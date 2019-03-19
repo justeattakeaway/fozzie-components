@@ -1,0 +1,25 @@
+{
+  "name": "f-vue-icons",
+  "version": "0.1.0",
+  "main": "dist/f-vue-icons.common.js",
+  "directories": {
+    "lib": "src",
+    "test": "tests"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build --target lib --formats commonjs --name f-vue-icons ./src/index.js",
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit"
+  },
+  "dependencies": {
+    "@justeat/f-icons": "1.20.0",
+    "vue": "2.6.9"
+  },
+  "devDependencies": {
+    "vue-svg-loader": "0.12.0"
+  }
+}
