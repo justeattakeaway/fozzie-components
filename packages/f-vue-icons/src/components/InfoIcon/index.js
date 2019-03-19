@@ -1,7 +1,7 @@
-import infoIcon from './InfoIcon.vue';
+import InfoIcon from './InfoIcon.vue';
 
 const install = Vue => {
-    Vue.component(infoIcon.name, infoIcon);
+    Vue.component(InfoIcon.name, InfoIcon);
 };
 
 export default install;
