@@ -1,5 +1,5 @@
 import * as components from './components';
-import InfoIcon from './components/InfoIcon.vue';
+import InfoIcon from './components/InfoIcon/InfoIcon.vue';
 
 const Fozzie = Vue => {
     // eslint-disable-next-line guard-for-in, no-restricted-syntax
