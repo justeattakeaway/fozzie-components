@@ -1,5 +1,5 @@
 <template>
-    <spicy-icon class="c-icon c-icon--vegetarian" />
+    <spicy-icon class="c-icon c-icon--spicy" />
 </template>
 
 <script>
