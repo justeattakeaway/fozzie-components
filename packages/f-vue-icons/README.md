@@ -1,5 +1,5 @@
 <div align="center">
-<h1>f-ui-components</h1>
+<h1>f-vue-icons</h1>
 
 <img width="125" alt="Fozzie Bear" src="bear.png" />
 
@@ -8,17 +8,17 @@
 
 ---
 
-[![npm version](https://badge.fury.io/js/%40justeat%2Ff-ui-components.svg)](https://badge.fury.io/js/%40justeat%2Ff-ui-components)
-[![Build Status](https://travis-ci.org/justeat/f-ui-components.svg)](https://travis-ci.org/justeat/f-ui-components)
-[![Coverage Status](https://coveralls.io/repos/github/justeat/f-ui-components/badge.svg)](https://coveralls.io/github/justeat/f-ui-components)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-ui-components/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-ui-components?targetFile=package.json)
+[![npm version](https://badge.fury.io/js/%40justeat%2Ff-vue-icons.svg)](https://badge.fury.io/js/%40justeat%2Ff-vue-icons)
+[![Build Status](https://travis-ci.org/justeat/f-vue-icons.svg)](https://travis-ci.org/justeat/f-vue-icons)
+[![Coverage Status](https://coveralls.io/repos/github/justeat/f-vue-icons/badge.svg)](https://coveralls.io/github/justeat/f-vue-icons)
+[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-vue-icons/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-vue-icons?targetFile=package.json)
 
 ---
 
 1. Add the module to your project
 
     ```bash
-    yarn install @justeat/f-ui-components
+    yarn install @justeat/f-vue-icons
     ```
 
 1. Import Individually at the component level (recommended)
@@ -32,7 +32,7 @@
 
 
     <script>
-    import { InfoIcon } from '@justeat/f-ui-components';
+    import { InfoIcon } from '@justeat/f-vue-icons';
 
     export default {
         components: {
@@ -46,7 +46,7 @@
 
     ```js
     import Vue from 'vue';
-    import { InfoIcon } from '@justeat/f-ui-components';
+    import { InfoIcon } from '@justeat/f-vue-icons';
 
     Vue.component('info-icon', InfoIcon);
     ```
@@ -57,7 +57,7 @@
 
     ```js
     import Vue from 'vue';
-    import FozzieIcons from '@justeat/f-ui-components';
+    import FozzieIcons from '@justeat/f-vue-icons';
 
     Vue.use(FozzieIcons);
     ```
