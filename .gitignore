@@ -1,22 +1,29 @@
+# Include your project-specific ignores in this file
+# Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
+# Find more examples at https://github.com/github/gitignore
+
+# Dependencies
+# - Node modules directory. comment this line to commit them.
+node_modules/
+
+
+# OS or Editor folders
+._*
+.cache
 .DS_Store
-node_modules
-dist
-
-# local env files
-.env.local
-.env.*.local
-
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-
-# Editor directories and files
 .idea
+.project
+.settings
+.tmproj
+*.esproj
+*.sublime-*
 .vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw*
+nbproject
+Thumbs.db
+logs
+*.log
+.yalc
+yalc.lock
+
+dist/
+coverage/
