@@ -30,7 +30,7 @@
     "test": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "@justeat/f-icons": "1.22.0",
+    "@justeat/f-icons": "1.23.0",
     "vue": "2.6.10"
   },
   "devDependencies": {
