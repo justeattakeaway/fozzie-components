@@ -4,18 +4,35 @@
   "workspaces": [
     "packages/*"
   ],
+  "homepage": "https://github.com/justeat/fozzie-components",
+  "contributors": [
+    "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:justeat/fozzie-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/justeat/fozzie-components/issues"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "keywords": [
+    "fozzie"
+  ],
+  "scripts": {
+    "lint": "lerna run lint --stream",
+    "lint:fix": "lerna run lint -- --fix",
+    "release": "lerna publish",
+    "test": "lerna run test --stream"
+  },
   "devDependencies": {
     "@justeat/eslint-config-fozzie": "2.3.0",
-    "@vue/cli-plugin-babel": "3.5.1",
-    "@vue/cli-service": "3.5.1",
     "@vue/eslint-config-standard": "4.0.0",
-    "@vue/test-utils": "1.0.0-beta.29",
-    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.1",
-    "babel-jest": "24.5.0",
     "eslint": "5.15.3",
-    "eslint-plugin-vue": "5.2.2",
-    "lerna": "3.13.1",
-    "vue-template-compiler": "2.6.9"
+    "eslint-plugin-vue": "5.2.2"
   }
 }
