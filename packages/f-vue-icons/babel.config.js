@@ -3,7 +3,8 @@ module.exports = {
         [
             '@vue/app',
             {
-                useBuiltIns: 'false'
+                useBuiltIns: 'false',
+                polyfills: 'false'
             }
         ]
     ]
