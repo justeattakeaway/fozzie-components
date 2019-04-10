@@ -23,16 +23,16 @@
     "fozzie"
   ],
   "scripts": {
+    "build": "lerna run build --stream",
     "lint": "lerna run lint --stream",
     "lint:fix": "lerna run lint -- --fix",
     "release": "lerna publish",
     "test": "lerna run test --stream"
   },
   "devDependencies": {
-    "@justeat/eslint-config-fozzie": "2.3.0",
+    "@justeat/eslint-config-fozzie": "3.0.0",
     "@vue/eslint-config-standard": "4.0.0",
-    "babel-eslint": "10.0.1",
-    "eslint": "5.15.3",
+    "eslint": "5.16.0",
     "eslint-plugin-vue": "5.2.2"
   }
 }

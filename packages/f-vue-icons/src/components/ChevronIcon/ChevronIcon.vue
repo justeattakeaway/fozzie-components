@@ -3,6 +3,7 @@
         :class="['c-icon c-icon--chevron', {
             'c-icon--chevron--small': isSmall,
             'c-icon--chevron--up': isFacingUp,
+            'c-icon--chevron--left': isFacingLeft,
             'c-icon--chevron--right': isFacingRight,
             ...iconClasses
         }]" />
@@ -26,6 +27,11 @@ export default {
         },
 
         isFacingUp: {
+            type: Boolean,
+            default: false
+        },
+
+        isFacingLeft: {
             type: Boolean,
             default: false
         },
