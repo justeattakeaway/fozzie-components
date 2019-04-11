@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "dist/f-vue-icons.umd.min.js",
   "files": [
     "dist"
@@ -30,7 +30,7 @@
     "test": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "@justeat/f-icons": "1.24.0",
+    "@justeat/f-icons": "1.25.0",
     "vue": "2.6.10"
   },
   "devDependencies": {
@@ -43,7 +43,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "24.7.1",
     "lerna": "3.13.2",
-    "vue-svg-loader": "0.12.0",
+    "vue-svg-loader": "0.11.0",
     "vue-template-compiler": "2.6.10"
   }
 }
