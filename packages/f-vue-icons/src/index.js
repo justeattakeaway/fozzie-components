@@ -1,6 +1,10 @@
 import * as components from './components';
+import AlertIcon from './components/AlertIcon/AlertIcon.vue';
+import BasketIcon from './components/BasketIcon/BasketIcon.vue';
 import ChevronIcon from './components/ChevronIcon/ChevronIcon.vue';
+import CollectionIcon from './components/CollectionIcon/CollectionIcon.vue';
 import CrossIcon from './components/CrossIcon/CrossIcon.vue';
+import DeliveryIcon from './components/DeliveryIcon/DeliveryIcon.vue';
 import InfoIcon from './components/InfoIcon/InfoIcon.vue';
 import MinusIcon from './components/MinusIcon/MinusIcon.vue';
 import OfferIcon from './components/OfferIcon/OfferIcon.vue';
@@ -19,8 +23,12 @@ const Fozzie = Vue => {
 export default Fozzie;
 
 export {
+    AlertIcon,
+    BasketIcon,
     ChevronIcon,
+    CollectionIcon,
     CrossIcon,
+    DeliveryIcon,
     InfoIcon,
     MinusIcon,
     OfferIcon,
