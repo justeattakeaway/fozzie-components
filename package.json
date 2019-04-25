@@ -33,6 +33,7 @@
     "@justeat/eslint-config-fozzie": "3.0.0",
     "@vue/eslint-config-standard": "4.0.0",
     "eslint": "5.16.0",
-    "eslint-plugin-vue": "5.2.2"
+    "eslint-plugin-vue": "5.2.2",
+    "lerna": "3.13.4"
   }
 }
