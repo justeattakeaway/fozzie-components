@@ -10,6 +10,12 @@ import OfferIcon from './OfferIcon';
 import PlusIcon from './PlusIcon';
 import SpicyIcon from './SpicyIcon';
 import VegetarianIcon from './VegetarianIcon';
+import PadlockIcon from './PadlockIcon';
+import CashIcon from './CashIcon';
+import StopwatchIcon from './StopwatchIcon';
+import MapPinIcon from './MapPinIcon';
+import ClockIcon from './ClockIcon';
+import LocalLegendIcon from './LocalLegendIcon';
 
 export {
     AlertIcon,
@@ -23,5 +29,11 @@ export {
     OfferIcon,
     PlusIcon,
     SpicyIcon,
-    VegetarianIcon
+    VegetarianIcon,
+    PadlockIcon,
+    CashIcon,
+    StopwatchIcon,
+    MapPinIcon,
+    ClockIcon,
+    LocalLegendIcon
 };

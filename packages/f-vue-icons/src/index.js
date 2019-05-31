@@ -11,6 +11,14 @@ import OfferIcon from './components/OfferIcon/OfferIcon.vue';
 import PlusIcon from './components/PlusIcon/PlusIcon.vue';
 import SpicyIcon from './components/SpicyIcon/SpicyIcon.vue';
 import VegetarianIcon from './components/VegetarianIcon/VegetarianIcon.vue';
+import PadlockIcon from './components/PadlockIcon/PadlockIcon.vue';
+import CashIcon from './components/CashIcon/CashIcon.vue';
+import StopwatchIcon from './components/StopwatchIcon/StopwatchIcon.vue';
+import MapPinIcon from './components/MapPinIcon/MapPinIcon.vue';
+import ClockIcon from './components/ClockIcon/ClockIcon.vue';
+import LocalLegendIcon from './components/LocalLegendIcon/LocalLegendIcon.vue';
+
+
 
 const Fozzie = Vue => {
     Object
@@ -34,5 +42,11 @@ export {
     OfferIcon,
     PlusIcon,
     SpicyIcon,
-    VegetarianIcon
+    VegetarianIcon,
+    PadlockIcon,
+    CashIcon,
+    StopwatchIcon,
+    MapPinIcon,
+    ClockIcon,
+    LocalLegendIcon
 };
