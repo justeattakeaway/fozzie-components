@@ -1,5 +1,5 @@
 <template>
-    <local-legend-icon :class="[iconClasses]" />
+    <local-legend-icon :class="['c-icon c-icon--localLegend', iconClasses]" />
 </template>
 
 <script>
