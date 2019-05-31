@@ -1,39 +1,39 @@
 import AlertIcon from './AlertIcon';
 import BasketIcon from './BasketIcon';
+import CashIcon from './CashIcon';
 import ChevronIcon from './ChevronIcon';
+import ClockIcon from './ClockIcon';
 import CollectionIcon from './CollectionIcon';
 import CrossIcon from './CrossIcon';
 import DeliveryIcon from './DeliveryIcon';
 import InfoIcon from './InfoIcon';
+import LocalLegendIcon from './LocalLegendIcon';
+import MapPinIcon from './MapPinIcon';
 import MinusIcon from './MinusIcon';
 import OfferIcon from './OfferIcon';
+import PadlockIcon from './PadlockIcon';
 import PlusIcon from './PlusIcon';
 import SpicyIcon from './SpicyIcon';
-import VegetarianIcon from './VegetarianIcon';
-import PadlockIcon from './PadlockIcon';
-import CashIcon from './CashIcon';
 import StopwatchIcon from './StopwatchIcon';
-import MapPinIcon from './MapPinIcon';
-import ClockIcon from './ClockIcon';
-import LocalLegendIcon from './LocalLegendIcon';
+import VegetarianIcon from './VegetarianIcon';
 
 export {
     AlertIcon,
     BasketIcon,
+    CashIcon,
     ChevronIcon,
+    ClockIcon,
     CollectionIcon,
     CrossIcon,
     DeliveryIcon,
     InfoIcon,
+    LocalLegendIcon,
+    MapPinIcon,
     MinusIcon,
     OfferIcon,
+    PadlockIcon,
     PlusIcon,
     SpicyIcon,
-    VegetarianIcon,
-    PadlockIcon,
-    CashIcon,
     StopwatchIcon,
-    MapPinIcon,
-    ClockIcon,
-    LocalLegendIcon
+    VegetarianIcon
 };

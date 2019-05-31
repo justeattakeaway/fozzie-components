@@ -1,5 +1,5 @@
 <template>
-    <map-pin-icon :class="['c-icon c-icon--mappin', iconClasses]" />
+    <map-pin-icon :class="['c-icon c-icon--mapPin', iconClasses]" />
 </template>
 
 <script>
