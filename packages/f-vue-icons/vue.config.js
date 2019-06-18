@@ -9,6 +9,9 @@ module.exports = {
 
         // add replacement loader(s)
         svgRule
+            .use('babel-loader')
+            .loader('babel-loader')
+            .end()
             .use('vue-svg-loader')
             .loader('vue-svg-loader');
     }

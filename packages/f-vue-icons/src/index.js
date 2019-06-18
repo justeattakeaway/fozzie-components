@@ -17,8 +17,7 @@ import PlusIcon from './components/PlusIcon/PlusIcon.vue';
 import SpicyIcon from './components/SpicyIcon/SpicyIcon.vue';
 import StopwatchIcon from './components/StopwatchIcon/StopwatchIcon.vue';
 import VegetarianIcon from './components/VegetarianIcon/VegetarianIcon.vue';
-
-
+import WarningIcon from './components/WarningIcon/WarningIcon.vue';
 
 const Fozzie = Vue => {
     Object
@@ -48,5 +47,6 @@ export {
     PlusIcon,
     SpicyIcon,
     StopwatchIcon,
-    VegetarianIcon
+    VegetarianIcon,
+    WarningIcon
 };
