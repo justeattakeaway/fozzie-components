@@ -16,6 +16,7 @@ import PlusIcon from './PlusIcon';
 import SpicyIcon from './SpicyIcon';
 import StopwatchIcon from './StopwatchIcon';
 import VegetarianIcon from './VegetarianIcon';
+import WarningIcon from './WarningIcon';
 
 export {
     AlertIcon,
@@ -35,5 +36,6 @@ export {
     PlusIcon,
     SpicyIcon,
     StopwatchIcon,
-    VegetarianIcon
+    VegetarianIcon,
+    WarningIcon
 };
