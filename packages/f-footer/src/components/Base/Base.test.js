@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import Footer from './Base.vue';
 
-describe('ChevronIcon', () => {
+describe('Footer', () => {
     it('should be defined', () => {
         const wrapper = shallowMount(Footer);
         expect(wrapper).toBeDefined();
