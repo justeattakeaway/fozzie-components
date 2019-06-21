@@ -1,5 +1,6 @@
 {
   "name": "root",
+  "version": "1.0.0",
   "private": true,
   "workspaces": [
     "packages/*"
@@ -31,9 +32,22 @@
   },
   "devDependencies": {
     "@justeat/eslint-config-fozzie": "3.1.1",
+    "@vue/cli-plugin-babel": "3.8.0",
+    "@vue/cli-plugin-eslint": "3.8.0",
+    "@vue/cli-plugin-unit-jest": "3.8.0",
+    "@vue/cli-service": "3.8.4",
     "@vue/eslint-config-standard": "4.0.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "24.8.0",
+    "babel-loader": "8.0.6",
     "eslint": "5.16.0",
     "eslint-plugin-vue": "5.2.2",
-    "lerna": "3.15.0"
+    "lerna": "3.15.0",
+    "vue-svg-loader": "0.12.0",
+    "vue-template-compiler": "2.6.10"
+  },
+  "dependencies": {
+    "@justeat/f-vue-icons": "file:packages/f-vue-icons"
   }
 }
