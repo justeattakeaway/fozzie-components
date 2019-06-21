@@ -1,7 +1,7 @@
 <div align="center">
 <h1>f-vue-icons</h1>
 
-<img width="125" alt="Fozzie Bear" src="bear.png" />
+<img width="125" alt="Fozzie Bear" src="../bear.png" />
 
 <p>Shared Icon Components for Vue.js.</p>
 </div>
