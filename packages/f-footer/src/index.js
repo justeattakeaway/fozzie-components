@@ -1,5 +1,5 @@
 // Import vue component
-import Footer from './components/Footer/Footer.vue';
+import Footer from './components/Footer.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {

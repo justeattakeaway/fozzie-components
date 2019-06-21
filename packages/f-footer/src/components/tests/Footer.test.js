@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import Footer from './Footer.vue';
+import Footer from '../Footer.vue';
 
 describe('Footer', () => {
     it('should be defined', () => {
