@@ -1,0 +1,41 @@
+{
+    "name": "@justeat/f-footer",
+    "version": "0.1.0",
+    "main": "dist/f-footer.umd.min.js",
+    "files": [
+      "dist"
+    ],
+    "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-footer",
+    "contributors": [
+      "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
+    ],
+    "repository": {
+      "type": "git",
+      "url": "git@github.com:justeat/fozzie-components.git"
+    },
+    "bugs": {
+      "url": "https://github.com/justeat/fozzie-components/issues"
+    },
+    "license": "Apache-2.0",
+    "engines": {
+      "node": ">=6.0.0"
+    },
+    "keywords": [
+      "fozzie"
+    ],
+    "scripts": {
+      "prepare": "yarn lint && yarn test && yarn build",
+      "build": "vue-cli-service build --target lib --formats umd-min --name f-footer ./src/index.js",
+      "lint": "vue-cli-service lint",
+      "test": "vue-cli-service test:unit"
+    },
+    "dependencies": {
+      "vue": "2.6.10"
+    },
+    "devDependencies": {
+      "@vue/cli-plugin-unit-jest": "3.8.0",
+      "@vue/test-utils": "1.0.0-beta.29",
+      "@vue/cli-plugin-eslint": "3.8.0"
+    }
+  }
+  
