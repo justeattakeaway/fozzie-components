@@ -1,7 +1,7 @@
 <div align="center">
 <h1>f-footer</h1>
 
-<img width="125" alt="Fozzie Bear" src="../bear.png" />
+<img width="125" alt="Fozzie Bear" src="../../bear.png" />
 
 <p>Global Footer Component for Vue.js.</p>
 </div>
@@ -23,22 +23,7 @@
 
 1. Import the component
 
-    ```
-    <template>
-        <footer />
-    </template>
-
-    <script>
-    import Vue from 'vue';
-    import Footer from '@justeat/f-footer';
-
-    export default {
-        components: {
-            Footer
-        }
-    }
-    </script>
-    ```
+    ...To be filled...
 
 1. Browser Support
 
@@ -47,6 +32,10 @@
 1. Building the Module
 
     Run `yarn build`.
+
+1. Running locally
+
+    Run `vue serve --open src/components/TestComponentForFooter.vue` from the f-footer root folder to render testing wrapper component
 
 1. Running the Tests
 

@@ -31,6 +31,10 @@
     "test": "lerna run test --stream"
   },
   "devDependencies": {
+    "@babel/cli": "7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "7.4.4",
+    "@babel/plugin-transform-object-assign": "7.2.0",
+    "@babel/preset-env": "7.4.5",
     "@justeat/eslint-config-fozzie": "3.1.1",
     "@vue/cli-plugin-babel": "3.8.0",
     "@vue/cli-plugin-eslint": "3.8.0",
@@ -39,15 +43,19 @@
     "@vue/eslint-config-standard": "4.0.0",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "10.0.2",
     "babel-jest": "24.8.0",
     "babel-loader": "8.0.6",
+    "cross-env": "5.2.0",
     "eslint": "5.16.0",
     "eslint-plugin-vue": "5.2.2",
     "lerna": "3.15.0",
+    "node-sass-magic-importer": "5.3.2",
     "vue-svg-loader": "0.12.0",
     "vue-template-compiler": "2.6.10"
   },
   "dependencies": {
+    "@justeat/f-footer": "file:packages/f-footer",
     "@justeat/f-vue-icons": "file:packages/f-vue-icons"
   }
 }
