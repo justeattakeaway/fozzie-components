@@ -25,8 +25,7 @@
   ],
   "scripts": {
     "prepare": "yarn lint && yarn test && yarn build",
-    "build:settings": "cross-env BABEL_ENV=settings babel src/tenants -d dist/config",
-    "build": "vue-cli-service build --target lib --name f-footer ./src/index.js && yarn build:settings",
+    "build": "vue-cli-service build --target lib --name f-footer ./src/index.js",
     "lint": "vue-cli-service lint --fix",
     "test": "vue-cli-service test:unit"
   },
@@ -37,7 +36,6 @@
     "@vue/cli-plugin-eslint": "3.8.0",
     "@vue/cli-plugin-unit-jest": "3.8.0",
     "@vue/test-utils": "1.0.0-beta.29",
-    "cross-env": "5.2.0",
     "node-sass-magic-importer": "5.3.2"
   }
 }

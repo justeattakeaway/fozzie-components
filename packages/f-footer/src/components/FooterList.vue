@@ -5,7 +5,7 @@
             {{ copy.customerServiceTitle }}
         </h3>
 
-        <ul class="c-footer-list">
+        <ul>
             <li>
                 <a
                     v-for="(link, index) in copy.customerServiceLinks"
