@@ -1,9 +1,9 @@
 <template>
-    <div class="f-footer">
+    <footer class="c-footer">
         <h1>Footer component</h1>
         <footer-list
             :copy="copy" />
-    </div>
+    </footer>
 </template>
 
 <script>
@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style>
-.f-footer {
+.c-footer {
     border: 2px solid red;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="f-footer-list">
+    <div class="c-footer-list">
         <h2>Footer List Component</h2>
         <h3 class="c-footer-heading">
             {{ copy.customerServiceTitle }}
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style>
-.f-footer-list {
+.c-footer-list {
     border: 2px solid blue;
 }
 </style>

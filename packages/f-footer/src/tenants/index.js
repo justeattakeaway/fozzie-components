@@ -1,13 +1,11 @@
 import uk from './en-GB';
 import au from './en-AU';
 import nz from './en-NZ';
-import ca from './en-CA';
 import dk from './da-DK';
 import es from './es-ES';
 import ie from './en-IE';
 import it from './it-IT';
 import no from './nb-NO';
-import frca from './fr-CA';
 
 const tenantConfigs = {
     'en-GB': uk,
@@ -17,9 +15,7 @@ const tenantConfigs = {
     'es-ES': es,
     'en-IE': ie,
     'it-IT': it,
-    'nb-NO': no,
-    'en-CA': ca,
-    'fr-CA': frca
+    'nb-NO': no
 };
 
 export default tenantConfigs;
