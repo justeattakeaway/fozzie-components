@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Footer should render default component markup 1`] = `
-<div>
+<div class="f-footer">
+  <h1>Footer component</h1>
   <footer-list-stub copy="[object Object]"></footer-list-stub>
 </div>
 `;

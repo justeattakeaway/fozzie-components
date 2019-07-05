@@ -13,7 +13,6 @@ v2.0.0-beta.1
 - `TestComponentForFooter` wrapper component for local testing
 - tenants resource files
 - logic to pick up tenants locales either from component's props or vue i18n plugin
-- `--no-cache` flag for jest tests
 - `@justeat/f-footer` to mono repo dependencies, was missed from initial setup
 
 

@@ -10,8 +10,6 @@ module.exports = api => {
             api.cache(true);
             presets.push(['@vue/app']);
         }
-        plugins.push('@babel/plugin-proposal-object-rest-spread');
-        plugins.push('@babel/plugin-transform-object-assign');
     }
 
     // use for both test and dev/live

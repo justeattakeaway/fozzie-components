@@ -28,7 +28,7 @@
     "build:settings": "cross-env BABEL_ENV=settings babel src/tenants -d dist/config",
     "build": "vue-cli-service build --target lib --name f-footer ./src/index.js && yarn build:settings",
     "lint": "vue-cli-service lint --fix",
-    "test": "vue-cli-service test:unit --no-cache"
+    "test": "vue-cli-service test:unit"
   },
   "dependencies": {
     "vue": "2.6.10"
