@@ -25,5 +25,242 @@ export default {
             url: 'http://justeat-premium.dk/',
             text: 'Just Eat Premium'
         }
-    ]
+    ],
+    cuisines: 'Hvad har du lyst til?',
+    cuisineLinks: [
+        {
+            url: '/takeaway',
+            text: 'Takeaway'
+        },
+        {
+            url: '/takeaway/italiensk',
+            text: 'Pizza'
+        },
+        {
+            url: '/takeaway/sushi',
+            text: 'Sushi'
+        },
+        {
+            url: '/takeaway/indisk',
+            text: 'Indisk'
+        },
+        {
+            url: '/takeaway/kinesisk',
+            text: 'Kinesisk'
+        },
+        {
+            url: '/takeaway/amerikansk',
+            text: 'Amerikansk & burger'
+        },
+        {
+            url: '/takeaway/premium-gourmet',
+            text: 'Premium & Gourmet'
+        },
+        {
+            url: '/takeaway/typer-foedevarer',
+            text: 'Alle køkkentyper'
+        }
+    ],
+    towns: 'Find din by',
+    locationLinks: [
+        {
+            url: '/takeaway/koebenhavn',
+            text: 'København'
+        },
+        {
+            url: '/takeaway/roskilde',
+            text: 'Roskilde'
+        },
+        {
+            url: '/takeaway/aarhus',
+            text: 'Aarhus'
+        },
+        {
+            url: '/takeaway/odense',
+            text: 'Odense'
+        },
+        {
+            url: '/takeaway/aalborg',
+            text: 'Aalborg'
+        },
+        {
+            url: '/takeaway/kgs-lyngby',
+            text: 'Lyngby'
+        },
+        {
+            url: '/takeaway/alle-byer',
+            text: 'Alle byer'
+        }
+    ],
+    brands: 'Brands',
+    brandLinks: [],
+    aboutUs: 'Om os',
+    aboutUsLinks: [
+        {
+            url: 'https://restaurants.just-eat.dk/',
+            text: 'Restaurant påmelding'
+        },
+        {
+            url: '/about',
+            text: 'Hvem er vi'
+        },
+        {
+            url: 'https://partner.just-eat.dk/',
+            text: 'Partner centre'
+        },
+        {
+            url: 'http://partnerblog.just-eat.dk/',
+            text: 'Partnerblog'
+        },
+        {
+            url: '/jobs',
+            text: 'Arbejd for os'
+        },
+        {
+            url: '/privacy-policy',
+            text: 'Handelsbetingelser'
+        },
+        {
+            url: '/cookiespolicy',
+            text: 'Brug af cookies'
+        }
+    ],
+    downloadOurApps: 'Download vores app',
+    appStoreIcons: [
+        {
+            url: 'https://170720.measurementapi.com/serve?action=click&publisher_id=170720&site_id=109400&my_campaign=website-app-page',
+            key: 'ios',
+            iconSrc: 'iosIconSrc',
+            altText: 'Hent i App Store'
+        },
+        {
+            url: 'https://170720.measurementapi.com/serve?action=click&publisher_id=170720&site_id=108390&my_campaign=website-app-page',
+            key: 'android',
+            iconSrc: 'androidIconSrc',
+            altText: 'Hent i Google Play'
+        },
+        {
+            url: 'https://www.microsoft.com/store/apps/9nblggh4vk8q',
+            key: 'microsoft',
+            iconSrc: 'microsoftIconSrc',
+            altText: 'Hent i Windows Store'
+        }
+    ],
+    feedback: 'Feedback',
+    improveOurWebsite: 'Hjælp os med at gøre vores hjemmeside bedre',
+    sendFeedback: 'Send feedback',
+    followUs: 'Følg os',
+    socialIcons: [
+        {
+            url: 'https://www.facebook.com/JustEatDK/',
+            key: 'facebook',
+            iconSrc: 'facebookIconUrl',
+            altText: ''
+        },
+        {
+            url: 'https://twitter.com/justeatdk',
+            key: 'twitter',
+            iconSrc: 'twitterIconUrl',
+            altText: ''
+        },
+        {
+            url: 'https://www.instagram.com/justeatdk/?hl=dk',
+            key: 'instagram',
+            iconSrc: 'instagramIconUrl',
+            altText: ''
+        }
+    ],
+    currentCountryLocalisedName: 'Danmark',
+    currentCountryFlagKey: 'dk',
+    countries: [
+        {
+            key: 'au',
+            flagUrl: 'australiaFlagIconUrl',
+            localisedName: 'Australien',
+            siteUrl: 'https://www.menulog.com.au'
+        },
+        {
+            key: 'br',
+            flagUrl: 'brasilFlagIconUrl',
+            localisedName: 'Brasilien',
+            siteUrl: 'https://www.ifood.com.br'
+        },
+        {
+            key: 'ca',
+            flagUrl: 'canadaFlagIconUrl',
+            localisedName: 'Canada',
+            siteUrl: 'https://www.just-eat.ca'
+        },
+        {
+            key: 'fr',
+            flagUrl: 'franceFlagIconUrl',
+            localisedName: 'Frankrig',
+            siteUrl: 'https://www.just-eat.fr/'
+        },
+        {
+            key: 'ie',
+            flagUrl: 'irelandFlagIconUrl',
+            localisedName: 'Irland',
+            siteUrl: 'https://www.just-eat.ie'
+        },
+        {
+            key: 'it',
+            flagUrl: 'italyFlagIconUrl',
+            localisedName: 'Italien',
+            siteUrl: 'https://www.justeat.it'
+        },
+        {
+            key: 'nz',
+            flagUrl: 'newzealandFlagIconUrl',
+            localisedName: 'New Zealand',
+            siteUrl: 'https://www.menulog.co.nz'
+        },
+        {
+            key: 'no',
+            flagUrl: 'norwayFlagIconUrl',
+            localisedName: 'Norge',
+            siteUrl: 'https://www.just-eat.no'
+        },
+        {
+            key: 'ch',
+            flagUrl: 'switzerlandFlagIconUrl',
+            localisedName: 'Schweiz',
+            siteUrl: 'https://www.eat.ch'
+        },
+        {
+            key: 'es',
+            flagUrl: 'spainFlagIconUrl',
+            localisedName: 'Spanien',
+            siteUrl: 'https://www.just-eat.es'
+        },
+        {
+            key: 'gb',
+            flagUrl: 'ukFlagIconUrl',
+            localisedName: 'Storbritannien',
+            siteUrl: 'https://www.just-eat.co.uk'
+        }
+    ],
+    changeCurrentCountry: 'Du er på den danske website. Klik her for at skifte.',
+    buttonClose: 'Luk',
+    paymentIcons: [
+        {
+            type: 'card',
+            key: 'dk',
+            iconSrc: 'dkIconSrc',
+            altText: 'Dankort'
+        },
+        {
+            type: 'card',
+            key: 'visa--verified',
+            iconSrc: 'visaIconSrc',
+            altText: 'Visa'
+        },
+        {
+            type: 'card',
+            key: 'mastercard--securecode',
+            iconSrc: 'mastercardIconSrc',
+            altText: 'Mastercard'
+        }
+    ],
+    vatInfo: ''
 };
