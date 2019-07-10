@@ -964,10 +964,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^12.0.9"
 
-"@justeat/browserslist-config-fozzie@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/browserslist-config-fozzie/-/browserslist-config-fozzie-1.1.0.tgz#40734f3812eca98136414a2453238056dc3678bb"
-  integrity sha512-eOn/XL1W2Spig+i4Ar4IfxMozPfb3SaDwkGlXCSgXxcgzSm6Y058Y519cwaCuz8ydwatPGKPgmeMZUujiR/I/Q==
+"@justeat/browserslist-config-fozzie@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@justeat/browserslist-config-fozzie/-/browserslist-config-fozzie-1.1.1.tgz#8f27a7b683f7c40469b6ff4049384370ae6530fc"
+  integrity sha512-Ypr/5NqRlQyWqLqTOA29DawRQJ3EA5wctVvKsqHgLXo47ikW+A9nNeloySTnu6La5QUjXSw/FTJxyfnuTxkqBg==
 
 "@justeat/eslint-config-fozzie@3.1.1":
   version "3.1.1"
@@ -989,7 +989,7 @@
     webpack-log "2.0.0"
 
 "@justeat/f-footer@file:packages/f-footer":
-  version "2.0.0-beta.1"
+  version "2.0.0-beta.2"
   dependencies:
     vue "2.6.10"
 
