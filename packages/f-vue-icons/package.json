@@ -24,8 +24,8 @@
     "fozzie"
   ],
   "scripts": {
-    "prepare": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --formats umd-min --name f-vue-icons ./src/index.js",
+    "prepare": "yarn test && yarn build",
+    "build": "yarn lint && vue-cli-service build --target lib --formats umd-min --name f-vue-icons ./src/index.js",
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service test:unit"
   },
