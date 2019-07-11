@@ -9,5 +9,5 @@ export default {
     components: {
         AmexSafekeyIcon
     }
-}
+};
 </script>

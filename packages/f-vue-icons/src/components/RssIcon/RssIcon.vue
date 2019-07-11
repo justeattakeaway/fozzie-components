@@ -9,5 +9,5 @@ export default {
     components: {
         RssIcon
     }
-}
+};
 </script>
