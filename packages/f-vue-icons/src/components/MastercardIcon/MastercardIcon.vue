@@ -9,5 +9,5 @@ export default {
     components: {
         MastercardIcon
     }
-}
+};
 </script>
