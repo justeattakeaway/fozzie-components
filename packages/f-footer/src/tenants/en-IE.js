@@ -1,102 +1,114 @@
 export default {
-    customerServiceTitle: 'Customer service',
-    customerServiceLinks: [
-        {
-            url: '/contact',
-            text: 'Contact us'
+    linkLists: {
+        customerService: {
+            title: 'Customer service',
+            links: [
+                {
+                    url: '/contact',
+                    text: 'Contact us'
+                },
+                {
+                    url: '/faq',
+                    text: 'FAQs'
+                },
+                {
+                    url: '/pricepromise',
+                    text: 'Price Promise'
+                },
+                {
+                    url: 'https://restaurants.just-eat.ie/',
+                    text: 'Restaurant sign-up'
+                },
+                {
+                    url: 'https://partner.just-eat.ie/',
+                    text: 'Partner centre'
+                }
+            ]
         },
-        {
-            url: '/faq',
-            text: 'FAQs'
+        cuisines: {
+            title: 'Popular cuisines',
+            links: [
+                {
+                    url: '/takeaway/nearme/pizza',
+                    text: 'Order Pizza'
+                },
+                {
+                    url: '/takeaway/nearme/chinese',
+                    text: 'Order Chinese'
+                },
+                {
+                    url: '/takeaway/nearme/indian',
+                    text: 'Order Indian'
+                },
+                {
+                    url: '/takeaway/nearme/mexican',
+                    text: 'Order Mexican'
+                },
+                {
+                    url: '/takeaway/nearme/thai',
+                    text: 'Order Thai'
+                }
+            ]
         },
-        {
-            url: '/pricepromise',
-            text: 'Price Promise'
+        locations: {
+            title: 'Popular locations',
+            links: [
+                {
+                    url: '/takeaway/dublin-area',
+                    text: 'Dublin'
+                },
+                {
+                    url: '/takeaway/limerick-city-centre',
+                    text: 'Limerick'
+                },
+                {
+                    url: '/takeaway/cork-city-centre',
+                    text: 'Cork'
+                },
+                {
+                    url: '/takeaway/galway-city-centre',
+                    text: 'Galway'
+                },
+                {
+                    url: '/takeaway/waterford',
+                    text: 'Waterford'
+                }
+            ]
         },
-        {
-            url: 'https://restaurants.just-eat.ie/',
-            text: 'Restaurant sign-up'
+        brands: {
+            title: 'Brands',
+            links: []
         },
-        {
-            url: 'https://partner.just-eat.ie/',
-            text: 'Partner centre'
+        aboutUs: {
+            title: 'About us',
+            links: [
+                {
+                    url: '/info/about-us',
+                    text: 'About us'
+                },
+                {
+                    url: '/takeaway/nearme',
+                    text: 'Browse Takeaways'
+                },
+                {
+                    url: '/privacy-policy',
+                    text: 'Privacy Policy'
+                },
+                {
+                    url: '/cookiespolicy',
+                    text: 'Cookie Policy'
+                },
+                {
+                    url: 'https://www.justeatshop.ie/gift-vouchers',
+                    text: 'Just Eat Gift Cards'
+                },
+                {
+                    url: '/blog',
+                    text: 'Just Eat Blog'
+                }
+            ]
         }
-    ],
-    cuisines: 'Popular cuisines',
-    cuisineLinks: [
-        {
-            url: '/takeaway/nearme/pizza',
-            text: 'Order Pizza'
-        },
-        {
-            url: '/takeaway/nearme/chinese',
-            text: 'Order Chinese'
-        },
-        {
-            url: '/takeaway/nearme/indian',
-            text: 'Order Indian'
-        },
-        {
-            url: '/takeaway/nearme/mexican',
-            text: 'Order Mexican'
-        },
-        {
-            url: '/takeaway/nearme/thai',
-            text: 'Order Thai'
-        }
-    ],
-    towns: 'Popular locations',
-    locationLinks: [
-        {
-            url: '/takeaway/dublin-area',
-            text: 'Dublin'
-        },
-        {
-            url: '/takeaway/limerick-city-centre',
-            text: 'Limerick'
-        },
-        {
-            url: '/takeaway/cork-city-centre',
-            text: 'Cork'
-        },
-        {
-            url: '/takeaway/galway-city-centre',
-            text: 'Galway'
-        },
-        {
-            url: '/takeaway/waterford',
-            text: 'Waterford'
-        }
-    ],
-    brands: 'Brands',
-    brandLinks: [],
-    aboutUs: 'About us',
-    aboutUsLinks: [
-        {
-            url: '/info/about-us',
-            text: 'About us'
-        },
-        {
-            url: '/takeaway/nearme',
-            text: 'Browse Takeaways'
-        },
-        {
-            url: '/privacy-policy',
-            text: 'Privacy Policy'
-        },
-        {
-            url: '/cookiespolicy',
-            text: 'Cookie Policy'
-        },
-        {
-            url: 'https://www.justeatshop.ie/gift-vouchers',
-            text: 'Just Eat Gift Cards'
-        },
-        {
-            url: '/blog',
-            text: 'Just Eat Blog'
-        }
-    ],
+    },
     downloadOurApps: 'Download our apps',
     appStoreIcons: [
         {
@@ -130,9 +142,9 @@ export default {
             altText: 'Just Eat on Twitter'
         },
         {
-            url: 'https://www.google.com/+JusteatIe1',
-            key: 'google-plus',
-            iconSrc: 'googlePlusIconUrl',
+            url: 'https://www.just-eat.ie/blog',
+            key: 'rss',
+            iconSrc: 'rssIconUrl',
             altText: ''
         },
         {

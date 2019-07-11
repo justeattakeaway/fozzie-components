@@ -1,122 +1,134 @@
 export default {
-    customerServiceTitle: 'Servicio al cliente',
-    customerServiceLinks: [
-        {
-            url: '/account/login/',
-            text: 'Inicia Sesión'
+    linkLists: {
+        customerService: {
+            title: 'Servicio al cliente',
+            links: [
+                {
+                    url: '/account/login/',
+                    text: 'Inicia Sesión'
+                },
+                {
+                    url: '/account/register/',
+                    text: 'Regístrate'
+                },
+                {
+                    url: '/blog/',
+                    text: 'Nuestro blog'
+                },
+                {
+                    url: '/account/info/',
+                    text: 'Información De La Cuenta'
+                }
+            ]
         },
-        {
-            url: '/account/register/',
-            text: 'Regístrate'
+        cuisines: {
+            title: 'Tipos de cocina',
+            links: [
+                {
+                    url: '/a-domicilio/cerca-de-mi/pizza/',
+                    text: 'Pizza a domicilio'
+                },
+                {
+                    url: '/a-domicilio/cerca-de-mi/kebab/',
+                    text: 'Kebab a domicilio'
+                },
+                {
+                    url: '/a-domicilio/cerca-de-mi/comida-china/',
+                    text: 'Comida china a domicilio'
+                },
+                {
+                    url: '/a-domicilio/cerca-de-mi/sushi/',
+                    text: 'Sushi a domicilio'
+                },
+                {
+                    url: '/a-domicilio/cerca-de-mi/hamburguesas/',
+                    text: 'Hamburguesas a domicilio'
+                },
+                {
+                    url: '/a-domicilio/cerca-de-mi/',
+                    text: 'Mas tipos de cocina'
+                }
+            ]
         },
-        {
-            url: '/blog/',
-            text: 'Nuestro blog'
+        locations: {
+            title: 'Ciudades',
+            links: [
+                {
+                    url: '/a-domicilio/madrid/',
+                    text: 'Madrid'
+                },
+                {
+                    url: '/a-domicilio/barcelona/',
+                    text: 'Barcelona'
+                },
+                {
+                    url: '/a-domicilio/valencia/',
+                    text: 'Valencia'
+                },
+                {
+                    url: '/a-domicilio/zaragoza/',
+                    text: 'Zaragoza'
+                },
+                {
+                    url: '/a-domicilio/palmas-de-gran-canaria/',
+                    text: 'Las Palmas'
+                },
+                {
+                    url: '/a-domicilio/',
+                    text: 'Más ciudades'
+                }
+            ]
         },
-        {
-            url: '/account/info/',
-            text: 'Información De La Cuenta'
+        brands: {
+            title: 'Las marcas',
+            links: []
+        },
+        aboutUs: {
+            title: 'Sobre nosotros',
+            links: [
+                {
+                    url: 'https://restaurantes.just-eat.es/',
+                    text: 'Registrarse en el restaurante'
+                },
+                {
+                    url: '/info/acerca-de-just-eat/',
+                    text: 'Quienes somos'
+                },
+                {
+                    url: '/help/',
+                    text: 'Ayuda'
+                },
+                {
+                    url: '/info/garantia-de-precio/',
+                    text: 'Garantía de precio'
+                },
+                {
+                    url: '/info/politica-de-privacidad/',
+                    text: 'Política de Privacidad'
+                },
+                {
+                    url: '/info/terminos-y-condiciones/',
+                    text: 'Términos y Condiciones'
+                },
+                {
+                    url: '/info/politica-de-cookies/',
+                    text: 'Política de Cookies'
+                },
+                {
+                    url: '/blog/descuento-5e-just-eat/',
+                    text: '5€ de descuento'
+                },
+                {
+                    url: '/campana/afiliacion',
+                    text: 'Programa de Afiliación'
+                },
+                {
+                    url: 'https://partner.just-eat.es/',
+                    text: 'Gestiona tu restaurante'
+                }
+            ]
         }
-    ],
-    cuisines: 'Tipos de cocina',
-    cuisineLinks: [
-        {
-            url: '/a-domicilio/cerca-de-mi/pizza/',
-            text: 'Pizza a domicilio'
-        },
-        {
-            url: '/a-domicilio/cerca-de-mi/kebab/',
-            text: 'Kebab a domicilio'
-        },
-        {
-            url: '/a-domicilio/cerca-de-mi/comida-china/',
-            text: 'Comida china a domicilio'
-        },
-        {
-            url: '/a-domicilio/cerca-de-mi/sushi/',
-            text: 'Sushi a domicilio'
-        },
-        {
-            url: '/a-domicilio/cerca-de-mi/hamburguesas/',
-            text: 'Hamburguesas a domicilio'
-        },
-        {
-            url: '/a-domicilio/cerca-de-mi/',
-            text: 'Mas tipos de cocina'
-        }
-    ],
-    towns: 'Ciudades',
-    locationLinks: [
-        {
-            url: '/a-domicilio/madrid/',
-            text: 'Madrid'
-        },
-        {
-            url: '/a-domicilio/barcelona/',
-            text: 'Barcelona'
-        },
-        {
-            url: '/a-domicilio/valencia/',
-            text: 'Valencia'
-        },
-        {
-            url: '/a-domicilio/zaragoza/',
-            text: 'Zaragoza'
-        },
-        {
-            url: '/a-domicilio/palmas-de-gran-canaria/',
-            text: 'Las Palmas'
-        },
-        {
-            url: '/a-domicilio/',
-            text: 'Más ciudades'
-        }
-    ],
-    brands: 'Las marcas',
-    brandLinks: [],
-    aboutUs: 'Sobre nosotros',
-    aboutUsLinks: [
-        {
-            url: 'https://restaurantes.just-eat.es/',
-            text: 'Registrarse en el restaurante'
-        },
-        {
-            url: '/info/acerca-de-just-eat/',
-            text: 'Quienes somos'
-        },
-        {
-            url: '/help/',
-            text: 'Ayuda'
-        },
-        {
-            url: '/info/garantia-de-precio/',
-            text: 'Garantía de precio'
-        },
-        {
-            url: '/info/politica-de-privacidad/',
-            text: 'Política de Privacidad'
-        },
-        {
-            url: '/info/terminos-y-condiciones/',
-            text: 'Términos y Condiciones'
-        },
-        {
-            url: '/info/politica-de-cookies/',
-            text: 'Política de Cookies'
-        },
-        {
-            url: '/blog/descuento-5e-just-eat/',
-            text: '5€ de descuento'
-        },
-        {
-            url: '/campana/afiliacion',
-            text: 'Programa de Afiliación'
-        },
-        {
-            url: 'https://partner.just-eat.es/',
-            text: 'Gestiona tu restaurante'
-        }
-    ],
+    },
     downloadOurApps: 'Descárgate la app',
     appStoreIcons: [
         {
@@ -150,9 +162,9 @@ export default {
             altText: ''
         },
         {
-            url: 'https://plus.google.com/+Just-eatEs',
-            key: 'google-plus',
-            iconSrc: 'googlePlusIconUrl',
+            url: 'https://www.just-eat.es/blog',
+            key: 'rss',
+            iconSrc: 'rssIconUrl',
             altText: ''
         },
         {

@@ -1,14 +1,15 @@
 <template>
-    <div class="c-footer-list">
-        <h2>Footer List Component</h2>
+    <div
+        v-if="linkList.links.length"
+        class="c-footer-list">
         <h3 class="c-footer-heading">
-            {{ copy.customerServiceTitle }}
+            {{ linkList.title }}
         </h3>
 
         <ul>
             <li>
                 <a
-                    v-for="(link, index) in copy.customerServiceLinks"
+                    v-for="(link, index) in linkList.links"
                     :key="index"
                     :href="link.url"
                     :rel="link.rel">
@@ -22,7 +23,7 @@
 <script>
 export default {
     props: {
-        copy: {
+        linkList: {
             type: Object,
             default: () => ({})
         }
@@ -31,7 +32,4 @@ export default {
 </script>
 
 <style>
-.c-footer-list {
-    border: 2px solid blue;
-}
 </style>

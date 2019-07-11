@@ -1,132 +1,144 @@
 export default {
-    customerServiceTitle: 'Customer service',
-    customerServiceLinks: [
-        {
-            url: '/contact',
-            text: 'Contact us'
+    linkLists: {
+        customerService: {
+            title: 'Customer service',
+            links: [
+                {
+                    url: '/contact',
+                    text: 'Contact us'
+                },
+                {
+                    url: '/account/login',
+                    text: 'Log in',
+                    rel: 'nofollow'
+                },
+                {
+                    url: '/account/register',
+                    text: 'Sign up'
+                },
+                {
+                    url: '/blog',
+                    text: 'Blog'
+                },
+                {
+                    url: '/apps',
+                    text: 'Mobile apps'
+                },
+                {
+                    url: '/member/updateuserinfo',
+                    text: 'My account'
+                }
+            ]
         },
-        {
-            url: '/account/login',
-            text: 'Log in',
-            rel: 'nofollow'
+        cuisines: {
+            title: 'Top cuisines',
+            links: [
+                {
+                    url: '/takeaway/nearme/chinese',
+                    text: 'Chinese'
+                },
+                {
+                    url: '/takeaway/nearme/indian',
+                    text: 'Indian'
+                },
+                {
+                    url: '/takeaway/nearme/italian',
+                    text: 'Italian'
+                },
+                {
+                    url: '/takeaway/nearme/sushi',
+                    text: 'Sushi'
+                },
+                {
+                    url: '/takeaway/nearme/pizza',
+                    text: 'Pizza'
+                },
+                {
+                    url: '/takeaway/nearme',
+                    text: 'View all cuisines'
+                }
+            ]
         },
-        {
-            url: '/account/register',
-            text: 'Sign up'
+        locations: {
+            title: 'Locations',
+            links: [
+                {
+                    url: '/takeaway/birmingham',
+                    text: 'Birmingham'
+                },
+                {
+                    url: '/takeaway/cardiff',
+                    text: 'Cardiff'
+                },
+                {
+                    url: '/takeaway/glasgow',
+                    text: 'Glasgow'
+                },
+                {
+                    url: '/takeaway/leeds',
+                    text: 'Leeds'
+                },
+                {
+                    url: '/takeaway/manchester',
+                    text: 'Manchester'
+                },
+                {
+                    url: '/takeaway',
+                    text: 'View all locations'
+                }
+            ]
         },
-        {
-            url: '/blog',
-            text: 'Blog'
+        brands: {
+            title: 'Brands',
+            links: []
         },
-        {
-            url: '/apps',
-            text: 'Mobile apps'
-        },
-        {
-            url: '/member/updateuserinfo',
-            text: 'My account'
+        aboutUs: {
+            title: 'A bit more about us',
+            links: [
+                {
+                    url: 'https://restaurants.just-eat.co.uk/',
+                    text: 'Restaurant sign up'
+                },
+                {
+                    url: 'https://couriers.just-eat.co.uk/application',
+                    text: 'Deliver with Just Eat'
+                },
+                {
+                    url: '/pricepromise',
+                    text: 'Price promise'
+                },
+                {
+                    url: '/privacy-policy',
+                    text: 'Privacy policy'
+                },
+                {
+                    url: '/termsandconditions',
+                    text: 'Terms and Conditions'
+                },
+                {
+                    url: '/cookiespolicy',
+                    text: 'Cookie Policy'
+                },
+                {
+                    url: 'https://www.justeatplc.com/about-us/our-business',
+                    text: 'About us'
+                },
+                {
+                    url: 'https://www.just-eat.com/',
+                    text: 'Company website'
+                },
+                {
+                    url: 'https://careers.just-eat.com/',
+                    text: 'Careers'
+                },
+                {
+                    url: 'https://www.justeatplc.com/download_file/view/435/1',
+                    text: 'Modern Slavery Statement',
+                    target: '_blank'
+                }
+            ]
         }
-    ],
-    cuisines: 'Top cuisines',
-    cuisineLinks: [
-        {
-            url: '/takeaway/nearme/chinese',
-            text: 'Chinese'
-        },
-        {
-            url: '/takeaway/nearme/indian',
-            text: 'Indian'
-        },
-        {
-            url: '/takeaway/nearme/italian',
-            text: 'Italian'
-        },
-        {
-            url: '/takeaway/nearme/sushi',
-            text: 'Sushi'
-        },
-        {
-            url: '/takeaway/nearme/pizza',
-            text: 'Pizza'
-        },
-        {
-            url: '/takeaway/nearme',
-            text: 'View all cuisines'
-        }
-    ],
-    towns: 'Locations',
-    locationLinks: [
-        {
-            url: '/takeaway/birmingham',
-            text: 'Birmingham'
-        },
-        {
-            url: '/takeaway/cardiff',
-            text: 'Cardiff'
-        },
-        {
-            url: '/takeaway/glasgow',
-            text: 'Glasgow'
-        },
-        {
-            url: '/takeaway/leeds',
-            text: 'Leeds'
-        },
-        {
-            url: '/takeaway/manchester',
-            text: 'Manchester'
-        },
-        {
-            url: '/takeaway',
-            text: 'View all locations'
-        }
-    ],
-    brands: 'Brands',
-    brandLinks: [],
-    aboutUs: 'A bit more about us',
-    aboutUsLinks: [
-        {
-            url: 'https://restaurants.just-eat.co.uk/',
-            text: 'Restaurant sign up'
-        },
-        {
-            url: 'https://couriers.just-eat.co.uk/application',
-            text: 'Deliver with Just Eat'
-        },
-        {
-            url: '/pricepromise',
-            text: 'Price promise'
-        },
-        {
-            url: '/privacy-policy',
-            text: 'Privacy policy'
-        },
-        {
-            url: '/termsandconditions',
-            text: 'Terms and Conditions'
-        },
-        {
-            url: '/cookiespolicy',
-            text: 'Cookie Policy'
-        },
-        {
-            url: 'https://www.justeatplc.com/about-us/our-business',
-            text: 'About us'
-        },
-        {
-            url: 'https://www.just-eat.com/',
-            text: 'Company website'
-        },
-        {
-            url: 'https://careers.just-eat.com/',
-            text: 'Careers'
-        },
-        {
-            url: 'https://www.justeatplc.com/download_file/view/435/1',
-            text: 'Modern Slavery Statement',
-            target: '_blank'
-        }
-    ],
+    },
     downloadOurApps: 'Download our apps',
     appStoreIcons: [
         {
