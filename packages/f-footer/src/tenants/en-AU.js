@@ -1,207 +1,219 @@
 export default {
-    customerServiceTitle: 'Customer service',
-    customerServiceLinks: [
-        {
-            url: '/content/contact-us/',
-            text: 'Contact us'
+    linkLists: {
+        customerService: {
+            title: 'Customer service',
+            links: [
+                {
+                    url: '/content/contact-us/',
+                    text: 'Contact us'
+                },
+                {
+                    url: '/account/login/',
+                    text: 'Log in'
+                },
+                {
+                    url: '/account/register/',
+                    text: 'Sign up'
+                },
+                {
+                    url: '/account/info/',
+                    text: 'My account'
+                },
+                {
+                    url: '/blog/',
+                    text: 'Menulog blog'
+                },
+                {
+                    url: '/help/',
+                    text: 'Help centre'
+                }
+            ]
         },
-        {
-            url: '/account/login/',
-            text: 'Log in'
+        cuisines: {
+            title: 'Cuisines',
+            links: [
+                {
+                    url: '/browse/burgers',
+                    text: 'Burgers Delivery'
+                },
+                {
+                    url: '/browse/chinese',
+                    text: 'Chinese Delivery'
+                },
+                {
+                    url: '/browse/indian',
+                    text: 'Indian Delivery'
+                },
+                {
+                    url: '/content/browse/italian',
+                    text: 'Italian Delivery'
+                },
+                {
+                    url: '/browse/japanese',
+                    text: 'Japanese Delivery'
+                },
+                {
+                    url: '/browse/korean',
+                    text: 'Korean Delivery'
+                },
+                {
+                    url: '/browse/pizza',
+                    text: 'Pizza Delivery'
+                },
+                {
+                    url: '/browse/thai',
+                    text: 'Thai Delivery'
+                },
+                {
+                    url: '/browse/vietnamese',
+                    text: 'Vietnamese Delivery'
+                },
+                {
+                    url: '/content/browse',
+                    text: 'View all cuisines'
+                }
+            ]
         },
-        {
-            url: '/account/register/',
-            text: 'Sign up'
+        locations: {
+            title: 'Locations',
+            links: [
+                {
+                    url: '/browse/sydney',
+                    text: 'Sydney food delivery'
+                },
+                {
+                    url: '/browse/melbourne-vic',
+                    text: 'Melbourne food delivery'
+                },
+                {
+                    url: '/browse/perth-wa',
+                    text: 'Perth food delivery'
+                },
+                {
+                    url: '/browse/brisbane-qld',
+                    text: 'Brisbane food delivery'
+                },
+                {
+                    url: '/browse/canberra-act',
+                    text: 'Canberra food delivery'
+                },
+                {
+                    url: '/browse/adelaide-sa',
+                    text: 'Adelaide food delivery'
+                },
+                {
+                    url: '/browse/hobart-tas',
+                    text: 'Hobart food delivery'
+                },
+                {
+                    url: '/browse/gold-coast',
+                    text: 'Gold Coast food delivery'
+                },
+                {
+                    url: '/browse/newcastle-hunter-valley',
+                    text: 'Newcastle food delivery'
+                },
+                {
+                    url: '/browse',
+                    text: 'View all locations'
+                }
+            ]
         },
-        {
-            url: '/account/info/',
-            text: 'My account'
+        brands: {
+            title: 'Brands',
+            links: [
+                {
+                    url: '/content/brands/hungry-jacks/',
+                    text: "Hungry Jack's Delivery"
+                },
+                {
+                    url: '/content/brands/kfc/',
+                    text: 'KFC Delivery'
+                },
+                {
+                    url: '/content/brands/crust/',
+                    text: 'Crust Delivery'
+                },
+                {
+                    url: '/content/brands/hogs-breath/',
+                    text: "Hog's Breath Delivery"
+                },
+                {
+                    url: '/content/brands/oporto/',
+                    text: 'Oporto Delivery'
+                },
+                {
+                    url: '/content/brands/pizza-hut/',
+                    text: 'Pizza Hut Delivery'
+                },
+                {
+                    url: '/content/brands/red-rooster/',
+                    text: 'Red Rooster Delivery'
+                },
+                {
+                    url: '/content/brands/subway/',
+                    text: 'Subway Delivery'
+                },
+                {
+                    url: '/content/brands/zambrero/',
+                    text: 'Zambrero Delivery'
+                },
+                {
+                    url: '/browse/',
+                    text: 'View all brands'
+                }
+            ]
         },
-        {
-            url: '/blog/',
-            text: 'Menulog blog'
-        },
-        {
-            url: '/help/',
-            text: 'Help centre'
+        aboutUs: {
+            title: 'A bit more about us',
+            links: [
+                {
+                    url: '/content/',
+                    text: 'About Menulog'
+                },
+                {
+                    url: '/content/our-price-promise/',
+                    text: 'Price promise'
+                },
+                {
+                    url: '/content/partner-with-us/',
+                    text: 'Partner with us'
+                },
+                {
+                    url: '/content/partner-with-us/',
+                    text: 'Menulog careers'
+                },
+                {
+                    url: '/content/corporate-partners/',
+                    text: 'Corporate partners'
+                },
+                {
+                    url: '/blog/category/press/',
+                    text: 'Media Centre'
+                },
+                {
+                    url: '/privacy-policy/',
+                    text: 'Privacy Policy and Terms of Use'
+                },
+                {
+                    url: 'https://partner.menulog.com.au/',
+                    text: 'Partner centre'
+                },
+                {
+                    url: 'https://couriers.menulog.com.au/application/',
+                    text: 'Become a courier'
+                },
+                {
+                    url: 'https://couriers.menulog.com.au/',
+                    text: 'Courier portal'
+                },
+                {
+                    url: '/content/join-menulog',
+                    text: 'List your restaurant'
+                }
+            ]
         }
-    ],
-    cuisines: 'Cuisines',
-    cuisineLinks: [
-        {
-            url: '/browse/burgers',
-            text: 'Burgers Delivery'
-        },
-        {
-            url: '/browse/chinese',
-            text: 'Chinese Delivery'
-        },
-        {
-            url: '/browse/indian',
-            text: 'Indian Delivery'
-        },
-        {
-            url: '/content/browse/italian',
-            text: 'Italian Delivery'
-        },
-        {
-            url: '/browse/japanese',
-            text: 'Japanese Delivery'
-        },
-        {
-            url: '/browse/korean',
-            text: 'Korean Delivery'
-        },
-        {
-            url: '/browse/pizza',
-            text: 'Pizza Delivery'
-        },
-        {
-            url: '/browse/thai',
-            text: 'Thai Delivery'
-        },
-        {
-            url: '/browse/vietnamese',
-            text: 'Vietnamese Delivery'
-        },
-        {
-            url: '/content/browse',
-            text: 'View all cuisines'
-        }
-    ],
-    towns: 'Locations',
-    locationLinks: [
-        {
-            url: '/browse/sydney',
-            text: 'Sydney food delivery'
-        },
-        {
-            url: '/browse/melbourne-vic',
-            text: 'Melbourne food delivery'
-        },
-        {
-            url: '/browse/perth-wa',
-            text: 'Perth food delivery'
-        },
-        {
-            url: '/browse/brisbane-qld',
-            text: 'Brisbane food delivery'
-        },
-        {
-            url: '/browse/canberra-act',
-            text: 'Canberra food delivery'
-        },
-        {
-            url: '/browse/adelaide-sa',
-            text: 'Adelaide food delivery'
-        },
-        {
-            url: '/browse/hobart-tas',
-            text: 'Hobart food delivery'
-        },
-        {
-            url: '/browse/gold-coast',
-            text: 'Gold Coast food delivery'
-        },
-        {
-            url: '/browse/newcastle-hunter-valley',
-            text: 'Newcastle food delivery'
-        },
-        {
-            url: '/browse',
-            text: 'View all locations'
-        }
-    ],
-    brands: 'Brands',
-    brandLinks: [
-        {
-            url: '/content/brands/hungry-jacks/',
-            text: "Hungry Jack's Delivery"
-        },
-        {
-            url: '/content/brands/kfc/',
-            text: 'KFC Delivery'
-        },
-        {
-            url: '/content/brands/crust/',
-            text: 'Crust Delivery'
-        },
-        {
-            url: '/content/brands/hogs-breath/',
-            text: "Hog's Breath Delivery"
-        },
-        {
-            url: '/content/brands/oporto/',
-            text: 'Oporto Delivery'
-        },
-        {
-            url: '/content/brands/pizza-hut/',
-            text: 'Pizza Hut Delivery'
-        },
-        {
-            url: '/content/brands/red-rooster/',
-            text: 'Red Rooster Delivery'
-        },
-        {
-            url: '/content/brands/subway/',
-            text: 'Subway Delivery'
-        },
-        {
-            url: '/content/brands/zambrero/',
-            text: 'Zambrero Delivery'
-        },
-        {
-            url: '/browse/',
-            text: 'View all brands'
-        }
-    ],
-    aboutUs: 'A bit more about us',
-    aboutUsLinks: [
-        {
-            url: '/content/',
-            text: 'About Menulog'
-        },
-        {
-            url: '/content/our-price-promise/',
-            text: 'Price promise'
-        },
-        {
-            url: '/content/partner-with-us/',
-            text: 'Partner with us'
-        },
-        {
-            url: '/content/partner-with-us/',
-            text: 'Menulog careers'
-        },
-        {
-            url: '/content/corporate-partners/',
-            text: 'Corporate partners'
-        },
-        {
-            url: '/blog/category/press/',
-            text: 'Media Centre'
-        },
-        {
-            url: '/privacy-policy/',
-            text: 'Privacy Policy and Terms of Use'
-        },
-        {
-            url: 'https://partner.menulog.com.au/',
-            text: 'Partner centre'
-        },
-        {
-            url: 'https://couriers.menulog.com.au/application/',
-            text: 'Become a courier'
-        },
-        {
-            url: 'https://couriers.menulog.com.au/',
-            text: 'Courier portal'
-        },
-        {
-            url: '/content/join-menulog',
-            text: 'List your restaurant'
-        }
-    ],
+    },
     downloadOurApps: 'Download our apps',
     appStoreIcons: [
         {
