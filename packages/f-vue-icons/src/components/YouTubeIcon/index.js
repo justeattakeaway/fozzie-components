@@ -1,7 +1,7 @@
-import YouTubeIcon from './YouTubeIcon.vue';
+import YoutubeIcon from './YoutubeIcon.vue';
 
 const install = Vue => {
-    Vue.component(YouTubeIcon.name, YouTubeIcon);
+    Vue.component(YoutubeIcon.name, YoutubeIcon);
 };
 
 export default install;
