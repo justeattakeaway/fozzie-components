@@ -1,130 +1,142 @@
 export default {
-    customerServiceTitle: 'Kundeservice',
-    customerServiceLinks: [
-        {
-            url: '/help',
-            text: 'Hjælp'
+    linkLists: {
+        customerService: {
+            title: 'Kundeservice',
+            links: [
+                {
+                    url: '/help',
+                    text: 'Hjælp'
+                },
+                {
+                    url: 'https://external-ordering.gavekortet.dk/justeat',
+                    text: 'Gavekort'
+                },
+                {
+                    url: '/takeaway/prisgaranti',
+                    text: 'Prisgaranti'
+                },
+                {
+                    url: '/takeaway/firmaaftale',
+                    text: 'Firmaaftale'
+                },
+                {
+                    url: '/blog',
+                    text: 'Just Eat Blog'
+                },
+                {
+                    url: 'http://justeat-premium.dk/',
+                    text: 'Just Eat Premium'
+                }
+            ]
         },
-        {
-            url: 'https://external-ordering.gavekortet.dk/justeat',
-            text: 'Gavekort'
+        cuisines: {
+            title: 'Hvad har du lyst til?',
+            links: [
+                {
+                    url: '/takeaway',
+                    text: 'Takeaway'
+                },
+                {
+                    url: '/takeaway/italiensk',
+                    text: 'Pizza'
+                },
+                {
+                    url: '/takeaway/sushi',
+                    text: 'Sushi'
+                },
+                {
+                    url: '/takeaway/indisk',
+                    text: 'Indisk'
+                },
+                {
+                    url: '/takeaway/kinesisk',
+                    text: 'Kinesisk'
+                },
+                {
+                    url: '/takeaway/amerikansk',
+                    text: 'Amerikansk & burger'
+                },
+                {
+                    url: '/takeaway/premium-gourmet',
+                    text: 'Premium & Gourmet'
+                },
+                {
+                    url: '/takeaway/typer-foedevarer',
+                    text: 'Alle køkkentyper'
+                }
+            ]
         },
-        {
-            url: '/takeaway/prisgaranti',
-            text: 'Prisgaranti'
+        locations: {
+            title: 'Find din by',
+            links: [
+                {
+                    url: '/takeaway/koebenhavn',
+                    text: 'København'
+                },
+                {
+                    url: '/takeaway/roskilde',
+                    text: 'Roskilde'
+                },
+                {
+                    url: '/takeaway/aarhus',
+                    text: 'Aarhus'
+                },
+                {
+                    url: '/takeaway/odense',
+                    text: 'Odense'
+                },
+                {
+                    url: '/takeaway/aalborg',
+                    text: 'Aalborg'
+                },
+                {
+                    url: '/takeaway/kgs-lyngby',
+                    text: 'Lyngby'
+                },
+                {
+                    url: '/takeaway/alle-byer',
+                    text: 'Alle byer'
+                }
+            ]
         },
-        {
-            url: '/takeaway/firmaaftale',
-            text: 'Firmaaftale'
+        brands: {
+            title: 'Brands',
+            links: []
         },
-        {
-            url: '/blog',
-            text: 'Just Eat Blog'
-        },
-        {
-            url: 'http://justeat-premium.dk/',
-            text: 'Just Eat Premium'
+        aboutUs: {
+            title: 'Om os',
+            links: [
+                {
+                    url: 'https://restaurants.just-eat.dk/',
+                    text: 'Restaurant påmelding'
+                },
+                {
+                    url: '/about',
+                    text: 'Hvem er vi'
+                },
+                {
+                    url: 'https://partner.just-eat.dk/',
+                    text: 'Partner centre'
+                },
+                {
+                    url: 'http://partnerblog.just-eat.dk/',
+                    text: 'Partnerblog'
+                },
+                {
+                    url: '/jobs',
+                    text: 'Arbejd for os'
+                },
+                {
+                    url: '/privacy-policy',
+                    text: 'Handelsbetingelser'
+                },
+                {
+                    url: '/cookiespolicy',
+                    text: 'Brug af cookies'
+                }
+            ]
         }
-    ],
-    cuisines: 'Hvad har du lyst til?',
-    cuisineLinks: [
-        {
-            url: '/takeaway',
-            text: 'Takeaway'
-        },
-        {
-            url: '/takeaway/italiensk',
-            text: 'Pizza'
-        },
-        {
-            url: '/takeaway/sushi',
-            text: 'Sushi'
-        },
-        {
-            url: '/takeaway/indisk',
-            text: 'Indisk'
-        },
-        {
-            url: '/takeaway/kinesisk',
-            text: 'Kinesisk'
-        },
-        {
-            url: '/takeaway/amerikansk',
-            text: 'Amerikansk & burger'
-        },
-        {
-            url: '/takeaway/premium-gourmet',
-            text: 'Premium & Gourmet'
-        },
-        {
-            url: '/takeaway/typer-foedevarer',
-            text: 'Alle køkkentyper'
-        }
-    ],
-    towns: 'Find din by',
-    locationLinks: [
-        {
-            url: '/takeaway/koebenhavn',
-            text: 'København'
-        },
-        {
-            url: '/takeaway/roskilde',
-            text: 'Roskilde'
-        },
-        {
-            url: '/takeaway/aarhus',
-            text: 'Aarhus'
-        },
-        {
-            url: '/takeaway/odense',
-            text: 'Odense'
-        },
-        {
-            url: '/takeaway/aalborg',
-            text: 'Aalborg'
-        },
-        {
-            url: '/takeaway/kgs-lyngby',
-            text: 'Lyngby'
-        },
-        {
-            url: '/takeaway/alle-byer',
-            text: 'Alle byer'
-        }
-    ],
-    brands: 'Brands',
-    brandLinks: [],
-    aboutUs: 'Om os',
-    aboutUsLinks: [
-        {
-            url: 'https://restaurants.just-eat.dk/',
-            text: 'Restaurant påmelding'
-        },
-        {
-            url: '/about',
-            text: 'Hvem er vi'
-        },
-        {
-            url: 'https://partner.just-eat.dk/',
-            text: 'Partner centre'
-        },
-        {
-            url: 'http://partnerblog.just-eat.dk/',
-            text: 'Partnerblog'
-        },
-        {
-            url: '/jobs',
-            text: 'Arbejd for os'
-        },
-        {
-            url: '/privacy-policy',
-            text: 'Handelsbetingelser'
-        },
-        {
-            url: '/cookiespolicy',
-            text: 'Brug af cookies'
-        }
-    ],
+    },
     downloadOurApps: 'Download vores app',
     appStoreIcons: [
         {

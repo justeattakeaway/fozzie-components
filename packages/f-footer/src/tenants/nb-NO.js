@@ -1,111 +1,123 @@
 export default {
-    customerServiceTitle: 'Kundeservice',
-    customerServiceLinks: [
-        {
-            url: '/help',
-            text: 'Hjelp'
+    linkLists: {
+        customerService: {
+            title: 'Kundeservice',
+            links: [
+                {
+                    url: '/help',
+                    text: 'Hjelp'
+                },
+                {
+                    url: '/account/login',
+                    text: 'Logg inn',
+                    rel: 'nofollow'
+                },
+                {
+                    url: '/account/register',
+                    text: 'Registrer deg'
+                }
+            ]
         },
-        {
-            url: '/account/login',
-            text: 'Logg inn',
-            rel: 'nofollow'
+        cuisines: {
+            title: 'Hva frister?',
+            links: [
+                {
+                    url: '/take-away',
+                    text: 'Take-away'
+                },
+                {
+                    url: '/take-away/pizza',
+                    text: 'Pizza'
+                },
+                {
+                    url: '/take-away/sushi',
+                    text: 'Sushi'
+                },
+                {
+                    url: '/take-away/indisk',
+                    text: 'Indisk'
+                },
+                {
+                    url: '/take-away/thaimat',
+                    text: 'Thaimat'
+                },
+                {
+                    url: '/take-away/kebab',
+                    text: 'Kebab'
+                },
+                {
+                    url: '/take-away/cuisines',
+                    text: 'Alle kjøkkentyper'
+                }
+            ]
         },
-        {
-            url: '/account/register',
-            text: 'Registrer deg'
+        locations: {
+            title: 'Finn din by',
+            links: [
+                {
+                    url: '/take-away/Oslo',
+                    text: 'Oslo'
+                },
+                {
+                    url: '/take-away/Bergen',
+                    text: 'Bergen'
+                },
+                {
+                    url: '/take-away/Trondheim',
+                    text: 'Trondheim'
+                },
+                {
+                    url: '/take-away/Drammen',
+                    text: 'Drammen'
+                },
+                {
+                    url: '/take-away/Fredrikstad',
+                    text: 'Fredrikstad'
+                },
+                {
+                    url: '/take-away/Asker',
+                    text: 'Asker & Bærum'
+                },
+                {
+                    url: '/take-away/cities',
+                    text: 'Alle byer'
+                }
+            ]
+        },
+        brands: {
+            title: 'Brands',
+            links: []
+        },
+        aboutUs: {
+            title: 'Om oss',
+            links: [
+                {
+                    url: '/take-away/bedrift-overtidsmat',
+                    text: 'Restaurant påmelding'
+                },
+                {
+                    url: '/about',
+                    text: 'Om oss'
+                },
+                {
+                    url: 'https://partner.just-eat.no/',
+                    text: 'Partner centre'
+                },
+                {
+                    url: '/jobs',
+                    text: 'Ledige stillinger'
+                },
+                {
+                    url: '/cookiespolicy',
+                    text: 'Cookies'
+                },
+                {
+                    url: '/privacy-policy',
+                    text: 'Handelsvilkår'
+                }
+            ]
         }
-    ],
-    cuisines: 'Hva frister?',
-    cuisineLinks: [
-        {
-            url: '/take-away',
-            text: 'Take-away'
-        },
-        {
-            url: '/take-away/pizza',
-            text: 'Pizza'
-        },
-        {
-            url: '/take-away/sushi',
-            text: 'Sushi'
-        },
-        {
-            url: '/take-away/indisk',
-            text: 'Indisk'
-        },
-        {
-            url: '/take-away/thaimat',
-            text: 'Thaimat'
-        },
-        {
-            url: '/take-away/kebab',
-            text: 'Kebab'
-        },
-        {
-            url: '/take-away/cuisines',
-            text: 'Alle kjøkkentyper'
-        }
-    ],
-    towns: 'Finn din by',
-    locationLinks: [
-        {
-            url: '/take-away/Oslo',
-            text: 'Oslo'
-        },
-        {
-            url: '/take-away/Bergen',
-            text: 'Bergen'
-        },
-        {
-            url: '/take-away/Trondheim',
-            text: 'Trondheim'
-        },
-        {
-            url: '/take-away/Drammen',
-            text: 'Drammen'
-        },
-        {
-            url: '/take-away/Fredrikstad',
-            text: 'Fredrikstad'
-        },
-        {
-            url: '/take-away/Asker',
-            text: 'Asker & Bærum'
-        },
-        {
-            url: '/take-away/cities',
-            text: 'Alle byer'
-        }
-    ],
-    brands: 'Brands',
-    brandLinks: [],
-    aboutUs: 'Om oss',
-    aboutUsLinks: [
-        {
-            url: '/take-away/bedrift-overtidsmat',
-            text: 'Restaurant påmelding'
-        },
-        {
-            url: '/about',
-            text: 'Om oss'
-        },
-        {
-            url: 'https://partner.just-eat.no/',
-            text: 'Partner centre'
-        },
-        {
-            url: '/jobs',
-            text: 'Ledige stillinger'
-        },
-        {
-            url: '/cookiespolicy',
-            text: 'Cookies'
-        },
-        {
-            url: '/privacy-policy',
-            text: 'Handelsvilkår'
-        }
-    ],
+    },
     downloadOurApps: 'Last ned appen vår',
     appStoreIcons: [
         {

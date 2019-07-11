@@ -35,7 +35,7 @@
 
 1. Running locally
 
-    Run `vue serve --open src/components/TestComponentForFooter.vue` from the f-footer root folder to render testing wrapper component
+    Run `vue serve --open src/components/FooterDemo.vue` from the f-footer root folder to render testing wrapper component
 
 1. Running the Tests
 

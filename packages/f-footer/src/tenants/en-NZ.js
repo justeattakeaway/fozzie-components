@@ -1,94 +1,106 @@
 export default {
-    customerServiceTitle: 'Customer service',
-    customerServiceLinks: [
-        {
-            url: '/content/contact-us/',
-            text: 'Contact us'
+    linkLists: {
+        customerService: {
+            title: 'Customer service',
+            links: [
+                {
+                    url: '/content/contact-us/',
+                    text: 'Contact us'
+                },
+                {
+                    url: '/account/login/',
+                    text: 'Log in'
+                },
+                {
+                    url: '/account/register/',
+                    text: 'Sign up'
+                },
+                {
+                    url: '/account/info/',
+                    text: 'My account'
+                },
+                {
+                    url: '/blog/',
+                    text: 'Menulog blog'
+                },
+                {
+                    url: '/help/',
+                    text: 'Help centre'
+                }
+            ]
         },
-        {
-            url: '/account/login/',
-            text: 'Log in'
+        cuisines: {
+            title: 'Top cuisines',
+            links: [
+                {
+                    url: '/browse/cuisines/chinese',
+                    text: 'Chinese'
+                },
+                {
+                    url: '/browse/cuisines/indian',
+                    text: 'Indian'
+                },
+                {
+                    url: '/browse/cuisines/thai',
+                    text: 'Thai'
+                },
+                {
+                    url: '/browse/cuisines/pizza',
+                    text: 'Pizza'
+                },
+                {
+                    url: '/browse',
+                    text: 'View all cuisines'
+                }
+            ]
         },
-        {
-            url: '/account/register/',
-            text: 'Sign up'
+        locations: {
+            title: 'Locations',
+            links: [
+                {
+                    url: '/browse/locations/auckland/',
+                    text: 'Auckland'
+                },
+                {
+                    url: '/browse/locations/wellington/',
+                    text: 'Wellington'
+                },
+                {
+                    url: '/browse/locations/christchurch/',
+                    text: 'Christchurch'
+                },
+                {
+                    url: '/browse/locations/dunedin/',
+                    text: 'Dunedin'
+                }
+            ]
         },
-        {
-            url: '/account/info/',
-            text: 'My account'
+        brands: {
+            title: 'Brands',
+            links: []
         },
-        {
-            url: '/blog/',
-            text: 'Menulog blog'
-        },
-        {
-            url: '/help/',
-            text: 'Help centre'
+        aboutUs: {
+            title: 'A bit more about us',
+            links: [
+                {
+                    url: '/about_menulog',
+                    text: 'Get to know us'
+                },
+                {
+                    url: '/privacy-policy#privacy_policy',
+                    text: 'Privacy Policy / Terms & Conditions'
+                },
+                {
+                    url: 'https://connect.menulog.co.nz/login?client_id=RappsOrigPartnerCentre&response_type=code&redirect_uri=https:%2F%2Fpartner.menulog.co.nz%2Fsignin-jeconnect&state=QaF4ae5nfj7FUpuoevTVCHvmMBxIA1hO_4mDtePNEJOasCly6wdTLaHjTuvS7_If4SwPYZelgwT0ZFYb7CCZvfIIr9X0OVLKiRpdCLYU9zJPuorMgnFjjRlyQNdU8L_5ZvkfGGBtXJx-jNOlh5lU_aqiQ-KgrKthGa83ZbYH8GjV81bwGb7iJ8PRFJPYbwTyys-zclUwNFxXhfdsOpqIWsIlfpQ',
+                    text: 'Partner Centre'
+                },
+                {
+                    url: '/join_takeaway_section',
+                    text: 'Restaurant sign up'
+                }
+            ]
         }
-    ],
-    cuisines: 'Top cuisines',
-    cuisineLinks: [
-        {
-            url: '/browse/cuisines/chinese',
-            text: 'Chinese'
-        },
-        {
-            url: '/browse/cuisines/indian',
-            text: 'Indian'
-        },
-        {
-            url: '/browse/cuisines/thai',
-            text: 'Thai'
-        },
-        {
-            url: '/browse/cuisines/pizza',
-            text: 'Pizza'
-        },
-        {
-            url: '/browse',
-            text: 'View all cuisines'
-        }
-    ],
-    towns: 'Locations',
-    locationLinks: [
-        {
-            url: '/browse/locations/auckland/',
-            text: 'Auckland'
-        },
-        {
-            url: '/browse/locations/wellington/',
-            text: 'Wellington'
-        },
-        {
-            url: '/browse/locations/christchurch/',
-            text: 'Christchurch'
-        },
-        {
-            url: '/browse/locations/dunedin/',
-            text: 'Dunedin'
-        }
-    ],
-    brands: 'Brands',
-    brandLinks: [],
-    aboutUs: 'A bit more about us',
-    aboutUsLinks: [
-        {
-            url: '/about_menulog',
-            text: 'Get to know us'
-        },
-        {
-            url: '/privacy-policy#privacy_policy',
-            text: 'Privacy Policy / Terms & Conditions'
-        },
-        {
-            url: 'https://connect.menulog.co.nz/login?client_id=RappsOrigPartnerCentre&response_type=code&redirect_uri=https:%2F%2Fpartner.menulog.co.nz%2Fsignin-jeconnect&state=QaF4ae5nfj7FUpuoevTVCHvmMBxIA1hO_4mDtePNEJOasCly6wdTLaHjTuvS7_If4SwPYZelgwT0ZFYb7CCZvfIIr9X0OVLKiRpdCLYU9zJPuorMgnFjjRlyQNdU8L_5ZvkfGGBtXJx-jNOlh5lU_aqiQ-KgrKthGa83ZbYH8GjV81bwGb7iJ8PRFJPYbwTyys-zclUwNFxXhfdsOpqIWsIlfpQ',
-            text: 'Partner Centre'
-        },
-        {
-            url: '/join_takeaway_section',
-            text: 'Restaurant sign up'
-        }
-    ],
+    },
     downloadOurApps: 'Download our apps',
     appStoreIcons: [
         {

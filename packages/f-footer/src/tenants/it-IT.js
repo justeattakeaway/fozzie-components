@@ -1,122 +1,134 @@
 export default {
-    customerServiceTitle: 'Servizio Clienti',
-    customerServiceLinks: [
-        {
-            url: '/account/login/',
-            text: 'Accedi'
+    linkLists: {
+        customerService: {
+            title: 'Servizio Clienti',
+            links: [
+                {
+                    url: '/account/login/',
+                    text: 'Accedi'
+                },
+                {
+                    url: '/account/register/',
+                    text: 'Registrati'
+                },
+                {
+                    url: '/blog/',
+                    text: 'Blog'
+                },
+                {
+                    url: '/account/info/',
+                    text: 'Il mio account'
+                },
+                {
+                    url: '/help/',
+                    text: 'Aiuto?'
+                }
+            ]
         },
-        {
-            url: '/account/register/',
-            text: 'Registrati'
+        cuisines: {
+            title: 'Cucine',
+            links: [
+                {
+                    url: '/domicilio/vicino-a-me/pizza/',
+                    text: 'Pizza a domicilio'
+                },
+                {
+                    url: '/domicilio/vicino-a-me/cinese',
+                    text: 'Cinese a domicilio'
+                },
+                {
+                    url: '/domicilio/vicino-a-me/sushi-giapponese/',
+                    text: 'Sushi a domicilio'
+                },
+                {
+                    url: '/domicilio/vicino-a-me/kebab/',
+                    text: 'Kebab a domicilio'
+                },
+                {
+                    url: '/domicilio/vicino-a-me/',
+                    text: 'Tutti i tipi di cucine'
+                }
+            ]
         },
-        {
-            url: '/blog/',
-            text: 'Blog'
+        locations: {
+            title: 'Città',
+            links: [
+                {
+                    url: '/domicilio/palermo/',
+                    text: 'Palermo'
+                },
+                {
+                    url: '/domicilio/roma/',
+                    text: 'Roma'
+                },
+                {
+                    url: '/domicilio/milano/',
+                    text: 'Milano'
+                },
+                {
+                    url: '/domicilio/napoli/',
+                    text: 'Napoli'
+                },
+                {
+                    url: '/domicilio/torino/',
+                    text: 'Torino'
+                },
+                {
+                    url: '/domicilio/bologna/',
+                    text: 'Bologna'
+                },
+                {
+                    url: '/domicilio/citta/',
+                    text: 'Tutte le città'
+                }
+            ]
         },
-        {
-            url: '/account/info/',
-            text: 'Il mio account'
+        brands: {
+            title: 'Brands',
+            links: []
         },
-        {
-            url: '/help/',
-            text: 'Aiuto?'
+        aboutUs: {
+            title: 'Chi siamo',
+            links: [
+                {
+                    url: '/informazioni/privacy-policy/',
+                    text: 'Termini e Condizioni'
+                },
+                {
+                    url: '/informazioni/politica-dei-cookie/',
+                    text: 'Cookie Policy'
+                },
+                {
+                    url: '/informazioni/about-us/',
+                    text: 'Informazioni su Just Eat'
+                },
+                {
+                    url: '/faq/',
+                    text: 'Domande frequenti'
+                },
+                {
+                    url: '/informazioni/miglior-prezzo-garantito/',
+                    text: 'Miglior Prezzo Garantito'
+                },
+                {
+                    url: '/informazioni/lavora-con-noi/',
+                    text: 'Lavora con noi'
+                },
+                {
+                    url: '/informazioni/driver-partner/',
+                    text: 'Diventa un Rider'
+                },
+                {
+                    url: '/informazioni/media-and-press/',
+                    text: 'Area stampa'
+                },
+                {
+                    url: '/app/',
+                    text: 'Le nostre App'
+                }
+            ]
         }
-    ],
-    cuisines: 'Cucine',
-    cuisineLinks: [
-        {
-            url: '/domicilio/vicino-a-me/pizza/',
-            text: 'Pizza a domicilio'
-        },
-        {
-            url: '/domicilio/vicino-a-me/cinese',
-            text: 'Cinese a domicilio'
-        },
-        {
-            url: '/domicilio/vicino-a-me/sushi-giapponese/',
-            text: 'Sushi a domicilio'
-        },
-        {
-            url: '/domicilio/vicino-a-me/kebab/',
-            text: 'Kebab a domicilio'
-        },
-        {
-            url: '/domicilio/vicino-a-me/',
-            text: 'Tutti i tipi di cucine'
-        }
-    ],
-    towns: 'Città',
-    locationLinks: [
-        {
-            url: '/domicilio/palermo/',
-            text: 'Palermo'
-        },
-        {
-            url: '/domicilio/roma/',
-            text: 'Roma'
-        },
-        {
-            url: '/domicilio/milano/',
-            text: 'Milano'
-        },
-        {
-            url: '/domicilio/napoli/',
-            text: 'Napoli'
-        },
-        {
-            url: '/domicilio/torino/',
-            text: 'Torino'
-        },
-        {
-            url: '/domicilio/bologna/',
-            text: 'Bologna'
-        },
-        {
-            url: '/domicilio/citta/',
-            text: 'Tutte le città'
-        }
-    ],
-    brands: 'Brands',
-    brandLinks: [],
-    aboutUs: 'Chi siamo',
-    aboutUsLinks: [
-        {
-            url: '/informazioni/privacy-policy/',
-            text: 'Termini e Condizioni'
-        },
-        {
-            url: '/informazioni/politica-dei-cookie/',
-            text: 'Cookie Policy'
-        },
-        {
-            url: '/informazioni/about-us/',
-            text: 'Informazioni su Just Eat'
-        },
-        {
-            url: '/faq/',
-            text: 'Domande frequenti'
-        },
-        {
-            url: '/informazioni/miglior-prezzo-garantito/',
-            text: 'Miglior Prezzo Garantito'
-        },
-        {
-            url: '/informazioni/lavora-con-noi/',
-            text: 'Lavora con noi'
-        },
-        {
-            url: '/informazioni/driver-partner/',
-            text: 'Diventa un Rider'
-        },
-        {
-            url: '/informazioni/media-and-press/',
-            text: 'Area stampa'
-        },
-        {
-            url: '/app/',
-            text: 'Le nostre App'
-        }
-    ],
+    },
     downloadOurApps: "Scarica l'app",
     appStoreIcons: [
         {
@@ -242,5 +254,5 @@ export default {
     ],
     changeCurrentCountry: 'Sei sul sito Italiano. Clicca qui per cambiare stato.',
     buttonClose: 'Chiudi',
-    vatInfo: ''
+    vatInfo: 'Just Eat Italy S.r.l. - P.IVA 07392740960'
 };

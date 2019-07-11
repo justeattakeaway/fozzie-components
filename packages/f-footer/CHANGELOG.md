@@ -4,6 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.3
+------------------------------
+*July 10, 2019*
+
+### Added
+- Child components containers for the footer: AppList, CountrySelector, Feedback, PaymentsList, SocialList and LegalField
+
+### Changed
+- Structure of the resource files for the lists of links
+- Replace googlePlus social link with blog
+- Add Italian VAT number
+
+
 v2.0.0-beta.2
 ------------------------------
 *July 5, 2019*

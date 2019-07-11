@@ -988,11 +988,6 @@
     webpack-cli "3.3.1"
     webpack-log "2.0.0"
 
-"@justeat/f-footer@file:packages/f-footer":
-  version "2.0.0-beta.2"
-  dependencies:
-    vue "2.6.10"
-
 "@justeat/f-icons@1.28.0":
   version "1.28.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-1.28.0.tgz#e049e292207a9f57f987b4792f810f0832166755"
@@ -1005,12 +1000,6 @@
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-utils/-/f-utils-0.3.0.tgz#1f18ba13ad7061e21c2112387234a77ba45fb5d3"
   integrity sha512-hqRiGA2lP++Z1oqawsv1V2Duf3YShaAbJ3S5JEPTpTMP5RjH36Xpc8nRbIVFBmwnZCu7L9iF7AebYTUX8XhiZA==
-
-"@justeat/f-vue-icons@file:packages/f-vue-icons":
-  version "0.6.0"
-  dependencies:
-    "@justeat/f-icons" "1.28.0"
-    vue "2.6.10"
 
 "@lerna/add@3.15.0":
   version "3.15.0"
