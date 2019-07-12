@@ -2,20 +2,21 @@
 
 exports[`Footer should render default component markup 1`] = `
 <footer class="c-footer">
-  <h1>Footer component</h1>
-  <div class="c-footer-row">
+  <div class="c-footer-layout c-footer-row c-footer-linkList">
     <footer-link-list-stub linklist="[object Object]"></footer-link-list-stub>
     <footer-link-list-stub linklist="[object Object]"></footer-link-list-stub>
     <footer-link-list-stub linklist="[object Object]"></footer-link-list-stub>
     <footer-link-list-stub linklist="[object Object]"></footer-link-list-stub>
     <footer-link-list-stub linklist="[object Object]"></footer-link-list-stub>
   </div>
-  <div class="c-footer-row">
-    <footer-app-list-stub title="Download our apps" appsicons="[object Object],[object Object]"></footer-app-list-stub>
-    <footer-feedback-stub title="Feedback" text="Help us improve our website" buttontext="Send feedback"></footer-feedback-stub>
-    <footer-social-list-stub title="Follow us" socialicons="[object Object],[object Object],[object Object]"></footer-social-list-stub>
+  <div class="c-footer-row--light">
+    <div class="c-footer-layout c-footer-row">
+      <footer-app-list-stub title="Download our apps" appsicons="[object Object],[object Object]"></footer-app-list-stub>
+      <footer-feedback-stub title="Feedback" text="Help us improve our website" buttontext="Send feedback"></footer-feedback-stub>
+      <footer-social-list-stub title="Follow us" socialicons="[object Object],[object Object],[object Object]"></footer-social-list-stub>
+    </div>
   </div>
-  <div class="c-footer-row">
+  <div class="c-footer-layout c-footer-row">
     <footer-country-selector-stub></footer-country-selector-stub>
     <!---->
     <footer-payment-list-stub paymenticons="[object Object],[object Object],[object Object]"></footer-payment-list-stub>
