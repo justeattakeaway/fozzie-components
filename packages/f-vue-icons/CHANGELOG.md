@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.10.0
+------------------------------
+*July 12, 2019*
+
+### Added 
+- `BaseIcon` and `AppStoreIcon` components
+- Root dependency on `sass-loader` and `node-sass`
+
+### Changed
+- Move social and payment icons into their own folders
+- Remove unnecessary exports
+
 
 v0.9.1
 ------------------------------
