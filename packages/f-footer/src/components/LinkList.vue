@@ -1,9 +1,11 @@
 <template>
     <div
         v-if="linkList.links.length"
-        :class="['c-footer-panel', { 'is-collapsed': panelCollapsed }]">
+        :class="['c-footer-panel', { 'is-collapsed': panelCollapsed }]"
+        data-js-test="linkList-wrapper">
         <h2
             class="c-footer-heading"
+            data-js-test="linkList-header"
             @click="onPanelClick">
             {{ linkList.title }}
         </h2>
