@@ -1,7 +1,7 @@
 <template>
     <component
-        :is="icon.url ? 'a' : 'span'"
-        :href="icon.url">
+        :is="url ? 'a' : 'span'"
+        :href="url">
         <component :is="iconType" />
     </component>
 </template>
@@ -46,14 +46,19 @@ export default {
         VisaVerifiedIcon
     },
     props: {
-        icon: {
-            type: Object,
+        name: {
+            type: String,
             required: true
+        },
+        url: {
+            type: String,
+            required: false,
+            default: ''
         }
     },
     computed: {
         iconType () {
-            return `${this.icon.key}-icon`;
+            return `${this.name}-icon`;
         }
     }
 };
