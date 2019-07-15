@@ -8,8 +8,7 @@ v0.10.0
 *July 12, 2019*
 
 ### Added 
-- `BaseIcon` and `AppStoreIcon` components
-- Root dependency on `sass-loader` and `node-sass`
+- `BaseProviderIcon` and `AppStoreIcon` components
 
 ### Changed
 - Move social and payment icons into their own folders

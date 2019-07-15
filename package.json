@@ -55,8 +55,6 @@
   },
   "dependencies": {
     "@justeat/f-footer": "file:packages/f-footer",
-    "@justeat/f-vue-icons": "file:packages/f-vue-icons",
-    "node-sass": "4.12.0",
-    "sass-loader": "7.1.0"
+    "@justeat/f-vue-icons": "file:packages/f-vue-icons"
   }
 }

@@ -1,7 +1,7 @@
 import * as components from './components';
 import AlertIcon from './components/AlertIcon/AlertIcon.vue';
 import AppStoreIcon from './components/AppStoreIcon/AppStoreIcon.vue';
-import BaseIcon from './components/BaseIcon/BaseIcon.vue';
+import BaseProviderIcon from './components/BaseProviderIcon/BaseProviderIcon.vue';
 import BasketIcon from './components/BasketIcon/BasketIcon.vue';
 import CashIcon from './components/CashIcon/CashIcon.vue';
 import ChevronIcon from './components/ChevronIcon/ChevronIcon.vue';
@@ -34,7 +34,7 @@ export default Fozzie;
 export {
     AlertIcon,
     AppStoreIcon,
-    BaseIcon,
+    BaseProviderIcon,
     BasketIcon,
     CashIcon,
     ChevronIcon,

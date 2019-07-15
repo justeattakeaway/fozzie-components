@@ -3,31 +3,31 @@
 </template>
 
 <script>
-import IosDkIcon from '@justeat/f-icons/src/img/icons/appstore/ios.dk.svg';
-import IosEnIcon from '@justeat/f-icons/src/img/icons/appstore/ios.svg';
-import IosEsIcon from '@justeat/f-icons/src/img/icons/appstore/ios.es.svg';
-import IosItIcon from '@justeat/f-icons/src/img/icons/appstore/ios.it.svg';
-import IosNoIcon from '@justeat/f-icons/src/img/icons/appstore/ios.no.svg';
-import AndroidDkIcon from '@justeat/f-icons/src/img/icons/appstore/android.dk.svg';
-import AndroidEnIcon from '@justeat/f-icons/src/img/icons/appstore/android.svg';
-import AndroidEsIcon from '@justeat/f-icons/src/img/icons/appstore/android.es.svg';
-import AndroidItIcon from '@justeat/f-icons/src/img/icons/appstore/android.it.svg';
-import AndroidNoIcon from '@justeat/f-icons/src/img/icons/appstore/android.no.svg';
-import MicrosoftDkIcon from '@justeat/f-icons/src/img/icons/appstore/microsoft.dk.svg';
+import AndroidIconDk from '@justeat/f-icons/src/img/icons/appstore/android.dk.svg';
+import AndroidIconEn from '@justeat/f-icons/src/img/icons/appstore/android.svg';
+import AndroidIconEs from '@justeat/f-icons/src/img/icons/appstore/android.es.svg';
+import AndroidIconIt from '@justeat/f-icons/src/img/icons/appstore/android.it.svg';
+import AndroidIconNo from '@justeat/f-icons/src/img/icons/appstore/android.no.svg';
+import IosIconDk from '@justeat/f-icons/src/img/icons/appstore/ios.dk.svg';
+import IosIconEn from '@justeat/f-icons/src/img/icons/appstore/ios.svg';
+import IosIconEs from '@justeat/f-icons/src/img/icons/appstore/ios.es.svg';
+import IosIconIt from '@justeat/f-icons/src/img/icons/appstore/ios.it.svg';
+import IosIconNo from '@justeat/f-icons/src/img/icons/appstore/ios.no.svg';
+import MicrosoftIconDk from '@justeat/f-icons/src/img/icons/appstore/microsoft.dk.svg';
 
 export default {
     components: {
-        IosEnIcon,
-        IosEsIcon,
-        IosDkIcon,
-        IosNoIcon,
-        IosItIcon,
-        AndroidDkIcon,
-        AndroidEnIcon,
-        AndroidEsIcon,
-        AndroidItIcon,
-        AndroidNoIcon,
-        MicrosoftDkIcon
+        AndroidIconDk,
+        AndroidIconEn,
+        AndroidIconEs,
+        AndroidIconIt,
+        AndroidIconNo,
+        IosIconDk,
+        IosIconEn,
+        IosIconEs,
+        IosIconIt,
+        IosIconNo,
+        MicrosoftIconDk
     },
     props: {
         platform: {
@@ -41,7 +41,7 @@ export default {
     },
     computed: {
         iconComponent () {
-            return `${this.platform}-${this.language}-icon`;
+            return `${this.platform}-icon-${this.language}`;
         }
     }
 };

@@ -1,6 +1,6 @@
 import AlertIcon from './AlertIcon';
 import AppStoreIcon from './AppStoreIcon';
-import BaseIcon from './BaseIcon';
+import BaseProviderIcon from './BaseProviderIcon';
 import BasketIcon from './BasketIcon';
 import CashIcon from './CashIcon';
 import ChevronIcon from './ChevronIcon';
@@ -23,7 +23,7 @@ import WarningIcon from './WarningIcon';
 export {
     AlertIcon,
     AppStoreIcon,
-    BaseIcon,
+    BaseProviderIcon,
     BasketIcon,
     CashIcon,
     ChevronIcon,

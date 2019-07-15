@@ -53,7 +53,7 @@ export default {
     },
     computed: {
         iconType () {
-            return `${this.icon.key}-icon`;
+            return `${this.icon.key}-provider-icon`;
         }
     }
 };
