@@ -23,7 +23,14 @@
 
 1. Import the component
 
-    ...To be filled...
+    - If there is a vue-i18n plugin in the project, footer component can be called without any props:
+
+    `<vue-footer />`
+
+    - Or you can pass locale as a property to specify the tenant:
+
+    `<vue-footer
+        locale="en-GB" />`
 
 1. Browser Support
 
