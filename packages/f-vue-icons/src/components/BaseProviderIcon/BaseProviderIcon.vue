@@ -1,18 +1,6 @@
 <template>
-    <div>
-        <a
-            v-if="url"
-            :href="url">
-            <component
-                :is="iconType"
-                :alt="alt" />
-        </a>
-
-        <component
-            :is="iconType"
-            v-else
-            :alt="alt" />
-    </div>
+    <component
+        :is="iconType" />
 </template>
 
 <script>
@@ -58,16 +46,6 @@ export default {
         name: {
             type: String,
             required: true
-        },
-        url: {
-            type: String,
-            required: false,
-            default: ''
-        },
-        alt: {
-            type: String,
-            required: false,
-            default: ''
         }
     },
     computed: {
