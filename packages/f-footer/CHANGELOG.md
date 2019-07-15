@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.4
+------------------------------
+*July 12, 2019*
+
+### Added
+- Imports for fozzie variables, mixins and colours so that they can be used in the styling.
+- Add logic for collapsing and styling for FooterList component
+- Some base styling for Footer component
+
+### Changed
+- Update footer URL for the "Locations" and "Cuisines" sections in Australia(Menulog)
+
 v2.0.0-beta.3
 ------------------------------
 *July 10, 2019*

@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h2>{{ title }}</h2>
+        <h2 class="c-footer-heading">
+            {{ title }}
+        </h2>
         <ul>
             <li
                 v-for="(icon, index) in appsIcons"
