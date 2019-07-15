@@ -9,7 +9,9 @@ module.exports = {
             .use('importer')
             .loader('sass-loader')
             .options({
-                importer: magicImporter()
+                importer: magicImporter(),
+                // eslint-disable-next-line quotes
+                data: `@import "@/assets/scss/common.scss";`
             });
 
         // Inline SVGs
