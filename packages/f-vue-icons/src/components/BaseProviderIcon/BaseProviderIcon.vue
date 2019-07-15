@@ -1,9 +1,18 @@
 <template>
-    <component
-        :is="url ? 'a' : 'span'"
-        :href="url">
-        <component :is="iconType" />
-    </component>
+    <div>
+        <a
+            v-if="url"
+            :href="url">
+            <component
+                :is="iconType"
+                :alt="alt" />
+        </a>
+
+        <component
+            :is="iconType"
+            v-else
+            :alt="alt" />
+    </div>
 </template>
 
 <script>
@@ -51,6 +60,11 @@ export default {
             required: true
         },
         url: {
+            type: String,
+            required: false,
+            default: ''
+        },
+        alt: {
             type: String,
             required: false,
             default: ''
