@@ -21,7 +21,7 @@ describe('LinkList component', () => {
         expect(wrapper).toBeDefined();
     });
 
-    it('is-collapsed class is present', () => {
+    it('should contain the class "is-collapsed"', () => {
         // Arrange & Act
         const linkListWrapper = wrapper.find('[data-js-test="linkList-wrapper"]');
 
@@ -29,7 +29,7 @@ describe('LinkList component', () => {
         expect(linkListWrapper.classes()).toContain('is-collapsed');
     });
 
-    it('removes is-collapsed class when linkList is clicked', () => {
+    it('shouldn\'t contain class "is-collapsed" when linkList title is clicked', () => {
         // Arrange
         const linkListWrapper = wrapper.find('[data-js-test="linkList-wrapper"]');
         const linkListHeader = wrapper.find('[data-js-test="linkList-header"]');
