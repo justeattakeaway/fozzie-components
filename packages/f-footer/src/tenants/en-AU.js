@@ -33,43 +33,43 @@ export default {
             title: 'Cuisines',
             links: [
                 {
-                    url: '/browse/burgers',
+                    url: '/takeaway/nearme/burgers',
                     text: 'Burgers Delivery'
                 },
                 {
-                    url: '/browse/chinese',
+                    url: '/takeaway/nearme/chinese',
                     text: 'Chinese Delivery'
                 },
                 {
-                    url: '/browse/indian',
+                    url: '/takeaway/nearme/indian',
                     text: 'Indian Delivery'
                 },
                 {
-                    url: '/content/browse/italian',
+                    url: '/takeaway/nearme/italian',
                     text: 'Italian Delivery'
                 },
                 {
-                    url: '/browse/japanese',
+                    url: '/takeaway/nearme/japanese',
                     text: 'Japanese Delivery'
                 },
                 {
-                    url: '/browse/korean',
+                    url: '/takeaway/nearme/korean',
                     text: 'Korean Delivery'
                 },
                 {
-                    url: '/browse/pizza',
+                    url: '/takeaway/nearme/pizza',
                     text: 'Pizza Delivery'
                 },
                 {
-                    url: '/browse/thai',
+                    url: '/takeaway/nearme/thai',
                     text: 'Thai Delivery'
                 },
                 {
-                    url: '/browse/vietnamese',
+                    url: '/takeaway/nearme/vietnamese',
                     text: 'Vietnamese Delivery'
                 },
                 {
-                    url: '/content/browse',
+                    url: '/takeaway/nearme/',
                     text: 'View all cuisines'
                 }
             ]
@@ -78,43 +78,43 @@ export default {
             title: 'Locations',
             links: [
                 {
-                    url: '/browse/sydney',
+                    url: '/takeaway/sydney-city-and-inner-south-nsw',
                     text: 'Sydney food delivery'
                 },
                 {
-                    url: '/browse/melbourne-vic',
+                    url: '/takeaway/melbourne-city-vic',
                     text: 'Melbourne food delivery'
                 },
                 {
-                    url: '/browse/perth-wa',
+                    url: '/takeaway/perth-city-wa',
                     text: 'Perth food delivery'
                 },
                 {
-                    url: '/browse/brisbane-qld',
+                    url: '/takeaway/brisbane-inner-city-qld',
                     text: 'Brisbane food delivery'
                 },
                 {
-                    url: '/browse/canberra-act',
+                    url: '/takeaway/canberra-queanbeyan-actt',
                     text: 'Canberra food delivery'
                 },
                 {
-                    url: '/browse/adelaide-sa',
+                    url: '/takeaway/adelaide-city-sa',
                     text: 'Adelaide food delivery'
                 },
                 {
-                    url: '/browse/hobart-tas',
+                    url: '/takeaway/hobart-inner-tas',
                     text: 'Hobart food delivery'
                 },
                 {
-                    url: '/browse/gold-coast',
+                    url: '/takeaway/gold-coast-qld',
                     text: 'Gold Coast food delivery'
                 },
                 {
-                    url: '/browse/newcastle-hunter-valley',
+                    url: '/takeaway/newcastle-and-lake-macquarie-nsw',
                     text: 'Newcastle food delivery'
                 },
                 {
-                    url: '/browse',
+                    url: '/takeaway/',
                     text: 'View all locations'
                 }
             ]

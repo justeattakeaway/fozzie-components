@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h2>{{ title }}</h2>
+        <h2 class="c-footer-heading">
+            {{ title }}
+        </h2>
         <p>
             {{ text }}
             <button>{{ buttonText }}</button>
