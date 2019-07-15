@@ -1,7 +1,7 @@
 <template>
     <footer class="c-footer">
         <div class="c-footer-layout c-footer-row c-footer-linkList">
-            <footer-link-list
+            <link-list
                 v-for="(linkList, index) in copy.linkLists"
                 :key="index"
                 :link-list="linkList" />
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import FooterLinkList from './FooterLinkList.vue';
+import LinkList from './LinkList.vue';
 import FooterAppList from './FooterAppList.vue';
 import FooterFeedback from './FooterFeedback.vue';
 import FooterSocialList from './FooterSocialList.vue';
@@ -45,7 +45,7 @@ import tenantConfigs from '../tenants';
 export default {
     name: 'VueFooter',
     components: {
-        FooterLinkList,
+        LinkList,
         FooterAppList,
         FooterFeedback,
         FooterSocialList,

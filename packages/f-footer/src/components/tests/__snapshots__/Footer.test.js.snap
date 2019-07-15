@@ -3,11 +3,11 @@
 exports[`Footer should render default component markup 1`] = `
 <footer class="c-footer">
   <div class="c-footer-layout c-footer-row c-footer-linkList">
-    <footer-link-list-stub linklist="[object Object]"></footer-link-list-stub>
-    <footer-link-list-stub linklist="[object Object]"></footer-link-list-stub>
-    <footer-link-list-stub linklist="[object Object]"></footer-link-list-stub>
-    <footer-link-list-stub linklist="[object Object]"></footer-link-list-stub>
-    <footer-link-list-stub linklist="[object Object]"></footer-link-list-stub>
+    <link-list-stub linklist="[object Object]"></link-list-stub>
+    <link-list-stub linklist="[object Object]"></link-list-stub>
+    <link-list-stub linklist="[object Object]"></link-list-stub>
+    <link-list-stub linklist="[object Object]"></link-list-stub>
+    <link-list-stub linklist="[object Object]"></link-list-stub>
   </div>
   <div class="c-footer-row--light">
     <div class="c-footer-layout c-footer-row">
