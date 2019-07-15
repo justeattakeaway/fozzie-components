@@ -1032,7 +1032,7 @@
   integrity sha512-hqRiGA2lP++Z1oqawsv1V2Duf3YShaAbJ3S5JEPTpTMP5RjH36Xpc8nRbIVFBmwnZCu7L9iF7AebYTUX8XhiZA==
 
 "@justeat/f-vue-icons@file:packages/f-vue-icons":
-  version "0.9.0"
+  version "0.10.0"
   dependencies:
     "@justeat/f-icons" "1.28.0"
     vue "2.6.10"
