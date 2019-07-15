@@ -4,7 +4,7 @@
         :class="['c-footer-panel', { 'is-collapsed': panelCollapsed }]">
         <h2
             class="c-footer-heading"
-            @click="panelClick">
+            @click="onPanelClick">
             {{ linkList.title }}
         </h2>
 
@@ -30,16 +30,18 @@ export default {
             default: () => ({})
         }
     },
-    data: () => ({
-        panelCollapsed: true
-    }),
+    data () {
+        return {
+            panelCollapsed: true
+        };
+    },
     methods: {
-        panelClick () {
-            if (this.checkIfTabletOrMobile()) {
+        onPanelClick () {
+            if (this.isBelowWide()) {
                 this.panelCollapsed = !this.panelCollapsed;
             }
         },
-        checkIfTabletOrMobile () {
+        isBelowWide () {
             return window.innerWidth <= 1024;
         }
     }
@@ -83,7 +85,8 @@ export default {
             width: auto;
         }
 
-        &:hover {
+        &:hover,
+        &:focus {
             text-decoration: underline;
         }
     }
