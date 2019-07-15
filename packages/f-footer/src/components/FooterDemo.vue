@@ -1,3 +1,6 @@
+// Demo component for testing footer independently via `vue serve --open src/components/FooterDemo.vue`
+// Fonts were added for beter comparison with the designs.
+
 <template>
     <vue-footer
         locale="en-GB" />
