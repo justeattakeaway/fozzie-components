@@ -30,7 +30,7 @@ export default {
         MicrosoftIconDk
     },
     props: {
-        platform: {
+        name: {
             type: String,
             required: true
         },
@@ -41,7 +41,7 @@ export default {
     },
     computed: {
         iconComponent () {
-            return `${this.platform}-icon-${this.language}`;
+            return `${this.name}-icon-${this.language}`;
         }
     }
 };
