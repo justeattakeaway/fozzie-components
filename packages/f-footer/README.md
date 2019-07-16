@@ -42,7 +42,7 @@
 
 1. Running locally
 
-    Run `vue serve --open src/components/FooterDemo.vue` from the f-footer root folder to render testing wrapper component
+    Run `yarn demo` in `/packages/f-footer` to render testing wrapper component
 
 1. Running the Tests
 

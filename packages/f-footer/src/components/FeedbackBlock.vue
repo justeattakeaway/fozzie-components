@@ -5,8 +5,8 @@
         </h2>
         <p>
             {{ text }}
-            <button>{{ buttonText }}</button>
         </p>
+        <button class="o-btn--tertiary">{{ buttonText }}</button>
     </div>
 </template>
 
@@ -29,6 +29,18 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+[data-feedback-block] {
+    .c-footer-heading {
+        padding-left: 0;
+    }
 
+    h2 {
+        padding-bottom: 2px;
+    }
+
+    @include media('<mid') {
+        order: 1;
+    }
+}
 </style>

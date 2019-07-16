@@ -113,15 +113,13 @@ export default {
     appStoreIcons: [
         {
             url: 'https://170722.measurementapi.com/serve?action=click&publisher_id=170722&site_id=109406&my_campaign=IEHomepageOngoing&my_publisher=IEHomePage&my_site=just-eat.ie&my_placement=IE4thBox',
-            key: 'ios',
-            iconSrc: 'iosIconSrc',
-            altText: 'Download on the App Store'
+            name: 'ios',
+            alt: 'Download on the App Store'
         },
         {
             url: 'https://170722.measurementapi.com/serve?action=click&publisher_id=170722&site_id=108388&my_campaign=IEHomepageOngoing&my_publisher=IEHomePage&my_site=just-eat.ie&my_placement=IE4thBox',
-            key: 'android',
-            iconSrc: 'androidIconSrc',
-            altText: 'Get it on Google Play'
+            name: 'android',
+            alt: 'Get it on Google Play'
         }
     ],
     feedback: 'Feedback',
@@ -131,33 +129,28 @@ export default {
     socialIcons: [
         {
             url: 'https://www.facebook.com/JustEatIreland',
-            key: 'facebook',
-            iconSrc: 'facebookIconUrl',
-            altText: 'Just Eat on Facebook'
+            name: 'facebook',
+            alt: 'Just Eat on Facebook'
         },
         {
             url: 'https://www.twitter.com/JustEatIE',
-            key: 'twitter',
-            iconSrc: 'twitterIconUrl',
-            altText: 'Just Eat on Twitter'
+            name: 'twitter',
+            alt: 'Just Eat on Twitter'
         },
         {
             url: 'https://www.just-eat.ie/blog',
-            key: 'rss',
-            iconSrc: 'rssIconUrl',
-            altText: ''
+            name: 'rss',
+            alt: 'Just Eat blog'
         },
         {
             url: 'https://instagram.com/justeatie/',
-            key: 'instagram',
-            iconSrc: 'instagramIconUrl',
-            altText: 'Just Eat on Instagram'
+            name: 'instagram',
+            alt: 'Just Eat on Instagram'
         },
         {
             url: 'https://www.pinterest.com/justeatie/',
-            key: 'pinterest',
-            iconSrc: 'pinterestIconUrl',
-            altText: 'Just Eat on Pinterest'
+            name: 'pinterest',
+            alt: 'Just Eat on Pinterest'
         }
     ],
     currentCountryLocalisedName: 'Ireland',
@@ -235,15 +228,13 @@ export default {
     paymentIcons: [
         {
             type: 'card',
-            key: 'mastercard--securecode',
-            iconSrc: 'mastercardIconSrc',
-            altText: 'Mastercard'
+            name: 'mastercard-securecode',
+            alt: 'Mastercard'
         },
         {
             type: 'card',
-            key: 'visa--verified',
-            iconSrc: 'visaIconSrc',
-            altText: 'Visa'
+            name: 'visa-verified',
+            alt: 'Visa'
         }
     ],
     vatInfo: ''

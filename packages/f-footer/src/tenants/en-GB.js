@@ -1,6 +1,7 @@
 export default {
     linkLists: {
         customerService: {
+            id: 'customer-service',
             title: 'Customer service',
             links: [
                 {
@@ -31,6 +32,7 @@ export default {
             ]
         },
         cuisines: {
+            id: 'top-cuisines',
             title: 'Top cuisines',
             links: [
                 {
@@ -60,6 +62,7 @@ export default {
             ]
         },
         locations: {
+            id: 'locations',
             title: 'Locations',
             links: [
                 {
@@ -89,10 +92,12 @@ export default {
             ]
         },
         brands: {
+            id: 'brands',
             title: 'Brands',
             links: []
         },
         aboutUs: {
+            id: 'about-us',
             title: 'A bit more about us',
             links: [
                 {
@@ -143,15 +148,13 @@ export default {
     appStoreIcons: [
         {
             url: 'https://app.adjust.com/oc511o_1455tm?utm_medium=internal&campaign=homepage',
-            key: 'ios',
-            iconSrc: 'iosIconSrc',
-            altText: 'Download on the App Store'
+            name: 'ios',
+            alt: 'Download on the App Store'
         },
         {
             url: 'https://app.adjust.com/1455tm?utm_medium=internal&campaign=homepage',
-            key: 'android',
-            iconSrc: 'androidIconSrc',
-            altText: 'Get it on Google Play'
+            name: 'android',
+            alt: 'Get it on Google Play'
         }
     ],
     feedback: 'Feedback',
@@ -161,21 +164,18 @@ export default {
     socialIcons: [
         {
             url: 'https://www.facebook.com/justeat',
-            key: 'facebook',
-            iconSrc: 'facebookIconUrl',
-            altText: 'Just Eat on Facebook'
+            name: 'facebook',
+            alt: 'Just Eat on Facebook'
         },
         {
             url: 'https://twitter.com/JustEatUK',
-            key: 'twitter',
-            iconSrc: 'twitterIconUrl',
-            altText: 'Just Eat on Twitter'
+            name: 'twitter',
+            alt: 'Just Eat on Twitter'
         },
         {
             url: 'https://www.youtube.com/user/TVjusteat',
-            key: 'youtube',
-            iconSrc: 'youtubeIconUrl',
-            altText: 'Just Eat on YouTube'
+            name: 'youtube',
+            alt: 'Just Eat on YouTube'
         }
     ],
     currentCountryLocalisedName: 'United Kingdom',
@@ -253,21 +253,18 @@ export default {
     paymentIcons: [
         {
             type: 'card',
-            key: 'mastercard--securecode',
-            iconSrc: 'mastercardIconSrc',
-            altText: 'Mastercard'
+            name: 'mastercard-securecode',
+            alt: 'Mastercard'
         },
         {
             type: 'card',
-            key: 'visa--verified',
-            iconSrc: 'visaIconSrc',
-            altText: 'Visa'
+            name: 'visa-verified',
+            alt: 'Visa'
         },
         {
             type: 'card',
-            key: 'amex--safekey',
-            iconSrc: 'amexIconSrc',
-            altText: 'American Express'
+            name: 'amex-safekey',
+            alt: 'American Express'
         }
     ],
     vatInfo: ''

@@ -5,14 +5,10 @@
         </h2>
         <ul>
             <li
-                v-for="(icon, index) in socialIcons"
+                v-for="(icon, index) in appsIcons"
                 :key="index">
-                <a
-                    :href="icon.url"
-                    target="_blank">
-                    <img
-                        src="/"
-                        :alt="icon.altText">
+                <a :href="icon.url">
+                    <app-store-icon :name="icon.name" />
                 </a>
             </li>
         </ul>
@@ -20,13 +16,18 @@
 </template>
 
 <script>
+import { AppStoreIcon } from '@justeat/f-vue-icons';
+
 export default {
+    components: {
+        AppStoreIcon
+    },
     props: {
         title: {
             type: String,
             default: ''
         },
-        socialIcons: {
+        appsIcons: {
             type: Array,
             default: () => ({})
         }
@@ -34,6 +35,6 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 
 </style>

@@ -1,57 +1,60 @@
 <template>
     <footer class="c-footer">
         <div class="c-footer-layout c-footer-row c-footer-linkList">
-            <footer-link-list
+            <link-list
                 v-for="(linkList, index) in copy.linkLists"
                 :key="index"
                 :link-list="linkList" />
         </div>
-        <div class="c-footer-row--light">
-            <div class="c-footer-layout c-footer-row">
-                <footer-app-list
+        <div class="c-footer-row c-footer-row--light">
+            <div class="c-footer-layout c-footer-row c-footer-row--narrow-columns">
+                <icon-list
+                    class="c-icon-list c-icon-list--apps"
                     :title="copy.downloadOurApps"
-                    :apps-icons="copy.appStoreIcons"
+                    :icons="copy.appStoreIcons"
+                    :isApps="true"
                 />
-                <footer-feedback
+                <feedback-block
+                    data-feedback-block
                     :title="copy.feedback"
                     :text="copy.improveOurWebsite"
                     :button-text="copy.sendFeedback" />
-                <footer-social-list
-                    :title="copy.followUs"
-                    :social-icons="copy.socialIcons" />
+                <icon-list
+                    class="c-icon-list c-icon-list--social"
+                    data-social-icons
+                    :icons="copy.socialIcons"
+                    :title="copy.followUs" />
             </div>
         </div>
-        <div class="c-footer-layout c-footer-row">
-            <footer-country-selector />
-            <footer-legal-field
+        <div class="c-footer-layout c-footer-row c-footer-row--wrap-reverse">
+            <country-selector />
+            <legal-block
                 v-if="copy.vatInfo"
                 :text="copy.vatInfo" />
-            <footer-payment-list
-                :payment-icons="copy.paymentIcons" />
+            <icon-list
+                class="c-icon-list c-icon-list--payments"
+                :icons="copy.paymentIcons"
+                data-payment-icons />
         </div>
     </footer>
 </template>
 
 <script>
-import FooterLinkList from './FooterLinkList.vue';
-import FooterAppList from './FooterAppList.vue';
-import FooterFeedback from './FooterFeedback.vue';
-import FooterSocialList from './FooterSocialList.vue';
-import FooterCountrySelector from './FooterCountrySelector.vue';
-import FooterLegalField from './FooterLegalField.vue';
-import FooterPaymentList from './FooterPaymentList.vue';
+import LinkList from './LinkList.vue';
+import FeedbackBlock from './FeedbackBlock.vue';
+import IconList from './IconList.vue';
+import CountrySelector from './CountrySelector.vue';
+import LegalBlock from './LegalBlock.vue';
 import tenantConfigs from '../tenants';
 
 export default {
     name: 'VueFooter',
     components: {
-        FooterLinkList,
-        FooterAppList,
-        FooterFeedback,
-        FooterSocialList,
-        FooterCountrySelector,
-        FooterLegalField,
-        FooterPaymentList
+        CountrySelector,
+        FeedbackBlock,
+        IconList,
+        LegalBlock,
+        LinkList
     },
     props: {
         locale: {
@@ -116,8 +119,7 @@ export default {
     padding: spacing(x2);
 
     @include media('>=wide') {
-        padding-left: 0;
-        padding-top: 0;
+        padding: 0;
     }
 }
 
@@ -143,6 +145,39 @@ export default {
     }
 }
 
+.c-footer-list {
+    padding: 0;
+    list-style: none;
+    list-style-image: none;
+    margin-top: 0;
+    margin-bottom: spacing(x2);
+    margin-left: spacing(x2);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+
+    & > li {
+        margin-bottom: 0;
+
+        &:before {
+            content: none;
+        }
+    }
+
+    @include media('>=wide') {
+        margin: spacing(x2) 0 0 0;
+    }
+}
+
+.c-footer-list--inline {
+    align-items: center;
+    flex-flow: row wrap;
+
+    @include media('>=wide') {
+        margin-bottom: 0;
+    }
+}
+
 .c-footer-linkList {
     display: flex;
     flex-flow: column nowrap;
@@ -150,6 +185,28 @@ export default {
     @include media('>=wide') {
         flex-flow: row nowrap;
     }
+}
+
+.c-footer-row--wrap-reverse {
+    flex-flow: row wrap-reverse;
+}
+
+.c-footer-row--narrow-columns {
+    @include media('<=mid') {
+        flex-flow: column nowrap;
+    }
+    
+    @include media('>mid') {
+        flex-flow: row wrap;
+    }
+
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0;
 }
 
 </style>

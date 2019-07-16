@@ -133,15 +133,13 @@ export default {
     appStoreIcons: [
         {
             url: 'https://itunes.apple.com/es/app/just-eat/id615238455?&mt=8',
-            key: 'ios',
-            iconSrc: 'iosIconSrc',
-            altText: 'Consíguelo en el App Store'
+            name: 'ios',
+            alt: 'Consíguelo en el App Store'
         },
         {
             url: 'https://play.google.com/store/apps/details?id=com.justeat.app.es',
-            key: 'android',
-            iconSrc: 'androidIconSrc',
-            altText: 'Disponible en Google play'
+            name: 'android',
+            alt: 'Disponible en Google play'
         }
     ],
     feedback: 'Opinión',
@@ -151,27 +149,23 @@ export default {
     socialIcons: [
         {
             url: 'https://www.facebook.com/JustEat.es',
-            key: 'facebook',
-            iconSrc: 'facebookIconUrl',
-            altText: ''
+            name: 'facebook',
+            alt: 'Facebook'
         },
         {
             url: 'https://twitter.com/JustEat_es',
-            key: 'twitter',
-            iconSrc: 'twitterIconUrl',
-            altText: ''
+            name: 'twitter',
+            alt: 'Twitter'
         },
         {
             url: 'https://www.just-eat.es/blog',
-            key: 'rss',
-            iconSrc: 'rssIconUrl',
-            altText: ''
+            name: 'rss',
+            alt: 'Blog'
         },
         {
             url: 'https://www.instagram.com/justeat_es/',
-            key: 'instagram',
-            iconSrc: 'instagramIconUrl',
-            altText: ''
+            name: 'instagram',
+            alt: 'Instagram'
         }
     ],
     currentCountryLocalisedName: 'España',
@@ -249,33 +243,28 @@ export default {
     paymentIcons: [
         {
             type: 'card',
-            key: 'mastercard--securecode',
-            iconSrc: 'mastercardIconSrc',
-            altText: 'Mastercard'
+            name: 'mastercard-securecode',
+            alt: 'Mastercard'
         },
         {
             type: 'card',
-            key: 'visa--verified',
-            iconSrc: 'visaIconSrc',
-            altText: 'Visa'
+            name: 'visa-verified',
+            alt: 'Visa'
         },
         {
             type: 'card',
-            key: 'amex--safekey',
-            iconSrc: 'amexIconSrc',
-            altText: 'American Express'
+            name: 'amex-safekey',
+            alt: 'American Express'
         },
         {
             type: 'card',
-            key: 'paypal',
-            iconSrc: 'paypalIconSrc',
-            altText: 'PayPal'
+            name: 'paypal',
+            alt: 'PayPal'
         },
         {
             type: 'certificate',
-            key: 'confianza',
-            iconSrc: 'confianzaIconSrc',
-            altText: ''
+            name: 'confianza',
+            alt: ''
         }
     ],
     vatInfo: ''

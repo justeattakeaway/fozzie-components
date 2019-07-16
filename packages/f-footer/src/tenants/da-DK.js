@@ -141,21 +141,18 @@ export default {
     appStoreIcons: [
         {
             url: 'https://170720.measurementapi.com/serve?action=click&publisher_id=170720&site_id=109400&my_campaign=website-app-page',
-            key: 'ios',
-            iconSrc: 'iosIconSrc',
-            altText: 'Hent i App Store'
+            name: 'ios',
+            alt: 'Hent i App Store'
         },
         {
             url: 'https://170720.measurementapi.com/serve?action=click&publisher_id=170720&site_id=108390&my_campaign=website-app-page',
-            key: 'android',
-            iconSrc: 'androidIconSrc',
-            altText: 'Hent i Google Play'
+            name: 'android',
+            alt: 'Hent i Google Play'
         },
         {
             url: 'https://www.microsoft.com/store/apps/9nblggh4vk8q',
-            key: 'microsoft',
-            iconSrc: 'microsoftIconSrc',
-            altText: 'Hent i Windows Store'
+            name: 'microsoft',
+            alt: 'Hent i Windows Store'
         }
     ],
     feedback: 'Feedback',
@@ -165,21 +162,18 @@ export default {
     socialIcons: [
         {
             url: 'https://www.facebook.com/JustEatDK/',
-            key: 'facebook',
-            iconSrc: 'facebookIconUrl',
-            altText: ''
+            name: 'facebook',
+            alt: 'Facebook'
         },
         {
             url: 'https://twitter.com/justeatdk',
-            key: 'twitter',
-            iconSrc: 'twitterIconUrl',
-            altText: ''
+            name: 'twitter',
+            alt: 'Twitter'
         },
         {
             url: 'https://www.instagram.com/justeatdk/?hl=dk',
-            key: 'instagram',
-            iconSrc: 'instagramIconUrl',
-            altText: ''
+            name: 'instagram',
+            alt: 'Instagram'
         }
     ],
     currentCountryLocalisedName: 'Danmark',
@@ -257,21 +251,18 @@ export default {
     paymentIcons: [
         {
             type: 'card',
-            key: 'dk',
-            iconSrc: 'dkIconSrc',
-            altText: 'Dankort'
+            name: 'dankort',
+            alt: 'Dankort'
         },
         {
             type: 'card',
-            key: 'visa--verified',
-            iconSrc: 'visaIconSrc',
-            altText: 'Visa'
+            name: 'visa-verified',
+            alt: 'Visa'
         },
         {
             type: 'card',
-            key: 'mastercard--securecode',
-            iconSrc: 'mastercardIconSrc',
-            altText: 'Mastercard'
+            name: 'mastercard-securecode',
+            alt: 'Mastercard'
         }
     ],
     vatInfo: ''

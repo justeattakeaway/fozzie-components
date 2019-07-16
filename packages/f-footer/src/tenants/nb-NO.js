@@ -122,15 +122,13 @@ export default {
     appStoreIcons: [
         {
             url: 'https://itunes.apple.com/no/app/just-eat.no/id748246908?ls=1&mt=8',
-            key: 'ios',
-            iconSrc: 'iosIconSrc',
-            altText: 'Hent i App Store'
+            name: 'ios',
+            alt: 'Hent i App Store'
         },
         {
             url: 'https://play.google.com/store/apps/details?id=com.justeat.app.no',
-            key: 'android',
-            iconSrc: 'androidIconSrc',
-            altText: 'Finn den på Google Play'
+            name: 'android',
+            alt: 'Finn den på Google Play'
         }
     ],
     feedback: 'Tilbakemelding',
@@ -140,15 +138,13 @@ export default {
     socialIcons: [
         {
             url: 'https://www.facebook.com/JustEatNO/',
-            key: 'facebook',
-            iconSrc: 'facebookIconUrl',
-            altText: ''
+            name: 'facebook',
+            alt: 'Facebook'
         },
         {
             url: '/blog',
-            key: 'rss',
-            iconSrc: 'rssIconUrl',
-            altText: ''
+            name: 'rss',
+            alt: 'Blog'
         }
     ],
     currentCountryLocalisedName: 'Norge',
@@ -226,15 +222,13 @@ export default {
     paymentIcons: [
         {
             type: 'card',
-            key: 'visa--verified',
-            iconSrc: 'visaIconSrc',
-            altText: 'Visa'
+            name: 'visa-verified',
+            alt: 'Visa'
         },
         {
             type: 'card',
-            key: 'mastercard--securecode',
-            iconSrc: 'mastercardIconSrc',
-            altText: 'Mastercard'
+            name: 'mastercard-securecode',
+            alt: 'Mastercard'
         }
     ],
     vatInfo: ''
