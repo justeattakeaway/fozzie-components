@@ -1,16 +1,18 @@
 <template>
     <div
         v-if="linkList.links.length"
-        :class="['c-footer-panel', { 'is-collapsed': panelCollapsed }]">
+        :class="['c-footer-panel', { 'is-collapsed': panelCollapsed && isBelowWide }]"
+        data-js-test="linkList-wrapper">
         <button
             :id="listHeadingId"
             class="c-footer-heading c-footer-heading--button"
+            data-js-test="linkList-header"
             :tabindex="isBelowWide ? 0 : -1"
             :disabled="!isBelowWide"
             :aria-disabled="!isBelowWide"
             :aria-expanded="!panelCollapsed ? 'true' : 'false'"
             :aria-controls="listId"
-            @click="onPanelClick" >
+            @click="onPanelClick">
             <h2>
                 {{ linkList.title }}
             </h2>
@@ -64,7 +66,7 @@ export default {
             return `${this.listId}-heading`;
         },
         isBelowWide () {
-            return this.currentScreenWidth < 1024;
+            return this.currentScreenWidth <= 1024;
         }
     },
     mounted () {
@@ -91,17 +93,17 @@ export default {
         display: none;
     }
 
+    &.is-collapsed {
+        .c-footer-list {
+            display: none;
+        }
+    }
+
     @include media('<wide') {
         border-bottom: 1px solid $footer-borderColor;
 
         &:last-of-type {
             border-bottom: none;
-        }
-
-        &.is-collapsed {
-            .c-footer-list {
-                display: none;
-            }
         }
 
         .c-icon--chevron {

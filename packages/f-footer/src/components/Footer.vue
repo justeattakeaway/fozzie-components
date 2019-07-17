@@ -1,13 +1,13 @@
 <template>
     <footer class="c-footer">
-        <div class="c-footer-layout c-footer-row c-footer-row--no-pad-below-wide">
+        <div class="c-footer-container c-footer-row c-footer-row--no-pad-below-wide">
             <link-list
                 v-for="(linkList, index) in copy.linkLists"
                 :key="index"
                 :link-list="linkList" />
         </div>
         <div class="c-footer-row--light">
-            <div class="c-footer-row c-footer-layout">
+            <div class="c-footer-row c-footer-container">
                 <icon-list
                     class="c-icon-list c-icon-list--apps"
                     :title="copy.downloadOurApps"
@@ -24,7 +24,7 @@
                     :title="copy.followUs" />
             </div>
         </div>
-        <div class="c-footer-layout c-footer-row">
+        <div class="c-footer-container c-footer-row">
             <country-selector />
             <legal-block
                 v-if="copy.vatInfo"
@@ -93,7 +93,7 @@ export default {
     color: $footer-textColor;
 }
 
-.c-footer-layout {
+.c-footer-container {
     width: 100%;
     max-width: #{$layout-max-width}px;
     margin: 0 auto;
@@ -145,7 +145,7 @@ export default {
     }
 }
 
-.c-footer-row--light {
+.c-footer-row--shaded {
     background-color: $footer-bgLight;
 }
 

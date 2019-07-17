@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.5
+------------------------------
+*July 15, 2019*
+
+### Added
+- Tests for LinksList component
+
+### Changed
+- Clean up some css class names for Footer component
+
+
 v2.0.0-beta.4
 ------------------------------
 *July 12, 2019*
@@ -15,6 +26,7 @@ v2.0.0-beta.4
 
 ### Changed
 - Update footer URL for the "Locations" and "Cuisines" sections in Australia(Menulog)
+
 
 v2.0.0-beta.3
 ------------------------------
