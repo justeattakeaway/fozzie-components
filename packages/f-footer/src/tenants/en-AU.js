@@ -1,4 +1,5 @@
 export default {
+    locale: 'en-AU',
     linkLists: {
         customerService: {
             title: 'Customer service',

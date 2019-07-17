@@ -1,7 +1,7 @@
 export default {
+    locale: 'en-GB',
     linkLists: {
         customerService: {
-            id: 'customer-service',
             title: 'Customer service',
             links: [
                 {
@@ -32,7 +32,6 @@ export default {
             ]
         },
         cuisines: {
-            id: 'top-cuisines',
             title: 'Top cuisines',
             links: [
                 {
@@ -62,7 +61,6 @@ export default {
             ]
         },
         locations: {
-            id: 'locations',
             title: 'Locations',
             links: [
                 {
@@ -92,12 +90,10 @@ export default {
             ]
         },
         brands: {
-            id: 'brands',
             title: 'Brands',
             links: []
         },
         aboutUs: {
-            id: 'about-us',
             title: 'A bit more about us',
             links: [
                 {

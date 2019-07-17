@@ -1,4 +1,5 @@
 export default {
+    locale: 'nb-NO',
     linkLists: {
         customerService: {
             title: 'Kundeservice',

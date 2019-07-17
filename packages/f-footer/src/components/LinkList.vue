@@ -3,25 +3,25 @@
         v-if="linkList.links.length"
         :class="['c-footer-panel', { 'is-collapsed': panelCollapsed }]">
         <button
-            class="c-footer-heading c-footer-heading--button"
             :id="listHeadingId"
-            @click="onPanelClick"
+            class="c-footer-heading c-footer-heading--button"
             :tabindex="isBelowWide ? 0 : -1"
             :disabled="!isBelowWide"
             :aria-disabled="!isBelowWide"
             :aria-expanded="!panelCollapsed ? 'true' : 'false'"
-            :aria-controls="listId">
+            :aria-controls="listId"
+            @click="onPanelClick" >
             <h2>
                 {{ linkList.title }}
             </h2>
             <chevron-icon
-                :isSmall="true"
-                :isFacingUp="!panelCollapsed" />
+                :is-small="true"
+                :is-facing-up="!panelCollapsed" />
         </button>
 
-        <ul 
-            class="c-footer-list"
+        <ul
             :id="listId"
+            class="c-footer-list"
             role="region"
             :aria-labelledby="listHeadingId">
             <li
@@ -56,13 +56,6 @@ export default {
             currentScreenWidth: window.innerWidth
         };
     },
-    methods: {
-        onPanelClick () {
-            if (this.isBelowWide) {
-                this.panelCollapsed = !this.panelCollapsed;
-            }
-        }
-    },
     computed: {
         listId () {
             return `footer-${this.linkList.title.toLowerCase().split(' ').join('-')}`;
@@ -77,7 +70,14 @@ export default {
     mounted () {
         window.addEventListener('resize', () => {
             this.currentScreenWidth = window.innerWidth;
-        })
+        });
+    },
+    methods: {
+        onPanelClick () {
+            if (this.isBelowWide) {
+                this.panelCollapsed = !this.panelCollapsed;
+            }
+        }
     }
 };
 </script>
@@ -122,6 +122,7 @@ export default {
         background: none;
         border-style: none;
         text-align: left;
+        padding: spacing(x2);
 
         h2 {
             @include font-size(mid);
@@ -129,6 +130,10 @@ export default {
 
         @include media('<wide') {
             cursor: pointer;
+        }
+
+        @include media('>=wide') {
+           padding: 0;
         }
     }
 

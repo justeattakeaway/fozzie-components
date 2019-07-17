@@ -1,22 +1,29 @@
 <template>
     <div>
-        <h2 v-if="title" class="c-footer-heading">{{ title }}</h2>
-        <ul>
+        <h2
+            v-if="title"
+            class="c-footer-heading c-footer-heading--short-below-wide">
+            {{ title }}
+        </h2>
+        <ul class="c-footer-list c-footer-list--inline">
             <li
                 v-for="icon in icons"
-                :key="icon.key">
+                :key="icon.key"
+                class="c-footer-list-item">
                 <a
                     v-if="icon.url"
                     :href="icon.url"
-                    :title="icon.alt" >
+                    :title="icon.alt">
                     <component
                         :is="isApps ? 'app-store-icon' : 'base-provider-icon'"
-                        v-bind="icon" />
+                        v-bind="icon"
+                        :locale="locale" />
                 </a>
                 <component
-                    v-else
                     :is="isApps ? 'app-store-icon' : 'base-provider-icon'"
+                    v-else
                     v-bind="icon"
+                    :locale="locale"
                     :aria-label="icon.alt" />
             </li>
         </ul>
@@ -48,6 +55,11 @@ export default {
             type: Boolean,
             required: false,
             default: false
+        },
+        locale: {
+            type: String,
+            required: false,
+            default: 'en-GB'
         }
     }
 };
@@ -55,48 +67,20 @@ export default {
 
 <style lang="scss">
 .c-icon-list {
-    ul {
-        margin: spacing(x2);
-    }
-
     svg {
         height: 25px;
-        margin: spacing();
-    }
-
-    .c-footer-heading {
-        padding-left: 0;
-    }
-}
-
-.c-icon-list--payments {
-    ul {
-        display: flex;
-        flex-shrink: 1;
-        justify-content: space-between;
     }
 }
 
 .c-icon-list--social {
-    ul {
-        display: flex;
-        justify-content: flex-start;
-        margin: 0 spacing(x2);
-        margin-left: -1*spacing();
+    svg {
+        height: 28px;
     }
 }
 
 .c-icon-list--apps {
     svg {
        height: 40px;
-       margin: spacing();
-    }
-
-   ul {
-        display: flex;
-        justify-content: flex-start;
-        margin: 0;
-        margin-left: -1*spacing();
     }
 }
 </style>

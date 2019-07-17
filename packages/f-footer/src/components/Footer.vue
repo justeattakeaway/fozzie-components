@@ -1,40 +1,37 @@
 <template>
     <footer class="c-footer">
-        <div class="c-footer-layout c-footer-row c-footer-linkList">
+        <div class="c-footer-layout c-footer-row c-footer-row--no-pad-below-wide">
             <link-list
                 v-for="(linkList, index) in copy.linkLists"
                 :key="index"
                 :link-list="linkList" />
         </div>
-        <div class="c-footer-row c-footer-row--light">
-            <div class="c-footer-layout c-footer-row c-footer-row--narrow-columns">
+        <div class="c-footer-row--light">
+            <div class="c-footer-row c-footer-layout">
                 <icon-list
                     class="c-icon-list c-icon-list--apps"
                     :title="copy.downloadOurApps"
                     :icons="copy.appStoreIcons"
-                    :isApps="true"
-                />
+                    :is-apps="true"
+                    :locale="copy.locale" />
                 <feedback-block
-                    data-feedback-block
                     :title="copy.feedback"
                     :text="copy.improveOurWebsite"
                     :button-text="copy.sendFeedback" />
                 <icon-list
                     class="c-icon-list c-icon-list--social"
-                    data-social-icons
                     :icons="copy.socialIcons"
                     :title="copy.followUs" />
             </div>
         </div>
-        <div class="c-footer-layout c-footer-row c-footer-row--wrap-reverse">
+        <div class="c-footer-layout c-footer-row">
             <country-selector />
             <legal-block
                 v-if="copy.vatInfo"
                 :text="copy.vatInfo" />
             <icon-list
                 class="c-icon-list c-icon-list--payments"
-                :icons="copy.paymentIcons"
-                data-payment-icons />
+                :icons="copy.paymentIcons" />
         </div>
     </footer>
 </template>
@@ -117,30 +114,43 @@ export default {
 .c-footer-heading {
     @include font-size(mid);
     padding: spacing(x2);
+    padding-left: 0;
 
-    @include media('>=wide') {
-        padding: 0;
+}
+
+.c-footer-heading--short-below-wide {
+    @include media('<wide') {
+        padding: 0 0 spacing();
     }
 }
 
 .c-footer-row {
     padding: 0;
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     justify-content: space-between;
+    padding: spacing(x2);
 
     @include media('>=wide') {
         padding: spacing(x4);
+        flex-flow: row nowrap;
+    }
+
+    .c-icon-list--apps {
+        flex-basis: 42%;
+    }
+
+    .c-icon-list--social {
+        flex-basis: 25%;
     }
 }
 
 .c-footer-row--light {
     background-color: $footer-bgLight;
-    margin: 0;
-    padding: spacing(x2);
+}
 
-    @include media('>=wide') {
-        margin: 0;
+.c-footer-row--no-pad-below-wide {
+    @include media('<wide') {
         padding: 0;
     }
 }
@@ -170,6 +180,7 @@ export default {
 }
 
 .c-footer-list--inline {
+    margin: 0 0 spacing(x2);
     align-items: center;
     flex-flow: row wrap;
 
@@ -178,35 +189,12 @@ export default {
     }
 }
 
-.c-footer-linkList {
-    display: flex;
-    flex-flow: column nowrap;
+.c-footer-list-item {
+    margin-right: spacing(x2);
 
-    @include media('>=wide') {
-        flex-flow: row nowrap;
+    &:last-child {
+        margin-right: 0;
     }
-}
-
-.c-footer-row--wrap-reverse {
-    flex-flow: row wrap-reverse;
-}
-
-.c-footer-row--narrow-columns {
-    @include media('<=mid') {
-        flex-flow: column nowrap;
-    }
-    
-    @include media('>mid') {
-        flex-flow: row wrap;
-    }
-
-}
-
-ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-evenly;
-    padding: 0;
 }
 
 </style>
