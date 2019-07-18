@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "main": "dist/f-vue-icons.umd.min.js",
   "files": [
     "dist"
@@ -33,7 +33,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-icons": "1.28.0",
+    "@justeat/f-icons": "1.29.0",
     "vue": "2.6.10"
   },
   "devDependencies": {
