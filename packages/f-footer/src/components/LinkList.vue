@@ -3,22 +3,22 @@
         v-if="linkList.links.length"
         :class="['c-footer-panel', { 'is-collapsed': panelCollapsed && isBelowWide }]"
         data-js-test="linkList-wrapper">
-        <button
-            :id="listHeadingId"
-            class="c-footer-heading c-footer-heading--button"
-            data-js-test="linkList-header"
-            :tabindex="isBelowWide ? 0 : -1"
-            :disabled="!isBelowWide"
-            :aria-disabled="!isBelowWide"
-            :aria-expanded="!panelCollapsed ? 'true' : 'false'"
-            :aria-controls="listId"
-            @click="onPanelClick">
-            <h2>
+        <h2>
+            <button
+                :id="listHeadingId"
+                class="c-footer-heading c-footer-heading--button"
+                data-js-test="linkList-header"
+                :tabindex="isBelowWide ? 0 : -1"
+                :disabled="!isBelowWide"
+                :aria-disabled="!isBelowWide"
+                :aria-expanded="!panelCollapsed ? 'true' : 'false'"
+                :aria-controls="listId"
+                @click="onPanelClick">
                 {{ linkList.title }}
-            </h2>
-            <chevron-icon
-                :is-facing-up="!panelCollapsed" />
-        </button>
+                <chevron-icon
+                    :is-facing-up="!panelCollapsed" />
+            </button>
+        </h2>
 
         <ul
             :id="listId"
@@ -54,7 +54,7 @@ export default {
     data () {
         return {
             panelCollapsed: true,
-            currentScreenWidth: window.innerWidth
+            currentScreenWidth: 0
         };
     },
     computed: {
@@ -69,6 +69,7 @@ export default {
         }
     },
     mounted () {
+        this.currentScreenWidth = window.innerWidth;
         window.addEventListener('resize', () => {
             this.currentScreenWidth = window.innerWidth;
         });
@@ -118,10 +119,11 @@ export default {
         border-style: none;
         text-align: left;
         padding: spacing(x2);
+        color: $color-headings;
+        font-family: $font-family-headings;
+        font-weight: $font-weight-headings;
 
-        h2 {
-            @include font-size(mid);
-        }
+        @include font-size(mid);
 
         @include media('<wide') {
             cursor: pointer;

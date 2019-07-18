@@ -9,7 +9,7 @@
             <li
                 v-for="icon in icons"
                 :key="icon.key"
-                class="c-footer-list-item">
+                class="c-footer-listItem">
                 <a
                     v-if="icon.url"
                     :href="icon.url"
@@ -70,6 +70,20 @@ export default {
     svg {
         height: 25px;
     }
+
+    .c-footer-listItem {
+        margin-bottom: spacing();
+        margin-right: spacing(x3);
+
+        a,
+        svg {
+            display: block;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
 }
 
 .c-iconList--social {
@@ -79,8 +93,13 @@ export default {
 }
 
 .c-iconList--apps {
+    .c-footer-listItem {
+        margin-right: spacing(x2);
+    }
+
     svg {
        height: 40px;
     }
 }
+
 </style>

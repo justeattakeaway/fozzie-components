@@ -193,12 +193,4 @@ export default {
     }
 }
 
-.c-footer-list-item {
-    margin-right: spacing(x2);
-
-    &:last-child {
-        margin-right: 0;
-    }
-}
-
 </style>
