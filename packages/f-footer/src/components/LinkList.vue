@@ -17,7 +17,6 @@
                 {{ linkList.title }}
             </h2>
             <chevron-icon
-                :is-small="true"
                 :is-facing-up="!panelCollapsed" />
         </button>
 
@@ -91,12 +90,14 @@ export default {
 
     .c-icon--chevron {
         display: none;
+
+        @include media('<wide') {
+            display: block;
+        }
     }
 
-    &.is-collapsed {
-        .c-footer-list {
-            display: none;
-        }
+    .c-icon--chevron--up {
+        transform: rotate(180deg);
     }
 
     @include media('<wide') {
@@ -104,14 +105,6 @@ export default {
 
         &:last-of-type {
             border-bottom: none;
-        }
-
-        .c-icon--chevron {
-            display: block;
-        }
-
-        .c-icon--chevron--up {
-            transform: rotate(180deg);
         }
     }
 
@@ -158,9 +151,9 @@ export default {
     }
 }
 
-.c-icon--chevron--small {
+.c-icon--chevron {
     width: 16px;
-    display: inline-block;
+    height: 9px;
 }
 
 </style>

@@ -177,6 +177,10 @@ export default {
     @include media('>=wide') {
         margin: spacing(x2) 0 0 0;
     }
+
+    .is-collapsed & {
+        display: none;
+    }
 }
 
 .c-footer-list--inline {
