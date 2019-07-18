@@ -2,7 +2,7 @@
     <div>
         <h2
             v-if="title"
-            class="c-footer-heading c-footer-heading--short-below-wide">
+            class="c-footer-heading c-footer-heading--shortBelowWide">
             {{ title }}
         </h2>
         <ul class="c-footer-list c-footer-list--inline">
@@ -66,19 +66,19 @@ export default {
 </script>
 
 <style lang="scss">
-.c-icon-list {
+.c-iconList {
     svg {
         height: 25px;
     }
 }
 
-.c-icon-list--social {
+.c-iconList--social {
     svg {
         height: 28px;
     }
 }
 
-.c-icon-list--apps {
+.c-iconList--apps {
     svg {
        height: 40px;
     }

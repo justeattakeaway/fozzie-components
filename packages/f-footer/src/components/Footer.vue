@@ -1,6 +1,6 @@
 <template>
     <footer class="c-footer">
-        <div class="c-footer-container c-footer-row c-footer-row--no-pad-below-wide">
+        <div class="c-footer-container c-footer-row c-footer-row--noPadBelowWide">
             <link-list
                 v-for="(linkList, index) in copy.linkLists"
                 :key="index"
@@ -9,7 +9,7 @@
         <div class="c-footer-row--light">
             <div class="c-footer-row c-footer-container">
                 <icon-list
-                    class="c-icon-list c-icon-list--apps"
+                    class="c-iconList c-iconList--apps"
                     :title="copy.downloadOurApps"
                     :icons="copy.appStoreIcons"
                     :is-apps="true"
@@ -19,7 +19,7 @@
                     :text="copy.improveOurWebsite"
                     :button-text="copy.sendFeedback" />
                 <icon-list
-                    class="c-icon-list c-icon-list--social"
+                    class="c-iconList c-iconList--social"
                     :icons="copy.socialIcons"
                     :title="copy.followUs" />
             </div>
@@ -30,7 +30,7 @@
                 v-if="copy.vatInfo"
                 :text="copy.vatInfo" />
             <icon-list
-                class="c-icon-list c-icon-list--payments"
+                class="c-iconList c-iconList--payments"
                 :icons="copy.paymentIcons" />
         </div>
     </footer>
@@ -118,7 +118,7 @@ export default {
 
 }
 
-.c-footer-heading--short-below-wide {
+.c-footer-heading--shortBelowWide {
     @include media('<wide') {
         padding: 0 0 spacing();
     }
@@ -136,11 +136,11 @@ export default {
         flex-flow: row nowrap;
     }
 
-    .c-icon-list--apps {
+    .c-iconList--apps {
         flex-basis: 42%;
     }
 
-    .c-icon-list--social {
+    .c-iconList--social {
         flex-basis: 25%;
     }
 }
@@ -149,7 +149,7 @@ export default {
     background-color: $footer-bgLight;
 }
 
-.c-footer-row--no-pad-below-wide {
+.c-footer-row--noPadBelowWide {
     @include media('<wide') {
         padding: 0;
     }

@@ -22,13 +22,13 @@ describe('LinkList component', () => {
         expect(wrapper).toBeDefined();
     });
 
-    describe('for mobile widths', () => {
+    describe('for narrow viewport widths', () => {
         beforeEach(() => {
             window.innerWidth = 414;
             window.dispatchEvent(new Event('resize'));
         });
 
-        it('should contain the class "is-collapsed"', () => {
+        it('should be in a collapsed state', () => {
             // Arrange & Act
             const linkListWrapper = wrapper.find('[data-js-test="linkList-wrapper"]');
 
@@ -36,7 +36,7 @@ describe('LinkList component', () => {
             expect(linkListWrapper.classes()).toContain('is-collapsed');
         });
 
-        it('shouldn\'t contain class "is-collapsed" when linkList title is clicked', () => {
+        it('should be in an open state when linkList title has been clicked', () => {
             // Arrange
             const linkListWrapper = wrapper.find('[data-js-test="linkList-wrapper"]');
             const linkListHeader = wrapper.find('[data-js-test="linkList-header"]');
@@ -49,13 +49,13 @@ describe('LinkList component', () => {
         });
     });
 
-    describe('for desktop widths', () => {
+    describe('for wide viewport widths', () => {
         beforeEach(() => {
             window.innerWidth = 1200;
             window.dispatchEvent(new Event('resize'));
         });
 
-        it('should not contain the class "is-collapsed"', () => {
+        it('should be in an open state', () => {
             // Arrange & Act
             const linkListWrapper = wrapper.find('[data-js-test="linkList-wrapper"]');
 

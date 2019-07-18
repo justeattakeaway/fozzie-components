@@ -1,6 +1,6 @@
 <template>
-    <div class="c-footer-feedback-block">
-        <h2 class="c-footer-heading c-footer-heading--short-below-wide">
+    <div class="c-footer-feedbackBlock">
+        <h2 class="c-footer-heading c-footer-heading--shortBelowWide">
             {{ title }}
         </h2>
         <p>
@@ -33,7 +33,7 @@ export default {
 
 <style lang="scss">
 
-.c-footer-feedback-block {
+.c-footer-feedbackBlock {
     @include media('<wide') {
         order: 1;
     }
