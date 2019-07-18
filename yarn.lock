@@ -1011,12 +1011,13 @@
 "@justeat/f-footer@file:packages/f-footer":
   version "2.0.0-beta.5"
   dependencies:
+    "@justeat/f-vue-icons" "0.11.0"
     vue "2.6.10"
 
-"@justeat/f-icons@1.28.0":
-  version "1.28.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-1.28.0.tgz#e049e292207a9f57f987b4792f810f0832166755"
-  integrity sha512-nEle3D4U1lRFNV3MFRcMKmV1KPHvTysu71QBdAIOzWRiFS9uFV35aICYBbA7xbZxSYHDnqynwmJoMZ2uOQIg1g==
+"@justeat/f-icons@1.29.0":
+  version "1.29.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-1.29.0.tgz#87adc2ac052cb8cade9090e87eefcf0cfdfdae1b"
+  integrity sha512-dpFyD2lO7Gt29T8kuuTLZSq93Oe/BbCG8BCf5Xw5UAZlRuu0tAQDDflGpot/GNfaZtWkR861EWexcqJznjcHeg==
   dependencies:
     "@justeat/f-utils" "0.3.0"
     include-media "1.4.9"
@@ -1039,7 +1040,7 @@
 "@justeat/f-vue-icons@file:packages/f-vue-icons":
   version "0.11.0"
   dependencies:
-    "@justeat/f-icons" "1.28.0"
+    "@justeat/f-icons" "1.29.0"
     vue "2.6.10"
 
 "@justeat/fozzie-colour-palette@2.3.0":
@@ -2024,6 +2025,21 @@
     "@vue/cli-shared-utils" "^3.9.0"
     babel-loader "^8.0.5"
     webpack ">=4 < 4.29"
+
+"@vue/cli-plugin-eslint@3.9.1":
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-eslint/-/cli-plugin-eslint-3.9.1.tgz#11f3bdc425619ea2f9e2ab74a8f89f75aa6c2657"
+  integrity sha512-j/ZF3G+OhtYO229UIkH6ef6UekW6MER9+o5jGOkwWed4ZheeT2ssFD2rCSJMXCuV7ygJvKOFGaBJBULL8Ibmzg==
+  dependencies:
+    "@vue/cli-shared-utils" "^3.9.0"
+    babel-eslint "^10.0.1"
+    eslint-loader "^2.1.2"
+    globby "^9.2.0"
+    webpack ">=4 < 4.29"
+    yorkie "^2.0.0"
+  optionalDependencies:
+    eslint "^4.19.1"
+    eslint-plugin-vue "^4.7.1"
 
 "@vue/cli-plugin-eslint@3.9.2":
   version "3.9.2"

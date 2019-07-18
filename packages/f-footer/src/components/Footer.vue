@@ -145,7 +145,7 @@ export default {
     }
 }
 
-.c-footer-row--shaded {
+.c-footer-row--light {
     background-color: $footer-bgLight;
 }
 

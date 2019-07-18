@@ -4,6 +4,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.6
+------------------------------
+*July 18, 2019*
+
+### Added
+- `yarn demo` command for easier prototyping
+- Dependency on `f-vue-icons`
+- Make use of `AppStoreIcon`, `BaseProviderIcon` and `ChevronIcon` from `f-vue-icons`
+- Generic `IconList` component
+- Component styles
+- Extend tests for `LinkList` component
+
+### Changed
+- Remove `Footer` prefix from most components
+- Remove unused fields from resource files and add locale
+
+
 v2.0.0-beta.5
 ------------------------------
 *July 15, 2019*
