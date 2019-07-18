@@ -6,7 +6,7 @@
                 :key="index"
                 :link-list="linkList" />
         </div>
-        <div class="c-footer-row--light">
+        <div class="c-footer-light">
             <div class="c-footer-row c-footer-container">
                 <icon-list
                     class="c-iconList c-iconList--apps"
@@ -93,6 +93,10 @@ export default {
     color: $footer-textColor;
 }
 
+.c-footer-light {
+    background-color: $footer-bgLight;
+}
+
 .c-footer-container {
     width: 100%;
     max-width: #{$layout-max-width}px;
@@ -143,10 +147,6 @@ export default {
     .c-iconList--social {
         flex-basis: 25%;
     }
-}
-
-.c-footer-row--light {
-    background-color: $footer-bgLight;
 }
 
 .c-footer-row--noPadBelowWide {
