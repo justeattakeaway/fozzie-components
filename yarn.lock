@@ -1013,10 +1013,10 @@
   dependencies:
     vue "2.6.10"
 
-"@justeat/f-icons@1.28.0":
-  version "1.28.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-1.28.0.tgz#e049e292207a9f57f987b4792f810f0832166755"
-  integrity sha512-nEle3D4U1lRFNV3MFRcMKmV1KPHvTysu71QBdAIOzWRiFS9uFV35aICYBbA7xbZxSYHDnqynwmJoMZ2uOQIg1g==
+"@justeat/f-icons@1.29.0":
+  version "1.29.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-1.29.0.tgz#87adc2ac052cb8cade9090e87eefcf0cfdfdae1b"
+  integrity sha512-dpFyD2lO7Gt29T8kuuTLZSq93Oe/BbCG8BCf5Xw5UAZlRuu0tAQDDflGpot/GNfaZtWkR861EWexcqJznjcHeg==
   dependencies:
     "@justeat/f-utils" "0.3.0"
     include-media "1.4.9"
@@ -1037,9 +1037,9 @@
   integrity sha512-hqRiGA2lP++Z1oqawsv1V2Duf3YShaAbJ3S5JEPTpTMP5RjH36Xpc8nRbIVFBmwnZCu7L9iF7AebYTUX8XhiZA==
 
 "@justeat/f-vue-icons@file:packages/f-vue-icons":
-  version "0.11.0"
+  version "0.13.0"
   dependencies:
-    "@justeat/f-icons" "1.28.0"
+    "@justeat/f-icons" "1.29.0"
     vue "2.6.10"
 
 "@justeat/fozzie-colour-palette@2.3.0":
