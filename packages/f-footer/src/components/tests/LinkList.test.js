@@ -16,28 +16,51 @@ const wrapper = shallowMount(LinkList, {
     }
 });
 
+
 describe('LinkList component', () => {
     it('should be defined', () => {
         expect(wrapper).toBeDefined();
     });
 
-    it('should contain the class "is-collapsed"', () => {
-        // Arrange & Act
-        const linkListWrapper = wrapper.find('[data-js-test="linkList-wrapper"]');
+    describe('for narrow viewport widths', () => {
+        beforeEach(() => {
+            window.innerWidth = 414;
+            window.dispatchEvent(new Event('resize'));
+        });
 
-        // Assert
-        expect(linkListWrapper.classes()).toContain('is-collapsed');
+        it('should be in a collapsed state', () => {
+            // Arrange & Act
+            const linkListWrapper = wrapper.find('[data-js-test="linkList-wrapper"]');
+
+            // Assert
+            expect(linkListWrapper.classes()).toContain('is-collapsed');
+        });
+
+        it('should be in an open state when linkList title has been clicked', () => {
+            // Arrange
+            const linkListWrapper = wrapper.find('[data-js-test="linkList-wrapper"]');
+            const linkListHeader = wrapper.find('[data-js-test="linkList-header"]');
+
+            // Act
+            linkListHeader.trigger('click');
+
+            // Assert
+            expect(linkListWrapper.classes()).not.toContain('is-collapsed');
+        });
     });
 
-    it('shouldn\'t contain class "is-collapsed" when linkList title is clicked', () => {
-        // Arrange
-        const linkListWrapper = wrapper.find('[data-js-test="linkList-wrapper"]');
-        const linkListHeader = wrapper.find('[data-js-test="linkList-header"]');
+    describe('for wide viewport widths', () => {
+        beforeEach(() => {
+            window.innerWidth = 1200;
+            window.dispatchEvent(new Event('resize'));
+        });
 
-        // Act
-        linkListHeader.trigger('click');
+        it('should be in an open state', () => {
+            // Arrange & Act
+            const linkListWrapper = wrapper.find('[data-js-test="linkList-wrapper"]');
 
-        // Assert
-        expect(linkListWrapper.classes()).not.toContain('is-collapsed');
+            // Assert
+            expect(linkListWrapper.classes()).not.toContain('is-collapsed');
+        });
     });
 });

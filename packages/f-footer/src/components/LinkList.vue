@@ -1,16 +1,30 @@
 <template>
     <div
         v-if="linkList.links.length"
-        :class="['c-footer-panel', { 'is-collapsed': panelCollapsed }]"
+        :class="['c-footer-panel', { 'is-collapsed': panelCollapsed && isBelowWide }]"
         data-js-test="linkList-wrapper">
-        <h2
-            class="c-footer-heading"
-            data-js-test="linkList-header"
-            @click="onPanelClick">
-            {{ linkList.title }}
+        <h2>
+            <button
+                :id="listHeadingId"
+                :tabindex="isBelowWide ? 0 : -1"
+                :disabled="!isBelowWide"
+                :aria-disabled="!isBelowWide"
+                :aria-expanded="!panelCollapsed ? 'true' : 'false'"
+                :aria-controls="listId"
+                class="c-footer-heading c-footer-heading--button"
+                data-js-test="linkList-header"
+                @click="onPanelClick">
+                {{ linkList.title }}
+                <chevron-icon
+                    :is-facing-up="!panelCollapsed" />
+            </button>
         </h2>
 
-        <ul class="c-footer-list">
+        <ul
+            :id="listId"
+            :aria-labelledby="listHeadingId"
+            class="c-footer-list"
+            role="region">
             <li
                 v-for="(link, index) in linkList.links"
                 :key="index">
@@ -25,7 +39,13 @@
 </template>
 
 <script>
+import { ChevronIcon } from '@justeat/f-vue-icons';
+import { throttle } from 'lodash-es';
+
 export default {
+    components: {
+        ChevronIcon
+    },
     props: {
         linkList: {
             type: Object,
@@ -34,17 +54,36 @@ export default {
     },
     data () {
         return {
-            panelCollapsed: true
+            panelCollapsed: true,
+            currentScreenWidth: 0
         };
+    },
+    computed: {
+        listId () {
+            return `footer-${this.linkList.title.toLowerCase().split(' ').join('-')}`;
+        },
+        listHeadingId () {
+            return `${this.listId}-heading`;
+        },
+        isBelowWide () {
+            return this.currentScreenWidth <= 1024;
+        }
+    },
+    mounted () {
+        this.currentScreenWidth = window.innerWidth;
+        window.addEventListener('resize', throttle(this.onResize, 100));
+    },
+    destroyed () {
+        window.removeEventListener('resize', this.resize);
     },
     methods: {
         onPanelClick () {
-            if (this.isBelowWide()) {
+            if (this.isBelowWide) {
                 this.panelCollapsed = !this.panelCollapsed;
             }
         },
-        isBelowWide () {
-            return window.innerWidth <= 1024;
+        onResize () {
+            this.currentScreenWidth = window.innerWidth;
         }
     }
 };
@@ -54,24 +93,49 @@ export default {
 
 .c-footer-panel {
     flex: 1 0 0;
+
+    .c-icon--chevron {
+        display: none;
+
+        @include media('<wide') {
+            display: block;
+        }
+    }
+
+    .c-icon--chevron--up {
+        transform: rotate(180deg);
+    }
+
     @include media('<wide') {
         border-bottom: 1px solid $footer-borderColor;
-        cursor: pointer;
 
         &:last-of-type {
             border-bottom: none;
         }
-
-        &.is-collapsed {
-            .c-footer-list {
-                display: none;
-            }
-        }
     }
 
-    .c-footer-heading {
+    .c-footer-heading--button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin: 0;
+        background: none;
+        border-style: none;
+        text-align: left;
+        padding: spacing(x2);
+        color: $color-headings;
+        font-family: $font-family-headings;
+        font-weight: $font-weight-headings;
+
+        @include font-size(mid);
+
+        @include media('<wide') {
+            cursor: pointer;
+        }
+
         @include media('>=wide') {
-            padding: 0;
+           padding: 0;
         }
     }
 
@@ -94,27 +158,9 @@ export default {
     }
 }
 
-.c-footer-list {
-    padding: 0;
-    list-style: none;
-    list-style-image: none;
-    margin-top: 0;
-    margin-bottom: spacing(x2);
-    margin-left: spacing(x2);
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-
-    & > li {
-        margin-bottom: 0;
-
-        &:before {
-            content: none;
-        }
-    }
-
-    @include media('>=wide') {
-        margin: spacing(x2) 0 0 0;
-    }
+.c-icon--chevron {
+    width: 16px;
+    height: 9px;
 }
+
 </style>

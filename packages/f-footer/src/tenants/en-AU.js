@@ -1,4 +1,5 @@
 export default {
+    locale: 'en-AU',
     linkLists: {
         customerService: {
             title: 'Customer service',
@@ -218,15 +219,13 @@ export default {
     appStoreIcons: [
         {
             url: 'https://itunes.apple.com/au/app/id327982905?mt=8&amp;&amp;referrer=click%3D73fe5f13-4f3b-4048-9a2e-ee96d517a632&amp;&amp;referrer=click%3De31ca6d6-04b6-4e31-820b-d276ee56ffb4',
-            key: 'ios',
-            iconSrc: 'iosIconSrc',
-            altText: 'Download on the App Store'
+            name: 'ios',
+            alt: 'Download on the App Store'
         },
         {
             url: 'https://play.google.com/store/apps/details?id=com.menulog.m',
-            key: 'android',
-            iconSrc: 'androidIconSrc',
-            altText: 'Get it on Google Play'
+            name: 'android',
+            alt: 'Get it on Google Play'
         }
     ],
     feedback: 'Feedback',
@@ -236,21 +235,18 @@ export default {
     socialIcons: [
         {
             url: 'https://www.facebook.com/Menulog.com.au/',
-            key: 'facebook',
-            iconSrc: 'facebookIconUrl',
-            altText: 'Menu Log on Facebook'
+            name: 'facebook',
+            alt: 'Menu Log on Facebook'
         },
         {
             url: 'https://twitter.com/menulog',
-            key: 'twitter',
-            iconSrc: 'twitterIconUrl',
-            altText: 'Menu Log on Twitter'
+            name: 'twitter',
+            alt: 'Menu Log on Twitter'
         },
         {
             url: 'https://www.instagram.com/menulog/',
-            key: 'instagram',
-            iconSrc: 'instagramIconUrl',
-            altText: 'Menu Log on Instagram'
+            name: 'instagram',
+            alt: 'Menu Log on Instagram'
         }
     ],
     currentCountryLocalisedName: 'Australia',
@@ -328,27 +324,23 @@ export default {
     paymentIcons: [
         {
             type: 'card',
-            key: 'mastercard',
-            iconSrc: 'mastercardCardIconSrc',
-            altText: 'Mastercard'
+            name: 'mastercard',
+            alt: 'Mastercard'
         },
         {
             type: 'card',
-            key: 'visa',
-            iconSrc: 'visaCardIconSrc',
-            altText: 'Visa'
+            name: 'visa',
+            alt: 'Visa'
         },
         {
             type: 'card',
-            key: 'amex',
-            iconSrc: 'amexCardIconSrc',
-            altText: 'American Express'
+            name: 'amex',
+            alt: 'American Express'
         },
         {
             type: 'card',
-            key: 'paypal',
-            iconSrc: 'paypalIconSrc',
-            altText: 'PayPal'
+            name: 'paypal',
+            alt: 'PayPal'
         }
     ],
     vatInfo: ''
