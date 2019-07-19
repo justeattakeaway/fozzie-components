@@ -1,12 +1,14 @@
 <template>
-    <div>
-        <h2 class="c-footer-heading">
+    <div class="c-footer-feedbackBlock">
+        <h2 class="c-footer-heading c-footer-heading--shortBelowWide">
             {{ title }}
         </h2>
         <p>
             {{ text }}
-            <button>{{ buttonText }}</button>
         </p>
+        <button class="o-btn--tertiary">
+            {{ buttonText }}
+        </button>
     </div>
 </template>
 
@@ -29,6 +31,12 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+
+.c-footer-feedbackBlock {
+    @include media('<wide') {
+        order: 1;
+    }
+}
 
 </style>
