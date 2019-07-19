@@ -1,57 +1,57 @@
 <template>
     <footer class="c-footer">
-        <div class="c-footer-container c-footer-row c-footer-linkList">
+        <div class="c-footer-container c-footer-row c-footer-row--noPadBelowWide">
             <link-list
                 v-for="(linkList, index) in copy.linkLists"
                 :key="index"
                 :link-list="linkList" />
         </div>
-        <div class="c-footer-row c-footer-row--shaded">
-            <div class="c-footer-container c-footer-row">
-                <footer-app-list
+        <div class="c-footer-light">
+            <div class="c-footer-row c-footer-container">
+                <icon-list
                     :title="copy.downloadOurApps"
-                    :apps-icons="copy.appStoreIcons"
-                />
-                <footer-feedback
+                    :icons="copy.appStoreIcons"
+                    :is-apps="true"
+                    :locale="copy.locale"
+                    class="c-iconList c-iconList--apps" />
+                <feedback-block
                     :title="copy.feedback"
                     :text="copy.improveOurWebsite"
                     :button-text="copy.sendFeedback" />
-                <footer-social-list
+                <icon-list
+                    :icons="copy.socialIcons"
                     :title="copy.followUs"
-                    :social-icons="copy.socialIcons" />
+                    class="c-iconList c-iconList--social" />
             </div>
         </div>
         <div class="c-footer-container c-footer-row">
-            <footer-country-selector />
-            <footer-legal-field
+            <country-selector />
+            <legal-block
                 v-if="copy.vatInfo"
                 :text="copy.vatInfo" />
-            <footer-payment-list
-                :payment-icons="copy.paymentIcons" />
+            <icon-list
+                :icons="copy.paymentIcons"
+                class="c-iconList c-iconList--payments" />
         </div>
     </footer>
 </template>
 
 <script>
 import LinkList from './LinkList.vue';
-import FooterAppList from './FooterAppList.vue';
-import FooterFeedback from './FooterFeedback.vue';
-import FooterSocialList from './FooterSocialList.vue';
-import FooterCountrySelector from './FooterCountrySelector.vue';
-import FooterLegalField from './FooterLegalField.vue';
-import FooterPaymentList from './FooterPaymentList.vue';
+import FeedbackBlock from './FeedbackBlock.vue';
+import IconList from './IconList.vue';
+import CountrySelector from './CountrySelector.vue';
+import LegalBlock from './LegalBlock.vue';
 import tenantConfigs from '../tenants';
 
 export default {
     name: 'VueFooter',
     components: {
-        LinkList,
-        FooterAppList,
-        FooterFeedback,
-        FooterSocialList,
-        FooterCountrySelector,
-        FooterLegalField,
-        FooterPaymentList
+        CountrySelector,
+        FeedbackBlock,
+        IconList,
+        LegalBlock,
+        LinkList
     },
     props: {
         locale: {
@@ -93,62 +93,90 @@ export default {
     color: $footer-textColor;
 }
 
+.c-footer-light {
+    background-color: $footer-bgLight;
+}
+
 .c-footer-container {
     width: 100%;
     max-width: #{$layout-max-width}px;
     margin: 0 auto;
-    padding-left: #{$layout-margin}px;
-    padding-right: #{$layout-margin}px;
-
-    @include media('<mid') {
-        padding-left: #{$layout-margin--mid}px;
-        padding-right: #{$layout-margin--mid}px;
-    }
-
-    @include media('<narrow') {
-        padding-left: #{$layout-margin--narrow}px;
-        padding-right: #{$layout-margin--narrow}px;
-    }
 }
 
 .c-footer-heading {
     @include font-size(mid);
     padding: spacing(x2);
+    padding-left: 0;
 
-    @include media('>=wide') {
-        padding-left: 0;
-        padding-top: 0;
+}
+
+.c-footer-heading--shortBelowWide {
+    @include media('<wide') {
+        padding: 0 0 spacing();
     }
 }
 
 .c-footer-row {
-    padding: 0;
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     justify-content: space-between;
-
-    @include media('>=wide') {
-        padding: spacing(x4);
-    }
-}
-
-.c-footer-row--shaded {
-    background-color: $footer-bgLight;
-    margin: 0;
     padding: spacing(x2);
 
     @include media('>=wide') {
-        margin: 0;
+        padding: spacing(x4);
+        flex-flow: row nowrap;
+    }
+
+    .c-iconList--apps {
+        flex-basis: 42%;
+    }
+
+    .c-iconList--social {
+        flex-basis: 25%;
+    }
+}
+
+.c-footer-row--noPadBelowWide {
+    @include media('<wide') {
         padding: 0;
     }
 }
 
-.c-footer-linkList {
+.c-footer-list {
+    padding: 0;
+    list-style: none;
+    list-style-image: none;
+    margin-top: 0;
+    margin-bottom: spacing(x2);
+    margin-left: spacing(x2);
     display: flex;
     flex-flow: column nowrap;
+    justify-content: flex-start;
+
+    & > li {
+        margin-bottom: 0;
+
+        &:before {
+            content: none;
+        }
+    }
 
     @include media('>=wide') {
-        flex-flow: row nowrap;
+        margin: spacing(x2) 0 0 0;
+    }
+
+    .is-collapsed & {
+        display: none;
+    }
+}
+
+.c-footer-list--inline {
+    margin: 0 0 spacing(x2);
+    align-items: center;
+    flex-flow: row wrap;
+
+    @include media('>=wide') {
+        margin-bottom: 0;
     }
 }
 

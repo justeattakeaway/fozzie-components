@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-footer",
-  "version": "v2.0.0-beta.5",
+  "version": "v2.0.0-beta.6",
   "main": "dist/f-footer.umd.min.js",
   "files": [
     "dist"
@@ -26,6 +26,7 @@
   "scripts": {
     "prepare": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-footer ./src/index.js",
+    "demo": "vue serve --open ./src/components/Demo.vue",
     "lint": "vue-cli-service lint --fix",
     "test": "vue-cli-service test:unit"
   },
@@ -33,6 +34,8 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
+    "@justeat/f-vue-icons": "0.12.0",
+    "lodash-es": "4.17.15",
     "vue": "2.6.10"
   },
   "devDependencies": {

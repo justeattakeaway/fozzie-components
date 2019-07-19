@@ -1,4 +1,5 @@
 export default {
+    locale: 'en-NZ',
     linkLists: {
         customerService: {
             title: 'Customer service',
@@ -105,15 +106,13 @@ export default {
     appStoreIcons: [
         {
             url: 'https://itunes.apple.com/nz/app/menulog-order-takeaway-food/id485249021?mt=8&&referrer=click%3D69811f6e-2144-4706-bafc-3d9ae07efd62',
-            key: 'ios',
-            iconSrc: 'iosIconSrc',
-            altText: 'Download on the App Store'
+            name: 'ios',
+            alt: 'Download on the App Store'
         },
         {
             url: 'https://play.google.com/store/apps/details?id=nz.co.menulog.m',
-            key: 'android',
-            iconSrc: 'androidIconSrc',
-            altText: 'Get it on Google Play'
+            name: 'android',
+            alt: 'Get it on Google Play'
         }
     ],
     feedback: 'Feedback',
@@ -123,21 +122,18 @@ export default {
     socialIcons: [
         {
             url: 'https://www.facebook.com/Menulog.co.nz',
-            key: 'facebook',
-            iconSrc: 'facebookIconUrl',
-            altText: 'Menu Log on Facebook'
+            name: 'facebook',
+            alt: 'Menu Log on Facebook'
         },
         {
             url: 'https://twitter.com/Menulog',
-            key: 'twitter',
-            iconSrc: 'twitterIconUrl',
-            altText: 'Menu Log on Twitter'
+            name: 'twitter',
+            alt: 'Menu Log on Twitter'
         },
         {
             url: 'https://www.instagram.com/menulog/',
-            key: 'instagram',
-            iconSrc: 'instagramIconUrl',
-            altText: 'Menu Log on Instagram'
+            name: 'instagram',
+            alt: 'Menu Log on Instagram'
         }
     ],
     currentCountryLocalisedName: 'New Zealand',
@@ -215,21 +211,18 @@ export default {
     paymentIcons: [
         {
             type: 'card',
-            key: 'mastercard',
-            iconSrc: 'mastercardCardIconSrc',
-            altText: 'Mastercard'
+            name: 'mastercard',
+            alt: 'Mastercard'
         },
         {
             type: 'card',
-            key: 'visa',
-            iconSrc: 'visaCardIconSrc',
-            altText: 'Visa'
+            name: 'visa',
+            alt: 'Visa'
         },
         {
             type: 'card',
-            key: 'amex',
-            iconSrc: 'amexCardIconSrc',
-            altText: 'American Express'
+            name: 'amex',
+            alt: 'American Express'
         }
     ],
     vatInfo: ''
