@@ -9,19 +9,19 @@
         <div class="c-footer-light">
             <div class="c-footer-row c-footer-container">
                 <icon-list
-                    class="c-iconList c-iconList--apps"
                     :title="copy.downloadOurApps"
                     :icons="copy.appStoreIcons"
                     :is-apps="true"
-                    :locale="copy.locale" />
+                    :locale="copy.locale"
+                    class="c-iconList c-iconList--apps" />
                 <feedback-block
                     :title="copy.feedback"
                     :text="copy.improveOurWebsite"
                     :button-text="copy.sendFeedback" />
                 <icon-list
-                    class="c-iconList c-iconList--social"
                     :icons="copy.socialIcons"
-                    :title="copy.followUs" />
+                    :title="copy.followUs"
+                    class="c-iconList c-iconList--social" />
             </div>
         </div>
         <div class="c-footer-container c-footer-row">
@@ -30,8 +30,8 @@
                 v-if="copy.vatInfo"
                 :text="copy.vatInfo" />
             <icon-list
-                class="c-iconList c-iconList--payments"
-                :icons="copy.paymentIcons" />
+                :icons="copy.paymentIcons"
+                class="c-iconList c-iconList--payments" />
         </div>
     </footer>
 </template>

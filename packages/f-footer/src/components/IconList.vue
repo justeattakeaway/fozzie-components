@@ -15,12 +15,12 @@
                     :href="icon.url"
                     :title="icon.alt">
                     <component
-                        :is="isApps ? 'app-store-icon' : 'base-provider-icon'"
+                        :is="iconChoice"
                         v-bind="icon"
                         :locale="locale" />
                 </a>
                 <component
-                    :is="isApps ? 'app-store-icon' : 'base-provider-icon'"
+                    :is="iconChoice"
                     v-else
                     v-bind="icon"
                     :locale="locale"
@@ -60,6 +60,11 @@ export default {
             type: String,
             required: false,
             default: 'en-GB'
+        }
+    },
+    computed: {
+        iconChoice () {
+            return this.isApps ? 'app-store-icon' : 'base-provider-icon';
         }
     }
 };

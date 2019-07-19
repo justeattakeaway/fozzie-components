@@ -6,13 +6,13 @@
         <h2>
             <button
                 :id="listHeadingId"
-                class="c-footer-heading c-footer-heading--button"
-                data-js-test="linkList-header"
                 :tabindex="isBelowWide ? 0 : -1"
                 :disabled="!isBelowWide"
                 :aria-disabled="!isBelowWide"
                 :aria-expanded="!panelCollapsed ? 'true' : 'false'"
                 :aria-controls="listId"
+                class="c-footer-heading c-footer-heading--button"
+                data-js-test="linkList-header"
                 @click="onPanelClick">
                 {{ linkList.title }}
                 <chevron-icon
@@ -22,9 +22,9 @@
 
         <ul
             :id="listId"
+            :aria-labelledby="listHeadingId"
             class="c-footer-list"
-            role="region"
-            :aria-labelledby="listHeadingId">
+            role="region">
             <li
                 v-for="(link, index) in linkList.links"
                 :key="index">
@@ -40,6 +40,7 @@
 
 <script>
 import { ChevronIcon } from '@justeat/f-vue-icons';
+import { throttle } from 'lodash-es';
 
 export default {
     components: {
@@ -70,15 +71,19 @@ export default {
     },
     mounted () {
         this.currentScreenWidth = window.innerWidth;
-        window.addEventListener('resize', () => {
-            this.currentScreenWidth = window.innerWidth;
-        });
+        window.addEventListener('resize', throttle(this.onResize, 100));
+    },
+    destroyed () {
+        window.removeEventListener('resize', this.resize);
     },
     methods: {
         onPanelClick () {
             if (this.isBelowWide) {
                 this.panelCollapsed = !this.panelCollapsed;
             }
+        },
+        onResize () {
+            this.currentScreenWidth = window.innerWidth;
         }
     }
 };
