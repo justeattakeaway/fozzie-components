@@ -3,7 +3,6 @@
 </template>
 
 <script>
-/* eslint-disable import/no-duplicates */
 import AndroidIconDaDk from '@justeat/f-icons/src/img/icons/appstore/android.dk.svg';
 import AndroidIconEnGb from '@justeat/f-icons/src/img/icons/appstore/android.svg';
 import AndroidIconEnIe from '@justeat/f-icons/src/img/icons/appstore/android.svg';
@@ -21,7 +20,6 @@ import IosIconEsEs from '@justeat/f-icons/src/img/icons/appstore/ios.es.svg';
 import IosIconItIt from '@justeat/f-icons/src/img/icons/appstore/ios.it.svg';
 import IosIconNbNo from '@justeat/f-icons/src/img/icons/appstore/ios.no.svg';
 import MicrosoftIconDaDk from '@justeat/f-icons/src/img/icons/appstore/microsoft.dk.svg';
-/* eslint-enable import/no-duplicates */
 
 export default {
     components: {

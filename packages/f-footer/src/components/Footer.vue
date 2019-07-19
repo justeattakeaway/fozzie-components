@@ -101,18 +101,6 @@ export default {
     width: 100%;
     max-width: #{$layout-max-width}px;
     margin: 0 auto;
-    padding-left: #{$layout-margin}px;
-    padding-right: #{$layout-margin}px;
-
-    @include media('<mid') {
-        padding-left: #{$layout-margin--mid}px;
-        padding-right: #{$layout-margin--mid}px;
-    }
-
-    @include media('<narrow') {
-        padding-left: #{$layout-margin--narrow}px;
-        padding-right: #{$layout-margin--narrow}px;
-    }
 }
 
 .c-footer-heading {
@@ -129,7 +117,6 @@ export default {
 }
 
 .c-footer-row {
-    padding: 0;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
