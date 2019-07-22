@@ -1047,7 +1047,7 @@
     vue "2.6.10"
 
 "@justeat/f-vue-icons@file:packages/f-vue-icons":
-  version "0.11.0"
+  version "0.13.0"
   dependencies:
     "@justeat/f-icons" "1.29.0"
     vue "2.6.10"
