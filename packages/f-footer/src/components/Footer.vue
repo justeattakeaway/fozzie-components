@@ -24,8 +24,11 @@
                     class="c-iconList c-iconList--social" />
             </div>
         </div>
-        <div class="c-footer-container c-footer-row">
-            <country-selector />
+        <div class="c-footer-container c-footer-row c-footer-row--noPadBelowWide">
+            <country-selector
+                :current-country-name="copy.currentCountryLocalisedName"
+                :current-country-key="copy.currentCountryFlagKey"
+                :countries="copy.countries" />
             <legal-block
                 v-if="copy.vatInfo"
                 :text="copy.vatInfo" />

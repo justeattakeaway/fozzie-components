@@ -108,6 +108,10 @@ export default {
 }
 
 .c-iconList--payments {
+    @include media('<wide') {
+        padding: spacing(x2);
+    }
+
     .c-footer-listItem {
         @include media('>=wide') {
             margin-right: spacing(x6);
