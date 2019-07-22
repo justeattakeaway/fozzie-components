@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppStoreIcon default component markup is rendered 1`] = `<ios-icon-en-gb-stub></ios-icon-en-gb-stub>`;
