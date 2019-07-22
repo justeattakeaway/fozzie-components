@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseProviderIcon default component markup is rendered 1`] = `<facebook-icon-stub></facebook-icon-stub>`;

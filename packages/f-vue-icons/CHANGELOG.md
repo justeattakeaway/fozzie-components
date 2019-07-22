@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.13.0
+------------------------------
+*July 19, 2019*
+
+### Added
+- Tests for `AppStoreIcon` and `BaseProviderIcon` components
+
+
 v0.12.0
 ------------------------------
 *July 18, 2019*
