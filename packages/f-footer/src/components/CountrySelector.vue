@@ -1,40 +1,46 @@
 <template>
-    <div class="c-footer-countrySelector">
+    <div 
+        class="c-footer-countrySelector"
+        @keyup.esc="hideCountryList">
+        <button
+            id="countrySelector-button"
+            class="c-countrySelector-link c-countrySelector-button"
+            type="button"
+            @click="toggleCountryList"
+            :aria-expanded="showCountryList ? 'true' : 'false'">
+            <flag-icon 
+                :country-code="currentCountryKey" />
+            {{ currentCountryName }}
+            <chevron-icon
+                v-if="!showCountryList"
+                :is-small="true" />
+            <cross-icon v-else />
+        </button>
         <ul
+            v-show="showCountryList"
             class="c-footer-countrySelector-list">
-            <li>
-                <button
-                    class="o-btn o-btnLink c-countrySelector-link c-countrySelector-button"
-                    type="button"
-                    @click="showCountryList = !showCountryList">
-                    <flag-icon :country-code="currentCountryKey" />
-                    {{ currentCountryName }}
-                    <chevron-icon
-                        v-if="!showCountryList"
-                        :is-small="true" />
-                    <cross-icon v-else />
-                </button>
+            <li
+                v-for="country in countries"
+                :key="country.key">
+                <a
+                    class="c-countrySelector-link"
+                    :href="country.siteUrl">
+                    <flag-icon :country-code="country.key" />
+                    <p>
+                        {{ country.localisedName }}
+                    </p>
+                </a>
             </li>
-            <div v-show="showCountryList">
-                <li
-                    v-for="country in countries"
-                    :key="country.key">
-                    <a
-                        class="c-countrySelector-link"
-                        :href="country.siteUrl">
-                        <flag-icon :country-code="country.key" />
-                        <p>
-                            {{ country.localisedName }}
-                        </p>
-                    </a>
-                </li>
-            </div>
         </ul>
     </div>
 </template>
 
 <script>
-import { ChevronIcon, CrossIcon, FlagIcon } from '@justeat/f-vue-icons';
+import {
+    ChevronIcon,
+    CrossIcon,
+    FlagIcon
+} from '@justeat/f-vue-icons';
 
 export default {
     components: {
@@ -60,12 +66,26 @@ export default {
         return {
             showCountryList: false
         };
+    },
+    methods: {
+        toggleCountryList () {
+            this.showCountryList = !this.showCountryList;
+        },
+        hideCountryList () {
+            if (this.showCountryList) {
+                this.toggleCountryList();
+            }
+            var button = document.querySelector('#countrySelector-button');
+            button.focus();
+        }
     }
 };
 </script>
 
 <style lang="scss">
 .c-footer-countrySelector {
+    width: 190px;
+    position: relative;
 
     @include media('<wide') {
         order: 1;
@@ -84,6 +104,7 @@ export default {
     .c-icon--cross {
         height: 8px;
         width: 8px;
+        margin: 0 3px;
     }
 }
 
@@ -94,7 +115,8 @@ export default {
     text-decoration: none;
     color: $grey--dark;
 
-    &:hover {
+    &:hover,
+    &:focus {
         color: $blue--dark;
     }
 
@@ -105,23 +127,25 @@ export default {
 }
 
 .c-countrySelector-button {
+    width: 100%;
+    padding: spacing(x2);
     display: flex;
     align-items: center;
     justify-content: space-around;
     background-color: $grey--lightest;
     border: none;
-    width: 100%;
-    padding: spacing(x2);
+    cursor: pointer;
 }
 
 .c-footer-countrySelector-list {
-    background-color: $footer-bgLight;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
     padding: 0;
-    width: 190px;
+    margin-bottom: spacing(x6) + 1;
+    background-color: $footer-bgLight;
+    box-shadow: 0 2px 28px rgba($grey--darkest, 0.08);
     list-style: none;
-
-    li:first-child {
-        margin-top: spacing();
-    }
 }
 </style>
