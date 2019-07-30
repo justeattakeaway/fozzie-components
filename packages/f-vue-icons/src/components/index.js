@@ -8,6 +8,7 @@ import ClockIcon from './ClockIcon';
 import CollectionIcon from './CollectionIcon';
 import CrossIcon from './CrossIcon';
 import DeliveryIcon from './DeliveryIcon';
+import FlagIcon from './FlagIcon';
 import InfoIcon from './InfoIcon';
 import LocalLegendIcon from './LocalLegendIcon';
 import MapPinIcon from './MapPinIcon';
@@ -31,6 +32,7 @@ export {
     CollectionIcon,
     CrossIcon,
     DeliveryIcon,
+    FlagIcon,
     InfoIcon,
     LocalLegendIcon,
     MapPinIcon,
