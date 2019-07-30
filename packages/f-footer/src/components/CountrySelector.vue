@@ -72,11 +72,10 @@ export default {
             this.showCountryList = !this.showCountryList;
         },
         hideCountryList () {
-            if (this.showCountryList) {
-                this.toggleCountryList();
-            }
-            var button = document.querySelector('#countrySelector-button');
-            button.focus();
+            this.showCountryList = false;
+
+            document.querySelector('#countrySelector-button')
+                .focus();
         }
     }
 };
