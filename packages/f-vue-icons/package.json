@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "main": "dist/f-vue-icons.umd.min.js",
   "files": [
     "dist"
@@ -26,7 +26,7 @@
   "scripts": {
     "prepare": "yarn test && yarn build",
     "build": "yarn lint && vue-cli-service build --target lib --formats umd-min --name f-vue-icons ./src/index.js",
-    "lint": "vue-cli-service lint",
+    "lint": "vue-cli-service lint --fix",
     "test": "vue-cli-service test:unit"
   },
   "browserslist": [
@@ -37,7 +37,8 @@
     "vue": "2.6.10"
   },
   "devDependencies": {
-    "@vue/cli-plugin-eslint": "3.9.1",
+    "@vue/cli-plugin-babel": "3.9.2",
+    "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "3.9.0",
     "@vue/test-utils": "1.0.0-beta.29"
   }
