@@ -1,7 +1,7 @@
 <div align="center">
 <h1>f-vue-icons</h1>
 
-<img width="125" alt="Fozzie Bear" src="../bear.png" />
+<img width="125" alt="Fozzie Bear" src="../../bear.png" />
 
 <p>Shared Icon Components for Vue.js.</p>
 </div>
@@ -18,7 +18,7 @@
 1. Add the module to your project
 
     ```bash
-    yarn install @justeat/f-vue-icons
+    yarn add @justeat/f-vue-icons
     ```
 
 1. Import Individually at the component level (recommended)
@@ -74,7 +74,7 @@
 
 1. Browser Support
 
-    There is some config included in this module but it is untested.
+    The component extends [@justeat/browserslist-config-fozzie](https://github.com/justeat/browserslist-config-fozzie) package for the list of browsers to support
 
 1. Building the Module
 
@@ -82,4 +82,4 @@
 
 1. Running the Tests
 
-    Run `yarn test:unit` to run the tests.
+    Run `yarn test` to run the tests.
