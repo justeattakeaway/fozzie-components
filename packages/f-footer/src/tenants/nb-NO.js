@@ -148,88 +148,74 @@ export default {
             alt: 'Blog'
         }
     ],
-    currentCountryLocalisedName: 'Norge',
-    currentCountryFlagKey: 'no',
+    currentCountryName: 'Norge',
+    currentCountryKey: 'no',
     countries: [
         {
             key: 'au',
-            flagUrl: 'australiaFlagIconUrl',
             localisedName: 'Australia',
             siteUrl: 'https://www.menulog.com.au'
         },
         {
             key: 'br',
-            flagUrl: 'brasilFlagIconUrl',
             localisedName: 'Brasil',
             siteUrl: 'https://www.ifood.com.br'
         },
         {
             key: 'ca',
-            flagUrl: 'canadaFlagIconUrl',
             localisedName: 'Canada',
             siteUrl: 'https://www.just-eat.ca'
         },
         {
             key: 'dk',
-            flagUrl: 'denmarkFlagIconUrl',
             localisedName: 'Danmark',
             siteUrl: 'https://www.just-eat.dk'
         },
         {
             key: 'fr',
-            flagUrl: 'franceFlagIconUrl',
             localisedName: 'Frankrike',
             siteUrl: 'https://www.just-eat.fr/'
         },
         {
             key: 'ie',
-            flagUrl: 'irelandFlagIconUrl',
             localisedName: 'Irland',
             siteUrl: 'https://www.just-eat.ie'
         },
         {
             key: 'it',
-            flagUrl: 'italyFlagIconUrl',
             localisedName: 'Italia',
             siteUrl: 'https://www.justeat.it'
         },
         {
             key: 'nz',
-            flagUrl: 'newzealandFlagIconUrl',
             localisedName: 'New Zealand',
             siteUrl: 'https://www.menulog.co.nz'
         },
         {
             key: 'es',
-            flagUrl: 'spainFlagIconUrl',
             localisedName: 'Spania',
             siteUrl: 'https://www.just-eat.es'
         },
         {
             key: 'gb',
-            flagUrl: 'ukFlagIconUrl',
             localisedName: 'Storbritannia',
             siteUrl: 'https://www.just-eat.co.uk'
         },
         {
             key: 'ch',
-            flagUrl: 'switzerlandFlagIconUrl',
             localisedName: 'Sveits',
             siteUrl: 'https://www.eat.ch'
         }
     ],
-    changeCurrentCountry: 'Du er på den norske nettsiden. Klikk her for å endre.',
-    buttonClose: 'Lukk',
+    changeCurrentCountry: 'Du er på den norske nettsiden, klikk her for å endre.',
     paymentIcons: [
         {
-            type: 'card',
             name: 'visa-verified',
-            alt: 'Visa'
+            alt: 'Visa Verified'
         },
         {
-            type: 'card',
             name: 'mastercard-securecode',
-            alt: 'Mastercard'
+            alt: 'Mastercard Securecode'
         }
     ],
     vatInfo: ''

@@ -26,9 +26,10 @@
         </div>
         <div class="c-footer-container c-footer-row c-footer-row--noPadBelowWide">
             <country-selector
-                :current-country-name="copy.currentCountryLocalisedName"
-                :current-country-key="copy.currentCountryFlagKey"
-                :countries="copy.countries" />
+                :current-country-name="copy.currentCountryName"
+                :current-country-key="copy.currentCountryKey"
+                :countries="copy.countries"
+                :changeCountryText="copy.changeCurrentCountry" />
             <legal-block
                 v-if="copy.vatInfo"
                 :text="copy.vatInfo" />

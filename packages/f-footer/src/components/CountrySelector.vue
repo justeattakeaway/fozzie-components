@@ -7,7 +7,9 @@
             class="c-countrySelector-link c-countrySelector-button"
             type="button"
             @click="toggleCountryList"
-            :aria-expanded="showCountryList ? 'true' : 'false'">
+            :aria-expanded="showCountryList ? 'true' : 'false'"
+            :aria-label="changeCountryText"
+            aria-controls="countrySelector-countries">
             <flag-icon 
                 :country-code="currentCountryKey" />
             {{ currentCountryName }}
@@ -18,7 +20,9 @@
         </button>
         <ul
             v-show="showCountryList"
-            class="c-footer-countrySelector-list">
+            id="countrySelector-countries"
+            class="c-footer-countrySelector-list"
+            role="region">
             <li
                 v-for="country in countries"
                 :key="country.key">
@@ -60,6 +64,10 @@ export default {
         countries: {
             type: Array,
             required: true
+        },
+        changeCountryText: {
+            type: String,
+            required: false
         }
     },
     data () {

@@ -177,93 +177,78 @@ export default {
             alt: 'Instagram'
         }
     ],
-    currentCountryLocalisedName: 'Danmark',
-    currentCountryFlagKey: 'dk',
+    currentCountryName: 'Danmark',
+    currentCountryKey: 'dk',
     countries: [
         {
             key: 'au',
-            flagUrl: 'australiaFlagIconUrl',
             localisedName: 'Australien',
             siteUrl: 'https://www.menulog.com.au'
         },
         {
             key: 'br',
-            flagUrl: 'brasilFlagIconUrl',
             localisedName: 'Brasilien',
             siteUrl: 'https://www.ifood.com.br'
         },
         {
             key: 'ca',
-            flagUrl: 'canadaFlagIconUrl',
             localisedName: 'Canada',
             siteUrl: 'https://www.just-eat.ca'
         },
         {
             key: 'fr',
-            flagUrl: 'franceFlagIconUrl',
             localisedName: 'Frankrig',
             siteUrl: 'https://www.just-eat.fr/'
         },
         {
             key: 'ie',
-            flagUrl: 'irelandFlagIconUrl',
             localisedName: 'Irland',
             siteUrl: 'https://www.just-eat.ie'
         },
         {
             key: 'it',
-            flagUrl: 'italyFlagIconUrl',
             localisedName: 'Italien',
             siteUrl: 'https://www.justeat.it'
         },
         {
             key: 'nz',
-            flagUrl: 'newzealandFlagIconUrl',
             localisedName: 'New Zealand',
             siteUrl: 'https://www.menulog.co.nz'
         },
         {
             key: 'no',
-            flagUrl: 'norwayFlagIconUrl',
             localisedName: 'Norge',
             siteUrl: 'https://www.just-eat.no'
         },
         {
             key: 'ch',
-            flagUrl: 'switzerlandFlagIconUrl',
             localisedName: 'Schweiz',
             siteUrl: 'https://www.eat.ch'
         },
         {
             key: 'es',
-            flagUrl: 'spainFlagIconUrl',
             localisedName: 'Spanien',
             siteUrl: 'https://www.just-eat.es'
         },
         {
             key: 'gb',
-            flagUrl: 'ukFlagIconUrl',
             localisedName: 'Storbritannien',
             siteUrl: 'https://www.just-eat.co.uk'
         }
     ],
-    changeCurrentCountry: 'Du er på den danske website. Klik her for at skifte.',
-    buttonClose: 'Luk',
+    changeCurrentCountry: 'Du er på den danske website, klik her for at skifte.',
     paymentIcons: [
         {
-            type: 'card',
             name: 'dankort',
             alt: 'Dankort'
         },
         {
-            type: 'card',
             name: 'visa-verified',
-            alt: 'Visa'
+            alt: 'Visa Verified'
         },
         {
-            type: 'card',
             name: 'mastercard-securecode',
-            alt: 'Mastercard'
+            alt: 'Mastercard Securecode'
         }
     ],
     vatInfo: ''
