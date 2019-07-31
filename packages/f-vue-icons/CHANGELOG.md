@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.15.1
+------------------------------
+*July 31, 2019*
+
+### Changed
+- Removed babel rule for ignoring polyfills for now
+
+
 v0.15.0
 ------------------------------
 *July 29, 2019*
