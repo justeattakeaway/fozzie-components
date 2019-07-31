@@ -4,7 +4,7 @@ import Footer from '../Footer.vue';
 describe('Footer', () => {
     it('should be defined', () => {
         const wrapper = shallowMount(Footer);
-        expect(wrapper).toBeDefined();
+        expect(wrapper.exists()).toBe(true);
     });
 
     it('should render default component markup', () => {

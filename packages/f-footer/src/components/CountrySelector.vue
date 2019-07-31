@@ -4,6 +4,7 @@
         @keyup.esc="hideCountryList">
         <button
             id="countrySelector-button"
+            data-js-test="countrySelector-button"
             class="c-countrySelector-link c-countrySelector-button"
             type="button"
             @click="toggleCountryList"
@@ -21,13 +22,16 @@
         <ul
             v-show="showCountryList"
             id="countrySelector-countries"
+            data-js-test="countrySelector-list"
             class="c-footer-countrySelector-list"
             role="region">
             <li
                 v-for="country in countries"
-                :key="country.key">
+                :key="country.key"
+                data-js-test="countrySelector-country">
                 <a
                     class="c-countrySelector-link"
+                    data-js-test="countrySelector-countryLink"
                     :href="country.siteUrl">
                     <flag-icon :country-code="country.key" />
                     <p>
