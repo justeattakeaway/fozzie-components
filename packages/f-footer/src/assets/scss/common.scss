@@ -21,6 +21,20 @@ $theme: 'je' !default;
  $footer-chevronColor    : $grey--dark !default;
  $footer-socialIconColor : $grey--dark !default;
 
+ /**
+ * Global variables which need to be changed depending on the theme (TODO: move to separate component)
+ */
+ $font-family-headings       : 'Ubuntu', sans-serif;
+ $font-family-headings--ml   : 'Aspira', 'Times New Roman', Times, serif;
+
+ $font-weight-headings       : 300; // instead of browser default, bold
+ $font-weight-headings--ml   : 800; // Heading style is Aspira Heavy, which is 800 font-weight
+
+ $color-link-default         : $blue;
+ $color-link-default--ml     : $green;
+
+
+
 @mixin theme($type) {
     [data-theme="#{$type}"] & {
         @content;

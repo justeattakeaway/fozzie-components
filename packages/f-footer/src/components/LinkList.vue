@@ -92,7 +92,7 @@ export default {
 <style lang="scss">
 
 .c-footer-panel {
-    flex: 1 0 0;
+    flex: 1 0 auto;
 
     .c-icon--chevron {
         display: none;
@@ -127,8 +127,12 @@ export default {
         color: $color-headings;
         font-family: $font-family-headings;
         font-weight: $font-weight-headings;
-
         @include font-size(mid);
+
+        @include theme(ml) {
+            font-family: $font-family-headings--ml;
+            font-weight: $font-weight-headings--ml;
+        }
 
         @include media('<wide') {
             cursor: pointer;
