@@ -4,7 +4,7 @@ import ChevronIcon from './ChevronIcon.vue';
 describe('ChevronIcon', () => {
     it('should be defined', () => {
         const wrapper = shallowMount(ChevronIcon);
-        expect(wrapper).toBeDefined();
+        expect(wrapper.exists()).toBe(true);
     });
 
     it('should add component class by default', () => {

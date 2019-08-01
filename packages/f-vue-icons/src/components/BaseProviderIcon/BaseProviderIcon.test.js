@@ -8,7 +8,7 @@ describe('BaseProviderIcon', () => {
         const wrapper = shallowMount(BaseProviderIcon, {
             propsData
         });
-        expect(wrapper).toBeDefined();
+        expect(wrapper.exists()).toBe(true);
     });
 
     it('default component markup is rendered', () => {

@@ -8,7 +8,7 @@ describe('AppStoreIcon', () => {
         const wrapper = shallowMount(AppStoreIcon, {
             propsData
         });
-        expect(wrapper).toBeDefined();
+        expect(wrapper.exists()).toBe(true);
     });
 
     it('default component markup is rendered', () => {

@@ -151,8 +151,7 @@ export default {
             width: auto;
         }
 
-        &:hover,
-        &:focus {
+        &:hover {
             text-decoration: underline;
         }
     }

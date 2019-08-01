@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.7
+------------------------------
+*August 01, 2019*
+
+### Added
+- `CountrySelector` component logic and styles
+- `CountrySelector` tests
+
+
 v2.0.0-beta.6
 ------------------------------
 *July 18, 2019*
