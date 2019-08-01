@@ -34,7 +34,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-vue-icons": "0.14.0",
+    "@justeat/f-vue-icons": "0.15.1",
     "lodash-es": "4.17.15",
     "vue": "2.6.10"
   },

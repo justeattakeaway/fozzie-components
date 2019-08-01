@@ -29,7 +29,7 @@
                 :current-country-name="copy.currentCountryName"
                 :current-country-key="copy.currentCountryKey"
                 :countries="copy.countries"
-                :changeCountryText="copy.changeCurrentCountry" />
+                :change-country-text="copy.changeCurrentCountry" />
             <legal-block
                 v-if="copy.vatInfo"
                 :text="copy.vatInfo" />

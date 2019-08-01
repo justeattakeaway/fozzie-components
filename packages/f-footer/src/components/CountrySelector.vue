@@ -1,5 +1,5 @@
 <template>
-    <div 
+    <div
         class="c-footer-countrySelector"
         @keyup.esc="hideCountryList">
         <button
@@ -7,11 +7,11 @@
             data-js-test="countrySelector-button"
             class="c-countrySelector-link c-countrySelector-button"
             type="button"
-            @click="toggleCountryList"
             :aria-expanded="showCountryList ? 'true' : 'false'"
             :aria-label="changeCountryText"
-            aria-controls="countrySelector-countries">
-            <flag-icon 
+            aria-controls="countrySelector-countries"
+            @click="toggleCountryList">
+            <flag-icon
                 :country-code="currentCountryKey" />
             {{ currentCountryName }}
             <chevron-icon
@@ -71,7 +71,7 @@ export default {
         },
         changeCountryText: {
             type: String,
-            required: false
+            default: ''
         }
     },
     data () {
