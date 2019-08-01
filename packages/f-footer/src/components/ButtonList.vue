@@ -3,13 +3,13 @@
         <h2 class="c-footer-heading">
             {{ buttonList.title }}
         </h2>
-        <div class="c-buttonsList">
+        <div class="c-buttonList">
             <a
                 v-for="(button, index) in buttonList.buttons"
                 :key="index"
                 :href="button.url"
                 target="_blank"
-                class="c-buttonsList-button">
+                class="c-buttonList-button">
                 {{ button.title }}
             </a>
         </div>
@@ -29,13 +29,13 @@ export default {
 
 <style lang="scss">
 
-.c-buttonsList {
+.c-buttonList {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
 }
 
-.c-buttonsList-button {
+.c-buttonList-button {
     display: inline-block;
     vertical-align: middle;
     min-width: 226px;
