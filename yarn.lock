@@ -1013,6 +1013,7 @@
   dependencies:
     "@justeat/f-vue-icons" "0.15.1"
     lodash-es "4.17.15"
+    v-click-outside "2.1.3"
     vue "2.6.10"
 
 "@justeat/f-icons@1.29.0":
@@ -1038,16 +1039,8 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-utils/-/f-utils-0.3.0.tgz#1f18ba13ad7061e21c2112387234a77ba45fb5d3"
   integrity sha512-hqRiGA2lP++Z1oqawsv1V2Duf3YShaAbJ3S5JEPTpTMP5RjH36Xpc8nRbIVFBmwnZCu7L9iF7AebYTUX8XhiZA==
 
-"@justeat/f-vue-icons@0.15.1":
-  version "0.15.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-0.15.1.tgz#5ff98161c618a9cb9a678d0cbd233a08b7111a28"
-  integrity sha512-4cqyhlg2vWHCjzWFtBK8PqSzmSla/NQeMtg+qfC4c9yjSYM37MrButBOIc7PMbnVtUkAQvCjTKHl2vWkVbuDqQ==
-  dependencies:
-    "@justeat/f-icons" "1.29.0"
-    vue "2.6.10"
-
 "@justeat/f-vue-icons@file:packages/f-vue-icons":
-  version "0.14.0"
+  version "0.15.1"
   dependencies:
     "@justeat/f-icons" "1.29.0"
     vue "2.6.10"
@@ -13259,6 +13252,11 @@ uuid@^3.0.1, uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
+
+v-click-outside@2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/v-click-outside/-/v-click-outside-2.1.3.tgz#b7297abe833a439dc0895e6418a494381e64b5e7"
+  integrity sha512-8d11/fN+nkSPeor87K8OtGc/lDbRwbUiFwdzxQEGidlXt6eko3gIgRM7ghgi4p/zohF3Ja9hAaydAajV3gnlPQ==
 
 v8-compile-cache@^2.0.2:
   version "2.0.3"

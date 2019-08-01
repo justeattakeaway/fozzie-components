@@ -6,10 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.0.0-beta.7
 ------------------------------
-*July 29, 2019*
+*August 01, 2019*
 
 ### Added
 - `CountrySelector` component logic and styles
+- `CountrySelector` tests
 
 
 v2.0.0-beta.6

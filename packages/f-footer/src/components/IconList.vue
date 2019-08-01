@@ -109,7 +109,8 @@ export default {
 
 .c-iconList--payments {
     @include media('<wide') {
-        padding: spacing(x2);
+        padding: spacing(x2) spacing(x2) 0;
+        border-bottom: 1px solid $grey--lighter;
     }
 
     .c-footer-listItem {

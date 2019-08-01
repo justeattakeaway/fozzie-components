@@ -1,9 +1,10 @@
 <template>
     <div
-        class="c-footer-countrySelector"
+        class="c-countrySelector"
         @keyup.esc="hideCountryList">
         <button
             id="countrySelector-button"
+            v-click-outside="hideCountryList"
             data-js-test="countrySelector-button"
             class="c-countrySelector-link c-countrySelector-button"
             type="button"
@@ -15,15 +16,15 @@
                 :country-code="currentCountryKey" />
             {{ currentCountryName }}
             <chevron-icon
-                v-if="!showCountryList"
+                v-show="!showCountryList"
                 :is-small="true" />
-            <cross-icon v-else />
+            <cross-icon v-show="showCountryList" />
         </button>
         <ul
             v-show="showCountryList"
             id="countrySelector-countries"
             data-js-test="countrySelector-list"
-            class="c-footer-countrySelector-list"
+            class="c-countrySelector-list"
             role="region">
             <li
                 v-for="country in countries"
@@ -49,12 +50,16 @@ import {
     CrossIcon,
     FlagIcon
 } from '@justeat/f-vue-icons';
+import vClickOutside from 'v-click-outside';
 
 export default {
     components: {
         ChevronIcon,
         CrossIcon,
         FlagIcon
+    },
+    directives: {
+        clickOutside: vClickOutside.directive
     },
     props: {
         currentCountryName: {
@@ -85,16 +90,13 @@ export default {
         },
         hideCountryList () {
             this.showCountryList = false;
-
-            document.querySelector('#countrySelector-button')
-                .focus();
         }
     }
 };
 </script>
 
 <style lang="scss">
-.c-footer-countrySelector {
+.c-countrySelector {
     width: 190px;
     position: relative;
 
@@ -146,9 +148,10 @@ export default {
     background-color: $grey--lightest;
     border: none;
     cursor: pointer;
+    @include font-size(base);
 }
 
-.c-footer-countrySelector-list {
+.c-countrySelector-list {
     position: absolute;
     left: 0;
     bottom: 0;

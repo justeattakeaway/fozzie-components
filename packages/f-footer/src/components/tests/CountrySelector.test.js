@@ -63,18 +63,20 @@ describe('CountrySelector', () => {
     });
 
     it('chevron icon should change to cross when clicked', () => {
-        let chevronIcon = wrapper.find(ChevronIcon);
-        let crossIcon = wrapper.find(CrossIcon);
+        // Arrange
+        const chevronIcon = wrapper.find(ChevronIcon);
+        const crossIcon = wrapper.find(CrossIcon);
 
         expect(chevronIcon.isVisible()).toBe(true);
-        expect(crossIcon.exists()).toBe(false);
+        expect(crossIcon.isVisible()).toBe(false);
 
+        // Act
         button.trigger('click');
 
-        crossIcon = wrapper.find(CrossIcon);
-        chevronIcon = wrapper.find(ChevronIcon);
-
+        // Assert
+        expect(chevronIcon.isVisible()).toBe(false);
         expect(crossIcon.isVisible()).toBe(true);
-        expect(chevronIcon.exists()).toBe(false);
     });
 });
+
+
