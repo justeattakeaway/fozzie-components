@@ -136,91 +136,76 @@ export default {
             alt: 'Menu Log on Instagram'
         }
     ],
-    currentCountryLocalisedName: 'New Zealand',
-    currentCountryFlagKey: 'nz',
+    currentCountryName: 'New Zealand',
+    currentCountryKey: 'nz',
     countries: [
         {
             key: 'au',
-            flagUrl: 'australiaFlagIconUrl',
             localisedName: 'Australia',
             siteUrl: 'https://www.menulog.com.au'
         },
         {
             key: 'br',
-            flagUrl: 'brasilFlagIconUrl',
             localisedName: 'Brazil',
             siteUrl: 'https://www.ifood.com.br'
         },
         {
             key: 'ca',
-            flagUrl: 'canadaFlagIconUrl',
             localisedName: 'Canada',
             siteUrl: 'https://www.just-eat.ca'
         },
         {
             key: 'dk',
-            flagUrl: 'denmarkFlagIconUrl',
             localisedName: 'Denmark',
             siteUrl: 'https://www.just-eat.dk'
         },
         {
             key: 'fr',
-            flagUrl: 'franceFlagIconUrl',
             localisedName: 'France',
             siteUrl: 'https://www.just-eat.fr/'
         },
         {
             key: 'ie',
-            flagUrl: 'irelandFlagIconUrl',
             localisedName: 'Ireland',
             siteUrl: 'https://www.just-eat.ie'
         },
         {
             key: 'it',
-            flagUrl: 'italyFlagIconUrl',
             localisedName: 'Italy',
             siteUrl: 'https://www.justeat.it'
         },
         {
             key: 'no',
-            flagUrl: 'norwayFlagIconUrl',
             localisedName: 'Norway',
             siteUrl: 'https://www.just-eat.no'
         },
         {
             key: 'es',
-            flagUrl: 'spainFlagIconUrl',
             localisedName: 'Spain',
             siteUrl: 'https://www.just-eat.es'
         },
         {
             key: 'ch',
-            flagUrl: 'switzerlandFlagIconUrl',
             localisedName: 'Switzerland',
             siteUrl: 'https://www.eat.ch'
         },
         {
             key: 'gb',
-            flagUrl: 'ukFlagIconUrl',
             localisedName: 'United Kingdom',
             siteUrl: 'https://www.just-eat.co.uk'
         }
     ],
-    changeCurrentCountry: 'You are on the NZ website. Click here to change.',
-    buttonClose: 'Close',
+    changeCurrentCountry: 'You are on the NZ website, click here to change.',
     paymentIcons: [
         {
-            type: 'card',
             name: 'mastercard',
             alt: 'Mastercard'
         },
         {
-            type: 'card',
             name: 'visa',
             alt: 'Visa'
         },
         {
-            type: 'card',
             name: 'amex',
             alt: 'American Express'
         }

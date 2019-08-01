@@ -1,7 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import LinkList from '../LinkList.vue';
 
-
 const wrapper = shallowMount(LinkList, {
     propsData: {
         linkList: {
@@ -16,10 +15,9 @@ const wrapper = shallowMount(LinkList, {
     }
 });
 
-
 describe('LinkList component', () => {
     it('should be defined', () => {
-        expect(wrapper).toBeDefined();
+        expect(wrapper.exists()).toBe(true);
     });
 
     describe('for narrow viewport widths', () => {

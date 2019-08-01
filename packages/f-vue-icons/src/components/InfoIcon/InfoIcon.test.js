@@ -4,7 +4,7 @@ import InfoIcon from './infoIcon.vue';
 describe('InfoIcon', () => {
     it('should be defined', () => {
         const wrapper = shallowMount(InfoIcon);
-        expect(wrapper).toBeDefined();
+        expect(wrapper.exists()).toBe(true);
     });
 
     it('component class is added by default', () => {
