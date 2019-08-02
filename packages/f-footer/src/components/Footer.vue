@@ -91,7 +91,7 @@ export default {
     },
     computed: {
         metaLegalFieldEnabled () {
-            return Object.keys(this.copy.metaLegalField).length !== 0;
+            return Object.keys(this.copy.metaLegalField).length > 0;
         }
     },
     methods: {

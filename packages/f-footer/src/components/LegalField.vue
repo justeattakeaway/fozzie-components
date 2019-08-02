@@ -1,6 +1,5 @@
 <template>
     <div
-        v-if="info"
         class="c-footer-certificates">
         <p
             v-if="info.textField">
