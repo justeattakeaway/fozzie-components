@@ -138,6 +138,7 @@ export default {
             ]
         }
     },
+    linkButtonList: [],
     downloadOurApps: 'Download vores app',
     appStoreIcons: [
         {

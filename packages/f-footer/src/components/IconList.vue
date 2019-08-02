@@ -94,6 +94,7 @@ export default {
 .c-iconList--social {
     svg {
         height: 28px;
+        width: 28px;
     }
 }
 
@@ -104,6 +105,7 @@ export default {
 
     svg {
        height: 40px;
+       width: 135px;
     }
 }
 
@@ -117,6 +119,10 @@ export default {
         @include media('>=wide') {
             margin-right: spacing(x6);
         }
+    }
+
+    svg {
+        max-width: 67px;
     }
 }
 

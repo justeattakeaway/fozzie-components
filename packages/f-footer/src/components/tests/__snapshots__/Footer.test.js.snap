@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Footer should render default component markup 1`] = `
-<footer class="c-footer">
+<footer data-theme="je" class="c-footer">
   <div class="c-footer-container c-footer-row c-footer-row--noPadBelowWide">
     <link-list-stub linklist="[object Object]"></link-list-stub>
     <link-list-stub linklist="[object Object]"></link-list-stub>
@@ -10,10 +10,13 @@ exports[`Footer should render default component markup 1`] = `
     <link-list-stub linklist="[object Object]"></link-list-stub>
   </div>
   <div class="c-footer-light">
-    <div class="c-footer-row c-footer-container">
-      <icon-list-stub icons="[object Object],[object Object]" title="Download our apps" isapps="true" locale="en-GB" class="c-iconList c-iconList--apps"></icon-list-stub>
-      <feedback-block-stub title="Feedback" text="Help us improve our website" buttontext="Send feedback"></feedback-block-stub>
-      <icon-list-stub icons="[object Object],[object Object],[object Object]" title="Follow us" locale="en-GB" class="c-iconList c-iconList--social"></icon-list-stub>
+    <div class="c-footer-container">
+      <!---->
+      <div class="c-footer-row">
+        <icon-list-stub icons="[object Object],[object Object]" title="Download our apps" isapps="true" locale="en-GB" class="c-iconList c-iconList--apps"></icon-list-stub>
+        <feedback-block-stub title="Feedback" text="Help us improve our website" buttontext="Send feedback"></feedback-block-stub>
+        <icon-list-stub icons="[object Object],[object Object],[object Object]" title="Follow us" locale="en-GB" class="c-iconList c-iconList--social"></icon-list-stub>
+      </div>
     </div>
   </div>
   <div class="c-footer-container c-footer-row c-footer-row--noPadBelowWide">
