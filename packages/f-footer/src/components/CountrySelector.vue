@@ -117,8 +117,7 @@ export default {
     .c-icon--cross {
         height: 8px;
         width: 8px;
-        margin: 0 3px;
-        margin: 0 0 0 spacing();
+        margin: 0 3px 0 spacing() + 3;
     }
 }
 

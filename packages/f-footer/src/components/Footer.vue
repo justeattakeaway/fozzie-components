@@ -44,7 +44,7 @@
                 :countries="copy.countries"
                 :change-country-text="copy.changeCurrentCountry" />
             <legal-field
-                v-if="copy.metaLegalField.length"
+                v-if="metaLegalFieldEnabled"
                 :info="copy.metaLegalField" />
             <icon-list
                 :icons="copy.paymentIcons"
@@ -88,6 +88,11 @@ export default {
             copy: { ...localeConfig },
             theme
         };
+    },
+    computed: {
+        metaLegalFieldEnabled () {
+            return Object.keys(this.copy.metaLegalField).length !== 0;
+        }
     },
     methods: {
         getLocale () {

@@ -3,11 +3,11 @@
         v-if="info"
         class="c-footer-certificates">
         <p
-            v-if="info.textField.length">
+            v-if="info.textField">
             {{ info.textField }}
         </p>
         <img
-            v-if="info.icon.name.length"
+            v-if="info.icon.name"
             :src="iconUrl"
             :alt="info.icon.alt"
             :class="['c-footer-certificates-icons', iconClass]">
