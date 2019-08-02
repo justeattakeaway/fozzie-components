@@ -1,46 +1,48 @@
 <template>
-    <div
-        class="c-countrySelector"
-        @keyup.esc="hideCountryList">
-        <button
-            id="countrySelector-button"
-            v-click-outside="hideCountryList"
-            data-js-test="countrySelector-button"
-            class="c-countrySelector-link c-countrySelector-button"
-            type="button"
-            :aria-expanded="showCountryList ? 'true' : 'false'"
-            :aria-label="changeCountryText"
-            aria-controls="countrySelector-countries"
-            @click="toggleCountryList">
-            <flag-icon
-                :country-code="currentCountryKey" />
-            {{ currentCountryName }}
-            <chevron-icon
-                v-show="!showCountryList"
-                :is-small="true" />
-            <cross-icon v-show="showCountryList" />
-        </button>
-        <ul
-            v-show="showCountryList"
-            id="countrySelector-countries"
-            data-js-test="countrySelector-list"
-            class="c-countrySelector-list"
-            role="region">
-            <li
-                v-for="country in countries"
-                :key="country.key"
-                data-js-test="countrySelector-country">
-                <a
-                    class="c-countrySelector-link"
-                    data-js-test="countrySelector-countryLink"
-                    :href="country.siteUrl">
-                    <flag-icon :country-code="country.key" />
-                    <p>
-                        {{ country.localisedName }}
-                    </p>
-                </a>
-            </li>
-        </ul>
+    <div class="c-countrySelectorContainer">
+        <div
+            class="c-countrySelector"
+            @keyup.esc="hideCountryList">
+            <button
+                id="countrySelector-button"
+                v-click-outside="hideCountryList"
+                data-js-test="countrySelector-button"
+                class="c-countrySelector-link c-countrySelector-button"
+                type="button"
+                :aria-expanded="showCountryList ? 'true' : 'false'"
+                :aria-label="changeCountryText"
+                aria-controls="countrySelector-countries"
+                @click="toggleCountryList">
+                <flag-icon
+                    :country-code="currentCountryKey" />
+                {{ currentCountryName }}
+                <chevron-icon
+                    v-show="!showCountryList"
+                    :is-small="true" />
+                <cross-icon v-show="showCountryList" />
+            </button>
+            <ul
+                v-show="showCountryList"
+                id="countrySelector-countries"
+                data-js-test="countrySelector-list"
+                class="c-countrySelector-list"
+                role="region">
+                <li
+                    v-for="country in countries"
+                    :key="country.key"
+                    data-js-test="countrySelector-country">
+                    <a
+                        class="c-countrySelector-link"
+                        data-js-test="countrySelector-countryLink"
+                        :href="country.siteUrl">
+                        <flag-icon :country-code="country.key" />
+                        <p>
+                            {{ country.localisedName }}
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -100,24 +102,23 @@ export default {
     width: 190px;
     position: relative;
 
-    @include media('<wide') {
-        order: 1;
-    }
-
     svg {
         height: 16px;
         width: 24px;
+        margin-right: spacing();
     }
 
     .c-icon--chevron--small {
         height: 6px;
         width: 14px;
+        margin: 0 0 0 spacing();
     }
 
     .c-icon--cross {
         height: 8px;
         width: 8px;
         margin: 0 3px;
+        margin: 0 0 0 spacing();
     }
 }
 
@@ -139,12 +140,19 @@ export default {
     }
 }
 
+.c-countrySelectorContainer {
+    @include media('<wide') {
+        width: 100%;
+        border-top: 1px solid $grey--lighter;
+        order: 3;
+    }
+}
+
 .c-countrySelector-button {
     width: 100%;
     padding: spacing(x2);
     display: flex;
     align-items: center;
-    justify-content: space-around;
     background-color: $grey--lightest;
     border: none;
     cursor: pointer;

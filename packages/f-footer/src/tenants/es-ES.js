@@ -248,5 +248,11 @@ export default {
             alt: 'PayPal'
         }
     ],
-    vatInfo: 'Confianza'
+    metaLegalField: {
+        textField: '',
+        icon: {
+            name: 'confianza',
+            alt: 'Confianza'
+        }
+    }
 };

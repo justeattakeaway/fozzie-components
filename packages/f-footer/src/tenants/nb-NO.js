@@ -219,5 +219,5 @@ export default {
             alt: 'Mastercard Securecode'
         }
     ],
-    vatInfo: ''
+    metaLegalField: {}
 };
