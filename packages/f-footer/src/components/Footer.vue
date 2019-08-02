@@ -1,27 +1,40 @@
 <template>
-    <footer class="c-footer">
+    <footer
+        :data-theme="theme"
+        class="c-footer">
         <div class="c-footer-container c-footer-row c-footer-row--noPadBelowWide">
             <link-list
                 v-for="(linkList, index) in copy.linkLists"
                 :key="index"
                 :link-list="linkList" />
         </div>
+
         <div class="c-footer-light">
-            <div class="c-footer-row c-footer-container">
-                <icon-list
-                    :title="copy.downloadOurApps"
-                    :icons="copy.appStoreIcons"
-                    :is-apps="true"
-                    :locale="copy.locale"
-                    class="c-iconList c-iconList--apps" />
-                <feedback-block
-                    :title="copy.feedback"
-                    :text="copy.improveOurWebsite"
-                    :button-text="copy.sendFeedback" />
-                <icon-list
-                    :icons="copy.socialIcons"
-                    :title="copy.followUs"
-                    class="c-iconList c-iconList--social" />
+            <div class="c-footer-container">
+                <div
+                    v-if="copy.linkButtonList.length"
+                    class="c-footer-row c-footer-row--noBottomPad">
+                    <button-list
+                        v-for="(buttonList, index) in copy.linkButtonList"
+                        :key="index"
+                        :button-list="buttonList" />
+                </div>
+                <div class="c-footer-row">
+                    <icon-list
+                        :title="copy.downloadOurApps"
+                        :icons="copy.appStoreIcons"
+                        :is-apps="true"
+                        :locale="copy.locale"
+                        class="c-iconList c-iconList--apps" />
+                    <feedback-block
+                        :title="copy.feedback"
+                        :text="copy.improveOurWebsite"
+                        :button-text="copy.sendFeedback" />
+                    <icon-list
+                        :icons="copy.socialIcons"
+                        :title="copy.followUs"
+                        class="c-iconList c-iconList--social" />
+                </div>
             </div>
         </div>
         <div class="c-footer-container c-footer-row c-footer-row--noPadBelowWide">
@@ -46,6 +59,7 @@ import FeedbackBlock from './FeedbackBlock.vue';
 import IconList from './IconList.vue';
 import CountrySelector from './CountrySelector.vue';
 import LegalBlock from './LegalBlock.vue';
+import ButtonList from './ButtonList.vue';
 import tenantConfigs from '../tenants';
 
 export default {
@@ -55,7 +69,8 @@ export default {
         FeedbackBlock,
         IconList,
         LegalBlock,
-        LinkList
+        LinkList,
+        ButtonList
     },
     props: {
         locale: {
@@ -67,9 +82,11 @@ export default {
     data () {
         const locale = this.getLocale();
         const localeConfig = tenantConfigs[locale];
+        const theme = this.getTheme(locale);
 
         return {
-            copy: { ...localeConfig }
+            copy: { ...localeConfig },
+            theme
         };
     },
     methods: {
@@ -85,6 +102,15 @@ export default {
             }
 
             return locale;
+        },
+        getTheme (locale) {
+            switch (locale) {
+                case 'en-AU':
+                case 'en-NZ':
+                    return 'ml';
+                default:
+                    return 'je';
+            }
         }
     }
 };
@@ -111,7 +137,13 @@ export default {
     @include font-size(mid);
     padding: spacing(x2);
     padding-left: 0;
+    font-family: $font-family-headings;
+    font-weight: $font-weight-headings;
 
+    @include theme(ml) {
+        font-family: $font-family-headings--ml;
+        font-weight: $font-weight-headings--ml;
+    }
 }
 
 .c-footer-heading--shortBelowWide {
@@ -129,14 +161,14 @@ export default {
     @include media('>=wide') {
         padding: spacing(x4);
         flex-flow: row nowrap;
-    }
 
-    .c-iconList--apps {
-        flex-basis: 42%;
-    }
+        .c-iconList--apps {
+            flex-basis: 42%;
+        }
 
-    .c-iconList--social {
-        flex-basis: 25%;
+        .c-iconList--social {
+            flex-basis: 25%;
+        }
     }
 }
 
@@ -144,6 +176,10 @@ export default {
     @include media('<wide') {
         padding: 0;
     }
+}
+
+.c-footer-row--noBottomPad {
+    padding-bottom: 0;
 }
 
 .c-footer-list {

@@ -4,6 +4,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.8
+------------------------------
+*August 01, 2019*
+
+### Added
+- `ButtonList` component
+- Small styles fixes for IE11
+- Some css global variables for MenuLog styles
+- `theme` mixin for picking up MenuLog styles
+- `@vue/cli-plugin-babel` to the package dev dependencies, it wasn't picked up from the root monorepo level
+
+### Changed
+- Restructured AU resource file for new button list block + added empty `linkButtonList` array for other tenants
+
+
 v2.0.0-beta.7
 ------------------------------
 *August 01, 2019*

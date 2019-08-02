@@ -21,6 +21,15 @@ $theme: 'je' !default;
  $footer-chevronColor    : $grey--dark !default;
  $footer-socialIconColor : $grey--dark !default;
 
+ /**
+ * Global variables which need to be changed depending on the theme (TODO: move to separate component)
+ */
+ $font-family-headings--ml   : 'Aspira', 'Times New Roman', Times, serif;
+ $font-weight-headings--ml   : 800;
+ $color-link-default--ml     : $green;
+
+
+
 @mixin theme($type) {
     [data-theme="#{$type}"] & {
         @content;

@@ -195,26 +195,38 @@ export default {
                 {
                     url: '/privacy-policy/',
                     text: 'Privacy Policy and Terms of Use'
-                },
-                {
-                    url: 'https://partner.menulog.com.au/',
-                    text: 'Partner centre'
-                },
-                {
-                    url: 'https://couriers.menulog.com.au/application/',
-                    text: 'Become a courier'
-                },
-                {
-                    url: 'https://couriers.menulog.com.au/',
-                    text: 'Courier portal'
-                },
-                {
-                    url: '/content/join-menulog',
-                    text: 'List your restaurant'
                 }
             ]
         }
     },
+    linkButtonList: [
+        {
+            title: 'Partner with Us',
+            buttons: [
+                {
+                    title: 'List your restaurant',
+                    url: '/content/join-menulog'
+                },
+                {
+                    title: 'Become a courier',
+                    url: 'https://couriers.menulog.com.au/application/'
+                }
+            ]
+        },
+        {
+            title: 'Already a partner',
+            buttons: [
+                {
+                    title: 'Partner centre',
+                    url: 'https://partner.menulog.com.au/'
+                },
+                {
+                    title: 'Courier portal',
+                    url: 'https://couriers.menulog.com.au/'
+                }
+            ]
+        }
+    ],
     downloadOurApps: 'Download our apps',
     appStoreIcons: [
         {

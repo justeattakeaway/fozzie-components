@@ -5,11 +5,9 @@ module.exports = api => {
     const presets = [];
     const plugins = [];
 
-    if (!isTest) {
-        if (!isSettings) {
-            api.cache(true);
-            presets.push(['@vue/app']);
-        }
+    if (!isTest && !isSettings) {
+        api.cache(true);
+        presets.push(['@vue/app']);
     }
 
     // use for both test and dev/live

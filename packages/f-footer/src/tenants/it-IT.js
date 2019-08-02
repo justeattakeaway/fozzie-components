@@ -130,6 +130,7 @@ export default {
             ]
         }
     },
+    linkButtonList: [],
     downloadOurApps: "Scarica l'app",
     appStoreIcons: [
         {
