@@ -110,6 +110,7 @@ export default {
             ]
         }
     },
+    linkButtonList: [],
     downloadOurApps: 'Download our apps',
     appStoreIcons: [
         {

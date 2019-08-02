@@ -119,6 +119,7 @@ export default {
             ]
         }
     },
+    linkButtonList: [],
     downloadOurApps: 'Last ned appen vår',
     appStoreIcons: [
         {
