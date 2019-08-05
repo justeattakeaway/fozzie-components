@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="c-footer-container c-footer-row c-footer-row--combined c-footer-row--doubledBottomPad c-footer-row--noPadBelowWide">
+        <div class="c-footer-container c-footer-row c-footer-row--combined c-footer-row--notEqualTopAndBottomPad c-footer-row--noPadBelowWide">
             <country-selector
                 :current-country-name="copy.currentCountryName"
                 :current-country-key="copy.currentCountryKey"
@@ -177,6 +177,9 @@ export default {
     }
 }
 
+// this modifier allows children in the row to stay on one line 
+// if they fit together for screens smaller than 1025px
+// standard c-footer-row splits children into separate rows for screens smaller than 1025px
 .c-footer-row--combined {
     flex-flow: row wrap;
 
@@ -185,7 +188,7 @@ export default {
     }
 }
 
-.c-footer-row--doubledBottomPad {
+.c-footer-row--notEqualTopAndBottomPad {
     padding-top: 20px;
     padding-bottom: 40px;
 }

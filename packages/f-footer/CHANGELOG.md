@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.0.0-beta.9
 ------------------------------
-*August 02, 2019*
+*August 05, 2019*
 
 ### Added
 - `LegalField` component
