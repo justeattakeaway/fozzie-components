@@ -30,7 +30,8 @@
                 :key="index">
                 <a
                     :href="link.url"
-                    :rel="link.rel">
+                    :rel="link.rel"
+                    :data-gtm="['engagement|footer|' + link.gtm]">
                     {{ link.text }}
                 </a>
             </li>

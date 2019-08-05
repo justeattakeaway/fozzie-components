@@ -9,7 +9,8 @@
                 :key="index"
                 :href="button.url"
                 target="_blank"
-                class="c-buttonList-button">
+                class="c-buttonList-button"
+                :data-gtm="['engagement|footer|' + button.gtm]">
                 {{ button.title }}
             </a>
         </div>

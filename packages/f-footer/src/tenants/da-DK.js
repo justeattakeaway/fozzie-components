@@ -6,27 +6,33 @@ export default {
             links: [
                 {
                     url: '/help',
-                    text: 'Hjælp'
+                    text: 'Hjælp',
+                    gtm: 'click_service_help'
                 },
                 {
                     url: 'https://external-ordering.gavekortet.dk/justeat',
-                    text: 'Gavekort'
+                    text: 'Gavekort',
+                    gtm: 'click_service_giftcard'
                 },
                 {
                     url: '/takeaway/prisgaranti',
-                    text: 'Prisgaranti'
+                    text: 'Prisgaranti',
+                    gtm: 'click_service_best_price_guarantee'
                 },
                 {
                     url: '/takeaway/firmaaftale',
-                    text: 'Firmaaftale'
+                    text: 'Firmaaftale',
+                    gtm: 'click_service_company_agreement'
                 },
                 {
                     url: '/blog',
-                    text: 'Just Eat Blog'
+                    text: 'Just Eat Blog',
+                    gtm: 'click_service_blog'
                 },
                 {
                     url: 'http://justeat-premium.dk/',
-                    text: 'Just Eat Premium'
+                    text: 'Just Eat Premium',
+                    gtm: 'click_service_premium'
                 }
             ]
         },
@@ -35,35 +41,43 @@ export default {
             links: [
                 {
                     url: '/takeaway',
-                    text: 'Takeaway'
+                    text: 'Takeaway',
+                    gtm: 'click_cuisine_takeaway'
                 },
                 {
                     url: '/takeaway/italiensk',
-                    text: 'Pizza'
+                    text: 'Pizza',
+                    gtm: 'click_cuisine_pizza'
                 },
                 {
                     url: '/takeaway/sushi',
-                    text: 'Sushi'
+                    text: 'Sushi',
+                    gtm: 'click_cuisine_suchi'
                 },
                 {
                     url: '/takeaway/indisk',
-                    text: 'Indisk'
+                    text: 'Indisk',
+                    gtm: 'click_cuisine_indian'
                 },
                 {
                     url: '/takeaway/kinesisk',
-                    text: 'Kinesisk'
+                    text: 'Kinesisk',
+                    gtm: 'click_cuisine_chinese'
                 },
                 {
                     url: '/takeaway/amerikansk',
-                    text: 'Amerikansk & burger'
+                    text: 'Amerikansk & burger',
+                    gtm: 'click_cuisine_american'
                 },
                 {
                     url: '/takeaway/premium-gourmet',
-                    text: 'Premium & Gourmet'
+                    text: 'Premium & Gourmet',
+                    gtm: 'click_cuisine_premium_gourmet'
                 },
                 {
                     url: '/takeaway/typer-foedevarer',
-                    text: 'Alle køkkentyper'
+                    text: 'Alle køkkentyper',
+                    gtm: 'click_cuisine_view_all'
                 }
             ]
         },
@@ -72,31 +86,38 @@ export default {
             links: [
                 {
                     url: '/takeaway/koebenhavn',
-                    text: 'København'
+                    text: 'København',
+                    gtm: 'click_location_copenhagen'
                 },
                 {
                     url: '/takeaway/roskilde',
-                    text: 'Roskilde'
+                    text: 'Roskilde',
+                    gtm: 'click_location_roskilde'
                 },
                 {
                     url: '/takeaway/aarhus',
-                    text: 'Aarhus'
+                    text: 'Aarhus',
+                    gtm: 'click_location_aarhus'
                 },
                 {
                     url: '/takeaway/odense',
-                    text: 'Odense'
+                    text: 'Odense',
+                    gtm: 'click_location_odense'
                 },
                 {
                     url: '/takeaway/aalborg',
-                    text: 'Aalborg'
+                    text: 'Aalborg',
+                    gtm: 'click_location_aalborg'
                 },
                 {
                     url: '/takeaway/kgs-lyngby',
-                    text: 'Lyngby'
+                    text: 'Lyngby',
+                    gtm: 'click_location_lyngby'
                 },
                 {
                     url: '/takeaway/alle-byer',
-                    text: 'Alle byer'
+                    text: 'Alle byer',
+                    gtm: 'click_location_view_all'
                 }
             ]
         },
@@ -109,31 +130,38 @@ export default {
             links: [
                 {
                     url: 'https://restaurants.just-eat.dk/',
-                    text: 'Restaurant påmelding'
+                    text: 'Restaurant påmelding',
+                    gtm: 'click_about_restaurant_singup'
                 },
                 {
                     url: '/about',
-                    text: 'Hvem er vi'
+                    text: 'Hvem er vi',
+                    gtm: 'click_about_about_us'
                 },
                 {
                     url: 'https://partner.just-eat.dk/',
-                    text: 'Partner centre'
+                    text: 'Partner centre',
+                    gtm: 'click_about_partner_centre'
                 },
                 {
                     url: 'http://partnerblog.just-eat.dk/',
-                    text: 'Partnerblog'
+                    text: 'Partnerblog',
+                    gtm: 'click_about_partner_blog'
                 },
                 {
                     url: '/jobs',
-                    text: 'Arbejd for os'
+                    text: 'Arbejd for os',
+                    gtm: 'click_about_work_with_us'
                 },
                 {
                     url: '/privacy-policy',
-                    text: 'Handelsbetingelser'
+                    text: 'Handelsbetingelser',
+                    gtm: 'click_about_privacy_policy'
                 },
                 {
                     url: '/cookiespolicy',
-                    text: 'Brug af cookies'
+                    text: 'Brug af cookies',
+                    gtm: 'click_about_cookie_policy'
                 }
             ]
         }
@@ -144,17 +172,20 @@ export default {
         {
             url: 'https://170720.measurementapi.com/serve?action=click&publisher_id=170720&site_id=109400&my_campaign=website-app-page',
             name: 'ios',
-            alt: 'Hent i App Store'
+            alt: 'Hent i App Store',
+            gtm: 'click_download_ios_app'
         },
         {
             url: 'https://170720.measurementapi.com/serve?action=click&publisher_id=170720&site_id=108390&my_campaign=website-app-page',
             name: 'android',
-            alt: 'Hent i Google Play'
+            alt: 'Hent i Google Play',
+            gtm: 'click_download_android_app'
         },
         {
             url: 'https://www.microsoft.com/store/apps/9nblggh4vk8q',
             name: 'microsoft',
-            alt: 'Hent i Windows Store'
+            alt: 'Hent i Windows Store',
+            gtm: 'click_download_windows_app'
         }
     ],
     feedback: 'Feedback',
@@ -165,17 +196,20 @@ export default {
         {
             url: 'https://www.facebook.com/JustEatDK/',
             name: 'facebook',
-            alt: 'Facebook'
+            alt: 'Facebook',
+            gtm: 'click_follow_facebook'
         },
         {
             url: 'https://twitter.com/justeatdk',
             name: 'twitter',
-            alt: 'Twitter'
+            alt: 'Twitter',
+            gtm: 'click_follow_twitter'
         },
         {
             url: 'https://www.instagram.com/justeatdk/?hl=dk',
             name: 'instagram',
-            alt: 'Instagram'
+            alt: 'Instagram',
+            gtm: 'click_follow_instagram'
         }
     ],
     currentCountryName: 'Danmark',
@@ -184,57 +218,68 @@ export default {
         {
             key: 'au',
             localisedName: 'Australien',
-            siteUrl: 'https://www.menulog.com.au'
+            siteUrl: 'https://www.menulog.com.au',
+            gtm: 'click_country_au'
         },
         {
             key: 'br',
             localisedName: 'Brasilien',
-            siteUrl: 'https://www.ifood.com.br'
+            siteUrl: 'https://www.ifood.com.br',
+            gtm: 'click_country_br'
         },
         {
             key: 'ca',
             localisedName: 'Canada',
-            siteUrl: 'https://www.just-eat.ca'
+            siteUrl: 'https://www.just-eat.ca',
+            gtm: 'click_country_ca'
         },
         {
             key: 'fr',
             localisedName: 'Frankrig',
-            siteUrl: 'https://www.just-eat.fr/'
+            siteUrl: 'https://www.just-eat.fr/',
+            gtm: 'click_country_fr'
         },
         {
             key: 'ie',
             localisedName: 'Irland',
-            siteUrl: 'https://www.just-eat.ie'
+            siteUrl: 'https://www.just-eat.ie',
+            gtm: 'click_country_ie'
         },
         {
             key: 'it',
             localisedName: 'Italien',
-            siteUrl: 'https://www.justeat.it'
+            siteUrl: 'https://www.justeat.it',
+            gtm: 'click_country_it'
         },
         {
             key: 'nz',
             localisedName: 'New Zealand',
-            siteUrl: 'https://www.menulog.co.nz'
+            siteUrl: 'https://www.menulog.co.nz',
+            gtm: 'click_country_nz'
         },
         {
             key: 'no',
             localisedName: 'Norge',
-            siteUrl: 'https://www.just-eat.no'
+            siteUrl: 'https://www.just-eat.no',
+            gtm: 'click_country_no'
         },
         {
             key: 'ch',
             localisedName: 'Schweiz',
-            siteUrl: 'https://www.eat.ch'
+            siteUrl: 'https://www.eat.ch',
+            gtm: 'click_country_ch'
         },
         {
             key: 'es',
             localisedName: 'Spanien',
-            siteUrl: 'https://www.just-eat.es'
+            siteUrl: 'https://www.just-eat.es',
+            gtm: 'click_country_es'
         },
         {
             key: 'gb',
             localisedName: 'Storbritannien',
-            siteUrl: 'https://www.just-eat.co.uk'
+            siteUrl: 'https://www.just-eat.co.uk',
+            gtm: 'click_country_gb'
         }
     ],
     changeCurrentCountry: 'Du er på den danske website, klik her for at skifte.',

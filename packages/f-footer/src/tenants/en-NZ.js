@@ -6,27 +6,33 @@ export default {
             links: [
                 {
                     url: '/content/contact-us/',
-                    text: 'Contact us'
+                    text: 'Contact us',
+                    gtm: 'click_service_contact_us'
                 },
                 {
                     url: '/account/login/',
-                    text: 'Log in'
+                    text: 'Log in',
+                    gtm: 'click_service_login'
                 },
                 {
                     url: '/account/register/',
-                    text: 'Sign up'
+                    text: 'Sign up',
+                    gtm: 'click_service_singup'
                 },
                 {
                     url: '/account/info/',
-                    text: 'My account'
+                    text: 'My account',
+                    gtm: 'click_service_account'
                 },
                 {
                     url: '/blog/',
-                    text: 'Menulog blog'
+                    text: 'Menulog blog',
+                    gtm: 'click_service_blog'
                 },
                 {
                     url: '/help/',
-                    text: 'Help centre'
+                    text: 'Help centre',
+                    gtm: 'click_service_help'
                 }
             ]
         },
@@ -35,23 +41,28 @@ export default {
             links: [
                 {
                     url: '/browse/cuisines/chinese',
-                    text: 'Chinese'
+                    text: 'Chinese',
+                    gtm: 'click_cuisine_chinese'
                 },
                 {
                     url: '/browse/cuisines/indian',
-                    text: 'Indian'
+                    text: 'Indian',
+                    gtm: 'click_cuisine_indian'
                 },
                 {
                     url: '/browse/cuisines/thai',
-                    text: 'Thai'
+                    text: 'Thai',
+                    gtm: 'click_cuisine_thai'
                 },
                 {
                     url: '/browse/cuisines/pizza',
-                    text: 'Pizza'
+                    text: 'Pizza',
+                    gtm: 'click_cuisine_pizza'
                 },
                 {
                     url: '/browse',
-                    text: 'View all cuisines'
+                    text: 'View all cuisines',
+                    gtm: 'click_cuisine_view_all'
                 }
             ]
         },
@@ -60,19 +71,23 @@ export default {
             links: [
                 {
                     url: '/browse/locations/auckland/',
-                    text: 'Auckland'
+                    text: 'Auckland',
+                    gtm: 'click_location_auckland'
                 },
                 {
                     url: '/browse/locations/wellington/',
-                    text: 'Wellington'
+                    text: 'Wellington',
+                    gtm: 'click_location_wellington'
                 },
                 {
                     url: '/browse/locations/christchurch/',
-                    text: 'Christchurch'
+                    text: 'Christchurch',
+                    gtm: 'click_location_christchurch'
                 },
                 {
                     url: '/browse/locations/dunedin/',
-                    text: 'Dunedin'
+                    text: 'Dunedin',
+                    gtm: 'click_location_dunedin'
                 }
             ]
         },
@@ -85,19 +100,23 @@ export default {
             links: [
                 {
                     url: '/about_menulog',
-                    text: 'Get to know us'
+                    text: 'Get to know us',
+                    gtm: 'click_about_about_menulog'
                 },
                 {
                     url: '/privacy-policy#privacy_policy',
-                    text: 'Privacy Policy / Terms & Conditions'
+                    text: 'Privacy Policy / Terms & Conditions',
+                    gtm: 'click_about_privacy_policy'
                 },
                 {
                     url: 'https://connect.menulog.co.nz/login?client_id=RappsOrigPartnerCentre&response_type=code&redirect_uri=https:%2F%2Fpartner.menulog.co.nz%2Fsignin-jeconnect&state=QaF4ae5nfj7FUpuoevTVCHvmMBxIA1hO_4mDtePNEJOasCly6wdTLaHjTuvS7_If4SwPYZelgwT0ZFYb7CCZvfIIr9X0OVLKiRpdCLYU9zJPuorMgnFjjRlyQNdU8L_5ZvkfGGBtXJx-jNOlh5lU_aqiQ-KgrKthGa83ZbYH8GjV81bwGb7iJ8PRFJPYbwTyys-zclUwNFxXhfdsOpqIWsIlfpQ',
-                    text: 'Partner Centre'
+                    text: 'Partner Centre',
+                    gtm: 'click_about_partner_centre'
                 },
                 {
                     url: '/join_takeaway_section',
-                    text: 'Restaurant sign up'
+                    text: 'Restaurant sign up',
+                    gtm: 'click_about_restaurant_singup'
                 }
             ]
         }
@@ -108,12 +127,14 @@ export default {
         {
             url: 'https://itunes.apple.com/nz/app/menulog-order-takeaway-food/id485249021?mt=8&&referrer=click%3D69811f6e-2144-4706-bafc-3d9ae07efd62',
             name: 'ios',
-            alt: 'Download on the App Store'
+            alt: 'Download on the App Store',
+            gtm: 'click_download_ios_app'
         },
         {
             url: 'https://play.google.com/store/apps/details?id=nz.co.menulog.m',
             name: 'android',
-            alt: 'Get it on Google Play'
+            alt: 'Get it on Google Play',
+            gtm: 'click_download_android_app'
         }
     ],
     feedback: 'Feedback',
@@ -124,17 +145,20 @@ export default {
         {
             url: 'https://www.facebook.com/Menulog.co.nz',
             name: 'facebook',
-            alt: 'Menu Log on Facebook'
+            alt: 'Menu Log on Facebook',
+            gtm: 'click_follow_facebook'
         },
         {
             url: 'https://twitter.com/Menulog',
             name: 'twitter',
-            alt: 'Menu Log on Twitter'
+            alt: 'Menu Log on Twitter',
+            gtm: 'click_follow_twitter'
         },
         {
             url: 'https://www.instagram.com/menulog/',
             name: 'instagram',
-            alt: 'Menu Log on Instagram'
+            alt: 'Menu Log on Instagram',
+            gtm: 'click_follow_instagram'
         }
     ],
     currentCountryName: 'New Zealand',
@@ -143,57 +167,68 @@ export default {
         {
             key: 'au',
             localisedName: 'Australia',
-            siteUrl: 'https://www.menulog.com.au'
+            siteUrl: 'https://www.menulog.com.au',
+            gtm: 'click_country_au'
         },
         {
             key: 'br',
             localisedName: 'Brazil',
-            siteUrl: 'https://www.ifood.com.br'
+            siteUrl: 'https://www.ifood.com.br',
+            gtm: 'click_country_br'
         },
         {
             key: 'ca',
             localisedName: 'Canada',
-            siteUrl: 'https://www.just-eat.ca'
+            siteUrl: 'https://www.just-eat.ca',
+            gtm: 'click_country_ca'
         },
         {
             key: 'dk',
             localisedName: 'Denmark',
-            siteUrl: 'https://www.just-eat.dk'
+            siteUrl: 'https://www.just-eat.dk',
+            gtm: 'click_country_dk'
         },
         {
             key: 'fr',
             localisedName: 'France',
-            siteUrl: 'https://www.just-eat.fr/'
+            siteUrl: 'https://www.just-eat.fr/',
+            gtm: 'click_country_fr'
         },
         {
             key: 'ie',
             localisedName: 'Ireland',
-            siteUrl: 'https://www.just-eat.ie'
+            siteUrl: 'https://www.just-eat.ie',
+            gtm: 'click_country_ie'
         },
         {
             key: 'it',
             localisedName: 'Italy',
-            siteUrl: 'https://www.justeat.it'
+            siteUrl: 'https://www.justeat.it',
+            gtm: 'click_country_it'
         },
         {
             key: 'no',
             localisedName: 'Norway',
-            siteUrl: 'https://www.just-eat.no'
+            siteUrl: 'https://www.just-eat.no',
+            gtm: 'click_country_no'
         },
         {
             key: 'es',
             localisedName: 'Spain',
-            siteUrl: 'https://www.just-eat.es'
+            siteUrl: 'https://www.just-eat.es',
+            gtm: 'click_country_es'
         },
         {
             key: 'ch',
             localisedName: 'Switzerland',
-            siteUrl: 'https://www.eat.ch'
+            siteUrl: 'https://www.eat.ch',
+            gtm: 'click_country_ch'
         },
         {
             key: 'gb',
             localisedName: 'United Kingdom',
-            siteUrl: 'https://www.just-eat.co.uk'
+            siteUrl: 'https://www.just-eat.co.uk',
+            gtm: 'click_country_gb'
         }
     ],
     changeCurrentCountry: 'You are on the NZ website, click here to change.',

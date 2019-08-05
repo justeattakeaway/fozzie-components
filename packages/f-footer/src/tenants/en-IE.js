@@ -6,23 +6,28 @@ export default {
             links: [
                 {
                     url: '/contact',
-                    text: 'Contact us'
+                    text: 'Contact us',
+                    gtm: 'click_service_contact_us'
                 },
                 {
                     url: '/faq',
-                    text: 'FAQs'
+                    text: 'FAQs',
+                    gtm: 'click_service_faq'
                 },
                 {
                     url: '/pricepromise',
-                    text: 'Price Promise'
+                    text: 'Price Promise',
+                    gtm: 'click_service_price_promise'
                 },
                 {
                     url: 'https://restaurants.just-eat.ie/',
-                    text: 'Restaurant sign-up'
+                    text: 'Restaurant sign-up',
+                    gtm: 'click_service_restaurant_singup'
                 },
                 {
                     url: 'https://partner.just-eat.ie/',
-                    text: 'Partner centre'
+                    text: 'Partner centre',
+                    gtm: 'click_service_partner_centre'
                 }
             ]
         },
@@ -31,23 +36,28 @@ export default {
             links: [
                 {
                     url: '/takeaway/nearme/pizza',
-                    text: 'Order Pizza'
+                    text: 'Order Pizza',
+                    gtm: 'click_cuisine_pizza'
                 },
                 {
                     url: '/takeaway/nearme/chinese',
-                    text: 'Order Chinese'
+                    text: 'Order Chinese',
+                    gtm: 'click_cuisine_chinese'
                 },
                 {
                     url: '/takeaway/nearme/indian',
-                    text: 'Order Indian'
+                    text: 'Order Indian',
+                    gtm: 'click_cuisine_indian'
                 },
                 {
                     url: '/takeaway/nearme/mexican',
-                    text: 'Order Mexican'
+                    text: 'Order Mexican',
+                    gtm: 'click_cuisine_mexican'
                 },
                 {
                     url: '/takeaway/nearme/thai',
-                    text: 'Order Thai'
+                    text: 'Order Thai',
+                    gtm: 'click_cuisine_thai'
                 }
             ]
         },
@@ -56,23 +66,28 @@ export default {
             links: [
                 {
                     url: '/takeaway/dublin-area',
-                    text: 'Dublin'
+                    text: 'Dublin',
+                    gtm: 'click_location_dublin'
                 },
                 {
                     url: '/takeaway/limerick-city-centre',
-                    text: 'Limerick'
+                    text: 'Limerick',
+                    gtm: 'click_location_limerick'
                 },
                 {
                     url: '/takeaway/cork-city-centre',
-                    text: 'Cork'
+                    text: 'Cork',
+                    gtm: 'click_location_cork'
                 },
                 {
                     url: '/takeaway/galway-city-centre',
-                    text: 'Galway'
+                    text: 'Galway',
+                    gtm: 'click_location_galway'
                 },
                 {
                     url: '/takeaway/waterford',
-                    text: 'Waterford'
+                    text: 'Waterford',
+                    gtm: 'click_location_waterford'
                 }
             ]
         },
@@ -85,27 +100,33 @@ export default {
             links: [
                 {
                     url: '/info/about-us',
-                    text: 'About us'
+                    text: 'About us',
+                    gtm: 'click_about_about_us'
                 },
                 {
                     url: '/takeaway/nearme',
-                    text: 'Browse Takeaways'
+                    text: 'Browse Takeaways',
+                    gtm: 'click_about_takeaway_near_me'
                 },
                 {
                     url: '/privacy-policy',
-                    text: 'Privacy Policy'
+                    text: 'Privacy Policy',
+                    gtm: 'click_about_privacy_policy'
                 },
                 {
                     url: '/cookiespolicy',
-                    text: 'Cookie Policy'
+                    text: 'Cookie Policy',
+                    gtm: 'click_about_cookie_policy'
                 },
                 {
                     url: 'https://www.justeatshop.ie/gift-vouchers',
-                    text: 'Just Eat Gift Cards'
+                    text: 'Just Eat Gift Cards',
+                    gtm: 'click_about_gift_cards'
                 },
                 {
                     url: '/blog',
-                    text: 'Just Eat Blog'
+                    text: 'Just Eat Blog',
+                    gtm: 'click_about_blog'
                 }
             ]
         }
@@ -116,12 +137,14 @@ export default {
         {
             url: 'https://170722.measurementapi.com/serve?action=click&publisher_id=170722&site_id=109406&my_campaign=IEHomepageOngoing&my_publisher=IEHomePage&my_site=just-eat.ie&my_placement=IE4thBox',
             name: 'ios',
-            alt: 'Download on the App Store'
+            alt: 'Download on the App Store',
+            gtm: 'click_download_ios_app'
         },
         {
             url: 'https://170722.measurementapi.com/serve?action=click&publisher_id=170722&site_id=108388&my_campaign=IEHomepageOngoing&my_publisher=IEHomePage&my_site=just-eat.ie&my_placement=IE4thBox',
             name: 'android',
-            alt: 'Get it on Google Play'
+            alt: 'Get it on Google Play',
+            gtm: 'click_download_android_app'
         }
     ],
     feedback: 'Feedback',
@@ -132,7 +155,8 @@ export default {
         {
             url: 'https://www.facebook.com/JustEatIreland',
             name: 'facebook',
-            alt: 'Just Eat on Facebook'
+            alt: 'Just Eat on Facebook',
+            gtm: 'click_follow_facebook'
         },
         {
             url: 'https://www.twitter.com/JustEatIE',
@@ -142,17 +166,20 @@ export default {
         {
             url: 'https://www.just-eat.ie/blog',
             name: 'rss',
-            alt: 'Just Eat blog'
+            alt: 'Just Eat blog',
+            gtm: 'click_follow_twitter'
         },
         {
             url: 'https://instagram.com/justeatie/',
             name: 'instagram',
-            alt: 'Just Eat on Instagram'
+            alt: 'Just Eat on Instagram',
+            gtm: 'click_follow_instagram'
         },
         {
             url: 'https://www.pinterest.com/justeatie/',
             name: 'pinterest',
-            alt: 'Just Eat on Pinterest'
+            alt: 'Just Eat on Pinterest',
+            gtm: 'click_follow_pinterest'
         }
     ],
     currentCountryName: 'Ireland',
@@ -161,57 +188,68 @@ export default {
         {
             key: 'au',
             localisedName: 'Australia',
-            siteUrl: 'https://www.menulog.com.au'
+            siteUrl: 'https://www.menulog.com.au',
+            gtm: 'click_country_au'
         },
         {
             key: 'br',
             localisedName: 'Brazil',
-            siteUrl: 'https://www.ifood.com.br'
+            siteUrl: 'https://www.ifood.com.br',
+            gtm: 'click_country_br'
         },
         {
             key: 'ca',
             localisedName: 'Canada',
-            siteUrl: 'https://www.just-eat.ca'
+            siteUrl: 'https://www.just-eat.ca',
+            gtm: 'click_country_ca'
         },
         {
             key: 'dk',
             localisedName: 'Denmark',
-            siteUrl: 'https://www.just-eat.dk'
+            siteUrl: 'https://www.just-eat.dk',
+            gtm: 'click_country_dk'
         },
         {
             key: 'fr',
             localisedName: 'France',
-            siteUrl: 'https://www.just-eat.fr/'
+            siteUrl: 'https://www.just-eat.fr/',
+            gtm: 'click_country_fr'
         },
         {
             key: 'it',
             localisedName: 'Italy',
-            siteUrl: 'https://www.justeat.it'
+            siteUrl: 'https://www.justeat.it',
+            gtm: 'click_country_it'
         },
         {
             key: 'nz',
             localisedName: 'New Zealand',
-            siteUrl: 'https://www.menulog.co.nz'
+            siteUrl: 'https://www.menulog.co.nz',
+            gtm: 'click_country_nz'
         },
         {
             key: 'no',
             localisedName: 'Norway',
-            siteUrl: 'https://www.just-eat.no'
+            siteUrl: 'https://www.just-eat.no',
+            gtm: 'click_country_no'
         },
         {
             key: 'es',
             localisedName: 'Spain',
-            siteUrl: 'https://www.just-eat.es'
+            siteUrl: 'https://www.just-eat.es',
+            gtm: 'click_country_es'
         },
         {
             key: 'ch',
             localisedName: 'Switzerland',
-            siteUrl: 'https://www.eat.ch'
+            siteUrl: 'https://www.eat.ch',
+            gtm: 'click_country_ch'
         },
         {
             key: 'gb',
             localisedName: 'United Kingdom',
-            siteUrl: 'https://www.just-eat.co.uk'
+            siteUrl: 'https://www.just-eat.co.uk',
+            gtm: 'click_country_gb'
         }
     ],
     changeCurrentCountry: 'You are on the Irish website, click here to change.',

@@ -34,6 +34,7 @@
                     <a
                         class="c-countrySelector-link"
                         data-js-test="countrySelector-countryLink"
+                        :data-gtm="['engagement|footer|' + country.gtm]"
                         :href="country.siteUrl">
                         <flag-icon :country-code="country.key" />
                         <p>

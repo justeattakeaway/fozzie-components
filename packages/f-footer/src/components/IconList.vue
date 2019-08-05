@@ -13,7 +13,8 @@
                 <a
                     v-if="icon.url"
                     :href="icon.url"
-                    :title="icon.alt">
+                    :title="icon.alt"
+                    :data-gtm="['engagement|footer|' + icon.gtm]">
                     <component
                         :is="iconChoice"
                         v-bind="icon"

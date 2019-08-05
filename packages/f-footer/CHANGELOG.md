@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.11
+------------------------------
+*August 6, 2019*
+
+### Added
+- `data-gtm` attributes for all the footer links
+- `gtm` data in resource files for all the tenants
+
+### Changed
+- Some AU resource links according to the latest changes in live version of the footer 
+
+
 v2.0.0-beta.10
 ------------------------------
 *August 6, 2019*
