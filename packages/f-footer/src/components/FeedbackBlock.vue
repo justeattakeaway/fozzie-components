@@ -1,12 +1,12 @@
 <template>
-    <div class="c-feedbackBlock" data-gtm-feedback>
+    <div class="c-feedback" data-gtm-feedback>
         <h2 class="c-footer-heading c-footer-heading--shortBelowWide">
             {{ title }}
         </h2>
-        <p class="c-feedbackBlock-text">
+        <p class="c-feedback-text">
             {{ text }}
         </p>
-        <button class="c-feedbackBlock-button">
+        <button class="c-feedback-button">
             {{ buttonText }}
         </button>
     </div>
@@ -33,17 +33,17 @@ export default {
 
 <style lang="scss">
 
-.c-feedbackBlock {
+.c-feedback {
     @include media('<wide') {
         order: 1;
     }
 }
 
-.c-feedbackBlock-text {
+.c-feedback-text {
     margin: 0 0 spacing(x0.5) 0;
 }
 
-.c-feedbackBlock-button {
+.c-feedback-button {
     border: 0;
     background-color: transparent;
     padding: 0;
