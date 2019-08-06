@@ -2,7 +2,12 @@
     <div
         class="c-feedback"
         data-gtm-feedback
-        data-gtm="engagement|footer|click_feedback">
+        data-trak="{
+            event: 'click'
+            category: 'engagement'
+            action: 'footer'
+            label: 'click_feedback'
+        }">
         <h2 class="c-footer-heading c-footer-heading--shortBelowWide">
             {{ title }}
         </h2>

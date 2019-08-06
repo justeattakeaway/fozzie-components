@@ -10,7 +10,12 @@
                 :href="button.url"
                 target="_blank"
                 class="c-buttonList-button"
-                :data-gtm="['engagement|footer|' + button.gtm]">
+                :data-trak="`{
+                    event: 'click'
+                    category: 'engagement'
+                    action: 'footer'
+                    label: '${button.gtm}'
+                }`">
                 {{ button.title }}
             </a>
         </div>

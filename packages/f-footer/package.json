@@ -39,6 +39,9 @@
     "v-click-outside": "2.1.3",
     "vue": "2.6.10"
   },
+  "peerDependencies": {
+    "@justeat/f-trak": "0.6.0"
+  },
   "devDependencies": {
     "@vue/cli-plugin-babel": "3.9.2",
     "@vue/cli-plugin-eslint": "3.9.2",

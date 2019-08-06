@@ -9,8 +9,9 @@ v2.0.0-beta.11
 *August 6, 2019*
 
 ### Added
-- `data-gtm` attributes for all the footer links
+- `data-trak` attributes for all the footer links
 - `gtm` data in resource files for all the tenants
+- `@justeat/f-trak` as a peer dependency
 
 ### Changed
 - Some AU resource links according to the latest changes in live version of the footer 
