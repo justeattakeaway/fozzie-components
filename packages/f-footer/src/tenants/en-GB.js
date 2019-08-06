@@ -109,7 +109,38 @@ export default {
         },
         brands: {
             title: 'Brands',
-            links: []
+            links: [
+                {
+                    url: '/takeaway/brands/kfc',
+                    text: 'KFC',
+                    gtm: 'click_brands_kfc'
+                },
+                {
+                    url: '/takeaway/brands/burger-king',
+                    text: 'Burger King',
+                    gtm: 'click_brands_burger-king'
+                },
+                {
+                    url: '/takeaway/brands/dominos-pizza',
+                    text: 'Dominos Pizza',
+                    gtm: 'click_brands_dominos-pizza'
+                },
+                {
+                    url: '/takeaway/brands/subway',
+                    text: 'Subway',
+                    gtm: 'click_brands_subway'
+                },
+                {
+                    url: '/takeaway/brands/yo-sushi',
+                    text: 'Yo! Suchi',
+                    gtm: 'click_brands_yo-suchi'
+                },
+                {
+                    url: '/takeaway/chains',
+                    text: 'View all brands',
+                    gtm: 'click_brands_view_all'
+                }
+            ]
         },
         aboutUs: {
             title: 'A bit more about us',
@@ -118,11 +149,6 @@ export default {
                     url: 'https://restaurants.just-eat.co.uk/',
                     text: 'Restaurant sign up',
                     gtm: 'click_about_restaurant_singup'
-                },
-                {
-                    url: 'https://couriers.just-eat.co.uk/application',
-                    text: 'Deliver with Just Eat',
-                    gtm: 'click_about_couriers'
                 },
                 {
                     url: '/pricepromise',
@@ -146,7 +172,7 @@ export default {
                 },
                 {
                     url: 'https://www.justeatplc.com/about-us/our-business',
-                    text: 'About us',
+                    text: 'About Just Eat',
                     gtm: 'click_about_about_us'
                 },
                 {

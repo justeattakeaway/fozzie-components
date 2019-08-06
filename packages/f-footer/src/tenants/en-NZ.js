@@ -26,12 +26,12 @@ export default {
                 },
                 {
                     url: '/blog/',
-                    text: 'Menulog blog',
+                    text: 'Menulog Blog',
                     gtm: 'click_service_blog'
                 },
                 {
                     url: '/help/',
-                    text: 'Help centre',
+                    text: 'Help Centre',
                     gtm: 'click_service_help'
                 }
             ]

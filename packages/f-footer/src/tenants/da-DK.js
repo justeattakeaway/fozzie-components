@@ -5,45 +5,35 @@ export default {
             title: 'Kundeservice',
             links: [
                 {
+                    url: '/account/login/',
+                    text: 'Log ind',
+                    gtm: 'click_service_login'
+                },
+                {
+                    url: '/account/registe',
+                    text: 'Opret bruger',
+                    gtm: 'click_service_singup'
+                },
+                {
                     url: '/help',
                     text: 'Hjælp',
                     gtm: 'click_service_help'
                 },
                 {
-                    url: 'https://external-ordering.gavekortet.dk/justeat',
-                    text: 'Gavekort',
-                    gtm: 'click_service_giftcard'
-                },
-                {
-                    url: '/takeaway/prisgaranti',
-                    text: 'Prisgaranti',
-                    gtm: 'click_service_best_price_guarantee'
-                },
-                {
-                    url: '/takeaway/firmaaftale',
-                    text: 'Firmaaftale',
-                    gtm: 'click_service_company_agreement'
+                    url: '/account/',
+                    text: 'Brugerinformation',
+                    gtm: 'click_service_account'
                 },
                 {
                     url: '/blog',
                     text: 'Just Eat Blog',
                     gtm: 'click_service_blog'
-                },
-                {
-                    url: 'http://justeat-premium.dk/',
-                    text: 'Just Eat Premium',
-                    gtm: 'click_service_premium'
                 }
             ]
         },
         cuisines: {
             title: 'Hvad har du lyst til?',
             links: [
-                {
-                    url: '/takeaway',
-                    text: 'Takeaway',
-                    gtm: 'click_cuisine_takeaway'
-                },
                 {
                     url: '/takeaway/italiensk',
                     text: 'Pizza',
@@ -110,13 +100,8 @@ export default {
                     gtm: 'click_location_aalborg'
                 },
                 {
-                    url: '/takeaway/kgs-lyngby',
-                    text: 'Lyngby',
-                    gtm: 'click_location_lyngby'
-                },
-                {
                     url: '/takeaway/alle-byer',
-                    text: 'Alle byer',
+                    text: 'Flere byer',
                     gtm: 'click_location_view_all'
                 }
             ]
@@ -129,45 +114,45 @@ export default {
             title: 'Om os',
             links: [
                 {
-                    url: 'https://restaurants.just-eat.dk/',
-                    text: 'Restaurant påmelding',
-                    gtm: 'click_about_restaurant_singup'
-                },
-                {
                     url: '/about',
                     text: 'Hvem er vi',
                     gtm: 'click_about_about_us'
                 },
                 {
-                    url: 'https://partner.just-eat.dk/',
-                    text: 'Partner centre',
-                    gtm: 'click_about_partner_centre'
-                },
-                {
-                    url: 'http://partnerblog.just-eat.dk/',
-                    text: 'Partnerblog',
-                    gtm: 'click_about_partner_blog'
-                },
-                {
-                    url: '/jobs',
-                    text: 'Arbejd for os',
-                    gtm: 'click_about_work_with_us'
-                },
-                {
-                    url: '/privacy-policy',
-                    text: 'Handelsbetingelser',
+                    url: '/info/privatlivspolitik',
+                    text: 'Fortrolighedspolitik',
                     gtm: 'click_about_privacy_policy'
                 },
                 {
-                    url: '/cookiespolicy',
-                    text: 'Brug af cookies',
+                    url: '/info/vilkar-og-betingelser',
+                    text: 'Vilkår og betingelser',
+                    gtm: 'click_about_tandcs'
+                },
+                {
+                    url: '/info/cookiepolitik',
+                    text: 'Cookiepolitik',
                     gtm: 'click_about_cookie_policy'
+                },
+                {
+                    url: '/takeaway/firmaaftale',
+                    text: 'Få en firmaaftale',
+                    gtm: 'click_about_work_with_us'
+                },
+                {
+                    url: 'https://giftcard-engine.gogift.com/DK/shop/justeatdk#/giftcards',
+                    text: 'Gavekort til Just Eat',
+                    gtm: 'click_about_giftcard'
+                },
+                {
+                    url: '/takeaway/prisgaranti/',
+                    text: 'Prisgaranti',
+                    gtm: 'click_about_best_price_guarantee'
                 }
             ]
         }
     },
     linkButtonList: [],
-    downloadOurApps: 'Download vores app',
+    downloadOurApps: 'Download vores apps',
     appStoreIcons: [
         {
             url: 'https://170720.measurementapi.com/serve?action=click&publisher_id=170720&site_id=109400&my_campaign=website-app-page',

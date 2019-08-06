@@ -190,12 +190,6 @@ export default {
             gtm: 'click_follow_twitter'
         },
         {
-            url: 'https://www.just-eat.es/blog',
-            name: 'rss',
-            alt: 'Blog',
-            gtm: 'click_follow_blog'
-        },
-        {
             url: 'https://www.instagram.com/justeat_es/',
             name: 'instagram',
             alt: 'Instagram',

@@ -5,29 +5,29 @@ export default {
             title: 'Customer service',
             links: [
                 {
-                    url: '/contact',
-                    text: 'Contact us',
-                    gtm: 'click_service_contact_us'
+                    url: '/account/login/',
+                    text: 'Log in',
+                    gtm: 'click_service_login'
                 },
                 {
-                    url: '/faq',
-                    text: 'FAQs',
-                    gtm: 'click_service_faq'
+                    url: '/account/register/',
+                    text: 'Sign up',
+                    gtm: 'click_service_singup'
                 },
                 {
-                    url: '/pricepromise',
-                    text: 'Price Promise',
-                    gtm: 'click_service_price_promise'
+                    url: '/blog',
+                    text: 'Blog',
+                    gtm: 'click_service_blog'
                 },
                 {
-                    url: 'https://restaurants.just-eat.ie/',
-                    text: 'Restaurant sign-up',
-                    gtm: 'click_service_restaurant_singup'
+                    url: '/account/',
+                    text: 'My account',
+                    gtm: 'click_service_account'
                 },
                 {
-                    url: 'https://partner.just-eat.ie/',
-                    text: 'Partner centre',
-                    gtm: 'click_service_partner_centre'
+                    url: '/help/',
+                    text: 'Help',
+                    gtm: 'click_service_help'
                 }
             ]
         },
@@ -58,6 +58,11 @@ export default {
                     url: '/takeaway/nearme/thai',
                     text: 'Order Thai',
                     gtm: 'click_cuisine_thai'
+                },
+                {
+                    url: '/takeaway/nearme/',
+                    text: 'View all cuisines',
+                    gtm: 'click_cuisine_view_all'
                 }
             ]
         },
@@ -88,6 +93,11 @@ export default {
                     url: '/takeaway/waterford',
                     text: 'Waterford',
                     gtm: 'click_location_waterford'
+                },
+                {
+                    url: '/takeaway/',
+                    text: 'View all locations',
+                    gtm: 'click_location_view_all'
                 }
             ]
         },
@@ -104,9 +114,14 @@ export default {
                     gtm: 'click_about_about_us'
                 },
                 {
-                    url: '/takeaway/nearme',
-                    text: 'Browse Takeaways',
-                    gtm: 'click_about_takeaway_near_me'
+                    url: '/pricepromise',
+                    text: 'Price Promise',
+                    gtm: 'click_about_price_promise'
+                },
+                {
+                    url: '/gift-vouchers/',
+                    text: 'Just Eat Giftcards',
+                    gtm: 'click_about_gift_cards'
                 },
                 {
                     url: '/privacy-policy',
@@ -114,19 +129,14 @@ export default {
                     gtm: 'click_about_privacy_policy'
                 },
                 {
-                    url: '/cookiespolicy',
+                    url: '/info/terms-and-conditions',
+                    text: 'Terms & Conditions',
+                    gtm: 'click_about_tandcs'
+                },
+                {
+                    url: '/info/terms-and-conditions',
                     text: 'Cookie Policy',
                     gtm: 'click_about_cookie_policy'
-                },
-                {
-                    url: 'https://www.justeatshop.ie/gift-vouchers',
-                    text: 'Just Eat Gift Cards',
-                    gtm: 'click_about_gift_cards'
-                },
-                {
-                    url: '/blog',
-                    text: 'Just Eat Blog',
-                    gtm: 'click_about_blog'
                 }
             ]
         }
@@ -161,12 +171,7 @@ export default {
         {
             url: 'https://www.twitter.com/JustEatIE',
             name: 'twitter',
-            alt: 'Just Eat on Twitter'
-        },
-        {
-            url: 'https://www.just-eat.ie/blog',
-            name: 'rss',
-            alt: 'Just Eat blog',
+            alt: 'Just Eat on Twitter',
             gtm: 'click_follow_twitter'
         },
         {
