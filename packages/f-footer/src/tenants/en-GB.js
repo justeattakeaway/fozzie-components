@@ -249,5 +249,5 @@ export default {
             alt: 'American Express Safekey'
         }
     ],
-    vatInfo: ''
+    metaLegalField: {}
 };
