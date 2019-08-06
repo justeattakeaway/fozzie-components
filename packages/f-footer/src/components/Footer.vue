@@ -37,15 +37,15 @@
                 </div>
             </div>
         </div>
-        <div class="c-footer-container c-footer-row c-footer-row--noPadBelowWide">
+        <div class="c-footer-container c-footer-row c-footer-row--combined c-footer-row--notEqualTopAndBottomPad c-footer-row--noPadBelowWide">
             <country-selector
                 :current-country-name="copy.currentCountryName"
                 :current-country-key="copy.currentCountryKey"
                 :countries="copy.countries"
                 :change-country-text="copy.changeCurrentCountry" />
-            <legal-block
-                v-if="copy.vatInfo"
-                :text="copy.vatInfo" />
+            <legal-field
+                v-if="metaLegalFieldEnabled"
+                :info="copy.metaLegalField" />
             <icon-list
                 :icons="copy.paymentIcons"
                 class="c-iconList c-iconList--payments" />
@@ -54,23 +54,23 @@
 </template>
 
 <script>
-import LinkList from './LinkList.vue';
+import ButtonList from './ButtonList.vue';
+import CountrySelector from './CountrySelector.vue';
 import FeedbackBlock from './FeedbackBlock.vue';
 import IconList from './IconList.vue';
-import CountrySelector from './CountrySelector.vue';
-import LegalBlock from './LegalBlock.vue';
-import ButtonList from './ButtonList.vue';
+import LegalField from './LegalField.vue';
+import LinkList from './LinkList.vue';
 import tenantConfigs from '../tenants';
 
 export default {
     name: 'VueFooter',
     components: {
+        ButtonList,
         CountrySelector,
         FeedbackBlock,
         IconList,
-        LegalBlock,
-        LinkList,
-        ButtonList
+        LegalField,
+        LinkList
     },
     props: {
         locale: {
@@ -88,6 +88,11 @@ export default {
             copy: { ...localeConfig },
             theme
         };
+    },
+    computed: {
+        metaLegalFieldEnabled () {
+            return Object.keys(this.copy.metaLegalField).length > 0;
+        }
     },
     methods: {
         getLocale () {
@@ -170,6 +175,22 @@ export default {
             flex-basis: 25%;
         }
     }
+}
+
+// this modifier allows children in the row to stay on one line 
+// if they fit together for screens smaller than 1025px
+// standard c-footer-row splits children into separate rows for screens smaller than 1025px
+.c-footer-row--combined {
+    flex-flow: row wrap;
+
+    @include media('>=wide') {
+        flex-flow: row nowrap;
+    }
+}
+
+.c-footer-row--notEqualTopAndBottomPad {
+    padding-top: 20px;
+    padding-bottom: 40px;
 }
 
 .c-footer-row--noPadBelowWide {

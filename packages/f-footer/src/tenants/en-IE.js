@@ -225,5 +225,5 @@ export default {
             alt: 'Visa Verified'
         }
     ],
-    vatInfo: ''
+    metaLegalField: {}
 };
