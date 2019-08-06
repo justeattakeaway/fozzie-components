@@ -177,7 +177,7 @@ export default {
     }
 }
 
-// this modifier allows children in the row to stay on one line 
+// this modifier allows children in the row to stay on one line
 // if they fit together for screens smaller than 1025px
 // standard c-footer-row splits children into separate rows for screens smaller than 1025px
 .c-footer-row--combined {

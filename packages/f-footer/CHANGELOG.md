@@ -4,9 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.10
+------------------------------
+*August 6, 2019*
+
+### Added
+- Styles and `data-gtm-feedback` attr for feedback component
+
+
 v2.0.0-beta.9
 ------------------------------
-*August 05, 2019*
+*August 5, 2019*
 
 ### Added
 - `LegalField` component
@@ -18,7 +26,7 @@ v2.0.0-beta.9
 
 v2.0.0-beta.8
 ------------------------------
-*August 01, 2019*
+*August 1, 2019*
 
 ### Added
 - `ButtonList` component
@@ -33,7 +41,7 @@ v2.0.0-beta.8
 
 v2.0.0-beta.7
 ------------------------------
-*August 01, 2019*
+*August 1, 2019*
 
 ### Added
 - `CountrySelector` component logic and styles
