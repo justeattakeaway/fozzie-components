@@ -1,5 +1,7 @@
 <template>
-    <div class="c-feedback" data-gtm-feedback>
+    <div
+        class="c-feedback"
+        data-gtm-feedback>
         <h2 class="c-footer-heading c-footer-heading--shortBelowWide">
             {{ title }}
         </h2>
