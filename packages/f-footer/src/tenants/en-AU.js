@@ -6,27 +6,33 @@ export default {
             links: [
                 {
                     url: '/content/contact-us/',
-                    text: 'Contact us'
+                    text: 'Contact us',
+                    gtm: 'click_service_contact_us'
                 },
                 {
                     url: '/account/login/',
-                    text: 'Log in'
+                    text: 'Log in',
+                    gtm: 'click_service_login'
                 },
                 {
                     url: '/account/register/',
-                    text: 'Sign up'
+                    text: 'Sign up',
+                    gtm: 'click_service_singup'
                 },
                 {
                     url: '/account/info/',
-                    text: 'My account'
+                    text: 'My account',
+                    gtm: 'click_service_account'
                 },
                 {
                     url: '/blog/',
-                    text: 'Menulog blog'
+                    text: 'Menulog blog',
+                    gtm: 'click_service_blog'
                 },
                 {
                     url: '/help/',
-                    text: 'Help centre'
+                    text: 'Help centre',
+                    gtm: 'click_service_help'
                 }
             ]
         },
@@ -35,43 +41,53 @@ export default {
             links: [
                 {
                     url: '/takeaway/nearme/burgers',
-                    text: 'Burgers Delivery'
+                    text: 'Burgers Delivery',
+                    gtm: 'click_cuisine_burgers'
                 },
                 {
                     url: '/takeaway/nearme/chinese',
-                    text: 'Chinese Delivery'
+                    text: 'Chinese Delivery',
+                    gtm: 'click_cuisine_chinese'
                 },
                 {
                     url: '/takeaway/nearme/indian',
-                    text: 'Indian Delivery'
+                    text: 'Indian Delivery',
+                    gtm: 'click_cuisine_indian'
                 },
                 {
                     url: '/takeaway/nearme/italian',
-                    text: 'Italian Delivery'
+                    text: 'Italian Delivery',
+                    gtm: 'click_cuisine_italian'
                 },
                 {
                     url: '/takeaway/nearme/japanese',
-                    text: 'Japanese Delivery'
+                    text: 'Japanese Delivery',
+                    gtm: 'click_cuisine_japanese'
                 },
                 {
                     url: '/takeaway/nearme/korean',
-                    text: 'Korean Delivery'
+                    text: 'Korean Delivery',
+                    gtm: 'click_cuisine_korean'
                 },
                 {
                     url: '/takeaway/nearme/pizza',
-                    text: 'Pizza Delivery'
+                    text: 'Pizza Delivery',
+                    gtm: 'click_cuisine_pizza'
                 },
                 {
                     url: '/takeaway/nearme/thai',
-                    text: 'Thai Delivery'
+                    text: 'Thai Delivery',
+                    gtm: 'click_cuisine_thai'
                 },
                 {
                     url: '/takeaway/nearme/vietnamese',
-                    text: 'Vietnamese Delivery'
+                    text: 'Vietnamese Delivery',
+                    gtm: 'click_cuisine_vietnamese'
                 },
                 {
                     url: '/takeaway/nearme/',
-                    text: 'View all cuisines'
+                    text: 'Browse more cuisines',
+                    gtm: 'click_cuisine_view_all'
                 }
             ]
         },
@@ -80,43 +96,53 @@ export default {
             links: [
                 {
                     url: '/takeaway/sydney-city-and-inner-south-nsw',
-                    text: 'Sydney food delivery'
+                    text: 'Sydney food delivery',
+                    gtm: 'click_location_sydney'
                 },
                 {
                     url: '/takeaway/melbourne-city-vic',
-                    text: 'Melbourne food delivery'
+                    text: 'Melbourne food delivery',
+                    gtm: 'click_location_melbourne'
                 },
                 {
                     url: '/takeaway/perth-city-wa',
-                    text: 'Perth food delivery'
+                    text: 'Perth food delivery',
+                    gtm: 'click_location_perth'
                 },
                 {
                     url: '/takeaway/brisbane-inner-city-qld',
-                    text: 'Brisbane food delivery'
+                    text: 'Brisbane food delivery',
+                    gtm: 'click_location_brisbane'
                 },
                 {
                     url: '/takeaway/canberra-queanbeyan-actt',
-                    text: 'Canberra food delivery'
+                    text: 'Canberra food delivery',
+                    gtm: 'click_location_canberra'
                 },
                 {
                     url: '/takeaway/adelaide-city-sa',
-                    text: 'Adelaide food delivery'
+                    text: 'Adelaide food delivery',
+                    gtm: 'click_location_adelaide'
                 },
                 {
                     url: '/takeaway/hobart-inner-tas',
-                    text: 'Hobart food delivery'
+                    text: 'Hobart food delivery',
+                    gtm: 'click_location_hobart'
                 },
                 {
                     url: '/takeaway/gold-coast-qld',
-                    text: 'Gold Coast food delivery'
+                    text: 'Gold Coast food delivery',
+                    gtm: 'click_location_gold_coast'
                 },
                 {
                     url: '/takeaway/newcastle-and-lake-macquarie-nsw',
-                    text: 'Newcastle food delivery'
+                    text: 'Newcastle food delivery',
+                    gtm: 'click_location_newcastle'
                 },
                 {
                     url: '/takeaway/',
-                    text: 'View all locations'
+                    text: 'Browse more cities',
+                    gtm: 'click_location_view_all'
                 }
             ]
         },
@@ -125,43 +151,53 @@ export default {
             links: [
                 {
                     url: '/content/brands/hungry-jacks/',
-                    text: "Hungry Jack's Delivery"
+                    text: "Hungry Jack's Delivery",
+                    gtm: 'click_brands_hungry-jacks'
                 },
                 {
                     url: '/content/brands/kfc/',
-                    text: 'KFC Delivery'
+                    text: 'KFC Delivery',
+                    gtm: 'click_brands_kfc'
                 },
                 {
                     url: '/content/brands/crust/',
-                    text: 'Crust Delivery'
+                    text: 'Crust Delivery',
+                    gtm: 'click_brands_crust'
                 },
                 {
                     url: '/content/brands/hogs-breath/',
-                    text: "Hog's Breath Delivery"
+                    text: "Hog's Breath Delivery",
+                    gtm: 'click_brands_hogs-breath'
                 },
                 {
                     url: '/content/brands/oporto/',
-                    text: 'Oporto Delivery'
+                    text: 'Oporto Delivery',
+                    gtm: 'click_brands_oporto'
                 },
                 {
                     url: '/content/brands/pizza-hut/',
-                    text: 'Pizza Hut Delivery'
+                    text: 'Pizza Hut Delivery',
+                    gtm: 'click_brands_pizza-hut'
                 },
                 {
                     url: '/content/brands/red-rooster/',
-                    text: 'Red Rooster Delivery'
+                    text: 'Red Rooster Delivery',
+                    gtm: 'click_brands_red-rooster'
                 },
                 {
                     url: '/content/brands/subway/',
-                    text: 'Subway Delivery'
+                    text: 'Subway Delivery',
+                    gtm: 'click_brands_subway'
                 },
                 {
                     url: '/content/brands/zambrero/',
-                    text: 'Zambrero Delivery'
+                    text: 'Zambrero Delivery',
+                    gtm: 'click_brands_zambrero'
                 },
                 {
                     url: '/browse/',
-                    text: 'View all brands'
+                    text: 'Browse more brands',
+                    gtm: 'click_brands_view_all'
                 }
             ]
         },
@@ -169,32 +205,34 @@ export default {
             title: 'A bit more about us',
             links: [
                 {
-                    url: '/content/',
-                    text: 'About Menulog'
+                    url: '/info/about-us',
+                    text: 'About Menulog',
+                    gtm: 'click_about_us'
                 },
                 {
-                    url: '/content/our-price-promise/',
-                    text: 'Price promise'
+                    url: '/info/our-price-promise',
+                    text: 'Our Price Promise',
+                    gtm: 'click_about_price_promise'
                 },
                 {
-                    url: '/content/partner-with-us/',
-                    text: 'Partner with us'
+                    url: '/info/partner-with-us/',
+                    text: 'Partner with Us',
+                    gtm: 'click_about_partner_with_us'
                 },
                 {
-                    url: '/content/partner-with-us/',
-                    text: 'Menulog careers'
+                    url: '/info/corporate-partners',
+                    text: 'Corporate partners',
+                    gtm: 'click_about_corporate_partners'
                 },
                 {
-                    url: '/content/corporate-partners/',
-                    text: 'Corporate partners'
+                    url: '/blog/menulog-news',
+                    text: 'Media Centre',
+                    gtm: 'click_about_menulog_news'
                 },
                 {
-                    url: '/blog/category/press/',
-                    text: 'Media Centre'
-                },
-                {
-                    url: '/privacy-policy/',
-                    text: 'Privacy Policy and Terms of Use'
+                    url: '/info/privacy-policy',
+                    text: 'Privacy Policy and Terms of Use',
+                    gtm: 'click_about_privacy_policy'
                 }
             ]
         }
@@ -205,11 +243,13 @@ export default {
             buttons: [
                 {
                     title: 'List your restaurant',
-                    url: '/content/join-menulog'
+                    url: '/info/join-menulog',
+                    gtm: 'click_about_restaurant_singup'
                 },
                 {
                     title: 'Become a courier',
-                    url: 'https://couriers.menulog.com.au/application/'
+                    url: 'https://couriers.menulog.com.au/application/',
+                    gtm: 'click_about_couriers'
                 }
             ]
         },
@@ -218,11 +258,13 @@ export default {
             buttons: [
                 {
                     title: 'Partner centre',
-                    url: 'https://partner.menulog.com.au/'
+                    url: 'https://partner.menulog.com.au/',
+                    gtm: 'click_about_partner_centre'
                 },
                 {
                     title: 'Courier portal',
-                    url: 'https://couriers.menulog.com.au/'
+                    url: 'https://couriers.menulog.com.au/login',
+                    gtm: 'click_about_courier_portal'
                 }
             ]
         }
@@ -232,12 +274,14 @@ export default {
         {
             url: 'https://itunes.apple.com/au/app/id327982905?mt=8&amp;&amp;referrer=click%3D73fe5f13-4f3b-4048-9a2e-ee96d517a632&amp;&amp;referrer=click%3De31ca6d6-04b6-4e31-820b-d276ee56ffb4',
             name: 'ios',
-            alt: 'Download on the App Store'
+            alt: 'Download on the App Store',
+            gtm: 'click_download_ios_app'
         },
         {
             url: 'https://play.google.com/store/apps/details?id=com.menulog.m',
             name: 'android',
-            alt: 'Get it on Google Play'
+            alt: 'Get it on Google Play',
+            gtm: 'click_download_android_app'
         }
     ],
     feedback: 'Feedback',
@@ -248,17 +292,20 @@ export default {
         {
             url: 'https://www.facebook.com/Menulog.com.au/',
             name: 'facebook',
-            alt: 'Menu Log on Facebook'
+            alt: 'Menu Log on Facebook',
+            gtm: 'click_follow_facebook'
         },
         {
             url: 'https://twitter.com/menulog',
             name: 'twitter',
-            alt: 'Menu Log on Twitter'
+            alt: 'Menu Log on Twitter',
+            gtm: 'click_follow_twitter'
         },
         {
             url: 'https://www.instagram.com/menulog/',
             name: 'instagram',
-            alt: 'Menu Log on Instagram'
+            alt: 'Menu Log on Instagram',
+            gtm: 'click_follow_instagram'
         }
     ],
     currentCountryName: 'Australia',
@@ -267,57 +314,68 @@ export default {
         {
             key: 'br',
             localisedName: 'Brazil',
-            siteUrl: 'https://www.ifood.com.br'
+            siteUrl: 'https://www.ifood.com.br',
+            gtm: 'click_country_br'
         },
         {
             key: 'ca',
             localisedName: 'Canada',
-            siteUrl: 'https://www.just-eat.ca'
+            siteUrl: 'https://www.just-eat.ca',
+            gtm: 'click_country_ca'
         },
         {
             key: 'dk',
             localisedName: 'Denmark',
-            siteUrl: 'https://www.just-eat.dk'
+            siteUrl: 'https://www.just-eat.dk',
+            gtm: 'click_country_dk'
         },
         {
             key: 'fr',
             localisedName: 'France',
-            siteUrl: 'https://www.just-eat.fr/'
+            siteUrl: 'https://www.just-eat.fr/',
+            gtm: 'click_country_fr'
         },
         {
             key: 'ie',
             localisedName: 'Ireland',
-            siteUrl: 'https://www.just-eat.ie'
+            siteUrl: 'https://www.just-eat.ie',
+            gtm: 'click_country_ie'
         },
         {
             key: 'it',
             localisedName: 'Italy',
-            siteUrl: 'https://www.justeat.it'
+            siteUrl: 'https://www.justeat.it',
+            gtm: 'click_country_it'
         },
         {
             key: 'nz',
             localisedName: 'New Zealand',
-            siteUrl: 'https://www.menulog.co.nz'
+            siteUrl: 'https://www.menulog.co.nz',
+            gtm: 'click_country_nz'
         },
         {
             key: 'no',
             localisedName: 'Norway',
-            siteUrl: 'https://www.just-eat.no'
+            siteUrl: 'https://www.just-eat.no',
+            gtm: 'click_country_no'
         },
         {
             key: 'es',
             localisedName: 'Spain',
-            siteUrl: 'https://www.just-eat.es'
+            siteUrl: 'https://www.just-eat.es',
+            gtm: 'click_country_es'
         },
         {
             key: 'ch',
             localisedName: 'Switzerland',
-            siteUrl: 'https://www.eat.ch'
+            siteUrl: 'https://www.eat.ch',
+            gtm: 'click_country_ch'
         },
         {
             key: 'gb',
             localisedName: 'United Kingdom',
-            siteUrl: 'https://www.just-eat.co.uk'
+            siteUrl: 'https://www.just-eat.co.uk',
+            gtm: 'click_country_gb'
         }
     ],
     changeCurrentCountry: 'You are on the AU website, click here to change.',

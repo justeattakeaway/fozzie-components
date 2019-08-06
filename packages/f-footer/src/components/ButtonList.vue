@@ -9,7 +9,13 @@
                 :key="index"
                 :href="button.url"
                 target="_blank"
-                class="c-buttonList-button">
+                class="c-buttonList-button"
+                :data-trak="`{
+                    event: 'click'
+                    category: 'engagement'
+                    action: 'footer'
+                    label: '${button.gtm}'
+                }`">
                 {{ button.title }}
             </a>
         </div>

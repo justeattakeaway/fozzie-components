@@ -30,7 +30,13 @@
                 :key="index">
                 <a
                     :href="link.url"
-                    :rel="link.rel">
+                    :rel="link.rel"
+                    :data-trak="`{
+                        event: 'click'
+                        category: 'engagement'
+                        action: 'footer'
+                        label: '${link.gtm}'
+                    }`">
                     {{ link.text }}
                 </a>
             </li>
