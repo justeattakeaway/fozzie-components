@@ -6,28 +6,34 @@ export default {
             links: [
                 {
                     url: '/contact',
-                    text: 'Contact us'
+                    text: 'Contact us',
+                    gtm: 'click_service_contact_us'
                 },
                 {
                     url: '/account/login',
                     text: 'Log in',
-                    rel: 'nofollow'
+                    rel: 'nofollow',
+                    gtm: 'click_service_login'
                 },
                 {
                     url: '/account/register',
-                    text: 'Sign up'
+                    text: 'Sign up',
+                    gtm: 'click_service_singup'
                 },
                 {
                     url: '/blog',
-                    text: 'Blog'
+                    text: 'Blog',
+                    gtm: 'click_service_blog'
                 },
                 {
                     url: '/apps',
-                    text: 'Mobile apps'
+                    text: 'Mobile apps',
+                    gtm: 'click_service_apps'
                 },
                 {
                     url: '/member/updateuserinfo',
-                    text: 'My account'
+                    text: 'My account',
+                    gtm: 'click_service_account'
                 }
             ]
         },
@@ -36,27 +42,33 @@ export default {
             links: [
                 {
                     url: '/takeaway/nearme/chinese',
-                    text: 'Chinese'
+                    text: 'Chinese',
+                    gtm: 'click_cuisine_chinese'
                 },
                 {
                     url: '/takeaway/nearme/indian',
-                    text: 'Indian'
+                    text: 'Indian',
+                    gtm: 'click_cuisine_indian'
                 },
                 {
                     url: '/takeaway/nearme/italian',
-                    text: 'Italian'
+                    text: 'Italian',
+                    gtm: 'click_cuisine_italian'
                 },
                 {
                     url: '/takeaway/nearme/sushi',
-                    text: 'Sushi'
+                    text: 'Sushi',
+                    gtm: 'click_cuisine_suchi'
                 },
                 {
                     url: '/takeaway/nearme/pizza',
-                    text: 'Pizza'
+                    text: 'Pizza',
+                    gtm: 'click_cuisine_pizza'
                 },
                 {
                     url: '/takeaway/nearme',
-                    text: 'View all cuisines'
+                    text: 'View all cuisines',
+                    gtm: 'click_cuisine_view_all'
                 }
             ]
         },
@@ -65,27 +77,33 @@ export default {
             links: [
                 {
                     url: '/takeaway/birmingham',
-                    text: 'Birmingham'
+                    text: 'Birmingham',
+                    gtm: 'click_location_birmingham'
                 },
                 {
                     url: '/takeaway/cardiff',
-                    text: 'Cardiff'
+                    text: 'Cardiff',
+                    gtm: 'click_location_cardiff'
                 },
                 {
                     url: '/takeaway/glasgow',
-                    text: 'Glasgow'
+                    text: 'Glasgow',
+                    gtm: 'click_location_glasgow'
                 },
                 {
                     url: '/takeaway/leeds',
-                    text: 'Leeds'
+                    text: 'Leeds',
+                    gtm: 'click_location_leeds'
                 },
                 {
                     url: '/takeaway/manchester',
-                    text: 'Manchester'
+                    text: 'Manchester',
+                    gtm: 'click_location_manchester'
                 },
                 {
                     url: '/takeaway',
-                    text: 'View all locations'
+                    text: 'View all locations',
+                    gtm: 'click_location_view_all'
                 }
             ]
         },
@@ -98,44 +116,54 @@ export default {
             links: [
                 {
                     url: 'https://restaurants.just-eat.co.uk/',
-                    text: 'Restaurant sign up'
+                    text: 'Restaurant sign up',
+                    gtm: 'click_about_restaurant_singup'
                 },
                 {
                     url: 'https://couriers.just-eat.co.uk/application',
-                    text: 'Deliver with Just Eat'
+                    text: 'Deliver with Just Eat',
+                    gtm: 'click_about_couriers'
                 },
                 {
                     url: '/pricepromise',
-                    text: 'Price promise'
+                    text: 'Price promise',
+                    gtm: 'click_about_price_promise'
                 },
                 {
                     url: '/privacy-policy',
-                    text: 'Privacy policy'
+                    text: 'Privacy policy',
+                    gtm: 'click_about_privacy_policy'
                 },
                 {
                     url: '/termsandconditions',
-                    text: 'Terms and Conditions'
+                    text: 'Terms and Conditions',
+                    gtm: 'click_about_tandcs'
                 },
                 {
                     url: '/cookiespolicy',
-                    text: 'Cookie Policy'
+                    text: 'Cookie Policy',
+                    gtm: 'click_about_cookie_policy'
                 },
                 {
                     url: 'https://www.justeatplc.com/about-us/our-business',
-                    text: 'About us'
+                    text: 'About us',
+                    gtm: 'click_about_about_us'
                 },
                 {
                     url: 'https://www.just-eat.com/',
-                    text: 'Company website'
+                    text: 'Company website',
+                    gtm: 'click_about_company'
                 },
                 {
                     url: 'https://careers.just-eat.com/',
-                    text: 'Careers'
+                    text: 'Careers',
+                    gtm: 'click_about_careers'
                 },
                 {
                     url: 'https://www.justeatplc.com/download_file/view/435/1',
                     text: 'Modern Slavery Statement',
-                    target: '_blank'
+                    target: '_blank',
+                    gtm: 'click_about_modern_slavery_statement'
                 }
             ]
         }
@@ -146,12 +174,14 @@ export default {
         {
             url: 'https://app.adjust.com/oc511o_1455tm?utm_medium=internal&campaign=homepage',
             name: 'ios',
-            alt: 'Download on the App Store'
+            alt: 'Download on the App Store',
+            gtm: 'click_download_ios_app'
         },
         {
             url: 'https://app.adjust.com/1455tm?utm_medium=internal&campaign=homepage',
             name: 'android',
-            alt: 'Get it on Google Play'
+            alt: 'Get it on Google Play',
+            gtm: 'click_download_android_app'
         }
     ],
     feedback: 'Feedback',
@@ -162,17 +192,20 @@ export default {
         {
             url: 'https://www.facebook.com/justeat',
             name: 'facebook',
-            alt: 'Just Eat on Facebook'
+            alt: 'Just Eat on Facebook',
+            gtm: 'click_follow_facebook'
         },
         {
             url: 'https://twitter.com/JustEatUK',
             name: 'twitter',
-            alt: 'Just Eat on Twitter'
+            alt: 'Just Eat on Twitter',
+            gtm: 'click_follow_twitter'
         },
         {
             url: 'https://www.youtube.com/user/TVjusteat',
             name: 'youtube',
-            alt: 'Just Eat on YouTube'
+            alt: 'Just Eat on YouTube',
+            gtm: 'click_follow_youtube'
         }
     ],
     currentCountryName: 'United Kingdom',
@@ -181,57 +214,68 @@ export default {
         {
             key: 'au',
             localisedName: 'Australia',
-            siteUrl: 'https://www.menulog.com.au'
+            siteUrl: 'https://www.menulog.com.au',
+            gtm: 'click_country_au'
         },
         {
             key: 'br',
             localisedName: 'Brazil',
-            siteUrl: 'https://www.ifood.com.br'
+            siteUrl: 'https://www.ifood.com.br',
+            gtm: 'click_country_br'
         },
         {
             key: 'ca',
             localisedName: 'Canada',
-            siteUrl: 'https://www.just-eat.ca'
+            siteUrl: 'https://www.just-eat.ca',
+            gtm: 'click_country_ca'
         },
         {
             key: 'dk',
             localisedName: 'Denmark',
-            siteUrl: 'https://www.just-eat.dk'
+            siteUrl: 'https://www.just-eat.dk',
+            gtm: 'click_country_dk'
         },
         {
             key: 'fr',
             localisedName: 'France',
-            siteUrl: 'https://www.just-eat.fr/'
+            siteUrl: 'https://www.just-eat.fr/',
+            gtm: 'click_country_fr'
         },
         {
             key: 'ie',
             localisedName: 'Ireland',
-            siteUrl: 'https://www.just-eat.ie'
+            siteUrl: 'https://www.just-eat.ie',
+            gtm: 'click_country_ie'
         },
         {
             key: 'it',
             localisedName: 'Italy',
-            siteUrl: 'https://www.justeat.it'
+            siteUrl: 'https://www.justeat.it',
+            gtm: 'click_country_it'
         },
         {
             key: 'nz',
             localisedName: 'New Zealand',
-            siteUrl: 'https://www.menulog.co.nz'
+            siteUrl: 'https://www.menulog.co.nz',
+            gtm: 'click_country_nz'
         },
         {
             key: 'no',
             localisedName: 'Norway',
-            siteUrl: 'https://www.just-eat.no'
+            siteUrl: 'https://www.just-eat.no',
+            gtm: 'click_country_no'
         },
         {
             key: 'es',
             localisedName: 'Spain',
-            siteUrl: 'https://www.just-eat.es'
+            siteUrl: 'https://www.just-eat.es',
+            gtm: 'click_country_es'
         },
         {
             key: 'ch',
             localisedName: 'Switzerland',
-            siteUrl: 'https://www.eat.ch'
+            siteUrl: 'https://www.eat.ch',
+            gtm: 'click_country_ch'
         }
     ],
     changeCurrentCountry: 'You are on the UK website, click here to change.',

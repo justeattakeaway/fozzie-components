@@ -13,7 +13,13 @@
                 <a
                     v-if="icon.url"
                     :href="icon.url"
-                    :title="icon.alt">
+                    :title="icon.alt"
+                    :data-trak="`{
+                        event: 'click'
+                        category: 'engagement'
+                        action: 'footer'
+                        label: '${icon.gtm}'
+                    }`">
                     <component
                         :is="iconChoice"
                         v-bind="icon"
