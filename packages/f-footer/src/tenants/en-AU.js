@@ -339,5 +339,5 @@ export default {
             alt: 'PayPal'
         }
     ],
-    vatInfo: ''
+    metaLegalField: {}
 };

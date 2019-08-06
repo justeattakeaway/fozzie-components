@@ -211,5 +211,5 @@ export default {
             alt: 'American Express'
         }
     ],
-    vatInfo: ''
+    metaLegalField: {}
 };

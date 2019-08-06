@@ -234,5 +234,8 @@ export default {
         }
     ],
     changeCurrentCountry: 'Sei sul sito Italiano, licca qui per cambiare stato.',
-    vatInfo: 'Just Eat Italy S.r.l. - P.IVA 07392740960'
+    metaLegalField: {
+        textField: 'Just Eat Italy S.r.l. - P.IVA 07392740960',
+        icon: {}
+    }
 };
