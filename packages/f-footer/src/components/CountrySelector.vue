@@ -170,9 +170,15 @@ export default {
     bottom: 0;
     width: 100%;
     padding: 0;
+    margin-top: 0;
+    margin-left: 0;
     margin-bottom: spacing(x6) + 1;
     background-color: $footer-bgLight;
     box-shadow: 0 2px 28px rgba($grey--darkest, 0.08);
     list-style: none;
+
+    & > li:before {
+        content: none;
+    }
 }
 </style>
