@@ -12,7 +12,7 @@ export default {
                 {
                     url: '/account/register/',
                     text: 'Regístrate',
-                    gtm: 'click_service_singup'
+                    gtm: 'click_service_signup'
                 },
                 {
                     url: '/blog/',
@@ -47,7 +47,7 @@ export default {
                 {
                     url: '/a-domicilio/cerca-de-mi/sushi/',
                     text: 'Sushi a domicilio',
-                    gtm: 'click_cuisine_suchi'
+                    gtm: 'click_cuisine_sushi'
                 },
                 {
                     url: '/a-domicilio/cerca-de-mi/hamburguesas/',
@@ -106,7 +106,7 @@ export default {
                 {
                     url: 'https://restaurantes.just-eat.es/',
                     text: 'Registrarse en el restaurante',
-                    gtm: 'click_about_restaurant_singup'
+                    gtm: 'click_about_restaurant_signup'
                 },
                 {
                     url: '/info/acerca-de-just-eat/',
@@ -188,12 +188,6 @@ export default {
             name: 'twitter',
             alt: 'Twitter',
             gtm: 'click_follow_twitter'
-        },
-        {
-            url: 'https://www.just-eat.es/blog',
-            name: 'rss',
-            alt: 'Blog',
-            gtm: 'click_follow_blog'
         },
         {
             url: 'https://www.instagram.com/justeat_es/',
