@@ -13,7 +13,7 @@ export default {
                 {
                     url: '/account/register',
                     text: 'Registrer',
-                    gtm: 'click_service_singup'
+                    gtm: 'click_service_signup'
                 },
                 {
                     url: '/account',
@@ -38,7 +38,7 @@ export default {
                 {
                     url: '/take-away/sushi',
                     text: 'Sushi',
-                    gtm: 'click_cuisine_suchi'
+                    gtm: 'click_cuisine_sushi'
                 },
                 {
                     url: '/take-away/indisk',
@@ -117,7 +117,7 @@ export default {
                 {
                     url: '/take-away/bedrift-overtidsmat',
                     text: 'Bli med på Just Eat!',
-                    gtm: 'click_about_restaurant_singup'
+                    gtm: 'click_about_restaurant_signup'
                 },
                 {
                     url: 'https://partner.just-eat.no/',

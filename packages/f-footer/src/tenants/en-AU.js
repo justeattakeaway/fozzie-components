@@ -17,7 +17,7 @@ export default {
                 {
                     url: '/account/register/',
                     text: 'Sign up',
-                    gtm: 'click_service_singup'
+                    gtm: 'click_service_signup'
                 },
                 {
                     url: '/account/info/',
@@ -244,7 +244,7 @@ export default {
                 {
                     title: 'List your restaurant',
                     url: '/info/join-menulog',
-                    gtm: 'click_about_restaurant_singup'
+                    gtm: 'click_about_restaurant_signup'
                 },
                 {
                     title: 'Become a courier',

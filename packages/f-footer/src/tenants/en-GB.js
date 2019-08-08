@@ -18,7 +18,7 @@ export default {
                 {
                     url: '/account/register',
                     text: 'Sign up',
-                    gtm: 'click_service_singup'
+                    gtm: 'click_service_signup'
                 },
                 {
                     url: '/blog',
@@ -58,7 +58,7 @@ export default {
                 {
                     url: '/takeaway/nearme/sushi',
                     text: 'Sushi',
-                    gtm: 'click_cuisine_suchi'
+                    gtm: 'click_cuisine_sushi'
                 },
                 {
                     url: '/takeaway/nearme/pizza',
@@ -122,7 +122,7 @@ export default {
                 },
                 {
                     url: '/takeaway/brands/dominos-pizza',
-                    text: 'Dominos Pizza',
+                    text: 'Domino\'s Pizza',
                     gtm: 'click_brands_dominos-pizza'
                 },
                 {
@@ -132,8 +132,8 @@ export default {
                 },
                 {
                     url: '/takeaway/brands/yo-sushi',
-                    text: 'Yo! Suchi',
-                    gtm: 'click_brands_yo-suchi'
+                    text: 'Yo! Sushi',
+                    gtm: 'click_brands_yo-sushi'
                 },
                 {
                     url: '/takeaway/chains',
@@ -148,7 +148,7 @@ export default {
                 {
                     url: 'https://restaurants.just-eat.co.uk/',
                     text: 'Restaurant sign up',
-                    gtm: 'click_about_restaurant_singup'
+                    gtm: 'click_about_restaurant_signup'
                 },
                 {
                     url: '/pricepromise',

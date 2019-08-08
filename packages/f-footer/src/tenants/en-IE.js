@@ -12,7 +12,7 @@ export default {
                 {
                     url: '/account/register/',
                     text: 'Sign up',
-                    gtm: 'click_service_singup'
+                    gtm: 'click_service_signup'
                 },
                 {
                     url: '/blog',

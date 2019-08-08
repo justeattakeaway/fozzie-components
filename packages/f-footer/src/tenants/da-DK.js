@@ -12,7 +12,7 @@ export default {
                 {
                     url: '/account/registe',
                     text: 'Opret bruger',
-                    gtm: 'click_service_singup'
+                    gtm: 'click_service_signup'
                 },
                 {
                     url: '/help',
@@ -42,7 +42,7 @@ export default {
                 {
                     url: '/takeaway/sushi',
                     text: 'Sushi',
-                    gtm: 'click_cuisine_suchi'
+                    gtm: 'click_cuisine_sushi'
                 },
                 {
                     url: '/takeaway/indisk',

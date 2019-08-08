@@ -17,7 +17,7 @@ export default {
                 {
                     url: '/account/register/',
                     text: 'Sign up',
-                    gtm: 'click_service_singup'
+                    gtm: 'click_service_signup'
                 },
                 {
                     url: '/account/info/',
@@ -116,7 +116,7 @@ export default {
                 {
                     url: '/join_takeaway_section',
                     text: 'Restaurant sign up',
-                    gtm: 'click_about_restaurant_singup'
+                    gtm: 'click_about_restaurant_signup'
                 }
             ]
         }

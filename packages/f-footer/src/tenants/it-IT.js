@@ -12,7 +12,7 @@ export default {
                 {
                     url: '/account/register/',
                     text: 'Registrati',
-                    gtm: 'click_service_singup'
+                    gtm: 'click_service_signup'
                 },
                 {
                     url: '/blog/',
@@ -47,7 +47,7 @@ export default {
                 {
                     url: '/domicilio/vicino-a-me/sushi-giapponese/',
                     text: 'Sushi a domicilio',
-                    gtm: 'click_cuisine_suchi'
+                    gtm: 'click_cuisine_sushi'
                 },
                 {
                     url: '/domicilio/vicino-a-me/kebab/',
@@ -110,7 +110,7 @@ export default {
                     gtm: 'click_location_padua'
                 },
                 {
-                    url: '/domicilio/parmaa',
+                    url: '/domicilio/parma',
                     text: 'Parma',
                     gtm: 'click_location_parma'
                 },
