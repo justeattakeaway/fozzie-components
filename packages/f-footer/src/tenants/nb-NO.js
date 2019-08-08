@@ -5,11 +5,6 @@ export default {
             title: 'Kundeservice',
             links: [
                 {
-                    url: '/help',
-                    text: 'Hjelp',
-                    gtm: 'click_service_help'
-                },
-                {
                     url: '/account/login',
                     text: 'Logg inn',
                     rel: 'nofollow',
@@ -17,19 +12,24 @@ export default {
                 },
                 {
                     url: '/account/register',
-                    text: 'Registrer deg',
-                    gtm: 'click_service_singup'
+                    text: 'Registrer',
+                    gtm: 'click_service_signup'
+                },
+                {
+                    url: '/account',
+                    text: 'Kontoinformasjon',
+                    gtm: 'click_service_account'
+                },
+                {
+                    url: '/help',
+                    text: 'Hjelp',
+                    gtm: 'click_service_help'
                 }
             ]
         },
         cuisines: {
             title: 'Hva frister?',
             links: [
-                {
-                    url: '/take-away',
-                    text: 'Take-away',
-                    gtm: 'click_cuisine_take_away'
-                },
                 {
                     url: '/take-away/pizza',
                     text: 'Pizza',
@@ -38,7 +38,7 @@ export default {
                 {
                     url: '/take-away/sushi',
                     text: 'Sushi',
-                    gtm: 'click_cuisine_suchi'
+                    gtm: 'click_cuisine_sushi'
                 },
                 {
                     url: '/take-away/indisk',
@@ -54,11 +54,6 @@ export default {
                     url: '/take-away/kebab',
                     text: 'Kebab',
                     gtm: 'click_cuisine_kebab'
-                },
-                {
-                    url: '/take-away/cuisines',
-                    text: 'Alle kjøkkentyper',
-                    gtm: 'click_cuisine_view_all'
                 }
             ]
         },
@@ -96,9 +91,19 @@ export default {
                     gtm: 'click_location_asker'
                 },
                 {
-                    url: '/take-away/cities',
-                    text: 'Alle byer',
-                    gtm: 'click_location_view_all'
+                    url: '/take-away/Skien/',
+                    text: 'Skien',
+                    gtm: 'click_location_skien'
+                },
+                {
+                    url: '/take-away/Moss/',
+                    text: 'Moss',
+                    gtm: 'click_location_moss'
+                },
+                {
+                    url: '/take-away/Sarpsborg/',
+                    text: 'Sarpsborg',
+                    gtm: 'click_location_sarpsborg'
                 }
             ]
         },
@@ -111,33 +116,33 @@ export default {
             links: [
                 {
                     url: '/take-away/bedrift-overtidsmat',
-                    text: 'Restaurant påmelding',
-                    gtm: 'click_about_restaurant_singup'
-                },
-                {
-                    url: '/about',
-                    text: 'Om oss',
-                    gtm: 'click_about_about_us'
+                    text: 'Bli med på Just Eat!',
+                    gtm: 'click_about_restaurant_signup'
                 },
                 {
                     url: 'https://partner.just-eat.no/',
-                    text: 'Partner centre',
+                    text: 'Partner Center',
                     gtm: 'click_about_partner_centre'
                 },
                 {
-                    url: '/jobs',
-                    text: 'Ledige stillinger',
-                    gtm: 'click_about_careers'
+                    url: '/info/privacy-policy',
+                    text: 'Personvernerklæring',
+                    gtm: 'click_about_privacy_policy'
                 },
                 {
-                    url: '/cookiespolicy',
-                    text: 'Cookies',
+                    url: '/info/cookies-policy',
+                    text: 'Cookie politikk',
                     gtm: 'click_about_cookie_policy'
                 },
                 {
-                    url: '/privacy-policy',
-                    text: 'Handelsvilkår',
-                    gtm: 'click_about_privacy_policy'
+                    url: '/help/',
+                    text: 'Om Just Eat',
+                    gtm: 'click_about_help'
+                },
+                {
+                    url: 'https://giftcard-engine.gogift.com/NO/shop/justeatno/#/giftcards',
+                    text: 'Gavekort til Just Eat',
+                    gtm: 'click_about_giftcards'
                 }
             ]
         }
@@ -168,12 +173,6 @@ export default {
             name: 'facebook',
             alt: 'Facebook',
             gtm: 'click_follow_facebook'
-        },
-        {
-            url: '/blog',
-            name: 'rss',
-            alt: 'Blog',
-            gtm: 'click_follow_blog'
         }
     ],
     currentCountryName: 'Norge',

@@ -12,7 +12,7 @@ export default {
                 {
                     url: '/account/register/',
                     text: 'Registrati',
-                    gtm: 'click_service_singup'
+                    gtm: 'click_service_signup'
                 },
                 {
                     url: '/blog/',
@@ -47,7 +47,7 @@ export default {
                 {
                     url: '/domicilio/vicino-a-me/sushi-giapponese/',
                     text: 'Sushi a domicilio',
-                    gtm: 'click_cuisine_suchi'
+                    gtm: 'click_cuisine_sushi'
                 },
                 {
                     url: '/domicilio/vicino-a-me/kebab/',
@@ -95,6 +95,26 @@ export default {
                     gtm: 'click_location_bologna'
                 },
                 {
+                    url: '/domicilio/ferrara',
+                    text: 'Ferrara',
+                    gtm: 'click_location_ferrara'
+                },
+                {
+                    url: '/domicilio/genova',
+                    text: 'Genova',
+                    gtm: 'click_location_genoa'
+                },
+                {
+                    url: '/domicilio/padova',
+                    text: 'Padova',
+                    gtm: 'click_location_padua'
+                },
+                {
+                    url: '/domicilio/parma',
+                    text: 'Parma',
+                    gtm: 'click_location_parma'
+                },
+                {
                     url: '/domicilio/citta/',
                     text: 'Tutte le città',
                     gtm: 'click_location_view_all'
@@ -110,6 +130,11 @@ export default {
             links: [
                 {
                     url: '/informazioni/privacy-policy/',
+                    text: 'Informativa sulla Privacy',
+                    gtm: 'click_about_privacy_policy'
+                },
+                {
+                    url: '/informazioni/termini-e-condizioni',
                     text: 'Termini e Condizioni',
                     gtm: 'click_about_tandcs'
                 },
@@ -124,14 +149,19 @@ export default {
                     gtm: 'click_about_about_us'
                 },
                 {
-                    url: '/faq/',
+                    url: '/help/',
                     text: 'Domande frequenti',
-                    gtm: 'click_about_faq'
+                    gtm: 'click_about_help'
                 },
                 {
                     url: '/informazioni/miglior-prezzo-garantito/',
                     text: 'Miglior Prezzo Garantito',
                     gtm: 'click_about_best_price_guarantee'
+                },
+                {
+                    url: '/informazioni/suggerisci-un-ristorante',
+                    text: 'Suggerisci un ristorante',
+                    gtm: 'click_about_suggest_a_restaurant'
                 },
                 {
                     url: '/informazioni/lavora-con-noi/',
@@ -144,14 +174,9 @@ export default {
                     gtm: 'click_about_couriers'
                 },
                 {
-                    url: '/informazioni/media-and-press/',
-                    text: 'Area stampa',
-                    gtm: 'click_about_media_and_press'
-                },
-                {
-                    url: '/app/',
-                    text: 'Le nostre App',
-                    gtm: 'click_about_app'
+                    url: 'https://partner.justeat.it/',
+                    text: 'Partner Center',
+                    gtm: 'click_about_partner_centre'
                 }
             ]
         }
