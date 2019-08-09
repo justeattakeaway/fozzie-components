@@ -1,9 +1,13 @@
 {
   "name": "@justeat/f-vue-icons",
   "version": "0.15.1",
-  "main": "dist/f-vue-icons.umd.min.js",
+  "main": "dist/vue-icons.ssr.js",
+  "module": "dist/vue-icons.esm.js",
+  "unpkg": "dist/vue-icons.min.js",
   "files": [
-    "dist"
+    "dist",
+    "src/**/*.vue",
+    "!src/lib-dev.vue"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-vue-icons",
   "contributors": [
@@ -24,22 +28,39 @@
     "fozzie"
   ],
   "scripts": {
-    "prepare": "yarn test && yarn build",
-    "build": "yarn lint && vue-cli-service build --target lib --formats umd-min --name f-vue-icons ./src/index.js",
+    "prepare-cli": "yarn test && yarn build",
+    "build-cli": "yarn lint && vue-cli-service build --target lib --formats umd-min --name f-vue-icons ./src/index.js",
     "lint": "vue-cli-service lint --fix",
-    "test": "vue-cli-service test:unit"
+    "test": "vue-cli-service test:unit",
+    "demo": "vue serve --open ./src/lib-dev.vue",
+
+    "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
+    "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
+    "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
+    "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-icons": "1.29.0",
-    "vue": "2.6.10"
+    "@justeat/f-icons": "1.29.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "3.9.2",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "3.9.0",
-    "@vue/test-utils": "1.0.0-beta.29"
+    "@vue/test-utils": "1.0.0-beta.29",
+    "cross-env": "^5.2.0",
+    "minimist": "^1.2.0",
+    "rollup": "^1.12.1",
+    "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-terser": "^4.0.4",
+    "rollup-plugin-vue": "^5.0.0",
+    "rollup-plugin-vue-inline-svg": "^1.0.1",
+    "vue": "^2.6.10",
+    "vue-svg-loader": "^0.12.0",
+    "vue-template-compiler": "^2.6.10"
   }
 }
