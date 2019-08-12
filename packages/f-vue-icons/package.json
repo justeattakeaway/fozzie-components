@@ -33,7 +33,6 @@
     "lint": "vue-cli-service lint --fix",
     "test": "vue-cli-service test:unit",
     "demo": "vue serve --open ./src/lib-dev.vue",
-
     "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
     "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
@@ -55,12 +54,13 @@
     "rollup": "^1.12.1",
     "rollup-plugin-buble": "^0.19.6",
     "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-terser": "^4.0.4",
     "rollup-plugin-vue": "^5.0.0",
-    "rollup-plugin-vue-inline-svg": "^1.0.1",
+    "rollup-pluginutils": "^2.8.1",
+    "svg-to-vue": "^0.4.0",
     "vue": "^2.6.10",
-    "vue-svg-loader": "^0.12.0",
     "vue-template-compiler": "^2.6.10"
   }
 }

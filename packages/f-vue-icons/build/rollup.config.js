@@ -3,9 +3,10 @@ import vue from 'rollup-plugin-vue';
 import buble from 'rollup-plugin-buble';
 import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
-import svg from 'rollup-plugin-vue-inline-svg';
+import svg from './rollup-plugin-vue-svg';
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
+import resolve from 'rollup-plugin-node-resolve';
 
 const argv = minimist(process.argv.slice(2));
 
@@ -17,6 +18,7 @@ const baseConfig = {
         'process.env.NODE_ENV': JSON.stringify('production'),
       }),
       svg(),
+      resolve(),
       commonjs(),
     ],
     vue: {
@@ -26,7 +28,9 @@ const baseConfig = {
       },
     },
     postVue: [
-      buble(),
+      buble({
+        objectAssign: 'Object.assign'
+      }),
     ],
   },
 };
