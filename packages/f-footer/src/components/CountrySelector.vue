@@ -34,12 +34,12 @@
                     <a
                         class="c-countrySelector-link"
                         data-js-test="countrySelector-countryLink"
-                        :data-trak="`{
-                            event: 'click'
-                            category: 'engagement'
-                            action: 'footer'
-                            label: '${country.gtm}'
-                        }`"
+                        :data-trak='`{
+                            "event": "click",
+                            "category": "engagement",
+                            "action": "footer",
+                            "label": "${country.gtm}"
+                        }`'
                         :href="country.siteUrl">
                         <flag-icon :country-code="country.key" />
                         <p>

@@ -18,10 +18,23 @@
 1. Add the module to your project
 
     ```bash
-    yarn install @justeat/f-footer
+    yarn add @justeat/f-footer
     ```
 
 1. Import the component
+
+    You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+
+    ```
+    import VueFooter from '@justeat/f-footer';
+    import '@justeat/f-footer/dist/f-footer.css';
+
+    export default {
+        components: {
+            VueFooter
+        }
+    }
+    ```
 
     - If there is a vue-i18n plugin in the project, footer component can be called without any props:
 
@@ -34,7 +47,7 @@
 
 1. Browser Support
 
-    There is some config included in this module but it is untested.
+    This component extends [@justeat/browserslist-config-fozzie](https://github.com/justeat/browserslist-config-fozzie).
 
 1. Building the Module
 

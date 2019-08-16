@@ -1,13 +1,14 @@
+// .is-invisible class on data-gtm-feedback element is dictated by gtm script for Usabilla
 <template>
     <div
-        class="c-feedback"
+        class="c-feedback is-invisible"
         data-gtm-feedback
-        data-trak="{
-            event: 'click'
-            category: 'engagement'
-            action: 'footer'
-            label: 'click_feedback'
-        }">
+        data-trak='{
+            "event": "click",
+            "category": "engagement",
+            "action": "footer",
+            "label": "click_feedback"
+        }'>
         <h2 class="c-footer-heading c-footer-heading--shortBelowWide">
             {{ title }}
         </h2>
@@ -45,6 +46,10 @@ export default {
     @include media('<wide') {
         order: 1;
     }
+}
+
+.c-feedback.is-invisible {
+    display: none;
 }
 
 .c-feedback-text {
