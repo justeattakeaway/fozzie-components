@@ -31,12 +31,12 @@
                 <a
                     :href="link.url"
                     :rel="link.rel"
-                    :data-trak="`{
-                        event: 'click'
-                        category: 'engagement'
-                        action: 'footer'
-                        label: '${link.gtm}'
-                    }`">
+                    :data-trak='`{
+                        "event": "click",
+                        "category": "engagement",
+                        "action": "footer",
+                        "label": "${link.gtm}"
+                    }`'>
                     {{ link.text }}
                 </a>
             </li>
