@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.1
+------------------------------
+*Aug 19, 2019*
+
+### Changed
+- Replaced vue-cli build with rollup
+
+### Removed
+- Deleted separate index.js files for every component
+
+
 v0.15.1
 ------------------------------
 *July 31, 2019*
