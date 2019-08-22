@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.16.0
+------------------------------
+*August 22, 2019*
+
+### Added
+- `TickIcon` component
+
+
 v0.15.1
 ------------------------------
 *July 31, 2019*
@@ -17,7 +25,7 @@ v0.15.0
 *July 29, 2019*
 
 ### Added
-- `@vue/cli-plugin-babel` to the package dev dependencies, it wasn't picked up from the root monorepo level 
+- `@vue/cli-plugin-babel` to the package dev dependencies, it wasn't picked up from the root monorepo level
 
 ### Changed
 - Small Readme amends
@@ -61,7 +69,7 @@ v0.10.0
 ------------------------------
 *July 12, 2019*
 
-### Added 
+### Added
 - `BaseProviderIcon` and `AppStoreIcon` components
 
 ### Changed
