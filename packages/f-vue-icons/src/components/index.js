@@ -18,6 +18,7 @@ import PadlockIcon from './PadlockIcon';
 import PlusIcon from './PlusIcon';
 import SpicyIcon from './SpicyIcon';
 import StopwatchIcon from './StopwatchIcon';
+import TickIcon from './TickIcon';
 import VegetarianIcon from './VegetarianIcon';
 import WarningIcon from './WarningIcon';
 
@@ -42,6 +43,7 @@ export {
     PlusIcon,
     SpicyIcon,
     StopwatchIcon,
+    TickIcon,
     VegetarianIcon,
     WarningIcon
 };

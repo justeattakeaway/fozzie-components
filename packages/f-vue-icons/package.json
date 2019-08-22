@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "0.15.1",
+  "version": "0.16.0",
   "main": "dist/f-vue-icons.umd.min.js",
   "files": [
     "dist"
