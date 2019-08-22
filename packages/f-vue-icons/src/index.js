@@ -19,6 +19,7 @@ import PadlockIcon from './components/PadlockIcon/PadlockIcon.vue';
 import PlusIcon from './components/PlusIcon/PlusIcon.vue';
 import SpicyIcon from './components/SpicyIcon/SpicyIcon.vue';
 import StopwatchIcon from './components/StopwatchIcon/StopwatchIcon.vue';
+import TickIcon from './components/TickIcon/TickIcon.vue';
 import VegetarianIcon from './components/VegetarianIcon/VegetarianIcon.vue';
 import WarningIcon from './components/WarningIcon/WarningIcon.vue';
 
@@ -53,6 +54,7 @@ export {
     PlusIcon,
     SpicyIcon,
     StopwatchIcon,
+    TickIcon,
     VegetarianIcon,
     WarningIcon
 };
