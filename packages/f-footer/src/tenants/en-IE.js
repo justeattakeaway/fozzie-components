@@ -145,13 +145,13 @@ export default {
     downloadOurApps: 'Download our apps',
     appStoreIcons: [
         {
-            url: 'https://170722.measurementapi.com/serve?action=click&publisher_id=170722&site_id=109406&my_campaign=IEHomepageOngoing&my_publisher=IEHomePage&my_site=just-eat.ie&my_placement=IE4thBox',
+            url: 'https://app.adjust.com/14v0t5?utm_medium=internal&campaign=footer',
             name: 'ios',
             alt: 'Download on the App Store',
             gtm: 'click_download_ios_app'
         },
         {
-            url: 'https://170722.measurementapi.com/serve?action=click&publisher_id=170722&site_id=108388&my_campaign=IEHomepageOngoing&my_publisher=IEHomePage&my_site=just-eat.ie&my_placement=IE4thBox',
+            url: 'https://app.adjust.com/rb8vue?utm_medium=internal&campaign=footer',
             name: 'android',
             alt: 'Get it on Google Play',
             gtm: 'click_download_android_app'

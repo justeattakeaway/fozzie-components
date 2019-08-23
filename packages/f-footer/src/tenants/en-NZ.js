@@ -131,7 +131,7 @@ export default {
             gtm: 'click_download_ios_app'
         },
         {
-            url: 'https://play.google.com/store/apps/details?id=nz.co.menulog.m',
+            url: 'https://play.google.com/store/apps/details?id=nz.co.menulog.m&&referrer=utm_campaign%3DHomepage%252520Banner%26utm_medium%3Dad-analytics%26utm_content%3D1d258717-c68d-439c-b04d-89898e2b73fe%26utm_source%3Dflurry',
             name: 'android',
             alt: 'Get it on Google Play',
             gtm: 'click_download_android_app'

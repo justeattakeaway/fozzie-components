@@ -11,7 +11,7 @@
                 target="_blank"
                 class="c-buttonList-button"
                 :data-trak='`{
-                    "event": "click",
+                    "trakEvent": "click",
                     "category": "engagement",
                     "action": "footer",
                     "label": "${button.gtm}"

@@ -198,13 +198,13 @@ export default {
     downloadOurApps: 'Download our apps',
     appStoreIcons: [
         {
-            url: 'https://app.adjust.com/oc511o_1455tm?utm_medium=internal&campaign=homepage',
+            url: 'https://app.adjust.com/oc511o_1455tm?utm_medium=internal&campaign=footer',
             name: 'ios',
             alt: 'Download on the App Store',
             gtm: 'click_download_ios_app'
         },
         {
-            url: 'https://app.adjust.com/1455tm?utm_medium=internal&campaign=homepage',
+            url: 'https://app.adjust.com/1455tm?utm_medium=internal&campaign=footer',
             name: 'android',
             alt: 'Get it on Google Play',
             gtm: 'click_download_android_app'

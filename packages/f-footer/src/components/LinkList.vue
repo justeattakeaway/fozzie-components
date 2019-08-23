@@ -32,7 +32,7 @@
                     :href="link.url"
                     :rel="link.rel"
                     :data-trak='`{
-                        "event": "click",
+                        "trakEvent": "click",
                         "category": "engagement",
                         "action": "footer",
                         "label": "${link.gtm}"
