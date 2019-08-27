@@ -35,7 +35,7 @@
                         class="c-countrySelector-link"
                         data-js-test="countrySelector-countryLink"
                         :data-trak='`{
-                            "event": "click",
+                            "trakEvent": "click",
                             "category": "engagement",
                             "action": "footer",
                             "label": "${country.gtm}"

@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.14
+------------------------------
+*August 23, 2019*
+
+### Changed
+- Apps links for different tenants according to the latest resources
+- Fixed data-trak attribute to be picked up by f-trak
+
+
 v2.0.0-beta.13
 ------------------------------
 *August 16, 2019*

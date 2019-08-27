@@ -15,7 +15,7 @@
                     :href="icon.url"
                     :title="icon.alt"
                     :data-trak='`{
-                        "event": "click",
+                        "trakEvent": "click",
                         "category": "engagement",
                         "action": "footer",
                         "label": "${icon.gtm}"

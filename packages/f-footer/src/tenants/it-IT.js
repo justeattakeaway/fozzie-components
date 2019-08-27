@@ -185,13 +185,13 @@ export default {
     downloadOurApps: "Scarica l'app",
     appStoreIcons: [
         {
-            url: 'https://itunes.apple.com/it/app/justeat.it-ristoranti-domicilio/id495607955?mt=8',
+            url: 'https://app.adjust.com/6zamp7?utm_medium=internal&campaign=footer',
             name: 'ios',
             alt: 'Scarica su App Store',
             gtm: 'click_download_ios_app'
         },
         {
-            url: 'https://play.google.com/store/apps/details?id=com.justeat.app.it',
+            url: 'https://app.adjust.com/60f9v1?utm_medium=internal&campaign=footer',
             name: 'android',
             alt: 'Disponibile su Google Play',
             gtm: 'click_download_android_app'
