@@ -155,22 +155,16 @@ export default {
     downloadOurApps: 'Download vores apps',
     appStoreIcons: [
         {
-            url: 'https://170720.measurementapi.com/serve?action=click&publisher_id=170720&site_id=109400&my_campaign=website-app-page',
+            url: 'https://app.adjust.com/lgmmz6?utm_medium=internal&campaign=footer',
             name: 'ios',
             alt: 'Hent i App Store',
             gtm: 'click_download_ios_app'
         },
         {
-            url: 'https://170720.measurementapi.com/serve?action=click&publisher_id=170720&site_id=108390&my_campaign=website-app-page',
+            url: 'https://app.adjust.com/5sd9oz?utm_medium=internal&campaign=footer',
             name: 'android',
             alt: 'Hent i Google Play',
             gtm: 'click_download_android_app'
-        },
-        {
-            url: 'https://www.microsoft.com/store/apps/9nblggh4vk8q',
-            name: 'microsoft',
-            alt: 'Hent i Windows Store',
-            gtm: 'click_download_windows_app'
         }
     ],
     feedback: 'Feedback',

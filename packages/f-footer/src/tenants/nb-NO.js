@@ -151,13 +151,13 @@ export default {
     downloadOurApps: 'Last ned appen vår',
     appStoreIcons: [
         {
-            url: 'https://itunes.apple.com/no/app/just-eat.no/id748246908?ls=1&mt=8',
+            url: 'https://app.adjust.com/n9wdqy?utm_medium=internal&campaign=footer',
             name: 'ios',
             alt: 'Hent i App Store',
             gtm: 'click_download_ios_app'
         },
         {
-            url: 'https://play.google.com/store/apps/details?id=com.justeat.app.no',
+            url: 'https://app.adjust.com/xpnrha?utm_medium=internal&campaign=footer',
             name: 'android',
             alt: 'Finn den på Google Play',
             gtm: 'click_download_android_app'

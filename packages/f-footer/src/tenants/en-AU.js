@@ -272,13 +272,13 @@ export default {
     downloadOurApps: 'Download our apps',
     appStoreIcons: [
         {
-            url: 'https://itunes.apple.com/au/app/id327982905?mt=8&amp;&amp;referrer=click%3D73fe5f13-4f3b-4048-9a2e-ee96d517a632&amp;&amp;referrer=click%3De31ca6d6-04b6-4e31-820b-d276ee56ffb4',
+            url: 'https://itunes.apple.com/au/app/id327982905?mt=8&&referrer=click%3D73fe5f13-4f3b-4048-9a2e-ee96d517a632&&referrer=click%3De31ca6d6-04b6-4e31-820b-d276ee56ffb4',
             name: 'ios',
             alt: 'Download on the App Store',
             gtm: 'click_download_ios_app'
         },
         {
-            url: 'https://play.google.com/store/apps/details?id=com.menulog.m',
+            url: 'https://play.google.com/store/apps/details?id=com.menulog.m&&referrer=utm_campaign%3DApp%252520Page%26utm_medium%3Dad-analytics%26utm_content%3Dce815ff1-90fa-44ee-9d12-b9934a22c5d0%26utm_source%3Dflurry',
             name: 'android',
             alt: 'Get it on Google Play',
             gtm: 'click_download_android_app'

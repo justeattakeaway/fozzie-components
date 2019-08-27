@@ -160,13 +160,13 @@ export default {
     downloadOurApps: 'Descárgate la app',
     appStoreIcons: [
         {
-            url: 'https://itunes.apple.com/es/app/just-eat/id615238455?&mt=8',
+            url: 'https://app.adjust.com/gxu4mb?utm_medium=internal&campaign=footer',
             name: 'ios',
             alt: 'Consíguelo en el App Store',
             gtm: 'click_download_ios_app'
         },
         {
-            url: 'https://play.google.com/store/apps/details?id=com.justeat.app.es',
+            url: 'https://app.adjust.com/f78ds2?utm_medium=internal&campaign=footer',
             name: 'android',
             alt: 'Disponible en Google play',
             gtm: 'click_download_android_app'

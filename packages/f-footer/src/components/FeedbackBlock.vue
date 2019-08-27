@@ -4,7 +4,7 @@
         class="c-feedback is-invisible"
         data-gtm-feedback
         data-trak='{
-            "event": "click",
+            "trakEvent": "click",
             "category": "engagement",
             "action": "footer",
             "label": "click_feedback"
