@@ -1,11 +1,19 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "0.20.1",
-  "main": "dist/f-vue-icons.umd.min.js",
+  "version": "1.0.0-beta.0",
+  "main": "dist/f-vue-icons.cjs.js",
+  "cdn": "dist/f-vue-icons.min.js",
+  "unpkg": "dist/f-vue-icons.min.js",
+  "module": "dist/f-vue-icons.es.js",
   "files": [
-    "dist"
+    "dist",
+    "icons"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-vue-icons",
+  "authors": [
+    "egoist <0x142857@gmail.com>",
+    "ashleynolan <nolly00@gmail.com>"
+  ],
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -25,22 +33,32 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --formats umd-min --name f-vue-icons ./src/index.js",
+    "clean": "",
+    "build": "npm run clean && npm run build:icons && npm run build:dist",
+    "build:dist": "bili --format umd,es,cjs,umd-min --js buble --name f-vue-icons",
+    "build:icons": "node build && babel src/components -d icons",
     "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
-    "test": "vue-cli-service test:unit"
+    "test": "vue-cli-service test:unit",
+    "example": "poi --serve --config example/poi.config.js",
+    "build:example": "poi --prod --config example/poi.config.js",
+    "prebuild:example": "npm run build:icons"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-icons": "1.32.0",
-    "vue": "2.6.11"
+    "@justeat/f-icons": "2.0.0-beta.3",
+    "babel-helper-vue-jsx-merge-props": "2.0.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.2.3",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.3.1",
-    "@vue/test-utils": "1.0.2"
+    "@vue/test-utils": "1.0.2",
+    "fs-extra": "^8.1.0",
+    "lodash.kebabcase": "^4.1.1",
+    "marked": "^0.7.0",
+    "pascal-case": "^2.0.1"
   }
 }
