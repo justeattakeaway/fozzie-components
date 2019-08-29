@@ -2223,14 +2223,6 @@
     classnames "2.2.5"
     core-js "3.1.3"
 
-"@justeat/f-icons@2.0.0-beta.3":
-  version "2.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.3.tgz#5609d9fe67f91f348a713019de2235781ec76f6a"
-  integrity sha512-RFIBXhY8db/XUD9JM8JAoDae8pqpRCFI2CLrkiOFwFO3rf3RhgTrX/WaSdFjHZQ/ZSDaVVsTN4Rou1W4YeRILA==
-  dependencies:
-    classnames "2.2.5"
-    core-js "3.1.3"
-
 "@justeat/f-icons@2.0.0-beta.6":
   version "2.0.0-beta.6"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.6.tgz#e3a08a25621332305abe79867a8005695958bce2"
@@ -2243,6 +2235,14 @@
   version "2.0.0-beta.9"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.9.tgz#af5c16c8562fd62d4c456c18f0773f68c796c625"
   integrity sha512-u8OqLUPSL6L7ZOlmPwsSXHGBqf4cydfVdY/FHQ1r72L/vC3ifhIolYvm43Cw6TqgDbzrnbeQqoBO3n9HZiL5LA==
+  dependencies:
+    classnames "2.2.5"
+    core-js "3.1.3"
+
+"@justeat/f-icons@^2.0.0-beta.4":
+  version "2.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.4.tgz#5b68303b6c39f06e31d8626fb47e8e3c33fa24a9"
+  integrity sha512-IjmgyfO+akCTS4ofze/EkO6kkefnQNBLlwMiyq9wRpwKIOc2+NX3mn/TQ1H96NHajWSQiSyhhwic5YHcq86+Pw==
   dependencies:
     classnames "2.2.5"
     core-js "3.1.3"

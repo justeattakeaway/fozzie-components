@@ -12,7 +12,7 @@ export default {
         viewBox: "0 0 640 480"
       },
       "class": "ficon ficon-flag.gb"
-    }, ctx.data]), [h("defs", [h("clippath", {
+    }, ctx.data]), [h("defs", [h("clipPath", {
       attrs: {
         id: "a"
       }
