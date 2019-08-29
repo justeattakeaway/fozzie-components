@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta.1",
   "main": "dist/f-vue-icons.cjs.js",
   "cdn": "dist/f-vue-icons.min.js",
   "unpkg": "dist/f-vue-icons.min.js",
@@ -9,6 +9,7 @@
     "dist",
     "icons"
   ],
+  "sideEffects": false,
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-vue-icons",
   "authors": [
     "egoist <0x142857@gmail.com>",
@@ -32,13 +33,12 @@
     "fozzie"
   ],
   "scripts": {
-    "prepare": "yarn test && yarn build",
     "clean": "",
     "build": "npm run clean && npm run build:icons && npm run build:dist",
     "build:dist": "bili --format umd,es,cjs,umd-min --js buble --name f-vue-icons",
     "build:icons": "node build && babel src/components -d icons",
     "lint": "eslint . --fix",
-    "test": "vue-cli-service test:unit",
+    "test": "",
     "example": "poi --serve --config example/poi.config.js",
     "build:example": "poi --prod --config example/poi.config.js",
     "prebuild:example": "npm run build:icons"
@@ -51,8 +51,6 @@
     "babel-helper-vue-jsx-merge-props": "^2.0.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
     "@vue/cli-plugin-babel": "3.9.2",
     "@vue/cli-plugin-unit-jest": "3.9.0",
     "@vue/test-utils": "1.0.0-beta.29",
