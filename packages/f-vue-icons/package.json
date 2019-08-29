@@ -51,6 +51,8 @@
     "babel-helper-vue-jsx-merge-props": "^2.0.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
     "@vue/cli-plugin-babel": "3.9.2",
     "@vue/cli-plugin-unit-jest": "3.9.0",
     "@vue/test-utils": "1.0.0-beta.29",
