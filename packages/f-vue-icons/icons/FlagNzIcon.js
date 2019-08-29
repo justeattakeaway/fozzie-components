@@ -40,7 +40,7 @@ export default {
         transform: "scale(-1 1) rotate(72)",
         href: "#a"
       }
-    }), h("clippath", {
+    }), h("clipPath", {
       attrs: {
         id: "a"
       }
@@ -48,7 +48,7 @@ export default {
       attrs: {
         d: "M0 0h600v300H0z"
       }
-    })]), h("clippath", {
+    })]), h("clipPath", {
       attrs: {
         id: "b"
       }

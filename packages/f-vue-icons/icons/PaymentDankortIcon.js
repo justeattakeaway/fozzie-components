@@ -12,7 +12,7 @@ export default {
         viewBox: "0 0 43 26"
       },
       "class": "ficon ficon-payment-dankort"
-    }, ctx.data]), [h("defs", [h("lineargradient", {
+    }, ctx.data]), [h("defs", [h("linearGradient", {
       attrs: {
         id: "a",
         x1: "49.988%",
@@ -50,7 +50,7 @@ export default {
         "stop-color": "#9E0B0F",
         offset: "100%"
       }
-    })]), h("lineargradient", {
+    })]), h("linearGradient", {
       attrs: {
         id: "b",
         x1: "5208%",
@@ -88,7 +88,7 @@ export default {
         "stop-color": "#9E0B0F",
         offset: "100%"
       }
-    })]), h("lineargradient", {
+    })]), h("linearGradient", {
       attrs: {
         id: "c",
         x1: "3112%",
