@@ -1,11 +1,19 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "0.16.0",
-  "main": "dist/f-vue-icons.umd.min.js",
+  "version": "1.0.0-beta.0",
+  "main": "dist/f-vue-icons.cjs.js",
+  "cdn": "dist/f-vue-icons.min.js",
+  "unpkg": "dist/f-vue-icons.min.js",
+  "module": "dist/f-vue-icons.es.js",
   "files": [
-    "dist"
+    "dist",
+    "icons"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-vue-icons",
+  "authors": [
+    "egoist <0x142857@gmail.com>",
+    "ashleynolan <nolly00@gmail.com>"
+  ],
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -18,28 +26,49 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "keywords": [
     "fozzie"
   ],
   "scripts": {
     "prepare": "yarn test && yarn build",
-    "build": "yarn lint && vue-cli-service build --target lib --formats umd-min --name f-vue-icons ./src/index.js",
-    "lint": "vue-cli-service lint --fix",
-    "test": "vue-cli-service test:unit"
+    "clean": "",
+    "build": "npm run clean && npm run build:icons && npm run build:dist",
+    "build:dist": "bili --format umd,es,cjs,umd-min --js buble --name f-vue-icons",
+    "build:icons": "node build && babel src/components -d icons",
+    "lint": "eslint . --fix",
+    "test": "vue-cli-service test:unit",
+    "example": "poi --serve --config example/poi.config.js",
+    "build:example": "poi --prod --config example/poi.config.js",
+    "prebuild:example": "npm run build:icons"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-icons": "1.29.0",
-    "vue": "2.6.10"
+    "@justeat/f-icons": "^2.0.0-beta.3",
+    "babel-helper-vue-jsx-merge-props": "^2.0.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
     "@vue/cli-plugin-babel": "3.9.2",
-    "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "3.9.0",
-    "@vue/test-utils": "1.0.0-beta.29"
+    "@vue/test-utils": "1.0.0-beta.29",
+    "fs-extra": "^8.1.0",
+    "lodash.kebabcase": "^4.1.1",
+    "marked": "^0.7.0",
+    "pascal-case": "^2.0.1"
+  },
+  "babel": {
+    "presets": [
+      [
+        "poi/babel",
+        {
+          "jsx": "vue"
+        }
+      ]
+    ]
   }
 }

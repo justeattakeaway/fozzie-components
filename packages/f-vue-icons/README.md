@@ -15,71 +15,66 @@
 
 ---
 
-1. Add the module to your project
+## Install
 
-    ```bash
-    yarn add @justeat/f-vue-icons
-    ```
+Add the module to your project
 
-1. Import Individually at the component level (recommended)
+```bash
+yarn add @justeat/f-vue-icons
+```
 
-    To save on bundle size you can import components individually in the app entry file.
+## Usage
 
-    ```js
-    <template>
-        <info-icon />
-    </template>
+```js
+// Only import what you need!
+import { AlertIcon, PaymentAmexIcon, ... } from '@justeat/f-vue-icons'
+```
+
+Within the context of a Vue app, that will look like:
+
+  ```js
+  <template>
+      <alert-icon />
+      <payment-amex-icon />
+  </template>
 
 
-    <script>
-    import { InfoIcon } from '@justeat/f-vue-icons';
+  <script>
+  import { AlertIcon, PaymentAmexIcon, ... } from '@justeat/f-vue-icons';
 
-    export default {
-        components: {
-            InfoIcon
-        }
-    };
-    </script>
-    ```
+  export default {
+      components: {
+          AlertIcon,
+          PaymentAmexIcon
+      }
+  };
+  </script>
+  ```
 
-1. Import Individually at the app level
+## TODO – setup a page with an example of all the icons somewhere – See all icons and usage here: https://f-vue-icons.netlify.com
 
-    ```js
-    import Vue from 'vue';
-    import { InfoIcon } from '@justeat/f-vue-icons';
 
-    Vue.component('info-icon', InfoIcon);
-    ```
+## Tree shaking
 
-1. Import all at the app level
+By using ES imports like `import { AlertIcon } from '@justeat/f-vue-icons'` with Webpack v4 or Rollup, unused exports in this module will be automatically eliminated.
 
-    Register the components in your app entry file.
+If you can't use a tree-shaking compatible build tool, then you can use the per-file icons from [`icons`](https://unpkg.com/@justeat/f-vue-icons/icons/) directory, e.g. `import AlertIcon from '@justeat/f-vue-icons/icons/AlertIcon'`.
 
-    ```js
-    import Vue from 'vue';
-    import FozzieIcons from '@justeat/f-vue-icons';
 
-    Vue.use(FozzieIcons);
-    ```
+### Browser Support
 
-1. Usage
+The component extends [@justeat/browserslist-config-fozzie](https://github.com/justeat/browserslist-config-fozzie) package for the list of browsers to support.
 
-    You can then reference the components like so
 
-    ```html
-    <info-icon
-        is-blue
-        is-small />
-    ```
+### Building the Module
 
-1. Browser Support
+Run `yarn build` to compile the module.
 
-    The component extends [@justeat/browserslist-config-fozzie](https://github.com/justeat/browserslist-config-fozzie) package for the list of browsers to support
+### Running the Tests
 
-1. Building the Module
+Run `yarn test` to run the tests.
 
-    Run `yarn build` to compile the module.
 
-1. Running the Tests
+## Credits
 
-    Run `yarn test` to run the tests.
+This package was heavily inspired by the excellent [`vue-feather-icons`](https://github.com/egoist/vue-feather-icons) package.
