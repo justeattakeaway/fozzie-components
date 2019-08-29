@@ -4,12 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.0.0-beta.0
+------------------------------
+*August 22, 2019*
+
+### Changed
+- Everything! Component has been modified now to pull in the new `f-icons` package and then build vue components from those files.  This is the first beta commit – still needs testing in packages to check working as expected.
+
+
 Latest (roll into next release)
 ------------------------------
 *June 4, 2020*
 
 ### Changed
-- ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails)
+- ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails).
 
 
 v0.20.1
@@ -17,7 +25,7 @@ v0.20.1
 *June 3, 2020*
 
 ### Fixed
-- Add `.vue` extentions to imports for icons in v0.20.0
+- Add `.vue` extensions to imports for icons in `v0.20.0`.
 
 
 v0.20.0
@@ -25,8 +33,8 @@ v0.20.0
 *June 2, 2020*
 
 ### Added
-- Sort icon
-- Restaurant Icon
+- Sort icon.
+- Restaurant icon.
 
 ### Changed
 - Updating `vue-test-utils` to v1 and `@vue/cli-plugin-unit-test` to v4.3.1.
@@ -40,7 +48,7 @@ v0.19.0
 *May 7, 2020*
 
 ### Added
-- Eyeglass icon
+- Eyeglass icon.
 
 
 v0.18.1
@@ -48,8 +56,8 @@ v0.18.1
 *March 30, 2020*
 
 ### Changed
-- Updated fileMock component name `TestFileStub` to comply with updated linting rules
-- Bumped `vue` dependency as was mismatched with other packages
+- Updated fileMock component name `TestFileStub` to comply with updated linting rules.
+- Bumped `vue` dependency as was mismatched with other packages.
 
 
 v0.18.0
