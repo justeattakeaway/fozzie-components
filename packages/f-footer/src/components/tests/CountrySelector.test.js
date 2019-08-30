@@ -1,5 +1,4 @@
 import { shallowMount } from '@vue/test-utils';
-import { CrossIcon, ChevronIcon } from '@justeat/f-vue-icons';
 import CountrySelector from '../CountrySelector.vue';
 
 describe('CountrySelector', () => {
@@ -61,22 +60,4 @@ describe('CountrySelector', () => {
         const link = wrapper.find('[data-js-test="countrySelector-countryLink"]');
         expect(link.attributes('href')).toBe(siteUrl);
     });
-
-    it('chevron icon should change to cross when clicked', () => {
-        // Arrange
-        const chevronIcon = wrapper.find(ChevronIcon);
-        const crossIcon = wrapper.find(CrossIcon);
-
-        expect(chevronIcon.isVisible()).toBe(true);
-        expect(crossIcon.isVisible()).toBe(false);
-
-        // Act
-        button.trigger('click');
-
-        // Assert
-        expect(chevronIcon.isVisible()).toBe(false);
-        expect(crossIcon.isVisible()).toBe(true);
-    });
 });
-
-

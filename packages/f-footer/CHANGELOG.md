@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.15
+------------------------------
+*August 30, 2019*
+
+### Added
+- `AppStoreIcon`, `BaseProviderIcon` and `FlagIcon` components
+
+### Changed
+- Replace f-vue-icons package with it's demo version
+- Added Readme
+
+
 v2.0.0-beta.14
 ------------------------------
 *August 23, 2019*
