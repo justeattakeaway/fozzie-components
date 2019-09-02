@@ -37,10 +37,8 @@
 </template>
 
 <script>
-import {
-    AppStoreIcon,
-    BaseProviderIcon
-} from '@justeat/f-vue-icons';
+import BaseProviderIcon from './BaseProviderIcon.vue';
+import AppStoreIcon from './AppStoreIcon.vue';
 
 export default {
     components: {
