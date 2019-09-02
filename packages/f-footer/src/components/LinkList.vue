@@ -16,7 +16,7 @@
                 @click="onPanelClick">
                 {{ linkList.title }}
                 <chevron-icon
-                    :is-facing-up="!panelCollapsed" />
+                    :class="[panelCollapsed ? 'c-icon--chevron' : 'c-icon--chevron c-icon--chevron--up']" />
             </button>
         </h2>
 

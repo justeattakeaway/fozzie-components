@@ -36,6 +36,20 @@
     }
     ```
 
+    If you are using Webpack, you can import the component dynamically to separate the footer bundle from the main `bundle.client.js`:
+
+    ```
+    import '@justeat/f-footer/dist/f-footer.css';
+
+    export default {
+        components: {
+            ...
+            VueFooter: () => import(/* webpackChunkName: "vue-footer" */ '@justeat/f-footer')
+        }
+    }
+
+    ```
+
     - If there is a vue-i18n plugin in the project, footer component can be called without any props:
 
     `<vue-footer />`
