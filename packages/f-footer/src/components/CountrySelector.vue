@@ -18,8 +18,10 @@
                 {{ currentCountryName }}
                 <chevron-icon
                     v-show="!showCountryList"
-                    :is-small="true" />
-                <cross-icon v-show="showCountryList" />
+                    class="c-icon--chevron--small" />
+                <cross-icon
+                    v-show="showCountryList"
+                    class="c-icon--cross" />
             </button>
             <ul
                 v-show="showCountryList"
@@ -55,10 +57,10 @@
 <script>
 import {
     ChevronIcon,
-    CrossIcon,
-    FlagIcon
+    CrossIcon
 } from '@justeat/f-vue-icons';
 import vClickOutside from 'v-click-outside';
+import FlagIcon from './FlagIcon.vue';
 
 export default {
     components: {
