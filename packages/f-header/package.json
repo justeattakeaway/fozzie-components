@@ -1,0 +1,53 @@
+{
+  "name": "@justeat/f-header",
+  "description": "Fozzie Header – Globalised Header Component",
+  "version": "v2.0.0-beta.0",
+  "main": "dist/f-header.umd.min.js",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-header",
+  "contributors": [
+    "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:justeat/fozzie-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/justeat/fozzie-components/issues"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "keywords": [
+    "fozzie"
+  ],
+  "scripts": {
+    "prepare": "yarn lint && yarn test && yarn build",
+    "build": "vue-cli-service build --target lib --name f-header ./src/index.js",
+    "demo": "vue serve --open ./src/components/Demo.vue",
+    "lint": "vue-cli-service lint --fix",
+    "test": "vue-cli-service test:unit"
+  },
+  "stylelint": {
+    "extends": "@justeat/stylelint-config-fozzie"
+  },
+  "browserslist": [
+    "extends @justeat/browserslist-config-fozzie"
+  ],
+  "dependencies": {
+
+  },
+  "peerDependencies": {
+    "@justeat/f-trak": "0.6.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "3.9.2",
+    "@vue/cli-plugin-eslint": "3.9.1",
+    "@vue/cli-plugin-unit-jest": "3.9.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "node-sass-magic-importer": "5.3.2"
+  }
+}
