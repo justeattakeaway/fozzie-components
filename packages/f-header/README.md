@@ -1,9 +1,9 @@
 <div align="center">
 <h1>f-header</h1>
 
-<img width="125" alt="Fozzie Bear" src="bear.png" />
+<img width="125" alt="Fozzie Bear" src="../../bear.png" />
 
-<p>Fozzie Header Component – allows any project to install and use a variation of the Just Eat header on their project.</p>
+<p>Global Header Component for Vue.js.</p>
 </div>
 
 ---
@@ -16,25 +16,43 @@
 
 ## Usage
 
-1. The easiest way to use fozzie modules in your Sass setup is to use [Eyeglass](https://www.npmjs.com/package/eyeglass).
-
-If you are using the [fozzie gulp build tasks](https://www.npmjs.com/package/@justeat/gulp-build-fozzie), then Eyeglass is automatically setup ready to use.  If not, you can use it in one of the following ways:
-
-- [Gulp](https://github.com/sass-eyeglass/eyeglass/blob/master/site-src/docs/integrations/gulp.md)
-- [WebPack](https://github.com/sass-eyeglass/eyeglass/issues/153#issuecomment-300895607)
-
-2.  Install the f-header module using NPM or Yarn:
+1.  Install the module using NPM or Yarn:
 
     ```bash
     yarn add @justeat/f-header
     ```
 
-3.  Then within your Sass files, you will need to import this module.
-
-    ```scss
-    @import 'f-header';
+    ```bash
+    npm install @justeat/f-header
     ```
 
-You can then use the `f-header` fozzie header module styling.
+2.  Import the component
+
+    You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+
+    ```
+    import VueHeader from '@justeat/f-header';
+    import '@justeat/f-header/dist/f-header.css';
+
+    export default {
+        components: {
+            VueHeader
+        }
+    }
+    ```
+
+    If you are using Webpack, you can import the component dynamically to separate the header bundle from the main `bundle.client.js`:
+
+    ```
+    import '@justeat/f-header/dist/f-header.css';
+
+    export default {
+        components: {
+            ...
+            VueHeader: () => import(/* webpackChunkName: "vue-header" */ '@justeat/f-header')
+        }
+    }
+
+    ```
 
 ## Documentation to be completed once module is in stable state.
