@@ -2652,18 +2652,18 @@
     "@justeat/f-utils" "0.3.0"
     include-media "1.4.9"
 
-"@justeat/f-icons@2.0.0-beta.9":
-  version "2.0.0-beta.9"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.9.tgz#af5c16c8562fd62d4c456c18f0773f68c796c625"
-  integrity sha512-u8OqLUPSL6L7ZOlmPwsSXHGBqf4cydfVdY/FHQ1r72L/vC3ifhIolYvm43Cw6TqgDbzrnbeQqoBO3n9HZiL5LA==
+"@justeat/f-icons@2.0.0-beta.5":
+  version "2.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.5.tgz#925d84c522f56011e756711ded525b397c1a2423"
+  integrity sha512-MFsK+5tiztC7ej0LgGArx/q7TcfkEuyyVpKMxStSOMBO7fVb69/uQEUvLQlUvdgwCJnDvD3uhoquhEn7kWiLyw==
   dependencies:
     classnames "2.2.5"
     core-js "3.1.3"
 
-"@justeat/f-icons@^2.0.0-beta.4":
-  version "2.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.4.tgz#5b68303b6c39f06e31d8626fb47e8e3c33fa24a9"
-  integrity sha512-IjmgyfO+akCTS4ofze/EkO6kkefnQNBLlwMiyq9wRpwKIOc2+NX3mn/TQ1H96NHajWSQiSyhhwic5YHcq86+Pw==
+"@justeat/f-icons@2.0.0-beta.9":
+  version "2.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.9.tgz#af5c16c8562fd62d4c456c18f0773f68c796c625"
+  integrity sha512-u8OqLUPSL6L7ZOlmPwsSXHGBqf4cydfVdY/FHQ1r72L/vC3ifhIolYvm43Cw6TqgDbzrnbeQqoBO3n9HZiL5LA==
   dependencies:
     classnames "2.2.5"
     core-js "3.1.3"

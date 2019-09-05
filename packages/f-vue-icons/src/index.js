@@ -78,6 +78,8 @@ export { default as FlagNzIcon } from '../icons/FlagNzIcon';
 
 export { default as InfoIcon } from '../icons/InfoIcon';
 
+export { default as JeLogoNoColourIcon } from '../icons/JeLogoNoColourIcon';
+
 export { default as LegendCondensedIcon } from '../icons/LegendCondensedIcon';
 
 export { default as LegendIcon } from '../icons/LegendIcon';
@@ -89,6 +91,8 @@ export { default as LoyaltyStampIcon } from '../icons/LoyaltyStampIcon';
 export { default as MapPinIcon } from '../icons/MapPinIcon';
 
 export { default as MinusIcon } from '../icons/MinusIcon';
+
+export { default as MlLogoIcon } from '../icons/MlLogoIcon';
 
 export { default as OfferIcon } from '../icons/OfferIcon';
 
