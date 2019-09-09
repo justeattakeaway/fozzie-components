@@ -5,7 +5,7 @@
         class="c-logo">
         <component
             :is="iconComponent"
-            :class="[isTransparent ? 'je-icon--transparent' : '', iconClassName]"
+            :class="[iconClassName, isTransparent && iconComponent == 'je-logo' ? 'c-icon-je--transparentBckgrnd' : '']"
             :data-js-test="iconClassName"
             class="c-logo-img" />
     </a>
@@ -41,7 +41,7 @@ export default {
             return `${this.theme}-logo`;
         },
         iconClassName () {
-            return `${this.theme}-icon`;
+            return `c-icon--${this.theme}`;
         },
         linkAltText () {
             return `Go to ${this.companyName} homepage`;
@@ -50,7 +50,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     // link with the logo
     .c-logo {
         display: block;
@@ -105,11 +105,11 @@ export default {
         }
     }
 
-    .je-icon g {
+    .c-icon--je g {
         fill: $header-logo-color;
     }
 
-    .je-icon--transparent g {
+    .c-icon-je--transparentBckgrnd g {
         fill: $header-logo-color--transparent;
     }
 </style>

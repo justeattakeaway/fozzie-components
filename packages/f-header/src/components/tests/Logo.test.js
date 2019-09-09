@@ -24,7 +24,7 @@ describe('Logo', () => {
             companyName: 'MenuLog'
         };
         const wrapper = shallowMount(Logo, { propsData });
-        const logo = wrapper.find('[data-js-test="ml-icon"]');
+        const logo = wrapper.find('[data-js-test="c-icon--ml"]');
 
         // Assert
         expect(logo).toBeDefined();
@@ -38,13 +38,13 @@ describe('Logo', () => {
             companyName: 'Just Eat'
         };
         const wrapper = shallowMount(Logo, { propsData });
-        const logo = wrapper.find('[data-js-test="je-icon"]');
+        const logo = wrapper.find('[data-js-test="c-icon--je"]');
 
         // Assert
         expect(logo).toBeDefined();
     });
 
-    it('should have "je-icon--transparent" class if "isTransparent" property is true', () => {
+    it('should have "c-icon-je--transparentBckgrnd" class if "isTransparent" property is true', () => {
         // Arrange & Act
         const propsData = {
             theme: 'je',
@@ -52,16 +52,16 @@ describe('Logo', () => {
             companyName: 'Just Eat'
         };
         const wrapper = shallowMount(Logo, { propsData });
-        const logo = wrapper.find('[data-js-test="je-icon"]');
+        const logo = wrapper.find('[data-js-test="c-icon--je"]');
 
         // Assert
         // with dynamically rendered components
         // dynamic classes returned as one string in the array
-        // so have to check for 'je-icon--transparent,je-icon' not just 'je-icon--transparen'
-        expect(logo.classes()).toContain('je-icon--transparent,je-icon');
+        // so have to check for 'c-icon--je,c-icon-je--transparentBckgrnd' not just 'c-icon-je--transparentBckgrnd'
+        expect(logo.classes()).toContain('c-icon--je,c-icon-je--transparentBckgrnd');
     });
 
-    it('shouldn\'t have "je-icon--transparent" class if "isTransparent" property is false', () => {
+    it('shouldn\'t have "c-icon-je--transparentBckgrnd" class if "isTransparent" property is false', () => {
         // Arrange & Act
         const propsData = {
             theme: 'je',
@@ -69,12 +69,12 @@ describe('Logo', () => {
             companyName: 'Just Eat'
         };
         const wrapper = shallowMount(Logo, { propsData });
-        const logo = wrapper.find('[data-js-test="je-icon"]');
+        const logo = wrapper.find('[data-js-test="c-icon--je"]');
 
         // Assert
         // with dynamically rendered components
         // dynamic classes returned as one string in the array
-        // so have to check for 'je-icon--transparent,je-icon' not just 'je-icon--transparen'
-        expect(logo.classes()).not.toContain('je-icon--transparent,je-icon');
+        // so have to check for 'c-icon--je,c-icon-je--transparentBckgrnd' not just 'c-icon-je--transparentBckgrnd'
+        expect(logo.classes()).not.toContain('c-icon--je,c-icon-je--transparentBckgrnd');
     });
 });
