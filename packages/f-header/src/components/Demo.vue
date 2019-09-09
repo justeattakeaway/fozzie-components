@@ -7,8 +7,8 @@
             name="viewport"
             content="width=device-width, initial-scale=1">
         <vue-header
-            :is-transparent=true
-            locale="en-AU" />
+            :is-transparent="true"
+            locale="en-GB" />
     </div>
 </template>
 

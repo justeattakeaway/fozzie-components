@@ -2,10 +2,12 @@
     <a
         :aria-label="linkAltText"
         href="/"
-        class="c-logo" >
+        class="c-logo">
         <component
             :is="iconComponent"
-            :class="[iconClassName, 'c-logo-img', {'je-icon--transparent': isTransparent}]" />
+            :class="[isTransparent ? 'je-icon--transparent' : '', iconClassName]"
+            :data-js-test="iconClassName"
+            class="c-logo-img" />
     </a>
 </template>
 

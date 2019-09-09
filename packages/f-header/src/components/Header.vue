@@ -4,7 +4,7 @@
         class="c-header">
         <logo
             :theme="theme"
-            :is-transparent=isTransparent
+            :is-transparent="isTransparent"
             :company-name="copy.companyName" />
     </header>
 </template>
@@ -50,7 +50,6 @@ export default {
             if (!tenantConfigs[locale]) {
                 locale = 'en-GB';
             }
-
             return locale;
         },
         getTheme (locale) {
