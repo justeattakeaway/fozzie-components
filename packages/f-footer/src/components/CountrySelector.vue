@@ -1,49 +1,67 @@
 <template>
-    <div class="c-countrySelectorContainer">
+    <div :class="$style['c-countrySelectorContainer']">
         <div
-            class="c-countrySelector"
+            :class="$style['c-countrySelector']"
             @keyup.esc="hideCountryList">
             <button
                 id="countrySelector-button"
                 v-click-outside="hideCountryList"
-                data-js-test="countrySelector-button"
-                class="c-countrySelector-link c-countrySelector-button"
-                type="button"
                 :aria-expanded="showCountryList ? 'true' : 'false'"
                 :aria-label="changeCountryText"
+                :class="[
+                    $style['c-countrySelector-link'],
+                    $style['c-countrySelector-button']
+                ]"
+                data-js-test="countrySelector-button"
+                type="button"
                 aria-controls="countrySelector-countries"
                 @click="toggleCountryList">
                 <flag-icon
-                    :country-code="currentCountryKey" />
+                    :country-code="currentCountryKey"
+                    :class="[
+                        $style['c-countrySelector-flag'],
+                        $style['c-countrySelector-flag--current']
+                    ]" />
                 {{ currentCountryName }}
+
                 <chevron-icon
                     v-show="!showCountryList"
-                    class="c-icon--chevron--small" />
+                    :class="[
+                        $style['c-icon--chevron--small'],
+                        $style['c-countrySelector-chevron']
+                    ]" />
+
                 <cross-icon
                     v-show="showCountryList"
-                    class="c-icon--cross" />
+                    :class="[
+                        $style['c-icon--cross'],,
+                        $style['c-countrySelector-cross']
+                    ]" />
             </button>
+
             <ul
                 v-show="showCountryList"
                 id="countrySelector-countries"
+                :class="$style['c-countrySelector-list']"
                 data-js-test="countrySelector-list"
-                class="c-countrySelector-list"
                 role="region">
                 <li
-                    v-for="country in countries"
-                    :key="country.key"
+                    v-for="(country, i) in countries"
+                    :key="i + '_Country'"
                     data-js-test="countrySelector-country">
                     <a
-                        class="c-countrySelector-link"
-                        data-js-test="countrySelector-countryLink"
                         :data-trak='`{
                             "trakEvent": "click",
                             "category": "engagement",
                             "action": "footer",
                             "label": "${country.gtm}"
                         }`'
-                        :href="country.siteUrl">
-                        <flag-icon :country-code="country.key" />
+                        :href="country.siteUrl"
+                        :class="$style['c-countrySelector-link']"
+                        data-js-test="countrySelector-countryLink">
+                        <flag-icon
+                            :country-code="country.key"
+                            :class="$style['c-countrySelector-flag']" />
                         <p>
                             {{ country.localisedName }}
                         </p>
@@ -68,36 +86,44 @@ export default {
         CrossIcon,
         FlagIcon
     },
+
     directives: {
         clickOutside: vClickOutside.directive
     },
+
     props: {
         currentCountryName: {
             type: String,
             required: true
         },
+
         currentCountryKey: {
             type: String,
             required: true
         },
+
         countries: {
             type: Array,
             required: true
         },
+
         changeCountryText: {
             type: String,
             default: ''
         }
     },
+
     data () {
         return {
             showCountryList: false
         };
     },
+
     methods: {
         toggleCountryList () {
             this.showCountryList = !this.showCountryList;
         },
+
         hideCountryList () {
             this.showCountryList = false;
         }
@@ -105,28 +131,12 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
+@import '@/assets/scss/icons.scss';
+
 .c-countrySelector {
     width: 190px;
     position: relative;
-
-    svg {
-        height: 16px;
-        width: 24px;
-        margin-right: spacing();
-    }
-
-    .c-icon--chevron--small {
-        height: 6px;
-        width: 14px;
-        margin: 0 0 0 spacing();
-    }
-
-    .c-icon--cross {
-        height: 8px;
-        width: 8px;
-        margin: 0 3px 0 spacing() + 3;
-    }
 }
 
 .c-countrySelector-link {
@@ -145,6 +155,23 @@ export default {
         margin: 0 0 0 spacing();
         display: inline-block;
     }
+}
+
+.c-countrySelector-flag {
+    height: 16px;
+    width: 24px;
+}
+
+.c-countrySelector-flag--current {
+    margin-right: spacing();
+}
+
+.c-countrySelector-chevron {
+    margin: 0 0 0 spacing();
+}
+
+.c-countrySelector-cross {
+    margin: 0 0 0 11px;
 }
 
 .c-countrySelectorContainer {
