@@ -3,8 +3,8 @@
         :data-theme="theme"
         class="c-header">
         <skip-to-main
-            :skip-to-main-content-text="copy.skipToMainContentText"
-            :extra-classes="[isTransparent ? 'c-skipTo--whiteLink' : '']" />
+            :text="copy.skipToMainContentText"
+            :transparent-bg="isTransparent" />
         <logo
             :theme="theme"
             :is-transparent="isTransparent"

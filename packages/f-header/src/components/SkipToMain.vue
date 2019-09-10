@@ -1,22 +1,21 @@
 <template>
-    <div :class="['c-skipTo', extraClasses]">
+    <div :class="['c-skipTo', { 'c-skipTo--whiteLink': transparentBg }]">
         <a
-            class="is-visuallyHidden focusable"
-            href="#skipToMain">{{ skipToMainContentText }}</a>
+            class="is-visuallyHidden is-focusable"
+            href="#skipToMain">{{ text }}</a>
     </div>
 </template>
 
 <script>
 export default {
     props: {
-        skipToMainContentText: {
+        text: {
             type: String,
             required: true
         },
-        extraClasses: {
-            type: Array,
-            required: false,
-            default: () => ({})
+        transparentBg: {
+            type: Boolean,
+            default: false
         }
     }
 
@@ -42,8 +41,8 @@ export default {
         position: absolute;
         width: 1px;
 
-        &.focusable:active,
-        &.focusable:focus {
+        &.is-focusable:active,
+        &.is-focusable:focus {
             clip: auto;
             height: auto;
             overflow: visible;
@@ -58,8 +57,8 @@ export default {
 
 .c-skipTo--whiteLink {
     .is-visuallyHidden {
-        &.focusable:active,
-        &.focusable:focus {
+        &.is-focusable:active,
+        &.is-focusable:focus {
             color: $white;
         }
     }
