@@ -2,6 +2,9 @@
     <header
         :data-theme="theme"
         class="c-header">
+        <skip-to-main
+            :skip-to-main-content-text="copy.skipToMainContentText"
+            :extra-classes="{ 'c-skipTo--whiteLink': isTransparent }" />
         <logo
             :theme="theme"
             :is-transparent="isTransparent"
@@ -11,12 +14,14 @@
 
 <script>
 import Logo from './Logo.vue';
+import SkipToMain from './SkipToMain.vue';
 import tenantConfigs from '../tenants';
 
 export default {
     name: 'VueHeader',
     components: {
-        Logo
+        Logo,
+        SkipToMain
     },
     props: {
         locale: {
