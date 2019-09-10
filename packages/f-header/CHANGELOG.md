@@ -11,6 +11,9 @@ v2.0.0-beta-2
  ### Added
 - SkipToMain component
 
+### Changed
+- Made `is-transparent` property to be not required with default `false` value
+
 
 v2.0.0-beta-1
 ------------------------------
