@@ -2,6 +2,9 @@
     <header
         :data-theme="theme"
         class="c-header">
+        <skip-to-main
+            :text="copy.skipToMainContentText"
+            :transparent-bg="isTransparent" />
         <logo
             :theme="theme"
             :is-transparent="isTransparent"
@@ -12,11 +15,13 @@
 <script>
 import Logo from './Logo.vue';
 import tenantConfigs from '../tenants';
+import SkipToMain from './SkipToMain.vue';
 
 export default {
     name: 'VueHeader',
     components: {
-        Logo
+        Logo,
+        SkipToMain
     },
     props: {
         locale: {
@@ -26,7 +31,8 @@ export default {
         },
         isTransparent: {
             type: Boolean,
-            required: true
+            required: false,
+            default: false
         }
     },
     data () {
