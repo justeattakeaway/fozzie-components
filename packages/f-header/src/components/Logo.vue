@@ -5,9 +5,9 @@
         class="c-logo">
         <component
             :is="iconComponent"
-            :class="[iconClassName, isTransparent && iconComponent == 'je-logo' ? 'c-icon-je--transparentBckgrnd' : '']"
-            :data-js-test="iconClassName"
-            class="c-logo-img" />
+            :class="[iconClassName, isTransparent && iconComponent === 'je-logo' ? 'c-icon-je--transparentBg' : '']"
+            class="c-logo-img"
+            :data-js-test="iconClassName" />
     </a>
 </template>
 
@@ -109,7 +109,7 @@ export default {
         fill: $header-logo-color;
     }
 
-    .c-icon-je--transparentBckgrnd g {
+    .c-icon-je--transparentBg g {
         fill: $header-logo-color--transparent;
     }
 </style>
