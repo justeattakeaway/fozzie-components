@@ -2652,10 +2652,10 @@
     "@justeat/f-utils" "0.3.0"
     include-media "1.4.9"
 
-"@justeat/f-icons@2.0.0-beta.5":
-  version "2.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.5.tgz#925d84c522f56011e756711ded525b397c1a2423"
-  integrity sha512-MFsK+5tiztC7ej0LgGArx/q7TcfkEuyyVpKMxStSOMBO7fVb69/uQEUvLQlUvdgwCJnDvD3uhoquhEn7kWiLyw==
+"@justeat/f-icons@2.0.0-beta.6":
+  version "2.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.6.tgz#e3a08a25621332305abe79867a8005695958bce2"
+  integrity sha512-tDT/WWMGJa0Qy62YD2RCu9JW2JSrusFG9n2vOam6UYwU0GoSAncED3Q68yo3fmckMdCONfwuXuRX0dWcWNSw3w==
   dependencies:
     classnames "2.2.5"
     core-js "3.1.3"

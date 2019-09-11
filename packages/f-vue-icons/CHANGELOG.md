@@ -4,12 +4,36 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest (roll into next release)
+------------------------------
+*June 4, 2020*
+
+### Changed
+- ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails).
+
+
+v1.0.0-beta.4
+------------------------------
+*September 11, 2019*
+
+### Changed
+- Update f-icons version to add profile icon
+
+
+v1.0.0-beta.3
+------------------------------
+*September 5, 2019*
+
+### Changed
+- Update f-icons version to add je transparent logo and menulog logo
+
+
 v1.0.0-beta.2
 ------------------------------
 *August 29, 2019*
 
 ### Fixed
-- Bringing in new vrersion of `f-icons`
+- Bringing in new version of `f-icons`
 
 
 v1.0.0-beta.1
@@ -26,14 +50,6 @@ v1.0.0-beta.0
 
 ### Changed
 - Everything! Component has been modified now to pull in the new `f-icons` package and then build vue components from those files.  This is the first beta commit – still needs testing in packages to check working as expected.
-
-
-Latest (roll into next release)
-------------------------------
-*June 4, 2020*
-
-### Changed
-- ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails).
 
 
 v0.20.1
