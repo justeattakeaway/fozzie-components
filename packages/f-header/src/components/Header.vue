@@ -11,10 +11,11 @@
             :company-name="copy.companyName" />
         <navigation
             :user-info="user"
-            :navLinks="copy.navLinks"
+            :nav-links="copy.navLinks"
             :help="copy.help"
             :account-logout="copy.accountLogout"
-            :account-login="copy.accountLogin" />
+            :account-login="copy.accountLogin"
+            :open-menu-text="copy.openMenuText" />
     </header>
 </template>
 
@@ -51,7 +52,7 @@ export default {
             isAuthenticated: true,
             friendlyName: 'John Doe',
             email: 'john.doe@example.com'
-        }
+        };
 
         return {
             copy: { ...localeConfig },

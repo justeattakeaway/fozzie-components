@@ -8,44 +8,44 @@ export default {
     navLinks: {
         accountInfo: {
             text: 'Account info',
-            url: "/account/info"
+            url: '/account/info'
         },
         orderHistory: {
             text: 'Orders',
-            url: "/order-history"
+            url: '/order-history'
         },
         savedCards: {
             text: 'Your saved cards',
-            url: "/member/savedcards"
+            url: '/member/savedcards'
         },
         addressBook: {
             text: 'Delivery addresses',
-            url: "/account/addressbook"
+            url: '/account/addressbook'
         },
         redeemAGiftcard: {
             text: 'Redeem a gift card',
-            url: "/giftcards/redeem"
+            url: '/giftcards/redeem'
         },
         redeemVoucher: {
             text: 'Redeem a voucher',
-            url: "/member/useraccount"
+            url: '/member/useraccount'
         },
         contactPreferences: {
             text: 'Contact preferences',
-            url: "/account/preferences"
+            url: '/account/preferences'
         }
     },
 
     help: {
         text: 'Help',
-        url: "/help"
+        url: '/help'
     },
     accountLogin: {
         text: 'Log in',
-        url: "/account/login?returnurl="
+        url: '/account/login?returnurl='
     },
     accountLogout: {
         text: 'Log out',
-        url: "/account/logout?returnurl="
+        url: '/account/logout?returnurl='
     }
 };
