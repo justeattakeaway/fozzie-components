@@ -122,6 +122,8 @@ export { default as PlusThinIcon } from '../icons/PlusThinIcon';
 
 export { default as PlusIcon } from '../icons/PlusIcon';
 
+export { default as ProfileIcon } from '../icons/ProfileIcon';
+
 export { default as QuestionmarkIcon } from '../icons/QuestionmarkIcon';
 
 export { default as RaysColouredMidIcon } from '../icons/RaysColouredMidIcon';

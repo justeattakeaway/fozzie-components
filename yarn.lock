@@ -2223,10 +2223,10 @@
     classnames "2.2.5"
     core-js "3.1.3"
 
-"@justeat/f-icons@2.0.0-beta.5":
-  version "2.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.5.tgz#925d84c522f56011e756711ded525b397c1a2423"
-  integrity sha512-MFsK+5tiztC7ej0LgGArx/q7TcfkEuyyVpKMxStSOMBO7fVb69/uQEUvLQlUvdgwCJnDvD3uhoquhEn7kWiLyw==
+"@justeat/f-icons@2.0.0-beta.6":
+  version "2.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.6.tgz#e3a08a25621332305abe79867a8005695958bce2"
+  integrity sha512-tDT/WWMGJa0Qy62YD2RCu9JW2JSrusFG9n2vOam6UYwU0GoSAncED3Q68yo3fmckMdCONfwuXuRX0dWcWNSw3w==
   dependencies:
     classnames "2.2.5"
     core-js "3.1.3"
@@ -2283,14 +2283,6 @@
   dependencies:
     "@justeat/f-icons" "1.32.0"
     vue "2.6.10"
-
-"@justeat/f-vue-icons@1.0.0-beta.4":
-  version "1.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.4.tgz#aef8a22b43f04f3ad0ca287f50ed1d68804c605a"
-  integrity sha512-AOiqwdNj/Gc+WY6TstINRXUy2lt2Ft9Ic/KlA0zyAfLRI8OWFa4tGzfOZijSyVq9m2QcxLBsDvj3SZ/i3vRl8A==
-  dependencies:
-    "@justeat/f-icons" "2.0.0-beta.6"
-    babel-helper-vue-jsx-merge-props "^2.0.3"
 
 "@justeat/f-vue-icons@1.0.0-beta.5":
   version "1.0.0-beta.5"
