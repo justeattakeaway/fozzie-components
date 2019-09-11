@@ -9,19 +9,27 @@
             :theme="theme"
             :is-transparent="isTransparent"
             :company-name="copy.companyName" />
+        <navigation
+            :user-info="user"
+            :navLinks="copy.navLinks"
+            :help="copy.help"
+            :account-logout="copy.accountLogout"
+            :account-login="copy.accountLogin" />
     </header>
 </template>
 
 <script>
 import Logo from './Logo.vue';
-import tenantConfigs from '../tenants';
+import Navigation from './Navigation.vue';
 import SkipToMain from './SkipToMain.vue';
+import tenantConfigs from '../tenants';
 
 export default {
     name: 'VueHeader',
     components: {
         Logo,
-        SkipToMain
+        SkipToMain,
+        Navigation
     },
     props: {
         locale: {
@@ -39,10 +47,16 @@ export default {
         const locale = this.getLocale();
         const localeConfig = tenantConfigs[locale];
         const theme = this.getTheme(locale);
+        const user = {
+            isAuthenticated: true,
+            friendlyName: 'John Doe',
+            email: 'john.doe@example.com'
+        }
 
         return {
             copy: { ...localeConfig },
-            theme
+            theme,
+            user
         };
     },
     methods: {
