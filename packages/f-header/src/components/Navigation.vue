@@ -1,44 +1,77 @@
 <template>
-    <nav  class="c-nav c-nav--global">
+    <nav class="c-nav c-nav--global">
         <div class="c-nav-container">
             <ul class="c-nav-list">
-                <li :class="['c-nav-list-item has-sublist', { 'is-hidden' : !userInfo.isAuthenticated }]" tabindex="0">
+                <li
+                    :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo.isAuthenticated }]"
+                    tabindex="0">
                     <p class="c-nav-list-text">
-                        <span v-if="userInfo.isAuthenticated" class="c-nav-list-text-sub">{{ userInfo.friendlyName }}</span>
+                        <span
+                            v-if="userInfo.isAuthenticated"
+                            class="c-nav-list-text-sub">{{ userInfo.friendlyName }}</span>
                     </p>
 
                     <ul class="c-nav-popoverList">
-                            <li 
-                                class="c-nav-list-item"
-                                v-for="(link, index) in navLinks"
-                                :key="index">
-                                <a 
-                                    class="c-nav-list-link"
-                                    :href="link.url">
-                                    {{ link.text }}
-                                </a>
-                            </li>
+                        <li
+                            v-for="(link, index) in navLinks"
+                            :key="index"
+                            class="c-nav-list-item">
+                            <a
+                                class="c-nav-list-link"
+                                :href="link.url"
+                                :data-trak='`{
+                                    "trakEvent": "click",
+                                    "category": "engagement",
+                                    "action": "header",
+                                    "label": "${link.gtm}"
+                                }`'>
+                                {{ link.text }}
+                            </a>
+                        </li>
 
                         <li class="c-nav-list-item c-nav-list-item--forceLast">
-                            <a 
+                            <a
                                 class="c-nav-list-link"
-                                :href="accountLogout.url">
+                                :href="accountLogout.url"
+                                :data-trak='`{
+                                    "trakEvent": "click",
+                                    "category": "engagement",
+                                    "action": "header",
+                                    "label": "${accountLogout.gtm}"
+                                }`'>
                                 {{ accountLogout.text }}
                             </a>
                         </li>
                     </ul>
                 </li>
 
-                <li 
+                <li
                     v-if="!userInfo.isAuthenticated"
-                    class="c-nav-list-item" >
-                    <a :href="accountLogin.url" rel="nofollow" class="c-nav-list-link">
+                    class="c-nav-list-item">
+                    <a
+                        :href="accountLogin.url"
+                        rel="nofollow"
+                        class="c-nav-list-link"
+                        :data-trak='`{
+                            "trakEvent": "click",
+                            "category": "engagement",
+                            "action": "header",
+                            "label": "${accountLogin.gtm}"
+                        }`'>
                         {{ accountLogin.text }}
                     </a>
                 </li>
 
                 <li class="c-nav-list-item c-nav-list-item--support">
-                    <a :href="help.url" class="c-nav-list-link">
+                    <a
+                        :href="help.url"
+                        class="c-nav-list-link"
+                        :data-trak='`{
+                            "trakEvent": "click",
+                            "category": "engagement",
+                            "action": "header",
+                            "label": "${help.gtm}"
+                        }`'>
                         {{ help.text }}
                     </a>
                 </li>
@@ -48,30 +81,30 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            userInfo: {
-                type: Object,
-                required: false
-            },
-            accountLogin: {
-                type: Object,
-                required: false
-            },
-            accountLogout: {
-                type: Object,
-                required: false
-            },
-            navLinks: {
-                type: Object,
-                required: true
-            },
-            help: {
-                type: Object,
-                required: false
-            }
+export default {
+    props: {
+        userInfo: {
+            type: Object,
+            required: false
+        },
+        accountLogin: {
+            type: Object,
+            required: false
+        },
+        accountLogout: {
+            type: Object,
+            required: false
+        },
+        navLinks: {
+            type: Object,
+            required: true
+        },
+        help: {
+            type: Object,
+            required: false
         }
     }
+};
 </script>
 
 <style lang="scss">
@@ -525,4 +558,3 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
     }
 
 </style>
-
