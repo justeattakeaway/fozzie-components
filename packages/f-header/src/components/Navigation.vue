@@ -40,28 +40,28 @@
                             :key="index"
                             class="c-nav-list-item">
                             <a
-                                class="c-nav-list-link"
                                 :href="link.url"
                                 :data-trak='`{
                                     "trakEvent": "click",
                                     "category": "engagement",
                                     "action": "header",
                                     "label": "${link.gtm}"
-                                }`'>
+                                }`'
+                                class="c-nav-list-link">
                                 {{ link.text }}
                             </a>
                         </li>
 
                         <li class="c-nav-list-item c-nav-list-item--forceLast">
                             <a
-                                class="c-nav-list-link"
                                 :href="accountLogout.url"
                                 :data-trak='`{
                                     "trakEvent": "click",
                                     "category": "engagement",
                                     "action": "header",
                                     "label": "${accountLogout.gtm}"
-                                }`'>
+                                }`'
+                                class="c-nav-list-link">
                                 {{ accountLogout.text }}
                             </a>
                         </li>
@@ -73,14 +73,14 @@
                     class="c-nav-list-item">
                     <a
                         :href="accountLogin.url"
-                        rel="nofollow"
-                        class="c-nav-list-link"
                         :data-trak='`{
                             "trakEvent": "click",
                             "category": "engagement",
                             "action": "header",
                             "label": "${accountLogin.gtm}"
-                        }`'>
+                        }`'
+                        rel="nofollow"
+                        class="c-nav-list-link">
                         {{ accountLogin.text }}
                     </a>
                 </li>
@@ -88,13 +88,13 @@
                 <li class="c-nav-list-item c-nav-list-item--support">
                     <a
                         :href="help.url"
-                        class="c-nav-list-link"
                         :data-trak='`{
                             "trakEvent": "click",
                             "category": "engagement",
                             "action": "header",
                             "label": "${help.gtm}"
-                        }`'>
+                        }`'
+                        class="c-nav-list-link">
                         {{ help.text }}
                     </a>
                 </li>

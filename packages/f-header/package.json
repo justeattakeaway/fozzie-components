@@ -35,12 +35,16 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-vue-icons": "1.0.0-beta.4"
+    "@justeat/f-vue-icons": "1.0.0-beta.3"
   },
   "peerDependencies": {
     "@justeat/f-trak": "0.6.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/plugin-proposal-optional-chaining": "^7.6.0",
+    "@babel/plugin-transform-runtime": "^7.6.0",
     "@vue/cli-plugin-babel": "3.9.2",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "3.9.0",
