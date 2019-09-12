@@ -2,14 +2,48 @@ export default {
     locale: 'en-NZ',
     companyName: 'Menulog',
     openMenuText: 'Open Menu',
-    loginLinkText: 'Log in',
     loginNoScriptLinkText: 'Account',
-    helpLinkText: 'Help',
-    logoutLinkText: 'Log out',
     skipToMainContentText: 'Skip to main content',
-    accountInfo: 'Account info',
-    accountOrderHistory: 'Orders',
-    accountCredit: 'Account credit',
-    paymentMethods: 'Payment methods',
-    deliveryAddresses: 'Delivery addresses'
+
+    navLinks: {
+        accountInfo: {
+            text: 'Account info',
+            url: '/account/info',
+            gtm: 'click_account_your_account'
+        },
+        orderHistory: {
+            text: 'Orders',
+            url: '/order-history',
+            gtm: 'click_account_your_orders'
+        },
+        accountCredit: {
+            text: 'Account credit',
+            url: '/account/credit',
+            gtm: 'click_account_credit'
+        },
+        addressBook: {
+            text: 'Delivery addresses',
+            url: '/account/addressbook',
+            gtm: 'click_account_address_books'
+        }
+    },
+
+    logo: {
+        gtm: 'click_logo'
+    },
+    help: {
+        text: 'Help',
+        url: '/help',
+        gtm: 'click_help'
+    },
+    accountLogin: {
+        text: 'Log in',
+        url: '/account/login?returnurl=',
+        gtm: 'click_login'
+    },
+    accountLogout: {
+        text: 'Log out',
+        url: '/account/logout?returnurl=',
+        gtm: 'click_logout'
+    }
 };

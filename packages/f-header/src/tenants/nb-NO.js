@@ -2,14 +2,58 @@ export default {
     locale: 'nb-NO',
     companyName: 'Just Eat',
     openMenuText: 'Open Menu',
-    loginLinkText: 'Logg inn',
     loginNoScriptLinkText: 'Konto',
-    helpLinkText: 'Hjelp',
-    logoutLinkText: 'Logg ut',
     skipToMainContentText: 'Hopp til hovedinnhold',
-    accountInfo: 'Kontoinformasjon',
-    accountOrderHistory: 'Ordre',
-    accountCredit: 'Gavekort saldo',
-    paymentMethods: 'Betalingsmetoder',
-    deliveryAddresses: 'Leveringsadresse'
+
+    navLinks: {
+        accountInfo: {
+            text: 'Kontoinformasjon',
+            url: '/account/info',
+            gtm: 'click_account_your_account'
+        },
+        orderHistory: {
+            text: 'Ordre',
+            url: '/order-history',
+            gtm: 'click_account_your_orders'
+        },
+        accountCredit: {
+            text: 'Gavekort saldo',
+            url: '/account/credit',
+            gtm: 'click_account_credit'
+        },
+        savedCards: {
+            text: 'Betalingsmetoder',
+            url: '/member/savedcards',
+            gtm: 'click_account_saved_cards'
+        },
+        addressBook: {
+            text: 'Leveringsadresse',
+            url: '/account/addressbook',
+            gtm: 'click_account_address_books'
+        },
+        contactPreferences: {
+            text: 'Foretrukne kontaktmetode',
+            url: '/account/contact-preferences/',
+            gtm: 'click_account_contact_preferences'
+        }
+    },
+
+    logo: {
+        gtm: 'click_logo'
+    },
+    help: {
+        text: 'Hjelp',
+        url: '/help',
+        gtm: 'click_help'
+    },
+    accountLogin: {
+        text: 'Logg inn',
+        url: '/account/login?returnurl=',
+        gtm: 'click_login'
+    },
+    accountLogout: {
+        text: 'Logg ut',
+        url: '/account/logout?returnurl=',
+        gtm: 'click_logout'
+    }
 };

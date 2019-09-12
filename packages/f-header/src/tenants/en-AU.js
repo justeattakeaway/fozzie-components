@@ -8,44 +8,42 @@ export default {
     navLinks: {
         accountInfo: {
             text: 'Account info',
-            url: '/account/info'
+            url: '/account/info',
+            gtm: 'click_account_your_account'
         },
         orderHistory: {
             text: 'Orders',
-            url: '/order-history'
+            url: '/order-history',
+            gtm: 'click_account_your_orders'
         },
-        savedCards: {
-            text: 'Your saved cards',
-            url: '/member/savedcards'
+        accountCredit: {
+            text: 'Account credit',
+            url: '/account/credit',
+            gtm: 'click_account_credit'
         },
         addressBook: {
             text: 'Delivery addresses',
-            url: '/account/addressbook'
-        },
-        redeemAGiftcard: {
-            text: 'Redeem a gift card',
-            url: '/giftcards/redeem'
-        },
-        redeemVoucher: {
-            text: 'Redeem a voucher',
-            url: '/member/useraccount'
-        },
-        contactPreferences: {
-            text: 'Contact preferences',
-            url: '/account/preferences'
+            url: '/account/addressbook',
+            gtm: 'click_account_address_books'
         }
     },
 
+    logo: {
+        gtm: 'click_logo'
+    },
     help: {
         text: 'Help',
-        url: '/help'
+        url: '/help',
+        gtm: 'click_help'
     },
     accountLogin: {
         text: 'Log in',
-        url: '/account/login?returnurl='
+        url: '/account/login?returnurl=',
+        gtm: 'click_login'
     },
     accountLogout: {
         text: 'Log out',
-        url: '/account/logout?returnurl='
+        url: '/account/logout?returnurl=',
+        gtm: 'click_logout'
     }
 };
