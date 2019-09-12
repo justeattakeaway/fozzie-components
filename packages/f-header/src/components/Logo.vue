@@ -7,7 +7,7 @@
             "trakEvent": "click",
             "category": "engagement",
             "action": "header",
-            "label": "${logo.gtm}"
+            "label": "${logoGtmLabel}"
         }`'>
         <component
             :is="iconComponent"
@@ -40,6 +40,10 @@ export default {
         companyName: {
             type: String,
             required: true
+        },
+        logoGtmLabel: {
+            type: String,
+            default: ''
         }
     },
     computed: {

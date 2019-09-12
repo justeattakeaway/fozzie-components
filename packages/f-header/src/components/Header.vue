@@ -8,7 +8,8 @@
         <logo
             :theme="theme"
             :is-transparent="isTransparent"
-            :company-name="copy.companyName" />
+            :company-name="copy.companyName"
+            :logo-gtm-label="copy.logo.gtm" />
         <navigation
             :user-info="user"
             :nav-links="copy.navLinks"
