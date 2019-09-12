@@ -41,7 +41,13 @@
                             class="c-nav-list-item">
                             <a
                                 class="c-nav-list-link"
-                                :href="link.url">
+                                :href="link.url"
+                                :data-trak='`{
+                                    "trakEvent": "click",
+                                    "category": "engagement",
+                                    "action": "header",
+                                    "label": "${link.gtm}"
+                                }`'>
                                 {{ link.text }}
                             </a>
                         </li>
@@ -49,7 +55,13 @@
                         <li class="c-nav-list-item c-nav-list-item--forceLast">
                             <a
                                 class="c-nav-list-link"
-                                :href="accountLogout.url">
+                                :href="accountLogout.url"
+                                :data-trak='`{
+                                    "trakEvent": "click",
+                                    "category": "engagement",
+                                    "action": "header",
+                                    "label": "${accountLogout.gtm}"
+                                }`'>
                                 {{ accountLogout.text }}
                             </a>
                         </li>
@@ -62,7 +74,13 @@
                     <a
                         :href="accountLogin.url"
                         rel="nofollow"
-                        class="c-nav-list-link">
+                        class="c-nav-list-link"
+                        :data-trak='`{
+                            "trakEvent": "click",
+                            "category": "engagement",
+                            "action": "header",
+                            "label": "${accountLogin.gtm}"
+                        }`'>
                         {{ accountLogin.text }}
                     </a>
                 </li>
@@ -70,7 +88,13 @@
                 <li class="c-nav-list-item c-nav-list-item--support">
                     <a
                         :href="help.url"
-                        class="c-nav-list-link">
+                        class="c-nav-list-link"
+                        :data-trak='`{
+                            "trakEvent": "click",
+                            "category": "engagement",
+                            "action": "header",
+                            "label": "${help.gtm}"
+                        }`'>
                         {{ help.text }}
                     </a>
                 </li>
@@ -81,6 +105,7 @@
 
 <script>
 import { ProfileIcon } from "@justeat/f-vue-icons";
+
 export default {
     props: {
         userInfo: {
@@ -367,14 +392,6 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
         @include media('>=mid') {
             position: relative;
             cursor: pointer;
-
-            // // display and size icon on sub element
-            // & > .icon {
-            //     background-size: 9px 6px;
-            //     background-position: right center; //fallback
-            //     background-position: right 10px center;
-            //     padding-right: $horizSpacing * 1.5;
-            // }
         }
     }
 
@@ -579,4 +596,3 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
     }
 
 </style>
-

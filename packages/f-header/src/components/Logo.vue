@@ -2,7 +2,13 @@
     <a
         :aria-label="linkAltText"
         href="/"
-        class="c-logo">
+        class="c-logo"
+        :data-trak='`{
+            "trakEvent": "click",
+            "category": "engagement",
+            "action": "header",
+            "label": "${logo.gtm}"
+        }`'>
         <component
             :is="iconComponent"
             :class="[iconClassName, isTransparent && iconComponent === 'je-logo' ? 'c-icon-je--transparentBg' : '']"
