@@ -1,11 +1,34 @@
 <template>
     <nav class="c-nav c-nav--global">
-        <div class="c-nav-container">
+        <button
+            class="c-nav-trigger"
+            type="button"
+            @click="onNavToggle">
+            {{ openMenuText }}
+        </button>
+
+        <input
+            id="nav-trigger"
+            v-model="navIsOpen"
+            type="checkbox"
+            class="c-nav-trigger is-hidden">
+
+        <label
+            :class="['c-nav-toggle', {
+                'is-open': navIsOpen
+            }]"
+            for="nav-trigger">
+            <span class="c-nav-toggle-icon">Open Menu</span>
+        </label>
+
+        <div
+            :class="['c-nav-container', { 'is-visible': navIsOpen }]">
             <ul class="c-nav-list">
                 <li
                     :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo.isAuthenticated }]"
                     tabindex="0">
                     <p class="c-nav-list-text">
+                        <profile-icon class="c-nav-icon c-nav-icon--profile" />
                         <span
                             v-if="userInfo.isAuthenticated"
                             class="c-nav-list-text-sub">{{ userInfo.friendlyName }}</span>
@@ -81,19 +104,21 @@
 </template>
 
 <script>
+import { ProfileIcon } from "@justeat/f-vue-icons";
+
 export default {
     props: {
         userInfo: {
             type: Object,
-            required: false
+            default: () => ({})
         },
         accountLogin: {
             type: Object,
-            required: false
+            default: () => ({})
         },
         accountLogout: {
             type: Object,
-            required: false
+            default: () => ({})
         },
         navLinks: {
             type: Object,
@@ -101,7 +126,24 @@ export default {
         },
         help: {
             type: Object,
-            required: false
+            default: () => ({})
+        },
+        openMenuText: {
+            type: String,
+            default: ''
+        }
+    },
+    components: {
+        ProfileIcon
+    },
+    data () {
+        return {
+            navIsOpen: false
+        };
+    },
+    methods: {
+        onNavToggle () {
+            this.navIsOpen = !this.navIsOpen;
         }
     }
 };
@@ -350,14 +392,6 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
         @include media('>=mid') {
             position: relative;
             cursor: pointer;
-
-            // // display and size icon on sub element
-            // & > .icon {
-            //     background-size: 9px 6px;
-            //     background-position: right center; //fallback
-            //     background-position: right 10px center;
-            //     padding-right: $horizSpacing * 1.5;
-            // }
         }
     }
 
@@ -374,6 +408,10 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
                 }
             }
         }
+    }
+    .c-nav-icon--profile {
+        width: 20px;
+        height: 22px;
     }
 
 // Nav Popover list
