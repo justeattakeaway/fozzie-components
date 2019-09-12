@@ -61,7 +61,7 @@ import IconList from './IconList.vue';
 import LegalField from './LegalField.vue';
 import LinkList from './LinkList.vue';
 import tenantConfigs from '../tenants';
-import '../../../shared.servive';
+import sharedService from '../../../shared.servive';
 
 export default {
     name: 'VueFooter',
@@ -81,9 +81,9 @@ export default {
         }
     },
     data () {
-        const locale = this.getLocale(this.tenantConfigs, this.locale, this.$118n);
+        const locale = sharedService.getLocale(this.tenantConfigs, this.locale, this.$118n);
         const localeConfig = tenantConfigs[locale];
-        const theme = this.getTheme(locale);
+        const theme = sharedService.getTheme(locale);
 
         return {
             copy: { ...localeConfig },
