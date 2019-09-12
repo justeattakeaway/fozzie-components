@@ -24,6 +24,8 @@ logs
 *.log
 .yalc
 yalc.lock
+yarn.lock
+package-lock.json
 
 dist/
 coverage/

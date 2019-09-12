@@ -43,6 +43,7 @@
     "@justeat/f-trak": "0.6.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.6.0",
     "@vue/cli-plugin-babel": "3.9.2",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "3.9.0",
