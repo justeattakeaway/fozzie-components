@@ -18,7 +18,7 @@
                 'is-open': navIsOpen
             }]"
             for="nav-trigger">
-            <span class="c-nav-toggle-icon">Open Menu</span>
+            <span class="c-nav-toggle-icon">{{ openMenuText }}</span>
         </label>
 
         <div
@@ -104,9 +104,12 @@
 </template>
 
 <script>
-import { ProfileIcon } from "@justeat/f-vue-icons";
+import { ProfileIcon } from '@justeat/f-vue-icons';
 
 export default {
+    components: {
+        ProfileIcon
+    },
     props: {
         userInfo: {
             type: Object,
@@ -132,9 +135,6 @@ export default {
             type: String,
             default: ''
         }
-    },
-    components: {
-        ProfileIcon
     },
     data () {
         return {
@@ -356,6 +356,10 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
                 .c-header--transparent & {
                     color: $nav-text-color--transparent;
                 }
+
+                @include theme(ml) {
+                    color: $nav-text-color--ml;
+                }
             }
         }
         .c-nav-list-text-sub {
@@ -375,6 +379,10 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
                 @include media('>=mid') {
                     color: $nav-text-color--hover;
                     text-decoration: underline;
+
+                    @include theme(ml) {
+                        color: $nav-text-color--hover--ml;
+                    }
 
                     .c-header--transparent & {
                         color: $nav-text-color--transparent;
@@ -403,6 +411,11 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
         @include media('>=mid') {
             & path {
                 fill: $nav-icon-color;
+
+                @include theme(ml) {
+                    fill: $nav-icon-color--ml;
+                }
+
                 .c-header--transparent & {
                     fill: $nav-icon-color--transparent;
                 }
@@ -554,6 +567,10 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
             height: $nav-toggleIcon-height;
             background-color: $nav-toggleIcon-color;
             border-radius: $nav-toggleIcon-borderRadius;
+
+            @include theme(ml) {
+                background-color: $nav-toggleIcon-color--ml;
+            }
 
             .c-header--transparent & {
                 background-color: $nav-toggleIcon-color--transparent;

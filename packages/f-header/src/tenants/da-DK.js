@@ -35,7 +35,7 @@ export default {
             text: 'Foretrukne kontaktmetode',
             url: '/account/preferences',
             gtm: 'click_account_contact_preferences'
-        }        
+        }
     },
 
     logo: {
