@@ -37,7 +37,7 @@
                         :href="deliveryEnquiry.url"
                         target="_blank"
                         class="c-nav-list-link">
-                        <delivery-icon class="delivery-icon" />
+                        <delivery-icon class="c-nav-icon c-nav-icon--delivery" />
                         {{ deliveryEnquiry.text }}
                     </a>
                 </li>
@@ -211,8 +211,6 @@ $nav-text-subFont                  : $font-family-base;
 $nav-text-color--narrow            : $grey--dark;
 $nav-icon-color                    : $blue;
 $nav-icon-color--transparent       : $white;
-$nav-icon-width--standard          : 27px;
-$nav-icon-height--standard         : 27px;
 $nav-transition-duration           : 250ms;
 
 $nav-trigger-length                : 56px;
@@ -255,22 +253,6 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
     z-index: zIndex(high);
     transition: opacity $nav-transition-duration ease-in-out,
                 z-index 0s linear;
-}
-
-// Hides icon on mobile devices
-.delivery-icon {
-    display: none;
-}
-
-// Show the delivery icon if desktop
-@include media('>=mid') {
-    .delivery-icon {
-        margin-right: 10px;
-        display: block;
-        height: $nav-icon-height--standard;
-        width: $nav-icon-width--standard;
-        fill: $nav-icon-color--transparent;
-    }
 }
 
 // removes scroll
@@ -477,7 +459,8 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
             }
         }
     }
-    .c-nav-icon--profile {
+    .c-nav-icon--profile,
+    .c-nav-icon--delivery {
         width: 20px;
         height: 22px;
     }

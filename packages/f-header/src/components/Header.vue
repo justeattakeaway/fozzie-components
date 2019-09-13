@@ -18,7 +18,7 @@
             :account-login="copy.accountLogin"
             :open-menu-text="copy.openMenuText"
             :delivery-enquiry="copy.deliveryEnquiry"
-            :locale="'locale'"
+            :locale="locale"
             :is-homepage="isHomepage" />
     </header>
 </template>
