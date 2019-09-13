@@ -25,6 +25,24 @@
             :class="['c-nav-container', { 'is-visible': navIsOpen }]">
             <ul class="c-nav-list">
                 <li
+                    v-if="showDeliveryEnquiry"
+                    class="c-nav-list-item">
+                    <a
+                        :data-trak='`{
+                            "trakEvent": "click",
+                            "category": "engagement",
+                            "action": "header",
+                            "label": "${deliveryEnquiry.gtm}"
+                        }`'
+                        :href="deliveryEnquiry.url"
+                        target="_blank"
+                        class="c-nav-list-link">
+                        <delivery-icon class="c-nav-icon c-nav-icon--delivery" />
+                        {{ deliveryEnquiry.text }}
+                    </a>
+                </li>
+
+                <li
                     :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo.isAuthenticated }]"
                     tabindex="0">
                     <p class="c-nav-list-text">
@@ -104,11 +122,13 @@
 </template>
 
 <script>
-import { ProfileIcon } from '@justeat/f-vue-icons';
+import { ProfileIcon, DeliveryIcon } from '@justeat/f-vue-icons';
+
 
 export default {
     components: {
-        ProfileIcon
+        ProfileIcon,
+        DeliveryIcon
     },
     props: {
         userInfo: {
@@ -134,6 +154,14 @@ export default {
         openMenuText: {
             type: String,
             default: ''
+        },
+        deliveryEnquiry: {
+            type: Object,
+            default: () => ({})
+        },
+        showDeliveryEnquiry: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
@@ -422,8 +450,12 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
             }
         }
     }
-    .c-nav-icon--profile {
+    .c-nav-icon--profile{
         width: 20px;
+        height: 22px;
+    }
+    .c-nav-icon--delivery {
+        width: 27px;
         height: 22px;
     }
 
