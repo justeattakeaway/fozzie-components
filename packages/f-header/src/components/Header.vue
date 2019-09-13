@@ -48,7 +48,7 @@ export default {
         },
         showDeliveryEnquiry: {
             type: Boolean,
-            default: true
+            default: false
         }
     },
     data () {
