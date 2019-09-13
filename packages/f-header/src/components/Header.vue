@@ -17,7 +17,7 @@
             :account-logout="copy.accountLogout"
             :account-login="copy.accountLogin"
             :open-menu-text="copy.openMenuText"
-            :delivery-enquiry="showDeliveryEnquiryWithContent && copy.deliveryEnquiry"
+            :delivery-enquiry="showDeliveryEnquiryWithContent ? copy.deliveryEnquiry : {}"
             :show-delivery-enquiry="showDeliveryEnquiryWithContent" />
     </header>
 </template>
