@@ -3,7 +3,7 @@
 exports[`Header should render default component markup 1`] = `
 <header data-theme="je" class="c-header">
   <skip-to-main-stub text="Skip to main content" transparentbg="true"></skip-to-main-stub>
-  <logo-stub theme="je" istransparent="true" companyname="Just Eat"></logo-stub>
-  <navigation-stub userinfo="[object Object]" accountlogin="[object Object]" accountlogout="[object Object]" navlinks="[object Object]" help="[object Object]" open-menu-text="Open Menu"></navigation-stub>
+  <logo-stub theme="je" istransparent="true" companyname="Just Eat" logogtmlabel="click_logo"></logo-stub>
+  <navigation-stub userinfo="[object Object]" accountlogin="[object Object]" accountlogout="[object Object]" navlinks="[object Object]" help="[object Object]" openmenutext="Open Menu" deliveryenquiry="[object Object]" locale="en-UK" ishomepage="true"></navigation-stub>
 </header>
 `;

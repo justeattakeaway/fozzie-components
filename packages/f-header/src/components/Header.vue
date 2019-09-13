@@ -16,7 +16,10 @@
             :help="copy.help"
             :account-logout="copy.accountLogout"
             :account-login="copy.accountLogin"
-            :open-menu-text="copy.openMenuText" />
+            :open-menu-text="copy.openMenuText"
+            :delivery-enquiry="copy.deliveryEnquiry"
+            :locale="'en-UK'"
+            :is-homepage="isHomepage" />
     </header>
 </template>
 
@@ -38,6 +41,11 @@ export default {
             type: String,
             required: false,
             default: ''
+        },
+        isHomepage: {
+            type: Boolean,
+            required: false,
+            default: true
         },
         isTransparent: {
             type: Boolean,

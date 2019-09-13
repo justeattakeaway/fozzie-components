@@ -25,6 +25,24 @@
             :class="['c-nav-container', { 'is-visible': navIsOpen }]">
             <ul class="c-nav-list">
                 <li
+                    v-if="locale === 'en-UK' && isHomepage"
+                    class="c-nav-list-item">
+                    <a
+                        :data-trak='`{
+                            "trakEvent": "click",
+                            "category": "engagement",
+                            "action": "header",
+                            "label": "${deliveryEnquiry.gtm}"
+                        }`'
+                        :href="deliveryEnquiry.url"
+                        target="_blank"
+                        class="c-nav-list-link">
+                        <delivery-icon class="delivery-icon" />
+                        {{ deliveryEnquiry.text }}
+                    </a>
+                </li>
+
+                <li
                     :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo.isAuthenticated }]"
                     tabindex="0">
                     <p class="c-nav-list-text">
@@ -104,11 +122,13 @@
 </template>
 
 <script>
-import { ProfileIcon } from '@justeat/f-vue-icons';
+import { ProfileIcon, DeliveryIcon } from '@justeat/f-vue-icons';
+
 
 export default {
     components: {
-        ProfileIcon
+        ProfileIcon,
+        DeliveryIcon
     },
     props: {
         userInfo: {
@@ -134,6 +154,18 @@ export default {
         openMenuText: {
             type: String,
             default: ''
+        },
+        deliveryEnquiry: {
+            type: Object,
+            default: () => ({})
+        },
+        locale: {
+            type: String,
+            default: ''
+        },
+        isHomepage: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
@@ -174,6 +206,8 @@ $nav-text-subFont                  : $font-family-base;
 $nav-text-color--narrow            : $grey--dark;
 $nav-icon-color                    : $blue;
 $nav-icon-color--transparent       : $white;
+$nav-icon-width--standard          : 27px;
+$nav-icon-height--standard         : 27px;
 $nav-transition-duration           : 250ms;
 
 $nav-trigger-length                : 56px;
@@ -216,6 +250,22 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
     z-index: zIndex(high);
     transition: opacity $nav-transition-duration ease-in-out,
                 z-index 0s linear;
+}
+
+// Hides icon on mobile devices
+.delivery-icon {
+    display: none;
+}
+
+// Show the delivery icon if desktop
+@include media('>=mid') {
+    .delivery-icon {
+        margin-right: 10px;
+        display: block;
+        height: $nav-icon-height--standard;
+        width: $nav-icon-width--standard;
+        fill: $nav-icon-color--transparent;
+    }
 }
 
 // removes scroll
