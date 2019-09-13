@@ -18,7 +18,7 @@
             :account-login="copy.accountLogin"
             :open-menu-text="copy.openMenuText"
             :delivery-enquiry="copy.deliveryEnquiry"
-            :locale="'en-UK'"
+            :locale="'locale'"
             :is-homepage="isHomepage" />
     </header>
 </template>
@@ -45,7 +45,7 @@ export default {
         isHomepage: {
             type: Boolean,
             required: false,
-            default: true
+            default: false
         },
         isTransparent: {
             type: Boolean,
