@@ -26,7 +26,8 @@
             <ul class="c-nav-list">
                 <li
                     v-if="showDeliveryEnquiry"
-                    class="c-nav-list-item">
+                    class="c-nav-list-item"
+                    data-js-test="delivery-enquiry">
                     <a
                         :data-trak='`{
                             "trakEvent": "click",
@@ -63,6 +64,7 @@
                         <li
                             v-for="(link, index) in navLinks"
                             :key="index"
+                            data-js-test="nav-links"
                             class="c-nav-list-item">
                             <a
                                 :tabindex="navIsOpen ? '0' : '-1'"
@@ -80,7 +82,9 @@
                             </a>
                         </li>
 
-                        <li class="c-nav-list-item c-nav-list-item--forceLast">
+                        <li
+                            class="c-nav-list-item c-nav-list-item--forceLast"
+                            data-js-test="logout">
                             <a
                                 :tabindex="navIsOpen ? '0' : '-1'"
                                 class="c-nav-list-link"
@@ -101,7 +105,8 @@
 
                 <li
                     v-if="!userInfo.isAuthenticated"
-                    class="c-nav-list-item">
+                    class="c-nav-list-item"
+                    data-js-test="login">
                     <a
                         :href="accountLogin.url"
                         rel="nofollow"

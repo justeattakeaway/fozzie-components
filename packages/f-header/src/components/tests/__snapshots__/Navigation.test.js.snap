@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigation should render default component markup 1`] = `
+<nav class="c-nav c-nav--global" istransparent="true"><button type="button" class="c-nav-trigger">
+
+  </button> <input id="nav-trigger" type="checkbox" class="c-nav-trigger is-hidden"> <label for="nav-trigger" class="c-nav-toggle"><span class="c-nav-toggle-icon"></span></label>
+  <div class="c-nav-container">
+    <ul class="c-nav-list">
+      <!---->
+      <li class="c-nav-list-item has-sublist is-hidden"><a href="/" aria-expanded="false" aria-haspopup="true" class="c-nav-list-text">
+          <profile-icon-stub class="c-nav-icon c-nav-icon--profile"></profile-icon-stub>
+          <!---->
+        </a>
+        <ul class="c-nav-popoverList">
+          <li class="c-nav-list-item c-nav-list-item--forceLast"><a tabindex="-1" data-trak="{
+                                &quot;trakEvent&quot;: &quot;click&quot;,
+                                &quot;category&quot;: &quot;engagement&quot;,
+                                &quot;action&quot;: &quot;header&quot;,
+                                &quot;label&quot;: &quot;undefined&quot;
+                            }" class="c-nav-list-link">
+
+            </a></li>
+        </ul>
+      </li>
+      <li class="c-nav-list-item"><a rel="nofollow" data-trak="{
+                        &quot;trakEvent&quot;: &quot;click&quot;,
+                        &quot;category&quot;: &quot;engagement&quot;,
+                        &quot;action&quot;: &quot;header&quot;,
+                        &quot;label&quot;: &quot;undefined&quot;
+                    }" class="c-nav-list-link">
+
+        </a></li>
+      <li class="c-nav-list-item c-nav-list-item--support"><a data-trak="{
+                        &quot;trakEvent&quot;: &quot;click&quot;,
+                        &quot;category&quot;: &quot;engagement&quot;,
+                        &quot;action&quot;: &quot;header&quot;,
+                        &quot;label&quot;: &quot;undefined&quot;
+                    }" class="c-nav-list-link">
+
+        </a></li>
+    </ul>
+  </div>
+</nav>
+`;
