@@ -175,7 +175,7 @@ export default {
     },
     computed: {
         showDeliveryEnquiry () {
-            return this.locale === 'en-UK' && this.isHomepage;
+            return this.locale === 'en-GB' && this.isHomepage;
         }
     },
     methods: {
