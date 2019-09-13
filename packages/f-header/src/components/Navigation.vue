@@ -25,7 +25,7 @@
             :class="['c-nav-container', { 'is-visible': navIsOpen }]">
             <ul class="c-nav-list">
                 <li
-                    v-if="locale === 'en-UK' && isHomepage"
+                    v-if="showDeliveryEnquiry"
                     class="c-nav-list-item">
                     <a
                         :data-trak='`{
@@ -172,6 +172,11 @@ export default {
         return {
             navIsOpen: false
         };
+    },
+    computed: {
+        showDeliveryEnquiry () {
+            return this.locale === 'en-UK' && this.isHomepage;
+        }
     },
     methods: {
         onNavToggle () {
