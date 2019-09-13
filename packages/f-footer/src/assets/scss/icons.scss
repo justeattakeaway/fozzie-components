@@ -1,0 +1,23 @@
+.c-icon--chevron {
+    display: none;
+    height: 9px;
+    width: 16px;
+
+    @include media('<wide') {
+        display: block;
+    }
+}
+
+    .c-icon--chevron--up {
+        transform: rotate(180deg);
+    }
+
+    .c-icon--chevron--small {
+        height: 6px;
+        width: 14px;
+    }
+
+.c-icon--cross {
+    height: 8px;
+    width: 8px;
+}
