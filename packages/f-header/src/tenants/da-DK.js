@@ -55,10 +55,5 @@ export default {
         text: 'Log ud',
         url: '/account/logout?returnurl=',
         gtm: 'click_logout'
-    },
-    deliveryEnquiry: {
-        text: 'Deliver with Just Eat',
-        url: 'https://couriers.just-eat.co.uk/application?utm_medium=referrer&utm_source=just-eat.co.uk&utm_campaign=ex1140-header',
-        gtm: 'click_delivery_job'
     }
 };
