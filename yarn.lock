@@ -1015,7 +1015,7 @@
     vue "2.6.10"
 
 "@justeat/f-header@file:packages/f-header":
-  version "2.0.0-beta.1"
+  version "2.0.0-beta.2"
   dependencies:
     "@justeat/f-vue-icons" "1.0.0-beta.3"
 
@@ -2762,6 +2762,11 @@ anymatch@^2.0.0:
   dependencies:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
+
+appboy-web-sdk@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/appboy-web-sdk/-/appboy-web-sdk-2.4.0.tgz#e9bde310f5e1b4b6b176083ba0960d4fe4735661"
+  integrity sha512-WDMGiNct9VL2fUDlQfkrbXOH2w/5seLo0cdU3SCX+LmDdbd/B1gcJlYOtJYPUPLzqJjAlP3vJgS11O9pJk5qDg==
 
 append-transform@^0.4.0:
   version "0.4.0"
