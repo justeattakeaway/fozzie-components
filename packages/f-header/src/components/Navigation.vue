@@ -450,9 +450,12 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
             }
         }
     }
-    .c-nav-icon--profile,
-    .c-nav-icon--delivery {
+    .c-nav-icon--profile{
         width: 20px;
+        height: 22px;
+    }
+    .c-nav-icon--delivery {
+        width: 27px;
         height: 22px;
     }
 
