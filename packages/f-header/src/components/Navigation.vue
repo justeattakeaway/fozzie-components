@@ -159,11 +159,7 @@ export default {
             type: Object,
             default: () => ({})
         },
-        locale: {
-            type: String,
-            default: ''
-        },
-        isHomepage: {
+        showDeliveryEnquiry: {
             type: Boolean,
             default: false
         }
@@ -172,11 +168,6 @@ export default {
         return {
             navIsOpen: false
         };
-    },
-    computed: {
-        showDeliveryEnquiry () {
-            return this.locale === 'en-GB' && this.isHomepage;
-        }
     },
     methods: {
         onNavToggle () {

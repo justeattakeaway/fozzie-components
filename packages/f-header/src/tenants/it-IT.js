@@ -56,3 +56,4 @@ export default {
         url: '/account/logout?returnurl=',
         gtm: 'click_logout'
     }
+};

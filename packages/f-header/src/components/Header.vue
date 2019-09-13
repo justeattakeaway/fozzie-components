@@ -18,8 +18,7 @@
             :account-login="copy.accountLogin"
             :open-menu-text="copy.openMenuText"
             :delivery-enquiry="copy.deliveryEnquiry"
-            :locale="locale"
-            :is-homepage="isHomepage" />
+            :show-delivery-enquiry="showDeliveryEnquiry" />
     </header>
 </template>
 
@@ -42,15 +41,14 @@ export default {
             required: false,
             default: ''
         },
-        isHomepage: {
-            type: Boolean,
-            required: false,
-            default: false
-        },
         isTransparent: {
             type: Boolean,
             required: false,
             default: false
+        },
+        showDeliveryEnquiry: {
+            type: Boolean,
+            default: true
         }
     },
     data () {
