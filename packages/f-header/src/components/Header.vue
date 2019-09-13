@@ -17,8 +17,8 @@
             :account-logout="copy.accountLogout"
             :account-login="copy.accountLogin"
             :open-menu-text="copy.openMenuText"
-            :delivery-enquiry="showDeliveryEnquiry && copy.deliveryEnquiry"
-            :show-delivery-enquiry="showDeliveryEnquiry" />
+            :delivery-enquiry="showDeliveryEnquiryWithContent && copy.deliveryEnquiry"
+            :show-delivery-enquiry="showDeliveryEnquiryWithContent" />
     </header>
 </template>
 
@@ -66,6 +66,11 @@ export default {
             theme,
             user
         };
+    },
+    computed: {
+        showDeliveryEnquiryWithContent () {
+            return this.copy.deliveryEnquiry && this.showDeliveryEnquiry;
+        }
     },
     methods: {
         getLocale () {
