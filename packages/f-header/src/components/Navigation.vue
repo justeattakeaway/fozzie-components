@@ -43,14 +43,21 @@
                 </li>
 
                 <li
-                    :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo.isAuthenticated }]"
-                    tabindex="0">
-                    <p class="c-nav-list-text">
+                    :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo.isAuthenticated, 'open': navIsOpen }]"
+                    @mouseover="openNav"
+                    @mouseleave="closeNav"
+                    @keyup.esc="closeNav">
+                    <a
+                        class="c-nav-list-text"
+                        href="/"
+                        :aria-expanded="navIsOpen ? 'true' : 'false'"
+                        aria-haspopup="true"
+                        @click.prevent="onNavToggle">
                         <profile-icon class="c-nav-icon c-nav-icon--profile" />
                         <span
                             v-if="userInfo.isAuthenticated"
                             class="c-nav-list-text-sub">{{ userInfo.friendlyName }}</span>
-                    </p>
+                    </a>
 
                     <ul class="c-nav-popoverList">
                         <li
@@ -58,6 +65,7 @@
                             :key="index"
                             class="c-nav-list-item">
                             <a
+                                :tabindex="navIsOpen ? '0' : '-1'"
                                 class="c-nav-list-link"
                                 :href="link.url"
                                 :data-trak='`{
@@ -65,13 +73,16 @@
                                     "category": "engagement",
                                     "action": "header",
                                     "label": "${link.gtm}"
-                                }`'>
+                                }`'
+                                @blur="closeNav"
+                                @focus="openNav">
                                 {{ link.text }}
                             </a>
                         </li>
 
                         <li class="c-nav-list-item c-nav-list-item--forceLast">
                             <a
+                                :tabindex="navIsOpen ? '0' : '-1'"
                                 class="c-nav-list-link"
                                 :href="accountLogout.url"
                                 :data-trak='`{
@@ -79,7 +90,9 @@
                                     "category": "engagement",
                                     "action": "header",
                                     "label": "${accountLogout.gtm}"
-                                }`'>
+                                }`'
+                                @blur="closeNav"
+                                @focus="openNav">
                                 {{ accountLogout.text }}
                             </a>
                         </li>
@@ -172,6 +185,12 @@ export default {
     methods: {
         onNavToggle () {
             this.navIsOpen = !this.navIsOpen;
+        },
+        closeNav () {
+            this.navIsOpen = false;
+        },
+        openNav () {
+            this.navIsOpen = true;
         }
     }
 };
@@ -521,10 +540,8 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
                 }
             }
 
-        // display the popover when our parent item is hovered
-        .has-sublist:hover &,
-        .has-sublist:focus &,
-        .has-sublist:active & {
+        // display the popover when our parent item is hovered(recieved class .open)
+        .has-sublist.open & {
             opacity: 1;
             z-index: zIndex(high);
             right: 0;
