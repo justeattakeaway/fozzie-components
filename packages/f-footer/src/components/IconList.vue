@@ -1,15 +1,21 @@
 <template>
-    <div>
+    <div
+        :class="[$style['c-iconList'], {
+            [$style['c-iconList--apps']]: isApps,
+            [$style['c-iconList--payments']]: isPayments,
+            [$style['c-iconList--social']]: isSocial
+        }]">
         <h2
             v-if="title"
             class="c-footer-heading c-footer-heading--shortBelowWide">
             {{ title }}
         </h2>
+
         <ul class="c-footer-list c-footer-list--inline">
             <li
-                v-for="icon in icons"
-                :key="icon.key"
-                class="c-footer-listItem">
+                v-for="(icon, i) in icons"
+                :key="i + '_Icon'"
+                :class="$style['c-iconList-listItem']">
                 <a
                     v-if="icon.url"
                     :href="icon.url"
@@ -25,6 +31,7 @@
                         v-bind="icon"
                         :locale="locale" />
                 </a>
+
                 <component
                     :is="iconChoice"
                     v-else
@@ -45,27 +52,44 @@ export default {
         AppStoreIcon,
         BaseProviderIcon
     },
+
     props: {
         icons: {
             type: Array,
             required: true
         },
+
         title: {
             type: String,
             required: false,
             default: ''
         },
+
         isApps: {
             type: Boolean,
             required: false,
             default: false
         },
+
+        isPayments: {
+            type: Boolean,
+            required: false,
+            default: false
+        },
+
+        isSocial: {
+            type: Boolean,
+            required: false,
+            default: false
+        },
+
         locale: {
             type: String,
             required: false,
             default: 'en-GB'
         }
     },
+
     computed: {
         iconChoice () {
             return this.isApps ? 'app-store-icon' : 'base-provider-icon';
@@ -74,28 +98,31 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
+
 .c-iconList {
     svg {
         height: 25px;
     }
+}
 
-    .c-footer-listItem {
-        margin-bottom: spacing();
-        margin-right: spacing(x3);
+.c-iconList-listItem {
+    margin-bottom: spacing();
+    margin-right: spacing(x3);
 
-        a,
-        svg {
-            display: block;
-        }
+    a,
+    svg {
+        display: block;
+    }
 
-        &:last-child {
-            margin-right: 0;
-        }
+    &:last-child {
+        margin-right: 0;
     }
 }
 
 .c-iconList--social {
+    flex-basis: 25%;
+
     svg {
         height: 28px;
         width: 28px;
@@ -103,7 +130,9 @@ export default {
 }
 
 .c-iconList--apps {
-    .c-footer-listItem {
+    flex-basis: 42%;
+
+    .c-iconList-listItem {
         margin-right: spacing(x2);
     }
 
@@ -121,7 +150,7 @@ export default {
         padding: spacing(x2) spacing(x2) 0;
     }
 
-    .c-footer-listItem {
+    .c-iconList-listItem {
         @include media('>=wide') {
             margin-right: spacing(x6);
         }
