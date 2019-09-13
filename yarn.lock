@@ -1014,10 +1014,10 @@
     "@justeat/f-utils" "0.3.0"
     include-media "1.4.9"
 
-"@justeat/f-icons@2.0.0-beta.5":
-  version "2.0.0-beta.5"
-  resolved "http://packages.je-labs.com/npm/private-npm/@justeat/f-icons/-/f-icons-2.0.0-beta.5.tgz#925d84c522f56011e756711ded525b397c1a2423"
-  integrity sha1-kl2ExSL1YBHnVnEd7VJbOXwaJCM=
+"@justeat/f-icons@2.0.0-beta.6":
+  version "2.0.0-beta.6"
+  resolved "http://packages.je-labs.com/npm/private-npm/@justeat/f-icons/-/f-icons-2.0.0-beta.6.tgz#e3a08a25621332305abe79867a8005695958bce2"
+  integrity sha1-46CKJWITMjBavnmGeoAFaVlYvOI=
   dependencies:
     classnames "2.2.5"
     core-js "3.1.3"
@@ -1053,12 +1053,12 @@
     "@justeat/f-icons" "^2.0.0-beta.4"
     babel-helper-vue-jsx-merge-props "^2.0.3"
 
-"@justeat/f-vue-icons@1.0.0-beta.3":
-  version "1.0.0-beta.3"
-  resolved "http://packages.je-labs.com/npm/private-npm/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.3.tgz#050138fb615cc511cd39ece25bc47e1c47668379"
-  integrity sha1-BQE4+2FcxRHNOeziW8R+HEdmg3k=
+"@justeat/f-vue-icons@1.0.0-beta.4":
+  version "1.0.0-beta.4"
+  resolved "http://packages.je-labs.com/npm/private-npm/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.4.tgz#aef8a22b43f04f3ad0ca287f50ed1d68804c605a"
+  integrity sha1-rviiK0PwTzrQyih/UO0daIBMYFo=
   dependencies:
-    "@justeat/f-icons" "2.0.0-beta.5"
+    "@justeat/f-icons" "2.0.0-beta.6"
     babel-helper-vue-jsx-merge-props "^2.0.3"
 
 "@justeat/fozzie-colour-palette@2.3.0":
