@@ -1,6 +1,5 @@
 <template>
-    <component
-        :is="iconType" />
+    <component :is="iconType" />
 </template>
 
 <script>
@@ -43,12 +42,14 @@ export default {
         VisaIcon,
         VisaVerifiedIcon
     },
+
     props: {
         name: {
             type: String,
             required: true
         }
     },
+
     computed: {
         iconType () {
             return `${this.name}-icon`;

@@ -3,19 +3,20 @@
         <h2 class="c-footer-heading">
             {{ buttonList.title }}
         </h2>
-        <div class="c-buttonList">
+
+        <div :class="$style['c-buttonList']">
             <a
-                v-for="(button, index) in buttonList.buttons"
-                :key="index"
+                v-for="(button, i) in buttonList.buttons"
+                :key="i + '_Button'"
                 :href="button.url"
-                target="_blank"
-                class="c-buttonList-button"
                 :data-trak='`{
                     "trakEvent": "click",
                     "category": "engagement",
                     "action": "footer",
                     "label": "${button.gtm}"
-                }`'>
+                }`'
+                :class="$style['c-buttonList-button']"
+                target="_blank">
                 {{ button.title }}
             </a>
         </div>
@@ -33,34 +34,33 @@ export default {
 };
 </script>
 
-<style lang="scss">
-
+<style lang="scss" module>
 .c-buttonList {
+    align-items: center;
     display: flex;
     flex-flow: row wrap;
-    align-items: center;
 }
 
 .c-buttonList-button {
-    display: inline-block;
-    vertical-align: middle;
-    min-width: 226px;
     background-color: $white;
     border-radius: 4px;
     color: $color-link-default;
-    text-decoration: none;
-    @include font-size(base--scaleUp, false);
-    font-weight: $font-weight-headings;
+    display: inline-block;
     font-family: $font-family-headings;
-    padding: 10px spacing(x2);
-    text-align: center;
+    font-weight: $font-weight-headings;
+    min-width: 226px;
     margin-right: spacing(x2);
     margin-bottom: spacing();
+    padding: 10px spacing(x2);
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    @include font-size(base--scaleUp, false);
 
     @include theme(ml) {
+       color: $color-link-default--ml;
        font-family: $font-family-headings--ml;
        font-weight:  $font-weight-headings--ml;
-       color: $color-link-default--ml;
     }
 
     &:last-child {
@@ -73,15 +73,13 @@ export default {
     }
 
     @include media('<narrow') {
-        width: 100%;
-        margin-right: 0;
         margin-bottom: spacing(x2);
+        margin-right: 0;
+        width: 100%;
 
         &:last-child {
             margin-bottom: spacing();
         }
     }
 }
-
 </style>
-

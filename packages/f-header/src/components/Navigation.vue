@@ -1,5 +1,6 @@
 <template>
-    <nav class="c-nav c-nav--global">
+    <nav
+        class="c-nav c-nav--global">
         <button
             class="c-nav-trigger"
             type="button"
@@ -14,6 +15,7 @@
             class="c-nav-trigger is-hidden">
 
         <label
+            data-js-test="nav-toggle"
             :class="['c-nav-toggle', {
                 'is-open': navIsOpen
             }]"

@@ -2048,6 +2048,21 @@
     babel-loader "^8.0.5"
     webpack ">=4 < 4.29"
 
+"@vue/cli-plugin-eslint@3.9.1":
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-eslint/-/cli-plugin-eslint-3.9.1.tgz#11f3bdc425619ea2f9e2ab74a8f89f75aa6c2657"
+  integrity sha512-j/ZF3G+OhtYO229UIkH6ef6UekW6MER9+o5jGOkwWed4ZheeT2ssFD2rCSJMXCuV7ygJvKOFGaBJBULL8Ibmzg==
+  dependencies:
+    "@vue/cli-shared-utils" "^3.9.0"
+    babel-eslint "^10.0.1"
+    eslint-loader "^2.1.2"
+    globby "^9.2.0"
+    webpack ">=4 < 4.29"
+    yorkie "^2.0.0"
+  optionalDependencies:
+    eslint "^4.19.1"
+    eslint-plugin-vue "^4.7.1"
+
 "@vue/cli-plugin-eslint@3.9.2":
   version "3.9.2"
   resolved "https://registry.yarnpkg.com/@vue/cli-plugin-eslint/-/cli-plugin-eslint-3.9.2.tgz#747c616b13a11f34ac80554eee899cbfcd1977b8"

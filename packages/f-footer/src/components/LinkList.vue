@@ -1,7 +1,9 @@
 <template>
     <div
         v-if="linkList.links.length"
-        :class="['c-footer-panel', { 'is-collapsed': panelCollapsed && isBelowWide }]"
+        :class="[$style['c-footer-panel'], {
+            [$style['is-collapsed']]: panelCollapsed && isBelowWide
+        }]"
         data-js-test="linkList-wrapper">
         <h2>
             <button
@@ -11,12 +13,18 @@
                 :aria-disabled="!isBelowWide"
                 :aria-expanded="!panelCollapsed ? 'true' : 'false'"
                 :aria-controls="listId"
-                class="c-footer-heading c-footer-heading--button"
+                :class="[
+                    'c-footer-heading',
+                    'c-footer-heading--button',
+                    $style['c-footer-heading--button']
+                ]"
                 data-js-test="linkList-header"
                 @click="onPanelClick">
                 {{ linkList.title }}
                 <chevron-icon
-                    :class="[panelCollapsed ? 'c-icon--chevron' : 'c-icon--chevron c-icon--chevron--up']" />
+                    :class="[$style['c-icon--chevron'], {
+                        [$style['c-icon--chevron--up']]: !panelCollapsed
+                    }]" />
             </button>
         </h2>
 
@@ -26,11 +34,12 @@
             class="c-footer-list"
             role="region">
             <li
-                v-for="(link, index) in linkList.links"
-                :key="index">
+                v-for="(link, i) in linkList.links"
+                :key="i + '_Link'">
                 <a
                     :href="link.url"
                     :rel="link.rel"
+                    :class="$style['c-footer-list-link']"
                     :data-trak='`{
                         "trakEvent": "click",
                         "category": "engagement",
@@ -52,42 +61,51 @@ export default {
     components: {
         ChevronIcon
     },
+
     props: {
         linkList: {
             type: Object,
             default: () => ({})
         }
     },
+
     data () {
         return {
             panelCollapsed: true,
             currentScreenWidth: 0
         };
     },
+
     computed: {
         listId () {
             return `footer-${this.linkList.title.toLowerCase().split(' ').join('-')}`;
         },
+
         listHeadingId () {
             return `${this.listId}-heading`;
         },
+
         isBelowWide () {
             return this.currentScreenWidth <= 1024;
         }
     },
+
     mounted () {
         this.currentScreenWidth = window.innerWidth;
         window.addEventListener('resize', throttle(this.onResize, 100));
     },
+
     destroyed () {
         window.removeEventListener('resize', this.resize);
     },
+
     methods: {
         onPanelClick () {
             if (this.isBelowWide) {
                 this.panelCollapsed = !this.panelCollapsed;
             }
         },
+
         onResize () {
             this.currentScreenWidth = window.innerWidth;
         }
@@ -95,22 +113,11 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
+@import '@/assets/scss/icons.scss';
 
 .c-footer-panel {
     flex: 1 0 auto;
-
-    .c-icon--chevron {
-        display: none;
-
-        @include media('<wide') {
-            display: block;
-        }
-    }
-
-    .c-icon--chevron--up {
-        transform: rotate(180deg);
-    }
 
     @include media('<wide') {
         border-bottom: 1px solid $footer-borderColor;
@@ -119,57 +126,51 @@ export default {
             border-bottom: none;
         }
     }
+}
 
-    .c-footer-heading--button {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        margin: 0;
-        background: none;
-        border-style: none;
-        text-align: left;
-        padding: spacing(x2);
-        color: $color-headings;
-        font-family: $font-family-headings;
-        font-weight: $font-weight-headings;
-        @include font-size(mid);
+.c-footer-heading--button {
+    align-items: center;
+    background: none;
+    border-style: none;
+    color: $color-headings;
+    display: flex;
+    font-family: $font-family-headings;
+    font-weight: $font-weight-headings;
+    justify-content: space-between;
+    margin: 0;
+    padding: spacing(x2);
+    text-align: left;
+    width: 100%;
+    @include font-size(mid);
 
-        @include theme(ml) {
-            font-family: $font-family-headings--ml;
-            font-weight: $font-weight-headings--ml;
-        }
-
-        @include media('<wide') {
-            cursor: pointer;
-        }
-
-        @include media('>=wide') {
-           padding: 0;
-        }
+    @include theme(ml) {
+        font-family: $font-family-headings--ml;
+        font-weight: $font-weight-headings--ml;
     }
 
-    a {
-        color: $footer-textColor;
-        display: inline-block;
-        padding: spacing() spacing(x2);
-        text-decoration: none;
-        width: 100%;
+    @include media('<wide') {
+        cursor: pointer;
+    }
 
-        @include media('>=wide') {
-            padding: 0 0 spacing();
-            width: auto;
-        }
-
-        &:hover {
-            text-decoration: underline;
-        }
+    @include media('>=wide') {
+        padding: 0;
     }
 }
 
-.c-icon--chevron {
-    width: 16px;
-    height: 9px;
-}
+.c-footer-list-link {
+    color: $footer-textColor;
+    display: inline-block;
+    padding: spacing() spacing(x2);
+    text-decoration: none;
+    width: 100%;
 
+    @include media('>=wide') {
+        padding: 0 0 spacing();
+        width: auto;
+    }
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
 </style>
