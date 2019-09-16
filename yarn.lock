@@ -1016,8 +1016,8 @@
 
 "@justeat/f-icons@2.0.0-beta.6":
   version "2.0.0-beta.6"
-  resolved "http://packages.je-labs.com/npm/private-npm/@justeat/f-icons/-/f-icons-2.0.0-beta.6.tgz#e3a08a25621332305abe79867a8005695958bce2"
-  integrity sha1-46CKJWITMjBavnmGeoAFaVlYvOI=
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.6.tgz#e3a08a25621332305abe79867a8005695958bce2"
+  integrity sha512-tDT/WWMGJa0Qy62YD2RCu9JW2JSrusFG9n2vOam6UYwU0GoSAncED3Q68yo3fmckMdCONfwuXuRX0dWcWNSw3w==
   dependencies:
     classnames "2.2.5"
     core-js "3.1.3"
@@ -1055,8 +1055,8 @@
 
 "@justeat/f-vue-icons@1.0.0-beta.4":
   version "1.0.0-beta.4"
-  resolved "http://packages.je-labs.com/npm/private-npm/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.4.tgz#aef8a22b43f04f3ad0ca287f50ed1d68804c605a"
-  integrity sha1-rviiK0PwTzrQyih/UO0daIBMYFo=
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.4.tgz#aef8a22b43f04f3ad0ca287f50ed1d68804c605a"
+  integrity sha512-AOiqwdNj/Gc+WY6TstINRXUy2lt2Ft9Ic/KlA0zyAfLRI8OWFa4tGzfOZijSyVq9m2QcxLBsDvj3SZ/i3vRl8A==
   dependencies:
     "@justeat/f-icons" "2.0.0-beta.6"
     babel-helper-vue-jsx-merge-props "^2.0.3"
@@ -2047,21 +2047,6 @@
     "@vue/cli-shared-utils" "^3.9.0"
     babel-loader "^8.0.5"
     webpack ">=4 < 4.29"
-
-"@vue/cli-plugin-eslint@3.9.1":
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-eslint/-/cli-plugin-eslint-3.9.1.tgz#11f3bdc425619ea2f9e2ab74a8f89f75aa6c2657"
-  integrity sha512-j/ZF3G+OhtYO229UIkH6ef6UekW6MER9+o5jGOkwWed4ZheeT2ssFD2rCSJMXCuV7ygJvKOFGaBJBULL8Ibmzg==
-  dependencies:
-    "@vue/cli-shared-utils" "^3.9.0"
-    babel-eslint "^10.0.1"
-    eslint-loader "^2.1.2"
-    globby "^9.2.0"
-    webpack ">=4 < 4.29"
-    yorkie "^2.0.0"
-  optionalDependencies:
-    eslint "^4.19.1"
-    eslint-plugin-vue "^4.7.1"
 
 "@vue/cli-plugin-eslint@3.9.2":
   version "3.9.2"
