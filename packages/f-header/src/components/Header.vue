@@ -8,20 +8,32 @@
         <logo
             :theme="theme"
             :is-transparent="isTransparent"
-            :company-name="copy.companyName" />
+            :company-name="copy.companyName"
+            :logo-gtm-label="copy.logo.gtm" />
+        <navigation
+            :user-info="user"
+            :nav-links="copy.navLinks"
+            :help="copy.help"
+            :account-logout="copy.accountLogout"
+            :account-login="copy.accountLogin"
+            :open-menu-text="copy.openMenuText"
+            :delivery-enquiry="copy.deliveryEnquiry"
+            :show-delivery-enquiry="showDeliveryEnquiryWithContent" />
     </header>
 </template>
 
 <script>
 import Logo from './Logo.vue';
-import tenantConfigs from '../tenants';
+import Navigation from './Navigation.vue';
 import SkipToMain from './SkipToMain.vue';
+import tenantConfigs from '../tenants';
 
 export default {
     name: 'VueHeader',
     components: {
         Logo,
-        SkipToMain
+        SkipToMain,
+        Navigation
     },
     props: {
         locale: {
@@ -33,17 +45,32 @@ export default {
             type: Boolean,
             required: false,
             default: false
+        },
+        showDeliveryEnquiry: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
         const locale = this.getLocale();
         const localeConfig = tenantConfigs[locale];
         const theme = this.getTheme(locale);
+        const user = {
+            isAuthenticated: true,
+            friendlyName: 'John Doe',
+            email: 'john.doe@example.com'
+        };
 
         return {
             copy: { ...localeConfig },
-            theme
+            theme,
+            user
         };
+    },
+    computed: {
+        showDeliveryEnquiryWithContent () {
+            return this.copy.deliveryEnquiry && this.showDeliveryEnquiry;
+        }
     },
     methods: {
         getLocale () {
