@@ -55,4 +55,21 @@
 
     ```
 
+3. Properties which component accepts:
+
+    `locale` - If there is a vue-i18n plugin in the project, the header component can be called without locale property, otherwise it accepts it in format like 'en-GB'
+
+    `isTransparent` - Boolean property with `false` as a default value, defines wether the header has transparent or white background.
+
+    `showDeliveryEnquiry` - Boolean property with `false` as a default value, defines if it is necessary to show the "Deliver with Just Eat" linkin the header.
+
+    `userInfo` - user object property, with default value like: 
+    ```
+    {
+        isAuthenticated: false,
+        friendlyName: '',
+        email: ''
+    }
+    ```
+
 ## Documentation to be completed once module is in stable state.

@@ -11,7 +11,7 @@
             :company-name="copy.companyName"
             :logo-gtm-label="copy.logo.gtm" />
         <navigation
-            :user-info="user"
+            :user-info="userInfo"
             :nav-links="copy.navLinks"
             :help="copy.help"
             :account-logout="copy.accountLogout"
@@ -49,22 +49,24 @@ export default {
         showDeliveryEnquiry: {
             type: Boolean,
             default: false
+        },
+        userInfo: {
+            type: Object,
+            default: () => ({
+                isAuthenticated: false,
+                friendlyName: '',
+                email: ''
+            })
         }
     },
     data () {
         const locale = this.getLocale();
         const localeConfig = tenantConfigs[locale];
         const theme = this.getTheme(locale);
-        const user = {
-            isAuthenticated: true,
-            friendlyName: 'John Doe',
-            email: 'john.doe@example.com'
-        };
 
         return {
             copy: { ...localeConfig },
-            theme,
-            user
+            theme
         };
     },
     computed: {
