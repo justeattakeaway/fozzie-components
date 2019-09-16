@@ -4,6 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta-3
+------------------------------
+*September 13, 2019*
+
+ ### Added
+- Navigation component
+- `f-trak` attributes to the links
+
+### Changed
+- Resource files updated with the navigation links
+- `@justeat/f-vue-icons` package updated to contain latest header icons
+
+
 v2.0.0-beta-2
 ------------------------------
 *September 10, 2019*

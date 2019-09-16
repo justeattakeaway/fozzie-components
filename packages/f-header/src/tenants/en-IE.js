@@ -2,14 +2,58 @@ export default {
     locale: 'en-IE',
     companyName: 'Just Eat',
     openMenuText: 'Open Menu',
-    loginLinkText: 'Log in',
     loginNoScriptLinkText: 'Account',
-    helpLinkText: 'Help',
-    logoutLinkText: 'Log out',
     skipToMainContentText: 'Skip to main content',
-    accountInfo: 'Account info',
-    accountOrderHistory: 'Orders',
-    accountCredit: 'Account credit',
-    paymentMethods: 'Payment methods',
-    deliveryAddresses: 'Delivery addresses'
+
+    navLinks: {
+        accountInfo: {
+            text: 'Account info',
+            url: '/account/info',
+            gtm: 'click_account_your_account'
+        },
+        orderHistory: {
+            text: 'Orders',
+            url: '/order-history',
+            gtm: 'click_account_your_orders'
+        },
+        redeemAGiftcard: {
+            text: 'Redeem a gift card',
+            url: '/giftcards/redeem',
+            gtm: 'click_account_redeem_giftcard'
+        },
+        savedCards: {
+            text: 'Payment methods',
+            url: '/member/savedcards',
+            gtm: 'click_account_saved_cards'
+        },
+        addressBook: {
+            text: 'Delivery addresses',
+            url: '/account/addressbook',
+            gtm: 'click_account_address_books'
+        },
+        contactPreferences: {
+            text: 'Contact preferences',
+            url: '/account/preferences',
+            gtm: 'click_account_contact_preferences'
+        }
+    },
+
+    logo: {
+        gtm: 'click_logo'
+    },
+    help: {
+        text: 'Help',
+        url: '/help',
+        gtm: 'click_help'
+    },
+    accountLogin: {
+        text: 'Log in',
+        url: '/account/login?returnurl=',
+        gtm: 'click_login'
+    },
+    accountLogout: {
+        text: 'Log out',
+        url: '/account/logout?returnurl=',
+        gtm: 'click_logout'
+    }
 };
