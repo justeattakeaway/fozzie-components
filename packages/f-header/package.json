@@ -35,6 +35,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
+    "@justeat/f-logger": "0.7.1",
     "@justeat/f-vue-icons": "1.0.0-beta.4"
   },
   "peerDependencies": {
