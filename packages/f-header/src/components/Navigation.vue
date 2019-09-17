@@ -59,7 +59,12 @@
                         <profile-icon class="c-nav-icon c-nav-icon--profile" />
                         <span
                             v-if="userInfo.isAuthenticated"
-                            class="c-nav-list-text-sub">{{ userInfo.friendlyName }}</span>
+                            class="c-nav-list-text-sub">
+                            {{ userInfo.friendlyName }}
+                        </span>
+                        <span class="c-nav-list-text-sub u-showBelowMid">
+                            {{ userInfo.email }}
+                        </span>
                     </a>
 
                     <ul class="c-nav-popoverList">
@@ -401,6 +406,10 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
                 color: $nav-text-color;
                 border-bottom: none;
 
+                @include theme(ml) {
+                    color: $nav-text-color--ml;
+                }
+
                 // the following styles align the elements vertically to the height of the header bar
                 // don’t need a fallback, as it degrades gracefully
                 display: flex;
@@ -410,10 +419,6 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
                 .c-header--transparent & {
                     color: $nav-text-color--transparent;
                 }
-
-                @include theme(ml) {
-                    color: $nav-text-color--ml;
-                }
             }
         }
         .c-nav-list-text-sub {
@@ -422,6 +427,12 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
             text-overflow: ellipsis;
             white-space: nowrap;
             max-width: 300px;
+
+            &.u-showBelowMid {
+                @include media('>=mid') {
+                    display: none !important;
+                }
+            }
         }
 
         .c-nav-list-link {
@@ -476,10 +487,20 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
             }
         }
     }
-    .c-nav-icon--profile{
+    .c-nav-icon--profile {
         width: 20px;
         height: 22px;
+
+    // mobile menulog user profile icon to be green, not default blue
+    & path {
+        @include media('<mid') {
+            @include theme(ml) {
+                    fill: $nav-icon-color--ml;
+                }
+            }
+        }
     }
+
     .c-nav-icon--delivery {
         width: 27px;
         height: 22px;

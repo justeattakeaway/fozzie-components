@@ -51,15 +51,25 @@ export default {
             display: block;
             margin: 4px;
             padding: 4px;
+
+            @include theme(ml) {
+                color: $green;
+            }
         }
     }
 }
+
+
 
 .c-skipTo--whiteLink {
     .is-visuallyHidden {
         &.is-focusable:active,
         &.is-focusable:focus {
             color: $white;
+
+            @include theme(ml) {
+                color: $white;
+            }
         }
     }
 }
