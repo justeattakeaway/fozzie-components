@@ -68,7 +68,7 @@ import IconList from './IconList.vue';
 import LegalField from './LegalField.vue';
 import LinkList from './LinkList.vue';
 import tenantConfigs from '../tenants';
-import sharedService from '../../../shared.service';
+import sharedService from '../../../../scripts/shared.service';
 
 export default {
     components: {

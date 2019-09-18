@@ -28,8 +28,8 @@
 import Logo from './Logo.vue';
 import SkipToMain from './SkipToMain.vue';
 import tenantConfigs from '../tenants';
-import sharedService from '../../../shared.service';
 import Navigation from './Navigation.vue';
+import sharedService from '../../../../scripts/shared.service';
 
 export default {
     name: 'VueHeader',
