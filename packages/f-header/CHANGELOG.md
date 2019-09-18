@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.0.0-beta-6
+------------------------------
+*September 18, 2019*
+
+### Changed
+ - Added tests for the navigation component
+ - Added new snapshot
+
 
 v2.0.0-beta-5
 ------------------------------
@@ -11,8 +19,6 @@ v2.0.0-beta-5
 ### Changed
  - Add a logic to hide "Deliver with Just Eat" link from mobile screen size
  - DeliveryEnquiry gtm label changed to be 'click_courier_signup'
- - Added tests for the navigation component
- - Added new snapshot
 
 ### Removed
 - Cleaned up unused css styles
