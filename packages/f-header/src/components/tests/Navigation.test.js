@@ -51,7 +51,7 @@ describe('Navigation', () => {
         expect(wrapper.find('[data-js-test="delivery-enquiry"]').exists()).toBe(true);
     });
 
-    it('should NOT show "Deliver for Just Eat" in nav if prop true and content there', () => {
+    it('should NOT show "Deliver for Just Eat" in nav if prop false and content there', () => {
         // Arrange
         const propsData = {
             ...defaultPropsData,
