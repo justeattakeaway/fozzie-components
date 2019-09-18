@@ -2,6 +2,7 @@
 
 exports[`Header should render default component markup 1`] = `
 <header data-theme="je" class="c-header">
+  <skip-to-main-stub text="Skip to main content" transparentbg="true"></skip-to-main-stub>
   <logo-stub theme="je" istransparent="true" companyname="Just Eat"></logo-stub>
 </header>
 `;
