@@ -30,14 +30,12 @@ const resizeWindow = (x, y) => {
 
 describe('Navigation', () => {
     it('should be defined', () => {
-        const propsData = {
-            ...defaultPropsData
-        };
+        const propsData = defaultPropsData;
         const wrapper = shallowMount(Navigation, { propsData });
         expect(wrapper.exists()).toBe(true);
     });
 
-    it('should show "Deliver for Just Eat" in nav if prop true and content there', () => {
+    it('should show "Deliver for Just Eat" in nav if prop true and the content is there', () => {
         // Arrange
         const propsData = {
             ...defaultPropsData,
@@ -51,7 +49,7 @@ describe('Navigation', () => {
         expect(wrapper.find('[data-js-test="delivery-enquiry"]').exists()).toBe(true);
     });
 
-    it('should NOT show "Deliver for Just Eat" in nav if prop false and content there', () => {
+    it('should NOT show "Deliver for Just Eat" in nav if prop false and the content is there', () => {
         // Arrange
         const propsData = {
             ...defaultPropsData,
@@ -65,7 +63,7 @@ describe('Navigation', () => {
         expect(wrapper.find('[data-js-test="delivery-enquiry"]').exists()).toBe(false);
     });
 
-    it('should show "navLinks" and "logout" if the user is logged in and HAS nav link data', () => {
+    it('should show "logout" if the user is logged in and has nav link data', () => {
         // Arrange
         const propsData = {
             ...defaultPropsData,
@@ -79,10 +77,41 @@ describe('Navigation', () => {
 
         // Assert
         expect(wrapper.find('[data-js-test="logout"]').exists()).toBe(true);
+    });
+
+    it('should show "navLinks" if the user is logged in and has nav link data', () => {
+        // Arrange
+        const propsData = {
+            ...defaultPropsData,
+            userInfo: {
+                isAuthenticated: true
+            }
+        };
+
+        // Act
+        const wrapper = shallowMount(Navigation, { propsData });
+
+        // Assert
         expect(wrapper.find('[data-js-test="nav-links"]').exists()).toBe(true);
     });
 
-    it('should NOT show "navLinks" but show "logout" if the user is logged in but DOES NOT have nav link data', () => {
+    it('should NOT show "navLinks" if the user is logged in but does NOT have nav link data', () => {
+        // Arrange
+        const propsData = {
+            navLinks: {},
+            userInfo: {
+                isAuthenticated: true
+            }
+        };
+
+        // Act
+        const wrapper = shallowMount(Navigation, { propsData });
+
+        // Assert
+        expect(wrapper.find('[data-js-test="nav-links"]').exists()).toBe(false);
+    });
+
+    it('should show "logout" if the user is logged in but does NOT have nav link data', () => {
         // Arrange
         const propsData = {
             navLinks: {},
@@ -96,10 +125,9 @@ describe('Navigation', () => {
 
         // Assert
         expect(wrapper.find('[data-js-test="logout"]').exists()).toBe(true);
-        expect(wrapper.find('[data-js-test="nav-links"]').exists()).toBe(false);
     });
 
-    it('should show "login" if the user has no nav link data and is not authenticated"', () => {
+    it('should show "login" if the user DOES NOT have nav link data and is NOT logged in"', () => {
         // Arrange
         const propsData = {
             navLinks: {},
@@ -128,8 +156,11 @@ describe('Navigation', () => {
             navIsOpen: true
         };
 
+        const width = 767;
+        const height = 768;
+
         // Act
-        resizeWindow(767, 1800);
+        resizeWindow(width, height);
         const wrapper = shallowMount(Navigation, { navData, propsData });
         wrapper.vm.openNav();
 
@@ -149,9 +180,11 @@ describe('Navigation', () => {
         const navData = {
             navIsOpen: false
         };
+        const width = 767;
+        const height = 768;
 
         // Act
-        resizeWindow(767, 1800);
+        resizeWindow(width, height);
         const wrapper = shallowMount(Navigation, { navData, propsData });
         wrapper.vm.closeNav();
 
