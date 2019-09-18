@@ -1,3 +1,8 @@
+/**
+ * @overview Shared Service
+ *
+ * @module shared/service
+ */
 
 /**
  * Returns the locale for translation localization
