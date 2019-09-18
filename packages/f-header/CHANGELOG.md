@@ -11,6 +11,8 @@ v2.0.0-beta-5
 ### Changed
  - Add a logic to hide "Deliver with Just Eat" link from mobile screen size
  - DeliveryEnquiry gtm label changed to be 'click_courier_signup'
+ - Added tests for the navigation component
+ - Added new snapshot
 
 ### Removed
 - Cleaned up unused css styles
