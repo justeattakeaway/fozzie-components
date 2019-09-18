@@ -2,10 +2,11 @@
     <footer
         :data-theme="theme"
         class="c-footer">
-        <div class="c-footer-container c-footer-row c-footer-row--noPadBelowWide">
+        <div
+            class="c-footer-container c-footer-row c-footer-row--noPadBelowWide">
             <link-list
-                v-for="(linkList, index) in copy.linkLists"
-                :key="index"
+                v-for="(linkList, i) in copy.linkLists"
+                :key="i + '_ButtonList'"
                 :link-list="linkList" />
         </div>
 
@@ -15,40 +16,46 @@
                     v-if="copy.linkButtonList.length"
                     class="c-footer-row c-footer-row--noBottomPad">
                     <button-list
-                        v-for="(buttonList, index) in copy.linkButtonList"
-                        :key="index"
+                        v-for="(buttonList, i) in copy.linkButtonList"
+                        :key="i + '_ButtonList'"
                         :button-list="buttonList" />
                 </div>
+
                 <div class="c-footer-row">
                     <icon-list
                         :title="copy.downloadOurApps"
                         :icons="copy.appStoreIcons"
-                        :is-apps="true"
                         :locale="copy.locale"
-                        class="c-iconList c-iconList--apps" />
+                        is-apps />
+
                     <feedback-block
                         :title="copy.feedback"
                         :text="copy.improveOurWebsite"
                         :button-text="copy.sendFeedback" />
+
                     <icon-list
                         :icons="copy.socialIcons"
                         :title="copy.followUs"
-                        class="c-iconList c-iconList--social" />
+                        is-social />
                 </div>
             </div>
         </div>
-        <div class="c-footer-container c-footer-row c-footer-row--combined c-footer-row--notEqualTopAndBottomPad c-footer-row--noPadBelowWide">
+
+        <div
+            class="c-footer-container c-footer-row c-footer-row--combined c-footer-row--notEqualTopAndBottomPad c-footer-row--noPadBelowWide">
             <country-selector
                 :current-country-name="copy.currentCountryName"
                 :current-country-key="copy.currentCountryKey"
                 :countries="copy.countries"
                 :change-country-text="copy.changeCurrentCountry" />
+
             <legal-field
                 v-if="metaLegalFieldEnabled"
                 :info="copy.metaLegalField" />
+
             <icon-list
                 :icons="copy.paymentIcons"
-                class="c-iconList c-iconList--payments" />
+                is-payments />
         </div>
     </footer>
 </template>
@@ -64,7 +71,6 @@ import tenantConfigs from '../tenants';
 import sharedService from '../../../shared.service';
 
 export default {
-    name: 'VueFooter',
     components: {
         ButtonList,
         CountrySelector,
@@ -73,6 +79,7 @@ export default {
         LegalField,
         LinkList
     },
+
     props: {
         locale: {
             type: String,
@@ -80,6 +87,7 @@ export default {
             default: ''
         }
     },
+
     data () {
         const locale = sharedService.getLocale(tenantConfigs, this.locale, this.$118n);
         const localeConfig = tenantConfigs[locale];
@@ -90,6 +98,7 @@ export default {
             theme
         };
     },
+
     computed: {
         metaLegalFieldEnabled () {
             return Object.keys(this.copy.metaLegalField).length > 0;
@@ -99,7 +108,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 .c-footer {
     background-color: $footer-bgColor;
     color: $footer-textColor;
@@ -143,14 +151,6 @@ export default {
     @include media('>=wide') {
         padding: spacing(x4);
         flex-flow: row nowrap;
-
-        .c-iconList--apps {
-            flex-basis: 42%;
-        }
-
-        .c-iconList--social {
-            flex-basis: 25%;
-        }
     }
 }
 
