@@ -30,6 +30,9 @@
                     v-if="showDeliveryEnquiry"
                     class="c-nav-list-item"
                     data-js-test="delivery-enquiry">
+                    v-if="showDeliveryEnquiry && !isBelowMid"
+                    class="c-nav-list-item"
+                    data-js-test="delivery-enquiry">
                     <a
                         :data-trak='`{
                             "trakEvent": "click",
@@ -148,7 +151,7 @@
 
 <script>
 import { ProfileIcon, DeliveryIcon } from '@justeat/f-vue-icons';
-
+import { throttle } from 'lodash-es';
 
 export default {
     components: {
@@ -191,8 +194,21 @@ export default {
     },
     data () {
         return {
-            navIsOpen: false
+            navIsOpen: false,
+            currentScreenWidth: 0
         };
+    },
+    computed: {
+        isBelowMid () {
+            return this.currentScreenWidth <= 767;
+        }
+    },
+    mounted () {
+        this.currentScreenWidth = window.innerWidth;
+        window.addEventListener('resize', throttle(this.onResize, 100));
+    },
+    destroyed () {
+        window.removeEventListener('resize', this.resize);
     },
     methods: {
         onNavToggle () {
@@ -203,6 +219,9 @@ export default {
         },
         openNav () {
             this.navIsOpen = true;
+        },
+        onResize () {
+            this.currentScreenWidth = window.innerWidth;
         }
     }
 };
@@ -286,10 +305,6 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
             position: fixed;
             width: 100%;
             padding-top: $header-height--narrow;
-
-            @at-root .is-multiLanguage#{&} {
-                padding-top: $header-height--narrow--multiLang;
-            }
         }
     }
 }
@@ -331,11 +346,6 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
 
             &.is-visible {
                 @include nav-container-visible();
-            }
-
-            .is-multiLanguage & {
-                top: $header-height--narrow--multiLang;
-                height: calc(100% - (#{$header-height--narrow--multiLang}));
             }
         }
     }
