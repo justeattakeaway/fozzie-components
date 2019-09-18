@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.16
+------------------------------
+*September 9, 2019*
+
+### Changed
+- Using CSS modules to apply styles.
+- Applied ESLint auto-fix to components.
+- Moved legal field image import out of method and inline in the component.
+- `v-for` loop keys more robust by updating the key names.
+
+
 v2.0.0-beta.15
 ------------------------------
 *August 30, 2019*
@@ -42,7 +53,7 @@ v2.0.0-beta.12
 
 ### Changed
 - Small css changes for country selector component
-- Updated resource files according to the latest changes 
+- Updated resource files according to the latest changes
 
 
 v2.0.0-beta.11
@@ -55,7 +66,7 @@ v2.0.0-beta.11
 - `@justeat/f-trak` as a peer dependency
 
 ### Changed
-- Some AU resource links according to the latest changes in live version of the footer 
+- Some AU resource links according to the latest changes in live version of the footer
 
 
 v2.0.0-beta.10
@@ -161,7 +172,7 @@ v2.0.0-beta.2
 *July 5, 2019*
 
 ### Added
-- Transferred all footer data from the original f-footer mobule 
+- Transferred all footer data from the original f-footer module
 
 
 v2.0.0-beta.1

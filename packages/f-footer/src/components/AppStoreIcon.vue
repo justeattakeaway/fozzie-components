@@ -35,17 +35,20 @@ export default {
         IosIconItIt,
         IosIconNbNo
     },
+
     props: {
         name: {
             type: String,
             required: true
         },
+
         locale: {
             type: String,
             required: false,
             default: 'en-GB'
         }
     },
+
     computed: {
         iconComponent () {
             return `${this.name}-icon-${this.locale.toLowerCase()}`;

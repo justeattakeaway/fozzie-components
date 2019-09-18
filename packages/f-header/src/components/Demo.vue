@@ -8,7 +8,6 @@
             content="width=device-width, initial-scale=1">
         <vue-header
             locale="en-AU" />
-        <input id="skipToMain">
     </div>
 </template>
 

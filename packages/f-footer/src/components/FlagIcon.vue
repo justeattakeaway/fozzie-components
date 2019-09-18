@@ -33,12 +33,14 @@ export default {
         FlagIconNo,
         FlagIconNz
     },
+
     props: {
         countryCode: {
             type: String,
             required: true
         }
     },
+
     computed: {
         iconComponent () {
             return `flag-icon-${this.countryCode.toLowerCase()}`;
