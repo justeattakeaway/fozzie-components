@@ -1,8 +1,7 @@
-import appboy from 'appboy-web-sdk';
-
-const intialiseBraze = apiKey => {
+const intialiseBraze = (apiKey, enableLogging = false) => {
     if (typeof window !== 'undefined') {
-        appboy.initialize(apiKey);
+        const appboy = require('appboy-web-sdk'); // eslint-disable-line
+        appboy.initialize(apiKey, { enableLogging });
         appboy.display.automaticallyShowNewInAppMessages();
         appboy.openSession();
     }
