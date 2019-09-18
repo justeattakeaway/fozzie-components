@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "workspaces": [
     "packages/*"
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@babel/cli": "7.5.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.6.0",
     "@babel/preset-env": "7.5.4",
     "@justeat/browserslist-config-fozzie": "1.1.1",
     "@justeat/eslint-config-fozzie": "3.1.1",
