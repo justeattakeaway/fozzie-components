@@ -3,7 +3,9 @@ module.exports = api => {
     const isTest = api.env('test');
     const isSettings = api.env('settings');
     const presets = [];
-    const plugins = [];
+    const plugins = [
+        '@babel/plugin-proposal-optional-chaining'
+    ];
 
     if (!isTest && !isSettings) {
         api.cache(true);
