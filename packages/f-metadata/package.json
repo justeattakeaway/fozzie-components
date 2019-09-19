@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-metadata",
   "description": "Fozzie Metadata Component",
-  "version": "v1.0.0",
+  "version": "v0.1.0",
   "main": "dist/f-metadata.umd.min.js",
   "files": [
     "dist"
@@ -32,8 +32,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "appboy-web-sdk": "^2.4.0",
-    "yalc": "^1.0.0-pre.34"
+    "appboy-web-sdk": "2.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "3.9.2",
