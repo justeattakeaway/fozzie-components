@@ -6,7 +6,6 @@
 
 import { logError } from '@justeat/f-logger';
 
-
 const storeLocalAnalyticsBlob = result => {
     window.localStorage.setItem('je-analytics', JSON.stringify(result));
     return result;
@@ -53,6 +52,34 @@ const orderCountSupported = () => {
     return Promise.reject();
 };
 
+const removeElement = element => element && element.remove();
+const removeHiddenClass = element => element && element.classList.remove('is-hidden');
+
+const updateDom = authData => {
+    const authEl = document.querySelector('[data-auth-wrapper]');
+    const loginEl = document.querySelector('[data-login]');
+
+    if (authData.isAuthenticated) {
+        const headerName = document.querySelector('[data-name]');
+        const headerEmail = document.querySelector('[data-email]');
+
+        if (headerName && authData.friendlyName !== '') {
+            headerName.textContent = authData.friendlyName;
+        }
+        if (headerEmail && authData.email !== '') {
+            headerEmail.textContent = authData.email;
+        }
+
+        removeHiddenClass(authEl);
+        removeElement(loginEl);
+    } else {
+        removeHiddenClass(loginEl);
+        removeElement(authEl);
+    }
+
+    return authData;
+};
+
 export const saveUserData = authData => {
     if (!authData.isAuthenticated) {
         return Promise.resolve();
@@ -82,34 +109,6 @@ export const saveUserData = authData => {
     pushUserData(userData);
 
     return Promise.resolve();
-};
-
-const removeElement = element => element && element.remove();
-const removeHiddenClass = element => element && element.classList.remove('is-hidden');
-
-const updateDom = authData => {
-    const authEl = document.querySelector('[data-auth-wrapper]');
-    const loginEl = document.querySelector('[data-login]');
-
-    if (authData.isAuthenticated) {
-        const headerName = document.querySelector('[data-name]');
-        const headerEmail = document.querySelector('[data-email]');
-
-        if (headerName && authData.friendlyName !== '') {
-            headerName.textContent = authData.friendlyName;
-        }
-        if (headerEmail && authData.email !== '') {
-            headerEmail.textContent = authData.email;
-        }
-
-        removeHiddenClass(authEl);
-        removeElement(loginEl);
-    } else {
-        removeHiddenClass(loginEl);
-        removeElement(authEl);
-    }
-
-    return authData;
 };
 
 /**

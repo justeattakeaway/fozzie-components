@@ -305,6 +305,14 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-syntax-optional-catch-binding" "^7.2.0"
 
+"@babel/plugin-proposal-optional-chaining@^7.6.0":
+  version "7.6.0"
+  resolved "http://packages.je-labs.com/npm/private-npm/@babel/plugin-proposal-optional-chaining/-/plugin-proposal-optional-chaining-7.6.0.tgz#e9bf1f9b9ba10c77c033082da75f068389041af8"
+  integrity sha1-6b8fm5uhDHfAMwgtp18Gg4kEGvg=
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.0.0"
+    "@babel/plugin-syntax-optional-chaining" "^7.2.0"
+
 "@babel/plugin-proposal-unicode-property-regex@^7.2.0", "@babel/plugin-proposal-unicode-property-regex@^7.4.4":
   version "7.4.4"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-unicode-property-regex/-/plugin-proposal-unicode-property-regex-7.4.4.tgz#501ffd9826c0b91da22690720722ac7cb1ca9c78"
@@ -360,6 +368,13 @@
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-optional-catch-binding/-/plugin-syntax-optional-catch-binding-7.2.0.tgz#a94013d6eda8908dfe6a477e7f9eda85656ecf5c"
   integrity sha512-bDe4xKNhb0LI7IvZHiA13kff0KEfaGX/Hv4lMA9+7TEc63hMNvfKo6ZFpXhKuEp+II/q35Gc4NoMeDZyaUbj9w==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.0.0"
+
+"@babel/plugin-syntax-optional-chaining@^7.2.0":
+  version "7.2.0"
+  resolved "http://packages.je-labs.com/npm/private-npm/@babel/plugin-syntax-optional-chaining/-/plugin-syntax-optional-chaining-7.2.0.tgz#a59d6ae8c167e7608eaa443fda9fa8fa6bf21dff"
+  integrity sha1-pZ1q6MFn52COqkQ/2p+o+mvyHf8=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
@@ -1016,16 +1031,8 @@
 
 "@justeat/f-icons@2.0.0-beta.6":
   version "2.0.0-beta.6"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.6.tgz#e3a08a25621332305abe79867a8005695958bce2"
-  integrity sha512-tDT/WWMGJa0Qy62YD2RCu9JW2JSrusFG9n2vOam6UYwU0GoSAncED3Q68yo3fmckMdCONfwuXuRX0dWcWNSw3w==
-  dependencies:
-    classnames "2.2.5"
-    core-js "3.1.3"
-
-"@justeat/f-icons@^2.0.0-beta.4":
-  version "2.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.4.tgz#5b68303b6c39f06e31d8626fb47e8e3c33fa24a9"
-  integrity sha512-IjmgyfO+akCTS4ofze/EkO6kkefnQNBLlwMiyq9wRpwKIOc2+NX3mn/TQ1H96NHajWSQiSyhhwic5YHcq86+Pw==
+  resolved "http://packages.je-labs.com/npm/private-npm/@justeat/f-icons/-/f-icons-2.0.0-beta.6.tgz#e3a08a25621332305abe79867a8005695958bce2"
+  integrity sha1-46CKJWITMjBavnmGeoAFaVlYvOI=
   dependencies:
     classnames "2.2.5"
     core-js "3.1.3"
@@ -1045,18 +1052,10 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-utils/-/f-utils-0.3.0.tgz#1f18ba13ad7061e21c2112387234a77ba45fb5d3"
   integrity sha512-hqRiGA2lP++Z1oqawsv1V2Duf3YShaAbJ3S5JEPTpTMP5RjH36Xpc8nRbIVFBmwnZCu7L9iF7AebYTUX8XhiZA==
 
-"@justeat/f-vue-icons@1.0.0-beta.2":
-  version "1.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.2.tgz#87facc8553888b87e63a6dd8a378876624eaee2b"
-  integrity sha512-5pLzLq+cPNDQDa6eo1YcLi7Tos4tGFgHPQGn4gptstgdO22gpQcpmKkHPpjmD49Hxg/1jK/KyzBuyrYzsd7ffw==
-  dependencies:
-    "@justeat/f-icons" "^2.0.0-beta.4"
-    babel-helper-vue-jsx-merge-props "^2.0.3"
-
-"@justeat/f-vue-icons@1.0.0-beta.4":
+"@justeat/f-vue-icons@^1.0.0-beta.4":
   version "1.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.4.tgz#aef8a22b43f04f3ad0ca287f50ed1d68804c605a"
-  integrity sha512-AOiqwdNj/Gc+WY6TstINRXUy2lt2Ft9Ic/KlA0zyAfLRI8OWFa4tGzfOZijSyVq9m2QcxLBsDvj3SZ/i3vRl8A==
+  resolved "http://packages.je-labs.com/npm/private-npm/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.4.tgz#aef8a22b43f04f3ad0ca287f50ed1d68804c605a"
+  integrity sha1-rviiK0PwTzrQyih/UO0daIBMYFo=
   dependencies:
     "@justeat/f-icons" "2.0.0-beta.6"
     babel-helper-vue-jsx-merge-props "^2.0.3"

@@ -64,6 +64,7 @@
   "dependencies": {
     "@justeat/f-footer": "file:packages/f-footer",
     "@justeat/f-header": "file:packages/f-header",
+    "@justeat/f-logger": "^0.7.1",
     "@justeat/f-vue-icons": "file:packages/f-vue-icons"
   }
 }
