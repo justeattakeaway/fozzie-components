@@ -1,15 +1,18 @@
 <template>
     <div
-        class="c-footer-certificates">
+        :class="$style['c-footer-certificates']">
         <p
             v-if="info.textField">
             {{ info.textField }}
         </p>
         <img
             v-if="info.icon.name"
-            :src="iconUrl"
+            :src="require(`../assets/img/${info.icon.name}.png`)"
             :alt="info.icon.alt"
-            :class="['c-footer-certificates-icons', iconClass]">
+            :class="[
+                $style['c-footer-certificates-icons'],
+                $style[iconClass]
+            ]">
     </div>
 </template>
 
@@ -21,24 +24,16 @@ export default {
             required: true
         }
     },
+
     computed: {
         iconClass () {
             return `c-footer-certificates-icons--${this.info.icon.name}`;
-        },
-        iconUrl () {
-            return this.getImgUrl(this.info.icon.name);
-        }
-    },
-    methods: {
-        getImgUrl (name) {
-            // eslint-disable-next-line global-require, import/no-dynamic-require
-            return require(`../assets/img/${name}.png`);
         }
     }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
 
 .c-footer-certificates {
     display: flex;
