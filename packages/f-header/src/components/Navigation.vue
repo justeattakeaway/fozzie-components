@@ -1,5 +1,6 @@
 <template>
-    <nav class="c-nav c-nav--global">
+    <nav
+        class="c-nav c-nav--global">
         <button
             class="c-nav-trigger"
             type="button"
@@ -14,6 +15,7 @@
             class="c-nav-trigger is-hidden">
 
         <label
+            data-js-test="nav-toggle"
             :class="['c-nav-toggle', {
                 'is-open': navIsOpen
             }]"
@@ -26,7 +28,11 @@
             <ul class="c-nav-list">
                 <li
                     v-if="showDeliveryEnquiry"
-                    class="c-nav-list-item">
+                    class="c-nav-list-item"
+                    data-js-test="delivery-enquiry">
+                    v-if="showDeliveryEnquiry && !isBelowMid"
+                    class="c-nav-list-item"
+                    data-js-test="delivery-enquiry">
                     <a
                         :data-trak='`{
                             "trakEvent": "click",
@@ -68,6 +74,7 @@
                         <li
                             v-for="(link, index) in navLinks"
                             :key="index"
+                            data-js-test="nav-links"
                             class="c-nav-list-item">
                             <a
                                 :tabindex="navIsOpen ? '0' : '-1'"
@@ -85,7 +92,9 @@
                             </a>
                         </li>
 
-                        <li class="c-nav-list-item c-nav-list-item--forceLast">
+                        <li
+                            class="c-nav-list-item c-nav-list-item--forceLast"
+                            data-js-test="logout">
                             <a
                                 :tabindex="navIsOpen ? '0' : '-1'"
                                 class="c-nav-list-link"
@@ -106,7 +115,8 @@
 
                 <li
                     v-if="!userInfo.isAuthenticated"
-                    class="c-nav-list-item">
+                    class="c-nav-list-item"
+                    data-js-test="login">
                     <a
                         :href="accountLogin.url"
                         rel="nofollow"
@@ -141,7 +151,7 @@
 
 <script>
 import { ProfileIcon, DeliveryIcon } from '@justeat/f-vue-icons';
-
+import { throttle } from 'lodash-es';
 
 export default {
     components: {
@@ -184,8 +194,21 @@ export default {
     },
     data () {
         return {
-            navIsOpen: false
+            navIsOpen: false,
+            currentScreenWidth: 0
         };
+    },
+    computed: {
+        isBelowMid () {
+            return this.currentScreenWidth <= 767;
+        }
+    },
+    mounted () {
+        this.currentScreenWidth = window.innerWidth;
+        window.addEventListener('resize', throttle(this.onResize, 100));
+    },
+    destroyed () {
+        window.removeEventListener('resize', this.resize);
     },
     methods: {
         onNavToggle () {
@@ -196,6 +219,9 @@ export default {
         },
         openNav () {
             this.navIsOpen = true;
+        },
+        onResize () {
+            this.currentScreenWidth = window.innerWidth;
         }
     }
 };
@@ -279,10 +305,6 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
             position: fixed;
             width: 100%;
             padding-top: $header-height--narrow;
-
-            @at-root .is-multiLanguage#{&} {
-                padding-top: $header-height--narrow--multiLang;
-            }
         }
     }
 }
@@ -324,11 +346,6 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
 
             &.is-visible {
                 @include nav-container-visible();
-            }
-
-            .is-multiLanguage & {
-                top: $header-height--narrow--multiLang;
-                height: calc(100% - (#{$header-height--narrow--multiLang}));
             }
         }
     }

@@ -68,6 +68,7 @@ import IconList from './IconList.vue';
 import LegalField from './LegalField.vue';
 import LinkList from './LinkList.vue';
 import tenantConfigs from '../tenants';
+import sharedService from '../../../../scripts/shared.service';
 
 export default {
     components: {
@@ -88,9 +89,9 @@ export default {
     },
 
     data () {
-        const locale = this.getLocale();
+        const locale = sharedService.getLocale(tenantConfigs, this.locale, this.$118n);
         const localeConfig = tenantConfigs[locale];
-        const theme = this.getTheme(locale);
+        const theme = sharedService.getTheme(locale);
 
         return {
             copy: { ...localeConfig },
@@ -101,35 +102,6 @@ export default {
     computed: {
         metaLegalFieldEnabled () {
             return Object.keys(this.copy.metaLegalField).length > 0;
-        }
-    },
-
-    methods: {
-        getLocale () {
-            let locale = this.locale
-                || (this.$i18n
-                    ? this.$i18n.locale
-                    : null); // use prop, or the i18n locale value set
-
-            // if the locale is either
-            // a) not set
-            // or b) set to a country code that this component does not recognise
-            // it will be set to 'en-GB'
-            if (!tenantConfigs[locale]) {
-                locale = 'en-GB';
-            }
-
-            return locale;
-        },
-
-        getTheme (locale) {
-            switch (locale) {
-                case 'en-AU':
-                case 'en-NZ':
-                    return 'ml';
-                default:
-                    return 'je';
-            }
         }
     }
 };
