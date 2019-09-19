@@ -2,7 +2,7 @@
     <div
         v-if="linkList.links.length"
         :class="[$style['c-footer-panel'], {
-            [$style['is-collapsed']]: panelCollapsed && isBelowWide
+            'is-collapsed': panelCollapsed && isBelowWide
         }]"
         data-js-test="linkList-wrapper">
         <h2>
@@ -15,8 +15,7 @@
                 :aria-controls="listId"
                 :class="[
                     'c-footer-heading',
-                    'c-footer-heading--button',
-                    $style['c-footer-heading--button']
+                    'c-footer-heading--button'
                 ]"
                 data-js-test="linkList-header"
                 @click="onPanelClick">
@@ -125,35 +124,6 @@ export default {
         &:last-of-type {
             border-bottom: none;
         }
-    }
-}
-
-.c-footer-heading--button {
-    align-items: center;
-    background: none;
-    border-style: none;
-    color: $color-headings;
-    display: flex;
-    font-family: $font-family-headings;
-    font-weight: $font-weight-headings;
-    justify-content: space-between;
-    margin: 0;
-    padding: spacing(x2);
-    text-align: left;
-    width: 100%;
-    @include font-size(mid);
-
-    @include theme(ml) {
-        font-family: $font-family-headings--ml;
-        font-weight: $font-weight-headings--ml;
-    }
-
-    @include media('<wide') {
-        cursor: pointer;
-    }
-
-    @include media('>=wide') {
-        padding: 0;
     }
 }
 
