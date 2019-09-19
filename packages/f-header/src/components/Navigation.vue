@@ -53,7 +53,7 @@
                     <a
                         class="c-nav-list-text"
                         href="/"
-                        :tabindex="isBelowMid ? '-1' : '0'"
+                        :tabindex="isBelowMid ? -1 : 0"
                         :aria-expanded="!isBelowMid && navIsOpen ? 'true' : 'false'"
                         :aria-haspopup="isBelowMid ? false : true"
                         @click.prevent="onNavToggle">
@@ -75,7 +75,7 @@
                             data-js-test="nav-links"
                             class="c-nav-list-item">
                             <a
-                                :tabindex="navIsOpen ? '0' : '-1'"
+                                :tabindex="navIsOpen ? 0 : -1"
                                 class="c-nav-list-link"
                                 :href="link.url"
                                 :data-trak='`{
@@ -95,7 +95,7 @@
                             class="c-nav-list-item"
                             data-js-test="logout">
                             <a
-                                :tabindex="navIsOpen ? '0' : '-1'"
+                                :tabindex="navIsOpen ? 0 : -1"
                                 class="c-nav-list-link"
                                 :href="accountLogout.url"
                                 :data-trak='`{
@@ -168,7 +168,7 @@
                         class="c-nav-list-item"
                         data-js-test="logout">
                         <a
-                            :tabindex="navIsOpen ? '0' : '-1'"
+                            :tabindex="navIsOpen ? 0 : -1"
                             class="c-nav-list-link"
                             :href="accountLogout.url"
                             :data-trak='`{
