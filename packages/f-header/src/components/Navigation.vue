@@ -1,11 +1,11 @@
 <template>
-    <nav
-        class="c-nav c-nav--global">
+    <nav class="c-nav c-nav--global">
         <button
             class="c-nav-trigger"
             type="button"
+            :aria-expanded="navIsOpen ? 'true' : 'false'"
+            :aria-label="openMenuText"
             @click="onNavToggle">
-            {{ openMenuText }}
         </button>
 
         <input
@@ -27,9 +27,6 @@
             :class="['c-nav-container', { 'is-visible': navIsOpen }]">
             <ul class="c-nav-list">
                 <li
-                    v-if="showDeliveryEnquiry"
-                    class="c-nav-list-item"
-                    data-js-test="delivery-enquiry">
                     v-if="showDeliveryEnquiry && !isBelowMid"
                     class="c-nav-list-item"
                     data-js-test="delivery-enquiry">
@@ -56,13 +53,12 @@
                     <a
                         class="c-nav-list-text"
                         href="/"
-                        :aria-expanded="navIsOpen ? 'true' : 'false'"
-                        aria-haspopup="true"
+                        :tabindex="isBelowMid ? '-1' : '0'"
+                        :aria-expanded="!isBelowMid && navIsOpen ? 'true' : 'false'"
+                        :aria-haspopup="isBelowMid ? false : true"
                         @click.prevent="onNavToggle">
                         <profile-icon class="c-nav-icon c-nav-icon--profile" />
-                        <span
-                            v-if="userInfo.isAuthenticated"
-                            class="c-nav-list-text-sub">
+                        <span class="c-nav-list-text-sub">
                             {{ userInfo.friendlyName }}
                         </span>
                         <span class="c-nav-list-text-sub u-showBelowMid">
@@ -70,7 +66,9 @@
                         </span>
                     </a>
 
-                    <ul class="c-nav-popoverList">
+                    <ul
+                        class="c-nav-popoverList"
+                        :aria-label="userInfo.friendlyName">
                         <li
                             v-for="(link, index) in navLinks"
                             :key="index"
@@ -93,7 +91,8 @@
                         </li>
 
                         <li
-                            class="c-nav-list-item c-nav-list-item--forceLast"
+                            v-if="!isBelowMid"
+                            class="c-nav-list-item"
                             data-js-test="logout">
                             <a
                                 :tabindex="navIsOpen ? '0' : '-1'"
@@ -131,7 +130,9 @@
                     </a>
                 </li>
 
-                <li class="c-nav-list-item c-nav-list-item--support">
+                <li
+                    v-if="!isBelowMid"
+                    class="c-nav-list-item c-nav-list-item--support">
                     <a
                         :href="help.url"
                         class="c-nav-list-link"
@@ -144,6 +145,44 @@
                         {{ help.text }}
                     </a>
                 </li>
+
+                <template v-if="isBelowMid">
+                    <li class="c-nav-list-item c-nav-list-item--support">
+                        <a
+                            :href="help.url"
+                            class="c-nav-list-link"
+                            :data-trak='`{
+                                "trakEvent": "click",
+                                "category": "engagement",
+                                "action": "header",
+                                "label": "${help.gtm}"
+                            }`'
+                            @blur="closeNav"
+                            @focus="openNav">
+                            {{ help.text }}
+                        </a>
+                    </li>
+
+                    <li
+
+                        class="c-nav-list-item"
+                        data-js-test="logout">
+                        <a
+                            :tabindex="navIsOpen ? '0' : '-1'"
+                            class="c-nav-list-link"
+                            :href="accountLogout.url"
+                            :data-trak='`{
+                                "trakEvent": "click",
+                                "category": "engagement",
+                                "action": "header",
+                                "label": "${accountLogout.gtm}"
+                            }`'
+                            @blur="closeNav"
+                            @focus="openNav">
+                            {{ accountLogout.text }}
+                        </a>
+                    </li>
+                </template>
             </ul>
         </div>
     </nav>
