@@ -1,12 +1,11 @@
 <template>
-    <nav
-        class="c-nav c-nav--global">
+    <nav class="c-nav c-nav--global">
         <button
             class="c-nav-trigger"
             type="button"
-            @click="onNavToggle">
-            {{ openMenuText }}
-        </button>
+            :aria-expanded="navIsOpen ? 'true' : 'false'"
+            :aria-label="openMenuText"
+            @click="onNavToggle" />
 
         <input
             id="nav-trigger"
@@ -27,9 +26,6 @@
             :class="['c-nav-container', { 'is-visible': navIsOpen }]">
             <ul class="c-nav-list">
                 <li
-                    v-if="showDeliveryEnquiry"
-                    class="c-nav-list-item"
-                    data-js-test="delivery-enquiry">
                     v-if="showDeliveryEnquiry && !isBelowMid"
                     class="c-nav-list-item"
                     data-js-test="delivery-enquiry">
@@ -57,12 +53,12 @@
                         v-if="userInfo"
                         class="c-nav-list-text"
                         href="/"
-                        :aria-expanded="navIsOpen ? 'true' : 'false'"
-                        aria-haspopup="true"
+                        :tabindex="isBelowMid ? -1 : 0"
+                        :aria-expanded="!isBelowMid && navIsOpen ? 'true' : 'false'"
+                        :aria-haspopup="isBelowMid ? false : true"
                         @click.prevent="onNavToggle">
                         <profile-icon class="c-nav-icon c-nav-icon--profile" />
-                        <span
-                            class="c-nav-list-text-sub">
+                        <span class="c-nav-list-text-sub">
                             {{ userInfo.friendlyName }}
                         </span>
                         <span class="c-nav-list-text-sub u-showBelowMid">
@@ -70,14 +66,16 @@
                         </span>
                     </a>
 
-                    <ul class="c-nav-popoverList">
+                    <ul
+                        class="c-nav-popoverList"
+                        :aria-label="userInfo.friendlyName">
                         <li
                             v-for="(link, index) in navLinks"
                             :key="index"
                             data-js-test="nav-links"
                             class="c-nav-list-item">
                             <a
-                                :tabindex="navIsOpen ? '0' : '-1'"
+                                :tabindex="navIsOpen ? 0 : -1"
                                 class="c-nav-list-link"
                                 :href="link.url"
                                 :data-trak='`{
@@ -93,12 +91,13 @@
                         </li>
 
                         <li
-                            class="c-nav-list-item c-nav-list-item--forceLast"
+                            v-if="!isBelowMid"
+                            class="c-nav-list-item"
                             data-js-test="logout">
                             <a
-                                :tabindex="navIsOpen ? '0' : '-1'"
+                                :tabindex="navIsOpen ? 0 : -1"
                                 class="c-nav-list-link"
-                                :href="`${accountLogout.url}${returnUrl}`"
+                                :href="returnLogoutUrl"
                                 :data-trak='`{
                                     "trakEvent": "click",
                                     "category": "engagement",
@@ -118,7 +117,7 @@
                     class="c-nav-list-item"
                     data-js-test="login">
                     <a
-                        :href="`${accountLogin.url}${returnUrl}`"
+                        :href="returnLoginUrl"
                         rel="nofollow"
                         class="c-nav-list-link"
                         :data-trak='`{
@@ -131,7 +130,47 @@
                     </a>
                 </li>
 
-                <li class="c-nav-list-item c-nav-list-item--support">
+                <template v-if="isBelowMid">
+                    <li class="c-nav-list-item c-nav-list-item--support">
+                        <a
+                            :href="help.url"
+                            class="c-nav-list-link"
+                            :data-trak='`{
+                                "trakEvent": "click",
+                                "category": "engagement",
+                                "action": "header",
+                                "label": "${help.gtm}"
+                            }`'
+                            @blur="closeNav"
+                            @focus="openNav">
+                            {{ help.text }}
+                        </a>
+                    </li>
+
+                    <li
+                        v-if="userInfo.isAuthenticated"
+                        class="c-nav-list-item"
+                        data-js-test="logout">
+                        <a
+                            :tabindex="navIsOpen ? 0 : -1"
+                            class="c-nav-list-link"
+                            :href="returnLogoutUrl"
+                            :data-trak='`{
+                                "trakEvent": "click",
+                                "category": "engagement",
+                                "action": "header",
+                                "label": "${accountLogout.gtm}"
+                            }`'
+                            @blur="closeNav"
+                            @focus="openNav">
+                            {{ accountLogout.text }}
+                        </a>
+                    </li>
+                </template>
+
+                <li
+                    v-else
+                    class="c-nav-list-item c-nav-list-item--support">
                     <a
                         :href="help.url"
                         class="c-nav-list-link"
@@ -187,6 +226,11 @@ export default {
         showDeliveryEnquiry: {
             type: Boolean,
             default: false
+        },
+        justLog: {
+            type: Function,
+            default: () => ({}),
+            required: true
         }
     },
     data () {
@@ -206,6 +250,12 @@ export default {
             const { href } = this.$router.resolve({ name });
 
             return encodeURIComponent(href);
+        },
+        returnLoginUrl () {
+            return `${this.accountLogin.url}${this.returnUrl}`;
+        },
+        returnLogoutUrl () {
+            return `${this.accountLogout.url}${this.returnUrl}`;
         }
     },
     mounted () {
@@ -236,11 +286,9 @@ export default {
                         credentials: 'same-origin'
                     }
                 });
-                if (data) {
-                    this.userInfo = data;
-                }
+                if (data) this.userInfo = data;
             } catch (err) {
-                justLog.error('Error handling "returnUserDetails" action', err);
+                if (this.justLog) this.justLog.error('Error handling "returnUserDetails" action', err);
             }
         }
     }

@@ -52,14 +52,6 @@ export default {
         showDeliveryEnquiry: {
             type: Boolean,
             default: false
-        },
-        userInfo: {
-            type: Object,
-            default: () => ({
-                isAuthenticated: false,
-                friendlyName: '',
-                email: ''
-            })
         }
     },
     data () {
