@@ -2,7 +2,6 @@ import { shallowMount } from '@vue/test-utils';
 import Navigation from '../Navigation.vue';
 
 const defaultPropsData = {
-    userInfo: {},
     accountLogin: {},
     accountLogout: {},
     navLinks: {
@@ -21,6 +20,17 @@ const defaultPropsData = {
     deliveryEnquiry: {},
     showDeliveryEnquiry: false
 };
+const defaultData = {
+    userInfo: {
+        isAuthenticated: false,
+        friendlyName: 'James Fisher',
+        email: 'j.fisher@fakemail.com',
+
+    },
+    navIsOpen: false,
+}
+const width = 767;
+const height = 768;
 
 const resizeWindow = (x, y) => {
     window.innerWidth = x;
@@ -31,7 +41,9 @@ const resizeWindow = (x, y) => {
 describe('Navigation', () => {
     it('should be defined', () => {
         const propsData = defaultPropsData;
+        const data = defaultData;
         const wrapper = shallowMount(Navigation, { propsData });
+        wrapper.setData(data);
         expect(wrapper.exists()).toBe(true);
     });
 
@@ -41,9 +53,11 @@ describe('Navigation', () => {
             ...defaultPropsData,
             showDeliveryEnquiry: true
         };
+        const data = defaultData;
 
         // Act
         const wrapper = shallowMount(Navigation, { propsData });
+        wrapper.setData(data);
 
         // Assert
         expect(wrapper.find('[data-js-test="delivery-enquiry"]').exists()).toBe(true);
@@ -55,9 +69,11 @@ describe('Navigation', () => {
             ...defaultPropsData,
             showDeliveryEnquiry: false
         };
+        const data = defaultData;
 
         // Act
         const wrapper = shallowMount(Navigation, { propsData });
+        wrapper.setData(data);
 
         // Assert
         expect(wrapper.find('[data-js-test="delivery-enquiry"]').exists()).toBe(false);
@@ -65,8 +81,8 @@ describe('Navigation', () => {
 
     it('should show "logout" if the user is logged in and has nav link data', () => {
         // Arrange
-        const propsData = {
-            ...defaultPropsData,
+        const propsData = defaultPropsData;
+        const data = {
             userInfo: {
                 isAuthenticated: true
             }
@@ -74,6 +90,7 @@ describe('Navigation', () => {
 
         // Act
         const wrapper = shallowMount(Navigation, { propsData });
+        wrapper.setData(data);
 
         // Assert
         expect(wrapper.find('[data-js-test="logout"]').exists()).toBe(true);
@@ -81,8 +98,8 @@ describe('Navigation', () => {
 
     it('should show "navLinks" if the user is logged in and has nav link data', () => {
         // Arrange
-        const propsData = {
-            ...defaultPropsData,
+        const propsData = defaultPropsData;
+        const data = {
             userInfo: {
                 isAuthenticated: true
             }
@@ -90,6 +107,7 @@ describe('Navigation', () => {
 
         // Act
         const wrapper = shallowMount(Navigation, { propsData });
+        wrapper.setData(data);
 
         // Assert
         expect(wrapper.find('[data-js-test="nav-links"]').exists()).toBe(true);
@@ -98,7 +116,10 @@ describe('Navigation', () => {
     it('should NOT show "navLinks" if the user is logged in but does NOT have nav link data', () => {
         // Arrange
         const propsData = {
-            navLinks: {},
+            ...defaultPropsData,
+            navLinks: {}
+        };
+        const data = {
             userInfo: {
                 isAuthenticated: true
             }
@@ -106,6 +127,7 @@ describe('Navigation', () => {
 
         // Act
         const wrapper = shallowMount(Navigation, { propsData });
+        wrapper.setData(data);
 
         // Assert
         expect(wrapper.find('[data-js-test="nav-links"]').exists()).toBe(false);
@@ -113,8 +135,8 @@ describe('Navigation', () => {
 
     it('should show "logout" if the user is logged in but does NOT have nav link data', () => {
         // Arrange
-        const propsData = {
-            navLinks: {},
+        const propsData = defaultPropsData;
+        const data = {
             userInfo: {
                 isAuthenticated: true
             }
@@ -122,6 +144,7 @@ describe('Navigation', () => {
 
         // Act
         const wrapper = shallowMount(Navigation, { propsData });
+        wrapper.setData(data);
 
         // Assert
         expect(wrapper.find('[data-js-test="logout"]').exists()).toBe(true);
@@ -130,14 +153,17 @@ describe('Navigation', () => {
     it('should show "login" if the user DOES NOT have nav link data and is NOT logged in"', () => {
         // Arrange
         const propsData = {
-            navLinks: {},
-            userInfo: {
-                isAuthenticated: false
-            }
+            ...defaultPropsData,
+            navLinks: {}
+        };
+        const data = {
+            ...defaultData,
+            userInfo: false,
         };
 
         // Act
         const wrapper = shallowMount(Navigation, { propsData });
+        wrapper.setData(data);
 
         // Assert
         expect(wrapper.find('[data-js-test="login"]').exists()).toBe(true);
@@ -147,21 +173,20 @@ describe('Navigation', () => {
         // Arrange
         const propsData = {
             ...defaultPropsData,
+            navLinks: {}
+        };
+        const data = {
+            ...defaultData,
             userInfo: {
                 isAuthenticated: true
-            }
-        };
-
-        const navData = {
+            },
             navIsOpen: true
         };
 
-        const width = 767;
-        const height = 768;
-
         // Act
         resizeWindow(width, height);
-        const wrapper = shallowMount(Navigation, { navData, propsData });
+        const wrapper = shallowMount(Navigation, { propsData });
+        wrapper.setData(data);
         wrapper.vm.openNav();
 
         // Assert
@@ -170,22 +195,19 @@ describe('Navigation', () => {
 
     it('should NOT show nav links on mobile when "navIsOpen" is false', () => {
         // Arrange
-        const propsData = {
-            ...defaultPropsData,
+        const propsData = defaultPropsData;
+        const data = {
+            ...defaultData,
             userInfo: {
                 isAuthenticated: true
-            }
+            },
+            navIsOpen: true
         };
-
-        const navData = {
-            navIsOpen: false
-        };
-        const width = 767;
-        const height = 768;
 
         // Act
         resizeWindow(width, height);
-        const wrapper = shallowMount(Navigation, { navData, propsData });
+        const wrapper = shallowMount(Navigation, { propsData });
+        wrapper.setData(data);
         wrapper.vm.closeNav();
 
         // Assert

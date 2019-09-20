@@ -49,11 +49,12 @@
                 </li>
 
                 <li
-                    :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo.isAuthenticated, 'open': navIsOpen }]"
+                    :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo, 'open': navIsOpen }]"
                     @mouseover="openNav"
                     @mouseleave="closeNav"
                     @keyup.esc="closeNav">
                     <a
+                        v-if="userInfo"
                         class="c-nav-list-text"
                         href="/"
                         :aria-expanded="navIsOpen ? 'true' : 'false'"
@@ -61,7 +62,6 @@
                         @click.prevent="onNavToggle">
                         <profile-icon class="c-nav-icon c-nav-icon--profile" />
                         <span
-                            v-if="userInfo.isAuthenticated"
                             class="c-nav-list-text-sub">
                             {{ userInfo.friendlyName }}
                         </span>
@@ -114,7 +114,7 @@
                 </li>
 
                 <li
-                    v-if="!userInfo.isAuthenticated"
+                    v-if="!userInfo"
                     class="c-nav-list-item"
                     data-js-test="login">
                     <a
@@ -152,6 +152,7 @@
 <script>
 import { ProfileIcon, DeliveryIcon } from '@justeat/f-vue-icons';
 import { throttle } from 'lodash-es';
+import axios from 'axios';
 
 export default {
     components: {
@@ -159,10 +160,6 @@ export default {
         DeliveryIcon
     },
     props: {
-        userInfo: {
-            type: Object,
-            default: () => ({})
-        },
         accountLogin: {
             type: Object,
             default: () => ({})
@@ -195,7 +192,8 @@ export default {
     data () {
         return {
             navIsOpen: false,
-            currentScreenWidth: 0
+            currentScreenWidth: 0,
+            userInfo: false
         };
     },
     computed: {
@@ -211,6 +209,7 @@ export default {
         }
     },
     mounted () {
+		this.returnUserDetails();
         this.currentScreenWidth = window.innerWidth;
         window.addEventListener('resize', throttle(this.onResize, 100));
     },
@@ -229,6 +228,21 @@ export default {
         },
         onResize () {
             this.currentScreenWidth = window.innerWidth;
+        },
+        async returnUserDetails () {
+            try {
+                const { data } = await axios.get('/api/account/details', {
+                    headers: {
+                        credentials: 'same-origin'
+                    }
+                });
+                if (data) {
+                    this.userInfo = data;
+                }
+            } catch (err) {
+                // eslint-disable-next-line no-console
+                console.log('Error handling "returnUserDetails" action', err);
+            }
         }
     }
 };
