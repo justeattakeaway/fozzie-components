@@ -96,7 +96,7 @@
                             <a
                                 :tabindex="navIsOpen ? 0 : -1"
                                 class="c-nav-list-link"
-                                :href="accountLogout.url"
+                                :href="returnLogoutUrl"
                                 :data-trak='`{
                                     "trakEvent": "click",
                                     "category": "engagement",
@@ -116,7 +116,7 @@
                     class="c-nav-list-item"
                     data-js-test="login">
                     <a
-                        :href="accountLogin.url"
+                        :href="returnLoginUrl"
                         rel="nofollow"
                         class="c-nav-list-link"
                         :data-trak='`{
@@ -153,7 +153,7 @@
                         <a
                             :tabindex="navIsOpen ? 0 : -1"
                             class="c-nav-list-link"
-                            :href="accountLogout.url"
+                            :href="returnLogoutUrl"
                             :data-trak='`{
                                 "trakEvent": "click",
                                 "category": "engagement",
@@ -243,6 +243,19 @@ export default {
         isBelowMid () {
             return this.currentScreenWidth <= 767;
         },
+        returnUrl () {
+            if (!this.$route) return;
+            const { name } = this.$route;
+            const { href } = this.$router.resolve({ name });
+
+            return encodeURIComponent(href);
+        },
+        returnLoginUrl () {
+            return `${this.accountLogin.url}${this.returnUrl}`
+        },
+        returnLogoutUrl () {
+            return `${this.accountLogout.url}${this.returnUrl}`
+        }
     },
     mounted () {
         this.setUserDetails();
