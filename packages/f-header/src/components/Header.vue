@@ -19,7 +19,8 @@
                 :account-login="copy.accountLogin"
                 :open-menu-text="copy.openMenuText"
                 :delivery-enquiry="copy.deliveryEnquiry"
-                :show-delivery-enquiry="showDeliveryEnquiryWithContent" />
+                :show-delivery-enquiry="showDeliveryEnquiryWithContent"
+                :just-log="justLog" />
         </div>
     </header>
 </template>
@@ -56,7 +57,7 @@ export default {
         justLog: {
             type: Function,
             default: () => ({}),
-            required: true
+            required: false
         }
     },
     data () {

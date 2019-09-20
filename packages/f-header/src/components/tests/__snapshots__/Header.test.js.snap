@@ -5,7 +5,9 @@ exports[`Header should render default component markup 1`] = `
   <skip-to-main-stub text="Skip to main content" transparentbg="true"></skip-to-main-stub>
   <div class="c-header-container">
     <logo-stub theme="je" istransparent="true" companyname="Just Eat" logogtmlabel="click_logo"></logo-stub>
-    <navigation-stub accountlogin="[object Object]" accountlogout="[object Object]" navlinks="[object Object]" help="[object Object]" openmenutext="Open Menu" deliveryenquiry="[object Object]" user-info="[object Object]"></navigation-stub>
+    <navigation-stub accountlogin="[object Object]" accountlogout="[object Object]" navlinks="[object Object]" help="[object Object]" openmenutext="Open Menu" deliveryenquiry="[object Object]" justlog="function _default() {
+        return {};
+      }"></navigation-stub>
   </div>
 </header>
 `;

@@ -230,7 +230,7 @@ export default {
         justLog: {
             type: Function,
             default: () => ({}),
-            required: true
+            required: false
         }
     },
     data () {
