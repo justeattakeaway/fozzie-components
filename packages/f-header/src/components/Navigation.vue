@@ -50,7 +50,6 @@
                     @mouseleave="closeNav"
                     @keyup.esc="closeNav">
                     <a
-                        v-if="userInfo"
                         class="c-nav-list-text"
                         href="/"
                         :tabindex="isBelowMid ? -1 : 0"
@@ -97,7 +96,7 @@
                             <a
                                 :tabindex="navIsOpen ? 0 : -1"
                                 class="c-nav-list-link"
-                                :href="returnLogoutUrl"
+                                :href="accountLogout.url"
                                 :data-trak='`{
                                     "trakEvent": "click",
                                     "category": "engagement",
@@ -117,7 +116,7 @@
                     class="c-nav-list-item"
                     data-js-test="login">
                     <a
-                        :href="returnLoginUrl"
+                        :href="accountLogin.url"
                         rel="nofollow"
                         class="c-nav-list-link"
                         :data-trak='`{
@@ -148,13 +147,13 @@
                     </li>
 
                     <li
-                        v-if="userInfo.isAuthenticated"
+                        v-if="userInfo"
                         class="c-nav-list-item"
                         data-js-test="logout">
                         <a
                             :tabindex="navIsOpen ? 0 : -1"
                             class="c-nav-list-link"
-                            :href="returnLogoutUrl"
+                            :href="accountLogout.url"
                             :data-trak='`{
                                 "trakEvent": "click",
                                 "category": "engagement",
@@ -244,22 +243,9 @@ export default {
         isBelowMid () {
             return this.currentScreenWidth <= 767;
         },
-        returnUrl () {
-            if (!this.$route) return false;
-            const { name } = this.$route;
-            const { href } = this.$router.resolve({ name });
-
-            return encodeURIComponent(href);
-        },
-        returnLoginUrl () {
-            return `${this.accountLogin.url}${this.returnUrl}`;
-        },
-        returnLogoutUrl () {
-            return `${this.accountLogout.url}${this.returnUrl}`;
-        }
     },
     mounted () {
-        this.returnUserDetails();
+        this.setUserDetails();
         this.currentScreenWidth = window.innerWidth;
         window.addEventListener('resize', throttle(this.onResize, 100));
     },
@@ -279,16 +265,20 @@ export default {
         onResize () {
             this.currentScreenWidth = window.innerWidth;
         },
-        async returnUserDetails () {
+        async setUserDetails () {
             try {
                 const { data } = await axios.get('/api/account/details', {
                     headers: {
                         credentials: 'same-origin'
                     }
                 });
-                if (data) this.userInfo = data;
+                if (data) {
+                    this.userInfo = data
+                };
             } catch (err) {
-                if (this.justLog) this.justLog.error('Error handling "returnUserDetails" action', err);
+                if (this.justLog) {
+                    this.justLog.error('Error handling "setUserDetails" action', err);
+                }
             }
         }
     }
