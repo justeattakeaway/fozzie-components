@@ -246,7 +246,7 @@ export default {
         returnUrl () {
             if (!this.$route) return;
             const { name } = this.$route;
-            const { href } = this.$router.resolve({ name });
+            const { href } = window.location.search += name
 
             return encodeURIComponent(href);
         },
