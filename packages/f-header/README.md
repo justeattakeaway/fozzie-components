@@ -63,13 +63,4 @@
 
     `showDeliveryEnquiry` - Boolean property with `false` as a default value, defines if it is necessary to show the "Deliver with Just Eat" linkin the header.
 
-    `userInfo` - user object property, with default value like: 
-    ```
-    {
-        isAuthenticated: false,
-        friendlyName: '',
-        email: ''
-    }
-    ```
-
 ## Documentation to be completed once module is in stable state.
