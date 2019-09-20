@@ -240,8 +240,7 @@ export default {
                     this.userInfo = data;
                 }
             } catch (err) {
-                // eslint-disable-next-line no-console
-                console.log('Error handling "returnUserDetails" action', err);
+                justLog.error('Error handling "returnUserDetails" action', err);
             }
         }
     }
