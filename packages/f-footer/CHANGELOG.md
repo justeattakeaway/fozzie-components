@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v2.0.0-beta-18
+------------------------------
+*September 19, 2019*
+
+### Changed
+ - Removed css module style call from non-module css class
+ - Moved some css styles out of css module to be reusable
+
+
 v2.0.0-beta-17
 ------------------------------
 *September 18, 2019*
