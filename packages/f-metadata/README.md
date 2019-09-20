@@ -31,7 +31,7 @@
     You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
     ```
-    import { initialiseBraze } from '@justeat/f-metadata';
+    import initialiseBraze from '@justeat/f-metadata';
     ```
 
 ## Documentation to be completed once module is in stable state.
