@@ -52,6 +52,11 @@ export default {
         showDeliveryEnquiry: {
             type: Boolean,
             default: false
+        },
+        justLog: {
+            type: Function,
+            default: () => ({}),
+            required: true
         }
     },
     data () {
