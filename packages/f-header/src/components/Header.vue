@@ -1,14 +1,14 @@
 <template>
     <header
         :data-theme="theme"
-        :class="['c-header', { 'c-header--transparent c-header--gradient': isTransparent }]">
+        :class="['c-header', { 'c-header--transparent c-header--gradient': showTransparentHeader }]">
         <skip-to-main
             :text="copy.skipToMainContentText"
-            :transparent-bg="isTransparent" />
+            :transparent-bg="showTransparentHeader" />
         <div class="c-header-container">
             <logo
                 :theme="theme"
-                :is-transparent="isTransparent"
+                :is-transparent="showTransparentHeader"
                 :company-name="copy.companyName"
                 :logo-gtm-label="copy.logo.gtm" />
             <navigation
@@ -20,7 +20,8 @@
                 :delivery-enquiry="copy.deliveryEnquiry"
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
                 :user-info-prop="userInfoProp"
-                :just-log="justLog" />
+                :just-log="justLog"
+                @onMobileNavToggle="mobileNavToggled" />
         </div>
     </header>
 </template>
@@ -69,15 +70,25 @@ export default {
         const locale = sharedService.getLocale(tenantConfigs, this.locale, this.$118n);
         const localeConfig = tenantConfigs[locale];
         const theme = sharedService.getTheme(locale);
+        const mobileNavIsOpen = false;
 
         return {
             copy: { ...localeConfig },
-            theme
+            theme,
+            mobileNavIsOpen
         };
     },
     computed: {
         showDeliveryEnquiryWithContent () {
             return this.copy.deliveryEnquiry && this.showDeliveryEnquiry;
+        },
+        showTransparentHeader () {
+            return this.isTransparent && this.!mobileNavIsOpen;
+        }
+    },
+    methods: {
+        mobileNavToggled (value) {
+            this.mobileNavIsOpen = value;
         }
     }
 };

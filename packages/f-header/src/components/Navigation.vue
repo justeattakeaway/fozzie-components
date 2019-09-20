@@ -1,25 +1,30 @@
 <template>
     <nav class="c-nav c-nav--global">
         <button
-            class="c-nav-trigger"
+            data-js-test="nav-toggle"
+            :class="['c-nav-trigger c-nav-toggle is-hidden--noJS', {
+                'is-open': navIsOpen
+            }]"
             type="button"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
             :aria-label="openMenuText"
-            @click="onNavToggle" />
+            @click="onHamburgerMenuClick">
+            <span class="c-nav-toggle-icon" />
+        </button>
 
         <input
             id="nav-trigger"
             v-model="navIsOpen"
             type="checkbox"
-            class="c-nav-trigger is-hidden">
+            class="c-nav-trigger is-hidden is-shown--noJS">
 
         <label
-            data-js-test="nav-toggle"
-            :class="['c-nav-toggle', {
+            :class="['c-nav-toggle is-hidden is-shown--noJS', {
                 'is-open': navIsOpen
             }]"
-            for="nav-trigger">
-            <span class="c-nav-toggle-icon">{{ openMenuText }}</span>
+            for="nav-trigger"
+            :aria-label="openMenuText">
+            <span class="c-nav-toggle-icon" />
         </label>
 
         <div
@@ -297,6 +302,10 @@ export default {
                     this.justLog.error('Error handling "setUserInfo" action', err);
                 }
             }
+        },
+        onHamburgerMenuClick () {
+            this.onNavToggle();
+            this.$emit('onMobileNavToggle', this.navIsOpen);
         }
     }
 };
@@ -305,9 +314,16 @@ export default {
 <style lang="scss">
 
 // Hide from both screenreaders and browsers: h5bp.com/u
-.is-hidden {
+.is-hidden,
+.no-js .is-hidden--noJS {
     display: none !important;
     visibility: hidden !important;
+}
+
+.is-shown,
+.no-js .is-shown--noJS {
+    display: block !important;
+    visibility: visible !important;
 }
 
 /**
@@ -665,12 +681,12 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
     }
 }
 
-
-
 // Navigation Trigger
 // This is the checkbox that controls the menu active state without JS via :checked
 .c-nav-trigger {
     position: absolute;
+    width: $nav-trigger-length;
+    height: $nav-trigger-length;
     top: -100px;
     left: -100px;
 
@@ -705,9 +721,12 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
     cursor: pointer;
 
     // hide on wider views
-    // TODO – ACCESSIBILITY MAY NOT WANT TO COMPLETELY HIDE THIS
     @include media('>=mid') {
         display: none;
+
+        &.is-shown--noJS {
+            display: none !important;
+        }
     }
 }
 
