@@ -12,7 +12,6 @@
                 :company-name="copy.companyName"
                 :logo-gtm-label="copy.logo.gtm" />
             <navigation
-                :user-info="userInfo"
                 :nav-links="copy.navLinks"
                 :help="copy.help"
                 :account-logout="copy.accountLogout"
