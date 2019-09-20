@@ -98,7 +98,7 @@
                             <a
                                 :tabindex="navIsOpen ? '0' : '-1'"
                                 class="c-nav-list-link"
-                                :href="accountLogout.url"
+                                :href="`${accountLogout.url}${returnUrl}`"
                                 :data-trak='`{
                                     "trakEvent": "click",
                                     "category": "engagement",
@@ -118,7 +118,7 @@
                     class="c-nav-list-item"
                     data-js-test="login">
                     <a
-                        :href="accountLogin.url"
+                        :href="`${accountLogin.url}${returnUrl}`"
                         rel="nofollow"
                         class="c-nav-list-link"
                         :data-trak='`{
@@ -201,6 +201,13 @@ export default {
     computed: {
         isBelowMid () {
             return this.currentScreenWidth <= 767;
+        },
+        returnUrl () {
+            if (!this.$route) return false;
+            const { name } = this.$route;
+            const { href } = this.$router.resolve({ name });
+
+            return encodeURIComponent(href);
         }
     },
     mounted () {

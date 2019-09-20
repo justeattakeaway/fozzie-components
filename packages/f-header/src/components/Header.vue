@@ -71,6 +71,11 @@ export default {
             copy: { ...localeConfig },
             theme
         };
+    },
+    computed: {
+        showDeliveryEnquiryWithContent () {
+            return this.copy.deliveryEnquiry && this.showDeliveryEnquiry;
+        }
     }
 };
 </script>
