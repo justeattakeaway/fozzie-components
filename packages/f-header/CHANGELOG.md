@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.0.0-beta-8
 ------------------------------
-*September 19, 2019*
+*September 20, 2019*
 
 ### Changed
  - Added some accessibility improvements to the navigation component

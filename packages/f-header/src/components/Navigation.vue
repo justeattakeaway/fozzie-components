@@ -130,22 +130,6 @@
                     </a>
                 </li>
 
-                <li
-                    v-if="!isBelowMid"
-                    class="c-nav-list-item c-nav-list-item--support">
-                    <a
-                        :href="help.url"
-                        class="c-nav-list-link"
-                        :data-trak='`{
-                            "trakEvent": "click",
-                            "category": "engagement",
-                            "action": "header",
-                            "label": "${help.gtm}"
-                        }`'>
-                        {{ help.text }}
-                    </a>
-                </li>
-
                 <template v-if="isBelowMid">
                     <li class="c-nav-list-item c-nav-list-item--support">
                         <a
@@ -164,9 +148,9 @@
                     </li>
 
                     <li
-
                         class="c-nav-list-item"
-                        data-js-test="logout">
+                        data-js-test="logout"
+                        v-if="userInfo.isAuthenticated">
                         <a
                             :tabindex="navIsOpen ? 0 : -1"
                             class="c-nav-list-link"
@@ -183,6 +167,24 @@
                         </a>
                     </li>
                 </template>
+
+                <li
+                    v-else
+                    class="c-nav-list-item c-nav-list-item--support">
+                    <a
+                        :href="help.url"
+                        class="c-nav-list-link"
+                        :data-trak='`{
+                            "trakEvent": "click",
+                            "category": "engagement",
+                            "action": "header",
+                            "label": "${help.gtm}"
+                        }`'>
+                        {{ help.text }}
+                    </a>
+                </li>
+
+                
             </ul>
         </div>
     </nav>
