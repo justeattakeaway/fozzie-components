@@ -24,11 +24,11 @@ const defaultData = {
     userInfo: {
         isAuthenticated: false,
         friendlyName: 'James Fisher',
-        email: 'j.fisher@fakemail.com',
+        email: 'j.fisher@fakemail.com'
 
     },
-    navIsOpen: false,
-}
+    navIsOpen: false
+};
 const width = 767;
 const height = 768;
 
@@ -158,7 +158,7 @@ describe('Navigation', () => {
         };
         const data = {
             ...defaultData,
-            userInfo: false,
+            userInfo: false
         };
 
         // Act

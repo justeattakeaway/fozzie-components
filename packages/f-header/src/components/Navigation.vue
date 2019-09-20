@@ -209,7 +209,7 @@ export default {
         }
     },
     mounted () {
-		this.returnUserDetails();
+        this.returnUserDetails();
         this.currentScreenWidth = window.innerWidth;
         window.addEventListener('resize', throttle(this.onResize, 100));
     },
