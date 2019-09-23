@@ -244,17 +244,14 @@ export default {
             return this.currentScreenWidth <= 767;
         },
         returnUrl () {
-            if (!this.$route) return;
-            const { name } = this.$route;
-            const { href } = window.location.search += name
-
-            return encodeURIComponent(href);
+            if (!this.$route) return '';
+            return this.$route.name;
         },
         returnLoginUrl () {
-            return `${this.accountLogin.url}${this.returnUrl}`
+            return `${this.accountLogin.url}${this.returnUrl}`;
         },
         returnLogoutUrl () {
-            return `${this.accountLogout.url}${this.returnUrl}`
+            return `${this.accountLogout.url}${this.returnUrl}`;
         }
     },
     mounted () {
@@ -286,8 +283,8 @@ export default {
                     }
                 });
                 if (data) {
-                    this.userInfo = data
-                };
+                    this.userInfo = data;
+                }
             } catch (err) {
                 if (this.justLog) {
                     this.justLog.error('Error handling "setUserDetails" action', err);
