@@ -1024,13 +1024,13 @@
 "@justeat/f-footer@file:packages/f-footer":
   version "2.0.0-beta.18"
   dependencies:
-    "@justeat/f-vue-icons" "^1.0.0-beta.4"
+    "@justeat/f-vue-icons" "1.0.0-beta.4"
     lodash-es "4.17.15"
     v-click-outside "2.1.3"
     vue "2.6.10"
 
 "@justeat/f-header@file:packages/f-header":
-  version "2.0.0-beta.8"
+  version "2.0.0-beta.9"
   dependencies:
     "@justeat/f-vue-icons" "1.0.0-beta.4"
     axios "0.19.0"
@@ -1072,7 +1072,7 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-utils/-/f-utils-0.3.0.tgz#1f18ba13ad7061e21c2112387234a77ba45fb5d3"
   integrity sha512-hqRiGA2lP++Z1oqawsv1V2Duf3YShaAbJ3S5JEPTpTMP5RjH36Xpc8nRbIVFBmwnZCu7L9iF7AebYTUX8XhiZA==
 
-"@justeat/f-vue-icons@1.0.0-beta.4", "@justeat/f-vue-icons@^1.0.0-beta.4":
+"@justeat/f-vue-icons@1.0.0-beta.4":
   version "1.0.0-beta.4"
   resolved "http://packages.je-labs.com/npm/private-npm/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.4.tgz#aef8a22b43f04f3ad0ca287f50ed1d68804c605a"
   integrity sha1-rviiK0PwTzrQyih/UO0daIBMYFo=
