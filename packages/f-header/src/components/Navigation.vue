@@ -244,8 +244,8 @@ export default {
             return this.currentScreenWidth <= 767;
         },
         returnUrl () {
-            if (!this.$route) return '';
-            return this.$route.name;
+            if (!this.$route) return encodeURIComponent(document.location.pathname);
+            return encodeURIComponent(this.$route.name);
         },
         returnLoginUrl () {
             return `${this.accountLogin.url}${this.returnUrl}`;
