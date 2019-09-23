@@ -12,14 +12,14 @@
                 :company-name="copy.companyName"
                 :logo-gtm-label="copy.logo.gtm" />
             <navigation
-                :user-info="userInfo"
                 :nav-links="copy.navLinks"
                 :help="copy.help"
                 :account-logout="copy.accountLogout"
                 :account-login="copy.accountLogin"
                 :open-menu-text="copy.openMenuText"
                 :delivery-enquiry="copy.deliveryEnquiry"
-                :show-delivery-enquiry="showDeliveryEnquiryWithContent" />
+                :show-delivery-enquiry="showDeliveryEnquiryWithContent"
+                :just-log="justLog" />
         </div>
     </header>
 </template>
@@ -53,13 +53,10 @@ export default {
             type: Boolean,
             default: false
         },
-        userInfo: {
-            type: Object,
-            default: () => ({
-                isAuthenticated: false,
-                friendlyName: '',
-                email: ''
-            })
+        justLog: {
+            type: Function,
+            default: () => ({}),
+            required: false
         }
     },
     data () {
@@ -71,6 +68,11 @@ export default {
             copy: { ...localeConfig },
             theme
         };
+    },
+    computed: {
+        showDeliveryEnquiryWithContent () {
+            return this.copy.deliveryEnquiry && this.showDeliveryEnquiry;
+        }
     }
 };
 </script>
