@@ -5,8 +5,7 @@
             type="button"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
             :aria-label="openMenuText"
-            @click="onNavToggle">
-        </button>
+            @click="onNavToggle" />
 
         <input
             id="nav-trigger"
@@ -46,7 +45,7 @@
                 </li>
 
                 <li
-                    :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo.isAuthenticated, 'open': navIsOpen }]"
+                    :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo, 'open': navIsOpen }]"
                     @mouseover="openNav"
                     @mouseleave="closeNav"
                     @keyup.esc="closeNav">
@@ -97,7 +96,7 @@
                             <a
                                 :tabindex="navIsOpen ? 0 : -1"
                                 class="c-nav-list-link"
-                                :href="accountLogout.url"
+                                :href="returnLogoutUrl"
                                 :data-trak='`{
                                     "trakEvent": "click",
                                     "category": "engagement",
@@ -113,11 +112,11 @@
                 </li>
 
                 <li
-                    v-if="!userInfo.isAuthenticated"
+                    v-if="!userInfo"
                     class="c-nav-list-item"
                     data-js-test="login">
                     <a
-                        :href="accountLogin.url"
+                        :href="returnLoginUrl"
                         rel="nofollow"
                         class="c-nav-list-link"
                         :data-trak='`{
@@ -148,13 +147,13 @@
                     </li>
 
                     <li
+                        v-if="userInfo"
                         class="c-nav-list-item"
-                        data-js-test="logout"
-                        v-if="userInfo.isAuthenticated">
+                        data-js-test="logout">
                         <a
                             :tabindex="navIsOpen ? 0 : -1"
                             class="c-nav-list-link"
-                            :href="accountLogout.url"
+                            :href="returnLogoutUrl"
                             :data-trak='`{
                                 "trakEvent": "click",
                                 "category": "engagement",
@@ -183,8 +182,6 @@
                         {{ help.text }}
                     </a>
                 </li>
-
-                
             </ul>
         </div>
     </nav>
@@ -193,6 +190,7 @@
 <script>
 import { ProfileIcon, DeliveryIcon } from '@justeat/f-vue-icons';
 import { throttle } from 'lodash-es';
+import axios from 'axios';
 
 export default {
     components: {
@@ -200,10 +198,6 @@ export default {
         DeliveryIcon
     },
     props: {
-        userInfo: {
-            type: Object,
-            default: () => ({})
-        },
         accountLogin: {
             type: Object,
             default: () => ({})
@@ -231,20 +225,37 @@ export default {
         showDeliveryEnquiry: {
             type: Boolean,
             default: false
+        },
+        justLog: {
+            type: Function,
+            default: () => ({}),
+            required: false
         }
     },
     data () {
         return {
             navIsOpen: false,
-            currentScreenWidth: 0
+            currentScreenWidth: 0,
+            userInfo: false
         };
     },
     computed: {
         isBelowMid () {
             return this.currentScreenWidth <= 767;
+        },
+        returnUrl () {
+            if (!this.$route) return encodeURIComponent(document.location.pathname);
+            return encodeURIComponent(this.$route.name);
+        },
+        returnLoginUrl () {
+            return `${this.accountLogin.url}${this.returnUrl}`;
+        },
+        returnLogoutUrl () {
+            return `${this.accountLogout.url}${this.returnUrl}`;
         }
     },
     mounted () {
+        this.setUserDetails();
         this.currentScreenWidth = window.innerWidth;
         window.addEventListener('resize', throttle(this.onResize, 100));
     },
@@ -263,6 +274,22 @@ export default {
         },
         onResize () {
             this.currentScreenWidth = window.innerWidth;
+        },
+        async setUserDetails () {
+            try {
+                const { data } = await axios.get('/api/account/details', {
+                    headers: {
+                        credentials: 'same-origin'
+                    }
+                });
+                if (data) {
+                    this.userInfo = data;
+                }
+            } catch (err) {
+                if (this.justLog) {
+                    this.justLog.error('Error handling "setUserDetails" action', err);
+                }
+            }
         }
     }
 };
