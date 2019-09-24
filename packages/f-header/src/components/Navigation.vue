@@ -286,7 +286,7 @@ export default {
                     this.userInfo = data;
                 }
             } catch (err) {
-                if (this.justLog) {
+                if (this.justLog.error) {
                     this.justLog.error('Error handling "setUserDetails" action', err);
                 }
             }
