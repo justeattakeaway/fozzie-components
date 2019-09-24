@@ -54,7 +54,7 @@ export default {
             default: false
         },
         justLog: {
-            type: Function,
+            type: Object,
             default: () => ({}),
             required: false
         }
