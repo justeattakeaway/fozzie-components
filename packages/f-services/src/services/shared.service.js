@@ -27,6 +27,10 @@ const getLocale = (tenantConfigs, tenantString, globalTenant) => {
  * @returns {String} for the theme toggle
  */
 const getTheme = locale => {
+    if (locale === '') {
+        // eslint-disable-next-line no-param-reassign
+        locale = this?.$i18n.locale;
+    }
     switch (locale) {
         case 'en-AU':
         case 'en-NZ':
