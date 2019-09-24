@@ -1024,6 +1024,7 @@
 "@justeat/f-footer@file:packages/f-footer":
   version "2.0.0-beta.18"
   dependencies:
+    "@justeat/f-services" "2.0.0-beta.1"
     "@justeat/f-vue-icons" "1.0.0-beta.4"
     lodash-es "4.17.15"
     v-click-outside "2.1.3"
@@ -1032,7 +1033,7 @@
 "@justeat/f-header@file:packages/f-header":
   version "2.0.0-beta.9"
   dependencies:
-    "@justeat/f-services" "file:../Library/Caches/Yarn/v4/npm-@justeat-f-header-2.0.0-beta.9-0468012f-b3f3-4f83-8f1b-8a3980760e6e-1569319556885/node_modules/@justeat/f-header/.yalc/@justeat/f-services"
+    "@justeat/f-services" "2.0.0-beta.1"
     "@justeat/f-vue-icons" "1.0.0-beta.4"
     axios "0.19.0"
     lodash-es "4.17.15"
@@ -1062,9 +1063,6 @@
   version "0.1.0"
   dependencies:
     appboy-web-sdk "2.4.0"
-
-"@justeat/f-services@file:packages/f-header/.yalc/@justeat/f-services":
-  version "2.0.0-beta.1-06e7ab46"
 
 "@justeat/f-services@file:packages/f-services":
   version "2.0.0-beta.1"
