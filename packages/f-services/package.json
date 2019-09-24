@@ -25,11 +25,9 @@
     "fozzie"
   ],
   "scripts": {
-    "prepare": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-services ./src/index.js",
-    "demo": "vue serve --open ./src/components/Demo.vue",
-    "lint": "vue-cli-service lint --fix",
-    "test": "vue-cli-service test:unit"
+    "prepare": "yarn test && yarn build",
+    "build": "webpack",
+    "test": "jest"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
