@@ -294,7 +294,7 @@ export default {
                 }
             } catch (err) {
                 if (this.justLog) {
-                    this.justLog.error('Error handling "setUserDetails" action', err);
+                    this.justLog.error('Error handling "setUserInfo" action', err);
                 }
             }
         }

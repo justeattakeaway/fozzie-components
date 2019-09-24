@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta-10
+------------------------------
+*September 20, 2019*
+
+### Changed
+- Name of method
+
+### Added
+- New prop for `userInfo` coming from outside the component
+- Logic to call the data if prop is `false`
+
+
 v2.0.0-beta-9
 ------------------------------
 *September 20, 2019*
