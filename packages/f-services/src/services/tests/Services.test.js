@@ -25,7 +25,7 @@ describe('sharedServices', () => {
             const tenantConfigs = {
                 'da-DK': 'dk'
             };
-            const tenantString = null;
+            const tenantString = '';
             const globalTenant = {
                 locale: 'it-IT'
             };
@@ -61,7 +61,7 @@ describe('sharedServices', () => {
             const tenantConfigs = {
                 'da-DK': 'dk'
             };
-            const tenantString = null;
+            const tenantString = '';
             const globalTenant = {
                 locale: 'da-DK'
             };
