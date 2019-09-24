@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import sharedServices from '@justeat/f-services';
 import ButtonList from './ButtonList.vue';
 import CountrySelector from './CountrySelector.vue';
 import FeedbackBlock from './FeedbackBlock.vue';
@@ -68,7 +69,6 @@ import IconList from './IconList.vue';
 import LegalField from './LegalField.vue';
 import LinkList from './LinkList.vue';
 import tenantConfigs from '../tenants';
-import sharedService from '../../../../scripts/shared.service';
 
 export default {
     components: {
@@ -89,9 +89,9 @@ export default {
     },
 
     data () {
-        const locale = sharedService.getLocale(tenantConfigs, this.locale, this.$118n);
+        const locale = sharedServices.getLocale(tenantConfigs, this.locale, this.$118n);
         const localeConfig = tenantConfigs[locale];
-        const theme = sharedService.getTheme(locale);
+        const theme = sharedServices.getTheme(locale);
 
         return {
             copy: { ...localeConfig },

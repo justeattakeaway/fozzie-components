@@ -1,12 +1,12 @@
 {
-  "name": "@justeat/f-header",
-  "description": "Fozzie Header – Globalised Header Component",
-  "version": "v2.0.0-beta.9",
-  "main": "dist/f-header.umd.min.js",
+  "name": "@justeat/f-services",
+  "description": "Fozzie Services - Shared Services for Components and projects",
+  "version": "v2.0.0-beta.1",
+  "main": "dist/f-services.umd.min.js",
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-header",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-services",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -26,7 +26,7 @@
   ],
   "scripts": {
     "prepare": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-header ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-services ./src/index.js",
     "demo": "vue serve --open ./src/components/Demo.vue",
     "lint": "vue-cli-service lint --fix",
     "test": "vue-cli-service test:unit"
@@ -34,15 +34,6 @@
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
-  "dependencies": {
-    "@justeat/f-services": "file:.yalc/@justeat/f-services",
-    "@justeat/f-vue-icons": "^1.0.0-beta.4",
-    "axios": "0.19.0",
-    "lodash-es": "4.17.15"
-  },
-  "peerDependencies": {
-    "@justeat/f-trak": "0.6.0"
-  },
   "devDependencies": {
     "@vue/cli-plugin-babel": "3.9.2",
     "@vue/cli-plugin-eslint": "3.9.2",

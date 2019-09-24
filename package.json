@@ -66,6 +66,7 @@
     "@justeat/f-footer": "file:packages/f-footer",
     "@justeat/f-header": "file:packages/f-header",
     "@justeat/f-metadata": "file:packages/f-metadata",
-    "@justeat/f-vue-icons": "file:packages/f-vue-icons"
+    "@justeat/f-vue-icons": "file:packages/f-vue-icons",
+    "@justeat/f-services": "file:packages/f-services"
   }
 }
