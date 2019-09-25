@@ -19,6 +19,7 @@
                 :open-menu-text="copy.openMenuText"
                 :delivery-enquiry="copy.deliveryEnquiry"
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
+                :user-info-prop="userInfoProp"
                 :just-log="justLog" />
         </div>
     </header>
@@ -56,6 +57,11 @@ export default {
         justLog: {
             type: Object,
             default: () => ({}),
+            required: false
+        },
+        userInfoProp: {
+            type: [Object, Boolean],
+            default: false,
             required: false
         }
     },
