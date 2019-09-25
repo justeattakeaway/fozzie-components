@@ -43,12 +43,10 @@ export default {
     props: {
         locale: {
             type: String,
-            required: false,
             default: ''
         },
         isTransparent: {
             type: Boolean,
-            required: false,
             default: false
         },
         showDeliveryEnquiry: {
@@ -56,14 +54,12 @@ export default {
             default: false
         },
         justLog: {
-            type: Function,
-            default: () => ({}),
-            required: false
+            type: Object,
+            default: () => ({})
         },
         userInfoProp: {
             type: [Object, Boolean],
-            default: false,
-            required: false
+            default: false
         }
     },
     data () {

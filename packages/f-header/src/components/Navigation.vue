@@ -232,14 +232,12 @@ export default {
             default: false
         },
         justLog: {
-            type: Function,
-            default: () => ({}),
-            required: false
+            type: Object,
+            default: () => ({})
         },
         userInfoProp: {
             type: [Object, Boolean],
-            default: false,
-            required: false
+            default: false
         }
     },
     data () {
@@ -299,7 +297,7 @@ export default {
                     this.userInfo = data;
                 }
             } catch (err) {
-                if (this.justLog) {
+                if (this.justLog.error) {
                     this.justLog.error('Error handling "setUserInfo" action', err);
                 }
             }
