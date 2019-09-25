@@ -59,10 +59,10 @@
 
     `locale` - If there is a vue-i18n plugin in the project, the header component can be called without locale property, otherwise it accepts it in format like 'en-GB'
 
-    `isTransparent` - Boolean property with `false` as a default value, defines wether the header has transparent or white background.
+    `isTransparent` - Boolean property with `false` as a default value, defines whether the header has transparent or white background.
 
-    `showDeliveryEnquiry` - Boolean property with `false` as a default value, defines if it is necessary to show the "Deliver with Just Eat" linkin the header.
+    `showDeliveryEnquiry` - Boolean property with `false` as a default value, defines if it is necessary to show the "Deliver with Just Eat" link in the header.
 
-    `justLog` - Function passed in for logging errors with the `setUserDetails` method. It has empty function as a default value
+    `justLog` - Function passed in for logging errors with the `setUserInfo` method. It has empty function as a default value
 
 ## Documentation to be completed once module is in stable state.
