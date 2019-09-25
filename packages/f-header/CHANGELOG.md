@@ -9,7 +9,7 @@ v2.0.0-beta-10
 *September 20, 2019*
 
 ### Changed
-- Name of method from 'setUserDetails' to 'setUserInfo'
+- Name of method from `setUserDetails` to `setUserInfo`
 
 ### Added
 - New prop for `userInfo` coming from outside the component
