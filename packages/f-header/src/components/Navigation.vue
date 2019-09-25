@@ -230,13 +230,18 @@ export default {
             type: Function,
             default: () => ({}),
             required: false
+        },
+        userInfoProp: {
+            type: [Object, Boolean],
+            default: false,
+            required: false
         }
     },
     data () {
         return {
             navIsOpen: false,
             currentScreenWidth: 0,
-            userInfo: false
+            userInfo: this.userInfoProp
         };
     },
     computed: {
@@ -255,7 +260,9 @@ export default {
         }
     },
     mounted () {
-        this.setUserDetails();
+        if (!this.userInfo) {
+            this.setUserInfo();
+        }
         this.currentScreenWidth = window.innerWidth;
         window.addEventListener('resize', throttle(this.onResize, 100));
     },
@@ -275,7 +282,7 @@ export default {
         onResize () {
             this.currentScreenWidth = window.innerWidth;
         },
-        async setUserDetails () {
+        async setUserInfo () {
             try {
                 const { data } = await axios.get('/api/account/details', {
                     headers: {
@@ -287,7 +294,7 @@ export default {
                 }
             } catch (err) {
                 if (this.justLog) {
-                    this.justLog.error('Error handling "setUserDetails" action', err);
+                    this.justLog.error('Error handling "setUserInfo" action', err);
                 }
             }
         }
