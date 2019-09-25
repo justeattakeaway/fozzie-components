@@ -287,6 +287,7 @@ export default {
         onResize () {
             this.currentScreenWidth = window.innerWidth;
         },
+        // If userInfoProp wasn't passed we make a call for userInfo on mounted hook
         async setUserInfo () {
             try {
                 const { data } = await axios.get('/api/account/details', {
@@ -303,6 +304,9 @@ export default {
                 }
             }
         },
+        // When hamburger menu is clicked we want to trigger toggling of navigation
+        // + emit the state of `navIsOpen` attr to the header component to change header styles in case of transparency
+        // in open nav state mobile header should become white, not transparent
         onHamburgerMenuClick () {
             this.onNavToggle();
             this.$emit('onMobileNavToggle', this.navIsOpen);

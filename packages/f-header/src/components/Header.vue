@@ -83,10 +83,12 @@ export default {
             return this.copy.deliveryEnquiry && this.showDeliveryEnquiry;
         },
         showTransparentHeader () {
-            return this.isTransparent && this.!mobileNavIsOpen;
+            return this.isTransparent && !this.mobileNavIsOpen;
         }
     },
     methods: {
+        // This method emits `navIsOpen` state from the navigation component
+        // to be able to deside when to show transparent header styles on mobile view
         mobileNavToggled (value) {
             this.mobileNavIsOpen = value;
         }
