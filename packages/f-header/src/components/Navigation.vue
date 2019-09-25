@@ -1,25 +1,30 @@
 <template>
     <nav class="c-nav c-nav--global">
         <button
-            class="c-nav-trigger"
+            data-js-test="nav-toggle"
+            :class="['c-nav-trigger c-nav-toggle is-hidden--noJS', {
+                'is-open': navIsOpen
+            }]"
             type="button"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
             :aria-label="openMenuText"
-            @click="onNavToggle" />
+            @click="onHamburgerMenuClick">
+            <span class="c-nav-toggle-icon" />
+        </button>
 
         <input
             id="nav-trigger"
             v-model="navIsOpen"
             type="checkbox"
-            class="c-nav-trigger is-hidden">
+            class="c-nav-trigger is-hidden is-shown--noJS">
 
         <label
-            data-js-test="nav-toggle"
-            :class="['c-nav-toggle', {
+            :class="['c-nav-toggle is-hidden is-shown--noJS', {
                 'is-open': navIsOpen
             }]"
-            for="nav-trigger">
-            <span class="c-nav-toggle-icon">{{ openMenuText }}</span>
+            for="nav-trigger"
+            :aria-label="openMenuText">
+            <span class="c-nav-toggle-icon" />
         </label>
 
         <div
@@ -227,14 +232,12 @@ export default {
             default: false
         },
         justLog: {
-            type: Function,
-            default: () => ({}),
-            required: false
+            type: Object,
+            default: () => ({})
         },
         userInfoProp: {
             type: [Object, Boolean],
-            default: false,
-            required: false
+            default: false
         }
     },
     data () {
@@ -282,6 +285,7 @@ export default {
         onResize () {
             this.currentScreenWidth = window.innerWidth;
         },
+        // If userInfoProp wasn't passed we make a call for userInfo on mounted hook
         async setUserInfo () {
             try {
                 const { data } = await axios.get('/api/account/details', {
@@ -293,10 +297,17 @@ export default {
                     this.userInfo = data;
                 }
             } catch (err) {
-                if (this.justLog) {
+                if (this.justLog.error) {
                     this.justLog.error('Error handling "setUserInfo" action', err);
                 }
             }
+        },
+        // When hamburger menu is clicked we want to trigger toggling of navigation
+        // + emit the state of `navIsOpen` attr to the header component to change header styles in case of transparency
+        // in open nav state mobile header should become white, not transparent
+        onHamburgerMenuClick () {
+            this.onNavToggle();
+            this.$emit('onMobileNavToggle', this.navIsOpen);
         }
     }
 };
@@ -305,9 +316,16 @@ export default {
 <style lang="scss">
 
 // Hide from both screenreaders and browsers: h5bp.com/u
-.is-hidden {
+.is-hidden,
+.no-js .is-hidden--noJS {
     display: none !important;
     visibility: hidden !important;
+}
+
+.is-shown,
+.no-js .is-shown--noJS {
+    display: block !important;
+    visibility: visible !important;
 }
 
 /**
@@ -665,12 +683,12 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
     }
 }
 
-
-
 // Navigation Trigger
 // This is the checkbox that controls the menu active state without JS via :checked
 .c-nav-trigger {
     position: absolute;
+    width: $nav-trigger-length;
+    height: $nav-trigger-length;
     top: -100px;
     left: -100px;
 
@@ -705,9 +723,12 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
     cursor: pointer;
 
     // hide on wider views
-    // TODO – ACCESSIBILITY MAY NOT WANT TO COMPLETELY HIDE THIS
     @include media('>=mid') {
         display: none;
+
+        &.is-shown--noJS {
+            display: none !important;
+        }
     }
 }
 
