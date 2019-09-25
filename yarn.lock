@@ -1024,7 +1024,7 @@
 "@justeat/f-footer@file:packages/f-footer":
   version "2.0.0-beta.18"
   dependencies:
-    "@justeat/f-services" "0.1.0"
+    "@justeat/f-services" "0.4.0"
     "@justeat/f-vue-icons" "1.0.0-beta.4"
     lodash-es "4.17.15"
     v-click-outside "2.1.3"
@@ -1063,11 +1063,6 @@
   version "0.1.0"
   dependencies:
     appboy-web-sdk "2.4.0"
-
-"@justeat/f-services@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-0.1.0.tgz#7f6c1799fa2f574c402e5b226ee96480546e66ec"
-  integrity sha512-5SUAlk4HCi0YbNiNmUaWCQUAItK0Y4Z272fgqwjaDzOdd5rRod4QGngnB+Nc1ZkQlF43DjXGYdY7FVoh57evJg==
 
 "@justeat/f-services@file:packages/f-services":
   version "0.4.0"
