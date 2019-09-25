@@ -10,7 +10,7 @@
     npm install @justeat/f-services
     ```
 
-2.  Import the component
+2.  Import the package
 
     You can import it in your like this (please note that styles have to be imported separately)
 
