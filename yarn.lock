@@ -1031,9 +1031,9 @@
     vue "2.6.10"
 
 "@justeat/f-header@file:packages/f-header":
-  version "2.0.0-beta.9"
+  version "2.0.0-beta.10"
   dependencies:
-    "@justeat/f-services" "0.1.0"
+    "@justeat/f-services" "0.4.0"
     "@justeat/f-vue-icons" "1.0.0-beta.4"
     axios "0.19.0"
     lodash-es "4.17.15"
@@ -1070,7 +1070,7 @@
   integrity sha512-5SUAlk4HCi0YbNiNmUaWCQUAItK0Y4Z272fgqwjaDzOdd5rRod4QGngnB+Nc1ZkQlF43DjXGYdY7FVoh57evJg==
 
 "@justeat/f-services@file:packages/f-services":
-  version "0.2.0"
+  version "0.4.0"
 
 "@justeat/f-utils@0.2.0":
   version "0.2.0"
