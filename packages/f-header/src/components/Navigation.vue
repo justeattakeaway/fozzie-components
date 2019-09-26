@@ -50,7 +50,7 @@
                 </li>
 
                 <li
-                    :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo, 'open': navIsOpen }]"
+                    :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo.isAuthenticated, 'open': navIsOpen }]"
                     @mouseover="openNav"
                     @mouseleave="closeNav"
                     @keyup.esc="closeNav">
@@ -117,7 +117,7 @@
                 </li>
 
                 <li
-                    v-if="!userInfo"
+                    v-if="!userInfo.isAuthenticated"
                     class="c-nav-list-item"
                     data-js-test="login">
                     <a
@@ -152,7 +152,7 @@
                     </li>
 
                     <li
-                        v-if="userInfo"
+                        v-if="userInfo.isAuthenticated"
                         class="c-nav-list-item"
                         data-js-test="logout">
                         <a
@@ -288,12 +288,12 @@ export default {
         // If userInfoProp wasn't passed we make a call for userInfo on mounted hook
         async setUserInfo () {
             try {
-                const { data } = await axios.get('/api/account/details', {
+                const { data } = await axios.get('https://uk-publicweb-haproxy-staging-uk.staging-uk.je-labs.com/api/account/details', {
                     headers: {
                         credentials: 'same-origin'
                     }
                 });
-                if (data !== {}) {
+                if (data) {
                     this.userInfo = data;
                 }
             } catch (err) {

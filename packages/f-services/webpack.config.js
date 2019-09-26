@@ -1,15 +1,24 @@
 const path = require('path');
 
 module.exports = {
-    mode: 'production',
-    entry: './src/index.js',
+    entry: {
+        main: [
+            '@babel/polyfill',
+            './src/index.js'
+        ]
+    },
+    mode: 'development',
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: 'demo.js',
+        path: path.resolve(__dirname, 'dist')
     },
     module: {
-        rules: [
-            { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
-        ]
+        rules: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+                loader: 'babel-loader'
+            }
+        }]
     }
 };
