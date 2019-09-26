@@ -288,7 +288,7 @@ export default {
         // If userInfoProp wasn't passed we make a call for userInfo on mounted hook
         async setUserInfo () {
             try {
-                const { data } = await axios.get('https://uk-publicweb-haproxy-staging-uk.staging-uk.je-labs.com/api/account/details', {
+                const { data } = await axios.get('/api/account/details', {
                     headers: {
                         credentials: 'same-origin'
                     }
