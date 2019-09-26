@@ -5,7 +5,7 @@
  */
 
 /**
- * Returns the locale in correct format 'en-GB'
+ * Returns the locale in correct case format 'en-GB'
  *
  * @param {locale} string of the current locale.
  * @returns {String}
