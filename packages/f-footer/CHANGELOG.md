@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+
+v2.0.0-beta-19
+------------------------------
+*September 25, 2019*
+
+### Changed
+ - Import for `f-services` package instead of calling file on the root
+ - Updated version of `f-services`
+
+
 v2.0.0-beta-18
 ------------------------------
 *September 19, 2019*

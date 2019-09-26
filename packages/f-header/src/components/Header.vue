@@ -27,11 +27,11 @@
 </template>
 
 <script>
+import sharedServices from '@justeat/f-services';
 import Logo from './Logo.vue';
 import SkipToMain from './SkipToMain.vue';
 import tenantConfigs from '../tenants';
 import Navigation from './Navigation.vue';
-import sharedService from '../../../../scripts/shared.service';
 
 export default {
     name: 'VueHeader',
@@ -63,9 +63,9 @@ export default {
         }
     },
     data () {
-        const locale = sharedService.getLocale(tenantConfigs, this.locale, this.$118n);
+        const locale = sharedServices.getLocale(tenantConfigs, this.locale, this.$118n);
         const localeConfig = tenantConfigs[locale];
-        const theme = sharedService.getTheme(locale);
+        const theme = sharedServices.getTheme(locale);
         const mobileNavIsOpen = false;
 
         return {
