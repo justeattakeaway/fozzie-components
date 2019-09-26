@@ -238,6 +238,10 @@ export default {
         userInfoProp: {
             type: [Object, Boolean],
             default: false
+        },
+        userInfoUrl: {
+            type: String,
+            default: '/api/account/details'
         }
     },
     data () {
@@ -288,7 +292,7 @@ export default {
         // If userInfoProp wasn't passed we make a call for userInfo on mounted hook
         async setUserInfo () {
             try {
-                const { data } = await axios.get('/api/account/details', {
+                const { data } = await axios.get(this.userInfoUrl, {
                     headers: {
                         credentials: 'same-origin'
                     }

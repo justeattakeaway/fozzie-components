@@ -60,6 +60,10 @@ export default {
         userInfoProp: {
             type: [Object, Boolean],
             default: false
+        },
+        userInfoUrl: {
+            type: String,
+            default: '/api/account/details'
         }
     },
     data () {

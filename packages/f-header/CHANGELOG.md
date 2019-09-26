@@ -10,6 +10,7 @@ v2.0.0-beta-15
 
 ### Changed
  - Reference to `$i18n` localization library
+ - Added prop for `userInfoUrl`
 
 
 v2.0.0-beta-14
