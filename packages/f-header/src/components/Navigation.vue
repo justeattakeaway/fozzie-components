@@ -293,7 +293,7 @@ export default {
                         credentials: 'same-origin'
                     }
                 });
-                if (data) {
+                if (data !== {}) {
                     this.userInfo = data;
                 }
             } catch (err) {
