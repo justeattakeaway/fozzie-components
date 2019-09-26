@@ -5,9 +5,10 @@
  */
 
 /**
- * Returns the locale in correct format
+ * Returns the locale in correct format 'en-GB'
  *
  * @param {locale} string of the current locale.
+ * @returns {String}
  */
 const transformLocale = locale => `${locale.slice(0, -3)}${locale.slice(locale.lastIndexOf('-')).toUpperCase()}`;
 
