@@ -4,6 +4,30 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+0.7.0
+------------------------------
+*September 26, 2019*
+
+ ### Removed
+- `transformLocale` as it is not needed any more
+
+
+0.6.0
+------------------------------
+*September 26, 2019*
+
+ ### Changed
+- Webpack config to add babel polyfill
+
+
+0.5.0
+------------------------------
+*September 26, 2019*
+
+ ### Added
+- Made a new method for transforming the locale
+
+
 0.4.0
 ------------------------------
 *September 25, 2019*

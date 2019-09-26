@@ -13,10 +13,7 @@
  * @returns {String}
  */
 const getLocale = (tenantConfigs, tenantString, globalTenant) => {
-    const locale = tenantString === '' ? globalTenant?.locale : tenantString;
-
-    // makes sure the locale is the same format as the tenants - 'en-GB'
-    let transformedLocale = `${locale.slice(0, -3)}${locale.slice(locale.lastIndexOf('-')).toUpperCase()}`;
+    let locale = tenantString === '' ? globalTenant?.locale : tenantString;
 
     // if the locale is either
     // a) not set

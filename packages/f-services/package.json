@@ -1,7 +1,11 @@
 {
   "name": "@justeat/f-services",
   "description": "Fozzie Services - Shared Services for Components and projects",
+<<<<<<< Updated upstream
   "version": "0.4.0",
+=======
+  "version": "0.7.0",
+>>>>>>> Stashed changes
   "main": "dist/f-services.umd.min.js",
   "files": [
     "dist"
