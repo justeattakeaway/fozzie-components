@@ -4,7 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v2.0.0-beta-21
+v2.0.0-beta.22
+------------------------------
+*September 27, 2019*
+
+### Changed
+- Confianza logo to use new svg icon instead of png image
+
+
+v2.0.0-beta.21
 ------------------------------
 *September 27, 2019*
 
@@ -13,7 +21,7 @@ v2.0.0-beta-21
  - Version of `f-services`
 
 
-v2.0.0-beta-20
+v2.0.0-beta.20
 ------------------------------
 *September 26, 2019*
 
@@ -21,7 +29,7 @@ v2.0.0-beta-20
  - Version of `f-services`
 
 
-v2.0.0-beta-19
+v2.0.0-beta.19
 ------------------------------
 *September 25, 2019*
 
@@ -30,7 +38,7 @@ v2.0.0-beta-19
  - Updated version of `f-services`
 
 
-v2.0.0-beta-18
+v2.0.0-beta.18
 ------------------------------
 *September 19, 2019*
 
@@ -39,7 +47,7 @@ v2.0.0-beta-18
  - Moved some css styles out of css module to be reusable
 
 
-v2.0.0-beta-17
+v2.0.0-beta.17
 ------------------------------
 *September 18, 2019*
 

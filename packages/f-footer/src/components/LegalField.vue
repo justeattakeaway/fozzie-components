@@ -5,19 +5,24 @@
             v-if="info.textField">
             {{ info.textField }}
         </p>
-        <img
-            v-if="info.icon.name"
-            :src="require(`../assets/img/${info.icon.name}.png`)"
-            :alt="info.icon.alt"
+
+        <confianza-icon
+            v-if="isConfianza"
             :class="[
                 $style['c-footer-certificates-icons'],
                 $style[iconClass]
-            ]">
+            ]" />
     </div>
 </template>
 
 <script>
+import { CertificateConfianzaIcon as ConfianzaIcon } from '@justeat/f-vue-icons';
+
 export default {
+
+    components: {
+        ConfianzaIcon
+    },
     props: {
         info: {
             type: Object,
@@ -26,6 +31,9 @@ export default {
     },
 
     computed: {
+        isConfianza () {
+            return this.info.icon.name === 'confianza';
+        },
         iconClass () {
             return `c-footer-certificates-icons--${this.info.icon.name}`;
         }
@@ -54,13 +62,8 @@ export default {
 }
 
 .c-footer-certificates-icons--confianza {
-    width: 195px;
-    height: 39px;
-
-    @include media('<wide') {
-        width: 145px;
-        height: 29px;
-    }
+    width: 50px;
+    height: 50px;
 }
 </style>
 
