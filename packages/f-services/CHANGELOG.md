@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 *September 26, 2019*
 
  ### Added
-- `transformLocale` method for transforming the locale
+- `transformLocale` method for changing the case format of the locale
 
 
 0.4.0
