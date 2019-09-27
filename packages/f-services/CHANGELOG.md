@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 0.7.0
 ------------------------------
-*September 26, 2019*
+*September 27, 2019*
 
  ### Removed
 - `transformLocale` as it is not needed any more
