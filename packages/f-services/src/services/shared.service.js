@@ -19,9 +19,9 @@ const getLocale = (tenantConfigs, tenantString, globalTenant) => {
     // a) not set
     // or b) set to a country code that this component does not recognise
     // it will be set to 'en-GB'
-    if (!tenantConfigs[transformedLocale]) transformedLocale = 'en-GB';
+    if (!tenantConfigs[locale]) locale = 'en-GB';
 
-    return transformedLocale;
+    return locale;
 };
 
 /**
