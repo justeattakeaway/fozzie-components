@@ -4,6 +4,31 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta-15
+------------------------------
+*September 27, 2019*
+
+### Changed
+ - Reference to `$i18n` localization library
+ - Added prop for `userInfoUrl`
+
+
+v2.0.0-beta-14
+------------------------------
+*September 26, 2019*
+
+### Changed
+ - Updated version of `f-services`
+
+
+v2.0.0-beta-13
+------------------------------
+*September 26, 2019*
+
+### Changed
+ - Condition against data in in `getUserInfo`
+
+
 v2.0.0-beta-12
 ------------------------------
 *September 25, 2019*
