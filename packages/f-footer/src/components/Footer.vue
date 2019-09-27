@@ -89,7 +89,7 @@ export default {
     },
 
     data () {
-        const locale = sharedServices.getLocale(tenantConfigs, this.locale, this.$118n);
+        const locale = sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
         const theme = sharedServices.getTheme(locale);
 
