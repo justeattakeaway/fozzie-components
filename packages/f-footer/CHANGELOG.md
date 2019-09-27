@@ -10,6 +10,7 @@ v2.0.0-beta-21
 
 ### Changed
  - Reference to `$i18n` localization library
+ - Version of `f-services`
 
 
 v2.0.0-beta-20
@@ -17,7 +18,7 @@ v2.0.0-beta-20
 *September 26, 2019*
 
 ### Changed
- - Updated version of `f-services`
+ - Version of `f-services`
 
 
 v2.0.0-beta-19
