@@ -26,7 +26,7 @@ v2.0.0-beta-13
 *September 26, 2019*
 
 ### Changed
- - Condition against data in in `getUserInfo`
+ - Condition against data in `getUserInfo`
 
 
 v2.0.0-beta-12
