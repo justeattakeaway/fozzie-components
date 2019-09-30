@@ -61,23 +61,23 @@ const getWindowHeight = () => window.innerHeight;
  *
  * @param {throttleTime} integer for setting the throttle time and toggling throttle off.
  * @param {eventName} integer for setting the name of the event listened to.
- * @param {action} function for running when the event is listened to.
+ * @param {callBackFunction} function for running when the event is listened to.
  */
-const addEvent = (eventName, throttleTime, action) => {
+const addEvent = (eventName, throttleTime, callBackFunction) => {
     if (throttleTime > 0) {
-        return window.addEventListener(eventName, throttle(action, throttleTime));
+        return window.addEventListener(eventName, throttle(callBackFunction, throttleTime));
     }
-    return window.addEventListener(eventName, action);
+    return window.addEventListener(eventName, callBackFunction);
 };
 
 /**
  * Removes chosen event.
  *
  * @param {eventName} integer for setting the name of the event listened to.
- * @param {action} function for running when the event is listened to.
+ * @param {callBackFunction} function for running when the event is listened to.
  */
-const removeEvent = (eventName, action) => {
-    window.removeEventListener(eventName, action);
+const removeEvent = (eventName, callBackFunction) => {
+    window.removeEventListener(eventName, callBackFunction);
 };
 
 export default {
