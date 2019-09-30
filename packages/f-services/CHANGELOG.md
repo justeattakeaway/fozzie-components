@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+0.9.0
+------------------------------
+*September 30, 2019*
+
+ ### Added
+- `lodash-es` throttle for the `addEvent` service
+
+
 0.8.0
 ------------------------------
 *September 30, 2019*
@@ -13,6 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `getWindowHeight` method for returning the current height of the window
 - `addEvent` method for listening to a given event and applying a given function at a given time
 - `removeEvent` method for clearing the listener for a given event and function
+
 
 0.7.0
 ------------------------------
