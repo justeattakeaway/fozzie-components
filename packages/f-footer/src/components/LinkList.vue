@@ -54,7 +54,7 @@
 
 <script>
 import { ChevronIcon } from '@justeat/f-vue-icons';
-import { throttle } from 'lodash-es';
+import sharedServices from '@justeat/f-services';
 
 export default {
     components: {
@@ -71,7 +71,7 @@ export default {
     data () {
         return {
             panelCollapsed: true,
-            currentScreenWidth: 0
+            currentScreenWidth: sharedServices.getWindowHeight()
         };
     },
 
@@ -90,12 +90,11 @@ export default {
     },
 
     mounted () {
-        this.currentScreenWidth = window.innerWidth;
-        window.addEventListener('resize', throttle(this.onResize, 100));
+        sharedServices.addEvent('resize', 100, this.onResize);
     },
 
     destroyed () {
-        window.removeEventListener('resize', this.resize);
+        sharedServices.removeEvent('resize', this.onResize);
     },
 
     methods: {
@@ -106,7 +105,7 @@ export default {
         },
 
         onResize () {
-            this.currentScreenWidth = window.innerWidth;
+            this.currentScreenWidth = sharedServices.getWindowHeight();
         }
     }
 };
