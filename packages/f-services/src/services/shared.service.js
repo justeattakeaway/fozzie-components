@@ -1,3 +1,5 @@
+import { throttle } from 'lodash-es';
+
 /**
  * @overview Shared Service
  *
@@ -10,7 +12,7 @@
  * @param {tenantConfigs} object of localization strings.
  * @param {tenantString} string of the current locale.
  * @param {globalTenant} object of the global localization strings.
- * @returns {String}
+ * @returns {string}
  */
 const getLocale = (tenantConfigs, tenantString, globalTenant) => {
     let locale = tenantString === '' ? globalTenant?.locale : tenantString;
@@ -28,7 +30,7 @@ const getLocale = (tenantConfigs, tenantString, globalTenant) => {
  * Returns the theme from the given locale
  *
  * @param {locale} string of the current locale.
- * @returns {String} for the theme toggle
+ * @returns {string} for the theme toggle
  */
 const getTheme = locale => {
     switch (locale) {
@@ -40,7 +42,49 @@ const getTheme = locale => {
     }
 };
 
+/**
+ * Returns new window width
+ *
+ * @returns {float} for window width
+ */
+const getWindowWidth = () => window.innerWidth;
+
+/**
+ * Returns new window height
+ *
+ * @returns {float} for window height
+ */
+const getWindowHeight = () => window.innerHeight;
+
+/**
+ * Applies logic to the chosen event and throttles it if needs be
+ *
+ * @param {throttleTime} integer for setting the throttle time and toggling throttle off.
+ * @param {eventName} integer for setting the name of the event listened to.
+ * @param {action} function for running when the event is listened to.
+ */
+const addEvent = (eventName, throttleTime, action) => {
+    if (throttleTime > 0) {
+        return window.addEventListener(eventName, throttle(action, throttleTime));
+    }
+    return window.addEventListener(eventName, action);
+};
+
+/**
+ * Removes chosen event.
+ *
+ * @param {eventName} integer for setting the name of the event listened to.
+ * @param {action} function for running when the event is listened to.
+ */
+const removeEvent = (eventName, action) => {
+    window.removeEventListener(eventName, action);
+};
+
 export default {
     getLocale,
-    getTheme
+    getTheme,
+    getWindowWidth,
+    getWindowHeight,
+    addEvent,
+    removeEvent
 };
