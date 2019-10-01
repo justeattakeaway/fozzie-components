@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta-16
+------------------------------
+*October 1, 2019*
+
+### Added
+ - New method `orderCountSupported` for order count tracking
+ - New `input` tag in the header `data-order-count-supported` for order count tracking
+
+
 v2.0.0-beta-15
 ------------------------------
 *September 27, 2019*
@@ -54,7 +63,7 @@ v2.0.0-beta-10
 *September 20, 2019*
 
 ### Changed
-- Name of method from `setUserDetails` to `setUserInfo`
+- Name of method from `setUserDetails` to `fetchUserInfo`
 
 ### Added
 - New prop for `userInfo` coming from outside the component

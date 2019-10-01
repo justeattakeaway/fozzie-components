@@ -1,29 +1,37 @@
 <template>
-    <header
-        :data-theme="theme"
-        :class="['c-header', { 'c-header--transparent c-header--gradient': showTransparentHeader }]">
-        <skip-to-main
-            :text="copy.skipToMainContentText"
-            :transparent-bg="showTransparentHeader" />
-        <div class="c-header-container">
-            <logo
-                :theme="theme"
-                :is-transparent="showTransparentHeader"
-                :company-name="copy.companyName"
-                :logo-gtm-label="copy.logo.gtm" />
-            <navigation
-                :nav-links="copy.navLinks"
-                :help="copy.help"
-                :account-logout="copy.accountLogout"
-                :account-login="copy.accountLogin"
-                :open-menu-text="copy.openMenuText"
-                :delivery-enquiry="copy.deliveryEnquiry"
-                :show-delivery-enquiry="showDeliveryEnquiryWithContent"
-                :user-info-prop="userInfoProp"
-                :just-log="justLog"
-                @onMobileNavToggle="mobileNavToggled" />
-        </div>
-    </header>
+    <section>
+        <input
+            data-order-count-supported
+            type="hidden"
+            :value="isOrderCountSupported">
+        <header
+            :data-theme="theme"
+            :class="['c-header', { 'c-header--transparent c-header--gradient': showTransparentHeader }]">
+            <skip-to-main
+                :text="copy.skipToMainContentText"
+                :transparent-bg="showTransparentHeader" />
+            <div class="c-header-container">
+                <logo
+                    :theme="theme"
+                    :is-transparent="showTransparentHeader"
+                    :company-name="copy.companyName"
+                    :logo-gtm-label="copy.logo.gtm" />
+                <navigation
+                    :nav-links="copy.navLinks"
+                    :help="copy.help"
+                    :account-logout="copy.accountLogout"
+                    :account-login="copy.accountLogin"
+                    :open-menu-text="copy.openMenuText"
+                    :delivery-enquiry="copy.deliveryEnquiry"
+                    :show-delivery-enquiry="showDeliveryEnquiryWithContent"
+                    :just-log="justLog"
+                    :user-info-prop="userInfoProp"
+                    :user-info-url="userInfoUrl"
+                    :order-count-url="orderCountUrl"
+                    @onMobileNavToggle="mobileNavToggled" />
+            </div>
+        </header>
+    </section>
 </template>
 
 <script>
@@ -60,6 +68,14 @@ export default {
         userInfoProp: {
             type: [Object, Boolean],
             default: false
+        },
+        userInfoUrl: {
+            type: String,
+            default: '/api/account/details'
+        },
+        orderCountUrl: {
+            type: String,
+            default: '/api/analytics/ordercount'
         }
     },
     data () {
@@ -67,11 +83,13 @@ export default {
         const localeConfig = tenantConfigs[locale];
         const theme = sharedServices.getTheme(locale);
         const mobileNavIsOpen = false;
+        const isOrderCountSupported = true;
 
         return {
             copy: { ...localeConfig },
             theme,
-            mobileNavIsOpen
+            mobileNavIsOpen,
+            isOrderCountSupported
         };
     },
     computed: {

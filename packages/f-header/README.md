@@ -63,6 +63,6 @@
 
     `showDeliveryEnquiry` - Boolean property with `false` as a default value, defines if it is necessary to show the "Deliver with Just Eat" link in the header.
 
-    `justLog` - Function passed in for logging errors with the `setUserInfo` method. It has empty function as a default value
+    `justLog` - Function passed in for logging errors with the `fetchUserInfo` method. It has empty function as a default value
 
 ## Documentation to be completed once module is in stable state.
