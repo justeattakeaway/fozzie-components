@@ -202,7 +202,6 @@ export default {
         ProfileIcon,
         DeliveryIcon
     },
-
     props: {
         accountLogin: {
             type: Object,
@@ -249,7 +248,6 @@ export default {
             default: '/api/analytics/ordercount'
         }
     },
-
     data () {
         return {
             navIsOpen: false,
@@ -258,7 +256,6 @@ export default {
             orderCountInfo: false
         };
     },
-
     computed: {
         isBelowMid () {
             return this.currentScreenWidth <= 767;
@@ -274,31 +271,25 @@ export default {
             return `${this.accountLogout.url}${this.returnUrl}`;
         }
     },
-
     mounted () {
         if (!this.userInfo) {
             this.fetchUserInfo();
         }
         sharedServices.addEvent('resize', 100, this.onResize);
     },
-
     destroyed () {
         sharedServices.removeEvent('resize', this.onResize);
     },
-
     methods: {
         onNavToggle () {
             this.navIsOpen = !this.navIsOpen;
         },
-
         closeNav () {
             this.navIsOpen = false;
         },
-
         openNav () {
             this.navIsOpen = true;
         },
-
         onResize () {
             this.currentScreenWidth = sharedServices.getWindowHeight();
         },
@@ -307,7 +298,6 @@ export default {
             this.onNavToggle();
             this.$emit('onMobileNavToggle', this.navIsOpen);
         },
-
         // If userInfoProp wasn't passed we make a call for userInfo on mounted hook
         async fetchUserInfo () {
             try {
