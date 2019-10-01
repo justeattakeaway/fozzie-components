@@ -194,7 +194,7 @@
 
 <script>
 import { ProfileIcon, DeliveryIcon } from '@justeat/f-vue-icons';
-import { throttle } from 'lodash-es';
+import sharedServices from '@justeat/f-services';
 import axios from 'axios';
 
 export default {
@@ -202,6 +202,7 @@ export default {
         ProfileIcon,
         DeliveryIcon
     },
+
     props: {
         accountLogin: {
             type: Object,
@@ -248,14 +249,16 @@ export default {
             default: '/api/analytics/ordercount'
         }
     },
+
     data () {
         return {
             navIsOpen: false,
-            currentScreenWidth: 0,
+            currentScreenWidth: sharedServices.getWindowHeight(),
             userInfo: this.userInfoProp,
             orderCountInfo: false
         };
     },
+
     computed: {
         isBelowMid () {
             return this.currentScreenWidth <= 767;
@@ -271,34 +274,40 @@ export default {
             return `${this.accountLogout.url}${this.returnUrl}`;
         }
     },
+
     mounted () {
         if (!this.userInfo) {
             this.fetchUserInfo();
         }
-        this.currentScreenWidth = window.innerWidth;
-        window.addEventListener('resize', throttle(this.onResize, 100));
+        sharedServices.addEvent('resize', 100, this.onResize);
     },
+
     destroyed () {
-        window.removeEventListener('resize', this.resize);
+        sharedServices.removeEvent('resize', this.onResize);
     },
+
     methods: {
         onNavToggle () {
             this.navIsOpen = !this.navIsOpen;
         },
+
         closeNav () {
             this.navIsOpen = false;
         },
+
         openNav () {
             this.navIsOpen = true;
         },
+
         onResize () {
-            this.currentScreenWidth = window.innerWidth;
+            this.currentScreenWidth = sharedServices.getWindowHeight();
         },
         // When hamburger menu is clicked we want to trigger toggling of navigation and emit the state to the parent to add transparent class
         onHamburgerMenuClick () {
             this.onNavToggle();
             this.$emit('onMobileNavToggle', this.navIsOpen);
         },
+
         // If userInfoProp wasn't passed we make a call for userInfo on mounted hook
         async fetchUserInfo () {
             try {

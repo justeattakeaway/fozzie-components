@@ -11,6 +11,14 @@ v2.0.0-beta-16
 ### Added
  - New method `orderCountSupported` for order count tracking
  - New `input` tag in the header `data-order-count-supported` for order count tracking
+ - New methods added for getting and setting local storage with order count `setAnanlyticsBlob` and `getLocalAnalyticsBlob`
+ - New method added for saving the users data `saveUserData`
+ - New method added for pushing the user data to the windows data layer `pushUserData`
+ - New method for fetching the order count through GET request `fetchOrderCountAndSave`
+ - new method for updating the order count `enrichUserDataWithCount`
+
+ ### Removed
+ - Methods and added them to `f-services`
 
 
 v2.0.0-beta-15
