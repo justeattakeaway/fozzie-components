@@ -1024,7 +1024,7 @@
 "@justeat/f-footer@file:packages/f-footer":
   version "2.0.0-beta.22"
   dependencies:
-    "@justeat/f-services" "^0.7.0"
+    "@justeat/f-services" "0.9.0"
     "@justeat/f-vue-icons" "1.0.0-beta.4"
     lodash-es "4.17.15"
     v-click-outside "2.1.3"
@@ -1033,9 +1033,9 @@
 "@justeat/f-header@file:packages/f-header":
   version "2.0.0-beta.16"
   dependencies:
-    "@justeat/f-services" "^0.8.0"
-    "@justeat/f-vue-icons" "^1.0.0-beta.4"
-    axios "0.19.0"
+    "@justeat/f-services" "0.9.0"
+    "@justeat/f-vue-icons" "1.0.0-beta.4"
+    axios "^0.19.0"
     lodash-es "4.17.15"
 
 "@justeat/f-icons@1.29.0":
@@ -1059,24 +1059,15 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-logger/-/f-logger-0.7.1.tgz#06e728d3c65733cab7c9bbfc813b401fa68ba82b"
   integrity sha512-qi1wDK5ijmQ6nE+2bIv68AuWVxCvogzVoXvHd4D0oZCw4PQmVfw9i25m/fw6AiipL6yxkiIGM4LfBlnm+FncDA==
 
-<<<<<<< HEAD
-=======
 "@justeat/f-metadata@file:packages/f-metadata":
   version "0.1.0"
   dependencies:
     appboy-web-sdk "2.4.0"
 
->>>>>>> d3066facec2006ebfc963b4a92fa38eb8ac26092
-"@justeat/f-services@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-0.7.0.tgz#899c826ed2e564ff1f495c1052f2f8fd6dbc5077"
-  integrity sha512-O9BseOP+wUip3xUpUHZqjAnr7obfHby1jP/jCLp+wmvU37QH6yi44iWaXmWQy8wSQegU2VDu3z7dKzgPRZB82g==
-<<<<<<< HEAD
-=======
-
 "@justeat/f-services@file:packages/f-services":
-  version "0.8.0"
->>>>>>> d3066facec2006ebfc963b4a92fa38eb8ac26092
+  version "0.9.0"
+  dependencies:
+    lodash-es "^4.17.15"
 
 "@justeat/f-utils@0.2.0":
   version "0.2.0"
@@ -1088,7 +1079,7 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-utils/-/f-utils-0.3.0.tgz#1f18ba13ad7061e21c2112387234a77ba45fb5d3"
   integrity sha512-hqRiGA2lP++Z1oqawsv1V2Duf3YShaAbJ3S5JEPTpTMP5RjH36Xpc8nRbIVFBmwnZCu7L9iF7AebYTUX8XhiZA==
 
-"@justeat/f-vue-icons@1.0.0-beta.4", "@justeat/f-vue-icons@^1.0.0-beta.4":
+"@justeat/f-vue-icons@1.0.0-beta.4":
   version "1.0.0-beta.4"
   resolved "http://packages.je-labs.com/npm/private-npm/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.4.tgz#aef8a22b43f04f3ad0ca287f50ed1d68804c605a"
   integrity sha1-rviiK0PwTzrQyih/UO0daIBMYFo=
@@ -3028,6 +3019,14 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
   integrity sha512-ReZxvNHIOv88FlT7rxcXIIC0fPt4KZqZbOlivyWtXLt8ESx84zd3kMC6iK5jVeS2qt+g7ftS7ye4fi06X5rtRQ==
 
+axios@^0.19.0:
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.0.tgz#8e09bff3d9122e133f7b8101c8fbdd00ed3d2ab8"
+  integrity sha512-1uvKqKQta3KBxIz14F2v06AEHZ/dIoeKfbTRkK1E5oqjDnuEerLmYTgJB5AiQZHJcljpg1TuRzdjDR06qNk0DQ==
+  dependencies:
+    follow-redirects "1.5.10"
+    is-buffer "^2.0.2"
+
 babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.26.0.tgz#63fd43f7dc1e3bb7ce35947db8fe369a3f58c74b"
@@ -4859,7 +4858,7 @@ debug@2, debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8, debug@^2.6.9:
   dependencies:
     ms "2.0.0"
 
-debug@3.1.0:
+debug@3.1.0, debug@=3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   integrity sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==
@@ -6330,6 +6329,13 @@ follow-redirects@0.0.7:
     debug "^2.2.0"
     stream-consume "^0.1.0"
 
+follow-redirects@1.5.10:
+  version "1.5.10"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.5.10.tgz#7b7a9f9aea2fdff36786a94ff643ed07f4ff5e2a"
+  integrity sha512-0V5l4Cizzvqt5D44aTXbFZz+FtyXV1vrDN6qrelxtfYQKW0KO0W2T/hkE8xvGa/540LkZlkaUjO4ailYTFtHVQ==
+  dependencies:
+    debug "=3.1.0"
+
 follow-redirects@^1.0.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.9.0.tgz#8d5bcdc65b7108fe1508649c79c12d732dcedb4f"
@@ -7545,6 +7551,11 @@ is-buffer@^1.1.5:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
   integrity sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==
+
+is-buffer@^2.0.2:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-2.0.4.tgz#3e572f23c8411a5cfd9557c849e3665e0b290623"
+  integrity sha512-Kq1rokWXOPXWuaMAqZiJW4XxsmD9zGx9q4aePabbn3qCRGedtH7Cm+zV8WETitMfu1wdh+Rvd6w5egwSngUX2A==
 
 is-callable@^1.1.4:
   version "1.1.4"
@@ -8787,11 +8798,6 @@ lines-and-columns@^1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
-
-lite-ready@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/lite-ready/-/lite-ready-1.0.4.tgz#6dfe50f45a5a2840c87c8406a7abf3088bfd255e"
-  integrity sha1-bf5Q9FpaKEDIfIQGp6vzCIv9JV4=
 
 load-json-file@^1.0.0:
   version "1.1.0"
