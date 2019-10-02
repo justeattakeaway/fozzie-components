@@ -34,4 +34,9 @@
     import initialiseBraze from '@justeat/f-metadata';
     ```
 
-## Documentation to be completed once module is in stable state.
+3. Properties which component accepts:
+
+    `enableLogging` - If set to `true`, it allows Braze logging in the console. Default set to `false`.
+
+    `disableComponent` - If set to `true`, it does not initialise Braze when called. Default set to `false`.
+
