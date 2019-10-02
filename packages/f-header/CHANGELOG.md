@@ -9,8 +9,6 @@ v2.0.0-beta-16
 *October 1, 2019*
 
 ### Added
- - New method `orderCountSupported` for order count tracking
- - New `input` tag in the header `data-order-count-supported` for order count tracking
  - New methods added for getting and setting local storage with order count `setAnalyticsBlob` and `getLocalAnalyticsBlob`
  - New method added for saving the users data `saveUserData`
  - New method added for pushing the user data to the windows data layer `pushUserData`

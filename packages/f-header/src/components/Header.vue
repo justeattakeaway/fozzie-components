@@ -2,10 +2,6 @@
     <header
         :data-theme="theme"
         :class="['c-header', { 'c-header--transparent c-header--gradient': showTransparentHeader }]">
-        <input
-            data-order-count-supported
-            type="hidden"
-            :value="isOrderCountSupported">
         <skip-to-main
             :text="copy.skipToMainContentText"
             :transparent-bg="showTransparentHeader" />
