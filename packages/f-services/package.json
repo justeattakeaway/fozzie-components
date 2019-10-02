@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-services",
   "description": "Fozzie Services - Shared Services for Components and projects",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "main": "dist/f-services.umd.min.js",
   "files": [
     "dist"
@@ -37,5 +37,8 @@
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "3.9.0",
     "@vue/test-utils": "1.0.0-beta.29"
+  },
+  "dependencies": {
+    "lodash-es": "4.17.15"
   }
 }
