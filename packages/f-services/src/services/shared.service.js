@@ -63,7 +63,7 @@ const getWindowHeight = () => window.innerHeight;
  * @param {eventName} integer for setting the name of the event listened to.
  * @param {callBackFunction} function for running when the event is listened to.
  */
-const addEvent = (eventName, throttleTime, callBackFunction) => {
+const addEvent = (eventName, callBackFunction, throttleTime) => {
     if (throttleTime > 0) {
         return window.addEventListener(eventName, throttle(callBackFunction, throttleTime));
     }
