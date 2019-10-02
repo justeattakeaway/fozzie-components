@@ -1,3 +1,4 @@
+import { throttle } from 'lodash-es';
 import sharedServices from '../shared.service';
 
 describe('sharedServices', () => {
@@ -98,7 +99,6 @@ describe('sharedServices', () => {
             // Arrange
             const locale = 'en-GB';
 
-
             // Act
             const result = sharedServices.getTheme(locale);
 
@@ -138,6 +138,50 @@ describe('sharedServices', () => {
 
             // Assert
             expect(result).toBe(375);
+        });
+    });
+
+    describe('addEvent', () => {
+        const eventName = 'resize';
+        const callBackFunction = jest.fn();
+
+        it('returns the correct event to be listened to WITHOUT being throttled', () => {
+            // Arrange
+            const throttleTime = 0;
+
+            // Act
+            sharedServices.addEvent(eventName, callBackFunction, throttleTime);
+            resizeWindow(windowWidth, windowHeight);
+
+            // Assert
+            expect(callBackFunction).toHaveBeenCalled();
+        });
+
+        it('returns the correct event to be listened to being throttled', () => {
+            // Arrange
+            const throttleTime = 10;
+
+            // Act
+            sharedServices.addEvent(eventName, callBackFunction, throttleTime);
+            resizeWindow(windowWidth, windowHeight);
+
+            // Assert
+            expect(callBackFunction).toHaveBeenCalled();
+        });
+    });
+
+    describe('removeEvent', () => {
+        it('removes given event listener', () => {
+            // Arrange
+            const eventName = 'resize';
+            const callBackFunction = jest.fn();
+
+            // Act
+            sharedServices.removeEvent(eventName, callBackFunction);
+            resizeWindow(windowWidth, windowHeight);
+
+            // Assert
+            expect(callBackFunction).not.toHaveBeenCalled();
         });
     });
 });

@@ -1,8 +1,8 @@
 {
   "name": "@justeat/f-services",
   "description": "Fozzie Services - Shared Services for Components and projects",
-  "version": "0.9.0",
-  "main": "dist/f-services.umd.min.js",
+  "version": "0.10.0",
+  "main": "dist/shared.services.bundle.js",
   "files": [
     "dist"
   ],
@@ -26,19 +26,23 @@
   ],
   "scripts": {
     "prepare": "yarn test && yarn build",
-    "build": "webpack",
+    "build": "webpack --config ./webpack.config.js --mode=production",
     "test": "jest"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "3.9.2",
-    "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "3.9.0",
-    "@vue/test-utils": "1.0.0-beta.29"
-  },
   "dependencies": {
+    "@babel/polyfill": "7.6.0",
     "lodash-es": "4.17.15"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.6.2",
+    "@babel/core": "7.6.2",
+    "@babel/node": "7.6.2",
+    "@babel/preset-env": "7.6.2",
+    "babel-loader": "8.0.6",
+    "webpack": "4.41.0",
+    "webpack-cli": "3.3.9"
   }
 }
