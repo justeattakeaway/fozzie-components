@@ -6,7 +6,7 @@
 
 
 // Import vue component
-import Services from './services/shared.service';
+import sharedServices from './services/shared.service';
 
 // To allow use as module (npm/webpack/etc.) export component
-export default Services;
+export default sharedServices;

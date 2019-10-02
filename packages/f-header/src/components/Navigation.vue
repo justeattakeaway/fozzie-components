@@ -297,7 +297,7 @@ export default {
         if (!this.userInfo) {
             this.fetchUserInfo();
         }
-        sharedServices.addEvent('resize', 100, this.onResize);
+        sharedServices.addEvent('resize', this.onResize, 100);
     },
 
     destroyed () {
