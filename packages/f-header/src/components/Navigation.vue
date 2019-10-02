@@ -358,7 +358,7 @@ export default {
                 });
                 if (data) {
                     this.orderCountInfo = data;
-                    this.setAnanlyticsBlob();
+                    this.setAnalyticsBlob();
                     this.enrichUserDataWithCount(data);
                     this.pushUserData();
                 }
@@ -370,7 +370,7 @@ export default {
         },
 
         // Sets the order count info in local storage
-        setAnanlyticsBlob () {
+        setAnalyticsBlob () {
             window.localStorage.setItem('je-analytics', JSON.stringify(this.orderCountInfo));
         },
 
