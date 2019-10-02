@@ -12,7 +12,6 @@ describe('sharedServices', () => {
                 locale: 'da-DK'
             };
 
-
             // Act
             const result = sharedServices.getLocale(tenantConfigs, tenantString, globalTenant);
 
@@ -29,7 +28,6 @@ describe('sharedServices', () => {
             const globalTenant = {
                 locale: 'it-IT'
             };
-
 
             // Act
             const result = sharedServices.getLocale(tenantConfigs, tenantString, globalTenant);
@@ -48,7 +46,6 @@ describe('sharedServices', () => {
                 locale: 'it-IT'
             };
 
-
             // Act
             const result = sharedServices.getLocale(tenantConfigs, tenantString, globalTenant);
 
@@ -66,7 +63,6 @@ describe('sharedServices', () => {
                 locale: 'da-DK'
             };
 
-
             // Act
             const result = sharedServices.getLocale(tenantConfigs, tenantString, globalTenant);
 
@@ -80,7 +76,6 @@ describe('sharedServices', () => {
             // Arrange
             const locale = 'en-AU';
 
-
             // Act
             const result = sharedServices.getTheme(locale);
 
@@ -91,7 +86,6 @@ describe('sharedServices', () => {
         it('returns "ml" for Menu Log theme if locale is "en-NZ"', () => {
             // Arrange
             const locale = 'en-NZ';
-
 
             // Act
             const result = sharedServices.getTheme(locale);
@@ -110,6 +104,40 @@ describe('sharedServices', () => {
 
             // Assert
             expect(result).toBe('je');
+        });
+    });
+
+    const windowWidth = 667;
+    const windowHeight = 375;
+    const resizeWindow = (x, y) => {
+        window.innerWidth = x;
+        window.innerHeight = y;
+        window.dispatchEvent(new Event('resize'));
+    };
+
+    describe('getWindowWidth', () => {
+        it('returns a float of the window width', () => {
+            // Arrange
+            resizeWindow(windowWidth, windowHeight);
+
+            // Act
+            const result = window.innerWidth;
+
+            // Assert
+            expect(result).toBe(667);
+        });
+    });
+
+    describe('getWindowHeight', () => {
+        it('returns a float of the window height', () => {
+            // Arrange
+            resizeWindow(windowWidth, windowHeight);
+
+            // Act
+            const result = window.innerHeight;
+
+            // Assert
+            expect(result).toBe(375);
         });
     });
 });
