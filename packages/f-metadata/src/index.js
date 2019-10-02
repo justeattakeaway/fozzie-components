@@ -1,9 +1,11 @@
-const initialiseBraze = (apiKey, enableLogging = false) => {
+const initialiseBraze = (apiKey, enableLogging = false, disableComponent = false) => {
     if (typeof window !== 'undefined') {
-        const appboy = require('appboy-web-sdk'); // eslint-disable-line
-        appboy.initialize(apiKey, { enableLogging });
-        appboy.display.automaticallyShowNewInAppMessages();
-        appboy.openSession();
+        if (!disableComponent) {
+            const appboy = require('appboy-web-sdk'); // eslint-disable-line
+            appboy.initialize(apiKey, { enableLogging });
+            appboy.display.automaticallyShowNewInAppMessages();
+            appboy.openSession();
+        }
     }
 };
 
