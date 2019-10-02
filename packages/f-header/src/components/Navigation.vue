@@ -202,52 +202,69 @@ export default {
         ProfileIcon,
         DeliveryIcon
     },
+
     props: {
         accountLogin: {
             type: Object,
             default: () => ({})
         },
+
         accountLogout: {
             type: Object,
             default: () => ({})
         },
+
         navLinks: {
             type: Object,
             required: true
         },
+
         help: {
             type: Object,
             default: () => ({})
         },
+
         openMenuText: {
             type: String,
             default: ''
         },
+
         deliveryEnquiry: {
             type: Object,
             default: () => ({})
         },
+
         showDeliveryEnquiry: {
             type: Boolean,
             default: false
         },
+
         justLog: {
             type: Object,
             default: () => ({})
         },
+
         userInfoProp: {
             type: [Object, Boolean],
             default: false
         },
+
         userInfoUrl: {
             type: String,
             default: '/api/account/details'
         },
+
         orderCountUrl: {
             type: String,
             default: '/api/analytics/ordercount'
+        },
+
+        isOrderCountSupported: {
+            type: Boolean,
+            default: true
         }
     },
+
     data () {
         return {
             navIsOpen: false,
@@ -256,48 +273,60 @@ export default {
             orderCountInfo: false
         };
     },
+
     computed: {
         isBelowMid () {
             return this.currentScreenWidth <= 767;
         },
+
         returnUrl () {
             if (!this.$route) return encodeURIComponent(document.location.pathname);
             return encodeURIComponent(this.$route.name);
         },
+
         returnLoginUrl () {
             return `${this.accountLogin.url}${this.returnUrl}`;
         },
+
         returnLogoutUrl () {
             return `${this.accountLogout.url}${this.returnUrl}`;
         }
     },
+
     mounted () {
         if (!this.userInfo) {
             this.fetchUserInfo();
         }
         sharedServices.addEvent('resize', 100, this.onResize);
     },
+
     destroyed () {
         sharedServices.removeEvent('resize', this.onResize);
     },
+
     methods: {
         onNavToggle () {
             this.navIsOpen = !this.navIsOpen;
         },
+
         closeNav () {
             this.navIsOpen = false;
         },
+
         openNav () {
             this.navIsOpen = true;
         },
+
         onResize () {
             this.currentScreenWidth = sharedServices.getWindowHeight();
         },
+
         // When hamburger menu is clicked we want to trigger toggling of navigation and emit the state to the parent to add transparent class
         onHamburgerMenuClick () {
             this.onNavToggle();
             this.$emit('onMobileNavToggle', this.navIsOpen);
         },
+
         // If userInfoProp wasn't passed we make a call for userInfo on mounted hook
         async fetchUserInfo () {
             try {
@@ -318,6 +347,7 @@ export default {
                 }
             }
         },
+
         // fetches the order count for the user
         async fetchOrderCountAndSave () {
             try {
@@ -338,38 +368,34 @@ export default {
                 }
             }
         },
+
         // Sets the order count info in local storage
         setAnanlyticsBlob () {
             window.localStorage.setItem('je-analytics', JSON.stringify(this.orderCountInfo));
         },
+
         // Gets the order count info in local storage
         getLocalAnalyticsBlob () {
             return window.localStorage.getItem('je-analytics');
         },
+
         // Updates the user information with the count
         enrichUserDataWithCount () {
             this.userInfo.orderCount = this.orderCountInfo.Count;
         },
+
         // Pushes the user info to the windows data layer
         pushUserData () {
             window.dataLayer.push(this.userInfo);
         },
-        // Checks that the element exist's
-        orderCountSupported () {
-            const supportedEl = document.querySelector('[data-order-count-supported]');
-            if (supportedEl && supportedEl.value) {
-                // Case insensitive regex test for value="true"
-                return /^true$/i.test(supportedEl.value);
-            }
-            return false;
-        },
+
         // Saves the user data and calls the nessesary methods based on what is already there
         saveUserData () {
             const localOrderCount = JSON.parse(this.getLocalAnalyticsBlob);
             const currentTime = new Date().getTime();
             const localOrderCountExpires = Date.parse(localOrderCount.Expires);
 
-            if (!this.orderCountSupported()) {
+            if (!this.isOrderCountSupported()) {
                 this.pushUserData();
             }
             if (!this.getLocalAnalyticsBlob) {

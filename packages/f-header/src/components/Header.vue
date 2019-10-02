@@ -27,6 +27,7 @@
                 :user-info-prop="userInfoProp"
                 :user-info-url="userInfoUrl"
                 :order-count-url="orderCountUrl"
+                :is-order-count-supported="isOrderCountSupported"
                 @onMobileNavToggle="mobileNavToggled" />
         </div>
     </header>
@@ -74,6 +75,10 @@ export default {
         orderCountUrl: {
             type: String,
             default: '/api/analytics/ordercount'
+        },
+        isOrderCountSupported: {
+            type: Boolean,
+            default: true
         }
     },
     data () {
@@ -81,13 +86,11 @@ export default {
         const localeConfig = tenantConfigs[locale];
         const theme = sharedServices.getTheme(locale);
         const mobileNavIsOpen = false;
-        const isOrderCountSupported = true;
 
         return {
             copy: { ...localeConfig },
             theme,
-            mobileNavIsOpen,
-            isOrderCountSupported
+            mobileNavIsOpen
         };
     },
     computed: {
