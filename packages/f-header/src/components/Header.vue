@@ -19,8 +19,11 @@
                 :open-menu-text="copy.openMenuText"
                 :delivery-enquiry="copy.deliveryEnquiry"
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
-                :user-info-prop="userInfoProp"
                 :just-log="justLog"
+                :user-info-prop="userInfoProp"
+                :user-info-url="userInfoUrl"
+                :order-count-url="orderCountUrl"
+                :is-order-count-supported="isOrderCountSupported"
                 @onMobileNavToggle="mobileNavToggled" />
         </div>
     </header>
@@ -60,6 +63,18 @@ export default {
         userInfoProp: {
             type: [Object, Boolean],
             default: false
+        },
+        userInfoUrl: {
+            type: String,
+            default: '/api/account/details'
+        },
+        orderCountUrl: {
+            type: String,
+            default: '/api/analytics/ordercount'
+        },
+        isOrderCountSupported: {
+            type: Boolean,
+            default: true
         }
     },
     data () {
