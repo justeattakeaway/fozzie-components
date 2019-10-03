@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-header",
   "description": "Fozzie Header – Globalised Header Component",
-  "version": "v2.0.0-beta.16",
+  "version": "v2.0.0-beta.17",
   "main": "dist/f-header.umd.min.js",
   "files": [
     "dist"
@@ -35,7 +35,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "0.9.0",
+    "@justeat/f-services": "0.10.0",
     "@justeat/f-vue-icons": "1.0.0-beta.4",
     "axios": "0.19.0",
     "lodash-es": "4.17.15"
