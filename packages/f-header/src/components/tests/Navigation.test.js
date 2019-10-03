@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+import TestUtils from 'js-test-buddy';
 import Navigation from '../Navigation.vue';
 
 const defaultPropsData = {
@@ -18,7 +19,8 @@ const defaultPropsData = {
     },
     openMenuText: 'Open menu',
     deliveryEnquiry: {},
-    showDeliveryEnquiry: false
+    showDeliveryEnquiry: false,
+    isOrderCountSupported: 'true'
 };
 const defaultData = {
     userInfo: {
@@ -26,6 +28,12 @@ const defaultData = {
         friendlyName: 'James Fisher',
         email: 'j.fisher@fakemail.com'
 
+    },
+    orderCountInfo: {
+        Count: 0,
+        UserId: 'dd52338e',
+        Created: '2019-10-03T12:54:51.9161092Z',
+        Expires: '2019-10-03T14:54:51.9161092Z'
     },
     navIsOpen: false
 };
@@ -214,31 +222,49 @@ describe('Navigation', () => {
         expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).not.toContain('is-open');
     });
 
-    it('should get a response when the user info endpoint is hit', async () => {
-        // Arrange
-        const userInfoUrl = 'https://www.just-eat.es/account/details';
+    describe('fetchUserInfo', () => {
         const propsData = defaultPropsData;
         const wrapper = shallowMount(Navigation, { propsData });
+        it('should get a response when the method is called', async () => {
+            // Arrange
+            const userInfoUrl = 'https://www.just-eat.co.uk/api/account/details';
 
-        // Act
-        wrapper.vm.fetchUserInfo(userInfoUrl, {}).then(response => {
-            expect(response).toEqual({
-                data: {}
+            // Act
+            wrapper.vm.fetchUserInfo(userInfoUrl, {}).then(response => {
+                expect(response).toEqual({
+                    data: {}
+                });
             });
         });
     });
 
-    it('should get a response when the order count endpoint is hit', async () => {
-        // Arrange
-        const orderCountUrl = 'https://www.just-eat.es/analytics/ordercount';
+    describe('fetchOrderCountAndSave', () => {
         const propsData = defaultPropsData;
         const wrapper = shallowMount(Navigation, { propsData });
+        it('should get a response when the method is called', async () => {
+            // Arrange
+            const orderCountUrl = 'https://www.just-eat.es/analytics/ordercount';
 
-        // Act
-        wrapper.vm.fetchOrderCountAndSave(orderCountUrl, {}).then(response => {
-            expect(response).toEqual({
-                data: {}
+            // Act
+            wrapper.vm.fetchOrderCountAndSave(orderCountUrl, {}).then(response => {
+                expect(response).toEqual({
+                    data: {}
+                });
             });
         });
     });
+
+    // it('should add a cookie when "setAnalyticsBlob" is called', () => {
+    //     // Arrange
+    //     const cookieName = 'je-analytics';
+    //     const propsData = defaultPropsData;
+    //     const wrapper = shallowMount(Navigation, { propsData });
+
+    //     // Assert
+    //     wrapper.vm.setAnalyticsBlob();
+    //     const spy = jest.spyOn(Storage.prototype, 'setItem');
+
+    //     // Act
+    //     expect(spy).toHaveBeenCalledWith(cookieName);
+    // });
 });

@@ -1,13 +1,13 @@
 <template>
     <nav class="c-nav c-nav--global">
         <button
-            data-js-test="nav-toggle"
             :class="['c-nav-trigger c-nav-toggle is-hidden--noJS', {
                 'is-open': navIsOpen
             }]"
-            type="button"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
             :aria-label="openMenuText"
+            data-js-test="nav-toggle"
+            type="button"
             @click="onHamburgerMenuClick">
             <span class="c-nav-toggle-icon" />
         </button>
@@ -22,8 +22,8 @@
             :class="['c-nav-toggle is-hidden is-shown--noJS', {
                 'is-open': navIsOpen
             }]"
-            for="nav-trigger"
-            :aria-label="openMenuText">
+            :aria-label="openMenuText"
+            for="nav-trigger">
             <span class="c-nav-toggle-icon" />
         </label>
 
@@ -55,11 +55,11 @@
                     @mouseleave="closeNav"
                     @keyup.esc="closeNav">
                     <a
-                        class="c-nav-list-text"
-                        href="/"
                         :tabindex="isBelowMid ? -1 : 0"
                         :aria-expanded="!isBelowMid && navIsOpen ? 'true' : 'false'"
                         :aria-haspopup="isBelowMid ? false : true"
+                        class="c-nav-list-text"
+                        href="/"
                         @click.prevent="onNavToggle">
                         <profile-icon class="c-nav-icon c-nav-icon--profile" />
                         <span class="c-nav-list-text-sub">
@@ -71,8 +71,8 @@
                     </a>
 
                     <ul
-                        class="c-nav-popoverList"
-                        :aria-label="userInfo.friendlyName">
+                        :aria-label="userInfo.friendlyName"
+                        class="c-nav-popoverList">
                         <li
                             v-for="(link, index) in navLinks"
                             :key="index"
@@ -80,7 +80,6 @@
                             class="c-nav-list-item">
                             <a
                                 :tabindex="navIsOpen ? 0 : -1"
-                                class="c-nav-list-link"
                                 :href="link.url"
                                 :data-trak='`{
                                     "trakEvent": "click",
@@ -88,6 +87,7 @@
                                     "action": "header",
                                     "label": "${link.gtm}"
                                 }`'
+                                class="c-nav-list-link"
                                 @blur="closeNav"
                                 @focus="openNav">
                                 {{ link.text }}
@@ -100,7 +100,6 @@
                             data-js-test="logout">
                             <a
                                 :tabindex="navIsOpen ? 0 : -1"
-                                class="c-nav-list-link"
                                 :href="returnLogoutUrl"
                                 :data-trak='`{
                                     "trakEvent": "click",
@@ -108,6 +107,7 @@
                                     "action": "header",
                                     "label": "${accountLogout.gtm}"
                                 }`'
+                                class="c-nav-list-link"
                                 @blur="closeNav"
                                 @focus="openNav">
                                 {{ accountLogout.text }}
@@ -122,14 +122,14 @@
                     data-js-test="login">
                     <a
                         :href="returnLoginUrl"
-                        rel="nofollow"
-                        class="c-nav-list-link"
                         :data-trak='`{
                             "trakEvent": "click",
                             "category": "engagement",
                             "action": "header",
                             "label": "${accountLogin.gtm}"
-                        }`'>
+                        }`'
+                        rel="nofollow"
+                        class="c-nav-list-link">
                         {{ accountLogin.text }}
                     </a>
                 </li>
@@ -138,13 +138,13 @@
                     <li class="c-nav-list-item c-nav-list-item--support">
                         <a
                             :href="help.url"
-                            class="c-nav-list-link"
                             :data-trak='`{
                                 "trakEvent": "click",
                                 "category": "engagement",
                                 "action": "header",
                                 "label": "${help.gtm}"
                             }`'
+                            class="c-nav-list-link"
                             @blur="closeNav"
                             @focus="openNav">
                             {{ help.text }}
@@ -157,7 +157,6 @@
                         data-js-test="logout">
                         <a
                             :tabindex="navIsOpen ? 0 : -1"
-                            class="c-nav-list-link"
                             :href="returnLogoutUrl"
                             :data-trak='`{
                                 "trakEvent": "click",
@@ -165,6 +164,7 @@
                                 "action": "header",
                                 "label": "${accountLogout.gtm}"
                             }`'
+                            class="c-nav-list-link"
                             @blur="closeNav"
                             @focus="openNav">
                             {{ accountLogout.text }}
@@ -177,13 +177,13 @@
                     class="c-nav-list-item c-nav-list-item--support">
                     <a
                         :href="help.url"
-                        class="c-nav-list-link"
                         :data-trak='`{
                             "trakEvent": "click",
                             "category": "engagement",
                             "action": "header",
                             "label": "${help.gtm}"
-                        }`'>
+                        }`'
+                        class="c-nav-list-link">
                         {{ help.text }}
                     </a>
                 </li>
@@ -256,7 +256,7 @@ export default {
 
         orderCountUrl: {
             type: String,
-            default: '/api/analytics/ordercount'
+            default: '/analytics/ordercount'
         },
 
         isOrderCountSupported: {
@@ -395,7 +395,7 @@ export default {
             const currentTime = new Date().getTime();
             const localOrderCountExpires = Date.parse(localOrderCount.Expires);
 
-            if (!this.isOrderCountSupported()) {
+            if (!this.isOrderCountSupported) {
                 this.pushUserData();
             }
             if (!this.getLocalAnalyticsBlob) {
