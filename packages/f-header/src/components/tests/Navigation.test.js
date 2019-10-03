@@ -213,4 +213,32 @@ describe('Navigation', () => {
         // Assert
         expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).not.toContain('is-open');
     });
+
+    it('should get a response when the user info endpoint is hit', async () => {
+        // Arrange
+        const userInfoUrl = 'https://www.just-eat.es/account/details';
+        const propsData = defaultPropsData;
+        const wrapper = shallowMount(Navigation, { propsData });
+
+        // Act
+        wrapper.vm.fetchUserInfo(userInfoUrl, {}).then(response => {
+            expect(response).toEqual({
+                data: {}
+            });
+        });
+    });
+
+    it('should get a response when the order count endpoint is hit', async () => {
+        // Arrange
+        const orderCountUrl = 'https://www.just-eat.es/analytics/ordercount';
+        const propsData = defaultPropsData;
+        const wrapper = shallowMount(Navigation, { propsData });
+
+        // Act
+        wrapper.vm.fetchOrderCountAndSave(orderCountUrl, {}).then(response => {
+            expect(response).toEqual({
+                data: {}
+            });
+        });
+    });
 });
