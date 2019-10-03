@@ -50,7 +50,7 @@
                 </li>
 
                 <li
-                    :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo.isAuthenticated, 'open': navIsOpen }]"
+                    :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo, 'open': navIsOpen }]"
                     @mouseover="openNav"
                     @mouseleave="closeNav"
                     @keyup.esc="closeNav">
@@ -117,7 +117,7 @@
                 </li>
 
                 <li
-                    v-if="!userInfo.isAuthenticated"
+                    v-if="!userInfo"
                     class="c-nav-list-item"
                     data-js-test="login">
                     <a
@@ -152,7 +152,7 @@
                     </li>
 
                     <li
-                        v-if="userInfo.isAuthenticated"
+                        v-if="userInfo"
                         class="c-nav-list-item"
                         data-js-test="logout">
                         <a
@@ -208,41 +208,60 @@ export default {
             type: Object,
             default: () => ({})
         },
+
         accountLogout: {
             type: Object,
             default: () => ({})
         },
+
         navLinks: {
             type: Object,
             required: true
         },
+
         help: {
             type: Object,
             default: () => ({})
         },
+
         openMenuText: {
             type: String,
             default: ''
         },
+
         deliveryEnquiry: {
             type: Object,
             default: () => ({})
         },
+
         showDeliveryEnquiry: {
             type: Boolean,
             default: false
         },
+
         justLog: {
             type: Object,
             default: () => ({})
         },
+
         userInfoProp: {
             type: [Object, Boolean],
             default: false
         },
+
         userInfoUrl: {
             type: String,
             default: '/api/account/details'
+        },
+
+        orderCountUrl: {
+            type: String,
+            default: '/api/analytics/ordercount'
+        },
+
+        isOrderCountSupported: {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -250,7 +269,8 @@ export default {
         return {
             navIsOpen: false,
             currentScreenWidth: sharedServices.getWindowHeight(),
-            userInfo: this.userInfoProp
+            userInfo: this.userInfoProp,
+            orderCountInfo: false
         };
     },
 
@@ -258,13 +278,16 @@ export default {
         isBelowMid () {
             return this.currentScreenWidth <= 767;
         },
+
         returnUrl () {
             if (!this.$route) return encodeURIComponent(document.location.pathname);
             return encodeURIComponent(this.$route.name);
         },
+
         returnLoginUrl () {
             return `${this.accountLogin.url}${this.returnUrl}`;
         },
+
         returnLogoutUrl () {
             return `${this.accountLogout.url}${this.returnUrl}`;
         }
@@ -272,9 +295,9 @@ export default {
 
     mounted () {
         if (!this.userInfo) {
-            this.setUserInfo();
+            this.fetchUserInfo();
         }
-        sharedServices.addEvent('resize', 100, this.onResize);
+        sharedServices.addEvent('resize', this.onResize, 100);
     },
 
     destroyed () {
@@ -298,30 +321,91 @@ export default {
             this.currentScreenWidth = sharedServices.getWindowHeight();
         },
 
+        // When hamburger menu is clicked we want to trigger toggling of navigation and emit the state to the parent to add transparent class
+        onHamburgerMenuClick () {
+            this.onNavToggle();
+            this.$emit('onMobileNavToggle', this.navIsOpen);
+        },
+
         // If userInfoProp wasn't passed we make a call for userInfo on mounted hook
-        async setUserInfo () {
+        async fetchUserInfo () {
             try {
                 const { data } = await axios.get(this.userInfoUrl, {
                     headers: {
                         credentials: 'same-origin'
                     }
                 });
-                if (data) {
+                if (data.isAuthenticated) {
                     this.userInfo = data;
+                    this.saveUserData();
+                } else {
+                    this.userInfo = false;
                 }
             } catch (err) {
                 if (this.justLog.error) {
-                    this.justLog.error('Error handling "setUserInfo" action', err);
+                    this.justLog.error('Unable to get user information from "fetchUserInfo"', err);
                 }
             }
         },
 
-        // When hamburger menu is clicked we want to trigger toggling of navigation
-        // + emit the state of `navIsOpen` attr to the header component to change header styles in case of transparency
-        // in open nav state mobile header should become white, not transparent
-        onHamburgerMenuClick () {
-            this.onNavToggle();
-            this.$emit('onMobileNavToggle', this.navIsOpen);
+        // fetches the order count for the user
+        async fetchOrderCountAndSave () {
+            try {
+                const { data } = await axios.get(this.orderCountUrl, {
+                    headers: {
+                        credentials: 'same-origin'
+                    }
+                });
+                if (data) {
+                    this.orderCountInfo = data;
+                    this.setAnalyticsBlob();
+                    this.enrichUserDataWithCount(data);
+                    this.pushUserData();
+                }
+            } catch (err) {
+                if (this.justLog.error) {
+                    this.justLog.error('Unable to get order count from "fetchOrderCountAndSave', err);
+                }
+            }
+        },
+
+        // Sets the order count info in local storage
+        setAnalyticsBlob () {
+            window.localStorage.setItem('je-analytics', JSON.stringify(this.orderCountInfo));
+        },
+
+        // Gets the order count info in local storage
+        getLocalAnalyticsBlob () {
+            return window.localStorage.getItem('je-analytics');
+        },
+
+        // Updates the user information with the count
+        enrichUserDataWithCount () {
+            this.userInfo.orderCount = this.orderCountInfo.Count;
+        },
+
+        // Pushes the user info to the windows data layer
+        pushUserData () {
+            window.dataLayer.push(this.userInfo);
+        },
+
+        // Saves the user data and calls the nessesary methods based on what is already there
+        saveUserData () {
+            const localOrderCount = JSON.parse(this.getLocalAnalyticsBlob);
+            const currentTime = new Date().getTime();
+            const localOrderCountExpires = Date.parse(localOrderCount.Expires);
+
+            if (!this.isOrderCountSupported()) {
+                this.pushUserData();
+            }
+            if (!this.getLocalAnalyticsBlob) {
+                this.fetchOrderCountAndSave();
+            }
+            if (localOrderCountExpires < currentTime) {
+                this.fetchOrderCountAndSave();
+            }
+            this.enrichUserDataWithCount(localOrderCount);
+            this.pushUserData();
         }
     }
 };
