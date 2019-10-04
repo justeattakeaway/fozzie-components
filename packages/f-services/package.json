@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-services",
   "description": "Fozzie Services - Shared Services for Components and projects",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "main": "dist/shared.services.bundle.js",
   "files": [
     "dist"
@@ -34,7 +34,8 @@
   ],
   "dependencies": {
     "@babel/polyfill": "7.6.0",
-    "lodash-es": "4.17.15"
+    "lodash-es": "4.17.15",
+    "window-or-global": "1.0.1"
   },
   "devDependencies": {
     "@babel/cli": "7.6.2",
