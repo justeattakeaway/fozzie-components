@@ -1,4 +1,5 @@
 import { throttle } from 'lodash-es';
+import root from 'window-or-global';
 
 /**
  * @overview Shared Service
@@ -47,14 +48,14 @@ const getTheme = locale => {
  *
  * @returns {float} for window width
  */
-const getWindowWidth = () => window.innerWidth;
+const getWindowWidth = () => root.innerWidth;
 
 /**
  * Returns new window height
  *
  * @returns {float} for window height
  */
-const getWindowHeight = () => window.innerHeight;
+const getWindowHeight = () => root.innerHeight;
 
 /**
  * Applies logic to the chosen event and throttles it if needs be
@@ -63,11 +64,11 @@ const getWindowHeight = () => window.innerHeight;
  * @param {eventName} integer for setting the name of the event listened to.
  * @param {callBackFunction} function for running when the event is listened to.
  */
-const addEvent = (eventName, throttleTime, callBackFunction) => {
+const addEvent = (eventName, callBackFunction, throttleTime) => {
     if (throttleTime > 0) {
-        return window.addEventListener(eventName, throttle(callBackFunction, throttleTime));
+        return root.addEventListener(eventName, throttle(callBackFunction, throttleTime));
     }
-    return window.addEventListener(eventName, callBackFunction);
+    return root.addEventListener(eventName, callBackFunction);
 };
 
 /**
@@ -77,7 +78,7 @@ const addEvent = (eventName, throttleTime, callBackFunction) => {
  * @param {callBackFunction} function for running when the event is listened to.
  */
 const removeEvent = (eventName, callBackFunction) => {
-    window.removeEventListener(eventName, callBackFunction);
+    root.removeEventListener(eventName, callBackFunction);
 };
 
 export default {

@@ -4,6 +4,37 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta-18
+------------------------------
+*October 7, 2019*
+
+### Added
+ - New version of `f-services`
+
+
+v2.0.0-beta-17
+------------------------------
+*October 3, 2019*
+
+### Added
+ - New version of `f-services`
+
+
+v2.0.0-beta-16
+------------------------------
+*October 1, 2019*
+
+### Added
+ - New methods added for getting and setting local storage with order count `setAnalyticsBlob` and `getLocalAnalyticsBlob`
+ - New method added for saving the users data `saveUserData`
+ - New method added for pushing the user data to the windows data layer `pushUserData`
+ - New method for fetching the order count through GET request `fetchOrderCountAndSave`
+ - new method for updating the order count `enrichUserDataWithCount`
+
+ ### Removed
+ - Methods and added them to `f-services`
+
+
 v2.0.0-beta-15
 ------------------------------
 *September 27, 2019*
@@ -54,7 +85,7 @@ v2.0.0-beta-10
 *September 20, 2019*
 
 ### Changed
-- Name of method from `setUserDetails` to `setUserInfo`
+- Name of method from `setUserDetails` to `fetchUserInfo`
 
 ### Added
 - New prop for `userInfo` coming from outside the component

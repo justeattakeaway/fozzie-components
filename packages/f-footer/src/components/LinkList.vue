@@ -90,7 +90,7 @@ export default {
     },
 
     mounted () {
-        sharedServices.addEvent('resize', 100, this.onResize);
+        sharedServices.addEvent('resize', this.onResize, 100);
     },
 
     destroyed () {
