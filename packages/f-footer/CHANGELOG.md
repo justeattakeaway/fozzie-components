@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.0.0-beta.23
 ------------------------------
-*September 30, 2019*
+*October 8, 2019*
 
 ### Removed
 - Methods and added them to `f-services`
