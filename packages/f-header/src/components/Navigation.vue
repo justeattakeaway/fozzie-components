@@ -239,7 +239,7 @@ export default {
             default: false
         },
 
-        justLog: {
+        errorLog: {
             type: Object,
             default: () => ({})
         },
@@ -280,8 +280,8 @@ export default {
         },
 
         returnUrl () {
-            if (!this.$route) return encodeURIComponent(document.location.pathname);
-            return encodeURIComponent(this.$route.name);
+            if (!this.$route && typeof document !== 'undefined') return encodeURIComponent(document.location.pathname);
+            return encodeURIComponent(this.$route ? this.$route.name : '');
         },
 
         returnLoginUrl () {
@@ -296,6 +296,8 @@ export default {
     mounted () {
         if (!this.userInfo) {
             this.fetchUserInfo();
+        } else {
+            this.saveUserData();
         }
         sharedServices.addEvent('resize', this.onResize, 100);
     },
@@ -342,8 +344,8 @@ export default {
                     this.userInfo = false;
                 }
             } catch (err) {
-                if (this.justLog.error) {
-                    this.justLog.error('Unable to get user information from "fetchUserInfo"', err);
+                if (this.errorLog) {
+                    this.errorLog('Unable to get user information from "fetchUserInfo"', err);
                 }
             }
         },
@@ -363,8 +365,8 @@ export default {
                     this.pushUserData();
                 }
             } catch (err) {
-                if (this.justLog.error) {
-                    this.justLog.error('Unable to get order count from "fetchOrderCountAndSave', err);
+                if (this.errorLog) {
+                    this.errorLog('Unable to get order count from "fetchOrderCountAndSave', err);
                 }
             }
         },
