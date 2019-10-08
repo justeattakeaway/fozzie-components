@@ -10,6 +10,7 @@ v2.0.0-beta-19
 
 ### Changed
  - New version of `getWindowHeight` to `getWindowWidth`
+ - Italian tenant that was wrong
 
 
 v2.0.0-beta-18
