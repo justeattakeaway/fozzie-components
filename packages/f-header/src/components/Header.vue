@@ -19,7 +19,7 @@
                 :open-menu-text="copy.openMenuText"
                 :delivery-enquiry="copy.deliveryEnquiry"
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
-                :just-log="justLog"
+                :error-log="errorLog"
                 :user-info-prop="userInfoProp"
                 :user-info-url="userInfoUrl"
                 :order-count-url="orderCountUrl"
@@ -56,7 +56,7 @@ export default {
             type: Boolean,
             default: false
         },
-        justLog: {
+        errorLog: {
             type: Object,
             default: () => ({})
         },
