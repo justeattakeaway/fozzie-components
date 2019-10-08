@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.23
+------------------------------
+*October 8, 2019*
+
+### Removed
+- Methods and added them to `f-services`
+
+### Changed
+- New version of `getWindowHeight` to `getWindowWidth`
+
+
 v2.0.0-beta.22
 ------------------------------
 *September 27, 2019*
