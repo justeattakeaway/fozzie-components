@@ -17,7 +17,7 @@ export default {
             gtm: 'click_account_your_orders'
         },
         accountCredit: {
-            text: 'Credito dell\'account',
+            text: 'Credito dell',
             url: '/account/credit',
             gtm: 'click_account_credit'
         },

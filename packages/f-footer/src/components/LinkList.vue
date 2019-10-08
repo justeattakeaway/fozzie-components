@@ -71,7 +71,7 @@ export default {
     data () {
         return {
             panelCollapsed: true,
-            currentScreenWidth: sharedServices.getWindowHeight()
+            currentScreenWidth: sharedServices.getWindowWidth()
         };
     },
 
@@ -105,7 +105,7 @@ export default {
         },
 
         onResize () {
-            this.currentScreenWidth = sharedServices.getWindowHeight();
+            this.currentScreenWidth = sharedServices.getWindowWidth();
         }
     }
 };
