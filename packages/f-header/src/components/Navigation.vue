@@ -268,7 +268,7 @@ export default {
     data () {
         return {
             navIsOpen: false,
-            currentScreenWidth: sharedServices.getWindowHeight(),
+            currentScreenWidth: sharedServices.getWindowWidth(),
             userInfo: this.userInfoProp,
             orderCountInfo: false
         };
@@ -320,7 +320,7 @@ export default {
         },
 
         onResize () {
-            this.currentScreenWidth = sharedServices.getWindowHeight();
+            this.currentScreenWidth = sharedServices.getWindowWidth();
         },
 
         // When hamburger menu is clicked we want to trigger toggling of navigation and emit the state to the parent to add transparent class

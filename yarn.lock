@@ -1243,9 +1243,9 @@
     qwery "4.0.0"
 
 "@justeat/f-footer@file:packages/f-footer":
-  version "2.0.0-beta.22"
+  version "2.0.0-beta.23"
   dependencies:
-    "@justeat/f-services" "0.9.0"
+    "@justeat/f-services" "0.11.0"
     "@justeat/f-vue-icons" "1.0.0-beta.4"
     lodash-es "4.17.15"
     v-click-outside "2.1.3"
@@ -1284,13 +1284,6 @@
   version "0.3.0"
   dependencies:
     appboy-web-sdk "2.4.0"
-
-"@justeat/f-services@0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-0.9.0.tgz#0d16efd1a6bbcb713f955f38b90e072e2e57cc75"
-  integrity sha512-80xj2Sm+XK8/OnuL/NY9d5erczhb8TtiGroUJztj3w3v+N3ekQSZdVOgb8fvCpnbYfmRTAkJM7ieYJOVqOm99w==
-  dependencies:
-    lodash-es "4.17.15"
 
 "@justeat/f-services@file:packages/f-services":
   version "0.11.0"
