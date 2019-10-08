@@ -12,7 +12,7 @@ v2.0.0-beta.23
 - Methods and added them to `f-services`
 
 ### Changed
- - New version of `getWindowHeight` to `getWindowWidth`
+- New version of `getWindowHeight` to `getWindowWidth`
 
 
 v2.0.0-beta.22
