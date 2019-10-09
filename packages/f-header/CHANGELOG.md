@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta-20
+------------------------------
+*October 9, 2019*
+
+### Changed
+ - Prop default and value for `errorLog`
+
+
 v2.0.0-beta-19
 ------------------------------
 *October 8, 2019*

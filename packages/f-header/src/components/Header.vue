@@ -48,30 +48,37 @@ export default {
             type: String,
             default: ''
         },
+
         isTransparent: {
             type: Boolean,
             default: false
         },
+
         showDeliveryEnquiry: {
             type: Boolean,
             default: false
         },
+
         errorLog: {
-            type: Object,
-            default: () => ({})
+            type: [Function, Boolean],
+            default: false
         },
+
         userInfoProp: {
             type: [Object, Boolean],
             default: false
         },
+
         userInfoUrl: {
             type: String,
             default: '/api/account/details'
         },
+
         orderCountUrl: {
             type: String,
             default: '/api/analytics/ordercount'
         },
+
         isOrderCountSupported: {
             type: Boolean,
             default: true

@@ -240,8 +240,8 @@ export default {
         },
 
         errorLog: {
-            type: Object,
-            default: () => ({})
+            type: [Function, Boolean],
+            default: false
         },
 
         userInfoProp: {
