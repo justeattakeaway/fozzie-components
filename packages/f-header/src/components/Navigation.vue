@@ -270,7 +270,8 @@ export default {
             navIsOpen: false,
             currentScreenWidth: sharedServices.getWindowWidth(),
             userInfo: this.userInfoProp,
-            orderCountInfo: false
+            currentTime: new Date().getTime(),
+            localOrderCountExpires: false
         };
     },
 
@@ -290,14 +291,23 @@ export default {
 
         returnLogoutUrl () {
             return `${this.accountLogout.url}${this.returnUrl}`;
+        },
+
+        isOrderCountValid () {
+            return this.isOrderCountSupported && this.userInfo.isAuthenticated && !this.getAnalyticsBlob;
+        },
+
+        isOrderCountOutOfDate () {
+            return this.localOrderCountExpires < this.currentTime;
         }
     },
 
     mounted () {
         if (!this.userInfo) {
             this.fetchUserInfo();
-        } else {
-            this.saveUserData();
+        }
+        if (this.isOrderCountValid || this.isOrderCountOutOfDate) {
+            this.fetchOrderCountAndSave();
         }
         sharedServices.addEvent('resize', this.onResize, 100);
     },
@@ -339,7 +349,6 @@ export default {
                 });
                 if (data.isAuthenticated) {
                     this.userInfo = data;
-                    this.saveUserData();
                 } else {
                     this.userInfo = false;
                 }
@@ -359,8 +368,8 @@ export default {
                     }
                 });
                 if (data) {
-                    this.orderCountInfo = data;
                     this.setAnalyticsBlob(data);
+                    this.localOrderCountExpires = data.Expires;
                     this.enrichUserDataWithCount(data);
                     this.pushUserData(data);
                 }
@@ -374,11 +383,10 @@ export default {
         // Sets the order count info in local storage
         setAnalyticsBlob (data) {
             window.localStorage.setItem('je-analytics', JSON.stringify(data));
-            return data;
         },
 
         // Gets the order count info in local storage
-        getLocalAnalyticsBlob () {
+        getAnalyticsBlob () {
             return window.localStorage.getItem('je-analytics');
         },
 
@@ -390,25 +398,6 @@ export default {
         // Pushes the user info to the windows data layer
         pushUserData (data) {
             window.dataLayer.push(data);
-        },
-
-        // Saves the user data and calls the nessesary methods based on what is already there
-        saveUserData () {
-            const localOrderCount = JSON.parse(this.getLocalAnalyticsBlob);
-            const currentTime = new Date().getTime();
-            const localOrderCountExpires = Date.parse(localOrderCount.Expires);
-
-            if (!this.isOrderCountSupported) {
-                this.pushUserData();
-            }
-            if (!this.getLocalAnalyticsBlob) {
-                this.fetchOrderCountAndSave();
-            }
-            if (localOrderCountExpires < currentTime) {
-                this.fetchOrderCountAndSave();
-            }
-            this.enrichUserDataWithCount(localOrderCount);
-            this.pushUserData();
         }
     }
 };

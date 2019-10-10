@@ -9,7 +9,6 @@ module.exports = api => {
 
     if (!isTest && !isSettings) {
         api.cache(true);
-        presets.push(['@vue/app']);
     }
 
     // use for both test and dev/live
