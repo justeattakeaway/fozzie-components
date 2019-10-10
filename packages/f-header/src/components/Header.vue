@@ -19,7 +19,7 @@
                 :open-menu-text="copy.openMenuText"
                 :delivery-enquiry="copy.deliveryEnquiry"
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
-                :just-log="justLog"
+                :error-log="errorLog"
                 :user-info-prop="userInfoProp"
                 :user-info-url="userInfoUrl"
                 :order-count-url="orderCountUrl"
@@ -48,30 +48,37 @@ export default {
             type: String,
             default: ''
         },
+
         isTransparent: {
             type: Boolean,
             default: false
         },
+
         showDeliveryEnquiry: {
             type: Boolean,
             default: false
         },
-        justLog: {
-            type: Object,
-            default: () => ({})
+
+        errorLog: {
+            type: [Function, Boolean],
+            default: false
         },
+
         userInfoProp: {
             type: [Object, Boolean],
             default: false
         },
+
         userInfoUrl: {
             type: String,
             default: '/api/account/details'
         },
+
         orderCountUrl: {
             type: String,
             default: '/api/analytics/ordercount'
         },
+
         isOrderCountSupported: {
             type: Boolean,
             default: true

@@ -239,9 +239,9 @@ export default {
             default: false
         },
 
-        justLog: {
-            type: Object,
-            default: () => ({})
+        errorLog: {
+            type: [Function, Boolean],
+            default: false
         },
 
         userInfoProp: {
@@ -268,7 +268,7 @@ export default {
     data () {
         return {
             navIsOpen: false,
-            currentScreenWidth: sharedServices.getWindowHeight(),
+            currentScreenWidth: sharedServices.getWindowWidth(),
             userInfo: this.userInfoProp,
             orderCountInfo: false
         };
@@ -280,8 +280,8 @@ export default {
         },
 
         returnUrl () {
-            if (!this.$route) return encodeURIComponent(document.location.pathname);
-            return encodeURIComponent(this.$route.name);
+            if (!this.$route && typeof document !== 'undefined') return encodeURIComponent(document.location.pathname);
+            return encodeURIComponent(this.$route ? this.$route.name : '');
         },
 
         returnLoginUrl () {
@@ -296,6 +296,8 @@ export default {
     mounted () {
         if (!this.userInfo) {
             this.fetchUserInfo();
+        } else {
+            this.saveUserData();
         }
         sharedServices.addEvent('resize', this.onResize, 100);
     },
@@ -318,7 +320,7 @@ export default {
         },
 
         onResize () {
-            this.currentScreenWidth = sharedServices.getWindowHeight();
+            this.currentScreenWidth = sharedServices.getWindowWidth();
         },
 
         // When hamburger menu is clicked we want to trigger toggling of navigation and emit the state to the parent to add transparent class
@@ -342,8 +344,8 @@ export default {
                     this.userInfo = false;
                 }
             } catch (err) {
-                if (this.justLog.error) {
-                    this.justLog.error('Unable to get user information from "fetchUserInfo"', err);
+                if (this.errorLog) {
+                    this.errorLog('Unable to get user information from "fetchUserInfo"', err);
                 }
             }
         },
@@ -358,20 +360,21 @@ export default {
                 });
                 if (data) {
                     this.orderCountInfo = data;
-                    this.setAnalyticsBlob();
+                    this.setAnalyticsBlob(data);
                     this.enrichUserDataWithCount(data);
-                    this.pushUserData();
+                    this.pushUserData(data);
                 }
             } catch (err) {
-                if (this.justLog.error) {
-                    this.justLog.error('Unable to get order count from "fetchOrderCountAndSave', err);
+                if (this.errorLog) {
+                    this.errorLog('Unable to get order count from "fetchOrderCountAndSave', err);
                 }
             }
         },
 
         // Sets the order count info in local storage
-        setAnalyticsBlob () {
-            window.localStorage.setItem('je-analytics', JSON.stringify(this.orderCountInfo));
+        setAnalyticsBlob (data) {
+            window.localStorage.setItem('je-analytics', JSON.stringify(data));
+            return data;
         },
 
         // Gets the order count info in local storage
@@ -380,13 +383,13 @@ export default {
         },
 
         // Updates the user information with the count
-        enrichUserDataWithCount () {
-            this.userInfo.orderCount = this.orderCountInfo.Count;
+        enrichUserDataWithCount (data) {
+            this.userInfo.orderCount = data.count.Count;
         },
 
         // Pushes the user info to the windows data layer
-        pushUserData () {
-            window.dataLayer.push(this.userInfo);
+        pushUserData (data) {
+            window.dataLayer.push(data);
         },
 
         // Saves the user data and calls the nessesary methods based on what is already there

@@ -7,7 +7,8 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'shared.services.bundle.js',
         library: 'f-services',
-        libraryTarget: 'umd'
+        libraryTarget: 'umd',
+        globalObject: 'this'
     },
     module: {
         rules: [

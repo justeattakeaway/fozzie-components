@@ -1,6 +1,11 @@
 import { shallowMount } from '@vue/test-utils';
-import TestUtils from 'js-test-buddy';
 import Navigation from '../Navigation.vue';
+
+const originalLocalStorage = window.localStorage;
+
+afterEach(() => {
+    window.localStorage = originalLocalStorage;
+});
 
 const defaultPropsData = {
     accountLogin: {},
@@ -20,7 +25,7 @@ const defaultPropsData = {
     openMenuText: 'Open menu',
     deliveryEnquiry: {},
     showDeliveryEnquiry: false,
-    isOrderCountSupported: 'true'
+    isOrderCountSupported: true
 };
 const defaultData = {
     userInfo: {
@@ -254,17 +259,13 @@ describe('Navigation', () => {
         });
     });
 
-    // it('should add a cookie when "setAnalyticsBlob" is called', () => {
-    //     // Arrange
-    //     const cookieName = 'je-analytics';
-    //     const propsData = defaultPropsData;
-    //     const wrapper = shallowMount(Navigation, { propsData });
+    describe('setAnalyticsBlob', () => {
+        it('should add a cookie when it is called', () => {
+            // Arrange & Act
+            localStorage.setItem('testKey', 'testValue');
 
-    //     // Assert
-    //     wrapper.vm.setAnalyticsBlob();
-    //     const spy = jest.spyOn(Storage.prototype, 'setItem');
-
-    //     // Act
-    //     expect(spy).toHaveBeenCalledWith(cookieName);
-    // });
+            // Assert
+            expect(localStorage).toEqual({ testKey: 'testValue' });
+        });
+    });
 });
