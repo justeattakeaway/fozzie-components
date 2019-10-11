@@ -302,7 +302,11 @@ export default {
             return this.localOrderCountExpires < currentTime;
         },
 
-        // Gets the order count info in local storage
+        /**
+         * Gets the analytic blob for order count.
+         *
+         * @return {object} from local storage containing analytic data.
+         */
         getAnalyticsBlob () {
             return window.localStorage.getItem('je-analytics') || false;
         }
@@ -386,7 +390,11 @@ export default {
             }
         },
 
-        // Sets the order count info in local storage
+        /**
+         * Sets the analytic blob for order count.
+         *
+         * @param {object} containing the analytic data for order count.
+         */
         setAnalyticsBlob (data) {
             window.localStorage.setItem('je-analytics', JSON.stringify(data));
         },
