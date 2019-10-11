@@ -10,7 +10,6 @@ v2.0.0-beta-21
 
 ### Changed
  - The way data is passed around in the order count logic
- - Version number
 
 ### Added
  - Tests for order count logic
