@@ -29,7 +29,6 @@ const defaultData = {
 
     },
     navIsOpen: false,
-    currentTime: 1570780396163,
     localOrderCountExpires: false
 };
 const width = 767;
@@ -215,7 +214,8 @@ describe('Navigation', () => {
             // Act
             wrapper.vm.data = {
                 ...defaultData,
-                localOrderCountExpires: 1570718234911
+                localOrderCountExpires: 1570718234911,
+                getCurrentTime: 1570780396163
             };
 
             // Assert
@@ -230,7 +230,8 @@ describe('Navigation', () => {
             // Act
             wrapper.vm.data = {
                 ...defaultData,
-                localOrderCountExpires: 2070718234911
+                localOrderCountExpires: 2070718234911,
+                getCurrentTime: 1570780396163
             };
 
             // Assert

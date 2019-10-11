@@ -270,7 +270,6 @@ export default {
             navIsOpen: false,
             currentScreenWidth: sharedServices.getWindowWidth(),
             userInfo: this.userInfoProp,
-            currentTime: new Date().getTime(),
             localOrderCountExpires: false
         };
     },
@@ -298,12 +297,16 @@ export default {
         },
 
         isOrderCountOutOfDate () {
-            return this.localOrderCountExpires < this.currentTime;
+            return this.localOrderCountExpires < this.getCurrentTime;
         },
 
         // Gets the order count info in local storage
         getAnalyticsBlob () {
             return window.localStorage.getItem('je-analytics') || false;
+        },
+
+        getCurrentTime () {
+            return new Date().getTime();
         }
     },
 
@@ -375,8 +378,8 @@ export default {
                 if (data) {
                     this.setAnalyticsBlob(data);
                     this.localOrderCountExpires = data.Expires;
-                    this.enrichUserDataWithCount(data);
-                    this.pushUserData(data);
+                    this.enrichUserDataWithCount(data.Count);
+                    this.pushUserData(this.userInfoProp);
                 }
             } catch (err) {
                 if (this.errorLog) {
@@ -391,13 +394,13 @@ export default {
         },
 
         // Updates the user information with the count
-        enrichUserDataWithCount (data) {
-            this.userInfo.orderCount = data.count.Count;
+        enrichUserDataWithCount (count) {
+            this.userInfo.orderCount = count;
         },
 
         // Pushes the user info to the windows data layer
-        pushUserData (data) {
-            window.dataLayer.push(data);
+        pushUserData (userInfo) {
+            window.dataLayer.push(userInfo);
         }
     }
 };
