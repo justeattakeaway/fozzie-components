@@ -29,7 +29,7 @@ const defaultData = {
 
     },
     navIsOpen: false,
-    currentTime: 1570718234911,
+    currentTime: 1570780396163,
     localOrderCountExpires: false
 };
 const width = 767;
@@ -206,6 +206,70 @@ describe('Navigation', () => {
         expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).not.toContain('is-open');
     });
 
+    describe('isOrderCountOutOfDate', () => {
+        it('should return true if the order count IS OUT of date', () => {
+            // Arrange
+            const propsData = defaultPropsData;
+            const wrapper = shallowMount(Navigation, { propsData });
+
+            // Act
+            wrapper.vm.data = {
+                ...defaultData,
+                localOrderCountExpires: 1570718234911
+            };
+
+            // Assert
+            expect(Navigation.computed.isOrderCountOutOfDate.call(wrapper.vm.data)).toBe(true);
+        });
+
+        it('should return false if the order count IS IN date', () => {
+            // Arrange
+            const propsData = defaultPropsData;
+            const wrapper = shallowMount(Navigation, { propsData });
+
+            // Act
+            wrapper.vm.data = {
+                ...defaultData,
+                localOrderCountExpires: 2070718234911
+            };
+
+            // Assert
+            expect(Navigation.computed.isOrderCountOutOfDate.call(wrapper.vm.data)).toBe(false);
+        });
+    });
+
+    describe('isOrderCountValid', () => {
+        it('should return true if the order count IS valid', () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                isOrderCountSupported: true
+            };
+            const wrapper = shallowMount(Navigation, { propsData });
+
+            // Act
+            wrapper.vm.setAnalyticsBlob();
+
+            // Assert
+            expect(Navigation.computed.isOrderCountValid.call(propsData)).toBe(true);
+        });
+
+        it('should return false if the order count IS NOT valid', () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                isOrderCountSupported: false
+            };
+            const wrapper = shallowMount(Navigation, { propsData });
+
+            // Act
+            wrapper.vm.setAnalyticsBlob();
+
+            // Assert
+            expect(Navigation.computed.isOrderCountValid.call(propsData)).toBe(false);
+        });
+    });
+
     describe('fetchUserInfo', () => {
         const propsData = defaultPropsData;
         const wrapper = shallowMount(Navigation, { propsData });
@@ -310,7 +374,7 @@ describe('Navigation', () => {
             const spy = jest.spyOn(Storage.prototype, 'getItem');
 
             // Assert
-            wrapper.vm.getAnalyticsBlob();
+            Navigation.computed.getAnalyticsBlob.call();
 
             // Act
             expect(spy).toHaveBeenCalled();
@@ -318,7 +382,7 @@ describe('Navigation', () => {
 
         it('should return truthy when called', () => {
             // Assert
-            wrapper.vm.getAnalyticsBlob();
+            Navigation.computed.getAnalyticsBlob.call();
 
             // Act
             expect(wrapper.vm.getAnalyticsBlob).toBeTruthy();

@@ -294,20 +294,22 @@ export default {
         },
 
         isOrderCountValid () {
-            return this.isOrderCountSupported && this.userInfo.isAuthenticated && !this.getAnalyticsBlob;
+            return this.isOrderCountSupported && !this.getAnalyticsBlob;
         },
 
         isOrderCountOutOfDate () {
             return this.localOrderCountExpires < this.currentTime;
+        },
+
+        // Gets the order count info in local storage
+        getAnalyticsBlob () {
+            return window.localStorage.getItem('je-analytics') || false;
         }
     },
 
     mounted () {
         if (!this.userInfo) {
             this.fetchUserInfo();
-        }
-        if (this.isOrderCountValid || this.isOrderCountOutOfDate) {
-            this.fetchOrderCountAndSave();
         }
         sharedServices.addEvent('resize', this.onResize, 100);
     },
@@ -349,6 +351,9 @@ export default {
                 });
                 if (data.isAuthenticated) {
                     this.userInfo = data;
+                    if (this.isOrderCountValid || this.isOrderCountOutOfDate) {
+                        this.fetchOrderCountAndSave();
+                    }
                 } else {
                     this.userInfo = false;
                 }
@@ -383,11 +388,6 @@ export default {
         // Sets the order count info in local storage
         setAnalyticsBlob (data) {
             window.localStorage.setItem('je-analytics', JSON.stringify(data));
-        },
-
-        // Gets the order count info in local storage
-        getAnalyticsBlob () {
-            return window.localStorage.getItem('je-analytics');
         },
 
         // Updates the user information with the count
