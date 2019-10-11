@@ -292,6 +292,7 @@ export default {
             return `${this.accountLogout.url}${this.returnUrl}`;
         },
 
+        // if the order count is supported and there is no blob in local storage then return true
         isOrderCountValid () {
             return this.isOrderCountSupported && !this.getAnalyticsBlob;
         },
