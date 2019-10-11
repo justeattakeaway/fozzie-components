@@ -381,7 +381,7 @@ export default {
                     this.setAnalyticsBlob(data);
                     this.localOrderCountExpires = data.Expires;
                     this.enrichUserDataWithCount(data.Count);
-                    this.pushUserData(this.userInfoProp);
+                    this.pushToDataLayer(this.userInfo);
                 }
             } catch (err) {
                 if (this.errorLog) {
@@ -405,8 +405,8 @@ export default {
         },
 
         // Pushes the user info to the windows data layer
-        pushUserData (userInfo) {
-            window.dataLayer.push(userInfo);
+        pushToDataLayer (data) {
+            window.dataLayer.push(data);
         }
     }
 };
