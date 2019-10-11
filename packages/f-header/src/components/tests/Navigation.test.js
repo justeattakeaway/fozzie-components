@@ -215,7 +215,7 @@ describe('Navigation', () => {
             wrapper.vm.data = {
                 ...defaultData,
                 localOrderCountExpires: 1570718234911,
-                getCurrentTime: 1570780396163
+                currentTime: 1570780396163
             };
 
             // Assert
@@ -231,7 +231,7 @@ describe('Navigation', () => {
             wrapper.vm.data = {
                 ...defaultData,
                 localOrderCountExpires: 2070718234911,
-                getCurrentTime: 1570780396163
+                currentTime: 1570780396163
             };
 
             // Assert

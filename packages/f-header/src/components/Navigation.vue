@@ -298,16 +298,13 @@ export default {
         },
 
         isOrderCountOutOfDate () {
-            return this.localOrderCountExpires < this.getCurrentTime;
+            const currentTime = new Date().getTime();
+            return this.localOrderCountExpires < currentTime;
         },
 
         // Gets the order count info in local storage
         getAnalyticsBlob () {
             return window.localStorage.getItem('je-analytics') || false;
-        },
-
-        getCurrentTime () {
-            return new Date().getTime();
         }
     },
 
