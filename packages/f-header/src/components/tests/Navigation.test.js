@@ -18,7 +18,8 @@ const defaultPropsData = {
     },
     openMenuText: 'Open menu',
     deliveryEnquiry: {},
-    showDeliveryEnquiry: false
+    showDeliveryEnquiry: false,
+    isOrderCountSupported: true
 };
 const defaultData = {
     userInfo: {
@@ -27,7 +28,8 @@ const defaultData = {
         email: 'j.fisher@fakemail.com'
 
     },
-    navIsOpen: false
+    navIsOpen: false,
+    localOrderCountExpires: false
 };
 const width = 767;
 const height = 768;
@@ -41,9 +43,8 @@ const resizeWindow = (x, y) => {
 describe('Navigation', () => {
     it('should be defined', () => {
         const propsData = defaultPropsData;
-        const data = defaultData;
         const wrapper = shallowMount(Navigation, { propsData });
-        wrapper.setData(data);
+        wrapper.vm.data = defaultData;
         expect(wrapper.exists()).toBe(true);
     });
 
@@ -53,11 +54,10 @@ describe('Navigation', () => {
             ...defaultPropsData,
             showDeliveryEnquiry: true
         };
-        const data = defaultData;
 
         // Act
         const wrapper = shallowMount(Navigation, { propsData });
-        wrapper.setData(data);
+        wrapper.vm.data = defaultData;
 
         // Assert
         expect(wrapper.find('[data-js-test="delivery-enquiry"]').exists()).toBe(true);
@@ -69,11 +69,10 @@ describe('Navigation', () => {
             ...defaultPropsData,
             showDeliveryEnquiry: false
         };
-        const data = defaultData;
 
         // Act
         const wrapper = shallowMount(Navigation, { propsData });
-        wrapper.setData(data);
+        wrapper.vm.data = defaultData;
 
         // Assert
         expect(wrapper.find('[data-js-test="delivery-enquiry"]').exists()).toBe(false);
@@ -82,15 +81,15 @@ describe('Navigation', () => {
     it('should show "logout" if the user is logged in and has nav link data', () => {
         // Arrange
         const propsData = defaultPropsData;
-        const data = {
+
+        // Act
+        const wrapper = shallowMount(Navigation, { propsData });
+        wrapper.vm.data = {
+            ...defaultData,
             userInfo: {
                 isAuthenticated: true
             }
         };
-
-        // Act
-        const wrapper = shallowMount(Navigation, { propsData });
-        wrapper.setData(data);
 
         // Assert
         expect(wrapper.find('[data-js-test="logout"]').exists()).toBe(true);
@@ -99,15 +98,15 @@ describe('Navigation', () => {
     it('should show "navLinks" if the user is logged in and has nav link data', () => {
         // Arrange
         const propsData = defaultPropsData;
-        const data = {
+
+        // Act
+        const wrapper = shallowMount(Navigation, { propsData });
+        wrapper.vm.data = {
+            ...defaultData,
             userInfo: {
                 isAuthenticated: true
             }
         };
-
-        // Act
-        const wrapper = shallowMount(Navigation, { propsData });
-        wrapper.setData(data);
 
         // Assert
         expect(wrapper.find('[data-js-test="nav-links"]').exists()).toBe(true);
@@ -119,15 +118,10 @@ describe('Navigation', () => {
             ...defaultPropsData,
             navLinks: {}
         };
-        const data = {
-            userInfo: {
-                isAuthenticated: true
-            }
-        };
 
         // Act
         const wrapper = shallowMount(Navigation, { propsData });
-        wrapper.setData(data);
+        wrapper.vm.data = defaultData;
 
         // Assert
         expect(wrapper.find('[data-js-test="nav-links"]').exists()).toBe(false);
@@ -136,15 +130,15 @@ describe('Navigation', () => {
     it('should show "logout" if the user is logged in but does NOT have nav link data', () => {
         // Arrange
         const propsData = defaultPropsData;
-        const data = {
+
+        // Act
+        const wrapper = shallowMount(Navigation, { propsData });
+        wrapper.vm.data = {
+            ...defaultData,
             userInfo: {
                 isAuthenticated: true
             }
         };
-
-        // Act
-        const wrapper = shallowMount(Navigation, { propsData });
-        wrapper.setData(data);
 
         // Assert
         expect(wrapper.find('[data-js-test="logout"]').exists()).toBe(true);
@@ -156,14 +150,13 @@ describe('Navigation', () => {
             ...defaultPropsData,
             navLinks: {}
         };
-        const data = {
-            ...defaultData,
-            userInfo: false
-        };
 
         // Act
         const wrapper = shallowMount(Navigation, { propsData });
-        wrapper.setData(data);
+        wrapper.vm.data = {
+            ...defaultData,
+            userInfo: false
+        };
 
         // Assert
         expect(wrapper.find('[data-js-test="login"]').exists()).toBe(true);
@@ -175,18 +168,17 @@ describe('Navigation', () => {
             ...defaultPropsData,
             navLinks: {}
         };
-        const data = {
+
+        // Act
+        resizeWindow(width, height);
+        const wrapper = shallowMount(Navigation, { propsData });
+        wrapper.vm.data = {
             ...defaultData,
             userInfo: {
                 isAuthenticated: true
             },
             navIsOpen: true
         };
-
-        // Act
-        resizeWindow(width, height);
-        const wrapper = shallowMount(Navigation, { propsData });
-        wrapper.setData(data);
         wrapper.vm.openNav();
 
         // Assert
@@ -196,21 +188,205 @@ describe('Navigation', () => {
     it('should NOT show nav links on mobile when "navIsOpen" is false', () => {
         // Arrange
         const propsData = defaultPropsData;
-        const data = {
+
+        // Act
+        resizeWindow(width, height);
+        const wrapper = shallowMount(Navigation, { propsData });
+        wrapper.vm.data = {
             ...defaultData,
             userInfo: {
                 isAuthenticated: true
             },
             navIsOpen: true
         };
-
-        // Act
-        resizeWindow(width, height);
-        const wrapper = shallowMount(Navigation, { propsData });
-        wrapper.setData(data);
         wrapper.vm.closeNav();
 
         // Assert
         expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).not.toContain('is-open');
+    });
+
+    describe('isOrderCountOutOfDate', () => {
+        it('should return true if the order count IS OUT of date', () => {
+            // Arrange
+            const propsData = defaultPropsData;
+            const wrapper = shallowMount(Navigation, { propsData });
+
+            // Act
+            wrapper.vm.data = {
+                ...defaultData,
+                localOrderCountExpires: 1570718234911,
+                currentTime: 1570780396163
+            };
+
+            // Assert
+            expect(Navigation.computed.isOrderCountOutOfDate.call(wrapper.vm.data)).toBe(true);
+        });
+
+        it('should return false if the order count IS IN date', () => {
+            // Arrange
+            const propsData = defaultPropsData;
+            const wrapper = shallowMount(Navigation, { propsData });
+
+            // Act
+            wrapper.vm.data = {
+                ...defaultData,
+                localOrderCountExpires: 2070718234911,
+                currentTime: 1570780396163
+            };
+
+            // Assert
+            expect(Navigation.computed.isOrderCountOutOfDate.call(wrapper.vm.data)).toBe(false);
+        });
+    });
+
+    describe('isOrderCountValid', () => {
+        it('should return true if the order count IS valid', () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                isOrderCountSupported: true
+            };
+            const wrapper = shallowMount(Navigation, { propsData });
+
+            // Act
+            wrapper.vm.setAnalyticsBlob();
+
+            // Assert
+            expect(Navigation.computed.isOrderCountValid.call(propsData)).toBe(true);
+        });
+
+        it('should return false if the order count IS NOT valid', () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                isOrderCountSupported: false
+            };
+            const wrapper = shallowMount(Navigation, { propsData });
+
+            // Act
+            wrapper.vm.setAnalyticsBlob();
+
+            // Assert
+            expect(Navigation.computed.isOrderCountValid.call(propsData)).toBe(false);
+        });
+    });
+
+    describe('fetchUserInfo', () => {
+        const propsData = defaultPropsData;
+        const wrapper = shallowMount(Navigation, { propsData });
+        it('should return a response and populate "userInfo"', async () => {
+            // Arrange
+            const userInfoUrl = 'https://www.just-eat.co.uk/api/account/details';
+
+            // Assert
+            wrapper.vm.data = {
+                ...defaultData,
+                userInfo: false
+            };
+
+            // Act
+            wrapper.vm.fetchUserInfo(userInfoUrl, { headers: { credentials: 'same-origin' } }).then(response => {
+                expect(response).toBeTruthy();
+                expect(wrapper.vm.data.userInfo).not.toEqual(false);
+            });
+        });
+    });
+
+    describe('fetchOrderCountAndSave', () => {
+        const propsData = defaultPropsData;
+        const wrapper = shallowMount(Navigation, { propsData });
+        const orderCountUrl = 'https://www.just-eat.es/analytics/ordercount';
+        it('should call "setAnalyticsBlob" when data is returned', async () => {
+            // Arrange
+            const spy = jest.spyOn(wrapper.vm, 'setAnalyticsBlob');
+
+            // Assert
+            wrapper.vm.data = defaultData;
+
+            // Act
+            wrapper.vm.fetchOrderCountAndSave(orderCountUrl, { headers: { credentials: 'same-origin' } }).then(response => {
+                expect(response).toBeTruthy();
+                expect(spy).toHaveBeenCalled();
+            });
+        });
+
+        it('should set "localOrderCountExpires" when data expiry is returned', async () => {
+            // Assert
+            wrapper.vm.data = defaultData;
+
+            // Act
+            wrapper.vm.fetchOrderCountAndSave(orderCountUrl, { headers: { credentials: 'same-origin' } }).then(response => {
+                expect(response).toBeTruthy();
+                expect(wrapper.vm.data.localOrderCountExpires).not.toEqual(false);
+            });
+        });
+
+        it('should call "enrichUserDataWithCount" when data is returned', async () => {
+            // Arrange
+            const spy = jest.spyOn(wrapper.vm, 'enrichUserDataWithCount');
+
+            // Assert
+            wrapper.vm.data = defaultData;
+
+            // Act
+            wrapper.vm.fetchOrderCountAndSave(orderCountUrl, { headers: { credentials: 'same-origin' } }).then(response => {
+                expect(response).toBeTruthy();
+                expect(spy).toHaveBeenCalled();
+            });
+        });
+
+        it('should call "pushUserData" when data is returned', async () => {
+            // Arrange
+            const spy = jest.spyOn(wrapper.vm, 'pushUserData');
+
+            // Assert
+            wrapper.vm.data = defaultData;
+
+            // Act
+            wrapper.vm.fetchOrderCountAndSave(orderCountUrl, { headers: { credentials: 'same-origin' } }).then(response => {
+                expect(response).toBeTruthy();
+                expect(spy).toHaveBeenCalled();
+            });
+        });
+    });
+
+    describe('setAnalyticsBlob', () => {
+        const propsData = defaultPropsData;
+        const wrapper = shallowMount(Navigation, { propsData });
+
+        it('should call "setItem" when called', () => {
+            // Arrange
+            const spy = jest.spyOn(Storage.prototype, 'setItem');
+
+            // Assert
+            wrapper.vm.setAnalyticsBlob();
+
+            // Act
+            expect(spy).toHaveBeenCalled();
+        });
+    });
+
+    describe('getAnalyticsBlob', () => {
+        const propsData = defaultPropsData;
+        const wrapper = shallowMount(Navigation, { propsData });
+
+        it('should call "getItem" when called', () => {
+            // Arrange
+            const spy = jest.spyOn(Storage.prototype, 'getItem');
+
+            // Assert
+            Navigation.computed.getAnalyticsBlob.call();
+
+            // Act
+            expect(spy).toHaveBeenCalled();
+        });
+
+        it('should return truthy when called', () => {
+            // Assert
+            Navigation.computed.getAnalyticsBlob.call();
+
+            // Act
+            expect(wrapper.vm.getAnalyticsBlob).toBeTruthy();
+        });
     });
 });
