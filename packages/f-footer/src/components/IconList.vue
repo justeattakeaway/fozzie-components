@@ -4,7 +4,8 @@
             [$style['c-iconList--apps']]: isApps,
             [$style['c-iconList--payments']]: isPayments,
             [$style['c-iconList--social']]: isSocial
-        }]">
+        }]"
+        data-test-id='footerBrands-column'>
         <h2
             v-if="title"
             class="c-footer-heading c-footer-heading--shortBelowWide">
