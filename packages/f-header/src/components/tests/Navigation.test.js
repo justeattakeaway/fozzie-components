@@ -335,9 +335,9 @@ describe('Navigation', () => {
             });
         });
 
-        it('should call "pushUserData" when data is returned', async () => {
+        it('should call "pushToDataLayer" when data is returned', async () => {
             // Arrange
-            const spy = jest.spyOn(wrapper.vm, 'pushUserData');
+            const spy = jest.spyOn(wrapper.vm, 'pushToDataLayer');
 
             // Assert
             wrapper.vm.data = defaultData;
