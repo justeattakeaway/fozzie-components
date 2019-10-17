@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.24
+------------------------------
+*October 17, 2019*
+
+### Added
+- `data-test-id` for system testing`
+
+
 v2.0.0-beta.23
 ------------------------------
 *October 8, 2019*
