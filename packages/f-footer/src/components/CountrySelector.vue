@@ -13,6 +13,7 @@
                     $style['c-countrySelector-button']
                 ]"
                 data-js-test="countrySelector-button"
+                data-test-id="countrySelector-button"
                 type="button"
                 aria-controls="countrySelector-countries"
                 @click="toggleCountryList">
@@ -22,7 +23,9 @@
                         $style['c-countrySelector-flag'],
                         $style['c-countrySelector-flag--current']
                     ]" />
-                {{ currentCountryName }}
+                <span data-test-id="countrySelector-current-country">
+                    {{ currentCountryName }}
+                </span>
 
                 <chevron-icon
                     v-show="!showCountryList"
@@ -62,7 +65,7 @@
                         <flag-icon
                             :country-code="country.key"
                             :class="$style['c-countrySelector-flag']" />
-                        <p>
+                        <p data-test-id="countrySelector-list">
                             {{ country.localisedName }}
                         </p>
                     </a>
