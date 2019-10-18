@@ -9,7 +9,7 @@ v2.0.0-beta.22
 
 ### Added
  - Pointer events rule to header gradient so that links displayed underneath the gradient are able to be clicked.
- - new styles to the `.c-nav-toggle` class.
+ - New styles to the `.c-nav-toggle` class.
 
 
 v2.0.0-beta-21
