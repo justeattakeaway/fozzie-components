@@ -820,6 +820,8 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
     width: $nav-trigger-length;
     height: $nav-trigger-length;
     cursor: pointer;
+    background-color: $nav-toggleIcon-bg;
+    border: none;
 
     // hide on wider views
     @include media('>=mid') {
