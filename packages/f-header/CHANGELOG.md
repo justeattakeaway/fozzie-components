@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.0.0-beta.22
+------------------------------
+*October 18, 2019*
+
+### Added
+ - Pointer events rule to header gradient so that links displayed underneath the gradient are able to be clicked.
+ - New styles to the `.c-nav-toggle` class.
+
 
 v2.0.0-beta-21
 ------------------------------
