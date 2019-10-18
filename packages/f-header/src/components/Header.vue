@@ -171,6 +171,7 @@ export default {
             height: $header--transparent-gradient;
             opacity: $header--transparent-opacity;
             background-image: linear-gradient(to top, transparent, $header--transparent-gradient-color);
+            pointer-events: none;
             position: absolute;
             top: 0;
             left: 0;
