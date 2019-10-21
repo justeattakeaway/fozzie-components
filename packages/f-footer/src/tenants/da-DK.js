@@ -2,7 +2,7 @@ export default {
     locale: 'da-DK',
     linkLists: {
         customerService: {
-            title: 'Kundeservice',
+            title: 'Kunde service',
             links: [
                 {
                     url: '/account/login/',
@@ -71,6 +71,10 @@ export default {
                 }
             ]
         },
+        brands: {
+            title: 'Populære kæder',
+            links: []
+        },
         locations: {
             title: 'Find din by',
             links: [
@@ -105,10 +109,6 @@ export default {
                     gtm: 'click_location_view_all'
                 }
             ]
-        },
-        brands: {
-            title: 'Brands',
-            links: []
         },
         aboutUs: {
             title: 'Om os',
@@ -147,6 +147,16 @@ export default {
                     url: '/takeaway/prisgaranti/',
                     text: 'Prisgaranti',
                     gtm: 'click_about_best_price_guarantee'
+                },
+                {
+                    url: 'https://restaurants.just-eat.dk/',
+                    text: 'Få din restaurant på Just Eat',
+                    gtm: ''
+                },
+                {
+                    url: 'https://connect.just-eat.dk/',
+                    text: 'Partner Center',
+                    gtm: ''
                 }
             ]
         }
