@@ -147,7 +147,7 @@ export default {
             overflow: hidden;
             position: fixed;
             width: 100%;
-            z-index: 9999;
+            z-index: zIndex(aboveHighest);
         }
     }
 
