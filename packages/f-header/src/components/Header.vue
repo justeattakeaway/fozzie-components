@@ -1,7 +1,7 @@
 <template>
     <header
         :data-theme="theme"
-        :class="['c-header', { 'c-header--transparent c-header--gradient': showTransparentHeader }]">
+        :class="['c-header', { 'c-header--transparent c-header--gradient': showTransparentHeader }, { 'is-navInView': mobileNavIsOpen }]">
         <skip-to-main
             :text="copy.skipToMainContentText"
             :transparent-bg="showTransparentHeader" />
@@ -122,18 +122,6 @@ export default {
     position: relative;
     z-index: zIndex(mid);
 
-    // when the off-screen navigation is active (on mobile), it fixes to the top of the screen.
-    // this stops the content being forced upwards when this happens (preventing slight visual glitch)
-    .is-navInView & {
-        @include media('<mid') {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: zIndex(high);
-        }
-    }
-
     // Styles for a sticky header on mobile
     @include media('<mid') {
         &.is-sticky {
@@ -151,6 +139,17 @@ export default {
         border-bottom: $header-separator solid $header-border-color;
     }
 }
+
+    // when the off-screen navigation is active (on mobile), it fixes to the top of the screen.
+    // this stops the content being forced upwards when this happens (preventing slight visual glitch)
+    .is-navInView {
+        @include media('<mid') {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            z-index: 9999;
+        }
+    }
 
     // Adds a border to the header to separate it from the
     // main content at all widths
