@@ -1243,7 +1243,7 @@
     qwery "4.0.0"
 
 "@justeat/f-footer@file:packages/f-footer":
-  version "2.0.0-beta.23"
+  version "2.0.0-beta.24"
   dependencies:
     "@justeat/f-services" "0.11.0"
     "@justeat/f-vue-icons" "1.0.0-beta.4"
@@ -1252,7 +1252,7 @@
     vue "2.6.10"
 
 "@justeat/f-header@file:packages/f-header":
-  version "2.0.0-beta.18"
+  version "2.0.0-beta.23"
   dependencies:
     "@justeat/f-services" "0.11.0"
     "@justeat/f-vue-icons" "1.0.0-beta.4"
@@ -1326,10 +1326,10 @@
   resolved "https://registry.yarnpkg.com/@justeat/fozzie-colour-palette/-/fozzie-colour-palette-2.4.0.tgz#dfc6f8b6ba86e5ca5833d75a7fedf7b0b6abd5d7"
   integrity sha512-JmKzKNHpZkF0ZkI1gdO5XnXk1KcFj7YBbPGCHd/H0+h1Z8uWq3pJ0fbD3misj/6qVih9XWtYCLerzNVyTaWIqg==
 
-"@justeat/fozzie@1.59.0":
-  version "1.59.0"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-1.59.0.tgz#79ad20282a90bac9e2130ad927f7d311daddfbf3"
-  integrity sha512-5UrklXOli3vlJlSWhfUsXTkJZlxtcZcbF6u/kj4fBNRT4n3VOzm3BsBtHl1jqOylG2Zp57ZtJLlNXiCsHKE9IQ==
+"@justeat/fozzie@1.70.0":
+  version "1.70.0"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-1.70.0.tgz#787f943f03d3a57d21a05cad8f9bb7b74e46583e"
+  integrity sha512-r8X68wuKhyAIM0Nx7p9NnZAjgP7XdRZ3QWGJC2634U3yZYcbpzLmwC1yPSimFwi+opd3Fpk9HbC1hhposeZEKw==
   dependencies:
     "@justeat/f-dom" "1.1.0"
     "@justeat/f-logger" "0.7.1"
