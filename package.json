@@ -38,7 +38,7 @@
     "@justeat/eslint-config-fozzie": "3.1.1",
     "@justeat/f-build-config": "0.3.0",
     "@justeat/f-utils": "0.3.0",
-    "@justeat/fozzie": "1.59.0",
+    "@justeat/fozzie": "1.70.0",
     "@justeat/fozzie-colour-palette": "2.4.0",
     "@vue/cli-plugin-babel": "3.9.2",
     "@vue/cli-plugin-eslint": "3.9.2",

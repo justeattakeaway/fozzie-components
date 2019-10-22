@@ -24,6 +24,7 @@
                 :user-info-url="userInfoUrl"
                 :order-count-url="orderCountUrl"
                 :is-order-count-supported="isOrderCountSupported"
+                :is-transparent="isTransparent"
                 @onMobileNavToggle="mobileNavToggled" />
         </div>
     </header>

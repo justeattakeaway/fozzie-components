@@ -262,6 +262,11 @@ export default {
         isOrderCountSupported: {
             type: Boolean,
             default: true
+        },
+
+        isTransparent: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -326,6 +331,8 @@ export default {
     methods: {
         onNavToggle () {
             this.navIsOpen = !this.navIsOpen;
+            // This is added to remove the ability to scroll the page content when the mobile navigation is open
+            document.documentElement.classList.toggle(this.isTransparent ? 'is-navInView is-navInView--noPad' : 'is-navInView');
         },
 
         closeNav () {
@@ -356,7 +363,7 @@ export default {
                 });
                 if (data.isAuthenticated) {
                     this.userInfo = data;
-                    if (this.isOrderCountValid || this.isOrderCountOutOfDate) {
+                    if (this.isOrderCountValid) {
                         this.fetchOrderCountAndSave();
                     }
                 } else {
@@ -377,7 +384,7 @@ export default {
                         credentials: 'same-origin'
                     }
                 });
-                if (data) {
+                if (data && this.isOrderCountOutOfDate) {
                     this.setAnalyticsBlob(data);
                     this.localOrderCountExpires = data.Expires;
                     this.enrichUserDataWithCount(data.Count);
