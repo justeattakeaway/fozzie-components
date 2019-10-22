@@ -356,7 +356,7 @@ export default {
                 });
                 if (data.isAuthenticated) {
                     this.userInfo = data;
-                    if (this.isOrderCountValid || this.isOrderCountOutOfDate) {
+                    if (this.isOrderCountValid) {
                         this.fetchOrderCountAndSave();
                     }
                 } else {
@@ -377,7 +377,7 @@ export default {
                         credentials: 'same-origin'
                     }
                 });
-                if (data) {
+                if (data && this.isOrderCountOutOfDate) {
                     this.setAnalyticsBlob(data);
                     this.localOrderCountExpires = data.Expires;
                     this.enrichUserDataWithCount(data.Count);
