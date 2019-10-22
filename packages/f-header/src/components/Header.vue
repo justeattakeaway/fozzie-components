@@ -1,11 +1,7 @@
 <template>
     <header
         :data-theme="theme"
-        :class="['c-header', {
-            'c-header--transparent c-header--gradient': showTransparentHeader,
-            'is-navInView': mobileNavIsOpen
-        }]"
-    >
+        :class="['c-header', { 'c-header--transparent c-header--gradient': showTransparentHeader }]">
         <skip-to-main
             :text="copy.skipToMainContentText"
             :transparent-bg="showTransparentHeader" />
@@ -128,12 +124,13 @@ export default {
 
     // when the off-screen navigation is active (on mobile), it fixes to the top of the screen.
     // this stops the content being forced upwards when this happens (preventing slight visual glitch)
-    &.is-navInView {
+    .is-navInView & {
         @include media('<mid') {
-            overflow: hidden;
             position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            z-index: zIndex(aboveHighest);
+            z-index: zIndex(high);
         }
     }
 
@@ -155,118 +152,118 @@ export default {
     }
 }
 
-// Adds a border to the header to separate it from the
-// main content at all widths
-.c-header--bordered {
-    border-bottom: $header-separator solid $header-border-color;
-}
+    // Adds a border to the header to separate it from the
+    // main content at all widths
+    .c-header--bordered {
+        border-bottom: $header-separator solid $header-border-color;
+    }
 
-.c-header--transparent {
-    background-color: transparent;
-    border: none;
-    position: absolute;
-    width: 100%;
-}
-
-.c-header--gradient {
-    &:before {
-        content: '';
-        height: $header--transparent-gradient;
-        opacity: $header--transparent-opacity;
-        background-image: linear-gradient(to top, transparent, $header--transparent-gradient-color);
-        pointer-events: none;
+    .c-header--transparent {
+        background-color: transparent;
+        border: none;
         position: absolute;
-        top: 0;
-        left: 0;
         width: 100%;
     }
-}
 
-.c-header-container {
-    width: 100%;
-    max-width: #{$layout-max-width}px;
-    margin: 0 auto;
-    padding-left: #{$layout-margin}px;
-    padding-right: #{$layout-margin}px;
-    position: relative;
-    min-height: $header-height--narrow;
-
-    @include media('>=mid') {
-        display: flex;
-        min-height: $header-height;
-    }
-
-    @include media('<mid') {
-        padding-left: #{$layout-margin--mid}px;
-        padding-right: #{$layout-margin--mid}px;
-    }
-
-    @include media('<narrow') {
-        padding-left: #{$layout-margin--narrow}px;
-        padding-right: #{$layout-margin--narrow}px;
-    }
-}
-
-// Header button Styling
-// Example – searchWeb filter button at narrow views
-.c-header-button {
-    top: 0;
-    right: 0;
-    border: 0;
-    padding: 0;
-    line-height: 1;
-    background: none;
-    appearance: none;
-    position: absolute;
-    width: $header-button--width;
-    height: $header-button--height;
-    z-index: zIndex(belowHighest);
-
-    .is-sticky & {
-        top: -#{$header-button--height};
-    }
-}
-
-.c-header-buttonIcon {
-    width: 28px;
-    height: 15px;
-    display: inline-block;
-
-    svg {
-        fill: $header-buttonIcon-color;
-
-        @include theme(ml) {
-            fill: $header-buttonIcon-color--ml;
+    .c-header--gradient {
+        &:before {
+            content: '';
+            height: $header--transparent-gradient;
+            opacity: $header--transparent-opacity;
+            background-image: linear-gradient(to top, transparent, $header--transparent-gradient-color);
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
         }
     }
-}
 
-.c-header-buttonCount {
-    top: 0;
-    right: 0;
-    min-width: 16px;
-    padding: 1px 3px 0;
-    text-align: center;
-    border-radius: 8px;
-    position: absolute;
-    @include font-size(small, false);
-    color: $header-buttonCount-color;
-    background: $header-buttonCount-bg;
-    border: 1px solid $header-buttonCount-borderColor;
+    .c-header-container {
+        width: 100%;
+        max-width: #{$layout-max-width}px;
+        margin: 0 auto;
+        padding-left: #{$layout-margin}px;
+        padding-right: #{$layout-margin}px;
+        position: relative;
+        min-height: $header-height--narrow;
 
-    @include theme(ml) {
-        background: $header-buttonCount-bg--ml;
+        @include media('>=mid') {
+            display: flex;
+            min-height: $header-height;
+        }
+
+        @include media('<mid') {
+            padding-left: #{$layout-margin--mid}px;
+            padding-right: #{$layout-margin--mid}px;
+        }
+
+        @include media('<narrow') {
+            padding-left: #{$layout-margin--narrow}px;
+            padding-right: #{$layout-margin--narrow}px;
+        }
     }
-}
 
-.c-header-button--primary {
-    display: block;
-    width: 40px;
-    padding-right: spacing();
-}
+    // Header button Styling
+    // Example – searchWeb filter button at narrow views
+    .c-header-button {
+        top: 0;
+        right: 0;
+        border: 0;
+        padding: 0;
+        line-height: 1;
+        background: none;
+        appearance: none;
+        position: absolute;
+        width: $header-button--width;
+        height: $header-button--height;
+        z-index: zIndex(belowHighest);
 
-.c-header-button--secondary {
-    right: 40px;
-}
+        .is-sticky & {
+            top: -#{$header-button--height};
+        }
+    }
+
+    .c-header-buttonIcon {
+        width: 28px;
+        height: 15px;
+        display: inline-block;
+
+        svg {
+            fill: $header-buttonIcon-color;
+
+            @include theme(ml) {
+                fill: $header-buttonIcon-color--ml;
+            }
+        }
+    }
+
+    .c-header-buttonCount {
+        top: 0;
+        right: 0;
+        min-width: 16px;
+        padding: 1px 3px 0;
+        text-align: center;
+        border-radius: 8px;
+        position: absolute;
+        @include font-size(small, false);
+        color: $header-buttonCount-color;
+        background: $header-buttonCount-bg;
+        border: 1px solid $header-buttonCount-borderColor;
+
+        @include theme(ml) {
+            background: $header-buttonCount-bg--ml;
+        }
+    }
+
+    .c-header-button--primary {
+        display: block;
+        width: 40px;
+        padding-right: spacing();
+    }
+
+    .c-header-button--secondary {
+        right: 40px;
+    }
 
 </style>
