@@ -140,6 +140,7 @@ export default {
     }
 }
 
+<<<<<<< HEAD
 // when the off-screen navigation is active (on mobile), it fixes to the top of the screen.
 // this stops the content being forced upwards when this happens (preventing slight visual glitch)
 .is-navInView {
@@ -148,6 +149,17 @@ export default {
         position: fixed;
         width: 100%;
         z-index: 9999;
+=======
+    // when the off-screen navigation is active (on mobile), it fixes to the top of the screen.
+    // this stops the content being forced upwards when this happens (preventing slight visual glitch)
+    .is-navInView {
+        @include media('<mid') {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            z-index: zIndex(aboveHighest);
+        }
+>>>>>>> f3c2ec5c37ef42511b872ba0341539168c4a1388
     }
 }
 
