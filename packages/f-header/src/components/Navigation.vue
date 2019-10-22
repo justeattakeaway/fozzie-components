@@ -262,6 +262,11 @@ export default {
         isOrderCountSupported: {
             type: Boolean,
             default: true
+        },
+
+        isTransparent: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -327,7 +332,7 @@ export default {
         onNavToggle () {
             this.navIsOpen = !this.navIsOpen;
             // This is added to remove the ability to scroll the page content when the mobile navigation is open
-            document.documentElement.classList.toggle('is-navInView');
+            document.documentElement.classList.toggle(this.isTransparent ? 'is-navInView--noPad' : 'is-navInView');
         },
 
         closeNav () {
