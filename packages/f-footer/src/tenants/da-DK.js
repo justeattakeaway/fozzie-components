@@ -151,12 +151,12 @@ export default {
                 {
                     url: 'https://restaurants.just-eat.dk/',
                     text: 'Få din restaurant på Just Eat',
-                    gtm: ''
+                    gtm: 'click_about_restaurant_signup'
                 },
                 {
                     url: 'https://connect.just-eat.dk/',
                     text: 'Partner Center',
-                    gtm: ''
+                    gtm: 'click_about_partner_centre'
                 }
             ]
         }

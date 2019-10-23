@@ -132,7 +132,7 @@ export default {
                 {
                     url: '/info/vilkar-og-betingelser',
                     text: 'Vilkår og betingelser',
-                    gtm: ''
+                    gtm: 'click_about_tandcs'
                 },
                 {
                     url: '/info/cookies-policy',
