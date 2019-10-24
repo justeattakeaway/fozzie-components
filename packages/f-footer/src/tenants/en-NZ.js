@@ -121,7 +121,38 @@ export default {
             ]
         }
     },
-    linkButtonList: [],
+    linkButtonList: [
+        {
+            title: 'Partner with Us',
+            buttons: [
+                {
+                    title: 'List your restaurant',
+                    url: '/info/join-menulog',
+                    gtm: 'click_about_restaurant_signup'
+                },
+                {
+                    title: 'Become a courier',
+                    url: 'https://couriers.menulog.co.nz/application/',
+                    gtm: 'click_about_couriers'
+                }
+            ]
+        },
+        {
+            title: 'Already a partner',
+            buttons: [
+                {
+                    title: 'Partner centre',
+                    url: 'https://partner.menulog.co.nz/',
+                    gtm: 'click_about_partner_centre'
+                },
+                {
+                    title: 'Courier portal',
+                    url: 'https://couriers.menulog.co.nz/login',
+                    gtm: 'click_about_courier_portal'
+                }
+            ]
+        }
+    ],
     downloadOurApps: 'Download our apps',
     appStoreIcons: [
         {
