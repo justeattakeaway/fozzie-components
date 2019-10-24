@@ -132,7 +132,7 @@ export default {
                 },
                 {
                     title: 'Become a courier',
-                    url: 'https://couriers.menulog.com.au/application/',
+                    url: 'https://couriers.menulog.co.nz/application/',
                     gtm: 'click_about_couriers'
                 }
             ]
@@ -142,12 +142,12 @@ export default {
             buttons: [
                 {
                     title: 'Partner centre',
-                    url: 'https://partner.menulog.com.au/',
+                    url: 'https://partner.menulog.co.nz/',
                     gtm: 'click_about_partner_centre'
                 },
                 {
                     title: 'Courier portal',
-                    url: 'https://couriers.menulog.com.au/login',
+                    url: 'https://couriers.menulog.co.nz/login',
                     gtm: 'click_about_courier_portal'
                 }
             ]

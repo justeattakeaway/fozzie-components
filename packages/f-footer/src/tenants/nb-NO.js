@@ -57,10 +57,6 @@ export default {
                 }
             ]
         },
-        brands: {
-            title: 'Merker',
-            links: []
-        },
         locations: {
             title: 'Finn din by',
             links: [
@@ -111,6 +107,10 @@ export default {
                 }
             ]
         },
+        brands: {
+            title: 'Brands',
+            links: []
+        },
         aboutUs: {
             title: 'Om oss',
             links: [
@@ -128,11 +128,6 @@ export default {
                     url: '/info/privacy-policy',
                     text: 'Personvernerklæring',
                     gtm: 'click_about_privacy_policy'
-                },
-                {
-                    url: '/info/vilkar-og-betingelser',
-                    text: 'Vilkår og betingelser',
-                    gtm: 'click_about_tandcs'
                 },
                 {
                     url: '/info/cookies-policy',
