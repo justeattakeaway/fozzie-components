@@ -7,17 +7,17 @@ export default {
 
     navLinks: {
         accountInfo: {
-            text: 'Brugerinformation',
+            text: 'Min profil',
             url: '/account/info',
             gtm: 'click_account_your_account'
         },
         orderHistory: {
-            text: 'Ordre',
+            text: 'Mine ordrer',
             url: '/order-history',
             gtm: 'click_account_your_orders'
         },
         accountCredit: {
-            text: 'Gavekort saldo',
+            text: 'Gavekortsaldo',
             url: '/account/credit/',
             gtm: 'click_account_credit'
         },
@@ -27,12 +27,12 @@ export default {
             gtm: 'click_account_saved_cards'
         },
         addressBook: {
-            text: 'Leveringsadresse',
+            text: 'Leveringsadresser',
             url: '/account/addressbook',
             gtm: 'click_account_address_books'
         },
         contactPreferences: {
-            text: 'Foretrukne kontaktmetode',
+            text: 'Kontaktmetoder',
             url: '/account/preferences',
             gtm: 'click_account_contact_preferences'
         }
