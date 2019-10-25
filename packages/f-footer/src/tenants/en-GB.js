@@ -121,11 +121,6 @@ export default {
                     gtm: 'click_brands_burger-king'
                 },
                 {
-                    url: '/takeaway/brands/dominos-pizza',
-                    text: 'Domino\'s Pizza',
-                    gtm: 'click_brands_dominos-pizza'
-                },
-                {
                     url: '/takeaway/brands/subway',
                     text: 'Subway',
                     gtm: 'click_brands_subway'
@@ -136,7 +131,7 @@ export default {
                     gtm: 'click_brands_yo-sushi'
                 },
                 {
-                    url: '/takeaway/chains',
+                    url: '/takeaway/brands',
                     text: 'View all brands',
                     gtm: 'click_brands_view_all'
                 }
