@@ -285,8 +285,12 @@ export default {
         },
 
         returnUrl () {
-            if (!this.$route && typeof document !== 'undefined') return encodeURIComponent(document.location.pathname);
-            return encodeURIComponent(this.$route ? this.$route.name : '');
+            if (this.$route) {
+                const { name } = this.$route;
+                const { href } = this.$router.resolve({ name });
+                return encodeURIComponent(href);
+            }
+            return encodeURIComponent(document.location.pathname);
         },
 
         returnLoginUrl () {
