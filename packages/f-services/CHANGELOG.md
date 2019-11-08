@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+0.13.0
+------------------------------
+*November 8, 2019*
+
+ ### Changed
+- Making sure that necessary 3rd party dependencies are bundled as part of the package
+
+
 0.12.0
 ------------------------------
 *November 8, 2019*
