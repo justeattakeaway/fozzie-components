@@ -290,15 +290,18 @@ export default {
                 const { href } = this.$router.resolve({ name });
                 return encodeURIComponent(href);
             }
-            return encodeURIComponent(document.location.pathname);
+            if (typeof document !== 'undefined') {
+                return encodeURIComponent(document.location.pathname);
+            }
+            return false;
         },
 
         returnLoginUrl () {
-            return `${this.accountLogin.url}${this.returnUrl}`;
+            return `${this.accountLogin.url}${this.returnUrl ? this.returnUrl : ''}`;
         },
 
         returnLogoutUrl () {
-            return `${this.accountLogout.url}${this.returnUrl}`;
+            return `${this.accountLogout.url}${this.returnUrl ? this.returnUrl : ''}`;
         },
 
         // if the order count is supported and there is no blob in local storage then return true
