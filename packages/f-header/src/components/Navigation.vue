@@ -100,7 +100,7 @@
                             data-js-test="logout">
                             <a
                                 :tabindex="navIsOpen ? 0 : -1"
-                                :href="accountLogout.url"
+                                :href="returnLogoutUrl"
                                 :data-trak='`{
                                     "trakEvent": "click",
                                     "category": "engagement",
@@ -121,7 +121,7 @@
                     class="c-nav-list-item"
                     data-js-test="login">
                     <a
-                        :href="accountLogin.url"
+                        :href="returnLoginUrl"
                         :data-trak='`{
                             "trakEvent": "click",
                             "category": "engagement",
@@ -157,7 +157,7 @@
                         data-js-test="logout">
                         <a
                             :tabindex="navIsOpen ? 0 : -1"
-                            :href="accountLogout.url"
+                            :href="returnLogoutUrl"
                             :data-trak='`{
                                 "trakEvent": "click",
                                 "category": "engagement",
@@ -293,7 +293,15 @@ export default {
             if (typeof document !== 'undefined') {
                 return encodeURIComponent(document.location.pathname);
             }
-            return false;
+            return '';
+        },
+
+        returnLoginUrl () {
+            return `${this.accountLogin.url}?returnurl=${this.returnUrl}`;
+        },
+
+        returnLogoutUrl () {
+            return `${this.accountLogout.url}?returnurl=${this.returnUrl}`;
         },
 
         // if the order count is supported and there is no blob in local storage then return true

@@ -6,10 +6,11 @@ module.exports = api => {
     const plugins = [
         '@babel/plugin-proposal-optional-chaining'
     ];
+    const builtIns = (api.env('development') ? 'entry' : false);
 
     if (!isTest && !isSettings) {
         api.cache(true);
-        presets.push(['@vue/app']);
+        presets.push(['@vue/app', { useBuiltIns: builtIns }]);
     }
 
     // use for both test and dev/live

@@ -9,7 +9,19 @@ v2.0.0-beta.27
 *November 8, 2019*
 
 ### Changed
- - `returnUrl` computed method to fix login and logout redirect.
+- Tenant urls for login and logout
+- `returnUrl` method
+
+
+v2.0.0-beta.26
+------------------------------
+*November 8, 2019*
+
+### Changed
+- `f-services` and other small package updates
+
+### Fixed
+- `yarn demo` error in babel config fixed so that `core-js` dependencies use entry paths
 
 
 v2.0.0-beta.25
