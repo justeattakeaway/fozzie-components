@@ -1,10 +1,9 @@
 {
   "name": "@justeat/f-services",
   "description": "Fozzie Services - Shared Services for Components and projects",
-  "version": "0.12.0",
-  "main": "dist/f-services.cjs.js",
+  "version": "0.13.0",
+  "main": "dist/f-services.umd.js",
   "module": "dist/f-services.esm.js",
-  "browser": "dist/f-services.umd.js",
   "source": "src/index.js",
   "files": [
     "dist"
@@ -44,10 +43,12 @@
   "devDependencies": {
     "@babel/core": "7.7.2",
     "@babel/preset-env": "7.7.1",
-    "@vue/cli-plugin-eslint": "^4.0.5",
-    "@vue/cli-plugin-unit-jest": "^4.0.5",
-    "rollup": "^1.26.3",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-terser": "^5.1.2"
+    "@vue/cli-plugin-eslint": "4.0.5",
+    "@vue/cli-plugin-unit-jest": "4.0.5",
+    "rollup": "1.26.3",
+    "rollup-plugin-babel": "4.3.3",
+    "rollup-plugin-commonjs": "10.1.0",
+    "rollup-plugin-node-resolve": "5.2.0",
+    "rollup-plugin-terser": "5.1.2"
   }
 }
