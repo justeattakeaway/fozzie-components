@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.26
+------------------------------
+*November 8, 2019*
+
+### Changed
+- `f-services` and other small package updates
+
+### Fixed
+- `yarn demo` error in babel config fixed so that `core-js` dependencies use entry paths
+
+
 v2.0.0-beta.25
 ------------------------------
 *November 7, 2019*
