@@ -288,6 +288,8 @@ describe('Navigation', () => {
             wrapper.vm.fetchUserInfo(userInfoUrl, { headers: { credentials: 'same-origin' } }).then(response => {
                 expect(response).toBeTruthy();
                 expect(wrapper.vm.data.userInfo).not.toEqual(false);
+            }).catch(err => {
+                console.log(err);
             });
         });
     });
@@ -307,6 +309,8 @@ describe('Navigation', () => {
             wrapper.vm.fetchOrderCountAndSave(orderCountUrl, { headers: { credentials: 'same-origin' } }).then(response => {
                 expect(response).toBeTruthy();
                 expect(spy).toHaveBeenCalled();
+            }).catch(err => {
+                console.log(err);
             });
         });
 
@@ -318,6 +322,8 @@ describe('Navigation', () => {
             wrapper.vm.fetchOrderCountAndSave(orderCountUrl, { headers: { credentials: 'same-origin' } }).then(response => {
                 expect(response).toBeTruthy();
                 expect(wrapper.vm.data.localOrderCountExpires).not.toEqual(false);
+            }).catch(err => {
+                console.log(err);
             });
         });
 
@@ -332,6 +338,8 @@ describe('Navigation', () => {
             wrapper.vm.fetchOrderCountAndSave(orderCountUrl, { headers: { credentials: 'same-origin' } }).then(response => {
                 expect(response).toBeTruthy();
                 expect(spy).toHaveBeenCalled();
+            }).catch(err => {
+                console.log(err);
             });
         });
 
@@ -346,6 +354,8 @@ describe('Navigation', () => {
             wrapper.vm.fetchOrderCountAndSave(orderCountUrl, { headers: { credentials: 'same-origin' } }).then(response => {
                 expect(response).toBeTruthy();
                 expect(spy).toHaveBeenCalled();
+            }).catch(err => {
+                console.log(err);
             });
         });
     });
