@@ -14,7 +14,7 @@ v2.0.0-beta.26
 
 v2.0.0-beta.25
 ------------------------------
-*November 6, 2019*
+*November 7, 2019*
 
 ### Removed
 - Typography include from styles, as not needed
