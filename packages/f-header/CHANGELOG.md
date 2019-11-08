@@ -4,12 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.26
+------------------------------
+*November 8, 2019*
+
+### Changed
+ - `returnUrl` computed method to fix login and logout redirect.
+
+
 v2.0.0-beta.25
 ------------------------------
 *November 6, 2019*
 
-### Changed
- - `returnUrl` computed method to fix login and logout.
+### Removed
+- Typography include from styles, as not needed
 
 
 v2.0.0-beta.24
