@@ -38,12 +38,12 @@ export default {
     },
     accountLogin: {
         text: 'Log in',
-        url: '/account/login?returnurl=',
+        url: '/account/login',
         gtm: 'click_login'
     },
     accountLogout: {
         text: 'Log out',
-        url: '/account/logout?returnurl=',
+        url: '/account/logout',
         gtm: 'click_logout'
     }
 };

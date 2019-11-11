@@ -48,12 +48,12 @@ export default {
     },
     accountLogin: {
         text: 'Logg inn',
-        url: '/account/login?returnurl=',
+        url: '/account/login',
         gtm: 'click_login'
     },
     accountLogout: {
         text: 'Logg ut',
-        url: '/account/logout?returnurl=',
+        url: '/account/logout',
         gtm: 'click_logout'
     }
 };
