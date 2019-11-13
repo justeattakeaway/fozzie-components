@@ -24,6 +24,7 @@
     "fozzie"
   ],
   "scripts": {
+    "prepare": "lerna run prepare --stream",
     "build": "lerna run build --stream",
     "lint": "lerna run lint --stream",
     "lint:fix": "lerna run lint -- --fix",
@@ -31,14 +32,14 @@
     "test": "lerna run test --stream"
   },
   "devDependencies": {
-    "@babel/cli": "7.5.0",
+    "@babel/cli": "7.7.0",
     "@babel/plugin-proposal-optional-chaining": "7.6.0",
-    "@babel/preset-env": "7.5.4",
+    "@babel/preset-env": "7.7.1",
     "@justeat/browserslist-config-fozzie": "1.1.1",
-    "@justeat/eslint-config-fozzie": "3.1.1",
+    "@justeat/eslint-config-fozzie": "3.3.1",
     "@justeat/f-build-config": "0.3.0",
     "@justeat/f-utils": "0.3.0",
-    "@justeat/fozzie": "1.70.0",
+    "@justeat/fozzie": "1.73.0",
     "@justeat/fozzie-colour-palette": "2.4.0",
     "@vue/cli-plugin-babel": "3.9.2",
     "@vue/cli-plugin-eslint": "3.9.2",
@@ -47,26 +48,19 @@
     "@vue/eslint-config-standard": "4.0.0",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "10.0.2",
-    "babel-jest": "24.8.0",
+    "babel-eslint": "10.0.3",
+    "babel-jest": "24.9.0",
     "babel-loader": "8.0.6",
     "css-loader": "1.0.1",
-    "eslint": "5.16.0",
-    "eslint-plugin-vue": "5.2.3",
+    "eslint": "6.6.0",
+    "eslint-plugin-vue": "6.0.0",
     "include-media": "1.4.9",
-    "lerna": "3.15.0",
-    "node-sass": "4.12.0",
+    "lerna": "3.18.4",
+    "node-sass": "4.13.0",
     "node-sass-magic-importer": "5.3.2",
     "postcss-loader": "3.0.0",
     "sass-loader": "7.1.0",
-    "vue-svg-loader": "0.12.0",
+    "vue-svg-loader": "0.14.0",
     "vue-template-compiler": "2.6.10"
-  },
-  "dependencies": {
-    "@justeat/f-footer": "file:packages/f-footer",
-    "@justeat/f-header": "file:packages/f-header",
-    "@justeat/f-metadata": "file:packages/f-metadata",
-    "@justeat/f-vue-icons": "file:packages/f-vue-icons",
-    "@justeat/f-services": "file:packages/f-services"
   }
 }

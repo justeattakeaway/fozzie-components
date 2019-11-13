@@ -285,16 +285,23 @@ export default {
         },
 
         returnUrl () {
-            if (!this.$route && typeof document !== 'undefined') return encodeURIComponent(document.location.pathname);
-            return encodeURIComponent(this.$route ? this.$route.name : '');
+            if (this.$route) {
+                const { name } = this.$route;
+                const { href } = this.$router.resolve({ name });
+                return encodeURIComponent(href);
+            }
+            if (typeof document !== 'undefined') {
+                return encodeURIComponent(document.location.pathname);
+            }
+            return '';
         },
 
         returnLoginUrl () {
-            return `${this.accountLogin.url}${this.returnUrl}`;
+            return `${this.accountLogin.url}?returnurl=${this.returnUrl}`;
         },
 
         returnLogoutUrl () {
-            return `${this.accountLogout.url}${this.returnUrl}`;
+            return `${this.accountLogout.url}?returnurl=${this.returnUrl}`;
         },
 
         // if the order count is supported and there is no blob in local storage then return true
@@ -332,7 +339,8 @@ export default {
         onNavToggle () {
             this.navIsOpen = !this.navIsOpen;
             // This is added to remove the ability to scroll the page content when the mobile navigation is open
-            document.documentElement.classList.toggle(this.isTransparent ? 'is-navInView is-navInView--noPad' : 'is-navInView');
+            document.documentElement.classList.toggle('is-navInView', this.navIsOpen);
+            document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.isTransparent);
         },
 
         closeNav () {

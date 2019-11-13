@@ -1,4 +1,3 @@
-import { throttle } from 'lodash-es';
 import sharedServices from '../shared.service';
 
 describe('sharedServices', () => {
