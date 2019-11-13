@@ -147,7 +147,7 @@ export default {
             buttons: [
                 {
                     title: 'List your restaurant',
-                    url: '/info/join-menulog',
+                    url: 'https://restaurants.just-eat.ie',
                     gtm: 'click_about_restaurant_signup'
                 },
                 {
@@ -167,7 +167,7 @@ export default {
                 },
                 {
                     title: 'Courier portal',
-                    url: 'https://couriers.just-eat.ielogin',
+                    url: 'https://couriers.just-eat.ie/account/login',
                     gtm: 'click_about_courier_portal'
                 }
             ]
