@@ -162,12 +162,12 @@ export default {
             buttons: [
                 {
                     title: 'Partner centre',
-                    url: 'https://partner.just-eat.co.uk/',
+                    url: 'https://partner.just-eat.ie/',
                     gtm: 'click_about_partner_centre'
                 },
                 {
                     title: 'Courier portal',
-                    url: 'https://couriers.just-eat.co.uk/login',
+                    url: 'https://couriers.just-eat.ielogin',
                     gtm: 'click_about_courier_portal'
                 }
             ]
