@@ -286,9 +286,7 @@ export default {
 
         returnUrl () {
             if (this.$route) {
-                const { name } = this.$route;
-                const { href } = this.$router.resolve({ name });
-                return encodeURIComponent(href);
+                return encodeURIComponent(this.$route.path);
             }
             if (typeof document !== 'undefined') {
                 return encodeURIComponent(document.location.pathname);
