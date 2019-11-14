@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v2.0.0-beta.29
+------------------------------
+*November 14, 2019*
+
+### Changed
+- Encode current path for `returnUrl` rather than route name
+
+
 v2.0.0-beta.28
 ------------------------------
 *November 11, 2019*
