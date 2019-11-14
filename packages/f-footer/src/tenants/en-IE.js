@@ -141,7 +141,38 @@ export default {
             ]
         }
     },
-    linkButtonList: [],
+    linkButtonList: [
+        {
+            title: 'Partner with Us',
+            buttons: [
+                {
+                    title: 'List your restaurant',
+                    url: 'https://restaurants.just-eat.ie',
+                    gtm: 'click_about_restaurant_signup'
+                },
+                {
+                    title: 'Become a courier',
+                    url: 'https://www.fountain.com/just-eat/apply/dublin-courier?preview=true',
+                    gtm: 'click_about_couriers'
+                }
+            ]
+        },
+        {
+            title: 'Already a partner',
+            buttons: [
+                {
+                    title: 'Partner centre',
+                    url: 'https://partner.just-eat.ie/',
+                    gtm: 'click_about_partner_centre'
+                },
+                {
+                    title: 'Courier portal',
+                    url: 'https://couriers.just-eat.ie/account/login',
+                    gtm: 'click_about_courier_portal'
+                }
+            ]
+        }
+    ],
     downloadOurApps: 'Download our apps',
     appStoreIcons: [
         {
