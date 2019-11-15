@@ -291,7 +291,7 @@ export default {
             if (typeof document !== 'undefined') {
                 return encodeURIComponent(document.location.pathname);
             }
-            return '';
+            return encodeURIComponent('/');
         },
 
         returnLoginUrl () {
