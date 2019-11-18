@@ -18,14 +18,14 @@ const initialiseBraze = (options = {
 
                         appboy.display.automaticallyShowNewInAppMessages();
 
+                        appboy.openSession();
+                        window.appboy = appboy;
+
                         appboy.changeUser(options.userId, () => {
                             window.dataLayer.push({
                                 event: 'appboyReady'
                             });
                         });
-
-                        window.appboy = appboy;
-                        appboy.openSession();
 
                         appboy.requestContentCardsRefresh();
                         const contentCards = appboy.getCachedContentCards();
