@@ -13,7 +13,7 @@
         <div class="c-footer-light">
             <div class="c-footer-container">
                 <div
-                    v-if="copy.linkButtonList.length && locale !== 'en-NZ'"
+                    v-if="copy.linkButtonList.length && showCourierLinks"
                     data-test-id="courierLinks-wrapper"
                     class="c-footer-row c-footer-row--noBottomPad">
                     <button-list
@@ -86,6 +86,12 @@ export default {
             type: String,
             required: false,
             default: ''
+        },
+
+        showCourierLinks: {
+            type: Boolean,
+            required: false,
+            default: true
         }
     },
 
