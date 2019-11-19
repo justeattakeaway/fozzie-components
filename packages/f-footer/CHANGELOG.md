@@ -9,7 +9,7 @@ v2.0.0-beta.31
 *November 19, 2019*
 
 ### Added
-- Toggled courier links off for `IE`.
+- Toggled courier links off with new prop `showCourierLinks`.
 
 
 v2.0.0-beta.30
