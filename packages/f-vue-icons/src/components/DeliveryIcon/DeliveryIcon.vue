@@ -1,7 +1,9 @@
 <template>
     <delivery-icon
-        :class="['c-icon c-icon--delivery', {
+        :class="['c-icon--delivery', {
             'c-icon--delivery--small': isSmall,
+            'c-icon': !isGreen,
+            'c-icon--green': isGreen,
             ...iconClasses
         }]" />
 </template>
@@ -19,6 +21,10 @@ export default {
 
     props: {
         isSmall: {
+            type: Boolean,
+            default: false
+        },
+        isGreen: {
             type: Boolean,
             default: false
         }
