@@ -1,3 +1,4 @@
+import AlcoholAgeIcon from './AlcoholAgeIcon';
 import AlertIcon from './AlertIcon';
 import AppStoreIcon from './AppStoreIcon';
 import BaseProviderIcon from './BaseProviderIcon';
@@ -21,9 +22,9 @@ import StopwatchIcon from './StopwatchIcon';
 import TickIcon from './TickIcon';
 import VegetarianIcon from './VegetarianIcon';
 import WarningIcon from './WarningIcon';
-import AlcoholAgeIcon from './AlcoholAgeIcon';
 
 export {
+    AlcoholAgeIcon,
     AlertIcon,
     AppStoreIcon,
     BaseProviderIcon,
@@ -46,6 +47,5 @@ export {
     StopwatchIcon,
     TickIcon,
     VegetarianIcon,
-    WarningIcon,
-    AlcoholAgeIcon
+    WarningIcon
 };
