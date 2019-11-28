@@ -1,4 +1,5 @@
 import * as components from './components';
+import AlcoholAgeIcon from './components/AlcoholAgeIcon/AlcoholAgeIcon.vue';
 import AlertIcon from './components/AlertIcon/AlertIcon.vue';
 import AppStoreIcon from './components/AppStoreIcon/AppStoreIcon.vue';
 import BaseProviderIcon from './components/BaseProviderIcon/BaseProviderIcon.vue';
@@ -34,6 +35,7 @@ const Fozzie = Vue => {
 export default Fozzie;
 
 export {
+    AlcoholAgeIcon,
     AlertIcon,
     AppStoreIcon,
     BaseProviderIcon,
