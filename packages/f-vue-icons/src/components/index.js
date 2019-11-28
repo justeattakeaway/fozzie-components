@@ -21,6 +21,7 @@ import StopwatchIcon from './StopwatchIcon';
 import TickIcon from './TickIcon';
 import VegetarianIcon from './VegetarianIcon';
 import WarningIcon from './WarningIcon';
+import AlcoholAgeIcon from './AlcoholAgeIcon';
 
 export {
     AlertIcon,
@@ -45,5 +46,6 @@ export {
     StopwatchIcon,
     TickIcon,
     VegetarianIcon,
-    WarningIcon
+    WarningIcon,
+    AlcoholAgeIcon
 };
