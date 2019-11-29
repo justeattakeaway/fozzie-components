@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.31
+------------------------------
+*November 29, 2019*
+
+### Fixed
+- DOM inconsistency caused by SSR issue when trying to calculate screen width on server
+- Opaque header when tabbing out of nav with narrow viewport
+
+
 v2.0.0-beta.30
 ------------------------------
 *November 15, 2019*

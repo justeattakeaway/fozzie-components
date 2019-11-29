@@ -8,7 +8,7 @@
             :aria-label="openMenuText"
             data-js-test="nav-toggle"
             type="button"
-            @click="onHamburgerMenuClick">
+            @click="onNavToggle">
             <span class="c-nav-toggle-icon" />
         </button>
 
@@ -51,8 +51,7 @@
 
                 <li
                     :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo, 'open': navIsOpen }]"
-                    @mouseover="openNav"
-                    @mouseleave="closeNav"
+                    v-on="isBelowMid ? null : { mouseover: openNav, mouseleave: closeNav }"
                     @keyup.esc="closeNav">
                     <a
                         :tabindex="isBelowMid ? -1 : 0"
@@ -134,57 +133,37 @@
                     </a>
                 </li>
 
-                <template v-if="isBelowMid">
-                    <li class="c-nav-list-item c-nav-list-item--support">
-                        <a
-                            :href="help.url"
-                            :data-trak='`{
+                <li class="c-nav-list-item c-nav-list-item--support">
+                    <a
+                        :href="help.url"
+                        :data-trak='`{
                                 "trakEvent": "click",
                                 "category": "engagement",
                                 "action": "header",
                                 "label": "${help.gtm}"
                             }`'
-                            class="c-nav-list-link"
-                            @blur="closeNav"
-                            @focus="openNav">
-                            {{ help.text }}
-                        </a>
-                    </li>
+                        class="c-nav-list-link"
+                        v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
+                        {{ help.text }}
+                    </a>
+                </li>
 
-                    <li
-                        v-if="userInfo"
-                        class="c-nav-list-item"
-                        data-js-test="logout">
-                        <a
-                            :tabindex="navIsOpen ? 0 : -1"
-                            :href="returnLogoutUrl"
-                            :data-trak='`{
+                <li
+                    v-if="userInfo && isBelowMid"
+                    class="c-nav-list-item"
+                    data-js-test="logout">
+                    <a
+                        :tabindex="navIsOpen ? 0 : -1"
+                        :href="returnLogoutUrl"
+                        :data-trak='`{
                                 "trakEvent": "click",
                                 "category": "engagement",
                                 "action": "header",
                                 "label": "${accountLogout.gtm}"
                             }`'
-                            class="c-nav-list-link"
-                            @blur="closeNav"
-                            @focus="openNav">
-                            {{ accountLogout.text }}
-                        </a>
-                    </li>
-                </template>
-
-                <li
-                    v-else
-                    class="c-nav-list-item c-nav-list-item--support">
-                    <a
-                        :href="help.url"
-                        :data-trak='`{
-                            "trakEvent": "click",
-                            "category": "engagement",
-                            "action": "header",
-                            "label": "${help.gtm}"
-                        }`'
-                        class="c-nav-list-link">
-                        {{ help.text }}
+                        class="c-nav-list-link"
+                        v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
+                        {{ accountLogout.text }}
                     </a>
                 </li>
             </ul>
@@ -273,7 +252,7 @@ export default {
     data () {
         return {
             navIsOpen: false,
-            currentScreenWidth: sharedServices.getWindowWidth(),
+            currentScreenWidth: null,
             userInfo: this.userInfoProp,
             localOrderCountExpires: false
         };
@@ -327,6 +306,7 @@ export default {
             this.fetchUserInfo();
         }
         sharedServices.addEvent('resize', this.onResize, 100);
+        this.onResize();
     },
 
     destroyed () {
@@ -337,26 +317,29 @@ export default {
         onNavToggle () {
             this.navIsOpen = !this.navIsOpen;
             // This is added to remove the ability to scroll the page content when the mobile navigation is open
-            document.documentElement.classList.toggle('is-navInView', this.navIsOpen);
-            document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.isTransparent);
+            this.handleMobileNavState();
         },
 
         closeNav () {
             this.navIsOpen = false;
+            this.handleMobileNavState();
         },
 
         openNav () {
             this.navIsOpen = true;
+            this.handleMobileNavState();
         },
 
         onResize () {
             this.currentScreenWidth = sharedServices.getWindowWidth();
         },
 
-        // When hamburger menu is clicked we want to trigger toggling of navigation and emit the state to the parent to add transparent class
-        onHamburgerMenuClick () {
-            this.onNavToggle();
-            this.$emit('onMobileNavToggle', this.navIsOpen);
+        handleMobileNavState () {
+            if (this.isBelowMid) {
+                this.$emit('onMobileNavToggle', this.navIsOpen);
+                document.documentElement.classList.toggle('is-navInView', this.navIsOpen);
+                document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.isTransparent);
+            }
         },
 
         // If userInfoProp wasn't passed we make a call for userInfo on mounted hook
