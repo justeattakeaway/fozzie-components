@@ -27,9 +27,41 @@
             <span class="c-nav-toggle-icon" />
         </label>
 
+        <a
+            v-if="showOffers && isBelowMid"
+            :data-trak='`{
+                "trakEvent": "click",
+                "category": "engagement",
+                "action": "header",
+                "label": "${offersCopy.gtm}"
+            }`'
+            :href="offersCopy.url"
+            class="c-nav-featureLink">
+            <offer-icon class="c-nav-icon c-nav-icon--offers" />
+            <span class="is-visuallyHidden">
+                {{ offersCopy.text }}
+            </span>
+        </a>
+
         <div
             :class="['c-nav-container', { 'is-visible': navIsOpen }]">
             <ul class="c-nav-list">
+                <li
+                    v-if="showOffers && !isBelowMid"
+                    class="c-nav-list-item">
+                    <a
+                        :data-trak='`{
+                            "trakEvent": "click",
+                            "category": "engagement",
+                            "action": "header",
+                            "label": "${offersCopy.gtm}"
+                        }`'
+                        :href="offersCopy.url"
+                        class="c-nav-list-link">
+                        <offer-icon class="c-nav-icon c-nav-icon--offers" />
+                        {{ offersCopy.text }}
+                    </a>
+                </li>
                 <li
                     v-if="showDeliveryEnquiry && !isBelowMid"
                     class="c-nav-list-item"
@@ -172,14 +204,19 @@
 </template>
 
 <script>
-import { ProfileIcon, DeliveryIcon } from '@justeat/f-vue-icons';
+import {
+    DeliveryIcon,
+    OfferIcon,
+    ProfileIcon
+} from '@justeat/f-vue-icons';
 import sharedServices from '@justeat/f-services';
 import axios from 'axios';
 
 export default {
     components: {
-        ProfileIcon,
-        DeliveryIcon
+        DeliveryIcon,
+        OfferIcon,
+        ProfileIcon
     },
 
     props: {
@@ -214,6 +251,16 @@ export default {
         },
 
         showDeliveryEnquiry: {
+            type: Boolean,
+            default: false
+        },
+
+        offersCopy: {
+            type: Object,
+            default: () => ({})
+        },
+
+        showOffersLink: {
             type: Boolean,
             default: false
         },
@@ -260,12 +307,24 @@ export default {
 
     computed: {
         isBelowMid () {
-            return this.currentScreenWidth <= 767;
+            return this.currentScreenWidth < 768;
+        },
+
+        currentPath () {
+            return this.$route.path;
+        },
+
+        isHomepage () {
+            return this.currentPath === '/';
+        },
+
+        showOffers () {
+            return this.showOffersLink && this.isHomepage;
         },
 
         returnUrl () {
             if (this.$route) {
-                return encodeURIComponent(this.$route.path);
+                return encodeURIComponent(this.currentPath);
             }
             if (typeof document !== 'undefined') {
                 return encodeURIComponent(document.location.pathname);
@@ -409,7 +468,8 @@ export default {
 </script>
 
 <style lang="scss">
-
+// TODO - Pull in fozzie utilities css instead
+// https://github.com/justeat/fozzie/blob/f7f0184ba3a244c19d6e83c44c35a31b7c2dd2d9/src/scss/trumps/_utilities.scss
 // Hide from both screenreaders and browsers: h5bp.com/u
 .is-hidden,
 .no-js .is-hidden--noJS {
@@ -421,6 +481,18 @@ export default {
 .no-js .is-shown--noJS {
     display: block !important;
     visibility: visible !important;
+}
+
+// Hide only visually, but have it available for screenreaders: h5bp.com/v
+.is-visuallyHidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
 }
 
 /**
@@ -666,6 +738,22 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
         }
     }
 
+    .c-nav-featureLink {
+        display: block;
+        width: 28px;
+        height: 28px;
+
+        @include media('<mid') {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 28px + 2*spacing(x2);
+            height: 28px + 2*spacing(x2);
+            padding: spacing(x2);
+        }
+
+    }
+
     // Icons, such as the profile icon
     .c-nav-icon {
         float: left;
@@ -685,6 +773,7 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
             }
         }
     }
+
     .c-nav-icon--profile {
         width: 20px;
         height: 22px;
@@ -702,6 +791,23 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
     .c-nav-icon--delivery {
         width: 27px;
         height: 22px;
+    }
+
+    .c-nav-icon--offers {
+        width: 28px;
+        height: 28px;
+
+        & path {
+            fill: $nav-icon-color;
+
+            @include theme(ml) {
+                fill: $nav-icon-color--ml;
+            }
+
+            .c-header--transparent & {
+                fill: $nav-icon-color--transparent;
+            }
+        }
     }
 
 // Nav Popover list
