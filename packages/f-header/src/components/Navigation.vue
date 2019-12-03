@@ -29,6 +29,7 @@
 
         <a
             v-if="showOffers && isBelowMid"
+            data-js-test="offers-link-mobile"
             :data-trak='`{
                 "trakEvent": "click",
                 "category": "engagement",
@@ -50,6 +51,7 @@
                     v-if="showOffers && !isBelowMid"
                     class="c-nav-list-item">
                     <a
+                        data-js-test="offers-link-desktop"
                         :data-trak='`{
                             "trakEvent": "click",
                             "category": "engagement",

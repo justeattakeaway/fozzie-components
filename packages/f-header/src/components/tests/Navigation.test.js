@@ -19,20 +19,24 @@ const defaultPropsData = {
     openMenuText: 'Open menu',
     deliveryEnquiry: {},
     showDeliveryEnquiry: false,
-    isOrderCountSupported: true
+    isOrderCountSupported: true,
+    offersCopy: {},
+    showOffersLink: false
 };
 const defaultData = {
     userInfo: {
         isAuthenticated: false,
         friendlyName: 'James Fisher',
         email: 'j.fisher@fakemail.com'
-
     },
     navIsOpen: false,
     localOrderCountExpires: false
 };
-const width = 767;
-const height = 768;
+
+const desktopWidth = 1200;
+const desktopHeight = 1024;
+const mobileWidth = 375;
+const mobileHeight = 667;
 
 const resizeWindow = (x, y) => {
     window.innerWidth = x;
@@ -41,6 +45,10 @@ const resizeWindow = (x, y) => {
 };
 
 describe('Navigation', () => {
+    beforeEach(() => {
+        resizeWindow(desktopWidth, desktopHeight);
+    });
+
     it('should be defined', () => {
         const propsData = defaultPropsData;
         const wrapper = shallowMount(Navigation, { propsData });
@@ -170,7 +178,7 @@ describe('Navigation', () => {
         };
 
         // Act
-        resizeWindow(width, height);
+        resizeWindow(mobileWidth, mobileHeight);
         const wrapper = shallowMount(Navigation, { propsData });
         wrapper.vm.data = {
             ...defaultData,
@@ -190,7 +198,7 @@ describe('Navigation', () => {
         const propsData = defaultPropsData;
 
         // Act
-        resizeWindow(width, height);
+        resizeWindow(mobileWidth, mobileHeight);
         const wrapper = shallowMount(Navigation, { propsData });
         wrapper.vm.data = {
             ...defaultData,
@@ -203,6 +211,207 @@ describe('Navigation', () => {
 
         // Assert
         expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).not.toContain('is-open');
+    });
+
+    describe('offers', () => {
+        it('showOffersLink prop should be passed through', () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                showOffersLink: true
+            };
+
+            // Act
+            const wrapper = shallowMount(Navigation, {
+                propsData,
+                mocks: {
+                    $route: {
+                        path: '/'
+                    }
+                }
+            });
+
+            // Assert
+            expect(wrapper.vm.showOffersLink).toBe(true);
+        });
+
+        it('should show offers link on desktop when "showOffersLink" is true', () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                showOffersLink: true
+            };
+
+            // Act
+            const wrapper = shallowMount(Navigation, {
+                propsData,
+                mocks: {
+                    $route: {
+                        path: '/'
+                    }
+                }
+            });
+
+            // Assert
+            expect(wrapper.find('[data-js-test="offers-link-desktop"]').exists()).toBe(true);
+        });
+
+        it('should NOT show offers link on desktop when "showOffersLink" is false', () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                showOffersLink: false
+            };
+
+            // Act
+            const wrapper = shallowMount(Navigation, {
+                propsData,
+                mocks: {
+                    $route: {
+                        path: '/'
+                    }
+                }
+            });
+
+            // Assert
+            expect(wrapper.find('[data-js-test="offers-link-desktop"]').exists()).toBe(false);
+        });
+
+        it('should show offers link on mobile when "showOffersLink" is true', () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                showOffersLink: true
+            };
+            resizeWindow(mobileWidth, mobileHeight);
+
+            // Act
+            const wrapper = shallowMount(Navigation, {
+                propsData,
+                mocks: {
+                    $route: {
+                        path: '/'
+                    }
+                }
+            });
+
+            // Assert
+            expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(true);
+        });
+
+        it('should NOT show offers link on mobile when "showOffersLink" is false', () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                showOffersLink: false
+            };
+            resizeWindow(mobileWidth, mobileHeight);
+
+            // Act
+            const wrapper = shallowMount(Navigation, {
+                propsData,
+                mocks: {
+                    $route: {
+                        path: '/'
+                    }
+                }
+            });
+
+            // Assert
+            expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(false);
+        });
+
+        it('should show offers link on mobile with open nav when "showOffersLink" is true', () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                showOffersLink: true
+            };
+            resizeWindow(mobileWidth, mobileHeight);
+
+            // Act
+            const wrapper = shallowMount(Navigation, {
+                propsData,
+                mocks: {
+                    $route: {
+                        path: '/'
+                    }
+                }
+            });
+            wrapper.vm.data = {
+                ...defaultData,
+                navIsOpen: true
+            };
+
+            // Assert
+            expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(true);
+        });
+
+        it('should NOT show offers link on mobile with open nav when "showOffersLink" is false', () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                showOffersLink: false
+            };
+            resizeWindow(mobileWidth, mobileHeight);
+
+            // Act
+            const wrapper = shallowMount(Navigation, {
+                propsData,
+                mocks: {
+                    $route: {
+                        path: '/'
+                    }
+                }
+            });
+            wrapper.vm.data = {
+                ...defaultData,
+                navIsOpen: true
+            };
+
+            // Assert
+            expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(false);
+        });
+    });
+
+    it('isHomepage is true on the homepage', () => {
+        const propsData = {
+            ...defaultPropsData,
+            showOffersLink: false
+        };
+
+        // Act
+        const wrapper = shallowMount(Navigation, {
+            propsData,
+            mocks: {
+                $route: {
+                    path: '/'
+                }
+            }
+        });
+
+        // Assert
+        expect(wrapper.vm.isHomepage).toBe(true);
+    });
+
+    it('isHomepage is false when on another page', () => {
+        const propsData = {
+            ...defaultPropsData,
+            showOffersLink: false
+        };
+
+        // Act
+        const wrapper = shallowMount(Navigation, {
+            propsData,
+            mocks: {
+                $route: {
+                    path: '/offers'
+                }
+            }
+        });
+
+        // Assert
+        expect(wrapper.vm.isHomepage).toBe(false);
     });
 
     describe('isOrderCountOutOfDate', () => {
