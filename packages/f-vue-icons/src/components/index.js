@@ -1,3 +1,4 @@
+import AlcoholAgeIcon from './AlcoholAgeIcon';
 import AlertIcon from './AlertIcon';
 import AppStoreIcon from './AppStoreIcon';
 import BaseProviderIcon from './BaseProviderIcon';
@@ -23,6 +24,7 @@ import VegetarianIcon from './VegetarianIcon';
 import WarningIcon from './WarningIcon';
 
 export {
+    AlcoholAgeIcon,
     AlertIcon,
     AppStoreIcon,
     BaseProviderIcon,
