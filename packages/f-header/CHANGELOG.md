@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.0.0-beta.32
 ------------------------------
-*December 2, 2019*
+*December 3, 2019*
 
 ### Added
 - Link to offers page
