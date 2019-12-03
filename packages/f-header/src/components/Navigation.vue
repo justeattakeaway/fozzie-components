@@ -507,6 +507,9 @@ $nav-icon-color                    : $blue;
 $nav-icon-color--transparent       : $white;
 $nav-transition-duration           : 250ms;
 
+$nav-featureLinkIcon-width         : 28px;
+$nav-featureLinkIcon-height        : 28px;
+
 $nav-trigger-length                : 56px;
 $nav-trigger-focus-color           : $blue;
 $nav-trigger-focus-bg              : $blue--offWhite;
@@ -733,15 +736,15 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
 
     .c-nav-featureLink {
         display: block;
-        width: 28px;
-        height: 28px;
+        width: $nav-featureLinkIcon-width;
+        height: $nav-featureLinkIcon-height;
 
         @include media('<mid') {
             position: absolute;
             top: 0;
             right: 0;
-            width: 28px + 2*spacing(x2);
-            height: 28px + 2*spacing(x2);
+            width: spacing(x2) + $nav-featureLinkIcon-width + spacing(x2); // includes padding on both sides
+            height: spacing(x2) + $nav-featureLinkIcon-height + spacing(x2);
             padding: spacing(x2);
         }
 
@@ -787,8 +790,8 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
     }
 
     .c-nav-icon--offers {
-        width: 28px;
-        height: 28px;
+        width: $nav-featureLinkIcon-width;
+        height: $nav-featureLinkIcon-height;
 
         & path {
             fill: $nav-icon-color;
