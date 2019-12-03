@@ -170,51 +170,54 @@ describe('Navigation', () => {
         expect(wrapper.find('[data-js-test="login"]').exists()).toBe(true);
     });
 
-    it('should show nav links on mobile when is "navIsOpen" is true', () => {
-        // Arrange
-        const propsData = {
-            ...defaultPropsData,
-            navLinks: {}
-        };
+    describe('nav links', () => {
+        it('should be shown on mobile when is "navIsOpen" is true', () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                navLinks: {}
+            };
 
-        // Act
-        resizeWindow(mobileWidth, mobileHeight);
-        const wrapper = shallowMount(Navigation, { propsData });
-        wrapper.vm.data = {
-            ...defaultData,
-            userInfo: {
-                isAuthenticated: true
-            },
-            navIsOpen: true
-        };
-        wrapper.vm.openNav();
+            // Act
+            resizeWindow(mobileWidth, mobileHeight);
+            const wrapper = shallowMount(Navigation, { propsData });
+            wrapper.vm.data = {
+                ...defaultData,
+                userInfo: {
+                    isAuthenticated: true
+                },
+                navIsOpen: true
+            };
+            wrapper.vm.openNav();
 
-        // Assert
-        expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).toContain('is-open');
+            // Assert
+            expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).toContain('is-open');
+        });
+
+        it('should not be shown on mobile when "navIsOpen" is false', () => {
+            // Arrange
+            const propsData = defaultPropsData;
+
+            // Act
+            resizeWindow(mobileWidth, mobileHeight);
+            const wrapper = shallowMount(Navigation, { propsData });
+            wrapper.vm.data = {
+                ...defaultData,
+                userInfo: {
+                    isAuthenticated: true
+                },
+                navIsOpen: true
+            };
+            wrapper.vm.closeNav();
+
+            // Assert
+            expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).not.toContain('is-open');
+        });
     });
 
-    it('should NOT show nav links on mobile when "navIsOpen" is false', () => {
-        // Arrange
-        const propsData = defaultPropsData;
 
-        // Act
-        resizeWindow(mobileWidth, mobileHeight);
-        const wrapper = shallowMount(Navigation, { propsData });
-        wrapper.vm.data = {
-            ...defaultData,
-            userInfo: {
-                isAuthenticated: true
-            },
-            navIsOpen: true
-        };
-        wrapper.vm.closeNav();
-
-        // Assert
-        expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).not.toContain('is-open');
-    });
-
-    describe('offers', () => {
-        it('showOffersLink prop should be passed through', () => {
+    describe('offers link', () => {
+        it('prop flag should be passed through', () => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
@@ -224,18 +227,14 @@ describe('Navigation', () => {
             // Act
             const wrapper = shallowMount(Navigation, {
                 propsData,
-                mocks: {
-                    $route: {
-                        path: '/'
-                    }
-                }
+                mocks: { $route: { path: '/' } }
             });
 
             // Assert
             expect(wrapper.vm.showOffersLink).toBe(true);
         });
 
-        it('should show offers link on desktop when "showOffersLink" is true', () => {
+        it('should be shown on desktop when "showOffersLink" is true', () => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
@@ -245,18 +244,14 @@ describe('Navigation', () => {
             // Act
             const wrapper = shallowMount(Navigation, {
                 propsData,
-                mocks: {
-                    $route: {
-                        path: '/'
-                    }
-                }
+                mocks: { $route: { path: '/' } }
             });
 
             // Assert
             expect(wrapper.find('[data-js-test="offers-link-desktop"]').exists()).toBe(true);
         });
 
-        it('should NOT show offers link on desktop when "showOffersLink" is false', () => {
+        it('should not be shown on desktop when "showOffersLink" is false', () => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
@@ -266,18 +261,14 @@ describe('Navigation', () => {
             // Act
             const wrapper = shallowMount(Navigation, {
                 propsData,
-                mocks: {
-                    $route: {
-                        path: '/'
-                    }
-                }
+                mocks: { $route: { path: '/' } }
             });
 
             // Assert
             expect(wrapper.find('[data-js-test="offers-link-desktop"]').exists()).toBe(false);
         });
 
-        it('should show offers link on mobile when "showOffersLink" is true', () => {
+        it('should be shown on mobile when "showOffersLink" is true', () => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
@@ -288,18 +279,14 @@ describe('Navigation', () => {
             // Act
             const wrapper = shallowMount(Navigation, {
                 propsData,
-                mocks: {
-                    $route: {
-                        path: '/'
-                    }
-                }
+                mocks: { $route: { path: '/' } }
             });
 
             // Assert
             expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(true);
         });
 
-        it('should NOT show offers link on mobile when "showOffersLink" is false', () => {
+        it('should not be shown on mobile when "showOffersLink" is false', () => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
@@ -310,18 +297,14 @@ describe('Navigation', () => {
             // Act
             const wrapper = shallowMount(Navigation, {
                 propsData,
-                mocks: {
-                    $route: {
-                        path: '/'
-                    }
-                }
+                mocks: { $route: { path: '/' } }
             });
 
             // Assert
             expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(false);
         });
 
-        it('should show offers link on mobile with open nav when "showOffersLink" is true', () => {
+        it('should be shown on mobile with open nav when "showOffersLink" is true', () => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
@@ -332,11 +315,7 @@ describe('Navigation', () => {
             // Act
             const wrapper = shallowMount(Navigation, {
                 propsData,
-                mocks: {
-                    $route: {
-                        path: '/'
-                    }
-                }
+                mocks: { $route: { path: '/' } }
             });
             wrapper.vm.data = {
                 ...defaultData,
@@ -347,7 +326,7 @@ describe('Navigation', () => {
             expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(true);
         });
 
-        it('should NOT show offers link on mobile with open nav when "showOffersLink" is false', () => {
+        it('should not be shown on mobile with open nav when "showOffersLink" is false', () => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
@@ -358,11 +337,7 @@ describe('Navigation', () => {
             // Act
             const wrapper = shallowMount(Navigation, {
                 propsData,
-                mocks: {
-                    $route: {
-                        path: '/'
-                    }
-                }
+                mocks: { $route: { path: '/' } }
             });
             wrapper.vm.data = {
                 ...defaultData,
@@ -383,11 +358,7 @@ describe('Navigation', () => {
         // Act
         const wrapper = shallowMount(Navigation, {
             propsData,
-            mocks: {
-                $route: {
-                    path: '/'
-                }
-            }
+            mocks: { $route: { path: '/' } }
         });
 
         // Assert
@@ -403,11 +374,7 @@ describe('Navigation', () => {
         // Act
         const wrapper = shallowMount(Navigation, {
             propsData,
-            mocks: {
-                $route: {
-                    path: '/offers'
-                }
-            }
+            mocks: { $route: { path: '/' } }
         });
 
         // Assert
