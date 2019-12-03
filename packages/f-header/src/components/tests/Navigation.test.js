@@ -225,10 +225,7 @@ describe('Navigation', () => {
             };
 
             // Act
-            const wrapper = shallowMount(Navigation, {
-                propsData,
-                mocks: { $route: { path: '/' } }
-            });
+            const wrapper = shallowMount(Navigation, { propsData });
 
             // Assert
             expect(wrapper.vm.showOffersLink).toBe(true);
@@ -242,10 +239,7 @@ describe('Navigation', () => {
             };
 
             // Act
-            const wrapper = shallowMount(Navigation, {
-                propsData,
-                mocks: { $route: { path: '/' } }
-            });
+            const wrapper = shallowMount(Navigation, { propsData });
 
             // Assert
             expect(wrapper.find('[data-js-test="offers-link-desktop"]').exists()).toBe(true);
@@ -259,10 +253,7 @@ describe('Navigation', () => {
             };
 
             // Act
-            const wrapper = shallowMount(Navigation, {
-                propsData,
-                mocks: { $route: { path: '/' } }
-            });
+            const wrapper = shallowMount(Navigation, { propsData });
 
             // Assert
             expect(wrapper.find('[data-js-test="offers-link-desktop"]').exists()).toBe(false);
@@ -277,10 +268,7 @@ describe('Navigation', () => {
             resizeWindow(mobileWidth, mobileHeight);
 
             // Act
-            const wrapper = shallowMount(Navigation, {
-                propsData,
-                mocks: { $route: { path: '/' } }
-            });
+            const wrapper = shallowMount(Navigation, { propsData });
 
             // Assert
             expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(true);
@@ -295,10 +283,7 @@ describe('Navigation', () => {
             resizeWindow(mobileWidth, mobileHeight);
 
             // Act
-            const wrapper = shallowMount(Navigation, {
-                propsData,
-                mocks: { $route: { path: '/' } }
-            });
+            const wrapper = shallowMount(Navigation, { propsData });
 
             // Assert
             expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(false);
@@ -313,10 +298,7 @@ describe('Navigation', () => {
             resizeWindow(mobileWidth, mobileHeight);
 
             // Act
-            const wrapper = shallowMount(Navigation, {
-                propsData,
-                mocks: { $route: { path: '/' } }
-            });
+            const wrapper = shallowMount(Navigation, { propsData });
             wrapper.vm.data = {
                 ...defaultData,
                 navIsOpen: true
@@ -335,10 +317,7 @@ describe('Navigation', () => {
             resizeWindow(mobileWidth, mobileHeight);
 
             // Act
-            const wrapper = shallowMount(Navigation, {
-                propsData,
-                mocks: { $route: { path: '/' } }
-            });
+            const wrapper = shallowMount(Navigation, { propsData });
             wrapper.vm.data = {
                 ...defaultData,
                 navIsOpen: true
@@ -347,38 +326,6 @@ describe('Navigation', () => {
             // Assert
             expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(false);
         });
-    });
-
-    it('isHomepage is true on the homepage', () => {
-        const propsData = {
-            ...defaultPropsData,
-            showOffersLink: false
-        };
-
-        // Act
-        const wrapper = shallowMount(Navigation, {
-            propsData,
-            mocks: { $route: { path: '/' } }
-        });
-
-        // Assert
-        expect(wrapper.vm.isHomepage).toBe(true);
-    });
-
-    it('isHomepage is false when on another page', () => {
-        const propsData = {
-            ...defaultPropsData,
-            showOffersLink: false
-        };
-
-        // Act
-        const wrapper = shallowMount(Navigation, {
-            propsData,
-            mocks: { $route: { path: '/' } }
-        });
-
-        // Assert
-        expect(wrapper.vm.isHomepage).toBe(false);
     });
 
     describe('isOrderCountOutOfDate', () => {

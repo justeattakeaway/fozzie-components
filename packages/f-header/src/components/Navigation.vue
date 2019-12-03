@@ -28,7 +28,7 @@
         </label>
 
         <a
-            v-if="showOffers && isBelowMid"
+            v-if="showOffersLink && isBelowMid"
             data-js-test="offers-link-mobile"
             :data-trak='`{
                 "trakEvent": "click",
@@ -48,7 +48,7 @@
             :class="['c-nav-container', { 'is-visible': navIsOpen }]">
             <ul class="c-nav-list">
                 <li
-                    v-if="showOffers && !isBelowMid"
+                    v-if="showOffersLink && !isBelowMid"
                     class="c-nav-list-item">
                     <a
                         data-js-test="offers-link-desktop"
@@ -312,21 +312,9 @@ export default {
             return this.currentScreenWidth < 768;
         },
 
-        currentPath () {
-            return this.$route.path;
-        },
-
-        isHomepage () {
-            return this.currentPath === '/';
-        },
-
-        showOffers () {
-            return this.showOffersLink && this.isHomepage;
-        },
-
         returnUrl () {
             if (this.$route) {
-                return encodeURIComponent(this.currentPath);
+                return encodeURIComponent(this.$route.path);
             }
             if (typeof document !== 'undefined') {
                 return encodeURIComponent(document.location.pathname);
