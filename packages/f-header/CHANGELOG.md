@@ -15,7 +15,7 @@ v2.0.0-beta.32
 
 v2.0.0-beta.31
 ------------------------------
-*November 29, 2019*
+*December 3, 2019*
 
 ### Fixed
 - DOM inconsistency caused by SSR issue when trying to calculate screen width on server
