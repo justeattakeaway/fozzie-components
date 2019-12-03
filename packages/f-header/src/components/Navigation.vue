@@ -337,8 +337,11 @@ export default {
         handleMobileNavState () {
             if (this.isBelowMid) {
                 this.$emit('onMobileNavToggle', this.navIsOpen);
-                document.documentElement.classList.toggle('is-navInView', this.navIsOpen);
-                document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.isTransparent);
+
+                if (typeof document !== 'undefined') {
+                    document.documentElement.classList.toggle('is-navInView', this.navIsOpen);
+                    document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.isTransparent);
+                }
             }
         },
 

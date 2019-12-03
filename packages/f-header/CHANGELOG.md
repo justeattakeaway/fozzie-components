@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.0.0-beta.31
 ------------------------------
-*November 29, 2019*
+*December 3, 2019*
 
 ### Fixed
 - DOM inconsistency caused by SSR issue when trying to calculate screen width on server
