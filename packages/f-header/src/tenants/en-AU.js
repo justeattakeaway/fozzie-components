@@ -45,5 +45,10 @@ export default {
         text: 'Log out',
         url: '/account/logout',
         gtm: 'click_logout'
+    },
+    offers: {
+        text: 'Offers',
+        url: '/offers',
+        gtm: 'click_offers_inbox'
     }
 };

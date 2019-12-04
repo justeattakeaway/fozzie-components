@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.32
+------------------------------
+*December 3, 2019*
+
+### Added
+- Link to offers page
+- Translations for Offers page link
+
+
 v2.0.0-beta.31
 ------------------------------
 *December 3, 2019*
