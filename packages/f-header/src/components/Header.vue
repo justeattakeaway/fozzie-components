@@ -19,6 +19,8 @@
                 :open-menu-text="copy.openMenuText"
                 :delivery-enquiry="copy.deliveryEnquiry"
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
+                :offers-copy="copy.offers"
+                :show-offers-link="showOffersLink"
                 :error-log="errorLog"
                 :user-info-prop="userInfoProp"
                 :user-info-url="userInfoUrl"
@@ -56,6 +58,11 @@ export default {
         },
 
         showDeliveryEnquiry: {
+            type: Boolean,
+            default: false
+        },
+
+        showOffersLink: {
             type: Boolean,
             default: false
         },
@@ -189,14 +196,14 @@ export default {
         position: relative;
         min-height: $header-height--narrow;
 
+        @include media('<wide') {
+            padding-left: #{$layout-margin--mid}px;
+            padding-right: #{$layout-margin--mid}px;
+        }
+
         @include media('>=mid') {
             display: flex;
             min-height: $header-height;
-        }
-
-        @include media('<mid') {
-            padding-left: #{$layout-margin--mid}px;
-            padding-right: #{$layout-margin--mid}px;
         }
 
         @include media('<narrow') {
