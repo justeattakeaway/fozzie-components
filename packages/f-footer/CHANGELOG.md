@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.33
+------------------------------
+*December 30, 2019*
+
+### Fixed
+- Only load accordions collapsed in mobile
+- Set `panelCollapsed` depending on device
+- Collapse panels when going from > to < mid.
+
+
 v2.0.0-beta.32
 ------------------------------
 *December 16, 2019*
