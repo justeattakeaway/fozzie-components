@@ -92,6 +92,10 @@ export default {
     mounted () {
         this.currentScreenWidth = sharedServices.getWindowWidth();
         sharedServices.addEvent('resize', this.onResize, 100);
+
+        if (!this.isBelowWide) {
+            this.panelCollapsed = false;
+        }
     },
 
     destroyed () {
@@ -107,6 +111,10 @@ export default {
 
         onResize () {
             this.currentScreenWidth = sharedServices.getWindowWidth();
+
+            if (this.isBelowWide) {
+                this.panelCollapsed = true;
+            }
         }
     }
 };
