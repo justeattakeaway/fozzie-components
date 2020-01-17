@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.33
+------------------------------
+*January 16, 2020*
+
+### Added
+- `data-gtm` attributes for the Offers inbox icons
+
+### Removed
+- `data-trak` attributes for the Offers inbox icons
+- Now-defunct copy
+
+
 v2.0.0-beta.32
 ------------------------------
 *December 3, 2019*
