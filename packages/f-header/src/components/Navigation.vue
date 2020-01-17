@@ -30,12 +30,7 @@
         <a
             v-if="showOffersLink && isBelowMid"
             data-js-test="offers-link-mobile"
-            :data-trak='`{
-                "trakEvent": "click",
-                "category": "engagement",
-                "action": "header",
-                "label": "${offersCopy.gtm}"
-            }`'
+            data-gtm="header|click - navigation|offers_icon"
             :href="offersCopy.url"
             class="c-nav-featureLink">
             <offer-icon class="c-nav-icon c-nav-icon--offers" />
@@ -52,12 +47,7 @@
                     class="c-nav-list-item">
                     <a
                         data-js-test="offers-link-desktop"
-                        :data-trak='`{
-                            "trakEvent": "click",
-                            "category": "engagement",
-                            "action": "header",
-                            "label": "${offersCopy.gtm}"
-                        }`'
+                        data-gtm="header|click - navigation|offers"
                         :href="offersCopy.url"
                         class="c-nav-list-link">
                         <offer-icon class="c-nav-icon c-nav-icon--offers" />
