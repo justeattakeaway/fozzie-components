@@ -58,7 +58,6 @@ export default {
     },
     offers: {
         text: '%OFFERS%',
-        url: '/offers',
-        gtm: 'click_offers_inbox'
+        url: '/offers'
     }
 };
