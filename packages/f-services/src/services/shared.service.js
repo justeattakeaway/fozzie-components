@@ -22,7 +22,10 @@ const DEFAULT_LOCALE = 'en-GB';
  * @param [globalTenant.locale] {string} of the global localization locale.
  * @returns {string}
  */
-const getLocale = (tenantConfigs, tenantString, globalTenant) => tenantConfigs[tenantString || globalTenant?.locale] || DEFAULT_LOCALE;
+const getLocale = (tenantConfigs, tenantString, globalTenant) => {
+    const locale = tenantString || globalTenant?.locale;
+    return tenantConfigs[locale] ? locale : DEFAULT_LOCALE;
+};
 
 /**
  * Returns the theme from the given locale
