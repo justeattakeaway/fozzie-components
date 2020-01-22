@@ -67,6 +67,7 @@ const getWindowHeight = () => root.innerHeight;
  * @param [throttleTime] {number} for setting the throttle time and toggling throttle off.
  * @param eventName {string} for setting the name of the event listened to.
  * @param callBackFunction {function} for running when the event is listened to.
+ * @returns {void}
  */
 const addEvent = (eventName, callBackFunction, throttleTime) => {
     const callback =
@@ -83,6 +84,7 @@ const addEvent = (eventName, callBackFunction, throttleTime) => {
  * @requires root.removeEventListener {function} for removing the event listener.
  * @param eventName {string} for setting the name of the event listened to.
  * @param callBackFunction {function} for running when the event is listened to.
+ * @returns {void}
  */
 const removeEvent = (eventName, callBackFunction) => root.removeEventListener(eventName, callBackFunction);
 
