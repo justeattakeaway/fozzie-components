@@ -120,7 +120,7 @@ describe('sharedServices', () => {
             resizeWindow(windowWidth, windowHeight);
 
             // Act
-            const result = window.innerWidth;
+            const result = sharedServices.getWindowWidth();
 
             // Assert
             expect(result).toBe(667);
@@ -133,7 +133,7 @@ describe('sharedServices', () => {
             resizeWindow(windowWidth, windowHeight);
 
             // Act
-            const result = window.innerHeight;
+            const result = sharedServices.getWindowHeight();
 
             // Assert
             expect(result).toBe(375);

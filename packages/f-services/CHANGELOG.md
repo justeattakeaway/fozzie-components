@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+0.13.1
+------------------------------
+*January 22, 2020*
+
+ ### Changed
+- Refactor JSDoc to conform to syntax rules
+- Refactor `getLocale` function to reduce complexity
+- Refactor `addEvent` function to reduce complexity
+
+### Added
+- `DEFAULT_LOCALE` variable for appropriate fallback rules
+
 
 0.13.0
 ------------------------------
