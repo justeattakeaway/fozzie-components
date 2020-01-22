@@ -8,6 +8,12 @@ import root from 'window-or-global';
  */
 
 /**
+ * Default locale value when locale is unavailable.
+ * @type {string}
+ */
+const DEFAULT_LOCALE = 'en-GB';
+
+/**
  * Returns the locale for translation localization
  *
  * @param tenantConfigs {object} of localization strings.
@@ -16,17 +22,7 @@ import root from 'window-or-global';
  * @param [globalTenant.locale] {string} of the global localization locale.
  * @returns {string}
  */
-const getLocale = (tenantConfigs, tenantString, globalTenant) => {
-    let locale = tenantString === '' ? globalTenant?.locale : tenantString;
-
-    // if the locale is either
-    // a) not set
-    // or b) set to a country code that this component does not recognise
-    // it will be set to 'en-GB'
-    if (!tenantConfigs[locale]) locale = 'en-GB';
-
-    return locale;
-};
+const getLocale = (tenantConfigs, tenantString, globalTenant) => tenantConfigs[tenantString || globalTenant?.locale] || DEFAULT_LOCALE;
 
 /**
  * Returns the theme from the given locale
