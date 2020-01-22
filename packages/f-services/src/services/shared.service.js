@@ -47,40 +47,48 @@ const getTheme = locale => {
 /**
  * Returns new window width
  *
- * @returns {float} for window width
+ * @requires root {object} from window-or-global module
+ * @requires root.innerWidth {number} for window width
+ * @returns {number} for window width
  */
 const getWindowWidth = () => root.innerWidth;
 
 /**
  * Returns new window height
  *
- * @returns {float} for window height
+ * @requires root {object} from window-or-global module
+ * @requires root.innerHeight {number} for window width
+ * @returns {number} for window height
  */
 const getWindowHeight = () => root.innerHeight;
 
 /**
  * Applies logic to the chosen event and throttles it if needs be
  *
+ * @requires root {object} from window-or-global module.
+ * @requires root.addEventListener {function} for adding the event listener.
+ * @requires throttle {function} from lodash.throttle.
  * @param [throttleTime] {number} for setting the throttle time and toggling throttle off.
  * @param eventName {string} for setting the name of the event listened to.
  * @param callBackFunction {function} for running when the event is listened to.
  */
 const addEvent = (eventName, callBackFunction, throttleTime) => {
-    if (throttleTime > 0) {
-        return root.addEventListener(eventName, throttle(callBackFunction, throttleTime));
-    }
-    return root.addEventListener(eventName, callBackFunction);
+    const callback =
+        throttleTime > 0
+            ? throttle(callBackFunction, throttleTime)
+            : callBackFunction;
+    return root.addEventListener(eventName, callback);
 };
 
 /**
  * Removes chosen event.
  *
+ * @requires root {object} from window-or-global module.
+ * @requires root.removeEventListener {function} for removing the event listener.
  * @param eventName {string} for setting the name of the event listened to.
  * @param callBackFunction {function} for running when the event is listened to.
  */
-const removeEvent = (eventName, callBackFunction) => {
-    root.removeEventListener(eventName, callBackFunction);
-};
+const removeEvent = (eventName, callBackFunction) => root.removeEventListener(eventName, callBackFunction);
 
 export default {
     getLocale,
