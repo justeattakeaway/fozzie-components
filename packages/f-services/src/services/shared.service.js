@@ -10,9 +10,10 @@ import root from 'window-or-global';
 /**
  * Returns the locale for translation localization
  *
- * @param {tenantConfigs} object of localization strings.
- * @param {tenantString} string of the current locale.
- * @param {globalTenant} object of the global localization strings.
+ * @param tenantConfigs {object} of localization strings.
+ * @param tenantString {string} of the current locale.
+ * @param globalTenant {object} of the global localization strings.
+ * @param [globalTenant.locale] {string} of the global localization locale.
  * @returns {string}
  */
 const getLocale = (tenantConfigs, tenantString, globalTenant) => {
@@ -30,7 +31,7 @@ const getLocale = (tenantConfigs, tenantString, globalTenant) => {
 /**
  * Returns the theme from the given locale
  *
- * @param {locale} string of the current locale.
+ * @param locale {string} of the current locale.
  * @returns {string} for the theme toggle
  */
 const getTheme = locale => {
@@ -60,9 +61,9 @@ const getWindowHeight = () => root.innerHeight;
 /**
  * Applies logic to the chosen event and throttles it if needs be
  *
- * @param {throttleTime} integer for setting the throttle time and toggling throttle off.
- * @param {eventName} integer for setting the name of the event listened to.
- * @param {callBackFunction} function for running when the event is listened to.
+ * @param [throttleTime] {number} for setting the throttle time and toggling throttle off.
+ * @param eventName {string} for setting the name of the event listened to.
+ * @param callBackFunction {function} for running when the event is listened to.
  */
 const addEvent = (eventName, callBackFunction, throttleTime) => {
     if (throttleTime > 0) {
@@ -74,8 +75,8 @@ const addEvent = (eventName, callBackFunction, throttleTime) => {
 /**
  * Removes chosen event.
  *
- * @param {eventName} integer for setting the name of the event listened to.
- * @param {callBackFunction} function for running when the event is listened to.
+ * @param eventName {string} for setting the name of the event listened to.
+ * @param callBackFunction {function} for running when the event is listened to.
  */
 const removeEvent = (eventName, callBackFunction) => {
     root.removeEventListener(eventName, callBackFunction);
