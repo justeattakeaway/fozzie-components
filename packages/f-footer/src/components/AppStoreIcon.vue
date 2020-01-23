@@ -15,6 +15,7 @@ import {
     AppIosItIcon as IosIconItIt,
     AppIosNoIcon as IosIconNbNo
 } from '@justeat/f-vue-icons';
+import iconPropsMixin from '../mixins/iconProps.mixin';
 
 export default {
     components: {
@@ -36,18 +37,9 @@ export default {
         IosIconNbNo
     },
 
-    props: {
-        name: {
-            type: String,
-            required: true
-        },
-
-        locale: {
-            type: String,
-            required: false,
-            default: 'en-GB'
-        }
-    },
+    mixins: [
+        iconPropsMixin
+    ],
 
     computed: {
         iconComponent () {
