@@ -1129,6 +1129,15 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-logger/-/f-logger-0.7.1.tgz#06e728d3c65733cab7c9bbfc813b401fa68ba82b"
   integrity sha512-qi1wDK5ijmQ6nE+2bIv68AuWVxCvogzVoXvHd4D0oZCw4PQmVfw9i25m/fw6AiipL6yxkiIGM4LfBlnm+FncDA==
 
+"@justeat/f-services@0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-0.13.0.tgz#b0fc67948e94800ba176addb9d92cce444d28c8e"
+  integrity sha512-iHfmZho2yvP8Bz2UrE9DYh2yMEf7jzINXkL6mtsM8CuSpJAjP4gVI9oQVMzEku7pOWDz6pZaTZT5mVu6Q6o8BQ==
+  dependencies:
+    "@babel/polyfill" "7.7.0"
+    lodash-es "4.17.15"
+    window-or-global "1.0.1"
+
 "@justeat/f-utils@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-utils/-/f-utils-0.2.0.tgz#b2333b5ddf20b4157af25091e6bc54706358100c"
