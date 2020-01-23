@@ -84,13 +84,11 @@ export default {
     props: {
         locale: {
             type: String,
-            required: false,
             default: ''
         },
 
         showCourierLinks: {
             type: Boolean,
-            required: false,
             default: true
         }
     },
