@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.35
+------------------------------
+*January 23, 2020*
+
+### Added
+- Icon props mixin so that the app store and base providor icon components can share the props.
+- Icon props mixin contains all possible props which can be passed to the icons to prevent stray attributed in the rendered HTML markup.
+
+### Changed
+- Removed `required` from props which already have a default value.
+
+
 v2.0.0-beta.34
 ------------------------------
 *January 10, 2020*

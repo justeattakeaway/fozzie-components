@@ -5,7 +5,7 @@
             [$style['c-iconList--payments']]: isPayments,
             [$style['c-iconList--social']]: isSocial
         }]"
-        data-test-id='footerBrands-column'>
+        data-test-id="footerBrands-column">
         <h2
             v-if="title"
             class="c-footer-heading c-footer-heading--shortBelowWide">
@@ -62,31 +62,26 @@ export default {
 
         title: {
             type: String,
-            required: false,
             default: ''
         },
 
         isApps: {
             type: Boolean,
-            required: false,
             default: false
         },
 
         isPayments: {
             type: Boolean,
-            required: false,
             default: false
         },
 
         isSocial: {
             type: Boolean,
-            required: false,
             default: false
         },
 
         locale: {
             type: String,
-            required: false,
             default: 'en-GB'
         }
     },

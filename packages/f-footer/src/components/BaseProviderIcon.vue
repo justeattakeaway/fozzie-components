@@ -22,6 +22,7 @@ import {
     PaymentVisaIcon as VisaIcon,
     PaymentVisaVerifiedIcon as VisaVerifiedIcon
 } from '@justeat/f-vue-icons';
+import iconPropsMixin from '../mixins/iconProps.mixin';
 
 export default {
     components: {
@@ -43,12 +44,9 @@ export default {
         VisaVerifiedIcon
     },
 
-    props: {
-        name: {
-            type: String,
-            required: true
-        }
-    },
+    mixins: [
+        iconPropsMixin
+    ],
 
     computed: {
         iconType () {
