@@ -3,6 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+1.0.2
+------------------------------
+*January  29, 2020*
+
+### Changed
+- Bumped `appboy-web-sdk` because of a known `contentCard` issue in 2.4.0
+
+### Removed
+- `requestContentCardsRefresh()` unnecessary call.
+
+### Fixed
+- `ContentCard` - Not displaying on initial first load due to appboy `sync`
+calls happening before the sdk is ready to update the
+`ab.storage.cc.[api-key]` in localStorage. Now using `subscribeToContentCardsUpdates` to listen 
+for updates.
+
 1.0.1
 ------------------------------
 *November 18, 2019*
