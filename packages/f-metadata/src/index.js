@@ -26,8 +26,6 @@ const initialiseBraze = (options = {
                                 event: 'appboyReady'
                             });
                         });
-
-                        appboy.requestContentCardsRefresh();
                         
                         appboy.subscribeToContentCardsUpdates(contentCards => {
                             if (contentCards && contentCards.cards.length) {

@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Bumped `appboy-web-sdk` because of a known `contentCard` issue in 2.4.0
 
+### Removed
+- `requestContentCardsRefresh()` unnecessary call.
+
 ### Fixed
 - `ContentCard` - Not displaying on initial first load due to appboy `sync`
 calls happening before the sdk is ready to update the
