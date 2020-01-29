@@ -28,10 +28,12 @@ const initialiseBraze = (options = {
                         });
 
                         appboy.requestContentCardsRefresh();
-                        const contentCards = appboy.getCachedContentCards();
-                        if (contentCards && contentCards.cards.length) {
-                            options.callbacks.handleContentCards(contentCards.cards);
-                        }
+                        
+                        appboy.subscribeToContentCardsUpdates(contentCards => {
+                            if (contentCards && contentCards.cards.length) {
+                                options.callbacks.handleContentCards(contentCards.cards);
+                            }
+                        });
                     }
                 })
                 .catch(error => `An error occurred while loading the component: ${error}`);
