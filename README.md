@@ -14,7 +14,4 @@ If this happens, delete all the `node_modules` folders throughout and then run `
 
 ## Publishing Components
 
-See Fozzie docs for further information on publishing and releasing (`Mono-repo Overview` and `Module maintenance`):
-
-https://fozzie.just-eat.com/documentation/open-source/
-
+See [Fozzie](https://fozzie.just-eat.com/documentation/open-source/) docs for further information on publishing and releasing (`Mono-repo Overview` and `Module maintenance`):
