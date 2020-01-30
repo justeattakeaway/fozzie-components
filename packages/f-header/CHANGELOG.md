@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.35
+------------------------------
+*Feb 3, 2020*
+
+### Changed
+- Saved cards' URL to avoid an unnecessary redirect.
+
+
 v2.0.0-beta.34
 ------------------------------
 *January 17, 2020*
