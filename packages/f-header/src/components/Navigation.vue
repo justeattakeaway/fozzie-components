@@ -350,12 +350,15 @@ export default {
         }
     },
 
+    created () {
+        this.onResize();
+    },
+
     mounted () {
         if (!this.userInfo) {
             this.fetchUserInfo();
         }
         sharedServices.addEvent('resize', this.onResize, 100);
-        this.onResize();
     },
 
     destroyed () {
