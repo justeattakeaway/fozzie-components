@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0-beta.36
+------------------------------
+*February 4, 2020*
+
+### Changed
+- Default to open state for footer, and then collapse for mobile on mounted. This means the footer links will still be shown if Javascript fails or is disabled.
+
+
 v2.0.0-beta.35
 ------------------------------
 *January 23, 2020*

@@ -70,7 +70,7 @@ export default {
 
     data () {
         return {
-            panelCollapsed: true,
+            panelCollapsed: false,
             currentScreenWidth: 0
         };
     },
@@ -93,8 +93,8 @@ export default {
         this.currentScreenWidth = sharedServices.getWindowWidth();
         sharedServices.addEvent('resize', this.onResize, 100);
 
-        if (!this.isBelowWide) {
-            this.panelCollapsed = false;
+        if (this.isBelowWide) {
+            this.panelCollapsed = true;
         }
     },
 
