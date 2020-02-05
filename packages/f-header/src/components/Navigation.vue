@@ -355,6 +355,8 @@ export default {
             this.fetchUserInfo();
         }
         sharedServices.addEvent('resize', this.onResize, 100);
+
+        this.onResize();
     },
 
     destroyed () {
