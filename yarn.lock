@@ -2621,9 +2621,10 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
-appboy-web-sdk@2.3.4:
-  version "2.3.4"
-  resolved "https://registry.yarnpkg.com/appboy-web-sdk/-/appboy-web-sdk-2.3.4.tgz#a7dceed96168118168e3780d3ddd0176e46fe924"
+appboy-web-sdk@2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/appboy-web-sdk/-/appboy-web-sdk-2.4.1.tgz#cdfa4074b83a4ea011f52d16b1d04dcad7f57eb8"
+  integrity sha512-xwNXrsSkENRnfq2IOkWcc7ODfxnxDHQ+Flxwf50+D5rggBSIs9e4rA29+7lJ/eEhgfIPFPux9FCt2HedMsJuzg==
 
 append-transform@^0.4.0:
   version "0.4.0"

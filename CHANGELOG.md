@@ -3,12 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v1.2.1
+v1.3.0
 ------------------------------
-*January 30, 2019*
+*February 5, 2020*
 
 ### Added
-- Link to Fozzie docs.
+- CircleCI base config for PR checks. Config currently will run unit tests across all `fozzie-components` packages
+
+
+v1.2.1
+------------------------------
+*January 30, 2020*
+
+### Added
+- Link to Fozzie docs
+
 
 v1.2.0
 ------------------------------
