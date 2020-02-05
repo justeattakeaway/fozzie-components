@@ -28,7 +28,7 @@
         </label>
 
         <a
-            v-if="showOffersLink && isBelowMid"
+            v-if="showOffersLink"
             data-js-test="offers-link-mobile"
             data-trak='{
                 "trakEvent": "click",
@@ -37,7 +37,7 @@
                 "label": "offers_icon"
             }'
             :href="offersCopy.url"
-            class="c-nav-featureLink">
+            class="c-nav-featureLink u-showBelowMid">
             <offer-icon class="c-nav-icon c-nav-icon--offers" />
             <span class="is-visuallyHidden">
                 {{ offersCopy.text }}
@@ -48,7 +48,7 @@
             :class="['c-nav-container', { 'is-visible': navIsOpen }]">
             <ul class="c-nav-list">
                 <li
-                    v-if="showOffersLink && !isBelowMid"
+                    v-if="showOffersLink"
                     class="c-nav-list-item">
                     <a
                         data-js-test="offers-link-desktop"
@@ -59,7 +59,7 @@
                             "label": "offers"
                         }'
                         :href="offersCopy.url"
-                        class="c-nav-list-link">
+                        class="c-nav-list-link u-showAboveMid">
                         <offer-icon class="c-nav-icon c-nav-icon--offers" />
                         {{ offersCopy.text }}
                     </a>
@@ -350,15 +350,13 @@ export default {
         }
     },
 
-    created () {
-        this.onResize();
-    },
-
     mounted () {
         if (!this.userInfo) {
             this.fetchUserInfo();
         }
         sharedServices.addEvent('resize', this.onResize, 100);
+
+        this.onResize();
     },
 
     destroyed () {
