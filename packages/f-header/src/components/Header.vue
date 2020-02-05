@@ -1,16 +1,19 @@
 <template>
     <header
         :data-theme="theme"
-        :class="['c-header', { 'c-header--transparent c-header--gradient': showTransparentHeader }]">
+        :class="['c-header', {
+            'c-header--brandColour': showBrandColourHeader,
+            'c-header--transparent c-header--gradient': showTransparentHeader
+        }]">
         <skip-to-main
             :text="copy.skipToMainContentText"
             :transparent-bg="showTransparentHeader" />
         <div class="c-header-container">
             <logo
                 :theme="theme"
-                :is-transparent="showTransparentHeader"
                 :company-name="copy.companyName"
-                :logo-gtm-label="copy.logo.gtm" />
+                :logo-gtm-label="copy.logo.gtm"
+                :header-background-theme="headerBackgroundTheme" />
             <navigation
                 :nav-links="copy.navLinks"
                 :help="copy.help"
@@ -26,7 +29,7 @@
                 :user-info-url="userInfoUrl"
                 :order-count-url="orderCountUrl"
                 :is-order-count-supported="isOrderCountSupported"
-                :is-transparent="isTransparent"
+                :header-background-theme="headerBackgroundTheme"
                 @onMobileNavToggle="mobileNavToggled" />
         </div>
     </header>
@@ -50,11 +53,6 @@ export default {
         locale: {
             type: String,
             default: ''
-        },
-
-        isTransparent: {
-            type: Boolean,
-            default: false
         },
 
         showDeliveryEnquiry: {
@@ -90,6 +88,11 @@ export default {
         isOrderCountSupported: {
             type: Boolean,
             default: true
+        },
+
+        headerBackgroundTheme: {
+            type: String,
+            default: 'white'
         }
     },
     data () {
@@ -109,7 +112,7 @@ export default {
             return this.copy.deliveryEnquiry && this.showDeliveryEnquiry;
         },
         showTransparentHeader () {
-            return this.isTransparent && !this.mobileNavIsOpen;
+            return headerBackgroundTheme === 'transparent' && !this.mobileNavIsOpen;
         }
     },
     methods: {
@@ -185,6 +188,11 @@ export default {
             left: 0;
             width: 100%;
         }
+    }
+
+    .c-header.c-header--brandColour {
+        background-color: $red;
+        min-height: 88px;
     }
 
     .c-header-container {

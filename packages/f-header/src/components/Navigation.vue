@@ -2,7 +2,8 @@
     <nav class="c-nav c-nav--global">
         <button
             :class="['c-nav-trigger c-nav-toggle is-hidden--noJS', {
-                'is-open': navIsOpen
+                'is-open': navIsOpen,
+                'c-logo--brandColour': showBrandColourHeader
             }]"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
             :aria-label="openMenuText"
@@ -20,7 +21,8 @@
 
         <label
             :class="['c-nav-toggle is-hidden is-shown--noJS', {
-                'is-open': navIsOpen
+                'is-open': navIsOpen,
+                'c-logo--brandColour': showBrandColourHeader
             }]"
             :aria-label="openMenuText"
             for="nav-trigger">
@@ -28,7 +30,7 @@
         </label>
 
         <a
-            v-if="showOffersLink && isBelowMid"
+            v-if="showOffersLink"
             data-js-test="offers-link-mobile"
             data-trak='{
                 "trakEvent": "click",
@@ -37,7 +39,7 @@
                 "label": "offers_icon"
             }'
             :href="offersCopy.url"
-            class="c-nav-featureLink">
+            class="c-nav-featureLink u-showBelowMid">
             <offer-icon class="c-nav-icon c-nav-icon--offers" />
             <span class="is-visuallyHidden">
                 {{ offersCopy.text }}
@@ -48,7 +50,7 @@
             :class="['c-nav-container', { 'is-visible': navIsOpen }]">
             <ul class="c-nav-list">
                 <li
-                    v-if="showOffersLink && !isBelowMid"
+                    v-if="showOffersLink"
                     class="c-nav-list-item">
                     <a
                         data-js-test="offers-link-desktop"
@@ -59,7 +61,7 @@
                             "label": "offers"
                         }'
                         :href="offersCopy.url"
-                        class="c-nav-list-link">
+                        class="c-nav-list-link u-showAboveMid">
                         <offer-icon class="c-nav-icon c-nav-icon--offers" />
                         {{ offersCopy.text }}
                     </a>
@@ -292,9 +294,8 @@ export default {
             default: true
         },
 
-        isTransparent: {
-            type: Boolean,
-            default: false
+        headerBackgroundTheme: {
+            type: String
         }
     },
 
@@ -350,15 +351,13 @@ export default {
         }
     },
 
-    created () {
-        this.onResize();
-    },
-
     mounted () {
         if (!this.userInfo) {
             this.fetchUserInfo();
         }
         sharedServices.addEvent('resize', this.onResize, 100);
+
+        this.onResize();
     },
 
     destroyed () {
@@ -392,7 +391,7 @@ export default {
 
                 if (typeof document !== 'undefined') {
                     document.documentElement.classList.toggle('is-navInView', this.navIsOpen);
-                    document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.isTransparent);
+                    document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.headerBackgroundTheme === 'transparent');
                 }
             }
         },
@@ -959,6 +958,10 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
 
             .c-header--transparent & {
                 background-color: $nav-toggleIcon-color--transparent;
+            }
+
+            .c-logo--brandColour & {
+                background-color: $white;
             }
         }
 
