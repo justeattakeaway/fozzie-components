@@ -7,8 +7,8 @@ v2.0.0-beta.36
 ------------------------------
 *February 5, 2020*
 
-### Changed
-- `resize` method call to `sharedServices` call within created hook. 
+### Removed
+- `created` hook call and replaced show and hide with css helpers.
 
 v2.0.0-beta.35
 ------------------------------
