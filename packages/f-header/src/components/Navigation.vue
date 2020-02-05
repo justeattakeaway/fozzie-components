@@ -351,7 +351,7 @@ export default {
     },
 
     created () {
-        this.onResize();
+        sharedServices.addEvent('resize', this.onResize, 100);
     },
 
     mounted () {
