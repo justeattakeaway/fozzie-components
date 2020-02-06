@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.4.0
+------------------------------
+*February 6, 2020*
+
+### Added
+- DangerJS Checks (via CircleCI)
+- Pull Request Template
+- `CODEOWNERS` file
+
+
 v1.3.0
 ------------------------------
 *February 5, 2020*

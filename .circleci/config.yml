@@ -25,6 +25,11 @@ jobs:
             key: yarn-packages-{{ checksum "yarn.lock" }}
             paths:
                 - ~/.cache/yarn
-        - run: # run tests
+        - run: # Run Tests
             name: Run Unit Tests
             command: yarn test
+        - run: # Run PR Checks
+            name: Run PR Checks
+            command: yarn danger ci
+
+

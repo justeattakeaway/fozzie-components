@@ -27,9 +27,9 @@
     "fozzie"
   ],
   "scripts": {
+    "prepublishOnly": "yarn test && yarn build",
     "build": "yarn lint && rollup --config",
     "lint": "vue-cli-service lint --fix",
-    "prepare": "yarn test && yarn build",
     "test": "vue-cli-service test:unit"
   },
   "browserslist": [
