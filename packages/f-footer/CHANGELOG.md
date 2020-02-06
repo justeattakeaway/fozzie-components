@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0
+------------------------------
+*February 6, 2020*
+
+### Changed
+- Moving `f-footer` Vue component to be `v2.0.0`.
+  If we need to update the old `f-footer` package, those changes can be released on the legacy `v1.x.x` release branch via the [legacy `f-footer` repo](https://github.com/justeat/f-footer).
+
+
 v2.0.0-beta.36
 ------------------------------
 *February 4, 2020*

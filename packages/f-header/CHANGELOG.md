@@ -10,12 +10,22 @@ v2.0.0-beta.36
 ### Removed
 - `created` hook call and replaced show and hide with css helpers.
 
+v2.0.0
+------------------------------
+*February 6, 2020*
+
+### Changed
+- Moving `f-header` Vue component to be `v2.0.0`.
+  If we need to update the old `f-header` package, those changes can be released on the legacy `v1.x.x` release branch via the [legacy `f-header` repo](https://github.com/justeat/f-header).
+
+
 v2.0.0-beta.35
 ------------------------------
 *February 4, 2020*
 
 ### Changed
 - Moved `resize` method to be called within created hook.
+
 
 v2.0.0-beta.34
 ------------------------------
