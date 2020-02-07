@@ -3,6 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.1.0
+------------------------------
+*February 10, 2020*
+
+### Added
+
+- "red dot" indicator to offers icon when `hasUnreadOffers` prop is set to true and associated unit tests.
+
+v2.0.0
+------------------------------
+*February 10, 2020*
+
+**Pending:** https://github.com/justeat/fozzie-components/pull/129
+
 v2.0.0-beta.36
 ------------------------------
 *February 5, 2020*
