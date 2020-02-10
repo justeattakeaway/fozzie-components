@@ -38,7 +38,9 @@
             }'
             :href="offersCopy.url"
             class="c-nav-featureLink u-showBelowMid">
-            <offer-icon class="c-nav-icon c-nav-icon--offers" />
+            <span :class="{ 'c-nav-icon-container--unread-offers': hasUnreadOffers }">
+                <offer-icon class="c-nav-icon c-nav-icon--offers" />
+            </span>
             <span class="is-visuallyHidden">
                 {{ offersCopy.text }}
             </span>
@@ -60,7 +62,9 @@
                         }'
                         :href="offersCopy.url"
                         class="c-nav-list-link u-showAboveMid">
-                        <offer-icon class="c-nav-icon c-nav-icon--offers" />
+                        <span :class="{ 'c-nav-icon-container--unread-offers': hasUnreadOffers }">
+                            <offer-icon class="c-nav-icon c-nav-icon--offers" />
+                        </span>
                         {{ offersCopy.text }}
                     </a>
                 </li>
@@ -263,6 +267,11 @@ export default {
         },
 
         showOffersLink: {
+            type: Boolean,
+            default: false
+        },
+
+        hasUnreadOffers: {
             type: Boolean,
             default: false
         },
@@ -791,6 +800,7 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
     }
 
     .c-nav-icon--offers {
+        position: relative;
         width: $nav-featureLinkIcon-width;
         height: $nav-featureLinkIcon-height;
 
@@ -804,6 +814,27 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
             .c-header--transparent & {
                 fill: $nav-icon-color--transparent;
             }
+        }
+    }
+
+    .c-nav-icon-container--unread-offers {
+        position: relative;
+        margin-right: spacing();
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #f74c00;
+            border: 1px solid white;
+        }
+
+        .c-nav-icon {
+            margin-right: 0;
         }
     }
 

@@ -21,6 +21,7 @@
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
                 :offers-copy="copy.offers"
                 :show-offers-link="showOffersLink"
+                :has-unread-offers="hasUnreadOffers"
                 :error-log="errorLog"
                 :user-info-prop="userInfoProp"
                 :user-info-url="userInfoUrl"
@@ -63,6 +64,11 @@ export default {
         },
 
         showOffersLink: {
+            type: Boolean,
+            default: false
+        },
+
+        hasUnreadOffers: {
             type: Boolean,
             default: false
         },
