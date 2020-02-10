@@ -39,4 +39,26 @@
     `enableLogging` - If set to `true`, it allows Braze logging in the console. Default set to `false`.
 
     `disableComponent` - If set to `true`, it does not initialise Braze when called. Default set to `false`.
+    
+## Migration to v2
+
+Version 2 exposes the appboy instance as opposed to content cards as part of the refresh callback, this makes it easier to access properties on the instance such as unreadCardCount and is a step closer to an isomorphic solution.
+
+### Accessing Cards
+
+Cards are now accessible on `myCallbackMethod.cards`.
+
+**For example**
+
+```js
+// v1 implementation
+const myCallback = cards => console.log(cards); // [...cards]
+appboy.requestImmediateRefresh();
+// [...cards]
+
+// v2 implementation
+const myCallback = cardsInstance => console.log(cardsInstance); // {cards: [...cards]}
+appboy.requestImmediateRefresh();
+// { cards: [...cards]}
+```
 
