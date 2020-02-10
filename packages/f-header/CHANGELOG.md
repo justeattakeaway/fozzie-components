@@ -5,9 +5,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.0.0-beta.37
 ------------------------------
-*February 5, 2020*
+*February 10, 2020*
 
-**In Progress**
+### Added
+
+- "red dot" indicator to offers icon when `hasUnreadOffers` prop is set to true and associated unit tests.
 
 v2.0.0-beta.36
 ------------------------------
