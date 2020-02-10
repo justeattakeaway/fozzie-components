@@ -3,12 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+1.0.4
+------------------------------
+*February  29, 2020*
+
+### Fixed
+- Ensure that `handleContentCards` callback has been set before attempting to call it.
+
 1.0.3
 ------------------------------
 *January  29, 2020*
 
 ### Added
 - `requestContentCardsRefresh()` call back as on some page refreshes it fails to invoke sync.
+
 
 1.0.2
 ------------------------------
@@ -23,8 +31,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - `ContentCard` - Not displaying on initial first load due to appboy `sync`
 calls happening before the sdk is ready to update the
-`ab.storage.cc.[api-key]` in localStorage. Now using `subscribeToContentCardsUpdates` to listen 
+`ab.storage.cc.[api-key]` in localStorage. Now using `subscribeToContentCardsUpdates` to listen
 for updates.
+
 
 1.0.1
 ------------------------------
@@ -32,6 +41,7 @@ for updates.
 
 ### Fixed
 - GTM event loading issues
+
 
 v1.0.0
 ------------------------------
