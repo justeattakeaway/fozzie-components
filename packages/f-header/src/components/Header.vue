@@ -112,7 +112,7 @@ export default {
             return this.copy.deliveryEnquiry && this.showDeliveryEnquiry;
         },
         showTransparentHeader () {
-            return headerBackgroundTheme === 'transparent' && !this.mobileNavIsOpen;
+            return this.headerBackgroundTheme === 'transparent' && !this.mobileNavIsOpen;
         }
     },
     methods: {

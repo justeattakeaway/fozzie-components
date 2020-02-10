@@ -43,7 +43,8 @@ export default {
             default: ''
         },
         headerBackgroundTheme: {
-            type: String
+            type: String,
+            default: 'white'
         }
     },
     computed: {
@@ -57,7 +58,7 @@ export default {
             return `Go to ${this.companyName} homepage`;
         },
         isLogoWhite () {
-            return (this.headerBackgroundTheme === 'transparent' || this.headerBackgroundTheme === 'red') && theme === 'je' ? 'c-icon-je--alt' : '';
+            return (this.headerBackgroundTheme === 'transparent' || this.headerBackgroundTheme === 'red') && this.theme === 'je' ? 'c-icon-je--alt' : '';
         }
     }
 };

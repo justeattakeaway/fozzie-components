@@ -295,7 +295,8 @@ export default {
         },
 
         headerBackgroundTheme: {
-            type: String
+            type: String,
+            default: 'white'
         }
     },
 
