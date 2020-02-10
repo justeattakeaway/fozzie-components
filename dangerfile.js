@@ -15,6 +15,7 @@ if (!isTrivial) {
     const modifiedPackages = modifiedFiles.filter(filepath => filepath.startsWith('packages/'))
         .map(filepath => filepath.split('/')[1]);
     const uniqueModifiedPackages = new Set(modifiedPackages);
+    const modifiedRootPackage = modifiedPackages.includes('');
 
     // Fail if the title of the PR isn't in the format of a version i.e. {package-name}@vX.X.X (such as f-header@v1.4.0)
     const versionRegex = /^([a-z\-]+@v?[0-9]+\.[0-9]+\.[0-9]+)/;
@@ -31,7 +32,7 @@ if (!isTrivial) {
     const hasRootPackageJsonChanged = modifiedRootFiles.includes('package.json');
     const rootPackageDiff = danger.git.JSONDiffForFile('package.json');
     rootPackageDiff.then(result => {
-        if (!hasRootPackageJsonChanged || (hasRootPackageJsonChanged && !result.version)) {
+        if (modifiedRootPackage && (!hasRootPackageJsonChanged || (hasRootPackageJsonChanged && !result.version))) {
             const semverLink = 'https://docs.npmjs.com/getting-started/semantic-versioning';
             fail(`:arrow_up: This PR should include a <a href="${semverLink}"><code>SEMVER</code></a> version bump at the root of the mono-repo, as you have changed root level config.`);
         }
@@ -55,8 +56,8 @@ if (!isTrivial) {
      */
     const checkPackageDiff = (pkg, resolve) => {
         // Check for version update
-        const hasPackageJsonChanged = danger.git.modified_files.includes(`/packages/${pkg}/package.json`);
-        const packageDiff = danger.git.JSONDiffForFile(`/packages/${pkg}/package.json`);
+        const hasPackageJsonChanged = danger.git.modified_files.includes(`packages/${pkg}/package.json`);
+        const packageDiff = danger.git.JSONDiffForFile(`packages/${pkg}/package.json`);
 
         packageDiff.then(result => {
             if (!hasPackageJsonChanged || (hasPackageJsonChanged && !result.version)) {
@@ -73,7 +74,7 @@ if (!isTrivial) {
     // Loops through each package that includes files that been modified and runs DangerJS checks for each
     const requests = Array.from(uniqueModifiedPackages).map(pkg => {
         // Add package to `failedChangelogs` if there isn’t a CHANGELOG entry – should update for every PR
-        if (!danger.git.modified_files.includes(`/packages/${pkg}/CHANGELOG.md`)) {
+        if (!danger.git.modified_files.includes(`packages/${pkg}/CHANGELOG.md`)) {
             failedChangelogs.push(pkg);
         }
 
