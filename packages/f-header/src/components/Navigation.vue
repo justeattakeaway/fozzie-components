@@ -820,6 +820,7 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
     }
 
     .c-nav-icon-container--unread-offers {
+        display: inline-block;
         position: relative;
         margin-right: spacing();
 
