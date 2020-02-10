@@ -26,11 +26,13 @@ const initialiseBraze = (options = {
                                 event: 'appboyReady'
                             });
                         });
-    
+
                         appboy.requestContentCardsRefresh();
-                        
+
                         appboy.subscribeToContentCardsUpdates(contentCards => {
-                            if (contentCards && contentCards.cards.length) {
+                            if (contentCards
+                                && contentCards.cards.length
+                                && options.callbacks.handleContentCards) {
                                 options.callbacks.handleContentCards(contentCards.cards);
                             }
                         });
