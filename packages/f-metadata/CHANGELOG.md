@@ -5,10 +5,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 1.0.4
 ------------------------------
-*February  29, 2020*
+*February 10, 2020*
 
 ### Fixed
 - Ensure that `handleContentCards` callback has been set before attempting to call it.
+
 
 1.0.3
 ------------------------------
