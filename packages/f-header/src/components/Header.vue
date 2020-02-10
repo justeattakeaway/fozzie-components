@@ -2,7 +2,7 @@
     <header
         :data-theme="theme"
         :class="['c-header', {
-            'c-header--brandColour': showBrandColourHeader,
+            'c-header--red': showRedBackgroundHeader,
             'c-header--transparent c-header--gradient': showTransparentHeader
         }]">
         <skip-to-main
@@ -113,6 +113,9 @@ export default {
         },
         showTransparentHeader () {
             return this.headerBackgroundTheme === 'transparent' && !this.mobileNavIsOpen;
+        },
+        showRedBackgroundHeader () {
+            return this.headerBackgroundTheme === 'red';
         }
     },
     methods: {
@@ -190,7 +193,7 @@ export default {
         }
     }
 
-    .c-header.c-header--brandColour {
+    .c-header.c-header--red {
         background-color: $red;
         min-height: 88px;
     }

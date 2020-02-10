@@ -4,7 +4,7 @@ import Header from '../Header.vue';
 describe('Header', () => {
     it('should be defined', () => {
         const propsData = {
-            isTransparent: true
+            headerBackgroundTheme: 'transparent'
         };
         const wrapper = shallowMount(Header, { propsData });
         expect(wrapper.exists()).toBe(true);
@@ -13,7 +13,7 @@ describe('Header', () => {
     it('should render default component markup', () => {
         // Arrange
         const propsData = {
-            isTransparent: true
+            headerBackgroundTheme: 'transparent'
         };
 
         // Act
@@ -28,7 +28,7 @@ describe('Header', () => {
         // Arrange
         const propsData = {
             locale: 'en-AU',
-            isTransparent: true
+            headerBackgroundTheme: 'transparent'
         };
 
         // Act
@@ -42,7 +42,7 @@ describe('Header', () => {
         // Arrange
         const propsData = {
             locale: 'en-NZ',
-            isTransparent: true
+            headerBackgroundTheme: 'transparent'
         };
 
         // Act
@@ -56,7 +56,7 @@ describe('Header', () => {
         // Arrange
         const propsData = {
             locale: 'nb-NO',
-            isTransparent: true
+            headerBackgroundTheme: 'transparent'
         };
 
         // Act

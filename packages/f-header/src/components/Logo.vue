@@ -13,7 +13,7 @@
             :is="iconComponent"
             :class="['c-logo-img',
                      iconClassName,
-                     { 'c-icon-je--transparentBg': isLogoWhite }]"
+                     isLogoWhite]"
             :data-js-test="iconClassName" />
     </a>
 </template>
