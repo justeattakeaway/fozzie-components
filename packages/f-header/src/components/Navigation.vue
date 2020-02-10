@@ -42,7 +42,7 @@
                 <offer-icon class="c-nav-icon c-nav-icon--offers" />
             </span>
             <span class="is-visuallyHidden">
-                {{ offersCopy.text }}
+                {{ offersCopy.text }}<span v-if="hasUnreadOffers">. You have new offers.</span>
             </span>
         </a>
 
@@ -65,7 +65,9 @@
                         <span :class="{ 'c-nav-icon-container--unread-offers': hasUnreadOffers }">
                             <offer-icon class="c-nav-icon c-nav-icon--offers" />
                         </span>
-                        {{ offersCopy.text }}
+                        {{ offersCopy.text }}<span
+                            v-if="hasUnreadOffers"
+                            class="is-visuallyHidden">. You have new offers.</span>
                     </a>
                 </li>
                 <li
