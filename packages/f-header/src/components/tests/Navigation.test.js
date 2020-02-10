@@ -326,6 +326,25 @@ describe('Navigation', () => {
             // Assert
             expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(false);
         });
+
+        it('should flag new offers when "hasUnreadOffers" is true', () => {
+            // Arrange
+            const offersText = '__OFFERS_TEXT__';
+            const propsData = {
+                ...defaultPropsData,
+                offersCopy: {
+                    text: offersText
+                },
+                showOffersLink: true,
+                hasUnreadOffers: true
+            };
+
+            // Act
+            const wrapper = shallowMount(Navigation, { propsData });
+
+            // Assert
+            expect(wrapper.find('[data-js-test="offers-link-desktop"]').text()).toBe(`${offersText}. You have new offers.`);
+        });
     });
 
     describe('isOrderCountOutOfDate', () => {
