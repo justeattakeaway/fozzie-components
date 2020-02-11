@@ -1,9 +1,8 @@
 <template>
     <nav class="c-nav c-nav--global">
         <button
-            :class="['c-nav-trigger c-nav-toggle is-hidden--noJS', {
-                'is-open': navIsOpen,
-                'c-logo--brandColour': isNavToggleWhite
+            :class="['c-nav-trigger c-nav-toggle is-hidden--noJS', NavToggleThemeClass, {
+                'is-open': navIsOpen
             }]"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
             :aria-label="openMenuText"
@@ -20,9 +19,8 @@
             class="c-nav-trigger is-hidden is-shown--noJS">
 
         <label
-            :class="['c-nav-toggle is-hidden is-shown--noJS', {
-                'is-open': navIsOpen,
-                'c-logo--brandColour': isNavToggleWhite
+            :class="['c-nav-toggle is-hidden is-shown--noJS', NavToggleThemeClass, {
+                'is-open': navIsOpen
             }]"
             :aria-label="openMenuText"
             for="nav-trigger">
@@ -341,9 +339,8 @@ export default {
             const currentTime = new Date().getTime();
             return this.localOrderCountExpires < currentTime;
         },
-
-        isNavToggleWhite () {
-            return this.headerBackgroundTheme === 'red';
+        NavToggleThemeClass () {
+            return this.headerBackgroundTheme === 'red' ? 'c-logo--brandColour' : '';
         },
 
         /**

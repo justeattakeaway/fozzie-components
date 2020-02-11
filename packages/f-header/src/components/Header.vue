@@ -1,8 +1,7 @@
 <template>
     <header
         :data-theme="theme"
-        :class="['c-header', {
-            'c-header--red': showRedBackgroundHeader,
+        :class="['c-header', headerBackgroundClass, {
             'c-header--transparent c-header--gradient': showTransparentHeader
         }]">
         <skip-to-main
@@ -114,8 +113,8 @@ export default {
         showTransparentHeader () {
             return this.headerBackgroundTheme === 'transparent' && !this.mobileNavIsOpen;
         },
-        showRedBackgroundHeader () {
-            return this.headerBackgroundTheme === 'red';
+        headerBackgroundClass () {
+            return this.headerBackgroundTheme === 'red' ? 'c-header--red' : '';
         }
     },
     methods: {
