@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import InfoIcon from './infoIcon.vue';
+import InfoIcon from './InfoIcon.vue';
 
 describe('InfoIcon', () => {
     it('should be defined', () => {

@@ -3,6 +3,41 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v1.4.1
+------------------------------
+*February 10, 2020*
+
+### Fixed
+- DangerJS fix for package paths and for false positive around reporting change in the root
+
+
+v1.4.0
+------------------------------
+*February 6, 2020*
+
+### Added
+- DangerJS Checks (via CircleCI)
+- Pull Request Template
+- `CODEOWNERS` file
+
+
+v1.3.0
+------------------------------
+*February 5, 2020*
+
+### Added
+- CircleCI base config for PR checks. Config currently will run unit tests across all `fozzie-components` packages
+
+
+v1.2.1
+------------------------------
+*January 30, 2020*
+
+### Added
+- Link to Fozzie docs
+
+
 v1.2.0
 ------------------------------
 *September 18, 2019*

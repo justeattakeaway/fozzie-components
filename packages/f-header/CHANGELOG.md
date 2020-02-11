@@ -3,13 +3,28 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
-v2.0.0-beta.35
+v2.0.0-beta.37
 ------------------------------
-*Feb 3, 2020*
+*Feb 11, 2020*
 
 ### Changed
 - Saved cards' URL to avoid an unnecessary redirect.
+
+
+v2.0.0-beta.36
+------------------------------
+*February 5, 2020*
+
+### Removed
+- `created` hook call and replaced show and hide with css helpers.
+
+
+v2.0.0-beta.35
+------------------------------
+*February 4, 2020*
+
+### Changed
+- Moved `resize` method to be called within created hook.
 
 
 v2.0.0-beta.34
