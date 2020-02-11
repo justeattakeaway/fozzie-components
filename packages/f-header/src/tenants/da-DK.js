@@ -23,7 +23,7 @@ export default {
         },
         savedCards: {
             text: 'Betalingsmetoder',
-            url: '/member/savedcards',
+            url: '/account/saved-cards',
             gtm: 'click_account_saved_cards'
         },
         addressBook: {
