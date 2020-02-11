@@ -12,7 +12,7 @@ const defaultPropsData = {
         },
         savedCards: {
             text: 'Your saved cards',
-            url: '/member/savedcards',
+            url: '/account/saved-cards',
             gtm: 'click_account_saved_cards'
         }
     },

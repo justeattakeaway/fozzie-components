@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.0.0
 ------------------------------
-*February 10, 2020*
+*February 11, 2020*
 
 ### Added
 - Styles for displaying red header without gradient
@@ -16,6 +16,14 @@ v2.0.0
 - **Breaking Change**: `isTransparent` Prop deprecated for `headerBackgroundTheme`. `headerBackgroundTheme` accepts `red` `transparent` and `white`(default) as properties.
 - Moving `f-header` Vue component to be `v2.0.0`.
   If we need to update the old `f-header` package, those changes can be released on the legacy `v1.x.x` release branch via the [legacy `f-header` repo](https://github.com/justeat/f-header).
+
+
+v2.0.0-beta.37
+------------------------------
+*Feb 11, 2020*
+
+### Changed
+- Saved cards' URL to avoid an unnecessary redirect.
 
 
 v2.0.0-beta.36

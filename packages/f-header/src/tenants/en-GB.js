@@ -18,7 +18,7 @@ export default {
         },
         savedCards: {
             text: 'Your saved cards',
-            url: '/member/savedcards',
+            url: '/account/paymentoptions',
             gtm: 'click_account_saved_cards'
         },
         addressBook: {
