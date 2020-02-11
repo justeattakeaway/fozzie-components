@@ -11,6 +11,7 @@ import CollectionIcon from './components/CollectionIcon/CollectionIcon.vue';
 import CrossIcon from './components/CrossIcon/CrossIcon.vue';
 import DeliveryIcon from './components/DeliveryIcon/DeliveryIcon.vue';
 import FlagIcon from './components/FlagIcon/FlagIcon.vue';
+import GiftIcon from './components/FlagIcon/GiftIcon.vue';
 import InfoIcon from './components/InfoIcon/InfoIcon.vue';
 import LocalLegendIcon from './components/LocalLegendIcon/LocalLegendIcon.vue';
 import MapPinIcon from './components/MapPinIcon/MapPinIcon.vue';
@@ -47,6 +48,7 @@ export {
     CrossIcon,
     DeliveryIcon,
     FlagIcon,
+    GiftIcon,
     InfoIcon,
     LocalLegendIcon,
     MapPinIcon,
