@@ -42,7 +42,7 @@
     
 ## Migration to v2
 
-Version 2 exposes the appboy instance as opposed to content cards as part of the refresh callback, this makes it easier to access properties on the instance such as unreadCardCount and is a step closer to an isomorphic solution.
+Version 2 exposes the appboy instance as opposed to content cards as part of the refresh callback, this makes it easier to access properties on the instance such as `getUnviewedCardCount` and is a step closer to an isomorphic solution.
 
 ### Accessing Cards
 
