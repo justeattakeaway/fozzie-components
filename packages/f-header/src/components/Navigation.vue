@@ -38,7 +38,7 @@
             }'
             :href="offersCopy.url"
             class="c-nav-featureLink u-showBelowMid">
-            <offer-icon class="c-nav-icon c-nav-icon--offers" />
+            <gift-icon class="c-nav-icon c-nav-icon--offers" />
             <span class="is-visuallyHidden">
                 {{ offersCopy.text }}
             </span>
@@ -60,7 +60,7 @@
                         }'
                         :href="offersCopy.url"
                         class="c-nav-list-link u-showAboveMid">
-                        <offer-icon class="c-nav-icon c-nav-icon--offers" />
+                        <gift-icon class="c-nav-icon c-nav-icon--offers" />
                         {{ offersCopy.text }}
                     </a>
                 </li>
@@ -208,7 +208,7 @@
 <script>
 import {
     DeliveryIcon,
-    OfferIcon,
+    GiftIcon,
     ProfileIcon
 } from '@justeat/f-vue-icons';
 import sharedServices from '@justeat/f-services';
@@ -217,7 +217,7 @@ import axios from 'axios';
 export default {
     components: {
         DeliveryIcon,
-        OfferIcon,
+        GiftIcon,
         ProfileIcon
     },
 
