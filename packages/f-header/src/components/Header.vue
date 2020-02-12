@@ -192,7 +192,7 @@ export default {
         }
     }
 
-    .c-header.c-header--red {
+.c-header--red {
         background-color: $red;
         min-height: 88px;
     }

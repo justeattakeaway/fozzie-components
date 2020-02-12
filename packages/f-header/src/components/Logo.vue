@@ -13,7 +13,7 @@
             :is="iconComponent"
             :class="['c-logo-img',
                      iconClassName,
-                     isLogoWhite]"
+                     logoColourModifier]"
             :data-js-test="iconClassName" />
     </a>
 </template>
@@ -57,7 +57,7 @@ export default {
         linkAltText () {
             return `Go to ${this.companyName} homepage`;
         },
-        isLogoWhite () {
+        logoColourModifier () {
             return (this.headerBackgroundTheme === 'transparent' || this.headerBackgroundTheme === 'red') && this.theme === 'je' ? 'c-icon-je--alt' : '';
         }
     }

@@ -1,7 +1,7 @@
 <template>
     <nav class="c-nav c-nav--global">
         <button
-            :class="['c-nav-trigger c-nav-toggle is-hidden--noJS', NavToggleThemeClass, {
+            :class="['c-nav-trigger c-nav-toggle is-hidden--noJS', navToggleThemeClass, {
                 'is-open': navIsOpen
             }]"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
@@ -19,7 +19,7 @@
             class="c-nav-trigger is-hidden is-shown--noJS">
 
         <label
-            :class="['c-nav-toggle is-hidden is-shown--noJS', NavToggleThemeClass, {
+            :class="['c-nav-toggle is-hidden is-shown--noJS', navToggleThemeClass, {
                 'is-open': navIsOpen
             }]"
             :aria-label="openMenuText"
@@ -339,7 +339,7 @@ export default {
             const currentTime = new Date().getTime();
             return this.localOrderCountExpires < currentTime;
         },
-        NavToggleThemeClass () {
+        navToggleThemeClass () {
             return this.headerBackgroundTheme === 'red' ? 'c-logo--brandColour' : '';
         },
 
