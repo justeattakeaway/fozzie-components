@@ -76,6 +76,8 @@ export { default as FlagNoIcon } from '../icons/FlagNoIcon';
 
 export { default as FlagNzIcon } from '../icons/FlagNzIcon';
 
+export { default as GiftIcon } from '../icons/GiftIcon';
+
 export { default as InfoIcon } from '../icons/InfoIcon';
 
 export { default as JeLogoNoColourIcon } from '../icons/JeLogoNoColourIcon';
