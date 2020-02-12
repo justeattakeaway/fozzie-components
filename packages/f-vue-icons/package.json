@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.5",
   "main": "dist/f-vue-icons.cjs.js",
   "cdn": "dist/f-vue-icons.min.js",
   "unpkg": "dist/f-vue-icons.min.js",
@@ -49,7 +49,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-icons": "2.0.0-beta.6",
+    "@justeat/f-icons": "2.0.0-beta.9",
     "babel-helper-vue-jsx-merge-props": "2.0.3"
   },
   "devDependencies": {
