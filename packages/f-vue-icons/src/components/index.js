@@ -10,6 +10,7 @@ import CollectionIcon from './CollectionIcon';
 import CrossIcon from './CrossIcon';
 import DeliveryIcon from './DeliveryIcon';
 import FlagIcon from './FlagIcon';
+import GiftIcon from './GiftIcon';
 import InfoIcon from './InfoIcon';
 import LocalLegendIcon from './LocalLegendIcon';
 import MapPinIcon from './MapPinIcon';
@@ -36,6 +37,7 @@ export {
     CrossIcon,
     DeliveryIcon,
     FlagIcon,
+    GiftIcon,
     InfoIcon,
     LocalLegendIcon,
     MapPinIcon,

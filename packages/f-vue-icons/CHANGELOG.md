@@ -5,6 +5,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 
+v0.18.0
+------------------------------
+*February 11, 2019*
+
+### Added
+- Gift icon
+
+
 v0.17.0
 ------------------------------
 *November 28, 2019*
