@@ -21,8 +21,10 @@ const defaultPropsData = {
     showDeliveryEnquiry: false,
     isOrderCountSupported: true,
     offersCopy: {},
-    showOffersLink: false
+    showOffersLink: false,
+    headerBackgroundTheme: 'white'
 };
+
 const defaultData = {
     userInfo: {
         isAuthenticated: false,
@@ -212,6 +214,20 @@ describe('Navigation', () => {
 
             // Assert
             expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).not.toContain('is-open');
+        });
+
+        it('should be white when "headerBackgroundTheme" is set to "red"', () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                headerBackgroundTheme: 'red'
+            };
+
+            // Act
+            const wrapper = shallowMount(Navigation, { propsData });
+
+            // Assert
+            expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).toContain('c-logo--brandColour');
         });
     });
 
