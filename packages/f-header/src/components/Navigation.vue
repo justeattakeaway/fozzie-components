@@ -38,9 +38,12 @@
             }'
             :href="offersCopy.url"
             class="c-nav-featureLink u-showBelowMid">
-            <gift-icon class="c-nav-icon c-nav-icon--offers" />
+            <component
+                :is="showForYouCopy ? 'gift-icon' : 'offer-icon'"
+                class="c-nav-icon c-nav-icon--offers"
+            />
             <span class="is-visuallyHidden">
-                {{ offersCopy.text }}
+                {{ showForYouCopy ? offersCopy.text : 'Offers' }}
             </span>
         </a>
 
@@ -60,8 +63,11 @@
                         }'
                         :href="offersCopy.url"
                         class="c-nav-list-link u-showAboveMid">
-                        <gift-icon class="c-nav-icon c-nav-icon--offers" />
-                        {{ offersCopy.text }}
+                        <component
+                            :is="showForYouCopy ? 'gift-icon' : 'offer-icon'"
+                            class="c-nav-icon c-nav-icon--offers"
+                        />
+                        {{ showForYouCopy ? offersCopy.text : 'Offers' }}
                     </a>
                 </li>
                 <li
@@ -209,6 +215,7 @@
 import {
     DeliveryIcon,
     GiftIcon,
+    OfferIcon,
     ProfileIcon
 } from '@justeat/f-vue-icons';
 import sharedServices from '@justeat/f-services';
@@ -218,6 +225,7 @@ export default {
     components: {
         DeliveryIcon,
         GiftIcon,
+        OfferIcon,
         ProfileIcon
     },
 
@@ -263,6 +271,11 @@ export default {
         },
 
         showOffersLink: {
+            type: Boolean,
+            default: false
+        },
+
+        showForYouCopy: {
             type: Boolean,
             default: false
         },
