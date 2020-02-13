@@ -1,7 +1,7 @@
 <template>
     <nav class="c-nav c-nav--global">
         <button
-            :class="['c-nav-trigger c-nav-toggle is-hidden--noJS', {
+            :class="['c-nav-trigger c-nav-toggle is-hidden--noJS', navToggleThemeClass, {
                 'is-open': navIsOpen
             }]"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
@@ -19,7 +19,7 @@
             class="c-nav-trigger is-hidden is-shown--noJS">
 
         <label
-            :class="['c-nav-toggle is-hidden is-shown--noJS', {
+            :class="['c-nav-toggle is-hidden is-shown--noJS', navToggleThemeClass, {
                 'is-open': navIsOpen
             }]"
             :aria-label="openMenuText"
@@ -305,9 +305,9 @@ export default {
             default: true
         },
 
-        isTransparent: {
-            type: Boolean,
-            default: false
+        headerBackgroundTheme: {
+            type: String,
+            default: 'white'
         }
     },
 
@@ -351,6 +351,9 @@ export default {
         isOrderCountOutOfDate () {
             const currentTime = new Date().getTime();
             return this.localOrderCountExpires < currentTime;
+        },
+        navToggleThemeClass () {
+            return this.headerBackgroundTheme === 'red' ? 'c-logo--brandColour' : '';
         },
 
         /**
@@ -403,7 +406,7 @@ export default {
 
                 if (typeof document !== 'undefined') {
                     document.documentElement.classList.toggle('is-navInView', this.navIsOpen);
-                    document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.isTransparent);
+                    document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.headerBackgroundTheme === 'transparent');
                 }
             }
         },
@@ -970,6 +973,10 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
 
             .c-header--transparent & {
                 background-color: $nav-toggleIcon-color--transparent;
+            }
+
+            .c-logo--brandColour & {
+                background-color: $white;
             }
         }
 

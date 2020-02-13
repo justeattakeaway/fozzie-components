@@ -4,6 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.0
+------------------------------
+*February 13, 2020*
+
+### Added
+- Styles for displaying red header without gradient
+- Prop to render red header
+
+### Changed
+- **Breaking Change**: `isTransparent` Prop deprecated for `headerBackgroundTheme`. `headerBackgroundTheme` accepts `red` `transparent` and `white`(default) as properties.
+- Moving `f-header` Vue component to be `v2.0.0`.
+  If we need to update the old `f-header` package, those changes can be released on the legacy `v1.x.x` release branch via the [legacy `f-header` repo](https://github.com/justeat/f-header).
+
+
 v2.0.0-beta.39
 ------------------------------
 *February 12, 2020*
