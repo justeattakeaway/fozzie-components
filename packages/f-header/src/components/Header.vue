@@ -1,16 +1,18 @@
 <template>
     <header
         :data-theme="theme"
-        :class="['c-header', { 'c-header--transparent c-header--gradient': showTransparentHeader }]">
+        :class="['c-header', headerBackgroundClass, {
+            'c-header--transparent c-header--gradient': showTransparentHeader
+        }]">
         <skip-to-main
             :text="copy.skipToMainContentText"
             :transparent-bg="showTransparentHeader" />
         <div class="c-header-container">
             <logo
                 :theme="theme"
-                :is-transparent="showTransparentHeader"
                 :company-name="copy.companyName"
-                :logo-gtm-label="copy.logo.gtm" />
+                :logo-gtm-label="copy.logo.gtm"
+                :header-background-theme="headerBackgroundTheme" />
             <navigation
                 :nav-links="copy.navLinks"
                 :help="copy.help"
@@ -22,12 +24,13 @@
                 :offers-copy="copy.offers"
                 :show-offers-link="showOffersLink"
                 :has-unread-offers="hasUnreadOffers"
+                :show-for-you-copy="showForYouCopy"
                 :error-log="errorLog"
                 :user-info-prop="userInfoProp"
                 :user-info-url="userInfoUrl"
                 :order-count-url="orderCountUrl"
                 :is-order-count-supported="isOrderCountSupported"
-                :is-transparent="isTransparent"
+                :header-background-theme="headerBackgroundTheme"
                 @onMobileNavToggle="mobileNavToggled" />
         </div>
     </header>
@@ -53,17 +56,17 @@ export default {
             default: ''
         },
 
-        isTransparent: {
-            type: Boolean,
-            default: false
-        },
-
         showDeliveryEnquiry: {
             type: Boolean,
             default: false
         },
 
         showOffersLink: {
+            type: Boolean,
+            default: false
+        },
+
+        showForYouCopy: {
             type: Boolean,
             default: false
         },
@@ -96,6 +99,11 @@ export default {
         isOrderCountSupported: {
             type: Boolean,
             default: true
+        },
+
+        headerBackgroundTheme: {
+            type: String,
+            default: 'white'
         }
     },
     data () {
@@ -115,7 +123,10 @@ export default {
             return this.copy.deliveryEnquiry && this.showDeliveryEnquiry;
         },
         showTransparentHeader () {
-            return this.isTransparent && !this.mobileNavIsOpen;
+            return this.headerBackgroundTheme === 'transparent' && !this.mobileNavIsOpen;
+        },
+        headerBackgroundClass () {
+            return this.headerBackgroundTheme === 'red' ? 'c-header--red' : '';
         }
     },
     methods: {
@@ -191,6 +202,11 @@ export default {
             left: 0;
             width: 100%;
         }
+    }
+
+.c-header--red {
+        background-color: $red;
+        min-height: 88px;
     }
 
     .c-header-container {

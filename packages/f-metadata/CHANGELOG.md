@@ -3,12 +3,29 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+2.0.0
+------------------------------
+*February  10, 2020*
+
+### Changed
+- Callback methods are now called with the whole appboy instance ensuring functionality is available on the appboy instance whenever a refresh is called. This also means that the callback will always return an object even when no content cards are available. Further instructions and upgrade instructions can be found in the [README](README.md).
+
+
+1.0.4
+------------------------------
+*February 10, 2020*
+
+### Fixed
+- Ensure that `handleContentCards` callback has been set before attempting to call it.
+
+
 1.0.3
 ------------------------------
 *January  29, 2020*
 
 ### Added
 - `requestContentCardsRefresh()` call back as on some page refreshes it fails to invoke sync.
+
 
 1.0.2
 ------------------------------
@@ -23,8 +40,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - `ContentCard` - Not displaying on initial first load due to appboy `sync`
 calls happening before the sdk is ready to update the
-`ab.storage.cc.[api-key]` in localStorage. Now using `subscribeToContentCardsUpdates` to listen 
+`ab.storage.cc.[api-key]` in localStorage. Now using `subscribeToContentCardsUpdates` to listen
 for updates.
+
 
 1.0.1
 ------------------------------
@@ -32,6 +50,7 @@ for updates.
 
 ### Fixed
 - GTM event loading issues
+
 
 v1.0.0
 ------------------------------

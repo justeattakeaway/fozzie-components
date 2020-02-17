@@ -11,8 +11,9 @@
         }`'>
         <component
             :is="iconComponent"
-            :class="[iconClassName, isTransparent && iconComponent === 'je-logo' ? 'c-icon-je--transparentBg' : '']"
-            class="c-logo-img"
+            :class="['c-logo-img',
+                     iconClassName,
+                     logoColourModifier]"
             :data-js-test="iconClassName" />
     </a>
 </template>
@@ -33,10 +34,6 @@ export default {
             type: String,
             required: true
         },
-        isTransparent: {
-            type: Boolean,
-            required: true
-        },
         companyName: {
             type: String,
             required: true
@@ -44,6 +41,10 @@ export default {
         logoGtmLabel: {
             type: String,
             default: ''
+        },
+        headerBackgroundTheme: {
+            type: String,
+            default: 'white'
         }
     },
     computed: {
@@ -55,6 +56,9 @@ export default {
         },
         linkAltText () {
             return `Go to ${this.companyName} homepage`;
+        },
+        logoColourModifier () {
+            return (this.headerBackgroundTheme === 'transparent' || this.headerBackgroundTheme === 'red') && this.theme === 'je' ? 'c-icon-je--alt' : '';
         }
     }
 };
@@ -119,7 +123,7 @@ export default {
         fill: $header-logo-color;
     }
 
-    .c-icon-je--transparentBg g {
-        fill: $header-logo-color--transparent;
+    .c-icon-je--alt g {
+        fill: $header-logo-color--alt;
     }
 </style>

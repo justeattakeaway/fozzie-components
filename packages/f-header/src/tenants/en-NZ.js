@@ -47,7 +47,7 @@ export default {
         gtm: 'click_logout'
     },
     offers: {
-        text: 'Offers',
+        text: 'For You',
         url: '/offers'
     }
 };

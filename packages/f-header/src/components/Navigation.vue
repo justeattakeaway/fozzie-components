@@ -1,7 +1,7 @@
 <template>
     <nav class="c-nav c-nav--global">
         <button
-            :class="['c-nav-trigger c-nav-toggle is-hidden--noJS', {
+            :class="['c-nav-trigger c-nav-toggle is-hidden--noJS', navToggleThemeClass, {
                 'is-open': navIsOpen
             }]"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
@@ -19,7 +19,7 @@
             class="c-nav-trigger is-hidden is-shown--noJS">
 
         <label
-            :class="['c-nav-toggle is-hidden is-shown--noJS', {
+            :class="['c-nav-toggle is-hidden is-shown--noJS', navToggleThemeClass, {
                 'is-open': navIsOpen
             }]"
             :aria-label="openMenuText"
@@ -39,10 +39,13 @@
             :href="offersCopy.url"
             class="c-nav-featureLink u-showBelowMid">
             <span :class="{ 'c-nav-icon-container--unread-offers': hasUnreadOffers }">
-                <offer-icon class="c-nav-icon c-nav-icon--offers" />
+                <component
+                    :is="showForYouCopy ? 'gift-icon' : 'offer-icon'"
+                    class="c-nav-icon c-nav-icon--offers"
+                />
             </span>
             <span class="is-visuallyHidden">
-                {{ offersCopy.text }}<span v-if="hasUnreadOffers">. You have new offers.</span>
+                {{ showForYouCopy ? offersCopy.text : 'Offers' }}<span v-if="hasUnreadOffers">. You have new offers.</span>
             </span>
         </a>
 
@@ -63,9 +66,12 @@
                         :href="offersCopy.url"
                         class="c-nav-list-link u-showAboveMid">
                         <span :class="{ 'c-nav-icon-container--unread-offers': hasUnreadOffers }">
-                            <offer-icon class="c-nav-icon c-nav-icon--offers" />
+                            <component
+                                :is="showForYouCopy ? 'gift-icon' : 'offer-icon'"
+                                class="c-nav-icon c-nav-icon--offers"
+                            />
                         </span>
-                        {{ offersCopy.text }}<span
+                        {{ showForYouCopy ? offersCopy.text : 'Offers' }}<span
                             v-if="hasUnreadOffers"
                             class="is-visuallyHidden">. You have new offers.</span>
                     </a>
@@ -214,6 +220,7 @@
 <script>
 import {
     DeliveryIcon,
+    GiftIcon,
     OfferIcon,
     ProfileIcon
 } from '@justeat/f-vue-icons';
@@ -223,6 +230,7 @@ import axios from 'axios';
 export default {
     components: {
         DeliveryIcon,
+        GiftIcon,
         OfferIcon,
         ProfileIcon
     },
@@ -272,8 +280,11 @@ export default {
             type: Boolean,
             default: false
         },
-
         hasUnreadOffers: {
+            type: Boolean,
+            default: false
+        },
+        showForYouCopy: {
             type: Boolean,
             default: false
         },
@@ -303,9 +314,9 @@ export default {
             default: true
         },
 
-        isTransparent: {
-            type: Boolean,
-            default: false
+        headerBackgroundTheme: {
+            type: String,
+            default: 'white'
         }
     },
 
@@ -349,6 +360,9 @@ export default {
         isOrderCountOutOfDate () {
             const currentTime = new Date().getTime();
             return this.localOrderCountExpires < currentTime;
+        },
+        navToggleThemeClass () {
+            return this.headerBackgroundTheme === 'red' ? 'c-logo--brandColour' : '';
         },
 
         /**
@@ -401,7 +415,7 @@ export default {
 
                 if (typeof document !== 'undefined') {
                     document.documentElement.classList.toggle('is-navInView', this.navIsOpen);
-                    document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.isTransparent);
+                    document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.headerBackgroundTheme === 'transparent');
                 }
             }
         },
@@ -991,6 +1005,10 @@ $nav-trigger-focus-bg--ml          : $green--offWhite;
 
             .c-header--transparent & {
                 background-color: $nav-toggleIcon-color--transparent;
+            }
+
+            .c-logo--brandColour & {
+                background-color: $white;
             }
         }
 

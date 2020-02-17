@@ -3,19 +3,53 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
 v2.1.0
 ------------------------------
-*February 10, 2020*
+*February 17, 2020*
 
 ### Added
 
 - "red dot" indicator to offers icon when `hasUnreadOffers` prop is set to true and associated unit tests.
 
+
 v2.0.0
 ------------------------------
-*February 10, 2020*
+*February 13, 2020*
 
-**Pending:** https://github.com/justeat/fozzie-components/pull/129
+### Added
+- Styles for displaying red header without gradient
+- Prop to render red header
+
+### Changed
+- **Breaking Change**: `isTransparent` Prop deprecated for `headerBackgroundTheme`. `headerBackgroundTheme` accepts `red` `transparent` and `white`(default) as properties.
+- Moving `f-header` Vue component to be `v2.0.0`.
+  If we need to update the old `f-header` package, those changes can be released on the legacy `v1.x.x` release branch via the [legacy `f-header` repo](https://github.com/justeat/f-header).
+
+
+v2.0.0-beta.39
+------------------------------
+*February 12, 2020*
+
+### Changed
+- Add temporary feature flag to 'For You' updates
+
+
+v2.0.0-beta.38
+------------------------------
+*February 12, 2020*
+
+### Changed
+- Change offers copy to 'For You'
+- Change offers icon to gift
+
+
+v2.0.0-beta.37
+------------------------------
+*Feb 11, 2020*
+
+### Changed
+- Saved cards' URL to avoid an unnecessary redirect.
 
 v2.0.0-beta.36
 ------------------------------
@@ -24,12 +58,14 @@ v2.0.0-beta.36
 ### Removed
 - `created` hook call and replaced show and hide with css helpers.
 
+
 v2.0.0-beta.35
 ------------------------------
 *February 4, 2020*
 
 ### Changed
 - Moved `resize` method to be called within created hook.
+
 
 v2.0.0-beta.34
 ------------------------------

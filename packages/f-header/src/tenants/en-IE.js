@@ -23,7 +23,7 @@ export default {
         },
         savedCards: {
             text: 'Payment methods',
-            url: '/member/savedcards',
+            url: '/account/saved-cards',
             gtm: 'click_account_saved_cards'
         },
         addressBook: {
@@ -57,7 +57,7 @@ export default {
         gtm: 'click_logout'
     },
     offers: {
-        text: 'Offers',
+        text: 'For You',
         url: '/offers'
     }
 };

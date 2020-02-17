@@ -5,7 +5,7 @@ describe('Logo', () => {
     it('should be defined', () => {
         const propsData = {
             theme: 'je',
-            isTransparent: true,
+            headerBackgroundTheme: 'transparent',
             companyName: 'Just Eat'
         };
         const wrapper = shallowMount(Logo, { propsData });
@@ -16,7 +16,7 @@ describe('Logo', () => {
         // Arrange
         const propsData = {
             theme: 'ml',
-            isTransparent: true,
+            headerBackgroundTheme: 'transparent',
             companyName: 'MenuLog'
         };
 
@@ -32,7 +32,7 @@ describe('Logo', () => {
         // Arrange
         const propsData = {
             theme: 'je',
-            isTransparent: true,
+            headerBackgroundTheme: 'transparent',
             companyName: 'Just Eat'
         };
 
@@ -44,11 +44,11 @@ describe('Logo', () => {
         expect(logo).toBeDefined();
     });
 
-    it('should have "c-icon-je--transparentBg" class if "isTransparent" property is true', () => {
+    it('should have "c-icon-je--alt" class if "headerBackgroundTheme" property is "transparent"', () => {
         // Arrange
         const propsData = {
             theme: 'je',
-            isTransparent: true,
+            headerBackgroundTheme: 'transparent',
             companyName: 'Just Eat'
         };
 
@@ -59,15 +59,15 @@ describe('Logo', () => {
         // Assert
         // with dynamically rendered components
         // dynamic classes returned as one string in the array
-        // so have to check for 'c-icon--je,c-icon-je--transparentBg' not just 'c-icon-je--transparentBg'
-        expect(logo.classes()).toContain('c-icon--je,c-icon-je--transparentBg');
+        // so have to check for 'c-logo-img,c-icon--je,c-icon-je--alt' not just 'c-icon-je--alt'
+        expect(logo.classes()).toContain('c-logo-img,c-icon--je,c-icon-je--alt');
     });
 
-    it('shouldn\'t have "c-icon-je--transparentBg" class if "isTransparent" property is false', () => {
+    it('should have "c-icon-je--alt" class if "headerBackgroundTheme" property is "red"', () => {
         // Arrange
         const propsData = {
             theme: 'je',
-            isTransparent: false,
+            headerBackgroundTheme: 'red',
             companyName: 'Just Eat'
         };
 
@@ -78,7 +78,26 @@ describe('Logo', () => {
         // Assert
         // with dynamically rendered components
         // dynamic classes returned as one string in the array
-        // so have to check for 'c-icon--je,c-icon-je--transparentBg' not just 'c-icon-je--transparentBg'
-        expect(logo.classes()).not.toContain('c-icon--je,c-icon-je--transparentBg');
+        // so have to check for 'c-logo-img,c-icon--je,c-icon-je--alt' not just 'c-icon-je--alt'
+        expect(logo.classes()).toContain('c-logo-img,c-icon--je,c-icon-je--alt');
+    });
+
+    it('shouldn\'t have "c-icon-je--alt" class if if "headerBackgroundTheme" property is not "red", "transparent"', () => {
+        // Arrange
+        const propsData = {
+            theme: 'je',
+            headerBackgroundTheme: 'green',
+            companyName: 'Just Eat'
+        };
+
+        // Act
+        const wrapper = shallowMount(Logo, { propsData });
+        const logo = wrapper.find('[data-js-test="c-icon--je"]');
+
+        // Assert
+        // with dynamically rendered components
+        // dynamic classes returned as one string in the array
+        // so have to check for 'c-logo-img,c-icon--je,c-icon-je--alt' not just 'c-icon-je--alt'
+        expect(logo.classes()).not.toContain('c-logo-img,c-icon--je,c-icon-je--alt');
     });
 });
