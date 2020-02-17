@@ -280,10 +280,12 @@ export default {
             type: Boolean,
             default: false
         },
+
         hasUnreadOffers: {
             type: Boolean,
             default: false
         },
+
         showForYouCopy: {
             type: Boolean,
             default: false
