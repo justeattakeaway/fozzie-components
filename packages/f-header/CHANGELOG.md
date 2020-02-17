@@ -51,6 +51,7 @@ v2.0.0-beta.37
 ### Changed
 - Saved cards' URL to avoid an unnecessary redirect.
 
+
 v2.0.0-beta.36
 ------------------------------
 *February 5, 2020*
