@@ -30,7 +30,6 @@ const initialiseBraze = (options = {}) => {
                         appboy.requestContentCardsRefresh();
 
                         appboy.subscribeToContentCardsUpdates(contentCards => contentCards
-                            && contentCards.cards.length
                             && handleContentCards
                             && handleContentCards(contentCards));
                     }
