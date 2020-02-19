@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-header",
   "description": "Fozzie Header – Globalised Header Component",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "dist/f-header.umd.min.js",
   "files": [
     "dist"
@@ -28,7 +28,8 @@
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-header ./src/index.js",
     "demo": "vue serve --open ./src/components/Demo.vue",
-    "lint": "vue-cli-service lint --fix",
+    "lint": "vue-cli-service lint",
+    "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit"
   },
   "browserslist": [
@@ -41,7 +42,8 @@
     "lodash-es": "4.17.15"
   },
   "peerDependencies": {
-    "@justeat/f-trak": "0.6.0"
+    "@justeat/f-trak": "0.6.0",
+    "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "3.9.2",
