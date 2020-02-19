@@ -1,42 +1,45 @@
-const initialiseBraze = (options = {}) => {
-    if (typeof window !== 'undefined') {
-        window.dataLayer = window.dataLayer || [];
-        const {
-            apiKey = null,
-            userId = null,
-            enableLogging = false,
-            disableComponent = false,
-            callbacks = {}
-        } = options;
-        const { handleContentCards = null } = callbacks;
+const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
+    if (typeof window === 'undefined') reject(new Error('window is not defined'));
 
-        if (!disableComponent) {
-            import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
-                .then(({ default: appboy }) => {
-                    if (apiKey && apiKey.length && userId && userId.length) {
-                        appboy.initialize(apiKey, { enableLogging });
+    const {
+        apiKey = null,
+        userId = null,
+        enableLogging = false,
+        disableComponent = false,
+        callbacks = {}
+    } = options;
+    const { handleContentCards = null } = callbacks;
 
-                        appboy.display.automaticallyShowNewInAppMessages();
+    if (disableComponent) reject(new Error('Braze invocation is disabled'));
 
-                        appboy.openSession();
-                        window.appboy = appboy;
+    window.dataLayer = window.dataLayer || [];
 
-                        appboy.changeUser(userId, () => {
-                            window.dataLayer.push({
-                                event: 'appboyReady'
-                            });
-                        });
+    import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
+        .then(({ default: appboy }) => {
+            if (apiKey && apiKey.length && userId && userId.length) {
+                appboy.initialize(apiKey, { enableLogging });
 
-                        appboy.requestContentCardsRefresh();
+                appboy.display.automaticallyShowNewInAppMessages();
 
-                        appboy.subscribeToContentCardsUpdates(contentCards => contentCards
-                            && handleContentCards
-                            && handleContentCards(contentCards));
-                    }
-                })
-                .catch(error => `An error occurred while loading the component: ${error}`);
-        }
-    }
-};
+                appboy.openSession();
+                window.appboy = appboy;
+
+                appboy.changeUser(userId, () => {
+                    window.dataLayer.push({
+                        event: 'appboyReady'
+                    });
+                });
+
+                appboy.requestContentCardsRefresh();
+
+                appboy.subscribeToContentCardsUpdates(contentCards => contentCards
+                    && handleContentCards
+                    && handleContentCards(contentCards));
+
+                resolve();
+            }
+        })
+        .catch(error => reject(new Error(`An error occurred while loading the component: ${error}`)));
+});
 
 export default initialiseBraze;
