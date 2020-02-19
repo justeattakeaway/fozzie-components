@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-metadata",
   "description": "Fozzie Metadata Component",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "main": "src/index.js",
   "files": [
     "dist"
@@ -26,7 +26,8 @@
   ],
   "scripts": {
     "build": "yarn lint",
-    "lint": "vue-cli-service lint --fix"
+    "lint": "vue-cli-service lint --fix",
+    "test": "jest --coverage"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "3.9.2",
-    "@vue/cli-plugin-eslint": "3.9.2"
+    "@vue/cli-plugin-eslint": "3.9.2",
+    "jest": "^25.1.0"
   }
 }
