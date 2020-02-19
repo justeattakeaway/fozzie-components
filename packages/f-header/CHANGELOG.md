@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.1
+------------------------------
+*February 19, 2020*
+
+### Added
+- `@justeat/browserslist-config-fozzie` added to `peerDependencies`
+
+### Changed
+- Separated out `lint` and `lint:fix` into two tasks (so CircleCI build can run lint task without fixing)
+
+
 v2.0.0
 ------------------------------
 *February 13, 2020*
