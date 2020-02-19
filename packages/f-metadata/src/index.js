@@ -1,3 +1,5 @@
+const noop = () => {};
+
 const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
     if (typeof window === 'undefined') reject(new Error('window is not defined'));
 
@@ -8,7 +10,7 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
         disableComponent = false,
         callbacks = {}
     } = options;
-    const { handleContentCards = null } = callbacks;
+    const { handleContentCards = noop } = callbacks;
 
     if (disableComponent) reject(new Error('Braze invocation is disabled'));
 
@@ -32,9 +34,7 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
 
                 appboy.requestContentCardsRefresh();
 
-                appboy.subscribeToContentCardsUpdates(contentCards => contentCards
-                    && handleContentCards
-                    && handleContentCards(contentCards));
+                appboy.subscribeToContentCardsUpdates(handleContentCards);
 
                 resolve();
             }
