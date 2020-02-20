@@ -25,6 +25,7 @@
     "fozzie"
   ],
   "scripts": {
+    "prepublish": "yarn test",
     "build": "yarn lint",
     "lint": "vue-cli-service lint --fix",
     "test": "jest --coverage"
