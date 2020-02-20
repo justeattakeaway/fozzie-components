@@ -36,7 +36,7 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
 
                 appboy.subscribeToContentCardsUpdates(handleContentCards);
 
-                resolve();
+                resolve(appboy);
             }
         })
         .catch(error => reject(new Error(`An error occurred while loading the component: ${error}`)));
