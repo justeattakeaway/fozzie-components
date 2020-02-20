@@ -1,7 +1,7 @@
 const noop = () => {};
 
 const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
-    if (typeof window === 'undefined') reject(new Error('window is not defined'));
+    if (typeof window === 'undefined') return reject(new Error('window is not defined'));
 
     const {
         apiKey = null,
@@ -12,11 +12,11 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
     } = options;
     const { handleContentCards = noop } = callbacks;
 
-    if (disableComponent) reject(new Error('disableComponent is set to true'));
+    if (disableComponent) return resolve(null);
 
     window.dataLayer = window.dataLayer || [];
 
-    import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
+    return import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
         .then(({ default: appboy }) => {
             if (apiKey && apiKey.length && userId && userId.length) {
                 appboy.initialize(apiKey, { enableLogging });

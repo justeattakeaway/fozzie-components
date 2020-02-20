@@ -35,13 +35,13 @@ describe('f-metadata', () => {
         jest.resetAllMocks();
     });
 
-    it('should not call initialise if disable component flag is set', () => {
+    it('should resolve as null if disableComponent is provided', () => {
         // Assemble & Act
         expect.assertions(2);
-        initialiseBraze({ ...settings, disableComponent: true }).catch(error => {
+        initialiseBraze({ ...settings, disableComponent: true }).then(instance => {
             // Assert
             expect(appboy.initialize).not.toHaveBeenCalled();
-            expect(error.message).toBe('disableComponent is set to true');
+            expect(instance).toBe(null);
         });
     });
 
