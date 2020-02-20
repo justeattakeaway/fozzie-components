@@ -14,7 +14,12 @@ describe('f-metadata › node', () => {
     });
 
     it('should not call initialise if window is undefined', () => {
-        // Assert
-        initialiseBraze().catch(() => expect(appboy.initialize).not.toHaveBeenCalled());
+        // Assemble & Act
+        expect.assertions(2);
+        initialiseBraze().catch(error => {
+            // Assert
+            expect(appboy.initialize).not.toHaveBeenCalled();
+            expect(error.message).toBe('window is not defined');
+        });
     });
 });

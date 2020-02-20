@@ -12,7 +12,7 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
     } = options;
     const { handleContentCards = noop } = callbacks;
 
-    if (disableComponent) reject(new Error('Braze invocation is disabled'));
+    if (disableComponent) reject(new Error('disableComponent is set to true'));
 
     window.dataLayer = window.dataLayer || [];
 

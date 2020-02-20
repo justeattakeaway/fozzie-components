@@ -37,10 +37,12 @@ describe('f-metadata', () => {
 
     it('should not call initialise if disable component flag is set', () => {
         // Assemble & Act
-        initialiseBraze({ ...settings, disableComponent: true });
-
-        // Assert
-        expect(appboy.initialize).not.toHaveBeenCalled();
+        expect.assertions(2);
+        initialiseBraze({ ...settings, disableComponent: true }).catch(error => {
+            // Assert
+            expect(appboy.initialize).not.toHaveBeenCalled();
+            expect(error.message).toBe('disableComponent is set to true');
+        });
     });
 
     it('should not call initialise if apiKey is not set', () => {
@@ -69,6 +71,17 @@ describe('f-metadata', () => {
         });
     });
 
+    it('should noop the callback if no function is provided', () => {
+        // Assemble & Act
+        expect.assertions(1);
+        initialiseBraze({ ...settings, callbacks: {} }).then(instance => {
+            appboy.subscribeToContentCardsUpdates.mock.calls[0][0]();
+
+            // Assert
+            expect(instance).toBeDefined();
+        });
+    });
+
     it('should fire a datalayer event when change user is called', () => {
         // Assemble
         const push = jest.fn();
@@ -90,10 +103,5 @@ describe('f-metadata', () => {
             appboy.subscribeToContentCardsUpdates.mock.calls[0][0](cards);
             expect(handleContentCards).toHaveBeenCalledWith(cards);
         });
-    });
-
-    it('should reject if the appboy-web-sdk module is unavailable', () => {
-        jest.mock('appboy-web-sdk', () => {});
-        initialiseBraze(settings);
     });
 });
