@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.5.0
+------------------------------
+*February 24, 2020*
+
+### Changed
+- Updated packages to have consistent lint rules
+- CircleCI Badge on README replaces TravisCI badge
+- Node version (`package.json`) updated to be `>=10.0.0` across all packages, as that's what we test against.
+- CircleCI Build now runs lint and build checks on all packages
+- `f-services` patch release (deleted some redundant/unneeded packages)
+
+
 v1.4.1
 ------------------------------
 *February 10, 2020*
