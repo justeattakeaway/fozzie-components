@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest (roll into next release)
+------------------------------
+*February 25, 2020*
+
+### Changed
+- `jest` config updates. `jsx` removed from transforms (as we don't use) and `transformIgnorePatterns` updated, `common.scss` added to globals loaded in, and `moduleNameMapper` updated to load in scss imports from `common.scss`.
+- Skipped test re-added (as it passes when tested)
+
+
 v2.0.0
 ------------------------------
 *February 19, 2020*

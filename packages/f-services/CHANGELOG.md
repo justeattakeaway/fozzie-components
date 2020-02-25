@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+Latest (roll into next release)
+------------------------------
+*February 25, 2020*
+
+### Changed
+- `jest` config updates. `moduleNameMapper` removed, `jsx` removed from checks (as we don't use) and `transformIgnorePatterns` updated.
+
+
 0.13.2
 ------------------------------
 *february 24, 2020*
