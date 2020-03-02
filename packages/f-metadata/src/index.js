@@ -20,27 +20,27 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
     window.dataLayer = window.dataLayer || [];
 
     return import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
-            .then(({ default: appboy }) => {
-                appboy.initialize(apiKey, { enableLogging });
+        .then(({ default: appboy }) => {
+            appboy.initialize(apiKey, { enableLogging });
 
-                appboy.display.automaticallyShowNewInAppMessages();
+            appboy.display.automaticallyShowNewInAppMessages();
 
-                appboy.openSession();
-                window.appboy = appboy;
+            appboy.openSession();
+            window.appboy = appboy;
 
-                appboy.changeUser(userId, () => {
-                    window.dataLayer.push({
-                        event: 'appboyReady'
-                    });
+            appboy.changeUser(userId, () => {
+                window.dataLayer.push({
+                    event: 'appboyReady'
                 });
+            });
 
-                appboy.requestContentCardsRefresh();
+            appboy.requestContentCardsRefresh();
 
-                appboy.subscribeToContentCardsUpdates(handleContentCards);
+            appboy.subscribeToContentCardsUpdates(handleContentCards);
 
-                return resolve(appboy);
-            })
-            .catch(error => reject(new Error(`An error occurred while loading the component: ${error}`)));
+            return resolve(appboy);
+        })
+        .catch(error => reject(new Error(`An error occurred while loading the component: ${error}`)));
 });
 
 export default initialiseBraze;
