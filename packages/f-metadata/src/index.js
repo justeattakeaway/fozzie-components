@@ -12,13 +12,15 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
     } = options;
     const { handleContentCards = noop } = callbacks;
 
-    if (disableComponent) return resolve(null);
+    if (disableComponent || !apiKey || !userId) {
+        handleContentCards(null);
+        return resolve(null);
+    }
 
     window.dataLayer = window.dataLayer || [];
 
     return import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
-        .then(({ default: appboy }) => {
-            if (apiKey && apiKey.length && userId && userId.length) {
+            .then(({ default: appboy }) => {
                 appboy.initialize(apiKey, { enableLogging });
 
                 appboy.display.automaticallyShowNewInAppMessages();
@@ -36,10 +38,9 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
 
                 appboy.subscribeToContentCardsUpdates(handleContentCards);
 
-                resolve(appboy);
-            }
-        })
-        .catch(error => reject(new Error(`An error occurred while loading the component: ${error}`)));
+                return resolve(appboy);
+            })
+            .catch(error => reject(new Error(`An error occurred while loading the component: ${error}`)));
 });
 
 export default initialiseBraze;
