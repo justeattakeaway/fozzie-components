@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+2.3.0
+------------------------------
+*March  2, 2020*
+
+### Changed
+- Callback with `null` if `apiKey` or `userId` is not defined.
+- Return before SDK import if dependencies are not available.
+
+
 2.2.0
 ------------------------------
 *February  20, 2020*
