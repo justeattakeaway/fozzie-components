@@ -68,7 +68,7 @@ export default {
         gtm: 'click_courier_signup'
     },
     offers: {
-        text: 'For You',
+        text: 'For you',
         url: '/offers'
     }
 };
