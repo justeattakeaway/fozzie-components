@@ -38,12 +38,9 @@
             }'
             :href="offersCopy.url"
             class="c-nav-featureLink u-showBelowMid">
-            <component
-                :is="showForYouCopy ? 'gift-icon' : 'offer-icon'"
-                class="c-nav-icon c-nav-icon--offers"
-            />
+            <gift-icon class="c-nav-icon c-nav-icon--offers" />
             <span class="is-visuallyHidden">
-                {{ showForYouCopy ? offersCopy.text : 'Offers' }}
+                {{ offersCopy.text }}
             </span>
         </a>
 
@@ -63,11 +60,8 @@
                         }'
                         :href="offersCopy.url"
                         class="c-nav-list-link u-showAboveMid">
-                        <component
-                            :is="showForYouCopy ? 'gift-icon' : 'offer-icon'"
-                            class="c-nav-icon c-nav-icon--offers"
-                        />
-                        {{ showForYouCopy ? offersCopy.text : 'Offers' }}
+                        <gift-icon class="c-nav-icon c-nav-icon--offers" />
+                        {{ offersCopy.text }}
                     </a>
                 </li>
                 <li
@@ -271,11 +265,6 @@ export default {
         },
 
         showOffersLink: {
-            type: Boolean,
-            default: false
-        },
-
-        showForYouCopy: {
             type: Boolean,
             default: false
         },
