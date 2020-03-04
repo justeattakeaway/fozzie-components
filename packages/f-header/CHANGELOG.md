@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.3
+------------------------------
+*March 4, 2020*
+
+### Changed
+- Case of "For you" navigation copy to match original designs.
+
+### Removed
+- Temporary feature toggle for the "For you" copy change.
+
+
 v2.0.2
 ------------------------------
 *March 3, 2020*
