@@ -209,7 +209,6 @@
 import {
     DeliveryIcon,
     GiftIcon,
-    OfferIcon,
     ProfileIcon
 } from '@justeat/f-vue-icons';
 import sharedServices from '@justeat/f-services';
@@ -219,7 +218,6 @@ export default {
     components: {
         DeliveryIcon,
         GiftIcon,
-        OfferIcon,
         ProfileIcon
     },
 
