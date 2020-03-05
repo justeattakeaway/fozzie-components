@@ -4,9 +4,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+v2.1.0
 ------------------------------
-*February 25, 2020*
+*March 5, 2020*
+
+### Fixed
+- Moved v-click-outside handler from button to parent element to prevent the country selector from closing on-click.
 
 ### Changed
 - `jest` config updates. `jsx` removed from transforms (as we don't use) and `transformIgnorePatterns` updated, `common.scss` added to globals loaded in, and `moduleNameMapper` updated to load in scss imports from `common.scss`.
