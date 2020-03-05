@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.1
+------------------------------
+*March 05, 2020*
+
+### Changed
+- Update courier footer link URLs for IE (Ireland)
+
+
 Latest (roll into next release)
 ------------------------------
 *February 25, 2020*
