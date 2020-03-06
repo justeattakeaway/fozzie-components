@@ -13,8 +13,6 @@ v2.1.0
 - Moved v-click-outside handler from button to parent element to prevent the country selector from closing on-click.
 
 
-Latest (roll into next release)
-------------------------------
 *March 05, 2020*
 
 ### Changed
