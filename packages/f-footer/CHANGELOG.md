@@ -13,6 +13,10 @@ v2.1.0
 - Moved v-click-outside handler from button to parent element to prevent the country selector from closing on-click.
 
 
+v2.0.1
+------------------------------
+*March 5, 2020*
+
 ### Changed
 - Update courier footer link URLs for IE (Ireland)
 - `jest` config updates. `jsx` removed from transforms (as we don't use) and `transformIgnorePatterns` updated, `common.scss` added to globals loaded in, and `moduleNameMapper` updated to load in scss imports from `common.scss`.
