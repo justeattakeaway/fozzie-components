@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.1.0
 ------------------------------
-*March 6, 2020*
+*March 11, 2020*
 
 ### Changed
 - Case of "For you" navigation copy to match original designs.
