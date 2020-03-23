@@ -1,42 +1,46 @@
-const initialiseBraze = (options = {}) => {
-    if (typeof window !== 'undefined') {
-        window.dataLayer = window.dataLayer || [];
-        const {
-            apiKey = null,
-            userId = null,
-            enableLogging = false,
-            disableComponent = false,
-            callbacks = {}
-        } = options;
-        const { handleContentCards = null } = callbacks;
+const noop = () => {};
 
-        if (!disableComponent) {
-            import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
-                .then(({ default: appboy }) => {
-                    if (apiKey && apiKey.length && userId && userId.length) {
-                        appboy.initialize(apiKey, { enableLogging });
+const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
+    if (typeof window === 'undefined') return reject(new Error('window is not defined'));
 
-                        appboy.display.automaticallyShowNewInAppMessages();
+    const {
+        apiKey = null,
+        userId = null,
+        enableLogging = false,
+        disableComponent = false,
+        callbacks = {}
+    } = options;
+    const { handleContentCards = noop } = callbacks;
 
-                        appboy.openSession();
-                        window.appboy = appboy;
-
-                        appboy.changeUser(userId, () => {
-                            window.dataLayer.push({
-                                event: 'appboyReady'
-                            });
-                        });
-
-                        appboy.requestContentCardsRefresh();
-
-                        appboy.subscribeToContentCardsUpdates(contentCards => contentCards
-                            && handleContentCards
-                            && handleContentCards(contentCards));
-                    }
-                })
-                .catch(error => `An error occurred while loading the component: ${error}`);
-        }
+    if (disableComponent || !apiKey || !userId) {
+        handleContentCards(null);
+        return resolve(null);
     }
-};
+
+    window.dataLayer = window.dataLayer || [];
+
+    return import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
+        .then(({ default: appboy }) => {
+            appboy.initialize(apiKey, { enableLogging });
+
+            appboy.display.automaticallyShowNewInAppMessages();
+
+            appboy.openSession();
+            window.appboy = appboy;
+
+            appboy.changeUser(userId, () => {
+                window.dataLayer.push({
+                    event: 'appboyReady'
+                });
+            });
+
+            appboy.requestContentCardsRefresh();
+
+            appboy.subscribeToContentCardsUpdates(handleContentCards);
+
+            resolve(appboy);
+        })
+        .catch(error => reject(new Error(`An error occurred while loading the component: ${error}`)));
+});
 
 export default initialiseBraze;

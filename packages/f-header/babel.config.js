@@ -1,14 +1,13 @@
 module.exports = api => {
     // Use isTest to determine what presets and plugins to use with jest
     const isTest = api.env('test');
-    const isSettings = api.env('settings');
     const presets = [];
     const plugins = [
         '@babel/plugin-proposal-optional-chaining'
     ];
     const builtIns = (api.env('development') ? 'entry' : false);
 
-    if (!isTest && !isSettings) {
+    if (!isTest) {
         api.cache(true);
         presets.push(['@vue/app', { useBuiltIns: builtIns }]);
     }

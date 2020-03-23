@@ -152,7 +152,7 @@ export default {
                 },
                 {
                     title: 'Become a courier',
-                    url: 'https://www.fountain.com/just-eat/apply/dublin-courier?preview=true',
+                    url: 'https://couriers.just-eat.ie/application',
                     gtm: 'click_about_couriers'
                 }
             ]
@@ -167,7 +167,7 @@ export default {
                 },
                 {
                     title: 'Courier portal',
-                    url: 'https://couriers.just-eat.ie/account/login',
+                    url: 'https://couriers.just-eat.ie/application',
                     gtm: 'click_about_courier_portal'
                 }
             ]

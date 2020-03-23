@@ -1,7 +1,6 @@
 module.exports = {
     moduleFileExtensions: [
         'js',
-        'jsx',
         'json',
         'vue'
     ],
@@ -9,15 +8,17 @@ module.exports = {
     transform: {
         '^.+\\.vue$': 'vue-jest',
         '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
-        '^.+\\.jsx?$': 'babel-jest'
+        '^.+\\.js$': 'babel-jest'
     },
 
     transformIgnorePatterns: [
-        'node_modules/(?!(babel-jest|jest-vue-preprocessor|lodash-es)/)'
+        'node_modules/(?!(lodash-es)/)'
     ],
 
     moduleNameMapper: {
-        '^@/(.*)$': '<rootDir>/src/$1'
+        '^@/(.*)$': '<rootDir>/src/$1',
+        '^~include-media/(.*)$': '<rootDir>../../node_modules/include-media/$1',
+        '^~@justeat/(.*)$': '<rootDir>../../node_modules/@justeat/$1'
     },
 
     snapshotSerializers: [
@@ -28,5 +29,15 @@ module.exports = {
         '**/*.{spec|test}.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)'
     ],
 
-    testURL: 'http://localhost/'
+    testURL: 'http://localhost/',
+
+    globals: {
+        'vue-jest': {
+            resources: {
+                scss: [
+                    './src/assets/scss/common.scss'
+                ]
+            }
+        }
+    }
 };

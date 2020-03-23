@@ -3,11 +3,28 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+Latest (roll into next release)
+------------------------------
+*February 25, 2020*
+
+### Changed
+- `jest` config updates. `moduleNameMapper` removed, `jsx` removed from checks (as we don't use) and `transformIgnorePatterns` updated.
+
+
+0.13.2
+------------------------------
+*february 24, 2020*
+
+### Changed
+- Unneeded dependencies removed (as in root monorepo dependencies or not used)
+
+
 0.13.1
 ------------------------------
 *January 22, 2020*
 
- ### Changed
+### Changed
 - Refactor JSDoc to conform to syntax rules
 - Refactor `getLocale` function to reduce complexity
 - Refactor `addEvent` function to reduce complexity
@@ -20,7 +37,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ------------------------------
 *November 8, 2019*
 
- ### Changed
+### Changed
 - Making sure that necessary 3rd party dependencies are bundled as part of the package
 
 
@@ -28,7 +45,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ------------------------------
 *November 8, 2019*
 
- ### Changed
+### Changed
 - Switched over to rollup for bundling as webpack was giving strange results when importing as a library
 
 
@@ -36,7 +53,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ------------------------------
 *October 4, 2019*
 
- ### Added
+### Added
 - `window-or-global` package for SSR issue`
 
 
@@ -44,10 +61,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ------------------------------
 *October 2, 2019*
 
- ### Added
+### Added
 - Tests for new services that have been added
 
- ### Changed
+### Changed
 - `webpack.config.js` and packages for a better build
 - Name of the export in the `index.js` to `sharedServices` for consistency
 
@@ -56,7 +73,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ------------------------------
 *October 1, 2019*
 
- ### Added
+### Added
 - `lodash-es` throttle for the `addEvent` service
 
 
@@ -64,7 +81,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ------------------------------
 *September 30, 2019*
 
- ### Added
+### Added
 - `getWindowWidth` method for returning the current width of the window
 - `getWindowHeight` method for returning the current height of the window
 - `addEvent` method for listening to a given event and applying a given function at a given time
@@ -75,7 +92,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ------------------------------
 *September 27, 2019*
 
- ### Removed
+### Removed
 - `transformLocale` as it is not needed any more
 
 
@@ -83,7 +100,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ------------------------------
 *September 26, 2019*
 
- ### Changed
+### Changed
 - Webpack config to add babel polyfill
 
 
@@ -91,7 +108,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ------------------------------
 *September 26, 2019*
 
- ### Added
+### Added
 - `transformLocale` method for changing the case format of the locale
 
 
@@ -99,7 +116,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ------------------------------
 *September 25, 2019*
 
- ### Added
+### Added
 - String manipulation on locale in `getLocale` method
 
 
@@ -107,7 +124,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ------------------------------
 *September 24, 2019*
 
- ### Added
+### Added
 - Added fallback for other method in shared service
 
 
@@ -115,7 +132,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ------------------------------
 *September 24, 2019*
 
- ### Added
+### Added
 - Fallback for locale in shared logic
 
 
@@ -123,6 +140,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ------------------------------
 *September 24, 2019*
 
- ### Added
+### Added
 - Created service package for shared logic
 - Tests for the methods inside

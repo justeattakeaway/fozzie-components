@@ -25,7 +25,7 @@
   dependencies:
     "@babel/highlight" "^7.0.0"
 
-"@babel/core@7.7.2", "@babel/core@^7.0.0", "@babel/core@^7.1.0", "@babel/core@^7.6.4":
+"@babel/core@^7.0.0", "@babel/core@^7.1.0", "@babel/core@^7.6.4":
   version "7.7.2"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.7.2.tgz#ea5b99693bcfc058116f42fa1dd54da412b29d91"
   integrity sha1-6luZaTvPwFgRb0L6HdVNpBKynZE=
