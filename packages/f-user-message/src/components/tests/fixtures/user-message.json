@@ -1,0 +1,35 @@
+{
+    "dk-DK": {
+      "userMessageText": "",
+      "userMessageEnabled": false
+    },
+    "en-AU": {
+      "userMessageText": "The current adverse weather conditions mean that deliveries might take a little longer than usual. Call the restaurant if you've got any questions about your order.",
+      "userMessageEnabled": true
+    },
+    "en-GB": {
+      "userMessageText": "The current adverse weather conditions mean that deliveries might take a little longer than usual. Call the restaurant if you've got any questions about your order.",
+      "userMessageEnabled": true
+    },
+    "en-IE": {
+      "userMessageText": "Due to ongoing adverse weather conditions, Just Eat deliveries may be affected or unavailable in some areas. This is in the interest of driver safety and at the discretion of our restaurant partners. Thank you for your patience during this time. The Just Eat team.",
+      "userMessageEnabled": false
+    },
+    "en-NZ": {
+      "userMessageText": "",
+      "userMessageEnabled": false
+    },
+    "es-ES": {
+      "userMessageText": "",
+      "userMessageEnabled": false
+    },
+    "it-IT": {
+      "userMessageText": "",
+      "userMessageEnabled": false
+    },
+    "nb-NO": {
+      "userMessageText": "",
+      "userMessageEnabled": false
+    }
+  }
+  
