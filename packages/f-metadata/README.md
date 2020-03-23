@@ -9,7 +9,7 @@
 ---
 
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-metadata.svg)](https://badge.fury.io/js/%40justeat%2Ff-metadata)
-[![Build Status](https://travis-ci.org/justeat/f-metadata.svg)](https://travis-ci.org/justeat/f-metadata)
+[![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg&circle-token=4c77c1990b98c8e06e01b497bc80f376346f609d)](https://circleci.com/gh/justeat/workflows/fozzie-components)
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-metadata/badge.svg)](https://coveralls.io/github/justeat/f-metadata)
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-metadata/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-metadata?targetFile=package.json)
 
@@ -39,7 +39,7 @@
     `enableLogging` - If set to `true`, it allows Braze logging in the console. Default set to `false`.
 
     `disableComponent` - If set to `true`, it does not initialise Braze when called. Default set to `false`.
-    
+
 ## Migration to v2
 
 Version 2 exposes the appboy instance as opposed to content cards as part of the refresh callback, this makes it easier to access properties on the instance such as `getUnviewedCardCount` and is a step closer to an isomorphic solution.

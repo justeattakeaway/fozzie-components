@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-services",
   "description": "Fozzie Services - Shared Services for Components and projects",
-  "version": "0.13.1",
+  "version": "0.13.2",
   "main": "dist/f-services.umd.js",
   "module": "dist/f-services.esm.js",
   "source": "src/index.js",
@@ -21,28 +21,26 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "keywords": [
     "fozzie"
   ],
   "scripts": {
-    "prepublishOnly": "yarn test && yarn build",
-    "build": "yarn lint && rollup --config",
-    "lint": "vue-cli-service lint --fix",
+    "prepublishOnly": "yarn lint && yarn test && yarn build",
+    "build": "rollup --config",
+    "lint": "vue-cli-service lint",
+    "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@babel/polyfill": "7.7.0",
     "lodash-es": "4.17.15",
     "window-or-global": "1.0.1"
   },
   "devDependencies": {
-    "@babel/core": "7.7.2",
-    "@babel/preset-env": "7.7.1",
     "@vue/cli-plugin-eslint": "4.0.5",
     "@vue/cli-plugin-unit-jest": "4.0.5",
     "rollup": "1.26.3",

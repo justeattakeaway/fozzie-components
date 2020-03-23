@@ -2,10 +2,10 @@
     <div :class="$style['c-countrySelectorContainer']">
         <div
             :class="$style['c-countrySelector']"
+            v-click-outside="hideCountryList"
             @keyup.esc="hideCountryList">
             <button
                 id="countrySelector-button"
-                v-click-outside="hideCountryList"
                 :aria-expanded="showCountryList ? 'true' : 'false'"
                 :aria-label="changeCountryText"
                 :class="[
