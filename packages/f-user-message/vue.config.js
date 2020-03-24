@@ -1,4 +1,5 @@
 const magicImporter = require('node-sass-magic-importer');
+const devServer = require('./vue.config.devServer');
 
 // vue.config.js
 module.exports = {
@@ -13,5 +14,6 @@ module.exports = {
                 // eslint-disable-next-line quotes
                 data: `@import "@/assets/scss/common.scss";`
             });
-    }
+    },
+    devServer: devServer
 };

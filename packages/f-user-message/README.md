@@ -62,9 +62,6 @@
      component can be called without locale property, otherwise it accepts it 
      in format like 'en-GB'
 
-    `debugmode` - This is to allow **_local, development only_**, testing and
-     should not be used in production. It has `false` as a default value
-
 ## Development
 
 Running below `yarn` commands from the component folder, starts a development
@@ -77,5 +74,6 @@ yarn install
 yarn demo
 ```
 
-NOTE: _`debugmode` is set to `true` in the example, to enable local preview.
-See [Demo](./src/demo/index.vue) use for more detail._
+A development server is set to provide a stubed response for the api call, when running locally. 
+
+See [Demo folder](./src/demo/) for more detail._

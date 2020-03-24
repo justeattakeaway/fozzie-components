@@ -34,10 +34,6 @@ export default {
         locale: {
             type: String,
             default: ''
-        },
-        debugmode: {
-            type: Boolean,
-            default: false
         }
     },
     data () {
@@ -55,7 +51,7 @@ export default {
     },
     methods: {
         async populateUserMessage () {
-            const message = await UserMessageApi.getUserMessage(this.locale, this.debugmode);
+            const message = await UserMessageApi.getUserMessage(this.locale);
             if (message && message.length) {
                 this.userMessageText = message;
                 this.userMessageEnabled = true;

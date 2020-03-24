@@ -7,7 +7,6 @@
             name="viewport"
             content="width=device-width, initial-scale=1">
         <user-message
-            :debugmode="true"
             locale="en-GB" />
     </div>
 </template>
