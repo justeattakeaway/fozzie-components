@@ -4,19 +4,20 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import UserMessage from '../UserMessage.vue';
 import userMessageService from '../../services/UserMessageApi';
 
+jest.useFakeTimers();
+
 const localVue = createLocalVue();
+const axiosMock = new MockAdapter(axios);
+const _locale = 'en-GB';
+const propsData = {
+    locale: _locale
+};
 
 let spy;
 let wrapper;
-let locale;
-const axiosMock = new MockAdapter(axios);
 
 beforeEach(() => {
     jest.clearAllMocks();
-
-    locale = {
-        appLocale: () => 'en-GB'
-    };
 });
 
 describe('UserMessage component', () => {
@@ -27,7 +28,7 @@ describe('UserMessage component', () => {
     it('calls populateUserMessage on mount', async () => {
         // Arrange
         axiosMock.onGet('/user-message.json').reply(200, {
-            'en-GB': {
+            [_locale]: {
                 userMessageText: 'test message',
                 userMessageEnabled: true
             }
@@ -38,7 +39,7 @@ describe('UserMessage component', () => {
         // Act
         shallowMount(UserMessage, {
             localVue,
-            locale,
+            propsData,
             methods: {
                 populateUserMessage: mockPopulateUserMessage
             }
@@ -52,162 +53,162 @@ describe('UserMessage component', () => {
         // Arrange
         spy = jest.spyOn(userMessageService, 'getUserMessage');
         axiosMock.onGet('/user-message.json').reply(200, {
-            'en-GB': {
+            [_locale]: {
                 userMessageText: 'test message',
                 userMessageEnabled: true
             }
         });
 
         // Act
-        shallowMount(UserMessage, { computed: locale });
+        shallowMount(UserMessage, { propsData });
 
         // Assert
         expect(spy).toHaveBeenCalledTimes(1);
     });
+});
 
-    describe('should contain message when', () => {
-        it('user message is enabled and not empty', async () => {
-            // Arrange
-            axiosMock.onGet('/user-message.json').reply(200, {
-                'en-GB': {
-                    userMessageText: 'test message',
-                    userMessageEnabled: true
-                }
-            });
-
-            wrapper = shallowMount(UserMessage, { computed: locale });
-
-            // Act
-            await wrapper.vm.populateUserMessage();
-
-            // Assert
-            expect(wrapper.vm.userMessageText).toEqual('test message');
+describe('should be displayed when', () => {
+    it('user message is enabled and not empty', async () => {
+        // Arrange
+        axiosMock.onGet('/user-message.json').reply(200, {
+            [_locale]: {
+                userMessageText: 'test message',
+                userMessageEnabled: true
+            }
         });
+
+        wrapper = shallowMount(UserMessage, { propsData });
+
+        // Act
+        await wrapper.vm.populateUserMessage();
+
+        // Assert
+        expect(wrapper.vm.userMessageEnabled).toBe(true);
+    });
+});
+
+describe('should contain message when', () => {
+    it('user message is enabled and not empty', async () => {
+        // Arrange
+        axiosMock.onGet('/user-message.json').reply(200, {
+            [_locale]: {
+                userMessageText: 'test message',
+                userMessageEnabled: true
+            }
+        });
+
+        wrapper = shallowMount(UserMessage, { propsData });
+
+        // Act
+        await wrapper.vm.populateUserMessage();
+
+        // Assert
+        expect(wrapper.vm.userMessageText).toEqual('test message');
+    });
+});
+
+describe('should not contain message when', () => {
+    it('user message is present but disabled', async () => {
+        axiosMock.onGet('/user-message.json').reply(200, {
+            [_locale]: {
+                userMessageText: 'test message',
+                userMessageEnabled: false
+            }
+        });
+
+        wrapper = shallowMount(UserMessage, { propsData });
+
+        // Act
+        await wrapper.vm.populateUserMessage();
+
+        // Assert
+        expect(wrapper.vm.userMessageText).toEqual('');
     });
 
-    describe('should not contain message when', () => {
-        it('user message is present but disabled', async () => {
-            axiosMock.onGet('/user-message.json').reply(200, {
-                'en-GB': {
-                    userMessageText: 'test message',
-                    userMessageEnabled: false
-                }
-            });
-
-            wrapper = shallowMount(UserMessage, { computed: locale });
-
-            // Act
-            await wrapper.vm.populateUserMessage();
-
-            // Assert
-            expect(wrapper.vm.userMessageText).toEqual('');
+    it('user message is enabled but empty', async () => {
+        axiosMock.onGet('/user-message.json').reply(200, {
+            [_locale]: {
+                userMessageText: '',
+                userMessageEnabled: true
+            }
         });
 
-        it('user message is enabled but empty', async () => {
-            axiosMock.onGet('/user-message.json').reply(200, {
-                'en-GB': {
-                    userMessageText: '',
-                    userMessageEnabled: true
-                }
-            });
+        wrapper = shallowMount(UserMessage, { propsData });
 
-            wrapper = shallowMount(UserMessage, { computed: locale });
+        // Act
+        await wrapper.vm.populateUserMessage();
 
-            // Act
-            await wrapper.vm.populateUserMessage();
-
-            // Assert
-            expect(wrapper.vm.userMessageText).toEqual('');
-        });
-
-        it('user message is enabled and empty', async () => {
-            axiosMock.onGet('/user-message.json').reply(200, {
-                'en-GB': {
-                    userMessageText: '',
-                    userMessageEnabled: true
-                }
-            });
-
-            wrapper = shallowMount(UserMessage, { computed: locale });
-
-            // Act
-            await wrapper.vm.populateUserMessage();
-
-            // Assert
-            expect(wrapper.vm.userMessageText).toEqual('');
-        });
+        // Assert
+        expect(wrapper.vm.userMessageText).toEqual('');
     });
 
-    describe('should be displayed when', () => {
-        it('user message is enabled and not empty', async () => {
-            // Arrange
-            axiosMock.onGet('/user-message.json').reply(200, {
-                'en-GB': {
-                    userMessageText: 'test message',
-                    userMessageEnabled: true
-                }
-            });
-
-            wrapper = shallowMount(UserMessage, { computed: locale });
-
-            // Act
-            wrapper.vm.populateUserMessage();
-
-            // Assert
-            expect(wrapper.vm.userMessageEnabled).toBe(true);
+    it('user message is enabled and empty', async () => {
+        axiosMock.onGet('/user-message.json').reply(200, {
+            [_locale]: {
+                userMessageText: '',
+                userMessageEnabled: true
+            }
         });
+
+        wrapper = shallowMount(UserMessage, { propsData });
+
+        // Act
+        await wrapper.vm.populateUserMessage();
+
+        // Assert
+        expect(wrapper.vm.userMessageText).toEqual('');
+    });
+});
+
+describe('should not be displayed when', () => {
+    it('user message is present but disabled', async () => {
+        axiosMock.onGet('/user-message.json').reply(200, {
+            [_locale]: {
+                userMessageText: 'test message',
+                userMessageEnabled: false
+            }
+        });
+
+        wrapper = shallowMount(UserMessage, { propsData });
+
+        // Act
+        await wrapper.vm.populateUserMessage();
+
+        // Assert
+        expect(wrapper.vm.userMessageEnabled).toBe(false);
     });
 
-    describe('should not be displayed when', () => {
-        it('user message is present but disabled', async () => {
-            axiosMock.onGet('/user-message.json').reply(200, {
-                'en-GB': {
-                    userMessageText: 'test message',
-                    userMessageEnabled: false
-                }
-            });
-
-            wrapper = shallowMount(UserMessage, { computed: locale });
-
-            // Act
-            await wrapper.vm.populateUserMessage();
-
-            // Assert
-            expect(wrapper.vm.userMessageEnabled).toBe(false);
+    it('user message is enabled but empty', async () => {
+        axiosMock.onGet('/user-message.json').reply(200, {
+            [_locale]: {
+                userMessageText: '',
+                userMessageEnabled: true
+            }
         });
 
-        it('user message is enabled but empty', async () => {
-            axiosMock.onGet('/user-message.json').reply(200, {
-                'en-GB': {
-                    userMessageText: '',
-                    userMessageEnabled: true
-                }
-            });
+        wrapper = shallowMount(UserMessage, { propsData });
 
-            wrapper = shallowMount(UserMessage, { computed: locale });
+        // Act
+        await wrapper.vm.populateUserMessage();
 
-            // Act
-            await wrapper.vm.populateUserMessage();
+        // Assert
+        expect(wrapper.vm.userMessageEnabled).toBe(false);
+    });
 
-            // Assert
-            expect(wrapper.vm.userMessageEnabled).toBe(false);
+    it('user message is enabled and empty', async () => {
+        axiosMock.onGet('/user-message.json').reply(200, {
+            [_locale]: {
+                userMessageText: 'test message',
+                userMessageEnabled: false
+            }
         });
 
-        it('user message is enabled and empty', async () => {
-            axiosMock.onGet('/user-message.json').reply(200, {
-                'en-GB': {
-                    userMessageText: 'test message',
-                    userMessageEnabled: false
-                }
-            });
+        wrapper = shallowMount(UserMessage, { propsData });
 
-            wrapper = shallowMount(UserMessage, { computed: locale });
+        // Act
+        await wrapper.vm.populateUserMessage();
 
-            // Act
-            await wrapper.vm.populateUserMessage();
-
-            // Assert
-            expect(wrapper.vm.userMessageEnabled).toBe(false);
-        });
+        // Assert
+        expect(wrapper.vm.userMessageEnabled).toBe(false);
     });
 });
