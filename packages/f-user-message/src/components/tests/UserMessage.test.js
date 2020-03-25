@@ -75,18 +75,13 @@ describe('UserMessage component', () => {
                 }
             });
 
-            try {
-                wrapper = shallowMount(UserMessage, { computed: locale });
+            wrapper = shallowMount(UserMessage, { computed: locale });
 
-                // Act
-                await wrapper.vm.populateUserMessage();
+            // Act
+            await wrapper.vm.populateUserMessage();
 
-                // Assert
-                expect(wrapper.vm.userMessageText).toEqual('test message');
-                console.log('User Message text: >>>', wrapper.vm.userMessageText);
-            } catch (error) {
-                console.log(error);
-            }
+            // Assert
+            expect(wrapper.vm.userMessageText).toEqual('test message');
         });
     });
 
