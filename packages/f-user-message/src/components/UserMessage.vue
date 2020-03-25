@@ -97,8 +97,10 @@ export default {
 }
 
 .c-userMessageText {
-    margin-left: spacing(x2);
-    margin-top: 0;
+    margin: 0 0 0 spacing(x2);
+    font-family: $font-family-base;
+    font-weight: $font-weight-base;
+    @include font-size(base);
 
     @include media('>=mid') {
         padding-left: 0;
