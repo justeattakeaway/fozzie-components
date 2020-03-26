@@ -36,13 +36,14 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "^0.13.2",
+    "@justeat/f-services": "0.13.2",
     "@justeat/f-vue-icons": "0.18.0",
-    "axios": "0.19.0",
+    "axios": "0.19.2",
     "lodash-es": "4.17.15"
   },
   "peerDependencies": {
-    "@justeat/f-trak": "0.6.0"
+    "@justeat/f-trak": "0.6.0",
+    "@justeat/eslint-config-fozzie": "3.3.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "3.9.2",
