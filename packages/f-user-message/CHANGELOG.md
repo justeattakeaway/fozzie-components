@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.1.0
 ------------------------------
-*March 25, 2020*
+*March 27, 2020*
 
 ### Added
 - Adds `f-user-message` vue component
