@@ -4,8 +4,6 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import UserMessage from '../UserMessage.vue';
 import userMessageService from '../../services/UserMessageApi';
 
-jest.useFakeTimers();
-
 const localVue = createLocalVue();
 const axiosMock = new MockAdapter(axios);
 const _locale = 'en-GB';
