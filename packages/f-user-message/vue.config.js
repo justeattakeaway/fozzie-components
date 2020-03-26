@@ -15,5 +15,5 @@ module.exports = {
                 data: `@import "@/assets/scss/common.scss";`
             });
     },
-    devServer: devServer
+    devServer
 };
