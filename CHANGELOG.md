@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.6.0
 ------------------------------
-*March 27, 2020*
+*March 30, 2020*
 
 ### Added
 - Added the `eslint-import-resolver-webpack` so that eslint can understand webpack special characters such as `@` used in import paths

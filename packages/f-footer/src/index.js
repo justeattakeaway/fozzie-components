@@ -5,7 +5,7 @@ import Footer from './components/Footer.vue';
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('Footer', Footer);
+    Vue.component('VueFooter', Footer);
 }
 
 // Create module definition for Vue.use()
