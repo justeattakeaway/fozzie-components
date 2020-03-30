@@ -6,10 +6,10 @@
         class="l-container">
         <div class="l-row">
             <div
-                :class="$style['c-userMessageContainer']"
+                :class="$style['c-userMessage-container']"
                 class="l-container--inner">
                 <clock-icon />
-                <p :class="$style['c-userMessageText']">
+                <p :class="$style['c-userMessage-text']">
                     {{ userMessageText }}
                 </p>
             </div>
@@ -68,7 +68,7 @@ export default {
     margin-top: spacing(x2);
 }
 
-.c-userMessageContainer {
+.c-userMessage-container {
     max-width: 350px;
     margin: 0 auto;
     padding: spacing(x2) 0;
@@ -84,7 +84,7 @@ export default {
     }
 
     svg {
-        fill: white;
+        fill: $white;
         min-width: 28px;
         max-width: 28px;
         width: 28px;
@@ -94,7 +94,7 @@ export default {
     }
 }
 
-.c-userMessageText {
+.c-userMessage-text {
     margin: 0 0 0 spacing(x2);
     font-family: $font-family-base;
     font-weight: $font-weight-base;

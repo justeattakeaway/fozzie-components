@@ -12,7 +12,7 @@ import UserMessage from './components/UserMessage.vue';
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('User Message', UserMessage);
+    Vue.component('UserMessage', UserMessage);
 }
 
 // Create module definition for Vue.use()

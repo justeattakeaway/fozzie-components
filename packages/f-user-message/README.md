@@ -74,6 +74,6 @@ yarn install
 yarn demo
 ```
 
-A development server is set to provide a stubed response for the api call, when running locally. 
+A development server is set to provide a stubbed response for the api call, when running locally. 
 
-See [Demo folder](./src/demo/) for more detail._
+See [Demo folder](./src/demo/) for more detail.
