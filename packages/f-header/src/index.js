@@ -12,7 +12,7 @@ import Header from './components/Header.vue';
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('Header', Header);
+    Vue.component('VueHeader', Header);
 }
 
 // Create module definition for Vue.use()
