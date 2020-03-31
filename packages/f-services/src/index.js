@@ -1,12 +1,16 @@
 /**
- * @overview Fozzie services JavaScript behaviour.
+ * @overview Fozzie's collection of shared javascript modules
  *
  * @module f-services
  */
 
+import axios from './axios';
+import globalisation from './globalisation';
+import window from './window';
 
-// Import vue component
-import sharedServices from './services/shared.service';
+export {
+    axios,
+    globalisation,
+    window
+};
 
-// To allow use as module (npm/webpack/etc.) export component
-export default sharedServices;
