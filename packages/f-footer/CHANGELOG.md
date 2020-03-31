@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest (roll into next release)
+------------------------------
+*March 30, 2020*
+
+### Changed
+- Updated name of component in `index.js` from `Footer` > `VueFooter` (as `Footer` is a reserved word according to linting rules)
+
 
 v2.1.0
 ------------------------------
