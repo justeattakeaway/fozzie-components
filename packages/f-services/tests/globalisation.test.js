@@ -72,10 +72,10 @@ describe('Globalisation services', () => {
     });
 
     describe('getTheme', () => {
-        it('returns "ml" if locale is "en-AU"', () => {
-            // Arrange
-            const locale = 'en-AU';
-
+        it.each([
+            'en-AU',
+            'en-NZ'
+        ])('returns "ml" if locale is "%s"', locale => {
             // Act
             const result = getTheme(locale);
 
@@ -83,21 +83,13 @@ describe('Globalisation services', () => {
             expect(result).toBe('ml');
         });
 
-        it('returns "ml" for Menu Log theme if locale is "en-NZ"', () => {
-            // Arrange
-            const locale = 'en-NZ';
-
-            // Act
-            const result = getTheme(locale);
-
-            // Assert
-            expect(result).toBe('ml');
-        });
-
-        it('returns "je" for Just Eat theme if locale is NOT "en-NZ"', () => {
-            // Arrange
-            const locale = 'en-GB';
-
+        it.each([
+            'en-GB',
+            'te-ST',
+            '',
+            undefined,
+            null
+        ])('returns "je" theme if locale is neither "en-AU" nor "en-NZ"', locale => {
             // Act
             const result = getTheme(locale);
 
