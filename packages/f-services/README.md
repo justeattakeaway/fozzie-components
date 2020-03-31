@@ -15,7 +15,7 @@
     You can import it in your like this (please note that styles have to be imported separately)
 
     ```
-    import { window as windowServices } from '@justeat/f-services';
+    import { windowServices } from '@justeat/f-services';
 
     // You can then (optionally) destructure
     // const { addEvent, getWindowWidth, removeEvent } = windowServices;

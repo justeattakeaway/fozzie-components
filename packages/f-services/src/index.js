@@ -4,13 +4,13 @@
  * @module f-services
  */
 
-import axios from './axios';
-import globalisation from './globalisation';
-import window from './window';
+import axiosServices from './axios';
+import globalisationServices from './globalisation';
+import windowServices from './window';
 
 export {
-    axios,
-    globalisation,
-    window
+    axiosServices,
+    globalisationServices,
+    windowServices
 };
 
