@@ -8,10 +8,16 @@ import {
     upperFirst
 } from 'lodash-es';
 
+/**
+ * Wrapper for navigator.connection and its Firefox/Safari implementations
+ */
 const getNetworkDetails = () => navigator.connection
         || navigator.mozConnection
         || navigator.webkitConnection;
 
+/**
+ * Returns a timeout in milliseconds based on the current connection speed. Slower connections will have longer timeouts.
+ */
 const getTimeout = () => {
     const connection = getNetworkDetails();
     const downlink = connection?.downlink;
@@ -38,20 +44,11 @@ const getTimeout = () => {
 };
 
 /**
- * Converts a string to Upper-Kebab-Case
- *
- * @param {string} toConvert
- * @returns {string}
- */
-const upperKebabCase = toConvert => words(toConvert)
-    .map(upperFirst)
-    .join('-');
-
-/**
  * Converts an objects' property keys into alternate casing using given transformation function.
  *
  * @param {Object} data
  * @param {Function} alternateCaser
+ * @returns {Object}
  */
 const objectToAlternateCasing = (data, alternateCaser) => {
     const alternateCasedObject = {};
@@ -80,8 +77,28 @@ const objectToAlternateCasing = (data, alternateCaser) => {
     return alternateCasedObject;
 };
 
+/**
+ * Converts an object's property names to camelCase
+ *
+ * @param {Object} data - Object to have its property names converted
+ */
 const objectToCamelCase = data => objectToAlternateCasing(data, camelCase);
 
+/**
+ * Converts a string to Upper-Kebab-Case. Can be used for request headers.
+ *
+ * @param {string} toConvert
+ * @returns {string}
+ */
+const upperKebabCase = toConvert => words(toConvert)
+    .map(upperFirst)
+    .join('-');
+
+/**
+ * Create an axios client.
+ *
+ * @param {Object} options
+ */
 const createClient = ({
     baseURL = '',
     headers,
@@ -93,6 +110,11 @@ const createClient = ({
     ...config
 });
 
+/**
+ * Wrapper for createClient that transforms response objects' property names to camelCase.
+ *
+ * @param {string} options
+ */
 const createCamelCaseClient = ({
     baseURL,
     headers
@@ -109,6 +131,11 @@ const createCamelCaseClient = ({
     }
 });
 
+/**
+ * A Smart Gateway wrapper for createCamelCaseClient.
+ *
+ * @param {string} options
+ */
 const createSmartGatewayClient = ({
     smartGatewayEndpoint: baseURL,
     headers

@@ -39,7 +39,7 @@ export const addEvent = (eventName, callBackFunction, throttleTime = 0) => {
 };
 
 /**
- * Removes chosen event.
+ * Removes given event listener from specified event.
  *
  * @requires root {object} from window-or-global module.
  * @requires root.removeEventListener {function} for removing the event listener.

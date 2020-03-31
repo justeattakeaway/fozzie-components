@@ -36,7 +36,7 @@ describe('Globalisation services', () => {
             expect(result).toBe('en-GB');
         });
 
-        it('returns the correct locale if tenantConfigs does contain the locale from tenantString', () => {
+        it('returns the correct locale if tenantConfigs contains the locale from tenantString', () => {
             // Arrange
             const tenantConfigs = {
                 'da-DK': 'dk'
