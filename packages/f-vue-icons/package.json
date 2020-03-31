@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "0.18.0",
+  "version": "0.18.1",
   "main": "dist/f-vue-icons.umd.min.js",
   "files": [
     "dist"
@@ -35,7 +35,7 @@
   ],
   "dependencies": {
     "@justeat/f-icons": "1.32.0",
-    "vue": "2.6.10"
+    "vue": "2.6.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "3.9.2",
