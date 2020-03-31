@@ -17,6 +17,9 @@
     ```
     import { window as windowServices } from '@justeat/f-services';
 
+    // You can then (optionally) destructure
+    // const { addEvent, getWindowWidth, removeEvent } = windowServices;
+
     ```
 
     If you are using Webpack, you can import the component dynamically to separate the services bundle from the main `bundle.client.js`:
@@ -27,8 +30,8 @@
     - `createClient` - Create an axios client.
     - `createCamelCaseClient` - Create an axios client with all response JSON transformed to camelCase.
     - `createSmartGatewayClient` - Wraps `createCamelCaseClient` providing a `smartGatewayEndpoint`.
-    - `objectToCamelCase` - Recursively converts object's property names to camelCase.
     - `getNetworkDetails` - Uses the navigator API (falling back to moz/webkit) to return network information.
+    - `objectToCamelCase` - Recursively converts object's property names to camelCase.
 
     ### globalisation
     - `getLocale` - Returns the locale for the current tenant, if the configuration for that locale is present, otherwise returns the default locale.
@@ -36,7 +39,7 @@
 
     ### window
     Uses the `window-or-global` module for SSR compatibility.
-    - `getWindowWidth` - Returns the current innerWidth.
-    - `getWindowHeight` - Returns the current innerHeight.
     - `addEvent` - Add an event listener with a callback function. Optional throttling.
+    - `getWindowHeight` - Returns the current innerHeight.
+    - `getWindowWidth` - Returns the current innerWidth.
     - `removeEvent` - Remove an event listener.
