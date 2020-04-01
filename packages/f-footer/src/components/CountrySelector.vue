@@ -1,8 +1,8 @@
 <template>
     <div :class="$style['c-countrySelectorContainer']">
         <div
-            :class="$style['c-countrySelector']"
             v-click-outside="hideCountryList"
+            :class="$style['c-countrySelector']"
             @keyup.esc="hideCountryList">
             <button
                 id="countrySelector-button"
