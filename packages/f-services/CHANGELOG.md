@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - Axios services module.
+- Axios as a peer dependency.
 
 ### Changed
 - Split central "shared" module into separate "window" and "globalisation" modules.

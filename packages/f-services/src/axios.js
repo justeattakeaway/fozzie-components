@@ -131,25 +131,9 @@ const createCamelCaseClient = ({
     }
 });
 
-/**
- * A Smart Gateway wrapper for createCamelCaseClient.
- *
- * @param {string} options
- */
-const createSmartGatewayClient = ({
-    smartGatewayEndpoint: baseURL,
-    headers
-} = {
-    baseURL: ''
-}) => createCamelCaseClient({
-    baseURL,
-    headers
-});
-
 export default {
     createClient,
     createCamelCaseClient,
-    createSmartGatewayClient,
     objectToCamelCase,
     getNetworkDetails
 };

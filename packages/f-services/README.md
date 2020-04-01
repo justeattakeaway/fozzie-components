@@ -29,7 +29,6 @@
     ### axios
     - `createClient` - Create an axios client.
     - `createCamelCaseClient` - Create an axios client with all response JSON transformed to camelCase.
-    - `createSmartGatewayClient` - Wraps `createCamelCaseClient` providing a `smartGatewayEndpoint`.
     - `getNetworkDetails` - Uses the navigator API (falling back to moz/webkit) to return network information.
     - `objectToCamelCase` - Recursively converts object's property names to camelCase.
 

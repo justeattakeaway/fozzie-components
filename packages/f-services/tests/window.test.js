@@ -68,7 +68,7 @@ describe('Window services', () => {
             // Arrange
             const throttleTime = 10;
             throttle.mockImplementationOnce(fn => fn);
-            
+
             // Act
             const cb = addEvent(eventName, callbackFunction, throttleTime);
 
@@ -164,7 +164,7 @@ describe('Window services', () => {
             // Arrange
             const throttleTime = 10;
             throttle.mockImplementationOnce(fn => fn);
-            
+
             const cb = addEvent(eventName, callbackFunction, throttleTime);
 
             // Act

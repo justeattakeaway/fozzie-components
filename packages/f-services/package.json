@@ -37,7 +37,6 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "axios": "0.19.2",
     "lodash-es": "4.17.15",
     "window-or-global": "1.0.1"
   },
@@ -50,5 +49,8 @@
     "rollup": "1.26.3",
     "rollup-plugin-babel": "4.3.3",
     "rollup-plugin-terser": "5.1.2"
+  },
+  "peerDependencies": {
+    "axios": "^0.19.2"
   }
 }
