@@ -15,7 +15,10 @@
     You can import it in your like this (please note that styles have to be imported separately)
 
     ```
-    import VueServices from '@justeat/f-services';
+    import { windowServices } from '@justeat/f-services';
+
+    // You can then (optionally) destructure
+    // const { addEvent, getWindowWidth, removeEvent } = windowServices;
 
     ```
 
@@ -23,8 +26,19 @@
 
 3. Services in the bundle:
 
-    `getLocale` - Returns the locale where the user is logged in
+    ### axios
+    - `createClient` - Create an axios client.
+    - `createCamelCaseClient` - Create an axios client with all response JSON transformed to camelCase.
+    - `getNetworkDetails` - Uses the navigator API (falling back to moz/webkit) to return network information.
+    - `objectToCamelCase` - Recursively converts object's property names to camelCase.
 
-    `getTheme` - Returns the theme based on the users locale
+    ### globalisation
+    - `getLocale` - Returns the locale for the current tenant, if the configuration for that locale is present, otherwise returns the default locale.
+    - `getTheme` - Returns the theme based on the user's locale. Either `ml` for Menulog or `je` for Just Eat.
 
-## Documentation to be completed once module is in stable state.
+    ### window
+    Uses the `window-or-global` module for SSR compatibility.
+    - `addEvent` - Add an event listener with a callback function. Optional throttling. Returns the function that will be called by the listener.
+    - `getWindowHeight` - Returns the current innerHeight.
+    - `getWindowWidth` - Returns the current innerWidth.
+    - `removeEvent` - Remove an event listener. To remove a throttled event, pass in the value returned by `addEvent` when the listener was added.
