@@ -4,17 +4,26 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+1.0.0
 ------------------------------
-*February 25, 2020*
+*April 1, 2020*
+
+### Added
+- Axios services module.
+- Axios as a peer dependency.
 
 ### Changed
+- Split central "shared" module into separate "window" and "globalisation" modules.
 - `jest` config updates. `moduleNameMapper` removed, `jsx` removed from checks (as we don't use) and `transformIgnorePatterns` updated.
+- Rollup package updates.
+
+### Fixed
+- `addEvent` returns the function that was assigned to the event listener so that this can be passed in to `removeEvent`. This is necessary for removing throttled event listeners.
 
 
 0.13.2
 ------------------------------
-*february 24, 2020*
+*February 24, 2020*
 
 ### Changed
 - Unneeded dependencies removed (as in root monorepo dependencies or not used)
