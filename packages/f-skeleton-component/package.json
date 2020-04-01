@@ -1,14 +1,12 @@
 {
-  "name": "@justeat/f-services",
-  "description": "Fozzie Services - Shared Services for Components and projects",
-  "version": "1.0.0",
-  "main": "dist/f-services.umd.js",
-  "module": "dist/f-services.esm.js",
-  "source": "src/index.js",
+  "name": "@justeat/f-skeleton-component",
+  "description": "Fozzie Skeleton Component – Replace name, description and package.json details with your own component information",
+  "version": "0.1.0",
+  "main": "dist/f-skeleton-component.umd.min.js",
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-services",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-skeleton-component",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -28,7 +26,8 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "rollup --config",
+    "build": "vue-cli-service build --target lib --name f-skeleton-component ./src/index.js",
+    "demo": "vue serve --open ./src/demo/Index.vue",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit"
@@ -37,18 +36,16 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "axios": "0.19.2",
-    "lodash-es": "4.17.15",
-    "window-or-global": "1.0.1"
+    "@justeat/f-services": "0.13.0"
+  },
+  "peerDependencies": {
+    "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "11.0.2",
-    "@rollup/plugin-json": "4.0.2",
-    "@rollup/plugin-node-resolve": "7.1.1",
+    "@vue/cli-plugin-babel": "3.9.2",
     "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "4.0.5",
-    "rollup": "1.26.3",
-    "rollup-plugin-babel": "4.3.3",
-    "rollup-plugin-terser": "5.1.2"
+    "@vue/cli-plugin-unit-jest": "3.9.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "node-sass-magic-importer": "5.3.2"
   }
 }
