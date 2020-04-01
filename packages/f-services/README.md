@@ -39,7 +39,7 @@
 
     ### window
     Uses the `window-or-global` module for SSR compatibility.
-    - `addEvent` - Add an event listener with a callback function. Optional throttling.
+    - `addEvent` - Add an event listener with a callback function. Optional throttling. Returns the function that will be called by the listener.
     - `getWindowHeight` - Returns the current innerHeight.
     - `getWindowWidth` - Returns the current innerWidth.
-    - `removeEvent` - Remove an event listener.
+    - `removeEvent` - Remove an event listener. To remove a throttled event, pass in the value returned by `addEvent` when the listener was added.
