@@ -1,11 +1,12 @@
 {
-  "name": "@justeat/f-vue-icons",
-  "version": "0.18.1",
-  "main": "dist/f-vue-icons.umd.min.js",
+  "name": "@justeat/f-user-message",
+  "description": "Fozzie User Message – Globalised User Message Component",
+  "version": "0.1.0",
+  "main": "dist/f-user-message.umd.min.js",
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-vue-icons",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-user-message",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -25,7 +26,8 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --formats umd-min --name f-vue-icons ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-user-message ./src/index.js",
+    "demo": "vue serve --open ./src/demo/index.vue",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit"
@@ -34,13 +36,21 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-icons": "1.32.0",
-    "vue": "2.6.11"
+    "@justeat/f-services": "0.13.2",
+    "@justeat/f-vue-icons": "0.18.0",
+    "axios": "0.19.2",
+    "lodash-es": "4.17.15"
+  },
+  "peerDependencies": {
+    "@justeat/eslint-config-fozzie": "3.3.1",
+    "@justeat/f-trak": "0.6.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "3.9.2",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "3.9.0",
-    "@vue/test-utils": "1.0.0-beta.29"
+    "@vue/test-utils": "1.0.0-beta.29",
+    "axios-mock-adapter": "1.18.1",
+    "node-sass-magic-importer": "5.3.2"
   }
 }

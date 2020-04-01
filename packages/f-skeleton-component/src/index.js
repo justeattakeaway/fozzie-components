@@ -1,11 +1,18 @@
+/**
+ * @overview Fozzie Skeleton Component JS Wrapper
+ *
+ * @module f-skeleton-component
+ */
+
+
 // Import vue component
-import Footer from './components/Footer.vue';
+import Skeleton from '@/components/Skeleton.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('VueFooter', Footer);
+    Vue.component('Skeleton', Skeleton);
 }
 
 // Create module definition for Vue.use()
@@ -25,4 +32,4 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export default Footer;
+export default Skeleton;
