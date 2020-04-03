@@ -74,12 +74,13 @@ describe('f-metadata', () => {
     it('should noop the callback if no function is provided', () => {
         // Assemble & Act
         expect.assertions(1);
-        initialiseBraze({ ...settings, callbacks: {} }).then(instance => {
-            appboy.subscribeToContentCardsUpdates.mock.calls[0][0]();
+        initialiseBraze({ ...settings, callbacks: {} })
+            .then(instance => {
+                appboy.subscribeToContentCardsUpdates.mock.calls[0][0]();
 
-            // Assert
-            expect(instance).toBeDefined();
-        });
+                // Assert
+                expect(instance).toBeDefined();
+            });
     });
 
     it('should fire a datalayer event when change user is called', () => {

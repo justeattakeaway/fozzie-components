@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+2.3.1
+------------------------------
+*April  3, 2020*
+
+### Fixed
+- Failing test (locally) due to dynamic imports not being supported when running `jest` without the `dynamic-import-node` plugin.
+- Small linting fix and abstracted out code coverage to separate `test:coverage` script in package.json.
+
+
 2.3.0
 ------------------------------
 *March  2, 2020*

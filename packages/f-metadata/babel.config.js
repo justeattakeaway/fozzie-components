@@ -6,7 +6,9 @@ module.exports = api => {
         '@babel/plugin-proposal-optional-chaining'
     ];
 
-    if (!isTest) {
+    if (isTest) {
+        plugins.push('dynamic-import-node'); // to support dynamic imports (and webpack dynamic imports) when running unit tests
+    } else {
         api.cache(true);
     }
 
