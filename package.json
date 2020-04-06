@@ -1,35 +1,17 @@
 {
   "name": "root",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
-  "homepage": "https://github.com/justeat/fozzie-components",
-  "contributors": [
-    "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:justeat/fozzie-components.git"
-  },
-  "bugs": {
-    "url": "https://github.com/justeat/fozzie-components/issues"
-  },
-  "license": "Apache-2.0",
-  "engines": {
-    "node": ">=10.0.0"
-  },
-  "keywords": [
-    "fozzie"
-  ],
   "scripts": {
-    "prepublishOnly": "lerna run prepublishOnly --stream",
     "build": "lerna run build --stream",
     "lint": "lerna run lint --stream",
     "lint:fix": "lerna run lint -- --fix",
+    "prepublishOnly": "lerna run prepublishOnly --stream",
     "release": "lerna publish",
     "test": "lerna run test --stream"
+  },
+  "dependencies": {
+    "core-js": "^3.6.4"
   },
   "devDependencies": {
     "@babel/cli": "7.8.4",
@@ -41,10 +23,10 @@
     "@justeat/f-utils": "0.3.0",
     "@justeat/fozzie": "1.73.0",
     "@justeat/fozzie-colour-palette": "2.5.0",
-    "@vue/cli-plugin-babel": "3.9.2",
+    "@vue/cli-plugin-babel": "4.2.3",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "3.9.0",
-    "@vue/cli-service": "3.9.2",
+    "@vue/cli-service": "4.2.3",
     "@vue/eslint-config-standard": "4.0.0",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
@@ -64,5 +46,26 @@
     "sass-loader": "7.1.0",
     "vue-svg-loader": "0.16.0",
     "vue-template-compiler": "2.6.11"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/justeat/fozzie-components/issues"
+  },
+  "contributors": [
+    "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
+  ],
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "homepage": "https://github.com/justeat/fozzie-components",
+  "keywords": [
+    "fozzie"
+  ],
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:justeat/fozzie-components.git"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
