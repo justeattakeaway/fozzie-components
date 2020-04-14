@@ -28,15 +28,15 @@ jobs:
         - run: # Run PR Checks
             name: Run PR Checks
             command: yarn danger ci
+        - run: # Check UI packages all build as expected
+            name: Build Packages
+            command: yarn build
         - run: # Lint packages
             name: Run Lint Tasks on Packages
             command: yarn lint
         - run: # Run Tests
             name: Run Unit Tests
             command: yarn test
-        - run: # Check UI packages all build as expected
-            name: Build Packages
-            command: yarn build
 
 
 
