@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (roll into next release)
 ------------------------------
+*April 16, 2020*
+
+### Added
+- `stories` folder that'll contain `*.stories.js` files for use with Storybook
+
+v2.1.1
+------------------------------
 *March 30, 2020*
 
 ### Changed

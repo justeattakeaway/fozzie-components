@@ -13,9 +13,6 @@ storiesOf('Storybook Knobs', module)
       showDeliveryEnquiry: {
         default: boolean('Show Delivery Enquiry', true)
       },
-      showForYouCopy: {
-        default: boolean('Show For You copy', true)
-      },
       headerBackgroundTheme: {
         default: select('Header theme', ["white", "red", "transparent"])
       }
