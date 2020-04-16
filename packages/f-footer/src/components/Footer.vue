@@ -96,15 +96,16 @@ export default {
     data () {
         const locale = sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
-        const theme = sharedServices.getTheme(locale);
 
         return {
-            copy: { ...localeConfig },
-            theme
+            copy: { ...localeConfig }
         };
     },
 
     computed: {
+        theme () {
+            return sharedServices.getTheme(this.locale);
+        },
         metaLegalFieldEnabled () {
             return Object.keys(this.copy.metaLegalField).length > 0;
         }
@@ -113,6 +114,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../assets/scss/common.scss";
+
 .c-footer {
     background-color: $footer-bgColor;
     color: $footer-textColor;

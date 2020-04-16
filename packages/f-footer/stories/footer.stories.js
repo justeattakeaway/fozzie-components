@@ -1,20 +1,16 @@
-import { action } from '@storybook/addon-actions'
+import { storiesOf } from '@storybook/vue';
+import { select } from '@storybook/addon-knobs';
+import VueFooter from '../src/components/Footer.vue'
 
-import Footer from '../src/components/Footer.vue'
 
-export default {
-  component: Footer,
-  title: 'f-footer'
-}
-
-export const JustEatFooter = () => ({
-  components: { Footer },
-  template: '<Footer locale="en-UK"/>',
-  methods: { action: action('clicked') }
-})
-
-export const MenulogFooter = () => ({
-    components: { Footer },
-    template: '<Footer locale="en-AU"/>',
-    methods: { action: action('clicked') }
+storiesOf('Storybook Knobs', module)
+  .add('f-footer', () => ({
+    components: { VueFooter },
+    props: {
+      locale: {
+        default: select('Locale', ['en-GB', 'en-AU'])
+      },
+    },
+    template: `<vue-footer :locale="locale" />`
   })
+);

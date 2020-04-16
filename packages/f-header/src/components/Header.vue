@@ -103,16 +103,17 @@ export default {
     data () {
         const locale = sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
-        const theme = sharedServices.getTheme(locale);
         const mobileNavIsOpen = false;
 
         return {
             copy: { ...localeConfig },
-            theme,
             mobileNavIsOpen
         };
     },
     computed: {
+        theme () {
+            return sharedServices.getTheme(this.locale);
+        },
         showDeliveryEnquiryWithContent () {
             return this.copy.deliveryEnquiry && this.showDeliveryEnquiry;
         },
@@ -134,6 +135,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../assets/scss/common.scss";
 
 .c-header {
     background-color: $header-bg;
