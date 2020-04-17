@@ -3,23 +3,20 @@
         type='submit'
         :class="[
             $style['o-btn'],
-            $style[buttonTypeClass],
+            $style[buttonStyleClass],
             (isFullWidth ? $style['o-btn--block'] : '')
         ]"
     >
-        {{ buttonText }}
+        <slot />
     </button>
 </template>
 
 <script>
 export default {
     name: 'ButtonComponent',
+
     props: {
-        buttonText: {
-            type: String,
-            default: ''
-        },
-        buttonType: {
+        buttonStyle: {
             type: String,
             default: ''
         },
@@ -29,11 +26,10 @@ export default {
         }
     },
     computed: {
-        buttonTypeClass () {
-            if (this.buttonType) {
-                return `o-btn--${this.buttonType}`;
-            }
-            return '';
+        buttonStyleClass () {
+            return (this.buttonStyle)
+                ? `o-btn--${this.buttonStyle}`
+                : '';
         }
     }
 };
@@ -61,6 +57,20 @@ $btn-primary-textColor              : $white;
 
 $btn-disabled-bgColor               : $grey--lighter;
 
+
+/**
+ * Base button styles – Based on csswizardry.com/beautons
+ *
+ * 1. Allow us to better style box model properties.
+ * 2. Line different sized buttons up a little nicer.
+ * 3. Make buttons inherit font styles.
+ * 4. Force all elements using beautons to appear clickable.
+ * 5. Normalise box model styles.
+ * 6. If the button’s text is 1em, and the button is (3 * font-size) tall, then
+ *    there is 1em of space above and below that text. We therefore apply 1em
+ *    of space to the left and right, as padding, to keep consistent spacing.
+ * 7. Fixes odd inner spacing in IE7.
+ */
 
 .o-btn {
     display: inline-block;                      /* [1] */

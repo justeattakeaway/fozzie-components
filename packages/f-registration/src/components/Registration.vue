@@ -1,7 +1,7 @@
 <template>
     <card
         card-title="Create Account"
-    >
+        :data-theme="theme">
         <form
             type="post"
             :class="$style['o-form']"
@@ -23,9 +23,10 @@
                 input-type="password" />
 
             <form-button
-                button-text="Create Account"
-                button-type="primary"
-                :is-full-width="true" />
+                button-style="primary"
+                is-full-width>
+                Create Account
+            </form-button>
         </form>
     </card>
 </template>
@@ -39,17 +40,20 @@ import tenantConfigs from '../tenants';
 
 export default {
     name: 'Registration',
+
     components: {
         FormButton,
         Card,
         FormField
     },
+
     props: {
         locale: {
             type: String,
             default: ''
         }
     },
+
     data () {
         const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];

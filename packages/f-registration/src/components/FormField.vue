@@ -1,6 +1,8 @@
 <template>
     <div class="c-formField">
-        <label :class="$style['o-form-label', 'c-formField-label']">{{ labelText }}</label>
+        <label
+            v-if="labelText"
+            :class="$style['o-form-label', 'c-formField-label']">{{ labelText }}</label>
         <input
             :type="inputType"
             :class="$style['o-form-field', 'c-formField-input']"
@@ -11,6 +13,7 @@
 <script>
 export default {
     name: 'FormField',
+
     props: {
         labelText: {
             type: String,

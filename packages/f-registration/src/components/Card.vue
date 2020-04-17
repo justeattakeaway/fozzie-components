@@ -1,6 +1,5 @@
 <template>
     <div
-        :data-theme="theme"
         :class="[
             $style['c-card'],
             $style['c-card--rounded'],
@@ -24,6 +23,7 @@
 <script>
 export default {
     name: 'Card',
+
     props: {
         cardTitle: {
             type: String,
