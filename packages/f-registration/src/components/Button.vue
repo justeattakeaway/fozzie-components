@@ -1,0 +1,172 @@
+<template>
+    <button
+        type='submit'
+        :class="[
+            $style['o-btn'],
+            $style[buttonTypeClass],
+            (isFullWidth ? $style['o-btn--block'] : '')
+        ]"
+    >
+        {{ buttonText }}
+    </button>
+</template>
+
+<script>
+export default {
+    name: 'ButtonComponent',
+    props: {
+        buttonText: {
+            type: String,
+            default: ''
+        },
+        buttonType: {
+            type: String,
+            default: ''
+        },
+        isFullWidth: {
+            type: Boolean,
+            default: false
+        }
+    },
+    computed: {
+        buttonTypeClass () {
+            if (this.buttonType) {
+                return `o-btn--${this.buttonType}`;
+            }
+            return '';
+        }
+    }
+};
+</script>
+
+<style lang="scss" module>
+
+// Button styling (should be pulled out as a separate component)
+
+$btn-default-bgColor                : $grey--lightest;
+$btn-default-text-colour            : $grey--dark;
+$btn-default-weight                 : 500;
+$btn-default-height                 : 2.6;
+$btn-default-font-size              : base--scaleUp;
+$btn-default-font-family            : $font-family-headings;
+$btn-default-bgColor--hover         : $grey--lighter;
+$btn-default-borderRadius           : 2px;
+$btn-default-hozPadding             : 1em;
+$btn-default-vertPadding            : 11px;
+
+$btn-primary-bgColor                : $blue;
+$btn-primary-bgColor--hover         : $blue--dark;
+$btn-primary-bgColor--focus         : $blue--darkest;
+$btn-primary-textColor              : $white;
+
+$btn-disabled-bgColor               : $grey--lighter;
+
+
+.o-btn {
+    display: inline-block;                      /* [1] */
+    vertical-align: middle;                     /* [2] */
+    font-family: $btn-default-font-family;      /* [3] */
+    @include font-size($btn-default-font-size); /* [3] */
+    cursor: pointer;                            /* [4] */
+    margin: 0;                                  /* [5] */
+    padding: $btn-default-vertPadding $btn-default-hozPadding; /* [5, 6] */
+    overflow: visible;                          /* [7] */
+    text-align: center;
+    font-weight: $btn-default-weight;
+    line-height: 1;
+
+    // You may want to change this
+    background-color: $btn-default-bgColor;
+    border-radius: $btn-default-borderRadius;
+    border: 1px solid transparent;
+    user-select: none;
+
+    color: $btn-default-text-colour;
+    text-decoration: none;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: $btn-default-bgColor--hover;
+
+        &:not(.o-btnLink) {
+            outline: none; // no need as already has a focus/active state
+        }
+    }
+
+    &,
+    &:hover,
+    &:active,
+    &:focus,
+    &:visited {
+        text-decoration: none;
+    }
+
+    // Disabled state
+    &.disabled,
+    &[disabled] {
+        cursor: default;
+
+        &,
+        &:hover {
+            background-color: $btn-disabled-bgColor;
+        }
+    }
+
+    &[type='submit'] {
+        margin-top: spacing(x2);
+    }
+}
+
+/**
+ * Modifier – .o-btn--primary
+ *
+ * Sets the btn colour to site primary colour
+ */
+
+.o-btn--primary {
+    background-color: $btn-primary-bgColor;
+
+    &,
+    &:link,
+    &:visited {
+        color: $btn-primary-textColor;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+        color: $btn-primary-textColor;
+    }
+
+    &:hover {
+        background-color: $btn-primary-bgColor--hover;
+    }
+
+    &:active,
+    &:focus {
+        background-color: $btn-primary-bgColor--focus;
+    }
+}
+
+/**
+ * Modifier – btn-block
+ *
+ * Makes the btn full width
+ */
+
+.o-btn--block {
+    display: block;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+
+    // Vertically space out multiple block buttons
+    // same as .o-btn--block + .o-btn--block
+    & + & {
+        margin-top: 10px;
+    }
+}
+
+
+</style>

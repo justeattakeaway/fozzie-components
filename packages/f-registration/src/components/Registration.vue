@@ -1,18 +1,49 @@
 <template>
-    <div
-        :data-theme="theme"
-        :class="$style['c-registration']">
-        I am a Registration Component
-    </div>
+    <card
+        card-title="Create Account"
+    >
+        <form
+            type="post"
+            :class="$style['o-form']"
+        >
+            <form-field
+                label-text="First name"
+                input-type="text" />
+
+            <form-field
+                label-text="Last name"
+                input-type="text" />
+
+            <form-field
+                label-text="Email"
+                input-type="email" />
+
+            <form-field
+                label-text="Password"
+                input-type="password" />
+
+            <form-button
+                button-text="Create Account"
+                button-type="primary"
+                :is-full-width="true" />
+        </form>
+    </card>
 </template>
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
+import FormButton from './Button.vue';
+import Card from './Card.vue';
+import FormField from './FormField.vue';
 import tenantConfigs from '../tenants';
 
 export default {
-    name: 'RegistrationComponent',
-    components: {},
+    name: 'Registration',
+    components: {
+        FormButton,
+        Card,
+        FormField
+    },
     props: {
         locale: {
             type: String,
@@ -34,15 +65,10 @@ export default {
 
 <style lang="scss" module>
 
-.c-registration {
-    display: flex;
-    justify-content: center;
-    min-height: 80vh;
-    width : 80vw;
-    margin: auto;
-    border: 1px solid $red;
-    font-family: $font-family-base;
-    @include font-size(large);
+// Form styling
+
+.o-form {
+    @include font-size(base--scaleUp);
 }
 
 </style>
