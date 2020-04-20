@@ -33,7 +33,7 @@
                         :title="copy.feedback"
                         :text="copy.improveOurWebsite"
                         :button-text="copy.sendFeedback" />
-
+                        
                     <icon-list
                         :icons="copy.socialIcons"
                         :title="copy.followUs"
@@ -82,7 +82,7 @@ export default {
     },
 
     props: {
-        locale: {
+        localeProp: {
             type: String,
             default: ''
         },
@@ -92,17 +92,14 @@ export default {
             default: true
         }
     },
-
-    data () {
-        const locale = sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
-
-        return {
-            copy: { ...localeConfig }
-        };
-    },
-
     computed: {
+        locale () {
+            return sharedServices.getLocale(tenantConfigs, this.localeProp, this.$i18n);
+        },
+        copy () {
+            const localeConfig = tenantConfigs[this.locale];
+            return localeConfig;
+        },
         theme () {
             return sharedServices.getTheme(this.locale);
         },

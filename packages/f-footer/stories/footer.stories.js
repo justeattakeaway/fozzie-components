@@ -1,16 +1,19 @@
 import { storiesOf } from '@storybook/vue';
-import { select } from '@storybook/addon-knobs';
+import { select, boolean } from '@storybook/addon-knobs';
 import VueFooter from '../src/components/Footer.vue'
 
 
-storiesOf('Storybook Knobs', module)
+storiesOf('Shared', module)
   .add('f-footer', () => ({
     components: { VueFooter },
     props: {
-      locale: {
+      localeProp: {
         default: select('Locale', ['en-GB', 'en-AU'])
       },
+      showCourierLinks: {
+        default: boolean('Show courier links', true)
+      }
     },
-    template: `<vue-footer :locale="locale" />`
+    template: `<vue-footer :showCourierLinks="showCourierLinks" :localeProp="localeProp" />`
   })
 );

@@ -23,7 +23,6 @@
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
                 :offers-copy="copy.offers"
                 :show-offers-link="showOffersLink"
-                :show-for-you-copy="showForYouCopy"
                 :error-log="errorLog"
                 :user-info-prop="userInfoProp"
                 :user-info-url="userInfoUrl"
@@ -61,11 +60,6 @@ export default {
         },
 
         showOffersLink: {
-            type: Boolean,
-            default: false
-        },
-
-        showForYouCopy: {
             type: Boolean,
             default: false
         },
