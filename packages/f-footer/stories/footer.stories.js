@@ -1,7 +1,6 @@
 import { storiesOf } from '@storybook/vue';
 import { select, boolean } from '@storybook/addon-knobs';
-import VueFooter from '../src/components/Footer.vue'
-
+import VueFooter from '../src/components/Footer.vue';
 
 storiesOf('Shared', module)
   .add('f-footer', () => ({

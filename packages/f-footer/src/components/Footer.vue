@@ -33,7 +33,7 @@
                         :title="copy.feedback"
                         :text="copy.improveOurWebsite"
                         :button-text="copy.sendFeedback" />
-                        
+
                     <icon-list
                         :icons="copy.socialIcons"
                         :title="copy.followUs"
