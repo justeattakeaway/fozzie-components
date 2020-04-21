@@ -1,13 +1,8 @@
-const utils = require('./utils.js');
 const rename = require('gulp-rename');
 const Generator = require('yeoman-generator');
+const utils = require('./utils.js');
 
 module.exports = class extends Generator {
-    constructor(args, opts) {
-        // Calling the super constructor is important so our generator is correctly set up
-        super(args, opts);
-    }
-
     async prompting () {
         this.answers = await this.prompt([
             {
@@ -33,9 +28,9 @@ module.exports = class extends Generator {
             template: utils.getComponentTemplateName(name), // vue-header or user-message,
             class: utils.getComponentClassName(name), // (c-)header or (c-)userMessage,
             readme: utils.getReadmeName(name) // Header or User Message
-        }
+        };
 
-        this.registerTransformStream(rename(function (path) {
+        this.registerTransformStream(rename(path => {
             path.basename = path.basename.replace(/(Skeleton)/g, nameTransformations.filename);
         }));
 
@@ -44,7 +39,7 @@ module.exports = class extends Generator {
             this.destinationPath(`../f-${this.answers.name}/`),
             {
                 name: nameTransformations,
-                description: this.answers.description,
+                description: this.answers.description
             },
             null,
             {
