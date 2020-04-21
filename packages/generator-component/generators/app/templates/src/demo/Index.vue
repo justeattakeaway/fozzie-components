@@ -1,4 +1,4 @@
-// Demo component for testing `f<%= name.default %>` independently via `vue serve --open src/demo/Index.vue`
+// Demo component for testing `f-<%= name.default %>` independently via `vue serve --open src/demo/Index.vue`
 // Fonts were added for beter comparison with the designs.
 
 <template>
