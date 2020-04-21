@@ -18,7 +18,7 @@ describe('Footer', () => {
     it('should render ml themed component if AU local passed', () => {
         // Arrange & Act
         const propsData = {
-            localeProp: 'en-AU'
+            locale: 'en-AU'
         };
         const wrapper = shallowMount(Footer, { propsData });
 
@@ -29,7 +29,7 @@ describe('Footer', () => {
     it('should render ml themed component if NZ local passed', () => {
         // Arrange & Act
         const propsData = {
-            localeProp: 'en-NZ'
+            locale: 'en-NZ'
         };
         const wrapper = shallowMount(Footer, { propsData });
 
@@ -40,7 +40,7 @@ describe('Footer', () => {
     it('should render je themed component if NO local passed', () => {
         // Arrange & Act
         const propsData = {
-            localeProp: 'nb-NO'
+            locale: 'nb-NO'
         };
         const wrapper = shallowMount(Footer, { propsData });
 

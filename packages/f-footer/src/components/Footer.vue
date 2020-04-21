@@ -82,7 +82,7 @@ export default {
     },
 
     props: {
-        localeProp: {
+        locale: {
             type: String,
             default: ''
         },
@@ -93,15 +93,15 @@ export default {
         }
     },
     computed: {
-        locale () {
-            return sharedServices.getLocale(tenantConfigs, this.localeProp, this.$i18n);
+        footerLocale () {
+            return sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         },
         copy () {
-            const localeConfig = tenantConfigs[this.locale];
+            const localeConfig = tenantConfigs[this.footerLocale];
             return localeConfig;
         },
         theme () {
-            return sharedServices.getTheme(this.locale);
+            return sharedServices.getTheme(this.footerLocale);
         },
         metaLegalFieldEnabled () {
             return Object.keys(this.copy.metaLegalField).length > 0;

@@ -6,13 +6,13 @@ storiesOf('Shared', module)
   .add('f-footer', () => ({
     components: { VueFooter },
     props: {
-      localeProp: {
+      locale: {
         default: select('Locale', ['en-GB', 'en-AU'])
       },
       showCourierLinks: {
         default: boolean('Show courier links', true)
       }
     },
-    template: `<vue-footer :showCourierLinks="showCourierLinks" :localeProp="localeProp" />`
+    template: `<vue-footer :showCourierLinks="showCourierLinks" :locale="locale" />`
   })
 );
