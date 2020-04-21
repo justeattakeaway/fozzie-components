@@ -1,5 +1,6 @@
 const utils = require('./utils.js');
 
+const rename = require('gulp-rename');
 const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
@@ -24,7 +25,7 @@ module.exports = class extends Generator {
     }
 
     async writing () {
-        const rootDestinationPath = `../f-${this.answers.name}`;
+        const rootDestinationPath = `../f-${this.answers.name}/`;
 
         const name = this.answers.name.toLowerCase();
 
@@ -39,17 +40,25 @@ module.exports = class extends Generator {
         }
 
         // this.log('packageName', nameTransformations.packageName);
-        this.log('default', nameTransformations.default);
-        this.log('component', nameTransformations.component);
-        this.log('filename', nameTransformations.filename);
-        this.log('template', nameTransformations.template);
-        this.log('class', nameTransformations.class);
-        this.log('readme', nameTransformations.readme);
+        // this.log('default', nameTransformations.default);
+        // this.log('component', nameTransformations.component);
+        // this.log('filename', nameTransformations.filename);
+        // this.log('template', nameTransformations.template);
+        // this.log('class', nameTransformations.class);
+        // this.log('readme', nameTransformations.readme);
+
+        this.registerTransformStream(rename(function(path) {
+            path.basename = path.basename.replace(/(Skeleton)/g, nameTransformations.filename);
+        }));
 
         this.fs.copyTpl(
-            this.templatePath('package.json'),
-            this.destinationPath(`${rootDestinationPath}/package.json`),
-            { name: nameTransformations, description: this.answers.description }
+            this.templatePath('**/*'),
+            this.destinationPath(`${rootDestinationPath}`),
+            {
+                name: nameTransformations,
+                description: this.answers.description,
+                globOptions: { dot: true }
+            }
         );
     }
 };

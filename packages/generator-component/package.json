@@ -36,6 +36,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
+    "gulp-rename": "1.2.2",
     "lodash": "4.17.15",
     "yeoman-generator": "4.8.2"
   },
