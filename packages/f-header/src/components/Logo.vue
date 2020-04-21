@@ -65,7 +65,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/scss/common.scss";
 
     // link with the logo
     .c-logo {

@@ -23,7 +23,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../assets/scss/common.scss";
 
 .c-skipTo {
     position: absolute;
