@@ -65,7 +65,6 @@ export default {
 </script>
 
 <style lang="scss">
-
     // link with the logo
     .c-logo {
         display: block;

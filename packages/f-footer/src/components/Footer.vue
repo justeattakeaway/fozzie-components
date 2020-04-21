@@ -111,7 +111,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 .c-footer {
     background-color: $footer-bgColor;
     color: $footer-textColor;

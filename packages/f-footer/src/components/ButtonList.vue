@@ -35,7 +35,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-buttonList {
     align-items: center;
     display: flex;

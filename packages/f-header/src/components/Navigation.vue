@@ -467,7 +467,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 // TODO - Pull in fozzie utilities css instead
 // https://github.com/justeat/fozzie/blob/f7f0184ba3a244c19d6e83c44c35a31b7c2dd2d9/src/scss/trumps/_utilities.scss
 // Hide from both screenreaders and browsers: h5bp.com/u
