@@ -3,7 +3,7 @@ const rename = require('gulp-rename');
 const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
-    constructor (args, opts) {
+    constructor(args, opts) {
         // Calling the super constructor is important so our generator is correctly set up
         super(args, opts);
     }
@@ -35,7 +35,7 @@ module.exports = class extends Generator {
             readme: utils.getReadmeName(name) // Header or User Message
         }
 
-        this.registerTransformStream(rename(function(path) {
+        this.registerTransformStream(rename(function (path) {
             path.basename = path.basename.replace(/(Skeleton)/g, nameTransformations.filename);
         }));
 
@@ -45,7 +45,12 @@ module.exports = class extends Generator {
             {
                 name: nameTransformations,
                 description: this.answers.description,
-                globOptions: { dot: true }
+            },
+            null,
+            {
+                globOptions: {
+                    dot: true
+                }
             }
         );
     }

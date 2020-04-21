@@ -1,7 +1,7 @@
 /**
  * @overview Fozzie <%= name.readme %> Component JS Wrapper
  *
- * @module f<%= name.default%>
+ * @module f-<%= name.default%>
  */
 
 
