@@ -1,11 +1,12 @@
 {
-  "name": "@justeat/generator-component",
-  "description": "Generator Component – A generator for Fozzie components",
+  "name": "@justeat/f-<%= name.default %>",
+  "description": "Fozzie <%= name.readme %> - <%= description %>",
   "version": "0.1.0",
+  "main": "dist/f-<%= name.default %>.umd.min.js",
   "files": [
-    "generators"
+    "dist"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/generator-component",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-<%= name.default %>",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -21,12 +22,11 @@
     "node": ">=10.0.0"
   },
   "keywords": [
-    "fozzie",
-    "yeoman-generator"
+    "fozzie"
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name generator-component ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-<%= name.default %> ./src/index.js",
     "demo": "vue serve --open ./src/demo/Index.vue",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
@@ -36,14 +36,12 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "lodash": "4.17.15",
-    "yeoman-generator": "4.8.2"
+    "@justeat/f-services": "0.13.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
-    "@justeat/eslint-config-fozzie": "3.4.1",
     "@vue/cli-plugin-babel": "4.2.3",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "3.9.0",
