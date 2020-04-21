@@ -1,22 +1,10 @@
-# generator-component
-
-This folder should be used as a template for new Vue components being added to the monorepo.
-
-## How to use this skeleton component
-
-1. Make a copy of the `generator-component` directory inside the `/packages` directory and rename it with the name of your component (e.g. `f-header`).
-2. Find all occurrences of `generator-component` or `Generator` within the copied files and replace with your component name (there will be quiet a few occurrences!).
-3. Delete the top section of this `README` (up to and including the horizontal rule below) and use the rest of this `README` as a template for of your component.
-
----
-
 <div align="center">
-<h1>generator-component</h1>
+  <h1>generator-component</h1>
 
-<img width="125" alt="Fozzie Bear" src="../../bear.png" />
+  <img width="125" alt="Fozzie Bear" src="../../bear.png" />
 
-<p>Generator Component structure for new Fozzie Vue components.</p>
-
+  <p>A generator for Fozzie components</p>
+</div>
 
 ---
 
@@ -28,56 +16,25 @@ This folder should be used as a template for new Vue components being added to t
 
 ## Usage
 
-1.  Install the module using NPM or Yarn:
+1.  Install its dependencies:
 
     ```bash
-    yarn add @justeat/generator-component
+    yarn install
     ```
 
     ```bash
-    npm install @justeat/generator-component
+    npm install
     ```
 
-2.  Import the component
+2.  Run the generator
 
-    You can import it in your Vue SFC like this (please note that styles have to be imported separately):
-
+    ```bash
+    yo @justeat/component
     ```
-    import VueMyComponent from '@justeat/generator-component';
-    import '@justeat/generator-component/dist/generator-component.css';
+3.  By following the interactive instructions, provide a name and a description.
 
-    export default {
-        components: {
-            VueMyComponent
-        }
-    }
-    ```
-
-    If you are using Webpack, you can import the component dynamically to separate the header bundle from the main `bundle.client.js`:
-
-    ```
-    import '@justeat/generator-component/dist/generator-component.css';
-
-    export default {
-        components: {
-            ...
-            VueMyComponent: () => import(/* webpackChunkName: "vue-header" */ '@justeat/generator-component')
-        }
-    }
-
-    ```
+4.  Navigate to your newly scaffolded template 🎉
 
 ## Development
 
-Running below `yarn` commands from the component folder, starts a development
-server displaying a preview example of the component implementation.
-
-```bash
-# cd /packages/generator-component
-yarn install
-
-# followed by
-yarn demo
-```
-
-## Documentation to be completed once module is in stable state.
+In order to develop the `generator-component`, you basically need to follow the instructions above and verify you're seeing what you expected to see in your newly created component.
