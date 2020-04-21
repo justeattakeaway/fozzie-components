@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils';
-import Skeleton from '../Skeleton.vue';
+import <%= name.component %> from '../<%= name.filename %>.vue';
 
-describe('Skeleton', () => {
+describe('<%= name.filename %>', () => {
     it('should be defined', () => {
         const propsData = {};
-        const wrapper = shallowMount(Skeleton, { propsData });
+        const wrapper = shallowMount(<%= name.component %>, { propsData });
         expect(wrapper.exists()).toBe(true);
     });
 });

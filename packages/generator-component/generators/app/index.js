@@ -1,5 +1,4 @@
 const utils = require('./utils.js');
-
 const rename = require('gulp-rename');
 const Generator = require('yeoman-generator');
 
@@ -25,13 +24,10 @@ module.exports = class extends Generator {
     }
 
     async writing () {
-        const rootDestinationPath = `../f-${this.answers.name}/`;
-
         const name = this.answers.name.toLowerCase();
 
         const nameTransformations = {
             default: name, // e.g. header or user-message
-            // package: `f-${name}`, // e.g. f-header or f-user-message
             component: utils.getComponentName(name), // e.g VueHeader or UserMessage,
             filename: utils.getComponentFilename(name), // Header(.vue) or UserMessage(.vue)
             template: utils.getComponentTemplateName(name), // vue-header or user-message,
@@ -39,21 +35,13 @@ module.exports = class extends Generator {
             readme: utils.getReadmeName(name) // Header or User Message
         }
 
-        // this.log('packageName', nameTransformations.packageName);
-        // this.log('default', nameTransformations.default);
-        // this.log('component', nameTransformations.component);
-        // this.log('filename', nameTransformations.filename);
-        // this.log('template', nameTransformations.template);
-        // this.log('class', nameTransformations.class);
-        // this.log('readme', nameTransformations.readme);
-
         this.registerTransformStream(rename(function(path) {
             path.basename = path.basename.replace(/(Skeleton)/g, nameTransformations.filename);
         }));
 
         this.fs.copyTpl(
             this.templatePath('**/*'),
-            this.destinationPath(`${rootDestinationPath}`),
+            this.destinationPath(`../f-${this.answers.name}/`),
             {
                 name: nameTransformations,
                 description: this.answers.description,

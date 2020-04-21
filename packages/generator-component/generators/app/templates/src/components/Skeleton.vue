@@ -1,8 +1,8 @@
 <template>
     <div
         :data-theme="theme"
-        :class="$style['c-skeleton']">
-        I am a Skeleton Component
+        :class="$style['c-<%= name.class %>']">
+        I am a <%= name.readme %> Component
     </div>
 </template>
 
@@ -11,7 +11,7 @@ import sharedServices from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 
 export default {
-    name: 'SkeletonComponent',
+    name: '<%= name.component %>',
     components: {},
     props: {
         locale: {
@@ -34,7 +34,7 @@ export default {
 
 <style lang="scss" module>
 
-.c-skeleton {
+.c-<%= name.class %> {
     display: flex;
     justify-content: center;
     min-height: 80vh;

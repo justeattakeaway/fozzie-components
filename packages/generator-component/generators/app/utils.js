@@ -35,7 +35,7 @@ function getComponentFilename(str) {
 function getComponentTemplateName(str) {
     return hasMultipleWords(str)
         ? str
-        : `vue-${str}`;
+        : prefixWithVue(str);
 }
 
 function getComponentClassName(str) {
