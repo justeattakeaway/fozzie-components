@@ -302,7 +302,6 @@ export default {
         return {
             navIsOpen: false,
             currentScreenWidth: null,
-            userInfo: this.userInfoProp,
             localOrderCountExpires: false
         };
     },
@@ -350,6 +349,9 @@ export default {
          */
         getAnalyticsBlob () {
             return window.localStorage.getItem('je-analytics') || false;
+        },
+        userInfo () {
+            return this.userInfoProp;
         }
     },
 

@@ -135,7 +135,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '@/assets/scss/icons.scss';
+@import '../assets/scss/icons.scss';
 
 .c-countrySelector {
     width: 190px;

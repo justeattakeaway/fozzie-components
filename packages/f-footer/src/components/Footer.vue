@@ -92,19 +92,17 @@ export default {
             default: true
         }
     },
-
-    data () {
-        const locale = sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
-        const theme = sharedServices.getTheme(locale);
-
-        return {
-            copy: { ...localeConfig },
-            theme
-        };
-    },
-
     computed: {
+        footerLocale () {
+            return sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
+        },
+        copy () {
+            const localeConfig = tenantConfigs[this.footerLocale];
+            return localeConfig;
+        },
+        theme () {
+            return sharedServices.getTheme(this.footerLocale);
+        },
         metaLegalFieldEnabled () {
             return Object.keys(this.copy.metaLegalField).length > 0;
         }

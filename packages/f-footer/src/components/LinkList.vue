@@ -121,7 +121,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '@/assets/scss/icons.scss';
+@import '../assets/scss/icons.scss';
 
 .c-footer-panel {
     flex: 1 0 auto;

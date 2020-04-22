@@ -23,7 +23,6 @@
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
                 :offers-copy="copy.offers"
                 :show-offers-link="showOffersLink"
-                :show-for-you-copy="showForYouCopy"
                 :error-log="errorLog"
                 :user-info-prop="userInfoProp"
                 :user-info-url="userInfoUrl"
@@ -65,11 +64,6 @@ export default {
             default: false
         },
 
-        showForYouCopy: {
-            type: Boolean,
-            default: false
-        },
-
         errorLog: {
             type: [Function, Boolean],
             default: false
@@ -103,16 +97,17 @@ export default {
     data () {
         const locale = sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
-        const theme = sharedServices.getTheme(locale);
         const mobileNavIsOpen = false;
 
         return {
             copy: { ...localeConfig },
-            theme,
             mobileNavIsOpen
         };
     },
     computed: {
+        theme () {
+            return sharedServices.getTheme(this.locale);
+        },
         showDeliveryEnquiryWithContent () {
             return this.copy.deliveryEnquiry && this.showDeliveryEnquiry;
         },
