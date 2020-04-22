@@ -2,7 +2,7 @@
   "name": "@justeat/storybook",
   "version": "0.2.0",
   "scripts": {
-    "storybook:deploy": "storybook-to-ghpages",
+    "build-storybook": "vue-cli-service storybook:build -c config/storybook",
     "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook"
   },
   "devDependencies": {
@@ -10,7 +10,6 @@
     "@storybook/addon-knobs": "5.3.0",
     "@storybook/addon-links": "5.3.0",
     "@storybook/addon-notes": "5.3.0",
-    "@storybook/storybook-deployer": "2.8.5",
     "@storybook/vue": "5.3.0",
     "node-sass-magic-importer": "5.3.2",
     "vue-cli-plugin-storybook": "1.2.2"
