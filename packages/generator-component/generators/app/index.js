@@ -6,14 +6,14 @@ module.exports = class extends Generator {
     async prompting () {
         this.answers = await this.prompt([
             {
-                type: 'input',
+                message: "What's your new component name (without the 'f-' prefix)? e.g. 'user-message'",
                 name: 'name',
-                message: "What's your new component name (without the 'f-' prefix)? e.g. 'user-message'"
+                type: 'input'
             },
             {
-                type: 'input',
+                message: 'How would you describe your new component?',
                 name: 'description',
-                message: 'How would you describe your new component?'
+                type: 'input'
             }
         ]);
     }
@@ -22,12 +22,12 @@ module.exports = class extends Generator {
         const name = this.answers.name.toLowerCase();
 
         const nameTransformations = {
-            default: name, // e.g. header or user-message
-            component: utils.getComponentName(name), // e.g VueHeader or UserMessage,
-            filename: utils.getComponentFilename(name), // Header(.vue) or UserMessage(.vue)
-            template: utils.getComponentTemplateName(name), // vue-header or user-message,
             class: utils.getComponentClassName(name), // (c-)header or (c-)userMessage,
-            readme: utils.getReadmeName(name) // Header or User Message
+            component: utils.getComponentName(name), // e.g VueHeader or UserMessage,
+            default: name, // e.g. header or user-message
+            filename: utils.getComponentFilename(name), // Header(.vue) or UserMessage(.vue)
+            readme: utils.getReadmeName(name), // Header or User Message
+            template: utils.getComponentTemplateName(name) // vue-header or user-message,
         };
 
         this.registerTransformStream(rename(path => {
@@ -38,8 +38,8 @@ module.exports = class extends Generator {
             this.templatePath('**/*'),
             this.destinationPath(`../f-${this.answers.name}/`),
             {
-                name: nameTransformations,
-                description: this.answers.description
+                description: this.answers.description,
+                name: nameTransformations
             },
             null,
             {
