@@ -57,21 +57,11 @@ jobs:
         name: Run Unit Tests
         command: yarn test
 
-workflows: 
+workflows:
+  version: 2 
   deploy: 
     jobs: 
-      - lint:
-          filters: 
-            branches: 
-              ignore: gh-pages
-      - test:
-          filters: 
-            branches: 
-              ignore: gh-pages
       - deploy:
           filters: 
             branches: 
               only: master
-          requires: 
-            - lint
-            - test
