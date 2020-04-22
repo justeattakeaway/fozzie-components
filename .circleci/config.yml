@@ -61,17 +61,17 @@ workflows:
   deploy:
     jobs:
       - lint:
-          filters:
-            branches:
-              ignore: 'gh-pages'
+        filters:
+          branches:
+            ignore: 'gh-pages'
       - test:
-          filters:
-            branches:
-              ignore: 'gh-pages'
+        filters:
+          branches:
+            ignore: 'gh-pages'
       - deploy:
-          filters:
-            branches:
-              only: master
-          requires:
-            - lint
-            - test
+        filters:
+          branches:
+            only: master
+              requires:
+                - lint
+                - test
