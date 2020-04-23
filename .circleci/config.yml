@@ -12,6 +12,13 @@ commands:
           fingerprints: 
             - "8b:4c:f2:d1:a1:1e:d6:f9:1e:e9:e0:40:a0:31:32:af"
 
+  install_node_dependencies:
+    description: Installs the node dependencies
+    steps:
+      - run: 
+        name: Install Dependencies
+        command: yarn install --frozen-lockfile
+
 executors:
   node:
     docker:
@@ -30,9 +37,7 @@ jobs:
           name: Restore Yarn Package Cache
           keys:
               - yarn-packages-{{ checksum "yarn.lock" }}
-      - run: 
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile
+      - install_node_dependencies
       - save_cache: 
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
@@ -56,6 +61,7 @@ jobs:
     steps:
       - set_deploy_key
       - checkout
+      - install_node_dependencies
       - run:
           name: Deploy
           command: yarn storybook:deploy --packages packages
