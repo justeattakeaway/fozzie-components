@@ -9,8 +9,8 @@ commands:
     description: Sets the ssh key for project access
     steps: 
       - add_ssh_keys: 
-        fingerprints: 
-          - '8b:4c:f2:d1:a1:1e:d6:f9:1e:e9:e0:40:a0:31:32:af'
+          fingerprints: 
+            - '8b:4c:f2:d1:a1:1e:d6:f9:1e:e9:e0:40:a0:31:32:af'
 
 jobs:
   build:
