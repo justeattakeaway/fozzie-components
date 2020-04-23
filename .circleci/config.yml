@@ -4,12 +4,6 @@
 #
 version: 2.1
 
-executors: 
-  node: 
-    docker:
-    # specify the version you desire here 
-      - image: circleci/node:12.14.1 # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
-
 commands: 
   set_deploy_key: 
     description: Sets the ssh key for project access
@@ -19,10 +13,14 @@ commands:
           - '8b:4c:f2:d1:a1:1e:d6:f9:1e:e9:e0:40:a0:31:32:af'
 
 jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:12.14.1 # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
+
   working_directory: ~/repo
 
   deploy: 
-    executor: node
     steps: 
       - set_deploy_key
       - checkout
