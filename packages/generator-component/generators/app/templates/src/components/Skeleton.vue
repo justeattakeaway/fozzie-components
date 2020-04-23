@@ -11,7 +11,7 @@ import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 
 export default {
-    name: 'NameComponent',
+    name: '<%= name.component %>',
     components: {},
     props: {
         locale: {
