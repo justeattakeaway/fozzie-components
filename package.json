@@ -69,10 +69,5 @@
   },
   "workspaces": [
     "packages/*"
-  ],
-  "storybook-deployer": {
-    "gitUsername": "siggerzz",
-    "gitEmail": "ben.siggery@just-eat.com",
-    "commitMessage": "Deploy Storybook to GitHub Pages"
-  }
+  ]
 }
