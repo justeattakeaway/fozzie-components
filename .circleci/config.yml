@@ -56,7 +56,6 @@ jobs:
       steps:
         - set_deploy_key
         - checkout
-        - install_dependencies
         - run:
             name: Deploy
             command: yarn deploy
