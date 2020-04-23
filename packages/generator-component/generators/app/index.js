@@ -38,7 +38,7 @@ module.exports = class extends Generator {
 
         this.fs.copyTpl(
             this.templatePath('**/*'),
-            this.destinationPath(`../f-${this.answers.name}/`),
+            this.destinationPath(`../f-${nameTransformations.default}/`),
             {
                 description: this.answers.description,
                 name: nameTransformations
