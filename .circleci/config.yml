@@ -58,7 +58,7 @@ jobs:
       - checkout
       - run:
           name: Deploy
-          command: yarn deploy
+          command: yarn storybook:deploy --packages packages
 
 workflows:
   version: 2 
