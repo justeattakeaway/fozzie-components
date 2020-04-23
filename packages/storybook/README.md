@@ -16,6 +16,6 @@ Storybook runs outside of your app. This allows you to develop UI components in 
 
 ## More Info
 
-### [Just Eat Storybook production](https://slack-redir.net/link?url=https%3A%2F%2Fjusteat.github.io%2Ffozzie-components%2F%40justeat%2Fstorybook%2Findex.html)
+### [Just Eat Storybook production](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html)
 
 ### [Storybook Documentation - Writing Stories](https://storybook.js.org/docs/basics/writing-stories/)

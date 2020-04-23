@@ -69,11 +69,14 @@ workflows:
 
   build:
     jobs:
-      - build 
+      - build:
+          filters:
+            branches:
+              ignore: 'gh-pages' 
 
   deploy-storybook: 
     jobs:
       - deploy-storybook:
-        filters: 
-          branches: 
-            only: master
+          filters: 
+            branches: 
+              only: master
