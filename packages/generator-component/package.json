@@ -25,9 +25,6 @@
     "yeoman-generator"
   ],
   "scripts": {
-    "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name generator-component ./src/index.js",
-    "demo": "vue serve --open ./src/demo/Index.vue",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit --passWithNoTests"
