@@ -10,7 +10,7 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
         disableComponent = false,
         callbacks = {}
     } = options;
-    const { handleContentCards = noop } = callbacks;
+    const { handleContentCards = noop, handleInAppMessages = noop } = callbacks;
 
     if (disableComponent || !apiKey || !userId) {
         handleContentCards(null);
@@ -23,8 +23,6 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
         .then(({ default: appboy }) => {
             appboy.initialize(apiKey, { enableLogging });
 
-            appboy.display.automaticallyShowNewInAppMessages();
-
             appboy.openSession();
             window.appboy = appboy;
 
@@ -36,6 +34,7 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
 
             appboy.requestContentCardsRefresh();
 
+            appboy.subscribeToInAppMessage(handleInAppMessages);
             appboy.subscribeToContentCardsUpdates(handleContentCards);
 
             resolve(appboy);
