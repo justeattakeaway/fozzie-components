@@ -2,7 +2,7 @@
     <div
         :data-theme="theme"
         :class="$style['c-<%= name.class %>']">
-        I am a <%= name.readme %> Component
+        {{ copy.text }}
     </div>
 </template>
 
@@ -11,7 +11,7 @@ import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 
 export default {
-    name: '<%= name.component %>',
+    name: 'NameComponent',
     components: {},
     props: {
         locale: {
@@ -38,7 +38,7 @@ export default {
     display: flex;
     justify-content: center;
     min-height: 80vh;
-    width : 80vw;
+    width: 80vw;
     margin: auto;
     border: 1px solid $red;
     font-family: $font-family-base;

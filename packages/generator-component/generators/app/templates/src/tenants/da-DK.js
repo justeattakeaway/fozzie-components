@@ -1,4 +1,4 @@
 export default {
     locale: 'da-DK',
-    skeletonText: 'I am a <%= name.component %> Component (DK)'
+    text: 'I am a <%= name.component %> Component (DK)'
 };
