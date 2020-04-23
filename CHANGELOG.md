@@ -10,6 +10,7 @@ v1.9.1
 ### Added
 - `@storybook/storybook-deployer` dependency to easily deploy storybook using the `storybook:deploy` script
 - Updated Circle CI config.yml to include new `deploy` workflow + other tweaks to existing `build` workflow
+- Added link to hosted Storybook in fozzie-component docs.
 
 v1.8.1
 ------------------------------
