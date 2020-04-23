@@ -31,7 +31,9 @@ module.exports = class extends Generator {
         };
 
         this.registerTransformStream(rename(path => {
-            path.basename = path.basename.replace(/(Skeleton)/g, nameTransformations.filename);
+            path.basename = path.basename
+                                .replace(/(Skeleton)/g, nameTransformations.filename)
+                                .replace(/__/g, ''); // We don't want to have file names such as .test.js or .stories.js, otherwise Jest or Storybook will pick them up from the templates folder.
         }));
 
         this.fs.copyTpl(

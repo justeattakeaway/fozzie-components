@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import sharedServices from '@justeat/f-services';
+import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 
 export default {
@@ -20,9 +20,9 @@ export default {
         }
     },
     data () {
-        const locale = sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
+        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
-        const theme = sharedServices.getTheme(locale);
+        const theme = globalisationServices.getTheme(locale);
 
         return {
             copy: { ...localeConfig },
