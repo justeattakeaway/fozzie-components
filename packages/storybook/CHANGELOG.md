@@ -8,7 +8,7 @@ v0.2.0
 *April 22, 2020*
 
 ### Added
-- Added `@storybook/storybook-deployer` to easily deploy storybook to GitHub pages.
+- Added README.md
 
 v0.1.0
 ------------------------------
