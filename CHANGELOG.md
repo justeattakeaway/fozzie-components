@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.9.1
+------------------------------
+*April 23, 2020*
+
+### Added
+- `@storybook/storybook-deployer` dependency to easily deploy storybook using the `storybook:deploy` script
 
 v1.8.1
 ------------------------------
