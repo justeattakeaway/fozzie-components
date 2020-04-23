@@ -34,7 +34,10 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
 
             appboy.requestContentCardsRefresh();
 
-            appboy.subscribeToInAppMessage(handleInAppMessages);
+            appboy.subscribeToInAppMessage(message => {
+                handleInAppMessages(message);
+                appboy.display.showInAppMessage(message);
+            });
             appboy.subscribeToContentCardsUpdates(handleContentCards);
 
             resolve(appboy);
