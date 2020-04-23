@@ -12,12 +12,10 @@ commands:
           fingerprints: 
             - "8b:4c:f2:d1:a1:1e:d6:f9:1e:e9:e0:40:a0:31:32:af"
 
-  install_node_dependencies:
+  install_dependencies:
     description: Installs the node dependencies
     steps:
-      - run: 
-        name: Install Dependencies
-        command: yarn install --frozen-lockfile
+      - run: yarn install --frozen-lockfile
 
 executors:
   node:
