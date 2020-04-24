@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import Logo from '../Logo.vue';
 
 describe('Logo', () => {
@@ -53,14 +53,14 @@ describe('Logo', () => {
         };
 
         // Act
-        const wrapper = shallowMount(Logo, { propsData });
+        const wrapper = mount(Logo, { propsData });
         const logo = wrapper.find('[data-js-test="c-icon--je"]');
 
         // Assert
         // with dynamically rendered components
         // dynamic classes returned as one string in the array
         // so have to check for 'c-logo-img,c-icon--je,c-icon-je--alt' not just 'c-icon-je--alt'
-        expect(logo.classes()).toContain('c-logo-img,c-icon--je,c-icon-je--alt');
+        expect(logo.classes('c-icon-je--alt')).toBe(true);
     });
 
     it('should have "c-icon-je--alt" class if "headerBackgroundTheme" property is "red"', () => {
@@ -72,14 +72,14 @@ describe('Logo', () => {
         };
 
         // Act
-        const wrapper = shallowMount(Logo, { propsData });
+        const wrapper = mount(Logo, { propsData });
         const logo = wrapper.find('[data-js-test="c-icon--je"]');
 
         // Assert
         // with dynamically rendered components
         // dynamic classes returned as one string in the array
         // so have to check for 'c-logo-img,c-icon--je,c-icon-je--alt' not just 'c-icon-je--alt'
-        expect(logo.classes()).toContain('c-logo-img,c-icon--je,c-icon-je--alt');
+        expect(logo.classes('c-icon-je--alt')).toBe(true);
     });
 
     it('shouldn\'t have "c-icon-je--alt" class if if "headerBackgroundTheme" property is not "red", "transparent"', () => {

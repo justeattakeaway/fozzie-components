@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+Latest (roll into next release)
+------------------------------
+*May 12, 2020*
+
+### Changed
+- Updating `vue-test-utils` to v1 and `@vue/cli-plugin-unit-test` to v4.3.1.
+
+### Removed
+- `testMatch` from jest config, as not needed.
+
+
 v0.19.0
 ------------------------------
 *May 7, 2020*
