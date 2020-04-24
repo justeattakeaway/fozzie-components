@@ -1,18 +1,18 @@
 /**
- * @overview Fozzie Skeleton Component JS Wrapper
+ * @overview Fozzie <%= name.readme %> Component JS Wrapper
  *
- * @module f-skeleton-component
+ * @module f-<%= name.default%>
  */
 
 
 // Import vue component
-import Skeleton from '@/components/Skeleton.vue';
+import <%= name.component %> from '@/components/<%= name.filename %>.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('Skeleton', Skeleton);
+    Vue.component('<%= name.component %>', <%= name.component %>);
 }
 
 // Create module definition for Vue.use()
@@ -32,4 +32,4 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export default Skeleton;
+export default <%= name.component %>;
