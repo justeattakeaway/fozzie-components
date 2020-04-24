@@ -1,17 +1,17 @@
 <template>
     <div
         :data-theme="theme"
-        :class="$style['c-skeleton']">
-        I am a Skeleton Component
+        :class="$style['c-<%= name.class %>']">
+        {{ copy.text }}
     </div>
 </template>
 
 <script>
-import sharedServices from '@justeat/f-services';
+import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 
 export default {
-    name: 'SkeletonComponent',
+    name: '<%= name.component %>',
     components: {},
     props: {
         locale: {
@@ -20,9 +20,9 @@ export default {
         }
     },
     data () {
-        const locale = sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
+        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
-        const theme = sharedServices.getTheme(locale);
+        const theme = globalisationServices.getTheme(locale);
 
         return {
             copy: { ...localeConfig },
@@ -34,11 +34,11 @@ export default {
 
 <style lang="scss" module>
 
-.c-skeleton {
+.c-<%= name.class %> {
     display: flex;
     justify-content: center;
     min-height: 80vh;
-    width : 80vw;
+    width: 80vw;
     margin: auto;
     border: 1px solid $red;
     font-family: $font-family-base;

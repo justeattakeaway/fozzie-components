@@ -1,4 +1,4 @@
-// Demo component for testing `f-skeleton-component` independently via `vue serve --open src/demo/Index.vue`
+// Demo component for testing `f-<%= name.default %>` independently via `vue serve --open src/demo/Index.vue`
 // Fonts were added for beter comparison with the designs.
 
 <template>
@@ -6,16 +6,16 @@
         <meta
             name="viewport"
             content="width=device-width, initial-scale=1">
-        <skeleton-component
+        <<%= name.template %>
             locale="en-GB" />
     </div>
 </template>
 
 <script>
-import SkeletonComponent from '@/components/Skeleton.vue';
+import <%= name.component %> from '@/components/<%= name.filename%>.vue';
 
 export default {
-    components: { SkeletonComponent }
+    components: { <%= name.component %> }
 };
 </script>
 
