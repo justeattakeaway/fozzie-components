@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "1.8.1",
+  "version": "1.9.0",
   "private": true,
   "scripts": {
     "build": "lerna run build --stream",
@@ -8,6 +8,7 @@
     "lint:fix": "lerna run lint -- --fix",
     "prepublishOnly": "lerna run prepublishOnly --stream",
     "release": "lerna publish",
+    "storybook:deploy": "storybook-to-ghpages --script storybook:build",
     "test": "lerna run test --stream"
   },
   "dependencies": {
@@ -44,6 +45,7 @@
     "node-sass-magic-importer": "5.3.2",
     "postcss-loader": "3.0.0",
     "sass-loader": "7.1.0",
+    "@storybook/storybook-deployer": "2.8.5",
     "vue-svg-loader": "0.16.0",
     "vue-template-compiler": "2.6.11"
   },
