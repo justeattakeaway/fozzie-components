@@ -3,40 +3,80 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2.1
-jobs:
-  build:
+
+commands: 
+  set_deploy_key: 
+    description: Sets the ssh key for project access
+    steps: 
+      - add_ssh_keys: 
+          fingerprints: 
+            - "8b:4c:f2:d1:a1:1e:d6:f9:1e:e9:e0:40:a0:31:32:af"
+
+  install_node_dependencies:
+    description: Installs the node dependencies
+    steps:
+      - run: yarn install --frozen-lockfile
+
+executors:
+  node:
     docker:
       # specify the version you desire here
       - image: circleci/node:12.14.1 # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
 
-    working_directory: ~/repo
+jobs:
 
+  working_directory: ~/repo
+
+  build:
+    executor: node
     steps: # a collection of executable commands
-        - checkout # special step to check out source code to working directory
-        - restore_cache:
-            name: Restore Yarn Package Cache
-            keys:
-                - yarn-packages-{{ checksum "yarn.lock" }}
-        - run:
-            name: Install Dependencies
-            command: yarn install --frozen-lockfile
-        - save_cache:
-            name: Save Yarn Package Cache
-            key: yarn-packages-{{ checksum "yarn.lock" }}
-            paths:
-                - ~/.cache/yarn
-        - run: # Run PR Checks
-            name: Run PR Checks
-            command: yarn danger ci
-        - run: # Check UI packages all build as expected
-            name: Build Packages
-            command: yarn build
-        - run: # Lint packages
-            name: Run Lint Tasks on Packages
-            command: yarn lint
-        - run: # Run Tests
-            name: Run Unit Tests
-            command: yarn test
+      - checkout # special step to check out source code to working directory
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+              - yarn-packages-{{ checksum "yarn.lock" }}
+      - install_node_dependencies
+      - save_cache: 
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths: 
+            - ~/.cache/yarn
+      - run: # Run PR Checks
+          name: Run PR Checks
+          command: yarn danger ci
+      - run: # Check UI packages all build as expected
+          name: Build Packages
+          command: yarn build
+      - run: # Lint packages
+          name: Run Lint Tasks on Packages
+          command: yarn lint
+      - run: # Run Tests
+          name: Run Unit Tests
+          command: yarn test
 
+  deploy-storybook:
+    executor: node
+    steps:
+      - set_deploy_key
+      - checkout
+      - install_node_dependencies
+      - run:
+          name: Deploy
+          command: yarn storybook:deploy --packages packages
 
+workflows:
+  version: 2
 
+  build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore: 'gh-pages' 
+
+  deploy-storybook: 
+    jobs:
+      - deploy-storybook:
+          filters: 
+            branches: 
+              only: master
