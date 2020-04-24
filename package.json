@@ -18,7 +18,7 @@
     "@babel/plugin-proposal-optional-chaining": "7.9.0",
     "@babel/preset-env": "7.9.0",
     "@justeat/browserslist-config-fozzie": "1.1.1",
-    "@justeat/eslint-config-fozzie": "3.4.0",
+    "@justeat/eslint-config-fozzie": "3.4.1",
     "@justeat/f-build-config": "0.3.0",
     "@justeat/f-utils": "0.3.0",
     "@justeat/fozzie": "1.73.0",

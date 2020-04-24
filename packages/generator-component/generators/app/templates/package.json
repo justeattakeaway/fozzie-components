@@ -1,12 +1,12 @@
 {
-  "name": "@justeat/f-skeleton-component",
-  "description": "Fozzie Skeleton Component – Replace name, description and package.json details with your own component information",
+  "name": "@justeat/f-<%= name.default %>",
+  "description": "Fozzie <%= name.readme %> – <%= description %>",
   "version": "0.1.0",
-  "main": "dist/f-skeleton-component.umd.min.js",
+  "main": "dist/f-<%= name.default %>.umd.min.js",
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-skeleton-component",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-<%= name.default %>",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -26,7 +26,7 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-skeleton-component ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-<%= name.default %> ./src/index.js",
     "demo": "vue serve --open ./src/demo/Index.vue",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
@@ -36,7 +36,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "0.13.0"
+    "@justeat/f-services": "1.0.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
