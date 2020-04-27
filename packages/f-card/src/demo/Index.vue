@@ -7,7 +7,20 @@
             name="viewport"
             content="width=device-width, initial-scale=1">
         <card-component
-            locale="en-GB" />
+            locale="en-GB"
+            card-heading="I am a demo card"
+            is-rounded=true
+            has-outline=true
+            is-page-content-wrapper=true>
+            <p>
+                Mollit aliqua labore excepteur voluptate consequat ut dolore
+                ipsum nostrud magna elit proident laboris. Irure do nulla
+                eiusmod aliquip enim qui deserunt Lorem. Dolore eu exercitation
+                fugiat tempor laborum consequat eu dolor voluptate reprehenderit tempor incididunt in.
+                Fugiat cillum laborum irure ea id deserunt quis est deserunt reprehenderit magna ea consectetur.
+                Magna ullamco eu et Lorem.
+            </p>
+        </card-component>
     </div>
 </template>
 
@@ -25,5 +38,6 @@ export default {
 
 body {
     margin: 0;
+    background: #f1f1f1;
 }
 </style>

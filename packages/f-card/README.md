@@ -68,4 +68,62 @@ yarn install
 yarn demo
 ```
 
-## Documentation to be completed once module is in stable state.
+### Storybook
+
+The component is also available to demo through our storybook instance which can be served locally by running `yarn storybook:serve` from the mono-repo root.
+
+
+## Props
+
+`f-card` has a number of props that allow you to customise its functionality.
+
+The props that can be defined are as follows:
+
+<table class="js-options">
+    <tr>
+        <th align="left">Prop</th>
+        <th>Required</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th align="left">Description</th>
+    </tr>
+    <tr>
+        <td><code>locale</code></td>
+        <td align="center">false</td>
+        <td align="center">string</td>
+        <td align="center"><code>en-GB</code></td>
+        <td>
+          <p>Sets the locale of the component (which determines what theme and translations to use.</p>
+          <p>If the application consuming the <code>f-card</code> component is using the vue <code>i18n</code> module, then the locale from that module will be used when this prop isn't defined. When this prop is defined, it takes precedence over the locale defined by the <code>i18n</code> module.</p>
+          <p>If not defined and the <code>i18n</code> module isn't present, the default locale used is <code>en-GB</code>.</p>
+        </td>
+    </tr>
+    <tr>
+        <td><code>isRounded</code></td>
+        <td align="center">false</td>
+        <td align="center">boolean</td>
+        <td align="center"><code>false</code></td>
+        <td>
+            When set to <code>true</code>, rounded corners are applied to the card component.
+        </td>
+    </tr>
+    <tr>
+        <td><code>hasOutline</code></td>
+        <td align="center">false</td>
+        <td align="center">boolean</td>
+        <td align="center"><code>false</code></td>
+        <td>
+            When set to <code>true</code>, an outline is applied to the card component.
+        </td>
+    </tr>
+    <tr>
+        <td><code>isPageContentWrapper</code></td>
+        <td align="center">false</td>
+        <td align="center">boolean</td>
+        <td align="center"><code>false</code></td>
+        <td>
+            <p>When set to <code>true</code>, applies styles to make the card act like a page content wrapper.</p>
+            <p>The card will be full width on narrow devices, and then a fixed width above a certain breakpoint width (about 480px), when the card will be centred on the page.</p>
+        </td>
+    </tr>
+</table>
