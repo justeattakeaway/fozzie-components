@@ -79,51 +79,9 @@ The component is also available to demo through our storybook instance which can
 
 The props that can be defined are as follows:
 
-<table class="js-options">
-    <tr>
-        <th align="left">Prop</th>
-        <th>Required</th>
-        <th>Type</th>
-        <th>Default</th>
-        <th align="left">Description</th>
-    </tr>
-    <tr>
-        <td><code>locale</code></td>
-        <td align="center">false</td>
-        <td align="center">string</td>
-        <td align="center"><code>en-GB</code></td>
-        <td>
-          <p>Sets the locale of the component (which determines what theme and translations to use.</p>
-          <p>If the application consuming the <code>f-card</code> component is using the vue <code>i18n</code> module, then the locale from that module will be used when this prop isn't defined. When this prop is defined, it takes precedence over the locale defined by the <code>i18n</code> module.</p>
-          <p>If not defined and the <code>i18n</code> module isn't present, the default locale used is <code>en-GB</code>.</p>
-        </td>
-    </tr>
-    <tr>
-        <td><code>isRounded</code></td>
-        <td align="center">false</td>
-        <td align="center">boolean</td>
-        <td align="center"><code>false</code></td>
-        <td>
-            When set to <code>true</code>, rounded corners are applied to the card component.
-        </td>
-    </tr>
-    <tr>
-        <td><code>hasOutline</code></td>
-        <td align="center">false</td>
-        <td align="center">boolean</td>
-        <td align="center"><code>false</code></td>
-        <td>
-            When set to <code>true</code>, an outline is applied to the card component.
-        </td>
-    </tr>
-    <tr>
-        <td><code>isPageContentWrapper</code></td>
-        <td align="center">false</td>
-        <td align="center">boolean</td>
-        <td align="center"><code>false</code></td>
-        <td>
-            <p>When set to <code>true</code>, applies styles to make the card act like a page content wrapper.</p>
-            <p>The card will be full width on narrow devices, and then a fixed width above a certain breakpoint width (about 480px), when the card will be centred on the page.</p>
-        </td>
-    </tr>
-</table>
+| Prop                      | Required       | Type          | Default | Description |
+| :---                      |     :---:      |     :---:     |  :---:  | :---        |
+| locale                    | false          | `string`      | `en-GB` | Sets the locale of the component (which determines what theme and translations to use.<br><br>If the application consuming the `f-card` component is using the vue `i18n` module, then the locale from that module will be used when this prop isn't defined. When this prop is defined, it takes precedence over the locale defined by the `i18n` module.<br><br>If not defined and the `i18n` module isn't present, the default locale used is `en-GB`.|
+| isRounded                | false           | `boolean`     | `false` | When set to `true`, rounded corners are applied to the card component. |
+| hasOutline               | false           | `boolean`     | `false` | When set to `true`, an outline is applied to the card component.  |
+| isPageContentWrapper     | false           | `boolean`     | `false` | When set to `true`, applies styles to make the card act like a page content wrapper.<br><br>The card will be full width on narrow devices, and then a fixed width above a certain breakpoint width (about 480px), when the card will be centred on the page. |

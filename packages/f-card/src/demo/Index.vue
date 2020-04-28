@@ -9,9 +9,9 @@
         <card-component
             locale="en-GB"
             card-heading="I am a demo card"
-            is-rounded=true
-            has-outline=true
-            is-page-content-wrapper=true>
+            is-rounded
+            has-outline
+            is-page-content-wrapper>
             <p>
                 Mollit aliqua labore excepteur voluptate consequat ut dolore
                 ipsum nostrud magna elit proident laboris. Irure do nulla
