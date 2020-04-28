@@ -4,22 +4,26 @@ import initialiseBraze from '../src';
 jest.mock('appboy-web-sdk', () => ({
     initialize: jest.fn(),
     display: {
-        automaticallyShowNewInAppMessages: jest.fn()
+        showInAppMessage: jest.fn()
     },
     openSession: jest.fn(),
     changeUser: jest.fn(),
     requestContentCardsRefresh: jest.fn(),
-    subscribeToContentCardsUpdates: jest.fn()
+    subscribeToContentCardsUpdates: jest.fn(),
+    subscribeToInAppMessage: jest.fn()
 }));
 
 const apiKey = '__API_KEY__';
 const userId = '__USER_ID__';
+const inAppMessage = '__IN_APP_MESSAGE__';
 const handleContentCards = jest.fn();
+const interceptInAppMessages = jest.fn();
 const enableLogging = true;
 const disableComponent = false;
 
 const callbacks = {
-    handleContentCards
+    handleContentCards,
+    interceptInAppMessages
 };
 
 const settings = {
@@ -63,18 +67,22 @@ describe('f-metadata', () => {
 
     it('should initialise appboy and setup relevant settings', () => {
         // Assemble & Act
-        initialiseBraze(settings).then(() => {
-            // Assert
-            expect(appboy.initialize).toHaveBeenCalledWith(apiKey, { enableLogging });
-            expect(appboy.display.automaticallyShowNewInAppMessages).toHaveBeenCalled();
-            expect(appboy.openSession).toHaveBeenCalled();
-        });
+        expect.assertions(2);
+        initialiseBraze(settings)
+            .then(() => {
+                // Assert
+                expect(appboy.initialize).toHaveBeenCalledWith(apiKey, { enableLogging });
+                expect(appboy.openSession).toHaveBeenCalled();
+            });
     });
 
     it('should noop the callback if no function is provided', () => {
         // Assemble & Act
         expect.assertions(1);
-        initialiseBraze({ ...settings, callbacks: {} })
+        initialiseBraze({
+            ...settings,
+            callbacks: {}
+        })
             .then(instance => {
                 appboy.subscribeToContentCardsUpdates.mock.calls[0][0]();
 
@@ -89,6 +97,7 @@ describe('f-metadata', () => {
         window.dataLayer = { push };
 
         // Act
+        expect.assertions(1);
         initialiseBraze(settings).then(() => {
             // Assert
             appboy.changeUser.mock.calls[0][1]();
@@ -96,13 +105,17 @@ describe('f-metadata', () => {
         });
     });
 
-    it('should trigger the given callback when content cards have updated', () => {
+    it('should trigger the given callbacks when content cards have updated', () => {
         const cards = ['__CARD__'];
         // Act
+        expect.assertions(3);
         initialiseBraze(settings).then(() => {
             // Assert
             appboy.subscribeToContentCardsUpdates.mock.calls[0][0](cards);
+            appboy.subscribeToInAppMessage.mock.calls[0][0](inAppMessage);
             expect(handleContentCards).toHaveBeenCalledWith(cards);
+            expect(interceptInAppMessages).toHaveBeenCalledWith(inAppMessage);
+            expect(appboy.display.showInAppMessage).toHaveBeenCalledWith(inAppMessage);
         });
     });
 });

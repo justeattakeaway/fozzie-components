@@ -10,7 +10,7 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
         disableComponent = false,
         callbacks = {}
     } = options;
-    const { handleContentCards = noop, handleInAppMessages = noop } = callbacks;
+    const { handleContentCards = noop, interceptInAppMessages = noop } = callbacks;
 
     if (disableComponent || !apiKey || !userId) {
         handleContentCards(null);
@@ -35,7 +35,7 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
             appboy.requestContentCardsRefresh();
 
             appboy.subscribeToInAppMessage(message => {
-                handleInAppMessages(message);
+                interceptInAppMessages(message);
                 appboy.display.showInAppMessage(message);
             });
             appboy.subscribeToContentCardsUpdates(handleContentCards);
