@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.10.0
+------------------------------
+*April 27, 2020*
+
+### Added
+- NPM Scripts at the root of the mono repo to run the Storybook docs through `yarn storybook:build` and `yarn storybook:serve`.
+
+
 v1.9.0
 ------------------------------
 *April 23, 2020*
@@ -11,6 +19,7 @@ v1.9.0
 - `@storybook/storybook-deployer` dependency to easily deploy storybook using the `storybook:deploy` script
 - Updated Circle CI config.yml to include new `deploy` workflow + other tweaks to existing `build` workflow
 - Added link to hosted Storybook in fozzie-component docs.
+
 
 v1.9.0
 ------------------------------
