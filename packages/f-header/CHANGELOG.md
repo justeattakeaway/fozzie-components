@@ -13,6 +13,7 @@ v2.2.0
 ### Changed
 - Made f-header `userInfo` data more generic
 
+
 v2.1.1
 ------------------------------
 *April 20, 2020*
