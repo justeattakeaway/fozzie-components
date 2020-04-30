@@ -21,5 +21,5 @@ export const clickHelpLink = () => {
 }
 
 export const logoIsDisplayed = () => {
-    return headerLogo.isDiplayed();
+    return headerLogo.isDisplayed();
 }

@@ -3360,7 +3360,7 @@
   resolved "https://registry.yarnpkg.com/@vue/web-component-wrapper/-/web-component-wrapper-1.2.0.tgz#bb0e46f1585a7e289b4ee6067dcc5a6ae62f1dd1"
   integrity sha512-Xn/+vdm9CjuC9p3Ae+lTClNutrVhsXpzxvoTXXtoys6kVRX9FkueSUAqSWAyZntmVLlR4DosBV4pH8y5Z/HbUw==
 
-"@wdio/cli@^6.1.5":
+"@wdio/cli@6.1.5":
   version "6.1.5"
   resolved "https://registry.yarnpkg.com/@wdio/cli/-/cli-6.1.5.tgz#9774a770bb5bc3bb68889655cfd3632452b629a8"
   integrity sha512-rdsolysNgsf/CwutDwJ46ahWsxSNssSbcZRL/IXb7fAxqLHpO88Fg9ueW0fp66jtPk5L6Yi1lcoHJhkqu45Iew==
