@@ -4,7 +4,8 @@
   "version": "2.2.0",
   "main": "dist/f-header.umd.min.js",
   "files": [
-    "dist"
+    "dist",
+    "page-objects"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-header",
   "contributors": [
