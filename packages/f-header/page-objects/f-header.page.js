@@ -4,20 +4,20 @@ const deliveryEnquiryLink = () => $('[data-test-id="delivery-link"]');
 const helpLink = () => $('[data-test-id="help-link"]');
 const headerLogo = () => $('[data-test-id="header-logo"]');
 
-export const clickLoginLink = () => {
+exports.clickLoginLink = () => {
     loginLink().click();
 }
 
-export const clickOffersLink = () => {
+exports.clickOffersLink = () => {
     offersLink().click();
 }
 
-export const clickDeliveryEnquiryLink = () => {
+exports.clickDeliveryEnquiryLink = () => {
     deliveryEnquiryLink().click();
 }
 
-export const clickHelpLink = () => {
+exports.clickHelpLink = () => {
     helpLink().click();
 }
 
-export const logoIsDisplayed = () => headerLogo().isDisplayed();
+exports.logoIsDisplayed = () => headerLogo().isDisplayed();
