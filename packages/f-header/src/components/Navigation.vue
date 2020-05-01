@@ -37,7 +37,8 @@
                 "label": "offers_icon"
             }'
             :href="offersCopy.url"
-            class="c-nav-featureLink u-showBelowMid">
+            class="c-nav-featureLink u-showBelowMid"
+            data-test-id="offers-link">
             <gift-icon class="c-nav-icon c-nav-icon--offers" />
             <span class="is-visuallyHidden">
                 {{ offersCopy.text }}
@@ -77,7 +78,8 @@
                         }`'
                         :href="deliveryEnquiry.url"
                         target="_blank"
-                        class="c-nav-list-link">
+                        class="c-nav-list-link"
+                        data-test-id="delivery-link">
                         <delivery-icon class="c-nav-icon c-nav-icon--delivery" />
                         {{ deliveryEnquiry.text }}
                     </a>
@@ -162,7 +164,8 @@
                             "label": "${accountLogin.gtm}"
                         }`'
                         rel="nofollow"
-                        class="c-nav-list-link">
+                        class="c-nav-list-link"
+                        data-test-id="login-link">
                         {{ accountLogin.text }}
                     </a>
                 </li>
@@ -177,7 +180,8 @@
                                 "label": "${help.gtm}"
                             }`'
                         class="c-nav-list-link"
-                        v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
+                        v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null"
+                        data-test-id="help-link">
                         {{ help.text }}
                     </a>
                 </li>
