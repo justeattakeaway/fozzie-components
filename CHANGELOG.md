@@ -5,10 +5,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.11.0
 ------------------------------
-*April 29, 2020*
+*May 1, 2020*
 
 ### Added
-- `@wdio/cli` dependency so that we're able to utilise WebDriverIO functionality in our new `*.page.js` files.
+- `webdriverio` dependency so that we're able to utilise WebDriverIO functionality in our new `*.page.js` files.
 
 
 v1.10.0
