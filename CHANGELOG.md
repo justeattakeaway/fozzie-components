@@ -3,13 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.11.0
+------------------------------
+*May 1, 2020*
+
+### Added
+- `webdriverio` dependency so that we're able to utilise WebDriverIO functionality in our new `*.page.js` files.
+
+
 v1.10.0
 ------------------------------
 *April 27, 2020*
 
 ### Added
 - NPM Scripts at the root of the mono repo to run the Storybook docs through `yarn storybook:build` and `yarn storybook:serve`.
-
 
 v1.9.0
 ------------------------------
