@@ -1,5 +1,12 @@
 const noop = () => {};
 
+/**
+ * sessionTimeoutInSeconds
+ * Set session timeout to 0 in order to avoid caching issues with Braze
+ * @type {number}
+ */
+const sessionTimeoutInSeconds = 0;
+
 const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
     if (typeof window === 'undefined') return reject(new Error('window is not defined'));
 
@@ -21,7 +28,7 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
 
     return import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
         .then(({ default: appboy }) => {
-            appboy.initialize(apiKey, { enableLogging });
+            appboy.initialize(apiKey, { enableLogging, sessionTimeoutInSeconds });
 
             appboy.display.automaticallyShowNewInAppMessages();
 
