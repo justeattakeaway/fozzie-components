@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+1.0.1
+------------------------------
+*May 6, 2020*
+
+### Changed
+- Syntax in `index.js` so that newer versions of f-services are compatible with Storybook
 
 1.0.0
 ------------------------------
