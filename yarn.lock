@@ -4172,10 +4172,10 @@ app-root-dir@^1.0.2:
   resolved "https://registry.yarnpkg.com/app-root-dir/-/app-root-dir-1.0.2.tgz#38187ec2dea7577fff033ffcb12172692ff6e118"
   integrity sha1-OBh+wt6nV3//Az/8sSFyaS/24Rg=
 
-appboy-web-sdk@2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/appboy-web-sdk/-/appboy-web-sdk-2.4.1.tgz#cdfa4074b83a4ea011f52d16b1d04dcad7f57eb8"
-  integrity sha512-xwNXrsSkENRnfq2IOkWcc7ODfxnxDHQ+Flxwf50+D5rggBSIs9e4rA29+7lJ/eEhgfIPFPux9FCt2HedMsJuzg==
+appboy-web-sdk@2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/appboy-web-sdk/-/appboy-web-sdk-2.5.2.tgz#e01ad9fbd744bc48da5bc91a3b3e71493f1a52bd"
+  integrity sha512-Gh5yAgEH/N7Wc3A0Pm8wZNb7uTygdHCB2BiJlI/0HZbJ1iWiA5SjGplTjovPZtrJK22AGcqRp9XVtea3EBYC9w==
 
 append-transform@^0.4.0:
   version "0.4.0"
