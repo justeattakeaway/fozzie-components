@@ -4,6 +4,11 @@
  * @module f-services
  */
 
-export { default as axiosServices } from './axios';
-export { default as globalisationServices } from './globalisation';
-export { default as windowServices } from './window';
+import axiosServices from './axios';
+import globalisationServices from './globalisation';
+import windowServices from './window';
+export {
+    axiosServices,
+    globalisationServices,
+    windowServices
+};
