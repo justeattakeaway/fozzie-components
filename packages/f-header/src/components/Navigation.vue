@@ -180,8 +180,8 @@
                                 "label": "${help.gtm}"
                             }`'
                         class="c-nav-list-link"
-                        v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null"
-                        data-test-id="help-link">
+                        data-test-id="help-link"
+                        v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
                         {{ help.text }}
                     </a>
                 </li>
@@ -306,6 +306,7 @@ export default {
         return {
             navIsOpen: false,
             currentScreenWidth: null,
+            userInfo: this.userInfoProp,
             localOrderCountExpires: false
         };
     },
@@ -342,6 +343,7 @@ export default {
             const currentTime = new Date().getTime();
             return this.localOrderCountExpires < currentTime;
         },
+
         navToggleThemeClass () {
             return this.headerBackgroundTheme === 'red' ? 'c-logo--brandColour' : '';
         },
@@ -353,9 +355,12 @@ export default {
          */
         getAnalyticsBlob () {
             return window.localStorage.getItem('je-analytics') || false;
-        },
-        userInfo () {
-            return this.userInfoProp;
+        }
+    },
+
+    watch: {
+        userInfoProp (userInfo) {
+            this.userInfo = userInfo;
         }
     },
 
@@ -363,6 +368,7 @@ export default {
         if (!this.userInfo) {
             this.fetchUserInfo();
         }
+
         sharedServices.addEvent('resize', this.onResize, 100);
 
         this.onResize();
@@ -412,8 +418,10 @@ export default {
                         credentials: 'same-origin'
                     }
                 });
+
                 if (data.isAuthenticated) {
                     this.userInfo = data;
+
                     if (this.isOrderCountValid) {
                         this.fetchOrderCountAndSave();
                     }
@@ -435,6 +443,7 @@ export default {
                         credentials: 'same-origin'
                     }
                 });
+
                 if (data && this.isOrderCountOutOfDate) {
                     this.setAnalyticsBlob(data);
                     this.localOrderCountExpires = data.Expires;
