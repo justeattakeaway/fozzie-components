@@ -1,5 +1,5 @@
 import appboy from 'appboy-web-sdk';
-import initialiseBraze from '../src';
+import initialiseBraze, { sessionTimeoutInSeconds } from '../src';
 
 jest.mock('appboy-web-sdk', () => ({
     initialize: jest.fn(),
@@ -71,7 +71,7 @@ describe('f-metadata', () => {
         initialiseBraze(settings)
             .then(() => {
                 // Assert
-                expect(appboy.initialize).toHaveBeenCalledWith(apiKey, { enableLogging });
+                expect(appboy.initialize).toHaveBeenCalledWith(apiKey, { enableLogging, sessionTimeoutInSeconds });
                 expect(appboy.openSession).toHaveBeenCalled();
             });
     });

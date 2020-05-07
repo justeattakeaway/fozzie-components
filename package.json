@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "1.8.1",
+  "version": "1.11.0",
   "private": true,
   "scripts": {
     "build": "lerna run build --stream",
@@ -8,6 +8,9 @@
     "lint:fix": "lerna run lint -- --fix",
     "prepublishOnly": "lerna run prepublishOnly --stream",
     "release": "lerna publish",
+    "storybook:build": "lerna run storybook:build",
+    "storybook:serve": "lerna run storybook:serve",
+    "storybook:deploy": "storybook-to-ghpages --script storybook:build",
     "test": "lerna run test --stream"
   },
   "dependencies": {
@@ -18,7 +21,7 @@
     "@babel/plugin-proposal-optional-chaining": "7.9.0",
     "@babel/preset-env": "7.9.0",
     "@justeat/browserslist-config-fozzie": "1.1.1",
-    "@justeat/eslint-config-fozzie": "3.4.0",
+    "@justeat/eslint-config-fozzie": "3.4.1",
     "@justeat/f-build-config": "0.3.0",
     "@justeat/f-utils": "0.3.0",
     "@justeat/fozzie": "1.73.0",
@@ -29,6 +32,7 @@
     "@vue/cli-service": "4.2.3",
     "@vue/eslint-config-standard": "4.0.0",
     "@vue/test-utils": "1.0.0-beta.29",
+    "webdriverio": "6.1.5",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
     "babel-jest": "24.9.0",
@@ -44,6 +48,7 @@
     "node-sass-magic-importer": "5.3.2",
     "postcss-loader": "3.0.0",
     "sass-loader": "7.1.0",
+    "@storybook/storybook-deployer": "2.8.5",
     "vue-svg-loader": "0.16.0",
     "vue-template-compiler": "2.6.11"
   },

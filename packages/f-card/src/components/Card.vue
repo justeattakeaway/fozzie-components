@@ -1,0 +1,124 @@
+<template>
+    <div
+        :data-theme-card="theme"
+        :class="[
+            $style['c-card'],
+            (isRounded ? $style['c-card--rounded'] : ''),
+            (hasOutline ? $style['c-card--outline'] : ''),
+            (isPageContentWrapper ? $style['c-card--pageContentWrapper'] : '')
+        ]">
+        <h1
+            v-if="cardHeading"
+            :class="[
+                'beta',
+                $style['c-card-heading']
+            ]"
+            data-test="card-heading"
+        >
+            {{ cardHeading }}
+        </h1>
+        <slot />
+    </div>
+</template>
+
+<script>
+import sharedServices from '@justeat/f-services';
+import tenantConfigs from '../tenants';
+
+export default {
+    name: 'CardComponent',
+    components: {},
+    props: {
+        locale: {
+            type: String,
+            default: ''
+        },
+        cardHeading: {
+            type: String,
+            default: ''
+        },
+        isRounded: {
+            type: Boolean,
+            default: false
+        },
+        hasOutline: {
+            type: Boolean,
+            default: false
+        },
+        isPageContentWrapper: {
+            type: Boolean,
+            default: false
+        }
+    },
+    computed: {
+        cardLocale () {
+            return sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
+        },
+        copy () {
+            const localeConfig = tenantConfigs[this.cardLocale];
+            return { ...localeConfig };
+        },
+        theme () {
+            return sharedServices.getTheme(this.cardLocale);
+        }
+    }
+};
+</script>
+
+<style lang="scss" module>
+
+$card-bgColor                             : $white;
+$card-borderColor                         : $grey--lightest;
+$card-borderRadius                        : $border-radius;
+$card-padding                             : spacing(x2);
+
+$card--pageContentWrapper-width           : 460px;
+
+.c-card {
+    background-color: $card-bgColor;
+    display: block;
+    padding: $card-padding;
+}
+
+    .c-card--separated {
+        margin-bottom: spacing();
+    }
+
+    .c-card--rounded {
+        border-radius: $card-borderRadius;
+    }
+
+    .c-card--outline {
+        border: solid 1px $card-borderColor;
+    }
+
+    // .c-card--pageContentWrapper Modifier
+    // Used for displaying full page content appropriately
+    // Default is fullWidth on narrow devices
+    // above $card-pageContentWrapper-width, the width of the card is restricted and centred on the page
+    .c-card--pageContentWrapper {
+        width: 100%;
+        transition: 250ms padding ease-in-out;
+        padding-left: 6%;
+        padding-right: 6%;
+
+        @include media('>=narrow') {
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+
+        @include media('>=#{$card--pageContentWrapper-width}') {
+            width: $card--pageContentWrapper-width;
+            margin: 0 auto;
+            padding-left: spacing() * 10;
+            padding-right: spacing() * 10;
+        }
+    }
+
+    .c-card-heading {
+        margin-bottom: spacing(x2);
+    }
+
+
+
+</style>
