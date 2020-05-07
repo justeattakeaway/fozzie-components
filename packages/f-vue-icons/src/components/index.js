@@ -9,6 +9,7 @@ import ClockIcon from './ClockIcon';
 import CollectionIcon from './CollectionIcon';
 import CrossIcon from './CrossIcon';
 import DeliveryIcon from './DeliveryIcon';
+import EyeglassIcon from './EyeglassIcon';
 import FlagIcon from './FlagIcon';
 import GiftIcon from './GiftIcon';
 import InfoIcon from './InfoIcon';
@@ -36,6 +37,7 @@ export {
     CollectionIcon,
     CrossIcon,
     DeliveryIcon,
+    EyeglassIcon,
     FlagIcon,
     GiftIcon,
     InfoIcon,
