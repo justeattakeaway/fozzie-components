@@ -10,6 +10,7 @@ import ClockIcon from './components/ClockIcon/ClockIcon.vue';
 import CollectionIcon from './components/CollectionIcon/CollectionIcon.vue';
 import CrossIcon from './components/CrossIcon/CrossIcon.vue';
 import DeliveryIcon from './components/DeliveryIcon/DeliveryIcon.vue';
+import EyeglassIcon from './components/EyeglassIcon/EyeglassIcon.vue';
 import FlagIcon from './components/FlagIcon/FlagIcon.vue';
 import GiftIcon from './components/GiftIcon/GiftIcon.vue';
 import InfoIcon from './components/InfoIcon/InfoIcon.vue';
@@ -47,6 +48,7 @@ export {
     CollectionIcon,
     CrossIcon,
     DeliveryIcon,
+    EyeglassIcon,
     FlagIcon,
     GiftIcon,
     InfoIcon,
