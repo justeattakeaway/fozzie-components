@@ -4,15 +4,28 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest (roll into next release)
+------------------------------
+*May 12, 2020*
+
+### Changed
+- Updating `vue-test-utils` to v1 and `@vue/cli-plugin-unit-test` to v4.3.1.
+- Use `node current` in unit test Babel config, so that it supports `async > await` properly.
+
+### Removed
+- `testMatch` from jest config, as not needed.
+
+
 v2.1.1
 ------------------------------
 *April 20, 2020*
 
 ### Added
-- `stories` folder that will contain `*.stories.js` files for use with Storybook
+- `stories` folder that will contain `*.stories.js` files for use with Storybook.
 
 ### Changed
-- Updated name of component in `index.js` from `Footer` > `VueFooter` (as `Footer` is a reserved word according to linting rules)
+- Updated name of component in `index.js` from `Footer` > `VueFooter` (as `Footer` is a reserved word according to linting rules).
+
 
 v2.1.0
 ------------------------------
@@ -27,9 +40,9 @@ v2.0.1
 *March 5, 2020*
 
 ### Changed
-- Update courier footer link URLs for IE (Ireland)
+- Update courier footer link URLs for IE (Ireland).
 - `jest` config updates. `jsx` removed from transforms (as we don't use) and `transformIgnorePatterns` updated, `common.scss` added to globals loaded in, and `moduleNameMapper` updated to load in scss imports from `common.scss`.
-- Skipped test re-added (as it passes when tested)
+- Skipped test re-added (as it passes when tested).
 
 
 v2.0.0
@@ -39,7 +52,7 @@ v2.0.0
 ### Changed
 - Moving `f-footer` Vue component to be `v2.0.0`.
   If we need to update the old `f-footer` package, those changes can be released on the legacy `v1.x.x` release branch via the [legacy `f-footer` repo](https://github.com/justeat/f-footer).
-- Separated out `lint` and `lint:fix` into two tasks (so CircleCI build can run lint task without fixing)
+- Separated out `lint` and `lint:fix` into two tasks (so CircleCI build can run lint task without fixing).
 
 
 v2.0.0-beta.36
