@@ -3,6 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v2.4.0
+------------------------------
+*May 12, 2020*
+
+### Fixed
+- Have added proper mocking for API data via `axios`. Quite a few of the tests were trying to call API endpoints and were passing without actually testing anything (but passed giving the impression they were). Have fixed this now so that these tests all work as expected with proper mocks.
+- Fixed some tests that broke when upgrading to the latest `vue-test-utils`.
+
+### Changed
+- Updated some of the methods that handle API calls to return as promises, so that they are easier to unit test.
+- Updating `vue-test-utils` to v1 and `@vue/cli-plugin-unit-test` to v4.3.1.
+- Use `node current` in unit test Babel config, so that it supports `async > await` properly.
+
+### Removed
+- `testMatch` from jest config, as not needed.
+
+
 v2.3.0
 ------------------------------
 *May 6, 2020*

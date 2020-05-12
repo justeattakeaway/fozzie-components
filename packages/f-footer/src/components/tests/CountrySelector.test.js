@@ -40,8 +40,9 @@ describe('CountrySelector', () => {
         expect(list.isVisible()).toBe(false);
     });
 
-    it('list should be displayed when button is clicked', () => {
-        button.trigger('click');
+    it('list should be displayed when button is clicked', async () => {
+        await button.trigger('click'); // wait for DOM to update as a result of click being triggered
+
         expect(list.isVisible()).toBe(true);
     });
 
