@@ -65,7 +65,7 @@ describe('Navigation', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    it('should show "Deliver for Just Eat" in nav if prop true and the content is there', async () => {
+    it('should show the delivery enquiry link in the navigation if `showDeliveryEnquiry: true` and the content is there', async () => {
         // Arrange
         const propsData = {
             ...defaultPropsData,
@@ -80,7 +80,7 @@ describe('Navigation', () => {
         expect(wrapper.find('[data-js-test="delivery-enquiry"]').exists()).toBe(true);
     });
 
-    it('should NOT show "Deliver for Just Eat" in nav if prop false and the content is there', async () => {
+    it('should NOT show the delivery enquiry link in the navigation if `showDeliveryEnquiry: false` and the content is there', async () => {
         // Arrange
         const propsData = {
             ...defaultPropsData,
@@ -368,11 +368,12 @@ describe('Navigation', () => {
             // Arrange
             const propsData = defaultPropsData;
             const wrapper = shallowMount(Navigation, { propsData });
+            const pastExpiryDate = new Date('Thu Oct 10 2019 15:37:14 GMT+0100').getTime();
 
             // Act
             await wrapper.setData({
                 ...defaultData,
-                localOrderCountExpires: 1570718234911
+                localOrderCountExpires: pastExpiryDate
             });
 
             // Assert
@@ -383,11 +384,12 @@ describe('Navigation', () => {
             // Arrange
             const propsData = defaultPropsData;
             const wrapper = shallowMount(Navigation, { propsData });
+            const futureExpiryDate = new Date('Tue Aug 14 2035 16:30:34 GMT+0100').getTime();
 
             // Act
             await wrapper.setData({
                 ...defaultData,
-                localOrderCountExpires: 2070718234911
+                localOrderCountExpires: futureExpiryDate
             });
 
             // Assert

@@ -57,7 +57,6 @@ describe('Logo', () => {
         const logo = wrapper.find('[data-js-test="c-icon--je"]');
 
         // Assert
-        // with dynamically rendered components
         // dynamic classes returned as one string in the array
         // so have to check for 'c-logo-img,c-icon--je,c-icon-je--alt' not just 'c-icon-je--alt'
         expect(logo.classes('c-icon-je--alt')).toBe(true);
@@ -76,7 +75,6 @@ describe('Logo', () => {
         const logo = wrapper.find('[data-js-test="c-icon--je"]');
 
         // Assert
-        // with dynamically rendered components
         // dynamic classes returned as one string in the array
         // so have to check for 'c-logo-img,c-icon--je,c-icon-je--alt' not just 'c-icon-je--alt'
         expect(logo.classes('c-icon-je--alt')).toBe(true);

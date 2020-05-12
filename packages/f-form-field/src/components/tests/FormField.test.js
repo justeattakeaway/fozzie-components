@@ -11,9 +11,6 @@ describe('FormField', () => {
     });
 
     describe('props ::', () => {
-        beforeEach(() => {
-            console.error = jest.fn();
-        });
         describe('inputType ::', () => {
             it('should be set to type `text` by default if no value is set', () => {
                 // Arrange
@@ -46,6 +43,7 @@ describe('FormField', () => {
                 const propsData = {
                     inputType: 'invalidType'
                 };
+                console.error = jest.fn();
 
                 // Act
                 const wrapper = shallowMount(FormField, { propsData });
