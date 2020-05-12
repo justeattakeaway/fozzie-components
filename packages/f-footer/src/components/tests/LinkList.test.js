@@ -34,13 +34,13 @@ describe('LinkList component', () => {
             expect(linkListWrapper.classes()).toContain('is-collapsed');
         });
 
-        it('should be in an open state when linkList title has been clicked', () => {
+        it('should be in an open state when linkList title has been clicked', async () => {
             // Arrange
             const linkListWrapper = wrapper.find('[data-js-test="linkList-wrapper"]');
             const linkListHeader = wrapper.find('[data-js-test="linkList-header"]');
 
             // Act
-            linkListHeader.trigger('click');
+            await linkListHeader.trigger('click'); // wait for DOM to update as a result of click being triggered
 
             // Assert
             expect(linkListWrapper.classes()).not.toContain('is-collapsed');
