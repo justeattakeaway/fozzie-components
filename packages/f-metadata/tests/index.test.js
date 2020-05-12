@@ -106,7 +106,7 @@ describe('f-metadata', () => {
     });
 
     describe('callbacks', () => {
-        it('should call `handleContentCards` content cards have updated', () => {
+        it('should call `handleContentCards` when content cards have updated', () => {
             // Assemble
             const cards = ['__CARD__'];
 
