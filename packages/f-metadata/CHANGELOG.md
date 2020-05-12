@@ -4,12 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+2.3.4
 ------------------------------
 *May 12, 2020*
 
 ### Changed
 - Updating `@vue/cli-plugin-unit-test` to v4.3.1.
+- Ordering of callbacks to ensure they're initialised before used
 
 
 2.3.3
