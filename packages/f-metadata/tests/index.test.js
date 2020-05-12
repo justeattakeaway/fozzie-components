@@ -105,17 +105,29 @@ describe('f-metadata', () => {
         });
     });
 
-    it('should trigger the given callbacks when content cards have updated', () => {
-        const cards = ['__CARD__'];
-        // Act
-        expect.assertions(3);
-        initialiseBraze(settings).then(() => {
-            // Assert
-            appboy.subscribeToContentCardsUpdates.mock.calls[0][0](cards);
-            appboy.subscribeToInAppMessage.mock.calls[0][0](inAppMessage);
-            expect(handleContentCards).toHaveBeenCalledWith(cards);
-            expect(interceptInAppMessages).toHaveBeenCalledWith(inAppMessage);
-            expect(appboy.display.showInAppMessage).toHaveBeenCalledWith(inAppMessage);
+    describe('callbacks', () => {
+        it('should call `handleContentCards` content cards have updated', () => {
+            // Assemble
+            const cards = ['__CARD__'];
+
+            // Act
+            expect.assertions(1);
+            initialiseBraze(settings).then(() => {
+                // Assert
+                appboy.subscribeToContentCardsUpdates.mock.calls[0][0](cards);
+                expect(handleContentCards).toHaveBeenCalledWith(cards);
+            });
+        });
+
+        it('should call `interceptInAppMessages` when in-app messages are displayed', () => {
+            // Act
+            expect.assertions(2);
+            initialiseBraze(settings).then(() => {
+                // Assert
+                appboy.subscribeToInAppMessage.mock.calls[0][0](inAppMessage);
+                expect(interceptInAppMessages).toHaveBeenCalledWith(inAppMessage);
+                expect(appboy.display.showInAppMessage).toHaveBeenCalledWith(inAppMessage);
+            });
         });
     });
 });
