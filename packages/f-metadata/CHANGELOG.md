@@ -5,10 +5,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 2.4.0
 ------------------------------
-*May  13, 2020*
+*May 13, 2020*
 
 ### Changed
-
 - Manually coerce in-app messages to allow apps to intercept and extend functionality.
 
 
