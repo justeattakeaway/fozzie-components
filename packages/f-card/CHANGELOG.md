@@ -10,6 +10,7 @@ Latest (roll into next release)
 
 ### Changed
 - Updating `vue-test-utils` to v1.
+- Structure of Storybook stories changed to CSF (Component Story Format) – the new recommended way to write stories.
 
 
 v0.2.0
