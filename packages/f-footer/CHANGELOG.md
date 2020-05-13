@@ -11,6 +11,7 @@ Latest (roll into next release)
 ### Changed
 - Updating `vue-test-utils` to v1 and `@vue/cli-plugin-unit-test` to v4.3.1.
 - Use `node current` in unit test Babel config, so that it supports `async > await` properly.
+- Structure of Storybook stories changed to CSF (Component Story Format) – the new recommended way to write stories.
 
 ### Removed
 - `testMatch` from jest config, as not needed.
