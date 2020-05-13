@@ -30,6 +30,12 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
         .then(({ default: appboy }) => {
             appboy.initialize(apiKey, { enableLogging, sessionTimeoutInSeconds });
 
+            appboy.subscribeToInAppMessage(message => {
+                interceptInAppMessages(message);
+                appboy.display.showInAppMessage(message);
+            });
+            appboy.subscribeToContentCardsUpdates(handleContentCards);
+
             appboy.openSession();
             window.appboy = appboy;
 
@@ -40,12 +46,6 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
             });
 
             appboy.requestContentCardsRefresh();
-
-            appboy.subscribeToInAppMessage(message => {
-                interceptInAppMessages(message);
-                appboy.display.showInAppMessage(message);
-            });
-            appboy.subscribeToContentCardsUpdates(handleContentCards);
 
             resolve(appboy);
         })

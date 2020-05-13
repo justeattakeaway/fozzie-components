@@ -411,14 +411,14 @@ export default {
         },
 
         // If userInfoProp wasn't passed we make a call for userInfo on mounted hook
-        async fetchUserInfo () {
-            try {
-                const { data } = await axios.get(this.userInfoUrl, {
-                    headers: {
-                        credentials: 'same-origin'
-                    }
-                });
+        fetchUserInfo () {
+            const userDetailsPromise = axios.get(this.userInfoUrl, {
+                headers: {
+                    credentials: 'same-origin'
+                }
+            });
 
+            userDetailsPromise.then(data => {
                 if (data.isAuthenticated) {
                     this.userInfo = data;
 
@@ -428,33 +428,38 @@ export default {
                 } else {
                     this.userInfo = false;
                 }
-            } catch (err) {
+            })
+            .catch(err => {
                 if (this.errorLog) {
                     this.errorLog('Unable to get user information from "fetchUserInfo"', err);
                 }
-            }
+            });
+
+            return userDetailsPromise;
         },
 
         // fetches the order count for the user
-        async fetchOrderCountAndSave () {
-            try {
-                const { data } = await axios.get(this.orderCountUrl, {
-                    headers: {
-                        credentials: 'same-origin'
-                    }
-                });
+        fetchOrderCountAndSave () {
+            const orderCountPromise = axios.get(this.orderCountUrl, {
+                headers: {
+                    credentials: 'same-origin'
+                }
+            });
 
+            orderCountPromise.then(data => {
                 if (data && this.isOrderCountOutOfDate) {
                     this.setAnalyticsBlob(data);
                     this.localOrderCountExpires = data.Expires;
                     this.enrichUserDataWithCount(data.Count);
                     this.pushToDataLayer(this.userInfo);
                 }
-            } catch (err) {
+            })
+            .catch(err => {
                 if (this.errorLog) {
                     this.errorLog('Unable to get order count from "fetchOrderCountAndSave', err);
                 }
-            }
+            });
+            return orderCountPromise;
         },
 
         /**
