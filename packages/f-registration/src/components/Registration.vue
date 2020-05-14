@@ -7,22 +7,27 @@
             :class="$style['o-form']"
         >
             <form-field
+                data-test-id="input-first-name"
                 label-text="First name"
                 input-type="text" />
 
             <form-field
+                data-test-id="input-last-name"
                 label-text="Last name"
                 input-type="text" />
 
             <form-field
+                data-test-id="input-email"
                 label-text="Email"
                 input-type="email" />
 
             <form-field
+                data-test-id="input-password"
                 label-text="Password"
                 input-type="password" />
 
             <form-button
+                data-test-id="create-account-submit-button"
                 button-style="primary"
                 is-full-width>
                 Create Account

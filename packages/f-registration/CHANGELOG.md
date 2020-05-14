@@ -6,7 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (roll into next release)
 ------------------------------
-*May 12, 2020*
+
+
+v0.3.0
+------------------------------
+*May 14, 2020*
+
+### Added
+- Added `data-test-id` for input elements in `f-registration`.
 
 ### Changed
 - Updating `vue-test-utils` to v1 and `@vue/cli-plugin-unit-test` to v4.3.1.
