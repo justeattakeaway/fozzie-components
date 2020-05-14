@@ -14,8 +14,6 @@ module.exports = api => {
         presets.push('@babel/env');
     }
 
-    // use for both test and dev/live
-
     return {
         presets,
         plugins
