@@ -11,9 +11,9 @@ describe('Registration', () => {
     it('has a button', () => {
         const propsData = {};
         const wrapper = shallowMount(Registration, { propsData });
-        const button = wrapper.find('button[data-test-id="create-account-submit-button"]')
-        expect(button.exists());
-    })
+        const button = wrapper.find("[data-test-id='create-account-submit-button']");
+        expect(button.exists()).toBe(true);
+    });
 
     describe(': props :', () => {
         it('if `value` is specified, should assign the input field a value attribute', () => {
