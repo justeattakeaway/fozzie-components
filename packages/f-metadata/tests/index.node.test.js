@@ -13,13 +13,15 @@ describe('f-metadata › node', () => {
         jest.resetAllMocks();
     });
 
-    it('should not call initialise if window is undefined', () => {
+    it('should not call initialise if window is undefined', async () => {
         // Assemble & Act
         expect.assertions(2);
-        initialiseBraze().catch(error => {
+        try {
+            await initialiseBraze();
+        } catch (error) {
             // Assert
             expect(appboy.initialize).not.toHaveBeenCalled();
             expect(error.message).toBe('window is not defined');
-        });
+        }
     });
 });
