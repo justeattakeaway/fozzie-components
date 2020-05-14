@@ -3,7 +3,7 @@
 
 <img width="125" alt="Fozzie Bear" src="../../bear.png" />
 
-<p>Global Header Component for Vue.js.</p>
+<p>Braze Content Cards Interface</p>
 </div>
 
 ---
@@ -13,32 +13,83 @@
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-metadata/badge.svg)](https://coveralls.io/github/justeat/f-metadata)
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-metadata/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-metadata?targetFile=package.json)
 
+This package provides an interface for initialising Braze and handling content cards and in-app messages.
+
+## Installation
+
+Install the module using NPM or Yarn:
+
+```bash
+// yarn
+$ yarn add @justeat/f-metadata
+
+// or npm
+$ npm install @justeat/f-metadata
+```
+
+The package can then be imported into your application:
+
+```js
+// import
+import initialiseBraze from '@justeat/f-metadata';
+
+// or require
+const initialiseBraze = require('@justeat/f-metadata');
+```
 
 ## Usage
 
-1.  Install the module using NPM or Yarn:
+### Initialisation
 
-    ```bash
-    yarn add @justeat/f-metadata
-    ```
+The package comes with one method for initialising Braze. All other functionality, such as handling content cards or intercepting in-app messages is done with callbacks passed through config.
 
-    ```bash
-    npm install @justeat/f-metadata
-    ```
+**Basic Example**
 
-2.  Import the package
+```js
+import initialiseBraze from '@justeat/f-metadata'
 
-    You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+const config = {
+  apiKey = '1234-1234-1234',
+  userId = 'ABC123',
+  enableLogging = true,
+  disableComponent = false,
+  callbacks = {
+    handleContentCards: cards => console.log(cards) // Braze content cards data
+    interceptInAppMessages inAppMessage => console.log(inAppMessage) // Braze in app message data
+  }
+};
 
-    ```
-    import initialiseBraze from '@justeat/f-metadata';
-    ```
+initialiseBraze(config);
+```
 
-3. Properties which component accepts:
+### Config Object
 
-    `enableLogging` - If set to `true`, it allows Braze logging in the console. Default set to `false`.
 
-    `disableComponent` - If set to `true`, it does not initialise Braze when called. Default set to `false`.
+#### `config.apiKey`
+
+The Braze API key used when invoking calls to the Braze SDK. This can be found in the Braze Dashboard at *App Settings->Developer Console->Rest API Keys*.
+
+#### `config.userId`
+
+The user ID to retrieve data for.
+
+#### `config.enableLogging`
+
+Enable/Disable verbose logging from the Braze SDK used for debugging.
+
+#### `config.disableComponent`
+
+Enable/Disable the Braze SDK when running experiments or feature toggling.
+
+### `config.callbacks.handleContentCards`
+
+The callback to be invoked when content cards have been retrieved.
+
+### `config.callbacks.interceptInAppMessages`
+
+The callback to be invoked when in-app messages have been retrieved.
+
+> **Please note:** This callback is fired before in-app messages are triggered.
 
 ## Migration to v2
 
@@ -62,3 +113,9 @@ appboy.requestImmediateRefresh();
 // { cards: [...cards]}
 ```
 
+## Resources
+
+| Name | Description | Link |
+|:----|:----|:----|
+| Appboy Technical Documentation | All documentation associated to the Javascript web SDK | [https://js.appboycdn.com/web-sdk/2.5/doc/module-appboy.html](https://js.appboycdn.com/web-sdk/2.5/doc/module-appboy.html) |
+| Appboy GitHub Repo | Code repo and issue tracking | [https://github.com/Appboy/appboy-web-sdk](https://github.com/Appboy/appboy-web-sdk) |
