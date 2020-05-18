@@ -16,7 +16,7 @@ $theme: 'je' !default;
 // $registration-background-color          : $brand--red;
 
 @mixin theme($type) {
-    [data-theme="#{$type}"] & {
+    [data-theme-registration="#{$type}"] & {
         @content;
     }
 }
