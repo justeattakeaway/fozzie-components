@@ -1,7 +1,10 @@
 <template>
     <card
-        card-title="Create Account"
-        :data-theme="theme">
+        :data-theme-registration="theme"
+        :card-heading="title"
+        is-rounded
+        has-outline
+        is-page-content-wrapper>
         <form
             type="post"
             :class="$style['o-form']"
@@ -9,28 +12,33 @@
             <form-field
                 data-test-id="input-first-name"
                 label-text="First name"
-                input-type="text" />
+                input-type="text"
+                label-style="inline" />
+
 
             <form-field
                 data-test-id="input-last-name"
                 label-text="Last name"
-                input-type="text" />
+                input-type="text"
+                label-style="inline" />
 
             <form-field
                 data-test-id="input-email"
                 label-text="Email"
-                input-type="email" />
+                input-type="email"
+                label-style="inline" />
 
             <form-field
                 data-test-id="input-password"
                 label-text="Password"
-                input-type="password" />
+                input-type="password"
+                label-style="inline" />
 
             <form-button
                 data-test-id="create-account-submit-button"
                 button-style="primary"
                 is-full-width>
-                Create Account
+                {{ buttonText }}
             </form-button>
         </form>
     </card>
@@ -38,17 +46,19 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
+import Card from '@justeat/f-card';
+import '@justeat/f-card/dist/f-card.css';
+import FormField from '@justeat/f-form-field';
+import '@justeat/f-form-field/dist/f-form-field.css';
 import FormButton from './Button.vue';
-import Card from './Card.vue';
-import FormField from './FormField.vue';
 import tenantConfigs from '../tenants';
 
 export default {
     name: 'Registration',
 
     components: {
-        FormButton,
         Card,
+        FormButton,
         FormField
     },
 
@@ -56,6 +66,14 @@ export default {
         locale: {
             type: String,
             default: ''
+        },
+        title: {
+            type: String,
+            default: 'Create Account'
+        },
+        buttonText: {
+            type: String,
+            default: 'Create Account'
         }
     },
 
