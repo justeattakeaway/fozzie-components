@@ -89,6 +89,10 @@ $form-input-borderColour--focus           : $grey--dark;
 
 .c-formField {
     position: relative;
+
+    & + & {
+        margin-top: spacing(x2);
+    }
 }
 
     .c-formField-input {
