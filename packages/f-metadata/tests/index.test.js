@@ -10,7 +10,8 @@ jest.mock('appboy-web-sdk', () => ({
     changeUser: jest.fn(),
     requestContentCardsRefresh: jest.fn(),
     subscribeToContentCardsUpdates: jest.fn(),
-    subscribeToInAppMessage: jest.fn()
+    subscribeToInAppMessage: jest.fn(),
+    subscribeToClickedEvent: jest.fn()
 }));
 
 const apiKey = '__API_KEY__';
@@ -18,12 +19,14 @@ const userId = '__USER_ID__';
 const inAppMessage = '__IN_APP_MESSAGE__';
 const handleContentCards = jest.fn();
 const interceptInAppMessages = jest.fn();
+const interceptInAppMessageClickEvents = jest.fn();
 const enableLogging = true;
 const disableComponent = false;
 
 const callbacks = {
     handleContentCards,
-    interceptInAppMessages
+    interceptInAppMessages,
+    interceptInAppMessageClickEvents
 };
 
 const settings = {
@@ -119,6 +122,16 @@ describe('f-metadata', () => {
             appboy.subscribeToInAppMessage.mock.calls[0][0](inAppMessage);
             expect(interceptInAppMessages).toHaveBeenCalledWith(inAppMessage);
             expect(appboy.display.showInAppMessage).toHaveBeenCalledWith(inAppMessage);
+        });
+
+        it('should call `subscribeToClickedEvent` when in-app messages are displayed', async () => {
+            // Assemble & Act
+            await initialiseBraze(settings);
+
+            // Assert
+            appboy.subscribeToInAppMessage.mock.calls[0][0](inAppMessage);
+            appboy.subscribeToClickedEvent.mock.calls[0][0]();
+            expect(interceptInAppMessageClickEvents).toHaveBeenCalled();
         });
     });
 });
