@@ -2,22 +2,32 @@
     <div
         :data-theme-formfield="theme"
         :class="$style['c-formField']">
-        <form-label
-            v-if="normalisedLabelStyle === 'default'"
-            :label-style="normalisedLabelStyle">
-            {{ labelText }}
-        </form-label>
-        <input
-            id="formfield"
-            :type="normalisedInputType"
-            placeholder=" "
-            :class="[$style['o-form-field'], $style['c-formField-input']]"
-        >
-        <form-label
-            v-if="normalisedLabelStyle === 'inline'"
-            :label-style="normalisedLabelStyle">
-            {{ labelText }}
-        </form-label>
+        <div
+            :class="$style['c-formField-inputWrapper']">
+            <form-label
+                v-if="normalisedLabelStyle === 'default'"
+                :label-style="normalisedLabelStyle"
+                :for="uniqueId">
+                {{ labelText }}
+            </form-label>
+            <input
+                :id="`${uniqueId}`"
+                :value="value"
+                v-bind="$attrs"
+                :type="normalisedInputType"
+                placeholder=" "
+                :class="[$style['o-form-field'], $style['c-formField-input']]"
+                @input="updateValue"
+                v-on="listeners"
+            >
+            <form-label
+                v-if="normalisedLabelStyle === 'inline'"
+                :label-style="normalisedLabelStyle"
+                :for="uniqueId">
+                {{ labelText }}
+            </form-label>
+        </div>
+        <slot name="error" />
     </div>
 </template>
 
@@ -32,6 +42,7 @@ export default {
     components: {
         FormLabel
     },
+    inheritAttrs: false,
     props: {
         locale: {
             type: String,
@@ -50,6 +61,10 @@ export default {
             type: String,
             default: 'default',
             validator: value => (VALID_LABEL_STYLES.indexOf(value) !== -1) // The prop value must match one of the valid input types
+        },
+        value: {
+            type: [String, Number],
+            default: ''
         }
     },
     computed: {
@@ -74,6 +89,20 @@ export default {
         },
         theme () {
             return globalisationServices.getTheme(this.formFieldLocale);
+        },
+        listeners () {
+            return {
+                ...this.$listeners,
+                input: this.updateValue
+            };
+        },
+        uniqueId () {
+            return `formField-${(this.$attrs.name ? this.$attrs.name : this._uid)}`;
+        }
+    },
+    methods: {
+        updateValue (event) {
+            this.$emit('input', event.target.value);
         }
     }
 };
@@ -88,12 +117,13 @@ $form-input-borderColour                  : $grey--lightest;
 $form-input-borderColour--focus           : $grey--dark;
 
 .c-formField {
-    position: relative;
-
     & + & {
         margin-top: spacing(x2);
     }
 }
+    .c-formField-inputWrapper {
+        position: relative;
+    }
 
     .c-formField-input {
         width: 100%;
@@ -108,5 +138,6 @@ $form-input-borderColour--focus           : $grey--dark;
         border-radius: $form-input-borderRadius;
         background-clip: padding-box;
     }
+
 
 </style>
