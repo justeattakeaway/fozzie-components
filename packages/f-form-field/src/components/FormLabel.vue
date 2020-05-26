@@ -1,7 +1,6 @@
 <template>
     <label
         v-if="hasLabelText"
-        for="formfield"
         :class="[
             $style['o-form-label'],
             $style['c-formField-label'],
