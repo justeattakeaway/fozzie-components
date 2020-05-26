@@ -8,31 +8,82 @@
         <form
             type="post"
             :class="$style['o-form']"
+            @submit="checkValidation"
         >
             <form-field
+                v-model="firstName"
+                name="firstName"
                 data-test-id="input-first-name"
                 label-text="First name"
                 input-type="text"
-                label-style="inline" />
-
+                label-style="inline">
+                <template #error>
+                    <p
+                        v-if="($v.firstName.$invalid && !$v.firstName.required) && $v.firstName.$dirty"
+                        :class="$style['o-form-error']">
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        Please enter your first name
+                    </p>
+                </template>
+            </form-field>
 
             <form-field
+                v-model="lastName"
+                name="lastName"
                 data-test-id="input-last-name"
                 label-text="Last name"
                 input-type="text"
-                label-style="inline" />
+                label-style="inline">
+                <template #error>
+                    <p
+                        v-if="($v.lastName.$invalid && !$v.lastName.required) && $v.lastName.$dirty"
+                        :class="$style['o-form-error']">
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        Please enter your last name
+                    </p>
+                </template>
+            </form-field>
 
             <form-field
+                v-model="email"
+                name="email"
                 data-test-id="input-email"
                 label-text="Email"
                 input-type="email"
-                label-style="inline" />
+                label-style="inline">
+                <!-- For when we want to add validation on blur of input - @blur="$v.email.$touch" -->
+                <template #error>
+                    <p
+                        v-if="($v.email.$invalid && !$v.email.required) && $v.email.$dirty"
+                        :class="$style['o-form-error']">
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        Please enter your email address
+                    </p>
+                    <p
+                        v-else-if="($v.email.$invalid && !$v.email.email) && $v.email.$dirty"
+                        :class="$style['o-form-error']">
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        Please enter a valid email address
+                    </p>
+                </template>
+            </form-field>
 
             <form-field
+                v-model="password"
+                name="password"
                 data-test-id="input-password"
                 label-text="Password"
                 input-type="password"
-                label-style="inline" />
+                label-style="inline">
+                <template #error>
+                    <p
+                        v-if="($v.password.$invalid && !$v.password.required) && $v.password.$dirty"
+                        :class="$style['o-form-error']">
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        Please enter a password
+                    </p>
+                </template>
+            </form-field>
 
             <form-button
                 data-test-id="create-account-submit-button"
@@ -46,6 +97,9 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
+import { validationMixin } from 'vuelidate';
+import { required, email } from 'vuelidate/lib/validators';
+import { WarningIcon } from '@justeat/f-vue-icons';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
@@ -59,8 +113,11 @@ export default {
     components: {
         Card,
         FormButton,
-        FormField
+        FormField,
+        WarningIcon
     },
+
+    mixins: [validationMixin],
 
     props: {
         locale: {
@@ -84,8 +141,37 @@ export default {
 
         return {
             copy: { ...localeConfig },
-            theme
+            theme,
+            firstName: null,
+            lastName: null,
+            email: null,
+            password: null
         };
+    },
+    validations: {
+        firstName: {
+            required
+        },
+        lastName: {
+            required
+        },
+        email: {
+            required,
+            email
+        },
+        password: {
+            required
+        }
+    },
+    methods: {
+        checkValidation (event) {
+            this.$v.$touch();
+            if (this.$v.$invalid) {
+                event.preventDefault();
+                return false;
+            }
+            return true;
+        }
     }
 };
 </script>
@@ -96,6 +182,23 @@ export default {
 
 .o-form {
     @include font-size(base--scaleUp);
+}
+
+    .o-form-error {
+        display: flex;
+        align-items: center;
+        color: $red;
+        @include font-size(base);
+        margin-top: spacing();
+    }
+        .o-form-error-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: spacing(x0.5);
+        }
+
+* + .o-form {
+    margin-top: spacing(x2);
 }
 
 </style>
