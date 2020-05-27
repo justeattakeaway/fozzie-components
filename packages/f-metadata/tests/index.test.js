@@ -11,12 +11,24 @@ jest.mock('appboy-web-sdk', () => ({
     requestContentCardsRefresh: jest.fn(),
     subscribeToContentCardsUpdates: jest.fn(),
     subscribeToInAppMessage: jest.fn(),
-    subscribeToClickedEvent: jest.fn()
+    subscribeToClickedEvent: jest.fn(),
+    ab: {
+        InAppMessage: Object
+    }
 }));
 
 const apiKey = '__API_KEY__';
 const userId = '__USER_ID__';
-const inAppMessage = '__IN_APP_MESSAGE__';
+const inAppMessage = {
+    buttons: [
+        {
+            subscribeToClickedEvent: jest.fn()
+        },
+        {
+            subscribeToClickedEvent: jest.fn()
+        }
+    ]
+};
 const handleContentCards = jest.fn();
 const interceptInAppMessages = jest.fn();
 const interceptInAppMessageClickEvents = jest.fn();
@@ -124,14 +136,30 @@ describe('f-metadata', () => {
             expect(appboy.display.showInAppMessage).toHaveBeenCalledWith(inAppMessage);
         });
 
-        it('should call `subscribeToClickedEvent` when in-app messages are displayed', async () => {
-            // Assemble & Act
+        it('should assign `subscribeToClickedEvent` to button index 1', async () => {
+            // Assemble
+            const { buttons: { 0: dismissButton, 1: successButton } } = inAppMessage;
+
+            // Act
             await initialiseBraze(settings);
 
             // Assert
             appboy.subscribeToInAppMessage.mock.calls[0][0](inAppMessage);
-            appboy.subscribeToClickedEvent.mock.calls[0][0]();
-            expect(interceptInAppMessageClickEvents).toHaveBeenCalled();
+            expect(dismissButton.subscribeToClickedEvent).not.toHaveBeenCalled();
+            expect(successButton.subscribeToClickedEvent).toHaveBeenCalled();
+        });
+
+        it('should call `interceptInAppMessageClickEvents` when `subscribeToClickedEvent` is triggered', async () => {
+            // Assemble
+            const { buttons: { 1: { subscribeToClickedEvent: successEvent } } } = inAppMessage;
+
+            // Assemble
+            await initialiseBraze(settings);
+
+            // Assert
+            appboy.subscribeToInAppMessage.mock.calls[0][0](inAppMessage);
+            successEvent.mock.calls[0][0]();
+            expect(interceptInAppMessageClickEvents).toHaveBeenCalledWith(inAppMessage);
         });
     });
 });
