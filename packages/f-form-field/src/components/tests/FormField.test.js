@@ -83,6 +83,21 @@ describe('FormField', () => {
                 expect(formInput.attributes('data-test-id')).toBe(dataTestId);
             });
 
+            it('should set the value of attribute data-test-id on input element if name is specified', () => {
+                // Arrange
+                const name = 'my-input';
+                const attrs = {
+                    name
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { attrs });
+                const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
+
+                // Assert
+                expect(formInput.attributes('data-test-id')).toBe(name);
+            });
+
             it('should not add the attribute data-test-id on input element if dataTestId is not specified', () => {
                 // Arrange & Act
                 const wrapper = shallowMount(FormField, { });

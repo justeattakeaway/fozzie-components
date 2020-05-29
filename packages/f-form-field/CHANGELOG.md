@@ -8,8 +8,8 @@ v0.5.0
 ------------------------------
 *May 29, 2020*
 
-### Changed
-- Added a `data-test-id` attribute to the input element.
+### Added
+- `data-test-id` attribute to the input element.
 
 
 v0.4.0
