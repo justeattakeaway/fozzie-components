@@ -91,6 +91,10 @@ The callback to be invoked when in-app messages have been retrieved.
 
 > **Please note:** This callback is fired before in-app messages are triggered.
 
+### `config.callbacks.interceptInAppMessageClickEvents`
+
+The callback to be invoked when in-app messages have been clicked.
+
 ## Migration to v2
 
 Version 2 exposes the appboy instance as opposed to content cards as part of the refresh callback, this makes it easier to access properties on the instance such as `getUnviewedCardCount` and is a step closer to an isomorphic solution.
