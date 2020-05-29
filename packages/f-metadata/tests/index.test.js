@@ -10,20 +10,35 @@ jest.mock('appboy-web-sdk', () => ({
     changeUser: jest.fn(),
     requestContentCardsRefresh: jest.fn(),
     subscribeToContentCardsUpdates: jest.fn(),
-    subscribeToInAppMessage: jest.fn()
+    subscribeToInAppMessage: jest.fn(),
+    subscribeToClickedEvent: jest.fn(),
+    ab: {
+        InAppMessage: Object
+    }
 }));
 
 const apiKey = '__API_KEY__';
 const userId = '__USER_ID__';
-const inAppMessage = '__IN_APP_MESSAGE__';
+const inAppMessage = {
+    buttons: [
+        {
+            subscribeToClickedEvent: jest.fn()
+        },
+        {
+            subscribeToClickedEvent: jest.fn()
+        }
+    ]
+};
 const handleContentCards = jest.fn();
 const interceptInAppMessages = jest.fn();
+const interceptInAppMessageClickEvents = jest.fn();
 const enableLogging = true;
 const disableComponent = false;
 
 const callbacks = {
     handleContentCards,
-    interceptInAppMessages
+    interceptInAppMessages,
+    interceptInAppMessageClickEvents
 };
 
 const settings = {
@@ -119,6 +134,32 @@ describe('f-metadata', () => {
             appboy.subscribeToInAppMessage.mock.calls[0][0](inAppMessage);
             expect(interceptInAppMessages).toHaveBeenCalledWith(inAppMessage);
             expect(appboy.display.showInAppMessage).toHaveBeenCalledWith(inAppMessage);
+        });
+
+        it('should assign `subscribeToClickedEvent` to button index 1', async () => {
+            // Assemble
+            const { buttons: { 0: dismissButton, 1: successButton } } = inAppMessage;
+
+            // Act
+            await initialiseBraze(settings);
+
+            // Assert
+            appboy.subscribeToInAppMessage.mock.calls[0][0](inAppMessage);
+            expect(dismissButton.subscribeToClickedEvent).not.toHaveBeenCalled();
+            expect(successButton.subscribeToClickedEvent).toHaveBeenCalled();
+        });
+
+        it('should call `interceptInAppMessageClickEvents` when `subscribeToClickedEvent` is triggered', async () => {
+            // Assemble
+            const { buttons: { 1: { subscribeToClickedEvent: successEvent } } } = inAppMessage;
+
+            // Assemble
+            await initialiseBraze(settings);
+
+            // Assert
+            appboy.subscribeToInAppMessage.mock.calls[0][0](inAppMessage);
+            successEvent.mock.calls[0][0]();
+            expect(interceptInAppMessageClickEvents).toHaveBeenCalledWith(inAppMessage);
         });
     });
 });
