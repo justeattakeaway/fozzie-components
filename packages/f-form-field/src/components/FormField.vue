@@ -16,6 +16,7 @@
                 v-bind="$attrs"
                 :type="normalisedInputType"
                 placeholder=" "
+                :data-test-id="testId"
                 :class="[$style['o-form-field'], $style['c-formField-input']]"
                 @input="updateValue"
                 v-on="listeners"
@@ -65,6 +66,10 @@ export default {
         value: {
             type: [String, Number],
             default: ''
+        },
+        dataTestId: {
+            type: String,
+            default: ''
         }
     },
     computed: {
@@ -98,6 +103,9 @@ export default {
         },
         uniqueId () {
             return `formField-${(this.$attrs.name ? this.$attrs.name : this._uid)}`;
+        },
+        testId () {
+            return this.dataTestId || this.$attrs.name || false;
         }
     },
     methods: {

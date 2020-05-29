@@ -67,6 +67,30 @@ describe('FormField', () => {
                 // Assert
                 expect(formInput.attributes('type')).toBe(definedType);
             });
+
+            it('should set the value of attribute data-test-id on input element if dataTestId is specified', () => {
+                // Arrange
+                const dataTestId = 'my-test-id';
+                const propsData = {
+                    dataTestId
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+                const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
+
+                // Assert
+                expect(formInput.attributes('data-test-id')).toBe(dataTestId);
+            });
+
+            it('should not add the attribute data-test-id on input element if dataTestId is not specified', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(FormField, { });
+                const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
+
+                // Assert
+                expect(formInput.attributes('data-test-id')).toBe(undefined);
+            });
         });
     });
 });
