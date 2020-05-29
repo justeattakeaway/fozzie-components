@@ -17,7 +17,11 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
         disableComponent = false,
         callbacks = {}
     } = options;
-    const { handleContentCards = noop, interceptInAppMessages = noop } = callbacks;
+    const {
+        handleContentCards = noop,
+        interceptInAppMessageClickEvents = noop,
+        interceptInAppMessages = noop
+    } = callbacks;
 
     if (disableComponent || !apiKey || !userId) {
         handleContentCards(null);
@@ -31,7 +35,16 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
             appboy.initialize(apiKey, { enableLogging, sessionTimeoutInSeconds });
 
             appboy.subscribeToInAppMessage(message => {
-                interceptInAppMessages(message);
+                if (message instanceof appboy.ab.InAppMessage) {
+                    /**
+                     * Always subscribe click action to second button
+                     * as this is always "success" as opposed to "dismiss"
+                     * as confirmed with CRM (AS)
+                     */
+                    const { buttons: { 1: button } } = message;
+                    interceptInAppMessages(message);
+                    button.subscribeToClickedEvent(() => interceptInAppMessageClickEvents(message));
+                }
                 appboy.display.showInAppMessage(message);
             });
             appboy.subscribeToContentCardsUpdates(handleContentCards);
