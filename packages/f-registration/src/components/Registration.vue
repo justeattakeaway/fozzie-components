@@ -9,8 +9,7 @@
             type="post"
             :class="$style['o-form']"
             @submit.prevent="onFormSubmit"
-        >
-            
+        >            
             <p
                 v-if="shouldShowGenericError"
                 :class="$style['o-form-error']">
@@ -115,6 +114,8 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 import FormButton from './Button.vue';
 import tenantConfigs from '../tenants';
 import axios from 'axios';
+
+const createAccountSuccessEventName = 'f-registration-create-account-success';
 
 export default {
     name: 'Registration',
@@ -239,14 +240,7 @@ export default {
                 throw new Error("There is no 'createAccountUrl' defined for this component.");
             }
             axios.post(this.createAccountUrl, registrationData)
-                .then (this.forwardToSuccessUrl());
-        },
-
-        forwardToSuccessUrl() {
-            if (!this.createAccountUrl) {
-                throw new Error("There is no 'createAccountSuccessForwardUrl' defined for this component.");
-            }
-            window.location.href = this.createAccountUrl;
+                .then (this.$emit(createAccountSuccessEventName));
         },
 
         isFormInvalid () {
