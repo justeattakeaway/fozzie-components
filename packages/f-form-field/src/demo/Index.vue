@@ -9,7 +9,8 @@
         <form-field
             locale="en-GB"
             label-text="First Name"
-            label-style="inline" />
+            label-style="inline"
+            data-test-id="a-constant-test-id" />
     </div>
 </template>
 
