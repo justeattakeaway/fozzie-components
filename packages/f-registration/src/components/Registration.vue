@@ -8,8 +8,15 @@
         <form
             type="post"
             :class="$style['o-form']"
-            @submit="checkValidation"
+            @submit.prevent="onFormSubmit"
         >
+            
+            <p
+                v-if="shouldShowGenericError"
+                :class="$style['o-form-error']">
+                <warning-icon :class="$style['o-form-error-icon']" />
+                {{genericErrorMessage}}
+            </p>
             <form-field
                 v-model="firstName"
                 name="firstName"
@@ -88,7 +95,8 @@
             <form-button
                 data-test-id="create-account-submit-button"
                 button-style="primary"
-                is-full-width>
+                is-full-width
+                :disabled="shouldDisableCreateAccountButton">
                 {{ buttonText }}
             </form-button>
         </form>
@@ -106,6 +114,7 @@ import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import FormButton from './Button.vue';
 import tenantConfigs from '../tenants';
+import axios from 'axios';
 
 export default {
     name: 'Registration',
@@ -131,6 +140,14 @@ export default {
         buttonText: {
             type: String,
             default: 'Create Account'
+        },
+        createAccountUrl: {
+            type: String,
+            default: undefined
+        },
+        createAccountSuccessForwardUrl: {
+            type: String,
+            default: undefined
         }
     },
 
@@ -145,11 +162,16 @@ export default {
             firstName: null,
             lastName: null,
             email: null,
-            password: null
+            password: null,
+            shouldDisableCreateAccountButton: false,
+            genericErrorMessage: null
         };
     },
 
-    computed: {
+    computed: {     
+        shouldShowGenericError () {
+            return this.genericErrorMessage;
+        },
         // Returns true if required validation conditions are not met and if the field has been `touched` by a user
         shouldShowFirstNameRequiredError () {
             return (this.$v.firstName.$invalid && !this.$v.firstName.required) && this.$v.firstName.$dirty;
@@ -189,13 +211,47 @@ export default {
     },
 
     methods: {
-        checkValidation (event) {
-            this.$v.$touch();
-            if (this.$v.$invalid) {
-                event.preventDefault();
+        onFormSubmit () {
+            if (this.isFormInvalid()) {
                 return false;
             }
-            return true;
+
+            try {
+                this.shouldDisableCreateAccountButton = true;
+                
+                var registrationData = {
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    email: this.email,
+                    password: this.password
+                };
+                this.createAccount(registrationData);                
+            } catch (error) {
+                this.genericErrorMessage = error;
+            }
+            finally {
+                this.shouldDisableCreateAccountButton = false;
+            }
+        },
+
+        createAccount (registrationData) {
+            if (!this.createAccountUrl) {
+                throw new Error("There is no 'createAccountUrl' defined for this component.");
+            }
+            axios.post(this.createAccountUrl, registrationData)
+                .then (this.forwardToSuccessUrl());
+        },
+
+        forwardToSuccessUrl() {
+            if (!this.createAccountUrl) {
+                throw new Error("There is no 'createAccountSuccessForwardUrl' defined for this component.");
+            }
+            window.location.href = this.createAccountUrl;
+        },
+
+        isFormInvalid () {
+            this.$v.$touch();
+            return this.$v.$invalid;
         }
     }
 };
