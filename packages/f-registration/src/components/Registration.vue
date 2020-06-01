@@ -19,7 +19,7 @@
                 label-style="inline">
                 <template #error>
                     <p
-                        v-if="($v.firstName.$invalid && !$v.firstName.required) && $v.firstName.$dirty"
+                        v-if="shouldShowFirstNameRequiredError"
                         :class="$style['o-form-error']">
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please enter your first name
@@ -36,7 +36,7 @@
                 label-style="inline">
                 <template #error>
                     <p
-                        v-if="($v.lastName.$invalid && !$v.lastName.required) && $v.lastName.$dirty"
+                        v-if="shouldShowLastNameRequiredError"
                         :class="$style['o-form-error']">
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please enter your last name
@@ -54,13 +54,13 @@
                 <!-- For when we want to add validation on blur of input - @blur="$v.email.$touch" -->
                 <template #error>
                     <p
-                        v-if="($v.email.$invalid && !$v.email.required) && $v.email.$dirty"
+                        v-if="shouldShowEmailRequiredError"
                         :class="$style['o-form-error']">
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please enter your email address
                     </p>
                     <p
-                        v-else-if="($v.email.$invalid && !$v.email.email) && $v.email.$dirty"
+                        v-else-if="shouldShowEmailInvalidError"
                         :class="$style['o-form-error']">
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please enter a valid email address
@@ -77,7 +77,7 @@
                 label-style="inline">
                 <template #error>
                     <p
-                        v-if="($v.password.$invalid && !$v.password.required) && $v.password.$dirty"
+                        v-if="shouldShowPasswordRequiredError"
                         :class="$style['o-form-error']">
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please enter a password
@@ -148,6 +148,30 @@ export default {
             password: null
         };
     },
+
+    computed: {
+        // Returns true if required validation conditions are not met and if the field has been `touched` by a user
+        shouldShowFirstNameRequiredError () {
+            return (this.$v.firstName.$invalid && !this.$v.firstName.required) && this.$v.firstName.$dirty;
+        },
+        // Returns true if required validation conditions are not met and if the field has been `touched` by a user
+        shouldShowLastNameRequiredError () {
+            return (this.$v.lastName.$invalid && !this.$v.lastName.required) && this.$v.lastName.$dirty;
+        },
+        // Returns true if required validation conditions are not met and if the field has been `touched` by a user
+        shouldShowEmailRequiredError () {
+            return (this.$v.email.$invalid && !this.$v.email.required) && this.$v.email.$dirty;
+        },
+        // Returns true if email validation conditions are not met and if the field has been `touched` by a user
+        shouldShowEmailInvalidError () {
+            return (this.$v.email.$invalid && !this.$v.email.email) && this.$v.email.$dirty;
+        },
+        // Returns true if email validation conditions are not met and if the field has been `touched` by a user
+        shouldShowPasswordRequiredError () {
+            return (this.$v.password.$invalid && !this.$v.password.required) && this.$v.password.$dirty;
+        }
+    },
+
     validations: {
         firstName: {
             required
@@ -163,6 +187,7 @@ export default {
             required
         }
     },
+
     methods: {
         checkValidation (event) {
             this.$v.$touch();
