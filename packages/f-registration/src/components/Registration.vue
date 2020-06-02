@@ -9,12 +9,12 @@
             type="post"
             :class="$style['o-form']"
             @submit.prevent="onFormSubmit"
-        >            
+        >
             <p
                 v-if="shouldShowGenericError"
                 :class="$style['o-form-error']">
                 <warning-icon :class="$style['o-form-error-icon']" />
-                {{genericErrorMessage}}
+                {{ genericErrorMessage }}
             </p>
             <form-field
                 v-model="firstName"
@@ -113,9 +113,10 @@ import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import FormButton from './Button.vue';
 import tenantConfigs from '../tenants';
-import axios from 'axios';
+import RegistrationServiceApi from '../services/RegistrationServiceApi';
 
-const createAccountSuccessEventName = 'f-registration-create-account-success';
+const CreateAccountSuccessEventName = 'registration-create-account-success';
+const CreateAccountFailureEventName = 'registration-create-account-failure';
 
 export default {
     name: 'Registration',
@@ -134,6 +135,10 @@ export default {
             type: String,
             default: ''
         },
+        tenant: {
+            type: String,
+            required: true
+        },
         title: {
             type: String,
             default: 'Create Account'
@@ -144,11 +149,7 @@ export default {
         },
         createAccountUrl: {
             type: String,
-            default: undefined
-        },
-        createAccountSuccessForwardUrl: {
-            type: String,
-            default: undefined
+            required: true
         }
     },
 
@@ -169,7 +170,7 @@ export default {
         };
     },
 
-    computed: {     
+    computed: {
         shouldShowGenericError () {
             return this.genericErrorMessage;
         },
@@ -212,35 +213,31 @@ export default {
     },
 
     methods: {
-        onFormSubmit () {
+        async onFormSubmit () {
+            this.genericErrorMessage = null;
             if (this.isFormInvalid()) {
-                return false;
+                return;
             }
 
+            this.shouldDisableCreateAccountButton = true;
             try {
-                this.shouldDisableCreateAccountButton = true;
-                
-                var registrationData = {
+                const registrationData = {
                     firstName: this.firstName,
                     lastName: this.lastName,
                     email: this.email,
                     password: this.password
                 };
-                this.createAccount(registrationData);                
-            } catch (error) {
-                this.genericErrorMessage = error;
-            }
-            finally {
+                await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData)
+                    .then(function handleResponse () {
+                        this.$emit(CreateAccountSuccessEventName);
+                    })
+                    .catch(error => {
+                        this.genericErrorMessage = error;
+                        this.$emit(CreateAccountFailureEventName);
+                    });
+            } finally {
                 this.shouldDisableCreateAccountButton = false;
             }
-        },
-
-        createAccount (registrationData) {
-            if (!this.createAccountUrl) {
-                throw new Error("There is no 'createAccountUrl' defined for this component.");
-            }
-            axios.post(this.createAccountUrl, registrationData)
-                .then (this.$emit(createAccountSuccessEventName));
         },
 
         isFormInvalid () {
