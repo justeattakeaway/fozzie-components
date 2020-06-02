@@ -4,4 +4,4 @@ const CreateAccountFailure = 'registration-create-account-failure';
 export default {
     CreateAccountSuccess,
     CreateAccountFailure
-}
+};

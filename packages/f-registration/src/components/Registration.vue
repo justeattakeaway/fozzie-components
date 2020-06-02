@@ -11,7 +11,7 @@
             @submit.prevent="onFormSubmit"
         >
             <p
-                v-if="shouldShowGenericError"
+                v-if="genericErrorMessage"
                 :class="$style['o-form-error']">
                 <warning-icon :class="$style['o-form-error-icon']" />
                 {{ genericErrorMessage }}
@@ -169,9 +169,6 @@ export default {
     },
 
     computed: {
-        shouldShowGenericError () {
-            return this.genericErrorMessage;
-        },
         // Returns true if required validation conditions are not met and if the field has been `touched` by a user
         shouldShowFirstNameRequiredError () {
             return (this.$v.firstName.$invalid && !this.$v.firstName.required) && this.$v.firstName.$dirty;
@@ -225,14 +222,12 @@ export default {
                     email: this.email,
                     password: this.password
                 };
-                await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData)
-                    .then(() => {
-                        this.$emit(EventNames.CreateAccountSuccess);
-                    })
-                    .catch(error => {
-                        this.genericErrorMessage = error;
-                        this.$emit(EventNames.CreateAccountFailure, error);
-                    });
+                await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData);
+                this.$emit(EventNames.CreateAccountSuccess);
+            }
+            catch (error) {
+                this.genericErrorMessage = error;
+                this.$emit(EventNames.CreateAccountFailure, error);             
             } finally {
                 this.shouldDisableCreateAccountButton = false;
             }
