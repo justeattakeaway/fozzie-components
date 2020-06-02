@@ -24,7 +24,7 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Ubuntu:300,500&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Hind+Vadodara:300,500&display=swap');
-
+@import '~@justeat/fozzie/src/scss/base/typography';
 
 body {
     margin: 0;

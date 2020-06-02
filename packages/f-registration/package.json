@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-registration",
   "description": "Fozzie Form Field Component",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "main": "dist/f-registration.umd.min.js",
   "files": [
     "dist"
@@ -38,8 +38,10 @@
   ],
   "dependencies": {
     "@justeat/f-card": "0.2.0",
-    "@justeat/f-form-field": "0.3.0",
-    "@justeat/f-services": "1.0.0"
+    "@justeat/f-form-field": "0.5.0",
+    "@justeat/f-services": "1.0.0",
+    "@justeat/f-vue-icons": "1.0.0-beta.5",
+    "vuelidate": "0.7.5"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
