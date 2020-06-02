@@ -38,6 +38,7 @@
                 <a
                     :href="link.url"
                     :rel="link.rel"
+                    :target="link.target"
                     :class="$style['c-footer-list-link']"
                     :data-trak='`{
                         "trakEvent": "click",
