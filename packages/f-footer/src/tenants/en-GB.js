@@ -184,6 +184,7 @@ export default {
                     url: 'https://www.justeatplc.com/download_file/view/435/1',
                     text: 'Modern Slavery Statement',
                     target: '_blank',
+                    rel: 'noopener',
                     gtm: 'click_about_modern_slavery_statement'
                 }
             ]
