@@ -7,7 +7,7 @@
             name="viewport"
             content="width=device-width, initial-scale=1">
         <vue-footer
-            locale="en-AU" />
+            locale="en-GB" />
     </div>
 </template>
 
