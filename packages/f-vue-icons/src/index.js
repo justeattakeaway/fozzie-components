@@ -20,6 +20,8 @@ import MinusIcon from './components/MinusIcon/MinusIcon.vue';
 import OfferIcon from './components/OfferIcon/OfferIcon.vue';
 import PadlockIcon from './components/PadlockIcon/PadlockIcon.vue';
 import PlusIcon from './components/PlusIcon/PlusIcon.vue';
+import RestaurantIcon from './components/RestaurantIcon';
+import SortIcon from './components/SortIcon';
 import SpicyIcon from './components/SpicyIcon/SpicyIcon.vue';
 import StopwatchIcon from './components/StopwatchIcon/StopwatchIcon.vue';
 import TickIcon from './components/TickIcon/TickIcon.vue';
@@ -58,6 +60,8 @@ export {
     OfferIcon,
     PadlockIcon,
     PlusIcon,
+    RestaurantIcon,
+    SortIcon,
     SpicyIcon,
     StopwatchIcon,
     TickIcon,
