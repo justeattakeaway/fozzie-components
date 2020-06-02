@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.20.0
 ------------------------------
-*May 26, 2020*
+*June 2, 2020*
 
 ### Added
 - Sort icon
@@ -16,15 +16,6 @@ v0.20.0
 
 ### Removed
 - `testMatch` from jest config, as not needed.
-
-
-v0.19.0
-------------------------------
-*May 7, 2020*
-
-### Added
-- Eyeglass icon
-
 
 v0.19.0
 ------------------------------
