@@ -3,8 +3,11 @@ module.exports = api => {
     const isTest = api.env('test');
     const presets = [];
     const plugins = [
-        '@babel/plugin-proposal-optional-chaining' // https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining
+        '@babel/plugin-proposal-optional-chaining', // https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining
+        '@babel/plugin-transform-regenerator',
+        '@babel/plugin-transform-runtime'
     ];
+
     const builtIns = (api.env('development') ? 'entry' : false);
 
     if (!isTest) {

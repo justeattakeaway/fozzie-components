@@ -114,9 +114,7 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 import FormButton from './Button.vue';
 import tenantConfigs from '../tenants';
 import RegistrationServiceApi from '../services/RegistrationServiceApi';
-
-const CreateAccountSuccessEventName = 'registration-create-account-success';
-const CreateAccountFailureEventName = 'registration-create-account-failure';
+import EventNames from '../event-names';
 
 export default {
     name: 'Registration',
@@ -228,12 +226,12 @@ export default {
                     password: this.password
                 };
                 await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData)
-                    .then(function handleResponse () {
-                        this.$emit(CreateAccountSuccessEventName);
+                    .then(() => {
+                        this.$emit(EventNames.CreateAccountSuccess);
                     })
                     .catch(error => {
                         this.genericErrorMessage = error;
-                        this.$emit(CreateAccountFailureEventName);
+                        this.$emit(EventNames.CreateAccountFailure, error);
                     });
             } finally {
                 this.shouldDisableCreateAccountButton = false;
