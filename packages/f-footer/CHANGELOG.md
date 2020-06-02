@@ -6,9 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (roll into next release)
 ------------------------------
-*May 12, 2020*
+*June 2, 2020*
 
 ### Changed
+- Include rel="noopener" attr in ButtonList items
+- Include target attr/property in LinksList items
+- Add rel: 'noopener' to en-GB link item with target: '_blank' property
 - Updating `vue-test-utils` to v1 and `@vue/cli-plugin-unit-test` to v4.3.1.
 - Use `node current` in unit test Babel config, so that it supports `async > await` properly.
 - Structure of Storybook stories changed to CSF (Component Story Format) – the new recommended way to write stories.
