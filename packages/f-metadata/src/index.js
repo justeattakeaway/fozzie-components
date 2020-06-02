@@ -1,4 +1,6 @@
-const noop = () => {};
+import noop from './utils/noop';
+import configureBraze from './configureBraze';
+
 
 /**
  * sessionTimeoutInSeconds
@@ -7,21 +9,17 @@ const noop = () => {};
  */
 export const sessionTimeoutInSeconds = 0;
 
-const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
+const initialise = (options = {}) => new Promise((resolve, reject) => {
     if (typeof window === 'undefined') return reject(new Error('window is not defined'));
 
     const {
-        apiKey = null,
-        userId = null,
-        enableLogging = false,
+        apiKey,
+        userId,
         disableComponent = false,
-        callbacks = {}
+        callbacks = {},
+        enableLogging
     } = options;
-    const {
-        handleContentCards = noop,
-        interceptInAppMessageClickEvents = noop,
-        interceptInAppMessages = noop
-    } = callbacks;
+    const { handleContentCards = noop } = callbacks;
 
     if (disableComponent || !apiKey || !userId) {
         handleContentCards(null);
@@ -30,27 +28,23 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
 
     window.dataLayer = window.dataLayer || [];
 
-    return import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
+    const isAppboyInitialised = () => {
+        if (!window.appboy) return false;
+        let result = null;
+        window.appboy.getUser(id => {
+            result = !!id;
+        });
+        return result;
+    };
+
+    return isAppboyInitialised() ? configureBraze(options) : import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
         .then(({ default: appboy }) => {
             appboy.initialize(apiKey, { enableLogging, sessionTimeoutInSeconds });
-
-            appboy.subscribeToInAppMessage(message => {
-                if (message instanceof appboy.ab.InAppMessage) {
-                    /**
-                     * Always subscribe click action to second button
-                     * as this is always "success" as opposed to "dismiss"
-                     * as confirmed with CRM (AS)
-                     */
-                    const { buttons: { 1: button } } = message;
-                    interceptInAppMessages(message);
-                    button.subscribeToClickedEvent(() => interceptInAppMessageClickEvents(message));
-                }
-                appboy.display.showInAppMessage(message);
-            });
-            appboy.subscribeToContentCardsUpdates(handleContentCards);
-
             appboy.openSession();
+
             window.appboy = appboy;
+
+            configureBraze(options);
 
             appboy.changeUser(userId, () => {
                 window.dataLayer.push({
@@ -58,11 +52,9 @@ const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
                 });
             });
 
-            appboy.requestContentCardsRefresh();
-
             resolve(appboy);
         })
         .catch(error => reject(new Error(`An error occurred while loading the component: ${error}`)));
 });
 
-export default initialiseBraze;
+export default initialise;
