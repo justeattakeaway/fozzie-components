@@ -1,6 +1,6 @@
 import noop from './utils/noop';
 
-const configureBraze = options => {
+const configureBraze = (options = {}) => {
     const { appboy } = window;
     const {
         callbacks = {}
