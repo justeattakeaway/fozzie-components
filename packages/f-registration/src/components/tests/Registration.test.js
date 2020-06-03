@@ -41,9 +41,9 @@ describe('Registration', () => {
             RegistrationServiceApi.createAccount.mockImplementation(async () => Promise.resolve());
             const wrapper = mountComponentAndAttachToDocument();
             try {
-                const firstName = 'Adam',
-                    lastName = 'Ashton',
-                    email = 'adam.ashton+jetest@just-eat.com',
+                const firstName = 'Ashton',
+                    lastName = 'Adamms',
+                    email = 'ashton.adamms@just-eat.com',
                     password = 'Passw0rd';
                 await wrapper.find("[data-test-id='input-first-name']").setValue(firstName);
                 await wrapper.find("[data-test-id='input-last-name']").setValue(lastName);
@@ -68,9 +68,9 @@ describe('Registration', () => {
             RegistrationServiceApi.createAccount.mockImplementation(async () => { throw new Error('Conflict') });
             const wrapper = mountComponentAndAttachToDocument();
             try {
-                const firstName = 'Adam',
-                    lastName = 'Ashton',
-                    email = 'adam.ashton+jetest@just-eat.com',
+                const firstName = 'Ashton',
+                    lastName = 'Adamms',
+                    email = 'ashton.adamms+jetest@just-eat.com',
                     password = 'Passw0rd';
                 await wrapper.find("[data-test-id='input-first-name']").setValue(firstName);
                 await wrapper.find("[data-test-id='input-last-name']").setValue(lastName);

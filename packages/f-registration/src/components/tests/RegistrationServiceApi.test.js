@@ -16,9 +16,9 @@ describe('RegistrationServiceApi', () => {
             const tenant = 'uk';
             const url = 'http://localhost/account/register';
             const data = {
-                firstName: 'Adam',
-                lastName: 'Ashton',
-                email: 'adam.ashton+jetest@just-eat.com',
+                firstName: 'Ashton',
+                lastName: 'Adamms',
+                email: 'ashton.adamms+jetest@just-eat.com',
                 password: 'Passw0rd'
             };
             axiosMock.onPost(url).reply(201);
