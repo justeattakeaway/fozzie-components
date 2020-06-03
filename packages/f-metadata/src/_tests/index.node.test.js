@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 import appboy from 'appboy-web-sdk';
-import initialiseBraze from '../src';
+import initialiseBraze from '../index';
 
 jest.mock('appboy-web-sdk', () => ({
     initialize: jest.fn()

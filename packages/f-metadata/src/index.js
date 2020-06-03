@@ -1,5 +1,6 @@
-import noop from './utils/noop';
 import configureBraze from './configureBraze';
+import noop from './utils/noop';
+import isAppboyInitialised from './utils/isAppboyInitialised';
 
 
 /**
@@ -28,16 +29,12 @@ const initialise = (options = {}) => new Promise((resolve, reject) => {
 
     window.dataLayer = window.dataLayer || [];
 
-    const isAppboyInitialised = () => {
-        if (!window.appboy) return false;
-        let result = null;
-        window.appboy.getUser(id => {
-            result = !!id;
-        });
-        return result;
-    };
+    if (isAppboyInitialised(window.appboy)) {
+        configureBraze(options);
+        return resolve(window.appboy);
+    }
 
-    return isAppboyInitialised() ? configureBraze(options) : import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
+    return import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
         .then(({ default: appboy }) => {
             appboy.initialize(apiKey, { enableLogging, sessionTimeoutInSeconds });
             appboy.openSession();
