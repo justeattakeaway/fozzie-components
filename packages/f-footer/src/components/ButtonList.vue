@@ -16,7 +16,8 @@
                     "label": "${button.gtm}"
                 }`'
                 :class="$style['c-buttonList-button']"
-                target="_blank">
+                target="_blank"
+                rel="noopener">
                 {{ button.title }}
             </a>
         </div>

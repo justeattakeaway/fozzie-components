@@ -6,10 +6,67 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (roll into next release)
 ------------------------------
-*March 30, 2020*
+*May 12, 2020*
+
+- Structure of Storybook stories changed to CSF (Component Story Format) – the new recommended way to write stories.
+
+
+v2.4.0
+------------------------------
+*May 12, 2020*
+
+### Fixed
+- Have added proper mocking for API data via `axios`. Quite a few of the tests were trying to call API endpoints and were passing without actually testing anything (but passed giving the impression they were). Have fixed this now so that these tests all work as expected with proper mocks.
+- Fixed some tests that broke when upgrading to the latest `vue-test-utils`.
+
+### Changed
+- Updated some of the methods that handle API calls to return as promises, so that they are easier to unit test.
+- Updating `vue-test-utils` to v1 and `@vue/cli-plugin-unit-test` to v4.3.1.
+- Use `node current` in unit test Babel config, so that it supports `async > await` properly.
+
+### Removed
+- `testMatch` from jest config, as not needed.
+
+
+v2.3.0
+------------------------------
+*May 6, 2020*
+
+### Fixed
+- Add `userInfo` back to data so that it can be updated after the AJAX call is performed.
+- Watch the value of `userInfoProp` so that when it changes the `userInfo` data property is also updated.
+- Ran lint fix task.
+
+
+v2.2.1
+------------------------------
+*May 1, 2020*
+
+### Changed
+- exports in `f-header.page.js` to CommonJS syntax
+
+
+v2.2.0
+------------------------------
+*April 29, 2020*
+
+### Added
+- `page-objects` folder for use with our WebDriverIO tests within the Nuxt app
+
+### Changed
+- Made f-header `userInfo` data more generic
+
+
+v2.1.1
+------------------------------
+*April 20, 2020*
+
+### Added
+- `stories` folder that will contain `*.stories.js` files for use with Storybook
 
 ### Changed
 - Updated name of component in `index.js` from `Header` > `VueHeader` (as `Header` is a reserved word according to linting rules)
+
 
 
 v2.1.0

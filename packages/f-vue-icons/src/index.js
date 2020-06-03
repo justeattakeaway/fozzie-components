@@ -10,6 +10,7 @@ import ClockIcon from './components/ClockIcon/ClockIcon.vue';
 import CollectionIcon from './components/CollectionIcon/CollectionIcon.vue';
 import CrossIcon from './components/CrossIcon/CrossIcon.vue';
 import DeliveryIcon from './components/DeliveryIcon/DeliveryIcon.vue';
+import EyeglassIcon from './components/EyeglassIcon/EyeglassIcon.vue';
 import FlagIcon from './components/FlagIcon/FlagIcon.vue';
 import GiftIcon from './components/GiftIcon/GiftIcon.vue';
 import InfoIcon from './components/InfoIcon/InfoIcon.vue';
@@ -19,6 +20,8 @@ import MinusIcon from './components/MinusIcon/MinusIcon.vue';
 import OfferIcon from './components/OfferIcon/OfferIcon.vue';
 import PadlockIcon from './components/PadlockIcon/PadlockIcon.vue';
 import PlusIcon from './components/PlusIcon/PlusIcon.vue';
+import RestaurantIcon from './components/RestaurantIcon/RestaurantIcon.vue';
+import SortIcon from './components/SortIcon/SortIcon.vue';
 import SpicyIcon from './components/SpicyIcon/SpicyIcon.vue';
 import StopwatchIcon from './components/StopwatchIcon/StopwatchIcon.vue';
 import TickIcon from './components/TickIcon/TickIcon.vue';
@@ -47,6 +50,7 @@ export {
     CollectionIcon,
     CrossIcon,
     DeliveryIcon,
+    EyeglassIcon,
     FlagIcon,
     GiftIcon,
     InfoIcon,
@@ -56,6 +60,8 @@ export {
     OfferIcon,
     PadlockIcon,
     PlusIcon,
+    RestaurantIcon,
+    SortIcon,
     SpicyIcon,
     StopwatchIcon,
     TickIcon,

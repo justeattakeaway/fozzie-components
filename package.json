@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "1.8.0",
+  "version": "1.13.0",
   "private": true,
   "scripts": {
     "build": "lerna run build --stream",
@@ -8,6 +8,9 @@
     "lint:fix": "lerna run lint -- --fix",
     "prepublishOnly": "lerna run prepublishOnly --stream",
     "release": "lerna publish",
+    "storybook:build": "lerna run storybook:build",
+    "storybook:serve": "lerna run storybook:serve",
+    "storybook:deploy": "storybook-to-ghpages --script storybook:build",
     "test": "lerna run test --stream"
   },
   "dependencies": {
@@ -16,22 +19,23 @@
   "devDependencies": {
     "@babel/cli": "7.8.4",
     "@babel/plugin-proposal-optional-chaining": "7.9.0",
-    "@babel/preset-env": "7.9.0",
+    "@babel/preset-env": "7.9.6",
     "@justeat/browserslist-config-fozzie": "1.1.1",
-    "@justeat/eslint-config-fozzie": "3.4.0",
+    "@justeat/eslint-config-fozzie": "3.4.1",
     "@justeat/f-build-config": "0.3.0",
     "@justeat/f-utils": "0.3.0",
-    "@justeat/fozzie": "1.73.0",
-    "@justeat/fozzie-colour-palette": "2.5.0",
+    "@justeat/fozzie": "3.0.0-beta.0",
+    "@justeat/fozzie-colour-palette": "3.0.0-beta.0",
+    "@storybook/storybook-deployer": "2.8.5",
     "@vue/cli-plugin-babel": "4.2.3",
     "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "3.9.0",
-    "@vue/cli-service": "4.2.3",
+    "@vue/cli-plugin-unit-jest": "4.3.1",
+    "@vue/cli-service": "4.3.1",
     "@vue/eslint-config-standard": "4.0.0",
-    "@vue/test-utils": "1.0.0-beta.29",
+    "@vue/test-utils": "1.0.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
-    "babel-jest": "24.9.0",
+    "babel-jest": "25.5.1",
     "babel-loader": "8.1.0",
     "css-loader": "1.0.1",
     "danger": "9.2.10",
@@ -45,7 +49,8 @@
     "postcss-loader": "3.0.0",
     "sass-loader": "7.1.0",
     "vue-svg-loader": "0.16.0",
-    "vue-template-compiler": "2.6.11"
+    "vue-template-compiler": "2.6.11",
+    "webdriverio": "6.1.7"
   },
   "bugs": {
     "url": "https://github.com/justeat/fozzie-components/issues"

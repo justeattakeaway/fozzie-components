@@ -9,6 +9,7 @@ import ClockIcon from './ClockIcon';
 import CollectionIcon from './CollectionIcon';
 import CrossIcon from './CrossIcon';
 import DeliveryIcon from './DeliveryIcon';
+import EyeglassIcon from './EyeglassIcon';
 import FlagIcon from './FlagIcon';
 import GiftIcon from './GiftIcon';
 import InfoIcon from './InfoIcon';
@@ -18,6 +19,8 @@ import MinusIcon from './MinusIcon';
 import OfferIcon from './OfferIcon';
 import PadlockIcon from './PadlockIcon';
 import PlusIcon from './PlusIcon';
+import RestaurantIcon from './RestaurantIcon';
+import SortIcon from './SortIcon';
 import SpicyIcon from './SpicyIcon';
 import StopwatchIcon from './StopwatchIcon';
 import TickIcon from './TickIcon';
@@ -36,6 +39,7 @@ export {
     CollectionIcon,
     CrossIcon,
     DeliveryIcon,
+    EyeglassIcon,
     FlagIcon,
     GiftIcon,
     InfoIcon,
@@ -45,6 +49,8 @@ export {
     OfferIcon,
     PadlockIcon,
     PlusIcon,
+    RestaurantIcon,
+    SortIcon,
     SpicyIcon,
     StopwatchIcon,
     TickIcon,

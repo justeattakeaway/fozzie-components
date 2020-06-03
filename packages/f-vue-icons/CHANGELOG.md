@@ -3,6 +3,34 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.20.1
+------------------------------
+*June 3, 2020*
+
+### Fixed
+- Add `.vue` extentions to imports for icons in v0.20.0
+
+v0.20.0
+------------------------------
+*June 2, 2020*
+
+### Added
+- Sort icon
+- Restaurant Icon
+
+### Changed
+- Updating `vue-test-utils` to v1 and `@vue/cli-plugin-unit-test` to v4.3.1.
+
+### Removed
+- `testMatch` from jest config, as not needed.
+
+v0.19.0
+------------------------------
+*May 7, 2020*
+
+### Added
+- Eyeglass icon
+
 
 v0.18.1
 ------------------------------
