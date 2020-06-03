@@ -4,11 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+v2.3.0
 ------------------------------
-*May 12, 2020*
+*June 3, 2020*
 
 ### Changed
+- Updated component to use new orange JET theme for ML.
+
+
+v2.2.0
+------------------------------
+*June 2, 2020*
+
+### Changed
+- Include rel="noopener" attr in ButtonList items
+- Include target attr/property in LinksList items
+- Add rel: 'noopener' to en-GB link item with target: '_blank' property
 - Updating `vue-test-utils` to v1 and `@vue/cli-plugin-unit-test` to v4.3.1.
 - Use `node current` in unit test Babel config, so that it supports `async > await` properly.
 - Structure of Storybook stories changed to CSF (Component Story Format) – the new recommended way to write stories.

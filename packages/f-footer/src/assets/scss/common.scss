@@ -21,13 +21,14 @@ $theme: 'je' !default;
  $footer-socialIconColor : $grey--dark !default;
 
  /**
- * Global variables which need to be changed depending on the theme (TODO: move to separate component)
+ * Global variables which need to be included for Menulog theming
+* TODO: delete these when brand is normalised to JET as will be able to pull in default colours
  */
  $font-family-headings--ml   : 'Aspira', 'Times New Roman', Times, serif;
  $font-weight-headings--ml   : 800;
- $color-link-default--ml     : $green;
- $color-link-hover--ml       : $green--dark;
- $color-link-active--ml      : $green--darkest;
+ $color-link-default--ml     : #4950b9;
+ $color-link-hover--ml       : #464cb1;
+ $color-link-active--ml      : #3d439b;
 
 
 

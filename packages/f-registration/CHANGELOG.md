@@ -4,6 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.5.0
+------------------------------
+*May 26, 2020*
+
+### Added
+- `Vuelidate` package added for validation of form inputs. Validation currently set-up to show to form submission.
+- Error messages for error states and styling for error messages (needs to be in the form rather than on the input because of the way CSS Modules works – the plan will be to move this styling to a more generic `f-form` component down the line).
+- `name` attributes added to each form field component.
+- Added base `typography` file to the demo component so that it shows how the component will look with the global fozzie typographic styles applied (global styles like this will be made available as a separate include that is imported into each component in the future).
+
+### Changed
+- Stubbed `.css` file module imports as was causing build error.
+
+
 v0.4.0
 ------------------------------
 *May 18, 2020*

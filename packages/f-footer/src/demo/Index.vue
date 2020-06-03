@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import VueFooter from './Footer.vue';
+import VueFooter from '@/components/Footer.vue';
 
 export default {
     components: { VueFooter }
