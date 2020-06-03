@@ -33,7 +33,7 @@ describe('Registration', () => {
         function mountComponentAndAttachToDocument () {
             const div = document.createElement('div');
             document.body.appendChild(div);
-            return mount(Registration, { propsData, sync: false, attachTo: div });
+            return mount(Registration, { propsData, attachTo: div });
         }
 
         it('should post correct data and emit success event when service succeeds', async () => {
