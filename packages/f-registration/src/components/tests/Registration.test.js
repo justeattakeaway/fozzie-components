@@ -1,9 +1,10 @@
-import RegistrationServiceApi from '../../services/RegistrationServiceApi'
-jest.mock('../../services/RegistrationServiceApi', () => ({ createAccount: jest.fn() })); 
 import { mount, shallowMount } from '@vue/test-utils';
 import flushPromises from 'flush-promises';
+import RegistrationServiceApi from '../../services/RegistrationServiceApi';
 import Registration from '../Registration.vue';
 import EventNames from '../../event-names';
+
+jest.mock('../../services/RegistrationServiceApi', () => ({ createAccount: jest.fn() }));
 
 describe('Registration', () => {
     const propsData = {
@@ -29,7 +30,7 @@ describe('Registration', () => {
         });
     });
 
-    describe('when creating an account', () => {        
+    describe('when creating an account', () => {
         function mountComponentAndAttachToDocument () {
             const div = document.createElement('div');
             document.body.appendChild(div);
@@ -65,7 +66,7 @@ describe('Registration', () => {
 
         it('should populate generic error message and emit failure event when service responds with an error', async () => {
             // Arrange
-            RegistrationServiceApi.createAccount.mockImplementation(async () => { throw new Error('Conflict') });
+            RegistrationServiceApi.createAccount.mockImplementation(async () => { throw new Error('Conflict'); });
             const wrapper = mountComponentAndAttachToDocument();
             try {
                 const firstName = 'Ashton',
@@ -82,7 +83,7 @@ describe('Registration', () => {
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.genericErrorMessage).not.toBeNull();                
+                expect(wrapper.vm.genericErrorMessage).not.toBeNull();
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             } finally {
                 wrapper.destroy();
