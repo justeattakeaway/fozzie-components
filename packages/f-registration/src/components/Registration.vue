@@ -224,10 +224,9 @@ export default {
                 };
                 await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData);
                 this.$emit(EventNames.CreateAccountSuccess);
-            }
-            catch (error) {
+            } catch (error) {
                 this.genericErrorMessage = error;
-                this.$emit(EventNames.CreateAccountFailure, error);             
+                this.$emit(EventNames.CreateAccountFailure, error);
             } finally {
                 this.shouldDisableCreateAccountButton = false;
             }
