@@ -18,7 +18,7 @@ describe('f-metadata › isAppboyInitialised', () => {
             })
         };
         isAppboyInitialised(appboy);
-        const hasUserId = getUserId.mock.calls[0][0];
+        const [[hasUserId]] = getUserId.mock.calls;
 
         afterEach(() => {
             jest.resetAllMocks();

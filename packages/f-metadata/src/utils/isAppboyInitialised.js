@@ -6,7 +6,9 @@
  */
 const isAppboyInitialised = appboy => {
     let result = false;
-    appboy && appboy.getUser().getUserId(id => {
+    if (!appboy) return result;
+
+    appboy.getUser().getUserId(id => {
         result = !!id;
         // Return result for testing
         return result;
