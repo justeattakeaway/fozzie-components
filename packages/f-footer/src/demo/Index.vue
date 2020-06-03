@@ -7,12 +7,12 @@
             name="viewport"
             content="width=device-width, initial-scale=1">
         <vue-footer
-            locale="en-GB" />
+            locale="en-AU" />
     </div>
 </template>
 
 <script>
-import VueFooter from './Footer.vue';
+import VueFooter from '@/components/Footer.vue';
 
 export default {
     components: { VueFooter }
