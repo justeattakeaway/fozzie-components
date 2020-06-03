@@ -48,7 +48,6 @@
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "7.10.1",
     "@vue/cli-plugin-babel": "4.2.3",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.3.1",
