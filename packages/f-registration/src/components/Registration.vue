@@ -133,7 +133,7 @@ export default {
             type: String,
             default: ''
         },
-        tenant: {
+        tenant: { // TODO Compute tenant value from local config instead of using this prop
             type: String,
             required: true
         },
