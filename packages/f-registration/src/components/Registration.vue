@@ -8,8 +8,14 @@
         <form
             type="post"
             :class="$style['o-form']"
-            @submit="checkValidation"
+            @submit.prevent="onFormSubmit"
         >
+            <p
+                v-if="genericErrorMessage"
+                :class="$style['o-form-error']">
+                <warning-icon :class="$style['o-form-error-icon']" />
+                {{ genericErrorMessage }}
+            </p>
             <form-field
                 v-model="firstName"
                 name="firstName"
@@ -88,7 +94,8 @@
             <form-button
                 data-test-id="create-account-submit-button"
                 button-style="primary"
-                is-full-width>
+                is-full-width
+                :disabled="shouldDisableCreateAccountButton">
                 {{ buttonText }}
             </form-button>
         </form>
@@ -106,6 +113,8 @@ import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import FormButton from './Button.vue';
 import tenantConfigs from '../tenants';
+import RegistrationServiceApi from '../services/RegistrationServiceApi';
+import EventNames from '../event-names';
 
 export default {
     name: 'Registration',
@@ -124,6 +133,10 @@ export default {
             type: String,
             default: ''
         },
+        tenant: { // TODO ACC2-506 Compute tenant value from local config instead of using this prop
+            type: String,
+            required: true
+        },
         title: {
             type: String,
             default: 'Create Account'
@@ -131,6 +144,10 @@ export default {
         buttonText: {
             type: String,
             default: 'Create Account'
+        },
+        createAccountUrl: {
+            type: String,
+            required: true
         }
     },
 
@@ -145,7 +162,9 @@ export default {
             firstName: null,
             lastName: null,
             email: null,
-            password: null
+            password: null,
+            shouldDisableCreateAccountButton: false,
+            genericErrorMessage: null
         };
     },
 
@@ -189,13 +208,33 @@ export default {
     },
 
     methods: {
-        checkValidation (event) {
-            this.$v.$touch();
-            if (this.$v.$invalid) {
-                event.preventDefault();
-                return false;
+        async onFormSubmit () {
+            this.genericErrorMessage = null;
+            if (this.isFormInvalid()) {
+                return;
             }
-            return true;
+
+            this.shouldDisableCreateAccountButton = true;
+            try {
+                const registrationData = {
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    email: this.email,
+                    password: this.password
+                };
+                await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData);
+                this.$emit(EventNames.CreateAccountSuccess);
+            } catch (error) {
+                this.genericErrorMessage = error;
+                this.$emit(EventNames.CreateAccountFailure, error);
+            } finally {
+                this.shouldDisableCreateAccountButton = false;
+            }
+        },
+
+        isFormInvalid () {
+            this.$v.$touch();
+            return this.$v.$invalid;
         }
     }
 };

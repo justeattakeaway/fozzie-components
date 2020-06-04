@@ -8,8 +8,7 @@
             content="width=device-width, initial-scale=1"
         >
         <registration
-            locale="en-GB"
-        />
+            locale="en-GB" />
     </div>
 </template>
 
