@@ -2,7 +2,7 @@
   "name": "@justeat/f-metadata",
   "description": "Fozzie Metadata Component",
   "version": "2.6.0",
-  "main": "dist/f-metadata.esm.js",
+  "main": "dist/index.js",
   "source": "src/index.js",
   "files": [
     "dist"
