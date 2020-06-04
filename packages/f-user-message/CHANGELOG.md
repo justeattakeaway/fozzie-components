@@ -10,6 +10,7 @@ Latest (roll into next release)
 
 ### Changed
 - Updating `vue-test-utils` to v1 and `@vue/cli-plugin-unit-test` to v4.3.1.
+- ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails)
 
 ### Removed
 - `testMatch` from jest config, as not needed.

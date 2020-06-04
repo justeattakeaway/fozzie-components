@@ -9,6 +9,7 @@ Latest (roll into next release)
 *May 12, 2020*
 
 - Structure of Storybook stories changed to CSF (Component Story Format) – the new recommended way to write stories.
+- ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails)
 
 
 v2.4.0
