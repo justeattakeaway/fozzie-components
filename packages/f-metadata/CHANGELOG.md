@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+2.6.0
+------------------------------
+*June 3, 2020*
+
+### Added
+- Check for previously initialised Braze instances on window and skip import of the SDK
+
+### Changed
+- Split codebase and add bundling through parcel
+
 2.5.0
 ------------------------------
 *May 27, 2020*

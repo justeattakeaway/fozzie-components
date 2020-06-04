@@ -1,8 +1,9 @@
 {
   "name": "@justeat/f-metadata",
   "description": "Fozzie Metadata Component",
-  "version": "2.5.0",
-  "main": "src/index.js",
+  "version": "2.6.0",
+  "main": "dist/f-metadata.esm.js",
+  "source": "src/index.js",
   "files": [
     "dist"
   ],
@@ -25,8 +26,8 @@
     "fozzie"
   ],
   "scripts": {
-    "prepublishOnly": "yarn test",
-    "build": "yarn lint:fix",
+    "prepublishOnly": "yarn build",
+    "build": "yarn lint:fix && yarn test && rollup --config",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit",
@@ -41,6 +42,12 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.2.3",
     "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "4.3.1"
+    "@vue/cli-plugin-unit-jest": "4.3.1",
+    "@rollup/plugin-commonjs": "11.0.2",
+    "@rollup/plugin-json": "4.0.2",
+    "@rollup/plugin-node-resolve": "7.1.1",
+    "rollup": "1.26.3",
+    "rollup-plugin-babel": "4.3.3",
+    "rollup-plugin-terser": "5.1.2"
   }
 }
