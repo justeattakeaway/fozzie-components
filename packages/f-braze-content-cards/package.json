@@ -36,7 +36,8 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.0.0"
+    "@justeat/f-services": "1.0.0",
+    "core-js": "^3.6.5"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"

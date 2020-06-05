@@ -1,3 +1,5 @@
+import globalThis from 'core-js/features/global-this';
+
 /**
  * @overview Fozzie f-braze-content-cards Component JS Wrapper
  *
@@ -21,8 +23,7 @@ const plugin = {
 };
 
 // Auto-install when vue is found (eg. in browser via <script> tag)
-const key = typeof window !== 'undefined' ? window : global;
-const GlobalVue = key?.Vue;
+const GlobalVue = globalThis?.window?.Vue || globalThis?.Vue || null;
 
 if (GlobalVue?.use) {
     GlobalVue.use(plugin);
