@@ -14,7 +14,7 @@ describe('f-metadata › node', () => {
     });
 
     it('should not call initialise if window is undefined', async () => {
-        // Assemble & Act
+        // Arrange & Act
         expect.assertions(2);
         try {
             await initialiseBraze();

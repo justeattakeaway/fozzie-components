@@ -1,5 +1,13 @@
 import isAppboyInitialised from '../isAppboyInitialised';
 
+const id = '__ID__';
+const getUserId = jest.fn();
+const appboy = {
+    getUser: () => ({
+        getUserId
+    })
+};
+
 describe('f-metadata › isAppboyInitialised', () => {
     afterEach(() => {
         jest.resetAllMocks();
@@ -9,27 +17,25 @@ describe('f-metadata › isAppboyInitialised', () => {
         expect(isAppboyInitialised()).toBe(false);
     });
 
-    describe('getUserId', () => {
-        const id = '__ID__';
-        const getUserId = jest.fn();
-        const appboy = {
-            getUser: () => ({
-                getUserId
-            })
-        };
-        isAppboyInitialised(appboy);
-        const [[hasUserId]] = getUserId.mock.calls;
+    it('should return false when getUser is undefined', () => {
+        // Arrange
+        getUserId.mockImplementation(hasUserId => hasUserId(null));
 
-        afterEach(() => {
-            jest.resetAllMocks();
-        });
+        // Act
+        const isAppboyInitialisedReturn = isAppboyInitialised(appboy);
 
-        it('should return false when getUser is undefined', () => {
-            expect(hasUserId(null)).toBe(false);
-        });
+        // Assert
+        expect(isAppboyInitialisedReturn).toBe(false);
+    });
 
-        it('should return true when getUserId returns a truthy value', () => {
-            expect(hasUserId(id)).toBe(true);
-        });
+    it('should return true when getUserId returns a truthy value', () => {
+        // Arrange
+        getUserId.mockImplementation(hasUserId => hasUserId(id));
+
+        // Act
+        const isAppboyInitialisedReturn = isAppboyInitialised(appboy);
+
+        // Assert
+        expect(isAppboyInitialisedReturn).toBe(true);
     });
 });

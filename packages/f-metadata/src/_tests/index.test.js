@@ -91,8 +91,10 @@ describe('f-metadata', () => {
         // Act
         await initialiseBraze(settings);
 
+        const [{ 1: analyticsCallback }] = appboySDK.changeUser.mock.calls;
+        analyticsCallback();
+
         // Assert
-        appboySDK.changeUser.mock.calls[0][1]();
         expect(push).toHaveBeenCalledWith({ event: 'appboyReady' });
     });
 });

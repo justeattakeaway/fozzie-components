@@ -10,8 +10,6 @@ const isAppboyInitialised = appboy => {
 
     appboy.getUser().getUserId(id => {
         result = !!id;
-        // Return result for testing
-        return result;
     });
     return result;
 };
