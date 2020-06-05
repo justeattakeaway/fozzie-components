@@ -10,8 +10,7 @@ module.exports = {
             .loader('sass-loader')
             .options({
                 importer: magicImporter(),
-                // eslint-disable-next-line quotes
-                data: `@import "@/assets/scss/common.scss";`
+                data: '@import "@/assets/scss/common.scss";'
             });
     }
 };
