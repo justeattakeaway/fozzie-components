@@ -5,7 +5,7 @@ import FormField from '../src/components/FormField.vue';
 import { VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../src/constants';
 
 export default {
-    title: 'Components',
+    title: 'Components/Atoms',
     decorators: [withKnobs]
 };
 

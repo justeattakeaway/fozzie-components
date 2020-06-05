@@ -16,7 +16,7 @@ const userInfo = {
 };
 
 export default {
-    title: 'Shared',
+    title: 'Components/Organisms',
     decorators: [withKnobs]
 };
 
