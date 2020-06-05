@@ -4,7 +4,7 @@ import {
 import Card from '../src/components/Card.vue';
 
 export default {
-    title: 'Components',
+    title: 'Components/Atoms',
     decorators: [withKnobs]
 };
 
