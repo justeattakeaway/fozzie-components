@@ -9,4 +9,5 @@ v0.1.0
 *June 5th, 2020*
 
 ### Added
-- Initial configuration and sample component
+- Initial component documentation and configuration
+- Placeholder component, unit test and storybook entry
