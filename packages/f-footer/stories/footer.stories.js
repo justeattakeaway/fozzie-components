@@ -2,7 +2,7 @@ import { select, boolean } from '@storybook/addon-knobs';
 import VueFooter from '../src/components/Footer.vue';
 
 export default {
-    title: 'Shared'
+    title: 'Components/Organisms'
 };
 
 export const FooterComponent = () => ({
