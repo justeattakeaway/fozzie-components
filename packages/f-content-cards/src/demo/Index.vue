@@ -11,11 +11,11 @@
 </template>
 
 <script>
-import BrazeContentCards from '@/components/BrazeContentCards.vue';
+import BrazeContentCards from '@/components/ContentCards.vue';
 
 export default {
     components: {
-        BrazeContentCards
+        ContentCards
     }
 };
 </script>

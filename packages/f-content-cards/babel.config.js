@@ -8,14 +8,13 @@ module.exports = api => {
     const builtIns = (api.env('development') ? 'entry' : false);
 
     if (!isTest) {
-        api.cache(true); // Caches the computed babel config function – https://babeljs.io/docs/en/config-files#apicache
+        api.cache(true);
         presets.push(['@vue/app', { useBuiltIns: builtIns }]);
+        presets.push('@babel/env');
+    } else {
+        // use current node version for transpiling test files
+        presets.push(['@babel/env', { targets: { node: 'current' } }]);
     }
-
-    // Alias for @babel/preset-env
-    // Hooks into browserslist to provide smart Babel transforms
-    // https://babeljs.io/docs/en/babel-preset-env
-    presets.push('@babel/env');
 
     return {
         presets,

@@ -1,19 +1,19 @@
 <template>
     <div
-        :class="$style['c-braze-content-cards']"
-        data-test-id="BrazeContentCards">
+        :class="$style['c-content-cards']"
+        data-test-id="ContentCards">
         Hello World
     </div>
 </template>
 
 <script>
 export default {
-    name: 'BrazeContentCards'
+    name: 'ContentCards'
 };
 </script>
 
 <style lang="scss" module>
-.c-braze-content-cards {
+.c-content-cards {
     display: flex;
     justify-content: center;
     min-height: 80vh;

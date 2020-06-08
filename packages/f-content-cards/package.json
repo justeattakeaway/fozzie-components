@@ -1,8 +1,8 @@
 {
-  "name": "@justeat/f-braze-content-cards",
-  "description": "Fozzie Braze Content Cards",
+  "name": "@justeat/f-content-cards",
+  "description": "Fozzie Content Cards",
   "version": "0.1.0",
-  "main": "dist/f-braze-content-cards.umd.min.js",
+  "main": "dist/f-content-cards.umd.min.js",
   "files": [
     "dist"
   ],
@@ -26,9 +26,9 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-braze-content-cards ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-content-cards ./src/index.js",
     "demo": "vue serve --open ./src/demo/Index.vue",
-    "lint": "vue-cli-service lint",
+    "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit"
   },

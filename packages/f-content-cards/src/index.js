@@ -8,13 +8,13 @@ import globalThis from 'core-js/features/global-this';
 
 
 // Import vue component
-import BrazeContentCards from '@/components/BrazeContentCards.vue';
+import ContentCards from '@/components/ContentCards.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('BrazeContentCards', BrazeContentCards);
+    Vue.component('ContentCards', ContentCards);
 }
 
 // Create module definition for Vue.use()
@@ -30,4 +30,4 @@ if (GlobalVue?.use) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export default BrazeContentCards;
+export default ContentCards;
