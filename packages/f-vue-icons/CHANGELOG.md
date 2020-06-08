@@ -12,6 +12,14 @@ Latest (roll into next release)
 - ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails).
 
 
+v1.0.0-beta.6
+------------------------------
+*June 8, 2020*
+
+### Changed
+- Update f-icons version to add new Menulog logo
+
+
 v1.0.0-beta.5
 ------------------------------
 *September 11, 2019*

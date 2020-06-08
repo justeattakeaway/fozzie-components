@@ -1,3 +1,5 @@
+export { default as AlcoholAgeIcon } from '../icons/AlcoholAgeIcon';
+
 export { default as AlertIcon } from '../icons/AlertIcon';
 
 export { default as AllergyNutIcon } from '../icons/AllergyNutIcon';
@@ -165,6 +167,10 @@ export { default as SortIcon } from '../icons/SortIcon';
 export { default as SpeechIcon } from '../icons/SpeechIcon';
 
 export { default as SpicyIcon } from '../icons/SpicyIcon';
+
+export { default as StarFilledOrangeIcon } from '../icons/StarFilledOrangeIcon';
+
+export { default as StarFilledYellowIcon } from '../icons/StarFilledYellowIcon';
 
 export { default as StarEmptyIcon } from '../icons/StarEmptyIcon';
 
