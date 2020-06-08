@@ -1,9 +1,9 @@
 import globalThis from 'core-js/features/global-this';
 
 /**
- * @overview Fozzie f-braze-content-cards Component JS Wrapper
+ * @overview Fozzie f-content-cards Component JS Wrapper
  *
- * @module f-braze-content-cards
+ * @module f-content-cards
  */
 
 
