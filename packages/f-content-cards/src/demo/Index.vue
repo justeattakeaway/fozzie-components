@@ -1,17 +1,17 @@
-// Demo component for testing `f-braze-content-cards` independently via `vue serve --open src/demo/Index.vue`
-// Fonts were added for beter comparison with the designs.
+// Demo component for testing `f-content-cards` independently via `vue serve --open src/demo/Index.vue`
+// Fonts were added for better comparison with the designs.
 
 <template>
     <div>
         <meta
             name="viewport"
             content="width=device-width, initial-scale=1">
-        <braze-content-cards />
+        <content-cards />
     </div>
 </template>
 
 <script>
-import BrazeContentCards from '@/components/ContentCards.vue';
+import ContentCards from '@/components/ContentCards.vue';
 
 export default {
     components: {

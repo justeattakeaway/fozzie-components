@@ -1,10 +1,10 @@
 
 <div align="center">
-  <h1>f-braze-content-cards</h1>
+  <h1>f-content-cards</h1>
 
   <img width="125" alt="Fozzie Bear" src="../../bear.png" />
 
-  <p>Braze content cards component</p>
+  <p>Content cards component</p>
 </div>
 
 ---
@@ -19,11 +19,11 @@
 1.  Install the module using NPM or Yarn:
 
     ```bash
-    yarn add @justeat/f-braze-content-cards
+    yarn add @justeat/f-content-cards
     ```
 
     ```bash
-    npm install @justeat/f-braze-content-cards
+    npm install @justeat/f-content-cards
     ```
 
 2.  Import the component
@@ -31,12 +31,12 @@
     You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
     ```
-    import BrazeContentCards from '@justeat/f-braze-content-cards';
-    import '@justeat/f-braze-content-cards/dist/f-braze-content-cards.css';
+    import ContentCards from '@justeat/f-content-cards';
+    import '@justeat/f-content-cards/dist/f-content-cards.css';
 
     export default {
         components: {
-            BrazeContentCards
+            ContentCards
         }
     }
     ```
@@ -44,12 +44,12 @@
     If you are using Webpack, you can import the component dynamically to separate the header bundle from the main `bundle.client.js`:
 
     ```
-    import '@justeat/f-braze-content-cards/dist/f-braze-content-cards.css';
+    import '@justeat/f-content-cards/dist/f-content-cards.css';
 
     export default {
         components: {
             ...
-            BrazeContentCards: () => import(/* webpackChunkName: "f-braze-content-cards" */ '@justeat/f-braze-content-cards')
+            ContentCards: () => import(/* webpackChunkName: "f-content-cards" */ '@justeat/f-content-cards')
         }
     }
 
@@ -61,7 +61,7 @@ Running below `yarn` commands from the component folder, starts a development
 server displaying a preview example of the component implementation.
 
 ```bash
-# cd /packages/f-braze-content-cards
+# cd /packages/f-content-cards
 yarn install
 
 # followed by
