@@ -29,10 +29,23 @@ $header-buttonCount-bg              : $blue;
 $header-buttonCount-color           : $white;
 $header-buttonCount-borderColor     : $white;
 
-
 $header--transparent-gradient-color : $black;
 $header--transparent-gradient       : 115px;
 $header--transparent-opacity        : 0.7;
+
+// TODO: Temporary JET ML colours – can delete in phase 2 of JET branding
+$orange-largeText             : #f36d00;
+$orange-largeText--dark       : #e96800; // used for hover of base $orange-largeText
+$orange-largeText--darkest    : #cb5b00; // used for focus/active of base $orange-largeText
+$orange--offWhite             : #ffe6cc;
+$violet                       : #4950b9;
+$violet--dark                 : #464cb1; // used for hover of base $violet
+$violet--darkest              : #3d439b; // used for focus/active of base $violet
+$violet--offWhite             : #f1effb;
+$violet--offWhite--dark       : #e7e5f1; // used for hover of base $violet--offWhite
+$violet--offWhite--darkest    : #cac8d2; // used for hover of base $violet--offWhite
+// TODO: End of ML specific JET colours to be deleted
+
 
 /**
  * Global variables which need to be changed depending on the theme (TODO: move to separate component)
