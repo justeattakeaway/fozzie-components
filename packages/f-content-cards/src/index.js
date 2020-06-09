@@ -23,9 +23,9 @@ const plugin = {
 };
 
 // Auto-install when vue is found (eg. in browser via <script> tag)
-const GlobalVue = globalThis?.window?.Vue || globalThis?.global?.Vue || null;
+const GlobalVue = globalThis?.Vue;
 
-if (GlobalVue?.use) {
+if (globalThis?.use) {
     GlobalVue.use(plugin);
 }
 
