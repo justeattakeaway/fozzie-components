@@ -2,7 +2,7 @@ import { withKnobs, text } from '@storybook/addon-knobs';
 import ContentCards from '../src/components/ContentCards.vue';
 
 export default {
-    title: 'Shared',
+    title: 'Components/Organisms',
     decorators: [withKnobs]
 };
 
@@ -16,9 +16,9 @@ export const ContentCardscomponent = () => ({
             default: text('User ID', '')
         }
     },
-    template: '<content-cards :userId="userId" :apiKey="apiKey" />'
+    template: '<div><content-cards :userId="userId" :apiKey="apiKey" /></div>'
 });
 
 ContentCardscomponent.story = {
-    name: 'f-braze'
+    name: 'f-content-cards'
 };
