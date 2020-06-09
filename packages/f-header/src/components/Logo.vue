@@ -59,7 +59,7 @@ export default {
             return `Go to ${this.companyName} homepage`;
         },
         logoColourModifier () {
-            return (this.headerBackgroundTheme === 'transparent' || this.headerBackgroundTheme === 'red') && this.theme === 'je' ? 'c-icon-je--alt' : '';
+            return (this.headerBackgroundTheme === 'transparent' || this.headerBackgroundTheme === 'red') ? 'c-icon--alt' : '';
         }
     }
 };
@@ -124,7 +124,7 @@ export default {
         fill: $header-logo-color;
     }
 
-    .c-icon-je--alt g {
+    .c-icon--alt g {
         fill: $header-logo-color--alt;
     }
 </style>
