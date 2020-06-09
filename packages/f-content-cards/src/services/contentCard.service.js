@@ -26,6 +26,16 @@ class ContentCards {
         };
     }
 
+    orderCardsByOrderValue () {
+        this.cards.sort(({ extras: { order: a } }, { extras: { order: b } }) => +a - +b);
+        return this;
+    }
+
+    orderCardsByUpdateValue () {
+        orderBy(this.cards, 'extras.updated');
+        return this;
+    }
+
     arrangeCardsByTitles () {
         this.cards.reduce((acc, card) => {
             const { custom_card_type: type } = card.extras;
@@ -67,8 +77,7 @@ class ContentCards {
 
     logBrazeEvent (type, payload) {
         const { appboy } = this;
-        if (!appboy) return false;
-
+        if (!appboy || !appboy[type]) return false;
         const output = appboy[type](payload, true);
         appboy.requestImmediateDataFlush();
 

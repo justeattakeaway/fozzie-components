@@ -4,7 +4,7 @@
         :href="ctaEnabled && ctaUrl"
         :class="['c-restaurantCard', { 'c-restaurantCard--isolateHeroImage': isAnniversaryCard }]"
         data-test-id="contentCard-link"
-        @click="onClickContentCard">
+    >
         <div
             :style="{ backgroundImage: 'url(' + image + ')' }"
             class="c-restaurantCard-bgImg" />
@@ -92,65 +92,9 @@ export default {
                         .filter(key => key.indexOf('line_') !== -1)
                         .map(key => this.extras[key]);
         },
-        showIcon () {
-            return this.icon && ['Promotion_Card_2', 'Voucher_Card_1', 'Restaurant_FTC_Offer_Card'].includes(this.type);
-        },
-        extractedCardId () {
-            const decoded = atob(this.cardId);
-            const start = decoded.indexOf('=');
-            const end = decoded.indexOf('&');
-            return decoded.slice(start + 1, end);
-        },
 
         isAnniversaryCard () {
             return this.type === 'Anniversary_Card_1';
-        }
-    },
-    mounted () {
-        window.dataLayer = window.dataLayer || [];
-        // this.onViewContentCard();
-    },
-    methods: {
-        // onViewContentCard () {
-        //     const payload = this.createDataObject({
-        //         contentAction: 'view'
-        //     });
-        //
-        //     // this.trackContentCardVisibility(payload);
-        // },
-
-        // onClickContentCard () {
-        //     const payload = this.createDataObject({
-        //         contentAction: 'click',
-        //         contentDeeplink: this.ctaUrl
-        //     });
-        //
-        //     // this.logCardClick(this.card);
-        //     // this.trackContentCardOnClick(payload);
-        // },
-
-        createDataObject (args) {
-            return {
-                canvasName: null,
-                contentAction: null,
-                contentCTA: this.voucherCode ? 'copy_voucher' : this.ctaText,
-                contentCategory: null,
-                contentDeeplink: null,
-                contentId: this.extractedCardId,
-                contentPosition: this.order,
-                contentTitle: this.title,
-                contentType: 'ContentCard',
-                customVoucherCode: this.voucherCode || null,
-                variantName: null,
-                carousel: this.isCarousel
-                    ?
-                    {
-                        listType: 'offers',
-                        componentId: this.containerTitle
-                    }
-                    : null,
-                ...args
-            };
         }
     }
 };
