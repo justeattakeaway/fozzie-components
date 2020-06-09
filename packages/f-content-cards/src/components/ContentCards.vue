@@ -14,7 +14,7 @@
 
 <script>
 import initialiseBraze from '@justeat/f-metadata';
-import ContentCards from '../services/contentCards.service';
+import ContentCards from '../services/contentCard.service';
 import cardTemplates from './cardTemplates';
 
 export default {
@@ -39,7 +39,7 @@ export default {
         };
     },
     mounted () {
-        this.setupBraze(this.apiKey, this.userId)
+        this.setupBraze(this.apiKey, this.userId);
     },
     methods: {
         setupBraze (apiKey, userId, enableLogging = false) {
