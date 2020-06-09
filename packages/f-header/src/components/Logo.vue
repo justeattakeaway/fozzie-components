@@ -76,7 +76,7 @@ export default {
 
 
         @include theme(ml) {
-            padding-top: 12px;
+            padding-top: 8px;
         }
 
         @include media('>=mid') {
@@ -85,7 +85,7 @@ export default {
             padding-top: 24px;
 
             @include theme(ml) {
-                padding-top: 10px;
+                padding-top: 16px;
             }
         }
     }
@@ -102,13 +102,13 @@ export default {
 
         // Menulog logo, as it has multiple fill values built in. We just hide the outline on transparent mode.
         @include theme(ml) {
-            width: 118px;
-            height: 40px;
+            width: 120px;
+            height: 32px;
             margin-left: -10.5px; //half of hamburger menu width
 
             @include media('>=mid') {
-                width: 180px;
-                height: 61px;
+                width: 149px;
+                height: 41px;
                 margin-left: 0;
             }
 

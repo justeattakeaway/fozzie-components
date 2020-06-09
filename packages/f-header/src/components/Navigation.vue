@@ -558,13 +558,13 @@ $nav-popover-padding               : spacing(x2);
 
 
 // Menulog theme overrides
-$nav-text-color--ml                : $green;
-$nav-text-color--hover--ml         : $green--dark;
-$nav-toggleIcon-color--ml          : $brand--green;
-$nav-icon-color--ml                : $brand--green;
+$nav-text-color--ml                : $violet;
+$nav-text-color--hover--ml         : $violet--dark;
+$nav-toggleIcon-color--ml          : $orange-largeText;
+$nav-icon-color--ml                : $orange-largeText;
 
-$nav-trigger-focus-color--ml       : $green;
-$nav-trigger-focus-bg--ml          : $green--offWhite;
+$nav-trigger-focus-color--ml       : $orange-largeText;
+$nav-trigger-focus-bg--ml          : $orange--offWhite;
 
 
 @mixin nav-container-visible () {

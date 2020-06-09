@@ -1327,6 +1327,14 @@
     "@justeat/f-utils" "0.3.0"
     include-media "1.4.9"
 
+"@justeat/f-icons@2.0.0-beta.11":
+  version "2.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.11.tgz#c2653fb72147b96de8ba9eb13d95142716f568fb"
+  integrity sha512-PHOHGujgn0xaOmV3X3nt8BMkNHf6rMmz1AVlZd3ACGiLObXOcPWitiV8ehCXAwGV5EBI0HIGBlQtU10wwJuGLQ==
+  dependencies:
+    classnames "2.2.5"
+    core-js "3.1.3"
+
 "@justeat/f-icons@2.0.0-beta.6":
   version "2.0.0-beta.6"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.6.tgz#e3a08a25621332305abe79867a8005695958bce2"
@@ -1404,20 +1412,28 @@
     "@justeat/f-icons" "2.0.0-beta.9"
     babel-helper-vue-jsx-merge-props "^2.0.3"
 
-"@justeat/fozzie-colour-palette@3.0.0-beta.0":
-  version "3.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie-colour-palette/-/fozzie-colour-palette-3.0.0-beta.0.tgz#12c88c3c1e9d81544c05773bea6eb12c75ac2447"
-  integrity sha512-QnPiHnYmOpLN+gswv9hOezegrsRpzqroamrVeh5JjEJXFSsUwCb+LnkrpQjlqoCfKNw3gL9WTFldptd+Om8syg==
+"@justeat/f-vue-icons@1.0.0-beta.6":
+  version "1.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.6.tgz#14ace81da24675f4d8f83799b608c9e471a7578b"
+  integrity sha512-F3Wur/iPug6g8gwdYWxvTUSlKtePs4hTvyX+ugnVZthGPVKZELYhuIyKz4IyEILdFIoUQnLE6ZcFy9687sf5qA==
+  dependencies:
+    "@justeat/f-icons" "2.0.0-beta.11"
+    babel-helper-vue-jsx-merge-props "2.0.3"
 
-"@justeat/fozzie@3.0.0-beta.0":
-  version "3.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-3.0.0-beta.0.tgz#bc21127077bfcb47f912fa826ca04451e6e38d88"
-  integrity sha512-C1VTPBTfz28oC5VS0MIZ5HNk+e2ndNPnd+0H8jrdWPuJLNlmboxGSHrYxa5oGK5wBJfsbAX5YVeb7Vi43InCwA==
+"@justeat/fozzie-colour-palette@3.0.0-beta.1":
+  version "3.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie-colour-palette/-/fozzie-colour-palette-3.0.0-beta.1.tgz#c4f7594b338f8f73470875174872c92ccdfd8f21"
+  integrity sha512-QlxDWTBfjS1n2W5wycqRNLSR+sX54qupAjl1WiVl0lW3dbPQAHnmi8wxcyrbMOlYw8PqeOUZffuSmHLR4exwlw==
+
+"@justeat/fozzie@3.0.0-beta.4":
+  version "3.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-3.0.0-beta.4.tgz#242f30f63764157bfcb7eeff31c4916dbd844c18"
+  integrity sha512-1e/DtutYld1RE+AMUTUu7nvM0xnAqeTTviLVT75VnCiYu4v/DsVkOS5ZzIdlO2E6daoNUOwfatkys2MAXoFNMQ==
   dependencies:
     "@justeat/f-dom" "1.1.0"
     "@justeat/f-logger" "0.8.1"
     "@justeat/f-utils" "0.3.0"
-    "@justeat/fozzie-colour-palette" "3.0.0-beta.0"
+    "@justeat/fozzie-colour-palette" "3.0.0-beta.1"
     fontfaceobserver "2.1.0"
     include-media "1.4.9"
     kickoff-grid.css "1.2.0"
@@ -4505,7 +4521,7 @@ babel-helper-to-multiple-sequence-expressions@^0.5.0:
   resolved "https://registry.yarnpkg.com/babel-helper-to-multiple-sequence-expressions/-/babel-helper-to-multiple-sequence-expressions-0.5.0.tgz#a3f924e3561882d42fcf48907aa98f7979a4588d"
   integrity sha512-m2CvfDW4+1qfDdsrtf4dwOslQC3yhbgyBFptncp4wvtdrDHqueW7slsYv4gArie056phvQFhT2nRcGS4bnm6mA==
 
-babel-helper-vue-jsx-merge-props@^2.0.3:
+babel-helper-vue-jsx-merge-props@2.0.3, babel-helper-vue-jsx-merge-props@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-2.0.3.tgz#22aebd3b33902328e513293a8e4992b384f9f1b6"
   integrity sha512-gsLiKK7Qrb7zYJNgiXKpXblxbV5ffSwR0f5whkPAaBAR4fhi6bwRZxX9wBlIc5M/v8CCkXUbXZL4N/nSE97cqg==
