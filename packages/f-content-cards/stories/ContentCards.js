@@ -1,8 +1,14 @@
-import { storiesOf } from '@storybook/vue';
 import ContentCards from '../src/components/ContentCards.vue';
 
-storiesOf('Components', module)
-  .add('f-content-cards', () => ({
-      components: { ContentCards },
-      template: '<content-cards />'
-  }));
+export default {
+    title: 'Components/Organisms'
+};
+
+export const ContentCardsComponent = () => ({
+    components: { ContentCards },
+    template: '<content-cards />'
+});
+
+ContentCardsComponent.story = {
+    name: 'f-content-cards'
+};
