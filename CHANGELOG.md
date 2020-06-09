@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.15.0
 ------------------------------
+*June 8, 2020*
+
+### Changed
+- Updated `fozzie` and `fozzie-colour-palette` dependencies to pull in updated JET theme variables for ML.
+
+
+v1.15.0
+------------------------------
 *June 4, 2020*
 
 ### Changed

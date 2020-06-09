@@ -53,7 +53,7 @@ export default {
             padding: 4px;
 
             @include theme(ml) {
-                color: $green;
+                color: $violet;
             }
         }
     }
