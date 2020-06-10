@@ -13,6 +13,7 @@
                 'beta',
                 $style['c-card-heading']
             ]"
+            :style="{ textAlign: cardHeadingPosition }"
             data-test="card-heading"
         >
             {{ cardHeading }}
@@ -36,6 +37,13 @@ export default {
         cardHeading: {
             type: String,
             default: ''
+        },
+        cardHeadingPosition: {
+            type: String,
+            default: 'left',
+            validator: value => {
+                return ['left', 'right', 'center'].indexOf(value) !== -1;
+            }
         },
         isRounded: {
             type: Boolean,
@@ -118,7 +126,4 @@ $card--pageContentWrapper-width           : 460px;
     .c-card-heading {
         margin-bottom: spacing(x2);
     }
-
-
-
 </style>

@@ -119,5 +119,47 @@ describe('Card', () => {
                 expect(wrapper.vm.isPageContentWrapper).toBe(true);
             });
         });
+
+        describe('cardHeadingPosition', () => {
+            it('should default to `left` if it is not set', () => {
+                // Arrange
+                const propsData = {};
+
+                // Act
+                const wrapper = shallowMount(Card, { propsData });
+
+                // Assert
+                expect(wrapper.vm.cardHeadingPosition).toBe('left');
+            });
+
+            it('should be set to `center` if the `cardHeadingPosition` prop is passed in as `center`', () => {
+                // Arrange
+                const propsData = {
+                    cardHeadingPosition: 'center'
+                };
+
+                // Act
+                const wrapper = shallowMount(Card, { propsData });
+
+                // Assert
+                expect(wrapper.vm.cardHeadingPosition).toBe('center');
+            });
+
+            it('should only allows `left`, `right` or `center` to be passed in.', () => {
+                // Arrange
+                const propsData = {};
+
+                // Act
+                const wrapper = shallowMount(Card, { propsData });
+
+                // Assert
+                const position = wrapper.vm.$options.props.cardHeadingPosition;
+
+                expect(position.validator('invalid')).toBeFalsy();
+                expect(position.validator('left')).toBeTruthy();
+                expect(position.validator('right')).toBeTruthy();
+                expect(position.validator('center')).toBeTruthy();
+            });
+        });
     });
 });
