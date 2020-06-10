@@ -1,12 +1,11 @@
-import globalThis from 'core-js/features/global-this';
-
 /**
  * @overview Fozzie f-content-cards Component JS Wrapper
  *
  * @module f-content-cards
  */
 
-
+import globalThis from 'core-js/features/global-this';
+import VueLazyload from 'vue-lazyload';
 // Import vue component
 import ContentCards from '@/components/ContentCards.vue';
 
@@ -23,10 +22,11 @@ const plugin = {
 };
 
 // Auto-install when vue is found (eg. in browser via <script> tag)
-const GlobalVue = globalThis?.Vue;
+const GlobalVue = globalThis?.window?.Vue || globalThis?.global?.Vue || null;
 
 if (GlobalVue?.use) {
     GlobalVue.use(plugin);
+    GlobalVue.use(VueLazyload, { observer: true });
 }
 
 // To allow use as module (npm/webpack/etc.) export component
