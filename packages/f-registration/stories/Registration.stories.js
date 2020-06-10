@@ -2,7 +2,7 @@ import { withKnobs, select, text } from '@storybook/addon-knobs';
 import Registration from '../src/components/Registration.vue';
 
 export default {
-    title: 'Components',
+    title: 'Components/Organisms',
     decorators: [withKnobs]
 };
 
