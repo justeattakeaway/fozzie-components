@@ -11,9 +11,9 @@
             v-if="cardHeading"
             :class="[
                 'beta',
-                $style['c-card-heading']
+                $style['c-card-heading'],
+                $style[`c-card--${cardHeadingPosition}`]
             ]"
-            :style="{ textAlign: cardHeadingPosition }"
             data-test="card-heading"
         >
             {{ cardHeading }}
@@ -125,5 +125,17 @@ $card--pageContentWrapper-width           : 460px;
 
     .c-card-heading {
         margin-bottom: spacing(x2);
+    }
+
+    .c-card--left {
+        text-align: left;
+    }
+
+    .c-card--center {
+        text-align: center;
+    }
+
+    .c-card--right {
+        text-align: right;
     }
 </style>
