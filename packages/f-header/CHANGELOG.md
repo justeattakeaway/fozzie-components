@@ -4,10 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.6.0
+------------------------------
+*June 9, 2020*
+
+### Changed
+- Updated Menulog header to switch to white logo when using transparent background header theme.
+
+
 v2.5.0
 ------------------------------
 *June 8, 2020*
 
+### Changed
 - New Menulog JET updates (logo and colours).
 - Structure of Storybook stories changed to CSF (Component Story Format) – the new recommended way to write stories.
 - ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails)
