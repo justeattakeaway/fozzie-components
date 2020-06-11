@@ -41,9 +41,7 @@ export default {
         cardHeadingPosition: {
             type: String,
             default: 'left',
-            validator: value => {
-                return ['left', 'right', 'center'].indexOf(value) !== -1;
-            }
+            validator: value => ['left', 'right', 'center'].indexOf(value) !== -1
         },
         isRounded: {
             type: Boolean,
