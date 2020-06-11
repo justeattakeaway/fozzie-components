@@ -12,7 +12,7 @@
             :class="[
                 'beta',
                 $style['c-card-heading'],
-                $style[`c-card--${cardHeadingPosition}`]
+                (cardHeadingPosition !== 'left' ? $style[`c-card--${cardHeadingPosition}`] : '')
             ]"
             data-test="card-heading"
         >
@@ -125,10 +125,6 @@ $card--pageContentWrapper-width           : 460px;
 
     .c-card-heading {
         margin-bottom: spacing(x2);
-    }
-
-    .c-card--left {
-        text-align: left;
     }
 
     .c-card--center {
