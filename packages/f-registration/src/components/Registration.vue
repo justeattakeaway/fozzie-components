@@ -7,7 +7,7 @@
         is-page-content-wrapper
         card-heading-position="center">
         <p
-            v-if="loginSettings"
+            v-if="shouldShowLoginLink"
             :class="$style['login-link']"
             data-test-id="create-account-login-link">
             {{ loginSettings.preLinkText }}<a :href="loginSettings.url">{{ loginSettings.linkText }}</a>
@@ -199,6 +199,9 @@ export default {
         // Returns true if email validation conditions are not met and if the field has been `touched` by a user
         shouldShowPasswordRequiredError () {
             return (this.$v.password.$invalid && !this.$v.password.required) && this.$v.password.$dirty;
+        },
+        shouldShowLoginLink () {
+            return this.loginSettings && this.loginSettings.linkText && this.loginSettings.url;
         }
     },
 

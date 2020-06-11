@@ -10,10 +10,6 @@ v0.7.0
 ### Changed
 - Storybook category updated to `Organisms`.
 
-Latest (rolled into next release)
-------------------------------
-*June 9, 2020*
-
 ### Added
 - Login link to registration component.
 
