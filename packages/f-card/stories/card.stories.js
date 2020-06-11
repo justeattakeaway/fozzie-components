@@ -17,6 +17,9 @@ export const CardComponent = () => ({
         cardHeading: {
             default: text('Card Heading', 'My Card Heading')
         },
+        cardHeadingPosition: {
+            default: select('Card Heading Position', ['left', 'center', 'right'])
+        },
         isRounded: {
             default: boolean('isRounded', false)
         },
@@ -31,7 +34,7 @@ export const CardComponent = () => ({
         notes: 'some documentation here'
     },
     template:
-        '<card :locale="locale" :cardHeading="cardHeading" :isRounded="isRounded" :hasOutline="hasOutline" :isPageContentWrapper="isPageContentWrapper"><p>Some Card Content</p></card>'
+        '<card :locale="locale" :cardHeading="cardHeading" :cardHeadingPosition="cardHeadingPosition" :isRounded="isRounded" :hasOutline="hasOutline" :isPageContentWrapper="isPageContentWrapper"><p>Some Card Content</p></card>'
 });
 
 CardComponent.story = {
