@@ -4,7 +4,14 @@
         :card-heading="title"
         is-rounded
         has-outline
-        is-page-content-wrapper>
+        is-page-content-wrapper
+        card-heading-position="center">
+        <p
+            v-if="loginSettings"
+            :class="$style['login-link']"
+            data-test-id="create-account-login-link">
+            {{ loginSettings.preLinkText }}<a :href="loginSettings.url">{{ loginSettings.linkText }}</a>
+        </p>
         <form
             type="post"
             :class="$style['o-form']"
@@ -148,6 +155,10 @@ export default {
         createAccountUrl: {
             type: String,
             required: true
+        },
+        loginSettings: {
+            type: Object,
+            default: undefined
         }
     },
 
@@ -248,21 +259,29 @@ export default {
     @include font-size(base--scaleUp);
 }
 
-    .o-form-error {
-        display: flex;
-        align-items: center;
-        color: $red;
-        @include font-size(base);
-        margin-top: spacing();
-    }
-        .o-form-error-icon {
-            width: 16px;
-            height: 16px;
-            margin-right: spacing(x0.5);
-        }
+.o-form-error {
+    display: flex;
+    align-items: center;
+    color: $red;
+    @include font-size(base);
+    margin-top: spacing();
+}
+
+.o-form-error-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: spacing(x0.5);
+}
 
 * + .o-form {
     margin-top: spacing(x2);
 }
 
+.login-link {
+    text-align: center;
+    a {
+        color: #266abd;
+        text-decoration: none;
+    }
+}
 </style>

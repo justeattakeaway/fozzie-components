@@ -9,7 +9,12 @@ jest.mock('../../services/RegistrationServiceApi', () => ({ createAccount: jest.
 describe('Registration', () => {
     const propsData = {
         tenant: 'uk',
-        createAccountUrl: 'http://localhost/account/register'
+        createAccountUrl: 'http://localhost/account/register',
+        loginSettings: {
+            preLinkText: 'Already have an account? ',
+            linkText: 'Log in',
+            url: '/login'
+        }
     };
 
     it('should be defined', () => {
@@ -27,6 +32,14 @@ describe('Registration', () => {
         it('if `value` is specified, should assign the input field a value attribute', () => {
             const wrapper = shallowMount(Registration, { propsData });
             expect(wrapper.exists()).toBe(true);
+        });
+
+        it('should show login link if loginSettings prop set.', () => {
+            const wrapper = shallowMount(Registration, { propsData });
+
+            const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
+
+            expect(loginLink.exists()).toBe(true);
         });
     });
 
