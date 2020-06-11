@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.7.0
 ------------------------------
-*June 1, 2020*
+*June 11, 2020*
 
 ### Changed
 - Storybook category updated to `Organisms`.
