@@ -280,10 +280,10 @@ export default {
     margin-top: spacing(x2);
 }
 
-.login-link {
+.c-loginLink {
     text-align: center;
     a {
-        color: #266abd;
+        color: $blue;
         text-decoration: none;
     }
 }
