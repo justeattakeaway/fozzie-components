@@ -145,16 +145,16 @@ describe('Card', () => {
                 expect(wrapper.vm.cardHeadingPosition).toBe('center');
             });
 
-            it('should only allows `left`, `right` or `center` to be passed in.', () => {
+            it('should only allow `left`, `right` or `center` to be passed in.', () => {
                 // Arrange
                 const propsData = {};
 
                 // Act
                 const wrapper = shallowMount(Card, { propsData });
 
-                // Assert
                 const position = wrapper.vm.$options.props.cardHeadingPosition;
 
+                // Assert
                 expect(position.validator('invalid')).toBeFalsy();
                 expect(position.validator('left')).toBeTruthy();
                 expect(position.validator('right')).toBeTruthy();
