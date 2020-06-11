@@ -8,7 +8,7 @@
         card-heading-position="center">
         <p
             v-if="shouldShowLoginLink"
-            :class="$style['login-link']"
+            :class="$style['c-loginLink']"
             data-test-id="create-account-login-link">
             {{ loginSettings.preLinkText }}<a :href="loginSettings.url">{{ loginSettings.linkText }}</a>
         </p>
