@@ -158,7 +158,7 @@ export default {
         },
         loginSettings: {
             type: Object,
-            default: undefined
+            default: () => {}
         }
     },
 

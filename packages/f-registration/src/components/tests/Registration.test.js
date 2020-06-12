@@ -9,12 +9,7 @@ jest.mock('../../services/RegistrationServiceApi', () => ({ createAccount: jest.
 describe('Registration', () => {
     const propsData = {
         tenant: 'uk',
-        createAccountUrl: 'http://localhost/account/register',
-        loginSettings: {
-            preLinkText: 'Already have an account? ',
-            linkText: 'Log in',
-            url: '/login'
-        }
+        createAccountUrl: 'http://localhost/account/register'
     };
 
     it('should be defined', () => {
@@ -35,7 +30,17 @@ describe('Registration', () => {
         });
 
         it('should show the login link if loginSettings prop set.', () => {
-            const wrapper = shallowMount(Registration, { propsData });
+            const wrapper = shallowMount(Registration, {
+                propsData: {
+                    tenant: 'uk',
+                    createAccountUrl: 'http://localhost/account/register',
+                    loginSettings: {
+                        preLinkText: 'Already have an account? ',
+                        linkText: 'Log in',
+                        url: '/login'
+                    }
+                }
+            });
 
             const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
 
@@ -69,6 +74,14 @@ describe('Registration', () => {
                     }
                 }
             });
+
+            const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
+
+            expect(loginLink.exists()).toBe(false);
+        });
+
+        it('shoud not show the login link if loginSettings prop not set', () => {
+            const wrapper = shallowMount(Registration, { propsData });
 
             const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
 
