@@ -10,7 +10,7 @@
             v-if="shouldShowLoginLink"
             :class="$style['c-loginLink']"
             data-test-id="create-account-login-link">
-            {{ loginSettings.preLinkText }}<a :href="loginSettings.url">{{ loginSettings.linkText }}</a>
+            {{ loginSettings.preLinkText }} <a :href="loginSettings.url">{{ loginSettings.linkText }}</a>
         </p>
         <form
             type="post"
