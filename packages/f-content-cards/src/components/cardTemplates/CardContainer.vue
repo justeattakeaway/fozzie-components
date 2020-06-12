@@ -2,32 +2,32 @@
     <component
         :is="ctaUrl && ctaEnabled ? 'a' : 'div'"
         :href="ctaEnabled && ctaUrl"
-        :class="['c-restaurantCard', { 'c-restaurantCard--isolateHeroImage': isAnniversaryCard }]"
+        :class="['c-contentCard', { 'c-contentCard--isolateHeroImage': isAnniversaryCard }]"
         data-test-id="contentCard-link"
     >
         <div
             v-lazy:background-image="image"
-            class="c-restaurantCard-bgImg" />
-        <div class="c-restaurantCard-info">
+            class="c-contentCard-bgImg" />
+        <div class="c-contentCard-info">
             <img
                 v-if="icon"
                 v-lazy="icon"
-                class="c-restaurantCard-thumbnail">
-            <h3 class="c-restaurantCard-title">
+                class="c-contentCard-thumbnail">
+            <h3 class="c-contentCard-title">
                 {{ title }}
             </h3>
-            <h4 class="c-restaurantCard-subTitle">
+            <h4 class="c-contentCard-subTitle">
                 {{ subtitle }}
             </h4>
             <template v-for="(textItem, textIndex) in descriptionText">
                 <p
                     :key="textIndex"
                     :data-test-id="`ContentCard-TextItem-${textIndex}`"
-                    class="c-restaurantCard-text">
+                    class="c-contentCard-text">
                     {{ textItem }}
                 </p>
             </template>
-            <div class="c-restaurantCard-footer">
+            <div class="c-contentCard-footer">
                 <slot />
             </div>
         </div>

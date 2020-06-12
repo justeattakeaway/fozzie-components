@@ -1,6 +1,6 @@
 <template>
     <div
-        class="c-restaurantCards c-restaurantCards--wrap"
+        class="c-contentCards c-contentCards--wrap"
         data-test-id="OffersInbox-Cards">
         <template v-for="(contentCard, cardIndex) in cards">
             <component
@@ -79,12 +79,12 @@ export default {
 </script>
 
 <style lang="scss">
-    // c-restaurantCard
+    // c-contentCard
     // Styling for a card that holds data on a restaurant
     // Currently consists of a main image, optional restaurant logo thumbnail
     // And then info text below (header, tags, description)
 
-    .c-restaurantCards {
+    .c-contentCards {
         margin-top: spacing(x5);
         margin-bottom: spacing(x5);
 
@@ -93,16 +93,16 @@ export default {
             flex-direction: row;
         }
     }
-    .c-restaurantCards--centred {
+    .c-contentCards--centred {
         justify-content: center;
     }
-    .c-restaurantCards--wrap {
+    .c-contentCards--wrap {
         flex-wrap: wrap;
 
         &.has-offers-carousel {
             margin-top: 0;
 
-            .c-restaurantCard {
+            .c-contentCard {
                 min-width: inherit;
                 max-width: inherit;
 
@@ -112,11 +112,11 @@ export default {
             }
         }
     }
-    .c-restaurantCards-sectionTitle {
+    .c-contentCards-sectionTitle {
         margin: spacing(x4) 0 0;
     }
 
-    .c-restaurantCard {
+    .c-contentCard {
         width: 100%;
         text-decoration: initial;
         text-align: center;
@@ -127,7 +127,7 @@ export default {
             color: currentColor;
         }
 
-        .c-restaurantCards--wrap & {
+        .c-contentCards--wrap & {
             display: flex;
             flex-direction: column;
             flex: 0 0 40%;
@@ -138,12 +138,12 @@ export default {
         @include media('>=narrowMid') {
             max-width: 370px;
 
-            .c-restaurantCards--wrap & {
+            .c-contentCards--wrap & {
                 margin: 0 spacing() spacing(x3);
             }
         }
 
-        .c-restaurantCard-banner {
+        .c-contentCard-banner {
             position: relative;
             display: inline-block;
             background: #cd381f;
@@ -153,7 +153,7 @@ export default {
             padding: 0 spacing();
         }
 
-        .c-restaurantCard-banner-content {
+        .c-contentCard-banner-content {
             display: inline-block;
             transform: skew(20deg);
         }
@@ -161,15 +161,15 @@ export default {
         /**
          * 1. Magic number to align isolated image with top of content card
          */
-        &.c-restaurantCard--isolateHeroImage {
+        &.c-contentCard--isolateHeroImage {
             position: relative;
             margin: 84px 0 spacing(x3); // 1
 
-            .c-restaurantCard-info {
+            .c-contentCard-info {
                 border-radius: $border-radius;
             }
 
-            .c-restaurantCard-bgImg {
+            .c-contentCard-bgImg {
                 position: absolute;
                 left: 0;
                 right: 0;
@@ -184,7 +184,7 @@ export default {
         }
     }
 
-    .c-restaurantCard-bgImg {
+    .c-contentCard-bgImg {
         width: 100%;
         min-height: 170px;
         background-repeat: repeat;
@@ -193,12 +193,12 @@ export default {
         background-position: center;
         border-radius: $border-radius $border-radius 0 0;
 
-        .c-restaurantCard-info--inset & {
+        .c-contentCard-info--inset & {
             height: 188px;
         }
     }
 
-    .c-restaurantCard-title {
+    .c-contentCard-title {
         margin-top: spacing();
         text-align: center;
 
@@ -212,17 +212,17 @@ export default {
         -webkit-box-orient: vertical;
     }
 
-    .c-restaurantCard-subTitle {
+    .c-contentCard-subTitle {
         @include font-size(base--scaleUp);
         margin-top: spacing();
     }
 
-    .c-restaurantCard-text {
+    .c-contentCard-text {
         margin-top: spacing();
         text-align: center;
     }
 
-    .c-restaurantCard-info {
+    .c-contentCard-info {
         position: relative;
         display: flex;
         flex-direction: column;
@@ -239,26 +239,26 @@ export default {
         }
     }
 
-    .c-restaurantCard-link {
+    .c-contentCard-link {
         font-weight: $font-weight-bold;
         text-decoration: none;
     }
 
-    .c-restaurantCard-footer {
+    .c-contentCard-footer {
         width: 100%;
         margin-top: auto;
         text-align: center;
         padding-top: spacing(x2);
     }
 
-    .c-restaurantCard-thumbnail {
+    .c-contentCard-thumbnail {
         border: 1px solid $grey--lightest;
         margin-top: - (32px + spacing(x2)); // This offsets the thumbnail above the top of the info card
         width: 48px;
         min-height: 48px;
     }
 
-    .c-restaurantCard-list {
+    .c-contentCard-list {
         display: flex;
         margin-top: 4px;
         margin-bottom: 4px;
@@ -292,14 +292,14 @@ export default {
         }
     }
 
-    .c-restaurantCard-offer {
+    .c-contentCard-offer {
         background-color: $yellow--light;
         width: calc(100% + #{ spacing(x4) });
         text-align: center;
         padding: 5px;
     }
 
-    .c-restaurantCard-promoted {
+    .c-contentCard-promoted {
         position: absolute;
         bottom: 100%;
         right: 0;
@@ -309,12 +309,12 @@ export default {
         font-weight: $font-weight-bold;
     }
 
-    .c-restaurantCard-data {
+    .c-contentCard-data {
         width: 100%;
         margin-top: auto;
     }
 
-    .c-restaurantCard-dataGroup {
+    .c-contentCard-dataGroup {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -322,19 +322,19 @@ export default {
     }
 
     // insets the info card on top of the restaurant image
-    .c-restaurantCard-info--inset {
+    .c-contentCard-info--inset {
         margin-left: spacing();
         margin-right: spacing();
         margin-top: -62px;
     }
 
     // infoText is text associated to the restaurant (like delivery time/distance)
-    .c-restaurantCard-infoText {
+    .c-contentCard-infoText {
         display: flex;
         align-content: center;
         margin-top: 0;
     }
-    .c-restaurantCard-infoText-icon {
+    .c-contentCard-infoText-icon {
         width: 18px;
         height: 18px;
         margin-right: 6px;
@@ -345,15 +345,15 @@ export default {
     }
 
     // Highlight color for text (used for labels like 'New')
-    .c-restaurantCard-infoText--highlight {
+    .c-contentCard-infoText--highlight {
         color: $green;
     }
     // Add small margin-top to infoText
-    .c-restaurantCard-infoText--spaced {
+    .c-contentCard-infoText--spaced {
         margin-top: spacing(x0.5);
     }
 
-    .c-restaurantCard-voucher {
+    .c-contentCard-voucher {
         display: flex;
         width: 100%;
         font-family: $font-family-base;
@@ -365,19 +365,19 @@ export default {
         background: transparent;
     }
 
-    .c-restaurantCard-voucher-code,
-    .c-restaurantCard-voucher-copy {
+    .c-contentCard-voucher-code,
+    .c-contentCard-voucher-copy {
         @include font-size(16, false);
         width: 50%;
     }
 
-    .c-restaurantCard-voucher-code {
+    .c-contentCard-voucher-code {
         font-weight: $font-weight-base;
         color: $grey--mid;
         text-align: left;
     }
 
-    .c-restaurantCard-voucher-copy {
+    .c-contentCard-voucher-copy {
         font-weight: $font-weight-bold;
         color: $color-link-default;
         text-align: right;
