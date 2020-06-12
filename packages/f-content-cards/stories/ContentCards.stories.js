@@ -10,10 +10,10 @@ export const ContentCardscomponent = () => ({
     components: { ContentCards },
     props: {
         apiKey: {
-            default: text('API Key', 'f714b0fc-6de5-4460-908e-2d9930f31339')
+            default: text('API Key', '')
         },
         userId: {
-            default: text('User ID', 'R8n39I8z2ZrfYSnqLbp2xPj5NdM=')
+            default: text('User ID', '')
         }
     },
     template: '<content-cards :userId="userId" :apiKey="apiKey" />'
