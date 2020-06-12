@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.7.1
 ------------------------------
-*June 11, 2020*
+*June 12, 2020*
 
 ### Changed
 - Added space between login preLinkText and linkText.
