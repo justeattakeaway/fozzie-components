@@ -35,7 +35,7 @@ describe('Registration', () => {
                     tenant: 'uk',
                     createAccountUrl: 'http://localhost/account/register',
                     loginSettings: {
-                        preLinkText: 'Already have an account? ',
+                        preLinkText: 'Already have an account?',
                         linkText: 'Log in',
                         url: '/login'
                     }
@@ -53,7 +53,7 @@ describe('Registration', () => {
                     tenant: 'uk',
                     createAccountUrl: 'http://localhost/account/register',
                     loginSettings: {
-                        preLinkText: 'Already have an account? '
+                        preLinkText: 'Already have an account?'
                     }
                 }
             });
@@ -69,7 +69,7 @@ describe('Registration', () => {
                     tenant: 'uk',
                     createAccountUrl: 'http://localhost/account/register',
                     loginSettings: {
-                        preLinkText: 'Already have an account? ',
+                        preLinkText: 'Already have an account?',
                         linkText: 'Log in'
                     }
                 }
