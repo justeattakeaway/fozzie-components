@@ -101,15 +101,6 @@ export default {
 
         &.has-offers-carousel {
             margin-top: 0;
-
-            .c-contentCard {
-                min-width: inherit;
-                max-width: inherit;
-
-                &:first-child {
-                    margin-left: 0;
-                }
-            }
         }
     }
     .c-contentCards-sectionTitle {
@@ -121,10 +112,23 @@ export default {
         text-decoration: initial;
         text-align: center;
 
+        @include media('>=narrowMid') {
+            max-width: 370px;
+        }
+
         &,
         &:hover,
         &:focus {
             color: currentColor;
+        }
+
+        .has-offers-carousel & {
+            min-width: inherit;
+            max-width: inherit;
+
+            &:first-child {
+                margin-left: 0;
+            }
         }
 
         .c-contentCards--wrap & {
@@ -133,12 +137,8 @@ export default {
             flex: 0 0 40%;
             margin: 0 spacing() spacing(x3) 0;
             width: 100%;
-        }
 
-        @include media('>=narrowMid') {
-            max-width: 370px;
-
-            .c-contentCards--wrap & {
+            @include media('>=narrowMid') {
                 margin: 0 spacing() spacing(x3);
             }
         }
@@ -146,7 +146,7 @@ export default {
         .c-contentCard-banner {
             position: relative;
             display: inline-block;
-            background: #cd381f;
+            background: $brand--red;
             transform: skew(-20deg);
             border-radius: $border-radius;
             color: white;

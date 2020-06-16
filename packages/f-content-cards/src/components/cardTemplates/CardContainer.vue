@@ -72,6 +72,7 @@ export default {
             custom_card_type: type,
             voucher_code: voucherCode
         } = extras;
+
         return {
             cardId,
             ctaUrl,

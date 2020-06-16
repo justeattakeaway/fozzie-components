@@ -1,4 +1,4 @@
-import ContentCardService from '../contentCard.service';
+import ContentCardService, { enabledCardTypes } from '../contentCard.service';
 
 describe('`contentCardService`', () => {
     it('should exist', () => {
@@ -39,19 +39,20 @@ describe('`contentCardService`', () => {
             },
             {
                 title: 'Wasp-17b',
-                extras: { updated: '2020-02-17T12:28:58.000Z', customCardType: 'promotion_card_2' }
+                extras: { updated: '2020-02-16T12:28:58.000Z', customCardType: 'promotion_card_2' }
             },
             {
                 title: 'Wasp-19b',
-                extras: { updated: '2020-02-17T18:23:58.000Z', customCardType: 'promotion_card_3' }
+                extras: { updated: '2020-02-15T18:23:58.000Z', customCardType: 'promotion_card_3' }
             }];
             const service = new ContentCardService({ cards });
 
             // Act
             const { cards: result } = service.orderCardsByUpdateValue().output();
+            const order = Object.values(result).map(({ title }) => title);
 
             // Assert
-            expect(service.orderCardsByUpdateValue().output().cards).toEqual(result);
+            expect(order).toEqual(['Wasp-19b', 'Wasp-17b', '51 Pegasi b']);
         });
     });
 
@@ -61,23 +62,24 @@ describe('`contentCardService`', () => {
                 // Arrange
                 const cards = [{
                     title: '51 Pegasi b',
-                    extras: { updated: '2020-02-17T13:23:58.000Z', customCardType: 'promotion_card_1' }
+                    extras: { updated: '2020-02-17T13:23:58.000Z', customCardType: 'Promotion_Card_1' }
                 },
                 {
                     title: 'Wasp-17b',
-                    extras: { updated: '2020-02-17T12:28:58.000Z', customCardType: 'promotion_card_2' }
+                    extras: { updated: '2020-02-17T12:28:58.000Z', customCardType: 'Promotion_Card_2' }
                 },
                 {
                     title: 'Wasp-19b',
-                    extras: { updated: '2020-02-17T18:23:58.000Z', customCardType: 'promotion_card_3' }
+                    extras: { updated: '2020-02-17T18:23:58.000Z', customCardType: 'Promotion_Card_3' }
                 }];
                 const service = new ContentCardService({ cards });
 
                 // Act
                 const { cards: result } = service.filterCards().output();
+                const areAllCardsSupported = Object.values(result).every(({ extras: { customCardType } }) => enabledCardTypes.includes(customCardType));
 
                 // Assert
-                expect(service.filterCards().output().cards).toEqual(result);
+                expect(areAllCardsSupported).toBe(true);
             });
         });
 
@@ -96,10 +98,10 @@ describe('`contentCardService`', () => {
                     title: 'Wasp-19b',
                     extras: {}
                 }];
-                const service = new ContentCardService({ cards });
+                const { cards: result } = new ContentCardService({ cards }).filterCards().output();
 
                 // Assert
-                expect(service.filterCards().output().cards).toEqual([]);
+                expect(result).toEqual([]);
             });
         });
     });
@@ -123,9 +125,10 @@ describe('`contentCardService`', () => {
 
             // Act
             const { cards: result } = service.removeDuplicateContentCards().output();
+            const cardTitles = result.map(({ title }) => title);
 
             // Assert
-            expect(service.removeDuplicateContentCards().output().cards).toEqual(result);
+            expect(cardTitles).toEqual(['Wasp-17b', 'Jupiter Hot']);
         });
     });
 

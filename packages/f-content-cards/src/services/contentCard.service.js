@@ -67,7 +67,7 @@ class ContentCards {
      * @returns {ContentCards}
      */
     orderCardsByUpdateValue () {
-        orderBy(this.cards, 'extras.updated');
+        this.cards = orderBy(this.cards, 'extras.updated');
         return this;
     }
 
