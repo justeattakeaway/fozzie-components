@@ -69,6 +69,8 @@ export default {
                 case 'Promotion_Card_1':
                 case 'Promotion_Card_2':
                     return 'PromotionCard';
+                case 'Post_Order_Card_1':
+                    return 'PostOrderCard';
                 default:
                     break;
             }

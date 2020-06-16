@@ -62,16 +62,20 @@ describe('`contentCardService`', () => {
             it('should filter content cards by, `promotion_card_1` & `promotion_card_2`', () => {
                 // Arrange
                 const cards = [{
-                    title: '51 Pegasi b',
+                    title: 'Promo Card 1',
                     extras: { updated: '2020-02-17T13:23:58.000Z', customCardType: 'Promotion_Card_1' }
                 },
                 {
-                    title: 'Wasp-17b',
+                    title: 'Promo Card 2',
                     extras: { updated: '2020-02-17T12:28:58.000Z', customCardType: 'Promotion_Card_2' }
                 },
                 {
-                    title: 'Wasp-19b',
+                    title: 'Promo Card 3',
                     extras: { updated: '2020-02-17T18:23:58.000Z', customCardType: 'Promotion_Card_3' }
+                },
+                {
+                    title: 'Post Order Card 1',
+                    extras: { updated: '2020-02-17T12:28:58.000Z', customCardType: 'Post_Order_Card_1' }
                 }];
                 const service = new ContentCardService({ cards });
 
