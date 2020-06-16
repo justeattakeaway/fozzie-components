@@ -11,7 +11,7 @@
         </span>
         <span
             v-if="type === 'Promotion_Card_2'"
-            class="c-restaurantCard-link o-btnLink"
+            class="c-contentCard-link o-btnLink"
             data-test-id="contentCard-promoCard-2">
             {{ ctaText }}
         </span>

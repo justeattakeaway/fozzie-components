@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import RegistrationServiceApi from '../../services/RegistrationServiceApi';
 
 describe('RegistrationServiceApi', () => {
-    const axiosMock = new MockAdapter(axios);    
+    const axiosMock = new MockAdapter(axios);
 
     describe('when creating an account', () => {
         afterEach(() => {
@@ -29,7 +29,7 @@ describe('RegistrationServiceApi', () => {
             // Assert
             expect(axiosMock.history.post.length).toBe(1);
             expect(axiosMock.history.post[0].data).toBe(JSON.stringify(data));
-            expect(axiosMock.history.post[0].headers["Accept-Tenant"]).toBe('uk');
+            expect(axiosMock.history.post[0].headers['Accept-Tenant']).toBe('uk');
         });
     });
 });

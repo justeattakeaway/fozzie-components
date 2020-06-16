@@ -2,32 +2,32 @@
     <component
         :is="ctaUrl && ctaEnabled ? 'a' : 'div'"
         :href="ctaEnabled && ctaUrl"
-        :class="['c-restaurantCard', { 'c-restaurantCard--isolateHeroImage': isAnniversaryCard }]"
+        :class="['c-contentCard', { 'c-contentCard--isolateHeroImage': isAnniversaryCard }]"
         data-test-id="contentCard-link"
     >
         <div
             :style="image && { backgroundImage: 'url(' + image + ')' }"
             :class="[{ 'c-restaurantCard-bgImg': !!image }]" />
-        <div class="c-restaurantCard-info">
+        <div class="c-contentCard-info">
             <img
                 v-if="icon"
-                :src="icon"
-                class="c-restaurantCard-thumbnail">
-            <h3 class="c-restaurantCard-title">
+                v-lazy="icon"
+                class="c-contentCard-thumbnail">
+            <h3 class="c-contentCard-title">
                 {{ title }}
             </h3>
-            <h4 class="c-restaurantCard-subTitle">
+            <h4 class="c-contentCard-subTitle">
                 {{ subtitle }}
             </h4>
             <template v-for="(textItem, textIndex) in descriptionText">
                 <p
                     :key="textIndex"
                     :data-test-id="`ContentCard-TextItem-${textIndex}`"
-                    class="c-restaurantCard-text">
+                    class="c-contentCard-text">
                     {{ textItem }}
                 </p>
             </template>
-            <div class="c-restaurantCard-footer">
+            <div class="c-contentCard-footer">
                 <slot />
             </div>
         </div>
@@ -72,6 +72,7 @@ export default {
             custom_card_type: type,
             voucher_code: voucherCode
         } = extras;
+
         return {
             cardId,
             ctaUrl,

@@ -8,7 +8,12 @@
             content="width=device-width, initial-scale=1"
         >
         <registration
-            locale="en-GB" />
+            locale="en-GB"
+            :login-settings="{
+                preLinkText: 'Already have an account?',
+                linkText: 'Log in',
+                url: '/login'
+            }" />
     </div>
 </template>
 
