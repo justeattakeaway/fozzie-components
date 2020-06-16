@@ -3,10 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
-Latest (roll into next release)
+2.6.0
 ------------------------------
-*June 4, 2020*
+*June 16, 2020*
+
+### Added
+- Check for previously initialised Braze instances on window and skip import of the SDK
 
 ### Changed
 - ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails)
