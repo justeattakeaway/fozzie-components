@@ -24,9 +24,10 @@ describe('`contentCardService`', () => {
 
             // Act
             const { cards: result } = service.orderCardsByOrderValue().output();
+            const cardOrderValues = result.map(({ extras: { order } }) => order);
 
             // Assert
-            expect(service.orderCardsByOrderValue().output().cards).toEqual(result);
+            expect(cardOrderValues).toEqual(['1', '3', '4']);
         });
     });
 
