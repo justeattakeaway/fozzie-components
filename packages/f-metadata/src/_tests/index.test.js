@@ -41,7 +41,6 @@ describe('f-metadata', () => {
         const instance = await initialiseBraze({ ...settings, disableComponent: true });
 
         // Assert
-        expect(appboySDK.initialize).not.toHaveBeenCalled();
         expect(instance).toBe(null);
     });
 
