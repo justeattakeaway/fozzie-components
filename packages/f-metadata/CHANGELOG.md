@@ -5,13 +5,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 2.6.0
 ------------------------------
-*June 5, 2020*
+*June 16, 2020*
 
 ### Added
 - Check for previously initialised Braze instances on window and skip import of the SDK
 
 ### Changed
-- Split codebase and add bundling through parcel
 - ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails)
 
 
