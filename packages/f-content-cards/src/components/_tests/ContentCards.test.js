@@ -26,6 +26,10 @@ const createCard = type => ({
     }
 });
 
+const createAppboyInstance = cardTypes => ({
+    cards: cardTypes.map(type => createCard(type))
+});
+
 describe('ContentCards', () => {
     it('should call intitialiseBraze when mounted', () => {
         // Arrange & Act
@@ -43,12 +47,10 @@ describe('ContentCards', () => {
         expect(settings.enableLogging).toBe(false);
     });
 
-    it('should format and display `Promotion_Card_1` and `Promotion_Card_2`', async () => {
+    it('should format and display allowed card types', async () => {
         // Arrange
-        const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2'];
-        const appboy = {
-            cards: cardTypes.map(type => createCard(type))
-        };
+        const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
+        const appboy = createAppboyInstance(cardTypes);
 
         // Act
         const instance = shallowMount(ContentCards, {
@@ -62,5 +64,6 @@ describe('ContentCards', () => {
 
         // Assert
         expect(instance.findAllComponents(cardTemplates.PromotionCard).length).toBe(2);
+        expect(instance.findAllComponents(cardTemplates.PostOrderCard).length).toBe(1);
     });
 });
