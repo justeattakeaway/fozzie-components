@@ -3,6 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.3.1
+------------------------------
+*June 11 2020*
+
+### Changed
+- Fixed linting issue.
+
+v0.3.0
+------------------------------
+*June 10 2020*
+
+### Changed
+- Additional prop to indicate card heading text alignment.
+- Storybook updated for card component.
 
 Latest (roll into next release)
 ------------------------------

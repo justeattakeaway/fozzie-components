@@ -11,7 +11,8 @@
             v-if="cardHeading"
             :class="[
                 'beta',
-                $style['c-card-heading']
+                $style['c-card-heading'],
+                (cardHeadingPosition !== 'left' ? $style[`c-card--${cardHeadingPosition}`] : '')
             ]"
             data-test="card-heading"
         >
@@ -36,6 +37,11 @@ export default {
         cardHeading: {
             type: String,
             default: ''
+        },
+        cardHeadingPosition: {
+            type: String,
+            default: 'left',
+            validator: value => ['left', 'right', 'center'].indexOf(value) !== -1
         },
         isRounded: {
             type: Boolean,
@@ -119,6 +125,11 @@ $card--pageContentWrapper-width           : 460px;
         margin-bottom: spacing(x2);
     }
 
+    .c-card--center {
+        text-align: center;
+    }
 
-
+    .c-card--right {
+        text-align: right;
+    }
 </style>

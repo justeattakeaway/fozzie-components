@@ -4,7 +4,14 @@
         :card-heading="title"
         is-rounded
         has-outline
-        is-page-content-wrapper>
+        is-page-content-wrapper
+        card-heading-position="center">
+        <p
+            v-if="shouldShowLoginLink"
+            :class="$style['c-loginLink']"
+            data-test-id="create-account-login-link">
+            {{ loginSettings.preLinkText }} <a :href="loginSettings.url">{{ loginSettings.linkText }}</a>
+        </p>
         <form
             type="post"
             :class="$style['o-form']"
@@ -148,6 +155,10 @@ export default {
         createAccountUrl: {
             type: String,
             required: true
+        },
+        loginSettings: {
+            type: Object,
+            default: () => {}
         }
     },
 
@@ -188,6 +199,9 @@ export default {
         // Returns true if email validation conditions are not met and if the field has been `touched` by a user
         shouldShowPasswordRequiredError () {
             return (this.$v.password.$invalid && !this.$v.password.required) && this.$v.password.$dirty;
+        },
+        shouldShowLoginLink () {
+            return this.loginSettings && this.loginSettings.linkText && this.loginSettings.url;
         }
     },
 
@@ -248,21 +262,29 @@ export default {
     @include font-size(base--scaleUp);
 }
 
-    .o-form-error {
-        display: flex;
-        align-items: center;
-        color: $red;
-        @include font-size(base);
-        margin-top: spacing();
-    }
-        .o-form-error-icon {
-            width: 16px;
-            height: 16px;
-            margin-right: spacing(x0.5);
-        }
+.o-form-error {
+    display: flex;
+    align-items: center;
+    color: $red;
+    @include font-size(base);
+    margin-top: spacing();
+}
+
+.o-form-error-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: spacing(x0.5);
+}
 
 * + .o-form {
     margin-top: spacing(x2);
 }
 
+.c-loginLink {
+    text-align: center;
+    a {
+        color: $blue;
+        text-decoration: none;
+    }
+}
 </style>

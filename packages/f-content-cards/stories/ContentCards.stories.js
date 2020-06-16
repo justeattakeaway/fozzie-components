@@ -16,7 +16,7 @@ export const ContentCardscomponent = () => ({
             default: text('User ID', '')
         }
     },
-    template: '<div><content-cards :userId="userId" :apiKey="apiKey" /></div>'
+    template: '<content-cards :userId="userId" :apiKey="apiKey" />'
 });
 
 ContentCardscomponent.story = {

@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.3.0
 ------------------------------
-*June 9th, 2020*
+*June 16th, 2020*
 
 ### Added
 - Post Order Content Card

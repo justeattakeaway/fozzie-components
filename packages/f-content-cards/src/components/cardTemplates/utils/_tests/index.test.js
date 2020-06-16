@@ -22,7 +22,7 @@ describe('contentCards › utils › normaliseCardType', () => {
         await Promise.all(tests.map(({ input, output }) => expect(normaliseCardType(input)).toBe(output)));
     });
 
-    it('Should return the input if type is not equal to string', async () => {
+    it('Should return null if type is not equal to string', async () => {
         // Assemble
         const tests = [
             undefined,
@@ -33,6 +33,6 @@ describe('contentCards › utils › normaliseCardType', () => {
         ];
 
         // Act & Assert
-        await Promise.all(tests.map(input => expect(normaliseCardType(input)).toBe(input)));
+        await Promise.all(tests.map(input => expect(normaliseCardType(input)).toBe(null)));
     });
 });
