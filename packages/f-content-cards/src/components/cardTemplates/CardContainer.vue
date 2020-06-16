@@ -96,12 +96,6 @@ export default {
         isAnniversaryCard () {
             return this.type === 'Anniversary_Card_1';
         }
-    },
-    watch: {
-        card: function (newCard) {
-            console.log({ newCard });
-            this.card = newCard;
-        }
     }
 };
 </script>
