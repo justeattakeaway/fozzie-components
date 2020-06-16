@@ -6,8 +6,8 @@
         data-test-id="contentCard-link"
     >
         <div
-            :style="{ backgroundImage: 'url(' + image + ')' }"
-            class="c-restaurantCard-bgImg" />
+            :style="image && { backgroundImage: 'url(' + image + ')' }"
+            :class="[{ 'c-restaurantCard-bgImg': !!image }]" />
         <div class="c-restaurantCard-info">
             <img
                 v-if="icon"
@@ -95,6 +95,12 @@ export default {
 
         isAnniversaryCard () {
             return this.type === 'Anniversary_Card_1';
+        }
+    },
+    watch: {
+        card: function (newCard) {
+            console.log({ newCard });
+            this.card = newCard;
         }
     }
 };
