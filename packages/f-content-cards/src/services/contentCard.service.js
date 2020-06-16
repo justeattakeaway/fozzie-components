@@ -4,6 +4,7 @@ import findIndex from 'lodash.findindex';
 export const enabledCardTypes = [
     'Anniversary_Card_1',
     'Header_Card',
+    'Post_Order_Card_1',
     'Promotion_Card_1',
     'Promotion_Card_2',
     'Restaurant_FTC_Offer_Card',
