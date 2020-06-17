@@ -1,6 +1,8 @@
 <template>
     <div :class="['c-postOrderCard' , { 'c-postOrderCard--condensed': !image && icon }]">
-        <h2>{{ title }}</h2>
+        <h2 v-if="title">
+            {{ title }}
+        </h2>
         <card-container
             :card="card"
             :container-title="containerTitle"
