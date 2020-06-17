@@ -35,6 +35,10 @@ export default {
         title: {
             type: String,
             default: ''
+        },
+        enabledCardTypes: {
+            type: Array,
+            default: () => ([])
         }
     },
     data () {
@@ -59,12 +63,14 @@ export default {
         },
         contentCards (appboy) {
             if (!appboy) return;
-            const { cards, titleCard } = new ContentCards(appboy)
-                        .removeDuplicateContentCards()
-                        .filterCards()
-                        .getTitleCard()
-                        .arrangeCardsByTitles()
-                        .output();
+            const { cards, titleCard } = new ContentCards(appboy, {
+                enabledCardTypes: this.enabledCardTypes
+            })
+                .removeDuplicateContentCards()
+                .filterCards()
+                .getTitleCard()
+                .arrangeCardsByTitles()
+                .output();
             this.cards = cards;
             this.titleCard = titleCard;
         },
@@ -391,10 +397,6 @@ export default {
     }
 
     .c-postOrderCard {
-        background: white;
-        border: 1px solid #eaeaea;
-        border-radius: 8px;
-        padding: 24px;
         width: 100%;
 
         &.c-postOrderCard--condensed {
@@ -429,15 +431,15 @@ export default {
             background: none;
             box-shadow: none;
             position: static;
+            display: block;
             text-align: left;
-            padding: 24px 0 0;
             min-height: 0;
+            border: 1px solid #eaeaea;
+            border-radius: 0 0 8px 8px;
+            padding: 24px;
         }
 
         .c-contentCard-title {
-            position: relative;
-            display: block;
-            width: 100%;
             text-align: left;
             margin: 0 0 16px;
         }
@@ -457,7 +459,7 @@ export default {
 
         .c-contentCard-bgImg {
             min-height: 253px;
-            border-radius: 8px;
+            border-radius: 8px 8px 0 0;
         }
     }
 
