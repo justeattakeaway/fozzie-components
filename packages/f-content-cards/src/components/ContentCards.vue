@@ -384,4 +384,75 @@ export default {
         color: $color-link-default;
         text-align: right;
     }
+
+    .c-postOrderCard {
+        background: white;
+        border: 1px solid #eaeaea;
+        border-radius: 8px;
+        padding: 24px;
+        width: 40%;
+
+        &.c-postOrderCard--condensed {
+            .c-restaurantCard-bgImg {
+                display: none;
+            }
+
+            .c-restaurantCard-thumbnail {
+                left: 0;
+                top: 0;
+            }
+
+            .c-restaurantCard-info {
+                padding: 0 0 0 72px;
+            }
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .c-restaurantCard-thumbnail {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            margin: 0;
+            border: none;
+        }
+
+        .c-restaurantCard-info {
+            background: none;
+            box-shadow: none;
+            position: static;
+            text-align: left;
+            padding: 24px 0 0;
+            min-height: 0;
+        }
+
+        .c-restaurantCard-title {
+            position: relative;
+            display: block;
+            width: 100%;
+            text-align: left;
+            margin: 0 0 16px;
+        }
+
+        .c-restaurantCard-subTitle {
+            text-align: left;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        a.c-restaurantCard {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .c-restaurantCard-bgImg {
+            min-height: 253px;
+            border-radius: 8px;
+        }
+    }
 </style>
