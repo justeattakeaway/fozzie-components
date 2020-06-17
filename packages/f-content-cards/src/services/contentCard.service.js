@@ -26,13 +26,16 @@ class ContentCards {
      * Create a ContentCards instance
      * @param {object} appboy - Appboy SDK instance
      * @param {object[]} appboy.cards
+     * @param {object} opts - Options
+     * @param {string[]} opts.enabledCardTypes
+     * @property {string[]} this.enabledCardTypes
      * @property {object} this.appboy
      * @property {object[]} this.cards
      * @property {object} this.titleCard
      */
-    constructor (appboy = {}, opts) {
+    constructor (appboy = {}, opts = {}) {
         const { cards = [] } = appboy;
-        const { enabledCardTypes } = opts;
+        const { enabledCardTypes = [] } = opts;
         this.enabledCardTypes = enabledCardTypes.length ? enabledCardTypes : defaultEnabledCardTypes;
         this.appboy = appboy;
         this.cards = cards;
