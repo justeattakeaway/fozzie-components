@@ -397,6 +397,9 @@ export default {
     }
 
     .c-postOrderCard {
+        border: 1px solid #eaeaea;
+        border-radius: 8px;
+        padding: 24px;
         width: 100%;
 
         &.c-postOrderCard--condensed {
@@ -434,9 +437,7 @@ export default {
             display: block;
             text-align: left;
             min-height: 0;
-            border: 1px solid #eaeaea;
-            border-radius: 0 0 8px 8px;
-            padding: 24px;
+            padding: 24px 0 0 0;
         }
 
         .c-contentCard-title {
@@ -459,7 +460,7 @@ export default {
 
         .c-contentCard-bgImg {
             min-height: 253px;
-            border-radius: 8px 8px 0 0;
+            border-radius: 8px;
         }
     }
 
