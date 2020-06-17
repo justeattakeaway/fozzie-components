@@ -6,8 +6,8 @@
         data-test-id="contentCard-link"
     >
         <div
-            v-lazy:background-image="image"
-            class="c-contentCard-bgImg" />
+            :v-lazy:background-image="image"
+            :class="[{ 'c-restaurantCard-bgImg': !!image }]" />
         <div class="c-contentCard-info">
             <img
                 v-if="icon"
