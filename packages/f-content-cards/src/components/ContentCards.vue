@@ -395,7 +395,7 @@ export default {
         border: 1px solid #eaeaea;
         border-radius: 8px;
         padding: 24px;
-        width: 40%;
+        width: 100%;
 
         &.c-postOrderCard--condensed {
             .c-contentCard-bgImg {
