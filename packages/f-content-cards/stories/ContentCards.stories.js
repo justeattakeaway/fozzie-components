@@ -1,5 +1,6 @@
-import { withKnobs, text } from '@storybook/addon-knobs';
+import { withKnobs, array, text } from '@storybook/addon-knobs';
 import ContentCards from '../src/components/ContentCards.vue';
+import { defaultEnabledCardTypes } from '../src/services/contentCard.service';
 
 export default {
     title: 'Components/Organisms',
@@ -17,6 +18,9 @@ export const ContentCardscomponent = () => ({
         },
         title: {
             default: text('Title', 'Promotional Offers')
+        },
+        enabledCardTypes: {
+            default: array('Enabled Card Types', defaultEnabledCardTypes)
         }
     },
     template: '<content-cards :userId="userId" :apiKey="apiKey" :title="title" />'

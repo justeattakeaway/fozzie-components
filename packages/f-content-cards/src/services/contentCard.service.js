@@ -7,14 +7,9 @@ import findIndex from 'lodash.findindex';
  * @type {string[]}
  */
 export const defaultEnabledCardTypes = [
-    'Anniversary_Card_1',
-    'Header_Card',
     'Post_Order_Card_1',
     'Promotion_Card_1',
-    'Promotion_Card_2',
-    'Restaurant_FTC_Offer_Card',
-    'Terms_And_Conditions_Card',
-    'Voucher_Card_1'
+    'Promotion_Card_2'
 ];
 
 /**
