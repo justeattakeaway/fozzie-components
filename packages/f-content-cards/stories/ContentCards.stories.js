@@ -10,10 +10,10 @@ export const ContentCardscomponent = () => ({
     components: { ContentCards },
     props: {
         apiKey: {
-            default: text('API Key', '3360df52-217f-41e9-9c9c-0dcda2538025')
+            default: text('API Key', '')
         },
         userId: {
-            default: text('User ID', 'XHfk/Wgf3psjtfK1oNSOMWsuKPA=')
+            default: text('User ID', '')
         },
         title: {
             default: text('Title', 'Promotional Offers')
