@@ -426,6 +426,7 @@ export default {
                 padding: 0 0 0 72px;
 
                 @include media('<mid') {
+                    position: relative;
                     padding: 24px 24px 24px 72px;
                     border-radius: 8px;
                 }
@@ -455,7 +456,6 @@ export default {
             padding: 24px 0 0 0;
 
             @include media ('<mid') {
-                position: relative;
                 border: 1px solid #eaeaea;
                 padding: 24px;
                 border-radius: 0 0 8px 8px;
