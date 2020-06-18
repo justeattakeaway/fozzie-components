@@ -402,6 +402,11 @@ export default {
         padding: 24px;
         width: 100%;
 
+        @include media ('<mid') {
+            border: none;
+            padding: 0;
+        }
+
         &.c-postOrderCard--condensed {
             .c-contentCard-bgImg {
                 display: none;
@@ -410,10 +415,20 @@ export default {
             .c-contentCard-thumbnail {
                 left: 0;
                 top: 0;
+
+                @include media('<mid') {
+                    top: 16px;
+                    left: 16px;
+                }
             }
 
             .c-contentCard-info {
                 padding: 0 0 0 72px;
+
+                @include media('<mid') {
+                    padding: 24px 24px 24px 72px;
+                    border-radius: 8px;
+                }
             }
         }
 
@@ -438,6 +453,13 @@ export default {
             text-align: left;
             min-height: 0;
             padding: 24px 0 0 0;
+
+            @include media ('<mid') {
+                position: relative;
+                border: 1px solid #eaeaea;
+                padding: 24px;
+                border-radius: 0 0 8px 8px;
+            }
         }
 
         .c-contentCard-title {
@@ -461,6 +483,10 @@ export default {
         .c-contentCard-bgImg {
             min-height: 253px;
             border-radius: 8px;
+
+            @include media ('<mid') {
+                border-radius: 8px 8px 0 0;
+            }
         }
     }
 
