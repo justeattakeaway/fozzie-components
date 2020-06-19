@@ -61,7 +61,7 @@ export default {
             extras = {},
             imageUrl,
             title,
-            description: subtitle,
+            description: subtitle
         } = this.card;
         const {
             icon_1: icon,
