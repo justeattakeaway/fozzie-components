@@ -1,4 +1,4 @@
-import ContentCardService, { enabledCardTypes } from '../contentCard.service';
+import ContentCardService, { defaultEnabledCardTypes } from '../contentCard.service';
 
 describe('`contentCardService`', () => {
     it('should exist', () => {
@@ -58,6 +58,33 @@ describe('`contentCardService`', () => {
     });
 
     describe('`filterCards`', () => {
+        it('should allow a user defined list of filtered content cards', () => {
+            // Arrange
+            const enabledCardTypes = ['Custom_Card_1'];
+            const cards = [
+                {
+                    title: 'Promo Card 1',
+                    extras: {
+                        customCardType: 'Promotion_Card_1'
+                    }
+                },
+                {
+                    title: 'Custom Card',
+                    extras: {
+                        customCardType: 'Custom_Card_1'
+                    }
+                }
+            ];
+            const service = new ContentCardService({ cards }, { enabledCardTypes });
+
+            // Act
+            const { cards: result } = service.filterCards().output();
+            const areAllCardsSupported = Object.values(result).every(({ extras: { customCardType } }) => enabledCardTypes.includes(customCardType));
+
+            // Assert
+            expect(areAllCardsSupported).toBe(true);
+        });
+
         describe('AND `custom_card_type` exists', () => {
             it('should filter content cards by, `promotion_card_1` & `promotion_card_2`', () => {
                 // Arrange
@@ -81,7 +108,7 @@ describe('`contentCardService`', () => {
 
                 // Act
                 const { cards: result } = service.filterCards().output();
-                const areAllCardsSupported = Object.values(result).every(({ extras: { customCardType } }) => enabledCardTypes.includes(customCardType));
+                const areAllCardsSupported = Object.values(result).every(({ extras: { customCardType } }) => defaultEnabledCardTypes.includes(customCardType));
 
                 // Assert
                 expect(areAllCardsSupported).toBe(true);

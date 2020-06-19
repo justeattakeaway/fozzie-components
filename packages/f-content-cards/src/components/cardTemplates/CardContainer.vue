@@ -62,10 +62,8 @@ export default {
             imageUrl,
             title,
             description: subtitle,
-            linkText
         } = this.card;
         const {
-            button_1: button,
             icon_1: icon,
             image_1: image,
             order,
@@ -76,7 +74,6 @@ export default {
         return {
             cardId,
             ctaUrl,
-            ctaText: button || linkText,
             image: image || imageUrl,
             icon,
             title,

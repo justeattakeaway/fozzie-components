@@ -97,6 +97,8 @@ export default {
     // Currently consists of a main image, optional restaurant logo thumbnail
     // And then info text below (header, tags, description)
 
+    $contentCardRadius: 8px;
+
     .c-contentCards {
         margin-top: spacing(x5);
         margin-bottom: spacing(x5);
@@ -397,9 +399,9 @@ export default {
     }
 
     .c-postOrderCard {
-        border: 1px solid #eaeaea;
-        border-radius: 8px;
-        padding: 24px;
+        border: 1px solid $color-border;
+        border-radius: $contentCardRadius;
+        padding: spacing(x3);
         width: 100%;
 
         @include media ('<mid') {
@@ -407,41 +409,16 @@ export default {
             padding: 0;
         }
 
-        &.c-postOrderCard--condensed {
-            .c-contentCard-bgImg {
-                display: none;
-            }
+        .c-postOrderCard-title {
+            @include font-size(large);
 
-            .c-contentCard-thumbnail {
-                left: 0;
-                top: 0;
-
-                @include media('<mid') {
-                    top: 16px;
-                    left: 16px;
-                }
-            }
-
-            .c-contentCard-info {
-                padding: 0 0 0 72px;
-
-                @include media('<mid') {
-                    position: relative;
-                    padding: 24px 24px 24px 72px;
-                    border-radius: 8px;
-                }
-            }
-        }
-
-        h2 {
-            font-size: 24px;
-            margin-bottom: 16px;
+            margin-bottom: spacing(x2);
         }
 
         .c-contentCard-thumbnail {
             position: absolute;
-            top: 16px;
-            left: 16px;
+            top: spacing(x2);
+            left: spacing(x2);
             margin: 0;
             border: none;
         }
@@ -453,27 +430,28 @@ export default {
             display: block;
             text-align: left;
             min-height: 0;
-            padding: 24px 0 0 0;
+            padding: spacing(x3) 0 0 0;
 
             @include media ('<mid') {
-                border: 1px solid #eaeaea;
-                padding: 24px;
-                border-radius: 0 0 8px 8px;
+                border: 1px solid $color-border;
+                padding: spacing(x3);
+                border-radius: 0 0 $contentCardRadius $contentCardRadius;
             }
         }
 
         .c-contentCard-title {
             text-align: left;
-            margin: 0 0 16px;
+            margin: 0 0 spacing(x2);
         }
 
         .c-contentCard-subTitle {
+            @include font-size(base);
+
             text-align: left;
-            font-size: 14px;
             margin: 0;
         }
 
-        a.c-contentCard {
+        .c-contentCard {
             position: relative;
             margin: 0;
             padding: 0;
@@ -481,11 +459,37 @@ export default {
         }
 
         .c-contentCard-bgImg {
-            min-height: 253px;
+            min-height: 250px;
             border-radius: 8px;
 
             @include media ('<mid') {
-                border-radius: 8px 8px 0 0;
+                border-radius: $contentCardRadius $contentCardRadius 0 0;
+            }
+        }
+    }
+
+    .c-postOrderCard--condensed {
+        .c-contentCard-bgImg {
+            display: none;
+        }
+
+        .c-contentCard-thumbnail {
+            left: 0;
+            top: 0;
+
+            @include media('<mid') {
+                top: spacing(x2);
+                left: spacing(x2);
+            }
+        }
+
+        .c-contentCard-info {
+            padding: 0 0 0 spacing(x9);
+
+            @include media('<mid') {
+                position: relative;
+                padding: spacing(x3) spacing(x3) spacing(x3) spacing(x9);
+                border-radius: $contentCardRadius;
             }
         }
     }
