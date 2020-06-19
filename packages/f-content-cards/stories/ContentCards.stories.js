@@ -23,7 +23,7 @@ export const ContentCardscomponent = () => ({
             default: array('Enabled Card Types', defaultEnabledCardTypes)
         }
     },
-    template: '<content-cards :userId="userId" :apiKey="apiKey" :title="title" />'
+    template: '<content-cards :userId="userId" :apiKey="apiKey" :title="title" :enabledCardTypes="enabledCardTypes" />'
 });
 
 ContentCardscomponent.story = {
