@@ -186,22 +186,22 @@ describe('`contentCardService`', () => {
                     title: 'Wasp-17b',
                     extras: {
                         updated: '2020-02-17T13:23:58.000Z',
-                        custom_card_type: 'promotion_card_1'
-                    } // eslint-disable-line camelcase
+                        custom_card_type: 'promotion_card_1' // eslint-disable-line camelcase
+                    }
                 },
                 {
                     title: 'Wasp-17b',
                     extras: {
                         updated: '2020-02-17T12:28:58.000Z',
-                        custom_card_type: 'promotion_card_1'
-                    } // eslint-disable-line camelcase
+                        custom_card_type: 'promotion_card_1' // eslint-disable-line camelcase
+                    }
                 },
                 {
                     title: 'Jupiter Hot',
                     extras: {
                         updated: '2020-02-17T18:23:58.000Z',
-                        custom_card_type: 'promotion_card_3'
-                    } // eslint-disable-line camelcase
+                        custom_card_type: 'promotion_card_3' // eslint-disable-line camelcase
+                    }
                 }
             ];
             const service = new ContentCardService({ cards });
@@ -289,22 +289,22 @@ describe('`contentCardService`', () => {
                             pinned: '11 August 2009',
                             extras: {
                                 updated: '2020-02-17T13:23:58.000Z',
-                                custom_card_type: 'Terms_And_Conditions_Card'
-                            } // eslint-disable-line camelcase
+                                custom_card_type: 'Terms_And_Conditions_Card' // eslint-disable-line camelcase
+                            }
                         },
                         {
                             title: 'Wasp-17b',
                             extras: {
                                 updated: '2020-02-17T12:28:58.000Z',
-                                custom_card_type: 'promotion_card_1'
-                            } // eslint-disable-line camelcase
+                                custom_card_type: 'promotion_card_1' // eslint-disable-line camelcase
+                            }
                         },
                         {
                             title: 'Jupiter Hot',
                             extras: {
                                 updated: '2020-02-17T18:23:58.000Z',
-                                custom_card_type: 'promotion_card_3'
-                            } // eslint-disable-line camelcase
+                                custom_card_type: 'promotion_card_3' // eslint-disable-line camelcase
+                            }
                         }
                     ];
 
@@ -315,23 +315,23 @@ describe('`contentCardService`', () => {
                             pinned: '11 August 2009',
                             extras: {
                                 updated: '2020-02-17T13:23:58.000Z',
-                                custom_card_type: 'Terms_And_Conditions_Card'
-                            } // eslint-disable-line camelcase
+                                custom_card_type: 'Terms_And_Conditions_Card' // eslint-disable-line camelcase
+                            }
                         },
                         cards: [
                             {
                                 title: 'Wasp-17b',
                                 extras: {
                                     updated: '2020-02-17T12:28:58.000Z',
-                                    custom_card_type: 'promotion_card_1'
-                                } // eslint-disable-line camelcase
+                                    custom_card_type: 'promotion_card_1' // eslint-disable-line camelcase
+                                }
                             },
                             {
                                 title: 'Jupiter Hot',
                                 extras: {
                                     updated: '2020-02-17T18:23:58.000Z',
-                                    custom_card_type: 'promotion_card_3'
-                                } // eslint-disable-line camelcase
+                                    custom_card_type: 'promotion_card_3' // eslint-disable-line camelcase
+                                }
                             }
                         ]
                     };
@@ -354,22 +354,22 @@ describe('`contentCardService`', () => {
                             title: 'Wasp-17b',
                             extras: {
                                 updated: '2020-02-17T13:23:58.000Z',
-                                custom_card_type: 'promotion_card_1'
-                            } // eslint-disable-line camelcase
+                                custom_card_type: 'promotion_card_1' // eslint-disable-line camelcase
+                            }
                         },
                         {
                             title: 'Wasp-17b',
                             extras: {
                                 updated: '2020-02-17T12:28:58.000Z',
-                                custom_card_type: 'promotion_card_1'
-                            } // eslint-disable-line camelcase
+                                custom_card_type: 'promotion_card_1' // eslint-disable-line camelcase
+                            }
                         },
                         {
                             title: 'Jupiter Hot',
                             extras: {
                                 updated: '2020-02-17T18:23:58.000Z',
-                                custom_card_type: 'promotion_card_3'
-                            } // eslint-disable-line camelcase
+                                custom_card_type: 'promotion_card_3' // eslint-disable-line camelcase
+                            }
                         }
                     ];
 
@@ -380,22 +380,22 @@ describe('`contentCardService`', () => {
                                 title: 'Wasp-17b',
                                 extras: {
                                     updated: '2020-02-17T13:23:58.000Z',
-                                    custom_card_type: 'promotion_card_1'
-                                } // eslint-disable-line camelcase
+                                    custom_card_type: 'promotion_card_1' // eslint-disable-line camelcase
+                                }
                             },
                             {
                                 title: 'Wasp-17b',
                                 extras: {
                                     updated: '2020-02-17T12:28:58.000Z',
-                                    custom_card_type: 'promotion_card_1'
-                                } // eslint-disable-line camelcase
+                                    custom_card_type: 'promotion_card_1' // eslint-disable-line camelcase
+                                }
                             },
                             {
                                 title: 'Jupiter Hot',
                                 extras: {
                                     updated: '2020-02-17T18:23:58.000Z',
-                                    custom_card_type: 'promotion_card_3'
-                                } // eslint-disable-line camelcase
+                                    custom_card_type: 'promotion_card_3' // eslint-disable-line camelcase
+                                }
                             }
                         ]
                     };
