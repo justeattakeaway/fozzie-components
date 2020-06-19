@@ -460,7 +460,7 @@ export default {
 
         .c-contentCard-bgImg {
             min-height: 250px;
-            border-radius: 8px;
+            border-radius: $contentCardRadius;
 
             @include media ('<mid') {
                 border-radius: $contentCardRadius $contentCardRadius 0 0;

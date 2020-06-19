@@ -3,12 +3,13 @@ import PostOrderCard from '../PostOrderCard.vue';
 
 const button = '__BUTTON__';
 const linkText = '__LINK_TEXT__';
+const customCardType = 'Post_Order_Card_1';
 
 const card = {
     linkText,
     extras: {
         button_1: button, // eslint-disable-line camelcase
-        custom_card_type: 'Post_Order_Card_1' // eslint-disable-line camelcase
+        custom_card_type: customCardType // eslint-disable-line camelcase
     }
 };
 
@@ -27,10 +28,14 @@ describe('contentCards › PostOrderCard', () => {
 
     it('should fallback to linkText if button_1 is unavailable', () => {
         // Arrange & Act
-        card.extras.button_1 = null; // eslint-disable-line camelcase
         const wrapper = shallowMount(PostOrderCard, {
             propsData: {
-                card
+                card: {
+                    linkText,
+                    extras: {
+                        custom_card_type: customCardType // eslint-disable-line camelcase
+                    }
+                }
             }
         });
 
