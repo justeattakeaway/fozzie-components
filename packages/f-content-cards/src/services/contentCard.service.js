@@ -6,15 +6,10 @@ import findIndex from 'lodash.findindex';
  *
  * @type {string[]}
  */
-export const enabledCardTypes = [
-    'Anniversary_Card_1',
-    'Header_Card',
+export const defaultEnabledCardTypes = [
     'Post_Order_Card_1',
     'Promotion_Card_1',
-    'Promotion_Card_2',
-    'Restaurant_FTC_Offer_Card',
-    'Terms_And_Conditions_Card',
-    'Voucher_Card_1'
+    'Promotion_Card_2'
 ];
 
 /**
@@ -26,12 +21,17 @@ class ContentCards {
      * Create a ContentCards instance
      * @param {object} appboy - Appboy SDK instance
      * @param {object[]} appboy.cards
+     * @param {object} opts - Options
+     * @param {string[]} opts.enabledCardTypes
+     * @property {string[]} this.enabledCardTypes
      * @property {object} this.appboy
      * @property {object[]} this.cards
      * @property {object} this.titleCard
      */
-    constructor (appboy = {}) {
+    constructor (appboy = {}, opts = {}) {
         const { cards = [] } = appboy;
+        const { enabledCardTypes = [] } = opts;
+        this.enabledCardTypes = enabledCardTypes.length ? enabledCardTypes : defaultEnabledCardTypes;
         this.appboy = appboy;
         this.cards = cards;
         this.titleCard = {};
@@ -116,7 +116,7 @@ class ContentCards {
             const { custom_card_type: type } = extras;
             if (!type) return false;
 
-            return enabledCardTypes.includes(type);
+            return this.enabledCardTypes.includes(type);
         });
         return this;
     }
