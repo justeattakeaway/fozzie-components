@@ -7,6 +7,7 @@
                 :is="handleCustomCardType(contentCard.extras.custom_card_type)"
                 :key="cardIndex"
                 :card="contentCard"
+                :title="title"
             />
         </template>
     </div>
@@ -30,6 +31,14 @@ export default {
         userId: {
             type: String,
             default: ''
+        },
+        title: {
+            type: String,
+            default: ''
+        },
+        enabledCardTypes: {
+            type: Array,
+            default: () => ([])
         }
     },
     data () {
@@ -54,12 +63,14 @@ export default {
         },
         contentCards (appboy) {
             if (!appboy) return;
-            const { cards, titleCard } = new ContentCards(appboy)
-                        .removeDuplicateContentCards()
-                        .filterCards()
-                        .getTitleCard()
-                        .arrangeCardsByTitles()
-                        .output();
+            const { cards, titleCard } = new ContentCards(appboy, {
+                enabledCardTypes: this.enabledCardTypes
+            })
+                .removeDuplicateContentCards()
+                .filterCards()
+                .getTitleCard()
+                .arrangeCardsByTitles()
+                .output();
             this.cards = cards;
             this.titleCard = titleCard;
         },
@@ -85,6 +96,8 @@ export default {
     // Styling for a card that holds data on a restaurant
     // Currently consists of a main image, optional restaurant logo thumbnail
     // And then info text below (header, tags, description)
+
+    $contentCardRadius: 8px;
 
     .c-contentCards {
         margin-top: spacing(x5);
@@ -383,5 +396,101 @@ export default {
         font-weight: $font-weight-bold;
         color: $color-link-default;
         text-align: right;
+    }
+
+    .c-postOrderCard {
+        border: 1px solid $color-border;
+        border-radius: $contentCardRadius;
+        padding: spacing(x3);
+        width: 100%;
+
+        @include media ('<mid') {
+            border: none;
+            padding: 0;
+        }
+
+        .c-postOrderCard-title {
+            @include font-size(large);
+
+            margin-bottom: spacing(x2);
+        }
+
+        .c-contentCard-thumbnail {
+            position: absolute;
+            top: spacing(x2);
+            left: spacing(x2);
+            margin: 0;
+            border: none;
+        }
+
+        .c-contentCard-info {
+            background: none;
+            box-shadow: none;
+            position: static;
+            display: block;
+            text-align: left;
+            min-height: 0;
+            padding: spacing(x3) 0 0 0;
+
+            @include media ('<mid') {
+                border: 1px solid $color-border;
+                padding: spacing(x3);
+                border-radius: 0 0 $contentCardRadius $contentCardRadius;
+            }
+        }
+
+        .c-contentCard-title {
+            text-align: left;
+            margin: 0 0 spacing(x2);
+        }
+
+        .c-contentCard-subTitle {
+            @include font-size(base);
+
+            text-align: left;
+            margin: 0;
+        }
+
+        .c-contentCard {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .c-contentCard-bgImg {
+            min-height: 250px;
+            border-radius: $contentCardRadius;
+
+            @include media ('<mid') {
+                border-radius: $contentCardRadius $contentCardRadius 0 0;
+            }
+        }
+    }
+
+    .c-postOrderCard--condensed {
+        .c-contentCard-bgImg {
+            display: none;
+        }
+
+        .c-contentCard-thumbnail {
+            left: 0;
+            top: 0;
+
+            @include media('<mid') {
+                top: spacing(x2);
+                left: spacing(x2);
+            }
+        }
+
+        .c-contentCard-info {
+            padding: 0 0 0 spacing(x9);
+
+            @include media('<mid') {
+                position: relative;
+                padding: spacing(x3) spacing(x3) spacing(x3) spacing(x9);
+                border-radius: $contentCardRadius;
+            }
+        }
     }
 </style>

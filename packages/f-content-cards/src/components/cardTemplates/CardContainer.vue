@@ -6,8 +6,8 @@
         data-test-id="contentCard-link"
     >
         <div
-            :v-lazy:background-image="image"
-            :class="[{ 'c-restaurantCard-bgImg': !!image }]" />
+            v-lazy:background-image="image"
+            :class="[{ 'c-contentCard-bgImg': !!image }]" />
         <div class="c-contentCard-info">
             <img
                 v-if="icon"
@@ -61,11 +61,9 @@ export default {
             extras = {},
             imageUrl,
             title,
-            description: subtitle,
-            linkText
+            description: subtitle
         } = this.card;
         const {
-            button_1: button,
             icon_1: icon,
             image_1: image,
             order,
@@ -76,7 +74,6 @@ export default {
         return {
             cardId,
             ctaUrl,
-            ctaText: button || linkText,
             image: image || imageUrl,
             icon,
             title,
