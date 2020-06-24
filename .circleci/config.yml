@@ -71,9 +71,9 @@ jobs:
       - set_deploy_key
       - checkout
       - restore_cache:
-      name: Restore Yarn Package Cache
-      keys:
-        - yarn-packages-{{ checksum "yarn.lock" }}
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - build_packages
       - run:
