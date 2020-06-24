@@ -4,11 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+v1.0.0
 ------------------------------
-*June 4, 2020*
+*June 24, 2020*
 
 ### Changed
+- A lot! Component has been modified to pull in the new `f-icons` v2 package and build vue components from those icons. The main reason for making these changes is to allow for tree-shaking of `f-vue-icons` (previously, all icons had to be loaded in, which isn't good for performance when an application may only use a couple of the icons).
+- Icons are now given a class of `c-ficon` (changed from `c-icon`). This is to make it really clear which version of `f-vue-icons` an application is now using.
+- Some logo names have changed between the last beta release and the full v1 release. This was just part of normalising the icon names and so will need to be updated in consuming packages (the main logo names have changed for instance).
 - ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails).
 
 

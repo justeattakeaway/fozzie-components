@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 768 206"
       },
-      "class": "ficon ficon-rays-coloured-mid"
+      "class": "c-ficon c-ficon--rays-coloured-mid"
     }, ctx.data]), [h("g", {
       attrs: {
         fill: "none",

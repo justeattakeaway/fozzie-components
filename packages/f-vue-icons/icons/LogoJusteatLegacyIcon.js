@@ -1,6 +1,6 @@
 import _mergeJSXProps from "babel-helper-vue-jsx-merge-props";
 export default {
-  name: 'JeLogoNoColourIcon',
+  name: 'LogoJusteatLegacyIcon',
   props: {},
   functional: true,
   render: function render(h, ctx) {
@@ -11,10 +11,9 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 165 32"
       },
-      "class": "ficon ficon-je-logo-no-colour"
+      "class": "c-ficon c-ficon--logo-justeat-legacy"
     }, ctx.data]), [h("g", {
       attrs: {
-        fill: "none",
         "fill-rule": "evenodd"
       }
     }, [h("path", {

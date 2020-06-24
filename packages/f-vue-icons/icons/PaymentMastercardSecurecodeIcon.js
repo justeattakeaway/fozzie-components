@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 67 24"
       },
-      "class": "ficon ficon-payment-mastercard-securecode"
+      "class": "c-ficon c-ficon--payment-mastercard-securecode"
     }, ctx.data]), [h("g", {
       attrs: {
         fill: "none",

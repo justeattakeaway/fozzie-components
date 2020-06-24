@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 43 26"
       },
-      "class": "ficon ficon-payment-dankort"
+      "class": "c-ficon c-ficon--payment-dankort"
     }, ctx.data]), [h("defs", [h("linearGradient", {
       attrs: {
         id: "a",

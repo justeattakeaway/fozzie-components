@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 20 20"
       },
-      "class": "ficon ficon-vegetarian"
+      "class": "c-ficon c-ficon--vegetarian"
     }, ctx.data]), [h("path", {
       attrs: {
         fill: "#028A00",

@@ -10,7 +10,7 @@ export default {
       attrs: {
         xmlns: "http://www.w3.org/2000/svg"
       },
-      "class": "ficon ficon-legend"
+      "class": "c-ficon c-ficon--legend"
     }, ctx.data]), [h("g", {
       attrs: {
         fill: "none",

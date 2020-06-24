@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 14 14"
       },
-      "class": "ficon ficon-plus"
+      "class": "c-ficon c-ficon--plus"
     }, ctx.data]), [h("path", {
       attrs: {
         "fill-rule": "evenodd",

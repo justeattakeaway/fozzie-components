@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 640 480"
       },
-      "class": "ficon ficon-flag.nz"
+      "class": "c-ficon c-ficon--flag.nz"
     }, ctx.data]), [h("path", {
       attrs: {
         d: "M0-.33v.5l1-.5z"

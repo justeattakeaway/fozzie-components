@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 135 40"
       },
-      "class": "ficon ficon-app-ios.es"
+      "class": "c-ficon c-ficon--app-ios.es"
     }, ctx.data]), [h("path", {
       attrs: {
         fill: "#A6A6A6",

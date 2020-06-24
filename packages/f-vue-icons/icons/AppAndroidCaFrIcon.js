@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 135 40"
       },
-      "class": "ficon ficon-app-android.ca.fr"
+      "class": "c-ficon c-ficon--app-android.ca.fr"
     }, ctx.data]), [h("path", {
       attrs: {
         d: "M130 40H5c-2.8 0-5-2.2-5-5V5c0-2.8 2.2-5 5-5h125c2.8 0 5 2.2 5 5v30c0 2.8-2.2 5-5 5z"

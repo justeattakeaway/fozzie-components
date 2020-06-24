@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 44 32"
       },
-      "class": "ficon ficon-speech"
+      "class": "c-ficon c-ficon--speech"
     }, ctx.data]), [h("g", {
       attrs: {
         fill: "#535353",

@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 640 480"
       },
-      "class": "ficon ficon-flag.es"
+      "class": "c-ficon c-ficon--flag.es"
     }, ctx.data]), [h("path", {
       attrs: {
         fill: "#c60b1e",
