@@ -3,15 +3,15 @@
   "version": "1.16.0",
   "private": true,
   "scripts": {
-    "build": "lerna run build --stream",
-    "lint": "lerna run lint --stream",
+    "build": "lerna run $LERNA_ARGS build --stream",
+    "lint": "lerna run $LERNA_ARGS lint --stream",
     "lint:fix": "lerna run lint -- --fix",
     "prepublishOnly": "lerna run prepublishOnly --stream",
     "release": "lerna publish",
     "storybook:build": "lerna run storybook:build",
     "storybook:serve": "lerna run storybook:serve",
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
-    "test": "lerna run test --stream"
+    "test": "lerna run $LERNA_ARGS test --stream"
   },
   "dependencies": {
     "core-js": "^3.6.4"
