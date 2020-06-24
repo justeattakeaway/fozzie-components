@@ -75,11 +75,12 @@ describe('f-metadata', () => {
 
     it('should initialise appboy and setup relevant settings', async () => {
         // Arrange & Act
-        await initialiseBraze(settings);
+        const output = await initialiseBraze(settings);
 
         // Assert
         expect(appboySDK.initialize).toHaveBeenCalledWith(apiKey, { enableLogging, sessionTimeoutInSeconds });
         expect(appboySDK.openSession).toHaveBeenCalled();
+        expect(output).toEqual(appboySDK);
     });
 
     it('should fire a datalayer event when change user is called', async () => {
