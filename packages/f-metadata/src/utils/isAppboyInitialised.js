@@ -4,14 +4,9 @@
  * @param {function} appboy.getUser - Appboy SDK getUser callback
  * @returns {promise<boolean>} - has appboy been initialised
  */
-const isAppboyInitialised = async appboy => {
-    let result = false;
-    if (!appboy) return result;
-
-    await appboy.getUser().getUserId(id => {
-        result = !!id;
-    });
-    return result;
-};
+const isAppboyInitialised = appboy => new Promise(resolve => {
+    if (!appboy) return resolve(false);
+    return appboy.getUser().getUserId(id => resolve(!!id));
+});
 
 export default isAppboyInitialised;
