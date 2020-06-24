@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.17.0
+------------------------------
+*June 24, 2020*
+
+### Changed
+- CircleCI params to restrict build concurrency to 1 to solve memory issues
+- StoryBook CircleCI build to build packages first to ensure dependencies are available
+
+
 v1.16.0
 ------------------------------
 *June 8, 2020*
