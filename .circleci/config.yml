@@ -4,18 +4,25 @@
 #
 version: 2.1
 
-commands: 
-  set_deploy_key: 
+commands:
+  set_deploy_key:
     description: Sets the ssh key for project access
-    steps: 
-      - add_ssh_keys: 
-          fingerprints: 
+    steps:
+      - add_ssh_keys:
+          fingerprints:
             - "8b:4c:f2:d1:a1:1e:d6:f9:1e:e9:e0:40:a0:31:32:af"
 
   install_node_dependencies:
     description: Installs the node dependencies
     steps:
       - run: yarn install --frozen-lockfile
+
+  build_packages:
+    description: Locally builds all packages in the monorepo
+    steps:
+      - run: # Check UI packages all build as expected
+          name: Build Packages
+          command: yarn build
 
 executors:
   node:
@@ -29,6 +36,9 @@ jobs:
 
   build:
     executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
       - restore_cache:
@@ -36,17 +46,15 @@ jobs:
           keys:
               - yarn-packages-{{ checksum "yarn.lock" }}
       - install_node_dependencies
-      - save_cache: 
+      - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths: 
+          paths:
             - ~/.cache/yarn
       - run: # Run PR Checks
           name: Run PR Checks
           command: yarn danger ci
-      - run: # Check UI packages all build as expected
-          name: Build Packages
-          command: yarn build
+      - build_packages
       - run: # Lint packages
           name: Run Lint Tasks on Packages
           command: yarn lint
@@ -56,10 +64,18 @@ jobs:
 
   deploy-storybook:
     executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
     steps:
       - set_deploy_key
       - checkout
+      - restore_cache:
+      name: Restore Yarn Package Cache
+      keys:
+        - yarn-packages-{{ checksum "yarn.lock" }}
       - install_node_dependencies
+      - build_packages
       - run:
           name: Deploy
           command: yarn storybook:deploy --packages packages
@@ -72,11 +88,11 @@ workflows:
       - build:
           filters:
             branches:
-              ignore: 'gh-pages' 
+              ignore: 'gh-pages'
 
-  deploy-storybook: 
+  deploy-storybook:
     jobs:
       - deploy-storybook:
-          filters: 
-            branches: 
+          filters:
+            branches:
               only: master
