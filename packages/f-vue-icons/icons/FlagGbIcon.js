@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 640 480"
       },
-      "class": "ficon ficon-flag.gb"
+      "class": "c-ficon c-ficon--flag.gb"
     }, ctx.data]), [h("defs", [h("clipPath", {
       attrs: {
         id: "a"

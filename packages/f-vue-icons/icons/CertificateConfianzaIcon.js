@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 51 51"
       },
-      "class": "ficon ficon-certificate-confianza"
+      "class": "c-ficon c-ficon--certificate-confianza"
     }, ctx.data]), [h("g", {
       attrs: {
         fill: "#4D4D4D"

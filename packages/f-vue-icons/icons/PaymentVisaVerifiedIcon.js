@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 56 24"
       },
-      "class": "ficon ficon-payment-visa-verified"
+      "class": "c-ficon c-ficon--payment-visa-verified"
     }, ctx.data]), [h("g", {
       attrs: {
         fill: "none",

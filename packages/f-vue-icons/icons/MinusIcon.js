@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 12 1"
       },
-      "class": "ficon ficon-minus"
+      "class": "c-ficon c-ficon--minus"
     }, ctx.data]), [h("path", {
       attrs: {
         d: "M.33 1a.33.33 0 0 1 0-.67h11.34a.33.33 0 0 1 0 .67H.33z",

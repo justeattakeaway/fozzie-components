@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 28 28"
       },
-      "class": "ficon ficon-social-pinterest"
+      "class": "c-ficon c-ficon--social-pinterest"
     }, ctx.data]), [h("path", {
       attrs: {
         fill: "#535353",

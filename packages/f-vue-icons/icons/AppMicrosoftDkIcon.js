@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 111 40"
       },
-      "class": "ficon ficon-app-microsoft.dk"
+      "class": "c-ficon c-ficon--app-microsoft.dk"
     }, ctx.data]), [h("g", {
       attrs: {
         fill: "none",

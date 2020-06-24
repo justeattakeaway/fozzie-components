@@ -82,11 +82,15 @@ export { default as GiftIcon } from '../icons/GiftIcon';
 
 export { default as InfoIcon } from '../icons/InfoIcon';
 
-export { default as JeLogoNoColourIcon } from '../icons/JeLogoNoColourIcon';
-
 export { default as LegendCondensedIcon } from '../icons/LegendCondensedIcon';
 
 export { default as LegendIcon } from '../icons/LegendIcon';
+
+export { default as LogoJusteatLegacyIcon } from '../icons/LogoJusteatLegacyIcon';
+
+export { default as LogoJusteatIcon } from '../icons/LogoJusteatIcon';
+
+export { default as LogoMenulogIcon } from '../icons/LogoMenulogIcon';
 
 export { default as LoyaltyStampAwardedIcon } from '../icons/LoyaltyStampAwardedIcon';
 
@@ -95,8 +99,6 @@ export { default as LoyaltyStampIcon } from '../icons/LoyaltyStampIcon';
 export { default as MapPinIcon } from '../icons/MapPinIcon';
 
 export { default as MinusIcon } from '../icons/MinusIcon';
-
-export { default as MlLogoIcon } from '../icons/MlLogoIcon';
 
 export { default as OfferIcon } from '../icons/OfferIcon';
 
@@ -167,10 +169,6 @@ export { default as SortIcon } from '../icons/SortIcon';
 export { default as SpeechIcon } from '../icons/SpeechIcon';
 
 export { default as SpicyIcon } from '../icons/SpicyIcon';
-
-export { default as StarFilledOrangeIcon } from '../icons/StarFilledOrangeIcon';
-
-export { default as StarFilledYellowIcon } from '../icons/StarFilledYellowIcon';
 
 export { default as StarEmptyIcon } from '../icons/StarEmptyIcon';
 

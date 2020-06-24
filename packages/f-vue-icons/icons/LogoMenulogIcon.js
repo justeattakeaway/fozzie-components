@@ -1,6 +1,6 @@
 import _mergeJSXProps from "babel-helper-vue-jsx-merge-props";
 export default {
-  name: 'MlLogoIcon',
+  name: 'LogoMenulogIcon',
   props: {},
   functional: true,
   render: function render(h, ctx) {
@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 146 40"
       },
-      "class": "ficon ficon-ml-logo"
+      "class": "c-ficon c-ficon--logo-menulog"
     }, ctx.data]), [h("g", {
       attrs: {
         fill: "#FF8000"

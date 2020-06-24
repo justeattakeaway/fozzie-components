@@ -11,7 +11,7 @@ export default {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 30 30"
       },
-      "class": "ficon ficon-loyalty-stamp-awarded"
+      "class": "c-ficon c-ficon--loyalty-stamp-awarded"
     }, ctx.data]), [h("g", {
       attrs: {
         fill: "none",
