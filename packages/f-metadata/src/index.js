@@ -10,8 +10,8 @@ import isAppboyInitialised from './utils/isAppboyInitialised';
  */
 export const sessionTimeoutInSeconds = 0;
 
-const initialise = (options = {}) => new Promise((resolve, reject) => {
-    if (typeof window === 'undefined') return reject(new Error('window is not defined'));
+const initialise = async (options = {}) => {
+    if (typeof window === 'undefined') throw new Error('window is not defined');
 
     const {
         apiKey,
@@ -22,36 +22,40 @@ const initialise = (options = {}) => new Promise((resolve, reject) => {
     } = options;
     const { handleContentCards = noop } = callbacks;
 
-    if (disableComponent || !apiKey || !userId) {
-        handleContentCards(null);
-        return resolve(null);
-    }
-
     window.dataLayer = window.dataLayer || [];
 
-    if (isAppboyInitialised(window.appboy)) {
+    const isInitialised = await isAppboyInitialised(window.appboy);
+
+    if (isInitialised) {
         configureBraze(options);
-        return resolve(window.appboy);
+        return window.appboy;
     }
 
-    return import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
-        .then(({ default: appboy }) => {
-            appboy.initialize(apiKey, { enableLogging, sessionTimeoutInSeconds });
-            appboy.openSession();
+    if (disableComponent || !apiKey || !userId) {
+        handleContentCards(null);
+        return null;
+    }
 
-            window.appboy = appboy;
+    try {
+        const { default: appboy } = await import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk');
 
-            configureBraze(options);
+        appboy.initialize(apiKey, { enableLogging, sessionTimeoutInSeconds });
+        appboy.openSession();
 
-            appboy.changeUser(userId, () => {
-                window.dataLayer.push({
-                    event: 'appboyReady'
-                });
+        window.appboy = appboy;
+
+        configureBraze(options);
+
+        appboy.changeUser(userId, () => {
+            window.dataLayer.push({
+                event: 'appboyReady'
             });
+        });
 
-            resolve(appboy);
-        })
-        .catch(error => reject(new Error(`An error occurred while loading the component: ${error}`)));
-});
+        return appboy;
+    } catch (error) {
+        throw new Error(`An error occurred while loading the component: ${error}`);
+    }
+};
 
 export default initialise;
