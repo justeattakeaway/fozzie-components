@@ -6,7 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.6.0
 ------------------------------
-*June 24th, 2020*
+*June 25th, 2020*
+
+### Changed
+- `@justeat/f-metadata` from a dependency to a devDependency
 
 ### Removed
 - `vue-lazyload` while intermittent issues loading images are investigated and rectified.
