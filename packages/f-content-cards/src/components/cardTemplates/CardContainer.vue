@@ -6,12 +6,12 @@
         data-test-id="contentCard-link"
     >
         <div
-            v-lazy:background-image="image"
+            :style="{ backgroundImage: `url('${image}')` }"
             :class="[{ 'c-contentCard-bgImg': !!image }]" />
         <div class="c-contentCard-info">
             <img
                 v-if="icon"
-                v-lazy="icon"
+                :src="icon"
                 class="c-contentCard-thumbnail">
             <h3 class="c-contentCard-title">
                 {{ title }}
