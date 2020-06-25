@@ -483,12 +483,16 @@ export default {
             }
         }
 
+        .c-postOrderCard-title {
+            margin: spacing(x2);
+        }
+
         .c-contentCard-info {
             padding: 0 0 0 spacing(x9);
 
             @include media('<mid') {
                 position: relative;
-                padding: spacing(x3) spacing(x3) spacing(x3) spacing(x9);
+                padding: spacing(x2) spacing(x2) spacing(x2) spacing(x9);
                 border-radius: $contentCardRadius;
             }
         }
