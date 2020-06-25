@@ -15,6 +15,7 @@ v0.8.0
 ### Changed
 - Mobile styling to fix defects with margins on both the title and content card
 
+
 v0.7.0
 ------------------------------
 *June 25th, 2020*
@@ -25,12 +26,14 @@ v0.7.0
 ### Removed
 - `vue-lazyload` while intermittent issues loading images are investigated and rectified.
 
+
 v0.6.0
 ------------------------------
 *June 24th, 2020*
 
 ### Added
 - `@justeat/f-metadata` as a dependency
+
 
 v0.5.0
 ------------------------------
@@ -40,6 +43,7 @@ v0.5.0
 - Add responsive styling to `Post_Order_Card_1` template
 - Expose prop for filtering content cards
 
+
 v0.4.0
 ------------------------------
 *June 16th, 2020*
@@ -47,12 +51,14 @@ v0.4.0
 ### Added
 - Add styling to `Post_Order_Card_1` template
 
+
 v0.3.0
 ------------------------------
 *June 16th, 2020*
 
 ### Added
 - Post Order Content Card
+
 
 v0.2.0
 ------------------------------
@@ -63,6 +69,7 @@ v0.2.0
 - Unit Tests
 - Content card service
 - Storybook entry
+
 
 v0.1.0
 ------------------------------
