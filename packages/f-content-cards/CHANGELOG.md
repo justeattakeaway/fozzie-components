@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.7.0
+------------------------------
+*June 25th, 2020*
+
+### Changed
+- `@justeat/f-metadata` from a dependency to a devDependency
+
+### Removed
+- `vue-lazyload` while intermittent issues loading images are investigated and rectified.
+
 v0.6.0
 ------------------------------
 *June 24th, 2020*
