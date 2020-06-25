@@ -8,6 +8,13 @@ v0.6.0
 ------------------------------
 *June 24th, 2020*
 
+### Removed
+- `vue-lazyload` while intermittent issues loading images are investigated and rectified.
+
+v0.6.0
+------------------------------
+*June 24th, 2020*
+
 ### Added
 - `@justeat/f-metadata` as a dependency
 
