@@ -19,7 +19,7 @@ export const ContentCardscomponent = () => ({
             default: text('Card Description', 'Whether you want to treat Mum to her Friday night favourite, or surprise your mate with a ‘KFC on me’, show them you care – the tasty way.')
         },
         image: {
-            default: text('Card Image', '')
+            default: text('Card Image', 'https://appboy-images.com/appboy/communication/marketing/content_cards_message_variations/images/5edf97b6141af454f8197e93/f43c54c99f2deca37600fa16331d7080c51717ef/original.png?1591711674')
         },
         icon: {
             default: text('Card Icon', 'https://appboy-images.com/appboy/communication/assets/image_assets/images/5ed7aac3967e180c25132d24/original.png?1591192259')
