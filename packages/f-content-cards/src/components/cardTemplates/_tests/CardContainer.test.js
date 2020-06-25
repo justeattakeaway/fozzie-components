@@ -1,10 +1,7 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
-import VueLazyload from 'vue-lazyload';
 import CardContainer from '../CardContainer.vue';
 
 const localVue = createLocalVue();
-
-localVue.use(VueLazyload);
 
 const url = '__URL__';
 const button = '__BUTTON__';

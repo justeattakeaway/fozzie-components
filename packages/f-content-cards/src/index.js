@@ -5,7 +5,6 @@
  */
 
 import globalThis from 'core-js/features/global-this';
-import VueLazyload from 'vue-lazyload';
 // Import vue component
 import ContentCards from '@/components/ContentCards.vue';
 
@@ -26,7 +25,6 @@ const GlobalVue = globalThis?.Vue;
 
 if (GlobalVue?.use) {
     GlobalVue.use(plugin);
-    GlobalVue.use(VueLazyload, { observer: true });
 }
 
 // To allow use as module (npm/webpack/etc.) export component
