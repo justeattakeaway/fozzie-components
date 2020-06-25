@@ -413,6 +413,10 @@ export default {
             @include font-size(large);
 
             margin-bottom: spacing(x2);
+
+            @include media ('<mid') {
+                margin: spacing(x2);
+            }
         }
 
         .c-contentCard-thumbnail {
@@ -488,7 +492,7 @@ export default {
 
             @include media('<mid') {
                 position: relative;
-                padding: spacing(x3) spacing(x3) spacing(x3) spacing(x9);
+                padding: spacing(x2) spacing(x2) spacing(x2) spacing(x9);
                 border-radius: $contentCardRadius;
             }
         }
