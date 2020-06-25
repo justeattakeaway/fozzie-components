@@ -413,6 +413,10 @@ export default {
             @include font-size(large);
 
             margin-bottom: spacing(x2);
+
+            @include media ('<mid') {
+                margin: spacing(x2);
+            }
         }
 
         .c-contentCard-thumbnail {
@@ -481,10 +485,6 @@ export default {
                 top: spacing(x2);
                 left: spacing(x2);
             }
-        }
-
-        .c-postOrderCard-title {
-            margin: spacing(x2);
         }
 
         .c-contentCard-info {
