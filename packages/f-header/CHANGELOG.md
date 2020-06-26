@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.0.0
+------------------------------
+*June 25, 2020*
+
+### Changed
+- Updated component to new orange JET theme for all tenants.
+- Demo component updated to reflect same structure im other packages.
+- Minor package updates.
+
+
 v2.6.0
 ------------------------------
 *June 9, 2020*

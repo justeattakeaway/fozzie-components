@@ -7,12 +7,12 @@
             name="viewport"
             content="width=device-width, initial-scale=1">
         <vue-header
-            locale="en-AU" />
+            locale="en-GB" />
     </div>
 </template>
 
 <script>
-import VueHeader from './Header.vue';
+import VueHeader from '@/components/Header.vue';
 
 export default {
     components: { VueHeader }

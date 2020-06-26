@@ -60,11 +60,11 @@ describe('Logo', () => {
         expect(logo.classes('c-icon--alt')).toBe(true);
     });
 
-    it('should have "c-icon--alt" class if "headerBackgroundTheme" property is "red"', () => {
+    it('should have "c-icon--alt" class if "headerBackgroundTheme" property is "orange"', () => {
         // Arrange
         const propsData = {
             theme: 'je',
-            headerBackgroundTheme: 'red',
+            headerBackgroundTheme: 'orange',
             companyName: 'Just Eat'
         };
 
@@ -76,7 +76,7 @@ describe('Logo', () => {
         expect(logo.classes('c-icon--alt')).toBe(true);
     });
 
-    it('shouldn\'t have "c-icon--alt" class if if "headerBackgroundTheme" property is not "red", "transparent"', () => {
+    it('shouldn\'t have "c-icon--alt" class if if "headerBackgroundTheme" property is not "orange", "transparent"', () => {
         // Arrange
         const propsData = {
             theme: 'je',

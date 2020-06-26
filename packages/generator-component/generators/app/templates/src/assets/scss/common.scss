@@ -13,7 +13,7 @@ $theme: 'je' !default;
 /**
  * Component Variables
  */
-<%= "// $" + name.class + "-background-color: $brand--red;" %>
+<%= "// $" + name.class + "-background-color: $brand--orange;" %>
 
 @mixin theme($type) {
     [data-theme="#{$type}"] & {
