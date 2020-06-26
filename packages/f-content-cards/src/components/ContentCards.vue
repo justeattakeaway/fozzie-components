@@ -161,7 +161,7 @@ export default {
         .c-contentCard-banner {
             position: relative;
             display: inline-block;
-            background: $brand--red;
+            background: $brand--orange;
             transform: skew(-20deg);
             border-radius: $border-radius;
             color: white;
@@ -204,7 +204,7 @@ export default {
         min-height: 170px;
         background-repeat: repeat;
         background-size: cover;
-        background-color: $grey--lightest;
+        background-color: $grey--lighter;
         background-position: center;
         border-radius: $border-radius $border-radius 0 0;
 
@@ -267,7 +267,7 @@ export default {
     }
 
     .c-contentCard-thumbnail {
-        border: 1px solid $grey--lightest;
+        border: 1px solid $grey--lighter;
         margin-top: - (32px + spacing(x2)); // This offsets the thumbnail above the top of the info card
         width: 48px;
         min-height: 48px;
@@ -308,7 +308,7 @@ export default {
     }
 
     .c-contentCard-offer {
-        background-color: $yellow--light;
+        background-color: $yellow--offWhite;
         width: calc(100% + #{ spacing(x4) });
         text-align: center;
         padding: 5px;
@@ -372,7 +372,7 @@ export default {
         display: flex;
         width: 100%;
         font-family: $font-family-base;
-        border: solid $grey--lighter;
+        border: solid $grey--light;
         border-width: 1px 0 0;
         padding-top: spacing(x1.5);
         margin-top: spacing(x3);

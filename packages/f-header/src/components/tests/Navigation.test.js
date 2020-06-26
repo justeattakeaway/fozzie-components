@@ -235,18 +235,18 @@ describe('Navigation', () => {
             expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).not.toContain('is-open');
         });
 
-        it('should be white when "headerBackgroundTheme" is set to "red"', () => {
+        it('should be white when "headerBackgroundTheme" is set to "orange"', () => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
-                headerBackgroundTheme: 'red'
+                headerBackgroundTheme: 'orange'
             };
 
             // Act
             const wrapper = shallowMount(Navigation, { propsData });
 
             // Assert
-            expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).toContain('c-logo--brandColour');
+            expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).toContain('c-nav-toggle--altColour');
         });
     });
 

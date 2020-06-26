@@ -9,6 +9,7 @@ Latest (roll into next release)
 *June 4, 2020*
 
 ### Changed
+- Updating colour variables to use new versions set in `fozzie-colour-palette`.
 - ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails)
 
 
