@@ -4,9 +4,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+v0.8.1
 ------------------------------
-*June 25, 2020*
+*June 26th, 2020*
+
+### Added
+- `.eslintrc.js` to allow `@justeat/f-metadata` to be updated without breaking the build
 
 ### Changed
 - Updating colour variables to use new versions set in `fozzie-colour-palette`.
