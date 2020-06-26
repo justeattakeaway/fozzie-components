@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.8.0
 ------------------------------
-*June 24, 2020*
+*June 26, 2020*
 
 ### Added
 - Methods for logging card click and view events, with the view to presenting a consistent

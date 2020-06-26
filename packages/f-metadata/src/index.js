@@ -30,6 +30,9 @@ export const initialise = async (options = {}) => {
 
     window.dataLayer = window.dataLayer || [];
 
+    // Note that appBoyPromise will not be set if this is the first time running this method -
+    // this is a guard against initialise() being called more than once, and attempting to
+    // reboot the entire appboy sdk.
     if (appBoyPromise) {
         await appBoyPromise;
         configureBraze(options);
@@ -85,13 +88,13 @@ const logEvent = async (type, payload) => {
 };
 
 /**
- * @param {Object} card Content card for which to log a click event
+ * @param {Object} card - Content card for which to log a click event
  * @returns {Promise<boolean|*>}
  */
 export const logCardClick = card => logEvent('logCardClick', card);
 
 /**
- * @param {Object[]} cards List of content cards for which to log view impressions
+ * @param {Object[]} cards - List of content cards for which to log view impressions
  * @returns {Promise<boolean|*>}
  */
 export const logCardImpressions = cards => logEvent('logCardImpressions', cards);
