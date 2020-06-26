@@ -74,7 +74,7 @@ export default {
 <style lang="scss" module>
 
 $card-bgColor                             : $white;
-$card-borderColor                         : $grey--lightest;
+$card-borderColor                         : $grey--lighter;
 $card-borderRadius                        : $border-radius;
 $card-padding                             : spacing(x2);
 

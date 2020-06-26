@@ -56,10 +56,9 @@ export default {
     text-align: center;
     text-decoration: none;
     vertical-align: middle;
-    @include font-size(base--scaleUp, false);
+    @include font-size(18, false);
 
     @include theme(ml) {
-       color: $color-link-default--ml;
        font-family: $font-family-headings--ml;
        font-weight:  $font-weight-headings--ml;
     }

@@ -121,7 +121,7 @@ $form-input-colour                        : $grey--dark;
 $form-input-bg                            : $white;
 $form-input-borderRadius                  : 3px;
 $form-input-borderWidth                   : 1px;
-$form-input-borderColour                  : $grey--lightest;
+$form-input-borderColour                  : $grey--lighter;
 $form-input-borderColour--focus           : $grey--dark;
 
 .c-formField {
