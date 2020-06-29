@@ -11,6 +11,7 @@ const configureBraze = (options = {}) => {
         handleContentCards = noop
     } = callbacks;
 
+    // Note that the below subscriptions return an ID that could later be used to unsubscribe
     appboy.subscribeToInAppMessage(message => {
         if (message instanceof appboy.ab.InAppMessage) {
             /**
