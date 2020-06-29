@@ -120,7 +120,7 @@ describe('f-metadata', () => {
                     }
                 ]
             };
-            const { buttons: { 0: otherButton } } = messageWithSingleButton;
+            const { buttons: { 0: singleButton } } = messageWithSingleButton;
 
             // Act
             await configureBraze(settings);
@@ -129,7 +129,7 @@ describe('f-metadata', () => {
             inAppMessageCallback(messageWithSingleButton);
 
             // Assert
-            expect(otherButton.subscribeToClickedEvent).not.toHaveBeenCalled();
+            expect(singleButton.subscribeToClickedEvent).not.toHaveBeenCalled();
         });
 
         it('should pass other messages straight to handleInAppMessage without adding click handlers', async () => {
