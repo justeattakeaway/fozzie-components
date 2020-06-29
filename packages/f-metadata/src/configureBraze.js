@@ -18,10 +18,13 @@ const configureBraze = (options = {}) => {
              * as this is always "success" as opposed to "dismiss"
              * as confirmed with CRM (AS)
              */
-            const { buttons: { 1: button } } = message;
             interceptInAppMessages(message);
-            button.subscribeToClickedEvent(() => interceptInAppMessageClickEvents(message));
+            if (message.buttons && message.buttons.length >= 2) {
+                const button = message.buttons[1]; // eslint-disable-line prefer-destructuring
+                button.subscribeToClickedEvent(() => interceptInAppMessageClickEvents(message));
+            }
         }
+
         appboy.display.showInAppMessage(message);
     });
     appboy.subscribeToContentCardsUpdates(handleContentCards);
