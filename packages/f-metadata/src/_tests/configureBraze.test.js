@@ -111,6 +111,27 @@ describe('f-metadata', () => {
             expect(successButton.subscribeToClickedEvent).toHaveBeenCalled();
         });
 
+        it('should not assign `subscribeToClickedEvent` if there are fewer than two buttons', async () => {
+            // Arrange
+            const messageWithSingleButton = {
+                buttons: [
+                    {
+                        subscribeToClickedEvent: jest.fn()
+                    }
+                ]
+            };
+            const { buttons: { 0: otherButton } } = messageWithSingleButton;
+
+            // Act
+            await configureBraze(settings);
+
+            const [[inAppMessageCallback]] = subscribeToInAppMessage.mock.calls;
+            inAppMessageCallback(messageWithSingleButton);
+
+            // Assert
+            expect(otherButton.subscribeToClickedEvent).not.toHaveBeenCalled();
+        });
+
         it('should pass other messages straight to handleInAppMessage without adding click handlers', async () => {
             // Arrange
             const message = '__MESSAGE__';
