@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v2.8.1
+------------------------------
+*June 29, 2020*
+
+### Fixed
+- Only subscribe to button click event when the button exists.
+
+
 v2.8.0
 ------------------------------
 *June 26, 2020*
@@ -20,6 +29,7 @@ v2.7.0
 
 ### Changed
 - Promises to async/await
+
 
 v2.6.0
 ------------------------------
@@ -75,7 +85,7 @@ v2.3.2
 
 v2.3.1
 ------------------------------
-*April  3, 2020*
+*April 3, 2020*
 
 ### Fixed
 - Failing test (locally) due to dynamic imports not being supported when running `jest` without the `dynamic-import-node` plugin.
@@ -84,7 +94,7 @@ v2.3.1
 
 v2.3.0
 ------------------------------
-*March  2, 2020*
+*March 2, 2020*
 
 ### Changed
 - Callback with `null` if `apiKey` or `userId` is not defined.
@@ -93,7 +103,7 @@ v2.3.0
 
 v2.2.0
 ------------------------------
-*February  20, 2020*
+*February 20, 2020*
 
 ### Added
 - Jest configuration and unit tests for both server and client.
@@ -105,7 +115,7 @@ v2.2.0
 
 v2.1.0
 ------------------------------
-*February  18, 2020*
+*February 18, 2020*
 
 ### Changed
 - Call `handleContentCards` with an empty array if no content cards are available, enabling any side effects once Braze is called.
@@ -113,7 +123,7 @@ v2.1.0
 
 v2.0.0
 ------------------------------
-*February  10, 2020*
+*February 10, 2020*
 
 ### Changed
 - Callback methods are now called with the whole appboy instance ensuring functionality is available on the appboy instance whenever a refresh is called. This also means that the callback will always return an object even when no content cards are available. Further instructions and upgrade instructions can be found in the [README](README.md).
