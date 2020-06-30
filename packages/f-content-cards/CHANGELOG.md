@@ -4,12 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.8.1
+------------------------------
+*June 30th, 2020*
+
+### Changed
+- Conditional logic for `c-postOrderCard--condensed` to match card container.
+
+
 v0.8.0
 ------------------------------
 *June 25th, 2020*
 
 ### Added
-
 - `@justeat/f-metadata` to `transformIgnorePatterns` in jest config to avoid failures.
 
 ### Changed
