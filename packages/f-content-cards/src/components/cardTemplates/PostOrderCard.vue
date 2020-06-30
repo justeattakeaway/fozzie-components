@@ -3,6 +3,7 @@
         <h2
             v-if="title"
             class="c-postOrderCard-title"
+            data-test-id="contentCard-postOrderCard-title"
         >
             {{ title }}
         </h2>
