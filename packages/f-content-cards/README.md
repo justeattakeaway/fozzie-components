@@ -197,11 +197,26 @@ $ yarn storybook:serve
 
 This will build and serve storybook at [http://localhost:6006](http://localhost:6006).
 
+## Issues
+
+Feel free to submit issues and enhancement requests.
+
+Please use [Fozzie Components Issues](https://github.com/justeat/fozzie-components/issues) specific bugs and errors.
+
 ## Contributing
+
+1. Optional: Fork the repo on github
+2. Clone the project to your own machine
+3. Create your own branch (This should follow the pattern *component-name@version* e.g. *f-content-cards@1.0.0*).
+4. Ensure you've bumped the package version and added a CHANGELOG entry.
+4. Push your work (Commit messages should follow the pattern *component-name@version - commit description* e.g. *f-content-cards@1.0.0 - Update README*)
+5. Submit a pull request
 
 ### Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+Our versioning format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
+For more information on versioning and previous examples please see the [CHANGELOG](CHANGELOG.md).
 
 ### Deployment
 
@@ -229,7 +244,5 @@ $ yarn publish
 
 ## License
 
-This project is licensed under the Apache v2.0 License - see the [LICENSE.md](LICENSE.md) file for details
-
-## References
+This project is licensed under the Apache v2.0 License - see the [LICENSE](LICENSE) file for details.
 
