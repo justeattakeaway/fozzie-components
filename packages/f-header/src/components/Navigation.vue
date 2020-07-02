@@ -345,7 +345,7 @@ export default {
         },
 
         navToggleThemeClass () {
-            return this.headerBackgroundTheme === 'orange' ? 'c-nav-toggle--altColour' : '';
+            return this.headerBackgroundTheme === 'highlight' ? 'c-nav-toggle--altColour' : '';
         },
 
         /**
@@ -542,7 +542,7 @@ $nav-toggleIcon-left               : spacing(x2);
 $nav-toggleIcon-width              : 21px;
 $nav-toggleIcon-height             : 2px;
 $nav-toggleIcon-borderRadius       : 1px;
-$nav-toggleIcon-color              : $color-primary;
+$nav-toggleIcon-color              : $color-secondary;
 $nav-toggleIcon-color--transparent : $white;
 $nav-toggleIcon-bg                 : transparent;
 $nav-toggleIcon-space              : 5px;
@@ -691,7 +691,7 @@ $nav-popover-padding               : spacing(x2);
                 align-items: center;
                 height: $header-height;
 
-                .c-header--orange &,
+                .c-header--highlightBg &,
                 .c-header--transparent & {
                     color: $nav-text-color--transparent;
                 }
@@ -721,7 +721,7 @@ $nav-popover-padding               : spacing(x2);
                     color: $nav-text-color--hover;
                     text-decoration: underline;
 
-                    .c-header--orange,
+                    .c-header--highlightBg,
                     .c-header--transparent & {
                         color: $nav-text-color--transparent;
                     }
@@ -766,7 +766,7 @@ $nav-popover-padding               : spacing(x2);
             & path {
                 fill: $nav-icon-color;
 
-                .c-header--orange &,
+                .c-header--highlightBg &,
                 .c-header--transparent & {
                     fill: $nav-icon-color--transparent;
                 }
@@ -791,7 +791,7 @@ $nav-popover-padding               : spacing(x2);
         & path {
             fill: $nav-icon-color;
 
-            .c-header--orange &,
+            .c-header--highlightBg &,
             .c-header--transparent & {
                 fill: $nav-icon-color--transparent;
             }

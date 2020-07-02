@@ -59,7 +59,14 @@ export default {
             return `Go to ${this.companyName} homepage`;
         },
         logoColourModifier () {
-            return (this.headerBackgroundTheme === 'transparent' || this.headerBackgroundTheme === 'orange') ? 'c-icon--alt' : '';
+            switch (this.headerBackgroundTheme) {
+                case 'transparent':
+                    return 'c-icon--onTransparentBg';
+                case 'highlight':
+                    return 'c-icon--onHighlightBg';
+                default:
+                    return '';
+            }
         }
     }
 };
@@ -119,13 +126,47 @@ export default {
         }
     }
 
-    .c-logo-img g,
-    .c-logo-img path {
-        fill: $header-logo-color;
+    .c-logo-img {
+        & g,
+        & path {
+            fill: $header-logo-color;
+
+            @include theme(ml) {
+                fill: $header-logo-color--ml;
+            }
+        }
+    }
+    // White logo on highlights background
+    .c-icon--onHighlightBg {
+        &.c-logo-img {
+            & g,
+            & path {
+                fill: $header-logo-color--alt;
+            }
+        }
     }
 
-    .c-icon--alt g,
-    .c-icon--alt path {
-        fill: $header-logo-color--alt;
+    // Transparent goes from white to red
+    .c-icon--onTransparentBg {
+        &.c-logo-img {
+            & g,
+            & path {
+                fill: $header-logo-color--alt;
+
+                .is-navInView & {
+                    fill: $header-logo-color;
+                }
+            }
+        }
     }
+
+    // Temporary styling for ML (until normalised in phase 3 of rebrand work)
+    // Transparent goes from white to orange
+    .is-navInView [data-theme='ml'] .c-icon--onTransparentBg {
+        & g,
+        & path {
+            fill: $header-logo-color--ml;
+        }
+    }
+
 </style>
