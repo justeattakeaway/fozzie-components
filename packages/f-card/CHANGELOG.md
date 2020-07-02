@@ -11,7 +11,6 @@ Latest (roll into next release)
 ### Added
 - Accessibility add-on to Storybook story.
 
-
 *June 25, 2020*
 
 ### Changed
