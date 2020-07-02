@@ -13,8 +13,9 @@ $theme: 'je' !default;
 /**
  * Component Variables
  */
-$header-logo-color                 : $brand--orange;
+$header-logo-color                 : $red;
 $header-logo-color--alt            : $white;
+$header-logo-color--ml             : $brand--orange;
 
 $header-height--narrow              : 48px;
 $header-button--height              : $header-height--narrow;

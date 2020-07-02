@@ -3,6 +3,7 @@
         <h2
             v-if="title"
             class="c-postOrderCard-title"
+            data-test-id="contentCard-postOrderCard-title"
         >
             {{ title }}
         </h2>
@@ -47,6 +48,7 @@ export default {
     data () {
         const {
             extras = {},
+            imageUrl,
             linkText
         } = this.card;
         const {
@@ -55,10 +57,11 @@ export default {
             image_1: image,
             icon_1: icon
         } = extras;
+
         return {
             ctaText: button || linkText,
             icon,
-            image,
+            image: image || imageUrl,
             type
         };
     }
