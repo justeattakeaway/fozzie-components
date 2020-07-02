@@ -1,22 +1,42 @@
 <template>
     <div
         class="c-contentCards c-contentCards--wrap"
-        data-test-id="OffersInbox-Cards">
+        :data-test-id="testId">
         <template v-for="(contentCard, cardIndex) in cards">
             <component
                 :is="handleCustomCardType(contentCard.extras.custom_card_type)"
                 :key="cardIndex"
                 :card="contentCard"
                 :title="title"
+                :data-test-id="testIdForItemWithIndex(cardIndex)"
             />
         </template>
     </div>
 </template>
 
 <script>
-import initialiseBraze from '@justeat/f-metadata';
+import initialiseBraze, { logCardClick, logCardImpressions } from '@justeat/f-metadata';
 import ContentCards from '../services/contentCard.service';
 import cardTemplates from './cardTemplates';
+
+const createBrazeEvent = (contentAction, payload) => {
+    const {
+        message,
+        messageAlignment,
+        dg: type,
+        buttons = {}
+    } = payload;
+    const { 1: primaryCTA = {} } = buttons;
+
+    return {
+        contentAction,
+        contentType: 'inAppMessage',
+        contentTitle: message,
+        contentPosition: messageAlignment,
+        contentCTA: primaryCTA.text,
+        variantName: type
+    };
+};
 
 export default {
     name: 'ContentCards',
@@ -39,17 +59,50 @@ export default {
         enabledCardTypes: {
             type: Array,
             default: () => ([])
+        },
+        pushToDataLayer: {
+            type: Function,
+            default: () => (() => {})
+        },
+        testId: {
+            type: String,
+            default: null
         }
     },
+
     data () {
         return {
             cards: [],
             titleCard: {}
         };
     },
+
+    watch: {
+        cards (current, previous) {
+            if (current.length && (current.length !== previous.length)) {
+                logCardImpressions(this.cards);
+            }
+        }
+    },
+
     mounted () {
         this.setupBraze(this.apiKey, this.userId);
     },
+
+    provide () {
+        const component = this;
+
+        return {
+            emitCardView ({ details }) {
+                component.trackInAppMessageVisibility(details);
+            },
+            emitCardClick ({ card, details }) {
+                component.trackInAppMessageClick(details);
+                logCardClick(card);
+            }
+        };
+    },
+
     methods: {
         setupBraze (apiKey, userId, enableLogging = false) {
             initialiseBraze({
@@ -86,6 +139,29 @@ export default {
                     break;
             }
             return false;
+        },
+
+        pushBrazeEvent (payload) {
+            this.pushToDataLayer({
+                event: 'BrazeContent',
+                custom: {
+                    braze: payload
+                }
+            });
+        },
+
+        testIdForItemWithIndex (index) {
+            return this.testId && `ContentCard-${index}`;
+        },
+
+        trackInAppMessageClick (details) {
+            const event = createBrazeEvent('click', details);
+            this.pushBrazeEvent(event);
+        },
+
+        trackInAppMessageVisibility (details) {
+            const event = createBrazeEvent('view', details);
+            this.pushBrazeEvent(event);
         }
     }
 };

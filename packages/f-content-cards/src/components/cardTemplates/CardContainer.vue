@@ -3,7 +3,8 @@
         :is="ctaUrl && ctaEnabled ? 'a' : 'div'"
         :href="ctaEnabled && ctaUrl"
         :class="['c-contentCard', { 'c-contentCard--isolateHeroImage': isAnniversaryCard }]"
-        data-test-id="contentCard-link"
+        :data-test-id="testId"
+        @click="onClickContentCard"
     >
         <div
             :style="{ backgroundImage: `url('${image}')` }"
@@ -22,7 +23,7 @@
             <template v-for="(textItem, textIndex) in descriptionText">
                 <p
                     :key="textIndex"
-                    :data-test-id="`ContentCard-TextItem-${textIndex}`"
+                    :data-test-id="testIdForItemWithIndex(textIndex)"
                     class="c-contentCard-text">
                     {{ textItem }}
                 </p>
@@ -35,6 +36,28 @@
 </template>
 
 <script>
+const cardDetails = (card, args) => ({
+    canvasName: null,
+    contentAction: null,
+    contentCTA: card.voucherCode ? 'copy_voucher' : card.ctaText,
+    contentCategory: null,
+    contentDeeplink: null,
+    contentId: card.extractedCardId,
+    contentPosition: card.order,
+    contentTitle: card.title,
+    contentType: 'ContentCard',
+    customVoucherCode: card.voucherCode || null,
+    variantName: null,
+    carousel: card.isCarousel
+        ?
+        {
+            listType: 'offers',
+            componentId: card.containerTitle
+        }
+        : null,
+    ...args
+});
+
 export default {
     props: {
         card: {
@@ -52,8 +75,13 @@ export default {
         ctaEnabled: {
             type: Boolean,
             default: true
+        },
+        testId: {
+            type: String,
+            default: null
         }
     },
+
     data () {
         const {
             id: cardId,
@@ -84,6 +112,7 @@ export default {
             extras
         };
     },
+
     computed: {
         descriptionText () {
             return Object.keys(this.extras)
@@ -91,8 +120,53 @@ export default {
                         .map(key => this.extras[key]);
         },
 
+        extractedCardId () {
+            const decoded = atob(this.cardId);
+            const start = decoded.indexOf('=');
+            const end = decoded.indexOf('&');
+            return decoded.slice(start + 1, end);
+        },
+
         isAnniversaryCard () {
             return this.type === 'Anniversary_Card_1';
+        }
+    },
+
+    inject: [
+        'emitCardView',
+        'emitCardClick'
+    ],
+
+    mounted () {
+        this.onViewContentCard();
+    },
+
+    methods: {
+        onViewContentCard () {
+            const details = cardDetails(this, {
+                contentAction: 'view'
+            });
+
+            this.emitCardView({
+                card: this.card,
+                details
+            });
+        },
+
+        onClickContentCard () {
+            const details = cardDetails(this, {
+                contentAction: 'click',
+                contentDeeplink: this.ctaUrl
+            });
+
+            this.emitCardClick({
+                card: this.card,
+                details
+            });
+        },
+
+        testIdForItemWithIndex (index) {
+            return this.testId && `ContentCard-TextItem-${index}`;
         }
     }
 };
