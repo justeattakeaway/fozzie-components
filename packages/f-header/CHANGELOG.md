@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.1.0
+------------------------------
+*July 2, 2020*
+
+### Changed
+- Updated logo and header background highlight colour to red to enable phased rollout of JET theme.
+- Changed logic for the header background & logo logic, as there was a bug when the navigation was in highlight mode and was open.
+- Updated theme to add Menulog orange branding in for the logo.
+
+
 v3.0.0
 ------------------------------
 *June 25, 2020*

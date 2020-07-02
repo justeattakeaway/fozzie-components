@@ -115,7 +115,7 @@ export default {
             return this.headerBackgroundTheme === 'transparent' && !this.mobileNavIsOpen;
         },
         headerBackgroundClass () {
-            return this.headerBackgroundTheme === 'orange' ? 'c-header--orange' : '';
+            return this.headerBackgroundTheme === 'highlight' ? 'c-header--highlightBg' : '';
         }
     },
     methods: {
@@ -193,9 +193,13 @@ export default {
         }
     }
 
-    .c-header--orange {
-        background-color: $color-primary;
+    .c-header--highlightBg {
+        background-color: $red; // temporary – will change to $color-primary as part of Phase 3
         min-height: 88px;
+
+        &[data-theme='ml'] {
+            background-color: $color-primary;
+        }
     }
 
     .c-header-container {
