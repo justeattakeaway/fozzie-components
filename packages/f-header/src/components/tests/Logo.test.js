@@ -44,7 +44,7 @@ describe('Logo', () => {
         expect(logo).toBeDefined();
     });
 
-    it('should have "c-icon--alt" class if "headerBackgroundTheme" property is "transparent"', () => {
+    it('should have "c-icon--onTransparentBg" class if "headerBackgroundTheme" property is "transparent"', () => {
         // Arrange
         const propsData = {
             theme: 'je',
@@ -57,14 +57,14 @@ describe('Logo', () => {
         const logo = wrapper.find('[data-js-test="c-icon--je"]');
 
         // Assert
-        expect(logo.classes('c-icon--alt')).toBe(true);
+        expect(logo.classes('c-icon--onTransparentBg')).toBe(true);
     });
 
-    it('should have "c-icon--alt" class if "headerBackgroundTheme" property is "orange"', () => {
+    it('should have "c-icon--onHighlightBg" class if "headerBackgroundTheme" property is "highlight"', () => {
         // Arrange
         const propsData = {
             theme: 'je',
-            headerBackgroundTheme: 'orange',
+            headerBackgroundTheme: 'highlight',
             companyName: 'Just Eat'
         };
 
@@ -73,10 +73,10 @@ describe('Logo', () => {
         const logo = wrapper.find('[data-js-test="c-icon--je"]');
 
         // Assert
-        expect(logo.classes('c-icon--alt')).toBe(true);
+        expect(logo.classes('c-icon--onHighlightBg')).toBe(true);
     });
 
-    it('shouldn\'t have "c-icon--alt" class if if "headerBackgroundTheme" property is not "orange", "transparent"', () => {
+    it('shouldn\'t have "c-icon--onHighlightBg" class if "headerBackgroundTheme" property is not "highlight", "transparent"', () => {
         // Arrange
         const propsData = {
             theme: 'je',
@@ -91,7 +91,7 @@ describe('Logo', () => {
         // Assert
         // with dynamically rendered components
         // dynamic classes returned as one string in the array
-        // so have to check for 'c-logo-img,c-icon--je,c-icon--alt' not just 'c-icon--alt'
-        expect(logo.classes()).not.toContain('c-logo-img,c-icon--je,c-icon--alt');
+        // so have to check for 'c-logo-img,c-icon--je,c-icon--onHighlightBg' not just 'c-icon--onHighlightBg'
+        expect(logo.classes()).not.toContain('c-logo-img,c-icon--je,c-icon--onHighlightBg');
     });
 });

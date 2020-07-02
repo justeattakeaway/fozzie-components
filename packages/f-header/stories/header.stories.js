@@ -33,7 +33,7 @@ export const HeaderComponent = () => ({
             default: boolean('Show delivery enquiry', false)
         },
         headerBackgroundTheme: {
-            default: select('Header theme', ['white', 'orange', 'transparent'])
+            default: select('Header theme', ['white', 'highlight', 'transparent'])
         },
         userInfoProp: {
             default: object('User info', userInfo)

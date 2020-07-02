@@ -235,11 +235,11 @@ describe('Navigation', () => {
             expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).not.toContain('is-open');
         });
 
-        it('should be white when "headerBackgroundTheme" is set to "orange"', () => {
+        it('should be white when "headerBackgroundTheme" is set to "highlight"', () => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
-                headerBackgroundTheme: 'orange'
+                headerBackgroundTheme: 'highlight'
             };
 
             // Act
