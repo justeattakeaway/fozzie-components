@@ -10,6 +10,14 @@ v0.10.0
 ### Added
 - Accessibility add-on to Storybook story.
 
+v0.9.0
+------------------------------
+*July 2nd, 2020*
+
+### Changed
+- README to include details on prerequisites, usage, development, testing and contributions
+
+
 v0.8.2
 ------------------------------
 *June 30th, 2020*
