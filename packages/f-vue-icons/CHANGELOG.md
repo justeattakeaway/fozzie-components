@@ -9,7 +9,7 @@ v1.1.0
 *July 3, 2020*
 
 ### Added
-- Colour props which conditionally add CSS classes to components.
+- `classModifier` prop which conditionally adds a CSS modifier class to components.
 
 
 v1.0.0

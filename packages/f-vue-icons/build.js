@@ -9,29 +9,9 @@ export default {
     name: '${name}',
 
     props: {
-        isWhite: {
-            type: Boolean,
-            default: false
-        },
-
-        isBlue: {
-            type: Boolean,
-            default: false
-        },
-
-        isGreen: {
-            type: Boolean,
-            default: false
-        },
-
-        isOrange: {
-            type: Boolean,
-            default: false
-        },
-
-        pushLeft: {
-            type: Boolean,
-            default: false
+        classModifier: {
+            type: String,
+            default: ''
         }
     },
 
@@ -41,11 +21,7 @@ export default {
         const attrs = ctx.data.attrs || {};
         ctx.data.attrs = attrs;
         ctx.data.class = {
-            'c-ficon--white': ctx.props.isWhite,
-            'c-ficon--blue': ctx.props.isBlue,
-            'c-ficon--green': ctx.props.isGreen,
-            'c-ficon--orange': ctx.props.isOrange,
-            'c-ficon--pushLeft': ctx.props.pushLeft
+            [\`c-ficon--\${ctx.props.classModifier}\`]: ctx.props.classModifier !== ''
         };
 
         return ${svg.replace(/<svg([^>]+)>/, '<svg$1 {...ctx.data}>')};

@@ -1,39 +1,20 @@
 import _mergeJSXProps from "babel-helper-vue-jsx-merge-props";
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 export default {
   name: 'FlagNzIcon',
   props: {
-    isWhite: {
-      type: Boolean,
-      default: false
-    },
-    isBlue: {
-      type: Boolean,
-      default: false
-    },
-    isGreen: {
-      type: Boolean,
-      default: false
-    },
-    isOrange: {
-      type: Boolean,
-      default: false
-    },
-    pushLeft: {
-      type: Boolean,
-      default: false
+    classModifier: {
+      type: String,
+      default: ''
     }
   },
   functional: true,
   render: function render(h, ctx) {
     var attrs = ctx.data.attrs || {};
     ctx.data.attrs = attrs;
-    ctx.data.class = {
-      'c-ficon--white': ctx.props.isWhite,
-      'c-ficon--blue': ctx.props.isBlue,
-      'c-ficon--green': ctx.props.isGreen,
-      'c-ficon--orange': ctx.props.isOrange,
-      'c-ficon--pushLeft': ctx.props.pushLeft
-    };
+    ctx.data.class = _defineProperty({}, "c-ficon--".concat(ctx.props.classModifier), ctx.props.classModifier !== '');
     return h("svg", _mergeJSXProps([{
       attrs: {
         xmlns: "http://www.w3.org/2000/svg",
