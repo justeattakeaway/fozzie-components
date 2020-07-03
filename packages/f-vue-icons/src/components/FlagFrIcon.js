@@ -22,11 +22,6 @@ export default {
             default: false
         },
 
-        isDarkestGrey: {
-            type: Boolean,
-            default: false
-        },
-
         pushLeft: {
             type: Boolean,
             default: false
@@ -43,7 +38,6 @@ export default {
             'c-ficon--blue': ctx.props.isBlue,
             'c-ficon--green': ctx.props.isGreen,
             'c-ficon--orange': ctx.props.isOrange,
-            'c-ficon--grey--darkest': ctx.props.isDarkestGrey,
             'c-ficon--pushLeft': ctx.props.pushLeft
         };
 
