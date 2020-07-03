@@ -9,6 +9,35 @@ export default {
     name: '${name}',
 
     props: {
+        isWhite: {
+            type: Boolean,
+            default: false
+        },
+
+        isBlue: {
+            type: Boolean,
+            default: false
+        },
+
+        isGreen: {
+            type: Boolean,
+            default: false
+        },
+
+        isOrange: {
+            type: Boolean,
+            default: false
+        },
+
+        isDarkestGrey: {
+            type: Boolean,
+            default: false
+        },
+
+        pushLeft: {
+            type: Boolean,
+            default: false
+        }
     },
 
     functional: true,
@@ -16,6 +45,14 @@ export default {
     render (h, ctx) {
         const attrs = ctx.data.attrs || {};
         ctx.data.attrs = attrs;
+        ctx.data.class = {
+            'c-ficon--white': ctx.props.isWhite,
+            'c-ficon--blue': ctx.props.isBlue,
+            'c-ficon--green': ctx.props.isGreen,
+            'c-ficon--orange': ctx.props.isOrange,
+            'c-ficon--grey--darkest': ctx.props.isDarkestGrey,
+            'c-ficon--pushLeft': ctx.props.pushLeft
+        };
 
         return ${svg.replace(/<svg([^>]+)>/, '<svg$1 {...ctx.data}>')};
     }
@@ -37,7 +74,7 @@ Promise.all(icons.map(icon => {
         .then(() => fs.writeFile(filepath, component, 'utf8'));
 })).then(() => {
     const main = icons
-        .map(icon => `export { default as ${icon.pascalCasedComponentName} } from '../icons/${icon.pascalCasedComponentName}';`)
-        .join('\n\n');
+        .map(icon => `export { default as ${icon.pascalCasedComponentName} } from '../icons/${icon.pascalCasedComponentName}';\n`)
+        .join('');
     return fs.outputFile('./src/index.js', main, 'utf8');
 });
