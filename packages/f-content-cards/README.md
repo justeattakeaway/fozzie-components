@@ -153,6 +153,25 @@ An array of custom content card types to display.
 
 > If no array is passed the component will default to showing all supported content card types.
 
+### `pushToDataLayer`
+
+**Type:** function
+**Required:** false
+
+A callback for feeding back analytics regarding content cards to the consuming application
+
+> If no function is passed then this will be replaced with a noop function
+
+### `testId`
+
+**Type:** string
+**Required:** false
+
+Indicates the test id attribute of the component root element.
+
+> If this is missing or nully, all child components will also be rendered without test id
+> attributes.
+
 ## Development
 
 Start by cloning the repository and installing the required dependencies:

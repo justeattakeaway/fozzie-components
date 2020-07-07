@@ -17,6 +17,7 @@ v0.10.0
 
 ### Changed
 - Updated @justeat/f-metadata version
+- Updated README
 
 
 v0.9.0
