@@ -22,7 +22,8 @@ describe('contentCards › PostOrderCard', () => {
         // Arrange & Act
         const wrapper = shallowMount(PostOrderCard, {
             propsData: {
-                card
+                card,
+                testId: 'foo'
             }
         });
 
@@ -39,7 +40,8 @@ describe('contentCards › PostOrderCard', () => {
                     extras: {
                         custom_card_type: customCardType // eslint-disable-line camelcase
                     }
-                }
+                },
+                testId: 'foo'
             }
         });
 
