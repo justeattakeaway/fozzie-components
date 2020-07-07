@@ -125,6 +125,7 @@ export default {
                 }
             });
         },
+
         contentCards (appboy) {
             if (!appboy) return;
             const { cards, titleCard } = new ContentCards(appboy, {

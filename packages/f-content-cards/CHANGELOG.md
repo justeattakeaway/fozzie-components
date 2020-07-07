@@ -4,6 +4,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.10.0
+------------------------------
+*July 7th, 2020*
+
+### Added
+- ContentCards component accepts `pushToDataLayer` callback as a prop for feeding back
+  analytics regarding content cards
+- ContentCards component accepts `testId` parameter as a prop, which indicates the test
+  id attribute of the component root element. If this is missing, all child components
+  will also be rendered without test id attributes.
+
+### Changed
+- Updated @justeat/f-metadata version
+
+
 v0.9.0
 ------------------------------
 *July 2nd, 2020*
