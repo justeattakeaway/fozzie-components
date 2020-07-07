@@ -1,22 +1,53 @@
 <template>
     <div
         class="c-contentCards c-contentCards--wrap"
-        data-test-id="OffersInbox-Cards">
+        :data-test-id="testId">
         <template v-for="(contentCard, cardIndex) in cards">
             <component
                 :is="handleCustomCardType(contentCard.extras.custom_card_type)"
                 :key="cardIndex"
                 :card="contentCard"
                 :title="title"
+                :data-test-id="testIdForItemWithIndex(cardIndex)"
             />
         </template>
     </div>
 </template>
 
 <script>
-import initialiseBraze from '@justeat/f-metadata';
+import initialiseBraze, { logCardClick, logCardImpressions } from '@justeat/f-metadata';
 import ContentCards from '../services/contentCard.service';
 import cardTemplates from './cardTemplates';
+
+/**
+ * Generates card-specific analytics data suitable for sending back to GTM via f-trak
+ *
+ * @param contentAction
+ * @param card
+ * @returns {{contentCTA, customVoucherCode, contentId: *, contentAction: *, contentPosition, contentTitle: *, contentType: string}}
+ */
+const createBrazeCardEvent = (contentAction, card) => {
+    const {
+        id: contentId,
+        title: contentTitle,
+        extras = {}
+    } = card;
+    const {
+        order: contentPosition,
+        button_1: contentCTA,
+        voucher_code: customVoucherCode
+    } = extras;
+
+    return {
+        contentId,
+        contentType: 'contentCard',
+        customVoucherCode,
+        contentTitle,
+        contentAction,
+        contentPosition,
+        contentCTA
+    };
+};
 
 export default {
     name: 'ContentCards',
@@ -39,17 +70,50 @@ export default {
         enabledCardTypes: {
             type: Array,
             default: () => ([])
+        },
+        pushToDataLayer: {
+            type: Function,
+            default: () => (() => {})
+        },
+        testId: {
+            type: String,
+            default: null
         }
     },
+
     data () {
         return {
             cards: [],
             titleCard: {}
         };
     },
+
+    watch: {
+        cards (current, previous) {
+            if (current.length && (current.length !== previous.length)) {
+                logCardImpressions(this.cards);
+            }
+        }
+    },
+
     mounted () {
         this.setupBraze(this.apiKey, this.userId);
     },
+
+    provide () {
+        const component = this;
+
+        return {
+            emitCardView (card) {
+                component.trackCardVisibility(card);
+            },
+            emitCardClick (card) {
+                component.trackCardClick(card);
+                logCardClick(card);
+            }
+        };
+    },
+
     methods: {
         setupBraze (apiKey, userId, enableLogging = false) {
             initialiseBraze({
@@ -61,6 +125,7 @@ export default {
                 }
             });
         },
+
         contentCards (appboy) {
             if (!appboy) return;
             const { cards, titleCard } = new ContentCards(appboy, {
@@ -86,6 +151,29 @@ export default {
                     break;
             }
             return false;
+        },
+
+        pushBrazeEvent (payload) {
+            this.pushToDataLayer({
+                event: 'BrazeContent',
+                custom: {
+                    braze: payload
+                }
+            });
+        },
+
+        testIdForItemWithIndex (index) {
+            return this.testId && `ContentCard-${index}`;
+        },
+
+        trackCardClick (card) {
+            const event = createBrazeCardEvent('click', card);
+            this.pushBrazeEvent(event);
+        },
+
+        trackCardVisibility (card) {
+            const event = createBrazeCardEvent('view', card);
+            this.pushBrazeEvent(event);
         }
     }
 };
