@@ -28,6 +28,12 @@ export const ContentCardscomponent = () => ({
             default: text('Card CTA', 'Purchase now')
         }
     },
+    provide () {
+        return {
+            emitCardView () {},
+            emitCardClick () {}
+        };
+    },
     data () {
         return {
             card: {

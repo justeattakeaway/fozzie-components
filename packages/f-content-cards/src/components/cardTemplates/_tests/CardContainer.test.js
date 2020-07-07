@@ -22,14 +22,27 @@ const card = {
     }
 };
 
+const testId = 'CardContainer';
+
+const provide = {
+    emitCardView: jest.fn(),
+    emitCardClick: jest.fn()
+};
+
 describe('ContentCard', () => {
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
+
     it('should render a link if ctaUrl is provided', () => {
         // Act
         const wrapper = shallowMount(CardContainer, {
             localVue,
             propsData: {
-                card
-            }
+                card,
+                testId
+            },
+            provide
         });
 
         // Assert
@@ -41,12 +54,14 @@ describe('ContentCard', () => {
         const wrapper = shallowMount(CardContainer, {
             localVue,
             propsData: {
-                card
-            }
+                card,
+                testId
+            },
+            provide
         });
 
         // Assert
-        expect(wrapper.find('[data-test-id="ContentCard-TextItem-0"').text()).toBe(line1);
+        expect(wrapper.find('[data-test-id="ContentCard-TextItem-0"]').text()).toBe(line1);
     });
 
     it('should apply the correct URL', () => {
@@ -54,11 +69,46 @@ describe('ContentCard', () => {
         const wrapper = shallowMount(CardContainer, {
             localVue,
             propsData: {
-                card
-            }
+                card,
+                testId
+            },
+            provide
         });
 
         // Assert
         expect(wrapper.find(`[href="${url}"]`).exists()).toBe(true);
+    });
+
+    it('should call the injected `emitCardView` event when mounted', () => {
+        // Arrange & Act
+        shallowMount(CardContainer, {
+            localVue,
+            propsData: {
+                card,
+                testId
+            },
+            provide
+        });
+
+        // Assert
+        expect(provide.emitCardView).toHaveBeenCalled();
+    });
+
+    it('should call the injected `emitCardClick` event when clicked', () => {
+        // Arrange
+        const wrapper = shallowMount(CardContainer, {
+            localVue,
+            propsData: {
+                card,
+                testId
+            },
+            provide
+        });
+
+        // Act
+        wrapper.find(`[data-test-id="${testId}"]`).trigger('click');
+
+        // Assert
+        expect(provide.emitCardClick).toHaveBeenCalled();
     });
 });
