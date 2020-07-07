@@ -13,6 +13,9 @@ const url = '__URL__';
 const button = '__BUTTON__';
 const line1 = '__LINE_1__';
 const description = '__DESCRIPTION__';
+const title = '__TITLE__';
+const voucherCode = '__VOUCHERCODE__';
+const order = '__ORDER__';
 const id = btoa('ABC123');
 
 const createCard = type => ({
@@ -20,10 +23,13 @@ const createCard = type => ({
     url,
     button,
     description,
+    title,
     extras: {
+        order,
         button_1: button, // eslint-disable-line camelcase
         custom_card_type: type, // eslint-disable-line camelcase
-        line_1: line1 // eslint-disable-line camelcase
+        line_1: line1, // eslint-disable-line camelcase
+        voucher_code: voucherCode // eslint-disable-line camelcase
     }
 });
 
@@ -121,7 +127,7 @@ describe('ContentCards', () => {
 
         it('should provide a view handler', async () => {
             const { instance, cardViewHandler } = await arrange();
-            const cardViewDetails = { details: { message: 'bar' }, card: 'bar' };
+            const cardViewDetails = createCard('Post_Order_Card_1');
 
             // Act
             instance.find('[data-promotion-card="true"]').vm.emitCardView(cardViewDetails);
@@ -133,17 +139,7 @@ describe('ContentCards', () => {
         describe('the view handler', () => {
             it('should push a correctly-formed tracking event to the data layer', async () => {
                 const { instance } = await arrange();
-                const cardViewDetails = {
-                    details: {
-                        message: 'bar',
-                        messageAlignment: 'bang',
-                        dg: 'baz',
-                        buttons: [{}, {
-                            text: 'Call to Arms!'
-                        }]
-                    },
-                    card: 'bar'
-                };
+                const cardViewDetails = createCard('Post_Order_Card_1');
 
                 // Act
                 instance.find('[data-promotion-card="true"]').vm.emitCardView(cardViewDetails);
@@ -153,12 +149,13 @@ describe('ContentCards', () => {
                     event: 'BrazeContent',
                     custom: {
                         braze: {
+                            contentId: id,
                             contentAction: 'view',
-                            contentType: 'inAppMessage',
-                            contentTitle: 'bar',
-                            contentPosition: 'bang',
-                            contentCTA: 'Call to Arms!',
-                            variantName: 'baz'
+                            contentType: 'contentCard',
+                            contentTitle: title,
+                            contentPosition: order,
+                            contentCTA: button,
+                            customVoucherCode: voucherCode
                         }
                     }
                 });
@@ -167,7 +164,7 @@ describe('ContentCards', () => {
 
         it('should provide a click handler', async () => {
             const { instance, cardClickHandler } = await arrange();
-            const cardClickDetails = { details: { message: 'foo' }, card: 'foo' };
+            const cardClickDetails = createCard('Post_Order_Card_1');
 
             // Act
             instance.find('[data-promotion-card="true"]').vm.emitCardClick(cardClickDetails);
@@ -179,17 +176,7 @@ describe('ContentCards', () => {
         describe('the click handler', () => {
             it('should push a correctly-formed tracking event to the data layer', async () => {
                 const { instance } = await arrange();
-                const cardClickDetails = {
-                    details: {
-                        message: 'foo',
-                        messageAlignment: 'bar',
-                        dg: 'baz',
-                        buttons: [{}, {
-                            text: 'Call to Arms!'
-                        }]
-                    },
-                    card: 'foo'
-                };
+                const cardClickDetails = createCard('Post_Order_Card_1');
 
                 // Act
                 instance.find('[data-promotion-card="true"]').vm.emitCardClick(cardClickDetails);
@@ -199,12 +186,13 @@ describe('ContentCards', () => {
                     event: 'BrazeContent',
                     custom: {
                         braze: {
+                            contentId: id,
                             contentAction: 'click',
-                            contentType: 'inAppMessage',
-                            contentTitle: 'foo',
-                            contentPosition: 'bar',
-                            contentCTA: 'Call to Arms!',
-                            variantName: 'baz'
+                            contentType: 'contentCard',
+                            contentTitle: title,
+                            contentPosition: order,
+                            contentCTA: button,
+                            customVoucherCode: voucherCode
                         }
                     }
                 });
@@ -212,7 +200,7 @@ describe('ContentCards', () => {
 
             it('should log a card click event with braze', async () => {
                 const { instance } = await arrange();
-                const cardClickDetails = { details: { message: 'foo' }, card: 'foo' };
+                const cardClickDetails = 'foo';
 
                 // Act
                 instance.find('[data-promotion-card="true"]').vm.emitCardClick(cardClickDetails);

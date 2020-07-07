@@ -19,22 +19,33 @@ import initialiseBraze, { logCardClick, logCardImpressions } from '@justeat/f-me
 import ContentCards from '../services/contentCard.service';
 import cardTemplates from './cardTemplates';
 
-const createBrazeEvent = (contentAction, payload) => {
+/**
+ * Generates card-specific analytics data suitable for sending back to GTM via f-trak
+ *
+ * @param contentAction
+ * @param card
+ * @returns {{contentCTA, customVoucherCode, contentId: *, contentAction: *, contentPosition, contentTitle: *, contentType: string}}
+ */
+const createBrazeCardEvent = (contentAction, card) => {
     const {
-        message,
-        messageAlignment,
-        dg: type,
-        buttons = {}
-    } = payload;
-    const { 1: primaryCTA = {} } = buttons;
+        id: contentId,
+        title: contentTitle,
+        extras = {}
+    } = card;
+    const {
+        order: contentPosition,
+        button_1: contentCTA,
+        voucher_code: customVoucherCode
+    } = extras;
 
     return {
+        contentId,
+        contentType: 'contentCard',
+        customVoucherCode,
+        contentTitle,
         contentAction,
-        contentType: 'inAppMessage',
-        contentTitle: message,
-        contentPosition: messageAlignment,
-        contentCTA: primaryCTA.text,
-        variantName: type
+        contentPosition,
+        contentCTA
     };
 };
 
@@ -93,11 +104,11 @@ export default {
         const component = this;
 
         return {
-            emitCardView ({ details }) {
-                component.trackInAppMessageVisibility(details);
+            emitCardView (card) {
+                component.trackCardVisibility(card);
             },
-            emitCardClick ({ card, details }) {
-                component.trackInAppMessageClick(details);
+            emitCardClick (card) {
+                component.trackCardClick(card);
                 logCardClick(card);
             }
         };
@@ -154,13 +165,13 @@ export default {
             return this.testId && `ContentCard-${index}`;
         },
 
-        trackInAppMessageClick (details) {
-            const event = createBrazeEvent('click', details);
+        trackCardClick (card) {
+            const event = createBrazeCardEvent('click', card);
             this.pushBrazeEvent(event);
         },
 
-        trackInAppMessageVisibility (details) {
-            const event = createBrazeEvent('view', details);
+        trackCardVisibility (card) {
+            const event = createBrazeCardEvent('view', card);
             this.pushBrazeEvent(event);
         }
     }

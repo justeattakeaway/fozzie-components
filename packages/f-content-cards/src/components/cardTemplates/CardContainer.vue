@@ -36,28 +36,6 @@
 </template>
 
 <script>
-const cardDetails = (card, args) => ({
-    canvasName: null,
-    contentAction: null,
-    contentCTA: card.voucherCode ? 'copy_voucher' : card.ctaText,
-    contentCategory: null,
-    contentDeeplink: null,
-    contentId: card.extractedCardId,
-    contentPosition: card.order,
-    contentTitle: card.title,
-    contentType: 'ContentCard',
-    customVoucherCode: card.voucherCode || null,
-    variantName: null,
-    carousel: card.isCarousel
-        ?
-        {
-            listType: 'offers',
-            componentId: card.containerTitle
-        }
-        : null,
-    ...args
-});
-
 export default {
     props: {
         card: {
@@ -143,26 +121,11 @@ export default {
 
     methods: {
         onViewContentCard () {
-            const details = cardDetails(this, {
-                contentAction: 'view'
-            });
-
-            this.emitCardView({
-                card: this.card,
-                details
-            });
+            this.emitCardView(this.card);
         },
 
         onClickContentCard () {
-            const details = cardDetails(this, {
-                contentAction: 'click',
-                contentDeeplink: this.ctaUrl
-            });
-
-            this.emitCardClick({
-                card: this.card,
-                details
-            });
+            this.emitCardClick(this.card);
         },
 
         testIdForItemWithIndex (index) {
