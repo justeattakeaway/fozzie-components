@@ -4,7 +4,18 @@ import { withA11y } from '@storybook/addon-a11y';
 
 export default {
     title: 'Components/Organisms',
-    decorators: [withA11y]
+    decorators: [withA11y],
+    parameters: {
+        a11y: {
+            element: '.c-footer', // root element
+            config: {},
+            options: {
+                rules: {
+                    'duplicate-id': { enabled: false }
+                }
+            }
+        }
+    }
 };
 
 export const FooterComponent = () => ({
