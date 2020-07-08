@@ -2,10 +2,11 @@ import {
     withKnobs, boolean, select, text
 } from '@storybook/addon-knobs';
 import Card from '../src/components/Card.vue';
+import { withA11y } from '@storybook/addon-a11y';
 
 export default {
     title: 'Components/Atoms',
-    decorators: [withKnobs]
+    decorators: [withKnobs, withA11y]
 };
 
 export const CardComponent = () => ({

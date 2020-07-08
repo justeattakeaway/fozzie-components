@@ -3,10 +3,11 @@ import {
 } from '@storybook/addon-knobs';
 import FormField from '../src/components/FormField.vue';
 import { VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../src/constants';
+import { withA11y } from '@storybook/addon-a11y';
 
 export default {
     title: 'Components/Atoms',
-    decorators: [withKnobs]
+    decorators: [withKnobs, withA11y]
 };
 
 export const FormFieldComponent = () => ({

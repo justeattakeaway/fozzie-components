@@ -1,10 +1,11 @@
 import { withKnobs, array, text } from '@storybook/addon-knobs';
 import ContentCards from '../src/components/ContentCards.vue';
 import { defaultEnabledCardTypes } from '../src/services/contentCard.service';
+import { withA11y } from '@storybook/addon-a11y';
 
 export default {
     title: 'Components/Organisms',
-    decorators: [withKnobs]
+    decorators: [withKnobs, withA11y]
 };
 
 export const ContentCardscomponent = () => ({

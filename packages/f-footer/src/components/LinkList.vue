@@ -30,8 +30,7 @@
         <ul
             :id="listId"
             :aria-labelledby="listHeadingId"
-            class="c-footer-list"
-            role="region">
+            class="c-footer-list">
             <li
                 v-for="(link, i) in linkList.links"
                 :key="i + '_Link'">
