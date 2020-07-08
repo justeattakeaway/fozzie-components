@@ -4,12 +4,33 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v1.18.0
+v1.20.0
 ------------------------------
 *June 25, 2020*
 
 ### Changed
-- Adding package dependencies for new `f-vue-icons` release.
+- Updating base version of `fozzie-colour-palette` and updating any colour variables affected.
+- Minor package updates.
+
+
+v1.19.0
+------------------------------
+*June 25, 2020*
+
+### Changed
+- Updating base version of `fozzie-colour-palette` and updating any colour variables affected.
+- Minor package updates.
+
+
+v1.18.0
+------------------------------
+*June 25, 2020*
+
+### Added
+- devDependency on `cross-env` to allow for cross-platform environment variables in CI scripts
+
+### Changed
+- scripts using `$LERNA_ARGS` to use `cross-env` as above
 
 
 v1.17.0

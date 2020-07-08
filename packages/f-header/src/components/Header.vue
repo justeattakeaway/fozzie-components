@@ -115,7 +115,7 @@ export default {
             return this.headerBackgroundTheme === 'transparent' && !this.mobileNavIsOpen;
         },
         headerBackgroundClass () {
-            return this.headerBackgroundTheme === 'red' ? 'c-header--red' : '';
+            return this.headerBackgroundTheme === 'highlight' ? 'c-header--highlightBg' : '';
         }
     },
     methods: {
@@ -193,9 +193,13 @@ export default {
         }
     }
 
-.c-header--red {
-        background-color: $red;
+    .c-header--highlightBg {
+        background-color: $red; // temporary – will change to $color-primary as part of Phase 3
         min-height: 88px;
+
+        &[data-theme='ml'] {
+            background-color: $color-primary;
+        }
     }
 
     .c-header-container {
@@ -250,10 +254,6 @@ export default {
 
         svg {
             fill: $header-buttonIcon-color;
-
-            @include theme(ml) {
-                fill: $header-buttonIcon-color--ml;
-            }
         }
     }
 
@@ -269,10 +269,6 @@ export default {
         color: $header-buttonCount-color;
         background: $header-buttonCount-bg;
         border: 1px solid $header-buttonCount-borderColor;
-
-        @include theme(ml) {
-            background: $header-buttonCount-bg--ml;
-        }
     }
 
     .c-header-button--primary {

@@ -2,17 +2,18 @@
     <card-container
         :card="card"
         :container-title="containerTitle"
-        :is-carousel="isCarousel">
+        :is-carousel="isCarousel"
+        :data-test-id="testId">
         <span
             v-if="type === 'Promotion_Card_1'"
             class="o-btn o-btn--secondary"
-            data-test-id="contentCard-promoCard-1">
+            :data-test-id="testIdForPromoCardType(1)">
             {{ ctaText }}
         </span>
         <span
             v-if="type === 'Promotion_Card_2'"
             class="c-contentCard-link o-btnLink"
-            data-test-id="contentCard-promoCard-2">
+            :data-test-id="testIdForPromoCardType(2)">
             {{ ctaText }}
         </span>
     </card-container>
@@ -37,6 +38,10 @@ export default {
         isCarousel: {
             type: Boolean,
             default: false
+        },
+        testId: {
+            type: String,
+            default: null
         }
     },
     data () {
@@ -52,6 +57,12 @@ export default {
             ctaText: button || linkText,
             type
         };
+    },
+
+    methods: {
+        testIdForPromoCardType (type) {
+            return this.testId && `contentCard-promoCard-${type}`;
+        }
     }
 };
 </script>

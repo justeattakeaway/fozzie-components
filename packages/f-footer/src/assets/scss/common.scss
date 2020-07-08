@@ -13,7 +13,7 @@ $theme: 'je' !default;
 /**
  * Component Variables
  */
- $footer-bgColor         : $grey--lightest !default;
+ $footer-bgColor         : $grey--lighter !default;
  $footer-bgLight         : $grey--offWhite !default;
  $footer-textColor       : $color-text !default;
  $footer-borderColor     : $color-border--interactive !default;
@@ -22,13 +22,10 @@ $theme: 'je' !default;
 
  /**
  * Global variables which need to be included for Menulog theming
-* TODO: delete these when brand is normalised to JET as will be able to pull in default colours
+* TODO: remove these when type is normalised to new JET font
  */
  $font-family-headings--ml   : 'Aspira', 'Times New Roman', Times, serif;
  $font-weight-headings--ml   : 800;
- $color-link-default--ml     : #4950b9;
- $color-link-hover--ml       : #464cb1;
- $color-link-active--ml      : #3d439b;
 
 
 

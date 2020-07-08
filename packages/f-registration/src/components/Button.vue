@@ -39,13 +39,13 @@ export default {
 
 // Button styling (should be pulled out as a separate component)
 
-$btn-default-bgColor                : $grey--lightest;
+$btn-default-bgColor                : $grey--lighter;
 $btn-default-text-colour            : $grey--dark;
 $btn-default-weight                 : 500;
 $btn-default-height                 : 2.6;
 $btn-default-font-size              : base--scaleUp;
 $btn-default-font-family            : $font-family-headings;
-$btn-default-bgColor--hover         : $grey--lighter;
+$btn-default-bgColor--hover         : $grey--light;
 $btn-default-borderRadius           : 2px;
 $btn-default-hozPadding             : 1em;
 $btn-default-vertPadding            : 11px;
@@ -55,7 +55,7 @@ $btn-primary-bgColor--hover         : $blue--dark;
 $btn-primary-bgColor--focus         : $blue--darkest;
 $btn-primary-textColor              : $white;
 
-$btn-disabled-bgColor               : $grey--lighter;
+$btn-disabled-bgColor               : $grey--light;
 
 
 /**
