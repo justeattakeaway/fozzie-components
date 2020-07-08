@@ -7,7 +7,7 @@ export default {
     decorators: [withKnobs, withA11y]
 };
 
-export const ContentCardscomponent = () => ({
+export const SkeletonLoaderComponent = () => ({
     components: { SkeletonLoader },
     props: {
         count: {
@@ -17,6 +17,6 @@ export const ContentCardscomponent = () => ({
     template: '<skeleton-loader :count="count" />'
 });
 
-ContentCardscomponent.story = {
+SkeletonLoaderComponent.story = {
     name: 'f-skeleton-card'
 };
