@@ -1,6 +1,6 @@
 import { withKnobs, number } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import SkeletonCard from '../src/components/cardTemplates/SkeletonCard.vue';
+import SkeletonLoader from '../src/components/cardTemplates/SkeletonLoader.vue';
 
 export default {
     title: 'Components/Atoms',
@@ -8,13 +8,13 @@ export default {
 };
 
 export const ContentCardscomponent = () => ({
-    components: { SkeletonCard },
+    components: { SkeletonLoader },
     props: {
         count: {
             default: number('Count', 1)
         }
     },
-    template: '<skeleton-card />'
+    template: '<skeleton-loader :count="count" />'
 });
 
 ContentCardscomponent.story = {
