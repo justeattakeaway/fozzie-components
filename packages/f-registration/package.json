@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-registration",
   "description": "Fozzie Form Field Component",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "main": "dist/f-registration.umd.min.js",
   "files": [
     "dist"
