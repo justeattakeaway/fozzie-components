@@ -16,6 +16,9 @@
   "dependencies": {
     "core-js": "^3.6.4"
   },
+  "resolutions": {
+    "webpack": "4.36.0"
+  },
   "devDependencies": {
     "@babel/cli": "7.10.3",
     "@babel/plugin-proposal-optional-chaining": "7.10.3",
@@ -48,7 +51,7 @@
     "node-sass": "4.14.1",
     "node-sass-magic-importer": "5.3.2",
     "postcss-loader": "3.0.0",
-    "sass-loader": "7.1.0",
+    "sass-loader": "7.3.1",
     "vue-svg-loader": "0.16.0",
     "vue-template-compiler": "2.6.11",
     "webdriverio": "6.1.20"
