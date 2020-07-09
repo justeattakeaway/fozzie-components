@@ -54,7 +54,7 @@
     "sass-loader": "7.1.0",
     "typeface-nunito": "0.0.72",
     "vue-svg-loader": "0.16.0",
-    "vue-template-compiler": "2.6.11",
+    "vue-template-compiler": "2.6.10",
     "webdriverio": "6.1.20"
   },
   "bugs": {
