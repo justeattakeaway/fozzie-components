@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div class="offers-preloading-wrap">
+        <div :class="['offers-preloading-wrap',{ 'offers-preloading-full-width': count === 1 }]">
             <template v-for="(skeletons, index) in count">
                 <div
                     :key="index"
-                    :class="['offers-preloading', { 'offers-preloading-promo': type === 'Promo' }]"
+                    :class="['offers-preloading', { 'offers-preloading-post-order': type === 'PostOrder' }]"
                     data-test-id="contentCard-skeletonLoader"
                 />
             </template>

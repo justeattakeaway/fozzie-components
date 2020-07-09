@@ -1,8 +1,10 @@
 <template>
     <div
+        v-if="hasLoaded"
         class="c-contentCards c-contentCards--wrap"
         :data-test-id="testId">
-        <template v-for="(contentCard, cardIndex) in cards">
+        <template
+            v-for="(contentCard, cardIndex) in cards">
             <component
                 :is="handleCustomCardType(contentCard.extras.custom_card_type)"
                 :key="cardIndex"
@@ -12,6 +14,10 @@
             />
         </template>
     </div>
+    <skeleton-loader
+        v-else
+        :type="loader.type"
+        :count="loader.count" />
 </template>
 
 <script>
@@ -82,9 +88,18 @@ export default {
     },
 
     data () {
+        const isPostOrderLoader = this.enabledCardTypes && this.enabledCardTypes.every(type => type === 'Post_Order_Card_1');
+        console.log({ isPostOrderLoader });
+
         return {
             cards: [],
-            titleCard: {}
+            titleCard: {},
+            hasLoaded: false,
+            loader: {
+                type: isPostOrderLoader ? 'PostOrder' : 'PromoCard',
+                count: isPostOrderLoader ? 1 : 3
+            }
+
         };
     },
 
@@ -138,6 +153,7 @@ export default {
                 .output();
             this.cards = cards;
             this.titleCard = titleCard;
+            this.hasLoaded = true;
         },
 
         handleCustomCardType (type) {
@@ -594,6 +610,8 @@ export default {
             flex-flow: wrap;
             flex-direction: row;
         }
+
+
     }
     .offers-preloading {
         border-radius: 4px;
@@ -609,6 +627,13 @@ export default {
             flex-direction: row;
             max-width: 370px;
             flex: 0 0 40%;
+        }
+
+        .offers-preloading-full-width & {
+            @include media('>=narrowMid') {
+                max-width: 100%;
+                flex: 0 0 100%;
+            }
         }
     }
 
@@ -628,54 +653,53 @@ export default {
             animation: shine 1.5s linear 1s infinite;
         }
 
-        &.offers-preloading-promo {
+        &.offers-preloading-post-order {
             background-image: radial-gradient(0 at 0 0, $grey--lighter 99%, transparent 0),
-            linear-gradient(to left, $grey--light 46px, transparent 0), // restaurant thumbnail placeholder left
-            linear-gradient($grey--lighter 170px, transparent 0), // restaurant hero image placeholder
+            linear-gradient(to right, white 20px, transparent 0),
+            linear-gradient($grey--lighter 20px, transparent 0),
+            linear-gradient($grey--lighter 220px, transparent 0), // restaurant hero image placeholder
             linear-gradient($grey--lighter 20px, transparent 0),
             linear-gradient($grey--lighter 20px, transparent 0),
             linear-gradient($grey--lighter 20px, transparent 0);
-
             background-size: 100px 457px,
-            50% 46px,
-            100% 170px,
-            80% 20px,
-            40% 20px,
-            65% 20px;
+            20px 100%,
+            50% 20px,
+            100% 220px,
+            100% 20px,
+            65% 20px,
+            40% 20px;
 
             background-position: 0 0,
-            23px 147px,
-            0 0,
-            20px 230px,
-            20px 260px,
-            20px 300px;
+            100% 0,
+            20px 20px,
+            20px 56px,
+            20px 292px,
+            20px 328px,
+            20px 364px;
         }
 
         background-image: radial-gradient(0 at 0 0, $grey--lighter 99%, transparent 0),
-        linear-gradient(to right, white 20px, transparent 0),
-        linear-gradient($grey--lighter 20px, transparent 0),
-        linear-gradient($grey--lighter 220px, transparent 0), // restaurant hero image placeholder
+        linear-gradient(to left, $grey--light 46px, transparent 0), // restaurant thumbnail placeholder left
+        linear-gradient($grey--lighter 170px, transparent 0), // restaurant hero image placeholder
         linear-gradient($grey--lighter 20px, transparent 0),
         linear-gradient($grey--lighter 20px, transparent 0),
         linear-gradient($grey--lighter 20px, transparent 0);
 
-        background-repeat: no-repeat;
-
         background-size: 100px 457px,
-        20px 100%,
-        50% 20px,
-        100% 220px,
-        100% 20px,
-        65% 20px,
-        40% 20px;
+        50% 46px,
+        100% 170px,
+        80% 20px,
+        40% 20px,
+        65% 20px;
 
         background-position: 0 0,
-        100% 0,
-        20px 20px,
-        20px 56px,
-        20px 292px,
-        20px 328px,
-        20px 364px;
+        23px 147px,
+        0 0,
+        20px 230px,
+        20px 260px,
+        20px 300px;
+
+        background-repeat: no-repeat;
     }
 
     @keyframes shine {
