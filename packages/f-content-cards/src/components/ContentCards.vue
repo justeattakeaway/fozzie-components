@@ -603,10 +603,7 @@ export default {
         margin: 0 8px 24px 0;
         width: 100%;
         padding: spacing(x3) spacing(x2);
-
-        &.offers-preloading-promo {
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-        }
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 
         @include media('>=narrowMid') {
             flex-direction: row;
@@ -655,7 +652,9 @@ export default {
         }
 
         background-image: radial-gradient(0 at 0 0, $grey--lighter 99%, transparent 0),
-        linear-gradient($grey--lighter 250px, transparent 0), // restaurant hero image placeholder
+        linear-gradient(to right, white 20px, transparent 0),
+        linear-gradient($grey--lighter 20px, transparent 0),
+        linear-gradient($grey--lighter 220px, transparent 0), // restaurant hero image placeholder
         linear-gradient($grey--lighter 20px, transparent 0),
         linear-gradient($grey--lighter 20px, transparent 0),
         linear-gradient($grey--lighter 20px, transparent 0);
@@ -663,16 +662,20 @@ export default {
         background-repeat: no-repeat;
 
         background-size: 100px 457px,
-        100% 250px,
+        20px 100%,
+        50% 20px,
+        100% 220px,
         100% 20px,
         65% 20px,
         40% 20px;
 
         background-position: 0 0,
-        0 0,
-        0 266px,
-        0 302px,
-        0 338px;
+        100% 0,
+        20px 20px,
+        20px 56px,
+        20px 292px,
+        20px 328px,
+        20px 364px;
     }
 
     @keyframes shine {
