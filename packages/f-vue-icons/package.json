@@ -47,13 +47,15 @@
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
+  "dependencies": {
+    "babel-helper-vue-jsx-merge-props": "2.0.3"
+  },
   "devDependencies": {
     "@justeat/f-icons": "2.1.0",
     "@vue/cli-plugin-babel": "4.2.3",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.3.1",
     "@vue/test-utils": "1.0.2",
-    "babel-helper-vue-jsx-merge-props": "2.0.3",
     "fs-extra": "8.1.0",
     "lodash.kebabcase": "4.1.1",
     "marked": "0.7.0",
