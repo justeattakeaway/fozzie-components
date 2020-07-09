@@ -4,6 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.1.0
+------------------------------
+*July 9, 2020*
+
+### Changed
+- Updated `f-vue-icons` version.
+- Made `f-trak` peer dependency use a range value.
+
+### Removed
+- Unused `lodash-es` dependency.
+- `lodash-es` ignore from jest config.
+
+
 v3.0.0
 ------------------------------
 *June 22, 2020*
