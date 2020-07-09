@@ -1630,10 +1630,12 @@
     "@justeat/f-icons" "1.32.0"
     vue "2.6.10"
 
-"@justeat/f-vue-icons@1.0.0-beta.10":
-  version "1.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.10.tgz#11aa923bd4823043fa086f098a2b1e0aba57b84b"
-  integrity sha512-BHkiiiZQGlRe6mb42mf0e2UFpB5zINoFf7pSGGpM7okStVDKtaCSUN7URlt/RNsMWdppeA2bhGJcfLriWk02bQ==
+"@justeat/f-vue-icons@1.0.0-beta.11":
+  version "1.0.0-beta.11"
+  resolved "http://packages.je-labs.com/npm/private-npm/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.11.tgz#2c8c1525e22c731a680a2a2bcae3ba1db4f959f8"
+  integrity sha1-LIwVJeIscxpoCioryuO6HbT5Wfg=
+  dependencies:
+    babel-helper-vue-jsx-merge-props "2.0.3"
 
 "@justeat/f-vue-icons@1.0.0-beta.5":
   version "1.0.0-beta.5"
