@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest (roll into next release)
+------------------------------
+*July 9, 2020*
+
+### Changed
+- Updated `sass-loader` to 7.3.1 to allow storybook to perform contextual import of common.scss files
+  from Single File Components in subdirectories
+
+
 v1.20.0
 ------------------------------
 *July 9, 2020*

@@ -1,18 +1,30 @@
 const magicImporter = require('node-sass-magic-importer');
+const path = require('path');
 
 // vue.config.js
 module.exports = {
-    chainWebpack: config => {
-        // console.log(config.module.rules);
-        config.module
-            .rule('scss-importer')
-            .test(/\.scss$/)
-            .use('importer')
-            .loader('sass-loader')
-            .options({
+    css: {
+        loaderOptions: {
+            sass: {
                 importer: magicImporter(),
-                // eslint-disable-next-line quotes
-                data: `@import "../assets/scss/common.scss";`
-            });
+                /**
+                 * Requires sass-loader 7.3.1 - works out the relative path for the common.scss file for each component
+                 *
+                 * @param resourcePath
+                 * @returns {string}
+                 */
+                data ({ resourcePath }) {
+                    const absPath = path.join(
+                        resourcePath,
+                        ...(new Array(resourcePath.split(path.sep).reverse().indexOf('src')).fill('..')),
+                        'assets/scss/common.scss'
+                    );
+                    const relPath = path.relative(path.dirname(resourcePath), absPath)
+                        .replace(new RegExp(path.sep.replace('\\', '\\\\'), 'g'), '/');
+                    return `@import "${relPath}";`;
+                }
+            }
+        },
+        modules: true
     }
 };
