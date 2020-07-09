@@ -4,7 +4,7 @@
             <template v-for="(skeletons, index) in count">
                 <div
                     :key="index"
-                    class="offers-preloading"
+                    :class="['offers-preloading', { 'offers-preloading-promo': type === 'Promo' }]"
                     data-test-id="contentCard-skeletonLoader"
                 />
             </template>
@@ -19,6 +19,10 @@ export default {
         count: {
             type: Number,
             default: 1
+        },
+        type: {
+            type: String,
+            default: 'Promo'
         }
     }
 };

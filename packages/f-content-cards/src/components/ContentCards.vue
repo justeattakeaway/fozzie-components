@@ -603,7 +603,10 @@ export default {
         margin: 0 8px 24px 0;
         width: 100%;
         padding: spacing(x3) spacing(x2);
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+
+        &.offers-preloading-promo {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+        }
 
         @include media('>=narrowMid') {
             flex-direction: row;
@@ -613,54 +616,68 @@ export default {
     }
 
     .offers-preloading:empty {
+        position: relative;
         height: 403px;
         background-color: $white;
 
-        background-image: radial-gradient(0 at 0 0, lightgray 99%, transparent 0),
-        linear-gradient(100deg, rgba(255, 255, 255, 0) 0%,
-                        rgba(255, 255, 255, 0) 30%,
-                        rgba(255, 255, 255, 0.5) 50%,
-                        rgba(255, 255, 255, 0) 70%), // shine
-        linear-gradient(to left, gray 23px, transparent 0), // restaurant thumbnail placeholder left
-        linear-gradient(to right, gray 23px, transparent 0), // restaurant thumbnail placeholder right
-        linear-gradient(lightgray 170px, transparent 0), // restaurant hero image placeholder
-        linear-gradient(lightgray 20px, transparent 0),
-        linear-gradient(lightgray 20px, transparent 0),
-        linear-gradient(lightgray 20px, transparent 0);
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 70%) -100px -100px/100px 657px no-repeat;
+            animation: shine 1.5s linear 1s infinite;
+        }
 
-        background-repeat: no-repeat;
+        &.offers-preloading-promo {
+            background-image: radial-gradient(0 at 0 0, $grey--lighter 99%, transparent 0),
+            linear-gradient(to left, $grey--light 46px, transparent 0), // restaurant thumbnail placeholder left
+            linear-gradient($grey--lighter 170px, transparent 0), // restaurant hero image placeholder
+            linear-gradient($grey--lighter 20px, transparent 0),
+            linear-gradient($grey--lighter 20px, transparent 0),
+            linear-gradient($grey--lighter 20px, transparent 0);
 
-        background-size: 100px 457px,
-        100px 657px,
-        50% 46px,
-        50% 46px,
-        100% 170px,
-        80% 20px,
-        40% 20px,
-        65% 20px;
+            background-size: 100px 457px,
+            50% 46px,
+            100% 170px,
+            80% 20px,
+            40% 20px,
+            65% 20px;
 
-        background-position: 0 0,
-        -100px -100px,
-        0 147px,
-        100% 147px,
-        0 0,
-        20px 230px,
-        20px 260px,
-        20px 300px;
-
-        animation: shine 1.5s linear 1s infinite;
-    }
-
-    @keyframes shine {
-        33%, to {
             background-position: 0 0,
-            140% -100px,
-            0 147px,
-            100% 147px,
+            23px 147px,
             0 0,
             20px 230px,
             20px 260px,
             20px 300px;
+        }
+
+        background-image: radial-gradient(0 at 0 0, $grey--lighter 99%, transparent 0),
+        linear-gradient($grey--lighter 250px, transparent 0), // restaurant hero image placeholder
+        linear-gradient($grey--lighter 20px, transparent 0),
+        linear-gradient($grey--lighter 20px, transparent 0),
+        linear-gradient($grey--lighter 20px, transparent 0);
+
+        background-repeat: no-repeat;
+
+        background-size: 100px 457px,
+        100% 250px,
+        100% 20px,
+        65% 20px,
+        40% 20px;
+
+        background-position: 0 0,
+        0 0,
+        0 266px,
+        0 302px,
+        0 338px;
+    }
+
+    @keyframes shine {
+        33%, to {
+            background-position: 140% -100px;
         }
     }
 
