@@ -84,7 +84,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .c-postOrderCard {
         border: 1px solid $color-border;
         border-radius: $contentCardRadius;
@@ -106,7 +106,7 @@ export default {
             }
         }
 
-        .c-contentCard-thumbnail {
+        /deep/ .c-contentCard-thumbnail {
             position: absolute;
             top: spacing(x2);
             left: spacing(x2);
@@ -114,7 +114,7 @@ export default {
             border: none;
         }
 
-        .c-contentCard-info {
+        /deep/ .c-contentCard-info {
             background: none;
             box-shadow: none;
             position: static;
@@ -130,26 +130,26 @@ export default {
             }
         }
 
-        .c-contentCard-title {
+        /deep/ .c-contentCard-title {
             text-align: left;
             margin: 0 0 spacing(x2);
         }
 
-        .c-contentCard-subTitle {
+        /deep/ .c-contentCard-subTitle {
             @include font-size(base);
 
             text-align: left;
             margin: 0;
         }
 
-        .c-contentCard {
+        /deep/ .c-contentCard {
             position: relative;
             margin: 0;
             padding: 0;
             max-width: 100%;
         }
 
-        .c-contentCard-bgImg {
+        /deep/ .c-contentCard-bgImg {
             min-height: 250px;
             border-radius: $contentCardRadius;
 
@@ -160,11 +160,11 @@ export default {
     }
 
     .c-postOrderCard--condensed {
-        .c-contentCard-bgImg {
+        /deep/ .c-contentCard-bgImg {
             display: none;
         }
 
-        .c-contentCard-thumbnail {
+        /deep/ .c-contentCard-thumbnail {
             left: 0;
             top: 0;
 
@@ -174,7 +174,7 @@ export default {
             }
         }
 
-        .c-contentCard-info {
+        /deep/ .c-contentCard-info {
             padding: 0 0 0 spacing(x9);
 
             @include media('<mid') {

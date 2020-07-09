@@ -179,7 +179,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .c-contentCards {
         margin-top: spacing(x5);
         margin-bottom: spacing(x5);

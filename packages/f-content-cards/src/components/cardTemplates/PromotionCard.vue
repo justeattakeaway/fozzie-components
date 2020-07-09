@@ -67,7 +67,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .c-contentCard-link {
         font-weight: $font-weight-bold;
         text-decoration: none;

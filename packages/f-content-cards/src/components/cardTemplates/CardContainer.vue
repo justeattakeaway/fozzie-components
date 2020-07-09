@@ -19,6 +19,7 @@
             <img
                 v-if="icon"
                 :src="icon"
+                :alt="title"
                 class="c-contentCard-thumbnail">
             <h3 class="c-contentCard-title">
                 {{ title }}
@@ -145,7 +146,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .c-contentCard {
         width: 100%;
         text-decoration: initial;
