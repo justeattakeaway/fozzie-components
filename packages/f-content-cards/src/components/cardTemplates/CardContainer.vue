@@ -144,3 +144,127 @@ export default {
     }
 };
 </script>
+
+<style lang="scss">
+    .c-contentCard {
+        width: 100%;
+        text-decoration: initial;
+        text-align: center;
+
+        @include media('>=narrowMid') {
+            max-width: 370px;
+        }
+
+        &,
+        &:hover,
+        &:focus {
+            color: currentColor;
+        }
+
+        .c-contentCards--wrap & {
+            display: flex;
+            flex-direction: column;
+            flex: 0 0 40%;
+            margin: 0 spacing() spacing(x3) 0;
+            width: 100%;
+
+            @include media('>=narrowMid') {
+                margin: 0 spacing() spacing(x3);
+            }
+        }
+
+        /**
+         * 1. Magic number to align isolated image with top of content card
+         */
+        &.c-contentCard--isolateHeroImage {
+            position: relative;
+            margin: 84px 0 spacing(x3); // 1
+
+            .c-contentCard-info {
+                border-radius: $border-radius;
+            }
+
+            .c-contentCard-bgImg {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: -83px;
+                z-index: zIndex(mid);
+                width: 109px;
+                height: 96px;
+                margin: 0 auto;
+                min-height: inherit;
+                background: transparent no-repeat;
+            }
+        }
+    }
+
+    .c-contentCard-bgImg {
+        width: 100%;
+        min-height: 170px;
+        background-repeat: repeat;
+        background-size: cover;
+        background-color: $grey--lighter;
+        background-position: center;
+        border-radius: $border-radius $border-radius 0 0;
+
+        .c-contentCard-info--inset & {
+            height: 188px;
+        }
+    }
+
+    .c-contentCard-title {
+        margin-top: spacing();
+        text-align: center;
+
+        // This is a super weird way to truncate text to 2 lines
+        // It uses old flexbox notation and webkit properties, but is supported in
+        // Chrome and Edge (as both are Chromium), Safari and Firefox. Go figure.
+        // Check this article for more info: https://css-tricks.com/line-clampin/#article-header-id-0
+        overflow: hidden;
+        display: -webkit-box; /* stylelint-disable-line value-no-vendor-prefix */
+        -webkit-line-clamp: 2; // stop at 2 lines
+        -webkit-box-orient: vertical;
+    }
+
+    .c-contentCard-subTitle {
+        @include font-size(base--scaleUp);
+        margin-top: spacing();
+    }
+
+    .c-contentCard-text {
+        margin-top: spacing();
+        text-align: center;
+    }
+
+    .c-contentCard-info {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 164px; // min-height set to the height of an card with a one-line title
+        background-color: $white;
+        padding: spacing(x3) spacing(x2);
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+        height: 100%;
+        border-radius: 0 0 $border-radius $border-radius;
+
+        .has-offer & {
+            padding-bottom: 0;
+        }
+    }
+
+    .c-contentCard-footer {
+        width: 100%;
+        margin-top: auto;
+        text-align: center;
+        padding-top: spacing(x2);
+    }
+
+    .c-contentCard-thumbnail {
+        border: 1px solid $grey--lighter;
+        margin-top: - (32px + spacing(x2)); // This offsets the thumbnail above the top of the info card
+        width: 48px;
+        min-height: 48px;
+    }
+</style>

@@ -66,3 +66,10 @@ export default {
     }
 };
 </script>
+
+<style lang="scss">
+    .c-contentCard-link {
+        font-weight: $font-weight-bold;
+        text-decoration: none;
+    }
+</style>
