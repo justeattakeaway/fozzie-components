@@ -2272,13 +2272,6 @@
   dependencies:
     window-or-global "^1.0.1"
 
-"@justeat/f-metadata@2.7.0":
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-metadata/-/f-metadata-2.7.0.tgz#da10960fb334adb9acd9fdf304063ca5fece1e34"
-  integrity sha512-ITj2Mb+/ctixAbRz9afJwTGoxj1nZmEpdqUE2f4q0o5ehNuviFpLCpB314E6q76c8mR8ojTbLWBCfpi8wxh7Bw==
-  dependencies:
-    appboy-web-sdk "2.5.2"
-
 "@justeat/f-services@0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-0.13.0.tgz#b0fc67948e94800ba176addb9d92cce444d28c8e"
@@ -9166,6 +9159,24 @@ extsprintf@^1.2.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
+
+eyeglass@1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/eyeglass/-/eyeglass-1.4.1.tgz#641591720df59291690cea7c45afa64d04840838"
+  integrity sha512-StYCyE+gClI+/dw7HyujkxHZozEAVE6pYgEKfSudY9kpVrcbS9k885KZlfSQ5s6U9DESgCXd9xRAVK072/XFSA==
+  dependencies:
+    archy "^1.0.0"
+    deasync "^0.1.4"
+    debug "^2.2.0"
+    ensure-symlink "^1.0.0"
+    fs-extra "^0.30.0"
+    glob "^7.1.0"
+    json-stable-stringify "^1.0.1"
+    lodash.includes "^4.3.0"
+    lodash.merge "^4.6.0"
+    node-sass "^4.0.0 || ^3.10.1"
+    node-sass-utils "^1.1.2"
+    semver "^5.0.3"
 
 eyeglass@^1.1.2:
   version "1.6.0"
