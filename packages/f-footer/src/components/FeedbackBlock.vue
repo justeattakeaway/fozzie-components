@@ -66,27 +66,15 @@ export default {
     @include font-size(base);
     text-decoration: underline;
 
-    @include theme(ml) {
-        color: $color-link-default--ml;
-    }
-
     &:hover {
         cursor: pointer;
         color: $color-link-hover;
         background-color: transparent;
-
-        @include theme(ml) {
-            color: $color-link-hover--ml;
-        }
     }
     &:active,
     &:focus {
         color: $color-link-active;
         background-color: transparent;
-
-        @include theme(ml) {
-            color: $color-link-active--ml;
-        }
     }
 }
 </style>

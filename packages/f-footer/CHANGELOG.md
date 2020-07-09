@@ -4,13 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+v3.0.0
 ------------------------------
-*June 4, 2020*
+*June 22, 2020*
 
 ### Changed
-- ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails)
+- Updated component to new orange JET theme for all tenants.
+- ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails).
 - Jest config updated to hide style warnings (as we don't need them to be shown for the tests).
+
+### Removed
+- Menulog colour theming (typography switch is still needed).
 
 
 v2.3.0
