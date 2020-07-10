@@ -11,6 +11,7 @@
             :class="[{ 'c-contentCard-bgImg': !!image }]">
             <img
                 v-if="!isBackgroundImage"
+                class="c-contentCard-img"
                 :src="image"
                 :alt="title">
         </div>

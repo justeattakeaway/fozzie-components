@@ -557,11 +557,11 @@ export default {
             @include media ('<mid') {
                 border-radius: $contentCardRadius $contentCardRadius 0 0;
             }
+        }
 
-            img {
-                display: block;
-                max-width: 100%;
-            }
+        .c-contentCard-img {
+            display: block;
+            max-width: 100%;
         }
     }
 
