@@ -551,11 +551,16 @@ export default {
         }
 
         .c-contentCard-bgImg {
-            min-height: 250px;
+            overflow: hidden;
             border-radius: $contentCardRadius;
 
             @include media ('<mid') {
                 border-radius: $contentCardRadius $contentCardRadius 0 0;
+            }
+
+            img {
+                display: block;
+                max-width: 100%;
             }
         }
     }

@@ -7,8 +7,13 @@
         @click="onClickContentCard"
     >
         <div
-            :style="{ backgroundImage: `url('${image}')` }"
-            :class="[{ 'c-contentCard-bgImg': !!image }]" />
+            :style="{ 'background-image': `url(${image})` }"
+            :class="[{ 'c-contentCard-bgImg': !!image }]">
+            <img
+                v-if="isPostOrderCard"
+                :src="image"
+                :alt="title">
+        </div>
         <div class="c-contentCard-info">
             <img
                 v-if="icon"
@@ -107,6 +112,10 @@ export default {
 
         isAnniversaryCard () {
             return this.type === 'Anniversary_Card_1';
+        },
+
+        isPostOrderCard () {
+            return this.type === 'Post_Order_Card_1';
         }
     },
 
