@@ -7,7 +7,7 @@
         @click="onClickContentCard"
     >
         <div
-            :style="{ 'background-image': `url(${image})` }"
+            :style="{ 'background-image': isPostOrderCard ? `url(${image})` : '' }"
             :class="[{ 'c-contentCard-bgImg': !!image }]">
             <img
                 v-if="isPostOrderCard"
