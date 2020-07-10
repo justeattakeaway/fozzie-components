@@ -180,7 +180,7 @@ export default {
 .c-countrySelectorContainer {
     @include media('<wide') {
         width: 100%;
-        border-top: 1px solid $grey--lighter;
+        border-top: 1px solid $grey--light;
         order: 3;
     }
 }
@@ -190,7 +190,7 @@ export default {
     padding: spacing(x2);
     display: flex;
     align-items: center;
-    background-color: $grey--lightest;
+    background-color: $grey--lighter;
     border: none;
     cursor: pointer;
     @include font-size(base);

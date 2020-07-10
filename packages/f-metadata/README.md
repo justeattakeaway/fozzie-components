@@ -41,12 +41,14 @@ const initialiseBraze = require('@justeat/f-metadata');
 
 ### Initialisation
 
-The package comes with one method for initialising Braze. All other functionality, such as handling content cards or intercepting in-app messages is done with callbacks passed through config.
+The package comes with one method for initialising Braze. A couple of other methods are provided for logging click and view events of cards back to braze.
+
+All other functionality, such as handling content cards or intercepting in-app messages is done with callbacks passed through config.
 
 **Basic Example**
 
 ```js
-import initialiseBraze from '@justeat/f-metadata'
+import initialiseBraze, { logCardClick, logCardImpressions } from '@justeat/f-metadata'
 
 const config = {
   apiKey = '1234-1234-1234',
@@ -59,7 +61,27 @@ const config = {
   }
 };
 
-initialiseBraze(config);
+const brazePromise = initialiseBraze(config);
+
+// The below assumes card data is being rendered into elements with class "brazeCard", that they
+// have card data as returned by braze attached to a "data-content-card" attribute, and that all
+// elements accessible via that css selector are visible
+
+brazePromise.then(() => {
+  const brazeCards = document.querySelectorAll('.brazeCard');
+
+  let brazeCardsData = [];
+
+  brazeCards.forEach(brazeCard => {
+    brazeCardsData.push(brazeCard.dataset.contentCard);
+
+    brazeCard.addEventListener('click', clickEvent => {
+      logCardClick(brazeCard.dataset.contentCard);
+    });
+  });
+
+  logCardImpressions(brazeCardsData);
+});
 ```
 
 ### Config Object

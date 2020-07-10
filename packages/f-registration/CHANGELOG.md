@@ -4,6 +4,46 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest (roll into next release)
+------------------------------
+*July 2, 2020*
+
+### Added
+- Accessibility add-on to Storybook story.
+
+*June 25, 2020*
+
+### Changed
+- Updating colour variables to use new versions set in `fozzie-colour-palette`.
+
+
+v0.7.1
+------------------------------
+*June 12, 2020*
+
+### Changed
+- Added space between login preLinkText and linkText.
+
+
+v0.7.0
+------------------------------
+*June 11, 2020*
+
+### Changed
+- Storybook category updated to `Organisms`.
+
+### Added
+- Login link to registration component.
+
+
+v0.6.0
+------------------------------
+*June 2, 2020*
+
+### Added
+- Create account API call when clicking create account button
+
+
 v0.5.0
 ------------------------------
 *May 26, 2020*

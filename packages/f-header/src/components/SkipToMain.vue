@@ -51,10 +51,7 @@ export default {
             display: block;
             margin: 4px;
             padding: 4px;
-
-            @include theme(ml) {
-                color: $green;
-            }
+            color: $color-link-default;
         }
     }
 }
@@ -66,10 +63,6 @@ export default {
         &.is-focusable:active,
         &.is-focusable:focus {
             color: $white;
-
-            @include theme(ml) {
-                color: $white;
-            }
         }
     }
 }

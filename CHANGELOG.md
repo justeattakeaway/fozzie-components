@@ -4,6 +4,68 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest (roll into next release)
+------------------------------
+*July 9, 2020*
+
+### Changed
+- Updated `sass-loader` to 7.3.1 to allow storybook to perform contextual import of common.scss files
+  from Single File Components in subdirectories
+
+
+v1.20.0
+------------------------------
+*July 9, 2020*
+
+### Changed
+- Updating dependencies of `fozzie-header` and `f-footer` packages.
+
+
+v1.19.0
+------------------------------
+*June 25, 2020*
+
+### Changed
+- Updating base version of `fozzie-colour-palette` and updating any colour variables affected.
+- Minor package updates.
+
+
+v1.18.0
+------------------------------
+*June 25, 2020*
+
+### Added
+- devDependency on `cross-env` to allow for cross-platform environment variables in CI scripts
+
+### Changed
+- scripts using `$LERNA_ARGS` to use `cross-env` as above
+
+
+v1.17.0
+------------------------------
+*June 24, 2020*
+
+### Changed
+- CircleCI params to restrict build concurrency to 1 to solve memory issues
+- StoryBook CircleCI build to build packages first to ensure dependencies are available
+
+
+v1.16.0
+------------------------------
+*June 8, 2020*
+
+### Changed
+- Updated `fozzie` and `fozzie-colour-palette` dependencies to pull in updated JET theme variables for ML.
+
+
+v1.15.0
+------------------------------
+*June 4, 2020*
+
+### Changed
+- ESLint autofix turned off across all packages for default lint tasks so that tests don't pass due to `--fix` being applied (as they should fail when this happens to prompt engineers to autofix).
+
+
 v1.14.0
 ------------------------------
 *June 3, 2020*

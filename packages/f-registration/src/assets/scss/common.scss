@@ -13,7 +13,7 @@ $theme: 'je' !default;
 /**
  * Component Variables
  */
-// $registration-background-color          : $brand--red;
+// $registration-background-color          : $brand--orange;
 
 @mixin theme($type) {
     [data-theme-registration="#{$type}"] & {

@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 import appboy from 'appboy-web-sdk';
-import initialiseBraze from '../src';
+import { initialise } from '../index';
 
 jest.mock('appboy-web-sdk', () => ({
     initialize: jest.fn()
@@ -14,10 +14,10 @@ describe('f-metadata › node', () => {
     });
 
     it('should not call initialise if window is undefined', async () => {
-        // Assemble & Act
+        // Arrange & Act
         expect.assertions(2);
         try {
-            await initialiseBraze();
+            await initialise();
         } catch (error) {
             // Assert
             expect(appboy.initialize).not.toHaveBeenCalled();

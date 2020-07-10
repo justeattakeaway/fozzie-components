@@ -1,21 +1,22 @@
-// Demo component for testing header independently via `vue serve --open src/components/Demo.vue`
-// Fonts were added for beter comparison with the designs.
+// Demo component for testing `f-content-cards` independently via `vue serve --open src/demo/Index.vue`
+// Fonts were added for better comparison with the designs.
 
 <template>
     <div>
         <meta
             name="viewport"
             content="width=device-width, initial-scale=1">
-        <vue-header
-            locale="en-AU" />
+        <content-cards />
     </div>
 </template>
 
 <script>
-import VueHeader from './Header.vue';
+import ContentCards from '@/components/ContentCards.vue';
 
 export default {
-    components: { VueHeader }
+    components: {
+        ContentCards
+    }
 };
 </script>
 

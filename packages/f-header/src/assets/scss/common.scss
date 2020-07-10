@@ -13,33 +13,26 @@ $theme: 'je' !default;
 /**
  * Component Variables
  */
-$header-logo-color                 : $brand--red;
+$header-logo-color                 : $red;
 $header-logo-color--alt            : $white;
+$header-logo-color--ml             : $brand--orange;
 
-$header-height--narrow              : 56px;
+$header-height--narrow              : 48px;
 $header-button--height              : $header-height--narrow;
 $header-button--width               : 56px;
 $header-height                      : 76px;
 $header-bg                          : $white;
 $header-separator                   : 1px;
 $header-separator                   : 4px;
-$header-border-color                : $grey--lightest;
+$header-border-color                : $grey--lighter;
 $header-buttonIcon-color            : $blue;
 $header-buttonCount-bg              : $blue;
 $header-buttonCount-color           : $white;
 $header-buttonCount-borderColor     : $white;
 
-
 $header--transparent-gradient-color : $black;
 $header--transparent-gradient       : 115px;
 $header--transparent-opacity        : 0.7;
-
-/**
- * Global variables which need to be changed depending on the theme (TODO: move to separate component)
-//  */
-
-$header-buttonIcon-color--ml: $green;
-$header-buttonCount-bg--ml: $green;
 
 @mixin theme($type) {
     [data-theme="#{$type}"] & {

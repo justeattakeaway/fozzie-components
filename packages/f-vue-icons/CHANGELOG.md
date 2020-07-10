@@ -3,12 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+Latest (roll into next release)
+------------------------------
+*June 4, 2020*
+
+### Changed
+- ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails)
+
+
 v0.20.1
 ------------------------------
 *June 3, 2020*
 
 ### Fixed
 - Add `.vue` extentions to imports for icons in v0.20.0
+
 
 v0.20.0
 ------------------------------
@@ -23,6 +33,7 @@ v0.20.0
 
 ### Removed
 - `testMatch` from jest config, as not needed.
+
 
 v0.19.0
 ------------------------------

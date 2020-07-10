@@ -292,19 +292,19 @@ export default {
         {
             url: 'https://www.facebook.com/Menulog.com.au/',
             name: 'facebook',
-            alt: 'Menu Log on Facebook',
+            alt: 'Menu Log on Facebook (leads to external site)',
             gtm: 'click_follow_facebook'
         },
         {
             url: 'https://twitter.com/menulog',
             name: 'twitter',
-            alt: 'Menu Log on Twitter',
+            alt: 'Menu Log on Twitter (leads to external site)',
             gtm: 'click_follow_twitter'
         },
         {
             url: 'https://www.instagram.com/menulog/',
             name: 'instagram',
-            alt: 'Menu Log on Instagram',
+            alt: 'Menu Log on Instagram (leads to external site)',
             gtm: 'click_follow_instagram'
         }
     ],

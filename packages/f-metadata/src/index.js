@@ -1,4 +1,6 @@
-const noop = () => {};
+import configureBraze from './configureBraze';
+import noop from './utils/noop';
+import isAppboyInitialised from './utils/isAppboyInitialised';
 
 /**
  * sessionTimeoutInSeconds
@@ -7,62 +9,94 @@ const noop = () => {};
  */
 export const sessionTimeoutInSeconds = 0;
 
-const initialiseBraze = (options = {}) => new Promise((resolve, reject) => {
-    if (typeof window === 'undefined') return reject(new Error('window is not defined'));
+/**
+ * appBoyPromise
+ * Promise that resolves to appboy when it has been set, for use by dependent utility functions
+ * @type {Promise<Object>|null}
+ */
+let appBoyPromise;
+
+export const initialise = async (options = {}) => {
+    if (typeof window === 'undefined') throw new Error('window is not defined');
 
     const {
-        apiKey = null,
-        userId = null,
-        enableLogging = false,
+        apiKey,
+        userId,
         disableComponent = false,
-        callbacks = {}
+        callbacks = {},
+        enableLogging
     } = options;
-    const {
-        handleContentCards = noop,
-        interceptInAppMessageClickEvents = noop,
-        interceptInAppMessages = noop
-    } = callbacks;
-
-    if (disableComponent || !apiKey || !userId) {
-        handleContentCards(null);
-        return resolve(null);
-    }
+    const { handleContentCards = noop } = callbacks;
 
     window.dataLayer = window.dataLayer || [];
 
-    return import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
-        .then(({ default: appboy }) => {
-            appboy.initialize(apiKey, { enableLogging, sessionTimeoutInSeconds });
+    // Note that appBoyPromise will not be set if this is the first time running this method -
+    // this is a guard against initialise() being called more than once, and attempting to
+    // reboot the entire appboy sdk.
+    if (appBoyPromise) {
+        await appBoyPromise;
+        configureBraze(options);
+        return appBoyPromise;
+    }
 
-            appboy.subscribeToInAppMessage(message => {
-                if (message instanceof appboy.ab.InAppMessage) {
-                    /**
-                     * Always subscribe click action to second button
-                     * as this is always "success" as opposed to "dismiss"
-                     * as confirmed with CRM (AS)
-                     */
-                    const { buttons: { 1: button } } = message;
-                    interceptInAppMessages(message);
-                    button.subscribeToClickedEvent(() => interceptInAppMessageClickEvents(message));
-                }
-                appboy.display.showInAppMessage(message);
+    const isInitialised = await isAppboyInitialised(window.appboy);
+
+    if (isInitialised) {
+        configureBraze(options);
+        appBoyPromise = Promise.resolve(window.appboy);
+        return window.appboy;
+    }
+
+    if (disableComponent || !apiKey || !userId) {
+        handleContentCards(null);
+        appBoyPromise = Promise.resolve();
+        return null;
+    }
+
+    try {
+        const { default: appboy } = await import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk');
+
+        appboy.initialize(apiKey, { enableLogging, sessionTimeoutInSeconds });
+        appboy.openSession();
+
+        window.appboy = appboy;
+
+        configureBraze(options);
+        appBoyPromise = Promise.resolve(window.appboy);
+
+        appboy.changeUser(userId, () => {
+            window.dataLayer.push({
+                event: 'appboyReady'
             });
-            appboy.subscribeToContentCardsUpdates(handleContentCards);
+        });
 
-            appboy.openSession();
-            window.appboy = appboy;
+        return appboy;
+    } catch (error) {
+        throw new Error(`An error occurred while loading the component: ${error}`);
+    }
+};
 
-            appboy.changeUser(userId, () => {
-                window.dataLayer.push({
-                    event: 'appboyReady'
-                });
-            });
+const logEvent = async (type, payload) => {
+    if (!appBoyPromise) return false;
 
-            appboy.requestContentCardsRefresh();
+    const appboy = await appBoyPromise;
 
-            resolve(appboy);
-        })
-        .catch(error => reject(new Error(`An error occurred while loading the component: ${error}`)));
-});
+    const output = appboy[type](payload, true);
+    appboy.requestImmediateDataFlush();
 
-export default initialiseBraze;
+    return output;
+};
+
+/**
+ * @param {Object} card - Content card for which to log a click event
+ * @returns {Promise<boolean|*>}
+ */
+export const logCardClick = card => logEvent('logCardClick', card);
+
+/**
+ * @param {Object[]} cards - List of content cards for which to log view impressions
+ * @returns {Promise<boolean|*>}
+ */
+export const logCardImpressions = cards => logEvent('logCardImpressions', cards);
+
+export default initialise;
