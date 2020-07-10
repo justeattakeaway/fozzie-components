@@ -2315,10 +2315,10 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.10.tgz#11aa923bd4823043fa086f098a2b1e0aba57b84b"
   integrity sha512-BHkiiiZQGlRe6mb42mf0e2UFpB5zINoFf7pSGGpM7okStVDKtaCSUN7URlt/RNsMWdppeA2bhGJcfLriWk02bQ==
 
-"@justeat/f-vue-icons@1.0.0-beta.11":
-  version "1.0.0-beta.11"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.11.tgz#2c8c1525e22c731a680a2a2bcae3ba1db4f959f8"
-  integrity sha512-wQGUfNzFy0Q111S/uYeeU1AFll5Py9F1QaNl6laQXHa1DCv1XI2u779OLHICDsn5LEW+TMvwDeQVtyYUPbIu8w==
+"@justeat/f-vue-icons@1.0.0-beta.12":
+  version "1.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.12.tgz#211a2284cb7693d7a05ab0ff99e22c6dfd8e26a8"
+  integrity sha512-n0YGuXjdlqqYn/x9c24aTVyQcI1rwaTkeQwbPng5fpgx7kJ8aHg8xMjkuDAWW9UXWj+np5kCXxeRLnw+l1+wKw==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
