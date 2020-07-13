@@ -1,5 +1,7 @@
 <template>
-    <div :class="['c-postOrderCard' , { 'c-postOrderCard--condensed': !image && icon }]">
+    <div
+        :data-test-id="testId"
+        :class="['c-postOrderCard' , { 'c-postOrderCard--condensed': !image && icon }]">
         <h2
             v-if="title"
             class="c-postOrderCard-title"
@@ -10,10 +12,11 @@
         <card-container
             :card="card"
             :container-title="containerTitle"
-            :is-carousel="isCarousel">
+            :is-carousel="isCarousel"
+            :data-test-id="containerTestId()">
             <span
                 class="o-link--full o-link--bold u-color-link u-text-left"
-                data-test-id="contentCard-postOrderCard-1">
+                :data-test-id="cardContentTestId()">
                 {{ ctaText }}
             </span>
         </card-container>
@@ -43,6 +46,10 @@ export default {
         title: {
             type: String,
             default: ''
+        },
+        testId: {
+            type: String,
+            default: null
         }
     },
     data () {
@@ -64,6 +71,15 @@ export default {
             image: image || imageUrl,
             type
         };
+    },
+
+    methods: {
+        cardContentTestId () {
+            return this.testId && 'contentCard-postOrderCard-1';
+        },
+        containerTestId () {
+            return this.testId && 'contentCard-link';
+        }
     }
 };
 </script>

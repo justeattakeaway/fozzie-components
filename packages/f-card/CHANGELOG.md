@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (roll into next release)
 ------------------------------
+*July 2, 2020*
+
+### Added
+- Accessibility add-on to Storybook story.
+
 *June 25, 2020*
 
 ### Changed

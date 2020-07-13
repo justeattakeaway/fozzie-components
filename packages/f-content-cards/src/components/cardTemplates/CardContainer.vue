@@ -3,11 +3,18 @@
         :is="ctaUrl && ctaEnabled ? 'a' : 'div'"
         :href="ctaEnabled && ctaUrl"
         :class="['c-contentCard', { 'c-contentCard--isolateHeroImage': isAnniversaryCard }]"
-        data-test-id="contentCard-link"
+        :data-test-id="testId"
+        @click="onClickContentCard"
     >
         <div
-            :style="{ backgroundImage: `url('${image}')` }"
-            :class="[{ 'c-contentCard-bgImg': !!image }]" />
+            :style="{ 'background-image': isBackgroundImage ? `url(${image})` : '' }"
+            :class="[{ 'c-contentCard-bgImg': !!image }]">
+            <img
+                v-if="!isBackgroundImage"
+                class="c-contentCard-img"
+                :src="image"
+                :alt="title">
+        </div>
         <div class="c-contentCard-info">
             <img
                 v-if="icon"
@@ -22,7 +29,7 @@
             <template v-for="(textItem, textIndex) in descriptionText">
                 <p
                     :key="textIndex"
-                    :data-test-id="`ContentCard-TextItem-${textIndex}`"
+                    :data-test-id="testIdForItemWithIndex(textIndex)"
                     class="c-contentCard-text">
                     {{ textItem }}
                 </p>
@@ -52,8 +59,13 @@ export default {
         ctaEnabled: {
             type: Boolean,
             default: true
+        },
+        testId: {
+            type: String,
+            default: null
         }
     },
+
     data () {
         const {
             id: cardId,
@@ -84,6 +96,7 @@ export default {
             extras
         };
     },
+
     computed: {
         descriptionText () {
             return Object.keys(this.extras)
@@ -91,8 +104,42 @@ export default {
                         .map(key => this.extras[key]);
         },
 
+        extractedCardId () {
+            const decoded = atob(this.cardId);
+            const start = decoded.indexOf('=');
+            const end = decoded.indexOf('&');
+            return decoded.slice(start + 1, end);
+        },
+
         isAnniversaryCard () {
             return this.type === 'Anniversary_Card_1';
+        },
+
+        isBackgroundImage () {
+            return this.type !== 'Post_Order_Card_1';
+        }
+    },
+
+    inject: [
+        'emitCardView',
+        'emitCardClick'
+    ],
+
+    mounted () {
+        this.onViewContentCard();
+    },
+
+    methods: {
+        onViewContentCard () {
+            this.emitCardView(this.card);
+        },
+
+        onClickContentCard () {
+            this.emitCardClick(this.card);
+        },
+
+        testIdForItemWithIndex (index) {
+            return this.testId && `ContentCard-TextItem-${index}`;
         }
     }
 };
