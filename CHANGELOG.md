@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (roll into next release)
 ------------------------------
-*July 9, 2020*
+*July 13, 2020*
 
 ### Changed
 - Updated `sass-loader` to 7.3.1 to allow storybook to perform contextual import of common.scss files
