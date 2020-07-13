@@ -3,8 +3,8 @@ import Registration from '../src/components/Registration.vue';
 import { withA11y } from '@storybook/addon-a11y';
 
 export default {
-title: 'Components/Organisms',
-decorators: [withKnobs, withA11y]
+    title: 'Components/Organisms',
+    decorators: [withKnobs, withA11y]
 };
 
 export const RegistrationComponent = () => ({
