@@ -61,6 +61,9 @@ jobs:
       - run: # Run Tests
           name: Run Unit Tests
           command: yarn test
+      - run: # Run Visual Regression Tests
+          name: Run Visual Regression Tests
+          command: cd ../packages/storybook; yarn snapshot
 
   deploy-storybook:
     executor: node
