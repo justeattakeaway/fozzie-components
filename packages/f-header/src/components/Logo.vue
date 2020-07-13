@@ -50,7 +50,7 @@ export default {
     },
     computed: {
         iconComponent () {
-            return `ml-logo`;
+            return `${this.theme}-logo`;
         },
         iconClassName () {
             return `c-icon--${this.theme}`;
