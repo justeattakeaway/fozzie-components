@@ -4,6 +4,45 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.10.1
+------------------------------
+*July 10, 2020*
+
+### Fixed
+- A defect where the main content card image was applied as a background image with cover sizing which caused the image to be cropped dependent on it's aspect ratio/sizing.
+
+
+v0.10.0
+------------------------------
+*July 2, 2020*
+
+### Added
+- Accessibility add-on to Storybook story.
+
+v0.10.0
+------------------------------
+*July 7th, 2020*
+
+### Added
+- ContentCards component accepts `pushToDataLayer` callback as a prop for feeding back
+  analytics regarding content cards
+- ContentCards component accepts `testId` parameter as a prop, which indicates the test
+  id attribute of the component root element. If this is missing, all child components
+  will also be rendered without test id attributes.
+
+### Changed
+- Updated @justeat/f-metadata version
+- Updated README
+
+
+v0.9.0
+------------------------------
+*July 2nd, 2020*
+
+### Changed
+- README to include details on prerequisites, usage, development, testing and contributions
+
+
 v0.8.2
 ------------------------------
 *June 30th, 2020*
