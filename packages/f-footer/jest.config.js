@@ -11,10 +11,6 @@ module.exports = {
         '^.+\\.js$': 'babel-jest'
     },
 
-    transformIgnorePatterns: [
-        'node_modules/(?!(lodash-es)/)'
-    ],
-
     moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/src/$1',
         '^~include-media/(.*)$': '<rootDir>../../node_modules/include-media/$1',
