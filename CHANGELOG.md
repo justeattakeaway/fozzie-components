@@ -9,7 +9,6 @@ Latest (roll into next release)
 
 ### Added
 - Updated Docker image in `config.yml` to include Chrome for Percy visual regression tests
-- New `percy` and `snapshot` scripts in `storybook` package for visual regression tests
 - New task in `config.yml` to run visual regression tests
 
 ### Changed
