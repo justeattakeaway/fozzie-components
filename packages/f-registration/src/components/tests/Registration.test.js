@@ -143,6 +143,34 @@ describe('Registration', () => {
 
                 // Assert
                 expect(wrapper.vm.genericErrorMessage).not.toBeNull();
+                expect(wrapper.vm.shouldShowEmailAlreadyExistsError).toBe(false);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should populate error message and emit failure event when service responds with a 409', async () => {
+            // Arrange
+            const err = { FaultId: '123', TraceId: '123', Errors: [{ Description: 'The specified email already exists', ErrorCode: '409' }] };
+            RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
+            const wrapper = mountComponentAndAttachToDocument();
+            try {
+                const firstName = 'Ashton',
+                    lastName = 'Adamms',
+                    email = 'ashton.adamms+jetest@just-eat.com',
+                    password = 'Passw0rd';
+                await wrapper.find("[data-test-id='input-first-name']").setValue(firstName);
+                await wrapper.find("[data-test-id='input-last-name']").setValue(lastName);
+                await wrapper.find("[data-test-id='input-email']").setValue(email);
+                await wrapper.find("[data-test-id='input-password']").setValue(password);
+
+                // Act
+                wrapper.find("[data-test-id='create-account-submit-button']").trigger('click');
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowEmailAlreadyExistsError).toBe(true);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             } finally {
                 wrapper.destroy();

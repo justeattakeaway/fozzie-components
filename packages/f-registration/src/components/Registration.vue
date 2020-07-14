@@ -78,6 +78,12 @@
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please enter a valid email address
                     </p>
+                    <p
+                        v-else-if="shouldShowEmailAlreadyExistsError"
+                        :class="$style['o-form-error']">
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        Please enter a valid email address
+                    </p>
                 </template>
             </form-field>
 
@@ -175,7 +181,8 @@ export default {
             email: null,
             password: null,
             shouldDisableCreateAccountButton: false,
-            genericErrorMessage: null
+            genericErrorMessage: null,
+            shouldShowEmailAlreadyExistsError: false
         };
     },
 
@@ -224,6 +231,7 @@ export default {
     methods: {
         async onFormSubmit () {
             this.genericErrorMessage = null;
+            this.shouldShowEmailAlreadyExistsError = false;
             if (this.isFormInvalid()) {
                 return;
             }
@@ -239,8 +247,13 @@ export default {
                 await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData);
                 this.$emit(EventNames.CreateAccountSuccess);
             } catch (error) {
-                this.genericErrorMessage = error;
-                this.$emit(EventNames.CreateAccountFailure, error);
+                const thrownErrors = error.Errors ? error.Errors : error;
+                if (Array.isArray(thrownErrors) && thrownErrors.some(thrownError => thrownError.ErrorCode === '409')) {
+                    this.shouldShowEmailAlreadyExistsError = true;
+                } else {
+                    this.genericErrorMessage = error;
+                }
+                this.$emit(EventNames.CreateAccountFailure, thrownErrors);
             } finally {
                 this.shouldDisableCreateAccountButton = false;
             }
