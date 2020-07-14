@@ -150,12 +150,17 @@ export default {
         }
 
         /deep/ .c-contentCard-bgImg {
-            min-height: 250px;
+            overflow: hidden;
             border-radius: $contentCardRadius;
 
             @include media ('<mid') {
                 border-radius: $contentCardRadius $contentCardRadius 0 0;
             }
+        }
+
+        /deep/ .c-contentCard-img {
+            display: block;
+            max-width: 100%;
         }
     }
 
