@@ -1,14 +1,12 @@
+import loggedOutUserMock from './api.account.details.json';
+
 /**
  * Mocks axios calls in the header tests
  **/
 module.exports = {
     get: jest.fn(url => {
         if (url === '/api/account/details') {
-            return Promise.resolve({
-                friendlyName: 'Bob',
-                isAuthenticated: true,
-                email: 'bob.magoo@just-eat.com'
-            });
+            return Promise.resolve({ data: loggedOutUserMock });
         } else if (url === '/analytics/ordercount') {
             return Promise.resolve({
                 Count: 1,
