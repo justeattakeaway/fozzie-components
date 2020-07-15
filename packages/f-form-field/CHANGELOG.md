@@ -6,9 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (roll into next release)
 ------------------------------
+*July 2, 2020*
+
+### Added
+- Accessibility add-on to Storybook story.
+
 *June 4, 2020*
 
 ### Changed
+- Updating colour variables to use new versions set in `fozzie-colour-palette`.
 - ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails)
 
 

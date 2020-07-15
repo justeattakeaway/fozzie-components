@@ -1,5 +1,4 @@
 import appboySDK from 'appboy-web-sdk';
-import initialiseBraze, { sessionTimeoutInSeconds } from '../index';
 import configureBraze from '../configureBraze';
 import isAppboyInitialised from '../utils/isAppboyInitialised';
 
@@ -16,7 +15,10 @@ jest.mock('appboy-web-sdk', () => ({
     changeUser: jest.fn(),
     ab: {
         InAppMessage: Object
-    }
+    },
+    logCardClick: jest.fn(),
+    logCardImpressions: jest.fn(),
+    requestImmediateDataFlush: jest.fn()
 }));
 
 const apiKey = '__API_KEY__';
@@ -31,9 +33,16 @@ const settings = {
     disableComponent
 };
 
+let initialiseBraze,
+    sessionTimeoutInSeconds;
+
 describe('f-metadata', () => {
     beforeEach(() => {
         jest.resetAllMocks();
+        jest.isolateModules(() => {
+            // eslint-disable-next-line global-require
+            ({ initialise: initialiseBraze, sessionTimeoutInSeconds } = require('../index'));
+        });
     });
 
     it('should resolve as null if disableComponent is provided', async () => {
@@ -75,11 +84,12 @@ describe('f-metadata', () => {
 
     it('should initialise appboy and setup relevant settings', async () => {
         // Arrange & Act
-        await initialiseBraze(settings);
+        const output = await initialiseBraze(settings);
 
         // Assert
         expect(appboySDK.initialize).toHaveBeenCalledWith(apiKey, { enableLogging, sessionTimeoutInSeconds });
         expect(appboySDK.openSession).toHaveBeenCalled();
+        expect(output).toEqual(appboySDK);
     });
 
     it('should fire a datalayer event when change user is called', async () => {
@@ -95,5 +105,104 @@ describe('f-metadata', () => {
 
         // Assert
         expect(push).toHaveBeenCalledWith({ event: 'appboyReady' });
+    });
+
+    it('should reject with an error when the configuration fails', async () => {
+        // Arrange
+        configureBraze.mockImplementation(() => { throw new Error('foo'); });
+
+        // Act
+        const appBoy = initialiseBraze(settings);
+
+        // Assert
+        await expect(appBoy).rejects.toThrow('An error occurred while loading the component: Error: foo');
+    });
+
+    describe('when called twice', () => {
+        it('should return different promises that resolve to the same value', async () => {
+            // Arrange
+            const appBoy1 = initialiseBraze(settings);
+
+            // Act
+            const appBoy2 = initialiseBraze(settings);
+
+            // Assert
+            expect(appBoy1).not.toBe(appBoy2);
+            await expect(appBoy1).resolves.toBe(await appBoy2);
+        });
+
+        it('should call configureBraze each time it is called', async () => {
+            // Arrange
+            await initialiseBraze(settings);
+
+            // Act
+            await initialiseBraze(settings);
+
+            // Assert
+            expect(configureBraze).toHaveBeenCalledTimes(2);
+        });
+    });
+});
+
+describe('when f-metadata is initialized', () => {
+    let logCardClick,
+        logCardImpressions;
+
+    beforeAll(async () => {
+        // Arrange
+        jest.isolateModules(() => {
+            // eslint-disable-next-line global-require
+            ({ initialise: initialiseBraze, logCardClick, logCardImpressions } = require('../index'));
+        });
+
+        await initialiseBraze(settings);
+    });
+
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
+
+    describe('logCardClick', () => {
+        it('should call logCardClick within appboy SDK and flush', async () => {
+            // Act
+            await logCardClick();
+
+            // Assert
+            expect(appboySDK.logCardClick).toHaveBeenCalled();
+            expect(appboySDK.requestImmediateDataFlush).toHaveBeenCalled();
+        });
+
+        it('should pass through the first parameter verbatim to logCardClick', async () => {
+            // Arrange
+            const param = { foo: 'bar' };
+
+            // Act
+            await logCardClick(param);
+
+            // Assert
+            expect(appboySDK.logCardClick).toHaveBeenCalledWith(param, true);
+        });
+    });
+
+    describe('logCardImpressions', () => {
+        it('should call logCardImpressions within appboy SDK and flush', async () => {
+            // Act
+            await logCardImpressions();
+
+            // Assert
+            expect(appboySDK.logCardImpressions).toHaveBeenCalled();
+            expect(appboySDK.requestImmediateDataFlush).toHaveBeenCalled();
+        });
+
+        it('should pass through the first parameter verbatim to logCardImpressions', async () => {
+            // Arrange
+            const param = { foo: 'bar' };
+
+            // Act
+            await logCardImpressions(param);
+
+            // Assert
+            expect(appboySDK.logCardImpressions).toHaveBeenCalledWith(param, true);
+        });
     });
 });

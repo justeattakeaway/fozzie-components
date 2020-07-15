@@ -3,6 +3,45 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.3.0
+------------------------------
+*July 9, 2020*
+
+### Changed
+- Updated `f-vue-icons` version.
+- Made `f-trak` peer dependency use a range value.
+
+### Removed
+- Unused `lodash-es` dependency.
+- `lodash-es` ignore from jest config.
+
+v3.2.0
+------------------------------
+*July 2, 2020*
+
+### Added
+- Accessibility add-on to Storybook story.
+
+
+v3.1.0
+------------------------------
+*July 2, 2020*
+
+### Changed
+- Updated logo and header background highlight colour to red to enable phased rollout of JET theme.
+- Changed logic for the header background & logo logic, as there was a bug when the navigation was in highlight mode and was open.
+- Updated theme to add Menulog orange branding in for the logo.
+
+
+v3.0.0
+------------------------------
+*June 25, 2020*
+
+### Changed
+- Updated component to new orange JET theme for all tenants.
+- Demo component updated to reflect same structure im other packages.
+- Minor package updates.
+
 
 v2.6.0
 ------------------------------

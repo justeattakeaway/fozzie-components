@@ -15,7 +15,8 @@ describe('contentCards › PromotionCard1', () => {
         // Arrange & Act
         const wrapper = shallowMount(PromotionCard, {
             propsData: {
-                card
+                card,
+                testId: 'foo'
             }
         });
 
@@ -32,7 +33,8 @@ describe('contentCards › PromotionCard1', () => {
                         ...card.extras,
                         custom_card_type: 'Promotion_Card_2' // eslint-disable-line
                     }
-                }
+                },
+                testId: 'foo'
             }
         });
 
@@ -52,7 +54,8 @@ describe('contentCards › PromotionCard1', () => {
                     extras: {
                         custom_card_type: 'Promotion_Card_1' // eslint-disable-line
                     }
-                }
+                },
+                testId: 'foo'
             }
         });
 
