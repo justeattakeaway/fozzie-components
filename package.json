@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "1.22.0",
+  "version": "1.23.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -8,6 +8,8 @@
     "lint:fix": "lerna run lint -- --fix",
     "prepublishOnly": "lerna run prepublishOnly --stream",
     "release": "lerna publish",
+    "storybook:build": "lerna run storybook:build",
+    "storybook:serve": "lerna run storybook:serve",
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\""
   },

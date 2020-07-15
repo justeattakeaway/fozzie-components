@@ -8,7 +8,7 @@ Latest (roll into next release)
 ------------------------------
 *July 15, 2020*
 ### Removed
-- `demo` script in favour of Storybook for local component
+- `demo` script in favour of Storybook for local component development
 
 *July 2, 2020*
 

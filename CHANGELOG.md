@@ -5,12 +5,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (roll into next release)
 ------------------------------
-*July 13, 2020*
+*July 15, 2020*
 
 ### Added
 - Updated Docker image in `config.yml` to include Chrome for Percy visual regression tests
 - New task in `config.yml` to run visual regression tests
-
+- re-add lerna script in mono-repo root for storybook build / deploy
 ### Changed
 - Updated `sass-loader` to 7.3.1 to allow storybook to perform contextual import of common.scss files
   from Single File Components in subdirectories
