@@ -21,14 +21,14 @@ module.exports = {
         before (app) {
             // The header component makes an API call to get information about the current user
             app.get('/api/account/details', (req, res) => {
-                let ref = req.headers.referer || req.headers.referrer;
+                const ref = req.headers.referer || req.headers.referrer;
                 const isLoggedIn = ref.includes('testuser');
                 if (isLoggedIn) {
                     res.json(responseLoggedIn);
                 } else {
                     res.json(responseLoggedOut);
                 }
-            })
+            });
         }
     }
 };
