@@ -63,9 +63,10 @@ server displaying a preview example of the component implementation.
 ```bash
 # cd /packages/f-registration
 yarn install
-
-# followed by
-yarn demo
 ```
+
+### Storybook
+
+The component is also available to demo through our storybook instance which can be served locally by running `yarn storybook:serve` from the mono-repo root.
 
 ## Documentation to be completed once module is in stable state.

@@ -67,9 +67,10 @@
 
     Run `yarn build`.
 
-1. Running locally
+1. Storybook
 
-    Run `yarn demo` in `/packages/f-footer` to render testing wrapper component
+    The component is also available to demo through our storybook instance which can be served locally by running `yarn storybook:serve` from the mono-repo root.
+
 
 1. Running the Tests
 

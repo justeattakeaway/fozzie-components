@@ -3,6 +3,11 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.13.0
+------------------------------
+*July 15, 2020*
+### Removed
+- `demo` script in favour of Storybook for local component development
 
 v0.10.1
 ------------------------------

@@ -70,10 +70,10 @@ server displaying a preview example of the component implementation.
 ```bash
 # cd /packages/f-user-message
 yarn install
-# followed by
-yarn demo
 ```
 
 A development server is set to provide a stubbed response for the api call, when running locally. 
 
-See [Demo folder](./src/demo/) for more detail.
+### Storybook
+
+The component is also available to demo through our storybook instance which can be served locally by running `yarn storybook:serve` from the mono-repo root.

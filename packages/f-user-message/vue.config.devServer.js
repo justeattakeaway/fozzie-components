@@ -1,4 +1,4 @@
-const userMessageStub = require('./src/demo/user-message.stub.json');
+const userMessageStub = require('./src/stubs/user-message.stub.json');
 
 module.exports = {
     port: 8080,

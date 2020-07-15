@@ -188,19 +188,9 @@ Change directory to the `f-content-cards` package:
 $ cd packages/f-content-cards
 ```
 
-### Running the demo
+### Storybook
 
-This package comes with a demo application which can be accessed as follows:
-
-> Please ensure you are in the f-content-card directory as outlined in the above instructions.
-
-```sh
-$ yarn demo
-```
-
-### Running storybook
-
-Storybook can be used to develop new and existing components.
+The component is also available to demo through our storybook instance which can be served locally by running `yarn storybook:serve` from the mono-repo root.
 
 To start storybook:
 

@@ -63,9 +63,6 @@ server displaying a preview example of the component implementation.
 ```bash
 # cd /packages/f-card
 yarn install
-
-# followed by
-yarn demo
 ```
 
 ### Storybook

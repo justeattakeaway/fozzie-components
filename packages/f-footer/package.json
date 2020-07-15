@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-footer",
-  "version": "3.3.2",
+  "version": "3.4.0",
   "main": "dist/f-footer.umd.min.js",
   "files": [
     "dist"
@@ -26,7 +26,6 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-footer ./src/index.js",
-    "demo": "vue serve --open ./src/demo/Index.vue",
     "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit"

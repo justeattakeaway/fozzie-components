@@ -64,9 +64,6 @@ server displaying a preview example of the component implementation.
 ```bash
 # cd /packages/f-form-field
 yarn install
-
-# followed by
-yarn demo
 ```
 
 ### Storybook

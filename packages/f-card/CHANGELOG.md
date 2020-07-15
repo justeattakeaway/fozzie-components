@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (roll into next release)
 ------------------------------
+*July 15, 2020*
+### Removed
+- `demo` script in favour of Storybook for local component
+
 *July 2, 2020*
 
 ### Added
