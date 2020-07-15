@@ -1,4 +1,4 @@
-import loggedOutUserMock from './api.account.details.json';
+import loggedInUserMock from './api.account.details.json';
 
 /**
  * Mocks axios calls in the header tests
@@ -6,7 +6,7 @@ import loggedOutUserMock from './api.account.details.json';
 module.exports = {
     get: jest.fn(url => {
         if (url === '/api/account/details') {
-            return Promise.resolve({ data: loggedOutUserMock });
+            return Promise.resolve({ data: loggedInUserMock });
         } else if (url === '/analytics/ordercount') {
             return Promise.resolve({
                 Count: 1,
