@@ -1,5 +1,5 @@
 const magicImporter = require('node-sass-magic-importer');
-var request = require('request')
+const request = require('request');
 
 // vue.config.js
 module.exports = {
@@ -17,17 +17,17 @@ module.exports = {
     },
     devServer: {
         port: 8080,
-        before: function(app) {
+        before (app) {
             // The header component makes an API call to get information about the current user
-            app.get('/api/account/details', function(req, res) {
+            app.get('/api/account/details', (req, res) => {
                 const responseLoggedIn = require('./src/components/tests/__mocks__/api.account.details.json')
                 const responseLoggedOut = require('./src/components/tests/__mocks__/api.account.details.loggedout.json')
                 let ref = req.headers.referer || req.headers.referrer
                 const isLoggedIn = ref.includes('testuser')
                 if (isLoggedIn) {
-                res.json(responseLoggedIn)
+                    res.json(responseLoggedIn)
                 } else {
-                res.json(responseLoggedOut)
+                    res.json(responseLoggedOut)
                 }
             })
         }
