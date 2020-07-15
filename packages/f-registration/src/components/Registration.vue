@@ -82,7 +82,7 @@
                         v-else-if="shouldShowEmailAlreadyExistsError"
                         :class="$style['o-form-error']">
                         <warning-icon :class="$style['o-form-error-icon']" />
-                        Please enter a valid email address
+                        An account with this email already exists
                     </p>
                 </template>
             </form-field>
