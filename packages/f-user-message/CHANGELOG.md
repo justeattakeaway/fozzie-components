@@ -10,6 +10,7 @@ v0.1.1
 
 ### Changed
 - Removed component top margin. This should be set in the host app, if required
+- Updated packages. Reduced bundle size
 
 
 Latest (roll into next release)
