@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import axios from 'axios';
+import loggedInUserMock from './__mocks__/api.account.details.json';
 import Navigation from '../Navigation.vue';
 
 const defaultPropsData = {
@@ -35,11 +36,7 @@ const defaultData = {
     navIsOpen: false,
     localOrderCountExpires: false
 };
-const asyncUserDetails = {
-    friendlyName: 'Bob',
-    isAuthenticated: true,
-    email: 'bob.magoo@just-eat.com'
-};
+const asyncUserDetails = loggedInUserMock;
 
 
 const desktopWidth = 1200;

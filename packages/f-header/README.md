@@ -30,7 +30,7 @@
 
     You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
-    ```
+    ```JavaScript
     import VueHeader from '@justeat/f-header';
     import '@justeat/f-header/dist/f-header.css';
 
@@ -43,12 +43,12 @@
 
     If you are using Webpack, you can import the component dynamically to separate the header bundle from the main `bundle.client.js`:
 
-    ```
+    ```JavaScript
     import '@justeat/f-header/dist/f-header.css';
 
     export default {
         components: {
-            ...
+            // ...
             VueHeader: () => import(/* webpackChunkName: "vue-header" */ '@justeat/f-header')
         }
     }
@@ -64,5 +64,22 @@
     `showDeliveryEnquiry` - Boolean property with `false` as a default value, defines if it is necessary to show the "Deliver with Just Eat" link in the header.
 
     `errorLog` - Function passed in for logging errors with the `fetchUserInfo` method. It has empty function as a default value
+
+    `userInfoProp` - Optional object conaining user details. If not provided `userInfoProp` is set via XHR call to `/api/account/details`
+
+## Demo and local development
+
+Running the command below from the component folder e.g. `./packages/f-header` will start a development server and allow to preview the component usually on http://localhost:8080/ 
+
+```bash
+# Local preview
+yarn demo
+
+# Logged out user - http://localhost:8080/
+# Logged in user - http://localhost:8080/?testuser
+```
+
+In addition using a `?testuser` parameter will simulate a logged in state. 
+
 
 ## Documentation to be completed once module is in stable state.
