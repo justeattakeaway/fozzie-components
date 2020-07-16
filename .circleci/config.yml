@@ -10,7 +10,7 @@ commands:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "8b:4c:f2:d1:a1:1e:d6:f9:1e:e9:e0:40:a0:31:32:af"
+            - "0e:50:82:ad:81:17:a5:31:04:13:fd:6e:c7:72:c9:18"
 
   install_node_dependencies:
     description: Installs the node dependencies
@@ -28,7 +28,7 @@ executors:
   node:
     docker:
       # specify the version you desire here
-      - image: circleci/node:12.14.1 # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
+      - image: circleci/node:12.14.1-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
 
 jobs:
 
@@ -61,6 +61,9 @@ jobs:
       - run: # Run Tests
           name: Run Unit Tests
           command: yarn test
+      - run: # Run Visual Regression Tests
+          name: Run Visual Regression Tests
+          command: cd ./packages/storybook && yarn snapshot
 
   deploy-storybook:
     executor: node

@@ -6,10 +6,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.11.0
 ------------------------------
-*July 9, 2020*
+*July 16, 2020*
 
 ### Added
 - Skeleton loading state card template
+
+
+v0.10.1
+------------------------------
+*July 10, 2020*
+
+### Fixed
+- A defect where the main content card image was applied as a background image with cover sizing which caused the image to be cropped dependent on it's aspect ratio/sizing.
 
 
 v0.10.0
