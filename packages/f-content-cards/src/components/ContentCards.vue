@@ -1,6 +1,6 @@
 <template>
     <div
-        class="c-contentCards c-contentCards--wrap"
+        :class="[$style['c-contentCards'], $style['c-contentCards--wrap' ]]"
         :data-test-id="testId">
         <template v-for="(contentCard, cardIndex) in cards">
             <component
@@ -179,7 +179,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" module>
     .c-contentCards {
         margin-top: spacing(x5);
         margin-bottom: spacing(x5);

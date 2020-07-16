@@ -2,40 +2,40 @@
     <component
         :is="ctaUrl && ctaEnabled ? 'a' : 'div'"
         :href="ctaEnabled && ctaUrl"
-        :class="['c-contentCard', { 'c-contentCard--isolateHeroImage': isAnniversaryCard }]"
+        :class="[$style['c-contentCard'], { [$style['c-contentCard--isolateHeroImage']]: isAnniversaryCard }]"
         :data-test-id="testId"
         @click="onClickContentCard"
     >
         <div
             :style="{ 'background-image': isBackgroundImage ? `url(${image})` : '' }"
-            :class="[{ 'c-contentCard-bgImg': !!image }]">
+            :class="[{ [$style['c-contentCard-bgImg']]: !!image }]">
             <img
                 v-if="!isBackgroundImage"
-                class="c-contentCard-img"
+                :class="$style['c-contentCard-img']"
                 :src="image"
                 :alt="title">
         </div>
-        <div class="c-contentCard-info">
+        <div :class="$style['c-contentCard-info']">
             <img
                 v-if="icon"
                 :src="icon"
                 :alt="title"
-                class="c-contentCard-thumbnail">
-            <h3 class="c-contentCard-title">
+                :class="$style['c-contentCard-thumbnail']">
+            <h3 :class="$style['c-contentCard-title']">
                 {{ title }}
             </h3>
-            <h4 class="c-contentCard-subTitle">
+            <h4 :class="$style['c-contentCard-subTitle']">
                 {{ subtitle }}
             </h4>
             <template v-for="(textItem, textIndex) in descriptionText">
                 <p
                     :key="textIndex"
                     :data-test-id="testIdForItemWithIndex(textIndex)"
-                    class="c-contentCard-text">
+                    :class="$style['c-contentCard-text']">
                     {{ textItem }}
                 </p>
             </template>
-            <div class="c-contentCard-footer">
+            <div :class="$style['c-contentCard-footer']">
                 <slot />
             </div>
         </div>
@@ -146,7 +146,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" module>
     .c-contentCard {
         width: 100%;
         text-decoration: initial;
@@ -267,5 +267,90 @@ export default {
         margin-top: - (32px + spacing(x2)); // This offsets the thumbnail above the top of the info card
         width: 48px;
         min-height: 48px;
+    }
+
+    .c-postOrderCardContainer {
+        .c-contentCard-thumbnail {
+            position: absolute;
+            top: spacing(x2);
+            left: spacing(x2);
+            margin: 0;
+            border: none;
+        }
+
+        .c-contentCard-info {
+            background: none;
+            box-shadow: none;
+            position: static;
+            display: block;
+            text-align: left;
+            min-height: 0;
+            padding: spacing(x3) 0 0 0;
+
+            @include media ('<mid') {
+                border: 1px solid $color-border;
+                padding: spacing(x3);
+                border-radius: 0 0 $contentCardRadius $contentCardRadius;
+            }
+        }
+
+        .c-contentCard-title {
+            text-align: left;
+            margin: 0 0 spacing(x2);
+        }
+
+        .c-contentCard-subTitle {
+            @include font-size(base);
+
+            text-align: left;
+            margin: 0;
+        }
+
+        &.c-contentCard {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .c-contentCard-bgImg {
+            overflow: hidden;
+            border-radius: $contentCardRadius;
+
+            @include media ('<mid') {
+                border-radius: $contentCardRadius $contentCardRadius 0 0;
+            }
+        }
+
+        .c-contentCard-img {
+            display: block;
+            max-width: 100%;
+        }
+    }
+
+    .c-postOrderCard--condensed {
+        .c-contentCard-bgImg {
+            display: none;
+        }
+
+        .c-contentCard-thumbnail {
+            left: 0;
+            top: 0;
+
+            @include media('<mid') {
+                top: spacing(x2);
+                left: spacing(x2);
+            }
+        }
+
+        .c-contentCard-info {
+            padding: 0 0 0 spacing(x9);
+
+            @include media('<mid') {
+                position: relative;
+                padding: spacing(x2) spacing(x2) spacing(x2) spacing(x9);
+                border-radius: $contentCardRadius;
+            }
+        }
     }
 </style>

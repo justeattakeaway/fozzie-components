@@ -1,16 +1,17 @@
 <template>
     <div
         :data-test-id="testId"
-        :class="['c-postOrderCard' , { 'c-postOrderCard--condensed': !image && icon }]">
+        :class="[$style['c-postOrderCard']]">
         <h2
             v-if="title"
-            class="c-postOrderCard-title"
+            :class="[$style['c-postOrderCard-title']]"
             data-test-id="contentCard-postOrderCard-title"
         >
             {{ title }}
         </h2>
         <card-container
             :card="card"
+            :class="[cardContainerStyles['c-postOrderCardContainer'] , { [cardContainerStyles['c-postOrderCard--condensed']]: !image && icon }]"
             :container-title="containerTitle"
             :is-carousel="isCarousel"
             :data-test-id="containerTestId()">
@@ -24,7 +25,10 @@
 </template>
 
 <script>
+/* eslint-disable import/no-duplicates */
 import CardContainer from './CardContainer.vue';
+import CardContainerStyles from './CardContainer.vue?vue&type=style&index=0&lang=scss&module=true&';
+/* eslint-enable import/no-duplicates */
 
 export default {
     components: {
@@ -34,6 +38,10 @@ export default {
         card: {
             type: Object,
             default: () => ({})
+        },
+        cardContainerStyles: {
+                type: Object,
+                default: () => CardContainerStyles
         },
         containerTitle: {
             type: String,
@@ -84,7 +92,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" module>
     .c-postOrderCard {
         border: 1px solid $color-border;
         border-radius: $contentCardRadius;
@@ -103,89 +111,6 @@ export default {
 
             @include media ('<mid') {
                 margin: spacing(x2);
-            }
-        }
-
-        /deep/ .c-contentCard-thumbnail {
-            position: absolute;
-            top: spacing(x2);
-            left: spacing(x2);
-            margin: 0;
-            border: none;
-        }
-
-        /deep/ .c-contentCard-info {
-            background: none;
-            box-shadow: none;
-            position: static;
-            display: block;
-            text-align: left;
-            min-height: 0;
-            padding: spacing(x3) 0 0 0;
-
-            @include media ('<mid') {
-                border: 1px solid $color-border;
-                padding: spacing(x3);
-                border-radius: 0 0 $contentCardRadius $contentCardRadius;
-            }
-        }
-
-        /deep/ .c-contentCard-title {
-            text-align: left;
-            margin: 0 0 spacing(x2);
-        }
-
-        /deep/ .c-contentCard-subTitle {
-            @include font-size(base);
-
-            text-align: left;
-            margin: 0;
-        }
-
-        /deep/ .c-contentCard {
-            position: relative;
-            margin: 0;
-            padding: 0;
-            max-width: 100%;
-        }
-
-        /deep/ .c-contentCard-bgImg {
-            overflow: hidden;
-            border-radius: $contentCardRadius;
-
-            @include media ('<mid') {
-                border-radius: $contentCardRadius $contentCardRadius 0 0;
-            }
-        }
-
-        /deep/ .c-contentCard-img {
-            display: block;
-            max-width: 100%;
-        }
-    }
-
-    .c-postOrderCard--condensed {
-        /deep/ .c-contentCard-bgImg {
-            display: none;
-        }
-
-        /deep/ .c-contentCard-thumbnail {
-            left: 0;
-            top: 0;
-
-            @include media('<mid') {
-                top: spacing(x2);
-                left: spacing(x2);
-            }
-        }
-
-        /deep/ .c-contentCard-info {
-            padding: 0 0 0 spacing(x9);
-
-            @include media('<mid') {
-                position: relative;
-                padding: spacing(x2) spacing(x2) spacing(x2) spacing(x9);
-                border-radius: $contentCardRadius;
             }
         }
     }
