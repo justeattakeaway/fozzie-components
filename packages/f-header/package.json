@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-header",
   "description": "Fozzie Header – Globalised Header Component",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "main": "dist/f-header.umd.min.js",
   "files": [
     "dist",
@@ -38,7 +38,7 @@
   ],
   "dependencies": {
     "@justeat/f-services": "0.13.0",
-    "@justeat/f-vue-icons": "1.0.0-beta.10",
+    "@justeat/f-vue-icons": "1.0.0-beta.11",
     "axios": "0.19.2"
   },
   "peerDependencies": {
