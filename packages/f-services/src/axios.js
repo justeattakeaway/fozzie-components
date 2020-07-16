@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import {
     forEach,
     isPlainObject,
@@ -7,6 +8,10 @@ import {
     words,
     upperFirst
 } from 'lodash-es';
+
+import {
+    Histogram
+} from 'prom-client';
 
 /**
  * Wrapper for navigator.connection and its Firefox/Safari implementations
@@ -95,6 +100,59 @@ const upperKebabCase = toConvert => words(toConvert)
     .join('-');
 
 /**
+ * Defines a histogram container for prometheus recordings
+ *
+ */
+const responseHistogram = new Histogram({
+    name: 'dependency_response_time',
+    help: 'Response times from an API dependency in milliseconds',
+    labelNames: ['status_code', 'path', 'method'],
+    buckets: [1, 5, 10, 50, 100, 500, 1000]
+});
+
+/**
+ * Record dependency response times with prometheus
+ *
+ * @param {object} responseObject
+ */
+const recordPrometheusStats = responseObject => {
+    const finishLabels = {
+        method: responseObject.method,
+        path: responseObject.url,
+        status_code: responseObject.statusCode // eslint-disable-line camelcase
+    };
+
+    responseHistogram.observe(finishLabels, responseObject.responseTimeMs);
+};
+
+/**
+ * Attach interceptors to the axios client to record response time from an API
+ *
+ * @param {object} axiosInstance
+ */
+const setupResponseTimeRecording = axiosInstance => {
+    axiosInstance.interceptors.request.use(config => {
+        config.meta = config.meta || {};
+        config.meta.requestStartedAt = new Date().getTime();
+        return config;
+    });
+
+    axiosInstance.interceptors.response.use(response => {
+        const timeTakenMs = new Date().getTime() - response.config.meta.requestStartedAt;
+
+        if (process.env.NODE_ENV === 'development') {
+            console.log(`Executed (${response.config.url}) in ${timeTakenMs} ms`);
+        }
+
+        response.responseTimeMs = timeTakenMs;
+
+        recordPrometheusStats(response);
+
+        return response;
+    });
+};
+
+/**
  * Create an axios client.
  *
  * @param {Object} options
@@ -102,13 +160,22 @@ const upperKebabCase = toConvert => words(toConvert)
 const createClient = ({
     baseURL = '',
     headers,
-    config
-} = {}) => axios.create({
-    baseURL,
-    headers: objectToAlternateCasing(headers, upperKebabCase),
-    timeout: getTimeout(),
-    ...config
-});
+    config,
+    recordResponseTimes = false
+} = {}) => {
+    const instance = axios.create({
+        baseURL,
+        headers: objectToAlternateCasing(headers, upperKebabCase),
+        timeout: getTimeout(),
+        ...config
+    });
+
+    if (recordResponseTimes) {
+        setupResponseTimeRecording(instance);
+    }
+
+    return instance;
+};
 
 /**
  * Wrapper for createClient that transforms response objects' property names to camelCase.
