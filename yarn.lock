@@ -2272,13 +2272,6 @@
   dependencies:
     window-or-global "^1.0.1"
 
-"@justeat/f-metadata@2.7.0":
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-metadata/-/f-metadata-2.7.0.tgz#da10960fb334adb9acd9fdf304063ca5fece1e34"
-  integrity sha512-ITj2Mb+/ctixAbRz9afJwTGoxj1nZmEpdqUE2f4q0o5ehNuviFpLCpB314E6q76c8mR8ojTbLWBCfpi8wxh7Bw==
-  dependencies:
-    appboy-web-sdk "2.5.2"
-
 "@justeat/f-services@0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-0.13.0.tgz#b0fc67948e94800ba176addb9d92cce444d28c8e"
@@ -9612,13 +9605,6 @@ for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
   integrity sha1-gQaNKVqBQuwKxybG4iAMMPttXoA=
-
-for-own@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/for-own/-/for-own-1.0.0.tgz#c63332f415cedc4b04dbfe70cf836494c53cb44b"
-  integrity sha1-xjMy9BXO3EsE2/5wz4NklMU8tEs=
-  dependencies:
-    for-in "^1.0.1"
 
 foreachasync@^3.0.0:
   version "3.0.0"
