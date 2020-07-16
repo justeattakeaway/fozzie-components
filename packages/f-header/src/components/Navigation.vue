@@ -418,9 +418,9 @@ export default {
                 }
             });
 
-            userDetailsPromise.then(data => {
-                if (data.isAuthenticated) {
-                    this.userInfo = data;
+            userDetailsPromise.then(response => {
+                if (response.data.isAuthenticated) {
+                    this.userInfo = response.data;
 
                     if (this.isOrderCountValid) {
                         this.fetchOrderCountAndSave();
