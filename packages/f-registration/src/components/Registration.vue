@@ -17,6 +17,7 @@
             :class="$style['o-form']"
             @submit.prevent="onFormSubmit"
         >
+            <!-- TODO WCB-1031 - Extract error messages into a separate component -->
             <p
                 v-if="shouldShowGenericErrorMessage"
                 :class="$style['o-form-error']">
