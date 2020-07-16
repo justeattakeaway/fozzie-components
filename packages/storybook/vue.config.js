@@ -5,7 +5,9 @@ const eyeglass = require('eyeglass');
 const rootDir = path.join(__dirname, '..', '..');
 
 const sassOptions = eyeglass({
-    root: rootDir,
+    eyeglass: {
+        root: rootDir
+    },
     includePaths: ['node_modules/'],
     sourceMap: true
 });
@@ -19,9 +21,14 @@ sassOptions.importer = [
 
 // vue.config.js
 module.exports = {
-    css: {
-        loaderOptions: {
-            sass: {
+    chainWebpack: config => {
+        // console.log(config.module.rules);
+        config.module
+            .rule('scss-importer')
+            .test(/\.scss$/)
+            .use('importer')
+            .loader('sass-loader')
+            .options({
                 ...sassOptions,
                 /**
                  * Requires sass-loader 7.3.1 - works out the relative path for the common.scss file for each component
@@ -39,8 +46,6 @@ module.exports = {
                         .replace(new RegExp(path.sep.replace('\\', '\\\\'), 'g'), '/');
                     return `@import "@justeat/fozzie/src/scss/fozzie"; @import "${relPath}";`;
                 }
-            }
-        },
-        modules: true
+            });
     }
 };
