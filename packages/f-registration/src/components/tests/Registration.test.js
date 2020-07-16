@@ -116,7 +116,7 @@ describe('Registration', () => {
 
                 // Assert
                 expect(RegistrationServiceApi.createAccount).toHaveBeenCalledTimes(1);
-                expect(wrapper.vm.genericErrorMessage).toBeNull();
+                expect(wrapper.vm.shouldShowGenericErrorMessage).toBe(false);
                 expect(wrapper.emitted(EventNames.CreateAccountSuccess).length).toBe(1);
             } finally {
                 wrapper.destroy();
@@ -142,7 +142,7 @@ describe('Registration', () => {
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.genericErrorMessage).not.toBeNull();
+                expect(wrapper.vm.shouldShowGenericErrorMessage).toBe(true);
                 expect(wrapper.vm.shouldShowEmailAlreadyExistsError).toBe(false);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             } finally {
@@ -170,6 +170,7 @@ describe('Registration', () => {
                 await flushPromises();
 
                 // Assert
+                expect(wrapper.vm.shouldShowGenericErrorMessage).toBe(false);
                 expect(wrapper.vm.shouldShowEmailAlreadyExistsError).toBe(true);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             } finally {

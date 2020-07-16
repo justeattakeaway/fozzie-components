@@ -18,10 +18,10 @@
             @submit.prevent="onFormSubmit"
         >
             <p
-                v-if="genericErrorMessage"
+                v-if="shouldShowGenericErrorMessage"
                 :class="$style['o-form-error']">
                 <warning-icon :class="$style['o-form-error-icon']" />
-                {{ genericErrorMessage }}
+                Something went wrong, please try again later
             </p>
             <form-field
                 v-model="firstName"
@@ -181,7 +181,7 @@ export default {
             email: null,
             password: null,
             shouldDisableCreateAccountButton: false,
-            genericErrorMessage: null,
+            shouldShowGenericErrorMessage: false,
             shouldShowEmailAlreadyExistsError: false
         };
     },
@@ -230,7 +230,7 @@ export default {
 
     methods: {
         async onFormSubmit () {
-            this.genericErrorMessage = null;
+            this.shouldShowGenericErrorMessage = false;
             this.shouldShowEmailAlreadyExistsError = false;
             if (this.isFormInvalid()) {
                 return;
@@ -247,11 +247,11 @@ export default {
                 await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData);
                 this.$emit(EventNames.CreateAccountSuccess);
             } catch (error) {
-                const thrownErrors = error.Errors ? error.Errors : error;
+                const thrownErrors = error.Errors || error;
                 if (Array.isArray(thrownErrors) && thrownErrors.some(thrownError => thrownError.ErrorCode === '409')) {
                     this.shouldShowEmailAlreadyExistsError = true;
                 } else {
-                    this.genericErrorMessage = error;
+                    this.shouldShowGenericErrorMessage = true;
                 }
                 this.$emit(EventNames.CreateAccountFailure, thrownErrors);
             } finally {
