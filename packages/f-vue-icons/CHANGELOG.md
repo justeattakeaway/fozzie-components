@@ -4,9 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.1.0
+------------------------------
+*July 16, 2020*
+
+### Changed
+- Nothing changed (this is the same as `v1.0.0`) – package version name error :facepalm:
+
+
 v1.0.0
 ------------------------------
-*June 24, 2020*
+*July 16, 2020*
 
 ### Changed
 - A lot! Component has been modified to pull in the new `f-icons` v2 package and build vue components from those icons. The main reason for making these changes is to allow for tree-shaking of `f-vue-icons` (previously, all icons had to be loaded in, which isn't good for performance when an application may only use a couple of the icons).
