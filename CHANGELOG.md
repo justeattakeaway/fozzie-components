@@ -3,7 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (roll into next release)
+
+v1.22.0
+------------------------------
+*July 16, 2020*
+
+### Changed
+- Adding package dependencies for new `f-vue-icons` release.
+
+
+v1.21.0
 ------------------------------
 *July 13, 2020*
 
@@ -15,6 +24,7 @@ Latest (roll into next release)
 - Updated `sass-loader` to 7.3.1 to allow storybook to perform contextual import of common.scss files
   from Single File Components in subdirectories
 - SSH key fingerprint that is used to deploy Storybook
+
 
 v1.20.0
 ------------------------------
