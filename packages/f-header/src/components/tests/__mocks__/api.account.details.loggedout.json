@@ -1,0 +1,15 @@
+{
+  "friendlyName": "",
+  "isAuthenticated": false,
+  "email": null,
+  "userData": {
+    "globalUserId": null,
+    "userId": null,
+    "authType": null,
+    "signinType": null,
+    "signupDate": null,
+    "email": null,
+    "a-UserId": "A_USER_ID",
+    "consumerStatus": "ReturnConsumer"
+  }
+}
