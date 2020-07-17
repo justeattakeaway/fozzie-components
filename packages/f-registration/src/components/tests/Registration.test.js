@@ -116,7 +116,7 @@ describe('Registration', () => {
 
                 // Assert
                 expect(RegistrationServiceApi.createAccount).toHaveBeenCalledTimes(1);
-                expect(wrapper.vm.shouldShowGenericErrorMessage).toBe(false);
+                expect(wrapper.vm.genericErrorMessage).toBeNull();
                 expect(wrapper.emitted(EventNames.CreateAccountSuccess).length).toBe(1);
             } finally {
                 wrapper.destroy();
@@ -142,15 +142,14 @@ describe('Registration', () => {
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowGenericErrorMessage).toBe(true);
-                expect(wrapper.vm.shouldShowEmailAlreadyExistsError).toBe(false);
+                expect(wrapper.vm.genericErrorMessage).not.toBeNull();
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             } finally {
                 wrapper.destroy();
             }
         });
 
-        it('should populate error message and emit failure event when service responds with a 409', async () => {
+        it('should show error message and emit failure event when service responds with a 409', async () => {
             // Arrange
             const err = { FaultId: '123', TraceId: '123', Errors: [{ Description: 'The specified email already exists', ErrorCode: '409' }] };
             RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
@@ -170,8 +169,61 @@ describe('Registration', () => {
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowGenericErrorMessage).toBe(false);
                 expect(wrapper.vm.shouldShowEmailAlreadyExistsError).toBe(true);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should populate generic error message and emit failure event when service responds with a 400', async () => {
+            // Arrange
+            const err = { FaultId: '123', TraceId: '123', Errors: [{ Description: 'The Password field is required', ErrorCode: '400' }] };
+            RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
+            const wrapper = mountComponentAndAttachToDocument();
+            try {
+                const firstName = 'Ashton',
+                    lastName = 'Adamms',
+                    email = 'ashton.adamms+jetest@just-eat.com',
+                    password = 'Passw0rd';
+                await wrapper.find("[data-test-id='input-first-name']").setValue(firstName);
+                await wrapper.find("[data-test-id='input-last-name']").setValue(lastName);
+                await wrapper.find("[data-test-id='input-email']").setValue(email);
+                await wrapper.find("[data-test-id='input-password']").setValue(password);
+
+                // Act
+                wrapper.find("[data-test-id='create-account-submit-button']").trigger('click');
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.genericErrorMessage).toEqual('The Password field is required');
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show default error message and emit failure event when service with an error with no description', async () => {
+            // Arrange
+            const err = { Errors: [{ ErrorCode: 'XXX' }] };
+            RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
+            const wrapper = mountComponentAndAttachToDocument();
+            try {
+                const firstName = 'Ashton',
+                    lastName = 'Adamms',
+                    email = 'ashton.adamms+jetest@just-eat.com',
+                    password = 'Passw0rd';
+                await wrapper.find("[data-test-id='input-first-name']").setValue(firstName);
+                await wrapper.find("[data-test-id='input-last-name']").setValue(lastName);
+                await wrapper.find("[data-test-id='input-email']").setValue(email);
+                await wrapper.find("[data-test-id='input-password']").setValue(password);
+
+                // Act
+                wrapper.find("[data-test-id='create-account-submit-button']").trigger('click');
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.genericErrorMessage).toEqual('Something went wrong, please try again later');
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             } finally {
                 wrapper.destroy();

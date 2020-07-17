@@ -19,10 +19,10 @@
         >
             <!-- TODO WCB-1031 - Extract error messages into a separate component -->
             <p
-                v-if="shouldShowGenericErrorMessage"
+                v-if="genericErrorMessage"
                 :class="$style['o-form-error']">
                 <warning-icon :class="$style['o-form-error-icon']" />
-                Something went wrong, please try again later
+                {{ genericErrorMessage }}
             </p>
             <form-field
                 v-model="firstName"
@@ -182,7 +182,7 @@ export default {
             email: null,
             password: null,
             shouldDisableCreateAccountButton: false,
-            shouldShowGenericErrorMessage: false,
+            genericErrorMessage: null,
             shouldShowEmailAlreadyExistsError: false
         };
     },
@@ -231,7 +231,7 @@ export default {
 
     methods: {
         async onFormSubmit () {
-            this.shouldShowGenericErrorMessage = false;
+            this.genericErrorMessage = null;
             this.shouldShowEmailAlreadyExistsError = false;
             if (this.isFormInvalid()) {
                 return;
@@ -249,10 +249,14 @@ export default {
                 this.$emit(EventNames.CreateAccountSuccess);
             } catch (error) {
                 const thrownErrors = error.Errors || error;
-                if (Array.isArray(thrownErrors) && thrownErrors.some(thrownError => thrownError.ErrorCode === '409')) {
-                    this.shouldShowEmailAlreadyExistsError = true;
+                if (Array.isArray(thrownErrors)) {
+                    if (thrownErrors.some(thrownError => thrownError.ErrorCode === '409')) {
+                        this.shouldShowEmailAlreadyExistsError = true;
+                    } else {
+                        this.genericErrorMessage = thrownErrors[0].Description || 'Something went wrong, please try again later';
+                    }
                 } else {
-                    this.shouldShowGenericErrorMessage = true;
+                    this.genericErrorMessage = error;
                 }
                 this.$emit(EventNames.CreateAccountFailure, thrownErrors);
             } finally {
