@@ -1,0 +1,15 @@
+{
+  "friendlyName": "John",
+  "isAuthenticated": true,
+  "email": "testuser@example.org",
+  "userData": {
+    "globalUserId": "EXAMPLE_USER_ID",
+    "userId": "0123456789",
+    "authType": "Login",
+    "signinType": "Email",
+    "signupDate": null,
+    "email": "EXAMPLE_USER_EMAIL",
+    "a-UserId": "A_USER_ID",
+    "consumerStatus": "Undefined"
+  }
+}

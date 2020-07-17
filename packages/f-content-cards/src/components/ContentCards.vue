@@ -185,8 +185,6 @@ export default {
     // Currently consists of a main image, optional restaurant logo thumbnail
     // And then info text below (header, tags, description)
 
-    $contentCardRadius: 8px;
-
     .c-contentCards {
         margin-top: spacing(x5);
         margin-bottom: spacing(x5);
@@ -551,12 +549,17 @@ export default {
         }
 
         .c-contentCard-bgImg {
-            min-height: 250px;
+            overflow: hidden;
             border-radius: $contentCardRadius;
 
             @include media ('<mid') {
                 border-radius: $contentCardRadius $contentCardRadius 0 0;
             }
+        }
+
+        .c-contentCard-img {
+            display: block;
+            max-width: 100%;
         }
     }
 

@@ -10,6 +10,8 @@ $theme: 'je' !default;
 @import '~@justeat/fozzie/src/scss/base/reset';
 @import '~@justeat/fozzie-colour-palette/src/scss';
 
+$contentCardRadius: 8px;
+
 @mixin theme($type) {
     [data-theme="#{$type}"] & {
         @content;
