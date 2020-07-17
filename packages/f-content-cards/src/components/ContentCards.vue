@@ -185,8 +185,6 @@ export default {
     // Currently consists of a main image, optional restaurant logo thumbnail
     // And then info text below (header, tags, description)
 
-    $contentCardRadius: 8px;
-
     .c-contentCards {
         margin-top: spacing(x5);
         margin-bottom: spacing(x5);

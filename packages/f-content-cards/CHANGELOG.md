@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.11.0
+------------------------------
+*July 16, 2020*
+
+### Added
+- Skeleton loading state card template
+
+
 v0.10.1
 ------------------------------
 *July 10, 2020*
@@ -18,6 +26,7 @@ v0.10.0
 
 ### Added
 - Accessibility add-on to Storybook story.
+
 
 v0.10.0
 ------------------------------
