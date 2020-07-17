@@ -40,8 +40,8 @@ export default {
             default: () => ({})
         },
         cardContainerStyles: {
-                type: Object,
-                default: () => CardContainerStyles
+            type: Object,
+            default: () => CardContainerStyles
         },
         containerTitle: {
             type: String,
