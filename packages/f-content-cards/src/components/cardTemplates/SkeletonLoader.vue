@@ -1,9 +1,9 @@
 <template>
-    <div class="offers-preloading-wrap">
+    <div class="c-contentCard-skeletonLoader-wrapper">
         <template v-for="(skeletons, index) in count">
             <div
                 :key="index"
-                class="offers-preloading"
+                class="c-contentCard-skeletonLoader-card"
                 data-test-id="contentCard-skeletonLoader"
             />
         </template>
@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style lang="scss">
-    .offers-preloading-wrap {
+    .c-contentCard-skeletonLoader-wrapper {
         margin-top: 40px;
 
         @include media('>=narrowMid') {
@@ -32,7 +32,7 @@ export default {
             flex-direction: row;
         }
     }
-    .offers-preloading {
+    .c-contentCard-skeletonLoader-card {
         border-radius: $contentCardRadius;
         display: flex;
         flex-direction: column;
@@ -53,7 +53,7 @@ export default {
      * 1. Magic number to match card height
      * 2. Using radial and linear gradients to create greyed out placeholder elements in preloading component
      */
-    .offers-preloading:empty {
+    .c-contentCard-skeletonLoader-card:empty {
         height: 403px; // 1
         background-color: $white;
 
