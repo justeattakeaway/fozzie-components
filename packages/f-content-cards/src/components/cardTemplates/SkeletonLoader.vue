@@ -1,5 +1,5 @@
 <template>
-    <div class="c-contentCard-skeletonLoader-wrapper">
+    <div class="c-contentCard-skeletonLoader">
         <template v-for="(skeletons, index) in count">
             <div
                 :key="index"
@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style lang="scss">
-    .c-contentCard-skeletonLoader-wrapper {
+    .c-contentCard-skeletonLoader {
         margin-top: 40px;
 
         @include media('>=narrowMid') {
