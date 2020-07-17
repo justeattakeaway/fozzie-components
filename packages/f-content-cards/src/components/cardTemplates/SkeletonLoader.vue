@@ -1,9 +1,9 @@
 <template>
-    <div class="c-skeletonLoader">
+    <div :class="$style['c-skeletonLoader']">
         <template v-for="(skeletons, index) in count">
             <div
                 :key="index"
-                class="c-skeletonLoader-card"
+                :class="$style['c-skeletonLoader-card']"
                 data-test-id="contentCard-skeletonLoader"
             />
         </template>
@@ -22,7 +22,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
     .c-skeletonLoader {
         margin-top: 40px;
 
@@ -33,7 +33,7 @@ export default {
         }
     }
     .c-skeletonLoader-card {
-        border-radius: $contentCardRadius;
+        border-radius: $border-radius;
         display: flex;
         flex-direction: column;
         flex: 0 0 40%;
