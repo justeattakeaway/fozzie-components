@@ -27,6 +27,8 @@
 <script>
 /* eslint-disable import/no-duplicates */
 import CardContainer from './CardContainer.vue';
+// The below allows distinct import of styles from cardContainer, in order to directly influence which intra-component
+// styles are used on the wrapper element in the card-container
 import CardContainerStyles from './CardContainer.vue?vue&type=style&index=0&lang=scss&module=true&';
 /* eslint-enable import/no-duplicates */
 

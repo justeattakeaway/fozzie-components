@@ -12,7 +12,7 @@
         </span>
         <span
             v-if="type === 'Promotion_Card_2'"
-            :class="[cardContainerStyles['c-contentCard-link'], 'o-btnLink']"
+            :class="[$style['c-contentCard-link'], 'o-btnLink']"
             :data-test-id="testIdForPromoCardType(2)">
             {{ ctaText }}
         </span>
@@ -20,10 +20,7 @@
 </template>
 
 <script>
-/* eslint-disable import/no-duplicates */
 import CardContainer from './CardContainer.vue';
-import CardContainerStyles from './CardContainer.vue?vue&type=style&index=0&lang=scss&module=true&';
-/* eslint-enable import/no-duplicates */
 
 export default {
     components: {
@@ -33,10 +30,6 @@ export default {
         card: {
             type: Object,
             default: () => ({})
-        },
-        cardContainerStyles: {
-            type: Object,
-            default: () => CardContainerStyles
         },
         containerTitle: {
             type: String,
