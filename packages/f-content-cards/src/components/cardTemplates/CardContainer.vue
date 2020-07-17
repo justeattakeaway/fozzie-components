@@ -290,7 +290,7 @@ export default {
             @include media ('<mid') {
                 border: 1px solid $color-border;
                 padding: spacing(x3);
-                border-radius: 0 0 $contentCardRadius $contentCardRadius;
+                border-radius: 0 0 $post-order-card-radius $post-order-card-radius;
             }
         }
 
@@ -315,10 +315,10 @@ export default {
 
         .c-contentCard-bgImg {
             overflow: hidden;
-            border-radius: $contentCardRadius;
+            border-radius: $post-order-card-radius;
 
             @include media ('<mid') {
-                border-radius: $contentCardRadius $contentCardRadius 0 0;
+                border-radius: $post-order-card-radius $post-order-card-radius 0 0;
             }
         }
 
@@ -349,7 +349,7 @@ export default {
             @include media('<mid') {
                 position: relative;
                 padding: spacing(x2) spacing(x2) spacing(x2) spacing(x9);
-                border-radius: $contentCardRadius;
+                border-radius: $post-order-card-radius;
             }
         }
     }
