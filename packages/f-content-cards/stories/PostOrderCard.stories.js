@@ -1,6 +1,6 @@
 import { withKnobs, text } from '@storybook/addon-knobs';
-import PostOrderCard from '../src/components/cardTemplates/PostOrderCard.vue';
 import { withA11y } from '@storybook/addon-a11y';
+import PostOrderCard from '../src/components/cardTemplates/PostOrderCard.vue';
 
 export default {
     title: 'Components/Atoms',

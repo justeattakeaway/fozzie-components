@@ -1,10 +1,10 @@
 <template>
-    <div class="c-skeletonLoader">
+    <div :class="$style['c-skeletonLoader']">
         <template v-for="(skeletons, index) in count">
             <div
                 :key="index"
-                :class="['c-skeletonLoader-card', { 'c-skeletonLoader-card--promo': type === 'Promo' }]"
-                data-test-id="contentCard-skeletonLoader"
+                :class="[$style['c-skeletonLoader-card'], { [$style['c-skeletonLoader-card--promo']]: type === 'promo' }]"
+                :data-test-id="`contentCard-skeletonLoader-${type}`"
             />
         </template>
     </div>
@@ -20,13 +20,13 @@ export default {
         },
         type: {
             type: String,
-            default: 'Promo'
+            default: 'promo'
         }
     }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
     .c-skeletonLoader {
         margin-top: 40px;
 
