@@ -100,18 +100,10 @@ describe('Registration', () => {
             // Arrange
             RegistrationServiceApi.createAccount.mockImplementation(async () => Promise.resolve());
             const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
             try {
-                const firstName = 'Ashton',
-                    lastName = 'Adamms',
-                    email = 'ashton.adamms@just-eat.com',
-                    password = 'Passw0rd';
-                await wrapper.find("[data-test-id='input-first-name']").setValue(firstName);
-                await wrapper.find("[data-test-id='input-last-name']").setValue(lastName);
-                await wrapper.find("[data-test-id='input-email']").setValue(email);
-                await wrapper.find("[data-test-id='input-password']").setValue(password);
-
                 // Act
-                wrapper.find("[data-test-id='create-account-submit-button']").trigger('click');
+                await wrapper.vm.onFormSubmit();
                 await flushPromises();
 
                 // Assert
@@ -127,18 +119,10 @@ describe('Registration', () => {
             // Arrange
             RegistrationServiceApi.createAccount.mockImplementation(async () => { throw new Error('Conflict'); });
             const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
             try {
-                const firstName = 'Ashton',
-                    lastName = 'Adamms',
-                    email = 'ashton.adamms+jetest@just-eat.com',
-                    password = 'Passw0rd';
-                await wrapper.find("[data-test-id='input-first-name']").setValue(firstName);
-                await wrapper.find("[data-test-id='input-last-name']").setValue(lastName);
-                await wrapper.find("[data-test-id='input-email']").setValue(email);
-                await wrapper.find("[data-test-id='input-password']").setValue(password);
-
                 // Act
-                wrapper.find("[data-test-id='create-account-submit-button']").trigger('click');
+                await wrapper.vm.onFormSubmit();
                 await flushPromises();
 
                 // Assert
@@ -154,18 +138,10 @@ describe('Registration', () => {
             const err = { FaultId: '123', TraceId: '123', Errors: [{ Description: 'The specified email already exists', ErrorCode: '409' }] };
             RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
             const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
             try {
-                const firstName = 'Ashton',
-                    lastName = 'Adamms',
-                    email = 'ashton.adamms+jetest@just-eat.com',
-                    password = 'Passw0rd';
-                await wrapper.find("[data-test-id='input-first-name']").setValue(firstName);
-                await wrapper.find("[data-test-id='input-last-name']").setValue(lastName);
-                await wrapper.find("[data-test-id='input-email']").setValue(email);
-                await wrapper.find("[data-test-id='input-password']").setValue(password);
-
                 // Act
-                wrapper.find("[data-test-id='create-account-submit-button']").trigger('click');
+                await wrapper.vm.onFormSubmit();
                 await flushPromises();
 
                 // Assert
@@ -181,18 +157,10 @@ describe('Registration', () => {
             const err = { FaultId: '123', TraceId: '123', Errors: [{ Description: 'The Password field is required', ErrorCode: '400' }] };
             RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
             const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
             try {
-                const firstName = 'Ashton',
-                    lastName = 'Adamms',
-                    email = 'ashton.adamms+jetest@just-eat.com',
-                    password = 'Passw0rd';
-                await wrapper.find("[data-test-id='input-first-name']").setValue(firstName);
-                await wrapper.find("[data-test-id='input-last-name']").setValue(lastName);
-                await wrapper.find("[data-test-id='input-email']").setValue(email);
-                await wrapper.find("[data-test-id='input-password']").setValue(password);
-
                 // Act
-                wrapper.find("[data-test-id='create-account-submit-button']").trigger('click');
+                await wrapper.vm.onFormSubmit();
                 await flushPromises();
 
                 // Assert
@@ -208,18 +176,10 @@ describe('Registration', () => {
             const err = { Errors: [{ ErrorCode: 'XXX' }] };
             RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
             const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
             try {
-                const firstName = 'Ashton',
-                    lastName = 'Adamms',
-                    email = 'ashton.adamms+jetest@just-eat.com',
-                    password = 'Passw0rd';
-                await wrapper.find("[data-test-id='input-first-name']").setValue(firstName);
-                await wrapper.find("[data-test-id='input-last-name']").setValue(lastName);
-                await wrapper.find("[data-test-id='input-email']").setValue(email);
-                await wrapper.find("[data-test-id='input-password']").setValue(password);
-
                 // Act
-                wrapper.find("[data-test-id='create-account-submit-button']").trigger('click');
+                await wrapper.vm.onFormSubmit();
                 await flushPromises();
 
                 // Assert
