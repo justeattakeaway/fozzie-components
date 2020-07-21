@@ -14,7 +14,7 @@ export const SkeletonLoaderComponent = () => ({
             default: number('Count', 1)
         },
         type: {
-            default: select('Type', ['Promo', 'PostOrder'], 'PostOrder')
+            default: select('Type', ['promo', 'postOrder'], 'promo')
         }
     },
     template: '<skeleton-loader :count="count" :type="type" />'

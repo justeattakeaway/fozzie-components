@@ -12,7 +12,7 @@
         </span>
         <span
             v-if="type === 'Promotion_Card_2'"
-            class="c-contentCard-link o-btnLink"
+            :class="[$style['c-contentCard-link'], 'o-btnLink']"
             :data-test-id="testIdForPromoCardType(2)">
             {{ ctaText }}
         </span>
@@ -66,3 +66,10 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" module>
+    .c-contentCard-link {
+        font-weight: $font-weight-bold;
+        text-decoration: none;
+    }
+</style>

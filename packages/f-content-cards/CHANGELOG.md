@@ -4,35 +4,44 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.12.0
+v1.1.0
 ------------------------------
-*July 10, 2020*
+*July 21, 2020*
 
 ### Added
 - Add Skeleton loading state for post order content cards
 
 
+v1.0.0
+------------------------------
+*July 21, 2020*
+
+### Changed
+- Styles separated out to individual components and scoped to avoid bleed-out
+
+
 v0.11.0
 ------------------------------
-*July 9, 2020*
+*July 16, 2020*
 
 ### Added
 - Skeleton loading state card template
 
 
+v0.10.1
+------------------------------
+*July 10, 2020*
+
+### Fixed
+- A defect where the main content card image was applied as a background image with cover sizing which caused the image to be cropped dependent on it's aspect ratio/sizing.
+
+
 v0.10.0
 ------------------------------
-*July 2, 2020*
+*July 7, 2020*
 
 ### Added
 - Accessibility add-on to Storybook story.
-
-
-v0.10.0
-------------------------------
-*July 7th, 2020*
-
-### Added
 - ContentCards component accepts `pushToDataLayer` callback as a prop for feeding back
   analytics regarding content cards
 - ContentCards component accepts `testId` parameter as a prop, which indicates the test

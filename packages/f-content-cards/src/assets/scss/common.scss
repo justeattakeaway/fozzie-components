@@ -10,6 +10,9 @@ $theme: 'je' !default;
 @import '~@justeat/fozzie/src/scss/base/reset';
 @import '~@justeat/fozzie-colour-palette/src/scss';
 
+// defined separately from the $border-radius variable in order to match the radius for UI elements in OrderWeb
+$post-order-card-radius: 8px;
+
 @mixin theme($type) {
     [data-theme="#{$type}"] & {
         @content;
