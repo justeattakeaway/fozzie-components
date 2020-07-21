@@ -3,7 +3,7 @@
         <template v-for="(skeletons, index) in count">
             <div
                 :key="index"
-                :class="[$style['c-skeletonLoader-card'], { [$style['c-skeletonLoader-card--promo']]: type === 'promo' }]"
+                :class="[$style['c-skeletonLoader-card'], $style[`c-skeletonLoader-card--${type}`]]"
                 :data-test-id="`contentCard-skeletonLoader-${type}`"
             />
         </template>
@@ -20,7 +20,10 @@ export default {
         },
         type: {
             type: String,
-            default: 'promo'
+            default: 'promo',
+            validator (value) {
+                return ['promo', 'postOrder'].indexOf(value) !== -1;
+            }
         }
     }
 };
