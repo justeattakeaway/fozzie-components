@@ -88,18 +88,14 @@ export default {
     },
 
     data () {
-        const isPostOrderLoader = this.enabledCardTypes && this.enabledCardTypes.every(type => type === 'Post_Order_Card_1');
-        console.log({ isPostOrderLoader });
+        const isPostOrderSkeletonCard = this.enabledCardTypes && this.enabledCardTypes.every(type => type === 'Post_Order_Card_1');
+        const loader = isPostOrderSkeletonCard ? { type: 'postOrder', count: 1 } : { type: 'promo', count: 3 };
 
         return {
             cards: [],
             titleCard: {},
             hasLoaded: false,
-            loader: {
-                type: isPostOrderLoader ? 'PostOrder' : 'PromoCard',
-                count: isPostOrderLoader ? 1 : 3
-            }
-
+            loader
         };
     },
 
