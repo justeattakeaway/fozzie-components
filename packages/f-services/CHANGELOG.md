@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (roll into next release)
 ------------------------------
+*July 21, 2020*
+
+### Changed
+- Vue CLI minor package updates.
+
 *May 12, 2020*
 
 ### Changed

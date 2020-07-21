@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.4.0
+------------------------------
+*July 21, 2020*
+
+### Changed
+- Updating component with the latest rebrand phase 3.1 colour changes.
+- Updated to `v1` of `f-vue-icons`.
+- Changing `data-theme` to `data-theme-footer` to avoid clashing with any other components in the future.
+- Vue CLI minor package updates.
+
+
 v3.3.2
 ------------------------------
 *July 10, 2020*

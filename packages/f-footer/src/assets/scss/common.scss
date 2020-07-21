@@ -30,7 +30,7 @@ $theme: 'je' !default;
 
 
 @mixin theme($type) {
-    [data-theme="#{$type}"] & {
+    [data-theme-footer="#{$type}"] & {
         @content;
     }
 }

@@ -4,8 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+v0.4.0
 ------------------------------
+*July 21, 2020*
+
+### Changed
+- Updating colour variables to use new versions set in `fozzie-colour-palette` (rebrand phase 3.1).
+- Changing `data-theme` to `data-theme-card` to avoid clashing with any other components in the future.
+- Vue CLI minor package updates.
+
 *July 2, 2020*
 
 ### Added
