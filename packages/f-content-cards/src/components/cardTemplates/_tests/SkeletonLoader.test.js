@@ -7,7 +7,7 @@ describe('contentCards › SkeletonLoader', () => {
         const wrapper = shallowMount(SkeletonLoader);
 
         // Assert
-        expect(wrapper.findAll('[data-test-id="contentCard-skeletonLoader"]')).toHaveLength(1);
+        expect(wrapper.findAll('[data-test-id="contentCard-skeletonLoader-promo"]')).toHaveLength(1);
     });
 
     it('should show multiple SkeletonLoader cards when provided with a "count" prop', async () => {
@@ -21,7 +21,22 @@ describe('contentCards › SkeletonLoader', () => {
             });
 
             // Assert
-            return expect(Array.from(wrapper.findAll('[data-test-id="contentCard-skeletonLoader"]'))).toHaveLength(count);
+            return expect(Array.from(wrapper.findAll('[data-test-id="contentCard-skeletonLoader-promo"]'))).toHaveLength(count);
         }));
+    });
+
+    it('should show the post order card styling when a type other than "promo" is provided', async () => {
+        // Arrange
+        const type = 'postOrder';
+
+        // Act
+        const wrapper = shallowMount(SkeletonLoader, {
+            propsData: {
+                type
+            }
+        });
+
+        // Assert
+        expect(wrapper.find('[data-test-id="contentCard-skeletonLoader-postOrder"]').exists()).toBe(true);
     });
 });

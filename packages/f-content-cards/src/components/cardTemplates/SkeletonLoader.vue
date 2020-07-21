@@ -3,8 +3,8 @@
         <template v-for="(skeletons, index) in count">
             <div
                 :key="index"
-                :class="$style['c-skeletonLoader-card']"
-                data-test-id="contentCard-skeletonLoader"
+                :class="[$style['c-skeletonLoader-card'], $style[`c-skeletonLoader-card--${type}`]]"
+                :data-test-id="`contentCard-skeletonLoader-${type}`"
             />
         </template>
     </div>
@@ -17,6 +17,13 @@ export default {
         count: {
             type: Number,
             default: 1
+        },
+        type: {
+            type: String,
+            default: 'promo',
+            validator (value) {
+                return ['promo', 'postOrder'].indexOf(value) !== -1;
+            }
         }
     }
 };
@@ -32,6 +39,7 @@ export default {
             flex-direction: row;
         }
     }
+
     .c-skeletonLoader-card {
         border-radius: $border-radius;
         display: flex;
@@ -51,58 +59,77 @@ export default {
 
     /**
      * 1. Magic number to match card height
-     * 2. Using radial and linear gradients to create greyed out placeholder elements in preloading component
+     * 2. Using gradients to create placeholder elements resembling the post order content cards (as default)
+     * 3. Using gradients to create placeholder elements resembling promotional content cards
      */
     .c-skeletonLoader-card:empty {
+        position: relative;
         height: 403px; // 1
         background-color: $white;
-
-        // 2
-        background-image: radial-gradient(0 at 0 0, lightgray 99%, transparent 0),
-                          linear-gradient(100deg, rgba(255, 255, 255, 0) 0%,
-                                                  rgba(255, 255, 255, 0) 30%,
-                                                  rgba(255, 255, 255, 0.5) 50%,
-                                                  rgba(255, 255, 255, 0) 70%), // shine
-                          linear-gradient(to left, gray 23px, transparent 0), // restaurant thumbnail placeholder left
-                          linear-gradient(to right, gray 23px, transparent 0), // restaurant thumbnail placeholder right
-                          linear-gradient(lightgray 170px, transparent 0), // restaurant hero image placeholder
-                          linear-gradient(lightgray 20px, transparent 0), // line one
-                          linear-gradient(lightgray 20px, transparent 0), // line two
-                          linear-gradient(lightgray 20px, transparent 0); // line three
-
         background-repeat: no-repeat;
 
+        // 2
+        background-image: radial-gradient(0 at 0 0, $grey--lighter 99%, transparent 0),
+                          linear-gradient(to right, white 20px, transparent 0), // 2.1 right margin
+                          linear-gradient($grey--lighter 20px, transparent 0), // 2.2 title placeholder
+                          linear-gradient($grey--lighter 220px, transparent 0), // 2.3 main image placeholder
+                          linear-gradient($grey--lighter 20px, transparent 0), // 2.4 line one placeholder
+                          linear-gradient($grey--lighter 20px, transparent 0), // 2.5 line two placeholder
+                          linear-gradient($grey--lighter 20px, transparent 0); // 2.6 line three placeholder
         background-size: 100px 457px,
-        100px 657px,
-        50% 46px,
-        50% 46px,
-        100% 170px,
-        80% 20px,
-        40% 20px,
-        65% 20px;
-
+                         20px 100%, // 2.1
+                         50% 20px, // 2.2
+                         100% 220px, // 2.3
+                         100% 20px, // 2.4
+                         65% 20px, // 2.5
+                         40% 20px; // 2.6
         background-position: 0 0,
-        -100px -100px,
-        0 147px,
-        100% 147px,
-        0 0,
-        20px 230px,
-        20px 260px,
-        20px 300px;
+                         100% 0, // 2.1
+                         20px 20px, // 2.2
+                         20px 56px, // 2.3
+                         20px 292px, // 2.4
+                         20px 328px, // 2.5
+                         20px 364px; // 2.6
 
-        animation: shine 1.5s linear 1s infinite;
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 70%) -100px -100px/100px 657px no-repeat;
+            animation: shine 1.5s linear 1s infinite;
+        }
+
+        &.c-skeletonLoader-card--promo {
+            // 3
+            background-image: radial-gradient(0 at 0 0, $grey--lighter 99%, transparent 0),
+                              linear-gradient(to left, $grey--light 46px, transparent 0), // 3.1 icon placeholder
+                              linear-gradient($grey--lighter 170px, transparent 0), // 3.2 main image placeholder
+                              linear-gradient($grey--lighter 20px, transparent 0), //  3.3 line one placeholder
+                              linear-gradient($grey--lighter 20px, transparent 0), // 3.4 line two placeholder
+                              linear-gradient($grey--lighter 20px, transparent 0); // 3.5 line three placeholder
+
+            background-size: 100px 457px,
+                             50% 46px, // 3.1
+                             100% 170px, // 3.2
+                             80% 20px, // 3.3
+                             40% 20px, // 3.4
+                             65% 20px; // 3.5
+
+            background-position: 0 0,
+                                 23px 147px, // 3.1
+                                 0 0, // 3.2
+                                 20px 230px, // 3.3
+                                 20px 260px, // 3.4
+                                 20px 300px; // 3.5
+        }
     }
 
     @keyframes shine {
         33%, to {
-            background-position: 0 0,
-            140% -100px,
-            0 147px,
-            100% 147px,
-            0 0,
-            20px 230px,
-            20px 260px,
-            20px 300px;
+            background-position: 140% -100px;
         }
     }
 </style>
