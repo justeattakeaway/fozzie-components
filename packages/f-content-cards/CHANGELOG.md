@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.0.0
 ------------------------------
-*July 14, 2020*
+*July 21, 2020*
 
 ### Changed
 - Styles separated out to individual components and scoped to avoid bleed-out
