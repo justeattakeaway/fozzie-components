@@ -15,7 +15,7 @@
         </template>
     </div>
     <skeleton-loader
-        v-else
+        v-else-if="showLoadingState"
         :type="loader.type"
         :count="loader.count" />
 </template>
@@ -84,6 +84,10 @@ export default {
         testId: {
             type: String,
             default: null
+        },
+        showLoadingState: {
+            type: Boolean,
+            default: true
         }
     },
 

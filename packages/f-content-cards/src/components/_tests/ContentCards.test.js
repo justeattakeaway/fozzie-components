@@ -78,6 +78,85 @@ describe('ContentCards', () => {
         expect(instance.findAllComponents(cardTemplates.PostOrderCard).length).toBe(1);
     });
 
+    describe('loading state', () => {
+        it('should show a skeleton loading card whilst initialising Braze', async () => {
+            // Arrange
+            const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
+            const appboy = createAppboyInstance(cardTypes);
+            const { SkeletonLoader } = cardTemplates;
+
+            // Act
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId
+                }
+            });
+
+            // Assert
+            expect(instance.findComponent(SkeletonLoader).exists()).toBe(true);
+
+            // Act
+            instance.vm.contentCards(appboy);
+            await instance.vm.$nextTick();
+
+            // Assert
+            expect(instance.findComponent(SkeletonLoader).exists()).toBe(false);
+        });
+
+        it('should NOT show a skeleton loading card whilst initialising Braze if "showLoadingState" prop is false"', async () => {
+            // Arrange
+            const showLoadingState = false;
+            const { SkeletonLoader } = cardTemplates;
+
+            // Act
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId,
+                    showLoadingState
+                }
+            });
+
+            // Assert
+            expect(instance.findComponent(SkeletonLoader).exists()).toBe(false);
+        });
+
+        it('should request a "postOrder" skeleton loading card when all card types are "Post_Order_Card_1"', () => {
+            // Arrange
+            const enabledCardTypes = ['Post_Order_Card_1'];
+
+            // Act
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId,
+                    enabledCardTypes
+                }
+            });
+
+            // Assert
+            expect(instance.vm.$data.loader).toEqual({ type: 'postOrder', count: 1 });
+        });
+
+        it('should request a "promo" skeleton loading card when all card types are NOT "Post_Order_Card_1"', () => {
+            // Arrange
+            const enabledCardTypes = ['Promotion_Card_1', 'Promotion_Card_2'];
+
+            // Act
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId,
+                    enabledCardTypes
+                }
+            });
+
+            // Assert
+            expect(instance.vm.$data.loader).toEqual({ type: 'promo', count: 3 });
+        });
+    });
+
     it('should call logCardImpressions from f-metadata with data from all displayed cards', async () => {
         // Arrange
         const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
