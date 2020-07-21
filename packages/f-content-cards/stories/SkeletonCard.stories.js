@@ -1,4 +1,4 @@
-import { withKnobs, number } from '@storybook/addon-knobs';
+import { withKnobs, number, select } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import SkeletonLoader from '../src/components/cardTemplates/SkeletonLoader.vue';
 
@@ -12,9 +12,12 @@ export const SkeletonLoaderComponent = () => ({
     props: {
         count: {
             default: number('Count', 1)
+        },
+        type: {
+            default: select('Type', ['promo', 'postOrder'], 'promo')
         }
     },
-    template: '<skeleton-loader :count="count" />'
+    template: '<skeleton-loader :count="count" :type="type" />'
 });
 
 SkeletonLoaderComponent.story = {
