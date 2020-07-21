@@ -6,10 +6,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.1.0
 ------------------------------
-*July 17, 2020*
+*July 21, 2020*
 
 ### Added
 - Add Skeleton loading state for post order content cards
+
+
+v1.0.0
+------------------------------
+*July 21, 2020*
+
+### Changed
+- Styles separated out to individual components and scoped to avoid bleed-out
 
 
 v0.11.0
@@ -30,17 +38,10 @@ v0.10.1
 
 v0.10.0
 ------------------------------
-*July 2, 2020*
+*July 7, 2020*
 
 ### Added
 - Accessibility add-on to Storybook story.
-
-
-v0.10.0
-------------------------------
-*July 7th, 2020*
-
-### Added
 - ContentCards component accepts `pushToDataLayer` callback as a prop for feeding back
   analytics regarding content cards
 - ContentCards component accepts `testId` parameter as a prop, which indicates the test

@@ -17,6 +17,7 @@
             :class="$style['o-form']"
             @submit.prevent="onFormSubmit"
         >
+            <!-- TODO WCB-1031 - Extract error messages into a separate component -->
             <p
                 v-if="genericErrorMessage"
                 :class="$style['o-form-error']">
@@ -77,6 +78,12 @@
                         :class="$style['o-form-error']">
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please enter a valid email address
+                    </p>
+                    <p
+                        v-else-if="shouldShowEmailAlreadyExistsError"
+                        :class="$style['o-form-error']">
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        An account with this email already exists
                     </p>
                 </template>
             </form-field>
@@ -175,7 +182,8 @@ export default {
             email: null,
             password: null,
             shouldDisableCreateAccountButton: false,
-            genericErrorMessage: null
+            genericErrorMessage: null,
+            shouldShowEmailAlreadyExistsError: false
         };
     },
 
@@ -224,6 +232,7 @@ export default {
     methods: {
         async onFormSubmit () {
             this.genericErrorMessage = null;
+            this.shouldShowEmailAlreadyExistsError = false;
             if (this.isFormInvalid()) {
                 return;
             }
@@ -239,8 +248,17 @@ export default {
                 await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData);
                 this.$emit(EventNames.CreateAccountSuccess);
             } catch (error) {
-                this.genericErrorMessage = error;
-                this.$emit(EventNames.CreateAccountFailure, error);
+                const thrownErrors = error.Errors || error;
+                if (Array.isArray(thrownErrors)) {
+                    if (thrownErrors.some(thrownError => thrownError.ErrorCode === '409')) {
+                        this.shouldShowEmailAlreadyExistsError = true;
+                    } else {
+                        this.genericErrorMessage = thrownErrors[0].Description || 'Something went wrong, please try again later';
+                    }
+                } else {
+                    this.genericErrorMessage = error;
+                }
+                this.$emit(EventNames.CreateAccountFailure, thrownErrors);
             } finally {
                 this.shouldDisableCreateAccountButton = false;
             }
