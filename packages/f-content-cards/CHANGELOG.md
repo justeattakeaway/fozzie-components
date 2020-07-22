@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.4.0
+------------------------------
+*July 22, 2020*
+
+### Added
+- `xhr-mock` and `faker` as dev dependencies
+- Faked card data for braze SDK responses
+
+### Changed
+- Story can multi-select different card types and then 'refresh'
+
+
 v1.3.0
 ------------------------------
 *July 23, 2020*
