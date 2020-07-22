@@ -1,5 +1,5 @@
 <template>
-    <div :class="[$style['c-skeletonLoader'], { [$style['c-skeletonLoader--fullWidth']]: count === 1 }]">
+    <div :class="[$style['c-skeletonLoader'], { [$style['c-skeletonLoader--fullWidth']]: isFullWidth}]">
         <template v-for="(skeletons, index) in count">
             <div
                 :key="index"
@@ -24,6 +24,11 @@ export default {
             validator (value) {
                 return ['promo', 'postOrder'].indexOf(value) !== -1;
             }
+        }
+    },
+    computed: {
+        isFullWidth () {
+            return this.count === 1
         }
     }
 };

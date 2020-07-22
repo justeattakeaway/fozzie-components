@@ -16,8 +16,8 @@
     </div>
     <skeleton-loader
         v-else-if="showLoadingState"
-        :type="loader.type"
-        :count="loader.count" />
+        :type="loadingCard.type"
+        :count="loadingCard.count" />
 </template>
 
 <script>
@@ -92,14 +92,14 @@ export default {
     },
 
     data () {
-        const isPostOrderSkeletonCard = this.enabledCardTypes && this.enabledCardTypes.every(type => type === 'Post_Order_Card_1');
-        const loader = isPostOrderSkeletonCard ? { type: 'postOrder', count: 1 } : { type: 'promo', count: 3 };
+        const isPostOrderSkeletonCard = this.enabledCardTypes.length && this.enabledCardTypes.every(type => type === 'Post_Order_Card_1');
+        const loadingCard = isPostOrderSkeletonCard ? { type: 'postOrder', count: 1 } : { type: 'promo', count: 3 };
 
         return {
             cards: [],
             titleCard: {},
             hasLoaded: false,
-            loader
+            loadingCard
         };
     },
 
