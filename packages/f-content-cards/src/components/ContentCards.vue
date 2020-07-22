@@ -1,8 +1,10 @@
 <template>
     <div
+        v-if="hasLoaded"
         :class="[$style['c-contentCards'], $style['c-contentCards--wrap' ]]"
         :data-test-id="testId">
-        <template v-for="(contentCard, cardIndex) in cards">
+        <template
+            v-for="(contentCard, cardIndex) in cards">
             <component
                 :is="handleCustomCardType(contentCard.extras.custom_card_type)"
                 :key="cardIndex"
@@ -12,6 +14,10 @@
             />
         </template>
     </div>
+    <skeleton-loader
+        v-else-if="showLoadingState"
+        :type="loadingCard.type"
+        :count="loadingCard.count" />
 </template>
 
 <script>
@@ -78,13 +84,22 @@ export default {
         testId: {
             type: String,
             default: null
+        },
+        showLoadingState: {
+            type: Boolean,
+            default: true
         }
     },
 
     data () {
+        const isPostOrderSkeletonCard = this.enabledCardTypes.length && this.enabledCardTypes.every(type => type === 'Post_Order_Card_1');
+        const loadingCard = isPostOrderSkeletonCard ? { type: 'postOrder', count: 1 } : { type: 'promo', count: 3 };
+
         return {
             cards: [],
-            titleCard: {}
+            titleCard: {},
+            hasLoaded: false,
+            loadingCard
         };
     },
 
@@ -138,6 +153,7 @@ export default {
                 .output();
             this.cards = cards;
             this.titleCard = titleCard;
+            this.hasLoaded = true;
         },
 
         handleCustomCardType (type) {
