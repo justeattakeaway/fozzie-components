@@ -172,6 +172,13 @@ Indicates the test id attribute of the component root element.
 > If this is missing or nully, all child components will also be rendered without test id
 > attributes.
 
+### `showLoadingState`
+
+**Type:** boolean
+**Required:** false
+
+Whether or not to show a skeleton loading state whilst initialising Braze. Defaults to `true`.
+
 ## Development
 
 Start by cloning the repository and installing the required dependencies:
