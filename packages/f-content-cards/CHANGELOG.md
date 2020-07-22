@@ -6,9 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (roll into next release)
 ------------------------------
-*July 21, 2020*
+*July 23, 2020*
 
 ### Changed
+- Some small colour updates (small changes to greys and blues inline with rebrand phase 3.1).
 - Changing `data-theme` to `data-theme-contentcards` to avoid clashing with any other components in the future.
 - Vue CLI minor package updates.
 

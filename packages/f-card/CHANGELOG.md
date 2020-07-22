@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.4.0
 ------------------------------
-*July 21, 2020*
+*July 23, 2020*
 
 ### Changed
 - Updating colour variables to use new versions set in `fozzie-colour-palette` (rebrand phase 3.1).

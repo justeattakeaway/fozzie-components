@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.1.1
 ------------------------------
-*July 21, 2020*
+*July 23, 2020*
 
 ### Changed
 - Moved some specific `devDependencies` used in this package away from the root (as they aren't currently shared by anything else).

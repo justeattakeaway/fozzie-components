@@ -6,10 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.4.0
 ------------------------------
-*July 21, 2020*
+*July 23, 2020*
 
 ### Changed
-- Updating component with the latest rebrand phase 3.1 colour changes.
+- Updating component with the latest rebrand phase 3.1 colour changes (and updated internal colour aliases).
 - Updated to `v1` of `f-vue-icons`.
 - Changing `data-theme` to `data-theme-footer` to avoid clashing with any other components in the future.
 - Vue CLI minor package updates.

@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.2.0
 ------------------------------
-*July 21, 2020*
+*July 23, 2020*
 
 ### Changed
 - Small update to colours from updating to `fozzie-colour-palette` in the mono-repo root.

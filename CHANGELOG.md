@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.23.0
 ------------------------------
-*July 21, 2020*
+*July 23, 2020*
 
 ### Added
 - `storybook:serve` & `storybook:build` scripts re-added so that storybook can be run from the root of the mono-repo.
@@ -16,7 +16,7 @@ v1.23.0
 - Minor package updates.
 
 ### Removed
-- Moved some specific `f-vue-icons` dependencies aay from the root, as not shared by any other package.
+- Moved some specific `f-vue-icons` dependencies away from the root, as not shared by any other package.
 
 
 v1.22.0
