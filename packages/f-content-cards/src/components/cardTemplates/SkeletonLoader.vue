@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style['c-skeletonLoader']">
+    <div :class="[$style['c-skeletonLoader'], { [$style['c-skeletonLoader--fullWidth']]: isFullWidth }]">
         <template v-for="(skeletons, index) in count">
             <div
                 :key="index"
@@ -24,6 +24,11 @@ export default {
             validator (value) {
                 return ['promo', 'postOrder'].indexOf(value) !== -1;
             }
+        }
+    },
+    computed: {
+        isFullWidth () {
+            return this.count === 1;
         }
     }
 };
@@ -54,6 +59,13 @@ export default {
             flex-direction: row;
             max-width: 370px;
             flex: 0 0 40%;
+        }
+
+        .c-skeletonLoader--fullWidth & {
+            @include media('>=narrowMid') {
+                max-width: 100%;
+                flex: 0 0 100%;
+            }
         }
     }
 
