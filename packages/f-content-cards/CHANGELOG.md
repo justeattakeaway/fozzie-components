@@ -6,10 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.3.0
 ------------------------------
-*July 22, 2020*
+*July 23, 2020*
 
 ### Changed
 - Open external links in `_blank` and internal links in `_self`
+- Some small colour updates (small changes to greys and blues inline with rebrand phase 3.1).
+- Changing `data-theme` to `data-theme-contentcards` to avoid clashing with any other components in the future.
+- Vue CLI minor package updates.
 
 
 v1.2.0

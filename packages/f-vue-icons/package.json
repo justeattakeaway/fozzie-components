@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "dist/f-vue-icons.cjs.js",
   "cdn": "dist/f-vue-icons.min.js",
   "unpkg": "dist/f-vue-icons.min.js",
@@ -52,14 +52,17 @@
   },
   "devDependencies": {
     "@justeat/f-icons": "2.1.0",
-    "@vue/cli-plugin-babel": "4.2.3",
+    "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "4.3.1",
-    "@vue/test-utils": "1.0.2",
+    "@vue/cli-plugin-unit-jest": "4.4.6",
+    "@vue/test-utils": "1.0.3",
+    "bili": "3.4.2",
     "fs-extra": "8.1.0",
     "lodash.kebabcase": "4.1.1",
     "marked": "0.7.0",
-    "pascal-case": "2.0.1"
+    "pascal-case": "2.0.1",
+    "poi": "12.9.0",
+    "prismjs": "1.20.0"
   },
   "babel": {
     "presets": [

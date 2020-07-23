@@ -194,12 +194,8 @@ export default {
     }
 
     .c-header--highlightBg {
-        background-color: $red; // temporary – will change to $color-primary as part of Phase 3
+        background-color: $color-primary;
         min-height: 88px;
-
-        &[data-theme='ml'] {
-            background-color: $color-primary;
-        }
     }
 
     .c-header-container {

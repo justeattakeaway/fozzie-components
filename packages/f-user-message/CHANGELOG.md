@@ -4,8 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+v0.2.0
 ------------------------------
+*July 23, 2020*
+
+### Changed
+- Small update to colours from updating to `fozzie-colour-palette` in the mono-repo root.
+- Vue CLI minor package updates.
+
 *May 12, 2020*
 
 ### Changed

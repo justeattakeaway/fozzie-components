@@ -33,7 +33,7 @@ export default {
 
 <style lang="scss" module>
 
-$form-label-colour: $grey--mid; // Text colour of form labels
+$form-label-colour: $grey--dark; // Text colour of form labels
 
 .c-formField-label {
     display: block;
