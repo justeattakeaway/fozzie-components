@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.2.0
+------------------------------
+*July 23, 2020*
+
+### Added
+- Adds a story to show all icons in a list view for demonstration purposes.
+
+
 v1.1.1
 ------------------------------
 *July 23, 2020*
