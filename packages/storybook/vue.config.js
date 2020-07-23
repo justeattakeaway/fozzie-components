@@ -37,9 +37,16 @@ module.exports = {
                  * @returns {string}
                  */
                 data ({ resourcePath }) {
+                    const levelsUpToSrc = resourcePath.split(path.sep).reverse().indexOf('src');
+
+                    // Only attempt to add common styles when under a src dir
+                    if (levelsUpToSrc === -1) {
+                        return '';
+                    }
+
                     const absPath = path.join(
                         resourcePath,
-                        ...(new Array(resourcePath.split(path.sep).reverse().indexOf('src')).fill('..')),
+                        ...(new Array(levelsUpToSrc).fill('..')),
                         'assets/scss/common.scss'
                     );
                     const relPath = path.relative(path.dirname(resourcePath), absPath)

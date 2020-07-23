@@ -1,0 +1,15 @@
+.s-icons {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-items: stretch;
+}
+
+.s-icons-cell {
+  border-bottom: solid 1px lightgrey;
+  min-height: 32px;
+}
+
+.s-icons-icon {
+  max-width: 50%;
+  max-height: 32px;
+}
