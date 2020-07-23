@@ -2,6 +2,8 @@
     <component
         :is="ctaUrl && ctaEnabled ? 'a' : 'div'"
         :href="ctaEnabled && ctaUrl"
+        :target="target.attribute"
+        :rel="target.rel"
         :class="[$style['c-contentCard'], { [$style['c-contentCard--isolateHeroImage']]: isAnniversaryCard }]"
         :data-test-id="testId"
         @click="onClickContentCard"
@@ -118,6 +120,24 @@ export default {
 
         isBackgroundImage () {
             return this.type !== 'Post_Order_Card_1';
+        },
+
+        target () {
+            try {
+                const url = new URL(this.ctaUrl);
+                const internalDomains = ['just-eat', 'justeat', 'menulog'];
+                const openInNewWindow = !internalDomains.some(partial => url.hostname.indexOf(partial) > -1);
+                return openInNewWindow ? {
+                    attribute: '_blank',
+                    rel: 'noopener noreferrer'
+                } : {
+                    attribute: '_self'
+                };
+            } catch (err) {
+                return {
+                    attribute: '_self'
+                };
+            }
         }
     },
 
