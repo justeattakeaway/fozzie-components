@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.5.0
+------------------------------
+*July 23, 2020*
+
+### Changed
+- Updating logo colour to orange and new colour changes for Rebrand phase 3.1
+- Changing `data-theme` to `data-theme-header` to avoid clashing with any other components in the future.
+- Vue CLI minor package updates.
+
+
 v3.4.1
 ------------------------------
 *July 16, 2020*

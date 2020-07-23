@@ -3,18 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+Latest (roll into next release)
+v0.2.0
+------------------------------
+*July 23, 2020*
+
+### Changed
+- Removed component top margin. This should be set in the host app, if required
+- Updated packages. Reduced bundle size
 
 v0.1.1
 ------------------------------
 *Jul 16, 2020*
 
 ### Changed
-- Removed component top margin. This should be set in the host app, if required
-- Updated packages. Reduced bundle size
+- Small update to colours from updating to `fozzie-colour-palette` in the mono-repo root.
+- Vue CLI minor package updates.
 
-
-Latest (roll into next release)
-------------------------------
 *May 12, 2020*
 
 ### Changed
@@ -23,7 +28,6 @@ Latest (roll into next release)
 
 ### Removed
 - `testMatch` from jest config, as not needed.
-
 
 v0.1.0
 ------------------------------

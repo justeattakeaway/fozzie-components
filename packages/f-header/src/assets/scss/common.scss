@@ -13,9 +13,8 @@ $theme: 'je' !default;
 /**
  * Component Variables
  */
-$header-logo-color                 : $red;
+$header-logo-color                 : $brand--orange;
 $header-logo-color--alt            : $white;
-$header-logo-color--ml             : $brand--orange;
 
 $header-height--narrow              : 48px;
 $header-button--height              : $header-height--narrow;
@@ -35,7 +34,7 @@ $header--transparent-gradient       : 115px;
 $header--transparent-opacity        : 0.7;
 
 @mixin theme($type) {
-    [data-theme="#{$type}"] & {
+    [data-theme-header="#{$type}"] & {
         @content;
     }
 }

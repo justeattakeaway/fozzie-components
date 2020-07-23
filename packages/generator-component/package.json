@@ -34,18 +34,18 @@
   ],
   "dependencies": {
     "gulp-rename": "1.2.2",
-    "lodash": "4.17.15",
-    "yeoman-generator": "4.8.3"
+    "lodash": "4.17.19",
+    "yeoman-generator": "4.11.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
     "@justeat/eslint-config-fozzie": "3.4.1",
-    "@vue/cli-plugin-babel": "4.2.3",
+    "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "4.3.1",
-    "@vue/test-utils": "1.0.2",
+    "@vue/cli-plugin-unit-jest": "4.4.6",
+    "@vue/test-utils": "1.0.3",
     "node-sass-magic-importer": "5.3.2"
   }
 }
