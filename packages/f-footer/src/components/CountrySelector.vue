@@ -147,7 +147,7 @@ export default {
     display: flex;
     padding: spacing() spacing(x2);
     text-decoration: none;
-    color: $grey--dark;
+    color: $color-text;
 
     &:hover,
     &:focus {
@@ -180,7 +180,7 @@ export default {
 .c-countrySelectorContainer {
     @include media('<wide') {
         width: 100%;
-        border-top: 1px solid $grey--light;
+        border-top: 1px solid $footer-borderColor;
         order: 3;
     }
 }
@@ -190,7 +190,7 @@ export default {
     padding: spacing(x2);
     display: flex;
     align-items: center;
-    background-color: $grey--lighter;
+    background-color: $footer-bgColor;
     border: none;
     cursor: pointer;
     @include font-size(base);

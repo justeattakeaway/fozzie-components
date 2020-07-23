@@ -13,12 +13,12 @@ $theme: 'je' !default;
 /**
  * Component Variables
  */
- $footer-bgColor         : $grey--lighter !default;
- $footer-bgLight         : $grey--offWhite !default;
+ $footer-bgColor         : $grey--light !default;
+ $footer-bgLight         : $grey--lighter !default;
  $footer-textColor       : $color-text !default;
- $footer-borderColor     : $color-border--interactive !default;
- $footer-chevronColor    : $grey--dark !default;
- $footer-socialIconColor : $grey--dark !default;
+ $footer-borderColor     : $color-border !default;
+ $footer-chevronColor    : $grey--darkest !default;
+ $footer-socialIconColor : $grey--darkest !default;
 
  /**
  * Global variables which need to be included for Menulog theming
@@ -30,7 +30,7 @@ $theme: 'je' !default;
 
 
 @mixin theme($type) {
-    [data-theme="#{$type}"] & {
+    [data-theme-footer="#{$type}"] & {
         @content;
     }
 }

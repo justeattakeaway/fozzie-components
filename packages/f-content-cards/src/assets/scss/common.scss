@@ -14,7 +14,7 @@ $theme: 'je' !default;
 $post-order-card-radius: 8px;
 
 @mixin theme($type) {
-    [data-theme="#{$type}"] & {
+    [data-theme-contentcards="#{$type}"] & {
         @content;
     }
 }
