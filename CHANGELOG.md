@@ -3,7 +3,31 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (roll into next release)
+
+v1.23.0
+------------------------------
+*July 23, 2020*
+
+### Added
+- `storybook:serve` & `storybook:build` scripts re-added so that storybook can be run from the root of the mono-repo.
+
+### Changed
+- Updating `fozzie` and `fozzie-colour-palette` to latest version (Rebrand rollout - Phase 3).
+- Minor package updates.
+
+### Removed
+- Moved some specific `f-vue-icons` dependencies away from the root, as not shared by any other package.
+
+
+v1.22.0
+------------------------------
+*July 16, 2020*
+
+### Changed
+- Adding package dependencies for new `f-vue-icons` release.
+
+
+v1.21.0
 ------------------------------
 *July 13, 2020*
 
@@ -15,6 +39,7 @@ Latest (roll into next release)
 - Updated `sass-loader` to 7.3.1 to allow storybook to perform contextual import of common.scss files
   from Single File Components in subdirectories
 - SSH key fingerprint that is used to deploy Storybook
+
 
 v1.20.0
 ------------------------------

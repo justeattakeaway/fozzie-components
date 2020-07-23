@@ -16,7 +16,7 @@ $theme: 'je' !default;
 // $formField-background-color: $brand--orange;
 
 @mixin theme($type) {
-    [data-theme="#{$type}"] & {
+    [data-theme-formfield="#{$type}"] & {
         @content;
     }
 }

@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`InfoIcon default component markup is rendered 1`] = `<info-icon-stub class="c-icon c-icon--info"></info-icon-stub>`;

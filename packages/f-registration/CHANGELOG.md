@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (roll into next release)
 ------------------------------
+*July 23, 2020*
+
+### Changed
+- Vue CLI minor package updates.
+- Small update to colours from updating to `fozzie-colour-palette` in the mono-repo root.
+
+
+v0.9.0
+------------------------------
+*July 15, 2020*
+
+### Changed
+- Update registration component to handle AccountWeb API endpoint.
+
 *July 2, 2020*
 
 ### Added
