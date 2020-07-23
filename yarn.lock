@@ -3378,8 +3378,8 @@
 
 "@vue/cli-plugin-eslint@4.4.6":
   version "4.4.6"
-  resolved "http://packages.je-labs.com/npm/private-npm/@vue/cli-plugin-eslint/-/cli-plugin-eslint-4.4.6.tgz#442d62a70dd93e4a549ff9164d2d10f4e97a58f1"
-  integrity sha1-RC1ipw3ZPkpUn/kWTS0Q9Ol6WPE=
+  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-eslint/-/cli-plugin-eslint-4.4.6.tgz#442d62a70dd93e4a549ff9164d2d10f4e97a58f1"
+  integrity sha512-3a9rVpOKPQsDgAlRkhmBMHboGobivG/47BbQGE66Z8YJxrgF/AWikP3Jy67SmxtszRkyiWfw4aJFRV9r3MzffQ==
   dependencies:
     "@vue/cli-shared-utils" "^4.4.6"
     eslint-loader "^2.2.1"
