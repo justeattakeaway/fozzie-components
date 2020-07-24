@@ -2,33 +2,13 @@ import faker from 'faker';
 
 /* eslint-disable camelcase */
 const cardTypes = {
-    Terms_And_Conditions_Card: {
-        label: 'Terms and Conditions',
-        fields: ['line3', 'line4']
-    },
-    Terms_And_Conditions_Card_2: {
-        label: 'Terms and Conditions 2',
-        fields: []
+    Anniversary_Card_1: {
+        label: 'Anniversary 1',
+        fields: ['button_1', 'line_3', 'background_image_1', 'voucher_code']
     },
     Header_Card: {
         label: 'Header',
         fields: ['background_color']
-    },
-    Voucher_Card_1: {
-        label: 'Voucher',
-        fields: ['button_1', 'line_3', 'voucher_code', 'image_1', 'icon_1']
-    },
-    Recommendation_Card_1: {
-        label: 'Recommendation',
-        fields: ['line_3', 'image_1']
-    },
-    Promotion_Card_1: {
-        label: 'Promotion 1',
-        fields: ['image_1', 'button_1', 'line_3', 'line_4', 'line_5', 'line_6', 'offer_auth_required']
-    },
-    Promotion_Card_2: {
-        label: 'Promotion 2',
-        fields: ['icon_1', 'button_1', 'line_3', 'image_1']
     },
     Home_Promotion_Card_1: {
         label: 'Home Promotion 1',
@@ -42,44 +22,73 @@ const cardTypes = {
         label: 'Post Order 1',
         fields: ['button_1', 'headline', 'image_1', 'icon_1']
     },
-    Anniversary_Card_1: {
-        label: 'Anniversary 1',
-        fields: ['button_1', 'line_3', 'background_image_1', 'voucher_code']
+    Promotion_Card_1: {
+        label: 'Promotion 1',
+        fields: ['image_1', 'button_1', 'line_3', 'line_4', 'line_5', 'line_6', 'offer_auth_required']
+    },
+    Promotion_Card_2: {
+        label: 'Promotion 2',
+        fields: ['icon_1', 'button_1', 'line_3', 'image_1']
+    },
+    Recommendation_Card_1: {
+        label: 'Recommendation',
+        fields: ['line_3', 'image_1']
     },
     Restaurant_FTC_Offer_Card: {
         label: 'Restaurant FTC Offer',
         fields: ['subtitle', 'banner', 'footer', 'restaurant_id', 'restaurant_logo_url', 'restaurant_image_url', 'offer_auth_required']
+    },
+    Terms_And_Conditions_Card: {
+        label: 'Terms and Conditions',
+        fields: ['line3', 'line4']
+    },
+    Terms_And_Conditions_Card_2: {
+        label: 'Terms and Conditions 2',
+        fields: []
+    },
+    Voucher_Card_1: {
+        label: 'Voucher',
+        fields: ['button_1', 'line_3', 'voucher_code', 'image_1', 'icon_1']
     }
 };
+/* eslint-enable camelcase */
 
+const randomSentence = faker.lorem.sentence.bind(faker.lorem, undefined, undefined);
+const randomColour = faker.internet.color.bind(faker.internet, undefined, undefined, undefined);
+
+/* eslint-disable camelcase */
+/**
+ * A POJO map of fieldname to generator function that will predictably generate the correct type
+ * @type {Object}
+ */
 const fieldTypeToFaker = {
-    background_color: faker.internet.color.bind(faker.internet),
-    background_image_1: () => 'https://picsum.photos/seed/background_image_1/384/216?blur=3',
-    banner: faker.lorem.sentence.bind(faker.lorem),
+    background_color: randomColour,
+    background_image_1: type => `https://picsum.photos/seed/${type}_background_image_1/384/216?blur=3`,
+    banner: randomSentence,
     brand_name: faker.commerce.product.bind(faker.commerce),
-    button_1: faker.lorem.words.bind(faker.lorem),
-    content_container_background: faker.internet.color.bind(faker.internet),
+    button_1: faker.lorem.words.bind(faker.lorem, undefined),
+    content_container_background: randomColour,
     display_times_json: () => ({
         Any: [
             { Start: '00:00', End: '23:59' }
         ]
     }),
-    footer: faker.lorem.sentence.bind(faker.lorem),
-    headline: faker.lorem.sentence.bind(faker.lorem),
-    icon_1: () => 'https://picsum.photos/seed/icon_1/48/48',
-    image_1: () => 'https://picsum.photos/seed/image_1/384/216?blur=3',
-    line3: faker.lorem.sentence.bind(faker.lorem),
-    line4: faker.lorem.sentence.bind(faker.lorem),
-    line_3: faker.lorem.sentence.bind(faker.lorem),
-    line_4: faker.lorem.sentence.bind(faker.lorem),
-    line_5: faker.lorem.sentence.bind(faker.lorem),
-    line_6: faker.lorem.sentence.bind(faker.lorem),
+    footer: randomSentence,
+    headline: randomSentence,
+    icon_1: type => `https://picsum.photos/seed/${type}_icon_1/48/48`,
+    image_1: type => `https://picsum.photos/seed/${type}_image_1/384/216?blur=3`,
+    line3: randomSentence,
+    line4: randomSentence,
+    line_3: randomSentence,
+    line_4: randomSentence,
+    line_5: randomSentence,
+    line_6: randomSentence,
     offer_auth_required: faker.random.boolean.bind(faker.random),
     restaurant_id: faker.random.number.bind(faker.random, { min: 100, max: 999999 }),
-    restaurant_image_url: () => 'https://picsum.photos/seed/restaurant_image_url/384/216?blur=3',
-    restaurant_logo_url: () => 'https://picsum.photos/seed/restaurant_logo_url/48/48',
-    subtitle: faker.lorem.sentence.bind(faker.lorem),
-    voucher_code: faker.lorem.slug.bind(faker.lorem)
+    restaurant_image_url: type => `https://picsum.photos/seed/${type}_restaurant_image_url/384/216?blur=3`,
+    restaurant_logo_url: type => `https://picsum.photos/seed/${type}_restaurant_logo_url/48/48`,
+    subtitle: randomSentence,
+    voucher_code: faker.lorem.slug.bind(faker.lorem, undefined)
 };
 /* eslint-enable camelcase */
 
@@ -99,7 +108,25 @@ function timeRange10HoursAroundNow () {
     };
 }
 
-function randomCardOfType (type) {
+const encoder = new TextEncoder();
+
+/**
+ * Predictably generates a number from a given string by performing a sha-1 hash
+ * and extracting the first four bytes as a 32 bit integer
+ * @param type
+ * @return {Promise<number>}
+ */
+async function seedFromType (type) {
+    // const arrayBuffer = new ArrayBuffer(type.length * 4);
+    // const typeBuffer = new Uint8Array(arrayBuffer);
+    const typeBuffer = encoder.encode(type);
+    const typeHash = await crypto.subtle.digest('SHA-1', typeBuffer);
+    const uInt32HashView = new Uint32Array(typeHash);
+    return uInt32HashView[0];
+}
+
+async function seededRandomCardOfType (type) {
+    faker.seed(await seedFromType(type));
     const { nowMinus5Hours, nowPlus5Hours } = timeRange10HoursAroundNow();
 
     const e = {
@@ -115,7 +142,7 @@ function randomCardOfType (type) {
                 return;
             }
 
-            e[field] = fieldTypeToFaker[field]();
+            e[field] = fieldTypeToFaker[field](type);
         });
 
     const id = btoa([`5d79109d167e923a83d3d7db_$_cc=${faker.random.uuid()}`, 'mv=5d79109d167e923a83d3d7dd', 'pi=cmp'].join('&'));
@@ -144,27 +171,27 @@ function randomCardOfType (type) {
 }
 
 /**
- * Generates a set of faked cards wrapped in data format expected by the braze SDK
+ * Generates a set of predictable faked cards wrapped in data format expected by the braze SDK
  *
  * @return {Object}
  */
-export default () => {
+export default async () => {
     const { nowMinus5Hours } = timeRange10HoursAroundNow();
 
     return {
         cards: [
-            randomCardOfType('Terms_And_Conditions_Card'),
-            randomCardOfType('Terms_And_Conditions_Card_2'),
-            randomCardOfType('Header_Card'),
-            randomCardOfType('Voucher_Card_1'),
-            randomCardOfType('Recommendation_Card_1'),
-            randomCardOfType('Promotion_Card_1'),
-            randomCardOfType('Promotion_Card_2'),
-            randomCardOfType('Home_Promotion_Card_1'),
-            randomCardOfType('Home_Promotion_Card_2'),
-            randomCardOfType('Post_Order_Card_1'),
-            randomCardOfType('Anniversary_Card_1'),
-            randomCardOfType('Restaurant_FTC_Offer_Card')
+            await seededRandomCardOfType('Terms_And_Conditions_Card'),
+            await seededRandomCardOfType('Terms_And_Conditions_Card_2'),
+            await seededRandomCardOfType('Header_Card'),
+            await seededRandomCardOfType('Voucher_Card_1'),
+            await seededRandomCardOfType('Recommendation_Card_1'),
+            await seededRandomCardOfType('Promotion_Card_1'),
+            await seededRandomCardOfType('Promotion_Card_2'),
+            await seededRandomCardOfType('Home_Promotion_Card_1'),
+            await seededRandomCardOfType('Home_Promotion_Card_2'),
+            await seededRandomCardOfType('Post_Order_Card_1'),
+            await seededRandomCardOfType('Anniversary_Card_1'),
+            await seededRandomCardOfType('Restaurant_FTC_Offer_Card')
         ],
         /* eslint-disable camelcase */
         last_full_sync_at: nowMinus5Hours,

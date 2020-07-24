@@ -6,11 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.4.0
 ------------------------------
-*July 22, 2020*
+*July 24, 2020*
 
 ### Added
 - `xhr-mock` and `faker` as dev dependencies
-- Faked card data for braze SDK responses
+- Predictable faked card data for braze SDK responses
 
 ### Changed
 - Story can multi-select different card types and then 'refresh'

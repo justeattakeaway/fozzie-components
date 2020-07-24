@@ -59,6 +59,12 @@ export function ContentCardscomponent () {
             ContentCards
         },
 
+        data () {
+            return {
+                mocksPrimed: false
+            };
+        },
+
         props: {
             apiKey: {
                 default: text('API Key', '00000000-0000-0000-0000-000000000000')
@@ -79,22 +85,33 @@ export function ContentCardscomponent () {
             }
         },
 
-        beforeCreate: () => {
+        /**
+         * Ensures that mocks are set up before enabling the content cards component
+         * @return {Promise<void>}
+         */
+        async beforeCreate () {
             resetBrazeData();
             mock.teardown();
             mock.setup();
             mock.post(/\/api\/v3\/content_cards\/sync\/?/, {
                 status: 201,
-                body: JSON.stringify(cards())
+                body: JSON.stringify(await cards())
             });
             mock.post(/\/api\/v3\/data\/?/, {
                 status: 201,
                 body: JSON.stringify(data())
             });
             mock.use(proxy);
+
+            this.mocksPrimed = true;
         },
 
-        template: '<content-cards :userId="userId" :apiKey="apiKey" :title="title" :enabledCardTypes="enabledCardTypes" />'
+        template: `<content-cards
+            v-if="mocksPrimed"
+            :userId="userId"
+            :apiKey="apiKey"
+            :title="title"
+            :enabledCardTypes="enabledCardTypes" />`
     };
 }
 
