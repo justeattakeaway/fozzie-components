@@ -1,4 +1,5 @@
 import faker from 'faker';
+import sha1 from 'crypto-js/sha1';
 
 /* eslint-disable camelcase */
 const cardTypes = {
@@ -108,25 +109,19 @@ function timeRange10HoursAroundNow () {
     };
 }
 
-const encoder = new TextEncoder();
-
 /**
  * Predictably generates a number from a given string by performing a sha-1 hash
  * and extracting the first four bytes as a 32 bit integer
  * @param type
- * @return {Promise<number>}
+ * @return {number}
  */
-async function seedFromType (type) {
-    // const arrayBuffer = new ArrayBuffer(type.length * 4);
-    // const typeBuffer = new Uint8Array(arrayBuffer);
-    const typeBuffer = encoder.encode(type);
-    const typeHash = await crypto.subtle.digest('SHA-1', typeBuffer);
-    const uInt32HashView = new Uint32Array(typeHash);
-    return uInt32HashView[0];
+function seedFromType (type) {
+    const cryptoHash = sha1(type);
+    return cryptoHash.words[0];
 }
 
-async function seededRandomCardOfType (type) {
-    faker.seed(await seedFromType(type));
+function seededRandomCardOfType (type) {
+    faker.seed(seedFromType(type));
     const { nowMinus5Hours, nowPlus5Hours } = timeRange10HoursAroundNow();
 
     const e = {
@@ -175,23 +170,23 @@ async function seededRandomCardOfType (type) {
  *
  * @return {Object}
  */
-export default async () => {
+export default () => {
     const { nowMinus5Hours } = timeRange10HoursAroundNow();
 
     return {
         cards: [
-            await seededRandomCardOfType('Terms_And_Conditions_Card'),
-            await seededRandomCardOfType('Terms_And_Conditions_Card_2'),
-            await seededRandomCardOfType('Header_Card'),
-            await seededRandomCardOfType('Voucher_Card_1'),
-            await seededRandomCardOfType('Recommendation_Card_1'),
-            await seededRandomCardOfType('Promotion_Card_1'),
-            await seededRandomCardOfType('Promotion_Card_2'),
-            await seededRandomCardOfType('Home_Promotion_Card_1'),
-            await seededRandomCardOfType('Home_Promotion_Card_2'),
-            await seededRandomCardOfType('Post_Order_Card_1'),
-            await seededRandomCardOfType('Anniversary_Card_1'),
-            await seededRandomCardOfType('Restaurant_FTC_Offer_Card')
+            seededRandomCardOfType('Terms_And_Conditions_Card'),
+            seededRandomCardOfType('Terms_And_Conditions_Card_2'),
+            seededRandomCardOfType('Header_Card'),
+            seededRandomCardOfType('Voucher_Card_1'),
+            seededRandomCardOfType('Recommendation_Card_1'),
+            seededRandomCardOfType('Promotion_Card_1'),
+            seededRandomCardOfType('Promotion_Card_2'),
+            seededRandomCardOfType('Home_Promotion_Card_1'),
+            seededRandomCardOfType('Home_Promotion_Card_2'),
+            seededRandomCardOfType('Post_Order_Card_1'),
+            seededRandomCardOfType('Anniversary_Card_1'),
+            seededRandomCardOfType('Restaurant_FTC_Offer_Card')
         ],
         /* eslint-disable camelcase */
         last_full_sync_at: nowMinus5Hours,
