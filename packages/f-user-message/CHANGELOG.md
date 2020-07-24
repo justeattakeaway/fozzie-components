@@ -20,6 +20,8 @@ v0.2.0
 - Small update to colours from updating to `fozzie-colour-palette` in the mono-repo root.
 - Vue CLI minor package updates.
 
+v0.1.0
+------------------------------
 *May 12, 2020*
 
 ### Changed
