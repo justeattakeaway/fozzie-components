@@ -131,14 +131,18 @@ export default {
 
     methods: {
         setupBraze (apiKey, userId, enableLogging = false) {
-            initialiseBraze({
-                apiKey,
-                userId,
-                enableLogging,
-                callbacks: {
-                    handleContentCards: this.contentCards
-                }
-            });
+            try {
+                initialiseBraze({
+                    apiKey,
+                    userId,
+                    enableLogging,
+                    callbacks: {
+                        handleContentCards: this.contentCards
+                    }
+                });
+            } catch (error) {
+                this.$emit('on-error', error);
+            }
         },
 
         contentCards (appboy) {
@@ -154,6 +158,12 @@ export default {
             this.cards = cards;
             this.titleCard = titleCard;
             this.hasLoaded = true;
+
+
+            this.$emit('on-appboy-init', appboy);
+            this.$emit('get-card-count', this.cards.length);
+            this.$emit('get-title-card', this.titleCard);
+            this.$emit('has-loaded', true);
         },
 
         handleCustomCardType (type) {

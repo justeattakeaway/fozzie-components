@@ -4,6 +4,7 @@ import {
     text,
     button
 } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import mock, { proxy } from 'xhr-mock';
 
@@ -13,6 +14,7 @@ import { defaultEnabledCardTypes } from '../src/services/contentCard.service';
 import cards from './mockData/cards';
 import data from './mockData/data';
 
+const callback = alert;
 /**
  * Resets all locally stored braze data so that the stubbed data is always fresh on page load
  */
@@ -79,6 +81,24 @@ export function ContentCardscomponent () {
             }
         },
 
+        methods: {
+            onAppboyInit (appboy) {
+                action('on-appboy-init')(appboy);
+            },
+            getCardCount (count) {
+                action('get-card-count')(count);
+            },
+            getTitleCard (card) {
+                action('get-title-card')(card);
+            },
+            hasLoaded (status) {
+                action('has-loaded')(status);
+            },
+            onError (error) {
+                action('on-error', error);
+            }
+        },
+
         /**
          * Ensures that card mocks are set up
          */
@@ -98,6 +118,11 @@ export function ContentCardscomponent () {
         },
 
         template: `<content-cards
+            @on-appboy-init="onAppboyInit"
+            @get-card-count="getCardCount"
+            @get-title-card="getTitleCard"
+            @has-loaded="hasLoaded"
+            @on-error="onError"
             :userId="userId"
             :apiKey="apiKey"
             :title="title"
