@@ -179,6 +179,26 @@ Indicates the test id attribute of the component root element.
 
 Whether or not to show a skeleton loading state whilst initialising Braze. Defaults to `true`.
 
+## Emitters
+
+The following event emitters can be used to hook into this component:
+
+### `@on-appboy-init`
+
+Called with the appboy instance once appboy has initialised.
+
+### `@get-card-count`
+
+Called with a number outlining the total card count once Appboy has initialised.
+
+### `@has-loaded`
+
+Called with a boolean indicating that the component has initialised.
+
+### `@on-error`
+
+Called with an Error object if appboy fails to initialise.
+
 ## Development
 
 Start by cloning the repository and installing the required dependencies:
