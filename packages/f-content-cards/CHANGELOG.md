@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.5.0
+------------------------------
+*July 29, 2020*
+
+### Added
+- `VoucherCard` component from HomeWeb's Offer page
+- Associated stories for Voucher and Anniversary card types
+- I18n config for 'Copy Code' button
+- `locale` prop to enable above to take effect
+
+
 v1.4.0
 ------------------------------
 *July 24, 2020*
