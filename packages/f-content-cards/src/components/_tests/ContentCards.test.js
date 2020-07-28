@@ -189,7 +189,7 @@ describe('ContentCards', () => {
         const arrange = async () => {
             const PromotionCard = Vue.extend({
                 template: '<div data-promotion-card="true"></div>',
-                inject: ['emitCardClick', 'emitCardView']
+                inject: ['emitCardClick', 'emitCardView', 'emitVoucherCodeClicked']
             });
             const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
             const appboy = createAppboyInstance(cardTypes);
@@ -205,10 +205,16 @@ describe('ContentCards', () => {
             });
             const cardClickHandler = jest.spyOn(instance.vm._provided, 'emitCardClick');
             const cardViewHandler = jest.spyOn(instance.vm._provided, 'emitCardView');
+            const voucherCodeClickedHandler = jest.spyOn(instance.vm._provided, 'emitVoucherCodeClicked');
             instance.vm.contentCards(appboy);
             await instance.vm.$nextTick();
 
-            return { instance, cardClickHandler, cardViewHandler };
+            return {
+                instance,
+                cardClickHandler,
+                cardViewHandler,
+                voucherCodeClickedHandler
+            };
         };
 
         it('should provide a view handler', async () => {
@@ -293,6 +299,32 @@ describe('ContentCards', () => {
 
                 // Assert
                 expect(logCardClick).toHaveBeenCalledWith('foo');
+            });
+        });
+
+        it('should provide a voucher code copied handler', async () => {
+            const { instance, voucherCodeClickedHandler } = await arrange();
+
+            // Act
+            instance.find('[data-promotion-card="true"]').vm.emitVoucherCodeClicked(url);
+
+            // Assert
+            expect(voucherCodeClickedHandler).toHaveBeenCalledWith(url);
+        });
+
+        describe('the voucher code copied handler', () => {
+            it('should emit a voucherCodeClicked event', async () => {
+                const { instance } = await arrange();
+
+                // Act
+                instance.find('[data-promotion-card="true"]').vm.emitVoucherCodeClicked(url);
+
+                // Assert
+                expect(instance.emitted().voucherCodeClicked).toBeTruthy();
+                expect(instance.emitted().voucherCodeClicked.length).toBe(1);
+                expect(instance.emitted().voucherCodeClicked[0]).toEqual([{
+                    url
+                }]);
             });
         });
     });
