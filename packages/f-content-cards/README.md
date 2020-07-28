@@ -153,6 +153,15 @@ An array of custom content card types to display.
 
 > If no array is passed the component will default to showing all supported content card types.
 
+### `locale`
+
+**Type:** string
+**Required:** true _if_ [vue-i18n](https://kazupon.github.io/vue-i18n/) plugin not used by consuming application
+
+Locale in `lang_COUNTRY` format - e.g. `en-GB`
+
+> If no array is passed the component will default to showing all supported content card types.
+
 ### `pushToDataLayer`
 
 **Type:** function
@@ -178,6 +187,18 @@ Indicates the test id attribute of the component root element.
 **Required:** false
 
 Whether or not to show a skeleton loading state whilst initialising Braze. Defaults to `true`.
+
+## Events
+
+The following events can be emitted by the component, with the shape given:
+
+### `voucherCodeClicked`
+
+```json5
+{
+    "url": "http://example.org/test" // Forwarding Url for the card containing the voucher code that was clicked
+}
+```
 
 ## Development
 

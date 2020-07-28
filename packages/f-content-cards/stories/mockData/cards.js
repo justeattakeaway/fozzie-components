@@ -156,7 +156,9 @@ function seededRandomCardOfType (type) {
         e,
         tp: 'short_news',
         ar: 1,
-        i: null,
+        i: (type === 'Anniversary_Card_1'
+            ? `https://picsum.photos/seed/${type}_i/109/96`
+            : `https://picsum.photos/seed/${type}_i/384/216?blur=3`),
         u: null,
         uw: null,
         tt,

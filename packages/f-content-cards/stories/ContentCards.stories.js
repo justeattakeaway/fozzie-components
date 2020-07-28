@@ -2,6 +2,7 @@ import {
     withKnobs,
     optionsKnob as options,
     text,
+    select,
     button
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
@@ -63,17 +64,25 @@ export function ContentCardscomponent () {
             apiKey: {
                 default: text('API Key', '00000000-0000-0000-0000-000000000000')
             },
+
             userId: {
                 default: text('User ID', 'test-user-id')
             },
+
             title: {
                 default: text('Title', 'Promotional Offers')
             },
+
+            locale: {
+                default: select('Locale', ['da-DK', 'en-GB', 'en-AU'], 'en-GB')
+            },
+
             enabledCardTypes: {
                 default: options('Enabled Card Types', allowedCardTypes, defaultEnabledCardTypes, {
                     display: 'multi-select'
                 })
             },
+
             refreshDisplayedCards: {
                 default: button('Refresh Card Types Displayed', () => { window.appboy.requestContentCardsRefresh(); })
             }
@@ -101,6 +110,7 @@ export function ContentCardscomponent () {
             :userId="userId"
             :apiKey="apiKey"
             :title="title"
+            :locale="locale"
             :enabledCardTypes="enabledCardTypes" />`
     };
 }
