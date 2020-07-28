@@ -7,7 +7,7 @@ export default {
     decorators: [withKnobs, withA11y]
 };
 
-export const ContentCardscomponent = () => ({
+export const PostOrderCardcomponent = () => ({
     components: { PostOrderCard },
     props: {
         title: {
@@ -69,6 +69,6 @@ export const ContentCardscomponent = () => ({
     template: '<post-order-card :card="card" :title="title" />'
 });
 
-ContentCardscomponent.story = {
+PostOrderCardcomponent.story = {
     name: 'post-order-card'
 };
