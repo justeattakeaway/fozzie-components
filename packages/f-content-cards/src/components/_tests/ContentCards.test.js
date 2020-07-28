@@ -349,4 +349,38 @@ describe('ContentCards', () => {
         // Assert
         expect(instance.find('[data-test-id]').exists()).toBeFalsy();
     });
+
+    describe('emitters', () => {
+        const appboy = createAppboyInstance(['Post_Order_Card_1']);
+
+        const testEmitter = async (emitter, expectedArgs) => {
+            // Arrange & Act
+            const instance = await shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId
+                }
+            });
+            await instance.vm.contentCards(appboy);
+
+            // Assert
+            const [calls] = instance.emitted()[emitter];
+            const [args] = calls;
+
+            expect(calls.length).toBe(1);
+            expect(args).toEqual(expectedArgs);
+        };
+
+        it('should emit an event containing the appboy instance when appboy is initialised', async () => {
+            await testEmitter('on-appboy-init', appboy);
+        });
+
+        it('should emit an event containing the content card count when appboy is initialised', async () => {
+            await testEmitter('get-card-count', 1);
+        });
+
+        it('should emit an event containing the loading status when appboy is initialised', async () => {
+            await testEmitter('has-loaded', true);
+        });
+    });
 });

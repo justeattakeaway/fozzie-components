@@ -155,14 +155,13 @@ export default {
                 .getTitleCard()
                 .arrangeCardsByTitles()
                 .output();
+
             this.cards = cards;
             this.titleCard = titleCard;
             this.hasLoaded = true;
 
-
             this.$emit('on-appboy-init', appboy);
-            this.$emit('get-card-count', this.cards.length);
-            this.$emit('get-title-card', this.titleCard);
+            this.$emit('get-card-count', cards.length);
             this.$emit('has-loaded', true);
         },
 
