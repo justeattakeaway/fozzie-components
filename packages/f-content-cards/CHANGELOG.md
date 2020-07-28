@@ -6,11 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.5.0
 ------------------------------
-*July 27, 2020*
+*July 28, 2020*
 
 ### Added
-- Event emitters for multiple scenarios (WIP - Will expand once complete)
 
+- Added the following event emitters:
+    - `@on-appboy-init`
+    - `@get-card-count`
+    - `@has-loaded`
+    - `@on-error`
 
 v1.4.0
 ------------------------------

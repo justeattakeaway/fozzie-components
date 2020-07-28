@@ -120,7 +120,6 @@ export function ContentCardscomponent () {
         template: `<content-cards
             @on-appboy-init="onAppboyInit"
             @get-card-count="getCardCount"
-            @get-title-card="getTitleCard"
             @has-loaded="hasLoaded"
             @on-error="onError"
             :userId="userId"
