@@ -11,7 +11,7 @@ import mock, { proxy } from 'xhr-mock';
 import ContentCards from '../src/components/ContentCards.vue';
 import { defaultEnabledCardTypes } from '../src/services/contentCard.service';
 
-import cards from './mockData/cards';
+import cards, { labelledMultiSelectAllowedValues } from './mockData/cards';
 import data from './mockData/data';
 
 /**
@@ -32,22 +32,6 @@ function resetBrazeData () {
             localStorage.removeItem(storageItem);
         });
 }
-
-const allowedCardTypes = {
-    'Terms and Conditions': 'Terms_And_Conditions_Card',
-    'Terms and Conditions 2': 'Terms_And_Conditions_Card_2',
-    Header: 'Header_Card',
-    Voucher: 'Voucher_Card_1',
-    Recommendation: 'Recommendation_Card_1',
-    'Promotion 1': 'Promotion_Card_1',
-    'Promotion 2': 'Promotion_Card_2',
-    'Home Promotion 1': 'Home_Promotion_Card_1',
-    'Home Promotion 2': 'Home_Promotion_Card_2',
-    'Post Order 1': 'Post_Order_Card_1',
-    'Anniversary 1': 'Anniversary_Card_1',
-    'Restaurant FTC Offer': 'Restaurant_FTC_Offer_Card',
-    'Recommendation 1': 'Recommendation_Card_1'
-};
 
 export default {
     title: 'Components/Organisms',
@@ -78,7 +62,7 @@ export function ContentCardscomponent () {
             },
 
             enabledCardTypes: {
-                default: options('Enabled Card Types', allowedCardTypes, defaultEnabledCardTypes, {
+                default: options('Enabled Card Types', labelledMultiSelectAllowedValues, defaultEnabledCardTypes, {
                     display: 'multi-select'
                 })
             },

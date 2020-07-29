@@ -99,7 +99,7 @@ const fieldTypeToFaker = {
  * @type {any}
  */
 export const labelledMultiSelectAllowedValues = Object.fromEntries(Object.entries(cardTypes)
-    .map(([key, { label }]) => [key, label]));
+    .map(([key, { label }]) => [label, key]));
 
 function timeRange10HoursAroundNow () {
     const now = Math.floor(Date.now() / 1000);

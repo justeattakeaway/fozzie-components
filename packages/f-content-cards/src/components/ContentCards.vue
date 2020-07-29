@@ -7,7 +7,7 @@
             v-for="(contentCard, cardIndex) in cards">
             <component
                 :is="handleCustomCardType(contentCard.extras.custom_card_type)"
-                :key="cardIndex"
+                :key="`${cardIndex}_${contentCard.id}`"
                 :card="contentCard"
                 :title="title"
                 :data-test-id="testIdForItemWithIndex(cardIndex)"
