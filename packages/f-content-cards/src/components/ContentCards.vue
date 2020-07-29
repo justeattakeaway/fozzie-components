@@ -6,7 +6,7 @@
         <template
             v-for="(contentCard, cardIndex) in cards">
             <component
-                :is="handleCustomCardType(contentCard.extras.custom_card_type)"
+                :is="handleCustomCardType(contentCard.type)"
                 :key="cardIndex"
                 :card="contentCard"
                 :title="title"
@@ -36,13 +36,10 @@ const createBrazeCardEvent = (contentAction, card) => {
     const {
         id: contentId,
         title: contentTitle,
-        extras = {}
-    } = card;
-    const {
         order: contentPosition,
-        button_1: contentCTA,
-        voucher_code: customVoucherCode
-    } = extras;
+        ctaText: contentCTA,
+        voucherCode: customVoucherCode
+    } = card;
 
     return {
         contentId,

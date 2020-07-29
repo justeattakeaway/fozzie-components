@@ -58,7 +58,7 @@ class ContentCards {
      * @returns {ContentCards}
      */
     orderCardsByOrderValue () {
-        this.cards.sort(({ extras: { order: a } }, { extras: { order: b } }) => +a - +b);
+        this.cards.sort(({ order: a }, { order: b }) => +a - +b);
         return this;
     }
 
@@ -69,7 +69,7 @@ class ContentCards {
      * @returns {ContentCards}
      */
     orderCardsByUpdateValue () {
-        this.cards = orderBy(this.cards, 'extras.updated');
+        this.cards = orderBy(this.cards, 'updated');
         return this;
     }
 
@@ -81,7 +81,7 @@ class ContentCards {
      */
     arrangeCardsByTitles () {
         this.cards.reduce((acc, card) => {
-            const { custom_card_type: type } = card.extras;
+            const { type } = card;
             if (type && (type === 'Header_Card' || type === 'Terms_And_Conditions_Card')) {
                 return [...acc, { title: card.title, cards: [] }];
             }
@@ -101,7 +101,7 @@ class ContentCards {
      * @returns {ContentCards}
      */
     getTitleCard () {
-        const index = findIndex(this.cards, card => card.extras.custom_card_type === 'Terms_And_Conditions_Card' && card.url && card.pinned);
+        const index = findIndex(this.cards, card => card.type === 'Terms_And_Conditions_Card' && card.url && card.pinned);
         const [titleCard] = index > -1 ? this.cards.splice(index, 1) : [{}];
         this.titleCard = titleCard;
         return this;
@@ -113,12 +113,7 @@ class ContentCards {
      * @returns {ContentCards}
      */
     filterCards () {
-        this.cards = this.cards.sort(({ extras: { order: a } }, { extras: { order: b } }) => +a - +b).filter(({ extras = {} }) => {
-            const { custom_card_type: type } = extras;
-            if (!type) return false;
-
-            return this.enabledCardTypes.includes(type);
-        });
+        this.cards = this.cards.sort(({ order: a }, { order: b }) => +a - +b).filter(({ type }) => (type ? this.enabledCardTypes.includes(type) : false));
         return this;
     }
 
@@ -131,9 +126,7 @@ class ContentCards {
      * @returns {ContentCards}
      */
     removeDuplicateContentCards () {
-        this.cards = orderBy(this.cards, 'extras.updated').filter((contentCard, index, item) => index ===
-            findIndex(item, card => (card.title === contentCard.title &&
-                card.extras.custom_card_type === contentCard.extras.custom_card_type)));
+        this.cards = orderBy(this.cards, 'updated').filter((contentCard, index, item) => index === findIndex(item, card => (card.title === contentCard.title && card.type === contentCard.type)));
         return this;
     }
 

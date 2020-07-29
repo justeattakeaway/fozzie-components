@@ -9,7 +9,8 @@ const transformCardData = (card = {}) => {
         imageUrl,
         title,
         linkText,
-        description: subtitle
+        description: subtitle,
+        pinned
     } = card;
 
     const {
@@ -18,15 +19,15 @@ const transformCardData = (card = {}) => {
         image_1: image = imageUrl,
         order,
         custom_card_type: type,
-        voucher_code: voucherCode
+        voucher_code: voucherCode,
+        updated
     } = extras;
 
-    const description = Object.values(extras)
-        .filter(([key]) => key.indexOf('line_') !== -1)
-        .map(({ 1: val }) => val);
+    const description = Object.keys(extras)
+        .filter(key => key.indexOf('line_') !== -1)
+        .map(key => extras[key]);
 
     const extractedCardId = extractCardId(id);
-
     const target = getCardUrlTarget(url);
 
     return {
@@ -42,7 +43,9 @@ const transformCardData = (card = {}) => {
         order,
         voucherCode,
         type,
-        target
+        target,
+        updated,
+        pinned
     };
 };
 

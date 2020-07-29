@@ -1,7 +1,7 @@
 <template>
     <component
-        :is="ctaUrl && ctaEnabled ? 'a' : 'div'"
-        :href="ctaEnabled && ctaUrl"
+        :is="url && ctaEnabled ? 'a' : 'div'"
+        :href="ctaEnabled && url"
         :target="target.attribute"
         :rel="target.rel"
         :class="[$style['c-contentCard'], { [$style['c-contentCard--isolateHeroImage']]: isAnniversaryCard }]"
@@ -29,7 +29,7 @@
             <h4 :class="$style['c-contentCard-subTitle']">
                 {{ subtitle }}
             </h4>
-            <template v-for="(textItem, textIndex) in descriptionText">
+            <template v-for="(textItem, textIndex) in description">
                 <p
                     :key="textIndex"
                     :data-test-id="testIdForItemWithIndex(textIndex)"
@@ -71,73 +71,43 @@ export default {
 
     data () {
         const {
-            id: cardId,
-            url: ctaUrl,
-            extras = {},
-            imageUrl,
-            title,
-            description: subtitle
-        } = this.card;
-        const {
-            icon_1: icon,
-            image_1: image,
-            order,
-            custom_card_type: type,
-            voucher_code: voucherCode
-        } = extras;
-
-        return {
-            cardId,
-            ctaUrl,
-            image: image || imageUrl,
+            id,
+            url,
             icon,
+            image,
+            order,
             title,
             subtitle,
-            order,
             voucherCode,
             type,
-            extras
+            description,
+            target,
+            extractedCardId
+        } = this.card;
+
+        return {
+            description,
+            id,
+            url,
+            icon,
+            image,
+            order,
+            title,
+            subtitle,
+            voucherCode,
+            type,
+            target,
+            extractedCardId
         };
     },
 
     computed: {
-        descriptionText () {
-            return Object.keys(this.extras)
-                        .filter(key => key.indexOf('line_') !== -1)
-                        .map(key => this.extras[key]);
-        },
-
-        extractedCardId () {
-            const decoded = atob(this.cardId);
-            const start = decoded.indexOf('=');
-            const end = decoded.indexOf('&');
-            return decoded.slice(start + 1, end);
-        },
-
         isAnniversaryCard () {
             return this.type === 'Anniversary_Card_1';
         },
 
         isBackgroundImage () {
             return this.type !== 'Post_Order_Card_1';
-        },
-
-        target () {
-            try {
-                const url = new URL(this.ctaUrl);
-                const internalDomains = ['just-eat', 'justeat', 'menulog'];
-                const openInNewWindow = !internalDomains.some(partial => url.hostname.indexOf(partial) > -1);
-                return openInNewWindow ? {
-                    attribute: '_blank',
-                    rel: 'noopener noreferrer'
-                } : {
-                    attribute: '_self'
-                };
-            } catch (err) {
-                return {
-                    attribute: '_self'
-                };
-            }
         }
     },
 
