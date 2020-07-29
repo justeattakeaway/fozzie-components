@@ -1,5 +1,6 @@
 import orderBy from 'lodash.orderby';
 import findIndex from 'lodash.findindex';
+import transformCardData from './utils/transformCardData';
 
 /**
  * List of enabled card types
@@ -33,7 +34,7 @@ class ContentCards {
         const { enabledCardTypes = [] } = opts;
         this.enabledCardTypes = enabledCardTypes.length ? enabledCardTypes : defaultEnabledCardTypes;
         this.appboy = appboy;
-        this.cards = cards;
+        this.cards = cards.map(transformCardData);
         this.titleCard = {};
     }
 
