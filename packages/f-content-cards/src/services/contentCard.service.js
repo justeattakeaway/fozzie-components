@@ -34,6 +34,7 @@ class ContentCards {
         const { enabledCardTypes = [] } = opts;
         this.enabledCardTypes = enabledCardTypes.length ? enabledCardTypes : defaultEnabledCardTypes;
         this.appboy = appboy;
+        this.rawCards = cards;
         this.cards = cards.map(transformCardData);
         this.titleCard = {};
     }
@@ -47,7 +48,8 @@ class ContentCards {
     output () {
         return {
             titleCard: this.titleCard,
-            cards: this.cards
+            cards: this.cards,
+            rawCards: this.rawCards
         };
     }
 

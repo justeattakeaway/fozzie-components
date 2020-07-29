@@ -94,6 +94,7 @@ export default {
 
         return {
             cards: [],
+            rawCards: [],
             titleCard: {},
             hasLoaded: false,
             loadingCard
@@ -103,7 +104,7 @@ export default {
     watch: {
         cards (current, previous) {
             if (current.length && (current.length !== previous.length)) {
-                logCardImpressions(this.cards);
+                logCardImpressions(this.rawCards);
             }
         }
     },
@@ -140,7 +141,7 @@ export default {
 
         contentCards (appboy) {
             if (!appboy) return;
-            const { cards, titleCard } = new ContentCards(appboy, {
+            const { cards, rawCards, titleCard } = new ContentCards(appboy, {
                 enabledCardTypes: this.enabledCardTypes
             })
                 .removeDuplicateContentCards()
@@ -148,6 +149,8 @@ export default {
                 .getTitleCard()
                 .arrangeCardsByTitles()
                 .output();
+
+            this.rawCards = rawCards;
             this.cards = cards;
             this.titleCard = titleCard;
             this.hasLoaded = true;

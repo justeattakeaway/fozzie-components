@@ -18,7 +18,7 @@ const voucherCode = '__VOUCHERCODE__';
 const order = '__ORDER__';
 const id = btoa('ABC123');
 
-const createCard = type => ({
+const createRawCard = type => ({
     id,
     url,
     button,
@@ -33,8 +33,19 @@ const createCard = type => ({
     }
 });
 
+const createCard = type => ({
+    id,
+    url,
+    ctaText: button,
+    description,
+    title,
+    order,
+    type,
+    voucherCode
+});
+
 const createAppboyInstance = cardTypes => ({
-    cards: cardTypes.map(type => createCard(type))
+    cards: cardTypes.map(type => createRawCard(type))
 });
 
 beforeEach(() => {

@@ -81,8 +81,7 @@ export default {
             voucherCode,
             type,
             description,
-            target,
-            extractedCardId
+            target = {}
         } = this.card;
 
         return {
@@ -96,8 +95,7 @@ export default {
             subtitle,
             voucherCode,
             type,
-            target,
-            extractedCardId
+            target
         };
     },
 
