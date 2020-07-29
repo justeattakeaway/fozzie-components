@@ -1,7 +1,9 @@
 import extractCardId from './extractCardId';
 import getCardUrlTarget from './getCardUrlTarget';
 
-const transformCardData = (card = {}) => {
+const transformCardData = card => {
+    if (card === null || typeof card !== 'object') return {};
+
     const {
         id,
         url,
