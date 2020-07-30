@@ -4,11 +4,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+v1.4.0
+------------------------------
+*July 24, 2020*
+
+### Added
+- `xhr-mock` and `faker` as dev dependencies
+- Predictable faked card data for braze SDK responses
+
+### Changed
+- Story can multi-select different card types and then 'refresh'
+
+
+v1.3.0
 ------------------------------
 *July 23, 2020*
 
 ### Changed
+- Open external links in `_blank` and internal links in `_self`
 - Some small colour updates (small changes to greys and blues inline with rebrand phase 3.1).
 - Changing `data-theme` to `data-theme-contentcards` to avoid clashing with any other components in the future.
 - Vue CLI minor package updates.

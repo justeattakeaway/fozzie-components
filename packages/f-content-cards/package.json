@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-content-cards",
   "description": "Fozzie Content Cards",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "main": "dist/f-content-cards.umd.min.js",
   "files": [
     "dist"
@@ -51,6 +51,9 @@
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
-    "node-sass-magic-importer": "5.3.2"
+    "crypto-js": "^4.0.0",
+    "faker": "^4.1.0",
+    "node-sass-magic-importer": "5.3.2",
+    "xhr-mock": "^2.5.1"
   }
 }
