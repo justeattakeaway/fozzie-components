@@ -38,6 +38,18 @@ function voucherCard (cardType, title, imageUrl, subtitle, voucherCode, icon1, l
     };
 }
 
+function provide () {
+    return {
+        copy: {
+            copyCodeLabel: 'Copy Code',
+            codeCopiedLabel: 'Offer code copied'
+        },
+        emitCardView () {},
+        emitCardClick () {},
+        emitVoucherCodeClick () {}
+    };
+}
+
 export const VoucherCardComponent = () => ({
     components: {
         VoucherCard
@@ -64,16 +76,7 @@ export const VoucherCardComponent = () => ({
         }
     },
 
-    provide () {
-        return {
-            copy: {
-                copyCodeLabel: 'Copy Code'
-            },
-            emitCardView () {},
-            emitCardClick () {},
-            emitVoucherCodeClick () {}
-        };
-    },
+    provide,
 
     data () {
         return voucherCard(
@@ -115,16 +118,7 @@ export const AnniversaryCardComponent = () => ({
         }
     },
 
-    provide () {
-        return {
-            copy: {
-                copyCodeLabel: 'Copy Code'
-            },
-            emitCardView () {},
-            emitCardClick () {},
-            emitVoucherCodeClick () {}
-        };
-    },
+    provide,
 
     data () {
         return voucherCard(

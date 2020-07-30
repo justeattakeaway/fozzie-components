@@ -14,7 +14,12 @@
                 :data-test-id="`contentCard-${cardType}-code`">
                 {{ code }}
             </span>
-            <span :class="$style['c-contentCard-voucher-copy']">{{ copy.copyCodeLabel }}</span>
+            <span
+                :class="voucherCopyClasses"
+                @transitionend="copyCooldownComplete">
+                <span>{{ voucherCopyCodeLabel }}</span>
+                <span role="status">{{ voucherCodeCopiedLabel }}</span>
+            </span>
         </button>
     </card-container>
 </template>
@@ -23,6 +28,10 @@
 import copyToClipboard from 'copy-to-clipboard';
 import CardContainer from './CardContainer.vue';
 import { normaliseCardType } from './utils';
+
+const COPY_STATE_AVAILABLE = 'available';
+const COPY_STATE_COOLDOWN = 'cooldown';
+const COPY_STATE_TRANSITIONOUT = 'transitionout';
 
 export default {
     components: {
@@ -41,6 +50,8 @@ export default {
         return {
             cardType: normaliseCardType(type),
             code: voucherCode,
+            copyState: COPY_STATE_AVAILABLE,
+            cooldownTimeout: null,
             url
         };
     },
@@ -48,6 +59,33 @@ export default {
     computed: {
         isAnniversaryCard () {
             return this.cardType === 'anniversaryCard1';
+        },
+
+        voucherCopyCodeLabel () {
+            switch (this.copyState) {
+                case COPY_STATE_AVAILABLE:
+                    return this.copy.copyCodeLabel;
+                case COPY_STATE_TRANSITIONOUT:
+                    return this.copy.codeCopiedLabel;
+                default:
+                    return '';
+            }
+        },
+
+        voucherCodeCopiedLabel () {
+            return this.copyState === COPY_STATE_COOLDOWN ? this.copy.codeCopiedLabel : '';
+        },
+
+        voucherCopyClasses () {
+            return [
+                this.$style['c-contentCard-voucher-copy'],
+                ...(this.copyState === COPY_STATE_COOLDOWN ? [
+                    this.$style['c-contentCard-voucher-copy-copied']
+                ] : []),
+                ...(this.copyState === COPY_STATE_TRANSITIONOUT ? [
+                    this.$style['c-contentCard-voucher-copy-transition-out']
+                ] : [])
+            ];
         }
     },
 
@@ -61,7 +99,22 @@ export default {
     methods: {
         copyVoucherCode () {
             copyToClipboard(this.code);
+
+            if (this.copyState === COPY_STATE_COOLDOWN) {
+                clearTimeout(this.cooldownTimeout);
+            }
+
+            this.copyState = COPY_STATE_COOLDOWN;
+            this.cooldownTimeout = setTimeout(() => this.copyCooldownEnded(), 3000);
             this.emitVoucherCodeClick(this.url);
+        },
+
+        copyCooldownEnded () {
+            this.copyState = COPY_STATE_TRANSITIONOUT;
+        },
+
+        copyCooldownComplete () {
+            this.copyState = COPY_STATE_AVAILABLE;
         }
     }
 };
@@ -96,5 +149,13 @@ export default {
         font-weight: $font-weight-bold;
         color: $color-link-default;
         text-align: right;
+    }
+
+    .c-contentCard-voucher-copy-copied {
+        color: $color-text--warning;
+    }
+
+    .c-contentCard-voucher-copy-transition-out {
+        transition: color 1s;
     }
 </style>
