@@ -75,21 +75,11 @@ export function ContentCardscomponent () {
         },
 
         methods: {
-            onAppboyInit (appboy) {
-                action('on-appboy-init')(appboy);
-            },
-            getCardCount (count) {
-                action('get-card-count')(count);
-            },
-            getTitleCard (card) {
-                action('get-title-card')(card);
-            },
-            hasLoaded (status) {
-                action('has-loaded')(status);
-            },
-            onError (error) {
-                action('on-error', error);
-            }
+            onBrazeInit: action('on-braze-init'),
+            getCardCount: action('get-card-count'),
+            getTitleCard: action('get-title-card'),
+            hasLoaded: action('has-loaded'),
+            onError: action('on-error')
         },
 
         /**
@@ -111,7 +101,7 @@ export function ContentCardscomponent () {
         },
 
         template: `<content-cards
-            @on-appboy-init="onAppboyInit"
+            @on-braze-init="onBrazeInit"
             @get-card-count="getCardCount"
             @has-loaded="hasLoaded"
             @on-error="onError"

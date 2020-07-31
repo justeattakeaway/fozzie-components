@@ -187,7 +187,7 @@ export default {
             this.titleCard = titleCard;
             this.hasLoaded = true;
 
-            this.$emit('on-appboy-init', appboy);
+            this.$emit('on-braze-init', appboy);
             this.$emit('get-card-count', cards.length);
             this.$emit('has-loaded', true);
         },

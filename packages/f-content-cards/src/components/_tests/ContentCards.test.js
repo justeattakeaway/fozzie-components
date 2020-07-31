@@ -404,7 +404,7 @@ describe('ContentCards', () => {
         };
 
         it('should emit an event containing the appboy instance when appboy is initialised', async () => {
-            await testEmitter('on-appboy-init', appboy);
+            await testEmitter('on-braze-init', appboy);
         });
 
         it('should emit an event containing the content card count when appboy is initialised', async () => {
