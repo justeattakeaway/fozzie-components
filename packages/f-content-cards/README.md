@@ -198,7 +198,7 @@ The following events can be emitted by the component, with the shape given:
 }
 ```
 
-### `@on-appboy-init`
+### `@on-braze-init`
 
 Called with the appboy instance once appboy has initialised.
 

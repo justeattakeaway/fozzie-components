@@ -11,7 +11,7 @@ v1.6.0
 ### Added
 
 - Added the following event emitters:
-    - `@on-appboy-init`
+    - `@on-braze-init`
     - `@get-card-count`
     - `@has-loaded`
     - `@on-error`
