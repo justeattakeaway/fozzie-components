@@ -18,7 +18,11 @@
                 :class="voucherCopyClasses"
                 @transitionend="copyCooldownComplete">
                 <span>{{ voucherCopyCodeLabel }}</span>
-                <span role="status">{{ voucherCodeCopiedLabel }}</span>
+                <span role="status">{{ voucherCodeCopiedLabel }}
+                    <tick-icon
+                        v-if="inCooldown"
+                        :class="$style['c-contentCard-voucher-code-cooldown-tick']" />
+                </span>
             </span>
         </button>
     </card-container>
@@ -26,6 +30,7 @@
 
 <script>
 import copyToClipboard from 'copy-to-clipboard';
+import { TickIcon } from '@justeat/f-vue-icons';
 import CardContainer from './CardContainer.vue';
 import { normaliseCardType } from './utils';
 
@@ -35,7 +40,8 @@ const COPY_STATE_TRANSITIONOUT = 'transitionout';
 
 export default {
     components: {
-        CardContainer
+        CardContainer,
+        TickIcon
     },
 
     props: {
@@ -86,6 +92,9 @@ export default {
                     this.$style['c-contentCard-voucher-copy-transition-out']
                 ] : [])
             ];
+        },
+        inCooldown () {
+            return this.copyState === COPY_STATE_COOLDOWN;
         }
     },
 
@@ -152,10 +161,14 @@ export default {
     }
 
     .c-contentCard-voucher-copy-copied {
-        color: $color-text--warning;
+        color: $color-text--success;
     }
 
     .c-contentCard-voucher-copy-transition-out {
         transition: color 1s;
+    }
+
+    .c-contentCard-voucher-code-cooldown-tick {
+        color: $color-text--success;
     }
 </style>
