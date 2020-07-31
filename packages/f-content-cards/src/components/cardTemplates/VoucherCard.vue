@@ -51,13 +51,13 @@ export default {
         // Locale-specific copy configuration
         'copy',
         // Callback for emitting event when voucher code is clicked
-        'emitVoucherCodeClicked'
+        'emitVoucherCodeClick'
     ],
 
     methods: {
         copyVoucherCode () {
             copyToClipboard(this.code);
-            this.emitVoucherCodeClicked(this.url);
+            this.emitVoucherCodeClick(this.url);
         }
     }
 };

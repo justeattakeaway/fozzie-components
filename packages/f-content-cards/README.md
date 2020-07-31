@@ -160,8 +160,6 @@ An array of custom content card types to display.
 
 Locale in `lang_COUNTRY` format - e.g. `en-GB`
 
-> If no array is passed the component will default to showing all supported content card types.
-
 ### `pushToDataLayer`
 
 **Type:** function
@@ -192,7 +190,7 @@ Whether or not to show a skeleton loading state whilst initialising Braze. Defau
 
 The following events can be emitted by the component, with the shape given:
 
-### `voucherCodeClicked`
+### `voucherCodeClick`
 
 ```json5
 {

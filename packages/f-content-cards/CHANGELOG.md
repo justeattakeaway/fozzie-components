@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.5.0
 ------------------------------
-*July 29, 2020*
+*July 31, 2020*
 
 ### Added
 - `VoucherCard` component from HomeWeb's Offer page

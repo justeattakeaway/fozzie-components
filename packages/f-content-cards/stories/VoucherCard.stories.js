@@ -73,7 +73,7 @@ export const VoucherCardcomponent = () => ({
             },
             emitCardView () {},
             emitCardClick () {},
-            emitVoucherCodeClicked () {}
+            emitVoucherCodeClick () {}
         };
     },
 
@@ -126,7 +126,7 @@ export const AnniversaryCardcomponent = () => ({
             },
             emitCardView () {},
             emitCardClick () {},
-            emitVoucherCodeClicked () {}
+            emitVoucherCodeClick () {}
         };
     },
 

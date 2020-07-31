@@ -146,8 +146,8 @@ export default {
                 component.trackCardVisibility(card);
             },
 
-            emitVoucherCodeClicked (url) {
-                component.$emit('voucherCodeClicked', {
+            emitVoucherCodeClick (url) {
+                component.$emit('voucherCodeClick', {
                     url
                 });
             },

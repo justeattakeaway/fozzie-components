@@ -1,6 +1,8 @@
 import { withKnobs, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import PostOrderCard from '../src/components/cardTemplates/PostOrderCard.vue';
+import jeIcon from './images/je-icon.png';
+import jeBackground from './images/je-marketing.png';
 
 export default {
     title: 'Components/Atoms/f-content-cards',
@@ -20,10 +22,10 @@ export const PostOrderCardcomponent = () => ({
             default: text('Card Description', 'Whether you want to treat Mum to her Friday night favourite, or surprise your mate with a ‘KFC on me’, show them you care – the tasty way.')
         },
         image: {
-            default: text('Card Image', 'https://appboy-images.com/appboy/communication/marketing/content_cards_message_variations/images/5edf97b6141af454f8197e93/f43c54c99f2deca37600fa16331d7080c51717ef/original.png?1591711674')
+            default: text('Card Image', jeBackground)
         },
         icon: {
-            default: text('Card Icon', 'https://appboy-images.com/appboy/communication/assets/image_assets/images/5ed7aac3967e180c25132d24/original.png?1591192259')
+            default: text('Card Icon', jeIcon)
         },
         cta: {
             default: text('Card CTA', 'Purchase now')

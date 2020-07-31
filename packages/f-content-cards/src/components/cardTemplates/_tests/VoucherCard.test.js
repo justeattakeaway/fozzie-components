@@ -23,7 +23,7 @@ const copy = {
 
 const provide = {
     copy,
-    emitVoucherCodeClicked: jest.fn()
+    emitVoucherCodeClick: jest.fn()
 };
 
 function getWrapper () {
@@ -83,12 +83,12 @@ describe('contentCards › VoucherCard', () => {
                 expect(copyToClipboard).toHaveBeenCalledWith(code);
             });
 
-            it('should call the injected `emitVoucherCodeClicked`', () => {
+            it('should call the injected `emitVoucherCodeClick`', () => {
                 // Act
                 wrapper.vm.copyVoucherCode();
 
                 // Assert
-                expect(provide.emitVoucherCodeClicked).toHaveBeenCalledWith(card.url);
+                expect(provide.emitVoucherCodeClick).toHaveBeenCalledWith(card.url);
             });
         });
     });
