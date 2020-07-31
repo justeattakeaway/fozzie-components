@@ -17,12 +17,23 @@
             <span
                 :class="voucherCopyClasses"
                 @transitionend="copyCooldownComplete">
-                <span>{{ voucherCopyCodeLabel }}</span>
-                <span role="status">{{ voucherCodeCopiedLabel }}
-                    <tick-icon
-                        v-if="inCooldown"
-                        :class="$style['c-contentCard-voucher-code-cooldown-tick']" />
+                <span :class="$style['c-contentCard-voucher-code-cooldown']" role="status">
+                    <transition
+                        :leave-to-class="$style['c-contentCard-voucher-copy-cooldownTick-leave-to']"
+                        :leave-active-class="$style['c-contentCard-voucher-copy-cooldownTick-leave-active']">
+                        <tick-icon
+                            v-if="inCooldown"
+                            :class="[
+                                $style['c-badge'],
+                                $style['c-badge--rounded'],
+                                $style['c-badge--success'],
+                                $style['zeta'],
+                                $style['c-contentCard-voucher-code-cooldown-tick']
+                            ]" />
+                    </transition>
+                    {{ voucherCodeCopiedLabel }}
                 </span>
+                <span>{{ voucherCopyCodeLabel }}</span>
             </span>
         </button>
     </card-container>
@@ -130,6 +141,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+    @include badge();
+
     .c-contentCard-voucher {
         display: flex;
         width: 100%;
@@ -168,7 +181,20 @@ export default {
         transition: color 1s;
     }
 
+    .c-contentCard-voucher-copy-cooldownTick-leave-to {
+        opacity: 0;
+    }
+
+    .c-contentCard-voucher-copy-cooldownTick-leave-active {
+        transition: opacity 1s;
+    }
+
     .c-contentCard-voucher-code-cooldown-tick {
-        color: $color-text--success;
+        background-color: $color-text--success;
+        fill: $color-bg--component;
+        width: spacing(x2);
+        height: spacing(x2);
+        padding: 0;
+        margin-top: -#{spacing()};
     }
 </style>
