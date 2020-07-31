@@ -70,6 +70,11 @@ export default {
             default: ''
         },
 
+        cardLimit: {
+            type: Number,
+            default: -1
+        },
+
         enabledCardTypes: {
             type: Array,
             default: () => ([])
@@ -177,6 +182,7 @@ export default {
                 .filterCards()
                 .getTitleCard()
                 .arrangeCardsByTitles()
+                .applyCardLimit(this.cardLimit)
                 .output();
             this.cards = cards;
             this.titleCard = titleCard;
