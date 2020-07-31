@@ -7,7 +7,7 @@
             v-for="(contentCard, cardIndex) in cards">
             <component
                 :is="handleCustomCardType(contentCard.extras.custom_card_type)"
-                :key="cardIndex"
+                :key="`${cardIndex}_${contentCard.id}`"
                 :card="contentCard"
                 :title="title"
                 :data-test-id="testIdForItemWithIndex(cardIndex)"
@@ -21,9 +21,11 @@
 </template>
 
 <script>
+import { globalisationServices } from '@justeat/f-services';
 import initialiseBraze, { logCardClick, logCardImpressions } from '@justeat/f-metadata';
 import ContentCards from '../services/contentCard.service';
 import cardTemplates from './cardTemplates';
+import tenantConfigs from '../tenants';
 
 /**
  * Generates card-specific analytics data suitable for sending back to GTM via f-trak
@@ -57,46 +59,62 @@ const createBrazeCardEvent = (contentAction, card) => {
 
 export default {
     name: 'ContentCards',
+
     components: {
         ...cardTemplates
     },
+
     props: {
         apiKey: {
             type: String,
             default: ''
         },
-        userId: {
-            type: String,
-            default: ''
-        },
-        title: {
-            type: String,
-            default: ''
-        },
+
         enabledCardTypes: {
             type: Array,
             default: () => ([])
         },
+
+        locale: {
+            type: String,
+            default: ''
+        },
+
         pushToDataLayer: {
             type: Function,
             default: () => (() => {})
         },
+
+        showLoadingState: {
+            type: Boolean,
+            default: true
+        },
+
         testId: {
             type: String,
             default: null
         },
-        showLoadingState: {
-            type: Boolean,
-            default: true
+
+        title: {
+            type: String,
+            default: ''
+        },
+
+        userId: {
+            type: String,
+            default: ''
         }
     },
 
     data () {
+        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
+        const localeConfig = tenantConfigs[locale];
         const isPostOrderSkeletonCard = this.enabledCardTypes.length && this.enabledCardTypes.every(type => type === 'Post_Order_Card_1');
         const loadingCard = isPostOrderSkeletonCard ? { type: 'postOrder', count: 1 } : { type: 'promo', count: 3 };
 
         return {
             cards: [],
+            copy: { ...localeConfig },
             titleCard: {},
             hasLoaded: false,
             loadingCard
@@ -119,13 +137,22 @@ export default {
         const component = this;
 
         return {
-            emitCardView (card) {
-                component.trackCardVisibility(card);
-            },
             emitCardClick (card) {
                 component.trackCardClick(card);
                 logCardClick(card);
-            }
+            },
+
+            emitCardView (card) {
+                component.trackCardVisibility(card);
+            },
+
+            emitVoucherCodeClick (url) {
+                component.$emit('voucherCodeClick', {
+                    url
+                });
+            },
+
+            copy: component.copy
         };
     },
 
@@ -158,11 +185,14 @@ export default {
 
         handleCustomCardType (type) {
             switch (type) {
+                case 'Anniversary_Card_1':
+                case 'Voucher_Card_1':
+                    return 'VoucherCard';
+                case 'Post_Order_Card_1':
+                    return 'PostOrderCard';
                 case 'Promotion_Card_1':
                 case 'Promotion_Card_2':
                     return 'PromotionCard';
-                case 'Post_Order_Card_1':
-                    return 'PostOrderCard';
                 default:
                     break;
             }

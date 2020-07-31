@@ -5,6 +5,7 @@
  */
 export const normaliseCardType = cardType => {
     if (typeof cardType !== 'string') {
+        // eslint-disable-next-line no-console
         console.error(`normaliseCardType › Expected a string but received ${typeof cardType}`);
         return null;
     }
