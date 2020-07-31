@@ -143,7 +143,7 @@ class ContentCards {
      * @returns {ContentCards}
      */
     applyCardLimit (limit) {
-        if (limit > -1) this.cards.splice(0, limit);
+        this.cards = limit > -1 ? this.cards.splice(0, limit) : this.cards;
         return this;
     }
 
