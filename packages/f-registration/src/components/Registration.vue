@@ -242,7 +242,7 @@ export default {
                 const registrationData = {
                     firstName: this.firstName,
                     lastName: this.lastName,
-                    email: this.email,
+                    emailAddress: this.email,
                     password: this.password
                 };
                 await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData);
