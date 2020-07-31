@@ -31,6 +31,11 @@
                     {{ voucherCodeCopiedLabel }}
                 </span>
                 <span>{{ voucherCopyCodeLabel }}</span>
+                <span role="status">{{ voucherCodeCopiedLabel }}
+                    <tick-icon
+                        v-if="inCooldown"
+                        :class="$style['c-contentCard-voucher-code-cooldown-tick']" />
+                </span>
             </span>
         </button>
     </card-container>
