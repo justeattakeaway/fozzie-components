@@ -61,11 +61,11 @@ export default {
 </script>
 
 <style lang="scss" module>
+
 .c-userMessage {
     color: $white;
     background-color: $orange;
     max-width: 100%;
-    margin-top: spacing(x2);
 }
 
 .c-userMessage-container {
@@ -104,4 +104,5 @@ export default {
         padding-left: 0;
     }
 }
+
 </style>
