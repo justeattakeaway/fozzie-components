@@ -135,7 +135,7 @@ describe('Registration', () => {
 
         it('should show error message and emit failure event when service responds with a 409', async () => {
             // Arrange
-            const err = { FaultId: '123', TraceId: '123', Errors: [{ Description: 'The specified email already exists', ErrorCode: '409' }] };
+            const err = { response: { data: { faultId: '123', traceId: '123', errors: [{ description: 'The specified email already exists', errorCode: '409' }] } } };
             RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
             const wrapper = mountComponentAndAttachToDocument();
             Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
@@ -154,7 +154,7 @@ describe('Registration', () => {
 
         it('should populate generic error message and emit failure event when service responds with a 400', async () => {
             // Arrange
-            const err = { FaultId: '123', TraceId: '123', Errors: [{ Description: 'The Password field is required', ErrorCode: '400' }] };
+            const err = { response: { data: { faultId: '123', traceId: '123', errors: [{ description: 'The Password field is required', errorCode: '400' }] } } };
             RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
             const wrapper = mountComponentAndAttachToDocument();
             Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
@@ -173,7 +173,7 @@ describe('Registration', () => {
 
         it('should show default error message and emit failure event when service with an error with no description', async () => {
             // Arrange
-            const err = { Errors: [{ ErrorCode: 'XXX' }] };
+            const err = { response: { data: { errors: [{ errorCode: 'XXX' }] } } };
             RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
             const wrapper = mountComponentAndAttachToDocument();
             Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
