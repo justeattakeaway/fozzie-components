@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.10.0
+------------------------------
+*August 3, 2020*
+
+### Fixed
+- Update expected structure of the axios error object to show custom 409 error message
+
+
+v0.9.2
+------------------------------
+*July 31, 2020*
+
+### Fixed
+- Changed property name of POST object from `email` to `emailAddress`.
+
+
 v0.9.1
 ------------------------------
 *July 28, 2020*
@@ -19,16 +35,10 @@ v0.9.0
 
 ### Changed
 - Update registration component to handle AccountWeb API endpoint.
-
-*July 2, 2020*
+- Updating colour variables to use new versions set in `fozzie-colour-palette`.
 
 ### Added
 - Accessibility add-on to Storybook story.
-
-*June 25, 2020*
-
-### Changed
-- Updating colour variables to use new versions set in `fozzie-colour-palette`.
 
 
 v0.7.1
