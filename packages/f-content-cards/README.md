@@ -198,6 +198,22 @@ The following events can be emitted by the component, with the shape given:
 }
 ```
 
+### `@on-braze-init`
+
+Called with the appboy instance once appboy has initialised.
+
+### `@get-card-count`
+
+Called with a number outlining the total card count once Appboy has initialised.
+
+### `@has-loaded`
+
+Called with a boolean indicating that the component has initialised.
+
+### `@on-error`
+
+Called with an Error object if appboy fails to initialise.
+
 ## Development
 
 Start by cloning the repository and installing the required dependencies:
