@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.1.0
 ------------------------------
-*July 4, 2020*
+*August 4, 2020*
 
 ### Added
 - Component structure and basic configuration (created using `generator-component`).
