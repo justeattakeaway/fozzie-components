@@ -23,7 +23,7 @@ describe('MegaModal', () => {
                 [false, true, false],
                 [false, false, true],
                 [true, true, true]
-            ])('should return "%s" when is open is "%s" and has overlay is "%s"', (
+            ])('should return "%s" when `isOpen` is "%s" and `hasOverlay` is "%s"', (
                 expected,
                 isOpen,
                 hasOverlay
