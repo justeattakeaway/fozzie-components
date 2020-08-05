@@ -97,105 +97,27 @@ The following rudimentary example can be used as a guide for implementing this c
 
 ## Configuration
 
-The following props can be used to configure the component:
+## Props
 
-### `is-open`
+`f-card` has a number of props that allow you to customise its functionality.
 
-Type: `Boolean`
+The props that can be defined are as follows:
 
-Default: `false`
+| Prop  | Type  | Default | Description |
+| ----- | ----- | ------- | ----------- |
+| `is-open` | `Boolean` | `false` | Sets the modal to open or closed state. |
+| `is-narrow` | `Boolean` | `false` | Use the narrow visual style. |
+| `is-wide` | `Boolean` | `false` | Use the wide visual style. |
+| `is-flush` | `Boolean` | `false` | Removes passing around the modal content. |
+| `is-full-height` | `Boolean` | `false` | Sets the modal content to full height of the screen. |
+| `is-scrollable` | `Boolean` | `false` | Makes the modal content scrollable.<br/><br/><blockquote>Note this only applies to small screen devices.</blockquote> |
+| `is-close-fixed` | `Boolean` | `false` | Sets the modal close button position to `fixed`. |
+| `is-close-rounded` | `Boolean` | `false` | Sets the modal close button to display in a rounded style. |
+| `has-overlay` | `Boolean` | `true` | Controls whether or not to display an overlay behind the modal. |
+| `has-close-button` | `Boolean` | `true` | Controls whether or not to display the modal close button. |
 
-Sets the modal to open or closed state.
-
-### `is-narrow`
-
-Type: `Boolean`
-
-Default: `false`
-
-Use the narrow visual style.
-
-### `is-wide`
-
-Type: `Boolean`
-
-Default: `false`
-
-Use the wide visual style.
-
-### `is-flush`
-
-Type: `Boolean`
-
-Default: `false`
-
-Removes passing around the modal content.
-
-### `is-full-height`
-
-Type: `Boolean`
-
-Default: `false`
-
-Sets the modal content to full height of the screen
-
-### `is-scrollable`
-
-Type: `Boolean`
-
-Default: `false`
-
-Makes the modal content scrollable.
-
-> Note this only applies to small screen devices.
-
-### `is-close-fixed`
-
-Type: `Boolean`
-
-Default: `false`
-
-Sets the modal close button position to `fixed`
-
-### `is-close-rounded`
-
-Type: `Boolean`
-
-Default: `false`
-
-Sets the modal close button to display in a rounded style.
-
-### `has-overlay`
-
-Type: `Boolean`
-
-Default: `true`
-
-Controls whether or not to display an overlay behind the modal.
-
-### `has-close-button`
-
-Type: `Boolean`
-
-Default: `true`
-
-Controls whether or not to display the modal close button.
-
-### `close-on-blur`
-
-Type: `Boolean`
-
-Default: `true`
-
-Controls whether or not to close the modal when the user clicks outside of the modal.
-
-### `close-button-copy`
-
-Type: `String`
-
-Default: `Close modal`
-
-Sets the hidden text value for the close button which is used by screen-readers.
+| `close-on-blur` | `Boolean` | `true` | Controls whether or not to close the modal when the user clicks outside of the modal. |
+| `close-button-copy` | `String` | `"Close modal"` | Sets the hidden text value for the close button which is used by screen-readers. |
 
 ## Development
 
