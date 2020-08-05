@@ -17,7 +17,7 @@
 
 ## Usage
 
-#### Installation
+### Installation
 
 This package can be installed using npm or yarn:
 
@@ -97,7 +97,7 @@ The following rudimentary example can be used as a guide for implementing this c
 
 ## Configuration
 
-## Props
+### Props
 
 `f-card` has a number of props that allow you to customise its functionality.
 
@@ -117,6 +117,13 @@ The props that can be defined are as follows:
 | `has-close-button` | `Boolean` | `true` | Controls whether or not to display the modal close button. |
 | `close-on-blur` | `Boolean` | `true` | Controls whether or not to close the modal when the user clicks outside of the modal. |
 | `close-button-copy` | `String` | `"Close modal"` | Sets the hidden text value for the close button which is used by screen-readers. |
+
+### Events
+
+| Event | Description |
+| ----- | ----------- |
+| `open` | This event is emitted when the modal is opened. |
+| `close` | This event is emitted when the modal is closed. |
 
 ## Development
 

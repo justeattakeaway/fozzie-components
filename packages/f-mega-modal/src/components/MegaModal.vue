@@ -130,7 +130,7 @@ export default {
             if (newVal) {
                 this.open();
             } else {
-                this.close(null, { emit: false });
+                this.close({ emit: false });
             }
         }
     },
@@ -236,11 +236,10 @@ export default {
          *
          * Emits an `close` event on completion.
          *
-         * @param {Object} e Event object.
-         * @param {Object} options - Close method options.
-         * @param {Boolean} options.emit - Controls whether or not the `close` event be emitted.
+         * @param {Object} [options] - Close method options.
+         * @param {Boolean} [options.emit=true] - Controls whether or not the `close` event be emitted.
          */
-        close (e, { emit = true } = {}) {
+        close ({ emit = true } = {}) {
             if (!this.hasOpened) return;
 
             this.hasOpened = false;
@@ -260,7 +259,7 @@ export default {
             megaModal.removeEventListener('keydown', this.keyActions);
 
             if (emit) {
-                this.$emit('close', e);
+                this.$emit('close');
             }
         }
     }
