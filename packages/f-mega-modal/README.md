@@ -115,7 +115,6 @@ The props that can be defined are as follows:
 | `is-close-rounded` | `Boolean` | `false` | Sets the modal close button to display in a rounded style. |
 | `has-overlay` | `Boolean` | `true` | Controls whether or not to display an overlay behind the modal. |
 | `has-close-button` | `Boolean` | `true` | Controls whether or not to display the modal close button. |
-
 | `close-on-blur` | `Boolean` | `true` | Controls whether or not to close the modal when the user clicks outside of the modal. |
 | `close-button-copy` | `String` | `"Close modal"` | Sets the hidden text value for the close button which is used by screen-readers. |
 
