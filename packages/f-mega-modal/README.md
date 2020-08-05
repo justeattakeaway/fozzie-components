@@ -147,14 +147,6 @@ Default: `false`
 
 Makes the modal content scrollable.
 
-### `is-scrollable`
-
-Type: `Boolean`
-
-Default: `false`
-
-Makes the modal content scrollable.
-
 > Note this only applies to small screen devices.
 
 ### `is-close-fixed`
