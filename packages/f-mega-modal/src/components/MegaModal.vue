@@ -136,6 +136,11 @@ export default {
     },
 
     methods: {
+        /**
+         * Handles user key presses to help improve acccessibilty for keyboard users.
+         *
+         * @param {Object} e Event object.
+         */
         keyActions (e) {
             if (e.key === 'Escape') {
                 this.close();
@@ -160,6 +165,11 @@ export default {
             }
         },
 
+        /**
+         * Registers modal actions when the modal is opened.
+         *
+         * Emits an `open` event on completion.
+         */
         open () {
             if (this.hasOpened) return;
 
@@ -179,7 +189,7 @@ export default {
                     'video:not([tabindex^="-"]):not([inert])',
                     '[contenteditable]:not([tabindex^="-"]):not([inert])',
                     '[tabindex]:not([tabindex^="-"]):not([inert])'
-                ].join(',');
+                ].join();
 
                 const {
                     megaModal,
@@ -212,12 +222,24 @@ export default {
             this.$emit('open');
         },
 
+        /**
+         * Closes the modal when the user clicks the overlay if configuration allows.
+         */
         overlayClose () {
             if (this.closeOnBlur) {
                 this.close();
             }
         },
 
+        /**
+         * Unregisters modal actions when the modal is closed.
+         *
+         * Emits an `close` event on completion.
+         *
+         * @param {Object} e Event object.
+         * @param {Object} options - Close method options.
+         * @param {Boolean} options.emit - Controls whether or not the `close` event be emitted.
+         */
         close (e, { emit = true } = {}) {
             if (!this.hasOpened) return;
 
