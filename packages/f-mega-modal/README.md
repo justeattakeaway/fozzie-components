@@ -125,6 +125,32 @@ The props that can be defined are as follows:
 | `open` | This event is emitted when the modal is opened. |
 | `close` | This event is emitted when the modal is closed. |
 
+You can add event listeners for these like so
+
+```js
+<template>
+  <mega-modal
+    @open="onModalOpen"
+    @close="onModalClose">
+    <p>Modal content</p>
+  </mega-modal>
+</template>
+
+<script>
+export default {
+  methods: {
+    onModalOpen () {
+      // Do stuff here
+    },
+
+    onModalClose () {
+      // Do stuff here
+    }
+  }
+}
+</script>
+```
+
 ## Development
 
 Start by cloning the repository and installing the required dependencies:
