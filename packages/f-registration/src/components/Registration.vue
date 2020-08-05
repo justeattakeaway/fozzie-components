@@ -36,7 +36,19 @@
                         v-if="shouldShowFirstNameRequiredError"
                         :class="$style['o-form-error']">
                         <warning-icon :class="$style['o-form-error-icon']" />
-                        Please enter your first name
+                        Please include your first name
+                    </p>
+                    <p
+                        v-if="shouldShowFirstNameMaxLengthError"
+                        :class="$style['o-form-error']">
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        First name exceeds 50 chars
+                    </p>
+                    <p
+                        v-if="shouldShowFirstNameInvalidCharError"
+                        :class="$style['o-form-error']">
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        Name should only contain letters, hyphens or apostrophes
                     </p>
                 </template>
             </form-field>
@@ -53,7 +65,13 @@
                         v-if="shouldShowLastNameRequiredError"
                         :class="$style['o-form-error']">
                         <warning-icon :class="$style['o-form-error-icon']" />
-                        Please enter your last name
+                        Please include your last name
+                    </p>
+                    <p
+                        v-if="shouldShowLastNameMaxLengthError"
+                        :class="$style['o-form-error']">
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        Last name exceeds 50 chars
                     </p>
                 </template>
             </form-field>
@@ -119,7 +137,7 @@
 <script>
 import { globalisationServices } from '@justeat/f-services';
 import { validationMixin } from 'vuelidate';
-import { required, email } from 'vuelidate/lib/validators';
+import { required, email, maxLength } from 'vuelidate/lib/validators';
 import { WarningIcon } from '@justeat/f-vue-icons';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
@@ -129,6 +147,14 @@ import FormButton from './Button.vue';
 import tenantConfigs from '../tenants';
 import RegistrationServiceApi from '../services/RegistrationServiceApi';
 import EventNames from '../event-names';
+
+// Returns true if there are no invalid chars in value. Valid chars are: a-z, A-Z, apostrophe, hyphen
+const validCharsInName = value => {
+    if (typeof value === 'undefined' || value === null || value === '') {
+        return true;
+    }
+    return /^[a-zA-Z'-]*$/.test(value);
+};
 
 export default {
     name: 'Registration',
@@ -190,7 +216,13 @@ export default {
     computed: {
         // Returns true if required validation conditions are not met and if the field has been `touched` by a user
         shouldShowFirstNameRequiredError () {
-            return (this.$v.firstName.$invalid && !this.$v.firstName.required) && this.$v.firstName.$dirty;
+            return this.$v.firstName.$invalid && !this.$v.firstName.required && this.$v.firstName.$dirty;
+        },
+        shouldShowFirstNameMaxLengthError () {
+            return this.$v.firstName.$invalid && !this.$v.firstName.maxLength && this.$v.firstName.$dirty;
+        },
+        shouldShowFirstNameInvalidCharError () {
+            return this.$v.firstName.$invalid && !this.$v.firstName.validCharsInName && this.$v.firstName.$dirty;
         },
         // Returns true if required validation conditions are not met and if the field has been `touched` by a user
         shouldShowLastNameRequiredError () {
@@ -215,10 +247,13 @@ export default {
 
     validations: {
         firstName: {
-            required
+            required,
+            maxLength: maxLength(50),
+            validCharsInName
         },
         lastName: {
-            required
+            required,
+            maxLength: maxLength(50)
         },
         email: {
             required,
