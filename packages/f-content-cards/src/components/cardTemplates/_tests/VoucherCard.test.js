@@ -11,10 +11,8 @@ const cardType = 'Voucher_Card_1';
 
 const card = {
     url: 'https://foo.com/bar',
-    extras: {
-        voucher_code: code, // eslint-disable-line camelcase
-        custom_card_type: cardType // eslint-disable-line camelcase
-    }
+    voucherCode: code,
+    type: cardType
 };
 
 const copy = {

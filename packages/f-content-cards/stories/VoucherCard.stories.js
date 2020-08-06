@@ -7,14 +7,14 @@ export default {
     decorators: [withKnobs, withA11y]
 };
 
-function voucherCard (cardType, title, imageUrl, description, voucherCode, icon1, line3) {
+function voucherCard (cardType, title, imageUrl, subtitle, voucherCode, icon1, line3) {
     return {
         card: {
             id: 'NWU1NTJjMWU2YThkNjM0ODllYzE3OGI5XyRfY2M9ZDg1MzM1ODktM2IyMC0xZmJkLWYwMzEtMTE5MjNjYjhiMjcyJm12PTVlNTUyYzFlNmE4ZDYzNDg5ZWMxNzhiZCZwaT1jbXA=',
             viewed: false,
             title,
             imageUrl,
-            description,
+            subtitle,
             created: null,
             updated: '2020-02-25T14:21:15.000Z',
             categories: [],
@@ -22,14 +22,12 @@ function voucherCard (cardType, title, imageUrl, description, voucherCode, icon1
             url: 'https://www.just-eat.co.uk/area/s637jj',
             linkText: 'www.just-eat.co.uk',
             aspectRatio: 1,
-            extras: {
-                order: '1',
-                image_1: imageUrl, // eslint-disable-line
-                voucher_code: voucherCode, // eslint-disable-line
-                icon_1: icon1, // eslint-disable-line
-                line_3: line3, // eslint-disable-line
-                custom_card_type: cardType // eslint-disable-line
-            },
+            order: '1',
+            image: imageUrl,
+            voucherCode,
+            icon: icon1,
+            description: [line3],
+            type: cardType,
             pinned: false,
             dismissible: true,
             dismissed: false,
@@ -52,8 +50,8 @@ export const VoucherCardcomponent = () => ({
         cardTitle: {
             default: text('Card Title', ' Aliquam et aliquam et.')
         },
-        description: {
-            default: text('Card Description', 'Voluptas sint id pariatur.')
+        subtitle: {
+            default: text('Card Subtitle', 'Voluptas sint id pariatur.')
         },
         image: {
             default: text('Card Image', 'https://picsum.photos/seed/VoucherCard_image/384/216?blur=3')
