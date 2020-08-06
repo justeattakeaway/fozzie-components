@@ -109,8 +109,8 @@ The props that can be defined are as follows:
 | `is-narrow` | `Boolean` | `false` | Use the narrow visual style. |
 | `is-wide` | `Boolean` | `false` | Use the wide visual style. |
 | `is-flush` | `Boolean` | `false` | Removes passing around the modal content. |
-| `is-full-height` | `Boolean` | `false` | Sets the modal content to full height of the screen. |
-| `is-scrollable` | `Boolean` | `false` | Makes the modal content scrollable.<br/><br/><blockquote>Note this only applies to small screen devices.</blockquote> |
+| `is-full-height` | `Boolean` | `false` | Sets the modal content to full height of the screen.<br/><br/><blockquote>Note this only applies to small screen devices.</blockquote> |
+| `is-scrollable` | `Boolean` | `false` | Makes the modal content scrollable. |
 | `is-close-fixed` | `Boolean` | `false` | Sets the modal close button position to `fixed`. |
 | `is-close-rounded` | `Boolean` | `false` | Sets the modal close button to display in a rounded style. |
 | `has-overlay` | `Boolean` | `true` | Controls whether or not to display an overlay behind the modal. |

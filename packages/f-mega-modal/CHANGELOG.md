@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.2.0
+------------------------------
+*August 6, 2020*
+
+### Added
+- Data attributes which can be used to hook onto with CSS or JS.
+
+### Changed
+- Tidied up close button styles.
+- Use Fozzie colour aliases where possible.
+
+### Fixed
+- Spelling mistaxe.
+- Moved config comment to correct prop.
+
+
 v0.1.0
 ------------------------------
 *August 5, 2020*
@@ -14,4 +30,3 @@ v0.1.0
 - Storybook config.
 - Unit tests.
 - Readme content.
-

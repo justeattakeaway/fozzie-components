@@ -1,6 +1,7 @@
 <template>
     <div
         ref="megaModal"
+        data-megamodal
         :class="[$style['c-megaModal'], {
             [$style['u-overlay']]: showOverlay
         }]"
@@ -8,6 +9,8 @@
         @click.self="overlayClose">
         <div
             ref="megaModalContent"
+            data-megamodal-content
+            :data-megamodal-content-visible="isOpen"
             :class="[$style['c-megaModal-content'], {
                 [$style['c-megaModal-content--visible']]: isOpen,
                 [$style['c-megaModal-content--narrow']]: isNarrow,
@@ -18,6 +21,7 @@
             role="dialog">
             <div
                 ref="megaModalDocument"
+                data-megamodal-document
                 :class="{
                     [$style['c-megaModal-document--scrollable']]: isScrollable
                 }"
@@ -27,7 +31,7 @@
                     name="close-button">
                     <button
                         type="button"
-                        :class="['o-btn--icon', $style['c-megaModal-closeBtn'], {
+                        :class="['u-ir', $style['c-megaModal-closeBtn'], {
                             [$style['c-megaModal-closeBtn--rounded']]: isCloseRounded,
                             [$style['c-megaModal-closeBtn--fixed']]: isCloseFixed || isFullHeight
                         }]"
@@ -152,12 +156,12 @@ export default {
                 const isLastElement = activeElement === this.lastFocusableEl;
 
                 if (e.shiftKey && isFirstElement) {
-                    // If focused on first item and user preses back-tab, go to the last focusable item
+                    // If focused on first item and user presses back-tab, go to the last focusable item
                     this.lastFocusableEl.focus();
 
                     e.preventDefault();
                 } else if (!e.shiftKey && isLastElement) {
-                    // If focused on the last item and user preses tab, go to the first focusable item
+                    // If focused on the last item and user presses tab, go to the first focusable item
                     this.firstFocusableEl.focus();
 
                     e.preventDefault();
@@ -281,7 +285,7 @@ export default {
 }
 
 .c-megaModal-content {
-    background-color: $white;
+    background-color: $color-bg--component;
     border-radius: $border-radius;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.12);
     display: none;
@@ -364,10 +368,6 @@ export default {
         background-color: $white;
         border-radius: 50%;
         opacity: 0.9;
-
-        &:hover {
-            background-color: $white;
-        }
     }
 
     .c-megaModal-closeBtn--fixed {
