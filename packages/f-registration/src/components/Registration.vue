@@ -155,17 +155,12 @@ import RegistrationServiceApi from '../services/RegistrationServiceApi';
 import EventNames from '../event-names';
 
 /**
- * Returns Tests for existence of valid chars only. Valid chars are: '', a-z, A-Z, apostrophe, hyphen
+ * Tests for existence of valid chars only in a string.
  *
  * @param {string} value The string to test.
  * @return {boolean} True if there are no invalid chars in value, false otherwise.
  */
-const validCharsInName = value => {
-    if (typeof value === 'undefined' || value === null || value === '') {
-        return true;
-    }
-    return /^[a-zA-Z'-]*$/.test(value);
-};
+const meetsCharacterValidationRules = value => /^[\u0060\u00C0-\u00F6\u00F8-\u017Fa-zA-Z-' ]*$/.test(value);
 
 export default {
     name: 'Registration',
@@ -228,34 +223,36 @@ export default {
         /*
          * Validation methods return true if the validation conditions
          * have not been met and the field has been `touched` by a user.
+         * The $dirty boolean changes to true when the user has focused/lost
+         * focus on the input field.
          */
 
         shouldShowFirstNameRequiredError () {
-            return this.$v.firstName.$invalid && !this.$v.firstName.required && this.$v.firstName.$dirty;
+            return !this.$v.firstName.required && this.$v.firstName.$dirty;
         },
         shouldShowFirstNameMaxLengthError () {
-            return this.$v.firstName.$invalid && !this.$v.firstName.maxLength && this.$v.firstName.$dirty;
+            return !this.$v.firstName.maxLength && this.$v.firstName.$dirty;
         },
         shouldShowFirstNameInvalidCharError () {
-            return this.$v.firstName.$invalid && !this.$v.firstName.validCharsInName && this.$v.firstName.$dirty;
+            return !this.$v.firstName.meetsCharacterValidationRules && this.$v.firstName.$dirty;
         },
         shouldShowLastNameRequiredError () {
-            return this.$v.lastName.$invalid && !this.$v.lastName.required && this.$v.lastName.$dirty;
+            return !this.$v.lastName.required && this.$v.lastName.$dirty;
         },
         shouldShowLastNameMaxLengthError () {
-            return this.$v.lastName.$invalid && !this.$v.lastName.maxLength && this.$v.lastName.$dirty;
+            return !this.$v.lastName.maxLength && this.$v.lastName.$dirty;
         },
         shouldShowLastNameInvalidCharError () {
-            return this.$v.lastName.$invalid && !this.$v.lastName.validCharsInName && this.$v.lastName.$dirty;
+            return !this.$v.lastName.meetsCharacterValidationRules && this.$v.lastName.$dirty;
         },
         shouldShowEmailRequiredError () {
-            return (this.$v.email.$invalid && !this.$v.email.required) && this.$v.email.$dirty;
+            return !this.$v.email.required && this.$v.email.$dirty;
         },
         shouldShowEmailInvalidError () {
-            return (this.$v.email.$invalid && !this.$v.email.email) && this.$v.email.$dirty;
+            return !this.$v.email.email && this.$v.email.$dirty;
         },
         shouldShowPasswordRequiredError () {
-            return (this.$v.password.$invalid && !this.$v.password.required) && this.$v.password.$dirty;
+            return !this.$v.password.required && this.$v.password.$dirty;
         },
         shouldShowLoginLink () {
             return this.loginSettings && this.loginSettings.linkText && this.loginSettings.url;
@@ -266,12 +263,12 @@ export default {
         firstName: {
             required,
             maxLength: maxLength(50),
-            validCharsInName
+            meetsCharacterValidationRules
         },
         lastName: {
             required,
             maxLength: maxLength(50),
-            validCharsInName
+            meetsCharacterValidationRules
         },
         email: {
             required,

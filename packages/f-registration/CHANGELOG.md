@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.11.0
 ------------------------------
-*August 5, 2020*
+*August 6, 2020*
 
 ### Added
 - Validation on First name and Last name regarding max length and invalid characters
