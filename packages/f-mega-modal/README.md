@@ -120,7 +120,7 @@ The props that can be defined are as follows:
 
 ### CSS Classes
 
-The modal has it's own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
+The modal has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
 
 In addition to this, the modal exposes some classes which you can target in your application.
 
