@@ -1,16 +1,15 @@
 <template>
     <div
         ref="megaModal"
-        data-megamodal
-        :class="[$style['c-megaModal'], {
+        :class="['c-megaModal', $style['c-megaModal'], {
             [$style['u-overlay']]: showOverlay
         }]"
         :aria-hidden="!isOpen"
         @click.self="overlayClose">
         <div
             ref="megaModalContent"
-            data-megamodal-content
-            :class="[$style['c-megaModal-content'], {
+            :class="['c-megaModal-content', $style['c-megaModal-content'], {
+                'c-megaModal-content--visible': isOpen,
                 [$style['c-megaModal-content--visible']]: isOpen,
                 [$style['c-megaModal-content--narrow']]: isNarrow,
                 [$style['c-megaModal-content--wide']]: isWide,
@@ -20,22 +19,21 @@
             role="dialog">
             <div
                 ref="megaModalDocument"
-                data-megamodal-document
-                :class="{
+                :class="['c-megaModal-document', {
+                    'c-megaModal-document--scrollable': isScrollable,
                     [$style['c-megaModal-document--scrollable']]: isScrollable
-                }"
+                }]"
                 role="document">
                 <slot
                     v-if="hasCloseButton"
                     name="close-button">
                     <button
                         type="button"
-                        :class="['u-ir', $style['c-megaModal-closeBtn'], {
+                        :class="['c-megaModal-closeBtn u-ir', $style['c-megaModal-closeBtn'], {
                             [$style['c-megaModal-closeBtn--rounded']]: isCloseRounded,
                             [$style['c-megaModal-closeBtn--fixed']]: isCloseFixed || isFullHeight
                         }]"
                         data-test-id="close-modal"
-                        data-megamodal-close-button
                         @click="close">
                         <svg
                             :class="$style['c-megaModal-closeIcon']"

@@ -118,6 +118,21 @@ The props that can be defined are as follows:
 | `close-on-blur` | `Boolean` | `true` | Controls whether or not to close the modal when the user clicks outside of the modal. |
 | `close-button-copy` | `String` | `"Close modal"` | Sets the hidden text value for the close button which is used by screen-readers. |
 
+### CSS Classes
+
+The modal has it's own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
+
+In addition to this, the modal exposes some classes which you can target in your application.
+
+| Class | Description |
+| ----- | ----------- |
+| `c-megaModal` | Can be used to target the modal wrapper element. |
+| `c-megaModal-content` | Can be used to target the modal content element. |
+| `c-megaModal-content--visible` | Can be used to target the modal content element when it is visible. |
+| `c-megaModal-document` | Can be used to target the modal document element. |
+| `c-megaModal-document--scrollable` | Can be used to target the modal document element when it is scrollable. |
+| `c-megaModal-closeBtn` | Can be used to target the modal close button element. |
+
 ### Events
 
 | Event | Description |

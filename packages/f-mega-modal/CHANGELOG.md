@@ -9,7 +9,7 @@ v0.2.0
 *August 6, 2020*
 
 ### Added
-- Data attributes which can be used to hook onto with CSS or JS.
+- CSS classes which can be targeted in a consuming application..
 
 ### Changed
 - Tidied up close button styles.
