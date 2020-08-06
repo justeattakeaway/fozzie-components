@@ -304,7 +304,6 @@ export default {
     @include media('>=mid') {
         max-height: 90vh;
         max-width: 600px;
-        overflow: hidden;
         padding: spacing(x5);
     }
 }
