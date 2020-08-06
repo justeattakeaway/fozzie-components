@@ -41,7 +41,6 @@ v1.5.0
 - Associated stories for Voucher and Anniversary card types
 - I18n config for 'Copy Code' button
 - `locale` prop to enable above to take effect
->>>>>>> master
 
 
 v1.4.0
