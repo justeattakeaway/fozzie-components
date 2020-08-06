@@ -36,7 +36,19 @@
                         v-if="shouldShowFirstNameRequiredError"
                         :class="$style['o-form-error']">
                         <warning-icon :class="$style['o-form-error-icon']" />
-                        Please enter your first name
+                        Please include your first name
+                    </p>
+                    <p
+                        v-if="shouldShowFirstNameMaxLengthError"
+                        :class="$style['o-form-error']">
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        First name exceeds 50 characters
+                    </p>
+                    <p
+                        v-if="shouldShowFirstNameInvalidCharError"
+                        :class="$style['o-form-error']">
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        First name should only contain letters, hyphens or apostrophes
                     </p>
                 </template>
             </form-field>
@@ -53,7 +65,19 @@
                         v-if="shouldShowLastNameRequiredError"
                         :class="$style['o-form-error']">
                         <warning-icon :class="$style['o-form-error-icon']" />
-                        Please enter your last name
+                        Please include your last name
+                    </p>
+                    <p
+                        v-if="shouldShowLastNameMaxLengthError"
+                        :class="$style['o-form-error']">
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        Last name exceeds 50 characters
+                    </p>
+                    <p
+                        v-if="shouldShowLastNameInvalidCharError"
+                        :class="$style['o-form-error']">
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        Last name should only contain letters, hyphens or apostrophes
                     </p>
                 </template>
             </form-field>
@@ -119,7 +143,7 @@
 <script>
 import { globalisationServices } from '@justeat/f-services';
 import { validationMixin } from 'vuelidate';
-import { required, email } from 'vuelidate/lib/validators';
+import { required, email, maxLength } from 'vuelidate/lib/validators';
 import { WarningIcon } from '@justeat/f-vue-icons';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
@@ -129,6 +153,14 @@ import FormButton from './Button.vue';
 import tenantConfigs from '../tenants';
 import RegistrationServiceApi from '../services/RegistrationServiceApi';
 import EventNames from '../event-names';
+
+/**
+ * Tests for existence of valid chars only in a string.
+ *
+ * @param {string} value The string to test.
+ * @return {boolean} True if there are no invalid chars in value, false otherwise.
+ */
+const meetsCharacterValidationRules = value => /^[\u0060\u00C0-\u00F6\u00F8-\u017Fa-zA-Z-' ]*$/.test(value);
 
 export default {
     name: 'Registration',
@@ -188,25 +220,39 @@ export default {
     },
 
     computed: {
-        // Returns true if required validation conditions are not met and if the field has been `touched` by a user
+        /*
+         * Validation methods return true if the validation conditions
+         * have not been met and the field has been `touched` by a user.
+         * The $dirty boolean changes to true when the user has focused/lost
+         * focus on the input field.
+         */
+
         shouldShowFirstNameRequiredError () {
-            return (this.$v.firstName.$invalid && !this.$v.firstName.required) && this.$v.firstName.$dirty;
+            return !this.$v.firstName.required && this.$v.firstName.$dirty;
         },
-        // Returns true if required validation conditions are not met and if the field has been `touched` by a user
+        shouldShowFirstNameMaxLengthError () {
+            return !this.$v.firstName.maxLength && this.$v.firstName.$dirty;
+        },
+        shouldShowFirstNameInvalidCharError () {
+            return !this.$v.firstName.meetsCharacterValidationRules && this.$v.firstName.$dirty;
+        },
         shouldShowLastNameRequiredError () {
-            return (this.$v.lastName.$invalid && !this.$v.lastName.required) && this.$v.lastName.$dirty;
+            return !this.$v.lastName.required && this.$v.lastName.$dirty;
         },
-        // Returns true if required validation conditions are not met and if the field has been `touched` by a user
+        shouldShowLastNameMaxLengthError () {
+            return !this.$v.lastName.maxLength && this.$v.lastName.$dirty;
+        },
+        shouldShowLastNameInvalidCharError () {
+            return !this.$v.lastName.meetsCharacterValidationRules && this.$v.lastName.$dirty;
+        },
         shouldShowEmailRequiredError () {
-            return (this.$v.email.$invalid && !this.$v.email.required) && this.$v.email.$dirty;
+            return !this.$v.email.required && this.$v.email.$dirty;
         },
-        // Returns true if email validation conditions are not met and if the field has been `touched` by a user
         shouldShowEmailInvalidError () {
-            return (this.$v.email.$invalid && !this.$v.email.email) && this.$v.email.$dirty;
+            return !this.$v.email.email && this.$v.email.$dirty;
         },
-        // Returns true if email validation conditions are not met and if the field has been `touched` by a user
         shouldShowPasswordRequiredError () {
-            return (this.$v.password.$invalid && !this.$v.password.required) && this.$v.password.$dirty;
+            return !this.$v.password.required && this.$v.password.$dirty;
         },
         shouldShowLoginLink () {
             return this.loginSettings && this.loginSettings.linkText && this.loginSettings.url;
@@ -215,10 +261,14 @@ export default {
 
     validations: {
         firstName: {
-            required
+            required,
+            maxLength: maxLength(50),
+            meetsCharacterValidationRules
         },
         lastName: {
-            required
+            required,
+            maxLength: maxLength(50),
+            meetsCharacterValidationRules
         },
         email: {
             required,

@@ -189,5 +189,159 @@ describe('Registration', () => {
                 wrapper.destroy();
             }
         });
+
+        it('should show error message and emit failure event when the first name field is not populated', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowFirstNameRequiredError).toBe(true);
+                expect(wrapper.vm.shouldShowFirstNameMaxLengthError).toBe(false);
+                expect(wrapper.vm.shouldShowFirstNameInvalidCharError).toBe(false);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show error message and emit failure event when the first name field is populated with invalid input', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                wrapper.find('[data-test-id="input-first-name"]').setValue('wh4t @ w3!rd |\\|ame');
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowFirstNameRequiredError).toBe(false);
+                expect(wrapper.vm.shouldShowFirstNameMaxLengthError).toBe(false);
+                expect(wrapper.vm.shouldShowFirstNameInvalidCharError).toBe(true);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show error message and emit failure event when the first name field is populated with too long an input', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                const longValue = 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij';
+                wrapper.find('[data-test-id="input-first-name"]').setValue(longValue);
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowFirstNameRequiredError).toBe(false);
+                expect(wrapper.vm.shouldShowFirstNameMaxLengthError).toBe(true);
+                expect(wrapper.vm.shouldShowFirstNameInvalidCharError).toBe(false);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show error message and emit failure event when the last name field is not populated', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                wrapper.find('[data-test-id="input-first-name"]').setValue('Adam');
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowLastNameRequiredError).toBe(true);
+                expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(false);
+                expect(wrapper.vm.shouldShowLastNameInvalidCharError).toBe(false);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show error message and emit failure event when the last name field is populated with invalid input', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                wrapper.find('[data-test-id="input-last-name"]').setValue('wh4t @ w3!rd |\\|ame');
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowLastNameRequiredError).toBe(false);
+                expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(false);
+                expect(wrapper.vm.shouldShowLastNameInvalidCharError).toBe(true);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show error message and emit failure event when the last name field is populated with too long an input', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                const longValue = 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij';
+                wrapper.find('[data-test-id="input-last-name"]').setValue(longValue);
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowLastNameRequiredError).toBe(false);
+                expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(true);
+                expect(wrapper.vm.shouldShowLastNameInvalidCharError).toBe(false);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show not error messages and emit success event when the name fields are populated correctly', async () => {
+            // Arrange
+            RegistrationServiceApi.createAccount.mockImplementation(async () => Promise.resolve());
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                wrapper.find('[data-test-id="input-first-name"]').setValue('James');
+                wrapper.find('[data-test-id="input-last-name"]').setValue('O\'Neil-Wight');
+                wrapper.find('[data-test-id="input-email"]').setValue('ashton.adamms+jetest@just-eat.com');
+                wrapper.find('[data-test-id="input-password"]').setValue('Secure123');
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowFirstNameRequiredError).toBe(false);
+                expect(wrapper.vm.shouldShowFirstNameMaxLengthError).toBe(false);
+                expect(wrapper.vm.shouldShowFirstNameInvalidCharError).toBe(false);
+                expect(wrapper.vm.shouldShowLastNameRequiredError).toBe(false);
+                expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(false);
+                expect(wrapper.vm.shouldShowLastNameInvalidCharError).toBe(false);
+                expect(wrapper.emitted(EventNames.CreateAccountSuccess).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
     });
 });
