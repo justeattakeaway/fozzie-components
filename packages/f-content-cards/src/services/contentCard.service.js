@@ -137,6 +137,17 @@ class ContentCards {
     }
 
     /**
+     * Limits cards to the given card count limit.
+     * @param {Number} limit - Content card count limit
+     * @property {Object[]} this.cards
+     * @returns {ContentCards}
+     */
+    applyCardLimit (limit) {
+        this.cards = limit > -1 ? this.cards.splice(0, limit) : this.cards;
+        return this;
+    }
+
+    /**
      * Log Braze event and flush queue
      * @param {String} type - Event type (check braze sdk for log types)
      * @param {Object[]} payload - Event payload
