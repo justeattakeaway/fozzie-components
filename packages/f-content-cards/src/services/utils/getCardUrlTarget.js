@@ -6,7 +6,7 @@ const getCardUrlTarget = cardUrl => {
         const openInNewWindow = !internalDomains.some(partial => url.hostname.indexOf(partial) > -1);
         return openInNewWindow ? {
             attribute: '_blank',
-            rel: 'noopener noreferrer'
+            rel: 'noopener'
         } : {
             attribute: '_self'
         };

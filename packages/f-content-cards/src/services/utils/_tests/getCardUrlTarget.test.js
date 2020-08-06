@@ -23,7 +23,7 @@ describe('services › utils › getCardUrlTarget', () => {
 
         // Assert
         expect(attribute).toBe('_blank');
-        expect(rel).toBe('noopener noreferrer');
+        expect(rel).toBe('noopener');
     });
 
     it('should default to _blank if URL fails to parse', () => {
