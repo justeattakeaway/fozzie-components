@@ -83,7 +83,7 @@ export const VoucherCardcomponent = () => ({
             this.cardTitle,
             this.voucherCode,
             this.icon,
-            this.description
+            this.subtitle
         );
     },
 
@@ -106,7 +106,7 @@ export const AnniversaryCardcomponent = () => ({
         cardTitle: {
             default: text('Card Title', 'Aspernatur ipsum sunt omnis cum veritatis cumque animi.')
         },
-        description: {
+        subtitle: {
             default: text('Card Description', 'Nemo quasi vitae omnis aliquid deserunt ut saepe.')
         },
         image: {
@@ -136,7 +136,7 @@ export const AnniversaryCardcomponent = () => ({
             this.cardTitle,
             this.voucherCode,
             this.icon,
-            this.description
+            this.subtitle
         );
     },
 
