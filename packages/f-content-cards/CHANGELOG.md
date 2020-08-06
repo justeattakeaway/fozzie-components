@@ -4,12 +4,44 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v1.6.0
+v1.8.0
 ------------------------------
-*July 29, 2020*
+*August 6, 2020*
 
 ### Changed
 - Transform incoming Braze SDK data at source to avoid manipulations throughout the component tree.
+
+
+v1.7.0
+------------------------------
+*August 4, 2020*
+
+### Added
+- `limitCards` prop which applies a hard limit to the content card count
+
+
+v1.6.0
+------------------------------
+*July 31, 2020*
+
+### Added
+- Added the following event emitters:
+    - `@on-braze-init`
+    - `@get-card-count`
+    - `@has-loaded`
+    - `@on-error`
+
+
+v1.5.0
+------------------------------
+*July 31, 2020*
+
+### Added
+- `VoucherCard` component from HomeWeb's Offer page
+- Associated stories for Voucher and Anniversary card types
+- I18n config for 'Copy Code' button
+- `locale` prop to enable above to take effect
+>>>>>>> master
 
 
 v1.4.0

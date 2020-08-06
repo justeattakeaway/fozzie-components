@@ -358,4 +358,30 @@ describe('`contentCardService`', () => {
             });
         });
     });
+
+    describe('`applyCardLimit` method', () => {
+        it('should retain all cards if count is -1', () => {
+            const cards = new Array(10).map((card, i) => ({
+                title: `__CARD_${i}__ `
+            }));
+
+            const { cards: output } = new ContentCardService({ cards })
+                .applyCardLimit(-1)
+                .output();
+
+            expect(output).toEqual(cards);
+        });
+
+        it('should limit cards by the given count', () => {
+            const cards = new Array(10).map((card, i) => ({
+                title: `__CARD_${i}__ `
+            }));
+
+            const { cards: output } = new ContentCardService({ cards })
+                .applyCardLimit(4)
+                .output();
+
+            expect(output).toHaveLength(4);
+        });
+    });
 });

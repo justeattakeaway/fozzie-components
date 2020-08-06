@@ -1,12 +1,12 @@
 {
-  "name": "@justeat/f-content-cards",
-  "description": "Fozzie Content Cards",
-  "version": "1.7.0",
-  "main": "dist/f-content-cards.umd.min.js",
+  "name": "@justeat/f-mega-modal",
+  "description": "Fozzie Mega Modal – A Vue.js modal component",
+  "version": "0.1.0",
+  "main": "dist/f-mega-modal.common.js",
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-content-cards",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-mega-modal",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -26,36 +26,24 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-content-cards ./src/index.js",
-    "demo": "vue serve --open ./src/demo/Index.vue",
-    "lint": "vue-cli-service lint --no-fix",
+    "build": "vue-cli-service build --target lib --name f-mega-modal ./src/index.js",
+    "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
-  "dependencies": {
-    "@justeat/f-services": "1.0.1",
-    "core-js": "3.6.5",
-    "lodash.findindex": "4.6.0",
-    "lodash.orderby": "4.6.0"
-  },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
-    "vue": "2.x"
+    "body-scroll-lock": "3.x"
   },
   "devDependencies": {
-    "@justeat/f-metadata": "2.8.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
-    "copy-to-clipboard": "3.3.1",
-    "crypto-js": "4.0.0",
-    "faker": "4.1.0",
-    "node-sass-magic-importer": "5.3.2",
-    "vue": "2.6.10",
-    "xhr-mock": "2.5.1"
+    "body-scroll-lock": "3.0.3",
+    "node-sass-magic-importer": "5.3.2"
   }
 }

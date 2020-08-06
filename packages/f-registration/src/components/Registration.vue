@@ -242,18 +242,22 @@ export default {
                 const registrationData = {
                     firstName: this.firstName,
                     lastName: this.lastName,
-                    email: this.email,
+                    emailAddress: this.email,
                     password: this.password
                 };
                 await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData);
                 this.$emit(EventNames.CreateAccountSuccess);
             } catch (error) {
-                const thrownErrors = error.Errors || error;
+                let thrownErrors = error;
+                if (error && error.response && error.response.data && error.response.data.errors) {
+                    thrownErrors = error.response.data.errors;
+                }
+
                 if (Array.isArray(thrownErrors)) {
-                    if (thrownErrors.some(thrownError => thrownError.ErrorCode === '409')) {
+                    if (thrownErrors.some(thrownError => thrownError.errorCode === '409')) {
                         this.shouldShowEmailAlreadyExistsError = true;
                     } else {
-                        this.genericErrorMessage = thrownErrors[0].Description || 'Something went wrong, please try again later';
+                        this.genericErrorMessage = thrownErrors[0].description || 'Something went wrong, please try again later';
                     }
                 } else {
                     this.genericErrorMessage = error;
