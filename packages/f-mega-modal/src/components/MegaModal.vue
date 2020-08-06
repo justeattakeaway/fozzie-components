@@ -1,14 +1,15 @@
 <template>
     <div
         ref="megaModal"
-        :class="[$style['c-megaModal'], {
+        :class="['c-megaModal', $style['c-megaModal'], {
             [$style['u-overlay']]: showOverlay
         }]"
         :aria-hidden="!isOpen"
         @click.self="overlayClose">
         <div
             ref="megaModalContent"
-            :class="[$style['c-megaModal-content'], {
+            :class="['c-megaModal-content', $style['c-megaModal-content'], {
+                'c-megaModal-content--visible': isOpen,
                 [$style['c-megaModal-content--visible']]: isOpen,
                 [$style['c-megaModal-content--narrow']]: isNarrow,
                 [$style['c-megaModal-content--wide']]: isWide,
@@ -18,16 +19,17 @@
             role="dialog">
             <div
                 ref="megaModalDocument"
-                :class="{
+                :class="['c-megaModal-document', {
+                    'c-megaModal-document--scrollable': isScrollable,
                     [$style['c-megaModal-document--scrollable']]: isScrollable
-                }"
+                }]"
                 role="document">
                 <slot
                     v-if="hasCloseButton"
                     name="close-button">
                     <button
                         type="button"
-                        :class="['o-btn--icon', $style['c-megaModal-closeBtn'], {
+                        :class="['c-megaModal-closeBtn u-ir', $style['c-megaModal-closeBtn'], {
                             [$style['c-megaModal-closeBtn--rounded']]: isCloseRounded,
                             [$style['c-megaModal-closeBtn--fixed']]: isCloseFixed || isFullHeight
                         }]"
@@ -152,12 +154,12 @@ export default {
                 const isLastElement = activeElement === this.lastFocusableEl;
 
                 if (e.shiftKey && isFirstElement) {
-                    // If focused on first item and user preses back-tab, go to the last focusable item
+                    // If focused on first item and user presses back-tab, go to the last focusable item
                     this.lastFocusableEl.focus();
 
                     e.preventDefault();
                 } else if (!e.shiftKey && isLastElement) {
-                    // If focused on the last item and user preses tab, go to the first focusable item
+                    // If focused on the last item and user presses tab, go to the first focusable item
                     this.firstFocusableEl.focus();
 
                     e.preventDefault();
@@ -281,7 +283,7 @@ export default {
 }
 
 .c-megaModal-content {
-    background-color: $white;
+    background-color: $color-bg--component;
     border-radius: $border-radius;
     box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.12);
     display: none;
@@ -364,10 +366,6 @@ export default {
         background-color: $white;
         border-radius: 50%;
         opacity: 0.9;
-
-        &:hover {
-            background-color: $white;
-        }
     }
 
     .c-megaModal-closeBtn--fixed {

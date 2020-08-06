@@ -109,14 +109,29 @@ The props that can be defined are as follows:
 | `is-narrow` | `Boolean` | `false` | Use the narrow visual style. |
 | `is-wide` | `Boolean` | `false` | Use the wide visual style. |
 | `is-flush` | `Boolean` | `false` | Removes passing around the modal content. |
-| `is-full-height` | `Boolean` | `false` | Sets the modal content to full height of the screen. |
-| `is-scrollable` | `Boolean` | `false` | Makes the modal content scrollable.<br/><br/><blockquote>Note this only applies to small screen devices.</blockquote> |
+| `is-full-height` | `Boolean` | `false` | Sets the modal content to full height of the screen.<br/><br/><blockquote>Note this only applies to small screen devices.</blockquote> |
+| `is-scrollable` | `Boolean` | `false` | Makes the modal content scrollable. |
 | `is-close-fixed` | `Boolean` | `false` | Sets the modal close button position to `fixed`. |
 | `is-close-rounded` | `Boolean` | `false` | Sets the modal close button to display in a rounded style. |
 | `has-overlay` | `Boolean` | `true` | Controls whether or not to display an overlay behind the modal. |
 | `has-close-button` | `Boolean` | `true` | Controls whether or not to display the modal close button. |
 | `close-on-blur` | `Boolean` | `true` | Controls whether or not to close the modal when the user clicks outside of the modal. |
 | `close-button-copy` | `String` | `"Close modal"` | Sets the hidden text value for the close button which is used by screen-readers. |
+
+### CSS Classes
+
+The modal has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
+
+In addition to this, the modal exposes some classes which you can target in your application.
+
+| Class | Description |
+| ----- | ----------- |
+| `c-megaModal` | Can be used to target the modal wrapper element. |
+| `c-megaModal-content` | Can be used to target the modal content element. |
+| `c-megaModal-content--visible` | Can be used to target the modal content element when it is visible. |
+| `c-megaModal-document` | Can be used to target the modal document element. |
+| `c-megaModal-document--scrollable` | Can be used to target the modal document element when it is scrollable. |
+| `c-megaModal-closeBtn` | Can be used to target the modal close button element. |
 
 ### Events
 
