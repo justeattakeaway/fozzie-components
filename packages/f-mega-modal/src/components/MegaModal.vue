@@ -10,7 +10,6 @@
         <div
             ref="megaModalContent"
             data-megamodal-content
-            :data-megamodal-content-visible="isOpen"
             :class="[$style['c-megaModal-content'], {
                 [$style['c-megaModal-content--visible']]: isOpen,
                 [$style['c-megaModal-content--narrow']]: isNarrow,
@@ -36,6 +35,7 @@
                             [$style['c-megaModal-closeBtn--fixed']]: isCloseFixed || isFullHeight
                         }]"
                         data-test-id="close-modal"
+                        data-megamodal-close-button
                         @click="close">
                         <svg
                             :class="$style['c-megaModal-closeIcon']"
