@@ -42,7 +42,7 @@
                         v-if="shouldShowFirstNameMaxLengthError"
                         :class="$style['o-form-error']">
                         <warning-icon :class="$style['o-form-error-icon']" />
-                        First name exceeds 50 chars
+                        First name exceeds 50 characters
                     </p>
                     <p
                         v-if="shouldShowFirstNameInvalidCharError"
@@ -71,7 +71,7 @@
                         v-if="shouldShowLastNameMaxLengthError"
                         :class="$style['o-form-error']">
                         <warning-icon :class="$style['o-form-error-icon']" />
-                        Last name exceeds 50 chars
+                        Last name exceeds 50 characters
                     </p>
                     <p
                         v-if="shouldShowLastNameInvalidCharError"
@@ -154,7 +154,12 @@ import tenantConfigs from '../tenants';
 import RegistrationServiceApi from '../services/RegistrationServiceApi';
 import EventNames from '../event-names';
 
-// Returns true if there are no invalid chars in value. Valid chars are: a-z, A-Z, apostrophe, hyphen
+/**
+ * Returns Tests for existence of valid chars only. Valid chars are: '', a-z, A-Z, apostrophe, hyphen
+ *
+ * @param {string} value The string to test.
+ * @return {boolean} True if there are no invalid chars in value, false otherwise.
+ */
 const validCharsInName = value => {
     if (typeof value === 'undefined' || value === null || value === '') {
         return true;
@@ -220,8 +225,11 @@ export default {
     },
 
     computed: {
-        // Validation methods return true if the validation conditions
-        // have not been met and the field has been `touched` by a user.
+        /*
+         * Validation methods return true if the validation conditions
+         * have not been met and the field has been `touched` by a user.
+         */
+
         shouldShowFirstNameRequiredError () {
             return this.$v.firstName.$invalid && !this.$v.firstName.required && this.$v.firstName.$dirty;
         },

@@ -229,5 +229,27 @@ describe('Registration', () => {
                 wrapper.destroy();
             }
         });
+
+        it('should show error message and emit failure event when the last name field is populated with too long an input', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                const longValue = 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij';
+                wrapper.find('[data-test-id="input-last-name"]').setValue(longValue);
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowLastNameRequiredError).toBe(false);
+                expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(true);
+                expect(wrapper.vm.shouldShowLastNameInvalidCharError).toBe(false);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
     });
 });
