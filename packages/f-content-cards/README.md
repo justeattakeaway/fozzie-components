@@ -186,6 +186,13 @@ Indicates the test id attribute of the component root element.
 
 Whether or not to show a skeleton loading state whilst initialising Braze. Defaults to `true`.
 
+### `cardLimit`
+
+**Type:** number
+**Required:** false
+
+Limit the amount of cards to show. Defaults to `-1` which shows all cards.
+
 ## Events
 
 The following events can be emitted by the component, with the shape given:
