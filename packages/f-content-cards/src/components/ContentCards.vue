@@ -6,7 +6,7 @@
         <template
             v-for="(contentCard, cardIndex) in cards">
             <component
-                :is="handleCustomCardType(contentCard.extras.custom_card_type)"
+                :is="handleCustomCardType(contentCard.type)"
                 :key="`${cardIndex}_${contentCard.id}`"
                 :card="contentCard"
                 :title="title"
@@ -38,13 +38,10 @@ const createBrazeCardEvent = (contentAction, card) => {
     const {
         id: contentId,
         title: contentTitle,
-        extras = {}
-    } = card;
-    const {
         order: contentPosition,
-        button_1: contentCTA,
-        voucher_code: customVoucherCode
-    } = extras;
+        ctaText: contentCTA,
+        voucherCode: customVoucherCode
+    } = card;
 
     return {
         contentId,
@@ -119,6 +116,7 @@ export default {
 
         return {
             cards: [],
+            rawCards: [],
             copy: { ...localeConfig },
             titleCard: {},
             hasLoaded: false,
@@ -129,7 +127,7 @@ export default {
     watch: {
         cards (current, previous) {
             if (current.length && (current.length !== previous.length)) {
-                logCardImpressions(this.cards);
+                logCardImpressions(this.rawCards);
             }
         }
     },
@@ -179,7 +177,7 @@ export default {
 
         contentCards (appboy) {
             if (!appboy) return;
-            const { cards, titleCard } = new ContentCards(appboy, {
+            const { cards, rawCards, titleCard } = new ContentCards(appboy, {
                 enabledCardTypes: this.enabledCardTypes
             })
                 .removeDuplicateContentCards()
@@ -189,6 +187,7 @@ export default {
                 .applyCardLimit(this.cardLimit)
                 .output();
 
+            this.rawCards = rawCards;
             this.cards = cards;
             this.titleCard = titleCard;
             this.hasLoaded = true;

@@ -44,7 +44,7 @@ export const PostOrderCardcomponent = () => ({
                 viewed: false,
                 title: this.cardTitle,
                 imageUrl: null,
-                description: this.description,
+                subtitle: this.description,
                 created: null,
                 updated: '2020-02-25T14:21:15.000Z',
                 categories: [],
@@ -52,13 +52,11 @@ export const PostOrderCardcomponent = () => ({
                 url: 'https://www.just-eat.co.uk/area/s637jj',
                 linkText: 'www.just-eat.co.uk',
                 aspectRatio: 1,
-                extras: {
-                    order: '1',
-                    image_1: this.image, // eslint-disable-line
-                    button_1: this.cta, // eslint-disable-line
-                    icon_1: this.icon, // eslint-disable-line
-                    custom_card_type: 'Post_Order_Card_1' // eslint-disable-line
-                },
+                order: '1',
+                image: this.image,
+                ctaText: this.cta,
+                icon: this.icon,
+                type: 'Post_Order_Card_1',
                 pinned: false,
                 dismissible: true,
                 dismissed: false,

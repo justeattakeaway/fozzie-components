@@ -46,15 +46,13 @@ export default {
     },
     data () {
         const {
-            extras = {},
-            linkText
+            button,
+            ctaText,
+            type
         } = this.card;
-        const {
-            button_1: button,
-            custom_card_type: type
-        } = extras;
         return {
-            ctaText: button || linkText,
+            button,
+            ctaText,
             type
         };
     },
