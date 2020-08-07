@@ -64,22 +64,19 @@ export default {
     },
     data () {
         const {
-            extras = {},
-            imageUrl,
-            linkText
+            image,
+            ctaText,
+            button,
+            type,
+            icon
         } = this.card;
-        const {
-            button_1: button,
-            custom_card_type: type,
-            image_1: image,
-            icon_1: icon
-        } = extras;
 
         return {
-            ctaText: button || linkText,
-            icon,
-            image: image || imageUrl,
-            type
+            image,
+            ctaText,
+            button,
+            type,
+            icon
         };
     },
 

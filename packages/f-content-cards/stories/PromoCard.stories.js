@@ -41,11 +41,12 @@ function PromotionCardStoryGenerator (type) {
         data () {
             return {
                 card: {
+                    type,
                     id: 'NWU1NTJjMWU2YThkNjM0ODllYzE3OGI5XyRfY2M9ZDg1MzM1ODktM2IyMC0xZmJkLWYwMzEtMTE5MjNjYjhiMjcyJm12PTVlNTUyYzFlNmE4ZDYzNDg5ZWMxNzhiZCZwaT1jbXA=',
                     viewed: false,
                     title: this.cardTitle,
                     imageUrl: null,
-                    description: this.description,
+                    subtitle: this.description,
                     created: null,
                     updated: '2020-02-25T14:21:15.000Z',
                     categories: [],
@@ -53,13 +54,10 @@ function PromotionCardStoryGenerator (type) {
                     url: 'https://www.just-eat.co.uk/area/s637jj',
                     linkText: 'www.just-eat.co.uk',
                     aspectRatio: 1,
-                    extras: {
-                        order: '1',
-                        image_1: this.image, // eslint-disable-line
-                        button_1: this.cta, // eslint-disable-line
-                        icon_1: this.icon, // eslint-disable-line
-                        custom_card_type: type // eslint-disable-line
-                    },
+                    order: '1',
+                    image: this.image,
+                    ctaText: this.cta,
+                    icon: this.icon,
                     pinned: false,
                     dismissible: true,
                     dismissed: false,

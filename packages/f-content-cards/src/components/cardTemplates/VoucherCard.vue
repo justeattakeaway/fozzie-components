@@ -35,14 +35,10 @@ export default {
     },
 
     data () {
-        const { url, extras = {} } = this.card;
-        const {
-            voucher_code: code,
-            custom_card_type: cardType
-        } = extras;
+        const { url, voucherCode, type } = this.card;
         return {
-            cardType: normaliseCardType(cardType),
-            code,
+            cardType: normaliseCardType(type),
+            code: voucherCode,
             url
         };
     },
