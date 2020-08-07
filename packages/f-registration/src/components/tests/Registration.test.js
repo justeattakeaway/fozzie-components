@@ -304,7 +304,7 @@ describe('Registration', () => {
             }
         });
 
-        it('should show not error messages and emit success event when all fields are populated correctly', async () => {
+        it('should emit success event when all fields are populated correctly', async () => {
             // Arrange
             RegistrationServiceApi.createAccount.mockImplementation(async () => Promise.resolve());
             const wrapper = mountComponentAndAttachToDocument();
