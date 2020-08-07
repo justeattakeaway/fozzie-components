@@ -201,8 +201,6 @@ describe('Registration', () => {
 
                 // Assert
                 expect(wrapper.vm.shouldShowFirstNameRequiredError).toBe(true);
-                expect(wrapper.vm.shouldShowFirstNameMaxLengthError).toBe(false);
-                expect(wrapper.vm.shouldShowFirstNameInvalidCharError).toBe(false);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             } finally {
                 wrapper.destroy();
@@ -221,8 +219,6 @@ describe('Registration', () => {
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowFirstNameRequiredError).toBe(false);
-                expect(wrapper.vm.shouldShowFirstNameMaxLengthError).toBe(false);
                 expect(wrapper.vm.shouldShowFirstNameInvalidCharError).toBe(true);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             } finally {
@@ -243,9 +239,7 @@ describe('Registration', () => {
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowFirstNameRequiredError).toBe(false);
                 expect(wrapper.vm.shouldShowFirstNameMaxLengthError).toBe(true);
-                expect(wrapper.vm.shouldShowFirstNameInvalidCharError).toBe(false);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             } finally {
                 wrapper.destroy();
@@ -265,8 +259,6 @@ describe('Registration', () => {
 
                 // Assert
                 expect(wrapper.vm.shouldShowLastNameRequiredError).toBe(true);
-                expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(false);
-                expect(wrapper.vm.shouldShowLastNameInvalidCharError).toBe(false);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             } finally {
                 wrapper.destroy();
@@ -285,8 +277,6 @@ describe('Registration', () => {
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowLastNameRequiredError).toBe(false);
-                expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(false);
                 expect(wrapper.vm.shouldShowLastNameInvalidCharError).toBe(true);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             } finally {
@@ -307,20 +297,17 @@ describe('Registration', () => {
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowLastNameRequiredError).toBe(false);
                 expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(true);
-                expect(wrapper.vm.shouldShowLastNameInvalidCharError).toBe(false);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             } finally {
                 wrapper.destroy();
             }
         });
 
-        it('should show not error messages and emit success event when the name fields are populated correctly', async () => {
+        it('should emit success event when all fields are populated correctly', async () => {
             // Arrange
             RegistrationServiceApi.createAccount.mockImplementation(async () => Promise.resolve());
             const wrapper = mountComponentAndAttachToDocument();
-            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
             try {
                 wrapper.find('[data-test-id="input-first-name"]').setValue('James');
                 wrapper.find('[data-test-id="input-last-name"]').setValue('O\'Neil-Wight');
@@ -332,12 +319,6 @@ describe('Registration', () => {
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowFirstNameRequiredError).toBe(false);
-                expect(wrapper.vm.shouldShowFirstNameMaxLengthError).toBe(false);
-                expect(wrapper.vm.shouldShowFirstNameInvalidCharError).toBe(false);
-                expect(wrapper.vm.shouldShowLastNameRequiredError).toBe(false);
-                expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(false);
-                expect(wrapper.vm.shouldShowLastNameInvalidCharError).toBe(false);
                 expect(wrapper.emitted(EventNames.CreateAccountSuccess).length).toBe(1);
             } finally {
                 wrapper.destroy();
