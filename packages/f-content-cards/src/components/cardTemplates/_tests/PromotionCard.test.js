@@ -1,27 +1,23 @@
 import { shallowMount } from '@vue/test-utils';
 import PromotionCard from '../PromotionCard.vue';
 
-const button = '__BUTTON__';
-
-const card = {
-    extras: {
-        button_1: button, // eslint-disable-line camelcase
-        custom_card_type: 'Promotion_Card_1' // eslint-disable-line camelcase
-    }
-};
+const ctaText = '__CTA_TEXT__';
 
 describe('contentCards › PromotionCard1', () => {
     it('should display the appropriate content when type is promotion_card_1', () => {
         // Arrange & Act
         const wrapper = shallowMount(PromotionCard, {
             propsData: {
-                card,
+                card: {
+                    ctaText,
+                    type: 'Promotion_Card_1'
+                },
                 testId: 'foo'
             }
         });
 
         // Assert
-        expect(wrapper.find('[data-test-id="contentCard-promoCard-1"]').text()).toBe(button);
+        expect(wrapper.find('[data-test-id="contentCard-promoCard-1"]').text()).toBe(ctaText);
     });
 
     it('should display the appropriate content when type is promotion_card_2', () => {
@@ -29,37 +25,14 @@ describe('contentCards › PromotionCard1', () => {
         const wrapper = shallowMount(PromotionCard, {
             propsData: {
                 card: {
-                    extras: {
-                        ...card.extras,
-                        custom_card_type: 'Promotion_Card_2' // eslint-disable-line
-                    }
+                    ctaText,
+                    type: 'Promotion_Card_2'
                 },
                 testId: 'foo'
             }
         });
 
         // Assert
-        expect(wrapper.find('[data-test-id="contentCard-promoCard-2"]').text()).toBe(button);
-    });
-
-    it('should fallback to linkText if button copy is not provided', () => {
-        // Arrange
-        const linkText = '__LINK_TEXT__';
-
-        // Act
-        const wrapper = shallowMount(PromotionCard, {
-            propsData: {
-                card: {
-                    linkText,
-                    extras: {
-                        custom_card_type: 'Promotion_Card_1' // eslint-disable-line
-                    }
-                },
-                testId: 'foo'
-            }
-        });
-
-        // Assert
-        expect(wrapper.find('[data-test-id="contentCard-promoCard-1"]').text()).toBe(linkText);
+        expect(wrapper.find('[data-test-id="contentCard-promoCard-2"]').text()).toBe(ctaText);
     });
 });

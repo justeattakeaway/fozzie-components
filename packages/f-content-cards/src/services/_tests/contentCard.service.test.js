@@ -28,7 +28,7 @@ describe('`contentCardService`', () => {
 
             // Act
             const { cards: result } = service.orderCardsByOrderValue().output();
-            const cardOrderValues = result.map(({ extras: { order } }) => order);
+            const cardOrderValues = result.map(({ order }) => order);
 
             // Assert
             expect(cardOrderValues).toEqual(['1', '3', '4']);
@@ -308,41 +308,14 @@ describe('`contentCardService`', () => {
                         }
                     ];
 
-                    const expectedResult = {
-                        titleCard: {
-                            title: 'Wasp-17b',
-                            url: '/WASP-17b',
-                            pinned: '11 August 2009',
-                            extras: {
-                                updated: '2020-02-17T13:23:58.000Z',
-                                custom_card_type: 'Terms_And_Conditions_Card' // eslint-disable-line camelcase
-                            }
-                        },
-                        cards: [
-                            {
-                                title: 'Wasp-17b',
-                                extras: {
-                                    updated: '2020-02-17T12:28:58.000Z',
-                                    custom_card_type: 'promotion_card_1' // eslint-disable-line camelcase
-                                }
-                            },
-                            {
-                                title: 'Jupiter Hot',
-                                extras: {
-                                    updated: '2020-02-17T18:23:58.000Z',
-                                    custom_card_type: 'promotion_card_3' // eslint-disable-line camelcase
-                                }
-                            }
-                        ]
-                    };
-
                     // Act
-                    const result = new ContentCardService({ cards })
+                    const { titleCard, cards: contentCards } = new ContentCardService({ cards })
                         .getTitleCard()
                         .output();
 
                     // Assert
-                    expect(result).toEqual(expectedResult);
+                    expect(titleCard.title).toBe('Wasp-17b');
+                    expect(contentCards).toHaveLength(2);
                 });
             });
 
@@ -373,40 +346,14 @@ describe('`contentCardService`', () => {
                         }
                     ];
 
-                    const expectedResult = {
-                        titleCard: {},
-                        cards: [
-                            {
-                                title: 'Wasp-17b',
-                                extras: {
-                                    updated: '2020-02-17T13:23:58.000Z',
-                                    custom_card_type: 'promotion_card_1' // eslint-disable-line camelcase
-                                }
-                            },
-                            {
-                                title: 'Wasp-17b',
-                                extras: {
-                                    updated: '2020-02-17T12:28:58.000Z',
-                                    custom_card_type: 'promotion_card_1' // eslint-disable-line camelcase
-                                }
-                            },
-                            {
-                                title: 'Jupiter Hot',
-                                extras: {
-                                    updated: '2020-02-17T18:23:58.000Z',
-                                    custom_card_type: 'promotion_card_3' // eslint-disable-line camelcase
-                                }
-                            }
-                        ]
-                    };
-
                     // Act
-                    const result = new ContentCardService({ cards })
-                        .getTitleCard(cards)
+                    const { titleCard, cards: contentCards } = new ContentCardService({ cards })
+                        .getTitleCard()
                         .output();
 
                     // Assert
-                    expect(result).toEqual(expectedResult);
+                    expect(titleCard).toEqual({});
+                    expect(contentCards).toHaveLength(3);
                 });
             });
         });
