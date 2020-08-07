@@ -207,6 +207,9 @@ export default {
                 case 'Promotion_Card_1':
                 case 'Promotion_Card_2':
                     return 'PromotionCard';
+                case 'Terms_And_Conditions_Card':
+                case 'Terms_And_Conditions_Card_2':
+                    return 'TermsAndConditionsCard';
                 default:
                     break;
             }

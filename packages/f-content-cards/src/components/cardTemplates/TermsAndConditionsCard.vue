@@ -1,0 +1,103 @@
+<template>
+    <div
+        :data-test-id="dataTestId('shell')"
+        :class="$style['c-contentCards-tnc-card-shell']">
+        <h1
+            :data-test-id="dataTestId('title')"
+            :class="$style['c-contentCards-tnc-card-primaryHeader']">
+            {{ titleCard.title }}
+        </h1>
+        <h2
+            :data-test-id="dataTestId('description')"
+            :class="$style['c-contentCards-tnc-card-secondaryHeader']">
+            {{ titleCard.description }}
+        </h2>
+        <p>
+            <a
+                :href="titleCard.url"
+                :data-test-id="dataTestId('cta')"
+                class="o-link--noDecoration o-link--bold">
+                {{ titleCard.ctaLabel }}
+            </a>
+        </p>
+    </div>
+</template>
+
+<script>
+export default {
+    props: {
+        card: {
+            type: Object,
+            default: () => ({
+                title: false,
+                description: false,
+                ctaLabel: false,
+                url: false
+            })
+        },
+
+        testId: {
+            type: String,
+            default: undefined
+        }
+    },
+
+    computed: {
+        suppliedCardHasAllProperties () {
+            return this.card.title &&
+                this.card.description &&
+                this.card.ctaLabel &&
+                this.card.url;
+        },
+
+        titleCard () {
+            return this.suppliedCardHasAllProperties
+                ? this.card
+                : {
+                    title: this.copy.loggedInTitle,
+                    description: this.copy.loggedInSubtitle,
+                    ctaLabel: this.copy.loggedInTermsText,
+                    url: this.copy.loggedInTermsUrl
+                };
+        }
+    },
+
+    inject: [
+        // Locale-specific copy configuration
+        'copy'
+    ],
+
+    methods: {
+        dataTestId (suffix) {
+            return this.testId && `${this.testId}-${suffix}`;
+        }
+    }
+};
+</script>
+
+<style lang="scss" module>
+  .c-contentCards-tnc-card-shell {
+    background-color: $white;
+    padding: spacing(x3);
+    text-align: center;
+  }
+
+  .c-contentCards-tnc-card-primaryHeader {
+    @include font-size(mid);
+    color: $grey--darkest;
+
+    @include media('>=narrow') {
+      @include font-size(jumbo);
+    }
+  }
+
+  .c-contentCards-tnc-card-secondaryHeader {
+    @include font-size(base);
+    color: $grey--dark;
+    margin-top: spacing(x2);
+
+    @include media('>=narrow') {
+      @include font-size(mid);
+    }
+  }
+</style>
