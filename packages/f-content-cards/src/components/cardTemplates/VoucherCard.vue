@@ -1,7 +1,8 @@
 <template>
     <card-container
         :card="card"
-        :cta-enabled="false">
+        :cta-enabled="false"
+        :isolate-hero-image="isAnniversaryCard">
         <button
             type="button"
             :class="$style['c-contentCard-voucher']"
@@ -41,6 +42,12 @@ export default {
             code: voucherCode,
             url
         };
+    },
+
+    computed: {
+        isAnniversaryCard () {
+            return this.cardType === 'Anniversary_Card_1';
+        }
     },
 
     inject: [
