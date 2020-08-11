@@ -26,8 +26,8 @@ export const TermsAndConditionsCardcomponent = () => ({
         cardTitle: {
             default: text('Card Title', 'T&amp;C Example Title')
         },
-        description: {
-            default: text('Card Description', 'Example description')
+        subtitle: {
+            default: text('Card Subtitle', 'Example subtitle')
         },
         url: {
             default: text('Card URL', '/termsandconditions#ii.just-eat-voucher-terms-conditions')
@@ -52,7 +52,7 @@ export const TermsAndConditionsCardcomponent = () => ({
         };
     },
 
-    template: '<terms-and-conditions-card :card="{title:cardTitle,description,url,ctaLabel:label}" />'
+    template: '<terms-and-conditions-card :card="{title:cardTitle,subtitle,url,ctaText:label}" />'
 });
 
 TermsAndConditionsCardcomponent.story = {

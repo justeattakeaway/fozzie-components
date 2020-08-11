@@ -1,20 +1,21 @@
-import {createLocalVue, shallowMount} from '@vue/test-utils';
+/* eslint indent: ["error", 4, {ignoredNodes: ["TemplateLiteral > *"]}] */
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import TermsAndConditionsCard from '../TermsAndConditionsCard.vue';
 
 const localVue = createLocalVue();
 
 jest.mock('copy-to-clipboard');
 
-const ctaLabel = '__CTA_LABEL__';
+const ctaText = '__CTA_TEXT__';
 const url = 'https://foo.com/bar';
-const description = '__DESCRIPTION__';
+const subtitle = '__SUBTITLE__';
 const title = '__TITLE__';
 
 const card = (overrides = {}) => ({
     ...{
         title,
-        description,
-        ctaLabel,
+        subtitle,
+        ctaText,
         url
     },
     ...overrides
@@ -41,7 +42,6 @@ function getWrapper (cardOverrides) {
 }
 
 describe('contentCards › TermsAndConditionsCard', () => {
-
     beforeEach(() => {
         jest.resetAllMocks();
     });
@@ -49,15 +49,15 @@ describe('contentCards › TermsAndConditionsCard', () => {
     describe.each`
         shouldDisplayProps | undefinedKey
         ${false}           | ${'title'}
-        ${false}           | ${'description'}
-        ${false}           | ${'ctaLabel'}
+        ${false}           | ${'subtitle'}
+        ${false}           | ${'ctaText'}
         ${false}           | ${'url'}
         ${true}            | ${'unrelatedKey'}
     `('when $undefinedKey is undefined', (shouldDisplayProps, undefinedKey) => {
         let wrapper;
 
         beforeEach(() => {
-            // Arrange
+            // Arrange & Act
             wrapper = getWrapper({
                 [undefinedKey]: undefined
             });
@@ -66,8 +66,8 @@ describe('contentCards › TermsAndConditionsCard', () => {
         it(`should ${shouldDisplayProps ? '' : 'not '}display all props as given`, () => {
             // Assert
             expect(wrapper.find('[data-test-id="tnctest-title"]').text()).toBe(shouldDisplayProps ? title : 'loggedInTitle');
-            expect(wrapper.find('[data-test-id="tnctest-description"]').text()).toBe(shouldDisplayProps ? description : 'loggedInSubtitle');
-            expect(wrapper.find('[data-test-id="tnctest-cta"]').text()).toBe(shouldDisplayProps ? ctaLabel : 'loggedInTermsText');
+            expect(wrapper.find('[data-test-id="tnctest-subtitle"]').text()).toBe(shouldDisplayProps ? subtitle : 'loggedInSubtitle');
+            expect(wrapper.find('[data-test-id="tnctest-cta"]').text()).toBe(shouldDisplayProps ? ctaText : 'loggedInTermsText');
             expect(wrapper.find('[data-test-id="tnctest-cta"]').attributes('href')).toBe(shouldDisplayProps ? url : 'loggedInTermsUrl');
         });
     });

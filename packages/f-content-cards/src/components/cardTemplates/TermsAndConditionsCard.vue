@@ -8,16 +8,16 @@
             {{ titleCard.title }}
         </h1>
         <h2
-            :data-test-id="dataTestId('description')"
+            :data-test-id="dataTestId('subtitle')"
             :class="$style['c-contentCards-tnc-card-secondaryHeader']">
-            {{ titleCard.description }}
+            {{ titleCard.subtitle }}
         </h2>
         <p>
             <a
                 :href="titleCard.url"
                 :data-test-id="dataTestId('cta')"
                 class="o-link--noDecoration o-link--bold">
-                {{ titleCard.ctaLabel }}
+                {{ titleCard.ctaText }}
             </a>
         </p>
     </div>
@@ -30,8 +30,8 @@ export default {
             type: Object,
             default: () => ({
                 title: false,
-                description: false,
-                ctaLabel: false,
+                subtitle: false,
+                ctaText: false,
                 url: false
             })
         },
@@ -45,8 +45,8 @@ export default {
     computed: {
         suppliedCardHasAllProperties () {
             return this.card.title &&
-                this.card.description &&
-                this.card.ctaLabel &&
+                this.card.subtitle &&
+                this.card.ctaText &&
                 this.card.url;
         },
 
@@ -55,8 +55,8 @@ export default {
                 ? this.card
                 : {
                     title: this.copy.loggedInTitle,
-                    description: this.copy.loggedInSubtitle,
-                    ctaLabel: this.copy.loggedInTermsText,
+                    subtitle: this.copy.loggedInSubtitle,
+                    ctaText: this.copy.loggedInTermsText,
                     url: this.copy.loggedInTermsUrl
                 };
         }
