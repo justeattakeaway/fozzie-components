@@ -310,7 +310,7 @@ export default {
 
         .c-contentCard-img {
             display: block;
-            max-width: 100%;
+            width: 100%;
         }
     }
 
