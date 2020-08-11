@@ -7,7 +7,16 @@ export default {
     decorators: [withKnobs, withA11y]
 };
 
-
+/**
+ * Definition for story for Terms and Conditions card component
+ *
+ * @return {{
+ *  template: string,
+ *  components: {Object}
+ *  props: {Object}
+ *  provide: {Function}
+ * }}
+ */
 export const TermsAndConditionsCardcomponent = () => ({
     components: {
         TermsAndConditionsCard
@@ -28,6 +37,10 @@ export const TermsAndConditionsCardcomponent = () => ({
         }
     },
 
+    /**
+     * Stubbed copy for injecting when supplied card information is not complete
+     * @return {{copy: {loggedInSubtitle: string, loggedInTitle: string, loggedInTermsUrl: string, loggedInTermsText: string}}}
+     */
     provide () {
         return {
             copy: {

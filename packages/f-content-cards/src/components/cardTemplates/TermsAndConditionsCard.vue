@@ -68,8 +68,14 @@ export default {
     ],
 
     methods: {
+        /**
+         * Returns an ID based on the given suffix if non-empty test ID supplied as prop
+         * @param suffix
+         * @return {false|string}
+         */
         dataTestId (suffix) {
-            return this.testId && `${this.testId}-${suffix}`;
+            return (this.testId || false)
+                && `${this.testId}-${suffix}`;
         }
     }
 };
