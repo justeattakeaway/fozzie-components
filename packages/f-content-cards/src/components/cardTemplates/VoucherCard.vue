@@ -46,7 +46,7 @@ export default {
 
     computed: {
         isAnniversaryCard () {
-            return this.cardType === 'Anniversary_Card_1';
+            return this.cardType === 'anniversaryCard1';
         }
     },
 
