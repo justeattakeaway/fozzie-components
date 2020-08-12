@@ -12,12 +12,10 @@ const subtitle = '__SUBTITLE__';
 const title = '__TITLE__';
 
 const card = (overrides = {}) => ({
-    ...{
-        title,
-        subtitle,
-        ctaText,
-        url
-    },
+    title,
+    subtitle,
+    ctaText,
+    url,
     ...overrides
 });
 
