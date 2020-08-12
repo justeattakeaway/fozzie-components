@@ -4,15 +4,15 @@
         :href="ctaEnabled && url"
         :target="target.attribute"
         :rel="target.rel"
-        :class="[$style['c-contentCard'], { [$style['c-contentCard--isolateHeroImage']]: isAnniversaryCard }]"
+        :class="[$style['c-contentCard'], { [$style['c-contentCard--isolateHeroImage']]: isolateHeroImage }]"
         :data-test-id="testId"
         @click="onClickContentCard"
     >
         <div
-            :style="{ 'background-image': isBackgroundImage ? `url(${image})` : '' }"
+            :style="{ 'background-image': applyImageAsBackground ? `url(${image})` : '' }"
             :class="[{ [$style['c-contentCard-bgImg']]: !!image }]">
             <img
-                v-if="!isBackgroundImage"
+                v-if="!applyImageAsBackground"
                 :class="$style['c-contentCard-img']"
                 :src="image"
                 :alt="title">
@@ -66,6 +66,14 @@ export default {
         testId: {
             type: String,
             default: null
+        },
+        applyImageAsBackground: {
+            type: Boolean,
+            default: true
+        },
+        isolateHeroImage: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -97,16 +105,6 @@ export default {
             type,
             target
         };
-    },
-
-    computed: {
-        isAnniversaryCard () {
-            return this.type === 'Anniversary_Card_1';
-        },
-
-        isBackgroundImage () {
-            return this.type !== 'Post_Order_Card_1';
-        }
     },
 
     inject: [
@@ -312,7 +310,7 @@ export default {
 
         .c-contentCard-img {
             display: block;
-            max-width: 100%;
+            width: 100%;
         }
     }
 
