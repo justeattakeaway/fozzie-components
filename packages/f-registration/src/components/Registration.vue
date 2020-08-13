@@ -5,7 +5,8 @@
         is-rounded
         has-outline
         is-page-content-wrapper
-        card-heading-position="center">
+        card-heading-position="center"
+        data-js-test="registration-component">
         <p
             v-if="shouldShowLoginLink"
             :class="$style['c-loginLink']"
