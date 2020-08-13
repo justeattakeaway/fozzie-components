@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.12.10
+------------------------------
+*August 13, 2020*
+
+### Added
+- `f-registration.page.js` for use within WebDriverIO test frameworks.
+- New `data-test-id` attributes for f-registration error selectors.
+
 v0.11.1
 ------------------------------
 *August 7, 2020*
