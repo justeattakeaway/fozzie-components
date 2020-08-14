@@ -5,7 +5,8 @@
         is-rounded
         has-outline
         is-page-content-wrapper
-        card-heading-position="center">
+        card-heading-position="center"
+        data-test-id="registration-component">
         <p
             v-if="shouldShowLoginLink"
             :class="$style['c-loginLink']"
@@ -34,19 +35,22 @@
                 <template #error>
                     <p
                         v-if="shouldShowFirstNameRequiredError"
-                        :class="$style['o-form-error']">
+                        :class="$style['o-form-error']"
+                        data-test-id='error-first-name-empty'>
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please include your first name
                     </p>
                     <p
                         v-if="shouldShowFirstNameMaxLengthError"
-                        :class="$style['o-form-error']">
+                        :class="$style['o-form-error']"
+                        data-test-id='error-first-name-maxlength'>
                         <warning-icon :class="$style['o-form-error-icon']" />
                         First name exceeds 50 characters
                     </p>
                     <p
                         v-if="shouldShowFirstNameInvalidCharError"
-                        :class="$style['o-form-error']">
+                        :class="$style['o-form-error']"
+                        data-test-id='error-first-name-invalid'>
                         <warning-icon :class="$style['o-form-error-icon']" />
                         First name should only contain letters, hyphens or apostrophes
                     </p>
@@ -63,19 +67,22 @@
                 <template #error>
                     <p
                         v-if="shouldShowLastNameRequiredError"
-                        :class="$style['o-form-error']">
+                        :class="$style['o-form-error']"
+                        data-test-id='error-last-name-empty'>
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please include your last name
                     </p>
                     <p
                         v-if="shouldShowLastNameMaxLengthError"
-                        :class="$style['o-form-error']">
+                        :class="$style['o-form-error']"
+                        data-test-id='error-last-name-maxlength'>
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Last name exceeds 50 characters
                     </p>
                     <p
                         v-if="shouldShowLastNameInvalidCharError"
-                        :class="$style['o-form-error']">
+                        :class="$style['o-form-error']"
+                        data-test-id='error-last-name-invalid'>
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Last name should only contain letters, hyphens or apostrophes
                     </p>
@@ -93,19 +100,22 @@
                 <template #error>
                     <p
                         v-if="shouldShowEmailRequiredError"
-                        :class="$style['o-form-error']">
+                        :class="$style['o-form-error']"
+                        data-test-id='error-email-empty'>
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please enter your email address
                     </p>
                     <p
                         v-else-if="shouldShowEmailInvalidError"
-                        :class="$style['o-form-error']">
+                        :class="$style['o-form-error']"
+                        data-test-id='error-email-invalid'>
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please enter a valid email address
                     </p>
                     <p
                         v-else-if="shouldShowEmailAlreadyExistsError"
-                        :class="$style['o-form-error']">
+                        :class="$style['o-form-error']"
+                        data-test-id='error-email-exists'>
                         <warning-icon :class="$style['o-form-error-icon']" />
                         An account with this email already exists
                     </p>
@@ -122,7 +132,8 @@
                 <template #error>
                     <p
                         v-if="shouldShowPasswordRequiredError"
-                        :class="$style['o-form-error']">
+                        :class="$style['o-form-error']"
+                        data-test-id='error-password-empty'>
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please enter a password
                     </p>
