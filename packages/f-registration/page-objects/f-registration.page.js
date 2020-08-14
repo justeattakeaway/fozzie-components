@@ -1,4 +1,4 @@
-const registrationComponent = () => $('[data-js-test="registration-component"]');
+const registrationComponent = () => $('[data-test-id="registration-component"]');
 const firstNameInput = () => registrationComponent().$('[data-test-id="input-first-name"]');
 const lastNameInput = () => registrationComponent().$('[data-test-id="input-last-name"]');
 const emailInput = () => registrationComponent().$('[data-test-id="input-email"]');
@@ -30,9 +30,9 @@ const passwordEmptyError = () => $('[data-test-id="error-password-empty"]');
  * @param {String} userInfo.email The user's e-mail address
  * @param {String} userInfo.password The user's password
  */
-exports.submitRegistrationForm = () => {
+exports.submitRegistrationForm = (userInfo) => {
 
-    browser.waitUntil(() => registrationComponentIsDisplayed());
+    registrationComponent().waitForExist();
     firstNameInput().setValue(userInfo.firstName);
     lastNameInput().setValue(userInfo.lastName);
     emailInput().setValue(userInfo.email);
@@ -40,17 +40,15 @@ exports.submitRegistrationForm = () => {
     createAccountButton().click();
 }
 
-exports.registrationComponentIsDisplayed = () => registrationComponent().isDisplayed();
+exports.firstNameEmptyErrorIsDisplayed = () => firstNameEmptyError().isDisplayed();
+exports.firstNameMaxLengthErrorIsDisplayed = () => firstNameMaxLengthError().isDisplayed();
+exports.firstNameInvalidErrorIsDisplayed = () => firstNameInvalidError().isDisplayed();
 
-exports.firstNameEmptyErrorIsDisplayed = () => firstNameEmptyError.isDisplayed();
-exports.firstNameMaxLengthErrorIsDisplayed = () => firstNameMaxLengthError.isDisplayed();
-exports.firstNameInvalidErrorIsDisplayed = () => firstNameInvalidError.isDisplayed();
+exports.lastNameEmptyErrorIsDisplayed = () => lastNameEmptyError().isDisplayed();
+exports.lastNameMaxLengthErrorIsDisplayed = () => lastNameMaxLengthError().isDisplayed();
+exports.lastNameInvalidErrorIsDisplayed = () => lastNameInvalidError().isDisplayed();
 
-exports.lastNameEmptyErrorIsDisplayed = () => lastNameEmptyError.isDisplayed();
-exports.lastNameMaxLengthErrorIsDisplayed = () => lastNameMaxLengthError.isDisplayed();
-exports.lastNameInvalidErrorIsDisplayed = () => lastNameInvalidError.isDisplayed();
-
-exports.emailEmptyErrorIsDisplayed = () => emailEmptyError.isDisplayed();
-exports.emailInvalidErrorIsDisplayed = () =>emailInvalidError.isDisplayed();
-exports.emailExistsErrorIsDisplayed = () => emailExistsError.isDisplayed();
-exports.passwordEmptyErrorIsDisplayed = () => passwordEmptyError.isDisplayed();
+exports.emailEmptyErrorIsDisplayed = () => emailEmptyError().isDisplayed();
+exports.emailInvalidErrorIsDisplayed = () =>emailInvalidError().isDisplayed();
+exports.emailExistsErrorIsDisplayed = () => emailExistsError().isDisplayed();
+exports.passwordEmptyErrorIsDisplayed = () => passwordEmptyError().isDisplayed();
