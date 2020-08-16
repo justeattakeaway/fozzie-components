@@ -11,10 +11,12 @@
     "storybook:build": "lerna run storybook:build",
     "storybook:serve": "lerna run storybook:serve",
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
-    "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\""
+    "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
+    "test-component:chrome": "lerna run test-component:chrome"
   },
   "dependencies": {
-    "core-js": "^3.6.4"
+    "core-js": "^3.6.4",
+    "global": "^4.4.0"
   },
   "resolutions": {
     "webpack": "4.36.0"
@@ -36,10 +38,16 @@
     "@vue/cli-service": "4.4.6",
     "@vue/eslint-config-standard": "4.0.0",
     "@vue/test-utils": "1.0.3",
+    "@wdio/cli": "6.4.0",
+    "@wdio/local-runner": "6.4.0",
+    "@wdio/mocha-framework": "6.4.0",
+    "@wdio/spec-reporter": "6.4.0",
+    "@wdio/sync": "6.4.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
     "babel-jest": "26.1.0",
     "babel-loader": "8.1.0",
+    "chromedriver": "84.0.1",
     "cross-env": "7.0.2",
     "css-loader": "1.0.1",
     "danger": "10.2.1",
@@ -50,10 +58,12 @@
     "lerna": "3.22.1",
     "node-sass": "4.14.1",
     "node-sass-magic-importer": "5.3.2",
+    "npm-run-all": "4.1.5",
     "postcss-loader": "3.0.0",
     "sass-loader": "7.3.1",
     "vue-svg-loader": "0.16.0",
     "vue-template-compiler": "2.6.10",
+    "wdio-chromedriver-service": "6.0.3",
     "webdriverio": "6.3.4"
   },
   "bugs": {
