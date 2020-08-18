@@ -12,7 +12,7 @@
         </span>
         <span
             v-if="type === 'Promotion_Card_2'"
-            class="c-contentCard-link o-btnLink"
+            :class="[$style['c-contentCard-link'], 'o-btnLink']"
             :data-test-id="testIdForPromoCardType(2)">
             {{ ctaText }}
         </span>
@@ -46,15 +46,13 @@ export default {
     },
     data () {
         const {
-            extras = {},
-            linkText
+            button,
+            ctaText,
+            type
         } = this.card;
-        const {
-            button_1: button,
-            custom_card_type: type
-        } = extras;
         return {
-            ctaText: button || linkText,
+            button,
+            ctaText,
             type
         };
     },
@@ -66,3 +64,10 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" module>
+    .c-contentCard-link {
+        font-weight: $font-weight-bold;
+        text-decoration: none;
+    }
+</style>

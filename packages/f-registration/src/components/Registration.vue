@@ -5,7 +5,8 @@
         is-rounded
         has-outline
         is-page-content-wrapper
-        card-heading-position="center">
+        card-heading-position="center"
+        data-test-id="registration-component">
         <p
             v-if="shouldShowLoginLink"
             :class="$style['c-loginLink']"
@@ -17,6 +18,7 @@
             :class="$style['o-form']"
             @submit.prevent="onFormSubmit"
         >
+            <!-- TODO WCB-1031 - Extract error messages into a separate component -->
             <p
                 v-if="genericErrorMessage"
                 :class="$style['o-form-error']">
@@ -33,9 +35,24 @@
                 <template #error>
                     <p
                         v-if="shouldShowFirstNameRequiredError"
-                        :class="$style['o-form-error']">
+                        :class="$style['o-form-error']"
+                        data-test-id='error-first-name-empty'>
                         <warning-icon :class="$style['o-form-error-icon']" />
-                        Please enter your first name
+                        Please include your first name
+                    </p>
+                    <p
+                        v-if="shouldShowFirstNameMaxLengthError"
+                        :class="$style['o-form-error']"
+                        data-test-id='error-first-name-maxlength'>
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        First name exceeds 50 characters
+                    </p>
+                    <p
+                        v-if="shouldShowFirstNameInvalidCharError"
+                        :class="$style['o-form-error']"
+                        data-test-id='error-first-name-invalid'>
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        First name should only contain letters, hyphens or apostrophes
                     </p>
                 </template>
             </form-field>
@@ -50,9 +67,24 @@
                 <template #error>
                     <p
                         v-if="shouldShowLastNameRequiredError"
-                        :class="$style['o-form-error']">
+                        :class="$style['o-form-error']"
+                        data-test-id='error-last-name-empty'>
                         <warning-icon :class="$style['o-form-error-icon']" />
-                        Please enter your last name
+                        Please include your last name
+                    </p>
+                    <p
+                        v-if="shouldShowLastNameMaxLengthError"
+                        :class="$style['o-form-error']"
+                        data-test-id='error-last-name-maxlength'>
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        Last name exceeds 50 characters
+                    </p>
+                    <p
+                        v-if="shouldShowLastNameInvalidCharError"
+                        :class="$style['o-form-error']"
+                        data-test-id='error-last-name-invalid'>
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        Last name should only contain letters, hyphens or apostrophes
                     </p>
                 </template>
             </form-field>
@@ -68,15 +100,24 @@
                 <template #error>
                     <p
                         v-if="shouldShowEmailRequiredError"
-                        :class="$style['o-form-error']">
+                        :class="$style['o-form-error']"
+                        data-test-id='error-email-empty'>
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please enter your email address
                     </p>
                     <p
                         v-else-if="shouldShowEmailInvalidError"
-                        :class="$style['o-form-error']">
+                        :class="$style['o-form-error']"
+                        data-test-id='error-email-invalid'>
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please enter a valid email address
+                    </p>
+                    <p
+                        v-else-if="shouldShowEmailAlreadyExistsError"
+                        :class="$style['o-form-error']"
+                        data-test-id='error-email-exists'>
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        An account with this email already exists
                     </p>
                 </template>
             </form-field>
@@ -91,7 +132,8 @@
                 <template #error>
                     <p
                         v-if="shouldShowPasswordRequiredError"
-                        :class="$style['o-form-error']">
+                        :class="$style['o-form-error']"
+                        data-test-id='error-password-empty'>
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please enter a password
                     </p>
@@ -112,7 +154,7 @@
 <script>
 import { globalisationServices } from '@justeat/f-services';
 import { validationMixin } from 'vuelidate';
-import { required, email } from 'vuelidate/lib/validators';
+import { required, email, maxLength } from 'vuelidate/lib/validators';
 import { WarningIcon } from '@justeat/f-vue-icons';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
@@ -122,6 +164,14 @@ import FormButton from './Button.vue';
 import tenantConfigs from '../tenants';
 import RegistrationServiceApi from '../services/RegistrationServiceApi';
 import EventNames from '../event-names';
+
+/**
+ * Tests for existence of valid chars only in a string.
+ *
+ * @param {string} value The string to test.
+ * @return {boolean} True if there are no invalid chars in value, false otherwise.
+ */
+const meetsCharacterValidationRules = value => /^[\u0060\u00C0-\u00F6\u00F8-\u017Fa-zA-Z-' ]*$/.test(value);
 
 export default {
     name: 'Registration',
@@ -175,30 +225,45 @@ export default {
             email: null,
             password: null,
             shouldDisableCreateAccountButton: false,
-            genericErrorMessage: null
+            genericErrorMessage: null,
+            shouldShowEmailAlreadyExistsError: false
         };
     },
 
     computed: {
-        // Returns true if required validation conditions are not met and if the field has been `touched` by a user
+        /*
+         * Validation methods return true if the validation conditions
+         * have not been met and the field has been `touched` by a user.
+         * The $dirty boolean changes to true when the user has focused/lost
+         * focus on the input field.
+         */
+
         shouldShowFirstNameRequiredError () {
-            return (this.$v.firstName.$invalid && !this.$v.firstName.required) && this.$v.firstName.$dirty;
+            return !this.$v.firstName.required && this.$v.firstName.$dirty;
         },
-        // Returns true if required validation conditions are not met and if the field has been `touched` by a user
+        shouldShowFirstNameMaxLengthError () {
+            return !this.$v.firstName.maxLength && this.$v.firstName.$dirty;
+        },
+        shouldShowFirstNameInvalidCharError () {
+            return !this.$v.firstName.meetsCharacterValidationRules && this.$v.firstName.$dirty;
+        },
         shouldShowLastNameRequiredError () {
-            return (this.$v.lastName.$invalid && !this.$v.lastName.required) && this.$v.lastName.$dirty;
+            return !this.$v.lastName.required && this.$v.lastName.$dirty;
         },
-        // Returns true if required validation conditions are not met and if the field has been `touched` by a user
+        shouldShowLastNameMaxLengthError () {
+            return !this.$v.lastName.maxLength && this.$v.lastName.$dirty;
+        },
+        shouldShowLastNameInvalidCharError () {
+            return !this.$v.lastName.meetsCharacterValidationRules && this.$v.lastName.$dirty;
+        },
         shouldShowEmailRequiredError () {
-            return (this.$v.email.$invalid && !this.$v.email.required) && this.$v.email.$dirty;
+            return !this.$v.email.required && this.$v.email.$dirty;
         },
-        // Returns true if email validation conditions are not met and if the field has been `touched` by a user
         shouldShowEmailInvalidError () {
-            return (this.$v.email.$invalid && !this.$v.email.email) && this.$v.email.$dirty;
+            return !this.$v.email.email && this.$v.email.$dirty;
         },
-        // Returns true if email validation conditions are not met and if the field has been `touched` by a user
         shouldShowPasswordRequiredError () {
-            return (this.$v.password.$invalid && !this.$v.password.required) && this.$v.password.$dirty;
+            return !this.$v.password.required && this.$v.password.$dirty;
         },
         shouldShowLoginLink () {
             return this.loginSettings && this.loginSettings.linkText && this.loginSettings.url;
@@ -207,10 +272,14 @@ export default {
 
     validations: {
         firstName: {
-            required
+            required,
+            maxLength: maxLength(50),
+            meetsCharacterValidationRules
         },
         lastName: {
-            required
+            required,
+            maxLength: maxLength(50),
+            meetsCharacterValidationRules
         },
         email: {
             required,
@@ -224,6 +293,7 @@ export default {
     methods: {
         async onFormSubmit () {
             this.genericErrorMessage = null;
+            this.shouldShowEmailAlreadyExistsError = false;
             if (this.isFormInvalid()) {
                 return;
             }
@@ -233,14 +303,27 @@ export default {
                 const registrationData = {
                     firstName: this.firstName,
                     lastName: this.lastName,
-                    email: this.email,
+                    emailAddress: this.email,
                     password: this.password
                 };
                 await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData);
                 this.$emit(EventNames.CreateAccountSuccess);
             } catch (error) {
-                this.genericErrorMessage = error;
-                this.$emit(EventNames.CreateAccountFailure, error);
+                let thrownErrors = error;
+                if (error && error.response && error.response.data && error.response.data.errors) {
+                    thrownErrors = error.response.data.errors;
+                }
+
+                if (Array.isArray(thrownErrors)) {
+                    if (thrownErrors.some(thrownError => thrownError.errorCode === '409')) {
+                        this.shouldShowEmailAlreadyExistsError = true;
+                    } else {
+                        this.genericErrorMessage = thrownErrors[0].description || 'Something went wrong, please try again later';
+                    }
+                } else {
+                    this.genericErrorMessage = error;
+                }
+                this.$emit(EventNames.CreateAccountFailure, thrownErrors);
             } finally {
                 this.shouldDisableCreateAccountButton = false;
             }

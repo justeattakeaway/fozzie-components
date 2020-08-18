@@ -3,12 +3,55 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.5.0
+------------------------------
+*July 23, 2020*
+
+### Changed
+- Updating logo colour to orange and new colour changes for Rebrand phase 3.1
+- Changing `data-theme` to `data-theme-header` to avoid clashing with any other components in the future.
+- Vue CLI minor package updates.
+
+
+v3.4.1
+------------------------------
+*July 16, 2020*
+
+### Changed
+- Updating `f-vue-icons` version and some dependency updates.
+
+
+v3.4.0
+------------------------------
+*July 14, 2020*
+
+### Changed
+- Fix `f-header` regression with api response for user details.
+- Added `?testuser` Demo mocks.
+- Updated README.md with Demo mock details.
+
+
+v3.3.0
+------------------------------
+*July 9, 2020*
+
+### Changed
+- Updated `f-vue-icons` version.
+- Made `f-trak` peer dependency use a range value.
+
+### Removed
+- Unused `lodash-es` dependency.
+- `lodash-es` ignore from jest config.
+
+
 v3.2.0
 ------------------------------
 *July 2, 2020*
 
 ### Added
 - Accessibility add-on to Storybook story.
+
 
 v3.1.0
 ------------------------------

@@ -4,17 +4,65 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+v0.12.0
 ------------------------------
-*July 2, 2020*
+*August 13, 2020*
+
+### Added
+- `f-registration.page.js` for use within WebDriverIO test frameworks.
+- New `data-test-id` attributes for f-registration error selectors.
+
+v0.11.1
+------------------------------
+*August 7, 2020*
+
+### Changed
+- Unit tests cleaned up in Registration.test.js
+
+
+v0.11.0
+------------------------------
+*August 6, 2020*
+
+### Added
+- Validation on First name and Last name regarding max length and invalid characters
+
+
+v0.10.0
+------------------------------
+*August 3, 2020*
+
+### Fixed
+- Update expected structure of the axios error object to show custom 409 error message
+
+
+v0.9.2
+------------------------------
+*July 31, 2020*
+
+### Fixed
+- Changed property name of POST object from `email` to `emailAddress`.
+
+
+v0.9.1
+------------------------------
+*July 28, 2020*
+
+### Changed
+- Vue CLI minor package updates.
+- Small update to colours from updating to `fozzie-colour-palette` in the mono-repo root.
+
+
+v0.9.0
+------------------------------
+*July 15, 2020*
+
+### Changed
+- Update registration component to handle AccountWeb API endpoint.
+- Updating colour variables to use new versions set in `fozzie-colour-palette`.
 
 ### Added
 - Accessibility add-on to Storybook story.
-
-*June 25, 2020*
-
-### Changed
-- Updating colour variables to use new versions set in `fozzie-colour-palette`.
 
 
 v0.7.1

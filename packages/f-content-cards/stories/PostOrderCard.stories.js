@@ -1,13 +1,15 @@
 import { withKnobs, text } from '@storybook/addon-knobs';
-import PostOrderCard from '../src/components/cardTemplates/PostOrderCard.vue';
 import { withA11y } from '@storybook/addon-a11y';
+import PostOrderCard from '../src/components/cardTemplates/PostOrderCard.vue';
+import jeIcon from './images/je-icon.png';
+import jeBackground from './images/je-marketing.png';
 
 export default {
-    title: 'Components/Atoms',
+    title: 'Components/Atoms/f-content-cards',
     decorators: [withKnobs, withA11y]
 };
 
-export const ContentCardscomponent = () => ({
+export const PostOrderCardcomponent = () => ({
     components: { PostOrderCard },
     props: {
         title: {
@@ -20,10 +22,10 @@ export const ContentCardscomponent = () => ({
             default: text('Card Description', 'Whether you want to treat Mum to her Friday night favourite, or surprise your mate with a ‘KFC on me’, show them you care – the tasty way.')
         },
         image: {
-            default: text('Card Image', 'https://appboy-images.com/appboy/communication/marketing/content_cards_message_variations/images/5edf97b6141af454f8197e93/f43c54c99f2deca37600fa16331d7080c51717ef/original.png?1591711674')
+            default: text('Card Image', jeBackground)
         },
         icon: {
-            default: text('Card Icon', 'https://appboy-images.com/appboy/communication/assets/image_assets/images/5ed7aac3967e180c25132d24/original.png?1591192259')
+            default: text('Card Icon', jeIcon)
         },
         cta: {
             default: text('Card CTA', 'Purchase now')
@@ -42,7 +44,7 @@ export const ContentCardscomponent = () => ({
                 viewed: false,
                 title: this.cardTitle,
                 imageUrl: null,
-                description: this.description,
+                subtitle: this.description,
                 created: null,
                 updated: '2020-02-25T14:21:15.000Z',
                 categories: [],
@@ -50,13 +52,11 @@ export const ContentCardscomponent = () => ({
                 url: 'https://www.just-eat.co.uk/area/s637jj',
                 linkText: 'www.just-eat.co.uk',
                 aspectRatio: 1,
-                extras: {
-                    order: '1',
-                    image_1: this.image, // eslint-disable-line
-                    button_1: this.cta, // eslint-disable-line
-                    icon_1: this.icon, // eslint-disable-line
-                    custom_card_type: 'Post_Order_Card_1' // eslint-disable-line
-                },
+                order: '1',
+                image: this.image,
+                ctaText: this.cta,
+                icon: this.icon,
+                type: 'Post_Order_Card_1',
                 pinned: false,
                 dismissible: true,
                 dismissed: false,
@@ -69,6 +69,6 @@ export const ContentCardscomponent = () => ({
     template: '<post-order-card :card="card" :title="title" />'
 });
 
-ContentCardscomponent.story = {
-    name: 'f-post-order-card'
+PostOrderCardcomponent.story = {
+    name: 'post-order-card'
 };

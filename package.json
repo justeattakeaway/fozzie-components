@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "1.19.0",
+  "version": "1.23.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -16,30 +16,33 @@
   "dependencies": {
     "core-js": "^3.6.4"
   },
+  "resolutions": {
+    "webpack": "4.36.0"
+  },
   "devDependencies": {
-    "@babel/cli": "7.10.3",
-    "@babel/plugin-proposal-optional-chaining": "7.10.3",
-    "@babel/preset-env": "7.10.3",
+    "@babel/cli": "7.10.5",
+    "@babel/plugin-proposal-optional-chaining": "7.10.4",
+    "@babel/preset-env": "7.10.4",
     "@justeat/browserslist-config-fozzie": "1.1.1",
     "@justeat/eslint-config-fozzie": "3.4.1",
     "@justeat/f-build-config": "0.3.0",
     "@justeat/f-utils": "0.3.0",
-    "@justeat/fozzie": "3.0.0-beta.5",
-    "@justeat/fozzie-colour-palette": "3.0.0-beta.2",
+    "@justeat/fozzie": "3.0.0-beta.8",
+    "@justeat/fozzie-colour-palette": "3.0.0-beta.4",
     "@storybook/storybook-deployer": "2.8.6",
-    "@vue/cli-plugin-babel": "4.4.5",
+    "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "4.4.5",
-    "@vue/cli-service": "4.4.5",
+    "@vue/cli-plugin-unit-jest": "4.4.6",
+    "@vue/cli-service": "4.4.6",
     "@vue/eslint-config-standard": "4.0.0",
     "@vue/test-utils": "1.0.3",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
-    "babel-jest": "26.0.1",
+    "babel-jest": "26.1.0",
     "babel-loader": "8.1.0",
-    "cross-env": "^7.0.2",
+    "cross-env": "7.0.2",
     "css-loader": "1.0.1",
-    "danger": "10.2.0",
+    "danger": "10.2.1",
     "eslint": "6.8.0",
     "eslint-import-resolver-webpack": "0.12.2",
     "eslint-plugin-vue": "6.2.2",
@@ -48,10 +51,10 @@
     "node-sass": "4.14.1",
     "node-sass-magic-importer": "5.3.2",
     "postcss-loader": "3.0.0",
-    "sass-loader": "7.1.0",
+    "sass-loader": "7.3.1",
     "vue-svg-loader": "0.16.0",
-    "vue-template-compiler": "2.6.11",
-    "webdriverio": "6.1.20"
+    "vue-template-compiler": "2.6.10",
+    "webdriverio": "6.3.4"
   },
   "bugs": {
     "url": "https://github.com/justeat/fozzie-components/issues"

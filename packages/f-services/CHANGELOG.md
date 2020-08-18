@@ -14,6 +14,7 @@ v1.1.0
 - `axios-mock-adapter` to help with testing.
 
 ### Changed
+- Vue CLI minor package updates.
 - `@vue/cli-plugin-unit-test` to v4.3.1.
 - ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails)
 

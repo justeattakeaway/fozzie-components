@@ -130,10 +130,6 @@ export default {
         & g,
         & path {
             fill: $header-logo-color;
-
-            @include theme(ml) {
-                fill: $header-logo-color--ml;
-            }
         }
     }
     // White logo on highlights background
@@ -157,15 +153,6 @@ export default {
                     fill: $header-logo-color;
                 }
             }
-        }
-    }
-
-    // Temporary styling for ML (until normalised in phase 3 of rebrand work)
-    // Transparent goes from white to orange
-    .is-navInView [data-theme='ml'] .c-icon--onTransparentBg {
-        & g,
-        & path {
-            fill: $header-logo-color--ml;
         }
     }
 

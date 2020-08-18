@@ -1,19 +1,21 @@
 <template>
     <div
         :data-test-id="testId"
-        :class="['c-postOrderCard' , { 'c-postOrderCard--condensed': !image && icon }]">
+        :class="[$style['c-postOrderCard']]">
         <h2
             v-if="title"
-            class="c-postOrderCard-title"
+            :class="[$style['c-postOrderCard-title']]"
             data-test-id="contentCard-postOrderCard-title"
         >
             {{ title }}
         </h2>
         <card-container
             :card="card"
+            :class="[cardContainerStyles['c-postOrderCardContainer'] , { [cardContainerStyles['c-postOrderCard--condensed']]: !image && icon }]"
             :container-title="containerTitle"
             :is-carousel="isCarousel"
-            :data-test-id="containerTestId()">
+            :data-test-id="containerTestId()"
+            :apply-image-as-background="false">
             <span
                 class="o-link--full o-link--bold u-color-link u-text-left"
                 :data-test-id="cardContentTestId()">
@@ -24,7 +26,12 @@
 </template>
 
 <script>
+/* eslint-disable import/no-duplicates */
 import CardContainer from './CardContainer.vue';
+// The below allows distinct import of styles from cardContainer, in order to directly influence which intra-component
+// styles are used on the wrapper element in the card-container
+import CardContainerStyles from './CardContainer.vue?vue&type=style&index=0&lang=scss&module=true&';
+/* eslint-enable import/no-duplicates */
 
 export default {
     components: {
@@ -34,6 +41,10 @@ export default {
         card: {
             type: Object,
             default: () => ({})
+        },
+        cardContainerStyles: {
+            type: Object,
+            default: () => CardContainerStyles
         },
         containerTitle: {
             type: String,
@@ -54,22 +65,19 @@ export default {
     },
     data () {
         const {
-            extras = {},
-            imageUrl,
-            linkText
+            image,
+            ctaText,
+            button,
+            type,
+            icon
         } = this.card;
-        const {
-            button_1: button,
-            custom_card_type: type,
-            image_1: image,
-            icon_1: icon
-        } = extras;
 
         return {
-            ctaText: button || linkText,
-            icon,
-            image: image || imageUrl,
-            type
+            image,
+            ctaText,
+            button,
+            type,
+            icon
         };
     },
 
@@ -83,3 +91,27 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" module>
+    .c-postOrderCard {
+        border: 1px solid $color-border;
+        border-radius: $post-order-card-radius;
+        padding: spacing(x3);
+        width: 100%;
+
+        @include media ('<mid') {
+            border: none;
+            padding: 0;
+        }
+
+        .c-postOrderCard-title {
+            @include font-size(large);
+
+            margin-bottom: spacing(x2);
+
+            @include media ('<mid') {
+                margin: spacing(x2);
+            }
+        }
+    }
+</style>

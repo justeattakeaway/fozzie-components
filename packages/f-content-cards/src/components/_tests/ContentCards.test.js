@@ -18,7 +18,7 @@ const voucherCode = '__VOUCHERCODE__';
 const order = '__ORDER__';
 const id = btoa('ABC123');
 
-const createCard = type => ({
+const createRawCard = type => ({
     id,
     url,
     button,
@@ -33,8 +33,19 @@ const createCard = type => ({
     }
 });
 
+const createCard = type => ({
+    id,
+    url,
+    ctaText: button,
+    description,
+    title,
+    order,
+    type,
+    voucherCode
+});
+
 const createAppboyInstance = cardTypes => ({
-    cards: cardTypes.map(type => createCard(type))
+    cards: cardTypes.map(type => createRawCard(type))
 });
 
 beforeEach(() => {
@@ -78,6 +89,92 @@ describe('ContentCards', () => {
         expect(instance.findAllComponents(cardTemplates.PostOrderCard).length).toBe(1);
     });
 
+    describe('loading state', () => {
+        it('should show a skeleton loading card before Braze has initialised', async () => {
+            // Arrange
+            const { SkeletonLoader } = cardTemplates;
+
+            // Act
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId
+                }
+            });
+
+            // Assert
+            expect(instance.findComponent(SkeletonLoader).exists()).toBe(true);
+        });
+
+        it('should hide the skeleton loading card after Braze has initialised', async () => {
+            // Arrange
+            const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
+            const appboy = createAppboyInstance(cardTypes);
+            const { SkeletonLoader } = cardTemplates;
+
+            // Act
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId
+                }
+            });
+            instance.vm.contentCards(appboy);
+            await instance.vm.$nextTick();
+
+            // Assert
+            expect(instance.findComponent(SkeletonLoader).exists()).toBe(false);
+        });
+
+        it('should NOT show a skeleton loading card whilst initialising Braze if "showLoadingState" prop is false"', async () => {
+            // Arrange
+            const showLoadingState = false;
+            const { SkeletonLoader } = cardTemplates;
+
+            // Act
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId,
+                    showLoadingState
+                }
+            });
+
+            // Assert
+            expect(instance.findComponent(SkeletonLoader).exists()).toBe(false);
+        });
+
+        it('should default to "promo" skeleton loading card', () => {
+            // Assemble & Act
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId
+                }
+            });
+
+            // Assert
+            expect(instance.vm.$data.loadingCard).toEqual({ type: 'promo', count: 3 });
+        });
+
+        it('should request a "postOrder" skeleton loading card when all card types are "Post_Order_Card_1"', () => {
+            // Arrange
+            const enabledCardTypes = ['Post_Order_Card_1'];
+
+            // Act
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId,
+                    enabledCardTypes
+                }
+            });
+
+            // Assert
+            expect(instance.vm.$data.loadingCard).toEqual({ type: 'postOrder', count: 1 });
+        });
+    });
+
     it('should call logCardImpressions from f-metadata with data from all displayed cards', async () => {
         // Arrange
         const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
@@ -103,7 +200,7 @@ describe('ContentCards', () => {
         const arrange = async () => {
             const PromotionCard = Vue.extend({
                 template: '<div data-promotion-card="true"></div>',
-                inject: ['emitCardClick', 'emitCardView']
+                inject: ['emitCardClick', 'emitCardView', 'emitVoucherCodeClick']
             });
             const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
             const appboy = createAppboyInstance(cardTypes);
@@ -119,10 +216,16 @@ describe('ContentCards', () => {
             });
             const cardClickHandler = jest.spyOn(instance.vm._provided, 'emitCardClick');
             const cardViewHandler = jest.spyOn(instance.vm._provided, 'emitCardView');
+            const voucherCodeClickHandler = jest.spyOn(instance.vm._provided, 'emitVoucherCodeClick');
             instance.vm.contentCards(appboy);
             await instance.vm.$nextTick();
 
-            return { instance, cardClickHandler, cardViewHandler };
+            return {
+                instance,
+                cardClickHandler,
+                cardViewHandler,
+                voucherCodeClickHandler
+            };
         };
 
         it('should provide a view handler', async () => {
@@ -209,6 +312,32 @@ describe('ContentCards', () => {
                 expect(logCardClick).toHaveBeenCalledWith('foo');
             });
         });
+
+        it('should provide a voucher code copied handler', async () => {
+            const { instance, voucherCodeClickHandler } = await arrange();
+
+            // Act
+            instance.find('[data-promotion-card="true"]').vm.emitVoucherCodeClick(url);
+
+            // Assert
+            expect(voucherCodeClickHandler).toHaveBeenCalledWith(url);
+        });
+
+        describe('the voucher code copied handler', () => {
+            it('should emit a voucherCodeClick event', async () => {
+                const { instance } = await arrange();
+
+                // Act
+                instance.find('[data-promotion-card="true"]').vm.emitVoucherCodeClick(url);
+
+                // Assert
+                expect(instance.emitted().voucherCodeClick).toBeTruthy();
+                expect(instance.emitted().voucherCodeClick.length).toBe(1);
+                expect(instance.emitted().voucherCodeClick[0]).toEqual([{
+                    url
+                }]);
+            });
+        });
     });
 
     describe('when test id prop provided', () => {
@@ -262,5 +391,39 @@ describe('ContentCards', () => {
 
         // Assert
         expect(instance.find('[data-test-id]').exists()).toBeFalsy();
+    });
+
+    describe('emitters', () => {
+        const appboy = createAppboyInstance(['Post_Order_Card_1']);
+
+        const testEmitter = async (emitter, expectedArgs) => {
+            // Arrange & Act
+            const instance = await shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId
+                }
+            });
+            await instance.vm.contentCards(appboy);
+
+            // Assert
+            const [calls] = instance.emitted()[emitter];
+            const [args] = calls;
+
+            expect(calls.length).toBe(1);
+            expect(args).toEqual(expectedArgs);
+        };
+
+        it('should emit an event containing the appboy instance when appboy is initialised', async () => {
+            await testEmitter('on-braze-init', appboy);
+        });
+
+        it('should emit an event containing the content card count when appboy is initialised', async () => {
+            await testEmitter('get-card-count', 1);
+        });
+
+        it('should emit an event containing the loading status when appboy is initialised', async () => {
+            await testEmitter('has-loaded', true);
+        });
     });
 });

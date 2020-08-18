@@ -4,22 +4,18 @@ import CardContainer from '../CardContainer.vue';
 const localVue = createLocalVue();
 
 const url = '__URL__';
-const button = '__BUTTON__';
+const ctaLabel = '__CTA_LABEL__';
 const line1 = '__LINE_1__';
-const description = '__DESCRIPTION__';
+const description = [line1];
 const id = btoa('ABC123');
 const type = 'Promotion_Card_1';
 
 const card = {
     id,
     url,
-    button,
     description,
-    extras: {
-        button_1: button, // eslint-disable-line camelcase
-        custom_card_type: type, // eslint-disable-line camelcase
-        line_1: line1 // eslint-disable-line camelcase
-    }
+    ctaLabel,
+    type
 };
 
 const testId = 'CardContainer';
@@ -34,7 +30,7 @@ describe('ContentCard', () => {
         jest.resetAllMocks();
     });
 
-    it('should render a link if ctaUrl is provided', () => {
+    it('should render a link if url is provided', () => {
         // Act
         const wrapper = shallowMount(CardContainer, {
             localVue,

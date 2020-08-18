@@ -1,20 +1,16 @@
 import { shallowMount } from '@vue/test-utils';
 import PostOrderCard from '../PostOrderCard.vue';
 
-const imageUrl = '__IMAGE_URL__';
-const image = '__IMAGE_1__';
-const icon = '__ICON_1__';
-const button = '__BUTTON__';
-const linkText = '__LINK_TEXT__';
-const customCardType = 'Post_Order_Card_1';
+const image = '__IMAGE__';
+const icon = '__ICON__';
+const ctaText = '__CTA_TEXT__';
+const type = 'Post_Order_Card_1';
 
 const card = {
-    linkText,
-    extras: {
-        icon_1: icon, // eslint-disable-line camelcase
-        button_1: button, // eslint-disable-line camelcase
-        custom_card_type: customCardType // eslint-disable-line camelcase
-    }
+    ctaText,
+    icon,
+    image,
+    type
 };
 
 describe('contentCards › PostOrderCard', () => {
@@ -28,25 +24,7 @@ describe('contentCards › PostOrderCard', () => {
         });
 
         // Assert
-        expect(wrapper.find('[data-test-id="contentCard-postOrderCard-1"]').text()).toBe(button);
-    });
-
-    it('should fallback to linkText if button_1 is unavailable', () => {
-        // Arrange & Act
-        const wrapper = shallowMount(PostOrderCard, {
-            propsData: {
-                card: {
-                    linkText,
-                    extras: {
-                        custom_card_type: customCardType // eslint-disable-line camelcase
-                    }
-                },
-                testId: 'foo'
-            }
-        });
-
-        // Assert
-        expect(wrapper.find('[data-test-id="contentCard-postOrderCard-1"]').text()).toBe(linkText);
+        expect(wrapper.find('[data-test-id="contentCard-postOrderCard-1"]').text()).toBe(ctaText);
     });
 
     it('should hide the heading element if the copy is unavailable', () => {
@@ -63,10 +41,8 @@ describe('contentCards › PostOrderCard', () => {
             const wrapper = shallowMount(PostOrderCard, {
                 propsData: {
                     card: {
-                        extras: {
-                            icon_1: icon, // eslint-disable-line camelcase
-                            custom_card_type: customCardType // eslint-disable-line camelcase
-                        }
+                        icon,
+                        type
                     }
                 }
             });
@@ -80,11 +56,9 @@ describe('contentCards › PostOrderCard', () => {
             const wrapper = shallowMount(PostOrderCard, {
                 propsData: {
                     card: {
-                        imageUrl,
-                        extras: {
-                            icon_1: icon, // eslint-disable-line camelcase
-                            custom_card_type: customCardType // eslint-disable-line camelcase
-                        }
+                        image,
+                        icon,
+                        type
                     }
                 }
             });
@@ -97,13 +71,9 @@ describe('contentCards › PostOrderCard', () => {
             // Arrange & Act
             const wrapper = shallowMount(PostOrderCard, {
                 propsData: {
-                    card: {
-                        extras: {
-                            icon_1: icon, // eslint-disable-line camelcase
-                            image_1: image, // eslint-disable-line camelcase
-                            custom_card_type: customCardType // eslint-disable-line camelcase
-                        }
-                    }
+                    icon,
+                    image,
+                    type
                 }
             });
 

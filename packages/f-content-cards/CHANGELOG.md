@@ -3,18 +3,123 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v1.9.0
+------------------------------
+*August 10, 2020*
+
+### Changed
+- Move content card type checks to appropriate components to avoid explicit card type comparisons in `CardContainer`.
+
+
+v1.8.0
+------------------------------
+*August 6, 2020*
+
+### Changed
+- Transform incoming Braze SDK data at source to avoid manipulations throughout the component tree.
+
+
+v1.7.0
+------------------------------
+*August 4, 2020*
+
+### Added
+- `limitCards` prop which applies a hard limit to the content card count
+
+
+v1.6.0
+------------------------------
+*July 31, 2020*
+
+### Added
+- Added the following event emitters:
+    - `@on-braze-init`
+    - `@get-card-count`
+    - `@has-loaded`
+    - `@on-error`
+
+
+v1.5.0
+------------------------------
+*July 31, 2020*
+
+### Added
+- `VoucherCard` component from HomeWeb's Offer page
+- Associated stories for Voucher and Anniversary card types
+- I18n config for 'Copy Code' button
+- `locale` prop to enable above to take effect
+
+
+v1.4.0
+------------------------------
+*July 24, 2020*
+
+### Added
+- `xhr-mock` and `faker` as dev dependencies
+- Predictable faked card data for braze SDK responses
+
+### Changed
+- Story can multi-select different card types and then 'refresh'
+
+
+v1.3.0
+------------------------------
+*July 23, 2020*
+
+### Changed
+- Open external links in `_blank` and internal links in `_self`
+- Some small colour updates (small changes to greys and blues inline with rebrand phase 3.1).
+- Changing `data-theme` to `data-theme-contentcards` to avoid clashing with any other components in the future.
+- Vue CLI minor package updates.
+
+
+v1.2.0
+------------------------------
+*July 21, 2020*
+
+### Added
+- Apply skeleton loading state
+
+
+v1.1.0
+------------------------------
+*July 21, 2020*
+
+### Added
+- Add Skeleton loading state for post order content cards
+
+
+v1.0.0
+------------------------------
+*July 21, 2020*
+
+### Changed
+- Styles separated out to individual components and scoped to avoid bleed-out
+
+
+v0.11.0
+------------------------------
+*July 16, 2020*
+
+### Added
+- Skeleton loading state card template
+
+
+v0.10.1
+------------------------------
+*July 10, 2020*
+
+### Fixed
+- A defect where the main content card image was applied as a background image with cover sizing which caused the image to be cropped dependent on it's aspect ratio/sizing.
+
+
 v0.10.0
 ------------------------------
-*July 2, 2020*
+*July 7, 2020*
 
 ### Added
 - Accessibility add-on to Storybook story.
-
-v0.10.0
-------------------------------
-*July 7th, 2020*
-
-### Added
 - ContentCards component accepts `pushToDataLayer` callback as a prop for feeding back
   analytics regarding content cards
 - ContentCards component accepts `testId` parameter as a prop, which indicates the test

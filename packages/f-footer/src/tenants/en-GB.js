@@ -151,22 +151,22 @@ export default {
                     gtm: 'click_about_price_promise'
                 },
                 {
-                    url: '/privacy-policy',
+                    url: '/info/privacy-policy',
                     text: 'Privacy policy',
                     gtm: 'click_about_privacy_policy'
                 },
                 {
-                    url: '/termsandconditions',
+                    url: '/info/terms-and-conditions',
                     text: 'Terms and Conditions',
                     gtm: 'click_about_tandcs'
                 },
                 {
-                    url: '/cookiespolicy',
+                    url: '/info/cookies-policy',
                     text: 'Cookie Policy',
                     gtm: 'click_about_cookie_policy'
                 },
                 {
-                    url: 'https://www.justeatplc.com/about-us/our-business',
+                    url: 'https://www.just-eat.com/about-us',
                     text: 'About Just Eat',
                     gtm: 'click_about_about_us'
                 },
@@ -181,7 +181,7 @@ export default {
                     gtm: 'click_about_careers'
                 },
                 {
-                    url: 'https://www.justeatplc.com/download_file/view/435/1',
+                    url: 'https://www.just-eat.com/download_file/view/912/1',
                     text: 'Modern Slavery Statement',
                     target: '_blank',
                     rel: 'noopener',
@@ -214,19 +214,19 @@ export default {
         {
             url: 'https://www.facebook.com/justeat',
             name: 'facebook',
-            alt: 'Just Eat on Facebook',
+            alt: 'Just Eat on Facebook (leads to external site)',
             gtm: 'click_follow_facebook'
         },
         {
             url: 'https://twitter.com/JustEatUK',
             name: 'twitter',
-            alt: 'Just Eat on Twitter',
+            alt: 'Just Eat on Twitter (leads to external site)',
             gtm: 'click_follow_twitter'
         },
         {
             url: 'https://www.youtube.com/user/TVjusteat',
             name: 'youtube',
-            alt: 'Just Eat on YouTube',
+            alt: 'Just Eat on YouTube (leads to external site)',
             gtm: 'click_follow_youtube'
         }
     ],

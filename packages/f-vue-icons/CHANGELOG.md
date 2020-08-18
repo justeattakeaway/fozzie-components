@@ -4,12 +4,95 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+v1.2.0
 ------------------------------
-*June 4, 2020*
+*July 23, 2020*
+
+### Added
+- Adds a story to show all icons in a list view for demonstration purposes.
+
+
+v1.1.1
+------------------------------
+*July 23, 2020*
 
 ### Changed
-- ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails)
+- Moved some specific `devDependencies` used in this package away from the root (as they aren't currently shared by anything else).
+
+
+v1.1.0
+------------------------------
+*July 16, 2020*
+
+### Changed
+- Nothing changed (this is the same as `v1.0.0`) – package version name error :facepalm:
+
+
+v1.0.0
+------------------------------
+*July 16, 2020*
+
+### Changed
+- A lot! Component has been modified to pull in the new `f-icons` v2 package and build vue components from those icons. The main reason for making these changes is to allow for tree-shaking of `f-vue-icons` (previously, all icons had to be loaded in, which isn't good for performance when an application may only use a couple of the icons).
+- Icons are now given a class of `c-ficon` (changed from `c-icon`). This is to make it really clear which version of `f-vue-icons` an application is now using.
+- Some logo names have changed between the last beta release and the full v1 release. This was just part of normalising the icon names and so will need to be updated in consuming packages (the main logo names have changed for instance).
+- ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails).
+
+
+v1.0.0-beta.6
+------------------------------
+*June 8, 2020*
+
+### Changed
+- Update f-icons version to add new Menulog logo
+
+
+v1.0.0-beta.5
+------------------------------
+*September 11, 2019*
+
+### Changed
+- Update f-icons version to add gift icon
+
+
+v1.0.0-beta.4
+------------------------------
+*September 11, 2019*
+
+### Changed
+- Update f-icons version to add profile icon
+
+
+v1.0.0-beta.3
+------------------------------
+*September 5, 2019*
+
+### Changed
+- Update f-icons version to add je transparent logo and menulog logo
+
+
+v1.0.0-beta.2
+------------------------------
+*August 29, 2019*
+
+### Fixed
+- Bringing in new version of `f-icons`
+
+
+v1.0.0-beta.1
+------------------------------
+*August 29, 2019*
+
+### Fixed
+- Fixed tree shaking by adding `sideEffects`.
+
+
+v1.0.0-beta.0
+------------------------------
+*August 22, 2019*
+
+### Changed
+- Everything! Component has been modified now to pull in the new `f-icons` package and then build vue components from those files.  This is the first beta commit – still needs testing in packages to check working as expected.
 
 
 v0.20.1
@@ -17,7 +100,7 @@ v0.20.1
 *June 3, 2020*
 
 ### Fixed
-- Add `.vue` extentions to imports for icons in v0.20.0
+- Add `.vue` extensions to imports for icons in `v0.20.0`.
 
 
 v0.20.0
@@ -25,8 +108,8 @@ v0.20.0
 *June 2, 2020*
 
 ### Added
-- Sort icon
-- Restaurant Icon
+- Sort icon.
+- Restaurant icon.
 
 ### Changed
 - Updating `vue-test-utils` to v1 and `@vue/cli-plugin-unit-test` to v4.3.1.
@@ -40,7 +123,7 @@ v0.19.0
 *May 7, 2020*
 
 ### Added
-- Eyeglass icon
+- Eyeglass icon.
 
 
 v0.18.1
@@ -48,8 +131,8 @@ v0.18.1
 *March 30, 2020*
 
 ### Changed
-- Updated fileMock component name `TestFileStub` to comply with updated linting rules
-- Bumped `vue` dependency as was mismatched with other packages
+- Updated fileMock component name `TestFileStub` to comply with updated linting rules.
+- Bumped `vue` dependency as was mismatched with other packages.
 
 
 v0.18.0
