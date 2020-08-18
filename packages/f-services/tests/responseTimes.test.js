@@ -2,13 +2,11 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import setupResponseTimeRecording from '../src/responseTimes';
 
-let instance, mock;
+let instance;
+let mock;
 
-const withDelay = (delay, response) => () => {
-    return new Promise(function(resolve, _) {
-        setTimeout(() => resolve(response), delay);
-    });
-};
+// eslint-disable-next-line no-unused-vars
+const withDelay = (delay, response) => () => new Promise((resolve, _) => setTimeout(() => resolve(response), delay));
 
 beforeEach(() => {
     instance = axios.create();
@@ -31,7 +29,7 @@ describe('request interceptor', () => {
     it('should add requestStartedAt', async () => {
         // Arrange
         mock = new MockAdapter(instance);
-        mock.onGet("/test").reply(200);
+        mock.onGet('/test').reply(200);
         setupResponseTimeRecording(instance);
 
         // Act
@@ -51,7 +49,7 @@ describe('response interceptor', () => {
         console.log(`Delay         : ${delay}ms`); // eslint-disable-line no-console
 
         mock = new MockAdapter(instance);
-        mock.onGet("/test").reply(withDelay(delay, [200]));
+        mock.onGet('/test').reply(withDelay(delay, [200]));
         setupResponseTimeRecording(instance);
 
         // Act

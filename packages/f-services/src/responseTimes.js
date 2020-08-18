@@ -42,7 +42,7 @@ const setupResponseTimeRecording = ({ interceptors }) => {
         const timeTakenMs = new Date().getTime() - response.config.meta.requestStartedAt;
 
         if (process.env.NODE_ENV === 'development') {
-            console.log(`Executed (${response.config.url}) in ${timeTakenMs} ms`);
+            console.log(`Executed (${response.config.url}) in ${timeTakenMs} ms`); // eslint-disable-line no-console
         }
 
         response.responseTimeMs = timeTakenMs;
