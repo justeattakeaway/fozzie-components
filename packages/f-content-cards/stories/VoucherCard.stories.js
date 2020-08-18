@@ -90,9 +90,7 @@ export const VoucherCardcomponent = () => ({
     template: '<voucher-card :card="card" />'
 });
 
-VoucherCardcomponent.story = {
-    name: 'voucher-card'
-};
+VoucherCardcomponent.storyName = 'voucher-card';
 
 export const AnniversaryCardcomponent = () => ({
     components: {
@@ -143,6 +141,4 @@ export const AnniversaryCardcomponent = () => ({
     template: '<voucher-card :card="card" />'
 });
 
-AnniversaryCardcomponent.story = {
-    name: 'anniversary-card'
-};
+AnniversaryCardcomponent.storyName = 'anniversary-card';

@@ -31,6 +31,4 @@ export const FooterComponent = () => ({
     template: '<vue-footer :showCourierLinks="showCourierLinks" :locale="locale" />'
 });
 
-FooterComponent.story = {
-    name: 'f-footer'
-};
+FooterComponent.storyName = 'f-footer';

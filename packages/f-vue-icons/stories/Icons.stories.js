@@ -27,6 +27,4 @@ export const Icons = () => ({
     })
 });
 
-Icons.story = {
-    name: 'f-vue-icons'
-};
+Icons.storyName = 'f-vue-icons';
