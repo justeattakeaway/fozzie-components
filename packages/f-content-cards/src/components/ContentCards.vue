@@ -208,6 +208,8 @@ export default {
                 case 'Anniversary_Card_1':
                 case 'Voucher_Card_1':
                     return 'VoucherCard';
+                case 'Restaurant_FTC_Offer_Card':
+                    return 'FirstTimeCustomerCard';
                 case 'Post_Order_Card_1':
                     return 'PostOrderCard';
                 case 'Promotion_Card_1':
