@@ -24,6 +24,9 @@ The basic strategy is to load in the `JustEatBasis-Regular` webfont as soon as p
     font-weight: 400;
     font-display: swap;
 }
+body {
+    font-feature-settings: "tnum"; // Enable tabular numbers
+}
 </style>
 ```
 
@@ -47,7 +50,7 @@ if( "fonts" in document ) {
     });;
 }
 
-// This next block is for IE11 and old Edge support
+// This next block is for IE11 and old Edge support, which don't support the new Font loading API
 if(!("fonts" in document) && "head" in document) {
     // Awkwardly dump the second stage @font-face blocks in the head
     var style = document.createElement("style");
