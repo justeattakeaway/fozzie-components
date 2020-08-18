@@ -89,6 +89,7 @@ workflows:
   build:
     jobs:
       - build:
+          context: web-core
           filters:
             branches:
               ignore: 'gh-pages'
