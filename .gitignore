@@ -22,6 +22,8 @@ nbproject
 Thumbs.db
 logs
 *.log
+.yarnrc
+.yarn/
 .yalc
 yalc.lock
 package-lock.json

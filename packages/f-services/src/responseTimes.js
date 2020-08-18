@@ -53,6 +53,4 @@ const setupResponseTimeRecording = ({ interceptors }) => {
     });
 };
 
-export default {
-    setupResponseTimeRecording
-};
+export default setupResponseTimeRecording;

@@ -6,7 +6,9 @@ module.exports = api => {
         '@babel/plugin-proposal-optional-chaining'
     ];
 
-    if (!isTest) {
+    if (isTest) {
+        plugins.push('@babel/plugin-transform-runtime');
+    } else {
         api.cache(true);
     }
 
