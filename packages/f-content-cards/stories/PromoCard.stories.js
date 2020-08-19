@@ -73,13 +73,9 @@ function PromotionCardStoryGenerator (type) {
 
 export const PromotionCard1component = PromotionCardStoryGenerator('Promotion_Card_1');
 
-PromotionCard1component.story = {
-    name: 'promotion-card-1'
-};
+PromotionCard1component.storyName = 'promotion-card-1';
 
 
 export const PromotionCard2component = PromotionCardStoryGenerator('Promotion_Card_2');
 
-PromotionCard2component.story = {
-    name: 'promotion-card-2'
-};
+PromotionCard2component.storyName = 'promotion-card-2';
