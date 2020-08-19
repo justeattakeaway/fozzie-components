@@ -95,6 +95,4 @@ export const MegaModalComponent = () => ({
     `
 });
 
-MegaModalComponent.story = {
-    name: 'f-mega-modal'
-};
+MegaModalComponent.storyName = 'f-mega-modal';

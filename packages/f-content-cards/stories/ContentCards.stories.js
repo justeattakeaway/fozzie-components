@@ -113,6 +113,4 @@ export function ContentCardscomponent () {
     };
 }
 
-ContentCardscomponent.story = {
-    name: 'f-content-cards'
-};
+ContentCardscomponent.storyName = 'f-content-cards';

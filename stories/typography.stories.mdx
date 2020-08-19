@@ -1,0 +1,66 @@
+<Meta title="Documentation/Typography"/>
+
+# Typography
+
+## Font loading
+
+On the Just Eat and Menulog platform, we use our custom font `JustEatBasis`, of which we currently use two weights; Regular and Bold.
+
+For any platform wanting to consume these fonts, we recommend following the implementation, which closely follows the `[Critical FOFT with Preload](https://www.zachleat.com/web/comprehensive-webfonts/#critical-foft-preload)` technique as outlined by Zach Leat. A working demo can also be found of this loading strategy [on Codepen](https://codepen.io/ashleynolan/pen/gOrMpex).
+
+The basic strategy is to load in the `JustEatBasis-Regular` webfont as soon as possible. A faux bold is applied to this regular font while we lazy load in the `JustEatBasis-Bold` webfont, which then re-renders the faux bold as the intended bold typeface.
+
+## Implementation
+
+1. Add the following code into the `<head>` of your application.
+
+```html
+<link rel="preload" href="https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Regular-optimised.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face {
+    font-family: JustEatBasis;
+    src: url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Regular-optimised.woff2') format("woff2"),
+       url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Regular-optimised.woff') format("woff");
+    font-weight: 400;
+    font-display: swap;
+}
+body {
+    font-feature-settings: "tnum"; // Enable tabular numbers
+}
+</style>
+```
+
+The first `link` tag will load in the `JustEatBasis-Regular` font file. The `rel=preload` attribute tells the browser to download and cache it as soon as possible.
+
+The `@font-face` declaration is then to apply the `JustEatBasis` font as soon as it's available (and as it's inline in the `head` of the page, it won't wait for the rest of the CSS to be parsed until it renders the font).
+
+2. Add the following JS as an inline `<script>` block at the end of your HTML (just before your main JS bundle for example).
+
+```js
+if( "fonts" in document ) {
+    var bold = new FontFace("JustEatBasis", "url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff2') format('woff2'), url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff') format('woff')", { weight: "600" });
+
+    Promise.all([ bold.load() ]).then(function(fonts) {
+        fonts.forEach(function(font) {
+            document.fonts.add(font);
+        });
+    })
+      .then(function () {
+        document.documentElement.className += " fonts-loaded";
+    });;
+}
+
+// This next block is for IE11 and old Edge support, which don't support the new Font loading API
+if(!("fonts" in document) && "head" in document) {
+    // Awkwardly dump the second stage @font-face blocks in the head
+    var style = document.createElement("style");
+    // Note: Edge supports WOFF2
+    style.innerHTML = "@font-face { font-family: JustEatBasis; font-weight: 600; src: url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff2') format('woff2'), url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff') format('woff'); }";
+    document.head.appendChild(style);
+    document.documentElement.className += " fonts-loaded";
+}
+```
+
+This lazily loads in the `JustEatBasis-Bold` font to take over from the Faux Bold rendering of the Regular font.
+
+N.b. You should also put the two webfont URLs into your service worker so that they are cached at browser level, saving additional requests on repeat vists.
