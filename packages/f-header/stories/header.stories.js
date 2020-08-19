@@ -46,6 +46,4 @@ export const HeaderComponent = () => ({
     template: '<vue-header :userInfoProp="userInfoProp" :showOffersLink="showOffersLink" :locale="locale" :headerBackgroundTheme="headerBackgroundTheme" :showDeliveryEnquiry="showDeliveryEnquiry" />'
 });
 
-HeaderComponent.story = {
-    name: 'f-header'
-};
+HeaderComponent.storyName = 'f-header';
