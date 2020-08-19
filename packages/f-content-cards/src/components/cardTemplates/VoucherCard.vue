@@ -24,9 +24,6 @@
                         <tick-icon
                             v-if="inCooldown"
                             :class="[
-                                $style['c-badge'],
-                                $style['c-badge--rounded'],
-                                $style['c-badge--success'],
                                 $style['zeta'],
                                 $style['c-contentCard-voucher-code-cooldown-tick']
                             ]" />
@@ -190,8 +187,8 @@ export default {
     }
 
     .c-contentCard-voucher-code-cooldown-tick {
-        background-color: $color-text--success;
-        fill: $color-bg--component;
+        // background-color: $color-text--success;
+        fill: $color-text--success;
         width: spacing(x2);
         height: spacing(x2);
         padding: 0;
