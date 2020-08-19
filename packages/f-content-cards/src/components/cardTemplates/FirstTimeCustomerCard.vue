@@ -5,10 +5,10 @@
             <span
                 :class="['c-restaurantCard-banner-content', $style['c-restaurantCard-banner-content']]"
                 data-test-id="FirstTimeCustomerCard-Banner">
-                {{ banner }}
+                {{ card.banner }}
             </span>
         </span> for first time user
-        <p>{{ footer }}</p>
+        <p>{{ card.footer }}</p>
     </card-container>
 </template>
 
@@ -19,6 +19,7 @@ export default {
     components: {
         CardContainer
     },
+
     props: {
         card: {
             type: Object,

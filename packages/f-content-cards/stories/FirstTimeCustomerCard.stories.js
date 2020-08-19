@@ -34,6 +34,12 @@ export const FirstTimeCustomerCardcomponent = () => ({
         },
         label: {
             default: text('Call to Action Label', 'See the terms and conditions')
+        },
+        banner: {
+            default: text('Card Banner', 'Banner placeholder text')
+        },
+        footer: {
+            default: text('Card Footer', 'Footer placeholder text')
         }
     },
 
@@ -43,16 +49,12 @@ export const FirstTimeCustomerCardcomponent = () => ({
      */
     provide () {
         return {
-            copy: {
-                loggedInTitle: 'Copy logged in title',
-                loggedInSubtitle: 'Copy logged in subtitle',
-                loggedInTermsText: 'Copy linked text',
-                loggedInTermsUrl: '/copy/terms/url'
-            }
+            emitCardView () {},
+            emitCardClick () {}
         };
     },
 
-    template: '<terms-and-conditions-card :card="{title:cardTitle,subtitle,url,ctaText:label}" />'
+    template: '<first-time-customer-card :card="{title:cardTitle,subtitle,url,ctaText:label,banner,footer}" />'
 });
 
 FirstTimeCustomerCardcomponent.story = {
