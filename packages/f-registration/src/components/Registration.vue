@@ -6,11 +6,7 @@
         has-outline
         is-page-content-wrapper
         card-heading-position="center"
-<<<<<<< HEAD
         data-test-id="registration-component">
-=======
-        data-js-test="registration-component">
->>>>>>> a1e0450... Add data-test-id for registration component
         <p
             v-if="shouldShowLoginLink"
             :class="$style['c-loginLink']"
