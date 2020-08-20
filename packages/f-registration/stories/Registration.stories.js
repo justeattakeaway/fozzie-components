@@ -26,6 +26,4 @@ export const RegistrationComponent = () => ({
     template: '<registration :locale="locale" :title="title" :button-text="buttonText" />'
 });
 
-RegistrationComponent.story = {
-    name: 'f-registration'
-};
+RegistrationComponent.storyName = 'f-registration';

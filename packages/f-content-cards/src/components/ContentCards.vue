@@ -197,6 +197,12 @@ export default {
             this.$emit('has-loaded', true);
         },
 
+        /**
+         * Maps given card type to component name
+         *
+         * @param type
+         * @return {string|boolean}
+         */
         handleCustomCardType (type) {
             switch (type) {
                 case 'Anniversary_Card_1':
@@ -207,6 +213,9 @@ export default {
                 case 'Promotion_Card_1':
                 case 'Promotion_Card_2':
                     return 'PromotionCard';
+                case 'Terms_And_Conditions_Card':
+                case 'Terms_And_Conditions_Card_2':
+                    return 'TermsAndConditionsCard';
                 default:
                     break;
             }

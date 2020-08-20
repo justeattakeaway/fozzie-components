@@ -4,9 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.10.0
+------------------------------
+*August 18, 2020*
+
+### Added
+- `Terms and Conditions Card` (title) card type, with associated tests and story.
+
+
 v1.9.0
 ------------------------------
-*August 10, 2020*
+*August 11, 2020*
 
 ### Changed
 - Move content card type checks to appropriate components to avoid explicit card type comparisons in `CardContainer`.

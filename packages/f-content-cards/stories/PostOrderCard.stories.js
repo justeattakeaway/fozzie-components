@@ -69,6 +69,4 @@ export const PostOrderCardcomponent = () => ({
     template: '<post-order-card :card="card" :title="title" />'
 });
 
-PostOrderCardcomponent.story = {
-    name: 'post-order-card'
-};
+PostOrderCardcomponent.storyName = 'post-order-card';
