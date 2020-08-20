@@ -25,7 +25,7 @@ const passwordEmptyError = () => $('[data-test-id="error-password-empty"]');
  * Inputs user details into the registration component and submits the form.
  *
  * @param {Object} userInfo
- * @param {String} userInfo.firstName    The user's first name
+ * @param {String} userInfo.firstName The user's first name
  * @param {String} userInfo.lastName The user's last name
  * @param {String} userInfo.email The user's e-mail address
  * @param {String} userInfo.password The user's password
