@@ -18,13 +18,7 @@ export default {
  * Definition for story for First Time Customer Card component
  *
  * @param {Object} args
- * @param {Object}
- * @return {{
- *  template: string,
- *  components: {Object}
- *  props: {Object}
- *  provide: {Function}
- * }}
+ * @param {{argTypes: {Array}}}
  * @return {{
  *  template: string,
  *  components: {
