@@ -38,6 +38,4 @@ export const CardComponent = () => ({
         '<card :locale="locale" :cardHeading="cardHeading" :cardHeadingPosition="cardHeadingPosition" :isRounded="isRounded" :hasOutline="hasOutline" :isPageContentWrapper="isPageContentWrapper"><p>Some Card Content</p></card>'
 });
 
-CardComponent.story = {
-    name: 'f-card'
-};
+CardComponent.storyName = 'f-card';

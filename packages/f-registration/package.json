@@ -1,11 +1,11 @@
 {
   "name": "@justeat/f-registration",
   "description": "Fozzie Form Field Component",
-  "version": "0.12.0",
+  "version": "0.14.0",
   "main": "dist/f-registration.umd.min.js",
   "files": [
     "dist",
-    "page-objects"
+    "test-utils"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-registration",
   "contributors": [

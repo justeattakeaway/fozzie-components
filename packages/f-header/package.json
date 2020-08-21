@@ -1,11 +1,11 @@
 {
   "name": "@justeat/f-header",
   "description": "Fozzie Header – Globalised Header Component",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "main": "dist/f-header.umd.min.js",
   "files": [
     "dist",
-    "page-objects"
+    "test-utils"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-header",
   "contributors": [

@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.24.0
+------------------------------
+*August 18, 2020*
+
+### Changed
+- Updated to Storybook `v6` (and updated stories across other packages as part of the migration).
+
+
+v1.23.1
+------------------------------
+*August 18, 2020*
+
+### Added
+- CircleCI context to use shared variables.
+
+
 v1.23.0
 ------------------------------
 *July 23, 2020*

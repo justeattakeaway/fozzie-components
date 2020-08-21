@@ -33,6 +33,4 @@ export const FormFieldComponent = () => ({
         '<form-field :locale="locale" :labelText="labelText" :inputType="inputType" :labelStyle="labelStyle" />'
 });
 
-FormFieldComponent.story = {
-    name: 'f-form-field'
-};
+FormFieldComponent.storyName = 'f-form-field';

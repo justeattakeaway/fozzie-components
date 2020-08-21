@@ -20,6 +20,4 @@ export const SkeletonLoaderComponent = () => ({
     template: '<skeleton-loader :count="count" :type="type" />'
 });
 
-SkeletonLoaderComponent.story = {
-    name: 'skeleton-card'
-};
+SkeletonLoaderComponent.storyName = 'skeleton-card';
