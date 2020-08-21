@@ -10,6 +10,7 @@
                 :key="`${cardIndex}_${contentCard.id}`"
                 :card="contentCard"
                 :title="title"
+                :tenant="tenant"
                 :data-test-id="testIdForItemWithIndex(cardIndex)"
             />
         </template>
@@ -26,6 +27,14 @@ import initialiseBraze, { logCardClick, logCardImpressions } from '@justeat/f-me
 import ContentCards from '../services/contentCard.service';
 import cardTemplates from './cardTemplates';
 import tenantConfigs from '../tenants';
+import uk from "../tenants/en-GB";
+import au from "../tenants/en-AU";
+import nz from "../tenants/en-NZ";
+import dk from "../tenants/da-DK";
+import es from "../tenants/es-ES";
+import ie from "../tenants/en-IE";
+import it from "../tenants/it-IT";
+import no from "../tenants/nb-NO";
 
 /**
  * Generates card-specific analytics data suitable for sending back to GTM via f-trak
@@ -122,6 +131,21 @@ export default {
             hasLoaded: false,
             loadingCard
         };
+    },
+
+    computed: {
+        tenant () {
+            return {
+                'en-GB': 'uk',
+                'en-AU': 'au',
+                'en-NZ': 'nz',
+                'da-DK': 'dk',
+                'es-ES': 'es',
+                'en-IE': 'ie',
+                'it-IT': 'it',
+                'nb-NO': 'no'
+            }[this.locale] || 'uk';
+        }
     },
 
     watch: {

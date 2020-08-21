@@ -41,6 +41,10 @@ const transformCardData = card => {
         .filter(key => key.indexOf('line_') !== -1)
         .map(key => extras[key]);
 
+    if (subtitleDescription && (subtitle !== subtitleDescription)) {
+        description.unshift(subtitleDescription);
+    }
+
     const extractedCardId = extractCardId(id);
     const target = getCardUrlTarget(url);
 

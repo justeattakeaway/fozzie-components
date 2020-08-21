@@ -1,14 +1,31 @@
 <template>
     <card-container
-        :card="card">
-        <span :class="['c-restaurantCard-banner', $style['c-restaurantCard-banner']]">
+        :card="card"
+        :banner-before-description="bannerBeforeDescription"
+        :bold-title="!usesLegacyStyles">
+        <template v-slot:banner>
             <span
-                :class="['c-restaurantCard-banner-content', $style['c-restaurantCard-banner-content']]"
-                data-test-id="FirstTimeCustomerCard-Banner">
-                {{ card.banner }}
+                :class="['c-restaurantCard-banner', $style['c-restaurantCard-banner'], {
+                    [$style['c-restaurantCard-banner-legacy']]: usesLegacyStyles
+                }]">
+                <span
+                    :class="['c-restaurantCard-banner-content', $style['c-restaurantCard-banner-content'], {
+                        [$style['c-restaurantCard-banner-content-legacy']]: usesLegacyStyles
+                    }]"
+                    data-test-id="FirstTimeCustomerCard-Banner">
+                    {{ card.banner }}
+                </span>
             </span>
-        </span> for first time user
-        <p>{{ card.footer }}</p>
+            <template v-if="!bannerBeforeDescription">
+                for first time user
+            </template>
+        </template>
+        <p
+            :class="['c-restaurantCard-footer', $style['c-restaurantCard-footer'], {
+                [$style['c-restaurantCard-footer-legacy']]: usesLegacyStyles
+            }]">
+            {{ card.footer }}
+        </p>
     </card-container>
 </template>
 
@@ -29,6 +46,21 @@ export default {
         testId: {
             type: String,
             default: undefined
+        },
+
+        tenant: {
+            type: String,
+            default: 'uk'
+        }
+    },
+
+    computed: {
+        bannerBeforeDescription () {
+            return this.tenant === 'uk';
+        },
+
+        usesLegacyStyles () {
+            return this.tenant !== 'uk';
         }
     }
 };
@@ -38,15 +70,39 @@ export default {
 .c-restaurantCard-banner {
     position: relative;
     display: inline-block;
-    background: #cd381f;
-    transform: skew(-20deg);
-    border-radius: $border-radius;
-    color: white;
+    background: $card-section-highlight-backgroundColor;
     padding: 0 spacing();
+    margin: spacing(x2) 0;
 }
 
 .c-restaurantCard-banner-content {
     display: inline-block;
-    transform: skew(20deg);
+    font-weight: bold;
 }
+
+.c-restaurantCard-footer {
+    @include font-size(small);
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: -#{spacing()};
+}
+
+.c-restaurantCard-banner-legacy {
+    background: #cd381f;
+    transform: skew(-20deg);
+    border-radius: $border-radius;
+    color: white;
+}
+
+.c-restaurantCard-banner-content-legacy {
+    transform: skew(20deg);
+    font-weight: normal;
+}
+
+.c-restaurantCard-footer-legacy {
+    @include font-size(base);
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
 </style>
