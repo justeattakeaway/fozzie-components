@@ -27,14 +27,6 @@ import initialiseBraze, { logCardClick, logCardImpressions } from '@justeat/f-me
 import ContentCards from '../services/contentCard.service';
 import cardTemplates from './cardTemplates';
 import tenantConfigs from '../tenants';
-import uk from "../tenants/en-GB";
-import au from "../tenants/en-AU";
-import nz from "../tenants/en-NZ";
-import dk from "../tenants/da-DK";
-import es from "../tenants/es-ES";
-import ie from "../tenants/en-IE";
-import it from "../tenants/it-IT";
-import no from "../tenants/nb-NO";
 
 /**
  * Generates card-specific analytics data suitable for sending back to GTM via f-trak

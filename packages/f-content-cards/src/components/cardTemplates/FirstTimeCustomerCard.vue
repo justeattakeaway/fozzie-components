@@ -67,10 +67,13 @@ export default {
 </script>
 
 <style lang="scss" module>
+$banner-bgColour : $orange--offWhite;
+$banner-bgColour-legacy : #cd381f;
+
 .c-restaurantCard-banner {
     position: relative;
     display: inline-block;
-    background: $card-section-highlight-backgroundColor;
+    background: $banner-bgColour;
     padding: 0 spacing();
     margin: spacing(x2) 0;
 }
@@ -88,7 +91,7 @@ export default {
 }
 
 .c-restaurantCard-banner-legacy {
-    background: #cd381f;
+    background: $banner-bgColour-legacy;
     transform: skew(-20deg);
     border-radius: $border-radius;
     color: white;
