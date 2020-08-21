@@ -117,7 +117,7 @@
                         :class="$style['o-form-error']"
                         data-test-id='error-email-exists'>
                         <warning-icon :class="$style['o-form-error-icon']" />
-                        An account with this email already exists
+                        Email address is already registered
                     </p>
                 </template>
             </form-field>
