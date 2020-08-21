@@ -28,7 +28,7 @@
   "scripts": {
     "prepublishOnly": "yarn && yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-header ./src/index.js",
-    "demo": "vue serve --port 8080 ./src/demo/Index.vue",
+    "demo": "vue serve ./src/demo/Index.vue",
     "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit",
@@ -50,6 +50,7 @@
     "@justeat/f-trak": ">=0.6.0"
   },
   "devDependencies": {
+    "@babel/register": "^7.10.5",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
