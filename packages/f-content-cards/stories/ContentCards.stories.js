@@ -40,7 +40,7 @@ export default {
     decorators: [withKnobs, withA11y]
 };
 
-export function ContentCardscomponent () {
+export function ContentCardsComponent () {
     return {
         components: {
             ContentCards
@@ -113,4 +113,4 @@ export function ContentCardscomponent () {
     };
 }
 
-ContentCardscomponent.storyName = 'f-content-cards';
+ContentCardsComponent.storyName = 'f-content-cards';
