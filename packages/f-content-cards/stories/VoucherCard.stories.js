@@ -38,7 +38,7 @@ function voucherCard (cardType, title, imageUrl, subtitle, voucherCode, icon1, l
     };
 }
 
-export const VoucherCardcomponent = () => ({
+export const VoucherCardComponent = () => ({
     components: {
         VoucherCard
     },
@@ -90,9 +90,9 @@ export const VoucherCardcomponent = () => ({
     template: '<voucher-card :card="card" />'
 });
 
-VoucherCardcomponent.storyName = 'voucher-card';
+VoucherCardComponent.storyName = 'voucher-card';
 
-export const AnniversaryCardcomponent = () => ({
+export const AnniversaryCardComponent = () => ({
     components: {
         VoucherCard
     },
@@ -141,4 +141,4 @@ export const AnniversaryCardcomponent = () => ({
     template: '<voucher-card :card="card" />'
 });
 
-AnniversaryCardcomponent.storyName = 'anniversary-card';
+AnniversaryCardComponent.storyName = 'anniversary-card';

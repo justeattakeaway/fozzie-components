@@ -22,6 +22,7 @@ const voucherCode = '__VOUCHER_CODE__';
 const updated = '__UPDATED__';
 const extractedCardId = '__EXTRACTED_CARD_ID__';
 const description = '__DESCRIPTION__';
+const subtitle = '__SUBTITLE__';
 const target = { attribute: '_self' };
 
 getCardUrlTarget.mockReturnValue(target);
@@ -111,6 +112,48 @@ describe('services › utils › transformCardData', () => {
 
         // Assert
         expect(output.image).toBe(imageUrl);
+    });
+
+    describe('when `subtitle` key within extras is populated', () => {
+        // Arrange
+        const subtitleCardData = {
+            ...rawCard,
+            extras: {
+                line_1: line1, // eslint-disable-line camelcase
+                line_2: line2, // eslint-disable-line camelcase
+                subtitle
+            }
+        };
+
+        it('should populate `subtitle` key with subtitle value from extras', () => {
+            // Act
+            const output = transformCardData(subtitleCardData);
+
+            // Assert
+            expect(output.subtitle).toBe('__SUBTITLE__');
+        });
+
+        it('should prepend `description` key from main card config (if set) into description array', () => {
+            // Act
+            const output = transformCardData(subtitleCardData);
+
+            // Assert
+            expect(output.description).toEqual(['__DESCRIPTION__', '__LINE_1__', '__LINE_2__']);
+        });
+
+        it('should not append to description array, if description key is not set in main card config', () => {
+            // Arrange
+            const data = {
+                ...subtitleCardData,
+                description: undefined
+            };
+
+            // Act
+            const output = transformCardData(data);
+
+            // Assert
+            expect(output.description).toEqual(['__LINE_1__', '__LINE_2__']);
+        });
     });
 
     it('should return an empty object if provided card is not an object', async () => {

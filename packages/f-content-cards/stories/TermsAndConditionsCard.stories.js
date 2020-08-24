@@ -17,7 +17,7 @@ export default {
  *  provide: {Function}
  * }}
  */
-export const TermsAndConditionsCardcomponent = () => ({
+export const TermsAndConditionsCardComponent = () => ({
     components: {
         TermsAndConditionsCard
     },
@@ -55,6 +55,4 @@ export const TermsAndConditionsCardcomponent = () => ({
     template: '<terms-and-conditions-card :card="{title:cardTitle,subtitle,url,ctaText:label}" />'
 });
 
-TermsAndConditionsCardcomponent.story = {
-    name: 'terms-and-conditions-card'
-};
+TermsAndConditionsCardComponent.storyName = 'terms-and-conditions-card';

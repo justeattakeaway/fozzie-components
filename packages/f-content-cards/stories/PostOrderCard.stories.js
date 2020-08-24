@@ -9,7 +9,7 @@ export default {
     decorators: [withKnobs, withA11y]
 };
 
-export const PostOrderCardcomponent = () => ({
+export const PostOrderCardComponent = () => ({
     components: { PostOrderCard },
     props: {
         title: {
@@ -69,4 +69,4 @@ export const PostOrderCardcomponent = () => ({
     template: '<post-order-card :card="card" :title="title" />'
 });
 
-PostOrderCardcomponent.storyName = 'post-order-card';
+PostOrderCardComponent.storyName = 'post-order-card';
