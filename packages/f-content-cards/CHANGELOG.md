@@ -6,10 +6,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.12.0
 ------------------------------
-*August 21, 2020*
+*August 24, 2020*
 
 ### Changed
 - Updated anniversary card to match new styling requirements
+
+
+v1.11.0
+------------------------------
+*August 21, 2020*
+
+### Added
+- `Restaurant FTC Offer Card` card type, with associated tests and story.
 
 
 v1.10.0

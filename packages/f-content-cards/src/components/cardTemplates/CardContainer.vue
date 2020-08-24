@@ -23,12 +23,19 @@
                 :src="icon"
                 :alt="title"
                 :class="$style['c-contentCard-thumbnail']">
-            <h3 :class="[$style['c-contentCard-title'], titleSubStyle]">
+            <h3
+                :class="[$style['c-contentCard-title'], {
+                    [$style['c-contentCard-title-legacy']]: !boldTitle,
+                    titleSubStyle
+                }]">
                 {{ title }}
             </h3>
             <h4 :class="[$style['c-contentCard-subTitle'], subtitleSubStyle]">
                 {{ subtitle }}
             </h4>
+            <slot
+                v-if="bannerBeforeDescription"
+                name="banner" />
             <template v-for="(textItem, textIndex) in description">
                 <p
                     :key="textIndex"
@@ -37,6 +44,9 @@
                     {{ textItem }}
                 </p>
             </template>
+            <slot
+                v-if="!bannerBeforeDescription"
+                name="banner" />
             <div :class="$style['c-contentCard-footer']">
                 <slot />
             </div>
@@ -78,46 +88,54 @@ export default {
         isolateHeroImage: {
             type: Boolean,
             default: false
+        },
+        bannerBeforeDescription: {
+            type: Boolean,
+            default: false
+        },
+        boldTitle: {
+            type: Boolean,
+            default: false
         }
     },
 
-    data () {
-        const {
-            id,
-            url,
-            icon,
-            image,
-            order,
-            title,
-            subtitle,
-            voucherCode,
-            type,
-            description,
-            target = {}
-        } = this.card;
-
-        return {
-            description,
-            id,
-            url,
-            icon,
-            image,
-            order,
-            title,
-            subtitle,
-            voucherCode,
-            type,
-            target
-        };
-    },
-
     computed: {
+        description () {
+            return this.card.description;
+        },
+
+        icon () {
+            return this.card.icon;
+        },
+
+        image () {
+            return this.card.image;
+        },
+
+        subtitle () {
+            return this.card.subtitle;
+        },
+
+        target () {
+            return this.card.target || {};
+        },
+
+        title () {
+            return this.card.title;
+        },
+
+        url () {
+            return this.card.url;
+        },
+
         titleSubStyle () {
             return this.emboldenText ? this.$style['c-emboldenedText--title'] : '';
         },
+
         subtitleSubStyle () {
             return this.emboldenText ? this.$style['c-emboldenedText--subtitle'] : '';
         },
+
         textSubStyle () {
             return this.emboldenText ? this.$style['c-emboldenedText--text'] : '';
         }
@@ -224,9 +242,14 @@ export default {
         // Chrome and Edge (as both are Chromium), Safari and Firefox. Go figure.
         // Check this article for more info: https://css-tricks.com/line-clampin/#article-header-id-0
         overflow: hidden;
+        font-weight: bold;
         display: -webkit-box; /* stylelint-disable-line value-no-vendor-prefix */
         -webkit-line-clamp: 2; // stop at 2 lines
         -webkit-box-orient: vertical;
+    }
+
+    .c-contentCard-title-legacy {
+        font-weight: normal;
     }
 
     .c-contentCard-subTitle {
