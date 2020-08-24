@@ -10,6 +10,7 @@
                 :key="`${cardIndex}_${contentCard.id}`"
                 :card="contentCard"
                 :title="title"
+                :tenant="tenant"
                 :data-test-id="testIdForItemWithIndex(cardIndex)"
             />
         </template>
@@ -124,6 +125,21 @@ export default {
         };
     },
 
+    computed: {
+        tenant () {
+            return {
+                'en-GB': 'uk',
+                'en-AU': 'au',
+                'en-NZ': 'nz',
+                'da-DK': 'dk',
+                'es-ES': 'es',
+                'en-IE': 'ie',
+                'it-IT': 'it',
+                'nb-NO': 'no'
+            }[this.locale] || 'uk';
+        }
+    },
+
     watch: {
         cards (current, previous) {
             if (current.length && (current.length !== previous.length)) {
@@ -208,6 +224,8 @@ export default {
                 case 'Anniversary_Card_1':
                 case 'Voucher_Card_1':
                     return 'VoucherCard';
+                case 'Restaurant_FTC_Offer_Card':
+                    return 'FirstTimeCustomerCard';
                 case 'Post_Order_Card_1':
                     return 'PostOrderCard';
                 case 'Promotion_Card_1':
