@@ -26,11 +26,11 @@
             <h3
                 :class="[$style['c-contentCard-title'], {
                     [$style['c-contentCard-title-legacy']]: !boldTitle,
-                    titleSubStyle
+                    [$style['c-emboldenedText--title']]: emboldenText
                 }]">
                 {{ title }}
             </h3>
-            <h4 :class="[$style['c-contentCard-subTitle'], subtitleSubStyle]">
+            <h4 :class="[$style['c-contentCard-subTitle'], { [$style['c-emboldenedText--subtitle']]: emboldenText }]">
                 {{ subtitle }}
             </h4>
             <slot
@@ -40,7 +40,7 @@
                 <p
                     :key="textIndex"
                     :data-test-id="testIdForItemWithIndex(textIndex)"
-                    :class="[$style['c-contentCard-text'], textSubStyle]">
+                    :class="[$style['c-contentCard-text'], { [$style['c-emboldenedText--text']]: emboldenText }]">
                     {{ textItem }}
                 </p>
             </template>
@@ -126,18 +126,6 @@ export default {
 
         url () {
             return this.card.url;
-        },
-
-        titleSubStyle () {
-            return this.emboldenText ? this.$style['c-emboldenedText--title'] : '';
-        },
-
-        subtitleSubStyle () {
-            return this.emboldenText ? this.$style['c-emboldenedText--subtitle'] : '';
-        },
-
-        textSubStyle () {
-            return this.emboldenText ? this.$style['c-emboldenedText--text'] : '';
         }
     },
 
