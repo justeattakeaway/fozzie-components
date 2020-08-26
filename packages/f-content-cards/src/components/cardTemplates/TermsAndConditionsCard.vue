@@ -89,21 +89,21 @@ export default {
   }
 
   .c-contentCards-tnc-card-primaryHeader {
-    @include font-size(mid);
+    @include font-size(heading-s);
     color: $grey--darkest;
 
     @include media('>=narrow') {
-      @include font-size(jumbo);
+      @include font-size(heading-xl);
     }
   }
 
   .c-contentCards-tnc-card-secondaryHeader {
-    @include font-size(base);
+    @include font-size(body-s);
     color: $grey--dark;
     margin-top: spacing(x2);
 
     @include media('>=narrow') {
-      @include font-size(mid);
+      @include font-size(heading-s);
     }
   }
 </style>

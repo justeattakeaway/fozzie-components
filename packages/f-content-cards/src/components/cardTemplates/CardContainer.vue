@@ -241,7 +241,7 @@ export default {
     }
 
     .c-contentCard-subTitle {
-        @include font-size(base--scaleUp);
+        @include font-size(body-l);
         margin-top: spacing();
     }
 
@@ -308,7 +308,7 @@ export default {
         }
 
         .c-contentCard-subTitle {
-            @include font-size(base);
+            @include font-size(body-s);
 
             text-align: left;
             margin: 0;

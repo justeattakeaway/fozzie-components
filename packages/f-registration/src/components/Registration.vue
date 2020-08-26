@@ -367,14 +367,14 @@ export default {
 // Form styling
 
 .o-form {
-    @include font-size(base--scaleUp);
+    @include font-size(body-l);
 }
 
 .o-form-error {
     display: flex;
     align-items: center;
     color: $red;
-    @include font-size(base);
+    @include font-size(body-s);
     margin-top: spacing();
 }
 

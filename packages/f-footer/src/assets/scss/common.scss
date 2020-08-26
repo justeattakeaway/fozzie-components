@@ -20,15 +20,6 @@ $theme: 'je' !default;
  $footer-chevronColor    : $grey--darkest !default;
  $footer-socialIconColor : $grey--darkest !default;
 
- /**
- * Global variables which need to be included for Menulog theming
-* TODO: remove these when type is normalised to new JET font
- */
- $font-family-headings--ml   : 'Aspira', 'Times New Roman', Times, serif;
- $font-weight-headings--ml   : 800;
-
-
-
 @mixin theme($type) {
     [data-theme-footer="#{$type}"] & {
         @content;
