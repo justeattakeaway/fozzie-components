@@ -25,11 +25,12 @@
                 :class="$style['c-contentCard-thumbnail']">
             <h3
                 :class="[$style['c-contentCard-title'], {
-                    [$style['c-contentCard-title-legacy']]: !boldTitle
+                    [$style['c-contentCard-title-legacy']]: !boldTitle,
+                    [$style['c-emboldenedText--title']]: emboldenText
                 }]">
                 {{ title }}
             </h3>
-            <h4 :class="$style['c-contentCard-subTitle']">
+            <h4 :class="[$style['c-contentCard-subTitle'], { [$style['c-emboldenedText--subtitle']]: emboldenText }]">
                 {{ subtitle }}
             </h4>
             <slot
@@ -39,7 +40,7 @@
                 <p
                     :key="textIndex"
                     :data-test-id="testIdForItemWithIndex(textIndex)"
-                    :class="$style['c-contentCard-text']">
+                    :class="[$style['c-contentCard-text'], { [$style['c-emboldenedText--text']]: emboldenText }]">
                     {{ textItem }}
                 </p>
             </template>
@@ -79,6 +80,10 @@ export default {
         applyImageAsBackground: {
             type: Boolean,
             default: true
+        },
+        emboldenText: {
+            type: Boolean,
+            default: false
         },
         isolateHeroImage: {
             type: Boolean,
@@ -178,13 +183,14 @@ export default {
         }
 
         /**
-         * 1. Magic number to align isolated image with top of content card
+         * 1. Magic numbers to correctly size the hero image
          */
         &.c-contentCard--isolateHeroImage {
             position: relative;
-            margin: 84px 0 spacing(x3); // 1
 
             .c-contentCard-info {
+                padding-top: spacing(x10) + spacing(x6);
+                padding-bottom: spacing(x2);
                 border-radius: $border-radius;
             }
 
@@ -192,13 +198,15 @@ export default {
                 position: absolute;
                 left: 0;
                 right: 0;
-                top: -83px;
+                top: spacing(x2);
                 z-index: zIndex(mid);
-                width: 109px;
-                height: 96px;
+                width: 114px; // 1
+                height: 114px; // 1
                 margin: 0 auto;
                 min-height: inherit;
-                background: transparent no-repeat;
+                background: transparent no-repeat center;
+                background-size: contain;
+                border-radius: 0;
             }
         }
     }
@@ -211,10 +219,6 @@ export default {
         background-color: $grey--lighter;
         background-position: center;
         border-radius: $border-radius $border-radius 0 0;
-
-        .c-contentCard-info--inset & {
-            height: 188px;
-        }
     }
 
     .c-contentCard-title {
@@ -257,10 +261,6 @@ export default {
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
         height: 100%;
         border-radius: 0 0 $border-radius $border-radius;
-
-        .has-offer & {
-            padding-bottom: 0;
-        }
     }
 
     .c-contentCard-footer {
@@ -360,5 +360,20 @@ export default {
                 border-radius: $post-order-card-radius;
             }
         }
+    }
+
+    .c-emboldenedText--title {
+        font-weight: bold;
+    }
+
+    .c-emboldenedText--subtitle {
+        @include font-size(base);
+        margin-top: spacing(x2);
+    }
+
+    .c-emboldenedText--text {
+        @include font-size(base);
+        font-weight: bold;
+        margin-top: 0;
     }
 </style>

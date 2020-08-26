@@ -2,7 +2,8 @@
     <card-container
         :card="card"
         :cta-enabled="false"
-        :isolate-hero-image="isAnniversaryCard">
+        :isolate-hero-image="isAnniversaryCard"
+        :embolden-text="isAnniversaryCard">
         <button
             type="button"
             :class="$style['c-contentCard-voucher']"
@@ -73,8 +74,8 @@ export default {
         font-family: $font-family-base;
         border: solid $color-border;
         border-width: 1px 0 0;
-        padding-top: spacing(x1.5);
-        margin-top: spacing(x3);
+        padding-top: spacing(x2);
+        margin-top: spacing();
         cursor: pointer;
         background: transparent;
     }
