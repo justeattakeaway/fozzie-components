@@ -9,8 +9,7 @@ v1.1.0
 *August 18, 2020*
 
 ### Added
-- Request/response interceptors to record API response times and push to Prometheus.
-- `prom-client` for pushing to Prometheus.
+- Request/response interceptors to add response times to response object.
 - `axios-mock-adapter` to help with testing.
 
 ### Changed

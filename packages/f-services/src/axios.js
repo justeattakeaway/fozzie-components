@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import {
     forEach,
     isPlainObject,
@@ -8,8 +7,6 @@ import {
     words,
     upperFirst
 } from 'lodash-es';
-
-import setupResponseTimeRecording from './responseTimes';
 
 /**
  * Wrapper for navigator.connection and its Firefox/Safari implementations
@@ -98,6 +95,30 @@ const upperKebabCase = toConvert => words(toConvert)
     .join('-');
 
 /**
+ * Attach interceptors to the axios client to record response time from an API
+ *
+ * @param {AxiosInstance} axiosInstance
+ * @param {Function} callback - Function to be invoked, takes the [axios response object](https://github.com/axios/axios#response-schema) as a parameter. You should publish your stats (i.e., response times) using this callback.
+ */
+const setupResponseTimeRecording = ({ interceptors }, callback) => {
+    if (!callback || typeof callback !== 'function') return;
+
+    interceptors.request.use(config => {
+        config.meta = config.meta || {};
+        config.meta.requestStartedAt = new Date().getTime();
+        return config;
+    });
+
+    interceptors.response.use(response => {
+        const timeTakenMs = new Date().getTime() - response.config.meta.requestStartedAt;
+        response.responseTimeMs = timeTakenMs; // Extend the default response schema
+
+        callback(response);
+        return response;
+    });
+};
+
+/**
  * Create an axios client.
  *
  * @param {Object} options
@@ -106,7 +127,7 @@ const createClient = ({
     baseURL = '',
     headers,
     config,
-    recordResponseTimes = false
+    responseCallback = false
 } = {}) => {
     const instance = axios.create({
         baseURL,
@@ -115,9 +136,7 @@ const createClient = ({
         ...config
     });
 
-    if (recordResponseTimes) {
-        setupResponseTimeRecording(instance);
-    }
+    setupResponseTimeRecording(instance, responseCallback);
 
     return instance;
 };
@@ -147,5 +166,6 @@ export default {
     createClient,
     createCamelCaseClient,
     objectToCamelCase,
-    getNetworkDetails
+    getNetworkDetails,
+    setupResponseTimeRecording
 };
