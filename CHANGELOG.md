@@ -3,6 +3,103 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.24.1
+------------------------------
+*August 20, 2020*
+
+### Changed
+- Updated typography docs for importing custom font.
+
+
+v1.24.0
+------------------------------
+*August 18, 2020*
+
+### Changed
+- Updated to Storybook `v6` (and updated stories across other packages as part of the migration).
+
+
+v1.23.1
+------------------------------
+*August 18, 2020*
+
+### Added
+- CircleCI context to use shared variables.
+
+
+v1.23.0
+------------------------------
+*July 23, 2020*
+
+### Added
+- `storybook:serve` & `storybook:build` scripts re-added so that storybook can be run from the root of the mono-repo.
+
+### Changed
+- Updating `fozzie` and `fozzie-colour-palette` to latest version (Rebrand rollout - Phase 3).
+- Minor package updates.
+
+### Removed
+- Moved some specific `f-vue-icons` dependencies away from the root, as not shared by any other package.
+
+
+v1.22.0
+------------------------------
+*July 16, 2020*
+
+### Changed
+- Adding package dependencies for new `f-vue-icons` release.
+
+
+v1.21.0
+------------------------------
+*July 13, 2020*
+
+### Added
+- Updated Docker image in `config.yml` to include Chrome for Percy visual regression tests
+- New task in `config.yml` to run visual regression tests
+
+### Changed
+- Updated `sass-loader` to 7.3.1 to allow storybook to perform contextual import of common.scss files
+  from Single File Components in subdirectories
+- SSH key fingerprint that is used to deploy Storybook
+
+
+v1.20.0
+------------------------------
+*July 9, 2020*
+
+### Changed
+- Updating dependencies of `fozzie-header` and `f-footer` packages.
+
+
+v1.19.0
+------------------------------
+*June 25, 2020*
+
+### Changed
+- Updating base version of `fozzie-colour-palette` and updating any colour variables affected.
+- Minor package updates.
+
+
+v1.18.0
+------------------------------
+*June 25, 2020*
+
+### Added
+- devDependency on `cross-env` to allow for cross-platform environment variables in CI scripts
+
+### Changed
+- scripts using `$LERNA_ARGS` to use `cross-env` as above
+
+
+v1.17.0
+------------------------------
+*June 24, 2020*
+
+### Changed
+- CircleCI params to restrict build concurrency to 1 to solve memory issues
+- StoryBook CircleCI build to build packages first to ensure dependencies are available
+
 
 v1.16.0
 ------------------------------

@@ -1,12 +1,10 @@
-import globalThis from 'core-js/features/global-this';
-
 /**
  * @overview Fozzie f-content-cards Component JS Wrapper
  *
  * @module f-content-cards
  */
 
-
+import globalThis from 'core-js/features/global-this';
 // Import vue component
 import ContentCards from '@/components/ContentCards.vue';
 

@@ -196,25 +196,25 @@ export default {
         {
             url: 'https://www.facebook.com/JustEatIreland',
             name: 'facebook',
-            alt: 'Just Eat on Facebook',
+            alt: 'Just Eat on Facebook (leads to external site)',
             gtm: 'click_follow_facebook'
         },
         {
             url: 'https://www.twitter.com/JustEatIE',
             name: 'twitter',
-            alt: 'Just Eat on Twitter',
+            alt: 'Just Eat on Twitter (leads to external site)',
             gtm: 'click_follow_twitter'
         },
         {
             url: 'https://instagram.com/justeatie/',
             name: 'instagram',
-            alt: 'Just Eat on Instagram',
+            alt: 'Just Eat on Instagram (leads to external site)',
             gtm: 'click_follow_instagram'
         },
         {
             url: 'https://www.pinterest.com/justeatie/',
             name: 'pinterest',
-            alt: 'Just Eat on Pinterest',
+            alt: 'Just Eat on Pinterest (leads to external site)',
             gtm: 'click_follow_pinterest'
         }
     ],

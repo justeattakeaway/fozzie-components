@@ -4,13 +4,77 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+v3.4.0
 ------------------------------
-*June 4, 2020*
+*July 23, 2020*
 
 ### Changed
-- ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails)
+- Updating component with the latest rebrand phase 3.1 colour changes (and updated internal colour aliases).
+- Updated to `v1` of `f-vue-icons`.
+- Changing `data-theme` to `data-theme-footer` to avoid clashing with any other components in the future.
+- Vue CLI minor package updates.
+
+
+v3.3.2
+------------------------------
+*July 10, 2020*
+
+### Changed
+- Patch to include latest `f-vue-icons`.
+
+
+v3.3.1
+------------------------------
+*July 10, 2020*
+
+### Changed
+- Patch to include latest `f-vue-icons`.
+
+
+v3.3.0
+------------------------------
+*July 9, 2020*
+
+### Changed
+- Updated link to Modern Slavery statement
+- Updated footer links to avoid redirects
+
+### Added
+- "Leads to external site" to social media link alt text (currently English only)
+
+
+v3.2.0
+------------------------------
+*July 9, 2020*
+
+### Changed
+- Updated `f-vue-icons` version.
+- Made `f-trak` peer dependency use a range value.
+
+### Removed
+- Unused `lodash-es` dependency.
+- `lodash-es` ignore from jest config.
+
+
+v3.1.0
+------------------------------
+*July 2, 2020*
+
+### Added
+- Accessibility add-on to Storybook story.
+
+
+v3.0.0
+------------------------------
+*June 22, 2020*
+
+### Changed
+- Updated component to new orange JET theme for all tenants.
+- ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails).
 - Jest config updated to hide style warnings (as we don't need them to be shown for the tests).
+
+### Removed
+- Menulog colour theming (typography switch is still needed).
 
 
 v2.3.0

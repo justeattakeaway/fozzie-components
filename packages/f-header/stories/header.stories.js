@@ -2,6 +2,7 @@ import {
     withKnobs, boolean, select, object
 } from '@storybook/addon-knobs';
 import VueHeader from '../src/components/Header.vue';
+import { withA11y } from '@storybook/addon-a11y';
 
 const userInfo = {
     friendlyName: 'John',
@@ -17,7 +18,7 @@ const userInfo = {
 
 export default {
     title: 'Components/Organisms',
-    decorators: [withKnobs]
+    decorators: [withKnobs, withA11y]
 };
 
 export const HeaderComponent = () => ({
@@ -33,7 +34,7 @@ export const HeaderComponent = () => ({
             default: boolean('Show delivery enquiry', false)
         },
         headerBackgroundTheme: {
-            default: select('Header theme', ['white', 'red', 'transparent'])
+            default: select('Header theme', ['white', 'highlight', 'transparent'])
         },
         userInfoProp: {
             default: object('User info', userInfo)
@@ -45,6 +46,4 @@ export const HeaderComponent = () => ({
     template: '<vue-header :userInfoProp="userInfoProp" :showOffersLink="showOffersLink" :locale="locale" :headerBackgroundTheme="headerBackgroundTheme" :showDeliveryEnquiry="showDeliveryEnquiry" />'
 });
 
-HeaderComponent.story = {
-    name: 'f-header'
-};
+HeaderComponent.storyName = 'f-header';

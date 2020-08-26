@@ -13,10 +13,10 @@ $theme: 'je' !default;
 /**
  * Component Variables
  */
-// $card-background-color          : $brand--red;
+// $card-background-color          : $brand--orange;
 
 @mixin theme($type) {
-    [data-theme="#{$type}"] & {
+    [data-theme-card="#{$type}"] & {
         @content;
     }
 }

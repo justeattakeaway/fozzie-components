@@ -1,9 +1,10 @@
 import { withKnobs, select, text } from '@storybook/addon-knobs';
 import Registration from '../src/components/Registration.vue';
+import { withA11y } from '@storybook/addon-a11y';
 
 export default {
     title: 'Components/Organisms',
-    decorators: [withKnobs]
+    decorators: [withKnobs, withA11y]
 };
 
 export const RegistrationComponent = () => ({
@@ -25,6 +26,4 @@ export const RegistrationComponent = () => ({
     template: '<registration :locale="locale" :title="title" :button-text="buttonText" />'
 });
 
-RegistrationComponent.story = {
-    name: 'f-registration'
-};
+RegistrationComponent.storyName = 'f-registration';

@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import axios from 'axios';
+import loggedInUserMock from './__mocks__/api.account.details.json';
 import Navigation from '../Navigation.vue';
 
 const defaultPropsData = {
@@ -35,11 +36,7 @@ const defaultData = {
     navIsOpen: false,
     localOrderCountExpires: false
 };
-const asyncUserDetails = {
-    friendlyName: 'Bob',
-    isAuthenticated: true,
-    email: 'bob.magoo@just-eat.com'
-};
+const asyncUserDetails = loggedInUserMock;
 
 
 const desktopWidth = 1200;
@@ -235,18 +232,18 @@ describe('Navigation', () => {
             expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).not.toContain('is-open');
         });
 
-        it('should be white when "headerBackgroundTheme" is set to "red"', () => {
+        it('should be white when "headerBackgroundTheme" is set to "highlight"', () => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
-                headerBackgroundTheme: 'red'
+                headerBackgroundTheme: 'highlight'
             };
 
             // Act
             const wrapper = shallowMount(Navigation, { propsData });
 
             // Assert
-            expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).toContain('c-logo--brandColour');
+            expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).toContain('c-nav-toggle--altColour');
         });
     });
 

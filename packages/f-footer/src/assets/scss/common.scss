@@ -13,27 +13,24 @@ $theme: 'je' !default;
 /**
  * Component Variables
  */
- $footer-bgColor         : $grey--lightest !default;
- $footer-bgLight         : $grey--offWhite !default;
+ $footer-bgColor         : $grey--light !default;
+ $footer-bgLight         : $grey--lighter !default;
  $footer-textColor       : $color-text !default;
- $footer-borderColor     : $color-border--interactive !default;
- $footer-chevronColor    : $grey--dark !default;
- $footer-socialIconColor : $grey--dark !default;
+ $footer-borderColor     : $color-border !default;
+ $footer-chevronColor    : $grey--darkest !default;
+ $footer-socialIconColor : $grey--darkest !default;
 
  /**
  * Global variables which need to be included for Menulog theming
-* TODO: delete these when brand is normalised to JET as will be able to pull in default colours
+* TODO: remove these when type is normalised to new JET font
  */
  $font-family-headings--ml   : 'Aspira', 'Times New Roman', Times, serif;
  $font-weight-headings--ml   : 800;
- $color-link-default--ml     : #4950b9;
- $color-link-hover--ml       : #464cb1;
- $color-link-active--ml      : #3d439b;
 
 
 
 @mixin theme($type) {
-    [data-theme="#{$type}"] & {
+    [data-theme-footer="#{$type}"] & {
         @content;
     }
 }

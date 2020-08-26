@@ -117,11 +117,11 @@ export default {
 </script>
 
 <style lang="scss" module>
-$form-input-colour                        : $grey--dark;
+$form-input-colour                        : $color-text;
 $form-input-bg                            : $white;
 $form-input-borderRadius                  : 3px;
 $form-input-borderWidth                   : 1px;
-$form-input-borderColour                  : $grey--lightest;
+$form-input-borderColour                  : $grey--light;
 $form-input-borderColour--focus           : $grey--dark;
 
 .c-formField {

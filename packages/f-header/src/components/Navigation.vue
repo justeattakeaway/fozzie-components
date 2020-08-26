@@ -345,7 +345,7 @@ export default {
         },
 
         navToggleThemeClass () {
-            return this.headerBackgroundTheme === 'red' ? 'c-logo--brandColour' : '';
+            return this.headerBackgroundTheme === 'highlight' ? 'c-nav-toggle--altColour' : '';
         },
 
         /**
@@ -418,9 +418,9 @@ export default {
                 }
             });
 
-            userDetailsPromise.then(data => {
-                if (data.isAuthenticated) {
-                    this.userInfo = data;
+            userDetailsPromise.then(response => {
+                if (response.data.isAuthenticated) {
+                    this.userInfo = response.data;
 
                     if (this.isOrderCountValid) {
                         this.fetchOrderCountAndSave();
@@ -521,31 +521,31 @@ export default {
 
 $nav-text-size                     : 'base--scaleUp';
 $nav-text-font                     : $font-family-headings;
-$nav-text-color                    : $blue;
-$nav-text-color--transparent       : $white;
-$nav-text-weight                   : 500;
-$nav-text-color--hover             : $blue;
-$nav-text-subFont                  : $font-family-base;
+$nav-text-color                    : $color-link-default;
+$nav-text-color--hover             : $color-link-hover;
 $nav-text-color--narrow            : $grey--dark;
-$nav-icon-color                    : $blue;
+$nav-text-color--transparent       : $white;
+$nav-text-weight                   : $font-weight-bold;
+$nav-text-subFont                  : $font-family-base;
+$nav-icon-color                    : $color-secondary;
 $nav-icon-color--transparent       : $white;
 $nav-transition-duration           : 250ms;
 
 $nav-featureLinkIcon-width         : 28px;
 $nav-featureLinkIcon-height        : 28px;
 
-$nav-trigger-length                : 56px;
+$nav-trigger-width                 : 56px;
+$nav-trigger-height                : 48px;
 $nav-trigger-focus-color           : $blue;
 $nav-trigger-focus-bg              : $blue--offWhite;
 $nav-toggleIcon-left               : spacing(x2);
 $nav-toggleIcon-width              : 21px;
 $nav-toggleIcon-height             : 2px;
 $nav-toggleIcon-borderRadius       : 1px;
-$nav-toggleIcon-color              : $blue;
+$nav-toggleIcon-color              : $color-secondary;
 $nav-toggleIcon-color--transparent : $white;
 $nav-toggleIcon-bg                 : transparent;
 $nav-toggleIcon-space              : 5px;
-
 
 $nav-tooltip-width                 : 10px;
 
@@ -554,17 +554,6 @@ $nav-popover-radius                : 3px;
 $nav-popover-transition-duration   : 200ms;
 $nav-popover-transition-delay      : 200ms;
 $nav-popover-padding               : spacing(x2);
-
-
-
-// Menulog theme overrides
-$nav-text-color--ml                : $violet;
-$nav-text-color--hover--ml         : $violet--dark;
-$nav-toggleIcon-color--ml          : $orange-largeText;
-$nav-icon-color--ml                : $orange-largeText;
-
-$nav-trigger-focus-color--ml       : $orange-largeText;
-$nav-trigger-focus-bg--ml          : $orange--offWhite;
 
 
 @mixin nav-container-visible () {
@@ -687,7 +676,7 @@ $nav-trigger-focus-bg--ml          : $orange--offWhite;
             @include font-size('base');
             font-weight: 300;
             text-decoration: none;
-            border-bottom: 1px solid $grey--lightest;
+            border-bottom: 1px solid $grey--light;
 
             @include media('>=mid') {
                 font-family: $nav-text-font;
@@ -696,16 +685,13 @@ $nav-trigger-focus-bg--ml          : $orange--offWhite;
                 color: $nav-text-color;
                 border-bottom: none;
 
-                @include theme(ml) {
-                    color: $nav-text-color--ml;
-                }
-
                 // the following styles align the elements vertically to the height of the header bar
                 // don’t need a fallback, as it degrades gracefully
                 display: flex;
                 align-items: center;
                 height: $header-height;
 
+                .c-header--highlightBg &,
                 .c-header--transparent & {
                     color: $nav-text-color--transparent;
                 }
@@ -735,10 +721,7 @@ $nav-trigger-focus-bg--ml          : $orange--offWhite;
                     color: $nav-text-color--hover;
                     text-decoration: underline;
 
-                    @include theme(ml) {
-                        color: $nav-text-color--hover--ml;
-                    }
-
+                    .c-header--highlightBg,
                     .c-header--transparent & {
                         color: $nav-text-color--transparent;
                     }
@@ -783,10 +766,7 @@ $nav-trigger-focus-bg--ml          : $orange--offWhite;
             & path {
                 fill: $nav-icon-color;
 
-                @include theme(ml) {
-                    fill: $nav-icon-color--ml;
-                }
-
+                .c-header--highlightBg &,
                 .c-header--transparent & {
                     fill: $nav-icon-color--transparent;
                 }
@@ -797,15 +777,6 @@ $nav-trigger-focus-bg--ml          : $orange--offWhite;
     .c-nav-icon--profile {
         width: 20px;
         height: 22px;
-
-    // mobile menulog user profile icon to be green, not default blue
-    & path {
-        @include media('<mid') {
-            @include theme(ml) {
-                    fill: $nav-icon-color--ml;
-                }
-            }
-        }
     }
 
     .c-nav-icon--delivery {
@@ -820,10 +791,7 @@ $nav-trigger-focus-bg--ml          : $orange--offWhite;
         & path {
             fill: $nav-icon-color;
 
-            @include theme(ml) {
-                fill: $nav-icon-color--ml;
-            }
-
+            .c-header--highlightBg &,
             .c-header--transparent & {
                 fill: $nav-icon-color--transparent;
             }
@@ -866,7 +834,7 @@ $nav-trigger-focus-bg--ml          : $orange--offWhite;
 
         & .c-nav-list-item {
             float: none;
-            border-bottom: 1px solid $grey--lightest;
+            border-bottom: 1px solid $grey--light;
 
             &:last-child {
                 border-bottom: none;
@@ -908,8 +876,8 @@ $nav-trigger-focus-bg--ml          : $orange--offWhite;
 // This is the checkbox that controls the menu active state without JS via :checked
 .c-nav-trigger {
     position: absolute;
-    width: $nav-trigger-length;
-    height: $nav-trigger-length;
+    width: $nav-trigger-width;
+    height: $nav-trigger-height;
     top: -100px;
     left: -100px;
 
@@ -939,8 +907,8 @@ $nav-trigger-focus-bg--ml          : $orange--offWhite;
     position: absolute;
     top: 0;
     left: 0;
-    width: $nav-trigger-length;
-    height: $nav-trigger-length;
+    width: $nav-trigger-width;
+    height: $nav-trigger-height;
     cursor: pointer;
     background-color: $nav-toggleIcon-bg;
     border: none;
@@ -974,15 +942,11 @@ $nav-trigger-focus-bg--ml          : $orange--offWhite;
             background-color: $nav-toggleIcon-color;
             border-radius: $nav-toggleIcon-borderRadius;
 
-            @include theme(ml) {
-                background-color: $nav-toggleIcon-color--ml;
-            }
-
             .c-header--transparent & {
                 background-color: $nav-toggleIcon-color--transparent;
             }
 
-            .c-logo--brandColour & {
+            .c-nav-toggle--altColour & {
                 background-color: $white;
             }
         }

@@ -4,11 +4,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+v0.6.0
 ------------------------------
+*June 23, 2020*
+
+### Changed
+- Changing `data-theme` to `data-theme-formfield` to avoid clashing with any other components in the future.
+- Vue CLI minor package updates.
+- Updating colour of input label and border.
+
+*July 2, 2020*
+
+### Added
+- Accessibility add-on to Storybook story.
+
 *June 4, 2020*
 
 ### Changed
+- Updating colour variables to use new versions set in `fozzie-colour-palette`.
 - ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails)
 
 
