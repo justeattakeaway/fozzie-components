@@ -50,9 +50,9 @@ $btn-default-borderRadius           : 2px;
 $btn-default-hozPadding             : 1em;
 $btn-default-vertPadding            : 11px;
 
-$btn-primary-bgColor                : $blue;
-$btn-primary-bgColor--hover         : $blue--dark;
-$btn-primary-bgColor--focus         : $blue--darkest;
+$btn-primary-bgColor                : $orange;
+$btn-primary-bgColor--hover         : $orange--dark;
+$btn-primary-bgColor--focus         : $orange--darkest;
 $btn-primary-textColor              : $white;
 
 $btn-disabled-bgColor               : $grey--light;

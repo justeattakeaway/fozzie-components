@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.15.0
+------------------------------
+*August 26, 2020*
+
+### Changed
+- Update button colour to orange.
 
 v0.14.0
 ------------------------------
