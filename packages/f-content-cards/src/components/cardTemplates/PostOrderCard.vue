@@ -103,7 +103,7 @@ export default {
         }
 
         .c-postOrderCard-title {
-            @include font-size(large);
+            @include font-size(heading-m);
 
             margin-bottom: spacing(x2);
 

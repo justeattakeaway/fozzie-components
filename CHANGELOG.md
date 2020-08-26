@@ -72,6 +72,14 @@ v1.29.0
 - Move `@pact-foundation/pact` to devDependencies.
 
 
+v2.0.0
+------------------------------
+*September 9, 2020*
+
+### Changed
+- Updating components to use `JustEatBasis` and subsequent breaking changes to update font variables to hook into new design token variables in fozzie.
+
+
 v1.28.0
 ------------------------------
 *September 9, 2020*

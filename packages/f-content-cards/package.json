@@ -1,7 +1,11 @@
 {
   "name": "@justeat/f-content-cards",
   "description": "Fozzie Content Cards",
+<<<<<<< HEAD
   "version": "1.15.0",
+=======
+  "version": "2.0.0-beta.0",
+>>>>>>> 1a5a4c6... fozzie-components@v2.0.0 – JustEatBasis typography updates
   "main": "dist/f-content-cards.umd.min.js",
   "files": [
     "dist"

@@ -3,15 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.29.0
+------------------------------
+### Changed
+- Uses `JustEatBasis` font and new fozzie font size declarations.
+
+
 v0.28.0
 ------------------------------
 ### Removed
 - Contract tests + scripts
 
-
 v0.27.0
 ------------------------------
 *September 23, 2020*
+
 ### Changed
 - Use the latest version of F-Card to apply top and bottom margins to the registration component
 
@@ -82,6 +89,7 @@ v0.21.0
 
 ### Added
 - `registrationSource` and `marketingPreferences` to account creation post request body.
+
 
 v0.20.0
 ------------------------------
