@@ -531,22 +531,19 @@ describe('Navigation', () => {
         });
     });
 
-    describe('showLoginOrUserInfo', () => {
-
-        it('should NOT show "login" if `showLoginOrUserInfo: false`"', async () => {
+    describe('showLoginInfo', () => {
+        it('should NOT show "login" if `showLoginInfo: false`"', async () => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
-                showLoginOrUserInfo: false
+                showLoginInfo: false
             };
 
             // Act
             const wrapper = shallowMount(Navigation, {
                 propsData,
                 data () {
-                    return {
-                        ...defaultData
-                    };
+                    return defaultData;
                 }
             });
 
@@ -554,11 +551,11 @@ describe('Navigation', () => {
             expect(wrapper.find('[data-js-test="login"]').exists()).toBe(false);
         });
 
-        it('should NOT show "navLinks" if `showLoginOrUserInfo: false` and the user is logged in and has nav link data', async () => {
+        it('should NOT show "navLinks" if `showLoginInfo: false` and the user is logged in and has nav link data', async () => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
-                showLoginOrUserInfo: false
+                showLoginInfo: false
             };
 
             // Act
@@ -571,7 +568,7 @@ describe('Navigation', () => {
             });
 
             // Assert
-            expect(wrapper.find('[data-js-test="user-info-icon"]').classes()).toContain('is-hidden')
+            expect(wrapper.find('[data-js-test="user-info-icon"]').classes()).toContain('is-hidden');
         });
     });
 });

@@ -29,7 +29,7 @@
                 :order-count-url="orderCountUrl"
                 :is-order-count-supported="isOrderCountSupported"
                 :header-background-theme="headerBackgroundTheme"
-                :show-login-or-user-info="showLoginOrUserInfo"
+                :show-login-info="showLoginInfo"
                 @onMobileNavToggle="mobileNavToggled" />
         </div>
     </header>
@@ -65,7 +65,7 @@ export default {
             default: false
         },
 
-        showLoginOrUserInfo: {
+        showLoginInfo: {
             type: Boolean,
             default: true
         },
