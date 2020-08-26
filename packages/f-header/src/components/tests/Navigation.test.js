@@ -188,6 +188,7 @@ describe('Navigation', () => {
         expect(wrapper.find('[data-js-test="login"]').exists()).toBe(true);
     });
 
+
     describe('nav links', () => {
         it('should be shown on mobile when is "navIsOpen" is true', async () => {
             // Arrange
@@ -527,6 +528,50 @@ describe('Navigation', () => {
 
             // Act
             expect(spy).toHaveBeenCalled();
+        });
+    });
+
+    describe('showLoginOrUserInfo', () => {
+
+        it('should NOT show "login" if `showLoginOrUserInfo: false`"', async () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                showLoginOrUserInfo: false
+            };
+
+            // Act
+            const wrapper = shallowMount(Navigation, {
+                propsData,
+                data () {
+                    return {
+                        ...defaultData
+                    };
+                }
+            });
+
+            // Assert
+            expect(wrapper.find('[data-js-test="login"]').exists()).toBe(false);
+        });
+
+        it('should NOT show "navLinks" if `showLoginOrUserInfo: false` and the user is logged in and has nav link data', async () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                showLoginOrUserInfo: false
+            };
+
+            // Act
+            const wrapper = shallowMount(Navigation, { propsData });
+            await wrapper.setData({
+                ...propsData,
+                userInfo: {
+                    isAuthenticated: true
+                }
+            });
+
+            // Assert
+            expect(wrapper.find('[data-js-test="user-info-icon"]').classes()).toContain('is-hidden')
         });
     });
 });
