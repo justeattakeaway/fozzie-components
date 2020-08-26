@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.1.0
 ------------------------------
-*August 18, 2020*
+*August 26, 2020*
 
 ### Added
 - Request/response interceptors to add response times to response object.

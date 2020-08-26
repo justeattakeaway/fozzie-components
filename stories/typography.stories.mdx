@@ -6,7 +6,7 @@
 
 On the Just Eat and Menulog platform, we use our custom font `JustEatBasis`, of which we currently use two weights; Regular and Bold.
 
-For any platform wanting to consume these fonts, we recommend following the implementation, which closely follows the `[Critical FOFT with Preload](https://www.zachleat.com/web/comprehensive-webfonts/#critical-foft-preload)` technique as outlined by Zach Leat. A working demo can also be found of this loading strategy [on Codepen](https://codepen.io/ashleynolan/pen/gOrMpex).
+For any platform wanting to consume these fonts, we recommend following the implementation, which closely follows the [Critical FOFT with Preload](https://www.zachleat.com/web/comprehensive-webfonts/#critical-foft-preload) technique as outlined by Zach Leat. A working demo can also be found of this loading strategy [on Codepen](https://codepen.io/ashleynolan/pen/gOrMpex).
 
 The basic strategy is to load in the `JustEatBasis-Regular` webfont as soon as possible. A faux bold is applied to this regular font while we lazy load in the `JustEatBasis-Bold` webfont, which then re-renders the faux bold as the intended bold typeface.
 
@@ -30,9 +30,9 @@ body {
 </style>
 ```
 
-The first `link` tag will load in the `JustEatBasis-Regular` font file. The `rel=preload` attribute tells the browser to download and cache it as soon as possible.
+   The first `link` tag will load in the `JustEatBasis-Regular` font file. The `rel=preload` attribute tells the browser to download and cache it as soon as possible.
 
-The `@font-face` declaration is then to apply the `JustEatBasis` font as soon as it's available (and as it's inline in the `head` of the page, it won't wait for the rest of the CSS to be parsed until it renders the font).
+   The `@font-face` declaration is then to apply the `JustEatBasis` font as soon as it's available (and as it's inline in the `head` of the page, it won't wait for the rest of the CSS to be parsed until it renders the font).
 
 2. Add the following JS as an inline `<script>` block at the end of your HTML (just before your main JS bundle for example).
 
@@ -46,7 +46,7 @@ if( "fonts" in document ) {
         });
     })
       .then(function () {
-        document.documentElement.className += " fonts-loaded";
+        document.documentElement.className += " webfonts-loaded";
     });;
 }
 
@@ -57,10 +57,12 @@ if(!("fonts" in document) && "head" in document) {
     // Note: Edge supports WOFF2
     style.innerHTML = "@font-face { font-family: JustEatBasis; font-weight: 600; src: url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff2') format('woff2'), url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff') format('woff'); }";
     document.head.appendChild(style);
-    document.documentElement.className += " fonts-loaded";
+    document.documentElement.className += " webfonts-loaded";
 }
 ```
 
 This lazily loads in the `JustEatBasis-Bold` font to take over from the Faux Bold rendering of the Regular font.
 
 N.b. You should also put the two webfont URLs into your service worker so that they are cached at browser level, saving additional requests on repeat vists.
+
+3. You should now be able to use the `JustEatBasis` font when defining your `font-family` in CSS. If you use `fozzie`, this will automatically get set as part of the typography styles. If not, then you will need to set `font-family: 'JustEatBasis';` in your CSS to use it. Bold is under the same font name at `font-weight: 600;`.
