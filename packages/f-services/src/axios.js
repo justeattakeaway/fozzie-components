@@ -95,6 +95,30 @@ const upperKebabCase = toConvert => words(toConvert)
     .join('-');
 
 /**
+ * Attach interceptors to the axios client to record response time from an API
+ *
+ * @param {AxiosInstance} axiosInstance
+ * @param {Function} callback - Function to be invoked, takes the [axios response object](https://github.com/axios/axios#response-schema) as a parameter. You should publish your stats (i.e., response times) using this callback.
+ */
+const setupResponseTimeRecording = ({ interceptors }, callback) => {
+    if (!callback || typeof callback !== 'function') return;
+
+    interceptors.request.use(config => {
+        config.meta = config.meta || {};
+        config.meta.requestStartedAt = new Date().getTime();
+        return config;
+    });
+
+    interceptors.response.use(response => {
+        const timeTakenMs = new Date().getTime() - response.config.meta.requestStartedAt;
+        response.responseTimeMs = timeTakenMs; // Extend the default response schema
+
+        callback(response);
+        return response;
+    });
+};
+
+/**
  * Create an axios client.
  *
  * @param {Object} options
@@ -102,13 +126,20 @@ const upperKebabCase = toConvert => words(toConvert)
 const createClient = ({
     baseURL = '',
     headers,
-    config
-} = {}) => axios.create({
-    baseURL,
-    headers: objectToAlternateCasing(headers, upperKebabCase),
-    timeout: getTimeout(),
-    ...config
-});
+    config,
+    responseCallback = false
+} = {}) => {
+    const instance = axios.create({
+        baseURL,
+        headers: objectToAlternateCasing(headers, upperKebabCase),
+        timeout: getTimeout(),
+        ...config
+    });
+
+    setupResponseTimeRecording(instance, responseCallback);
+
+    return instance;
+};
 
 /**
  * Wrapper for createClient that transforms response objects' property names to camelCase.
@@ -135,5 +166,6 @@ export default {
     createClient,
     createCamelCaseClient,
     objectToCamelCase,
-    getNetworkDetails
+    getNetworkDetails,
+    setupResponseTimeRecording
 };
