@@ -42,7 +42,7 @@ export default {
     margin: auto;
     border: 1px solid $red;
     font-family: $font-family-base;
-    @include font-size(large);
+    @include font-size(heading-m);
 }
 
 </style>

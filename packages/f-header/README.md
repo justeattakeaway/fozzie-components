@@ -64,16 +64,16 @@ The props that can be defined are as follows:
 
 | Prop                      | Type          | Default | Description |
 | :---                      |     :---:     |  :---:  | :---        |
-| locale                    | `String`      | `en-GB` | Sets the locale of the component (which determines what theme and translations to use.<br><br>If the application consuming the `f-card` component is using the vue `i18n` module, then the locale from that module will be used when this prop isn't defined. When this prop is defined, it takes precedence over the locale defined by the `i18n` module.<br><br>If not defined and the `i18n` module isn't present, the default locale used is `en-GB`.|
-| errorLog                  | `Function`     | `-`    | Function passed in for logging errors with the `fetchUserInfo` method. |
-| headerBackgroundTheme     | `Boolean`     | `white` | Sets the background theme for the header component.<br><br>When set to `white` the header will be white with the default logo colour.<br>When set to `transparent` the header will be transparent with a white logo.<br>When set to `highlight` the header will use the primary brand colour as the background colour with a white logo. |
+| locale                    | `String`      | `en-GB` | Sets the locale of the component (which determines what theme and translations to use.<br><br>If the application consuming the `f-header` component is using the vue `i18n` module, then the locale from that module will be used when this prop isn't defined. When this prop is defined, it takes precedence over the locale defined by the `i18n` module.<br><br>If not defined and the `i18n` module isn't present, the default locale used is `en-GB`.|
+| errorLog                  | `Function`    | `-`    | Function passed in for logging errors with the `fetchUserInfo` method. |
+| headerBackgroundTheme     | `String`      | `white` | Sets the background theme for the header component.<br><br>When set to `white` the header will be white with the default logo colour.<br>When set to `transparent` the header will be transparent with a white logo.<br>When set to `highlight` the header will use the primary brand colour as the background colour with a white logo. |
 | isOrderCountSupported     | `Boolean`     | `true` | ?? |
-| orderCountUrl             | `Boolean`     | `false` | ?? |
+| orderCountUrl             | `String`      | `false` | ?? |
 | showDeliveryEnquiry       | `Boolean`     | `false` | Defines if it is necessary to show the "Deliver with Just Eat" link in the header. |
 | showOffersLink            | `Boolean`     | `false` | Defines whether the offers link should be shown in the navigation. |
 | showLoginInfo             | `Boolean`     | `true` | Defines whether the login & user info icon should be shown in the navigation. |
-| userInfoProp              | `Object`     | `{}`     | Optional object conaining user details. If not provided `userInfoProp` is set via XHR call to `/api/account/details` |
-| userInfoUrl               | `Boolean`     | `false` | URL to call to retrieve the userInfo (when `userInfoProp` isn't set). |
+| userInfoProp              | `Object`      | `{}`     | Optional object conaining user details. If not provided `userInfoProp` is set via XHR call to `/api/account/details` |
+| userInfoUrl               | `String`      | `false` | URL to call to retrieve the userInfo (when `userInfoProp` isn't set). |
 
 
     `showLoginInfo` - Optional Boolean property with `true` as a default value, defines whether the login / user info icon should be shown in the navigation.
