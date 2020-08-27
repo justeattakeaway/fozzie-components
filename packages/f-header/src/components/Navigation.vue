@@ -86,7 +86,10 @@
                 </li>
 
                 <li
-                    :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo || !showLoginInfo, 'open': navIsOpen }]"
+                    :class="['c-nav-list-item has-sublist', {
+                        'is-hidden': !userInfo || !showLoginInfo,
+                        'open': navIsOpen
+                    }]"
                     data-js-test="user-info-icon"
                     v-on="isBelowMid ? null : { mouseover: openNav, mouseleave: closeNav }"
                     @keyup.esc="closeNav">
