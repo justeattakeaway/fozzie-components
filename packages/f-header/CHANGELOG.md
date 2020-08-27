@@ -30,7 +30,7 @@ v4.0.0-beta.1
 
 v4.0.0-beta.0
 ------------------------------
-*August 26, 2020*
+*August 27, 2020*
 
 ### Changed
 - Uses `JustEatBasis` font and new fozzie font size declarations.

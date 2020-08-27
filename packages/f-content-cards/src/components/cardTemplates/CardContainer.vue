@@ -367,12 +367,12 @@ export default {
     }
 
     .c-emboldenedText--subtitle {
-        @include font-size(base);
+        @include font-size(body-s);
         margin-top: spacing(x2);
     }
 
     .c-emboldenedText--text {
-        @include font-size(base);
+        @include font-size(body-s);
         font-weight: bold;
         margin-top: 0;
     }

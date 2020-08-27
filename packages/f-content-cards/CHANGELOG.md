@@ -31,6 +31,17 @@ v1.14.0
 - `Home_Promotion_Card_1` template and type to allowed content card types
 
 
+v2.0.0-beta.1
+------------------------------
+*August 28, 2020*
+
+### Added
+- Check for `console.error` being thrown in `utils` tests.
+
+### Fixed
+- Couple of old font references updated.
+
+
 v2.0.0-beta.0
 ------------------------------
 *August 27, 2020*
