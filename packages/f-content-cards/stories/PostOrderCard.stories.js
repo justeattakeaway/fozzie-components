@@ -6,7 +6,6 @@ export default {
         headline: { control: { type: 'text' } },
         cardTitle: { control: { type: 'text' } },
         subtitle: { control: { type: 'text' } },
-        description: { control: { type: 'text' } },
         image: { control: { type: 'text' } },
         icon: { control: { type: 'text' } },
         ctaText: { control: { type: 'text' } },
@@ -47,7 +46,7 @@ export const PostOrderCardComponent = (args, { argTypes }) => ({
         };
     },
 
-    template: '<post-order-card :card="{title: cardTitle, ctaText, headline, image, icon, description: [description], url}" :tenant="tenant" />'
+    template: '<post-order-card :card="{title: cardTitle, ctaText, headline, image, icon, subtitle, url}" :tenant="tenant" />'
 });
 
 PostOrderCardComponent.storyName = 'post-order-card';
@@ -55,7 +54,7 @@ PostOrderCardComponent.storyName = 'post-order-card';
 PostOrderCardComponent.args = {
     headline: 'Promotional Offer',
     cardTitle: 'Treat them with a Just Eat gift card',
-    description: 'Whether you want to treat Mum to her Friday night favourite, or surprise your mate with a ‘KFC on me’, show them you care – the tasty way.',
+    subtitle: 'Whether you want to treat Mum to her Friday night favourite, or surprise your mate with a ‘KFC on me’, show them you care – the tasty way.',
     ctaText: 'Purchase now',
     image: 'https://picsum.photos/seed/FirstTimeCustomerCard_image/384/216?blur=3',
     icon: 'https://picsum.photos/seed/FirstTimeCustomerCard_icon/48/48',
