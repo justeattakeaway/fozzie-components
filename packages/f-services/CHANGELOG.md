@@ -4,21 +4,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+v1.1.0
 ------------------------------
-*July 23, 2020*
+*August 26, 2020*
+
+### Added
+- Request/response interceptors to add response times to response object.
+- `axios-mock-adapter` to help with testing.
 
 ### Changed
 - Vue CLI minor package updates.
-
-*May 12, 2020*
-
-### Changed
 - `@vue/cli-plugin-unit-test` to v4.3.1.
 - ESLint autofix turned off (so that tests don't pass due to `--fix` being applied, but then publish subsequently fails)
 
 
-1.0.1
+v1.0.1
 ------------------------------
 *May 6, 2020*
 
@@ -26,7 +26,7 @@ Latest (roll into next release)
 - Syntax in `index.js` so that newer versions of f-services are compatible with Storybook
 
 
-1.0.0
+v1.0.0
 ------------------------------
 *April 1, 2020*
 
@@ -43,7 +43,7 @@ Latest (roll into next release)
 - `addEvent` returns the function that was assigned to the event listener so that this can be passed in to `removeEvent`. This is necessary for removing throttled event listeners.
 
 
-0.13.2
+v0.13.2
 ------------------------------
 *February 24, 2020*
 
@@ -51,7 +51,7 @@ Latest (roll into next release)
 - Unneeded dependencies removed (as in root monorepo dependencies or not used)
 
 
-0.13.1
+v0.13.1
 ------------------------------
 *January 22, 2020*
 
@@ -64,7 +64,7 @@ Latest (roll into next release)
 - `DEFAULT_LOCALE` variable for appropriate fallback rules
 
 
-0.13.0
+v0.13.0
 ------------------------------
 *November 8, 2019*
 
@@ -72,7 +72,7 @@ Latest (roll into next release)
 - Making sure that necessary 3rd party dependencies are bundled as part of the package
 
 
-0.12.0
+v0.12.0
 ------------------------------
 *November 8, 2019*
 
@@ -80,7 +80,7 @@ Latest (roll into next release)
 - Switched over to rollup for bundling as webpack was giving strange results when importing as a library
 
 
-0.11.0
+v0.11.0
 ------------------------------
 *October 4, 2019*
 
@@ -88,7 +88,7 @@ Latest (roll into next release)
 - `window-or-global` package for SSR issue`
 
 
-0.10.0
+v0.10.0
 ------------------------------
 *October 2, 2019*
 
@@ -100,7 +100,7 @@ Latest (roll into next release)
 - Name of the export in the `index.js` to `sharedServices` for consistency
 
 
-0.9.0
+v0.9.0
 ------------------------------
 *October 1, 2019*
 
@@ -108,7 +108,7 @@ Latest (roll into next release)
 - `lodash-es` throttle for the `addEvent` service
 
 
-0.8.0
+v0.8.0
 ------------------------------
 *September 30, 2019*
 
@@ -119,7 +119,7 @@ Latest (roll into next release)
 - `removeEvent` method for clearing the listener for a given event and function
 
 
-0.7.0
+v0.7.0
 ------------------------------
 *September 27, 2019*
 
@@ -127,7 +127,7 @@ Latest (roll into next release)
 - `transformLocale` as it is not needed any more
 
 
-0.6.0
+v0.6.0
 ------------------------------
 *September 26, 2019*
 
@@ -135,7 +135,7 @@ Latest (roll into next release)
 - Webpack config to add babel polyfill
 
 
-0.5.0
+v0.5.0
 ------------------------------
 *September 26, 2019*
 
@@ -143,7 +143,7 @@ Latest (roll into next release)
 - `transformLocale` method for changing the case format of the locale
 
 
-0.4.0
+v0.4.0
 ------------------------------
 *September 25, 2019*
 
@@ -151,7 +151,7 @@ Latest (roll into next release)
 - String manipulation on locale in `getLocale` method
 
 
-0.3.0
+v0.3.0
 ------------------------------
 *September 24, 2019*
 
@@ -159,7 +159,7 @@ Latest (roll into next release)
 - Added fallback for other method in shared service
 
 
-0.2.0
+v0.2.0
 ------------------------------
 *September 24, 2019*
 
@@ -167,7 +167,7 @@ Latest (roll into next release)
 - Fallback for locale in shared logic
 
 
-0.1.0
+v0.1.0
 ------------------------------
 *September 24, 2019*
 
