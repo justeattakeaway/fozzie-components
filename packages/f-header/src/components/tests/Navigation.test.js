@@ -561,7 +561,7 @@ describe('Navigation', () => {
             // Act
             const wrapper = shallowMount(Navigation, { propsData });
             await wrapper.setData({
-                ...propsData,
+                ...defaultData,
                 userInfo: {
                     isAuthenticated: true
                 }
