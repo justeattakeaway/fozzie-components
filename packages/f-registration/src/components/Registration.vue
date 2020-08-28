@@ -188,11 +188,7 @@ export default {
     props: {
         locale: {
             type: String,
-            default: ''
-        },
-        tenant: { // TODO ACC2-506 Compute tenant value from local config instead of using this prop
-            type: String,
-            required: true
+            default: 'en-GB'
         },
         title: {
             type: String,
@@ -267,6 +263,18 @@ export default {
         },
         shouldShowLoginLink () {
             return this.loginSettings && this.loginSettings.linkText && this.loginSettings.url;
+        },
+        tenant () {
+            return {
+                'en-GB': 'uk',
+                'en-AU': 'au',
+                'en-NZ': 'nz',
+                'da-DK': 'dk',
+                'es-ES': 'es',
+                'en-IE': 'ie',
+                'it-IT': 'it',
+                'nb-NO': 'no'
+            }[this.locale];
         }
     },
 
