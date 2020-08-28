@@ -65,7 +65,6 @@ export default {
     color: $white;
     background-color: $orange;
     max-width: 100%;
-    margin-top: spacing(x2);
 }
 
 .c-userMessage-container {
