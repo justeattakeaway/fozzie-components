@@ -67,6 +67,8 @@
 
     `userInfoProp` - Optional object conaining user details. If not provided `userInfoProp` is set via XHR call to `/api/account/details`
 
+    `showLoginInfo` - Optional Boolean property with `true` as a default value, defines whether the login / user info icon should be shown in the navigation.
+
 ## Demo and local development
 
 Running the command below from the component folder e.g. `./packages/f-header` will start a development server and allow to preview the component usually on http://localhost:8080/ 
