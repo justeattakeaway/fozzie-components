@@ -8,7 +8,7 @@ jest.mock('../../services/RegistrationServiceApi', () => ({ createAccount: jest.
 
 describe('Registration', () => {
     const propsData = {
-        tenant: 'uk',
+        locale: 'en-GB',
         createAccountUrl: 'http://localhost/account/register'
     };
 
@@ -32,7 +32,7 @@ describe('Registration', () => {
         it('should show the login link if loginSettings prop set.', () => {
             const wrapper = shallowMount(Registration, {
                 propsData: {
-                    tenant: 'uk',
+                    locale: 'en-GB',
                     createAccountUrl: 'http://localhost/account/register',
                     loginSettings: {
                         preLinkText: 'Already have an account?',
@@ -50,7 +50,7 @@ describe('Registration', () => {
         it('should not show the login link if loginSettings prop set but linkText not set.', () => {
             const wrapper = shallowMount(Registration, {
                 propsData: {
-                    tenant: 'uk',
+                    locale: 'en-GB',
                     createAccountUrl: 'http://localhost/account/register',
                     loginSettings: {
                         preLinkText: 'Already have an account?'
@@ -66,7 +66,7 @@ describe('Registration', () => {
         it('should not show the login link if loginSettings prop set but url not set.', () => {
             const wrapper = shallowMount(Registration, {
                 propsData: {
-                    tenant: 'uk',
+                    locale: 'en-GB',
                     createAccountUrl: 'http://localhost/account/register',
                     loginSettings: {
                         preLinkText: 'Already have an account?',
@@ -86,6 +86,17 @@ describe('Registration', () => {
             const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
 
             expect(loginLink.exists()).toBe(false);
+        });
+
+        it('should fallback to use the en-GB locale if no locale passed', () => {
+            // Arrange
+            const wrapper = shallowMount(Registration, {
+                propsData: {
+                    createAccountUrl: 'http://localhost/account/register'
+                }
+            });
+
+            expect(wrapper.vm.tenant).toBe('uk');
         });
     });
 
