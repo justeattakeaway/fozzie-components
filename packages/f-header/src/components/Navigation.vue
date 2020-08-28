@@ -86,7 +86,11 @@
                 </li>
 
                 <li
-                    :class="['c-nav-list-item has-sublist', { 'is-hidden': !userInfo, 'open': navIsOpen }]"
+                    :class="['c-nav-list-item has-sublist', {
+                        'is-hidden': !userInfo || !showLoginInfo,
+                        'open': navIsOpen
+                    }]"
+                    data-js-test="user-info-icon"
                     v-on="isBelowMid ? null : { mouseover: openNav, mouseleave: closeNav }"
                     @keyup.esc="closeNav">
                     <a
@@ -152,7 +156,7 @@
                 </li>
 
                 <li
-                    v-if="!userInfo"
+                    v-if="!userInfo && showLoginInfo"
                     class="c-nav-list-item"
                     data-js-test="login">
                     <a
@@ -187,7 +191,7 @@
                 </li>
 
                 <li
-                    v-if="userInfo && isBelowMid"
+                    v-if="userInfo && isBelowMid && showLoginInfo"
                     class="c-nav-list-item"
                     data-js-test="logout">
                     <a
@@ -269,6 +273,11 @@ export default {
         showOffersLink: {
             type: Boolean,
             default: false
+        },
+
+        showLoginInfo: {
+            type: Boolean,
+            default: true
         },
 
         errorLog: {
