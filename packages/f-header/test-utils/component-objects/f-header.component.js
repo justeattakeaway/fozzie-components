@@ -20,4 +20,4 @@ exports.clickHelpLink = () => {
     helpLink().click();
 }
 
-exports.logoIsDisplayed = () => headerLogo().isDisplayed();
+exports.isLogoDisplayed = () => headerLogo().isDisplayed();

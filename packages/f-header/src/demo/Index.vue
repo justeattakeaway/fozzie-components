@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import VueHeader from '@/components/Header.vue';
+import VueHeader from '../components/Header.vue';
 
 export default {
     components: { VueHeader }
