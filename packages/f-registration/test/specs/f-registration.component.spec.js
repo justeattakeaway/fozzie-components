@@ -13,10 +13,10 @@ describe('f-header component tests', () => {
         };
 
         RegistrationComponent.submitRegistrationForm(userInfo);
-        assert.ok(RegistrationComponent.firstNameEmptyErrorIsDisplayed());
-        assert.ok(RegistrationComponent.lastNameEmptyErrorIsDisplayed());
-        assert.ok(RegistrationComponent.emailEmptyErrorIsDisplayed());
-        assert.ok(RegistrationComponent.passwordEmptyErrorIsDisplayed());
+        assert.ok(RegistrationComponent.isFirstNameEmptyErrorDisplayed());
+        assert.ok(RegistrationComponent.isLastNameEmptyErrorDisplayed());
+        assert.ok(RegistrationComponent.isEmailEmptyErrorDisplayed());
+        assert.ok(RegistrationComponent.isPasswordEmptyErrorDisplayed());
     });
 });
 

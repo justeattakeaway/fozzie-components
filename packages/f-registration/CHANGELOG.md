@@ -8,7 +8,7 @@ v0.17.0
 *September 1, 2020*
 
 ### Added
-- WebdriverIO component tests
+- WebDriverIO component tests
 
 v0.16.0
 ------------------------------
