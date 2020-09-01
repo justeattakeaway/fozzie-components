@@ -8,7 +8,7 @@ v3.8.0
 *September 1, 2020*
 
 ### Added
-- WebdriverIO tests
+- WebDriverIO component tests
 
 
 v3.7.0

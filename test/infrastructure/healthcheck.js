@@ -1,6 +1,7 @@
 
 const axios = require('axios');
 
+const address = `http://localhost:${process.argv[2]}`;
 let attempts = 0;
 let intervalId;
 
@@ -11,19 +12,21 @@ let intervalId;
 const interval = setInterval(async () => {
     attempts++;
     try {
-        const { status } = await axios.get(`http://localhost:${process.argv[2]}`);
+        const { status } = await axios.get(address);
 
         if (status === 200) {
             clearInterval(intervalId);
         }
+
+        if (attempts >= 15) {
+            console.error(`Failed to get ${address} after ${attempts} attempts.  Server returned ${status}`); // eslint-disable-line
+            process.exit(1);
+        }
+
     } catch (error) {
         console.log('Attempt', attempts, error.code); // eslint-disable-line
     }
 
-    if (attempts >= 15) {
-        console.error('Too many attempts'); // eslint-disable-line
-        process.exit(1);
-    }
 }, 10000);
 
 intervalId = interval;
