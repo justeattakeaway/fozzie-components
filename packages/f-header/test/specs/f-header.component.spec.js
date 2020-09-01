@@ -1,4 +1,3 @@
-import assert from 'assert';
 import HeaderComponent from '../../test-utils/component-objects/f-header.component';
 
 describe('f-header component tests', () => {
@@ -7,7 +6,7 @@ describe('f-header component tests', () => {
         browser.url('http://localhost:8080');
 
         // Assert
-        assert.ok(HeaderComponent.isLogoDisplayed());
+        expect(HeaderComponent.isLogoDisplayed()).toBe(true);
     });
 });
 

@@ -1,5 +1,4 @@
 import RegistrationComponent from '../../test-utils/component-objects/f-registration.component';
-import assert from 'assert';
 
 describe('f-header component tests', () => {
     it('should display error if first name field is empty', () => {
@@ -18,10 +17,10 @@ describe('f-header component tests', () => {
         RegistrationComponent.submitRegistrationForm(userInfo);
 
         // Assert
-        assert.ok(RegistrationComponent.isFirstNameEmptyErrorDisplayed());
-        assert.ok(RegistrationComponent.isLastNameEmptyErrorDisplayed());
-        assert.ok(RegistrationComponent.isEmailEmptyErrorDisplayed());
-        assert.ok(RegistrationComponent.isPasswordEmptyErrorDisplayed());
+        expect(RegistrationComponent.isFirstNameEmptyErrorDisplayed()).toBe(true);
+        expect(RegistrationComponent.isLastNameEmptyErrorDisplayed()).toBe(true);
+        expect(RegistrationComponent.isEmailEmptyErrorDisplayed()).toBe(true);
+        expect(RegistrationComponent.isPasswordEmptyErrorDisplayed()).toBe(true);
     });
 });
 
