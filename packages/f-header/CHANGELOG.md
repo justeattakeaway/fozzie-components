@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.8.0
+------------------------------
+*September 1, 2020*
+
+### Added
+- WebDriverIO component tests
+
+
 v3.7.0
 ------------------------------
 *August 26, 2020*

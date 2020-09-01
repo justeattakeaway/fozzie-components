@@ -40,15 +40,15 @@ exports.submitRegistrationForm = (userInfo) => {
     createAccountButton().click();
 }
 
-exports.firstNameEmptyErrorIsDisplayed = () => firstNameEmptyError().isDisplayed();
-exports.firstNameMaxLengthErrorIsDisplayed = () => firstNameMaxLengthError().isDisplayed();
-exports.firstNameInvalidErrorIsDisplayed = () => firstNameInvalidError().isDisplayed();
+exports.isFirstNameEmptyErrorDisplayed = () => firstNameEmptyError().isDisplayed();
+exports.isFirstNameMaxLengthErrorDisplayed = () => firstNameMaxLengthError().isDisplayed();
+exports.isFirstNameInvalidErrorDisplayed = () => firstNameInvalidError().isDisplayed();
 
-exports.lastNameEmptyErrorIsDisplayed = () => lastNameEmptyError().isDisplayed();
-exports.lastNameMaxLengthErrorIsDisplayed = () => lastNameMaxLengthError().isDisplayed();
-exports.lastNameInvalidErrorIsDisplayed = () => lastNameInvalidError().isDisplayed();
+exports.isLastNameEmptyErrorDisplayed = () => lastNameEmptyError().isDisplayed();
+exports.isLastNameMaxLengthErrorDisplayed = () => lastNameMaxLengthError().isDisplayed();
+exports.isLastNameInvalidErrorDisplayed = () => lastNameInvalidError().isDisplayed();
 
-exports.emailEmptyErrorIsDisplayed = () => emailEmptyError().isDisplayed();
-exports.emailInvalidErrorIsDisplayed = () =>emailInvalidError().isDisplayed();
-exports.emailExistsErrorIsDisplayed = () => emailExistsError().isDisplayed();
-exports.passwordEmptyErrorIsDisplayed = () => passwordEmptyError().isDisplayed();
+exports.isEmailEmptyErrorDisplayed = () => emailEmptyError().isDisplayed();
+exports.isEmailInvalidErrorDisplayed = () =>emailInvalidError().isDisplayed();
+exports.isEmailExistsErrorDisplayed = () => emailExistsError().isDisplayed();
+exports.isPasswordEmptyErrorDisplayed = () => passwordEmptyError().isDisplayed();
