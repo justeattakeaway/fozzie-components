@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.13.0
 ------------------------------
-*August 26, 2020*
+*September 1, 2020*
 
 ### Changed
 - Pull Post Order Content Card title from Braze
