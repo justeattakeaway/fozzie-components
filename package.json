@@ -14,10 +14,6 @@
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
     "test-component:chrome": "lerna run test-component:chrome"
   },
-  "dependencies": {
-    "core-js": "^3.6.4",
-    "global": "^4.4.0"
-  },
   "resolutions": {
     "webpack": "4.36.0"
   },

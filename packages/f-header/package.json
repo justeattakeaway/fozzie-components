@@ -28,7 +28,7 @@
   "scripts": {
     "prepublishOnly": "yarn && yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-header ./src/index.js",
-    "demo": "vue serve ./src/demo/Index.vue",
+    "demo": "vue serve --port 8080 ./src/demo/Index.vue",
     "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit",
@@ -36,6 +36,11 @@
     "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js 8080",
     "webdriver:delay:chrome": "yarn test:wait-for-server && yarn webdriver:start:chrome",
     "webdriver:start:chrome": "wdio ../../wdio.conf.js"
+  },
+  "scriptsInfo": {
+    "test-component:chrome": "Runs the functional test suite against Chrome.",
+    "webdriver:delay:chrome": "Waits for Vue to start before running the Chrome webdriver to prevent a race condition. Not for direct use.",
+    "webdriver:start:chrome": "Runs the Chrome webdriver. Not for direct use."
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"

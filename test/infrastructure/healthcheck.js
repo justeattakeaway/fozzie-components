@@ -4,6 +4,10 @@ const axios = require('axios');
 let attempts = 0;
 let intervalId;
 
+
+/**
+ * Makes GET requests to the vue server until a 200 is recieved so that WebdriverIO can start.
+ */
 const interval = setInterval(async () => {
     attempts++;
     try {

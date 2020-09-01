@@ -1,4 +1,4 @@
-import RegistrationComponent from '../../page-objects/f-registration.page';
+import RegistrationComponent from '../../test-utils/component-objects/f-registration.component';
 import assert from 'assert';
 
 describe('f-header component tests', () => {
@@ -14,6 +14,9 @@ describe('f-header component tests', () => {
 
         RegistrationComponent.submitRegistrationForm(userInfo);
         assert.ok(RegistrationComponent.firstNameEmptyErrorIsDisplayed());
+        assert.ok(RegistrationComponent.lastNameEmptyErrorIsDisplayed());
+        assert.ok(RegistrationComponent.emailEmptyErrorIsDisplayed());
+        assert.ok(RegistrationComponent.passwordEmptyErrorIsDisplayed());
     });
 });
 
