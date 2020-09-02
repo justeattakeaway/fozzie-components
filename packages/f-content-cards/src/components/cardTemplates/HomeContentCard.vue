@@ -3,24 +3,26 @@
         :data-test-id="testId"
         :style="{ background: backgroundColor }"
         :class="[$style['c-homeContentCard']]">
-        <div :class="[$style['c-homeContentCard-icon']]">
-            <img
-                :src="icon"
-                alt="">
-        </div>
-        <div
-            :class="[$style['c-homeContentCard-innerCard']]"
-            :style="{ background: contentContainerBackground }">
-            <img
-                :src="image"
-                alt="">
-            <h3>{{ title }}</h3>
-            <p>{{ subtitle }}</p>
-            <p>
-                <a
-                    :href="url"
-                    class="o-link--full o-link--bold u-color-link u-text-left">{{ ctaText }}</a>
-            </p>
+        <div :class="['l-container', $style['c-homeContentCard-container']]">
+            <div :class="[$style['c-homeContentCard-icon']]">
+                <img
+                    :src="icon"
+                    alt="">
+            </div>
+            <div
+                :class="[$style['c-homeContentCard-innerCard']]"
+                :style="{ background: contentContainerBackground }">
+                <img
+                    :src="image"
+                    alt="">
+                <h3>{{ title }}</h3>
+                <p>{{ subtitle }}</p>
+                <p v-if="url">
+                    <a
+                        :href="url"
+                        class="o-link--full o-link--bold u-color-link u-text-left">{{ ctaText }}</a>
+                </p>
+            </div>
         </div>
     </div>
 </template>
@@ -78,25 +80,40 @@ export default {
 
 <style lang="scss" module>
     .c-homeContentCard {
+        padding: spacing(x3) 0 spacing(x2);
+
+        @include media('>mid') {
+            padding: spacing(x3) 0;
+        }
+    }
+
+    .c-homeContentCard-container {
         display: flex;
-        padding: spacing(x3);
+        flex-wrap: wrap;
     }
 
     .c-homeContentCard-icon {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 50%;
+        width: 100%;
+        margin-bottom: spacing(x3);
 
         img {
-            width: 100px;
+            max-height: 65px;
+            max-width: 100%;
+        }
+
+        @include media('>mid') {
+            width: 50%;
+            margin-bottom: 0;
         }
     }
 
     .c-homeContentCard-innerCard {
         position: relative;
-        width: 50%;
-        border: 1px solid $color-border;
+        width: 100%;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
         border-radius: $post-order-card-radius;
         padding: spacing(x3) 220px spacing(x3) spacing(x3);
 
@@ -106,6 +123,10 @@ export default {
             top: 50%;
             transform: translate(0, -50%);
             width: 200px;
+        }
+
+        @include media('>mid') {
+            width: 50%;
         }
     }
 </style>

@@ -13,6 +13,7 @@ export default {
         ctaText: { control: { type: 'text' } },
         backgroundColor: { control: { type: 'text' } },
         contentContainerBackground: { control: { type: 'text' } },
+        url: { control: { type: 'text' } },
         tenant: { control: { type: 'radio', options: ['uk', 'au', 'nz'] } }
     }
 };
@@ -49,7 +50,7 @@ export const HomeContentCardComponent = (args, { argTypes }) => ({
         };
     },
 
-    template: '<home-content-card :card="{title, backgroundColor, contentContainerBackground, ctaText, subtitle, image, icon}" :tenant="tenant" />'
+    template: '<home-content-card :card="{title, backgroundColor, contentContainerBackground, ctaText, subtitle, image, icon, url}" :tenant="tenant" />'
 });
 
 HomeContentCardComponent.storyName = 'home-content-card-1';
@@ -62,5 +63,6 @@ HomeContentCardComponent.args = {
     image: jeBackground,
     icon: jeIcon,
     ctaText: 'Purchase now',
+    url: '#',
     tenant: 'uk'
 };
