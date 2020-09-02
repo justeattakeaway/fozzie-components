@@ -11,9 +11,13 @@ import {
 /**
  * Wrapper for navigator.connection and its Firefox/Safari implementations
  */
-const getNetworkDetails = () => navigator.connection
+const getNetworkDetails = () => {
+    if (typeof navigator === 'undefined') return null;
+
+    return navigator.connection
         || navigator.mozConnection
         || navigator.webkitConnection;
+};
 
 /**
  * Returns a timeout in milliseconds based on the current connection speed. Slower connections will have longer timeouts.
