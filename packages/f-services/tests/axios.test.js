@@ -4,9 +4,9 @@ import axiosServices from '../src/axios';
 
 const { getNetworkDetails, setupResponseTimeRecording } = axiosServices;
 
+let callback;
 let instance;
 let mock;
-let callback;
 let windowSpy;
 
 // eslint-disable-next-line no-unused-vars
@@ -22,9 +22,12 @@ afterEach(() => {
 });
 
 describe('getNetworkDetails', () => {
+    beforeEach(() => {
+        windowSpy = jest.spyOn(window, 'navigator', 'get');
+    });
+
     it('should return `null` when navigator is undefined', () => {
         // Arrange
-        windowSpy = jest.spyOn(window, 'navigator', 'get');
         windowSpy.mockImplementation(() => undefined);
 
         // Act
@@ -36,7 +39,6 @@ describe('getNetworkDetails', () => {
 
     it('should return navigation.connection if it is defined', () => {
         // Arrange
-        windowSpy = jest.spyOn(window, 'navigator', 'get');
         windowSpy.mockImplementation(() => ({ connection: 'CONNECTION' }));
 
         // Act
@@ -48,7 +50,6 @@ describe('getNetworkDetails', () => {
 
     it('should return navigation.mozConnection if it is defined and navigator.connection is not', () => {
         // Arrange
-        windowSpy = jest.spyOn(window, 'navigator', 'get');
         windowSpy.mockImplementation(() => ({
             mozConnection: 'MOZ-CONNECTION'
         }));
@@ -62,7 +63,6 @@ describe('getNetworkDetails', () => {
 
     it('should return navigation.mozConnection preferentially over navigator.webkitConnection', () => {
         // Arrange
-        windowSpy = jest.spyOn(window, 'navigator', 'get');
         windowSpy.mockImplementation(() => ({
             mozConnection: 'MOZ-CONNECTION',
             webkitConnection: 'WEBKIT-CONNECTION'
@@ -77,7 +77,6 @@ describe('getNetworkDetails', () => {
 
     it('should return navigation.webkitConnection if it is defined and navigator.connection and navigator.mozConnection are not', () => {
         // Arrange
-        windowSpy = jest.spyOn(window, 'navigator', 'get');
         windowSpy.mockImplementation(() => ({
             webkitConnection: 'WEBKIT-CONNECTION'
         }));
