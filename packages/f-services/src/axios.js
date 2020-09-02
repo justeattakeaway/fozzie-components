@@ -16,7 +16,8 @@ const getNetworkDetails = () => {
 
     return navigator.connection
         || navigator.mozConnection
-        || navigator.webkitConnection;
+        || navigator.webkitConnection
+        || null;
 };
 
 /**
