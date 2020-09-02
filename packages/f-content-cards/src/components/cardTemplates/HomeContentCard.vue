@@ -1,29 +1,32 @@
 <template>
     <div
         :data-test-id="testId"
-        :class="[$style['c-postOrderCard']]">
-        <h2
-            v-if="title"
-            :class="[$style['c-postOrderCard-title']]"
-            data-test-id="contentCard-postOrderCard-title"
-        >
-            {{ title }}
-        </h2>
+        :style="{ background: backgroundColor }"
+        :class="[$style['c-homeContentCard']]">
+        <div :class="[$style['c-homeContentCard-icon']]">
+            <img
+                :src="icon"
+                alt="">
+        </div>
+        <div
+            :class="[$style['c-homeContentCard-innerCard']]"
+            :style="{ background: contentContainerBackground }">
+            <img
+                :src="image"
+                alt="">
+            <h3>{{ title }}</h3>
+            <p>{{ subtitle }}</p>
+            <p>
+                <a
+                    :href="url"
+                    class="o-link--full o-link--bold u-color-link u-text-left">{{ ctaText }}</a>
+            </p>
+        </div>
     </div>
 </template>
 
 <script>
-/* eslint-disable import/no-duplicates */
-import CardContainer from './CardContainer.vue';
-// The below allows distinct import of styles from cardContainer, in order to directly influence which intra-component
-// styles are used on the wrapper element in the card-container
-import CardContainerStyles from './CardContainer.vue?vue&type=style&index=0&lang=scss&module=true&';
-/* eslint-enable import/no-duplicates */
-
 export default {
-    components: {
-        CardContainer
-    },
     props: {
         card: {
             type: Object,
@@ -39,16 +42,26 @@ export default {
             image,
             ctaText,
             button,
+            backgroundColor,
+            contentContainerBackground,
             type,
-            icon
+            icon,
+            title,
+            url,
+            subtitle
         } = this.card;
 
         return {
+            title,
+            backgroundColor,
+            contentContainerBackground,
             image,
             ctaText,
             button,
             type,
-            icon
+            icon,
+            url,
+            subtitle
         };
     },
 
@@ -64,25 +77,35 @@ export default {
 </script>
 
 <style lang="scss" module>
-    .c-postOrderCard {
+    .c-homeContentCard {
+        display: flex;
+        padding: spacing(x3);
+    }
+
+    .c-homeContentCard-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+
+        img {
+            width: 100px;
+        }
+    }
+
+    .c-homeContentCard-innerCard {
+        position: relative;
+        width: 50%;
         border: 1px solid $color-border;
         border-radius: $post-order-card-radius;
-        padding: spacing(x3);
-        width: 100%;
+        padding: spacing(x3) 220px spacing(x3) spacing(x3);
 
-        @include media ('<mid') {
-            border: none;
-            padding: 0;
-        }
-
-        .c-postOrderCard-title {
-            @include font-size(large);
-
-            margin-bottom: spacing(x2);
-
-            @include media ('<mid') {
-                margin: spacing(x2);
-            }
+        img {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translate(0, -50%);
+            width: 200px;
         }
     }
 </style>

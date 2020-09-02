@@ -7,7 +7,6 @@ export default {
     title: 'Components/Atoms/f-content-cards',
     argTypes: {
         title: { control: { type: 'text' } },
-        cardTitle: { control: { type: 'text' } },
         subtitle: { control: { type: 'text' } },
         image: { control: { type: 'text' } },
         icon: { control: { type: 'text' } },
@@ -50,14 +49,15 @@ export const HomeContentCardComponent = (args, { argTypes }) => ({
         };
     },
 
-    template: '<home-content-card :card="{title: cardTitle, ctaText, subtitle, image, icon}" :tenant="tenant" :title="title" />'
+    template: '<home-content-card :card="{title, backgroundColor, contentContainerBackground, ctaText, subtitle, image, icon}" :tenant="tenant" />'
 });
 
 HomeContentCardComponent.storyName = 'home-content-card-1';
 
 HomeContentCardComponent.args = {
-    title: 'Promotional Offer',
-    cardTitle: 'Treat them with a Just Eat gift card',
+    title: 'Treat them with a Just Eat gift card',
+    backgroundColor: 'silver',
+    contentContainerBackground: 'white',
     subtitle: 'Whether you want to treat Mum to her Friday night favourite, or surprise your mate with a ‘KFC on me’, show them you care – the tasty way.',
     image: jeBackground,
     icon: jeIcon,
