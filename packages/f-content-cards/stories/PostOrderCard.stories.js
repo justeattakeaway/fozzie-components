@@ -1,72 +1,64 @@
-import { withKnobs, text } from '@storybook/addon-knobs';
-import { withA11y } from '@storybook/addon-a11y';
 import PostOrderCard from '../src/components/cardTemplates/PostOrderCard.vue';
-import jeIcon from './images/je-icon.png';
-import jeBackground from './images/je-marketing.png';
 
 export default {
     title: 'Components/Atoms/f-content-cards',
-    decorators: [withKnobs, withA11y]
+    argTypes: {
+        headline: { control: { type: 'text' } },
+        cardTitle: { control: { type: 'text' } },
+        subtitle: { control: { type: 'text' } },
+        image: { control: { type: 'text' } },
+        icon: { control: { type: 'text' } },
+        ctaText: { control: { type: 'text' } },
+        url: { control: { type: 'text' } },
+        tenant: { control: { type: 'radio', options: ['uk', 'au', 'nz'] } }
+    }
 };
 
-export const PostOrderCardComponent = () => ({
-    components: { PostOrderCard },
-    props: {
-        title: {
-            default: text('Title', 'Promotional Offer')
-        },
-        cardTitle: {
-            default: text('Card Title', 'Treat them with a Just Eat gift card')
-        },
-        description: {
-            default: text('Card Description', 'Whether you want to treat Mum to her Friday night favourite, or surprise your mate with a ‘KFC on me’, show them you care – the tasty way.')
-        },
-        image: {
-            default: text('Card Image', jeBackground)
-        },
-        icon: {
-            default: text('Card Icon', jeIcon)
-        },
-        cta: {
-            default: text('Card CTA', 'Purchase now')
-        }
+/**
+ * Definition for story for First Time Customer Card component
+ *
+ * @param {Object} args
+ * @param {{argTypes: {Array}}}
+ * @return {{
+ *  template: string,
+ *  components: {
+ *      PostOrderCardComponent: {Object}
+ *  },
+ *  provide: {Function},
+ *  props: string[]
+ * }}
+ */
+export const PostOrderCardComponent = (args, { argTypes }) => ({
+    components: {
+        PostOrderCard
     },
+
+    props: Object.keys(argTypes),
+
+    /**
+     * Stubbed copy for injecting when supplied card information is not complete
+     * @return {{emitCardView: {Function}, emitCardClick: {Function}}}
+     */
     provide () {
         return {
             emitCardView () {},
             emitCardClick () {}
         };
     },
-    data () {
-        return {
-            card: {
-                id: 'NWU1NTJjMWU2YThkNjM0ODllYzE3OGI5XyRfY2M9ZDg1MzM1ODktM2IyMC0xZmJkLWYwMzEtMTE5MjNjYjhiMjcyJm12PTVlNTUyYzFlNmE4ZDYzNDg5ZWMxNzhiZCZwaT1jbXA=',
-                viewed: false,
-                title: this.cardTitle,
-                imageUrl: null,
-                subtitle: this.description,
-                created: null,
-                updated: '2020-02-25T14:21:15.000Z',
-                categories: [],
-                expiresAt: '2020-03-25T23:55:00.000Z',
-                url: 'https://www.just-eat.co.uk/area/s637jj',
-                linkText: 'www.just-eat.co.uk',
-                aspectRatio: 1,
-                order: '1',
-                image: this.image,
-                ctaText: this.cta,
-                icon: this.icon,
-                type: 'Post_Order_Card_1',
-                pinned: false,
-                dismissible: true,
-                dismissed: false,
-                clicked: false,
-                Ra: null,
-                Rf: null
-            }
-        };
-    },
-    template: '<post-order-card :card="card" :title="title" />'
+
+    template: '<post-order-card :card="{title: cardTitle, ctaText, headline, image, icon, subtitle, url}" :tenant="tenant" />'
 });
 
 PostOrderCardComponent.storyName = 'post-order-card';
+
+PostOrderCardComponent.args = {
+    headline: 'Promotional Offer',
+    cardTitle: 'Treat them with a Just Eat gift card',
+    subtitle: 'Whether you want to treat Mum to her Friday night favourite, or surprise your mate with a ‘KFC on me’, show them you care – the tasty way.',
+    ctaText: 'Purchase now',
+    image: 'https://picsum.photos/seed/FirstTimeCustomerCard_image/384/216?blur=3',
+    icon: 'https://picsum.photos/seed/FirstTimeCustomerCard_icon/48/48',
+    url: '#',
+    tenant: 'uk'
+};
+

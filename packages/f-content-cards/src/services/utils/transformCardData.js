@@ -34,7 +34,8 @@ const transformCardData = card => {
         subtitle = subtitleDescription,
         custom_card_type: type,
         updated,
-        voucher_code: voucherCode
+        voucher_code: voucherCode,
+        headline
     } = extras;
 
     const description = Object.keys(extras)
@@ -54,6 +55,7 @@ const transformCardData = card => {
         description,
         extractedCardId,
         footer,
+        headline,
         icon,
         id,
         image,
