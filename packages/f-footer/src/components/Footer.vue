@@ -131,6 +131,7 @@ $footer-heading-font-size: 'heading-s';
 
 .c-footer-heading {
     @include font-size($footer-heading-font-size);
+    font-family: $font-family-base;
     font-weight: $font-weight-headings;
     padding: spacing(x2);
     padding-left: 0;
