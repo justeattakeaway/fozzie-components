@@ -3,7 +3,9 @@
         :data-test-id="testId"
         :style="{ background: backgroundColor }"
         :class="[$style['c-homeContentCard']]">
-        <div :class="['l-container', $style['c-homeContentCard-container']]">
+        <div
+            :class="['l-container', $style['c-homeContentCard-container']]"
+            :style="{ maxWidth: `${containerMaxWidth}px` }">
             <div :class="[$style['c-homeContentCard-icon']]">
                 <img
                     :src="icon"
@@ -16,7 +18,7 @@
                     :src="image"
                     alt="">
                 <h3>{{ title }}</h3>
-                <p>{{ subtitle }}</p>
+                <p>{{ description }}</p>
                 <p v-if="url">
                     <a
                         :href="url"
@@ -34,6 +36,10 @@ export default {
             type: Object,
             default: () => ({})
         },
+        containerMaxWidth: {
+            type: Number,
+            default: 1272
+        },
         testId: {
             type: String,
             default: null
@@ -50,7 +56,7 @@ export default {
             icon,
             title,
             url,
-            subtitle
+            description
         } = this.card;
 
         return {
@@ -63,7 +69,7 @@ export default {
             type,
             icon,
             url,
-            subtitle
+            description
         };
     },
 

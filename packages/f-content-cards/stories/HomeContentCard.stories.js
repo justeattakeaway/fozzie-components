@@ -7,7 +7,7 @@ export default {
     title: 'Components/Atoms/f-content-cards',
     argTypes: {
         title: { control: { type: 'text' } },
-        subtitle: { control: { type: 'text' } },
+        description: { control: { type: 'text' } },
         image: { control: { type: 'text' } },
         icon: { control: { type: 'text' } },
         ctaText: { control: { type: 'text' } },
@@ -50,7 +50,7 @@ export const HomeContentCardComponent = (args, { argTypes }) => ({
         };
     },
 
-    template: '<home-content-card :card="{title, backgroundColor, contentContainerBackground, ctaText, subtitle, image, icon, url}" :tenant="tenant" />'
+    template: '<home-content-card :card="{title, backgroundColor, contentContainerBackground, ctaText, description, image, icon, url}" :tenant="tenant" />'
 });
 
 HomeContentCardComponent.storyName = 'home-content-card-1';
@@ -59,7 +59,7 @@ HomeContentCardComponent.args = {
     title: 'Treat them with a Just Eat gift card',
     backgroundColor: 'silver',
     contentContainerBackground: 'white',
-    subtitle: 'Whether you want to treat Mum to her Friday night favourite, or surprise your mate with a ‘KFC on me’, show them you care – the tasty way.',
+    description: 'Whether you want to treat Mum to her Friday night favourite, or surprise your mate with a ‘KFC on me’, show them you care – the tasty way.',
     image: jeBackground,
     icon: jeIcon,
     ctaText: 'Purchase now',
