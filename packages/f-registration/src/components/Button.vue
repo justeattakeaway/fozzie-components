@@ -43,7 +43,7 @@ $btn-default-bgColor                : $grey--lighter;
 $btn-default-text-colour            : $grey--dark;
 $btn-default-weight                 : 500;
 $btn-default-height                 : 2.6;
-$btn-default-font-size              : base--scaleUp;
+$btn-default-font-size              : body-l;
 $btn-default-font-family            : $font-family-base;
 $btn-default-bgColor--hover         : $grey--light;
 $btn-default-borderRadius           : 2px;
