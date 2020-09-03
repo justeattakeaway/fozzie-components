@@ -37,9 +37,11 @@ describe('getNetworkDetails', () => {
         expect(connection).toBe(null);
     });
 
-    it('should return navigation.connection if it is defined', () => {
+    it('should return navigator.connection if it is available', () => {
         // Arrange
-        windowSpy.mockImplementation(() => ({ connection: 'CONNECTION' }));
+        windowSpy.mockImplementation(() => ({
+            connection: 'CONNECTION'
+        }));
 
         // Act
         const connection = getNetworkDetails();
@@ -48,7 +50,7 @@ describe('getNetworkDetails', () => {
         expect(connection).toBe('CONNECTION');
     });
 
-    it('should return navigation.mozConnection if it is defined and navigator.connection is not', () => {
+    it('should return navigator.mozConnection if it is available', () => {
         // Arrange
         windowSpy.mockImplementation(() => ({
             mozConnection: 'MOZ-CONNECTION'
@@ -61,21 +63,7 @@ describe('getNetworkDetails', () => {
         expect(connection).toBe('MOZ-CONNECTION');
     });
 
-    it('should return navigation.mozConnection preferentially over navigator.webkitConnection', () => {
-        // Arrange
-        windowSpy.mockImplementation(() => ({
-            mozConnection: 'MOZ-CONNECTION',
-            webkitConnection: 'WEBKIT-CONNECTION'
-        }));
-
-        // Act
-        const connection = getNetworkDetails();
-
-        // Assert
-        expect(connection).toBe('MOZ-CONNECTION');
-    });
-
-    it('should return navigation.webkitConnection if it is defined and navigator.connection and navigator.mozConnection are not', () => {
+    it('should return navigator.webkitConnection if it is available', () => {
         // Arrange
         windowSpy.mockImplementation(() => ({
             webkitConnection: 'WEBKIT-CONNECTION'
