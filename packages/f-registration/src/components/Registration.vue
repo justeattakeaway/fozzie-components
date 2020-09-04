@@ -148,6 +148,11 @@
                 {{ buttonText }}
             </form-button>
         </form>
+        <p :class="$style['c-legal-hyperlinks']">
+            {{ copy.navLinks.termsAndConditions.prefix }}<a :href="copy.navLinks.termsAndConditions.url">{{ copy.navLinks.termsAndConditions.text }}</a>{{ copy.navLinks.termsAndConditions.suffix }}
+            {{ copy.navLinks.privacyPolicy.prefix }}<a :href="copy.navLinks.privacyPolicy.url">{{ copy.navLinks.privacyPolicy.text }}</a>
+            {{ copy.navLinks.cookiesPolicy.prefix }}<a :href="copy.navLinks.cookiesPolicy.url">{{ copy.navLinks.cookiesPolicy.text }}</a>{{ copy.navLinks.cookiesPolicy.suffix }}
+        </p>
     </card>
 </template>
 
@@ -373,6 +378,13 @@ export default {
 
 .c-loginLink {
     text-align: center;
+    a {
+        color: $blue;
+        text-decoration: none;
+    }
+}
+
+.c-legal-hyperlinks {
     a {
         color: $blue;
         text-decoration: none;
