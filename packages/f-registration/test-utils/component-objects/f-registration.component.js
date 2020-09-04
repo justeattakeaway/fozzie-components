@@ -60,7 +60,7 @@ exports.isEmailInvalidErrorDisplayed = () => emailInvalidError().isDisplayed();
 exports.isEmailExistsErrorDisplayed = () => emailExistsError().isDisplayed();
 exports.isPasswordEmptyErrorDisplayed = () => passwordEmptyError().isDisplayed();
 
-exports.termsAndConditionsLinkCanBeUsed = () => termsAndConditionsLink().isClickable();
-exports.privacyPolicyLinkCanBeUsed = () => privacyPolicyLink().isClickable();
-exports.cookiesPolicyLinkCanBeUsed = () => cookiesPolicyLink().isClickable();
+exports.termsAndConditionsLinkCanBeClicked = () => termsAndConditionsLink().isClickable();
+exports.privacyPolicyLinkCanBeClicked = () => privacyPolicyLink().isClickable();
+exports.cookiesPolicyLinkCanBeClicked = () => cookiesPolicyLink().isClickable();
 

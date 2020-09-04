@@ -23,7 +23,7 @@ describe('f-header component tests', () => {
         expect(RegistrationComponent.isPasswordEmptyErrorDisplayed()).toBe(true);
     });
 
-    it('should show and be able to use the legal documentation', () => {
+    it('should show and be able to click the legal documentation', () => {
         // Arrange
         browser.url('http://localhost:8081');
 
@@ -31,9 +31,9 @@ describe('f-header component tests', () => {
         RegistrationComponent.waitForRegistrationForm();
 
         // Assert
-        expect(RegistrationComponent.termsAndConditionsLinkCanBeUsed()).toBe(true);
-        expect(RegistrationComponent.privacyPolicyLinkCanBeUsed()).toBe(true);
-        expect(RegistrationComponent.cookiesPolicyLinkCanBeUsed()).toBe(true);
+        expect(RegistrationComponent.termsAndConditionsLinkCanBeClicked()).toBe(true);
+        expect(RegistrationComponent.privacyPolicyLinkCanBeClicked()).toBe(true);
+        expect(RegistrationComponent.cookiesPolicyLinkCanBeClicked()).toBe(true);
     });
 });
 

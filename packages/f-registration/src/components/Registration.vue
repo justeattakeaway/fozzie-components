@@ -152,15 +152,18 @@
             {{ copy.navLinks.termsAndConditions.prefix }}
             <a
                 data-test-id="ts-and-cs-link"
-                :href="copy.navLinks.termsAndConditions.url">{{ copy.navLinks.termsAndConditions.text }}</a>{{ copy.navLinks.termsAndConditions.suffix }}
+                :href="copy.navLinks.termsAndConditions.url"
+                target="_blank">{{ copy.navLinks.termsAndConditions.text }}</a>{{ copy.navLinks.termsAndConditions.suffix }}
             {{ copy.navLinks.privacyPolicy.prefix }}
             <a
                 data-test-id="privacy-policy-link"
-                :href="copy.navLinks.privacyPolicy.url">{{ copy.navLinks.privacyPolicy.text }}</a>
+                :href="copy.navLinks.privacyPolicy.url"
+                target="_blank">{{ copy.navLinks.privacyPolicy.text }}</a>
             {{ copy.navLinks.cookiesPolicy.prefix }}
             <a
                 data-test-id="cookies-policy-link"
-                :href="copy.navLinks.cookiesPolicy.url">{{ copy.navLinks.cookiesPolicy.text }}</a>{{ copy.navLinks.cookiesPolicy.suffix }}
+                :href="copy.navLinks.cookiesPolicy.url"
+                target="_blank">{{ copy.navLinks.cookiesPolicy.text }}</a>{{ copy.navLinks.cookiesPolicy.suffix }}
         </p>
     </card>
 </template>
