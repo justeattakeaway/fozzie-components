@@ -22,5 +22,18 @@ describe('f-header component tests', () => {
         expect(RegistrationComponent.isEmailEmptyErrorDisplayed()).toBe(true);
         expect(RegistrationComponent.isPasswordEmptyErrorDisplayed()).toBe(true);
     });
+
+    it('should show and be able to use the legal documentation', () => {
+        // Arrange
+        browser.url('http://localhost:8081');
+
+        // Act
+        RegistrationComponent.waitForRegistrationForm();
+
+        // Assert
+        expect(RegistrationComponent.termsAndConditionsLinkCanBeUsed()).toBe(true);
+        expect(RegistrationComponent.privacyPolicyLinkCanBeUsed()).toBe(true);
+        expect(RegistrationComponent.cookiesPolicyLinkCanBeUsed()).toBe(true);
+    });
 });
 
