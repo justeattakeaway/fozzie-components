@@ -44,7 +44,7 @@ export default {
         },
         testId: {
             type: String,
-            default: 'contentCard-postOrderCard-1'
+            default: 'contentCard-homeContentCard'
         }
     },
     data () {
