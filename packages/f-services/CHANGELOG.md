@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.2.0
+------------------------------
+*September 2, 2020*
+
+### Changed
+- Handle missing navigator API so that the default axios timeout is returned when used on the server.
+
+
 v1.1.0
 ------------------------------
 *August 26, 2020*

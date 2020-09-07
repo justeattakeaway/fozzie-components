@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.18.0
+v0.19.0
 ------------------------------
 *September 7, 2020*
 
@@ -14,6 +14,13 @@ v0.18.0
 ### Changed
 - `testEnvironment` in `package.json` for consumer pact tests
 - `modulePathIgnorePatterns` in `jest.config.js`
+
+v0.18.0
+------------------------------
+*September 4, 2020*
+
+### Added
+- Legal text and relevant hyperlinks
 
 v0.17.0
 ------------------------------

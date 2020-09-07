@@ -98,11 +98,6 @@ export default {
             default: null
         },
 
-        title: {
-            type: String,
-            default: ''
-        },
-
         userId: {
             type: String,
             default: ''

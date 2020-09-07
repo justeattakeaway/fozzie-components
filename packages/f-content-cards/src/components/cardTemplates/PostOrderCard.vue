@@ -3,11 +3,11 @@
         :data-test-id="testId"
         :class="[$style['c-postOrderCard']]">
         <h2
-            v-if="title"
+            v-if="headline"
             :class="[$style['c-postOrderCard-title']]"
             data-test-id="contentCard-postOrderCard-title"
         >
-            {{ title }}
+            {{ headline }}
         </h2>
         <card-container
             :card="card"
@@ -54,10 +54,6 @@ export default {
             type: Boolean,
             default: false
         },
-        title: {
-            type: String,
-            default: ''
-        },
         testId: {
             type: String,
             default: null
@@ -69,7 +65,8 @@ export default {
             ctaText,
             button,
             type,
-            icon
+            icon,
+            headline
         } = this.card;
 
         return {
@@ -77,7 +74,8 @@ export default {
             ctaText,
             button,
             type,
-            icon
+            icon,
+            headline
         };
     },
 
