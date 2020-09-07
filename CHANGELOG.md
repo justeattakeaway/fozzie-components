@@ -12,6 +12,7 @@ v1.26.0
 - .gitignore entry for `pacts` folder
 - lerna script to execute `test:consumer` script
 - `publish:pact` script to publish pacts to the broker
+- New build steps in `config.yml`
 ### Changed
 - `testEnvironment` in `package.json` for consumer pact tests
 

@@ -14,7 +14,7 @@
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
     "test-component:chrome": "lerna run test-component:chrome",
     "test:consumer": "lerna run test:consumer",
-    "publish:pact": "pact-broker publish ./pacts --consumer-app-version=1.0.0 --broker-base-url=http://pact.just-eat.com"
+    "publish:pact": "pact-broker publish ./pacts --consumer-app-version=$npm_package_version --broker-base-url=http://pact.just-eat.com"
   },
   "resolutions": {
     "webpack": "4.36.0"
