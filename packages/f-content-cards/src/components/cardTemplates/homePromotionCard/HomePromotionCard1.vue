@@ -6,7 +6,7 @@
         <div
             :data-test-id="containerTestId"
             :class="['l-container', $style['c-contentCards-homePromotionCard1-container']]"
-            :style="{ maxWidth: `${maxWidth}px` }">
+            :style="{ maxWidth: `${containerMaxWidth}px` }">
             <div :class="[$style['c-contentCards-homePromotionCard1-icon']]">
                 <img
                     :src="icon"
@@ -74,10 +74,6 @@ export default {
 
         containerTestId () {
             return `${this.testId}--container`;
-        },
-
-        maxWidth () {
-            return typeof this.containerMaxWidth === 'string' ? this.containerMaxWidth : `${this.containerMaxWidth}px`;
         }
     }
 };

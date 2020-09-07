@@ -1,6 +1,6 @@
 <template>
-    <component
-        :data-testid="testId"
+    <div
+        :data-test-id="testId"
         :class="[$style['c-contentCards-homePromotionCard2']]"
         :style="{ background: contentContainerBackground }">
         <img
@@ -15,7 +15,7 @@
                 :data-test-id="ctaTestId"
                 class="o-link--full o-link--bold u-color-link u-text-left">{{ ctaText }}</a>
         </p>
-    </component>
+    </div>
 </template>
 
 <script>
