@@ -5,12 +5,14 @@ const image = '__IMAGE__';
 const icon = '__ICON__';
 const ctaText = '__CTA_TEXT__';
 const type = 'Post_Order_Card_1';
+const headline = '__HEADLINE__';
 
 const card = {
     ctaText,
     icon,
     image,
-    type
+    type,
+    headline
 };
 
 describe('contentCards › PostOrderCard', () => {
@@ -25,6 +27,7 @@ describe('contentCards › PostOrderCard', () => {
 
         // Assert
         expect(wrapper.find('[data-test-id="contentCard-postOrderCard-1"]').text()).toBe(ctaText);
+        expect(wrapper.find('[data-test-id="contentCard-postOrderCard-title"]').text()).toBe(headline);
     });
 
     it('should hide the heading element if the copy is unavailable', () => {
@@ -34,6 +37,7 @@ describe('contentCards › PostOrderCard', () => {
         // Assert
         expect(wrapper.find('[data-test-id="contentCard-postOrderCard-title"]').exists()).toBe(false);
     });
+
 
     describe('condensed', () => {
         it('should apply the condensed class when no background image is available', () => {

@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-registration",
   "description": "Fozzie Form Field Component",
-  "version": "0.16.0",
+  "version": "0.18.0",
   "main": "dist/f-registration.umd.min.js",
   "files": [
     "dist",
@@ -28,11 +28,15 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-registration ./src/index.js",
-    "demo": "vue serve --open ./src/demo/Index.vue",
+    "demo": "vue serve --port 8081 ./src/demo/Index.vue",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit",
-    "test:coverage": "yarn test --coverage"
+    "test:coverage": "yarn test --coverage",
+    "test-component:chrome": "run-p --race demo webdriver:delay:chrome",
+    "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js 8081",
+    "webdriver:delay:chrome": "yarn test:wait-for-server && yarn webdriver:start:chrome",
+    "webdriver:start:chrome": "wdio ../../wdio.conf.js"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
