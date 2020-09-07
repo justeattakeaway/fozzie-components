@@ -24,8 +24,8 @@ describe("Pact setup", () => {
   beforeAll(async () => {
     await provider.setup().then(() => {
          provider.addInteraction({
-            state: 'i want to create a new consumer',
-            uponReceiving: 'a request to create a consumer',
+            state: 'i have a new customer email address for a tenant',
+            uponReceiving: 'a POST request to create a consumer',
             withRequest: {
                 method: 'POST',
                 path: '/consumers/uk',
