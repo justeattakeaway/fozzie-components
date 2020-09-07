@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-registration",
   "description": "Fozzie Form Field Component",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "main": "dist/f-registration.umd.min.js",
   "files": [
     "dist",
@@ -36,7 +36,8 @@
     "test-component:chrome": "run-p --race demo webdriver:delay:chrome",
     "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js 8081",
     "webdriver:delay:chrome": "yarn test:wait-for-server && yarn webdriver:start:chrome",
-    "webdriver:start:chrome": "wdio ../../wdio.conf.js"
+    "webdriver:start:chrome": "wdio ../../wdio.conf.js",
+    "test:consumer": "jest test/specs/consumer --runInBand"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -48,6 +49,9 @@
     "@justeat/f-vue-icons": "1.0.0-beta.5",
     "axios": "0.19.2",
     "vuelidate": "0.7.5"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
