@@ -4,6 +4,7 @@
         :style="{ background: backgroundColor }"
         :class="[$style['c-homeContentCard']]">
         <div
+            :data-test-id="containerTestId"
             :class="['l-container', $style['c-homeContentCard-container']]"
             :style="{ maxWidth: `${containerMaxWidth}px` }">
             <div :class="[$style['c-homeContentCard-icon']]">
@@ -22,6 +23,7 @@
                 <p v-if="url">
                     <a
                         :href="url"
+                        :data-test-id="ctaTestId"
                         class="o-link--full o-link--bold u-color-link u-text-left">{{ ctaText }}</a>
                 </p>
             </div>
@@ -42,7 +44,7 @@ export default {
         },
         testId: {
             type: String,
-            default: null
+            default: 'contentCard-postOrderCard-1'
         }
     },
     data () {
@@ -72,13 +74,13 @@ export default {
             description
         };
     },
-
-    methods: {
-        cardContentTestId () {
-            return this.testId && 'contentCard-postOrderCard-1';
+    computed: {
+        ctaTestId () {
+            return `${this.testId}--cta`;
         },
+
         containerTestId () {
-            return this.testId && 'contentCard-link';
+            return `${this.testId}--container`;
         }
     }
 };
