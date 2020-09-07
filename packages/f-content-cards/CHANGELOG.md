@@ -9,7 +9,16 @@ v1.14.0
 *September 7, 2020*
 
 ### Added
+- `Home_Promotion_Card_2` template and type to allowed content card types
 
+### Changed
+- Naming and folder structure for brevity
+
+v1.14.0
+------------------------------
+*September 7, 2020*
+
+### Added
 - `Home_Promotion_Card_1` template and type to allowed content card types
 
 
