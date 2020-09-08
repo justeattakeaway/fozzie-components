@@ -3,9 +3,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v1.26.0
+v1.27.0
 ------------------------------
-*September 7, 2020*
+*September 8, 2020*
 
 ### Added
 -  `@pact-foundation/pact` dependency for pact tests
