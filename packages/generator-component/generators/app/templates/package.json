@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-<%= name.default %>",
   "description": "Fozzie <%= name.readme %> – <%= description %>",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/f-<%= name.default %>.umd.min.js",
   "files": [
     "dist"
@@ -42,10 +42,10 @@
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "4.2.3",
+    "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "4.3.1",
-    "@vue/test-utils": "1.0.2",
+    "@vue/cli-plugin-unit-jest": "4.4.6",
+    "@vue/test-utils": "1.0.3",
     "node-sass-magic-importer": "5.3.2"
   }
 }

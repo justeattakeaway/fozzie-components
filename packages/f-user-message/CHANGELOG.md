@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.3.1
+------------------------------
+*September 8, 2020*
+
+### Changed
+- `eslint-config-fozzie` & `f-trak` peer dependencies use a range value.
+
+
 v0.3.0
 ------------------------------
 *August 28, 2020*
@@ -11,6 +20,7 @@ v0.3.0
 - Removed component top margin. This should be set in the host app, if required
 - Updated packages. Reduced bundle size
 
+
 v0.2.0
 ------------------------------
 *July 23, 2020*
@@ -18,6 +28,7 @@ v0.2.0
 ### Changed
 - Small update to colours from updating to `fozzie-colour-palette` in the mono-repo root.
 - Vue CLI minor package updates.
+
 
 v0.1.1
 ------------------------------
