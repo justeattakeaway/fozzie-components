@@ -15,7 +15,7 @@ commands:
   install_node_dependencies:
     description: Installs the node dependencies
     steps:
-      - run: yarn install --frozen-lockfile
+      - run: yarn install
 
   build_packages:
     description: Locally builds all packages in the monorepo
