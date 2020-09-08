@@ -1,7 +1,7 @@
-import RegistrationComponent from '../../test-utils/component-objects/f-registration.component';
+import RegistrationComponent from '../../../test-utils/component-objects/f-registration.component';
 
 describe('f-header component tests', () => {
-    it('should display error if first name field is empty', () => {
+    it('should display errors if mandatory fields are empty', () => {
 
         // Arrange
         browser.url('http://localhost:8081');
@@ -36,4 +36,3 @@ describe('f-header component tests', () => {
         expect(RegistrationComponent.cookiesPolicyLinkCanBeClicked()).toBe(true);
     });
 });
-

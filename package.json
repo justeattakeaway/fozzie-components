@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "1.26.0",
+  "version": "1.27.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -12,7 +12,9 @@
     "storybook:serve": "lerna run storybook:serve",
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
-    "test-component:chrome": "lerna run test-component:chrome"
+    "test-component:chrome": "lerna run test-component:chrome",
+    "test:consumer": "lerna run test:consumer",
+    "publish:pact": "pact-broker publish ./pacts --consumer-app-version=$npm_package_version --broker-base-url=http://pact.just-eat.com"
   },
   "resolutions": {
     "webpack": "4.36.0"
@@ -72,6 +74,9 @@
     "node": ">=10.0.0"
   },
   "homepage": "https://github.com/justeat/fozzie-components",
+  "jest": {
+    "testEnvironment": "node"
+  },
   "keywords": [
     "fozzie"
   ],
@@ -82,5 +87,8 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@pact-foundation/pact": "9.11.1"
+  }
 }
