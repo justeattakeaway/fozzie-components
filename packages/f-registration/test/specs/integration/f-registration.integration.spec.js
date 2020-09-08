@@ -28,8 +28,11 @@ describe('Registration API service', () => {
 
         }).reply(201);
 
+        // Act
         await RegistrationServiceApi.createAccount(endpoint, tenant, CONSUMERS_REQUEST_DATA)
         .then(response => {
+
+            // Assert
             expect(response.status).toEqual(201);
         })
     });
@@ -55,10 +58,12 @@ describe('Registration API service', () => {
 
         });
 
+        // Act
         await RegistrationServiceApi.createAccount(endpoint, tenant, CONSUMERS_REQUEST_DATA)
         .then()
         .catch(error => {
 
+            // Assert
             expect(error.response.status).toBe(409);
             expect(error.response.data.errors.length).toBe(1);
             expect(error.response.data.errors[0].description).toBe('The specified email already exists');
