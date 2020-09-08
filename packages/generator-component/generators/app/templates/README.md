@@ -42,7 +42,7 @@
     }
     ```
 
-    If you are using Webpack, you can import the component dynamically to separate the header bundle from the main `bundle.client.js`:
+    If you are using Webpack, you can import the component dynamically to separate the `<%= name.template%>` bundle from the main `bundle.client.js`:
 
     ```
     import '@justeat/f-<%= name.default %>/dist/f-<%= name.default %>.css';
