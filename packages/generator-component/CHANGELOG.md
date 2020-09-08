@@ -4,12 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+v0.2.1
 ------------------------------
-*July 23, 2020*
+*September 8, 2020*
 
 ### Changed
+- Updated `devDependencies` to use same versions as the other packages.
 - Vue CLI minor package updates.
+
+### Fixed
+- Updated bundle name in readme template.
 
 
 v0.2.0

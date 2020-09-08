@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v1.26.0
+------------------------------
+*September 8, 2020*
+
+### Changed
+- Updating `peerDependencies` to use ranges values.
+- Updating `devDependencies` in generator package to use same values as the other packages.
+
+### Fixed
+- Updated bundle name in generator readme template.
+
+
 v1.25.0
 ------------------------------
 *September 1, 2020*
