@@ -89,6 +89,11 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps:
       - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - install_node_dependencies
       - run:
           name: authenticate with npm
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
