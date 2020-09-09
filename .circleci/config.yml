@@ -118,7 +118,7 @@ workflows:
           context: web-core
           filters:
             branches:
-              ignore: 'gh-pages'
+              only: 'master'
 
   deploy-storybook:
     jobs:
