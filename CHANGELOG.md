@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v1.28.0
+------------------------------
+*September 9, 2020*
+
+### Changed
+- Updated typography font loading JS snippet to use a self-executing function in order to avoid polluting the global namespace.
+- Updated typography font loading JS snippet to follow our lint rules more closely.
+
+
 v1.27.0
 ------------------------------
 *September 8, 2020*
@@ -14,6 +24,7 @@ v1.27.0
 - `publish:pact` script to publish pacts to the broker
 ### Changed
 - `testEnvironment` in `package.json` for consumer pact tests
+
 
 v1.26.0
 ------------------------------
