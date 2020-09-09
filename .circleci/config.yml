@@ -109,7 +109,7 @@ workflows:
 
   npm-publish:
     jobs:
-      - build:
+      - npm-publish:
           context: web-core
           filters:
             branches:
