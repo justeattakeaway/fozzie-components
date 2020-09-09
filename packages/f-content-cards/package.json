@@ -38,6 +38,7 @@
   "dependencies": {
     "@justeat/f-services": "1.0.1",
     "core-js": "3.6.5",
+    "date-fns": "^2.16.1",
     "lodash.findindex": "4.6.0",
     "lodash.orderby": "4.6.0"
   },
