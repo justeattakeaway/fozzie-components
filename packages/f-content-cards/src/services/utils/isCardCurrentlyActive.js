@@ -8,10 +8,13 @@ import isBefore from 'date-fns/isBefore';
  * Can be used in isolation or as part of Array.filter
  * @param card {object}
  * @param card.displayTimes {object} - Display times
+ * @param brands {string[]} - String of current brands
  * @returns {boolean} - is card active
  */
-const isCardCurrentlyActive = (card = {}) => {
-    const { displayTimes } = card;
+const isCardCurrentlyActive = (card = {}, brands = []) => {
+    const { displayTimes, brand } = card;
+
+    if (!brands.includes(brand)) return false;
     if (!displayTimes) return true;
 
     const now = new Date();
