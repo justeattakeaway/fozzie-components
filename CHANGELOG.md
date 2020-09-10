@@ -12,6 +12,14 @@ Latest (roll into next release)
 - Move `@pact-foundation/pact` to devDependencies.
 
 
+v1.29.0
+------------------------------
+*September 9, 2020*
+
+### Added
+- New build to publish npm packages as part of CI.
+
+
 v1.28.0
 ------------------------------
 *September 9, 2020*
