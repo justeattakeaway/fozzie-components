@@ -95,11 +95,11 @@ jobs:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - run:
-          name: authenticate with npm
+          name: Authenticate with npm
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
       - run:
-          name: npm publish
-          command: npm publish
+          name: Publish to npm
+          command: yarn release
 
 workflows:
   version: 2

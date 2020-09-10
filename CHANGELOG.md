@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.30.0
+------------------------------
+*September 10, 2020*
+
+### Changed
+- Changed the way we publish packages to npm
+
+
 v1.29.0
 ------------------------------
 *September 9, 2020*
