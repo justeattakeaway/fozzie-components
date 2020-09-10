@@ -144,7 +144,7 @@
                 data-test-id="create-account-submit-button"
                 button-style="primary"
                 is-full-width
-                :disabled="shouldDisableCreateAccountButton">
+                :disabled="disableCreateAccountButton">
                 {{ buttonText }}
             </form-button>
         </form>
@@ -237,7 +237,7 @@ export default {
             lastName: null,
             email: null,
             password: null,
-            shouldDisableCreateAccountButton: false,
+            disableCreateAccountButton: false,
             genericErrorMessage: null,
             shouldShowEmailAlreadyExistsError: false
         };
@@ -319,17 +319,20 @@ export default {
         async onFormSubmit () {
             this.genericErrorMessage = null;
             this.shouldShowEmailAlreadyExistsError = false;
+
             if (this.isFormInvalid()) {
                 return;
             }
 
-            this.shouldDisableCreateAccountButton = true;
+            this.disableCreateAccountButton = true;
             try {
                 const registrationData = {
                     firstName: this.firstName,
                     lastName: this.lastName,
                     emailAddress: this.email,
-                    password: this.password
+                    password: this.password,
+                    registrationSource: 'Native',
+                    marketingPreferences: []
                 };
                 await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData);
                 this.$emit(EventNames.CreateAccountSuccess);
@@ -350,7 +353,7 @@ export default {
                 }
                 this.$emit(EventNames.CreateAccountFailure, thrownErrors);
             } finally {
-                this.shouldDisableCreateAccountButton = false;
+                this.disableCreateAccountButton = false;
             }
         },
 

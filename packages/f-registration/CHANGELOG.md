@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.20.0
+------------------------------
+*September 10, 2020*
+
+### Added
+- `registrationSource` and `marketingPreferences` to account creation post request body.
+
+### Changed
+- Rename `shouldDisableCreateAccountButton` data variable to `disableCreateAccountButton`.
+
+
 v0.19.0
 ------------------------------
 *September 7, 2020*
@@ -15,12 +27,14 @@ v0.19.0
 - `testEnvironment` in `package.json` for consumer pact tests
 - `modulePathIgnorePatterns` in `jest.config.js`
 
+
 v0.18.0
 ------------------------------
 *September 4, 2020*
 
 ### Added
 - Legal text and relevant hyperlinks
+
 
 v0.17.0
 ------------------------------
@@ -29,12 +43,14 @@ v0.17.0
 ### Added
 - WebDriverIO component tests
 
+
 v0.16.0
 ------------------------------
 *August 28, 2020*
 
 ### Changed
 - Remove tenant prop and infer from locale prop instead.
+
 
 v0.15.0
 ------------------------------
@@ -43,12 +59,14 @@ v0.15.0
 ### Changed
 - Update button colour to orange.
 
+
 v0.14.0
 ------------------------------
 *August 21, 2020*
 
 ### Changed
 - Validation message for conflicting email address.
+
 
 v0.13.0
 ------------------------------
@@ -60,6 +78,7 @@ v0.13.0
 ### Changed
 - Changed folder structure for test utils.
 
+
 v0.12.0
 ------------------------------
 *August 13, 2020*
@@ -67,6 +86,7 @@ v0.12.0
 ### Added
 - `f-registration.page.js` for use within WebDriverIO test frameworks.
 - New `data-test-id` attributes for f-registration error selectors.
+
 
 v0.11.1
 ------------------------------
