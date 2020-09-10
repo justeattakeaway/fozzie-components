@@ -1,6 +1,6 @@
 import HomeContentCard from '../src/components/cardTemplates/HomeContentCard.vue';
-import jeIcon from './images/je-icon.png';
-import jeBackground from './images/je-marketing.jpg';
+import icon from './images/mcdelivery-logo.png';
+import image from './images/burger-placeholder.jpg';
 
 
 export default {
@@ -57,11 +57,11 @@ HomeContentCardComponent.storyName = 'home-content-card-1';
 
 HomeContentCardComponent.args = {
     title: 'Treat them with a Just Eat gift card',
-    backgroundColor: 'silver',
+    backgroundColor: '#da0006',
     contentContainerBackground: 'white',
     description: 'Whether you want to treat Mum to her Friday night favourite, or surprise your mate with a ‘KFC on me’, show them you care – the tasty way.',
-    image: jeBackground,
-    icon: jeIcon,
+    image,
+    icon,
     ctaText: 'Purchase now',
     url: '#',
     tenant: 'uk'
