@@ -1,6 +1,6 @@
 import HomeContentCard from '../src/components/cardTemplates/HomeContentCard.vue';
 import jeIcon from './images/je-icon.png';
-import jeBackground from './images/je-marketing.png';
+import jeBackground from './images/je-marketing.jpg';
 
 
 export default {
