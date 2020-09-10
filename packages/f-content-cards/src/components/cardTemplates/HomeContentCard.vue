@@ -6,16 +6,16 @@
     >
         <div
             :data-test-id="containerTestId"
-            :class="['l-container', $style['c-homeContentCard-container']]"
+            :class="['l-container', 'c-homeContentCard-container', $style['c-homeContentCard-container']]"
             :style="{ maxWidth: `${containerMaxWidth}px` }"
         >
-            <div :class="[$style['c-homeContentCard-icon']]">
+            <div :class="['c-homeContentCard-icon', $style['c-homeContentCard-icon']]">
                 <img
                     :src="icon"
                     alt="">
             </div>
             <div
-                :class="[$style['c-homeContentCard-innerCard']]"
+                :class="['c-homeContentCard-innerCard', $style['c-homeContentCard-innerCard']]"
                 :style="{ background: contentContainerBackground }"
             >
                 <img
