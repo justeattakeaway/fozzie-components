@@ -144,7 +144,7 @@
                 data-test-id="create-account-submit-button"
                 button-style="primary"
                 is-full-width
-                :disabled="disableCreateAccountButton">
+                :disabled="shouldDisableCreateAccountButton">
                 {{ buttonText }}
             </form-button>
         </form>
@@ -237,7 +237,7 @@ export default {
             lastName: null,
             email: null,
             password: null,
-            disableCreateAccountButton: false,
+            shouldDisableCreateAccountButton: false,
             genericErrorMessage: null,
             shouldShowEmailAlreadyExistsError: false
         };
@@ -324,7 +324,7 @@ export default {
                 return;
             }
 
-            this.disableCreateAccountButton = true;
+            this.shouldDisableCreateAccountButton = true;
             try {
                 const registrationData = {
                     firstName: this.firstName,
@@ -353,7 +353,7 @@ export default {
                 }
                 this.$emit(EventNames.CreateAccountFailure, thrownErrors);
             } finally {
-                this.disableCreateAccountButton = false;
+                this.shouldDisableCreateAccountButton = false;
             }
         },
 

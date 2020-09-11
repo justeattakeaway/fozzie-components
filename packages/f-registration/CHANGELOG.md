@@ -11,9 +11,6 @@ v0.20.0
 ### Added
 - `registrationSource` and `marketingPreferences` to account creation post request body.
 
-### Changed
-- Rename `shouldDisableCreateAccountButton` data variable to `disableCreateAccountButton`.
-
 
 v0.19.0
 ------------------------------
