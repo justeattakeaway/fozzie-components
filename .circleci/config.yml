@@ -59,7 +59,7 @@ jobs:
           name: Run Lint Tasks on Packages
           command: yarn lint
       - run: # Run Tests
-          name: Run Unit Tests
+          name: Run Unit / Integration Tests
           command: yarn test
       - run: # Run Visual Regression Tests
           name: Run Visual Regression Tests
