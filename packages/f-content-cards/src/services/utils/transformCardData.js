@@ -21,6 +21,8 @@ const transformCardData = card => {
     } = card;
 
     const {
+        background_color: backgroundColor,
+        content_container_background: contentBackgroundColor,
         banner,
         button_1: ctaText = linkText,
         footer,
@@ -50,6 +52,8 @@ const transformCardData = card => {
     const target = getCardUrlTarget(url);
 
     return {
+        backgroundColor,
+        contentBackgroundColor,
         banner,
         ctaText,
         description,

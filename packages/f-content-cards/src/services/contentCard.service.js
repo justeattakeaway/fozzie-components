@@ -8,6 +8,7 @@ import transformCardData from './utils/transformCardData';
  * @type {string[]}
  */
 export const defaultEnabledCardTypes = [
+    'Home_Promotion_Card_1',
     'Post_Order_Card_1',
     'Promotion_Card_1',
     'Promotion_Card_2'
