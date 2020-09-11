@@ -1,7 +1,7 @@
 import { withKnobs, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import PromotionCard from '../src/components/cardTemplates/PromotionCard.vue';
-import jeBackground from './images/je-marketing.png';
+import jeBackground from './images/je-marketing.jpg';
 import jeIcon from './images/je-icon.png';
 
 export default {
