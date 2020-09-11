@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.14.0
+------------------------------
+*September 7, 2020*
+
+### Added
+
+- `Home_Promotion_Card_1` template and type to allowed content card types
+
+
 v1.13.0
 ------------------------------
 *September 1, 2020*
