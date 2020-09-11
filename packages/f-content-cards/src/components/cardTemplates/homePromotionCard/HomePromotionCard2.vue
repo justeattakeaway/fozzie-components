@@ -1,12 +1,11 @@
 <template>
     <div
         :data-test-id="testId"
-        :class="[$style['c-contentCards-homePromotionCard2']]"
+        :class="['c-contentCards-homePromotionCard2', $style['c-contentCards-homePromotionCard2']]"
         :style="{ background: contentContainerBackground }">
-        <img
-            :src="image"
-            :class="[$style['c-contentCards-homePromotionCard2-image']]"
-            alt="">
+        <div
+            :class="['c-homeContentCard-innerCard', $style['c-homeContentCard-innerCard']]"
+            :style="{ background: contentContainerBackground }" />
         <h3>{{ title }}</h3>
         <p>{{ description }}</p>
         <p v-if="url">
@@ -27,7 +26,7 @@ export default {
         },
         testId: {
             type: String,
-            default: 'contentCard-homePromotionCard-2'
+            default: 'contentCard-homePromotionCard2'
         }
     },
     data () {
@@ -51,7 +50,7 @@ export default {
     },
     computed: {
         ctaTestId () {
-            return `${this.testId}--cta`;
+            return this.testId ? `${this.testId}--cta` : false;
         }
     }
 };
@@ -72,7 +71,14 @@ export default {
         right: 0;
         top: 50%;
         transform: translate(0, -50%);
-        width: 200px;
+        width: 35%;
+        height: 100%;
+        background: right center no-repeat;
+        background-size: contain;
+
+        @include media(">narrow") {
+            width: 200px;
+        }
     }
 </style>
 

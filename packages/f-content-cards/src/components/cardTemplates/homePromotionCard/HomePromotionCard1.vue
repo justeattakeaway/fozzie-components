@@ -2,17 +2,17 @@
     <div
         :data-test-id="testId"
         :style="{ background: backgroundColor }"
-        :class="[$style['c-contentCards-homePromotionCard1']]">
+        :class="['c-contentCards-homePromotionCard1', $style['c-contentCards-homePromotionCard1']]">
         <div
             :data-test-id="containerTestId"
-            :class="['l-container', $style['c-contentCards-homePromotionCard1-container']]"
+            :class="['l-container', 'c-contentCards-homePromotionCard1-container', $style['c-contentCards-homePromotionCard1-container']]"
             :style="{ maxWidth: `${containerMaxWidth}px` }">
-            <div :class="[$style['c-contentCards-homePromotionCard1-icon']]">
+            <div :class="['c-contentCards-homePromotionCard1-icon', $style['c-contentCards-homePromotionCard1-icon']]">
                 <img
                     :src="icon"
                     alt="">
             </div>
-            <div :class="[$style['c-contentCards-homePromotionCard1-innerCard']]">
+            <div :class="['c-contentCards-homePromotionCard1-innerCard', $style['c-contentCards-homePromotionCard1-innerCard']]">
                 <home-promotion-card2 :card="card" />
             </div>
         </div>
@@ -37,7 +37,7 @@ export default {
         },
         testId: {
             type: String,
-            default: 'contentCard-homePromotionCard-1'
+            default: 'contentCard-homePromotionCard1'
         }
     },
     data () {
@@ -69,11 +69,11 @@ export default {
     },
     computed: {
         ctaTestId () {
-            return `${this.testId}--cta`;
+            return this.testId ? `${this.testId}--cta` : false;
         },
 
         containerTestId () {
-            return `${this.testId}--container`;
+            return this.testId ? `${this.testId}--container` : false;
         }
     }
 };
@@ -99,11 +99,6 @@ export default {
         justify-content: center;
         width: 100%;
         margin-bottom: spacing(x3);
-
-        img {
-            max-height: 65px;
-            max-width: 100%;
-        }
 
         @include media('>mid') {
             width: 50%;
