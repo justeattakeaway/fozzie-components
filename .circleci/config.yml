@@ -61,7 +61,7 @@ jobs:
       - run: # Run Tests
           name: Run Unit / Integration Tests
           command: yarn test
-      - run: # Run Component UI Tests
+      - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global
       - run: # Run Component UI Tests
