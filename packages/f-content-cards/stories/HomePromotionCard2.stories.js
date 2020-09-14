@@ -1,6 +1,5 @@
 import { HomePromotionCard2 } from '../src/components/cardTemplates/homePromotionCard';
-import jeIcon from './images/je-icon.png';
-import jeBackground from './images/je-marketing.png';
+import image from './images/burger-placeholder.jpg';
 
 
 export default {
@@ -57,9 +56,9 @@ HomePromotionCard2Component.storyName = 'home-promotion-card-2';
 
 HomePromotionCard2Component.args = {
     title: 'Treat them with a Just Eat gift card',
-    contentContainerBackground: 'white',
+    contentContainerBackground: '#da0006',
     description: 'Whether you want to treat Mum to her Friday night favourite, or surprise your mate with a ‘KFC on me’, show them you care – the tasty way.',
-    image: jeBackground,
+    image,
     ctaText: 'Purchase now',
     url: '#',
     tenant: 'uk'

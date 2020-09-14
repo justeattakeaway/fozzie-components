@@ -100,6 +100,11 @@ export default {
         width: 100%;
         margin-bottom: spacing(x3);
 
+        img {
+            max-height: 65px;
+            max-width: 100%;
+        }
+
         @include media('>mid') {
             width: 50%;
             margin-bottom: 0;

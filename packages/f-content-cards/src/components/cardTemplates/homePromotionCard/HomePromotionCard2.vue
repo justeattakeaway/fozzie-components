@@ -4,8 +4,8 @@
         :class="['c-contentCards-homePromotionCard2', $style['c-contentCards-homePromotionCard2']]"
         :style="{ background: contentContainerBackground }">
         <div
-            :class="['c-homeContentCard-innerCard', $style['c-homeContentCard-innerCard']]"
-            :style="{ background: contentContainerBackground }" />
+            :class="['c-contentCards-homePromotionCard2-image', $style['c-contentCards-homePromotionCard2-image']]"
+            :style="{ backgroundImage: `url('${image}')` }" />
         <h3>{{ title }}</h3>
         <p>{{ description }}</p>
         <p v-if="url">
@@ -63,7 +63,11 @@ export default {
         width: 100%;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
         border-radius: $post-order-card-radius;
-        padding: spacing(x3) 220px spacing(x3) spacing(x3);
+        padding: spacing(x3) calc(35% + 8px) spacing(x3) spacing(x3);
+
+        @include media(">narrow") {
+            padding-right: 208px;
+        }
     }
 
     .c-contentCards-homePromotionCard2-image {
