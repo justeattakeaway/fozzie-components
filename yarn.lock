@@ -2683,9 +2683,9 @@
     unzipper "^0.10.10"
     url-join "^4.0.0"
 
-"@pact-foundation/pact@^9.11.1":
+"@pact-foundation/pact@9.11.1":
   version "9.11.1"
-  resolved "https://registry.npmjs.org/@pact-foundation/pact/-/pact-9.11.1.tgz#f17d6bc7b9f8fb29138c91c3cfb04f7cd3d92ea3"
+  resolved "https://registry.yarnpkg.com/@pact-foundation/pact/-/pact-9.11.1.tgz#f17d6bc7b9f8fb29138c91c3cfb04f7cd3d92ea3"
   integrity sha512-Hp6VbKjnaBg18wdyDXAjzQfXyISUSa8747vKc/Aohj4XrJALMWnqZDfLJkjgz+3l6dmDRQN37gVoL8RG2GJRqg==
   dependencies:
     "@pact-foundation/pact-node" "^10.9.7"

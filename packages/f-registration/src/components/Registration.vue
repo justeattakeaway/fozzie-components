@@ -319,6 +319,7 @@ export default {
         async onFormSubmit () {
             this.genericErrorMessage = null;
             this.shouldShowEmailAlreadyExistsError = false;
+
             if (this.isFormInvalid()) {
                 return;
             }
@@ -329,7 +330,9 @@ export default {
                     firstName: this.firstName,
                     lastName: this.lastName,
                     emailAddress: this.email,
-                    password: this.password
+                    password: this.password,
+                    registrationSource: 'Native',
+                    marketingPreferences: []
                 };
                 await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData);
                 this.$emit(EventNames.CreateAccountSuccess);
