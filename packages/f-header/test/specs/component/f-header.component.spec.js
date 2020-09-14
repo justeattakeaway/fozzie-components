@@ -1,12 +1,14 @@
-import HeaderComponent from '../../test-utils/component-objects/f-header.component';
+import HeaderComponent from '../../../test-utils/component-objects/f-header.component';
 
 describe('f-header component tests', () => {
-    it('should display the f-header component', () => {
+    beforeEach(() => {
         // Arrange
         browser.url('http://localhost:8080');
+    })
+
+    it('should display the f-header component', () => {
 
         // Assert
         expect(HeaderComponent.isLogoDisplayed()).toBe(true);
     });
 });
-
