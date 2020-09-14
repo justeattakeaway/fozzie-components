@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.16.0
+------------------------------
+*September 14, 2020*
+
+### Changed
+- `filterContentCards` method to perform brand and display time checks when Home Promotion Card 1 & 2 are filtered.
+
+
 v1.13.0
 ------------------------------
 *September 1, 2020*
