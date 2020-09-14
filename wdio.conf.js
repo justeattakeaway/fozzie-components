@@ -1,3 +1,12 @@
+var fp = require("find-free-port")
+
+
+// Finds a free port for @wdio/chromedriver-service to run on.\
+// This prevents conflicts when tests are run in parallel using lerna 
+let chromeDriverPort = fp(8080, 8180, function(freePort){
+    return freePort;
+});
+
 exports.config = {
     //
     // ====================
@@ -107,6 +116,7 @@ exports.config = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: ['chromedriver'],
+    chromeDriverArgs: ['--port', `${chromeDriverPort}`],
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber

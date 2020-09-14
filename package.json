@@ -89,5 +89,8 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "find-free-port": "2.0.0"
+  }
 }
