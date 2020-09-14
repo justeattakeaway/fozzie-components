@@ -1,13 +1,31 @@
+import MockDate from 'mockdate';
 import isCardCurrentlyActive from '../isCardCurrentlyActive';
 
-const brands = ['McDonalds'];
+const brand = '__BRAND__';
+
+const brands = [brand];
 
 const card = {
-    brand: 'McDonalds'
+    brand,
+    displayTimes: {}
 };
 
 describe('services › utils › transformCardData', () => {
-    it('should fallback to current datetime if a value is not provided', () => {});
+    it('should return true if card does not contain brand', () => {
+        // Arrange & Act
+        const result = isCardCurrentlyActive({ displayTimes: {} });
+
+        // Assert
+        expect(result).toBe(true);
+    });
+
+    it('should return true if card does not contain display times', () => {
+        // Arrange & Act
+        const result = isCardCurrentlyActive({ brand });
+
+        // Assert
+        expect(result).toBe(true);
+    });
 
     it('should return false if card brand is not in users brand list', () => {
         // Arrange & Act
@@ -35,8 +53,10 @@ describe('services › utils › transformCardData', () => {
 
     it("should return true if current datetime is between today's display times", () => {
         // Arrange
+        const date = Date.parse('14 Sep 2020 13:00:00 GMT');
+        MockDate.set(date);
         const displayTimes = {
-            Wed: {
+            Mon: {
                 start: '09:00',
                 end: '17:00'
             }
@@ -51,6 +71,8 @@ describe('services › utils › transformCardData', () => {
 
     it('should return true if current datetime is between "Any" display times', () => {
         // Arrange
+        const date = Date.parse('14 Sep 2020 13:00:00 GMT');
+        MockDate.set(date);
         const displayTimes = {
             Any: {
                 start: '09:00',
@@ -67,8 +89,10 @@ describe('services › utils › transformCardData', () => {
 
     it('should return false if current datetime is NOT between provided display times', () => {
         // Arrange
+        const date = Date.parse('14 Sep 2020 08:00:00 GMT');
+        MockDate.set(date);
         const displayTimes = {
-            Wed: {
+            Mon: {
                 start: '12:00',
                 end: '17:00'
             }

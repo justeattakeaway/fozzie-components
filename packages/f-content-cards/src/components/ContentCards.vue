@@ -68,6 +68,11 @@ export default {
             default: ''
         },
 
+        brands: {
+            type: Array,
+            default: () => ([])
+        },
+
         cardLimit: {
             type: Number,
             default: -1
@@ -192,7 +197,7 @@ export default {
                 enabledCardTypes: this.enabledCardTypes
             })
                 .removeDuplicateContentCards()
-                .filterCards()
+                .filterCards(this.brands)
                 .getTitleCard()
                 .arrangeCardsByTitles()
                 .applyCardLimit(this.cardLimit)

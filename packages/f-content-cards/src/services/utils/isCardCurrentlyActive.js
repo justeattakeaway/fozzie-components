@@ -14,8 +14,8 @@ import isBefore from 'date-fns/isBefore';
 const isCardCurrentlyActive = (card = {}, brands = []) => {
     const { displayTimes, brand } = card;
 
+    if (!displayTimes || !brand) return true;
     if (!brands.includes(brand)) return false;
-    if (!displayTimes) return true;
 
     const now = new Date();
     const currentDay = format(now, 'E');

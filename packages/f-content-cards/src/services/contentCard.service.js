@@ -125,11 +125,11 @@ class ContentCards {
      * @property {Object[]} this.cards
      * @returns {ContentCards}
      */
-    filterCards () {
+    filterCards (brands) {
         this.cards = this.cards
             .sort(({ order: a }, { order: b }) => +a - +b)
             .filter(({ type }) => (type ? this.enabledCardTypes.includes(type) : false))
-            .filter(isCardCurrentlyActive);
+            .filter(card => isCardCurrentlyActive(card, brands));
         return this;
     }
 
