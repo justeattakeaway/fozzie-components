@@ -62,8 +62,11 @@ jobs:
           name: Run Unit / Integration Tests
           command: yarn test
       - run: # Run Component UI Tests
+          name: Install Component Test Dependencies
+          command: yarn global add @vue/cli @vue/cli-service-global
+      - run: # Run Component UI Tests
           name: Run WebDriverIO Component Tests
-          command: yarn global add @vue/cli && yarn test-component:chrome
+          command: yarn test-component:chrome
       - run: # Run Visual Regression Tests
           name: Run Visual Regression Tests
           command: cd ./packages/storybook && yarn snapshot
