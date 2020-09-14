@@ -8,6 +8,7 @@ v1.30.0
 ------------------------------
 ### Added
 - New build step for to run component UI tests
+- `local:tests` script to easily run all tests locally before submitting a PR
 
 ### Changed
 - `wdio.conf.js` compnent test spec directory
