@@ -56,7 +56,7 @@ HomePromotionCard2Component.storyName = 'home-promotion-card-2';
 
 HomePromotionCard2Component.args = {
     title: 'Treat them with a Just Eat gift card',
-    contentContainerBackground: '#da0006',
+    contentContainerBackground: 'white',
     description: 'Whether you want to treat Mum to her Friday night favourite, or surprise your mate with a ‘KFC on me’, show them you care – the tasty way.',
     image,
     ctaText: 'Purchase now',
