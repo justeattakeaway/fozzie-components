@@ -37,5 +37,5 @@ module.exports = {
     modulePathIgnorePatterns: [
         './test/specs/component/',
         './test/specs/consumer/'
-    ],
+    ]
 };

@@ -19,12 +19,20 @@ v1.29.0
 ### Changed
 - Build step name in config.yml to include addition of integration tests
 
+Latest (roll into next release)
+------------------------------
+*September 10, 2020*
+
+### Changed
+- Move `@pact-foundation/pact` to devDependencies.
+
+
 v1.29.0
 ------------------------------
 *September 9, 2020*
 
 ### Added
-- New build to publish npm packages as part of CI
+- New build to publish npm packages as part of CI.
 
 
 v1.28.0
