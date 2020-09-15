@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-metadata",
   "description": "Fozzie Metadata Component",
-  "version": "2.8.1",
+  "version": "3.0.0-beta.1",
   "main": "src/index.js",
   "files": [
     "src"
@@ -35,11 +35,15 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "appboy-web-sdk": "2.5.2"
+    "appboy-web-sdk": "2.5.2",
+    "lodash.findindex": "4.6.0",
+    "lodash.orderby": "4.6.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "4.4.6"
+    "@vue/cli-plugin-unit-jest": "4.4.6",
+    "core-js": "3.6.5",
+    "jest-extended": "0.11.5"
   }
 }
