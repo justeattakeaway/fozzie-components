@@ -1,7 +1,7 @@
 /* eslint indent: ["error", 4, {ignoredNodes: ["TemplateLiteral > *"]}] */
 import appboySDK from 'appboy-web-sdk';
 
-import 'core-js/modules/es.object.from-entries.js';
+import 'core-js/modules/es.object.from-entries';
 
 import isAppboyInitialised from '../utils/isAppboyInitialised';
 import ContentCards from '../services/contentCard.service';
