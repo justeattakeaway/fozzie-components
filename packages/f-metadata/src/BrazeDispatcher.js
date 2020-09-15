@@ -13,7 +13,8 @@ function interceptInAppMessageClickEventsHandler (message) {
 }
 
 /**
- *
+ * Dispatches events for in-app messages to component-registered callbacks and registers internal handler to the
+ * click events of the CTA button
  * @param message
  * @this BrazeDispatcher
  */
@@ -26,7 +27,7 @@ function interceptInAppMessagesHandler (message) {
          */
         this.inAppMessagesCallbacks.forEach(callback => callback(message));
         if (message.buttons && message.buttons.length >= 2) {
-            const button = message.buttons[1]; // eslint-disable-line prefer-destructuring
+            const [, button] = message.buttons;
             // Note that the below subscription returns an ID that could later be used to unsubscribe
             button.subscribeToClickedEvent(() => interceptInAppMessageClickEventsHandler.bind(this)(message));
         }
@@ -35,7 +36,7 @@ function interceptInAppMessagesHandler (message) {
 }
 
 /**
- *
+ * Internal handler for content cards that dispatches to component-registered callbacks
  * @param postCardsAppboy
  * @this BrazeDispatcher
  */
@@ -45,7 +46,7 @@ function contentCardsHandler (postCardsAppboy) {
     const {
         cards,
         rawCards
-    } = new ContentCards(postCardsAppboy)
+    } = new ContentCards(postCardsAppboy, { enabledCardTypes: this.dispatcherOptions.enabledCardTypes })
         .removeDuplicateContentCards()
         .filterCards()
         .getTitleCard()
@@ -121,16 +122,20 @@ class BrazeDispatcher {
             userId,
             disableComponent = false,
             callbacks = {},
-            enableLogging
+            enableLogging,
+            enabledCardTypes = []
         } = options;
 
         if (!this.dispatcherOptions) {
             this.dispatcherOptions = {
                 apiKey,
-                userId
+                userId,
+                enabledCardTypes
             };
         } else if (!(apiKey === this.dispatcherOptions.apiKey
-            && userId === this.dispatcherOptions.userId)) {
+            && userId === this.dispatcherOptions.userId
+            && JSON.stringify(enabledCardTypes.slice().sort())
+                === JSON.stringify(this.dispatcherOptions.enabledCardTypes.slice().sort()))) {
             throw new Error('attempt to reinitialise appboy with different parameters');
         }
 
