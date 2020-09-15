@@ -41,7 +41,7 @@ export default {
 
 $btn-default-bgColor                : $grey--lighter;
 $btn-default-text-colour            : $grey--dark;
-$btn-default-weight                 : 500;
+$btn-default-weight                 : 600;
 $btn-default-height                 : 2.6;
 $btn-default-font-size              : base--scaleUp;
 $btn-default-font-family            : $font-family-headings;
