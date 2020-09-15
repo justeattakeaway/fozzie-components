@@ -1,5 +1,4 @@
-import HomeContentCard from '../src/components/cardTemplates/HomeContentCard.vue';
-import icon from './images/mcdelivery-logo.png';
+import { HomePromotionCard2 } from '../src/components/cardTemplates/homePromotionCard';
 import image from './images/burger-placeholder.jpg';
 
 
@@ -26,15 +25,15 @@ export default {
  * @return {{
  *  template: string,
  *  components: {
- *      HomeContentCardComponent: {Object}
+ *      HomePromotionCard2Component: {Object}
  *  },
  *  provide: {Function},
  *  props: string[]
  * }}
  */
-export const HomeContentCardComponent = (args, { argTypes }) => ({
+export const HomePromotionCard2Component = (args, { argTypes }) => ({
     components: {
-        HomeContentCard
+        HomePromotionCard: HomePromotionCard2
     },
 
     props: Object.keys(argTypes),
@@ -50,18 +49,16 @@ export const HomeContentCardComponent = (args, { argTypes }) => ({
         };
     },
 
-    template: '<home-content-card :card="{title, backgroundColor, contentContainerBackground, ctaText, description, image, icon, url}" :tenant="tenant" />'
+    template: '<home-promotion-card :card="{title, backgroundColor, contentContainerBackground, ctaText, description, image, icon, url}" :tenant="tenant" />'
 });
 
-HomeContentCardComponent.storyName = 'home-content-card-1';
+HomePromotionCard2Component.storyName = 'home-promotion-card-2';
 
-HomeContentCardComponent.args = {
+HomePromotionCard2Component.args = {
     title: 'Treat them with a Just Eat gift card',
-    backgroundColor: '#da0006',
     contentContainerBackground: 'white',
     description: 'Whether you want to treat Mum to her Friday night favourite, or surprise your mate with a ‘KFC on me’, show them you care – the tasty way.',
     image,
-    icon,
     ctaText: 'Purchase now',
     url: '#',
     tenant: 'uk'
