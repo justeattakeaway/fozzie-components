@@ -4,12 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (roll into next release)
+v3.0.0-beta.1
 ------------------------------
-*July 23, 2020*
+*September 15, 2020*
 
 ### Changed
 - Vue CLI minor package updates.
+- Begins the decoupling of f-metadata from f-content-cards, allowing callbacks for multiple components to be registered
 
 
 v2.8.1
