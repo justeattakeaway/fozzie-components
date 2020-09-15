@@ -9,6 +9,8 @@ import isCardCurrentlyActive from './utils/isCardCurrentlyActive';
  * @type {string[]}
  */
 export const defaultEnabledCardTypes = [
+    'Home_Promotion_Card_1',
+    'Home_Promotion_Card_2',
     'Post_Order_Card_1',
     'Promotion_Card_1',
     'Promotion_Card_2'

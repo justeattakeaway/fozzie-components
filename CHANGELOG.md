@@ -3,6 +3,61 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.29.0
+*September 9, 2020*
+------------------------------
+### Changed
+- Build step name in config.yml to include addition of integration tests
+
+Latest (roll into next release)
+------------------------------
+*September 10, 2020*
+
+### Changed
+- Move `@pact-foundation/pact` to devDependencies.
+
+
+v1.29.0
+------------------------------
+*September 9, 2020*
+
+### Added
+- New build to publish npm packages as part of CI.
+
+
+v1.28.0
+------------------------------
+*September 9, 2020*
+
+### Changed
+- Updated typography font loading JS snippet to use a self-executing function in order to avoid polluting the global namespace.
+- Updated typography font loading JS snippet to follow our lint rules more closely.
+
+v1.27.0
+------------------------------
+*September 8, 2020*
+
+### Added
+-  `@pact-foundation/pact` dependency for pact tests
+- .gitignore entry for `pacts` folder
+- lerna script to execute `test:consumer` script
+- `publish:pact` script to publish pacts to the broker
+### Changed
+- `testEnvironment` in `package.json` for consumer pact tests
+
+
+v1.26.0
+------------------------------
+*September 8, 2020*
+
+### Changed
+- Updating `peerDependencies` to use ranges values.
+- Updating `devDependencies` in generator package to use same values as the other packages.
+
+### Fixed
+- Updated bundle name in generator readme template.
+
+
 v1.25.0
 ------------------------------
 *September 1, 2020*

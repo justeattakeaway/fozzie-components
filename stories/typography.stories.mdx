@@ -37,28 +37,33 @@ body {
 2. Add the following JS as an inline `<script>` block at the end of your HTML (just before your main JS bundle for example).
 
 ```js
-if( "fonts" in document ) {
-    var bold = new FontFace("JustEatBasis", "url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff2') format('woff2'), url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff') format('woff')", { weight: "600" });
+(function () {
+    var fontUrls = 'url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff2") format("woff2"), url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff") format("woff")';
 
-    Promise.all([ bold.load() ]).then(function(fonts) {
-        fonts.forEach(function(font) {
-            document.fonts.add(font);
-        });
-    })
-      .then(function () {
-        document.documentElement.className += " webfonts-loaded";
-    });;
-}
+    if('fonts' in document ) {
+        var bold = new FontFace('JustEatBasis', fontUrls, { weight: '600' });
 
-// This next block is for IE11 and old Edge support, which don't support the new Font loading API
-if(!("fonts" in document) && "head" in document) {
-    // Awkwardly dump the second stage @font-face blocks in the head
-    var style = document.createElement("style");
-    // Note: Edge supports WOFF2
-    style.innerHTML = "@font-face { font-family: JustEatBasis; font-weight: 600; src: url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff2') format('woff2'), url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff') format('woff'); }";
-    document.head.appendChild(style);
-    document.documentElement.className += " webfonts-loaded";
-}
+        Promise.all([bold.load()])
+            .then(function (fonts) {
+                fonts.forEach(function (font) {
+                    document.fonts.add(font);
+                });
+            })
+            .then(function () {
+                document.documentElement.className += ' webfonts-loaded';
+            });
+    }
+
+    // This next block is for IE11 and old Edge support, which don't support the new Font loading API
+    if(!('fonts' in document) && 'head' in document) {
+        // Awkwardly dump the second stage @font-face blocks in the head
+        var style = document.createElement('style');
+        // Note: Edge supports WOFF2
+        style.innerHTML = '@font-face { font-family: JustEatBasis; font-weight: 600; src: ' + fontUrls + '; }';
+        document.head.appendChild(style);
+        document.documentElement.className += ' webfonts-loaded';
+    }
+})();
 ```
 
 This lazily loads in the `JustEatBasis-Bold` font to take over from the Faux Bold rendering of the Regular font.
