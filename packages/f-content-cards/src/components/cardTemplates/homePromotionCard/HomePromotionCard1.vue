@@ -37,7 +37,7 @@ export default {
         },
         testId: {
             type: String,
-            default: 'contentCard-homePromotionCard1'
+            default: null
         }
     },
     data () {
