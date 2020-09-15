@@ -64,6 +64,12 @@ function contentCardsHandler (postCardsAppboy) {
 let dispatcherInstance;
 
 class BrazeDispatcher {
+    /**
+     * Static constructor to store one instance of BrazeDispatcher per js env
+     * @param {Number} sessionTimeoutInSeconds
+     * @return {BrazeDispatcher}
+     * @constructor
+     */
     static GetDispatcher (sessionTimeoutInSeconds) {
         if (!dispatcherInstance) {
             dispatcherInstance = new BrazeDispatcher(sessionTimeoutInSeconds);
@@ -71,6 +77,10 @@ class BrazeDispatcher {
         return dispatcherInstance;
     }
 
+    /**
+     * Sets defaults, checks environment, checks for reinstantiation
+     * @param {Number} sessionTimeoutInSeconds
+     */
     constructor (sessionTimeoutInSeconds) {
         if (typeof window === 'undefined') throw new Error('window is not defined');
 
@@ -96,6 +106,14 @@ class BrazeDispatcher {
         this.sessionTimeoutInSeconds = sessionTimeoutInSeconds;
     }
 
+    /**
+     * Checks and sets configuration, appends given callbacks to internal registries and sets internal promise
+     * resolving to appboy SDK.
+     * Opens session, sets user ID and/or subscribes internal callbacks if necessary
+     *
+     * @param {Object} options
+     * @return {Promise<null|*>}
+     */
     async configure (options = {}) {
         this.appboy = window.appboy;
         const {
@@ -170,6 +188,10 @@ class BrazeDispatcher {
         }
     }
 
+    /**
+     * Subscribes internal callbacks to Braze SDK hooks
+     * @param appboy
+     */
     subscribeBraze (appboy) {
         // Note that the below subscriptions return an ID that could later be used to unsubscribe
         appboy.subscribeToInAppMessage(interceptInAppMessagesHandler.bind(this));
@@ -178,6 +200,10 @@ class BrazeDispatcher {
         this.requestRefresh(appboy);
     }
 
+    /**
+     * Ensures only one card refresh request is queued at once
+     * @param appboy
+     */
     requestRefresh (appboy) {
         if (!this.refreshRequested) {
             this.refreshRequested = true;
@@ -185,6 +211,12 @@ class BrazeDispatcher {
         }
     }
 
+    /**
+     * Abstracts card interaction reports to braze SDK
+     * @param {String} type
+     * @param {Card} payload
+     * @return {Promise<boolean|*>}
+     */
     async logEvent (type, payload) {
         if (!this.appboyPromise) return false;
 
@@ -196,6 +228,11 @@ class BrazeDispatcher {
         return output;
     }
 
+    /**
+     * Reports card click interaction to Braze SDK
+     * @param {String} cardId
+     * @return {Promise<boolean|*>}
+     */
     logCardClick (cardId) {
         const cardIndex = this.rawCardIndex[cardId];
         const card = this.rawCards[cardIndex];
@@ -203,7 +240,7 @@ class BrazeDispatcher {
     }
 
     /**
-     *
+     * Reports card impressions interaction to Braze SDK
      * @param {String[]} cardIds
      * @return {Promise<boolean|*>}
      */
