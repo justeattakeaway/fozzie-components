@@ -29,6 +29,7 @@
     "@justeat/f-utils": "1.0.0-beta.0",
     "@justeat/fozzie": "4.0.0-beta.0",
     "@justeat/fozzie-colour-palette": "3.0.0-beta.6",
+    "@pact-foundation/pact": "9.11.1",
     "@storybook/storybook-deployer": "2.8.6",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
@@ -87,8 +88,5 @@
   },
   "workspaces": [
     "packages/*"
-  ],
-  "dependencies": {
-    "@pact-foundation/pact": "9.11.1"
-  }
+  ]
 }

@@ -3,6 +3,27 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.29.0
+*September 9, 2020*
+------------------------------
+### Changed
+- Build step name in config.yml to include addition of integration tests
+
+Latest (roll into next release)
+------------------------------
+*September 10, 2020*
+
+### Changed
+- Move `@pact-foundation/pact` to devDependencies.
+
+
+v1.29.0
+------------------------------
+*September 9, 2020*
+
+### Added
+- New build to publish npm packages as part of CI.
+
 
 v2.0.0
 ------------------------------
@@ -19,7 +40,6 @@ v1.28.0
 ### Changed
 - Updated typography font loading JS snippet to use a self-executing function in order to avoid polluting the global namespace.
 - Updated typography font loading JS snippet to follow our lint rules more closely.
-
 
 v1.27.0
 ------------------------------

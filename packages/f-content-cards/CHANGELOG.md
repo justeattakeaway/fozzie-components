@@ -23,6 +23,14 @@ v2.0.0-beta.0
 - Now uses new `JustEatBasis` font and updated type variables.
 
 
+v1.14.0
+------------------------------
+*September 7, 2020*
+
+### Added
+- `Home_Promotion_Card_1` template and type to allowed content card types
+
+
 v1.13.0
 ------------------------------
 *September 1, 2020*

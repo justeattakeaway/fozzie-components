@@ -3,12 +3,45 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.20.0
+
+v2.0.0
 ------------------------------
 *September 9, 2020*
 
 ### Changed
 - Uses `JustEatBasis` font and new fozzie font size declarations.
+
+
+v0.23.0
+------------------------------
+*September 15, 2020*
+
+### Changed
+- font-weight for the Button bold text is now 500
+
+
+v0.22.0
+------------------------------
+*September 15, 2020*
+
+### Changed
+- font-weight for the Button bold text is now 600
+
+
+v0.21.0
+------------------------------
+*September 10, 2020*
+
+### Added
+- `registrationSource` and `marketingPreferences` to account creation post request body.
+
+
+v0.20.0
+------------------------------
+*September 9, 2020*
+
+### Added
+- Integration tests
 
 
 v0.19.0
@@ -22,6 +55,7 @@ v0.19.0
 ### Changed
 - `testEnvironment` in `package.json` for consumer pact tests
 - `modulePathIgnorePatterns` in `jest.config.js`
+
 
 v0.18.0
 ------------------------------
