@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.15.0
 ------------------------------
-*September 11, 2020*
+*September 15, 2020*
 
 ### Added
 - `Home_Promotion_Card_2` template and type to allowed content card types
