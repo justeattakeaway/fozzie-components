@@ -1,0 +1,218 @@
+import ContentCards from './services/contentCard.service';
+import isAppboyInitialised from './utils/isAppboyInitialised';
+
+/* braze event handler callbacks */
+
+/**
+ * Dispatches events for in-app message clicks to the registered handlers
+ * @param message
+ * @this BrazeDispatcher
+ */
+function interceptInAppMessageClickEventsHandler (message) {
+    this.inAppMessageClickEventCallbacks.forEach(callback => callback(message));
+}
+
+/**
+ *
+ * @param message
+ * @this BrazeDispatcher
+ */
+function interceptInAppMessagesHandler (message) {
+    if (message instanceof this.appboy.ab.InAppMessage) {
+        /**
+         * Always subscribe click action to second button
+         * as this is always "success" as opposed to "dismiss"
+         * as confirmed with CRM (AS)
+         */
+        this.inAppMessagesCallbacks.forEach(callback => callback(message));
+        if (message.buttons && message.buttons.length >= 2) {
+            const button = message.buttons[1]; // eslint-disable-line prefer-destructuring
+            // Note that the below subscription returns an ID that could later be used to unsubscribe
+            button.subscribeToClickedEvent(() => interceptInAppMessageClickEventsHandler.bind(this)(message));
+        }
+    }
+    this.appboy.display.showInAppMessage(message);
+}
+
+/**
+ *
+ * @param postCardsAppboy
+ * @this BrazeDispatcher
+ */
+function contentCardsHandler (postCardsAppboy) {
+    this.refreshRequested = false;
+
+    const {
+        cards,
+        rawCards
+    } = new ContentCards(postCardsAppboy)
+        .removeDuplicateContentCards()
+        .filterCards()
+        .getTitleCard()
+        .arrangeCardsByTitles()
+        .output();
+
+    this.cardsCallbacks.forEach(callback => callback(cards));
+
+    this.rawCards = rawCards;
+
+    this.rawCardIndex = Object.fromEntries(this.rawCards.map((rawCard, idx) => [rawCard.id, idx]));
+}
+
+/* BrazeDispatcher */
+
+let dispatcherInstance;
+
+class BrazeDispatcher {
+    static GetDispatcher (sessionTimeoutInSeconds) {
+        if (!dispatcherInstance) {
+            dispatcherInstance = new BrazeDispatcher(sessionTimeoutInSeconds);
+        }
+        return dispatcherInstance;
+    }
+
+    constructor (sessionTimeoutInSeconds) {
+        if (typeof window === 'undefined') throw new Error('window is not defined');
+
+        if (dispatcherInstance && dispatcherInstance !== this) {
+            throw new Error('do not instantiate more than one instance of BrazeDispatcher');
+        }
+        dispatcherInstance = this;
+
+        this.appboyPromise = null;
+
+        this.dispatcherOptions = null;
+
+        this.cardsCallbacks = [];
+        this.inAppMessageClickEventCallbacks = [];
+        this.inAppMessagesCallbacks = [];
+
+        this.rawCards = null;
+
+        this.rawCardIndex = {};
+
+        this.refreshRequested = false;
+
+        this.sessionTimeoutInSeconds = sessionTimeoutInSeconds;
+    }
+
+    async configure (options = {}) {
+        this.appboy = window.appboy;
+        const {
+            apiKey,
+            userId,
+            disableComponent = false,
+            callbacks = {},
+            enableLogging
+        } = options;
+
+        if (!this.dispatcherOptions) {
+            this.dispatcherOptions = {
+                apiKey,
+                userId
+            };
+        } else if (!(apiKey === this.dispatcherOptions.apiKey
+            && userId === this.dispatcherOptions.userId)) {
+            throw new Error('attempt to reinitialise appboy with different parameters');
+        }
+
+        window.dataLayer = window.dataLayer || [];
+
+        // Add callbacks to internal lists prior to attempting to configure appboy
+        if (callbacks.interceptInAppMessageClickEvents) this.inAppMessageClickEventCallbacks.push(callbacks.interceptInAppMessageClickEvents);
+        if (callbacks.interceptInAppMessages) this.inAppMessagesCallbacks.push(callbacks.interceptInAppMessages);
+        if (callbacks.handleContentCards) this.cardsCallbacks.push(callbacks.handleContentCards);
+
+        // Note that appBoyPromise will not be set if this is the first time running this method -
+        // this is a guard against initialise() being called more than once, and attempting to
+        // reboot the entire appboy sdk.
+        if (this.appboyPromise) {
+            this.appboyPromise
+                .then(appboy => this.requestRefresh(appboy));
+            return this.appboyPromise;
+        }
+
+        const isInitialised = await isAppboyInitialised(window.appboy);
+
+        if (isInitialised) {
+            this.appboyPromise = Promise.resolve(window.appboy);
+            this.subscribeBraze(window.appboy);
+            return this.appboyPromise;
+        }
+
+        if (disableComponent || !apiKey || !userId) {
+            this.appboyPromise = Promise.resolve();
+            return this.appboyPromise;
+        }
+
+        try {
+            this.appboyPromise = import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
+                .then(({ default: appboy }) => {
+                    appboy.initialize(apiKey, { enableLogging, sessionTimeoutInSeconds: this.sessionTimeoutInSeconds });
+                    appboy.openSession();
+
+                    window.appboy = appboy;
+
+                    this.subscribeBraze(appboy);
+
+                    appboy.changeUser(userId, () => {
+                        window.dataLayer.push({
+                            event: 'appboyReady'
+                        });
+                    });
+
+                    return window.appboy;
+                });
+
+            return await this.appboyPromise;
+        } catch (error) {
+            throw new Error(`An error occurred while loading the component: ${error}`);
+        }
+    }
+
+    subscribeBraze (appboy) {
+        // Note that the below subscriptions return an ID that could later be used to unsubscribe
+        appboy.subscribeToInAppMessage(interceptInAppMessagesHandler.bind(this));
+        appboy.subscribeToContentCardsUpdates(contentCardsHandler.bind(this));
+
+        this.requestRefresh(appboy);
+    }
+
+    requestRefresh (appboy) {
+        if (!this.refreshRequested) {
+            this.refreshRequested = true;
+            appboy.requestContentCardsRefresh();
+        }
+    }
+
+    async logEvent (type, payload) {
+        if (!this.appboyPromise) return false;
+
+        const appboy = await this.appboyPromise;
+
+        const output = appboy[type](payload, true);
+        appboy.requestImmediateDataFlush();
+
+        return output;
+    }
+
+    logCardClick (cardId) {
+        const cardIndex = this.rawCardIndex[cardId];
+        const card = this.rawCards[cardIndex];
+        return this.logEvent('logCardClick', card);
+    }
+
+    /**
+     *
+     * @param {String[]} cardIds
+     * @return {Promise<boolean|*>}
+     */
+    logCardImpressions (cardIds) {
+        const cardsShown = cardIds.map(cardId => this.rawCardIndex[cardId])
+            .filter(a => a !== undefined)
+            .map(cardIndex => this.rawCards[cardIndex]);
+        return this.logEvent('logCardImpressions', cardsShown);
+    }
+}
+
+export default BrazeDispatcher.GetDispatcher;
