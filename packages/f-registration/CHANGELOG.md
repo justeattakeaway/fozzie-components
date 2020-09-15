@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.22.0
 ------------------------------
-*September 14, 2020*
+*September 15, 2020*
 
 ### Changed
 - font-weight for the Button bold text is now 600
