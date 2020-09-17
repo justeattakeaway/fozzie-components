@@ -41,33 +41,35 @@ const initialiseBraze = require('@justeat/f-metadata');
 
 ### Initialisation
 
-The package comes with one method for initialising Braze. A couple of other methods are provided for logging click and view events of cards back to braze.
+The package comes with one method for initialising Braze, or retrieving the already initialised module.
 
-All other functionality, such as handling content cards or intercepting in-app messages is done with callbacks passed through config.
+This method returns an instance of the BrazeDispatcher class, which can also be used for logging interactions with braze elements returned from the API.
+
+All other functionality, such as handling content cards or intercepting in-app messages can be done with callbacks passed through config.
 
 **Basic Example**
 
 ```js
-import initialiseBraze, { logCardClick, logCardImpressions } from '@justeat/f-metadata'
+import initialise from '@justeat/f-metadata'
 
 const config = {
-  apiKey = '1234-1234-1234',
-  userId = 'ABC123',
-  enableLogging = true,
-  disableComponent = false,
-  callbacks = {
-    handleContentCards: cards => console.log(cards) // Braze content cards data
-    interceptInAppMessages inAppMessage => console.log(inAppMessage) // Braze in app message data
+  apiKey: '1234-1234-1234',
+  userId: 'ABC123',
+  enableLogging: true,
+  disableComponent: false,
+  callbacks: {
+    handleContentCards: cards => console.log(cards), // Braze content cards data
+    interceptInAppMessages: inAppMessage => console.log(inAppMessage) // Braze in app message data
   }
 };
 
-const brazePromise = initialiseBraze(config);
+const brazePromise = initialise(config);
 
 // The below assumes card data is being rendered into elements with class "brazeCard", that they
 // have card data as returned by braze attached to a "data-content-card" attribute, and that all
 // elements accessible via that css selector are visible
 
-brazePromise.then(() => {
+brazePromise.then(brazeDispatcher => {
   const brazeCards = document.querySelectorAll('.brazeCard');
 
   let brazeCardsData = [];
@@ -76,11 +78,11 @@ brazePromise.then(() => {
     brazeCardsData.push(brazeCard.dataset.contentCard);
 
     brazeCard.addEventListener('click', clickEvent => {
-      logCardClick(brazeCard.dataset.contentCard);
+      brazeDispatcher.logCardClick(brazeCard.dataset.contentCard);
     });
   });
 
-  logCardImpressions(brazeCardsData);
+  brazeDispatcher.logCardImpressions(brazeCardsData);
 });
 ```
 
@@ -105,13 +107,13 @@ Enable/Disable the Braze SDK when running experiments or feature toggling.
 
 ### `config.callbacks.handleContentCards`
 
-The callback to be invoked when content cards have been retrieved.
+A callback to be invoked when content cards have been retrieved.
 
 ### `config.callbacks.interceptInAppMessages`
 
-The callback to be invoked when in-app messages have been retrieved.
+A callback to be invoked when in-app messages have been retrieved.
 
-> **Please note:** This callback is fired before in-app messages are triggered.
+> **Please note:** The dispatcher fires callbacks registered for in-app messages before it triggers the messages.
 
 ### `config.callbacks.interceptInAppMessageClickEvents`
 

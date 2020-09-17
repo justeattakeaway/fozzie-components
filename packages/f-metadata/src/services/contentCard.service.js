@@ -133,32 +133,6 @@ class ContentCards {
         this.cards = orderBy(this.cards, 'updated').filter((contentCard, index, item) => index === findIndex(item, card => (card.title === contentCard.title && card.type === contentCard.type)));
         return this;
     }
-
-    /**
-     * Limits cards to the given card count limit.
-     * @param {Number} limit - Content card count limit
-     * @property {Object[]} this.cards
-     * @returns {ContentCards}
-     */
-    applyCardLimit (limit) {
-        this.cards = limit > -1 ? this.cards.splice(0, limit) : this.cards;
-        return this;
-    }
-
-    /**
-     * Log Braze event and flush queue
-     * @param {String} type - Event type (check braze sdk for log types)
-     * @param {Object[]} payload - Event payload
-     * @returns {Boolean} - Success status
-     */
-    logBrazeEvent (type, payload) {
-        const { appboy } = this;
-        if (!appboy || !appboy[type]) return false;
-        const output = appboy[type](payload, true);
-        appboy.requestImmediateDataFlush();
-
-        return output;
-    }
 }
 
 export default ContentCards;

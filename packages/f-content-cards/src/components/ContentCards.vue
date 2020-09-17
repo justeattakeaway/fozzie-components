@@ -229,6 +229,10 @@ export default {
                 case 'Terms_And_Conditions_Card':
                 case 'Terms_And_Conditions_Card_2':
                     return 'TermsAndConditionsCard';
+                case 'Home_Promotion_Card_1':
+                    return 'HomePromotionCard1';
+                case 'Home_Promotion_Card_2':
+                    return 'HomePromotionCard2';
                 default:
                     break;
             }

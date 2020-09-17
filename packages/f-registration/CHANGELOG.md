@@ -3,12 +3,33 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.22.0
+v0.25.0
 ------------------------------
-*September 9, 2020*
+*September 17, 2020*
 
 ### Changed
 - Updated `f-registration` component object to make tests pass
+
+v0.24.0
+------------------------------
+*September 15, 2020*
+
+### Changed
+- Include Registration API service as part of npm package for use in Magikarp contract tests
+
+v0.23.0
+------------------------------
+*September 15, 2020*
+
+### Changed
+- font-weight for the Button bold text is now 500
+
+v0.22.0
+------------------------------
+*September 15, 2020*
+
+### Changed
+- font-weight for the Button bold text is now 600
 
 v0.21.0
 ------------------------------
