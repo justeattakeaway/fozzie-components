@@ -203,6 +203,26 @@ describe('Card', () => {
                 // Assert
                 expect(getTheme).toHaveBeenCalledWith('en-AU');
             });
+
+            it('should return theme of `ml`', () => {
+                // Arrange
+                const propsData = {};
+
+                getTheme.mockImplementation(() => 'ml' );
+
+                // Act
+                const wrapper = shallowMount(Card, { 
+                    propsData, 
+                    computed: {
+                        cardLocale() {
+                            return 'en-AU'
+                        }
+                    } 
+                });
+
+                // Assert
+                expect(wrapper.vm.theme).toBe('ml');
+            });
         });
     });
 });
