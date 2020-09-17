@@ -6,19 +6,11 @@ import { getTheme, getLocale } from '@justeat/f-services';
 
 jest.mock('../../tenants', () => {
     return {
-        'en-GB': {
-            locale: 'en-GB',
-            cardTitle: 'I am a Card Component (GB)'
-        },
         'en-AU': {
             locale: 'en-AU',
             cardTitle: 'I am a Card Component (AU)'
         },
-        'en-NZ': {
-            locale: 'en-NZ',
-            cardTitle: 'I am a Card Component (NZ)'
-        }
-    }
+    };
 });
 
 describe('Card', () => {
@@ -191,31 +183,23 @@ describe('Card', () => {
         describe('cardLocale', () => {
             xit('should call the `getLocale` method from `sharedServices`', () => {
                 // Arrange
-                const mockedLocale = 'en-NZ';
+                const mockedLocale = 'en-AU';
 
                 const propsData = {
                     locale: mockedLocale
                 };
 
                 const mockedTennats = {
-                    'en-GB': {
-                        locale: 'en-GB',
-                        cardTitle: 'I am a Card Component (GB)'
-                    },
                     'en-AU': {
                         locale: 'en-AU',
                         cardTitle: 'I am a Card Component (AU)'
                     },
-                    'en-NZ': {
-                        locale: 'en-NZ',
-                        cardTitle: 'I am a Card Component (NZ)'
-                    }
                 };
                 // Act
                 const wrapper = shallowMount(Card, { 
                     propsData, 
                     mocks: { 
-                        $i18n: () => 'en-NZ'
+                        $i18n: () => 'en-AU'
                     }  
                 });
 
@@ -225,7 +209,7 @@ describe('Card', () => {
 
             it('should return correct locale', () => {
                 // Arrange
-                const mockedLocale = 'en-NZ';
+                const mockedLocale = 'en-AU';
 
                 const propsData = {
                     locale: mockedLocale
@@ -237,7 +221,7 @@ describe('Card', () => {
                 const wrapper = shallowMount(Card, { 
                     propsData, 
                     mocks: { 
-                        $i18n: () => 'en-NZ'
+                        $i18n: () => 'en-AU'
                     }  
                 });
 
@@ -249,15 +233,15 @@ describe('Card', () => {
         describe('copy', () => {
             it('should return the local config', () => {
                 // Arrange
-                const mockedLocale = 'en-NZ';
+                const mockedLocale = 'en-AU';
 
                 const propsData = {
                     locale: mockedLocale
                 };
 
                 const expectedReturn = {
-                    "cardTitle": "I am a Card Component (NZ)",
-                    "locale": "en-NZ"
+                    "cardTitle": "I am a Card Component (AU)",
+                    "locale": "en-AU"
                 }
 
                 // Act
