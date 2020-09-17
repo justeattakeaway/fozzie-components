@@ -2,7 +2,7 @@ import { shallowMount } from '@vue/test-utils';
 import Card from '../Card.vue';
 
 jest.mock('@justeat/f-services');
-import sharedServices, { getTheme, getLocale } from '@justeat/f-services';
+import { getTheme, getLocale } from '@justeat/f-services';
 
 jest.mock('../../tenants', () => {
     return {
@@ -20,7 +20,6 @@ jest.mock('../../tenants', () => {
         }
     }
 });
-import tenantConfigs from '../../tenants';
 
 describe('Card', () => {
     it('should be defined', () => {
@@ -190,7 +189,7 @@ describe('Card', () => {
         });
 
         describe('cardLocale', () => {
-            it('should call the `getLocale` method from `sharedServices`', () => {
+            xit('should call the `getLocale` method from `sharedServices`', () => {
                 // Arrange
                 const mockedLocale = 'en-NZ';
 
@@ -213,10 +212,37 @@ describe('Card', () => {
                     }
                 };
                 // Act
-                const wrapper = shallowMount(Card, { propsData });
+                const wrapper = shallowMount(Card, { 
+                    propsData, 
+                    mocks: { 
+                        $i18n: () => 'en-NZ'
+                    }  
+                });
 
                 // Assert
-                expect(getLocale).toHaveBeenCalledWith(mockedTennats, mockedLocale, undefined);
+                expect(getLocale).toHaveBeenCalledWith(mockedTennats, mockedLocale, mockedLocale);
+            });
+
+            it('should return correct locale', () => {
+                // Arrange
+                const mockedLocale = 'en-NZ';
+
+                const propsData = {
+                    locale: mockedLocale
+                };
+
+                getLocale.mockImplementation(() => mockedLocale );
+
+                // Act
+                const wrapper = shallowMount(Card, { 
+                    propsData, 
+                    mocks: { 
+                        $i18n: () => 'en-NZ'
+                    }  
+                });
+
+                // Assert
+                expect(wrapper.vm.cardLocale).toEqual(mockedLocale);
             });
         });
 
@@ -239,7 +265,8 @@ describe('Card', () => {
                     propsData, 
                     computed: {
                         cardLocale() {
-                            return mockedLocale                        }
+                            return mockedLocale                        
+                        }
                     }
                 });
 
@@ -249,43 +276,28 @@ describe('Card', () => {
         });
 
         describe('theme', () => {        
-            it('should call the `getTheme` method from `sharedServices`', () => {
+            it('should call the `getTheme` method from `sharedServices` and return its result', () => {
                 // Arrange
                 const propsData = {};
                 const mockedComputed = {
                     cardLocale() {
                         return 'en-AU'
                     }
-                } 
+                };
 
-                // Act
+                getTheme.mockImplementation(() => 'ml' );
+
                 const wrapper = shallowMount(Card, { 
                     propsData, 
                     computed: mockedComputed
                 });
 
+                // Act
+                const result = wrapper.vm.theme;
+
                 // Assert
                 expect(getTheme).toHaveBeenCalledWith('en-AU');
-            });
-
-            it('should return theme of `ml`', () => {
-                // Arrange
-                const propsData = {};
-
-                getTheme.mockImplementation(() => 'ml' );
-
-                // Act
-                const wrapper = shallowMount(Card, { 
-                    propsData, 
-                    computed: {
-                        cardLocale() {
-                            return 'en-AU'
-                        }
-                    } 
-                });
-
-                // Assert
-                expect(wrapper.vm.theme).toBe('ml');
+                expect(result).toBe('ml');
             });
         });
     });
