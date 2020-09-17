@@ -31,7 +31,8 @@
                 data-test-id="input-first-name"
                 label-text="First name"
                 input-type="text"
-                label-style="inline">
+                label-style="inline"
+                @blur="$v.firstName.$touch">
                 <template #error>
                     <p
                         v-if="shouldShowFirstNameRequiredError"
@@ -63,7 +64,8 @@
                 data-test-id="input-last-name"
                 label-text="Last name"
                 input-type="text"
-                label-style="inline">
+                label-style="inline"
+                @blur="$v.lastName.$touch">
                 <template #error>
                     <p
                         v-if="shouldShowLastNameRequiredError"
@@ -95,7 +97,8 @@
                 data-test-id="input-email"
                 label-text="Email"
                 input-type="email"
-                label-style="inline">
+                label-style="inline"
+                @blur="$v.email.$touch">
                 <!-- For when we want to add validation on blur of input - @blur="$v.email.$touch" -->
                 <template #error>
                     <p
@@ -128,7 +131,8 @@
                 data-test-id="input-password"
                 label-text="Password"
                 input-type="password"
-                label-style="inline">
+                label-style="inline"
+                @blur="$v.password.$touch">
                 <template #error>
                     <p
                         v-if="shouldShowPasswordRequiredError"

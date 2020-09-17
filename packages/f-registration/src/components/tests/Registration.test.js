@@ -237,6 +237,25 @@ describe('Registration', () => {
             }
         });
 
+        it('should show error message when the first name field is populated with invalid input and focus is lost', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                const firstNameInput = wrapper.find('[data-test-id="input-first-name"]');
+                firstNameInput.setValue('wh4t @ w3!rd |\\|ame');
+
+                // Act
+                firstNameInput.trigger('blur');
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowFirstNameInvalidCharError).toBe(true);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
         it('should show error message and emit failure event when the first name field is populated with too long an input', async () => {
             // Arrange
             const wrapper = mountComponentAndAttachToDocument();
@@ -310,6 +329,26 @@ describe('Registration', () => {
                 // Assert
                 expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(true);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show error message when the last name field is populated with too long an input and focus is lost', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                const longValue = 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij';
+                const lastNameInput = wrapper.find('[data-test-id="input-last-name"]');
+                lastNameInput.setValue(longValue);
+
+                // Act
+                lastNameInput.trigger('blur');
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(true);
             } finally {
                 wrapper.destroy();
             }
