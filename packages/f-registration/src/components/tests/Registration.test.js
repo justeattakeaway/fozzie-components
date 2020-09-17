@@ -393,6 +393,25 @@ describe('Registration', () => {
             }
         });
 
+        it('should show error message when the password field is populated with too short an input and focus is lost', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                const passwordInput = wrapper.find('[data-test-id="input-password"]');
+                passwordInput.setValue('dog');
+
+                // Act
+                passwordInput.trigger('blur');
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowPasswordMinLengthError).toBe(true);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
         it('should show error message and emit failure event when the email field is populated with too long an input', async () => {
             // Arrange
             const wrapper = mountComponentAndAttachToDocument();
@@ -408,6 +427,25 @@ describe('Registration', () => {
                 // Assert
                 expect(wrapper.vm.shouldShowEmailMaxLengthError).toBe(true);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show error message when the email field is invalid and focus is lost', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                const emailInput = wrapper.find('[data-test-id="input-email"]');
+                emailInput.setValue('invalid email');
+
+                // Act
+                emailInput.trigger('blur');
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowEmailInvalidError).toBe(true);
             } finally {
                 wrapper.destroy();
             }
