@@ -178,7 +178,7 @@ describe('Card', () => {
     describe('computed', () => {
         let locale;
         let propsData;
-        let mockedTennats;
+        let mockedTenants;
         let mockedCardLocale;
 
         beforeEach(() => {
@@ -186,7 +186,7 @@ describe('Card', () => {
             propsData = {
                 locale: locale
             };
-            mockedTennats = {
+            mockedTenants = {
                 'en-AU': {
                     locale: 'en-AU',
                     cardTitle: 'I am a Card Component (AU)'
@@ -221,7 +221,7 @@ describe('Card', () => {
                 const result = wrapper.vm.cardLocale;
 
                 // Assert
-                expect(getLocale).toHaveBeenCalledWith(mockedTennats, locale, mockedI18n);
+                expect(getLocale).toHaveBeenCalledWith(mockedTenants, locale, mockedI18n);
                 expect(result).toEqual(locale);
             });
         });
