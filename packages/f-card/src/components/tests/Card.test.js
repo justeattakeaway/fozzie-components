@@ -176,25 +176,25 @@ describe('Card', () => {
     });
 
     describe('computed', () => {
-        let locale;
+        const localeAU = 'en-AU';
+
         let propsData;
         let mockedTenants;
         let mockedCardLocale;
 
         beforeEach(() => {
-            locale = 'en-AU';   
             propsData = {
-                locale: locale
+                locale: localeAU
             };
             mockedTenants = {
                 'en-AU': {
-                    locale: 'en-AU',
+                    locale: localeAU,
                     cardTitle: 'I am a Card Component (AU)'
                 },
             };
             mockedCardLocale = {
                 cardLocale() {
-                    return 'en-AU'
+                    return localeAU;
                 }
             };
         });
@@ -206,9 +206,9 @@ describe('Card', () => {
         describe('cardLocale', () => {
             it('should call the `getLocale` method from `sharedServices` and return correct locale', () => {
                 // Arrange
-                const mockedI18n = () => 'en-AU'
+                const mockedI18n = () => localeAU;
                 
-                getLocale.mockImplementation(() => locale);
+                getLocale.mockImplementation(() => localeAU);
 
                 const wrapper = shallowMount(Card, { 
                     propsData, 
@@ -221,8 +221,8 @@ describe('Card', () => {
                 const result = wrapper.vm.cardLocale;
 
                 // Assert
-                expect(getLocale).toHaveBeenCalledWith(mockedTenants, locale, mockedI18n);
-                expect(result).toEqual(locale);
+                expect(getLocale).toHaveBeenCalledWith(mockedTenants, localeAU, mockedI18n);
+                expect(result).toEqual(localeAU);
             });
         });
 
@@ -231,7 +231,7 @@ describe('Card', () => {
                 // Arrange
                 const expectedReturn = {
                     "cardTitle": "I am a Card Component (AU)",
-                    "locale": "en-AU"
+                    "locale": localeAU
                 }
 
                 const wrapper = shallowMount(Card, { 
@@ -261,7 +261,7 @@ describe('Card', () => {
                 const result = wrapper.vm.theme;
 
                 // Assert
-                expect(getTheme).toHaveBeenCalledWith('en-AU');
+                expect(getTheme).toHaveBeenCalledWith(localeAU);
                 expect(result).toBe('ml');
             });
         });
