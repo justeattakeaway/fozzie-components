@@ -181,52 +181,39 @@ describe('Card', () => {
         });
 
         describe('cardLocale', () => {
-            xit('should call the `getLocale` method from `sharedServices`', () => {
-                // Arrange
-                const mockedLocale = 'en-AU';
+            it('should call the `getLocale` method from `sharedServices` and return correct locale', () => {
+                 // Arrange
+                 const mockedLocale = 'en-AU';
 
-                const propsData = {
-                    locale: mockedLocale
-                };
+                 const propsData = {
+                     locale: mockedLocale
+                 };
 
-                const mockedTennats = {
+                 const mockedTennats = {
                     'en-AU': {
                         locale: 'en-AU',
                         cardTitle: 'I am a Card Component (AU)'
                     },
                 };
-                // Act
-                const wrapper = shallowMount(Card, { 
-                    propsData, 
-                    mocks: { 
-                        $i18n: () => 'en-AU'
-                    }  
-                });
 
-                // Assert
-                expect(getLocale).toHaveBeenCalledWith(mockedTennats, mockedLocale, mockedLocale);
-            });
-
-            it('should return correct locale', () => {
-                // Arrange
-                const mockedLocale = 'en-AU';
-
-                const propsData = {
-                    locale: mockedLocale
-                };
-
+                const mockedI18n = () => 'en-AU'
+                
                 getLocale.mockImplementation(() => mockedLocale );
 
-                // Act
                 const wrapper = shallowMount(Card, { 
                     propsData, 
                     mocks: { 
-                        $i18n: () => 'en-AU'
+                        $i18n: mockedI18n
                     }  
                 });
+ 
+                 // Act
+                 const result = wrapper.vm.cardLocale;
 
-                // Assert
-                expect(wrapper.vm.cardLocale).toEqual(mockedLocale);
+                 // Assert
+                 expect(getLocale).toHaveBeenCalledWith(mockedTennats, mockedLocale, mockedI18n);
+
+                 expect(result).toEqual(mockedLocale);
             });
         });
 
