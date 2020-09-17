@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
 import Card from '../Card.vue';
+import { getTheme, getLocale } from '@justeat/f-services';
 
 jest.mock('@justeat/f-services');
-import { getTheme, getLocale } from '@justeat/f-services';
 
 jest.mock('../../tenants', () => {
     return {
