@@ -176,15 +176,15 @@ describe('Card', () => {
     });
 
     describe('computed', () => {
-        let mockedLocale;
+        let locale;
         let propsData;
         let mockedTennats;
         let mockedCardLocale;
 
         beforeEach(() => {
-            mockedLocale = 'en-AU';   
+            locale = 'en-AU';   
             propsData = {
-                locale: mockedLocale
+                locale: locale
             };
             mockedTennats = {
                 'en-AU': {
@@ -208,7 +208,7 @@ describe('Card', () => {
                 // Arrange
                 const mockedI18n = () => 'en-AU'
                 
-                getLocale.mockImplementation(() => mockedLocale);
+                getLocale.mockImplementation(() => locale);
 
                 const wrapper = shallowMount(Card, { 
                     propsData, 
@@ -221,8 +221,8 @@ describe('Card', () => {
                 const result = wrapper.vm.cardLocale;
 
                 // Assert
-                expect(getLocale).toHaveBeenCalledWith(mockedTennats, mockedLocale, mockedI18n);
-                expect(result).toEqual(mockedLocale);
+                expect(getLocale).toHaveBeenCalledWith(mockedTennats, locale, mockedI18n);
+                expect(result).toEqual(locale);
             });
         });
 
