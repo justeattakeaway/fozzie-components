@@ -4,6 +4,24 @@ import Card from '../Card.vue';
 jest.mock('@justeat/f-services');
 import sharedServices, { getTheme, getLocale } from '@justeat/f-services';
 
+jest.mock('../../tenants', () => {
+    return {
+        'en-GB': {
+            locale: 'en-GB',
+            cardTitle: 'I am a Card Component (GB)'
+        },
+        'en-AU': {
+            locale: 'en-AU',
+            cardTitle: 'I am a Card Component (AU)'
+        },
+        'en-NZ': {
+            locale: 'en-NZ',
+            cardTitle: 'I am a Card Component (NZ)'
+        }
+    }
+});
+import tenantConfigs from '../../tenants';
+
 describe('Card', () => {
     it('should be defined', () => {
         // Arrange
@@ -174,13 +192,31 @@ describe('Card', () => {
         describe('cardLocale', () => {
             it('should call the `getLocale` method from `sharedServices`', () => {
                 // Arrange
-                const propsData = {};
+                const mockedLocale = 'en-NZ';
 
+                const propsData = {
+                    locale: mockedLocale
+                };
+
+                const mockedTennats = {
+                    'en-GB': {
+                        locale: 'en-GB',
+                        cardTitle: 'I am a Card Component (GB)'
+                    },
+                    'en-AU': {
+                        locale: 'en-AU',
+                        cardTitle: 'I am a Card Component (AU)'
+                    },
+                    'en-NZ': {
+                        locale: 'en-NZ',
+                        cardTitle: 'I am a Card Component (NZ)'
+                    }
+                };
                 // Act
                 const wrapper = shallowMount(Card, { propsData });
 
                 // Assert
-                expect(getLocale).toHaveBeenCalled();
+                expect(getLocale).toHaveBeenCalledWith(mockedTennats, mockedLocale, undefined);
             });
         });
 
