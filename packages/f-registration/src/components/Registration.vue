@@ -119,7 +119,7 @@
                         :class="$style['o-form-error']"
                         data-test-id='error-email-maxlength'>
                         <warning-icon :class="$style['o-form-error-icon']" />
-                        Email exceeds 50 characters
+                        Email address exceeds 50 characters
                     </p>
                     <p
                         v-else-if="shouldShowEmailAlreadyExistsError"
