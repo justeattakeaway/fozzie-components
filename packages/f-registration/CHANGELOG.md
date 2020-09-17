@@ -11,6 +11,10 @@ v0.26.0
 ### Changed
 - Validation for inputs now displayed when focus is lost
 
+### Added
+- Email input max length is now 50 characters
+- Password input must be between 4 and 50 characters
+
 
 v0.25.0
 ------------------------------

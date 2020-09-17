@@ -354,6 +354,65 @@ describe('Registration', () => {
             }
         });
 
+        it('should show error message and emit failure event when the password field is populated with too long an input', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                const longValue = 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij';
+                wrapper.find('[data-test-id="input-password"]').setValue(longValue);
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowPasswordMaxLengthError).toBe(true);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show error message and emit failure event when the password field is populated with too short an input', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                wrapper.find('[data-test-id="input-password"]').setValue('dog');
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowPasswordMinLengthError).toBe(true);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show error message and emit failure event when the email field is populated with too long an input', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                const longEmail = 'test-user-with-somewhat-long-email@justeattakeaway.com';
+                wrapper.find('[data-test-id="input-email"]').setValue(longEmail);
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowEmailMaxLengthError).toBe(true);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
         it('should emit success event when all fields are populated correctly', async () => {
             // Arrange
             RegistrationServiceApi.createAccount.mockImplementation(async () => Promise.resolve());

@@ -99,7 +99,6 @@
                 input-type="email"
                 label-style="inline"
                 @blur="$v.email.$touch">
-                <!-- For when we want to add validation on blur of input - @blur="$v.email.$touch" -->
                 <template #error>
                     <p
                         v-if="shouldShowEmailRequiredError"
@@ -114,6 +113,13 @@
                         data-test-id='error-email-invalid'>
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please enter a valid email address
+                    </p>
+                    <p
+                        v-if="shouldShowEmailMaxLengthError"
+                        :class="$style['o-form-error']"
+                        data-test-id='error-email-maxlength'>
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        Email exceeds 50 characters
                     </p>
                     <p
                         v-else-if="shouldShowEmailAlreadyExistsError"
@@ -140,6 +146,20 @@
                         data-test-id='error-password-empty'>
                         <warning-icon :class="$style['o-form-error-icon']" />
                         Please enter a password
+                    </p>
+                    <p
+                        v-if="shouldShowPasswordMinLengthError"
+                        :class="$style['o-form-error']"
+                        data-test-id='error-password-minlength'>
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        Password is less than four characters
+                    </p>
+                    <p
+                        v-if="shouldShowPasswordMaxLengthError"
+                        :class="$style['o-form-error']"
+                        data-test-id='error-password-maxlength'>
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        Password exceeds 50 characters
                     </p>
                 </template>
             </form-field>
@@ -175,7 +195,9 @@
 <script>
 import { globalisationServices } from '@justeat/f-services';
 import { validationMixin } from 'vuelidate';
-import { required, email, maxLength } from 'vuelidate/lib/validators';
+import {
+    required, email, minLength, maxLength
+} from 'vuelidate/lib/validators';
 import { WarningIcon } from '@justeat/f-vue-icons';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
@@ -276,11 +298,20 @@ export default {
         shouldShowEmailRequiredError () {
             return !this.$v.email.required && this.$v.email.$dirty;
         },
+        shouldShowEmailMaxLengthError () {
+            return !this.$v.email.maxLength && this.$v.email.$dirty;
+        },
         shouldShowEmailInvalidError () {
             return !this.$v.email.email && this.$v.email.$dirty;
         },
         shouldShowPasswordRequiredError () {
             return !this.$v.password.required && this.$v.password.$dirty;
+        },
+        shouldShowPasswordMinLengthError () {
+            return !this.$v.password.minLength && this.$v.password.$dirty;
+        },
+        shouldShowPasswordMaxLengthError () {
+            return !this.$v.password.maxLength && this.$v.password.$dirty;
         },
         shouldShowLoginLink () {
             return this.loginSettings && this.loginSettings.linkText && this.loginSettings.url;
@@ -312,10 +343,13 @@ export default {
         },
         email: {
             required,
-            email
+            email,
+            maxLength: maxLength(50)
         },
         password: {
-            required
+            required,
+            minLength: minLength(4),
+            maxLength: maxLength(50)
         }
     },
 
