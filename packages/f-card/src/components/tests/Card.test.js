@@ -1,6 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
 import Card from '../Card.vue';
 
+jest.mock('@justeat/f-services');
+import sharedServices, { getTheme } from '@justeat/f-services';
+
 describe('Card', () => {
     it('should be defined', () => {
         // Arrange
@@ -159,6 +162,34 @@ describe('Card', () => {
                 expect(position.validator('left')).toBeTruthy();
                 expect(position.validator('right')).toBeTruthy();
                 expect(position.validator('center')).toBeTruthy();
+            });
+        });
+    });
+
+    describe('computed', () => {
+        describe('theme', () => {
+
+            afterEach(() => {
+                jest.resetAllMocks();
+            });
+        
+            it('should call the `getTheme` method from `sharedServices`', () => {
+                // Arrange
+                const propsData = {};
+                const mockedComputed = {
+                    cardLocale() {
+                        return 'en-AU'
+                    }
+                } 
+
+                // Act
+                const wrapper = shallowMount(Card, { 
+                    propsData, 
+                    computed: mockedComputed
+                });
+
+                // Assert
+                expect(getTheme).toHaveBeenCalledWith('en-AU');
             });
         });
     });
