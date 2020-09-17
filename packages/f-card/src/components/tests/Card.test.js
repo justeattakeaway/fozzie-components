@@ -2,7 +2,7 @@ import { shallowMount } from '@vue/test-utils';
 import Card from '../Card.vue';
 
 jest.mock('@justeat/f-services');
-import sharedServices, { getTheme } from '@justeat/f-services';
+import sharedServices, { getTheme, getLocale } from '@justeat/f-services';
 
 describe('Card', () => {
     it('should be defined', () => {
@@ -167,12 +167,24 @@ describe('Card', () => {
     });
 
     describe('computed', () => {
-        describe('theme', () => {
+        afterEach(() => {
+            jest.resetAllMocks();
+        });
 
-            afterEach(() => {
-                jest.resetAllMocks();
+        describe('cardLocale', () => {
+            it('should call the `getLocale` method from `sharedServices`', () => {
+                // Arrange
+                const propsData = {};
+
+                // Act
+                const wrapper = shallowMount(Card, { propsData });
+
+                // Assert
+                expect(getLocale).toHaveBeenCalled();
             });
-        
+        });
+
+        describe('theme', () => {        
             it('should call the `getTheme` method from `sharedServices`', () => {
                 // Arrange
                 const propsData = {};
