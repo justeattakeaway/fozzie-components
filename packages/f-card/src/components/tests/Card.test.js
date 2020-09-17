@@ -176,29 +176,39 @@ describe('Card', () => {
     });
 
     describe('computed', () => {
+        let mockedLocale;
+        let propsData;
+        let mockedTennats;
+        let mockedCardLocale;
+
+        beforeEach(() => {
+            mockedLocale = 'en-AU';   
+            propsData = {
+                locale: mockedLocale
+            };
+            mockedTennats = {
+                'en-AU': {
+                    locale: 'en-AU',
+                    cardTitle: 'I am a Card Component (AU)'
+                },
+            };
+            mockedCardLocale = {
+                cardLocale() {
+                    return 'en-AU'
+                }
+            };
+        });
+
         afterEach(() => {
             jest.resetAllMocks();
         });
 
         describe('cardLocale', () => {
             it('should call the `getLocale` method from `sharedServices` and return correct locale', () => {
-                 // Arrange
-                 const mockedLocale = 'en-AU';
-
-                 const propsData = {
-                     locale: mockedLocale
-                 };
-
-                 const mockedTennats = {
-                    'en-AU': {
-                        locale: 'en-AU',
-                        cardTitle: 'I am a Card Component (AU)'
-                    },
-                };
-
+                // Arrange
                 const mockedI18n = () => 'en-AU'
                 
-                getLocale.mockImplementation(() => mockedLocale );
+                getLocale.mockImplementation(() => mockedLocale);
 
                 const wrapper = shallowMount(Card, { 
                     propsData, 
@@ -206,61 +216,45 @@ describe('Card', () => {
                         $i18n: mockedI18n
                     }  
                 });
- 
-                 // Act
-                 const result = wrapper.vm.cardLocale;
 
-                 // Assert
-                 expect(getLocale).toHaveBeenCalledWith(mockedTennats, mockedLocale, mockedI18n);
+                // Act
+                const result = wrapper.vm.cardLocale;
 
-                 expect(result).toEqual(mockedLocale);
+                // Assert
+                expect(getLocale).toHaveBeenCalledWith(mockedTennats, mockedLocale, mockedI18n);
+                expect(result).toEqual(mockedLocale);
             });
         });
 
         describe('copy', () => {
             it('should return the local config', () => {
                 // Arrange
-                const mockedLocale = 'en-AU';
-
-                const propsData = {
-                    locale: mockedLocale
-                };
-
                 const expectedReturn = {
                     "cardTitle": "I am a Card Component (AU)",
                     "locale": "en-AU"
                 }
 
-                // Act
                 const wrapper = shallowMount(Card, { 
                     propsData, 
-                    computed: {
-                        cardLocale() {
-                            return mockedLocale                        
-                        }
-                    }
+                    computed: mockedCardLocale
                 });
 
+                // Act
+                const result = wrapper.vm.copy;
+
                 // Assert
-                expect(wrapper.vm.copy).toEqual(expectedReturn);
+                expect(result).toEqual(expectedReturn);
             });
         });
 
         describe('theme', () => {        
             it('should call the `getTheme` method from `sharedServices` and return its result', () => {
                 // Arrange
-                const propsData = {};
-                const mockedComputed = {
-                    cardLocale() {
-                        return 'en-AU'
-                    }
-                };
-
                 getTheme.mockImplementation(() => 'ml' );
 
                 const wrapper = shallowMount(Card, { 
                     propsData, 
-                    computed: mockedComputed
+                    computed: mockedCardLocale
                 });
 
                 // Act
