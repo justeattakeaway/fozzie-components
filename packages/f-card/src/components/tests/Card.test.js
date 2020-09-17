@@ -220,6 +220,34 @@ describe('Card', () => {
             });
         });
 
+        describe('copy', () => {
+            it('should return the local config', () => {
+                // Arrange
+                const mockedLocale = 'en-NZ';
+
+                const propsData = {
+                    locale: mockedLocale
+                };
+
+                const expectedReturn = {
+                    "cardTitle": "I am a Card Component (NZ)",
+                    "locale": "en-NZ"
+                }
+
+                // Act
+                const wrapper = shallowMount(Card, { 
+                    propsData, 
+                    computed: {
+                        cardLocale() {
+                            return mockedLocale                        }
+                    }
+                });
+
+                // Assert
+                expect(wrapper.vm.copy).toEqual(expectedReturn);
+            });
+        });
+
         describe('theme', () => {        
             it('should call the `getTheme` method from `sharedServices`', () => {
                 // Arrange
