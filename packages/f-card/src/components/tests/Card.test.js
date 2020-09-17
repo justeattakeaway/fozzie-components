@@ -177,27 +177,20 @@ describe('Card', () => {
 
     describe('computed', () => {
         const localeAU = 'en-AU';
-
-        let propsData;
-        let mockedTenants;
-        let mockedCardLocale;
-
-        beforeEach(() => {
-            propsData = {
-                locale: localeAU
-            };
-            mockedTenants = {
-                'en-AU': {
-                    locale: localeAU,
-                    cardTitle: 'I am a Card Component (AU)'
-                },
-            };
-            mockedCardLocale = {
-                cardLocale() {
-                    return localeAU;
-                }
-            };
-        });
+        const propsData = {
+            locale: localeAU
+        };
+        const mockedTenants = {
+            'en-AU': {
+                locale: localeAU,
+                cardTitle: 'I am a Card Component (AU)'
+            },
+        };
+        const mockedCardLocale = {
+            cardLocale() {
+                return localeAU;
+            }
+        };
 
         afterEach(() => {
             jest.resetAllMocks();
