@@ -28,7 +28,7 @@ executors:
   node:
     docker:
       # specify the version you desire here
-      - image: circleci/node:12.14.1-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
+      - image: circleci/node:12.18.2-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
 
 jobs:
 
@@ -61,6 +61,12 @@ jobs:
       - run: # Run Tests
           name: Run Unit / Integration Tests
           command: yarn test
+      - run: # Install Component Test Dependencies
+          name: Install Component Test Dependencies
+          command: yarn global add @vue/cli @vue/cli-service-global
+      - run: # Run Component UI Tests
+          name: Run WebDriverIO Component Tests
+          command: yarn test-component:chrome
       - run: # Run Visual Regression Tests
           name: Run Visual Regression Tests
           command: cd ./packages/storybook && yarn snapshot

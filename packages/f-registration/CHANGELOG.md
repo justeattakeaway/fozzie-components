@@ -4,12 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.25.0
+v0.26.0
 ------------------------------
 *September 17 , 2020*
 
 ### Changed
 - Validation for inputs now displayed when focus is lost
+
+
+v0.25.0
+------------------------------
+*September 17, 2020*
+
+### Changed
+- Updated `f-registration` component object to make tests pass
 
 
 v0.24.0
@@ -42,7 +50,6 @@ v0.21.0
 
 ### Added
 - `registrationSource` and `marketingPreferences` to account creation post request body.
-
 
 v0.20.0
 ------------------------------
