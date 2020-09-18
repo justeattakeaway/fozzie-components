@@ -35,7 +35,7 @@ const passwordEmptyError = () => $('[data-test-id="error-password-empty"]');
  * @param {String} userInfo.password The user's password
  */
 exports.submitRegistrationForm = (userInfo) => {
-    this.waitForRegistrationForm();
+    exports.waitForRegistrationForm();
     firstNameInput().setValue(userInfo.firstName);
     lastNameInput().setValue(userInfo.lastName);
     emailInput().setValue(userInfo.email);

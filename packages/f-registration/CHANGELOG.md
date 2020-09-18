@@ -3,13 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.24.1
+v0.25.1
 ------------------------------
-*September 15, 2020*
+*September 18, 2020*
 
 ### Fixed
 - RegistrationService import so that it can be used by contract tests
 
+v0.25.0
+------------------------------
+*September 17, 2020*
+
+### Changed
+- Updated `f-registration` component object to make tests pass
 
 v0.24.0
 ------------------------------
@@ -38,7 +44,6 @@ v0.21.0
 
 ### Added
 - `registrationSource` and `marketingPreferences` to account creation post request body.
-
 
 v0.20.0
 ------------------------------
