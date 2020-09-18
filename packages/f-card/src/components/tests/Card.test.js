@@ -1,5 +1,17 @@
 import { shallowMount } from '@vue/test-utils';
 import Card from '../Card.vue';
+import { getTheme, getLocale } from '@justeat/f-services';
+
+jest.mock('@justeat/f-services');
+
+jest.mock('../../tenants', () => {
+    return {
+        'en-AU': {
+            locale: 'en-AU',
+            cardTitle: 'I am a Card Component (AU)'
+        },
+    };
+});
 
 describe('Card', () => {
     it('should be defined', () => {
@@ -159,6 +171,91 @@ describe('Card', () => {
                 expect(position.validator('left')).toBeTruthy();
                 expect(position.validator('right')).toBeTruthy();
                 expect(position.validator('center')).toBeTruthy();
+            });
+        });
+    });
+
+    describe('computed', () => {
+        const localeAU = 'en-AU';
+        const propsData = {
+            locale: localeAU
+        };
+        const mockedTenants = {
+            'en-AU': {
+                locale: localeAU,
+                cardTitle: 'I am a Card Component (AU)'
+            },
+        };
+        const mockedCardLocale = {
+            cardLocale() {
+                return localeAU;
+            }
+        };
+
+        afterEach(() => {
+            jest.resetAllMocks();
+        });
+
+        describe('cardLocale', () => {
+            it('should call the `getLocale` method from `sharedServices` and return correct locale', () => {
+                // Arrange
+                const mockedI18n = () => localeAU;
+                
+                getLocale.mockImplementation(() => localeAU);
+
+                const wrapper = shallowMount(Card, { 
+                    propsData, 
+                    mocks: { 
+                        $i18n: mockedI18n
+                    }  
+                });
+
+                // Act
+                const result = wrapper.vm.cardLocale;
+
+                // Assert
+                expect(getLocale).toHaveBeenCalledWith(mockedTenants, localeAU, mockedI18n);
+                expect(result).toEqual(localeAU);
+            });
+        });
+
+        describe('copy', () => {
+            it('should return the local config', () => {
+                // Arrange
+                const expectedReturn = {
+                    "cardTitle": "I am a Card Component (AU)",
+                    "locale": localeAU
+                }
+
+                const wrapper = shallowMount(Card, { 
+                    propsData, 
+                    computed: mockedCardLocale
+                });
+
+                // Act
+                const result = wrapper.vm.copy;
+
+                // Assert
+                expect(result).toEqual(expectedReturn);
+            });
+        });
+
+        describe('theme', () => {        
+            it('should call the `getTheme` method from `sharedServices` and return its result', () => {
+                // Arrange
+                getTheme.mockImplementation(() => 'ml' );
+
+                const wrapper = shallowMount(Card, { 
+                    propsData, 
+                    computed: mockedCardLocale
+                });
+
+                // Act
+                const result = wrapper.vm.theme;
+
+                // Assert
+                expect(getTheme).toHaveBeenCalledWith(localeAU);
+                expect(result).toBe('ml');
             });
         });
     });
