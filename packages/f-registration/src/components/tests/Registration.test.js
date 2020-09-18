@@ -237,6 +237,25 @@ describe('Registration', () => {
             }
         });
 
+        it('should show error message when the first name field is populated with invalid input and focus is lost', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                const firstNameInput = wrapper.find('[data-test-id="input-first-name"]');
+                firstNameInput.setValue('wh4t @ w3!rd |\\|ame');
+
+                // Act
+                firstNameInput.trigger('blur');
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowFirstNameInvalidCharError).toBe(true);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
         it('should show error message and emit failure event when the first name field is populated with too long an input', async () => {
             // Arrange
             const wrapper = mountComponentAndAttachToDocument();
@@ -310,6 +329,123 @@ describe('Registration', () => {
                 // Assert
                 expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(true);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show error message when the last name field is populated with too long an input and focus is lost', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                const longValue = 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij';
+                const lastNameInput = wrapper.find('[data-test-id="input-last-name"]');
+                lastNameInput.setValue(longValue);
+
+                // Act
+                lastNameInput.trigger('blur');
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(true);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show error message and emit failure event when the password field is populated with too long an input', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                const longValue = 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij';
+                wrapper.find('[data-test-id="input-password"]').setValue(longValue);
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowPasswordMaxLengthError).toBe(true);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show error message and emit failure event when the password field is populated with too short an input', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                wrapper.find('[data-test-id="input-password"]').setValue('dog');
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowPasswordMinLengthError).toBe(true);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show error message when the password field is populated with too short an input and focus is lost', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                const passwordInput = wrapper.find('[data-test-id="input-password"]');
+                passwordInput.setValue('dog');
+
+                // Act
+                passwordInput.trigger('blur');
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowPasswordMinLengthError).toBe(true);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show error message and emit failure event when the email field is populated with too long an input', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                const longEmail = 'test-user-with-somewhat-long-email@justeattakeaway.com';
+                wrapper.find('[data-test-id="input-email"]').setValue(longEmail);
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowEmailMaxLengthError).toBe(true);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+            } finally {
+                wrapper.destroy();
+            }
+        });
+
+        it('should show error message when the email field is invalid and focus is lost', async () => {
+            // Arrange
+            const wrapper = mountComponentAndAttachToDocument();
+            Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+            try {
+                const emailInput = wrapper.find('[data-test-id="input-email"]');
+                emailInput.setValue('invalid email');
+
+                // Act
+                emailInput.trigger('blur');
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.shouldShowEmailInvalidError).toBe(true);
             } finally {
                 wrapper.destroy();
             }
