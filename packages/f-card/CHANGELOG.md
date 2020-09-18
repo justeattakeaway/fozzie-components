@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.5.0
 ------------------------------
-*September 17 2020*
+*September 18 2020*
 
 ### Added
 - Tests for `f-card` computed properties.
