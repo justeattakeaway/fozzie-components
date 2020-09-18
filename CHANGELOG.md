@@ -3,12 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v1.30.0
-*September 16, 2020*
+v1.31.0
+*September 18, 2020*
 ------------------------------
 ### Removed
 - Contract test dependencies + scripts
 
+v1.30.0
+*September 14, 2020*
+------------------------------
+### Added
+- New build step for to run component UI tests
+- `local:tests` script to easily run all tests locally before submitting a PR
+
+### Changed
+- `wdio.conf.js` compnent test spec directory
 
 v1.29.0
 *September 9, 2020*
