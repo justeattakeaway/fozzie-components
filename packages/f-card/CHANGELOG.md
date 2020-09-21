@@ -8,7 +8,7 @@ v0.5.1
 *September 21 2020*
 
 ### Fixed
-- fixed linting issues fo `f-card` computed properties tests.
+- Fix linting issues fo `f-card` computed properties tests.
 
 v0.5.0
 ------------------------------
