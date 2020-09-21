@@ -1,16 +1,15 @@
-import axios from 'axios';
+const axios = require('axios');
 
-export default {
-    async createAccount (url, tenant, data) {
-        const config = {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept-Tenant': tenant
-            },
-            timeout: 1000
-        };
-        return axios
-            .post(url, data, config);
-    }
+
+exports.createAccount = async (url, tenant, data) => {
+    const config = {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept-Tenant': tenant
+        },
+        timeout: 1000
+    };
+    return axios
+        .post(url, data, config);
 };
