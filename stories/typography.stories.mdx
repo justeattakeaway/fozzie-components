@@ -50,7 +50,7 @@ body {
                 });
             })
             .then(function () {
-                document.documentElement.className += ' webfonts-loaded';
+                document.documentElement.classList.add('webfonts-loaded');
             });
     }
 
@@ -61,7 +61,7 @@ body {
         // Note: Edge supports WOFF2
         style.innerHTML = '@font-face { font-family: JustEatBasis; font-weight: 600; src: ' + fontUrls + '; }';
         document.head.appendChild(style);
-        document.documentElement.className += ' webfonts-loaded';
+        document.documentElement.classList.add('webfonts-loaded');
     }
 })();
 ```
