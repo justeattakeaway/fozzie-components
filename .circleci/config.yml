@@ -88,24 +88,25 @@ jobs:
           name: Deploy
           command: yarn storybook:deploy --packages packages
 
-  npm-publish:
-    executor: node
-    environment:
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
-    steps:
-      - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - install_node_dependencies
-      - run:
-          name: authenticate with npm
-          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
-      - run:
-          name: npm publish
-          command: npm publish
+  # Stopping until Circle CI credit issue is resolved
+  # npm-publish:
+  #   executor: node
+  #   environment:
+  #     # required to prevent ENOMEM errors
+  #     LERNA_ARGS: --concurrency 1
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
+  #         name: Restore Yarn Package Cache
+  #         keys:
+  #           - yarn-packages-{{ checksum "yarn.lock" }}
+  #     - install_node_dependencies
+  #     - run:
+  #         name: authenticate with npm
+  #         command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
+  #     - run:
+  #         name: npm publish
+  #         command: npm publish
 
 workflows:
   version: 2
@@ -118,13 +119,14 @@ workflows:
             branches:
               ignore: 'gh-pages'
 
-  npm-publish:
-    jobs:
-      - npm-publish:
-          context: web-core
-          filters:
-            branches:
-              only: 'master'
+  # Stopping until Circle CI credit issue is resolved
+  # npm-publish:
+  #   jobs:
+  #     - npm-publish:
+  #         context: web-core
+  #         filters:
+  #           branches:
+  #             only: 'master'
 
   deploy-storybook:
     jobs:
