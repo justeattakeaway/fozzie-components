@@ -1,17 +1,15 @@
 import { shallowMount } from '@vue/test-utils';
-import Card from '../Card.vue';
 import { getTheme, getLocale } from '@justeat/f-services';
+import Card from '../Card.vue';
 
 jest.mock('@justeat/f-services');
 
-jest.mock('../../tenants', () => {
-    return {
-        'en-AU': {
-            locale: 'en-AU',
-            cardTitle: 'I am a Card Component (AU)'
-        },
-    };
-});
+jest.mock('../../tenants', () => ({
+    'en-AU': {
+        locale: 'en-AU',
+        cardTitle: 'I am a Card Component (AU)'
+    }
+}));
 
 describe('Card', () => {
     it('should be defined', () => {
@@ -184,10 +182,10 @@ describe('Card', () => {
             'en-AU': {
                 locale: localeAU,
                 cardTitle: 'I am a Card Component (AU)'
-            },
+            }
         };
         const mockedCardLocale = {
-            cardLocale() {
+            cardLocale () {
                 return localeAU;
             }
         };
@@ -200,14 +198,14 @@ describe('Card', () => {
             it('should call the `getLocale` method from `sharedServices` and return correct locale', () => {
                 // Arrange
                 const mockedI18n = () => localeAU;
-                
+
                 getLocale.mockImplementation(() => localeAU);
 
-                const wrapper = shallowMount(Card, { 
-                    propsData, 
-                    mocks: { 
+                const wrapper = shallowMount(Card, {
+                    propsData,
+                    mocks: {
                         $i18n: mockedI18n
-                    }  
+                    }
                 });
 
                 // Act
@@ -223,12 +221,12 @@ describe('Card', () => {
             it('should return the local config', () => {
                 // Arrange
                 const expectedReturn = {
-                    "cardTitle": "I am a Card Component (AU)",
-                    "locale": localeAU
-                }
+                    cardTitle: 'I am a Card Component (AU)',
+                    locale: localeAU
+                };
 
-                const wrapper = shallowMount(Card, { 
-                    propsData, 
+                const wrapper = shallowMount(Card, {
+                    propsData,
                     computed: mockedCardLocale
                 });
 
@@ -240,13 +238,13 @@ describe('Card', () => {
             });
         });
 
-        describe('theme', () => {        
+        describe('theme', () => {
             it('should call the `getTheme` method from `sharedServices` and return its result', () => {
                 // Arrange
-                getTheme.mockImplementation(() => 'ml' );
+                getTheme.mockImplementation(() => 'ml');
 
-                const wrapper = shallowMount(Card, { 
-                    propsData, 
+                const wrapper = shallowMount(Card, {
+                    propsData,
                     computed: mockedCardLocale
                 });
 
