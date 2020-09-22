@@ -8,6 +8,8 @@ import globalThis from 'core-js/features/global-this';
 // Import vue component
 import ContentCards from '@/components/ContentCards.vue';
 
+export { CARDSOURCE_BRAZE, CARDSOURCE_CUSTOM } from '@/components/ContentCards.vue';
+
 // Declare install function executed by Vue.use()
 export function install (Vue) {
     if (install.installed) return;
