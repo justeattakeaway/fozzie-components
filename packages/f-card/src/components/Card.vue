@@ -107,6 +107,7 @@ $card--pageContentWrapper-width           : 460px;
         transition: 250ms padding ease-in-out;
         padding-left: 6%;
         padding-right: 6%;
+        margin: spacing() * 5 0;
 
         @include media('>=narrow') {
             padding-left: 10%;
@@ -115,7 +116,7 @@ $card--pageContentWrapper-width           : 460px;
 
         @include media('>=#{$card--pageContentWrapper-width}') {
             width: $card--pageContentWrapper-width;
-            margin: 0 auto;
+            margin: spacing() * 5 auto;
             padding-left: spacing() * 10;
             padding-right: spacing() * 10;
         }
