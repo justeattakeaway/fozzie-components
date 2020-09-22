@@ -6,10 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.16.0
 ------------------------------
-*September 15, 2020*
+*September 22, 2020*
 
 ### Changed
 - `filterContentCards` method to perform brand and display time checks when Home Promotion Card 1 & 2 are filtered.
+- Apply card types in order of given filters when limit is set to 1
 
 
 v1.15.0
