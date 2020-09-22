@@ -160,6 +160,14 @@ class ContentCards {
      * @returns {ContentCards}
      */
     applyCardLimit (limit) {
+        if (limit === 1 && this.enabledCardTypes.length > 1) {
+            this.enabledCardTypes.some(enabledCardType => {
+                const card = this.cards.find(({ type }) => type === enabledCardType);
+                if (card) this.cards = [card];
+                return card && this.cards.length === limit;
+            });
+            return this;
+        }
         this.cards = limit > -1 ? this.cards.splice(0, limit) : this.cards;
         return this;
     }
