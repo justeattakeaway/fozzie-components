@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.26.2
+------------------------------
+*September 23, 2020*
+
+### Changed
+- Reverted syntax change in `RegistrationService` due to issues when running `yarn:demo`
+
+
 v0.26.1
 ------------------------------
 *September 21, 2020*
