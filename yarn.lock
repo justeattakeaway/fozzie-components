@@ -1660,13 +1660,6 @@
     webpack-cli "3.3.1"
     webpack-log "2.0.0"
 
-"@justeat/f-card@0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-0.3.1.tgz#b327827e64f4077b45d28a27905f32405f63b50c"
-  integrity sha512-k/V+5CmqgTLqvLs0fR30lUy2WivMZXasmuVwaMUjM65ipgqWAij/tXCNibA50DBC115dtz793roIlr5MH5mT2A==
-  dependencies:
-    "@justeat/f-services" "0.13.0"
-
 "@justeat/f-dom@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-1.1.0.tgz#491ba78240ab73a3c4687d93eb8004415fe8a9c7"
