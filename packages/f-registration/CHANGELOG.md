@@ -3,12 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.27.0
+v0.26.2
 ------------------------------
-*September 21, 2020*
+*September 23, 2020*
 
-### Removed
-- Contract tests + scripts
+### Fixed
+- Changed RegistrationService to prevent error when running `yarn:demo`
 
 
 v0.26.1
