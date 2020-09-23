@@ -5,10 +5,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.27.0
 ------------------------------
-*September 21, 2020*
+*September 23, 2020*
 
 ### Removed
 - Contract tests + scripts
+
+
+v0.26.2
+------------------------------
+*September 23, 2020*
+
+### Changed
+- Reverted syntax change in `RegistrationService` due to issues when running `yarn:demo`
 
 
 v0.26.1
