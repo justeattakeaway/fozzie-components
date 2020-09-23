@@ -124,6 +124,10 @@ export default {
     },
 
     computed: {
+        /**
+         * Determines the tenant based on the currently selected locale in order to choose correct translations
+         * @return {String}
+         **/
         tenant () {
             return {
                 'en-GB': 'uk',
@@ -139,6 +143,11 @@ export default {
     },
 
     watch: {
+        /**
+         * Determines what card impressions should be logged, and whether the loaded flag should be set
+         * @param {Card[]} current
+         * @param {Card[]} previous
+         **/
         cards (current, previous) {
             this.$emit('get-card-count', current.length);
 
@@ -150,6 +159,11 @@ export default {
             }
         },
 
+        /**
+         * Monitors the loaded flag to emit the has-loaded event if necessary
+         * @param {Boolean} current
+         * @param {Boolean} previous
+         **/
         hasLoaded (current, previous) {
             if (current && !previous) {
                 this.$emit('has-loaded', true);
@@ -157,23 +171,38 @@ export default {
         }
     },
 
+    /**
+     * Emits an event that allows consuming code to inject custom content cards, and sets off braze initialisation
+     **/
     mounted () {
         this.$emit('custom-cards-callback', this.customContentCards.bind(this));
         this.setupBraze(this.apiKey, this.userId);
     },
 
+    /**
+     * Sets up dependencies required by descendant components
+     **/
     provide () {
         const component = this;
 
         return {
+            /**
+             * Reflects card click events though to common click event handler
+             **/
             emitCardClick (card) {
                 component.handleCardClick(card);
             },
 
+            /**
+             * Reflects card view events though to common view event handler
+             **/
             emitCardView (card) {
                 component.handleCardView(card);
             },
 
+            /**
+             * Emits voucher code click event with given ongoing url
+             **/
             emitVoucherCodeClick (url) {
                 component.$emit('voucherCodeClick', {
                     url
@@ -186,6 +215,7 @@ export default {
 
     methods: {
         /**
+         * Initializes braze and handles success / failure states from the returned promise
          * @param {String} apiKey
          * @param {String} userId
          * @param {Boolean} enableLogging
@@ -209,6 +239,13 @@ export default {
                 });
         },
 
+        /**
+         * Common method for handling card ingestion to component
+         * @param {String} source
+         * @param {Function} successCallback
+         * @param {Function} failCallback
+         * @param {Card[]} cards
+         **/
         contentCards ({
             source,
             successCallback = () => {},
@@ -224,6 +261,10 @@ export default {
             return successCallback();
         },
 
+        /**
+         * Handles card ingestion via braze
+         * @param {Card[]} cards
+         **/
         brazeContentCards (cards) {
             this.contentCards({
                 source: CARDSOURCE_BRAZE,
@@ -231,6 +272,10 @@ export default {
             }, cards);
         },
 
+        /**
+         * Handles custom card ingestion
+         * @param {Card[]} cards
+         **/
         customContentCards (cards) {
             this.contentCards({
                 source: CARDSOURCE_CUSTOM
@@ -277,6 +322,10 @@ export default {
             return false;
         },
 
+        /**
+         * Takes appropriate response for click event for given card object based on its source
+         * @param card
+         */
         handleCardClick (card) {
             switch (card.source) {
                 case CARDSOURCE_BRAZE:
@@ -291,6 +340,10 @@ export default {
             }
         },
 
+        /**
+         * Takes appropriate response for view event for given card object based on its source
+         * @param card
+         */
         handleCardView (card) {
             switch (card.source) {
                 case CARDSOURCE_BRAZE:
@@ -304,6 +357,10 @@ export default {
             }
         },
 
+        /**
+         * Uses given pushToDataLayer function to report braze card event
+         * @param payload
+         */
         pushBrazeEvent (payload) {
             this.pushToDataLayer({
                 event: 'BrazeContent',
@@ -313,18 +370,30 @@ export default {
             });
         },
 
-        testIdForItemWithIndex (index) {
-            return this.testId && `ContentCard-${this.testId}-${index}`;
-        },
-
+        /**
+         * Generates a click event for the given card data and reports using the common method
+         * @param card
+         */
         trackBrazeCardClick (card) {
             const event = createBrazeCardEvent('click', card);
             this.pushBrazeEvent(event);
         },
 
+        /**
+         * Generates a view event for the given card data and reports using the common method
+         * @param card
+         */
         trackBrazeCardVisibility (card) {
             const event = createBrazeCardEvent('view', card);
             this.pushBrazeEvent(event);
+        },
+
+        /**
+         * Generates a unique test id on a per-card basis if testId prop provided
+         * @param index
+         */
+        testIdForItemWithIndex (index) {
+            return this.testId && `ContentCard-${this.testId}-${index}`;
         }
     }
 };
