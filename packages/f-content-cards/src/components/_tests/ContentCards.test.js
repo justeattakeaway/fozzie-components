@@ -20,7 +20,7 @@ const id = btoa('ABC123');
 
 const brazeDispatcher = {
     logCardClick: jest.fn(),
-    logCardImpressions: jest.fn(),
+    logCardImpressions: jest.fn()
 };
 
 const createCard = type => ({
