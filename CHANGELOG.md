@@ -10,6 +10,14 @@ v1.33.0
 - Contract test dependencies + scripts
 
 
+v1.32.1
+------------------------------
+*September 23, 2020*
+
+### Changed
+- Updated typography CSS snippet to use valid comment.
+
+
 v1.32.0
 ------------------------------
 *September 21, 2020*
