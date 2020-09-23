@@ -4,6 +4,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.1.0-beta.1
+------------------------------
+*September 23, 2020*
+
+### Added
+- `@custom-cards-callback` event dispatched on mount to expose a callback for consuming code to inject
+  custom content cards
+
+### Removed
+- Card filtering/transforming/sorting logic moved to `f-metadata`; only the absolute limit number remains
+
+### Changed
+- Bumped dependency on f-metadata to version `3.0.0-beta.1`
+
+
 v2.0.0
 ------------------------------
 *September 23, 2020*
@@ -48,7 +63,6 @@ v2.0.0-beta.0
 
 ### Changed
 - Now uses new `JustEatBasis` font and updated type variables.
-
 
 
 v1.13.0
