@@ -9,4 +9,4 @@ const CONSUMERS_REQUEST_DATA = {
 
 export {
     CONSUMERS_REQUEST_DATA
-}
+};
