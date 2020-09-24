@@ -62,7 +62,7 @@
     "marked": "0.7.0",
     "pascal-case": "2.0.1",
     "poi": "12.9.0",
-    "prismjs": "1.20.0"
+    "prismjs": "1.21.0"
   },
   "babel": {
     "presets": [
