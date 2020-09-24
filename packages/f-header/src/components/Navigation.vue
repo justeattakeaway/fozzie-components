@@ -528,8 +528,8 @@ export default {
  *
  */
 
-$nav-text-size                     : 'base--scaleUp';
-$nav-text-font                     : $font-family-headings;
+$nav-text-size                     : 'body-l';
+$nav-text-size--narrow             : 'body-s';
 $nav-text-color                    : $color-link-default;
 $nav-text-color--hover             : $color-link-hover;
 $nav-text-color--narrow            : $grey--dark;
@@ -682,13 +682,12 @@ $nav-popover-padding               : spacing(x2);
             margin: 0;
             font-family: $nav-text-subFont;
             color: $nav-text-color--narrow;
-            @include font-size('base');
+            @include font-size($nav-text-size--narrow);
             font-weight: 300;
             text-decoration: none;
             border-bottom: 1px solid $grey--light;
 
             @include media('>=mid') {
-                font-family: $nav-text-font;
                 @include font-size($nav-text-size);
                 font-weight: $nav-text-weight;
                 color: $nav-text-color;

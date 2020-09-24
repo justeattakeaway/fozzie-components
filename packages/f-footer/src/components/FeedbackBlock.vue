@@ -46,6 +46,8 @@ export default {
 
 <style lang="scss" module>
 
+$feedback-btn-font-size: 'body-s';
+
 .c-feedback {
     @include media('<wide') {
         order: 1;
@@ -63,7 +65,7 @@ export default {
     margin: 0;
     color: $color-link-default;
     font-weight: 500;
-    @include font-size(base);
+    @include font-size($feedback-btn-font-size);
     text-decoration: underline;
 
     &:hover {

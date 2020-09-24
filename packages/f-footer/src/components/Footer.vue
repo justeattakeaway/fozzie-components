@@ -111,6 +111,9 @@ export default {
 </script>
 
 <style lang="scss">
+
+$footer-heading-font-size: 'heading-s';
+
 .c-footer {
     background-color: $footer-bgColor;
     color: $footer-textColor;
@@ -127,16 +130,11 @@ export default {
 }
 
 .c-footer-heading {
-    @include font-size(mid);
+    @include font-size($footer-heading-font-size);
+    font-family: $font-family-base;
+    font-weight: $font-weight-headings;
     padding: spacing(x2);
     padding-left: 0;
-    font-family: $font-family-headings;
-    font-weight: $font-weight-headings;
-
-    @include theme(ml) {
-        font-family: $font-family-headings--ml;
-        font-weight: $font-weight-headings--ml;
-    }
 }
 
 .c-footer-heading--shortBelowWide {
@@ -151,19 +149,13 @@ export default {
     border-style: none;
     color: $color-headings;
     display: flex;
-    font-family: $font-family-headings;
     font-weight: $font-weight-headings;
     justify-content: space-between;
     margin: 0;
     padding: spacing(x2);
     text-align: left;
     width: 100%;
-    @include font-size(mid);
-
-    @include theme(ml) {
-        font-family: $font-family-headings--ml;
-        font-weight: $font-weight-headings--ml;
-    }
+    @include font-size($footer-heading-font-size);
 
     @include media('<wide') {
         cursor: pointer;

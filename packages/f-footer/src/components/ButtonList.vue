@@ -36,6 +36,9 @@ export default {
 </script>
 
 <style lang="scss" module>
+
+$buttonList-font-size: 'subheading-s';
+
 .c-buttonList {
     align-items: center;
     display: flex;
@@ -47,7 +50,7 @@ export default {
     border-radius: 4px;
     color: $color-link-default;
     display: inline-block;
-    font-family: $font-family-headings;
+    @include font-size($buttonList-font-size, false);
     font-weight: $font-weight-headings;
     min-width: 226px;
     margin-right: spacing(x2);
@@ -56,12 +59,6 @@ export default {
     text-align: center;
     text-decoration: none;
     vertical-align: middle;
-    @include font-size(18, false);
-
-    @include theme(ml) {
-       font-family: $font-family-headings--ml;
-       font-weight:  $font-weight-headings--ml;
-    }
 
     &:last-child {
         margin-right: 0;
