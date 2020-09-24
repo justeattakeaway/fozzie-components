@@ -1694,13 +1694,6 @@
   dependencies:
     window-or-global "^1.0.1"
 
-"@justeat/f-metadata@2.8.1":
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-metadata/-/f-metadata-2.8.1.tgz#b943f18f4901ad0784a8b6a594d0e4b7f47cacbc"
-  integrity sha512-o9rEdXminQsWBgsJ44LzYmsJKnufN1nnfnPO0Gfc8d/FUUYSa4Ce6Mc5MDx5w9VoTnGAnzrr72j1LmSdqhNP3w==
-  dependencies:
-    appboy-web-sdk "2.5.2"
-
 "@justeat/f-services@0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-0.13.0.tgz#b0fc67948e94800ba176addb9d92cce444d28c8e"

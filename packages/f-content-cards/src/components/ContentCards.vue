@@ -240,7 +240,8 @@ export default {
         },
 
         /**
-         * Common method for handling card ingestion to component
+         * Common method for handling card ingestion to component. Card list length of 0 (after filtering) is considered
+         * 'successful' but does not overwrite any cards currently in place, in order to maintain cards that are present
          * @param {String} source
          * @param {Function} successCallback
          * @param {Function} failCallback
@@ -255,8 +256,13 @@ export default {
                 return failCallback();
             }
 
-            this.cards = this.limitCards(cards, this.cardLimit)
-                .map(card => Object.assign(card, { source }));
+            const limitedCards = this.limitCards(cards, this.cardLimit);
+
+            if ((this.cards.length !== 0) && (limitedCards.length === 0)) {
+                return successCallback();
+            }
+
+            this.cards = limitedCards.map(card => Object.assign(card, { source }));
 
             return successCallback();
         },
