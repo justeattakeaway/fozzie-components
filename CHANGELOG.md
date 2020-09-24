@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v2.0.0
+------------------------------
+*September 24, 2020*
+
+### Changed
+- Updating components to use `JustEatBasis` and subsequent breaking changes to update font variables to hook into new design token variables in fozzie.
+
+
 v1.34.0
 *September 24, 2020*
 ------------------------------
@@ -70,14 +79,6 @@ v1.29.0
 ### Changed
 - Build step name in config.yml to include addition of integration tests
 - Move `@pact-foundation/pact` to devDependencies.
-
-
-v2.0.0
-------------------------------
-*September 9, 2020*
-
-### Changed
-- Updating components to use `JustEatBasis` and subsequent breaking changes to update font variables to hook into new design token variables in fozzie.
 
 
 v1.28.0
