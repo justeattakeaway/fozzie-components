@@ -3,6 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.34.0
+*September 24, 2020*
+------------------------------
+### Changed
+- Lerna script to run component tests in series.
+- `maxInstanstances` property in WebDriverIO config
+
+
+### Removed
+- Contract test dependency.
+- Contract test publish npm script.
+- Dependency for finding available ports.
+
+
 v1.33.0
 *September 21, 2020*
 ------------------------------
