@@ -55,23 +55,32 @@
 
     ```
 
-3. Properties which component accepts:
 
-    `locale` - If there is a vue-i18n plugin in the project, the header component can be called without locale property, otherwise it accepts it in format like 'en-GB'
+### Props
 
-    `isTransparent` - Boolean property with `false` as a default value, defines whether the header has transparent or white background.
+`f-header` has a number of props that allow you to customise its functionality.
 
-    `showDeliveryEnquiry` - Boolean property with `false` as a default value, defines if it is necessary to show the "Deliver with Just Eat" link in the header.
+The props that can be defined are as follows:
 
-    `errorLog` - Function passed in for logging errors with the `fetchUserInfo` method. It has empty function as a default value
+| Prop                      | Type          | Default | Description |
+| :---                      |     :---:     |  :---:  | :---        |
+| locale                    | `String`      | `en-GB` | Sets the locale of the component (which determines what theme and translations to use.<br><br>If the application consuming the `f-header` component is using the vue `i18n` module, then the locale from that module will be used when this prop isn't defined. When this prop is defined, it takes precedence over the locale defined by the `i18n` module.<br><br>If not defined and the `i18n` module isn't present, the default locale used is `en-GB`.|
+| errorLog                  | `Function`    | `-`    | Function passed in for logging errors with the `fetchUserInfo` method. |
+| headerBackgroundTheme     | `String`      | `white` | Sets the background theme for the header component.<br><br>When set to `white` the header will be white with the default logo colour.<br>When set to `transparent` the header will be transparent with a white logo.<br>When set to `highlight` the header will use the primary brand colour as the background colour with a white logo. |
+| isOrderCountSupported     | `Boolean`     | `true` | ?? |
+| orderCountUrl             | `String`      | `false` | ?? |
+| showDeliveryEnquiry       | `Boolean`     | `false` | Defines if it is necessary to show the "Deliver with Just Eat" link in the header. |
+| showOffersLink            | `Boolean`     | `false` | Defines whether the offers link should be shown in the navigation. |
+| showLoginInfo             | `Boolean`     | `true` | Defines whether the login & user info icon should be shown in the navigation. |
+| userInfoProp              | `Object`      | `{}`     | Optional object conaining user details. If not provided `userInfoProp` is set via XHR call to `/api/account/details` |
+| userInfoUrl               | `String`      | `false` | URL to call to retrieve the userInfo (when `userInfoProp` isn't set). |
 
-    `userInfoProp` - Optional object conaining user details. If not provided `userInfoProp` is set via XHR call to `/api/account/details`
 
     `showLoginInfo` - Optional Boolean property with `true` as a default value, defines whether the login / user info icon should be shown in the navigation.
 
 ## Demo and local development
 
-Running the command below from the component folder e.g. `./packages/f-header` will start a development server and allow to preview the component usually on http://localhost:8080/ 
+Running the command below from the component folder e.g. `./packages/f-header` will start a development server and allow to preview the component usually on http://localhost:8080/
 
 ```bash
 # Local preview
@@ -81,7 +90,7 @@ yarn demo
 # Logged in user - http://localhost:8080/?testuser
 ```
 
-In addition using a `?testuser` parameter will simulate a logged in state. 
+In addition using a `?testuser` parameter will simulate a logged in state.
 
 
 ## Documentation to be completed once module is in stable state.

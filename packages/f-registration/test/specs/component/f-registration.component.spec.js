@@ -1,13 +1,12 @@
 import RegistrationComponent from '../../../test-utils/component-objects/f-registration.component';
 
-describe('f-header component tests', () => {
+describe('f-registration component tests', () => {
     beforeEach(() => {
         // Arrange
         browser.url('http://localhost:8081');
-    })
+    });
 
     it.only('should display errors if mandatory fields are empty', () => {
-
         // Arrange
         const userInfo = {
             firstName: '',
@@ -27,7 +26,6 @@ describe('f-header component tests', () => {
     });
 
     it('should show and be able to click the legal documentation', () => {
-
         // Act
         RegistrationComponent.waitForRegistrationForm();
 

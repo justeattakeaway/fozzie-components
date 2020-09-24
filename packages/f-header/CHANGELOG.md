@@ -3,12 +3,38 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.0.0
+------------------------------
+*September 14, 2020*
+
+### Changed
+- Moving header components out of `beta` state as now released.
+
+
 v3.9.0
 ------------------------------
 *September 14, 2020*
 
 ### Changed
 - Directory of component UI test specs
+
+
+v4.0.0-beta.1
+------------------------------
+*August 28, 2020*
+
+### Changed
+- Rebase latest master onto beta release.
+
+
+v4.0.0-beta.0
+------------------------------
+*August 27, 2020*
+
+### Changed
+- Uses `JustEatBasis` font and new fozzie font size declarations.
+
 
 v3.8.0
 ------------------------------
@@ -24,6 +50,7 @@ v3.7.0
 
 ### Added
 - Added new prop on header & navigation to allow hiding of login / user icon in navigation.
+
 
 v3.6.0
 ------------------------------

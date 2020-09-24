@@ -32,7 +32,15 @@ describe('contentCards › utils › normaliseCardType', () => {
             []
         ];
 
+        console.error = jest.fn();
+
         // Act & Assert
-        await Promise.all(tests.map(input => expect(normaliseCardType(input)).toBe(null)));
+
+        await Promise.all(tests.map(input => {
+            expect(normaliseCardType(input)).toBe(null);
+            expect(console.error).toHaveBeenCalledTimes(1); // checks that an error is thrown
+            console.error.mockClear();
+            return true;
+        }));
     });
 });

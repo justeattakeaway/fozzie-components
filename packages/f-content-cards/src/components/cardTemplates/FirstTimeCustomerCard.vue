@@ -84,7 +84,7 @@ $banner-bgColour-legacy : #cd381f;
 }
 
 .c-restaurantCard-footer {
-    @include font-size(small);
+    @include font-size(caption);
     font-weight: bold;
     margin-top: 0;
     margin-bottom: -#{spacing()};
@@ -103,7 +103,7 @@ $banner-bgColour-legacy : #cd381f;
 }
 
 .c-restaurantCard-footer-legacy {
-    @include font-size(base);
+    @include font-size(body-s);
     font-weight: normal;
     margin-bottom: 0;
 }

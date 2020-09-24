@@ -97,7 +97,7 @@ export default {
     margin: 0 0 0 spacing(x2);
     font-family: $font-family-base;
     font-weight: $font-weight-base;
-    @include font-size(base);
+    @include font-size(body-s);
 
     @include media('>=mid') {
         padding-left: 0;
