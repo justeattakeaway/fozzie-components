@@ -24,14 +24,6 @@ v1.33.0
 - Contract test dependencies + scripts
 
 
-
-v1.33.0
-*September 21, 2020*
-------------------------------
-### Removed
-- Contract test dependencies + scripts
-
-
 v1.32.1
 ------------------------------
 *September 23, 2020*
