@@ -137,6 +137,8 @@ export default {
 <style lang="scss" module>
 @import '../assets/scss/icons.scss';
 
+$countrySelector-btn-font-size: 'body-s';
+
 .c-countrySelector {
     width: 190px;
     position: relative;
@@ -186,14 +188,14 @@ export default {
 }
 
 .c-countrySelector-button {
-    width: 100%;
-    padding: spacing(x2);
-    display: flex;
     align-items: center;
     background-color: $footer-bgColor;
     border: none;
     cursor: pointer;
-    @include font-size(base);
+    display: flex;
+    @include font-size($countrySelector-btn-font-size);
+    padding: spacing(x2);
+    width: 100%;
 }
 
 .c-countrySelector-list {
