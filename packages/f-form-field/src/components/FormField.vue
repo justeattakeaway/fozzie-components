@@ -5,10 +5,10 @@
         <div
             :class="$style['c-formField-inputWrapper']">
             <form-label
-                v-if="!isNarrow"
+                v-if="!isInline"
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
-                :isNarrow="isNarrow">
+                :isInline="isInline">
                 {{ labelText }}
             </form-label>
             <input
@@ -23,10 +23,10 @@
                 v-on="listeners"
             >
             <form-label
-                v-if="isNarrow"
+                v-if="isInline"
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
-                :isNarrow="isNarrow">
+                :isInline="isInline">
                 {{ labelText }}
             </form-label>
         </div>
@@ -109,7 +109,7 @@ export default {
         testId () {
             return this.dataTestId || this.$attrs.name || false;
         },
-        isNarrow () {
+        isInline () {
             return (window.innerWidth < 768 && this.labelStyle === 'inlineNarrow') || this.labelStyle === 'inline';
         }
     },

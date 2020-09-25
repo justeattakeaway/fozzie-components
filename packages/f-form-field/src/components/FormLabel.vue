@@ -4,7 +4,7 @@
         :class="[
             $style['o-form-label'],
             $style['c-formField-label'],
-            (isNarrow ? $style['c-formField-label--inline'] : '')
+            (isInline ? $style['c-formField-label--inline'] : '')
         ]">
         <slot />
     </label>
@@ -22,7 +22,7 @@ export default {
             default: 'default',
             validator: value => (VALID_LABEL_STYLES.indexOf(value) !== -1)
         },
-        isNarrow: {
+        isInline: {
             type: Boolean,
             default: false
         }

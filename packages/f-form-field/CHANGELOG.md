@@ -11,6 +11,7 @@ v0.7.0
 ### Added
 - `inlineNarrow` label style that changes label positioning based on window size.
 
+
 v0.6.0
 ------------------------------
 *June 23, 2020*
