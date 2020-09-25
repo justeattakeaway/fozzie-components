@@ -4,7 +4,7 @@
         :class="[
             $style['o-form-label'],
             $style['c-formField-label'],
-            (labelStyle === 'inline' ? $style['c-formField-label--inline'] : '')
+            (isNarrow ? $style['c-formField-label--inline'] : '')
         ]">
         <slot />
     </label>
@@ -26,6 +26,9 @@ export default {
     computed: {
         hasLabelText () {
             return this.$slots.default && !!this.$slots.default[0].text.length;
+        },
+        isNarrow () {
+            return (window.innerWidth < 768 && this.labelStyle === 'inlineNarrow') || this.labelStyle === 'inline';
         }
     }
 };
