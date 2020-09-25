@@ -21,14 +21,15 @@ export default {
             type: String,
             default: 'default',
             validator: value => (VALID_LABEL_STYLES.indexOf(value) !== -1)
+        },
+        isNarrow: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
         hasLabelText () {
             return this.$slots.default && !!this.$slots.default[0].text.length;
-        },
-        isNarrow () {
-            return (window.innerWidth < 768 && this.labelStyle === 'inlineNarrow') || this.labelStyle === 'inline';
         }
     }
 };

@@ -7,7 +7,8 @@
             <form-label
                 v-if="!isNarrow"
                 :label-style="normalisedLabelStyle"
-                :for="uniqueId">
+                :for="uniqueId"
+                :isNarrow="isNarrow">
                 {{ labelText }}
             </form-label>
             <input
@@ -24,7 +25,8 @@
             <form-label
                 v-if="isNarrow"
                 :label-style="normalisedLabelStyle"
-                :for="uniqueId">
+                :for="uniqueId"
+                :isNarrow="isNarrow">
                 {{ labelText }}
             </form-label>
         </div>
