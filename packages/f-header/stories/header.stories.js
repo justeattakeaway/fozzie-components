@@ -40,13 +40,16 @@ export const HeaderComponent = () => ({
             default: object('User info', userInfo)
         },
         showLoginInfo: {
-            default: object('Show login/user info link', true)
+            default: boolean('Show login/user info link', true)
+        },
+        showHelpLink: {
+            default: boolean('Show help link', true)
         }
     },
     parameters: {
         notes: 'some documentation here'
     },
-    template: '<vue-header :userInfoProp="userInfoProp" :showOffersLink="showOffersLink" :locale="locale" :headerBackgroundTheme="headerBackgroundTheme" :showDeliveryEnquiry="showDeliveryEnquiry" :showLoginInfo="showLoginInfo" />'
+    template: '<vue-header :userInfoProp="userInfoProp" :showOffersLink="showOffersLink" :showHelpLink="showHelpLink" :locale="locale" :headerBackgroundTheme="headerBackgroundTheme" :showDeliveryEnquiry="showDeliveryEnquiry" :showLoginInfo="showLoginInfo" />'
 });
 
 HeaderComponent.storyName = 'f-header';
