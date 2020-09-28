@@ -645,13 +645,13 @@ describe('Navigation', () => {
             };
 
             // Act
-            const wrapper = shallowMount(Navigation, { 
+            const wrapper = shallowMount(Navigation, {
                 propsData,
                 computed: {
                     hasNavigationLinks () {
                         return true;
                     }
-                } 
+                }
             });
 
             await wrapper.setData({
@@ -668,59 +668,16 @@ describe('Navigation', () => {
 
 
     describe('hasNavigationLinks', () => {
-        it('should return true if `showOffersLink` is true', async () => {
+        it.each([
+            'showOffersLink',
+            'showHelpLink',
+            'showDeliveryEnquiry',
+            'showLoginLink'
+        ])('should return true if `%s` is true', async navLink => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
-                showOffersLink: true
-            };
-
-            // Act
-            const wrapper = shallowMount(Navigation, {
-                propsData
-            });
-
-            // Assert
-            expect(wrapper.vm.hasNavigationLinks).toBe(true);
-        });
-
-        it('should return true if `showHelpLink` is true', async () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                showHelpLink: true
-            };
-
-            // Act
-            const wrapper = shallowMount(Navigation, {
-                propsData
-            });
-
-            // Assert
-            expect(wrapper.vm.hasNavigationLinks).toBe(true);
-        });
-
-        it('should return true if `showDeliveryEnquiry` is true', async () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                showDeliveryEnquiry: true
-            };
-
-            // Act
-            const wrapper = shallowMount(Navigation, {
-                propsData
-            });
-
-            // Assert
-            expect(wrapper.vm.hasNavigationLinks).toBe(true);
-        });
-
-        it('should return true if `showLoginInfo` is true', async () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                showLoginInfo: true
+                [navLink]: true
             };
 
             // Act
@@ -749,6 +706,6 @@ describe('Navigation', () => {
 
             // Assert
             expect(wrapper.vm.hasNavigationLinks).toBe(false);
-        });        
+        });
     });
 });
