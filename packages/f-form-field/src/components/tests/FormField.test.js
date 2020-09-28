@@ -107,5 +107,19 @@ describe('FormField', () => {
                 expect(formInput.attributes('data-test-id')).toBe(undefined);
             });
         });
+
+        xdescribe('labelStyle ::', () => {
+            it('should be set to type `default` by default if no value is set', () => {
+                // Arrange
+                const propsData = {};
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+                const formLabel = wrapper.find('label');
+
+                // Assert
+                expect(formLabel.attributes('type')).toBe('default');
+            });
+        });
     });
 });
