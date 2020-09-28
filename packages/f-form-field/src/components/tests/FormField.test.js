@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
+import Vue from 'vue';
 import FormField from '../FormField.vue';
 import { DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../../constants';
-
 
 describe('FormField', () => {
     it('should be defined', () => {
@@ -124,15 +124,16 @@ describe('FormField', () => {
             });
 
             describe('when set to `inlineNarrow`', () => {
-                it('should append the label above input when window size is not mobile', () => {
+                it('should append the label above input when window size is not mobile', async () => {
                     // Arrange
                     const propsData = {
-                        labelStyle: 'default',
+                        labelStyle: 'inlineNarrow',
                         labelText: 'Test Label'
                     };
 
                     // Act
-                    const wrapper = shallowMount(FormField, { propsData });
+                    const wrapper = await shallowMount(FormField, { propsData });
+
                     const defaultLabel = wrapper.find('[data-js-test="defaultLabel"]');
                     const inlineLabel = wrapper.find('[data-js-test="inlineLabel"]');
 
