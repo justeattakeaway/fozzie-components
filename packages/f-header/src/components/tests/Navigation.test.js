@@ -24,6 +24,8 @@ const defaultPropsData = {
     isOrderCountSupported: true,
     offersCopy: {},
     showOffersLink: false,
+    showHelpLink: false,
+    userInfoProp: false,
     headerBackgroundTheme: 'white'
 };
 
@@ -188,6 +190,45 @@ describe('Navigation', () => {
         expect(wrapper.find('[data-js-test="login"]').exists()).toBe(true);
     });
 
+    it('should show the navbar if there are navigation links', async () => {
+        // Arrange
+        const propsData = {
+            ...defaultPropsData
+        };
+
+        // Act
+        const wrapper = shallowMount(Navigation, {
+            propsData,
+            computed: {
+                hasNavigationLinks () {
+                    return true;
+                }
+            }
+        });
+
+        // Assert
+        expect(wrapper.find('[data-js-test="nav-container"]').exists()).toBe(true);
+    });
+
+    it('should NOT show the navbar if there are no navigation links', async () => {
+        // Arrange
+        const propsData = {
+            ...defaultPropsData
+        };
+
+        // Act
+        const wrapper = shallowMount(Navigation, {
+            propsData,
+            computed: {
+                hasNavigationLinks () {
+                    return false;
+                }
+            }
+        });
+
+        // Assert
+        expect(wrapper.find('[data-js-test="nav-container"]').exists()).toBe(false);
+    });
 
     describe('nav links', () => {
         it('should be shown on mobile when is "navIsOpen" is true', async () => {
@@ -394,7 +435,8 @@ describe('Navigation', () => {
         it('should be shown when "showHelpLink" is not explicitly set', () => {
             // Arrange
             const propsData = {
-                ...defaultPropsData
+                ...defaultPropsData,
+                showHelpLink: undefined
             };
 
             // Act
@@ -599,7 +641,8 @@ describe('Navigation', () => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
-                showLoginInfo: false
+                showLoginInfo: false,
+                userInfoProp: true
             };
 
             // Act
@@ -614,5 +657,110 @@ describe('Navigation', () => {
             // Assert
             expect(wrapper.find('[data-js-test="user-info-icon"]').classes()).toContain('is-hidden');
         });
+    });
+
+
+    describe('hasNavigationLinks', () => {
+        it('should return true if `showOffersLink` is true', async () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                showOffersLink: true
+            };
+
+            // Act
+            const wrapper = shallowMount(Navigation, {
+                propsData
+            });
+
+            // Assert
+            expect(wrapper.vm.hasNavigationLinks).toBe(true);
+        });
+
+        it('should return true if `showHelpLink` is true', async () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                showHelpLink: true
+            };
+
+            // Act
+            const wrapper = shallowMount(Navigation, {
+                propsData
+            });
+
+            // Assert
+            expect(wrapper.vm.hasNavigationLinks).toBe(true);
+        });
+
+        it('should return true if `showDeliveryEnquiry` is true', async () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                showDeliveryEnquiry: true
+            };
+
+            // Act
+            const wrapper = shallowMount(Navigation, {
+                propsData
+            });
+
+            // Assert
+            expect(wrapper.vm.hasNavigationLinks).toBe(true);
+        });
+
+        it('should return true if `showLoginInfo` is true', async () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                showLoginInfo: true
+            };
+
+            // Act
+            const wrapper = shallowMount(Navigation, {
+                propsData
+            });
+
+            // Assert
+            expect(wrapper.vm.hasNavigationLinks).toBe(true);
+        });
+
+        it('should return true if `userInfo` is not empty', async () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                userInfoProp: true
+            };
+
+            // Act
+            const wrapper = shallowMount(Navigation, {
+                propsData
+            });
+
+            await wrapper.setData(defaultData);
+
+            // Assert
+            expect(wrapper.vm.hasNavigationLinks).toBe(true);
+        });
+
+        it('should return false if there are no underlying links to show', async () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                showLoginInfo: false,
+                showOffersLink: false,
+                showHelpLink: false,
+                showDeliveryEnquiry: false,
+                userInfoProp: false
+            };
+
+            // Act
+            const wrapper = shallowMount(Navigation, {
+                propsData
+            });
+
+            // Assert
+            expect(wrapper.vm.hasNavigationLinks).toBe(false);
+        });        
     });
 });

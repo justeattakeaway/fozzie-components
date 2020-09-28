@@ -1,5 +1,8 @@
 <template>
-    <nav class="c-nav c-nav--global">
+    <nav
+        v-if="hasNavigationLinks"
+        class="c-nav c-nav--global"
+        data-js-test="nav-container">
         <button
             :class="['c-nav-trigger c-nav-toggle is-hidden--noJS', navToggleThemeClass, {
                 'is-open': navIsOpen
@@ -370,6 +373,14 @@ export default {
          */
         getAnalyticsBlob () {
             return window.localStorage.getItem('je-analytics') || false;
+        },
+
+        hasNavigationLinks () {
+            return this.showOffersLink ||
+                this.showHelpLink ||
+                this.showDeliveryEnquiry ||
+                this.showLoginInfo ||
+                this.userInfo;
         }
     },
 
