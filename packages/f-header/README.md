@@ -71,12 +71,15 @@ The props that can be defined are as follows:
 | orderCountUrl             | `String`      | `false` | ?? |
 | showDeliveryEnquiry       | `Boolean`     | `false` | Defines if it is necessary to show the "Deliver with Just Eat" link in the header. |
 | showOffersLink            | `Boolean`     | `false` | Defines whether the offers link should be shown in the navigation. |
+| showHelpLink              | `Boolean`     | `true` | Defines whether the help link should be shown in the navigation. |
 | showLoginInfo             | `Boolean`     | `true` | Defines whether the login & user info icon should be shown in the navigation. |
 | userInfoProp              | `Object`      | `{}`     | Optional object conaining user details. If not provided `userInfoProp` is set via XHR call to `/api/account/details` |
 | userInfoUrl               | `String`      | `false` | URL to call to retrieve the userInfo (when `userInfoProp` isn't set). |
 
 
     `showLoginInfo` - Optional Boolean property with `true` as a default value, defines whether the login / user info icon should be shown in the navigation.
+
+**Important:** if you're adding a new property to show/hide something on the navigation bar, you probably want to check the `hasNavigationLinks` computed property, since you might have to update it.
 
 ## Demo and local development
 

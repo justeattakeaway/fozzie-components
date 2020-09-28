@@ -67,9 +67,6 @@ jobs:
       - run: # Run Component UI Tests
           name: Run WebDriverIO Component Tests
           command: yarn test-component:chrome
-      - run: # Run Visual Regression Tests
-          name: Run Visual Regression Tests
-          command: cd ./packages/storybook && yarn snapshot
 
   deploy-storybook:
     executor: node
