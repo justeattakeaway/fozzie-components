@@ -673,7 +673,7 @@ describe('Navigation', () => {
             'showHelpLink',
             'showDeliveryEnquiry',
             'showLoginLink'
-        ])('should return true if `%s` is true', async navLink => {
+        ])('should return true if `%s` is true', navLink => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
@@ -689,7 +689,7 @@ describe('Navigation', () => {
             expect(wrapper.vm.hasNavigationLinks).toBe(true);
         });
 
-        it('should return false if there are no underlying links to show', async () => {
+        it('should return false if there are no underlying links to show', () => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
