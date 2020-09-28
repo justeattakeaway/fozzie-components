@@ -361,6 +361,50 @@ describe('Navigation', () => {
         });
     });
 
+
+    describe('help link', () => {
+        it('should be shown when "showHelpLink" is true', () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                showHelpLink: true
+            };
+
+            // Act
+            const wrapper = shallowMount(Navigation, { propsData });
+
+            // Assert
+            expect(wrapper.find('[data-test-id="help-link"]').exists()).toBe(true);
+        });
+
+        it('should not be shown when "showHelpLink" is false', () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData,
+                showHelpLink: false
+            };
+
+            // Act
+            const wrapper = shallowMount(Navigation, { propsData });
+
+            // Assert
+            expect(wrapper.find('[data-test-id="help-link"]').exists()).toBe(false);
+        });
+
+        it('should be shown when "showHelpLink" is not explicitly set', () => {
+            // Arrange
+            const propsData = {
+                ...defaultPropsData
+            };
+
+            // Act
+            const wrapper = shallowMount(Navigation, { propsData });
+
+            // Assert
+            expect(wrapper.find('[data-test-id="help-link"]').exists()).toBe(true);
+        });
+    });
+
     describe('isOrderCountOutOfDate', () => {
         it('should return true if the order count IS OUT of date', async () => {
             // Arrange

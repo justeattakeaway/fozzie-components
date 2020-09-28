@@ -176,6 +176,7 @@
 
                 <li class="c-nav-list-item c-nav-list-item--support">
                     <a
+                        v-if="showHelpLink"
                         :href="help.url"
                         :data-trak='`{
                                 "trakEvent": "click",
@@ -273,6 +274,11 @@ export default {
         showOffersLink: {
             type: Boolean,
             default: false
+        },
+
+        showHelpLink: {
+            type: Boolean,
+            default: true
         },
 
         showLoginInfo: {
