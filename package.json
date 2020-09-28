@@ -38,7 +38,7 @@
     "@vue/test-utils": "1.0.3",
     "@wdio/cli": "6.4.0",
     "@wdio/local-runner": "6.4.0",
-    "@wdio/mocha-framework": "6.4.0",
+    "@wdio/mocha-framework": "^6.4.0",
     "@wdio/spec-reporter": "6.4.0",
     "@wdio/sync": "6.4.0",
     "babel-core": "7.0.0-bridge.0",
