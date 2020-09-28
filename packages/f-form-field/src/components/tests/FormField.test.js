@@ -4,14 +4,14 @@ import { DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../..
 
 
 describe('FormField', () => {
-    xit('should be defined', () => {
+    it('should be defined', () => {
         const propsData = {};
         const wrapper = shallowMount(FormField, { propsData });
         expect(wrapper.exists()).toBe(true);
     });
 
     describe('props ::', () => {
-        xdescribe('inputType ::', () => {
+        describe('inputType ::', () => {
             it('should be set to type `text` by default if no value is set', () => {
                 // Arrange
                 const propsData = {};
@@ -109,7 +109,7 @@ describe('FormField', () => {
         });
 
         describe('labelStyle ::', () => {
-            xit.each(VALID_LABEL_STYLES)('should set the type of form label element as expected', definedType => {
+            it.each(VALID_LABEL_STYLES)('should set the type of form label element as expected', definedType => {
                 // Arrange
                 const propsData = {
                     labelStyle: definedType
@@ -128,7 +128,7 @@ describe('FormField', () => {
                     // Arrange
                     const propsData = {
                         labelStyle: 'default',
-                        labelText: 'Label'
+                        labelText: 'Test Label'
                     };
 
                     // Act

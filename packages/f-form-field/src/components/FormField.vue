@@ -141,22 +141,18 @@ export default {
         },
 
         isInline () {
-            // if (typeof (window) !== 'undefined' && this.windowWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') {
-            //     return true;
-            // } else if (this.labelStyle === 'inline') {
-            //     return true;
-            // }
+            if (typeof (window) !== 'undefined' && this.windowWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') {
+                return true;
+            } else if (this.labelStyle === 'inline') {
+                return true;
+            }
 
-            // return false;
-
-            return window && (this.windowWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') || this.labelStyle === 'inline';
+            return false;
         }
     },
 
     mounted () {
-        if (typeof (window) !== 'undefined') {
-            window.addEventListener('resize', this.updateWidth);
-        }
+        window.addEventListener('resize', this.updateWidth);
     },
 
     methods: {
