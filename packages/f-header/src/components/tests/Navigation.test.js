@@ -190,7 +190,7 @@ describe('Navigation', () => {
         expect(wrapper.find('[data-js-test="login"]').exists()).toBe(true);
     });
 
-    it('should show the navbar if there are navigation links', async () => {
+    it('should show the navbar if there are navigation links', () => {
         // Arrange
         const propsData = {
             ...defaultPropsData
@@ -210,7 +210,7 @@ describe('Navigation', () => {
         expect(wrapper.find('[data-js-test="nav-container"]').exists()).toBe(true);
     });
 
-    it('should NOT show the navbar if there are no navigation links', async () => {
+    it('should NOT show the navbar if there are no navigation links', () => {
         // Arrange
         const propsData = {
             ...defaultPropsData
