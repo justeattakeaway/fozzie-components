@@ -124,6 +124,13 @@ describe('FormField', () => {
             });
 
             describe('when set to `inlineNarrow`', () => {
+                const eventName = 'resize';
+
+                const resizeWindow = (width) => {
+                    window.innerWidth = width;
+                    window.dispatchEvent(new Event(eventName));
+                };
+
                 it('should append the label above input when window size is not mobile', async () => {
                     // Arrange
                     const propsData = {
@@ -140,6 +147,26 @@ describe('FormField', () => {
                     // Assert
                     expect(defaultLabel.exists()).toBe(true);
                     expect(inlineLabel.exists()).toBe(false);
+                });
+
+                it('should append the label inline with input when window size is mobile', async () => {
+                    // Arrange
+                    const propsData = {
+                        labelStyle: 'inlineNarrow',
+                        labelText: 'Test Label'
+                    };
+
+                    resizeWindow(750);
+
+                    // Act
+                    const wrapper = await shallowMount(FormField, { propsData });
+
+                    const defaultLabel = wrapper.find('[data-js-test="defaultLabel"]');
+                    const inlineLabel = wrapper.find('[data-js-test="inlineLabel"]');
+
+                    // Assert
+                    expect(defaultLabel.exists()).toBe(false);
+                    expect(inlineLabel.exists()).toBe(true);
                 });
             });
         });
