@@ -4,7 +4,6 @@
         :class="$style['c-formField']">
         <div
             :class="$style['c-formField-inputWrapper']">
-            <p>IsInline: {{ isInline }}</p>
             <form-label
                 v-if="!isInline"
                 :label-style="normalisedLabelStyle"
@@ -153,6 +152,7 @@ export default {
 
     mounted () {
         window.addEventListener('resize', this.updateWidth);
+        this.updateWidth();
     },
 
     methods: {
