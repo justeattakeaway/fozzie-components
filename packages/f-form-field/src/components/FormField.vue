@@ -38,10 +38,15 @@
 import { globalisationServices } from '@justeat/f-services';
 import FormLabel from './FormLabel.vue';
 import tenantConfigs from '../tenants';
-import { VALID_INPUT_TYPES, DEFAULT_INPUT_TYPE, VALID_LABEL_STYLES } from '../constants';
+import { VALID_INPUT_TYPES, DEFAULT_INPUT_TYPE, VALID_LABEL_STYLES, MOBILE_WIDTH } from '../constants';
 
 export default {
     name: 'FormField',
+    data() {
+        return {
+            isInline: false
+        }
+    },
     components: {
         FormLabel
     },
@@ -108,15 +113,18 @@ export default {
         },
         testId () {
             return this.dataTestId || this.$attrs.name || false;
-        },
-        isInline () {
-            return (window.innerWidth < 768 && this.labelStyle === 'inlineNarrow') || this.labelStyle === 'inline';
         }
     },
     methods: {
         updateValue (event) {
             this.$emit('input', event.target.value);
+        },
+        handleChange () {
+            this.isInline = (window.innerWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') || this.labelStyle === 'inline';
         }
+    },
+    created() {
+        window.addEventListener("resize", this.handleChange);
     }
 };
 </script>
