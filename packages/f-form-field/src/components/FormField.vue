@@ -120,7 +120,7 @@ export default {
             this.$emit('input', event.target.value);
         },
         handleChange () {
-            this.isInline = (window.innerWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') || this.labelStyle === 'inline';
+            this.isInline = window && (window.innerWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') || this.labelStyle === 'inline';
         }
     },
     created() {
