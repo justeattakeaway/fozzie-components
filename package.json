@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -8,6 +8,7 @@
     "lint:fix": "lerna run lint -- --fix",
     "prepublishOnly": "lerna run prepublishOnly --stream",
     "release": "lerna publish",
+    "size": "yarn build && size-limit",
     "storybook:build": "lerna run storybook:build",
     "storybook:serve": "lerna run storybook:serve",
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
@@ -29,6 +30,7 @@
     "@justeat/f-utils": "1.0.0-beta.0",
     "@justeat/fozzie": "4.0.0-beta.0",
     "@justeat/fozzie-colour-palette": "3.0.0-beta.6",
+    "@size-limit/preset-small-lib": "4.6.0",
     "@storybook/storybook-deployer": "2.8.6",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
@@ -59,6 +61,7 @@
     "npm-run-all": "4.1.5",
     "postcss-loader": "3.0.0",
     "sass-loader": "7.3.1",
+    "size-limit": "4.6.0",
     "vue-svg-loader": "0.16.0",
     "vue-template-compiler": "2.6.10",
     "wdio-chromedriver-service": "6.0.3",

@@ -1,0 +1,5 @@
+[
+    {
+        "path": "packages/*/dist/*.js"
+    }
+]
