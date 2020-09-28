@@ -4,11 +4,15 @@
         :class="$style['c-formField']">
         <div
             :class="$style['c-formField-inputWrapper']">
+            <p>IsInline: {{ isInline }}</p>
             <form-label
                 v-if="!isInline"
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
-                :isInline="isInline">
+                :isInline="isInline"
+                :data-js-test="isInline"
+                :faye="isInline || 'das'"
+                >
                 {{ labelText }}
             </form-label>
             <input
@@ -26,7 +30,9 @@
                 v-if="isInline"
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
-                :isInline="isInline">
+                :isInline="isInline"
+                :data-js-test="isInline"
+                >
                 {{ labelText }}
             </form-label>
         </div>
