@@ -379,8 +379,7 @@ export default {
             return this.showOffersLink ||
                 this.showHelpLink ||
                 this.showDeliveryEnquiry ||
-                this.showLoginInfo ||
-                this.userInfo;
+                this.showLoginInfo;
         }
     },
 

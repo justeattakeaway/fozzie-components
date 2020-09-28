@@ -641,12 +641,19 @@ describe('Navigation', () => {
             // Arrange
             const propsData = {
                 ...defaultPropsData,
-                showLoginInfo: false,
-                userInfoProp: true
+                showLoginInfo: false
             };
 
             // Act
-            const wrapper = shallowMount(Navigation, { propsData });
+            const wrapper = shallowMount(Navigation, { 
+                propsData,
+                computed: {
+                    hasNavigationLinks () {
+                        return true;
+                    }
+                } 
+            });
+
             await wrapper.setData({
                 ...defaultData,
                 userInfo: {
@@ -725,24 +732,6 @@ describe('Navigation', () => {
             expect(wrapper.vm.hasNavigationLinks).toBe(true);
         });
 
-        it('should return true if `userInfo` is not empty', async () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                userInfoProp: true
-            };
-
-            // Act
-            const wrapper = shallowMount(Navigation, {
-                propsData
-            });
-
-            await wrapper.setData(defaultData);
-
-            // Assert
-            expect(wrapper.vm.hasNavigationLinks).toBe(true);
-        });
-
         it('should return false if there are no underlying links to show', async () => {
             // Arrange
             const propsData = {
@@ -750,8 +739,7 @@ describe('Navigation', () => {
                 showLoginInfo: false,
                 showOffersLink: false,
                 showHelpLink: false,
-                showDeliveryEnquiry: false,
-                userInfoProp: false
+                showDeliveryEnquiry: false
             };
 
             // Act
