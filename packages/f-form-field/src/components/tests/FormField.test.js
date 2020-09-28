@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import FormField from '../FormField.vue';
-import { DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES } from '../../constants';
+import { DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../../constants';
 
 
 describe('FormField', () => {
@@ -105,6 +105,22 @@ describe('FormField', () => {
 
                 // Assert
                 expect(formInput.attributes('data-test-id')).toBe(undefined);
+            });
+        });
+
+        describe('labelStyle ::', () => {
+            it.each(VALID_LABEL_STYLES)('should set the type of form label element as expected', definedType => {
+                // Arrange
+                const propsData = {
+                    labelStyle: definedType
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+                const formLabel = wrapper.find('form-label-stub'); // change to .c-formField when CSS Modules is working
+
+                // Assert
+                expect(formLabel.attributes('labelstyle')).toBe(definedType);
             });
         });
     });
