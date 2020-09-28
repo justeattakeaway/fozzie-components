@@ -42,9 +42,9 @@ import { VALID_INPUT_TYPES, DEFAULT_INPUT_TYPE, VALID_LABEL_STYLES, MOBILE_WIDTH
 
 export default {
     name: 'FormField',
-    data() {
+    data () {
         return {
-            isInline: false
+            windowWidth: ''
         }
     },
     components: {
@@ -113,18 +113,21 @@ export default {
         },
         testId () {
             return this.dataTestId || this.$attrs.name || false;
+        },
+        isInline() {
+            return window && (this.windowWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') || this.labelStyle === 'inline';            
         }
     },
     methods: {
         updateValue (event) {
             this.$emit('input', event.target.value);
         },
-        handleChange () {
-            this.isInline = window && (window.innerWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') || this.labelStyle === 'inline';
-        }
+        updateWidth (event) {
+            this.windowWidth = window.innerWidth;
+        },
     },
     created() {
-        window.addEventListener("resize", this.handleChange);
+        window && window.addEventListener("resize", this.updateWidth);
     }
 };
 </script>
