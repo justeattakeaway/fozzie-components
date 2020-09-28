@@ -127,18 +127,18 @@ describe('FormField', () => {
                 it('should append the label above input when window size is not mobile', () => {
                     // Arrange
                     const propsData = {
-                        labelStyle: 'inline',
+                        labelStyle: 'default',
                         labelText: 'Label'
                     };
 
                     // Act
                     const wrapper = shallowMount(FormField, { propsData });
-                    const formLabel = wrapper.find('[data-js-test="true"]');
-
-                    expect(wrapper.html()).toBe('true');
+                    const defaultLabel = wrapper.find('[data-js-test="defaultLabel"]');
+                    const inlineLabel = wrapper.find('[data-js-test="inlineLabel"]');
 
                     // Assert
-                    expect(formLabel.exists()).toBe(true);
+                    expect(defaultLabel.exists()).toBe(true);
+                    expect(inlineLabel.exists()).toBe(false);
                 });
             });
         });

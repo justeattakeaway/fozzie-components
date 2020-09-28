@@ -9,10 +9,8 @@
                 v-if="!isInline"
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
-                :isInline="isInline"
-                :data-js-test="isInline"
-                :faye="isInline || 'das'"
-                >
+                :is-inline="isInline"
+                data-js-test="defaultLabel">
                 {{ labelText }}
             </form-label>
             <input
@@ -30,9 +28,8 @@
                 v-if="isInline"
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
-                :isInline="isInline"
-                :data-js-test="isInline"
-                >
+                :is-inline="isInline"
+                data-js-test="inlineLabel">
                 {{ labelText }}
             </form-label>
         </div>
@@ -44,47 +41,62 @@
 import { globalisationServices } from '@justeat/f-services';
 import FormLabel from './FormLabel.vue';
 import tenantConfigs from '../tenants';
-import { VALID_INPUT_TYPES, DEFAULT_INPUT_TYPE, VALID_LABEL_STYLES, MOBILE_WIDTH } from '../constants';
+import {
+    VALID_INPUT_TYPES,
+    DEFAULT_INPUT_TYPE,
+    VALID_LABEL_STYLES,
+    MOBILE_WIDTH
+} from '../constants';
 
 export default {
     name: 'FormField',
-    data () {
-        return {
-            windowWidth: ''
-        }
-    },
+
     components: {
         FormLabel
     },
+
     inheritAttrs: false,
+
     props: {
         locale: {
             type: String,
             default: ''
         },
+
         labelText: {
             type: String,
             default: ''
         },
+
         inputType: {
             type: String,
             default: DEFAULT_INPUT_TYPE,
             validator: value => (VALID_INPUT_TYPES.indexOf(value) !== -1) // The prop value must match one of the valid input types
         },
+
         labelStyle: {
             type: String,
             default: 'default',
             validator: value => (VALID_LABEL_STYLES.indexOf(value) !== -1) // The prop value must match one of the valid input types
         },
+
         value: {
             type: [String, Number],
             default: ''
         },
+
         dataTestId: {
             type: String,
             default: ''
         }
     },
+
+    data () {
+        return {
+            windowWidth: ''
+        };
+    },
+
     computed: {
         normalisedInputType () {
             if (VALID_INPUT_TYPES.includes(this.inputType)) {
@@ -92,48 +104,69 @@ export default {
             }
             return DEFAULT_INPUT_TYPE;
         },
+
         normalisedLabelStyle () {
             if (VALID_LABEL_STYLES.includes(this.labelStyle)) {
                 return this.labelStyle;
             }
             return '';
         },
+
         formFieldLocale () {
             return globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         },
+
         copy () {
             const localeConfig = tenantConfigs[this.formFieldLocale];
             return { ...localeConfig };
         },
+
         theme () {
             return globalisationServices.getTheme(this.formFieldLocale);
         },
+
         listeners () {
             return {
                 ...this.$listeners,
                 input: this.updateValue
             };
         },
+
         uniqueId () {
             return `formField-${(this.$attrs.name ? this.$attrs.name : this._uid)}`;
         },
+
         testId () {
             return this.dataTestId || this.$attrs.name || false;
         },
-        isInline() {
-            return window && (this.windowWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') || this.labelStyle === 'inline';            
+
+        isInline () {
+            // if (typeof (window) !== 'undefined' && this.windowWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') {
+            //     return true;
+            // } else if (this.labelStyle === 'inline') {
+            //     return true;
+            // }
+
+            // return false;
+
+            return window && (this.windowWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') || this.labelStyle === 'inline';
         }
     },
+
+    mounted () {
+        if (typeof (window) !== 'undefined') {
+            window.addEventListener('resize', this.updateWidth);
+        }
+    },
+
     methods: {
         updateValue (event) {
             this.$emit('input', event.target.value);
         },
-        updateWidth (event) {
+
+        updateWidth () {
             this.windowWidth = window.innerWidth;
-        },
-    },
-    created() {
-        window && window.addEventListener("resize", this.updateWidth);
+        }
     }
 };
 </script>
