@@ -177,9 +177,10 @@
                     </a>
                 </li>
 
-                <li class="c-nav-list-item c-nav-list-item--support">
+                <li
+                    v-if="showHelpLink"
+                    class="c-nav-list-item c-nav-list-item--support">
                     <a
-                        v-if="showHelpLink"
                         :href="help.url"
                         :data-trak='`{
                                 "trakEvent": "click",
