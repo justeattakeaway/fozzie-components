@@ -1,6 +1,6 @@
 import { withA11y } from '@storybook/addon-a11y';
 
-import * as IconsComponents from '../dist/f-vue-icons.es';
+import * as IconsComponents from '../src/index';
 import './icons.css';
 
 const icons = {};
