@@ -405,7 +405,7 @@ describe('`contentCardService`', () => {
                 .output();
 
             expect(output).toHaveLength(1);
-            expect(output[0].type).toBe('Home_Promotion_Card_2');
+            expect(output[0].type).toBe('Home_Promotion_Card_1');
         });
     });
 });

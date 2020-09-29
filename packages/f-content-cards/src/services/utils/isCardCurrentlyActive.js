@@ -1,7 +1,6 @@
-import parse from 'date-fns/parse';
-import format from 'date-fns/format';
-import isAfter from 'date-fns/isAfter';
-import isBefore from 'date-fns/isBefore';
+import {
+    parse, format, isAfter, isBefore
+} from 'date-fns';
 
 /**
  * Determines whether a card is currently active using display times JSON
