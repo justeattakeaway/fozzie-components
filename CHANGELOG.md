@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.2.0
+------------------------------
+*September 29, 2020*
+
+### Added
+- Build and store artifacts for bundle size comparisons with BuildSize.
+
+
 v2.1.0
 ------------------------------
 *September 28, 2020*
@@ -20,12 +28,12 @@ v2.0.0
 
 
 v1.34.0
-*September 24, 2020*
 ------------------------------
+*September 24, 2020*
+
 ### Changed
 - Lerna script to run component tests in series.
 - `maxInstanstances` property in WebDriverIO config
-
 
 ### Removed
 - Contract test dependency.
@@ -34,8 +42,9 @@ v1.34.0
 
 
 v1.33.0
-*September 21, 2020*
 ------------------------------
+*September 21, 2020*
+
 ### Removed
 - Contract test dependencies + scripts
 
@@ -284,6 +293,7 @@ v1.10.0
 ### Added
 - NPM Scripts at the root of the mono repo to run the Storybook docs through `yarn storybook:build` and `yarn storybook:serve`.
 
+
 v1.9.0
 ------------------------------
 *April 23, 2020*
@@ -292,13 +302,6 @@ v1.9.0
 - `@storybook/storybook-deployer` dependency to easily deploy storybook using the `storybook:deploy` script
 - Updated Circle CI config.yml to include new `deploy` workflow + other tweaks to existing `build` workflow
 - Added link to hosted Storybook in fozzie-component docs.
-
-
-v1.9.0
-------------------------------
-*April 23, 2020*
-
-### Added
 - `generator-component` added to scaffold new components.
 
 

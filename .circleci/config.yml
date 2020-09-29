@@ -67,6 +67,11 @@ jobs:
       - run: # Run Component UI Tests
           name: Run WebDriverIO Component Tests
           command: yarn test-component:chrome
+      - run:
+          name: Build packages
+          command: yarn build
+      - store_artifacts:
+          path: /packages/*/dist/*.js
 
   deploy-storybook:
     executor: node
