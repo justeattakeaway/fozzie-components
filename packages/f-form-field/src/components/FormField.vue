@@ -39,6 +39,7 @@
 <script>
 import { globalisationServices } from '@justeat/f-services';
 import FormLabel from './FormLabel.vue';
+import Debounce from '../services/debounce';
 import tenantConfigs from '../tenants';
 import {
     VALID_INPUT_TYPES,
@@ -146,7 +147,7 @@ export default {
     },
 
     mounted () {
-        window.addEventListener('resize', this.updateWidth);
+        window.addEventListener('resize', Debounce(this.updateWidth, 100));
         this.updateWidth();
     },
 

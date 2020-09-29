@@ -1,7 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import FormField from '../FormField.vue';
 import { DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../../constants';
-import _ from 'lodash';
 
 describe('FormField', () => {
     it('should be defined', () => {
@@ -149,7 +148,7 @@ describe('FormField', () => {
                     const defaultLabel = wrapper.find('[data-js-test="defaultLabel"]');
                     const inlineLabel = wrapper.find('[data-js-test="inlineLabel"]');
 
-                    // Assert
+                    // Assert                    expect(defaultLabel.exists()).toBe(true);
                     expect(defaultLabel.exists()).toBe(true);
                     expect(inlineLabel.exists()).toBe(false);
                 });
