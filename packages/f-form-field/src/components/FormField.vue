@@ -92,7 +92,7 @@ export default {
 
     data () {
         return {
-            windowWidth: ''
+            windowWidth: null
         };
     },
 
@@ -140,13 +140,8 @@ export default {
         },
 
         isInline () {
-            if (typeof (window) !== 'undefined' && this.windowWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') {
-                return true;
-            } else if (this.labelStyle === 'inline') {
-                return true;
-            }
-
-            return false;
+            return (this.windowWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') ||
+                this.labelStyle === 'inline';
         }
     },
 
@@ -155,14 +150,20 @@ export default {
         this.updateWidth();
     },
 
+    destroyed () {
+        window.removeEventListener('resize', this.updateWidth);
+    },
+
     methods: {
         updateValue (event) {
             this.$emit('input', event.target.value);
         },
 
         updateWidth () {
-            this.windowWidth = window.innerWidth;
-        }
+            if (typeof (window) !== 'undefined') {
+                this.windowWidth = window.innerWidth;
+            };
+        },
     }
 };
 </script>

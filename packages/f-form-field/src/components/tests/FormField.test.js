@@ -1,6 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import FormField from '../FormField.vue';
 import { DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../../constants';
+import _ from 'lodash';
 
 describe('FormField', () => {
     it('should be defined', () => {
@@ -108,7 +109,7 @@ describe('FormField', () => {
         });
 
         describe('labelStyle ::', () => {
-            it.each(VALID_LABEL_STYLES)('should set the type of form label element as expected', definedType => {
+            it.each(VALID_LABEL_STYLES)('should set the type of form label element as expected if labelStyle=%p is specified', definedType => {
                 // Arrange
                 const propsData = {
                     labelStyle: definedType
@@ -153,7 +154,7 @@ describe('FormField', () => {
                     expect(inlineLabel.exists()).toBe(false);
                 });
 
-                it('should append the label inline with input when window size is mobile', () => {
+                it('should append the label inline with input when window size is mobile', async () => {
                     // Arrange
                     const propsData = {
                         labelStyle: 'inlineNarrow',
@@ -163,7 +164,7 @@ describe('FormField', () => {
                     resizeWindow(MOBILE);
 
                     // Act
-                    const wrapper = shallowMount(FormField, { propsData });
+                    const wrapper = await shallowMount(FormField, { propsData });
 
                     const defaultLabel = wrapper.find('[data-js-test="defaultLabel"]');
                     const inlineLabel = wrapper.find('[data-js-test="inlineLabel"]');
