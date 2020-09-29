@@ -130,12 +130,17 @@ describe('FormField', () => {
                     window.dispatchEvent(new Event(eventName));
                 };
 
+                const MOBILE = 767;
+                const DESKTOP = 768;
+
                 it('should append the label above input when window size is not mobile', async () => {
                     // Arrange
                     const propsData = {
                         labelStyle: 'inlineNarrow',
                         labelText: 'Test Label'
                     };
+
+                    resizeWindow(DESKTOP);
 
                     // Act
                     const wrapper = await shallowMount(FormField, { propsData });
@@ -155,7 +160,7 @@ describe('FormField', () => {
                         labelText: 'Test Label'
                     };
 
-                    resizeWindow(767);
+                    resizeWindow(MOBILE);
 
                     // Act
                     const wrapper = shallowMount(FormField, { propsData });
