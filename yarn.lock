@@ -1682,10 +1682,10 @@
     classnames "2.2.5"
     core-js "3.1.3"
 
-"@justeat/f-icons@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.1.0.tgz#f1187e318855a7eb559e651e9af5562de69a5398"
-  integrity sha512-s2BhBUsgRzJnMB/XXZ0fwGOdR9DeZ31xz0itwUkBVpB1aM/6iYeyvqxT2t9zXGqryaEFZeWywZiMIAh/B8/f3Q==
+"@justeat/f-icons@2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.2.0.tgz#843f06e0cfd21d9f6676b2a21be5ceb12b4184db"
+  integrity sha512-pyHYjf7UUTq9BzyTvpdkMfnaeu8yt+ttz3uL6Y9Pk9WeT3Y8pS3M2vw+5hnwuQT5sAUjoC0OU/5ttTB0y8wdtw==
 
 "@justeat/f-logger@0.8.1":
   version "0.8.1"
