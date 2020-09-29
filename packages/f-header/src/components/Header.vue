@@ -23,6 +23,7 @@
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
                 :offers-copy="copy.offers"
                 :show-offers-link="showOffersLink"
+                :show-help-link="showHelpLink"
                 :error-log="errorLog"
                 :user-info-prop="userInfoProp"
                 :user-info-url="userInfoUrl"
@@ -55,12 +56,27 @@ export default {
             default: ''
         },
 
-        showDeliveryEnquiry: {
-            type: Boolean,
+        errorLog: {
+            type: [Function, Boolean],
             default: false
         },
 
-        showOffersLink: {
+        headerBackgroundTheme: {
+            type: String,
+            default: 'white'
+        },
+
+        isOrderCountSupported: {
+            type: Boolean,
+            default: true
+        },
+
+        orderCountUrl: {
+            type: String,
+            default: '/api/analytics/ordercount'
+        },
+
+        showDeliveryEnquiry: {
             type: Boolean,
             default: false
         },
@@ -70,8 +86,13 @@ export default {
             default: true
         },
 
-        errorLog: {
-            type: [Function, Boolean],
+        showHelpLink: {
+            type: Boolean,
+            default: true
+        },
+
+        showOffersLink: {
+            type: Boolean,
             default: false
         },
 
@@ -83,21 +104,6 @@ export default {
         userInfoUrl: {
             type: String,
             default: '/api/account/details'
-        },
-
-        orderCountUrl: {
-            type: String,
-            default: '/api/analytics/ordercount'
-        },
-
-        isOrderCountSupported: {
-            type: Boolean,
-            default: true
-        },
-
-        headerBackgroundTheme: {
-            type: String,
-            default: 'white'
         }
     },
     data () {
@@ -267,7 +273,7 @@ export default {
         text-align: center;
         border-radius: 8px;
         position: absolute;
-        @include font-size(small, false);
+        @include font-size(caption, false);
         color: $header-buttonCount-color;
         background: $header-buttonCount-bg;
         border: 1px solid $header-buttonCount-borderColor;

@@ -3,18 +3,77 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v1.29.0
-*September 9, 2020*
+v2.1.0
+------------------------------
+*September 28, 2020*
+
+### Removed
+- Build config for visual regression tests
+
+
+v2.0.0
+------------------------------
+*September 24, 2020*
+
+### Changed
+- Updating components to use `JustEatBasis` and subsequent breaking changes to update font variables to hook into new design token variables in fozzie.
+
+
+v1.34.0
+*September 24, 2020*
 ------------------------------
 ### Changed
-- Build step name in config.yml to include addition of integration tests
+- Lerna script to run component tests in series.
+- `maxInstanstances` property in WebDriverIO config
 
-Latest (roll into next release)
+
+### Removed
+- Contract test dependency.
+- Contract test publish npm script.
+- Dependency for finding available ports.
+
+
+v1.33.0
+*September 21, 2020*
 ------------------------------
-*September 10, 2020*
+### Removed
+- Contract test dependencies + scripts
+
+
+v1.32.1
+------------------------------
+*September 23, 2020*
 
 ### Changed
-- Move `@pact-foundation/pact` to devDependencies.
+- Updated typography CSS snippet to use valid comment.
+
+
+v1.32.0
+------------------------------
+*September 21, 2020*
+
+### Changed
+- Comment out npm publish build step
+
+
+v1.31.0
+------------------------------
+*September 17, 2020*
+
+### Changed
+- Updated typography font loading JS snippet to use `classList.add()`.
+
+
+v1.30.0
+------------------------------
+*September 14, 2020*
+
+### Added
+- New build step for to run component UI tests
+- `local:tests` script to easily run all tests locally before submitting a PR
+
+### Changed
+- `wdio.conf.js` compnent test spec directory
 
 
 v1.29.0
@@ -23,6 +82,10 @@ v1.29.0
 
 ### Added
 - New build to publish npm packages as part of CI.
+
+### Changed
+- Build step name in config.yml to include addition of integration tests
+- Move `@pact-foundation/pact` to devDependencies.
 
 
 v1.28.0
@@ -33,6 +96,7 @@ v1.28.0
 - Updated typography font loading JS snippet to use a self-executing function in order to avoid polluting the global namespace.
 - Updated typography font loading JS snippet to follow our lint rules more closely.
 
+
 v1.27.0
 ------------------------------
 *September 8, 2020*
@@ -42,6 +106,7 @@ v1.27.0
 - .gitignore entry for `pacts` folder
 - lerna script to execute `test:consumer` script
 - `publish:pact` script to publish pacts to the broker
+
 ### Changed
 - `testEnvironment` in `package.json` for consumer pact tests
 

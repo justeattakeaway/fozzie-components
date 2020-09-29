@@ -4,13 +4,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v1.16.0
+v2.1.0
 ------------------------------
-*September 22, 2020*
+*September 29, 2020*
 
 ### Changed
 - `filterContentCards` method to perform brand and display time checks when Home Promotion Card 1 & 2 are filtered.
 - Apply card types in order of given filters when limit is set to 1
+
+
+v2.0.0
+------------------------------
+*September 23, 2020*
+
+### Changed
+- Moving component out of beta now font changes have been released.
 
 
 v1.15.0
@@ -30,6 +38,26 @@ v1.14.0
 
 ### Added
 - `Home_Promotion_Card_1` template and type to allowed content card types
+
+
+v2.0.0-beta.1
+------------------------------
+*August 28, 2020*
+
+### Added
+- Check for `console.error` being thrown in `utils` tests.
+
+### Fixed
+- Couple of old font references updated.
+
+
+v2.0.0-beta.0
+------------------------------
+*August 27, 2020*
+
+### Changed
+- Now uses new `JustEatBasis` font and updated type variables.
+
 
 
 v1.13.0

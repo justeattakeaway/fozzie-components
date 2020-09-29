@@ -28,7 +28,7 @@ executors:
   node:
     docker:
       # specify the version you desire here
-      - image: circleci/node:12.14.1-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
+      - image: circleci/node:12.18.2-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
 
 jobs:
 
@@ -61,9 +61,12 @@ jobs:
       - run: # Run Tests
           name: Run Unit / Integration Tests
           command: yarn test
-      - run: # Run Visual Regression Tests
-          name: Run Visual Regression Tests
-          command: cd ./packages/storybook && yarn snapshot
+      - run: # Install Component Test Dependencies
+          name: Install Component Test Dependencies
+          command: yarn global add @vue/cli @vue/cli-service-global
+      - run: # Run Component UI Tests
+          name: Run WebDriverIO Component Tests
+          command: yarn test-component:chrome
 
   deploy-storybook:
     executor: node
@@ -82,24 +85,25 @@ jobs:
           name: Deploy
           command: yarn storybook:deploy --packages packages
 
-  npm-publish:
-    executor: node
-    environment:
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
-    steps:
-      - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - install_node_dependencies
-      - run:
-          name: authenticate with npm
-          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
-      - run:
-          name: npm publish
-          command: npm publish
+  # Stopping until Circle CI credit issue is resolved
+  # npm-publish:
+  #   executor: node
+  #   environment:
+  #     # required to prevent ENOMEM errors
+  #     LERNA_ARGS: --concurrency 1
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
+  #         name: Restore Yarn Package Cache
+  #         keys:
+  #           - yarn-packages-{{ checksum "yarn.lock" }}
+  #     - install_node_dependencies
+  #     - run:
+  #         name: authenticate with npm
+  #         command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
+  #     - run:
+  #         name: npm publish
+  #         command: npm publish
 
 workflows:
   version: 2
@@ -112,13 +116,14 @@ workflows:
             branches:
               ignore: 'gh-pages'
 
-  npm-publish:
-    jobs:
-      - npm-publish:
-          context: web-core
-          filters:
-            branches:
-              only: 'master'
+  # Stopping until Circle CI credit issue is resolved
+  # npm-publish:
+  #   jobs:
+  #     - npm-publish:
+  #         context: web-core
+  #         filters:
+  #           branches:
+  #             only: 'master'
 
   deploy-storybook:
     jobs:

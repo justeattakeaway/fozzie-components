@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.0.0-beta.1
+------------------------------
+*September 3, 2020*
+
+### Changed
+- Rebasing `v0.3.0` changes into the beta branch.
+
+
+v1.0.0-beta.0
+------------------------------
+*August 27, 2020*
+
+### Changed
+- Uses `JustEatBasis` font and new fozzie font size declarations.
+
+
 v0.3.1
 ------------------------------
 *September 8, 2020*

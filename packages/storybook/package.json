@@ -1,14 +1,11 @@
 {
   "name": "@justeat/storybook",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "scripts": {
     "storybook:build": "vue-cli-service storybook:build -c config/storybook",
-    "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook",
-    "percy": "percy-storybook",
-    "snapshot": "run-s storybook:build percy"
+    "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook"
   },
   "devDependencies": {
-    "@percy/storybook": "3.3.0",
     "@storybook/addon-a11y": "6.0.5",
     "@storybook/addon-essentials": "6.0.5",
     "@storybook/addon-knobs": "6.0.5",

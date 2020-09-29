@@ -4,6 +4,30 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.0.0
+------------------------------
+*September 24, 2020*
+
+### Changed
+- Moving package out of beta now typography has been released.
+
+
+v4.0.0-beta.1
+------------------------------
+*September 3, 2020*
+
+### Changed
+- Updating footer headings to new JustEatBasis font.
+
+
+v4.0.0-beta.0
+------------------------------
+*August 27, 2020*
+
+### Changed
+- Uses `JustEatBasis` font and new fozzie font size declarations.
+
+
 v3.4.0
 ------------------------------
 *July 23, 2020*

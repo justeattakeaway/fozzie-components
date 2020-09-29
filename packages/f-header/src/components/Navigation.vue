@@ -1,5 +1,8 @@
 <template>
-    <nav class="c-nav c-nav--global">
+    <nav
+        v-if="hasNavigationLinks"
+        class="c-nav c-nav--global"
+        data-js-test="nav-container">
         <button
             :class="['c-nav-trigger c-nav-toggle is-hidden--noJS', navToggleThemeClass, {
                 'is-open': navIsOpen
@@ -174,7 +177,9 @@
                     </a>
                 </li>
 
-                <li class="c-nav-list-item c-nav-list-item--support">
+                <li
+                    v-if="showHelpLink"
+                    class="c-nav-list-item c-nav-list-item--support">
                     <a
                         :href="help.url"
                         :data-trak='`{
@@ -275,6 +280,11 @@ export default {
             default: false
         },
 
+        showHelpLink: {
+            type: Boolean,
+            default: true
+        },
+
         showLoginInfo: {
             type: Boolean,
             default: true
@@ -364,6 +374,13 @@ export default {
          */
         getAnalyticsBlob () {
             return window.localStorage.getItem('je-analytics') || false;
+        },
+
+        hasNavigationLinks () {
+            return this.showOffersLink ||
+                this.showHelpLink ||
+                this.showDeliveryEnquiry ||
+                this.showLoginInfo;
         }
     },
 
@@ -528,8 +545,8 @@ export default {
  *
  */
 
-$nav-text-size                     : 'base--scaleUp';
-$nav-text-font                     : $font-family-headings;
+$nav-text-size                     : 'body-l';
+$nav-text-size--narrow             : 'body-s';
 $nav-text-color                    : $color-link-default;
 $nav-text-color--hover             : $color-link-hover;
 $nav-text-color--narrow            : $grey--dark;
@@ -682,13 +699,12 @@ $nav-popover-padding               : spacing(x2);
             margin: 0;
             font-family: $nav-text-subFont;
             color: $nav-text-color--narrow;
-            @include font-size('base');
+            @include font-size($nav-text-size--narrow);
             font-weight: 300;
             text-decoration: none;
             border-bottom: 1px solid $grey--light;
 
             @include media('>=mid') {
-                font-family: $nav-text-font;
                 @include font-size($nav-text-size);
                 font-weight: $nav-text-weight;
                 color: $nav-text-color;
