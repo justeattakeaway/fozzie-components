@@ -6,10 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.7.0
 ------------------------------
-*September 25, 2020*
+*September 29, 2020*
 
 ### Added
 - `inlineNarrow` label style that changes label positioning based on window size.
+- `form-field` tests for `inlineNarrow` style.
+
+### Changed
+- `babel.config.js` to match other packages as it was causing `ReferenceError: regeneratorRuntime is not defined`.
 
 
 v0.6.0

@@ -1,5 +1,4 @@
 import { shallowMount } from '@vue/test-utils';
-import Vue from 'vue';
 import FormField from '../FormField.vue';
 import { DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../../constants';
 
@@ -126,7 +125,7 @@ describe('FormField', () => {
             describe('when set to `inlineNarrow`', () => {
                 const eventName = 'resize';
 
-                const resizeWindow = (width) => {
+                const resizeWindow = width => {
                     window.innerWidth = width;
                     window.dispatchEvent(new Event(eventName));
                 };
@@ -149,17 +148,17 @@ describe('FormField', () => {
                     expect(inlineLabel.exists()).toBe(false);
                 });
 
-                it('should append the label inline with input when window size is mobile', async () => {
+                it('should append the label inline with input when window size is mobile', () => {
                     // Arrange
                     const propsData = {
                         labelStyle: 'inlineNarrow',
                         labelText: 'Test Label'
                     };
 
-                    resizeWindow(750);
+                    resizeWindow(767);
 
                     // Act
-                    const wrapper = await shallowMount(FormField, { propsData });
+                    const wrapper = shallowMount(FormField, { propsData });
 
                     const defaultLabel = wrapper.find('[data-js-test="defaultLabel"]');
                     const inlineLabel = wrapper.find('[data-js-test="inlineLabel"]');
