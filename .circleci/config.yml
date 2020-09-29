@@ -70,8 +70,11 @@ jobs:
       - run:
           name: Build packages
           command: yarn build
+      - run:
+          name: Zip artifacts
+          command: zip packages/*/dist/*.js --out js-bundles.zip
       - store_artifacts:
-          path: /packages/*/dist/*.js
+          path: js-bundles.zip
 
   deploy-storybook:
     executor: node
