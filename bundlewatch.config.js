@@ -13,7 +13,8 @@ const packageNames = fs.readdirSync('packages/');
 const filteredPackages = packageNames.filter(package => !excludedPackages.includes(package));
 
 const files = filteredPackages.map(name => ({
-    path: `packages/${name}/dist/*.js`
+    path: `packages/${name}/dist/*.js`,
+    maxSize: '200kB'
 }));
 
 module.exports = {
