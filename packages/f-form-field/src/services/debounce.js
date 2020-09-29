@@ -1,12 +1,11 @@
-module.exports = function debounce (fn, delay) {
-    let timeoutID = null;
+export default function debounce (fn, delay, ...args) {
+    let timeoutId = null;
 
     return () => {
-        clearTimeout(timeoutID);
-        const args = arguments;
-        
-        timeoutID = setTimeout(() => {
+        clearTimeout(timeoutId);
+
+        timeoutId = setTimeout(() => {
             fn.apply(this, args);
         }, delay);
     };
-};
+}
