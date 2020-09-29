@@ -199,7 +199,12 @@
 <script>
 import { globalisationServices } from '@justeat/f-services';
 import { validationMixin } from 'vuelidate';
-import { required, email, minLength, maxLength } from 'vuelidate/lib/validators';
+import {
+    required,
+    email,
+    minLength,
+    maxLength
+} from 'vuelidate/lib/validators';
 import { WarningIcon, BagCelebrateIcon } from '@justeat/f-vue-icons';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
@@ -454,10 +459,9 @@ export default {
 .bag-icon {
     width: 97px;
     height: 78px;
-    margin:auto;
-    display:block;
+    margin: auto;
+    display: block;
     position: relative;
     bottom: -30px;
-    padding: auto;
 }
 </style>

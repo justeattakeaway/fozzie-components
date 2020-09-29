@@ -36,6 +36,6 @@ body {
 }
 
 .registration-form {
-    margin-top: 100px
+    margin-top: 100px;
 }
 </style>

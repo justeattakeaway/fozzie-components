@@ -5,6 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.30.0
 ------------------------------
+*September 29, 2020*
 ### Added
 - Added bag icon to registration component.
 
