@@ -16,4 +16,12 @@ const files = filteredPackages.map(name => ({
     path: `packages/${name}/dist/*.js`
 }));
 
-module.exports = { files };
+module.exports = {
+    files,
+    ci: {
+        trackBranches: [
+            'master',
+            'main'
+        ]
+    }
+};
