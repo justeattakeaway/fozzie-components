@@ -453,7 +453,7 @@ export default {
 }
 
 .c-card-padding {
-    padding-top: 30px;
+    padding-top: 35px;
 }
 
 .bag-icon {
@@ -463,5 +463,6 @@ export default {
     display: block;
     position: relative;
     bottom: -30px;
+    right: -16px;
 }
 </style>
