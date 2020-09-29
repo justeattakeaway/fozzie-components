@@ -123,15 +123,22 @@ describe('FormField', () => {
             });
 
             describe('when set to `inlineNarrow`', () => {
-                const eventName = 'resize';
+                let eventName;
+                let resizeWindow;
+                let MOBILE;
+                let DESKTOP;
 
-                const resizeWindow = width => {
-                    window.innerWidth = width;
-                    window.dispatchEvent(new Event(eventName));
-                };
+                beforeEach(() => {
+                    eventName = 'resize';
 
-                const MOBILE = 767;
-                const DESKTOP = 768;
+                    resizeWindow = width => {
+                        window.innerWidth = width;
+                        window.dispatchEvent(new Event(eventName));
+                    };
+
+                    MOBILE = 767;
+                    DESKTOP = 768;
+                });
 
                 it('should append the label above input when window size is not mobile', async () => {
                     // Arrange
@@ -148,7 +155,7 @@ describe('FormField', () => {
                     const defaultLabel = wrapper.find('[data-js-test="defaultLabel"]');
                     const inlineLabel = wrapper.find('[data-js-test="inlineLabel"]');
 
-                    // Assert                    expect(defaultLabel.exists()).toBe(true);
+                    // Assert
                     expect(defaultLabel.exists()).toBe(true);
                     expect(inlineLabel.exists()).toBe(false);
                 });
