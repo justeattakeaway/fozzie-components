@@ -26,7 +26,8 @@
                         "category": "engagement",
                         "action": "footer",
                         "label": "${icon.gtm}"
-                    }`'>
+                    }`'
+                    data-test-id="footerIcon">
                     <component
                         :is="iconChoice"
                         v-bind="icon"
