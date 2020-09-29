@@ -1,204 +1,211 @@
 <template>
-    <card
-        :data-theme-registration="theme"
-        :card-heading="title"
-        is-rounded
-        has-outline
-        is-page-content-wrapper
-        card-heading-position="center"
-        data-test-id="registration-component">
-        <p
-            v-if="shouldShowLoginLink"
-            :class="$style['c-loginLink']"
-            data-test-id="create-account-login-link">
-            {{ loginSettings.preLinkText }} <a :href="loginSettings.url">{{ loginSettings.linkText }}</a>
-        </p>
-        <form
-            type="post"
-            :class="$style['o-form']"
-            @submit.prevent="onFormSubmit"
-        >
-            <!-- TODO WCB-1031 - Extract error messages into a separate component -->
+    <div>
+        <bag-celebrate-icon :class="$style['bag-icon']" />
+        <card
+            :data-theme-registration="theme"
+            :card-heading="title"
+            is-rounded
+            has-outline
+            is-page-content-wrapper
+            card-heading-position="center"
+            data-test-id="registration-component"
+            :class="$style['c-card-padding']">
             <p
-                v-if="genericErrorMessage"
-                :class="$style['o-form-error']">
-                <warning-icon :class="$style['o-form-error-icon']" />
-                {{ genericErrorMessage }}
+                v-if="shouldShowLoginLink"
+                :class="$style['c-loginLink']"
+                data-test-id="create-account-login-link">
+                {{ loginSettings.preLinkText }} <a :href="loginSettings.url">{{ loginSettings.linkText }}</a>
             </p>
-            <form-field
-                v-model="firstName"
-                name="firstName"
-                data-test-id="input-first-name"
-                label-text="First name"
-                input-type="text"
-                label-style="inline"
-                @blur="$v.firstName.$touch">
-                <template #error>
-                    <p
-                        v-if="shouldShowFirstNameRequiredError"
-                        :class="$style['o-form-error']"
-                        data-test-id='error-first-name-empty'>
-                        <warning-icon :class="$style['o-form-error-icon']" />
-                        Please include your first name
-                    </p>
-                    <p
-                        v-if="shouldShowFirstNameMaxLengthError"
-                        :class="$style['o-form-error']"
-                        data-test-id='error-first-name-maxlength'>
-                        <warning-icon :class="$style['o-form-error-icon']" />
-                        First name exceeds 50 characters
-                    </p>
-                    <p
-                        v-if="shouldShowFirstNameInvalidCharError"
-                        :class="$style['o-form-error']"
-                        data-test-id='error-first-name-invalid'>
-                        <warning-icon :class="$style['o-form-error-icon']" />
-                        First name should only contain letters, hyphens or apostrophes
-                    </p>
-                </template>
-            </form-field>
+            <form
+                type="post"
+                :class="$style['o-form']"
+                @submit.prevent="onFormSubmit"
+            >
+                <!-- TODO WCB-1031 - Extract error messages into a separate component -->
+                <p
+                    v-if="genericErrorMessage"
+                    :class="$style['o-form-error']">
+                    <warning-icon :class="$style['o-form-error-icon']" />
+                    {{ genericErrorMessage }}
+                </p>
+                <form-field
+                    v-model="firstName"
+                    name="firstName"
+                    data-test-id="input-first-name"
+                    label-text="First name"
+                    input-type="text"
+                    label-style="inline"
+                    @blur="$v.firstName.$touch">
+                    <template #error>
+                        <p
+                            v-if="shouldShowFirstNameRequiredError"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-first-name-empty'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            Please include your first name
+                        </p>
+                        <p
+                            v-if="shouldShowFirstNameMaxLengthError"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-first-name-maxlength'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            First name exceeds 50 characters
+                        </p>
+                        <p
+                            v-if="shouldShowFirstNameInvalidCharError"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-first-name-invalid'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            First name should only contain letters, hyphens or apostrophes
+                        </p>
+                    </template>
+                </form-field>
 
-            <form-field
-                v-model="lastName"
-                name="lastName"
-                data-test-id="input-last-name"
-                label-text="Last name"
-                input-type="text"
-                label-style="inline"
-                @blur="$v.lastName.$touch">
-                <template #error>
-                    <p
-                        v-if="shouldShowLastNameRequiredError"
-                        :class="$style['o-form-error']"
-                        data-test-id='error-last-name-empty'>
-                        <warning-icon :class="$style['o-form-error-icon']" />
-                        Please include your last name
-                    </p>
-                    <p
-                        v-if="shouldShowLastNameMaxLengthError"
-                        :class="$style['o-form-error']"
-                        data-test-id='error-last-name-maxlength'>
-                        <warning-icon :class="$style['o-form-error-icon']" />
-                        Last name exceeds 50 characters
-                    </p>
-                    <p
-                        v-if="shouldShowLastNameInvalidCharError"
-                        :class="$style['o-form-error']"
-                        data-test-id='error-last-name-invalid'>
-                        <warning-icon :class="$style['o-form-error-icon']" />
-                        Last name should only contain letters, hyphens or apostrophes
-                    </p>
-                </template>
-            </form-field>
+                <form-field
+                    v-model="lastName"
+                    name="lastName"
+                    data-test-id="input-last-name"
+                    label-text="Last name"
+                    input-type="text"
+                    label-style="inline"
+                    @blur="$v.lastName.$touch">
+                    <template #error>
+                        <p
+                            v-if="shouldShowLastNameRequiredError"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-last-name-empty'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            Please include your last name
+                        </p>
+                        <p
+                            v-if="shouldShowLastNameMaxLengthError"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-last-name-maxlength'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            Last name exceeds 50 characters
+                        </p>
+                        <p
+                            v-if="shouldShowLastNameInvalidCharError"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-last-name-invalid'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            Last name should only contain letters, hyphens or apostrophes
+                        </p>
+                    </template>
+                </form-field>
 
-            <form-field
-                v-model="email"
-                name="email"
-                data-test-id="input-email"
-                label-text="Email"
-                input-type="email"
-                label-style="inline"
-                @blur="$v.email.$touch">
-                <template #error>
-                    <p
-                        v-if="shouldShowEmailRequiredError"
-                        :class="$style['o-form-error']"
-                        data-test-id='error-email-empty'>
-                        <warning-icon :class="$style['o-form-error-icon']" />
-                        Please enter your email address
-                    </p>
-                    <p
-                        v-else-if="shouldShowEmailInvalidError"
-                        :class="$style['o-form-error']"
-                        data-test-id='error-email-invalid'>
-                        <warning-icon :class="$style['o-form-error-icon']" />
-                        Please enter a valid email address
-                    </p>
-                    <p
-                        v-if="shouldShowEmailMaxLengthError"
-                        :class="$style['o-form-error']"
-                        data-test-id='error-email-maxlength'>
-                        <warning-icon :class="$style['o-form-error-icon']" />
-                        Email address exceeds 50 characters
-                    </p>
-                    <p
-                        v-else-if="shouldShowEmailAlreadyExistsError"
-                        :class="$style['o-form-error']"
-                        data-test-id='error-email-exists'>
-                        <warning-icon :class="$style['o-form-error-icon']" />
-                        Email address is already registered
-                    </p>
-                </template>
-            </form-field>
+                <form-field
+                    v-model="email"
+                    name="email"
+                    data-test-id="input-email"
+                    label-text="Email"
+                    input-type="email"
+                    label-style="inline"
+                    @blur="$v.email.$touch">
+                    <template #error>
+                        <p
+                            v-if="shouldShowEmailRequiredError"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-email-empty'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            Please enter your email address
+                        </p>
+                        <p
+                            v-else-if="shouldShowEmailInvalidError"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-email-invalid'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            Please enter a valid email address
+                        </p>
+                        <p
+                            v-if="shouldShowEmailMaxLengthError"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-email-maxlength'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            Email address exceeds 50 characters
+                        </p>
+                        <p
+                            v-else-if="shouldShowEmailAlreadyExistsError"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-email-exists'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            Email address is already registered
+                        </p>
+                    </template>
+                </form-field>
 
-            <form-field
-                v-model="password"
-                name="password"
-                data-test-id="input-password"
-                label-text="Password"
-                input-type="password"
-                label-style="inline"
-                @blur="$v.password.$touch">
-                <template #error>
-                    <p
-                        v-if="shouldShowPasswordRequiredError"
-                        :class="$style['o-form-error']"
-                        data-test-id='error-password-empty'>
-                        <warning-icon :class="$style['o-form-error-icon']" />
-                        Please enter a password
-                    </p>
-                    <p
-                        v-if="shouldShowPasswordMinLengthError"
-                        :class="$style['o-form-error']"
-                        data-test-id='error-password-minlength'>
-                        <warning-icon :class="$style['o-form-error-icon']" />
-                        Password is less than four characters
-                    </p>
-                    <p
-                        v-if="shouldShowPasswordMaxLengthError"
-                        :class="$style['o-form-error']"
-                        data-test-id='error-password-maxlength'>
-                        <warning-icon :class="$style['o-form-error-icon']" />
-                        Password exceeds 50 characters
-                    </p>
-                </template>
-            </form-field>
+                <form-field
+                    v-model="password"
+                    name="password"
+                    data-test-id="input-password"
+                    label-text="Password"
+                    input-type="password"
+                    label-style="inline"
+                    @blur="$v.password.$touch">
+                    <template #error>
+                        <p
+                            v-if="shouldShowPasswordRequiredError"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-password-empty'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            Please enter a password
+                        </p>
+                        <p
+                            v-if="shouldShowPasswordMinLengthError"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-password-minlength'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            Password is less than four characters
+                        </p>
+                        <p
+                            v-if="shouldShowPasswordMaxLengthError"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-password-maxlength'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            Password exceeds 50 characters
+                        </p>
+                    </template>
+                </form-field>
 
-            <form-button
-                data-test-id="create-account-submit-button"
-                button-style="primary"
-                is-full-width
-                :disabled="shouldDisableCreateAccountButton">
-                {{ buttonText }}
-            </form-button>
-        </form>
-        <p :class="$style['c-legal-hyperlinks']">
-            {{ copy.navLinks.termsAndConditions.prefix }}
-            <a
-                data-test-id="ts-and-cs-link"
-                :href="copy.navLinks.termsAndConditions.url"
-                target="_blank">{{ copy.navLinks.termsAndConditions.text }}</a>{{ copy.navLinks.termsAndConditions.suffix }}
-            {{ copy.navLinks.privacyPolicy.prefix }}
-            <a
-                data-test-id="privacy-policy-link"
-                :href="copy.navLinks.privacyPolicy.url"
-                target="_blank">{{ copy.navLinks.privacyPolicy.text }}</a>
-            {{ copy.navLinks.cookiesPolicy.prefix }}
-            <a
-                data-test-id="cookies-policy-link"
-                :href="copy.navLinks.cookiesPolicy.url"
-                target="_blank">{{ copy.navLinks.cookiesPolicy.text }}</a>{{ copy.navLinks.cookiesPolicy.suffix }}
-        </p>
-    </card>
+                <form-button
+                    data-test-id="create-account-submit-button"
+                    button-style="primary"
+                    is-full-width
+                    :disabled="shouldDisableCreateAccountButton">
+                    {{ buttonText }}
+                </form-button>
+            </form>
+            <p :class="$style['c-legal-hyperlinks']">
+                {{ copy.navLinks.termsAndConditions.prefix }}
+                <a
+                    data-test-id="ts-and-cs-link"
+                    :href="copy.navLinks.termsAndConditions.url"
+                    target="_blank">{{ copy.navLinks.termsAndConditions.text }}</a>{{ copy.navLinks.termsAndConditions.suffix }}
+                {{ copy.navLinks.privacyPolicy.prefix }}
+                <a
+                    data-test-id="privacy-policy-link"
+                    :href="copy.navLinks.privacyPolicy.url"
+                    target="_blank">{{ copy.navLinks.privacyPolicy.text }}</a>
+                {{ copy.navLinks.cookiesPolicy.prefix }}
+                <a
+                    data-test-id="cookies-policy-link"
+                    :href="copy.navLinks.cookiesPolicy.url"
+                    target="_blank">{{ copy.navLinks.cookiesPolicy.text }}</a>{{ copy.navLinks.cookiesPolicy.suffix }}
+            </p>
+        </card>
+    </div>
 </template>
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
 import { validationMixin } from 'vuelidate';
 import {
-    required, email, minLength, maxLength
+    required,
+    email,
+    minLength,
+    maxLength
 } from 'vuelidate/lib/validators';
-import { WarningIcon } from '@justeat/f-vue-icons';
+import { WarningIcon, BagCelebrateIcon } from '@justeat/f-vue-icons';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
@@ -223,7 +230,8 @@ export default {
         Card,
         FormButton,
         FormField,
-        WarningIcon
+        WarningIcon,
+        BagCelebrateIcon
     },
 
     mixins: [validationMixin],
@@ -442,5 +450,18 @@ export default {
         color: $blue;
         text-decoration: none;
     }
+}
+
+.c-card-padding {
+    padding-top: 30px;
+}
+
+.bag-icon {
+    width: 97px;
+    height: 78px;
+    margin: auto;
+    display: block;
+    position: relative;
+    bottom: -30px;
 }
 </style>
