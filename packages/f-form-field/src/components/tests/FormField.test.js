@@ -125,12 +125,10 @@ describe('FormField', () => {
             describe('when set to `inlineNarrow`', () => {
                 const MOBILE = 767;
                 const DESKTOP = 768;
-                let eventName;
+                const eventName = 'resize';
                 let resizeWindow;
 
                 beforeEach(() => {
-                    eventName = 'resize';
-
                     resizeWindow = width => {
                         window.innerWidth = width;
                         window.dispatchEvent(new Event(eventName));
