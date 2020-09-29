@@ -163,8 +163,8 @@ export default {
         updateWidth () {
             if (typeof (window) !== 'undefined') {
                 this.windowWidth = window.innerWidth;
-            };
-        },
+            }
+        }
     }
 };
 </script>
