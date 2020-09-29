@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -45,6 +45,7 @@
     "babel-eslint": "10.1.0",
     "babel-jest": "26.1.0",
     "babel-loader": "8.1.0",
+    "bundlewatch": "0.3.1",
     "chromedriver": "84.0.1",
     "cross-env": "7.0.2",
     "css-loader": "1.0.1",
