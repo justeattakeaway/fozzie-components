@@ -10,6 +10,7 @@ v0.7.1
 
 ### Changed
 - `debounce.js` lint issue and timeout variable name.
+- `labelStyle` test setup.
 
 
 v0.7.0
