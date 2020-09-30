@@ -465,8 +465,9 @@ export default {
 
 .bag-icon {
     @media screen and (max-width: 768px) {
-        width: 74px;
-        height: 92px;
+        width: 92px;
+        height: 74px;
+        // bottom: -42px;
     }
 
     width: 97px;
