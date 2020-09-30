@@ -69,7 +69,6 @@ jobs:
           command: yarn test-component:chrome
       - store_artifacts:
           path: axe-violations/
-          destination: axe-violations
 
   deploy-storybook:
     executor: node
