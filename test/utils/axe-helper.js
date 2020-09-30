@@ -30,6 +30,7 @@ exports.processResults = (results, componentName) => {
     
     const fileName = `${__dirname}../../../axe-violations/${componentName}-a11y-violations`;
 
+    // axe-reports can't create the CSV in CI due to permissions so we have to create the file ourselves.
     if(process.env.CIRCLECI)
     {
         exec(`touch ${fileName}`, (error, stdout, stderr) => {
