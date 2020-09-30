@@ -13,7 +13,8 @@
                 preLinkText: 'Already have an account?',
                 linkText: 'Log in',
                 url: '/login'
-            }" />
+            }"
+            class="registration-form" />
     </div>
 </template>
 
@@ -32,5 +33,9 @@ export default {
 
 body {
     margin: 0;
+}
+
+.registration-form {
+    margin-top: 100px;
 }
 </style>

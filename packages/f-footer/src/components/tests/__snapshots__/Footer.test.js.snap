@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Footer should render default component markup 1`] = `
-<footer data-theme="je" class="c-footer">
+<footer data-theme="je" data-test-id="footer-component" class="c-footer">
   <div class="c-footer-container c-footer-row c-footer-row--noPadBelowWide">
     <link-list-stub linklist="[object Object]"></link-list-stub>
     <link-list-stub linklist="[object Object]"></link-list-stub>

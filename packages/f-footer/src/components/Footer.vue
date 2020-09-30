@@ -1,7 +1,8 @@
 <template>
     <footer
         :data-theme="theme"
-        class="c-footer">
+        class="c-footer"
+        data-test-id="footer-component">
         <div
             class="c-footer-container c-footer-row c-footer-row--noPadBelowWide">
             <link-list

@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.30.0
+------------------------------
+*September 29, 2020*
+### Added
+- Added bag icon to registration component.
+
 
 v0.29.0
 ------------------------------
@@ -14,6 +20,7 @@ v0.28.0
 ------------------------------
 ### Removed
 - Contract tests + scripts
+
 
 v0.27.0
 ------------------------------
