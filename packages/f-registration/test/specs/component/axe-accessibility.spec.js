@@ -1,7 +1,6 @@
 import { AxeReports } from 'axe-reports';
 
-import getAccessibilityTestResults from '../../../../../test/utils/axe-helper.js';
-import RegistrationComponent from '../../../test-utils/component-objects/f-registration.component';
+import { getAccessibilityTestResults } from '../../../../../test/utils/axe-helper.js';
 
 describe('Axe accessibility tests', () => {
     beforeEach(() => {
