@@ -5120,8 +5120,8 @@ aws4@^1.8.0:
 
 axe-core@4.0.2:
   version "4.0.2"
-  resolved "http://packages.je-labs.com/npm/private-npm/axe-core/-/axe-core-4.0.2.tgz#c7cf7378378a51fcd272d3c09668002a4990b1cb"
-  integrity sha1-x89zeDeKUfzSctPAlmgAKkmQscs=
+  resolved "https://registry.npmjs.org/axe-core/-/axe-core-4.0.2.tgz#c7cf7378378a51fcd272d3c09668002a4990b1cb"
+  integrity sha512-arU1h31OGFu+LPrOLGZ7nB45v940NMDMEJeNmbutu57P+UFDVnkZg3e+J1I2HJRZ9hT7gO8J91dn/PMrAiKakA==
 
 axe-core@^3.5.2:
   version "3.5.5"
