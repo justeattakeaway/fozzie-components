@@ -68,7 +68,7 @@ jobs:
           name: Run WebDriverIO Component / Accessibility Tests
           command: yarn test-component:chrome
       - store_artifacts:
-          path: /axe-violations
+          path: ~/axe-violations
 
   deploy-storybook:
     executor: node
