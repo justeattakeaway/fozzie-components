@@ -1167,8 +1167,8 @@
 
 "@babel/runtime-corejs3@^7.9.6":
   version "7.11.2"
-  resolved "http://packages.je-labs.com/npm/private-npm/@babel/runtime-corejs3/-/runtime-corejs3-7.11.2.tgz#02c3029743150188edeb66541195f54600278419"
-  integrity sha1-AsMCl0MVAYjt62ZUEZX1RgAnhBk=
+  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs3/-/runtime-corejs3-7.11.2.tgz#02c3029743150188edeb66541195f54600278419"
+  integrity sha512-qh5IR+8VgFz83VBa6OkaET6uN/mJOhHONuy3m1sgF0CV6mXdPSEBdA7e1eUbVvyNtANjMbg22JUv71BaDXLY6A==
   dependencies:
     core-js-pure "^3.0.0"
     regenerator-runtime "^0.13.4"
@@ -1228,7 +1228,7 @@
 
 "@elasticprojects/abstract-cli@^11.1.0":
   version "11.3.1"
-  resolved "http://packages.je-labs.com/npm/private-npm/@elasticprojects/abstract-cli/-/abstract-cli-11.3.1.tgz#a003035eba3477960a2be7a07ecf652691b568a6"
+  resolved "https://registry.yarnpkg.com/@elasticprojects/abstract-cli/-/abstract-cli-11.3.1.tgz#a003035eba3477960a2be7a07ecf652691b568a6"
   integrity sha512-5/2JX3PVdCGRJZ3BtzhGKD7iV2+MPy20tw4yZZnFDEpteftkVkpulpaTd/IuelZnre1tgh9UZSaO2ShgXoOIUw==
 
 "@emotion/cache@^10.0.27", "@emotion/cache@^10.0.9":
@@ -2766,7 +2766,7 @@
 
 "@storybook/addon-a11y@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/addon-a11y/-/addon-a11y-6.0.22.tgz#194ddf5b050482345fa19546704d463aa489eea2"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-a11y/-/addon-a11y-6.0.22.tgz#194ddf5b050482345fa19546704d463aa489eea2"
   integrity sha512-mghO2/YhYKNOURPAAm9Ipo5q7XHoGfihomZqFFxdVPVMl1JZe5iQ6Fj0CTZEDfFqzwanZV/MVblRDEOD4zWXcg==
   dependencies:
     "@storybook/addons" "6.0.22"
@@ -2788,7 +2788,7 @@
 
 "@storybook/addon-actions@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/addon-actions/-/addon-actions-6.0.22.tgz#40dff4101274c512df1e1134a1ec4da16eca44e7"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-6.0.22.tgz#40dff4101274c512df1e1134a1ec4da16eca44e7"
   integrity sha512-yP8BCxHscKhrXha0Z2nw+8OuFJDSCBAygju2HAr915g8+mAMIlpKmlPu6QOhwY9gP/Cn9HQCmrtPzuTeV2Ogug==
   dependencies:
     "@storybook/addons" "6.0.22"
@@ -2812,7 +2812,7 @@
 
 "@storybook/addon-backgrounds@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/addon-backgrounds/-/addon-backgrounds-6.0.22.tgz#a4b02972ee57b387935c49cbeb81a174dd7dd655"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-backgrounds/-/addon-backgrounds-6.0.22.tgz#a4b02972ee57b387935c49cbeb81a174dd7dd655"
   integrity sha512-O3cU/DYO2ORaOLWINGtgpQSqS4hbXGFs5AShjrsVjSt7+G7uF83zo8UttG6zcuEYlGXAPs6/Z7oNr3OWHth/RA==
   dependencies:
     "@storybook/addons" "6.0.22"
@@ -2828,7 +2828,7 @@
 
 "@storybook/addon-controls@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/addon-controls/-/addon-controls-6.0.22.tgz#eb8fb04e7c60e5c0c8b842486564067e390214db"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-controls/-/addon-controls-6.0.22.tgz#eb8fb04e7c60e5c0c8b842486564067e390214db"
   integrity sha512-14ZzkM0h88+wSuYmupYyRYJroe3MUfmayAcMuMAKbmDxu40mRKohB353JVtqK+71X4CqPX8HIu6rDam6pi7CEQ==
   dependencies:
     "@storybook/addons" "6.0.22"
@@ -2842,7 +2842,7 @@
 
 "@storybook/addon-docs@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/addon-docs/-/addon-docs-6.0.22.tgz#286f0a6d3d7821360405ac234331092c2b32e507"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-docs/-/addon-docs-6.0.22.tgz#286f0a6d3d7821360405ac234331092c2b32e507"
   integrity sha512-/XhL0/6Cq8rT8AbBujoy3TeZXL/oIfTyhbhyq0a4+KQuvaov0SUAQ2movOu0k/WgRu0sHR9Eu3/Dcca2MGwQ8Q==
   dependencies:
     "@babel/generator" "^7.9.6"
@@ -2886,7 +2886,7 @@
 
 "@storybook/addon-essentials@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/addon-essentials/-/addon-essentials-6.0.22.tgz#0865bcf198ff28282e82f9a613f13c97561ded0b"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-essentials/-/addon-essentials-6.0.22.tgz#0865bcf198ff28282e82f9a613f13c97561ded0b"
   integrity sha512-kncZNHjEgI7OLQRa8T7R6E+ZvKrI1ZaCeGN5bA+M+nYKBz9yyFfCIZkS40pXZ1ktInpcWqOfr8JRberi0CIUgw==
   dependencies:
     "@storybook/addon-actions" "6.0.22"
@@ -2904,7 +2904,7 @@
 
 "@storybook/addon-knobs@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/addon-knobs/-/addon-knobs-6.0.22.tgz#c14f0c46317d417774446f77b1de57bb01e45031"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-knobs/-/addon-knobs-6.0.22.tgz#c14f0c46317d417774446f77b1de57bb01e45031"
   integrity sha512-y5p92f7IVOxQ/5rJnMB/BuzwNXbdtfJhV7hvBjW8OS4E95EW+HXe7+gNOE2uEbALZZbBHX43H8lYlB+QoyZXcA==
   dependencies:
     "@storybook/addons" "6.0.22"
@@ -2929,7 +2929,7 @@
 
 "@storybook/addon-links@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/addon-links/-/addon-links-6.0.22.tgz#8169033fc128eccfe33029a88373a86f1556bc5b"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-6.0.22.tgz#8169033fc128eccfe33029a88373a86f1556bc5b"
   integrity sha512-1zD2RxNcwTnPJM4650UvIUTHsoCYbo6iy6VWpzxrK8LHEst0/DZ+XQOYxH8Yy8fyMQTJzOMlTqnlhvM5skOdjQ==
   dependencies:
     "@storybook/addons" "6.0.22"
@@ -2947,7 +2947,7 @@
 
 "@storybook/addon-toolbars@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/addon-toolbars/-/addon-toolbars-6.0.22.tgz#b56c1fc3383cf1afcbf2f2ab35f84e03ace0ed45"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-toolbars/-/addon-toolbars-6.0.22.tgz#b56c1fc3383cf1afcbf2f2ab35f84e03ace0ed45"
   integrity sha512-s008Dug6xIvekaTgLCMCXI5PB2C5mdGRbZRqaBvoy5DVG7HXgJT6i8F7YDtAJDuOgqBeeLUjy4j8/5GCF8vGmw==
   dependencies:
     "@storybook/addons" "6.0.22"
@@ -2958,7 +2958,7 @@
 
 "@storybook/addon-viewport@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/addon-viewport/-/addon-viewport-6.0.22.tgz#2ecad3b0a8061f1bc8a58db13baffefa9712c195"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-viewport/-/addon-viewport-6.0.22.tgz#2ecad3b0a8061f1bc8a58db13baffefa9712c195"
   integrity sha512-Liqa+dBNLuuS4lbUFNFEcFxWLGSIcvQ8mJqbk+TOqic/Tv3R234l+EY3BlHQrzrM6YjPii/wjYj666lEwrW2dA==
   dependencies:
     "@storybook/addons" "6.0.22"
@@ -2975,7 +2975,7 @@
 
 "@storybook/addons@6.0.22", "@storybook/addons@^6.0.5":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/addons/-/addons-6.0.22.tgz#90958365dcd16cd1f71dcf1f7497c6554293b6a5"
+  resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-6.0.22.tgz#90958365dcd16cd1f71dcf1f7497c6554293b6a5"
   integrity sha512-D7GfOZ16DAyIUoNXY/aisKlXxHlk61XDIAvN102n/GGrmiNQhCKO2cuwjrmpqQGIXW/+QAsc0YUUAptEKpw9vw==
   dependencies:
     "@storybook/api" "6.0.22"
@@ -2990,7 +2990,7 @@
 
 "@storybook/api@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/api/-/api-6.0.22.tgz#ef6bbb4f06036cf09bb355fc5fd41d16ead37e23"
+  resolved "https://registry.yarnpkg.com/@storybook/api/-/api-6.0.22.tgz#ef6bbb4f06036cf09bb355fc5fd41d16ead37e23"
   integrity sha512-GfGRXAe0h5cFTwJUJ7XqhaaE4+aXk/f+QCWfuUQkipUsGhGL+KLY80OU5cqC7LDB2nbhZ2bKUaLCzXu1Qsw5pw==
   dependencies:
     "@reach/router" "^1.3.3"
@@ -3016,8 +3016,8 @@
 
 "@storybook/api@6.0.5":
   version "6.0.5"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/api/-/api-6.0.5.tgz#cee404e54b935d3cd007fea5e79e5157f9e2ab14"
-  integrity sha1-zuQE5UuTXTzQB/6l555RV/niqxQ=
+  resolved "https://registry.yarnpkg.com/@storybook/api/-/api-6.0.5.tgz#cee404e54b935d3cd007fea5e79e5157f9e2ab14"
+  integrity sha512-gpJwQG+eRxcw9KQjxj+3bRkmcIF3LXUKv3NElM5D/7UJeGFnESfyFiImbjHruwnstlyR4AxEsx3zd1DPg532yg==
   dependencies:
     "@reach/router" "^1.3.3"
     "@storybook/channels" "6.0.5"
@@ -3042,7 +3042,7 @@
 
 "@storybook/channel-postmessage@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/channel-postmessage/-/channel-postmessage-6.0.22.tgz#0a928d25fe3b87340e5670e897dc8fa4ee6ca6df"
+  resolved "https://registry.yarnpkg.com/@storybook/channel-postmessage/-/channel-postmessage-6.0.22.tgz#0a928d25fe3b87340e5670e897dc8fa4ee6ca6df"
   integrity sha512-Upa2rG9H65MPdVxT9pNeDL9VlX5VeP7bpvR/TTEf2cRCiq6SC93pAs45XPWBcD8Jhq3p5+uFDARKReb2iF49+w==
   dependencies:
     "@storybook/channels" "6.0.22"
@@ -3055,7 +3055,7 @@
 
 "@storybook/channels@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/channels/-/channels-6.0.22.tgz#4cdfee7c1581462ec872b310917003c9e4dc7224"
+  resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-6.0.22.tgz#4cdfee7c1581462ec872b310917003c9e4dc7224"
   integrity sha512-d/RlPFDq9NXA/Y3CVDsSVsWgvYiiiifxQN9hz5+y3T6MnRJPEfAPWYkbv+wLixWbDF2ULzjQHp4zcfTm6T7A4w==
   dependencies:
     core-js "^3.0.1"
@@ -3064,8 +3064,8 @@
 
 "@storybook/channels@6.0.5":
   version "6.0.5"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/channels/-/channels-6.0.5.tgz#d679601dfb63ac2d1037f431de72e6978abd785c"
-  integrity sha1-1nlgHftjrC0QN/Qx3nLml4q9eFw=
+  resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-6.0.5.tgz#d679601dfb63ac2d1037f431de72e6978abd785c"
+  integrity sha512-OvKShvkcouCDhm8iWMUwbMqSclPHlLvDex8rj+ti/ADXp08wwnjIkNjYlW90oD7m+YJWr9JUGd9EqIiMRFS17A==
   dependencies:
     core-js "^3.0.1"
     ts-dedent "^1.1.1"
@@ -3073,7 +3073,7 @@
 
 "@storybook/client-api@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/client-api/-/client-api-6.0.22.tgz#b6079d376b49eb23b69661474446ed402bdef235"
+  resolved "https://registry.yarnpkg.com/@storybook/client-api/-/client-api-6.0.22.tgz#b6079d376b49eb23b69661474446ed402bdef235"
   integrity sha512-GP9m1LW3C79EJxTGToCvBZDEApMRCl9tVXGfB9yEB0dIFC9jTwsPfpwjnhh2Imp9xJjszahSqxkhv4rAZ8C44Q==
   dependencies:
     "@storybook/addons" "6.0.22"
@@ -3096,7 +3096,7 @@
 
 "@storybook/client-logger@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/client-logger/-/client-logger-6.0.22.tgz#4e4b2c40b708b500611d5e207099a4e46e825590"
+  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-6.0.22.tgz#4e4b2c40b708b500611d5e207099a4e46e825590"
   integrity sha512-AQD2Zz7BIIwrP0/sNZMXgP/BEZo5qK1YPDl2mPppSJdFocVCYDlc6HgYPZZHtPvD5BVWAENg2NQoGBOivuMl3g==
   dependencies:
     core-js "^3.0.1"
@@ -3104,15 +3104,15 @@
 
 "@storybook/client-logger@6.0.5":
   version "6.0.5"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/client-logger/-/client-logger-6.0.5.tgz#1dc2a4f67902af3da71731010882593e918688f3"
-  integrity sha1-HcKk9nkCrz2nFzEBCIJZPpGGiPM=
+  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-6.0.5.tgz#1dc2a4f67902af3da71731010882593e918688f3"
+  integrity sha512-/HhLvpRp5JlCZEvY2hk9EvAOtILEQnEqfkG/wUQay8oacS48kQhO2ms0Lm/jfXZaOrguy2+gxKEsHGfxUsvtLA==
   dependencies:
     core-js "^3.0.1"
     global "^4.3.2"
 
 "@storybook/components@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/components/-/components-6.0.22.tgz#07b0804fb9b39787967be88d435540adddce328d"
+  resolved "https://registry.yarnpkg.com/@storybook/components/-/components-6.0.22.tgz#07b0804fb9b39787967be88d435540adddce328d"
   integrity sha512-sc7O4djNLajyJdVY4dUSO73L/+VM8IyzYKK9c5kSw4pN+l6M3EUBi4Zt/jdQc+WxSBmmriSe7aBOKrOSxBBSiA==
   dependencies:
     "@storybook/client-logger" "6.0.22"
@@ -3140,8 +3140,8 @@
 
 "@storybook/components@6.0.5":
   version "6.0.5"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/components/-/components-6.0.5.tgz#34d139efde75ebb5add9f1f273bd06ce82a92204"
-  integrity sha1-NNE5795167Wt2fHyc70GzoKpIgQ=
+  resolved "https://registry.yarnpkg.com/@storybook/components/-/components-6.0.5.tgz#34d139efde75ebb5add9f1f273bd06ce82a92204"
+  integrity sha512-NJNBIKesDMN7nZS5STpDY3c3FYAgN1Qq1X5FE60yxXUCFTRjgQmsN8WWl71PB0BJaR6IB1Jvvg/q+vLILB6u4A==
   dependencies:
     "@storybook/client-logger" "6.0.5"
     "@storybook/csf" "0.0.1"
@@ -3168,21 +3168,21 @@
 
 "@storybook/core-events@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/core-events/-/core-events-6.0.22.tgz#1bbdef9d50cea628f6f761117b6ddb9927caebf8"
+  resolved "https://registry.yarnpkg.com/@storybook/core-events/-/core-events-6.0.22.tgz#1bbdef9d50cea628f6f761117b6ddb9927caebf8"
   integrity sha512-XQplzZwC9o4OQbKPjBruIOSFGto6qtmIAuh94NaHB6Hpv8YpsDwy1fXxEr990fj/5bOXmL4YV3x1AD6fOK/1sA==
   dependencies:
     core-js "^3.0.1"
 
 "@storybook/core-events@6.0.5":
   version "6.0.5"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/core-events/-/core-events-6.0.5.tgz#455f89c4e8ed0b242c43bca9b0caf3935f01251f"
-  integrity sha1-RV+JxOjtCyQsQ7ypsMrzk18BJR8=
+  resolved "https://registry.yarnpkg.com/@storybook/core-events/-/core-events-6.0.5.tgz#455f89c4e8ed0b242c43bca9b0caf3935f01251f"
+  integrity sha512-nTC60k4yeiQ3+WW5qCFnGUNh2xxt8PYibGs3J7fboJhalvrcZUOyyybJFyQOteumQevoFIKQXE8IEXsJuXRDpQ==
   dependencies:
     core-js "^3.0.1"
 
 "@storybook/core@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/core/-/core-6.0.22.tgz#3ea911f486bbf5918976f0101627057af58d2f34"
+  resolved "https://registry.yarnpkg.com/@storybook/core/-/core-6.0.22.tgz#3ea911f486bbf5918976f0101627057af58d2f34"
   integrity sha512-VgzybAKw5Jd5HzpVukvKLj2ScZ8bzJAvhoFAab3zegNyk1bK+qUK8vYDWP5dzaINvW63zA/D5kyjfZP8T9EofQ==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.8.3"
@@ -3292,7 +3292,7 @@
 
 "@storybook/node-logger@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/node-logger/-/node-logger-6.0.22.tgz#a95bb605309baf6bd768fa57dff77760f41c7f10"
+  resolved "https://registry.yarnpkg.com/@storybook/node-logger/-/node-logger-6.0.22.tgz#a95bb605309baf6bd768fa57dff77760f41c7f10"
   integrity sha512-H5j0zjMmg6o+wQgiY1GWlgz6cciHJN5vw7/B/hUksMHOwc+30nrGa89dDouj2ze1vJfiY3AaOMrsgtuMYFXaHQ==
   dependencies:
     "@types/npmlog" "^4.1.2"
@@ -3303,14 +3303,14 @@
 
 "@storybook/postinstall@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/postinstall/-/postinstall-6.0.22.tgz#2460742e1ae7e7a9aa3f8430b9eb7b48bd4bd47b"
+  resolved "https://registry.yarnpkg.com/@storybook/postinstall/-/postinstall-6.0.22.tgz#2460742e1ae7e7a9aa3f8430b9eb7b48bd4bd47b"
   integrity sha512-7ttH4GXLBnVyk0+BEQo79jBLp9wN+52atRIaqNxrefiCa24wWc9o/Cj/MZigheOYDYYXCCFFhjHp+IOtQaEiEw==
   dependencies:
     core-js "^3.0.1"
 
 "@storybook/router@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/router/-/router-6.0.22.tgz#90dc8eb5c766b85b555cc103ac6197d7c11700be"
+  resolved "https://registry.yarnpkg.com/@storybook/router/-/router-6.0.22.tgz#90dc8eb5c766b85b555cc103ac6197d7c11700be"
   integrity sha512-Gu3PmWXaDDhDqTY/S8/ag2OCdTb0S+aD/QkXvQzSht5gt5d8M2tQxBlhXDVFNhYGRz7zQtjRmTxqT/3YX9tjrg==
   dependencies:
     "@reach/router" "^1.3.3"
@@ -3322,8 +3322,8 @@
 
 "@storybook/router@6.0.5":
   version "6.0.5"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/router/-/router-6.0.5.tgz#a7d95e48a257c592cf2a9008208d6bc60053a6d7"
-  integrity sha1-p9leSKJXxZLPKpAIII1rxgBTptc=
+  resolved "https://registry.yarnpkg.com/@storybook/router/-/router-6.0.5.tgz#a7d95e48a257c592cf2a9008208d6bc60053a6d7"
+  integrity sha512-DegPXGQDN0iYbuhQP/9YqrizbNtRUTCLyBDMB8UPJ1B1A/xxTajsOkGP7GXEicvrO+8rFn1E/k16iMwfAgAn0A==
   dependencies:
     "@reach/router" "^1.3.3"
     "@types/reach__router" "^1.3.5"
@@ -3342,7 +3342,7 @@
 
 "@storybook/source-loader@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/source-loader/-/source-loader-6.0.22.tgz#62fb842f76be1a3e4eea7451c69de8726591dae8"
+  resolved "https://registry.yarnpkg.com/@storybook/source-loader/-/source-loader-6.0.22.tgz#62fb842f76be1a3e4eea7451c69de8726591dae8"
   integrity sha512-PqtNZgcD/EEoBffftls2OsU8gF2Ioub/0Zxw8tVJOTQT2J6JB6eXkWtJQVBlRwtZdtAQStlZKKWeZeqt6pkFlQ==
   dependencies:
     "@storybook/addons" "6.0.22"
@@ -3369,7 +3369,7 @@
 
 "@storybook/theming@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/theming/-/theming-6.0.22.tgz#c50877d19c9807cc35655d78f8b5c866b861b853"
+  resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.0.22.tgz#c50877d19c9807cc35655d78f8b5c866b861b853"
   integrity sha512-aR11z70vq0G+F61PIJHW1Kt1lmA2vYxGWF1TL6rsECXNt4fN+X9ig082G0Uhag0mV/FJZdKhhpv360paJFYF2g==
   dependencies:
     "@emotion/core" "^10.0.20"
@@ -3387,8 +3387,8 @@
 
 "@storybook/theming@6.0.5":
   version "6.0.5"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/theming/-/theming-6.0.5.tgz#40fb4b89bb947d49f904a913bdd8adc2a0a07df2"
-  integrity sha1-QPtLibuUfUn5BKkTvditwqCgffI=
+  resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.0.5.tgz#40fb4b89bb947d49f904a913bdd8adc2a0a07df2"
+  integrity sha512-dPiAjN2Cj80e67dPsGYSzlxdxheKpUXrOhgQcUSAi46Vtkif96EnqtbGz1RIAv1Yg/+NTqBCOstJaeYz7y8N5A==
   dependencies:
     "@emotion/core" "^10.0.20"
     "@emotion/is-prop-valid" "^0.8.6"
@@ -3405,7 +3405,7 @@
 
 "@storybook/ui@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/ui/-/ui-6.0.22.tgz#f8aa93c66e66e99010d98a7344adf1c7a9839224"
+  resolved "https://registry.yarnpkg.com/@storybook/ui/-/ui-6.0.22.tgz#f8aa93c66e66e99010d98a7344adf1c7a9839224"
   integrity sha512-iueyQ3EnLHhbV6xWQWMoN1aenEh3jLAXFmabxrf1s/l0JKn0u6qr7BHZcu3VZJ4EJCEsh6wDFNWjaUbTpfDU5g==
   dependencies:
     "@emotion/core" "^10.0.20"
@@ -3442,7 +3442,7 @@
 
 "@storybook/vue@6.0.22":
   version "6.0.22"
-  resolved "http://packages.je-labs.com/npm/private-npm/@storybook/vue/-/vue-6.0.22.tgz#d208e126b1cc6ddf9ed0dd2a92acbe3ff2645b02"
+  resolved "https://registry.yarnpkg.com/@storybook/vue/-/vue-6.0.22.tgz#d208e126b1cc6ddf9ed0dd2a92acbe3ff2645b02"
   integrity sha512-zXfET2mEjGevwYouP8P2I0COMKZVXVpO6l3c87wU2jixqNxMx3dtx4SWBmBomAelyh5o4Du3TSKPBqRe0lXQ+w==
   dependencies:
     "@storybook/addons" "6.0.22"
@@ -4269,8 +4269,8 @@
 
 "@wdio/mocha-framework@6.4.0":
   version "6.4.0"
-  resolved "http://packages.je-labs.com/npm/private-npm/@wdio/mocha-framework/-/mocha-framework-6.4.0.tgz#2f52cfdeabd3cde7722b9a703f525e646795ecc5"
-  integrity sha1-L1LP3qvTzedyK5pwP1JeZGeV7MU=
+  resolved "https://registry.yarnpkg.com/@wdio/mocha-framework/-/mocha-framework-6.4.0.tgz#2f52cfdeabd3cde7722b9a703f525e646795ecc5"
+  integrity sha512-xRN4pblLuTBkfK/mj2wWs/R/Xkzv5I/FGxdj/X/CNlbCu+llYSjJ5acXFA06klT/LymLgV468a9b6zK42g9rVQ==
   dependencies:
     "@wdio/logger" "6.0.16"
     "@wdio/utils" "6.4.0"
@@ -4546,7 +4546,7 @@ abort-controller@^3.0.0:
 
 abstract-sdk@^8.0.0-beta.32:
   version "8.0.0-beta.37"
-  resolved "http://packages.je-labs.com/npm/private-npm/abstract-sdk/-/abstract-sdk-8.0.0-beta.37.tgz#b14b52174d7d88d9ed4d9dc24c704836737caf02"
+  resolved "https://registry.yarnpkg.com/abstract-sdk/-/abstract-sdk-8.0.0-beta.37.tgz#b14b52174d7d88d9ed4d9dc24c704836737caf02"
   integrity sha512-DDJaPhJvHY71Gf0rEZksjwR9jY6DxfHarqbUWn7SjpuvH3drmVl+DPeXFNjVx8bxN6O0yLgZ4wV0MzqJYoEPfA==
   dependencies:
     "@babel/runtime-corejs3" "^7.9.6"
@@ -7644,7 +7644,7 @@ cross-env@7.0.2:
 
 cross-fetch@^3.0.1:
   version "3.0.6"
-  resolved "http://packages.je-labs.com/npm/private-npm/cross-fetch/-/cross-fetch-3.0.6.tgz#3a4040bc8941e653e0e9cf17f29ebcd177d3365c"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.0.6.tgz#3a4040bc8941e653e0e9cf17f29ebcd177d3365c"
   integrity sha512-KBPUbqgFjzWlVcURG+Svp9TlhA5uliYtiNx/0r8nv0pdypeQCRJ9IaSIc3q/x3q8t3F75cHuwxVql1HFGHCNJQ==
   dependencies:
     node-fetch "2.6.1"
@@ -13215,8 +13215,8 @@ js-queue@2.0.0:
 
 js-sha256@^0.9.0:
   version "0.9.0"
-  resolved "http://packages.je-labs.com/npm/private-npm/js-sha256/-/js-sha256-0.9.0.tgz#0b89ac166583e91ef9123644bd3c5334ce9d0966"
-  integrity sha1-C4msFmWD6R75EjZEvTxTNM6dCWY=
+  resolved "https://registry.yarnpkg.com/js-sha256/-/js-sha256-0.9.0.tgz#0b89ac166583e91ef9123644bd3c5334ce9d0966"
+  integrity sha512-sga3MHh9sgQN2+pJ9VYZ+1LPwXOxuBJBA5nrR5/ofPfuiJBE2hnjsaN8se8JznOmGLN2p49Pe5U/ttafcs/apA==
 
 js-string-escape@^1.0.1:
   version "1.0.1"
@@ -17180,8 +17180,8 @@ prettier@^1.18.2:
 
 prettier@~2.0.5:
   version "2.0.5"
-  resolved "http://packages.je-labs.com/npm/private-npm/prettier/-/prettier-2.0.5.tgz#d6d56282455243f2f92cc1716692c08aa31522d4"
-  integrity sha1-1tVigkVSQ/L5LMFxZpLAiqMVItQ=
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.0.5.tgz#d6d56282455243f2f92cc1716692c08aa31522d4"
+  integrity sha512-7PtVymN48hGcO4fGjybyBSIWDsLU4H4XlvOHfq91pz9kkGlonzwTfYkaIEwiRg/dAJF9YlbsduBAgtYLi+8cFg==
 
 pretty-bytes@^5.2.0:
   version "5.4.1"
@@ -17623,8 +17623,8 @@ query-string@^4.1.0:
 
 query-string@^6.1.0, query-string@^6.13.1:
   version "6.13.4"
-  resolved "http://packages.je-labs.com/npm/private-npm/query-string/-/query-string-6.13.4.tgz#b35a9a3bd4955bce55f94feb0e819b3d0be6f66f"
-  integrity sha1-s1qaO9SVW85V+U/rDoGbPQvm9m8=
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.13.4.tgz#b35a9a3bd4955bce55f94feb0e819b3d0be6f66f"
+  integrity sha512-E2NPIeJoBEJGQNy3ib1k/Z/OkDBUKIo8IV2ZVwbKfoa65IS9unqWWUlLcbfU70Da0qNoxUZZA8CfKUjKLE641Q==
   dependencies:
     decode-uri-component "^0.2.0"
     split-on-first "^1.0.0"
@@ -19689,7 +19689,7 @@ store2@^2.7.1:
 
 storybook-addons-abstract@6.0.0:
   version "6.0.0"
-  resolved "http://packages.je-labs.com/npm/private-npm/storybook-addons-abstract/-/storybook-addons-abstract-6.0.0.tgz#4c2b509fee8c1d747f44ef1a1b2e622d9c13711f"
+  resolved "https://registry.yarnpkg.com/storybook-addons-abstract/-/storybook-addons-abstract-6.0.0.tgz#4c2b509fee8c1d747f44ef1a1b2e622d9c13711f"
   integrity sha512-Ea30yHwxPNztWJq3r3s8tNksKwDlCr3Wd6pI9+h2Fbeuf2xiCa0ggO2IfQkiLfZSvaNapKhqdOdFrifA9sXuIg==
   dependencies:
     "@storybook/addons" "^6.0.5"
@@ -20660,8 +20660,8 @@ tryer@^1.0.1:
 
 ts-dedent@^1.1.0:
   version "1.2.0"
-  resolved "http://packages.je-labs.com/npm/private-npm/ts-dedent/-/ts-dedent-1.2.0.tgz#6aa2229d837159bb6d635b6b233002423b91e0b0"
-  integrity sha1-aqIinYNxWbttY1trIzACQjuR4LA=
+  resolved "https://registry.yarnpkg.com/ts-dedent/-/ts-dedent-1.2.0.tgz#6aa2229d837159bb6d635b6b233002423b91e0b0"
+  integrity sha512-6zSJp23uQI+Txyz5LlXMXAHpUhY4Hi0oluXny0OgIR7g/Cromq4vDBnhtbBdyIV34g0pgwxUvnvg+jLJe4c1NA==
 
 ts-dedent@^1.1.1:
   version "1.1.1"
@@ -21154,7 +21154,7 @@ use-config@^2.0.4:
 
 use-image@^1.0.3:
   version "1.0.6"
-  resolved "http://packages.je-labs.com/npm/private-npm/use-image/-/use-image-1.0.6.tgz#f26aefc61daa8ad94515f611dfb06d8a40c9ea8f"
+  resolved "https://registry.yarnpkg.com/use-image/-/use-image-1.0.6.tgz#f26aefc61daa8ad94515f611dfb06d8a40c9ea8f"
   integrity sha512-iTM2ze8QACdiE9CoYekEOeerRDH5suCdLq6MkdCu6N6cRUHWuXMNT2hFm09nboazEFV2TwGjzlv/1mF2BsqDgw==
 
 use-isomorphic-layout-effect@^1.0.0:
@@ -21816,7 +21816,7 @@ webpack-virtual-modules@^0.2.2:
 
 webpack@4.30.0, webpack@4.36.0, "webpack@>=4 < 4.29", webpack@^4.0.0, webpack@^4.26.0, webpack@^4.43.0:
   version "4.36.0"
-  resolved "http://packages.je-labs.com/npm/private-npm/webpack/-/webpack-4.36.0.tgz#d49474e54acd6eed51c3aff70333cbd172f21101"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.36.0.tgz#d49474e54acd6eed51c3aff70333cbd172f21101"
   integrity sha512-UGcu9VQMjs9CxYfDEMe7UYkMgSVx9eSgcmj8ksveJk0b7/CxPW4B0HOk+yF0CLQg8p0sxynUS4PHQtjEDSZSmg==
   dependencies:
     "@webassemblyjs/ast" "1.8.5"
