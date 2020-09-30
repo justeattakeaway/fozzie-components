@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -41,6 +41,7 @@
     "@wdio/mocha-framework": "6.4.0",
     "@wdio/spec-reporter": "6.4.0",
     "@wdio/sync": "6.4.0",
+    "axe-core": "4.0.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
     "babel-jest": "26.1.0",

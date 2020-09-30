@@ -1,6 +1,6 @@
 import { AxeReports } from 'axe-reports';
 
-import { AxeHelper } from '../../../test-utils/helpers/axe-helper';
+import getAccessibilityTestResults from '../../../../../test/utils/axe-helper.js';
 import RegistrationComponent from '../../../test-utils/component-objects/f-registration.component';
 
 describe('Axe accessibility tests', () => {
@@ -11,7 +11,7 @@ describe('Axe accessibility tests', () => {
 
     it('should test f-registration component WCAG compliance', () => {
         // Act
-        const axeResults = AxeHelper.getAccessibilityTestResults();
+        const axeResults = getAccessibilityTestResults();
 
         // Assert
         if (axeResults.violations.length > 0) {
