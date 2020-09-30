@@ -1,0 +1,1 @@
+This directory should remain empty unless any failures occur when running the accessibility tests

@@ -65,7 +65,7 @@
                     v-model="lastName"
                     name="lastName"
                     data-test-id="input-last-name"
-                    label-text="Last name"
+                    
                     input-type="text"
                     label-style="inline"
                     @blur="$v.lastName.$touch">

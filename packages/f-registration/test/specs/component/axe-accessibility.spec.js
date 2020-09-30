@@ -1,5 +1,4 @@
-import AxeReports from 'axe-reports';
-import { getAccessibilityTestResults } from '../../../../../test/utils/axe-helper.js';
+import { getAccessibilityTestResults, processResults} from '../../../../../test/utils/axe-helper.js';
 
 describe('Axe accessibility tests', () => {
     beforeEach(() => {
@@ -13,8 +12,7 @@ describe('Axe accessibility tests', () => {
 
         // Assert
         if (axeResults.violations.length > 0) {
-            AxeReports.processResults(axeResults, 'csv', 'f-registration-a11y-violations');
-            console.error(`Expected no accessibility violations. Found: ${axeResults.violations.length}`);
+            processResults(axeResults, 'f-registration')
         }
         expect(axeResults.violations.length).toBe(0);
     });

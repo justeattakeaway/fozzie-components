@@ -1,4 +1,5 @@
 const { source } = require('axe-core');
+const AxeReports = require('axe-reports');
 
 exports.getAccessibilityTestResults =  () => {
     browser.execute(source);
@@ -22,3 +23,8 @@ exports.getAccessibilityTestResults =  () => {
         });
     });
 };
+
+exports.processResults = (results, componentName) => {    
+    AxeReports.processResults(results, 'csv',  __dirname + `../../../axe-violations/${componentName}-a11y-violations`);
+    console.error(`Expected no accessibility violations. Found: ${results.violations.length}`);
+}

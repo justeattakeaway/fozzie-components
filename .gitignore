@@ -8,9 +8,6 @@ node_modules/
 pacts/
 pact-logs/
 
-#Accessibility test artifacts
-*-a11y-violations.csv
-
 # OS or Editor folders
 ._*
 .cache
