@@ -72,7 +72,7 @@ jobs:
           command: yarn build
       - run:
           name: Zip artifacts
-          command: zip packages/*/dist/*.js --out js-bundles.zip
+          command: ls packages/*/dist/*.js | zip -@ -j js-bundles
       - store_artifacts:
           path: js-bundles.zip
 
