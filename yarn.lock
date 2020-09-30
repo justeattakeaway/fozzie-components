@@ -5128,6 +5128,11 @@ axe-core@^3.5.2:
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-3.5.5.tgz#84315073b53fa3c0c51676c588d59da09a192227"
   integrity sha512-5P0QZ6J5xGikH780pghEdbEKijCTrruK9KxtPZCFWUpef0f6GipO+xEZ5GKCb020mmqgbiNO6TcA55CriL784Q==
 
+axe-reports@1.1.11:
+  version "1.1.11"
+  resolved "https://registry.npmjs.org/axe-reports/-/axe-reports-1.1.11.tgz#e96524970f7f654040cfd8b2f977afa131f69952"
+  integrity sha512-sXBP3ytd7Nihmge60EYIT8oH0vKyc25ENIQ+fKpbuNe0s4Y5VpPSfxKqCtiYlcr68B1ZA7ysk85CTDC69p5IpQ==
+
 axios-mock-adapter@1.18.2:
   version "1.18.2"
   resolved "https://registry.yarnpkg.com/axios-mock-adapter/-/axios-mock-adapter-1.18.2.tgz#01fa9e88e692e8f1bbc1ad1200dde672486e03c7"
