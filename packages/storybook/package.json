@@ -6,11 +6,11 @@
     "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook"
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "6.0.5",
-    "@storybook/addon-essentials": "6.0.5",
-    "@storybook/addon-knobs": "6.0.5",
-    "@storybook/addon-links": "6.0.5",
-    "@storybook/vue": "6.0.5",
+    "@storybook/addon-a11y": "6.0.22",
+    "@storybook/addon-essentials": "6.0.22",
+    "@storybook/addon-knobs": "6.0.22",
+    "@storybook/addon-links": "6.0.22",
+    "@storybook/vue": "6.0.22",
     "eyeglass": "1.4.1",
     "node-sass-magic-importer": "5.3.2",
     "npm-run-all": "4.1.5",
