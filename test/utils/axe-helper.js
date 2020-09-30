@@ -28,12 +28,14 @@ exports.getAccessibilityTestResults =  () => {
 exports.processResults = (results, componentName) => {   
     console.log('Creating .CSV artifact for Axe violations')
     
-    const fileName = `/axe-violations/${componentName}-a11y-violations.csv`;
 
+    const filePath = `axe-violations/${componentName}-a11y-violations`;
     // axe-reports can't create the CSV in CI due to permissions so we have to create the file ourselves.
     if(process.env.CIRCLECI)
     {
-        exec(`touch ${fileName}`, (error, stdout, stderr) => {
+        const ciFileName = `/home/circleci/project/${filePath}.csv`;
+
+        exec(`touch ${ciFileName}`, (error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
                 return;
@@ -46,6 +48,6 @@ exports.processResults = (results, componentName) => {
         });
     }
 
-    AxeReports.processResults(results, 'csv',  `${__dirname}../../..${fileName}`);
+    AxeReports.processResults(results, 'csv',  `${__dirname}../../../${filePath}`);
     console.error(`Expected no accessibility violations. Found: ${results.violations.length}`);
 }
