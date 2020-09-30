@@ -1,5 +1,6 @@
 const { source } = require('axe-core');
 const AxeReports = require('axe-reports');
+const { exec } = require("child_process");
 
 exports.getAccessibilityTestResults =  () => {
     browser.execute(source);
@@ -25,7 +26,25 @@ exports.getAccessibilityTestResults =  () => {
 };
 
 exports.processResults = (results, componentName) => {   
-    console.log('Creating .CSV artifact for Axe violations') 
-    AxeReports.processResults(results, 'csv',  __dirname + `../../../axe-violations/${componentName}-a11y-violations`);
+    console.log('Creating .CSV artifact for Axe violations')
+    
+    const fileName = `${__dirname}../../../axe-violations/${componentName}-a11y-violations`;
+
+    if(process.env.CIRCLECI)
+    {
+        exec(`touch ${fileName}`, (error, stdout, stderr) => {
+            if (error) {
+                console.log(`error: ${error.message}`);
+                return;
+            }
+            if (stderr) {
+                console.log(`stderr: ${stderr}`);
+                return;
+            }
+            console.log(`stdout: ${stdout}`);
+        });
+    }
+
+    AxeReports.processResults(results, 'csv',  fileName);
     console.error(`Expected no accessibility violations. Found: ${results.violations.length}`);
 }
