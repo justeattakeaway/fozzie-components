@@ -124,7 +124,8 @@ $btn-disabled-bgColor               : $grey--light;
     }
 
     &[type='submit'] {
-        margin-top: spacing(x2);
+        margin-top: 32px;
+        margin-bottom: 32px;
     }
 }
 

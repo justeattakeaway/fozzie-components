@@ -10,8 +10,7 @@
         <registration
             locale="en-GB"
             :login-settings="{
-                preLinkText: 'Already have an account?',
-                linkText: 'Log in',
+                linkText: 'Already on Just Eat?',
                 url: '/login'
             }"
             class="registration-form" />

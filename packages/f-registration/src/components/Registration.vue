@@ -10,12 +10,12 @@
             card-heading-position="center"
             data-test-id="registration-component"
             :class="$style['c-card-padding']">
-            <p
+            <div
                 v-if="shouldShowLoginLink"
                 :class="$style['c-loginLink']"
                 data-test-id="create-account-login-link">
-                {{ loginSettings.preLinkText }} <a :href="loginSettings.url">{{ loginSettings.linkText }}</a>
-            </p>
+                <a :href="loginSettings.url">{{ loginSettings.linkText }}</a>
+            </div>
             <form
                 type="post"
                 :class="$style['o-form']"
@@ -243,11 +243,11 @@ export default {
         },
         title: {
             type: String,
-            default: 'Create Account'
+            default: 'Create account'
         },
         buttonText: {
             type: String,
-            default: 'Create Account'
+            default: 'Create account'
         },
         createAccountUrl: {
             type: String,
@@ -440,29 +440,43 @@ export default {
 .c-loginLink {
     text-align: center;
     a {
+        font-weight: bold;
         color: $blue;
         text-decoration: none;
     }
 }
 
 .c-legal-hyperlinks {
+    text-align: center;
+    padding-bottom:48px;
+    margin-top: 8px;
+
     a {
+        font-weight: bold;
         color: $blue;
         text-decoration: none;
     }
 }
 
 .c-card-padding {
-    padding-top: 35px;
+    padding-top: 48px;
+    padding-bottom: 8px;
 }
 
 .bag-icon {
+    @media screen and (max-width: 768px) {
+        width: 74px;
+        height: 92px;
+    }
+
     width: 97px;
     height: 78px;
     margin: auto;
     display: block;
     position: relative;
-    bottom: -30px;
+    bottom: -36px;
     right: -16px;
+    border: black;
 }
+
 </style>
