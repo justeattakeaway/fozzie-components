@@ -1,7 +1,9 @@
-import { source } from 'axe-core';
+const { source } = require('axe-core');
 
-export default function getAccessibilityTestResults () {
+exports.getAccessibilityTestResults =  () => {
     browser.execute(source);
+
+    // https://github.com/dequelabs/axe-core/blob/develop/doc/API.md
 
     return browser.executeAsync(done => {
         const options = {
@@ -14,14 +16,9 @@ export default function getAccessibilityTestResults () {
             }
         };
 
-        const { axe } = window;
-        if (!axe) {
-            throw new Error('Unable to find axe-core');
-        }
-
         axe.run(document, options, (err, results) => {
             if (err) throw err;
             done(results);
         });
     });
-}
+};
