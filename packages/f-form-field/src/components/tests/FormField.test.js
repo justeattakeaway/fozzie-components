@@ -123,21 +123,16 @@ describe('FormField', () => {
             });
 
             describe('when set to `inlineNarrow`', () => {
-                let eventName;
+                const MOBILE = 767;
+                const DESKTOP = 768;
+                const eventName = 'resize';
                 let resizeWindow;
-                let MOBILE;
-                let DESKTOP;
 
                 beforeEach(() => {
-                    eventName = 'resize';
-
                     resizeWindow = width => {
                         window.innerWidth = width;
                         window.dispatchEvent(new Event(eventName));
                     };
-
-                    MOBILE = 767;
-                    DESKTOP = 768;
                 });
 
                 it('should append the label above input when window size is not mobile', async () => {
