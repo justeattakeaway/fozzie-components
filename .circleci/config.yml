@@ -71,10 +71,10 @@ jobs:
           name: Build packages
           command: yarn build
       - run:
-          name: Zip artifacts
-          command: ls packages/*/dist/*.js | zip -@ -j js-bundles
+          name: Copy bundles
+          command: mkdir artifacts && cp packages/*/dist/*.js artifacts
       - store_artifacts:
-          path: js-bundles.zip
+          path: artifacts
 
   deploy-storybook:
     executor: node
