@@ -23,6 +23,10 @@
         margin-bottom: 16px;
     }
 
+    svg.sidebar-svg-icon {
+        display: none;
+    }
+
     [data-title] a {
         font-size: 16px;
         margin-bottom: 8px;
@@ -31,30 +35,30 @@
 
 <script>
 (function () {
-    var fontUrls = 'url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff2") format("woff2"), url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff") format("woff")';
+    const fontUrls = 'url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff2") format("woff2"), url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff") format("woff")';
 
-    if('fonts' in document ) {
-        var bold = new FontFace('JustEatBasis', fontUrls, { weight: '600' });
+    if ('fonts' in document) {
+        const bold = new FontFace('JustEatBasis', fontUrls, { weight: '600' });
 
         Promise.all([bold.load()])
-            .then(function (fonts) {
-                fonts.forEach(function (font) {
+            .then(fonts => {
+                fonts.forEach(font => {
                     document.fonts.add(font);
                 });
             })
-            .then(function () {
+            .then(() => {
                 document.documentElement.classList.add('webfonts-loaded');
             });
     }
 
     // This next block is for IE11 and old Edge support, which don't support the new Font loading API
-    if(!('fonts' in document) && 'head' in document) {
+    if (!('fonts' in document) && 'head' in document) {
         // Awkwardly dump the second stage @font-face blocks in the head
-        var style = document.createElement('style');
+        const style = document.createElement('style');
         // Note: Edge supports WOFF2
-        style.innerHTML = '@font-face { font-family: JustEatBasis; font-weight: 600; src: ' + fontUrls + '; }';
+        style.innerHTML = `@font-face { font-family: JustEatBasis; font-weight: 600; src: ${fontUrls}; }`;
         document.head.appendChild(style);
         document.documentElement.classList.add('webfonts-loaded');
     }
-})();
+}());
 </script>
