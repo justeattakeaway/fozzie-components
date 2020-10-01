@@ -1,4 +1,5 @@
 import { getAccessibilityTestResults, processResults} from '../../../../../test/utils/axe-helper.js';
+import RegistrationComponent from '../../../test-utils/component-objects/f-registration.component';
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
@@ -32,7 +33,7 @@ describe('Accessibility tests', () => {
 
         // Assert
         if (axeResults.violations.length > 0) {
-            processResults(axeResults, 'f-registration')
+            processResults(axeResults, 'f-registration-with-errors')
         }
         expect(axeResults.violations.length).toBe(0);
     });

@@ -33,6 +33,8 @@ exports.processResults = (results, componentName) => {
     // axe-reports can't create the CSV in CI due to permissions so we have to create the file ourselves.
     if(process.env.CIRCLECI)
     {
+        console.log(`current directory is: ${process.cwd()}`);
+        console.log(`working directory is: ${process.env.PWD}`);
         const ciFileName = `/home/circleci/project/${filePath}.csv`;
 
         exec(`touch ${ciFileName}`, (error, stdout, stderr) => {
