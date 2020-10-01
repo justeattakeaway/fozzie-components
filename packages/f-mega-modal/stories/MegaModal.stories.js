@@ -3,7 +3,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import MegaModal from '../src/components/MegaModal.vue';
 
 export default {
-    title: 'Components/Atoms',
+    title: 'Components/Atoms/f-mega-modal',
 
     decorators: [
         withKnobs,
@@ -101,4 +101,4 @@ export const MegaModalComponent = () => ({
     `
 });
 
-MegaModalComponent.storyName = 'f-mega-modal';
+MegaModalComponent.storyName = 'Example';
