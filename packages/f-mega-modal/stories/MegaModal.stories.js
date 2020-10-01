@@ -3,12 +3,18 @@ import { withA11y } from '@storybook/addon-a11y';
 import MegaModal from '../src/components/MegaModal.vue';
 
 export default {
-    title: 'Components/Atoms',
+    title: 'Components/Atoms/f-mega-modal',
 
     decorators: [
         withKnobs,
         withA11y
-    ]
+    ],
+
+    parameters: {
+        abstract: {
+            url: 'https://share.goabstract.com/733ca894-a4bb-43e3-a2b1-dd27ff6d00c4'
+        }
+    }
 };
 
 export const MegaModalComponent = () => ({
@@ -95,4 +101,4 @@ export const MegaModalComponent = () => ({
     `
 });
 
-MegaModalComponent.storyName = 'f-mega-modal';
+MegaModalComponent.storyName = 'Example';
