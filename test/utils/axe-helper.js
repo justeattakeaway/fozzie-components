@@ -29,27 +29,35 @@ exports.processResults = (results, componentName) => {
     console.log('Creating .CSV artifact for Axe violations')
     
 
-    const filePath = `axe-violations/${componentName}-a11y-violations`;
+    const fileName = `${componentName}-a11y-violations`;
+    const localFilePath = `${__dirname}../../../axe-violations/${fileName}`;
     // axe-reports can't create the CSV in CI due to permissions so we have to create the file ourselves.
     if(process.env.CIRCLECI)
     {
-        console.log(`current directory is: ${process.cwd()}`);
-        console.log(`working directory is: ${process.env.PWD}`);
-        const ciFileName = `/home/circleci/project/${filePath}.csv`;
+        const ciFilePath = `/home/circleci/project/axe-violations/${fileName}`;
 
-        exec(`touch ${ciFileName}`, (error, stdout, stderr) => {
-            if (error) {
-                console.log(`error: ${error.message}`);
-                return;
+        try {
+            if (!fs.existsSync(ciFileName)) {
+                exec(`touch ${ciFileName}`, (error, stdout, stderr) => {
+                    if (error) {
+                        console.log(`error: ${error.message}`);
+                        return;
+                    }
+                    if (stderr) {
+                        console.log(`stderr: ${stderr}`);
+                        return;
+                    }
+                    console.log(`stdout: ${stdout}`);
+                });
             }
-            if (stderr) {
-                console.log(`stderr: ${stderr}`);
-                return;
-            }
-            console.log(`stdout: ${stdout}`);
-        });
+          } catch(err) {
+            console.error(err)
+          }
+
+        AxeReports.processResults(results, 'csv', ciFilePath, false);
     }
 
-    AxeReports.processResults(results, 'csv',  `${__dirname}../../../${filePath}`);
+        AxeReports.processResults(results, 'csv', localFilePath, false);
+
     console.error(`Expected no accessibility violations. Found: ${results.violations.length}`);
 }

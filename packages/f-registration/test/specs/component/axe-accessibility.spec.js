@@ -33,7 +33,7 @@ describe('Accessibility tests', () => {
 
         // Assert
         if (axeResults.violations.length > 0) {
-            processResults(axeResults, 'f-registration-with-errors')
+            processResults(axeResults, 'f-registration')
         }
         expect(axeResults.violations.length).toBe(0);
     });
