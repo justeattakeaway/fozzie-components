@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.32.0
+------------------------------
+*October 2, 2020*
+### Added
+- Emit CreateAccountFailure event when form is submitted for validation fails
+
+### Changed
+- Password field has no max length requirement
+- Refactored unit tests to ensure failure event is emitted because of validation errors and not service failures
+
+
 v0.30.0
 ------------------------------
 *September 29, 2020*
