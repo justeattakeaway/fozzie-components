@@ -1,4 +1,4 @@
-import { getAccessibilityTestResults, processResults} from '../../../../../test/utils/axe-helper.js';
+import { getAccessibilityTestResults, processResults } from '../../../../../test/utils/axe-helper';
 import RegistrationComponent from '../../../test-utils/component-objects/f-registration.component';
 
 describe('Accessibility tests', () => {
@@ -21,11 +21,11 @@ describe('Accessibility tests', () => {
     it('a11y - should test f-registration component error messages are WCAG compliance', () => {
         // Arrange
         const userInfo = {
-                    firstName: '',
-                    lastName: '',
-                    email: '',
-                    password: ''
-                };
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: ''
+        };
         RegistrationComponent.submitRegistrationForm(userInfo);
 
         // Act
@@ -33,7 +33,7 @@ describe('Accessibility tests', () => {
 
         // Assert
         if (axeResults.violations.length > 0) {
-            processResults(axeResults, 'f-registration')
+            processResults(axeResults, 'f-registration');
         }
         expect(axeResults.violations.length).toBe(0);
     });
