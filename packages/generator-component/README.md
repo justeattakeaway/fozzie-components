@@ -38,3 +38,12 @@
 ## Development
 
 In order to develop the `generator-component`, you basically need to follow the instructions above and verify you're seeing what you expected to see in your newly created component.
+
+
+## Testing
+If your component does not require component tests (see `test/component.README.md for guidance`), please delete the following scripts in `package.json`:
+
+  "test-component:chrome"
+  "test:wait-for-server"
+  "webdriver:delay:chrome"
+  "webdriver:start:chrome"

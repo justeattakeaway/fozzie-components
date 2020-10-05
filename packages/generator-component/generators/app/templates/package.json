@@ -4,8 +4,7 @@
   "version": "0.1.0",
   "main": "dist/f-<%= name.default %>.umd.min.js",
   "files": [
-    "dist",
-    "test-utils"
+    "dist"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-<%= name.default %>",
   "contributors": [
