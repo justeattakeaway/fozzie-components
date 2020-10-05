@@ -2,6 +2,9 @@ const { source } = require('axe-core');
 const AxeReports = require('axe-reports');
 const { exec } = require("child_process");
 
+/**
+ * Runs the WCAG accessibility tests on the curent page of the global browser
+ */
 exports.getAccessibilityTestResults =  () => {
     browser.execute(source);
 
@@ -25,6 +28,11 @@ exports.getAccessibilityTestResults =  () => {
     });
 };
 
+/**
+ * Creates a CSV build artifact of the pages accessibility violations.
+ * @param {Object} results - The accessibility violations.
+ * @param {String} componentName - Name of the component that was tested.
+ */
 exports.processResults = (results, componentName) => 
     console.log('Creating .CSV artifact for Axe violations')
 
