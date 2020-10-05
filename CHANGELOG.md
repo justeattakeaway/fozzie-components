@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.3.0
+------------------------------
+*October 5, 2020*
+
+### Added
+- Axe packages for running a11y tests in any component.
+
 
 v2.2.0
 ------------------------------
