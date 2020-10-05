@@ -7,7 +7,7 @@ v0.32.0
 ------------------------------
 *October 2, 2020*
 ### Added
-- Emit CreateAccountFailure event when form is submitted for validation fails
+- Emit CreateAccountFailure event when form is submitted with validation errors
 
 ### Changed
 - Password field has no max length requirement
