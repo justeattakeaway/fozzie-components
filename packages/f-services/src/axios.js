@@ -131,12 +131,15 @@ const setupResponseTimeRecording = ({ interceptors }, callback) => {
 const createClient = ({
     baseURL = '',
     headers,
+    headerTransform,
     config,
     responseCallback = false
 } = {}) => {
     const instance = axios.create({
         baseURL,
-        headers: objectToAlternateCasing(headers, upperKebabCase),
+        headers: headerTransform
+            ? headerTransform(headers)
+            : objectToAlternateCasing(headers, upperKebabCase),
         timeout: getTimeout(),
         ...config
     });
@@ -153,12 +156,14 @@ const createClient = ({
  */
 const createCamelCaseClient = ({
     baseURL,
-    headers
+    headers,
+    headerTransform
 } = {
     baseURL: ''
 }) => createClient({
     baseURL,
     headers,
+    headerTransform,
     config: {
         transformResponse: [
             ...axios.defaults.transformResponse,
