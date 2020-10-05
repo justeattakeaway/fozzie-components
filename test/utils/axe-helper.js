@@ -25,9 +25,8 @@ exports.getAccessibilityTestResults =  () => {
     });
 };
 
-exports.processResults = (results, componentName) => {   
+exports.processResults = (results, componentName) => 
     console.log('Creating .CSV artifact for Axe violations')
-    
 
     const fileName = `${componentName}-a11y-violations`;
     const localFilePath = `${__dirname}../../../axe-violations/${fileName}`;
@@ -56,8 +55,10 @@ exports.processResults = (results, componentName) => {
 
         AxeReports.processResults(results, 'csv', ciFilePath, false);
     }
-
+    else
+    {
         AxeReports.processResults(results, 'csv', localFilePath, false);
+    }   
 
     console.error(`Expected no accessibility violations. Found: ${results.violations.length}`);
 }
