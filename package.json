@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -13,7 +13,7 @@
     "storybook:serve": "lerna run storybook:serve",
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
-    "test-component:chrome": "lerna run test-component:chrome --concurrency 1",
+    "test-component:chrome": "lerna run test-component:chrome --concurrency 1 --stream",
     "test:consumer": "lerna run test:consumer",
     "local:tests": "yarn test && yarn test-component:chrome"
   },
@@ -42,6 +42,8 @@
     "@wdio/mocha-framework": "6.4.0",
     "@wdio/spec-reporter": "6.4.0",
     "@wdio/sync": "6.4.0",
+    "axe-core": "4.0.2",
+    "axe-reports": "1.1.11",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
     "babel-jest": "26.1.0",
