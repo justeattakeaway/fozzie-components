@@ -5111,10 +5111,20 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.10.1.tgz#e1e82e4f3e999e2cfd61b161280d16a111f86428"
   integrity sha512-zg7Hz2k5lI8kb7U32998pRRFin7zJlkfezGJjUc2heaD4Pw2wObakCDVzkKztTm/Ln7eiVvYsjqak0Ed4LkMDA==
 
+axe-core@4.0.2:
+  version "4.0.2"
+  resolved "https://registry.npmjs.org/axe-core/-/axe-core-4.0.2.tgz#c7cf7378378a51fcd272d3c09668002a4990b1cb"
+  integrity sha512-arU1h31OGFu+LPrOLGZ7nB45v940NMDMEJeNmbutu57P+UFDVnkZg3e+J1I2HJRZ9hT7gO8J91dn/PMrAiKakA==
+
 axe-core@^3.5.2:
   version "3.5.5"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-3.5.5.tgz#84315073b53fa3c0c51676c588d59da09a192227"
   integrity sha512-5P0QZ6J5xGikH780pghEdbEKijCTrruK9KxtPZCFWUpef0f6GipO+xEZ5GKCb020mmqgbiNO6TcA55CriL784Q==
+
+axe-reports@1.1.11:
+  version "1.1.11"
+  resolved "https://registry.npmjs.org/axe-reports/-/axe-reports-1.1.11.tgz#e96524970f7f654040cfd8b2f977afa131f69952"
+  integrity sha512-sXBP3ytd7Nihmge60EYIT8oH0vKyc25ENIQ+fKpbuNe0s4Y5VpPSfxKqCtiYlcr68B1ZA7ysk85CTDC69p5IpQ==
 
 axios-mock-adapter@1.18.2:
   version "1.18.2"
@@ -5124,7 +5134,7 @@ axios-mock-adapter@1.18.2:
     fast-deep-equal "^3.1.1"
     is-buffer "^2.0.3"
 
-axios@0.19.2, axios@^0.19.2:
+axios@0.19.2, axios@^0.19.0, axios@^0.19.2:
   version "0.19.2"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
   integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
@@ -6116,6 +6126,22 @@ builtins@^1.0.3:
   resolved "https://registry.yarnpkg.com/builtins/-/builtins-1.0.3.tgz#cb94faeb61c8696451db36534e1422f94f0aee88"
   integrity sha1-y5T662HIaWRR2zZTThQi+U8K7og=
 
+bundlewatch@0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/bundlewatch/-/bundlewatch-0.3.1.tgz#1d367a9878c9306b5ec5f23cab2eb8178664f758"
+  integrity sha512-yVuOHljZCxRrDgujRn7GED+7Ms8G7hQJmP8vtQWIquDwDfocJH6RdRX42mqDWhMXGdsT3qhB1GYJ5q5zFZ0AEA==
+  dependencies:
+    axios "^0.19.0"
+    bytes "^3.0.0"
+    chalk "^4.0.0"
+    ci-env "^1.14.0"
+    commander "^5.0.0"
+    glob "^7.1.2"
+    gzip-size "^5.1.1"
+    jsonpack "^1.1.5"
+    lodash.merge "^4.6.1"
+    read-pkg-up "^7.0.1"
+
 byline@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/byline/-/byline-5.0.0.tgz#741c5216468eadc457b03410118ad77de8c1ddb1"
@@ -6629,6 +6655,11 @@ chromedriver@84.0.1:
     https-proxy-agent "^5.0.0"
     mkdirp "^1.0.4"
     tcp-port-used "^1.0.1"
+
+ci-env@^1.14.0:
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/ci-env/-/ci-env-1.16.0.tgz#e97f3b5001a8daf7da6e46f418bc6892a238704d"
+  integrity sha512-ucF9caQEX5wQlY449KZBIJPx91+kRg9tJ3tWSc4+KzrvC5KNiPm/3g1noP8VhdI3046+Vw3jLmKAD0fjCRJTmw==
 
 ci-info@^1.5.0:
   version "1.6.0"
@@ -10857,7 +10888,7 @@ gulp-rename@1.2.2:
   resolved "https://registry.yarnpkg.com/gulp-rename/-/gulp-rename-1.2.2.tgz#3ad4428763f05e2764dec1c67d868db275687817"
   integrity sha1-OtRCh2PwXidk3sHGfYaNsnVoeBc=
 
-gzip-size@5.1.1, gzip-size@^5.0.0:
+gzip-size@5.1.1, gzip-size@^5.0.0, gzip-size@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-5.1.1.tgz#cb9bee692f87c0612b232840a873904e4c135274"
   integrity sha512-FNHi6mmoHvs1mxZAds4PpdCS6QG8B4C1krxJsMutgxl5t3+GlRTzzI3NEkifXx2pVsOvJdOGSmIgDhQ55FwdPA==
@@ -13308,6 +13339,11 @@ jsonify@~0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
   integrity sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=
+
+jsonpack@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/jsonpack/-/jsonpack-1.1.5.tgz#d42b0dcfd91ac58ef3110f96d2c599404c3dc27c"
+  integrity sha1-1CsNz9kaxY7zEQ+W0sWZQEw9wnw=
 
 jsonparse@^1.2.0:
   version "1.3.1"

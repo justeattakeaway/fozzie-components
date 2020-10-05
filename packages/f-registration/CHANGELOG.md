@@ -10,6 +10,14 @@ v0.32.0
 - Use the latest version of `f-form-field` to display form labels on desktop.
 
 
+v0.31.0
+------------------------------
+*September 30, 2020*
+
+### Added
+- Accessibility tests that run as part of the pipeline
+
+
 v0.30.0
 ------------------------------
 *September 29, 2020*
