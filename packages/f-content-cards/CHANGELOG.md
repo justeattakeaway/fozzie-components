@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.1.0-beta.1
 ------------------------------
-*September 23, 2020*
+*October 5, 2020*
 
 ### Added
 - `@custom-cards-callback` event dispatched on mount to expose a callback for consuming code to inject
