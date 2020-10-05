@@ -1667,13 +1667,6 @@
   dependencies:
     qwery "4.0.0"
 
-"@justeat/f-form-field@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-0.5.0.tgz#ee65b10978c049aaf42346a3b8d637234b60cf2a"
-  integrity sha512-SkzwIyFRb+nJX0M3rCmw9X1yf5m4FHoD05dtwrww6fH0H6ojq0dFbryVRAvDuyYd0/d7ftgy+muQUxZldgg9hw==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
 "@justeat/f-icons@2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.2.0.tgz#843f06e0cfd21d9f6676b2a21be5ceb12b4184db"
