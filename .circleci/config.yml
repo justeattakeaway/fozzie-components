@@ -67,6 +67,9 @@ jobs:
       - run: # Run Component UI Tests
           name: Run WebDriverIO Component Tests
           command: yarn test-component:chrome
+      - run:
+          name: Run Bundlewatch checks
+          command: yarn bundlewatch
 
   deploy-storybook:
     executor: node
