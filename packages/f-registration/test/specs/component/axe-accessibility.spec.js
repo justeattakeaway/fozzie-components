@@ -17,24 +17,4 @@ describe('Accessibility tests', () => {
         }
         expect(axeResults.violations.length).toBe(0);
     });
-
-    it('a11y - should test f-registration component error messages are WCAG compliance', () => {
-        // Arrange
-        const userInfo = {
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: ''
-        };
-        RegistrationComponent.submitRegistrationForm(userInfo);
-
-        // Act
-        const axeResults = getAccessibilityTestResults();
-
-        // Assert
-        if (axeResults.violations.length > 0) {
-            processResults(axeResults, 'f-registration');
-        }
-        expect(axeResults.violations.length).toBe(0);
-    });
 });
