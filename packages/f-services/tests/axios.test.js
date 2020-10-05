@@ -77,6 +77,63 @@ describe('getNetworkDetails', () => {
     });
 });
 
+describe('createClient', () => {
+    describe('headers', () => {
+        it('should transform header keys to title case', async () => {
+            // Arrange
+            const headers = {
+                'accept-language': 'en-GB'
+            };
+
+            // Act
+            const client = axiosServices.createClient({
+                headers
+            });
+
+            // Assert
+            expect(client.defaults.headers['accept-language']).toBeUndefined();
+            expect(client.defaults.headers['Accept-Language']).toBe('en-GB');
+        });
+
+        it('should transform header keys underscores to dashes', async () => {
+            // Arrange
+            const headers = {
+                // eslint-disable-next-line camelcase
+                accept_language: 'en-GB'
+            };
+
+            // Act
+            const client = axiosServices.createClient({
+                headers
+            });
+
+            // Assert
+            expect(client.defaults.headers.accept_language).toBeUndefined();
+            expect(client.defaults.headers['Accept-Language']).toBe('en-GB');
+        });
+
+        describe('with custom header transforms', () => {
+            it('should apply custom transform if specified', async () => {
+                // Arrange
+                const headers = {
+                    // eslint-disable-next-line camelcase
+                    accept_language: 'en-GB'
+                };
+                const headerTransform = h => h;
+
+                // Act
+                const client = axiosServices.createClient({
+                    headers,
+                    headerTransform
+                });
+
+                // Assert
+                expect(client.defaults.headers.accept_language).toBe('en-GB');
+                expect(client.defaults.headers['Accept-Language']).toBeUndefined();
+            });
+        });
+    });
+});
 
 describe('setupResponseTimeRecording', () => {
     it.each([

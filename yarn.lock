@@ -1674,14 +1674,6 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
-"@justeat/f-icons@2.0.0-beta.9":
-  version "2.0.0-beta.9"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.0.0-beta.9.tgz#af5c16c8562fd62d4c456c18f0773f68c796c625"
-  integrity sha512-u8OqLUPSL6L7ZOlmPwsSXHGBqf4cydfVdY/FHQ1r72L/vC3ifhIolYvm43Cw6TqgDbzrnbeQqoBO3n9HZiL5LA==
-  dependencies:
-    classnames "2.2.5"
-    core-js "3.1.3"
-
 "@justeat/f-icons@2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.2.0.tgz#843f06e0cfd21d9f6676b2a21be5ceb12b4184db"
@@ -1752,14 +1744,6 @@
   integrity sha512-wQGUfNzFy0Q111S/uYeeU1AFll5Py9F1QaNl6laQXHa1DCv1XI2u779OLHICDsn5LEW+TMvwDeQVtyYUPbIu8w==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
-
-"@justeat/f-vue-icons@1.0.0-beta.5":
-  version "1.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.0.0-beta.5.tgz#b38372e2c4eca1cf51478fe2e1553d5c50a8ff38"
-  integrity sha512-Lfxq7XAxoy1e9efVH3rFpHw0gLKcJN0C3GVdf7LeE/VSMOKl7j/yiG42tyTdM/3x7QSUsONr+HONe0+NfWgsZg==
-  dependencies:
-    "@justeat/f-icons" "2.0.0-beta.9"
-    babel-helper-vue-jsx-merge-props "^2.0.3"
 
 "@justeat/f-vue-icons@1.2.0":
   version "1.2.0"
@@ -4162,23 +4146,13 @@
     loglevel-plugin-prefix "^0.8.4"
     strip-ansi "^6.0.0"
 
-"@wdio/logger@6.4.7":
-  version "6.4.7"
-  resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-6.4.7.tgz#6d83033a0d7ef20f3b2cc2420956105903a6a4e7"
-  integrity sha512-Mm/rsRa/1u/l8/IrNKM2c9tkvLE90i83d3KZ0Ujh4cicYJv+lNi9whsCi+p3QNFCo64nJ6bfC+0Ho5VgD3MiKw==
+"@wdio/mocha-framework@6.4.0":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@wdio/mocha-framework/-/mocha-framework-6.4.0.tgz#2f52cfdeabd3cde7722b9a703f525e646795ecc5"
+  integrity sha512-xRN4pblLuTBkfK/mj2wWs/R/Xkzv5I/FGxdj/X/CNlbCu+llYSjJ5acXFA06klT/LymLgV468a9b6zK42g9rVQ==
   dependencies:
-    chalk "^4.0.0"
-    loglevel "^1.6.0"
-    loglevel-plugin-prefix "^0.8.4"
-    strip-ansi "^6.0.0"
-
-"@wdio/mocha-framework@^6.4.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@wdio/mocha-framework/-/mocha-framework-6.5.0.tgz#d401ad4e31a967ce3497b2559d474b61a9df77bf"
-  integrity sha512-KkngBftMbFZC8+QGwfWeZOYcjh/knk7lvvOU9IkRsuf6Kip8fx4I/Jw9Bv0bstSNRpctBkpC5iBx2HsPnLfFEQ==
-  dependencies:
-    "@wdio/logger" "6.4.7"
-    "@wdio/utils" "6.5.0"
+    "@wdio/logger" "6.0.16"
+    "@wdio/utils" "6.4.0"
     expect-webdriverio "^1.1.5"
     mocha "^8.0.1"
 
@@ -4258,13 +4232,6 @@
   integrity sha512-sAVBbgQjUmvbvkQ/EyWIUSDoebtiZewmf6wb6Pt6EZfaTm4hul30Txd+IXfazhuxp701PskwufkMWzrQIXhpKw==
   dependencies:
     "@wdio/logger" "6.0.16"
-
-"@wdio/utils@6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@wdio/utils/-/utils-6.5.0.tgz#46398b08e6741eb97a57089b2c909622c480ea22"
-  integrity sha512-k5RxRj/re/BbK76SjWSmyhJFHWnXD74vl/doCAQNuOaKFBd2dqMCs3GiFjYCyLcU37XGMAnRvI3tKHflyLGJYw==
-  dependencies:
-    "@wdio/logger" "6.4.7"
 
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
@@ -5151,10 +5118,20 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.10.1.tgz#e1e82e4f3e999e2cfd61b161280d16a111f86428"
   integrity sha512-zg7Hz2k5lI8kb7U32998pRRFin7zJlkfezGJjUc2heaD4Pw2wObakCDVzkKztTm/Ln7eiVvYsjqak0Ed4LkMDA==
 
+axe-core@4.0.2:
+  version "4.0.2"
+  resolved "https://registry.npmjs.org/axe-core/-/axe-core-4.0.2.tgz#c7cf7378378a51fcd272d3c09668002a4990b1cb"
+  integrity sha512-arU1h31OGFu+LPrOLGZ7nB45v940NMDMEJeNmbutu57P+UFDVnkZg3e+J1I2HJRZ9hT7gO8J91dn/PMrAiKakA==
+
 axe-core@^3.5.2:
   version "3.5.5"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-3.5.5.tgz#84315073b53fa3c0c51676c588d59da09a192227"
   integrity sha512-5P0QZ6J5xGikH780pghEdbEKijCTrruK9KxtPZCFWUpef0f6GipO+xEZ5GKCb020mmqgbiNO6TcA55CriL784Q==
+
+axe-reports@1.1.11:
+  version "1.1.11"
+  resolved "https://registry.npmjs.org/axe-reports/-/axe-reports-1.1.11.tgz#e96524970f7f654040cfd8b2f977afa131f69952"
+  integrity sha512-sXBP3ytd7Nihmge60EYIT8oH0vKyc25ENIQ+fKpbuNe0s4Y5VpPSfxKqCtiYlcr68B1ZA7ysk85CTDC69p5IpQ==
 
 axios-mock-adapter@1.18.2:
   version "1.18.2"
@@ -5164,7 +5141,7 @@ axios-mock-adapter@1.18.2:
     fast-deep-equal "^3.1.1"
     is-buffer "^2.0.3"
 
-axios@0.19.2, axios@^0.19.2:
+axios@0.19.2, axios@^0.19.0, axios@^0.19.2:
   version "0.19.2"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
   integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
@@ -6156,6 +6133,22 @@ builtins@^1.0.3:
   resolved "https://registry.yarnpkg.com/builtins/-/builtins-1.0.3.tgz#cb94faeb61c8696451db36534e1422f94f0aee88"
   integrity sha1-y5T662HIaWRR2zZTThQi+U8K7og=
 
+bundlewatch@0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/bundlewatch/-/bundlewatch-0.3.1.tgz#1d367a9878c9306b5ec5f23cab2eb8178664f758"
+  integrity sha512-yVuOHljZCxRrDgujRn7GED+7Ms8G7hQJmP8vtQWIquDwDfocJH6RdRX42mqDWhMXGdsT3qhB1GYJ5q5zFZ0AEA==
+  dependencies:
+    axios "^0.19.0"
+    bytes "^3.0.0"
+    chalk "^4.0.0"
+    ci-env "^1.14.0"
+    commander "^5.0.0"
+    glob "^7.1.2"
+    gzip-size "^5.1.1"
+    jsonpack "^1.1.5"
+    lodash.merge "^4.6.1"
+    read-pkg-up "^7.0.1"
+
 byline@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/byline/-/byline-5.0.0.tgz#741c5216468eadc457b03410118ad77de8c1ddb1"
@@ -6670,6 +6663,11 @@ chromedriver@84.0.1:
     mkdirp "^1.0.4"
     tcp-port-used "^1.0.1"
 
+ci-env@^1.14.0:
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/ci-env/-/ci-env-1.16.0.tgz#e97f3b5001a8daf7da6e46f418bc6892a238704d"
+  integrity sha512-ucF9caQEX5wQlY449KZBIJPx91+kRg9tJ3tWSc4+KzrvC5KNiPm/3g1noP8VhdI3046+Vw3jLmKAD0fjCRJTmw==
+
 ci-info@^1.5.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-1.6.0.tgz#2ca20dbb9ceb32d4524a683303313f0304b1e497"
@@ -6709,11 +6707,6 @@ class-utils@^0.3.5:
     define-property "^0.2.5"
     isobject "^3.0.0"
     static-extend "^0.1.1"
-
-classnames@2.2.5:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
-  integrity sha1-+zgB1FNGdknvNgPH1hoCvRKb3m0=
 
 classnames@^2.2.5:
   version "2.2.6"
@@ -7419,11 +7412,6 @@ core-js-pure@^3.0.1:
   version "3.6.5"
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.6.5.tgz#c79e75f5e38dbc85a662d91eea52b8256d53b813"
   integrity sha512-lacdXOimsiD0QyNf9BC/mxivNJ/ybBGJXQFKzRekp1WTHoVUWsUHEn+2T8GJAzzIhyOuXA+gOxCVN3l+5PLPUA==
-
-core-js@3.1.3:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.1.3.tgz#95700bca5f248f5f78c0ec63e784eca663ec4138"
-  integrity sha512-PWZ+ZfuaKf178BIAg+CRsljwjIMRV8MY00CbZczkR6Zk5LfkSkjGoaab3+bqRQWVITNZxQB7TFYz+CFcyuamvA==
 
 core-js@3.6.5, core-js@^3.0.1, core-js@^3.0.4, core-js@^3.6.5:
   version "3.6.5"
@@ -10907,7 +10895,7 @@ gulp-rename@1.2.2:
   resolved "https://registry.yarnpkg.com/gulp-rename/-/gulp-rename-1.2.2.tgz#3ad4428763f05e2764dec1c67d868db275687817"
   integrity sha1-OtRCh2PwXidk3sHGfYaNsnVoeBc=
 
-gzip-size@5.1.1, gzip-size@^5.0.0:
+gzip-size@5.1.1, gzip-size@^5.0.0, gzip-size@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-5.1.1.tgz#cb9bee692f87c0612b232840a873904e4c135274"
   integrity sha512-FNHi6mmoHvs1mxZAds4PpdCS6QG8B4C1krxJsMutgxl5t3+GlRTzzI3NEkifXx2pVsOvJdOGSmIgDhQ55FwdPA==
@@ -13358,6 +13346,11 @@ jsonify@~0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
   integrity sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=
+
+jsonpack@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/jsonpack/-/jsonpack-1.1.5.tgz#d42b0dcfd91ac58ef3110f96d2c599404c3dc27c"
+  integrity sha1-1CsNz9kaxY7zEQ+W0sWZQEw9wnw=
 
 jsonparse@^1.2.0:
   version "1.3.1"

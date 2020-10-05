@@ -5,13 +5,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.32.0
 ------------------------------
-*October 2, 2020*
+*October 5, 2020*
 ### Added
 - Emit CreateAccountFailure event when form is submitted with validation errors
 
 ### Changed
 - Password field has no max length requirement
 - Refactored unit tests to ensure failure event is emitted because of validation errors and not service failures
+
+
+v0.31.0
+------------------------------
+*September 30, 2020*
+
+### Added
+- Accessibility tests that run as part of the pipeline
 
 
 v0.30.0
