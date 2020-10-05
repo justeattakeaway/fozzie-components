@@ -41,7 +41,7 @@ In order to develop the `generator-component`, you basically need to follow the 
 
 
 ## Testing
-If your component does not require component tests (see `test/component.README.md for guidance`), please delete the following scripts in `package.json`:
+If your component does not require component tests (see `test/component.README.md` for guidance), please delete the following scripts in `package.json`:
 
   "test-component:chrome"
   "test:wait-for-server"
