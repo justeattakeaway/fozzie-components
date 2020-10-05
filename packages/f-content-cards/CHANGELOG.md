@@ -11,6 +11,8 @@ v2.1.0-beta.1
 ### Added
 - `@custom-cards-callback` event dispatched on mount to expose a callback for consuming code to inject
   custom content cards
+- Beta release for ensuring the decoupling with f-metadata works before opening to a wider number of
+  consumers
 
 ### Removed
 - Card filtering/transforming/sorting logic moved to `f-metadata`; only the absolute limit number remains
