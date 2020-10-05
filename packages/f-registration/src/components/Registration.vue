@@ -157,13 +157,6 @@
                             <warning-icon :class="$style['o-form-error-icon']" />
                             Password is less than four characters
                         </p>
-                        <p
-                            v-if="shouldShowPasswordMaxLengthError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-password-maxlength'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
-                            Password exceeds 50 characters
-                        </p>
                     </template>
                 </form-field>
 
@@ -318,9 +311,6 @@ export default {
         shouldShowPasswordMinLengthError () {
             return !this.$v.password.minLength && this.$v.password.$dirty;
         },
-        shouldShowPasswordMaxLengthError () {
-            return !this.$v.password.maxLength && this.$v.password.$dirty;
-        },
         shouldShowLoginLink () {
             return this.loginSettings && this.loginSettings.linkText && this.loginSettings.url;
         },
@@ -356,8 +346,7 @@ export default {
         },
         password: {
             required,
-            minLength: minLength(4),
-            maxLength: maxLength(50)
+            minLength: minLength(4)
         }
     },
 
@@ -367,6 +356,7 @@ export default {
             this.shouldShowEmailAlreadyExistsError = false;
 
             if (this.isFormInvalid()) {
+                this.$emit(EventNames.CreateAccountFailure);
                 return;
             }
 
