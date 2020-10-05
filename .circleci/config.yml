@@ -65,8 +65,10 @@ jobs:
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global
       - run: # Run Component UI Tests
-          name: Run WebDriverIO Component Tests
+          name: Run WebDriverIO Component / Accessibility Tests
           command: yarn test-component:chrome
+      - store_artifacts:
+          path: axe-violations/
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
