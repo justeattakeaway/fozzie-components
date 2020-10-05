@@ -197,13 +197,17 @@ Limit the amount of cards to show. Defaults to `-1` which shows all cards.
 
 The following events can be emitted by the component, with the shape given:
 
-### `voucherCodeClick`
+### `@voucherCodeClick`
 
 ```json5
 {
     "url": "http://example.org/test" // Forwarding Url for the card containing the voucher code that was clicked
 }
 ```
+
+### `@custom-cards-callback`
+
+Called with a function that can be used by the consuming code to inject custom content cards
 
 ### `@on-braze-init`
 
