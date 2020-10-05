@@ -1,11 +1,11 @@
 const { source } = require('axe-core');
 const AxeReports = require('axe-reports');
-const { exec } = require("child_process");
+const { exec } = require('child_process');
 
 /**
  * Runs the WCAG accessibility tests on the curent page of the global browser
  */
-exports.getAccessibilityTestResults =  () => {
+exports.getAccessibilityTestResults = () => {
     browser.execute(source);
 
     // https://github.com/dequelabs/axe-core/blob/develop/doc/API.md
@@ -33,15 +33,14 @@ exports.getAccessibilityTestResults =  () => {
  * @param {Object} results - The accessibility violations.
  * @param {String} componentName - Name of the component that was tested.
  */
-exports.processResults = (results, componentName) => 
-    console.log('Creating .CSV artifact for Axe violations')
+exports.processResults = (results, componentName) => {
+    console.log('Creating .CSV artifact for Axe violations');
 
     const fileName = `${componentName}-a11y-violations`;
     const localFilePath = `${__dirname}../../../axe-violations/${fileName}`;
     // axe-reports can't create the CSV in CI due to permissions so we have to create the file ourselves.
-    if(process.env.CIRCLECI)
-    {
-        const ciFilePath = `/home/circleci/project/axe-violations/${fileName}`;
+    if (process.env.CIRCLECI) {
+        const ciFileName = `/home/circleci/project/axe-violations/${fileName}`;
 
         try {
             if (!fs.existsSync(ciFileName)) {
@@ -57,16 +56,14 @@ exports.processResults = (results, componentName) =>
                     console.log(`stdout: ${stdout}`);
                 });
             }
-          } catch(err) {
-            console.error(err)
-          }
+        } catch (err) {
+            console.error(err);
+        }
 
         AxeReports.processResults(results, 'csv', ciFilePath, false);
-    }
-    else
-    {
+    } else {
         AxeReports.processResults(results, 'csv', localFilePath, false);
-    }   
+    }
 
     console.error(`Expected no accessibility violations. Found: ${results.violations.length}`);
-}
+};
