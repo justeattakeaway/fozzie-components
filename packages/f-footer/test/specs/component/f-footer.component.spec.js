@@ -3,7 +3,7 @@ import FooterComponent from '../../../test-utils/component-objects/f-footer.comp
 describe('f-header component tests', () => {
     beforeEach(() => {
         // Arrange
-        browser.url('http://localhost:8082');
+        browser.url('http://localhost:8080');
         FooterComponent.waitForFooter();
     });
 
