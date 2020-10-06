@@ -135,6 +135,15 @@ The Braze SDK api key.
 
 > If no apiKey is provided the component will look for an existing appboy implementation at `window.appboy`.
 
+### `brands`
+
+**Type:** array
+**Required:** false
+
+List of brands for user's current postcode.
+
+> Only required when displaying Home Promotion Card 1 and 2
+
 ### `user-id`
 
 **Type:** string

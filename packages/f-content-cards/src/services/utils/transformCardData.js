@@ -37,7 +37,8 @@ const transformCardData = card => {
         custom_card_type: type,
         updated,
         voucher_code: voucherCode,
-        headline
+        headline,
+        display_times_json: displayTimes
     } = extras;
 
     const description = Object.keys(extras)
@@ -73,7 +74,8 @@ const transformCardData = card => {
         type,
         updated,
         url,
-        voucherCode
+        voucherCode,
+        displayTimes
     };
 };
 
