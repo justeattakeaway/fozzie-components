@@ -383,5 +383,29 @@ describe('`contentCardService`', () => {
 
             expect(output).toHaveLength(4);
         });
+
+        it('should apply card limits using enabledCardType order when limit is set to 1', () => {
+            const cards = [
+                {
+                    extras: {
+                        custom_card_type: 'Home_Promotion_Card_1' // eslint-disable-line camelcase
+                    }
+                },
+                {
+                    extras: {
+                        custom_card_type: 'Home_Promotion_Card_2' // eslint-disable-line camelcase
+                    }
+                }
+            ];
+            const options = {
+                enabledCardTypes: ['Home_Promotion_Card_1', 'Home_Promotion_Card_2']
+            };
+            const { cards: output } = new ContentCardService({ cards }, options)
+                .applyCardLimit(1)
+                .output();
+
+            expect(output).toHaveLength(1);
+            expect(output[0].type).toBe('Home_Promotion_Card_1');
+        });
     });
 });
