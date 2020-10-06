@@ -1,7 +1,7 @@
 
 const axios = require('axios');
 
-const address = `http://localhost:8080`;
+const address = 'http://localhost:8080';
 let attempts = 0;
 let intervalId;
 
