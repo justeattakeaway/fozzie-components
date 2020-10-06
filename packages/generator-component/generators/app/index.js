@@ -50,7 +50,7 @@ module.exports = class extends Generator {
         }));
 
         let ignoreTestPattern = this.answers.needsUITests ? [] : ["**/*/test", '**/*/test-utils/component-objects']
-        const ignoreApiMockPattern = this.answers.needsTestingApiMocks ? [] : ["**/*/test-utils/system-test"];
+        const ignoreApiMockPattern = this.answers.needsTestingApiMocks ? [] : ["**/*/test-utils/system-test", "**/*/src/services"];
     
         ignoreTestPattern = ignoreTestPattern.concat(ignoreApiMockPattern);
 
