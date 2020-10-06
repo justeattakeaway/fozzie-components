@@ -1,7 +1,8 @@
 <template>
     <div
         :data-theme="theme"
-        :class="$style['c-<%= name.class %>']">
+        :class="$style['c-<%= name.class %>']"
+        data-test-id='<%= name.class %>-component'>
         {{ copy.text }}
     </div>
 </template>
