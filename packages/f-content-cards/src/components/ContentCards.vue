@@ -70,6 +70,11 @@ export default {
             default: ''
         },
 
+        brands: {
+            type: Array,
+            default: () => ([])
+        },
+
         cardLimit: {
             type: Number,
             default: -1
@@ -227,6 +232,7 @@ export default {
                 userId,
                 enableLogging,
                 enabledCardTypes: this.enabledCardTypes,
+                brands: this.brands,
                 callbacks: {
                     handleContentCards: this.brazeContentCards
                 }

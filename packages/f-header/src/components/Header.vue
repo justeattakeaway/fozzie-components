@@ -23,6 +23,7 @@
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
                 :offers-copy="copy.offers"
                 :show-offers-link="showOffersLink"
+                :show-help-link="showHelpLink"
                 :error-log="errorLog"
                 :user-info-prop="userInfoProp"
                 :user-info-url="userInfoUrl"
@@ -81,6 +82,11 @@ export default {
         },
 
         showLoginInfo: {
+            type: Boolean,
+            default: true
+        },
+
+        showHelpLink: {
             type: Boolean,
             default: true
         },

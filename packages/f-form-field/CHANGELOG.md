@@ -4,6 +4,27 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.7.1
+------------------------------
+*September 29, 2020*
+
+### Changed
+- `debounce.js` lint issue and timeout variable name.
+- `labelStyle` test setup.
+
+
+v0.7.0
+------------------------------
+*September 29, 2020*
+
+### Added
+- `inlineNarrow` label style that changes label positioning based on window size.
+- `form-field` tests for `inlineNarrow` style.
+
+### Changed
+- `babel.config.js` to match other packages as it was causing `ReferenceError: regeneratorRuntime is not defined`.
+
+
 v0.6.0
 ------------------------------
 *June 23, 2020*

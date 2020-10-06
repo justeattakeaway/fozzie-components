@@ -1,7 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import FormField from '../FormField.vue';
-import { DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES } from '../../constants';
-
+import { DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../../constants';
 
 describe('FormField', () => {
     it('should be defined', () => {
@@ -105,6 +104,76 @@ describe('FormField', () => {
 
                 // Assert
                 expect(formInput.attributes('data-test-id')).toBe(undefined);
+            });
+        });
+
+        describe('labelStyle ::', () => {
+            it.each(VALID_LABEL_STYLES)('should set the type of form label element as expected if labelStyle=%p is specified', definedType => {
+                // Arrange
+                const propsData = {
+                    labelStyle: definedType
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+                const formLabel = wrapper.find('form-label-stub');
+
+                // Assert
+                expect(formLabel.attributes('labelstyle')).toBe(definedType);
+            });
+
+            describe('when set to `inlineNarrow`', () => {
+                const MOBILE = 767;
+                const DESKTOP = 768;
+                const eventName = 'resize';
+                let resizeWindow;
+
+                beforeEach(() => {
+                    resizeWindow = width => {
+                        window.innerWidth = width;
+                        window.dispatchEvent(new Event(eventName));
+                    };
+                });
+
+                it('should append the label above input when window size is not mobile', async () => {
+                    // Arrange
+                    const propsData = {
+                        labelStyle: 'inlineNarrow',
+                        labelText: 'Test Label'
+                    };
+
+                    resizeWindow(DESKTOP);
+
+                    // Act
+                    const wrapper = await shallowMount(FormField, { propsData });
+
+                    const defaultLabel = wrapper.find('[data-js-test="defaultLabel"]');
+                    const inlineLabel = wrapper.find('[data-js-test="inlineLabel"]');
+
+                    // Assert
+                    expect(defaultLabel.exists()).toBe(true);
+                    expect(inlineLabel.exists()).toBe(false);
+                });
+
+                it('should append the label inline with input when window size is mobile', async () => {
+                    // Arrange
+                    const propsData = {
+                        labelStyle: 'inlineNarrow',
+                        labelText: 'Test Label'
+                    };
+
+                    resizeWindow(MOBILE);
+
+                    // Act
+                    const wrapper = await shallowMount(FormField, { propsData });
+
+                    const defaultLabel = wrapper.find('[data-js-test="defaultLabel"]');
+                    const inlineLabel = wrapper.find('[data-js-test="inlineLabel"]');
+
+                    // Assert
+                    expect(defaultLabel.exists()).toBe(false);
+                    expect(inlineLabel.exists()).toBe(true);
+                });
             });
         });
     });
