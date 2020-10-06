@@ -4,7 +4,9 @@
   "version": "0.1.0",
   "main": "dist/f-<%= name.default %>.umd.min.js",
   "files": [
-    "dist"
+    "dist"<% if(needsUITests) { %>,
+    "test-utils"<% } %> <% if(needsTestingApiMocks) { %>,
+    "src/services"<% } %>
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-<%= name.default %>",
   "contributors": [
@@ -27,10 +29,13 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-<%= name.default %> ./src/index.js",
-    "demo": "vue serve --open ./src/demo/Index.vue",
+    "demo": "vue serve --port 8080 ./src/demo/Index.vue",
     "lint": "vue-cli-service lint",
-    "lint:fix": "yarn lint --fix",
-    "test": "vue-cli-service test:unit"
+    "lint:fix": "yarn lint --fix"<% if(needsUITests) { %>,
+    "test-component:chrome": "run-p --race demo webdriver:delay:chrome",
+    "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js",
+    "webdriver:delay:chrome": "yarn test:wait-for-server && yarn webdriver:start:chrome",
+    "webdriver:start:chrome": "wdio ../../wdio.conf.js"<% } %>
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
