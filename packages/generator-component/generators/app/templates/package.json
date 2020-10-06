@@ -29,13 +29,13 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-<%= name.default %> ./src/index.js",
-    "demo": "vue serve --port 8083 ./src/demo/Index.vue",
+    "demo": "vue serve --port 8080 ./src/demo/Index.vue",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "test": "vue-cli-service test:unit",
     "test:coverage": "yarn test --coverage"<% if(needsUITests) { %>,
     "test-component:chrome": "run-p --race demo webdriver:delay:chrome",
-    "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js 8080",
+    "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js",
     "webdriver:delay:chrome": "yarn test:wait-for-server && yarn webdriver:start:chrome",
     "webdriver:start:chrome": "wdio ../../wdio.conf.js"<% } %>
   },
