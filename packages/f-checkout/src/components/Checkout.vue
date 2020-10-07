@@ -21,7 +21,7 @@
                     input-type="text"
                     label-style="inline" />
 
-                <div>
+                <div :class="$style['form-field-group']">
                     <form-field
                         v-model="lineOne"
                         name="address-line-one"
@@ -29,7 +29,7 @@
                         label-text="Address line 1"
                         input-type="text"
                         label-style="inline"
-                        class="form-field-group" />
+                        :class="$style['grouped-form-field']" />
 
                     <form-field
                         v-model="lineTwo"
@@ -38,7 +38,7 @@
                         label-text="Address line 2"
                         input-type="text"
                         label-style="inline"
-                        class="form-field-group" />
+                        :class="$style['grouped-form-field']" />
 
                     <form-field
                         v-model="city"
@@ -47,7 +47,7 @@
                         label-text="City"
                         input-type="text"
                         label-style="inline"
-                        class="form-field-group" />
+                        :class="$style['grouped-form-field']" />
                 </div>
 
                 <form-field
@@ -67,6 +67,7 @@
                     </p>
 
                     <textarea
+                        id="c-fareaorm-text-"
                         name="notePlaceholder"
                         cols="30"
                         rows="10"
@@ -194,5 +195,15 @@ $form-input-borderColour--focus           : $grey--dark;
     border-radius: $form-input-borderRadius;
     background-clip: padding-box;
 }
+
+.grouped-form-field {
+    margin-top:-9px;
+    margin-bottom:-18px;
+}
+.form-field-group {
+    background: yellow;
+    margin: 29px 0 40px 0;
+}
+
 
 </style>
