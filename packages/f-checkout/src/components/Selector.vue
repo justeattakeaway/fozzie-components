@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class="$style['selector-component']">
         <label for="delivery-time">Delivery time</label>
         <select id="delivery-time">
             <option
@@ -29,4 +29,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+
+.selector-component {
+    margin: 30px 0;
+}
 </style>
