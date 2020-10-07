@@ -56,19 +56,7 @@
                     input-type="text"
                     label-style="inline" />
 
-                <label for="delivery-time">Delivery time</label>
-                <select id="delivery-time">
-                    <option
-                        value="As soon as possible">
-                        As soon as possible
-                    </option>
-                    <option
-                        v-for="(time, index) in deliveryTimes"
-                        :key="index"
-                        :value="time">
-                        {{ time }}
-                    </option>
-                </select>
+                <form-selector />
 
                 <div>
                     <h3>Leave a note</h3>
@@ -101,13 +89,15 @@ import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
+import FormSelector from './Selector.vue';
 import tenantConfigs from '../tenants';
 
 export default {
     name: 'VueCheckout',
     components: {
         Card,
-        FormField
+        FormField,
+        FormSelector
     },
     props: {
         locale: {
