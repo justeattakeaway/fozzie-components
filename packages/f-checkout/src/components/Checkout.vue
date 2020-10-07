@@ -55,6 +55,20 @@
                     label-text="Postcode"
                     input-type="text"
                     label-style="inline" />
+
+                <label for="delivery-time">Delivery time</label>
+                <select id="delivery-time">
+                    <option
+                        value="As soon as possible">
+                        As soon as possible
+                    </option>
+                    <option
+                        v-for="(time, index) in deliveryTimes"
+                        :key="index"
+                        :value="time">
+                        {{ time }}
+                    </option>
+                </select>
             </form>
         </card>
     </div>
@@ -101,6 +115,10 @@ export default {
         postcode: {
             type: String,
             default: null
+        },
+        deliveryTimes: {
+            type: Array,
+            default: () => []
         }
     },
     data () {
