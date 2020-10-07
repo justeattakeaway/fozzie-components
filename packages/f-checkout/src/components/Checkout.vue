@@ -21,7 +21,7 @@
 
                 <div>
                     <form-field
-                        v-model="address.lineOne"
+                        v-model="lineOne"
                         name="address-line-one"
                         data-test-id="input-address-line-one"
                         label-text="Address Line 1"
@@ -29,7 +29,7 @@
                         label-style="inline" />
 
                     <form-field
-                        v-model="address.lineTwo"
+                        v-model="lineTwo"
                         name="address-line-two"
                         data-test-id="input-address-line-two"
                         label-text="Address Line 2"
@@ -37,7 +37,7 @@
                         label-style="inline" />
 
                     <form-field
-                        v-model="address.mobileNumber"
+                        v-model="mobileNumber"
                         name="address-city"
                         data-test-id="input-address-city"
                         label-text="City"
@@ -46,7 +46,7 @@
                 </div>
 
                 <form-field
-                    v-model="address.postcode"
+                    v-model="postcode"
                     name="address-postcode"
                     data-test-id="input-address-postcode"
                     label-text="Postcode"
@@ -83,9 +83,21 @@ export default {
             type: String,
             default: null
         },
-        address: {
-            type: Object,
-            default: () => {}
+        lineOne: {
+            type: String,
+            default: null
+        },
+        lineTwo: {
+            type: String,
+            default: null
+        },
+        city: {
+            type: String,
+            default: null
+        },
+        postcode: {
+            type: String,
+            default: null
         }
     },
     data () {
