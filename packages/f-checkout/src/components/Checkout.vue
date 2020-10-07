@@ -100,6 +100,7 @@ import { globalisationServices } from '@justeat/f-services';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
+import '@justeat/f-form-field/dist/f-form-field.css';
 import tenantConfigs from '../tenants';
 
 export default {
@@ -214,8 +215,6 @@ $btn-primary-textColor              : $white;
     font-weight: $btn-default-weight;
     line-height: 1;
 
-    // You may want to change this
-    // background-color: $btn-default-bgColor;
     border-radius: $btn-default-borderRadius;
     border: 1px solid transparent;
     user-select: none;
