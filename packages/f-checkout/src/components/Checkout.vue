@@ -5,17 +5,20 @@
         <card
             :data-theme="theme"
             :card-heading="title"
+            is-rounded
             has-outline
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="checkout-card-component"
             :class="$style['c-card-padding']">
-            <form action="">
+            <form
+                action=""
+                :class="$style['o-form']">
                 <form-field
                     v-model="mobileNumber"
                     name="mobile-number"
                     data-test-id="input-mobile-number"
-                    label-text="Mobile Number"
+                    label-text="Mobile number"
                     input-type="text"
                     label-style="inline" />
 
@@ -24,7 +27,7 @@
                         v-model="lineOne"
                         name="address-line-one"
                         data-test-id="input-address-line-one"
-                        label-text="Address Line 1"
+                        label-text="Address line 1"
                         input-type="text"
                         label-style="inline" />
 
@@ -32,7 +35,7 @@
                         v-model="lineTwo"
                         name="address-line-two"
                         data-test-id="input-address-line-two"
-                        label-text="Address Line 2"
+                        label-text="Address line 2"
                         input-type="text"
                         label-style="inline" />
 
@@ -130,4 +133,7 @@ export default {
     padding-top: 30px;
 }
 
+.o-form {
+    @include font-size(body-l);
+}
 </style>
