@@ -61,16 +61,16 @@
                 <form-selector />
 
                 <div>
-                    <h3>Leave a note</h3>
+                    <h4>Leave a note</h4>
                     <p>
                         {{ noteText }}
                     </p>
 
                     <textarea
-                        id=""
-                        name=""
+                        name="notePlaceholder"
                         cols="30"
                         rows="10"
+                        :class="$style['c-form-text-area']"
                         :placeholder="notePlaceholder" />
                 </div>
 
@@ -162,6 +162,13 @@ export default {
 </script>
 
 <style lang="scss" module>
+$form-input-colour                        : $color-text;
+$form-input-bg                            : $white;
+$form-input-borderRadius                  : 3px;
+$form-input-borderWidth                   : 1px;
+$form-input-borderColour                  : $grey--light;
+$form-input-borderColour--focus           : $grey--dark;
+
 .c-checkout {
     margin: auto;
     // min-height: 80vh;
@@ -171,6 +178,21 @@ export default {
 .c-card-padding {
     padding-top: 30px;
     padding-bottom: 60px;
+}
+
+.c-form-text-area {
+    width: 100%;
+    height: 12rem;
+    padding: 0.5rem;
+    resize: none;
+    @include font-size();
+    font-family: $font-family-base;
+    color: $form-input-colour;
+    font-weight: $font-weight-base;
+    background-color: $form-input-bg;
+    border: $form-input-borderWidth solid $form-input-borderColour;
+    border-radius: $form-input-borderRadius;
+    background-clip: padding-box;
 }
 
 </style>
