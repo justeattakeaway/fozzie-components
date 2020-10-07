@@ -9,7 +9,51 @@
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="checkout-card-component"
-            :class="$style['c-card-padding']" />
+            :class="$style['c-card-padding']">
+            <form action="">
+                <form-field
+                    v-model="mobileNumber"
+                    name="mobile-number"
+                    data-test-id="input-mobile-number"
+                    label-text="Mobile Number"
+                    input-type="text"
+                    label-style="inline" />
+
+                <div>
+                    <form-field
+                        v-model="address.lineOne"
+                        name="address-line-one"
+                        data-test-id="input-address-line-one"
+                        label-text="Address Line 1"
+                        input-type="text"
+                        label-style="inline" />
+
+                    <form-field
+                        v-model="address.lineTwo"
+                        name="address-line-two"
+                        data-test-id="input-address-line-two"
+                        label-text="Address Line 2"
+                        input-type="text"
+                        label-style="inline" />
+
+                    <form-field
+                        v-model="address.mobileNumber"
+                        name="address-city"
+                        data-test-id="input-address-city"
+                        label-text="City"
+                        input-type="text"
+                        label-style="inline" />
+                </div>
+
+                <form-field
+                    v-model="address.postcode"
+                    name="address-postcode"
+                    data-test-id="input-address-postcode"
+                    label-text="Postcode"
+                    input-type="text"
+                    label-style="inline" />
+            </form>
+        </card>
     </div>
 </template>
 
@@ -17,12 +61,14 @@
 import { globalisationServices } from '@justeat/f-services';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
+import FormField from '@justeat/f-form-field';
 import tenantConfigs from '../tenants';
 
 export default {
     name: 'VueCheckout',
     components: {
-        Card
+        Card,
+        FormField
     },
     props: {
         locale: {
@@ -32,6 +78,14 @@ export default {
         title: {
             type: String,
             default: '#name, confirm your details'
+        },
+        mobileNumber: {
+            type: String,
+            default: null
+        },
+        address: {
+            type: Object,
+            default: () => {}
         }
     },
     data () {
