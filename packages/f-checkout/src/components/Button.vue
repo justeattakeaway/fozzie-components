@@ -84,6 +84,8 @@ $btn-disabled-bgColor               : $grey--light;
     text-align: center;
     font-weight: $btn-default-weight;
     line-height: 1;
+    display: flex;
+    margin: 0 auto;
 
     // You may want to change this
     background-color: $btn-default-bgColor;

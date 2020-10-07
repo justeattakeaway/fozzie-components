@@ -12,8 +12,7 @@
             data-test-id="checkout-card-component"
             :class="$style['c-card-padding']">
             <form
-                action=""
-                :class="$style['o-form']">
+                action="">
                 <form-field
                     v-model="mobileNumber"
                     name="mobile-number"
@@ -29,7 +28,8 @@
                         data-test-id="input-address-line-one"
                         label-text="Address line 1"
                         input-type="text"
-                        label-style="inline" />
+                        label-style="inline"
+                        class="form-field-group" />
 
                     <form-field
                         v-model="lineTwo"
@@ -37,15 +37,17 @@
                         data-test-id="input-address-line-two"
                         label-text="Address line 2"
                         input-type="text"
-                        label-style="inline" />
+                        label-style="inline"
+                        class="form-field-group" />
 
                     <form-field
-                        v-model="mobileNumber"
+                        v-model="city"
                         name="address-city"
                         data-test-id="input-address-city"
                         label-text="City"
                         input-type="text"
-                        label-style="inline" />
+                        label-style="inline"
+                        class="form-field-group" />
                 </div>
 
                 <form-field
@@ -74,8 +76,7 @@
 
                 <form-button
                     data-test-id="confirm-payment-submit-button"
-                    button-style="primary"
-                    :disabled="shouldDisableCreateAccountButton">
+                    button-style="primary">
                     {{ buttonText }}
                 </form-button>
             </form>
@@ -161,22 +162,15 @@ export default {
 </script>
 
 <style lang="scss" module>
-// .c-checkout {
-//     display: flex;
-//     justify-content: center;
-//     min-height: 80vh;
-//     width: 80vw;
-//     margin: auto;
-//     border: 1px solid $red;
-//     font-family: $font-family-base;
-//     @include font-size(heading-m);
-// }
+.c-checkout {
+    margin: auto;
+    // min-height: 80vh;
+    font-family: $font-family-base;
+}
 
 .c-card-padding {
     padding-top: 30px;
+    padding-bottom: 60px;
 }
 
-.o-form {
-    @include font-size(body-l);
-}
 </style>
