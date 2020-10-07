@@ -72,12 +72,12 @@
                         :placeholder="notePlaceholder" />
                 </div>
 
-                <button
-                    type='submit'
-                    :class="$style['o-btn--primary']"
-                >
-                    Go to Payment
-                </button>
+                <form-button
+                    data-test-id="confirm-payment-submit-button"
+                    button-style="primary"
+                    :disabled="shouldDisableCreateAccountButton">
+                    {{ buttonText }}
+                </form-button>
             </form>
         </card>
     </div>
@@ -90,6 +90,7 @@ import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import FormSelector from './Selector.vue';
+import FormButton from './Button.vue';
 import tenantConfigs from '../tenants';
 
 export default {
@@ -97,7 +98,8 @@ export default {
     components: {
         Card,
         FormField,
-        FormSelector
+        FormSelector,
+        FormButton
     },
     props: {
         locale: {
@@ -139,6 +141,10 @@ export default {
         notePlaceholder: {
             type: String,
             default: "e.g. the dorbell doesn't work. Do not include details about any allergies here. \n\n We're working with resturants to cut waste. Please don't as for plastic cutlery."
+        },
+        buttonText: {
+            type: String,
+            default: 'Go to Payment'
         }
     },
     data () {
@@ -155,23 +161,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
-$btn-default-bgColor                : $grey--lighter;
-$btn-default-text-colour            : $grey--dark;
-$btn-default-weight                 : 500;
-$btn-default-height                 : 2.6;
-$btn-default-font-size              : body-l;
-$btn-default-font-family            : $font-family-base;
-$btn-default-bgColor--hover         : $grey--light;
-$btn-default-borderRadius           : 2px;
-$btn-default-hozPadding             : 1em;
-$btn-default-vertPadding            : 11px;
-
-$btn-primary-bgColor                : $orange;
-$btn-primary-bgColor--hover         : $orange--dark;
-$btn-primary-bgColor--focus         : $orange--darkest;
-$btn-primary-textColor              : $white;
-
 // .c-checkout {
 //     display: flex;
 //     justify-content: center;
@@ -189,48 +178,5 @@ $btn-primary-textColor              : $white;
 
 .o-form {
     @include font-size(body-l);
-}
-
-.o-btn--primary {
-    background-color: $btn-primary-bgColor;
-    display: inline-block;                      /* [1] */
-    vertical-align: middle;                     /* [2] */
-    font-family: $btn-default-font-family;      /* [3] */
-    @include font-size($btn-default-font-size); /* [3] */
-    cursor: pointer;                            /* [4] */
-    margin: 0;                                  /* [5] */
-    padding: $btn-default-vertPadding $btn-default-hozPadding; /* [5, 6] */
-    overflow: visible;                          /* [7] */
-    text-align: center;
-    font-weight: $btn-default-weight;
-    line-height: 1;
-
-    border-radius: $btn-default-borderRadius;
-    border: 1px solid transparent;
-    user-select: none;
-
-    color: $btn-default-text-colour;
-    text-decoration: none;
-
-    &,
-    &:link,
-    &:visited {
-        color: $btn-primary-textColor;
-    }
-
-    &:hover,
-    &:active,
-    &:focus {
-        color: $btn-primary-textColor;
-    }
-
-    &:hover {
-        background-color: $btn-primary-bgColor--hover;
-    }
-
-    &:active,
-    &:focus {
-        background-color: $btn-primary-bgColor--focus;
-    }
 }
 </style>
