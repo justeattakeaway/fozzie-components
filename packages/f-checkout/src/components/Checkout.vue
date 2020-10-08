@@ -11,8 +11,7 @@
             card-heading-position="center"
             data-test-id="checkout-card-component"
             :class="$style['c-card-padding']">
-            <form
-                action="">
+            <form action="post">
                 <form-field
                     v-model="mobileNumber"
                     name="mobile-number"
@@ -21,33 +20,28 @@
                     input-type="text"
                     label-style="inline" />
 
-                <div :class="$style['form-field-group']">
+                <div :class="$style['l-address-group']">
                     <form-field
                         v-model="lineOne"
                         name="address-line-one"
                         data-test-id="input-address-line-one"
                         label-text="Address line 1"
                         input-type="text"
-                        label-style="inline"
-                        :class="$style['grouped-form-field']" />
-
+                        label-style="inline" />
                     <form-field
                         v-model="lineTwo"
                         name="address-line-two"
                         data-test-id="input-address-line-two"
                         label-text="Address line 2"
                         input-type="text"
-                        label-style="inline"
-                        :class="$style['grouped-form-field']" />
-
+                        label-style="inline" />
                     <form-field
                         v-model="city"
                         name="address-city"
                         data-test-id="input-address-city"
                         label-text="City"
                         input-type="text"
-                        label-style="inline"
-                        :class="$style['grouped-form-field']" />
+                        label-style="inline" />
                 </div>
 
                 <form-field
@@ -60,7 +54,7 @@
 
                 <form-selector />
 
-                <div>
+                <div :class="$style['c-userNote']">
                     <h4 :class="$style['note-heading']">
                         Leave a note
                     </h4>
@@ -73,7 +67,7 @@
                         name="notePlaceholder"
                         cols="30"
                         rows="10"
-                        :class="$style['c-form-text-area']"
+                        :class="$style['c-userNote-textArea']"
                         :placeholder="notePlaceholder" />
                 </div>
 
@@ -181,43 +175,48 @@ $form-note-text                           : $grey--darkest;
     margin: auto;
     // min-height: 80vh;
     font-family: $font-family-base;
+    @include font-size();
 }
 
 .c-card-padding {
     padding-top: 20px;
     padding-bottom: 40px;
-}
-
-.c-form-text-area {
-    width: 100%;
-    height: 12rem;
-    padding: 0.5rem;
-    resize: none;
     @include font-size();
-    font-family: $font-family-base;
-    color: $form-input-colour;
-    font-weight: $font-weight-base;
-    background-color: $form-input-bg;
-    border: $form-input-borderWidth solid $form-input-borderColour;
-    border-radius: $form-input-borderRadius;
-    background-clip: padding-box;
 }
 
-.grouped-form-field {
-    margin-top:-9px;
-    margin-bottom:-18px;
-}
-.form-field-group {
-    background: yellow;
+
+.l-address-group {
     margin: 29px 0 40px 0;
+
+        div {
+            margin-bottom: -17px;
+        }
 }
 
-.note-text {
-    color: $form-input-borderColour--focus;
-    margin-top: 5px;
+.c-userNote {
+    h4 {
+        margin: 0;
+    }
+
+    p {
+        color: $form-input-borderColour--focus;
+        margin-top: 5px;
+    }
+
+    .c-userNote-textArea {
+        width: 100%;
+        height: 12rem;
+        padding: 0.5rem;
+        resize: none;
+        @include font-size();
+        font-family: $font-family-base;
+        color: $form-input-colour;
+        font-weight: $font-weight-base;
+        background-color: $form-input-bg;
+        border: $form-input-borderWidth solid $form-input-borderColour;
+        border-radius: $form-input-borderRadius;
+        background-clip: padding-box;
+    }
 }
 
-.note-heading {
-    margin: 0;
-}
 </style>
