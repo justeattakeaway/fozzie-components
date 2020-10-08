@@ -61,8 +61,10 @@
                 <form-selector />
 
                 <div>
-                    <h4>Leave a note</h4>
-                    <p>
+                    <h4 :class="$style['note-heading']">
+                        Leave a note
+                    </h4>
+                    <p :class="$style['note-text']">
                         {{ noteText }}
                     </p>
 
@@ -169,6 +171,7 @@ $form-input-borderRadius                  : 3px;
 $form-input-borderWidth                   : 1px;
 $form-input-borderColour                  : $grey--light;
 $form-input-borderColour--focus           : $grey--dark;
+$form-note-text                           : $grey--darkest;
 
 .c-checkout {
     margin: auto;
@@ -205,5 +208,13 @@ $form-input-borderColour--focus           : $grey--dark;
     margin: 29px 0 40px 0;
 }
 
+.note-text {
+    color: $form-input-borderColour--focus;
+    margin-top: 5px;
+}
+
+.note-heading {
+    margin: 0;
+}
 
 </style>
