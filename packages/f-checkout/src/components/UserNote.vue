@@ -1,9 +1,9 @@
 <template>
     <div :class="$style['c-userNote']">
-        <h4 :class="$style['note-heading']">
+        <h4>
             Leave a note
         </h4>
-        <p :class="$style['note-text']">
+        <p>
             {{ noteText }}
         </p>
 
