@@ -97,10 +97,6 @@ export default {
             type: String,
             default: ''
         },
-        title: {
-            type: String,
-            default: '#name, confirm your details'
-        },
         buttonText: {
             type: String,
             default: 'Go to Payment'
@@ -115,6 +111,7 @@ export default {
         return {
             copy: { ...localeConfig },
             theme,
+            firstName: 'firstName',
             mobileNumber: null,
             address: {
                 lineOne: null,
@@ -123,6 +120,12 @@ export default {
                 postcode: null
             }
         };
+    },
+
+    computed: {
+        title () {
+            return `${this.firstName}, confirm your details`;
+        }
     }
 };
 </script>
