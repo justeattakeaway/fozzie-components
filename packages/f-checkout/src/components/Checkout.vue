@@ -141,7 +141,6 @@ $form-note-text                           : $grey--darkest;
 
 .c-checkout {
     margin: auto;
-    // min-height: 80vh;
     font-family: $font-family-base;
     @include font-size();
 }
@@ -149,16 +148,14 @@ $form-note-text                           : $grey--darkest;
 .c-card-padding {
     padding-top: 20px;
     padding-bottom: 40px;
-    @include font-size();
 }
-
 
 .l-address-group {
     margin: 29px 0 40px 0;
 
-        div {
-            margin-bottom: -17px;
-        }
+    div {
+        margin-bottom: -17px;
+    }
 }
 
 .c-userNote {
@@ -186,5 +183,4 @@ $form-note-text                           : $grey--darkest;
         background-clip: padding-box;
     }
 }
-
 </style>
