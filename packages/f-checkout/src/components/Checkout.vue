@@ -32,7 +32,7 @@
                         v-model="address.lineTwo"
                         name="address-line-two"
                         data-test-id="input-address-line-two"
-                        label-text="Address line 2"
+                        label-text="Address line 2 (optional)"
                         input-type="text"
                         label-style="inline" />
                     <form-field

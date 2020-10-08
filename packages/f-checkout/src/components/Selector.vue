@@ -5,7 +5,9 @@
             :class="$style['o-selector-label']">
             Delivery time
         </label>
-        <select id="delivery-time">
+        <select
+            id="delivery-time"
+            :class="$style['c-selector-input']">
             <option
                 v-for="(time, index) in deliveryTimes"
                 :key="index"
@@ -22,7 +24,7 @@ export default {
     props: {
         deliveryTimes: {
             type: Array,
-            default: () => []
+            default: () => ['', 'As soon as possible', 'Today in 5 minutes']
         }
     }
 };
@@ -42,7 +44,7 @@ $form-input-borderColour--focus           : $grey--dark;
     position: relative;
     width: 100%;
     height: 2.5rem;
-    padding: 0.5rem;
+    padding: 0;
     @include font-size();
     font-family: $font-family-base;
     color: $form-input-colour;
@@ -51,17 +53,25 @@ $form-input-borderColour--focus           : $grey--dark;
     border: $form-input-borderWidth solid $form-input-borderColour;
     border-radius: $form-input-borderRadius;
     background-clip: padding-box;
+
+    .o-selector-label {
+        display: block;
+        color: $form-label-colour;
+        margin-bottom: spacing();
+        position: absolute;
+        top: 50%;
+        left: 0.5rem;
+        transform: translateY(-50%);
+        margin-bottom: 0;
+        cursor: text;
+    }
+
+    .c-selector-input {
+        height: 100%;
+        width: 100%;
+        padding: 0.5rem;
+        border: none;
+    }
 }
 
-.o-selector-label {
-    display: block;
-    color: $form-label-colour;
-    margin-bottom: spacing();
-    position: absolute;
-    top: 50%;
-    left: 0.5rem;
-    transform: translateY(-50%);
-    margin-bottom: 0;
-    cursor: text;
-}
 </style>
