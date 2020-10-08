@@ -8,21 +8,13 @@ const createAccountButton = () => registrationComponent().$('[data-test-id="crea
 const termsAndConditionsLink = () => registrationComponent().$('[data-test-id="ts-and-cs-link"]');
 const privacyPolicyLink = () => registrationComponent().$('[data-test-id="privacy-policy-link"]');
 const cookiesPolicyLink = () => registrationComponent().$('[data-test-id="cookies-policy-link"]');
+const errorSummaryContainer = () => $('[data-test-id="error-summary-container"]');
 
 // Validation errors
-const firstNameEmptyError = () => $('[data-test-id="error-first-name-empty"]');
-const firstNameMaxLengthError = () => $('[data-test-id="error-first-name-maxlength"]');
-const firstNameInvalidError = () => $('[data-test-id="error-first-name-invalid"]');
-
-const lastNameEmptyError = () => $('[data-test-id="error-last-name-empty"]');
-const lastNameMaxLengthError = () => $('[data-test-id="error-last-name-maxlength"]');
-const lastNameInvalidError = () => $('[data-test-id="error-last-name-invalid"]');
-
-const emailEmptyError = () => $('[data-test-id="error-email-empty"]');
-const emailInvalidError = () => $('[data-test-id="error-email-invalid"]');
-const emailExistsError = () => $('[data-test-id="error-email-exists"]');
-
-const passwordEmptyError = () => $('[data-test-id="error-password-empty"]');
+const errorMessageFirstname = () => $('[data-test-id="error-message-firstname"]');
+const errorMessageLastname = () => $('[data-test-id="error-message-lastname"]');
+const errorMessageEmail = () => $('[data-test-id="error-message-email"]');
+const errorMessagePassword = () => $('[data-test-id="error-message-password"]');
 
 /**
  * @description
@@ -34,7 +26,7 @@ const passwordEmptyError = () => $('[data-test-id="error-password-empty"]');
  * @param {String} userInfo.email The user's e-mail address
  * @param {String} userInfo.password The user's password
  */
-exports.submitRegistrationForm = (userInfo) => {
+exports.submitRegistrationForm = userInfo => {
     exports.waitForRegistrationForm();
     firstNameInput().setValue(userInfo.firstName);
     lastNameInput().setValue(userInfo.lastName);
@@ -47,20 +39,19 @@ exports.waitForRegistrationForm = () => {
     registrationComponent().waitForExist();
 };
 
-exports.isFirstNameEmptyErrorDisplayed = () => firstNameEmptyError().isDisplayed();
-exports.isFirstNameMaxLengthErrorDisplayed = () => firstNameMaxLengthError().isDisplayed();
-exports.isFirstNameInvalidErrorDisplayed = () => firstNameInvalidError().isDisplayed();
+exports.errorMessageFirstnameText = () => errorMessageFirstname().getText();
 
-exports.isLastNameEmptyErrorDisplayed = () => lastNameEmptyError().isDisplayed();
-exports.isLastNameMaxLengthErrorDisplayed = () => lastNameMaxLengthError().isDisplayed();
-exports.isLastNameInvalidErrorDisplayed = () => lastNameInvalidError().isDisplayed();
+exports.errorMessageLastnameText = () => errorMessageLastname().getText();
 
-exports.isEmailEmptyErrorDisplayed = () => emailEmptyError().isDisplayed();
-exports.isEmailInvalidErrorDisplayed = () => emailInvalidError().isDisplayed();
-exports.isEmailExistsErrorDisplayed = () => emailExistsError().isDisplayed();
-exports.isPasswordEmptyErrorDisplayed = () => passwordEmptyError().isDisplayed();
+exports.errorMessageEmailText = () => errorMessageEmail().getText();
+
+exports.errorMessagePasswordText = () => errorMessagePassword().getText();
 
 exports.termsAndConditionsLinkCanBeClicked = () => termsAndConditionsLink().isClickable();
 exports.privacyPolicyLinkCanBeClicked = () => privacyPolicyLink().isClickable();
 exports.cookiesPolicyLinkCanBeClicked = () => cookiesPolicyLink().isClickable();
 
+exports.errorSummaryContainerRole = () => errorSummaryContainer().getAttribute('role');
+exports.errorSummaryContainerDisplayed = () => errorSummaryContainer().isDisplayed();
+exports.errorSummaryContainerMessageCount = () => errorSummaryContainer().$$('p').length;
+exports.errorSummaryContainerMessageText = () => errorSummaryContainer().getText();

@@ -8,6 +8,7 @@
             content="width=device-width, initial-scale=1"
         >
         <registration
+            createAccountUrl="http://account-url.example.com"
             locale="en-GB"
             :show-login-link=true
             create-account-url="/account/register"

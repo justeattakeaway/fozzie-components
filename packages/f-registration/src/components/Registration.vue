@@ -55,7 +55,7 @@
                         <p
                             id="error-message-firstname"
                             :class="$style['o-form-error']"
-                            data-test-id='error-first-name-empty'>
+                            data-test-id='error-message-firstname'>
                             <warning-icon :class="$style['o-form-error-icon']" />
                             {{ describeFirstnameErrorMessage }}
                         </p>
@@ -79,7 +79,7 @@
                         <p
                             id="error-message-lastname"
                             :class="$style['o-form-error']"
-                            data-test-id='error-last-name-empty'>
+                            data-test-id='error-message-lastname'>
                             <warning-icon :class="$style['o-form-error-icon']" />
                             {{ describeLastnameErrorMessage }}
                         </p>
@@ -104,7 +104,7 @@
                         <p
                             id="error-message-email"
                             :class="$style['o-form-error']"
-                            data-test-id='error-email-empty'>
+                            data-test-id='error-message-email'>
                             <warning-icon :class="$style['o-form-error-icon']" />
                             {{ describeEmailErrorMessage }}
                         </p>
@@ -128,7 +128,7 @@
                         <p
                             id="error-message-password"
                             :class="$style['o-form-error']"
-                            data-test-id='error-password-empty'>
+                            data-test-id='error-message-password'>
                             <warning-icon :class="$style['o-form-error-icon']" />
                             {{ describePasswordErrorMessage }}
                         </p>
