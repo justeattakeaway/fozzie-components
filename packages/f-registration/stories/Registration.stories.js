@@ -20,12 +20,15 @@ export const RegistrationComponent = () => ({
         },
         buttonText: {
             default: text('Button Text', 'Create Account')
+        },
+        createAccountUrl: {
+            default: text('Dummy Account URL', 'http://account-url.example.com')
         }
     },
     parameters: {
         notes: 'some documentation here'
     },
-    template: '<registration :locale="locale" :title="title" :button-text="buttonText" />'
+    template: '<registration :locale="locale" :title="title" :button-text="buttonText" :create-account-url="createAccountUrl"/>'
 });
 
 RegistrationComponent.parameters = {

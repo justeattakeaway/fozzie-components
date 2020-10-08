@@ -26,140 +26,111 @@
                 @submit.prevent="onFormSubmit"
             >
                 <!-- TODO WCB-1031 - Extract error messages into a separate component -->
-                <p
-                    v-if="genericErrorMessage"
-                    :class="$style['o-form-error']">
-                    <warning-icon :class="$style['o-form-error-icon']" />
-                    {{ genericErrorMessage }}
-                </p>
+                <section
+                    id="error-summary-container"
+                    :class="$style['is-visuallyHidden']"
+                    role="alert"
+                    data-test-id="error-summary-container">
+                    <p
+                        v-if="genericErrorMessage"
+                        :class="$style['o-form-error']">
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        {{ genericErrorMessage }}
+                    </p>
+                </section>
                 <form-field
+                    ref="firstName"
                     v-model="firstName"
                     name="firstName"
                     data-test-id="input-first-name"
                     :label-text="copy.labels.firstName"
                     input-type="text"
                     label-style="inlineNarrow"
-                    @blur="formFieldBlur('firstName')">
-                    <template #error>
+                    aria-describedby="error-message-firstname"
+                    :aria-invalid="!!describeFirstnameErrorMessage"
+                    @blur="$v.firstName.$touch">
+                    <template
+                        v-if="describeFirstnameErrorMessage"
+                        #error>
                         <p
-                            v-if="shouldShowFirstNameRequiredError"
+                            id="error-message-firstname"
                             :class="$style['o-form-error']"
                             data-test-id='error-first-name-empty'>
                             <warning-icon :class="$style['o-form-error-icon']" />
-                            {{ copy.validationMessages.firstName.requiredError }}
-                        </p>
-                        <p
-                            v-if="shouldShowFirstNameMaxLengthError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-first-name-maxlength'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
-                            {{ copy.validationMessages.firstName.maxLengthError }}
-                        </p>
-                        <p
-                            v-if="shouldShowFirstNameInvalidCharError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-first-name-invalid'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
-                            {{ copy.validationMessages.firstName.invalidCharError }}
+                            {{ describeFirstnameErrorMessage }}
                         </p>
                     </template>
                 </form-field>
 
                 <form-field
+                    ref="lastName"
                     v-model="lastName"
                     name="lastName"
                     data-test-id="input-last-name"
                     :label-text="copy.labels.lastName"
                     input-type="text"
                     label-style="inlineNarrow"
-                    @blur="formFieldBlur('lastName')">
-                    <template #error>
+                    aria-describedby="error-message-lastname"
+                    :aria-invalid="!!describeLastnameErrorMessage"
+                    @blur="$v.lastName.$touch">
+                    <template
+                        v-if="describeLastnameErrorMessage"
+                        #error>
                         <p
-                            v-if="shouldShowLastNameRequiredError"
+                            id="error-message-lastname"
                             :class="$style['o-form-error']"
                             data-test-id='error-last-name-empty'>
                             <warning-icon :class="$style['o-form-error-icon']" />
-                            {{ copy.validationMessages.lastName.requiredError }}
-                        </p>
-                        <p
-                            v-if="shouldShowLastNameMaxLengthError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-last-name-maxlength'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
-                            {{ copy.validationMessages.lastName.maxLengthError }}
-                        </p>
-                        <p
-                            v-if="shouldShowLastNameInvalidCharError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-last-name-invalid'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
-                            {{ copy.validationMessages.lastName.invalidCharError }}
+                            {{ describeLastnameErrorMessage }}
                         </p>
                     </template>
                 </form-field>
 
                 <form-field
+                    ref="email"
                     v-model="email"
                     name="email"
                     data-test-id="input-email"
                     :label-text="copy.labels.email"
                     input-type="email"
                     label-style="inlineNarrow"
-                    @blur="formFieldBlur('email')">
-                    <template #error>
+                    aria-describedby="error-message-email"
+                    :aria-invalid="!!describeEmailErrorMessage"
+                    @blur="$v.email.$touch">
+                    <!-- For when we want to add validation on blur of input - @blur="$v.email.$touch" -->
+                    <template
+                        v-if="describeEmailErrorMessage"
+                        #error>
                         <p
-                            v-if="shouldShowEmailRequiredError"
+                            id="error-message-email"
                             :class="$style['o-form-error']"
                             data-test-id='error-email-empty'>
                             <warning-icon :class="$style['o-form-error-icon']" />
-                            {{ copy.validationMessages.email.requiredError }}
-                        </p>
-                        <p
-                            v-else-if="shouldShowEmailInvalidError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-email-invalid'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
-                            {{ copy.validationMessages.email.invalidEmailError }}
-                        </p>
-                        <p
-                            v-if="shouldShowEmailMaxLengthError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-email-maxlength'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
-                            {{ copy.validationMessages.email.maxLengthError }}
-                        </p>
-                        <p
-                            v-else-if="shouldShowEmailAlreadyExistsError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-email-exists'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
-                            {{ copy.validationMessages.email.alreadyExistsError }}
+                            {{ describeEmailErrorMessage }}
                         </p>
                     </template>
                 </form-field>
 
                 <form-field
+                    ref="password"
                     v-model="password"
                     name="password"
                     data-test-id="input-password"
                     :label-text="copy.labels.password"
                     input-type="password"
                     label-style="inlineNarrow"
-                    @blur="formFieldBlur('password')">
-                    <template #error>
+                    aria-describedby="error-message-password"
+                    :aria-invalid="!!describePasswordErrorMessage"
+                    @blur="$v.password.$touch">
+                    <template
+                        v-if="describePasswordErrorMessage"
+                        #error>
                         <p
-                            v-if="shouldShowPasswordRequiredError"
+                            id="error-message-password"
                             :class="$style['o-form-error']"
                             data-test-id='error-password-empty'>
                             <warning-icon :class="$style['o-form-error-icon']" />
-                            {{ copy.validationMessages.password.requiredError }}
-                        </p>
-                        <p
-                            v-if="shouldShowPasswordMinLengthError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-password-minlength'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
-                            {{ copy.validationMessages.password.minLengthError }}
+                            {{ describePasswordErrorMessage }}
                         </p>
                     </template>
                 </form-field>
@@ -299,38 +270,55 @@ export default {
          * focus on the input field.
          */
 
-        shouldShowFirstNameRequiredError () {
-            return !this.$v.firstName.required && this.$v.firstName.$dirty;
+        describeFirstnameErrorMessage () {
+            if (this.$v.firstName.$dirty) {
+                if (!this.$v.firstName.required) {
+                    return 'Please include your first name';
+                }
+                if (!this.$v.firstName.maxLength) {
+                    return 'First name exceeds 50 characters';
+                }
+                if (!this.$v.firstName.meetsCharacterValidationRules) {
+                    return 'First name should only contain letters, hyphens or apostrophes';
+                }
+            }
+            return '';
         },
-        shouldShowFirstNameMaxLengthError () {
-            return !this.$v.firstName.maxLength && this.$v.firstName.$dirty;
+        describeLastnameErrorMessage () {
+            if (this.$v.lastName.$dirty) {
+                if (!this.$v.lastName.required) {
+                    return 'Please include your last name';
+                }
+                if (!this.$v.lastName.maxLength) {
+                    return 'Last name exceeds 50 characters';
+                }
+                if (!this.$v.lastName.meetsCharacterValidationRules) {
+                    return 'Last name should only contain letters, hyphens or apostrophes';
+                }
+            }
+            return '';
         },
-        shouldShowFirstNameInvalidCharError () {
-            return !this.$v.firstName.meetsCharacterValidationRules && this.$v.firstName.$dirty;
+        describeEmailErrorMessage () {
+            if (this.$v.email.$dirty) {
+                if (!this.$v.email.required) {
+                    return 'Please enter your email address';
+                }
+                if (!this.$v.email.email) {
+                    return 'Please enter a valid email address';
+                }
+            }
+            return '';
         },
-        shouldShowLastNameRequiredError () {
-            return !this.$v.lastName.required && this.$v.lastName.$dirty;
-        },
-        shouldShowLastNameMaxLengthError () {
-            return !this.$v.lastName.maxLength && this.$v.lastName.$dirty;
-        },
-        shouldShowLastNameInvalidCharError () {
-            return !this.$v.lastName.meetsCharacterValidationRules && this.$v.lastName.$dirty;
-        },
-        shouldShowEmailRequiredError () {
-            return !this.$v.email.required && this.$v.email.$dirty;
-        },
-        shouldShowEmailMaxLengthError () {
-            return !this.$v.email.maxLength && this.$v.email.$dirty;
-        },
-        shouldShowEmailInvalidError () {
-            return !this.$v.email.email && this.$v.email.$dirty;
-        },
-        shouldShowPasswordRequiredError () {
-            return !this.$v.password.required && this.$v.password.$dirty;
-        },
-        shouldShowPasswordMinLengthError () {
-            return !this.$v.password.minLength && this.$v.password.$dirty;
+        describePasswordErrorMessage () {
+            if (this.$v.password.$dirty) {
+                if (!this.$v.password.required) {
+                    return 'Please enter a password';
+                }
+                if (!this.$v.password.minLength) {
+                    return 'Password is less than four characters';
+                }
+            }
+            return '';
         },
         tenant () {
             return {
@@ -445,8 +433,27 @@ export default {
         },
 
         isFormInvalid () {
-            this.$v.$touch();
-            return this.$v.$invalid;
+            const v = this.$v;
+            function countErrors () {
+                return [
+                    v.firstName.$anyError,
+                    v.lastName.$anyError,
+                    v.email.$anyError,
+                    v.password.$anyError
+                ].filter(x => x)
+                .length;
+            }
+            v.firstName.$touch();
+            v.lastName.$touch();
+            v.email.$touch();
+            v.password.$touch();
+
+            if (v.$invalid) {
+                this.genericErrorMessage = `There are ${countErrors()} errors in the form.`;
+                return true;
+            }
+            this.genericErrorMessage = '';
+            return false;
         }
     }
 };
