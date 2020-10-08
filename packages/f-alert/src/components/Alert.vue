@@ -5,34 +5,39 @@
                  $style[`c-alert--${type}`],
                  (isRounded ? $style['c-alert--rounded'] : '')]"
         data-test-id='alert-component'>
-        <button
-            v-if="isDismissable"
-            type="button"
-            :class="[$style['c-alert-dismiss'], 'o-btn o-btn--icon']"
-            @click="dismiss">
-            <cross-icon
-                :class="[$style['c-icon--cross'], $style['c-alert-dismiss-icon']]" />
-        </button>
-        <!-- TODO: make this dynamic. See https://skipthedishes.atlassian.net/browse/WCB-1219 -->
-        <h3
-            :class="$style['c-alert-heading']">
-            <slot name="heading" />
-        </h3>
-        <p
+        <div
+            :class="$style['c-alert-heading-container']">
+            <alert-icon
+                :class="[$style['c-icon--alert'], $style['c-alert-icon']]" />
+            <!-- TODO: make this dynamic. See https://skipthedishes.atlassian.net/browse/WCB-1219 -->
+            <h3
+                :class="$style['c-alert-heading']">
+                <slot name="heading" />
+            </h3>
+            <button
+                v-if="isDismissable"
+                type="button"
+                :class="[$style['c-alert-dismiss'], 'o-btn o-btn--icon']"
+                @click="dismiss">
+                <cross-icon
+                    :class="[$style['c-icon--cross'], $style['c-alert-dismiss-icon']]" />
+            </button>
+        </div>
+        <div
             :class="$style['c-alert-content']">
             <slot name="content" />
-        </p>
+        </div>
     </div>
 </template>
 
 <script>
-import { CrossIcon } from '@justeat/f-vue-icons';
+import { CrossIcon, AlertIcon } from '@justeat/f-vue-icons';
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 
 export default {
     name: 'VueAlert',
-    components: { CrossIcon },
+    components: { CrossIcon, AlertIcon },
     props: {
         locale: {
             type: String,
@@ -40,8 +45,8 @@ export default {
         },
         type: {
             type: String,
-            default: 'success',
-            validator: value => ['success', 'warning', 'info', 'danger'].indexOf(value) !== -1
+            default: 'neutral',
+            validator: value => ['success', 'warning', 'info', 'danger', 'neutral'].indexOf(value) !== -1
         },
         isRounded: {
             type: Boolean,
@@ -82,9 +87,10 @@ $alert-borderRadius: $border-radius;
 .c-alert {
     position: relative;
     padding: spacing();
+    padding-bottom: spacing(x1.5);
     margin-top: spacing(x2);
     border: 0;
-    min-height: 132px;
+    // min-height: 132px;
 
     &:first-child {
         margin-top: 0;
@@ -94,6 +100,11 @@ $alert-borderRadius: $border-radius;
         margin-top: spacing(x2);
     }
 }
+    .c-alert-heading-container {
+        display: flex;
+        align-items: center;
+        padding: spacing(x0.5) 0;
+    }
 
     .c-alert--rounded {
         border-radius: $alert-borderRadius;
@@ -115,21 +126,29 @@ $alert-borderRadius: $border-radius;
         @include alert-variant($color-bg--info, $color-text);
     }
 
+    .c-alert--neutral {
+        @include alert-variant($color-bg--darker, $color-text);
+    }
+
     .c-alert-heading {
         @include font-size(subheading-s, true, narrow);
-        margin-top: spacing(x0.5);
+        margin-top: -1px;
     }
 
     .c-alert-content {
         @include font-size(body-l);
+        padding-left: spacing(x5);
+    }
+
+    .c-alert-icon {
+        height: 20px;
+        margin: 0 spacing(x1.5) 0 spacing();
     }
 
     button.c-alert-dismiss { // TODO: Needed more specificity here.
-        padding: spacing();
         text-indent: 0;
-        position: absolute;
-        right: spacing();
-        top: spacing();
+        margin-left: auto;
+        margin-right: spacing();
         z-index: zIndex(high);
 
         &:hover {
