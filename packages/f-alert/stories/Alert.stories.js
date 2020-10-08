@@ -15,7 +15,6 @@ storiesOf('Components', module)
         <vue-alert
             locale="en-GB"
             type="danger"
-            :isRounded="false"
             :isDismissable="true">
             <template v-slot:heading>Title of the alert</template>
             <template v-slot:content>You can put any HTML here, buddy.</template>

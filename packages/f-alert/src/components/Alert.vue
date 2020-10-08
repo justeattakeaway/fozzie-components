@@ -1,19 +1,17 @@
 <template>
     <div
-        :data-theme="theme"
         :class="[$style['c-alert'],
-                 $style[`c-alert--${type}`],
-                 (isRounded ? $style['c-alert--rounded'] : '')]"
+                 $style[`c-alert--${type}`]]"
         data-test-id='alert-component'>
         <div
             :class="$style['c-alert-heading-container']">
             <alert-icon
                 :class="[$style['c-icon--alert'], $style['c-alert-icon']]" />
             <!-- TODO: make this dynamic. See https://skipthedishes.atlassian.net/browse/WCB-1219 -->
-            <h3
+            <h2
                 :class="$style['c-alert-heading']">
                 <slot name="heading" />
-            </h3>
+            </h2>
             <button
                 v-if="isDismissable"
                 type="button"
@@ -32,8 +30,6 @@
 
 <script>
 import { CrossIcon, AlertIcon } from '@justeat/f-vue-icons';
-import { globalisationServices } from '@justeat/f-services';
-import tenantConfigs from '../tenants';
 
 export default {
     name: 'VueAlert',
@@ -48,28 +44,10 @@ export default {
             default: 'neutral',
             validator: value => ['success', 'warning', 'info', 'danger', 'neutral'].indexOf(value) !== -1
         },
-        isRounded: {
-            type: Boolean,
-            default: false
-        },
         isDismissable: {
             type: Boolean,
             default: false
-        },
-        isFullWidth: {
-            type: Boolean,
-            default: false
         }
-    },
-    data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
-        const theme = globalisationServices.getTheme(locale);
-
-        return {
-            copy: { ...localeConfig },
-            theme
-        };
     },
     methods: {
         dismiss () {
@@ -90,15 +68,6 @@ $alert-borderRadius: $border-radius;
     padding-bottom: spacing(x1.5);
     margin-top: spacing(x2);
     border: 0;
-    // min-height: 132px;
-
-    &:first-child {
-        margin-top: 0;
-    }
-
-    & + * {
-        margin-top: spacing(x2);
-    }
 }
     .c-alert-heading-container {
         display: flex;
