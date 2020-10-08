@@ -54,22 +54,7 @@
 
                 <form-selector />
 
-                <div :class="$style['c-userNote']">
-                    <h4 :class="$style['note-heading']">
-                        Leave a note
-                    </h4>
-                    <p :class="$style['note-text']">
-                        {{ noteText }}
-                    </p>
-
-                    <textarea
-                        id="c-fareaorm-text-"
-                        name="notePlaceholder"
-                        cols="30"
-                        rows="10"
-                        :class="$style['c-userNote-textArea']"
-                        :placeholder="notePlaceholder" />
-                </div>
+                <user-note />
 
                 <allergy-note />
 
@@ -91,6 +76,7 @@ import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import FormSelector from './Selector.vue';
 import FormButton from './Button.vue';
+import UserNote from './UserNote.vue';
 import AllergyNote from './AllergyNote.vue';
 import tenantConfigs from '../tenants';
 
@@ -101,7 +87,8 @@ export default {
         FormField,
         FormSelector,
         FormButton,
-        AllergyNote
+        AllergyNote,
+        UserNote
     },
     props: {
         locale: {
