@@ -1,5 +1,5 @@
 <template>
-    <a :class="$style['text']">
+    <a :class="$style['c-allergyNote']">
         {{ text }}
     </a>
 </template>
@@ -17,16 +17,17 @@ export default {
 </script>
 
 <style lang="scss" module>
-.text {
+.c-allergyNote {
     display: block;
     margin: auto;
-    padding: 20px 12px 0 12px;
+    padding: 20px;
+    padding-bottom: 0;
     text-align: center;
     color: $color-link-default;
     text-decoration: underline;
 }
 
-.text:hover {
+.c-allergyNote:hover {
     color: $color-link-hover;
 }
 </style>
