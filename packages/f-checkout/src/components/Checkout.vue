@@ -77,6 +77,8 @@
                         :placeholder="notePlaceholder" />
                 </div>
 
+                <allergy-note />
+
                 <form-button
                     data-test-id="confirm-payment-submit-button"
                     button-style="primary">
@@ -95,6 +97,7 @@ import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import FormSelector from './Selector.vue';
 import FormButton from './Button.vue';
+import AllergyNote from './AllergyNote.vue';
 import tenantConfigs from '../tenants';
 
 export default {
@@ -103,7 +106,8 @@ export default {
         Card,
         FormField,
         FormSelector,
-        FormButton
+        FormButton,
+        AllergyNote
     },
     props: {
         locale: {
@@ -180,8 +184,8 @@ $form-note-text                           : $grey--darkest;
 }
 
 .c-card-padding {
-    padding-top: 30px;
-    padding-bottom: 60px;
+    padding-top: 20px;
+    padding-bottom: 40px;
 }
 
 .c-form-text-area {
@@ -216,5 +220,4 @@ $form-note-text                           : $grey--darkest;
 .note-heading {
     margin: 0;
 }
-
 </style>
