@@ -22,21 +22,21 @@
 
                 <div :class="$style['l-address-group']">
                     <form-field
-                        v-model="lineOne"
+                        v-model="address.lineOne"
                         name="address-line-one"
                         data-test-id="input-address-line-one"
                         label-text="Address line 1"
                         input-type="text"
                         label-style="inline" />
                     <form-field
-                        v-model="lineTwo"
+                        v-model="address.lineTwo"
                         name="address-line-two"
                         data-test-id="input-address-line-two"
                         label-text="Address line 2"
                         input-type="text"
                         label-style="inline" />
                     <form-field
-                        v-model="city"
+                        v-model="address.city"
                         name="address-city"
                         data-test-id="input-address-city"
                         label-text="City"
@@ -45,7 +45,7 @@
                 </div>
 
                 <form-field
-                    v-model="postcode"
+                    v-model="address.postcode"
                     name="address-postcode"
                     data-test-id="input-address-postcode"
                     label-text="Postcode"
@@ -82,6 +82,7 @@ import tenantConfigs from '../tenants';
 
 export default {
     name: 'VueCheckout',
+
     components: {
         Card,
         FormField,
@@ -90,6 +91,7 @@ export default {
         AllergyNote,
         UserNote
     },
+
     props: {
         locale: {
             type: String,
@@ -99,43 +101,12 @@ export default {
             type: String,
             default: '#name, confirm your details'
         },
-        mobileNumber: {
-            type: String,
-            default: null
-        },
-        lineOne: {
-            type: String,
-            default: null
-        },
-        lineTwo: {
-            type: String,
-            default: null
-        },
-        city: {
-            type: String,
-            default: null
-        },
-        postcode: {
-            type: String,
-            default: null
-        },
-        deliveryTimes: {
-            type: Array,
-            default: () => []
-        },
-        noteText: {
-            type: String,
-            default: "Leave a note for the restaurant with anything they need to know (e.g. the doorbell doesn't work). Do not include details about any allergies here."
-        },
-        notePlaceholder: {
-            type: String,
-            default: "e.g. the dorbell doesn't work. Do not include details about any allergies here. \n\n We're working with resturants to cut waste. Please don't as for plastic cutlery."
-        },
         buttonText: {
             type: String,
             default: 'Go to Payment'
         }
     },
+
     data () {
         const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
@@ -143,7 +114,14 @@ export default {
 
         return {
             copy: { ...localeConfig },
-            theme
+            theme,
+            mobileNumber: null,
+            address: {
+                lineOne: null,
+                lineTwo: null,
+                citry: null,
+                postcode: null
+            }
         };
     }
 };
