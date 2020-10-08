@@ -6,7 +6,6 @@
         <p>
             {{ noteText }}
         </p>
-
         <textarea
             id="c-fareaorm-text-"
             name="notePlaceholder"
@@ -20,6 +19,7 @@
 <script>
 export default {
     name: 'UserNote',
+
     props: {
         noteText: {
             type: String,

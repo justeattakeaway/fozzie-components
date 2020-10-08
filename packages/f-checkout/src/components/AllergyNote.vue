@@ -7,6 +7,7 @@
 <script>
 export default {
     name: 'SelectorComponent',
+
     props: {
         text: {
             type: String,
@@ -25,9 +26,9 @@ export default {
     text-align: center;
     color: $color-link-default;
     text-decoration: underline;
-}
 
-.c-allergyNote:hover {
-    color: $color-link-hover;
+    &:hover {
+        color: $color-link-hover;
+    }
 }
 </style>

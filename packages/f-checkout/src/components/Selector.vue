@@ -21,6 +21,7 @@
 <script>
 export default {
     name: 'SelectorComponent',
+
     props: {
         deliveryTimes: {
             type: Array,
@@ -73,5 +74,4 @@ $form-input-borderColour--focus           : $grey--dark;
         border: none;
     }
 }
-
 </style>

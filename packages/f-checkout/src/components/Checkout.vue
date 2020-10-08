@@ -19,7 +19,6 @@
                     label-text="Mobile number"
                     input-type="text"
                     label-style="inline" />
-
                 <div :class="$style['l-address-group']">
                     <form-field
                         v-model="address.lineOne"
@@ -43,7 +42,6 @@
                         input-type="text"
                         label-style="inline" />
                 </div>
-
                 <form-field
                     v-model="address.postcode"
                     name="address-postcode"
@@ -51,13 +49,9 @@
                     label-text="Postcode"
                     input-type="text"
                     label-style="inline" />
-
                 <form-selector />
-
                 <user-note />
-
                 <allergy-note />
-
                 <form-button
                     data-test-id="confirm-payment-submit-button"
                     button-style="primary">
