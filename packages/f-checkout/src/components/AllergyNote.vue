@@ -28,7 +28,8 @@ export default {
     text-decoration: underline;
     font-weight: $font-weight-bold;
 
-    &:hover {
+    &:hover,
+    &:focus {
         color: $color-link-hover;
     }
 }
