@@ -54,8 +54,7 @@
                 <user-note />
                 <allergy-note />
                 <form-button
-                    data-test-id="confirm-payment-submit-button"
-                    button-style="primary">
+                    data-test-id="confirm-payment-submit-button">
                     {{ buttonText }}
                 </form-button>
             </form>
