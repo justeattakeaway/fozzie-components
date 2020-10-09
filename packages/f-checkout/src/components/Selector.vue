@@ -20,8 +20,6 @@
 
 <script>
 export default {
-    name: 'SelectorComponent',
-
     props: {
         deliveryTimes: {
             type: Array,

@@ -17,8 +17,6 @@
 
 <script>
 export default {
-    name: 'UserNote',
-
     props: {
         noteText: {
             type: String,

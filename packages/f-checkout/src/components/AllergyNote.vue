@@ -6,8 +6,6 @@
 
 <script>
 export default {
-    name: 'SelectorComponent',
-
     props: {
         text: {
             type: String,

@@ -6,12 +6,6 @@
     </button>
 </template>
 
-<script>
-export default {
-    name: 'ButtonComponent'
-};
-</script>
-
 <style lang="scss" module>
 
 $btn-default-weight                 : 500;
