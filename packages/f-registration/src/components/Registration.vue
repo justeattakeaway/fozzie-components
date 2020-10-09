@@ -19,6 +19,9 @@
             <form
                 type="post"
                 :class="$style['o-form']"
+                tabindex="0"
+                @click="formStart"
+                @focus="formStart"
                 @submit.prevent="onFormSubmit"
             >
                 <!-- TODO WCB-1031 - Extract error messages into a separate component -->
@@ -266,7 +269,8 @@ export default {
             password: null,
             shouldDisableCreateAccountButton: false,
             genericErrorMessage: null,
-            shouldShowEmailAlreadyExistsError: false
+            shouldShowEmailAlreadyExistsError: false,
+            formStarted: false
         };
     },
 
@@ -351,6 +355,13 @@ export default {
     },
 
     methods: {
+        formStart () {
+            if (!this.formStarted) {
+                this.$emit(EventNames.CreateAccountStart);
+                this.formStarted = true;
+            }
+        },
+
         async onFormSubmit () {
             this.genericErrorMessage = null;
             this.shouldShowEmailAlreadyExistsError = false;
