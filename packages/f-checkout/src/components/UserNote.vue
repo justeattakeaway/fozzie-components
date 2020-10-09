@@ -7,7 +7,6 @@
             {{ noteText }}
         </p>
         <textarea
-            id="c-fareaorm-text-"
             name="notePlaceholder"
             cols="30"
             rows="10"
@@ -56,7 +55,7 @@ $form-note-color                           : $grey--dark;
 
     .c-userNote-textArea {
         width: 100%;
-        height: 10rem;
+        height: 8rem;
         padding: 0.5rem;
         resize: none;
         font-family: $font-family-base;

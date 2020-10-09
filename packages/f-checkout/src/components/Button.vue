@@ -1,33 +1,14 @@
 <template>
     <button
         type='submit'
-        :class="$style['o-btn']"
-    >
+        :class="$style['o-btn']">
         <slot />
     </button>
 </template>
 
 <script>
 export default {
-    name: 'ButtonComponent',
-
-    props: {
-        buttonStyle: {
-            type: String,
-            default: ''
-        },
-        isFullWidth: {
-            type: Boolean,
-            default: false
-        }
-    },
-    computed: {
-        buttonStyleClass () {
-            return (this.buttonStyle)
-                ? `o-btn--${this.buttonStyle}`
-                : '';
-        }
-    }
+    name: 'ButtonComponent'
 };
 </script>
 
