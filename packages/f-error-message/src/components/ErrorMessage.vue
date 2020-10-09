@@ -1,48 +1,49 @@
 <template>
-    <div
-        :data-theme="theme"
-        :class="$style['c-errorMessage']">
-        {{ copy.text }}
-    </div>
+    <p
+        v-if="hasSlotData"
+        :class="$style['c-error-message']"
+        :data-test-id="dataTestId">
+        <warning-icon :class="$style['c-error-message-icon']" />
+        <slot />
+    </p>
 </template>
 
 <script>
-import { globalisationServices } from '@justeat/f-services';
-import tenantConfigs from '../tenants';
+import { WarningIcon } from '@justeat/f-vue-icons';
 
 export default {
     name: 'ErrorMessage',
-    components: {},
+    components: {
+        WarningIcon
+    },
     props: {
-        locale: {
+        dataTestId: {
             type: String,
             default: ''
         }
     },
-    data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
-        const theme = globalisationServices.getTheme(locale);
-
-        return {
-            copy: { ...localeConfig },
-            theme
-        };
+    computed: {
+        hasSlotData () {
+            return !!this.$slots.default;
+        }
     }
 };
 </script>
 
 <style lang="scss" module>
 
-.c-errorMessage {
+.c-error-message {
     display: flex;
-    justify-content: center;
-    min-height: 80vh;
-    width: 80vw;
-    margin: auto;
-    border: 1px solid $red;
-    font-family: $font-family-base;
-    @include font-size(large);
+    align-items: center;
+    color: $red;
+    @include font-size(base);
+    margin-top: spacing();
+}
+
+.c-error-message-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: spacing(x0.5);
 }
 
 </style>
