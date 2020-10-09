@@ -15,7 +15,6 @@ export default {
 <style lang="scss" module>
 
 $btn-default-weight                 : 500;
-$btn-default-height                 : 2.6;
 $btn-default-font-size              : body-l;
 $btn-default-font-family            : $font-family-base;
 $btn-default-borderRadius           : 2px;
@@ -24,7 +23,6 @@ $btn-default-vertPadding            : 12px;
 
 $btn-primary-bgColor                : $orange;
 $btn-primary-bgColor--hover         : $orange--dark;
-$btn-primary-bgColor--focus         : $orange--darkest;
 $btn-primary-textColor              : $white;
 
 $btn-disabled-bgColor               : $grey--light;
