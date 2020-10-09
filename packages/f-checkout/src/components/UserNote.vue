@@ -27,7 +27,7 @@ export default {
         },
         notePlaceholder: {
             type: String,
-            default: "e.g. the dorbell doesn't work. Do not include details about any allergies here. \n\n We're working with resturants to cut waste. Please don't as for plastic cutlery."
+            default: "e.g. the doorbell doesn't work. Do not include details about any allergies here. \n\nWe're working with resturants to cut waste. Please don't ask for plastic cutlery."
         }
     }
 };
@@ -40,24 +40,25 @@ $form-input-borderRadius                  : 3px;
 $form-input-borderWidth                   : 1px;
 $form-input-borderColour                  : $grey--light;
 $form-input-borderColour--focus           : $grey--dark;
-$form-note-text                           : $grey--dark;
+$form-note-color                           : $grey--dark;
 
 .c-userNote {
+
     h4 {
         margin: 0;
     }
 
     p {
-        color: $form-note-text;
+        color: $form-note-color;
         margin-top: 5px;
+        @include font-size(caption);
     }
 
     .c-userNote-textArea {
         width: 100%;
-        height: 12rem;
+        height: 10rem;
         padding: 0.5rem;
         resize: none;
-        @include font-size();
         font-family: $font-family-base;
         color: $form-input-colour;
         font-weight: $font-weight-base;

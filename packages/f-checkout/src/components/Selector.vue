@@ -43,17 +43,11 @@ $form-input-borderColour--focus           : $grey--dark;
 .c-selector {
     margin: 30px 0;
     position: relative;
-    width: 100%;
-    height: 2.5rem;
     padding: 0;
-    @include font-size();
     font-family: $font-family-base;
     color: $form-input-colour;
     font-weight: $font-weight-base;
     background-color: $form-input-bg;
-    border: $form-input-borderWidth solid $form-input-borderColour;
-    border-radius: $form-input-borderRadius;
-    background-clip: padding-box;
 
     .o-selector-label {
         display: block;
@@ -63,15 +57,16 @@ $form-input-borderColour--focus           : $grey--dark;
         top: 50%;
         left: 0.5rem;
         transform: translateY(-50%);
-        margin-bottom: 0;
-        cursor: text;
+        cursor: pointer;
     }
 
     .c-selector-input {
-        height: 100%;
+        height: 2.5rem;
         width: 100%;
         padding: 0.5rem;
-        border: none;
+        border: $form-input-borderWidth solid $form-input-borderColour;
+        border-radius: $form-input-borderRadius;
+        cursor: pointer;
     }
 }
 </style>

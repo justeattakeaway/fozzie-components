@@ -47,8 +47,8 @@ $btn-default-font-size              : body-l;
 $btn-default-font-family            : $font-family-base;
 $btn-default-bgColor--hover         : $grey--light;
 $btn-default-borderRadius           : 2px;
-$btn-default-hozPadding             : 1em;
-$btn-default-vertPadding            : 11px;
+$btn-default-hozPadding             : 2em;
+$btn-default-vertPadding            : 12px;
 
 $btn-primary-bgColor                : $orange;
 $btn-primary-bgColor--hover         : $orange--dark;

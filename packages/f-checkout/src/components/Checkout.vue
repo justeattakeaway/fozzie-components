@@ -1,5 +1,6 @@
 <template>
     <div
+        :data-theme="theme"
         :class="$style['c-checkout']"
         data-test-id='checkout-component'>
         <card
@@ -110,7 +111,7 @@ export default {
             address: {
                 lineOne: null,
                 lineTwo: null,
-                citry: null,
+                city: null,
                 postcode: null
             }
         };
@@ -125,18 +126,15 @@ export default {
 </script>
 
 <style lang="scss" module>
-$form-input-colour                        : $color-text;
-$form-input-bg                            : $white;
-$form-input-borderRadius                  : 3px;
-$form-input-borderWidth                   : 1px;
-$form-input-borderColour                  : $grey--light;
-$form-input-borderColour--focus           : $grey--dark;
-$form-note-text                           : $grey--darkest;
+$font-family                              : $font-family-base;
 
 .c-checkout {
     margin: auto;
     font-family: $font-family-base;
-    @include font-size();
+
+    h1 {
+        @include font-size(body-l);
+    }
 }
 
 .c-card-padding {
@@ -145,36 +143,11 @@ $form-note-text                           : $grey--darkest;
 }
 
 .l-address-group {
-    margin: 29px 0 40px 0;
+    margin: 29px 0 45px 0;
+    @include font-size(body-s);
 
     div {
         margin-bottom: -17px;
-    }
-}
-
-.c-userNote {
-    h4 {
-        margin: 0;
-    }
-
-    p {
-        color: $form-input-borderColour--focus;
-        margin-top: 5px;
-    }
-
-    .c-userNote-textArea {
-        width: 100%;
-        height: 12rem;
-        padding: 0.5rem;
-        resize: none;
-        @include font-size();
-        font-family: $font-family-base;
-        color: $form-input-colour;
-        font-weight: $font-weight-base;
-        background-color: $form-input-bg;
-        border: $form-input-borderWidth solid $form-input-borderColour;
-        border-radius: $form-input-borderRadius;
-        background-clip: padding-box;
     }
 }
 </style>
