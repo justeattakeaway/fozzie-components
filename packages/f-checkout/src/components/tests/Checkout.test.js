@@ -9,7 +9,7 @@ describe('Checkout', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    it('has a button', () => {
+    it('have a button', () => {
         const wrapper = shallowMount(VueCheckout, { propsData });
         const button = wrapper.find("[data-test-id='confirm-payment-submit-button']");
         expect(button.exists()).toBe(true);
