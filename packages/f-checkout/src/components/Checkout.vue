@@ -137,14 +137,18 @@ export default {
 
 <style lang="scss" module>
 $font-family                              : $font-family-base;
+$font-colour                              : $color-text;
+$font-weight                              : $font-weight-base;
 
 .c-checkout {
     margin: auto;
     font-family: $font-family-base;
+    color: $font-colour;
+    font-weight: $font-weight;
 
     .c-card-dimensions {
         width: 462px;
-        padding: 30px 80px 50px 80px;
+        padding: 25px 80px 50px 80px;
     }
 
     h1 {

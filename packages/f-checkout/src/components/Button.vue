@@ -9,7 +9,7 @@
 <style lang="scss" module>
 
 $btn-default-weight                 : 500;
-$btn-default-font-size              : body-l;
+$btn-default-font-size              : body-s;
 $btn-default-font-family            : $font-family-base;
 $btn-default-borderRadius           : 2px;
 $btn-default-hozPadding             : 2em;
@@ -27,7 +27,7 @@ $btn-disabled-bgColor               : $grey--light;
     font-family: $btn-default-font-family;
     @include font-size($btn-default-font-size);
     cursor: pointer;
-    padding: $btn-default-vertPadding $btn-default-hozPadding;
+    padding: 16px 52px;
     overflow: visible;
     text-align: center;
     font-weight: $btn-default-weight;
