@@ -15,6 +15,7 @@
             <form action="post">
                 <form-field
                     v-model="mobileNumber"
+                    :class="$style['c-formFiled']"
                     name="mobile-number"
                     data-test-id="input-mobile-number"
                     label-text="Mobile number"
@@ -24,6 +25,7 @@
                 <div :class="$style['l-address-group']">
                     <form-field
                         v-model="address.lineOne"
+                        :class="$style['c-formFiled']"
                         name="address-line-one"
                         data-test-id="input-address-line-one"
                         label-text="Address line 1"
@@ -32,6 +34,7 @@
 
                     <form-field
                         v-model="address.lineTwo"
+                        :class="$style['c-formFiled']"
                         name="address-line-two"
                         data-test-id="input-address-line-two"
                         label-text="Address line 2 (optional)"
@@ -40,6 +43,7 @@
 
                     <form-field
                         v-model="address.city"
+                        :class="$style['c-formFiled']"
                         name="address-city"
                         data-test-id="input-address-city"
                         label-text="City"
@@ -49,6 +53,7 @@
 
                 <form-field
                     v-model="address.postcode"
+                    :class="$style['c-formFiled']"
                     name="address-postcode"
                     data-test-id="input-address-postcode"
                     label-text="Postcode"
@@ -137,17 +142,16 @@ $font-family                              : $font-family-base;
     margin: auto;
     font-family: $font-family-base;
 
-    h1 {
-        font-size: 20px;
-    }
     .c-card-dimensions {
         width: 462px;
-        height: 885px;
         padding: 30px 80px 50px 80px;
     }
 
+    h1 {
+        font-size: 20px;
+    }
     .l-address-group {
-        margin: 29px 0 45px 0;
+        margin: 18px 0 34px 0;
         @include font-size(body-s);
 
         div {
@@ -155,5 +159,4 @@ $font-family                              : $font-family-base;
         }
     }
 }
-
 </style>

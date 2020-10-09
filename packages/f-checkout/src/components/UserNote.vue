@@ -44,16 +44,7 @@ $form-note-color                           : $grey--dark;
 .c-userNote {
     .c-userNote--title {
         font-weight: 600;
-    }
-
-    div {
-        color: $form-note-color;
-        margin-top: 5px;
-    }
-
-    .c-userNote--title {
-        font-weight: 600;
-        font-size: 16px;
+        margin-top: spacing(x3);
     }
 
     div {
@@ -64,10 +55,12 @@ $form-note-color                           : $grey--dark;
 
     .c-userNote-textArea {
         width: 100%;
-        height: 8rem;
-        padding: 0.5rem;
+        height: 130px;
+        padding: 15px 9px;
+        font-weight: 600;
         resize: none;
-        margin-top: spacing(x2);
+        margin-top: spacing(x1.5);
+        margin-bottom: spacing(x1.5);
         font-family: $font-family-base;
         color: $form-input-colour;
         font-weight: $font-weight-base;

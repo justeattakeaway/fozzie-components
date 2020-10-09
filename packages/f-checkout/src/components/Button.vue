@@ -35,7 +35,6 @@ $btn-disabled-bgColor               : $grey--light;
     font-family: $btn-default-font-family;
     @include font-size($btn-default-font-size);
     cursor: pointer;
-    margin: 0;
     padding: $btn-default-vertPadding $btn-default-hozPadding;
     overflow: visible;
     text-align: center;

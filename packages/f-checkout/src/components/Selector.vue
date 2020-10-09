@@ -41,7 +41,7 @@ $form-input-borderColour                  : $grey--light;
 $form-input-borderColour--focus           : $grey--dark;
 
 .c-selector {
-    margin: 30px 0;
+    margin: 18px 0;
     position: relative;
     padding: 0;
     font-family: $font-family-base;
@@ -52,7 +52,6 @@ $form-input-borderColour--focus           : $grey--dark;
     .o-selector-label {
         display: block;
         color: $form-label-colour;
-        margin-bottom: spacing();
         position: absolute;
         top: 50%;
         left: 0.5rem;
@@ -61,7 +60,7 @@ $form-input-borderColour--focus           : $grey--dark;
     }
 
     .c-selector-input {
-        height: 2.5rem;
+        height: 53px;
         width: 100%;
         padding: 0.5rem;
         border: $form-input-borderWidth solid $form-input-borderColour;

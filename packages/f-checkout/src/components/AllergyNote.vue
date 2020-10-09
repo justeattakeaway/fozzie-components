@@ -21,7 +21,7 @@ export default {
 .c-allergyNote {
     display: block;
     margin: auto;
-    margin-top: spacing(x2);
+    margin-top: spacing(x2) ;
     padding: 0 20px;
     padding-bottom: 0;
     text-align: center;
