@@ -11,7 +11,7 @@
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="checkout-card-component"
-            :class="$style['c-card-padding']">
+            :class="$style['c-card-dimensions']">
             <form action="post">
                 <form-field
                     v-model="mobileNumber"
@@ -99,7 +99,7 @@ export default {
         },
         buttonText: {
             type: String,
-            default: 'Go to Payment'
+            default: 'Go to payment'
         }
     },
 
@@ -111,7 +111,7 @@ export default {
         return {
             copy: { ...localeConfig },
             theme,
-            firstName: 'firstName',
+            firstName: 'faye',
             mobileNumber: null,
             address: {
                 lineOne: null,
@@ -138,21 +138,22 @@ $font-family                              : $font-family-base;
     font-family: $font-family-base;
 
     h1 {
-        @include font-size(body-l);
+        font-size: 20px;
+    }
+    .c-card-dimensions {
+        width: 462px;
+        height: 885px;
+        padding: 30px 80px 50px 80px;
+    }
+
+    .l-address-group {
+        margin: 29px 0 45px 0;
+        @include font-size(body-s);
+
+        div {
+            margin-bottom: -17px;
+        }
     }
 }
 
-.c-card-padding {
-    padding-top: 20px;
-    padding-bottom: 40px;
-}
-
-.l-address-group {
-    margin: 29px 0 45px 0;
-    @include font-size(body-s);
-
-    div {
-        margin-bottom: -17px;
-    }
-}
 </style>

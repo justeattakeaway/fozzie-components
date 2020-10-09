@@ -21,12 +21,14 @@ export default {
 .c-allergyNote {
     display: block;
     margin: auto;
-    padding: 15px;
+    margin-top: spacing(x2);
+    padding: 0 20px;
     padding-bottom: 0;
     text-align: center;
     color: $color-link-default;
     text-decoration: underline;
     font-weight: $font-weight-bold;
+    font-size: 16px;
 
     &:hover,
     &:focus {

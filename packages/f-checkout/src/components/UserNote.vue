@@ -1,11 +1,11 @@
 <template>
     <div :class="$style['c-userNote']">
-        <h4>
+        <div :class="$style['c-userNote--title']">
             Leave a note
-        </h4>
-        <p>
+        </div>
+        <div>
             {{ noteText }}
-        </p>
+        </div>
         <textarea
             name="notePlaceholder"
             cols="30"
@@ -42,15 +42,24 @@ $form-input-borderColour--focus           : $grey--dark;
 $form-note-color                           : $grey--dark;
 
 .c-userNote {
-
-    h4 {
-        margin: 0;
+    .c-userNote--title {
+        font-weight: 600;
     }
 
-    p {
+    div {
         color: $form-note-color;
         margin-top: 5px;
-        @include font-size(caption);
+    }
+
+    .c-userNote--title {
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    div {
+        color: $form-note-color;
+        margin-top: 5px;
+        font-size: 14px;
     }
 
     .c-userNote-textArea {
@@ -58,6 +67,7 @@ $form-note-color                           : $grey--dark;
         height: 8rem;
         padding: 0.5rem;
         resize: none;
+        margin-top: spacing(x2);
         font-family: $font-family-base;
         color: $form-input-colour;
         font-weight: $font-weight-base;
