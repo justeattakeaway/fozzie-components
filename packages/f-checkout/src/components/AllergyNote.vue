@@ -21,7 +21,6 @@ export default {
     margin: auto;
     margin-top: spacing(x2) ;
     padding: 0 20px;
-    padding-bottom: 0;
     text-align: center;
     color: $color-link-default;
     text-decoration: underline;

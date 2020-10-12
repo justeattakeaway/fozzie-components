@@ -153,7 +153,7 @@ $font-weight                              : $font-weight-base;
 
     h1 {
         font-size: 20px;
-        margin-bottom: 20px;
+        margin-bottom: spacing(x2);
     }
 
     .c-formField {
@@ -163,7 +163,7 @@ $font-weight                              : $font-weight-base;
     }
 
     .l-address-group {
-        margin: 18px 0 34px 0;
+        margin: spacing(x2) 0 spacing(x4) 0;
         @include font-size(body-s);
 
         div {

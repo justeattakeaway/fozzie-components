@@ -38,15 +38,16 @@ $form-input-borderWidth                   : 1px;
 $form-input-borderColour                  : $grey--light;
 $form-input-borderColour--focus           : $grey--dark;
 $form-note-color                           : $grey--dark;
+$font-colour                              : $color-text;
 
 .c-userNote {
     .c-userNote--title {
         font-weight: 600;
         margin-top: spacing(x3);
+        color: $font-colour;
     }
 
     div {
-        color: $form-note-color;
         margin-top: 5px;
         font-size: 14px;
     }
