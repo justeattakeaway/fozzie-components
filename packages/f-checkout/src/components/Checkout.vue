@@ -154,6 +154,7 @@ $font-weight                              : $font-weight-base;
     h1 {
         font-size: 20px;
         margin-bottom: spacing(x2);
+        color: $grey--darkest;
     }
 
     .c-formField {

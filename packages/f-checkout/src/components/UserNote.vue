@@ -37,7 +37,6 @@ $form-input-borderRadius                  : 3px;
 $form-input-borderWidth                   : 1px;
 $form-input-borderColour                  : $grey--light;
 $form-input-borderColour--focus           : $grey--dark;
-$form-note-color                           : $grey--dark;
 $font-colour                              : $color-text;
 
 .c-userNote {
@@ -45,11 +44,13 @@ $font-colour                              : $color-text;
         font-weight: 600;
         margin-top: spacing(x3);
         color: $font-colour;
+        font-size: 16px;
     }
 
     div {
         margin-top: 5px;
         font-size: 14px;
+        // color: $grey--dark;
     }
 
     .c-userNote-textArea {
