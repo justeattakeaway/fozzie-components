@@ -62,7 +62,11 @@
 
                 <form-selector />
                 <user-note />
-                <allergy-note />
+                <button
+                    class="o-btn o-btnLink"
+                    data-test-id="allergy-button">
+                    {{ allergyText }}
+                </button>
 
                 <button
                     class="o-btn o-btn--primary o-btn--wide"
@@ -82,7 +86,6 @@ import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
-import AllergyNote from './AllergyNote.vue';
 import tenantConfigs from '../tenants';
 
 export default {
@@ -92,7 +95,6 @@ export default {
         Card,
         FormField,
         FormSelector,
-        AllergyNote,
         UserNote
     },
 
@@ -104,6 +106,10 @@ export default {
         buttonText: {
             type: String,
             default: 'Go to payment'
+        },
+        allergyText: {
+            type: String,
+            default: 'If you or someone you’re ordering for has a food allergy or intolerance, click here'
         }
     },
 
@@ -147,7 +153,7 @@ $font-weight                              : $font-weight-base;
 
     .c-card-dimensions {
         width: 462px;
-        padding: 25px 80px 50px 80px;
+        padding: spacing(x5) spacing(x9) spacing(x4) spacing(x9);
     }
 
     h1 {
@@ -159,7 +165,6 @@ $font-weight                              : $font-weight-base;
     input {
         height: 50px;
     }
-
 
     .l-address-group {
         margin: spacing(x2) 0 spacing(x4) 0;
@@ -173,6 +178,7 @@ $font-weight                              : $font-weight-base;
     button {
         display: flex;
         margin: spacing(x2) auto;
+        font-size: 16px;
     }
 }
 </style>
