@@ -81,9 +81,7 @@
 <script>
 import { globalisationServices } from '@justeat/f-services';
 import Card from '@justeat/f-card';
-import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
-import '@justeat/f-form-field/dist/f-form-field.css';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
 import tenantConfigs from '../tenants';
@@ -141,6 +139,9 @@ export default {
 </script>
 
 <style lang="scss" module>
+@import '@justeat/f-card/dist/f-card.css';
+@import '@justeat/f-form-field/dist/f-form-field.css';
+
 $font-family                              : $font-family-base;
 $font-colour                              : $color-text;
 $font-weight                              : $font-weight-base;
