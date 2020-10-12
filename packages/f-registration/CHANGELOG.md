@@ -8,6 +8,10 @@ v0.34.0
 *October 9, 2020*
 ### Added
 - Emit CreateAccountStart event on first form interaction
+- Emit CreateAccountInlineError event on field blur and fails validation
+
+### Changed
+- Updated CreateAccountFailure emit event to pass the valid & invalid fields in the payload
 
 
 v0.33.0
