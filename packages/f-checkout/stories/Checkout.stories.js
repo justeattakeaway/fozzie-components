@@ -1,9 +1,15 @@
-import { storiesOf } from '@storybook/vue';
+import { withKnobs } from '@storybook/addon-knobs';
 import VueCheckout from '../src/components/Checkout.vue';
 
-storiesOf('Components', module)
-  .add('f-checkout', () => ({
+export default {
+    title: 'Components/Organisms',
+    decorators: [withKnobs]
+};
+
+export const CheckoutComponent = () => ({
     components: { VueCheckout },
-    template: `<vue-checkout />`
-  })
-);
+    template:
+        '<vue-checkout />'
+});
+
+CheckoutComponent.storyName = 'f-checkout';
