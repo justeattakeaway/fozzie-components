@@ -20,7 +20,7 @@ export default {
     props: {
         noteText: {
             type: String,
-            default: "Leave a note for the restaurant with anything they need to know (e.g. the doorbell doesn't work). Do not include details about any allergies here."
+            default: "Leave a note for the resturant with anything they need to know (e.g. the doorbell doesn't work). Do not include details about any allergies here."
         },
         notePlaceholder: {
             type: String,
@@ -50,7 +50,6 @@ $font-colour                              : $color-text;
     div {
         margin-top: 5px;
         font-size: 14px;
-        // color: $grey--dark;
     }
 
     .c-userNote-textArea {
