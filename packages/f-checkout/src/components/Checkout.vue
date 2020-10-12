@@ -156,11 +156,10 @@ $font-weight                              : $font-weight-base;
         color: $grey--darkest;
     }
 
-    .c-formField {
-        input {
-            height: 50px;
-        }
+    input {
+        height: 50px;
     }
+
 
     .l-address-group {
         margin: spacing(x2) 0 spacing(x4) 0;
