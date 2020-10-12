@@ -39,7 +39,7 @@ $form-input-borderColour                  : $grey--light;
 $form-input-borderColour--focus           : $grey--dark;
 
 .c-selector {
-    margin: 18px 0;
+    margin: spacing(x2) 0;
     position: relative;
     padding: 0;
     font-family: $font-family-base;

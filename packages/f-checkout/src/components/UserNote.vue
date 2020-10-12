@@ -55,7 +55,7 @@ $font-colour                              : $color-text;
     .c-userNote-textArea {
         width: 100%;
         height: 130px;
-        padding: 15px 9px;
+        padding: spacing(x1.5) spacing(x1);
         font-weight: 600;
         resize: none;
         margin-top: spacing(x1.5);

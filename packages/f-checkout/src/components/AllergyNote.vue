@@ -20,7 +20,7 @@ export default {
     display: block;
     margin: auto;
     margin-top: spacing(x2) ;
-    padding: 0 20px;
+    padding: 0 spacing(x3);
     text-align: center;
     color: $color-link-default;
     text-decoration: underline;
