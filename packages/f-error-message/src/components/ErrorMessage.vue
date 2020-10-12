@@ -2,9 +2,12 @@
     <p
         v-if="hasSlotData"
         :class="$style['c-error-message']"
-        :data-test-id="dataTestId">
+        data-test-id="error-message"
+        :data-test-title="dataTestTitle">
         <warning-icon :class="$style['c-error-message-icon']" />
-        <slot />
+        <span data-test-id="content">
+            <slot />
+        </span>
     </p>
 </template>
 
