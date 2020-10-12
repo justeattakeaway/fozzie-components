@@ -49,14 +49,14 @@ module.exports = class extends Generator {
                                 .replace(/__/g, ''); // We don't want to have file names such as .test.js or .stories.js, otherwise Jest or Storybook will pick them up from the templates folder.
         }));
 
-        let ignoreTestPattern = this.answers.needsUITests ? [] : ["**/*/test", '**/*/test-utils/component-objects']
-        const ignoreApiMockPattern = this.answers.needsTestingApiMocks ? [] : ["**/*/test-utils/system-test", "**/*/src/services"];
-    
+        let ignoreTestPattern = this.answers.needsUITests ? [] : ['**/*/test', '**/*/test-utils/component-objects'];
+        const ignoreApiMockPattern = this.answers.needsTestingApiMocks ? [] : ['**/*/test-utils/system-test', '**/*/src/services'];
+
         ignoreTestPattern = ignoreTestPattern.concat(ignoreApiMockPattern);
 
         this.fs.copyTpl(
             this.templatePath('**/*'),
-            this.destinationPath(`../f-${nameTransformations.default}/`),
+            this.destinationPath(`f-${nameTransformations.default}/`),
             {
                 description: this.answers.description,
                 name: nameTransformations,
