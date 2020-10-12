@@ -1,5 +1,6 @@
 <template>
     <div
+        v-if="!isDismissed"
         :class="[$style['c-alert'],
                  $style[`c-alert--${type}`]]"
         data-test-id='alert-component'>
@@ -49,10 +50,14 @@ export default {
             default: false
         }
     },
+    data () {
+        return {
+            isDismissed: false
+        };
+    },
     methods: {
         dismiss () {
-            this.$destroy();
-            this.$el.parentNode.removeChild(this.$el);
+            this.isDismissed = true;
         }
     }
 };

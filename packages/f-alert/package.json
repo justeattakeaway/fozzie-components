@@ -29,7 +29,8 @@
     "build": "vue-cli-service build --target lib --name f-alert ./src/index.js",
     "demo": "vue serve --port 8080 ./src/demo/Index.vue",
     "lint": "vue-cli-service lint",
-    "lint:fix": "yarn lint --fix"
+    "lint:fix": "yarn lint --fix",
+    "test": "vue-cli-service test:unit"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
