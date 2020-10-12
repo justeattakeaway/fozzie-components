@@ -27,7 +27,7 @@
                         v-model="address.lineOne"
                         :class="$style['c-formField']"
                         name="address-line-one"
-                        data-test-id="input-address-line-one"
+                        data-test-id="input-address-line-1"
                         label-text="Address line 1"
                         input-type="text"
                         label-style="inline" />
@@ -36,7 +36,7 @@
                         v-model="address.lineTwo"
                         :class="$style['c-formField']"
                         name="address-line-two"
-                        data-test-id="input-address-line-two"
+                        data-test-id="input-address-line-2"
                         label-text="Address line 2 (optional)"
                         input-type="text"
                         label-style="inline" />
