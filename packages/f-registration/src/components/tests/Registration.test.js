@@ -220,7 +220,6 @@ describe('Registration', () => {
                 // Assert
                 expect(wrapper.vm.shouldShowFirstNameRequiredError).toBe(true);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('firstName');
             });
 
             it('should show error message and emit failure event when the first name field is populated with invalid input', async () => {
@@ -234,10 +233,9 @@ describe('Registration', () => {
                 // Assert
                 expect(wrapper.vm.shouldShowFirstNameInvalidCharError).toBe(true);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('firstName');
             });
 
-            it('should show error message and emit inline failure event when the first name field is populated with invalid input and focus is lost', async () => {
+            it('should show error message when the first name field is populated with invalid input and focus is lost', async () => {
                 // Arrange
                 const firstNameInput = wrapper.find('[data-test-id="input-first-name"]');
                 firstNameInput.setValue('wh4t @ w3!rd |\\|ame');
@@ -248,8 +246,6 @@ describe('Registration', () => {
 
                 // Assert
                 expect(wrapper.vm.shouldShowFirstNameInvalidCharError).toBe(true);
-                expect(wrapper.emitted(EventNames.CreateAccountInlineError).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CreateAccountInlineError)[0][0]).toBe('firstName');
             });
 
             it('should show error message and emit failure event when the first name field is populated with too long an input', async () => {
@@ -264,7 +260,6 @@ describe('Registration', () => {
                 // Assert
                 expect(wrapper.vm.shouldShowFirstNameMaxLengthError).toBe(true);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('firstName');
             });
 
             it('should show error message and emit failure event when the last name field is not populated', async () => {
@@ -278,7 +273,6 @@ describe('Registration', () => {
                 // Assert
                 expect(wrapper.vm.shouldShowLastNameRequiredError).toBe(true);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('lastName');
             });
 
             it('should show error message and emit failure event when the last name field is populated with invalid input', async () => {
@@ -292,7 +286,6 @@ describe('Registration', () => {
                 // Assert
                 expect(wrapper.vm.shouldShowLastNameInvalidCharError).toBe(true);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('lastName');
             });
 
             it('should show error message and emit failure event when the last name field is populated with too long an input', async () => {
@@ -307,10 +300,9 @@ describe('Registration', () => {
                 // Assert
                 expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(true);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('lastName');
             });
 
-            it('should show error message and emit inline failure event when the last name field is populated with too long an input and focus is lost', async () => {
+            it('should show error message when the last name field is populated with too long an input and focus is lost', async () => {
                 // Arrange
                 const longValue = 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij';
                 const lastNameInput = wrapper.find('[data-test-id="input-last-name"]');
@@ -322,8 +314,6 @@ describe('Registration', () => {
 
                 // Assert
                 expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(true);
-                expect(wrapper.emitted(EventNames.CreateAccountInlineError).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CreateAccountInlineError)[0][0]).toBe('lastName');
             });
 
             it('should allow input and emit success event when the password field is populated with a long input', async () => {
@@ -352,10 +342,9 @@ describe('Registration', () => {
                 // Assert
                 expect(wrapper.vm.shouldShowPasswordMinLengthError).toBe(true);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('password');
             });
 
-            it('should show error message and emit inline failure event when the password field is populated with too short an input and focus is lost', async () => {
+            it('should show error message when the password field is populated with too short an input and focus is lost', async () => {
                 // Arrange
                 const passwordInput = wrapper.find('[data-test-id="input-password"]');
                 passwordInput.setValue('dog');
@@ -366,8 +355,6 @@ describe('Registration', () => {
 
                 // Assert
                 expect(wrapper.vm.shouldShowPasswordMinLengthError).toBe(true);
-                expect(wrapper.emitted(EventNames.CreateAccountInlineError).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CreateAccountInlineError)[0][0]).toBe('password');
             });
 
             it('should show error message and emit failure event when the email field is populated with too long an input', async () => {
@@ -382,10 +369,9 @@ describe('Registration', () => {
                 // Assert
                 expect(wrapper.vm.shouldShowEmailMaxLengthError).toBe(true);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('email');
             });
 
-            it('should show error message and emit inline failure event when the email field is invalid and focus is lost', async () => {
+            it('should show error message when the email field is invalid and focus is lost', async () => {
                 // Arrange
                 const emailInput = wrapper.find('[data-test-id="input-email"]');
                 emailInput.setValue('invalid email');
@@ -396,8 +382,6 @@ describe('Registration', () => {
 
                 // Assert
                 expect(wrapper.vm.shouldShowEmailInvalidError).toBe(true);
-                expect(wrapper.emitted(EventNames.CreateAccountInlineError).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CreateAccountInlineError)[0][0]).toBe('email');
             });
 
             it('should emit success event when all fields are populated correctly', async () => {
