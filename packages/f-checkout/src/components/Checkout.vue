@@ -64,10 +64,11 @@
                 <user-note />
                 <allergy-note />
 
-                <form-button
+                <button
+                    class="o-btn o-btn--primary o-btn--wide"
                     data-test-id="confirm-payment-submit-button">
                     {{ buttonText }}
-                </form-button>
+                </button>
             </form>
         </card>
     </div>
@@ -80,7 +81,6 @@ import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import FormSelector from './Selector.vue';
-import FormButton from './Button.vue';
 import UserNote from './UserNote.vue';
 import AllergyNote from './AllergyNote.vue';
 import tenantConfigs from '../tenants';
@@ -92,7 +92,6 @@ export default {
         Card,
         FormField,
         FormSelector,
-        FormButton,
         AllergyNote,
         UserNote
     },
@@ -170,6 +169,11 @@ $font-weight                              : $font-weight-base;
         div {
             margin-bottom: -17px;
         }
+    }
+
+    button {
+        display: flex;
+        margin: spacing(x2) auto;
     }
 }
 </style>
