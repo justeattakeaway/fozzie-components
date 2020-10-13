@@ -6,8 +6,11 @@
         data-test-id='alert-component'>
         <div
             :class="$style['c-alert-heading-container']">
-            <alert-icon
-                :class="[$style['c-icon--alert'], $style['c-alert-icon']]" />
+            <component
+                :is="icon"
+                :class="[$style['c-icon--alert'],
+                         $style['c-alert-icon'],
+                         $style[`c-alert-icon--${type}`]]" />
             <!-- TODO: make this dynamic. See https://skipthedishes.atlassian.net/browse/WCB-1219 -->
             <h2
                 :class="$style['c-alert-heading']">
@@ -30,11 +33,23 @@
 </template>
 
 <script>
-import { CrossIcon, AlertIcon } from '@justeat/f-vue-icons';
+import {
+    CrossIcon,
+    DangerIcon,
+    InfoIcon,
+    SuccessIcon,
+    WarningIcon
+} from '@justeat/f-vue-icons';
 
 export default {
     name: 'VueAlert',
-    components: { CrossIcon, AlertIcon },
+    components: {
+        CrossIcon,
+        DangerIcon,
+        InfoIcon,
+        SuccessIcon,
+        WarningIcon
+    },
     props: {
         locale: {
             type: String,
@@ -42,8 +57,8 @@ export default {
         },
         type: {
             type: String,
-            default: 'neutral',
-            validator: value => ['success', 'warning', 'info', 'danger', 'neutral'].indexOf(value) !== -1
+            default: 'info',
+            validator: value => ['success', 'warning', 'info', 'danger'].indexOf(value) !== -1
         },
         isDismissable: {
             type: Boolean,
@@ -54,6 +69,11 @@ export default {
         return {
             isDismissed: false
         };
+    },
+    computed: {
+        icon () {
+            return `${this.type}Icon`;
+        }
     },
     methods: {
         dismiss () {
@@ -118,6 +138,10 @@ $alert-borderRadius: $border-radius;
         height: 20px;
         margin: 0 spacing(x1.5) 0 spacing();
     }
+
+        .c-alert-icon--warning {
+            margin-right: 10px;
+        }
 
     button.c-alert-dismiss { // TODO: Needed more specificity here.
         text-indent: 0;
