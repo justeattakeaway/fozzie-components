@@ -31,25 +31,29 @@ export default {
 </script>
 
 <style lang="scss" module>
-$form-input-bg                            : $white;
-$form-input-borderRadius                  : 3px;
-$form-input-borderWidth                   : 1px;
-$form-input-borderColour                  : $grey--light;
-$form-font-weight-bold                    : $font-weight-bold;
+$note-input-bg                            : $white;
+$note-input-borderRadius                  : 3px;
+$note-input-borderWidth                   : 1px;
+$note-input-borderColour                  : $grey--light;
+$note-font-weight-bold                    : $font-weight-bold;
 $line-height                              : 17.5px;
+$note-textColour                          : $grey--dark;
+$note-headingColour                       : $grey--darkest;
 
 .c-userNote {
-    font-weight: $form-font-weight-bold;
+    font-weight: $note-font-weight-bold;
 
     .c-userNote-title {
         margin-top: spacing(x3);
         @include font-size(body-l);
+        color: $note-headingColour;
     }
 
     div {
         margin-top: spacing(x1);
         font-size: 14px;
         line-height: $line-height;
+        color: $note-headingColour;
     }
 
     .c-userNote-textArea {
@@ -58,9 +62,9 @@ $line-height                              : 17.5px;
         padding: spacing(x1.5) spacing(x1);
         margin: spacing(x2) 0 spacing(x3) 0;
         font-family: inherit;
-        background-color: $form-input-bg;
-        border: $form-input-borderWidth solid $form-input-borderColour;
-        border-radius: $form-input-borderRadius;
+        background-color: $note-input-bg;
+        border: $note-input-borderWidth solid $note-input-borderColour;
+        border-radius: $note-input-borderRadius;
         background-clip: padding-box;
         resize: none;
     }
