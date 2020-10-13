@@ -22,7 +22,11 @@
                 :class="[$style['c-alert-dismiss'], 'o-btn o-btn--icon']"
                 @click="dismiss">
                 <cross-icon
-                    :class="[$style['c-icon--cross'], $style['c-alert-dismiss-icon']]" />
+                    :class="[$style['c-icon--cross'], $style['c-alert-dismiss-icon']]"
+                />
+                <span class="is-visuallyHidden">
+                    {{ copy.dismissAlertText }}
+                </span>
             </button>
         </div>
         <div
@@ -40,6 +44,8 @@ import {
     SuccessIcon,
     WarningIcon
 } from '@justeat/f-vue-icons';
+import { globalisationServices } from '@justeat/f-services';
+import tenantConfigs from '../tenants';
 
 export default {
     name: 'VueAlert',
@@ -66,8 +72,14 @@ export default {
         }
     },
     data () {
+        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
+        const localeConfig = tenantConfigs[locale];
+        const theme = globalisationServices.getTheme(locale);
+
         return {
-            isDismissed: false
+            isDismissed: false,
+            copy: { ...localeConfig },
+            theme
         };
     },
     computed: {
