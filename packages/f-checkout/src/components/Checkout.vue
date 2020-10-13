@@ -151,6 +151,10 @@ $line-height                              : 16px;
         height: 50px;
     }
 
+    label {
+        @include font-size(body-l);
+    }
+
     .l-addressGroup {
         margin: spacing(x2) 0 spacing(x4) 0;
         @include font-size(body-s);
