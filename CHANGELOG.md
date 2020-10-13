@@ -9,6 +9,7 @@ v2.4.0
 
 ### Added
 - Jest support to Storybook
+- Made unit test folder names consistent
 
 
 v2.3.0
