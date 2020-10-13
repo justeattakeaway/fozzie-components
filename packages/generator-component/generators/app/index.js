@@ -48,7 +48,6 @@ module.exports = class extends Generator {
                                 .replace(/(f-skeleton)/g, `f-${nameTransformations.class}`)
                                 .replace(/__/g, ''); // We don't want to have file names such as .test.js or .stories.js, otherwise Jest or Storybook will pick them up from the templates folder.
         }));
-        
         let ignoreTestPattern = this.answers.needsComponentTests ? [] : ["**/*/test/specs/component", '**/*/test-utils/component-objects']
         const ignoreApiMockPattern = this.answers.needsTestingApiMocks ? [] : ["**/*/test-utils/system-test", "**/*/src/services"];
     

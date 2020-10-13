@@ -6,7 +6,7 @@ describe('Accessibility tests', () => {
         browser.url('http://localhost:8081');
     });
 
-    it('a11y - should test f-registration component WCAG compliance', () => {
+    it('a11y - should test f-<%= name.class %> component WCAG compliance', () => {
         // Act
         const axeResults = getAccessibilityTestResults();
 
