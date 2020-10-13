@@ -1,10 +1,10 @@
 <template>
     <p
         v-if="hasSlotData"
-        :class="$style['c-error-message']"
+        :class="$style['c-errorMessage']"
         data-test-id="error-message"
         :data-test-title="dataTestTitle">
-        <warning-icon :class="$style['c-error-message-icon']" />
+        <warning-icon :class="$style['c-errorMessage-icon']" />
         <span data-test-id="content">
             <slot />
         </span>
@@ -35,7 +35,7 @@ export default {
 
 <style lang="scss" module>
 
-.c-error-message {
+.c-errorMessage {
     display: flex;
     align-items: center;
     color: $red;
@@ -43,7 +43,7 @@ export default {
     margin-top: spacing();
 }
 
-.c-error-message-icon {
+.c-errorMessage-icon {
     width: 16px;
     height: 16px;
     margin-right: spacing(x0.5);
