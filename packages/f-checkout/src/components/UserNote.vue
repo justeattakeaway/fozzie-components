@@ -56,7 +56,7 @@ $line-height                              : 17.5px;
         height: 130px;
         width: 100%;
         padding: spacing(x1.5) spacing(x1);
-        margin-top: spacing(x2);
+        margin: spacing(x2) 0 spacing(x3) 0;
         font-family: inherit;
         background-color: $form-input-bg;
         border: $form-input-borderWidth solid $form-input-borderColour;

@@ -176,6 +176,7 @@ $line-height                              : 16px;
         @include font-size(body-l);
         font-weight: $font-weight-bold;
         line-height: $line-height;
+        margin-bottom: spacing(x1);
     }
 
     .o-btn--payment {
