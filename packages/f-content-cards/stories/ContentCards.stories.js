@@ -7,6 +7,7 @@ import {
 } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
+import { withTests } from '@storybook/addon-jest';
 import mock, { proxy } from 'xhr-mock';
 
 import ContentCards from '../src/components/ContentCards.vue';
@@ -14,6 +15,7 @@ import { defaultEnabledCardTypes } from '../src/services/contentCard.service';
 
 import cards, { labelledMultiSelectAllowedValues } from './mockData/cards';
 import data from './mockData/data';
+import results from '../src/components/tests/f-content-cards-test-results.json';
 
 const callback = alert;
 /**
@@ -37,7 +39,7 @@ function resetBrazeData () {
 
 export default {
     title: 'Components/Organisms',
-    decorators: [withKnobs, withA11y]
+    decorators: [withKnobs, withA11y, withTests({ results })]
 };
 
 export function ContentCardsComponent () {
@@ -112,5 +114,9 @@ export function ContentCardsComponent () {
             :enabledCardTypes="enabledCardTypes" />`
     };
 }
+
+ContentCardsComponent.parameters = {
+    jest: ['ContentCards.test.js'],
+  };
 
 ContentCardsComponent.storyName = 'f-content-cards';

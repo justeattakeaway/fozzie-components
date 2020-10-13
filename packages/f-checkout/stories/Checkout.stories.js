@@ -1,9 +1,24 @@
-import { storiesOf } from '@storybook/vue';
-import VueCheckout from '../src/components/Checkout.vue';
 
-storiesOf('Components', module)
-  .add('f-checkout', () => ({
-    components: { VueCheckout },
-    template: `<vue-checkout />`
-  })
-);
+import VueCheckout from '../src/components/Checkout.vue';
+import results from '../src/components/tests/f-checkout-test-results.json';
+import { withTests } from '@storybook/addon-jest';
+
+export default {
+  title: 'Components/Organisms',
+  decorators: [withTests({ results })]
+};
+
+export const Checkout = () => ({
+  components: { VueCheckout },
+  template:
+      '<vue-checkout />',
+  parameters: {
+    notes: 'some documentation here'
+}
+});
+
+Checkout.parameters = {
+  jest: ['Checkout.test.js'],
+};
+
+Checkout.storyName = 'f-checkout';
