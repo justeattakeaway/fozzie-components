@@ -57,13 +57,15 @@
                 <form-selector />
                 <user-note />
                 <button
-                    :class="[$style['o-btn--allergy'], 'o-btnLink']"
+                    :class="[$style['o-btn--allergy'],
+                             'o-btnLink']"
                     data-test-id="allergy-button">
                     {{ allergyText }}
                 </button>
 
                 <button
-                    :class="[$style['o-btn--payment'], 'o-btn', 'o-btn--primary', 'o-btn--wide']"
+                    :class="[$style['o-btn--payment'],
+                             'o-btn', 'o-btn--primary', 'o-btn--wide']"
                     data-test-id="confirm-payment-submit-button">
                     {{ buttonText }}
                 </button>
