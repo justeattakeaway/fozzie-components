@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.34.0
+------------------------------
+*October 9, 2020*
+### Added
+- Emit CreateAccountStart event on first form interaction
+- Emit CreateAccountInlineError event on field blur and fails validation
+
+### Changed
+- Updated CreateAccountFailure emit event to pass the valid & invalid fields in the payload
+
+
 v0.33.0
 ------------------------------
 *October 5, 2020*
