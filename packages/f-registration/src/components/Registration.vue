@@ -5,7 +5,6 @@
             :data-theme-registration="theme"
             :card-heading="title"
             is-rounded
-            has-outline
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="registration-component"
@@ -258,11 +257,11 @@ export default {
         },
         title: {
             type: String,
-            default: 'Create Account'
+            default: 'Create account'
         },
         buttonText: {
             type: String,
-            default: 'Create Account'
+            default: 'Create account'
         },
         createAccountUrl: {
             type: String,
@@ -472,18 +471,12 @@ export default {
     margin-top: spacing(x2);
 }
 
-.c-loginLink {
+.c-loginLink, .c-legal-hyperlinks {
     text-align: center;
     a {
         color: $blue;
         text-decoration: none;
-    }
-}
-
-.c-legal-hyperlinks {
-    a {
-        color: $blue;
-        text-decoration: none;
+        font-weight: bold;
     }
 }
 
