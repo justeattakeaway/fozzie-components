@@ -10,7 +10,7 @@
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="checkout-card-component"
-            :class="$style['c-card-dimensions']">
+            :class="$style['c-card--dimensions']">
             <form action="post">
                 <form-field
                     v-model="mobileNumber"
@@ -57,13 +57,13 @@
                 <form-selector />
                 <user-note />
                 <button
-                    class="o-btn o-btnLink"
+                    :class="[$style['o-btn--allergy'], 'o-btnLink']"
                     data-test-id="allergy-button">
                     {{ allergyText }}
                 </button>
 
                 <button
-                    class="o-btn o-btn--primary o-btn--wide"
+                    :class="[$style['o-btn--payment'], 'o-btn', 'o-btn--primary', 'o-btn--wide']"
                     data-test-id="confirm-payment-submit-button">
                     {{ buttonText }}
                 </button>
@@ -139,6 +139,8 @@ export default {
 $font-family                              : $font-family-base;
 $font-colour                              : $color-text;
 $font-weight                              : $font-weight-base;
+$font-weight-bold                         : $font-weight-bold;
+$line-height                              : 16px;
 
 .c-checkout {
     margin: auto;
@@ -152,9 +154,8 @@ $font-weight                              : $font-weight-base;
     }
 
     h1 {
-        font-size: 20px;
+        @include font-size(heading-s);
         margin-bottom: spacing(x2);
-        color: $grey--darkest;
     }
 
     input {
@@ -170,10 +171,19 @@ $font-weight                              : $font-weight-base;
         }
     }
 
-    button {
+    .o-btn--allergy {
+        padding: 0 spacing(x3);
+        @include font-size(body-l);
+        font-weight: $font-weight-bold;
+        line-height: $line-height;
+    }
+
+    .o-btn--payment {
         display: flex;
         margin: spacing(x2) auto;
-        font-size: 16px;
+        @include font-size(body-l);
+        font-weight: $font-weight-bold;
+        line-height: $line-height;
     }
 }
 </style>

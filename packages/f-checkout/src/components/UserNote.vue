@@ -31,42 +31,38 @@ export default {
 </script>
 
 <style lang="scss" module>
-$form-input-colour                        : $color-text;
 $form-input-bg                            : $white;
 $form-input-borderRadius                  : 3px;
 $form-input-borderWidth                   : 1px;
 $form-input-borderColour                  : $grey--light;
-$form-input-borderColour--focus           : $grey--dark;
-$font-colour                              : $color-text;
+$form-font-weight-bold                    : $font-weight-bold;
+$line-height                              : 17.5px;
 
 .c-userNote {
+    font-weight: $form-font-weight-bold;
+
     .c-userNote-title {
-        font-weight: 600;
         margin-top: spacing(x3);
-        color: $font-colour;
-        font-size: 16px;
+        @include font-size(body-l);
     }
 
     div {
-        margin-top: 5px;
+        margin-top: spacing(x1);
         font-size: 14px;
+        line-height: $line-height;
     }
 
     .c-userNote-textArea {
-        width: 100%;
         height: 130px;
+        width: 100%;
         padding: spacing(x1.5) spacing(x1);
-        font-weight: 600;
-        resize: none;
-        margin-top: spacing(x1.5);
-        margin-bottom: spacing(x1.5);
-        font-family: $font-family-base;
-        color: $form-input-colour;
-        font-weight: $font-weight-base;
+        margin-top: spacing(x2);
+        font-family: inherit;
         background-color: $form-input-bg;
         border: $form-input-borderWidth solid $form-input-borderColour;
         border-radius: $form-input-borderRadius;
         background-clip: padding-box;
+        resize: none;
     }
 }
 </style>
