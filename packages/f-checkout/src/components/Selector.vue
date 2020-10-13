@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style['c-selector']">
+    <div :class="$style['o-selector']">
         <label
             for="delivery-time"
             :class="$style['o-selector-label']">
@@ -7,7 +7,7 @@
         </label>
         <select
             id="delivery-time"
-            :class="$style['c-selector-input']">
+            :class="$style['o-selector-input']">
             <option
                 v-for="(time, index) in deliveryTimes"
                 :key="index"
@@ -38,7 +38,7 @@ $form-input-borderWidth                   : 1px;
 $form-input-borderColour                  : $grey--light;
 $form-input-borderColour--focus           : $grey--dark;
 
-.c-selector {
+.o-selector {
     margin: spacing(x2) 0;
     position: relative;
     padding: 0;
@@ -57,7 +57,7 @@ $form-input-borderColour--focus           : $grey--dark;
         cursor: pointer;
     }
 
-    .c-selector-input {
+    .o-selector-input {
         height: 53px;
         width: 100%;
         padding: 0.5rem;

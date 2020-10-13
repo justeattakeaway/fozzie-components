@@ -4,7 +4,6 @@
         :class="$style['c-checkout']"
         data-test-id='checkout-component'>
         <card
-            :data-theme="theme"
             :card-heading="title"
             is-rounded
             has-outline
@@ -15,17 +14,15 @@
             <form action="post">
                 <form-field
                     v-model="mobileNumber"
-                    :class="$style['c-formField']"
                     name="mobile-number"
                     data-test-id="input-mobile-number"
                     label-text="Mobile number"
                     input-type="text"
                     label-style="inline" />
 
-                <div :class="$style['l-address-group']">
+                <div :class="$style['l-addressGroup']">
                     <form-field
                         v-model="address.lineOne"
-                        :class="$style['c-formField']"
                         name="address-line-one"
                         data-test-id="input-address-line-1"
                         label-text="Address line 1"
@@ -34,7 +31,6 @@
 
                     <form-field
                         v-model="address.lineTwo"
-                        :class="$style['c-formField']"
                         name="address-line-two"
                         data-test-id="input-address-line-2"
                         label-text="Address line 2 (optional)"
@@ -43,7 +39,6 @@
 
                     <form-field
                         v-model="address.city"
-                        :class="$style['c-formField']"
                         name="address-city"
                         data-test-id="input-address-city"
                         label-text="City"
@@ -53,7 +48,6 @@
 
                 <form-field
                     v-model="address.postcode"
-                    :class="$style['c-formField']"
                     name="address-postcode"
                     data-test-id="input-address-postcode"
                     label-text="Postcode"
@@ -152,7 +146,7 @@ $font-weight                              : $font-weight-base;
     color: $font-colour;
     font-weight: $font-weight;
 
-    .c-card-dimensions {
+    .c-card--dimensions {
         width: 462px;
         padding: spacing(x5) spacing(x9) spacing(x4) spacing(x9);
     }
@@ -167,7 +161,7 @@ $font-weight                              : $font-weight-base;
         height: 50px;
     }
 
-    .l-address-group {
+    .l-addressGroup {
         margin: spacing(x2) 0 spacing(x4) 0;
         @include font-size(body-s);
 

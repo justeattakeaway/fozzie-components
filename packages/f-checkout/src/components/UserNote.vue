@@ -1,6 +1,6 @@
 <template>
     <div :class="$style['c-userNote']">
-        <div :class="$style['c-userNote--title']">
+        <div :class="$style['c-userNote-title']">
             Leave a note
         </div>
         <div>
@@ -40,7 +40,7 @@ $form-input-borderColour--focus           : $grey--dark;
 $font-colour                              : $color-text;
 
 .c-userNote {
-    .c-userNote--title {
+    .c-userNote-title {
         font-weight: 600;
         margin-top: spacing(x3);
         color: $font-colour;
