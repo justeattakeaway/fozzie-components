@@ -96,14 +96,6 @@ export default {
         locale: {
             type: String,
             default: ''
-        },
-        buttonText: {
-            type: String,
-            default: 'Go to payment'
-        },
-        allergyText: {
-            type: String,
-            default: 'If you or someone you’re ordering for has a food allergy or intolerance, click here'
         }
     },
 
@@ -122,7 +114,9 @@ export default {
                 lineTwo: null,
                 city: null,
                 postcode: null
-            }
+            },
+            buttonText: 'Go to payment',
+            allergyText: 'If you or someone you’re ordering for has a food allergy or intolerance, click here'
         };
     },
 
