@@ -132,10 +132,6 @@ $alert-borderRadius: $border-radius;
         @include alert-variant($color-bg--info, $color-text);
     }
 
-    .c-alert--neutral {
-        @include alert-variant($color-bg--darker, $color-text);
-    }
-
     .c-alert-heading {
         @include font-size(subheading-s, true, narrow);
         margin-top: -1px;
