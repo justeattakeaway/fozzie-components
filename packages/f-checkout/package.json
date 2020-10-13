@@ -43,6 +43,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
+    "axios": "0.20.0",
     "@justeat/f-card": "0.6.0",
     "@justeat/f-form-field": "0.7.1",
     "@justeat/f-services": "1.0.0"

@@ -77,8 +77,8 @@ import { globalisationServices } from '@justeat/f-services';
 import Card from '@justeat/f-card';
 import FormField from '@justeat/f-form-field';
 import FormSelector from './Selector.vue';
-import UserNote from './UserNote.vue';
 import tenantConfigs from '../tenants';
+import UserNote from './UserNote.vue';
 
 export default {
     name: 'VueCheckout',

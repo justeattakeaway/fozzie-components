@@ -44,7 +44,7 @@ $note-headingColour                       : $grey--darkest;
     font-weight: $note-font-weight-bold;
 
     .c-userNote-title {
-        margin-top: spacing(x3);
+        margin-top: spacing(x2);
         @include font-size(body-l);
         color: $note-headingColour;
     }
@@ -53,7 +53,7 @@ $note-headingColour                       : $grey--darkest;
         margin-top: spacing(x1);
         font-size: 14px;
         line-height: $line-height;
-        color: $note-headingColour;
+        color: $note-textColour;
     }
 
     .c-userNote-textArea {
