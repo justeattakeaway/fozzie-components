@@ -22,16 +22,16 @@
 
                 <div :class="$style['l-addressGroup']">
                     <form-field
-                        v-model="address.lineOne"
-                        name="address-line-one"
+                        v-model="address.line1"
+                        name="address-line-1"
                         data-test-id="input-address-line-1"
                         label-text="Address line 1"
                         input-type="text"
                         label-style="inline" />
 
                     <form-field
-                        v-model="address.lineTwo"
-                        name="address-line-two"
+                        v-model="address.line2"
+                        name="address-line-2"
                         data-test-id="input-address-line-2"
                         label-text="Address line 2 (optional)"
                         input-type="text"
@@ -115,7 +115,7 @@ export default {
         return {
             copy: { ...localeConfig },
             theme,
-            firstName: 'faye',
+            firstName: 'firstName',
             mobileNumber: null,
             address: {
                 lineOne: null,
