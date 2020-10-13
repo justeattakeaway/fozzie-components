@@ -31,22 +31,19 @@ export default {
 </script>
 
 <style lang="scss" module>
-$note-input-bg                            : $white;
 $note-input-borderRadius                  : 3px;
 $note-input-borderWidth                   : 1px;
 $note-input-borderColour                  : $grey--light;
-$note-font-weight-bold                    : $font-weight-bold;
-$line-height                              : 17.5px;
 $note-textColour                          : $grey--dark;
-$note-headingColour                       : $grey--darkest;
+$line-height                              : 17.5px;
 
 .c-userNote {
-    font-weight: $note-font-weight-bold;
+    font-weight: $font-weight-bold;
 
     .c-userNote-title {
         margin-top: spacing(x2);
         @include font-size(body-l);
-        color: $note-headingColour;
+        color: $color-headings;
     }
 
     div {
@@ -62,7 +59,7 @@ $note-headingColour                       : $grey--darkest;
         padding: spacing(x1.5) spacing(x1);
         margin: spacing(x2) 0 spacing(x3) 0;
         font-family: inherit;
-        background-color: $note-input-bg;
+        background-color: $color-bg--component;
         border: $note-input-borderWidth solid $note-input-borderColour;
         border-radius: $note-input-borderRadius;
         background-clip: padding-box;
