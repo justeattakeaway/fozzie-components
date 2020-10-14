@@ -10,10 +10,7 @@ export default {
 export const Checkout = () => ({
   components: { VueCheckout },
   template:
-      '<vue-checkout />',
-  parameters: {
-    notes: 'some documentation here'
-}
+      '<vue-checkout />'
 });
 
 Checkout.parameters = {
