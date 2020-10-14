@@ -59,6 +59,7 @@ $line-height                              : 17.5px;
         padding: spacing(x1.5) spacing(x1);
         margin: spacing(x2) 0 spacing(x3) 0;
         font-family: inherit;
+        font-weight: $font-weight-bold;
         background-color: $color-bg--component;
         border: $note-input-borderWidth solid $note-input-borderColour;
         border-radius: $note-input-borderRadius;
