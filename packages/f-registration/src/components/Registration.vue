@@ -163,6 +163,7 @@
                 </form-field>
 
                 <form-button
+                    class="submit-button-padding"
                     data-test-id="create-account-submit-button"
                     button-style="primary"
                     is-full-width
@@ -481,15 +482,26 @@ export default {
 }
 
 .c-card-padding {
-    padding-top: 30px;
+    padding-top: 55px;
+    padding-bottom: 50px;
+
+    @include media('<mid') {
+        padding-bottom: 32px;
+    }
 }
 
 .bag-icon {
     width: 97px;
     height: 78px;
+    top: 80px;
+    left: 20px;
+    position: relative;
+    @include media('<mid') {
+        width: 92px;
+        height: 74px;
+    }
     margin: auto;
     display: block;
-    position: relative;
-    bottom: -30px;
 }
+
 </style>
