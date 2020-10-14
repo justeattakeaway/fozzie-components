@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -10,7 +10,7 @@
     "prepublishOnly": "lerna run prepublishOnly --stream",
     "release": "lerna publish",
     "storybook:build": "lerna run storybook:build",
-    "storybook:serve": "lerna run storybook:serve",
+    "storybook:serve": "lerna run storybook:serve --stream",
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
     "test-component:chrome": "lerna run test-component:chrome --concurrency 1 --stream",
