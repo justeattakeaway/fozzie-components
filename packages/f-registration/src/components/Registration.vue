@@ -13,7 +13,7 @@
                 v-if="shouldShowLoginLink"
                 :class="$style['c-loginLink']"
                 data-test-id="create-account-login-link">
-                {{ loginSettings.preLinkText }} <a :href="loginSettings.url">{{ loginSettings.linkText }}</a>
+                <a :href="loginSettings.url">{{ loginSettings.linkText }}</a>
             </div>
             <form
                 type="post"
@@ -472,7 +472,8 @@ export default {
     margin-top: spacing(x2);
 }
 
-.c-loginLink, .c-legal-hyperlinks {
+.c-loginLink,
+.c-legal-hyperlinks {
     text-align: center;
     a {
         color: $blue;
