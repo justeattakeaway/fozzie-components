@@ -20,7 +20,7 @@ const userInfo = {
 
 export default {
     title: 'Components/Organisms',
-    decorators: [withKnobs, withA11y, withTests({ results})]
+    decorators: [withKnobs, withA11y, withTests({ results })]
 };
 
 export const HeaderComponent = () => ({

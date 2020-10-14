@@ -2,7 +2,7 @@ import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { withTests } from '@storybook/addon-jest';
 import MegaModal from '../src/components/MegaModal.vue';
-import results from '../src/components/tests/f-mega-modal-results.json';
+import results from '../src/components/tests/.jest-test-results.json';
 
 export default {
     title: 'Components/Atoms',
