@@ -54,6 +54,11 @@ module.exports = class extends Generator {
 
         ignoreTestPattern = ignoreTestPattern.concat(ignoreApiMockPattern);
 
+        const date = new Date();
+        const month = date.toLocaleString('en-GB', { month: 'long' });
+        const day = date.toLocaleString('en-GB', { day: 'numeric' });
+        const year = date.toLocaleString('en-GB', { year: 'numeric' });
+
         this.fs.copyTpl(
             this.templatePath('**/*'),
             this.destinationPath(`f-${nameTransformations.default}/`),
@@ -61,7 +66,8 @@ module.exports = class extends Generator {
                 description: this.answers.description,
                 name: nameTransformations,
                 needsUITests: this.answers.needsUITests,
-                needsTestingApiMocks: this.answers.needsTestingApiMocks
+                needsTestingApiMocks: this.answers.needsTestingApiMocks,
+                changelogDate: `${month} ${day}, ${year}`
             },
             null,
             {
