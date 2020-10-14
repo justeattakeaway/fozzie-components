@@ -3,7 +3,7 @@ import {
 } from '@storybook/addon-knobs';
 import Card from '../src/components/Card.vue';
 import { withA11y } from '@storybook/addon-a11y';
-import results from '../src/components/tests/f-card-test-results.json'
+import results from '../src/components/tests/.jest-test-results.json'
 import { withTests } from '@storybook/addon-jest';
 
 export default {

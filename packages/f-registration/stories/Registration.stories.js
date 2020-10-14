@@ -2,7 +2,7 @@ import { withKnobs, select, text } from '@storybook/addon-knobs';
 import Registration from '../src/components/Registration.vue';
 import { withA11y } from '@storybook/addon-a11y';
 import { withTests } from '@storybook/addon-jest';
-import results from '../src/components/tests/f-registration-test-results.json';
+import results from '../src/components/tests/.jest-test-results.json';
 
 export default {
     title: 'Components/Organisms',
@@ -31,8 +31,8 @@ export const RegistrationComponent = () => ({
 RegistrationComponent.parameters = {
     jest: [
         'Registration.test.js',
-        'f-registration.integration.test.js',
-        'RegistrationServiceApi.test.js'
+        'RegistrationServiceApi.test.js',
+        'f-registration.integration.test.js'
     ],
 }
 

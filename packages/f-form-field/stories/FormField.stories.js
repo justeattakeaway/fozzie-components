@@ -5,7 +5,7 @@ import FormField from '../src/components/FormField.vue';
 import { VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../src/constants';
 import { withA11y } from '@storybook/addon-a11y';
 import { withTests } from '@storybook/addon-jest';
-import results from '../src/components/tests/f-form-field-test-results.json';
+import results from '../src/components/tests/.jest-test-results.json';
 
 export default {
     title: 'Components/Atoms',

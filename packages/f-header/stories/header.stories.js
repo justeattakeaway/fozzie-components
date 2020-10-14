@@ -4,7 +4,7 @@ import {
 import VueHeader from '../src/components/Header.vue';
 import { withA11y } from '@storybook/addon-a11y';
 import { withTests } from '@storybook/addon-jest';
-import results from '../src/components/tests/f-header-test-results.json';
+import results from '../src/components/tests/.jest-test-results.json';
 
 const userInfo = {
     friendlyName: 'John',
@@ -55,7 +55,10 @@ export const HeaderComponent = () => ({
 });
 
 HeaderComponent.parameters = {
-    jest: ['Header.test.js', 'Logo.test.js'],
+    jest: [
+        'Header.test.js',
+        'Logo.test.js'
+    ],
 }
 
 HeaderComponent.storyName = 'f-header';

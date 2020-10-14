@@ -15,7 +15,7 @@ import { defaultEnabledCardTypes } from '../src/services/contentCard.service';
 
 import cards, { labelledMultiSelectAllowedValues } from './mockData/cards';
 import data from './mockData/data';
-import results from '../src/components/tests/f-content-cards-test-results.json';
+import results from '../src/components/tests/.jest-test-results.json';
 
 const callback = alert;
 /**

@@ -3,7 +3,7 @@ import VueFooter from '../src/components/Footer.vue';
 import { withA11y } from '@storybook/addon-a11y';
 import { withTests } from '@storybook/addon-jest';
 
-import results from '../src/components/tests/f-footer-test-results.json';
+import results from '../src/components/tests/.jest-test-results.json';
 export default {
     title: 'Components/Organisms',
     decorators: [withA11y, withTests({ results })],
@@ -37,7 +37,8 @@ FooterComponent.parameters = {
     jest: [
         'CountrySelector.test.js',
         'Footer.test.js',
-        'LinkList.test.js'],
+        'LinkList.test.js'
+    ],
   };
 
 FooterComponent.storyName = 'f-footer';

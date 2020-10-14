@@ -1,5 +1,5 @@
 import VueCheckout from '../src/components/Checkout.vue';
-import results from '../src/components/tests/f-checkout-test-results.json';
+import results from '../src/components/tests/.jest-test-results.json';
 import { withTests } from '@storybook/addon-jest';
 
 export default {
