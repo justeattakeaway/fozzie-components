@@ -3,7 +3,7 @@
         <div :class="$style['c-userNote-title']">
             Leave a note
         </div>
-        <div>
+        <div :class="$style['c-userNote-content']">
             {{ noteText }}
         </div>
         <textarea
@@ -46,7 +46,7 @@ $line-height                              : 17.5px;
         color: $color-headings;
     }
 
-    div {
+    .c-userNote-content {
         margin-top: spacing(x1);
         font-size: 14px;
         line-height: $line-height;
