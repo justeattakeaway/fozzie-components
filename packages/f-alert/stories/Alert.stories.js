@@ -14,9 +14,9 @@ storiesOf('Components', module)
         is-page-content-wrapper>
         <vue-alert
             locale="en-GB"
-            type="success"
-            :isDismissable="true">
-            <template v-slot:heading>Title of the alert</template>
+            type="info"
+            :isDismissable="true"
+            heading="Title of the alert">
             <template v-slot:content>You can put any HTML here, buddy.</template>
         </vue-alert>
         <p>

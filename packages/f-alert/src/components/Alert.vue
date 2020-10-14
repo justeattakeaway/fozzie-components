@@ -3,9 +3,10 @@
         v-if="!isDismissed"
         :class="[$style['c-alert'],
                  $style[`c-alert--${type}`]]"
-        data-test-id='alert-component'>
+        data-test-id="alert-component"
+        role="alert">
         <div
-            :class="$style['c-alert-heading-container']">
+            :class="$style['c-alert-headingContainer']">
             <component
                 :is="icon"
                 :class="[$style['c-icon--alert'],
@@ -14,7 +15,7 @@
             <!-- TODO: make this dynamic. See https://skipthedishes.atlassian.net/browse/WCB-1219 -->
             <h2
                 :class="$style['c-alert-heading']">
-                <slot name="heading" />
+                {{ heading }}
             </h2>
             <button
                 v-if="isDismissable"
@@ -66,6 +67,10 @@ export default {
             default: 'info',
             validator: value => ['success', 'warning', 'info', 'danger'].indexOf(value) !== -1
         },
+        heading: {
+            type: String,
+            default: ''
+        },
         isDismissable: {
             type: Boolean,
             default: false
@@ -106,7 +111,7 @@ $alert-borderRadius: $border-radius;
     margin-top: spacing(x2);
     border: 0;
 }
-    .c-alert-heading-container {
+    .c-alert-headingContainer {
         display: flex;
         align-items: center;
         padding: spacing(x0.5) 0;
