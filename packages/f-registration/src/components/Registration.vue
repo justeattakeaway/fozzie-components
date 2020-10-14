@@ -9,12 +9,12 @@
             card-heading-position="center"
             data-test-id="registration-component"
             :class="$style['c-card-padding']">
-            <p
+            <div
                 v-if="shouldShowLoginLink"
                 :class="$style['c-loginLink']"
                 data-test-id="create-account-login-link">
                 {{ loginSettings.preLinkText }} <a :href="loginSettings.url">{{ loginSettings.linkText }}</a>
-            </p>
+            </div>
             <form
                 type="post"
                 :class="$style['o-form']"
@@ -171,7 +171,7 @@
                     {{ buttonText }}
                 </form-button>
             </form>
-            <p :class="$style['c-legal-hyperlinks']">
+            <div :class="$style['c-legal-hyperlinks']">
                 {{ copy.navLinks.termsAndConditions.prefix }}
                 <a
                     data-test-id="ts-and-cs-link"
@@ -187,7 +187,7 @@
                     data-test-id="cookies-policy-link"
                     :href="copy.navLinks.cookiesPolicy.url"
                     target="_blank">{{ copy.navLinks.cookiesPolicy.text }}</a>{{ copy.navLinks.cookiesPolicy.suffix }}
-            </p>
+            </div>
         </card>
     </div>
 </template>
