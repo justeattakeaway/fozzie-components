@@ -1,5 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
+import { withTests } from '@storybook/addon-jest';
 import mock, { proxy } from 'xhr-mock';
 import { defaultEnabledCardTypes } from '@justeat/f-metadata/src/services/contentCard.service';
 
@@ -7,6 +8,7 @@ import ContentCards from '../src/components/ContentCards.vue';
 
 import cards, { labelledMultiSelectAllowedValues } from './mockData/cards';
 import data from './mockData/data';
+import results from '../src/components/tests/.jest-test-results.json';
 
 /**
  * Resets all locally stored braze data so that the stubbed data is always fresh on page load
@@ -57,7 +59,7 @@ export default {
         locale: { control: { type: 'radio', options: ['da-DK', 'en-GB', 'en-AU'] } },
         enabledCardTypes: { control: { type: 'multi-select', options: labelledMultiSelectAllowedValues } }
     },
-    decorators: [withA11y]
+    decorators: [withA11y, withTests({ results })]
 };
 
 export function ContentCardsBraze (args, { argTypes }) {
@@ -93,6 +95,10 @@ export function ContentCardsBraze (args, { argTypes }) {
 }
 
 ContentCardsBraze.storyName = 'braze cards only';
+
+ContentCardsBraze.parameters = {
+    jest: ['ContentCards.test.js']
+};
 
 ContentCardsBraze.args = {
     apiKey: '00000000-0000-0000-0000-000000000000',
@@ -166,6 +172,10 @@ export function ContentCardsCustom (args, { argTypes }) {
         template
     };
 }
+
+ContentCardsCustom.parameters = {
+    jest: ['ContentCards.test.js']
+};
 
 ContentCardsCustom.storyName = 'custom card';
 

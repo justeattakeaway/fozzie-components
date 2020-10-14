@@ -19,6 +19,9 @@
             <form
                 type="post"
                 :class="$style['o-form']"
+                tabindex="0"
+                @click="formStart"
+                @focus="formStart"
                 @submit.prevent="onFormSubmit"
             >
                 <!-- TODO WCB-1031 - Extract error messages into a separate component -->
@@ -35,7 +38,7 @@
                     label-text="First name"
                     input-type="text"
                     label-style="inlineNarrow"
-                    @blur="$v.firstName.$touch">
+                    @blur="formFieldBlur('firstName')">
                     <template #error>
                         <p
                             v-if="shouldShowFirstNameRequiredError"
@@ -68,7 +71,7 @@
                     label-text="Last name"
                     input-type="text"
                     label-style="inlineNarrow"
-                    @blur="$v.lastName.$touch">
+                    @blur="formFieldBlur('lastName')">
                     <template #error>
                         <p
                             v-if="shouldShowLastNameRequiredError"
@@ -101,7 +104,7 @@
                     label-text="Email"
                     input-type="email"
                     label-style="inlineNarrow"
-                    @blur="$v.email.$touch">
+                    @blur="formFieldBlur('email')">
                     <template #error>
                         <p
                             v-if="shouldShowEmailRequiredError"
@@ -141,7 +144,7 @@
                     label-text="Password"
                     input-type="password"
                     label-style="inlineNarrow"
-                    @blur="$v.password.$touch">
+                    @blur="formFieldBlur('password')">
                     <template #error>
                         <p
                             v-if="shouldShowPasswordRequiredError"
@@ -216,6 +219,25 @@ import EventNames from '../event-names';
  */
 const meetsCharacterValidationRules = value => /^[\u0060\u00C0-\u00F6\u00F8-\u017Fa-zA-Z-' ]*$/.test(value);
 
+const formValidationState = $v => {
+    const fields = $v.$params;
+    const invalidFields = [];
+    const validFields = [];
+
+    Object.keys(fields).forEach(key => {
+        if ($v[key].$invalid) {
+            invalidFields.push(key);
+        } else {
+            validFields.push(key);
+        }
+    });
+
+    return {
+        validFields,
+        invalidFields
+    };
+};
+
 export default {
     name: 'Registration',
 
@@ -266,7 +288,8 @@ export default {
             password: null,
             shouldDisableCreateAccountButton: false,
             genericErrorMessage: null,
-            shouldShowEmailAlreadyExistsError: false
+            shouldShowEmailAlreadyExistsError: false,
+            formStarted: false
         };
     },
 
@@ -351,12 +374,33 @@ export default {
     },
 
     methods: {
+        formStart () {
+            if (!this.formStarted) {
+                this.$emit(EventNames.CreateAccountStart);
+                this.formStarted = true;
+            }
+        },
+
+        formFieldBlur (field) {
+            const fieldValidation = this.$v[field];
+            if (fieldValidation) {
+                fieldValidation.$touch();
+
+                if (fieldValidation.$invalid) {
+                    this.$emit(EventNames.CreateAccountInlineError, field);
+                }
+            }
+        },
+
         async onFormSubmit () {
             this.genericErrorMessage = null;
             this.shouldShowEmailAlreadyExistsError = false;
 
             if (this.isFormInvalid()) {
-                this.$emit(EventNames.CreateAccountFailure);
+                const validationState = formValidationState(this.$v);
+
+                this.$emit(EventNames.CreateAccountFailure, validationState);
+
                 return;
             }
 
@@ -399,6 +443,7 @@ export default {
         }
     }
 };
+
 </script>
 
 <style lang="scss" module>

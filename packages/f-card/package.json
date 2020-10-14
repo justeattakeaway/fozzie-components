@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-card",
   "description": "Fozzie Card Component – Used for providing wrapper card styling to an element (or group of elements)",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "main": "dist/f-card.umd.min.js",
   "files": [
     "dist"
@@ -30,7 +30,7 @@
     "demo": "vue serve --open ./src/demo/Index.vue",
     "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
-    "test": "vue-cli-service test:unit"
+    "test": "vue-cli-service test:unit --json --outputFile=./src/components/tests/.jest-test-results.json"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"

@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.4.0
+------------------------------
+*October 13, 2020*
+
+### Added
+- Success and danger icons.
+
+### Changed
+- Info, warning and cross icons.
+
+
 v1.3.0
 ------------------------------
 *September 28, 2020*

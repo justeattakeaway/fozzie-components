@@ -9,7 +9,8 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
-import tenantConfigs from '../tenants';
+import tenantConfigs from '../tenants';<% if(needsTestingApiMocks) { %>
+import <%= name.filename%>ServiceApi from '../services/<%= name.filename%>ServiceApi';<%}%>
 
 export default {
     name: '<%= name.component %>',
