@@ -11,16 +11,19 @@
                 :is="icon"
                 :class="[$style['c-icon--alert'],
                          $style['c-alert-icon'],
-                         $style[`c-alert-icon--${type}`]]" />
+                         $style[`c-alert-icon--${type}`]]"
+                data-test-id="alert-icon" />
             <!-- TODO: make this dynamic. See https://skipthedishes.atlassian.net/browse/WCB-1219 -->
             <h2
-                :class="$style['c-alert-heading']">
+                :class="$style['c-alert-heading']"
+                data-test-id="alert-heading">
                 {{ heading }}
             </h2>
             <button
                 v-if="isDismissable"
                 type="button"
                 :class="[$style['c-alert-dismiss'], 'o-btn o-btn--icon']"
+                data-test-id="alert-dismiss"
                 @click="dismiss">
                 <cross-icon
                     :class="[$style['c-icon--cross'], $style['c-alert-dismiss-icon']]"
@@ -64,12 +67,12 @@ export default {
         },
         type: {
             type: String,
-            default: 'info',
+            required: true,
             validator: value => ['success', 'warning', 'info', 'danger'].indexOf(value) !== -1
         },
         heading: {
             type: String,
-            default: ''
+            required: true
         },
         isDismissable: {
             type: Boolean,
