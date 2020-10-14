@@ -23,11 +23,11 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
-import initialiseBrazeDispatcher from '@justeat/f-metadata';
+import initialiseMetadataDispatcher from '@justeat/f-metadata';
 import cardTemplates from './cardTemplates';
 import tenantConfigs from '../tenants';
 
-export const CARDSOURCE_BRAZE = 'braze';
+export const CARDSOURCE_METADATA = 'metadata';
 export const CARDSOURCE_CUSTOM = 'custom';
 
 /**
@@ -37,7 +37,7 @@ export const CARDSOURCE_CUSTOM = 'custom';
  * @param card
  * @returns {{contentCTA, customVoucherCode, contentId: *, contentAction: *, contentPosition, contentTitle: *, contentType: string}}
  */
-const createBrazeCardEvent = (contentAction, card) => {
+const createMetadataCardEvent = (contentAction, card) => {
     const {
         id: contentId,
         title: contentTitle,
@@ -124,7 +124,7 @@ export default {
             titleCard: {},
             hasLoaded: false,
             loadingCard,
-            brazeDispatcher: null
+            metadataDispatcher: null
         };
     },
 
@@ -157,7 +157,7 @@ export default {
             this.$emit('get-card-count', current.length);
 
             if (current.length && (current.length !== previous.length)) {
-                this.brazeDispatcher.logCardImpressions(this.cards.map(({ id }) => id));
+                this.metadataDispatcher.logCardImpressions(this.cards.map(({ id }) => id));
             }
             if ((current.length > 0) && (previous.length === 0)) {
                 this.hasLoaded = true;
@@ -177,11 +177,11 @@ export default {
     },
 
     /**
-     * Emits an event that allows consuming code to inject custom content cards, and sets off braze initialisation
+     * Emits an event that allows consuming code to inject custom content cards, and sets off metadata initialisation
      **/
     mounted () {
         this.$emit('custom-cards-callback', this.customContentCards.bind(this));
-        this.setupBraze(this.apiKey, this.userId);
+        this.setupMetadata(this.apiKey, this.userId);
     },
 
     /**
@@ -220,25 +220,25 @@ export default {
 
     methods: {
         /**
-         * Initializes braze and handles success / failure states from the returned promise
+         * Initializes metadata and handles success / failure states from the returned promise
          * @param {String} apiKey
          * @param {String} userId
          * @param {Boolean} enableLogging
          * @return {Promise<void>}
          **/
-        setupBraze (apiKey, userId, enableLogging = false) {
-            return initialiseBrazeDispatcher({
+        setupMetadata (apiKey, userId, enableLogging = false) {
+            return initialiseMetadataDispatcher({
                 apiKey,
                 userId,
                 enableLogging,
                 enabledCardTypes: this.enabledCardTypes,
                 brands: this.brands,
                 callbacks: {
-                    handleContentCards: this.brazeContentCards
+                    handleContentCards: this.metadataContentCards
                 }
             })
                 .then(dispatcher => {
-                    this.brazeDispatcher = dispatcher;
+                    this.metadataDispatcher = dispatcher;
                 })
                 .catch(error => {
                     this.$emit('on-error', error);
@@ -274,13 +274,16 @@ export default {
         },
 
         /**
-         * Handles card ingestion via braze
+         * Handles card ingestion via metadata
          * @param {Card[]} cards
          **/
-        brazeContentCards (cards) {
+        metadataContentCards (cards) {
             this.contentCards({
-                source: CARDSOURCE_BRAZE,
-                successCallback: () => this.$emit('on-braze-init', window.appboy)
+                source: CARDSOURCE_METADATA,
+                successCallback: () => {
+                    this.$emit('on-braze-init', window.appboy); // for backward compatibility
+                    this.$emit('on-metadata-init', window.appboy);
+                }
             }, cards);
         },
 
@@ -300,6 +303,15 @@ export default {
          * @param {Number} limit
          **/
         limitCards (cards, limit) {
+            if (limit === 1 && this.enabledCardTypes.length > 1) {
+                const filteredCards = [];
+                this.enabledCardTypes.some(enabledCardType => {
+                    const card = cards.find(({ type }) => type === enabledCardType);
+                    if (card) filteredCards.push(card);
+                    return card && filteredCards.length === limit;
+                });
+                return filteredCards;
+            }
             return limit > -1 ? cards.slice(0, limit) : cards;
         },
 
@@ -340,9 +352,9 @@ export default {
          */
         handleCardClick (card) {
             switch (card.source) {
-                case CARDSOURCE_BRAZE:
-                    this.trackBrazeCardClick(card);
-                    this.brazeDispatcher.logCardClick(card.id);
+                case CARDSOURCE_METADATA:
+                    this.trackMetadataCardClick(card);
+                    this.metadataDispatcher.logCardClick(card.id);
                     break;
                 case CARDSOURCE_CUSTOM:
                     // TBC DPDAMI-2688
@@ -358,8 +370,8 @@ export default {
          */
         handleCardView (card) {
             switch (card.source) {
-                case CARDSOURCE_BRAZE:
-                    this.trackBrazeCardVisibility(card);
+                case CARDSOURCE_METADATA:
+                    this.trackMetadataCardVisibility(card);
                     break;
                 case CARDSOURCE_CUSTOM:
                     // TBC DPDAMI-2688
@@ -370,34 +382,21 @@ export default {
         },
 
         /**
-         * Uses given pushToDataLayer function to report braze card event
-         * @param payload
-         */
-        pushBrazeEvent (payload) {
-            this.pushToDataLayer({
-                event: 'BrazeContent',
-                custom: {
-                    braze: payload
-                }
-            });
-        },
-
-        /**
          * Generates a click event for the given card data and reports using the common method
          * @param card
          */
-        trackBrazeCardClick (card) {
-            const event = createBrazeCardEvent('click', card);
-            this.pushBrazeEvent(event);
+        trackMetadataCardClick (card) {
+            const event = createMetadataCardEvent('click', card);
+            this.metadataDispatcher.pushShapedEventToDataLayer(this.pushToDataLayer, event);
         },
 
         /**
          * Generates a view event for the given card data and reports using the common method
          * @param card
          */
-        trackBrazeCardVisibility (card) {
-            const event = createBrazeCardEvent('view', card);
-            this.pushBrazeEvent(event);
+        trackMetadataCardVisibility (card) {
+            const event = createMetadataCardEvent('view', card);
+            this.metadataDispatcher.pushShapedEventToDataLayer(this.pushToDataLayer, event);
         },
 
         /**

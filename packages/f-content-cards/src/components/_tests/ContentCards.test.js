@@ -1,9 +1,12 @@
 /* eslint indent: ["error", 4, {ignoredNodes: ["TemplateLiteral > *"]}] */
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import Vue from 'vue';
-import initialiseBraze from '@justeat/f-metadata';
-import ContentCards, { CARDSOURCE_BRAZE, CARDSOURCE_CUSTOM } from '../ContentCards.vue';
+import initialiseMetadata from '@justeat/f-metadata';
+import ContentCards, { CARDSOURCE_METADATA, CARDSOURCE_CUSTOM } from '../ContentCards.vue';
 import cardTemplates from '../cardTemplates';
+import CardContainer from '../cardTemplates/CardContainer.vue';
+import HomePromotionCard1 from '../cardTemplates/homePromotionCard/HomePromotionCard1.vue';
+import HomePromotionCard2 from '../cardTemplates/homePromotionCard/HomePromotionCard2.vue';
 
 jest.mock('@justeat/f-metadata');
 
@@ -18,9 +21,10 @@ const voucherCode = '__VOUCHERCODE__';
 const order = '__ORDER__';
 const id = btoa('ABC123');
 
-const brazeDispatcher = {
+const metadataDispatcher = {
     logCardClick: jest.fn(),
-    logCardImpressions: jest.fn()
+    logCardImpressions: jest.fn(),
+    pushShapedEventToDataLayer: jest.fn()
 };
 
 const createCard = type => ({
@@ -34,11 +38,11 @@ const createCard = type => ({
     voucherCode
 });
 
-const createBrazeCards = cardTypes => cardTypes.map(type => createCard(type));
+const createMetadataCards = cardTypes => cardTypes.map(type => createCard(type));
 
 beforeEach(() => {
     jest.resetAllMocks();
-    initialiseBraze.mockResolvedValue(brazeDispatcher);
+    initialiseMetadata.mockResolvedValue(metadataDispatcher);
 });
 
 describe('ContentCards', () => {
@@ -58,7 +62,7 @@ describe('ContentCards', () => {
         expect(instance.emitted()['custom-cards-callback'][0][0]).toBeInstanceOf(Function); // That is a callback
     });
 
-    it('should call intitialiseBraze when mounted', () => {
+    it('should call intitialiseMetadata when mounted', () => {
         // Arrange & Act
         shallowMount(ContentCards, {
             propsData: {
@@ -68,17 +72,17 @@ describe('ContentCards', () => {
         });
 
         // Assert
-        const [[settings]] = initialiseBraze.mock.calls;
+        const [[settings]] = initialiseMetadata.mock.calls;
         expect(settings.apiKey).toBe(apiKey);
         expect(settings.userId).toBe(userId);
         expect(settings.enableLogging).toBe(false);
     });
 
-    it('should handle rejections from the promise returned by intitialiseBraze by emitting an onError event', async () => {
+    it('should handle rejections from the promise returned by intitialiseMetadata by emitting an onError event', async () => {
         // Arrange
-        initialiseBraze.mockReset();
+        initialiseMetadata.mockReset();
         const error = new Error('foo');
-        initialiseBraze.mockRejectedValue(error);
+        initialiseMetadata.mockRejectedValue(error);
 
         // Act
         const instance = shallowMount(ContentCards, {
@@ -98,7 +102,7 @@ describe('ContentCards', () => {
     it('should format and display allowed card types', async () => {
         // Arrange
         const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
-        const cards = createBrazeCards(cardTypes);
+        const cards = createMetadataCards(cardTypes);
 
         // Act
         const instance = shallowMount(ContentCards, {
@@ -107,7 +111,7 @@ describe('ContentCards', () => {
                 userId
             }
         });
-        instance.vm.brazeContentCards(cards);
+        instance.vm.metadataContentCards(cards);
         await instance.vm.$nextTick();
 
         // Assert
@@ -119,7 +123,7 @@ describe('ContentCards', () => {
     it('should format and display injected custom cards', async () => {
         // Arrange
         const cardTypes = ['Post_Order_Card_1'];
-        const cards = createBrazeCards(cardTypes);
+        const cards = createMetadataCards(cardTypes);
 
         // Act
         const instance = shallowMount(ContentCards, {
@@ -150,7 +154,7 @@ describe('ContentCards', () => {
         `('should map `$type` card type to `$component` component', async ({ type, component }) => {
         // Arrange
         const cardTypes = [type];
-        const cards = createBrazeCards(cardTypes);
+        const cards = createMetadataCards(cardTypes);
 
         // Act
         const instance = shallowMount(ContentCards, {
@@ -159,7 +163,7 @@ describe('ContentCards', () => {
                 userId
             }
         });
-        instance.vm.brazeContentCards(cards);
+        instance.vm.metadataContentCards(cards);
         await instance.vm.$nextTick();
 
         // Assert
@@ -169,7 +173,7 @@ describe('ContentCards', () => {
     it('should not render invalid card types as components', async () => {
         // Arrange
         const cardTypes = ['INVALID'];
-        const cards = createBrazeCards(cardTypes);
+        const cards = createMetadataCards(cardTypes);
 
         // Act
         const instance = shallowMount(ContentCards, {
@@ -179,7 +183,7 @@ describe('ContentCards', () => {
                 testId: 'empty-content-cards'
             }
         });
-        instance.vm.brazeContentCards(cards);
+        instance.vm.metadataContentCards(cards);
         await instance.vm.$nextTick();
 
         // Assert
@@ -187,7 +191,7 @@ describe('ContentCards', () => {
     });
 
     describe('loading state', () => {
-        it('should show a skeleton loading card before Braze has initialised', async () => {
+        it('should show a skeleton loading card before Metadata has initialised', async () => {
             // Arrange
             const { SkeletonLoader } = cardTemplates;
 
@@ -203,10 +207,10 @@ describe('ContentCards', () => {
             expect(instance.findComponent(SkeletonLoader).exists()).toBe(true);
         });
 
-        it('should hide the skeleton loading card after Braze has initialised', async () => {
+        it('should hide the skeleton loading card after Metadata has initialised', async () => {
             // Arrange
             const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
-            const cards = createBrazeCards(cardTypes);
+            const cards = createMetadataCards(cardTypes);
             const { SkeletonLoader } = cardTemplates;
 
             // Act
@@ -216,14 +220,14 @@ describe('ContentCards', () => {
                     userId
                 }
             });
-            instance.vm.brazeContentCards(cards);
+            instance.vm.metadataContentCards(cards);
             await instance.vm.$nextTick();
 
             // Assert
             expect(instance.findComponent(SkeletonLoader).exists()).toBe(false);
         });
 
-        it('should NOT show a skeleton loading card whilst initialising Braze if "showLoadingState" prop is false"', async () => {
+        it('should NOT show a skeleton loading card whilst initialising Metadata if "showLoadingState" prop is false"', async () => {
             // Arrange
             const showLoadingState = false;
             const { SkeletonLoader } = cardTemplates;
@@ -275,7 +279,7 @@ describe('ContentCards', () => {
     it('should call logCardImpressions from f-metadata with data from all displayed cards', async () => {
         // Arrange
         const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
-        const cards = createBrazeCards(cardTypes);
+        const cards = createMetadataCards(cardTypes);
 
         // Act
         const instance = shallowMount(ContentCards, {
@@ -284,11 +288,11 @@ describe('ContentCards', () => {
                 userId
             }
         });
-        instance.vm.brazeContentCards(cards);
+        instance.vm.metadataContentCards(cards);
         await instance.vm.$nextTick();
 
         // Assert
-        expect(brazeDispatcher.logCardImpressions).toHaveBeenCalledWith(cards.map(card => card.id));
+        expect(metadataDispatcher.logCardImpressions).toHaveBeenCalledWith(cards.map(card => card.id));
     });
 
     describe('when mounting descendants', () => {
@@ -300,7 +304,7 @@ describe('ContentCards', () => {
                 inject: ['emitCardClick', 'emitCardView', 'emitVoucherCodeClick']
             });
             const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
-            const cards = createBrazeCards(cardTypes);
+            const cards = createMetadataCards(cardTypes);
             const instance = shallowMount(ContentCards, {
                 propsData: {
                     apiKey,
@@ -314,7 +318,7 @@ describe('ContentCards', () => {
             const cardClickHandler = jest.spyOn(instance.vm._provided, 'emitCardClick');
             const cardViewHandler = jest.spyOn(instance.vm._provided, 'emitCardView');
             const voucherCodeClickHandler = jest.spyOn(instance.vm._provided, 'emitVoucherCodeClick');
-            instance.vm.brazeContentCards(cards);
+            instance.vm.metadataContentCards(cards);
             await instance.vm.$nextTick();
 
             return {
@@ -337,11 +341,11 @@ describe('ContentCards', () => {
             expect(cardViewHandler).toHaveBeenCalledWith(cardViewDetails);
         });
 
-        describe('the view handler, for a braze card', () => {
+        describe('the view handler, for a metadata card', () => {
             it('should push a correctly-formed tracking event to the data layer', async () => {
                 const { instance } = await arrange();
                 const cardViewDetails = {
-                    source: CARDSOURCE_BRAZE,
+                    source: CARDSOURCE_METADATA,
                     ...createCard('Post_Order_Card_1')
                 };
 
@@ -349,19 +353,14 @@ describe('ContentCards', () => {
                 instance.find('[data-promotion-card="true"]').vm.emitCardView(cardViewDetails);
 
                 // Assert
-                expect(pushToDataLayer).toHaveBeenCalledWith({
-                    event: 'BrazeContent',
-                    custom: {
-                        braze: {
-                            contentId: id,
-                            contentAction: 'view',
-                            contentType: 'contentCard',
-                            contentTitle: title,
-                            contentPosition: order,
-                            contentCTA: button,
-                            customVoucherCode: voucherCode
-                        }
-                    }
+                expect(metadataDispatcher.pushShapedEventToDataLayer).toHaveBeenCalledWith(pushToDataLayer, {
+                    contentId: id,
+                    contentAction: 'view',
+                    contentType: 'contentCard',
+                    contentTitle: title,
+                    contentPosition: order,
+                    contentCTA: button,
+                    customVoucherCode: voucherCode
                 });
             });
         });
@@ -412,11 +411,11 @@ describe('ContentCards', () => {
             expect(cardClickHandler).toHaveBeenCalledWith(cardClickDetails);
         });
 
-        describe('the click handler, for a braze card', () => {
+        describe('the click handler, for a metadata card', () => {
             it('should push a correctly-formed tracking event to the data layer', async () => {
                 const { instance } = await arrange();
                 const cardClickDetails = {
-                    source: CARDSOURCE_BRAZE,
+                    source: CARDSOURCE_METADATA,
                     ...createCard('Post_Order_Card_1')
                 };
 
@@ -424,26 +423,21 @@ describe('ContentCards', () => {
                 instance.find('[data-promotion-card="true"]').vm.emitCardClick(cardClickDetails);
 
                 // Assert
-                expect(pushToDataLayer).toHaveBeenCalledWith({
-                    event: 'BrazeContent',
-                    custom: {
-                        braze: {
-                            contentId: id,
-                            contentAction: 'click',
-                            contentType: 'contentCard',
-                            contentTitle: title,
-                            contentPosition: order,
-                            contentCTA: button,
-                            customVoucherCode: voucherCode
-                        }
-                    }
+                expect(metadataDispatcher.pushShapedEventToDataLayer).toHaveBeenCalledWith(pushToDataLayer, {
+                    contentId: id,
+                    contentAction: 'click',
+                    contentType: 'contentCard',
+                    contentTitle: title,
+                    contentPosition: order,
+                    contentCTA: button,
+                    customVoucherCode: voucherCode
                 });
             });
 
-            it('should log a card click event with braze', async () => {
+            it('should log a card click event with metadata', async () => {
                 const { instance } = await arrange();
                 const cardClickDetails = {
-                    source: CARDSOURCE_BRAZE,
+                    source: CARDSOURCE_METADATA,
                     id: 'foo'
                 };
 
@@ -451,7 +445,7 @@ describe('ContentCards', () => {
                 instance.find('[data-promotion-card="true"]').vm.emitCardClick(cardClickDetails);
 
                 // Assert
-                expect(brazeDispatcher.logCardClick).toHaveBeenCalledWith('foo');
+                expect(metadataDispatcher.logCardClick).toHaveBeenCalledWith('foo');
             });
         });
 
@@ -523,7 +517,8 @@ describe('ContentCards', () => {
         beforeAll(async () => {
             // Arrange
             const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
-            const cards = createBrazeCards(cardTypes);
+            const cards = createMetadataCards(cardTypes);
+            initialiseMetadata.mockResolvedValue(metadataDispatcher);
 
             // Act
             instance = shallowMount(ContentCards, {
@@ -533,7 +528,7 @@ describe('ContentCards', () => {
                     testId
                 }
             });
-            instance.vm.brazeContentCards(cards);
+            instance.vm.metadataContentCards(cards);
             await instance.vm.$nextTick();
         });
 
@@ -553,7 +548,7 @@ describe('ContentCards', () => {
     it('should not generate test id attribute on self or children when no test id provided', async () => {
         // Arrange
         const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
-        const cards = createBrazeCards(cardTypes);
+        const cards = createMetadataCards(cardTypes);
 
         // Act
         const instance = shallowMount(ContentCards, {
@@ -562,7 +557,7 @@ describe('ContentCards', () => {
                 userId
             }
         });
-        instance.vm.brazeContentCards(cards);
+        instance.vm.metadataContentCards(cards);
         await instance.vm.$nextTick();
 
         // Assert
@@ -570,7 +565,7 @@ describe('ContentCards', () => {
     });
 
     describe('emitters', () => {
-        const cards = createBrazeCards(['Post_Order_Card_1']);
+        const cards = createMetadataCards(['Post_Order_Card_1']);
 
         const testEmitter = async (emitter, expectedArgs) => {
             // Arrange
@@ -582,7 +577,7 @@ describe('ContentCards', () => {
             });
 
             // Act
-            await instance.vm.brazeContentCards(cards);
+            await instance.vm.metadataContentCards(cards);
 
             // Assert
             const [calls] = instance.emitted()[emitter];
@@ -597,7 +592,7 @@ describe('ContentCards', () => {
             const appboy = '__APPBOY__';
             window.appboy = appboy;
 
-            await testEmitter('on-braze-init', appboy);
+            await testEmitter('on-metadata-init', appboy);
         });
 
         it('should emit an event containing the content card count when appboy is initialised', async () => {
@@ -606,6 +601,69 @@ describe('ContentCards', () => {
 
         it('should emit an event containing the loading status when appboy is initialised', async () => {
             await testEmitter('has-loaded', true);
+        });
+    });
+
+    describe('when `cardLimit` prop is set', () => {
+        const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
+        const cards = createMetadataCards(cardTypes);
+
+        const mountWithArguments = async (cardLimit, ingestedCards = cards, enabledCardTypes = cardTypes) => {
+            const instance = mount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId,
+                    cardLimit,
+                    enabledCardTypes
+                }
+            });
+            instance.vm.metadataContentCards(ingestedCards);
+            await instance.vm.$nextTick();
+            return instance;
+        };
+
+        it('should retain all cards if count is -1', async () => {
+            // Act
+            const component = await mountWithArguments(-1);
+
+            // Assert
+            const allCards = component.findComponent(ContentCards).findAllComponents(CardContainer);
+            expect(allCards).toHaveLength(cardTypes.length);
+        });
+
+        it('should limit cards by the given count', async () => {
+            // Act
+            const component = await mountWithArguments(2);
+
+            // Assert
+            const allCards = component.findComponent(ContentCards).findAllComponents(CardContainer);
+            expect(allCards).toHaveLength(2);
+        });
+
+        it('should apply card limits using enabledCardType order when limit is set to 1 - Correct card first', async () => {
+            // Arrange
+            const enabledCardTypes = ['Home_Promotion_Card_1', 'Home_Promotion_Card_2'];
+            const orderedCards = createMetadataCards(['Home_Promotion_Card_1', 'Home_Promotion_Card_2']);
+
+            // Act
+            const component = await mountWithArguments(1, orderedCards, enabledCardTypes);
+
+            // Assert
+            expect(component.findComponent(ContentCards).findAllComponents(HomePromotionCard1)).toHaveLength(1);
+            expect(component.findComponent(ContentCards).findAllComponents(HomePromotionCard2)).toHaveLength(1); // HPC2 is nested within HPC1
+        });
+
+        it('should apply card limits using enabledCardType order when limit is set to 1 - Correct card last', async () => {
+            // Arrange
+            const enabledCardTypes = ['Home_Promotion_Card_2', 'Home_Promotion_Card_1'];
+            const orderedCards = createMetadataCards(['Home_Promotion_Card_1', 'Home_Promotion_Card_2']);
+
+            // Act
+            const component = await mountWithArguments(1, orderedCards, enabledCardTypes);
+
+            // Assert
+            expect(component.findComponent(ContentCards).findAllComponents(HomePromotionCard1)).toHaveLength(0);
+            expect(component.findComponent(ContentCards).findAllComponents(HomePromotionCard2)).toHaveLength(1);
         });
     });
 });
