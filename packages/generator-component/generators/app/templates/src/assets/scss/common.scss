@@ -1,7 +1,7 @@
 // Set $theme variable so that fozzie doesn't complain when vars are imported below
 // n.b. This variables isn't actually used (unless there are theme specific vars from fozzie)
 // Instead, the theme is handled via a data-attribute on the component (via the `@mixin theme()` below)
-$theme: 'je' !default;
+$theme: 'jet' !default;
 
 @import '~@justeat/f-utils/src/scss/functions/index';
 @import '~@justeat/f-utils/src/scss/mixins/index';
@@ -14,9 +14,3 @@ $theme: 'je' !default;
  * Component Variables
  */
 <%= "// $" + name.class + "-background-color: $brand--orange;" %>
-
-@mixin theme($type) {
-    [data-theme="#{$type}"] & {
-        @content;
-    }
-}
