@@ -46,6 +46,7 @@ $form-input-borderColour--focus           : $grey--dark;
     color: $form-input-colour;
     font-weight: $font-weight-base;
     background-color: $form-input-bg;
+    @include font-size(body-l);
 
     .o-selector-label {
         display: block;

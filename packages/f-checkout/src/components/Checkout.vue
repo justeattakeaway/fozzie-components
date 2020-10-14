@@ -14,6 +14,7 @@
             <form action="post">
                 <form-field
                     v-model="mobileNumber"
+                    :class="$style['c-formField']"
                     name="mobile-number"
                     data-test-id="input-mobile-number"
                     label-text="Mobile number"
@@ -23,6 +24,7 @@
                 <div :class="$style['l-addressGroup']">
                     <form-field
                         v-model="address.line1"
+                        :class="$style['c-formField']"
                         name="address-line-1"
                         data-test-id="input-address-line-1"
                         label-text="Address line 1"
@@ -31,6 +33,7 @@
 
                     <form-field
                         v-model="address.line2"
+                        :class="$style['c-formField']"
                         name="address-line-2"
                         data-test-id="input-address-line-2"
                         label-text="Address line 2 (optional)"
@@ -39,6 +42,7 @@
 
                     <form-field
                         v-model="address.city"
+                        :class="$style['c-formField']"
                         name="address-city"
                         data-test-id="input-address-city"
                         label-text="City"
@@ -48,6 +52,7 @@
 
                 <form-field
                     v-model="address.postcode"
+                    :class="$style['c-formField']"
                     name="address-postcode"
                     data-test-id="input-address-postcode"
                     label-text="Postcode"
@@ -149,12 +154,14 @@ $line-height                              : 16px;
         margin-bottom: spacing(x2);
     }
 
-    input {
-        height: 50px;
-    }
+    .c-formField {
+        input {
+            height: 50px;
+        }
 
-    label {
-        @include font-size(body-l);
+        label {
+            @include font-size(body-l);
+        }
     }
 
     .l-addressGroup {
