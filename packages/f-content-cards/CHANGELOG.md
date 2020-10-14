@@ -14,6 +14,7 @@ v2.2.0-beta.1
 ### Changed
 - Bumped dependency on f-metadata to version `3.0.0-beta.2`
 - Left-aligns Post-Order Card Headline
+- Adds tracking for custom injected content cards
 
 
 v2.1.0

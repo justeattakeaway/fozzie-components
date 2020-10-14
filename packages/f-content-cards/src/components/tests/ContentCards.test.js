@@ -16,6 +16,7 @@ const userId = '__USER_ID__';
 const url = '__URL__';
 const button = '__BUTTON__';
 const description = '__DESCRIPTION__';
+const headline = '__HEADLINE__';
 const title = '__TITLE__';
 const voucherCode = '__VOUCHERCODE__';
 const order = '__ORDER__';
@@ -30,6 +31,7 @@ const metadataDispatcher = {
 const createCard = type => ({
     id,
     url,
+    headline,
     ctaText: button,
     description,
     title,
@@ -384,6 +386,7 @@ describe('ContentCards', () => {
 
         describe('the view handler, for a card with custom source', () => {
             it('should not throw an error', async () => {
+                // Arrange
                 const { instance } = await arrange();
                 const cardViewDetails = {
                     source: CARDSOURCE_CUSTOM,
@@ -396,6 +399,32 @@ describe('ContentCards', () => {
                 })
                 // Assert
                     .not.toThrowError();
+            });
+
+            it('should push a correctly-formed tracking event to the data layer', async () => {
+                const { instance } = await arrange();
+                const cardViewDetails = {
+                    source: CARDSOURCE_CUSTOM,
+                    ...createCard('Post_Order_Card_1')
+                };
+
+                // Act
+                instance.find('[data-promotion-card="true"]').vm.emitCardView(cardViewDetails);
+
+                // Assert
+                expect(pushToDataLayer).toHaveBeenCalledWith({
+                    event: 'Promotion',
+                    custom: {
+                        Promotion: {
+                            name: headline,
+                            type: 'justeat_contentCard',
+                            id: null,
+                            voucher: null,
+                            action: 'view',
+                            cta: button
+                        }
+                    }
+                });
             });
         });
 
@@ -480,6 +509,32 @@ describe('ContentCards', () => {
                 })
                 // Assert
                     .not.toThrowError();
+            });
+
+            it('should push a correctly-formed tracking event to the data layer', async () => {
+                const { instance } = await arrange();
+                const cardViewDetails = {
+                    source: CARDSOURCE_CUSTOM,
+                    ...createCard('Post_Order_Card_1')
+                };
+
+                // Act
+                instance.find('[data-promotion-card="true"]').vm.emitCardClick(cardViewDetails);
+
+                // Assert
+                expect(pushToDataLayer).toHaveBeenCalledWith({
+                    event: 'Promotion',
+                    custom: {
+                        Promotion: {
+                            name: headline,
+                            type: 'justeat_contentCard',
+                            id: null,
+                            voucher: null,
+                            action: 'click',
+                            cta: button
+                        }
+                    }
+                });
             });
         });
 

@@ -57,6 +57,34 @@ const createMetadataCardEvent = (contentAction, card) => {
     };
 };
 
+/**
+ * Generates custom card-specific analytics data suitable for sending back to GTM via f-trak
+ *
+ * @param {String} action
+ * @param {Object} card
+ * @returns {Object}
+ */
+const createCustomCardEvent = (action, card) => {
+    const {
+        headline: name,
+        ctaText: cta
+    } = card;
+
+    return {
+        event: 'Promotion',
+        custom: {
+            Promotion: {
+                name,
+                type: 'justeat_contentCard',
+                id: null,
+                voucher: null,
+                action,
+                cta
+            }
+        }
+    };
+};
+
 export default {
     name: 'ContentCards',
 
@@ -357,7 +385,7 @@ export default {
                     this.metadataDispatcher.logCardClick(card.id);
                     break;
                 case CARDSOURCE_CUSTOM:
-                    // TBC DPDAMI-2688
+                    this.trackCustomCardClick(card);
                     break;
                 default:
                     throw new Error('Invalid card source type');
@@ -374,7 +402,7 @@ export default {
                     this.trackMetadataCardVisibility(card);
                     break;
                 case CARDSOURCE_CUSTOM:
-                    // TBC DPDAMI-2688
+                    this.trackCustomCardVisibility(card);
                     break;
                 default:
                     throw new Error('Invalid card source type');
@@ -391,12 +419,30 @@ export default {
         },
 
         /**
+         * Generates a click event for the given card data and reports using the common method
+         * @param card
+         */
+        trackCustomCardClick (card) {
+            const event = createCustomCardEvent('click', card);
+            this.pushToDataLayer(event);
+        },
+
+        /**
          * Generates a view event for the given card data and reports using the common method
          * @param card
          */
         trackMetadataCardVisibility (card) {
             const event = createMetadataCardEvent('view', card);
             this.metadataDispatcher.pushShapedEventToDataLayer(this.pushToDataLayer, event);
+        },
+
+        /**
+         * Generates a view event for the given card data and reports using the common method
+         * @param card
+         */
+        trackCustomCardVisibility (card) {
+            const event = createCustomCardEvent('view', card);
+            this.pushToDataLayer(event);
         },
 
         /**
