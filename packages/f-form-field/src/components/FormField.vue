@@ -4,15 +4,16 @@
         :class="$style['c-formField']">
         <div
             :class="$style['c-formField-inputWrapper']">
-            <!-- <form-label
+            <form-label
                 v-if="!isInline"
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
                 :is-inline="isInline"
                 data-js-test="defaultLabel">
                 {{ labelText }}
-            </form-label> -->
+            </form-label>
             <input
+                :id="`${uniqueId}`"
                 :value="value"
                 v-bind="$attrs"
                 :type="normalisedInputType"

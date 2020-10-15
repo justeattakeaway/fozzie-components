@@ -9,13 +9,7 @@ describe('Accessibility tests', () => {
     it('a11y - should test f-formField component WCAG compliance', () => {
         // Act
         const axeResults = getAccessibilityTestResults('f-form-field');
-
-        // // Assert
-        // if (axeResults.violations.length > 0) {
-        //     // only create artifact if there are accessibility errors to show
-        //     processResults(axeResults, 'f-formField'); 
-        // }
-        // We want the build to fail if there are accessibility violations
+        //Assert
         expect(axeResults.violations.length).toBe(0);
     });
 });
