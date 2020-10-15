@@ -2,7 +2,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import VueCheckout from '../src/components/Checkout.vue';
 
 export default {
-    title: 'Components/Oganisms',
+    title: 'Components/Organisms',
     decorators: [withKnobs]
 };
 
