@@ -30,15 +30,11 @@
     "demo": "vue serve --open ./src/demo/Index.vue",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
-<<<<<<< HEAD
-    "test": "vue-cli-service test:unit", 
+    "test": "vue-cli-service test:unit --json --outputFile=./src/components/tests/.jest-test-results.json",
     "test-component:chrome": "run-p --race demo webdriver:delay:chrome",
     "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js",
     "webdriver:delay:chrome": "yarn test:wait-for-server && yarn webdriver:start:chrome",
     "webdriver:start:chrome": "wdio ../../wdio.conf.js"
-=======
-    "test": "vue-cli-service test:unit --json --outputFile=./src/components/tests/.jest-test-results.json"
->>>>>>> master
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
