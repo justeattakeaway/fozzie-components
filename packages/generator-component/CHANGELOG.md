@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.4.0
 ------------------------------
-*October 14, 2020*
+*October 15, 2020*
 
 ### Added
 - Axe Accessibility Spec template
