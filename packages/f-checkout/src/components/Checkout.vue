@@ -149,8 +149,14 @@ $line-height                              : 16px;
         padding: spacing(x5) spacing(x9) spacing(x4);
 
         @include media('<wide') {
-            width: 623px;
-            padding: spacing(x5) 96px spacing(x4);
+            width: 60%;
+            padding: spacing(x5) 10% spacing(x4);
+        }
+
+        @include media('<mid') {
+            width: 100%;
+            padding: spacing(x5) spacing(x2) spacing(x4);
+            margin-top: 0;
         }
     }
 
@@ -192,6 +198,12 @@ $line-height                              : 16px;
         @include font-size(body-l);
         font-weight: $font-weight-bold;
         line-height: $line-height;
+
+        @include media('<wide') {
+            display: block;
+            width: 70%;
+            padding: spacing(x2);
+        }
     }
 }
 </style>
