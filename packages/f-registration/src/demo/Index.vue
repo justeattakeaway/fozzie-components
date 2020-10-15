@@ -9,7 +9,7 @@
         >
         <registration
             locale="en-GB"
-            login-url="/login"
+            show-login-link=true
             class="registration-form" />
     </div>
 </template>

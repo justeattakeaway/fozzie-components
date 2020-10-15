@@ -29,12 +29,12 @@ describe('Registration', () => {
             expect(wrapper.exists()).toBe(true);
         });
 
-        it('should show the login link if login url prop set.', () => {
+        it('should show the login link if showLoginLink prop set to true.', () => {
             const wrapper = shallowMount(Registration, {
                 propsData: {
                     locale: 'en-GB',
                     createAccountUrl: 'http://localhost/account/register',
-                    loginUrl: '/login'
+                    showLoginLink: true
                 }
             });
 
@@ -43,12 +43,12 @@ describe('Registration', () => {
             expect(loginLink.exists()).toBe(true);
         });
 
-        it('should not show the login link if login url not set.', () => {
+        it('should not show the login link if showLoginLink is set to false.', () => {
             const wrapper = shallowMount(Registration, {
                 propsData: {
                     locale: 'en-GB',
                     createAccountUrl: 'http://localhost/account/register',
-                    loginUrl: ''
+                    showLoginLink: false
                 }
             });
 
@@ -57,7 +57,7 @@ describe('Registration', () => {
             expect(loginLink.exists()).toBe(false);
         });
 
-        it('shoud not show the login link if login url prop not set', () => {
+        it('should not show the login link if showLoginLink prop not set', () => {
             const wrapper = shallowMount(Registration, { propsData });
 
             const loginLink = wrapper.find("[data-test-id='create-account-login-link']");

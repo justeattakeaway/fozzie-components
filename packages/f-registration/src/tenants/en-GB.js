@@ -19,8 +19,9 @@ export default {
             url: '/info/cookies-policy',
             suffix: '.'
         },
-        alreadyHaveAnAccount: {
-            text: 'Already on Just Eat?'
+        login: {
+            text: 'Already on Just Eat?',
+            url: '/login'
         }
     },
 

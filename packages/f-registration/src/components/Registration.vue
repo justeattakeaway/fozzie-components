@@ -3,7 +3,7 @@
         <bag-celebrate-icon :class="$style['bag-icon']" />
         <card
             :data-theme-registration="theme"
-            :card-heading="title"
+            :card-heading="copy.labels.createAccountTitle"
             is-rounded
             has-outline
             is-page-content-wrapper
@@ -14,7 +14,7 @@
                 v-if="shouldShowLoginLink"
                 :class="$style['c-loginLink']"
                 data-test-id="create-account-login-link">
-                <a :href="loginUrl">{{ copy.navLinks.alreadyHaveAnAccount.text }}</a>
+                <a :href="copy.navLinks.login.url">{{ copy.navLinks.login.text }}</a>
             </p>
             <form
                 type="post"
@@ -168,7 +168,7 @@
                     button-style="primary"
                     is-full-width
                     :disabled="shouldDisableCreateAccountButton">
-                    {{ buttonText }}
+                    {{ copy.labels.createAccountBtn }}
                 </form-button>
             </form>
             <p :class="$style['c-legal-hyperlinks']">
@@ -256,21 +256,13 @@ export default {
             type: String,
             default: 'en-GB'
         },
-        title: {
-            type: String,
-            default: null
-        },
-        buttonText: {
-            type: String,
-            default: null
-        },
         createAccountUrl: {
             type: String,
             required: true
         },
-        loginUrl: {
-            type: String,
-            default: null
+        showLoginLink: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -335,7 +327,7 @@ export default {
             return !this.$v.password.minLength && this.$v.password.$dirty;
         },
         shouldShowLoginLink () {
-            return this.loginUrl;
+            return this.showLoginLink;
         },
         tenant () {
             return {
@@ -348,15 +340,6 @@ export default {
                 'it-IT': 'it',
                 'nb-NO': 'no'
             }[this.locale];
-        }
-    },
-
-    created () {
-        if (!this.title) {
-            this.title = this.copy.labels.createAccountTitle;
-        }
-        if (!this.buttonText) {
-            this.buttonText = this.copy.labels.createAccountBtn;
         }
     },
 
