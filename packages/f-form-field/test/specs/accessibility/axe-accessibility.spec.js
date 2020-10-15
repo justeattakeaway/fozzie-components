@@ -6,15 +6,14 @@ describe('Accessibility tests', () => {
         browser.url('http://localhost:8080');
     });
 
-    it('a11y - should test f-<%= name.class %> component WCAG compliance', () => {
+    it('a11y - should test f-formField component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults(componentName);
+        const axeResults = getAccessibilityTestResults('f-form-field');
 
-
-        // Assert
+        // // Assert
         // if (axeResults.violations.length > 0) {
         //     // only create artifact if there are accessibility errors to show
-        //     processResults(axeResults, 'f-<%= name.class %>'); 
+        //     processResults(axeResults, 'f-formField'); 
         // }
         // We want the build to fail if there are accessibility violations
         expect(axeResults.violations.length).toBe(0);
