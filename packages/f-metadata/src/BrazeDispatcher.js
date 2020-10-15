@@ -105,6 +105,8 @@ class BrazeDispatcher {
         this.refreshRequested = false;
 
         this.sessionTimeoutInSeconds = sessionTimeoutInSeconds;
+
+        this.eventSignifier = 'BrazeContent';
     }
 
     /**
@@ -254,6 +256,20 @@ class BrazeDispatcher {
             .filter(a => a !== undefined)
             .map(cardIndex => this.rawCards[cardIndex]);
         return this.logEvent('logCardImpressions', cardsShown);
+    }
+
+    /**
+     * Uses supplied pushToDataLayer function to report braze card event
+     * @param {Function} pushToDataLayer
+     * @param {Object} payload
+     */
+    pushShapedEventToDataLayer (pushToDataLayer, payload) {
+        pushToDataLayer({
+            event: this.eventSignifier,
+            custom: {
+                braze: payload
+            }
+        });
     }
 }
 

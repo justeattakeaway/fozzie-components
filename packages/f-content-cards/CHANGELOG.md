@@ -4,6 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.2.0-beta.1
+------------------------------
+*October 14, 2020*
+
+### Added
+- Integrated card limit changes from HPC1 & 2 work
+
+### Changed
+- Bumped dependency on f-metadata to version `3.0.0-beta.2`
+- Left-aligns Post-Order Card Headline
+- Adds tracking for custom injected content cards
+
+
 v2.1.0
 ------------------------------
 *September 29, 2020*
@@ -11,6 +24,23 @@ v2.1.0
 ### Changed
 - `filterContentCards` method to perform brand and display time checks when Home Promotion Card 1 & 2 are filtered.
 - Apply card types in order of given filters when limit is set to 1
+
+
+v2.1.0-beta.1
+------------------------------
+*October 5, 2020*
+
+### Added
+- `@custom-cards-callback` event dispatched on mount to expose a callback for consuming code to inject
+  custom content cards
+- Beta release for ensuring the decoupling with f-metadata works before opening to a wider number of
+  consumers
+
+### Removed
+- Card filtering/transforming/sorting logic moved to `f-metadata`; only the absolute limit number remains
+
+### Changed
+- Bumped dependency on f-metadata to version `3.0.0-beta.1`
 
 
 v2.0.0
@@ -57,7 +87,6 @@ v2.0.0-beta.0
 
 ### Changed
 - Now uses new `JustEatBasis` font and updated type variables.
-
 
 
 v1.13.0
