@@ -146,7 +146,12 @@ $line-height                              : 16px;
 
     .c-card--dimensions {
         width: 462px;
-        padding: spacing(x5) spacing(x9) spacing(x4) spacing(x9);
+        padding: spacing(x5) spacing(x9) spacing(x4);
+
+        @include media('<wide') {
+            width: 623px;
+            padding: spacing(x5) 96px spacing(x4);
+        }
     }
 
     h1 {
