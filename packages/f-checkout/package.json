@@ -32,7 +32,7 @@
     "demo": "vue serve --port 8080 ./src/demo/Index.vue",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
-    "test": "vue-cli-service test:unit",
+    "test": "vue-cli-service test:unit --json --outputFile=./src/components/tests/.jest-test-results.json",
     "test:coverage": "yarn test --coverage",
     "test-component:chrome": "run-p --race demo webdriver:delay:chrome",
     "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js",
