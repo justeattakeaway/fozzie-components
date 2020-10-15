@@ -32,5 +32,16 @@ describe('Checkout', () => {
                 expect(name.props('cardHeading')).toContain('Name');
             });
         });
+
+        describe('title ::', () => {
+            it('should add `name` to title text', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(VueCheckout, { propsData, data });
+                const name = wrapper.find("[data-test-id='checkout-card-component']");
+
+                // Assert
+                expect(name.props('cardHeading')).toEqual('Name, confirm your details');
+            });
+        });
     });
 });
