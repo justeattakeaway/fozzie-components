@@ -205,7 +205,7 @@ $line-height                              : 16px;
             padding: spacing(x2);
         }
 
-        @include media('<wide') {
+        @include media('<mid') {
             display: block;
             width: 100%;
         }
