@@ -1,15 +1,20 @@
-import { withKnobs } from '@storybook/addon-knobs';
+import { withTests } from '@storybook/addon-jest';
 import VueCheckout from '../src/components/Checkout.vue';
+import results from '../src/components/tests/.jest-test-results.json';
 
 export default {
     title: 'Components/Organisms',
-    decorators: [withKnobs]
+    decorators:  [withTests({ results })]
 };
 
-export const CheckoutComponent = () => ({
+export const Checkout = () => ({
     components: { VueCheckout },
     template:
         '<vue-checkout />'
 });
 
-CheckoutComponent.storyName = 'f-checkout';
+Checkout.parameters = {
+    jest: ['Checkout.test.js']
+};
+
+Checkout.storyName = 'f-checkout';
