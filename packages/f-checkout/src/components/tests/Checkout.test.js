@@ -14,4 +14,23 @@ describe('Checkout', () => {
         const button = wrapper.find("[data-test-id='confirm-payment-submit-button']");
         expect(button.exists()).toBe(true);
     });
+
+    describe('computed ::', () => {
+        const data = function () {
+            return {
+                firstName: 'name'
+            };
+        };
+
+        describe('name ::', () => {
+            it('should capitalize `firstName` data', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(VueCheckout, { propsData, data });
+                const name = wrapper.find("[data-test-id='checkout-card-component']");
+
+                // Assert
+                expect(name.props('cardHeading')).toContain('Name');
+            });
+        });
+    });
 });
