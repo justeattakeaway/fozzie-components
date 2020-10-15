@@ -1,4 +1,4 @@
-import { getAccessibilityTestResults, processResults } from '../../../../../test/utils/axe-helper';
+import { getAccessibilityTestResults } from '../../../../../../../../test/utils/axe-helper';
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
