@@ -204,6 +204,11 @@ $line-height                              : 16px;
             width: 70%;
             padding: spacing(x2);
         }
+
+        @include media('<wide') {
+            display: block;
+            width: 100%;
+        }
     }
 }
 </style>
