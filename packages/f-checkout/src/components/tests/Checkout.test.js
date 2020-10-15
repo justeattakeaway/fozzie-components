@@ -16,11 +16,9 @@ describe('Checkout', () => {
     });
 
     describe('computed ::', () => {
-        const data = function () {
-            return {
-                firstName: 'name'
-            };
-        };
+        const data = () => ({
+            firstName: 'name'
+        });
 
         describe('name ::', () => {
             it('should capitalize `firstName` data', () => {

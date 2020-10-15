@@ -4,7 +4,7 @@ import results from '../src/components/tests/.jest-test-results.json';
 
 export default {
     title: 'Components/Organisms',
-    decorators:  [withTests({ results })]
+    decorators: [withTests({ results })]
 };
 
 export const Checkout = () => ({
