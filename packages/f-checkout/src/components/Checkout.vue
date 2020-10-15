@@ -160,7 +160,7 @@ $line-height                              : 16px;
         @include media('<mid') {
             width: 100%;
             padding: spacing(x5) spacing(x2) spacing(x4);
-            margin-top: 0;
+            margin: 0;
         }
     }
 
