@@ -128,8 +128,12 @@ export default {
     },
 
     computed: {
+        name () {
+            return (this.firstName.charAt(0).toUpperCase() + this.firstName.slice(1));
+        },
+
         title () {
-            return `${this.firstName}, confirm your details`;
+            return `${this.name}, confirm your details`;
         }
     }
 };
