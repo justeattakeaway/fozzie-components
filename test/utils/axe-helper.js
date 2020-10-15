@@ -10,7 +10,7 @@ exports.getAccessibilityTestResults = (componentName) => {
 
     // https://github.com/dequelabs/axe-core/blob/develop/doc/API.md
 
-    return browser.execute(() => {
+    const results = browser.executeAsync(done => {
         const options = {
             runOnly: {
                 type: 'tag',
@@ -23,15 +23,18 @@ exports.getAccessibilityTestResults = (componentName) => {
 
         axe.run(document, options, (err, results) => {
             if (err) throw err;
+            done(results);
+
             return results;
-        })
-        .then(results, componentName => {
-            if (results.violations.length) {
-                this.processResults(results, componentName);
-                throw new Error('Accessibility issues found');
-            }
         });
-    })
+    });
+
+    if(results.violations.length > 0)
+    {
+        this.processResults(results, componentName);
+    }
+
+    return results;
 };
 
 /**
@@ -40,11 +43,6 @@ exports.getAccessibilityTestResults = (componentName) => {
  * @param {String} componentName - Name of the component that was tested.
  */
 exports.processResults = (results, componentName) => {
-    console.log("hello")
-
-    if (results.violations.length > 0) 
-    {
-
     console.log('Creating .CSV artifact for Axe violations');
 
     const fileName = `${componentName}-a11y-violations`;
@@ -77,5 +75,4 @@ exports.processResults = (results, componentName) => {
     }
 
     console.error(`Expected no accessibility violations. Found: ${results.violations.length}`);
-  }
 };
