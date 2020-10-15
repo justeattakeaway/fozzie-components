@@ -18,6 +18,44 @@ export default {
             text: 'Cookie Policy',
             url: '/info/cookies-policy',
             suffix: '.'
+        },
+        alreadyHaveAnAccount: {
+            text: 'Already on Just Eat?'
+        }
+    },
+
+    labels: {
+        createAccountTitle: 'Create an account',
+        createAccountBtn: 'Create account',
+        firstName: 'First Name',
+        lastName: 'Last Name',
+        email: 'Email',
+        password: 'Password'
+    },
+
+    validationMessages: {
+        firstName: {
+            requiredError: 'Please include your first name',
+            maxLengthError: 'First name exceeds 50 characters',
+            invalidCharError: 'Your name can only contain letters, hyphens or apostrophes'
+        },
+
+        lastName: {
+            requiredError: 'Please include your last name',
+            maxLengthError: 'Last name exceeds 50 characters',
+            invalidCharError: 'Your last name can only contain letters, hyphens or apostrophes'
+        },
+
+        email: {
+            requiredError: 'Please include your email address',
+            maxLengthError: 'Email address exceeds 50 characters',
+            invalidEmailError: 'Please enter your email address correctly',
+            alreadyExistsError: 'Email address is already registered'
+        },
+
+        password: {
+            requiredError: 'Please enter a password',
+            minLengthError: 'Password is less than four characters '
         }
     }
 };

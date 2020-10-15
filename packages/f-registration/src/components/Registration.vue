@@ -14,7 +14,7 @@
                 v-if="shouldShowLoginLink"
                 :class="$style['c-loginLink']"
                 data-test-id="create-account-login-link">
-                {{ loginSettings.preLinkText }} <a :href="loginSettings.url">{{ loginSettings.linkText }}</a>
+                <a :href="loginUrl">{{ copy.navLinks.alreadyHaveAnAccount.text }}</a>
             </p>
             <form
                 type="post"
@@ -35,7 +35,7 @@
                     v-model="firstName"
                     name="firstName"
                     data-test-id="input-first-name"
-                    label-text="First name"
+                    :label-text="copy.labels.firstName"
                     input-type="text"
                     label-style="inlineNarrow"
                     @blur="formFieldBlur('firstName')">
@@ -45,21 +45,21 @@
                             :class="$style['o-form-error']"
                             data-test-id='error-first-name-empty'>
                             <warning-icon :class="$style['o-form-error-icon']" />
-                            Please include your first name
+                            {{ copy.validationMessages.firstName.requiredError }}
                         </p>
                         <p
                             v-if="shouldShowFirstNameMaxLengthError"
                             :class="$style['o-form-error']"
                             data-test-id='error-first-name-maxlength'>
                             <warning-icon :class="$style['o-form-error-icon']" />
-                            First name exceeds 50 characters
+                            {{ copy.validationMessages.firstName.maxLengthError }}
                         </p>
                         <p
                             v-if="shouldShowFirstNameInvalidCharError"
                             :class="$style['o-form-error']"
                             data-test-id='error-first-name-invalid'>
                             <warning-icon :class="$style['o-form-error-icon']" />
-                            First name should only contain letters, hyphens or apostrophes
+                            {{ copy.validationMessages.firstName.invalidCharError }}
                         </p>
                     </template>
                 </form-field>
@@ -68,7 +68,7 @@
                     v-model="lastName"
                     name="lastName"
                     data-test-id="input-last-name"
-                    label-text="Last name"
+                    :label-text="copy.labels.lastName"
                     input-type="text"
                     label-style="inlineNarrow"
                     @blur="formFieldBlur('lastName')">
@@ -78,21 +78,21 @@
                             :class="$style['o-form-error']"
                             data-test-id='error-last-name-empty'>
                             <warning-icon :class="$style['o-form-error-icon']" />
-                            Please include your last name
+                            {{ copy.validationMessages.lastName.requiredError }}
                         </p>
                         <p
                             v-if="shouldShowLastNameMaxLengthError"
                             :class="$style['o-form-error']"
                             data-test-id='error-last-name-maxlength'>
                             <warning-icon :class="$style['o-form-error-icon']" />
-                            Last name exceeds 50 characters
+                            {{ copy.validationMessages.lastName.maxLengthError }}
                         </p>
                         <p
                             v-if="shouldShowLastNameInvalidCharError"
                             :class="$style['o-form-error']"
                             data-test-id='error-last-name-invalid'>
                             <warning-icon :class="$style['o-form-error-icon']" />
-                            Last name should only contain letters, hyphens or apostrophes
+                            {{ copy.validationMessages.lastName.invalidCharError }}
                         </p>
                     </template>
                 </form-field>
@@ -101,7 +101,7 @@
                     v-model="email"
                     name="email"
                     data-test-id="input-email"
-                    label-text="Email"
+                    :label-text="copy.labels.email"
                     input-type="email"
                     label-style="inlineNarrow"
                     @blur="formFieldBlur('email')">
@@ -111,28 +111,28 @@
                             :class="$style['o-form-error']"
                             data-test-id='error-email-empty'>
                             <warning-icon :class="$style['o-form-error-icon']" />
-                            Please enter your email address
+                            {{ copy.validationMessages.email.requiredError }}
                         </p>
                         <p
                             v-else-if="shouldShowEmailInvalidError"
                             :class="$style['o-form-error']"
                             data-test-id='error-email-invalid'>
                             <warning-icon :class="$style['o-form-error-icon']" />
-                            Please enter a valid email address
+                            {{ copy.validationMessages.email.invalidEmailError }}
                         </p>
                         <p
                             v-if="shouldShowEmailMaxLengthError"
                             :class="$style['o-form-error']"
                             data-test-id='error-email-maxlength'>
                             <warning-icon :class="$style['o-form-error-icon']" />
-                            Email address exceeds 50 characters
+                            {{ copy.validationMessages.email.maxLengthError }}
                         </p>
                         <p
                             v-else-if="shouldShowEmailAlreadyExistsError"
                             :class="$style['o-form-error']"
                             data-test-id='error-email-exists'>
                             <warning-icon :class="$style['o-form-error-icon']" />
-                            Email address is already registered
+                            {{ copy.validationMessages.email.alreadyExistsError }}
                         </p>
                     </template>
                 </form-field>
@@ -141,7 +141,7 @@
                     v-model="password"
                     name="password"
                     data-test-id="input-password"
-                    label-text="Password"
+                    :label-text="copy.labels.password"
                     input-type="password"
                     label-style="inlineNarrow"
                     @blur="formFieldBlur('password')">
@@ -151,14 +151,14 @@
                             :class="$style['o-form-error']"
                             data-test-id='error-password-empty'>
                             <warning-icon :class="$style['o-form-error-icon']" />
-                            Please enter a password
+                            {{ copy.validationMessages.password.requiredError }}
                         </p>
                         <p
                             v-if="shouldShowPasswordMinLengthError"
                             :class="$style['o-form-error']"
                             data-test-id='error-password-minlength'>
                             <warning-icon :class="$style['o-form-error-icon']" />
-                            Password is less than four characters
+                            {{ copy.validationMessages.password.minLengthError }}
                         </p>
                     </template>
                 </form-field>
@@ -258,19 +258,19 @@ export default {
         },
         title: {
             type: String,
-            default: 'Create Account'
+            default: null
         },
         buttonText: {
             type: String,
-            default: 'Create Account'
+            default: null
         },
         createAccountUrl: {
             type: String,
             required: true
         },
-        loginSettings: {
-            type: Object,
-            default: () => {}
+        loginUrl: {
+            type: String,
+            default: null
         }
     },
 
@@ -335,7 +335,7 @@ export default {
             return !this.$v.password.minLength && this.$v.password.$dirty;
         },
         shouldShowLoginLink () {
-            return this.loginSettings && this.loginSettings.linkText && this.loginSettings.url;
+            return this.loginUrl;
         },
         tenant () {
             return {
@@ -348,6 +348,15 @@ export default {
                 'it-IT': 'it',
                 'nb-NO': 'no'
             }[this.locale];
+        }
+    },
+
+    created () {
+        if (!this.title) {
+            this.title = this.copy.labels.createAccountTitle;
+        }
+        if (!this.buttonText) {
+            this.buttonText = this.copy.labels.createAccountBtn;
         }
     },
 
