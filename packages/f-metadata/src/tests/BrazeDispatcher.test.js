@@ -71,10 +71,21 @@ describe('instantiation', () => {
     });
 
     describe('BrazeDispatcher', () => {
+        const sessionTimeoutInSeconds = 0;
         let brazeDispatcher;
 
         beforeEach(() => {
-            brazeDispatcher = GetDispatcher(0);
+            brazeDispatcher = GetDispatcher(sessionTimeoutInSeconds);
+        });
+
+        it('should have a property `sessionTimeoutInSeconds` with value as supplied to GetDispatcher()', () => {
+            // Assert
+            expect(brazeDispatcher.sessionTimeoutInSeconds).toBe(sessionTimeoutInSeconds);
+        });
+
+        it('should have a property `eventSignifier` with default value `BrazeContent`', () => {
+            // Assert
+            expect(brazeDispatcher.eventSignifier).toBe('BrazeContent');
         });
 
         it('should throw an error when attempting to instantiate another instance', () => {
@@ -353,7 +364,7 @@ describe('BrazeDispatcher operation', () => {
 
         describe('logCardClick', () => {
             it('should report back to braze a card resolved from its given ID', async () => {
-                // Arrange
+                // Act
                 await dispatcher.logCardClick(rawCards[0].id);
 
                 // Assert
@@ -361,7 +372,7 @@ describe('BrazeDispatcher operation', () => {
             });
 
             it('should request a flush of data', async () => {
-                // Arrange
+                // Act
                 await dispatcher.logCardClick(rawCards[0].id);
 
                 // Assert
@@ -371,7 +382,7 @@ describe('BrazeDispatcher operation', () => {
 
         describe('logCardImpressions', () => {
             it('should report back to braze a list of cards resolved from their given IDs', async () => {
-                // Arrange
+                // Act
                 await dispatcher.logCardImpressions([rawCards[0].id, rawCards[1].id]);
 
                 // Assert
@@ -379,11 +390,30 @@ describe('BrazeDispatcher operation', () => {
             });
 
             it('should request a flush of data', async () => {
-                // Arrange
+                // Act
                 await dispatcher.logCardImpressions([rawCards[0].id, rawCards[1].id]);
 
                 // Assert
                 expect(appboy.requestImmediateDataFlush).toHaveBeenCalledAfter(appboy.logCardImpressions);
+            });
+        });
+
+        describe('pushShapedEventToDataLayer', () => {
+            it('should report back to braze a list of cards resolved from their given IDs', async () => {
+                // Arrange
+                const pushToDataLayer = jest.fn();
+                const givenContent = { foo: 'bar' };
+
+                // Act
+                dispatcher.pushShapedEventToDataLayer(pushToDataLayer, givenContent);
+
+                // Assert
+                expect(pushToDataLayer).toHaveBeenCalledWith({
+                    event: dispatcher.eventSignifier,
+                    custom: {
+                        braze: givenContent
+                    }
+                });
             });
         });
     });
