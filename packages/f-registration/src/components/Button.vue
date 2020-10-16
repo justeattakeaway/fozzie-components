@@ -124,7 +124,7 @@ $btn-disabled-bgColor               : $grey--light;
 
     &[type='submit'] {
         margin-top: spacing(x4);
-        margin-bottom: spacing(x4);
+        margin-bottom: spacing(x3);
     }
 }
 

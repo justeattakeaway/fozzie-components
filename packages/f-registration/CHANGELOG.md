@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 v0.35.0
 ------------------------------
 *October 16, 2020*
+### Changed
+- Various style to align better with designs.
+
+
+v0.35.0
+------------------------------
+*October 16, 2020*
 ### Added
 - Moved text into translations file 
 - Support for locale en-GB
