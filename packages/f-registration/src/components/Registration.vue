@@ -491,7 +491,7 @@ export default {
     position: absolute;
     top: 56px;
     left: 50%;
-    margin-left: -36px;
+    transform: translate(-35%);
     @include media('<mid') {
         width: 92px;
         height: 74px;
