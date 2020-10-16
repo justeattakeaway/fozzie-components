@@ -4,7 +4,7 @@ import RegistrationComponent from '../../../test-utils/component-objects/f-regis
 describe('Accessibility tests', () => {
     beforeEach(() => {
         // Arrange
-        browser.url('http://localhost:8081');
+        browser.url('http://localhost:8080');
     });
 
     it('a11y - should test f-registration component WCAG compliance', () => {
