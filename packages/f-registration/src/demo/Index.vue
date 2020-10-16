@@ -9,10 +9,7 @@
         >
         <registration
             locale="en-GB"
-            :login-settings="{
-                linkText: 'Already on Just Eat?',
-                url: '/login'
-            }"
+            show-login-link=true
             class="registration-form" />
     </div>
 </template>

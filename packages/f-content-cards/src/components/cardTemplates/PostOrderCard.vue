@@ -106,6 +106,7 @@ export default {
             @include font-size(heading-m);
 
             margin-bottom: spacing(x2);
+            text-align: left;
 
             @include media ('<mid') {
                 margin: spacing(x2);

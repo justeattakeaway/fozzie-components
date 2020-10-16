@@ -3,6 +3,8 @@ import {
 } from '@storybook/addon-knobs';
 import VueHeader from '../src/components/Header.vue';
 import { withA11y } from '@storybook/addon-a11y';
+import { withTests } from '@storybook/addon-jest';
+import results from '../src/components/tests/.jest-test-results.json';
 
 const userInfo = {
     friendlyName: 'John',
@@ -18,7 +20,7 @@ const userInfo = {
 
 export default {
     title: 'Components/Organisms',
-    decorators: [withKnobs, withA11y]
+    decorators: [withKnobs, withA11y, withTests({ results })]
 };
 
 export const HeaderComponent = () => ({
@@ -51,5 +53,12 @@ export const HeaderComponent = () => ({
     },
     template: '<vue-header :userInfoProp="userInfoProp" :showOffersLink="showOffersLink" :showHelpLink="showHelpLink" :locale="locale" :headerBackgroundTheme="headerBackgroundTheme" :showDeliveryEnquiry="showDeliveryEnquiry" :showLoginInfo="showLoginInfo" />'
 });
+
+HeaderComponent.parameters = {
+    jest: [
+        'Header.test.js',
+        'Logo.test.js'
+    ],
+}
 
 HeaderComponent.storyName = 'f-header';
