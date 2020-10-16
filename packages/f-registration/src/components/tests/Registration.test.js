@@ -8,7 +8,6 @@ jest.mock('../../services/RegistrationServiceApi', () => ({ createAccount: jest.
 
 describe('Registration', () => {
     const propsData = {
-        locale: 'en-GB',
         createAccountUrl: 'http://localhost/account/register'
     };
 
@@ -29,16 +28,11 @@ describe('Registration', () => {
             expect(wrapper.exists()).toBe(true);
         });
 
-        it('should show the login link if loginSettings prop set.', () => {
+        it('should show the login link if showLoginLink prop set to true.', () => {
             const wrapper = shallowMount(Registration, {
                 propsData: {
-                    locale: 'en-GB',
                     createAccountUrl: 'http://localhost/account/register',
-                    loginSettings: {
-                        preLinkText: 'Already have an account?',
-                        linkText: 'Log in',
-                        url: '/login'
-                    }
+                    showLoginLink: true
                 }
             });
 
@@ -47,14 +41,11 @@ describe('Registration', () => {
             expect(loginLink.exists()).toBe(true);
         });
 
-        it('should not show the login link if loginSettings prop set but linkText not set.', () => {
+        it('should not show the login link if showLoginLink is set to false.', () => {
             const wrapper = shallowMount(Registration, {
                 propsData: {
-                    locale: 'en-GB',
                     createAccountUrl: 'http://localhost/account/register',
-                    loginSettings: {
-                        preLinkText: 'Already have an account?'
-                    }
+                    showLoginLink: false
                 }
             });
 
@@ -63,29 +54,26 @@ describe('Registration', () => {
             expect(loginLink.exists()).toBe(false);
         });
 
-        it('should not show the login link if loginSettings prop set but url not set.', () => {
-            const wrapper = shallowMount(Registration, {
-                propsData: {
-                    locale: 'en-GB',
-                    createAccountUrl: 'http://localhost/account/register',
-                    loginSettings: {
-                        preLinkText: 'Already have an account?',
-                        linkText: 'Log in'
-                    }
-                }
-            });
-
-            const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
-
-            expect(loginLink.exists()).toBe(false);
-        });
-
-        it('shoud not show the login link if loginSettings prop not set', () => {
+        it('should show the login link if showLoginLink prop not set', () => {
             const wrapper = shallowMount(Registration, { propsData });
 
             const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
 
-            expect(loginLink.exists()).toBe(false);
+            expect(loginLink.exists()).toBe(true);
+        });
+
+        it('should show emit VisitLoginPage event when login link is clicked.', () => {
+            const wrapper = shallowMount(Registration, {
+                propsData: {
+                    createAccountUrl: 'http://localhost/account/register'
+                }
+            });
+
+            const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
+            loginLink.trigger('click');
+
+            // Assert
+            expect(wrapper.emitted(EventNames.VisitLoginPage).length).toBe(1);
         });
 
         it('should fallback to use the en-GB locale if no locale passed', () => {

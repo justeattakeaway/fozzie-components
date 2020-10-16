@@ -9,11 +9,7 @@
         >
         <registration
             locale="en-GB"
-            :login-settings="{
-                preLinkText: 'Already have an account?',
-                linkText: 'Log in',
-                url: '/login'
-            }"
+            show-login-link=true
             class="registration-form" />
     </div>
 </template>
