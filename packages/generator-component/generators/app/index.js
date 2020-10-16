@@ -16,8 +16,8 @@ module.exports = class extends Generator {
                 type: 'input'
             },
             {
-                message: 'Does the component require browser-based UI tests?',
-                name: 'needsUITests',
+                message: 'Does the component require browser-based Component Tests?',
+                name: 'needsComponentTests',
                 type: 'confirm',
                 default: false
             },
@@ -48,10 +48,9 @@ module.exports = class extends Generator {
                                 .replace(/(f-skeleton)/g, `f-${nameTransformations.class}`)
                                 .replace(/__/g, ''); // We don't want to have file names such as .test.js or .stories.js, otherwise Jest or Storybook will pick them up from the templates folder.
         }));
-
-        let ignoreTestPattern = this.answers.needsUITests ? [] : ['**/*/test', '**/*/test-utils/component-objects'];
-        const ignoreApiMockPattern = this.answers.needsTestingApiMocks ? [] : ['**/*/test-utils/system-test', '**/*/src/services'];
-
+        let ignoreTestPattern = this.answers.needsComponentTests ? [] : ["**/*/test/specs/component", '**/*/test-utils/component-objects']
+        const ignoreApiMockPattern = this.answers.needsTestingApiMocks ? [] : ["**/*/test-utils/system-test", "**/*/src/services"];
+    
         ignoreTestPattern = ignoreTestPattern.concat(ignoreApiMockPattern);
 
         const date = new Date();
@@ -65,7 +64,7 @@ module.exports = class extends Generator {
             {
                 description: this.answers.description,
                 name: nameTransformations,
-                needsUITests: this.answers.needsUITests,
+                needsComponentTests: this.answers.needsComponentTests,
                 needsTestingApiMocks: this.answers.needsTestingApiMocks,
                 changelogDate: `${month} ${day}, ${year}`
             },
