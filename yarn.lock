@@ -1660,6 +1660,13 @@
     webpack-cli "3.3.1"
     webpack-log "2.0.0"
 
+"@justeat/f-card@0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-0.6.0.tgz#8adf0899511400d970b8added0f549fef1de0413"
+  integrity sha512-MCVzNmNHQ/GpDWGqQOii26mAkDh5lPu7SrOp/3qBwtD5oAhhGOxWPQogbdLWTmD0+O5Sn1n4oX3Z590D9ej4UA==
+  dependencies:
+    "@justeat/f-services" "0.13.0"
+
 "@justeat/f-dom@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-1.1.0.tgz#491ba78240ab73a3c4687d93eb8004415fe8a9c7"
@@ -2888,7 +2895,7 @@
     regenerator-runtime "^0.13.3"
     ts-dedent "^1.1.1"
 
-"@storybook/addon-jest@^6.0.26":
+"@storybook/addon-jest@6.0.26":
   version "6.0.26"
   resolved "https://registry.yarnpkg.com/@storybook/addon-jest/-/addon-jest-6.0.26.tgz#86a88d1c50e757a3c8150f7de3ddb4ef6aa10866"
   integrity sha512-Mlzvqc8poSK5wgS/cPsxKccMFYaZeIbq/U4eDY9KB+do7YotiqMfQKNtPlOgQZ2Y+aZSLhKqX7IGJ9iAnid7kQ==

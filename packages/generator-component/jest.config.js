@@ -15,9 +15,14 @@ module.exports = {
         'node_modules/(?!(lodash-es)/)'
     ],
 
+    testURL: 'http://localhost/',
+
     snapshotSerializers: [
         'jest-serializer-vue'
     ],
 
-    testURL: 'http://localhost/'
+    modulePathIgnorePatterns: [
+        './test/specs/accessibility/'
+    ]
+
 };
