@@ -4,7 +4,8 @@
             <label
                 v-if="!selectedTime"
                 for="delivery-time"
-                :class="$style['o-selector-label']">
+                :class="$style['o-selector-label']"
+                data-test-id="selector-label">
                 Delivery time
             </label>
             <select
