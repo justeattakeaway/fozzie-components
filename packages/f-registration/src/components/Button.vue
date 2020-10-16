@@ -41,9 +41,9 @@ export default {
 
 $btn-default-bgColor                : $grey--lighter;
 $btn-default-text-colour            : $grey--dark;
-$btn-default-weight                 : bold;
+$btn-default-weight                 : $font-weight-bold;
 $btn-default-height                 : 2.6;
-$btn-default-font-size              : 20px;
+$btn-default-font-size              : heading-s;
 $btn-default-font-family            : $font-family-base;
 $btn-default-bgColor--hover         : $grey--light;
 $btn-default-borderRadius           : 2px;
@@ -83,7 +83,6 @@ $btn-disabled-bgColor               : $grey--light;
     overflow: visible;                          /* [7] */
     text-align: center;
     font-weight: $btn-default-weight;
-    line-height: 1.5;
 
     // You may want to change this
     background-color: $btn-default-bgColor;

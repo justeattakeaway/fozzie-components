@@ -1,6 +1,5 @@
 <template>
     <div>
-        <bag-celebrate-icon :class="$style['bag-icon']" />
         <card
             :data-theme-registration="theme"
             :card-heading="title"
@@ -9,12 +8,13 @@
             card-heading-position="center"
             data-test-id="registration-component"
             :class="$style['c-card-padding']">
-            <div
+            <bag-celebrate-icon :class="$style['bag-icon']" />
+            <p
                 v-if="shouldShowLoginLink"
                 :class="$style['c-loginLink']"
                 data-test-id="create-account-login-link">
                 <a :href="loginSettings.url">{{ loginSettings.linkText }}</a>
-            </div>
+            </p>
             <form
                 type="post"
                 :class="$style['o-form']"
@@ -171,7 +171,7 @@
                     {{ buttonText }}
                 </form-button>
             </form>
-            <div :class="$style['c-legal-hyperlinks']">
+            <p :class="$style['c-legal-hyperlinks']">
                 {{ copy.navLinks.termsAndConditions.prefix }}
                 <a
                     data-test-id="ts-and-cs-link"
@@ -187,7 +187,7 @@
                     data-test-id="cookies-policy-link"
                     :href="copy.navLinks.cookiesPolicy.url"
                     target="_blank">{{ copy.navLinks.cookiesPolicy.text }}</a>{{ copy.navLinks.cookiesPolicy.suffix }}
-            </div>
+            </p>
         </card>
     </div>
 </template>
@@ -478,31 +478,30 @@ export default {
     a {
         color: $blue;
         text-decoration: none;
-        font-weight: bold;
+        font-weight: $font-weight-bold;
     }
 }
 
 .c-card-padding {
-    padding-top: 55px;
-    padding-bottom: 50px;
+    padding-top: spacing(x5);
+    padding-bottom: spacing(x6);
 
     @include media('<mid') {
-        padding-bottom: 32px;
+        padding-bottom: spacing(x4);
     }
 }
 
 .bag-icon {
     width: 97px;
     height: 78px;
-    top: 80px;
-    left: 20px;
-    position: relative;
+    position: absolute;
+    top: 56px;
+    left: 50%;
+    margin-left: -36px;
     @include media('<mid') {
         width: 92px;
         height: 74px;
     }
-    margin: auto;
-    display: block;
 }
 
 </style>
