@@ -2,14 +2,14 @@
     <div>
         <div :class="$style['o-selector']">
             <label
-                v-if="!selected"
+                v-if="!selectedTime"
                 for="delivery-time"
                 :class="$style['o-selector-label']">
                 Delivery time
             </label>
             <select
                 id="delivery-time"
-                v-model="selected"
+                v-model="selectedTime"
                 :class="$style['o-selector-input']">
                 <option
                     v-for="(time, index) in deliveryTimes"
@@ -33,7 +33,7 @@ export default {
 
     data () {
         return {
-            selected: null
+            selectedTime: null
         };
     }
 };
