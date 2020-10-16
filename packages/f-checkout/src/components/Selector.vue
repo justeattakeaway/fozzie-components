@@ -1,6 +1,5 @@
 <template>
     <div>
-        {{ selected }}
         <div :class="$style['o-selector']">
             <label
                 v-if="!selected"
@@ -10,8 +9,8 @@
             </label>
             <select
                 id="delivery-time"
-                :class="$style['o-selector-input']"
-                @change="selected = true">
+                v-model="selected"
+                :class="$style['o-selector-input']">
                 <option
                     v-for="(time, index) in deliveryTimes"
                     :key="index"
@@ -34,7 +33,7 @@ export default {
 
     data () {
         return {
-            selected: false
+            selected: null
         };
     }
 };
