@@ -2,9 +2,11 @@
     <div>
         <div :class="$style['o-selector']">
             <label
-                v-if="!selectedTime"
                 for="delivery-time"
-                :class="$style['o-selector-label']"
+                :class="[
+                    $style['o-selector-label'],
+                    (!selectedTime ? '' : 'is-visuallyHidden')
+                ]"
                 data-test-id="selector-label">
                 Delivery time
             </label>
