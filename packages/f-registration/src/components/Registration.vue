@@ -13,7 +13,8 @@
             <p
                 v-if="shouldShowLoginLink"
                 :class="$style['c-loginLink']"
-                data-test-id="create-account-login-link">
+                data-test-id="create-account-login-link"
+                @click="visitLoginPage">
                 <a :href="copy.navLinks.login.url">{{ copy.navLinks.login.text }}</a>
             </p>
             <form
@@ -371,6 +372,10 @@ export default {
                 this.$emit(EventNames.CreateAccountStart);
                 this.formStarted = true;
             }
+        },
+
+        visitLoginPage () {
+            this.$emit(EventNames.VisitLoginPage);
         },
 
         formFieldBlur (field) {

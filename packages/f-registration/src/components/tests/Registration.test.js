@@ -8,7 +8,6 @@ jest.mock('../../services/RegistrationServiceApi', () => ({ createAccount: jest.
 
 describe('Registration', () => {
     const propsData = {
-        locale: 'en-GB',
         createAccountUrl: 'http://localhost/account/register'
     };
 
@@ -32,7 +31,6 @@ describe('Registration', () => {
         it('should show the login link if showLoginLink prop set to true.', () => {
             const wrapper = shallowMount(Registration, {
                 propsData: {
-                    locale: 'en-GB',
                     createAccountUrl: 'http://localhost/account/register',
                     showLoginLink: true
                 }
@@ -46,7 +44,6 @@ describe('Registration', () => {
         it('should not show the login link if showLoginLink is set to false.', () => {
             const wrapper = shallowMount(Registration, {
                 propsData: {
-                    locale: 'en-GB',
                     createAccountUrl: 'http://localhost/account/register',
                     showLoginLink: false
                 }
@@ -63,6 +60,21 @@ describe('Registration', () => {
             const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
 
             expect(loginLink.exists()).toBe(false);
+        });
+
+        it('should show emit VisitLoginPage event when login link is clicked.', () => {
+            const wrapper = shallowMount(Registration, {
+                propsData: {
+                    createAccountUrl: 'http://localhost/account/register',
+                    showLoginLink: true
+                }
+            });
+
+            const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
+            loginLink.trigger('click');
+
+            // Assert
+            expect(wrapper.emitted(EventNames.VisitLoginPage).length).toBe(1);
         });
 
         it('should fallback to use the en-GB locale if no locale passed', () => {

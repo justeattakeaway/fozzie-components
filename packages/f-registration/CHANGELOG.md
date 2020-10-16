@@ -9,6 +9,10 @@ v0.35.0
 ### Added
 - Moved text into translations file 
 - Support for locale en-GB
+- Emit VisitLoginPage event on login page click interaction
+
+### Changed
+- Prop for showing login link changed to boolean called `showLoginLink`
 
 
 v0.34.0
