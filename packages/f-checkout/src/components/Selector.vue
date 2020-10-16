@@ -1,20 +1,25 @@
 <template>
-    <div :class="$style['o-selector']">
-        <label
-            for="delivery-time"
-            :class="$style['o-selector-label']">
-            Delivery time
-        </label>
-        <select
-            id="delivery-time"
-            :class="$style['o-selector-input']">
-            <option
-                v-for="(time, index) in deliveryTimes"
-                :key="index"
-                :value="time">
-                {{ time }}
-            </option>
-        </select>
+    <div>
+        {{ selected }}
+        <div :class="$style['o-selector']">
+            <label
+                v-if="!selected"
+                for="delivery-time"
+                :class="$style['o-selector-label']">
+                Delivery time
+            </label>
+            <select
+                id="delivery-time"
+                :class="$style['o-selector-input']"
+                @change="selected = true">
+                <option
+                    v-for="(time, index) in deliveryTimes"
+                    :key="index"
+                    :value="time">
+                    {{ time }}
+                </option>
+            </select>
+        </div>
     </div>
 </template>
 
@@ -25,6 +30,12 @@ export default {
             type: Array,
             default: () => ['', 'As soon as possible', 'Today in 5 minutes']
         }
+    },
+
+    data () {
+        return {
+            selected: false
+        };
     }
 };
 </script>
