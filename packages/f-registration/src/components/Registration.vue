@@ -11,7 +11,7 @@
             data-test-id="registration-component"
             :class="$style['c-card-padding']">
             <p
-                v-if="shouldShowLoginLink"
+                v-if="showLoginLink"
                 :class="$style['c-loginLink']"
                 data-test-id="create-account-login-link"
                 @click="visitLoginPage">
@@ -263,7 +263,7 @@ export default {
         },
         showLoginLink: {
             type: Boolean,
-            default: false
+            default: true
         }
     },
 
@@ -326,9 +326,6 @@ export default {
         },
         shouldShowPasswordMinLengthError () {
             return !this.$v.password.minLength && this.$v.password.$dirty;
-        },
-        shouldShowLoginLink () {
-            return this.showLoginLink;
         },
         tenant () {
             return {

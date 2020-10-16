@@ -54,19 +54,18 @@ describe('Registration', () => {
             expect(loginLink.exists()).toBe(false);
         });
 
-        it('should not show the login link if showLoginLink prop not set', () => {
+        it('should show the login link if showLoginLink prop not set', () => {
             const wrapper = shallowMount(Registration, { propsData });
 
             const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
 
-            expect(loginLink.exists()).toBe(false);
+            expect(loginLink.exists()).toBe(true);
         });
 
         it('should show emit VisitLoginPage event when login link is clicked.', () => {
             const wrapper = shallowMount(Registration, {
                 propsData: {
-                    createAccountUrl: 'http://localhost/account/register',
-                    showLoginLink: true
+                    createAccountUrl: 'http://localhost/account/register'
                 }
             });
 
