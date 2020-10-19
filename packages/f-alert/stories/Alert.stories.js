@@ -1,20 +1,23 @@
-import { storiesOf } from '@storybook/vue';
+import { withA11y } from '@storybook/addon-a11y';
 import VueAlert from '../src/components/Alert.vue';
 import VueCard from '../../f-card/src/components/Card.vue';
 
+export default {
+    title: 'Components/Atoms',
+    decorators: [withA11y]
+};
 
-storiesOf('Components', module)
-  .add('f-alert', () => ({
+export const AlertComponent = () => ({
     components: { VueAlert, VueCard },
     template: `
-      <vue-card
+    <vue-card
         locale="en-GB"
         is-rounded
         has-outline
         is-page-content-wrapper>
         <vue-alert
             locale="en-GB"
-            type="info"
+            type="success"
             :isDismissable="true"
             heading="Title of the alert">
             <template v-slot:content>You can put any HTML here, buddy.</template>
@@ -27,6 +30,7 @@ storiesOf('Components', module)
             Fugiat cillum laborum irure ea id deserunt quis est deserunt reprehenderit magna ea consectetur.
             Magna ullamco eu et Lorem.
         </p>
-      </vue-card>`
-  })
-);
+    </vue-card>`
+});
+
+AlertComponent.storyName = 'f-alert';
