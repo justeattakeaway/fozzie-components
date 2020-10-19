@@ -4,6 +4,10 @@ import VueAlert from '../Alert.vue';
 const defaultPropsData = { heading: 'Alert title', type: 'info' };
 
 describe('Alert', () => {
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+
     it('should be defined', () => {
         // Arrange & Act
         const wrapper = shallowMount(VueAlert, { propsData: defaultPropsData });
@@ -72,22 +76,20 @@ describe('Alert', () => {
             expect(dismiss.exists()).toBe(false);
         });
 
-        // it('should call `dismiss` when clicked', () => {
-        //     // Arrange
-        //     const dismissMock = jest.fn();
-        //     const wrapper = shallowMount(VueAlert, {
-        //         propsData: { ...defaultPropsData, isDismissable: true },
-        //         methods: {
-        //             dismiss: dismissMock
-        //         }
-        //     });
+        it('should call `dismiss` when clicked', () => {
+            // Arrange
+            const dismissSpy = jest.spyOn(VueAlert.methods, 'dismiss');
 
-        //     // Act
-        //     wrapper.find('[data-test-id="alert-dismiss"]').trigger('click');
+            const wrapper = shallowMount(VueAlert, {
+                propsData: { ...defaultPropsData, isDismissable: true },
+            });
 
-        //     // Assert
-        //     expect(dismissMock).toHaveBeenCalled();
-        // });
+            // Act
+            wrapper.find('[data-test-id="alert-dismiss"]').trigger('click');
+
+            // Assert
+            expect(dismissSpy).toHaveBeenCalled();
+        });
     });
 
     describe('props', () => {
