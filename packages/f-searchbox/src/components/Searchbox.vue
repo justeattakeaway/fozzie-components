@@ -10,7 +10,7 @@
 <script>
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
-//import SearchboxServiceApi from '../services/SearchboxServiceApi';
+// import SearchboxServiceApi from '../services/SearchboxServiceApi';
 
 export default {
     name: 'VueSearchbox',
