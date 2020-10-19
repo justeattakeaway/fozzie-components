@@ -28,7 +28,7 @@ executors:
   node:
     docker:
       # specify the version you desire here
-      - image: circleci/node:12.18.2-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
+      - image: circleci/node:12.18.4-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
 
 jobs:
 
@@ -86,6 +86,9 @@ jobs:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - build_packages
+      - run: # Run Tests (Needed for Jest Storybook support)
+          name: Run Unit / Integration Tests
+          command: yarn test
       - run:
           name: Deploy
           command: yarn storybook:deploy --packages packages

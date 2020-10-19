@@ -5,12 +5,12 @@ const { exec } = require('child_process');
 /**
  * Runs the WCAG accessibility tests on the curent page of the global browser
  */
-exports.getAccessibilityTestResults = () => {
+exports.getAccessibilityTestResults = (componentName) => {
     browser.execute(source);
 
     // https://github.com/dequelabs/axe-core/blob/develop/doc/API.md
 
-    return browser.executeAsync(done => {
+    const results = browser.executeAsync(done => {
         const options = {
             runOnly: {
                 type: 'tag',
@@ -24,8 +24,17 @@ exports.getAccessibilityTestResults = () => {
         axe.run(document, options, (err, results) => {
             if (err) throw err;
             done(results);
+
+            return results;
         });
     });
+
+    if(results.violations.length > 0)
+    {
+        this.processResults(results, componentName);
+    }
+
+    return results;
 };
 
 /**

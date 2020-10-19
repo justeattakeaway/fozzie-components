@@ -3,6 +3,36 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.4.0
+------------------------------
+*October 16, 2020*
+
+### Added
+- Axe Accessibility Spec template
+
+### Changed
+- Moved conditional statement from axe-accessibility spec to axe-helper
+
+
+v1.3.0
+------------------------------
+*October 14, 2020*
+
+### Added
+- Use today's date when creating initial changelog entry.
+
+
+v1.2.0
+------------------------------
+*October 14, 2020*
+
+### Changed
+- Changed path so that the generator outputs to the current directory it's in, rather than the directory above the current location.
+- Updated `babel.config.js` to run the tests through latest Node version rather than our browser config.
+- Deleted theme mixin, as no longer needed.
+- Removed font files from `Demo.vue`.
+- Storybook syntax updated to new `export` syntax (from legacy `storiesOf` syntax).
+
 v1.1.1
 ------------------------------
 *October 6, 2020*
@@ -13,6 +43,7 @@ v1.1.1
 
 ### Fixed
 - Test template
+
 
 v1.1.0
 ------------------------------

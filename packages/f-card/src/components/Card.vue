@@ -10,7 +10,6 @@
         <h1
             v-if="cardHeading"
             :class="[
-                'beta',
                 $style['c-card-heading'],
                 (cardHeadingPosition !== 'left' ? $style[`c-card--${cardHeadingPosition}`] : '')
             ]"
