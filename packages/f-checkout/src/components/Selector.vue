@@ -1,19 +1,19 @@
 <template>
     <div
         :class="[
-            'o-selector',
-            { 'o-selector--float': selectedTime }
+            'o-form-select',
+            { 'o-form-select--float': selectedTime }
         ]"
-        data-test-id="selector">
+        data-test-id="form-select">
         <label
             for="delivery-time"
-            class="o-selector-label">
+            class="o-form-select-label">
             Delivery time
         </label>
         <select
             id="delivery-time"
             v-model="selectedTime"
-            class="o-selector-input">
+            class="o-form-select-input">
             <option
                 v-for="(time, index) in deliveryTimes"
                 :key="index"
@@ -50,7 +50,7 @@ $form-input-borderWidth                   : 1px;
 $form-input-borderColour                  : $grey--light;
 $form-input-borderColour--focus           : $grey--dark;
 
-.o-selector {
+.o-form-select {
     position: relative;
     height: 60px;
     margin: spacing(x2) 0;
@@ -63,7 +63,7 @@ $form-input-borderColour--focus           : $grey--dark;
     border: $form-input-borderWidth solid $form-input-borderColour;
     border-radius: $form-input-borderRadius;
 
-    .o-selector-label {
+    .o-form-select-label {
         display: block;
         position: absolute;
         top: 50%;
@@ -73,7 +73,7 @@ $form-input-borderColour--focus           : $grey--dark;
         cursor: pointer;
     }
 
-    .o-selector-input {
+    .o-form-select-input {
         height: 100%;
         width: 100%;
         padding: 3px;
@@ -83,14 +83,14 @@ $form-input-borderColour--focus           : $grey--dark;
     }
 }
 
-.o-selector--float {
-    .o-selector-label {
+.o-form-select--float {
+    .o-form-select-label {
         @include font-size(body-s, false);
         line-height: 1.29;
         top: 15px;
     }
 
-    .o-selector-input {
+    .o-form-select-input {
         padding-top: spacing(x3);
     }
 }

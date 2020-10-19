@@ -14,22 +14,22 @@ describe('Selector', () => {
             it('should add class to display label above option when not null', async () => {
                 // Arrange & Act
                 const wrapper = shallowMount(Selector, { propsData });
-                const selector = wrapper.find("[data-test-id='selector']");
+                const selector = wrapper.find("[data-test-id='form-select']");
 
                 wrapper.setData({ selectedTime: 'testTime' });
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(selector.classes()).toContain('o-selector--float');
+                expect(selector.classes()).toContain('o-form-select--float');
             });
 
             it('should remove class to display label centrally when  null', () => {
                 // Arrange & Act
                 const wrapper = shallowMount(Selector, { propsData });
-                const selector = wrapper.find("[data-test-id='selector']");
+                const selector = wrapper.find("[data-test-id='form-select']");
 
                 // Assert
-                expect(selector.classes()).not.toContain('o-selector--float');
+                expect(selector.classes()).not.toContain('o-form-select--float');
             });
         });
     });
