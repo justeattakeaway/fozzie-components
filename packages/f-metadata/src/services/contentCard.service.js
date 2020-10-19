@@ -1,4 +1,5 @@
 import orderBy from 'lodash.orderby';
+import startsWith from 'lodash.startswith';
 import findIndex from 'lodash.findindex';
 import transformCardData from './utils/transformCardData';
 import isCardCurrentlyActive from './utils/isCardCurrentlyActive';
@@ -35,12 +36,11 @@ class ContentCards {
     constructor (appboy = {}, opts = {}) {
         const { cards = [] } = appboy;
         const { enabledCardTypes = [] } = opts;
-        this.enabledCardTypes = enabledCardTypes.length
-            ? enabledCardTypes
-            : defaultEnabledCardTypes;
+        this.enabledCardTypes = enabledCardTypes.length ? enabledCardTypes : defaultEnabledCardTypes;
         this.appboy = appboy;
         this.rawCards = cards;
         this.cards = cards.map(transformCardData);
+        this.groups = [];
         this.titleCard = {};
     }
 
@@ -54,6 +54,20 @@ class ContentCards {
         return {
             titleCard: this.titleCard,
             cards: this.cards,
+            rawCards: this.rawCards
+        };
+    }
+
+    /**
+     * Outputs grouped results
+     * @returns {object} output
+     * @returns {object} output.titleCard
+     * @returns {object[]} output.groups
+     */
+    outputGroups () {
+        return {
+            titleCard: this.titleCard,
+            groups: this.groups,
             rawCards: this.rawCards
         };
     }
@@ -87,12 +101,9 @@ class ContentCards {
      * @returns {ContentCards}
      */
     arrangeCardsByTitles () {
-        this.cards.reduce((acc, card) => {
+        this.groups = this.cards.reduce((acc, card) => {
             const { type } = card;
-            if (
-                type &&
-                (type === 'Header_Card' || type === 'Terms_And_Conditions_Card')
-            ) {
+            if (type && (startsWith(type, 'Header_Card') || startsWith(type, 'Terms_And_Conditions_Card'))) {
                 return [...acc, { title: card.title, cards: [] }];
             }
             if (!acc.length) {
@@ -111,27 +122,19 @@ class ContentCards {
      * @returns {ContentCards}
      */
     getTitleCard () {
-        const index = findIndex(
-            this.cards,
-            card => card.type === 'Terms_And_Conditions_Card' &&
-                card.url &&
-                card.pinned
-        );
+        const index = findIndex(this.cards, card => card.type === 'Terms_And_Conditions_Card' && card.url && card.pinned);
         const [titleCard] = index > -1 ? this.cards.splice(index, 1) : [{}];
         this.titleCard = titleCard;
         return this;
     }
 
     /**
-     * Filters out card types based on `enabledCardTypes` and display times
+     * Filters out card types based on `enabledCardTypes`
      * @property {Object[]} this.cards
      * @returns {ContentCards}
      */
-    filterCards (brands) {
-        this.cards = this.cards
-            .sort(({ order: a }, { order: b }) => +a - +b)
-            .filter(({ type }) => (type ? this.enabledCardTypes.includes(type) : false))
-            .filter(card => isCardCurrentlyActive(card, brands));
+    filterCards () {
+        this.cards = this.cards.sort(({ order: a }, { order: b }) => +a - +b).filter(({ type }) => (type ? this.enabledCardTypes.includes(type) : false));
         return this;
     }
 
@@ -144,12 +147,7 @@ class ContentCards {
      * @returns {ContentCards}
      */
     removeDuplicateContentCards () {
-        this.cards = orderBy(this.cards, 'updated').filter((contentCard, index, item) => index ===
-            findIndex(
-                item,
-                card => card.title === contentCard.title &&
-                    card.type === contentCard.type
-            ));
+        this.cards = orderBy(this.cards, 'updated').filter((contentCard, index, item) => index === findIndex(item, card => (card.title === contentCard.title && card.type === contentCard.type)));
         return this;
     }
 }

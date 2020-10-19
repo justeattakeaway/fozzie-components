@@ -43,19 +43,30 @@ function interceptInAppMessagesHandler (message) {
 function contentCardsHandler (postCardsAppboy) {
     this.refreshRequested = false;
 
-    const {
-        cards,
-        rawCards
-    } = new ContentCards(postCardsAppboy, { enabledCardTypes: this.dispatcherOptions.enabledCardTypes })
+    // don't output straight away as we need to create grouped output as well as the normal output
+    const preCallbackSelection = new ContentCards(postCardsAppboy, { enabledCardTypes: this.dispatcherOptions.enabledCardTypes })
         .removeDuplicateContentCards()
         .filterCards()
-        .getTitleCard()
-        .arrangeCardsByTitles()
-        .output();
+        .getTitleCard();
 
-    this.cardsCallbacks.forEach(callback => callback(cards));
-
-    this.rawCards = rawCards;
+    if (this.cardsCallbacks.length > 0) {
+        // cards and raw cards
+        const { cards, rawCards } = preCallbackSelection.output();
+        // cards in ungrouped format returned via callback
+        this.cardsCallbacks.forEach(callback => callback(cards));
+        // set raw cards
+        this.rawCards = rawCards;
+    }
+    if (this.groupedCardsCallback.length > 0) {
+        // grouped cards
+        const { groups, rawCards } = preCallbackSelection
+            .arrangeCardsByTitles()
+            .outputGroups();
+        // cards in grouped format returned via callback
+        this.groupedCardsCallback.forEach(callback => callback(groups));
+        // set raw cards only if above is not set
+        if (this.rawCards.length === 0) this.rawCards = rawCards;
+    }
 
     this.rawCardIndex = Object.fromEntries(this.rawCards.map((rawCard, idx) => [rawCard.id, idx]));
 }
@@ -95,6 +106,7 @@ class BrazeDispatcher {
         this.dispatcherOptions = null;
 
         this.cardsCallbacks = [];
+        this.groupedCardsCallback = [];
         this.inAppMessageClickEventCallbacks = [];
         this.inAppMessagesCallbacks = [];
 
@@ -147,6 +159,7 @@ class BrazeDispatcher {
         if (callbacks.interceptInAppMessageClickEvents) this.inAppMessageClickEventCallbacks.push(callbacks.interceptInAppMessageClickEvents);
         if (callbacks.interceptInAppMessages) this.inAppMessagesCallbacks.push(callbacks.interceptInAppMessages);
         if (callbacks.handleContentCards) this.cardsCallbacks.push(callbacks.handleContentCards);
+        if (callbacks.handleContentCardsGrouped) this.groupedCardsCallback.push(callbacks.handleContentCardsGrouped);
 
         // Note that appBoyPromise will not be set if this is the first time running this method -
         // this is a guard against initialise() being called more than once, and attempting to

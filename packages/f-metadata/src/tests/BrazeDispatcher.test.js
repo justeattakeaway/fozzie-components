@@ -18,6 +18,7 @@ jest.isolateModules(() => {
 });
 
 const handleContentCards = jest.fn();
+const handleContentCardsGrouped = jest.fn();
 const interceptInAppMessages = jest.fn();
 const interceptInAppMessageClickEvents = jest.fn();
 
@@ -219,7 +220,8 @@ describe('BrazeDispatcher operation', () => {
         callbacks: {
             interceptInAppMessageClickEvents,
             interceptInAppMessages,
-            handleContentCards
+            handleContentCards,
+            handleContentCardsGrouped
         }
     };
 
@@ -246,6 +248,22 @@ describe('BrazeDispatcher operation', () => {
                 { id: 'card1' },
                 { id: 'card2' }
             ];
+            const groupedCards = [
+                {
+                    title: 'example1',
+                    cards: [
+                        { id: 'card1' },
+                        { id: 'card2' }
+                    ]
+                },
+                {
+                    title: 'example2',
+                    cards: [
+                        { id: 'card3' },
+                        { id: 'card4' }
+                    ]
+                }
+            ];
             beforeEach(() => {
                 ContentCards.prototype.orderCardsByOrderValue.mockReturnThis();
                 ContentCards.prototype.orderCardsByUpdateValue.mockReturnThis();
@@ -257,9 +275,13 @@ describe('BrazeDispatcher operation', () => {
                     cards: rawCards,
                     rawCards
                 });
+                ContentCards.prototype.outputGroups.mockReturnValue({
+                    groups: groupedCards,
+                    rawCards
+                });
             });
 
-            it('should instantiate ContentCards and call required methods in order', () => {
+            it('should instantiate ContentCards and call required methods in order up to output method', () => {
                 // Arrange & Act
                 contentCardsHandler();
 
@@ -269,8 +291,24 @@ describe('BrazeDispatcher operation', () => {
                     .toHaveBeenCalledBefore(contentCardsInstance.filterCards);
                 expect(contentCardsInstance.filterCards)
                     .toHaveBeenCalledBefore(contentCardsInstance.getTitleCard);
-                expect(contentCardsInstance.getTitleCard)
-                    .toHaveBeenCalledBefore(contentCardsInstance.arrangeCardsByTitles);
+            });
+
+            it('should call the arrangeCardsByTitles method before outputGroups method is called', () => {
+                // Arrange & Act
+                contentCardsHandler();
+
+                const [contentCardsInstance] = ContentCards.mock.instances;
+
+                expect(contentCardsInstance.arrangeCardsByTitles)
+                    .toHaveBeenCalledBefore(contentCardsInstance.outputGroups);
+            });
+
+            it('should call the getTitleCard method before output method is called', () => {
+                // Arrange & Act
+                contentCardsHandler();
+
+                const [contentCardsInstance] = ContentCards.mock.instances;
+
                 expect(contentCardsInstance.getTitleCard)
                     .toHaveBeenCalledBefore(contentCardsInstance.output);
             });
@@ -281,6 +319,14 @@ describe('BrazeDispatcher operation', () => {
 
                 // Assert
                 expect(handleContentCards).toHaveBeenCalledWith(rawCards);
+            });
+
+            it('should call registered group callback with returned cards', () => {
+                // Arrange & Act
+                contentCardsHandler();
+
+                // Assert
+                expect(handleContentCardsGrouped).toHaveBeenCalledWith(groupedCards);
             });
         });
 
@@ -348,6 +394,22 @@ describe('BrazeDispatcher operation', () => {
             { id: 'card1' },
             { id: 'card2' }
         ];
+        const groupedCards = [
+            {
+                title: 'example1',
+                cards: [
+                    { id: 'card1' },
+                    { id: 'card2' }
+                ]
+            },
+            {
+                title: 'example2',
+                cards: [
+                    { id: 'card3' },
+                    { id: 'card4' }
+                ]
+            }
+        ];
         beforeEach(() => {
             ContentCards.prototype.orderCardsByOrderValue.mockReturnThis();
             ContentCards.prototype.orderCardsByUpdateValue.mockReturnThis();
@@ -357,6 +419,10 @@ describe('BrazeDispatcher operation', () => {
             ContentCards.prototype.removeDuplicateContentCards.mockReturnThis();
             ContentCards.prototype.output.mockReturnValue({
                 cards: rawCards,
+                rawCards
+            });
+            ContentCards.prototype.outputGroups.mockReturnValue({
+                groups: groupedCards,
                 rawCards
             });
             contentCardsHandler();
