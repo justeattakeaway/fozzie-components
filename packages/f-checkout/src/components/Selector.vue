@@ -83,6 +83,11 @@ $form-input-borderColour--focus           : $grey--dark;
     }
 }
 
+/**
+ * Modifier – .o-form-select--float
+ *
+ * Moves the select label to sit above chosen option
+ */
 .o-form-select--float {
     .o-form-select-label {
         @include font-size(body-s, false);
