@@ -59,6 +59,7 @@ const config = {
   disableComponent: false,
   callbacks: {
     handleContentCards: cards => console.log(cards), // Braze content cards data
+    handleContentCardsGrouped: groupedCards => console.log(groupedCards), // Braze content cards data
     interceptInAppMessages: inAppMessage => console.log(inAppMessage) // Braze in app message data
   }
 };
@@ -108,6 +109,10 @@ Enable/Disable the Braze SDK when running experiments or feature toggling.
 ### `config.callbacks.handleContentCards`
 
 A callback to be invoked when content cards have been retrieved.
+
+### `config.callbacks.handleContentCardsGrouped`
+
+A callback to be invoked when content cards have been retrieved, grouped by header card title.
 
 ### `config.callbacks.interceptInAppMessages`
 
