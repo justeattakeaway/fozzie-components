@@ -68,7 +68,7 @@ $form-input-borderColour--focus           : $grey--dark;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        padding: 8px;
+        padding: spacing();
         color: $form-label-colour;
         cursor: pointer;
     }
