@@ -1,19 +1,19 @@
 <template>
     <div
         :class="[
-            $style['o-selector'],
-            (!selectedTime ? '' : 'o-selector--float')
+            'o-selector',
+            { 'o-selector--float': selectedTime }
         ]"
         data-test-id="selector">
         <label
             for="delivery-time"
-            :class="$style['o-selector-label']">
+            class="o-selector-label">
             Delivery time
         </label>
         <select
             id="delivery-time"
             v-model="selectedTime"
-            :class="$style['o-selector-input']">
+            class="o-selector-input">
             <option
                 v-for="(time, index) in deliveryTimes"
                 :key="index"
@@ -41,7 +41,7 @@ export default {
 };
 </script>
 
-<style lang="scss" module>
+<style lang="scss">
 $form-label-colour                        : $grey--dark;
 $form-input-colour                        : $color-text;
 $form-input-bg                            : $white;
@@ -52,7 +52,7 @@ $form-input-borderColour--focus           : $grey--dark;
 
 .o-selector {
     position: relative;
-    height: 53px;
+    height: 60px;
     margin: spacing(x2) 0;
     padding: 0;
     @include font-size(body-l);
@@ -79,17 +79,19 @@ $form-input-borderColour--focus           : $grey--dark;
         padding: 0.2rem;
         border: none;
         cursor: pointer;
+        color: $color-text;
     }
 }
 
 .o-selector--float {
     .o-selector-label {
-        @include font-size(body-s);
+        @include font-size(body-s, false);
+        line-height: 1.29;
         top: 15px;
     }
 
     .o-selector-input {
-        padding-top: 20px;
+        padding-top: spacing(x3);
     }
 }
 </style>
