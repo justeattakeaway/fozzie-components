@@ -76,7 +76,7 @@ $form-input-borderColour--focus           : $grey--dark;
     .o-selector-input {
         height: 100%;
         width: 100%;
-        padding: 2.8px;
+        padding: 3px;
         border: none;
         cursor: pointer;
         color: $color-text;
