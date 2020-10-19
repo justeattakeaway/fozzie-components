@@ -1,31 +1,26 @@
 <template>
-    <div>
-        <div
-            :class="[
-                $style['o-selector'],
-                (selectedTime ? $style['o-selector--float'] : '')
-            ]">
-            <label
-                for="delivery-time"
-                :class="[
-                    $style['o-selector-label']
-
-                ]"
-                data-test-id="selector-label">
-                Delivery time
-            </label>
-            <select
-                id="delivery-time"
-                v-model="selectedTime"
-                :class="$style['o-selector-input']">
-                <option
-                    v-for="(time, index) in deliveryTimes"
-                    :key="index"
-                    :value="time">
-                    {{ time }}
-                </option>
-            </select>
-        </div>
+    <div
+        data-test-id="selector"
+        :class="[
+            $style['o-selector'],
+            (selectedTime ? $style['o-selector--float'] : '')
+        ]">
+        <label
+            for="delivery-time"
+            :class="$style['o-selector-label']">
+            Delivery time
+        </label>
+        <select
+            id="delivery-time"
+            v-model="selectedTime"
+            :class="$style['o-selector-input']">
+            <option
+                v-for="(time, index) in deliveryTimes"
+                :key="index"
+                :value="time">
+                {{ time }}
+            </option>
+        </select>
     </div>
 </template>
 

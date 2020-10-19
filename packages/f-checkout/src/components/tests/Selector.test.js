@@ -14,13 +14,13 @@ describe('Selector', () => {
             it('should add class to visually hide label when not null', async () => {
                 // Arrange & Act
                 const wrapper = shallowMount(Selector, { propsData });
-                const label = wrapper.find("[data-test-id='selector-label']");
+                const selector = wrapper.find("[data-test-id='selector']");
 
                 wrapper.setData({ selectedTime: 'testTime' });
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(label.classes()).toContain('is-visuallyHidden');
+                expect(selector.classes()).toContain('o-selector--float');
             });
         });
     });
