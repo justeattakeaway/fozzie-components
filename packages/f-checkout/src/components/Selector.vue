@@ -68,7 +68,7 @@ $form-input-borderColour--focus           : $grey--dark;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        padding: 0.5rem;
+        padding: 5px;
         color: $form-label-colour;
         cursor: pointer;
     }
@@ -76,7 +76,7 @@ $form-input-borderColour--focus           : $grey--dark;
     .o-selector-input {
         height: 100%;
         width: 100%;
-        padding: 0.2rem;
+        padding: 2px;
         border: none;
         cursor: pointer;
         color: $color-text;
