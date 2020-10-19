@@ -7,7 +7,12 @@
             name="viewport"
             content="width=device-width, initial-scale=1">
         <vue-alert
-            locale="en-GB" />
+            locale="en-GB"
+            type="success"
+            :isDismissable="true"
+            heading="Title of the alert">
+            <template v-slot:content>You can put any HTML here!</template>
+        </vue-alert>
     </div>
 </template>
 
