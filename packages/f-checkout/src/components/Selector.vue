@@ -1,10 +1,10 @@
 <template>
     <div
-        data-test-id="selector"
         :class="[
             $style['o-selector'],
-            (!selectedTime ? '' : $style['o-selector--float'])
-        ]">
+            (!selectedTime ? '' : 'o-selector--float')
+        ]"
+        data-test-id="selector">
         <label
             for="delivery-time"
             :class="$style['o-selector-label']">

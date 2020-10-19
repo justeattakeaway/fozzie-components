@@ -11,7 +11,7 @@ describe('Selector', () => {
 
     describe('data ::', () => {
         describe('selectedTime ::', () => {
-            it('should add class to visually hide label when not null', async () => {
+            it('should add class to display label above option when not null', async () => {
                 // Arrange & Act
                 const wrapper = shallowMount(Selector, { propsData });
                 const selector = wrapper.find("[data-test-id='selector']");
@@ -20,8 +20,16 @@ describe('Selector', () => {
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                // expect(wrapper.html()).toEqual('');
                 expect(selector.classes()).toContain('o-selector--float');
+            });
+
+            it('should remove class to display label centrally when not null', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(Selector, { propsData });
+                const selector = wrapper.find("[data-test-id='selector']");
+
+                // Assert
+                expect(selector.classes()).not.toContain('o-selector--float');
             });
         });
     });
