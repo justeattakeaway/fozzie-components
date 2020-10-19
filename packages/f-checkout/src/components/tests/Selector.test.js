@@ -20,6 +20,7 @@ describe('Selector', () => {
                 await wrapper.vm.$nextTick();
 
                 // Assert
+                // expect(wrapper.html()).toEqual('');
                 expect(selector.classes()).toContain('o-selector--float');
             });
         });

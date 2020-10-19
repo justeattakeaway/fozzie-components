@@ -3,7 +3,7 @@
         data-test-id="selector"
         :class="[
             $style['o-selector'],
-            (selectedTime ? $style['o-selector--float'] : '')
+            (!selectedTime ? '' : $style['o-selector--float'])
         ]">
         <label
             for="delivery-time"
