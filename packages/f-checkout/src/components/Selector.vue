@@ -1,11 +1,15 @@
 <template>
     <div>
-        <div :class="$style['o-selector']">
+        <div
+            :class="[
+                $style['o-selector'],
+                (selectedTime ? $style['o-selector--float'] : '')
+            ]">
             <label
                 for="delivery-time"
                 :class="[
-                    $style['o-selector-label'],
-                    (!selectedTime ? '' : 'is-visuallyHidden')
+                    $style['o-selector-label']
+
                 ]"
                 data-test-id="selector-label">
                 Delivery time
@@ -52,32 +56,45 @@ $form-input-borderColour                  : $grey--light;
 $form-input-borderColour--focus           : $grey--dark;
 
 .o-selector {
-    margin: spacing(x2) 0;
     position: relative;
+    height: 53px;
+    margin: spacing(x2) 0;
     padding: 0;
+    @include font-size(body-l);
     font-family: $font-family-base;
     color: $form-input-colour;
     font-weight: $font-weight-base;
     background-color: $form-input-bg;
-    @include font-size(body-l);
+    border: $form-input-borderWidth solid $form-input-borderColour;
+    border-radius: $form-input-borderRadius;
 
     .o-selector-label {
         display: block;
-        color: $form-label-colour;
         position: absolute;
         top: 50%;
-        left: 0.5rem;
         transform: translateY(-50%);
+        padding: 0.5rem;
+        color: $form-label-colour;
         cursor: pointer;
     }
 
     .o-selector-input {
-        height: 53px;
+        height: 100%;
         width: 100%;
-        padding: 0.5rem;
-        border: $form-input-borderWidth solid $form-input-borderColour;
-        border-radius: $form-input-borderRadius;
+        padding: 0.2rem;
+        border: none;
         cursor: pointer;
+    }
+}
+
+.o-selector--float {
+    .o-selector-label {
+        @include font-size(body-s);
+        top: 15px;
+    }
+
+    .o-selector-input {
+        padding-top: 20px;
     }
 }
 </style>
