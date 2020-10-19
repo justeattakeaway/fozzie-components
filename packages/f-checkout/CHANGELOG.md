@@ -5,11 +5,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.2.1
 ------------------------------
-*October 16, 2020*
+*October 19, 2020*
 
 ### Changed
 - Selector to hide label when time selected.
 
+### Added
+- Selector unit tests
 
 v0.2.0
 ------------------------------
