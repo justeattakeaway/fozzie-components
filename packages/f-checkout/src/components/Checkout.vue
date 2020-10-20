@@ -12,52 +12,10 @@
             data-test-id="checkout-card-component"
             :class="$style['c-card--dimensions']">
             <form action="post">
-                <form-field
-                    v-model="mobileNumber"
-                    :class="$style['c-formField']"
-                    name="mobile-number"
-                    data-test-id="input-mobile-number"
-                    label-text="Mobile number"
-                    input-type="text"
-                    label-style="inline" />
-
-                <div :class="$style['l-addressGroup']">
-                    <form-field
-                        v-model="address.line1"
-                        :class="$style['c-formField']"
-                        name="address-line-1"
-                        data-test-id="input-address-line-1"
-                        label-text="Address line 1"
-                        input-type="text"
-                        label-style="inline" />
-
-                    <form-field
-                        v-model="address.line2"
-                        :class="$style['c-formField']"
-                        name="address-line-2"
-                        data-test-id="input-address-line-2"
-                        label-text="Address line 2 (optional)"
-                        input-type="text"
-                        label-style="inline" />
-
-                    <form-field
-                        v-model="address.city"
-                        :class="$style['c-formField']"
-                        name="address-city"
-                        data-test-id="input-address-city"
-                        label-text="City"
-                        input-type="text"
-                        label-style="inline" />
-                </div>
-
-                <form-field
-                    v-model="address.postcode"
-                    :class="$style['c-formField']"
-                    name="address-postcode"
-                    data-test-id="input-address-postcode"
-                    label-text="Postcode"
-                    input-type="text"
-                    label-style="inline" />
+                <component
+                    :is="type"
+                    :mobile-number="mobileNumber"
+                    :address="address" />
 
                 <form-selector />
                 <user-note />
@@ -83,8 +41,8 @@
 import { globalisationServices } from '@justeat/f-services';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
-import FormField from '@justeat/f-form-field';
-import '@justeat/f-form-field/dist/f-form-field.css';
+import Collection from './Collection.vue';
+import Delivery from './Delivery.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
 import tenantConfigs from '../tenants';
@@ -94,7 +52,8 @@ export default {
 
     components: {
         Card,
-        FormField,
+        Collection,
+        Delivery,
         FormSelector,
         UserNote
     },
@@ -103,6 +62,10 @@ export default {
         locale: {
             type: String,
             default: ''
+        },
+        type: {
+            type: String,
+            default: 'Collection'
         }
     },
 
