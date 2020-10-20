@@ -104,7 +104,7 @@ describe('Alert', () => {
                 // Assert
                 expect(type.required).toBe(true);
             });
-            
+
             it('should only allow `danger`, `success`, `info` or `warning` to be passed in.', () => {
                 // Arrange
                 const wrapper = shallowMount(VueAlert, { propsData: defaultPropsData });

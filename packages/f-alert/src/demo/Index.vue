@@ -11,7 +11,7 @@
             type="success"
             :isDismissable="true"
             heading="Title of the alert">
-            <template v-slot:content>You can put any HTML here!</template>
+            You can put any HTML here!
         </vue-alert>
     </div>
 </template>

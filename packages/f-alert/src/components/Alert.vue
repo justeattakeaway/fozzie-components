@@ -9,8 +9,7 @@
             :class="$style['c-alert-headingContainer']">
             <component
                 :is="icon"
-                :class="[$style['c-icon--alert'],
-                         $style['c-alert-icon'],
+                :class="[$style['c-alert-icon'],
                          $style[`c-alert-icon--${type}`]]"
                 data-test-id="alert-icon" />
             <!-- TODO: make this dynamic. See https://skipthedishes.atlassian.net/browse/WCB-1219 -->
@@ -26,7 +25,7 @@
                 data-test-id="alert-dismiss"
                 @click="dismiss">
                 <cross-icon
-                    :class="[$style['c-icon--cross'], $style['c-alert-dismiss-icon']]"
+                    :class="[$style['c-alert-dismiss-icon']]"
                 />
                 <span class="is-visuallyHidden">
                     {{ copy.dismissAlertText }}
@@ -35,7 +34,7 @@
         </div>
         <div
             :class="$style['c-alert-content']">
-            <slot name="content" />
+            <slot />
         </div>
     </div>
 </template>
