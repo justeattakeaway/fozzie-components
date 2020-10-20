@@ -36,25 +36,6 @@ function interceptInAppMessagesHandler (message) {
 }
 
 /**
- * Takes Callbacks and fires each one with appropriate cards.
- * @param callbacks
- * @param contentCardsSelection
- * @param group
- * @returns {*[]|*}
- */
-function cardCallbackHandler (callbacks, contentCardsSelection, group = false) {
-    if (callbacks.length > 0) {
-        const { cards, rawCards } = group ? contentCardsSelection
-            .arrangeCardsByTitles()
-            .outputGroups() :
-            contentCardsSelection.output();
-        callbacks.forEach(callback => callback(cards));
-        return rawCards;
-    }
-    return [];
-}
-
-/**
  * Internal handler for content cards that dispatches to component-registered callbacks
  * @param postCardsAppboy
  * @this BrazeDispatcher
@@ -62,15 +43,21 @@ function cardCallbackHandler (callbacks, contentCardsSelection, group = false) {
 function contentCardsHandler (postCardsAppboy) {
     this.refreshRequested = false;
 
-    // don't output straight away as we need to create grouped output as well as the normal output
-    const contentCardsSelection = new ContentCards(postCardsAppboy, { enabledCardTypes: this.dispatcherOptions.enabledCardTypes })
+    const {
+        cards,
+        rawCards,
+        groups
+    } = new ContentCards(postCardsAppboy, { enabledCardTypes: this.dispatcherOptions.enabledCardTypes })
         .removeDuplicateContentCards()
         .filterCards()
-        .getTitleCard();
+        .getTitleCard()
+        .arrangeCardsByTitles()
+        .output();
 
-    this.rawCards = cardCallbackHandler(this.cardsCallbacks, contentCardsSelection);
-    const rawCards = cardCallbackHandler(this.groupedCardsCallback, contentCardsSelection, true);
-    if (this.rawCards.length === 0) this.rawCards = rawCards;
+    this.cardsCallbacks.forEach(callback => callback(cards));
+    this.groupedCardsCallback.forEach(callback => callback(groups));
+
+    this.rawCards = rawCards;
 
     this.rawCardIndex = Object.fromEntries(this.rawCards.map((rawCard, idx) => [rawCard.id, idx]));
 }

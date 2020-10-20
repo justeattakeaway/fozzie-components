@@ -56,19 +56,6 @@ class ContentCards {
         return {
             titleCard: this.titleCard,
             cards: this.cards,
-            rawCards: this.rawCards
-        };
-    }
-
-    /**
-     * Outputs grouped results
-     * @returns {object} output
-     * @returns {object} output.titleCard
-     * @returns {object[]} output.groups
-     */
-    outputGroups () {
-        return {
-            titleCard: this.titleCard,
             groups: this.groups,
             rawCards: this.rawCards
         };

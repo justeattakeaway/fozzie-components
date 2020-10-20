@@ -273,15 +273,12 @@ describe('BrazeDispatcher operation', () => {
                 ContentCards.prototype.removeDuplicateContentCards.mockReturnThis();
                 ContentCards.prototype.output.mockReturnValue({
                     cards: rawCards,
-                    rawCards
-                });
-                ContentCards.prototype.outputGroups.mockReturnValue({
                     groups: groupedCards,
                     rawCards
                 });
             });
 
-            it('should instantiate ContentCards and call required methods in order of [removeDuplicateContentCards, filterCards, getTitleCard]', () => {
+            it('should instantiate ContentCards and call required methods in order of [removeDuplicateContentCards, filterCards, getTitleCard, output]', () => {
                 // Arrange & Act
                 contentCardsHandler();
 
@@ -291,27 +288,7 @@ describe('BrazeDispatcher operation', () => {
                     .toHaveBeenCalledBefore(contentCardsInstance.filterCards);
                 expect(contentCardsInstance.filterCards)
                     .toHaveBeenCalledBefore(contentCardsInstance.getTitleCard);
-            });
-
-            it('should call the arrangeCardsByTitles method before outputGroups method is called', () => {
-                // Arrange & Act
-                contentCardsHandler();
-
-                const [contentCardsInstance] = ContentCards.mock.instances;
-
-                // Assert
                 expect(contentCardsInstance.arrangeCardsByTitles)
-                    .toHaveBeenCalledBefore(contentCardsInstance.outputGroups);
-            });
-
-            it('should call the getTitleCard method before output method is called', () => {
-                // Arrange & Act
-                contentCardsHandler();
-
-                const [contentCardsInstance] = ContentCards.mock.instances;
-
-                // Assert
-                expect(contentCardsInstance.getTitleCard)
                     .toHaveBeenCalledBefore(contentCardsInstance.output);
             });
 
@@ -421,9 +398,6 @@ describe('BrazeDispatcher operation', () => {
             ContentCards.prototype.removeDuplicateContentCards.mockReturnThis();
             ContentCards.prototype.output.mockReturnValue({
                 cards: rawCards,
-                rawCards
-            });
-            ContentCards.prototype.outputGroups.mockReturnValue({
                 groups: groupedCards,
                 rawCards
             });

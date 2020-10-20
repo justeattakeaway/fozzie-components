@@ -368,7 +368,7 @@ describe('`contentCardService`', () => {
             // Act
             const {
                 groups: contentCards
-            } = service.arrangeCardsByTitles().outputGroups();
+            } = service.arrangeCardsByTitles().output();
 
             // Assert
             expect(contentCards).toHaveLength(4);
