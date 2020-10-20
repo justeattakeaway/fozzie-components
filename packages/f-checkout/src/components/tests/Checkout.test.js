@@ -1,21 +1,35 @@
 import { shallowMount } from '@vue/test-utils';
 import VueCheckout from '../Checkout.vue';
+import { VALID_CHECKOUT_TYPES } from '../../constants';
 
 describe('Checkout', () => {
-    const propsData = {};
-
     it('should be defined', () => {
+        const propsData = {};
         const wrapper = shallowMount(VueCheckout, { propsData });
         expect(wrapper.exists()).toBe(true);
     });
 
-    it('have a button', () => {
-        const wrapper = shallowMount(VueCheckout, { propsData });
-        const button = wrapper.find("[data-test-id='confirm-payment-submit-button']");
-        expect(button.exists()).toBe(true);
+    describe('props ::', () => {
+        describe('checkoutType ::', () => {
+            it.each(VALID_CHECKOUT_TYPES)('should set load the component as expected if checkoutType=%p is specified', definedType => {
+                // Arrange
+                const propsData = {
+                    checkoutType: definedType
+                };
+
+                // Act
+                const wrapper = shallowMount(VueCheckout, { propsData });
+                const selectedComponent = wrapper.find('[data-test-id="checkout-component-type"]');
+
+                // Assert
+                expect(selectedComponent.element.tagName).toMatchSnapshot();
+            });
+        });
     });
 
     describe('computed ::', () => {
+        const propsData = {};
+
         const data = () => ({
             firstName: 'name'
         });

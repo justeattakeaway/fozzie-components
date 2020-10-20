@@ -13,12 +13,13 @@
             :class="$style['c-card--dimensions']">
             <form action="post">
                 <component
-                    :is="type"
+                    :is="checkoutType"
                     :mobile-number="mobileNumber"
-                    :address="address" />
+                    :address="address"
+                    data-test-id='checkout-component-type' />
 
                 <form-selector
-                    :type="type" />
+                    :type="checkoutType" />
                 <user-note />
                 <button
                     :class="[
@@ -69,7 +70,7 @@ export default {
             type: String,
             default: ''
         },
-        type: {
+        checkoutType: {
             type: String,
             default: 'Collection',
             validator: value => (VALID_CHECKOUT_TYPES.indexOf(value) !== -1)
