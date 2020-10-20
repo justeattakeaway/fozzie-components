@@ -7,7 +7,7 @@ v0.1.1
 ------------------------------
 *October 20, 2020*
 
-### Added
+### Changed
 - Removing unwanted comment from the code.
 
 
