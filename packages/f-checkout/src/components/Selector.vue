@@ -91,7 +91,6 @@ $form-input-borderColour--focus           : $grey--dark;
 .o-form-select--float {
     .o-form-select-label {
         @include font-size(body-s);
-        // line-height: 1.29;
         top: 15px;
     }
 
