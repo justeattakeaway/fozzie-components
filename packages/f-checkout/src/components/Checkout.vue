@@ -21,15 +21,19 @@
                     :type="type" />
                 <user-note />
                 <button
-                    :class="[$style['o-btn--allergy'],
-                             'o-btnLink']"
+                    :class="[
+                        $style['o-btn--allergy'],
+                        'o-btnLink'
+                    ]"
                     data-test-id="allergy-button">
                     {{ allergyText }}
                 </button>
 
                 <button
-                    :class="[$style['o-btn--payment'],
-                             'o-btn', 'o-btn--primary', 'o-btn--wide']"
+                    :class="[
+                        $style['o-btn--payment'],
+                        'o-btn', 'o-btn--primary', 'o-btn--wide'
+                    ]"
                     data-test-id="confirm-payment-submit-button">
                     {{ buttonText }}
                 </button>
@@ -41,6 +45,7 @@
 <script>
 import { globalisationServices } from '@justeat/f-services';
 import Card from '@justeat/f-card';
+import { VALID_CHECKOUT_TYPES } from '../constants';
 import '@justeat/f-card/dist/f-card.css';
 import Collection from './Collection.vue';
 import Delivery from './Delivery.vue';
@@ -66,7 +71,8 @@ export default {
         },
         type: {
             type: String,
-            default: 'Collection'
+            default: 'Collection',
+            validator: value => (VALID_CHECKOUT_TYPES.indexOf(value) !== -1)
         }
     },
 
