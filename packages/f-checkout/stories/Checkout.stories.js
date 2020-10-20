@@ -12,12 +12,12 @@ export default {
 export const Checkout = () => ({
     components: { VueCheckout },
     props: {
-        type: {
-            default: select('type', VALID_CHECKOUT_TYPES)
+        checkoutType: {
+            default: select('checkoutType', VALID_CHECKOUT_TYPES)
         }
     },
     template:
-        '<vue-checkout :type="type" />'
+        '<vue-checkout :checkoutType="checkoutType" />'
 });
 
 Checkout.parameters = {
