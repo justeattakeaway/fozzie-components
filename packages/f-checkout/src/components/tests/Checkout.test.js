@@ -29,16 +29,17 @@ describe('Checkout', () => {
 
     describe('computed ::', () => {
         const propsData = {};
-
-        const data = () => ({
-            firstName: 'name'
-        });
+        const data = { firstName: 'name' };
 
         describe('name ::', () => {
-            it('should capitalize `firstName` data', () => {
-                // Arrange & Act
-                const wrapper = shallowMount(VueCheckout, { propsData, data });
+            it('should capitalize `firstName` data', async () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, { propsData });
                 const name = wrapper.find("[data-test-id='checkout-card-component']");
+
+                // Act
+                wrapper.setData(data);
+                await wrapper.vm.$nextTick();
 
                 // Assert
                 expect(name.props('cardHeading')).toContain('Name');
@@ -46,10 +47,14 @@ describe('Checkout', () => {
         });
 
         describe('title ::', () => {
-            it('should add `name` to title text', () => {
-                // Arrange & Act
-                const wrapper = shallowMount(VueCheckout, { propsData, data });
+            it('should add `name` to title text', async () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, { propsData });
                 const name = wrapper.find("[data-test-id='checkout-card-component']");
+
+                // Act
+                wrapper.setData(data);
+                await wrapper.vm.$nextTick();
 
                 // Assert
                 expect(name.props('cardHeading')).toEqual('Name, confirm your details');
