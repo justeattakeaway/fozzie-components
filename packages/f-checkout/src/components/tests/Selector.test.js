@@ -23,7 +23,7 @@ describe('Selector', () => {
                 expect(selector.classes()).toContain('o-form-select--float');
             });
 
-            it('should remove class to display label centrally when  null', () => {
+            it('should remove class to display label centrally when null', () => {
                 // Arrange & Act
                 const wrapper = shallowMount(Selector, { propsData });
                 const selector = wrapper.find("[data-test-id='form-select']");
