@@ -13,6 +13,7 @@ v0.3.0
 ### Added
 - Selector unit tests
 
+
 v0.2.0
 ------------------------------
 *October 15, 2020*
