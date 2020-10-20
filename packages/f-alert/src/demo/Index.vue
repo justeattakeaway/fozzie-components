@@ -9,7 +9,7 @@
         <vue-alert
             locale="en-GB"
             type="success"
-            :isDismissable="true"
+            :is-dismissable="true"
             heading="Title of the alert">
             You can put any HTML here!
         </vue-alert>

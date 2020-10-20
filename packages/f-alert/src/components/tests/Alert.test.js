@@ -81,7 +81,7 @@ describe('Alert', () => {
             const dismissSpy = jest.spyOn(VueAlert.methods, 'dismiss');
 
             const wrapper = shallowMount(VueAlert, {
-                propsData: { ...defaultPropsData, isDismissable: true },
+                propsData: { ...defaultPropsData, isDismissable: true }
             });
 
             // Act
