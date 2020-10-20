@@ -6,16 +6,28 @@
         <meta
             name="viewport"
             content="width=device-width, initial-scale=1">
-        <content-cards />
+        <content-cards
+            api-key="test"
+            user-id="test"
+            @error="handleErrors" />
     </div>
 </template>
 
 <script>
 import ContentCards from '@/components/ContentCards.vue';
+import makeServer from './mockServer';
 
 export default {
     components: {
         ContentCards
+    },
+    created () {
+        makeServer();
+    },
+    methods: {
+        handleErrors (error) {
+            console.log(error);
+        }
     }
 };
 </script>

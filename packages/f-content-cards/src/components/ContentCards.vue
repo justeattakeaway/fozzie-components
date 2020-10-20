@@ -255,6 +255,7 @@ export default {
          * @return {Promise<void>}
          **/
         setupMetadata (apiKey, userId, enableLogging = false) {
+            console.log('test');
             return initialiseMetadataDispatcher({
                 apiKey,
                 userId,
@@ -266,9 +267,11 @@ export default {
                 }
             })
                 .then(dispatcher => {
+                    console.log('test2');
                     this.metadataDispatcher = dispatcher;
                 })
                 .catch(error => {
+                    console.log(error);
                     this.$emit('on-error', error);
                 });
         },
