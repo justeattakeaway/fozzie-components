@@ -9,8 +9,7 @@
         >
         <registration
             locale="en-GB"
-            show-login-link=true
-            class="registration-form" />
+            show-login-link=true />
     </div>
 </template>
 
@@ -29,10 +28,7 @@ export default {
 
 body {
     margin: 0;
-    background: #f9fafb;
+    background-color: #f9fafb;
 }
 
-.registration-form {
-    margin-top: 100px;
-}
 </style>

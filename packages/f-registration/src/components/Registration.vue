@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div
+        :class="$style['c-registration-form']">
         <card
             :data-theme-registration="theme"
             :card-heading="copy.labels.createAccountTitle"
@@ -443,6 +444,9 @@ export default {
 <style lang="scss" module>
 
 // Form styling
+.c-registration-form {
+    margin-top: 100px;
+}
 
 .o-form {
     @include font-size(body-l);
