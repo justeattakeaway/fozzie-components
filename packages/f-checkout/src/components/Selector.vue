@@ -3,13 +3,13 @@
         <label
             for="delivery-time"
             :class="$style['o-selector-label']">
-            Delivery time
+            {{ type }} time
         </label>
         <select
             id="delivery-time"
             :class="$style['o-selector-input']">
             <option
-                v-for="(time, index) in deliveryTimes"
+                v-for="(time, index) in times"
                 :key="index"
                 :value="time">
                 {{ time }}
@@ -21,9 +21,14 @@
 <script>
 export default {
     props: {
-        deliveryTimes: {
+        times: {
             type: Array,
             default: () => ['', 'As soon as possible', 'Today in 5 minutes']
+        },
+
+        type: {
+            type: String,
+            default: null
         }
     }
 };

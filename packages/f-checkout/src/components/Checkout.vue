@@ -17,7 +17,8 @@
                     :mobile-number="mobileNumber"
                     :address="address" />
 
-                <form-selector />
+                <form-selector
+                    :type="type" />
                 <user-note />
                 <button
                     :class="[$style['o-btn--allergy'],
