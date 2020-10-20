@@ -20,6 +20,7 @@
 
                 <form-selector
                     :type="checkoutType" />
+
                 <user-note />
                 <button
                     :class="[
@@ -164,7 +165,7 @@ $line-height                              : 16px;
         @include font-size(body-l);
         font-weight: $font-weight-bold;
         line-height: $line-height;
-        margin-bottom: spacing(x1);
+        margin-bottom: spacing(x0.5);
     }
 
     .o-btn--payment {
