@@ -60,7 +60,7 @@
                     label-style="inline" />
 
                 <form-selector />
-                <user-note />
+                <user-note data-test-id='user-note'/>
                 <button
                     :class="[$style['o-btn--allergy'],
                              'o-btnLink']"

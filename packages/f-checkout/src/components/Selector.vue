@@ -7,7 +7,8 @@
         </label>
         <select
             id="delivery-time"
-            :class="$style['o-selector-input']">
+            :class="$style['o-selector-input']"
+            data-test-id='delivery-time'>
             <option
                 v-for="(time, index) in deliveryTimes"
                 :key="index"
