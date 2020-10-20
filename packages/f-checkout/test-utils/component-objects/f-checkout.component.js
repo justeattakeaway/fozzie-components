@@ -21,7 +21,7 @@ exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
 
 /**
  * @description
- * Inputs address details into the checkout component
+ * Inputs address details into the checkout component.
  *
  * @param {Object} addressInfo
  * @param {String} addressInfo.mobileNumber The user's mobile number
@@ -41,7 +41,7 @@ exports.submitCheckoutForm = (addressInfo) => {
 
 /**
  * @description
- * Sets the value of the delivery time dropdown based on visible text .
+ * Sets the value of the delivery time dropdown based on visible text.
  *
  * @param {String} deliveryTimeText The text visible text value of the delivery time
  */
@@ -61,7 +61,7 @@ exports.inputUserNote = (userNote) => {
 
 /**
  * @description
- * Submits the checkout form
+ * Submits the checkout form.
  */
 exports.submit = () => {
     goToPaymentButton().click();
