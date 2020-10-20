@@ -281,7 +281,7 @@ describe('BrazeDispatcher operation', () => {
                 });
             });
 
-            it('should instantiate ContentCards and call required methods in order up to output method', () => {
+            it('should instantiate ContentCards and call required methods in order of [removeDuplicateContentCards, filterCards, getTitleCard]', () => {
                 // Arrange & Act
                 contentCardsHandler();
 
@@ -299,6 +299,7 @@ describe('BrazeDispatcher operation', () => {
 
                 const [contentCardsInstance] = ContentCards.mock.instances;
 
+                // Assert
                 expect(contentCardsInstance.arrangeCardsByTitles)
                     .toHaveBeenCalledBefore(contentCardsInstance.outputGroups);
             });
@@ -309,6 +310,7 @@ describe('BrazeDispatcher operation', () => {
 
                 const [contentCardsInstance] = ContentCards.mock.instances;
 
+                // Assert
                 expect(contentCardsInstance.getTitleCard)
                     .toHaveBeenCalledBefore(contentCardsInstance.output);
             });
