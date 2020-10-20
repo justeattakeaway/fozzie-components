@@ -36,9 +36,9 @@ class ContentCards {
     constructor (appboy = {}, opts = {}) {
         const { cards = [] } = appboy;
         const { enabledCardTypes = [] } = opts;
-        this.enabledCardTypes = enabledCardTypes.length ?
-            enabledCardTypes :
-            defaultEnabledCardTypes;
+        this.enabledCardTypes = enabledCardTypes.length
+            ? enabledCardTypes
+            : defaultEnabledCardTypes;
         this.appboy = appboy;
         this.rawCards = cards;
         this.cards = cards.map(transformCardData);
@@ -127,8 +127,8 @@ class ContentCards {
         const index = findIndex(
             this.cards,
             card => card.type === 'Terms_And_Conditions_Card' &&
-                    card.url &&
-                    card.pinned
+                card.url &&
+                card.pinned
         );
         const [titleCard] = index > -1 ? this.cards.splice(index, 1) : [{}];
         this.titleCard = titleCard;
@@ -160,8 +160,8 @@ class ContentCards {
         this.cards = orderBy(this.cards, 'updated').filter((contentCard, index, item) => index ===
             findIndex(
                 item,
-                card => (card.title === contentCard.title &&
-                    card.type === contentCard.type)
+                card => card.title === contentCard.title &&
+                    card.type === contentCard.type
             ));
         return this;
     }
