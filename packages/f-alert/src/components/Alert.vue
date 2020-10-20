@@ -12,7 +12,7 @@
                 :class="[$style['c-alert-icon'],
                          $style[`c-alert-icon--${type}`]]"
                 data-test-id="alert-icon" />
-            <!-- TODO: make this dynamic. See https://skipthedishes.atlassian.net/browse/WCB-1219 -->
+            <!-- TODO: make this dynamic. Find related ticket ;) -->
             <h2
                 :class="$style['c-alert-heading']"
                 data-test-id="alert-heading">
