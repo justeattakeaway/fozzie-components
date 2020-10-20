@@ -416,16 +416,19 @@ export default {
                     thrownErrors = error.response.data.errors;
                 }
 
+                this.$emit(EventNames.CreateAccountFailure, thrownErrors);
+
                 if (Array.isArray(thrownErrors)) {
                     if (thrownErrors.some(thrownError => thrownError.errorCode === '409')) {
                         this.shouldShowEmailAlreadyExistsError = true;
+                    } else if (thrownErrors.some(thrownError => thrownError.errorCode === '403')) {
+                        window.location.href = this.copy.navLinks.login.url;
                     } else {
                         this.genericErrorMessage = thrownErrors[0].description || 'Something went wrong, please try again later';
                     }
                 } else {
                     this.genericErrorMessage = error;
                 }
-                this.$emit(EventNames.CreateAccountFailure, thrownErrors);
             } finally {
                 this.shouldDisableCreateAccountButton = false;
             }
