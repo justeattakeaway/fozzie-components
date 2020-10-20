@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.1.0
 ------------------------------
-*October 13, 2020*
+*October 20, 2020*
 
 ### Added
 - Initial version with support for `danger`, `warning`, `success` and `info` dismissable/non-dismissable alerts.
