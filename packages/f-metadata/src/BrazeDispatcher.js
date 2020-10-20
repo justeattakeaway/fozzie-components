@@ -36,6 +36,25 @@ function interceptInAppMessagesHandler (message) {
 }
 
 /**
+ * Takes Callbacks and fires each one with appropriate cards.
+ * @param callbacks
+ * @param contentCardsSelection
+ * @param group
+ * @returns {*[]|*}
+ */
+function cardCallbackHandler (callbacks, contentCardsSelection, group = false) {
+    if (callbacks.length > 0) {
+        const { cards, rawCards } = group ? contentCardsSelection
+            .arrangeCardsByTitles()
+            .outputGroups() :
+            contentCardsSelection.output();
+        callbacks.forEach(callback => callback(cards));
+        return rawCards;
+    }
+    return [];
+}
+
+/**
  * Internal handler for content cards that dispatches to component-registered callbacks
  * @param postCardsAppboy
  * @this BrazeDispatcher
@@ -44,29 +63,14 @@ function contentCardsHandler (postCardsAppboy) {
     this.refreshRequested = false;
 
     // don't output straight away as we need to create grouped output as well as the normal output
-    const preCallbackSelection = new ContentCards(postCardsAppboy, { enabledCardTypes: this.dispatcherOptions.enabledCardTypes })
+    const contentCardsSelection = new ContentCards(postCardsAppboy, { enabledCardTypes: this.dispatcherOptions.enabledCardTypes })
         .removeDuplicateContentCards()
         .filterCards()
         .getTitleCard();
 
-    if (this.cardsCallbacks.length > 0) {
-        // cards and raw cards
-        const { cards, rawCards } = preCallbackSelection.output();
-        // cards in ungrouped format returned via callback
-        this.cardsCallbacks.forEach(callback => callback(cards));
-        // set raw cards
-        this.rawCards = rawCards;
-    }
-    if (this.groupedCardsCallback.length > 0) {
-        // grouped cards
-        const { groups, rawCards } = preCallbackSelection
-            .arrangeCardsByTitles()
-            .outputGroups();
-        // cards in grouped format returned via callback
-        this.groupedCardsCallback.forEach(callback => callback(groups));
-        // set raw cards only if above is not set
-        if (this.rawCards.length === 0) this.rawCards = rawCards;
-    }
+    this.rawCards = cardCallbackHandler(this.cardsCallbacks, contentCardsSelection);
+    const rawCards = cardCallbackHandler(this.groupedCardsCallback, contentCardsSelection, true);
+    if (this.rawCards.length === 0) this.rawCards = rawCards;
 
     this.rawCardIndex = Object.fromEntries(this.rawCards.map((rawCard, idx) => [rawCard.id, idx]));
 }
