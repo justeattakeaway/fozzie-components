@@ -9,7 +9,6 @@
                 :is="handleCustomCardType(contentCard.type)"
                 :key="`${cardIndex}_${contentCard.id}`"
                 :card="contentCard"
-                :title="title"
                 :tenant="tenant"
                 :data-test-id="testIdForItemWithIndex(cardIndex)"
             />
@@ -38,6 +37,7 @@ export const CARDSOURCE_CUSTOM = 'custom';
  * @returns {{contentCTA, customVoucherCode, contentId: *, contentAction: *, contentPosition, contentTitle: *, contentType: string}}
  */
 const createMetadataCardEvent = (contentAction, card) => {
+    // console.log(card);
     const {
         id: contentId,
         title: contentTitle,
@@ -255,7 +255,6 @@ export default {
          * @return {Promise<void>}
          **/
         setupMetadata (apiKey, userId, enableLogging = false) {
-            console.log('test');
             return initialiseMetadataDispatcher({
                 apiKey,
                 userId,
@@ -267,11 +266,9 @@ export default {
                 }
             })
                 .then(dispatcher => {
-                    console.log('test2');
                     this.metadataDispatcher = dispatcher;
                 })
                 .catch(error => {
-                    console.log(error);
                     this.$emit('on-error', error);
                 });
         },
@@ -353,6 +350,7 @@ export default {
          * @return {string|boolean}
          */
         handleCustomCardType (type) {
+            console.log(type);
             switch (type) {
                 case 'Anniversary_Card_1':
                 case 'Voucher_Card_1':

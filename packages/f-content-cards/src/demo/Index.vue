@@ -9,6 +9,7 @@
         <content-cards
             api-key="test"
             user-id="test"
+            :enabled-card-types="enabledCardTypes"
             @error="handleErrors" />
     </div>
 </template>
@@ -21,6 +22,12 @@ export default {
     components: {
         ContentCards
     },
+    data: () => ({
+        enabledCardTypes: [
+            'Voucher_Card_1',
+            'Promotion_Card_1'
+        ]
+    }),
     created () {
         makeServer();
     },
