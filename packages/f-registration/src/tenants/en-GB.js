@@ -21,7 +21,7 @@ export default {
         },
         login: {
             text: 'Already on Just Eat?',
-            url: '/login'
+            url: '/account/login'
         }
     },
 
