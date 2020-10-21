@@ -38,7 +38,7 @@
             input-type="text"
             label-style="inline" />
 
-        <form-selector />
+        <form-selector :type="Delivery" />
     </div>
 </template>
 
@@ -82,9 +82,11 @@ export default {
         @include font-size(body-l);
     }
 }
+
 .l-addressGroup {
     margin: spacing(x2) 0 spacing(x4) 0;
     @include font-size(body-s);
+
     div {
         margin-bottom: -17px;
     }

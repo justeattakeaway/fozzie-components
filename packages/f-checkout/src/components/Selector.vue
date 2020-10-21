@@ -8,7 +8,7 @@
         <label
             for="delivery-time"
             :class="$style['o-form-select-label']">
-            Delivery time
+            {{ type }} time
         </label>
         <select
             id="delivery-time"
@@ -30,6 +30,11 @@ export default {
         deliveryTimes: {
             type: Array,
             default: () => ['', 'As soon as possible', 'Today in 5 minutes']
+        },
+
+        type: {
+            type: String,
+            default: null
         }
     },
 

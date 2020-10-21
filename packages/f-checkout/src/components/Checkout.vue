@@ -51,6 +51,7 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
+import { VALID_CHECKOUT_TYPES } from '../constants';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
@@ -77,7 +78,8 @@ export default {
 
         checkoutType: {
             type: String,
-            default: 'Delivery'
+            default: 'Delivery',
+            validator: value => (VALID_CHECKOUT_TYPES.indexOf(value) !== -1)
         }
     },
 
@@ -150,15 +152,6 @@ $line-height                              : 16px;
 
         label {
             @include font-size(body-l);
-        }
-    }
-
-    .l-addressGroup {
-        margin: spacing(x2) 0 spacing(x4) 0;
-        @include font-size(body-s);
-
-        div {
-            margin-bottom: -17px;
         }
     }
 
