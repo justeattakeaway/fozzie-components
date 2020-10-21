@@ -135,7 +135,7 @@ describe('Registration', () => {
 
             it('should emit login blocked event when service responds with a 403', async () => {
                 // Arrange
-                const err = { response: { data: { faultId: '123', traceId: '123', errors: [{ description: 'Not authorized.', errorCode: '403' }] } } };
+                const err = { response: { data: { faultId: '123', traceId: '123', errors: [{ description: 'Forbidden.', errorCode: '403' }] } } };
                 RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
                 const wrapper = mountComponentAndAttachToDocument();
                 Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });

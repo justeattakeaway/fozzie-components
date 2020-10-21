@@ -422,6 +422,7 @@ export default {
                         this.shouldShowEmailAlreadyExistsError = true;
                     } else if (thrownErrors.some(thrownError => thrownError.errorCode === '403')) {
                         this.$emit(EventNames.LoginBlocked);
+
                         shouldEmitCreateAccountFailure = false;
                     } else {
                         this.genericErrorMessage = thrownErrors[0].description || 'Something went wrong, please try again later';

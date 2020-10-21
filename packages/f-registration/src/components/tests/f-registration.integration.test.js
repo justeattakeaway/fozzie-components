@@ -83,7 +83,7 @@ describe('Registration API service', () => {
             traceId: 'H3TKh4QSJUSwVBCBqEtkKw',
             errors: [
                 {
-                    description: 'Not authorized.',
+                    description: 'Forbidden.',
                     errorCode: '403'
                 }
             ]
