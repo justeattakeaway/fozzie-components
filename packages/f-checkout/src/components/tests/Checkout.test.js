@@ -1,30 +1,45 @@
 import { shallowMount } from '@vue/test-utils';
+import { VALID_CHECKOUT_TYPES } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 
 describe('Checkout', () => {
-    const propsData = {};
-
     it('should be defined', () => {
+        const propsData = {};
         const wrapper = shallowMount(VueCheckout, { propsData });
         expect(wrapper.exists()).toBe(true);
     });
 
-    it('have a button', () => {
-        const wrapper = shallowMount(VueCheckout, { propsData });
-        const button = wrapper.find("[data-test-id='confirm-payment-submit-button']");
-        expect(button.exists()).toBe(true);
+    describe('props ::', () => {
+        describe('checkoutType ::', () => {
+            it.each(VALID_CHECKOUT_TYPES)('should set load the component as expected if checkoutType=%p is specified', definedType => {
+                // Arrange
+                const propsData = {
+                    checkoutType: definedType
+                };
+
+                // Act
+                const wrapper = shallowMount(VueCheckout, { propsData });
+                const selectedComponent = wrapper.find('[data-test-id="checkout-component-type"]');
+
+                // Assert
+                expect(selectedComponent.element.tagName).toMatchSnapshot();
+            });
+        });
     });
 
     describe('computed ::', () => {
-        const data = () => ({
-            firstName: 'name'
-        });
+        const propsData = {};
+        const data = { firstName: 'name' };
 
         describe('name ::', () => {
-            it('should capitalize `firstName` data', () => {
-                // Arrange & Act
-                const wrapper = shallowMount(VueCheckout, { propsData, data });
+            it('should capitalize `firstName` data', async () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, { propsData });
                 const name = wrapper.find("[data-test-id='checkout-card-component']");
+
+                // Act
+                wrapper.setData(data);
+                await wrapper.vm.$nextTick();
 
                 // Assert
                 expect(name.props('cardHeading')).toContain('Name');
@@ -32,10 +47,14 @@ describe('Checkout', () => {
         });
 
         describe('title ::', () => {
-            it('should add `name` to title text', () => {
-                // Arrange & Act
-                const wrapper = shallowMount(VueCheckout, { propsData, data });
+            it('should add `name` to title text', async () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, { propsData });
                 const name = wrapper.find("[data-test-id='checkout-card-component']");
+
+                // Act
+                wrapper.setData(data);
+                await wrapper.vm.$nextTick();
 
                 // Assert
                 expect(name.props('cardHeading')).toEqual('Name, confirm your details');

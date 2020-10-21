@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkout props :: checkoutType :: should set load the component as expected if checkoutType="Collection" is specified 1`] = `"COLLECTION-STUB"`;
+
+exports[`Checkout props :: checkoutType :: should set load the component as expected if checkoutType="Delivery" is specified 1`] = `"DELIVERY-STUB"`;

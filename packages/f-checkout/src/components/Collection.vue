@@ -8,6 +8,8 @@
 import FormSelector from './Selector.vue';
 
 export default {
+    name: 'Collection',
+
     components: {
         FormSelector
     },

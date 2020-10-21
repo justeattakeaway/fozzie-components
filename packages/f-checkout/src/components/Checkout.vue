@@ -51,11 +51,12 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
-import { VALID_CHECKOUT_TYPES } from '../constants';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
+import Collection from './Collection.vue';
 import Delivery from './Delivery.vue';
+import { VALID_CHECKOUT_TYPES } from '../constants';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import UserNote from './UserNote.vue';
 import tenantConfigs from '../tenants';
@@ -65,6 +66,7 @@ export default {
 
     components: {
         Card,
+        Collection,
         Delivery,
         FormField,
         UserNote
