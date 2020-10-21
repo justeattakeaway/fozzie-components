@@ -1758,15 +1758,20 @@
     "@justeat/f-icons" "2.3.0"
     babel-helper-vue-jsx-merge-props "2.0.3"
 
+"@justeat/fozzie-colour-palette@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie-colour-palette/-/fozzie-colour-palette-3.0.0.tgz#55eb60de93c4785049eb8abc82b760e57b3ca9c0"
+  integrity sha512-WZXfILucrW3XxwHvwouFg0JEHe13QFBPHNNKKakNOnMEsU0kiwxtd042JjRT3ZwkD5r89hdNa6YLtLsraaFq5w==
+
 "@justeat/fozzie-colour-palette@3.0.0-beta.6":
   version "3.0.0-beta.6"
   resolved "https://registry.yarnpkg.com/@justeat/fozzie-colour-palette/-/fozzie-colour-palette-3.0.0-beta.6.tgz#3d66dd63b48dacf649f003a3b3c7c39ecf7d94b7"
   integrity sha512-DbUvzLpVr2Q9/6QTF58/fomb1YOdn8ytGE+PLo9prNlpc24ZaFEDPfHzK63nyAvmmw1VboRNRzOpffArdW4FNQ==
 
-"@justeat/fozzie@4.0.0-beta.0":
-  version "4.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-4.0.0-beta.0.tgz#66d7ee71a90bdff3bc4b67994305d888fe8f7c64"
-  integrity sha512-/uElS2zDFD8A7DiA5bxbBmjKbUGI00u4bApJVUwCRaGBgqScEwrI9ya1cYt5/KlTD5YtFef3iOd7QppilSb5mQ==
+"@justeat/fozzie@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-4.1.0.tgz#cd9cdb1cef5f7e0b0ee13482c271292acd0dfe2d"
+  integrity sha512-6q762UPmMjIpjH70Oj+M5DLRy5AU04Nkpzq4qH1LC2BR96zKZtsqlxL4fSIrnf3DHGeKRpbfr9KaXgWAAhjkXA==
   dependencies:
     "@justeat/f-dom" "1.1.0"
     "@justeat/f-logger" "0.8.1"
