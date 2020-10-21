@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.5.0
 ------------------------------
-*October 21, 2020*
+*October 22, 2020*
 
 ### Added
 - Collection component to replicate ConsumerWeb.
