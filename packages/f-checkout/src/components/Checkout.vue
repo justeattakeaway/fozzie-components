@@ -18,7 +18,7 @@
                     data-test-id='checkout-component-type' />
 
                 <form-selector
-                    :label="copy.labels.timeSelector" />
+                    :type="checkoutType" />
 
                 <user-note />
                 <button

@@ -1,6 +1,7 @@
 <template>
     <div data-test-id='delivery-component'>
         <form-field
+            v-model="mobileNumber"
             :class="$style['c-formField']"
             name="mobile-number"
             data-test-id="input-mobile-number"
@@ -10,6 +11,7 @@
 
         <div :class="$style['l-addressGroup']">
             <form-field
+                v-model="address.line1"
                 :class="$style['c-formField']"
                 name="address-line-1"
                 data-test-id="input-address-line-1"
@@ -18,6 +20,7 @@
                 label-style="inline" />
 
             <form-field
+                v-model="address.line2"
                 :class="$style['c-formField']"
                 name="address-line-2"
                 data-test-id="input-address-line-2"
@@ -26,6 +29,7 @@
                 label-style="inline" />
 
             <form-field
+                v-model="address.city"
                 :class="$style['c-formField']"
                 name="address-city"
                 data-test-id="input-address-city"
@@ -35,6 +39,7 @@
         </div>
 
         <form-field
+            v-model="address.postcode"
             :class="$style['c-formField']"
             name="address-postcode"
             data-test-id="input-address-postcode"
@@ -56,6 +61,18 @@ export default {
             type: Object,
             default: () => ({})
         }
+    },
+
+    data () {
+        return {
+            mobileNumber: null,
+            address: {
+                line1: null,
+                line2: null,
+                city: null,
+                postcode: null
+            }
+        };
     }
 };
 </script>

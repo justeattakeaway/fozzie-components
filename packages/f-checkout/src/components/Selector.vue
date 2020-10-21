@@ -3,7 +3,7 @@
         <label
             for="delivery-time"
             :class="$style['o-selector-label']">
-            {{ label }}
+            {{ type }} time
         </label>
         <select
             id="delivery-time"
@@ -26,7 +26,7 @@ export default {
             default: () => ['', 'As soon as possible', 'Today in 5 minutes']
         },
 
-        label: {
+        type: {
             type: String,
             default: null
         }
