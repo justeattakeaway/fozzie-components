@@ -23,6 +23,7 @@
 
                 <component
                     :is="checkoutType"
+                    :labels="copy.labels"
                     data-test-id='checkout-component-type' />
 
                 <user-note />

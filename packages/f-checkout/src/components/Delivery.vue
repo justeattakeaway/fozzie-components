@@ -6,7 +6,7 @@
                 :class="$style['c-formField']"
                 name="address-line-1"
                 data-test-id="input-address-line-1"
-                label-text="Address line 1"
+                :label-text="labels.line1"
                 input-type="text"
                 label-style="inline" />
 
@@ -15,7 +15,7 @@
                 :class="$style['c-formField']"
                 name="address-line-2"
                 data-test-id="input-address-line-2"
-                label-text="Address line 2 (optional)"
+                :label-text="labels.line2"
                 input-type="text"
                 label-style="inline" />
 
@@ -24,7 +24,7 @@
                 :class="$style['c-formField']"
                 name="address-city"
                 data-test-id="input-address-city"
-                label-text="City"
+                :label-text="labels.city"
                 input-type="text"
                 label-style="inline" />
         </div>
@@ -34,7 +34,7 @@
             :class="$style['c-formField']"
             name="address-postcode"
             data-test-id="input-address-postcode"
-            label-text="Postcode"
+            :label-text="labels.postcode"
             input-type="text"
             label-style="inline" />
 
@@ -51,6 +51,13 @@ export default {
     components: {
         FormField,
         FormSelector
+    },
+
+    props: {
+        labels: {
+            type: Object,
+            default: () => ({})
+        }
     },
 
     data () {
