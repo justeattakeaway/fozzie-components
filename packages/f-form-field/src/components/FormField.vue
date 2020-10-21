@@ -1,7 +1,8 @@
 <template>
     <div
         :data-theme-formfield="theme"
-        :class="$style['c-formField']">
+        :class="$style['c-formField']"
+        data-test-id="form-field-component">
         <div
             :class="$style['c-formField-inputWrapper']">
             <form-label
@@ -28,7 +29,8 @@
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
                 :is-inline="isInline"
-                data-js-test="inlineLabel">
+                data-js-test="inlineLabel"
+                 data-test-id="testLabel">
                 {{ labelText }}
             </form-label>
         </div>
