@@ -27,7 +27,7 @@
                         'o-btnLink'
                     ]"
                     data-test-id="allergy-button">
-                    {{ allergyText }}
+                    {{ copy.allergyText }}
                 </button>
 
                 <button
@@ -70,6 +70,7 @@ export default {
             type: String,
             default: ''
         },
+
         checkoutType: {
             type: String,
             default: 'Collection',
@@ -93,8 +94,7 @@ export default {
                 city: null,
                 postcode: null
             },
-            buttonText: 'Go to payment',
-            allergyText: 'If you or someone you’re ordering for has a food allergy or intolerance, click here'
+            buttonText: 'Go to payment'
         };
     },
 
