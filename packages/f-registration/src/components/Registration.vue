@@ -261,6 +261,11 @@ export default {
             type: String,
             required: true
         },
+        createAccountTimeout: {
+            type: Number,
+            required: false,
+            default: 1000
+        },
         showLoginLink: {
             type: Boolean,
             default: true
@@ -408,24 +413,32 @@ export default {
                     registrationSource: 'Native',
                     marketingPreferences: []
                 };
-                await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData);
+                await RegistrationServiceApi.createAccount(this.createAccountUrl, this.tenant, registrationData, this.createAccountTimeout);
                 this.$emit(EventNames.CreateAccountSuccess);
             } catch (error) {
                 let thrownErrors = error;
                 if (error && error.response && error.response.data && error.response.data.errors) {
                     thrownErrors = error.response.data.errors;
                 }
+                let shouldEmitCreateAccountFailure = true;
 
                 if (Array.isArray(thrownErrors)) {
                     if (thrownErrors.some(thrownError => thrownError.errorCode === '409')) {
                         this.shouldShowEmailAlreadyExistsError = true;
+                    } else if (thrownErrors.some(thrownError => thrownError.errorCode === '403')) {
+                        this.$emit(EventNames.LoginBlocked);
+
+                        shouldEmitCreateAccountFailure = false;
                     } else {
                         this.genericErrorMessage = thrownErrors[0].description || 'Something went wrong, please try again later';
                     }
                 } else {
                     this.genericErrorMessage = error;
                 }
-                this.$emit(EventNames.CreateAccountFailure, thrownErrors);
+
+                if (shouldEmitCreateAccountFailure) {
+                    this.$emit(EventNames.CreateAccountFailure, thrownErrors);
+                }
             } finally {
                 this.shouldDisableCreateAccountButton = false;
             }
