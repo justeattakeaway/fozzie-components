@@ -1,6 +1,6 @@
 <template>
     <div data-test-id='collection-component'>
-        <form-selector :type="Collection" />
+        <form-selector type="Collection" />
     </div>
 </template>
 

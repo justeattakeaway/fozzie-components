@@ -38,7 +38,7 @@
             input-type="text"
             label-style="inline" />
 
-        <form-selector :type="Delivery" />
+        <form-selector type="Delivery" />
     </div>
 </template>
 
