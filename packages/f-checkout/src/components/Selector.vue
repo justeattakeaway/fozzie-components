@@ -5,6 +5,7 @@
             $style['o-form-select'],
             (!selectedTime ? '' : $style['o-form-select--float'])
         ]">
+        {{ selectedTime }}
         <label
             for="delivery-time"
             :class="$style['o-form-select-label']">
