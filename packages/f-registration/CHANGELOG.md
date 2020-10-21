@@ -8,6 +8,7 @@ v0.36.0
 *October 20, 2020*
 ### Added
 - Handling of 403 responses in `f-registration`. 
+- New prop to set the form AJAX call timeout.
 
 
 v0.35.0
