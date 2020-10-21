@@ -12,6 +12,17 @@ v0.5.0
 - Delivery component to replicate ConsumerWeb.
 
 
+v0.3.0
+------------------------------
+*October 21, 2020*
+
+### Changed
+- Selector to hide label when time selected.
+
+### Added
+- Selector unit tests
+
+
 v0.2.0
 ------------------------------
 *October 15, 2020*
