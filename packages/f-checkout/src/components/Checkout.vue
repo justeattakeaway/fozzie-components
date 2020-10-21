@@ -14,12 +14,11 @@
             <form action="post">
                 <component
                     :is="checkoutType"
-                    :mobile-number="mobileNumber"
-                    :address="address"
+                    :labels="copy.labels"
                     data-test-id='checkout-component-type' />
 
                 <form-selector
-                    :type="checkoutType" />
+                    :label="copy.labels.timeSelector" />
 
                 <user-note />
                 <button

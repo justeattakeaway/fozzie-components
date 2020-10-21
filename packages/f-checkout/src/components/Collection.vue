@@ -5,7 +5,7 @@
             :class="$style['c-formField']"
             name="mobile-number"
             data-test-id="input-mobile-number"
-            label-text="Mobile number"
+            :label-text="labels.mobileNumber"
             input-type="text"
             label-style="inline" />
     </div>
@@ -19,9 +19,9 @@ export default {
     components: { FormField },
 
     props: {
-        mobileNumber: {
-            type: String,
-            default: ''
+        labels: {
+            type: Object,
+            default: () => ({})
         }
     }
 };

@@ -1,49 +1,44 @@
 <template>
     <div data-test-id='delivery-component'>
         <form-field
-            v-model="mobileNumber"
             :class="$style['c-formField']"
             name="mobile-number"
             data-test-id="input-mobile-number"
-            label-text="Mobile number"
+            :label-text="labels.mobileNumber"
             input-type="text"
             label-style="inline" />
 
         <div :class="$style['l-addressGroup']">
             <form-field
-                v-model="address.line1"
                 :class="$style['c-formField']"
                 name="address-line-1"
                 data-test-id="input-address-line-1"
-                label-text="Address line 1"
+                :label-text="labels.line1"
                 input-type="text"
                 label-style="inline" />
 
             <form-field
-                v-model="address.line2"
                 :class="$style['c-formField']"
                 name="address-line-2"
                 data-test-id="input-address-line-2"
-                label-text="Address line 2 (optional)"
+                :label-text="labels.line2"
                 input-type="text"
                 label-style="inline" />
 
             <form-field
-                v-model="address.city"
                 :class="$style['c-formField']"
                 name="address-city"
                 data-test-id="input-address-city"
-                label-text="City"
+                :label-text="labels.city"
                 input-type="text"
                 label-style="inline" />
         </div>
 
         <form-field
-            v-model="address.postcode"
             :class="$style['c-formField']"
             name="address-postcode"
             data-test-id="input-address-postcode"
-            label-text="Postcode"
+            :label-text="labels.postcode"
             input-type="text"
             label-style="inline" />
     </div>
@@ -57,12 +52,7 @@ export default {
     components: { FormField },
 
     props: {
-        mobileNumber: {
-            type: String,
-            default: ''
-        },
-
-        address: {
+        labels: {
             type: Object,
             default: () => ({})
         }
