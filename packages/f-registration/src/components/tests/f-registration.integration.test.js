@@ -78,13 +78,6 @@ describe('Registration API service', () => {
 
     it('responds with 403 when login blocked by ravelin or recaptcha', async () => {
         // Arrange
-        Object.defineProperty(window, 'location', {
-            value: {
-                href: 'https://www.just-eat-test.co.uk/account/register'
-            }
-        });
-
-
         axiosMock.onPost(propsData.createAccountUrl, CONSUMERS_REQUEST_DATA).reply(403, {
             faultId: '25bbe062-c53d-4fbc-9d6c-3df6127b94fd',
             traceId: 'H3TKh4QSJUSwVBCBqEtkKw',
@@ -108,7 +101,7 @@ describe('Registration API service', () => {
         await flushPromises();
 
         // Assert
-        expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-        expect(window.location.href).toBe('/account/login');
+        expect(wrapper.emitted(EventNames.LoginBlocked).length).toBe(1);
+        expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
     });
 });

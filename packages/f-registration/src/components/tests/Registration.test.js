@@ -133,17 +133,12 @@ describe('Registration', () => {
                 }
             });
 
-            it('should emit failure event when service responds with a 403 and redirect to the login page', async () => {
+            it('should emit login blocked event when service responds with a 403', async () => {
                 // Arrange
                 const err = { response: { data: { faultId: '123', traceId: '123', errors: [{ description: 'Not authorized.', errorCode: '403' }] } } };
                 RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
                 const wrapper = mountComponentAndAttachToDocument();
                 Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
-                Object.defineProperty(window, 'location', {
-                    value: {
-                        href: 'https://www.just-eat-test.co.uk/account/register'
-                    }
-                });
 
                 try {
                     // Act
@@ -151,8 +146,8 @@ describe('Registration', () => {
                     await flushPromises();
 
                     // Assert
-                    expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-                    expect(window.location.href).toBe('/account/login');
+                    expect(wrapper.emitted(EventNames.LoginBlocked).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
                 } finally {
                     wrapper.destroy();
                 }
