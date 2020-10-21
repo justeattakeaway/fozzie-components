@@ -30,7 +30,7 @@
                 :for="uniqueId"
                 :is-inline="isInline"
                 data-js-test="inlineLabel"
-                 data-test-id="testLabel">
+                data-test-id="testLabel">
                 {{ labelText }}
             </form-label>
         </div>
