@@ -1,7 +1,8 @@
 /* global danger, fail, message */
 const { pr } = danger.github;
 const bodyAndTitle = (pr.body + pr.title).toLowerCase();
-const isTrivial = bodyAndTitle.includes('#trivial');
+const isTrivial = bodyAndTitle.includes('#trivial'); // turns off all danger checks
+const isGlobalConfigUpdate = bodyAndTitle.includes('#globalconfig'); // turns off danger checks for packages outside the root
 
 if (!isTrivial) {
     const failedChangelogs = [];
@@ -42,59 +43,61 @@ if (!isTrivial) {
         /* eslint-enable no-console */
     });
 
+    // If this PR is just an internal config update, then don't run
+    // the danger checks for every sub-package (as we shouldn't mandate CHANGELOG and version bumps for this at package level)
+    if (!isGlobalConfigUpdate) {
+        /** Specific Package Checks **/
 
+        /**
+         * checkPackageDiff
+         * Checks if there is a change in the package.json for a specific package
+         * Returns with a Promise resolve() when completed
+         *
+         * @param {*} pkg
+         * @param {*} resolve
+         */
+        const checkPackageDiff = (pkg, resolve) => {
+            // Check for version update
+            const hasPackageJsonChanged = danger.git.modified_files.includes(`packages/${pkg}/package.json`);
+            const packageDiff = danger.git.JSONDiffForFile(`packages/${pkg}/package.json`);
 
-    /** Specific Package Checks **/
+            packageDiff.then(result => {
+                if (!hasPackageJsonChanged || (hasPackageJsonChanged && !result.version)) {
+                    failedVersionBumps.push(pkg);
+                }
+                resolve();
+            }, err => {
+                /* eslint-disable no-console */
+                console.log(err);
+                /* eslint-enable no-console */
+            });
+        };
 
-    /**
-     * checkPackageDiff
-     * Checks if there is a change in the package.json for a specific package
-     * Returns with a Promise resolve() when completed
-     *
-     * @param {*} pkg
-     * @param {*} resolve
-     */
-    const checkPackageDiff = (pkg, resolve) => {
-        // Check for version update
-        const hasPackageJsonChanged = danger.git.modified_files.includes(`packages/${pkg}/package.json`);
-        const packageDiff = danger.git.JSONDiffForFile(`packages/${pkg}/package.json`);
-
-        packageDiff.then(result => {
-            if (!hasPackageJsonChanged || (hasPackageJsonChanged && !result.version)) {
-                failedVersionBumps.push(pkg);
+        // Loops through each package that includes files that been modified and runs DangerJS checks for each
+        const requests = Array.from(uniqueModifiedPackages).map(pkg => {
+            // Add package to `failedChangelogs` if there isn’t a CHANGELOG entry – should update for every PR
+            if (!danger.git.modified_files.includes(`packages/${pkg}/CHANGELOG.md`)) {
+                failedChangelogs.push(pkg);
             }
-            resolve();
-        }, err => {
-            /* eslint-disable no-console */
-            console.log(err);
-            /* eslint-enable no-console */
+
+            // Add package to `failedVersionBumps` if there isn’t a package.json bump
+            return new Promise(resolve => {
+                checkPackageDiff(pkg, resolve);
+            });
         });
-    };
 
-    // Loops through each package that includes files that been modified and runs DangerJS checks for each
-    const requests = Array.from(uniqueModifiedPackages).map(pkg => {
-        // Add package to `failedChangelogs` if there isn’t a CHANGELOG entry – should update for every PR
-        if (!danger.git.modified_files.includes(`packages/${pkg}/CHANGELOG.md`)) {
-            failedChangelogs.push(pkg);
-        }
-
-        // Add package to `failedVersionBumps` if there isn’t a package.json bump
-        return new Promise(resolve => {
-            checkPackageDiff(pkg, resolve);
+        // Once all packages have been checked, if `failedVersionBumps` isn't empty, return DangerJS fail
+        Promise.all(requests).then(() => {
+            if (failedVersionBumps.length) {
+                const semverLink = 'https://docs.npmjs.com/getting-started/semantic-versioning';
+                fail(`:arrow_up: This PR should include a <a href="${semverLink}"><code>SEMVER</code></a> version bump for <strong>${failedVersionBumps.join(', ')}</strong>, so that these packages can be published once merged.`);
+            }
         });
-    });
 
-    // Once all packages have been checked, if `failedVersionBumps` isn't empty, return DangerJS fail
-    Promise.all(requests).then(() => {
-        if (failedVersionBumps.length) {
-            const semverLink = 'https://docs.npmjs.com/getting-started/semantic-versioning';
-            fail(`:arrow_up: This PR should include a <a href="${semverLink}"><code>SEMVER</code></a> version bump for <strong>${failedVersionBumps.join(', ')}</strong>, so that these packages can be published once merged.`);
+        // if `failedChangelogs` isn't empty, return DangerJS fail
+        if (failedChangelogs.length) {
+            fail(`:memo: Please include a <code>CHANGELOG</code> entry for <strong>${failedChangelogs.join(', ')}</strong>`);
         }
-    });
-
-    // if `failedChangelogs` isn't empty, return DangerJS fail
-    if (failedChangelogs.length) {
-        fail(`:memo: Please include a <code>CHANGELOG</code> entry for <strong>${failedChangelogs.join(', ')}</strong>`);
     }
 }
 
