@@ -21,56 +21,25 @@
                     input-type="text"
                     label-style="inline" />
 
-                <div :class="$style['l-addressGroup']">
-                    <form-field
-                        v-model="address.line1"
-                        :class="$style['c-formField']"
-                        name="address-line-1"
-                        data-test-id="input-address-line-1"
-                        label-text="Address line 1"
-                        input-type="text"
-                        label-style="inline" />
+                <component
+                    :is="checkoutType"
+                    data-test-id='checkout-component-type' />
 
-                    <form-field
-                        v-model="address.line2"
-                        :class="$style['c-formField']"
-                        name="address-line-2"
-                        data-test-id="input-address-line-2"
-                        label-text="Address line 2 (optional)"
-                        input-type="text"
-                        label-style="inline" />
-
-                    <form-field
-                        v-model="address.city"
-                        :class="$style['c-formField']"
-                        name="address-city"
-                        data-test-id="input-address-city"
-                        label-text="City"
-                        input-type="text"
-                        label-style="inline" />
-                </div>
-
-                <form-field
-                    v-model="address.postcode"
-                    :class="$style['c-formField']"
-                    name="address-postcode"
-                    data-test-id="input-address-postcode"
-                    label-text="Postcode"
-                    input-type="text"
-                    label-style="inline" />
-
-                <form-selector />
                 <user-note />
                 <button
-                    :class="[$style['o-btn--allergy'],
-                             'o-btnLink']"
+                    :class="[
+                        $style['o-btn--allergy'],
+                        'o-btnLink'
+                    ]"
                     data-test-id="allergy-button">
                     {{ allergyText }}
                 </button>
 
                 <button
-                    :class="[$style['o-btn--payment'],
-                             'o-btn', 'o-btn--primary', 'o-btn--wide']"
+                    :class="[
+                        $style['o-btn--payment'],
+                        'o-btn', 'o-btn--primary', 'o-btn--wide'
+                    ]"
                     data-test-id="confirm-payment-submit-button">
                     {{ buttonText }}
                 </button>
@@ -84,8 +53,8 @@ import { globalisationServices } from '@justeat/f-services';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
+import Delivery from './Delivery.vue';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
 import tenantConfigs from '../tenants';
 
@@ -94,8 +63,8 @@ export default {
 
     components: {
         Card,
+        Delivery,
         FormField,
-        FormSelector,
         UserNote
     },
 
@@ -103,6 +72,11 @@ export default {
         locale: {
             type: String,
             default: ''
+        },
+
+        checkoutType: {
+            type: String,
+            default: 'Delivery'
         }
     },
 

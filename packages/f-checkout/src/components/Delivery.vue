@@ -1,21 +1,12 @@
 <template>
     <div data-test-id='delivery-component'>
-        <form-field
-            v-model="mobileNumber"
-            :class="$style['c-formField']"
-            name="mobile-number"
-            data-test-id="input-mobile-number"
-            :label-text="labels.mobileNumber"
-            input-type="text"
-            label-style="inline" />
-
         <div :class="$style['l-addressGroup']">
             <form-field
                 v-model="address.line1"
                 :class="$style['c-formField']"
                 name="address-line-1"
                 data-test-id="input-address-line-1"
-                :label-text="labels.line1"
+                label-text="Address line 1"
                 input-type="text"
                 label-style="inline" />
 
@@ -24,7 +15,7 @@
                 :class="$style['c-formField']"
                 name="address-line-2"
                 data-test-id="input-address-line-2"
-                :label-text="labels.line2"
+                label-text="Address line 2 (optional)"
                 input-type="text"
                 label-style="inline" />
 
@@ -33,7 +24,7 @@
                 :class="$style['c-formField']"
                 name="address-city"
                 data-test-id="input-address-city"
-                :label-text="labels.city"
+                label-text="City"
                 input-type="text"
                 label-style="inline" />
         </div>
@@ -43,26 +34,27 @@
             :class="$style['c-formField']"
             name="address-postcode"
             data-test-id="input-address-postcode"
-            :label-text="labels.postcode"
+            label-text="Postcode"
             input-type="text"
             label-style="inline" />
+
+        <form-selector />
     </div>
 </template>
 
 <script>
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
+import FormSelector from './Selector.vue';
+
 export default {
-    components: { FormField },
-    props: {
-        labels: {
-            type: Object,
-            default: () => ({})
-        }
+    components: {
+        FormField,
+        FormSelector
     },
+
     data () {
         return {
-            mobileNumber: null,
             address: {
                 line1: null,
                 line2: null,
