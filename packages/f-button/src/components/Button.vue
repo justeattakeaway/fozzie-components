@@ -90,18 +90,17 @@ $btn-sizeXSmall-lineHeight      : 1;
 
 
 .o-btn {
-    display: inline-block;                      /* [1] */
-    vertical-align: middle;                     /* [2] */
-    font-family: $btn-default-font-family;      /* [3] */
-    @include font-size($btn-default-font-size); /* [3] */
-    cursor: pointer;                            /* [4] */
-    margin: 0;                                  /* [5] */
-    padding: $btn-default-padding;              /* [5, 6] */
-    overflow: visible;                          /* [7] */
+    display: inline-block;
+    vertical-align: middle;
+    font-family: $btn-default-font-family;
+    @include font-size($btn-default-font-size);
+    cursor: pointer;
+    margin: 0;
+    padding: $btn-default-padding;
+    overflow: visible;
     text-align: center;
     font-weight: $btn-default-weight;
 
-    // You may want to change this
     background-color: $btn-default-bgColor;
     border-radius: $btn-default-borderRadius;
     border: 1px solid transparent;
@@ -270,8 +269,6 @@ $btn-sizeXSmall-lineHeight      : 1;
         background-color: $orange;
     }
 }
-
-// .o-btn--sizeMedium {}
 
 .o-btn--sizeSmall {
     padding: $btn-sizeSmall-padding;
