@@ -133,6 +133,26 @@ describe('Registration', () => {
                 }
             });
 
+            it('should emit login blocked event when service responds with a 403', async () => {
+                // Arrange
+                const err = { response: { data: { faultId: '123', traceId: '123', errors: [{ description: 'Forbidden.', errorCode: '403' }] } } };
+                RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
+                const wrapper = mountComponentAndAttachToDocument();
+                Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+
+                try {
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+                    await flushPromises();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.LoginBlocked).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
+                } finally {
+                    wrapper.destroy();
+                }
+            });
+
             it('should populate generic error message and emit failure event when service responds with a 400', async () => {
                 // Arrange
                 const err = { response: { data: { faultId: '123', traceId: '123', errors: [{ description: 'The Password field is required', errorCode: '400' }] } } };

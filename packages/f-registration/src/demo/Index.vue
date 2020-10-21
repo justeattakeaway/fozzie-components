@@ -9,7 +9,8 @@
         >
         <registration
             locale="en-GB"
-            show-login-link=true
+            :show-login-link=true
+            create-account-url="/account/register"
             class="registration-form" />
     </div>
 </template>
