@@ -1,19 +1,19 @@
 <template>
     <div
+        data-test-id="form-select"
         :class="[
-            'o-form-select',
-            { 'o-form-select--float': selectedTime }
-        ]"
-        data-test-id="form-select">
+            $style['o-form-select'],
+            (!selectedTime ? '' : $style['o-form-select--float'])
+        ]">
         <label
             for="delivery-time"
-            class="o-form-select-label">
+            :class="$style['o-form-select-label']">
             Delivery time
         </label>
         <select
             id="delivery-time"
             v-model="selectedTime"
-            class="o-form-select-input">
+            :class="$style['o-form-select-input']">
             <option
                 v-for="(time, index) in deliveryTimes"
                 :key="index"
@@ -41,7 +41,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
 $form-label-colour                        : $grey--dark;
 $form-input-colour                        : $color-text;
 $form-input-bg                            : $white;
