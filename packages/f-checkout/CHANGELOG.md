@@ -10,6 +10,9 @@ v0.4.0
 ### Added
 - Address component to be displayed if `checkoutMethod` is set to 'Delivery'.
 
+### Removed
+- Address related form fields from `f-checkout`.
+
 ### Changed
 - Checkout Component to replicate Collection and Delivery in ConsumerWeb.
 - Selector to uses `method` prop to change label text.
