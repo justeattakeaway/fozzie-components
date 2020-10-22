@@ -391,7 +391,7 @@ export default {
     },
 
     mounted () {
-        if (!this.userInfo) {
+        if (this.showLoginInfo && !this.userInfo) {
             this.fetchUserInfo();
         }
 
