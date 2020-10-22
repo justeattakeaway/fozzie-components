@@ -41,7 +41,7 @@ $line-height                              : 17.5px;
     font-weight: $font-weight-bold;
 
     .c-userNote-title {
-        margin-top: spacing(x3);
+        margin-top: spacing(x2);
         @include font-size(body-l);
         color: $color-headings;
     }
