@@ -224,8 +224,10 @@ import {
     GiftIcon,
     ProfileIcon
 } from '@justeat/f-vue-icons';
-import sharedServices from '@justeat/f-services';
-import axios from 'axios';
+import {
+    axiosServices,
+    windowServices
+} from '@justeat/f-services';
 
 export default {
     components: {
@@ -395,13 +397,13 @@ export default {
             this.fetchUserInfo();
         }
 
-        sharedServices.addEvent('resize', this.onResize, 100);
+        windowServices.addEvent('resize', this.onResize, 100);
 
         this.onResize();
     },
 
     destroyed () {
-        sharedServices.removeEvent('resize', this.onResize);
+        windowServices.removeEvent('resize', this.onResize);
     },
 
     methods: {
@@ -422,7 +424,7 @@ export default {
         },
 
         onResize () {
-            this.currentScreenWidth = sharedServices.getWindowWidth();
+            this.currentScreenWidth = windowServices.getWindowWidth();
         },
 
         handleMobileNavState () {
@@ -438,11 +440,13 @@ export default {
 
         // If userInfoProp wasn't passed we make a call for userInfo on mounted hook
         fetchUserInfo () {
-            const userDetailsPromise = axios.get(this.userInfoUrl, {
+            const client = axiosServices.createClient({
                 headers: {
                     credentials: 'same-origin'
                 }
             });
+
+            const userDetailsPromise = client.get(this.userInfoUrl);
 
             userDetailsPromise.then(response => {
                 if (response.data.isAuthenticated) {
@@ -466,11 +470,13 @@ export default {
 
         // fetches the order count for the user
         fetchOrderCountAndSave () {
-            const orderCountPromise = axios.get(this.orderCountUrl, {
+            const client = axiosServices.createClient({
                 headers: {
                     credentials: 'same-origin'
                 }
             });
+
+            const orderCountPromise = client.get(this.orderCountUrl);
 
             orderCountPromise.then(data => {
                 if (data && this.isOrderCountOutOfDate) {

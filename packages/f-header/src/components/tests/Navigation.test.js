@@ -1,78 +1,54 @@
 import { shallowMount } from '@vue/test-utils';
-import axios from 'axios';
-import loggedInUserMock from './__mocks__/api.account.details.json';
+
+import asyncUserDetails from './__mocks__/api.account.details.json';
+import {
+    defaultData,
+    defaultPropsData,
+    mockGet,
+    setDesktopViewport,
+    setMobileViewport
+} from './helpers/navigation';
+
 import Navigation from '../Navigation.vue';
 
-const defaultPropsData = {
-    accountLogin: {},
-    accountLogout: {},
-    navLinks: {
-        orderHistory: {
-            text: 'Your orders',
-            url: '/order-history',
-            gtm: 'click_account_your_orders'
-        },
-        savedCards: {
-            text: 'Your saved cards',
-            url: '/account/saved-cards',
-            gtm: 'click_account_saved_cards'
-        }
+let wrapper;
+
+jest.mock('@justeat/f-services', () => ({
+    axiosServices: {
+        createClient: () => ({
+            get: mockGet
+        })
     },
-    openMenuText: 'Open menu',
-    deliveryEnquiry: {},
-    showDeliveryEnquiry: false,
-    isOrderCountSupported: true,
-    offersCopy: {},
-    showOffersLink: false,
-    showHelpLink: false,
-    userInfoProp: false,
-    headerBackgroundTheme: 'white'
-};
-
-const defaultData = {
-    userInfo: {
-        isAuthenticated: false,
-        friendlyName: 'James Fisher',
-        email: 'j.fisher@fakemail.com'
-    },
-    navIsOpen: false,
-    localOrderCountExpires: false
-};
-const asyncUserDetails = loggedInUserMock;
-
-
-const desktopWidth = 1200;
-const desktopHeight = 1024;
-const mobileWidth = 375;
-const mobileHeight = 667;
-
-const resizeWindow = (x, y) => {
-    window.innerWidth = x;
-    window.innerHeight = y;
-    window.dispatchEvent(new Event('resize'));
-};
+    windowServices: {
+        addEvent: jest.fn(),
+        getWindowWidth: jest.fn()
+    }
+}));
 
 describe('Navigation', () => {
     beforeEach(() => {
-        resizeWindow(desktopWidth, desktopHeight);
+        setDesktopViewport();
     });
 
     it('should be defined', () => {
-        const propsData = defaultPropsData;
-        const wrapper = shallowMount(Navigation, { propsData });
+        // Arrange & Act
+        wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
         wrapper.setData(defaultData);
+
+        // Assert
         expect(wrapper.exists()).toBe(true);
     });
 
     it('should show the delivery enquiry link in the navigation if `showDeliveryEnquiry: true` and the content is there', async () => {
         // Arrange
-        const propsData = {
-            ...defaultPropsData,
-            showDeliveryEnquiry: true
-        };
+        wrapper = shallowMount(Navigation, {
+            propsData: {
+                ...defaultPropsData,
+                showDeliveryEnquiry: true
+            }
+        });
 
         // Act
-        const wrapper = shallowMount(Navigation, { propsData });
         await wrapper.setData(defaultData); // need to await this for the state to fully update the DOM
 
         // Assert
@@ -81,13 +57,14 @@ describe('Navigation', () => {
 
     it('should NOT show the delivery enquiry link in the navigation if `showDeliveryEnquiry: false` and the content is there', async () => {
         // Arrange
-        const propsData = {
-            ...defaultPropsData,
-            showDeliveryEnquiry: false
-        };
+        wrapper = shallowMount(Navigation, {
+            propsData: {
+                ...defaultPropsData,
+                showDeliveryEnquiry: false
+            }
+        });
 
         // Act
-        const wrapper = shallowMount(Navigation, { propsData });
         await wrapper.setData(defaultData);
 
         // Assert
@@ -96,10 +73,9 @@ describe('Navigation', () => {
 
     it('should show "logout" if the user is logged in and has nav link data', async () => {
         // Arrange
-        const propsData = defaultPropsData;
+        wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
 
         // Act
-        const wrapper = shallowMount(Navigation, { propsData });
         await wrapper.setData({
             ...defaultData,
             userInfo: {
@@ -113,10 +89,9 @@ describe('Navigation', () => {
 
     it('should show "navLinks" if the user is logged in and has nav link data', async () => {
         // Arrange
-        const propsData = defaultPropsData;
+        wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
 
         // Act
-        const wrapper = shallowMount(Navigation, { propsData });
         await wrapper.setData({
             ...defaultData,
             userInfo: {
@@ -130,13 +105,14 @@ describe('Navigation', () => {
 
     it('should NOT show "navLinks" if the user is logged in but does NOT have nav link data', async () => {
         // Arrange
-        const propsData = {
-            ...defaultPropsData,
-            navLinks: {}
-        };
+        wrapper = shallowMount(Navigation, {
+            propsData: {
+                ...defaultPropsData,
+                navLinks: {}
+            }
+        });
 
         // Act
-        const wrapper = shallowMount(Navigation, { propsData });
         await wrapper.setData(defaultData);
 
         // Assert
@@ -144,12 +120,9 @@ describe('Navigation', () => {
     });
 
     it('should show "logout" if the user is logged in but does NOT have nav link data', () => {
-        // Arrange
-        const propsData = defaultPropsData;
-
-        // Act
-        const wrapper = shallowMount(Navigation, {
-            propsData,
+        // Arrange & Act
+        wrapper = shallowMount(Navigation, {
+            propsData: defaultPropsData,
             data () {
                 return {
                     ...defaultData,
@@ -166,14 +139,11 @@ describe('Navigation', () => {
 
     it('should show "login" if the user DOES NOT have nav link data and is NOT logged in"', async () => {
         // Arrange
-        const propsData = {
-            ...defaultPropsData,
-            navLinks: {}
-        };
-
-        // Act
-        const wrapper = shallowMount(Navigation, {
-            propsData,
+        wrapper = shallowMount(Navigation, {
+            propsData: {
+                ...defaultPropsData,
+                navLinks: {}
+            },
             data () {
                 return {
                     ...defaultData
@@ -181,7 +151,7 @@ describe('Navigation', () => {
             }
         });
 
-        // reset the user data to empty
+        // Act
         await wrapper.setData({
             userInfo: false
         });
@@ -191,14 +161,9 @@ describe('Navigation', () => {
     });
 
     it('should show the navbar if there are navigation links', () => {
-        // Arrange
-        const propsData = {
-            ...defaultPropsData
-        };
-
-        // Act
-        const wrapper = shallowMount(Navigation, {
-            propsData,
+        // Arrange & Act
+        wrapper = shallowMount(Navigation, {
+            propsData: defaultPropsData,
             computed: {
                 hasNavigationLinks () {
                     return true;
@@ -233,14 +198,15 @@ describe('Navigation', () => {
     describe('nav links', () => {
         it('should be shown on mobile when is "navIsOpen" is true', async () => {
             // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                navLinks: {}
-            };
+            setMobileViewport();
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    navLinks: {}
+                }
+            });
 
             // Act
-            resizeWindow(mobileWidth, mobileHeight);
-            const wrapper = shallowMount(Navigation, { propsData });
             await wrapper.setData({
                 ...defaultData,
                 userInfo: {
@@ -256,11 +222,9 @@ describe('Navigation', () => {
 
         it('should not be shown on mobile when "navIsOpen" is false', async () => {
             // Arrange
-            const propsData = defaultPropsData;
+            setMobileViewport();
+            wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
 
-            // Act
-            resizeWindow(mobileWidth, mobileHeight);
-            const wrapper = shallowMount(Navigation, { propsData });
             await wrapper.setData({
                 ...defaultData,
                 userInfo: {
@@ -268,6 +232,8 @@ describe('Navigation', () => {
                 },
                 navIsOpen: true
             });
+
+            // Act
             await wrapper.vm.closeNav();
 
             // Assert
@@ -275,14 +241,13 @@ describe('Navigation', () => {
         });
 
         it('should be white when "headerBackgroundTheme" is set to "highlight"', () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                headerBackgroundTheme: 'highlight'
-            };
-
-            // Act
-            const wrapper = shallowMount(Navigation, { propsData });
+            // Arrange & Act
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    headerBackgroundTheme: 'highlight'
+                }
+            });
 
             // Assert
             expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).toContain('c-nav-toggle--altColour');
@@ -292,155 +257,153 @@ describe('Navigation', () => {
 
     describe('offers link', () => {
         it('prop flag should be passed through', () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                showOffersLink: true
-            };
-
-            // Act
-            const wrapper = shallowMount(Navigation, { propsData });
+            // Arrange & Act
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showOffersLink: true
+                }
+            });
 
             // Assert
             expect(wrapper.vm.showOffersLink).toBe(true);
         });
 
         it('should be shown on desktop when "showOffersLink" is true', () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                showOffersLink: true
-            };
-
-            // Act
-            const wrapper = shallowMount(Navigation, { propsData });
+            // Arrange & Act
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showOffersLink: true
+                }
+            });
 
             // Assert
             expect(wrapper.find('[data-js-test="offers-link-desktop"]').exists()).toBe(true);
         });
 
         it('should not be shown on desktop when "showOffersLink" is false', () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                showOffersLink: false
-            };
-
-            // Act
-            const wrapper = shallowMount(Navigation, { propsData });
+            // Arrange & Act
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showOffersLink: false
+                }
+            });
 
             // Assert
             expect(wrapper.find('[data-js-test="offers-link-desktop"]').exists()).toBe(false);
         });
 
-        it('should be shown on mobile when "showOffersLink" is true', () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                showOffersLink: true
-            };
-            resizeWindow(mobileWidth, mobileHeight);
-
-            // Act
-            const wrapper = shallowMount(Navigation, { propsData });
-
-            // Assert
-            expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(true);
-        });
-
-        it('should not be shown on mobile when "showOffersLink" is false', () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                showOffersLink: false
-            };
-            resizeWindow(mobileWidth, mobileHeight);
-
-            // Act
-            const wrapper = shallowMount(Navigation, { propsData });
-
-            // Assert
-            expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(false);
-        });
-
-        it('should be shown on mobile with open nav when "showOffersLink" is true', async () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                showOffersLink: true
-            };
-            resizeWindow(mobileWidth, mobileHeight);
-
-            // Act
-            const wrapper = shallowMount(Navigation, { propsData });
-            await wrapper.setData({
-                ...defaultData,
-                navIsOpen: true
+        describe('on mobile', () => {
+            beforeEach(() => {
+                setMobileViewport();
             });
 
-            // Assert
-            expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(true);
-        });
+            it('should be shown when "showOffersLink" is true', () => {
+                // Arrange & Act
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showOffersLink: true
+                    }
+                });
 
-        it('should not be shown on mobile with open nav when "showOffersLink" is false', async () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                showOffersLink: false
-            };
-            resizeWindow(mobileWidth, mobileHeight);
-
-            // Act
-            const wrapper = shallowMount(Navigation, { propsData });
-            await wrapper.setData({
-                ...defaultData,
-                navIsOpen: true
+                // Assert
+                expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(true);
             });
 
-            // Assert
-            expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(false);
+            it('should not be shown when "showOffersLink" is false', () => {
+                // Arrange & Act
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showOffersLink: false
+                    }
+                });
+
+                // Assert
+                expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(false);
+            });
+
+            it('should be shown with open nav when "showOffersLink" is true', async () => {
+                // Arrange
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showOffersLink: true
+                    }
+                });
+
+                // Act
+                await wrapper.setData({
+                    ...defaultData,
+                    navIsOpen: true
+                });
+
+                // Assert
+                expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(true);
+            });
+
+            it('should not be shown with open nav when "showOffersLink" is false', async () => {
+                // Arrange
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showOffersLink: false
+                    }
+                });
+
+                // Act
+                await wrapper.setData({
+                    ...defaultData,
+                    navIsOpen: true
+                });
+
+                // Assert
+                expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(false);
+            });
         });
+
+
     });
 
 
     describe('help link', () => {
         it('should be shown when "showHelpLink" is true', () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                showHelpLink: true
-            };
-
-            // Act
-            const wrapper = shallowMount(Navigation, { propsData });
+            // Arrange & Act
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showHelpLink: true
+                }
+            });
 
             // Assert
             expect(wrapper.find('[data-test-id="help-link"]').exists()).toBe(true);
         });
 
         it('should not be shown when "showHelpLink" is false', () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                showHelpLink: false
-            };
-
-            // Act
-            const wrapper = shallowMount(Navigation, { propsData });
+            // Arrange & Act
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showHelpLink: false
+                }
+            });
 
             // Assert
             expect(wrapper.find('[data-test-id="help-link"]').exists()).toBe(false);
         });
 
         it('should be shown when "showHelpLink" is not explicitly set', () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                showHelpLink: undefined
-            };
-
-            // Act
-            const wrapper = shallowMount(Navigation, { propsData });
+            // Arrange & Act
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showHelpLink: undefined
+                }
+            });
 
             // Assert
             expect(wrapper.find('[data-test-id="help-link"]').exists()).toBe(true);
@@ -450,9 +413,8 @@ describe('Navigation', () => {
     describe('isOrderCountOutOfDate', () => {
         it('should return true if the order count IS OUT of date', async () => {
             // Arrange
-            const propsData = defaultPropsData;
-            const wrapper = shallowMount(Navigation, { propsData });
             const pastExpiryDate = new Date('Thu Oct 10 2019 15:37:14 GMT+0100').getTime();
+            wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
 
             // Act
             await wrapper.setData({
@@ -466,9 +428,8 @@ describe('Navigation', () => {
 
         it('should return false if the order count IS IN date', async () => {
             // Arrange
-            const propsData = defaultPropsData;
-            const wrapper = shallowMount(Navigation, { propsData });
-            const futureExpiryDate = new Date('Tue Aug 14 2035 16:30:34 GMT+0100').getTime();
+            const futureExpiryDate = new Date('Tue Aug 14 2063 16:30:34 GMT+0100').getTime();
+            wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
 
             // Act
             await wrapper.setData({
@@ -488,7 +449,7 @@ describe('Navigation', () => {
                 ...defaultPropsData,
                 isOrderCountSupported: true
             };
-            const wrapper = shallowMount(Navigation, { propsData });
+            wrapper = shallowMount(Navigation, { propsData });
 
             // Act
             wrapper.vm.setAnalyticsBlob();
@@ -503,7 +464,7 @@ describe('Navigation', () => {
                 ...defaultPropsData,
                 isOrderCountSupported: false
             };
-            const wrapper = shallowMount(Navigation, { propsData });
+            wrapper = shallowMount(Navigation, { propsData });
 
             // Act
             wrapper.vm.setAnalyticsBlob();
@@ -516,12 +477,8 @@ describe('Navigation', () => {
     describe('fetchUserInfo', () => {
         it('should return a response and populate "userInfo"', async () => {
             // Arrange
-            const propsData = {
-                ...defaultPropsData
-            };
-            const wrapper = shallowMount(Navigation, { propsData });
+            wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
 
-            // Assert
             // Clear any user data so we can test the fetchUserInfo call
             await wrapper.setData({
                 ...defaultData,
@@ -531,70 +488,72 @@ describe('Navigation', () => {
             // Act
             await wrapper.vm.fetchUserInfo();
 
-            expect(axios.get).toHaveBeenCalled();
+            // Assert
+            expect(mockGet).toHaveBeenCalled();
             expect(wrapper.vm.$data.userInfo).toBeDefined();
             expect(wrapper.vm.$data.userInfo).toEqual(asyncUserDetails);
         });
     });
 
     describe('fetchOrderCountAndSave', () => {
-        const propsData = defaultPropsData;
-        const wrapper = shallowMount(Navigation, { propsData });
+        beforeEach(() => {
+            wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
+        });
 
         it('should call "setAnalyticsBlob" when data is returned', async () => {
             // Arrange
             const analyticsSpy = jest.spyOn(wrapper.vm, 'setAnalyticsBlob');
 
-            // Assert
-            await wrapper.setData(defaultData);
-
             // Act
+            await wrapper.setData(defaultData);
             await wrapper.vm.fetchOrderCountAndSave();
-            expect(axios.get).toHaveBeenCalled();
+
+            // Assert
+            expect(mockGet).toHaveBeenCalled();
             expect(analyticsSpy).toHaveBeenCalled();
         });
 
         it('should set "localOrderCountExpires" when data expiry is returned', async () => {
-            // Assert
+            // Arrange
             wrapper.setData(defaultData);
 
             // Act
             await wrapper.vm.fetchOrderCountAndSave();
+
+            // Assert
             expect(wrapper.vm.$data.localOrderCountExpires).not.toEqual(false);
         });
 
         it('should call "enrichUserDataWithCount" when data is returned', async () => {
             // Arrange
             const userDataSpy = jest.spyOn(wrapper.vm, 'enrichUserDataWithCount');
-
-            // Assert
             await wrapper.setData(defaultData);
 
             // Act
             await wrapper.vm.fetchOrderCountAndSave();
+
+            // Assert
             expect(userDataSpy).toHaveBeenCalled();
         });
 
         it('should call "pushToDataLayer" when data is returned', async () => {
             // Arrange
             const dataLayerSpy = jest.spyOn(wrapper.vm, 'pushToDataLayer');
-
-            // Assert
             await wrapper.setData(defaultData);
 
             // Act
             await wrapper.vm.fetchOrderCountAndSave();
+
+            // Assert
             expect(dataLayerSpy).toHaveBeenCalled();
         });
     });
 
     describe('setAnalyticsBlob', () => {
-        const propsData = defaultPropsData;
-        const wrapper = shallowMount(Navigation, { propsData });
-
         it('should call "setItem" when called', () => {
             // Arrange
             const spy = jest.spyOn(Storage.prototype, 'setItem');
+            wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
 
             // Assert
             wrapper.vm.setAnalyticsBlob();
@@ -619,15 +578,12 @@ describe('Navigation', () => {
 
     describe('showLoginInfo', () => {
         it('should NOT show "login" if `showLoginInfo: false`"', async () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                showLoginInfo: false
-            };
-
-            // Act
-            const wrapper = shallowMount(Navigation, {
-                propsData,
+            // Arrange & Act
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showLoginInfo: false
+                },
                 data () {
                     return defaultData;
                 }
@@ -639,14 +595,11 @@ describe('Navigation', () => {
 
         it('should NOT show "navLinks" if `showLoginInfo: false` and the user is logged in and has nav link data', async () => {
             // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                showLoginInfo: false
-            };
-
-            // Act
-            const wrapper = shallowMount(Navigation, {
-                propsData,
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showLoginInfo: false
+                },
                 computed: {
                     hasNavigationLinks () {
                         return true;
@@ -654,6 +607,7 @@ describe('Navigation', () => {
                 }
             });
 
+            // Act
             await wrapper.setData({
                 ...defaultData,
                 userInfo: {
@@ -674,15 +628,12 @@ describe('Navigation', () => {
             'showDeliveryEnquiry',
             'showLoginLink'
         ])('should return true if `%s` is true', navLink => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                [navLink]: true
-            };
-
-            // Act
-            const wrapper = shallowMount(Navigation, {
-                propsData
+            // Arrange & Act
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    [navLink]: true
+                }
             });
 
             // Assert
@@ -690,18 +641,15 @@ describe('Navigation', () => {
         });
 
         it('should return false if there are no underlying links to show', () => {
-            // Arrange
-            const propsData = {
-                ...defaultPropsData,
-                showLoginInfo: false,
-                showOffersLink: false,
-                showHelpLink: false,
-                showDeliveryEnquiry: false
-            };
-
-            // Act
+            // Arrange & Act
             const wrapper = shallowMount(Navigation, {
-                propsData
+                propsData: {
+                    ...defaultPropsData,
+                    showLoginInfo: false,
+                    showOffersLink: false,
+                    showHelpLink: false,
+                    showDeliveryEnquiry: false
+                }
             });
 
             // Assert
