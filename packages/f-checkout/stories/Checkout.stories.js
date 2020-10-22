@@ -1,4 +1,4 @@
-import { withKnobs, select } from '@storybook/addon-knobs';
+import { select } from '@storybook/addon-knobs';
 import { withTests } from '@storybook/addon-jest';
 import { VALID_CHECKOUT_METHOD } from '../src/constants';
 import VueCheckout from '../src/components/Checkout.vue';
@@ -6,16 +6,15 @@ import results from '../src/components/tests/.jest-test-results.json';
 
 export default {
     title: 'Components/Organisms',
-    decorators: [withKnobs, withTests({ results })]
+    decorators: [withTests({ results })],
+    argTypes: {
+        checkoutMethod: { control: { type: 'select', options: VALID_CHECKOUT_METHOD } }
+    }
 };
 
-export const Checkout = () => ({
+export const Checkout = args => ({
     components: { VueCheckout },
-    props: {
-        checkoutMethod: {
-            default: select('Checkout Method', VALID_CHECKOUT_METHOD)
-        }
-    },
+    props: Object.keys(args),
     template:
         '<vue-checkout :checkoutMethod="checkoutMethod" />'
 });
@@ -25,3 +24,7 @@ Checkout.parameters = {
 };
 
 Checkout.storyName = 'f-checkout';
+
+Checkout.args = {
+    checkoutMethod: 'Collection'
+};

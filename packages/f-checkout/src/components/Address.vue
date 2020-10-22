@@ -1,33 +1,27 @@
 <template>
     <div data-test-id='address-component'>
-        <div :class="$style['l-addressGroup']">
+        <fieldset :class="$style['l-addressGroup']">
             <form-field
                 v-model="address.line1"
-                :class="$style['c-formField']"
                 name="address-line-1"
                 data-test-id="input-address-line-1"
                 :label-text="labels.line1"
-                input-type="text"
                 label-style="inline" />
 
             <form-field
                 v-model="address.line2"
-                :class="$style['c-formField']"
                 name="address-line-2"
                 data-test-id="input-address-line-2"
                 :label-text="labels.line2"
-                input-type="text"
                 label-style="inline" />
 
             <form-field
                 v-model="address.city"
-                :class="$style['c-formField']"
                 name="address-city"
                 data-test-id="input-address-city"
                 :label-text="labels.city"
-                input-type="text"
                 label-style="inline" />
-        </div>
+        </fieldset>
 
         <form-field
             v-model="address.postcode"
@@ -35,7 +29,6 @@
             name="address-postcode"
             data-test-id="input-address-postcode"
             :label-text="labels.postcode"
-            input-type="text"
             label-style="inline" />
     </div>
 </template>
@@ -79,10 +72,12 @@ export default {
 
 .l-addressGroup {
     margin: spacing(x2) 0 spacing(x4) 0;
+    padding: 0;
+    border: none;
     @include font-size(body-s);
 
-    div {
-        margin-bottom: -17px;
+    .c-formField  {
+        margin-bottom: -50px;
     }
 }
 </style>

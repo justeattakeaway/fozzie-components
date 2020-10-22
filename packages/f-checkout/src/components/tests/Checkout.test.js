@@ -11,7 +11,7 @@ describe('Checkout', () => {
 
     describe('props ::', () => {
         describe('checkoutMethod ::', () => {
-            it.each(VALID_CHECKOUT_METHOD)('should update the Selector `method` attribute to match checkoutMethod=%p', definedType => {
+            it.each(VALID_CHECKOUT_METHOD)('should update the Selector `ordermethod` attribute to match checkoutMethod=%p', definedType => {
                 // Arrange
                 const propsData = {
                     checkoutMethod: definedType
@@ -22,7 +22,7 @@ describe('Checkout', () => {
                 const selectorComponent = wrapper.find('[data-test-id="selector"]');
 
                 // Assert
-                expect(selectorComponent.attributes('method')).toEqual(definedType);
+                expect(selectorComponent.attributes('ordermethod')).toEqual(definedType);
             });
 
             it('should display the address block if set to `Delivery`', () => {

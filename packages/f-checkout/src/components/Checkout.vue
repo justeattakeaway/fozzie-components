@@ -18,7 +18,6 @@
                     name="mobile-number"
                     data-test-id="input-mobile-number"
                     :label-text="copy.labels.mobileNumber"
-                    input-type="text"
                     label-style="inline" />
 
                 <address-block
@@ -27,7 +26,7 @@
                     data-test-id='address-block' />
 
                 <form-selector
-                    :method="checkoutMethod"
+                    :order-method="checkoutMethod"
                     data-test-id='selector' />
 
                 <user-note />
