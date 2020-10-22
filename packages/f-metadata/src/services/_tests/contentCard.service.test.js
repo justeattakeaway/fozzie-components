@@ -302,4 +302,80 @@ describe('`contentCardService`', () => {
             });
         });
     });
+
+    describe('`arrangeCardsByTitles` method', () => {
+        const cards = [
+            {
+                title: '20% off at ASOS.',
+                extras: {
+                    order: '1',
+                    custom_card_type: 'Promotion_Card_1' // eslint-disable-line camelcase
+                }
+            },
+            {
+                title: 'Hot deals on the takeaways you love',
+                extras: {
+                    order: '40',
+                    custom_card_type: 'Header_Card' // eslint-disable-line camelcase
+                }
+            },
+            {
+                title: 'OK Pizza.',
+                extras: {
+                    order: '41',
+                    custom_card_type: 'Promotion_Card_2' // eslint-disable-line camelcase
+                }
+            },
+            {
+                title: 'OK Burgers.',
+                extras: {
+                    order: '42',
+                    custom_card_type: 'Promotion_Card_2' // eslint-disable-line camelcase
+                }
+            },
+            {
+                title: 'The tastiest offers near you!',
+                extras: {
+                    order: '50',
+                    custom_card_type: 'Header_Card' // eslint-disable-line camelcase
+                }
+            },
+            {
+                title: 'Best Pizza.',
+                extras: {
+                    order: '51',
+                    custom_card_type: 'Promotion_Card_2' // eslint-disable-line camelcase
+                }
+            },
+            {
+                title: 'Bristol Burgers.',
+                extras: {
+                    order: '52',
+                    custom_card_type: 'Promotion_Card_2' // eslint-disable-line camelcase
+                }
+            },
+            {
+                title: 'Full terms and conditions here.',
+                extras: {
+                    order: '100',
+                    custom_card_type: 'Terms_And_Conditions_Card_2' // eslint-disable-line camelcase
+                }
+            }
+        ];
+
+        it('should group content cards by type where type starts with either `Header_Card` or `Terms_And_Conditions_Card`', () => {
+            // Arrange
+            const service = new ContentCardService({ cards });
+
+            // Act
+            const {
+                groups: contentCards
+            } = service.arrangeCardsByTitles().output();
+
+            // Assert
+            expect(contentCards).toHaveLength(4);
+            expect(contentCards[1].cards).toHaveLength(2);
+            expect(contentCards[2].cards).toHaveLength(2);
+        });
+    });
 });
