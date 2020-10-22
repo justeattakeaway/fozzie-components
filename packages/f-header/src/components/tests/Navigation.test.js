@@ -493,6 +493,50 @@ describe('Navigation', () => {
             expect(wrapper.vm.$data.userInfo).toBeDefined();
             expect(wrapper.vm.$data.userInfo).toEqual(asyncUserDetails);
         });
+
+        describe('(with spy)', () => {
+            let spy;
+
+            beforeEach(() => {
+                spy = jest.spyOn(Navigation.methods, 'fetchUserInfo');
+            });
+
+            afterEach(() => {
+                spy.mockReset();
+            });
+
+            it('should be called if "showLoginInfo" is true and user info is truthy', async () => {
+                // Arrange & Act
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showLoginInfo: true,
+                        userInfoProp: false
+                    }
+                });
+
+                // Assert
+                expect(spy).toHaveBeenCalled();
+            });
+
+            it.each([
+                [true, 'truthy', defaultData.userInfo],
+                [false, 'truthy', defaultData.userInfo],
+                [false, 'falsy', false]
+            ])('should not be called if "showLoginInfo" is %s and user info is %s', (showLoginInfo, _, userInfoProp) => {
+                // Arrange & Act
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showLoginInfo,
+                        userInfoProp
+                    }
+                });
+
+                // Assert
+                expect(spy).not.toHaveBeenCalled();
+            });
+        })
     });
 
     describe('fetchOrderCountAndSave', () => {
