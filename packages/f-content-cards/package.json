@@ -44,7 +44,7 @@
     "vue": "2.x"
   },
   "devDependencies": {
-    "@justeat/f-metadata": "3.0.0-beta.2",
+    "@justeat/f-metadata": "3.0.0-beta.3",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
