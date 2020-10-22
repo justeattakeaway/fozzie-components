@@ -20,6 +20,7 @@
                 :type="normalisedInputType"
                 placeholder=" "
                 :data-test-id="testId"
+                data-testid="testId"
                 :class="[$style['o-form-field'], $style['c-formField-input']]"
                 @input="updateValue"
                 v-on="listeners"

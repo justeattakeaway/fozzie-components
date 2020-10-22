@@ -1,7 +1,6 @@
 const formFieldComponent = () => $('[data-test-id="form-field-component"]');
 const testLabel = () => $('[data-test-id="testLabel"]');
-const fieldInput = () => $('input');
-
+const input = () => $('[data-testid="testId"]');
 /**
  * @param {Object} userInput
  * @param {String} userInput.firstName The user's first name
@@ -9,8 +8,8 @@ const fieldInput = () => $('input');
  * The below function adds and displays the user's first name into the form-field component.
  */
 exports.displayUserInput = (userInput) => {
-    fieldInput().setValue(userInput.firstName);
-    fieldInput().getValue();
+    input().setValue(userInput.firstName);
+    input().getValue();
 };
 
 exports.waitForFormField = () => formFieldComponent().waitForExist();
