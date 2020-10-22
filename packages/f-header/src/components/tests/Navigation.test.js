@@ -26,9 +26,7 @@ jest.mock('@justeat/f-services', () => ({
 }));
 
 describe('Navigation', () => {
-    beforeEach(() => {
-        setDesktopViewport();
-    });
+    beforeEach(setDesktopViewport);
 
     it('should be defined', () => {
         // Arrange & Act
@@ -182,7 +180,7 @@ describe('Navigation', () => {
         };
 
         // Act
-        const wrapper = shallowMount(Navigation, {
+        wrapper = shallowMount(Navigation, {
             propsData,
             computed: {
                 hasNavigationLinks () {
@@ -196,49 +194,52 @@ describe('Navigation', () => {
     });
 
     describe('nav links', () => {
-        it('should be shown on mobile when is "navIsOpen" is true', async () => {
-            // Arrange
-            setMobileViewport();
-            wrapper = shallowMount(Navigation, {
-                propsData: {
-                    ...defaultPropsData,
-                    navLinks: {}
-                }
+        describe('on mobile', () => {
+            beforeEach(setMobileViewport);
+
+            it('should be shown when is "navIsOpen" is true', async () => {
+                // Arrange
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        navLinks: {}
+                    }
+                });
+
+                // Act
+                await wrapper.setData({
+                    ...defaultData,
+                    userInfo: {
+                        isAuthenticated: true
+                    },
+                    navIsOpen: true
+                });
+                wrapper.vm.openNav();
+
+                // Assert
+                expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).toContain('is-open');
             });
 
-            // Act
-            await wrapper.setData({
-                ...defaultData,
-                userInfo: {
-                    isAuthenticated: true
-                },
-                navIsOpen: true
-            });
-            wrapper.vm.openNav();
+            it('should not be shown when "navIsOpen" is false', async () => {
+                // Arrange
+                wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
 
-            // Assert
-            expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).toContain('is-open');
+                await wrapper.setData({
+                    ...defaultData,
+                    userInfo: {
+                        isAuthenticated: true
+                    },
+                    navIsOpen: true
+                });
+
+                // Act
+                await wrapper.vm.closeNav();
+
+                // Assert
+                expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).not.toContain('is-open');
+            });
         });
 
-        it('should not be shown on mobile when "navIsOpen" is false', async () => {
-            // Arrange
-            setMobileViewport();
-            wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
-
-            await wrapper.setData({
-                ...defaultData,
-                userInfo: {
-                    isAuthenticated: true
-                },
-                navIsOpen: true
-            });
-
-            // Act
-            await wrapper.vm.closeNav();
-
-            // Assert
-            expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).not.toContain('is-open');
-        });
 
         it('should be white when "headerBackgroundTheme" is set to "highlight"', () => {
             // Arrange & Act
@@ -296,9 +297,7 @@ describe('Navigation', () => {
         });
 
         describe('on mobile', () => {
-            beforeEach(() => {
-                setMobileViewport();
-            });
+            beforeEach(setMobileViewport);
 
             it('should be shown when "showOffersLink" is true', () => {
                 // Arrange & Act
@@ -364,8 +363,6 @@ describe('Navigation', () => {
                 expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(false);
             });
         });
-
-
     });
 
 
@@ -536,7 +533,7 @@ describe('Navigation', () => {
                 // Assert
                 expect(spy).not.toHaveBeenCalled();
             });
-        })
+        });
     });
 
     describe('fetchOrderCountAndSave', () => {
@@ -664,7 +661,6 @@ describe('Navigation', () => {
         });
     });
 
-
     describe('hasNavigationLinks', () => {
         it.each([
             'showOffersLink',
@@ -686,7 +682,7 @@ describe('Navigation', () => {
 
         it('should return false if there are no underlying links to show', () => {
             // Arrange & Act
-            const wrapper = shallowMount(Navigation, {
+            wrapper = shallowMount(Navigation, {
                 propsData: {
                     ...defaultPropsData,
                     showLoginInfo: false,

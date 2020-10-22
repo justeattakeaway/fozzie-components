@@ -11,8 +11,8 @@ const resizeWindow = (x, y) => {
     window.dispatchEvent(new Event('resize'));
 };
 
-const setMobileViewport = () => resizeWindow(mobileWidth, mobileHeight);
 const setDesktopViewport = () => resizeWindow(desktopWidth, desktopHeight);
+const setMobileViewport = () => resizeWindow(mobileWidth, mobileHeight);
 
 const defaultPropsData = {
     accountLogin: {},
@@ -71,4 +71,4 @@ export {
     mockGet,
     setDesktopViewport,
     setMobileViewport
-}
+};
