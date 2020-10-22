@@ -47,7 +47,7 @@ $line-height                              : 17.5px;
     }
 
     .c-userNote-content {
-        margin-top: spacing(x1);
+        margin-top: spacing(x0.5);
         font-size: 14px;
         line-height: $line-height;
         color: $note-textColour;
