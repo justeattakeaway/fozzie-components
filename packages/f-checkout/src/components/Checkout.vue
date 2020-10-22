@@ -14,14 +14,13 @@
             <form action="post">
                 <form-field
                     v-model="mobileNumber"
-                    :class="$style['c-formField']"
                     name="mobile-number"
                     data-test-id="input-mobile-number"
                     :label-text="copy.labels.mobileNumber"
                     label-style="inline" />
 
                 <address-block
-                    v-if="checkoutMethod === 'Delivery'"
+                    v-if="checkoutMethod === delivery"
                     :labels="copy.labels"
                     data-test-id='address-block' />
 
@@ -58,7 +57,7 @@ import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import { VALID_CHECKOUT_METHOD } from '../constants';
+import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY } from '../constants';
 import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
@@ -104,7 +103,8 @@ export default {
                 city: null,
                 postcode: null
             },
-            buttonText: 'Go to payment'
+            buttonText: 'Go to payment',
+            delivery: CHECKOUT_METHOD_DELIVERY
         };
     },
 
@@ -148,16 +148,6 @@ $line-height                              : 16px;
     h1 {
         @include font-size(heading-s);
         margin-bottom: spacing(x2);
-    }
-
-    .c-formField {
-        input {
-            height: 50px;
-        }
-
-        label {
-            @include font-size(body-l);
-        }
     }
 
     .o-btn--allergy {

@@ -3,6 +3,7 @@
         <fieldset :class="$style['l-addressGroup']">
             <form-field
                 v-model="address.line1"
+                :class="$style['c-checkout-formField']"
                 name="address-line-1"
                 data-test-id="input-address-line-1"
                 :label-text="labels.line1"
@@ -10,6 +11,7 @@
 
             <form-field
                 v-model="address.line2"
+                :class="$style['c-checkout-formField']"
                 name="address-line-2"
                 data-test-id="input-address-line-2"
                 :label-text="labels.line2"
@@ -17,6 +19,7 @@
 
             <form-field
                 v-model="address.city"
+                :class="$style['c-checkout-formField']"
                 name="address-city"
                 data-test-id="input-address-city"
                 :label-text="labels.city"
@@ -25,7 +28,6 @@
 
         <form-field
             v-model="address.postcode"
-            :class="$style['c-formField']"
             name="address-postcode"
             data-test-id="input-address-postcode"
             :label-text="labels.postcode"
@@ -61,14 +63,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-.c-formField {
-    input {
-        height: 50px;
-    }
-    label {
-        @include font-size(body-l);
-    }
-}
 
 .l-addressGroup {
     margin: spacing(x2) 0 spacing(x4) 0;
@@ -76,8 +70,8 @@ export default {
     border: none;
     @include font-size(body-s);
 
-    .c-formField  {
-        margin-bottom: -50px;
+    .c-checkout-formField  {
+        margin-bottom: -17px;
     }
 }
 </style>

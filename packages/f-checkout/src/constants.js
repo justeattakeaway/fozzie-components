@@ -1,2 +1,4 @@
-// eslint-disable-next-line import/prefer-default-export
-export const VALID_CHECKOUT_METHOD = ['Collection', 'Delivery'];
+export const CHECKOUT_METHOD_COLLECTION = 'Collection';
+export const CHECKOUT_METHOD_DELIVERY = 'Delivery';
+
+export const VALID_CHECKOUT_METHOD = [CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY];
