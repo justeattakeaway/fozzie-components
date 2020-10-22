@@ -3,15 +3,38 @@
         v-if="hasLoaded"
         :class="[$style['c-contentCards'], $style['c-contentCards--wrap' ]]"
         :data-test-id="testId">
-        <template
-            v-for="(contentCard, cardIndex) in cards">
-            <component
-                :is="handleCustomCardType(contentCard.type)"
-                :key="`${cardIndex}_${contentCard.id}`"
-                :card="contentCard"
-                :tenant="tenant"
-                :data-test-id="testIdForItemWithIndex(cardIndex)"
-            />
+        <template v-if="groupCards">
+            <template v-for="({ title, cards: subCards }, groupIndex) in cardsGrouped">
+                <h3
+                    :key="groupIndex"
+                    :class="[$style['c-contentCards--group-title']]"
+                >
+                    {{ title }}
+                </h3>
+                <div
+                    v-for="(contentCard, cardIndex) in subCards"
+                    :key="`${cardIndex}_${contentCard.id}`"
+                    :class="[$style['c-contentCards--group']]"
+                >
+                    <component
+                        :is="handleCustomCardType(contentCard.type)"
+                        :card="contentCard"
+                        :tenant="tenant"
+                        :data-test-id="testIdForItemWithIndex(cardIndex)"
+                    />
+                </div>
+            </template>
+        </template>
+        <template v-else>
+            <template v-for="(contentCard, cardIndex) in cards">
+                <component
+                    :is="handleCustomCardType(contentCard.type)"
+                    :key="`${cardIndex}_${contentCard.id}`"
+                    :card="contentCard"
+                    :tenant="tenant"
+                    :data-test-id="testIdForItemWithIndex(cardIndex)"
+                />
+            </template>
         </template>
     </div>
     <skeleton-loader
@@ -136,6 +159,11 @@ export default {
         userId: {
             type: String,
             default: ''
+        },
+
+        groupCards: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -147,6 +175,7 @@ export default {
 
         return {
             cards: [],
+            cardsGrouped: [],
             rawCards: [],
             copy: { ...localeConfig },
             titleCard: {},
@@ -193,6 +222,25 @@ export default {
         },
 
         /**
+         * Determines what card impressions should be logged, and whether the loaded flag should be set for groups cards
+         * @param {Boolean} current
+         * @param {Boolean} previous
+         **/
+        cardsGrouped (current, previous) {
+            this.$emit('get-group-count', current.length);
+
+            if (current.length && (current.length !== previous.length)) {
+                this.metadataDispatcher.logCardImpressions([
+                    ...this.cardsGrouped.flatMap(({ cards: { id } }) => id)
+                    // ...this.cardsGrouped.map(({ id }) => id)
+                ]);
+            }
+            if ((current.length > 0) && (previous.length === 0)) {
+                this.hasLoaded = true;
+            }
+        },
+
+        /**
          * Monitors the loaded flag to emit the has-loaded event if necessary
          * @param {Boolean} current
          * @param {Boolean} previous
@@ -201,7 +249,17 @@ export default {
             if (current && !previous) {
                 this.$emit('has-loaded', true);
             }
-        }
+        },
+
+        // TODO remove / find better way of updating the enabledCardTypes
+        enabledCardTypes (current) {
+            if (this.metadataDispatcher !== null) {
+                this.metadataDispatcher.dispatcherOptions.enabledCardTypes = [...current];
+                this.metadataDispatcher.requestRefresh(window.appboy);
+                console.log(this.metadataDispatcher.dispatcherOptions);
+            }
+        },
+
     },
 
     /**
@@ -259,18 +317,19 @@ export default {
                 apiKey,
                 userId,
                 enableLogging,
-                enabledCardTypes: this.enabledCardTypes,
+                enabledCardTypes: [...this.enabledCardTypes, 'Header_Card'],
                 brands: this.brands,
                 callbacks: {
-                    handleContentCards: this.metadataContentCards
+                    handleContentCards: this.metadataContentCards,
+                    handleContentCardsGrouped: this.metadataContentCardsGrouped
                 }
             })
-                .then(dispatcher => {
-                    this.metadataDispatcher = dispatcher;
-                })
-                .catch(error => {
-                    this.$emit('on-error', error);
-                });
+            .then(dispatcher => {
+                this.metadataDispatcher = dispatcher;
+            })
+            .catch(error => {
+                this.$emit('on-error', error);
+            });
         },
 
         /**
@@ -299,6 +358,19 @@ export default {
             this.cards = limitedCards.map(card => Object.assign(card, { source }));
 
             return successCallback();
+        },
+
+        contentCardsGrouped ({
+            source
+        }, groupedCards) {
+            console.log(groupedCards);
+            this.cardsGrouped = groupedCards.map(card => Object.assign(card, { source }));
+        },
+
+        metadataContentCardsGrouped (groupedCards) {
+            this.contentCardsGrouped({
+                source: CARDSOURCE_METADATA
+            }, groupedCards);
         },
 
         /**
@@ -350,7 +422,6 @@ export default {
          * @return {string|boolean}
          */
         handleCustomCardType (type) {
-            console.log(type);
             switch (type) {
                 case 'Anniversary_Card_1':
                 case 'Voucher_Card_1':
@@ -471,4 +542,15 @@ export default {
     .c-contentCards--wrap {
         flex-wrap: wrap;
     }
+
+    .c-contentCards--group {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .c-contentCards--group-title {
+        width:100%;
+        margin-bottom: spacing(x3);
+    }
+
 </style>
