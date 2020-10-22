@@ -1,4 +1,5 @@
 import orderBy from 'lodash.orderby';
+import startsWith from 'lodash.startswith';
 import findIndex from 'lodash.findindex';
 import transformCardData from './utils/transformCardData';
 import isCardCurrentlyActive from './utils/isCardCurrentlyActive';
@@ -41,6 +42,7 @@ class ContentCards {
         this.appboy = appboy;
         this.rawCards = cards;
         this.cards = cards.map(transformCardData);
+        this.groups = [];
         this.titleCard = {};
     }
 
@@ -54,6 +56,7 @@ class ContentCards {
         return {
             titleCard: this.titleCard,
             cards: this.cards,
+            groups: this.groups,
             rawCards: this.rawCards
         };
     }
@@ -87,12 +90,9 @@ class ContentCards {
      * @returns {ContentCards}
      */
     arrangeCardsByTitles () {
-        this.cards.reduce((acc, card) => {
+        this.groups = this.cards.reduce((acc, card) => {
             const { type } = card;
-            if (
-                type &&
-                (type === 'Header_Card' || type === 'Terms_And_Conditions_Card')
-            ) {
+            if (type && (startsWith(type, 'Header_Card') || startsWith(type, 'Terms_And_Conditions_Card'))) {
                 return [...acc, { title: card.title, cards: [] }];
             }
             if (!acc.length) {
