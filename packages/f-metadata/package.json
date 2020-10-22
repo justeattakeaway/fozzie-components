@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-metadata",
   "description": "Fozzie Metadata Component",
-  "version": "3.0.0-beta.2",
+  "version": "3.0.0-beta.3",
   "main": "src/index.js",
   "files": [
     "src"
@@ -38,7 +38,8 @@
     "appboy-web-sdk": "2.5.2",
     "date-fns": "2.16.1",
     "lodash.findindex": "4.6.0",
-    "lodash.orderby": "4.6.0"
+    "lodash.orderby": "4.6.0",
+    "lodash.startswith": "4.2.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.4.6",

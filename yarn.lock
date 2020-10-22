@@ -1691,6 +1691,16 @@
   dependencies:
     window-or-global "^1.0.1"
 
+"@justeat/f-metadata@3.0.0-beta.2":
+  version "3.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@justeat/f-metadata/-/f-metadata-3.0.0-beta.2.tgz#5f8a226165011fd148ca6c0e4b3eee4ef46bc19d"
+  integrity sha512-PD4dK4nmLkujWQ0PWO8HDOA+sGlEMUUVjLTsVkYJNSoMwe1DY+gBWkNEjD3iL1jyANXQWtsvwX5D1gC8fm6UfA==
+  dependencies:
+    appboy-web-sdk "2.5.2"
+    date-fns "2.16.1"
+    lodash.findindex "4.6.0"
+    lodash.orderby "4.6.0"
+
 "@justeat/f-services@0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-0.13.0.tgz#b0fc67948e94800ba176addb9d92cce444d28c8e"
@@ -14058,6 +14068,11 @@ lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
   integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
+
+lodash.startswith@4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/lodash.startswith/-/lodash.startswith-4.2.1.tgz#c598c4adce188a27e53145731cdc6c0e7177600c"
+  integrity sha1-xZjErc4YiiflMUVzHNxsDnF3YAw=
 
 lodash.template@^4.0.2, lodash.template@^4.5.0:
   version "4.5.0"
