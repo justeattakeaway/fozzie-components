@@ -22,12 +22,12 @@
                     label-style="inline" />
 
                 <address-block
-                    v-if="checkoutType === 'Delivery'"
+                    v-if="checkoutMethod === 'Delivery'"
                     :labels="copy.labels"
                     data-test-id='address-block' />
 
                 <form-selector
-                    :checkout-type="checkoutType"
+                    :method="checkoutMethod"
                     data-test-id='selector' />
 
                 <user-note />
@@ -82,7 +82,7 @@ export default {
             default: ''
         },
 
-        checkoutType: {
+        checkoutMethod: {
             type: String,
             default: 'Collection',
             validator: value => (VALID_CHECKOUT_METHOD.indexOf(value) !== -1)

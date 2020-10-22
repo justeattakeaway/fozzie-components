@@ -8,10 +8,10 @@ v0.5.0
 *October 22, 2020*
 
 ### Added
-- Collection component to replicate ConsumerWeb.
-- Delivery component to replicate ConsumerWeb.
+- Address component to be displayed if `checkoutMethod` is set to 'Delivery'.
 
 ### Changed
+- Checkout Component to replicate Collection and Delivery in ConsumerWeb.
 - Selector to uses `type` prop to change label text.
 
 

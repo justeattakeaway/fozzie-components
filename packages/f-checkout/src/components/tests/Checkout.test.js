@@ -10,11 +10,11 @@ describe('Checkout', () => {
     });
 
     describe('props ::', () => {
-        describe('checkoutType ::', () => {
-            it.each(VALID_CHECKOUT_METHOD)('should update the Selector `checkouttype` to match checkoutType=%p', definedType => {
+        describe('checkoutMethod ::', () => {
+            it.each(VALID_CHECKOUT_METHOD)('should update the Selector `method` to match checkoutMethod=%p', definedType => {
                 // Arrange
                 const propsData = {
-                    checkoutType: definedType
+                    checkoutMethod: definedType
                 };
 
                 // Act
@@ -22,13 +22,13 @@ describe('Checkout', () => {
                 const selectorComponent = wrapper.find('[data-test-id="selector"]');
 
                 // Assert
-                expect(selectorComponent.attributes('checkouttype')).toEqual(definedType);
+                expect(selectorComponent.attributes('method')).toEqual(definedType);
             });
 
             it('should display the address block if set to `Delivery`', () => {
                 // Arrange
                 const propsData = {
-                    checkoutType: 'Delivery'
+                    checkoutMethod: 'Delivery'
                 };
 
                 // Act
@@ -42,7 +42,7 @@ describe('Checkout', () => {
             it('should not display the address block if set to `Collection`', () => {
                 // Arrange
                 const propsData = {
-                    checkoutType: 'Collection'
+                    checkoutMethod: 'Collection'
                 };
 
                 // Act

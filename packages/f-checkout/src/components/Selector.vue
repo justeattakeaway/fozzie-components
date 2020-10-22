@@ -8,7 +8,7 @@
         <label
             for="time-selection"
             :class="$style['o-form-select-label']">
-            {{ checkoutType }} time
+            {{ method }} time
         </label>
         <select
             id="time-selection"
@@ -32,7 +32,7 @@ export default {
             default: () => ['', 'As soon as possible', 'Today in 5 minutes']
         },
 
-        checkoutType: {
+        method: {
             type: String,
             default: null
         }
