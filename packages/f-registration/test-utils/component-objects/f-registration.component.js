@@ -26,12 +26,17 @@ const errorMessagePassword = () => $('[data-test-id="error-message-password"]');
  * @param {String} userInfo.email The user's e-mail address
  * @param {String} userInfo.password The user's password
  */
-exports.submitRegistrationForm = userInfo => {
+ exports.populateRegistrationForm = userInfo => {
+     exports.waitForRegistrationForm();
+     firstNameInput().setValue(userInfo.firstName);
+     lastNameInput().setValue(userInfo.lastName);
+     emailInput().setValue(userInfo.email);
+     passwordInput().setValue(userInfo.password);
+};
+
+exports.submitRegistrationForm = () => {
     exports.waitForRegistrationForm();
-    firstNameInput().setValue(userInfo.firstName);
-    lastNameInput().setValue(userInfo.lastName);
-    emailInput().setValue(userInfo.email);
-    passwordInput().setValue(userInfo.password);
+
     createAccountButton().click();
 };
 
