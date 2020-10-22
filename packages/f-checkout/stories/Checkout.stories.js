@@ -13,7 +13,7 @@ export const Checkout = () => ({
     components: { VueCheckout },
     props: {
         checkoutMethod: {
-            default: select('checkoutMethod', VALID_CHECKOUT_METHOD)
+            default: select('Checkout Method', VALID_CHECKOUT_METHOD)
         }
     },
     template:
