@@ -1750,23 +1750,28 @@
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
-"@justeat/f-vue-icons@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.3.0.tgz#48ff808c7b2fa5a22c59b26c85d1b5b3b0729649"
-  integrity sha512-HDEH5Fzrcx/NdwXK0SH7O2NAAivT9/+zGe5hEcREPATglwBaRxIv33ulvIMBIjfF65wNcDGYqs4zLgFlNDrSzQ==
+"@justeat/f-vue-icons@1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.4.0.tgz#44ed886c92e3402a817dc9530ad2b9f7e1f11f99"
+  integrity sha512-sMF6eUlzNOaGKlJUxFeYHElrH5rXCVnS+HM10PJjERz7T66ACtWkOsaEzyzGnOle4CIjJ78tfd9Adjz6Dn5YTQ==
   dependencies:
-    "@justeat/f-icons" "2.2.0"
+    "@justeat/f-icons" "2.3.0"
     babel-helper-vue-jsx-merge-props "2.0.3"
+
+"@justeat/fozzie-colour-palette@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie-colour-palette/-/fozzie-colour-palette-3.0.0.tgz#55eb60de93c4785049eb8abc82b760e57b3ca9c0"
+  integrity sha512-WZXfILucrW3XxwHvwouFg0JEHe13QFBPHNNKKakNOnMEsU0kiwxtd042JjRT3ZwkD5r89hdNa6YLtLsraaFq5w==
 
 "@justeat/fozzie-colour-palette@3.0.0-beta.6":
   version "3.0.0-beta.6"
   resolved "https://registry.yarnpkg.com/@justeat/fozzie-colour-palette/-/fozzie-colour-palette-3.0.0-beta.6.tgz#3d66dd63b48dacf649f003a3b3c7c39ecf7d94b7"
   integrity sha512-DbUvzLpVr2Q9/6QTF58/fomb1YOdn8ytGE+PLo9prNlpc24ZaFEDPfHzK63nyAvmmw1VboRNRzOpffArdW4FNQ==
 
-"@justeat/fozzie@4.0.0-beta.0":
-  version "4.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-4.0.0-beta.0.tgz#66d7ee71a90bdff3bc4b67994305d888fe8f7c64"
-  integrity sha512-/uElS2zDFD8A7DiA5bxbBmjKbUGI00u4bApJVUwCRaGBgqScEwrI9ya1cYt5/KlTD5YtFef3iOd7QppilSb5mQ==
+"@justeat/fozzie@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-4.1.0.tgz#cd9cdb1cef5f7e0b0ee13482c271292acd0dfe2d"
+  integrity sha512-6q762UPmMjIpjH70Oj+M5DLRy5AU04Nkpzq4qH1LC2BR96zKZtsqlxL4fSIrnf3DHGeKRpbfr9KaXgWAAhjkXA==
   dependencies:
     "@justeat/f-dom" "1.1.0"
     "@justeat/f-logger" "0.8.1"
@@ -6803,10 +6808,10 @@ chrome-trace-event@^1.0.0:
   dependencies:
     tslib "^1.9.0"
 
-chromedriver@84.0.1:
-  version "84.0.1"
-  resolved "https://registry.yarnpkg.com/chromedriver/-/chromedriver-84.0.1.tgz#eaca7723f1a58c262a5c521b8596769af40b0d4f"
-  integrity sha512-iJ6Y680yp58+KlAPS5YgYe3oePVFf8jY5k4YoczhXkT0p/mQZKfGNkGG/Xc0LjGWDQRTgZwXg66hOXoApIQecg==
+chromedriver@86.0.0:
+  version "86.0.0"
+  resolved "https://registry.yarnpkg.com/chromedriver/-/chromedriver-86.0.0.tgz#4b9504d5bbbcd4c6bd6d6fd1dd8247ab8cdeca67"
+  integrity sha512-byLJWhAfuYOmzRYPDf4asJgGDbI4gJGHa+i8dnQZGuv+6WW1nW1Fg+8zbBMOfLvGn7sKL41kVdmCEVpQHn9oyg==
   dependencies:
     "@testim/chrome-version" "^1.0.7"
     axios "^0.19.2"

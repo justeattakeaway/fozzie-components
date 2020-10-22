@@ -5,9 +5,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.37.0
 ------------------------------
-*October 20, 2020*
+*October 22, 2020*
 ### Changed
 - Various style to align better with designs.
+
+
+v0.36.0
+------------------------------
+*October 20, 2020*
+### Added
+- Handling of 403 responses in `f-registration`. 
+- New prop to set the form AJAX call timeout.
 
 
 v0.35.0
