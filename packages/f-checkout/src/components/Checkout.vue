@@ -21,10 +21,14 @@
                     input-type="text"
                     label-style="inline" />
 
-                <component
-                    :is="checkoutType"
+                <address-block
+                    v-if="checkoutType === 'Delivery'"
                     :labels="copy.labels"
-                    data-test-id='checkout-component-type' />
+                    data-test-id='address-block' />
+
+                <form-selector
+                    :checkout-type="checkoutType"
+                    data-test-id='selector' />
 
                 <user-note />
                 <button
@@ -54,10 +58,10 @@ import { globalisationServices } from '@justeat/f-services';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
-import Collection from './Collection.vue';
-import Delivery from './Delivery.vue';
-import { VALID_CHECKOUT_TYPES } from '../constants';
 import '@justeat/f-form-field/dist/f-form-field.css';
+import { VALID_CHECKOUT_METHOD } from '../constants';
+import AddressBlock from './Address.vue';
+import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
 import tenantConfigs from '../tenants';
 
@@ -65,10 +69,10 @@ export default {
     name: 'VueCheckout',
 
     components: {
+        AddressBlock,
         Card,
-        Collection,
-        Delivery,
         FormField,
+        FormSelector,
         UserNote
     },
 
@@ -80,8 +84,8 @@ export default {
 
         checkoutType: {
             type: String,
-            default: 'Delivery',
-            validator: value => (VALID_CHECKOUT_TYPES.indexOf(value) !== -1)
+            default: 'Collection',
+            validator: value => (VALID_CHECKOUT_METHOD.indexOf(value) !== -1)
         }
     },
 

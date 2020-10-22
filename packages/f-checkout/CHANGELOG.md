@@ -11,6 +11,9 @@ v0.5.0
 - Collection component to replicate ConsumerWeb.
 - Delivery component to replicate ConsumerWeb.
 
+### Changed
+- Selector to uses `type` prop to change label text.
+
 
 v0.3.0
 ------------------------------

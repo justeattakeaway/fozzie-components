@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import { VALID_CHECKOUT_TYPES } from '../../constants';
+import { VALID_CHECKOUT_METHOD } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 
 describe('Checkout', () => {
@@ -11,7 +11,7 @@ describe('Checkout', () => {
 
     describe('props ::', () => {
         describe('checkoutType ::', () => {
-            it.each(VALID_CHECKOUT_TYPES)('should set load the component as expected if checkoutType=%p is specified', definedType => {
+            it.each(VALID_CHECKOUT_METHOD)('should update the Selector `checkouttype` to match checkoutType=%p', definedType => {
                 // Arrange
                 const propsData = {
                     checkoutType: definedType
@@ -19,10 +19,38 @@ describe('Checkout', () => {
 
                 // Act
                 const wrapper = shallowMount(VueCheckout, { propsData });
-                const selectedComponent = wrapper.find('[data-test-id="checkout-component-type"]');
+                const selectorComponent = wrapper.find('[data-test-id="selector"]');
 
                 // Assert
-                expect(selectedComponent.element.tagName).toMatchSnapshot();
+                expect(selectorComponent.attributes('checkouttype')).toEqual(definedType);
+            });
+
+            it('should display the address block if set to `Delivery`', () => {
+                // Arrange
+                const propsData = {
+                    checkoutType: 'Delivery'
+                };
+
+                // Act
+                const wrapper = shallowMount(VueCheckout, { propsData });
+                const addressBlock = wrapper.find('[data-test-id="address-block"]');
+
+                // Assert
+                expect(addressBlock.exists()).toBe(true);
+            });
+
+            it('should not display the address block if set to `Collection`', () => {
+                // Arrange
+                const propsData = {
+                    checkoutType: 'Collection'
+                };
+
+                // Act
+                const wrapper = shallowMount(VueCheckout, { propsData });
+                const addressBlock = wrapper.find('[data-test-id="address-block"]');
+
+                // Assert
+                expect(addressBlock.exists()).toBe(false);
             });
         });
     });

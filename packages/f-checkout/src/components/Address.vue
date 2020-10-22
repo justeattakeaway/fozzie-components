@@ -1,5 +1,5 @@
 <template>
-    <div data-test-id='delivery-component'>
+    <div data-test-id='address-component'>
         <div :class="$style['l-addressGroup']">
             <form-field
                 v-model="address.line1"
@@ -37,21 +37,15 @@
             :label-text="labels.postcode"
             input-type="text"
             label-style="inline" />
-
-        <form-selector type="Delivery" />
     </div>
 </template>
 
 <script>
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import FormSelector from './Selector.vue';
 
 export default {
-    components: {
-        FormField,
-        FormSelector
-    },
+    components: { FormField },
 
     props: {
         labels: {

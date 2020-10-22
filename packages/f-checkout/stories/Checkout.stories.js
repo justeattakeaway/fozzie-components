@@ -1,6 +1,6 @@
 import { withKnobs, select } from '@storybook/addon-knobs';
 import { withTests } from '@storybook/addon-jest';
-import { VALID_CHECKOUT_TYPES } from '../src/constants';
+import { VALID_CHECKOUT_METHOD } from '../src/constants';
 import VueCheckout from '../src/components/Checkout.vue';
 import results from '../src/components/tests/.jest-test-results.json';
 
@@ -13,7 +13,7 @@ export const Checkout = () => ({
     components: { VueCheckout },
     props: {
         checkoutType: {
-            default: select('checkoutType', VALID_CHECKOUT_TYPES)
+            default: select('checkoutType', VALID_CHECKOUT_METHOD)
         }
     },
     template:
