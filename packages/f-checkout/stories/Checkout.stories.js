@@ -1,6 +1,5 @@
-import { select } from '@storybook/addon-knobs';
 import { withTests } from '@storybook/addon-jest';
-import { VALID_CHECKOUT_METHOD } from '../src/constants';
+import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_COLLECTION } from '../src/constants';
 import VueCheckout from '../src/components/Checkout.vue';
 import results from '../src/components/tests/.jest-test-results.json';
 
@@ -26,5 +25,5 @@ Checkout.parameters = {
 Checkout.storyName = 'f-checkout';
 
 Checkout.args = {
-    checkoutMethod: 'Collection'
+    checkoutMethod: CHECKOUT_METHOD_COLLECTION
 };
