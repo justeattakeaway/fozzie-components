@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.2.0
+------------------------------
+*October 23, 2020*
+
+### Changed
+- Don't fetch user details when showUserInfo prop is false.
+- Use `axiosServices` from `f-services` instead of axios.
+- Use latest `f-vue-icons`.
+
+
 v4.1.0
 ------------------------------
 *September 28, 2020*
