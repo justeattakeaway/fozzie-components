@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.7.0
+------------------------------
+*October 21, 2020*
+
+### Added
+- Added `#globalconfig` flag that can be added to PR titles to stop danger running on all packages (only runs on root).
+
+
 v2.6.0
 ------------------------------
 *October 21, 2020*
