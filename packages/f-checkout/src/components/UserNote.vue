@@ -56,7 +56,7 @@ $line-height                              : 17.5px;
     .c-userNote-textArea {
         height: 130px;
         width: 100%;
-        padding: spacing(x1.5) spacing(x1);
+        padding: spacing(x1.5) spacing();
         margin: spacing(x2) 0 spacing(x3) 0;
         font-family: inherit;
         font-weight: $font-weight-bold;
