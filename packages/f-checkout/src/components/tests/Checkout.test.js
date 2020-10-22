@@ -11,7 +11,7 @@ describe('Checkout', () => {
 
     describe('props ::', () => {
         describe('checkoutMethod ::', () => {
-            it.each(VALID_CHECKOUT_METHOD)('should update the Selector `method` to match checkoutMethod=%p', definedType => {
+            it.each(VALID_CHECKOUT_METHOD)('should update the Selector `method` attribute to match checkoutMethod=%p', definedType => {
                 // Arrange
                 const propsData = {
                     checkoutMethod: definedType
