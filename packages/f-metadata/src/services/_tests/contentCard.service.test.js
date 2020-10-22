@@ -362,9 +362,11 @@ describe('`contentCardService`', () => {
                 }
             }
         ];
+
         it('should group content cards by type where type starts with either `Header_Card` or `Terms_And_Conditions_Card`', () => {
             // Arrange
             const service = new ContentCardService({ cards });
+
             // Act
             const {
                 groups: contentCards
