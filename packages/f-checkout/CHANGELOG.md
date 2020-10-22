@@ -12,7 +12,7 @@ v0.4.0
 
 ### Changed
 - Checkout Component to replicate Collection and Delivery in ConsumerWeb.
-- Selector to uses `type` prop to change label text.
+- Selector to uses `method` prop to change label text.
 
 
 v0.3.0
