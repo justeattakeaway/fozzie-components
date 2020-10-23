@@ -9,7 +9,7 @@ v0.2.0
 
 ### Added 
 - data-test IDs to Alert Component 
-- Basic test for Alert 
+- Basic tests for Alert 
 - Alert Component-Object 
 
 
