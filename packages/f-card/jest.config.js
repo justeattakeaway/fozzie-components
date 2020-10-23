@@ -15,7 +15,7 @@ module.exports = {
         'node_modules/(?!(lodash-es)/)'
     ],
 
-    testURL: 'http://localhost/', 
+    testURL: 'http://localhost/',
 
     snapshotSerializers: [
         'jest-serializer-vue'
