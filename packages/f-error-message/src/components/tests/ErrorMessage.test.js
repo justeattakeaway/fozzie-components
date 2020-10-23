@@ -10,28 +10,43 @@ const propsData = {
 describe('ErrorMessage', () => {
 
     it('should be defined', () => {
+        // Arrange & Act
         const wrapper = shallowMount(ErrorMessage, {});
+
+        // Assert
         expect(wrapper.exists()).toBe(true);
     });
 
-    it ('should render if slot content is provided', () => {
-
+    it('should render if slot content is provided', () => {
+        // Arrange
         const wrapper = shallowMount(ErrorMessage, propsData);
+
+        // Act
         const content = wrapper.find('[data-test-id="content"]');
+
+        // Assert
         expect(content.exists()).toBe(true);
     });
 
-    it ('should not render if slot content is omitted', () => {
-
+    it('should not render if slot content is omitted', () => {
+        // Arrange
         const wrapper = shallowMount(ErrorMessage, {});
+
+        // Act
         const content = wrapper.find('[data-test-id="content"]');
+
+        // Assert
         expect(content.exists()).toBe(false);
     });
 
-    it ('should correctly render the content passed in a slot', () => {
-
+    it('should correctly render the content passed in a slot', () => {
+        // Arrange
         const wrapper = shallowMount(ErrorMessage, propsData);
+
+        // Act
         const content = wrapper.find('[data-test-id="content"]');
+
+        // Assert
         expect(content.element.innerHTML).toBe(propsData.slots.default);
     });
 });
