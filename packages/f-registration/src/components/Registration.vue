@@ -426,7 +426,7 @@ export default {
                 if (Array.isArray(thrownErrors)) {
                     if (thrownErrors.some(thrownError => thrownError.errorCode === '409')) {
                         this.shouldShowEmailAlreadyExistsError = true;
-                    } else if (thrownErrors.some(thrownError => thrownError.errorCode === '403')) {
+                    } else if (thrownErrors.some(thrownError => thrownError.errorCode === 'FailedUserAuthentication')) {
                         this.$emit(EventNames.LoginBlocked);
 
                         shouldEmitCreateAccountFailure = false;
