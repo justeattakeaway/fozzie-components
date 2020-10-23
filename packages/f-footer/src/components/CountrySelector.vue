@@ -145,7 +145,6 @@ $countrySelector-btn-font-size: 'body-s';
 }
 
 .c-countrySelector-link {
-    padding: 0;
     display: flex;
     padding: spacing() spacing(x2);
     text-decoration: none;

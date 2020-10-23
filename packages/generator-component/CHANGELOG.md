@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v1.5.0
+------------------------------
+*October 23, 2020*
+
+### Added
+- Stylelint config added as part of the generator.
+
+
 v1.4.0
 ------------------------------
 *October 16, 2020*
