@@ -19,5 +19,9 @@ module.exports = {
         'jest-serializer-vue'
     ],
 
-    testURL: 'http://localhost/'
+    testURL: 'http://localhost/', 
+
+    modulePathIgnorePatterns: [
+        './test/specs/component/'
+    ]
 };
