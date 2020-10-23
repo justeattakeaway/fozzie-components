@@ -1,6 +1,6 @@
 <template>
     <div
-        :class="$style['c-registration-form']">
+        :class="$style['c-registration']">
         <card
             :data-theme-registration="theme"
             :card-heading="copy.labels.createAccountTitle"
@@ -165,7 +165,6 @@
                 </form-field>
 
                 <form-button
-                    class="submit-button-padding"
                     data-test-id="create-account-submit-button"
                     button-style="primary"
                     is-full-width
@@ -457,7 +456,7 @@ export default {
 <style lang="scss" module>
 
 // Form styling
-.c-registration-form {
+.c-registration {
     margin-top: 100px;
 }
 
