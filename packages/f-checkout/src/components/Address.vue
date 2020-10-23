@@ -70,7 +70,7 @@ export default {
     border: none;
     @include font-size(body-s);
 
-    .c-addressGroup-formField  {
+    .c-addressGroup-formField {
         margin-bottom: -17px;
     }
 }

@@ -15,5 +15,8 @@ module.exports = {
                 data: `@import "@/assets/scss/common.scss";`
             });
     },
+    pluginOptions: {
+        lintStyleOnBuild: true
+    },
     devServer
 };
