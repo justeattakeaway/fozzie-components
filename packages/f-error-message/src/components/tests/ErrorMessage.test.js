@@ -9,14 +9,6 @@ const propsData = {
 
 describe('ErrorMessage', () => {
 
-    it('should be defined', () => {
-        // Arrange & Act
-        const wrapper = shallowMount(ErrorMessage, {});
-
-        // Assert
-        expect(wrapper.exists()).toBe(true);
-    });
-
     it('should render if slot content is provided', () => {
         // Arrange
         const wrapper = shallowMount(ErrorMessage, propsData);
