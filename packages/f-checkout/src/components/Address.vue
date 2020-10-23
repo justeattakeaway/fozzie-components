@@ -1,9 +1,9 @@
 <template>
     <div data-test-id='address-component'>
-        <fieldset :class="$style['l-addressGroup']">
+        <fieldset :class="$style['c-addressGroup']">
             <form-field
                 v-model="address.line1"
-                :class="$style['c-checkout-formField']"
+                :class="$style['c-addressGroup-formField']"
                 name="address-line-1"
                 data-test-id="input-address-line-1"
                 :label-text="labels.line1"
@@ -11,7 +11,7 @@
 
             <form-field
                 v-model="address.line2"
-                :class="$style['c-checkout-formField']"
+                :class="$style['c-addressGroup-formField']"
                 name="address-line-2"
                 data-test-id="input-address-line-2"
                 :label-text="labels.line2"
@@ -19,7 +19,7 @@
 
             <form-field
                 v-model="address.city"
-                :class="$style['c-checkout-formField']"
+                :class="$style['c-addressGroup-formField']"
                 name="address-city"
                 data-test-id="input-address-city"
                 :label-text="labels.city"
@@ -64,13 +64,13 @@ export default {
 
 <style lang="scss" module>
 
-.l-addressGroup {
+.c-addressGroup {
     margin: spacing(x2) 0 spacing(x4) 0;
     padding: 0;
     border: none;
     @include font-size(body-s);
 
-    .c-checkout-formField  {
+    .c-addressGroup-formField  {
         margin-bottom: -17px;
     }
 }
