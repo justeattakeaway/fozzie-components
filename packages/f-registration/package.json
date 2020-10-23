@@ -32,6 +32,7 @@
     "demo": "vue serve --port 8080 ./src/demo/Index.vue",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
+    "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit --json --outputFile=./src/components/tests/.jest-test-results.json",
     "test:coverage": "yarn test --coverage",
     "test-component:chrome": "run-p --race demo webdriver:delay:chrome",
@@ -54,6 +55,7 @@
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
+    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",

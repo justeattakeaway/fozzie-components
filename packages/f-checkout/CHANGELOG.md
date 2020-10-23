@@ -18,6 +18,14 @@ v0.4.0
 - Selector to uses `method` prop to change label text.
 
 
+Latest (to be added to next release)
+------------------------------
+*October 23, 2020*
+
+### Added
+- Stylelint added to lint styling on build.
+
+
 v0.3.0
 ------------------------------
 *October 21, 2020*
