@@ -3,6 +3,7 @@ import flushPromises from 'flush-promises';
 import RegistrationServiceApi from '../../services/RegistrationServiceApi';
 import Registration from '../Registration.vue';
 import EventNames from '../../event-names';
+import translations from '../../tenants/en-GB';
 
 jest.mock('../../services/RegistrationServiceApi', () => ({ createAccount: jest.fn() }));
 
@@ -215,18 +216,21 @@ describe('Registration', () => {
 
                 // Assert
                 expect(RegistrationServiceApi.createAccount).toHaveBeenCalledTimes(1);
-                expect(wrapper.vm.genericErrorMessage).toBeNull();
+                expect(wrapper.vm.genericErrorMessage).toBe('');
                 expect(wrapper.emitted(EventNames.CreateAccountSuccess).length).toBe(1);
             });
 
             it('should show error message and emit failure event when the first name field is not populated', async () => {
+                // Arrange
+                const message = translations.validationMessages.firstName.requiredError;
+
                 // Act
                 await wrapper.vm.onFormSubmit();
                 await flushPromises();
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(wrapper.vm.shouldShowFirstNameRequiredError).toBe(true);
+                expect(wrapper.vm.describeFirstnameErrorMessage).toBe(message);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('firstName');
             });
@@ -234,13 +238,14 @@ describe('Registration', () => {
             it('should show error message and emit failure event when the first name field is populated with invalid input', async () => {
                 // Arrange
                 wrapper.find('[data-test-id="input-first-name"]').setValue('wh4t @ w3!rd |\\|ame');
+                const message = translations.validationMessages.firstName.invalidCharError;
 
                 // Act
                 await wrapper.vm.onFormSubmit();
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowFirstNameInvalidCharError).toBe(true);
+                expect(wrapper.vm.describeFirstnameErrorMessage).toBe(message);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('firstName');
             });
@@ -249,13 +254,14 @@ describe('Registration', () => {
                 // Arrange
                 const firstNameInput = wrapper.find('[data-test-id="input-first-name"]');
                 firstNameInput.setValue('wh4t @ w3!rd |\\|ame');
+                const message = translations.validationMessages.firstName.invalidCharError;
 
                 // Act
                 firstNameInput.trigger('blur');
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowFirstNameInvalidCharError).toBe(true);
+                expect(wrapper.vm.describeFirstnameErrorMessage).toBe(message);
                 expect(wrapper.emitted(EventNames.CreateAccountInlineError).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CreateAccountInlineError)[0][0]).toBe('firstName');
             });
@@ -264,13 +270,14 @@ describe('Registration', () => {
                 // Arrange
                 const longValue = 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij';
                 wrapper.find('[data-test-id="input-first-name"]').setValue(longValue);
+                const message = translations.validationMessages.firstName.maxLengthError;
 
                 // Act
                 await wrapper.vm.onFormSubmit();
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowFirstNameMaxLengthError).toBe(true);
+                expect(wrapper.vm.describeFirstnameErrorMessage).toBe(message);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('firstName');
             });
@@ -278,13 +285,14 @@ describe('Registration', () => {
             it('should show error message and emit failure event when the last name field is not populated', async () => {
                 // Arrange
                 wrapper.find('[data-test-id="input-first-name"]').setValue('Adam');
+                const message = translations.validationMessages.lastName.requiredError;
 
                 // Act
                 await wrapper.vm.onFormSubmit();
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowLastNameRequiredError).toBe(true);
+                expect(wrapper.vm.describeLastnameErrorMessage).toBe(message);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('lastName');
             });
@@ -292,13 +300,14 @@ describe('Registration', () => {
             it('should show error message and emit failure event when the last name field is populated with invalid input', async () => {
                 // Arrange
                 wrapper.find('[data-test-id="input-last-name"]').setValue('wh4t @ w3!rd |\\|ame');
+                const message = translations.validationMessages.lastName.invalidCharError;
 
                 // Act
                 await wrapper.vm.onFormSubmit();
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowLastNameInvalidCharError).toBe(true);
+                expect(wrapper.vm.describeLastnameErrorMessage).toBe(message);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('lastName');
             });
@@ -307,13 +316,14 @@ describe('Registration', () => {
                 // Arrange
                 const longValue = 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij';
                 wrapper.find('[data-test-id="input-last-name"]').setValue(longValue);
+                const message = translations.validationMessages.lastName.maxLengthError;
 
                 // Act
                 await wrapper.vm.onFormSubmit();
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(true);
+                expect(wrapper.vm.describeLastnameErrorMessage).toBe(message);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('lastName');
             });
@@ -323,13 +333,14 @@ describe('Registration', () => {
                 const longValue = 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij';
                 const lastNameInput = wrapper.find('[data-test-id="input-last-name"]');
                 lastNameInput.setValue(longValue);
+                const message = translations.validationMessages.lastName.maxLengthError;
 
                 // Act
                 lastNameInput.trigger('blur');
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowLastNameMaxLengthError).toBe(true);
+                expect(wrapper.vm.describeLastnameErrorMessage).toBe(message);
                 expect(wrapper.emitted(EventNames.CreateAccountInlineError).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CreateAccountInlineError)[0][0]).toBe('lastName');
             });
@@ -352,13 +363,14 @@ describe('Registration', () => {
             it('should show error message and emit failure event when the password field is populated with too short an input', async () => {
                 // Arrange
                 wrapper.find('[data-test-id="input-password"]').setValue('dog');
+                const message = translations.validationMessages.password.minLengthError;
 
                 // Act
                 await wrapper.vm.onFormSubmit();
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowPasswordMinLengthError).toBe(true);
+                expect(wrapper.vm.describePasswordErrorMessage).toBe(message);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('password');
             });
@@ -367,13 +379,14 @@ describe('Registration', () => {
                 // Arrange
                 const passwordInput = wrapper.find('[data-test-id="input-password"]');
                 passwordInput.setValue('dog');
+                const message = translations.validationMessages.password.minLengthError;
 
                 // Act
                 passwordInput.trigger('blur');
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowPasswordMinLengthError).toBe(true);
+                expect(wrapper.vm.describePasswordErrorMessage).toBe(message);
                 expect(wrapper.emitted(EventNames.CreateAccountInlineError).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CreateAccountInlineError)[0][0]).toBe('password');
             });
@@ -382,13 +395,14 @@ describe('Registration', () => {
                 // Arrange
                 const longEmail = 'test-user-with-somewhat-long-email@justeattakeaway.com';
                 wrapper.find('[data-test-id="input-email"]').setValue(longEmail);
+                const message = translations.validationMessages.email.maxLengthError;
 
                 // Act
                 await wrapper.vm.onFormSubmit();
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowEmailMaxLengthError).toBe(true);
+                expect(wrapper.vm.describeEmailErrorMessage).toBe(message);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('email');
             });
@@ -397,13 +411,14 @@ describe('Registration', () => {
                 // Arrange
                 const emailInput = wrapper.find('[data-test-id="input-email"]');
                 emailInput.setValue('invalid email');
+                const message = translations.validationMessages.email.invalidEmailError;
 
                 // Act
                 emailInput.trigger('blur');
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.vm.shouldShowEmailInvalidError).toBe(true);
+                expect(wrapper.vm.describeEmailErrorMessage).toBe(message);
                 expect(wrapper.emitted(EventNames.CreateAccountInlineError).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CreateAccountInlineError)[0][0]).toBe('email');
             });

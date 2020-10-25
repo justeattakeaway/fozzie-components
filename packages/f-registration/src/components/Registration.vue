@@ -48,7 +48,7 @@
                     label-style="inlineNarrow"
                     aria-describedby="error-message-firstname"
                     :aria-invalid="!!describeFirstnameErrorMessage"
-                    @blur="$v.firstName.$touch">
+                    @blur="formFieldBlur('firstName')">
                     <template
                         v-if="describeFirstnameErrorMessage"
                         #error>
@@ -72,7 +72,7 @@
                     label-style="inlineNarrow"
                     aria-describedby="error-message-lastname"
                     :aria-invalid="!!describeLastnameErrorMessage"
-                    @blur="$v.lastName.$touch">
+                    @blur="formFieldBlur('lastName')">
                     <template
                         v-if="describeLastnameErrorMessage"
                         #error>
@@ -96,7 +96,7 @@
                     label-style="inlineNarrow"
                     aria-describedby="error-message-email"
                     :aria-invalid="!!describeEmailErrorMessage"
-                    @blur="$v.email.$touch">
+                    @blur="formFieldBlur('email')">
                     <!-- For when we want to add validation on blur of input - @blur="$v.email.$touch" -->
                     <template
                         v-if="describeEmailErrorMessage"
@@ -121,7 +121,7 @@
                     label-style="inlineNarrow"
                     aria-describedby="error-message-password"
                     :aria-invalid="!!describePasswordErrorMessage"
-                    @blur="$v.password.$touch">
+                    @blur="formFieldBlur('password')">
                     <template
                         v-if="describePasswordErrorMessage"
                         #error>
@@ -279,7 +279,7 @@ export default {
                     return 'First name exceeds 50 characters';
                 }
                 if (!this.$v.firstName.meetsCharacterValidationRules) {
-                    return 'First name should only contain letters, hyphens or apostrophes';
+                    return 'Your name can only contain letters, hyphens or apostrophes';
                 }
             }
             return '';
@@ -293,7 +293,7 @@ export default {
                     return 'Last name exceeds 50 characters';
                 }
                 if (!this.$v.lastName.meetsCharacterValidationRules) {
-                    return 'Last name should only contain letters, hyphens or apostrophes';
+                    return 'Your last name can only contain letters, hyphens or apostrophes';
                 }
             }
             return '';
@@ -303,8 +303,11 @@ export default {
                 if (!this.$v.email.required) {
                     return 'Please enter your email address';
                 }
+                if (!this.$v.email.maxLength) {
+                    return 'Email address exceeds 50 characters';
+                }
                 if (!this.$v.email.email) {
-                    return 'Please enter a valid email address';
+                    return 'Please enter your email address correctly';
                 }
             }
             return '';
