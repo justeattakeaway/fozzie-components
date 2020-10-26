@@ -3,6 +3,12 @@
         :data-theme="theme"
         :class="$style['c-checkout']"
         data-test-id='checkout-component'>
+        <alert
+            :locale="locale"
+            type="danger"
+            heading="error">
+            <p>There's been an error</p>
+        </alert>
         <card
             :card-heading="title"
             is-rounded
@@ -11,13 +17,27 @@
             card-heading-position="center"
             data-test-id="checkout-card-component"
             :class="$style['c-card--dimensions']">
-            <form action="post">
+            <form
+                type="post"
+                @click="formStart"
+                @focus="formStart"
+                @submit.prevent="onFormSubmit">
                 <form-field
                     v-model="mobileNumber"
                     name="mobile-number"
                     data-test-id="input-mobile-number"
                     :label-text="copy.labels.mobileNumber"
-                    label-style="inline" />
+                    :class="shouldShowMobileNumberRequiredError ? $style['c-checkout-formField--error'] : ''">
+                    label-style="inline">
+                    <template #error>
+                        <p
+                            v-if="shouldShowMobileNumberRequiredError"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-mobile-number-empty'>
+                            {{ copy.validationMessages.mobileNumber.requiredError }}
+                        </p>
+                    </template>
+                </form-field>
 
                 <address-block
                     v-if="checkoutMethod === delivery"
@@ -53,6 +73,14 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
+import { validationMixin } from 'vuelidate';
+import {
+    required,
+    numeric,
+    minLength
+} from 'vuelidate/lib/validators';
+import Alert from '@justeat/f-alert';
+import '@justeat/f-alert/dist/f-alert.css';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
@@ -63,16 +91,38 @@ import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
 import tenantConfigs from '../tenants';
 
+const formValidationState = $v => {
+    const fields = $v.$params;
+    const invalidFields = [];
+    const validFields = [];
+
+    Object.keys(fields).forEach(key => {
+        if ($v[key].$invalid) {
+            invalidFields.push(key);
+        } else {
+            validFields.push(key);
+        }
+    });
+
+    return {
+        validFields,
+        invalidFields
+    };
+};
+
 export default {
     name: 'VueCheckout',
 
     components: {
         AddressBlock,
+        Alert,
         Card,
         FormField,
         FormSelector,
         UserNote
     },
+
+    mixins: [validationMixin],
 
     props: {
         locale: {
@@ -104,7 +154,8 @@ export default {
                 postcode: null
             },
             buttonText: 'Go to payment',
-            delivery: CHECKOUT_METHOD_DELIVERY
+            delivery: CHECKOUT_METHOD_DELIVERY,
+            formStarted: false
         };
     },
 
@@ -115,6 +166,35 @@ export default {
 
         title () {
             return `${this.name}, confirm your details`;
+        },
+
+        shouldShowMobileNumberRequiredError () {
+            return (!this.$v.mobileNumber.required || !this.$v.mobileNumber.numeric || !this.$v.mobileNumber.minLength) && this.$v.mobileNumber.$dirty;
+        }
+    },
+
+    methods: {
+        onFormSubmit () {
+            if (this.isFormInvalid()) {
+                const validationState = formValidationState(this.$v);
+            }
+        },
+
+        formStart () {
+            this.formStarted = true;
+        },
+
+        isFormInvalid () {
+            this.$v.$touch();
+            return this.$v.$invalid;
+        }
+    },
+
+    validations: {
+        mobileNumber: {
+            required,
+            numeric,
+            minLength: minLength(10)
         }
     }
 };
@@ -175,6 +255,20 @@ $line-height                              : 16px;
             display: block;
             width: 100%;
         }
+    }
+
+    .c-checkout-formField--error {
+        input {
+            border: 1px solid $red;
+        }
+    }
+
+    .o-form-error {
+        display: flex;
+        align-items: center;
+        color: $red;
+        @include font-size(body-s);
+        margin-top: spacing();
     }
 }
 </style>
