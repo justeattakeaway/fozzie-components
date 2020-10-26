@@ -10,3 +10,11 @@ v0.1.0
 
 ### Added
 - Initial commit
+
+v0.2.0
+------------------------------
+*October 26, 2020*
+
+### Added
+- Built out functionality
+- Added unit tests
