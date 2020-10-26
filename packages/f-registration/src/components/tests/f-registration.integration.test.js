@@ -83,8 +83,8 @@ describe('Registration API service', () => {
             traceId: 'H3TKh4QSJUSwVBCBqEtkKw',
             errors: [
                 {
-                    description: 'Forbidden.',
-                    errorCode: '403'
+                    description: 'Failed user authentication.',
+                    errorCode: 'FailedUserAuthentication'
                 }
             ]
         });

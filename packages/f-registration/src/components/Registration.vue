@@ -1,15 +1,15 @@
 <template>
-    <div>
-        <bag-celebrate-icon :class="$style['bag-icon']" />
+    <div
+        :class="$style['c-registration']">
         <card
             :data-theme-registration="theme"
             :card-heading="copy.labels.createAccountTitle"
             is-rounded
-            has-outline
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="registration-component"
             :class="$style['c-card-padding']">
+            <bag-celebrate-icon :class="$style['bag-icon']" />
             <p
                 v-if="showLoginLink"
                 :class="$style['c-loginLink']"
@@ -416,7 +416,7 @@ export default {
                 if (Array.isArray(thrownErrors)) {
                     if (thrownErrors.some(thrownError => thrownError.errorCode === '409')) {
                         this.shouldShowEmailAlreadyExistsError = true;
-                    } else if (thrownErrors.some(thrownError => thrownError.errorCode === '403')) {
+                    } else if (thrownErrors.some(thrownError => thrownError.errorCode === 'FailedUserAuthentication')) {
                         this.$emit(EventNames.LoginBlocked);
 
                         shouldEmitCreateAccountFailure = false;
@@ -466,6 +466,9 @@ export default {
 <style lang="scss" module>
 
 // Form styling
+.c-registration {
+    margin-top: 100px;
+}
 
 .o-form {
     @include font-size(body-l);
@@ -489,31 +492,36 @@ export default {
     margin-top: spacing(x2);
 }
 
-.c-loginLink {
+.c-loginLink,
+.c-legal-hyperlinks {
     text-align: center;
     a {
         color: $blue;
         text-decoration: none;
-    }
-}
-
-.c-legal-hyperlinks {
-    a {
-        color: $blue;
-        text-decoration: none;
+        font-weight: $font-weight-bold;
     }
 }
 
 .c-card-padding {
-    padding-top: 30px;
+    padding-top: spacing(x5);
+    padding-bottom: spacing(x6);
+
+    @include media('<mid') {
+        padding-bottom: spacing(x4);
+    }
 }
 
 .bag-icon {
     width: 97px;
     height: 78px;
-    margin: auto;
-    display: block;
-    position: relative;
-    bottom: -30px;
+    position: absolute;
+    top: 56px;
+    left: 50%;
+    transform: translate(-35%);
+    @include media('<mid') {
+        width: 92px;
+        height: 74px;
+    }
 }
+
 </style>

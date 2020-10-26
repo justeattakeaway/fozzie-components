@@ -26,7 +26,7 @@ export default {
     },
 
     labels: {
-        createAccountTitle: 'Create an account',
+        createAccountTitle: 'Create account',
         createAccountBtn: 'Create account',
         firstName: 'First Name',
         lastName: 'Last Name',

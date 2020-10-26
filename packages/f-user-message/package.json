@@ -30,6 +30,7 @@
     "demo": "vue serve --open ./src/demo/index.vue",
     "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
+    "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit --json --outputFile=./src/components/tests/.jest-test-results.json"
   },
   "browserslist": [
@@ -46,6 +47,7 @@
     "@justeat/f-trak": ">=0.6.0"
   },
   "devDependencies": {
+    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",

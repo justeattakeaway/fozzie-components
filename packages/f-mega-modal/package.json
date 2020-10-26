@@ -29,6 +29,7 @@
     "build": "vue-cli-service build --target lib --name f-mega-modal ./src/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
+    "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit --json --outputFile=./src/components/tests/.jest-test-results.json"
   },
   "browserslist": [
@@ -39,6 +40,7 @@
     "body-scroll-lock": "3.x"
   },
   "devDependencies": {
+    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
