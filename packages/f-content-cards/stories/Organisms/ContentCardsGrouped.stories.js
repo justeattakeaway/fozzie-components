@@ -2,10 +2,12 @@ import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import { withTests } from '@storybook/addon-jest';
 import { defaultEnabledCardTypes } from '@justeat/f-metadata/src/services/contentCard.service';
+import mock, { proxy } from 'xhr-mock';
 import ContentCards from '../../src/components/ContentCards.vue';
 import results from '../../src/components/tests/.jest-test-results.json';
-import { makeServer } from '../mocks/mirage-server';
-import { labelledMultiSelectAllowedValues } from '../mockData/cards';
+// import { makeServer } from '../mocks/mirage-server';
+import cards, { labelledMultiSelectAllowedValues } from '../mockData/cards';
+import data from '../mockData/data';
 
 /**
  * Resets all locally stored braze data so that the stubbed data is always fresh on page load
@@ -76,7 +78,18 @@ export function ContentCardsBrazeGroup (args, { argTypes }) {
         beforeCreate () {
             resetBrazeData();
             // make the mirage server
-            makeServer();
+            // makeServer();
+            mock.teardown();
+            mock.setup();
+            mock.post(/\/api\/v3\/content_cards\/sync\/?/, {
+                status: 201,
+                body: JSON.stringify(cards())
+            });
+            mock.post(/\/api\/v3\/data\/?/, {
+                status: 201,
+                body: JSON.stringify(data())
+            });
+            mock.use(proxy);
         },
 
         template
