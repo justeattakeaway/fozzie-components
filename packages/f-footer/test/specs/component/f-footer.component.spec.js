@@ -1,10 +1,15 @@
 import FooterComponent from '../../../test-utils/component-objects/f-footer.component';
 
-describe('f-header component tests', () => {
+describe('f-footer component tests', () => {
     beforeEach(() => {
         // Arrange
         browser.url('http://localhost:8080');
         FooterComponent.waitForFooter();
+    });
+
+    it('should display the footer', () => {
+        //Assert
+        expect(FooterComponent.isFooterDisplayed()).toBe(true);
     });
 
     it('should display App Store Icons', () => {
@@ -14,11 +19,18 @@ describe('f-header component tests', () => {
     });
 
     it('App Store links should be correct', () => {
+        //Act
         FooterComponent.clickIosIcon();
+
+        //Assert
         expect(browser.getUrl()).toContain("https://apps.apple.com");  
+
+        //Act
         browser.back();
         FooterComponent.waitForFooter();
         FooterComponent.clickAndroidIcon();
+
+        //Assert
         expect(browser.getUrl()).toContain("https://play.google.com/");
     });
 
@@ -52,5 +64,4 @@ describe('f-header component tests', () => {
         // Assert
         expect(browser.getUrl()).toContain("https://www.instagram.com");
     });
-
 });

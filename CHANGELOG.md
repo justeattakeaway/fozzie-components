@@ -9,7 +9,7 @@ v2.8.1
 *October 26, 2020*
 
 ### Changed
-- 'jet' theme instead of 'je' in common.scss for the components.
+- 'jet' theme variable instead of 'je' in common.scss for the components.
 
 
 v2.8.0
