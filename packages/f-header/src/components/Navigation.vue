@@ -448,9 +448,9 @@ export default {
 
             return client
                 .get(this.userInfoUrl)
-                .then(response => {
-                    if (response.data.isAuthenticated) {
-                        this.userInfo = response.data;
+                .then(({ data }) => {
+                    if (data.isAuthenticated) {
+                        this.userInfo = data;
 
                         if (this.isOrderCountValid) {
                             this.fetchOrderCountAndSave();
@@ -474,22 +474,21 @@ export default {
                 }
             });
 
-            const orderCountPromise = client.get(this.orderCountUrl);
-
-            orderCountPromise.then(data => {
-                if (data && this.isOrderCountOutOfDate) {
-                    this.setAnalyticsBlob(data);
-                    this.localOrderCountExpires = data.Expires;
-                    this.enrichUserDataWithCount(data.Count);
-                    this.pushToDataLayer(this.userInfo);
-                }
-            })
-            .catch(err => {
-                if (this.errorLog) {
-                    this.errorLog('Unable to get order count from "fetchOrderCountAndSave', err);
-                }
-            });
-            return orderCountPromise;
+            return client
+                .get(this.orderCountUrl)
+                .then(data => {
+                    if (data && this.isOrderCountOutOfDate) {
+                        this.setAnalyticsBlob(data);
+                        this.localOrderCountExpires = data.Expires;
+                        this.enrichUserDataWithCount(data.Count);
+                        this.pushToDataLayer(this.userInfo);
+                    }
+                })
+                .catch(err => {
+                    if (this.errorLog) {
+                        this.errorLog('Unable to get order count from "fetchOrderCountAndSave', err);
+                    }
+                });
         },
 
         /**
