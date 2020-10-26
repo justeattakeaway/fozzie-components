@@ -53,6 +53,7 @@ export default {
         apiKey: { control: { type: 'text' } },
         userId: { control: { type: 'text' } },
         title: { control: { type: 'text' } },
+        groupCards: { control: { type: 'boolean' } },
         locale: { control: { type: 'radio', options: ['da-DK', 'en-GB', 'en-AU'] } },
         enabledCardTypes: { control: { type: 'check', options: labelledMultiSelectAllowedValues } }
     },

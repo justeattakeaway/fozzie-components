@@ -4,16 +4,18 @@
         :class="[$style['c-contentCards'], $style['c-contentCards--wrap' ]]"
         :data-test-id="testId">
         <template v-if="groupCards">
-            <template v-for="({ title, cards: subCards }, groupIndex) in cardsGrouped">
+            <template v-for="({ title, cards: subCards, id: groupId }, groupIndex) in cardsGrouped">
                 <h3
+                    v-if="groupId"
                     :key="groupIndex"
                     :class="[$style['c-contentCards--group-title']]"
+                    :data-test-id="`${groupIndex}_${groupId}`"
                 >
                     {{ title }}
                 </h3>
                 <div
                     v-for="(contentCard, cardIndex) in subCards"
-                    :key="`${cardIndex}_${contentCard.id}`"
+                    :key="`${groupIndex}_${cardIndex}_${contentCard.id}`"
                     :class="[$style['c-contentCards--group']]"
                 >
                     <component
@@ -213,7 +215,7 @@ export default {
         cards (current, previous) {
             this.$emit('get-card-count', current.length);
 
-            if (current.length && (current.length !== previous.length)) {
+            if (current.length && (current.length !== previous.length) && !this.groupCards) {
                 this.metadataDispatcher.logCardImpressions(this.cards.map(({ id }) => id));
             }
             if ((current.length > 0) && (previous.length === 0)) {
@@ -229,11 +231,11 @@ export default {
         cardsGrouped (current, previous) {
             this.$emit('get-group-count', current.length);
 
-            if (current.length && (current.length !== previous.length)) {
-                this.metadataDispatcher.logCardImpressions([
-                    ...this.cardsGrouped.flatMap(({ cards: { id } }) => id)
-                    // ...this.cardsGrouped.map(({ id }) => id)
-                ]);
+            if (current.length && (current.length !== previous.length) && this.groupCards) {
+                this.metadataDispatcher.logCardImpressions(this.cardsGrouped.flatMap(({ cards, id }) => [
+                    id, ...cards.map(({ id: cardId }) => cardId)
+                ])
+                .filter(cardID => cardID !== undefined));
             }
             if ((current.length > 0) && (previous.length === 0)) {
                 this.hasLoaded = true;
@@ -249,16 +251,7 @@ export default {
             if (current && !previous) {
                 this.$emit('has-loaded', true);
             }
-        },
-
-        // TODO remove / find better way of updating the enabledCardTypes
-        enabledCardTypes (current) {
-            if (this.metadataDispatcher !== null) {
-                this.metadataDispatcher.dispatcherOptions.enabledCardTypes = [...current];
-                this.metadataDispatcher.requestRefresh(window.appboy);
-                console.log(this.metadataDispatcher.dispatcherOptions);
-            }
-        },
+        }
 
     },
 
@@ -360,13 +353,21 @@ export default {
             return successCallback();
         },
 
+        /**
+         * Common method for handling card ingestion to component for grouped cards.
+         * @param {String} source
+         * @param {Card[]} groupedCards
+         **/
         contentCardsGrouped ({
             source
         }, groupedCards) {
-            console.log(groupedCards);
             this.cardsGrouped = groupedCards.map(card => Object.assign(card, { source }));
         },
 
+        /**
+         * Handles card ingestion via metadata for groups
+         * @param {Card[]} groupedCards
+         **/
         metadataContentCardsGrouped (groupedCards) {
             this.contentCardsGrouped({
                 source: CARDSOURCE_METADATA
