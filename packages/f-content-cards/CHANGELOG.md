@@ -13,6 +13,18 @@ watch for cardsGrouped enabling a new emitter containing the number of groups an
 when grouped as well. Please be aware while groupedCards is true limiting cannot be used, this is until
 we have decided how to apply limiting to groups.
 
+Latest (to be added to next release)
+------------------------------
+*October 26, 2020*
+
+### Added
+- Stylelint added to lint styling on build.
+
+### Changed
+- 'jet' theme instead of 'je' 
+
+
+
 v2.2.0-beta.1
 ------------------------------
 *October 14, 2020*

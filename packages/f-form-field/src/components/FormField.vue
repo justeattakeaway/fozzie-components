@@ -1,7 +1,8 @@
 <template>
     <div
         :data-theme-formfield="theme"
-        :class="$style['c-formField']">
+        :class="$style['c-formField']"
+        data-test-id="form-field-component">
         <div
             :class="$style['c-formField-inputWrapper']">
             <form-label
@@ -18,7 +19,8 @@
                 v-bind="$attrs"
                 :type="normalisedInputType"
                 placeholder=" "
-                :data-test-id="testId"
+                :data-js-test="testId"
+                data-test-id="testInput"
                 :class="[$style['o-form-field'], $style['c-formField-input']]"
                 @input="updateValue"
                 v-on="listeners"
@@ -28,7 +30,8 @@
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
                 :is-inline="isInline"
-                data-js-test="inlineLabel">
+                data-js-test="inlineLabel"
+                data-test-id="testLabel">
                 {{ labelText }}
             </form-label>
         </div>

@@ -12,18 +12,9 @@ export default {
         viewBox: "0 0 640 480"
       },
       "class": "c-ficon c-ficon--flag.gb"
-    }, ctx.data]), [h("defs", [h("clipPath", {
+    }, ctx.data]), [h("g", {
       attrs: {
-        id: "a"
-      }
-    }, [h("path", {
-      attrs: {
-        "fill-opacity": ".67",
-        d: "M-85.333 0h682.67v512h-682.67z"
-      }
-    })])]), h("g", {
-      attrs: {
-        "clip-path": "url(#a)",
+        "clip-path": "url(#)",
         transform: "translate(80) scale(.94)"
       }
     }, [h("g", {

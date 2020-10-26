@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "1.4.0",
+  "version": "1.6.0",
   "main": "dist/f-vue-icons.cjs.js",
   "cdn": "dist/f-vue-icons.min.js",
   "unpkg": "dist/f-vue-icons.min.js",
@@ -48,20 +48,19 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-icons": "2.3.0",
     "babel-helper-vue-jsx-merge-props": "2.0.3"
   },
   "devDependencies": {
-    "@justeat/f-icons": "2.3.0",
-    "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "4.4.6",
+    "@justeat/f-icons": "2.5.0",
+    "@vue/cli-plugin-babel": "4.5.8",
+    "@vue/cli-plugin-eslint": "4.5.8",
+    "@vue/cli-plugin-unit-jest": "4.5.8",
     "@vue/test-utils": "1.0.3",
     "bili": "3.4.2",
-    "fs-extra": "8.1.0",
+    "fs-extra": "9.0.1",
     "lodash.kebabcase": "4.1.1",
-    "marked": "0.7.0",
-    "pascal-case": "2.0.1",
+    "marked": "1.2.2",
+    "pascal-case": "3.1.1",
     "poi": "12.9.0",
     "prismjs": "1.21.0"
   },

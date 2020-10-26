@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-alert",
   "description": "Fozzie Alert – Fozzie Alert Component",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "main": "dist/f-alert.umd.min.js",
   "files": [
     "dist"
@@ -30,7 +30,17 @@
     "demo": "vue serve --port 8080 ./src/demo/Index.vue",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
-    "test": "vue-cli-service test:unit"
+    "lint:style": "vue-cli-service lint:style",
+    "test": "vue-cli-service test:unit", 
+    "test-component:chrome": "run-p --race demo webdriver:delay:chrome",
+    "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js",
+    "webdriver:delay:chrome": "yarn test:wait-for-server && yarn webdriver:start:chrome",
+    "webdriver:start:chrome": "wdio ../../wdio.conf.js"
+  },
+  "scriptsInfo": {
+    "test-component:chrome": "Runs the functional test suite against Chrome.",
+    "webdriver:delay:chrome": "Waits for Vue to start before running the Chrome webdriver to prevent a race condition. Not for direct use.",
+    "webdriver:start:chrome": "Runs the Chrome webdriver. Not for direct use."
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -43,6 +53,7 @@
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
+    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",

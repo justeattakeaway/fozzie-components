@@ -30,9 +30,7 @@ export default {
 
 body {
     margin: 0;
+    background-color: #f9fafb;
 }
 
-.registration-form {
-    margin-top: 100px;
-}
 </style>

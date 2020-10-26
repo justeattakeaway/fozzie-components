@@ -93,7 +93,7 @@ class ContentCards {
         this.groups = this.cards.reduce((acc, card) => {
             const { type } = card;
             if (type && (startsWith(type, 'Header_Card') || startsWith(type, 'Terms_And_Conditions_Card'))) {
-                return [...acc, { title: card.title, cards: [] }];
+                return [...acc, { ...card, cards: [] }];
             }
             if (!acc.length) {
                 return [{ title: '', cards: [card] }];

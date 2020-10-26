@@ -3,6 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v1.6.0
+------------------------------
+*October 26, 2020*
+
+### Changed
+- Updated f-icons dependency.
+
+
+v1.5.0
+------------------------------
+*October 26, 2020*
+
+### Changed
+- Updated npm dependencies.
+- Updated f-icons dependency pulled through updates to to SVG assets including missing elements and duplicated id's.
+
+
 v1.4.0
 ------------------------------
 *October 13, 2020*

@@ -41,9 +41,9 @@ export default {
 
 $btn-default-bgColor                : $grey--lighter;
 $btn-default-text-colour            : $grey--dark;
-$btn-default-weight                 : 500;
+$btn-default-weight                 : $font-weight-bold;
 $btn-default-height                 : 2.6;
-$btn-default-font-size              : body-l;
+$btn-default-font-size              : heading-s;
 $btn-default-font-family            : $font-family-base;
 $btn-default-bgColor--hover         : $grey--light;
 $btn-default-borderRadius           : 2px;
@@ -83,7 +83,6 @@ $btn-disabled-bgColor               : $grey--light;
     overflow: visible;                          /* [7] */
     text-align: center;
     font-weight: $btn-default-weight;
-    line-height: 1;
 
     // You may want to change this
     background-color: $btn-default-bgColor;
@@ -124,7 +123,8 @@ $btn-disabled-bgColor               : $grey--light;
     }
 
     &[type='submit'] {
-        margin-top: spacing(x2);
+        margin-top: spacing(x4);
+        margin-bottom: spacing(x3);
     }
 }
 

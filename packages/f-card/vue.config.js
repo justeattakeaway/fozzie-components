@@ -13,5 +13,8 @@ module.exports = {
                 // eslint-disable-next-line quotes
                 data: `@import "@/assets/scss/common.scss";`
             });
+    },
+    pluginOptions: {
+        lintStyleOnBuild: true
     }
 };

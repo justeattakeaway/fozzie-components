@@ -1,6 +1,6 @@
 import _mergeJSXProps from "babel-helper-vue-jsx-merge-props";
 export default {
-  name: 'PlusThinIcon',
+  name: 'PlusThickIcon',
   props: {},
   functional: true,
   render: function render(h, ctx) {
@@ -9,12 +9,13 @@ export default {
     return h("svg", _mergeJSXProps([{
       attrs: {
         xmlns: "http://www.w3.org/2000/svg",
-        viewBox: "0 0 21 21"
+        viewBox: "0 0 14 14"
       },
-      "class": "c-ficon c-ficon--plus-thin"
+      "class": "c-ficon c-ficon--plus-thick"
     }, ctx.data]), [h("path", {
       attrs: {
-        d: "M11.25 10.08h8.83a.59.59 0 1 1 0 1.17h-8.83v8.83a.59.59 0 0 1-1.17 0v-8.83H1.25a.59.59 0 0 1 0-1.17h8.83V1.25a.59.59 0 1 1 1.17 0v8.83z"
+        "fill-rule": "evenodd",
+        d: "M8.238 13.73H5.815V8.24H.27V5.815h5.545V.27h2.423v5.545h5.547v2.423H8.238v5.493z"
       }
     })]);
   }

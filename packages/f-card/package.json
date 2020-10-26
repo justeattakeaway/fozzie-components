@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-card",
   "description": "Fozzie Card Component – Used for providing wrapper card styling to an element (or group of elements)",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "main": "dist/f-card.umd.min.js",
   "files": [
     "dist"
@@ -30,7 +30,17 @@
     "demo": "vue serve --open ./src/demo/Index.vue",
     "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
-    "test": "vue-cli-service test:unit --json --outputFile=./src/components/tests/.jest-test-results.json"
+    "lint:style": "vue-cli-service lint:style",
+    "test": "vue-cli-service test:unit --json --outputFile=./src/components/tests/.jest-test-results.json", 
+    "test-component:chrome": "run-p --race demo webdriver:delay:chrome",
+    "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js",
+    "webdriver:delay:chrome": "yarn test:wait-for-server && yarn webdriver:start:chrome",
+    "webdriver:start:chrome": "wdio ../../wdio.conf.js"
+  },
+  "scriptsInfo": {
+    "test-component:chrome": "Runs the functional test suite against Chrome.",
+    "webdriver:delay:chrome": "Waits for Vue to start before running the Chrome webdriver to prevent a race condition. Not for direct use.",
+    "webdriver:start:chrome": "Runs the Chrome webdriver. Not for direct use."
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -42,6 +52,7 @@
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
+    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
