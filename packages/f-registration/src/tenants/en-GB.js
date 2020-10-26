@@ -21,12 +21,12 @@ export default {
         },
         login: {
             text: 'Already on Just Eat?',
-            url: '/login'
+            url: '/account/login'
         }
     },
 
     labels: {
-        createAccountTitle: 'Create an account',
+        createAccountTitle: 'Create account',
         createAccountBtn: 'Create account',
         firstName: 'First Name',
         lastName: 'Last Name',

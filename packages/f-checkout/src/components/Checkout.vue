@@ -14,63 +14,36 @@
             <form action="post">
                 <form-field
                     v-model="mobileNumber"
-                    :class="$style['c-formField']"
                     name="mobile-number"
                     data-test-id="input-mobile-number"
-                    label-text="Mobile number"
-                    input-type="text"
+                    :label-text="copy.labels.mobileNumber"
                     label-style="inline" />
 
-                <div :class="$style['l-addressGroup']">
-                    <form-field
-                        v-model="address.line1"
-                        :class="$style['c-formField']"
-                        name="address-line-1"
-                        data-test-id="input-address-line-1"
-                        label-text="Address line 1"
-                        input-type="text"
-                        label-style="inline" />
+                <address-block
+                    v-if="checkoutMethod === delivery"
+                    :labels="copy.labels"
+                    data-test-id='address-block' />
 
-                    <form-field
-                        v-model="address.line2"
-                        :class="$style['c-formField']"
-                        name="address-line-2"
-                        data-test-id="input-address-line-2"
-                        label-text="Address line 2 (optional)"
-                        input-type="text"
-                        label-style="inline" />
-
-                    <form-field
-                        v-model="address.city"
-                        :class="$style['c-formField']"
-                        name="address-city"
-                        data-test-id="input-address-city"
-                        label-text="City"
-                        input-type="text"
-                        label-style="inline" />
-                </div>
-
-                <form-field
-                    v-model="address.postcode"
-                    :class="$style['c-formField']"
-                    name="address-postcode"
-                    data-test-id="input-address-postcode"
-                    label-text="Postcode"
-                    input-type="text"
-                    label-style="inline" />
+                <form-selector
+                    :order-method="checkoutMethod"
+                    data-test-id='selector' />
 
                 <form-selector />
                 <user-note data-test-id='user-note'/>
                 <button
-                    :class="[$style['o-btn--allergy'],
-                             'o-btnLink']"
+                    :class="[
+                        $style['o-btn--allergy'],
+                        'o-btnLink'
+                    ]"
                     data-test-id="allergy-button">
-                    {{ allergyText }}
+                    {{ copy.allergyText }}
                 </button>
 
                 <button
-                    :class="[$style['o-btn--payment'],
-                             'o-btn', 'o-btn--primary', 'o-btn--wide']"
+                    :class="[
+                        $style['o-btn--payment'],
+                        'o-btn', 'o-btn--primary', 'o-btn--wide'
+                    ]"
                     data-test-id="confirm-payment-submit-button">
                     {{ buttonText }}
                 </button>
@@ -85,6 +58,8 @@ import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
+import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY } from '../constants';
+import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
 import tenantConfigs from '../tenants';
@@ -93,6 +68,7 @@ export default {
     name: 'VueCheckout',
 
     components: {
+        AddressBlock,
         Card,
         FormField,
         FormSelector,
@@ -103,6 +79,12 @@ export default {
         locale: {
             type: String,
             default: ''
+        },
+
+        checkoutMethod: {
+            type: String,
+            default: 'Collection',
+            validator: value => (VALID_CHECKOUT_METHOD.indexOf(value) !== -1)
         }
     },
 
@@ -123,7 +105,7 @@ export default {
                 postcode: null
             },
             buttonText: 'Go to payment',
-            allergyText: 'If you or someone you’re ordering for has a food allergy or intolerance, click here'
+            delivery: CHECKOUT_METHOD_DELIVERY
         };
     },
 
@@ -169,31 +151,12 @@ $line-height                              : 16px;
         margin-bottom: spacing(x2);
     }
 
-    .c-formField {
-        input {
-            height: 50px;
-        }
-
-        label {
-            @include font-size(body-l);
-        }
-    }
-
-    .l-addressGroup {
-        margin: spacing(x2) 0 spacing(x4) 0;
-        @include font-size(body-s);
-
-        div {
-            margin-bottom: -17px;
-        }
-    }
-
     .o-btn--allergy {
         padding: 0 spacing(x3);
         @include font-size(body-l);
         font-weight: $font-weight-bold;
         line-height: $line-height;
-        margin-bottom: spacing(x1);
+        margin-bottom: spacing(x0.5);
     }
 
     .o-btn--payment {

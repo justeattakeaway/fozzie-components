@@ -1,16 +1,22 @@
 <template>
-    <div :class="$style['o-selector']">
+    <div
+        data-test-id="form-select"
+        :class="[
+            $style['o-form-select'],
+            (selectedTime ? $style['o-form-select--float'] : '')
+        ]">
         <label
-            for="delivery-time"
-            :class="$style['o-selector-label']">
-            Delivery time
+            for="time-selection"
+            :class="$style['o-form-select-label']">
+            {{ orderMethod }} time
         </label>
         <select
-            id="delivery-time"
-            :class="$style['o-selector-input']"
-            data-test-id='delivery-time'>
+            id="time-selection"
+            v-model="selectedTime"
+            :class="$style['o-form-select-input']"
+            data-test-id='delivery-time>
             <option
-                v-for="(time, index) in deliveryTimes"
+                v-for="(time, index) in times"
                 :key="index"
                 :value="time">
                 {{ time }}
@@ -22,10 +28,21 @@
 <script>
 export default {
     props: {
-        deliveryTimes: {
+        times: {
             type: Array,
             default: () => ['', 'As soon as possible', 'Today in 5 minutes']
+        },
+
+        orderMethod: {
+            type: String,
+            default: null
         }
+    },
+
+    data () {
+        return {
+            selectedTime: null
+        };
     }
 };
 </script>
@@ -39,33 +56,52 @@ $form-input-borderWidth                   : 1px;
 $form-input-borderColour                  : $grey--light;
 $form-input-borderColour--focus           : $grey--dark;
 
-.o-selector {
-    margin: spacing(x2) 0;
+.o-form-select {
     position: relative;
+    height: 60px;
+    margin: spacing(x2) 0;
     padding: 0;
+    @include font-size(body-l);
     font-family: $font-family-base;
     color: $form-input-colour;
     font-weight: $font-weight-base;
     background-color: $form-input-bg;
-    @include font-size(body-l);
+    border: $form-input-borderWidth solid $form-input-borderColour;
+    border-radius: $form-input-borderRadius;
 
-    .o-selector-label {
+    .o-form-select-label {
         display: block;
-        color: $form-label-colour;
         position: absolute;
         top: 50%;
-        left: 0.5rem;
         transform: translateY(-50%);
+        padding: spacing();
+        color: $form-label-colour;
         cursor: pointer;
     }
 
-    .o-selector-input {
-        height: 53px;
+    .o-form-select-input {
+        height: 100%;
         width: 100%;
-        padding: 0.5rem;
-        border: $form-input-borderWidth solid $form-input-borderColour;
-        border-radius: $form-input-borderRadius;
+        padding: spacing(x0.5);
+        border: none;
         cursor: pointer;
+        color: $color-text;
+    }
+}
+
+/**
+ * Modifier – .o-form-select--float
+ *
+ * Moves the select label to sit above chosen option
+ */
+.o-form-select--float {
+    .o-form-select-label {
+        @include font-size(body-s);
+        top: 15px;
+    }
+
+    .o-form-select-input {
+        padding-top: spacing(x3);
     }
 }
 </style>

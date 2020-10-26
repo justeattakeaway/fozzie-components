@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-form-field",
   "description": "Fozzie Form Field – Fozzie Form Field Component",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "main": "dist/f-form-field.umd.min.js",
   "files": [
     "dist"
@@ -30,6 +30,7 @@
     "demo": "vue serve --open ./src/demo/Index.vue",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
+    "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit --json --outputFile=./src/components/tests/.jest-test-results.json",
     "test-component:chrome": "run-p --race demo webdriver:delay:chrome",
     "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js",
@@ -46,6 +47,7 @@
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
+    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",

@@ -12,5 +12,8 @@ module.exports = {
                 importer: magicImporter(),
                 data: '@import "@/assets/scss/common.scss";'
             });
+    },
+    pluginOptions: {
+        lintStyleOnBuild: true
     }
 };

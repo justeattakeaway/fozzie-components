@@ -1,6 +1,7 @@
 <template>
     <div
         :data-theme-card="theme"
+        data-test-id="card-component"
         :class="[
             $style['c-card'],
             (isRounded ? $style['c-card--rounded'] : ''),
