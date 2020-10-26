@@ -65,7 +65,7 @@ export default {
         border-radius: $post-order-card-radius;
         padding: spacing(x3) calc(35% + 8px) spacing(x3) spacing(x3);
 
-        @include media(">narrow") {
+        @include media('>narrow') {
             padding-right: 208px;
         }
     }
@@ -80,7 +80,7 @@ export default {
         background: right center no-repeat;
         background-size: contain;
 
-        @include media(">narrow") {
+        @include media('>narrow') {
             width: 200px;
         }
     }
