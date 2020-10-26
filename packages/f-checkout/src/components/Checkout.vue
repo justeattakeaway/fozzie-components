@@ -27,7 +27,7 @@
                     name="mobile-number"
                     data-test-id="input-mobile-number"
                     :label-text="copy.labels.mobileNumber"
-                    :class="shouldShowMobileNumberRequiredError ? $style['c-checkout-formField--error'] : ''">
+                    :class="shouldShowMobileNumberRequiredError ? $style['c-checkout-formField--error'] : '' "
                     label-style="inline">
                     <template #error>
                         <p
