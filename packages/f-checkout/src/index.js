@@ -8,6 +8,8 @@
 // Import vue component
 import VueCheckout from '@/components/Checkout.vue';
 
+export { CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY } from './constants';
+
 // Declare install function executed by Vue.use()
 export function install (Vue) {
     if (install.installed) return;

@@ -5,9 +5,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.2.0
 ------------------------------
-*October 23, 2020*
+*October 26, 2020*
 
-### Added 
+### Added
+- Stylelint added to lint styling on build.
 - data-test IDs to Alert Component 
 - Basic tests for Alert 
 - Alert Component-Object 

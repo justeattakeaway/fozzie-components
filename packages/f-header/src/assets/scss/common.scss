@@ -1,7 +1,7 @@
 // Set $theme variable so that fozzie doesn't complain when vars are pulled in
 // n.b. This isn't used currently (unless there are theme specific vars from fozzie)
 // The theme is handled via a data-attribute on the component
-$theme: 'je' !default;
+$theme: 'jet' !default;
 
 @import '~@justeat/f-utils/src/scss/functions/index';
 @import '~@justeat/f-utils/src/scss/mixins/index';

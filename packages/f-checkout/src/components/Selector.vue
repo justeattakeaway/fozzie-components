@@ -6,16 +6,16 @@
             (selectedTime ? $style['o-form-select--float'] : '')
         ]">
         <label
-            for="delivery-time"
+            for="time-selection"
             :class="$style['o-form-select-label']">
-            Delivery time
+            {{ orderMethod }} time
         </label>
         <select
-            id="delivery-time"
+            id="time-selection"
             v-model="selectedTime"
             :class="$style['o-form-select-input']">
             <option
-                v-for="(time, index) in deliveryTimes"
+                v-for="(time, index) in times"
                 :key="index"
                 :value="time">
                 {{ time }}
@@ -27,9 +27,14 @@
 <script>
 export default {
     props: {
-        deliveryTimes: {
+        times: {
             type: Array,
             default: () => ['', 'As soon as possible', 'Today in 5 minutes']
+        },
+
+        orderMethod: {
+            type: String,
+            default: null
         }
     },
 

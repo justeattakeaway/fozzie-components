@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const path = require('path');
 const ficons = require('@justeat/f-icons');
-const pascalCase = require('pascal-case');
+const { pascalCase } = require('pascal-case');
 const fs = require('fs-extra');
 
 const componentTemplate = (name, svg) => `

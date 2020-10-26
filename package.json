@@ -1,12 +1,13 @@
 {
   "name": "root",
-  "version": "2.7.0",
+  "version": "2.8.1",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
     "bundlewatch": "cross-env-shell \"yarn build && bundlewatch --config bundlewatch.config.js\"",
     "lint": "cross-env-shell \"lerna run $LERNA_ARGS lint --stream\"",
     "lint:fix": "lerna run lint -- --fix",
+    "lint:style": "lerna run lint:style --stream",
     "prepublishOnly": "lerna run prepublishOnly --stream",
     "release": "lerna publish",
     "storybook:build": "lerna run storybook:build",
@@ -30,6 +31,7 @@
     "@justeat/f-utils": "1.0.0-beta.0",
     "@justeat/fozzie": "4.1.0",
     "@justeat/fozzie-colour-palette": "3.0.0",
+    "@justeat/stylelint-config-fozzie": "2.2.0",
     "@storybook/storybook-deployer": "2.8.6",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
@@ -63,6 +65,8 @@
     "npm-run-all": "4.1.5",
     "postcss-loader": "3.0.0",
     "sass-loader": "7.3.1",
+    "stylelint": "13.7.2",
+    "stylelint-scss": "3.18.0",
     "vue-svg-loader": "0.16.0",
     "vue-template-compiler": "2.6.10",
     "wdio-chromedriver-service": "6.0.3",
@@ -85,6 +89,9 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:justeat/fozzie-components.git"
+  },
+  "stylelint": {
+    "extends": "@justeat/stylelint-config-fozzie"
   },
   "workspaces": [
     "packages/*"

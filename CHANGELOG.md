@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.8.1
+------------------------------
+*October 26, 2020*
+
+### Changed
+- 'jet' theme variable instead of 'je' in common.scss for the components.
+
+
+v2.8.0
+------------------------------
+*October 23, 2020*
+
+### Added
+- Stylelint added to lint styling on component builds (for relevant packages).
+
+
 v2.7.0
 ------------------------------
 *October 21, 2020*

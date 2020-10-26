@@ -67,7 +67,7 @@ describe('FormField', () => {
                 expect(formInput.attributes('type')).toBe(definedType);
             });
 
-            it('should set the value of attribute data-test-id on input element if dataTestId is specified', () => {
+            it('should set the value of attribute data-js-test on input element if dataTestId is specified', () => {
                 // Arrange
                 const dataTestId = 'my-test-id';
                 const propsData = {
@@ -79,10 +79,10 @@ describe('FormField', () => {
                 const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
 
                 // Assert
-                expect(formInput.attributes('data-test-id')).toBe(dataTestId);
+                expect(formInput.attributes('data-js-test')).toBe(dataTestId);
             });
 
-            it('should set the value of attribute data-test-id on input element if name is specified', () => {
+            it('should set the value of attribute data-js-test on input element if name is specified', () => {
                 // Arrange
                 const name = 'my-input';
                 const attrs = {
@@ -94,16 +94,16 @@ describe('FormField', () => {
                 const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
 
                 // Assert
-                expect(formInput.attributes('data-test-id')).toBe(name);
+                expect(formInput.attributes('data-js-test')).toBe(name);
             });
 
-            it('should not add the attribute data-test-id on input element if dataTestId is not specified', () => {
+            it('should not add the attribute data-js-test on input element if dataTestId is not specified', () => {
                 // Arrange & Act
                 const wrapper = shallowMount(FormField, { });
                 const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
 
                 // Assert
-                expect(formInput.attributes('data-test-id')).toBe(undefined);
+                expect(formInput.attributes('data-js-test')).toBe(undefined);
             });
         });
 
