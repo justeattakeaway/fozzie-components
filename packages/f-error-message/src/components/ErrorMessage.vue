@@ -20,7 +20,7 @@ export default {
         WarningIcon
     },
     props: {
-        dataTestId: {
+        dataTestTitle: {
             type: String,
             default: ''
         }
