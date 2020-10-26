@@ -8,11 +8,21 @@ Latest (to be added to next release)
 ------------------------------
 *October 26, 2020*
 
-### Added
-- Stylelint added to lint styling on build.
-
 ### Changed
 - 'jet' theme instead of 'je'
+
+
+v4.2.0
+------------------------------
+*October 26, 2020*
+
+### Changed
+- Don't fetch user details when showUserInfo prop is false.
+- Use `axiosServices` from `f-services` instead of axios.
+- Use latest `f-vue-icons`.
+
+### Added
+- Stylelint added to lint styling on build.
 
 
 v4.1.0
