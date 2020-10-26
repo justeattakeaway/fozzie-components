@@ -15,10 +15,13 @@ v0.8.0
 
 Latest (to be added to next release)
 ------------------------------
-*October 23, 2020*
+*October 26, 2020*
 
 ### Added
 - Stylelint added to lint styling on build.
+
+### Changed
+- 'jet' theme instead of 'je'
 
 
 v0.7.1
