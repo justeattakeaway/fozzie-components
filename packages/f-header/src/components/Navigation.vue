@@ -446,26 +446,24 @@ export default {
                 }
             });
 
-            const userDetailsPromise = client.get(this.userInfoUrl);
+            return client
+                .get(this.userInfoUrl)
+                .then(response => {
+                    if (response.data.isAuthenticated) {
+                        this.userInfo = response.data;
 
-            userDetailsPromise.then(response => {
-                if (response.data.isAuthenticated) {
-                    this.userInfo = response.data;
-
-                    if (this.isOrderCountValid) {
-                        this.fetchOrderCountAndSave();
+                        if (this.isOrderCountValid) {
+                            this.fetchOrderCountAndSave();
+                        }
+                    } else {
+                        this.userInfo = false;
                     }
-                } else {
-                    this.userInfo = false;
-                }
-            })
-            .catch(err => {
-                if (this.errorLog) {
-                    this.errorLog('Unable to get user information from "fetchUserInfo"', err);
-                }
-            });
-
-            return userDetailsPromise;
+                })
+                .catch(err => {
+                    if (this.errorLog) {
+                        this.errorLog('Unable to get user information from "fetchUserInfo"', err);
+                    }
+                });
         },
 
         // fetches the order count for the user
