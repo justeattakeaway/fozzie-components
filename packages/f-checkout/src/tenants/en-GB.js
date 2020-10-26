@@ -1,4 +1,13 @@
 export default {
     locale: 'en-GB',
-    text: 'I am a VueCheckout Component (GB)'
+
+    labels: {
+        mobileNumber: 'Mobile Number',
+        line1: 'Address line 1',
+        line2: 'Address line 2 (optional)',
+        city: 'City',
+        postcode: 'Postcode'
+    },
+
+    allergyText: 'If you or someone you’re ordering for has a food allergy or intolerance, click here'
 };

@@ -3,17 +3,26 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+Latest (to be added to next release)
+------------------------------
+*October 23, 2020*
+
+### Added
+- Stylelint added to lint styling on build.
+
+
 v4.1.0
 ------------------------------
 *September 28, 2020*
 
-### Added 
-- data-test IDs to Footer Component 
-- Test for Footer Icons 
-- F-Footer Component-Object 
+### Added
+- data-test IDs to Footer Component
+- Test for Footer Icons
+- F-Footer Component-Object
 
 ### Changed
-- Npm scripts 
+- Npm scripts
 
 
 v4.0.0

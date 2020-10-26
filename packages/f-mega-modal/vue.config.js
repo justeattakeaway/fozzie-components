@@ -17,5 +17,8 @@ module.exports = {
         config.externals({
             'body-scroll-lock': 'body-scroll-lock'
         });
+    },
+    pluginOptions: {
+        lintStyleOnBuild: true
     }
 };

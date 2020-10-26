@@ -6,12 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.2.0
 ------------------------------
-*October 23, 2020*
+*October 26, 2020*
 
 ### Changed
 - Don't fetch user details when showUserInfo prop is false.
 - Use `axiosServices` from `f-services` instead of axios.
 - Use latest `f-vue-icons`.
+
+### Added
+- Stylelint added to lint styling on build.
 
 
 v4.1.0
