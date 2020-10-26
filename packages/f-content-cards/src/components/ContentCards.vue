@@ -62,7 +62,6 @@ export const CARDSOURCE_CUSTOM = 'custom';
  * @returns {{contentCTA, customVoucherCode, contentId: *, contentAction: *, contentPosition, contentTitle: *, contentType: string}}
  */
 const createMetadataCardEvent = (contentAction, card) => {
-    // console.log(card);
     const {
         id: contentId,
         title: contentTitle,
