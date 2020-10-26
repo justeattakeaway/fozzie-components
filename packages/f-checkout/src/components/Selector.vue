@@ -32,11 +32,13 @@ export default {
             type: Array,
             default: () => ['', 'As soon as possible', 'Today in 5 minutes']
         },
+
         orderMethod: {
             type: String,
             default: null
         }
     },
+
     data () {
         return {
             selectedTime: null
@@ -53,6 +55,7 @@ $form-input-borderRadius                  : 3px;
 $form-input-borderWidth                   : 1px;
 $form-input-borderColour                  : $grey--light;
 $form-input-borderColour--focus           : $grey--dark;
+
 .o-form-select {
     position: relative;
     height: 60px;
@@ -65,6 +68,7 @@ $form-input-borderColour--focus           : $grey--dark;
     background-color: $form-input-bg;
     border: $form-input-borderWidth solid $form-input-borderColour;
     border-radius: $form-input-borderRadius;
+
     .o-form-select-label {
         display: block;
         position: absolute;
@@ -74,6 +78,7 @@ $form-input-borderColour--focus           : $grey--dark;
         color: $form-label-colour;
         cursor: pointer;
     }
+
     .o-form-select-input {
         height: 100%;
         width: 100%;
@@ -83,6 +88,7 @@ $form-input-borderColour--focus           : $grey--dark;
         color: $color-text;
     }
 }
+
 /**
  * Modifier – .o-form-select--float
  *
@@ -93,6 +99,7 @@ $form-input-borderColour--focus           : $grey--dark;
         @include font-size(body-s);
         top: 15px;
     }
+
     .o-form-select-input {
         padding-top: spacing(x3);
     }
