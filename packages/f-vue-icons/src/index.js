@@ -63,7 +63,7 @@ export { default as PaymentMastercardIcon } from '../icons/PaymentMastercardIcon
 export { default as PaymentPaypalIcon } from '../icons/PaymentPaypalIcon';
 export { default as PaymentVisaVerifiedIcon } from '../icons/PaymentVisaVerifiedIcon';
 export { default as PaymentVisaIcon } from '../icons/PaymentVisaIcon';
-export { default as PlusThinIcon } from '../icons/PlusThinIcon';
+export { default as PlusThickIcon } from '../icons/PlusThickIcon';
 export { default as PlusIcon } from '../icons/PlusIcon';
 export { default as ProfileIcon } from '../icons/ProfileIcon';
 export { default as QuestionmarkIcon } from '../icons/QuestionmarkIcon';
