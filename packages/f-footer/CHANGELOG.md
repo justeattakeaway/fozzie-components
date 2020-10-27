@@ -3,7 +3,8 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (to be added to next release)
+
+v4.2.0
 ------------------------------
 *October 26, 2020*
 
@@ -12,8 +13,9 @@ Latest (to be added to next release)
 
 ### Changed
 - 'jet' theme instead of 'je'
-### Changed 
-- Removed typo in component test 
+- Removed typo in component test
+- Updated dependencies.
+- Updated `f-services` imports to use new variables.
 
 
 v4.1.0
