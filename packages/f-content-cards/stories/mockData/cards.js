@@ -177,18 +177,18 @@ export default () => {
 
     return {
         cards: [
-            // seededRandomCardOfType('Terms_And_Conditions_Card'),
-            // seededRandomCardOfType('Terms_And_Conditions_Card_2'),
-            // seededRandomCardOfType('Header_Card'),
+            seededRandomCardOfType('Terms_And_Conditions_Card'),
+            seededRandomCardOfType('Terms_And_Conditions_Card_2'),
+            seededRandomCardOfType('Header_Card'),
             seededRandomCardOfType('Voucher_Card_1'),
-            // seededRandomCardOfType('Recommendation_Card_1'),
-            seededRandomCardOfType('Promotion_Card_1')
-            // seededRandomCardOfType('Promotion_Card_2'),
-            // seededRandomCardOfType('Home_Promotion_Card_1'),
-            // seededRandomCardOfType('Home_Promotion_Card_2'),
-            // seededRandomCardOfType('Post_Order_Card_1'),
-            // seededRandomCardOfType('Anniversary_Card_1'),
-            // seededRandomCardOfType('Restaurant_FTC_Offer_Card')
+            seededRandomCardOfType('Recommendation_Card_1'),
+            seededRandomCardOfType('Promotion_Card_1'),
+            seededRandomCardOfType('Promotion_Card_2'),
+            seededRandomCardOfType('Home_Promotion_Card_1'),
+            seededRandomCardOfType('Home_Promotion_Card_2'),
+            seededRandomCardOfType('Post_Order_Card_1'),
+            seededRandomCardOfType('Anniversary_Card_1'),
+            seededRandomCardOfType('Restaurant_FTC_Offer_Card')
         ],
         /* eslint-disable camelcase */
         last_full_sync_at: nowMinus5Hours,
