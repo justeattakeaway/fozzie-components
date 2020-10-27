@@ -162,20 +162,12 @@ export default {
       attrs: {
         fill: "#fff",
         d: "M151.7 0v79.37H0v60.68h151.7v79.37h60.69v-79.37h151.7V79.37H212.4V0z",
-        "clip-path": "url(#flag-nz-a)",
-        color: "#000",
-        "font-family": "sans-serif",
-        "font-weight": "400",
-        overflow: "visible"
+        "clip-path": "url(#flag-nz-a)"
       }
     }), h("path", {
       attrs: {
         fill: "#cc142b",
-        d: "M163.84 0v91.5H0v36.41h163.84v91.5h36.41v-91.5H364.1v-36.4H200.25V0z",
-        color: "#000",
-        "font-family": "sans-serif",
-        "font-weight": "400",
-        overflow: "visible"
+        d: "M163.84 0v91.5H0v36.41h163.84v91.5h36.41v-91.5H364.1v-36.4H200.25V0z"
       }
     })]);
   }

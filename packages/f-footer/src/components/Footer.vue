@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import sharedServices from '@justeat/f-services';
+import { globalisationServices } from '@justeat/f-services';
 import ButtonList from './ButtonList.vue';
 import CountrySelector from './CountrySelector.vue';
 import FeedbackBlock from './FeedbackBlock.vue';
@@ -95,14 +95,14 @@ export default {
     },
     computed: {
         footerLocale () {
-            return sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
+            return globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         },
         copy () {
             const localeConfig = tenantConfigs[this.footerLocale];
             return localeConfig;
         },
         theme () {
-            return sharedServices.getTheme(this.footerLocale);
+            return globalisationServices.getTheme(this.footerLocale);
         },
         metaLegalFieldEnabled () {
             return Object.keys(this.copy.metaLegalField).length > 0;
