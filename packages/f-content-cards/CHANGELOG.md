@@ -8,10 +8,7 @@ v2.2.0-beta.2
 *October 26, 2020*
 
 ### Added
-- Integrated card grouping via new Braze dispatcher method, added new prop groupCards and added new
-watch for cardsGrouped enabling a new emitter containing the number of groups and logCardImpressions
-when grouped as well. Please be aware while groupedCards is true limiting cannot be used, this is until
-we have decided how to apply limiting to groups.
+- Integrated card grouping via new Braze dispatcher method, added new prop groupCards and added new watch for cardsGrouped enabling a new emitter containing the number of groups and logCardImpressions when grouped as well. Please be aware while groupedCards is true limiting cannot be used, this is until we have decided how to apply limiting to groups.
 
 Latest (to be added to next release)
 ------------------------------

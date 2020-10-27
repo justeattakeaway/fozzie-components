@@ -10,6 +10,7 @@ v2.9.0
 ### Added
 - Added an entry to gitignore to ignore some local development tools for mocking http requests
 
+
 v2.8.1
 ------------------------------
 *October 26, 2020*

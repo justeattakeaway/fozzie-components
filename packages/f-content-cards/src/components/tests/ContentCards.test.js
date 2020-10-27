@@ -822,5 +822,31 @@ describe('ContentCards', () => {
             // Assert
             expect(metadataDispatcher.logCardImpressions).toHaveBeenCalledTimes(1);
         });
+
+        it('should generate test id attributes on child content cards components within a group', async () => {
+            // Arrange
+            const testId = 'foo';
+            const cardTypes = ['Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1'];
+            const cardsGrouped = createMetadataCardsGrouped(cardTypes);
+
+            // Act
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId,
+                    groupCards: true,
+                    testId
+                }
+            });
+            instance.vm.metadataContentCardsGrouped(cardsGrouped);
+            await instance.vm.$nextTick();
+
+            // Assert
+            expect(instance.find(`[data-test-id="ContentCard-${testId}-0-0"]`).exists()).toBeTruthy();
+            expect(instance.find(`[data-test-id="ContentCard-${testId}-0-1"]`).exists()).toBeTruthy();
+            expect(instance.find(`[data-test-id="ContentCard-${testId}-1-1"]`).exists()).toBeTruthy();
+            expect(instance.find(`[data-test-id="ContentCard-${testId}-0-2"]`).exists()).toBeTruthy();
+            expect(instance.find(`[data-test-id="ContentCard-${testId}-1-2"]`).exists()).toBeTruthy();
+        });
     });
 });

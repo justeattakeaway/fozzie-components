@@ -8,7 +8,7 @@
                 <h3
                     v-if="groupId"
                     :key="groupIndex"
-                    :class="[$style['c-contentCards--group-title']]"
+                    :class="[$style['c-contentCards--group-title'], 'c-contentCards--group-title']"
                     :data-test-id="`${groupIndex}_${groupId}`"
                 >
                     {{ title }}
@@ -22,7 +22,7 @@
                         :is="handleCustomCardType(contentCard.type)"
                         :card="contentCard"
                         :tenant="tenant"
-                        :data-test-id="testIdForItemWithIndex(cardIndex)"
+                        :data-test-id="testIdForItemWithIndex(cardIndex, groupIndex)"
                     />
                 </div>
             </template>
@@ -520,9 +520,12 @@ export default {
         /**
          * Generates a unique test id on a per-card basis if testId prop provided
          * @param index
+         * @param groupIndex optional
          */
-        testIdForItemWithIndex (index) {
-            return this.testId && `ContentCard-${this.testId}-${index}`;
+        testIdForItemWithIndex (index, groupIndex = null) {
+            return groupIndex !== null ?
+                this.testId && `ContentCard-${this.testId}-${index}-${groupIndex}` :
+                this.testId && `ContentCard-${this.testId}-${index}`;
         }
     }
 };
