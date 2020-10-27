@@ -54,7 +54,7 @@
 
 <script>
 import { ChevronIcon } from '@justeat/f-vue-icons';
-import sharedServices from '@justeat/f-services';
+import { windowServices } from '@justeat/f-services';
 
 export default {
     components: {
@@ -90,8 +90,8 @@ export default {
     },
 
     mounted () {
-        this.currentScreenWidth = sharedServices.getWindowWidth();
-        sharedServices.addEvent('resize', this.onResize, 100);
+        this.currentScreenWidth = windowServices.getWindowWidth();
+        windowServices.addEvent('resize', this.onResize, 100);
 
         if (this.isBelowWide) {
             this.panelCollapsed = true;
@@ -99,7 +99,7 @@ export default {
     },
 
     destroyed () {
-        sharedServices.removeEvent('resize', this.onResize);
+        windowServices.removeEvent('resize', this.onResize);
     },
 
     methods: {
@@ -110,7 +110,7 @@ export default {
         },
 
         onResize () {
-            this.currentScreenWidth = sharedServices.getWindowWidth();
+            this.currentScreenWidth = windowServices.getWindowWidth();
 
             if (this.isBelowWide) {
                 this.panelCollapsed = true;
