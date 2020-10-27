@@ -17,6 +17,23 @@ describe('f-checkout component tests', () => {
         expect(CheckoutComponent.isAllergenLinkDisplayed()).toBe(true);
     }
 
+    it('should display all fields', () => {
+        // Act
+        var areFieldsDisplayed = function(){
+            var i;
+            var fields = CheckoutComponent.isCheckoutFormFieldsDisplayed();
+            for(i = 0; i < fields.values.length; i++){
+                if(fields[i]==false){
+                    console.log(fields);
+                    return false;
+                }
+            }
+            return true;
+        }
+        // Assert
+        expect(areFieldsDisplayed()).toBe(true);
+    });
+
     // Skip until we have something to assert on
     it.skip('should submit the checkout form', () => {
 
