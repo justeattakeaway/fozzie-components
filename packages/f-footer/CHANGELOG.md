@@ -13,7 +13,7 @@ v4.2.0
 
 ### Changed
 - 'jet' theme instead of 'je'
-- Removed typo in component test
+- Removed typo in component test 
 - Updated dependencies.
 - Updated `f-services` imports to use new variables.
 
