@@ -27,8 +27,8 @@
                     name="mobile-number"
                     data-test-id="input-mobile-number"
                     :label-text="copy.labels.mobileNumber"
-                    :class="shouldShowMobileNumberRequiredError ? $style['c-checkout-formField--error'] : '' "
                     label-style="inline">
+                    // TODO: - Replace with f-error-message
                     <template #error>
                         <p
                             v-if="shouldShowMobileNumberRequiredError"
@@ -41,7 +41,9 @@
 
                 <address-block
                     v-if="checkoutMethod === delivery"
+                    v-model="address"
                     :labels="copy.labels"
+                    :errors="addressErrors"
                     data-test-id='address-block' />
 
                 <form-selector
@@ -110,6 +112,15 @@ const formValidationState = $v => {
     };
 };
 
+function validPostcode () {
+    if (this.address.postcode) {
+        const postcode = this.address.postcode.replace(/\s/g, '');
+        const regex = /^[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}$/i;
+        return regex.test(postcode);
+    }
+    return false;
+}
+
 export default {
     name: 'VueCheckout',
 
@@ -148,8 +159,8 @@ export default {
             firstName: 'firstName',
             mobileNumber: null,
             address: {
-                lineOne: null,
-                lineTwo: null,
+                line1: null,
+                line2: null,
                 city: null,
                 postcode: null
             },
@@ -169,7 +180,55 @@ export default {
         },
 
         shouldShowMobileNumberRequiredError () {
-            return (!this.$v.mobileNumber.required || !this.$v.mobileNumber.numeric || !this.$v.mobileNumber.minLength) && this.$v.mobileNumber.$dirty;
+            return (!this.$v.mobileNumber.required ||
+                    !this.$v.mobileNumber.numeric ||
+                    !this.$v.mobileNumber.minLength)
+
+                    && this.$v.mobileNumber.$dirty;
+        },
+
+        shouldShowAddressLine1RequiredError () {
+            return !this.$v.address.line1.required && this.$v.address.line1.$dirty;
+        },
+
+        shouldShowAddressCityRequiredError () {
+            return !this.$v.address.city.required && this.$v.address.city.$dirty;
+        },
+
+        shouldShowAddressPostcodeRequiredError () {
+            return !this.$v.address.postcode.required && this.$v.address.postcode.$dirty;
+        },
+
+        shouldShowAddressPostcodeTypeError () {
+            return !this.$v.address.postcode.validPostcode && this.$v.address.postcode.$dirty;
+        },
+
+        addressErrors () {
+            return {
+                line1: {
+                    error: this.shouldShowAddressLine1RequiredError,
+                    message: this.copy.validationMessages.addressLine1.requiredError
+                },
+
+                city: {
+                    error: this.shouldShowAddressCityRequiredError,
+                    message: this.copy.validationMessages.city.requiredError
+                },
+
+                postcode: {
+                    errors: {
+                        required: {
+                            error: this.shouldShowAddressPostcodeRequiredError,
+                            message: this.copy.validationMessages.postcode.requiredError
+                        },
+
+                        type: {
+                            error: this.shouldShowAddressPostcodeTypeError,
+                            message: this.copy.validationMessages.postcode.invalidCharError
+                        }
+                    }
+                }
+            };
         }
     },
 
@@ -177,6 +236,7 @@ export default {
         onFormSubmit () {
             if (this.isFormInvalid()) {
                 const validationState = formValidationState(this.$v);
+                console.log(validationState);
             }
         },
 
@@ -195,6 +255,19 @@ export default {
             required,
             numeric,
             minLength: minLength(10)
+        },
+
+        address: {
+            line1: {
+                required
+            },
+            city: {
+                required
+            },
+            postcode: {
+                required,
+                validPostcode
+            }
         }
     }
 };
@@ -254,12 +327,6 @@ $line-height                              : 16px;
         @include media('<mid') {
             display: block;
             width: 100%;
-        }
-    }
-
-    .c-checkout-formField--error {
-        input {
-            border: 1px solid $red;
         }
     }
 

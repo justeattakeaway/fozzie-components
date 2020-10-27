@@ -27,10 +27,9 @@
             >
                 <!-- TODO WCB-1031 - Extract error messages into a separate component -->
                 <p
-                    v-if="genericErrorMessage"
                     :class="$style['o-form-error']">
                     <warning-icon :class="$style['o-form-error-icon']" />
-                    {{ genericErrorMessage }}
+                    server error
                 </p>
                 <form-field
                     v-model="firstName"
