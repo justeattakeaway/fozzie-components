@@ -16,7 +16,6 @@
 
 <script>
 import ContentCards from '@/components/ContentCards.vue';
-import makeServer from './mockServer';
 
 export default {
     components: {
@@ -27,15 +26,7 @@ export default {
             'Voucher_Card_1',
             'Promotion_Card_1'
         ]
-    }),
-    created () {
-        makeServer();
-    },
-    methods: {
-        handleErrors (error) {
-            console.log(error);
-        }
-    }
+    })
 };
 </script>
 
