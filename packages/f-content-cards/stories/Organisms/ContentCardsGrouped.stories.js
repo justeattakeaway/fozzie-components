@@ -47,6 +47,7 @@ const template = `<content-cards
             :apiKey="apiKey"
             :title="title"
             :locale="locale"
+            :group-cards="true"
             :enabledCardTypes="enabledCardTypes" />`;
 
 export default {
