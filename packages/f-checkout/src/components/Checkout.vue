@@ -20,8 +20,6 @@
             :class="$style['c-card--dimensions']">
             <form
                 type="post"
-                @click="formStart"
-                @focus="formStart"
                 @submit.prevent="onFormSubmit">
                 <form-field
                     v-model="mobileNumber"
@@ -222,13 +220,8 @@ export default {
     methods: {
         onFormSubmit () {
             if (this.isFormInvalid()) {
-                const validationState = formValidationState(this.$v);
-                console.log(validationState);
+                formValidationState(this.$v);
             }
-        },
-
-        formStart () {
-            this.formStarted = true;
         },
 
         isFormInvalid () {
