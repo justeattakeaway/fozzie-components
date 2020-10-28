@@ -6,13 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (to be added to next release)
 ------------------------------
-*October 26, 2020*
+*October 28, 2020*
 
 ### Added
 - Stylelint added to lint styling on build.
 
 ### Changed
 - 'jet' theme instead of 'je'
+
+### Removed
+- System test mocks
 
 
 v0.37.0
