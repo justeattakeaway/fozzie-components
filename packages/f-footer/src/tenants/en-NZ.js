@@ -109,7 +109,7 @@ export default {
                     gtm: 'click_about_privacy_policy'
                 },
                 {
-                    url: 'https://connect.menulog.co.nz/login?client_id=RappsOrigPartnerCentre&response_type=code&redirect_uri=https:%2F%2Fpartner.menulog.co.nz%2Fsignin-jeconnect&state=QaF4ae5nfj7FUpuoevTVCHvmMBxIA1hO_4mDtePNEJOasCly6wdTLaHjTuvS7_If4SwPYZelgwT0ZFYb7CCZvfIIr9X0OVLKiRpdCLYU9zJPuorMgnFjjRlyQNdU8L_5ZvkfGGBtXJx-jNOlh5lU_aqiQ-KgrKthGa83ZbYH8GjV81bwGb7iJ8PRFJPYbwTyys-zclUwNFxXhfdsOpqIWsIlfpQ',
+                    url: 'https://connect.menulog.co.nz/',
                     text: 'Partner Centre',
                     gtm: 'click_about_partner_centre'
                 },

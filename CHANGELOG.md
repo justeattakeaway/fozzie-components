@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.8.1
 ------------------------------
+*October 28, 2020*
+
+### Removed
+
+- Year from the copyright notes
+- Authors from f-vue-icons
+- Params from a corporate link
+- travis yml file
+
+
+v2.8.1
+------------------------------
 *October 26, 2020*
 
 ### Changed
