@@ -24,7 +24,7 @@ describe('f-checkout component tests', () => {
         'addressline2',
         'addresscity',
         'addresspostcode'
-    ]).it.only('should display all fields', (fieldName) => {
+    ]).it('should display all fields', (fieldName) => {
         // Assert
         expect(CheckoutComponent.areCheckoutFormFieldsDisplayed(fieldName)).toBe(true);
     });
