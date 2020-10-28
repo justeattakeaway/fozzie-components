@@ -32,7 +32,7 @@
                     // TODO: - Replace with f-error-message
                     <template #error>
                         <p
-                            v-if="shouldShowMobileNumberRequiredError"
+                            v-if="shouldShowMobileNumberInvalidError"
                             :class="$style['o-form-error']"
                             data-test-id='error-mobile-number-empty'>
                             {{ copy.validationMessages.mobileNumber.requiredError }}
@@ -79,7 +79,6 @@ import { globalisationServices } from '@justeat/f-services';
 import { validationMixin } from 'vuelidate';
 import {
     required,
-    requiredIf,
     numeric,
     minLength
 } from 'vuelidate/lib/validators';
@@ -186,51 +185,32 @@ export default {
             return this.checkoutMethod === 'Delivery';
         },
 
-        shouldShowMobileNumberRequiredError () {
-            return (!this.$v.mobileNumber.required ||
-                    !this.$v.mobileNumber.numeric ||
-                    !this.$v.mobileNumber.minLength)
-
-                    && this.$v.mobileNumber.$dirty;
-        },
-
-        shouldShowAddressLine1RequiredError () {
-            return !this.$v.address.line1.required && this.$v.address.line1.$dirty;
-        },
-
-        shouldShowAddressCityRequiredError () {
-            return !this.$v.address.city.required && this.$v.address.city.$dirty;
-        },
-
-        shouldShowAddressPostcodeRequiredError () {
-            return !this.$v.address.postcode.required && this.$v.address.postcode.$dirty;
-        },
-
-        shouldShowAddressPostcodeTypeError () {
-            return !this.$v.address.postcode.isValidPostcode && this.$v.address.postcode.$dirty;
+        shouldShowMobileNumberInvalidError () {
+            const mobileNumberInvalid = !this.$v.mobileNumber.required || !this.$v.mobileNumber.numeric || !this.$v.mobileNumber.minLength;
+            return mobileNumberInvalid && this.$v.mobileNumber.$dirty;
         },
 
         addressErrors () {
             return {
                 line1: {
-                    error: this.shouldShowAddressLine1RequiredError,
+                    error: !this.$v.address.line1.required && this.$v.address.line1.$dirty,
                     message: this.copy.validationMessages.addressLine1.requiredError
                 },
 
                 city: {
-                    error: this.shouldShowAddressCityRequiredError,
+                    error: !this.$v.address.city.required && this.$v.address.city.$dirty,
                     message: this.copy.validationMessages.city.requiredError
                 },
 
                 postcode: {
                     errors: {
                         required: {
-                            error: this.shouldShowAddressPostcodeRequiredError,
+                            error: !this.$v.address.postcode.required && this.$v.address.postcode.$dirty,
                             message: this.copy.validationMessages.postcode.requiredError
                         },
 
                         type: {
-                            error: this.shouldShowAddressPostcodeTypeError,
+                            error: !this.$v.address.postcode.isValidPostcode && this.$v.address.postcode.$dirty,
                             message: this.copy.validationMessages.postcode.invalidCharError
                         }
                     }
