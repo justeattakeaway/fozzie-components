@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (to be added to next release)
 ------------------------------
-*October 26, 2020*
+*October 28, 2020*
 
 ### Added
 - Added an entry to gitignore to ignore some local development tools for mocking http requests
