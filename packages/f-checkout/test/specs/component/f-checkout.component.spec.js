@@ -1,4 +1,5 @@
 import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.component';
+import forEach from 'mocha-each';
 
 describe('f-checkout component tests', () => {
     beforeEach(() => {
@@ -17,21 +18,15 @@ describe('f-checkout component tests', () => {
         expect(CheckoutComponent.isAllergenLinkDisplayed()).toBe(true);
     }
 
-    it('should display all fields', () => {
-        // Act
-        var areFieldsDisplayed = function(){
-            var i;
-            var fields = CheckoutComponent.isCheckoutFormFieldsDisplayed();
-            for(i = 0; i < fields.values.length; i++){
-                if(fields[i]==false){
-                    console.log(fields);
-                    return false;
-                }
-            }
-            return true;
-        }
+    forEach([
+        'mobilenumber',
+        'addressline1',
+        'addressline2',
+        'addresscity',
+        'addresspostcode'
+    ]).it.only('should display all fields', (fieldName) => {
         // Assert
-        expect(areFieldsDisplayed()).toBe(true);
+        expect(CheckoutComponent.areCheckoutFormFieldsDisplayed(fieldName)).toBe(true);
     });
 
     // Skip until we have something to assert on

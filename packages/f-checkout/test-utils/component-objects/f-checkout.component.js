@@ -39,6 +39,24 @@ exports.submitCheckoutForm = (addressInfo) => {
     addressPostcodeInput().setValue(addressInfo.postcode);
 };
 
+exports.areCheckoutFormFieldsDisplayed = (fieldName) => {
+
+    switch(fieldName.toLowerCase()) {
+        case 'mobilenumber':
+            return mobileNumberInput().isDisplayed();
+        case 'addressline1':
+            return addressLine1Input().isDisplayed();
+        case 'addressline2':
+            return addressLine2Input().isDisplayed();
+        case 'addresscity':
+            return addressCityInput().isDisplayed();
+        case 'addresspostcode':
+            return addressPostcodeInput().isDisplayed();
+        default:
+            throw new Error(`Field ${fieldName} not recognized`);
+    }
+}
+
 /**
  * @description
  * Sets the value of the delivery time dropdown based on visible text.
