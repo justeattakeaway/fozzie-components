@@ -4,6 +4,7 @@
         :class="$style['c-checkout']"
         data-test-id='checkout-component'>
         <alert
+            v-if="genericErrorMessage"
             :locale="locale"
             type="danger"
             heading="error">
@@ -40,7 +41,7 @@
                 </form-field>
 
                 <address-block
-                    v-if="checkoutMethod === delivery"
+                    v-if="isAddressRequired"
                     v-model="address"
                     :labels="copy.labels"
                     :errors="addressErrors"
@@ -78,6 +79,7 @@ import { globalisationServices } from '@justeat/f-services';
 import { validationMixin } from 'vuelidate';
 import {
     required,
+    requiredIf,
     numeric,
     minLength
 } from 'vuelidate/lib/validators';
@@ -112,7 +114,7 @@ const formValidationState = $v => {
     };
 };
 
-function validPostcode () {
+function isValidPostcode () {
     if (this.address.postcode) {
         const postcode = this.address.postcode.replace(/\s/g, '');
         const regex = /^[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}$/i;
@@ -166,7 +168,8 @@ export default {
             },
             buttonText: 'Go to payment',
             delivery: CHECKOUT_METHOD_DELIVERY,
-            formStarted: false
+            formStarted: false,
+            genericErrorMessage: null
         };
     },
 
@@ -200,7 +203,7 @@ export default {
         },
 
         shouldShowAddressPostcodeTypeError () {
-            return !this.$v.address.postcode.validPostcode && this.$v.address.postcode.$dirty;
+            return !this.$v.address.postcode.isValidPostcode && this.$v.address.postcode.$dirty;
         },
 
         addressErrors () {
@@ -229,6 +232,10 @@ export default {
                     }
                 }
             };
+        },
+
+        isAddressRequired () {
+            return this.checkoutMethod === 'Delivery';
         }
     },
 
@@ -250,25 +257,28 @@ export default {
         }
     },
 
-    validations: {
-        mobileNumber: {
-            required,
-            numeric,
-            minLength: minLength(10)
-        },
+    validations () {
+        return {
+            address: {
+                line1: {
+                    required: requiredIf(this.isAddressRequired)
+                },
+                city: {
+                    required: requiredIf(this.isAddressRequired)
+                },
+                postcode: {
+                    required: requiredIf(this.isAddressRequired),
+                    isValidPostcode: requiredIf(this.isAddressRequired)
+                }
+            },
 
-        address: {
-            line1: {
-                required
-            },
-            city: {
-                required
-            },
-            postcode: {
+
+            mobileNumber: {
                 required,
-                validPostcode
+                numeric,
+                minLength: minLength(10)
             }
-        }
+        };
     }
 };
 </script>

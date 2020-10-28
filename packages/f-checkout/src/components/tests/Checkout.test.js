@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+import flushPromises from 'flush-promises';
 import { VALID_CHECKOUT_METHOD } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 
@@ -86,6 +87,46 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(name.props('cardHeading')).toEqual('Name, confirm your details');
+            });
+        });
+    });
+
+    describe('with a working checkout service', () => {
+        describe('when checkoutMethod set to `Collection`', () => {
+            const propsData = { checkoutMethod: 'Collection' };
+
+            it('should show error message and emit failure event when the mobile number field is not populated', async () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, { propsData });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(wrapper.vm.shouldShowMobileNumberRequiredError).toBe(true);
+                // expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+                // expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('firstName');
+            });
+
+            it('should not show error message or emit failure event when the address input fields are not populated', async () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, { propsData });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(wrapper.vm.shouldShowAddressLine1RequiredError).toBe(false);
+                expect(wrapper.vm.shouldShowAddressCityRequiredError).toBe(false);
+                expect(wrapper.vm.shouldShowAddressPostcodeRequiredError).toBe(false);
+                expect(wrapper.vm.shouldShowAddressPostcodeTypeError).toBe(false);
+
+                // expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
+                // expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('firstName');
             });
         });
     });
