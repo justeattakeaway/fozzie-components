@@ -109,7 +109,7 @@ export default {
                     gtm: 'click_about_privacy_policy'
                 },
                 {
-                    url: 'https://connect.menulog.co.nz/***REMOVED***',
+                    url: 'https://connect.menulog.co.nz/',
                     text: 'Partner Centre',
                     gtm: 'click_about_partner_centre'
                 },
