@@ -4,7 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v2.8.1
+v2.8.3
+------------------------------
+*October 28, 2020*
+
+### Added
+- `CONTRIBUTING` file added to explain some of the guidelines we have around PRs.
+
+
+v2.8.2
 ------------------------------
 *October 28, 2020*
 
