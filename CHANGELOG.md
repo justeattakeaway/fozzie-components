@@ -11,7 +11,15 @@ Latest (to be added to next release)
 - Added an entry to gitignore to ignore some local development tools for mocking http requests
 
 
-v2.8.1
+v2.8.3
+------------------------------
+*October 28, 2020*
+
+### Added
+- `CONTRIBUTING` file added to explain some of the guidelines we have around PRs.
+
+
+v2.8.2
 ------------------------------
 *October 28, 2020*
 
