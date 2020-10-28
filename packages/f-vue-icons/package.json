@@ -11,10 +11,6 @@
   ],
   "sideEffects": false,
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-vue-icons",
-  "authors": [
-    "egoist <0x142857@gmail.com>",
-    "ashleynolan <nolly00@gmail.com>"
-  ],
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
