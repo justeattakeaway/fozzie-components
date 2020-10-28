@@ -41,7 +41,7 @@
                 </form-field>
 
                 <address-block
-                    v-if="isAddressRequired"
+                    v-if="checkoutMethod === delivery"
                     v-model="address"
                     :labels="copy.labels"
                     :errors="addressErrors"
@@ -182,6 +182,10 @@ export default {
             return `${this.name}, confirm your details`;
         },
 
+        isAddressRequired () {
+            return this.checkoutMethod === 'Delivery';
+        },
+
         shouldShowMobileNumberRequiredError () {
             return (!this.$v.mobileNumber.required ||
                     !this.$v.mobileNumber.numeric ||
@@ -232,10 +236,6 @@ export default {
                     }
                 }
             };
-        },
-
-        isAddressRequired () {
-            return this.checkoutMethod === 'Delivery';
         }
     },
 
@@ -258,21 +258,29 @@ export default {
     },
 
     validations () {
-        return {
-            address: {
-                line1: {
-                    required: requiredIf(this.isAddressRequired)
+        if (this.isAddressRequired) {
+            return {
+                address: {
+                    line1: {
+                        required
+                    },
+                    city: {
+                        required
+                    },
+                    postcode: {
+                        required,
+                        isValidPostcode
+                    }
                 },
-                city: {
-                    required: requiredIf(this.isAddressRequired)
-                },
-                postcode: {
-                    required: requiredIf(this.isAddressRequired),
-                    isValidPostcode: requiredIf(this.isAddressRequired)
+
+                mobileNumber: {
+                    required,
+                    numeric,
+                    minLength: minLength(10)
                 }
-            },
-
-
+            };
+        }
+        return {
             mobileNumber: {
                 required,
                 numeric,
