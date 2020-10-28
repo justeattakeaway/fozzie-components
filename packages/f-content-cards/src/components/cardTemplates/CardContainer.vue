@@ -159,6 +159,11 @@ export default {
         width: 100%;
         text-decoration: initial;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        margin-right: spacing(x2);
+        margin-bottom: spacing(x2);
 
         @include media('>=narrowMid') {
             max-width: 370px;
@@ -253,13 +258,13 @@ export default {
     .c-contentCard-info {
         position: relative;
         display: flex;
+        flex-grow: 1;
         flex-direction: column;
         align-items: center;
         min-height: 164px; // min-height set to the height of an card with a one-line title
         background-color: $white;
         padding: spacing(x3) spacing(x2);
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-        height: 100%;
         border-radius: 0 0 $border-radius $border-radius;
     }
 

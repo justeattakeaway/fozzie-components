@@ -42,6 +42,19 @@ const createCard = type => ({
 
 const createMetadataCards = cardTypes => cardTypes.map(type => createCard(type));
 
+const createMetadataCardsGrouped = cardTypes => cardTypes.reduce((acc, type) => {
+    const card = createCard(type);
+
+    if (type === 'Header_Card' || type === 'Terms_And_Conditions_Card') {
+        return [...acc, { ...card, cards: [] }];
+    }
+    if (!acc.length) {
+        return [{ title: '', cards: [card] }];
+    }
+    acc[acc.length - 1].cards.push(card);
+    return acc;
+}, []);
+
 beforeEach(() => {
     jest.resetAllMocks();
     initialiseMetadata.mockResolvedValue(metadataDispatcher);
@@ -719,6 +732,121 @@ describe('ContentCards', () => {
             // Assert
             expect(component.findComponent(ContentCards).findAllComponents(HomePromotionCard1)).toHaveLength(0);
             expect(component.findComponent(ContentCards).findAllComponents(HomePromotionCard2)).toHaveLength(1);
+        });
+    });
+
+    describe('when `groupCards` prop is set', () => {
+        it('should group cards by Header_Card or Terms_And_Conditions_Card', async () => {
+            // Arrange
+            const cardTypes = ['Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1'];
+            const cardsGrouped = createMetadataCardsGrouped(cardTypes);
+
+            // Act
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId,
+                    groupCards: true
+                }
+            });
+            instance.vm.metadataContentCardsGrouped(cardsGrouped);
+            await instance.vm.$nextTick();
+            const postOrderCards = instance.findAllComponents(cardTemplates.PostOrderCard);
+            const [, { id: groupId1, title: title1Text }, { id: groupId2, title: title2Text }] = cardsGrouped;
+            const title1 = instance.find(`[data-test-id="${1}_${groupId1}"]`);
+            const title2 = instance.find(`[data-test-id="${2}_${groupId2}"]`);
+
+            // Assert - one for each child
+            expect(postOrderCards).toHaveLength(5);
+            expect(title1.text()).toBe(title1Text);
+            expect(title2.text()).toBe(title2Text);
+        });
+
+        it('should emit an event with the grouped content card count of 3 when appboy is initialised', async () => {
+            // Arrange
+            const cardTypes = ['Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1'];
+            const cardsGrouped = createMetadataCardsGrouped(cardTypes);
+
+            // Act
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId,
+                    groupCards: true
+                }
+            });
+            instance.vm.metadataContentCardsGrouped(cardsGrouped);
+            await instance.vm.$nextTick();
+
+            // Assert
+            expect(instance.emitted('get-group-count')[0]).toEqual([3]);
+        });
+
+        it('should call logCardImpressions from f-metadata with data from all displayed cards including the header cards minus the groups with no ID', async () => {
+            // Arrange
+            const cardTypes = ['Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1'];
+            const cardsGrouped = createMetadataCardsGrouped(cardTypes);
+
+            // Act
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId,
+                    groupCards: true
+                }
+            });
+            instance.vm.metadataContentCardsGrouped(cardsGrouped);
+            await instance.vm.$nextTick();
+
+            // Assert - Check to see all card Id's are present excluding cards with with no ID
+            expect(metadataDispatcher.logCardImpressions).toHaveBeenCalledWith(cardsGrouped.flatMap(({ cards, id: groupId }) => [groupId, ...cards.map(({ id: cardId }) => cardId)])
+                .filter(cardID => cardID !== undefined));
+        });
+
+        it('should call logCardImpressions from f-metadata ONCE and make sure the normal logCardImpressions from cards watcher is not being fired when the groupCards prop is set to true', async () => {
+            // Arrange
+            const cardTypes = ['Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1'];
+            const cardsGrouped = createMetadataCardsGrouped(cardTypes);
+
+            // Act
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId,
+                    groupCards: true
+                }
+            });
+            instance.vm.metadataContentCardsGrouped(cardsGrouped);
+            await instance.vm.$nextTick();
+
+            // Assert
+            expect(metadataDispatcher.logCardImpressions).toHaveBeenCalledTimes(1);
+        });
+
+        it('should generate test id attributes on child content cards components within a group', async () => {
+            // Arrange
+            const testId = 'foo';
+            const cardTypes = ['Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1'];
+            const cardsGrouped = createMetadataCardsGrouped(cardTypes);
+
+            // Act
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId,
+                    groupCards: true,
+                    testId
+                }
+            });
+            instance.vm.metadataContentCardsGrouped(cardsGrouped);
+            await instance.vm.$nextTick();
+
+            // Assert
+            expect(instance.find(`[data-test-id="ContentCard-${testId}-0-0"]`).exists()).toBeTruthy();
+            expect(instance.find(`[data-test-id="ContentCard-${testId}-0-1"]`).exists()).toBeTruthy();
+            expect(instance.find(`[data-test-id="ContentCard-${testId}-1-1"]`).exists()).toBeTruthy();
+            expect(instance.find(`[data-test-id="ContentCard-${testId}-0-2"]`).exists()).toBeTruthy();
+            expect(instance.find(`[data-test-id="ContentCard-${testId}-1-2"]`).exists()).toBeTruthy();
         });
     });
 });

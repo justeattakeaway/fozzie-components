@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+Latest (to be added to next release)
+------------------------------
+*October 26, 2020*
+
+### Added
+- Added an entry to gitignore to ignore some local development tools for mocking http requests
+
 
 v2.8.1
 ------------------------------

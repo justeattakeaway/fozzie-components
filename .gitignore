@@ -30,3 +30,4 @@ package-lock.json
 dist/
 coverage/
 packages/**/src/components/tests/.jest-test-results.json
+/packages/f-content-cards/stories/mocks/
