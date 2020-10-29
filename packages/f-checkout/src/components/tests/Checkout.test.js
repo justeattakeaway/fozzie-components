@@ -136,7 +136,6 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(wrapper.vm.addressErrors).toBe(null);
-
                 expect(wrapper.emitted(EventNames.GoToPaymentFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('mobileNumber');
             });
@@ -173,7 +172,6 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(wrapper.vm.addressErrors.line1.error).toBe(true);
-
                 expect(wrapper.emitted(EventNames.GoToPaymentFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('address');
             });
@@ -189,7 +187,6 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(wrapper.vm.addressErrors.city.error).toBe(true);
-
                 expect(wrapper.emitted(EventNames.GoToPaymentFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('address');
             });
@@ -205,7 +202,6 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(wrapper.vm.addressErrors.postcode.errors.required.error).toBe(true);
-
                 expect(wrapper.emitted(EventNames.GoToPaymentFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('address');
             });
@@ -223,7 +219,6 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(wrapper.vm.addressErrors.postcode.errors.type.error).toBe(true);
-
                 expect(wrapper.emitted(EventNames.GoToPaymentFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('address');
             });
