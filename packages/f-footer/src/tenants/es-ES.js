@@ -206,34 +206,58 @@ export default {
             gtm: 'click_country_au'
         },
         {
-            key: 'br',
-            localisedName: 'Brasil',
-            siteUrl: 'https://www.ifood.com.br',
-            gtm: 'click_country_br'
+            key: 'at',
+            localisedName: 'Österreich',
+            siteUrl: 'https://www.lieferando.at',
+            gtm: 'click_country_at'
+        },
+        {
+            key: 'be',
+            localisedName: 'België',
+            siteUrl: 'https://www.takeaway.com/be',
+            gtm: 'click_country_be'
+        },
+        {
+            key: 'bg',
+            localisedName: 'Bulgaria',
+            siteUrl: 'https://www.takeaway.com/bg',
+            gtm: 'click_country_bg'
         },
         {
             key: 'ca',
-            localisedName: 'Canadá',
-            siteUrl: 'https://www.just-eat.ca',
+            localisedName: 'Canada',
+            siteUrl: 'https://www.skipthedishes.com',
             gtm: 'click_country_ca'
         },
         {
             key: 'dk',
-            localisedName: 'Dinamarca',
+            localisedName: 'Danmark',
             siteUrl: 'https://www.just-eat.dk',
             gtm: 'click_country_dk'
         },
         {
             key: 'fr',
-            localisedName: 'Francia',
+            localisedName: 'France',
             siteUrl: 'https://www.just-eat.fr/',
             gtm: 'click_country_fr'
         },
         {
+            key: 'de',
+            localisedName: 'Deutschland',
+            siteUrl: 'https://www.lieferando.de',
+            gtm: 'click_country_de'
+        },
+        {
             key: 'ie',
-            localisedName: 'Irlanda',
+            localisedName: 'Ireland',
             siteUrl: 'https://www.just-eat.ie',
             gtm: 'click_country_ie'
+        },
+        {
+            key: 'il',
+            localisedName: 'Israel',
+            siteUrl: 'https://www.10bis.co.il/next',
+            gtm: 'click_country_il'
         },
         {
             key: 'it',
@@ -242,28 +266,70 @@ export default {
             gtm: 'click_country_it'
         },
         {
-            key: 'no',
-            localisedName: 'Noruega',
-            siteUrl: 'https://www.just-eat.no',
-            gtm: 'click_country_no'
+            key: 'lu',
+            localisedName: 'Luxembourg',
+            siteUrl: 'https://www.takeaway.com/lu',
+            gtm: 'click_country_lu'
+        },
+        {
+            key: 'nl',
+            localisedName: 'Nederland',
+            siteUrl: 'https://www.thuisbezorgd.nl',
+            gtm: 'click_country_nl'
         },
         {
             key: 'nz',
-            localisedName: 'Nueva Zelanda',
+            localisedName: 'New Zealand',
             siteUrl: 'https://www.menulog.co.nz',
             gtm: 'click_country_nz'
         },
         {
+            key: 'no',
+            localisedName: 'Norge',
+            siteUrl: 'https://www.just-eat.no',
+            gtm: 'click_country_no'
+        },
+        {
+            key: 'pl',
+            localisedName: 'Polska',
+            siteUrl: 'https://www.pyszne.pl',
+            gtm: 'click_country_pl'
+        },
+        {
+            key: 'pt',
+            localisedName: 'Portugal',
+            siteUrl: 'https://www.takeaway.com/pt',
+            gtm: 'click_country_pt'
+        },
+        {
+            key: 'ro',
+            localisedName: 'Romania',
+            siteUrl: 'https://www.takeaway.com/ro',
+            gtm: 'click_country_ro'
+        },
+        {
             key: 'gb',
-            localisedName: 'Reino Unido',
+            localisedName: 'United Kingdom',
             siteUrl: 'https://www.just-eat.co.uk',
             gtm: 'click_country_gb'
         },
         {
             key: 'ch',
-            localisedName: 'Suiza',
+            localisedName: 'Schweiz',
             siteUrl: 'https://www.eat.ch',
             gtm: 'click_country_ch'
+        },
+        {
+            key: 'ch',
+            localisedName: 'Switzerland',
+            siteUrl: 'https://www.eat.ch/en',
+            gtm: 'click_country_ch_en'
+        },
+        {
+            key: 'ch',
+            localisedName: 'Suisse',
+            siteUrl: 'https://www.eat.ch/fr',
+            gtm: 'click_country_ch_fr'
         }
     ],
     changeCurrentCountry: 'Estás en Just Eat España, haz clic aquí para cambiar país.',
