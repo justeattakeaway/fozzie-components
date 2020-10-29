@@ -162,7 +162,7 @@ describe('Checkout', () => {
                 expect(wrapper.emitted(EventNames.GoToPaymentSuccess).length).toBe(1);
             });
 
-            it('should not show error message or emit failure event when the address input fields are not populated', async () => {
+            it('should show error message and emit failure event when the address line 1 input field is not populated', async () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, { propsData });
 
@@ -175,7 +175,57 @@ describe('Checkout', () => {
                 expect(wrapper.vm.addressErrors.line1.error).toBe(true);
 
                 expect(wrapper.emitted(EventNames.GoToPaymentFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('mobileNumber');
+                expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('address');
+            });
+
+            it('should show error message and emit failure event when the address city input field is not populated', async () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, { propsData });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(wrapper.vm.addressErrors.city.error).toBe(true);
+
+                expect(wrapper.emitted(EventNames.GoToPaymentFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('address');
+            });
+
+            it('should show error message and emit failure event when the address postcode input field is not populated', async () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, { propsData });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(wrapper.vm.addressErrors.postcode.errors.required.error).toBe(true);
+
+                expect(wrapper.emitted(EventNames.GoToPaymentFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('address');
+            });
+
+            it('should show error message and emit failure event when the address postcode input field is populated with incorrect postcode', async () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, { propsData });
+                const postcodeInput = wrapper.find('[data-test-id="input-address-postcode"]');
+                postcodeInput.setValue('!?dh352s');
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(wrapper.vm.addressErrors.postcode.errors.type.error).toBe(true);
+
+                expect(wrapper.emitted(EventNames.GoToPaymentFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('address');
             });
         });
     });
