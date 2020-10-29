@@ -99,7 +99,6 @@ describe('Checkout', () => {
             it('should emit success event when all fields are populated correctly', async () => {
                 // Arrange
                 const wrapper = mount(VueCheckout, { propsData });
-                // expect(wrapper.html()).toBe('1');
                 wrapper.find('[data-test-id="input-mobile-number"]').setValue('07777777777');
 
                 // Act
@@ -147,7 +146,6 @@ describe('Checkout', () => {
             it('should emit success event when all fields are populated correctly', async () => {
                 // Arrange
                 const wrapper = mount(VueCheckout, { propsData });
-                // expect(wrapper.html()).toBe('1');
                 wrapper.find('[data-test-id="input-mobile-number"]').setValue('07777777777');
                 wrapper.find('[data-test-id="input-address-line-1"]').setValue('Fleet Place House');
                 wrapper.find('[data-test-id="input-address-city"]').setValue('London');
