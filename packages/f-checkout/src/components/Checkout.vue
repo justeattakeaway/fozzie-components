@@ -222,6 +222,13 @@ export default {
                 const validationState = formValidationState(this.$v);
                 this.$emit(EventNames.GoToPaymentFailure, validationState);
             }
+
+            try {
+                this.$emit(EventNames.GoToPaymentSuccess);
+            } catch (error) {
+                const thrownErrors = error;
+                this.$emit(EventNames.GoToPaymentFailure, thrownErrors);
+            }
         },
 
         isFormInvalid () {

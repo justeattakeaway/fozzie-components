@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import flushPromises from 'flush-promises';
 import { VALID_CHECKOUT_METHOD } from '../../constants';
 import VueCheckout from '../Checkout.vue';
@@ -130,6 +130,23 @@ describe('Checkout', () => {
 
         describe('when checkoutMethod set to `Delivery`', () => {
             const propsData = { checkoutMethod: 'Delivery' };
+
+            it('should emit success event when all fields are populated correctly', async () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, { propsData });
+                // expect(wrapper.html()).toBe('1');
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue('07777777777');
+                wrapper.find('[data-test-id="input-address-line-1"]').setValue('Fleet Place House');
+                wrapper.find('[data-test-id="input-address-city"]').setValue('London');
+                wrapper.find('[data-test-id="input-address-postcode"]').setValue('EC4M 7RF');
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.emitted(EventNames.GoToPaymentSuccess).length).toBe(1);
+            });
 
             it('should not show error message or emit failure event when the address input fields are not populated', async () => {
                 // Arrange
