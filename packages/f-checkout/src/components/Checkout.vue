@@ -91,6 +91,7 @@ import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
 import tenantConfigs from '../tenants';
+import EventNames from '../event-names';
 
 const formValidationState = $v => {
     const fields = $v.$params;
@@ -165,7 +166,6 @@ export default {
             },
             buttonText: 'Go to payment',
             delivery: CHECKOUT_METHOD_DELIVERY,
-            formStarted: false,
             genericErrorMessage: null
         };
     },
@@ -179,48 +179,48 @@ export default {
             return `${this.name}, confirm your details`;
         },
 
-        isAddressRequired () {
-            return this.checkoutMethod === 'Delivery';
-        },
-
         shouldShowMobileNumberInvalidError () {
             const mobileNumberInvalid = !this.$v.mobileNumber.required || !this.$v.mobileNumber.numeric || !this.$v.mobileNumber.minLength;
             return mobileNumberInvalid && this.$v.mobileNumber.$dirty;
         },
 
         addressErrors () {
-            return {
-                line1: {
-                    error: !this.$v.address.line1.required && this.$v.address.line1.$dirty,
-                    message: this.copy.validationMessages.addressLine1.requiredError
-                },
+            if (this.checkoutMethod === this.delivery) {
+                return {
+                    line1: {
+                        error: !this.$v.address.line1.required && this.$v.address.line1.$dirty,
+                        message: this.copy.validationMessages.addressLine1.requiredError
+                    },
 
-                city: {
-                    error: !this.$v.address.city.required && this.$v.address.city.$dirty,
-                    message: this.copy.validationMessages.city.requiredError
-                },
+                    city: {
+                        error: !this.$v.address.city.required && this.$v.address.city.$dirty,
+                        message: this.copy.validationMessages.city.requiredError
+                    },
 
-                postcode: {
-                    errors: {
-                        required: {
-                            error: !this.$v.address.postcode.required && this.$v.address.postcode.$dirty,
-                            message: this.copy.validationMessages.postcode.requiredError
-                        },
+                    postcode: {
+                        errors: {
+                            required: {
+                                error: !this.$v.address.postcode.required && this.$v.address.postcode.$dirty,
+                                message: this.copy.validationMessages.postcode.requiredError
+                            },
 
-                        type: {
-                            error: !this.$v.address.postcode.isValidPostcode && this.$v.address.postcode.$dirty,
-                            message: this.copy.validationMessages.postcode.invalidCharError
+                            type: {
+                                error: !this.$v.address.postcode.isValidPostcode && this.$v.address.postcode.$dirty,
+                                message: this.copy.validationMessages.postcode.invalidCharError
+                            }
                         }
                     }
-                }
-            };
+                };
+            }
+            return null;
         }
     },
 
     methods: {
         onFormSubmit () {
             if (this.isFormInvalid()) {
-                formValidationState(this.$v);
+                const validationState = formValidationState(this.$v);
+                this.$emit(EventNames.GoToPaymentFailure, validationState);
             }
         },
 
@@ -231,7 +231,7 @@ export default {
     },
 
     validations () {
-        if (this.isAddressRequired) {
+        if (this.checkoutMethod === this.delivery) {
             return {
                 address: {
                     line1: {

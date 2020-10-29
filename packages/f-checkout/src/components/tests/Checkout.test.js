@@ -2,6 +2,7 @@ import { shallowMount } from '@vue/test-utils';
 import flushPromises from 'flush-promises';
 import { VALID_CHECKOUT_METHOD } from '../../constants';
 import VueCheckout from '../Checkout.vue';
+import EventNames from '../../event-names';
 
 describe('Checkout', () => {
     it('should be defined', () => {
@@ -105,9 +106,9 @@ describe('Checkout', () => {
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(wrapper.vm.shouldShowMobileNumberRequiredError).toBe(true);
-                // expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-                // expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('firstName');
+                expect(wrapper.vm.shouldShowMobileNumberInvalidError).toBe(true);
+                expect(wrapper.emitted(EventNames.GoToPaymentFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('mobileNumber');
             });
 
             it('should not show error message or emit failure event when the address input fields are not populated', async () => {
@@ -120,13 +121,30 @@ describe('Checkout', () => {
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(wrapper.vm.shouldShowAddressLine1RequiredError).toBe(false);
-                expect(wrapper.vm.shouldShowAddressCityRequiredError).toBe(false);
-                expect(wrapper.vm.shouldShowAddressPostcodeRequiredError).toBe(false);
-                expect(wrapper.vm.shouldShowAddressPostcodeTypeError).toBe(false);
+                expect(wrapper.vm.addressErrors).toBe(null);
 
-                // expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-                // expect(wrapper.emitted(EventNames.CreateAccountFailure)[0][0].invalidFields).toContain('firstName');
+                expect(wrapper.emitted(EventNames.GoToPaymentFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('mobileNumber');
+            });
+        });
+
+        describe('when checkoutMethod set to `Delivery`', () => {
+            const propsData = { checkoutMethod: 'Delivery' };
+
+            it('should not show error message or emit failure event when the address input fields are not populated', async () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, { propsData });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(wrapper.vm.addressErrors.line1.error).toBe(true);
+
+                expect(wrapper.emitted(EventNames.GoToPaymentFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('mobileNumber');
             });
         });
     });
