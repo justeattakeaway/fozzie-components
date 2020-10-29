@@ -96,6 +96,20 @@ describe('Checkout', () => {
         describe('when checkoutMethod set to `Collection`', () => {
             const propsData = { checkoutMethod: 'Collection' };
 
+            it('should emit success event when all fields are populated correctly', async () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, { propsData });
+                // expect(wrapper.html()).toBe('1');
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue('07777777777');
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.emitted(EventNames.GoToPaymentSuccess).length).toBe(1);
+            });
+
             it('should show error message and emit failure event when the mobile number field is not populated', async () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, { propsData });
