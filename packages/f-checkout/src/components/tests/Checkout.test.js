@@ -120,7 +120,7 @@ describe('Checkout', () => {
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(wrapper.vm.shouldShowMobileNumberInvalidError).toBe(true);
+                expect(wrapper.vm.isMobileNumberValid).toBe(false);
                 expect(wrapper.emitted(EventNames.GoToPaymentFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('mobileNumber');
             });

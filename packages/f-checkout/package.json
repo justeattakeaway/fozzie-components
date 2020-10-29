@@ -44,12 +44,11 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-alert": "^0.1.1",
+    "@justeat/f-alert": "0.1.1",
     "@justeat/f-card": "0.6.0",
     "@justeat/f-form-field": "0.7.1",
     "@justeat/f-services": "1.0.0",
-    "axios": "0.20.0",
-    "flush-promises": "^1.0.2",
+    "flush-promises": "1.0.2",
     "vuelidate": "^0.7.6"
   },
   "peerDependencies": {

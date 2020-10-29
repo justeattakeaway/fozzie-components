@@ -135,7 +135,7 @@ export default {
 .o-form-error {
     display: flex;
     align-items: center;
-    color: $red;
+    color: $color-text--danger;
     @include font-size(body-s);
     margin-top: spacing();
 }

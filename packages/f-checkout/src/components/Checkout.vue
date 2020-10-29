@@ -30,7 +30,7 @@
                     // TODO: - Replace with f-error-message
                     <template #error>
                         <p
-                            v-if="shouldShowMobileNumberInvalidError"
+                            v-if="!isMobileNumberValid"
                             :class="$style['o-form-error']"
                             data-test-id='error-mobile-number-empty'>
                             {{ copy.validationMessages.mobileNumber.requiredError }}
@@ -93,34 +93,6 @@ import UserNote from './UserNote.vue';
 import tenantConfigs from '../tenants';
 import EventNames from '../event-names';
 
-const formValidationState = $v => {
-    const fields = $v.$params;
-    const invalidFields = [];
-    const validFields = [];
-
-    Object.keys(fields).forEach(key => {
-        if ($v[key].$invalid) {
-            invalidFields.push(key);
-        } else {
-            validFields.push(key);
-        }
-    });
-
-    return {
-        validFields,
-        invalidFields
-    };
-};
-
-function isValidPostcode () {
-    if (this.address.postcode) {
-        const postcode = this.address.postcode.replace(/\s/g, '');
-        const regex = /^[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}$/i;
-        return regex.test(postcode);
-    }
-    return false;
-}
-
 export default {
     name: 'VueCheckout',
 
@@ -179,9 +151,9 @@ export default {
             return `${this.name}, confirm your details`;
         },
 
-        shouldShowMobileNumberInvalidError () {
-            const mobileNumberInvalid = !this.$v.mobileNumber.required || !this.$v.mobileNumber.numeric || !this.$v.mobileNumber.minLength;
-            return mobileNumberInvalid && this.$v.mobileNumber.$dirty;
+        isMobileNumberValid () {
+            const mobileNumberInvalid = this.$v.mobileNumber.required || this.$v.mobileNumber.numeric || this.$v.mobileNumber.minLength;
+            return mobileNumberInvalid && !this.$v.mobileNumber.$dirty;
         },
 
         addressErrors () {
@@ -217,9 +189,37 @@ export default {
     },
 
     methods: {
+        formValidationState ($v) {
+            const fields = $v.$params;
+            const invalidFields = [];
+            const validFields = [];
+
+            Object.keys(fields).forEach(key => {
+                if ($v[key].$invalid) {
+                    invalidFields.push(key);
+                } else {
+                    validFields.push(key);
+                }
+            });
+
+            return {
+                validFields,
+                invalidFields
+            };
+        },
+
+        isValidPostcode () {
+            if (this.address.postcode) {
+                const postcode = this.address.postcode.replace(/\s/g, '');
+                const regex = /^[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}$/i;
+                return regex.test(postcode);
+            }
+            return false;
+        },
+
         onFormSubmit () {
             if (this.isFormInvalid()) {
-                const validationState = formValidationState(this.$v);
+                const validationState = this.formValidationState(this.$v);
                 this.$emit(EventNames.GoToPaymentFailure, validationState);
             }
 
@@ -249,7 +249,7 @@ export default {
                     },
                     postcode: {
                         required,
-                        isValidPostcode
+                        isValidPostcode: this.isValidPostcode
                     }
                 },
 
@@ -331,7 +331,7 @@ $line-height                              : 16px;
     .o-form-error {
         display: flex;
         align-items: center;
-        color: $red;
+        color: $color-text--danger;
         @include font-size(body-s);
         margin-top: spacing();
     }
