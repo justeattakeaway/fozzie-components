@@ -60,9 +60,7 @@
 </template>
 
 <script>
-import {
-    EyeglassIcon
-} from '@justeat/f-vue-icons';
+import { EyeglassIcon } from '@justeat/f-vue-icons';
 
 export default {
     components: {
