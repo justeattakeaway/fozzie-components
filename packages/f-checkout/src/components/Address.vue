@@ -2,73 +2,69 @@
     <div data-test-id='address-component'>
         <fieldset :class="$style['c-addressGroup']">
             <form-field
-                v-model="localAddress.line1"
-                :value="address.line1"
+                v-model="value.line1"
                 :class="$style['c-addressGroup-formField']"
                 name="address-line-1"
                 data-test-id="input-address-line-1"
-                :label-text="labels.line1"
+                :label-text="passed.copy.labels.line1"
                 label-style="inline">
                 // TODO: - Replace with f-error-message
                 <template #error>
                     <p
-                        v-if="errors.line1.error"
+                        v-if="!isAddressLine1Valid"
                         :class="$style['o-form-error']"
                         data-test-id='error-address-line1-empty'>
-                        {{ errors.line1.message }}
+                        {{ passed.copy.validationMessages.addressLine1.requiredError }}
                     </p>
                 </template>
             </form-field>
 
             <form-field
-                v-model="localAddress.line2"
-                :value="address.line2"
+                v-model="value.line2"
                 :class="$style['c-addressGroup-formField']"
                 name="address-line-2"
                 data-test-id="input-address-line-2"
-                :label-text="labels.line2"
+                :label-text="passed.copy.labels.line2"
                 label-style="inline" />
 
             <form-field
-                v-model="localAddress.city"
-                :value="address.city"
+                v-model="value.city"
                 :class="$style['c-addressGroup-formField']"
                 name="address-city"
                 data-test-id="input-address-city"
-                :label-text="labels.city"
+                :label-text="passed.copy.labels.city"
                 label-style="inline">
                 // TODO: - Replace with f-error-message
                 <template #error>
                     <p
-                        v-if="errors.city.error"
+                        v-if="!isAddressCityValid"
                         :class="$style['o-form-error']"
                         data-test-id='error-address-city-empty'>
-                        {{ errors.city.message }}
+                        {{ passed.copy.validationMessages.city.requiredError }}
                     </p>
                 </template>
             </form-field>
         </fieldset>
 
         <form-field
-            v-model="localAddress.postcode"
-            :value="address.postcode"
+            v-model="value.postcode"
             name="address-postcode"
             data-test-id="input-address-postcode"
-            :label-text="labels.postcode"
+            :label-text="passed.copy.labels.postcode"
             label-style="inline">
             // TODO: - Replace with f-error-message
             <template #error>
                 <p
-                    v-if="errors.postcode.errors.required.error"
+                    v-if="!isAddressPostcodeValid"
                     :class="$style['o-form-error']"
                     data-test-id='error-address-postcode-empty'>
-                    {{ errors.postcode.errors.required.message }}
+                    {{ passed.copy.validationMessages.postcode.requiredError }}
                 </p>
                 <p
-                    v-else-if="errors.postcode.errors.type.error"
+                    v-else-if="!isAddressPostcodeCorrectType"
                     :class="$style['o-form-error']"
                     data-test-id='error-address-postcode-type-error'>
-                    {{ errors.postcode.errors.type.message }}
+                    {{ passed.copy.validationMessages.postcode.invalidCharError }}
                 </p>
             </template>
         </form-field>
@@ -82,38 +78,40 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 export default {
     components: { FormField },
 
+    inject: ['passed'],
+
     props: {
-        labels: {
-            type: Object,
-            default: () => ({})
-        },
-
-        errors: {
-            type: Object,
-            default: () => ({})
-        },
-
         value: {
             type: Object,
             required: true
         }
     },
 
-    data () {
-        return {
-            address: {
-                line1: null,
-                line2: null,
-                city: null,
-                postcode: null
-            }
-        };
+    computed: {
+        isAddressLine1Valid () {
+            return this.passed.$v.address.line1.required && !this.passed.$v.address.line1.$dirty;
+        },
+
+        isAddressCityValid () {
+            return this.passed.$v.address.city.required && !this.passed.$v.address.city.$dirty;
+        },
+
+        isAddressPostcodeValid () {
+            return this.passed.$v.address.postcode.required && !this.passed.$v.address.postcode.$dirty;
+        },
+
+        isAddressPostcodeCorrectType () {
+            return this.passed.$v.address.postcode.isValidPostcode && !this.passed.$v.address.postcode.$dirty;
+        }
     },
 
-    computed: {
-        localAddress: {
-            get () { return this.value; },
-            set (localAddress) { this.$emit('input', localAddress); }
+    watch: {
+        value: {
+            deep: true,
+
+            handler () {
+                console.log('changed');
+            }
         }
     }
 };

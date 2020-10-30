@@ -41,8 +41,6 @@
                 <address-block
                     v-if="checkoutMethod === delivery"
                     v-model="address"
-                    :labels="copy.labels"
-                    :errors="addressErrors"
                     data-test-id='address-block' />
 
                 <form-selector
@@ -142,6 +140,19 @@ export default {
         };
     },
 
+    provide () {
+        const passed = {};
+        Object.defineProperty(passed, '$v', {
+            enumerable: true,
+            get: () => this.$v
+        });
+        Object.defineProperty(passed, 'copy', {
+            enumerable: true,
+            get: () => this.copy
+        });
+        return { passed };
+    },
+
     computed: {
         name () {
             return (this.firstName.charAt(0).toUpperCase() + this.firstName.slice(1));
@@ -154,37 +165,6 @@ export default {
         isMobileNumberValid () {
             const mobileNumberInvalid = this.$v.mobileNumber.required || this.$v.mobileNumber.numeric || this.$v.mobileNumber.minLength;
             return mobileNumberInvalid && !this.$v.mobileNumber.$dirty;
-        },
-
-        addressErrors () {
-            if (this.checkoutMethod === this.delivery) {
-                return {
-                    line1: {
-                        error: !this.$v.address.line1.required && this.$v.address.line1.$dirty,
-                        message: this.copy.validationMessages.addressLine1.requiredError
-                    },
-
-                    city: {
-                        error: !this.$v.address.city.required && this.$v.address.city.$dirty,
-                        message: this.copy.validationMessages.city.requiredError
-                    },
-
-                    postcode: {
-                        errors: {
-                            required: {
-                                error: !this.$v.address.postcode.required && this.$v.address.postcode.$dirty,
-                                message: this.copy.validationMessages.postcode.requiredError
-                            },
-
-                            type: {
-                                error: !this.$v.address.postcode.isValidPostcode && this.$v.address.postcode.$dirty,
-                                message: this.copy.validationMessages.postcode.invalidCharError
-                            }
-                        }
-                    }
-                };
-            }
-            return null;
         }
     },
 
