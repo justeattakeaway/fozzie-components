@@ -5,6 +5,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (to be added to next release)
 ------------------------------
+*October 30, 2020*
+
+### Added
+- Added `mocha-each` to package.json.
+
+
+v2.9.0
+------------------------------
 *October 28, 2020*
 
 ### Added
