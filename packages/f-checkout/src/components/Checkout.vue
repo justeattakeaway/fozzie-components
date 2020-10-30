@@ -13,22 +13,24 @@
             :class="$style['c-card--dimensions']">
             <form action="post">
                 <form-field
-                    v-model="mobileNumber"
+                    v-model="customer.phoneNumber"
                     name="mobile-number"
                     data-test-id="input-mobile-number"
                     :label-text="copy.labels.mobileNumber"
                     label-style="inline" />
 
                 <address-block
-                    v-if="checkoutMethod === delivery"
+                    v-if="isDelivery"
                     :labels="copy.labels"
+                    :address="fulfillment.address"
                     data-test-id='address-block' />
 
                 <form-selector
-                    :order-method="checkoutMethod"
+                    :order-method="serviceType"
+                    :times="fulfillment.times"
                     data-test-id='selector' />
 
-                <form-selector />
+
                 <user-note data-test-id='user-note' />
                 <button
                     :class="[
@@ -38,7 +40,6 @@
                     data-test-id="allergy-button">
                     {{ copy.allergyText }}
                 </button>
-
                 <button
                     :class="[
                         $style['o-btn--payment'],
@@ -63,6 +64,7 @@ import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
 import tenantConfigs from '../tenants';
+import CheckoutServiceApi from '../services/CheckoutServiceApi';
 
 export default {
     name: 'VueCheckout',
@@ -83,8 +85,19 @@ export default {
 
         checkoutMethod: {
             type: String,
-            default: 'Collection',
+            default: 'delivery',
             validator: value => (VALID_CHECKOUT_METHOD.indexOf(value) !== -1)
+        },
+
+        checkoutUrl: {
+            type: String,
+            required: true
+        },
+
+        getCheckoutTimeout: {
+            type: Number,
+            required: false,
+            default: 1000
         }
     },
 
@@ -94,28 +107,89 @@ export default {
         const theme = globalisationServices.getTheme(locale);
 
         return {
+            isOpen: true,
             copy: { ...localeConfig },
             theme,
-            firstName: 'firstName',
-            mobileNumber: null,
-            address: {
-                lineOne: null,
-                lineTwo: null,
-                city: null,
-                postcode: null
+            id: '',
+            isFulfillable: true,
+            customer: {
+                dateOfBirth: '',
+                emailAddress: '',
+                firstName: '',
+                lastName: '',
+                phoneNumber: ''
             },
+            fulfillment: {
+                address: {
+                    line1: '',
+                    line2: '',
+                    city: '',
+                    postcode: ''
+                },
+                times: []
+            },
+            messages: [],
+            notes: [],
+            notices: [],
             buttonText: 'Go to payment',
-            delivery: CHECKOUT_METHOD_DELIVERY
+            serviceType: this.checkoutMethod
         };
     },
 
     computed: {
         name () {
-            return (this.firstName.charAt(0).toUpperCase() + this.firstName.slice(1));
+            return (this.customer.firstName.charAt(0).toUpperCase() + this.customer.firstName.slice(1));
         },
 
         title () {
-            return `${this.name}, confirm your details`;
+            return this.name ? `${this.name}, confirm your details` : '';
+        },
+
+        isDelivery () {
+            return this.serviceType === CHECKOUT_METHOD_DELIVERY;
+        },
+
+        tenant () {
+            return {
+                'en-GB': 'uk',
+                'en-AU': 'au',
+                'en-NZ': 'nz',
+                'da-DK': 'dk',
+                'es-ES': 'es',
+                'en-IE': 'ie',
+                'it-IT': 'it',
+                'nb-NO': 'no'
+            }[this.locale];
+        }
+    },
+
+    async mounted () {
+        try {
+            const result = await CheckoutServiceApi.getData(this.checkoutUrl, this.tenant, this.getCheckoutTimeout);
+            this.mapResponse(result.data);
+        } catch (error) {
+            const CheckoutGetFailure = 'checkout-get-failure'; // TODO: Move to event-names once the other PR merged
+            this.$emit(CheckoutGetFailure, error);
+        }
+    },
+
+    methods: {
+        mapResponse (data) {
+            this.id = data.id;
+            this.isFulfillable = data.isFulfillable;
+            this.customer = data.customer;
+            this.fulfillment.times = data.fulfillment.times;
+
+            this.fulfillment.address = {
+                line1: data.fulfillment.address.lines[0],
+                line2: data.fulfillment.address.lines[1],
+                city: data.fulfillment.address.lines[3],
+                postcode: data.fulfillment.address.postalCode
+            };
+            this.messages = data.messages;
+            this.notes = data.notes;
+            this.notices = data.notices;
+            this.serviceType = data.serviceType;
         }
     }
 };

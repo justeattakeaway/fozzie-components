@@ -8,12 +8,16 @@
             content="width=device-width, initial-scale=1">
         <vue-checkout
             locale="en-GB"
-            checkout-method="Delivery" />
+            checkout-url="checkout.json" />
     </div>
 </template>
 
 <script>
+
 import VueCheckout from '@/components/Checkout.vue';
+import CheckoutMock from './checkoutMock';
+
+CheckoutMock.setup('/checkout.json');
 
 export default {
     components: { VueCheckout }

@@ -1,0 +1,78 @@
+{
+  "id": "12345",
+  "serviceType": "delivery",
+  "customer": {
+    "firstName": "Joe",
+    "lastName": "Bloggs",
+    "phoneNumber": "\u002B447111111111",
+    "dateOfBirth": "1980-01-30",
+    "emailAddress": "joe.bloggs@justeattakeaway.com"
+  },
+  "fulfillment": {
+    "times": [
+      {
+        "label": {
+          "text": "As soon as possible"
+        },
+        "from": "2020-01-01T00:00\u002B00:00",
+        "to": "2020-01-01T00:00\u002B00:00",
+        "selected": true
+      },
+      {
+        "label": {
+          "text": "Monday 00:15"
+        },
+        "from": "2020-01-01T00:15\u002B00:00",
+        "to": "2020-01-01T00:15\u002B00:00",
+        "selected": false
+      },
+      {
+        "label": {
+          "text": "Monday 00:30"
+        },
+        "from": "2020-01-01T00:30\u002B00:00",
+        "to": "2020-01-01T00:30\u002B00:00",
+        "selected": false
+      }
+    ],
+    "address": {
+      "lines": [
+        "1 Bristol Road",
+        "",
+        "",
+        "Bristol",
+        "Somerset"
+      ],
+      "postalCode": "BS1 1AA"
+    }
+  },
+  "notes": [
+    {
+      "type": "delivery",
+      "note": "Test note for delivery"
+    }
+  ],
+  "isFulfillable": true,
+  "notices": [
+    {
+      "type": "allergy",
+      "notice": {
+        "text": "If you have a food allergy or intolerance (or someone you\u0027re ordering for has), \u003Ca href=\u0022https://greggs.co.uk/nutrition\u0022 data-test-id=\u0022allergen-url-link\u0022 target=\u0022_blank\u0022 rel=\u0022noopener\u0022\u003Eread what this restaurant has to say about allergies\u003C/a\u003E before placing your order. Do not order if you cannot get the allergy information you need."
+      }
+    }
+  ],
+  "messages": [
+    {
+      "type": "warning",
+      "message": {
+        "text": "Please hurry, the restaurant is closing soon"
+      }
+    },
+    {
+      "type": "information",
+      "message": {
+        "text": "We\u0027re sorry, some items in your basket are no longer available"
+      }
+    }
+  ]
+}

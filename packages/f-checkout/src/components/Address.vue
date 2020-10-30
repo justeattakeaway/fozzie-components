@@ -46,18 +46,16 @@ export default {
         labels: {
             type: Object,
             default: () => ({})
-        }
-    },
-
-    data () {
-        return {
-            address: {
+        },
+        address: {
+            type: Object,
+            default: () => ({
                 line1: null,
                 line2: null,
                 city: null,
                 postcode: null
-            }
-        };
+            })
+        }
     }
 };
 </script>

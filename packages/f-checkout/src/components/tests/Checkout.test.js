@@ -4,7 +4,7 @@ import VueCheckout from '../Checkout.vue';
 
 describe('Checkout', () => {
     it('should be defined', () => {
-        const propsData = {};
+        const propsData = { checkoutUrl: '/checkout/uk/12345' };
         const wrapper = shallowMount(VueCheckout, { propsData });
         expect(wrapper.exists()).toBe(true);
     });
@@ -14,7 +14,8 @@ describe('Checkout', () => {
             it.each(VALID_CHECKOUT_METHOD)('should update the Selector `ordermethod` attribute to match checkoutMethod=%p', definedType => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: definedType
+                    checkoutMethod: definedType,
+                    checkoutUrl: '/checkout/uk/12345'
                 };
 
                 // Act
@@ -25,10 +26,11 @@ describe('Checkout', () => {
                 expect(selectorComponent.attributes('ordermethod')).toEqual(definedType);
             });
 
-            it('should display the address block if set to `Delivery`', () => {
+            it('should display the address block if set to `delivery`', () => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: 'Delivery'
+                    checkoutMethod: 'delivery',
+                    checkoutUrl: '/checkout/uk/12345'
                 };
 
                 // Act
@@ -39,10 +41,11 @@ describe('Checkout', () => {
                 expect(addressBlock.exists()).toBe(true);
             });
 
-            it('should not display the address block if set to `Collection`', () => {
+            it('should not display the address block if set to `collection`', () => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: 'Collection'
+                    checkoutMethod: 'collection',
+                    checkoutUrl: '/checkout/uk/12345'
                 };
 
                 // Act
@@ -56,8 +59,8 @@ describe('Checkout', () => {
     });
 
     describe('computed ::', () => {
-        const propsData = {};
-        const data = { firstName: 'name' };
+        const propsData = { checkoutUrl: '/checkout/uk/12345' };
+        const data = { customer: { firstName: 'name' } };
 
         describe('name ::', () => {
             it('should capitalize `firstName` data', async () => {
