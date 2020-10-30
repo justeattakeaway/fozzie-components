@@ -18,15 +18,11 @@ describe('f-checkout component tests', () => {
         expect(CheckoutComponent.isAllergenLinkDisplayed()).toBe(true);
     }
 
-    forEach([
-        'mobilenumber',
-        'addressline1',
-        'addressline2',
-        'addresscity',
-        'addresspostcode'
-    ]).it('should display all fields', (fieldName) => {
+    forEach(
+        Object.keys(CheckoutComponent.inputs)
+    ).it('should display all fields', (key) => {
         // Assert
-        expect(CheckoutComponent.areCheckoutFormFieldsDisplayed(fieldName)).toBe(true);
+        expect(CheckoutComponent.inputs[key]().isDisplayed()).toBe(true);
     });
 
     // Skip until we have something to assert on

@@ -1,11 +1,6 @@
 const checkoutComponent = () => $('[data-test-id="checkout-component"]');
 
 // Form Fields
-const mobileNumberInput = () => $('[data-test-id="input-mobile-number"]');
-const addressLine1Input = () => $('[data-test-id="input-address-line-1"]');
-const addressLine2Input = () => $('[data-test-id="input-address-line-2"]');
-const addressCityInput = () => $('[data-test-id="input-address-city"]');
-const addressPostcodeInput = () => $('[data-test-id="input-address-postcode"]');
 
 const userNoteInput = () => $('[data-test-id="user-note"] textarea');
 
@@ -15,6 +10,15 @@ const deliveryTimeDropdown = () => $('[data-test-id="delivery-time"]');
 
 const goToPaymentButton = () => $('[data-test-id="confirm-payment-submit-button"]');
 
+exports.inputs = {
+    mobileNumber: () => $('[data-test-id="input-mobile-number"]'),
+    addressLine1: () => $('[data-test-id="input-address-line-1"]'),
+    addressLine2: () => $('[data-test-id="input-address-line-2"]'),
+    addressCity: () => $('[data-test-id="input-address-city"]'),
+    addressPostcode: () => $('[data-test-id="input-address-postcode"]')
+}
+
+// exports.mobileNumberInput = () => $('[data-test-id="input-mobile-number"]');
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
@@ -38,24 +42,6 @@ exports.submitCheckoutForm = (addressInfo) => {
     addressCityInput().setValue(addressInfo.city);
     addressPostcodeInput().setValue(addressInfo.postcode);
 };
-
-exports.areCheckoutFormFieldsDisplayed = (fieldName) => {
-
-    switch(fieldName.toLowerCase()) {
-        case 'mobilenumber':
-            return mobileNumberInput().isDisplayed();
-        case 'addressline1':
-            return addressLine1Input().isDisplayed();
-        case 'addressline2':
-            return addressLine2Input().isDisplayed();
-        case 'addresscity':
-            return addressCityInput().isDisplayed();
-        case 'addresspostcode':
-            return addressPostcodeInput().isDisplayed();
-        default:
-            throw new Error(`Field ${fieldName} not recognized`);
-    }
-}
 
 /**
  * @description
