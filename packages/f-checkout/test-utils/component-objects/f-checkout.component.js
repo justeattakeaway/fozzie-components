@@ -18,7 +18,6 @@ exports.inputs = {
     addressPostcode: () => $('[data-test-id="input-address-postcode"]')
 }
 
-// exports.mobileNumberInput = () => $('[data-test-id="input-mobile-number"]');
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
