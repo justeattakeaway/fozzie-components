@@ -1,3 +1,4 @@
+# PLEASE DO NOT USE THIS COMPONENT IN PRODUCTION YET.
 
 <div align="center">
   <h1>f-searchbox</h1>

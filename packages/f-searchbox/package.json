@@ -5,7 +5,7 @@
   "main": "dist/f-searchbox.umd.min.js",
   "files": [
     "dist",
-    "test-utils" ,
+    "test-utils",
     "src/services"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-searchbox",
@@ -43,6 +43,7 @@
   ],
   "dependencies": {
     "@justeat/f-services": "1.0.0",
+    "@justeat/f-vue-icons": "^1.6.0",
     "axios": "0.19.2"
   },
   "peerDependencies": {
