@@ -6,11 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.3.0
 ------------------------------
-*October 29, 2020*
+*October 30, 2020*
 
 ### Changed
 - New country list in country selector
 - New round flag icons in country selector
+- Extracted country list from tenants files
 
 
 v4.2.0
