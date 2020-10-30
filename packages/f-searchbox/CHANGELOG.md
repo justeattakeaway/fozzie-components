@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.1
+------------------------------
+*October 30, 2020*
+
+### Added
+- Base components: Shell, No Shell & form.
+- Styles carried over from current f-searchbox.
+- Base config setup to allow `config` to be passed through to searchbox.
+
+### Changed
+- f-vue-icons > 1.8.0
+
 
 Latest (to be added to next release)
 ------------------------------
