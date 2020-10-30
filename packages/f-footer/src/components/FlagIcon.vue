@@ -4,34 +4,52 @@
 
 <script>
 import {
-    FlagAuIcon as FlagIconAu,
-    FlagBrIcon as FlagIconBr,
-    FlagCaIcon as FlagIconCa,
-    FlagChIcon as FlagIconCh,
-    FlagDkIcon as FlagIconDk,
-    FlagEsIcon as FlagIconEs,
-    FlagFrIcon as FlagIconFr,
-    FlagGbIcon as FlagIconGb,
-    FlagIeIcon as FlagIconIe,
-    FlagItIcon as FlagIconIt,
-    FlagNoIcon as FlagIconNo,
-    FlagNzIcon as FlagIconNz
+    FlagAtRoundIcon as FlagIconAt,
+    FlagBeRoundIcon as FlagIconBe,
+    FlagBgRoundIcon as FlagIconBg,
+    FlagCaRoundIcon as FlagIconCa,
+    FlagChRoundIcon as FlagIconCh,
+    FlagDkRoundIcon as FlagIconDk,
+    FlagAuRoundIcon as FlagIconAu,
+    FlagFrRoundIcon as FlagIconFr,
+    FlagDeRoundIcon as FlagIconDe,
+    FlagIeRoundIcon as FlagIconIe,
+    FlagIlRoundIcon as FlagIconIl,
+    FlagItRoundIcon as FlagIconIt,
+    FlagLuRoundIcon as FlagIconLu,
+    FlagNlRoundIcon as FlagIconNl,
+    FlagNzRoundIcon as FlagIconNz,
+    FlagNoRoundIcon as FlagIconNo,
+    FlagPlRoundIcon as FlagIconPl,
+    FlagPtRoundIcon as FlagIconPt,
+    FlagRoRoundIcon as FlagIconRo,
+    FlagEsRoundIcon as FlagIconEs,
+    FlagGbRoundIcon as FlagIconGb
 } from '@justeat/f-vue-icons';
 
 export default {
     components: {
-        FlagIconAu,
-        FlagIconBr,
+        FlagIconAt,
+        FlagIconBe,
+        FlagIconBg,
         FlagIconCa,
         FlagIconCh,
         FlagIconDk,
-        FlagIconEs,
+        FlagIconAu,
         FlagIconFr,
-        FlagIconGb,
+        FlagIconDe,
         FlagIconIe,
+        FlagIconIl,
         FlagIconIt,
+        FlagIconLu,
+        FlagIconNl,
+        FlagIconNz,
         FlagIconNo,
-        FlagIconNz
+        FlagIconPl,
+        FlagIconPt,
+        FlagIconRo,
+        FlagIconEs,
+        FlagIconGb
     },
 
     props: {
