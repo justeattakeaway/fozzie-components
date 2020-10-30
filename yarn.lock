@@ -1763,6 +1763,13 @@
     "@justeat/f-icons" "2.3.0"
     babel-helper-vue-jsx-merge-props "2.0.3"
 
+"@justeat/f-vue-icons@1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.8.0.tgz#b2efa001b5af22cc0b32780c1d3eae76fa9c03ab"
+  integrity sha512-PfanIMxRJH93Z1J315Biit97NvjBOtI9VhJuXa841i9bjH+gkYI5nPZNJ8OeYnGLi2OwyKmU8DYt+XQDE+s8xg==
+  dependencies:
+    babel-helper-vue-jsx-merge-props "2.0.3"
+
 "@justeat/fozzie-colour-palette@3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/fozzie-colour-palette/-/fozzie-colour-palette-3.0.0.tgz#55eb60de93c4785049eb8abc82b760e57b3ca9c0"

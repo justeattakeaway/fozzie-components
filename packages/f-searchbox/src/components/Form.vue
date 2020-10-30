@@ -60,7 +60,6 @@
 </template>
 
 <script>
-// `EyeglassIcon` needs to change to the new/existing icon, using this as a placeholder for now.
 import {
     EyeglassIcon
 } from '@justeat/f-vue-icons';
