@@ -48,7 +48,7 @@
             <country-selector
                 :current-country-name="copy.currentCountryName"
                 :current-country-key="copy.currentCountryKey"
-                :countries="copy.countries"
+                :countries="countryList"
                 :change-country-text="copy.changeCurrentCountry" />
 
             <legal-field
@@ -70,7 +70,7 @@ import FeedbackBlock from './FeedbackBlock.vue';
 import IconList from './IconList.vue';
 import LegalField from './LegalField.vue';
 import LinkList from './LinkList.vue';
-import tenantConfigs from '../tenants';
+import { tenantConfigs, countries } from '../tenants';
 
 export default {
     components: {
@@ -81,7 +81,6 @@ export default {
         LegalField,
         LinkList
     },
-
     props: {
         locale: {
             type: String,
@@ -106,6 +105,9 @@ export default {
         },
         metaLegalFieldEnabled () {
             return Object.keys(this.copy.metaLegalField).length > 0;
+        },
+        countryList () {
+            return countries.filter(country => country.key !== this.copy.currentCountryKey);
         }
     }
 };
