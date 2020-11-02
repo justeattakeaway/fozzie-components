@@ -245,4 +245,8 @@ $footer-heading-font-size: 'heading-s';
     }
 }
 
+.c-footer-list--noBottomMargin {
+    margin-bottom: 0;
+}
+
 </style>
