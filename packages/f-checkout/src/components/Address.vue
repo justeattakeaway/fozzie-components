@@ -97,16 +97,6 @@ export default {
         isAddressPostcodeIncorrectType () {
             return this.passed.$v.address.postcode.$dirty && !this.passed.$v.address.postcode.isValidPostcode;
         }
-    },
-
-    watch: {
-        value: {
-            deep: true,
-
-            handler () {
-                console.log('changed');
-            }
-        }
     }
 };
 </script>
