@@ -204,6 +204,12 @@ export default {
             name: 'android',
             alt: 'Get it on Google Play',
             gtm: 'click_download_android_app'
+        },
+        {
+            url: 'https://appgallery.cloud.huawei.com/ag/n/app/C101688679?channelId=JustEat+website&id=f7c5193d2ec8406c9774188a3a7360a0&s=81F93139C63A9427F2E6E58C3F34313F7EF771664E5EE8F919F929ED301468F9&detailType=0&v=',
+            name: 'huawei',
+            alt: 'Get it on HUAWEI AppGallery',
+            gtm: 'click_download_huawei_app'
         }
     ],
     feedback: 'Feedback',
