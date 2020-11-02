@@ -6,7 +6,11 @@
         <meta
             name="viewport"
             content="width=device-width, initial-scale=1">
-        <content-cards />
+        <content-cards
+            api-key="test"
+            user-id="test"
+            :enabled-card-types="enabledCardTypes"
+            @error="handleErrors" />
     </div>
 </template>
 
@@ -16,7 +20,13 @@ import ContentCards from '@/components/ContentCards.vue';
 export default {
     components: {
         ContentCards
-    }
+    },
+    data: () => ({
+        enabledCardTypes: [
+            'Voucher_Card_1',
+            'Promotion_Card_1'
+        ]
+    })
 };
 </script>
 

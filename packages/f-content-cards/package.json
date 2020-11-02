@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-content-cards",
   "description": "Fozzie Content Cards",
-  "version": "2.2.0-beta.1",
+  "version": "2.2.0-beta.2",
   "main": "dist/f-content-cards.umd.min.js",
   "files": [
     "dist"
@@ -47,6 +47,7 @@
   "devDependencies": {
     "@justeat/f-metadata": "3.0.0-beta.2",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
+    "@justeat/f-metadata": "3.0.0-beta.4",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
@@ -54,6 +55,7 @@
     "copy-to-clipboard": "3.3.1",
     "crypto-js": "4.0.0",
     "faker": "4.1.0",
+    "miragejs": "^0.1.41",
     "node-sass-magic-importer": "5.3.2",
     "vue": "2.6.10",
     "xhr-mock": "2.5.1"

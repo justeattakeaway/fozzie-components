@@ -3,16 +3,40 @@
         v-if="hasLoaded"
         :class="[$style['c-contentCards'], $style['c-contentCards--wrap' ]]"
         :data-test-id="testId">
-        <template
-            v-for="(contentCard, cardIndex) in cards">
-            <component
-                :is="handleCustomCardType(contentCard.type)"
-                :key="`${cardIndex}_${contentCard.id}`"
-                :card="contentCard"
-                :title="title"
-                :tenant="tenant"
-                :data-test-id="testIdForItemWithIndex(cardIndex)"
-            />
+        <template v-if="groupCards">
+            <template v-for="({ title, cards: subCards, id: groupId }, groupIndex) in cardsGrouped">
+                <h3
+                    v-if="groupId"
+                    :key="groupIndex"
+                    :class="[$style['c-contentCards--group-title'], 'c-contentCards--group-title']"
+                    :data-test-id="`${groupIndex}_${groupId}`"
+                >
+                    {{ title }}
+                </h3>
+                <div
+                    v-for="(contentCard, cardIndex) in subCards"
+                    :key="`${groupIndex}_${cardIndex}_${contentCard.id}`"
+                    :class="[$style['c-contentCards--group']]"
+                >
+                    <component
+                        :is="handleCustomCardType(contentCard.type)"
+                        :card="contentCard"
+                        :tenant="tenant"
+                        :data-test-id="testIdForItemWithIndex(cardIndex, groupIndex)"
+                    />
+                </div>
+            </template>
+        </template>
+        <template v-else>
+            <template v-for="(contentCard, cardIndex) in cards">
+                <component
+                    :is="handleCustomCardType(contentCard.type)"
+                    :key="`${cardIndex}_${contentCard.id}`"
+                    :card="contentCard"
+                    :tenant="tenant"
+                    :data-test-id="testIdForItemWithIndex(cardIndex)"
+                />
+            </template>
         </template>
     </div>
     <skeleton-loader
@@ -136,6 +160,11 @@ export default {
         userId: {
             type: String,
             default: ''
+        },
+
+        groupCards: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -147,6 +176,7 @@ export default {
 
         return {
             cards: [],
+            cardsGrouped: [],
             rawCards: [],
             copy: { ...localeConfig },
             titleCard: {},
@@ -184,8 +214,27 @@ export default {
         cards (current, previous) {
             this.$emit('get-card-count', current.length);
 
-            if (current.length && (current.length !== previous.length)) {
+            if (current.length && (current.length !== previous.length) && !this.groupCards) {
                 this.metadataDispatcher.logCardImpressions(this.cards.map(({ id }) => id));
+            }
+            if ((current.length > 0) && (previous.length === 0)) {
+                this.hasLoaded = true;
+            }
+        },
+
+        /**
+         * Determines what card impressions should be logged, and whether the loaded flag should be set for groups cards
+         * @param {Boolean} current
+         * @param {Boolean} previous
+         **/
+        cardsGrouped (current, previous) {
+            this.$emit('get-group-count', current.length);
+
+            if (current.length && (current.length !== previous.length) && this.groupCards) {
+                this.metadataDispatcher.logCardImpressions(this.cardsGrouped.flatMap(({ cards, id }) => [
+                    id, ...cards.map(({ id: cardId }) => cardId)
+                ])
+                .filter(cardID => cardID !== undefined));
             }
             if ((current.length > 0) && (previous.length === 0)) {
                 this.hasLoaded = true;
@@ -202,6 +251,7 @@ export default {
                 this.$emit('has-loaded', true);
             }
         }
+
     },
 
     /**
@@ -259,18 +309,19 @@ export default {
                 apiKey,
                 userId,
                 enableLogging,
-                enabledCardTypes: this.enabledCardTypes,
+                enabledCardTypes: [...this.enabledCardTypes, 'Header_Card'],
                 brands: this.brands,
                 callbacks: {
-                    handleContentCards: this.metadataContentCards
+                    handleContentCards: this.metadataContentCards,
+                    handleContentCardsGrouped: this.metadataContentCardsGrouped
                 }
             })
-                .then(dispatcher => {
-                    this.metadataDispatcher = dispatcher;
-                })
-                .catch(error => {
-                    this.$emit('on-error', error);
-                });
+            .then(dispatcher => {
+                this.metadataDispatcher = dispatcher;
+            })
+            .catch(error => {
+                this.$emit('on-error', error);
+            });
         },
 
         /**
@@ -299,6 +350,27 @@ export default {
             this.cards = limitedCards.map(card => Object.assign(card, { source }));
 
             return successCallback();
+        },
+
+        /**
+         * Common method for handling card ingestion to component for grouped cards.
+         * @param {String} source
+         * @param {Card[]} groupedCards
+         **/
+        contentCardsGrouped ({
+            source
+        }, groupedCards) {
+            this.cardsGrouped = groupedCards.map(card => Object.assign(card, { source }));
+        },
+
+        /**
+         * Handles card ingestion via metadata for groups
+         * @param {Card[]} groupedCards
+         **/
+        metadataContentCardsGrouped (groupedCards) {
+            this.contentCardsGrouped({
+                source: CARDSOURCE_METADATA
+            }, groupedCards);
         },
 
         /**
@@ -448,9 +520,12 @@ export default {
         /**
          * Generates a unique test id on a per-card basis if testId prop provided
          * @param index
+         * @param groupIndex optional
          */
-        testIdForItemWithIndex (index) {
-            return this.testId && `ContentCard-${this.testId}-${index}`;
+        testIdForItemWithIndex (index, groupIndex = null) {
+            return groupIndex !== null ?
+                this.testId && `ContentCard-${this.testId}-${index}-${groupIndex}` :
+                this.testId && `ContentCard-${this.testId}-${index}`;
         }
     }
 };
@@ -470,4 +545,15 @@ export default {
     .c-contentCards--wrap {
         flex-wrap: wrap;
     }
+
+    .c-contentCards--group {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .c-contentCards--group-title {
+        width: 100%;
+        margin-bottom: spacing(x3);
+    }
+
 </style>
