@@ -3,6 +3,49 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.10.0
+------------------------------
+*November 2, 2020*
+
+### Added
+- Added `mocha-each` to package.json.
+
+
+v2.9.0
+------------------------------
+*October 28, 2020*
+
+### Added
+- Added an entry to gitignore to ignore some local development tools for mocking http requests
+
+
+v2.8.3
+------------------------------
+*October 28, 2020*
+
+### Added
+- `CONTRIBUTING` file added to explain some of the guidelines we have around PRs.
+
+
+v2.8.2
+------------------------------
+*October 28, 2020*
+
+### Removed
+
+- Year from the copyright notes
+- Authors from f-vue-icons
+- Params from a corporate link
+- travis yml file
+
+
+v2.8.1
+------------------------------
+*October 26, 2020*
+
+### Changed
+- 'jet' theme variable instead of 'je' in common.scss for the components.
+
 
 v2.8.0
 ------------------------------

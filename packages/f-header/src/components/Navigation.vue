@@ -224,8 +224,10 @@ import {
     GiftIcon,
     ProfileIcon
 } from '@justeat/f-vue-icons';
-import sharedServices from '@justeat/f-services';
-import axios from 'axios';
+import {
+    axiosServices,
+    windowServices
+} from '@justeat/f-services';
 
 export default {
     components: {
@@ -391,17 +393,17 @@ export default {
     },
 
     mounted () {
-        if (!this.userInfo) {
+        if (this.showLoginInfo && !this.userInfo) {
             this.fetchUserInfo();
         }
 
-        sharedServices.addEvent('resize', this.onResize, 100);
+        windowServices.addEvent('resize', this.onResize, 100);
 
         this.onResize();
     },
 
     destroyed () {
-        sharedServices.removeEvent('resize', this.onResize);
+        windowServices.removeEvent('resize', this.onResize);
     },
 
     methods: {
@@ -422,7 +424,7 @@ export default {
         },
 
         onResize () {
-            this.currentScreenWidth = sharedServices.getWindowWidth();
+            this.currentScreenWidth = windowServices.getWindowWidth();
         },
 
         handleMobileNavState () {
@@ -438,54 +440,55 @@ export default {
 
         // If userInfoProp wasn't passed we make a call for userInfo on mounted hook
         fetchUserInfo () {
-            const userDetailsPromise = axios.get(this.userInfoUrl, {
+            const client = axiosServices.createClient({
                 headers: {
                     credentials: 'same-origin'
                 }
             });
 
-            userDetailsPromise.then(response => {
-                if (response.data.isAuthenticated) {
-                    this.userInfo = response.data;
+            return client
+                .get(this.userInfoUrl)
+                .then(({ data }) => {
+                    if (data.isAuthenticated) {
+                        this.userInfo = data;
 
-                    if (this.isOrderCountValid) {
-                        this.fetchOrderCountAndSave();
+                        if (this.isOrderCountValid) {
+                            this.fetchOrderCountAndSave();
+                        }
+                    } else {
+                        this.userInfo = false;
                     }
-                } else {
-                    this.userInfo = false;
-                }
-            })
-            .catch(err => {
-                if (this.errorLog) {
-                    this.errorLog('Unable to get user information from "fetchUserInfo"', err);
-                }
-            });
-
-            return userDetailsPromise;
+                })
+                .catch(err => {
+                    if (this.errorLog) {
+                        this.errorLog('Unable to get user information from "fetchUserInfo"', err);
+                    }
+                });
         },
 
         // fetches the order count for the user
         fetchOrderCountAndSave () {
-            const orderCountPromise = axios.get(this.orderCountUrl, {
+            const client = axiosServices.createClient({
                 headers: {
                     credentials: 'same-origin'
                 }
             });
 
-            orderCountPromise.then(data => {
-                if (data && this.isOrderCountOutOfDate) {
-                    this.setAnalyticsBlob(data);
-                    this.localOrderCountExpires = data.Expires;
-                    this.enrichUserDataWithCount(data.Count);
-                    this.pushToDataLayer(this.userInfo);
-                }
-            })
-            .catch(err => {
-                if (this.errorLog) {
-                    this.errorLog('Unable to get order count from "fetchOrderCountAndSave', err);
-                }
-            });
-            return orderCountPromise;
+            return client
+                .get(this.orderCountUrl)
+                .then(data => {
+                    if (data && this.isOrderCountOutOfDate) {
+                        this.setAnalyticsBlob(data);
+                        this.localOrderCountExpires = data.Expires;
+                        this.enrichUserDataWithCount(data.Count);
+                        this.pushToDataLayer(this.userInfo);
+                    }
+                })
+                .catch(err => {
+                    if (this.errorLog) {
+                        this.errorLog('Unable to get order count from "fetchOrderCountAndSave', err);
+                    }
+                });
         },
 
         /**

@@ -7,7 +7,8 @@
             name="viewport"
             content="width=device-width, initial-scale=1">
         <vue-checkout
-            locale="en-GB" />
+            locale="en-GB"
+            checkout-method="Delivery" />
     </div>
 </template>
 
