@@ -28,6 +28,8 @@ export default {
 <style lang="scss" module>
 @import '../assets/scss/common';
 
+$midWide: 980px;
+
 .c-searchShell {
     -webkit-font-smoothing: antialiased;
     background-color: $color-bg--component;
@@ -49,7 +51,7 @@ export default {
         min-height: 210px;
     }
 
-    @include media('>=980') {
+    @include media('>=#{$midWide}') {
         min-height: 230px;
         padding: 18px spacing(x2) 20px;
     }
@@ -74,7 +76,7 @@ export default {
         margin-bottom: 12px;
     }
 
-    @include media('>=980') {
+    @include media('>=#{$midWide}') {
         margin-bottom: 14px;
     }
 }
