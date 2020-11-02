@@ -12,7 +12,8 @@
             {{ title }}
         </h2>
 
-        <ul :class="['c-footer-list c-footer-list--inline', {
+        <ul
+            :class="['c-footer-list c-footer-list--inline', {
                 'c-footer-list--noBottomMargin': isApps
             }]">
             <li
