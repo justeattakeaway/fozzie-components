@@ -82,6 +82,13 @@ export default {
     },
 
     computed: {
+        /*
+        * Validation methods return true if the validation conditions
+        * have not been met and the field has been `touched` by a user.
+        * The $dirty boolean changes to true when the user has focused/lost
+        * focus on the input field.
+        */
+
         isAddressLine1Invalid () {
             return this.passed.$v.address.line1.$dirty && !this.passed.$v.address.line1.required;
         },

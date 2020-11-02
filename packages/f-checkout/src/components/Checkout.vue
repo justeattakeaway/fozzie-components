@@ -37,7 +37,7 @@
                 </form-field>
 
                 <address-block
-                    v-if="checkoutMethod === delivery"
+                    v-if="checkoutMethod === 'Delivery'"
                     v-model="address"
                     data-test-id='address-block' />
 
@@ -84,7 +84,7 @@ import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY } from '../constants';
+import { VALID_CHECKOUT_METHOD } from '../constants';
 import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
@@ -136,7 +136,6 @@ export default {
                 postcode: null
             },
             buttonText: 'Go to payment',
-            delivery: CHECKOUT_METHOD_DELIVERY,
             genericErrorMessage: null,
             formStarted: false
         };
@@ -165,6 +164,12 @@ export default {
         },
 
         isMobileNumberInvalid () {
+            /*
+            * Validation methods return true if the validation conditions
+            * have not been met and the field has been `touched` by a user.
+            * The $dirty boolean changes to true when the user has focused/lost
+            * focus on the input field.
+            */
             const mobileNumberInvalid = !this.$v.mobileNumber.required || !this.$v.mobileNumber.numeric || !this.$v.mobileNumber.minLength;
             return this.$v.mobileNumber.$dirty && mobileNumberInvalid;
         }
@@ -220,7 +225,7 @@ export default {
     },
 
     validations () {
-        if (this.checkoutMethod === this.delivery) {
+        if (this.checkoutMethod === 'Delivery') {
             return {
                 address: {
                     line1: {
