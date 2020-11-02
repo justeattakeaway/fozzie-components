@@ -10,7 +10,7 @@
                 label-style="inline">
                 <template #error>
                     <error-message
-                        v-if="!isAddressLine1Valid"
+                        v-if="isAddressLine1Invalid"
                         data-test-id='error-address-line1-empty'>
                         {{ passed.copy.validationMessages.addressLine1.requiredError }}
                     </error-message>
@@ -34,15 +34,13 @@
                 label-style="inline">
                 <template #error>
                     <error-message
-                        v-if="!isAddressCityValid"
+                        v-if="isAddressCityInvalid"
                         data-test-id='error-address-city-empty'>
                         {{ passed.copy.validationMessages.city.requiredError }}
                     </error-message>
                 </template>
             </form-field>
         </fieldset>
-        {{ isAddressPostcodeValid }}
-        {{ isAddressPostcodeCorrectType }}
         <form-field
             v-model="value.postcode"
             name="address-postcode"
@@ -51,12 +49,12 @@
             label-style="inline">
             <template #error>
                 <error-message
-                    v-if="!isAddressPostcodeValid"
+                    v-if="isAddressPostcodeInvalid"
                     data-test-id='error-address-postcode-empty'>
                     {{ passed.copy.validationMessages.postcode.requiredError }}
                 </error-message>
                 <error-message
-                    v-else-if="!isAddressPostcodeCorrectType"
+                    v-else-if="isAddressPostcodeIncorrectType"
                     data-test-id='error-address-postcode-type-error'>
                     {{ passed.copy.validationMessages.postcode.invalidCharError }}
                 </error-message>
@@ -84,20 +82,20 @@ export default {
     },
 
     computed: {
-        isAddressLine1Valid () {
-            return !this.passed.$v.address.line1.required && !this.passed.$v.address.line1.$dirty;
+        isAddressLine1Invalid () {
+            return this.passed.$v.address.line1.$dirty && !this.passed.$v.address.line1.required;
         },
 
-        isAddressCityValid () {
-            return !this.passed.$v.address.city.required && !this.passed.$v.address.city.$dirty;
+        isAddressCityInvalid () {
+            return this.passed.$v.address.city.$dirty && !this.passed.$v.address.city.required;
         },
 
-        isAddressPostcodeValid () {
-            return !this.passed.$v.address.postcode.required && !this.passed.$v.address.postcode.$dirty;
+        isAddressPostcodeInvalid () {
+            return this.passed.$v.address.postcode.$dirty && !this.passed.$v.address.postcode.required;
         },
 
-        isAddressPostcodeCorrectType () {
-            return !this.passed.$v.address.postcode.isValidPostcode && !this.passed.$v.address.postcode.$dirty;
+        isAddressPostcodeIncorrectType () {
+            return this.passed.$v.address.postcode.$dirty && !this.passed.$v.address.postcode.isValidPostcode;
         }
     },
 

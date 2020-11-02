@@ -20,8 +20,6 @@
             :class="$style['c-card--dimensions']">
             <form
                 type="post"
-                @click="formStart"
-                @focus="formStart"
                 @submit.prevent="onFormSubmit">
                 <form-field
                     v-model="mobileNumber"
@@ -31,7 +29,7 @@
                     label-style="inline">
                     <template #error>
                         <error-message
-                            v-if="!isMobileNumberValid"
+                            v-if="isMobileNumberInvalid"
                             data-test-id='error-mobile-number-empty'>
                             {{ copy.validationMessages.mobileNumber.requiredError }}
                         </error-message>
@@ -166,20 +164,13 @@ export default {
             return `${this.name}, confirm your details`;
         },
 
-        isMobileNumberValid () {
-            const mobileNumberValid = !this.$v.mobileNumber.required || !this.$v.mobileNumber.numeric || !this.$v.mobileNumber.minLength;
-            return mobileNumberValid && !this.$v.mobileNumber.$dirty;
+        isMobileNumberInvalid () {
+            const mobileNumberInvalid = !this.$v.mobileNumber.required || !this.$v.mobileNumber.numeric || !this.$v.mobileNumber.minLength;
+            return this.$v.mobileNumber.$dirty && mobileNumberInvalid;
         }
     },
 
     methods: {
-        formStart () {
-            if (!this.formStarted) {
-                // this.$emit(EventNames.CreateAccountStart);
-                this.formStarted = true;
-            }
-        },
-
         formValidationState ($v) {
             const fields = $v.$params;
             const invalidFields = [];
