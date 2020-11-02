@@ -89,19 +89,19 @@ export default {
 
     computed: {
         isAddressLine1Valid () {
-            return this.passed.$v.address.line1.required && !this.passed.$v.address.line1.$dirty;
+            return !this.passed.$v.address.line1.required && !this.passed.$v.address.line1.$dirty;
         },
 
         isAddressCityValid () {
-            return this.passed.$v.address.city.required && !this.passed.$v.address.city.$dirty;
+            return !this.passed.$v.address.city.required && !this.passed.$v.address.city.$dirty;
         },
 
         isAddressPostcodeValid () {
-            return this.passed.$v.address.postcode.required && !this.passed.$v.address.postcode.$dirty;
+            return !this.passed.$v.address.postcode.required && !this.passed.$v.address.postcode.$dirty;
         },
 
         isAddressPostcodeCorrectType () {
-            return this.passed.$v.address.postcode.isValidPostcode && !this.passed.$v.address.postcode.$dirty;
+            return !this.passed.$v.address.postcode.isValidPostcode && !this.passed.$v.address.postcode.$dirty;
         }
     },
 

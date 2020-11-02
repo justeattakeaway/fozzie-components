@@ -80,6 +80,7 @@ import {
 } from 'vuelidate/lib/validators';
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
+import '@justeat/f-button/dist/f-button.css';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
