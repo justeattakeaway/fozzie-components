@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (to be added to next release)
 ------------------------------
+*November 3, 2020*
+
+### Changed
+- Added f-error-message for inline registration page errors
+
 *October 28, 2020*
 
 ### Added

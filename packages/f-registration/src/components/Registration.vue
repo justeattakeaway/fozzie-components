@@ -41,27 +41,21 @@
                     label-style="inlineNarrow"
                     @blur="formFieldBlur('firstName')">
                     <template #error>
-                        <p
+                        <error-message
                             v-if="shouldShowFirstNameRequiredError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-first-name-empty'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
+                            data-test-title='error-first-name-empty'>
                             {{ copy.validationMessages.firstName.requiredError }}
-                        </p>
-                        <p
+                        </error-message>
+                        <error-message
                             v-if="shouldShowFirstNameMaxLengthError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-first-name-maxlength'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
+                            data-test-title='error-first-name-maxlength'>
                             {{ copy.validationMessages.firstName.maxLengthError }}
-                        </p>
-                        <p
+                        </error-message>
+                        <error-message
                             v-if="shouldShowFirstNameInvalidCharError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-first-name-invalid'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
+                            data-test-title='error-first-name-invalid'>
                             {{ copy.validationMessages.firstName.invalidCharError }}
-                        </p>
+                        </error-message>
                     </template>
                 </form-field>
 
@@ -74,27 +68,21 @@
                     label-style="inlineNarrow"
                     @blur="formFieldBlur('lastName')">
                     <template #error>
-                        <p
+                        <error-message
                             v-if="shouldShowLastNameRequiredError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-last-name-empty'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
+                            data-test-title='error-last-name-empty'>
                             {{ copy.validationMessages.lastName.requiredError }}
-                        </p>
-                        <p
+                        </error-message>
+                        <error-message
                             v-if="shouldShowLastNameMaxLengthError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-last-name-maxlength'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
+                            data-test-title='error-last-name-maxlength'>
                             {{ copy.validationMessages.lastName.maxLengthError }}
-                        </p>
-                        <p
+                        </error-message>
+                        <error-message
                             v-if="shouldShowLastNameInvalidCharError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-last-name-invalid'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
+                            data-test-title='error-last-name-invalid'>
                             {{ copy.validationMessages.lastName.invalidCharError }}
-                        </p>
+                        </error-message>
                     </template>
                 </form-field>
 
@@ -107,34 +95,26 @@
                     label-style="inlineNarrow"
                     @blur="formFieldBlur('email')">
                     <template #error>
-                        <p
+                        <error-message
                             v-if="shouldShowEmailRequiredError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-email-empty'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
+                            data-test-title='error-email-empty'>
                             {{ copy.validationMessages.email.requiredError }}
-                        </p>
-                        <p
+                        </error-message>
+                        <error-message
                             v-else-if="shouldShowEmailInvalidError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-email-invalid'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
+                            data-test-title='error-email-invalid'>
                             {{ copy.validationMessages.email.invalidEmailError }}
-                        </p>
-                        <p
+                        </error-message>
+                        <error-message
                             v-if="shouldShowEmailMaxLengthError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-email-maxlength'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
+                            data-test-title='error-email-maxlength'>
                             {{ copy.validationMessages.email.maxLengthError }}
-                        </p>
-                        <p
+                        </error-message>
+                        <error-message
                             v-else-if="shouldShowEmailAlreadyExistsError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-email-exists'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
+                            data-test-title='error-email-exists'>
                             {{ copy.validationMessages.email.alreadyExistsError }}
-                        </p>
+                        </error-message>
                     </template>
                 </form-field>
 
@@ -147,20 +127,16 @@
                     label-style="inlineNarrow"
                     @blur="formFieldBlur('password')">
                     <template #error>
-                        <p
+                        <error-message
                             v-if="shouldShowPasswordRequiredError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-password-empty'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
+                            data-test-title='error-password-empty'>
                             {{ copy.validationMessages.password.requiredError }}
-                        </p>
-                        <p
+                        </error-message>
+                        <error-message
                             v-if="shouldShowPasswordMinLengthError"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-password-minlength'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
+                            data-test-title='error-password-minlength'>
                             {{ copy.validationMessages.password.minLengthError }}
-                        </p>
+                        </error-message>
                     </template>
                 </form-field>
 
@@ -207,6 +183,8 @@ import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
+import ErrorMessage from '@justeat/f-error-message';
+import '@justeat/f-error-message/dist/f-error-message.css';
 import FormButton from './Button.vue';
 import tenantConfigs from '../tenants';
 import RegistrationServiceApi from '../services/RegistrationServiceApi';
@@ -247,7 +225,8 @@ export default {
         FormButton,
         FormField,
         WarningIcon,
-        BagCelebrateIcon
+        BagCelebrateIcon,
+        ErrorMessage
     },
 
     mixins: [validationMixin],
