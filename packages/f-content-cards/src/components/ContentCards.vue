@@ -13,17 +13,18 @@
                 >
                     {{ title }}
                 </h3>
-                <div
-                    v-for="(contentCard, cardIndex) in subCards"
-                    :key="`${groupIndex}_${cardIndex}_${contentCard.id}`"
-                    :class="[$style['c-contentCards--group']]"
-                >
-                    <component
-                        :is="handleCustomCardType(contentCard.type)"
-                        :card="contentCard"
-                        :tenant="tenant"
-                        :data-test-id="testIdForItemWithIndex(cardIndex, groupIndex)"
-                    />
+                <div :class="[$style['c-contentCards--group']]">
+                    <template
+                        v-for="(contentCard, cardIndex) in subCards"
+                    >
+                        <component
+                            :is="handleCustomCardType(contentCard.type)"
+                            :key="`${groupIndex}_${cardIndex}_${contentCard.id}`"
+                            :card="contentCard"
+                            :tenant="tenant"
+                            :data-test-id="testIdForItemWithIndex(cardIndex, groupIndex)"
+                        />
+                    </template>
                 </div>
             </template>
         </template>
@@ -305,11 +306,12 @@ export default {
          * @return {Promise<void>}
          **/
         setupMetadata (apiKey, userId, enableLogging = false) {
+            console.log(this.enabledCardTypes);
             return initialiseMetadataDispatcher({
                 apiKey,
                 userId,
                 enableLogging,
-                enabledCardTypes: [...this.enabledCardTypes, 'Header_Card'],
+                enabledCardTypes: [...this.enabledCardTypes],
                 brands: this.brands,
                 callbacks: {
                     handleContentCards: this.metadataContentCards,
@@ -549,6 +551,8 @@ export default {
     .c-contentCards--group {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
+        width:100%;
     }
 
     .c-contentCards--group-title {

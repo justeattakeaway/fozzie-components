@@ -2,7 +2,8 @@
     <card-container
         :card="card"
         :banner-before-description="bannerBeforeDescription"
-        :bold-title="!usesLegacyStyles">
+        :bold-title="!usesLegacyStyles"
+    >
         <template v-slot:banner>
             <span
                 :class="['c-restaurantCard-banner', $style['c-restaurantCard-banner'], {
@@ -75,7 +76,7 @@ $banner-bgColour-legacy : #cd381f;
     display: inline-block;
     background: $banner-bgColour;
     padding: 0 spacing();
-    margin: spacing(x2) 0;
+    margin: spacing(x2) 0 spacing() 0;
 }
 
 .c-restaurantCard-banner-content {
@@ -86,8 +87,8 @@ $banner-bgColour-legacy : #cd381f;
 .c-restaurantCard-footer {
     @include font-size(caption);
     font-weight: bold;
-    margin-top: 0;
-    margin-bottom: -#{spacing()};
+    margin-top: spacing(x0.5);
+    //margin-bottom: -#{spacing()};
 }
 
 .c-restaurantCard-banner-legacy {

@@ -2,12 +2,12 @@ import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import { withTests } from '@storybook/addon-jest';
 import { defaultEnabledCardTypes } from '@justeat/f-metadata/src/services/contentCard.service';
-import mock, { proxy } from 'xhr-mock';
+// import mock, { proxy } from 'xhr-mock';
 import ContentCards from '../../src/components/ContentCards.vue';
 import results from '../../src/components/tests/.jest-test-results.json';
-// import { makeServer } from '../mocks/mirage-server';
-import cards, { labelledMultiSelectAllowedValues } from '../mockData/cards';
-import data from '../mockData/data';
+import { makeServer } from '../mocks/mirage-server';
+import { labelledMultiSelectAllowedValues } from '../mockData/cards';
+// import data from '../mockData/data';
 
 /**
  * Resets all locally stored braze data so that the stubbed data is always fresh on page load
@@ -47,8 +47,8 @@ const template = `<content-cards
             :apiKey="apiKey"
             :title="title"
             :locale="locale"
-            :group-cards="true"
-            :enabledCardTypes="enabledCardTypes" />`;
+            :group-cards="groupCards"
+            :enabled-card-types="enabledCardTypes" />`;
 
 export default {
     title: 'Components/Organisms/f-content-cards',
@@ -58,7 +58,7 @@ export default {
         title: { control: { type: 'text' } },
         groupCards: { control: { type: 'boolean' } },
         locale: { control: { type: 'radio', options: ['da-DK', 'en-GB', 'en-AU'] } },
-        enabledCardTypes: { control: { type: 'check', options: labelledMultiSelectAllowedValues } }
+        // enabledCardTypes: { control: { type: 'check', options: labelledMultiSelectAllowedValues } }
     },
     decorators: [withA11y, withTests({ results })]
 };
@@ -79,18 +79,18 @@ export function ContentCardsBrazeGroup (args, { argTypes }) {
         beforeCreate () {
             resetBrazeData();
             // make the mirage server
-            // makeServer();
-            mock.teardown();
-            mock.setup();
-            mock.post(/\/api\/v3\/content_cards\/sync\/?/, {
-                status: 201,
-                body: JSON.stringify(cards())
-            });
-            mock.post(/\/api\/v3\/data\/?/, {
-                status: 201,
-                body: JSON.stringify(data())
-            });
-            mock.use(proxy);
+            makeServer();
+            // mock.teardown();
+            // mock.setup();
+            // mock.post(/\/api\/v3\/content_cards\/sync\/?/, {
+            //     status: 201,
+            //     body: JSON.stringify(cards())
+            // });
+            // mock.post(/\/api\/v3\/data\/?/, {
+            //     status: 201,
+            //     body: JSON.stringify(data())
+            // });
+            // mock.use(proxy);
         },
 
         template
@@ -108,5 +108,6 @@ ContentCardsBrazeGroup.args = {
     userId: 'test-user-id',
     title: 'Promotional Offers',
     locale: 'en-GB',
-    enabledCardTypes: defaultEnabledCardTypes
+    groupCards: true,
+    enabledCardTypes: ['Header_Card', 'Promotion_Card_1', 'Promotion_Card_2', 'Restaurant_FTC_Offer_Card', 'Voucher_Card_1', 'Anniversary_Card_1']
 };

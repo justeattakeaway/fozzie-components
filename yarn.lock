@@ -1675,6 +1675,11 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.2.0.tgz#843f06e0cfd21d9f6676b2a21be5ceb12b4184db"
   integrity sha512-pyHYjf7UUTq9BzyTvpdkMfnaeu8yt+ttz3uL6Y9Pk9WeT3Y8pS3M2vw+5hnwuQT5sAUjoC0OU/5ttTB0y8wdtw==
 
+"@justeat/f-icons@2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.3.0.tgz#473cc1ce7edeb0ce58df674c9c4ee0ebf30171d8"
+  integrity sha512-KQ19RSgGyMwfAV4ZOA7SU3BjyR6h9z7Ykc0K3DBcft4EJBDh1lmvtAZIaZJyhDTwKrggrJaLq5QubEHlB6gkew==
+
 "@justeat/f-icons@2.5.0":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.5.0.tgz#48af36446b85f8577de76d565bbc9d54f48ae3e8"
