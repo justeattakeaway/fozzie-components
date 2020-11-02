@@ -10,7 +10,7 @@ $search-button-bgColor--active: $orange--darkest;
     display: inline-block;
     position: relative;
     width: 100%;
-    max-width: 611px;
+    max-width: 610px;
 
     @include media('>=narrow') {
         min-height: 90px;
@@ -52,27 +52,15 @@ $search-button-bgColor--active: $orange--darkest;
 
     @include media('>=narrow') {
         height: 60px;
-
-        //@include theme('je') {
-        //    padding: 11px spacing(x2);
-        //}
     }
 
     @include media('>=narrowMid') {
         min-width: 128px;
     }
 
-    //@include theme('ml') {
-    //    @include media('>=mid') {
-    //        padding: 11px spacing(x2);
-    //    }
-    //}
-
     .c-search-btn-icon {
         @include media('>=narrowMid') {
-            //@include theme('je') {
-                display: none;
-            //}
+            display: none;
         }
 
         svg {
@@ -81,13 +69,6 @@ $search-button-bgColor--active: $orange--darkest;
             display: flex;
             justify-content: center;
             align-items: center;
-
-            @include media('>=mid') {
-                //@include theme('ml') {
-                //    margin-right: spacing();
-                //    height: 23px;
-                //}
-            }
         }
     }
 }
@@ -102,21 +83,13 @@ $search-button-bgColor--active: $orange--darkest;
 .c-search-btn-text {
     display: none;
 
-    //@include theme('je') {
-        @include media('>=narrowMid') {
-            display: block;
-            margin: 0 auto;
-        }
-    //}
-
-    //@include theme('ml') {
-    //    @include media('>=mid') {
-    //        display: block;
-    //        margin: 0 auto;
-    //    }
-    //}
+    @include media('>=narrowMid') {
+        display: block;
+        margin: 0 auto;
+    }
 }
 
+// @Todo - should use f-error-message here instead.
 .c-search-error {
     background: url(//dy3erx8o0a6nh.cloudfront.net/images/icons/states/icon-error--red.svg) no-repeat left 10px;
     color: $color-text--danger;
@@ -143,7 +116,7 @@ $search-button-bgColor--active: $orange--darkest;
 
 .c-search-input,
 .c-search-streetInput {
-    font-size: 16px;
+    @include font-size(body-l);
     line-height: 1.25;
     border: none;
     outline: none;
@@ -288,7 +261,7 @@ $search-button-bgColor--active: $orange--darkest;
     width: 20px;
     height: 20px;
     margin-right: 20px;
-    border: 3px solid #f36D00;
+    border: 3px solid $orange;
     border-top: 3px solid rgba(243, 109, 0, 0.2);
     border-radius: 50%;
     animation: spin 1s linear 0s infinite;
