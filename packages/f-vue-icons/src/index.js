@@ -7,6 +7,7 @@ export { default as AppAndroidEsIcon } from '../icons/AppAndroidEsIcon';
 export { default as AppAndroidItIcon } from '../icons/AppAndroidItIcon';
 export { default as AppAndroidNoIcon } from '../icons/AppAndroidNoIcon';
 export { default as AppAndroidIcon } from '../icons/AppAndroidIcon';
+export { default as AppHuaweiUkIcon } from '../icons/AppHuaweiUkIcon';
 export { default as AppIosDkIcon } from '../icons/AppIosDkIcon';
 export { default as AppIosEsIcon } from '../icons/AppIosEsIcon';
 export { default as AppIosItIcon } from '../icons/AppIosItIcon';
