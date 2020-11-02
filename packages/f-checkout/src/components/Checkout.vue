@@ -137,8 +137,7 @@ export default {
                 postcode: null
             },
             buttonText: 'Go to payment',
-            genericErrorMessage: null,
-            formStarted: false
+            genericErrorMessage: null
         };
     },
 

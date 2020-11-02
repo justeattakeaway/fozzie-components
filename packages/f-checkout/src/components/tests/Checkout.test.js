@@ -118,7 +118,7 @@ describe('Checkout', () => {
                 await flushPromises();
                 await wrapper.vm.$nextTick();
 
-                // Assert                expect(wrapper.vm.isMobileNumberValid).toBe(false);
+                // Assert
 
                 expect(wrapper.vm.isMobileNumberInvalid).toBe(true);
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
