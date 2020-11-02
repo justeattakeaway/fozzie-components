@@ -6,13 +6,13 @@
                 :class="$style['c-addressGroup-formField']"
                 name="address-line-1"
                 data-test-id="input-address-line-1"
-                :label-text="passed.copy.labels.line1"
+                :label-text="shared.copy.labels.line1"
                 label-style="inline">
                 <template #error>
                     <error-message
                         v-if="isAddressLine1Invalid"
                         data-test-id='error-address-line1-empty'>
-                        {{ passed.copy.validationMessages.addressLine1.requiredError }}
+                        {{ shared.copy.validationMessages.addressLine1.requiredError }}
                     </error-message>
                 </template>
             </form-field>
@@ -22,7 +22,7 @@
                 :class="$style['c-addressGroup-formField']"
                 name="address-line-2"
                 data-test-id="input-address-line-2"
-                :label-text="passed.copy.labels.line2"
+                :label-text="shared.copy.labels.line2"
                 label-style="inline" />
 
             <form-field
@@ -30,13 +30,13 @@
                 :class="$style['c-addressGroup-formField']"
                 name="address-city"
                 data-test-id="input-address-city"
-                :label-text="passed.copy.labels.city"
+                :label-text="shared.copy.labels.city"
                 label-style="inline">
                 <template #error>
                     <error-message
                         v-if="isAddressCityInvalid"
                         data-test-id='error-address-city-empty'>
-                        {{ passed.copy.validationMessages.city.requiredError }}
+                        {{ shared.copy.validationMessages.city.requiredError }}
                     </error-message>
                 </template>
             </form-field>
@@ -45,18 +45,18 @@
             v-model="value.postcode"
             name="address-postcode"
             data-test-id="input-address-postcode"
-            :label-text="passed.copy.labels.postcode"
+            :label-text="shared.copy.labels.postcode"
             label-style="inline">
             <template #error>
                 <error-message
                     v-if="isAddressPostcodeInvalid"
                     data-test-id='error-address-postcode-empty'>
-                    {{ passed.copy.validationMessages.postcode.requiredError }}
+                    {{ shared.copy.validationMessages.postcode.requiredError }}
                 </error-message>
                 <error-message
                     v-else-if="isAddressPostcodeIncorrectType"
                     data-test-id='error-address-postcode-type-error'>
-                    {{ passed.copy.validationMessages.postcode.invalidCharError }}
+                    {{ shared.copy.validationMessages.postcode.invalidCharError }}
                 </error-message>
             </template>
         </form-field>
@@ -72,7 +72,7 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 export default {
     components: { FormField, ErrorMessage },
 
-    inject: ['passed'],
+    inject: ['shared'],
 
     props: {
         value: {
@@ -90,19 +90,19 @@ export default {
         */
 
         isAddressLine1Invalid () {
-            return this.passed.$v.address.line1.$dirty && !this.passed.$v.address.line1.required;
+            return this.shared.$v.address.line1.$dirty && !this.shared.$v.address.line1.required;
         },
 
         isAddressCityInvalid () {
-            return this.passed.$v.address.city.$dirty && !this.passed.$v.address.city.required;
+            return this.shared.$v.address.city.$dirty && !this.shared.$v.address.city.required;
         },
 
         isAddressPostcodeInvalid () {
-            return this.passed.$v.address.postcode.$dirty && !this.passed.$v.address.postcode.required;
+            return this.shared.$v.address.postcode.$dirty && !this.shared.$v.address.postcode.required;
         },
 
         isAddressPostcodeIncorrectType () {
-            return this.passed.$v.address.postcode.$dirty && !this.passed.$v.address.postcode.isValidPostcode;
+            return this.shared.$v.address.postcode.$dirty && !this.shared.$v.address.postcode.isValidPostcode;
         }
     }
 };

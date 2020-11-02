@@ -142,16 +142,18 @@ export default {
     },
 
     provide () {
-        const passed = {};
-        Object.defineProperty(passed, '$v', {
-            enumerable: true,
-            get: () => this.$v
+        const shared = {};
+        Object.defineProperties(shared, {
+            $v: {
+                enumerable: true,
+                get: () => this.$v
+            },
+            copy: {
+                enumerable: true,
+                get: () => this.copy
+            }
         });
-        Object.defineProperty(passed, 'copy', {
-            enumerable: true,
-            get: () => this.copy
-        });
-        return { passed };
+        return { shared };
     },
 
     computed: {
