@@ -3,6 +3,16 @@
         :data-theme="theme"
         :class="$style['c-checkout']"
         data-test-id='checkout-component'>
+        {{ $t('test') }}
+        <i18n
+            path="testPlaceholder">
+            <template #number>
+                0123456789
+            </template>
+            <template #readMoreUrl>
+                My URL!
+            </template>
+        </i18n>
         <card
             :card-heading="title"
             is-rounded
@@ -29,7 +39,7 @@
                     data-test-id='selector' />
 
                 <form-selector />
-                <user-note data-test-id='user-note'/>
+                <user-note data-test-id='user-note' />
                 <button
                     :class="[
                         $style['o-btn--allergy'],

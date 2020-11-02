@@ -68,7 +68,7 @@
     "stylelint": "13.7.2",
     "stylelint-scss": "3.18.0",
     "vue-svg-loader": "0.16.0",
-    "vue-template-compiler": "2.6.10",
+    "vue-template-compiler": "2.6.12",
     "wdio-chromedriver-service": "6.0.3",
     "webdriverio": "6.3.4"
   },
