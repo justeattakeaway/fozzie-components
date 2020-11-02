@@ -45,13 +45,13 @@ export default {
 
     @include media('>=narrowMid') {
         max-width: 800px;
-        padding: 16px;
-        min-height: 211px;
+        padding: spacing(x2);
+        min-height: 210px;
     }
 
     @include media('>=980') {
         min-height: 230px;
-        padding: 18px 16px 20px;
+        padding: 18px spacing(x2) 20px;
     }
 }
 .c-searchShell-title,
@@ -67,7 +67,7 @@ export default {
     color: $color-headings--highlight;
     @include font-size('heading-xxl', true, 'narrow');
     font-weight: $font-weight-bold;
-    margin-bottom: 8px;
+    margin-bottom: spacing();
 
     @include media('>=narrowMid') {
         @include font-size('heading-xxl');
@@ -83,7 +83,7 @@ export default {
     color: $grey--dark;
     @include font-size('subheading-s', true, 'narrow');
     font-weight: $font-weight-base;
-    margin-bottom: 16px;
+    margin-bottom: spacing(x2);
 
     @include media('>=narrowMid') {
         @include font-size('subheading-s');

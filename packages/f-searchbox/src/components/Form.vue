@@ -27,6 +27,7 @@
                         ref="addressInput"
                         :value="address"
                         name="postcode"
+                        type="search"
                         data-test-id="address-box-input"
                         :aria-label="copy.fieldLabel"
                         :aria-describedby="false ? 'errorMessage' : false"
