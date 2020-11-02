@@ -1,15 +1,15 @@
-const GoToPaymentSuccess = 'checkout-payment-success';
-const GoToPaymentFailure = 'checkout-payment-failure';
-const GoToPaymentStart = 'checkout-payment-start';
-const GoToPaymentInlineError = 'checkout-payment-inline-error';
+const CheckoutSuccess = 'checkout-payment-success';
+const CheckoutFailure = 'checkout-payment-failure';
+const CheckoutStart = 'checkout-payment-start';
+const CheckoutInlineError = 'checkout-payment-inline-error';
 const VisitCheckoutPage = 'checkout-visit-payment-page';
 const CheckoutBlocked = 'checkout-payment-blocked';
 
 export default {
-    GoToPaymentSuccess,
-    GoToPaymentFailure,
-    GoToPaymentStart,
-    GoToPaymentInlineError,
+    CheckoutSuccess,
+    CheckoutFailure,
+    CheckoutStart,
+    CheckoutInlineError,
     VisitCheckoutPage,
     CheckoutBlocked
 };

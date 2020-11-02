@@ -92,8 +92,8 @@ describe('Checkout', () => {
         });
     });
 
-    describe('with a working checkout service', () => {
-        describe('when checkoutMethod set to `Collection`', () => {
+    describe('when form submitted', () => {
+        describe('if checkoutMethod set to `Collection`', () => {
             const propsData = { checkoutMethod: 'Collection' };
 
             it('should emit success event when all fields are populated correctly', async () => {
@@ -106,7 +106,7 @@ describe('Checkout', () => {
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.emitted(EventNames.GoToPaymentSuccess).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
             });
 
             it('should show error message and emit failure event when the mobile number field is not populated', async () => {
@@ -121,8 +121,8 @@ describe('Checkout', () => {
                 // Assert                expect(wrapper.vm.isMobileNumberValid).toBe(false);
 
                 expect(wrapper.vm.isMobileNumberInvalid).toBe(true);
-                expect(wrapper.emitted(EventNames.GoToPaymentFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('mobileNumber');
+                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('mobileNumber');
             });
 
             it('should not show error message or emit failure event when the address input fields are not populated', async () => {
@@ -136,12 +136,12 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(wrapper.vm.address.required).toBe(undefined);
-                expect(wrapper.emitted(EventNames.GoToPaymentFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('mobileNumber');
+                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('mobileNumber');
             });
         });
 
-        describe('when checkoutMethod set to `Delivery`', () => {
+        describe('if checkoutMethod set to `Delivery`', () => {
             const propsData = { checkoutMethod: 'Delivery' };
 
             it('should emit success event when all fields are populated correctly', async () => {
@@ -157,7 +157,7 @@ describe('Checkout', () => {
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.emitted(EventNames.GoToPaymentSuccess).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
             });
 
             it('should emit failure event when the address input fields are not populated', async () => {
@@ -170,8 +170,8 @@ describe('Checkout', () => {
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(wrapper.emitted(EventNames.GoToPaymentFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.GoToPaymentFailure)[0][0].invalidFields).toContain('address');
+                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address');
             });
         });
     });

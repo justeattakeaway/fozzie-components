@@ -90,19 +90,25 @@ export default {
         */
 
         isAddressLine1Invalid () {
-            return this.shared.$v.address.line1.$dirty && !this.shared.$v.address.line1.required;
+            return this.checkValid('line1');
         },
 
         isAddressCityInvalid () {
-            return this.shared.$v.address.city.$dirty && !this.shared.$v.address.city.required;
+            return this.checkValid('city');
         },
 
         isAddressPostcodeInvalid () {
-            return this.shared.$v.address.postcode.$dirty && !this.shared.$v.address.postcode.required;
+            return this.checkValid('postcode');
         },
 
         isAddressPostcodeIncorrectType () {
             return this.shared.$v.address.postcode.$dirty && !this.shared.$v.address.postcode.isValidPostcode;
+        }
+    },
+
+    methods: {
+        checkValid (field) {
+            return this.shared.$v.address[field].$dirty && !this.shared.$v.address[field].required;
         }
     }
 };

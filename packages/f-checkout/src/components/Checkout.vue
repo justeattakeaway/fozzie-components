@@ -209,14 +209,14 @@ export default {
         onFormSubmit () {
             if (this.isFormInvalid()) {
                 const validationState = this.formValidationState(this.$v);
-                this.$emit(EventNames.GoToPaymentFailure, validationState);
+                this.$emit(EventNames.CheckoutFailure, validationState);
             }
 
             try {
-                this.$emit(EventNames.GoToPaymentSuccess);
+                this.$emit(EventNames.CheckoutSuccess);
             } catch (error) {
                 const thrownErrors = error;
-                this.$emit(EventNames.GoToPaymentFailure, thrownErrors);
+                this.$emit(EventNames.CheckoutFailure, thrownErrors);
             }
         },
 
