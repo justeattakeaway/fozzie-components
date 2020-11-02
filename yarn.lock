@@ -1680,10 +1680,10 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.3.0.tgz#473cc1ce7edeb0ce58df674c9c4ee0ebf30171d8"
   integrity sha512-KQ19RSgGyMwfAV4ZOA7SU3BjyR6h9z7Ykc0K3DBcft4EJBDh1lmvtAZIaZJyhDTwKrggrJaLq5QubEHlB6gkew==
 
-"@justeat/f-icons@2.8.0":
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.8.0.tgz#df50ca315d6337c6b5bcdaa79b3dd01d86ca839d"
-  integrity sha512-zNxdVzre+DH3falRoLTiQiHrKKTgtgLiIxchxU+HWaf5qBwIbsn9Yb2AUC/q+PajrhbyPp+9NFhw5QE2CQE6Ww==
+"@justeat/f-icons@2.9.0":
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.9.0.tgz#bdff89717654afa4d6bcceda400a6d53a71b4b04"
+  integrity sha512-c5v6dLX+zGP8RR71lMYIg/R5MYsxIGKEXUF1N+qiobSIMwxYlSDWT1duph01FvwyqB1cwpdK1Ragvk5BrBdGiQ==
 
 "@justeat/f-logger@0.8.1":
   version "0.8.1"
@@ -15292,7 +15292,7 @@ mkdirp@0.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@^0.5.3, mkdir
   dependencies:
     minimist "^1.2.5"
 
-mocha-each@^2.0.1:
+mocha-each@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/mocha-each/-/mocha-each-2.0.1.tgz#e36668e481ad3c4ec42a79bc94b8968ec0054c87"
   integrity sha512-0ZgWY5ajbnROXkfyaDb+0RAYzDBH3QVow/1zJiyl7lYMRnj1Nid8RDP2+/2TTajB5n4vr21v35MjB72GjFFj2g==
