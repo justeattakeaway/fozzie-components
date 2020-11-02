@@ -20,6 +20,8 @@
             :class="$style['c-card--dimensions']">
             <form
                 type="post"
+                @click="formStart"
+                @focus="formStart"
                 @submit.prevent="onFormSubmit">
                 <form-field
                     v-model="mobileNumber"
@@ -27,14 +29,12 @@
                     data-test-id="input-mobile-number"
                     :label-text="copy.labels.mobileNumber"
                     label-style="inline">
-                    // TODO: - Replace with f-error-message
                     <template #error>
-                        <p
+                        <error-message
                             v-if="!isMobileNumberValid"
-                            :class="$style['o-form-error']"
                             data-test-id='error-mobile-number-empty'>
                             {{ copy.validationMessages.mobileNumber.requiredError }}
-                        </p>
+                        </error-message>
                     </template>
                 </form-field>
 
@@ -80,7 +80,8 @@ import {
 } from 'vuelidate/lib/validators';
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
-import '@justeat/f-button/dist/f-button.css';
+import ErrorMessage from '@justeat/f-error-message';
+import '@justeat/f-error-message/dist/f-error-message.css';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
@@ -98,6 +99,7 @@ export default {
     components: {
         AddressBlock,
         Alert,
+        ErrorMessage,
         Card,
         FormField,
         FormSelector,
@@ -137,7 +139,8 @@ export default {
             },
             buttonText: 'Go to payment',
             delivery: CHECKOUT_METHOD_DELIVERY,
-            genericErrorMessage: null
+            genericErrorMessage: null,
+            formStarted: false
         };
     },
 
@@ -164,12 +167,19 @@ export default {
         },
 
         isMobileNumberValid () {
-            const mobileNumberInvalid = this.$v.mobileNumber.required || this.$v.mobileNumber.numeric || this.$v.mobileNumber.minLength;
-            return mobileNumberInvalid && !this.$v.mobileNumber.$dirty;
+            const mobileNumberValid = !this.$v.mobileNumber.required || !this.$v.mobileNumber.numeric || !this.$v.mobileNumber.minLength;
+            return mobileNumberValid && !this.$v.mobileNumber.$dirty;
         }
     },
 
     methods: {
+        formStart () {
+            if (!this.formStarted) {
+                // this.$emit(EventNames.CreateAccountStart);
+                this.formStarted = true;
+            }
+        },
+
         formValidationState ($v) {
             const fields = $v.$params;
             const invalidFields = [];
@@ -307,14 +317,6 @@ $line-height                              : 16px;
             display: block;
             width: 100%;
         }
-    }
-
-    .o-form-error {
-        display: flex;
-        align-items: center;
-        color: $color-text--danger;
-        @include font-size(body-s);
-        margin-top: spacing();
     }
 }
 </style>

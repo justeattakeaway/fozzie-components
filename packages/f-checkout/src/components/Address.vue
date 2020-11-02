@@ -8,14 +8,12 @@
                 data-test-id="input-address-line-1"
                 :label-text="passed.copy.labels.line1"
                 label-style="inline">
-                // TODO: - Replace with f-error-message
                 <template #error>
-                    <p
+                    <error-message
                         v-if="!isAddressLine1Valid"
-                        :class="$style['o-form-error']"
                         data-test-id='error-address-line1-empty'>
                         {{ passed.copy.validationMessages.addressLine1.requiredError }}
-                    </p>
+                    </error-message>
                 </template>
             </form-field>
 
@@ -34,49 +32,47 @@
                 data-test-id="input-address-city"
                 :label-text="passed.copy.labels.city"
                 label-style="inline">
-                // TODO: - Replace with f-error-message
                 <template #error>
-                    <p
+                    <error-message
                         v-if="!isAddressCityValid"
-                        :class="$style['o-form-error']"
                         data-test-id='error-address-city-empty'>
                         {{ passed.copy.validationMessages.city.requiredError }}
-                    </p>
+                    </error-message>
                 </template>
             </form-field>
         </fieldset>
-
+        {{ isAddressPostcodeValid }}
+        {{ isAddressPostcodeCorrectType }}
         <form-field
             v-model="value.postcode"
             name="address-postcode"
             data-test-id="input-address-postcode"
             :label-text="passed.copy.labels.postcode"
             label-style="inline">
-            // TODO: - Replace with f-error-message
             <template #error>
-                <p
+                <error-message
                     v-if="!isAddressPostcodeValid"
-                    :class="$style['o-form-error']"
                     data-test-id='error-address-postcode-empty'>
                     {{ passed.copy.validationMessages.postcode.requiredError }}
-                </p>
-                <p
+                </error-message>
+                <error-message
                     v-else-if="!isAddressPostcodeCorrectType"
-                    :class="$style['o-form-error']"
                     data-test-id='error-address-postcode-type-error'>
                     {{ passed.copy.validationMessages.postcode.invalidCharError }}
-                </p>
+                </error-message>
             </template>
         </form-field>
     </div>
 </template>
 
 <script>
+import ErrorMessage from '@justeat/f-error-message';
+import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 
 export default {
-    components: { FormField },
+    components: { FormField, ErrorMessage },
 
     inject: ['passed'],
 
@@ -128,13 +124,5 @@ export default {
     .c-addressGroup-formField {
         margin-bottom: -17px;
     }
-}
-
-.o-form-error {
-    display: flex;
-    align-items: center;
-    color: $color-text--danger;
-    @include font-size(body-s);
-    margin-top: spacing();
 }
 </style>
