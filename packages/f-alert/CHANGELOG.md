@@ -3,13 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
-Latest (to be added to next release)
+v0.2.0
 ------------------------------
-*October 23, 2020*
+*October 26, 2020*
 
 ### Added
 - Stylelint added to lint styling on build.
+- data-test IDs to Alert Component 
+- Basic tests for Alert 
+- Alert Component-Object 
 
 
 v0.1.1

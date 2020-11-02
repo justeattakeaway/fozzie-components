@@ -4,12 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (to be added to next release)
+v2.2.0-beta.2
 ------------------------------
-*October 23, 2020*
+*October 26, 2020*
 
 ### Added
-- Stylelint added to lint styling on build.
+- Integrated card grouping via new Braze dispatcher method
+- Prop groupCards for grouping by title
+- Watcher for cardsGrouped enabling a new emitter containing the number of groups
+- LogCardImpressions when grouped
+- Stylelint added to lint styling on build
+
+### Changed
+- 'jet' theme instead of 'je'
+
+### Removed
+- While groupedCards is true limiting cannot be used, this is until we have decided how to apply limiting to groups.
 
 
 v2.2.0-beta.1

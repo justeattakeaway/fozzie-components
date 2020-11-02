@@ -22,27 +22,27 @@ export default {
       }
     }), h("use", {
       attrs: {
-        transform: "scale(-1 1)",
-        href: "#a"
+        href: "#flag-nz-a",
+        transform: "scale(-1 1)"
       }
     }), h("use", {
       attrs: {
-        transform: "rotate(72 0 0)",
-        href: "#a"
+        href: "#flag-nz-a",
+        transform: "rotate(72 0 0)"
       }
     }), h("use", {
       attrs: {
-        transform: "rotate(-72 0 0)",
-        href: "#a"
+        href: "#flag-nz-a",
+        transform: "rotate(-72 0 0)"
       }
     }), h("use", {
       attrs: {
-        transform: "scale(-1 1) rotate(72)",
-        href: "#a"
+        href: "#flag-nz-a",
+        transform: "scale(-1 1) rotate(72)"
       }
     }), h("clipPath", {
       attrs: {
-        id: "a"
+        id: "flag-nz-a"
       }
     }, [h("path", {
       attrs: {
@@ -50,7 +50,7 @@ export default {
       }
     })]), h("clipPath", {
       attrs: {
-        id: "b"
+        id: "flag-nz-b"
       }
     }, [h("path", {
       attrs: {
@@ -58,9 +58,9 @@ export default {
       }
     })]), h("path", {
       attrs: {
-        d: "M0 0h640v480H0z",
         fill: "#00247d",
-        "fill-rule": "evenodd"
+        "fill-rule": "evenodd",
+        d: "M0 0h640v480H0z"
       }
     }), h("g", {
       attrs: {
@@ -68,18 +68,18 @@ export default {
       }
     }, [h("use", {
       attrs: {
-        fill: "#fff",
-        height: "100%",
         width: "100%",
-        href: "#b",
+        height: "100%",
+        fill: "#fff",
+        href: "#flag-nz-b",
         transform: "matrix(45.4 0 0 45.4 900 120)"
       }
     }), h("use", {
       attrs: {
-        fill: "#cc142b",
-        height: "100%",
         width: "100%",
-        href: "#b",
+        height: "100%",
+        fill: "#cc142b",
+        href: "#flag-nz-b",
         transform: "matrix(30 0 0 30 900 120)"
       }
     })]), h("g", {
@@ -88,18 +88,18 @@ export default {
       }
     }, [h("use", {
       attrs: {
-        fill: "#fff",
-        height: "100%",
         width: "100%",
-        href: "#b",
+        height: "100%",
+        fill: "#fff",
+        href: "#flag-nz-b",
         transform: "rotate(-82 519.02 -457.67) scale(40.4)"
       }
     }), h("use", {
       attrs: {
-        fill: "#cc142b",
-        height: "100%",
         width: "100%",
-        href: "#b",
+        height: "100%",
+        fill: "#cc142b",
+        href: "#flag-nz-b",
         transform: "rotate(-82 519.02 -457.67) scale(25)"
       }
     })]), h("g", {
@@ -108,18 +108,18 @@ export default {
       }
     }, [h("use", {
       attrs: {
-        fill: "#fff",
-        height: "100%",
         width: "100%",
-        href: "#b",
+        height: "100%",
+        fill: "#fff",
+        href: "#flag-nz-b",
         transform: "rotate(-82 668.57 -327.67) scale(45.4)"
       }
     }), h("use", {
       attrs: {
-        fill: "#cc142b",
-        height: "100%",
         width: "100%",
-        href: "#b",
+        height: "100%",
+        fill: "#cc142b",
+        href: "#flag-nz-b",
         transform: "rotate(-82 668.57 -327.67) scale(30)"
       }
     })]), h("g", {
@@ -128,58 +128,46 @@ export default {
       }
     }, [h("use", {
       attrs: {
-        fill: "#fff",
-        height: "100%",
         width: "100%",
-        href: "#b",
+        height: "100%",
+        fill: "#fff",
+        href: "#flag-nz-b",
         transform: "matrix(50.4 0 0 50.4 900 480)"
       }
     }), h("use", {
       attrs: {
-        fill: "#cc142b",
-        height: "100%",
         width: "100%",
-        href: "#b",
+        height: "100%",
+        fill: "#cc142b",
+        href: "#flag-nz-b",
         transform: "matrix(35 0 0 35 900 480)"
       }
     })]), h("path", {
       attrs: {
-        "clip-path": "url(#a)",
-        d: "M0 0l600 300M0 300L600 0",
-        transform: "scale(.60681 .73139)",
         stroke: "#fff",
-        "stroke-width": "60"
-      }
-    }), h("path", {
-      attrs: {
-        "clip-path": "url(#b)",
+        "stroke-width": "60",
         d: "M0 0l600 300M0 300L600 0",
-        transform: "scale(.60681 .73139)",
+        "clip-path": "url(#flag-nz-a)",
+        transform: "scale(.60681 .73139)"
+      }
+    }), h("path", {
+      attrs: {
         stroke: "#cc142b",
-        "stroke-width": "40"
+        "stroke-width": "40",
+        d: "M0 0l600 300M0 300L600 0",
+        "clip-path": "url(#flag-nz-b)",
+        transform: "scale(.60681 .73139)"
       }
     }), h("path", {
-      style: "line-height:normaltext-indent:0text-align:starttext-decoration-line:nonetext-decoration-style:solidtext-decoration-color:#000text-transform:noneblock-progression:tbisolation:automix-blend-mode:normal",
       attrs: {
-        "clip-path": "url(#a)",
+        fill: "#fff",
         d: "M151.7 0v79.37H0v60.68h151.7v79.37h60.69v-79.37h151.7V79.37H212.4V0z",
-        color: "#000",
-        "font-weight": "400",
-        "font-family": "sans-serif",
-        "white-space": "normal",
-        overflow: "visible",
-        fill: "#fff"
+        "clip-path": "url(#flag-nz-a)"
       }
     }), h("path", {
-      style: "line-height:normaltext-indent:0text-align:starttext-decoration-line:nonetext-decoration-style:solidtext-decoration-color:#000text-transform:noneblock-progression:tbisolation:automix-blend-mode:normal",
       attrs: {
-        d: "M163.84 0v91.5H0v36.41h163.84v91.5h36.41v-91.5H364.1v-36.4H200.25V0z",
-        color: "#000",
-        "font-weight": "400",
-        "font-family": "sans-serif",
-        "white-space": "normal",
-        overflow: "visible",
-        fill: "#cc142b"
+        fill: "#cc142b",
+        d: "M163.84 0v91.5H0v36.41h163.84v91.5h36.41v-91.5H364.1v-36.4H200.25V0z"
       }
     })]);
   }

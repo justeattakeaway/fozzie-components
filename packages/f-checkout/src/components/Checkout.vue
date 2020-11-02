@@ -45,7 +45,8 @@
                     :order-method="checkoutMethod"
                     data-test-id='selector' />
 
-                <user-note />
+                <form-selector />
+                <user-note data-test-id='user-note' />
                 <button
                     :class="[
                         $style['o-btn--allergy'],

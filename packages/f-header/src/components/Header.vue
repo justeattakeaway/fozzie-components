@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import sharedServices from '@justeat/f-services';
+import { globalisationServices } from '@justeat/f-services';
 import Logo from './Logo.vue';
 import SkipToMain from './SkipToMain.vue';
 import tenantConfigs from '../tenants';
@@ -107,7 +107,7 @@ export default {
         }
     },
     data () {
-        const locale = sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
+        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
         const mobileNavIsOpen = false;
 
@@ -118,7 +118,7 @@ export default {
     },
     computed: {
         theme () {
-            return sharedServices.getTheme(this.locale);
+            return globalisationServices.getTheme(this.locale);
         },
         showDeliveryEnquiryWithContent () {
             return this.copy.deliveryEnquiry && this.showDeliveryEnquiry;

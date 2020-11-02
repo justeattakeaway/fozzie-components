@@ -6,6 +6,7 @@ const facebookIcon = () => footerIcons()[2];
 const twitterIcon = () => footerIcons()[3];
 const instagramIcon = () => footerIcons()[4];
 
+exports.isFooterDisplayed = () => footerComponent().isDisplayed();
 exports.isIosIconDisplayed = () => iosIcon().isDisplayed();
 exports.isAndroidIconDisplayed = () => androidIcon().isDisplayed();
 exports.isFacebookIconDisplayed = () => facebookIcon().isDisplayed();
