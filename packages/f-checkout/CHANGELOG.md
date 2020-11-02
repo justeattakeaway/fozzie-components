@@ -20,7 +20,6 @@ v0.6.0
 ### Added
 - New component tests
 
-
 v0.5.0
 ------------------------------
 *October 26, 2020*
