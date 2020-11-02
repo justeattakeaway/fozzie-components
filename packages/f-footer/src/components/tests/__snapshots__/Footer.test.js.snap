@@ -13,14 +13,14 @@ exports[`Footer should render default component markup 1`] = `
     <div class="c-footer-container">
       <!---->
       <div class="c-footer-row">
-        <icon-list-stub icons="[object Object],[object Object]" title="Download our apps" isapps="true" locale="en-GB"></icon-list-stub>
+        <icon-list-stub icons="[object Object],[object Object],[object Object]" title="Download our apps" isapps="true" locale="en-GB"></icon-list-stub>
         <feedback-block-stub title="Feedback" text="Help us improve our website" buttontext="Send feedback"></feedback-block-stub>
         <icon-list-stub icons="[object Object],[object Object],[object Object]" title="Follow us" issocial="true" locale="en-GB"></icon-list-stub>
       </div>
     </div>
   </div>
   <div class="c-footer-container c-footer-row c-footer-row--combined c-footer-row--notEqualTopAndBottomPad c-footer-row--noPadBelowWide">
-    <country-selector-stub currentcountryname="United Kingdom" currentcountrykey="gb" countries="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" changecountrytext="You are on the UK website, click here to change."></country-selector-stub>
+    <country-selector-stub currentcountryname="United Kingdom" currentcountrykey="gb" countries="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" changecountrytext="You are on the UK website, click here to change."></country-selector-stub>
     <!---->
     <icon-list-stub icons="[object Object],[object Object],[object Object]" title="" ispayments="true" locale="en-GB"></icon-list-stub>
   </div>

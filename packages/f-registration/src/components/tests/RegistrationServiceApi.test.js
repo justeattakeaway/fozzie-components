@@ -18,7 +18,7 @@ describe('RegistrationServiceApi', () => {
             const data = {
                 firstName: 'Ashton',
                 lastName: 'Adamms',
-                email: 'ashton.adamms+jetest@just-eat.com',
+                email: 'ashton.adamms+jetest@example.com',
                 password: 'Passw0rd'
             };
             axiosMock.onPost(url).reply(201);

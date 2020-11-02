@@ -109,7 +109,7 @@ export default {
                     gtm: 'click_about_privacy_policy'
                 },
                 {
-                    url: 'https://connect.menulog.co.nz/login?client_id=RappsOrigPartnerCentre&response_type=code&redirect_uri=https:%2F%2Fpartner.menulog.co.nz%2Fsignin-jeconnect&state=QaF4ae5nfj7FUpuoevTVCHvmMBxIA1hO_4mDtePNEJOasCly6wdTLaHjTuvS7_If4SwPYZelgwT0ZFYb7CCZvfIIr9X0OVLKiRpdCLYU9zJPuorMgnFjjRlyQNdU8L_5ZvkfGGBtXJx-jNOlh5lU_aqiQ-KgrKthGa83ZbYH8GjV81bwGb7iJ8PRFJPYbwTyys-zclUwNFxXhfdsOpqIWsIlfpQ',
+                    url: 'https://connect.menulog.co.nz/',
                     text: 'Partner Centre',
                     gtm: 'click_about_partner_centre'
                 },
@@ -194,74 +194,6 @@ export default {
     ],
     currentCountryName: 'New Zealand',
     currentCountryKey: 'nz',
-    countries: [
-        {
-            key: 'au',
-            localisedName: 'Australia',
-            siteUrl: 'https://www.menulog.com.au',
-            gtm: 'click_country_au'
-        },
-        {
-            key: 'br',
-            localisedName: 'Brazil',
-            siteUrl: 'https://www.ifood.com.br',
-            gtm: 'click_country_br'
-        },
-        {
-            key: 'ca',
-            localisedName: 'Canada',
-            siteUrl: 'https://www.just-eat.ca',
-            gtm: 'click_country_ca'
-        },
-        {
-            key: 'dk',
-            localisedName: 'Denmark',
-            siteUrl: 'https://www.just-eat.dk',
-            gtm: 'click_country_dk'
-        },
-        {
-            key: 'fr',
-            localisedName: 'France',
-            siteUrl: 'https://www.just-eat.fr/',
-            gtm: 'click_country_fr'
-        },
-        {
-            key: 'ie',
-            localisedName: 'Ireland',
-            siteUrl: 'https://www.just-eat.ie',
-            gtm: 'click_country_ie'
-        },
-        {
-            key: 'it',
-            localisedName: 'Italy',
-            siteUrl: 'https://www.justeat.it',
-            gtm: 'click_country_it'
-        },
-        {
-            key: 'no',
-            localisedName: 'Norway',
-            siteUrl: 'https://www.just-eat.no',
-            gtm: 'click_country_no'
-        },
-        {
-            key: 'es',
-            localisedName: 'Spain',
-            siteUrl: 'https://www.just-eat.es',
-            gtm: 'click_country_es'
-        },
-        {
-            key: 'ch',
-            localisedName: 'Switzerland',
-            siteUrl: 'https://www.eat.ch',
-            gtm: 'click_country_ch'
-        },
-        {
-            key: 'gb',
-            localisedName: 'United Kingdom',
-            siteUrl: 'https://www.just-eat.co.uk',
-            gtm: 'click_country_gb'
-        }
-    ],
     changeCurrentCountry: 'You are on the NZ website, click here to change.',
     paymentIcons: [
         {

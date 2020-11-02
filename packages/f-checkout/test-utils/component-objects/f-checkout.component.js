@@ -1,11 +1,6 @@
 const checkoutComponent = () => $('[data-test-id="checkout-component"]');
 
 // Form Fields
-const mobileNumberInput = () => $('[data-test-id="input-mobile-number"]');
-const addressLine1Input = () => $('[data-test-id="input-address-line-1"]');
-const addressLine2Input = () => $('[data-test-id="input-address-line-2"]');
-const addressCityInput = () => $('[data-test-id="input-address-city"]');
-const addressPostcodeInput = () => $('[data-test-id="input-address-postcode"]');
 
 const userNoteInput = () => $('[data-test-id="user-note"] textarea');
 
@@ -14,6 +9,14 @@ const allergenLink = () => $('[data-test-id="allergy-button"]');
 const deliveryTimeDropdown = () => $('[data-test-id="delivery-time"]');
 
 const goToPaymentButton = () => $('[data-test-id="confirm-payment-submit-button"]');
+
+exports.inputs = {
+    mobileNumber: () => $('[data-test-id="input-mobile-number"]'),
+    addressLine1: () => $('[data-test-id="input-address-line-1"]'),
+    addressLine2: () => $('[data-test-id="input-address-line-2"]'),
+    addressCity: () => $('[data-test-id="input-address-city"]'),
+    addressPostcode: () => $('[data-test-id="input-address-postcode"]')
+}
 
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
