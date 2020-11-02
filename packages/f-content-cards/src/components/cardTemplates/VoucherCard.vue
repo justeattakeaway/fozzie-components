@@ -176,7 +176,7 @@ export default {
     }
 
     .c-contentCard-voucher-copy-copied {
-        color: $color-text--success;
+        color: $orange--aa;
     }
 
     .c-contentCard-voucher-copy-transition-out {
@@ -193,7 +193,7 @@ export default {
 
     .c-contentCard-voucher-code-cooldown-tick {
         // background-color: $color-text--success;
-        fill: $color-text--success;
+        fill: $orange--aa;
         width: spacing(x2);
         height: spacing(x2);
         padding: 0;
