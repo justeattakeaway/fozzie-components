@@ -443,20 +443,6 @@ export default {
     @include font-size(body-l);
 }
 
-.o-form-error {
-    display: flex;
-    align-items: center;
-    color: $red;
-    @include font-size(body-s);
-    margin-top: spacing();
-}
-
-.o-form-error-icon {
-    width: 16px;
-    height: 16px;
-    margin-right: spacing(x0.5);
-}
-
 * + .o-form {
     margin-top: spacing(x2);
 }
