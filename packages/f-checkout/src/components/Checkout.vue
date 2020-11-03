@@ -37,7 +37,7 @@
                 </form-field>
 
                 <address-block
-                    v-if="checkoutMethod === 'Delivery'"
+                    v-if="isDeliveryMethod"
                     v-model="address"
                     data-test-id='address-block' />
 
@@ -45,7 +45,6 @@
                     :order-method="checkoutMethod"
                     data-test-id='selector' />
 
-                <form-selector />
                 <user-note data-test-id='user-note' />
                 <button
                     :class="[
@@ -183,6 +182,10 @@ export default {
             */
             const mobileNumberInvalid = !this.$v.mobileNumber.required || !this.$v.mobileNumber.numeric || !this.$v.mobileNumber.minLength;
             return this.$v.mobileNumber.$dirty && mobileNumberInvalid;
+        },
+
+        isDeliveryMethod () {
+            return this.checkoutMethod === 'Delivery';
         }
     },
 
@@ -206,6 +209,7 @@ export default {
             };
         },
 
+        // TODO: Extract to `f-services
         isValidPostcode () {
             if (this.address.postcode) {
                 const postcode = this.address.postcode.replace(/\s/g, '');
@@ -236,8 +240,8 @@ export default {
     },
 
     validations () {
-        if (this.checkoutMethod === 'Delivery') {
-            return {
+        const deliveryDetails = this.isDeliveryMethod
+            ? {
                 address: {
                     line1: {
                         required
@@ -256,15 +260,16 @@ export default {
                     numeric,
                     minLength: minLength(10)
                 }
-            };
-        }
-        return {
-            mobileNumber: {
-                required,
-                numeric,
-                minLength: minLength(10)
             }
-        };
+            : {
+                mobileNumber: {
+                    required,
+                    numeric,
+                    minLength: minLength(10)
+                }
+            };
+
+        return deliveryDetails;
     }
 };
 </script>

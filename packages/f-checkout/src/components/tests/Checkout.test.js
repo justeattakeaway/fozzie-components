@@ -119,7 +119,36 @@ describe('Checkout', () => {
                 await wrapper.vm.$nextTick();
 
                 // Assert
+                expect(wrapper.vm.isMobileNumberInvalid).toBe(true);
+                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('mobileNumber');
+            });
 
+            it('should show error message and emit failure event when the mobile number field is populated with a < 10 numbers', async () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, { propsData });
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue('077777');
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.vm.isMobileNumberInvalid).toBe(true);
+                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('mobileNumber');
+            });
+
+            it('should show error message and emit failure event when the mobile number field is populated with non numeric value', async () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, { propsData });
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue('hs;-j`$e&1l');
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
                 expect(wrapper.vm.isMobileNumberInvalid).toBe(true);
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('mobileNumber');
@@ -127,17 +156,16 @@ describe('Checkout', () => {
 
             it('should not show error message or emit failure event when the address input fields are not populated', async () => {
                 // Arrange
-                const wrapper = shallowMount(VueCheckout, { propsData });
+                const wrapper = mount(VueCheckout, { propsData });
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue('07777777777');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
                 await flushPromises();
-                await wrapper.vm.$nextTick();
 
                 // Assert
                 expect(wrapper.vm.address.required).toBe(undefined);
-                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('mobileNumber');
+                expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
             });
         });
 
