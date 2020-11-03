@@ -3538,6 +3538,11 @@
   resolved "https://registry.yarnpkg.com/@testim/chrome-version/-/chrome-version-1.0.7.tgz#0cd915785ec4190f08a3a6acc9b61fc38fb5f1a9"
   integrity sha512-8UT/J+xqCYfn3fKtOznAibsHpiuDshCb0fwgWxRazTT19Igp9ovoXMPhXyLD6m3CKQGTMHgqoxaFfMWaL40Rnw==
 
+"@types/allure-js-commons@^0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@types/allure-js-commons/-/allure-js-commons-0.0.0.tgz#accf21f2fa69b3c494adc3bba5ce240c0d7c159c"
+  integrity sha512-LvREMEGmh0oZIQ11d/vt6BSv6CD0w3berVRRFrpgDVkRhAu+UFkreDrRrdl+01PFjf7/J0lJV1UrhVyRS2tOWA==
+
 "@types/anymatch@*":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@types/anymatch/-/anymatch-1.3.1.tgz#336badc1beecb9dacc38bea2cf32adf627a8421a"
@@ -3687,6 +3692,11 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
+"@types/jest@^22.2.3":
+  version "22.2.3"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.2.3.tgz#0157c0316dc3722c43a7b71de3fdf3acbccef10d"
+  integrity sha512-e74sM9W/4qqWB6D4TWV9FQk0WoHtX1X4FJpbjxucMSVJHtFjbQOH3H6yp+xno4br0AKG0wz/kPtaN599GUOvAg==
+
 "@types/jest@^24.0.19":
   version "24.9.1"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.9.1.tgz#02baf9573c78f1b9974a5f36778b366aa77bd534"
@@ -3754,6 +3764,11 @@
   version "14.14.3"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.3.tgz#e1c09064121f894baaad2bd9f12ce4a41bffb274"
   integrity sha512-33/L34xS7HVUx23e0wOT2V1qPF1IrHgQccdJVm9uXGTB9vFBrrzBtkQymT8VskeKOxjz55MSqMv0xuLq+u98WQ==
+
+"@types/node@^10.1.2":
+  version "10.17.44"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.44.tgz#3945e6b702cb6403f22b779c8ea9e5c3f44ead40"
+  integrity sha512-vHPAyBX1ffLcy4fQHmDyIUMUb42gHZjPHU66nhvbMzAWJqHnySGZ6STwN3rwrnSd1FHB0DI/RWgGELgKSYRDmw==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -3868,6 +3883,11 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-2.0.0.tgz#7036640b4e21cc2f259ae826ce843d277dad8cff"
   integrity sha512-RJJrrySY7A8havqpGObOB4W92QXKJo63/jFLLgpvOtsGUqbQZ9Sbgl35KMm1DjC6j7AvmmU2bIno+3IyEaemaw==
+
+"@types/strip-ansi@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@types/strip-ansi/-/strip-ansi-3.0.0.tgz#9b63d453a6b54aa849182207711a08be8eea48ae"
+  integrity sha1-m2PUU6a1SqhJGCIHcRoIvo7qSK4=
 
 "@types/strip-bom@^3.0.0":
   version "3.0.0"
@@ -13004,6 +13024,18 @@ javascript-stringify@^2.0.0, javascript-stringify@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/javascript-stringify/-/javascript-stringify-2.0.1.tgz#6ef358035310e35d667c675ed63d3eb7c1aa19e5"
   integrity sha512-yV+gqbd5vaOYjqlbk16EG89xB5udgjqQF3C5FAORDg4f/IS1Yc5ERCv5e/57yBcfJYw05V5JyIXabhwb75Xxow==
+
+jest-allure@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/jest-allure/-/jest-allure-0.1.3.tgz#acd669d3a5dd933aa230a1e2d5d9cafc623a9989"
+  integrity sha512-EkO3LmkPx/a4VDg81JKtdy6kFXI0D1rHRIJ5Sa9MZaGtFYpgiCJFa6XwTgIySaVN+3+QBbIt1558CEkIW7FKFA==
+  dependencies:
+    "@types/allure-js-commons" "^0.0.0"
+    "@types/jest" "^22.2.3"
+    "@types/node" "^10.1.2"
+    "@types/strip-ansi" "^3.0.0"
+    allure-js-commons "^1.3.2"
+    strip-ansi "^4.0.0"
 
 jest-changed-files@^24.9.0:
   version "24.9.0"
