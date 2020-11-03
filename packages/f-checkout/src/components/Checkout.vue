@@ -141,12 +141,18 @@ export default {
     },
 
     methods: {
+        initialiseLocalisation () {
+
+        },
+
         updateLocalisation () {
             const locale = this.locale || this.$i18n.locale;
-            const localeConfig = tenantConfigs['en-GB'];
+            const localeConfig = tenantConfigs[locale];
+            this.$i18n.setLocaleMessage(locale, { ...localeConfig });
 
-            this.$i18n.setLocaleMessage(locale, this.copy);
-            this.$i18n.setLocaleMessage('en-GB', { ...localeConfig });
+            const fallbackLocale = 'en-GB';
+            const fallbackLocaleConfig = tenantConfigs[fallbackLocale];
+            this.$i18n.setLocaleMessage(fallbackLocale, { ...fallbackLocaleConfig });
 
             this.$i18n.locale = locale;
         }
