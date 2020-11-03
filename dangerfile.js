@@ -13,6 +13,7 @@ const uniqueModifiedPackages = new Set(modifiedPackages);
 const modifiedRootPackage = modifiedPackages.includes('');
 
 const pr_number = danger.github.pr.number;
+message(`PR object is ${danger.github.pr}`);
 modifiedPackages.forEach(name => auto_label.set(pr_number, name, '#333333'));
 if (modifiedRootPackage) auto_label.set(pr_number, 'root', '#333333');
 
