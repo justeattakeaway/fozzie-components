@@ -1,29 +1,27 @@
-import { withTests } from '@storybook/addon-jest';
-import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_COLLECTION } from '../src/constants';
+import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY, VALID_LOCALES } from '../src/constants';
+import {
+    withKnobs, boolean, select, object, text
+} from '@storybook/addon-knobs';
+import { withA11y } from '@storybook/addon-a11y';
 import VueCheckout from '../src/components/Checkout.vue';
-import results from '../src/components/tests/.jest-test-results.json';
 
 export default {
     title: 'Components/Organisms',
-    decorators: [withTests({ results })],
-    argTypes: {
-        checkoutMethod: { control: { type: 'select', options: VALID_CHECKOUT_METHOD } }
-    }
+    decorators: [withA11y]
 };
 
-export const Checkout = args => ({
+export const CheckoutComponent = () => ({
     components: { VueCheckout },
-    props: Object.keys(args),
+    props: {
+        locale: {
+            default: select('Locale', ['en-GB', 'es-ES'], 'en-GB')
+        },
+        checkoutMethod: {
+            default: select('Checkout Method', VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY)
+        },
+    },
     template:
-        '<vue-checkout :checkoutMethod="checkoutMethod" />'
+        '<vue-checkout :checkoutMethod="checkoutMethod" locale="es-ES" />'
 });
 
-Checkout.parameters = {
-    jest: ['Checkout.test.js', 'Selector.test.js']
-};
-
-Checkout.storyName = 'f-checkout';
-
-Checkout.args = {
-    checkoutMethod: CHECKOUT_METHOD_COLLECTION
-};
+CheckoutComponent.storyName = 'f-checkout';

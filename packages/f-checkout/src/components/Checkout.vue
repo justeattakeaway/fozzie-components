@@ -3,6 +3,8 @@
         :data-theme="theme"
         :class="$style['c-checkout']"
         data-test-id='checkout-component'>
+        {{ $i18n.locale }}
+
         {{ $t('test') }}
         <i18n
             path="testPlaceholder">
@@ -26,12 +28,12 @@
                     v-model="mobileNumber"
                     name="mobile-number"
                     data-test-id="input-mobile-number"
-                    :label-text="copy.labels.mobileNumber"
+                    :label-text="$t('labels.mobileNumber')"
                     label-style="inline" />
 
                 <address-block
                     v-if="checkoutMethod === delivery"
-                    :labels="copy.labels"
+                    :labels="$t('labels')"
                     data-test-id='address-block' />
 
                 <form-selector
@@ -46,7 +48,7 @@
                         'o-btnLink'
                     ]"
                     data-test-id="allergy-button">
-                    {{ copy.allergyText }}
+                    {{ $t('allergyText') }}
                 </button>
 
                 <button
@@ -55,7 +57,7 @@
                         'o-btn', 'o-btn--primary', 'o-btn--wide'
                     ]"
                     data-test-id="confirm-payment-submit-button">
-                    {{ buttonText }}
+                    {{ $t('buttonText') }}
                 </button>
             </form>
         </card>
@@ -114,7 +116,6 @@ export default {
                 city: null,
                 postcode: null
             },
-            buttonText: 'Go to payment',
             delivery: CHECKOUT_METHOD_DELIVERY
         };
     },
@@ -126,6 +127,23 @@ export default {
 
         title () {
             return `${this.name}, confirm your details`;
+        }
+    },
+
+    watch: {
+        locale: {
+            immediate: true,
+            handler (oldLocale, newLocale) {
+                console.log("WATCHING YOU!");
+                
+                const locale = newLocale || this.$i18n.locale;
+                const localeConfig = tenantConfigs['en-GB'];
+
+                this.$i18n.setLocaleMessage(locale, this.copy);
+                this.$i18n.setLocaleMessage('en-GB', { ...localeConfig });
+
+                this.$i18n.locale = locale;
+            }
         }
     }
 };

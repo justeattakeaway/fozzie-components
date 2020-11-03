@@ -8,12 +8,7 @@ Vue.use(VueI18n);
 const i18n = new VueI18n({
     locale: 'en-GB',
     fallbackLocale: 'en-GB',
-    messages: {
-        'en-GB': {
-            test: 'Hey!',
-            testPlaceholder: 'Ben, Thomas and Sacha {number} made this work {readMoreUrl}.'
-        }
-    }
+    messages: {}
 });
 
 addDecorator(() => ({
