@@ -147,7 +147,7 @@ $search-button-bgColor--active: $orange--darkest;
 
     &:focus + .c-search-placeholder,
     &.is-notEmpty + .c-search-placeholder {
-        font-size: 12px;
+        @include font-size(caption);
         transform: translateY(0);
 
         @include media('>=narrowMid') {
@@ -184,8 +184,8 @@ $search-button-bgColor--active: $orange--darkest;
     position: relative;
 
     @include media('>=narrow') {
+        @include font-size(body-l);
         height: 60px;
-        font-size: 16px;
     }
 
     &.has-error {
