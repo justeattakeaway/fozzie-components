@@ -1,11 +1,11 @@
 {
   "name": "@justeat/f-searchbox",
   "description": "Fozzie Searchbox – Just Eat Takeaway Global Searchbox",
-  "version": "4.0.0-beta.0",
+  "version": "4.0.0-beta.1",
   "main": "dist/f-searchbox.umd.min.js",
   "files": [
     "dist",
-    "test-utils" ,
+    "test-utils",
     "src/services"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-searchbox",
@@ -43,6 +43,7 @@
   ],
   "dependencies": {
     "@justeat/f-services": "1.0.0",
+    "@justeat/f-vue-icons": "1.8.0",
     "axios": "0.19.2"
   },
   "peerDependencies": {

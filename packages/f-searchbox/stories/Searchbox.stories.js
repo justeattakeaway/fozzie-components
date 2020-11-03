@@ -3,7 +3,7 @@
 //     withKnobs, select, boolean
 // } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import VueSearchbox from '../src/components/Searchbox.vue';
+import VueSearchbox from '../src/components/Base.vue';
 
 export default {
     title: 'Components',
