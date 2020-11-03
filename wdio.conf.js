@@ -124,12 +124,13 @@ exports.config = {
     // see also: https://webdriver.io/docs/dot-reporter.html
     // reporters: ['dot'],
 
-    reporters: ['teamcity'], 
-    reporters: [['allure', {
-        outputDir: 'allure-results', 
-        disableWebdriverStepsReporting: false, 
-        disableWebdriverScreenshotsReporting: false
-    }]],
+    reporters: [
+        ['allure', {
+            outputDir: '../../allure-results',
+            disableWebdriverStepsReporting: false,
+            disableWebdriverScreenshotsReporting: false
+        }]
+    ],
 
     afterTest: () => {
         browser.takeScreenshot();
