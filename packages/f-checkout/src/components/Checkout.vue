@@ -101,13 +101,8 @@ export default {
     },
 
     data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
-        const theme = globalisationServices.getTheme(locale);
-
         return {
-            copy: { ...localeConfig },
-            theme,
+            theme: 'je',
             firstName: 'firstName',
             mobileNumber: null,
             address: {
@@ -132,29 +127,29 @@ export default {
 
     watch: {
         locale () {
-            this.updateLocalisation();
+            this.initialiseLocalisation();
         }
     },
 
     created () {
-        this.updateLocalisation();
+        this.initialiseLocalisation();
     },
 
     methods: {
-        initialiseLocalisation () {
-
-        },
-
-        updateLocalisation () {
-            const locale = this.locale || this.$i18n.locale;
+        setupLocale (locale) {
             const localeConfig = tenantConfigs[locale];
             this.$i18n.setLocaleMessage(locale, { ...localeConfig });
+        },
 
-            const fallbackLocale = 'en-GB';
-            const fallbackLocaleConfig = tenantConfigs[fallbackLocale];
-            this.$i18n.setLocaleMessage(fallbackLocale, { ...fallbackLocaleConfig });
+        initialiseLocalisation () {
+            const currentLocale = this.locale || this.$i18n.locale;
+            this.setupLocale(currentLocale);
 
-            this.$i18n.locale = locale;
+            // Install Fallback Messages
+            this.setupLocale('en-GB');
+
+            this.theme = globalisationServices.getTheme(currentLocale);
+            this.$i18n.locale = currentLocale;
         }
     }
 };
