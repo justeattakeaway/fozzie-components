@@ -6,13 +6,13 @@
                 :class="$style['c-addressGroup-formField']"
                 name="address-line-1"
                 data-test-id="input-address-line-1"
-                :label-text="shared.copy.labels.line1"
+                :label-text="copy.labels.line1"
                 label-style="inline">
                 <template #error>
                     <error-message
                         v-if="isAddressLine1Invalid"
                         data-test-id='error-address-line1-empty'>
-                        {{ shared.copy.validationMessages.addressLine1.requiredError }}
+                        {{ copy.validationMessages.addressLine1.requiredError }}
                     </error-message>
                 </template>
             </form-field>
@@ -22,7 +22,7 @@
                 :class="$style['c-addressGroup-formField']"
                 name="address-line-2"
                 data-test-id="input-address-line-2"
-                :label-text="shared.copy.labels.line2"
+                :label-text="copy.labels.line2"
                 label-style="inline" />
 
             <form-field
@@ -30,13 +30,13 @@
                 :class="$style['c-addressGroup-formField']"
                 name="address-city"
                 data-test-id="input-address-city"
-                :label-text="shared.copy.labels.city"
+                :label-text="copy.labels.city"
                 label-style="inline">
                 <template #error>
                     <error-message
                         v-if="isAddressCityInvalid"
                         data-test-id='error-address-city-empty'>
-                        {{ shared.copy.validationMessages.city.requiredError }}
+                        {{ copy.validationMessages.city.requiredError }}
                     </error-message>
                 </template>
             </form-field>
@@ -45,18 +45,18 @@
             v-model="value.postcode"
             name="address-postcode"
             data-test-id="input-address-postcode"
-            :label-text="shared.copy.labels.postcode"
+            :label-text="copy.labels.postcode"
             label-style="inline">
             <template #error>
                 <error-message
                     v-if="isAddressPostcodeInvalid"
                     data-test-id='error-address-postcode-empty'>
-                    {{ shared.copy.validationMessages.postcode.requiredError }}
+                    {{ copy.validationMessages.postcode.requiredError }}
                 </error-message>
                 <error-message
                     v-else-if="isAddressPostcodeIncorrectType"
                     data-test-id='error-address-postcode-type-error'>
-                    {{ shared.copy.validationMessages.postcode.invalidCharError }}
+                    {{ copy.validationMessages.postcode.invalidCharError }}
                 </error-message>
             </template>
         </form-field>
@@ -72,7 +72,7 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 export default {
     components: { FormField, ErrorMessage },
 
-    inject: ['shared'],
+    inject: ['$v', 'copy'],
 
     props: {
         value: {
@@ -102,13 +102,13 @@ export default {
         },
 
         isAddressPostcodeIncorrectType () {
-            return this.shared.$v.address.postcode.$dirty && !this.shared.$v.address.postcode.isValidPostcode;
+            return this.$v.addressErrors.postcode.$dirty && !this.$v.addressErrors.postcode.isValidPostcode;
         }
     },
 
     methods: {
         checkValid (field) {
-            return this.shared.$v.address[field].$dirty && !this.shared.$v.address[field].required;
+            return this.$v.addressErrors[field].$dirty && !this.$v.addressErrors[field].required;
         }
     }
 };

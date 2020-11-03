@@ -142,18 +142,27 @@ export default {
     },
 
     provide () {
-        const shared = {};
-        Object.defineProperties(shared, {
-            $v: {
+        const $v = {};
+        const copy = {};
+
+        Object.defineProperty($v, 'addressErrors', {
+            enumerable: true,
+            get: () => this.$v.address
+        });
+
+        Object.defineProperties(copy, {
+            labels: {
                 enumerable: true,
-                get: () => this.$v
+                get: () => this.copy.labels
             },
-            copy: {
+
+            validationMessages: {
                 enumerable: true,
-                get: () => this.copy
+                get: () => this.copy.validationMessages
             }
         });
-        return { shared };
+
+        return { $v, copy };
     },
 
     computed: {
