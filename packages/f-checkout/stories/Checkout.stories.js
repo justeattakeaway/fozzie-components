@@ -3,7 +3,9 @@ import { withA11y } from '@storybook/addon-a11y';
 
 import {
     VALID_CHECKOUT_METHOD,
-    CHECKOUT_METHOD_DELIVERY
+    CHECKOUT_METHOD_DELIVERY,
+    VALID_LOCALES,
+    LOCALE_ENGLISH
 } from '../src/constants';
 
 import VueCheckout from '../src/components/Checkout.vue';
@@ -17,7 +19,7 @@ export const CheckoutComponent = () => ({
     components: { VueCheckout },
     props: {
         locale: {
-            default: select('Locale', ['en-GB', 'es-ES'], 'en-GB')
+            default: select('Locale', VALID_LOCALES, LOCALE_ENGLISH)
         },
         checkoutMethod: {
             default: select('Checkout Method', VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY)
