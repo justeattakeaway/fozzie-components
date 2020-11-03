@@ -126,8 +126,8 @@ export default {
     },
 
     watch: {
-        locale () {
-            this.initialiseLocalisation();
+        locale (newValue) {
+            this.setupLocale(newValue, true);
         }
     },
 
@@ -136,20 +136,19 @@ export default {
     },
 
     methods: {
-        setupLocale (locale) {
+        setupLocale (locale, applyLocale = false) {
             const localeConfig = tenantConfigs[locale];
             this.$i18n.setLocaleMessage(locale, { ...localeConfig });
+
+            if (applyLocale) this.$i18n.locale = locale;
         },
 
         initialiseLocalisation () {
             const currentLocale = this.locale || this.$i18n.locale;
-            this.setupLocale(currentLocale);
+            const fallbackLocale = 'en-GB';
 
-            // Install Fallback Messages
-            this.setupLocale('en-GB');
-
-            this.theme = globalisationServices.getTheme(currentLocale);
-            this.$i18n.locale = currentLocale;
+            this.setupLocale(currentLocale, true);
+            this.setupLocale(fallbackLocale);
         }
     }
 };
