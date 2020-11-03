@@ -4,19 +4,21 @@ const bodyAndTitle = (pr.body + pr.title).toLowerCase();
 const isTrivial = bodyAndTitle.includes('#trivial'); // turns off all danger checks
 const isGlobalConfigUpdate = bodyAndTitle.includes('#globalconfig'); // turns off danger checks for packages outside the root
 
+const modifiedFiles = danger.git.modified_files;
+
+// Get an array of packages that have changed, then make that array unique
+const modifiedPackages = modifiedFiles.filter(filepath => filepath.startsWith('packages/'))
+    .map(filepath => filepath.split('/')[1]);
+const uniqueModifiedPackages = new Set(modifiedPackages);
+const modifiedRootPackage = modifiedPackages.includes('');
+
+const pr_number = danger.github.pr.number;
+modifiedPackages.forEach(name => auto_label.set(pr_number, name, '#333333'));
+if (modifiedRootPackage) auto_label.set(pr_number, 'root', '#333333');
+
 if (!isTrivial) {
     const failedChangelogs = [];
     const failedVersionBumps = [];
-    const modifiedFiles = danger.git.modified_files;
-
-    // Get an array of files in the root monorepo that have changed
-    const modifiedRootFiles = modifiedFiles.filter(filepath => !filepath.startsWith('packages/') && filepath !== 'yarn.lock');
-
-    // Get an array of packages that have changed, then make that array unique
-    const modifiedPackages = modifiedFiles.filter(filepath => filepath.startsWith('packages/'))
-        .map(filepath => filepath.split('/')[1]);
-    const uniqueModifiedPackages = new Set(modifiedPackages);
-    const modifiedRootPackage = modifiedPackages.includes('');
 
     // Fail if the title of the PR isn't in the format of a version i.e. {package-name}@vX.X.X (such as f-header@v1.4.0)
     const versionRegex = /^([a-z\-]+@v?[0-9]+\.[0-9]+\.[0-9]+)/;
@@ -24,6 +26,9 @@ if (!isTrivial) {
     if (!isPRTitleVersioned) {
         fail(':exclamation: PR title should start with the package version in the format {package-name}@v(x.x.x) (such as f-header@v1.4.0)');
     }
+
+    // Get an array of files in the root monorepo that have changed
+    const modifiedRootFiles = modifiedFiles.filter(filepath => !filepath.startsWith('packages/') && filepath !== 'yarn.lock');
 
     if (modifiedRootFiles.length && !modifiedRootFiles.includes('CHANGELOG.md')) {
         const changelogLink = 'https://github.com/justeat/fozzie-components/blob/master/CHANGELOG.md';
@@ -100,5 +105,3 @@ if (!isTrivial) {
         }
     }
 }
-
-
