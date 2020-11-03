@@ -131,19 +131,24 @@ export default {
     },
 
     watch: {
-        locale: {
-            immediate: true,
-            handler (oldLocale, newLocale) {
-                console.log("WATCHING YOU!");
-                
-                const locale = newLocale || this.$i18n.locale;
-                const localeConfig = tenantConfigs['en-GB'];
+        locale () {
+            this.updateLocalisation();
+        }
+    },
 
-                this.$i18n.setLocaleMessage(locale, this.copy);
-                this.$i18n.setLocaleMessage('en-GB', { ...localeConfig });
+    created () {
+        this.updateLocalisation();
+    },
 
-                this.$i18n.locale = locale;
-            }
+    methods: {
+        updateLocalisation () {
+            const locale = this.locale || this.$i18n.locale;
+            const localeConfig = tenantConfigs['en-GB'];
+
+            this.$i18n.setLocaleMessage(locale, this.copy);
+            this.$i18n.setLocaleMessage('en-GB', { ...localeConfig });
+
+            this.$i18n.locale = locale;
         }
     }
 };

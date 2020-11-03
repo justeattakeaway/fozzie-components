@@ -1,8 +1,11 @@
-import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY, VALID_LOCALES } from '../src/constants';
-import {
-    withKnobs, boolean, select, object, text
-} from '@storybook/addon-knobs';
+import { select } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
+
+import {
+    VALID_CHECKOUT_METHOD,
+    CHECKOUT_METHOD_DELIVERY
+} from '../src/constants';
+
 import VueCheckout from '../src/components/Checkout.vue';
 
 export default {
@@ -18,10 +21,10 @@ export const CheckoutComponent = () => ({
         },
         checkoutMethod: {
             default: select('Checkout Method', VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY)
-        },
+        }
     },
     template:
-        '<vue-checkout :checkoutMethod="checkoutMethod" locale="es-ES" />'
+        '<vue-checkout :checkoutMethod="checkoutMethod" :locale="locale" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';
