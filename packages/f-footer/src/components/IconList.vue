@@ -134,10 +134,6 @@ export default {
     .c-iconList-listItem {
         margin-right: spacing(x2);
         margin-bottom: spacing(x2);
-
-        &:last-child {
-            margin-right: 0;
-        }
     }
 
     svg {
