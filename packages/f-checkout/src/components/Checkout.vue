@@ -212,12 +212,9 @@ export default {
 
         // TODO: Extract to `f-services`
         isValidPostcode () {
-            if (this.address.postcode) {
-                const postcode = this.address.postcode.replace(/\s/g, '');
-                const regex = /^[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}$/i;
-                return regex.test(postcode);
-            }
-            return false;
+            // regex: https://stackoverflow.com/questions/164979/uk-postcode-regex-comprehensive#164994
+            const postcodeRegex = /^([Gg][Ii][Rr]\s?0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/;
+            return postcodeRegex.test(this.address.postcode);
         },
 
         onFormSubmit () {
