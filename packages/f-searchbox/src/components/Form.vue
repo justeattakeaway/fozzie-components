@@ -2,7 +2,6 @@
     <form
         action="#"
         method="post">
-
         <input
             v-model="cuisine"
             type="hidden"
@@ -45,12 +44,12 @@
                 data-test-id="find-restaurants-button"
                 :aria-label="copy.buttonText"
                 :class="{
-                [$style['c-search-btn']]: true,
-                [$style['c-search-btn--compressed']]: isCompressed
-            }">
+                    [$style['c-search-btn']]: true,
+                    [$style['c-search-btn--compressed']]: isCompressed
+                }">
                 <div :class="$style['c-search-btn-icon']">
                     <slot name="icon-submit">
-                        <EyeglassIcon />
+                        <eyeglass-icon />
                     </slot>
                 </div>
 
@@ -69,8 +68,14 @@ export default {
     },
 
     props: {
-        copy: Object,
-        config: Object
+        copy: {
+            type: Object,
+            default: () => {}
+        },
+        config: {
+            type: Object,
+            default: () => {}
+        }
     },
 
     data () {
@@ -88,7 +93,7 @@ export default {
             query,
             queryString,
             isCompressed
-        }
+        };
     }
 };
 </script>

@@ -34,7 +34,7 @@ $midWide: 980px;
     -webkit-font-smoothing: antialiased;
     background-color: $color-bg--component;
     border-radius: $border-radius;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
     color: $grey--dark;
     @include font-size('heading-xl', false);
     font-family: $font-family-base;
@@ -61,7 +61,7 @@ $midWide: 980px;
     font-family: $font-family-base;
     margin: 0;
     padding: 0;
-    text-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    text-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 
