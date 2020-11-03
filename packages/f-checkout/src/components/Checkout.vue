@@ -7,8 +7,9 @@
             v-if="genericErrorMessage"
             :locale="locale"
             type="danger"
-            heading="error">
-            <p>There's been an error</p>
+            :class="$style['c-checkout-alert']"
+            heading="Error">
+            <p>{{ genericErrorMessage }}</p>
         </alert>
         <card
             :card-heading="title"
@@ -209,7 +210,7 @@ export default {
             };
         },
 
-        // TODO: Extract to `f-services
+        // TODO: Extract to `f-services`
         isValidPostcode () {
             if (this.address.postcode) {
                 const postcode = this.address.postcode.replace(/\s/g, '');
@@ -223,13 +224,29 @@ export default {
             if (this.isFormInvalid()) {
                 const validationState = this.formValidationState(this.$v);
                 this.$emit(EventNames.CheckoutFailure, validationState);
+                return;
             }
 
             try {
                 this.$emit(EventNames.CheckoutSuccess);
             } catch (error) {
-                const thrownErrors = error;
+                let thrownErrors = error;
                 this.$emit(EventNames.CheckoutFailure, thrownErrors);
+
+                if (error && error.response && error.response.data && error.response.data.errors) {
+                    thrownErrors = error.response.data.errors;
+                }
+                const shouldEmitCheckoutFailure = true;
+
+                if (Array.isArray(thrownErrors)) {
+                    this.genericErrorMessage = thrownErrors[0].description || 'Something went wrong, please try again later';
+                } else {
+                    this.genericErrorMessage = error;
+                }
+
+                if (shouldEmitCheckoutFailure) {
+                    this.$emit(EventNames.CreateAccountFailure, thrownErrors);
+                }
             }
         },
 
@@ -282,6 +299,11 @@ $line-height                              : 16px;
     font-family: $font-family-base;
     color: $color-text;
     font-weight: $font-weight-base;
+
+    .c-checkout-alert {
+        width: 462px;
+        margin: 0 auto;
+    }
 
     .c-card--dimensions {
         width: 462px;

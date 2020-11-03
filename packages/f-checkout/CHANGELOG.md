@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.7.0
 ------------------------------
-*November 2, 2020*
+*November 4, 2020*
 
 ### Added
 - Inline error handling to `Checkout` and `Address` components.
