@@ -17,6 +17,7 @@ Object.keys(danger.github.pr).forEach(key => {
 });
 
 const pr_number = danger.github.pr.number;
+auto_label.set(pr_number, 'Test label', '#000000');
 modifiedPackages.forEach(name => auto_label.set(pr_number, name, '#333333'));
 if (modifiedRootPackage) auto_label.set(pr_number, 'root', '#333333');
 
