@@ -1680,10 +1680,10 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.3.0.tgz#473cc1ce7edeb0ce58df674c9c4ee0ebf30171d8"
   integrity sha512-KQ19RSgGyMwfAV4ZOA7SU3BjyR6h9z7Ykc0K3DBcft4EJBDh1lmvtAZIaZJyhDTwKrggrJaLq5QubEHlB6gkew==
 
-"@justeat/f-icons@2.7.0":
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.7.0.tgz#4d9563a73cb6acf1c9e026bdcca8db6fcc01a5a5"
-  integrity sha512-NADu8kak1U55jpW/bhRnd9T9dF3rr560LPocrDkyiXTuGewcz+DuB2Q+y5ejdcRrb0LMVqhOPaHCM4SieE7vWQ==
+"@justeat/f-icons@2.9.0":
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.9.0.tgz#bdff89717654afa4d6bcceda400a6d53a71b4b04"
+  integrity sha512-c5v6dLX+zGP8RR71lMYIg/R5MYsxIGKEXUF1N+qiobSIMwxYlSDWT1duph01FvwyqB1cwpdK1Ragvk5BrBdGiQ==
 
 "@justeat/f-logger@0.8.1":
   version "0.8.1"
@@ -1760,10 +1760,10 @@
     "@justeat/f-icons" "2.3.0"
     babel-helper-vue-jsx-merge-props "2.0.3"
 
-"@justeat/f-vue-icons@1.7.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.7.0.tgz#a48b7a5102d2bb22c5dc1cbe72ea872683a7d35b"
-  integrity sha512-QeCXY+zxRRu6YIcBIhp2wh2SRnCX8yk6z3yWEJDpEf+qrTAAcZv3X/DobrtpzFUuXf+2Hbvb4CmdB7HFQ2BzaA==
+"@justeat/f-vue-icons@1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.8.0.tgz#b2efa001b5af22cc0b32780c1d3eae76fa9c03ab"
+  integrity sha512-PfanIMxRJH93Z1J315Biit97NvjBOtI9VhJuXa841i9bjH+gkYI5nPZNJ8OeYnGLi2OwyKmU8DYt+XQDE+s8xg==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
@@ -15297,6 +15297,13 @@ mkdirp@0.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@^0.5.3, mkdir
   dependencies:
     minimist "^1.2.5"
 
+mocha-each@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/mocha-each/-/mocha-each-2.0.1.tgz#e36668e481ad3c4ec42a79bc94b8968ec0054c87"
+  integrity sha512-0ZgWY5ajbnROXkfyaDb+0RAYzDBH3QVow/1zJiyl7lYMRnj1Nid8RDP2+/2TTajB5n4vr21v35MjB72GjFFj2g==
+  dependencies:
+    sprintf-js "^1.0.3"
+
 mocha@^8.0.1:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/mocha/-/mocha-8.2.0.tgz#f8aa79110b4b5a6580c65d4dd8083c425282624e"
@@ -20162,6 +20169,11 @@ split@^1.0.0:
   integrity sha512-mTyOoPbrivtXnwnIxZRFYRrPNtEFKlpB2fvjSnCQUiAA6qAZzqwna5envK4uk6OIeP17CsdF3rSBGYVBsU0Tkg==
   dependencies:
     through "2"
+
+sprintf-js@^1.0.3:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.1.2.tgz#da1765262bf8c0f571749f2ad6c26300207ae673"
+  integrity sha512-VE0SOVEHCk7Qc8ulkWw3ntAzXuqf7S2lvwQaDLRnUeIEaKNQJzV6BwmLKhOqT61aGhfUMrXeaBk+oDGCzvhcug==
 
 sprintf-js@~1.0.2:
   version "1.0.3"

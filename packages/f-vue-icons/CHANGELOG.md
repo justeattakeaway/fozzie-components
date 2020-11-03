@@ -1,7 +1,24 @@
 # Changelog
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html)
+
+
+v1.10.0
+------------------------------
+*November 02, 2020*
+
+### Changed
+- Updated f-icons dependency to include updated huawei icon.
+
+
+v1.9.0
+------------------------------
+*November 02, 2020*
+
+### Added
+- New huawei icon for the footer.
+
 
 v1.8.0
 ------------------------------

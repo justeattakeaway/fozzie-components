@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import VueSearchbox from '../Searchbox.vue';
+import VueSearchbox from '../Base.vue';
 
 describe('Searchbox', () => {
     it('should be defined', () => {
