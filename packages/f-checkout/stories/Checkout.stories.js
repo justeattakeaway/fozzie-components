@@ -3,10 +3,13 @@ import { withA11y } from '@storybook/addon-a11y';
 
 import {
     VALID_CHECKOUT_METHOD,
-    CHECKOUT_METHOD_DELIVERY,
+    CHECKOUT_METHOD_DELIVERY
+} from '../src/constants';
+
+import {
     VALID_LOCALES,
     LOCALE_ENGLISH
-} from '../src/constants';
+} from '../../storybook/constants/globalisation';
 
 import VueCheckout from '../src/components/Checkout.vue';
 
