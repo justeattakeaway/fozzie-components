@@ -2,6 +2,7 @@ import { shallowMount, mount } from '@vue/test-utils';
 import flushPromises from 'flush-promises';
 import { VALID_CHECKOUT_METHOD } from '../../constants';
 import VueCheckout from '../Checkout.vue';
+// import CheckoutServiceApi from '../../services/CheckoutServiceApi';
 import EventNames from '../../event-names';
 
 describe('Checkout', () => {
@@ -96,30 +97,32 @@ describe('Checkout', () => {
         describe('if checkoutMethod set to `Collection`', () => {
             const propsData = { checkoutMethod: 'Collection' };
 
-            it('should emit success event when all fields are populated correctly', async () => {
+            it('should emit success event when all fields are populated correctly', () => {
                 // Arrange
                 const wrapper = mount(VueCheckout, { propsData });
                 wrapper.find('[data-test-id="input-mobile-number"]').setValue('07777777777');
 
                 // Act
-                await wrapper.vm.onFormSubmit();
-                await flushPromises();
+                wrapper.vm.onFormSubmit();
+                // await flushPromises();
 
                 // Assert
                 expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)).toBe(undefined);
             });
 
             it('should show error message and emit failure event when the mobile number field is not populated', async () => {
                 // Arrange
-                const wrapper = shallowMount(VueCheckout, { propsData });
+                const wrapper = mount(VueCheckout, { propsData });
 
                 // Act
-                await wrapper.vm.onFormSubmit();
+                wrapper.vm.onFormSubmit();
                 await flushPromises();
-                await wrapper.vm.$nextTick();
+                const mobileNumberEmptyMessage = wrapper.find('[data-test-id="error-mobile-number"]');
 
                 // Assert
-                expect(wrapper.vm.isMobileNumberInvalid).toBe(true);
+                expect(wrapper.vm.isMobileNumberValid).toBe(false);
+                expect(mobileNumberEmptyMessage.exists()).toBe(true);
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('mobileNumber');
             });
@@ -130,11 +133,13 @@ describe('Checkout', () => {
                 wrapper.find('[data-test-id="input-mobile-number"]').setValue('077777');
 
                 // Act
-                await wrapper.vm.onFormSubmit();
+                wrapper.vm.onFormSubmit();
                 await flushPromises();
+                const mobileNumberEmptyMessage = wrapper.find('[data-test-id="error-mobile-number"]');
 
                 // Assert
-                expect(wrapper.vm.isMobileNumberInvalid).toBe(true);
+                expect(wrapper.vm.isMobileNumberValid).toBe(false);
+                expect(mobileNumberEmptyMessage.exists()).toBe(true);
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('mobileNumber');
             });
@@ -145,27 +150,30 @@ describe('Checkout', () => {
                 wrapper.find('[data-test-id="input-mobile-number"]').setValue('hs;-j`$e&1l');
 
                 // Act
-                await wrapper.vm.onFormSubmit();
+                wrapper.vm.onFormSubmit();
                 await flushPromises();
+                const mobileNumberEmptyMessage = wrapper.find('[data-test-id="error-mobile-number"]');
 
                 // Assert
-                expect(wrapper.vm.isMobileNumberInvalid).toBe(true);
+                expect(wrapper.vm.isMobileNumberValid).toBe(false);
+                expect(mobileNumberEmptyMessage.exists()).toBe(true);
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('mobileNumber');
             });
 
-            it('should not show error message or emit failure event when the address input fields are not populated', async () => {
+            it('should not show error message or emit failure event when the address input fields are not populated', () => {
                 // Arrange
                 const wrapper = mount(VueCheckout, { propsData });
                 wrapper.find('[data-test-id="input-mobile-number"]').setValue('07777777777');
 
                 // Act
-                await wrapper.vm.onFormSubmit();
-                await flushPromises();
+                wrapper.vm.onFormSubmit();
+                // await flushPromises();
 
                 // Assert
                 expect(wrapper.vm.address.required).toBe(undefined);
                 expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)).toBe(undefined);
             });
         });
 
@@ -186,18 +194,66 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)).toBe(undefined);
             });
 
-            it('should emit failure event when the address input fields are not populated', async () => {
+            it('should emit failure event and display error message when address line1 input field is empty', async () => {
                 // Arrange
-                const wrapper = shallowMount(VueCheckout, { propsData });
+                const wrapper = mount(VueCheckout, { propsData });
 
                 // Act
                 await wrapper.vm.onFormSubmit();
                 await flushPromises();
-                await wrapper.vm.$nextTick();
+                const addressLine1EmptyMessage = wrapper.find('[data-test-id="error-address-line1-empty"]');
 
                 // Assert
+                expect(addressLine1EmptyMessage.exists()).toBe(true);
+                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address');
+            });
+
+            it('should emit failure event and display error message when city input field is empty', async () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, { propsData });
+
+                // Act
+                wrapper.vm.onFormSubmit();
+                await flushPromises();
+                const addressCityEmptyMessage = wrapper.find('[data-test-id="error-address-city-empty"]');
+
+                // Assert
+                expect(addressCityEmptyMessage.exists()).toBe(true);
+                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address');
+            });
+
+            it('should emit failure event and display error message when postcode input field is empty', async () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, { propsData });
+
+                // Act
+                wrapper.vm.onFormSubmit();
+                await flushPromises();
+                const addressPostcodeEmptyMessage = wrapper.find('[data-test-id="error-address-postcode-empty"]');
+
+                // Assert
+                expect(addressPostcodeEmptyMessage.exists()).toBe(true);
+                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address');
+            });
+
+            it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, { propsData });
+                wrapper.find('[data-test-id="input-address-postcode"]').setValue('?!hdb-se');
+
+                // Act
+                wrapper.vm.onFormSubmit();
+                await flushPromises();
+                const addressPostcodeTypeErrorMessage = wrapper.find('[data-test-id="error-address-postcode-type-error"]');
+
+                // Assert
+                expect(addressPostcodeTypeErrorMessage.exists()).toBe(true);
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address');
             });

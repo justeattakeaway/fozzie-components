@@ -10,8 +10,8 @@
                 label-style="inline">
                 <template #error>
                     <error-message
-                        v-if="isAddressLine1Invalid"
-                        data-test-id='error-address-line1-empty'>
+                        v-if="!isAddressLine1Valid"
+                        data-test-id="error-address-line1-empty">
                         {{ copy.validationMessages.addressLine1.requiredError }}
                     </error-message>
                 </template>
@@ -34,8 +34,8 @@
                 label-style="inline">
                 <template #error>
                     <error-message
-                        v-if="isAddressCityInvalid"
-                        data-test-id='error-address-city-empty'>
+                        v-if="!isAddressCityValid"
+                        data-test-id="error-address-city-empty">
                         {{ copy.validationMessages.city.requiredError }}
                     </error-message>
                 </template>
@@ -49,13 +49,13 @@
             label-style="inline">
             <template #error>
                 <error-message
-                    v-if="isAddressPostcodeInvalid"
-                    data-test-id='error-address-postcode-empty'>
+                    v-if="!isAddressPostcodeValid"
+                    data-test-id="error-address-postcode-empty">
                     {{ copy.validationMessages.postcode.requiredError }}
                 </error-message>
                 <error-message
-                    v-else-if="isAddressPostcodeIncorrectType"
-                    data-test-id='error-address-postcode-type-error'>
+                    v-else-if="!isAddressPostcodeCorrectType"
+                    data-test-id="error-address-postcode-type-error">
                     {{ copy.validationMessages.postcode.invalidCharError }}
                 </error-message>
             </template>
@@ -89,20 +89,20 @@ export default {
         * focus on the input field.
         */
 
-        isAddressLine1Invalid () {
-            return this.isFieldValid('line1');
+        isAddressLine1Valid () {
+            return !this.isFieldValid('line1');
         },
 
-        isAddressCityInvalid () {
-            return this.isFieldValid('city');
+        isAddressCityValid () {
+            return !this.isFieldValid('city');
         },
 
-        isAddressPostcodeInvalid () {
-            return this.isFieldValid('postcode');
+        isAddressPostcodeValid () {
+            return !this.isFieldValid('postcode');
         },
 
-        isAddressPostcodeIncorrectType () {
-            return this.$v.addressErrors.postcode.$dirty && !this.$v.addressErrors.postcode.isValidPostcode;
+        isAddressPostcodeCorrectType () {
+            return !(this.$v.addressErrors.postcode.$dirty && !this.$v.addressErrors.postcode.isValidPostcode);
         }
     },
 

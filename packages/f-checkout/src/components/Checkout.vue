@@ -30,8 +30,8 @@
                     label-style="inline">
                     <template #error>
                         <error-message
-                            v-if="isMobileNumberInvalid"
-                            data-test-id="error-mobile-number-empty">
+                            v-if="!isMobileNumberValid"
+                            data-test-id="error-mobile-number">
                             {{ copy.validationMessages.mobileNumber.requiredError }}
                         </error-message>
                     </template>
@@ -90,6 +90,7 @@ import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
 import tenantConfigs from '../tenants';
+// import CheckoutServiceApi from '../services/CheckoutServiceApi';
 import EventNames from '../event-names';
 
 export default {
@@ -118,6 +119,17 @@ export default {
             default: 'Collection',
             validator: value => (VALID_CHECKOUT_METHOD.indexOf(value) !== -1)
         }
+
+        // checkoutUrl: {
+        //     type: String,
+        //     required: true
+        // },
+
+        // checkoutTimeout: {
+        //     type: Number,
+        //     required: false,
+        //     default: 1000
+        // }
     },
 
     data () {
@@ -137,7 +149,8 @@ export default {
                 postcode: null
             },
             buttonText: 'Go to payment',
-            genericErrorMessage: null
+            genericErrorMessage: null,
+            shouldDisableCheckoutButton: false
         };
     },
 
@@ -174,7 +187,7 @@ export default {
             return `${this.name}, confirm your details`;
         },
 
-        isMobileNumberInvalid () {
+        isMobileNumberValid () {
             /*
             * Validation methods return true if the validation conditions
             * have not been met and the field has been `touched` by a user.
@@ -182,7 +195,7 @@ export default {
             * focus on the input field.
             */
             const mobileNumberInvalid = !this.$v.mobileNumber.required || !this.$v.mobileNumber.numeric || !this.$v.mobileNumber.minLength;
-            return this.$v.mobileNumber.$dirty && mobileNumberInvalid;
+            return !(this.$v.mobileNumber.$dirty && mobileNumberInvalid);
         },
 
         isDeliveryMethod () {
@@ -217,14 +230,25 @@ export default {
             return postcodeRegex.test(this.address.postcode);
         },
 
-        onFormSubmit () {
+        async onFormSubmit () {
             if (this.isFormInvalid()) {
                 const validationState = this.formValidationState(this.$v);
+
                 this.$emit(EventNames.CheckoutFailure, validationState);
+
                 return;
             }
 
+            this.shouldDisableCheckoutButton = true;
             try {
+                // const checkoutData = {
+                //     mobileNumber: this.mobileNumber
+                // };
+                // if (this.isDeliveryMethod) {
+                //     checkoutData.address = this.address;
+                // }
+
+                // await CheckoutServiceApi.submitCheckout(this.checkoutUrl, this.tenant, checkoutData, this.checkoutTimeout);
                 this.$emit(EventNames.CheckoutSuccess);
             } catch (error) {
                 let thrownErrors = error;
