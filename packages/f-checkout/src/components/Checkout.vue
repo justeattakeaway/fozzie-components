@@ -266,7 +266,7 @@ export default {
                 }
 
                 if (shouldEmitCheckoutFailure) {
-                    this.$emit(EventNames.CreateAccountFailure, thrownErrors);
+                    this.$emit(EventNames.CheckoutFailure, thrownErrors);
                 }
             }
         },
