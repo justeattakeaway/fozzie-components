@@ -23,50 +23,20 @@
     yarn add @justeat/f-globalisation
     ```
 
-    ```bash
-    npm install @justeat/f-globalisation
-    ```
+2.  Import the Mixin
 
-2.  Import the component
-
-    You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+    F-Globalisation contains a mixin which should be imported into your "Smart Component", for example in F-Checkout import it into the Checkout.vue component as that is the root.
 
     ```
     import VueGlobalisation from '@justeat/f-globalisation';
-    import '@justeat/f-globalisation/dist/f-globalisation.css';
 
     export default {
-        components: {
-            VueGlobalisation
-        }
+        mixins: [VueGlobalisation]
     }
     ```
 
-    If you are using Webpack, you can import the component dynamically to separate the `vue-globalisation` bundle from the main `bundle.client.js`:
+3.  Add `tenantConfigs` to your component data
 
-    ```
-    import '@justeat/f-globalisation/dist/f-globalisation.css';
+    The mixin will access your localisation by accessing this data property. See F-Checkout for an example if needed. It should expose an import for /locales/index.js directory
 
-    export default {
-        components: {
-            ...
-            VueGlobalisation: () => import(/* webpackChunkName: "vue-globalisation" */ '@justeat/f-globalisation')
-        }
-    }
-
-    ```
-
-## Development
-
-Running below `yarn` commands from the component folder, starts a development
-server displaying a preview example of the component implementation.
-
-```bash
-# cd /packages/f-globalisation
-yarn install
-
-# followed by
-yarn demo
-```
-
-## Documentation to be completed once module is in stable state.
+Once installed; you should be able to access `$t`, `<i18n>` and `this.$i18n` and the correct locale messages should be loaded automatically.
