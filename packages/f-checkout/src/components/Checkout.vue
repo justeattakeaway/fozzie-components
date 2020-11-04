@@ -4,8 +4,6 @@
         :class="$style['c-checkout']"
         data-test-id='checkout-component'>
         {{ $i18n.locale }}
-
-        {{ $t('test') }}
         <i18n
             path="testPlaceholder">
             <template #number>
