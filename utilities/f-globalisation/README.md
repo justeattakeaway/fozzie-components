@@ -37,6 +37,24 @@
 
 3.  Add `tenantConfigs` to your component data
 
-    The mixin will access your localisation by accessing this data property. See F-Checkout for an example if needed. It should expose an import for /locales/index.js directory
+    The mixin will access your localisation by accessing this data property. See F-Checkout for an example if needed. It should expose an import for the localisation files in your component.
 
-Once installed; you should be able to access `$t`, `<i18n>` and `this.$i18n` and the correct locale messages should be loaded automatically.
+    ```
+    import tenantConfigs from '../tenants';
+
+    export default {
+        mixins: [globalisationMixin],
+
+        data () {
+            return {
+                tenantConfigs
+            }
+        }
+    }
+    ```
+
+4. Now apply vue-i18n within your components
+
+    Once installed; you should be able to access `$t`, `<i18n>` and `this.$i18n`. The correct locale messages should be loaded automatically and `en-GB` should also be loaded as a fallback.
+
+    vue-i18n is not needed as a dependency, because it is registered by the host application, such as CoreWeb or Storybook and thus exists in context.
