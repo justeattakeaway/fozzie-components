@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import { globalisationServices } from '@justeat/f-services';
+import globalisationMixin from '@justeat/f-globalisation';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
@@ -87,12 +87,9 @@ export default {
         UserNote
     },
 
-    props: {
-        locale: {
-            type: String,
-            default: ''
-        },
+    mixins: [globalisationMixin],
 
+    props: {
         checkoutMethod: {
             type: String,
             default: 'Collection',
@@ -102,6 +99,7 @@ export default {
 
     data () {
         return {
+            tenantConfigs,
             theme: 'je',
             firstName: 'firstName',
             mobileNumber: null,
@@ -122,33 +120,6 @@ export default {
 
         title () {
             return `${this.name}, confirm your details`;
-        }
-    },
-
-    watch: {
-        locale (newValue) {
-            this.setupLocale(newValue, true);
-        }
-    },
-
-    created () {
-        this.initialiseLocalisation();
-    },
-
-    methods: {
-        setupLocale (locale, applyLocale = false) {
-            const localeConfig = tenantConfigs[locale];
-            this.$i18n.setLocaleMessage(locale, { ...localeConfig });
-
-            if (applyLocale) this.$i18n.locale = locale;
-        },
-
-        initialiseLocalisation () {
-            const currentLocale = this.locale || this.$i18n.locale;
-            const fallbackLocale = 'en-GB';
-
-            this.setupLocale(currentLocale, true);
-            this.setupLocale(fallbackLocale);
         }
     }
 };

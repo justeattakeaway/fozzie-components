@@ -58,3 +58,5 @@
     Once installed; you should be able to access `$t`, `<i18n>` and `this.$i18n`. The correct locale messages should be loaded automatically and `en-GB` should also be loaded as a fallback.
 
     vue-i18n is not needed as a dependency, because it is registered by the host application, such as CoreWeb or Storybook and thus exists in context.
+
+    The mixin also exposes a prop; so that you can pass a locale in from a website host where required.
