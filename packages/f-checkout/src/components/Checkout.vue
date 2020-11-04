@@ -2,7 +2,7 @@
     <div
         :data-theme="theme"
         :class="$style['c-checkout']"
-        data-test-id='checkout-component'>
+        data-test-id="checkout-component">
         <alert
             v-if="genericErrorMessage"
             :locale="locale"
@@ -31,7 +31,7 @@
                     <template #error>
                         <error-message
                             v-if="isMobileNumberInvalid"
-                            data-test-id='error-mobile-number-empty'>
+                            data-test-id="error-mobile-number-empty">
                             {{ copy.validationMessages.mobileNumber.requiredError }}
                         </error-message>
                     </template>
@@ -40,13 +40,13 @@
                 <address-block
                     v-if="isDeliveryMethod"
                     v-model="address"
-                    data-test-id='address-block' />
+                    data-test-id="address-block" />
 
                 <form-selector
                     :order-method="checkoutMethod"
-                    data-test-id='selector' />
+                    data-test-id="selector" />
 
-                <user-note data-test-id='user-note' />
+                <user-note data-test-id="user-note" />
                 <button
                     :class="[
                         $style['o-btn--allergy'],
@@ -85,7 +85,7 @@ import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import { VALID_CHECKOUT_METHOD } from '../constants';
+import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY } from '../constants';
 import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
@@ -186,7 +186,7 @@ export default {
         },
 
         isDeliveryMethod () {
-            return this.checkoutMethod === 'Delivery';
+            return this.checkoutMethod === CHECKOUT_METHOD_DELIVERY;
         }
     },
 
@@ -254,42 +254,37 @@ export default {
     },
 
     validations () {
-        const deliveryDetails = this.isDeliveryMethod
-            ? {
-                address: {
-                    line1: {
-                        required
-                    },
-                    city: {
-                        required
-                    },
-                    postcode: {
-                        required,
-                        isValidPostcode: this.isValidPostcode
-                    }
-                },
-
-                mobileNumber: {
-                    required,
-                    numeric,
-                    minLength: minLength(10)
-                }
+        const collectionDetails = {
+            mobileNumber: {
+                required,
+                numeric,
+                minLength: minLength(10)
             }
-            : {
-                mobileNumber: {
+        };
+
+        if (this.isDeliveryMethod) {
+            collectionDetails.address = {
+                line1: {
+                    required
+                },
+                city: {
+                    required
+                },
+                postcode: {
                     required,
-                    numeric,
-                    minLength: minLength(10)
+                    isValidPostcode: this.isValidPostcode
                 }
             };
+        }
 
-        return deliveryDetails;
+        return collectionDetails;
     }
 };
 </script>
 
 <style lang="scss" module>
 $line-height                              : 16px;
+$checkout-width                           : 462px;
 
 .c-checkout {
     margin: auto;
@@ -298,12 +293,12 @@ $line-height                              : 16px;
     font-weight: $font-weight-base;
 
     .c-checkout-alert {
-        width: 462px;
+        width: $checkout-width;
         margin: 0 auto;
     }
 
     .c-card--dimensions {
-        width: 462px;
+        width: $checkout-width;
         padding: spacing(x5) spacing(x9) spacing(x4);
 
         @include media('<wide') {

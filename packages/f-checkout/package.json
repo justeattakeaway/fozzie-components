@@ -51,7 +51,7 @@
     "@justeat/f-services": "1.0.0",
     "axios": "0.20.0",
     "flush-promises": "1.0.2",
-    "vuelidate": "^0.7.6"
+    "vuelidate": "0.7.6"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"

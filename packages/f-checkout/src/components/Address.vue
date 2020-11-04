@@ -90,15 +90,15 @@ export default {
         */
 
         isAddressLine1Invalid () {
-            return this.checkValid('line1');
+            return this.isFieldValid('line1');
         },
 
         isAddressCityInvalid () {
-            return this.checkValid('city');
+            return this.isFieldValid('city');
         },
 
         isAddressPostcodeInvalid () {
-            return this.checkValid('postcode');
+            return this.isFieldValid('postcode');
         },
 
         isAddressPostcodeIncorrectType () {
@@ -107,7 +107,7 @@ export default {
     },
 
     methods: {
-        checkValid (field) {
+        isFieldValid (field) {
             return this.$v.addressErrors[field].$dirty && !this.$v.addressErrors[field].required;
         }
     }
