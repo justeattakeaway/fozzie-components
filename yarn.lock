@@ -1670,6 +1670,9 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
+"@justeat/f-globalisation@file:packages/f-checkout/.yalc/@justeat/f-globalisation":
+  version "0.1.0-adc3ef70"
+
 "@justeat/f-icons@2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.2.0.tgz#843f06e0cfd21d9f6676b2a21be5ceb12b4184db"
@@ -22090,7 +22093,7 @@ vue-hot-reload-api@^2.3.0:
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
   integrity sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog==
 
-vue-i18n@^8.0.0, vue-i18n@^8.22.1:
+vue-i18n@^8.0.0:
   version "8.22.1"
   resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.22.1.tgz#b9dd098a17e1f5adb91bdf9611f0385310da7cb1"
   integrity sha512-JNgiEJ5a8YPfk5y2lKyfOAGLmkpAVfhaUi+T4wGpSppRYZ3XSyawSDDketY5KV2CsAiBLAGEIO6jO+0l2hQubg==

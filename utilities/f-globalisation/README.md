@@ -23,50 +23,40 @@
     yarn add @justeat/f-globalisation
     ```
 
-    ```bash
-    npm install @justeat/f-globalisation
-    ```
+2.  Import the Mixin
 
-2.  Import the component
-
-    You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+    F-Globalisation contains a mixin which should be imported into your "Smart Component", for example in F-Checkout import it into the Checkout.vue component as that is the root.
 
     ```
     import VueGlobalisation from '@justeat/f-globalisation';
-    import '@justeat/f-globalisation/dist/f-globalisation.css';
 
     export default {
-        components: {
-            VueGlobalisation
+        mixins: [VueGlobalisation]
+    }
+    ```
+
+3.  Add `tenantConfigs` to your component data
+
+    The mixin will access your localisation by accessing this data property. See F-Checkout for an example if needed. It should expose an import for the localisation files in your component.
+
+    ```
+    import tenantConfigs from '../tenants';
+
+    export default {
+        mixins: [globalisationMixin],
+
+        data () {
+            return {
+                tenantConfigs
+            }
         }
     }
     ```
 
-    If you are using Webpack, you can import the component dynamically to separate the `vue-globalisation` bundle from the main `bundle.client.js`:
+4. Now apply vue-i18n within your components
 
-    ```
-    import '@justeat/f-globalisation/dist/f-globalisation.css';
+    Once installed; you should be able to access `$t`, `<i18n>` and `this.$i18n`. The correct locale messages should be loaded automatically and `en-GB` should also be loaded as a fallback.
 
-    export default {
-        components: {
-            ...
-            VueGlobalisation: () => import(/* webpackChunkName: "vue-globalisation" */ '@justeat/f-globalisation')
-        }
-    }
+    vue-i18n is not needed as a dependency, because it is registered by the host application, such as CoreWeb or Storybook and thus exists in context.
 
-    ```
-
-## Development
-
-Running below `yarn` commands from the component folder, starts a development
-server displaying a preview example of the component implementation.
-
-```bash
-# cd /packages/f-globalisation
-yarn install
-
-# followed by
-yarn demo
-```
-
-## Documentation to be completed once module is in stable state.
+    The mixin also exposes a prop; so that you can pass a locale in from a website host where required.
