@@ -15,7 +15,9 @@ export default {
             const localeConfig = this.tenantConfigs[locale];
             this.$i18n.setLocaleMessage(locale, { ...localeConfig });
 
-            if (applyLocale) this.$i18n.locale = locale;
+            if (applyLocale) {
+                this.$i18n.locale = locale;
+            }
         },
 
         initialiseLocalisation () {
