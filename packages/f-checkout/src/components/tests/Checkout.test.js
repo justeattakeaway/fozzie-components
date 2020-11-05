@@ -10,7 +10,7 @@ describe('Checkout', () => {
     const checkoutURL = 'http://localhost/account/register';
 
     it('should be defined', () => {
-        const propsData = { checkoutURL };
+        const propsData = {};
         const wrapper = shallowMount(VueCheckout, { propsData });
         expect(wrapper.exists()).toBe(true);
     });
@@ -20,8 +20,7 @@ describe('Checkout', () => {
             it.each(VALID_CHECKOUT_METHOD)('should update the Selector `ordermethod` attribute to match checkoutMethod=%p', definedType => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: definedType,
-                    checkoutURL
+                    checkoutMethod: definedType
                 };
 
                 // Act
@@ -35,8 +34,7 @@ describe('Checkout', () => {
             it('should display the address block if set to `Delivery`', () => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: 'Delivery',
-                    checkoutURL
+                    checkoutMethod: 'Delivery'
                 };
 
                 // Act
@@ -50,8 +48,7 @@ describe('Checkout', () => {
             it('should not display the address block if set to `Collection`', () => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: 'Collection',
-                    checkoutURL
+                    checkoutMethod: 'Collection'
                 };
 
                 // Act
@@ -65,7 +62,7 @@ describe('Checkout', () => {
     });
 
     describe('computed ::', () => {
-        const propsData = { checkoutURL };
+        const propsData = {};
         const data = { firstName: 'name' };
 
         describe('name ::', () => {
@@ -242,7 +239,7 @@ describe('Checkout', () => {
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address');
             });
 
-            xit('should emit failure event and display error message when city input field is empty', async () => {
+            it('should emit failure event and display error message when city input field is empty', async () => {
                 // Arrange && Act
                 await wrapper.vm.onFormSubmit();
                 const addressCityEmptyMessage = wrapper.find('[data-test-id="error-address-city-empty"]');
