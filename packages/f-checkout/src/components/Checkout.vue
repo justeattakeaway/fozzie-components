@@ -204,7 +204,7 @@ export default {
     },
 
     methods: {
-        formValidationState ($v) {
+        getFormValidationState ($v) {
             const fields = $v.$params;
             const invalidFields = [];
             const validFields = [];
@@ -231,8 +231,8 @@ export default {
         },
 
         async onFormSubmit () {
-            if (this.isFormInvalid()) {
-                const validationState = this.formValidationState(this.$v);
+            if (!this.isFormValid()) {
+                const validationState = this.getFormValidationState(this.$v);
 
                 this.$emit(EventNames.CheckoutFailure, validationState);
 
@@ -240,42 +240,39 @@ export default {
             }
 
             this.shouldDisableCheckoutButton = true;
+
             try {
                 const checkoutData = {
                     mobileNumber: this.mobileNumber
                 };
+
                 if (this.isDeliveryMethod) {
                     checkoutData.address = this.address;
                 }
 
                 await CheckoutServiceApi.submitCheckout(this.checkoutUrl, this.tenant, checkoutData, this.checkoutTimeout);
+
                 this.$emit(EventNames.CheckoutSuccess);
             } catch (error) {
-                let thrownErrors = error;
+                const thrownErrors = error;
+                // TODO: Babel 'optional-chaining' plugin not working in storybook
+                // const thrownErrors = error?.response?.data?.errors || error;
                 this.$emit(EventNames.CheckoutFailure, thrownErrors);
 
-                if (error && error.response && error.response.data && error.response.data.errors) {
-                    thrownErrors = error.response.data.errors;
-                }
-                const shouldEmitCheckoutFailure = true;
-
+                // TODO: Review this later - even though f-registration does something similar
                 if (Array.isArray(thrownErrors)) {
-                    this.genericErrorMessage = thrownErrors[0].description || 'Something went wrong, please try again later';
+                    this.genericErrorMessage = thrownErrors[0].description || this.copy.errorMessages.genericServerError;
                 } else {
                     this.genericErrorMessage = error;
                 }
-
-                if (shouldEmitCheckoutFailure) {
-                    this.$emit(EventNames.CheckoutFailure, thrownErrors);
-                }
             } finally {
-                this.shouldDisableCreateAccountButton = false;
+                this.shouldDisableCheckoutButton = false;
             }
         },
 
-        isFormInvalid () {
+        isFormValid () {
             this.$v.$touch();
-            return this.$v.$invalid;
+            return !this.$v.$invalid;
         }
     },
 

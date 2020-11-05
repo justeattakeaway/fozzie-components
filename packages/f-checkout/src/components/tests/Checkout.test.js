@@ -100,6 +100,12 @@ describe('Checkout', () => {
     });
 
     describe('when form submitted', () => {
+        function mountComponentAndAttachToDocument (propsData) {
+            const div = document.createElement('div');
+            document.body.appendChild(div);
+            return mount(VueCheckout, { propsData, attachTo: div });
+        }
+
         describe('if checkoutMethod set to `Collection`', () => {
             // TODO: Remove this repeated section
             const propsData = {
@@ -107,18 +113,12 @@ describe('Checkout', () => {
                 checkoutUrl
             };
 
-            function mountComponentAndAttachToDocument () {
-                const div = document.createElement('div');
-                document.body.appendChild(div);
-                return mount(VueCheckout, { propsData, attachTo: div });
-            }
-
             let wrapper;
             beforeEach(() => {
                 CheckoutServiceApi.submitCheckout.mockClear();
                 CheckoutServiceApi.submitCheckout.mockImplementation(async () => Promise.resolve());
 
-                wrapper = mountComponentAndAttachToDocument();
+                wrapper = mountComponentAndAttachToDocument(propsData);
             });
 
             afterEach(() => {
@@ -200,18 +200,12 @@ describe('Checkout', () => {
                 checkoutUrl
             };
 
-            function mountComponentAndAttachToDocument () {
-                const div = document.createElement('div');
-                document.body.appendChild(div);
-                return mount(VueCheckout, { propsData, attachTo: div });
-            }
-
             let wrapper;
             beforeEach(() => {
                 CheckoutServiceApi.submitCheckout.mockClear();
                 CheckoutServiceApi.submitCheckout.mockImplementation(async () => Promise.resolve());
 
-                wrapper = mountComponentAndAttachToDocument();
+                wrapper = mountComponentAndAttachToDocument(propsData);
             });
 
             afterEach(() => {
