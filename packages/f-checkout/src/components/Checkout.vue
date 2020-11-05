@@ -8,7 +8,7 @@
             :locale="locale"
             type="danger"
             :class="$style['c-checkout-alert']"
-            heading="Error">
+            :heading="copy.errorMessages.errors.errorHeading">
             <p>{{ genericErrorMessage }}</p>
         </alert>
         <card
@@ -254,14 +254,17 @@ export default {
 
                 this.$emit(EventNames.CheckoutSuccess);
             } catch (error) {
-                const thrownErrors = error;
+                let thrownErrors = error;
+                if (error && error.response && error.response.data && error.response.data.errors) {
+                    thrownErrors = error.response.data.errors;
+                }
                 // TODO: Babel 'optional-chaining' plugin not working in storybook
                 // const thrownErrors = error?.response?.data?.errors || error;
                 this.$emit(EventNames.CheckoutFailure, thrownErrors);
 
                 // TODO: Review this later - even though f-registration does something similar
                 if (Array.isArray(thrownErrors)) {
-                    this.genericErrorMessage = thrownErrors[0].description || this.copy.errorMessages.genericServerError;
+                    this.genericErrorMessage = thrownErrors[0].description || this.copy.errorMessages.errors.genericServerError;
                 } else {
                     this.genericErrorMessage = error;
                 }
@@ -277,7 +280,7 @@ export default {
     },
 
     validations () {
-        const collectionDetails = {
+        const deliveryDetails = {
             mobileNumber: {
                 required,
                 numeric,
@@ -286,7 +289,7 @@ export default {
         };
 
         if (this.isDeliveryMethod) {
-            collectionDetails.address = {
+            deliveryDetails.address = {
                 line1: {
                     required
                 },
@@ -300,7 +303,7 @@ export default {
             };
         }
 
-        return collectionDetails;
+        return deliveryDetails;
     }
 };
 </script>

@@ -100,25 +100,21 @@ describe('Checkout', () => {
     });
 
     describe('when form submitted', () => {
-        function mountComponentAndAttachToDocument (propsData) {
-            const div = document.createElement('div');
-            document.body.appendChild(div);
-            return mount(VueCheckout, { propsData, attachTo: div });
-        }
-
         describe('if checkoutMethod set to `Collection`', () => {
-            // TODO: Remove this repeated section
             const propsData = {
                 checkoutMethod: 'Collection',
                 checkoutUrl
             };
 
             let wrapper;
+            let mobileNumberFormField;
+
             beforeEach(() => {
                 CheckoutServiceApi.submitCheckout.mockClear();
                 CheckoutServiceApi.submitCheckout.mockImplementation(async () => Promise.resolve());
 
-                wrapper = mountComponentAndAttachToDocument(propsData);
+                wrapper = mount(VueCheckout, { propsData });
+                mobileNumberFormField = wrapper.find('[data-test-id="input-mobile-number"]');
             });
 
             afterEach(() => {
@@ -127,7 +123,7 @@ describe('Checkout', () => {
 
             it('should emit success event when all fields are populated correctly', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue('07777777777');
+                mobileNumberFormField.setValue('07777777777');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -144,14 +140,14 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(wrapper.vm.isMobileNumberValid).toBe(false);
-                expect(mobileNumberEmptyMessage.exists()).toBe(true);
+                expect(mobileNumberEmptyMessage).toMatchSnapshot();
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('mobileNumber');
             });
 
             it('should show error message and emit failure event when the mobile number field is populated with a < 10 numbers', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue('077777');
+                mobileNumberFormField.setValue('077777');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -159,14 +155,14 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(wrapper.vm.isMobileNumberValid).toBe(false);
-                expect(mobileNumberEmptyMessage.exists()).toBe(true);
+                expect(mobileNumberEmptyMessage).toMatchSnapshot();
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('mobileNumber');
             });
 
             it('should show error message and emit failure event when the mobile number field is populated with non numeric value', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue('hs;-j`$e&1l');
+                mobileNumberFormField.setValue('hs;-j`$e&1l');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -174,14 +170,14 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(wrapper.vm.isMobileNumberValid).toBe(false);
-                expect(mobileNumberEmptyMessage.exists()).toBe(true);
+                expect(mobileNumberEmptyMessage).toMatchSnapshot();
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('mobileNumber');
             });
 
             it('should not show error message or emit failure event when the address input fields are not populated', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue('07777777777');
+                mobileNumberFormField.setValue('07777777777');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -194,18 +190,27 @@ describe('Checkout', () => {
         });
 
         describe('if checkoutMethod set to `Delivery`', () => {
-            // TODO: Remove this repeated section
             const propsData = {
                 checkoutMethod: 'Delivery',
                 checkoutUrl
             };
 
             let wrapper;
+            let mobileNumberFormField;
+            let addressLine1FormField;
+            let addressCityFormField;
+            let addressPostcodeFormField;
+
             beforeEach(() => {
                 CheckoutServiceApi.submitCheckout.mockClear();
                 CheckoutServiceApi.submitCheckout.mockImplementation(async () => Promise.resolve());
 
-                wrapper = mountComponentAndAttachToDocument(propsData);
+                wrapper = mount(VueCheckout, { propsData });
+
+                mobileNumberFormField = wrapper.find('[data-test-id="input-mobile-number"]');
+                addressLine1FormField = wrapper.find('[data-test-id="input-address-line-1"]');
+                addressCityFormField = wrapper.find('[data-test-id="input-address-city"]');
+                addressPostcodeFormField = wrapper.find('[data-test-id="input-address-postcode"]');
             });
 
             afterEach(() => {
@@ -214,10 +219,10 @@ describe('Checkout', () => {
 
             it('should emit success event when all fields are populated correctly', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue('07777777777');
-                wrapper.find('[data-test-id="input-address-line-1"]').setValue('Fleet Place House');
-                wrapper.find('[data-test-id="input-address-city"]').setValue('London');
-                wrapper.find('[data-test-id="input-address-postcode"]').setValue('EC4M 7RF');
+                mobileNumberFormField.setValue('07777777777');
+                addressLine1FormField.setValue('Fleet Place House');
+                addressCityFormField.setValue('London');
+                addressPostcodeFormField.setValue('EC4M 7RF');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -233,7 +238,7 @@ describe('Checkout', () => {
                 const addressLine1EmptyMessage = wrapper.find('[data-test-id="error-address-line1-empty"]');
 
                 // Assert
-                expect(addressLine1EmptyMessage.exists()).toBe(true);
+                expect(addressLine1EmptyMessage).toMatchSnapshot();
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address');
             });
@@ -244,7 +249,7 @@ describe('Checkout', () => {
                 const addressCityEmptyMessage = wrapper.find('[data-test-id="error-address-city-empty"]');
 
                 // Assert
-                expect(addressCityEmptyMessage.exists()).toBe(true);
+                expect(addressCityEmptyMessage).toMatchSnapshot();
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address');
             });
@@ -255,21 +260,21 @@ describe('Checkout', () => {
                 const addressPostcodeEmptyMessage = wrapper.find('[data-test-id="error-address-postcode-empty"]');
 
                 // Assert
-                expect(addressPostcodeEmptyMessage.exists()).toBe(true);
+                expect(addressPostcodeEmptyMessage).toMatchSnapshot();
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address');
             });
 
             it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-address-postcode"]').setValue('?!hdb-se');
+                addressPostcodeFormField.setValue('?!hdb-se');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
                 const addressPostcodeTypeErrorMessage = wrapper.find('[data-test-id="error-address-postcode-type-error"]');
 
                 // Assert
-                expect(addressPostcodeTypeErrorMessage.exists()).toBe(true);
+                expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address');
             });

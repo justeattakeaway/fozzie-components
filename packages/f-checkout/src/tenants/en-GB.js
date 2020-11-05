@@ -28,6 +28,9 @@ export default {
     allergyText: 'If you or someone you’re ordering for has a food allergy or intolerance, click here',
 
     errorMessages: {
-        genericServerError: 'Something went wrong, please try again later'
+        errors: {
+            errorHeading: 'Error',
+            genericServerError: 'Something went wrong, please try again later'
+        }
     }
 };
