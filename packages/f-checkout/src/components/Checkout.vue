@@ -90,7 +90,7 @@ import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
 import tenantConfigs from '../tenants';
-// import CheckoutServiceApi from '../services/CheckoutServiceApi';
+import CheckoutServiceApi from '../services/CheckoutServiceApi';
 import EventNames from '../event-names';
 
 export default {
@@ -118,18 +118,20 @@ export default {
             type: String,
             default: 'Collection',
             validator: value => (VALID_CHECKOUT_METHOD.indexOf(value) !== -1)
+        },
+
+        // TODO: remove default add required back
+        checkoutUrl: {
+            type: String,
+            // required: true,
+            default: 'http://localhost/account/register'
+        },
+
+        checkoutTimeout: {
+            type: Number,
+            required: false,
+            default: 1000
         }
-
-        // checkoutUrl: {
-        //     type: String,
-        //     required: true
-        // },
-
-        // checkoutTimeout: {
-        //     type: Number,
-        //     required: false,
-        //     default: 1000
-        // }
     },
 
     data () {
@@ -241,14 +243,14 @@ export default {
 
             this.shouldDisableCheckoutButton = true;
             try {
-                // const checkoutData = {
-                //     mobileNumber: this.mobileNumber
-                // };
-                // if (this.isDeliveryMethod) {
-                //     checkoutData.address = this.address;
-                // }
+                const checkoutData = {
+                    mobileNumber: this.mobileNumber
+                };
+                if (this.isDeliveryMethod) {
+                    checkoutData.address = this.address;
+                }
 
-                // await CheckoutServiceApi.submitCheckout(this.checkoutUrl, this.tenant, checkoutData, this.checkoutTimeout);
+                await CheckoutServiceApi.submitCheckout(this.checkoutUrl, this.tenant, checkoutData, this.checkoutTimeout);
                 this.$emit(EventNames.CheckoutSuccess);
             } catch (error) {
                 let thrownErrors = error;
@@ -268,6 +270,8 @@ export default {
                 if (shouldEmitCheckoutFailure) {
                     this.$emit(EventNames.CheckoutFailure, thrownErrors);
                 }
+            } finally {
+                this.shouldDisableCreateAccountButton = false;
             }
         },
 
