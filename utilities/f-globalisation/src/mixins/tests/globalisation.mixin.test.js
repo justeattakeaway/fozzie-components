@@ -9,10 +9,6 @@ Vue.use(VueI18n);
 const DEFAULT_LOCALE = 'en-GB';
 const ALTERNATIVE_LOCALE = 'es-ES';
 
-const i18n = new VueI18n({
-    locale: DEFAULT_LOCALE
-});
-
 const defaultData = {
     tenantConfigs: {
         [DEFAULT_LOCALE]: {
@@ -25,9 +21,14 @@ const defaultData = {
 };
 
 describe('Globalisation', () => {
+    let i18n;
     let component;
 
     beforeEach(() => {
+        i18n = new VueI18n({
+            locale: DEFAULT_LOCALE
+        });
+
         component = {
             render () {},
             mixins: [globalisationMixin]
@@ -39,6 +40,7 @@ describe('Globalisation', () => {
     });
 
     it('should be defined', () => {
+        // Arrange & Act
         const wrapper = shallowMount(component, {
             data () {
                 return defaultData;
@@ -46,13 +48,16 @@ describe('Globalisation', () => {
             i18n
         });
 
+        // Assert
         expect(wrapper.exists()).toBe(true);
     });
 
     describe('created', () => {
         it('should call `initialiseLocalisation`', () => {
+            // Arrange
             const initialiseLocalisationMock = jest.spyOn(component.mixins[0].methods, 'initialiseLocalisation');
 
+            // Act
             shallowMount(component, {
                 data () {
                     return defaultData;
@@ -60,7 +65,31 @@ describe('Globalisation', () => {
                 i18n
             });
 
+            // Assert
             expect(initialiseLocalisationMock).toHaveBeenCalled();
+        });
+    });
+
+    describe('watch', () => {
+        describe('locale', () => {
+            it('should call `setupLocale` with new value and `true`', async () => {
+                // Arrange
+                const setupLocaleMock = jest.spyOn(component.mixins[0].methods, 'setupLocale');
+                component.mixins[0].created = jest.fn();
+
+                const wrapper = shallowMount(component, {
+                    data () {
+                        return defaultData;
+                    },
+                    i18n
+                });
+
+                // Act
+                await wrapper.setProps({ locale: ALTERNATIVE_LOCALE });
+
+                // Assert
+                expect(setupLocaleMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, true);
+            });
         });
     });
 
@@ -75,8 +104,9 @@ describe('Globalisation', () => {
             beforeEach(() => {
                 setupLocaleMock = jest.spyOn(component.mixins[0].methods, 'setupLocale');
             });
-                        
+
             it('should call `setupLocale` once to set up the locale with the provided `locale` prop', () => {
+                // Arrange
                 const wrapper = shallowMount(component, {
                     data () {
                         return defaultData;
@@ -87,13 +117,16 @@ describe('Globalisation', () => {
                     i18n
                 });
 
+                // Act
                 wrapper.vm.initialiseLocalisation();
 
+                // Assert
                 expect(setupLocaleMock).toHaveBeenCalledTimes(1);
                 expect(setupLocaleMock).toHaveBeenCalledWith(DEFAULT_LOCALE, true);
             });
 
             it('should call `setupLocale` twice to set up both the locale with the provided `locale` prop and the fallback locale when these are different', () => {
+                // Arrange
                 const wrapper = shallowMount(component, {
                     data () {
                         return defaultData;
@@ -104,14 +137,17 @@ describe('Globalisation', () => {
                     i18n
                 });
 
+                // Act
                 wrapper.vm.initialiseLocalisation();
 
+                // Assert
                 expect(setupLocaleMock).toHaveBeenCalledTimes(2);
                 expect(setupLocaleMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, true);
                 expect(setupLocaleMock).toHaveBeenCalledWith(DEFAULT_LOCALE, false);
             });
 
             it('should call `setupLocale` twice to set up both the current locale and the fallback locale when these are different', () => {
+                // Arrange
                 const wrapper = shallowMount(component, {
                     data () {
                         return defaultData;
@@ -121,8 +157,10 @@ describe('Globalisation', () => {
                     })
                 });
 
+                // Act
                 wrapper.vm.initialiseLocalisation();
 
+                // Assert
                 expect(setupLocaleMock).toHaveBeenCalledTimes(2);
                 expect(setupLocaleMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, true);
                 expect(setupLocaleMock).toHaveBeenCalledWith(DEFAULT_LOCALE, false);
@@ -130,27 +168,14 @@ describe('Globalisation', () => {
         });
 
         describe('setupLocale', () => {
-            it('should set the messages for the provided locale and update the current i18n locale when `applyLocale` is `true`', () => {
-                const setLocaleMessageMock = jest.spyOn(i18n, 'setLocaleMessage');
+            let setLocaleMessageMock;
 
-                // CONTINUE HERE, TEST THE LOCALE IS SET
-
-                const wrapper = shallowMount(component, {
-                    data () {
-                        return defaultData;
-                    },
-                    i18n
-                });
-
-                wrapper.vm.setupLocale(DEFAULT_LOCALE, true);
-
-                expect(setLocaleMessageMock).toHaveBeenCalledTimes(1);
-                expect(setLocaleMessageMock).toHaveBeenCalledWith(DEFAULT_LOCALE, defaultData.tenantConfigs[DEFAULT_LOCALE]);
+            beforeEach(() => {
+                setLocaleMessageMock = jest.spyOn(i18n, 'setLocaleMessage');
             });
 
             it('should set the messages for the provided locale and update the current i18n locale when `applyLocale` is `true`', () => {
-                const setLocaleMessageMock = jest.spyOn(i18n, 'setLocaleMessage');
-
+                // Arrange
                 const wrapper = shallowMount(component, {
                     data () {
                         return defaultData;
@@ -158,11 +183,69 @@ describe('Globalisation', () => {
                     i18n
                 });
 
-                wrapper.vm.setupLocale(DEFAULT_LOCALE, true);
+                // Act
+                wrapper.vm.setupLocale(ALTERNATIVE_LOCALE, true);
 
+                // Assert
                 expect(setLocaleMessageMock).toHaveBeenCalledTimes(1);
-                expect(setLocaleMessageMock).toHaveBeenCalledWith(DEFAULT_LOCALE, defaultData.tenantConfigs[DEFAULT_LOCALE]);
-            });            
+                expect(setLocaleMessageMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, defaultData.tenantConfigs[ALTERNATIVE_LOCALE]);
+                expect(i18n.locale).toBe(ALTERNATIVE_LOCALE);
+            });
+
+            it('should set the messages for the provided locale and not update the current i18n locale when `applyLocale` is `false`', () => {
+                // Arrange
+                const wrapper = shallowMount(component, {
+                    data () {
+                        return defaultData;
+                    },
+                    i18n
+                });
+
+                // Act
+                wrapper.vm.setupLocale(ALTERNATIVE_LOCALE, false);
+
+                // Assert
+                expect(setLocaleMessageMock).toHaveBeenCalledTimes(1);
+                expect(setLocaleMessageMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, defaultData.tenantConfigs[ALTERNATIVE_LOCALE]);
+                expect(i18n.locale).toBe(DEFAULT_LOCALE);
+            });
+        });
+    });
+
+    describe('props', () => {
+        describe('locale', () => {
+            it('should not be required', () => {
+                // Arrange
+                const wrapper = shallowMount(component);
+
+                // Act
+                const { locale } = wrapper.vm.$options.props;
+
+                // Assert
+                expect(locale.required).toBe(undefined);
+            });
+
+            it('should be a string', () => {
+                // Arrange
+                const wrapper = shallowMount(component);
+
+                // Act
+                const { locale } = wrapper.vm.$options.props;
+
+                // Assert
+                expect(locale.type).toBe(String);
+            });
+
+            it('should default to \'\'', () => {
+                // Arrange
+                const wrapper = shallowMount(component);
+
+                // Act
+                const { locale } = wrapper.vm.$options.props;
+
+                // Assert
+                expect(locale.default).toBe('');
+            });
         });
     });
 });
