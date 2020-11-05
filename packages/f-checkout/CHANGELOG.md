@@ -9,8 +9,6 @@ v0.8.0
 
 ### Added
 - Checkout component calls server to get data
-- Allergen modal
-- Messages list
 
 
 v0.6.0
