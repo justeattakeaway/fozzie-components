@@ -3,8 +3,10 @@ import { VALID_CHECKOUT_METHOD } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 
 describe('Checkout', () => {
+    const checkoutUrl = '/checkout/uk/12345';
+
     it('should be defined', () => {
-        const propsData = { checkoutUrl: '/checkout/uk/12345' };
+        const propsData = { checkoutUrl };
         const wrapper = shallowMount(VueCheckout, { propsData });
         expect(wrapper.exists()).toBe(true);
     });
@@ -15,7 +17,7 @@ describe('Checkout', () => {
                 // Arrange
                 const propsData = {
                     checkoutMethod: definedType,
-                    checkoutUrl: '/checkout/uk/12345'
+                    checkoutUrl
                 };
 
                 // Act
@@ -30,7 +32,7 @@ describe('Checkout', () => {
                 // Arrange
                 const propsData = {
                     checkoutMethod: 'delivery',
-                    checkoutUrl: '/checkout/uk/12345'
+                    checkoutUrl
                 };
 
                 // Act
@@ -45,7 +47,7 @@ describe('Checkout', () => {
                 // Arrange
                 const propsData = {
                     checkoutMethod: 'collection',
-                    checkoutUrl: '/checkout/uk/12345'
+                    checkoutUrl
                 };
 
                 // Act
@@ -59,7 +61,7 @@ describe('Checkout', () => {
     });
 
     describe('computed ::', () => {
-        const propsData = { checkoutUrl: '/checkout/uk/12345' };
+        const propsData = { checkoutUrl };
         const data = { customer: { firstName: 'name' } };
 
         describe('name ::', () => {

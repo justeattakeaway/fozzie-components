@@ -5423,7 +5423,7 @@ axios-mock-adapter@1.18.2:
     fast-deep-equal "^3.1.1"
     is-buffer "^2.0.3"
 
-axios-mock-adapter@^1.19.0:
+axios-mock-adapter@1.19.0:
   version "1.19.0"
   resolved "https://registry.yarnpkg.com/axios-mock-adapter/-/axios-mock-adapter-1.19.0.tgz#9d72e321a6c5418e1eff067aa99761a86c5188a4"
   integrity sha512-D+0U4LNPr7WroiBDvWilzTMYPYTuZlbo6BI8YHZtj7wYQS8NkARlP9KBt8IWWHTQJ0q/8oZ0ClPBtKCCkx8cQg==

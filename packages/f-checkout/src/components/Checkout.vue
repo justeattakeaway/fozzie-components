@@ -110,7 +110,7 @@ export default {
             isOpen: true,
             copy: { ...localeConfig },
             theme,
-            id: '',
+            checkoutId: '',
             isFulfillable: true,
             customer: {
                 dateOfBirth: '',
@@ -175,7 +175,7 @@ export default {
 
     methods: {
         mapResponse (data) {
-            this.id = data.id;
+            this.checkoutId = data.id;
             this.isFulfillable = data.isFulfillable;
             this.customer = data.customer;
             this.fulfillment.times = data.fulfillment.times;
@@ -186,6 +186,7 @@ export default {
                 city: data.fulfillment.address.lines[3],
                 postcode: data.fulfillment.address.postalCode
             };
+
             this.messages = data.messages;
             this.notes = data.notes;
             this.notices = data.notices;
