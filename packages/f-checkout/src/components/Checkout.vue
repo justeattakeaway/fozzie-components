@@ -120,11 +120,9 @@ export default {
             validator: value => (VALID_CHECKOUT_METHOD.indexOf(value) !== -1)
         },
 
-        // TODO: remove default add required back
         checkoutUrl: {
             type: String,
-            // required: true,
-            default: 'http://localhost/account/register'
+            required: true
         },
 
         checkoutTimeout: {

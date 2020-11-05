@@ -7,10 +7,10 @@ import EventNames from '../../event-names';
 jest.mock('../../services/CheckoutServiceApi', () => ({ submitCheckout: jest.fn() }));
 
 describe('Checkout', () => {
-    const checkoutURL = 'http://localhost/account/register';
+    const checkoutUrl = 'http://localhost/account/register';
 
     it('should be defined', () => {
-        const propsData = {};
+        const propsData = { checkoutUrl };
         const wrapper = shallowMount(VueCheckout, { propsData });
         expect(wrapper.exists()).toBe(true);
     });
@@ -20,7 +20,8 @@ describe('Checkout', () => {
             it.each(VALID_CHECKOUT_METHOD)('should update the Selector `ordermethod` attribute to match checkoutMethod=%p', definedType => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: definedType
+                    checkoutMethod: definedType,
+                    checkoutUrl
                 };
 
                 // Act
@@ -34,7 +35,8 @@ describe('Checkout', () => {
             it('should display the address block if set to `Delivery`', () => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: 'Delivery'
+                    checkoutMethod: 'Delivery',
+                    checkoutUrl
                 };
 
                 // Act
@@ -48,7 +50,8 @@ describe('Checkout', () => {
             it('should not display the address block if set to `Collection`', () => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: 'Collection'
+                    checkoutMethod: 'Collection',
+                    checkoutUrl
                 };
 
                 // Act
@@ -62,7 +65,7 @@ describe('Checkout', () => {
     });
 
     describe('computed ::', () => {
-        const propsData = {};
+        const propsData = { checkoutUrl };
         const data = { firstName: 'name' };
 
         describe('name ::', () => {
@@ -98,9 +101,10 @@ describe('Checkout', () => {
 
     describe('when form submitted', () => {
         describe('if checkoutMethod set to `Collection`', () => {
+            // TODO: Remove this repeated section
             const propsData = {
                 checkoutMethod: 'Collection',
-                checkoutURL
+                checkoutUrl
             };
 
             function mountComponentAndAttachToDocument () {
@@ -190,9 +194,10 @@ describe('Checkout', () => {
         });
 
         describe('if checkoutMethod set to `Delivery`', () => {
+            // TODO: Remove this repeated section
             const propsData = {
                 checkoutMethod: 'Delivery',
-                checkoutURL
+                checkoutUrl
             };
 
             function mountComponentAndAttachToDocument () {
