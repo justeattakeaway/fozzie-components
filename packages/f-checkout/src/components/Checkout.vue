@@ -59,7 +59,7 @@ import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY } from '../constants';
+import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY, TENANT_MAP } from '../constants';
 import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
@@ -142,7 +142,7 @@ export default {
         },
 
         title () {
-            return this.name ? `${this.name}, confirm your details` : '';
+            return `${this.name}, confirm your details`;
         },
 
         isDelivery () {
@@ -150,16 +150,7 @@ export default {
         },
 
         tenant () {
-            return {
-                'en-GB': 'uk',
-                'en-AU': 'au',
-                'en-NZ': 'nz',
-                'da-DK': 'dk',
-                'es-ES': 'es',
-                'en-IE': 'ie',
-                'it-IT': 'it',
-                'nb-NO': 'no'
-            }[this.locale];
+            return TENANT_MAP[this.locale];
         }
     },
 
