@@ -234,10 +234,13 @@ export default {
             this.$emit('get-group-count', current.length);
 
             if (current.length && (current.length !== previous.length) && this.groupCards) {
-                this.metadataDispatcher.logCardImpressions(this.cardsGrouped.flatMap(({ cards, id }) => [
-                    id, ...cards.map(({ id: cardId }) => cardId)
-                ])
-                .filter(cardID => cardID !== undefined));
+                const cardsReduced = this.cardsGrouped.reduce(
+                    (acc, { cards, id: groupId }) => [...acc,
+                        ...[groupId, ...cards.map(({ id: cardId }) => cardId)]],
+                    []
+                )
+                .filter(cardID => cardID !== undefined);
+                this.metadataDispatcher.logCardImpressions(cardsReduced);
             }
             if ((current.length > 0) && (previous.length === 0)) {
                 this.hasLoaded = true;

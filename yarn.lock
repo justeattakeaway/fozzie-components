@@ -1680,15 +1680,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.3.0.tgz#473cc1ce7edeb0ce58df674c9c4ee0ebf30171d8"
   integrity sha512-KQ19RSgGyMwfAV4ZOA7SU3BjyR6h9z7Ykc0K3DBcft4EJBDh1lmvtAZIaZJyhDTwKrggrJaLq5QubEHlB6gkew==
 
-"@justeat/f-icons@2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.5.0.tgz#48af36446b85f8577de76d565bbc9d54f48ae3e8"
-  integrity sha512-uP+ALHO13pOnu6Biz0KKeaZRw8+JM9uBIOJ2c+ZgT+RkQWhlDf8cXkDYRB80NBbbM145kyinJjIFLuowVeqCcw==
-"@justeat/f-icons@2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.3.0.tgz#473cc1ce7edeb0ce58df674c9c4ee0ebf30171d8"
-  integrity sha512-KQ19RSgGyMwfAV4ZOA7SU3BjyR6h9z7Ykc0K3DBcft4EJBDh1lmvtAZIaZJyhDTwKrggrJaLq5QubEHlB6gkew==
-
 "@justeat/f-icons@2.9.0":
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.9.0.tgz#bdff89717654afa4d6bcceda400a6d53a71b4b04"
