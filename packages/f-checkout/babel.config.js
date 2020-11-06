@@ -3,10 +3,7 @@ module.exports = api => {
     const isTest = api.env('test');
     const presets = [];
     const plugins = [
-        ['@babel/plugin-proposal-optional-chaining', // https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining
-            {
-                loose: true // Need this for Storybook v6 beta.
-            }]
+        '@babel/plugin-proposal-optional-chaining' // https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining
     ];
     const builtIns = (api.env('development') ? 'entry' : false);
 
