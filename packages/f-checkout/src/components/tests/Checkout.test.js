@@ -108,6 +108,7 @@ describe('Checkout', () => {
         const validAddressCity = 'London';
         const validAddressPostcode = 'EC4M 7RF';
         const inValidCharacterAddressPostcode = '?!hdb-se';
+        const inValidLengthAddressPostcode = 'EC4M 7R';
 
         describe('if checkoutMethod set to `Collection`', () => {
             const propsData = {
@@ -266,6 +267,21 @@ describe('Checkout', () => {
             it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
                 // Arrange
                 wrapper.find('[data-test-id="input-address-postcode"]').setValue(inValidCharacterAddressPostcode);
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                const addressPostcodeTypeErrorMessage = wrapper.find('[data-test-id="error-address-postcode-type-error"]');
+
+                // Assert
+                expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
+                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address');
+            });
+
+
+            it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
+                // Arrange
+                wrapper.find('[data-test-id="input-address-postcode"]').setValue(inValidLengthAddressPostcode);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
