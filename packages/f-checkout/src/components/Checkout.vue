@@ -40,6 +40,7 @@
                 <address-block
                     v-if="isDeliveryMethod"
                     v-model="address"
+                    :address="address"
                     data-test-id="address-block" />
 
                 <form-selector

@@ -2,7 +2,7 @@
     <div data-test-id='address-component'>
         <fieldset :class="$style['c-addressGroup']">
             <form-field
-                v-model="value.line1"
+                v-model="address.line1"
                 :class="$style['c-addressGroup-formField']"
                 name="address-line-1"
                 data-test-id="input-address-line-1"
@@ -18,7 +18,7 @@
             </form-field>
 
             <form-field
-                v-model="value.line2"
+                v-model="address.line2"
                 :class="$style['c-addressGroup-formField']"
                 name="address-line-2"
                 data-test-id="input-address-line-2"
@@ -26,7 +26,7 @@
                 label-style="inline" />
 
             <form-field
-                v-model="value.city"
+                v-model="address.city"
                 :class="$style['c-addressGroup-formField']"
                 name="address-city"
                 data-test-id="input-address-city"
@@ -42,7 +42,7 @@
             </form-field>
         </fieldset>
         <form-field
-            v-model="value.postcode"
+            v-model="address.postcode"
             name="address-postcode"
             data-test-id="input-address-postcode"
             :label-text="copy.labels.postcode"
@@ -75,7 +75,7 @@ export default {
     inject: ['$v', 'copy'],
 
     props: {
-        value: {
+        address: {
             type: Object,
             required: true
         }
