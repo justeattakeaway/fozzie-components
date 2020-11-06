@@ -38,7 +38,9 @@ module.exports = {
         './test/specs/component/'
     ],
 
-    setupFilesAfterEnv: ['../../jest.setup.js'],
+    setupFilesAfterEnv: [
+        '../../jest.setup.js'
+    ]
 
     // reporters: ["default", "jest-allure"]
 };

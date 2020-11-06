@@ -13,6 +13,7 @@ const apiKey = '__API_KEY__';
 const userId = '__USER_ID__';
 
 describe('BrazeDispatcher › node', () => {
+    // allure.feature('Braze Dispatcher Node');
     beforeEach(() => {
         jest.resetAllMocks();
     });

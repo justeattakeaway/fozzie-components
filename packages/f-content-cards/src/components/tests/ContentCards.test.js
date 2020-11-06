@@ -61,6 +61,7 @@ beforeEach(() => {
 });
 
 describe('ContentCards', () => {
+    allure.feature('Content Cards');
     it('should emit a custom content callback when mounted', () => {
         // Arrange & Act
         const instance = shallowMount(ContentCards, {
@@ -582,7 +583,7 @@ describe('ContentCards', () => {
         const testId = 'foo';
         let instance;
 
-        beforeAll(async () => {
+        beforeEach(async () => {
             // Arrange
             const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
             const cards = createMetadataCards(cardTypes);
