@@ -8,7 +8,7 @@
             :locale="locale"
             type="danger"
             :class="$style['c-checkout-alert']"
-            :heading="copy.errorMessages.errors.errorHeading">
+            :heading="copy.errorMessages.errorHeading">
             <p>{{ genericErrorMessage }}</p>
         </alert>
         <card
@@ -264,7 +264,7 @@ export default {
 
                 // TODO: Review this later - even though f-registration does something similar
                 if (Array.isArray(thrownErrors)) {
-                    this.genericErrorMessage = thrownErrors[0].description || this.copy.errorMessages.errors.genericServerError;
+                    this.genericErrorMessage = thrownErrors[0].description || this.copy.errorMessages.genericServerError;
                 } else {
                     this.genericErrorMessage = error;
                 }

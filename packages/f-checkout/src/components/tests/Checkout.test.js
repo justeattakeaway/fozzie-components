@@ -100,6 +100,15 @@ describe('Checkout', () => {
     });
 
     describe('when form submitted', () => {
+        const validMobileNumber = '07777777777';
+        const invalidShortMobileNumber = '077777';
+        const invalidCharacterMobileNumber = 'hs;-j`$e&1l';
+
+        const validAddressLine1 = 'Fleet Place House';
+        const validAddressCity = 'London';
+        const validAddressPostcode = 'EC4M 7RF';
+        const inValidCharacterAddressPostcode = '?!hdb-se';
+
         describe('if checkoutMethod set to `Collection`', () => {
             const propsData = {
                 checkoutMethod: 'Collection',
@@ -107,14 +116,12 @@ describe('Checkout', () => {
             };
 
             let wrapper;
-            let mobileNumberFormField;
 
             beforeEach(() => {
                 CheckoutServiceApi.submitCheckout.mockClear();
                 CheckoutServiceApi.submitCheckout.mockImplementation(async () => Promise.resolve());
 
                 wrapper = mount(VueCheckout, { propsData });
-                mobileNumberFormField = wrapper.find('[data-test-id="input-mobile-number"]');
             });
 
             afterEach(() => {
@@ -123,7 +130,7 @@ describe('Checkout', () => {
 
             it('should emit success event when all fields are populated correctly', async () => {
                 // Arrange
-                mobileNumberFormField.setValue('07777777777');
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue(validMobileNumber);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -147,7 +154,7 @@ describe('Checkout', () => {
 
             it('should show error message and emit failure event when the mobile number field is populated with a < 10 numbers', async () => {
                 // Arrange
-                mobileNumberFormField.setValue('077777');
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue(invalidShortMobileNumber);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -162,7 +169,7 @@ describe('Checkout', () => {
 
             it('should show error message and emit failure event when the mobile number field is populated with non numeric value', async () => {
                 // Arrange
-                mobileNumberFormField.setValue('hs;-j`$e&1l');
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue(invalidCharacterMobileNumber);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -177,7 +184,7 @@ describe('Checkout', () => {
 
             it('should not show error message or emit failure event when the address input fields are not populated', async () => {
                 // Arrange
-                mobileNumberFormField.setValue('07777777777');
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue(validMobileNumber);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -196,21 +203,12 @@ describe('Checkout', () => {
             };
 
             let wrapper;
-            let mobileNumberFormField;
-            let addressLine1FormField;
-            let addressCityFormField;
-            let addressPostcodeFormField;
 
             beforeEach(() => {
                 CheckoutServiceApi.submitCheckout.mockClear();
                 CheckoutServiceApi.submitCheckout.mockImplementation(async () => Promise.resolve());
 
                 wrapper = mount(VueCheckout, { propsData });
-
-                mobileNumberFormField = wrapper.find('[data-test-id="input-mobile-number"]');
-                addressLine1FormField = wrapper.find('[data-test-id="input-address-line-1"]');
-                addressCityFormField = wrapper.find('[data-test-id="input-address-city"]');
-                addressPostcodeFormField = wrapper.find('[data-test-id="input-address-postcode"]');
             });
 
             afterEach(() => {
@@ -219,10 +217,10 @@ describe('Checkout', () => {
 
             it('should emit success event when all fields are populated correctly', async () => {
                 // Arrange
-                mobileNumberFormField.setValue('07777777777');
-                addressLine1FormField.setValue('Fleet Place House');
-                addressCityFormField.setValue('London');
-                addressPostcodeFormField.setValue('EC4M 7RF');
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue(validMobileNumber);
+                wrapper.find('[data-test-id="input-address-line-1"]').setValue(validAddressLine1);
+                wrapper.find('[data-test-id="input-address-city"]').setValue(validAddressCity);
+                wrapper.find('[data-test-id="input-address-postcode"]').setValue(validAddressPostcode);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -267,7 +265,7 @@ describe('Checkout', () => {
 
             it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
                 // Arrange
-                addressPostcodeFormField.setValue('?!hdb-se');
+                wrapper.find('[data-test-id="input-address-postcode"]').setValue(inValidCharacterAddressPostcode);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
