@@ -5,15 +5,17 @@
         :data-test-id="testId">
         <template v-if="groupCards">
             <template v-for="({ title, cards: subCards, id: groupId }, groupIndex) in cardsGrouped">
-                <h3
+                <h2
                     v-if="groupId"
                     :key="groupIndex"
                     :class="[$style['c-contentCards--group-title'], 'c-contentCards--group-title']"
                     :data-test-id="`${groupIndex}_${groupId}`"
                 >
                     {{ title }}
-                </h3>
-                <div :class="[$style['c-contentCards--group']]">
+                </h2>
+                <div
+                    :key="`${groupIndex}-children`"
+                    :class="[$style['c-contentCards--group']]">
                     <template
                         v-for="(contentCard, cardIndex) in subCards"
                     >
@@ -306,7 +308,6 @@ export default {
          * @return {Promise<void>}
          **/
         setupMetadata (apiKey, userId, enableLogging = false) {
-            console.log(this.enabledCardTypes);
             return initialiseMetadataDispatcher({
                 apiKey,
                 userId,
@@ -536,28 +537,30 @@ export default {
 <style lang="scss" module>
     .c-contentCards {
         margin-top: spacing(x5);
-        margin-bottom: spacing(x5);
+        margin-bottom: spacing(x3);
 
         @include media('>=narrowMid') {
             display: flex;
-            flex-direction: row;
+            flex-flow: row;
         }
     }
 
     .c-contentCards--wrap {
-        flex-wrap: wrap;
+        flex-flow: wrap;
     }
 
     .c-contentCards--group {
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        width:100%;
+        flex-flow: row wrap;
+        width: 100%;
     }
 
     .c-contentCards--group-title {
         width: 100%;
-        margin-bottom: spacing(x3);
+        &:not(:first-child) {
+            margin-top: spacing(x3);
+        }
+        margin-bottom: spacing(x2);
     }
 
 </style>

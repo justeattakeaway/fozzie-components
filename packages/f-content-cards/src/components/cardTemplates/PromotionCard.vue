@@ -71,7 +71,7 @@ export default {
         text-decoration: none;
         @include font-size(body-l);
         color: $color-secondary;
-        margin-top: spacing();
         display: block; // TODO replace
     }
+
 </style>

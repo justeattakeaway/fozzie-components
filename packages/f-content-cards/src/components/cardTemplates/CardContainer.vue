@@ -26,9 +26,9 @@
             <div :class="$style['c-content-card-body']">
                 <h3
                     :class="[$style['c-contentCard-title'], {
-                    [$style['c-contentCard-title-legacyx']]: !boldTitle,
-                    [$style['c-emboldenedText--title']]: emboldenText
-                }]">
+                        [$style['c-contentCard-title-legacyx']]: !boldTitle,
+                        [$style['c-emboldenedText--title']]: emboldenText
+                    }]">
                     {{ title }}
                 </h3>
                 <h4 :class="[$style['c-contentCard-subTitle'], { [$style['c-emboldenedText--subtitle']]: emboldenText }]">
@@ -255,11 +255,11 @@ export default {
     .c-contentCard-subTitle {
         @include font-size(body-l);
         font-weight: $font-weight-base;
-        margin: spacing() spacing(x5) 0 spacing(x5);
+        margin-top: spacing();
     }
 
     .c-contentCard-text {
-        margin: spacing(x0.5) spacing(x5) 0 spacing(x5);
+        margin-top: spacing(x0.5);
         text-align: center;
     }
 
@@ -279,9 +279,8 @@ export default {
     .c-contentCard-footer {
         width: 100%;
         flex-shrink: 0;
-        //margin-top: auto;
+        margin-top: spacing();
         text-align: center;
-        //padding-top: spacing(x2);
     }
 
     .c-contentCard-thumbnail {
@@ -381,7 +380,7 @@ export default {
     }
 
     .c-emboldenedText--subtitle {
-        @include font-size(body-s);
+        @include font-size(body-l);
         margin-top: spacing(x2);
     }
 
