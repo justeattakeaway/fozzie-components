@@ -175,10 +175,13 @@ export default {
 <style lang="scss" module>
 $form-input-colour                        : $color-text;
 $form-input-bg                            : $white;
-$form-input-borderRadius                  : 3px;
+$form-input-borderRadius                  : $border-radius;
 $form-input-borderWidth                   : 1px;
-$form-input-borderColour                  : $grey--light;
+$form-input-borderColour                  : $grey--mid;
 $form-input-borderColour--focus           : $grey--dark;
+$form-input-height                        : 46px; // height is 46px + 1px border = 48px
+$form-input-padding                       : spacing(x1.5) spacing(x2);
+$form-input-fontSize                      : 'body-l';
 
 .c-formField {
     & + & {
@@ -191,9 +194,9 @@ $form-input-borderColour--focus           : $grey--dark;
 
     .c-formField-input {
         width: 100%;
-        height: 2.5rem;
-        padding: 0.5rem;
-        @include font-size();
+        @include rem(height, $form-input-height); //convert height to rem
+        padding: $form-input-padding; //convert padding to rem
+        @include font-size($form-input-fontSize);
         font-family: $font-family-base;
         color: $form-input-colour;
         font-weight: $font-weight-base;
