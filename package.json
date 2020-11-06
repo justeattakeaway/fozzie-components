@@ -95,6 +95,7 @@
     "extends": "@justeat/stylelint-config-fozzie"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "services/*"
   ]
 }
