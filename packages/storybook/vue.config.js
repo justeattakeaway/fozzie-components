@@ -51,7 +51,11 @@ module.exports = {
                     );
                     const relPath = path.relative(path.dirname(resourcePath), absPath)
                         .replace(new RegExp(path.sep.replace('\\', '\\\\'), 'g'), '/');
-                    return `@import "@justeat/fozzie/src/scss/fozzie"; @import "${relPath}";`;
+                    return `
+@import "@justeat/fozzie/src/scss/fozzie";
+@include reset();
+@include typography();
+@import "${relPath}";`;
                 }
             });
     }
