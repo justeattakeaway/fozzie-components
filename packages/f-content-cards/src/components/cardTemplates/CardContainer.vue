@@ -176,6 +176,10 @@ export default {
             max-width: 370px;
         }
 
+        @include media('<=narrowMid') {
+            margin-right: 0;
+        }
+
         &,
         &:hover,
         &:focus {
