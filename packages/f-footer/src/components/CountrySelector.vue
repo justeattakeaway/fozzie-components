@@ -164,10 +164,12 @@ $countrySelector-btn-font-size: 'body-s';
 .c-countrySelector-flag {
     height: 16px;
     width: 24px;
+    margin-top: 2px;
 }
 
 .c-countrySelector-flag--current {
     margin-right: spacing();
+    margin-top: 0;
 }
 
 .c-countrySelector-chevron {

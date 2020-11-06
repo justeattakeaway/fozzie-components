@@ -3,15 +3,40 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (to be added to next release)
+
+v2.11.0
 ------------------------------
-*October 26, 2020*
+*November 6, 2020*
+
+### Changed
+- Fozzie updated to v5 beta branch (no changes in components required - mostly restructuring at this point).
+
+
+v2.10.0
+------------------------------
+*November 2, 2020*
+
+### Added
+- Added `mocha-each` to package.json.
+
+
+v2.9.0
+------------------------------
+*October 28, 2020*
 
 ### Added
 - Added an entry to gitignore to ignore some local development tools for mocking http requests
 
 
-v2.8.1
+v2.8.3
+------------------------------
+*October 28, 2020*
+
+### Added
+- `CONTRIBUTING` file added to explain some of the guidelines we have around PRs.
+
+
+v2.8.2
 ------------------------------
 *October 28, 2020*
 
