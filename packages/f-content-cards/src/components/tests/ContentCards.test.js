@@ -61,6 +61,7 @@ beforeEach(() => {
 });
 
 describe('ContentCards', () => {
+    // eslint-disable-next-line no-undef
     allure.feature('Content Cards');
     it('should emit a custom content callback when mounted', () => {
         // Arrange & Act

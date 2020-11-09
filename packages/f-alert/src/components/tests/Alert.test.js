@@ -4,6 +4,7 @@ import VueAlert from '../Alert.vue';
 const defaultPropsData = { heading: 'Alert title', type: 'info' };
 
 describe('Alert', () => {
+    // eslint-disable-next-line no-undef
     allure.feature('Alert');
     afterEach(() => {
         jest.clearAllMocks();

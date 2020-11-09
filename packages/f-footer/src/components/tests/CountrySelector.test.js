@@ -2,6 +2,7 @@ import { shallowMount } from '@vue/test-utils';
 import CountrySelector from '../CountrySelector.vue';
 
 describe('CountrySelector', () => {
+    // eslint-disable-next-line no-undef
     allure.feature('Country Selector');
     let wrapper,
         button,

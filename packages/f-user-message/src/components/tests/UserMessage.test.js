@@ -19,6 +19,7 @@ beforeEach(() => {
 });
 
 describe('UserMessage component', () => {
+    // eslint-disable-next-line no-undef
     allure.feature('User Message');
     it('has a mounted hook', () => {
         expect(typeof UserMessage.mounted).toBe('function');

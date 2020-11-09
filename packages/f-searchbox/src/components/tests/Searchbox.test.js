@@ -2,6 +2,7 @@ import { shallowMount } from '@vue/test-utils';
 import VueSearchbox from '../Base.vue';
 
 describe('Searchbox', () => {
+    // eslint-disable-next-line no-undef
     allure.feature('Searchbox');
     it('should be defined', () => {
         const propsData = {};

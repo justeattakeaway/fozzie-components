@@ -3,6 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import RegistrationServiceApi from '../../services/RegistrationServiceApi';
 
 describe('RegistrationServiceApi', () => {
+    // eslint-disable-next-line no-undef
     allure.feature('Registration Service API');
     const axiosMock = new MockAdapter(axios);
 

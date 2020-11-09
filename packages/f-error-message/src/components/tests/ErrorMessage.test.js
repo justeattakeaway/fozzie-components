@@ -8,6 +8,7 @@ const propsData = {
 };
 
 describe('ErrorMessage', () => {
+    // eslint-disable-next-line no-undef
     allure.feature('Error Message');
 
     it('should render if slot content is provided', () => {
