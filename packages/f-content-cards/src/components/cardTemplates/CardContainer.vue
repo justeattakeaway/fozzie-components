@@ -26,7 +26,7 @@
             <div :class="$style['c-content-card-body']">
                 <h3
                     :class="[$style['c-contentCard-title'], {
-                        [$style['c-contentCard-title-legacyx']]: !boldTitle,
+                        [$style['c-contentCard-title-legacy']]: !boldTitle,
                         [$style['c-emboldenedText--title']]: emboldenText
                     }]">
                     {{ title }}

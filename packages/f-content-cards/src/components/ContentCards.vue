@@ -16,9 +16,7 @@
                 <div
                     :key="`${groupIndex}-children`"
                     :class="[$style['c-contentCards--group']]">
-                    <template
-                        v-for="(contentCard, cardIndex) in subCards"
-                    >
+                    <template v-for="(contentCard, cardIndex) in subCards">
                         <component
                             :is="handleCustomCardType(contentCard.type)"
                             :key="`${groupIndex}_${cardIndex}_${contentCard.id}`"
