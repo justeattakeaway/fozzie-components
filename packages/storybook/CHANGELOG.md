@@ -11,6 +11,14 @@ v0.15.0
 - `preview.js` file to decorate our stories with `vue-i18n`.
 
 
+v0.14.0
+------------------------------
+*November 6, 2020*
+
+### Removed
+- Jest addon for Storybook
+
+
 v0.13.0
 ------------------------------
 *November 6, 2020*

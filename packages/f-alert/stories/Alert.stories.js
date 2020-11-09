@@ -1,5 +1,4 @@
-import {
-    withKnobs, boolean, select, object, text
+import { boolean, select, text
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import VueAlert from '../src/components/Alert.vue';
