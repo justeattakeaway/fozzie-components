@@ -1631,6 +1631,14 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
+"@justeat/f-alert@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-0.1.1.tgz#3ea11276f6c5931670c1f85f6810c1133601490b"
+  integrity sha512-Y1qpZwNiRuFkmwGtlgUmCRY1yyoSh5cI9bdPkFwfg+l8ToACbCkU/kGfwqNTfmUoOLCwrM5HMvK/NIcnwVXS2A==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+    "@justeat/f-vue-icons" "1.4.0"
+
 "@justeat/f-build-config@0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-build-config/-/f-build-config-0.3.0.tgz#15b18304e792ee031e0eb6b71f944c3d3c797c1f"
@@ -1662,13 +1670,6 @@
   integrity sha512-1XNBr7loJ6o6TlWZxSx38jSZld4Q9zAlH+waNe0TXCdf3AgsR+pe5IHCQYgkmdHCXhHq9hLZW6NXZnz42UnORg==
   dependencies:
     qwery "4.0.0"
-
-"@justeat/f-error-message@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-0.2.0.tgz#5c8831681b6e64c13e51800c7489bbb7f632d3e0"
-  integrity sha512-U6lyk1UbjQJEfdzl926SlwV8b0JY35XuMRWiJ0/BLxYR6UZm+OlWY8NGdiiZHfAL4eoXUYaS2kwxzzJDjEw+Jg==
-  dependencies:
-    "@justeat/f-vue-icons" "1.0.0"
 
 "@justeat/f-form-field@0.7.1":
   version "0.7.1"
@@ -15299,7 +15300,7 @@ mkdirp@0.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@^0.5.3, mkdir
   dependencies:
     minimist "^1.2.5"
 
-mocha-each@^2.0.1:
+mocha-each@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/mocha-each/-/mocha-each-2.0.1.tgz#e36668e481ad3c4ec42a79bc94b8968ec0054c87"
   integrity sha512-0ZgWY5ajbnROXkfyaDb+0RAYzDBH3QVow/1zJiyl7lYMRnj1Nid8RDP2+/2TTajB5n4vr21v35MjB72GjFFj2g==
@@ -22166,7 +22167,7 @@ vuelidate@0.7.5:
   resolved "https://registry.yarnpkg.com/vuelidate/-/vuelidate-0.7.5.tgz#ff48c75ae9d24ea24c24e9ea08065eda0a0cba0a"
   integrity sha512-GAAG8QAFVp7BFeQlNaThpTbimq3+HypBPNwdkCkHZZeVaD5zmXXfhp357dcUJXHXTZjSln0PvP6wiwLZXkFTwg==
 
-vuelidate@^0.7.6:
+vuelidate@0.7.6:
   version "0.7.6"
   resolved "https://registry.yarnpkg.com/vuelidate/-/vuelidate-0.7.6.tgz#84100c13b943470660d0416642845cd2a1edf4b2"
   integrity sha512-suzIuet1jGcyZ4oUSW8J27R2tNrJ9cIfklAh63EbAkFjE380iv97BAiIeolRYoB9bF9usBXCu4BxftWN1Dkn3g==

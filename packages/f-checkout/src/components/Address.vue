@@ -10,7 +10,7 @@
                 label-style="inline">
                 <template #error>
                     <error-message
-                        v-if="!isAddressLine1Valid"
+                        v-if="!isAddressLine1Empty"
                         data-test-id="error-address-line1-empty">
                         {{ copy.validationMessages.addressLine1.requiredError }}
                     </error-message>
@@ -34,7 +34,7 @@
                 label-style="inline">
                 <template #error>
                     <error-message
-                        v-if="!isAddressCityValid"
+                        v-if="!isAddressCityEmpty"
                         data-test-id="error-address-city-empty">
                         {{ copy.validationMessages.city.requiredError }}
                     </error-message>
@@ -49,12 +49,12 @@
             label-style="inline">
             <template #error>
                 <error-message
-                    v-if="!isAddressPostcodeValid"
+                    v-if="!isAddressPostcodeEmpty"
                     data-test-id="error-address-postcode-empty">
                     {{ copy.validationMessages.postcode.requiredError }}
                 </error-message>
                 <error-message
-                    v-else-if="!isAddressPostcodeCorrectType"
+                    v-else-if="!isAddressPostcodeValid"
                     data-test-id="error-address-postcode-type-error">
                     {{ copy.validationMessages.postcode.invalidCharError }}
                 </error-message>
@@ -72,6 +72,10 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 export default {
     components: { FormField, ErrorMessage },
 
+    /*
+    * Provide/Inject allows nested `Address` component to inherit `Checkout`
+    * validator scope, `$v`.
+    */
     inject: ['$v', 'copy'],
 
     props: {
@@ -89,19 +93,19 @@ export default {
         * focus on the input field.
         */
 
-        isAddressLine1Valid () {
+        isAddressLine1Empty () {
             return !this.isFieldValid('line1');
         },
 
-        isAddressCityValid () {
+        isAddressCityEmpty () {
             return !this.isFieldValid('city');
         },
 
-        isAddressPostcodeValid () {
+        isAddressPostcodeEmpty () {
             return !this.isFieldValid('postcode');
         },
 
-        isAddressPostcodeCorrectType () {
+        isAddressPostcodeValid () {
             return !(this.$v.addressErrors.postcode.$dirty && !this.$v.addressErrors.postcode.isValidPostcode);
         }
     },

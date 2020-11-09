@@ -155,6 +155,10 @@ export default {
         };
     },
 
+    /*
+    * Provide/Inject allows nested `Address` component to inherit `Checkout`
+    * validator scope, `$v`.
+    */
     provide () {
         const $v = {};
         const copy = {};
@@ -195,8 +199,8 @@ export default {
             * The $dirty boolean changes to true when the user has focused/lost
             * focus on the input field.
             */
-            const mobileNumberInvalid = !this.$v.mobileNumber.required || !this.$v.mobileNumber.numeric || !this.$v.mobileNumber.minLength;
-            return !(this.$v.mobileNumber.$dirty && mobileNumberInvalid);
+            const isMobileNumberValid = !(!this.$v.mobileNumber.required || !this.$v.mobileNumber.numeric || !this.$v.mobileNumber.minLength);
+            return !(this.$v.mobileNumber.$dirty && !isMobileNumberValid);
         },
 
         isDeliveryMethod () {
