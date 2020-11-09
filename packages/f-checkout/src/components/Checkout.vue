@@ -263,8 +263,7 @@ export default {
                 if (error && error.response && error.response.data && error.response.data.errors) {
                     thrownErrors = error.response.data.errors;
                 }
-                // TODO: Babel 'optional-chaining' plugin not working in storybook
-                // const thrownErrors = error?.response?.data?.errors || error;
+
                 this.$emit(EventNames.CheckoutFailure, thrownErrors);
 
                 // TODO: Review this later - even though f-registration does something similar
