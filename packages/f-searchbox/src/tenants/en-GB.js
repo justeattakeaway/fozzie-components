@@ -1,4 +1,38 @@
+import { isPostcodeEmpty, doesPostcodeMatchRegex } from '../utils/helpers';
+
 export default {
     locale: 'en-GB',
-    text: 'I am a VueSearchbox Component (GB)'
+    buttonText: 'Search',
+    fieldLabel: 'Enter your postcode',
+    fieldPlaceholder: 'Enter your postcode',
+    headlineSubtitle: 'Find restaurants delivering right now, near you',
+    headlineTitle: 'Tuck into a takeaway today',
+    errors: {
+        POSTCODE_EMPTY: 'Please enter a postcode',
+        POSTCODE_INVALID: 'Please enter a full, valid postcode',
+        UNKNOWN_ERROR: 'An unknown error occurred'
+    }
+};
+
+const component = {
+    formUrl: '/search/do',
+    locationFormat: location => location.postcode
+};
+
+const service = {
+    validation: {
+        POSTCODE_EMPTY: (value = '') => !isPostcodeEmpty(value),
+        POSTCODE_INVALID: (value = '') => {
+            const parsed = value.trim().replace(/\s/g, '');
+
+            return parsed.length < 8 &&
+                // If postcode is empty, don't raise POSTCODE_INVALID as well
+                (isPostcodeEmpty(parsed) || doesPostcodeMatchRegex(parsed));
+        }
+    }
+};
+
+export {
+    component,
+    service
 };
