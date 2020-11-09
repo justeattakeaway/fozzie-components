@@ -1,9 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
-import { withTests } from '@storybook/addon-jest';
 import mock, { proxy } from 'xhr-mock';
 import ContentCards from '../../src/components/ContentCards.vue';
-import results from '../../src/components/tests/.jest-test-results.json';
 import data from '../mockData/data';
 import cards from '../mockData/cards';
 
@@ -57,7 +55,7 @@ export default {
         groupCards: { control: { type: 'boolean' } },
         locale: { control: { type: 'radio', options: ['da-DK', 'en-GB', 'en-AU'] } },
     },
-    decorators: [withA11y, withTests({ results })]
+    decorators: [withA11y]
 };
 
 export function ContentCardsBrazeGroup (args, { argTypes }) {
@@ -94,10 +92,6 @@ export function ContentCardsBrazeGroup (args, { argTypes }) {
 }
 
 ContentCardsBrazeGroup.storyName = 'Braze: Grouped';
-
-ContentCardsBrazeGroup.parameters = {
-    jest: ['ContentCards.test.js']
-};
 
 ContentCardsBrazeGroup.args = {
     apiKey: '00000000-0000-0000-0000-000000000000',
