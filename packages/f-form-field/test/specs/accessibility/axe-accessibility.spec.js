@@ -1,7 +1,6 @@
 import { getAccessibilityTestResults, processResults } from '../../../../../test/utils/axe-helper';
 
 describe('Accessibility tests', () => {
-    // allure.feature('Form Field Accessibility');
     beforeEach(() => {
         // Arrange
         browser.url('http://localhost:8080');

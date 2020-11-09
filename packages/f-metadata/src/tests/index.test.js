@@ -13,7 +13,6 @@ let sessionTimeoutInSeconds,
 jest.mock('../BrazeDispatcher');
 
 describe('f-metadata initialise', () => {
-    // allure.feature('Metadata');
     beforeEach(() => {
         jest.resetAllMocks();
         jest.isolateModules(() => {

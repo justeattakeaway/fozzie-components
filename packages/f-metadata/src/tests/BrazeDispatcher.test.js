@@ -58,7 +58,6 @@ beforeEach(() => {
 });
 
 describe('instantiation', () => {
-    // allure.feature('Braze Dispatcher');
     describe('GetDispatcher', () => {
         it('should return the same BrazeDispatcher instance when called twice', () => {
             // Arrange
