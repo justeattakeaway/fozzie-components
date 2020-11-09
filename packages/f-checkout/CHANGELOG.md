@@ -6,11 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.7.0
 ------------------------------
-*November 6, 2020*
+*November 9, 2020*
 
 ### Added
 - Inline error handling to `Checkout` and `Address` components.
 - Server side error handling.
+- Validations from `f-services`.
 
 
 v0.6.0
@@ -19,6 +20,7 @@ v0.6.0
 
 ### Added
 - New component tests
+
 
 v0.5.0
 ------------------------------
@@ -35,6 +37,7 @@ v0.4.0
 
 ### Added
 - Address component to be displayed if `checkoutMethod` is set to 'Delivery'.
+- Stylelint added to lint styling on build.
 
 ### Removed
 - Address related form fields from `f-checkout`.
@@ -42,14 +45,6 @@ v0.4.0
 ### Changed
 - Checkout Component to replicate Collection and Delivery in ConsumerWeb.
 - Selector to uses `method` prop to change label text.
-
-
-Latest (to be added to next release)
-------------------------------
-*October 23, 2020*
-
-### Added
-- Stylelint added to lint styling on build.
 
 
 v0.3.0

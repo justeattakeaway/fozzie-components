@@ -71,25 +71,28 @@
 </template>
 
 <script>
-import { globalisationServices } from '@justeat/f-services';
 import { validationMixin } from 'vuelidate';
 import {
     required,
     numeric,
     minLength
 } from 'vuelidate/lib/validators';
+
+import { globalisationServices, validations } from '@justeat/f-services';
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
-import ErrorMessage from '@justeat/f-error-message';
-import '@justeat/f-error-message/dist/f-error-message.css';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
+import ErrorMessage from '@justeat/f-error-message';
+import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY } from '../constants';
+
 import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
+
+import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY } from '../constants';
 import tenantConfigs from '../tenants';
 import CheckoutServiceApi from '../services/CheckoutServiceApi';
 import EventNames from '../event-names';
@@ -100,8 +103,8 @@ export default {
     components: {
         AddressBlock,
         Alert,
-        ErrorMessage,
         Card,
+        ErrorMessage,
         FormField,
         FormSelector,
         UserNote
@@ -209,35 +212,9 @@ export default {
     },
 
     methods: {
-        getFormValidationState ($v) {
-            const fields = $v.$params;
-            const invalidFields = [];
-            const validFields = [];
-
-            Object.keys(fields).forEach(key => {
-                if ($v[key].$invalid) {
-                    invalidFields.push(key);
-                } else {
-                    validFields.push(key);
-                }
-            });
-
-            return {
-                validFields,
-                invalidFields
-            };
-        },
-
-        // TODO: Extract to `f-services`
-        isValidPostcode () {
-            // regex: https://stackoverflow.com/questions/164979/uk-postcode-regex-comprehensive#164994
-            const postcodeRegex = /^([Gg][Ii][Rr]\s?0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/;
-            return postcodeRegex.test(this.address.postcode);
-        },
-
         async onFormSubmit () {
             if (!this.isFormValid()) {
-                const validationState = this.getFormValidationState(this.$v);
+                const validationState = validations.getFormValidationState(this.$v);
 
                 this.$emit(EventNames.CheckoutFailure, validationState);
 
@@ -260,6 +237,8 @@ export default {
                 this.$emit(EventNames.CheckoutSuccess);
             } catch (error) {
                 let thrownErrors = error;
+
+                // Ideally we would use optional chaining but it doesn't currently work with Storybook
                 if (error && error.response && error.response.data && error.response.data.errors) {
                     thrownErrors = error.response.data.errors;
                 }
@@ -302,7 +281,7 @@ export default {
                 },
                 postcode: {
                     required,
-                    isValidPostcode: this.isValidPostcode
+                    isValidPostcode: validations.isValidPostcode
                 }
             };
         }
