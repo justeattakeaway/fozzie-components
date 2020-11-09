@@ -1,10 +1,8 @@
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
-import { withTests } from '@storybook/addon-jest';
 import { defaultEnabledCardTypes } from '@justeat/f-metadata/src/services/contentCard.service';
 import mock, { proxy } from 'xhr-mock';
 import ContentCards from '../../src/components/ContentCards.vue';
-import results from '../../src/components/tests/.jest-test-results.json';
 // import { makeServer } from '../mocks/mirage-server';
 import cards, { labelledMultiSelectAllowedValues } from '../mockData/cards';
 import data from '../mockData/data';
@@ -98,10 +96,6 @@ export function ContentCardsBrazeGroup (args, { argTypes }) {
 }
 
 ContentCardsBrazeGroup.storyName = 'Braze: Grouped';
-
-ContentCardsBrazeGroup.parameters = {
-    jest: ['ContentCards.test.js']
-};
 
 ContentCardsBrazeGroup.args = {
     apiKey: '00000000-0000-0000-0000-000000000000',
