@@ -1733,16 +1733,10 @@
     lodash-es "4.17.15"
     window-or-global "1.0.1"
 
-"@justeat/f-services@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.3.0.tgz#0165f7fe3f69e0b6e6388bce7194e080bbfc9445"
-  integrity sha512-OTFFi7gBBzDphpUse2bcBo36nk+F+J4pEo/yivxdTrUEVYE6zcSht+ZRD+t4T7cncRDIue7AaCADdKpGIOhD2Q==
-  dependencies:
-    lodash-es "4.17.15"
-    window-or-global "1.0.1"
-
-"@justeat/f-services@file:packages/f-checkout/.yalc/@justeat/f-services":
+"@justeat/f-services@1.4.0":
   version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.4.0.tgz#e783b8455904b5f3879e3a90d744913bf01bd0a3"
+  integrity sha512-EjeUhz++c0QlToz1SvBOtmFSsWO6qRccJoYXYWcws3eNNZKvQbckqFVZ6cvjxaHZ66kcue53kOiazCGN+rpbuw==
   dependencies:
     lodash-es "4.17.15"
     window-or-global "1.0.1"
