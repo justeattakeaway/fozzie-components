@@ -275,7 +275,7 @@ export default {
         align-items: center;
         min-height: 164px; // min-height set to the height of an card with a one-line title
         background-color: $white;
-        padding: spacing(x2) spacing(x2);
+        padding: spacing(x2);
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
         border-radius: 0 0 $border-radius $border-radius;
     }

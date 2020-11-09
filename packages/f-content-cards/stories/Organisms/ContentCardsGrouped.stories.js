@@ -4,8 +4,6 @@ import { withTests } from '@storybook/addon-jest';
 import mock, { proxy } from 'xhr-mock';
 import ContentCards from '../../src/components/ContentCards.vue';
 import results from '../../src/components/tests/.jest-test-results.json';
-// import { makeServer } from '../mocks/mirage-server';
-// import { labelledMultiSelectAllowedValues } from '../mockData/cards';
 import data from '../mockData/data';
 import cards from '../mockData/cards';
 
@@ -58,7 +56,6 @@ export default {
         title: { control: { type: 'text' } },
         groupCards: { control: { type: 'boolean' } },
         locale: { control: { type: 'radio', options: ['da-DK', 'en-GB', 'en-AU'] } },
-        // enabledCardTypes: { control: { type: 'check', options: labelledMultiSelectAllowedValues } }
     },
     decorators: [withA11y, withTests({ results })]
 };
@@ -78,8 +75,7 @@ export function ContentCardsBrazeGroup (args, { argTypes }) {
          */
         beforeCreate () {
             resetBrazeData();
-            // make the mirage server
-            // makeServer();
+
             mock.teardown();
             mock.setup();
             mock.post(/\/api\/v3\/content_cards\/sync\/?/, {
