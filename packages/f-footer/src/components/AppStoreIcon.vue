@@ -13,7 +13,8 @@ import {
     AppIosIcon as IosIconEnGb,
     AppIosEsIcon as IosIconEsEs,
     AppIosItIcon as IosIconItIt,
-    AppIosNoIcon as IosIconNbNo
+    AppIosNoIcon as IosIconNbNo,
+    AppHuaweiUkIcon as HuaweiIconEnGb
 } from '@justeat/f-vue-icons';
 import iconPropsMixin from '../mixins/iconProps.mixin';
 
@@ -34,7 +35,8 @@ export default {
         IosIconEnNz: IosIconEnGb,
         IosIconEsEs,
         IosIconItIt,
-        IosIconNbNo
+        IosIconNbNo,
+        HuaweiIconEnGb
     },
 
     mixins: [

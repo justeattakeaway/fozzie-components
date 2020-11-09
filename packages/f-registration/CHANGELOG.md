@@ -3,9 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
-Latest (to be added to next release)
+v0.39.1
 ------------------------------
+*November 5, 2020*
+
+### Added
+- Added f-error-message into dependencies for f-registration
+
+v0.39.0
+------------------------------
+*November 3, 2020*
+
+### Changed
+- Added f-error-message for inline registration page errors
+
 *October 28, 2020*
 
 ### Added

@@ -12,7 +12,10 @@
             {{ title }}
         </h2>
 
-        <ul class="c-footer-list c-footer-list--inline">
+        <ul
+            :class="['c-footer-list c-footer-list--inline', {
+                'c-footer-list--noBottomMargin': isApps
+            }]">
             <li
                 v-for="(icon, i) in icons"
                 :key="i + '_Icon'"
@@ -127,10 +130,10 @@ export default {
 }
 
 .c-iconList--apps {
-    flex-basis: 42%;
 
     .c-iconList-listItem {
         margin-right: spacing(x2);
+        margin-bottom: spacing(x2);
     }
 
     svg {

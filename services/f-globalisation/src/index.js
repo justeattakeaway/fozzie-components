@@ -1,18 +1,18 @@
 /**
- * @overview Fozzie Searchbox Component JS Wrapper
+ * @overview Fozzie Globalisation Component JS Wrapper
  *
- * @module f-searchbox
+ * @module f-globalisation
  */
 
 
 // Import vue component
-import VueSearchbox from '@/components/Base.vue';
+import VueGlobalisation from '@/mixins/globalisation.mixin.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('VueSearchbox', VueSearchbox);
+    Vue.mixin('VueGlobalisation', VueGlobalisation);
 }
 
 // Create module definition for Vue.use()
@@ -32,4 +32,4 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export default VueSearchbox;
+export default VueGlobalisation;
