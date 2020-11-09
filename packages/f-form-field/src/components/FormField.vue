@@ -2,7 +2,7 @@
     <div
         :data-theme-formfield="theme"
         :class="$style['c-formField']"
-        data-test-id="form-field-component">
+        :data-test-id="TEST_IDS.component.id" >
         <div
             :class="$style['c-formField-inputWrapper']">
             <form-label
@@ -10,7 +10,7 @@
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
                 :is-inline="isInline"
-                data-js-test="defaultLabel">
+                :data-test-id="TEST_IDS.labels.top">
                 {{ labelText }}
             </form-label>
             <input
@@ -19,8 +19,7 @@
                 v-bind="$attrs"
                 :type="normalisedInputType"
                 placeholder=" "
-                :data-js-test="testId"
-                data-test-id="testInput"
+                :data-test-id="TEST_IDS.inputs.firstName"
                 :class="[$style['o-form-field'], $style['c-formField-input']]"
                 @input="updateValue"
                 v-on="listeners"
@@ -30,8 +29,7 @@
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
                 :is-inline="isInline"
-                data-js-test="inlineLabel"
-                data-test-id="testLabel">
+                :data-test-id="TEST_IDS.labels.bottom">
                 {{ labelText }}
             </form-label>
         </div>
@@ -50,6 +48,8 @@ import {
     VALID_LABEL_STYLES,
     MOBILE_WIDTH
 } from '../constants';
+import { TEST_IDS } from 
+'../../test-utils/component-objects/data-test-ids'
 
 export default {
     name: 'FormField',
@@ -88,18 +88,16 @@ export default {
             default: ''
         },
 
-        dataTestId: {
-            type: String,
-            default: ''
+        TEST_IDS: {
+            type: Object,
+            default: TEST_IDS
         }
     },
-
     data () {
         return {
-            windowWidth: null
+            windowWidth: null, 
         };
     },
-
     computed: {
         normalisedInputType () {
             if (VALID_INPUT_TYPES.includes(this.inputType)) {
