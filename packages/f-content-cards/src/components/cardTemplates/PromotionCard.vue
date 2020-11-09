@@ -71,7 +71,7 @@ export default {
         text-decoration: none;
         @include font-size(body-l);
         color: $color-secondary;
-        display: block; // TODO replace
+        display: block;
     }
 
 </style>
