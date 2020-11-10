@@ -26,7 +26,6 @@ jest.mock('@justeat/f-services', () => ({
 }));
 
 describe('Navigation', () => {
-    // eslint-disable-next-line no-undef
     allure.feature('Navigation');
     beforeEach(setDesktopViewport);
 

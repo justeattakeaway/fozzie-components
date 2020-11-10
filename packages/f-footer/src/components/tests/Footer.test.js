@@ -2,7 +2,6 @@ import { shallowMount } from '@vue/test-utils';
 import Footer from '../Footer.vue';
 
 describe('Footer', () => {
-    // eslint-disable-next-line no-undef
     allure.feature('Footer');
     it('should be defined', () => {
         const wrapper = shallowMount(Footer);

@@ -2,7 +2,6 @@ import { shallowMount } from '@vue/test-utils';
 import Selector from '../Selector.vue';
 
 describe('Selector', () => {
-    // eslint-disable-next-line no-undef
     allure.feature('Checkout-Selector');
     const propsData = {};
 

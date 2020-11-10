@@ -12,7 +12,6 @@ jest.mock('../../tenants', () => ({
 }));
 
 describe('Card', () => {
-    // eslint-disable-next-line no-undef
     allure.feature('Card');
     it('should be defined', () => {
         // Arrange

@@ -2,7 +2,6 @@ import { shallowMount } from '@vue/test-utils';
 import Header from '../Header.vue';
 
 describe('Header', () => {
-    // eslint-disable-next-line no-undef
     allure.feature('Header');
     it('should be defined', () => {
         const propsData = {

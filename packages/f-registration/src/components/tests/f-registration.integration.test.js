@@ -17,7 +17,6 @@ const propsData = {
 let wrapper;
 
 describe('Registration API service', () => {
-    // eslint-disable-next-line no-undef
     allure.feature('Registration API');
     beforeEach(() => {
         const div = document.createElement('div');

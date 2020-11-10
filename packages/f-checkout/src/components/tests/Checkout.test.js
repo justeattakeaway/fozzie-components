@@ -3,7 +3,6 @@ import { VALID_CHECKOUT_METHOD } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 
 describe('Checkout', () => {
-    // eslint-disable-next-line no-undef
     allure.feature('Checkout');
     it('should be defined', () => {
         const propsData = {};
