@@ -1,22 +1,35 @@
-import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_COLLECTION } from '../src/constants';
+import { select } from '@storybook/addon-knobs';
+import { withA11y } from '@storybook/addon-a11y';
+
+import {
+    VALID_CHECKOUT_METHOD,
+    CHECKOUT_METHOD_DELIVERY
+} from '../src/constants';
+
+import {
+    VALID_LOCALES,
+    ENGLISH_LOCALE
+} from '../../storybook/constants/globalisation';
+
 import VueCheckout from '../src/components/Checkout.vue';
 
 export default {
     title: 'Components/Organisms',
-    argTypes: {
-        checkoutMethod: { control: { type: 'select', options: VALID_CHECKOUT_METHOD } }
-    }
+    decorators: [withA11y]
 };
 
-export const Checkout = args => ({
+export const CheckoutComponent = () => ({
     components: { VueCheckout },
-    props: Object.keys(args),
+    props: {
+        locale: {
+            default: select('Locale', VALID_LOCALES, ENGLISH_LOCALE)
+        },
+        checkoutMethod: {
+            default: select('Checkout Method', VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY)
+        }
+    },
     template:
-        '<vue-checkout :checkoutMethod="checkoutMethod" />'
+        '<vue-checkout :checkoutMethod="checkoutMethod" :locale="locale" />'
 });
 
-Checkout.storyName = 'f-checkout';
-
-Checkout.args = {
-    checkoutMethod: CHECKOUT_METHOD_COLLECTION
-};
+CheckoutComponent.storyName = 'f-checkout';
