@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.13.0
 ------------------------------
-*November 9, 2020*
+*November 10, 2020*
 
 ### Added
 -  Added Allure reporting using WebdriverIO and Jest to Fozzie Components.
