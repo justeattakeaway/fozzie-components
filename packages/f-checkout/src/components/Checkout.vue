@@ -1,6 +1,6 @@
 <template>
     <div
-        :data-theme="theme"
+        data-theme="jet"
         :class="$style['c-checkout']"
         data-test-id='checkout-component'>
         <card
@@ -93,7 +93,6 @@ export default {
     data () {
         return {
             tenantConfigs,
-            theme: 'jet',
             firstName: 'firstName',
             mobileNumber: null,
             address: {
