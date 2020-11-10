@@ -26,6 +26,12 @@ module.exports = class extends Generator {
                 name: 'needsTestingApiMocks',
                 type: 'confirm',
                 default: false
+            },
+            {
+                message: 'Does the component require localisation?',
+                name: 'needsLocalisation',
+                type: 'confirm',
+                default: true
             }
         ]);
     }
@@ -50,7 +56,7 @@ module.exports = class extends Generator {
         }));
         let ignoreTestPattern = this.answers.needsComponentTests ? [] : ["**/*/test/specs/component", '**/*/test-utils/component-objects']
         const ignoreApiMockPattern = this.answers.needsTestingApiMocks ? [] : ["**/*/src/services"];
-    
+
         ignoreTestPattern = ignoreTestPattern.concat(ignoreApiMockPattern);
 
         const date = new Date();

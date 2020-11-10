@@ -2,8 +2,14 @@
 // import {
 //     withKnobs, select, boolean
 // } from '@storybook/addon-knobs';
+import { select, boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import <%= name.component %> from '../src/components/<%= name.filename %>.vue';
+
+import {
+    VALID_LOCALES,
+    ENGLISH_LOCALE
+} from '../../storybook/constants/globalisation';
 
 export default {
     title: 'Components',
@@ -13,6 +19,9 @@ export default {
 export const <%= name.component %>Component = () => ({
     components: { <%= name.component %> },
     props: {
+        locale: {
+            default: select('Locale', VALID_LOCALES, ENGLISH_LOCALE)
+        },
         buttonType: {
             default: select('Button Type', ['primary', 'primaryAlt', 'secondary', 'tertiary', 'link'])
         },
@@ -20,7 +29,7 @@ export const <%= name.component %>Component = () => ({
             default: boolean('fullWidth', false)
         }
     },
-    template: `<<%= name.template %> />`
+    template: `<<%= name.template %> :locale="locale" />`
 });
 
 <%= name.component %>Component.storyName = 'f-<%= name.default %>';
