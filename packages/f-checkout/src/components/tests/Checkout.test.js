@@ -1,27 +1,26 @@
-import { shallowMount, createLocalVue, config } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { VALID_CHECKOUT_METHOD } from '../../constants';
 import VueCheckout from '../Checkout.vue';
+import VueI18n from 'vue-i18n';
 import tenantConfigs from '../../tenants';
 
 const localVue = createLocalVue();
 
+localVue.use(VueI18n);
+
 const i18n = {
     locale: 'en-GB',
-    messages: tenantConfigs['en-GB'],
-    setLocaleMessage: jest.fn()
+    messages: tenantConfigs['en-GB']
 };
-
-// Mock the vue-i18n context objects
-config.mocks.$i18n = i18n;
-config.mocks.$t = key => key;
 
 describe('Checkout', () => {
     it('should be defined', () => {
         const propsData = {};
-
-        const wrapper = shallowMount(VueCheckout, {
+       
+        const wrapper = shallowMount(VueCheckout, { 
+            i18n,
             localVue,
-            propsData
+            propsData                    
         });
 
         expect(wrapper.exists()).toBe(true);
@@ -36,9 +35,10 @@ describe('Checkout', () => {
                 };
 
                 // Act
-                const wrapper = shallowMount(VueCheckout, {
+                const wrapper = shallowMount(VueCheckout, { 
+                    i18n,
                     localVue,
-                    propsData
+                    propsData                    
                 });
 
                 const selectorComponent = wrapper.find('[data-test-id="selector"]');
@@ -54,9 +54,10 @@ describe('Checkout', () => {
                 };
 
                 // Act
-                const wrapper = shallowMount(VueCheckout, {
+                const wrapper = shallowMount(VueCheckout, { 
+                    i18n,
                     localVue,
-                    propsData
+                    propsData                    
                 });
 
                 const addressBlock = wrapper.find('[data-test-id="address-block"]');
@@ -72,9 +73,10 @@ describe('Checkout', () => {
                 };
 
                 // Act
-                const wrapper = shallowMount(VueCheckout, {
+                const wrapper = shallowMount(VueCheckout, { 
+                    i18n,
                     localVue,
-                    propsData
+                    propsData                    
                 });
 
                 const addressBlock = wrapper.find('[data-test-id="address-block"]');
@@ -92,9 +94,10 @@ describe('Checkout', () => {
         describe('name ::', () => {
             it('should capitalize `firstName` data', async () => {
                 // Arrange
-                const wrapper = shallowMount(VueCheckout, {
+                const wrapper = shallowMount(VueCheckout, { 
+                    i18n,
                     localVue,
-                    propsData
+                    propsData                    
                 });
 
                 const name = wrapper.find("[data-test-id='checkout-card-component']");
@@ -111,9 +114,10 @@ describe('Checkout', () => {
         describe('title ::', () => {
             it('should add `name` to title text', async () => {
                 // Arrange
-                const wrapper = shallowMount(VueCheckout, {
+                const wrapper = shallowMount(VueCheckout, { 
+                    i18n,
                     localVue,
-                    propsData
+                    propsData                    
                 });
 
                 const name = wrapper.find("[data-test-id='checkout-card-component']");
