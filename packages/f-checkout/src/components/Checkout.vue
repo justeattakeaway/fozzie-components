@@ -38,7 +38,7 @@
                 </form-field>
 
                 <address-block
-                    v-if="isDeliveryMethod"
+                    v-if="isCheckoutMethodDelivery"
                     v-model="address"
                     :address="address"
                     data-test-id="address-block" />
@@ -207,51 +207,57 @@ export default {
             return !this.$v.mobileNumber.$dirty || isMobileNumberValid;
         },
 
-        isDeliveryMethod () {
+        isCheckoutMethodDelivery () {
             return this.checkoutMethod === CHECKOUT_METHOD_DELIVERY;
         }
     },
 
     methods: {
+        async callCheckoutServiceApi () {
+            const checkoutData = {
+                mobileNumber: this.mobileNumber
+            };
+
+            if (this.isCheckoutMethodDelivery) {
+                checkoutData.address = this.address;
+            }
+
+            await CheckoutServiceApi.submitCheckout(this.checkoutUrl, this.tenant, checkoutData, this.checkoutTimeout);
+
+            this.$emit(EventNames.CheckoutSuccess);
+        },
+
+        handleErrorState (error) {
+            let thrownErrors = error;
+
+            // Ideally we would use optional chaining but it doesn't currently work with Storybook
+            if (error && error.response && error.response.data && error.response.data.errors) {
+                thrownErrors = error.response.data.errors;
+            }
+
+            this.$emit(EventNames.CheckoutFailure, thrownErrors);
+
+            // TODO: Review this later - even though f-registration does something similar
+            if (Array.isArray(thrownErrors)) {
+                this.genericErrorMessage = thrownErrors[0].description || this.copy.errorMessages.genericServerError;
+            } else {
+                this.genericErrorMessage = error;
+            }
+        },
+
         async onFormSubmit () {
             if (!this.isFormValid()) {
                 const validationState = validations.getFormValidationState(this.$v);
-
                 this.$emit(EventNames.CheckoutFailure, validationState);
-
                 return;
             }
 
             this.shouldDisableCheckoutButton = true;
 
             try {
-                const checkoutData = {
-                    mobileNumber: this.mobileNumber
-                };
-
-                if (this.isDeliveryMethod) {
-                    checkoutData.address = this.address;
-                }
-
-                await CheckoutServiceApi.submitCheckout(this.checkoutUrl, this.tenant, checkoutData, this.checkoutTimeout);
-
-                this.$emit(EventNames.CheckoutSuccess);
+                await this.callCheckoutServiceApi();
             } catch (error) {
-                let thrownErrors = error;
-
-                // Ideally we would use optional chaining but it doesn't currently work with Storybook
-                if (error && error.response && error.response.data && error.response.data.errors) {
-                    thrownErrors = error.response.data.errors;
-                }
-
-                this.$emit(EventNames.CheckoutFailure, thrownErrors);
-
-                // TODO: Review this later - even though f-registration does something similar
-                if (Array.isArray(thrownErrors)) {
-                    this.genericErrorMessage = thrownErrors[0].description || this.copy.errorMessages.genericServerError;
-                } else {
-                    this.genericErrorMessage = error;
-                }
+                this.handleErrorState(error);
             } finally {
                 this.shouldDisableCheckoutButton = false;
             }
@@ -272,7 +278,7 @@ export default {
             }
         };
 
-        if (this.isDeliveryMethod) {
+        if (this.isCheckoutMethodDelivery) {
             deliveryDetails.address = {
                 line1: {
                     required
@@ -327,6 +333,7 @@ $checkout-width                           : 462px;
         @include font-size(heading-s);
         margin-bottom: spacing(x2);
     }
+
     .c-checkout-allergyButton {
       padding: 0 spacing(x3);
     }
