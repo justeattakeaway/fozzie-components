@@ -26,7 +26,7 @@
     npm install
     ```
 
-2.  Run the generator
+2.  Run the generator in '/packages'
 
     ```bash
     yo @justeat/component

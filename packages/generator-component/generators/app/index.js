@@ -26,12 +26,6 @@ module.exports = class extends Generator {
                 name: 'needsTestingApiMocks',
                 type: 'confirm',
                 default: false
-            },
-            {
-                message: 'Does the component require localisation?',
-                name: 'needsLocalisation',
-                type: 'confirm',
-                default: true
             }
         ]);
     }
