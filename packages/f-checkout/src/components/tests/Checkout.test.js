@@ -132,7 +132,7 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)).toBe(undefined);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
             });
 
             it('should show error message and emit failure event when the mobile number field is not populated', async () => {
@@ -185,9 +185,13 @@ describe('Checkout', () => {
                 await wrapper.vm.onFormSubmit();
 
                 // Assert
-                expect(wrapper.vm.address.required).toBe(undefined);
                 expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)).toBe(undefined);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
+            });
+
+            it('should not create validations for address', () => {
+                // Assert
+                expect(wrapper.vm.$v.address).toBeUndefined();
             });
         });
 
@@ -206,10 +210,6 @@ describe('Checkout', () => {
                 wrapper = mount(VueCheckout, { propsData });
             });
 
-            afterEach(() => {
-                wrapper.destroy();
-            });
-
             it('should emit success event when all fields are populated correctly', async () => {
                 // Arrange
                 wrapper.find('[data-test-id="input-mobile-number"]').setValue(mobileNumber);
@@ -222,7 +222,7 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)).toBe(undefined);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
             });
 
             it('should emit failure event and display error message when address line1 input field is empty', async () => {
@@ -285,6 +285,13 @@ describe('Checkout', () => {
                 expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address');
+            });
+
+            it('should create validations for address', () => {
+                // Assert
+                expect(wrapper.vm.$v.address.line1).toBeDefined();
+                expect(wrapper.vm.$v.address.city).toBeDefined();
+                expect(wrapper.vm.$v.address.postcode).toBeDefined();
             });
         });
     });

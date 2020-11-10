@@ -106,7 +106,7 @@ export default {
         },
 
         isAddressPostcodeValid () {
-            return !(this.$v.addressErrors.postcode.$dirty && !this.$v.addressErrors.postcode.isValidPostcode);
+            return !this.$v.addressErrors.postcode.$dirty || this.$v.addressErrors.postcode.isValidPostcode;
         }
     },
 

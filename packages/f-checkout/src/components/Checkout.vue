@@ -203,7 +203,7 @@ export default {
             * The $dirty boolean changes to true when the user has focused/lost
             * focus on the input field.
             */
-            const isMobileNumberValid = !(!this.$v.mobileNumber.required || !this.$v.mobileNumber.numeric || !this.$v.mobileNumber.minLength);
+            const isMobileNumberValid = this.$v.mobileNumber.required && this.$v.mobileNumber.numeric && this.$v.mobileNumber.minLength;
             return !this.$v.mobileNumber.$dirty || isMobileNumberValid;
         },
 
