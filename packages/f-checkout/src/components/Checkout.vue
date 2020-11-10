@@ -328,7 +328,7 @@ $checkout-width                           : 462px;
         margin-bottom: spacing(x2);
     }
     .c-checkout-allergyButton {
-      padding: 0 spacing(x3)
+      padding: 0 spacing(x3);
     }
 
     .c-checkout-submitButton {
