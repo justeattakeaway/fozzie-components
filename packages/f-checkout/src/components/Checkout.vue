@@ -50,13 +50,14 @@
                 <user-note data-test-id="user-note" />
 
                 <button-component
+                    :class="$style['c-checkout-allergyButton']"
                     button-type="link"
                     data-test-id="allergy-button">
                     {{ copy.allergyText }}
                 </button-component>
 
                 <button-component
-                    :class="$style['o-btn--checkout']"
+                    :class="$style['c-checkout-submitButton']"
                     button-type="primary"
                     button-size="large"
                     data-test-id="confirm-payment-submit-button">
@@ -326,8 +327,11 @@ $checkout-width                           : 462px;
         @include font-size(heading-s);
         margin-bottom: spacing(x2);
     }
+    .c-checkout-allergyButton {
+      padding: 0 spacing(x3)
+    }
 
-    .o-btn--checkout {
+    .c-checkout-submitButton {
         display: flex;
         margin: spacing(x2) auto;
 
