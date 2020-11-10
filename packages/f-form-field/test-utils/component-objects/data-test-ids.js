@@ -1,58 +1,23 @@
-
-// Schema
-// "section" used for breaking down larger components.
-//  {grouping}-{unique_id} <-- string pattern 
-// {
-//     "section" = { // ? optional
-//         "grouping": { // mandatory
-//             "id": "" // mandatory
-//         }
-//     }
-// }
-
 export const TEST_IDS = {
     component: {
         id: "component-form-field"
     },
-    // default: {
-    //     id: ""
-    // }, //Is this needed for production?
     labels: {
         top: "label-top", 
-        bottom: "label-bottom"
+        inline: "label-inline"
     },
     inputs: {
         firstName: "input-first-name"
     }
 }
 
-// export const test_ids = {
-//     "inputs": {
-//         "input_first_name": "input-first-name",
-//     }, 
-//     "errors": {
-//         "error_first_name": "error-first-name"
-//     },
-//     "controls": {
-//         "submit-button": "controls-submit-button"
-//     }
-// }
-/* <button data-test-id="{ test_ids.top_bar.button.button_2 }"></button>
-// Unit
-findComponents(button);
-findAll("[data-test-id^='top-bar-submit']")
-find("[data-test-id='error-first-name']");
-find("[data-test-id^='error-']");
-fozFind('error-', '^=');
-fozFindAll('error-', '^=');
-// Component Selectors
-$('[data-test-id="error-first-name"]');
-$('[data-test-id^="error-"]');
-foz$('error-', '^=');
-data-test-id*=""
-data-test-id^=""
-data-test-id=""
-// shorthand
-function $(id, operator = "=") {
-    return "[data-test-id" . operator . id . "]";
-} */
+//people could copy and paste so we can get symmetry throughout our tests 
+           //unit tests- f-form-field
+            //     //this whole concept is about not showing data-test-ids in production, but they always do anyway
+            //     //because component tests need them. If we want them removed, we'd need the tests to only run on a test environment 
+            //     // and remove the ids when run in production. 
+            // });
+            
+            // });  -- this is about checking whether the data-test-id shows when the variable is blank. 
+            //If we are sharing data then it's likely the data-test-id will never actually be blank. If we do not want
+            //the data test ids to be visibile in production, we may need to find another way.

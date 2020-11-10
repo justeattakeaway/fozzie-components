@@ -2,7 +2,7 @@
     <div
         :data-theme-formfield="theme"
         :class="$style['c-formField']"
-        :data-test-id="TEST_IDS.component.id" >
+        :data-test-id="dataTestId.component.id" >
         <div
             :class="$style['c-formField-inputWrapper']">
             <form-label
@@ -10,7 +10,7 @@
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
                 :is-inline="isInline"
-                :data-test-id="TEST_IDS.labels.top">
+                :data-test-id="dataTestId.labels.top">
                 {{ labelText }}
             </form-label>
             <input
@@ -19,7 +19,7 @@
                 v-bind="$attrs"
                 :type="normalisedInputType"
                 placeholder=" "
-                :data-test-id="TEST_IDS.inputs.firstName"
+                :data-test-id="dataTestId.inputs.firstName"
                 :class="[$style['o-form-field'], $style['c-formField-input']]"
                 @input="updateValue"
                 v-on="listeners"
@@ -29,7 +29,7 @@
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
                 :is-inline="isInline"
-                :data-test-id="TEST_IDS.labels.bottom">
+                :data-test-id="dataTestId.labels.inline">
                 {{ labelText }}
             </form-label>
         </div>
@@ -88,7 +88,7 @@ export default {
             default: ''
         },
 
-        TEST_IDS: {
+        dataTestId: {
             type: Object,
             default: TEST_IDS
         }
