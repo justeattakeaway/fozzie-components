@@ -167,7 +167,7 @@ export default {
         const $v = {};
         const copy = {};
 
-        Object.defineProperty($v, 'addressErrors', {
+        Object.defineProperty($v, 'addressValidations', {
             enumerable: true,
             get: () => this.$v.address
         });

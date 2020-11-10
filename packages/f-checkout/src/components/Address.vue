@@ -94,25 +94,25 @@ export default {
         */
 
         isAddressLine1Empty () {
-            return this.isFieldValid('line1');
+            return this.isFieldEmpty('line1');
         },
 
         isAddressCityEmpty () {
-            return this.isFieldValid('city');
+            return this.isFieldEmpty('city');
         },
 
         isAddressPostcodeEmpty () {
-            return this.isFieldValid('postcode');
+            return this.isFieldEmpty('postcode');
         },
 
         isAddressPostcodeValid () {
-            return !this.$v.addressErrors.postcode.$dirty || this.$v.addressErrors.postcode.isValidPostcode;
+            return !this.$v.addressValidations.postcode.$dirty || this.$v.addressValidations.postcode.isValidPostcode;
         }
     },
 
     methods: {
-        isFieldValid (field) {
-            return this.$v.addressErrors[field].$dirty && !this.$v.addressErrors[field].required;
+        isFieldEmpty (field) {
+            return this.$v.addressValidations[field].$dirty && !this.$v.addressValidations[field].required;
         }
     }
 };
