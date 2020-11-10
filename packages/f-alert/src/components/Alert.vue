@@ -3,26 +3,26 @@
         v-if="!isDismissed"
         :class="[$style['c-alert'],
                  $style[`c-alert--${type}`]]"
-        data-test-id="alert-component"
-        role="alert">
+        role="alert"
+        :data-test-id="test.IDS.component.id" >
         <div
             :class="$style['c-alert-headingContainer']">
             <component
                 :is="icon"
                 :class="[$style['c-alert-icon'],
                          $style[`c-alert-icon--${type}`]]"
-                data-test-id="alert-icon" />
+                :data-test-id="test.IDS.icons.alert" />
             <!-- TODO: make this dynamic. Find related ticket ;) -->
             <h2
                 :class="$style['c-alert-heading']"
-                data-test-id="alert-heading">
+                :data-test-id="test.IDS.heading.heading" >
                 {{ heading }}
             </h2>
             <button
                 v-if="isDismissable"
                 type="button"
                 :class="[$style['c-alert-dismiss'], 'o-btn o-btn--icon']"
-                data-test-id="alert-dismiss"
+                :data-test-id="test.IDS.buttons.cancel"
                 @click="dismiss">
                 <cross-icon
                     :class="[$style['c-alert-dismiss-icon']]"
@@ -49,6 +49,8 @@ import {
 } from '@justeat/f-vue-icons';
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
+import { IDS } from 
+'../../test-utils/component-objects/data-test-ids'
 
 export default {
     name: 'VueAlert',
@@ -76,6 +78,12 @@ export default {
         isDismissable: {
             type: Boolean,
             default: false
+        },
+        test: {
+            type: Object,
+            default: () => ({
+            IDS
+        })
         }
     },
     data () {
@@ -86,7 +94,7 @@ export default {
         return {
             isDismissed: false,
             copy: { ...localeConfig },
-            theme
+            theme,
         };
     },
     computed: {

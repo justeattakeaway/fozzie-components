@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import VueAlert from '../Alert.vue';
+import { IDS } from '../../../test-utils/component-objects/data-test-ids'
 
 const defaultPropsData = { heading: 'Alert title', type: 'info' };
 
@@ -46,7 +47,7 @@ describe('Alert', () => {
             const wrapper = shallowMount(VueAlert, { propsData: defaultPropsData });
 
             // Act
-            const heading = wrapper.find('[data-test-id="alert-heading"]');
+            const heading = wrapper.find(`[data-test-id="${IDS.heading.heading}"]`);
 
             // Assert
             expect(heading.text()).toBe(defaultPropsData.heading);
