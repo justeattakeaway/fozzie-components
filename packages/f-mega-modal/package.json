@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-mega-modal",
   "description": "Fozzie Mega Modal – A Vue.js modal component",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "dist/f-mega-modal.common.js",
   "files": [
     "dist"
@@ -30,7 +30,7 @@
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
-    "test": "vue-cli-service test:unit --json --outputFile=./src/components/tests/.jest-test-results.json"
+    "test": "vue-cli-service test:unit"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"

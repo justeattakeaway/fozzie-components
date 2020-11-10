@@ -10,6 +10,14 @@ Latest (changes to be rolled into next release)
 ### Added
 - Webdriver and Jest Allure test reporting.
 
+v4.4.2
+------------------------------
+*November 10, 2020*
+
+### Changed
+- Modern slavery statement link
+
+
 v4.4.1
 ------------------------------
 *November 3, 2020*

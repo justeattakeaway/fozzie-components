@@ -19,6 +19,9 @@ Latest (changes to be rolled into next release)
 ### Changed
 - 'jet' theme instead of 'je'
 
+### Removed
+- Bracket in Storybook file
+
 
 v0.2.0
 ------------------------------

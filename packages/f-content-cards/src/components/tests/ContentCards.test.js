@@ -799,9 +799,10 @@ describe('ContentCards', () => {
             instance.vm.metadataContentCardsGrouped(cardsGrouped);
             await instance.vm.$nextTick();
 
+            const cardsReduced = cardsGrouped.reduce((acc, { cards, id: groupId }) => [...acc, ...[groupId, ...cards.map(({ id: cardId }) => cardId)]], []).filter(cardID => cardID !== undefined);
+
             // Assert - Check to see all card Id's are present excluding cards with with no ID
-            expect(metadataDispatcher.logCardImpressions).toHaveBeenCalledWith(cardsGrouped.flatMap(({ cards, id: groupId }) => [groupId, ...cards.map(({ id: cardId }) => cardId)])
-                .filter(cardID => cardID !== undefined));
+            expect(metadataDispatcher.logCardImpressions).toHaveBeenCalledWith(cardsReduced);
         });
 
         it('should call logCardImpressions from f-metadata ONCE and make sure the normal logCardImpressions from cards watcher is not being fired when the groupCards prop is set to true', async () => {

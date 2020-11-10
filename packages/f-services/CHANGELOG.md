@@ -10,6 +10,14 @@ Latest (changes to be rolled into next release)
 ### Added
 - Webdriver and Jest Allure test reporting.
 
+v1.4.0
+------------------------------
+*November 9, 2020*
+
+### Added
+- Postcode and form validation methods inside new validation service.
+
+
 v1.3.0
 ------------------------------
 *October 5, 2020*
