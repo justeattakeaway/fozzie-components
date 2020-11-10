@@ -6,13 +6,14 @@
 
 
 // Import vue component
-import VueGlobalisation from '@/mixins/globalisation.mixin.vue';
+import VueI18n from 'vue-i18n';
+import VueGlobalisationMixin from './mixins/globalisation.mixin.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.mixin('VueGlobalisation', VueGlobalisation);
+    Vue.mixin('VueGlobalisation', VueGlobalisationMixin);
 }
 
 // Create module definition for Vue.use()
@@ -32,4 +33,7 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export default VueGlobalisation;
+export {
+    VueGlobalisationMixin,
+    VueI18n
+};

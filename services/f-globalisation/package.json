@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-globalisation",
   "description": "Fozzie Globalisation – A utility which wires up vue-i18n within your Smart Component",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "dist/f-globalisation.umd.min.js",
   "files": [
     "dist"
@@ -34,13 +34,15 @@
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
+  "dependencies": {
+    "vue-i18n": "8.0.0"
+  },
   "devDependencies": {
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
-    "vue": "2.6.10",
-    "vue-i18n": "8.0.0"
+    "vue": "2.6.10"
   }
 }
