@@ -123,10 +123,6 @@ describe('Checkout', () => {
                 wrapper = mount(VueCheckout, { propsData });
             });
 
-            afterEach(() => {
-                wrapper.destroy();
-            });
-
             it('should emit success event when all fields are populated correctly', async () => {
                 // Arrange
                 wrapper.find('[data-test-id="input-mobile-number"]').setValue(mobileNumber);

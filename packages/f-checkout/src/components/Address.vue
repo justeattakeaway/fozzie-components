@@ -10,7 +10,7 @@
                 label-style="inline">
                 <template #error>
                     <error-message
-                        v-if="!isAddressLine1Empty"
+                        v-if="isAddressLine1Empty"
                         data-test-id="error-address-line1-empty">
                         {{ copy.validationMessages.addressLine1.requiredError }}
                     </error-message>
@@ -34,7 +34,7 @@
                 label-style="inline">
                 <template #error>
                     <error-message
-                        v-if="!isAddressCityEmpty"
+                        v-if="isAddressCityEmpty"
                         data-test-id="error-address-city-empty">
                         {{ copy.validationMessages.city.requiredError }}
                     </error-message>
@@ -49,7 +49,7 @@
             label-style="inline">
             <template #error>
                 <error-message
-                    v-if="!isAddressPostcodeEmpty"
+                    v-if="isAddressPostcodeEmpty"
                     data-test-id="error-address-postcode-empty">
                     {{ copy.validationMessages.postcode.requiredError }}
                 </error-message>
@@ -94,15 +94,15 @@ export default {
         */
 
         isAddressLine1Empty () {
-            return !this.isFieldValid('line1');
+            return this.isFieldValid('line1');
         },
 
         isAddressCityEmpty () {
-            return !this.isFieldValid('city');
+            return this.isFieldValid('city');
         },
 
         isAddressPostcodeEmpty () {
-            return !this.isFieldValid('postcode');
+            return this.isFieldValid('postcode');
         },
 
         isAddressPostcodeValid () {

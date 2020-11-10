@@ -204,7 +204,7 @@ export default {
             * focus on the input field.
             */
             const isMobileNumberValid = !(!this.$v.mobileNumber.required || !this.$v.mobileNumber.numeric || !this.$v.mobileNumber.minLength);
-            return !(this.$v.mobileNumber.$dirty && !isMobileNumberValid);
+            return !this.$v.mobileNumber.$dirty || isMobileNumberValid;
         },
 
         isDeliveryMethod () {
