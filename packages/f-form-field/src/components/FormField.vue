@@ -29,7 +29,7 @@
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
                 :is-inline="isInline"
-                :data-test-id="dataTestId.labels.inline">
+                :data-test-id="dataTestId.labels.bottom">
                 {{ labelText }}
             </form-label>
         </div>
@@ -90,7 +90,7 @@ export default {
 
         dataTestId: {
             type: Object,
-            default: TEST_IDS
+            default: TEST_IDS, 
         }
     },
     data () {
