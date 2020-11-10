@@ -1,11 +1,9 @@
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
-import { defaultEnabledCardTypes } from '@justeat/f-metadata/src/services/contentCard.service';
 import mock, { proxy } from 'xhr-mock';
 import ContentCards from '../../src/components/ContentCards.vue';
-// import { makeServer } from '../mocks/mirage-server';
-import cards, { labelledMultiSelectAllowedValues } from '../mockData/cards';
 import data from '../mockData/data';
+import cards from '../mockData/cards';
 
 /**
  * Resets all locally stored braze data so that the stubbed data is always fresh on page load
@@ -45,8 +43,8 @@ const template = `<content-cards
             :apiKey="apiKey"
             :title="title"
             :locale="locale"
-            :group-cards="true"
-            :enabledCardTypes="enabledCardTypes" />`;
+            :group-cards="groupCards"
+            :enabled-card-types="enabledCardTypes" />`;
 
 export default {
     title: 'Components/Organisms/f-content-cards',
@@ -56,9 +54,8 @@ export default {
         title: { control: { type: 'text' } },
         groupCards: { control: { type: 'boolean' } },
         locale: { control: { type: 'radio', options: ['da-DK', 'en-GB', 'en-AU'] } },
-        enabledCardTypes: { control: { type: 'check', options: labelledMultiSelectAllowedValues } }
     },
-    decorators: [withA11y, withTests({ results })]
+    decorators: [withA11y]
 };
 
 export function ContentCardsBrazeGroup (args, { argTypes }) {
@@ -76,8 +73,7 @@ export function ContentCardsBrazeGroup (args, { argTypes }) {
          */
         beforeCreate () {
             resetBrazeData();
-            // make the mirage server
-            // makeServer();
+
             mock.teardown();
             mock.setup();
             mock.post(/\/api\/v3\/content_cards\/sync\/?/, {
@@ -102,5 +98,6 @@ ContentCardsBrazeGroup.args = {
     userId: 'test-user-id',
     title: 'Promotional Offers',
     locale: 'en-GB',
-    enabledCardTypes: defaultEnabledCardTypes
+    groupCards: true,
+    enabledCardTypes: ['Header_Card', 'Promotion_Card_1', 'Promotion_Card_2', 'Restaurant_FTC_Offer_Card', 'Voucher_Card_1', 'Anniversary_Card_1']
 };
