@@ -100,13 +100,15 @@ describe('Checkout', () => {
     });
 
     describe('when form submitted', () => {
-        const mobileNumber = '07777777777';
+        const validMobileNumber = '07777777777';
+        const invalidShortMobileNumber = '077777';
+        const invalidCharacterMobileNumber = 'hs;-j`$e&1l';
 
-        const address = {
-            line1: 'Fleet Place House',
-            city: 'London',
-            postcode: 'EC4M 7RF'
-        };
+        const validAddressLine1 = 'Fleet Place House';
+        const validAddressCity = 'London';
+        const validAddressPostcode = 'EC4M 7RF';
+        const inValidCharacterAddressPostcode = '?!hdb-se';
+        const inValidLengthAddressPostcode = 'EC4M 7R';
 
         describe('if checkoutMethod set to `Collection`', () => {
             const propsData = {
@@ -129,7 +131,7 @@ describe('Checkout', () => {
 
             it('should emit success event when all fields are populated correctly', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue(mobileNumber);
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue(validMobileNumber);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -153,7 +155,7 @@ describe('Checkout', () => {
 
             it('should show error message and emit failure event when the mobile number field is populated with a < 10 numbers', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue('077777');
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue(invalidShortMobileNumber);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -168,7 +170,7 @@ describe('Checkout', () => {
 
             it('should show error message and emit failure event when the mobile number field is populated with non numeric value', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue('hs;-j`$e&1l');
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue(invalidCharacterMobileNumber);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -183,7 +185,7 @@ describe('Checkout', () => {
 
             it('should not show error message or emit failure event when the address input fields are not populated', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue(mobileNumber);
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue(validMobileNumber);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -216,10 +218,10 @@ describe('Checkout', () => {
 
             it('should emit success event when all fields are populated correctly', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue(mobileNumber);
-                wrapper.find('[data-test-id="input-address-line-1"]').setValue(address.line1);
-                wrapper.find('[data-test-id="input-address-city"]').setValue(address.city);
-                wrapper.find('[data-test-id="input-address-postcode"]').setValue(address.postcode);
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue(validMobileNumber);
+                wrapper.find('[data-test-id="input-address-line-1"]').setValue(validAddressLine1);
+                wrapper.find('[data-test-id="input-address-city"]').setValue(validAddressCity);
+                wrapper.find('[data-test-id="input-address-postcode"]').setValue(validAddressPostcode);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -264,7 +266,7 @@ describe('Checkout', () => {
 
             it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-address-postcode"]').setValue('?!hdb-se');
+                wrapper.find('[data-test-id="input-address-postcode"]').setValue(inValidCharacterAddressPostcode);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -279,7 +281,7 @@ describe('Checkout', () => {
 
             it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-address-postcode"]').setValue('EC4M 7R');
+                wrapper.find('[data-test-id="input-address-postcode"]').setValue(inValidLengthAddressPostcode);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
