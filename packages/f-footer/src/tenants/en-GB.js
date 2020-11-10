@@ -181,7 +181,7 @@ export default {
                     gtm: 'click_about_careers'
                 },
                 {
-                    url: 'https://www.just-eat.com/download_file/view/912/1',
+                    url: 'https://www.just-eat.co.uk/CmsAssets/media/Files/Common/legal/modern-slavery-statement/JEL-Modern-Slavery-Statement-2019-FINAL.pdf?bid=84c6585fdc794d4fa4b917b8cedb9ff5',
                     text: 'Modern Slavery Statement',
                     target: '_blank',
                     rel: 'noopener',
