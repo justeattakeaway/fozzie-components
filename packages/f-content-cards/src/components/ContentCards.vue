@@ -5,25 +5,26 @@
         :data-test-id="testId">
         <template v-if="groupCards">
             <template v-for="({ title, cards: subCards, id: groupId }, groupIndex) in cardsGrouped">
-                <h3
+                <h2
                     v-if="groupId"
                     :key="groupIndex"
                     :class="[$style['c-contentCards--group-title'], 'c-contentCards--group-title']"
                     :data-test-id="`${groupIndex}_${groupId}`"
                 >
                     {{ title }}
-                </h3>
+                </h2>
                 <div
-                    v-for="(contentCard, cardIndex) in subCards"
-                    :key="`${groupIndex}_${cardIndex}_${contentCard.id}`"
-                    :class="[$style['c-contentCards--group']]"
-                >
-                    <component
-                        :is="handleCustomCardType(contentCard.type)"
-                        :card="contentCard"
-                        :tenant="tenant"
-                        :data-test-id="testIdForItemWithIndex(cardIndex, groupIndex)"
-                    />
+                    :key="`${groupIndex}-children`"
+                    :class="[$style['c-contentCards--group']]">
+                    <template v-for="(contentCard, cardIndex) in subCards">
+                        <component
+                            :is="handleCustomCardType(contentCard.type)"
+                            :key="`${groupIndex}_${cardIndex}_${contentCard.id}`"
+                            :card="contentCard"
+                            :tenant="tenant"
+                            :data-test-id="testIdForItemWithIndex(cardIndex, groupIndex)"
+                        />
+                    </template>
                 </div>
             </template>
         </template>
@@ -231,10 +232,13 @@ export default {
             this.$emit('get-group-count', current.length);
 
             if (current.length && (current.length !== previous.length) && this.groupCards) {
-                this.metadataDispatcher.logCardImpressions(this.cardsGrouped.flatMap(({ cards, id }) => [
-                    id, ...cards.map(({ id: cardId }) => cardId)
-                ])
-                .filter(cardID => cardID !== undefined));
+                const cardsReduced = this.cardsGrouped.reduce(
+                    (acc, { cards, id: groupId }) => [...acc,
+                        ...[groupId, ...cards.map(({ id: cardId }) => cardId)]],
+                    []
+                )
+                .filter(cardID => cardID !== undefined);
+                this.metadataDispatcher.logCardImpressions(cardsReduced);
             }
             if ((current.length > 0) && (previous.length === 0)) {
                 this.hasLoaded = true;
@@ -309,7 +313,7 @@ export default {
                 apiKey,
                 userId,
                 enableLogging,
-                enabledCardTypes: [...this.enabledCardTypes, 'Header_Card'],
+                enabledCardTypes: [...this.enabledCardTypes],
                 brands: this.brands,
                 callbacks: {
                     handleContentCards: this.metadataContentCards,
@@ -534,26 +538,30 @@ export default {
 <style lang="scss" module>
     .c-contentCards {
         margin-top: spacing(x5);
-        margin-bottom: spacing(x5);
+        margin-bottom: spacing(x3);
 
         @include media('>=narrowMid') {
             display: flex;
-            flex-direction: row;
+            flex-flow: row;
         }
     }
 
     .c-contentCards--wrap {
-        flex-wrap: wrap;
+        flex-flow: wrap;
     }
 
     .c-contentCards--group {
         display: flex;
-        flex-direction: row;
+        flex-flow: row wrap;
+        width: 100%;
     }
 
     .c-contentCards--group-title {
         width: 100%;
-        margin-bottom: spacing(x3);
+        &:not(:first-child) {
+            margin-top: spacing(x3);
+        }
+        margin-bottom: spacing(x2);
     }
 
 </style>
