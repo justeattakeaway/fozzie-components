@@ -45,7 +45,7 @@
   ],
   "dependencies": {
     "@justeat/f-alert": "0.1.1",
-    "@justeat/f-button": "^0.1.0",
+    "@justeat/f-button": "0.1.0",
     "@justeat/f-card": "0.6.0",
     "@justeat/f-error-message": "0.2.0",
     "@justeat/f-form-field": "0.7.1",
