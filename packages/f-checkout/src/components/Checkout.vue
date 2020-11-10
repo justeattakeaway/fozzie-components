@@ -48,23 +48,20 @@
                     data-test-id="selector" />
 
                 <user-note data-test-id="user-note" />
-                <button
-                    :class="[
-                        $style['o-btn--allergy'],
-                        'o-btnLink'
-                    ]"
+
+                <button-component
+                    button-type="link"
                     data-test-id="allergy-button">
                     {{ copy.allergyText }}
-                </button>
+                </button-component>
 
-                <button
-                    :class="[
-                        $style['o-btn--payment'],
-                        'o-btn', 'o-btn--primary', 'o-btn--wide'
-                    ]"
+                <button-component
+                    :class="$style['o-btn--checkout']"
+                    button-type="primary"
+                    button-size="large"
                     data-test-id="confirm-payment-submit-button">
                     {{ buttonText }}
-                </button>
+                </button-component>
             </form>
         </card>
     </div>
@@ -81,6 +78,8 @@ import {
 import { globalisationServices, validations } from '@justeat/f-services';
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
+import ButtonComponent from '@justeat/f-button';
+import '@justeat/f-button/dist/f-button.css';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import ErrorMessage from '@justeat/f-error-message';
@@ -103,6 +102,7 @@ export default {
     components: {
         AddressBlock,
         Alert,
+        ButtonComponent,
         Card,
         ErrorMessage,
         FormField,
@@ -327,20 +327,9 @@ $checkout-width                           : 462px;
         margin-bottom: spacing(x2);
     }
 
-    .o-btn--allergy {
-        padding: 0 spacing(x3);
-        @include font-size(body-l);
-        font-weight: $font-weight-bold;
-        line-height: $line-height;
-        margin-bottom: spacing(x0.5);
-    }
-
-    .o-btn--payment {
+    .o-btn--checkout {
         display: flex;
         margin: spacing(x2) auto;
-        @include font-size(body-l);
-        font-weight: $font-weight-bold;
-        line-height: $line-height;
 
         @include media('<wide') {
             display: block;
