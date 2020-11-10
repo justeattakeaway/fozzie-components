@@ -75,7 +75,7 @@ export default {
         border: solid $color-border;
         border-width: 1px 0 0;
         padding-top: spacing(x2);
-        margin-top: spacing();
+        margin-top: spacing(x2);
         cursor: pointer;
         background: transparent;
     }

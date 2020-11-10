@@ -23,30 +23,32 @@
                 :src="icon"
                 :alt="title"
                 :class="$style['c-contentCard-thumbnail']">
-            <h3
-                :class="[$style['c-contentCard-title'], {
-                    [$style['c-contentCard-title-legacy']]: !boldTitle,
-                    [$style['c-emboldenedText--title']]: emboldenText
-                }]">
-                {{ title }}
-            </h3>
-            <h4 :class="[$style['c-contentCard-subTitle'], { [$style['c-emboldenedText--subtitle']]: emboldenText }]">
-                {{ subtitle }}
-            </h4>
-            <slot
-                v-if="bannerBeforeDescription"
-                name="banner" />
-            <template v-for="(textItem, textIndex) in description">
-                <p
-                    :key="textIndex"
-                    :data-test-id="testIdForItemWithIndex(textIndex)"
-                    :class="[$style['c-contentCard-text'], { [$style['c-emboldenedText--text']]: emboldenText }]">
-                    {{ textItem }}
-                </p>
-            </template>
-            <slot
-                v-if="!bannerBeforeDescription"
-                name="banner" />
+            <div :class="$style['c-content-card-body']">
+                <h3
+                    :class="[$style['c-contentCard-title'], {
+                        [$style['c-contentCard-title-legacy']]: !boldTitle,
+                        [$style['c-emboldenedText--title']]: emboldenText
+                    }]">
+                    {{ title }}
+                </h3>
+                <h4 :class="[$style['c-contentCard-subTitle'], { [$style['c-emboldenedText--subtitle']]: emboldenText }]">
+                    {{ subtitle }}
+                </h4>
+                <slot
+                    v-if="bannerBeforeDescription"
+                    name="banner" />
+                <template v-for="(textItem, textIndex) in description">
+                    <p
+                        :key="textIndex"
+                        :data-test-id="testIdForItemWithIndex(textIndex)"
+                        :class="[$style['c-contentCard-text'], { [$style['c-emboldenedText--text']]: emboldenText }]">
+                        {{ textItem }}
+                    </p>
+                </template>
+                <slot
+                    v-if="!bannerBeforeDescription"
+                    name="banner" />
+            </div>
             <div :class="$style['c-contentCard-footer']">
                 <slot />
             </div>
@@ -155,6 +157,11 @@ export default {
 </script>
 
 <style lang="scss" module>
+
+    .c-content-card-body {
+        flex-grow: 1;
+    }
+
     .c-contentCard {
         width: 100%;
         text-decoration: initial;
@@ -167,6 +174,10 @@ export default {
 
         @include media('>=narrowMid') {
             max-width: 370px;
+        }
+
+        @include media('<=narrowMid') {
+            margin-right: 0;
         }
 
         &,
@@ -247,11 +258,12 @@ export default {
 
     .c-contentCard-subTitle {
         @include font-size(body-l);
+        font-weight: $font-weight-base;
         margin-top: spacing();
     }
 
     .c-contentCard-text {
-        margin-top: spacing();
+        margin-top: spacing(x0.5);
         text-align: center;
     }
 
@@ -263,16 +275,16 @@ export default {
         align-items: center;
         min-height: 164px; // min-height set to the height of an card with a one-line title
         background-color: $white;
-        padding: spacing(x3) spacing(x2);
+        padding: spacing(x2);
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
         border-radius: 0 0 $border-radius $border-radius;
     }
 
     .c-contentCard-footer {
         width: 100%;
-        margin-top: auto;
+        flex-shrink: 0;
+        margin-top: spacing();
         text-align: center;
-        padding-top: spacing(x2);
     }
 
     .c-contentCard-thumbnail {
@@ -372,7 +384,7 @@ export default {
     }
 
     .c-emboldenedText--subtitle {
-        @include font-size(body-s);
+        @include font-size(body-l);
         margin-top: spacing(x2);
     }
 
