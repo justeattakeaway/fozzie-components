@@ -2,7 +2,7 @@
 // import {
 //     withKnobs, select, boolean
 // } from '@storybook/addon-knobs';
-import { select, boolean } from '@storybook/addon-knobs';
+import { select } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import <%= name.component %> from '../src/components/<%= name.filename %>.vue';
 
@@ -21,12 +21,6 @@ export const <%= name.component %>Component = () => ({
     props: {
         locale: {
             default: select('Locale', VALID_LOCALES, ENGLISH_LOCALE)
-        },
-        buttonType: {
-            default: select('Button Type', ['primary', 'primaryAlt', 'secondary', 'tertiary', 'link'])
-        },
-        fullWidth: {
-            default: boolean('fullWidth', false)
         }
     },
     template: `<<%= name.template %> :locale="locale" />`
