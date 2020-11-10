@@ -7,7 +7,7 @@ export default {
 
     decorators: [
         withKnobs,
-        withA11y)
+        withA11y
     ]
 };
 
