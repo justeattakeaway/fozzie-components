@@ -22,6 +22,6 @@ module.exports = {
         }
     },
     globals: {
-        "allure": false
+        "allure": "readonly"
     }
 };
