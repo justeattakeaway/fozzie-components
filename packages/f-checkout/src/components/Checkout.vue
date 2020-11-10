@@ -214,6 +214,10 @@ export default {
 
     methods: {
         async callCheckoutServiceApi () {
+            /*
+            * Add user data to `checkoutData` and submit to Checkout endpoint
+            * If this is successful emit `CheckoutSuccess` event
+            */
             const checkoutData = {
                 mobileNumber: this.mobileNumber
             };
@@ -228,6 +232,10 @@ export default {
         },
 
         handleErrorState (error) {
+            /*
+            * Emit `CheckoutFailure` event with error data
+            * Update `genericErrorMessage` to display correct errorMessage for passed error
+            */
             let thrownErrors = error;
 
             // Ideally we would use optional chaining but it doesn't currently work with Storybook
