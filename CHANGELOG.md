@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v2.13.0
+------------------------------
+*November 11, 2020*
+
+### Updated
+- Version of `f-utils` updated to v1.
+
+
 v2.12.0
 ------------------------------
 *November 9, 2020*
