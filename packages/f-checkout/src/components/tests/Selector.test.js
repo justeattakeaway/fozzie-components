@@ -2,6 +2,7 @@ import { shallowMount } from '@vue/test-utils';
 import Selector from '../Selector.vue';
 
 describe('Selector', () => {
+    allure.feature('Checkout-Selector');
     const propsData = {};
 
     it('should be defined', () => {
