@@ -13,7 +13,7 @@ export const ErrorMessageComponent = () => ({
     components: { ErrorMessage },
     props: {},
     template:
-        '<error-message>Your phone number should be at least 10 characters long and shouldn\'t contain letters or special characters</error-message>'
+        '<error-message>Default error message</error-message>'
 });
 
 ErrorMessageComponent.storyName = 'f-error-message';
