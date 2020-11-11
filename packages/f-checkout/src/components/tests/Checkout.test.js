@@ -10,8 +10,7 @@ localVue.use(VueI18n);
 
 const i18n = {
     locale: 'en-GB',
-    messages: tenantConfigs['en-GB'],
-    setLocaleMessage: jest.fn()
+    messages: tenantConfigs['en-GB']
 };
 
 describe('Checkout', () => {
