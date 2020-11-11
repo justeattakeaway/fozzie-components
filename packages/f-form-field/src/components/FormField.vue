@@ -2,7 +2,7 @@
     <div
         :data-theme-formfield="theme"
         :class="$style['c-formField']"
-        :data-test-id="dataTestId.component.id" >
+        data-test-id="form-field-component">
         <div
             :class="$style['c-formField-inputWrapper']">
             <form-label
@@ -10,7 +10,7 @@
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
                 :is-inline="isInline"
-                :data-test-id="dataTestId.labels.top">
+                data-js-test="defaultLabel">
                 {{ labelText }}
             </form-label>
             <input
@@ -19,7 +19,8 @@
                 v-bind="$attrs"
                 :type="normalisedInputType"
                 placeholder=" "
-                :data-test-id="dataTestId.inputs.firstName"
+                :data-js-test="testId"
+                data-test-id="testInput"
                 :class="[$style['o-form-field'], $style['c-formField-input']]"
                 @input="updateValue"
                 v-on="listeners"
@@ -29,7 +30,8 @@
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
                 :is-inline="isInline"
-                :data-test-id="dataTestId.labels.bottom">
+                data-js-test="inlineLabel"
+                data-test-id="testLabel">
                 {{ labelText }}
             </form-label>
         </div>
@@ -48,54 +50,43 @@ import {
     VALID_LABEL_STYLES,
     MOBILE_WIDTH
 } from '../constants';
-import { TEST_IDS } from 
-'../../test-utils/component-objects/data-test-ids'
-
 export default {
     name: 'FormField',
-
     components: {
         FormLabel
     },
-
     inheritAttrs: false,
-
     props: {
         locale: {
             type: String,
             default: ''
         },
-
         labelText: {
             type: String,
             default: ''
         },
-
         inputType: {
             type: String,
             default: DEFAULT_INPUT_TYPE,
             validator: value => (VALID_INPUT_TYPES.indexOf(value) !== -1) // The prop value must match one of the valid input types
         },
-
         labelStyle: {
             type: String,
             default: 'default',
             validator: value => (VALID_LABEL_STYLES.indexOf(value) !== -1) // The prop value must match one of the valid input types
         },
-
         value: {
             type: [String, Number],
             default: ''
         },
-
         dataTestId: {
-            type: Object,
-            default: TEST_IDS, 
+            type: String,
+            default: ''
         }
     },
     data () {
         return {
-            windowWidth: null, 
+            windowWidth: null
         };
     },
     computed: {
@@ -105,62 +96,50 @@ export default {
             }
             return DEFAULT_INPUT_TYPE;
         },
-
         normalisedLabelStyle () {
             if (VALID_LABEL_STYLES.includes(this.labelStyle)) {
                 return this.labelStyle;
             }
             return '';
         },
-
         formFieldLocale () {
             return globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         },
-
         copy () {
             const localeConfig = tenantConfigs[this.formFieldLocale];
             return { ...localeConfig };
         },
-
         theme () {
             return globalisationServices.getTheme(this.formFieldLocale);
         },
-
         listeners () {
             return {
                 ...this.$listeners,
                 input: this.updateValue
             };
         },
-
         uniqueId () {
             return `formField-${(this.$attrs.name ? this.$attrs.name : this._uid)}`;
         },
-
         testId () {
             return this.dataTestId || this.$attrs.name || false;
         },
-
         isInline () {
             return (this.windowWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') ||
                 this.labelStyle === 'inline';
         }
     },
-
     mounted () {
         window.addEventListener('resize', Debounce(this.updateWidth, 100));
         this.updateWidth();
     },
-
     destroyed () {
         window.removeEventListener('resize', this.updateWidth);
     },
-
     methods: {
         updateValue (event) {
             this.$emit('input', event.target.value);
         },
-
         updateWidth () {
             if (typeof (window) !== 'undefined') {
                 this.windowWidth = window.innerWidth;
@@ -180,7 +159,6 @@ $form-input-borderColour--focus           : $grey--dark;
 $form-input-height                        : 46px; // height is 46px + 1px border = 48px
 $form-input-padding                       : spacing(x1.5) spacing(x2);
 $form-input-fontSize                      : 'body-l';
-
 .c-formField {
     & + & {
         margin-top: spacing(x2);
@@ -189,7 +167,6 @@ $form-input-fontSize                      : 'body-l';
     .c-formField-inputWrapper {
         position: relative;
     }
-
     .c-formField-input {
         width: 100%;
         @include rem(height, $form-input-height); //convert height to rem
@@ -203,6 +180,4 @@ $form-input-fontSize                      : 'body-l';
         border-radius: $form-input-borderRadius;
         background-clip: padding-box;
     }
-
-
 </style>

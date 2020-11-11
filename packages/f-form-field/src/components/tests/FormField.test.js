@@ -69,7 +69,7 @@ describe('FormField', () => {
 
             it('should set the value of attribute data-js-test on input element if dataTestId is specified', () => {
                 // Arrange
-                const dataTestId = "input-first-name";
+                const dataTestId = 'my-test-id';
                 const propsData = {
                     dataTestId
                 };
@@ -79,12 +79,12 @@ describe('FormField', () => {
                 const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
 
                 // Assert
-                expect(formInput.attributes('data-test-id')).toBe(dataTestId);
+                expect(formInput.attributes('data-js-test')).toBe(dataTestId);
             });
 
             it('should set the value of attribute data-js-test on input element if name is specified', () => {
                 // Arrange
-                const name = 'input-first-name';
+                const name = 'my-input';
                 const attrs = {
                     name
                 };
@@ -94,7 +94,16 @@ describe('FormField', () => {
                 const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
 
                 // Assert
-                expect(formInput.attributes('data-test-id')).toBe(name);
+                expect(formInput.attributes('data-js-test')).toBe(name);
+            });
+
+            it('should not add the attribute data-js-test on input element if dataTestId is not specified', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(FormField, { });
+                const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
+
+                // Assert
+                expect(formInput.attributes('data-js-test')).toBe(undefined);
             });
         });
 
@@ -138,8 +147,8 @@ describe('FormField', () => {
                     // Act
                     const wrapper = await shallowMount(FormField, { propsData });
 
-                    const defaultLabel = wrapper.find('[data-test-id="label-top"]');
-                    const inlineLabel = wrapper.find('[data-test-id="label-inline"]');
+                    const defaultLabel = wrapper.find('[data-js-test="defaultLabel"]');
+                    const inlineLabel = wrapper.find('[data-js-test="inlineLabel"]');
 
                     // Assert
                     expect(defaultLabel.exists()).toBe(true);
@@ -158,8 +167,8 @@ describe('FormField', () => {
                     // Act
                     const wrapper = await shallowMount(FormField, { propsData });
 
-                    const defaultLabel = wrapper.find('[data-test-id="label-top"]');
-                    const inlineLabel = wrapper.find('[data-test-id="label-inline"]');
+                    const defaultLabel = wrapper.find('[data-js-test="defaultLabel"]');
+                    const inlineLabel = wrapper.find('[data-js-test="inlineLabel"]');
 
                     // Assert
                     expect(defaultLabel.exists()).toBe(false);
