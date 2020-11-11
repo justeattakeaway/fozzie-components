@@ -253,6 +253,11 @@ export default {
         },
 
         async onFormSubmit () {
+            /*
+            * Check for is valid - no inline messages
+            * If form is valid try to call `CheckoutServiceApi`
+            * Catch and handle any errors
+            */
             if (!this.isFormValid()) {
                 const validationState = validations.getFormValidationState(this.$v);
                 this.$emit(EventNames.CheckoutFailure, validationState);
@@ -271,6 +276,9 @@ export default {
         },
 
         isFormValid () {
+            /*
+            * Check to see if any `Vulidate` calidation errors
+            */
             this.$v.$touch();
             return !this.$v.$invalid;
         }
