@@ -49,7 +49,7 @@ import {
 } from '@justeat/f-vue-icons';
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
-import { testIds } from
+import testIds from
     '../../test-utils/component-objects/data-test-ids';
 
 export default {

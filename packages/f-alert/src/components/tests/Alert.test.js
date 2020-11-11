@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import VueAlert from '../Alert.vue';
-import { testIds } from '../../../test-utils/component-objects/data-test-ids';
+import testIds from '../../../test-utils/component-objects/data-test-ids';
 
 const defaultPropsData = { heading: 'Alert title', type: 'info' };
 

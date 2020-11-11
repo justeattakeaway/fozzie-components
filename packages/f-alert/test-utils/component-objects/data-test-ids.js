@@ -1,4 +1,4 @@
-export const testIds = {
+export default {
     id: 'alert-component',
     headings: {
         title: 'heading-title'
