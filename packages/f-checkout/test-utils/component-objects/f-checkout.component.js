@@ -16,7 +16,7 @@ exports.inputs = {
     addressLine2: () => $('[data-test-id="input-address-line-2"]'),
     addressCity: () => $('[data-test-id="input-address-city"]'),
     addressPostcode: () => $('[data-test-id="input-address-postcode"]')
-}
+};
 
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
@@ -33,7 +33,7 @@ exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
  * @param {String} addressInfo.city City of the user's address
  * @param {String} addressInfo.postcode Postcode of the user's address
  */
-exports.submitCheckoutForm = (addressInfo) => {
+exports.submitCheckoutForm = addressInfo => {
     exports.waitForCheckoutComponent();
     mobileNumberInput().setValue(addressInfo.mobileNumber);
     addressLine1Input().setValue(addressInfo.line1);
@@ -48,9 +48,9 @@ exports.submitCheckoutForm = (addressInfo) => {
  *
  * @param {String} deliveryTimeText The text visible text value of the delivery time
  */
-exports.selectDeliveryTime = (deliveryTimeText) => {
+exports.selectDeliveryTime = deliveryTimeText => {
     deliveryTimeDropdown().selectByVisibleText(deliveryTimeText);
-}
+};
 
 /**
  * @description
@@ -58,9 +58,9 @@ exports.selectDeliveryTime = (deliveryTimeText) => {
  *
  * @param {String} userNote The user note value to be entered
  */
-exports.inputUserNote = (userNote) => {
+exports.inputUserNote = userNote => {
     userNoteInput().setValue(userNote);
-}
+};
 
 /**
  * @description
@@ -68,4 +68,4 @@ exports.inputUserNote = (userNote) => {
  */
 exports.submit = () => {
     goToPaymentButton().click();
-}
+};

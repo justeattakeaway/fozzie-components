@@ -3,12 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.7.0
+------------------------------
+*November 11, 2020*
+
+### Added
+- Integration with `f-globalisation`.
+
+### Changed
+- The way we run the demo page (used by component tests) so that we can control what we inject into the Vue instance.
+
+
 v0.6.0
 ------------------------------
 *November 2, 2020*
 
 ### Added
 - New component tests
+
 
 v0.5.0
 ------------------------------

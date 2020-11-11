@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "main": "dist/f-checkout.umd.min.js",
   "files": [
     "dist",
@@ -29,7 +29,7 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-checkout ./src/index.js",
-    "demo": "vue serve --port 8080 ./src/demo/Index.vue",
+    "demo": "vue serve --port 8080 ./src/demo/demo.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
@@ -44,10 +44,11 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "axios": "0.20.0",
     "@justeat/f-card": "0.6.0",
     "@justeat/f-form-field": "0.7.1",
-    "@justeat/f-services": "1.0.0"
+    "@justeat/f-globalisation": "0.2.0",
+    "@justeat/f-services": "1.0.0",
+    "axios": "0.20.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
