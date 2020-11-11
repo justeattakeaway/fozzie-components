@@ -1,3 +1,6 @@
 module.exports = {
-    setupFilesAfterEnv: ['jest-extended']
+    setupFilesAfterEnv: [
+        'jest-extended',
+        '../../jest.setup.js'
+    ]
 };

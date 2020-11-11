@@ -4,6 +4,7 @@ import MegaModal from '../MegaModal.vue';
 const localVue = createLocalVue();
 
 describe('MegaModal', () => {
+    allure.feature('Mega Modal');
     describe('component', () => {
         it('should be defined', () => {
             // Arrange & Act

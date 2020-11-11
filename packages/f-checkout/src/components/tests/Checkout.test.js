@@ -7,6 +7,8 @@ import EventNames from '../../event-names';
 jest.mock('../../services/CheckoutServiceApi', () => ({ submitCheckout: jest.fn() }));
 
 describe('Checkout', () => {
+    allure.feature('Checkout');
+  
     const checkoutUrl = 'http://localhost/account/register';
 
     it('should be defined', () => {

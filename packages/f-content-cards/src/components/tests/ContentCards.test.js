@@ -61,6 +61,7 @@ beforeEach(() => {
 });
 
 describe('ContentCards', () => {
+    allure.feature('Content Cards');
     it('should emit a custom content callback when mounted', () => {
         // Arrange & Act
         const instance = shallowMount(ContentCards, {
@@ -582,7 +583,7 @@ describe('ContentCards', () => {
         const testId = 'foo';
         let instance;
 
-        beforeAll(async () => {
+        beforeEach(async () => {
             // Arrange
             const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
             const cards = createMetadataCards(cardTypes);
@@ -798,9 +799,10 @@ describe('ContentCards', () => {
             instance.vm.metadataContentCardsGrouped(cardsGrouped);
             await instance.vm.$nextTick();
 
+            const cardsReduced = cardsGrouped.reduce((acc, { cards, id: groupId }) => [...acc, ...[groupId, ...cards.map(({ id: cardId }) => cardId)]], []).filter(cardID => cardID !== undefined);
+
             // Assert - Check to see all card Id's are present excluding cards with with no ID
-            expect(metadataDispatcher.logCardImpressions).toHaveBeenCalledWith(cardsGrouped.flatMap(({ cards, id: groupId }) => [groupId, ...cards.map(({ id: cardId }) => cardId)])
-                .filter(cardID => cardID !== undefined));
+            expect(metadataDispatcher.logCardImpressions).toHaveBeenCalledWith(cardsReduced);
         });
 
         it('should call logCardImpressions from f-metadata ONCE and make sure the normal logCardImpressions from cards watcher is not being fired when the groupCards prop is set to true', async () => {

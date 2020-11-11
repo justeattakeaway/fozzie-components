@@ -8,6 +8,7 @@ const propsData = {
 };
 
 describe('ErrorMessage', () => {
+    allure.feature('Error Message');
 
     it('should render if slot content is provided', () => {
         // Arrange
