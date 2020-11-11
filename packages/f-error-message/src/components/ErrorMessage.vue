@@ -52,6 +52,7 @@ export default {
     width: 16px;
     line-height: 20px;
     margin-right: spacing();
+    margin-top: 2px;
     float: left;
 }
 
