@@ -36,8 +36,8 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-errorMessage {
+    position: relative;
     color: $color-text--danger;
     @include font-size(base);
     margin-top: spacing();
@@ -46,14 +46,13 @@ export default {
 .c-errorMessage-content {
     display: block;
     overflow: hidden;
+    margin-left: spacing(x3);
 }
 
 .c-errorMessage-icon {
+    position: absolute;
     width: 16px;
     line-height: 20px;
-    margin-right: spacing();
     margin-top: 2px;
-    float: left;
 }
-
 </style>
