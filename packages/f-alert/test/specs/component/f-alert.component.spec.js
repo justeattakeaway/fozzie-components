@@ -7,15 +7,15 @@ describe('f-alert component tests', () => {
         AlertComponent.waitForAlert();
     });
 
-    it('should display Alert', () => {
+    it.only('should display Alert', () => {
         //Assert
         expect(AlertComponent.isAlertDisplayed()).toBe(true);
     });
 
     it('should close alert when exit button is clicked', () => {
         //Act
-        AlertComponent.exitAlert(); 
-        
+        AlertComponent.exitAlert();
+
         //Assert
         expect(AlertComponent.isAlertDisplayed()).toBe(false);
     });

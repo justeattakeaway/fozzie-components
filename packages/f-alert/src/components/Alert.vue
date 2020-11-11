@@ -4,25 +4,25 @@
         :class="[$style['c-alert'],
                  $style[`c-alert--${type}`]]"
         role="alert"
-        :data-test-id="test.IDS.component.id" >
+        :data-test-id="testIds.id">
         <div
             :class="$style['c-alert-headingContainer']">
             <component
                 :is="icon"
                 :class="[$style['c-alert-icon'],
                          $style[`c-alert-icon--${type}`]]"
-                :data-test-id="test.IDS.icons.alert" />
+                :data-test-id="testIds.icons.alert" />
             <!-- TODO: make this dynamic. Find related ticket ;) -->
             <h2
                 :class="$style['c-alert-heading']"
-                :data-test-id="test.IDS.heading.heading" >
+                :data-test-id="testIds.headings.title">
                 {{ heading }}
             </h2>
             <button
                 v-if="isDismissable"
                 type="button"
                 :class="[$style['c-alert-dismiss'], 'o-btn o-btn--icon']"
-                :data-test-id="test.IDS.buttons.cancel"
+                :data-test-id="testIds.buttons.cancel"
                 @click="dismiss">
                 <cross-icon
                     :class="[$style['c-alert-dismiss-icon']]"
@@ -49,8 +49,8 @@ import {
 } from '@justeat/f-vue-icons';
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
-import { IDS } from 
-'../../test-utils/component-objects/data-test-ids'
+import { testIds } from
+    '../../test-utils/component-objects/data-test-ids';
 
 export default {
     name: 'VueAlert',
@@ -78,12 +78,6 @@ export default {
         isDismissable: {
             type: Boolean,
             default: false
-        },
-        test: {
-            type: Object,
-            default: () => ({
-            IDS
-        })
         }
     },
     data () {
@@ -95,6 +89,7 @@ export default {
             isDismissed: false,
             copy: { ...localeConfig },
             theme,
+            testIds
         };
     },
     computed: {

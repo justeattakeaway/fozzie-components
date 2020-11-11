@@ -50,6 +50,7 @@ import {
     VALID_LABEL_STYLES,
     MOBILE_WIDTH
 } from '../constants';
+
 export default {
     name: 'FormField',
     components: {

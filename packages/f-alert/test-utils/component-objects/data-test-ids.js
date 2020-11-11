@@ -1,14 +1,12 @@
-export const IDS = {
-    component: {
-        id: "alert-component"
-    },
-    heading: {
-        heading: "alert-heading"
+export const testIds = {
+    id: "alert-component",
+    headings: {
+        title: "heading-title"
     },
     buttons: {
-        cancel: "cancel-button"
+        cancel: "button-cancel"
     },
     icons: {
-        alert: "alert-icon"
+        alert: "icon-alert"
     }
-}
+};

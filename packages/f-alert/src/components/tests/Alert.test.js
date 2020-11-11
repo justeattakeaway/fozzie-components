@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import VueAlert from '../Alert.vue';
-import { IDS } from '../../../test-utils/component-objects/data-test-ids'
+import { testIds } from '../../../test-utils/component-objects/data-test-ids';
 
 const defaultPropsData = { heading: 'Alert title', type: 'info' };
 
@@ -22,7 +22,7 @@ describe('Alert', () => {
         const wrapper = shallowMount(VueAlert, { propsData: defaultPropsData });
 
         // Act
-        const alert = wrapper.find(`[data-test-id="${IDS.component.id}"]`);
+        const alert = wrapper.find(`[data-test-id="${testIds.id}"]`);
 
         // Assert
         expect(alert.attributes('role')).toBe('alert');
@@ -34,7 +34,7 @@ describe('Alert', () => {
             const wrapper = shallowMount(VueAlert, { propsData: { heading: 'Alert title', type } });
 
             // Act
-            const icon = wrapper.find(`[data-test-id="${IDS.icons.alert}"]`);
+            const icon = wrapper.find(`[data-test-id="${testIds.icons.alert}"]`);
 
             // Assert
             expect(icon.element.tagName).toMatchSnapshot();
@@ -47,7 +47,7 @@ describe('Alert', () => {
             const wrapper = shallowMount(VueAlert, { propsData: defaultPropsData });
 
             // Act
-            const heading = wrapper.find(`[data-test-id="${IDS.heading.heading}"]`);
+            const heading = wrapper.find(`[data-test-id="${testIds.headings.title}"]`);
 
             // Assert
             expect(heading.text()).toBe(defaultPropsData.heading);
@@ -60,7 +60,7 @@ describe('Alert', () => {
             const wrapper = shallowMount(VueAlert, { propsData: { ...defaultPropsData, isDismissable: true } });
 
             // Act
-            const dismiss = wrapper.find(`[data-test-id="${IDS.buttons.cancel}"]`);
+            const dismiss = wrapper.find(`[data-test-id="${testIds.buttons.cancel}"]`);
 
             // Assert
             expect(dismiss.exists()).toBe(true);
@@ -71,7 +71,7 @@ describe('Alert', () => {
             const wrapper = shallowMount(VueAlert, { propsData: { ...defaultPropsData, isDismissable: false } });
 
             // Act
-            const dismiss = wrapper.find(`[data-test-id="${IDS.buttons.cancel}"]`);
+            const dismiss = wrapper.find(`[data-test-id="${testIds.buttons.cancel}"]`);
 
             // Assert
             expect(dismiss.exists()).toBe(false);
@@ -86,7 +86,7 @@ describe('Alert', () => {
             });
 
             // Act
-            wrapper.find(`[data-test-id="${IDS.buttons.cancel}"]`).trigger('click');
+            wrapper.find(`[data-test-id="${testIds.buttons.cancel}"]`).trigger('click');
 
             // Assert
             expect(dismissSpy).toHaveBeenCalled();
