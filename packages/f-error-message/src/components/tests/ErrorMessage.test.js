@@ -8,6 +8,7 @@ const propsData = {
 };
 
 describe('ErrorMessage', () => {
+
     it('should render if slot content is provided', () => {
         // Arrange
         const wrapper = shallowMount(ErrorMessage, propsData);
