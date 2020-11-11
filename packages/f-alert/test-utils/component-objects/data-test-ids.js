@@ -1,12 +1,12 @@
 export const testIds = {
     id: "alert-component",
     headings: {
-        title: "heading-title"
+        title: 'heading-title'
     },
     buttons: {
-        cancel: "button-cancel"
+        cancel: 'button-cancel'
     },
     icons: {
-        alert: "icon-alert"
+        alert: 'icon-alert'
     }
 };
