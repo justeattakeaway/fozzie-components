@@ -23,5 +23,9 @@ module.exports = {
 
     modulePathIgnorePatterns: [
         './test/specs/component/'
+    ],
+
+    setupFilesAfterEnv: [
+        '../../jest.setup.js'
     ]
 };

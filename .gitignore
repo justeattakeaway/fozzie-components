@@ -31,3 +31,7 @@ dist/
 coverage/
 packages/**/src/components/tests/.jest-test-results.json
 /packages/f-content-cards/stories/mocks/
+
+# Test result folders
+allure-report
+allure-results

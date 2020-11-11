@@ -3,6 +3,7 @@ import FormField from '../FormField.vue';
 import { DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../../constants';
 
 describe('FormField', () => {
+    allure.feature('Form Field');
     it('should be defined', () => {
         const propsData = {};
         const wrapper = shallowMount(FormField, { propsData });

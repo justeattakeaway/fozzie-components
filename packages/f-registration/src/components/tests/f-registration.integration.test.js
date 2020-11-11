@@ -17,6 +17,7 @@ const propsData = {
 let wrapper;
 
 describe('Registration API service', () => {
+    allure.feature('Registration API');
     beforeEach(() => {
         const div = document.createElement('div');
         document.body.appendChild(div);

@@ -14,6 +14,7 @@ const i18n = {
 };
 
 describe('Checkout', () => {
+    allure.feature('Checkout');
     it('should be defined', () => {
         const propsData = {};
 

@@ -7,6 +7,7 @@ import EventNames from '../../event-names';
 jest.mock('../../services/RegistrationServiceApi', () => ({ createAccount: jest.fn() }));
 
 describe('Registration', () => {
+    allure.feature('Registration');
     const propsData = {
         createAccountUrl: 'http://localhost/account/register'
     };

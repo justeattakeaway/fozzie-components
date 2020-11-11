@@ -25,7 +25,7 @@ module.exports = {
         'jest-serializer-vue'
     ],
 
-    testURL: 'http://localhost/', 
+    testURL: 'http://localhost/',
 
     globals: {
         'vue-jest': {
@@ -34,8 +34,12 @@ module.exports = {
     },
 
     modulePathIgnorePatterns: [
-        './test/specs/accessibility/', 
+        './test/specs/accessibility/',
         './test/specs/component/'
+    ],
+
+    setupFilesAfterEnv: [
+        '../../jest.setup.js'
     ]
 
 };

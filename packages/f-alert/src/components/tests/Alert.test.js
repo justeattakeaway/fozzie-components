@@ -4,6 +4,7 @@ import VueAlert from '../Alert.vue';
 const defaultPropsData = { heading: 'Alert title', type: 'info' };
 
 describe('Alert', () => {
+    allure.feature('Alert');
     afterEach(() => {
         jest.clearAllMocks();
     });
