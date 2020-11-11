@@ -1,12 +1,12 @@
 {
-  "name": "@justeat/f-mega-modal",
-  "description": "Fozzie Mega Modal – A Vue.js modal component",
-  "version": "0.2.1",
-  "main": "dist/f-mega-modal.common.js",
+  "name": "@justeat/f-globalisation",
+  "description": "Fozzie Globalisation – A utility which wires up vue-i18n within your Smart Component",
+  "version": "0.1.0",
+  "main": "dist/f-globalisation.umd.min.js",
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-mega-modal",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-globalisation",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -26,26 +26,21 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-mega-modal ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-globalisation ./src/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
-    "lint:style": "vue-cli-service lint:style",
-    "test": "vue-cli-service test:unit"
+    "test": "vue-cli-service test:unit --json --outputFile=./src/mixins/tests/.jest-test-results.json"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
-  "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.1.1",
-    "body-scroll-lock": "3.x"
-  },
   "devDependencies": {
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
-    "body-scroll-lock": "3.0.3",
-    "node-sass-magic-importer": "5.3.2"
+    "vue": "2.6.10",
+    "vue-i18n": "8.0.0"
   }
 }

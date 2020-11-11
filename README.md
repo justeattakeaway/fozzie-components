@@ -22,8 +22,6 @@ To run storybook first you must run the following at the the top level
 
 `yarn build` to build the require packages for storybook to run.
 
-Then run `yarn test` in order to get the required test files outputted for storybook’s unit test add-on to work.
-
 Then run `yarn storybook:serve` to start storybook, which will open on `localhost:6006`.
 
 
