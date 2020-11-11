@@ -1,4 +1,4 @@
-import { testIds } from './data-test-ids';
+import testIds from './data-test-ids';
 
 const alertComponent = () => $(`[data-test-id="${testIds.id}"]`);
 const exitAlertButton = () => $(`[data-test-id="${testIds.buttons.cancel}"]`); 
