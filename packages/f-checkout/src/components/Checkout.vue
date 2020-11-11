@@ -9,7 +9,7 @@
             type="danger"
             :class="$style['c-checkout-alert']"
             :heading="copy.errorMessages.errorHeading">
-            <p>{{ genericErrorMessage }}</p>
+            {{ genericErrorMessage }}
         </alert>
         <card
             :card-heading="title"
