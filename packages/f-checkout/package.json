@@ -29,7 +29,7 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-checkout ./src/index.js",
-    "demo": "vue serve --port 8080 ./src/demo/Index.vue",
+    "demo": "vue serve --port 8080 ./src/demo/demo.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
@@ -53,6 +53,9 @@
     "axios": "0.20.0",
     "flush-promises": "1.0.2",
     "vuelidate": "0.7.6"
+    "@justeat/f-globalisation": "0.2.0",
+    "@justeat/f-services": "1.0.0",
+    "axios": "0.20.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"

@@ -1,6 +1,6 @@
 <template>
     <div
-        :data-theme="theme"
+        data-theme="jet"
         :class="$style['c-checkout']"
         data-test-id="checkout-component">
         <alert
@@ -10,6 +10,7 @@
             :heading="copy.errorMessages.errorHeading">
             {{ genericErrorMessage }}
         </alert>
+
         <card
             :card-heading="title"
             is-rounded
@@ -25,8 +26,8 @@
                     v-model="mobileNumber"
                     name="mobile-number"
                     data-test-id="input-mobile-number"
-                    :label-text="copy.labels.mobileNumber"
-                    label-style="inline">
+                    :label-text="$t('labels.mobileNumber')"
+                    label-style="inline" />
                     <template #error>
                         <error-message
                             v-if="!isMobileNumberValid"
@@ -52,16 +53,16 @@
                     :class="$style['c-checkout-allergyButton']"
                     button-type="link"
                     data-test-id="allergy-button">
-                    {{ copy.allergyText }}
-                </button-component>
+                    {{ $t('allergyText') }}
+                </button>
 
                 <button-component
                     :class="$style['c-checkout-submitButton']"
                     button-type="primary"
                     button-size="large"
                     data-test-id="confirm-payment-submit-button">
-                    {{ buttonText }}
-                </button-component>
+                    {{ $t('buttonText') }}
+                </button>
             </form>
         </card>
     </div>
@@ -75,11 +76,13 @@ import {
     minLength
 } from 'vuelidate/lib/validators';
 
-import { globalisationServices, validations } from '@justeat/f-services';
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
 import ButtonComponent from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
+import { validations } from '@justeat/f-services';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
+
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import ErrorMessage from '@justeat/f-error-message';
@@ -110,14 +113,9 @@ export default {
         UserNote
     },
 
-    mixins: [validationMixin],
+    mixins: [validationMixin, VueGlobalisationMixin],
 
     props: {
-        locale: {
-            type: String,
-            default: ''
-        },
-
         checkoutMethod: {
             type: String,
             default: 'Collection',
@@ -137,13 +135,8 @@ export default {
     },
 
     data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
-        const theme = globalisationServices.getTheme(locale);
-
         return {
-            copy: { ...localeConfig },
-            theme,
+            tenantConfigs,
             firstName: 'firstName',
             mobileNumber: null,
             address: {
@@ -152,9 +145,9 @@ export default {
                 city: null,
                 postcode: null
             },
-            buttonText: 'Go to payment',
             genericErrorMessage: null,
             shouldDisableCheckoutButton: false
+            delivery: CHECKOUT_METHOD_DELIVERY
         };
     },
 

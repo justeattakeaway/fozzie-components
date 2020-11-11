@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "2.13.0",
+  "version": "2.14.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -72,6 +72,7 @@
     "sass-loader": "7.3.1",
     "stylelint": "13.7.2",
     "stylelint-scss": "3.18.0",
+    "vue": "2.6.10",
     "vue-svg-loader": "0.16.0",
     "vue-template-compiler": "2.6.10",
     "wdio-chromedriver-service": "6.0.3",
