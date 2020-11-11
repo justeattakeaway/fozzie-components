@@ -22,7 +22,7 @@ describe('Alert', () => {
         const wrapper = shallowMount(VueAlert, { propsData: defaultPropsData });
 
         // Act
-        const alert = wrapper.find('[data-test-id="alert-component"]');
+        const alert = wrapper.find(`[data-test-id="${IDS.component.id}"]`);
 
         // Assert
         expect(alert.attributes('role')).toBe('alert');
@@ -34,7 +34,7 @@ describe('Alert', () => {
             const wrapper = shallowMount(VueAlert, { propsData: { heading: 'Alert title', type } });
 
             // Act
-            const icon = wrapper.find('[data-test-id="alert-icon"]');
+            const icon = wrapper.find(`[data-test-id="${IDS.icons.alert}"]`);
 
             // Assert
             expect(icon.element.tagName).toMatchSnapshot();
@@ -60,7 +60,7 @@ describe('Alert', () => {
             const wrapper = shallowMount(VueAlert, { propsData: { ...defaultPropsData, isDismissable: true } });
 
             // Act
-            const dismiss = wrapper.find('[data-test-id="alert-dismiss"]');
+            const dismiss = wrapper.find(`[data-test-id="${IDS.buttons.cancel}"]`);
 
             // Assert
             expect(dismiss.exists()).toBe(true);
@@ -71,7 +71,7 @@ describe('Alert', () => {
             const wrapper = shallowMount(VueAlert, { propsData: { ...defaultPropsData, isDismissable: false } });
 
             // Act
-            const dismiss = wrapper.find('[data-test-id="alert-dismiss"]');
+            const dismiss = wrapper.find(`[data-test-id="${IDS.buttons.cancel}"]`);
 
             // Assert
             expect(dismiss.exists()).toBe(false);
@@ -86,7 +86,7 @@ describe('Alert', () => {
             });
 
             // Act
-            wrapper.find('[data-test-id="alert-dismiss"]').trigger('click');
+            wrapper.find(`[data-test-id="${IDS.buttons.cancel}"]`).trigger('click');
 
             // Assert
             expect(dismissSpy).toHaveBeenCalled();
