@@ -1,5 +1,5 @@
 export const testIds = {
-    id: "alert-component",
+    id: 'alert-component',
     headings: {
         title: 'heading-title'
     },
