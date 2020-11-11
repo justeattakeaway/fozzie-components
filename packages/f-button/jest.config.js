@@ -31,5 +31,13 @@ module.exports = {
         }
     },
 
-    testURL: 'http://localhost/'
+    modulePathIgnorePatterns: [
+        './test/specs/component/'
+    ],
+
+    testURL: 'http://localhost/',
+
+    setupFilesAfterEnv: [
+        '../../jest.setup.js'
+    ]
 };

@@ -1,4 +1,5 @@
 module.exports = {
+
     moduleFileExtensions: [
         'js',
         'json',
@@ -33,5 +34,10 @@ module.exports = {
         }
     },
 
-    testURL: 'http://localhost/'
+    testURL: 'http://localhost/',
+
+    setupFilesAfterEnv: [
+        '../../jest.setup.js'
+    ]
+
 };

@@ -12,6 +12,7 @@ jest.mock('../../tenants', () => ({
 }));
 
 describe('Card', () => {
+    allure.feature('Card');
     it('should be defined', () => {
         // Arrange
         const propsData = {};

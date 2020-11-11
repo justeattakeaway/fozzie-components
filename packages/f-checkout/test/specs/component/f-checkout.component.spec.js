@@ -13,10 +13,10 @@ describe('f-checkout component tests', () => {
         expect(CheckoutComponent.isCheckoutComponentDisplayed()).toBe(true);
     });
 
-    it('should display the allergen link'), () => {
+    it('should display the allergen link', () => {
         // Assert
         expect(CheckoutComponent.isAllergenLinkDisplayed()).toBe(true);
-    }
+    });
 
     forEach(
         Object.keys(CheckoutComponent.inputs)

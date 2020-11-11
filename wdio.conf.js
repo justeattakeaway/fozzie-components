@@ -124,7 +124,18 @@ exports.config = {
     // see also: https://webdriver.io/docs/dot-reporter.html
     // reporters: ['dot'],
 
+    reporters: [
+        ['allure', {
+            outputDir: '../../allure-results',
+            disableWebdriverStepsReporting: false,
+            disableWebdriverScreenshotsReporting: false
+        }]
+    ],
 
+    afterTest: () => {
+        browser.takeScreenshot();
+        browser.deleteAllCookies();
+    },
 
     //
     // Options to be passed to Mocha.

@@ -2,6 +2,7 @@ import { shallowMount } from '@vue/test-utils';
 import CountrySelector from '../CountrySelector.vue';
 
 describe('CountrySelector', () => {
+    allure.feature('Country Selector');
     let wrapper,
         button,
         list,
