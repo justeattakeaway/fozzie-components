@@ -111,6 +111,11 @@ export default {
     },
 
     methods: {
+        /*
+        * Returns true if `field` has been touched and if it is empty
+        * The $dirty boolean changes to true when the user has focused/lost
+        * focus on the input field.
+        */
         isFieldEmpty (field) {
             return this.$v.addressValidations[field].$dirty && !this.$v.addressValidations[field].required;
         }

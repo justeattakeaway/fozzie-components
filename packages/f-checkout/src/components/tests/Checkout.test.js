@@ -103,9 +103,9 @@ describe('Checkout', () => {
         const mobileNumber = '07777777777';
 
         const address = {
-            line1: 'Fleet Place House',
-            city: 'London',
-            postcode: 'EC4M 7RF'
+            line1: 'Address First Line',
+            city: 'City',
+            postcode: 'EE1E 1EE'
         };
 
         describe('if checkoutMethod set to `Collection`', () => {

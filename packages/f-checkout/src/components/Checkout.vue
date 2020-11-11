@@ -5,7 +5,6 @@
         data-test-id="checkout-component">
         <alert
             v-if="genericErrorMessage"
-            :locale="locale"
             type="danger"
             :class="$style['c-checkout-alert']"
             :heading="copy.errorMessages.errorHeading">
