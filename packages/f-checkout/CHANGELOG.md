@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.7.0
 ------------------------------
-*November 10, 2020*
+*November 11, 2020*
 
 ### Added
 - Integration with `f-globalisation`.
