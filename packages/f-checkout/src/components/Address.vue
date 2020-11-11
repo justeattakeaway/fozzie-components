@@ -6,13 +6,13 @@
                 :class="$style['c-addressGroup-formField']"
                 name="address-line-1"
                 data-test-id="input-address-line-1"
-                :label-text="copy.labels.line1"
+                :label-text="$t.labels.line1"
                 label-style="inline">
                 <template #error>
                     <error-message
                         v-if="isAddressLine1Empty"
                         data-test-id="error-address-line1-empty">
-                        {{ copy.validationMessages.addressLine1.requiredError }}
+                        {{ $t.validationMessages.addressLine1.requiredError }}
                     </error-message>
                 </template>
             </form-field>
@@ -22,7 +22,7 @@
                 :class="$style['c-addressGroup-formField']"
                 name="address-line-2"
                 data-test-id="input-address-line-2"
-                :label-text="copy.labels.line2"
+                :label-text="$t.labels.line2"
                 label-style="inline" />
 
             <form-field
@@ -30,13 +30,13 @@
                 :class="$style['c-addressGroup-formField']"
                 name="address-city"
                 data-test-id="input-address-city"
-                :label-text="copy.labels.city"
+                :label-text="$t.labels.city"
                 label-style="inline">
                 <template #error>
                     <error-message
                         v-if="isAddressCityEmpty"
                         data-test-id="error-address-city-empty">
-                        {{ copy.validationMessages.city.requiredError }}
+                        {{ $t.validationMessages.city.requiredError }}
                     </error-message>
                 </template>
             </form-field>
@@ -45,18 +45,18 @@
             v-model="address.postcode"
             name="address-postcode"
             data-test-id="input-address-postcode"
-            :label-text="copy.labels.postcode"
+            :label-text="$t.labels.postcode"
             label-style="inline">
             <template #error>
                 <error-message
                     v-if="isAddressPostcodeEmpty"
                     data-test-id="error-address-postcode-empty">
-                    {{ copy.validationMessages.postcode.requiredError }}
+                    {{ $t.validationMessages.postcode.requiredError }}
                 </error-message>
                 <error-message
                     v-else-if="!isAddressPostcodeValid"
                     data-test-id="error-address-postcode-type-error">
-                    {{ copy.validationMessages.postcode.invalidCharError }}
+                    {{ $t.validationMessages.postcode.invalidCharError }}
                 </error-message>
             </template>
         </form-field>
@@ -76,7 +76,7 @@ export default {
     * Provide/Inject allows nested `Address` component to inherit `Checkout`
     * validator scope, `$v`.
     */
-    inject: ['$v', 'copy'],
+    inject: ['$v', '$t'],
 
     props: {
         address: {

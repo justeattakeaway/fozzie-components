@@ -19,7 +19,6 @@ const i18n = {
 
 describe('Checkout', () => {
     allure.feature('Checkout');
-  
     const checkoutUrl = 'http://localhost/account/register';
 
     it('should be defined', () => {
@@ -164,7 +163,11 @@ describe('Checkout', () => {
                 CheckoutServiceApi.submitCheckout.mockClear();
                 CheckoutServiceApi.submitCheckout.mockImplementation(async () => Promise.resolve());
 
-                wrapper = mount(VueCheckout, { propsData });
+                wrapper = mount(VueCheckout, {
+                    i18n,
+                    localVue,
+                    propsData
+                });
             });
 
             it('should emit success event when all fields are populated correctly', async () => {
@@ -251,7 +254,11 @@ describe('Checkout', () => {
                 CheckoutServiceApi.submitCheckout.mockClear();
                 CheckoutServiceApi.submitCheckout.mockImplementation(async () => Promise.resolve());
 
-                wrapper = mount(VueCheckout, { propsData });
+                wrapper = mount(VueCheckout, {
+                    i18n,
+                    localVue,
+                    propsData
+                });
             });
 
             it('should emit success event when all fields are populated correctly', async () => {

@@ -7,7 +7,7 @@
             v-if="genericErrorMessage"
             type="danger"
             :class="$style['c-checkout-alert']"
-            :heading="copy.errorMessages.errorHeading">
+            :heading="$t('errorMessages.errorHeading')">
             {{ genericErrorMessage }}
         </alert>
 
@@ -27,12 +27,12 @@
                     name="mobile-number"
                     data-test-id="input-mobile-number"
                     :label-text="$t('labels.mobileNumber')"
-                    label-style="inline" />
+                    label-style="inline">
                     <template #error>
                         <error-message
                             v-if="!isMobileNumberValid"
                             data-test-id="error-mobile-number">
-                            {{ copy.validationMessages.mobileNumber.requiredError }}
+                            {{ $t('validationMessages.mobileNumber.requiredError') }}
                         </error-message>
                     </template>
                 </form-field>
@@ -54,7 +54,7 @@
                     button-type="link"
                     data-test-id="allergy-button">
                     {{ $t('allergyText') }}
-                </button>
+                </button-component>
 
                 <button-component
                     :class="$style['c-checkout-submitButton']"
@@ -62,7 +62,7 @@
                     button-size="large"
                     data-test-id="confirm-payment-submit-button">
                     {{ $t('buttonText') }}
-                </button>
+                </button-component>
             </form>
         </card>
     </div>
@@ -146,7 +146,7 @@ export default {
                 postcode: null
             },
             genericErrorMessage: null,
-            shouldDisableCheckoutButton: false
+            shouldDisableCheckoutButton: false,
             delivery: CHECKOUT_METHOD_DELIVERY
         };
     },
@@ -157,26 +157,26 @@ export default {
     */
     provide () {
         const $v = {};
-        const copy = {};
+        const $t = {};
 
         Object.defineProperty($v, 'addressValidations', {
             enumerable: true,
             get: () => this.$v.address
         });
 
-        Object.defineProperties(copy, {
+        Object.defineProperties($t, {
             labels: {
                 enumerable: true,
-                get: () => this.copy.labels
+                get: () => this.$t('labels')
             },
 
             validationMessages: {
                 enumerable: true,
-                get: () => this.copy.validationMessages
+                get: () => this.$t('validationMessages')
             }
         });
 
-        return { $v, copy };
+        return { $v, $t };
     },
 
     computed: {

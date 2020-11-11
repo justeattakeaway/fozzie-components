@@ -29,7 +29,7 @@ export default {
         errorHeading: 'Error',
         genericServerError: 'Something went wrong, please try again later'
     },
-  
+
     buttonText: 'Go to payment',
 
     allergyText: 'If you or someone you’re ordering for has a food allergy or intolerance, click here'
