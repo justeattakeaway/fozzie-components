@@ -52,7 +52,6 @@ export default {
 .c-errorMessage-icon {
     position: absolute;
     width: 16px;
-    line-height: 20px;
     margin-top: 2px;
 }
 </style>
