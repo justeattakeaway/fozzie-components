@@ -1,8 +1,8 @@
 <template>
     <div
-        :data-theme="theme"
+        data-theme="jet"
         :class="$style['c-checkout']"
-        data-test-id='checkout-component'>
+        data-test-id="checkout-component">
         <card
             :card-heading="title"
             is-rounded
@@ -16,12 +16,12 @@
                     v-model="mobileNumber"
                     name="mobile-number"
                     data-test-id="input-mobile-number"
-                    :label-text="copy.labels.mobileNumber"
+                    :label-text="$t('labels.mobileNumber')"
                     label-style="inline" />
 
                 <address-block
                     v-if="checkoutMethod === delivery"
-                    :labels="copy.labels"
+                    :labels="$t('labels')"
                     data-test-id='address-block' />
 
                 <form-selector
@@ -36,7 +36,7 @@
                         'o-btnLink'
                     ]"
                     data-test-id="allergy-button">
-                    {{ copy.allergyText }}
+                    {{ $t('allergyText') }}
                 </button>
 
                 <button
@@ -45,7 +45,7 @@
                         'o-btn', 'o-btn--primary', 'o-btn--wide'
                     ]"
                     data-test-id="confirm-payment-submit-button">
-                    {{ buttonText }}
+                    {{ $t('buttonText') }}
                 </button>
             </form>
         </card>
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { globalisationServices } from '@justeat/f-services';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
@@ -75,12 +75,9 @@ export default {
         UserNote
     },
 
-    props: {
-        locale: {
-            type: String,
-            default: ''
-        },
+    mixins: [VueGlobalisationMixin],
 
+    props: {
         checkoutMethod: {
             type: String,
             default: 'Collection',
@@ -89,13 +86,8 @@ export default {
     },
 
     data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
-        const theme = globalisationServices.getTheme(locale);
-
         return {
-            copy: { ...localeConfig },
-            theme,
+            tenantConfigs,
             firstName: 'firstName',
             mobileNumber: null,
             address: {
@@ -104,7 +96,6 @@ export default {
                 city: null,
                 postcode: null
             },
-            buttonText: 'Go to payment',
             delivery: CHECKOUT_METHOD_DELIVERY
         };
     },
