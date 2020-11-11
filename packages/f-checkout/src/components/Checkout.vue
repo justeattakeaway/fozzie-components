@@ -2,7 +2,7 @@
     <div
         data-theme="jet"
         :class="$style['c-checkout']"
-        data-test-id='checkout-component'>
+        data-test-id="checkout-component">
         <card
             :card-heading="title"
             is-rounded
@@ -78,11 +78,6 @@ export default {
     mixins: [VueGlobalisationMixin],
 
     props: {
-        locale: {
-            type: String,
-            default: ''
-        },
-
         checkoutMethod: {
             type: String,
             default: 'Collection',

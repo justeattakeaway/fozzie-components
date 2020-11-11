@@ -10,6 +10,9 @@ v0.7.0
 ### Added
 - Integration with `f-globalisation`.
 
+### Changed
+- The way we run the demo page (used by component tests) so that we can control what we inject into the Vue instance.
+
 
 v0.6.0
 ------------------------------
