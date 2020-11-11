@@ -3,6 +3,7 @@ import { VALID_CHECKOUT_METHOD } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 
 describe('Checkout', () => {
+    allure.feature('Checkout');
     it('should be defined', () => {
         const propsData = {};
         const wrapper = shallowMount(VueCheckout, { propsData });

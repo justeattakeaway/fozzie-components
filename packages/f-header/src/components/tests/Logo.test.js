@@ -2,6 +2,7 @@ import { mount, shallowMount } from '@vue/test-utils';
 import Logo from '../Logo.vue';
 
 describe('Logo', () => {
+    allure.feature('Logo');
     it('should be defined', () => {
         const propsData = {
             theme: 'je',
