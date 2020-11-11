@@ -7,6 +7,7 @@
 
 // Import vue component
 import VueSearchbox from '@/components/Base.vue';
+import searchbox from './store/searchbox.module';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {

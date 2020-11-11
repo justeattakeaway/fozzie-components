@@ -24,4 +24,8 @@ export default {
 body {
     margin: 0;
 }
+
+ html {
+     font-size: 14px; /* set base font-size to 14px (to make sure rem values are calculated the same as in fozzie) */
+ }
 </style>

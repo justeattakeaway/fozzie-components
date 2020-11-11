@@ -1,12 +1,13 @@
 <template>
     <form
-        action="#"
-        method="post">
+        :action="config.formUrl"
+        :class="$style['c-search']"
+        method="post"
+        @submit.stop="submit">
         <input
             v-model="cuisine"
             type="hidden"
             name="cuisine">
-
         <input
             v-model="query"
             type="hidden"
@@ -20,16 +21,17 @@
                 <label
                     :class="{
                         [$style['c-search-label']]: true,
+                        [$style['has-error']]: errorMessage,
                         [$style['c-search-label--noBorder']]: isCompressed
                     }">
                     <input
                         ref="addressInput"
-                        :value="address"
+                        v-model="address"
                         name="postcode"
                         type="search"
                         data-test-id="address-box-input"
                         :aria-label="copy.fieldLabel"
-                        :aria-describedby="false ? 'errorMessage' : false"
+                        :aria-describedby="errorMessage ? 'errorMessage' : false"
                         :class="{
                             [$style['c-search-input']]: true,
                             [$style['is-notEmpty']]: address
@@ -56,15 +58,23 @@
                 <span :class="$style['c-search-btn-text']">{{ copy.buttonText }}</span>
             </button>
         </div>
+
+        <error-message
+            v-if="errorMessage"
+            :class="$style['c-search-error']"
+            aria-live="assertive">{{ errorMessage }}</error-message>
     </form>
 </template>
 
 <script>
+import ErrorMessage from '@justeat/f-error-message';
+import '@justeat/f-error-message/dist/f-error-message.css';
 import { EyeglassIcon } from '@justeat/f-vue-icons';
 
 export default {
     components: {
-        EyeglassIcon
+        EyeglassIcon,
+        ErrorMessage
     },
 
     props: {
@@ -75,25 +85,69 @@ export default {
         config: {
             type: Object,
             default: () => {}
+        },
+        service: {
+            type: Object,
+            default: () => {}
         }
     },
 
     data () {
         const {
-            address = '',
-            cuisine = '',
-            query = '',
-            queryString = '',
-            isCompressed = false
-        } = this.config;
-
-        return {
-            address,
             cuisine,
             query,
             queryString,
-            isCompressed
+            isCompressed,
+            clearAddressOnValidSubmit,
+            addressField
+        } = this.config;
+
+        return {
+            address: this.address,
+            cuisine,
+            query,
+            queryString,
+            isCompressed,
+            clearAddressOnValidSubmit,
+            addressField,
+            isDirty: false,
+            errors: []
         };
+    },
+
+    computed: {
+        /**
+         * Return a tenant specific error message from the config.
+         *
+         * @returns {*}
+         */
+        errorMessage() {
+            const messageKey = this.errors.length && this.errors[0];
+
+            if (!messageKey) return false;
+
+            return this.copy.errors[messageKey] || this.copy.errors['UNKNOWN_ERROR'];
+        },
+    },
+
+    methods: {
+        async submit (e) {
+            const isValid = this.service.isValid(this.address);
+
+            if (isValid === true) {
+                this.errors = [];
+            } else {
+                e.preventDefault();
+                this.errors = isValid;
+            }
+
+            if (this.clearAddressOnValidSubmit) {
+                this.address = '';
+                this.isDirty = false;
+            }
+
+            return true;
+        }
     }
 };
 </script>

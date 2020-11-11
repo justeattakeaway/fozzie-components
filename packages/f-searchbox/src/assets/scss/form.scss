@@ -89,16 +89,9 @@ $search-button-bgColor--active: $orange--darkest;
     }
 }
 
-// @Todo - should use f-error-message here instead.
 .c-search-error {
-    background: url('//dy3erx8o0a6nh.cloudfront.net/images/icons/states/icon-error--red.svg') no-repeat left 10px;
-    color: $color-text--danger;
-    font-family: $font-family-base;
     @include font-size(body-s, false);
-    padding-top: spacing();
-    padding-left: 20px;
     position: static;
-    text-align: left;
 }
 
 .c-search-fieldWrapper {
