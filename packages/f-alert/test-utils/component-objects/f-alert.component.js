@@ -1,5 +1,7 @@
-const alertComponent = () => $('[data-test-id="alert-component"]');
-const exitAlertButton = () => $('[data-test-id="alert-dismiss"]'); 
+const IDs = require('./data-test-ids');
+
+const alertComponent = () => $(`[data-test-id="${IDS.component.id}"]`);
+const exitAlertButton = () => $(`[data-test-id="${IDS.button.cancel}"]`); 
 
 exports.isAlertDisplayed = () => alertComponent().isDisplayed();
 exports.waitForAlert = () => alertComponent().waitForExist();
