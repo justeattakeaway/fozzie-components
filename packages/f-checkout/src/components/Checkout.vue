@@ -308,7 +308,7 @@ export default {
 
 <style lang="scss" module>
 $line-height                              : 16px;
-$checkout-width                           : 462px;
+$checkout-width                           : 460px;
 
 .c-checkout {
     margin: auto;
@@ -337,13 +337,8 @@ $checkout-width                           : 462px;
         }
     }
 
-    h1 {
-        @include font-size(heading-s);
-        margin-bottom: spacing(x2);
-    }
-
     .c-checkout-allergyButton {
-      padding: 0 spacing(x3);
+        padding: 0 spacing(x3);
     }
 
     .c-checkout-submitButton {
