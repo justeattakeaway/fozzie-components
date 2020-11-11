@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import globalisationMixin from '@justeat/f-globalisation';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
@@ -75,7 +75,7 @@ export default {
         UserNote
     },
 
-    mixins: [globalisationMixin],
+    mixins: [VueGlobalisationMixin],
 
     props: {
         locale: {

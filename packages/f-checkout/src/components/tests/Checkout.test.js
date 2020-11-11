@@ -1,9 +1,12 @@
-import { shallowMount, createLocalVue, config } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { VueI18n } from '@justeat/f-globalisation';
 import { VALID_CHECKOUT_METHOD } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import tenantConfigs from '../../tenants';
 
 const localVue = createLocalVue();
+
+localVue.use(VueI18n);
 
 const i18n = {
     locale: 'en-GB',
@@ -11,15 +14,12 @@ const i18n = {
     setLocaleMessage: jest.fn()
 };
 
-// Mock the vue-i18n context objects
-config.mocks.$i18n = i18n;
-config.mocks.$t = key => key;
-
 describe('Checkout', () => {
     it('should be defined', () => {
         const propsData = {};
 
         const wrapper = shallowMount(VueCheckout, {
+            i18n,
             localVue,
             propsData
         });
@@ -37,6 +37,7 @@ describe('Checkout', () => {
 
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
+                    i18n,
                     localVue,
                     propsData
                 });
@@ -55,6 +56,7 @@ describe('Checkout', () => {
 
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
+                    i18n,
                     localVue,
                     propsData
                 });
@@ -73,6 +75,7 @@ describe('Checkout', () => {
 
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
+                    i18n,
                     localVue,
                     propsData
                 });
@@ -93,6 +96,7 @@ describe('Checkout', () => {
             it('should capitalize `firstName` data', async () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
+                    i18n,
                     localVue,
                     propsData
                 });
@@ -112,6 +116,7 @@ describe('Checkout', () => {
             it('should add `name` to title text', async () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
+                    i18n,
                     localVue,
                     propsData
                 });
