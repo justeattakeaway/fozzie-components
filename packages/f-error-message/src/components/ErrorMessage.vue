@@ -39,7 +39,7 @@ export default {
 .c-errorMessage {
     position: relative;
     color: $color-text--danger;
-    @include font-size(base);
+    @include font-size();
     margin-top: spacing();
 }
 

@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-error-message",
   "description": "Fozzie Error Message – Generic inline error message",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "dist/f-error-message.umd.min.js",
   "files": [
     "dist"
