@@ -157,26 +157,13 @@ export default {
     */
     provide () {
         const $v = {};
-        const $t = {};
 
         Object.defineProperty($v, 'addressValidations', {
             enumerable: true,
             get: () => this.$v.address
         });
 
-        Object.defineProperties($t, {
-            labels: {
-                enumerable: true,
-                get: () => this.$t('labels')
-            },
-
-            validationMessages: {
-                enumerable: true,
-                get: () => this.$t('validationMessages')
-            }
-        });
-
-        return { $v, $t };
+        return { $v };
     },
 
     computed: {
