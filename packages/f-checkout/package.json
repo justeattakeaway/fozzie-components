@@ -51,7 +51,8 @@
     "@justeat/f-form-field": "0.7.1",
     "@justeat/f-globalisation": "0.2.0",
     "@justeat/f-services": "1.4.0",
-    "axios": "0.20.0"
+    "axios": "0.20.0",
+    "vuelidate": "0.7.6"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
