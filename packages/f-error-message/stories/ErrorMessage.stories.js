@@ -1,8 +1,8 @@
 import {
     withKnobs, boolean, select, text
 } from '@storybook/addon-knobs';
-import ErrorMessage from '../src/components/ErrorMessage.vue';
 import { withA11y } from '@storybook/addon-a11y';
+import ErrorMessage from '../src/components/ErrorMessage.vue';
 
 export default {
     title: 'Components/Atoms',
