@@ -4,7 +4,7 @@
             $style['o-btn'],
             $style[`o-btn--${buttonType}`],
             $style[`o-btn--size${buttonSizeClassname}`],
-            (fullWidth ? $style['o-btn--fullWidth'] : '')
+            (isFullWidth ? $style['o-btn--fullWidth'] : '')
         ]"
         data-test-id='button-component'>
         <slot />
@@ -25,7 +25,7 @@ export default {
             type: String,
             default: 'medium'
         },
-        fullWidth: {
+        isFullWidth: {
             type: Boolean,
             default: false
         }

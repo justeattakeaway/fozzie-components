@@ -18,11 +18,11 @@ export const ButtonComponent = () => ({
         buttonSize: {
             default: select('Button Size', ['xsmall', 'small', 'medium', 'large'], 'medium')
         },
-        fullWidth: {
-            default: boolean('fullWidth', false)
+        isFullWidth: {
+            default: boolean('isFullWidth', false)
         }
     },
-    template: '<vue-button :buttonType="buttonType" :buttonSize="buttonSize" :fullWidth="fullWidth">Default Button Text</vue-button>'
+    template: '<vue-button :buttonType="buttonType" :buttonSize="buttonSize" :isFullWidth="isFullWidth">Default Button Text</vue-button>'
 });
 
 ButtonComponent.storyName = 'f-button';
