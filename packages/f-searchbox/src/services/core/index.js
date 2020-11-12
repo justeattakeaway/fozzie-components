@@ -14,11 +14,6 @@ export default (options = {}) => {
         get validation () {
             return validation;
         },
-        /* eslint-disable-next-line no-empty-function */
-        set options (value) { },
-        get options () {
-            return options;
-        },
         clientInit (dependentApiPromise) {
             if (service.clientInit !== undefined) {
                 service.clientInit(dependentApiPromise);

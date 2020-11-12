@@ -59,6 +59,8 @@
             </button>
         </div>
 
+        <p>{{ store.state.count }}</p>
+
         <error-message
             v-if="errorMessage"
             :class="$style['c-search-error']"
@@ -70,6 +72,7 @@
 import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import { EyeglassIcon } from '@justeat/f-vue-icons';
+import store from '../store/searchbox.module';
 
 export default {
     components: {
@@ -111,7 +114,8 @@ export default {
             clearAddressOnValidSubmit,
             addressField,
             isDirty: false,
-            errors: []
+            errors: [],
+            store: store
         };
     },
 
