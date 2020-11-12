@@ -5,6 +5,8 @@ import { ENGLISH_LOCALE } from '../../constants/globalisation';
 
 Vue.use(VueI18n);
 
+Vue.config.devtools = true;
+
 const i18n = new VueI18n({
     locale: ENGLISH_LOCALE,
     fallbackLocale: ENGLISH_LOCALE,
