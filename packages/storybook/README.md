@@ -12,6 +12,10 @@ Storybook runs outside of your app. This allows you to develop UI components in 
 `yarn storybook:deploy`
 
 
+### Using the Vue Dev tools
+To use the Vue Dev tools you need to open the canvas in a new tab (using the link in the top right of Storybook).
+
+
 
 
 ## More Info
