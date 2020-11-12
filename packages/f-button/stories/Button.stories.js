@@ -13,10 +13,10 @@ export const ButtonComponent = () => ({
     components: { VueButton },
     props: {
         buttonType: {
-            default: select('Button Type', ['primary', 'secondary', 'outline', 'ghost', 'link'])
+            default: select('Button Type', ['primary', 'secondary', 'outline', 'ghost', 'link', 'icon'])
         },
         buttonSize: {
-            default: select('Button Size', ['xsmall', 'small', 'medium', 'large'], 'medium')
+            default: select('Button Size', ['XSmall', 'small', 'medium', 'large'], 'medium')
         },
         fullWidth: {
             default: boolean('fullWidth', false)

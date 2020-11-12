@@ -18,10 +18,11 @@
                 data-test-id="alert-heading">
                 {{ heading }}
             </h2>
-            <button
+            <vue-button
                 v-if="isDismissable"
-                type="button"
-                :class="[$style['c-alert-dismiss'], 'o-btn o-btn--icon']"
+                :class="[$style['c-alert-dismiss']]"
+                button-type="icon"
+                button-size="sizeXSmall"
                 data-test-id="alert-dismiss"
                 @click="dismiss">
                 <cross-icon
@@ -30,7 +31,7 @@
                 <span class="is-visuallyHidden">
                     {{ copy.dismissAlertText }}
                 </span>
-            </button>
+            </vue-button>
         </div>
         <div
             :class="$style['c-alert-content']">
@@ -49,7 +50,8 @@ import {
 } from '@justeat/f-vue-icons';
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
-
+import VueButton from '@justeat/f-button';
+import '@justeat/f-button/dist/f-button.css';
 export default {
     name: 'VueAlert',
     components: {
@@ -158,7 +160,7 @@ $alert-borderRadius: $border-radius;
             margin-right: 10px;
         }
 
-    button.c-alert-dismiss { // TODO: Needed more specificity here.
+    vue-button.c-alert-dismiss { // TODO: Needed more specificity here.
         text-indent: 0;
         margin-left: auto;
         margin-right: spacing();

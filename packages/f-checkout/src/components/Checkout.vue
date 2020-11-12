@@ -30,23 +30,23 @@
 
                 <form-selector />
                 <user-note data-test-id='user-note' />
-                <button
+                <vue-button
                     :class="[
                         $style['o-btn--allergy'],
                         'o-btnLink'
                     ]"
                     data-test-id="allergy-button">
                     {{ copy.allergyText }}
-                </button>
+                </vue-button>
 
-                <button
+                <vue-button
                     :class="[
                         $style['o-btn--payment'],
                         'o-btn', 'o-btn--primary', 'o-btn--wide'
                     ]"
                     data-test-id="confirm-payment-submit-button">
                     {{ buttonText }}
-                </button>
+                </vue-button>
             </form>
         </card>
     </div>
@@ -58,11 +58,13 @@ import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
+import VueButton from '@justeat/f-button';
 import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY } from '../constants';
 import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
 import tenantConfigs from '../tenants';
+import '@justeat/f-button/dist/f-button.css';
 
 export default {
     name: 'VueCheckout',
@@ -72,7 +74,8 @@ export default {
         Card,
         FormField,
         FormSelector,
-        UserNote
+        UserNote,
+        VueButton
     },
 
     props: {

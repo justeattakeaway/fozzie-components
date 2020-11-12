@@ -334,4 +334,18 @@ $btn-sizeXSmall-lineHeight      : 1;
     }
 }
 
+//remove unneeded styles (like colours) from a button when only an icon is on it (like a close button)
+.o-btn--icon {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: 0;
+  direction: ltr;
+  display: block;
+  overflow: hidden;
+  text-align: left;
+  text-indent: -999em;
+  padding: 0;
+  &:hover { background-color: transparent; }
+}
+
 </style>
