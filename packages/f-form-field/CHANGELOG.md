@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v1.0.0
+------------------------------
+*November 9, 2020*
+
+### Changed
+- Added styles for error state and disabled state of form input.
+
+
 v0.9.0
 ------------------------------
 *November 6, 2020*
