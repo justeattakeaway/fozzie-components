@@ -257,7 +257,7 @@ export default {
 
         isFormValid () {
             /*
-            * Check to see if any `Vulidate` calidation errors
+            * Check to see if any `Vuelidate` validation errors
             */
             this.$v.$touch();
             return !this.$v.$invalid;
