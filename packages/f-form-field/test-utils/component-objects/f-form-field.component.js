@@ -7,7 +7,7 @@ const input = () => $('[data-test-id="testInput"]');
  * @description
  * The below function adds and displays the user's first name into the form-field component.
  */
-exports.displayUserInput = (userInput) => {
+exports.displayUserInput = userInput => {
     input().setValue(userInput.firstName);
     input().getValue();
 };
@@ -15,4 +15,4 @@ exports.displayUserInput = (userInput) => {
 exports.waitForFormField = () => formFieldComponent().waitForExist();
 
 exports.isLabelDisplayed = () => testLabel().isDisplayed();
-exports.isFormFieldDisplayed = () => formFieldComponent().isDisplayed(); 
+exports.isFormFieldDisplayed = () => formFieldComponent().isDisplayed();

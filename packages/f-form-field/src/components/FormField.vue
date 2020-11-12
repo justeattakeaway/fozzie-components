@@ -1,7 +1,11 @@
 <template>
     <div
         :data-theme-formfield="theme"
-        :class="$style['c-formField']"
+        :class="[
+            $style['c-formField'], {
+                [$style['c-formField--invalid']]: hasError
+            }
+        ]"
         data-test-id="form-field-component">
         <div
             :class="$style['c-formField-inputWrapper']">
@@ -21,7 +25,10 @@
                 placeholder=" "
                 :data-js-test="testId"
                 data-test-id="testInput"
-                :class="[$style['o-form-field'], $style['c-formField-input']]"
+                :class="[
+                    $style['o-form-field'],
+                    $style['c-formField-input']
+                ]"
                 @input="updateValue"
                 v-on="listeners"
             >
@@ -86,6 +93,11 @@ export default {
         value: {
             type: [String, Number],
             default: ''
+        },
+
+        hasError: {
+            type: Boolean,
+            default: false
         },
 
         dataTestId: {
@@ -173,12 +185,17 @@ export default {
 </script>
 
 <style lang="scss" module>
-$form-input-colour                        : $color-text;
+$form-input-textColour                    : $color-text;
+$form-input-textColour--disabled          : $grey--midDark;
 $form-input-bg                            : $white;
+$form-input-bg--hover                     : rgba($black, 0.04);
+$form-input-bg--disabled                  : $color-disabled;
 $form-input-borderRadius                  : $border-radius;
 $form-input-borderWidth                   : 1px;
-$form-input-borderColour                  : $grey--mid;
-$form-input-borderColour--focus           : $grey--dark;
+$form-input-borderColour                  : $color-border;
+$form-input-borderColour--focus           : $color-border--interactive;
+$form-input-borderColour--invalid         : $red;
+$form-input-borderColour--disabled        : $color-disabled;
 $form-input-height                        : 46px; // height is 46px + 1px border = 48px
 $form-input-padding                       : spacing(x1.5) spacing(x2);
 $form-input-fontSize                      : 'body-l';
@@ -198,12 +215,32 @@ $form-input-fontSize                      : 'body-l';
         padding: $form-input-padding; //convert padding to rem
         @include font-size($form-input-fontSize);
         font-family: $font-family-base;
-        color: $form-input-colour;
+        color: $form-input-textColour;
         font-weight: $font-weight-base;
         background-color: $form-input-bg;
         border: $form-input-borderWidth solid $form-input-borderColour;
         border-radius: $form-input-borderRadius;
         background-clip: padding-box;
+
+        &:hover {
+            background-color: $form-input-bg--hover;
+        }
+
+        .c-formField--invalid & {
+            border-color: $form-input-borderColour--invalid;
+        }
+
+        // Disabled state
+        &[disabled] {
+            cursor: not-allowed;
+
+            &,
+            &:hover {
+                background-color: $form-input-bg--disabled;
+                color: $form-input-textColour--disabled;
+                border-color: $form-input-borderColour--disabled;
+            }
+        }
     }
 
 

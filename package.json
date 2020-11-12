@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "2.14.0",
+  "version": "2.15.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -29,7 +29,7 @@
     "@justeat/browserslist-config-fozzie": "1.1.1",
     "@justeat/eslint-config-fozzie": "3.4.1",
     "@justeat/f-build-config": "0.3.0",
-    "@justeat/f-utils": "1.0.0-beta.0",
+    "@justeat/f-utils": "1.0.0",
     "@justeat/fozzie": "5.0.0-beta.0",
     "@justeat/fozzie-colour-palette": "3.0.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",

@@ -1777,11 +1777,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-utils/-/f-utils-1.0.0.tgz#d4f38f6c2b2992fefa39789f1ce742dc083798b1"
   integrity sha512-sxAIxcHrgYYlxTZuadFTvWeB24M3C53eLWLQ3xMm3nnMQN8Ls8qoWM8WSW8YadgJVUZ5/uq3tP4xMihpvxNupw==
 
-"@justeat/f-utils@1.0.0-beta.0":
-  version "1.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-utils/-/f-utils-1.0.0-beta.0.tgz#4d0765efda51ed78b5cd6a377fcea02b343dc1ff"
-  integrity sha512-CkvBhv9pJMY/qqbYAu1c2buLcyfGfR8LbGGmIUh8LdTf+P1UvPi5868N+7W5pKStNRD2WOOK5Oo6TBRLMgt1Pg==
-
 "@justeat/f-vue-icons@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.0.0.tgz#368bf02d1f2befe623342e41ae14dce24c62ee79"
