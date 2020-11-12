@@ -35,7 +35,7 @@
                         :class="{
                             [$style['c-search-input']]: true,
                             [$style['is-notEmpty']]: address
-                        }">
+                        }"/>
 
                     <span :class="$style['c-search-placeholder']">{{ copy.fieldPlaceholder }}</span>
                 </label>
@@ -59,8 +59,6 @@
             </button>
         </div>
 
-        <p>{{ store.state.count }}</p>
-
         <error-message
             v-if="errorMessage"
             :class="$style['c-search-error']"
@@ -73,6 +71,8 @@ import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import { EyeglassIcon } from '@justeat/f-vue-icons';
 import store from '../store/searchbox.module';
+import { getLastLocation } from '../utils/helpers';
+import { processLocationCookie } from '../services/form.services';
 
 export default {
     components: {
@@ -97,25 +97,28 @@ export default {
 
     data () {
         const {
-            cuisine,
-            query,
-            queryString,
-            isCompressed,
-            clearAddressOnValidSubmit,
-            addressField
-        } = this.config;
-
-        return {
-            address: this.address,
+            address,
             cuisine,
             query,
             queryString,
             isCompressed,
             clearAddressOnValidSubmit,
             addressField,
-            isDirty: false,
-            errors: [],
-            store: store
+            setCookies,
+            autoPopulateAddress
+        } = this.config;
+
+        return {
+            address: this.lastAddress || address,
+            cuisine,
+            query,
+            queryString,
+            isCompressed,
+            clearAddressOnValidSubmit,
+            addressField,
+            setCookies,
+            autoPopulateAddress,
+            store
         };
     },
 
@@ -126,7 +129,7 @@ export default {
          * @returns {*}
          */
         errorMessage() {
-            const messageKey = this.errors.length && this.errors[0];
+            const messageKey = this.store.state.errors.length && this.store.state.errors[0];
 
             if (!messageKey) return false;
 
@@ -136,21 +139,31 @@ export default {
 
     methods: {
         async submit (e) {
-            const isValid = this.service.isValid(this.address);
+            this.store.commit('SET_IS_VALID', this.service.isValid(this.address));
 
-            if (isValid === true) {
-                this.errors = [];
+            if (this.store.state.isValid === true) {
+                this.store.commit('SET_ERRORS', []);
             } else {
                 e.preventDefault();
-                this.errors = isValid;
+                this.store.commit('SET_ERRORS', this.store.state.isValid);
             }
 
             if (this.clearAddressOnValidSubmit) {
                 this.address = '';
-                this.isDirty = false;
+                this.store.commit('SET_IS_DIRTY', false);
             }
 
+            processLocationCookie(this.setCookies, this.address);
+
             return true;
+        }
+    },
+
+    mounted () {
+        this.lastAddress = this.config.locationFormat(getLastLocation());
+
+        if (this.lastAddress) {
+            this.address = this.autoPopulateAddress ? this.lastAddress : '';
         }
     }
 };
