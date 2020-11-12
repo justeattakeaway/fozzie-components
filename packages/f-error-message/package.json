@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-error-message",
   "description": "Fozzie Error Message – Generic inline error message",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "dist/f-error-message.umd.min.js",
   "files": [
     "dist"
@@ -37,7 +37,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-vue-icons": "1.0.0"
+    "@justeat/f-vue-icons": "1.10.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
