@@ -100,7 +100,7 @@ describe('FormField', () => {
 
             it('should not add the attribute data-js-test on input element if dataTestId is not specified', () => {
                 // Arrange & Act
-                const wrapper = shallowMount(FormField, { });
+                const wrapper = shallowMount(FormField, {});
                 const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
 
                 // Assert
