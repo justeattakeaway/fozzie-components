@@ -1,7 +1,6 @@
-// Uncomment the import below to add prop controls to your Story (and add `withKnobs` to the decorators array)
-// import {
-//     withKnobs, select, boolean
-// } from '@storybook/addon-knobs';
+import {
+    withKnobs, select, boolean
+} from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import CookieBanner from '../src/components/CookieBanner.vue';
 
@@ -12,15 +11,10 @@ export default {
 
 export const CookieBannerComponent = () => ({
     components: { CookieBanner },
-    props: {
-        buttonType: {
-            default: select('Button Type', ['primary', 'primaryAlt', 'secondary', 'tertiary', 'link'])
-        },
-        fullWidth: {
-            default: boolean('fullWidth', false)
-        }
-    },
-    template: `<cookie-banner />`
+    props: { locale: {
+        default: select('Locale', ['en-GB', 'en-IE', 'es-ES'])
+    } },
+    template: `<cookie-banner :locale="locale" />`
 });
 
 CookieBannerComponent.storyName = 'f-cookie-banner';
