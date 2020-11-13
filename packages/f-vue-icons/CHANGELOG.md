@@ -11,6 +11,10 @@ v1.11.0
 ### Added
 - Caret icon.
 
+### Fixed
+- Unused ids.
+- Removed superfluous elements which were preventing CSS styles from applying fill colours.
+
 
 v1.10.0
 ------------------------------
