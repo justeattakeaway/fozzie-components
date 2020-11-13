@@ -19,17 +19,21 @@ export default (options = {}) => {
                 service.clientInit(dependentApiPromise);
             }
         },
+        /**
+         * Core validation method, loops though all the validation methods (injected via validation)
+         * & returns keys if the validation fails or `true` if it passes.
+         * @param value
+         * @param validationOverride
+         * @returns {boolean}
+         */
         isValid (value, validationOverride) {
-            // loop through validation methods
             const validationService = validationOverride || validation;
             const errors = Object.keys(validationService).reduce((p, key) => (
                 validationService[key](value)
                     ? p
                     : p.concat(key || false)
             ), []);
-
-            // return keys where validation failed
-            // or true if ALL validation is passed
+            
             return errors.length ? errors : true;
         }
     };

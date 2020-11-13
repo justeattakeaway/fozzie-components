@@ -8,7 +8,7 @@
             content="width=device-width, initial-scale=1">
         <vue-searchbox
             locale="en-GB"
-            :config="{ hideShell: false, isCompressed: false }" />
+            :config="{ hideShell: false, isCompressed: false, onSubmit: true }" />
     </div>
 </template>
 

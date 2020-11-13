@@ -21,6 +21,23 @@ const processLocationCookie = (shouldSetCookie, address) => {
     }
 };
 
+/**
+ * Custom submit handler for consuming applications that want to call it's own submit handler.
+ * The custom submit handler would be set via the `config` `onSubmit: function() {}` This method prevents
+ * f-searchbox from making it's on submission and allows the consuming application to proceed with it's own.
+ *
+ * @param submit
+ * @param address
+ * @param e
+ */
+const onCustomSubmit = (submit, address, e) => {
+    if (submit) {
+        e.preventDefault();
+        submit(address);
+    }
+};
+
 export {
-    processLocationCookie
+    processLocationCookie,
+    onCustomSubmit
 };

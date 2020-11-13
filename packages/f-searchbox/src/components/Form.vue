@@ -14,49 +14,16 @@
             name="query">
 
         <div :class="$style['c-search-fieldWrapper']">
-            <div
-                :class="{
-                    [$style['c-search-inputWrapper']]: true
-                }">
-                <label
-                    :class="{
-                        [$style['c-search-label']]: true,
-                        [$style['has-error']]: errorMessage,
-                        [$style['c-search-label--noBorder']]: isCompressed
-                    }">
-                    <input
-                        ref="addressInput"
-                        v-model="address"
-                        name="postcode"
-                        type="search"
-                        data-test-id="address-box-input"
-                        :aria-label="copy.fieldLabel"
-                        :aria-describedby="errorMessage ? 'errorMessage' : false"
-                        :class="{
-                            [$style['c-search-input']]: true,
-                            [$style['is-notEmpty']]: address
-                        }"/>
+            <form-label-wrapper
+                v-model="address"
+                :error-message="errorMessage"
+                :address="address"
+                :copy="copy"
+                :is-compressed="isCompressed"/>
 
-                    <span :class="$style['c-search-placeholder']">{{ copy.fieldPlaceholder }}</span>
-                </label>
-            </div>
-
-            <button
-                type="submit"
-                data-test-id="find-restaurants-button"
-                :aria-label="copy.buttonText"
-                :class="{
-                    [$style['c-search-btn']]: true,
-                    [$style['c-search-btn--compressed']]: isCompressed
-                }">
-                <div :class="$style['c-search-btn-icon']">
-                    <slot name="icon-submit">
-                        <eyeglass-icon />
-                    </slot>
-                </div>
-
-                <span :class="$style['c-search-btn-text']">{{ copy.buttonText }}</span>
-            </button>
+            <form-search-button
+                :copy="copy"
+                :is-compressed="isCompressed"/>
         </div>
 
         <error-message
@@ -68,16 +35,21 @@
 
 <script>
 import ErrorMessage from '@justeat/f-error-message';
+import FormLabelWrapper from './formElements/FormLabelWrapper.vue';
+import FormSearchButton from './formElements/FormSearchButton.vue';
 import '@justeat/f-error-message/dist/f-error-message.css';
-import { EyeglassIcon } from '@justeat/f-vue-icons';
 import store from '../store/searchbox.module';
 import { getLastLocation } from '../utils/helpers';
-import { processLocationCookie } from '../services/form.services';
+import {
+    processLocationCookie,
+    onCustomSubmit
+} from '../services/general.services';
 
 export default {
     components: {
-        EyeglassIcon,
-        ErrorMessage
+        ErrorMessage,
+        FormLabelWrapper,
+        FormSearchButton
     },
 
     props: {
@@ -105,6 +77,7 @@ export default {
             clearAddressOnValidSubmit,
             addressField,
             setCookies,
+            onSubmit,
             autoPopulateAddress
         } = this.config;
 
@@ -117,6 +90,7 @@ export default {
             clearAddressOnValidSubmit,
             addressField,
             setCookies,
+            onSubmit,
             autoPopulateAddress,
             store
         };
@@ -138,25 +112,43 @@ export default {
     },
 
     methods: {
+        /**
+         * Main submit handler that's responsible for submitting searches to SERP:
+         *
+         * 1. Checks address validation.
+         * 2. If the address is valid we submit the address to SERP.
+         * 3. Note: `configs` determine custom behaviour, e.g setCookies & clearAddressOnValidSubmit etc see readme.
+         *
+         * @param boolean
+         */
         async submit (e) {
             this.store.commit('SET_IS_VALID', this.service.isValid(this.address));
 
             if (this.store.state.isValid === true) {
                 this.store.commit('SET_ERRORS', []);
+                processLocationCookie(this.setCookies, this.address);
+                this.clearAddressValue(this.clearAddressOnValidSubmit);
+                onCustomSubmit(this.onSubmit, this.address, event);
             } else {
                 e.preventDefault();
                 this.store.commit('SET_ERRORS', this.store.state.isValid);
             }
 
-            if (this.clearAddressOnValidSubmit) {
+            return true;
+        },
+
+        /**
+         * Clears the address value when the address is valid.
+         * Determined by the config `clearAddressOnValidSubmit`.
+         *
+         * @param shouldClear
+         */
+        clearAddressValue (shouldClear) {
+            if (shouldClear) {
                 this.address = '';
                 this.store.commit('SET_IS_DIRTY', false);
             }
-
-            processLocationCookie(this.setCookies, this.address);
-
-            return true;
-        }
+        },
     },
 
     mounted () {
@@ -170,34 +162,24 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/form.scss';
+.c-search {
+    background-color: transparent;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    max-width: 610px;
 
-.is-visuallyHidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
+    @include media('>=narrow') {
+        min-height: 90px;
+    }
 }
 
-.c-search-btn-clear {
-    $btn-size: 52px;
+.c-search-fieldWrapper {
+    display: flex;
+}
 
-    background: $white;
-    border: none;
-    width: $btn-size;
-    height: $btn-size;
-    right: 5px;
-    top: 5px;
-    position: absolute;
-    cursor: pointer;
-
-    &:hover,
-    &:focus {
-        background-color: $grey--offWhite;
-    }
+.c-search-error {
+    @include font-size(body-s, false);
+    position: static;
 }
 </style>

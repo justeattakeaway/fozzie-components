@@ -17,7 +17,8 @@
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 import SearchForm from './Form.vue';
-import SearchShell from './Shell.vue';
+import SearchShell from './shells/Shell.vue';
+import NoSearchShell from './shells/NoShell.vue';
 import Service from '../services/core';
 // import SearchboxServiceApi from '../services/SearchboxServiceApi';
 
@@ -25,7 +26,8 @@ export default {
     name: 'VueSearchbox',
     components: {
         SearchForm,
-        SearchShell
+        SearchShell,
+        NoSearchShell
     },
     props: {
         locale: {
@@ -50,7 +52,7 @@ export default {
             componentLocale: locale,
             theme,
             service,
-            element: componentConfig.hideShell ? 'search-no-shell' : 'search-shell'
+            element: componentConfig.hideShell ? 'no-search-shell' : 'search-shell'
         };
     }
 };

@@ -15,7 +15,7 @@ export default new Vuex.Store({
         ['SET_IS_VALID']: (state, isValid) => {
             state.isValid = isValid;
         },
-    
+        
         ['SET_ERRORS']: (state, errors) => {
             state.errors = errors;
         },

@@ -5,162 +5,33 @@ $search-button-bgColor: $color-primary;
 $search-button-bgColor--hover: $orange--dark;
 $search-button-bgColor--active: $orange--darkest;
 
-.c-search {
-    background-color: transparent;
-    display: inline-block;
-    position: relative;
-    width: 100%;
-    max-width: 610px;
-
-    @include media('>=narrow') {
-        min-height: 90px;
-    }
-}
-
-.c-search-btn {
-    display: flex;
-    align-items: center;
-    -webkit-appearance: none;
-    -webkit-box-sizing: border-box;
-    background-color: $search-button-bgColor;
-    border: none;
-    border-radius: 0 $border-radius $border-radius 0;
-    box-sizing: border-box;
-    color: $white;
-    cursor: pointer;
-    font-family: $font-family-base;
-    @include font-size(heading-s);
-    font-weight: $font-weight-bold;
-    justify-content: space-around;
-    margin: 0;
-    outline: none;
-    text-align: center;
-    text-decoration: none;
-    height: 56px;
-    min-width: 56px;
-    padding: spacing();
-    right: 0;
-
-    &:focus,
-    &:hover {
-        background-color: $search-button-bgColor--hover;
-    }
-
-    &:active {
-        background-color: $search-button-bgColor--active;
-    }
-
-    @include media('>=narrow') {
-        height: 60px;
-    }
-
-    @include media('>=narrowMid') {
-        min-width: 128px;
-    }
-
-    .c-search-btn-icon {
-        @include media('>=narrowMid') {
-            display: none;
-        }
-
-        svg {
-            width: 24px;
-            height: 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    }
-}
-
-.c-search-btn--compressed {
-    margin: spacing(x0.5);
-    border-radius: $border-radius;
-    height: 48px;
-    min-width: 48px;
-}
-
-.c-search-btn-text {
-    display: none;
-
-    @include media('>=narrowMid') {
-        display: block;
-        margin: 0 auto;
-    }
-}
-
-.c-search-error {
-    @include font-size(body-s, false);
-    position: static;
-}
-
-.c-search-fieldWrapper {
-    display: flex;
-}
-
-.c-search-innerFields {
-    align-items: center;
-    display: flex;
-    height: 35px;
+.c-search-placeholder {
     position: absolute;
-    right: 0;
-    top: 11px;
+    top: spacing();
+    left: spacing(x2);
+    text-align: left;
+    transition: all 0.3s;
+    cursor: text;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    right: spacing(x2);
+
+    @include media('>=narrowMid') {
+        top: 50%;
+        transform: translateY(-50%);
+    }
 }
 
 .c-search-input,
-.c-search-streetInput {
-    @include font-size(body-l);
-    line-height: 1.25;
-    border: none;
-    outline: none;
-    padding: spacing();
-    font-family: $font-family-base;
-    background-color: transparent;
-}
-
-.c-search-input {
-    box-sizing: border-box;
-    padding: 28px spacing(x2) spacing();
-    width: 100%;
-    font-weight: $font-weight-bold;
-    height: 56px;
-
-    &::placeholder {
-        text-transform: none;
-    }
-
-    // Add padding to input when new elements overlap field
-    .has-streetNumber & {
-       padding-right: 60px;
-    }
-
-    @include media('>=narrow') {
-        height: 60px;
-    }
-
-    &:focus + .c-search-placeholder,
-    &.is-notEmpty + .c-search-placeholder {
-        @include font-size(caption);
-        transform: translateY(0);
-
-        @include media('>=narrowMid') {
-            @include font-size(body-s, false);
-            transform: translateY(-110%);
+.c-search-placeholder {
+    @include media('<narrowMid') {
+        .has-geo & {
+            right: spacing(x4);
         }
-    }
-}
-
-.c-search-inputWrapper {
-    position: relative;
-    border: 0;
-    margin: 0;
-    padding: 0;
-    flex: 1 1 auto;
-}
-
-.c-search-inputWrapper--fullWidth {
-    @include media('>=mid') {
-        position: static;
+        .has-geo.has-streetNumber & {
+            right: 80px;
+        }
     }
 }
 
@@ -186,38 +57,56 @@ $search-button-bgColor--active: $orange--darkest;
     }
 }
 
-.c-search-label--noBorder {
-    border: none;
-}
-
-.c-search-placeholder {
-    position: absolute;
-    top: spacing();
-    left: spacing(x2);
-    text-align: left;
-    transition: all 0.3s;
-    cursor: text;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    right: spacing(x2);
-
-    @include media('>=narrowMid') {
-        top: 50%;
-        transform: translateY(-50%);
-    }
-}
-
 .c-search-input,
-.c-search-placeholder {
-    @include media('<narrowMid') {
-      .has-geo & {
-          right: spacing(x4);
-      }
-      .has-geo.has-streetNumber & {
-          right: 80px;
-      }
+.c-search-streetInput {
+    @include font-size(body-l);
+    line-height: 1.25;
+    border: none;
+    outline: none;
+    padding: spacing();
+    font-family: $font-family-base;
+    background-color: transparent;
+}
+
+.c-search-input {
+    box-sizing: border-box;
+    padding: 28px spacing(x2) spacing();
+    width: 100%;
+    font-weight: $font-weight-bold;
+    height: 56px;
+
+    &::placeholder {
+      text-transform: none;
     }
+
+  // Add padding to input when new elements overlap field
+    .has-streetNumber & {
+      padding-right: 60px;
+    }
+
+    @include media('>=narrow') {
+      height: 60px;
+    }
+
+      &:focus + .c-search-placeholder,
+      &.is-notEmpty + .c-search-placeholder {
+          @include font-size(caption);
+          transform: translateY(0);
+
+          @include media('>=narrowMid') {
+              @include font-size(body-s, false);
+              transform: translateY(-110%);
+          }
+      }
+}
+
+.c-search-innerFields {
+    align-items: center;
+    display: flex;
+    height: 35px;
+    position: absolute;
+    right: 0;
+    top: 11px;
 }
 
 .c-search-streetInput {

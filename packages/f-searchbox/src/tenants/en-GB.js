@@ -22,6 +22,7 @@ const component = {
     isCompressed: true,
     query: '',
     setCookies: false,
+    onSubmit: false,
     autoPopulateAddress: true,
     addressField: {
         isNumeric: false,
