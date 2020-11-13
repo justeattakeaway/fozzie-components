@@ -1682,6 +1682,11 @@
     webpack-cli "3.3.1"
     webpack-log "2.0.0"
 
+"@justeat/f-button@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.1.0.tgz#97578c7491e869a4ac7100773db45e31d7b7c39f"
+  integrity sha512-K/vrpkFdfy0svu1/wNZhPDSJvVcw3b4y2UQB014UpUnOSerdeZOFItahTdy9um0pMrIA7MEZVasYBzPxMlO87A==
+
 "@justeat/f-card@0.6.0":
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-0.6.0.tgz#8adf0899511400d970b8added0f549fef1de0413"

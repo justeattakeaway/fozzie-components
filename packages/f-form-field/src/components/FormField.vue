@@ -17,7 +17,31 @@
                 data-js-test="defaultLabel">
                 {{ labelText }}
             </form-label>
+
+            <select
+                v-if="isDropdown"
+                :id="`${uniqueId}`"
+                :value="value"
+                v-bind="$attrs"
+                :data-js-test="testId"
+                data-test-id="testInput"
+                :class="[
+                    $style['o-form-field'],
+                    $style['c-formField-input']
+                ]"
+                @input="updateValue"
+                v-on="listeners"
+            >
+                <option
+                    v-for="(option, index) in options"
+                    :key="index"
+                    :value="option">
+                    {{ option }}
+                </option>
+            </select>
+
             <input
+                v-else
                 :id="`${uniqueId}`"
                 :value="value"
                 v-bind="$attrs"
@@ -41,6 +65,7 @@
                 data-test-id="testLabel">
                 {{ labelText }}
             </form-label>
+            </select>
         </div>
         <slot name="error" />
     </div>
@@ -103,6 +128,11 @@ export default {
         dataTestId: {
             type: String,
             default: ''
+        },
+
+        options: {
+            type: Array,
+            default: () => ['As soon as possible', 'Today in 5 minutes']
         }
     },
 
@@ -158,6 +188,10 @@ export default {
         isInline () {
             return (this.windowWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') ||
                 this.labelStyle === 'inline';
+        },
+
+        isDropdown () {
+            return this.normalisedInputType === 'dropdown';
         }
     },
 
