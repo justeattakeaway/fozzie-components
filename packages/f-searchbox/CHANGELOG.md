@@ -8,6 +8,18 @@ v4.0.0-beta.2
 *November 13, 2020*
 
 ### Added
+- Baseline for UK logic (without Events at the moment).
+- Tests to cover changes.
+- Searchbox with/without shell comfigs.
+- Vuex (Needs work).
+- `setCookies`
+- `onSubmit`
+- `autoPopulateAddress`
+- `hideShell`
+- `clearAddressOnValidSubmit`
+
+### Changed
+- Extracted out form specific components into their own component directory & ported over styles into those directories.
 
 
 v4.0.0-beta.1
