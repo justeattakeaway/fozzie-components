@@ -15,6 +15,13 @@ Error: ENOENT: no such file or directory, symlink '…\fozzie-components\package
 
 If this happens, delete all the `node_modules` folders throughout and then run `yarn install` from the root directory again.
 
+In some rare cases modules specified in the components own `package.json` file can sometimes fail to resolve / install correctly. This can lead to errors like:
+Example error: The following module could not be found, please run `yarn add @moduleName` to install it.
+
+There's two solutions you could try from the root of the project which may fix this:
+
+1. yarn cache clean
+2. yarn build
 
 ## Running Storybook
 

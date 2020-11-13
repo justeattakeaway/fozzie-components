@@ -13,7 +13,7 @@ const COOKIE_DAYS = 365;
  */
 const processLocationCookie = (shouldSetCookie, address) => {
     if (!shouldSetCookie) {
-        return;
+        return false;
     }
     
     if (typeof address === 'string') {
