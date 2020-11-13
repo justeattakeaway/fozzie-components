@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html)
 
 
+v1.11.0
+------------------------------
+*November 13, 2020*
+
+### Added
+- Caret icon.
+
+### Fixed
+- Unused ids.
+- Removed superfluous elements which were preventing CSS styles from applying fill colours.
+
+
 v1.10.0
 ------------------------------
 *November 02, 2020*
