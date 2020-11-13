@@ -1,6 +1,6 @@
 const formFieldComponent = () => $('[data-test-id="form-field-component"]');
-const testLabel = () => $('[data-test-id="testLabel"]');
-const input = () => $('[data-test-id="testInput"]');
+const testLabel = () => $('[data-test-id="form-field-label"]');
+const input = () => $('[data-test-id="form-field-input"]');
 /**
  * @param {Object} userInput
  * @param {String} userInput.firstName The user's first name
