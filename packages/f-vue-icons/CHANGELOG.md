@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.10.0
 ------------------------------
+*November 13, 2020*
+
+### Added
+- Caret icon.
+
+
+v1.10.0
+------------------------------
 *November 02, 2020*
 
 ### Changed
