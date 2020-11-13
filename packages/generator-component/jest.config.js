@@ -22,8 +22,7 @@ module.exports = {
     ],
 
     modulePathIgnorePatterns: [
-        './test/specs/accessibility/',
-        './test/specs/component/'
+        './test/specs/accessibility/'
     ],
 
     setupFilesAfterEnv: [
