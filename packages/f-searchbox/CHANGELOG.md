@@ -17,7 +17,7 @@ v4.0.0-beta.2
 - `autoPopulateAddress`
 - `hideShell`
 - `clearAddressOnValidSubmit`
-- Allow previous addresses (saved in cookie) to proceed.
+- Allow previous postcode (saved in cookie) to proceed.
 
 ### Changed
 - Extracted out form specific components into their own component directory & ported over styles into those directories.
