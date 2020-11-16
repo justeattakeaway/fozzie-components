@@ -44,7 +44,7 @@
                     data-test-id="address-block" />
 
                 <form-selector
-                    :order-method="checkoutMethod"
+                    :order-method="serviceType"
                     data-test-id="selector" />
 
                 <user-note data-test-id="user-note" />
@@ -164,15 +164,7 @@ export default {
                 lastName: '',
                 phoneNumber: ''
             },
-            fulfillment: {
-                address: {
-                    line1: '',
-                    line2: '',
-                    city: '',
-                    postcode: ''
-                },
-                times: []
-            },
+            times: [],
             messages: [],
             notes: [],
             notices: [],
@@ -312,8 +304,8 @@ export default {
             this.checkoutId = data.id;
             this.isFulfillable = data.isFulfillable;
             this.customer = data.customer;
-            this.fulfillment.times = data.fulfillment.times;
-            this.fulfillment.address = {
+            this.times = data.fulfillment.times;
+            this.address = {
                 line1: data.fulfillment.address.lines[0],
                 line2: data.fulfillment.address.lines[1],
                 city: data.fulfillment.address.lines[3],

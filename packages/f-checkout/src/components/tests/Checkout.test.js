@@ -55,10 +55,10 @@ describe('Checkout', () => {
                 expect(selectorComponent.attributes('ordermethod')).toEqual(definedType);
             });
 
-            it('should display the address block if set to `Delivery`', () => {
+            it('should display the address block if set to `delivery`', () => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: 'Delivery',
+                    checkoutMethod: 'delivery',
                     checkoutUrl
                 };
 
@@ -75,10 +75,10 @@ describe('Checkout', () => {
                 expect(addressBlock.exists()).toBe(true);
             });
 
-            it('should not display the address block if set to `Collection`', () => {
+            it('should not display the address block if set to `collection`', () => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: 'Collection',
+                    checkoutMethod: 'collection',
                     checkoutUrl
                 };
 
@@ -151,9 +151,9 @@ describe('Checkout', () => {
             postcode: 'EE1E 1EE'
         };
 
-        describe('if checkoutMethod set to `Collection`', () => {
+        describe('if checkoutMethod set to `collection`', () => {
             const propsData = {
-                checkoutMethod: 'Collection',
+                checkoutMethod: 'collection',
                 checkoutUrl
             };
 
@@ -242,9 +242,9 @@ describe('Checkout', () => {
             });
         });
 
-        describe('if checkoutMethod set to `Delivery`', () => {
+        describe('if checkoutMethod set to `delivery`', () => {
             const propsData = {
-                checkoutMethod: 'Delivery',
+                checkoutMethod: 'delivery',
                 checkoutUrl
             };
 
