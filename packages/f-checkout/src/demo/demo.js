@@ -2,6 +2,9 @@ import Vue from 'vue';
 import { VueI18n } from '@justeat/f-globalisation';
 import VueCheckout from '../components/Checkout.vue';
 import { ENGLISH_LOCALE } from '../../../storybook/constants/globalisation';
+import CheckoutMock from './checkoutMock';
+
+CheckoutMock.setup('/checkout.json');
 
 Vue.config.productionTip = false;
 
@@ -18,7 +21,8 @@ new Vue({
     i18n,
     render: h => h(VueCheckout, {
         props: {
-            checkoutMethod: 'Delivery'
+            checkoutMethod: 'delivery',
+            checkoutUrl: '/checkout.json'
         }
     })
 }).$mount('#app');

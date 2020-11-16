@@ -12,6 +12,9 @@ import {
 } from '../../storybook/constants/globalisation';
 
 import VueCheckout from '../src/components/Checkout.vue';
+import CheckoutMock from '../src/demo/checkoutMock';
+
+CheckoutMock.setup('/checkout.json');
 
 export default {
     title: 'Components/Organisms',
@@ -29,7 +32,7 @@ export const CheckoutComponent = () => ({
         }
     },
     template:
-        '<vue-checkout :checkoutMethod="checkoutMethod" :locale="locale" />'
+        '<vue-checkout :checkoutMethod="checkoutMethod" checkoutUrl="/checkout.json" :locale="locale" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';

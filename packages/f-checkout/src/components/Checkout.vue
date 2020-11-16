@@ -94,7 +94,7 @@ import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
 
-import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY } from '../constants';
+import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY, TENANT_MAP } from '../constants';
 import tenantConfigs from '../tenants';
 import CheckoutServiceApi from '../services/CheckoutServiceApi';
 import EventNames from '../event-names';
@@ -118,7 +118,7 @@ export default {
     props: {
         checkoutMethod: {
             type: String,
-            default: 'Collection',
+            default: 'collection',
             validator: value => (VALID_CHECKOUT_METHOD.indexOf(value) !== -1)
         },
 
@@ -128,6 +128,12 @@ export default {
         },
 
         checkoutTimeout: {
+            type: Number,
+            required: false,
+            default: 1000
+        },
+
+        getCheckoutTimeout: {
             type: Number,
             required: false,
             default: 1000
@@ -147,7 +153,31 @@ export default {
             },
             genericErrorMessage: null,
             shouldDisableCheckoutButton: false,
-            delivery: CHECKOUT_METHOD_DELIVERY
+            delivery: CHECKOUT_METHOD_DELIVERY,
+
+            checkoutId: '',
+            isFulfillable: true,
+            customer: {
+                dateOfBirth: '',
+                emailAddress: '',
+                firstName: '',
+                lastName: '',
+                phoneNumber: ''
+            },
+            fulfillment: {
+                address: {
+                    line1: '',
+                    line2: '',
+                    city: '',
+                    postcode: ''
+                },
+                times: []
+            },
+            messages: [],
+            notes: [],
+            notices: [],
+            buttonText: 'Go to payment',
+            serviceType: this.checkoutMethod
         };
     },
 
@@ -187,7 +217,22 @@ export default {
         },
 
         isCheckoutMethodDelivery () {
-            return this.checkoutMethod === CHECKOUT_METHOD_DELIVERY;
+            // return this.checkoutMethod === CHECKOUT_METHOD_DELIVERY;
+            return this.serviceType === CHECKOUT_METHOD_DELIVERY;
+        },
+
+        tenant () {
+            return TENANT_MAP[this.locale];
+        }
+    },
+
+    async mounted () {
+        try {
+            const result = await CheckoutServiceApi.getCheckout(this.checkoutUrl, this.tenant, this.getCheckoutTimeout);
+            this.mapResponse(result.data);
+        } catch (error) {
+            const CheckoutGetFailure = 'checkout-get-failure'; // TODO: Move to event-names once the other PR merged
+            this.$emit(CheckoutGetFailure, error);
         }
     },
 
@@ -261,6 +306,23 @@ export default {
             */
             this.$v.$touch();
             return !this.$v.$invalid;
+        },
+
+        mapResponse (data) {
+            this.checkoutId = data.id;
+            this.isFulfillable = data.isFulfillable;
+            this.customer = data.customer;
+            this.fulfillment.times = data.fulfillment.times;
+            this.fulfillment.address = {
+                line1: data.fulfillment.address.lines[0],
+                line2: data.fulfillment.address.lines[1],
+                city: data.fulfillment.address.lines[3],
+                postcode: data.fulfillment.address.postalCode
+            };
+            this.messages = data.messages;
+            this.notes = data.notes;
+            this.notices = data.notices;
+            this.serviceType = data.serviceType;
         }
     },
 
