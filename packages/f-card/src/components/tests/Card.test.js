@@ -31,7 +31,7 @@ describe('Card', () => {
 
             // Act
             const wrapper = shallowMount(Card, { propsData });
-            const cardTitleElement = wrapper.find('[data-test="card-heading"]');
+            const cardTitleElement = wrapper.find('[data-test-id="card-heading"]');
 
             // Assert
             expect(cardTitleElement.exists()).toBe(false);
@@ -45,7 +45,7 @@ describe('Card', () => {
 
             // Act
             const wrapper = shallowMount(Card, { propsData });
-            const cardTitleElement = wrapper.find('[data-test="card-heading"]');
+            const cardTitleElement = wrapper.find('[data-test-id="card-heading"]');
 
             // Assert
             expect(cardTitleElement.text()).toBe(propsData.cardHeading);

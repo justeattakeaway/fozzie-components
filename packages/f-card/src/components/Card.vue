@@ -14,7 +14,7 @@
                 $style['c-card-heading'],
                 (cardHeadingPosition !== 'left' ? $style[`c-card--${cardHeadingPosition}`] : '')
             ]"
-            data-test="card-heading"
+            data-test-id="card-heading"
         >
             {{ cardHeading }}
         </h1>
