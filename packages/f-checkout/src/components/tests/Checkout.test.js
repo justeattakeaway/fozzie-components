@@ -13,6 +13,20 @@ const localVue = createLocalVue();
 
 localVue.use(VueI18n);
 
+const defaultCheckoutGetData = {
+    customer: {
+        firstName: '',
+        phoneNumber: null
+    },
+    fulfillment: {
+        address: {
+            lines: [null, null, null, null],
+            postalCode: null
+        }
+    },
+    serviceType: CHECKOUT_METHOD_DELIVERY
+};
+
 const i18n = {
     locale: 'en-GB',
     messages: tenantConfigs['en-GB']
@@ -152,22 +166,6 @@ describe('Checkout', () => {
             postcode: 'EE1E 1EE'
         };
 
-        function CheckoutGetData (serviceType) {
-            return {
-                customer: {
-                    firstName: '',
-                    phoneNumber: null
-                },
-                fulfillment: {
-                    address: {
-                        lines: [null, null, null, null],
-                        postalCode: null
-                    }
-                },
-                serviceType
-            };
-        }
-
         describe('if checkoutMethod set to `collection`', () => {
             const propsData = {
                 checkoutMethod: CHECKOUT_METHOD_COLLECTION,
@@ -177,16 +175,19 @@ describe('Checkout', () => {
             let wrapper;
 
             beforeEach(() => {
-                CheckoutServiceApi.submitCheckout.mockClear();
                 CheckoutServiceApi.submitCheckout.mockImplementation(async () => Promise.resolve());
-                CheckoutServiceApi.getCheckout.mockClear();
-                CheckoutServiceApi.getCheckout.mockImplementation(async () => Promise.resolve({ data: CheckoutGetData(CHECKOUT_METHOD_COLLECTION) }));
+                CheckoutServiceApi.getCheckout.mockImplementation(async () => Promise.resolve({ data: { ...defaultCheckoutGetData, serviceType: CHECKOUT_METHOD_COLLECTION } }));
 
                 wrapper = mount(VueCheckout, {
                     i18n,
                     localVue,
                     propsData
                 });
+            });
+
+            afterEach(() => {
+                CheckoutServiceApi.submitCheckout.mockClear();
+                CheckoutServiceApi.getCheckout.mockClear();
             });
 
             it('should emit success event when all fields are populated correctly', async () => {
@@ -270,16 +271,19 @@ describe('Checkout', () => {
             let wrapper;
 
             beforeEach(() => {
-                CheckoutServiceApi.submitCheckout.mockClear();
                 CheckoutServiceApi.submitCheckout.mockImplementation(async () => Promise.resolve());
-                CheckoutServiceApi.getCheckout.mockClear();
-                CheckoutServiceApi.getCheckout.mockImplementation(async () => Promise.resolve({ data: CheckoutGetData(CHECKOUT_METHOD_DELIVERY) }));
+                CheckoutServiceApi.getCheckout.mockImplementation(async () => Promise.resolve({ data: { ...defaultCheckoutGetData, serviceType: CHECKOUT_METHOD_DELIVERY } }));
 
                 wrapper = mount(VueCheckout, {
                     i18n,
                     localVue,
                     propsData
                 });
+            });
+
+            afterEach(() => {
+                CheckoutServiceApi.submitCheckout.mockClear();
+                CheckoutServiceApi.getCheckout.mockClear();
             });
 
             it('should emit success event when all fields are populated correctly', async () => {
@@ -369,10 +373,6 @@ describe('Checkout', () => {
     });
 
     describe('when form is loaded', () => {
-        function CheckoutGetData () {
-            return CheckoutGetMockData;
-        }
-
         const propsData = {
             checkoutMethod: CHECKOUT_METHOD_DELIVERY,
             checkoutUrl
@@ -382,7 +382,6 @@ describe('Checkout', () => {
             let wrapper;
 
             beforeEach(() => {
-                CheckoutServiceApi.getCheckout.mockClear();
                 CheckoutServiceApi.getCheckout.mockImplementation(async () => Promise.reject());
 
                 wrapper = mount(VueCheckout, {
@@ -390,6 +389,10 @@ describe('Checkout', () => {
                     localVue,
                     propsData
                 });
+            });
+
+            afterEach(() => {
+                CheckoutServiceApi.getCheckout.mockClear();
             });
 
             it('should emit failure event', async () => {
@@ -401,14 +404,17 @@ describe('Checkout', () => {
             let wrapper;
 
             beforeEach(() => {
-                CheckoutServiceApi.getCheckout.mockClear();
-                CheckoutServiceApi.getCheckout.mockImplementation(async () => Promise.resolve({ data: CheckoutGetData() }));
+                CheckoutServiceApi.getCheckout.mockImplementation(async () => Promise.resolve({ data: CheckoutGetMockData }));
 
                 wrapper = mount(VueCheckout, {
                     i18n,
                     localVue,
                     propsData
                 });
+            });
+
+            afterEach(() => {
+                CheckoutServiceApi.getCheckout.mockClear();
             });
 
             it('should emit success event', async () => {

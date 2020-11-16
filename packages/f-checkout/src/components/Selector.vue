@@ -14,7 +14,7 @@
             id="time-selection"
             v-model="selectedTime"
             :class="$style['o-form-select-input']"
-            data-test-id="delivery-time"
+            data-test-id="fulfillment-time"
             @change="selectionChanged">
             <option
                 v-for="(time, index) in times"

@@ -156,7 +156,6 @@ export default {
             },
             genericErrorMessage: null,
             shouldDisableCheckoutButton: false,
-            delivery: CHECKOUT_METHOD_DELIVERY,
             checkoutId: '',
             isFulfillable: true,
             times: [],
@@ -300,8 +299,11 @@ export default {
         mapResponse (data) {
             this.checkoutId = data.id;
             this.isFulfillable = data.isFulfillable;
-            this.firstName = data.customer.firstName;
-            this.mobileNumber = data.customer.phoneNumber;
+            if (data.customer) {
+                this.firstName = data.customer.firstName;
+                this.mobileNumber = data.customer.phoneNumber;
+            }
+
             this.times = data.fulfillment.times;
             this.address.line1 = data.fulfillment.address.lines[0];
             this.address.line2 = data.fulfillment.address.lines[1];
