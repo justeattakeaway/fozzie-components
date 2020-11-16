@@ -23,7 +23,7 @@ describe('Logo', () => {
 
         // Act
         const wrapper = shallowMount(Logo, { propsData });
-        const logo = wrapper.find('[data-js-test="c-icon--ml"]');
+        const logo = wrapper.find('[data-theme-logo="c-icon--ml"]');
 
         // Assert
         expect(logo).toBeDefined();
@@ -39,7 +39,7 @@ describe('Logo', () => {
 
         // Act
         const wrapper = shallowMount(Logo, { propsData });
-        const logo = wrapper.find('[data-js-test="c-icon--je"]');
+        const logo = wrapper.find('[data-theme-logo="c-icon--je"]');
 
         // Assert
         expect(logo).toBeDefined();
@@ -55,7 +55,7 @@ describe('Logo', () => {
 
         // Act
         const wrapper = mount(Logo, { propsData });
-        const logo = wrapper.find('[data-js-test="c-icon--je"]');
+        const logo = wrapper.find('[data-theme-logo="c-icon--je"]');
 
         // Assert
         expect(logo.classes('c-icon--onTransparentBg')).toBe(true);
@@ -71,7 +71,7 @@ describe('Logo', () => {
 
         // Act
         const wrapper = mount(Logo, { propsData });
-        const logo = wrapper.find('[data-js-test="c-icon--je"]');
+        const logo = wrapper.find('[data-theme-logo="c-icon--je"]');
 
         // Assert
         expect(logo.classes('c-icon--onHighlightBg')).toBe(true);
@@ -87,7 +87,7 @@ describe('Logo', () => {
 
         // Act
         const wrapper = shallowMount(Logo, { propsData });
-        const logo = wrapper.find('[data-js-test="c-icon--je"]');
+        const logo = wrapper.find('[data-theme-logo="c-icon--je"]');
 
         // Assert
         // with dynamically rendered components

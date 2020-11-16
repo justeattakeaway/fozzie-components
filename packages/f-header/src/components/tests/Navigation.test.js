@@ -51,7 +51,7 @@ describe('Navigation', () => {
         await wrapper.setData(defaultData); // need to await this for the state to fully update the DOM
 
         // Assert
-        expect(wrapper.find('[data-js-test="delivery-enquiry"]').exists()).toBe(true);
+        expect(wrapper.find('[data-test-id="delivery-enquiry"]').exists()).toBe(true);
     });
 
     it('should NOT show the delivery enquiry link in the navigation if `showDeliveryEnquiry: false` and the content is there', async () => {
@@ -67,7 +67,7 @@ describe('Navigation', () => {
         await wrapper.setData(defaultData);
 
         // Assert
-        expect(wrapper.find('[data-js-test="delivery-enquiry"]').exists()).toBe(false);
+        expect(wrapper.find('[data-test-id="delivery-enquiry"]').exists()).toBe(false);
     });
 
     it('should show "logout" if the user is logged in and has nav link data', async () => {
@@ -83,7 +83,7 @@ describe('Navigation', () => {
         });
 
         // Assert
-        expect(wrapper.find('[data-js-test="logout"]').exists()).toBe(true);
+        expect(wrapper.find('[data-test-id="logout"]').exists()).toBe(true);
     });
 
     it('should show "navLinks" if the user is logged in and has nav link data', async () => {
@@ -99,7 +99,7 @@ describe('Navigation', () => {
         });
 
         // Assert
-        expect(wrapper.find('[data-js-test="nav-links"]').exists()).toBe(true);
+        expect(wrapper.find('[data-test-id="nav-links"]').exists()).toBe(true);
     });
 
     it('should NOT show "navLinks" if the user is logged in but does NOT have nav link data', async () => {
@@ -115,7 +115,7 @@ describe('Navigation', () => {
         await wrapper.setData(defaultData);
 
         // Assert
-        expect(wrapper.find('[data-js-test="nav-links"]').exists()).toBe(false);
+        expect(wrapper.find('[data-test-id="nav-links"]').exists()).toBe(false);
     });
 
     it('should show "logout" if the user is logged in but does NOT have nav link data', () => {
@@ -133,7 +133,7 @@ describe('Navigation', () => {
         });
 
         // Assert
-        expect(wrapper.find('[data-js-test="logout"]').exists()).toBe(true);
+        expect(wrapper.find('[data-test-id="logout"]').exists()).toBe(true);
     });
 
     it('should show "login" if the user DOES NOT have nav link data and is NOT logged in"', async () => {
@@ -156,7 +156,7 @@ describe('Navigation', () => {
         });
 
         // Assert
-        expect(wrapper.find('[data-js-test="login"]').exists()).toBe(true);
+        expect(wrapper.find('[data-test-id="login"]').exists()).toBe(true);
     });
 
     it('should show the navbar if there are navigation links', () => {
@@ -171,7 +171,7 @@ describe('Navigation', () => {
         });
 
         // Assert
-        expect(wrapper.find('[data-js-test="nav-container"]').exists()).toBe(true);
+        expect(wrapper.find('[data-test-id="nav-container"]').exists()).toBe(true);
     });
 
     it('should NOT show the navbar if there are no navigation links', () => {
@@ -191,7 +191,7 @@ describe('Navigation', () => {
         });
 
         // Assert
-        expect(wrapper.find('[data-js-test="nav-container"]').exists()).toBe(false);
+        expect(wrapper.find('[data-test-id="nav-container"]').exists()).toBe(false);
     });
 
     describe('nav links', () => {
@@ -218,7 +218,7 @@ describe('Navigation', () => {
                 wrapper.vm.openNav();
 
                 // Assert
-                expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).toContain('is-open');
+                expect(wrapper.find('[data-test-id="nav-toggle"]').classes()).toContain('is-open');
             });
 
             it('should not be shown when "navIsOpen" is false', async () => {
@@ -237,7 +237,7 @@ describe('Navigation', () => {
                 await wrapper.vm.closeNav();
 
                 // Assert
-                expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).not.toContain('is-open');
+                expect(wrapper.find('[data-test-id="nav-toggle"]').classes()).not.toContain('is-open');
             });
         });
 
@@ -252,7 +252,7 @@ describe('Navigation', () => {
             });
 
             // Assert
-            expect(wrapper.find('[data-js-test="nav-toggle"]').classes()).toContain('c-nav-toggle--altColour');
+            expect(wrapper.find('[data-test-id="nav-toggle"]').classes()).toContain('c-nav-toggle--altColour');
         });
     });
 
@@ -281,7 +281,7 @@ describe('Navigation', () => {
             });
 
             // Assert
-            expect(wrapper.find('[data-js-test="offers-link-desktop"]').exists()).toBe(true);
+            expect(wrapper.find('[data-test-id="offers-link-desktop"]').exists()).toBe(true);
         });
 
         it('should not be shown on desktop when "showOffersLink" is false', () => {
@@ -294,7 +294,7 @@ describe('Navigation', () => {
             });
 
             // Assert
-            expect(wrapper.find('[data-js-test="offers-link-desktop"]').exists()).toBe(false);
+            expect(wrapper.find('[data-test-id="offers-link-desktop"]').exists()).toBe(false);
         });
 
         describe('on mobile', () => {
@@ -310,7 +310,7 @@ describe('Navigation', () => {
                 });
 
                 // Assert
-                expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(true);
+                expect(wrapper.find('[data-test-id="offers-link-mobile"]').exists()).toBe(true);
             });
 
             it('should not be shown when "showOffersLink" is false', () => {
@@ -323,7 +323,7 @@ describe('Navigation', () => {
                 });
 
                 // Assert
-                expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(false);
+                expect(wrapper.find('[data-test-id="offers-link-mobile"]').exists()).toBe(false);
             });
 
             it('should be shown with open nav when "showOffersLink" is true', async () => {
@@ -342,7 +342,7 @@ describe('Navigation', () => {
                 });
 
                 // Assert
-                expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(true);
+                expect(wrapper.find('[data-test-id="offers-link-mobile"]').exists()).toBe(true);
             });
 
             it('should not be shown with open nav when "showOffersLink" is false', async () => {
@@ -361,7 +361,7 @@ describe('Navigation', () => {
                 });
 
                 // Assert
-                expect(wrapper.find('[data-js-test="offers-link-mobile"]').exists()).toBe(false);
+                expect(wrapper.find('[data-test-id="offers-link-mobile"]').exists()).toBe(false);
             });
         });
     });
@@ -632,7 +632,7 @@ describe('Navigation', () => {
             });
 
             // Assert
-            expect(wrapper.find('[data-js-test="login"]').exists()).toBe(false);
+            expect(wrapper.find('[data-test-id="login"]').exists()).toBe(false);
         });
 
         it('should NOT show "navLinks" if `showLoginInfo: false` and the user is logged in and has nav link data', async () => {
@@ -658,7 +658,7 @@ describe('Navigation', () => {
             });
 
             // Assert
-            expect(wrapper.find('[data-js-test="user-info-icon"]').classes()).toContain('is-hidden');
+            expect(wrapper.find('[data-test-id="user-info-icon"]').classes()).toContain('is-hidden');
         });
     });
 
