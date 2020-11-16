@@ -42,7 +42,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-error-message": "0.2.0",
+    "@justeat/f-error-message": "0.3.1",
     "@justeat/f-services": "1.0.0",
     "@justeat/f-vue-icons": "1.8.0",
     "axios": "0.19.2"

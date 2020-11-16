@@ -38,9 +38,9 @@
 
 <script>
 import ErrorMessage from '@justeat/f-error-message';
+import '@justeat/f-error-message/dist/f-error-message.css';
 import FormLabelWrapper from './formElements/FormLabelWrapper.vue';
 import FormSearchButton from './formElements/FormSearchButton.vue';
-import '@justeat/f-error-message/dist/f-error-message.css';
 import store from '../store/searchbox.module';
 import { getLastLocation } from '../utils/helpers';
 import { search } from '../services/search.services';
@@ -202,7 +202,7 @@ export default {
         if (this.lastAddress) {
             this.address = this.autoPopulateAddress ? this.lastAddress : '';
         }
-    },
+    }
 };
 </script>
 

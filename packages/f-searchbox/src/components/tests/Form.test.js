@@ -227,7 +227,7 @@ describe('`Form`', () => {
                 });
 
                 describe('when `address` `isValid` is falsy', () => {
-                    xit('should prevent default to stop the form from submitting a invalid search', () => {
+                    it('should prevent default to stop the form from submitting a invalid search', () => {
                         // Arrange
                         const propsData = {
                             config: {
@@ -249,7 +249,7 @@ describe('`Form`', () => {
                         expect(event.preventDefault).toHaveBeenCalled();
                     });
 
-                    xit('should commit the invalid errors', () => {
+                    it('should commit the invalid errors', () => {
                         // Arrange
                         const SET_ERRORS = 'SET_ERRORS';
                         const propsData = {
