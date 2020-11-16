@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.16.0
+------------------------------
+*November 16, 2020*
+
+### Changed
+- Replaced `data-js-test` attribute with  `data-test-id` to reduce test-ids in components.
+
+
 v2.15.0
 ------------------------------
 *November 12, 2020*
