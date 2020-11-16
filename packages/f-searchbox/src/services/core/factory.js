@@ -4,6 +4,6 @@
  *
  * @param Service
  */
-export default (Service) => {
+export default Service => {
     Service();
 };

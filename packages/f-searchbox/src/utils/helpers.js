@@ -18,7 +18,7 @@ const doesPostcodeMatchRegex = postcode => {
     return postcodeRegex.test(postcode);
 };
 
-const normalisePostcode = postcode => postcode ? postcode.toUpperCase().replace(/\s/g, '').trim() : '';
+const normalisePostcode = postcode => (postcode ? postcode.toUpperCase().replace(/\s/g, '').trim() : '');
 
 const millisecondsPerDay = 86400000; // 24 * 60 * 60 * 1000
 

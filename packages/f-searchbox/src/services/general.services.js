@@ -15,10 +15,12 @@ const processLocationCookie = (shouldSetCookie, address) => {
     if (!shouldSetCookie) {
         return false;
     }
-    
+
     if (typeof address === 'string') {
         setCookie('je-location', normalisePostcode(address), COOKIE_DAYS);
     }
+
+    return true;
 };
 
 /**

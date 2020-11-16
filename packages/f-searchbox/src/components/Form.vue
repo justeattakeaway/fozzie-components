@@ -1,5 +1,6 @@
 <template>
     <form
+        ref="form"
         :action="config.formUrl"
         :class="$style['c-search']"
         method="post"
@@ -19,17 +20,19 @@
                 :error-message="errorMessage"
                 :address="address"
                 :copy="copy"
-                :is-compressed="isCompressed"/>
+                :is-compressed="isCompressed" />
 
             <form-search-button
                 :copy="copy"
-                :is-compressed="isCompressed"/>
+                :is-compressed="isCompressed" />
         </div>
 
         <error-message
             v-if="errorMessage"
             :class="$style['c-search-error']"
-            aria-live="assertive">{{ errorMessage }}</error-message>
+            aria-live="assertive">
+            {{ errorMessage }}
+        </error-message>
     </form>
 </template>
 
@@ -40,6 +43,7 @@ import FormSearchButton from './formElements/FormSearchButton.vue';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import store from '../store/searchbox.module';
 import { getLastLocation } from '../utils/helpers';
+import { search } from '../services/search.services';
 import {
     processLocationCookie,
     onCustomSubmit
@@ -72,6 +76,7 @@ export default {
             address,
             cuisine,
             query,
+            formUrl,
             queryString,
             isCompressed,
             clearAddressOnValidSubmit,
@@ -85,6 +90,7 @@ export default {
             address: this.lastAddress || address,
             cuisine,
             query,
+            formUrl,
             queryString,
             isCompressed,
             clearAddressOnValidSubmit,
@@ -102,13 +108,33 @@ export default {
          *
          * @returns {*}
          */
-        errorMessage() {
+        errorMessage () {
             const messageKey = this.store.state.errors.length && this.store.state.errors[0];
 
             if (!messageKey) return false;
 
-            return this.copy.errors[messageKey] || this.copy.errors['UNKNOWN_ERROR'];
+            return this.copy.errors[messageKey] || this.copy.errors.UNKNOWN_ERROR;
         },
+
+        /**
+         * Checks to see if the lastAddress (set via `je-location` cookie) matches the `address` value. Will also
+         * verify that the address is valid.
+         *
+         * @returns {Boolean}
+         */
+        hasLastSavedAddress () {
+            return this.lastAddress
+                    && this.address === this.lastAddress
+                    && this.store.state.isValid === true;
+        }
+    },
+
+    mounted () {
+        this.lastAddress = this.config.locationFormat(getLastLocation());
+
+        if (this.lastAddress) {
+            this.address = this.autoPopulateAddress ? this.lastAddress : '';
+        }
     },
 
     methods: {
@@ -116,25 +142,52 @@ export default {
          * Main submit handler that's responsible for submitting searches to SERP:
          *
          * 1. Checks address validation.
-         * 2. If the address is valid we submit the address to SERP.
+         * 2. If the address is valid we submit the address.
          * 3. Note: `configs` determine custom behaviour, e.g setCookies & clearAddressOnValidSubmit etc see readme.
          *
-         * @param boolean
+         * @param e
          */
         async submit (e) {
             this.store.commit('SET_IS_VALID', this.service.isValid(this.address));
+
+            if (this.hasLastSavedAddress) {
+                return this.searchPreviouslySavedAddress(e);
+            }
 
             if (this.store.state.isValid === true) {
                 this.store.commit('SET_ERRORS', []);
                 processLocationCookie(this.setCookies, this.address);
                 this.clearAddressValue(this.clearAddressOnValidSubmit);
-                onCustomSubmit(this.onSubmit, this.address, event);
+                onCustomSubmit(this.onSubmit, this.address, e);
             } else {
                 e.preventDefault();
                 this.store.commit('SET_ERRORS', this.store.state.isValid);
             }
 
             return true;
+        },
+
+        /**
+         * Responsible for submitting a manual `form.submit` If a custom `onSubmit` method is passed through
+         * from the consuming application we want to ignore the submit as the `onSubmit` in some cases (Menu) will not require
+         * navigation to SERP.
+         *
+         * 1. Checks address validation.
+         * 2. If the address is valid we submit the address to SERP.
+         * 3. Note: `configs` determine custom behaviour, e.g setCookies & clearAddressOnValidSubmit etc see readme.
+         *
+         * @param event
+         */
+        searchPreviouslySavedAddress (event) {
+            const searchPayload = {
+                onSubmit: this.onSubmit,
+                formUrl: this.formUrl,
+                form: this.$refs.form,
+                callback: getLastLocation,
+                event
+            };
+
+            search(searchPayload);
         },
 
         /**
@@ -148,14 +201,6 @@ export default {
                 this.address = '';
                 this.store.commit('SET_IS_DIRTY', false);
             }
-        },
-    },
-
-    mounted () {
-        this.lastAddress = this.config.locationFormat(getLastLocation());
-
-        if (this.lastAddress) {
-            this.address = this.autoPopulateAddress ? this.lastAddress : '';
         }
     }
 };

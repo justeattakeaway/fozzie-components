@@ -12,6 +12,8 @@ import VueSearchbox from '@/components/Base.vue';
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
+
+
     Vue.component('VueSearchbox', VueSearchbox);
 }
 

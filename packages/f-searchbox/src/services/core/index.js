@@ -2,18 +2,18 @@ import LocationFactory from './factory';
 
 export default (options = {}) => {
     const {
-        validation = {},
+        validation = {}
     } = options;
-    
+
     const blankService = () => ({});
     const service = LocationFactory(blankService);
-    
+
     return {
-        /* eslint-disable-next-line no-empty-function */
-        set validation (value) { },
         get validation () {
             return validation;
         },
+        /* eslint-disable-next-line no-empty-function */
+        set validation (value) { },
         clientInit (dependentApiPromise) {
             if (service.clientInit !== undefined) {
                 service.clientInit(dependentApiPromise);
@@ -33,7 +33,7 @@ export default (options = {}) => {
                     ? p
                     : p.concat(key || false)
             ), []);
-            
+
             return errors.length ? errors : true;
         }
     };

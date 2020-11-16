@@ -11,7 +11,7 @@
             }">
             <input
                 ref="addressInput"
-                v-model="addressValue"
+                :value="getAddressValue"
                 name="postcode"
                 type="search"
                 data-test-id="address-box-input"
@@ -21,7 +21,7 @@
                     [$style['c-search-input']]: true,
                     [$style['is-notEmpty']]: address
                 }"
-                @input="$emit('input', $event.target.value)"/>
+                @input="$emit('input', $event.target.value)">
 
             <span :class="$style['c-search-placeholder']">{{ copy.fieldPlaceholder }}</span>
         </label>
@@ -32,7 +32,8 @@
 export default {
     props: {
         errorMessage: {
-            type: [Boolean, String]
+            type: [Boolean, String],
+            default: false
         },
         address: {
             type: String,
@@ -48,9 +49,9 @@ export default {
         }
     },
 
-    data () {
-        return {
-            addressValue: this.address
+    computed: {
+        getAddressValue () {
+            return this.address;
         }
     }
 };
