@@ -129,14 +129,6 @@ export default {
         }
     },
 
-    mounted () {
-        this.lastAddress = this.config.locationFormat(getLastLocation());
-
-        if (this.lastAddress) {
-            this.address = this.autoPopulateAddress ? this.lastAddress : '';
-        }
-    },
-
     methods: {
         /**
          * Main submit handler that's responsible for submitting searches to SERP:
@@ -202,7 +194,15 @@ export default {
                 this.store.commit('SET_IS_DIRTY', false);
             }
         }
-    }
+    },
+
+    mounted () {
+        this.lastAddress = this.config.locationFormat(getLastLocation());
+
+        if (this.lastAddress) {
+            this.address = this.autoPopulateAddress ? this.lastAddress : '';
+        }
+    },
 };
 </script>
 
