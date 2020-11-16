@@ -26,6 +26,7 @@ jest.mock('@justeat/f-services', () => ({
 }));
 
 describe('Navigation', () => {
+    allure.feature('Navigation');
     beforeEach(setDesktopViewport);
 
     it('should be defined', () => {

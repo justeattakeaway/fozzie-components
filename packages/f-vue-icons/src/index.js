@@ -16,6 +16,7 @@ export { default as AppIosIcon } from '../icons/AppIosIcon';
 export { default as AppMicrosoftDkIcon } from '../icons/AppMicrosoftDkIcon';
 export { default as BagCelebrateIcon } from '../icons/BagCelebrateIcon';
 export { default as BasketIcon } from '../icons/BasketIcon';
+export { default as CaretIcon } from '../icons/CaretIcon';
 export { default as CashIcon } from '../icons/CashIcon';
 export { default as CertificateConfianzaIcon } from '../icons/CertificateConfianzaIcon';
 export { default as ChevronIcon } from '../icons/ChevronIcon';

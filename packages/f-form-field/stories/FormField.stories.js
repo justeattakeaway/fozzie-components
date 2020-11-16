@@ -1,15 +1,13 @@
 import {
-    withKnobs, boolean, select, text
+    withKnobs, select, text, boolean
 } from '@storybook/addon-knobs';
+import { withA11y } from '@storybook/addon-a11y';
 import FormField from '../src/components/FormField.vue';
 import { VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../src/constants';
-import { withA11y } from '@storybook/addon-a11y';
-import { withTests } from '@storybook/addon-jest';
-import results from '../src/components/tests/.jest-test-results.json';
 
 export default {
     title: 'Components/Atoms',
-    decorators: [withKnobs, withA11y, withTests({ results })]
+    decorators: [withKnobs, withA11y]
 };
 
 export const FormFieldComponent = () => ({
@@ -26,17 +24,16 @@ export const FormFieldComponent = () => ({
         },
         labelStyle: {
             default: select('Label Style', VALID_LABEL_STYLES)
+        },
+        hasError: {
+            default: boolean('hasError', false)
         }
     },
     parameters: {
         notes: 'some documentation here'
     },
     template:
-        '<form-field :locale="locale" :labelText="labelText" :inputType="inputType" :labelStyle="labelStyle" />'
+        '<form-field :locale="locale" :labelText="labelText" :inputType="inputType" :labelStyle="labelStyle" :hasError="hasError" />'
 });
-
-FormFieldComponent.parameters = {
-    jest: ['FormField.test.js'],
-  };
 
 FormFieldComponent.storyName = 'f-form-field';

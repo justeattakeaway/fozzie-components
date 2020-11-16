@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "0.6.0",
+  "version": "0.8.0",
   "main": "dist/f-checkout.umd.min.js",
   "files": [
     "dist",
@@ -29,11 +29,11 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-checkout ./src/index.js",
-    "demo": "vue serve --port 8080 ./src/demo/Index.vue",
+    "demo": "vue serve --port 8080 ./src/demo/demo.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
-    "test": "vue-cli-service test:unit --json --outputFile=./src/components/tests/.jest-test-results.json",
+    "test": "vue-cli-service test:unit",
     "test:coverage": "yarn test --coverage",
     "test-component:chrome": "run-p --race demo webdriver:delay:chrome",
     "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js",
@@ -44,10 +44,15 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "axios": "0.20.0",
+    "@justeat/f-alert": "0.1.1",
+    "@justeat/f-button": "0.1.0",
     "@justeat/f-card": "0.6.0",
+    "@justeat/f-error-message": "0.2.0",
     "@justeat/f-form-field": "0.7.1",
-    "@justeat/f-services": "1.0.0"
+    "@justeat/f-globalisation": "0.2.0",
+    "@justeat/f-services": "1.4.0",
+    "axios": "0.20.0",
+    "vuelidate": "0.7.6"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"

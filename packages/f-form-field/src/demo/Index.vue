@@ -9,8 +9,7 @@
         <form-field
             locale="en-GB"
             label-text="First Name"
-            label-style="inline"
-            data-test-id="a-constant-test-id" />
+            data-test-id="form-field-input" />
     </div>
 </template>
 
@@ -23,9 +22,6 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,500&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Hind+Vadodara:300,500&display=swap');
-
 body {
     margin: 0;
 }

@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkout when form submitted if checkoutMethod set to \`Collection\` should show error message and emit failure event when the mobile number field is not populated 1`] = `
+<p data-test-id="error-mobile-number" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" class="c-ficon c-ficon--warning ErrorMessage_c-errorMessage-icon_3E2NJ">
+    <path d="M6.5 4.24a.32.32 0 0 1 .66 0v2.6a.32.32 0 0 1-.65 0v-2.6zm.33 4.88a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm6.36 1.24a1.3 1.3 0 0 1-1.12.7H1.6a1.29 1.29 0 0 1-1.04-2L5.8 1.22a1.25 1.25 0 0 1 2.08 0l5.24 7.82c.27.4.3.9.08 1.31zm-.62-.94L7.33 1.59a.6.6 0 0 0-1 0L1.1 9.42a.64.64 0 0 0 .5 1h10.47a.64.64 0 0 0 .51-1z" fill="#D50525"></path>
+  </svg><span data-test-id="content">
+                        Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
+                    </span></p>
+`;
+
+exports[`Checkout when form submitted if checkoutMethod set to \`Collection\` should show error message and emit failure event when the mobile number field is populated with a < 10 numbers 1`] = `
+<p data-test-id="error-mobile-number" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" class="c-ficon c-ficon--warning ErrorMessage_c-errorMessage-icon_3E2NJ">
+    <path d="M6.5 4.24a.32.32 0 0 1 .66 0v2.6a.32.32 0 0 1-.65 0v-2.6zm.33 4.88a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm6.36 1.24a1.3 1.3 0 0 1-1.12.7H1.6a1.29 1.29 0 0 1-1.04-2L5.8 1.22a1.25 1.25 0 0 1 2.08 0l5.24 7.82c.27.4.3.9.08 1.31zm-.62-.94L7.33 1.59a.6.6 0 0 0-1 0L1.1 9.42a.64.64 0 0 0 .5 1h10.47a.64.64 0 0 0 .51-1z" fill="#D50525"></path>
+  </svg><span data-test-id="content">
+                        Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
+                    </span></p>
+`;
+
+exports[`Checkout when form submitted if checkoutMethod set to \`Collection\` should show error message and emit failure event when the mobile number field is populated with non numeric value 1`] = `
+<p data-test-id="error-mobile-number" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" class="c-ficon c-ficon--warning ErrorMessage_c-errorMessage-icon_3E2NJ">
+    <path d="M6.5 4.24a.32.32 0 0 1 .66 0v2.6a.32.32 0 0 1-.65 0v-2.6zm.33 4.88a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm6.36 1.24a1.3 1.3 0 0 1-1.12.7H1.6a1.29 1.29 0 0 1-1.04-2L5.8 1.22a1.25 1.25 0 0 1 2.08 0l5.24 7.82c.27.4.3.9.08 1.31zm-.62-.94L7.33 1.59a.6.6 0 0 0-1 0L1.1 9.42a.64.64 0 0 0 .5 1h10.47a.64.64 0 0 0 .51-1z" fill="#D50525"></path>
+  </svg><span data-test-id="content">
+                        Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
+                    </span></p>
+`;
+
+exports[`Checkout when form submitted if checkoutMethod set to \`Delivery\` should emit failure event and display error message when address line1 input field is empty 1`] = `
+<p data-test-id="error-address-line1-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" class="c-ficon c-ficon--warning ErrorMessage_c-errorMessage-icon_3E2NJ">
+    <path d="M6.5 4.24a.32.32 0 0 1 .66 0v2.6a.32.32 0 0 1-.65 0v-2.6zm.33 4.88a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm6.36 1.24a1.3 1.3 0 0 1-1.12.7H1.6a1.29 1.29 0 0 1-1.04-2L5.8 1.22a1.25 1.25 0 0 1 2.08 0l5.24 7.82c.27.4.3.9.08 1.31zm-.62-.94L7.33 1.59a.6.6 0 0 0-1 0L1.1 9.42a.64.64 0 0 0 .5 1h10.47a.64.64 0 0 0 .51-1z" fill="#D50525"></path>
+  </svg><span data-test-id="content">
+                    Please enter the first line of your address
+                </span></p>
+`;
+
+exports[`Checkout when form submitted if checkoutMethod set to \`Delivery\` should emit failure event and display error message when city input field is empty 1`] = `
+<p data-test-id="error-address-city-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" class="c-ficon c-ficon--warning ErrorMessage_c-errorMessage-icon_3E2NJ">
+    <path d="M6.5 4.24a.32.32 0 0 1 .66 0v2.6a.32.32 0 0 1-.65 0v-2.6zm.33 4.88a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm6.36 1.24a1.3 1.3 0 0 1-1.12.7H1.6a1.29 1.29 0 0 1-1.04-2L5.8 1.22a1.25 1.25 0 0 1 2.08 0l5.24 7.82c.27.4.3.9.08 1.31zm-.62-.94L7.33 1.59a.6.6 0 0 0-1 0L1.1 9.42a.64.64 0 0 0 .5 1h10.47a.64.64 0 0 0 .51-1z" fill="#D50525"></path>
+  </svg><span data-test-id="content">
+                    Please enter your town or city
+                </span></p>
+`;
+
+exports[`Checkout when form submitted if checkoutMethod set to \`Delivery\` should emit failure event and display error message when postcode contains incorrect characters 1`] = `
+<p data-test-id="error-address-postcode-type-error" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" class="c-ficon c-ficon--warning ErrorMessage_c-errorMessage-icon_3E2NJ">
+    <path d="M6.5 4.24a.32.32 0 0 1 .66 0v2.6a.32.32 0 0 1-.65 0v-2.6zm.33 4.88a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm6.36 1.24a1.3 1.3 0 0 1-1.12.7H1.6a1.29 1.29 0 0 1-1.04-2L5.8 1.22a1.25 1.25 0 0 1 2.08 0l5.24 7.82c.27.4.3.9.08 1.31zm-.62-.94L7.33 1.59a.6.6 0 0 0-1 0L1.1 9.42a.64.64 0 0 0 .5 1h10.47a.64.64 0 0 0 .51-1z" fill="#D50525"></path>
+  </svg><span data-test-id="content">
+                This doesn't look like a UK postcode, can you enter it again please?
+            </span></p>
+`;
+
+exports[`Checkout when form submitted if checkoutMethod set to \`Delivery\` should emit failure event and display error message when postcode contains incorrect characters 2`] = `
+<p data-test-id="error-address-postcode-type-error" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" class="c-ficon c-ficon--warning ErrorMessage_c-errorMessage-icon_3E2NJ">
+    <path d="M6.5 4.24a.32.32 0 0 1 .66 0v2.6a.32.32 0 0 1-.65 0v-2.6zm.33 4.88a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm6.36 1.24a1.3 1.3 0 0 1-1.12.7H1.6a1.29 1.29 0 0 1-1.04-2L5.8 1.22a1.25 1.25 0 0 1 2.08 0l5.24 7.82c.27.4.3.9.08 1.31zm-.62-.94L7.33 1.59a.6.6 0 0 0-1 0L1.1 9.42a.64.64 0 0 0 .5 1h10.47a.64.64 0 0 0 .51-1z" fill="#D50525"></path>
+  </svg><span data-test-id="content">
+                This doesn't look like a UK postcode, can you enter it again please?
+            </span></p>
+`;
+
+exports[`Checkout when form submitted if checkoutMethod set to \`Delivery\` should emit failure event and display error message when postcode input field is empty 1`] = `
+<p data-test-id="error-address-postcode-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" class="c-ficon c-ficon--warning ErrorMessage_c-errorMessage-icon_3E2NJ">
+    <path d="M6.5 4.24a.32.32 0 0 1 .66 0v2.6a.32.32 0 0 1-.65 0v-2.6zm.33 4.88a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm6.36 1.24a1.3 1.3 0 0 1-1.12.7H1.6a1.29 1.29 0 0 1-1.04-2L5.8 1.22a1.25 1.25 0 0 1 2.08 0l5.24 7.82c.27.4.3.9.08 1.31zm-.62-.94L7.33 1.59a.6.6 0 0 0-1 0L1.1 9.42a.64.64 0 0 0 .5 1h10.47a.64.64 0 0 0 .51-1z" fill="#D50525"></path>
+  </svg><span data-test-id="content">
+                Please enter your full UK postcode
+            </span></p>
+`;

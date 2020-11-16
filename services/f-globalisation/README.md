@@ -28,10 +28,10 @@
     F-Globalisation contains a mixin which should be imported into your "Smart Component", for example in F-Checkout import it into the Checkout.vue component as that is the root.
 
     ```
-    import VueGlobalisation from '@justeat/f-globalisation';
+    import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 
     export default {
-        mixins: [VueGlobalisation]
+        mixins: [VueGlobalisationMixin]
     }
     ```
 
@@ -43,7 +43,7 @@
     import tenantConfigs from '../tenants';
 
     export default {
-        mixins: [globalisationMixin],
+        mixins: [VueGlobalisationMixin],
 
         data () {
             return {

@@ -3,6 +3,7 @@ import FormField from '../FormField.vue';
 import { DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../../constants';
 
 describe('FormField', () => {
+    allure.feature('Form Field');
     it('should be defined', () => {
         const propsData = {};
         const wrapper = shallowMount(FormField, { propsData });
@@ -66,45 +67,6 @@ describe('FormField', () => {
                 // Assert
                 expect(formInput.attributes('type')).toBe(definedType);
             });
-
-            it('should set the value of attribute data-js-test on input element if dataTestId is specified', () => {
-                // Arrange
-                const dataTestId = 'my-test-id';
-                const propsData = {
-                    dataTestId
-                };
-
-                // Act
-                const wrapper = shallowMount(FormField, { propsData });
-                const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
-
-                // Assert
-                expect(formInput.attributes('data-js-test')).toBe(dataTestId);
-            });
-
-            it('should set the value of attribute data-js-test on input element if name is specified', () => {
-                // Arrange
-                const name = 'my-input';
-                const attrs = {
-                    name
-                };
-
-                // Act
-                const wrapper = shallowMount(FormField, { attrs });
-                const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
-
-                // Assert
-                expect(formInput.attributes('data-js-test')).toBe(name);
-            });
-
-            it('should not add the attribute data-js-test on input element if dataTestId is not specified', () => {
-                // Arrange & Act
-                const wrapper = shallowMount(FormField, { });
-                const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
-
-                // Assert
-                expect(formInput.attributes('data-js-test')).toBe(undefined);
-            });
         });
 
         describe('labelStyle ::', () => {
@@ -147,8 +109,8 @@ describe('FormField', () => {
                     // Act
                     const wrapper = await shallowMount(FormField, { propsData });
 
-                    const defaultLabel = wrapper.find('[data-js-test="defaultLabel"]');
-                    const inlineLabel = wrapper.find('[data-js-test="inlineLabel"]');
+                    const defaultLabel = wrapper.find('[data-test-id="form-field-label"]');
+                    const inlineLabel = wrapper.find('[data-test-id="form-field-label--inline"]');
 
                     // Assert
                     expect(defaultLabel.exists()).toBe(true);
@@ -167,8 +129,8 @@ describe('FormField', () => {
                     // Act
                     const wrapper = await shallowMount(FormField, { propsData });
 
-                    const defaultLabel = wrapper.find('[data-js-test="defaultLabel"]');
-                    const inlineLabel = wrapper.find('[data-js-test="inlineLabel"]');
+                    const defaultLabel = wrapper.find('[data-test-id="form-field-label"]');
+                    const inlineLabel = wrapper.find('[data-test-id="form-field-label--inline"]');
 
                     // Assert
                     expect(defaultLabel.exists()).toBe(false);

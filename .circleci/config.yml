@@ -86,9 +86,6 @@ jobs:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - build_packages
-      - run: # Run Tests (Needed for Jest Storybook support)
-          name: Run Unit / Integration Tests
-          command: yarn test
       - run:
           name: Deploy
           command: yarn storybook:deploy --packages packages
