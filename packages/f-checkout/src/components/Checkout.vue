@@ -95,7 +95,9 @@ import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
 
-import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION, TENANT_MAP } from '../constants';
+import {
+    VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION, TENANT_MAP
+} from '../constants';
 import tenantConfigs from '../tenants';
 import CheckoutServiceApi from '../services/CheckoutServiceApi';
 import EventNames from '../event-names';
