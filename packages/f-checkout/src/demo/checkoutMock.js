@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import checkoutJson from './checkout.json';
 
 export default {
-    setup(path) {
+    setup (path) {
         const mock = new MockAdapter(axios);
         mock.onGet(path).reply(200, checkoutJson);
     }

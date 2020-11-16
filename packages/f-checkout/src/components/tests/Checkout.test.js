@@ -1,12 +1,13 @@
 import { shallowMount, mount, createLocalVue } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
-import { VALID_CHECKOUT_METHOD } from '../../constants';
+import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import CheckoutServiceApi from '../../services/CheckoutServiceApi';
 import EventNames from '../../event-names';
 import tenantConfigs from '../../tenants';
+import CheckoutGetMockData from '../../demo/checkout.json';
 
-jest.mock('../../services/CheckoutServiceApi', () => ({ submitCheckout: jest.fn() }));
+jest.mock('../../services/CheckoutServiceApi', () => ({ submitCheckout: jest.fn(), getCheckout: jest.fn() }));
 
 const localVue = createLocalVue();
 
@@ -58,7 +59,7 @@ describe('Checkout', () => {
             it('should display the address block if set to `delivery`', () => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: 'delivery',
+                    checkoutMethod: CHECKOUT_METHOD_DELIVERY,
                     checkoutUrl
                 };
 
@@ -78,7 +79,7 @@ describe('Checkout', () => {
             it('should not display the address block if set to `collection`', () => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: 'collection',
+                    checkoutMethod: CHECKOUT_METHOD_COLLECTION,
                     checkoutUrl
                 };
 
@@ -151,9 +152,25 @@ describe('Checkout', () => {
             postcode: 'EE1E 1EE'
         };
 
+        function CheckoutGetData (serviceType) {
+            return {
+                customer: {
+                    firstName: '',
+                    phoneNumber: null
+                },
+                fulfillment: {
+                    address: {
+                        lines: [null, null, null, null],
+                        postalCode: null
+                    }
+                },
+                serviceType
+            };
+        }
+
         describe('if checkoutMethod set to `collection`', () => {
             const propsData = {
-                checkoutMethod: 'collection',
+                checkoutMethod: CHECKOUT_METHOD_COLLECTION,
                 checkoutUrl
             };
 
@@ -162,6 +179,8 @@ describe('Checkout', () => {
             beforeEach(() => {
                 CheckoutServiceApi.submitCheckout.mockClear();
                 CheckoutServiceApi.submitCheckout.mockImplementation(async () => Promise.resolve());
+                CheckoutServiceApi.getCheckout.mockClear();
+                CheckoutServiceApi.getCheckout.mockImplementation(async () => Promise.resolve({ data: CheckoutGetData(CHECKOUT_METHOD_COLLECTION) }));
 
                 wrapper = mount(VueCheckout, {
                     i18n,
@@ -244,7 +263,7 @@ describe('Checkout', () => {
 
         describe('if checkoutMethod set to `delivery`', () => {
             const propsData = {
-                checkoutMethod: 'delivery',
+                checkoutMethod: CHECKOUT_METHOD_DELIVERY,
                 checkoutUrl
             };
 
@@ -253,6 +272,8 @@ describe('Checkout', () => {
             beforeEach(() => {
                 CheckoutServiceApi.submitCheckout.mockClear();
                 CheckoutServiceApi.submitCheckout.mockImplementation(async () => Promise.resolve());
+                CheckoutServiceApi.getCheckout.mockClear();
+                CheckoutServiceApi.getCheckout.mockImplementation(async () => Promise.resolve({ data: CheckoutGetData(CHECKOUT_METHOD_DELIVERY) }));
 
                 wrapper = mount(VueCheckout, {
                     i18n,
@@ -343,6 +364,67 @@ describe('Checkout', () => {
                 expect(wrapper.vm.$v.address.line1).toBeDefined();
                 expect(wrapper.vm.$v.address.city).toBeDefined();
                 expect(wrapper.vm.$v.address.postcode).toBeDefined();
+            });
+        });
+    });
+
+    describe('when form is loaded', () => {
+        function CheckoutGetData () {
+            return CheckoutGetMockData;
+        }
+
+        const propsData = {
+            checkoutMethod: CHECKOUT_METHOD_DELIVERY,
+            checkoutUrl
+        };
+
+        describe('when request fails', () => {
+            let wrapper;
+
+            beforeEach(() => {
+                CheckoutServiceApi.getCheckout.mockClear();
+                CheckoutServiceApi.getCheckout.mockImplementation(async () => Promise.reject());
+
+                wrapper = mount(VueCheckout, {
+                    i18n,
+                    localVue,
+                    propsData
+                });
+            });
+
+            it('should emit failure event', async () => {
+                expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
+            });
+        });
+
+        describe('when request succeeds', () => {
+            let wrapper;
+
+            beforeEach(() => {
+                CheckoutServiceApi.getCheckout.mockClear();
+                CheckoutServiceApi.getCheckout.mockImplementation(async () => Promise.resolve({ data: CheckoutGetData() }));
+
+                wrapper = mount(VueCheckout, {
+                    i18n,
+                    localVue,
+                    propsData
+                });
+            });
+
+            it('should emit success event', async () => {
+                expect(wrapper.emitted(EventNames.CheckoutGetSuccess).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutGetFailure)).toBeUndefined();
+            });
+
+            it('should set mobile number', async () => {
+                expect(wrapper.find('[data-test-id="input-mobile-number"]').element.value).toBe('+447111111111');
+            });
+
+            it('should set address fields', async () => {
+                expect(wrapper.find('[data-test-id="input-address-line-1"]').element.value).toBe('1 Bristol Road');
+                expect(wrapper.find('[data-test-id="input-address-line-2"]').element.value).toBe('Flat 1');
+                expect(wrapper.find('[data-test-id="input-address-city"]').element.value).toBe('Bristol');
+                expect(wrapper.find('[data-test-id="input-address-postcode"]').element.value).toBe('BS1 1AA');
             });
         });
     });

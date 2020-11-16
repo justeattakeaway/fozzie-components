@@ -45,6 +45,7 @@
 
                 <form-selector
                     :order-method="serviceType"
+                    :times="times"
                     data-test-id="selector" />
 
                 <user-note data-test-id="user-note" />
@@ -94,7 +95,7 @@ import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
 
-import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY, TENANT_MAP } from '../constants';
+import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION, TENANT_MAP } from '../constants';
 import tenantConfigs from '../tenants';
 import CheckoutServiceApi from '../services/CheckoutServiceApi';
 import EventNames from '../event-names';
@@ -118,7 +119,7 @@ export default {
     props: {
         checkoutMethod: {
             type: String,
-            default: 'collection',
+            default: CHECKOUT_METHOD_COLLECTION,
             validator: value => (VALID_CHECKOUT_METHOD.indexOf(value) !== -1)
         },
 
@@ -160,7 +161,6 @@ export default {
             messages: [],
             notes: [],
             notices: [],
-            buttonText: 'Go to payment',
             serviceType: this.checkoutMethod
         };
     },
@@ -201,7 +201,6 @@ export default {
         },
 
         isCheckoutMethodDelivery () {
-            // return this.checkoutMethod === CHECKOUT_METHOD_DELIVERY;
             return this.serviceType === CHECKOUT_METHOD_DELIVERY;
         },
 
@@ -211,13 +210,7 @@ export default {
     },
 
     async mounted () {
-        try {
-            const result = await CheckoutServiceApi.getCheckout(this.checkoutUrl, this.tenant, this.getCheckoutTimeout);
-            this.mapResponse(result.data);
-        } catch (error) {
-            const CheckoutGetFailure = 'checkout-get-failure'; // TODO: Move to event-names once the other PR merged
-            this.$emit(CheckoutGetFailure, error);
-        }
+        await this.getCheckout();
     },
 
     methods: {
@@ -237,6 +230,16 @@ export default {
             await CheckoutServiceApi.submitCheckout(this.checkoutUrl, this.tenant, checkoutData, this.checkoutTimeout);
 
             this.$emit(EventNames.CheckoutSuccess);
+        },
+
+        async getCheckout () {
+            try {
+                const result = await CheckoutServiceApi.getCheckout(this.checkoutUrl, this.tenant, this.getCheckoutTimeout);
+                this.$emit(EventNames.CheckoutGetSuccess);
+                this.mapResponse(result.data);
+            } catch (thrownErrors) {
+                this.$emit(EventNames.CheckoutGetFailure, thrownErrors);
+            }
         },
 
         handleErrorState (error) {
@@ -298,12 +301,10 @@ export default {
             this.firstName = data.customer.firstName;
             this.mobileNumber = data.customer.phoneNumber;
             this.times = data.fulfillment.times;
-            this.address = {
-                line1: data.fulfillment.address.lines[0],
-                line2: data.fulfillment.address.lines[1],
-                city: data.fulfillment.address.lines[3],
-                postcode: data.fulfillment.address.postalCode
-            };
+            this.address.line1 = data.fulfillment.address.lines[0];
+            this.address.line2 = data.fulfillment.address.lines[1];
+            this.address.city = data.fulfillment.address.lines[3];
+            this.address.postcode = data.fulfillment.address.postalCode;
             this.messages = data.messages;
             this.notes = data.notes;
             this.notices = data.notices;
