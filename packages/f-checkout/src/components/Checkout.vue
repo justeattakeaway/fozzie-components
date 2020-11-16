@@ -143,7 +143,7 @@ export default {
     data () {
         return {
             tenantConfigs,
-            firstName: 'firstName',
+            firstName: '',
             mobileNumber: null,
             address: {
                 line1: null,
@@ -154,16 +154,8 @@ export default {
             genericErrorMessage: null,
             shouldDisableCheckoutButton: false,
             delivery: CHECKOUT_METHOD_DELIVERY,
-
             checkoutId: '',
             isFulfillable: true,
-            customer: {
-                dateOfBirth: '',
-                emailAddress: '',
-                firstName: '',
-                lastName: '',
-                phoneNumber: ''
-            },
             times: [],
             messages: [],
             notes: [],
@@ -303,7 +295,8 @@ export default {
         mapResponse (data) {
             this.checkoutId = data.id;
             this.isFulfillable = data.isFulfillable;
-            this.customer = data.customer;
+            this.firstName = data.customer.firstName;
+            this.mobileNumber = data.customer.phoneNumber;
             this.times = data.fulfillment.times;
             this.address = {
                 line1: data.fulfillment.address.lines[0],
