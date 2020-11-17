@@ -90,7 +90,7 @@ E.g.
 const options = {                 // (opt) component settings
   address: '',                    // String - override default address field value
   cuisine: '',                    // String - override default cuisine field value
-  hideShell: false,               // Boolean – hide/show search box shell
+  isShellHidden: false,           // Boolean – hide/show search box shell
   isCompressed: false,            // Boolean - hide/show compressed searchbox
   query: '',                      // String - override default query field value
   queryParams: {},                // Object - Query parameter overrides as key value pairs
