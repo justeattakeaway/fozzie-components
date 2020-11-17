@@ -80,7 +80,7 @@ E.g.
 
 ```vue
 <template>
-    <search-box
+    <vue-search-box
         locale="en-GB"
         :config="{ hideShell: true }" />
 </template>
@@ -108,7 +108,7 @@ Applies query parameters to the form URL to enable filters and other options on 
 **Format**
 
 ```vue
-<search-box
+<vue-search-box
     :config="{
         queryString: {
            [param]: value
@@ -121,7 +121,7 @@ Applies query parameters to the form URL to enable filters and other options on 
 
 
 ```vue
-<search-box
+<vue-search-box
     :config="{
         queryString: {
            refine: 'halal' // Users are redirected to /:search-url?refine=halal
