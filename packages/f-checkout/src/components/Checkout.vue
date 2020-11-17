@@ -95,9 +95,7 @@ import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
 
-import {
-    VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION, TENANT_MAP
-} from '../constants';
+import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP } from '../constants';
 import tenantConfigs from '../tenants';
 import CheckoutServiceApi from '../services/CheckoutServiceApi';
 import EventNames from '../event-names';
@@ -119,12 +117,6 @@ export default {
     mixins: [validationMixin, VueGlobalisationMixin],
 
     props: {
-        checkoutMethod: {
-            type: String,
-            default: CHECKOUT_METHOD_COLLECTION,
-            validator: value => (VALID_CHECKOUT_METHOD.indexOf(value) !== -1)
-        },
-
         checkoutUrl: {
             type: String,
             required: true

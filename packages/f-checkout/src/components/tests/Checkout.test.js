@@ -48,13 +48,16 @@ describe('Checkout', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    describe('props ::', () => {
-        describe('checkoutMethod ::', () => {
-            it.each(VALID_CHECKOUT_METHOD)('should update the Selector `ordermethod` attribute to match checkoutMethod=%p', definedType => {
+    describe('data ::', () => {
+        describe('serviceType ::', () => {
+            it.each(VALID_CHECKOUT_METHOD)('should update the Selector `ordermethod` attribute to match serviceType=%p', async definedType => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: definedType,
                     checkoutUrl
+                };
+
+                const data = {
+                    serviceType: definedType
                 };
 
                 // Act
@@ -63,6 +66,9 @@ describe('Checkout', () => {
                     localVue,
                     propsData
                 });
+
+                wrapper.setData(data);
+                await wrapper.vm.$nextTick();
 
                 const selectorComponent = wrapper.find('[data-test-id="selector"]');
 
@@ -70,11 +76,14 @@ describe('Checkout', () => {
                 expect(selectorComponent.attributes('ordermethod')).toEqual(definedType);
             });
 
-            it('should display the address block if set to `delivery`', () => {
+            it('should display the address block if set to `delivery`', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: CHECKOUT_METHOD_DELIVERY,
                     checkoutUrl
+                };
+
+                const data = {
+                    serviceType: CHECKOUT_METHOD_DELIVERY
                 };
 
                 // Act
@@ -83,6 +92,9 @@ describe('Checkout', () => {
                     localVue,
                     propsData
                 });
+
+                wrapper.setData(data);
+                await wrapper.vm.$nextTick();
 
                 const addressBlock = wrapper.find('[data-test-id="address-block"]');
 
@@ -90,11 +102,14 @@ describe('Checkout', () => {
                 expect(addressBlock.exists()).toBe(true);
             });
 
-            it('should not display the address block if set to `collection`', () => {
+            it('should not display the address block if set to `collection`', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: CHECKOUT_METHOD_COLLECTION,
                     checkoutUrl
+                };
+
+                const data = {
+                    serviceType: CHECKOUT_METHOD_COLLECTION
                 };
 
                 // Act
@@ -103,6 +118,9 @@ describe('Checkout', () => {
                     localVue,
                     propsData
                 });
+
+                wrapper.setData(data);
+                await wrapper.vm.$nextTick();
 
                 const addressBlock = wrapper.find('[data-test-id="address-block"]');
 
@@ -166,9 +184,8 @@ describe('Checkout', () => {
             postcode: 'EE1E 1EE'
         };
 
-        describe('if checkoutMethod set to `collection`', () => {
+        describe('if serviceType set to `collection`', () => {
             const propsData = {
-                checkoutMethod: CHECKOUT_METHOD_COLLECTION,
                 checkoutUrl
             };
 
@@ -262,9 +279,8 @@ describe('Checkout', () => {
             });
         });
 
-        describe('if checkoutMethod set to `delivery`', () => {
+        describe('if serviceType set to `delivery`', () => {
             const propsData = {
-                checkoutMethod: CHECKOUT_METHOD_DELIVERY,
                 checkoutUrl
             };
 
@@ -374,7 +390,6 @@ describe('Checkout', () => {
 
     describe('when form is loaded', () => {
         const propsData = {
-            checkoutMethod: CHECKOUT_METHOD_DELIVERY,
             checkoutUrl
         };
 
