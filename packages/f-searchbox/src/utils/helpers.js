@@ -18,6 +18,10 @@ const doesPostcodeMatchRegex = postcode => {
     return postcodeRegex.test(postcode);
 };
 
+/**
+ * Returns a postcode format to a more consistent form by setting it to uppercase and removing spaces.
+ * @param postcode
+ */
 const normalisePostcode = postcode => (postcode ? postcode.toUpperCase().replace(/\s/g, '').trim() : '');
 
 const millisecondsPerDay = 86400000; // 24 * 60 * 60 * 1000
@@ -40,6 +44,14 @@ const setCookie = (name, value, days) => {
     document.cookie = `${name}=${(value || '') + expires}; path=/`;
 };
 
+/**
+ * Returns a location object that contains previous searches from stored cookies.
+ * Example return if a `je-location` cookie existed (from en-GB):
+ *
+ * {postcode: "AR511AR"}
+ *
+ * @returns Object
+ */
 const getLastLocation = () => window.document.cookie
     .split('; ')
     .reduce((location, data) => {

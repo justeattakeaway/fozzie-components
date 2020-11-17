@@ -39,7 +39,7 @@
 <script>
 import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
-import FormLabelWrapper from './formElements/FormLabelWrapper.vue';
+import FormLabelWrapper from './formElements/FormSearchField.vue';
 import FormSearchButton from './formElements/FormSearchButton.vue';
 import store from '../store/searchbox.module';
 import { getLastLocation } from '../utils/helpers';
@@ -131,7 +131,7 @@ export default {
 
     methods: {
         /**
-         * Main submit handler that's responsible for submitting searches to SERP:
+         * Main submit handler that's responsible for submitting searches: for example to SERP.
          *
          * 1. Checks address validation.
          * 2. If the address is valid we submit the address.
@@ -197,6 +197,7 @@ export default {
     },
 
     mounted () {
+        // `lastAddress` is set by returning the location cookie stored on the users machine.
         this.lastAddress = this.config.locationFormat(getLastLocation());
 
         if (this.lastAddress) {

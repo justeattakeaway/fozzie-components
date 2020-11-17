@@ -227,7 +227,7 @@ describe('`Form`', () => {
                 });
 
                 describe('when `address` `isValid` is falsy', () => {
-                    it('should prevent default to stop the form from submitting a invalid search', () => {
+                    it('should prevent default to stop the form from submitting an invalid search', () => {
                         // Arrange
                         const propsData = {
                             config: {

@@ -13,7 +13,7 @@ describe('`Base`', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    describe('Base `shell` configs', () => {
+    describe('`shell` configs', () => {
         it('should set the correct `shell` element to `search-shell` when `hideShell` is not set', () => {
             // Arrange
             const propsData = {};

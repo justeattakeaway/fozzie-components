@@ -8,11 +8,11 @@
                 [$style['c-search-btn']]: true,
                 [$style['c-search-btn--compressed']]: isCompressed
             }">
-            <div :class="$style['c-search-btn-icon']">
+            <span :class="$style['c-search-btn-icon']">
                 <slot name="icon-submit">
                     <eyeglass-icon />
                 </slot>
-            </div>
+            </span>
 
             <span :class="$style['c-search-btn-text']">{{ copy.buttonText }}</span>
         </button>
