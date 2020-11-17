@@ -1,25 +1,25 @@
 <template>
     <div
         :class="$style['c-registration']">
-        <card
+        <card-component
             :data-theme-registration="theme"
             :card-heading="copy.labels.createAccountTitle"
             is-rounded
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="registration-component"
-            :class="$style['c-card-padding']">
-            <bag-celebrate-icon :class="$style['bag-icon']" />
+            :class="$style['c-registration-card']">
+            <bag-celebrate-icon :class="$style['c-registration-icon']" />
             <p
                 v-if="showLoginLink"
-                :class="$style['c-loginLink']"
+                :class="$style['c-registration-link']"
                 data-test-id="create-account-login-link"
                 @click="visitLoginPage">
                 <a :href="copy.navLinks.login.url">{{ copy.navLinks.login.text }}</a>
             </p>
             <form
                 type="post"
-                :class="$style['o-form']"
+                :class="$style['c-registration-form']"
                 tabindex="0"
                 @click="formStart"
                 @focus="formStart"
@@ -38,7 +38,6 @@
                     data-test-id="input-first-name"
                     :label-text="copy.labels.firstName"
                     input-type="text"
-                    label-style="inlineNarrow"
                     @blur="formFieldBlur('firstName')">
                     <template #error>
                         <error-message
@@ -65,7 +64,6 @@
                     data-test-id="input-last-name"
                     :label-text="copy.labels.lastName"
                     input-type="text"
-                    label-style="inlineNarrow"
                     @blur="formFieldBlur('lastName')">
                     <template #error>
                         <error-message
@@ -92,7 +90,6 @@
                     data-test-id="input-email"
                     :label-text="copy.labels.email"
                     input-type="email"
-                    label-style="inlineNarrow"
                     @blur="formFieldBlur('email')">
                     <template #error>
                         <error-message
@@ -124,7 +121,6 @@
                     data-test-id="input-password"
                     :label-text="copy.labels.password"
                     input-type="password"
-                    label-style="inlineNarrow"
                     @blur="formFieldBlur('password')">
                     <template #error>
                         <error-message
@@ -140,15 +136,17 @@
                     </template>
                 </form-field>
 
-                <form-button
+                <button-component
+                    :class="$style['c-registration-submit']"
                     data-test-id="create-account-submit-button"
-                    button-style="primary"
+                    button-type="primary"
+                    button-size="large"
                     is-full-width
                     :disabled="shouldDisableCreateAccountButton">
                     {{ copy.labels.createAccountBtn }}
-                </form-button>
+                </button-component>
             </form>
-            <p :class="$style['c-legal-hyperlinks']">
+            <p :class="$style['c-registration-link']">
                 {{ copy.navLinks.termsAndConditions.prefix }}
                 <a
                     data-test-id="ts-and-cs-link"
@@ -165,7 +163,7 @@
                     :href="copy.navLinks.cookiesPolicy.url"
                     target="_blank">{{ copy.navLinks.cookiesPolicy.text }}</a>{{ copy.navLinks.cookiesPolicy.suffix }}
             </p>
-        </card>
+        </card-component>
     </div>
 </template>
 
@@ -179,13 +177,14 @@ import {
     maxLength
 } from 'vuelidate/lib/validators';
 import { WarningIcon, BagCelebrateIcon } from '@justeat/f-vue-icons';
-import Card from '@justeat/f-card';
+import ButtonComponent from '@justeat/f-button';
+import '@justeat/f-button/dist/f-button.css';
+import CardComponent from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
-import FormButton from './Button.vue';
 import tenantConfigs from '../tenants';
 import RegistrationServiceApi from '../services/RegistrationServiceApi';
 import EventNames from '../event-names';
@@ -221,8 +220,8 @@ export default {
     name: 'Registration',
 
     components: {
-        Card,
-        FormButton,
+        ButtonComponent,
+        CardComponent,
         FormField,
         WarningIcon,
         BagCelebrateIcon,
@@ -434,49 +433,57 @@ export default {
 
 <style lang="scss" module>
 
+$registration-icon-width          : 97px;
+$registration-icon-width--narrow  : 92px;
+$registration-icon-height         : 78px;
+$registration-icon-height--narrow : 74px;
+
 // Form styling
 .c-registration {
     margin-top: 100px;
 }
 
-.o-form {
-    @include font-size(body-l);
-}
+    .c-registration-card {
+        position: relative;
+        padding-top: spacing(x5);
+        padding-bottom: spacing(x6);
 
-* + .o-form {
-    margin-top: spacing(x2);
-}
-
-.c-loginLink,
-.c-legal-hyperlinks {
-    text-align: center;
-    a {
-        color: $blue;
-        text-decoration: none;
-        font-weight: $font-weight-bold;
+        @include media('<mid') {
+            padding-bottom: spacing(x4);
+        }
     }
-}
 
-.c-card-padding {
-    padding-top: spacing(x5);
-    padding-bottom: spacing(x6);
+    .c-registration-icon {
+        width: $registration-icon-width;
+        height: $registration-icon-height;
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        transform: translate(-35%);
 
-    @include media('<mid') {
-        padding-bottom: spacing(x4);
+        @include media('<mid') {
+            width: $registration-icon-width--narrow;
+            height: $registration-icon-height--narrow;
+        }
     }
-}
 
-.bag-icon {
-    width: 97px;
-    height: 78px;
-    position: absolute;
-    top: 56px;
-    left: 50%;
-    transform: translate(-35%);
-    @include media('<mid') {
-        width: 92px;
-        height: 74px;
+    .c-registration-form {
+        margin-top: spacing(x2);
     }
-}
+
+    .c-registration-submit {
+        margin-top: spacing(x4);
+        margin-bottom: spacing(x3);
+    }
+
+    .c-registration-link {
+        text-align: center;
+
+        a {
+            // TODO: check default link styles in PIE and update fozzie // (should be able to remove these styles then)
+            text-decoration: none;
+            font-weight: $font-weight-bold;
+        }
+    }
 
 </style>
