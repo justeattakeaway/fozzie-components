@@ -44,7 +44,8 @@
                     data-test-id="address-block" />
 
                 <form-selector
-                    :order-method="checkoutMethod"
+                    :order-method="serviceType"
+                    :times="times"
                     data-test-id="selector" />
 
                 <user-note data-test-id="user-note" />
@@ -94,7 +95,7 @@ import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
 
-import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY } from '../constants';
+import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP } from '../constants';
 import tenantConfigs from '../tenants';
 import CheckoutServiceApi from '../services/CheckoutServiceApi';
 import EventNames from '../event-names';
@@ -116,12 +117,6 @@ export default {
     mixins: [validationMixin, VueGlobalisationMixin],
 
     props: {
-        checkoutMethod: {
-            type: String,
-            default: 'Collection',
-            validator: value => (VALID_CHECKOUT_METHOD.indexOf(value) !== -1)
-        },
-
         checkoutUrl: {
             type: String,
             required: true
@@ -131,13 +126,19 @@ export default {
             type: Number,
             required: false,
             default: 1000
+        },
+
+        getCheckoutTimeout: {
+            type: Number,
+            required: false,
+            default: 1000
         }
     },
 
     data () {
         return {
             tenantConfigs,
-            firstName: 'firstName',
+            firstName: '',
             mobileNumber: null,
             address: {
                 line1: null,
@@ -147,7 +148,13 @@ export default {
             },
             genericErrorMessage: null,
             shouldDisableCheckoutButton: false,
-            delivery: CHECKOUT_METHOD_DELIVERY
+            checkoutId: '',
+            isFulfillable: true,
+            times: [],
+            messages: [],
+            notes: [],
+            notices: [],
+            serviceType: this.checkoutMethod
         };
     },
 
@@ -187,8 +194,22 @@ export default {
         },
 
         isCheckoutMethodDelivery () {
-            return this.checkoutMethod === CHECKOUT_METHOD_DELIVERY;
+            return this.serviceType === CHECKOUT_METHOD_DELIVERY;
+        },
+
+        tenant () {
+            return TENANT_MAP[this.locale];
         }
+    },
+
+    watch: {
+        async checkoutUrl () {
+            await this.getCheckout();
+        }
+    },
+
+    async mounted () {
+        await this.getCheckout();
     },
 
     methods: {
@@ -208,6 +229,16 @@ export default {
             await CheckoutServiceApi.submitCheckout(this.checkoutUrl, this.tenant, checkoutData, this.checkoutTimeout);
 
             this.$emit(EventNames.CheckoutSuccess);
+        },
+
+        async getCheckout () {
+            try {
+                const result = await CheckoutServiceApi.getCheckout(this.checkoutUrl, this.tenant, this.getCheckoutTimeout);
+                this.$emit(EventNames.CheckoutGetSuccess);
+                this.mapResponse(result.data);
+            } catch (thrownErrors) {
+                this.$emit(EventNames.CheckoutGetFailure, thrownErrors);
+            }
         },
 
         handleErrorState (error) {
@@ -261,6 +292,28 @@ export default {
             */
             this.$v.$touch();
             return !this.$v.$invalid;
+        },
+
+        mapResponse (data) {
+            this.checkoutId = data.id;
+            this.isFulfillable = data.isFulfillable;
+            if (data.customer) {
+                this.firstName = data.customer.firstName;
+                this.mobileNumber = data.customer.phoneNumber;
+            }
+
+            this.times = data.fulfillment.times;
+            if (data.fulfillment.address) {
+                this.address.line1 = data.fulfillment.address.lines[0];
+                this.address.line2 = data.fulfillment.address.lines[1];
+                this.address.city = data.fulfillment.address.lines[3];
+                this.address.postcode = data.fulfillment.address.postalCode;
+            }
+
+            this.messages = data.messages;
+            this.notes = data.notes;
+            this.notices = data.notices;
+            this.serviceType = data.serviceType;
         }
     },
 

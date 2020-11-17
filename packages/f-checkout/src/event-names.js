@@ -4,6 +4,8 @@ const CheckoutStart = 'checkout-payment-start';
 const CheckoutInlineError = 'checkout-payment-inline-error';
 const CheckoutVisitPage = 'checkout-visit-payment-page';
 const CheckoutBlocked = 'checkout-payment-blocked';
+const CheckoutGetSuccess = 'checkout-get-success';
+const CheckoutGetFailure = 'checkout-get-failure';
 
 export default {
     CheckoutSuccess,
@@ -11,5 +13,7 @@ export default {
     CheckoutStart,
     CheckoutInlineError,
     CheckoutVisitPage,
-    CheckoutBlocked
+    CheckoutBlocked,
+    CheckoutGetSuccess,
+    CheckoutGetFailure
 };

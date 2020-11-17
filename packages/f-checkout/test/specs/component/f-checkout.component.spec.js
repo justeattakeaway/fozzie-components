@@ -37,7 +37,7 @@ describe('f-checkout component tests', () => {
         // Act
         CheckoutComponent.submitCheckoutForm(addressInfo);
         CheckoutComponent.inputUserNote('No mushrooms!');
-        CheckoutComponent.selectDeliveryTime('As soon as possible');
+        CheckoutComponent.selectFulfillmentTime('As soon as possible');
         CheckoutComponent.submit();
     });
 });
