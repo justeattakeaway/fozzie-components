@@ -1,10 +1,16 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import checkoutJson from './checkout.json';
+import checkoutDelivery from './checkout-delivery.json';
+import checkoutCollection from './checkout-collection.json';
+
+const mock = new MockAdapter(axios);
 
 export default {
-    setup (path) {
-        const mock = new MockAdapter(axios);
-        mock.onGet(path).reply(200, checkoutJson);
+    setupDelivery (path) {
+        mock.onGet(path).reply(200, checkoutDelivery);
+    },
+
+    setupCollection (path) {
+        mock.onGet(path).reply(200, checkoutCollection);
     }
 };

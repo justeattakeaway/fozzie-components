@@ -1,0 +1,59 @@
+{
+  "id": "12345",
+  "serviceType": "collection",
+  "customer": {
+    "firstName": "Joe",
+    "lastName": "Bloggs",
+    "phoneNumber": "+447111111111",
+    "dateOfBirth": "1980-01-30",
+    "emailAddress": "joe.bloggs@justeattakeaway.com"
+  },
+  "fulfillment": {
+    "times": [{
+        "label": {
+          "text": "As soon as possible"
+        },
+        "from": "2020-01-01T00:00+00:00",
+        "to": "2020-01-01T00:00+00:00",
+        "selected": true
+      },
+      {
+        "label": {
+          "text": "Monday 00:15"
+        },
+        "from": "2020-01-01T00:15+00:00",
+        "to": "2020-01-01T00:15+00:00",
+        "selected": false
+      },
+      {
+        "label": {
+          "text": "Monday 00:30"
+        },
+        "from": "2020-01-01T00:30+00:00",
+        "to": "2020-01-01T00:30+00:00",
+        "selected": false
+      }
+    ]
+  },
+  "notes": [],
+  "isFulfillable": true,
+  "notices": [{
+    "type": "allergy",
+    "notice": {
+      "text": "If you have a food allergy or intolerance (or someone you're ordering for has), <a href=\"https://greggs.co.uk/nutrition\" data-test-id=\"allergen-url-link\" target=\"_blank\" rel=\"noopener\">read what this restaurant has to say about allergies</a> before placing your order. Do not order if you cannot get the allergy information you need."
+    }
+  }],
+  "messages": [{
+      "type": "warning",
+      "message": {
+        "text": "Please hurry, the restaurant is closing soon"
+      }
+    },
+    {
+      "type": "information",
+      "message": {
+        "text": "We're sorry, some items in your basket are no longer available"
+      }
+    }
+  ]
+}

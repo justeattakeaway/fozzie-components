@@ -5,7 +5,7 @@ import VueCheckout from '../Checkout.vue';
 import CheckoutServiceApi from '../../services/CheckoutServiceApi';
 import EventNames from '../../event-names';
 import tenantConfigs from '../../tenants';
-import CheckoutGetMockData from '../../demo/checkout.json';
+import CheckoutGetMockData from '../../demo/checkout-delivery.json';
 
 jest.mock('../../services/CheckoutServiceApi', () => ({ submitCheckout: jest.fn(), getCheckout: jest.fn() }));
 

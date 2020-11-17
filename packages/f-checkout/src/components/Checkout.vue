@@ -210,6 +210,12 @@ export default {
         }
     },
 
+    watch: {
+        async checkoutUrl () {
+            await this.getCheckout();
+        }
+    },
+
     async mounted () {
         await this.getCheckout();
     },
@@ -305,10 +311,13 @@ export default {
             }
 
             this.times = data.fulfillment.times;
-            this.address.line1 = data.fulfillment.address.lines[0];
-            this.address.line2 = data.fulfillment.address.lines[1];
-            this.address.city = data.fulfillment.address.lines[3];
-            this.address.postcode = data.fulfillment.address.postalCode;
+            if (data.fulfillment.address) {
+                this.address.line1 = data.fulfillment.address.lines[0];
+                this.address.line2 = data.fulfillment.address.lines[1];
+                this.address.city = data.fulfillment.address.lines[3];
+                this.address.postcode = data.fulfillment.address.postalCode;
+            }
+
             this.messages = data.messages;
             this.notes = data.notes;
             this.notices = data.notices;

@@ -14,7 +14,11 @@ import {
 import VueCheckout from '../src/components/Checkout.vue';
 import CheckoutMock from '../src/demo/checkoutMock';
 
-CheckoutMock.setup('/checkout.json');
+const deliveryUrl = '/checkout-delivery.json';
+const collectionUrl = '/checkout-collection.json';
+
+CheckoutMock.setupDelivery(deliveryUrl);
+CheckoutMock.setupCollection(collectionUrl);
 
 export default {
     title: 'Components/Organisms',
@@ -27,12 +31,12 @@ export const CheckoutComponent = () => ({
         locale: {
             default: select('Locale', VALID_LOCALES, ENGLISH_LOCALE)
         },
-        checkoutMethod: {
-            default: select('Checkout Method', VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY)
+        checkoutUrl: {
+            default: select('Checkout Url', [deliveryUrl, collectionUrl], deliveryUrl)
         }
     },
     template:
-        '<vue-checkout :checkoutMethod="checkoutMethod" checkoutUrl="/checkout.json" :locale="locale" />'
+        '<vue-checkout :checkoutUrl="checkoutUrl" :locale="locale" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';
