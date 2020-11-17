@@ -12,7 +12,7 @@ const cookiesPolicyLink = () => registrationComponent().$('[data-test-id="cookie
 // Validation errors
 const firstNameEmptyError = () => $('[data-test-id="error-first-name-empty"]');
 const firstNameMaxLengthError = () => $('[data-test-id="error-first-name-maxlength"]');
-const firstNameInvalidError = () => $('[data-test-title="error-first-name-invalid"]');
+const firstNameInvalidError = () => $('[data-test-id="error-first-name-invalid"]');
 
 const lastNameEmptyError = () => $('[data-test-id="error-last-name-empty"]');
 const lastNameMaxLengthError = () => $('[data-test-id="error-last-name-maxlength"]');
