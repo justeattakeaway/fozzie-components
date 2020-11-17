@@ -172,7 +172,7 @@ describe('`Form`', () => {
                         expect(wrapper.vm.store.state.errors).toEqual([]);
                     });
 
-                    it('should invoke `processLocationCookie` to set je location cookies manually if `setCookies` is enabled', () => {
+                    it('should invoke `processLocationCookie` to set je location cookies manually if `shouldSetCookies` is enabled', () => {
                         // Arrange
                         const address = 'AR511AR';
                         const propsData = {
@@ -189,7 +189,7 @@ describe('`Form`', () => {
                         });
 
                         const spy = jest.spyOn(processLocationCookie, 'processLocationCookie');
-                        wrapper.setData({ setCookies: false, address });
+                        wrapper.setData({ shouldSetCookies: false, address });
 
                         // Act
                         wrapper.vm.submit(event);
@@ -214,7 +214,7 @@ describe('`Form`', () => {
                             propsData
                         });
 
-                        wrapper.setData({ clearAddressOnValidSubmit: true });
+                        wrapper.setData({ shouldClearAddressOnValidSubmit: true });
 
                         const spy = jest.spyOn(wrapper.vm, 'clearAddressValue');
 
@@ -295,7 +295,7 @@ describe('`Form`', () => {
             });
 
             describe('when invoked', () => {
-                describe('AND `clearAddressOnValidSubmit` is truthy', () => {
+                describe('AND `shouldClearAddressOnValidSubmit` is truthy', () => {
                     it('should set the `address` to ``', () => {
                         // Arrange
                         const propsData = {
@@ -308,10 +308,10 @@ describe('`Form`', () => {
                             }
                         };
                         const wrapper = shallowMount(Form, { propsData });
-                        wrapper.setData({ clearAddressOnValidSubmit: true });
+                        wrapper.setData({ shouldClearAddressOnValidSubmit: true });
 
                         // Act
-                        wrapper.vm.clearAddressValue(wrapper.vm.clearAddressOnValidSubmit);
+                        wrapper.vm.clearAddressValue(wrapper.vm.shouldClearAddressOnValidSubmit);
 
                         // Assert
                         expect(wrapper.vm.address).toBe('');

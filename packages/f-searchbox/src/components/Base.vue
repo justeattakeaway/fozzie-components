@@ -52,7 +52,7 @@ export default {
             componentLocale: locale,
             theme,
             service,
-            element: componentConfig.hideShell ? 'no-search-shell' : 'search-shell'
+            element: componentConfig.isShellHidden ? 'no-search-shell' : 'search-shell'
         };
     }
 };

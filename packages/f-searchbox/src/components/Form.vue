@@ -79,11 +79,11 @@ export default {
             formUrl,
             queryString,
             isCompressed,
-            clearAddressOnValidSubmit,
+            shouldClearAddressOnValidSubmit,
             addressField,
-            setCookies,
+            shouldSetCookies,
             onSubmit,
-            autoPopulateAddress
+            shouldAutoPopulateAddress
         } = this.config;
 
         return {
@@ -93,11 +93,11 @@ export default {
             formUrl,
             queryString,
             isCompressed,
-            clearAddressOnValidSubmit,
+            shouldClearAddressOnValidSubmit,
             addressField,
-            setCookies,
+            shouldSetCookies,
             onSubmit,
-            autoPopulateAddress,
+            shouldAutoPopulateAddress,
             store
         };
     },
@@ -135,7 +135,7 @@ export default {
          *
          * 1. Checks address validation.
          * 2. If the address is valid we submit the address.
-         * 3. Note: `configs` determine custom behaviour, e.g setCookies & clearAddressOnValidSubmit etc see readme.
+         * 3. Note: `configs` determine custom behaviour, e.g shouldSetCookies & shouldClearAddressOnValidSubmit etc see readme.
          *
          * @param e
          */
@@ -148,8 +148,8 @@ export default {
 
             if (this.store.state.isValid === true) {
                 this.store.commit('SET_ERRORS', []);
-                processLocationCookie(this.setCookies, this.address);
-                this.clearAddressValue(this.clearAddressOnValidSubmit);
+                processLocationCookie(this.shouldSetCookies, this.address);
+                this.clearAddressValue(this.shouldClearAddressOnValidSubmit);
                 onCustomSubmit(this.onSubmit, this.address, e);
             } else {
                 e.preventDefault();
@@ -163,10 +163,6 @@ export default {
          * Responsible for submitting a manual `form.submit` If a custom `onSubmit` method is passed through
          * from the consuming application we want to ignore the submit as the `onSubmit` in some cases (Menu) will not require
          * navigation to SERP.
-         *
-         * 1. Checks address validation.
-         * 2. If the address is valid we submit the address to SERP.
-         * 3. Note: `configs` determine custom behaviour, e.g setCookies & clearAddressOnValidSubmit etc see readme.
          *
          * @param event
          */
@@ -184,12 +180,12 @@ export default {
 
         /**
          * Clears the address value when the address is valid.
-         * Determined by the config `clearAddressOnValidSubmit`.
+         * Determined by the config `shouldClearAddressOnValidSubmit`.
          *
-         * @param shouldClear
+         * @param shouldClearAddressOnValidSubmit
          */
-        clearAddressValue (shouldClear) {
-            if (shouldClear) {
+        clearAddressValue (shouldClearAddressOnValidSubmit) {
+            if (shouldClearAddressOnValidSubmit) {
                 this.address = '';
                 this.store.commit('SET_IS_DIRTY', false);
             }
@@ -201,7 +197,7 @@ export default {
         this.lastAddress = this.config.locationFormat(getLastLocation());
 
         if (this.lastAddress) {
-            this.address = this.autoPopulateAddress ? this.lastAddress : '';
+            this.address = this.shouldAutoPopulateAddress ? this.lastAddress : '';
         }
     }
 };

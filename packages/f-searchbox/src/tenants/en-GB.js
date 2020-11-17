@@ -18,18 +18,18 @@ const component = {
     formUrl: '/search/do',
     address: '',
     cuisine: '',
-    hideShell: false,
+    isShellHidden: false,
     isCompressed: true,
     query: '',
-    setCookies: false,
+    shouldSetCookies: false,
     onSubmit: false,
-    autoPopulateAddress: true,
+    shouldAutoPopulateAddress: true,
     addressField: {
         isNumeric: false,
         name: 'postcode',
         type: 'text'
     },
-    clearAddressOnValidSubmit: false,
+    shouldClearAddressOnValidSubmit: false,
     locationFormat: location => location.postcode
 };
 

@@ -14,7 +14,7 @@ describe('`Base`', () => {
     });
 
     describe('`shell` configs', () => {
-        it('should set the correct `shell` element to `search-shell` when `hideShell` is not set', () => {
+        it('should set the correct `shell` element to `search-shell` when `isShellHidden` is not set', () => {
             // Arrange
             const propsData = {};
 
@@ -25,10 +25,10 @@ describe('`Base`', () => {
             expect(wrapper.vm.element).toBe('search-shell');
         });
 
-        it('should set the correct `shell` element to `search-shell` when `hideShell` is set to `true`', () => {
+        it('should set the correct `shell` element to `search-shell` when `isShellHidden` is set to `true`', () => {
             // Arrange
             const propsData = {
-                config: { hideShell: false }
+                config: { isShellHidden: false }
             };
 
             // Act
@@ -38,10 +38,10 @@ describe('`Base`', () => {
             expect(wrapper.vm.element).toBe('search-shell');
         });
 
-        it('should set the correct `shell` element to `no-search-shell` when `hideShell` is set to `true` ', () => {
+        it('should set the correct `shell` element to `no-search-shell` when `isShellHidden` is set to `true` ', () => {
             // Arrange
             const propsData = {
-                config: { hideShell: true }
+                config: { isShellHidden: true }
             };
 
             // Act
