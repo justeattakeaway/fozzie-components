@@ -139,7 +139,7 @@ export default {
          *
          * @param e
          */
-        async submit (e) {
+        submit (e) {
             this.store.commit('SET_IS_VALID', this.service.isValid(this.address));
 
             if (this.hasLastSavedAddress) {
