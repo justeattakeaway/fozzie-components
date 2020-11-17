@@ -106,10 +106,10 @@ $search-height-mid: 60px;
 
 // c-search-innerFields represents the geolocation components i.e the geo locate button & street input field (available in I18n)
 .c-search-innerFields {
+    position: absolute;
     align-items: center;
     display: flex;
     height: 35px;
-    position: absolute;
     right: 0;
     top: 11px;
 }
