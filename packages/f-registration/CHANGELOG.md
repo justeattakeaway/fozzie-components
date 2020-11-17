@@ -3,12 +3,29 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.40.0
+------------------------------
+*November 17, 2020*
+
+### Added
+- Eyeglass sass config added so that the component can just import the base fozzie `index.scss`.
+
+### Changed
+- `Button.vue` replaced in favour of `f-button` component.
+- Some small class name updates to make more consistent with our naming scheme.
+
+### Removed
+- `theme()` mixin as no longer needed.
+
+
 v0.39.1
 ------------------------------
 *November 5, 2020*
 
 ### Added
 - Added f-error-message into dependencies for f-registration
+
 
 v0.39.0
 ------------------------------
