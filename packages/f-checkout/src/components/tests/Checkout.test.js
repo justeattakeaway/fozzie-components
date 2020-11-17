@@ -1,16 +1,31 @@
 import { shallowMount, mount, createLocalVue } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
-import { VALID_CHECKOUT_METHOD } from '../../constants';
+import { VALID_CHECKOUT_METHOD, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import CheckoutServiceApi from '../../services/CheckoutServiceApi';
 import EventNames from '../../event-names';
 import tenantConfigs from '../../tenants';
+import CheckoutGetMockData from '../../demo/checkout-delivery.json';
 
-jest.mock('../../services/CheckoutServiceApi', () => ({ submitCheckout: jest.fn() }));
+jest.mock('../../services/CheckoutServiceApi', () => ({ submitCheckout: jest.fn(), getCheckout: jest.fn() }));
 
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
+
+const defaultCheckoutGetData = {
+    customer: {
+        firstName: '',
+        phoneNumber: null
+    },
+    fulfillment: {
+        address: {
+            lines: [null, null, null, null],
+            postalCode: null
+        }
+    },
+    serviceType: CHECKOUT_METHOD_DELIVERY
+};
 
 const i18n = {
     locale: 'en-GB',
@@ -33,13 +48,16 @@ describe('Checkout', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    describe('props ::', () => {
-        describe('checkoutMethod ::', () => {
-            it.each(VALID_CHECKOUT_METHOD)('should update the Selector `ordermethod` attribute to match checkoutMethod=%p', definedType => {
+    describe('data ::', () => {
+        describe('serviceType ::', () => {
+            it.each(VALID_CHECKOUT_METHOD)('should update the Selector `ordermethod` attribute to match serviceType=%p', async definedType => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: definedType,
                     checkoutUrl
+                };
+
+                const data = {
+                    serviceType: definedType
                 };
 
                 // Act
@@ -48,6 +66,9 @@ describe('Checkout', () => {
                     localVue,
                     propsData
                 });
+
+                wrapper.setData(data);
+                await wrapper.vm.$nextTick();
 
                 const selectorComponent = wrapper.find('[data-test-id="selector"]');
 
@@ -55,11 +76,14 @@ describe('Checkout', () => {
                 expect(selectorComponent.attributes('ordermethod')).toEqual(definedType);
             });
 
-            it('should display the address block if set to `Delivery`', () => {
+            it('should display the address block if set to `delivery`', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: 'Delivery',
                     checkoutUrl
+                };
+
+                const data = {
+                    serviceType: CHECKOUT_METHOD_DELIVERY
                 };
 
                 // Act
@@ -68,6 +92,9 @@ describe('Checkout', () => {
                     localVue,
                     propsData
                 });
+
+                wrapper.setData(data);
+                await wrapper.vm.$nextTick();
 
                 const addressBlock = wrapper.find('[data-test-id="address-block"]');
 
@@ -75,11 +102,14 @@ describe('Checkout', () => {
                 expect(addressBlock.exists()).toBe(true);
             });
 
-            it('should not display the address block if set to `Collection`', () => {
+            it('should not display the address block if set to `collection`', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutMethod: 'Collection',
                     checkoutUrl
+                };
+
+                const data = {
+                    serviceType: CHECKOUT_METHOD_COLLECTION
                 };
 
                 // Act
@@ -88,6 +118,9 @@ describe('Checkout', () => {
                     localVue,
                     propsData
                 });
+
+                wrapper.setData(data);
+                await wrapper.vm.$nextTick();
 
                 const addressBlock = wrapper.find('[data-test-id="address-block"]');
 
@@ -151,23 +184,27 @@ describe('Checkout', () => {
             postcode: 'EE1E 1EE'
         };
 
-        describe('if checkoutMethod set to `Collection`', () => {
+        describe('if serviceType set to `collection`', () => {
             const propsData = {
-                checkoutMethod: 'Collection',
                 checkoutUrl
             };
 
             let wrapper;
 
             beforeEach(() => {
-                CheckoutServiceApi.submitCheckout.mockClear();
                 CheckoutServiceApi.submitCheckout.mockImplementation(async () => Promise.resolve());
+                CheckoutServiceApi.getCheckout.mockImplementation(async () => Promise.resolve({ data: { ...defaultCheckoutGetData, serviceType: CHECKOUT_METHOD_COLLECTION } }));
 
                 wrapper = mount(VueCheckout, {
                     i18n,
                     localVue,
                     propsData
                 });
+            });
+
+            afterEach(() => {
+                CheckoutServiceApi.submitCheckout.mockClear();
+                CheckoutServiceApi.getCheckout.mockClear();
             });
 
             it('should emit success event when all fields are populated correctly', async () => {
@@ -242,23 +279,27 @@ describe('Checkout', () => {
             });
         });
 
-        describe('if checkoutMethod set to `Delivery`', () => {
+        describe('if serviceType set to `delivery`', () => {
             const propsData = {
-                checkoutMethod: 'Delivery',
                 checkoutUrl
             };
 
             let wrapper;
 
             beforeEach(() => {
-                CheckoutServiceApi.submitCheckout.mockClear();
                 CheckoutServiceApi.submitCheckout.mockImplementation(async () => Promise.resolve());
+                CheckoutServiceApi.getCheckout.mockImplementation(async () => Promise.resolve({ data: { ...defaultCheckoutGetData, serviceType: CHECKOUT_METHOD_DELIVERY } }));
 
                 wrapper = mount(VueCheckout, {
                     i18n,
                     localVue,
                     propsData
                 });
+            });
+
+            afterEach(() => {
+                CheckoutServiceApi.submitCheckout.mockClear();
+                CheckoutServiceApi.getCheckout.mockClear();
             });
 
             it('should emit success event when all fields are populated correctly', async () => {
@@ -343,6 +384,68 @@ describe('Checkout', () => {
                 expect(wrapper.vm.$v.address.line1).toBeDefined();
                 expect(wrapper.vm.$v.address.city).toBeDefined();
                 expect(wrapper.vm.$v.address.postcode).toBeDefined();
+            });
+        });
+    });
+
+    describe('when form is loaded', () => {
+        const propsData = {
+            checkoutUrl
+        };
+
+        describe('when request fails', () => {
+            let wrapper;
+
+            beforeEach(() => {
+                CheckoutServiceApi.getCheckout.mockImplementation(async () => Promise.reject());
+
+                wrapper = mount(VueCheckout, {
+                    i18n,
+                    localVue,
+                    propsData
+                });
+            });
+
+            afterEach(() => {
+                CheckoutServiceApi.getCheckout.mockClear();
+            });
+
+            it('should emit failure event', async () => {
+                expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
+            });
+        });
+
+        describe('when request succeeds', () => {
+            let wrapper;
+
+            beforeEach(() => {
+                CheckoutServiceApi.getCheckout.mockImplementation(async () => Promise.resolve({ data: CheckoutGetMockData }));
+
+                wrapper = mount(VueCheckout, {
+                    i18n,
+                    localVue,
+                    propsData
+                });
+            });
+
+            afterEach(() => {
+                CheckoutServiceApi.getCheckout.mockClear();
+            });
+
+            it('should emit success event', async () => {
+                expect(wrapper.emitted(EventNames.CheckoutGetSuccess).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutGetFailure)).toBeUndefined();
+            });
+
+            it('should set mobile number', async () => {
+                expect(wrapper.find('[data-test-id="input-mobile-number"]').element.value).toBe('+447111111111');
+            });
+
+            it('should set address fields', async () => {
+                expect(wrapper.find('[data-test-id="input-address-line-1"]').element.value).toBe('1 Bristol Road');
+                expect(wrapper.find('[data-test-id="input-address-line-2"]').element.value).toBe('Flat 1');
+                expect(wrapper.find('[data-test-id="input-address-city"]').element.value).toBe('Bristol');
+                expect(wrapper.find('[data-test-id="input-address-postcode"]').element.value).toBe('BS1 1AA');
             });
         });
     });

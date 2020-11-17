@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "main": "dist/f-checkout.umd.min.js",
   "files": [
     "dist",
@@ -52,7 +52,8 @@
     "@justeat/f-globalisation": "0.2.0",
     "@justeat/f-services": "1.4.0",
     "axios": "0.20.0",
-    "vuelidate": "0.7.6"
+    "vuelidate": "0.7.6",
+    "axios-mock-adapter": "1.19.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"

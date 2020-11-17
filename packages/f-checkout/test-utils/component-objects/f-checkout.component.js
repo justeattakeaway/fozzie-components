@@ -6,7 +6,7 @@ const userNoteInput = () => $('[data-test-id="user-note"] textarea');
 
 const allergenLink = () => $('[data-test-id="allergy-button"]');
 
-const deliveryTimeDropdown = () => $('[data-test-id="delivery-time"]');
+const fulfillmentTimeDropdown = () => $('[data-test-id="fulfillment-time"]');
 
 const goToPaymentButton = () => $('[data-test-id="confirm-payment-submit-button"]');
 
@@ -44,12 +44,12 @@ exports.submitCheckoutForm = addressInfo => {
 
 /**
  * @description
- * Sets the value of the delivery time dropdown based on visible text.
+ * Sets the value of the fulfillment time dropdown based on visible text.
  *
- * @param {String} deliveryTimeText The text visible text value of the delivery time
+ * @param {String} fulfillmentTimeText The text visible text value of the fulfillment time
  */
-exports.selectDeliveryTime = deliveryTimeText => {
-    deliveryTimeDropdown().selectByVisibleText(deliveryTimeText);
+exports.selectFulfillmentTime = fulfillmentTimeText => {
+    fulfillmentTimeDropdown().selectByVisibleText(fulfillmentTimeText);
 };
 
 /**
