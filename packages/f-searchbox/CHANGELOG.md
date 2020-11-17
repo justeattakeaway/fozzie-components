@@ -12,11 +12,11 @@ v4.0.0-beta.2
 - Tests to cover changes.
 - Searchbox with/without shell comfigs.
 - Vuex (Needs work).
-- `setCookies`
+- `shouldsetCookies`
 - `onSubmit`
-- `autoPopulateAddress`
-- `hideShell`
-- `clearAddressOnValidSubmit`
+- `shouldAutoPopulateAddress`
+- `isShellHidden`
+- `shouldClearAddressOnValidSubmit`
 - Allow previous postcode (saved in cookie) to proceed.
 
 ### Changed
