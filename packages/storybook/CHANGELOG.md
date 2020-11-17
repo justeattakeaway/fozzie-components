@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.17.0
+------------------------------
+*November 17, 2020*
+
+### Changed
+- Moved `sassOptions` config out of the Storybook `vue.config.js` so that it can be used by other components.
+
+
 v0.16.0
 ------------------------------
 *November 16, 2020*
