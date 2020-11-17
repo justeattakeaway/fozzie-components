@@ -21,7 +21,6 @@ new Vue({
     i18n,
     render: h => h(VueCheckout, {
         props: {
-            checkoutMethod: 'delivery',
             checkoutUrl: '/checkout-delivery.json'
         }
     })
