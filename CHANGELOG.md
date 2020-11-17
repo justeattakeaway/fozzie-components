@@ -4,12 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v2.16.0
+v2.17.0
 ------------------------------
-*November 16, 2020*
+*November 17, 2020*
 
 ### Changed
-- Replaced `data-js-test` attribute with  `data-test-id` to reduce test-ids in components.
+- Consolidated test-ids in fozzie components - replaced `data-js-test` attribute with `data-test-id`.
+
+
+v2.16.0
+------------------------------
+*November 17, 2020*
+
+### Updated
+- Splitting out `sassOptions` config to allow Eyeglass includes, so all components can use the same config.
 
 
 v2.15.0

@@ -1,0 +1,90 @@
+<link rel="shortcut icon" href="/storybook.ico" type="image/x-icon">
+
+<link rel="preload" href="https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Regular-optimised.woff2" as="font" type="font/woff2" crossorigin>
+
+<script>
+    (function () {
+        var fontUrls = 'url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff2") format("woff2"), url("https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Bold-optimised.woff") format("woff")';
+
+        if ('fonts' in document) {
+            var bold = new FontFace('JustEatBasis', fontUrls, { weight: '600' });
+
+            Promise.all([bold.load()])
+                .then(function (fonts) {
+                    fonts.forEach(function (font) {
+                        document.fonts.add(font);
+                    });
+                })
+                .then(function () {
+                    document.documentElement.classList.add('webfonts-loaded');
+                });
+        }
+
+        // This next block is for IE11 and old Edge support, which don't support the new Font loading API
+        if (!('fonts' in document) && 'head' in document) {
+            // Awkwardly dump the second stage @font-face blocks in the head
+            var style = document.createElement('style');
+            // Note: Edge supports WOFF2
+            style.innerHTML = '@font-face { font-family: JustEatBasis; font-weight: 600; src: ' + fontUrls + '; }';
+            document.head.appendChild(style);
+            document.documentElement.classList.add('webfonts-loaded');
+        }
+    })();
+    // This sets the initial width of the nav sidebar.
+    localStorage.setItem('storybook-layout', JSON.stringify({
+        resizerPanel: {
+            x: 0,
+            y: 568
+        },
+        resizerNav: {
+            x: 250,
+            y: 0
+        }
+    }));
+</script>
+
+
+<style>
+    @font-face {
+        font-family: JustEatBasis;
+        src: url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Regular-optimised.woff2') format('woff2'),
+            url('https://d30v2pzvrfyzpo.cloudfront.net/fonts/JustEatBasis-Regular-optimised.woff') format('woff');
+        font-weight: 400;
+        font-display: swap;
+    }
+
+    body {
+        font-feature-settings: "tnum"; /* Enable tabular numbers */
+    }
+
+    /*
+     * Sidebar override styles
+     */
+    div.sidebar-subheading {
+        color: #fff;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: normal;
+        margin-bottom: 16px;
+        text-transform: none;
+    }
+
+    a.sidebar-item {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    span.sidebar-expander {
+        top: 12px;
+    }
+
+    svg.sidebar-svg-icon * {
+        fill: #df6400;
+    }
+
+    [data-title] a {
+        color: #fff;
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+</style>
