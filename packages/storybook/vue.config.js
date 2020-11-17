@@ -1,23 +1,8 @@
-const magicImporter = require('node-sass-magic-importer');
 const path = require('path');
-const eyeglass = require('eyeglass');
 
 const rootDir = path.join(__dirname, '..', '..');
+const sassOptions = require('../../config/sassOptions')(rootDir);
 
-const sassOptions = eyeglass({
-    eyeglass: {
-        root: rootDir
-    },
-    includePaths: ['node_modules/'],
-    sourceMap: true
-});
-
-sassOptions.importer = [
-    magicImporter({
-        cwd: rootDir
-    }),
-    sassOptions.importer
-];
 
 // vue.config.js
 module.exports = {
@@ -55,6 +40,7 @@ module.exports = {
 @import "@justeat/fozzie/src/scss/fozzie";
 @include reset();
 @include typography();
+@include links();
 @import "${relPath}";`;
                 }
             });
