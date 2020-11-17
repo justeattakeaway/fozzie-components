@@ -3,6 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.16.0
+------------------------------
+*November 16, 2020*
+
+### Added
+- PIE dark theme!
+- Custom PIE logo.
+- Custom favicon.
+- Set up public directory so that we can reference assets in stories and mdx
+- `manager-head.html` so we can set up fonts and layout config.
+
+### Changed
+- Updated Storybook npm dependencies.
+- Override list styles in `preview-head.html`.
+
+
 v0.15.0
 ------------------------------
 *November 9, 2020*
