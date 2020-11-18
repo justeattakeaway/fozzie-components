@@ -15,7 +15,7 @@
             name="query">
 
         <div :class="$style['c-search-fieldWrapper']">
-            <form-label-wrapper
+            <form-search-field
                 v-model="address"
                 :error-message="errorMessage"
                 :address="address"
@@ -39,7 +39,7 @@
 <script>
 import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
-import FormLabelWrapper from './formElements/FormSearchField.vue';
+import FormSearchField from './formElements/FormSearchField.vue';
 import FormSearchButton from './formElements/FormSearchButton.vue';
 import store from '../store/searchbox.module';
 import { getLastLocation } from '../utils/helpers';
@@ -52,7 +52,7 @@ import {
 export default {
     components: {
         ErrorMessage,
-        FormLabelWrapper,
+        FormSearchField,
         FormSearchButton
     },
 
