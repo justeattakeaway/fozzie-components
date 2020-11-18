@@ -71,3 +71,61 @@ yarn demo
 ```
 
 ## Documentation to be completed once module is in stable state.
+
+## Options
+
+To apply these options, pass them through as part of an optional `config` prop.
+
+E.g.
+
+```vue
+<template>
+    <vue-search-box
+        locale="en-GB"
+        :config="{ hideShell: true }" />
+</template>
+```
+
+```js
+const options = {                 // (opt) component settings
+  address: '',                    // String - override default address field value
+  cuisine: '',                    // String - override default cuisine field value
+  isShellHidden: false,           // Boolean – hide/show search box shell
+  isCompressed: false,            // Boolean - hide/show compressed searchbox
+  query: '',                      // String - override default query field value
+  queryParams: {},                // Object - Query parameter overrides as key value pairs
+  onSubmit: a => void,            // Function - called when user selected a valid address, prevents form submit
+  shouldSetCookies: false,              // Boolean - sets je default location cookies
+  shouldAutoPopulateAddress: true,      // Boolean - should the address value be auto-populated?
+  shouldClearAddressOnValidSubmit: true // Boolean - should the address be cleared when a valid form is submitted?
+}
+```
+
+### `config.queryParams`
+
+Applies query parameters to the form URL to enable filters and other options on the search results page.
+
+**Format**
+
+```vue
+<vue-search-box
+    :config="{
+        queryString: {
+           [param]: value
+        }
+    }"
+/>
+```
+
+**Example**
+
+
+```vue
+<vue-search-box
+    :config="{
+        queryString: {
+           refine: 'halal' // Users are redirected to /:search-url?refine=halal
+        }
+    }"
+/>
+```

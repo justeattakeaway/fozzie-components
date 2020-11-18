@@ -1,6 +1,6 @@
 import { isPostcodeEmpty, doesPostcodeMatchRegex } from '../utils/helpers';
 
-export default {
+const copy = {
     locale: 'en-GB',
     buttonText: 'Search',
     fieldLabel: 'Enter your postcode',
@@ -16,6 +16,20 @@ export default {
 
 const component = {
     formUrl: '/search/do',
+    address: '',
+    cuisine: '',
+    isShellHidden: false,
+    isCompressed: true,
+    query: '',
+    shouldSetCookies: false,
+    onSubmit: false,
+    shouldAutoPopulateAddress: true,
+    addressField: {
+        isNumeric: false,
+        name: 'postcode',
+        type: 'text'
+    },
+    shouldClearAddressOnValidSubmit: false,
     locationFormat: location => location.postcode
 };
 
@@ -32,7 +46,8 @@ const service = {
     }
 };
 
-export {
+export default {
     component,
-    service
+    service,
+    copy
 };

@@ -8,6 +8,7 @@
         <search-form
             :config="componentConfig"
             :copy="copy"
+            :service="service"
             v-on="$listeners" />
     </component>
 </template>
@@ -16,14 +17,17 @@
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 import SearchForm from './Form.vue';
-import SearchShell from './Shell.vue';
+import SearchShell from './shells/Shell.vue';
+import NoSearchShell from './shells/NoShell.vue';
+import Service from '../services/core';
 // import SearchboxServiceApi from '../services/SearchboxServiceApi';
 
 export default {
     name: 'VueSearchbox',
     components: {
         SearchForm,
-        SearchShell
+        SearchShell,
+        NoSearchShell
     },
     props: {
         locale: {
@@ -40,12 +44,15 @@ export default {
         const localeConfig = tenantConfigs[locale];
         const theme = globalisationServices.getTheme(locale);
         const componentConfig = { ...localeConfig.component, ...this.config };
+        const service = Service(localeConfig.service);
 
         return {
-            copy: { ...localeConfig },
+            copy: { ...localeConfig.copy },
             componentConfig,
+            componentLocale: locale,
             theme,
-            element: componentConfig.hideShell ? 'search-no-shell' : 'search-shell'
+            service,
+            element: componentConfig.isShellHidden ? 'no-search-shell' : 'search-shell'
         };
     }
 };
