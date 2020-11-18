@@ -62,9 +62,11 @@ describe('FormField', () => {
 
                 // Act
                 const wrapper = shallowMount(FormField, { propsData });
-                const formInput = wrapper.find('[data-test-id="testInput"]'); // change to .c-formField when CSS Modules is working
+                const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
 
                 // Assert
+                // expect(wrapper.html('type')).toBe(definedType);
+
                 expect(formInput.attributes('type')).toBe(definedType);
             });
         });

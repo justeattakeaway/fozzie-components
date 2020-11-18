@@ -22,9 +22,8 @@
                 v-if="isDropdown"
                 :id="`${uniqueId}`"
                 v-bind="$attrs"
-                :data-js-test="testId"
-                data-test-id="testInput"
                 :type="normalisedInputType"
+                :data-test-id="testId"
                 :class="[
                     $style['o-form-field'],
                     $style['c-formField-input']
@@ -176,6 +175,7 @@ export default {
         },
 
         testId () {
+            console.log(`Input Type: ${this.inputType}, Test ID: ${this.dataTestId || this.$attrs.name || false}`);
             return this.dataTestId || this.$attrs.name || false;
         },
 
