@@ -12,7 +12,6 @@
                     $style['c-countrySelector-link'],
                     $style['c-countrySelector-button']
                 ]"
-                data-js-test="countrySelector-button"
                 data-test-id="countrySelector-button"
                 type="button"
                 aria-controls="countrySelector-countries"
@@ -46,12 +45,12 @@
                 v-show="showCountryList"
                 id="countrySelector-countries"
                 :class="$style['c-countrySelector-list']"
-                data-js-test="countrySelector-list"
+                data-test-id="countrySelector-list"
                 role="region">
                 <li
                     v-for="(country, i) in countries"
                     :key="i + '_Country'"
-                    data-js-test="countrySelector-country">
+                    data-test-id="countrySelector-country">
                     <a
                         :data-trak='`{
                             "trakEvent": "click",
@@ -61,7 +60,7 @@
                         }`'
                         :href="country.siteUrl"
                         :class="$style['c-countrySelector-link']"
-                        data-js-test="countrySelector-countryLink">
+                        data-test-id="countrySelector-countryLink">
                         <flag-icon
                             :country-code="country.key"
                             :class="$style['c-countrySelector-flag']" />

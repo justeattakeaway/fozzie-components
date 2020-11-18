@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.17.0
+------------------------------
+*November 17, 2020*
+
+### Changed
+- Consolidated test-ids in fozzie components - replaced `data-js-test` attribute with `data-test-id`.
+
+
 v2.16.0
 ------------------------------
 *November 17, 2020*

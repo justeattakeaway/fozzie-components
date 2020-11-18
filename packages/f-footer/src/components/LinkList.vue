@@ -4,7 +4,7 @@
         :class="[$style['c-footer-panel'], {
             'is-collapsed': panelCollapsed && isBelowWide
         }]"
-        data-js-test="linkList-wrapper">
+        data-test-id="linkList-wrapper">
         <h2>
             <button
                 :id="listHeadingId"
@@ -17,7 +17,7 @@
                     'c-footer-heading',
                     'c-footer-heading--button'
                 ]"
-                data-js-test="linkList-header"
+                data-test-id="linkList-header"
                 @click="onPanelClick">
                 {{ linkList.title }}
                 <chevron-icon

@@ -42,17 +42,17 @@
                     <template #error>
                         <error-message
                             v-if="shouldShowFirstNameRequiredError"
-                            data-test-title='error-first-name-empty'>
+                            data-test-id='error-first-name-empty'>
                             {{ copy.validationMessages.firstName.requiredError }}
                         </error-message>
                         <error-message
                             v-if="shouldShowFirstNameMaxLengthError"
-                            data-test-title='error-first-name-maxlength'>
+                            data-test-id='error-first-name-maxlength'>
                             {{ copy.validationMessages.firstName.maxLengthError }}
                         </error-message>
                         <error-message
                             v-if="shouldShowFirstNameInvalidCharError"
-                            data-test-title='error-first-name-invalid'>
+                            data-test-id='error-first-name-invalid'>
                             {{ copy.validationMessages.firstName.invalidCharError }}
                         </error-message>
                     </template>
@@ -68,17 +68,17 @@
                     <template #error>
                         <error-message
                             v-if="shouldShowLastNameRequiredError"
-                            data-test-title='error-last-name-empty'>
+                            data-test-id='error-last-name-empty'>
                             {{ copy.validationMessages.lastName.requiredError }}
                         </error-message>
                         <error-message
                             v-if="shouldShowLastNameMaxLengthError"
-                            data-test-title='error-last-name-maxlength'>
+                            data-test-id='error-last-name-maxlength'>
                             {{ copy.validationMessages.lastName.maxLengthError }}
                         </error-message>
                         <error-message
                             v-if="shouldShowLastNameInvalidCharError"
-                            data-test-title='error-last-name-invalid'>
+                            data-test-id='error-last-name-invalid'>
                             {{ copy.validationMessages.lastName.invalidCharError }}
                         </error-message>
                     </template>
@@ -94,22 +94,22 @@
                     <template #error>
                         <error-message
                             v-if="shouldShowEmailRequiredError"
-                            data-test-title='error-email-empty'>
+                            data-test-id='error-email-empty'>
                             {{ copy.validationMessages.email.requiredError }}
                         </error-message>
                         <error-message
                             v-else-if="shouldShowEmailInvalidError"
-                            data-test-title='error-email-invalid'>
+                            data-test-id='error-email-invalid'>
                             {{ copy.validationMessages.email.invalidEmailError }}
                         </error-message>
                         <error-message
                             v-if="shouldShowEmailMaxLengthError"
-                            data-test-title='error-email-maxlength'>
+                            data-test-id='error-email-maxlength'>
                             {{ copy.validationMessages.email.maxLengthError }}
                         </error-message>
                         <error-message
                             v-else-if="shouldShowEmailAlreadyExistsError"
-                            data-test-title='error-email-exists'>
+                            data-test-id='error-email-exists'>
                             {{ copy.validationMessages.email.alreadyExistsError }}
                         </error-message>
                     </template>
@@ -125,12 +125,12 @@
                     <template #error>
                         <error-message
                             v-if="shouldShowPasswordRequiredError"
-                            data-test-title='error-password-empty'>
+                            data-test-id='error-password-empty'>
                             {{ copy.validationMessages.password.requiredError }}
                         </error-message>
                         <error-message
                             v-if="shouldShowPasswordMinLengthError"
-                            data-test-title='error-password-minlength'>
+                            data-test-id='error-password-minlength'>
                             {{ copy.validationMessages.password.minLengthError }}
                         </error-message>
                     </template>

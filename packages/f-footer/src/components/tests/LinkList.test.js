@@ -29,7 +29,7 @@ describe('LinkList component', () => {
 
         it('should be in a collapsed state', () => {
             // Arrange & Act
-            const linkListWrapper = wrapper.find('[data-js-test="linkList-wrapper"]');
+            const linkListWrapper = wrapper.find('[data-test-id="linkList-wrapper"]');
 
             // Assert
             expect(linkListWrapper.classes()).toContain('is-collapsed');
@@ -37,8 +37,8 @@ describe('LinkList component', () => {
 
         it('should be in an open state when linkList title has been clicked', async () => {
             // Arrange
-            const linkListWrapper = wrapper.find('[data-js-test="linkList-wrapper"]');
-            const linkListHeader = wrapper.find('[data-js-test="linkList-header"]');
+            const linkListWrapper = wrapper.find('[data-test-id="linkList-wrapper"]');
+            const linkListHeader = wrapper.find('[data-test-id="linkList-header"]');
 
             // Act
             await linkListHeader.trigger('click'); // wait for DOM to update as a result of click being triggered
@@ -56,7 +56,7 @@ describe('LinkList component', () => {
 
         it('should be in an open state', () => {
             // Arrange & Act
-            const linkListWrapper = wrapper.find('[data-js-test="linkList-wrapper"]');
+            const linkListWrapper = wrapper.find('[data-test-id="linkList-wrapper"]');
 
             // Assert
             expect(linkListWrapper.classes()).not.toContain('is-collapsed');

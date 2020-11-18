@@ -2,14 +2,14 @@
     <nav
         v-if="hasNavigationLinks"
         class="c-nav c-nav--global"
-        data-js-test="nav-container">
+        data-test-id="nav-container">
         <button
             :class="['c-nav-trigger c-nav-toggle is-hidden--noJS', navToggleThemeClass, {
                 'is-open': navIsOpen
             }]"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
             :aria-label="openMenuText"
-            data-js-test="nav-toggle"
+            data-test-id="nav-toggle"
             type="button"
             @click="onNavToggle">
             <span class="c-nav-toggle-icon" />
@@ -32,7 +32,7 @@
 
         <a
             v-if="showOffersLink"
-            data-js-test="offers-link-mobile"
+            data-test-id="offers-link-mobile"
             data-trak='{
                 "trakEvent": "click",
                 "category": "header",
@@ -40,8 +40,7 @@
                 "label": "offers_icon"
             }'
             :href="offersCopy.url"
-            class="c-nav-featureLink u-showBelowMid"
-            data-test-id="offers-link">
+            class="c-nav-featureLink u-showBelowMid">
             <gift-icon class="c-nav-icon c-nav-icon--offers" />
             <span class="is-visuallyHidden">
                 {{ offersCopy.text }}
@@ -55,7 +54,7 @@
                     v-if="showOffersLink"
                     class="c-nav-list-item">
                     <a
-                        data-js-test="offers-link-desktop"
+                        data-test-id="offers-link-desktop"
                         data-trak='{
                             "trakEvent": "click",
                             "category": "header",
@@ -71,7 +70,7 @@
                 <li
                     v-if="showDeliveryEnquiry && !isBelowMid"
                     class="c-nav-list-item"
-                    data-js-test="delivery-enquiry">
+                    data-test-id="delivery-enquiry">
                     <a
                         :data-trak='`{
                             "trakEvent": "click",
@@ -93,7 +92,7 @@
                         'is-hidden': !userInfo || !showLoginInfo,
                         'open': navIsOpen
                     }]"
-                    data-js-test="user-info-icon"
+                    data-test-id="user-info-icon"
                     v-on="isBelowMid ? null : { mouseover: openNav, mouseleave: closeNav }"
                     @keyup.esc="closeNav">
                     <a
@@ -118,7 +117,7 @@
                         <li
                             v-for="(link, index) in navLinks"
                             :key="index"
-                            data-js-test="nav-links"
+                            data-test-id="nav-links"
                             class="c-nav-list-item">
                             <a
                                 :tabindex="navIsOpen ? 0 : -1"
@@ -139,7 +138,7 @@
                         <li
                             v-if="!isBelowMid"
                             class="c-nav-list-item"
-                            data-js-test="logout">
+                            data-test-id="logout">
                             <a
                                 :tabindex="navIsOpen ? 0 : -1"
                                 :href="returnLogoutUrl"
@@ -161,7 +160,7 @@
                 <li
                     v-if="!userInfo && showLoginInfo"
                     class="c-nav-list-item"
-                    data-js-test="login">
+                    data-test-id="login">
                     <a
                         :href="returnLoginUrl"
                         :data-trak='`{
@@ -198,7 +197,7 @@
                 <li
                     v-if="userInfo && isBelowMid && showLoginInfo"
                     class="c-nav-list-item"
-                    data-js-test="logout">
+                    data-test-id="logout">
                     <a
                         :tabindex="navIsOpen ? 0 : -1"
                         :href="returnLogoutUrl"

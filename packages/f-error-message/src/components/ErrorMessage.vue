@@ -2,8 +2,7 @@
     <p
         v-if="hasSlotData"
         :class="$style['c-errorMessage']"
-        data-test-id="error-message"
-        :data-test-title="dataTestTitle">
+        :data-test-id="dataTestId">
         <danger-icon :class="$style['c-errorMessage-icon']" />
         <span
             data-test-id="content"
@@ -22,9 +21,9 @@ export default {
         DangerIcon
     },
     props: {
-        dataTestTitle: {
+        dataTestId: {
             type: String,
-            default: ''
+            default: 'error-message-component'
         }
     },
     computed: {

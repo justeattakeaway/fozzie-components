@@ -10,19 +10,19 @@ const privacyPolicyLink = () => registrationComponent().$('[data-test-id="privac
 const cookiesPolicyLink = () => registrationComponent().$('[data-test-id="cookies-policy-link"]');
 
 // Validation errors
-const firstNameEmptyError = () => $('[data-test-title="error-first-name-empty"]');
-const firstNameMaxLengthError = () => $('[data-test-title="error-first-name-maxlength"]');
-const firstNameInvalidError = () => $('[data-test-title="error-first-name-invalid"]');
+const firstNameEmptyError = () => $('[data-test-id="error-first-name-empty"]');
+const firstNameMaxLengthError = () => $('[data-test-id="error-first-name-maxlength"]');
+const firstNameInvalidError = () => $('[data-test-id="error-first-name-invalid"]');
 
-const lastNameEmptyError = () => $('[data-test-title="error-last-name-empty"]');
-const lastNameMaxLengthError = () => $('[data-test-title="error-last-name-maxlength"]');
-const lastNameInvalidError = () => $('[data-test-title="error-last-name-invalid"]');
+const lastNameEmptyError = () => $('[data-test-id="error-last-name-empty"]');
+const lastNameMaxLengthError = () => $('[data-test-id="error-last-name-maxlength"]');
+const lastNameInvalidError = () => $('[data-test-id="error-last-name-invalid"]');
 
-const emailEmptyError = () => $('[data-test-title="error-email-empty"]');
-const emailInvalidError = () => $('[data-test-title="error-email-invalid"]');
-const emailExistsError = () => $('[data-test-title="error-email-exists"]');
+const emailEmptyError = () => $('[data-test-id="error-email-empty"]');
+const emailInvalidError = () => $('[data-test-id="error-email-invalid"]');
+const emailExistsError = () => $('[data-test-id="error-email-exists"]');
 
-const passwordEmptyError = () => $('[data-test-title="error-password-empty"]');
+const passwordEmptyError = () => $('[data-test-id="error-password-empty"]');
 
 /**
  * @description
