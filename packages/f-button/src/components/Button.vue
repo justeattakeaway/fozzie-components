@@ -267,6 +267,13 @@ $btn-sizeXSmall-lineHeight      : 1;
 
     &.o-btn--primary {
         background-color: $orange;
+
+        &:hover {
+            background-color: $orange--dark;
+        }
+        &:active {
+            background-color: $orange--darkest;
+        }
     }
 }
 
