@@ -46,7 +46,7 @@ export default {
             ctaText,
             button,
             backgroundColor,
-            contentContainerBackground,
+            contentBackgroundColor,
             type,
             icon,
             title,
@@ -57,7 +57,7 @@ export default {
         return {
             title,
             backgroundColor,
-            contentContainerBackground,
+            contentBackgroundColor,
             image,
             ctaText,
             button,
