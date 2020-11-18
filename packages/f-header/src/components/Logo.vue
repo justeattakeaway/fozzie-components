@@ -14,7 +14,7 @@
             :class="['c-logo-img',
                      iconClassName,
                      logoColourModifier]"
-            :data-js-test="iconClassName"
+            :data-theme-logo="iconClassName"
             data-test-id="header-logo" />
     </a>
 </template>
