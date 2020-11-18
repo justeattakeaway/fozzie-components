@@ -25,8 +25,8 @@ describe('CountrySelector', () => {
             ]
         };
         wrapper = shallowMount(CountrySelector, { propsData });
-        button = wrapper.find('[data-js-test="countrySelector-button"]');
-        list = wrapper.find('[data-js-test="countrySelector-list"]');
+        button = wrapper.find('[data-test-id="countrySelector-button"]');
+        list = wrapper.find('[data-test-id="countrySelector-list"]');
     });
 
     it('should be defined', () => {
@@ -54,12 +54,12 @@ describe('CountrySelector', () => {
     });
 
     it('list should contain country from props', () => {
-        const country = wrapper.find('[data-js-test="countrySelector-country"]');
+        const country = wrapper.find('[data-test-id="countrySelector-country"]');
         expect(country.text()).toBe(localisedName);
     });
 
     it('should contain correct link', () => {
-        const link = wrapper.find('[data-js-test="countrySelector-countryLink"]');
+        const link = wrapper.find('[data-test-id="countrySelector-countryLink"]');
         expect(link.attributes('href')).toBe(siteUrl);
     });
 });
