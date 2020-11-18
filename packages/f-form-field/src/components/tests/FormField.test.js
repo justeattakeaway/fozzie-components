@@ -79,7 +79,6 @@ describe('FormField', () => {
 
                 // Act
                 const wrapper = shallowMount(FormField, { propsData });
-                // const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
 
                 // Assert
                 expect(wrapper.contains(FormDropdown)).toBe(true);
