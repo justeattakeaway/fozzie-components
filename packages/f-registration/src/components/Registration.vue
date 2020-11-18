@@ -483,6 +483,11 @@ $registration-icon-height--narrow : 74px;
             // TODO: check default link styles in PIE and update fozzie // (should be able to remove these styles then)
             text-decoration: none;
             font-weight: $font-weight-bold;
+
+            &:hover,
+            &:focus {
+                text-decoration: underline;
+            }
         }
     }
 
