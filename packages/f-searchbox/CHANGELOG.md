@@ -3,6 +3,26 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.2
+------------------------------
+*November 13, 2020*
+
+### Added
+- Baseline for UK logic (without Events at the moment).
+- Tests to cover changes.
+- Searchbox with/without shell comfigs.
+- Vuex (Needs work).
+- `shouldsetCookies`
+- `onSubmit`
+- `shouldAutoPopulateAddress`
+- `isShellHidden`
+- `shouldClearAddressOnValidSubmit`
+- Allow previous postcode (saved in cookie) to proceed.
+
+### Changed
+- Extracted out form specific components into their own component directory & ported over styles into those directories.
+
+
 v4.0.0-beta.1
 ------------------------------
 *October 30, 2020*

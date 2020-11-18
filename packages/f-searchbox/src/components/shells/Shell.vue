@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/common';
+@import '../../assets/scss/common';
 
 $midWide: 980px;
 
