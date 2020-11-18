@@ -3,7 +3,7 @@ import {
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import FormField from '../src/components/FormField.vue';
-import { VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../src/constants';
+import { CUSTOM_INPUT_TYPES, VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../src/constants';
 
 export default {
     title: 'Components/Atoms',
@@ -20,7 +20,7 @@ export const FormFieldComponent = () => ({
             default: text('Label Text', 'First Name')
         },
         inputType: {
-            default: select('Input Type', VALID_INPUT_TYPES)
+            default: select('Input Type', VALID_INPUT_TYPES.concat(CUSTOM_INPUT_TYPES))
         },
         labelStyle: {
             default: select('Label Style', VALID_LABEL_STYLES)
@@ -31,7 +31,6 @@ export const FormFieldComponent = () => ({
         dropdownOptions: {
             default: array('Dropdown Options', ['As soon as possible', 'Today in 5 minutes'], ',')
         }
-
     },
     parameters: {
         notes: 'some documentation here'

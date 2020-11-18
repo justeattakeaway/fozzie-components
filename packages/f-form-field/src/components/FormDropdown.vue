@@ -47,25 +47,23 @@ export default {
 </script>
 
 <style lang="scss" module>
-.c-formDropdown {
-    .c-formDropdown-icon {
-        width: 12px;
-        position: absolute;
-        right: spacing(x3);
-        bottom: 20px;
-        transform: rotate(180deg);
-    }
+.c-formDropdown-icon {
+    width: spacing(x1.5);
+    position: absolute;
+    right: spacing(x3);
+    bottom: 20px;
+    transform: rotate(180deg);
+}
 
-    .c-formDropdown-select {
-        padding: spacing(x1.5) spacing(x2);
-        height: 100%;
-        width: 100%;
+.c-formDropdown-select {
+    padding: spacing(x1.5) spacing(x2);
+    height: 100%;
+    width: 100%;
 
-        /* Remove default styling */
-        border: none;
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-    }
+    /* Remove default styling */
+    border: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 </style>

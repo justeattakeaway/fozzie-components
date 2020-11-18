@@ -1722,6 +1722,13 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
+"@justeat/f-form-field@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-1.1.0.tgz#a9d8ba9ca65a1d5a7f016e69a079c044b5d7d8ea"
+  integrity sha512-pdvIN2OVPlFxzAatDMe2SoWH4q2n/QJ84YnLmK6P49PXg2bGPPLI8foQgVO4wUsDzuzClL8k1BJxwAMwMpmA8Q==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
 "@justeat/f-icons@2.10.1":
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.10.1.tgz#35d0a49b602e87105f9888c8f976a31317fe5ca1"

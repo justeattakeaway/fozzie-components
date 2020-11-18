@@ -43,7 +43,7 @@
                 :class="[
                     $style['o-form-field'],
                     $style['c-formField-input'],
-                    $style['c-formField-input-padding']
+                    $style['c-formField-input--textField']
                 ]"
                 @input="updateValue"
                 v-on="listeners"
@@ -68,8 +68,9 @@ import FormLabel from './FormLabel.vue';
 import Debounce from '../services/debounce';
 import tenantConfigs from '../tenants';
 import {
-    VALID_INPUT_TYPES,
+    CUSTOM_INPUT_TYPES,
     DEFAULT_INPUT_TYPE,
+    VALID_INPUT_TYPES,
     VALID_LABEL_STYLES,
     MOBILE_WIDTH
 } from '../constants';
@@ -98,7 +99,7 @@ export default {
         inputType: {
             type: String,
             default: DEFAULT_INPUT_TYPE,
-            validator: value => (VALID_INPUT_TYPES.indexOf(value) !== -1) // The prop value must match one of the valid input types
+            validator: value => (VALID_INPUT_TYPES.includes(value) || (CUSTOM_INPUT_TYPES.includes(value)))// The prop value must match one of the valid input types
         },
 
         labelStyle: {
@@ -184,7 +185,7 @@ export default {
         },
 
         isDropdown () {
-            return this.normalisedInputType === 'dropdown';
+            return this.inputType === 'dropdown';
         }
     },
 
@@ -240,8 +241,8 @@ $form-input-fontSize                      : 'body-l';
         position: relative;
     }
 
-    .c-formField-input-padding {
-        padding: $form-input-padding; //convert padding to rem
+    .c-formField-input--textField {
+        padding: $form-input-padding;
     }
 
     .c-formField-input {
