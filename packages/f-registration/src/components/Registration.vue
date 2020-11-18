@@ -450,13 +450,16 @@ $registration-icon-height--narrow : 74px;
         position: relative;
         padding-top: spacing(x7);
         padding-bottom: spacing(x6);
-        // TODO: box shadow value will eventually come from PIE design tokens, but hard coding here for now
-        box-shadow: 0 1px 1px 0 rgba($black, 0.03),
-                    0 2px 1px -1px rgba($black, 0.07),
-                    0 1px 3px 0 rgba($black, 0.06);
 
         @include media('<mid') {
             padding-bottom: spacing(x4);
+        }
+
+        @include media('>=narrow') {
+            // TODO: box shadow value will eventually come from PIE design tokens, but hard coding here for now
+            box-shadow: 0 1px 1px 0 rgba($black, 0.03),
+                    0 2px 1px -1px rgba($black, 0.07),
+                    0 1px 3px 0 rgba($black, 0.06);
         }
     }
 
@@ -497,6 +500,7 @@ $registration-icon-height--narrow : 74px;
             }
         }
     }
+
         .c-registration-link--subtitle {
             margin-top: - spacing(); // shift the subtitle link closer to the main title
         }
