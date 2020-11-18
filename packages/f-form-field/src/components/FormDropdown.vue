@@ -7,7 +7,7 @@
             data-test-id="formDropdown-icon" />
         <select
             id="time-selection"
-            :class="$style['c-formDropdown-input']"
+            :class="$style['c-formDropdown-select']"
             data-test-id="formDropdown-select"
             @change="updateOption">
             <option
@@ -56,7 +56,7 @@ export default {
         transform: rotate(180deg);
     }
 
-    .c-formDropdown-input {
+    .c-formDropdown-select {
         padding: spacing(x1.5) spacing(x2);
         height: 100%;
         width: 100%;
