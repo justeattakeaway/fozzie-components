@@ -14,12 +14,13 @@
             id="time-selection"
             v-model="selectedTime"
             :class="$style['o-form-select-input']"
-            data-test-id="delivery-time">
+            data-test-id="fulfillment-time"
+            @change="selectionChanged">
             <option
                 v-for="(time, index) in times"
                 :key="index"
-                :value="time">
-                {{ time }}
+                :value="time.from">
+                {{ time.label.text }}
             </option>
         </select>
     </div>
@@ -30,7 +31,7 @@ export default {
     props: {
         times: {
             type: Array,
-            default: () => ['', 'As soon as possible', 'Today in 5 minutes']
+            default: () => []
         },
 
         orderMethod: {
@@ -43,6 +44,25 @@ export default {
         return {
             selectedTime: null
         };
+    },
+
+    watch: {
+        times (newValue) {
+            const selected = newValue.find(t => t.selected);
+            if (selected) {
+                this.selectedTime = selected.from;
+            }
+        }
+    },
+
+    methods: {
+        selectionChanged () {
+            this.times.forEach(el => { el.selected = false; });
+            const newSelected = this.times.find(t => t.from === this.selectedTime);
+            if (newSelected) {
+                newSelected.selected = true;
+            }
+        }
     }
 };
 </script>

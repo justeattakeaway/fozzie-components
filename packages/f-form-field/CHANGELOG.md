@@ -11,6 +11,14 @@ v1.1.0
 - New `dropdown` module.
 
 
+v1.1.0
+------------------------------
+*November 13, 2020*
+
+### Changed
+- Updating tests, test hooks (and removing `data-js-test` attribute).
+
+
 v1.0.0
 ------------------------------
 *November 9, 2020*

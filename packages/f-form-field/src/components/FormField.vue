@@ -14,7 +14,7 @@
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
                 :is-inline="isInline"
-                data-js-test="defaultLabel">
+                data-test-id="form-field-label">
                 {{ labelText }}
             </form-label>
 
@@ -40,8 +40,7 @@
                 v-bind="$attrs"
                 :type="normalisedInputType"
                 placeholder=" "
-                :data-js-test="testId"
-                data-test-id="testInput"
+                :data-test-id="testId"
                 :class="[
                     $style['o-form-field'],
                     $style['c-formField-input'],
@@ -55,8 +54,7 @@
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
                 :is-inline="isInline"
-                data-js-test="inlineLabel"
-                data-test-id="testLabel">
+                data-test-id="form-field-label--inline">
                 {{ labelText }}
             </form-label>
         </div>
