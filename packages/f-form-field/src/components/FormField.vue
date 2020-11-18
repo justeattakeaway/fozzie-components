@@ -175,7 +175,6 @@ export default {
         },
 
         testId () {
-            console.log(`Input Type: ${this.inputType}, Test ID: ${this.dataTestId || this.$attrs.name || false}`);
             return this.dataTestId || this.$attrs.name || false;
         },
 

@@ -1,6 +1,7 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import FormField from '../FormField.vue';
-import { DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../../constants';
+import FormDropdown from '../FormDropdown.vue';
+import { DEFAULT_INPUT_TYPE, VALID_LABEL_STYLES } from '../../constants';
 
 describe('FormField', () => {
     allure.feature('Form Field');
@@ -54,20 +55,34 @@ describe('FormField', () => {
                 expect(formInput.attributes('type')).toBe(DEFAULT_INPUT_TYPE);
             });
 
-            it.each(VALID_INPUT_TYPES)('should set the type of form input element as expected if inputType=%p is specified', definedType => {
+            it.each([
+                'text', 'email', 'password', 'radio', 'checkbox'
+            ])('should set the type of form input element as expected if inputType=%p is specified', definedType => {
                 // Arrange
                 const propsData = {
                     inputType: definedType
                 };
 
                 // Act
-                const wrapper = shallowMount(FormField, { propsData });
+                const wrapper = mount(FormField, { propsData });
                 const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
 
                 // Assert
-                // expect(wrapper.html('type')).toBe(definedType);
-
                 expect(formInput.attributes('type')).toBe(definedType);
+            });
+
+            it('should display the dropdown component if inputType=`dropdown`', () => {
+                // Arrange
+                const propsData = {
+                    inputType: 'dropdown'
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+                // const formInput = wrapper.find('input'); // change to .c-formField when CSS Modules is working
+
+                // Assert
+                expect(wrapper.contains(FormDropdown)).toBe(true);
             });
         });
 
