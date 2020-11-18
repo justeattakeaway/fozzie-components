@@ -22,6 +22,7 @@ const transformCardData = card => {
 
     const {
         background_color: backgroundColor,
+        brand_name: brandName,
         content_container_background: contentBackgroundColor,
         banner,
         button_1: ctaText = linkText,
@@ -54,6 +55,7 @@ const transformCardData = card => {
 
     return {
         backgroundColor,
+        brandName,
         contentBackgroundColor,
         banner,
         ctaText,

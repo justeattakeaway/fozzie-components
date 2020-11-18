@@ -2,12 +2,17 @@
     <div
         :data-test-id="testId"
         :class="['c-contentCards-homePromotionCard2', $style['c-contentCards-homePromotionCard2']]"
-        :style="{ background: contentContainerBackground }">
+        :style="{ background: contentBackgroundColor }">
         <div
             :class="['c-contentCards-homePromotionCard2-image', $style['c-contentCards-homePromotionCard2-image']]"
             :style="{ backgroundImage: `url('${image}')` }" />
         <h3>{{ title }}</h3>
-        <p>{{ description }}</p>
+        <template v-for="(textItem, textIndex) in description">
+            <p
+                :key="textIndex">
+                {{ textItem }}
+            </p>
+        </template>
         <p v-if="url">
             <a
                 :href="url"
@@ -33,7 +38,7 @@ export default {
         const {
             image,
             ctaText,
-            contentContainerBackground,
+            contentBackgroundColor,
             title,
             url,
             description
@@ -41,7 +46,7 @@ export default {
 
         return {
             title,
-            contentContainerBackground,
+            contentBackgroundColor,
             image,
             ctaText,
             url,
