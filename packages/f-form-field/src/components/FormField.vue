@@ -18,27 +18,20 @@
                 {{ labelText }}
             </form-label>
 
-            <select
+            <form-dropdown
                 v-if="isDropdown"
                 :id="`${uniqueId}`"
-                :value="value"
                 v-bind="$attrs"
                 :data-js-test="testId"
                 data-test-id="testInput"
+                :type="normalisedInputType"
                 :class="[
                     $style['o-form-field'],
                     $style['c-formField-input']
                 ]"
-                @input="updateValue"
-                v-on="listeners"
-            >
-                <option
-                    v-for="(option, index) in options"
-                    :key="index"
-                    :value="option">
-                    {{ option }}
-                </option>
-            </select>
+                :dropdown-options="dropdownOptions"
+                @update="updateOption"
+                v-on="listeners" />
 
             <input
                 v-else
@@ -51,7 +44,8 @@
                 data-test-id="testInput"
                 :class="[
                     $style['o-form-field'],
-                    $style['c-formField-input']
+                    $style['c-formField-input'],
+                    $style['c-formField-input-padding']
                 ]"
                 @input="updateValue"
                 v-on="listeners"
@@ -65,7 +59,6 @@
                 data-test-id="testLabel">
                 {{ labelText }}
             </form-label>
-            </select>
         </div>
         <slot name="error" />
     </div>
@@ -73,6 +66,7 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
+import FormDropdown from './FormDropdown.vue';
 import FormLabel from './FormLabel.vue';
 import Debounce from '../services/debounce';
 import tenantConfigs from '../tenants';
@@ -87,6 +81,7 @@ export default {
     name: 'FormField',
 
     components: {
+        FormDropdown,
         FormLabel
     },
 
@@ -130,9 +125,9 @@ export default {
             default: ''
         },
 
-        options: {
+        dropdownOptions: {
             type: Array,
-            default: () => ['As soon as possible', 'Today in 5 minutes']
+            default: () => null
         }
     },
 
@@ -173,7 +168,8 @@ export default {
         listeners () {
             return {
                 ...this.$listeners,
-                input: this.updateValue
+                input: this.updateValue,
+                update: this.updateOption
             };
         },
 
@@ -207,6 +203,10 @@ export default {
     methods: {
         updateValue (event) {
             this.$emit('input', event.target.value);
+        },
+
+        updateOption (option) {
+            this.$emit('input', option);
         },
 
         updateWidth () {
@@ -243,10 +243,13 @@ $form-input-fontSize                      : 'body-l';
         position: relative;
     }
 
+    .c-formField-input-padding {
+        padding: $form-input-padding; //convert padding to rem
+    }
+
     .c-formField-input {
         width: 100%;
         @include rem(height, $form-input-height); //convert height to rem
-        padding: $form-input-padding; //convert padding to rem
         @include font-size($form-input-fontSize);
         font-family: $font-family-base;
         color: $form-input-textColour;
@@ -276,6 +279,4 @@ $form-input-fontSize                      : 'body-l';
             }
         }
     }
-
-
 </style>

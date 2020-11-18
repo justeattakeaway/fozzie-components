@@ -1,5 +1,5 @@
 import {
-    withKnobs, select, text, boolean
+    withKnobs, select, text, boolean, array
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import FormField from '../src/components/FormField.vue';
@@ -27,13 +27,17 @@ export const FormFieldComponent = () => ({
         },
         hasError: {
             default: boolean('hasError', false)
+        },
+        dropdownOptions: {
+            default: array('Dropdown Options', ['As soon as possible', 'Today in 5 minutes'], ',')
         }
+
     },
     parameters: {
         notes: 'some documentation here'
     },
     template:
-        '<form-field :locale="locale" :labelText="labelText" :inputType="inputType" :labelStyle="labelStyle" :hasError="hasError" />'
+        '<form-field :locale="locale" :labelText="labelText" :inputType="inputType" :labelStyle="labelStyle" :hasError="hasError" :dropdownOptions="dropdownOptions"/>'
 });
 
 FormFieldComponent.storyName = 'f-form-field';
