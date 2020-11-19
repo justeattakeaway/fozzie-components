@@ -1,19 +1,13 @@
 <template>
     <div
-        data-test-id="form-select"
-        :class="[
-            $style['o-form-select'],
-            (selectedTime ? $style['o-form-select--float'] : '')
-        ]">
+        data-test-id="form-select">
         <label
-            for="time-selection"
-            :class="$style['o-form-select-label']">
+            for="time-selection">
             {{ orderMethod }} time
         </label>
         <select
             id="time-selection"
             v-model="selectedTime"
-            :class="$style['o-form-select-input']"
             data-test-id="fulfillment-time"
             @change="selectionChanged">
             <option
@@ -23,11 +17,33 @@
                 {{ time.label.text }}
             </option>
         </select>
+        {{ selectedTime }}
+        <form-field
+            v-model="selectedTime"
+            data-test-id="fulfillment-time"
+            :label-text="selectorTitle"
+            input-type="dropdown"
+            :dropdown-options="times"
+            @change="selectionChanged" />
+        <form-field
+            v-model="selectedTime"
+            data-test-id="fulfillment-time"
+            :label-text="selectorTitle"
+            input-type="dropdown"
+            :dropdown-options="labels"
+            @input="hmm" />
+        </select>
     </div>
 </template>
 
 <script>
+import FormField from '@justeat/f-form-field';
+import '@justeat/f-form-field/dist/f-form-field.css';
+
 export default {
+
+    components: { FormField },
+
     props: {
         times: {
             type: Array,
@@ -42,8 +58,20 @@ export default {
 
     data () {
         return {
-            selectedTime: null
+            selectedTime: null,
+            labels: [],
+            test: ['asdsa', 'asdasdaasd']
         };
+    },
+
+    computed: {
+        selectorTitle () {
+            let title;
+            if (this.orderMethod) {
+                title = this.orderMethod.charAt(0).toUpperCase() + this.orderMethod.slice(1);
+            }
+            return `${title} time`;
+        }
     },
 
     watch: {
@@ -55,73 +83,40 @@ export default {
         }
     },
 
+    mounted () {
+        if (this.labels) {
+            this.createLables(this.labels);
+        }
+    },
+
     methods: {
         selectionChanged () {
             this.times.forEach(el => { el.selected = false; });
-            const newSelected = this.times.find(t => t.from === this.selectedTime);
+            console.log(this.selectedTime);
+            const newSelected = this.times.find(t => t.label.text === this.selectedTime);
+            console.log(newSelected);
             if (newSelected) {
                 newSelected.selected = true;
             }
+        },
+
+        createLables (aaaaa) {
+            if (this.times) {
+                this.times.forEach(time => {
+                    console.log(time.label.text);
+                    console.log(`labhels ${this.labels}`);
+                    aaaaa.push(time.label.text);
+                });
+            }
+            this.selectedTime = this.times[0].label.text;
+            console.log(this.labels);
+        },
+
+        hmm (e) {
+            console.log(e);
+            this.selectedTime = e;
+            this.selectionChanged();
         }
     }
 };
 </script>
-
-<style lang="scss" module>
-$form-label-colour                        : $grey--dark;
-$form-input-colour                        : $color-text;
-$form-input-bg                            : $white;
-$form-input-borderRadius                  : 3px;
-$form-input-borderWidth                   : 1px;
-$form-input-borderColour                  : $grey--light;
-$form-input-borderColour--focus           : $grey--dark;
-
-.o-form-select {
-    position: relative;
-    height: 60px;
-    margin: spacing(x2) 0;
-    padding: 0;
-    @include font-size(body-l);
-    font-family: $font-family-base;
-    color: $form-input-colour;
-    font-weight: $font-weight-base;
-    background-color: $form-input-bg;
-    border: $form-input-borderWidth solid $form-input-borderColour;
-    border-radius: $form-input-borderRadius;
-
-    .o-form-select-label {
-        display: block;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        padding: spacing();
-        color: $form-label-colour;
-        cursor: pointer;
-    }
-
-    .o-form-select-input {
-        height: 100%;
-        width: 100%;
-        padding: spacing(x0.5);
-        border: none;
-        cursor: pointer;
-        color: $color-text;
-    }
-}
-
-/**
- * Modifier – .o-form-select--float
- *
- * Moves the select label to sit above chosen option
- */
-.o-form-select--float {
-    .o-form-select-label {
-        @include font-size(body-s);
-        top: 15px;
-    }
-
-    .o-form-select-input {
-        padding-top: spacing(x3);
-    }
-}
-</style>

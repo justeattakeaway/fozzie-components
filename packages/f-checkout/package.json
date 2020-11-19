@@ -48,7 +48,7 @@
     "@justeat/f-button": "0.1.0",
     "@justeat/f-card": "0.6.0",
     "@justeat/f-error-message": "0.2.0",
-    "@justeat/f-form-field": "0.7.1",
+    "@justeat/f-form-field": "1.2.0",
     "@justeat/f-globalisation": "0.2.0",
     "@justeat/f-services": "1.4.0",
     "axios": "0.20.0",
