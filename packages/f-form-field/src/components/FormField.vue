@@ -99,7 +99,7 @@ export default {
         inputType: {
             type: String,
             default: DEFAULT_INPUT_TYPE,
-            validator: value => (VALID_INPUT_TYPES.includes(value) || (CUSTOM_INPUT_TYPES.includes(value)))// The prop value must match one of the valid input types
+            validator: value => ((VALID_INPUT_TYPES.indexOf(value) !== -1) || (CUSTOM_INPUT_TYPES.indexOf(value) !== -1))// The prop value must match one of the valid input types
         },
 
         labelStyle: {
