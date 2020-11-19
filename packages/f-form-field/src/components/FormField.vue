@@ -17,7 +17,23 @@
                 data-test-id="form-field-label">
                 {{ labelText }}
             </form-label>
+
+            <form-dropdown
+                v-if="isDropdown"
+                :id="`${uniqueId}`"
+                v-bind="$attrs"
+                :type="normalisedInputType"
+                :data-test-id="testId"
+                :class="[
+                    $style['o-form-field'],
+                    $style['c-formField-input']
+                ]"
+                :dropdown-options="dropdownOptions"
+                @update="updateOption"
+                v-on="listeners" />
+
             <input
+                v-else
                 :id="`${uniqueId}`"
                 :value="value"
                 v-bind="$attrs"
@@ -26,7 +42,8 @@
                 :data-test-id="testId"
                 :class="[
                     $style['o-form-field'],
-                    $style['c-formField-input']
+                    $style['c-formField-input'],
+                    $style['c-formField-input--textField']
                 ]"
                 @input="updateValue"
                 v-on="listeners"
@@ -46,12 +63,14 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
+import FormDropdown from './FormDropdown.vue';
 import FormLabel from './FormLabel.vue';
 import Debounce from '../services/debounce';
 import tenantConfigs from '../tenants';
 import {
-    VALID_INPUT_TYPES,
+    CUSTOM_INPUT_TYPES,
     DEFAULT_INPUT_TYPE,
+    VALID_INPUT_TYPES,
     VALID_LABEL_STYLES,
     MOBILE_WIDTH
 } from '../constants';
@@ -60,6 +79,7 @@ export default {
     name: 'FormField',
 
     components: {
+        FormDropdown,
         FormLabel
     },
 
@@ -79,7 +99,7 @@ export default {
         inputType: {
             type: String,
             default: DEFAULT_INPUT_TYPE,
-            validator: value => (VALID_INPUT_TYPES.indexOf(value) !== -1) // The prop value must match one of the valid input types
+            validator: value => ((VALID_INPUT_TYPES.indexOf(value) !== -1) || (CUSTOM_INPUT_TYPES.indexOf(value) !== -1))// The prop value must match one of the valid input types
         },
 
         labelStyle: {
@@ -101,6 +121,11 @@ export default {
         dataTestId: {
             type: String,
             default: ''
+        },
+
+        dropdownOptions: {
+            type: Array,
+            default: () => null
         }
     },
 
@@ -141,7 +166,8 @@ export default {
         listeners () {
             return {
                 ...this.$listeners,
-                input: this.updateValue
+                input: this.updateValue,
+                update: this.updateOption
             };
         },
 
@@ -156,6 +182,10 @@ export default {
         isInline () {
             return (this.windowWidth < MOBILE_WIDTH && this.labelStyle === 'inlineNarrow') ||
                 this.labelStyle === 'inline';
+        },
+
+        isDropdown () {
+            return this.inputType === 'dropdown';
         }
     },
 
@@ -171,6 +201,10 @@ export default {
     methods: {
         updateValue (event) {
             this.$emit('input', event.target.value);
+        },
+
+        updateOption (option) {
+            this.$emit('input', option);
         },
 
         updateWidth () {
@@ -207,10 +241,13 @@ $form-input-fontSize                      : 'body-l';
         position: relative;
     }
 
+    .c-formField-input--textField {
+        padding: $form-input-padding;
+    }
+
     .c-formField-input {
         width: 100%;
         @include rem(height, $form-input-height); //convert height to rem
-        padding: $form-input-padding; //convert padding to rem
         @include font-size($form-input-fontSize);
         font-family: $font-family-base;
         color: $form-input-textColour;
@@ -240,6 +277,4 @@ $form-input-fontSize                      : 'body-l';
             }
         }
     }
-
-
 </style>
