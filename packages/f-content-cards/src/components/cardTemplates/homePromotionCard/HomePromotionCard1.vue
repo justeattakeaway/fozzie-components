@@ -82,6 +82,7 @@ export default {
 <style lang="scss" module>
     .c-contentCards-homePromotionCard1 {
         padding: spacing(x3) 0 spacing(x2);
+        width: 100%;
 
         @include media('>mid') {
             padding: spacing(x3) 0;
@@ -91,6 +92,7 @@ export default {
     .c-contentCards-homePromotionCard1-container {
         display: flex;
         flex-wrap: wrap;
+        margin: 0 auto 0;
     }
 
     .c-contentCards-homePromotionCard1-icon {
@@ -113,9 +115,13 @@ export default {
 
     .c-contentCards-homePromotionCard1-innerCard {
         width: 100%;
+        padding-left: spacing(x2);
+        padding-right: spacing(x2);
 
         @include media('>mid') {
             width: 50%;
+            padding-left: 0;
+            padding-right: spacing(x4);
         }
     }
 </style>
