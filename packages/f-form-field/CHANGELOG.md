@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.2.0
 ------------------------------
-*November 18, 2020*
+*November 19, 2020*
 
 ### Added
 - New `dropdown` module.
