@@ -8,7 +8,7 @@ v1.3.0
 *November 20, 2020*
 
 ### Added
-- Focus and Active styles for `text`, `password`, `dropdown, and `email` inputs.
+- Focus and Active styles for `text`, `password`, `dropdown`, and `email` inputs.
 
 ### Changed
 - Inline label `font-weight` and `color`.
