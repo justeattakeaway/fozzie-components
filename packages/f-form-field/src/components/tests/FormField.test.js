@@ -1,6 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
 import FormField from '../FormField.vue';
-import { DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES, VALID_LABEL_STYLES } from '../../constants';
+import FormDropdown from '../FormDropdown.vue';
+import {
+    DEFAULT_INPUT_TYPE, VALID_INPUT_TYPES, VALID_LABEL_STYLES
+} from '../../constants';
 
 describe('FormField', () => {
     allure.feature('Form Field');
@@ -66,6 +69,19 @@ describe('FormField', () => {
 
                 // Assert
                 expect(formInput.attributes('type')).toBe(definedType);
+            });
+
+            it('should display the dropdown component if inputType=`dropdown`', () => {
+                // Arrange
+                const propsData = {
+                    inputType: 'dropdown'
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+
+                // Assert
+                expect(wrapper.contains(FormDropdown)).toBe(true);
             });
         });
 
