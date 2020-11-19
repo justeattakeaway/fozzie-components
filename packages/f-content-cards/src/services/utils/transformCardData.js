@@ -2,6 +2,19 @@ import extractCardId from './extractCardId';
 import getCardUrlTarget from './getCardUrlTarget';
 
 /**
+ * Attempt to parse a string containing valid JSON
+ * @param {String} displayTimesJson
+ * @return {Object}
+ */
+const ingestDisplayTimesOrEmptyObject = displayTimesJson => {
+    try {
+        return JSON.parse(displayTimesJson);
+    } catch {
+        return {};
+    }
+};
+
+/**
  * Transforms various card data and extended fields into uniform card data format
  * @param card
  * @return {Object}
@@ -22,7 +35,7 @@ const transformCardData = card => {
 
     const {
         background_color: backgroundColor,
-        brand_name: brandName,
+        brand_name: brand,
         content_container_background: contentBackgroundColor,
         banner,
         button_1: ctaText = linkText,
@@ -39,8 +52,12 @@ const transformCardData = card => {
         updated,
         voucher_code: voucherCode,
         headline,
-        display_times_json: displayTimes
+        display_times_json: displayTimesJson
     } = extras;
+
+    const displayTimes = (typeof displayTimesJson === 'string')
+        ? ingestDisplayTimesOrEmptyObject(displayTimesJson)
+        : displayTimesJson;
 
     const description = Object.keys(extras)
         .filter(key => key.indexOf('line_') !== -1)
@@ -55,7 +72,7 @@ const transformCardData = card => {
 
     return {
         backgroundColor,
-        brandName,
+        brand,
         contentBackgroundColor,
         banner,
         ctaText,

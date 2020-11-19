@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.1.2
+------------------------------
+*November 19, 2020*
+
+### Fixed
+- HomePromoCard 1 Alignment and spacing
+- Limit number of skeleton cards to max of CardLimit
+- Fix brand handling
+
+
 v2.1.1
 ------------------------------
 *November 18, 2020*
