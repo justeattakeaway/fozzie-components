@@ -12,6 +12,9 @@ v0.43.0
 - Margin at top of component updated for narrow widths.
 - De-capitalised `name` on form labels.
 
+### Fixed
+- Generic error message updated to use `f-error-message` component.
+
 
 v0.42.0
 ------------------------------
