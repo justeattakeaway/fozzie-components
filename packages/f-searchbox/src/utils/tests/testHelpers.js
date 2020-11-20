@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/prefer-default-export, camelcase */
 
 function loadGoogleMapsMocks (opts = {}) {
     const {
@@ -151,7 +151,7 @@ function getAddressComponentsMock () {
         utc_offset: 60,
         vicinity: 'Adelfia',
         html_attributions: []
-    }
+    };
 }
 
 export {

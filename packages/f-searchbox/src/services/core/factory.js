@@ -103,14 +103,14 @@ const getLocationPostcode = geolocate => (
         && location.street
         && location.locality
         && !location.postcode
-            
+
             ? geolocate(location.latitude, location.longitude)
             .then(results => results.find(result => result.postcode))
             .then(result => {
                 location.postcode = result && result.postcode;
                 return location;
             })
-            
+
             : location
     )
 );
@@ -135,9 +135,9 @@ const searchLocations = (service, country) => (address => (
                     return result.slice(0, suggestionLimit);
                 }
                 throw new Error(NO_SUGGESTION_FOUND);
-        }, () => {
-            throw new Error(SEARCH_ERROR);
-        })
+            }, () => {
+                throw new Error(SEARCH_ERROR);
+            })
 ));
 
 /**
@@ -175,9 +175,9 @@ export default (Service, countryCode) => {
         getLocationPostcode: geolocate
             ? getLocationPostcode(geolocate)
             : location => Promise.resolve(location),
-        
+
         isGeoAvailable: isGeoAvailable && !!service.getLocationFromGeo,
-        
+
         searchLocations: service.searchLocations
             ? searchLocations(service, countryCode)
             : () => Promise.resolve([])

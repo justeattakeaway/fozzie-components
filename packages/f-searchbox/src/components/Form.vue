@@ -174,6 +174,15 @@ export default {
         )
     },
 
+    mounted () {
+        // `lastAddress` is set by returning the location cookie stored on the users machine.
+        this.lastAddress = this.config.locationFormat(getLastLocation());
+
+        if (this.lastAddress) {
+            this.address = this.shouldAutoPopulateAddress ? this.lastAddress : '';
+        }
+    },
+
     methods: {
         /**
          * Main submit handler that's responsible for submitting searches: for example to SERP.
@@ -234,15 +243,6 @@ export default {
                 this.address = '';
                 this.store.dispatch('setIsDirty', false);
             }
-        }
-    },
-
-    mounted () {
-        // `lastAddress` is set by returning the location cookie stored on the users machine.
-        this.lastAddress = this.config.locationFormat(getLastLocation());
-
-        if (this.lastAddress) {
-            this.address = this.shouldAutoPopulateAddress ? this.lastAddress : '';
         }
     }
 };

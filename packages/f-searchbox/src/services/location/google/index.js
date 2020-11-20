@@ -41,7 +41,7 @@ function getServices () {
     }
 
     const dummyElement = document.createElement('div');
-    
+
     return {
         autocomplete: new google.maps.places.AutocompleteService(),
         geocoder: new google.maps.Geocoder(),
@@ -90,7 +90,7 @@ function loadGoogleApi ({ client, libraries }) {
 export default () => {
     let sessionToken;
     let initPromise;
-    
+
     /**
      * Checks to make sure we only get the service that's fully loaded.
      *
@@ -135,7 +135,7 @@ export default () => {
 
             return initPromise;
         },
-    
+
         /**
          * Resolves the `getService` with a formatted location from `getDetails`.
          *
@@ -148,7 +148,7 @@ export default () => {
                 resolve(formatLocation(results))
             ));
         })),
-    
+
         /**
          * Resolves the `getService` with a formatted location from `geocoder`.
          *
@@ -162,7 +162,7 @@ export default () => {
                 resolve(results.map(formatLocation));
             });
         })),
-    
+
         /**
          * Resolves the `getService` with a formatted location from autocomplete `getPlacePredictions`.
          *
@@ -178,7 +178,7 @@ export default () => {
                 sessionToken
             }, resolve);
         })),
-    
+
         /**
          * Create session token from `services.createSessionToken`.
          */

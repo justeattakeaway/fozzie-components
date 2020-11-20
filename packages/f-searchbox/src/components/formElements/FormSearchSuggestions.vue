@@ -1,9 +1,9 @@
 <template>
     <div :class="$style['c-search-suggestions']">
         <button
-            type="button"
             v-for="(item, index) in suggestions"
             :key="index"
+            type="button"
             :class="{
                 [$style['c-search-suggestions-item']]: true
             }">
