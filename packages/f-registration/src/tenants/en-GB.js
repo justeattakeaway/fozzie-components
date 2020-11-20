@@ -28,8 +28,8 @@ export default {
     labels: {
         createAccountTitle: 'Create account',
         createAccountBtn: 'Create account',
-        firstName: 'First Name',
-        lastName: 'Last Name',
+        firstName: 'First name',
+        lastName: 'Last name',
         email: 'Email',
         password: 'Password'
     },
