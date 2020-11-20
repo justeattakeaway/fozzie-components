@@ -37,9 +37,13 @@ export default {
 
 <style lang="scss" module>
 
-$form-label-colour    : $grey--darkest; // Text colour of form labels
-$form-label-fontSize  : 'body-s';
-$form-label-weight    : $font-weight-bold;
+$form-label-colour              : $grey--darkest; // Text colour of form labels
+$form-label-colour-inline       : $grey--dark;
+$form-label-fontSize            : 'body-s';
+$form-label-weight              : $font-weight-bold;
+$form-label-weight-inline       : $font-weight-base;
+$form-label-padding             : spacing(x1.5) spacing(x2);
+
 
 .c-formField-label {
     display: block;
@@ -52,8 +56,11 @@ $form-label-weight    : $font-weight-bold;
 .c-formField-label--inline {
     position: absolute;
     top: 50%;
-    left: 0.5rem;
     transform: translateY(-50%);
+    @include font-size($form-label-fontSize);
+    font-weight: $form-label-weight-inline;
+    color: $form-label-colour-inline;
+    padding: $form-label-padding;
     margin-bottom: 0;
     cursor: text; // make the cursor the same as the default input hover cursor
 }

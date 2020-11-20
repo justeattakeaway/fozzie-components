@@ -56,14 +56,15 @@ export default {
 }
 
 .c-formDropdown-select {
-    padding: spacing(x1.5) spacing(x2);
+    padding: 0 spacing(x2);
     height: 100%;
     width: 100%;
+    font: inherit;
+    background: inherit;
+    outline: none;
 
     /* Remove default styling */
     border: none;
     appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
 }
 </style>
