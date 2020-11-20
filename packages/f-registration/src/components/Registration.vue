@@ -436,6 +436,8 @@ export default {
 
 <style lang="scss" module>
 
+$registration-topMargin           : spacing() * 14;
+$registration-topMargin--narrow   : spacing(x9);
 $registration-icon-width          : 97px;
 $registration-icon-width--narrow  : 92px;
 $registration-icon-height         : 78px;
@@ -443,7 +445,11 @@ $registration-icon-height--narrow : 74px;
 
 // Form styling
 .c-registration {
-    margin-top: 112px;
+    margin-top: $registration-topMargin--narrow;
+
+    @include media('>mid') {
+        margin-top: $registration-topMargin;
+    }
 }
 
     .c-registration-card {
