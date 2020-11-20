@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.3.0
+------------------------------
+*November 20, 2020*
+
+### Added
+- Focus and Active styles for `text`, `password`, `dropdown`, and `email` inputs.
+
+### Changed
+- Inline label `font-weight` and `color`.
+
+
 v1.2.0
 ------------------------------
 *November 19, 2020*

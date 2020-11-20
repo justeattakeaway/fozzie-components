@@ -26,7 +26,8 @@
                 :data-test-id="testId"
                 :class="[
                     $style['o-form-field'],
-                    $style['c-formField-input']
+                    $style['c-formField-input'],
+                    $style['c-formField-input-inputFields--focus']
                 ]"
                 :dropdown-options="dropdownOptions"
                 @update="updateOption"
@@ -43,7 +44,9 @@
                 :class="[
                     $style['o-form-field'],
                     $style['c-formField-input'],
-                    $style['c-formField-input--textField']
+                    $style['c-formField-input-textField'], {
+                        [$style['c-formField-input-inputFields--focus']]: isInputField
+                    }
                 ]"
                 @input="updateValue"
                 v-on="listeners"
@@ -186,6 +189,10 @@ export default {
 
         isDropdown () {
             return this.inputType === 'dropdown';
+        },
+
+        isInputField () {
+            return !(this.inputType === 'radio' || this.inputType === 'checkbox');
         }
     },
 
@@ -231,6 +238,7 @@ $form-input-borderColour--disabled        : $color-disabled;
 $form-input-height                        : 46px; // height is 46px + 1px border = 48px
 $form-input-padding                       : spacing(x1.5) spacing(x2);
 $form-input-fontSize                      : 'body-l';
+$form-input-focus                         : $blue--light;
 
 .c-formField {
     & + & {
@@ -241,8 +249,17 @@ $form-input-fontSize                      : 'body-l';
         position: relative;
     }
 
-    .c-formField-input--textField {
+    .c-formField-input-textField {
         padding: $form-input-padding;
+    }
+
+    .c-formField-input-inputFields--focus {
+        &:focus,
+        &:active,
+        &:focus-within {
+            box-shadow: 0 0 0 2pt $form-input-focus;
+            outline: none;
+        }
     }
 
     .c-formField-input {
@@ -277,4 +294,5 @@ $form-input-fontSize                      : 'body-l';
             }
         }
     }
+
 </style>
