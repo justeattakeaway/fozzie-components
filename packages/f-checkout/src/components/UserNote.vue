@@ -38,28 +38,26 @@ $note-textColour                          : $grey--dark;
 $line-height                              : 17.5px;
 
 .c-userNote {
-    font-weight: $font-weight-bold;
+    margin-top: spacing(x3);
+    @include font-size(body-s);
 
     .c-userNote-title {
-        margin-top: spacing(x2);
-        @include font-size(body-l);
+        font-weight: $font-weight-bold;
         color: $color-headings;
     }
 
     .c-userNote-content {
-        margin-top: spacing(x0.5);
-        font-size: 14px;
-        line-height: $line-height;
-        color: $note-textColour;
+        margin-top: spacing();
+        color: $color-headings;
+        margin-bottom: spacing(x0.5);
     }
 
     .c-userNote-textArea {
-        height: 130px;
+        height: 144px;
         width: 100%;
-        padding: spacing(x1.5) spacing();
-        margin: spacing(x2) 0 spacing(x3) 0;
-        font-family: inherit;
-        font-weight: $font-weight-bold;
+        padding: spacing() spacing(x2);
+        margin-top: spacing(x2);
+        font: inherit;
         background-color: $color-bg--component;
         border: $note-input-borderWidth solid $note-input-borderColour;
         border-radius: $note-input-borderRadius;
