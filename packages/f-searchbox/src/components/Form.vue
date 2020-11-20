@@ -30,6 +30,7 @@
 
         <form-search-suggestions
             v-if="searchSuggestion"
+            aria-live="assertive"
             :suggestion-format="suggestionFormat"
             :suggestions="searchSuggestion" />
 

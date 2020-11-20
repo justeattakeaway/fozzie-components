@@ -1,13 +1,14 @@
 <template>
     <div :class="$style['c-search-suggestions']">
-        <div
+        <button
+            type="button"
             v-for="(item, index) in suggestions"
             :key="index"
             :class="{
                 [$style['c-search-suggestions-item']]: true
             }">
             {{ suggestionFormat(item) }}
-        </div>
+        </button>
         <div :class="$style['c-search-poweredByGoogle']">
             <img
                 :src="poweredByGoogle"
@@ -17,6 +18,7 @@
 </template>
 
 <script>
+// Look into trying to convert this to a SVG then it can be pulled in via f-vue-icons.
 import poweredByGoogle from '../../assets/img/powered_by_google.png';
 
 export default {
@@ -60,6 +62,9 @@ $highlight-colour: #eaeaea;
 }
 
 .c-search-suggestions-item {
+    display: block;
+    width: 100%;
+    border: 0;
     border-top: $highlight-colour 1px solid;
     cursor: pointer;
     font-family: Arial, sans-serif;

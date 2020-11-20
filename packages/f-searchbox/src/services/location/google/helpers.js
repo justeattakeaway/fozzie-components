@@ -1,4 +1,13 @@
 /**
+ * Finds the first instance of a specified address type, in a Google Maps address component field
+ * Example Google Maps API response with address components:
+ * {
+    ...
+    "address_components": [
+      { "long_name": "Adelfia", "short_name": "Adelfia", "types": [ "locality", "political" ] },
+    ]
+  }
+ *
  *
  *
  * @param components
@@ -20,7 +29,7 @@ const getAddressComponent = (components = [], useLongName, ...types) => {
 };
 
 /**
- *
+ * Format location result so it can be consumed and resolved by the google places getter methods.
  *
  * @param result
  * @returns {Object}
