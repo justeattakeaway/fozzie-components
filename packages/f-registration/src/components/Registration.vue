@@ -29,12 +29,12 @@
                 @submit.prevent="onFormSubmit"
             >
                 <!-- TODO WCB-1031 - Extract error messages into a separate component -->
-                <p
+                <error-message
                     v-if="genericErrorMessage"
-                    :class="$style['o-form-error']">
-                    <warning-icon :class="$style['o-form-error-icon']" />
+                    :class="$style['c-registration-genericError']">
+                    >
                     {{ genericErrorMessage }}
-                </p>
+                </error-message>
                 <form-field
                     v-model="firstName"
                     name="firstName"
@@ -179,7 +179,7 @@ import {
     minLength,
     maxLength
 } from 'vuelidate/lib/validators';
-import { WarningIcon, BagCelebrateIcon } from '@justeat/f-vue-icons';
+import { BagCelebrateIcon } from '@justeat/f-vue-icons';
 import ButtonComponent from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import CardComponent from '@justeat/f-card';
@@ -226,7 +226,6 @@ export default {
         ButtonComponent,
         CardComponent,
         FormField,
-        WarningIcon,
         BagCelebrateIcon,
         ErrorMessage
     },
@@ -436,6 +435,8 @@ export default {
 
 <style lang="scss" module>
 
+$registration-topMargin           : spacing() * 14;
+$registration-topMargin--narrow   : spacing(x9);
 $registration-icon-width          : 97px;
 $registration-icon-width--narrow  : 92px;
 $registration-icon-height         : 78px;
@@ -443,7 +444,11 @@ $registration-icon-height--narrow : 74px;
 
 // Form styling
 .c-registration {
-    margin-top: 112px;
+    margin-top: $registration-topMargin--narrow;
+
+    @include media('>mid') {
+        margin-top: $registration-topMargin;
+    }
 }
 
     .c-registration-card {
@@ -479,6 +484,11 @@ $registration-icon-height--narrow : 74px;
 
     .c-registration-form {
         margin-top: spacing(x3);
+    }
+
+    .c-registration-genericError {
+        margin-top: 0;
+        margin-bottom: spacing(x2);
     }
 
     .c-registration-submit {

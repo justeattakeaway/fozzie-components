@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.43.0
+------------------------------
+*November 20, 2020*
+
+### Changed
+- Margin at top of component updated for narrow widths.
+- De-capitalised `name` on form labels.
+
+### Fixed
+- Generic error message updated to use `f-error-message` component.
+
+
 v0.42.0
 ------------------------------
 *November 18, 2020*
