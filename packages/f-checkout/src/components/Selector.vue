@@ -38,11 +38,13 @@ export default {
             default: null
         }
     },
+
     data () {
         return {
             selectedTime: null
         };
     },
+
     watch: {
         times (newValue) {
             const selected = newValue.find(t => t.selected);
@@ -51,6 +53,7 @@ export default {
             }
         }
     },
+
     methods: {
         selectionChanged () {
             this.times.forEach(el => { el.selected = false; });
@@ -71,6 +74,7 @@ $form-input-borderRadius                  : 3px;
 $form-input-borderWidth                   : 1px;
 $form-input-borderColour                  : $grey--light;
 $form-input-borderColour--focus           : $grey--dark;
+
 .o-form-select {
     position: relative;
     height: 60px;
@@ -83,6 +87,7 @@ $form-input-borderColour--focus           : $grey--dark;
     background-color: $form-input-bg;
     border: $form-input-borderWidth solid $form-input-borderColour;
     border-radius: $form-input-borderRadius;
+
     .o-form-select-label {
         display: block;
         position: absolute;
@@ -92,6 +97,7 @@ $form-input-borderColour--focus           : $grey--dark;
         color: $form-label-colour;
         cursor: pointer;
     }
+
     .o-form-select-input {
         height: 100%;
         width: 100%;

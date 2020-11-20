@@ -351,12 +351,18 @@ export default {
 <style lang="scss" module>
 $line-height                              : 16px;
 $checkout-width                           : 596px;
+$checkout-padding                         : spacing(x5) 100px;
 
 .c-checkout {
     margin: auto;
     font-family: $font-family-base;
     color: $color-text;
     font-weight: $font-weight-base;
+
+    .c-card--dimensions {
+        width: $checkout-width;
+        padding: $checkout-padding;
+    }
 
     .c-checkout-form {
         margin-top: spacing(x3);
@@ -365,11 +371,6 @@ $checkout-width                           : 596px;
     .c-checkout-alert {
         width: $checkout-width;
         margin: 0 auto;
-    }
-
-    .c-card--dimensions {
-        width: $checkout-width;
-        padding: spacing(x5) 100px;
     }
 
     .c-checkout-allergyButton {

@@ -31,36 +31,37 @@ export default {
 </script>
 
 <style lang="scss" module>
-$note-input-borderRadius                  : 3px;
-$note-input-borderWidth                   : 1px;
-$note-input-borderColour                  : $grey--light;
-$note-textColour                          : $grey--dark;
-$line-height                              : 17.5px;
+$userNote-textArea-borderRadius                  : 3px;
+$userNote-textArea-borderWidth                   : 1px;
+$userNote-textArea-borderColour                  : $grey--light;
+$userNote-textColour                             : $grey--dark;
+$userNote-textArea-bg                            : $color-bg--component;
+$userNote-textArea-height                        : 144px;
 
 .c-userNote {
     margin-top: spacing(x3);
     @include font-size(body-s);
+    color: $color-headings;
 
     .c-userNote-title {
         font-weight: $font-weight-bold;
-        color: $color-headings;
     }
 
     .c-userNote-content {
         margin-top: spacing();
-        color: $color-headings;
         margin-bottom: spacing(x0.5);
     }
 
     .c-userNote-textArea {
-        height: 144px;
+        height: $userNote-textArea-height;
         width: 100%;
         padding: spacing() spacing(x2);
         margin-top: spacing(x2);
         font: inherit;
-        background-color: $color-bg--component;
-        border: $note-input-borderWidth solid $note-input-borderColour;
-        border-radius: $note-input-borderRadius;
+        color: inherit;
+        background-color: $userNote-textArea-bg;
+        border: $userNote-textArea-borderWidth solid $userNote-textArea-borderColour;
+        border-radius: $userNote-textArea-borderRadius;
         background-clip: padding-box;
         resize: none;
     }
