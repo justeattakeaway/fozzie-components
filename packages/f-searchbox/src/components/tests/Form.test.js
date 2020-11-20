@@ -98,7 +98,7 @@ describe('`Form`', () => {
                     });
                 });
 
-                it('should commit the mutation `SET_IS_VALID` with a boolean `true` when the address is valid', () => {
+                it('should dispatch the action `setIsValid` with a boolean `true` when the address is valid', () => {
                     // Arrange
                     const propsData = {
                         config: {
@@ -113,8 +113,7 @@ describe('`Form`', () => {
                         propsData
                     });
                     const address = 'AR511AR';
-                    const SET_IS_VALID = 'SET_IS_VALID';
-                    const spy = jest.spyOn(wrapper.vm.store, 'commit');
+                    const spy = jest.spyOn(wrapper.vm.store, 'dispatch');
 
                     wrapper.setData({ address });
 
@@ -122,10 +121,10 @@ describe('`Form`', () => {
                     wrapper.vm.submit(event);
 
                     // Assert
-                    expect(spy).toHaveBeenCalledWith(SET_IS_VALID, true);
+                    expect(spy).toHaveBeenCalledWith('setIsValid', true);
                 });
 
-                it('should commit the mutation `SET_IS_VALID` with [] when the address is not valid', () => {
+                it('should dispatch the action `setIsValid` with [] when the address is not valid', () => {
                     // Arrange
                     const propsData = {
                         config: {
@@ -138,15 +137,14 @@ describe('`Form`', () => {
                     };
                     const wrapper = shallowMount(Form, { propsData });
                     const address = 'Eridanus';
-                    const SET_IS_VALID = 'SET_IS_VALID';
                     wrapper.setData({ address });
-                    const spy = jest.spyOn(wrapper.vm.store, 'commit');
+                    const spy = jest.spyOn(wrapper.vm.store, 'dispatch');
 
                     // Act
                     wrapper.vm.submit(event);
 
                     // Assert
-                    expect(spy).toHaveBeenCalledWith(SET_IS_VALID, []);
+                    expect(spy).toHaveBeenCalledWith('setIsValid', []);
                 });
 
                 describe('when `address` `isValid` is truthy', () => {
@@ -249,9 +247,8 @@ describe('`Form`', () => {
                         expect(event.preventDefault).toHaveBeenCalled();
                     });
 
-                    it('should commit the invalid errors', () => {
+                    it('should dispatch the action `setErrors` to set the correct errors', () => {
                         // Arrange
-                        const SET_ERRORS = 'SET_ERRORS';
                         const propsData = {
                             config: {
                                 address: 'Cassiopeia',
@@ -264,13 +261,13 @@ describe('`Form`', () => {
                         const wrapper = shallowMount(Form, {
                             propsData
                         });
-                        const spy = jest.spyOn(wrapper.vm.store, 'commit');
+                        const spy = jest.spyOn(wrapper.vm.store, 'dispatch');
 
                         // Act
                         wrapper.vm.submit(event);
 
                         // Assert
-                        expect(spy).toHaveBeenCalledWith(SET_ERRORS, []);
+                        expect(spy).toHaveBeenCalledWith('setErrors', []);
                     });
                 });
             });

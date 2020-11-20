@@ -37,6 +37,10 @@ export default {
         config: {
             type: Object,
             default: () => {}
+        },
+        dependentApiPromise: {
+            type: Object,
+            default: () => {}
         }
     },
     data () {
@@ -54,6 +58,15 @@ export default {
             service,
             element: componentConfig.isShellHidden ? 'no-search-shell' : 'search-shell'
         };
+    },
+
+    /**
+     * The `dependentApiPromise` is a promise object that is injected via an option (prop) in the standalone builds.
+     * The `clientInit` is the google api initializer which relies on the `service` containing `autocomplete` set to true.
+     *
+     */
+    beforeMount () {
+        this.service.clientInit(this.dependentApiPromise);
     }
 };
 </script>

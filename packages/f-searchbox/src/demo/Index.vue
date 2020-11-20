@@ -7,7 +7,7 @@
             name="viewport"
             content="width=device-width, initial-scale=1">
         <vue-searchbox
-            locale="en-GB"
+            locale="es-ES"
             :config="{ isShellHidden: false, isCompressed: false }" />
     </div>
 </template>
