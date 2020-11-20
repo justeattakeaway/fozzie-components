@@ -34,14 +34,14 @@ export default {
 $userNote-textArea-borderRadius                  : 3px;
 $userNote-textArea-borderWidth                   : 1px;
 $userNote-textArea-borderColour                  : $grey--light;
-$userNote-textColour                             : $grey--dark;
+$userNote-textColour                             : $grey--darkest;
 $userNote-textArea-bg                            : $color-bg--component;
 $userNote-textArea-height                        : 144px;
 
 .c-userNote {
     margin-top: spacing(x3);
     @include font-size(body-s);
-    color: $color-headings;
+    color: $userNote-textColour;
 
     .c-userNote-title {
         font-weight: $font-weight-bold;

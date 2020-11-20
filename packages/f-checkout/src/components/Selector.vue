@@ -33,6 +33,7 @@ export default {
             type: Array,
             default: () => []
         },
+
         orderMethod: {
             type: String,
             default: null
@@ -107,6 +108,7 @@ $form-input-borderColour--focus           : $grey--dark;
         color: $color-text;
     }
 }
+
 /**
  * Modifier – .o-form-select--float
  *
@@ -117,6 +119,7 @@ $form-input-borderColour--focus           : $grey--dark;
         @include font-size(body-s);
         top: 15px;
     }
+
     .o-form-select-input {
         padding-top: spacing(x3);
     }
