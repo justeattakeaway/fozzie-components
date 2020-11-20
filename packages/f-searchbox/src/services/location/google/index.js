@@ -18,6 +18,17 @@ const fields = [
     'types'
 ];
 
+/**
+ * Service provider responsible for checking and returning the google `AutocompleteService`.
+ *
+ * @returns {{
+ *  autocomplete: Window.google.maps.places.AutocompleteService,
+ *  geocoder: Window.google.maps.Geocoder,
+ *  latlng: (function(...[*])),
+ *  places: Window.google.maps.places.PlacesService,
+ *  createSessionToken: (function(): google.maps.places.AutocompleteSessionToken)
+ * }}
+ */
 function getServices () {
     if (
         !google.maps ||
@@ -30,6 +41,7 @@ function getServices () {
     }
 
     const dummyElement = document.createElement('div');
+    
     return {
         autocomplete: new google.maps.places.AutocompleteService(),
         geocoder: new google.maps.Geocoder(),
@@ -39,6 +51,14 @@ function getServices () {
     };
 }
 
+/**
+ * Loads the google api via a Promise. Responsible for generating the script settings
+ * & appending to the DOM.
+ *
+ * @param client
+ * @param libraries
+ * @returns {Promise}
+ */
 function loadGoogleApi ({ client, libraries }) {
     return new Promise((resolve, reject) => {
         // resolve on load
@@ -70,10 +90,12 @@ function loadGoogleApi ({ client, libraries }) {
 export default () => {
     let sessionToken;
     let initPromise;
-
-    /*
-        make sure we only get the service that's fully loaded
-    */
+    
+    /**
+     * Checks to make sure we only get the service that's fully loaded.
+     *
+     * @returns {*}
+     */
     function getService () {
         if (!initPromise) {
             throw new Error(errors.NOT_INITIALISED);
@@ -83,9 +105,11 @@ export default () => {
 
     return {
         /**
-         * This method uses a two step process - first; to determine a promise that resolves when the google maps api
-         * has loaded, and second; to produce a promise chain that resolves to a service instance bound to the
-         * resolved google maps api
+         * This method uses a two step process:
+         *
+         * 1. Checks to determine a promise that resolves when the google maps api has loaded.
+         * 2. Creates  a promise chain that resolves to a service instance bound to the resolved google maps api
+         *
          *
          * @param googleApiPromise {Promise|undefined} If defined, is assumed to resolve when google maps api has loaded
          * @returns {Promise}
@@ -104,16 +128,19 @@ export default () => {
                 });
             }
 
-            initPromise = loadingPromise
-            .then(() => getServices())
-            .then(services => {
+            initPromise = loadingPromise.then(() => getServices()).then(services => {
                 sessionToken = services.createSessionToken();
                 return services;
             });
 
             return initPromise;
         },
-
+    
+        /**
+         * Resolves the `getService` with a formatted location from `getDetails`.
+         *
+         * @param placeId
+         */
         getLocationDetails: placeId => getService().then(services => new Promise(resolve => {
             sessionToken = services.createSessionToken();
 
@@ -121,7 +148,13 @@ export default () => {
                 resolve(formatLocation(results))
             ));
         })),
-
+    
+        /**
+         * Resolves the `getService` with a formatted location from `geocoder`.
+         *
+         * @param lat
+         * @param lng
+         */
         getLocationFromGeo: (lat, lng) => getService().then(services => new Promise(resolve => {
             services.geocoder.geocode({
                 location: services.latlng(lat, lng)
@@ -129,7 +162,13 @@ export default () => {
                 resolve(results.map(formatLocation));
             });
         })),
-
+    
+        /**
+         * Resolves the `getService` with a formatted location from autocomplete `getPlacePredictions`.
+         *
+         * @param address
+         * @param country
+         */
         searchLocations: (address, country) => getService().then(services => new Promise(resolve => {
             services.autocomplete.getPlacePredictions({
                 componentRestrictions: {
@@ -139,7 +178,10 @@ export default () => {
                 sessionToken
             }, resolve);
         })),
-
+    
+        /**
+         * Create session token from `services.createSessionToken`.
+         */
         getSessionToken: () => sessionToken
     };
 };

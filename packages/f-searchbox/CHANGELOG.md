@@ -3,6 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.3
+------------------------------
+*November 20, 2020*
+
+### Added
+
+- Some accessibility improvements to google places, suggestion dropdown now reads out to the user & result items are `button` elements.
+- Tests to cover changes.
+- `copy` per tenant.
+- `service` config per tenant.
+- `debounce` to `address` watch.
+- `mutation.types.js` for use within the store.
+- `searchbox.module` updated to handle `setSuggestions` call.
+- Switched out search button for `f-button` component.
+- `FormSearchSuggestions.vue` to display results from API
+
+
 v4.0.0-beta.2
 ------------------------------
 *November 13, 2020*

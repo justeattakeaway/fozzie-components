@@ -28,6 +28,14 @@ export default new Vuex.Store({
         setErrors ({ commit }, payload) {
             commit(SET_ERRORS, payload);
         },
+        /**
+         * Takes the given payload (if successful a valid address search response or unsuccessful; a rejection) & commits the
+         * relevant states.
+         *
+         * @param commit
+         * @param payload
+         * @returns {Promise.<TResult>}
+         */
         setSuggestions ({ commit }, payload) {
             return payload.then(
                 results => {
@@ -39,7 +47,9 @@ export default new Vuex.Store({
                      */
                 },
                 error => {
-                    // no suggestions should exist if there's an error
+                    /**
+                     * If there's an error we need to clear the sugguestions & set the expected error.
+                     */
                     commit(SET_SUGGESTIONS, []);
                     commit(SET_ERRORS, error.errors || [error.message]);
                 }

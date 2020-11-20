@@ -115,6 +115,12 @@ export default {
     },
 
     computed: {
+        /**
+         * Get stored `suggestions` from state if they exist. To minimize multiple types of
+         * suggestion types i.e at an API level; we should try and stick to this single suggestion value
+         * for all consuming APIs rather than creating new ones based on the APIs we're consuming.
+         *
+         * */
         searchSuggestion () {
             return this.store.state.suggestions;
         },
@@ -166,15 +172,6 @@ export default {
             500,
             { maxWait: 1500 }
         )
-    },
-
-    mounted () {
-        // `lastAddress` is set by returning the location cookie stored on the users machine.
-        this.lastAddress = this.config.locationFormat(getLastLocation());
-
-        if (this.lastAddress) {
-            this.address = this.shouldAutoPopulateAddress ? this.lastAddress : '';
-        }
     },
 
     methods: {
@@ -237,6 +234,15 @@ export default {
                 this.address = '';
                 this.store.dispatch('setIsDirty', false);
             }
+        }
+    },
+
+    mounted () {
+        // `lastAddress` is set by returning the location cookie stored on the users machine.
+        this.lastAddress = this.config.locationFormat(getLastLocation());
+
+        if (this.lastAddress) {
+            this.address = this.shouldAutoPopulateAddress ? this.lastAddress : '';
         }
     }
 };
