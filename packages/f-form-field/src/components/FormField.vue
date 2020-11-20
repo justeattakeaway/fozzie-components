@@ -27,7 +27,7 @@
                 :class="[
                     $style['o-form-field'],
                     $style['c-formField-input'],
-                    $style['c-formField-input-textFields--focus']
+                    $style['c-formField-input-inputFields--focus']
                 ]"
                 :dropdown-options="dropdownOptions"
                 @update="updateOption"
@@ -45,7 +45,7 @@
                     $style['o-form-field'],
                     $style['c-formField-input'],
                     $style['c-formField-input-textField'], {
-                        [$style['c-formField-input-textFields--focus']]: isTextField
+                        [$style['c-formField-input-inputFields--focus']]: isInputField
                     }
                 ]"
                 @input="updateValue"
@@ -191,7 +191,7 @@ export default {
             return this.inputType === 'dropdown';
         },
 
-        isTextField () {
+        isInputField () {
             return !(this.inputType === 'radio' || this.inputType === 'checkbox');
         }
     },
@@ -253,7 +253,7 @@ $form-input-focus                         : $blue--light;
         padding: $form-input-padding;
     }
 
-    .c-formField-input-textFields--focus {
+    .c-formField-input-inputFields--focus {
         &:focus,
         &:active,
         &:focus-within {
