@@ -31,38 +31,37 @@ export default {
 </script>
 
 <style lang="scss" module>
-$note-input-borderRadius                  : 3px;
-$note-input-borderWidth                   : 1px;
-$note-input-borderColour                  : $grey--light;
-$note-textColour                          : $grey--dark;
-$line-height                              : 17.5px;
+$userNote-textArea-borderRadius                  : $border-radius;
+$userNote-textArea-borderWidth                   : 1px;
+$userNote-textArea-borderColour                  : $grey--light;
+$userNote-textColour                             : $color-text;
+$userNote-textArea-bg                            : $color-bg--component;
+$userNote-textArea-height                        : 144px;
 
 .c-userNote {
-    font-weight: $font-weight-bold;
+    margin-top: spacing(x3);
+    @include font-size(body-s);
+    color: $userNote-textColour;
 
     .c-userNote-title {
-        margin-top: spacing(x2);
-        @include font-size(body-l);
-        color: $color-headings;
+        font-weight: $font-weight-bold;
     }
 
     .c-userNote-content {
-        margin-top: spacing(x0.5);
-        font-size: 14px;
-        line-height: $line-height;
-        color: $note-textColour;
+        margin-top: spacing();
+        margin-bottom: spacing(x0.5);
     }
 
     .c-userNote-textArea {
-        height: 130px;
+        height: $userNote-textArea-height;
         width: 100%;
-        padding: spacing(x1.5) spacing();
-        margin: spacing(x2) 0 spacing(x3) 0;
-        font-family: inherit;
-        font-weight: $font-weight-bold;
-        background-color: $color-bg--component;
-        border: $note-input-borderWidth solid $note-input-borderColour;
-        border-radius: $note-input-borderRadius;
+        padding: spacing() spacing(x2);
+        margin-top: spacing(x2);
+        font: inherit;
+        color: inherit;
+        background-color: $userNote-textArea-bg;
+        border: $userNote-textArea-borderWidth solid $userNote-textArea-borderColour;
+        border-radius: $userNote-textArea-borderRadius;
         background-clip: padding-box;
         resize: none;
     }

@@ -3,6 +3,7 @@ export default {
 
     labels: {
         mobileNumber: 'Mobile Number',
+        addressGroup: 'Address',
         line1: 'Address line 1',
         line2: 'Address line 2 (optional)',
         city: 'City',

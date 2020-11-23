@@ -21,13 +21,14 @@
             :class="$style['c-card--dimensions']">
             <form
                 type="post"
+                :class="$style['c-checkout-form']"
                 @submit.prevent="onFormSubmit">
                 <form-field
                     v-model="mobileNumber"
                     name="mobile-number"
                     data-test-id="input-mobile-number"
                     :label-text="$t('labels.mobileNumber')"
-                    label-style="inline">
+                    :has-error="!isMobileNumberValid">
                     <template #error>
                         <error-message
                             v-if="!isMobileNumberValid"
@@ -61,6 +62,7 @@
                     :class="$style['c-checkout-submitButton']"
                     button-type="primary"
                     button-size="large"
+                    is-full-width
                     data-test-id="confirm-payment-submit-button">
                     {{ $t('buttonText') }}
                 </button-component>
@@ -348,7 +350,8 @@ export default {
 
 <style lang="scss" module>
 $line-height                              : 16px;
-$checkout-width                           : 460px;
+$checkout-width                           : 596px;
+$checkout-padding                         : spacing(x5) 100px;
 
 .c-checkout {
     margin: auto;
@@ -356,45 +359,26 @@ $checkout-width                           : 460px;
     color: $color-text;
     font-weight: $font-weight-base;
 
+    .c-card--dimensions {
+        width: $checkout-width;
+        padding: $checkout-padding;
+    }
+
+    .c-checkout-form {
+        margin-top: spacing(x3);
+    }
+
     .c-checkout-alert {
         width: $checkout-width;
         margin: 0 auto;
     }
 
-    .c-card--dimensions {
-        width: $checkout-width;
-        padding: spacing(x5) spacing(x9) spacing(x4);
-
-        @include media('<wide') {
-            width: 60%;
-            padding: spacing(x5) 10% spacing(x4);
-        }
-
-        @include media('<mid') {
-            width: 100%;
-            padding: spacing(x5) spacing(x2) spacing(x4);
-            margin: 0;
-        }
-    }
-
     .c-checkout-allergyButton {
-        padding: 0 spacing(x3);
+        margin-top: spacing(x1.5);
     }
 
     .c-checkout-submitButton {
-        display: flex;
-        margin: spacing(x2) auto;
-
-        @include media('<wide') {
-            display: block;
-            width: 70%;
-            padding: spacing(x2);
-        }
-
-        @include media('<mid') {
-            display: block;
-            width: 100%;
-        }
+        margin: spacing(x4) 0 spacing(x0.5);
     }
 }
 </style>
