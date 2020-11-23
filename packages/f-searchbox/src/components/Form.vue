@@ -19,6 +19,7 @@
                 v-model="address"
                 :error-message="errorMessage"
                 :address="address"
+                :should-display-custom-autocomplete="service.isAutocompleteEnabled"
                 :copy="copy"
                 :is-compressed="isCompressed" />
 
@@ -26,6 +27,12 @@
                 :copy="copy"
                 :is-compressed="isCompressed" />
         </div>
+
+        <form-search-suggestions
+            v-if="searchSuggestion"
+            aria-live="assertive"
+            :suggestion-format="suggestionFormat"
+            :suggestions="searchSuggestion" />
 
         <error-message
             v-if="errorMessage"
@@ -37,10 +44,12 @@
 </template>
 
 <script>
+import debounce from 'lodash.debounce';
 import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import FormSearchField from './formElements/FormSearchField.vue';
 import FormSearchButton from './formElements/FormSearchButton.vue';
+import FormSearchSuggestions from './formElements/FormSearchSuggestions.vue';
 import store from '../store/searchbox.module';
 import { getLastLocation } from '../utils/helpers';
 import { search } from '../services/search.services';
@@ -53,7 +62,8 @@ export default {
     components: {
         ErrorMessage,
         FormSearchField,
-        FormSearchButton
+        FormSearchButton,
+        FormSearchSuggestions
     },
 
     props: {
@@ -83,7 +93,8 @@ export default {
             addressField,
             shouldSetCookies,
             onSubmit,
-            shouldAutoPopulateAddress
+            shouldAutoPopulateAddress,
+            suggestionFormat
         } = this.config;
 
         return {
@@ -98,11 +109,21 @@ export default {
             shouldSetCookies,
             onSubmit,
             shouldAutoPopulateAddress,
+            suggestionFormat,
             store
         };
     },
 
     computed: {
+        /**
+         * Get stored `suggestions` from state if they exist. To minimize multiple types of
+         * suggestion types i.e at an API level; we should try and stick to this single suggestion value
+         * for all consuming APIs rather than creating new ones based on the APIs we're consuming.
+         *
+         * */
+        searchSuggestion () {
+            return this.store.state.suggestions;
+        },
         /**
          * Return a tenant specific error message from the config.
          *
@@ -129,6 +150,39 @@ export default {
         }
     },
 
+    watch: {
+        /**
+         * Watches address value, based on the input value we perform any `preSearchValidation` validation; if supplied
+         * via the service options. We then dispatch / set the suggestions by either resolving the promise or rejecting it.
+         * The end results means `suggestions: []` gets populated if results are returned, this is passed to the
+         * search suggestions component dropdown.
+         *
+         * */
+        address: debounce(
+            function invoker (value) {
+                const { preSearchValidation } = this.service.options;
+                const errors = !!preSearchValidation && this.service.isValid(value, preSearchValidation);
+
+                if (Array.isArray(errors)) {
+                    this.store.dispatch('setSuggestions', Promise.reject(new Error(errors[0])));
+                } else {
+                    this.store.dispatch('setSuggestions', this.service.search(value));
+                }
+            },
+            500,
+            { maxWait: 1500 }
+        )
+    },
+
+    mounted () {
+        // `lastAddress` is set by returning the location cookie stored on the users machine.
+        this.lastAddress = this.config.locationFormat(getLastLocation());
+
+        if (this.lastAddress) {
+            this.address = this.shouldAutoPopulateAddress ? this.lastAddress : '';
+        }
+    },
+
     methods: {
         /**
          * Main submit handler that's responsible for submitting searches: for example to SERP.
@@ -140,20 +194,20 @@ export default {
          * @param e
          */
         submit (e) {
-            this.store.commit('SET_IS_VALID', this.service.isValid(this.address));
+            this.store.dispatch('setIsValid', this.service.isValid(this.address));
 
             if (this.hasLastSavedAddress) {
                 return this.searchPreviouslySavedAddress(e);
             }
 
             if (this.store.state.isValid === true) {
-                this.store.commit('SET_ERRORS', []);
+                this.store.dispatch('setErrors', []);
                 processLocationCookie(this.shouldSetCookies, this.address);
                 this.clearAddressValue(this.shouldClearAddressOnValidSubmit);
                 onCustomSubmit(this.onSubmit, this.address, e);
             } else {
                 e.preventDefault();
-                this.store.commit('SET_ERRORS', this.store.state.isValid);
+                this.store.dispatch('setErrors', this.store.state.isValid);
             }
 
             return true;
@@ -187,17 +241,8 @@ export default {
         clearAddressValue (shouldClearAddressOnValidSubmit) {
             if (shouldClearAddressOnValidSubmit) {
                 this.address = '';
-                this.store.commit('SET_IS_DIRTY', false);
+                this.store.dispatch('setIsDirty', false);
             }
-        }
-    },
-
-    mounted () {
-        // `lastAddress` is set by returning the location cookie stored on the users machine.
-        this.lastAddress = this.config.locationFormat(getLastLocation());
-
-        if (this.lastAddress) {
-            this.address = this.shouldAutoPopulateAddress ? this.lastAddress : '';
         }
     }
 };

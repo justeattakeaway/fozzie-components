@@ -19,7 +19,7 @@ const component = {
     address: '',
     cuisine: '',
     isShellHidden: false,
-    isCompressed: true,
+    isCompressed: false,
     query: '',
     shouldSetCookies: false,
     onSubmit: false,
