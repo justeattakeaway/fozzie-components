@@ -10,7 +10,7 @@
 ---
 
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-user-message/badge.svg)](https://coveralls.io/github/justeat/f-user-message)
-[![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg&circle-token=4c77c1990b98c8e06e01b497bc80f376346f609d)](https://circleci.com/gh/justeat/workflows/fozzie-components)
+[![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-user-message/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-user-message?targetFile=package.json)
 <!-- markdownlint-enable -->
 
@@ -59,7 +59,7 @@
 3. Properties which component accepts:
 
     `locale` - If there is a vue-i18n plugin in the project, the user message
-     component can be called without locale property, otherwise it accepts it 
+     component can be called without locale property, otherwise it accepts it
      in format like 'en-GB'
 
 ## Development
@@ -74,6 +74,6 @@ yarn install
 yarn demo
 ```
 
-A development server is set to provide a stubbed response for the api call, when running locally. 
+A development server is set to provide a stubbed response for the api call, when running locally.
 
 See [Demo folder](./src/demo/) for more detail.
