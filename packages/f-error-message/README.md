@@ -10,7 +10,7 @@
 ---
 
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-error-message.svg)](https://badge.fury.io/js/%40justeat%2Ff-error-message)
-[![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg&circle-token=4c77c1990b98c8e06e01b497bc80f376346f609d)](https://circleci.com/gh/justeat/workflows/fozzie-components)
+[![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-error-message/badge.svg)](https://coveralls.io/github/justeat/f-error-message)
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-error-message/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-error-message?targetFile=package.json)
 
