@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button
+        <search-button
             type="submit"
             data-test-id="find-restaurants-button"
             :aria-label="copy.buttonText"
@@ -15,16 +15,19 @@
             </span>
 
             <span :class="$style['c-search-btn-text']">{{ copy.buttonText }}</span>
-        </button>
+        </search-button>
     </div>
 </template>
 
 <script>
+import SearchButton from '@justeat/f-button';
+import '@justeat/f-button/dist/f-button.css';
 import { EyeglassIcon } from '@justeat/f-vue-icons';
 
 export default {
     components: {
-        EyeglassIcon
+        EyeglassIcon,
+        SearchButton
     },
     props: {
         isCompressed: {
