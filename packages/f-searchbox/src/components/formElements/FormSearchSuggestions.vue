@@ -44,12 +44,14 @@ export default {
 <style lang="scss" module>
 @import '../../assets/scss/common';
 
-$highlight-colour: #eaeaea;
+$suggestions-item-highlight-colour: $grey--light;
+$suggestions-bg-colour: $white;
+$suggestions-shadow-colour: $grey--midDark;
 
 .c-search-suggestions {
-    $border-radius: 3px;
-    background: $white;
-    box-shadow: #9b9b9b 0 5px 6px -2px;
+    $border-radius: 2px;
+    background: $suggestions-bg-colour;
+    box-shadow: $suggestions-shadow-colour 0 5px 6px -2px;
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
     position: absolute;
@@ -65,7 +67,7 @@ $highlight-colour: #eaeaea;
     display: block;
     width: 100%;
     border: 0;
-    border-top: $highlight-colour 1px solid;
+    border-top: $suggestions-item-highlight-colour 1px solid;
     cursor: pointer;
     font-family: Arial, sans-serif;
     font-size: 11px;
@@ -79,14 +81,14 @@ $highlight-colour: #eaeaea;
 
     &:hover,
     &.selected {
-        background: $highlight-colour;
+        background: $suggestions-item-highlight-colour;
     }
 }
 
 .c-search-poweredByGoogle {
     display: flex;
     justify-content: flex-end;
-    padding: 8px;
+    padding: spacing();
 
     img {
         width: 100px;

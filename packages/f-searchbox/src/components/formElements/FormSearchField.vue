@@ -16,7 +16,7 @@
                 type="search"
                 data-test-id="address-box-input"
                 :aria-label="copy.fieldLabel"
-                :autocomplete="shouldDisplayAutocomplete ? 'off' : 'on'"
+                :autocomplete="shouldDisplayCustomAutocomplete ? 'off' : 'on'"
                 :aria-describedby="errorMessage ? 'errorMessage' : false"
                 :class="{
                     [$style['c-search-input']]: true,
@@ -48,7 +48,7 @@ export default {
             type: Object,
             default:  () => ({})
         },
-        shouldDisplayAutocomplete: {
+        shouldDisplayCustomAutocomplete: {
             type: Boolean,
             default: false
         }

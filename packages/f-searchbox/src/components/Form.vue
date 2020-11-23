@@ -19,7 +19,7 @@
                 v-model="address"
                 :error-message="errorMessage"
                 :address="address"
-                :should-display-autocomplete="service.isAutocompleteEnabled"
+                :should-display-custom-autocomplete="service.isAutocompleteEnabled"
                 :copy="copy"
                 :is-compressed="isCompressed" />
 
