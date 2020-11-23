@@ -1,65 +1,121 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Checkout when form submitted if serviceType set to \`collection\` should show error message and emit failure event when the mobile number field is not populated 1`] = `
-<p data-test-id="error-mobile-number" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" class="c-ficon c-ficon--warning ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <path d="M6.5 4.24a.32.32 0 0 1 .66 0v2.6a.32.32 0 0 1-.65 0v-2.6zm.33 4.88a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm6.36 1.24a1.3 1.3 0 0 1-1.12.7H1.6a1.29 1.29 0 0 1-1.04-2L5.8 1.22a1.25 1.25 0 0 1 2.08 0l5.24 7.82c.27.4.3.9.08 1.31zm-.62-.94L7.33 1.59a.6.6 0 0 0-1 0L1.1 9.42a.64.64 0 0 0 .5 1h10.47a.64.64 0 0 0 .51-1z" fill="#D50525"></path>
-  </svg><span data-test-id="content">
+<p data-test-id="error-mobile-number" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g transform="translate(-34.000000, -18.000000)">
+        <g transform="translate(32.000000, 16.000000)">
+          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
+          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
+        </g>
+      </g>
+    </g>
+  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
                         Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
                     </span></p>
 `;
 
 exports[`Checkout when form submitted if serviceType set to \`collection\` should show error message and emit failure event when the mobile number field is populated with a < 10 numbers 1`] = `
-<p data-test-id="error-mobile-number" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" class="c-ficon c-ficon--warning ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <path d="M6.5 4.24a.32.32 0 0 1 .66 0v2.6a.32.32 0 0 1-.65 0v-2.6zm.33 4.88a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm6.36 1.24a1.3 1.3 0 0 1-1.12.7H1.6a1.29 1.29 0 0 1-1.04-2L5.8 1.22a1.25 1.25 0 0 1 2.08 0l5.24 7.82c.27.4.3.9.08 1.31zm-.62-.94L7.33 1.59a.6.6 0 0 0-1 0L1.1 9.42a.64.64 0 0 0 .5 1h10.47a.64.64 0 0 0 .51-1z" fill="#D50525"></path>
-  </svg><span data-test-id="content">
+<p data-test-id="error-mobile-number" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g transform="translate(-34.000000, -18.000000)">
+        <g transform="translate(32.000000, 16.000000)">
+          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
+          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
+        </g>
+      </g>
+    </g>
+  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
                         Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
                     </span></p>
 `;
 
 exports[`Checkout when form submitted if serviceType set to \`collection\` should show error message and emit failure event when the mobile number field is populated with non numeric value 1`] = `
-<p data-test-id="error-mobile-number" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" class="c-ficon c-ficon--warning ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <path d="M6.5 4.24a.32.32 0 0 1 .66 0v2.6a.32.32 0 0 1-.65 0v-2.6zm.33 4.88a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm6.36 1.24a1.3 1.3 0 0 1-1.12.7H1.6a1.29 1.29 0 0 1-1.04-2L5.8 1.22a1.25 1.25 0 0 1 2.08 0l5.24 7.82c.27.4.3.9.08 1.31zm-.62-.94L7.33 1.59a.6.6 0 0 0-1 0L1.1 9.42a.64.64 0 0 0 .5 1h10.47a.64.64 0 0 0 .51-1z" fill="#D50525"></path>
-  </svg><span data-test-id="content">
+<p data-test-id="error-mobile-number" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g transform="translate(-34.000000, -18.000000)">
+        <g transform="translate(32.000000, 16.000000)">
+          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
+          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
+        </g>
+      </g>
+    </g>
+  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
                         Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
                     </span></p>
 `;
 
 exports[`Checkout when form submitted if serviceType set to \`delivery\` should emit failure event and display error message when address line1 input field is empty 1`] = `
-<p data-test-id="error-address-line1-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" class="c-ficon c-ficon--warning ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <path d="M6.5 4.24a.32.32 0 0 1 .66 0v2.6a.32.32 0 0 1-.65 0v-2.6zm.33 4.88a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm6.36 1.24a1.3 1.3 0 0 1-1.12.7H1.6a1.29 1.29 0 0 1-1.04-2L5.8 1.22a1.25 1.25 0 0 1 2.08 0l5.24 7.82c.27.4.3.9.08 1.31zm-.62-.94L7.33 1.59a.6.6 0 0 0-1 0L1.1 9.42a.64.64 0 0 0 .5 1h10.47a.64.64 0 0 0 .51-1z" fill="#D50525"></path>
-  </svg><span data-test-id="content">
+<p data-test-id="error-address-line1-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g transform="translate(-34.000000, -18.000000)">
+        <g transform="translate(32.000000, 16.000000)">
+          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
+          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
+        </g>
+      </g>
+    </g>
+  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
                     Please enter the first line of your address
                 </span></p>
 `;
 
 exports[`Checkout when form submitted if serviceType set to \`delivery\` should emit failure event and display error message when city input field is empty 1`] = `
-<p data-test-id="error-address-city-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" class="c-ficon c-ficon--warning ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <path d="M6.5 4.24a.32.32 0 0 1 .66 0v2.6a.32.32 0 0 1-.65 0v-2.6zm.33 4.88a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm6.36 1.24a1.3 1.3 0 0 1-1.12.7H1.6a1.29 1.29 0 0 1-1.04-2L5.8 1.22a1.25 1.25 0 0 1 2.08 0l5.24 7.82c.27.4.3.9.08 1.31zm-.62-.94L7.33 1.59a.6.6 0 0 0-1 0L1.1 9.42a.64.64 0 0 0 .5 1h10.47a.64.64 0 0 0 .51-1z" fill="#D50525"></path>
-  </svg><span data-test-id="content">
-                    Please enter your town or city
-                </span></p>
+<p data-test-id="error-address-city-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g transform="translate(-34.000000, -18.000000)">
+        <g transform="translate(32.000000, 16.000000)">
+          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
+          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
+        </g>
+      </g>
+    </g>
+  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
+                Please enter your town or city
+            </span></p>
 `;
 
 exports[`Checkout when form submitted if serviceType set to \`delivery\` should emit failure event and display error message when postcode contains incorrect characters 1`] = `
-<p data-test-id="error-address-postcode-type-error" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" class="c-ficon c-ficon--warning ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <path d="M6.5 4.24a.32.32 0 0 1 .66 0v2.6a.32.32 0 0 1-.65 0v-2.6zm.33 4.88a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm6.36 1.24a1.3 1.3 0 0 1-1.12.7H1.6a1.29 1.29 0 0 1-1.04-2L5.8 1.22a1.25 1.25 0 0 1 2.08 0l5.24 7.82c.27.4.3.9.08 1.31zm-.62-.94L7.33 1.59a.6.6 0 0 0-1 0L1.1 9.42a.64.64 0 0 0 .5 1h10.47a.64.64 0 0 0 .51-1z" fill="#D50525"></path>
-  </svg><span data-test-id="content">
+<p data-test-id="error-address-postcode-type-error" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g transform="translate(-34.000000, -18.000000)">
+        <g transform="translate(32.000000, 16.000000)">
+          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
+          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
+        </g>
+      </g>
+    </g>
+  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
                 This doesn't look like a UK postcode, can you enter it again please?
             </span></p>
 `;
 
 exports[`Checkout when form submitted if serviceType set to \`delivery\` should emit failure event and display error message when postcode contains incorrect characters 2`] = `
-<p data-test-id="error-address-postcode-type-error" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" class="c-ficon c-ficon--warning ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <path d="M6.5 4.24a.32.32 0 0 1 .66 0v2.6a.32.32 0 0 1-.65 0v-2.6zm.33 4.88a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm6.36 1.24a1.3 1.3 0 0 1-1.12.7H1.6a1.29 1.29 0 0 1-1.04-2L5.8 1.22a1.25 1.25 0 0 1 2.08 0l5.24 7.82c.27.4.3.9.08 1.31zm-.62-.94L7.33 1.59a.6.6 0 0 0-1 0L1.1 9.42a.64.64 0 0 0 .5 1h10.47a.64.64 0 0 0 .51-1z" fill="#D50525"></path>
-  </svg><span data-test-id="content">
+<p data-test-id="error-address-postcode-type-error" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g transform="translate(-34.000000, -18.000000)">
+        <g transform="translate(32.000000, 16.000000)">
+          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
+          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
+        </g>
+      </g>
+    </g>
+  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
                 This doesn't look like a UK postcode, can you enter it again please?
             </span></p>
 `;
 
 exports[`Checkout when form submitted if serviceType set to \`delivery\` should emit failure event and display error message when postcode input field is empty 1`] = `
-<p data-test-id="error-address-postcode-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" class="c-ficon c-ficon--warning ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <path d="M6.5 4.24a.32.32 0 0 1 .66 0v2.6a.32.32 0 0 1-.65 0v-2.6zm.33 4.88a.65.65 0 1 1 0-1.3.65.65 0 0 1 0 1.3zm6.36 1.24a1.3 1.3 0 0 1-1.12.7H1.6a1.29 1.29 0 0 1-1.04-2L5.8 1.22a1.25 1.25 0 0 1 2.08 0l5.24 7.82c.27.4.3.9.08 1.31zm-.62-.94L7.33 1.59a.6.6 0 0 0-1 0L1.1 9.42a.64.64 0 0 0 .5 1h10.47a.64.64 0 0 0 .51-1z" fill="#D50525"></path>
-  </svg><span data-test-id="content">
+<p data-test-id="error-address-postcode-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g transform="translate(-34.000000, -18.000000)">
+        <g transform="translate(32.000000, 16.000000)">
+          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
+          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
+        </g>
+      </g>
+    </g>
+  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
                 Please enter your full UK postcode
             </span></p>
 `;

@@ -1687,22 +1687,17 @@
     webpack-cli "3.3.1"
     webpack-log "2.0.0"
 
-"@justeat/f-button@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.1.0.tgz#97578c7491e869a4ac7100773db45e31d7b7c39f"
-  integrity sha512-K/vrpkFdfy0svu1/wNZhPDSJvVcw3b4y2UQB014UpUnOSerdeZOFItahTdy9um0pMrIA7MEZVasYBzPxMlO87A==
-
-"@justeat/f-card@0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-0.6.0.tgz#8adf0899511400d970b8added0f549fef1de0413"
-  integrity sha512-MCVzNmNHQ/GpDWGqQOii26mAkDh5lPu7SrOp/3qBwtD5oAhhGOxWPQogbdLWTmD0+O5Sn1n4oX3Z590D9ej4UA==
-  dependencies:
-    "@justeat/f-services" "0.13.0"
-
 "@justeat/f-card@0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-0.7.0.tgz#3179bcee050625c4391a4e97d39884a660feed8f"
   integrity sha512-7d7RmAlaakEVGR3H/Z+21JYHc5ySallKtaEZZFZuyuugUgUVxa/51qIXYS3iYN1btMAi3WNTFhEfMBse7pfCHw==
+  dependencies:
+    "@justeat/f-services" "0.13.0"
+
+"@justeat/f-card@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-0.8.0.tgz#f49403128ff972fbd8ac8cc600c3c0ed82a76d78"
+  integrity sha512-e1/BbN3UpeD/rnN8BBCd5a0QBuvEFenONz9bOQttvX8HzwWuZnhS2Lx/bhKICFvFtaGjHm9AuOoZ36FBdvKG+Q==
   dependencies:
     "@justeat/f-services" "0.13.0"
 
@@ -1713,19 +1708,12 @@
   dependencies:
     qwery "4.0.0"
 
-"@justeat/f-error-message@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-0.2.0.tgz#5c8831681b6e64c13e51800c7489bbb7f632d3e0"
-  integrity sha512-U6lyk1UbjQJEfdzl926SlwV8b0JY35XuMRWiJ0/BLxYR6UZm+OlWY8NGdiiZHfAL4eoXUYaS2kwxzzJDjEw+Jg==
+"@justeat/f-error-message@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-0.3.0.tgz#53645fbfd34a352dbd348670cac9dd483d6f0c11"
+  integrity sha512-zO9f6kIgnqwh+/3IFobdT2g6Tvs0wbUpcs8oATel6zMkm687VwgTnK1XuRAQUIDPiEmyISrDV0HZQXjnLJ7G0Q==
   dependencies:
-    "@justeat/f-vue-icons" "1.0.0"
-
-"@justeat/f-form-field@0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-0.7.1.tgz#789f5e9f342f964b9cc5f985fc162c616dbf192f"
-  integrity sha512-rg0grprUeEcy6wW8fEOZUA6uRTCw1AejRGYOYtSxiXrrgnJzY8DoKSkxwBrRcir6ql1hyRK1AQ9cPsby06ZCVg==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
+    "@justeat/f-vue-icons" "1.10.0"
 
 "@justeat/f-form-field@1.1.0":
   version "1.1.0"
@@ -1733,6 +1721,14 @@
   integrity sha512-pdvIN2OVPlFxzAatDMe2SoWH4q2n/QJ84YnLmK6P49PXg2bGPPLI8foQgVO4wUsDzuzClL8k1BJxwAMwMpmA8Q==
   dependencies:
     "@justeat/f-services" "1.0.0"
+
+"@justeat/f-form-field@1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-1.3.0.tgz#d2c393632135a20ad1d5bf2eaa84c3a3089ba5e1"
+  integrity sha512-iIKUd4/F4G7bUFl5m8ppjRANBzc0Nt7He+jByio5E7jkRq9SRwpgPEk2M+y0ii+6/B1jxkHO/4facKb0QMhmvw==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+    "@justeat/f-vue-icons" "1.11.0"
 
 "@justeat/f-icons@2.10.1":
   version "2.10.1"
@@ -1796,13 +1792,6 @@
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-utils/-/f-utils-1.0.0.tgz#d4f38f6c2b2992fefa39789f1ce742dc083798b1"
   integrity sha512-sxAIxcHrgYYlxTZuadFTvWeB24M3C53eLWLQ3xMm3nnMQN8Ls8qoWM8WSW8YadgJVUZ5/uq3tP4xMihpvxNupw==
-
-"@justeat/f-vue-icons@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.0.0.tgz#368bf02d1f2befe623342e41ae14dce24c62ee79"
-  integrity sha512-nIF9q0B9V3Bra7SgFWtCM8KtlcpnMwoLN1EDfT2tK7Zciv+HW1vPSjTR2DX29qTQZ4Qkf2bo2b73dtypaqr5vg==
-  dependencies:
-    babel-helper-vue-jsx-merge-props "2.0.3"
 
 "@justeat/f-vue-icons@1.10.0":
   version "1.10.0"

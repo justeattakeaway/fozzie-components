@@ -1,16 +1,22 @@
 <template>
     <div data-test-id='address-component'>
-        <fieldset :class="$style['c-addressGroup']">
+        <fieldset :class="$style['c-address-group']">
+            <legend
+                :class="$style['c-address-label']">
+                {{ $t('labels.addressGroup') }}
+            </legend>
             <form-field
                 v-model="address.line1"
-                :class="$style['c-addressGroup-formField']"
+                :class="$style['c-address-formField']"
                 name="address-line-1"
                 data-test-id="input-address-line-1"
                 :label-text="$t('labels.line1')"
-                label-style="inline">
+                label-style="inline"
+                :has-error="isAddressLine1Empty">
                 <template #error>
                     <error-message
                         v-if="isAddressLine1Empty"
+                        :class="$style['c-address-error']"
                         data-test-id="error-address-line1-empty">
                         {{ $t('validationMessages.addressLine1.requiredError') }}
                     </error-message>
@@ -19,34 +25,34 @@
 
             <form-field
                 v-model="address.line2"
-                :class="$style['c-addressGroup-formField']"
+                :class="$style['c-address-formField']"
                 name="address-line-2"
                 data-test-id="input-address-line-2"
                 :label-text="$t('labels.line2')"
                 label-style="inline" />
-
-            <form-field
-                v-model="address.city"
-                :class="$style['c-addressGroup-formField']"
-                name="address-city"
-                data-test-id="input-address-city"
-                :label-text="$t('labels.city')"
-                label-style="inline">
-                <template #error>
-                    <error-message
-                        v-if="isAddressCityEmpty"
-                        data-test-id="error-address-city-empty">
-                        {{ $t('validationMessages.city.requiredError') }}
-                    </error-message>
-                </template>
-            </form-field>
         </fieldset>
+
+        <form-field
+            v-model="address.city"
+            name="address-city"
+            data-test-id="input-address-city"
+            :label-text="$t('labels.city')"
+            :has-error="isAddressCityEmpty">
+            <template #error>
+                <error-message
+                    v-if="isAddressCityEmpty"
+                    data-test-id="error-address-city-empty">
+                    {{ $t('validationMessages.city.requiredError') }}
+                </error-message>
+            </template>
+        </form-field>
+
         <form-field
             v-model="address.postcode"
             name="address-postcode"
             data-test-id="input-address-postcode"
             :label-text="$t('labels.postcode')"
-            label-style="inline">
+            :has-error="!isAddressPostcodeValid">
             <template #error>
                 <error-message
                     v-if="isAddressPostcodeEmpty"
@@ -105,14 +111,17 @@ export default {
             return this.isFieldEmpty('postcode');
         },
 
+        /*
+        * Checks that postcode is a valid postcode and that the field is not empty.
+        */
         isAddressPostcodeValid () {
-            return !this.$v.addressValidations.postcode.$dirty || this.$v.addressValidations.postcode.isValidPostcode;
+            return (!this.$v.addressValidations.postcode.$dirty || this.$v.addressValidations.postcode.isValidPostcode) && !this.isAddressPostcodeEmpty;
         }
     },
 
     methods: {
         /*
-        * Returns true if `field` has been touched and if it is empty
+        * Returns true if `field` has been touched and if it is still empty
         * The $dirty boolean changes to true when the user has focused/lost
         * focus on the input field.
         */
@@ -124,15 +133,35 @@ export default {
 </script>
 
 <style lang="scss" module>
+$address-colour          : $color-text;
+$address-fontSize        : 'body-s';
+$address-weight-bold     : $font-weight-bold;
 
-.c-addressGroup {
-    margin: spacing(x2) 0 spacing(x4) 0;
+.c-address-label {
+    color: $address-colour;
+    @include font-size($address-fontSize);
+    font-weight: $address-weight-bold;
+    margin: spacing(x2) 0 spacing();
+}
+
+.c-address-group {
+    margin: spacing(x2) 0 spacing(x4);
     padding: 0;
     border: none;
-    @include font-size(body-s);
+    @include font-size($address-fontSize);
 
-    .c-addressGroup-formField {
+    .c-address-formField {
         margin-bottom: -17px;
+
+        &:focus-within,
+        &:active {
+            z-index: zIndex(high);
+            position: relative;
+        }
     }
+}
+
+.c-address-error {
+    margin-bottom: spacing(x5);
 }
 </style>
