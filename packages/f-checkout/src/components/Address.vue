@@ -1,10 +1,10 @@
 <template>
     <div data-test-id='address-component'>
-        <label
-            :class="$style['c-address-label']">
-            {{ $t('labels.addressGroup') }}
-        </label>
-        <fieldset :class="$style['c-address-group']">
+        <div :class="$style['c-address-group']">
+            <p
+                :class="$style['c-address-label']">
+                {{ $t('labels.addressGroup') }}
+            </p>
             <form-field
                 v-model="address.line1"
                 :class="$style['c-address-formField']"
@@ -30,7 +30,7 @@
                 data-test-id="input-address-line-2"
                 :label-text="$t('labels.line2')"
                 label-style="inline" />
-        </fieldset>
+        </div>
 
         <form-field
             v-model="address.city"
@@ -138,7 +138,6 @@ $address-fontSize        : 'body-s';
 $address-weight-bold     : $font-weight-bold;
 
 .c-address-label {
-    display: block;
     color: $address-colour;
     @include font-size($address-fontSize);
     font-weight: $address-weight-bold;
@@ -146,7 +145,7 @@ $address-weight-bold     : $font-weight-bold;
 }
 
 .c-address-group {
-    margin-bottom: spacing(x4);
+    margin: spacing(x2) 0 spacing(x4);
     padding: 0;
     border: none;
     @include font-size($address-fontSize);
