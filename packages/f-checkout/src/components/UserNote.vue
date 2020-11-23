@@ -33,8 +33,8 @@ export default {
 <style lang="scss" module>
 $userNote-textArea-borderRadius                  : 3px;
 $userNote-textArea-borderWidth                   : 1px;
-$userNote-textArea-borderColour                  : $grey--light;
-$userNote-textColour                             : $grey--darkest;
+$userNote-textArea-borderColour                  : $color-disabled;
+$userNote-textColour                             : $color-text;
 $userNote-textArea-bg                            : $color-bg--component;
 $userNote-textArea-height                        : 144px;
 
