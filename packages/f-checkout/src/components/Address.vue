@@ -12,12 +12,12 @@
                 data-test-id="input-address-line-1"
                 :label-text="$t('labels.line1')"
                 label-style="inline"
-                :has-error="!isAddressLine1Complete">
+                :has-error="isAddressLine1Empty">
                 <template #error>
                     <error-message
-                        v-if="!isAddressLine1Complete"
+                        v-if="isAddressLine1Empty"
                         :class="$style['c-address-error']"
-                        data-test-id="error-address-line1-incomplete">
+                        data-test-id="error-address-line1-empty">
                         {{ $t('validationMessages.addressLine1.requiredError') }}
                     </error-message>
                 </template>
@@ -37,11 +37,11 @@
             name="address-city"
             data-test-id="input-address-city"
             :label-text="$t('labels.city')"
-            :has-error="!isAddressCityComplete">
+            :has-error="isAddressCityEmpty">
             <template #error>
                 <error-message
-                    v-if="!isAddressCityComplete"
-                    data-test-id="error-address-city-incomplete">
+                    v-if="isAddressCityEmpty"
+                    data-test-id="error-address-city-empty">
                     {{ $t('validationMessages.city.requiredError') }}
                 </error-message>
             </template>
@@ -55,8 +55,8 @@
             :has-error="!isAddressPostcodeValid">
             <template #error>
                 <error-message
-                    v-if="!isAddressPostcodeComplete"
-                    data-test-id="error-address-postcode-incomplete">
+                    v-if="isAddressPostcodeEmpty"
+                    data-test-id="error-address-postcode-empty">
                     {{ $t('validationMessages.postcode.requiredError') }}
                 </error-message>
                 <error-message
@@ -99,23 +99,23 @@ export default {
         * focus on the input field.
         */
 
-        isAddressLine1Complete () {
-            return this.isFieldComplete('line1');
+        isAddressLine1Empty () {
+            return this.isFieldEmpty('line1');
         },
 
-        isAddressCityComplete () {
-            return this.isFieldComplete('city');
+        isAddressCityEmpty () {
+            return this.isFieldEmpty('city');
         },
 
-        isAddressPostcodeComplete () {
-            return this.isFieldComplete('postcode');
+        isAddressPostcodeEmpty () {
+            return this.isFieldEmpty('postcode');
         },
 
         /*
-        * Checks that postcode is a valid postcode and that the field is not complete.
+        * Checks that postcode is a valid postcode and that the field is not empty.
         */
         isAddressPostcodeValid () {
-            return (!this.$v.addressValidations.postcode.$dirty || this.$v.addressValidations.postcode.isValidPostcode) && this.isAddressPostcodeComplete;
+            return (!this.$v.addressValidations.postcode.$dirty || this.$v.addressValidations.postcode.isValidPostcode) && !this.isAddressPostcodeEmpty;
         }
     },
 
@@ -125,8 +125,8 @@ export default {
         * The $dirty boolean changes to true when the user has focused/lost
         * focus on the input field.
         */
-        isFieldComplete (field) {
-            return !(this.$v.addressValidations[field].$dirty && !this.$v.addressValidations[field].required);
+        isFieldEmpty (field) {
+            return this.$v.addressValidations[field].$dirty && !this.$v.addressValidations[field].required;
         }
     }
 };
