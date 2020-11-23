@@ -17,7 +17,7 @@
                     <error-message
                         v-if="!isAddressLine1Complete"
                         :class="$style['c-addressGroup-error']"
-                        data-test-id="error-address-line1-complete">
+                        data-test-id="error-address-line1-incomplete">
                         {{ $t('validationMessages.addressLine1.requiredError') }}
                     </error-message>
                 </template>
@@ -42,7 +42,7 @@
             <template #error>
                 <error-message
                     v-if="!isAddressCityComplete"
-                    data-test-id="error-address-city-complete">
+                    data-test-id="error-address-city-incomplete">
                     {{ $t('validationMessages.city.requiredError') }}
                 </error-message>
             </template>
@@ -57,7 +57,7 @@
             <template #error>
                 <error-message
                     v-if="!isAddressPostcodeComplete"
-                    data-test-id="error-address-postcode-complete">
+                    data-test-id="error-address-postcode-incomplete">
                     {{ $t('validationMessages.postcode.requiredError') }}
                 </error-message>
                 <error-message

@@ -45,8 +45,8 @@ exports[`Checkout when form submitted if serviceType set to \`collection\` shoul
                     </span></p>
 `;
 
-exports[`Checkout when form submitted if serviceType set to \`delivery\` should emit failure event and display error message when address line1 input field is empty 1`] = `
-<p data-test-id="error-address-line1-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+exports[`Checkout when form submitted if serviceType set to \`delivery\` should emit failure event and display error message when address line1 input field is incomplete 1`] = `
+<p data-test-id="error-address-line1-incomplete" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-34.000000, -18.000000)">
         <g transform="translate(32.000000, 16.000000)">
@@ -60,8 +60,8 @@ exports[`Checkout when form submitted if serviceType set to \`delivery\` should 
                 </span></p>
 `;
 
-exports[`Checkout when form submitted if serviceType set to \`delivery\` should emit failure event and display error message when city input field is empty 1`] = `
-<p data-test-id="error-address-city-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+exports[`Checkout when form submitted if serviceType set to \`delivery\` should emit failure event and display error message when city input field is incomplete 1`] = `
+<p data-test-id="error-address-city-incomplete" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-34.000000, -18.000000)">
         <g transform="translate(32.000000, 16.000000)">
@@ -105,8 +105,8 @@ exports[`Checkout when form submitted if serviceType set to \`delivery\` should 
             </span></p>
 `;
 
-exports[`Checkout when form submitted if serviceType set to \`delivery\` should emit failure event and display error message when postcode input field is empty 1`] = `
-<p data-test-id="error-address-postcode-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+exports[`Checkout when form submitted if serviceType set to \`delivery\` should emit failure event and display error message when postcode input field is incomplete 1`] = `
+<p data-test-id="error-address-postcode-incomplete" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-34.000000, -18.000000)">
         <g transform="translate(32.000000, 16.000000)">

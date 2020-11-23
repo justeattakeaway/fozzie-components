@@ -317,10 +317,10 @@ describe('Checkout', () => {
                 expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
             });
 
-            it('should emit failure event and display error message when address line1 input field is empty', async () => {
+            it('should emit failure event and display error message when address line1 input field is incomplete', async () => {
                 // Arrange && Act
                 await wrapper.vm.onFormSubmit();
-                const addressLine1EmptyMessage = wrapper.find('[data-test-id="error-address-line1-empty"]');
+                const addressLine1EmptyMessage = wrapper.find('[data-test-id="error-address-line1-incomplete"]');
 
                 // Assert
                 expect(addressLine1EmptyMessage).toMatchSnapshot();
@@ -328,10 +328,10 @@ describe('Checkout', () => {
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address');
             });
 
-            it('should emit failure event and display error message when city input field is empty', async () => {
+            it('should emit failure event and display error message when city input field is incomplete', async () => {
                 // Arrange && Act
                 await wrapper.vm.onFormSubmit();
-                const addressCityEmptyMessage = wrapper.find('[data-test-id="error-address-city-empty"]');
+                const addressCityEmptyMessage = wrapper.find('[data-test-id="error-address-city-incomplete"]');
 
                 // Assert
                 expect(addressCityEmptyMessage).toMatchSnapshot();
@@ -339,10 +339,10 @@ describe('Checkout', () => {
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address');
             });
 
-            it('should emit failure event and display error message when postcode input field is empty', async () => {
+            it('should emit failure event and display error message when postcode input field is incomplete', async () => {
                 // Arrange && Act
                 await wrapper.vm.onFormSubmit();
-                const addressPostcodeEmptyMessage = wrapper.find('[data-test-id="error-address-postcode-empty"]');
+                const addressPostcodeEmptyMessage = wrapper.find('[data-test-id="error-address-postcode-incomplete"]');
 
                 // Assert
                 expect(addressPostcodeEmptyMessage).toMatchSnapshot();
