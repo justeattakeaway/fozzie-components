@@ -16,7 +16,7 @@
                 <template #error>
                     <error-message
                         v-if="!isAddressLine1Complete"
-                        :class="$style['c-address-group-error']"
+                        :class="$style['c-address-error']"
                         data-test-id="error-address-line1-incomplete">
                         {{ $t('validationMessages.addressLine1.requiredError') }}
                     </error-message>
@@ -34,7 +34,6 @@
 
         <form-field
             v-model="address.city"
-            :class="$style['c-address-group-formField']"
             name="address-city"
             data-test-id="input-address-city"
             :label-text="$t('labels.city')"
@@ -134,15 +133,15 @@ export default {
 </script>
 
 <style lang="scss" module>
-$address-group-colour          : $color-text;
-$address-group-fontSize        : 'body-s';
-$address-group-weight-bold     : $font-weight-bold;
+$address-colour          : $color-text;
+$address-fontSize        : 'body-s';
+$address-weight-bold     : $font-weight-bold;
 
 .c-address-label {
     display: block;
-    color: $address-group-colour;
-    @include font-size($address-group-fontSize);
-    font-weight: $address-group-weight-bold;
+    color: $address-colour;
+    @include font-size($address-fontSize);
+    font-weight: $address-weight-bold;
     margin: spacing(x2) 0 spacing();
 }
 
@@ -150,7 +149,7 @@ $address-group-weight-bold     : $font-weight-bold;
     margin-bottom: spacing(x4);
     padding: 0;
     border: none;
-    @include font-size($address-group-fontSize);
+    @include font-size($address-fontSize);
 
     .c-address-group-formField {
         margin-bottom: -17px;
@@ -163,7 +162,7 @@ $address-group-weight-bold     : $font-weight-bold;
     }
 }
 
-.c-address-group-error {
+.c-address-error {
     margin-bottom: spacing(x5);
 }
 </style>
