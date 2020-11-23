@@ -48,7 +48,7 @@
     "@justeat/f-services": "1.0.0",
     "@justeat/f-vue-icons": "1.8.0",
     "axios": "0.19.2",
-    "lodash.debounce": "^4.0.8"
+    "lodash.debounce": "4.0.8"
   },
   "peerDependencies": {
     "vue": "2.x",
