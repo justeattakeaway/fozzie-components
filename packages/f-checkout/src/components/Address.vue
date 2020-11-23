@@ -5,33 +5,31 @@
                 :class="$style['c-address-label']">
                 {{ $t('labels.addressGroup') }}
             </legend>
-            <div>
-                <form-field
-                    v-model="address.line1"
-                    :class="$style['c-address-formField']"
-                    name="address-line-1"
-                    data-test-id="input-address-line-1"
-                    :label-text="$t('labels.line1')"
-                    label-style="inline"
-                    :has-error="isAddressLine1Empty">
-                    <template #error>
-                        <error-message
-                            v-if="isAddressLine1Empty"
-                            :class="$style['c-address-error']"
-                            data-test-id="error-address-line1-empty">
-                            {{ $t('validationMessages.addressLine1.requiredError') }}
-                        </error-message>
-                    </template>
-                </form-field>
+            <form-field
+                v-model="address.line1"
+                :class="$style['c-address-formField']"
+                name="address-line-1"
+                data-test-id="input-address-line-1"
+                :label-text="$t('labels.line1')"
+                label-style="inline"
+                :has-error="isAddressLine1Empty">
+                <template #error>
+                    <error-message
+                        v-if="isAddressLine1Empty"
+                        :class="$style['c-address-error']"
+                        data-test-id="error-address-line1-empty">
+                        {{ $t('validationMessages.addressLine1.requiredError') }}
+                    </error-message>
+                </template>
+            </form-field>
 
-                <form-field
-                    v-model="address.line2"
-                    :class="$style['c-address-formField']"
-                    name="address-line-2"
-                    data-test-id="input-address-line-2"
-                    :label-text="$t('labels.line2')"
-                    label-style="inline" />
-            </div>
+            <form-field
+                v-model="address.line2"
+                :class="$style['c-address-formField']"
+                name="address-line-2"
+                data-test-id="input-address-line-2"
+                :label-text="$t('labels.line2')"
+                label-style="inline" />
         </fieldset>
 
         <form-field
