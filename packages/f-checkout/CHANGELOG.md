@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.10.0
 ------------------------------
-*November 20, 2020*
+*November 23, 2020*
 
 ### Changed
 - Updated`f-card`, `f-button`, `f-form-field`, `f-error-message` versions.

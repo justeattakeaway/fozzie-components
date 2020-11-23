@@ -53,7 +53,7 @@
             name="address-postcode"
             data-test-id="input-address-postcode"
             :label-text="$t('labels.postcode')"
-            :has-error="!isAddressPostcodeFieldValid">
+            :has-error="!isAddressPostcodeValid">
             <template #error>
                 <error-message
                     v-if="isAddressPostcodeEmpty"
@@ -112,12 +112,11 @@ export default {
             return this.isFieldEmpty('postcode');
         },
 
+        /*
+        * Checks that postcode is a valid postcode and that the field is not empty.
+        */
         isAddressPostcodeValid () {
-            return !this.$v.addressValidations.postcode.$dirty || this.$v.addressValidations.postcode.isValidPostcode;
-        },
-
-        isAddressPostcodeFieldValid () {
-            return !this.isAddressPostcodeEmpty && this.isAddressPostcodeValid;
+            return (!this.$v.addressValidations.postcode.$dirty || this.$v.addressValidations.postcode.isValidPostcode) && !this.isAddressPostcodeEmpty;
         }
     },
 
@@ -158,7 +157,7 @@ $addressGroup-weight-bold     : $font-weight-bold;
 
         &:focus-within,
         &:active {
-            z-index: 9999;
+            z-index: zIndex(high);
             position: relative;
         }
     }
