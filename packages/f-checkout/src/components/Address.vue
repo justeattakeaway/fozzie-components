@@ -1,13 +1,13 @@
 <template>
     <div data-test-id='address-component'>
         <label
-            :class="$style['c-addressGroup-label']">
+            :class="$style['c-address-label']">
             {{ $t('labels.addressGroup') }}
         </label>
-        <fieldset :class="$style['c-addressGroup']">
+        <fieldset :class="$style['c-address-group']">
             <form-field
                 v-model="address.line1"
-                :class="$style['c-addressGroup-formField']"
+                :class="$style['c-address-group-formField']"
                 name="address-line-1"
                 data-test-id="input-address-line-1"
                 :label-text="$t('labels.line1')"
@@ -16,7 +16,7 @@
                 <template #error>
                     <error-message
                         v-if="!isAddressLine1Complete"
-                        :class="$style['c-addressGroup-error']"
+                        :class="$style['c-address-group-error']"
                         data-test-id="error-address-line1-incomplete">
                         {{ $t('validationMessages.addressLine1.requiredError') }}
                     </error-message>
@@ -25,7 +25,7 @@
 
             <form-field
                 v-model="address.line2"
-                :class="$style['c-addressGroup-formField']"
+                :class="$style['c-address-group-formField']"
                 name="address-line-2"
                 data-test-id="input-address-line-2"
                 :label-text="$t('labels.line2')"
@@ -34,7 +34,7 @@
 
         <form-field
             v-model="address.city"
-            :class="$style['c-addressGroup-formField']"
+            :class="$style['c-address-group-formField']"
             name="address-city"
             data-test-id="input-address-city"
             :label-text="$t('labels.city')"
@@ -122,7 +122,7 @@ export default {
 
     methods: {
         /*
-        * Returns true if `field` has been touched and if it is complete
+        * Returns true if `field` has been touched and if it is still empty
         * The $dirty boolean changes to true when the user has focused/lost
         * focus on the input field.
         */
@@ -134,25 +134,25 @@ export default {
 </script>
 
 <style lang="scss" module>
-$addressGroup-colour          : $color-text;
-$addressGroup-fontSize        : 'body-s';
-$addressGroup-weight-bold     : $font-weight-bold;
+$address-group-colour          : $color-text;
+$address-group-fontSize        : 'body-s';
+$address-group-weight-bold     : $font-weight-bold;
 
-.c-addressGroup-label {
+.c-address-label {
     display: block;
-    color: $addressGroup-colour;
-    @include font-size($addressGroup-fontSize);
-    font-weight: $addressGroup-weight-bold;
+    color: $address-group-colour;
+    @include font-size($address-group-fontSize);
+    font-weight: $address-group-weight-bold;
     margin: spacing(x2) 0 spacing();
 }
 
-.c-addressGroup {
+.c-address-group {
     margin-bottom: spacing(x4);
     padding: 0;
     border: none;
-    @include font-size($addressGroup-fontSize);
+    @include font-size($address-group-fontSize);
 
-    .c-addressGroup-formField {
+    .c-address-group-formField {
         margin-bottom: -17px;
 
         &:focus-within,
@@ -163,7 +163,7 @@ $addressGroup-weight-bold     : $font-weight-bold;
     }
 }
 
-.c-addressGroup-error {
+.c-address-group-error {
     margin-bottom: spacing(x5);
 }
 </style>

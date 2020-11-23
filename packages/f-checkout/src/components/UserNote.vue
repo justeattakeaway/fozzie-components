@@ -31,9 +31,9 @@ export default {
 </script>
 
 <style lang="scss" module>
-$userNote-textArea-borderRadius                  : 3px;
+$userNote-textArea-borderRadius                  : $border-radius;
 $userNote-textArea-borderWidth                   : 1px;
-$userNote-textArea-borderColour                  : $color-disabled;
+$userNote-textArea-borderColour                  : $grey--light;
 $userNote-textColour                             : $color-text;
 $userNote-textArea-bg                            : $color-bg--component;
 $userNote-textArea-height                        : 144px;
