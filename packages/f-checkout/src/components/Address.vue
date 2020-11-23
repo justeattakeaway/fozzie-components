@@ -7,7 +7,7 @@
         <fieldset :class="$style['c-address-group']">
             <form-field
                 v-model="address.line1"
-                :class="$style['c-address-group-formField']"
+                :class="$style['c-address-formField']"
                 name="address-line-1"
                 data-test-id="input-address-line-1"
                 :label-text="$t('labels.line1')"
@@ -25,7 +25,7 @@
 
             <form-field
                 v-model="address.line2"
-                :class="$style['c-address-group-formField']"
+                :class="$style['c-address-formField']"
                 name="address-line-2"
                 data-test-id="input-address-line-2"
                 :label-text="$t('labels.line2')"
@@ -151,7 +151,7 @@ $address-weight-bold     : $font-weight-bold;
     border: none;
     @include font-size($address-fontSize);
 
-    .c-address-group-formField {
+    .c-address-formField {
         margin-bottom: -17px;
 
         &:focus-within,
