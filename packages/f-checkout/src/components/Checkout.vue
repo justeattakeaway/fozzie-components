@@ -295,7 +295,7 @@ export default {
         async onFormSubmit () {
             /*
             * Check for is valid - no inline messages
-            * If form is valid try to call `CheckoutServiceApi`
+            * If form is valid try to call `postCheckout`
             * Catch and handle any errors
             */
             if (!this.isFormValid()) {

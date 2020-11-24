@@ -73,7 +73,7 @@ describe('Checkout', () => {
 
     describe('data ::', () => {
         describe('serviceType ::', () => {
-            it.each(VALID_CHECKOUT_METHODS)('should update the Selector `ordermethod` attribute to match serviceType=%p', async definedType => {
+            it.each(VALID_CHECKOUT_METHODS)('should update the selector `ordermethod` attribute to match serviceType=%p', async definedType => {
                 // Arrange
                 const propsData = {
                     checkoutUrl
@@ -209,7 +209,7 @@ describe('Checkout', () => {
                 });
             });
 
-            it('should emit success event when the mobile number field is populated correctly', async () => {
+            it('should emit success event when all the fields are populated correctly', async () => {
                 // Arrange
                 wrapper.find('[data-test-id="input-mobile-number"]').setValue(defaultState.customer.mobileNumber);
 
