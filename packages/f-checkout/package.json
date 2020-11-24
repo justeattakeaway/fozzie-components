@@ -52,11 +52,12 @@
     "@justeat/f-globalisation": "0.2.0",
     "@justeat/f-services": "1.4.0",
     "axios": "0.20.0",
-    "vuelidate": "0.7.6",
-    "axios-mock-adapter": "1.19.0"
+    "axios-mock-adapter": "1.19.0",
+    "vuelidate": "0.7.6"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.1.1"
+    "@justeat/browserslist-config-fozzie": ">=1.1.1",
+    "vuex": "3.5.1"
   },
   "devDependencies": {
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
@@ -64,6 +65,7 @@
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
-    "node-sass-magic-importer": "5.3.2"
+    "node-sass-magic-importer": "5.3.2",
+    "vuex": "3.5.1"
   }
 }
