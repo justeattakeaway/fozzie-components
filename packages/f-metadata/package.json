@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-metadata",
   "description": "Fozzie Metadata Component",
-  "version": "3.0.0-beta.4",
+  "version": "3.0.0-beta.5",
   "main": "src/index.js",
   "files": [
     "src"
