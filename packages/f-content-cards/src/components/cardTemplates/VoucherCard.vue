@@ -17,7 +17,7 @@
             <span
                 :class="voucherCopyClasses"
                 @transitionend="copyCooldownComplete">
-                <span :class="$style['c-contentCard-voucher-code-cooldown']" role="status">
+                <span data-test-id="contentCard-copied-label" :class="$style['c-contentCard-voucher-code-cooldown']" role="status">
                     <transition
                         :leave-to-class="$style['c-contentCard-voucher-copy-cooldownTick-leave-to']"
                         :leave-active-class="$style['c-contentCard-voucher-copy-cooldownTick-leave-active']">
@@ -30,12 +30,7 @@
                     </transition>
                     {{ voucherCodeCopiedLabel }}
                 </span>
-                <span>{{ voucherCopyCodeLabel }}</span>
-                <span role="status">{{ voucherCodeCopiedLabel }}
-                    <tick-icon
-                        v-if="inCooldown"
-                        :class="$style['c-contentCard-voucher-code-cooldown-tick']" />
-                </span>
+                <span data-test-id="contentCard-not-copied-label">{{ voucherCopyCodeLabel }}</span>
             </span>
         </button>
     </card-container>
@@ -192,7 +187,6 @@ export default {
     }
 
     .c-contentCard-voucher-code-cooldown-tick {
-        // background-color: $color-text--success;
         fill: $orange--aa;
         width: spacing(x2);
         height: spacing(x2);
