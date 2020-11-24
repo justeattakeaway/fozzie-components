@@ -71,6 +71,56 @@ describe('Checkout', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
+    describe('created :: ', () => {
+        afterEach(() => {
+            jest.clearAllMocks();
+        });
+
+        it('should register the `checkout` module if it doesn\'t exist in the store', () => {
+            // Arrange
+            const propsData = {
+                checkoutUrl
+            };
+
+            const store = new Vuex.Store({});
+
+            const registerModuleSpy = jest.spyOn(store, 'registerModule');
+
+            // Act
+            shallowMount(VueCheckout, {
+                store,
+                i18n,
+                localVue,
+                propsData
+            });
+
+            // Assert
+            expect(registerModuleSpy).toHaveBeenCalledWith('checkout', expect.any(Object));
+        });
+
+        it('should not register the `checkout` module if it already exists in the store', () => {
+            // Arrange
+            const propsData = {
+                checkoutUrl
+            };
+
+            const store = createStore();
+
+            const registerModuleSpy = jest.spyOn(store, 'registerModule');
+
+            // Act
+            shallowMount(VueCheckout, {
+                store,
+                i18n,
+                localVue,
+                propsData
+            });
+
+            // Assert
+            expect(registerModuleSpy).not.toHaveBeenCalled();
+        });
+    });
+
     describe('data ::', () => {
         describe('serviceType ::', () => {
             it.each(VALID_CHECKOUT_METHODS)('should update the selector `ordermethod` attribute to match serviceType=%p', async definedType => {
