@@ -3,12 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.11.0
+------------------------------
+*November 25, 2020*
+
+### Added
+- Vuex modules to make state management cleaner and clearer.
+
+
 v0.10.0
 ------------------------------
 *November 23, 2020*
 
 ### Changed
-- Updated`f-card`, `f-button`, `f-form-field`, `f-error-message` versions.
+- Updated `f-card`, `f-button`, `f-form-field`, `f-error-message` versions.
 - Updated font sizes, padding and layout to match PIE design.
 
 
