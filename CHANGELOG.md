@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.18.0
+------------------------------
+*November 24, 2020*
+
+### Added
+- Additional webdriver tests for f-header.
+- Allure reporter in the package.json script of each component folder (so it can be called more easily).
+- Video reporter in wdio.conf so errors are shown via recording in allure report.
+
 
 v2.18.0
 ------------------------------

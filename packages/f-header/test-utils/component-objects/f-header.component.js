@@ -4,6 +4,7 @@ const offersLinkDesktop = () => $('[data-test-id="offers-link-desktop"]');
 const deliveryEnquiryLink = () => $('[data-test-id="delivery-link"]');
 const helpLink = () => $('[data-test-id="help-link"]');
 const headerLogo = () => $('[data-test-id="header-logo"]');
+const navToggle = () => $('[data-test-id="nav-toggle"]');
 
 exports.clickLoginLink = () => {
     loginLink().click();
@@ -26,3 +27,6 @@ exports.clickHelpLink = () => {
 }
 
 exports.isLogoDisplayed = () => headerLogo().isDisplayed();
+exports.isNavIconVisible = () => navToggle().isDisplayedInViewport();
+exports.isHelpLinkDisplayed = () => helpLink().isDisplayedInViewport(); 
+exports.isLoginLinkDisplayed = () => loginLink().isDisplayedInViewport();

@@ -35,3 +35,4 @@ packages/**/src/components/tests/.jest-test-results.json
 # Test result folders
 allure-report
 allure-results
+_results_
