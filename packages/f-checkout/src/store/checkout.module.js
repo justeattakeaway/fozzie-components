@@ -46,10 +46,7 @@ export default {
 
         // eslint-disable-next-line no-unused-vars
         postCheckoutDetails: async ({ commit }, payload) => {
-            // TODO: deal with exceptions.
-            // debugger;
-
-            // try {
+            // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
             const {
                 url, tenant, data, timeout
             } = payload;
@@ -65,14 +62,6 @@ export default {
 
             // eslint-disable-next-line no-unused-vars
             const response = await axios.post(url, data, config);
-
-            // TODO: decide what to do with the response.
-            // console.log(response.data);
-            // } catch (err) {
-            //     // Handle Error Here
-            //     console.error(err);
-            //     throw err;
-            // }
         }
     },
 
