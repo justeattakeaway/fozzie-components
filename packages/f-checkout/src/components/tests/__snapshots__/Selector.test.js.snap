@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selector should show the delivery label when the \`serviceType\` is \`collection\` 1`] = `
+<label for="time-selection" data-test-id="fulfillment-time-label">
+  labels.collectionOrderMethod
+</label>
+`;
+
+exports[`Selector should show the delivery label when the \`serviceType\` is \`delivery\` 1`] = `
+<label for="time-selection" data-test-id="fulfillment-time-label">
+  labels.deliveryOrderMethod
+</label>
+`;

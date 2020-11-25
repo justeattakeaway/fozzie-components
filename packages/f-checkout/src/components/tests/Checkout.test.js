@@ -1,7 +1,7 @@
 import { shallowMount, mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
-import { VALID_CHECKOUT_METHODS, CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
+import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 import tenantConfigs from '../../tenants';
@@ -123,26 +123,6 @@ describe('Checkout', () => {
 
     describe('data ::', () => {
         describe('serviceType ::', () => {
-            it.each(VALID_CHECKOUT_METHODS)('should update the selector `ordermethod` attribute to match serviceType=%p', async definedType => {
-                // Arrange
-                const propsData = {
-                    checkoutUrl
-                };
-
-                // Act
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({ ...defaultState, serviceType: definedType }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                const selectorComponent = wrapper.find('[data-test-id="selector"]');
-
-                // Assert
-                expect(selectorComponent.attributes('ordermethod')).toEqual(definedType);
-            });
-
             it('should display the address block if set to `delivery`', async () => {
                 // Arrange
                 const propsData = {

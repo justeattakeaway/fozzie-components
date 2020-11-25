@@ -7,8 +7,9 @@
         ]">
         <label
             for="time-selection"
+            data-test-id="fulfillment-time-label"
             :class="$style['o-form-select-label']">
-            {{ orderMethod }} time
+            {{ orderMethod }}
         </label>
         <select
             id="time-selection"
@@ -27,23 +28,32 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import { CHECKOUT_METHOD_DELIVERY } from '../constants';
+
 export default {
-    props: {
-        times: {
-            type: Array,
-            default: () => []
-        },
-
-        orderMethod: {
-            type: String,
-            default: null
-        }
-    },
-
     data () {
         return {
             selectedTime: null
         };
+    },
+
+    computed: {
+        ...mapState('checkout', [
+            'fulfillment',
+            'serviceType'
+        ]),
+
+        // Adding a computed prop to simplify the nested watch.
+        times () {
+            return this.fulfillment.times;
+        },
+
+        orderMethod () {
+            return this.serviceType === CHECKOUT_METHOD_DELIVERY
+                ? this.$t('labels.deliveryOrderMethod')
+                : this.$t('labels.collectionOrderMethod');
+        }
     },
 
     watch: {

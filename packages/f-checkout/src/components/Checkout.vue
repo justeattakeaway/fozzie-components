@@ -39,14 +39,9 @@
 
                 <address-block
                     v-if="isCheckoutMethodDelivery"
-                    v-model="fulfillment.address"
-                    :address="fulfillment.address"
                     data-test-id="address-block" />
 
-                <form-selector
-                    :order-method="serviceType"
-                    :times="fulfillment.times"
-                    data-test-id="selector" />
+                <form-selector data-test-id="selector" />
 
                 <user-note data-test-id="user-note" />
 
