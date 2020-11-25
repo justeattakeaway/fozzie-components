@@ -6,7 +6,7 @@
                 {{ $t('labels.addressGroup') }}
             </legend>
             <form-field
-                v-model="address.line1"
+                v-model="fulfillment.address.line1"
                 :class="$style['c-address-formField']"
                 name="address-line-1"
                 data-test-id="input-address-line-1"
@@ -24,7 +24,7 @@
             </form-field>
 
             <form-field
-                v-model="address.line2"
+                v-model="fulfillment.address.line2"
                 :class="$style['c-address-formField']"
                 name="address-line-2"
                 data-test-id="input-address-line-2"
@@ -33,7 +33,7 @@
         </fieldset>
 
         <form-field
-            v-model="address.city"
+            v-model="fulfillment.address.city"
             name="address-city"
             data-test-id="input-address-city"
             :label-text="$t('labels.city')"
@@ -48,7 +48,7 @@
         </form-field>
 
         <form-field
-            v-model="address.postcode"
+            v-model="fulfillment.address.postcode"
             name="address-postcode"
             data-test-id="input-address-postcode"
             :label-text="$t('labels.postcode')"
@@ -74,6 +74,7 @@ import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
+import { mapState } from 'vuex';
 
 export default {
     components: { FormField, ErrorMessage },
@@ -84,14 +85,10 @@ export default {
     */
     inject: ['$v'],
 
-    props: {
-        address: {
-            type: Object,
-            required: true
-        }
-    },
-
     computed: {
+        ...mapState('checkout', [
+            'fulfillment'
+        ]),
         /*
         * Validation methods return true if the validation conditions
         * have not been met and the field has been `touched` by a user.
