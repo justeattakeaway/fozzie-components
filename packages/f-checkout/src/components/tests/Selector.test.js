@@ -85,7 +85,7 @@ describe('Selector', () => {
         expect(selectorLabel.html()).toMatchSnapshot();
     });
 
-    it('should show the delivery label when the `serviceType` is `collection`', async () => {
+    it('should show the collection label when the `serviceType` is `collection`', async () => {
         // Arrange & Act
         const wrapper = shallowMount(Selector, {
             store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
