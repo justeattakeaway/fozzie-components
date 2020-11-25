@@ -72,38 +72,48 @@ describe('contentCards › VoucherCard', () => {
             // Assert
             expect(wrapper.vm.copyVoucherCode).toBeDefined();
         });
+
         describe('when invoked', () => {
             beforeEach(() => {
                 jest.useFakeTimers();
             });
+
             it('should make a call to `copy` with the correct params', () => {
                 // Act
                 wrapper.vm.copyVoucherCode();
+
                 // Assert
                 expect(copyToClipboard).toHaveBeenCalledWith(code);
             });
+
             it('should call the injected `emitVoucherCodeClick`', () => {
                 // Act
                 wrapper.vm.copyVoucherCode();
+
                 // Assert
                 expect(provide.emitVoucherCodeClick).toHaveBeenCalledWith(card.url);
             });
+
             it('should display the correct label while in cool down', async () => {
                 // Act
                 wrapper.vm.copyVoucherCode();
                 await wrapper.vm.$nextTick();
                 const copiedLabelSpan = wrapper.find('[data-test-id="contentCard-copied-label"]');
+
                 // Assert
                 expect(copiedLabelSpan.text()).toEqual(copy.codeCopiedLabel);
             });
+
             it('should display the correct label when cool down ends after 3 seconds', async () => {
                 // Act
                 wrapper.vm.copyVoucherCode();
                 jest.advanceTimersByTime(3000);
+
                 // run this to simulate transition
                 wrapper.vm.copyCooldownComplete();
                 await wrapper.vm.$nextTick();
                 const copiedLabelSpan = wrapper.find('[data-test-id="contentCard-not-copied-label"]');
+
                 // Assert
                 expect(copiedLabelSpan.text()).toEqual(copy.copyCodeLabel);
             });

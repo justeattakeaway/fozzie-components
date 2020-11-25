@@ -17,7 +17,10 @@
             <span
                 :class="voucherCopyClasses"
                 @transitionend="copyCooldownComplete">
-                <span data-test-id="contentCard-copied-label" :class="$style['c-contentCard-voucher-code-cooldown']" role="status">
+                <span
+                    data-test-id="contentCard-copied-label"
+                    :class="$style['c-contentCard-voucher-code-cooldown']"
+                    role="status">
                     <transition
                         :leave-to-class="$style['c-contentCard-voucher-copy-cooldownTick-leave-to']"
                         :leave-active-class="$style['c-contentCard-voucher-copy-cooldownTick-leave-active']">
@@ -71,10 +74,18 @@ export default {
     },
 
     computed: {
+        /**
+         * Checks if the card type is anniversaryCard1
+         * @returns Boolean
+         */
         isAnniversaryCard () {
             return this.cardType === 'anniversaryCard1';
         },
 
+        /**
+         * Return the voucher label based on the copy state
+         * @returns String
+         */
         voucherCopyCodeLabel () {
             switch (this.copyState) {
                 case COPY_STATE_AVAILABLE:
@@ -86,10 +97,18 @@ export default {
             }
         },
 
+        /**
+         * Return the voucher copied label based on copy state
+         * @returns String
+         */
         voucherCodeCopiedLabel () {
             return this.copyState === COPY_STATE_COOLDOWN ? this.copy.codeCopiedLabel : '';
         },
 
+        /**
+         * Return the voucher copy classes based on copy state
+         * @returns {*[]}
+         */
         voucherCopyClasses () {
             return [
                 this.$style['c-contentCard-voucher-copy'],
@@ -101,6 +120,11 @@ export default {
                 ] : [])
             ];
         },
+
+        /**
+         * Checks to see if the copy state is in cool down
+         * @returns {boolean}
+         */
         inCooldown () {
             return this.copyState === COPY_STATE_COOLDOWN;
         }
@@ -114,6 +138,10 @@ export default {
     ],
 
     methods: {
+        /**
+         * Fires copy to clipboard, if in cool down clears the timeout, sets copy state
+         * creates a cool down timeout and emit voucher code click
+         */
         copyVoucherCode () {
             copyToClipboard(this.code);
 
@@ -126,10 +154,16 @@ export default {
             this.emitVoucherCodeClick(this.url);
         },
 
+        /**
+         * Sets the copy state to transition timeout
+         */
         copyCooldownEnded () {
             this.copyState = COPY_STATE_TRANSITIONOUT;
         },
 
+        /**
+         * Sets the copy state to state available
+         */
         copyCooldownComplete () {
             this.copyState = COPY_STATE_AVAILABLE;
         }
