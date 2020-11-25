@@ -72,22 +72,4 @@ $banner-bgColour-legacy : #cd381f;
     margin-top: spacing(x0.5);
 }
 
-.c-restaurantCard-banner-legacy {
-    background: $banner-bgColour-legacy;
-    transform: skew(-20deg);
-    border-radius: $border-radius;
-    color: white;
-}
-
-.c-restaurantCard-banner-content-legacy {
-    transform: skew(20deg);
-    font-weight: normal;
-}
-
-.c-restaurantCard-footer-legacy {
-    @include font-size(body-s);
-    font-weight: normal;
-    margin-bottom: 0;
-}
-
 </style>
