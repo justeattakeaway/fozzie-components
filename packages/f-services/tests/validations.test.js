@@ -65,7 +65,7 @@ describe('isValidPhoneNumber', () => {
         ['not even trying', false],
         ['', false],
         [null, false]
-    ])('should validate %s as %s', (number, expected) => {
+    ])('should validate %s as %s with `en-GB` locale', (number, expected) => {
         // Act
         const actual = isValidPhoneNumber(number, 'en-GB');
 
