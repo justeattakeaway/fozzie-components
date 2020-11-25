@@ -34,8 +34,8 @@ const defaultState = {
 };
 
 const defaultActions = {
-    getCheckoutDetails: jest.fn(),
-    postCheckoutDetails: jest.fn()
+    getCheckout: jest.fn(),
+    postCheckout: jest.fn()
 };
 
 const i18n = {
@@ -252,7 +252,7 @@ describe('Checkout', () => {
                 };
 
                 wrapper = mount(VueCheckout, {
-                    store: createStore(state, { ...defaultActions, getCheckoutDetails: jest.fn(async () => Promise.resolve()), postCheckoutDetails: jest.fn(async () => Promise.resolve()) }),
+                    store: createStore(state, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()), postCheckout: jest.fn(async () => Promise.resolve()) }),
                     i18n,
                     localVue,
                     propsData
@@ -342,7 +342,7 @@ describe('Checkout', () => {
                 };
 
                 wrapper = mount(VueCheckout, {
-                    store: createStore(state, { ...defaultActions, getCheckoutDetails: jest.fn(async () => Promise.resolve()), postCheckoutDetails: jest.fn(async () => Promise.resolve()) }),
+                    store: createStore(state, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()), postCheckout: jest.fn(async () => Promise.resolve()) }),
                     i18n,
                     localVue,
                     propsData
@@ -445,7 +445,7 @@ describe('Checkout', () => {
 
             beforeEach(() => {
                 wrapper = mount(VueCheckout, {
-                    store: createStore(defaultState, { ...defaultActions, getCheckoutDetails: jest.fn(async () => Promise.reject()) }),
+                    store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.reject()) }),
                     i18n,
                     localVue,
                     propsData
@@ -462,7 +462,7 @@ describe('Checkout', () => {
 
             beforeEach(() => {
                 wrapper = mount(VueCheckout, {
-                    store: createStore(defaultState, { ...defaultActions, getCheckoutDetails: jest.fn(async () => Promise.resolve()) }),
+                    store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()) }),
                     i18n,
                     localVue,
                     propsData

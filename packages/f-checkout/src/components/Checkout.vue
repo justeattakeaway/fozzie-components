@@ -203,12 +203,12 @@ export default {
 
     watch: {
         async checkoutUrl () {
-            await this.getCheckout();
+            await this.loadCheckout();
         }
     },
 
     async mounted () {
-        await this.getCheckout();
+        await this.loadCheckout();
     },
 
     created () {
@@ -229,11 +229,15 @@ export default {
 
     methods: {
         ...mapActions('checkout', [
-            'getCheckoutDetails',
-            'postCheckoutDetails'
+            'getCheckout',
+            'postCheckout'
         ]),
 
-        async postCheckout () {
+        /**
+         * Submit the checkout details while emitting events to communicate its success or failure.
+         *
+         */
+        async submitCheckout () {
             try {
                 const checkoutData = {
                     mobileNumber: this.customer.mobileNumber
@@ -243,7 +247,7 @@ export default {
                     checkoutData.address = this.fulfillment.address;
                 }
 
-                await this.postCheckoutDetails({
+                await this.postCheckout({
                     url: 'myPostUrl',
                     tenant: this.tenant,
                     data: checkoutData,
@@ -256,9 +260,13 @@ export default {
             }
         },
 
-        async getCheckout () {
+        /**
+         * Load the checkout details while emitting events to communicate its success or failure.
+         *
+         */
+        async loadCheckout () {
             try {
-                await this.getCheckoutDetails({
+                await this.getCheckout({
                     url: this.checkoutUrl,
                     tenant: this.tenant,
                     timeout: this.getCheckoutTimeout
@@ -295,7 +303,7 @@ export default {
         async onFormSubmit () {
             /*
             * Check for is valid - no inline messages
-            * If form is valid try to call `postCheckout`
+            * If form is valid try to call `submitCheckout`
             * Catch and handle any errors
             */
             if (!this.isFormValid()) {
@@ -307,7 +315,7 @@ export default {
             this.shouldDisableCheckoutButton = true;
 
             try {
-                await this.postCheckout();
+                await this.submitCheckout();
             } catch (error) {
                 this.handleErrorState(error);
             } finally {

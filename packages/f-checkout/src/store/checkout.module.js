@@ -26,7 +26,13 @@ export default {
     }),
 
     actions: {
-        getCheckoutDetails: async ({ commit }, payload) => {
+        /**
+         * Get the checkout details from the backend and update the state.
+         *
+         * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getCheckout: async ({ commit }, payload) => {
             // TODO: deal with exceptions.
             const { url, tenant, timeout } = payload;
 
@@ -41,11 +47,17 @@ export default {
 
             const { data } = await axios.get(url, config);
 
-            commit('setCheckoutDetails', data);
+            commit('updateState', data);
         },
 
+        /**
+         * Post the checkout details to the backend.
+         *
+         * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
         // eslint-disable-next-line no-unused-vars
-        postCheckoutDetails: async ({ commit }, payload) => {
+        postCheckout: async ({ commit }, payload) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
             const {
                 url, tenant, data, timeout
@@ -66,7 +78,7 @@ export default {
     },
 
     mutations: {
-        setCheckoutDetails: (state, {
+        updateState: (state, {
             id,
             serviceType,
             customer,
