@@ -1,6 +1,6 @@
 import validations from '../src/validations';
 
-const { getFormValidationState, isValidPostcode } = validations;
+const { getFormValidationState, isValidPostcode, isValidPhoneNumber } = validations;
 
 describe('getFormValidationState', () => {
     it('should separate valid and invalid fields', () => {
@@ -49,6 +49,25 @@ describe('isValidPostcode', () => {
     ])('should validate %s as %s', (postcode, expected) => {
         // Act
         const actual = isValidPostcode(postcode);
+
+        // Assert
+        expect(actual).toBe(expected);
+    });
+});
+
+describe('isValidPhoneNumber', () => {
+    it.each([
+        ['0711111111', true],
+        ['+447111111111', true],
+        ['0711 1111 111', false],
+        ['07111', false],
+        ['07!!!!', false],
+        ['not even trying', false],
+        ['', false],
+        [null, false]
+    ])('should validate %s as %s with `en-GB` locale', (number, expected) => {
+        // Act
+        const actual = isValidPhoneNumber(number, 'en-GB');
 
         // Assert
         expect(actual).toBe(expected);
