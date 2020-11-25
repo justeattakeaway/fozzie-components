@@ -1,6 +1,6 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import copyToClipboard from 'copy-to-clipboard';
-import VoucherCard from '../VoucherCard.vue';
+import VoucherCard from '../voucherCard/VoucherCard.vue';
 
 const localVue = createLocalVue();
 

@@ -1,6 +1,6 @@
 import { text, withKnobs } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import VoucherCard from '../src/components/cardTemplates/VoucherCard.vue';
+import VoucherCard from '../src/components/cardTemplates/voucherCard/VoucherCard.vue';
 
 export default {
     title: 'Components/Atoms/f-content-cards',

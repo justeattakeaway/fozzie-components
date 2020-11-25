@@ -42,12 +42,9 @@
 <script>
 import copyToClipboard from 'copy-to-clipboard';
 import { TickIcon } from '@justeat/f-vue-icons';
-import CardContainer from './CardContainer.vue';
-import { normaliseCardType } from './utils';
-
-const COPY_STATE_AVAILABLE = 'available';
-const COPY_STATE_COOLDOWN = 'cooldown';
-const COPY_STATE_TRANSITIONOUT = 'transitionout';
+import CardContainer from '../CardContainer.vue';
+import { normaliseCardType } from '../utils';
+import { COPY_STATE_AVAILABLE, COPY_STATE_COOLDOWN, COPY_STATE_TRANSITIONOUT } from './service.types';
 
 export default {
     components: {
