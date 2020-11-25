@@ -44,13 +44,14 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import debounce from 'lodash.debounce';
 import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import FormSearchField from './formElements/FormSearchField.vue';
 import FormSearchButton from './formElements/FormSearchButton.vue';
 import FormSearchSuggestions from './formElements/FormSearchSuggestions.vue';
-import store from '../store/searchbox.module';
+import searchboxModule from '../store/searchbox.module';
 import { getLastLocation } from '../utils/helpers';
 import { search } from '../services/search.services';
 import {
@@ -109,12 +110,17 @@ export default {
             shouldSetCookies,
             onSubmit,
             shouldAutoPopulateAddress,
-            suggestionFormat,
-            store
+            suggestionFormat
         };
     },
 
     computed: {
+        ...mapState('searchbox', [
+            'suggestions',
+            'errors',
+            'isValid'
+        ]),
+
         /**
          * Get stored `suggestions` from state if they exist. To minimize multiple types of
          * suggestion types i.e at an API level; we should try and stick to this single suggestion value
@@ -122,7 +128,7 @@ export default {
          *
          * */
         searchSuggestion () {
-            return this.store.state.suggestions;
+            return this.suggestions;
         },
         /**
          * Return a tenant specific error message from the config.
@@ -130,7 +136,7 @@ export default {
          * @returns {*}
          */
         errorMessage () {
-            const messageKey = this.store.state.errors.length && this.store.state.errors[0];
+            const messageKey = this.errors.length && this.errors[0];
 
             if (!messageKey) return false;
 
@@ -146,7 +152,7 @@ export default {
         hasLastSavedAddress () {
             return this.lastAddress
                     && this.address === this.lastAddress
-                    && this.store.state.isValid === true;
+                    && this.isValid === true;
         }
     },
 
@@ -164,9 +170,9 @@ export default {
                 const errors = !!preSearchValidation && this.service.isValid(value, preSearchValidation);
 
                 if (Array.isArray(errors)) {
-                    this.store.dispatch('setSuggestions', Promise.reject(new Error(errors[0])));
+                    this.setSuggestions(Promise.reject(new Error(errors[0])));
                 } else {
-                    this.store.dispatch('setSuggestions', this.service.search(value));
+                    this.setSuggestions(this.service.search(value));
                 }
             },
             500,
@@ -184,6 +190,13 @@ export default {
     },
 
     methods: {
+        ...mapActions('searchbox', [
+            'setSuggestions',
+            'setIsValid',
+            'setErrors',
+            'setIsDirty'
+        ]),
+
         /**
          * Main submit handler that's responsible for submitting searches: for example to SERP.
          *
@@ -194,20 +207,22 @@ export default {
          * @param e
          */
         submit (e) {
-            this.store.dispatch('setIsValid', this.service.isValid(this.address));
+            this.setIsValid(this.service.isValid(this.address));
 
             if (this.hasLastSavedAddress) {
                 return this.searchPreviouslySavedAddress(e);
             }
 
-            if (this.store.state.isValid === true) {
-                this.store.dispatch('setErrors', []);
+            debugger;
+
+            if (this.isValid === true) {
+                this.setErrors([]);
                 processLocationCookie(this.shouldSetCookies, this.address);
                 this.clearAddressValue(this.shouldClearAddressOnValidSubmit);
                 onCustomSubmit(this.onSubmit, this.address, e);
             } else {
                 e.preventDefault();
-                this.store.dispatch('setErrors', this.store.state.isValid);
+                this.setErrors(this.isValid);
             }
 
             return true;
@@ -241,8 +256,14 @@ export default {
         clearAddressValue (shouldClearAddressOnValidSubmit) {
             if (shouldClearAddressOnValidSubmit) {
                 this.address = '';
-                this.store.dispatch('setIsDirty', false);
+                this.setIsDirty(false);
             }
+        }
+    },
+
+    created () {
+        if (!this.$store.hasModule('searchbox')) {
+            this.$store.registerModule('searchbox', searchboxModule);
         }
     }
 };
