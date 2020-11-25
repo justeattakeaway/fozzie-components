@@ -1,30 +1,21 @@
 <template>
     <card-container
         :card="card"
-        :banner-before-description="bannerBeforeDescription"
-        :bold-title="!usesLegacyStyles"
+        :banner-before-description="true"
+        :bold-title="true"
     >
         <template v-slot:banner>
             <span
-                :class="['c-restaurantCard-banner', $style['c-restaurantCard-banner'], {
-                    [$style['c-restaurantCard-banner-legacy']]: usesLegacyStyles
-                }]">
+                :class="['c-restaurantCard-banner', $style['c-restaurantCard-banner']]">
                 <span
-                    :class="['c-restaurantCard-banner-content', $style['c-restaurantCard-banner-content'], {
-                        [$style['c-restaurantCard-banner-content-legacy']]: usesLegacyStyles
-                    }]"
+                    :class="['c-restaurantCard-banner-content', $style['c-restaurantCard-banner-content']]"
                     data-test-id="FirstTimeCustomerCard-Banner">
                     {{ card.banner }}
                 </span>
             </span>
-            <template v-if="!bannerBeforeDescription">
-                for first time user
-            </template>
         </template>
         <p
-            :class="['c-restaurantCard-footer', $style['c-restaurantCard-footer'], {
-                [$style['c-restaurantCard-footer-legacy']]: usesLegacyStyles
-            }]">
+            :class="['c-restaurantCard-footer', $style['c-restaurantCard-footer']]">
             {{ card.footer }}
         </p>
     </card-container>
@@ -52,16 +43,6 @@ export default {
         tenant: {
             type: String,
             default: 'uk'
-        }
-    },
-
-    computed: {
-        bannerBeforeDescription () {
-            return this.tenant === 'uk';
-        },
-
-        usesLegacyStyles () {
-            return this.tenant !== 'uk';
         }
     }
 };
