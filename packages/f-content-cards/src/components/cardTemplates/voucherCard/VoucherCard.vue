@@ -3,7 +3,9 @@
         :card="card"
         :cta-enabled="false"
         :isolate-hero-image="isAnniversaryCard"
-        :embolden-text="isAnniversaryCard">
+        :embolden-text="isAnniversaryCard"
+        :bold-title="true"
+    >
         <button
             type="button"
             :class="$style['c-contentCard-voucher']"
