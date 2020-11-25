@@ -8,13 +8,13 @@
     >
         <span
             v-if="type === 'Promotion_Card_1'"
-            :class="[$style['c-contentCard-link-promo-1']]"
+            :class="[$style['c-contentCard-linkPromo1']]"
             :data-test-id="testIdForPromoCardType(1)">
             {{ ctaText }}
         </span>
         <span
             v-if="type === 'Promotion_Card_2'"
-            :class="[$style['c-contentCard-link-promo-2']]"
+            :class="[$style['c-contentCard-linkPromo2']]"
             :data-test-id="testIdForPromoCardType(2)">
             {{ ctaText }}
         </span>
@@ -76,7 +76,7 @@ export default {
     $btn-secondary-textColor--hover     : $blue;
     $btn-secondary-textColor--active    : $blue;
 
-    .c-contentCard-link-promo-2 {
+    .c-contentCard-linkPromo2 {
         font-weight: $font-weight-bold;
         text-decoration: none;
         @include font-size(body-l);
@@ -84,7 +84,7 @@ export default {
         display: block;
     }
 
-    .c-contentCard-link-promo-1 {
+    .c-contentCard-linkPromo1 {
         background-color: $btn-secondary-bgColor;
 
         border: 1px solid transparent;
