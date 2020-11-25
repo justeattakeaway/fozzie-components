@@ -7,6 +7,7 @@ $theme: 'jet' !default;
 @import '~@justeat/f-utils/src/scss/mixins/index';
 @import '~include-media/dist/include-media'; // Cleaner media query declarations – http://include-media.com
 @import '~@justeat/fozzie/src/scss/settings/variables';
+@import '~@justeat/fozzie/src/scss/components/optional/badges';
 @import '~@justeat/fozzie/src/scss/base/reset';
 @import '~@justeat/fozzie-colour-palette/src/scss';
 
