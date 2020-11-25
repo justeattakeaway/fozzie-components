@@ -18,7 +18,7 @@
             data-test-id="fulfillment-time"
             @change="selectionChanged">
             <option
-                v-for="(time, index) in times"
+                v-for="(time, index) in fulfillment.times"
                 :key="index"
                 :value="time.from">
                 {{ time.label.text }}
@@ -44,11 +44,6 @@ export default {
             'serviceType'
         ]),
 
-        // Adding a computed prop to simplify the nested watch.
-        times () {
-            return this.fulfillment.times;
-        },
-
         orderMethod () {
             return this.serviceType === CHECKOUT_METHOD_DELIVERY
                 ? this.$t('labels.deliveryOrderMethod')
@@ -57,7 +52,8 @@ export default {
     },
 
     watch: {
-        times (newValue) {
+        'fulfillment.times' (newValue) {
+            debugger;
             const selected = newValue.find(t => t.selected);
             if (selected) {
                 this.selectedTime = selected.from;
@@ -67,8 +63,8 @@ export default {
 
     methods: {
         selectionChanged () {
-            this.times.forEach(el => { el.selected = false; });
-            const newSelected = this.times.find(t => t.from === this.selectedTime);
+            this.fulfillment.times.forEach(el => { el.selected = false; });
+            const newSelected = this.fulfillment.times.find(t => t.from === this.selectedTime);
             if (newSelected) {
                 newSelected.selected = true;
             }
