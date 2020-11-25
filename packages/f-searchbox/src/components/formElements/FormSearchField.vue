@@ -22,33 +22,58 @@
                     [$style['c-search-input']]: true,
                     [$style['is-notEmpty']]: address
                 }"
-                @input="$emit('input', $event.target.value)">
+                @input="$emit('input', $event.target.value)"
+                @focus="$emit('focus', true)"
+                @blur="$emit('blur', false)">
 
             <span :class="$style['c-search-placeholder']">{{ copy.fieldPlaceholder }}</span>
         </label>
+
+        <form-search-street-number
+            v-if="shouldDisplayStreetNumberField"
+            v-model="streetNumber" />
     </div>
 </template>
 
 <script>
+import FormSearchStreetNumber from '../formElements/FormSearchStreetNumber.vue';
+
 export default {
+    components: {
+        FormSearchStreetNumber
+    },
     props: {
         errorMessage: {
             type: [Boolean, String],
             default: false
         },
+
         address: {
             type: String,
             default: ''
         },
+
         isCompressed: {
             type: Boolean,
             default: true
         },
+
         copy: {
             type: Object,
             default:  () => ({})
         },
+
         shouldDisplayCustomAutocomplete: {
+            type: Boolean,
+            default: false
+        },
+
+        streetNumber: {
+            type: String,
+            default: ''
+        },
+
+        shouldDisplayStreetNumberField: {
             type: Boolean,
             default: false
         }

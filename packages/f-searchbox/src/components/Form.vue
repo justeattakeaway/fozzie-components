@@ -1,7 +1,7 @@
 <template>
     <form
         ref="form"
-        :action="config.formUrl"
+        :action="formUrl"
         :class="$style['c-search']"
         method="post"
         @submit.stop="submit">
@@ -21,7 +21,11 @@
                 :address="address"
                 :should-display-custom-autocomplete="service.isAutocompleteEnabled"
                 :copy="copy"
-                :is-compressed="isCompressed" />
+                :street-number="streetNumber"
+                :should-display-street-number-field="shouldDisplayStreetNumberField"
+                :is-compressed="isCompressed"
+                @focus="onFormFocusBlurEvent"
+                @blur="onFormFocusBlurEvent"/>
 
             <form-search-button
                 :copy="copy"
@@ -29,10 +33,11 @@
         </div>
 
         <form-search-suggestions
-            v-if="searchSuggestion"
+            v-if="shouldDisplaySuggestions"
             aria-live="assertive"
             :suggestion-format="suggestionFormat"
-            :suggestions="searchSuggestion" />
+            :suggestions="searchSuggestion"
+            @selected-suggestion="onSelectedSuggestion"/>
 
         <error-message
             v-if="errorMessage"
@@ -52,10 +57,11 @@ import FormSearchButton from './formElements/FormSearchButton.vue';
 import FormSearchSuggestions from './formElements/FormSearchSuggestions.vue';
 import store from '../store/searchbox.module';
 import { getLastLocation } from '../utils/helpers';
-import { search } from '../services/search.services';
+import { search, selectedSuggestion } from '../services/search.services';
 import {
     processLocationCookie,
-    onCustomSubmit
+    onCustomSubmit,
+    generateFormQueryUrl
 } from '../services/general.services';
 
 export default {
@@ -94,7 +100,8 @@ export default {
             shouldSetCookies,
             onSubmit,
             shouldAutoPopulateAddress,
-            suggestionFormat
+            suggestionFormat,
+            requiredFields
         } = this.config;
 
         return {
@@ -110,6 +117,9 @@ export default {
             onSubmit,
             shouldAutoPopulateAddress,
             suggestionFormat,
+            requiredFields,
+            streetNumber: '',
+            isInputFocus: false,
             store
         };
     },
@@ -124,6 +134,23 @@ export default {
         searchSuggestion () {
             return this.store.state.suggestions;
         },
+
+        /**
+         * Display API suggestions in component: `form-search-suggestions`:
+         *
+         * 1. Service layer should contain `autocomplete`.
+         * 2. The form should have focus.
+         * 3. There should be suggestions.
+         * 4. There's no errors (otherwise the suggestions cover the errors) OR the input has been touched.
+         *
+         * */
+        shouldDisplaySuggestions () {
+            return this.service.isAutocompleteEnabled
+                    && this.isInputFocus
+                    && !!this.store.state.suggestions.length
+                    && !this.store.state.errors.length;
+        },
+
         /**
          * Return a tenant specific error message from the config.
          *
@@ -147,6 +174,16 @@ export default {
             return this.lastAddress
                     && this.address === this.lastAddress
                     && this.store.state.isValid === true;
+        },
+
+        /**
+         * In some instances (ES & IT tenants) we require a street number to be provided if there's
+         * not enough of the address information supplied by the user, in which case we display another input field
+         * for street numbers to be entered in. Component: `FormSearchStreetNumber`.
+         *
+         * */
+        shouldDisplayStreetNumberField () {
+            return this.store.state.streetNumberRequired;
         }
     },
 
@@ -163,7 +200,9 @@ export default {
                 const { preSearchValidation } = this.service.options;
                 const errors = !!preSearchValidation && this.service.isValid(value, preSearchValidation);
 
+                debugger;
                 if (Array.isArray(errors)) {
+                    this.store.dispatch('setIsDirty', true);
                     this.store.dispatch('setSuggestions', Promise.reject(new Error(errors[0])));
                 } else {
                     this.store.dispatch('setSuggestions', this.service.search(value));
@@ -181,6 +220,8 @@ export default {
         if (this.lastAddress) {
             this.address = this.shouldAutoPopulateAddress ? this.lastAddress : '';
         }
+
+        this.formUrl = generateFormQueryUrl(this.queryString, this.formUrl);
     },
 
     methods: {
@@ -193,24 +234,63 @@ export default {
          *
          * @param e
          */
-        submit (e) {
+        async submit (e) {
             this.store.dispatch('setIsValid', this.service.isValid(this.address));
 
             if (this.hasLastSavedAddress) {
                 return this.searchPreviouslySavedAddress(e);
             }
 
+            this.store.dispatch('setIsDirty', true);
+
             if (this.store.state.isValid === true) {
                 this.store.dispatch('setErrors', []);
                 processLocationCookie(this.shouldSetCookies, this.address);
                 this.clearAddressValue(this.shouldClearAddressOnValidSubmit);
                 onCustomSubmit(this.onSubmit, this.address, e);
+
+                if (this.service.isAutocompleteEnabled) {
+                    e.preventDefault();
+
+                    const info = await this.onSelectedSuggestion(0);
+
+                    // if the address is still missing fields, return here
+                    if (!info) {
+                        return false;
+                    }
+
+                    // TODO process the je last location cookie...
+                }
             } else {
                 e.preventDefault();
                 this.store.dispatch('setErrors', this.store.state.isValid);
             }
 
             return true;
+        },
+
+        onSelectedSuggestion (index) {
+            selectedSuggestion(
+                this.service,
+                this.store.state.suggestions,
+                this.requiredFields,
+                this.streetNumber,
+                index
+            ).then((value) => {
+                debugger;
+
+                if (value && value.errors) {
+                    this.store.dispatch('setErrors', value.errors);
+                }
+
+                if (value && value.requiresStreetNumber) {
+                    this.store.dispatch('setStreetNumberRequired', value.requiresStreetNumber);
+                }
+            });
+
+            // TODO pass through suggestion index for keyboard behaviour...
+            this.address = this.suggestionFormat(this.store.state.suggestions[index]);
+
         },
 
         /**
@@ -243,6 +323,16 @@ export default {
                 this.address = '';
                 this.store.dispatch('setIsDirty', false);
             }
+        },
+
+        onFormFocusBlurEvent (value) {
+            if (value) {
+                this.isInputFocus = value;
+            } else {
+                setTimeout(() => {
+                    this.isInputFocus = value;
+                }, 500);
+            }
         }
     }
 };
@@ -268,5 +358,6 @@ export default {
 .c-search-error {
     @include font-size(body-s, false);
     position: static;
+    text-align: left;
 }
 </style>

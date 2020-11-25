@@ -67,10 +67,27 @@ const getLastLocation = () => window.document.cookie
         return location;
     }, {});
 
+
+const generatePostForm = (url, data) => {
+    let html = '';
+    const form = document.createElement('form');
+    form.method = 'post';
+    form.action = url;
+    for (const key in data) {
+        html += `<input name="${key}" value="${data[key] || ''}" />`;
+    }
+    form.innerHTML = html;
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+};
+
+
 export {
     isPostcodeEmpty,
     doesPostcodeMatchRegex,
     normalisePostcode,
     setCookie,
-    getLastLocation
+    getLastLocation,
+    generatePostForm
 };
