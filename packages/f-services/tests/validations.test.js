@@ -67,7 +67,7 @@ describe('isValidPhoneNumber', () => {
         [null, false]
     ])('should validate %s as %s', (number, expected) => {
         // Act
-        const actual = isValidPhoneNumber(number);
+        const actual = isValidPhoneNumber(number, 'en-GB');
 
         // Assert
         expect(actual).toBe(expected);
