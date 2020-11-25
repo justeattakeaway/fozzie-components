@@ -3,16 +3,18 @@
         :card="card"
         :container-title="containerTitle"
         :is-carousel="isCarousel"
-        :data-test-id="testId">
+        :data-test-id="testId"
+        :bold-title="true"
+    >
         <span
             v-if="type === 'Promotion_Card_1'"
-            class="o-btn o-btn--secondary"
+            :class="[$style['c-contentCard-link-promo-1']]"
             :data-test-id="testIdForPromoCardType(1)">
             {{ ctaText }}
         </span>
         <span
             v-if="type === 'Promotion_Card_2'"
-            :class="[$style['c-contentCard-link']]"
+            :class="[$style['c-contentCard-link-promo-2']]"
             :data-test-id="testIdForPromoCardType(2)">
             {{ ctaText }}
         </span>
@@ -66,12 +68,60 @@ export default {
 </script>
 
 <style lang="scss" module>
-    .c-contentCard-link {
+
+    $btn-secondary-bgColor              : $blue--offWhite;
+    $btn-secondary-bgColor--hover       : $blue--offWhite--dark;
+    $btn-secondary-bgColor--active      : $blue--offWhite--darkest;
+    $btn-secondary-textColor            : $blue;
+    $btn-secondary-textColor--hover     : $blue;
+    $btn-secondary-textColor--active    : $blue;
+
+    .c-contentCard-link-promo-2 {
         font-weight: $font-weight-bold;
         text-decoration: none;
         @include font-size(body-l);
         color: $color-secondary;
         display: block;
+    }
+
+    .c-contentCard-link-promo-1 {
+        background-color: $btn-secondary-bgColor;
+
+        border: 1px solid transparent;
+        user-select: none;
+        overflow: visible;
+        text-align: center;
+        cursor: pointer;
+        margin-right: spacing();
+        display: inline-block;
+        vertical-align: middle;
+
+        padding: spacing() 1.2em;
+        border-radius: $border-radius;
+        font-weight: $font-weight-bold;
+        font-family: $font-family-base;
+        @include font-size('body-l');
+        text-decoration: none;
+
+        &,
+        &:link,
+        &:visited {
+            color: $btn-secondary-textColor;
+        }
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: $btn-secondary-textColor;
+        }
+
+        &:hover {
+            background-color: $btn-secondary-bgColor--hover;
+        }
+
+        &:active {
+            background-color: $btn-secondary-bgColor--active;
+        }
     }
 
 </style>
