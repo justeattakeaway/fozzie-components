@@ -63,6 +63,8 @@ export { default as FlagNzIcon } from '../icons/FlagNzIcon';
 export { default as FlagPlRoundIcon } from '../icons/FlagPlRoundIcon';
 export { default as FlagPtRoundIcon } from '../icons/FlagPtRoundIcon';
 export { default as FlagRoRoundIcon } from '../icons/FlagRoRoundIcon';
+export { default as GeoFillIcon } from '../icons/GeoFillIcon';
+export { default as GeoOutlineIcon } from '../icons/GeoOutlineIcon';
 export { default as GiftIcon } from '../icons/GiftIcon';
 export { default as InfoIcon } from '../icons/InfoIcon';
 export { default as LegendCondensedIcon } from '../icons/LegendCondensedIcon';
