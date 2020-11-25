@@ -36,7 +36,6 @@ const isValidPostcode = postcode => POSTCODE_REGEX.test(postcode);
  */
 const meetsCharacterValidationRules = value => /^[\u0060\u00C0-\u00F6\u00F8-\u017Fa-zA-Z-' ]*$/.test(value);
 
-
 const PHONE_REGEX = /^(\+(44))?[0-9]{10}|(\+(44))?[0-9]{11}$/;
 
 const isValidPhoneNumber = number => PHONE_REGEX.test(number);
