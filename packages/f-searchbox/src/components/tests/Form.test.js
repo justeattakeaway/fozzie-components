@@ -283,7 +283,7 @@ describe('`Form`', () => {
                 describe('when `address` `isValid` is falsy', () => {
                     it('should prevent default to stop the form from submitting an invalid search', () => {
                         // Arrange
-                        defaultState.isValid = ['Error'];
+                        mockState.isValid = ['Error'];
                         const propsData = {
                             config: {
                                 address: 'Cassiopeia',
@@ -308,7 +308,7 @@ describe('`Form`', () => {
 
                     it('should dispatch the action `setErrors` to set the correct errors', () => {
                         // Arrange
-                        defaultState.isValid = ['Error'];
+                        mockState.isValid = ['Error'];
                         const propsData = {
                             config: {
                                 address: 'Cassiopeia',
