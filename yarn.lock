@@ -1753,6 +1753,14 @@
     lodash-es "4.17.15"
     window-or-global "1.0.1"
 
+"@justeat/f-services@1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.4.0.tgz#e783b8455904b5f3879e3a90d744913bf01bd0a3"
+  integrity sha512-EjeUhz++c0QlToz1SvBOtmFSsWO6qRccJoYXYWcws3eNNZKvQbckqFVZ6cvjxaHZ66kcue53kOiazCGN+rpbuw==
+  dependencies:
+    lodash-es "4.17.15"
+    window-or-global "1.0.1"
+
 "@justeat/f-utils@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-utils/-/f-utils-1.0.0.tgz#d4f38f6c2b2992fefa39789f1ce742dc083798b1"

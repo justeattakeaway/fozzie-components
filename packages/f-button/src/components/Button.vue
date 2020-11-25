@@ -326,13 +326,13 @@ $btn-sizeXSmall-lineHeight      : 1;
     padding: 0;
     margin: 0;
     color: $color-link-default;
-    font-weight: $font-weight-base;
-    text-decoration: underline;
+    font-weight: $font-weight-bold;
 
     &:hover {
         cursor: pointer;
         color: $color-link-hover;
         background-color: transparent;
+        text-decoration: underline;
     }
     &:active,
     &:focus {
