@@ -53,7 +53,6 @@ export default {
 
     watch: {
         'fulfillment.times' (newValue) {
-            debugger;
             const selected = newValue.find(t => t.selected);
             if (selected) {
                 this.selectedTime = selected.from;
