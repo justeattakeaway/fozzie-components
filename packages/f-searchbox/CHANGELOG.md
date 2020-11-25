@@ -17,7 +17,7 @@ v4.0.0-beta.4
 
 ### Fixed
 
-- Vuex store mappings in form component, now using mapState & mapActions.
+- Vuex store mappings in form component, now using `mapState` & `mapActions`.
 
 
 v4.0.0-beta.3

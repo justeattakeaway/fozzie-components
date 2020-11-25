@@ -7,14 +7,14 @@ import {
 
 export default {
     namespaced: true,
-    
+
     state: () => ({
         isValid: false,
         isDirty: false,
         errors: [],
         suggestions: null
     }),
-    
+
     actions: {
         setIsValid ({ commit }, payload) {
             commit(SET_IS_VALID, payload);
@@ -53,20 +53,20 @@ export default {
             );
         }
     },
-    
+
     mutations: {
         [SET_IS_VALID]: (state, isValid) => {
             state.isValid = isValid;
         },
-        
+
         [SET_ERRORS]: (state, errors) => {
             state.errors = errors;
         },
-        
+
         [SET_IS_DIRTY]: (state, isDirty) => {
             state.errors = isDirty;
         },
-        
+
         [SET_SUGGESTIONS]: (state, suggestions) => {
             state.suggestions = suggestions;
         }

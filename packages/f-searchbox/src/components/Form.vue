@@ -189,6 +189,16 @@ export default {
         }
     },
 
+    created () {
+        if (!this.$store.hasModule('searchbox')) {
+            this.$store.registerModule('searchbox', searchboxModule);
+        }
+    },
+
+    beforeDestroy () {
+        this.$store.unregisterModule('searchbox');
+    },
+
     methods: {
         ...mapActions('searchbox', [
             'setSuggestions',
@@ -258,12 +268,6 @@ export default {
                 this.address = '';
                 this.setIsDirty(false);
             }
-        }
-    },
-
-    created () {
-        if (!this.$store.hasModule('searchbox')) {
-            this.$store.registerModule('searchbox', searchboxModule);
         }
     }
 };
