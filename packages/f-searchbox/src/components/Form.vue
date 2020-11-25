@@ -223,8 +223,6 @@ export default {
                 return this.searchPreviouslySavedAddress(e);
             }
 
-            debugger;
-
             if (this.isValid === true) {
                 this.setErrors([]);
                 processLocationCookie(this.shouldSetCookies, this.address);
