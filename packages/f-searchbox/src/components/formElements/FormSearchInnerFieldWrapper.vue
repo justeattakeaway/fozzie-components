@@ -1,6 +1,12 @@
 <template>
     <div :class="$style['c-search-innerFields']">
+        <form-search-geo
+            v-if="isGeoLocationAvailable"
+            :copy="copy"
+            :service="service" />
+
         <input
+            v-if="streetNumberRequired"
             ref="streetNumberInput"
             :value="getStreetNumberValue"
             :class="$style['c-search-streetInput']"
@@ -10,15 +16,36 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import FormSearchGeo from '../formElements/FormSearchGeo.vue';
 export default {
+    components: {
+        FormSearchGeo
+    },
+
     props: {
         streetNumber: {
             type: String,
             default: ''
+        },
+
+        copy: {
+            type: Object,
+            default:  () => ({})
+        },
+
+        service: {
+            type: Object,
+            default: () => {}
         }
     },
 
     computed: {
+        ...mapState('searchbox', [
+            'streetNumberRequired',
+            'isGeoLocationAvailable'
+        ]),
+
         getStreetNumberValue () {
             return this.streetNumber;
         }

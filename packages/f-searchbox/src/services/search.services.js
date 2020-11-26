@@ -43,7 +43,6 @@ const selectedSuggestion = (
     index
 ) => {
     // TODO pass through suggestion index for keyboard behaviour..
-    debugger;
     const suggestion = suggestions[index || 0];
     
     
@@ -70,9 +69,6 @@ const selectedSuggestion = (
         const streetNumberRequired =
             requiredFields.includes('streetNumber')
             && !location.streetNumber;
-        
-        debugger;
-        
         
         if (!missingFields.length) {
             const payload = {

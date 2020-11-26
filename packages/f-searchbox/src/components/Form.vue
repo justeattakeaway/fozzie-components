@@ -19,13 +19,11 @@
                 v-model="address"
                 :error-message="errorMessage"
                 :address="address"
+                :service="service"
                 :should-display-custom-autocomplete="service.isAutocompleteEnabled"
                 :copy="copy"
                 :street-number="streetNumber"
-                :should-display-street-number-field="shouldDisplayStreetNumberField"
-                :is-compressed="isCompressed"
-                @focus="onFormFocusBlurEvent"
-                @blur="onFormFocusBlurEvent" />
+                :is-compressed="isCompressed"/>
 
             <form-search-button
                 :copy="copy"
@@ -36,11 +34,12 @@
             v-if="shouldDisplaySuggestions"
             aria-live="assertive"
             :suggestion-format="suggestionFormat"
-            :suggestions="searchSuggestion"
+            :suggestions="suggestions"
             @selected-suggestion="onSelectedSuggestion" />
 
         <error-message
             v-if="errorMessage"
+            ref="errorMessage"
             :class="$style['c-search-error']"
             aria-live="assertive">
             {{ errorMessage }}
@@ -119,8 +118,7 @@ export default {
             shouldAutoPopulateAddress,
             suggestionFormat,
             requiredFields,
-            streetNumber: '',
-            isInputFocus: false
+            streetNumber: ''
         };
     },
 
@@ -129,18 +127,9 @@ export default {
             'suggestions',
             'errors',
             'isValid',
-            'streetNumberRequired'
+            'streetNumberRequired',
+            'isInputFocus'
         ]),
-
-        /**
-         * Get stored `suggestions` from state if they exist. To minimize multiple types of
-         * suggestion types i.e at an API level; we should try and stick to this single suggestion value
-         * for all consuming APIs rather than creating new ones based on the APIs we're consuming.
-         *
-         * */
-        searchSuggestion () {
-            return this.suggestions;
-        },
 
         /**
          * Display API suggestions in component: `form-search-suggestions`:
@@ -181,16 +170,6 @@ export default {
             return this.lastAddress
                     && this.address === this.lastAddress
                     && this.isValid === true;
-        },
-
-        /**
-         * In some instances (ES & IT tenants) we require a street number to be provided if there's
-         * not enough of the address information supplied by the user, in which case we display another input field
-         * for street numbers to be entered in. Component: `FormSearchStreetNumber`.
-         *
-         * */
-        shouldDisplayStreetNumberField () {
-            return this.streetNumberRequired;
         }
     },
 
@@ -227,6 +206,9 @@ export default {
         }
 
         this.formUrl = generateFormQueryUrl(this.queryString, this.formUrl);
+
+        // Set Geolocation state so we can display the geolocation icon button on small screens.
+        this.setGeoLocationAvailability(this.service.isGeoAvailable);
     },
 
     created () {
@@ -245,7 +227,8 @@ export default {
             'setIsValid',
             'setErrors',
             'setIsDirty',
-            'setStreetNumberRequired'
+            'setStreetNumberRequired',
+            'setGeoLocationAvailability'
         ]),
 
         /**
@@ -280,7 +263,7 @@ export default {
                         return false;
                     }
 
-                    // TODO process the je last location cookie...
+                    // TODO process the je last location cookie for international markets...
                 }
             } else {
                 e.preventDefault();
@@ -298,7 +281,6 @@ export default {
                 this.streetNumber,
                 index
             ).then(value => {
-                debugger;
 
                 if (value && value.errors) {
                     this.setErrors(value.errors);
@@ -342,16 +324,6 @@ export default {
             if (shouldClearAddressOnValidSubmit) {
                 this.address = '';
                 this.setIsDirty(false);
-            }
-        },
-
-        onFormFocusBlurEvent (value) {
-            if (value) {
-                this.isInputFocus = value;
-            } else {
-                setTimeout(() => {
-                    this.isInputFocus = value;
-                }, 500);
             }
         }
     }
