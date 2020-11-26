@@ -210,7 +210,7 @@ exports.config = {
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
-    beforeTest: function (test, context) {
+    beforeTest: () => {
         browser.url('http://localhost:8080');
     },
     /**
@@ -228,8 +228,10 @@ exports.config = {
     /**
      * Function to be executed after a test (in Mocha/Jasmine).
      */
-    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-    // },
+    afterTest: () => {
+        browser.url('http://localhost:8080');
+        browser.maximizeWindow();
+    },
 
 
     /**
