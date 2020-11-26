@@ -28,7 +28,7 @@ describe('f-footer component tests', () => {
         expect(browser.getUrl()).toContain("https://play.google.com/");
 
         //Act
-        browser.back();
+        // browser.back();
     });
 
     it('should display Social Media Icons', () => {
