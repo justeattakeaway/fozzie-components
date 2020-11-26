@@ -1,6 +1,3 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-
 import {
     SET_SUGGESTIONS,
     SET_ERRORS,
@@ -8,15 +5,15 @@ import {
     SET_IS_DIRTY
 } from './mutation.types';
 
-Vue.use(Vuex);
+export default {
+    namespaced: true,
 
-export default new Vuex.Store({
-    state: {
+    state: () => ({
         isValid: false,
         isDirty: false,
         errors: [],
         suggestions: null
-    },
+    }),
 
     actions: {
         setIsValid ({ commit }, payload) {
@@ -74,4 +71,4 @@ export default new Vuex.Store({
             state.suggestions = suggestions;
         }
     }
-});
+};
