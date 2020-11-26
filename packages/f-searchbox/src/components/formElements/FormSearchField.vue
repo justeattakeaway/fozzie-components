@@ -97,7 +97,7 @@ export default {
         /**
          * We want to make sure that we focus the user on the input field when
          * results are returned. The `shouldInputFieldHaveFocus` is set via the
-         * mutation in the store. We watch for a change after a successfull response
+         * mutation in the store. We watch for a change after a successful response
          * and only then do we want to focus.
          *
          * */
