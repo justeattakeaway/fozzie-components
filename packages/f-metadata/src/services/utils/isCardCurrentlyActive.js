@@ -18,14 +18,18 @@ const isCardCurrentlyActive = (card = {}, brands = []) => {
 
     const now = new Date();
     const currentDay = format(now, 'E');
-    const { start, end } = displayTimes[currentDay] || displayTimes.All || {};
+    const times = displayTimes[currentDay] || displayTimes.Any || [];
 
-    if (!start || !end) return true;
+    return !(times instanceof Array)
+        || times.length === 0
+        || times.some(({ Start: start, End: end }) => {
+            if (!start || !end) return true;
 
-    const startTime = parse(start, 'HH:mm', now);
-    const endTime = parse(end, 'HH:mm', now);
+            const startTime = parse(start, 'HH:mm', now);
+            const endTime = parse(end, 'HH:mm', now);
 
-    return isAfter(now, startTime) && isBefore(now, endTime);
+            return isAfter(now, startTime) && isBefore(now, endTime);
+        });
 };
 
 export default isCardCurrentlyActive;

@@ -94,6 +94,11 @@ brazePromise.then(brazeDispatcher => {
 
 The Braze API key used when invoking calls to the Braze SDK. This can be found in the Braze Dashboard at *App Settings->Developer Console->Rest API Keys*.
 
+#### `config.brands`
+
+Sets the brands that the consumers have an interest in. Is concatenated to the current list of brands held
+by the Braze adapter.
+
 #### `config.userId`
 
 The user ID to retrieve data for.

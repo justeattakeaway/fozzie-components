@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.2.0-beta.6
+------------------------------
+*November 25, 2020*
+
+### Changed
+- Incorporates changes from f-content-cards/2.1.x hotfix branch
+- Updates f-metadata dependency to incorporate card-data changes from same branch
+
+
 v2.2.0-beta.5
 ------------------------------
 *November 25, 2020*
@@ -60,6 +69,34 @@ v2.2.0-beta.1
 - Bumped dependency on f-metadata to version `3.0.0-beta.2`
 - Left-aligns Post-Order Card Headline
 - Adds tracking for custom injected content cards
+
+
+v2.1.3
+------------------------------
+*November 23, 2020*
+
+### Fixed
+- isCardCurrentlyActive now respects displayTimes JSON as specified
+
+
+v2.1.2
+------------------------------
+*November 19, 2020*
+
+### Fixed
+- HomePromoCard 1 Alignment and spacing
+- Limit number of skeleton cards to max of CardLimit
+- Fix brand handling
+
+
+v2.1.1
+------------------------------
+*November 18, 2020*
+
+### Fixed
+- HomePromoCard 1 & 2 render out content background colour correctly
+- HomePromoCard 1 & 2 separates description lines into paragraph tags
+- transformCardData now preserves brand_name as provided by braze
 
 
 v2.1.0

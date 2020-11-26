@@ -1,3 +1,5 @@
+import uniq from 'lodash.uniq';
+
 import ContentCards from './services/contentCard.service';
 import isAppboyInitialised from './utils/isAppboyInitialised';
 
@@ -49,7 +51,7 @@ function contentCardsHandler (postCardsAppboy) {
         groups
     } = new ContentCards(postCardsAppboy, { enabledCardTypes: this.dispatcherOptions.enabledCardTypes })
         .removeDuplicateContentCards()
-        .filterCards()
+        .filterCards(this.brands)
         .getTitleCard()
         .arrangeCardsByTitles()
         .output();
@@ -94,6 +96,8 @@ class BrazeDispatcher {
 
         this.appboyPromise = null;
 
+        this.brands = [];
+
         this.dispatcherOptions = null;
 
         this.cardsCallbacks = [];
@@ -128,7 +132,8 @@ class BrazeDispatcher {
             disableComponent = false,
             callbacks = {},
             enableLogging,
-            enabledCardTypes = []
+            enabledCardTypes = [],
+            brands = []
         } = options;
 
         if (!this.dispatcherOptions) {
@@ -151,6 +156,12 @@ class BrazeDispatcher {
         if (callbacks.interceptInAppMessages) this.inAppMessagesCallbacks.push(callbacks.interceptInAppMessages);
         if (callbacks.handleContentCards) this.cardsCallbacks.push(callbacks.handleContentCards);
         if (callbacks.handleContentCardsGrouped) this.groupedCardsCallback.push(callbacks.handleContentCardsGrouped);
+
+        // Concatenate brands to existing allowed brands for now
+        // TODO create registry of brands to apply before passing cards lists back to callbacks (has linked issue)
+        if (brands) {
+            this.brands = uniq([...this.brands, ...brands]);
+        }
 
         // Note that appBoyPromise will not be set if this is the first time running this method -
         // this is a guard against initialise() being called more than once, and attempting to
