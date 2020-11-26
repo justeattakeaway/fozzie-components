@@ -57,8 +57,6 @@ export default {
 <style lang="scss" module>
 @import '../../assets/scss/form';
 
-// c-search-innerFields represents the geolocation components
-// i.e the geo locate button & street input field (available in I18n)
 .c-search-innerFields {
     position: absolute;
     align-items: center;
