@@ -59,7 +59,7 @@ export default {
         ]),
 
         /**
-         * Check is suggestions exist in state, if not we attempt to return results
+         * Check if suggestions exist in state, if not we attempt to return results
          * via `getLocationFromGeo` which will resolve via our `setSuggestions` action.
          * If we return any errors then we will resolve with the rejection error.
          *
