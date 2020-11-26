@@ -5,10 +5,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.3.0
 ------------------------------
-*November 25, 2020*
+*November 26, 2020*
 
 ### Changed
-- `font-weight` and `text-decoration` for `:hover` states for link large buttons.
+- `font-weight` and `text-decoration` for `:hover` states for link buttons.
 
 
 v0.2.0
