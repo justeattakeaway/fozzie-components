@@ -34,7 +34,30 @@ const search = ({
     }
 };
 
-
+/**
+ * Responsible for allowing the user to select search results from google places.
+ * This method also does a few other things:
+ *
+ * 1. If the user is required to enter a more specific search i.e a street number
+ * then we alert the component responsible and display it.
+ *
+ * 2. We use the `requiredFields` (passed in via the tenant config) to determine if we
+ * need specific properties e.g. ['streetNumber', 'street', 'locality', 'postcode'].
+ *
+ * 3. If there are no missing fields we proceed to allowing the user to make a search via their
+ * selection.
+ *
+ * 4.If there are missing fields we like the street number w.e display a error specific to the type of
+ * error i.e Please enter a street number (translated)
+ *
+ *
+ * @param service
+ * @param suggestions
+ * @param requiredFields
+ * @param streetNumber
+ * @param index
+ * @returns {Promise.<TResult>}
+ */
 const selectedSuggestion = (
     service,
     suggestions,
@@ -45,12 +68,10 @@ const selectedSuggestion = (
     // TODO pass through suggestion index for keyboard behaviour..
     const suggestion = suggestions[index || 0];
     
-    
     // find current suggestion's location information
     const placeId = suggestion.place_id || suggestion.placeId;
     const streetNumberFormatted = streetNumber.trim();
     
-    // TODO! this.address = this.params.suggestionFormat(suggestion);
     const suggestionDescription = suggestion.description;
     
     return service.getLocationDetails(placeId)
@@ -66,9 +87,7 @@ const selectedSuggestion = (
             ), []);
         
         // if streetNumber is required and not in the current address
-        const streetNumberRequired =
-            requiredFields.includes('streetNumber')
-            && !location.streetNumber;
+        const streetNumberRequired = requiredFields.includes('streetNumber') && !location.streetNumber;
         
         if (!missingFields.length) {
             const payload = {
@@ -96,9 +115,6 @@ const selectedSuggestion = (
                 }
                 : '';
             
-            // this.$nextTick(() => {
-            //     this.$refs.streetNumberInput.focus();
-            // });
         } else {
             // suggestion doesn't have desired fields
             // therefore search must be more specific

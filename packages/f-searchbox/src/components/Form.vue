@@ -273,6 +273,13 @@ export default {
             return true;
         },
 
+        /**
+         * Triggered from the child component `form-search-suggestions`.
+         * Invokes `selectedSuggestion` from `search.service` which will
+         * resolve / return specific cases. E.g. if we need more information
+         * like the street number we flag this up to the component and display it.
+         *
+         * */
         onSelectedSuggestion (index) {
             selectedSuggestion(
                 this.service,
