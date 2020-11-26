@@ -8,7 +8,6 @@ v4.0.0-beta.5
 *November 26, 2020*
 
 ### Added
-
 - Geo location feature plus components.
 - Tenant tests.
 
