@@ -1,6 +1,6 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import copyToClipboard from 'copy-to-clipboard';
-import VoucherCard from '../VoucherCard.vue';
+import VoucherCard from '../voucherCard/VoucherCard.vue';
 
 const localVue = createLocalVue();
 
@@ -16,7 +16,8 @@ const card = {
 };
 
 const copy = {
-    copyCodeLabel: 'Thou copiest'
+    copyCodeLabel: 'Thou copiest',
+    codeCopiedLabel: 'I have been copied'
 };
 
 const provide = {
@@ -73,6 +74,10 @@ describe('contentCards › VoucherCard', () => {
         });
 
         describe('when invoked', () => {
+            beforeEach(() => {
+                jest.useFakeTimers();
+            });
+
             it('should make a call to `copy` with the correct params', () => {
                 // Act
                 wrapper.vm.copyVoucherCode();
@@ -87,6 +92,30 @@ describe('contentCards › VoucherCard', () => {
 
                 // Assert
                 expect(provide.emitVoucherCodeClick).toHaveBeenCalledWith(card.url);
+            });
+
+            it('should display the correct label while in cool down', async () => {
+                // Act
+                wrapper.vm.copyVoucherCode();
+                await wrapper.vm.$nextTick();
+                const copiedLabelSpan = wrapper.find('[data-test-id="contentCard-copied-label"]');
+
+                // Assert
+                expect(copiedLabelSpan.text()).toEqual(copy.codeCopiedLabel);
+            });
+
+            it('should display the correct label when cool down ends after 3 seconds', async () => {
+                // Act
+                wrapper.vm.copyVoucherCode();
+                jest.advanceTimersByTime(3000);
+
+                // run this to simulate transition
+                wrapper.vm.copyCooldownComplete();
+                await wrapper.vm.$nextTick();
+                const copiedLabelSpan = wrapper.find('[data-test-id="contentCard-not-copied-label"]');
+
+                // Assert
+                expect(copiedLabelSpan.text()).toEqual(copy.copyCodeLabel);
             });
         });
     });

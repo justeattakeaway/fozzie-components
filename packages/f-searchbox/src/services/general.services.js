@@ -56,10 +56,10 @@ const generateFormQueryUrl = (queryString, formUrl) => {
             const keys = Array.isArray(queryString[key]) ? queryString[key] : [queryString[key]];
             return keys.map(val => (val.length > 0 ? `${key}=${val}` : '')).join('&');
         }).join('&');
-        
+
         return `${formUrl}?${queryStringUrl}`;
     }
-    
+
     return formUrl;
 };
 

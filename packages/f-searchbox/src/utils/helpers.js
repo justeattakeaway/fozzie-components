@@ -73,9 +73,11 @@ const generatePostForm = (url, data) => {
     const form = document.createElement('form');
     form.method = 'post';
     form.action = url;
-    for (const key in data) {
+
+    Object.keys(data).forEach(key => {
         html += `<input name="${key}" value="${data[key] || ''}" />`;
-    }
+    });
+
     form.innerHTML = html;
     document.body.appendChild(form);
     form.submit();

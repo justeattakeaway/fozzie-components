@@ -25,7 +25,7 @@
                 :should-display-street-number-field="shouldDisplayStreetNumberField"
                 :is-compressed="isCompressed"
                 @focus="onFormFocusBlurEvent"
-                @blur="onFormFocusBlurEvent"/>
+                @blur="onFormFocusBlurEvent" />
 
             <form-search-button
                 :copy="copy"
@@ -37,7 +37,7 @@
             aria-live="assertive"
             :suggestion-format="suggestionFormat"
             :suggestions="searchSuggestion"
-            @selected-suggestion="onSelectedSuggestion"/>
+            @selected-suggestion="onSelectedSuggestion" />
 
         <error-message
             v-if="errorMessage"
@@ -49,13 +49,14 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import debounce from 'lodash.debounce';
 import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import FormSearchField from './formElements/FormSearchField.vue';
 import FormSearchButton from './formElements/FormSearchButton.vue';
 import FormSearchSuggestions from './formElements/FormSearchSuggestions.vue';
-import store from '../store/searchbox.module';
+import searchboxModule from '../store/searchbox.module';
 import { getLastLocation } from '../utils/helpers';
 import { search, selectedSuggestion } from '../services/search.services';
 import {
@@ -119,12 +120,18 @@ export default {
             suggestionFormat,
             requiredFields,
             streetNumber: '',
-            isInputFocus: false,
-            store
+            isInputFocus: false
         };
     },
 
     computed: {
+        ...mapState('searchbox', [
+            'suggestions',
+            'errors',
+            'isValid',
+            'streetNumberRequired'
+        ]),
+
         /**
          * Get stored `suggestions` from state if they exist. To minimize multiple types of
          * suggestion types i.e at an API level; we should try and stick to this single suggestion value
@@ -132,7 +139,7 @@ export default {
          *
          * */
         searchSuggestion () {
-            return this.store.state.suggestions;
+            return this.suggestions;
         },
 
         /**
@@ -147,8 +154,8 @@ export default {
         shouldDisplaySuggestions () {
             return this.service.isAutocompleteEnabled
                     && this.isInputFocus
-                    && !!this.store.state.suggestions.length
-                    && !this.store.state.errors.length;
+                    && !!this.suggestions.length
+                    && !this.errors.length;
         },
 
         /**
@@ -157,7 +164,7 @@ export default {
          * @returns {*}
          */
         errorMessage () {
-            const messageKey = this.store.state.errors.length && this.store.state.errors[0];
+            const messageKey = this.errors.length && this.errors[0];
 
             if (!messageKey) return false;
 
@@ -173,7 +180,7 @@ export default {
         hasLastSavedAddress () {
             return this.lastAddress
                     && this.address === this.lastAddress
-                    && this.store.state.isValid === true;
+                    && this.isValid === true;
         },
 
         /**
@@ -183,7 +190,7 @@ export default {
          *
          * */
         shouldDisplayStreetNumberField () {
-            return this.store.state.streetNumberRequired;
+            return this.streetNumberRequired;
         }
     },
 
@@ -200,12 +207,10 @@ export default {
                 const { preSearchValidation } = this.service.options;
                 const errors = !!preSearchValidation && this.service.isValid(value, preSearchValidation);
 
-                debugger;
                 if (Array.isArray(errors)) {
-                    this.store.dispatch('setIsDirty', true);
-                    this.store.dispatch('setSuggestions', Promise.reject(new Error(errors[0])));
+                    this.setSuggestions(Promise.reject(new Error(errors[0])));
                 } else {
-                    this.store.dispatch('setSuggestions', this.service.search(value));
+                    this.setSuggestions(this.service.search(value));
                 }
             },
             500,
@@ -224,7 +229,25 @@ export default {
         this.formUrl = generateFormQueryUrl(this.queryString, this.formUrl);
     },
 
+    created () {
+        if (!this.$store.hasModule('searchbox')) {
+            this.$store.registerModule('searchbox', searchboxModule);
+        }
+    },
+
+    beforeDestroy () {
+        this.$store.unregisterModule('searchbox');
+    },
+
     methods: {
+        ...mapActions('searchbox', [
+            'setSuggestions',
+            'setIsValid',
+            'setErrors',
+            'setIsDirty',
+            'setStreetNumberRequired'
+        ]),
+
         /**
          * Main submit handler that's responsible for submitting searches: for example to SERP.
          *
@@ -235,16 +258,14 @@ export default {
          * @param e
          */
         async submit (e) {
-            this.store.dispatch('setIsValid', this.service.isValid(this.address));
+            this.setIsValid(this.service.isValid(this.address));
 
             if (this.hasLastSavedAddress) {
                 return this.searchPreviouslySavedAddress(e);
             }
 
-            this.store.dispatch('setIsDirty', true);
-
-            if (this.store.state.isValid === true) {
-                this.store.dispatch('setErrors', []);
+            if (this.isValid === true) {
+                this.setErrors([]);
                 processLocationCookie(this.shouldSetCookies, this.address);
                 this.clearAddressValue(this.shouldClearAddressOnValidSubmit);
                 onCustomSubmit(this.onSubmit, this.address, e);
@@ -263,7 +284,7 @@ export default {
                 }
             } else {
                 e.preventDefault();
-                this.store.dispatch('setErrors', this.store.state.isValid);
+                this.setErrors(this.isValid);
             }
 
             return true;
@@ -272,25 +293,24 @@ export default {
         onSelectedSuggestion (index) {
             selectedSuggestion(
                 this.service,
-                this.store.state.suggestions,
+                this.suggestions,
                 this.requiredFields,
                 this.streetNumber,
                 index
-            ).then((value) => {
+            ).then(value => {
                 debugger;
 
                 if (value && value.errors) {
-                    this.store.dispatch('setErrors', value.errors);
+                    this.setErrors(value.errors);
                 }
 
                 if (value && value.requiresStreetNumber) {
-                    this.store.dispatch('setStreetNumberRequired', value.requiresStreetNumber);
+                    this.setStreetNumberRequired(value.requiresStreetNumber);
                 }
             });
 
             // TODO pass through suggestion index for keyboard behaviour...
-            this.address = this.suggestionFormat(this.store.state.suggestions[index]);
-
+            this.address = this.suggestionFormat(this.suggestions[index]);
         },
 
         /**
@@ -321,7 +341,7 @@ export default {
         clearAddressValue (shouldClearAddressOnValidSubmit) {
             if (shouldClearAddressOnValidSubmit) {
                 this.address = '';
-                this.store.dispatch('setIsDirty', false);
+                this.setIsDirty(false);
             }
         },
 

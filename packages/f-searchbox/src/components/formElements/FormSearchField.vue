@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import FormSearchStreetNumber from '../formElements/FormSearchStreetNumber.vue';
+import FormSearchStreetNumber from './FormSearchStreetNumber.vue';
 
 export default {
     components: {

@@ -3,6 +3,25 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v2.2.0-beta.5
+------------------------------
+*November 25, 2020*
+
+### Added
+- Removed tenant specific styles
+- Updated styles to match design
+
+
+v2.2.0-beta.4
+------------------------------
+*November 16, 2020*
+
+### Added
+- Voucher code copy design change
+- Updated tests
+
+
 v2.2.0-beta.3
 ------------------------------
 *November 06, 2020*

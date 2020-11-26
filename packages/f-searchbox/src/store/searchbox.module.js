@@ -1,6 +1,3 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-
 import {
     SET_SUGGESTIONS,
     SET_ERRORS,
@@ -9,9 +6,8 @@ import {
     SET_STREET_NUMBER_REQUIRED
 } from './mutation.types';
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
+export default {
+    namespaced: true,
     state: {
         isValid: false,
         isDirty: false,
@@ -57,7 +53,7 @@ export default new Vuex.Store({
                 }
             );
         },
-        
+
         setStreetNumberRequired ({ commit }, payload) {
             commit(SET_STREET_NUMBER_REQUIRED, payload);
         }
@@ -79,9 +75,9 @@ export default new Vuex.Store({
         [SET_SUGGESTIONS]: (state, suggestions) => {
             state.suggestions = suggestions;
         },
-    
+
         [SET_STREET_NUMBER_REQUIRED]: (state, streetNumberRequired) => {
             state.streetNumberRequired = streetNumberRequired;
         }
     }
-});
+};
