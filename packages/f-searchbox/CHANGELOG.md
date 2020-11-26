@@ -8,12 +8,23 @@ v4.0.0-beta.5
 *November 26, 2020*
 
 ### Added
-- Geo location feature plus components.
+- Geo location feature plus components, `FormSearchGeo.vue`.
 - Tenant tests.
+
+### Changed
+- Renamed street & geo location component to `FormSearchInnerFieldsWrapper.vue`.
 
 ### Fixed
 - IE config missing validation properties.
 - General tidy up of values being passed around.
+
+
+Latest (to be added to next release)
+------------------------------
+*November 26, 2020*
+
+### Added
+- css/scss to `moduleNameMapper` in `jest.config.js`
 
 
 v4.0.0-beta.4

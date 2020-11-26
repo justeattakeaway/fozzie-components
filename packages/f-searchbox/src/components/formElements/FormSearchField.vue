@@ -30,9 +30,9 @@
         </label>
 
         <form-search-inner-field-wrapper
+            v-model="streetNumber"
             :copy="copy"
-            :service="service"
-            v-model="streetNumber" />
+            :service="service" />
     </div>
 </template>
 

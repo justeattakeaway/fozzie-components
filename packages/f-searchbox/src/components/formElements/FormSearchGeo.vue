@@ -65,21 +65,19 @@ export default {
          *
          */
         getSuggestions () {
-            this.suggestions.length
-                ? this.setSuggestions(
-                    Promise.resolve(this.suggestions)
-                )
-                : this.service.getLocationFromGeo().then(
+            if (this.suggestions.length) {
+                this.setSuggestions(Promise.resolve(this.suggestions));
+            } else {
+                this.service.getLocationFromGeo().then(
                     suggestions => {
-                        this.setSuggestions(
-                            Promise.resolve(suggestions)
-                        );
+                        this.setSuggestions(Promise.resolve(suggestions));
                     },
                     error => {
                         this.setIsDirty(true);
                         this.setSuggestions(Promise.reject(new Error(error)));
                     }
                 );
+            }
         }
     }
 };

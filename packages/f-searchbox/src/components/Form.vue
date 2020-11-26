@@ -23,7 +23,7 @@
                 :should-display-custom-autocomplete="service.isAutocompleteEnabled"
                 :copy="copy"
                 :street-number="streetNumber"
-                :is-compressed="isCompressed"/>
+                :is-compressed="isCompressed" />
 
             <form-search-button
                 :copy="copy"
@@ -288,7 +288,6 @@ export default {
                 this.streetNumber,
                 index
             ).then(value => {
-
                 if (value && value.errors) {
                     this.setErrors(value.errors);
                 }

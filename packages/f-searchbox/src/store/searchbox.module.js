@@ -65,13 +65,13 @@ export default {
         setStreetNumberRequired ({ commit }, payload) {
             commit(SET_STREET_NUMBER_REQUIRED, payload);
         },
-        
+
         setInputFocus ({ commit }, payload) {
-            commit(SET_INPUT_FOCUS, payload)
+            commit(SET_INPUT_FOCUS, payload);
         },
-        
+
         setGeoLocationAvailability ({ commit }, payload) {
-            commit(SET_GEO_LOCATION_AVAILABILITY, payload)
+            commit(SET_GEO_LOCATION_AVAILABILITY, payload);
         }
     },
 
@@ -95,15 +95,15 @@ export default {
         [SET_STREET_NUMBER_REQUIRED]: (state, streetNumberRequired) => {
             state.streetNumberRequired = streetNumberRequired;
         },
-        
+
         [SET_INPUT_FOCUS]: (state, isInputFocus) => {
             state.isInputFocus = isInputFocus;
         },
-    
+
         [SET_GEO_LOCATION_AVAILABILITY]: (state, isGeoLocationAvailable) => {
             state.isGeoLocationAvailable = isGeoLocationAvailable;
         },
-    
+
         [SET_FOCUS_ON_INPUT]: (state, shouldInputFieldHaveFocus) => {
             state.shouldInputFieldHaveFocus = shouldInputFieldHaveFocus;
         }

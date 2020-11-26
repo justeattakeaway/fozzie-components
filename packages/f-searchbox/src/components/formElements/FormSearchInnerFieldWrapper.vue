@@ -17,7 +17,8 @@
 
 <script>
 import { mapState } from 'vuex';
-import FormSearchGeo from '../formElements/FormSearchGeo.vue';
+import FormSearchGeo from './FormSearchGeo.vue';
+
 export default {
     components: {
         FormSearchGeo
