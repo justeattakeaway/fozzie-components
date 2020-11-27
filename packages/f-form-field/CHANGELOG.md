@@ -9,7 +9,7 @@ v1.4.0
 
 ### Changed
 - `padding` and `font-size` for inline label.
-- `fill` for dropdown arrow, `color` and `bacgkround` hover state.
+- `fill` for dropdown arrow, `color` and `background` hover state.
 
 v1.3.0
 ------------------------------
