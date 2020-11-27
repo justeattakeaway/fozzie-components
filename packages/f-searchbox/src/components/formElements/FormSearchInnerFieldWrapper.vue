@@ -10,9 +10,9 @@
             ref="streetNumberInput"
             v-model="streetNumber"
             :class="$style['c-search-streetInput']"
-            @input="onStreetNumberEntered"
             type="input"
-            placeholder="N°">
+            placeholder="N°"
+            @input="onStreetNumberEntered">
     </div>
 </template>
 
@@ -41,7 +41,7 @@ export default {
     data () {
         return {
             streetNumber: ''
-        }
+        };
     },
 
     computed: {

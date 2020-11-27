@@ -76,7 +76,7 @@ export default {
         setGeoLocationAvailability ({ commit }, payload) {
             commit(SET_GEO_LOCATION_AVAILABILITY, payload);
         },
-        
+
         setStreetNumber ({ commit }, payload) {
             commit(SET_STREET_NUMBER_VALUE, payload);
         }
@@ -102,7 +102,7 @@ export default {
         [SET_STREET_NUMBER_REQUIRED]: (state, streetNumberRequired) => {
             state.streetNumberRequired = streetNumberRequired;
         },
-    
+
         [SET_STREET_NUMBER_VALUE]: (state, streetNumber) => {
             state.streetNumber = streetNumber;
         },
