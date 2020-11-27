@@ -56,10 +56,12 @@ describe('services › utils › transformCardData', () => {
         const date = Date.parse('14 Sep 2020 13:00:00 GMT');
         MockDate.set(date);
         const displayTimes = {
-            Mon: {
-                start: '09:00',
-                end: '17:00'
-            }
+            Mon: [
+                {
+                    Start: '09:00',
+                    End: '17:00'
+                }
+            ]
         };
 
         // Act
@@ -74,10 +76,12 @@ describe('services › utils › transformCardData', () => {
         const date = Date.parse('14 Sep 2020 13:00:00 GMT');
         MockDate.set(date);
         const displayTimes = {
-            Any: {
-                start: '09:00',
-                end: '17:00'
-            }
+            Any: [
+                {
+                    Start: '09:00',
+                    End: '17:00'
+                }
+            ]
         };
 
         // Act
@@ -92,10 +96,18 @@ describe('services › utils › transformCardData', () => {
         const date = Date.parse('14 Sep 2020 08:00:00 GMT');
         MockDate.set(date);
         const displayTimes = {
-            Mon: {
-                start: '12:00',
-                end: '17:00'
-            }
+            Mon: [
+                {
+                    Start: '12:00',
+                    End: '17:00'
+                }
+            ],
+            Any: [
+                {
+                    Start: '05:00',
+                    End: '07:00'
+                }
+            ]
         };
 
         // Act

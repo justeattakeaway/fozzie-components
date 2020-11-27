@@ -55,6 +55,8 @@ import tenantConfigs from '../tenants';
 export const CARDSOURCE_METADATA = 'metadata';
 export const CARDSOURCE_CUSTOM = 'custom';
 
+const DEFAULT_SKELETON_CARD_COUNT = 3;
+
 /**
  * Generates card-specific analytics data suitable for sending back to GTM via f-trak
  *
@@ -173,7 +175,14 @@ export default {
         const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
         const isPostOrderSkeletonCard = this.enabledCardTypes.length && this.enabledCardTypes.every(type => type === 'Post_Order_Card_1');
-        const loadingCard = isPostOrderSkeletonCard ? { type: 'postOrder', count: 1 } : { type: 'promo', count: 3 };
+        const loadingCard = isPostOrderSkeletonCard
+            ? { type: 'postOrder', count: 1 }
+            : {
+                type: 'promo',
+                count: this.cardLimit === -1
+                    ? DEFAULT_SKELETON_CARD_COUNT
+                    : Math.min(DEFAULT_SKELETON_CARD_COUNT, this.cardLimit)
+            };
 
         return {
             cards: [],

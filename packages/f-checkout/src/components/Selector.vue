@@ -7,8 +7,9 @@
         ]">
         <label
             for="time-selection"
+            data-test-id="fulfillment-time-label"
             :class="$style['o-form-select-label']">
-            {{ orderMethod }} time
+            {{ orderMethod }}
         </label>
         <select
             id="time-selection"
@@ -17,7 +18,7 @@
             data-test-id="fulfillment-time"
             @change="selectionChanged">
             <option
-                v-for="(time, index) in times"
+                v-for="(time, index) in fulfillment.times"
                 :key="index"
                 :value="time.from">
                 {{ time.label.text }}
@@ -27,27 +28,31 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import { CHECKOUT_METHOD_DELIVERY } from '../constants';
+
 export default {
-    props: {
-        times: {
-            type: Array,
-            default: () => []
-        },
-
-        orderMethod: {
-            type: String,
-            default: null
-        }
-    },
-
     data () {
         return {
             selectedTime: null
         };
     },
 
+    computed: {
+        ...mapState('checkout', [
+            'fulfillment',
+            'serviceType'
+        ]),
+
+        orderMethod () {
+            return this.serviceType === CHECKOUT_METHOD_DELIVERY
+                ? this.$t('labels.deliveryOrderMethod')
+                : this.$t('labels.collectionOrderMethod');
+        }
+    },
+
     watch: {
-        times (newValue) {
+        'fulfillment.times' (newValue) {
             const selected = newValue.find(t => t.selected);
             if (selected) {
                 this.selectedTime = selected.from;
@@ -57,8 +62,8 @@ export default {
 
     methods: {
         selectionChanged () {
-            this.times.forEach(el => { el.selected = false; });
-            const newSelected = this.times.find(t => t.from === this.selectedTime);
+            this.fulfillment.times.forEach(el => { el.selected = false; });
+            const newSelected = this.fulfillment.times.find(t => t.from === this.selectedTime);
             if (newSelected) {
                 newSelected.selected = true;
             }

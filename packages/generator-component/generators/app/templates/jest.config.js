@@ -18,7 +18,8 @@ module.exports = {
     moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/src/$1',
         '^~include-media/(.*)$': '<rootDir>../../node_modules/include-media/$1',
-        '^~@justeat/(.*)$': '<rootDir>../../node_modules/@justeat/$1'
+        '^~@justeat/(.*)$': '<rootDir>../../node_modules/@justeat/$1',
+        '\\.(css|scss)$': 'jest-transform-stub'
     },
 
     snapshotSerializers: [
@@ -39,6 +40,6 @@ module.exports = {
 
     modulePathIgnorePatterns: [
         './test/specs/accessibility/',
-        './test/specs/component/',
-    ],
+        './test/specs/component/'
+    ]
 };

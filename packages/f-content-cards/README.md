@@ -153,7 +153,7 @@ The Braze User ID associated to the current authenticated user.
 
 > If no userId is provided the component will look for an existing appboy implementation at `window.appboy`.
 
-### `enabled-content-cards`
+### `enabled-card-types`
 
 **Type:** array
 **Required:** false
@@ -194,6 +194,9 @@ Indicates the test id attribute of the component root element.
 **Required:** false
 
 Whether or not to show a skeleton loading state whilst initialising Braze. Defaults to `true`.
+For configurations where the enabled card types includes cards other than Post Order cards, the
+number of loading state cards shown is limited to the lowest of either `3` or the limit set in
+`cardLimit`
 
 ### `cardLimit`
 

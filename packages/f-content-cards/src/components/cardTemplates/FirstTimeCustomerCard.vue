@@ -1,30 +1,21 @@
 <template>
     <card-container
         :card="card"
-        :banner-before-description="bannerBeforeDescription"
-        :bold-title="!usesLegacyStyles"
+        :is-banner-before-description="true"
+        :should-embolden-title="true"
     >
         <template v-slot:banner>
             <span
-                :class="['c-restaurantCard-banner', $style['c-restaurantCard-banner'], {
-                    [$style['c-restaurantCard-banner-legacy']]: usesLegacyStyles
-                }]">
+                :class="['c-restaurantCard-banner', $style['c-restaurantCard-banner']]">
                 <span
-                    :class="['c-restaurantCard-banner-content', $style['c-restaurantCard-banner-content'], {
-                        [$style['c-restaurantCard-banner-content-legacy']]: usesLegacyStyles
-                    }]"
+                    :class="['c-restaurantCard-banner-content', $style['c-restaurantCard-banner-content']]"
                     data-test-id="FirstTimeCustomerCard-Banner">
                     {{ card.banner }}
                 </span>
             </span>
-            <template v-if="!bannerBeforeDescription">
-                for first time user
-            </template>
         </template>
         <p
-            :class="['c-restaurantCard-footer', $style['c-restaurantCard-footer'], {
-                [$style['c-restaurantCard-footer-legacy']]: usesLegacyStyles
-            }]">
+            :class="['c-restaurantCard-footer', $style['c-restaurantCard-footer']]">
             {{ card.footer }}
         </p>
     </card-container>
@@ -53,16 +44,6 @@ export default {
             type: String,
             default: 'uk'
         }
-    },
-
-    computed: {
-        bannerBeforeDescription () {
-            return this.tenant === 'uk';
-        },
-
-        usesLegacyStyles () {
-            return this.tenant !== 'uk';
-        }
     }
 };
 </script>
@@ -89,24 +70,6 @@ $banner-bgColour-legacy : #cd381f;
     @include font-size(caption);
     font-weight: bold;
     margin-top: spacing(x0.5);
-}
-
-.c-restaurantCard-banner-legacy {
-    background: $banner-bgColour-legacy;
-    transform: skew(-20deg);
-    border-radius: $border-radius;
-    color: white;
-}
-
-.c-restaurantCard-banner-content-legacy {
-    transform: skew(20deg);
-    font-weight: normal;
-}
-
-.c-restaurantCard-footer-legacy {
-    @include font-size(body-s);
-    font-weight: normal;
-    margin-bottom: 0;
 }
 
 </style>
