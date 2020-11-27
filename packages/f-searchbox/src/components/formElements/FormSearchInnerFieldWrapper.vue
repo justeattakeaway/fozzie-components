@@ -8,15 +8,16 @@
         <input
             v-if="streetNumberRequired"
             ref="streetNumberInput"
-            :value="getStreetNumberValue"
+            v-model="streetNumber"
             :class="$style['c-search-streetInput']"
+            @input="onStreetNumberEntered"
             type="input"
             placeholder="N°">
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import FormSearchGeo from './FormSearchGeo.vue';
 
 export default {
@@ -25,11 +26,6 @@ export default {
     },
 
     props: {
-        streetNumber: {
-            type: String,
-            default: ''
-        },
-
         copy: {
             type: Object,
             default:  () => ({})
@@ -37,7 +33,14 @@ export default {
 
         service: {
             type: Object,
-            default: () => {}
+            default: () => {},
+            required: true
+        }
+    },
+
+    data () {
+        return {
+            streetNumber: ''
         }
     },
 
@@ -45,10 +48,16 @@ export default {
         ...mapState('searchbox', [
             'streetNumberRequired',
             'isGeoLocationAvailable'
+        ])
+    },
+
+    methods: {
+        ...mapActions('searchbox', [
+            'setStreetNumber'
         ]),
 
-        getStreetNumberValue () {
-            return this.streetNumber;
+        onStreetNumberEntered () {
+            this.setStreetNumber(this.streetNumber);
         }
     }
 };
@@ -56,6 +65,9 @@ export default {
 
 <style lang="scss" module>
 @import '../../assets/scss/form';
+
+$streetInput-border-colour: $grey--lighter 1px solid;
+$streetInput-width: spacing(x6);
 
 .c-search-innerFields {
     position: absolute;
@@ -67,9 +79,9 @@ export default {
 }
 
 .c-search-streetInput {
-    border-left: $grey--lighter 1px solid;
+    border-left: $streetInput-border-colour;
     margin-right: spacing(x0.5);
-    width: 48px;
+    width: $streetInput-width;
     outline: $white 2px auto;
 
     &:focus {

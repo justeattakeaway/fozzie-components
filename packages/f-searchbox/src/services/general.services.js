@@ -44,8 +44,8 @@ const onCustomSubmit = (submit, address, e) => {
  * For more info see readme for details on the config: `queryString`.
  *
  *
- * @param queryString
- * @param formUrl
+ * @param {string} queryString
+ * @param {string} formUrl
  * @returns {string}
  */
 const generateFormQueryUrl = (queryString, formUrl) => {

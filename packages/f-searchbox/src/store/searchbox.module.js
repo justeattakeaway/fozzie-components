@@ -6,7 +6,8 @@ import {
     SET_STREET_NUMBER_REQUIRED,
     SET_INPUT_FOCUS,
     SET_GEO_LOCATION_AVAILABILITY,
-    SET_FOCUS_ON_INPUT
+    SET_FOCUS_ON_INPUT,
+    SET_STREET_NUMBER_VALUE
 } from './mutation.types';
 
 export default {
@@ -17,6 +18,7 @@ export default {
         errors: [],
         suggestions: [],
         streetNumberRequired: false,
+        streetNumber: '',
         isInputFocus: false,
         isGeoLocationAvailable: false,
         shouldInputFieldHaveFocus: false
@@ -56,6 +58,7 @@ export default {
                     /**
                      * If there's an error we need to clear the sugguestions & set the expected error.
                      */
+                    commit(SET_IS_DIRTY, true);
                     commit(SET_SUGGESTIONS, []);
                     commit(SET_ERRORS, error.errors || [error.message]);
                 }
@@ -72,6 +75,10 @@ export default {
 
         setGeoLocationAvailability ({ commit }, payload) {
             commit(SET_GEO_LOCATION_AVAILABILITY, payload);
+        },
+        
+        setStreetNumber ({ commit }, payload) {
+            commit(SET_STREET_NUMBER_VALUE, payload);
         }
     },
 
@@ -94,6 +101,10 @@ export default {
 
         [SET_STREET_NUMBER_REQUIRED]: (state, streetNumberRequired) => {
             state.streetNumberRequired = streetNumberRequired;
+        },
+    
+        [SET_STREET_NUMBER_VALUE]: (state, streetNumber) => {
+            state.streetNumber = streetNumber;
         },
 
         [SET_INPUT_FOCUS]: (state, isInputFocus) => {

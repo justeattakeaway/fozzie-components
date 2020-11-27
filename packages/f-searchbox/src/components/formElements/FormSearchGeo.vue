@@ -32,7 +32,8 @@ export default {
 
         service: {
             type: Object,
-            default: () => {}
+            default: () => {},
+            required: true
         }
     },
 
@@ -68,15 +69,7 @@ export default {
             if (this.suggestions.length) {
                 this.setSuggestions(Promise.resolve(this.suggestions));
             } else {
-                this.service.getLocationFromGeo().then(
-                    suggestions => {
-                        this.setSuggestions(Promise.resolve(suggestions));
-                    },
-                    error => {
-                        this.setIsDirty(true);
-                        this.setSuggestions(Promise.reject(new Error(error)));
-                    }
-                );
+                this.setSuggestions(this.service.getLocationFromGeo());
             }
         }
     }

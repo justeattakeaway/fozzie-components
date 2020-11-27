@@ -30,7 +30,6 @@
         </label>
 
         <form-search-inner-field-wrapper
-            v-model="streetNumber"
             :copy="copy"
             :service="service" />
     </div>
@@ -72,14 +71,10 @@ export default {
             default: false
         },
 
-        streetNumber: {
-            type: String,
-            default: ''
-        },
-
         service: {
             type: Object,
-            default: () => {}
+            default: () => {},
+            required: true
         }
     },
 
@@ -120,16 +115,12 @@ export default {
          *
          * DELAY: `ALLOWED_SELECTION_TIME: 500ms`
          *
-         * @param value
+         * @param {Boolean} value
          */
         toggleEnterLeaveInput (value) {
-            if (value) {
+            setTimeout(() => {
                 this.setInputFocus(value);
-            } else {
-                setTimeout(() => {
-                    this.setInputFocus(value);
-                }, ALLOWED_SELECTION_TIME);
-            }
+            }, value ? 0 : ALLOWED_SELECTION_TIME);
         }
     }
 };

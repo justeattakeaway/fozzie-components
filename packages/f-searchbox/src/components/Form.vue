@@ -22,7 +22,6 @@
                 :service="service"
                 :should-display-custom-autocomplete="service.isAutocompleteEnabled"
                 :copy="copy"
-                :street-number="streetNumber"
                 :is-compressed="isCompressed" />
 
             <form-search-button
@@ -117,8 +116,7 @@ export default {
             onSubmit,
             shouldAutoPopulateAddress,
             suggestionFormat,
-            requiredFields,
-            streetNumber: ''
+            requiredFields
         };
     },
 
@@ -128,7 +126,9 @@ export default {
             'errors',
             'isValid',
             'streetNumberRequired',
-            'isInputFocus'
+            'isInputFocus',
+            'streetNumber',
+            'isDirty'
         ]),
 
         /**
@@ -137,14 +137,12 @@ export default {
          * 1. Service layer should contain `autocomplete`.
          * 2. The form should have focus.
          * 3. There should be suggestions.
-         * 4. There's no errors (otherwise the suggestions cover the errors) OR the input has been touched.
          *
          * */
         shouldDisplaySuggestions () {
             return this.service.isAutocompleteEnabled
                     && this.isInputFocus
-                    && !!this.suggestions.length
-                    && !this.errors.length;
+                    && !!this.suggestions.length;
         },
 
         /**
@@ -153,7 +151,7 @@ export default {
          * @returns {*}
          */
         errorMessage () {
-            const messageKey = this.errors.length && this.errors[0];
+            const messageKey = this.errors && this.errors.length && this.errors[0];
 
             if (!messageKey) return false;
 
@@ -237,6 +235,8 @@ export default {
          * 1. Checks address validation.
          * 2. If the address is valid we submit the address.
          * 3. Note: `configs` determine custom behaviour, e.g shouldSetCookies & shouldClearAddressOnValidSubmit etc see readme.
+         * 4. If address is `isValid` & `isAutocompleteEnabled` is `true` we need to await `onSelectedSuggestion` before we proceed to make
+         * a search.
          *
          * @param e
          */
@@ -293,7 +293,7 @@ export default {
                 }
 
                 if (value && value.requiresStreetNumber) {
-                    this.setStreetNumberRequired(value.requiresStreetNumber);
+                    this.setStreetNumberRequired(true);
                 }
             });
 

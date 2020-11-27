@@ -44,10 +44,9 @@ const search = ({
  * 2. We use the `requiredFields` (passed in via the tenant config) to determine if we
  * need specific properties e.g. ['streetNumber', 'street', 'locality', 'postcode'].
  *
- * 3. If there are no missing fields we proceed to allowing the user to make a search via their
- * selection.
+ * 3. If there are no missing fields we let the user search using their selection.
  *
- * 4. If there are missing fields like the street number, we display a error specific to the type of
+ * 4. If there are missing fields like the street number, we display an error specific to the type of
  * error returned i.e Please enter a street number (translated) the component then would display the street number
  * field (ES & IT as examples).
  *
@@ -87,7 +86,6 @@ const selectedSuggestion = (
                     : allFields.concat(field)
             ), []);
         
-        // if streetNumber is required and not in the current address
         const streetNumberRequired = requiredFields.includes('streetNumber') && !location.streetNumber;
         
         if (!missingFields.length) {
@@ -97,7 +95,7 @@ const selectedSuggestion = (
                 houseNo: location.streetNumber,
                 where: location.postcode
             };
-            // perform search if all data present
+
             search({}, payload);
             return payload;
         } else if (
@@ -124,9 +122,6 @@ const selectedSuggestion = (
                 requiresStreetNumber: streetNumberRequired
             }
         }
-        
-        // not valid
-        return false;
     });
 };
 
