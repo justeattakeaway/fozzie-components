@@ -152,7 +152,11 @@ export default {
          * @returns {*}
          */
         errorMessage () {
-            const messageKey = this.errors && this.errors.length && this.errors[0];
+            const messageKey =
+                    this.isDirty
+                    && this.errors
+                    && this.errors.length
+                    && this.errors[0];
 
             if (!messageKey) return false;
 
@@ -186,6 +190,7 @@ export default {
                 const errors = !!preSearchValidation && this.service.isValid(value, preSearchValidation);
 
                 if (Array.isArray(errors)) {
+                    this.setIsDirty(true);
                     this.setSuggestions(Promise.reject(new Error(errors[0])));
                 } else {
                     this.setSuggestions(this.service.search(value));
@@ -248,9 +253,7 @@ export default {
                 return this.searchPreviouslySavedAddress(e);
             }
 
-            debugger;
             this.setIsDirty(true);
-            console.log(this.isDirty);
 
             if (this.isValid === true) {
                 this.setErrors([]);
