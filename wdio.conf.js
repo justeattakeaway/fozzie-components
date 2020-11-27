@@ -231,7 +231,7 @@ exports.config = {
     afterTest: () => {
         browser.url('http://localhost:8080');
         browser.maximizeWindow();
-    },
+    }
 
 
     /**
