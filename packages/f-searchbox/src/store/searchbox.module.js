@@ -92,7 +92,7 @@ export default {
         },
 
         [SET_IS_DIRTY]: (state, isDirty) => {
-            state.errors = isDirty;
+            state.isDirty = isDirty;
         },
 
         [SET_SUGGESTIONS]: (state, suggestions) => {

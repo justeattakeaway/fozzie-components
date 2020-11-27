@@ -142,7 +142,8 @@ export default {
         shouldDisplaySuggestions () {
             return this.service.isAutocompleteEnabled
                     && this.isInputFocus
-                    && !!this.suggestions.length;
+                    && !!this.suggestions.length
+                    && (!this.errors.length || this.isDirty);
         },
 
         /**
@@ -246,6 +247,10 @@ export default {
             if (this.hasLastSavedAddress) {
                 return this.searchPreviouslySavedAddress(e);
             }
+
+            debugger;
+            this.setIsDirty(true);
+            console.log(this.isDirty);
 
             if (this.isValid === true) {
                 this.setErrors([]);
