@@ -47,8 +47,9 @@ const search = ({
  * 3. If there are no missing fields we proceed to allowing the user to make a search via their
  * selection.
  *
- * 4.If there are missing fields we like the street number w.e display a error specific to the type of
- * error i.e Please enter a street number (translated)
+ * 4. If there are missing fields like the street number, we display a error specific to the type of
+ * error returned i.e Please enter a street number (translated) the component then would display the street number
+ * field (ES & IT as examples).
  *
  *
  * @param service
