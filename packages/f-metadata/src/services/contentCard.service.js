@@ -5,6 +5,12 @@ import transformCardData from './utils/transformCardData';
 import isCardCurrentlyActive from './utils/isCardCurrentlyActive';
 
 /**
+ * A 'large number' to force cards without an order to be ordered to the back
+ * @type {number}
+ */
+const DEFAULT_ORDER_VALUE = 9e9;
+
+/**
  * List of enabled card types
  *
  * @type {string[]}
@@ -68,7 +74,12 @@ class ContentCards {
      * @returns {ContentCards}
      */
     orderCardsByOrderValue () {
-        this.cards.sort(({ order: a }, { order: b }) => +a - +b);
+        this.cards.sort((
+            { order: a = DEFAULT_ORDER_VALUE },
+            { order: b = DEFAULT_ORDER_VALUE }
+        ) => (
+            +a - +b
+        ));
         return this;
     }
 
