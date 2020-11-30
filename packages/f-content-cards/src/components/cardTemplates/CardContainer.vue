@@ -25,10 +25,7 @@
                 :class="$style['c-contentCard-thumbnail']">
             <div :class="$style['c-content-card-body']">
                 <h3
-                    :class="[$style['c-contentCard-title'], {
-                        [$style['c-contentCard-title-legacy']]: !shouldEmboldenTitle,
-                        [$style['c-emboldenedText--title']]: shouldEmboldenText
-                    }]">
+                    :class="[$style['c-contentCard-title']]">
                     {{ title }}
                 </h3>
                 <h4 :class="[$style['c-contentCard-subTitle'], { [$style['c-emboldenedText--subtitle']]: shouldEmboldenText }]">
@@ -250,10 +247,6 @@ export default {
         display: -webkit-box; /* stylelint-disable-line value-no-vendor-prefix */
         -webkit-line-clamp: 2; // stop at 2 lines
         -webkit-box-orient: vertical;
-    }
-
-    .c-contentCard-title-legacy {
-        font-weight: normal;
     }
 
     .c-contentCard-subTitle {
