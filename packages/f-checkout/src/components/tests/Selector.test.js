@@ -10,6 +10,15 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
+const fulfillmentTimes = [
+    {
+        from: 'beginning',
+        label: 'time 1',
+        selected: false,
+        to: 'end'
+    }
+]
+
 const defaultState = {
     id: '',
     serviceType: CHECKOUT_METHOD_DELIVERY,
@@ -18,7 +27,7 @@ const defaultState = {
         mobileNumber: '447111111111'
     },
     fulfillment: {
-        times: [],
+        times: fulfillmentTimes,
         address: {
             line1: '1 Bristol Road',
             line2: 'Flat 1',
@@ -79,7 +88,7 @@ describe('Selector', () => {
             propsData
         });
 
-        const selector = wrapper.find('[data-test-id="fulfillment-time"]');
+        const selector = wrapper.find('[data-test-id="form-select"]');
 
         // Assert
         expect(selector.html()).toMatchSnapshot();
@@ -94,7 +103,7 @@ describe('Selector', () => {
             propsData
         });
 
-        const selector = wrapper.find('[data-test-id="fulfillment-time"]');
+        const selector = wrapper.find('[data-test-id="form-select"]');
 
         // Assert
         expect(selector.html()).toMatchSnapshot();
