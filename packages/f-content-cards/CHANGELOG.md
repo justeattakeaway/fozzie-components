@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.2.0-beta.7
+------------------------------
+*November 30, 2020*
+
+### Changed
+- Minor change to remove last of legacy styles in the content card container
+
+
 v2.2.0-beta.6
 ------------------------------
 *November 25, 2020*
