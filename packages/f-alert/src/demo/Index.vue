@@ -9,24 +9,50 @@
         <div data-test-id="component-controls">
             <h1>Component Controls</h1>
             <label for='locale'>Locale</label>
-            <select name='locale' data-test-id='control-locale' v-model="controls.locale">
-                <option value='en-GB'>en-GB</option>
-                <option value='en-AU'>en-AU</option>
+            <select
+                v-model="controls.locale"
+                name='locale'
+                data-test-id='control-locale'>
+                <option value='en-GB'>
+                    en-GB
+                </option>
+                <option value='en-AU'>
+                    en-AU
+                </option>
             </select>
             <br>
             <label for='alert-type'>Alert Type</label>
-            <select name='alert-type' data-test-id='control-alertType' v-model="controls.alertType">
-                <option value='success'>success</option>
-                <option value='warning'>warning</option>
-                <option value='danger'>danger</option>
-                <option value='info'>info</option>
+            <select
+                v-model="controls.alertType"
+                name='alert-type'
+                data-test-id='control-alertType'>
+                <option value='success'>
+                    success
+                </option>
+                <option value='warning'>
+                    warning
+                </option>
+                <option value='danger'>
+                    danger
+                </option>
+                <option value='info'>
+                    info
+                </option>
             </select>
             <br>
             <label for="is-dismissable">Is Dismissable</label>
-            <input id="is-dismissable" type="checkbox" data-test-id='control-isDismissable' v-model="controls.isDismissable">
+            <input
+                id="is-dismissable"
+                v-model="controls.isDismissable"
+                type="checkbox"
+                data-test-id='control-isDismissable'>
             <br>
             <label for="heading">Heading</label>
-            <input id="heading" type="text" data-test-id='control-heading' v-model='controls.heading'> 
+            <input
+                id="heading"
+                v-model='controls.heading'
+                type="text"
+                data-test-id='control-heading'>
         </div>
 
         <vue-alert
@@ -61,8 +87,8 @@ body {
 }
 
 .component-controls {
-    color: #ffffff;
+    color: #fff;
     font-family: 'Helvetica Neue', sans-serif;
-    background-color:#ffa500;
+    background-color: #ffa500;
 }
 </style>
