@@ -74,7 +74,7 @@ export default {
         controls: {
             locale: 'en-GB',
             alertType: 'success',
-            isDismissable: false,
+            isDismissable: true,
             heading: 'Title of the alert'
         }
     })
