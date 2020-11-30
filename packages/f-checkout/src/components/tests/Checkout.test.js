@@ -14,7 +14,9 @@ localVue.use(Vuex);
 const fulfillmentTimes = [
     {
         from: 'beginning',
-        label: 'time 1',
+        label: {
+            text: 'time 1'
+        },
         selected: false,
         to: 'end'
     }

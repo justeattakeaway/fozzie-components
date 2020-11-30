@@ -13,7 +13,9 @@ localVue.use(Vuex);
 const fulfillmentTimes = [
     {
         from: 'beginning',
-        label: 'time 1',
+        label: {
+            text: 'time 1'
+        },
         selected: false,
         to: 'end'
     }
@@ -79,33 +81,74 @@ describe('Selector', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    it('should show the delivery label when the `serviceType` is `delivery`', async () => {
-        // Arrange & Act
-        const wrapper = mount(Selector, {
-            store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_DELIVERY }),
-            i18n,
-            localVue,
-            propsData
+    describe('computed ::', () => {
+        describe('orderMethod', () => {
+            it('should show the delivery label when the `serviceType` is `delivery`', () => {
+                // Arrange & Act
+                const wrapper = mount(Selector, {
+                    store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_DELIVERY }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const selector = wrapper.find('[data-test-id="form-select"]');
+
+                // Assert
+                expect(selector.html()).toMatchSnapshot();
+            });
+
+            it('should show the collection label when the `serviceType` is `collection`', () => {
+                // Arrange & Act
+                const wrapper = mount(Selector, {
+                    store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const selector = wrapper.find('[data-test-id="form-select"]');
+
+                // Assert
+                expect(selector.html()).toMatchSnapshot();
+            });
         });
 
-        const selector = wrapper.find('[data-test-id="form-select"]');
+        describe('fulfillmentTimes', () => {
+            it('should create an array of labels from `fulfillment.times` state', () => {
+                // Arrange && Act
+                const wrapper = shallowMount(Selector, {
+                    store: createStore({ ...defaultState }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
 
-        // Assert
-        expect(selector.html()).toMatchSnapshot();
+                const expectedTimes = ["time 1"]
+
+                // Assert
+                expect(wrapper.vm.fulfillmentTimes).toEqual(expectedTimes)
+            })
+        })
     });
 
-    it('should show the collection label when the `serviceType` is `collection`', async () => {
-        // Arrange & Act
-        const wrapper = mount(Selector, {
-            store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
-            i18n,
-            localVue,
-            propsData
+    describe('methods ::', () => {
+        describe('selectionChanged', () => {
+            it('should update `fulfillment.times` time to be selected', () => {
+                // Arrange && Act
+                const wrapper = shallowMount(Selector, {
+                    store: createStore({ ...defaultState }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                wrapper.vm.selectionChanged ('time 1');
+
+
+                // Assert
+                expect(wrapper.vm.fulfillment.times[0].selected).toBe(true)
+            });
         });
-
-        const selector = wrapper.find('[data-test-id="form-select"]');
-
-        // Assert
-        expect(selector.html()).toMatchSnapshot();
     });
 });

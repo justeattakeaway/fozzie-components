@@ -5,7 +5,7 @@
         :class="$style['o-form-select']"
         input-type="dropdown"
         :label-text="orderMethod"
-        :dropdown-options="fulfilmentTimes"
+        :dropdown-options="fulfillmentTimes"
         @input="selectionChanged" />
 </template>
 
@@ -29,7 +29,7 @@ export default {
                 : this.$t('labels.collectionOrderMethod');
         },
 
-        fulfilmentTimes () {
+        fulfillmentTimes () {
             const times = this.fulfillment.times.map(time => time.label.text);
             return times;
         }
