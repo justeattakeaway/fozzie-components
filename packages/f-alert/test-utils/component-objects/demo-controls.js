@@ -17,7 +17,7 @@ exports.selectAlertTypeByValue = alertType => {
  * @param {boolean} isDismissable
  */
 exports.isDissmiable = isDismissable => {
-    if (!isDismissable) {
+    if (!isDismissable && controlIsDismissable().isSelected()) {
         controlIsDismissable().click();
     }
 };
