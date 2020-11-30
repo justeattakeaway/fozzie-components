@@ -10,6 +10,7 @@ v2.20.0
 ### Added
 - `demo-controls-helper.js` to contain any shared functions for controlling props values in WebDriverIO tests
 
+
 v2.19.0
 ------------------------------
 *November 24, 2020*
