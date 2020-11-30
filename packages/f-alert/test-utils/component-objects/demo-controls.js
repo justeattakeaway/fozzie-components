@@ -27,6 +27,3 @@ exports.isDissmiable = () => {
 exports.setHeaderTextValue = headerText => {
     controlHeading().setValue(headerText);
 };
-
-
-
