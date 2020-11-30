@@ -1,40 +1,29 @@
 <template>
     <div
-        data-test-id="form-select"
-        :class="[
-            $style['o-form-select'],
-            (selectedTime ? $style['o-form-select--float'] : '')
-        ]">
-        <label
-            for="time-selection"
-            data-test-id="fulfillment-time-label"
-            :class="$style['o-form-select-label']">
-            {{ orderMethod }}
-        </label>
-        <select
+        data-test-id="form-select">
+        <form-field
             id="time-selection"
             v-model="selectedTime"
-            :class="$style['o-form-select-input']"
+            input-type="dropdown"
+            :label-text="orderMethod"
+            :dropdown-options="dropdownOptions"
             data-test-id="fulfillment-time"
-            @change="selectionChanged">
-            <option
-                v-for="(time, index) in fulfillment.times"
-                :key="index"
-                :value="time.from">
-                {{ time.label.text }}
-            </option>
-        </select>
+            @input="selectionChanged" />
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import FormField from '@justeat/f-form-field';
 import { CHECKOUT_METHOD_DELIVERY } from '../constants';
 
 export default {
+    components: { FormField },
+
     data () {
         return {
-            selectedTime: null
+            selectedTime: null,
+            dropdownOptions: []
         };
     },
 
@@ -57,76 +46,31 @@ export default {
             if (selected) {
                 this.selectedTime = selected.from;
             }
+            this.createLables();
+        }
+    },
+
+    created () {
+        if (this.dropdownOptions && this.fulfillment.times.length > 1) {
+            this.createLables();
         }
     },
 
     methods: {
         selectionChanged () {
             this.fulfillment.times.forEach(el => { el.selected = false; });
-            const newSelected = this.fulfillment.times.find(t => t.from === this.selectedTime);
+            const newSelected = this.fulfillment.times.find(t => t.label.text === this.selectedTime);
             if (newSelected) {
                 newSelected.selected = true;
             }
+        },
+
+        createLables () {
+            this.fulfillment.times.forEach(time => {
+                this.dropdownOptions.push(time.label.text);
+            });
+            this.selectedTime = this.fulfillment.times[0].label.text;
         }
     }
 };
 </script>
-
-<style lang="scss" module>
-$form-label-colour                        : $grey--dark;
-$form-input-colour                        : $color-text;
-$form-input-bg                            : $white;
-$form-input-borderRadius                  : 3px;
-$form-input-borderWidth                   : 1px;
-$form-input-borderColour                  : $grey--light;
-$form-input-borderColour--focus           : $grey--dark;
-
-.o-form-select {
-    position: relative;
-    height: 60px;
-    margin: spacing(x2) 0;
-    padding: 0;
-    @include font-size(body-l);
-    font-family: $font-family-base;
-    color: $form-input-colour;
-    font-weight: $font-weight-base;
-    background-color: $form-input-bg;
-    border: $form-input-borderWidth solid $form-input-borderColour;
-    border-radius: $form-input-borderRadius;
-
-    .o-form-select-label {
-        display: block;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        padding: spacing();
-        color: $form-label-colour;
-        cursor: pointer;
-    }
-
-    .o-form-select-input {
-        height: 100%;
-        width: 100%;
-        padding: spacing(x0.5);
-        border: none;
-        cursor: pointer;
-        color: $color-text;
-    }
-}
-
-/**
- * Modifier – .o-form-select--float
- *
- * Moves the select label to sit above chosen option
- */
-.o-form-select--float {
-    .o-form-select-label {
-        @include font-size(body-s);
-        top: 15px;
-    }
-
-    .o-form-select-input {
-        padding-top: spacing(x3);
-    }
-}
-</style>
