@@ -51,8 +51,6 @@ export default {
         }
     },
 
-
-
     methods: {
         selectionChanged () {
             this.fulfillment.times.forEach(el => { el.selected = false; });
