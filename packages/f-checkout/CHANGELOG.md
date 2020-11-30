@@ -8,7 +8,7 @@ v0.12.0
 *November 30, 2020*
 
 ### Changed
-- Selector component to use `f-form-field` dropdown module.
+- Selector component to use `f-form-field` dropdown component.
 - Button version.
 
 

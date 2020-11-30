@@ -17,7 +17,7 @@ const fulfillmentTimes = [
         selected: false,
         to: 'end'
     }
-]
+];
 
 const defaultState = {
     id: '',

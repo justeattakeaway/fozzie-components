@@ -30,9 +30,7 @@ export default {
         },
 
         fulfilmentTimes () {
-            const times = this.fulfillment.times.map(time => {
-                return time.label.text;
-            });
+            const times = this.fulfillment.times.map(time => time.label.text);
             return times;
         }
     },
