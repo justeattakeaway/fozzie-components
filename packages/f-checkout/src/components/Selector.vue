@@ -30,6 +30,10 @@ export default {
         },
 
         fulfillmentTimes () {
+            /*
+            * Create an array from fulfillment times labels to
+            * display as options in dropdown
+            */
             const times = this.fulfillment.times.map(time => time.label.text);
             return times;
         }
@@ -37,6 +41,10 @@ export default {
 
     methods: {
         selectionChanged (e) {
+            /*
+            * Update all fulfillment.times.selected to false
+            * Update chosen fulfillment.times.selected to true
+            */
             this.fulfillment.times.forEach(el => { el.selected = false; });
             const newSelected = this.fulfillment.times.find(time => time.label.text === e);
             if (newSelected) {

@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.12.0
 ------------------------------
-*November 30, 2020*
+*December 1, 2020*
 
 ### Changed
 - Selector component to use `f-form-field` dropdown component.
