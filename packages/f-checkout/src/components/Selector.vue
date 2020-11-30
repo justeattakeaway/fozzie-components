@@ -1,16 +1,12 @@
 <template>
-    <div
+    <form-field
+        id="time-selection"
         data-test-id="form-select"
-        :class="$style['o-form-select']">
-        <form-field
-            id="time-selection"
-            v-model="selectedTime"
-            input-type="dropdown"
-            :label-text="orderMethod"
-            :dropdown-options="dropdownOptions"
-            data-test-id="fulfillment-time"
-            @input="selectionChanged" />
-    </div>
+        :class="$style['o-form-select']"
+        input-type="dropdown"
+        :label-text="orderMethod"
+        :dropdown-options="fulfilmentTimes"
+        @input="selectionChanged" />
 </template>
 
 <script>
@@ -20,13 +16,6 @@ import { CHECKOUT_METHOD_DELIVERY } from '../constants';
 
 export default {
     components: { FormField },
-
-    data () {
-        return {
-            selectedTime: null,
-            dropdownOptions: []
-        };
-    },
 
     computed: {
         ...mapState('checkout', [
@@ -38,33 +27,23 @@ export default {
             return this.serviceType === CHECKOUT_METHOD_DELIVERY
                 ? this.$t('labels.deliveryOrderMethod')
                 : this.$t('labels.collectionOrderMethod');
-        }
-    },
+        },
 
-    watch: {
-        'fulfillment.times' (newValue) {
-            const selected = newValue.find(t => t.selected);
-            if (selected) {
-                this.selectedTime = selected.from;
-            }
-            this.createDropdownOptions();
+        fulfilmentTimes () {
+            const times = this.fulfillment.times.map(time => {
+                return time.label.text;
+            });
+            return times;
         }
     },
 
     methods: {
-        selectionChanged () {
+        selectionChanged (e) {
             this.fulfillment.times.forEach(el => { el.selected = false; });
-            const newSelected = this.fulfillment.times.find(t => t.label.text === this.selectedTime);
+            const newSelected = this.fulfillment.times.find(time => time.label.text === e);
             if (newSelected) {
                 newSelected.selected = true;
             }
-        },
-
-        createDropdownOptions () {
-            this.fulfillment.times.forEach(time => {
-                this.dropdownOptions.push(time.label.text);
-            });
-            this.selectedTime = this.fulfillment.times[0].label.text;
         }
     }
 };
