@@ -32,7 +32,7 @@
 
         <a
             v-if="showOffersLink"
-            data-test-id="offers-link-mobile"
+            data-test-id="offers-link"
             data-trak='{
                 "trakEvent": "click",
                 "category": "header",
@@ -54,7 +54,7 @@
                     v-if="showOffersLink"
                     class="c-nav-list-item">
                     <a
-                        data-test-id="offers-link-desktop"
+                        data-test-id="offers-link"
                         data-trak='{
                             "trakEvent": "click",
                             "category": "header",

@@ -1,12 +1,6 @@
 import FooterComponent from '../../../test-utils/component-objects/f-footer.component';
 
 describe('f-footer component tests', () => {
-    beforeEach(() => {
-        // Arrange
-        browser.url('http://localhost:8080');
-        FooterComponent.waitForFooter();
-    });
-
     it('should display the footer', () => {
         //Assert
         expect(FooterComponent.isFooterDisplayed()).toBe(true);
@@ -32,6 +26,9 @@ describe('f-footer component tests', () => {
 
         //Assert
         expect(browser.getUrl()).toContain("https://play.google.com/");
+
+        //Act
+        // browser.back();
     });
 
     it('should display Social Media Icons', () => {
