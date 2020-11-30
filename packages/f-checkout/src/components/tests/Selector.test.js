@@ -78,8 +78,6 @@ describe('Selector', () => {
             localVue,
             propsData
         });
-        // expect(wrapper.html()).toEqual('');
-
 
         const selector = wrapper.find('[data-test-id="fulfillment-time"]');
 
