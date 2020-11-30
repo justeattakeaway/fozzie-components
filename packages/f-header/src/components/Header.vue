@@ -78,7 +78,7 @@ export default {
 
         showDeliveryEnquiry: {
             type: Boolean,
-            default: false
+            default: true
         },
 
         showLoginInfo: {
@@ -93,7 +93,7 @@ export default {
 
         showOffersLink: {
             type: Boolean,
-            default: false
+            default: true
         },
 
         userInfoProp: {

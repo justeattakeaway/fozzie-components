@@ -281,7 +281,7 @@ describe('Navigation', () => {
             });
 
             // Assert
-            expect(wrapper.find('[data-test-id="offers-link-desktop"]').exists()).toBe(true);
+            expect(wrapper.find('[data-test-id="offers-link"].u-showAboveMid').exists()).toBe(true);
         });
 
         it('should not be shown on desktop when "showOffersLink" is false', () => {
@@ -294,7 +294,7 @@ describe('Navigation', () => {
             });
 
             // Assert
-            expect(wrapper.find('[data-test-id="offers-link-desktop"]').exists()).toBe(false);
+            expect(wrapper.find('[data-test-id="offers-link"].u-showAboveMid').exists()).toBe(false);
         });
 
         describe('on mobile', () => {
@@ -310,7 +310,7 @@ describe('Navigation', () => {
                 });
 
                 // Assert
-                expect(wrapper.find('[data-test-id="offers-link-mobile"]').exists()).toBe(true);
+                expect(wrapper.find('[data-test-id="offers-link"].u-showBelowMid').exists()).toBe(true);
             });
 
             it('should not be shown when "showOffersLink" is false', () => {
@@ -323,7 +323,7 @@ describe('Navigation', () => {
                 });
 
                 // Assert
-                expect(wrapper.find('[data-test-id="offers-link-mobile"]').exists()).toBe(false);
+                expect(wrapper.find('[data-test-id="offers-link"].u-showBelowMid').exists()).toBe(false);
             });
 
             it('should be shown with open nav when "showOffersLink" is true', async () => {
@@ -342,7 +342,7 @@ describe('Navigation', () => {
                 });
 
                 // Assert
-                expect(wrapper.find('[data-test-id="offers-link-mobile"]').exists()).toBe(true);
+                expect(wrapper.find('[data-test-id="offers-link"].u-showBelowMid').exists()).toBe(true);
             });
 
             it('should not be shown with open nav when "showOffersLink" is false', async () => {
@@ -361,7 +361,7 @@ describe('Navigation', () => {
                 });
 
                 // Assert
-                expect(wrapper.find('[data-test-id="offers-link-mobile"]').exists()).toBe(false);
+                expect(wrapper.find('[data-test-id="offers-link"].u-showBelowMid').exists()).toBe(false);
             });
         });
     });
