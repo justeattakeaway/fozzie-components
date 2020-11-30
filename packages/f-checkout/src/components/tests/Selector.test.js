@@ -124,12 +124,12 @@ describe('Selector', () => {
                     propsData
                 });
 
-                const expectedTimes = ["time 1"]
+                const expectedTimes = ['time 1'];
 
                 // Assert
-                expect(wrapper.vm.fulfillmentTimes).toEqual(expectedTimes)
-            })
-        })
+                expect(wrapper.vm.fulfillmentTimes).toEqual(expectedTimes);
+            });
+        });
     });
 
     describe('methods ::', () => {
@@ -143,11 +143,11 @@ describe('Selector', () => {
                     propsData
                 });
 
-                wrapper.vm.selectionChanged ('time 1');
+                wrapper.vm.selectionChanged('time 1');
 
 
                 // Assert
-                expect(wrapper.vm.fulfillment.times[0].selected).toBe(true)
+                expect(wrapper.vm.fulfillment.times[0].selected).toBe(true);
             });
         });
     });
