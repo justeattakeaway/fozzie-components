@@ -13,8 +13,8 @@ exports.selectAlertTypeByValue = alertType => {
 };
 
 /**
- * Sets the alert type of a component based off the 'Alert Type' control dropdown value
- * @param {string} alertType
+ * Sets whether the component is dismissable based off the 'Is Dismissable' checkbox
+ * @param {boolean} isDismissable
  */
 exports.isDissmiable = isDismissable => {
     if (!isDismissable) {
