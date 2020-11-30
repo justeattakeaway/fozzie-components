@@ -53,6 +53,10 @@ export default {
     right: spacing(x3);
     bottom: 20px;
     transform: rotate(180deg);
+
+    path {
+        fill: $grey--dark;
+    }
 }
 
 .c-formDropdown-select {
@@ -60,7 +64,8 @@ export default {
     height: 100%;
     width: 100%;
     font: inherit;
-    background: inherit;
+    color: inherit;
+    background: transparent;
     outline: none;
 
     /* Remove default styling */
