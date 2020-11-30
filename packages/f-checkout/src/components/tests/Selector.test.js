@@ -1,6 +1,6 @@
 import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
 import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
 import Selector from '../Selector.vue';
 import tenantConfigs from '../../tenants';
@@ -70,10 +70,27 @@ describe('Selector', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    xit('should show the delivery label when the `serviceType` is `delivery`', async () => {
+    it('should show the delivery label when the `serviceType` is `delivery`', async () => {
         // Arrange & Act
-        const wrapper = shallowMount(Selector, {
+        const wrapper = mount(Selector, {
             store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_DELIVERY }),
+            i18n,
+            localVue,
+            propsData
+        });
+        // expect(wrapper.html()).toEqual('');
+
+
+        const selector = wrapper.find('[data-test-id="fulfillment-time"]');
+
+        // Assert
+        expect(selector.html()).toMatchSnapshot();
+    });
+
+    it('should show the collection label when the `serviceType` is `collection`', async () => {
+        // Arrange & Act
+        const wrapper = mount(Selector, {
+            store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
             i18n,
             localVue,
             propsData
@@ -82,21 +99,6 @@ describe('Selector', () => {
         const selector = wrapper.find('[data-test-id="fulfillment-time"]');
 
         // Assert
-        expect(selector.attributes('labeltext')).toEqual('');
-    });
-
-    xit('should show the collection label when the `serviceType` is `collection`', async () => {
-        // Arrange & Act
-        const wrapper = shallowMount(Selector, {
-            store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
-            i18n,
-            localVue,
-            propsData
-        });
-
-        const selectorLabel = wrapper.find('[data-test-id="fulfillment-time-label"]');
-
-        // Assert
-        expect(selectorLabel.html()).toMatchSnapshot();
+        expect(selector.html()).toMatchSnapshot();
     });
 });

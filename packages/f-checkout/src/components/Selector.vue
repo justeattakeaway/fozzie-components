@@ -1,6 +1,7 @@
 <template>
     <div
-        data-test-id="form-select">
+        data-test-id="form-select"
+        :class="$style['o-select']">
         <form-field
             id="time-selection"
             v-model="selectedTime"
@@ -50,11 +51,7 @@ export default {
         }
     },
 
-    created () {
-        if (this.dropdownOptions && this.fulfillment.times.length > 1) {
-            this.createLables();
-        }
-    },
+
 
     methods: {
         selectionChanged () {
@@ -74,3 +71,9 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" module>
+.o-select {
+    margin-top: spacing(x2);
+}
+</style>
