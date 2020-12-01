@@ -40,7 +40,7 @@
                 </option>
             </select>
             <br>
-            <label for="is-dismissible">Is Dismissable</label>
+            <label for="is-dismissible">Is Dismissible</label>
             <input
                 id="is-dismissible"
                 v-model="controls.isDismissible"
