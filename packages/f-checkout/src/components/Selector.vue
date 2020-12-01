@@ -1,22 +1,12 @@
 <template>
-    <div>
-        <form-field
-            id="time-selection"
-            data-test-id="form-select"
-            :class="$style['o-form-select']"
-            input-type="dropdown"
-            :label-text="orderMethod"
-            :dropdown-options="fulfillmentTimes"
-            @input="selectionChanged" />
-        <form-field
-            id="time-selection"
-            data-test-id="form-select"
-            :class="$style['o-form-select']"
-            input-type="dropdown"
-            :label-text="orderMethod"
-            :dropdown-options="fulfillment.times"
-            @input="selectionChanged" />
-    </div>
+    <form-field
+        id="time-selection"
+        data-test-id="form-select"
+        :class="$style['o-form-select']"
+        input-type="dropdown"
+        :label-text="orderMethod"
+        :dropdown-options="fulfillmentTimes"
+        @input="selectionChanged" />
 </template>
 
 <script>
@@ -54,8 +44,12 @@ export default {
             * Update all fulfillment.times.selected to false
             * Update chosen fulfillment.times.selected to true
             */
-            this.fulfillment.times.find(time => {
-                time.label.text === e ? time.selected = true : time.selected = false;
+            this.fulfillment.times.forEach(time => {
+                if (time.label.text === e) {
+                    time.selected = true;
+                } else {
+                    time.selected = false;
+                }
             });
         }
     }
