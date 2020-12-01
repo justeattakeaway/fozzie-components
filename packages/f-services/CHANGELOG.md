@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.6.0
 ------------------------------
-*November 30, 2020*
+*December 1, 2020*
 
 ### Changed
 - `getFormValidationState` function to return the full path of a nested object.
