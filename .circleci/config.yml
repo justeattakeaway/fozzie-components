@@ -30,6 +30,7 @@ commands:
     description: Sends a slack notifaction on job failure
     steps:
       - slack/notify:
+          branch_pattern: master
           event: fail
           custom: |
             {
@@ -76,6 +77,7 @@ commands:
     description: Sends a slack notifaction on job success
     steps:
       - slack/notify:
+          branch_pattern: master
           event: pass
           custom: |
             {
