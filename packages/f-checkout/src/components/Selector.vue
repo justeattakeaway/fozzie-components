@@ -1,5 +1,5 @@
 <template>
-    <form-field
+    <form-dropdown
         id="time-selection"
         data-test-id="form-select"
         :class="$style['c-selector']"
@@ -11,11 +11,11 @@
 
 <script>
 import { mapState } from 'vuex';
-import FormField from '@justeat/f-form-field';
+import FormDropdown from '@justeat/f-form-field';
 import { CHECKOUT_METHOD_DELIVERY } from '../constants';
 
 export default {
-    components: { FormField },
+    components: { FormDropdown },
 
     computed: {
         ...mapState('checkout', [
@@ -29,21 +29,21 @@ export default {
                 : this.$t('labels.collectionOrderMethod');
         },
 
+        /*
+        * Create an array from fulfillment times labels to
+        * display as options in dropdown
+        */
         fulfillmentTimes () {
-            /*
-            * Create an array from fulfillment times labels to
-            * display as options in dropdown
-            */
             return this.fulfillment.times.map(time => time.label.text);
         }
     },
 
     methods: {
+        /*
+        * Update all fulfillment.times.selected to false
+        * Update chosen fulfillment.times.selected to true
+        */
         selectionChanged (e) {
-            /*
-            * Update all fulfillment.times.selected to false
-            * Update chosen fulfillment.times.selected to true
-            */
             this.fulfillment.times.forEach(time => {
                 time.selected = time.label.text === e;
             });
