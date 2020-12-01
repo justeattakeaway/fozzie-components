@@ -1,7 +1,7 @@
 const componentControls = () => $('[data-test-id="component-controls"]');
 
 const controlAlertType = () => componentControls().$('[data-test-id="control-alertType"]');
-const controlIsDismissable = () => componentControls().$('[data-test-id="control-isDismissable"]');
+const controlIsDismissible = () => componentControls().$('[data-test-id="control-isDismissible"]');
 const controlHeading = () => componentControls().$('[data-test-id="control-heading"]');
 
 /**
@@ -14,11 +14,11 @@ exports.selectAlertTypeByValue = alertType => {
 
 /**
  * Sets whether the component is dismissable based off the 'Is Dismissable' checkbox
- * @param {boolean} isDismissable
+ * @param {boolean} isDismissible
  */
-exports.isDissmiable = isDismissable => {
-    if (!isDismissable && controlIsDismissable().isSelected()) {
-        controlIsDismissable().click();
+exports.isDismisible = isDismisible => {
+    if (!isDismisible && controlIsDismissible().isSelected()) {
+        controlIsDismissible().click();
     }
 };
 

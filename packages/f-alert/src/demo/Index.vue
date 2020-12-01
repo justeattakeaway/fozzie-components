@@ -43,9 +43,9 @@
             <label for="is-dismissable">Is Dismissable</label>
             <input
                 id="is-dismissable"
-                v-model="controls.isDismissable"
+                v-model="controls.isDismissible"
                 type="checkbox"
-                data-test-id='control-isDismissable'>
+                data-test-id='control-isDismissible'>
             <br>
             <label for="heading">Heading</label>
             <input
@@ -54,11 +54,10 @@
                 type="text"
                 data-test-id='control-heading'>
         </div>
-
         <vue-alert
             :locale='controls.locale'
             :type="controls.alertType"
-            :is-dismissable="controls.isDismissable"
+            :is-dismissible="controls.isDismissible"
             :heading="controls.heading">
             You can put any HTML here!
         </vue-alert>
@@ -74,7 +73,7 @@ export default {
         controls: {
             locale: 'en-GB',
             alertType: 'success',
-            isDismissable: true,
+            isDismissible: true,
             heading: 'Title of the alert'
         }
     })
