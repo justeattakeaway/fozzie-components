@@ -21,8 +21,8 @@ export const AlertComponent = () => ({
         heading: {
             default: text('Heading', 'Title of the alert')
         },
-        isDismissable: {
-            default: boolean('Is it dismissable?', true)
+        isDismissible: {
+            default: boolean('Is it dismissible?', true)
         }
     },
     template: `
@@ -34,7 +34,7 @@ export const AlertComponent = () => ({
         <vue-alert
             :locale="locale"
             :type="type"
-            :isDismissable="isDismissable"
+            :isDismissible="isDismissible"
             :heading="heading">
             You can put any HTML here!
         </vue-alert>

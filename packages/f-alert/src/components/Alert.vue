@@ -72,7 +72,7 @@ export default {
             type: String,
             required: true
         },
-        isDismissable: {
+        isDismissible: {
             type: Boolean,
             default: false
         }
