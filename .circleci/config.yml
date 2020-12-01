@@ -31,7 +31,46 @@ commands:
     steps:
       - slack/notify:
           event: fail
-          template: basic_fail_1
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Your job *${CIRCLE_JOB}* has failed ⚠️"
+                  },
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Commiter*:${CIRCLE_USERNAME}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*SHA*:${CIRCLE_SHA1}"
+                    }
+                  ],
+                  "accessory": {
+                    "type": "image",
+                    "image_url": "https://avatars3.githubusercontent.com/u/30729620?s=400&u=61309ea885d27e19266fa986dac9194defb45197&v=4",
+                    "alt_text": "Fozzie Logo"
+                  }
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Job"
+                      },
+                      "url": "${CIRCLE_BUILD_URL}"
+                    }
+                  ]
+                }
+              ]
+            }
 
   slack_notify_success:
     description: Sends a slack notifaction on job success
@@ -40,13 +79,12 @@ commands:
           event: pass
           custom: |
             {
-              "text": "",
               "blocks": [
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Your job *${CIRCLE_JOB}* succeeded 🎉"
+                    "text": "Your job *${CIRCLE_JOB}* has succeeded 🎉"
                   },
                   "fields": [
                     {

@@ -18,7 +18,8 @@
                 data-test-id="alert-heading">
                 {{ heading }}
             </h2>
-            <button v-if="isDismissable"
+            <button
+                v-if="isDismissable"
                 type="button"
                 :class="[$style['c-alert-dismiss'], 'o-btn o-btn--icon']"
                 data-test-id="alert-dismiss"
