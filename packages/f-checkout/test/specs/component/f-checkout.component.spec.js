@@ -1,5 +1,7 @@
 import forEach from 'mocha-each';
 import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.component';
+// import WebdriverExtensions from '../../../../../test/utils/webdriverio-extensions';
+import { ERRORS } from '../../../test-utils/component-objects/f-checkout-selectors';
 
 describe('f-checkout component tests', () => {
     beforeEach(() => {
@@ -18,13 +20,27 @@ describe('f-checkout component tests', () => {
         expect(CheckoutComponent.isAllergenLinkDisplayed()).toBe(true);
     });
 
+    forEach(Object.keys(CheckoutComponent.errorMessages))
+                .it.only('each fields error message should be displayed', key => {
+                    // Act
+                    CheckoutComponent.submit();
+                    CheckoutComponent.WaitForErrorMessage(key);
+
+                    // Assert
+                    expect(CheckoutComponent.errorMessages[key]().isDisplayed()).toBe(true);
+                });
+
+    forEach(Object.keys(CheckoutComponent.errorMessages)).it('each fields error message should not be displayed by default', key => {
+        // Assert
+        expect(CheckoutComponent.errorMessages[key]().isDisplayed()).toBe(false);
+    });
+
     forEach(Object.keys(CheckoutComponent.inputs)).it('should display all fields', key => {
         // Assert
         expect(CheckoutComponent.inputs[key]().isDisplayed()).toBe(true);
     });
 
-    // Skip until we have something to assert on
-    it.skip('should submit the checkout form', () => {
+    it('should submit the checkout form', () => {
         // Arrange
         const addressInfo = {
             mobileNumber: '07777777779',
@@ -35,7 +51,7 @@ describe('f-checkout component tests', () => {
         };
 
         // Act
-        CheckoutComponent.submitCheckoutForm(addressInfo);
+        CheckoutComponent.populateCheckoutForm(addressInfo);
         CheckoutComponent.inputUserNote('No mushrooms!');
         CheckoutComponent.selectFulfillmentTime('As soon as possible');
         CheckoutComponent.submit();

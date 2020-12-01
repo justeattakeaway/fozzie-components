@@ -1,22 +1,46 @@
-const checkoutComponent = () => $('[data-test-id="checkout-component"]');
+/* global browser, $ */
+
+import {
+    ALLERGEN_LINK,
+    CHECKOUT_COMPONENT,
+    FULFILLMENT_TIME_DROPDOWN,
+    USER_NOTE_INPUT,
+    GO_TO_PAYMENT_BUTTON,
+    INPUTS,
+    ERRORS
+} from './f-checkout-selectors';
+
+const { doesElementExist } = require('../../../../test/utils/webdriverio-extensions')(browser);
+
+doesElementExist(CHECKOUT_COMPONENT);
+
+const checkoutComponent = () => $(CHECKOUT_COMPONENT);
 
 // Form Fields
 
-const userNoteInput = () => $('[data-test-id="user-note"] textarea');
+const allergenLink = () => $(ALLERGEN_LINK);
+const fulfillmentTimeDropdown = () => $(FULFILLMENT_TIME_DROPDOWN);
+const goToPaymentButton = () => $(GO_TO_PAYMENT_BUTTON);
+const userNoteInput = () => $(USER_NOTE_INPUT);
 
-const allergenLink = () => $('[data-test-id="allergy-button"]');
-
-const fulfillmentTimeDropdown = () => $('[data-test-id="fulfillment-time"]');
-
-const goToPaymentButton = () => $('[data-test-id="confirm-payment-submit-button"]');
-
-exports.inputs = {
-    mobileNumber: () => $('[data-test-id="input-mobile-number"]'),
-    addressLine1: () => $('[data-test-id="input-address-line-1"]'),
-    addressLine2: () => $('[data-test-id="input-address-line-2"]'),
-    addressCity: () => $('[data-test-id="input-address-city"]'),
-    addressPostcode: () => $('[data-test-id="input-address-postcode"]')
+const inputs = {
+    mobileNumber: () => $(INPUTS.MOBILE_NUMBER),
+    addressLine1: () => $(INPUTS.ADDRESS_LINE_1),
+    addressLine2: () => $(INPUTS.ADDRESS_LINE_2),
+    addressCity: () => $(INPUTS.ADDRESS_CITY),
+    addressPostcode: () => $(INPUTS.ADDRESS_POSTCODE)
 };
+
+exports.inputs = inputs;
+
+const errorMessages = {
+    mobileNumber: () => $(ERRORS.MOBILE_NUMBER),
+    addressLine1: () => $(ERRORS.ADDRESS_LINE_1),
+    addressCity: () => $(ERRORS.ADDRESS_CITY),
+    addressPostcode: () => $(ERRORS.ADDRESS_POSTCODE)
+};
+
+exports.errorMessages = errorMessages;
 
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
@@ -33,13 +57,13 @@ exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
  * @param {String} addressInfo.city City of the user's address
  * @param {String} addressInfo.postcode Postcode of the user's address
  */
-exports.submitCheckoutForm = addressInfo => {
+exports.populateCheckoutForm = addressInfo => {
     exports.waitForCheckoutComponent();
-    mobileNumberInput().setValue(addressInfo.mobileNumber);
-    addressLine1Input().setValue(addressInfo.line1);
-    addressLine2Input().setValue(addressInfo.line2);
-    addressCityInput().setValue(addressInfo.city);
-    addressPostcodeInput().setValue(addressInfo.postcode);
+    inputs.mobileNumber().setValue(addressInfo.mobileNumber);
+    inputs.addressLine1().setValue(addressInfo.line1);
+    inputs.addressLine2().setValue(addressInfo.line2);
+    inputs.addressCity().setValue(addressInfo.city);
+    inputs.addressPostcode().setValue(addressInfo.postcode);
 };
 
 /**
@@ -68,4 +92,14 @@ exports.inputUserNote = userNote => {
  */
 exports.submit = () => {
     goToPaymentButton().click();
+};
+
+exports.clearAllFields = () => {
+    Object.keys(inputs).forEach(inputKey => {
+        inputs[inputKey]().setValue('');
+    });
+};
+
+exports.WaitForErrorMessage = errorMessage => {
+    doesElementExist(errorMessage);
 };
