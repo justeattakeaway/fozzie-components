@@ -183,6 +183,7 @@ export default {
             * The $dirty boolean changes to true when the user has focused/lost
             * focus on the input field.
             */
+            console.log(this.$v.customer.mobileNumber); // eslint-disable-line no-console
             const isMobileNumberValid = this.$v.customer.mobileNumber.required && this.$v.customer.mobileNumber.numeric && this.$v.customer.mobileNumber.minLength;
             return !this.$v.customer.mobileNumber.$dirty || isMobileNumberValid;
         },
@@ -324,6 +325,12 @@ export default {
             */
             this.$v.$touch();
             return !this.$v.$invalid;
+        },
+
+        isValidPhoneNumber () {
+            console.log("GHJKL"); // eslint-disable-line no-console
+            console.log(this)
+            return validations.isValidPhoneNumber(this.customer.mobileNumber, this.locale);
         }
     },
 
@@ -333,7 +340,8 @@ export default {
                 mobileNumber: {
                     required,
                     numeric,
-                    minLength: minLength(10)
+                    minLength: minLength(10),
+                    isValidPhoneNumber: this.isValidPhoneNumber
                 }
             }
         };
