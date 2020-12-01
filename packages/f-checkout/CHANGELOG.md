@@ -9,7 +9,7 @@ v0.12.0
 
 ### Changed
 - Selector component to use `f-form-field` dropdown component.
-- Button version.
+- `f-button` version.
 
 
 v0.11.0
