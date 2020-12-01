@@ -3,7 +3,7 @@ const LOG_WARN = 'logWarn';
 const LOG_ERROR = 'logError';
 
 // eslint-disable-next-line import/prefer-default-export
-export class JustLogService {
+export class LogService {
     constructor (callback) {
         this.$logger = callback;
     }
