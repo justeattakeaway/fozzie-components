@@ -43,7 +43,7 @@ export default {
         * Update all fulfillment.times.selected to false
         * Update chosen fulfillment.times.selected to true
         *
-        * @param {string} selectedTime The time emmited when dropdown value is changed.
+        * @param {string} selectedTime The time emited when dropdown value is changed.
         **/
         selectionChanged (selectedTime) {
             this.fulfillment.times.forEach(fulfillmentTime => {

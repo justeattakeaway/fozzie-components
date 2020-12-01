@@ -1,7 +1,7 @@
 import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
 import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
-import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION, FULFILLMENT_TIMES } from '../../constants';
+import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
 import Selector from '../Selector.vue';
 import tenantConfigs from '../../tenants';
 
@@ -9,6 +9,17 @@ const localVue = createLocalVue();
 
 localVue.use(VueI18n);
 localVue.use(Vuex);
+
+const fulfillmentTimes = [
+    {
+        from: 'beginning',
+        label: {
+            text: 'time 1'
+        },
+        selected: false,
+        to: 'end'
+    }
+];
 
 const defaultState = {
     id: '',
@@ -18,7 +29,7 @@ const defaultState = {
         mobileNumber: '447111111111'
     },
     fulfillment: {
-        times: FULFILLMENT_TIMES,
+        times: fulfillmentTimes,
         address: {
             line1: '1 Bristol Road',
             line2: 'Flat 1',

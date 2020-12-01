@@ -13,14 +13,3 @@ export const TENANT_MAP = {
     'it-IT': 'it',
     'nb-NO': 'no'
 };
-
-export const FULFILLMENT_TIMES = [
-    {
-        from: 'beginning',
-        label: {
-            text: 'time 1'
-        },
-        selected: false,
-        to: 'end'
-    }
-];

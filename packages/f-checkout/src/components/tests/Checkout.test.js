@@ -1,7 +1,7 @@
 import { shallowMount, mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
-import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION, FULFILLMENT_TIMES } from '../../constants';
+import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 import tenantConfigs from '../../tenants';
@@ -11,6 +11,17 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
+const fulfillmentTimes = [
+    {
+        from: 'beginning',
+        label: {
+            text: 'time 1'
+        },
+        selected: false,
+        to: 'end'
+    }
+];
+
 const defaultState = {
     id: '',
     serviceType: CHECKOUT_METHOD_DELIVERY,
@@ -19,7 +30,7 @@ const defaultState = {
         mobileNumber: '447111111111'
     },
     fulfillment: {
-        times: FULFILLMENT_TIMES,
+        times: fulfillmentTimes,
         address: {
             line1: '1 Bristol Road',
             line2: 'Flat 1',
@@ -227,7 +238,7 @@ describe('Checkout', () => {
                         firstName: defaultState.customer.firstName
                     },
                     fulfillment: {
-                        times: FULFILLMENT_TIMES,
+                        times: fulfillmentTimes,
                         address: {}
                     }
                 };
@@ -318,7 +329,7 @@ describe('Checkout', () => {
                         firstName: defaultState.customer.firstName
                     },
                     fulfillment: {
-                        times: FULFILLMENT_TIMES,
+                        times: fulfillmentTimes,
                         address: {}
                     }
                 };
