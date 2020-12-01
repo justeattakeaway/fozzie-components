@@ -180,7 +180,12 @@ workflows:
             branches:
               ignore: 'gh-pages'
       - notify:
+          requires:
+            - build
           context: web-core
+            filters:
+            branches:
+              ignore: 'gh-pages'
 
   # Stopping until Circle CI credit issue is resolved
   # npm-publish:
@@ -199,3 +204,6 @@ workflows:
               only: master
       - notify:
           context: web-core
+          requires:
+            - deploy-storybook
+          only: master
