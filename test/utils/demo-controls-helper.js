@@ -8,4 +8,4 @@ const controlLocale = () => componentControls().$('[data-test-id="control-locale
  */
 exports.selectLocaleByValue = locale => {
     controlLocale().selectByAttribute('value', locale);
-}
+};
