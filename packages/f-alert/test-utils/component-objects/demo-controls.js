@@ -16,8 +16,8 @@ exports.selectAlertTypeByValue = alertType => {
  * Sets whether the component is dismissable based off the 'Is Dismissable' checkbox
  * @param {boolean} isDismissible
  */
-exports.isDismisible = isDismisible => {
-    if (!isDismisible && controlIsDismissible().isSelected()) {
+exports.isDismissible = isDismissible => {
+    if (!isDismissible && controlIsDismissible().isSelected()) {
         controlIsDismissible().click();
     }
 };
