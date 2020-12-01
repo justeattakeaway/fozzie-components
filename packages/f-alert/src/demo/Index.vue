@@ -8,7 +8,7 @@
             content="width=device-width, initial-scale=1">
         <div data-test-id="component-controls">
             <h1>Component Controls</h1>
-            <label for='locale'>Locale</label>
+            <label for="locale">Locale</label>
             <select
                 v-model="controls.locale"
                 name="locale"
@@ -55,7 +55,7 @@
                 data-test-id="control-heading">
         </div>
         <vue-alert
-            :locale='controls.locale'
+            :locale="controls.locale"
             :type="controls.alertType"
             :is-dismissible="controls.isDismissible"
             :heading="controls.heading">
