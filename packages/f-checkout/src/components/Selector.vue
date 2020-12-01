@@ -2,7 +2,7 @@
     <form-dropdown
         id="time-selection"
         data-test-id="form-select"
-        :class="$style['c-selector']"
+        :class="$style['c-checkout-selector']"
         input-type="dropdown"
         :label-text="orderMethod"
         :dropdown-options="fulfillmentTimes"
@@ -39,10 +39,12 @@ export default {
     },
 
     methods: {
-        /*
+        /**
         * Update all fulfillment.times.selected to false
         * Update chosen fulfillment.times.selected to true
-        */
+        *
+        * @param {string} selectedTime The time emmited when dropdown value is changed.
+        **/
         selectionChanged (selectedTime) {
             this.fulfillment.times.forEach(fulfillmentTime => {
                 fulfillmentTime.selected = fulfillmentTime.label.text === selectedTime;
@@ -53,7 +55,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-.c-selector {
+.c-checkout-selector {
     margin-top: spacing(x2);
 }
 </style>
