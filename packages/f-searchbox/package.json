@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-searchbox",
   "description": "Fozzie Searchbox – Just Eat Takeaway Global Searchbox",
-  "version": "4.0.0-beta.4",
+  "version": "4.0.0-beta.5",
   "main": "dist/f-searchbox.umd.min.js",
   "files": [
     "dist",
@@ -47,7 +47,7 @@
     "@justeat/f-button": "0.2.0",
     "@justeat/f-error-message": "0.3.1",
     "@justeat/f-services": "1.0.0",
-    "@justeat/f-vue-icons": "1.8.0",
+    "@justeat/f-vue-icons": "1.12.0",
     "axios": "0.19.2",
     "lodash.debounce": "4.0.8"
   },

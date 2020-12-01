@@ -63,4 +63,84 @@ describe('`general.services`', () => {
             });
         });
     });
+
+    describe('`generateFormQueryUrl`', () => {
+        it('should exist', () => {
+            expect(generalServices.generateFormQueryUrl).toBeDefined();
+        });
+
+        describe('when invoked', () => {
+            describe('AND `queryString` & `formUrl` exist', () => {
+                it('should return a `formUrl` with a `queryString` appended', () => {
+                    // Arrange
+                    const formUrl = 'aquila/theEagle';
+                    const queryString = {
+                        genitive: 'Aquilae'
+                    };
+
+                    // Act
+                    const result = generalServices.generateFormQueryUrl(
+                        queryString,
+                        formUrl
+                    );
+
+                    // Assert
+                    expect(result).toBe('aquila/theEagle?genitive=Aquilae');
+                });
+
+                it('should return a `formUrl` with multiple `queryString` key/values appended if more than one is defined', () => {
+                    // Arrange
+                    const formUrl = 'aquila/theEagle';
+                    const queryString = {
+                        genitive: 'Aquilae',
+                        celestial: 'equator'
+                    };
+
+                    // Act
+                    const result = generalServices.generateFormQueryUrl(
+                        queryString,
+                        formUrl
+                    );
+
+                    // Assert
+                    expect(result).toBe('aquila/theEagle?genitive=Aquilae&celestial=equator');
+                });
+            });
+
+            describe('AND `queryString` is not populated', () => {
+                it('should return the `formUrl` value', () => {
+                    // Arrange
+                    const formUrl = 'aquila/theEagle';
+
+                    // Act
+                    const result = generalServices.generateFormQueryUrl(
+                        '',
+                        formUrl
+                    );
+
+                    // Assert
+                    expect(result).toBe(formUrl);
+                });
+            });
+
+            describe('AND `formUrl` is not populated', () => {
+                it('should return the `formUrl` value', () => {
+                    // Arrange
+                    const queryString = {
+                        genitive: 'Aquilae',
+                        celestial: 'equator'
+                    };
+
+                    // Act
+                    const result = generalServices.generateFormQueryUrl(
+                        queryString,
+                        ''
+                    );
+
+                    // Assert
+                    expect(result).toBe('');
+                });
+            });
+        });
+    });
 });
