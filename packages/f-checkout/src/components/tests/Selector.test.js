@@ -135,7 +135,7 @@ describe('Selector', () => {
     describe('methods ::', () => {
         describe('selectionChanged', () => {
             it('should update `fulfillment.times` time to be selected', () => {
-                // Arrange && Act
+                // Arrange
                 const wrapper = shallowMount(Selector, {
                     store: createStore({ ...defaultState }),
                     i18n,
@@ -143,8 +143,8 @@ describe('Selector', () => {
                     propsData
                 });
 
+                // Act
                 wrapper.vm.selectionChanged('time 1');
-
 
                 // Assert
                 expect(wrapper.vm.fulfillment.times[0].selected).toBe(true);

@@ -2,7 +2,7 @@
     <form-field
         id="time-selection"
         data-test-id="form-select"
-        :class="$style['o-form-select']"
+        :class="$style['c-selector']"
         input-type="dropdown"
         :label-text="orderMethod"
         :dropdown-options="fulfillmentTimes"
@@ -45,11 +45,7 @@ export default {
             * Update chosen fulfillment.times.selected to true
             */
             this.fulfillment.times.forEach(time => {
-                if (time.label.text === e) {
-                    time.selected = true;
-                } else {
-                    time.selected = false;
-                }
+                time.selected = time.label.text === e;
             });
         }
     }
@@ -57,7 +53,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-.o-form-select {
+.c-selector {
     margin-top: spacing(x2);
 }
 </style>
