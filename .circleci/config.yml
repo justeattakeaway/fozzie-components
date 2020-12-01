@@ -26,6 +26,60 @@ commands:
           name: Build Packages
           command: yarn build
 
+  slack_notify_fail:
+    description: Sends a slack notifaction on job failure
+    steps:
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+
+  slack_notify_success:
+    description: Sends a slack notifaction on job success
+    steps:
+      - slack/notify:
+          event: pass
+          custom: |
+            {
+              "text": "",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Your job *${CIRCLE_JOB}* succeeded 🎉"
+                  },
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Commiter*:${CIRCLE_USERNAME}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*SHA*:${CIRCLE_SHA1}"
+                    }
+                  ],
+                  "accessory": {
+                    "type": "image",
+                    "image_url": "https://avatars3.githubusercontent.com/u/30729620?s=400&u=61309ea885d27e19266fa986dac9194defb45197&v=4",
+                    "alt_text": "Fozzie Logo"
+                  }
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Job"
+                      },
+                      "url": "${CIRCLE_BUILD_URL}"
+                    }
+                  ]
+                }
+              ]
+            }
+
 executors:
   node:
     docker:
@@ -74,63 +128,8 @@ jobs:
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
-    
-  notify:
-    docker:
-      - image: 'cimg/base:stable'
-    steps:
-      # Send slack notification on build fail using CircleCI template - https://github.com/CircleCI-Public/slack-orb/blob/master/src/message_templates/basic_fail_1.json
-      - slack/notify:
-          event: fail
-          template: basic_fail_1
-      # Send slack notification on build success using a custom template
-      - slack/notify:
-          event: pass
-          custom: |
-            {
-              "text": "",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "Your job *${CIRCLE_JOB}* succeeded 🎉"
-                  },
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Commiter*:\\n${CIRCLE_USERNAME}"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*SHA*:\\n${CIRCLE_SHA1}"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Mentions*:\\n${SLACK_PARAM_MENTIONS}"
-                    }
-                  ],
-                  "accessory": {
-                    "type": "image",
-                    "image_url": "https://assets.brandfolder.com/otz5mn-bw4j2w-6jzqo8/original/circle-logo-badge-black.png",
-                    "alt_text": "CircleCI logo"
-                  }
-                },
-                {
-                  "type": "actions",
-                  "elements": [
-                    {
-                      "type": "button",
-                      "text": {
-                        "type": "plain_text",
-                        "text": "View Job"
-                      },
-                      "url": "${CIRCLE_BUILD_URL}"
-                    }
-                  ]
-                }
-              ]
-            }
+      - slack_notify_fail
+      - slack_notify_success
 
   deploy-storybook:
     executor: node
@@ -148,6 +147,8 @@ jobs:
       - run:
           name: Deploy
           command: yarn storybook:deploy --packages packages
+      - slack_notify_fail
+      - slack_notify_success
 
   # Stopping until Circle CI credit issue is resolved
   # npm-publish:
@@ -179,13 +180,6 @@ workflows:
           filters:
             branches:
               ignore: 'gh-pages'
-      - notify:
-          requires:
-            - build
-          context: web-core
-          filters:
-            branches:
-              ignore: 'gh-pages'
 
   # Stopping until Circle CI credit issue is resolved
   # npm-publish:
@@ -199,13 +193,6 @@ workflows:
   deploy-storybook:
     jobs:
       - deploy-storybook:
-          filters:
-            branches:
-              only: master
-      - notify:
-          context: web-core
-          requires:
-            - deploy-storybook
           filters:
             branches:
               only: master
