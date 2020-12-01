@@ -11,6 +11,17 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
+const fulfillmentTimes = [
+    {
+        from: '2020-01-01T00:00+00:00',
+        label: {
+            text: 'time 1'
+        },
+        selected: false,
+        to: '2020-01-01T00:00+00:00'
+    }
+];
+
 const defaultState = {
     id: '',
     serviceType: CHECKOUT_METHOD_DELIVERY,
@@ -19,7 +30,7 @@ const defaultState = {
         mobileNumber: '447111111111'
     },
     fulfillment: {
-        times: [],
+        times: fulfillmentTimes,
         address: {
             line1: '1 Bristol Road',
             line2: 'Flat 1',
@@ -227,6 +238,7 @@ describe('Checkout', () => {
                         firstName: defaultState.customer.firstName
                     },
                     fulfillment: {
+                        times: fulfillmentTimes,
                         address: {}
                     }
                 };
@@ -317,6 +329,7 @@ describe('Checkout', () => {
                         firstName: defaultState.customer.firstName
                     },
                     fulfillment: {
+                        times: fulfillmentTimes,
                         address: {}
                     }
                 };
