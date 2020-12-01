@@ -10,9 +10,6 @@ v4.0.0-beta.6
 ### Removed
 - Optional chaining syntax (Breaks storybook).
 
-### Add
-- Geo icon colour.
-
 
 v4.0.0-beta.5
 ------------------------------
