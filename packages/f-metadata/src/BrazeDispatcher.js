@@ -2,6 +2,7 @@ import uniq from 'lodash.uniq';
 
 import ContentCards from './services/contentCard.service';
 import isAppboyInitialised from './utils/isAppboyInitialised';
+import { JustLogService } from './services/logging/justLog.service';
 
 /* braze event handler callbacks */
 
@@ -64,6 +65,24 @@ function contentCardsHandler (postCardsAppboy) {
     this.rawCardIndex = Object.fromEntries(this.rawCards.map((rawCard, idx) => [rawCard.id, idx]));
 }
 
+/**
+ * Logger for braze dispatcher, utilizes a logging class based on the callback function key
+ * @param type - Function name being called on the class ( should be in ['info', 'warn', 'error'])
+ * @param {string} logMessage - Describe what happened
+ * @param {object} [payload={}] - Any additional properties you want to add to the logs
+ */
+function logger (type, logMessage, payload) {
+    this.loggerCallbacks.forEach((callback, key) => {
+        switch (key) {
+            case 'logToJustLog':
+                (new JustLogService(callback))[type](logMessage, payload);
+                break;
+            default:
+                (new JustLogService(callback))[type](logMessage, payload);
+        }
+    });
+}
+
 /* BrazeDispatcher */
 
 let dispatcherInstance;
@@ -100,6 +119,7 @@ class BrazeDispatcher {
 
         this.dispatcherOptions = null;
 
+        this.loggerCallbacks = [];
         this.cardsCallbacks = [];
         this.groupedCardsCallback = [];
         this.inAppMessageClickEventCallbacks = [];
@@ -131,6 +151,7 @@ class BrazeDispatcher {
             userId,
             disableComponent = false,
             callbacks = {},
+            loggerCallbacks,
             enableLogging,
             enabledCardTypes = [],
             brands = []
@@ -148,6 +169,10 @@ class BrazeDispatcher {
                 === JSON.stringify(this.dispatcherOptions.enabledCardTypes.slice().sort()))) {
             throw new Error('attempt to reinitialise appboy with different parameters');
         }
+
+        // checks for logging callbacks
+        if (loggerCallbacks.length > 0) logger.bind(this);
+        if (loggerCallbacks.logToJustLog && typeof loggerCallbacks.logToJustLog === 'function') this.loggerCallbacks.push(loggerCallbacks.logToJustLog);
 
         window.dataLayer = window.dataLayer || [];
 
