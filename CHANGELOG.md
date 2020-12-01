@@ -11,6 +11,14 @@ v2.21.0
 - Ability for CircleCI to post build statuses to slack.
 
 
+v2.20.0
+------------------------------
+*November 30, 2020*
+
+### Added
+- `demo-controls-helper.js` to contain any shared functions for controlling props values in WebDriverIO tests
+
+
 v2.19.0
 ------------------------------
 *November 24, 2020*

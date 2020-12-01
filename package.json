@@ -1,6 +1,10 @@
 {
   "name": "root",
+<<<<<<< HEAD
   "version": "2.21.0",
+=======
+  "version": "2.20.0",
+>>>>>>> 103ee594e2847059bd45cf0d1b203258cf276891
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",

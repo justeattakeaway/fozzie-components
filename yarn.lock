@@ -1735,14 +1735,6 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
-"@justeat/f-form-field@1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-1.4.0.tgz#4f5151996e2f80419bc74f6b126741161db7128a"
-  integrity sha512-LLiZ8McS9i8BTWrzujL0lWru7TlqDPp2JWjW3eUFCW8nUEbEIoDV5HJzQ1M21oLY7wSr0OH6wCqfNUfnRI5q/Q==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeat/f-vue-icons" "1.11.0"
-
 "@justeat/f-icons@2.12.0":
   version "2.12.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.12.0.tgz#07b221b284b4827ddcc6e04841228f77f24df45d"
@@ -1825,6 +1817,13 @@
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.11.0.tgz#3c5c91dcc04cd72e81d12f09bc8c9fec893909a5"
   integrity sha512-xw/Y0tOd1XQXUy6bl8VA3prBmgP2n0n2IHDKQFUOvGwupkAJ+3vwnlkhiMGlN8bripAPK80g01Abt/ZBBbXrUw==
+  dependencies:
+    babel-helper-vue-jsx-merge-props "2.0.3"
+
+"@justeat/f-vue-icons@1.12.0":
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.12.0.tgz#31f99cf5719f7b745534726a99516a1449827e73"
+  integrity sha512-qPSa3JzyWUKAzriu3O8Y/1PVk6e2tDymo8R5eSSmGSYVaxPcw8tdwGDzwbTnT8F+MoOokdAUzk+M4UnUiA2Q6Q==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
