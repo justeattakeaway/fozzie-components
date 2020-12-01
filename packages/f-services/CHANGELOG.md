@@ -7,6 +7,8 @@ v1.6.0
 ------------------------------
 *December 1, 2020*
 
+### Added
+- `getDeepObjectByPath` to `utilities.js` to traverse an object using a given path.
 ### Changed
 - `getFormValidationState` function to return the full path of a nested object.
 

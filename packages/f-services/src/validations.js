@@ -1,11 +1,4 @@
-/**
- * Returns a deep object by traversing following the provided path.
- *
- * @param {Object} obj The object to traverse.
- * @param {Array} path The path used to traverse the object.
- * @return {Object} The object at the end of the path.
- */
-const getDeepObjectByPath = (obj, path) => path.reduce((o, key) => (o && o[key] ? o[key] : null), obj);
+import utilities from './utilities';
 
 /**
  * Returns an object containing arrays of the names of valid and invalid validation rules.
@@ -19,9 +12,10 @@ const getFormValidationState = $v => {
     const flattenedParams = $v.$flattenParams();
 
     flattenedParams.forEach(param => {
-        const deepObjectProperty = getDeepObjectByPath($v, param.path);
+        const deepObjectProperty = utilities.getDeepObjectByPath($v, param.path);
         const propertyFullPath = param.path.join('.');
 
+        // Add the full path to the list of valid or invalid fields, as long as it doesn't already exist.
         if (deepObjectProperty.$invalid && invalidFields.indexOf(propertyFullPath) === -1) {
             invalidFields.push(propertyFullPath);
         } else if (!deepObjectProperty.$invalid && validFields.indexOf(propertyFullPath) === -1) {
