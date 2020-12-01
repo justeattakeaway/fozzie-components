@@ -2,7 +2,7 @@ import uniq from 'lodash.uniq';
 
 import ContentCards from './services/contentCard.service';
 import isAppboyInitialised from './utils/isAppboyInitialised';
-import { JustLogService } from './services/logging/justLog.service';
+import { LogService } from './services/logging/logging.service';
 
 /* braze event handler callbacks */
 
@@ -66,20 +66,15 @@ function contentCardsHandler (postCardsAppboy) {
 }
 
 /**
- * Logger for braze dispatcher, utilizes a logging class based on the callback function key
+ * Logger for braze dispatcher, utilizes a logging class to call the call back based on type
  * @param type - Function name being called on the class ( should be in ['info', 'warn', 'error'])
  * @param {string} logMessage - Describe what happened
  * @param {object} [payload={}] - Any additional properties you want to add to the logs
  */
 function logger (type, logMessage, payload) {
-    this.loggerCallbacks.forEach((callback, key) => {
-        switch (key) {
-            case 'logToJustLog':
-                (new JustLogService(callback))[type](logMessage, payload);
-                break;
-            default:
-                (new JustLogService(callback))[type](logMessage, payload);
-        }
+    this.loggerCallbacks.forEach(callback => {
+        // eslint-disable-next-line no-unused-expressions
+        (new LogService(callback))[type]?.(logMessage, payload);
     });
 }
 
@@ -151,7 +146,7 @@ class BrazeDispatcher {
             userId,
             disableComponent = false,
             callbacks = {},
-            loggerCallbacks,
+            loggerCallbacks = {},
             enableLogging,
             enabledCardTypes = [],
             brands = []
@@ -171,8 +166,13 @@ class BrazeDispatcher {
         }
 
         // checks for logging callbacks
-        if (loggerCallbacks.length > 0) logger.bind(this);
-        if (loggerCallbacks.logToJustLog && typeof loggerCallbacks.logToJustLog === 'function') this.loggerCallbacks.push(loggerCallbacks.logToJustLog);
+        if (loggerCallbacks.length > 0) {
+            logger.bind(this);
+            loggerCallbacks.filter(callback => typeof callback === 'function')
+                .forEach(callback => {
+                    this.loggerCallbacks.push(callback);
+                });
+        }
 
         window.dataLayer = window.dataLayer || [];
 
