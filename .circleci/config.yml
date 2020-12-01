@@ -3,6 +3,8 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2.1
+orbs:
+  slack: circleci/slack@4.1.3
 
 commands:
   set_deploy_key:
@@ -72,6 +74,28 @@ jobs:
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
+    
+    notify:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - slack/notify:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "*Hello! This is a test*",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
 
   deploy-storybook:
     executor: node
@@ -120,6 +144,8 @@ workflows:
           filters:
             branches:
               ignore: 'gh-pages'
+      - notify:
+          context: web-core
 
   # Stopping until Circle CI credit issue is resolved
   # npm-publish:
