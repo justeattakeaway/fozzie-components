@@ -75,27 +75,27 @@ jobs:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
     
-    notify:
-      docker:
-        - image: 'cimg/base:stable'
-      steps:
-        - slack/notify:
-            custom: |
-              {
-                "blocks": [
-                  {
-                    "type": "section",
-                    "fields": [
-                      {
-                        "type": "plain_text",
-                        "text": "*Hello! This is a test*",
-                        "emoji": true
-                      }
-                    ]
-                  }
-                ]
-              }
-            event: always
+  notify:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - slack/notify:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "*Hello! This is a test*",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
 
   deploy-storybook:
     executor: node
