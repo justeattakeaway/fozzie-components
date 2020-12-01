@@ -43,9 +43,9 @@ export default {
         * Update all fulfillment.times.selected to false
         * Update chosen fulfillment.times.selected to true
         */
-        selectionChanged (e) {
-            this.fulfillment.times.forEach(time => {
-                time.selected = time.label.text === e;
+        selectionChanged (selectedTime) {
+            this.fulfillment.times.forEach(fulfillmentTime => {
+                fulfillmentTime.selected = fulfillmentTime.label.text === selectedTime;
             });
         }
     }
