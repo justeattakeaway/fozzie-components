@@ -2,39 +2,11 @@
     <form-dropdown
         id="time-selection"
         data-test-id="form-select"
-<<<<<<< HEAD
-        :class="[
-            $style['o-form-select'],
-            (selectedTime ? $style['o-form-select--float'] : '')
-        ]">
-        <label
-            for="time-selection"
-            data-test-id="fulfillment-time-label"
-            :class="$style['o-form-select-label']">
-            {{ orderMethod }}
-        </label>
-        <select
-            id="time-selection"
-            v-model="selectedTime"
-            :class="$style['o-form-select-input']"
-            data-test-id="fulfillment-time"
-            @change="selectionChanged">
-            <option
-                data-test-id="time-options"
-                v-for="(time, index) in fulfillment.times"
-                :key="index"
-                :value="time.from">
-                {{ time.label.text }}
-            </option>
-        </select>
-    </div>
-=======
         :class="$style['c-checkout-selector']"
         input-type="dropdown"
         :label-text="orderMethod"
         :dropdown-options="fulfillmentTimes"
         @input="selectionChanged" />
->>>>>>> c09a412424c5f609d2f630b6beab35e599b54163
 </template>
 
 <script>
