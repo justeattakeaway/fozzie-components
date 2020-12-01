@@ -72,13 +72,11 @@ const selectedSuggestion = (
     const placeId = suggestion.place_id || suggestion.placeId;
     const streetNumberFormatted = streetNumber.trim();
     
-    const suggestionDescription = suggestion.description;
-    
     return service.getLocationDetails(placeId)
         .then(location => service.getLocationPostcode(location, streetNumberFormatted))
         .then(location => {
             location.streetNumber = location.streetNumber || streetNumberFormatted;
-            location.suggestion = suggestionDescription;
+            location.suggestion = suggestion.description;
             
             const missingFields = requiredFields.reduce((allFields, field) => (
                 location[field]

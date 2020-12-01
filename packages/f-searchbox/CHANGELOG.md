@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.0.0-beta.5
 ------------------------------
-*November 26, 2020*
+*December 1, 2020*
 
 ### Added
 - Geo location feature plus components, `FormSearchGeo.vue`.

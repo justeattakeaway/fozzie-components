@@ -73,7 +73,6 @@ export default {
 
         service: {
             type: Object,
-            default: () => {},
             required: true
         }
     },
