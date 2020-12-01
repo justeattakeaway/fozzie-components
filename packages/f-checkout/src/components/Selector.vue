@@ -1,12 +1,22 @@
 <template>
-    <form-field
-        id="time-selection"
-        data-test-id="form-select"
-        :class="$style['o-form-select']"
-        input-type="dropdown"
-        :label-text="orderMethod"
-        :dropdown-options="fulfillmentTimes"
-        @input="selectionChanged" />
+    <div>
+        <form-field
+            id="time-selection"
+            data-test-id="form-select"
+            :class="$style['o-form-select']"
+            input-type="dropdown"
+            :label-text="orderMethod"
+            :dropdown-options="fulfillmentTimes"
+            @input="selectionChanged" />
+        <form-field
+            id="time-selection"
+            data-test-id="form-select"
+            :class="$style['o-form-select']"
+            input-type="dropdown"
+            :label-text="orderMethod"
+            :dropdown-options="fulfillment.times"
+            @input="selectionChanged" />
+    </div>
 </template>
 
 <script>
@@ -34,8 +44,7 @@ export default {
             * Create an array from fulfillment times labels to
             * display as options in dropdown
             */
-            const times = this.fulfillment.times.map(time => time.label.text);
-            return times;
+            return this.fulfillment.times.map(time => time.label.text);
         }
     },
 
@@ -45,11 +54,9 @@ export default {
             * Update all fulfillment.times.selected to false
             * Update chosen fulfillment.times.selected to true
             */
-            this.fulfillment.times.forEach(el => { el.selected = false; });
-            const newSelected = this.fulfillment.times.find(time => time.label.text === e);
-            if (newSelected) {
-                newSelected.selected = true;
-            }
+            this.fulfillment.times.find(time => {
+                time.label.text === e ? time.selected = true : time.selected = false;
+            });
         }
     }
 };
@@ -60,3 +67,4 @@ export default {
     margin-top: spacing(x2);
 }
 </style>
+
