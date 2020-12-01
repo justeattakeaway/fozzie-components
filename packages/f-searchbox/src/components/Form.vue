@@ -154,7 +154,9 @@ export default {
         errorMessage () {
             const messageKey =
                     this.isDirty
-                    && this.errors?.[0];
+                    && this.errors
+                    && this.errors.length
+                    && this.errors[0];
 
             if (!messageKey) return false;
 
