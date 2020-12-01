@@ -11,48 +11,48 @@
             <label for='locale'>Locale</label>
             <select
                 v-model="controls.locale"
-                name='locale'
-                data-test-id='control-locale'>
-                <option value='en-GB'>
+                name="locale"
+                data-test-id="control-locale">
+                <option value="en-GB">
                     en-GB
                 </option>
-                <option value='en-AU'>
+                <option value="en-AU">
                     en-AU
                 </option>
             </select>
             <br>
-            <label for='alert-type'>Alert Type</label>
+            <label for="alert-type">Alert Type</label>
             <select
                 v-model="controls.alertType"
-                name='alert-type'
-                data-test-id='control-alertType'>
-                <option value='success'>
+                name="alert-type"
+                data-test-id="control-alertType">
+                <option value="success">
                     success
                 </option>
-                <option value='warning'>
+                <option value="warning">
                     warning
                 </option>
-                <option value='danger'>
+                <option value="danger">
                     danger
                 </option>
-                <option value='info'>
+                <option value="info">
                     info
                 </option>
             </select>
             <br>
-            <label for="is-dismissable">Is Dismissable</label>
+            <label for="is-dismissible">Is Dismissable</label>
             <input
-                id="is-dismissable"
+                id="is-dismissible"
                 v-model="controls.isDismissible"
                 type="checkbox"
-                data-test-id='control-isDismissible'>
+                data-test-id="control-isDismissible">
             <br>
             <label for="heading">Heading</label>
             <input
                 id="heading"
-                v-model='controls.heading'
+                v-model="controls.heading"
                 type="text"
-                data-test-id='control-heading'>
+                data-test-id="control-heading">
         </div>
         <vue-alert
             :locale='controls.locale'
