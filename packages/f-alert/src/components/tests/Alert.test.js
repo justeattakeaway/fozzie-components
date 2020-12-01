@@ -55,9 +55,9 @@ describe('Alert', () => {
     });
 
     describe('dismiss', () => {
-        it('should render the dismiss button if `isDismissable` is true', () => {
+        it('should render the dismiss button if `isDismissible` is true', () => {
             // Arrange
-            const wrapper = shallowMount(VueAlert, { propsData: { ...defaultPropsData, isDismissable: true } });
+            const wrapper = shallowMount(VueAlert, { propsData: { ...defaultPropsData, isDismissible: true } });
 
             // Act
             const dismiss = wrapper.find('[data-test-id="alert-dismiss"]');
@@ -66,9 +66,9 @@ describe('Alert', () => {
             expect(dismiss.exists()).toBe(true);
         });
 
-        it('should not render the dismiss button if `isDismissable` is false', () => {
+        it('should not render the dismiss button if `isDismissible` is false', () => {
             // Arrange
-            const wrapper = shallowMount(VueAlert, { propsData: { ...defaultPropsData, isDismissable: false } });
+            const wrapper = shallowMount(VueAlert, { propsData: { ...defaultPropsData, isDismissible: false } });
 
             // Act
             const dismiss = wrapper.find('[data-test-id="alert-dismiss"]');
@@ -82,7 +82,7 @@ describe('Alert', () => {
             const dismissSpy = jest.spyOn(VueAlert.methods, 'dismiss');
 
             const wrapper = shallowMount(VueAlert, {
-                propsData: { ...defaultPropsData, isDismissable: true }
+                propsData: { ...defaultPropsData, isDismissible: true }
             });
 
             // Act
