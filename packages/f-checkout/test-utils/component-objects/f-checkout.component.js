@@ -7,6 +7,8 @@ const userNoteInput = () => $('[data-test-id="user-note"] textarea');
 const allergenLink = () => $('[data-test-id="allergy-button"]');
 
 const fulfillmentTimeDropdown = () => $('[data-test-id="fulfillment-time"]');
+const listOfTimes = () => $$('[data-test-id="time-options"]');
+//first one might not always be the default
 
 const goToPaymentButton = () => $('[data-test-id="confirm-payment-submit-button"]');
 
@@ -21,7 +23,21 @@ exports.inputs = {
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
+// exports.defaultTimeDisplayed = () => fulfillmentTimeOptions()[0].isDisplayed();
 
+exports.defaultTimeText = () => listOfTimes()[0].getText();
+
+const secondTime = () => listOfTimes()[1].getText().replace(/\D/g,'');
+const thirdTime = () => listOfTimes()[2].getText().replace(/\D/g,'');
+
+exports.timeDescending = () => {
+    if (secondTime < thirdTime){
+        return true
+    } else {
+        return false
+    }
+}
+ 
 /**
  * @description
  * Inputs address details into the checkout component.

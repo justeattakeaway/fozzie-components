@@ -34,4 +34,22 @@ describe('f-checkout component tests', () => {
         CheckoutComponent.selectFulfillmentTime('As soon as possible');
         CheckoutComponent.submit();
     });
+
+    it('should have the delivery times text set to "As soon as possible" for default', () => {
+        // Assert
+        expect(CheckoutComponent.defaultTimeText()).toContain('As soon as possible');
+
+        // expect(CheckoutComponent.defaultTimeDisplayed()).toBe(true);
+    });
+
+    it.only('should show the times in a descending order', () => {
+        // Assert
+        console.log(CheckoutComponent.timeDescending());
+        // console.log(CheckoutComponent.secondTime())
+        // console.log(`Heyyy ${CheckoutComponent.thirdTime()}`)
+        // console.log(`heyyyy ${CheckoutComponent.secondTime()}`)
+        // expect(CheckoutComponent.)
+        expect(CheckoutComponent.timeDescending()).toBe(true);
+        // console.log(CheckoutComponent.secondTime());
+    }); 
 });

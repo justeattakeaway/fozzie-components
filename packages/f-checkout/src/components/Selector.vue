@@ -18,6 +18,7 @@
             data-test-id="fulfillment-time"
             @change="selectionChanged">
             <option
+                data-test-id="time-options"
                 v-for="(time, index) in fulfillment.times"
                 :key="index"
                 :value="time.from">
