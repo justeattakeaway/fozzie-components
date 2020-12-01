@@ -19,6 +19,32 @@ describe('getFormValidationState', () => {
             },
             yetAnotherValidation: {
                 $invalid: true
+            },
+            $flattenParams () {
+                return [
+                    {
+                        name: 'required',
+                        params: {
+                            type: 'required'
+                        },
+                        path: ['otherValidation']
+                    },
+                    {
+                        name: 'minLength',
+                        params: {
+                            type: 'minLength',
+                            min: 10
+                        },
+                        path: ['minLengthValidation']
+                    },
+                    {
+                        name: 'required',
+                        params: {
+                            type: 'required'
+                        },
+                        path: ['yetAnotherValidation']
+                    }
+                ];
             }
         };
 
@@ -29,6 +55,75 @@ describe('getFormValidationState', () => {
         expect(actual).toStrictEqual({
             validFields: ['minLengthValidation'],
             invalidFields: ['otherValidation', 'yetAnotherValidation']
+        });
+    });
+
+    it('should handle nested validation objects and return the full path of them in valid and invalid fields', () => {
+        // Arrange
+        const v = {
+            $params: {
+                parentObjectValidation: {},
+                minLengthValidation: {},
+                yetAnotherValidation: {}
+            },
+            minLengthValidation: {
+                $invalid: false
+            },
+            parentObjectValidation: {
+                $invalid: true,
+                childObjectValidation: {
+                    $invalid: true,
+                    grandChildObjectValidation: {
+                        $invalid: true
+                    }
+                }
+            },
+            yetAnotherValidation: {
+                $invalid: true
+            },
+            $flattenParams () {
+                return [
+                    {
+                        name: 'required',
+                        params: {
+                            type: 'required'
+                        },
+                        path: ['parentObjectValidation', 'childObjectValidation', 'grandChildObjectValidation']
+                    },
+                    {
+                        name: 'minLength',
+                        params: {
+                            type: 'minLength',
+                            min: 50
+                        },
+                        path: ['parentObjectValidation', 'childObjectValidation', 'grandChildObjectValidation']
+                    },
+                    {
+                        name: 'minLength',
+                        params: {
+                            type: 'minLength',
+                            min: 10
+                        },
+                        path: ['minLengthValidation']
+                    },
+                    {
+                        name: 'required',
+                        params: {
+                            type: 'required'
+                        },
+                        path: ['yetAnotherValidation']
+                    }
+                ];
+            }
+        };
+
+        // Act
+        const actual = getFormValidationState(v);
+
+        // Assert
+        expect(actual).toStrictEqual({
+            validFields: ['minLengthValidation'],
+            invalidFields: ['parentObjectValidation.childObjectValidation.grandChildObjectValidation', 'yetAnotherValidation']
         });
     });
 });

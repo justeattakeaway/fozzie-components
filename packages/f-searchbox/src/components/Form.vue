@@ -1,7 +1,7 @@
 <template>
     <form
         ref="form"
-        :action="config.formUrl"
+        :action="formUrl"
         :class="$style['c-search']"
         method="post"
         @submit.stop="submit">
@@ -19,6 +19,7 @@
                 v-model="address"
                 :error-message="errorMessage"
                 :address="address"
+                :service="service"
                 :should-display-custom-autocomplete="service.isAutocompleteEnabled"
                 :copy="copy"
                 :is-compressed="isCompressed" />
@@ -29,13 +30,15 @@
         </div>
 
         <form-search-suggestions
-            v-if="searchSuggestion"
+            v-if="shouldDisplaySuggestions"
             aria-live="assertive"
             :suggestion-format="suggestionFormat"
-            :suggestions="searchSuggestion" />
+            :suggestions="suggestions"
+            @selected-suggestion="onSelectedSuggestion" />
 
         <error-message
             v-if="errorMessage"
+            ref="errorMessage"
             :class="$style['c-search-error']"
             aria-live="assertive">
             {{ errorMessage }}
@@ -53,10 +56,11 @@ import FormSearchButton from './formElements/FormSearchButton.vue';
 import FormSearchSuggestions from './formElements/FormSearchSuggestions.vue';
 import searchboxModule from '../store/searchbox.module';
 import { getLastLocation } from '../utils/helpers';
-import { search } from '../services/search.services';
+import { search, selectedSuggestion } from '../services/search.services';
 import {
     processLocationCookie,
-    onCustomSubmit
+    onCustomSubmit,
+    generateFormQueryUrl
 } from '../services/general.services';
 
 export default {
@@ -95,7 +99,8 @@ export default {
             shouldSetCookies,
             onSubmit,
             shouldAutoPopulateAddress,
-            suggestionFormat
+            suggestionFormat,
+            requiredFields
         } = this.config;
 
         return {
@@ -110,7 +115,8 @@ export default {
             shouldSetCookies,
             onSubmit,
             shouldAutoPopulateAddress,
-            suggestionFormat
+            suggestionFormat,
+            requiredFields
         };
     },
 
@@ -118,25 +124,39 @@ export default {
         ...mapState('searchbox', [
             'suggestions',
             'errors',
-            'isValid'
+            'isValid',
+            'streetNumberRequired',
+            'isInputFocus',
+            'streetNumber',
+            'isDirty'
         ]),
 
         /**
-         * Get stored `suggestions` from state if they exist. To minimize multiple types of
-         * suggestion types i.e at an API level; we should try and stick to this single suggestion value
-         * for all consuming APIs rather than creating new ones based on the APIs we're consuming.
+         * Display API suggestions in component: `form-search-suggestions`:
+         *
+         * 1. Service layer should contain `autocomplete`.
+         * 2. The form should have focus.
+         * 3. There should be suggestions.
          *
          * */
-        searchSuggestion () {
-            return this.suggestions;
+        shouldDisplaySuggestions () {
+            return this.service.isAutocompleteEnabled
+                    && this.isInputFocus
+                    && !!this.suggestions.length
+                    && (!this.errors.length || this.isDirty);
         },
+
         /**
          * Return a tenant specific error message from the config.
          *
          * @returns {*}
          */
         errorMessage () {
-            const messageKey = this.errors.length && this.errors[0];
+            const messageKey =
+                    this.isDirty
+                    && this.errors
+                    && this.errors.length
+                    && this.errors[0];
 
             if (!messageKey) return false;
 
@@ -170,6 +190,7 @@ export default {
                 const errors = !!preSearchValidation && this.service.isValid(value, preSearchValidation);
 
                 if (Array.isArray(errors)) {
+                    this.setIsDirty(true);
                     this.setSuggestions(Promise.reject(new Error(errors[0])));
                 } else {
                     this.setSuggestions(this.service.search(value));
@@ -187,6 +208,11 @@ export default {
         if (this.lastAddress) {
             this.address = this.shouldAutoPopulateAddress ? this.lastAddress : '';
         }
+
+        this.formUrl = generateFormQueryUrl(this.queryString, this.formUrl);
+
+        // Set Geolocation state so we can display the geolocation icon button on small screens.
+        this.setGeoLocationAvailability(this.service.isGeoAvailable);
     },
 
     created () {
@@ -204,7 +230,9 @@ export default {
             'setSuggestions',
             'setIsValid',
             'setErrors',
-            'setIsDirty'
+            'setIsDirty',
+            'setStreetNumberRequired',
+            'setGeoLocationAvailability'
         ]),
 
         /**
@@ -213,27 +241,72 @@ export default {
          * 1. Checks address validation.
          * 2. If the address is valid we submit the address.
          * 3. Note: `configs` determine custom behaviour, e.g shouldSetCookies & shouldClearAddressOnValidSubmit etc see readme.
+         * 4. If address is `isValid` & `isAutocompleteEnabled` is `true` we need to await `onSelectedSuggestion` before we proceed to make
+         * a search.
          *
          * @param e
          */
-        submit (e) {
+        async submit (e) {
             this.setIsValid(this.service.isValid(this.address));
 
             if (this.hasLastSavedAddress) {
                 return this.searchPreviouslySavedAddress(e);
             }
 
+            this.setIsDirty(true);
+
             if (this.isValid === true) {
                 this.setErrors([]);
                 processLocationCookie(this.shouldSetCookies, this.address);
                 this.clearAddressValue(this.shouldClearAddressOnValidSubmit);
                 onCustomSubmit(this.onSubmit, this.address, e);
+
+                if (this.service.isAutocompleteEnabled) {
+                    e.preventDefault();
+
+                    const info = await this.onSelectedSuggestion(0);
+
+                    // if the address is still missing fields, return here
+                    if (!info) {
+                        return false;
+                    }
+
+                    // TODO process the je last location cookie for international markets...
+                }
             } else {
                 e.preventDefault();
                 this.setErrors(this.isValid);
             }
 
             return true;
+        },
+
+        /**
+         * Triggered from the child component `form-search-suggestions`.
+         * Invokes `selectedSuggestion` from `search.service` which will
+         * resolve / return specific cases. E.g. if we need more information
+         * like the street number we flag this up to the component and display it.
+         *
+         * */
+        onSelectedSuggestion (index) {
+            selectedSuggestion(
+                this.service,
+                this.suggestions,
+                this.requiredFields,
+                this.streetNumber,
+                index
+            ).then(value => {
+                if (value && value.errors) {
+                    this.setErrors(value.errors);
+                }
+
+                if (value && value.requiresStreetNumber) {
+                    this.setStreetNumberRequired(true);
+                }
+            });
+
+            // TODO pass through suggestion index for keyboard behaviour...
+            this.address = this.suggestionFormat(this.suggestions[index]);
         },
 
         /**
@@ -291,5 +364,6 @@ export default {
 .c-search-error {
     @include font-size(body-s, false);
     position: static;
+    text-align: left;
 }
 </style>

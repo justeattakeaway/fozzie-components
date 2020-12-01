@@ -20,7 +20,6 @@ import SearchForm from './Form.vue';
 import SearchShell from './shells/Shell.vue';
 import NoSearchShell from './shells/NoShell.vue';
 import Service from '../services/core';
-// import SearchboxServiceApi from '../services/SearchboxServiceApi';
 
 export default {
     name: 'VueSearchbox',

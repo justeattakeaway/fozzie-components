@@ -17,7 +17,8 @@ const mockState = {
 const mockActions = {
     setErrors: jest.fn(),
     setIsValid: jest.fn(),
-    setIsDirty: jest.fn()
+    setIsDirty: jest.fn(),
+    setGeoLocationAvailability: jest.fn()
 };
 
 const createStore = (state = mockState, actions = mockActions) => new Vuex.Store({

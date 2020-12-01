@@ -20,6 +20,7 @@ const component = {
     isShellHidden: false,
     isCompressed: false,
     query: '',
+    queryString: '',
     shouldSetCookies: false,
     onSubmit: false,
     shouldAutoPopulateAddress: true,
