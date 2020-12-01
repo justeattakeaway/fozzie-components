@@ -51,7 +51,7 @@
     "@justeat/f-error-message": "0.3.0",
     "@justeat/f-form-field": "1.4.0",
     "@justeat/f-globalisation": "0.2.0",
-    "@justeat/f-services": "1.4.0",
+    "@justeat/f-services": "1.6.0",
     "axios": "0.20.0",
     "axios-mock-adapter": "1.19.0",
     "vuelidate": "0.7.6"
