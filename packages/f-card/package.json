@@ -31,6 +31,7 @@
     "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
+    "report": "cd ../.. && yarn report",
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "run-p --race demo webdriver:delay:chrome",
     "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js",

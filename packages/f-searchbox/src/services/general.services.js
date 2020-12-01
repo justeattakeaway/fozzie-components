@@ -39,7 +39,32 @@ const onCustomSubmit = (submit, address, e) => {
     }
 };
 
+/**
+ * Create a form url query string based off the passed in config `queryString`.
+ * For more info see readme for details on the config: `queryString`.
+ *
+ *
+ * @param {string} queryString
+ * @param {string} formUrl
+ * @returns {string}
+ */
+const generateFormQueryUrl = (queryString, formUrl) => {
+    if (queryString && formUrl) {
+        // Loop over the query string object and will return a string in a 'key=val&key=val' format.
+        const queryStringUrl = Object.keys(queryString).map(key => {
+            // check to see is value is an array, convert to an array if its a string
+            const keys = Array.isArray(queryString[key]) ? queryString[key] : [queryString[key]];
+            return keys.map(val => (val.length > 0 ? `${key}=${val}` : '')).join('&');
+        }).join('&');
+
+        return `${formUrl}?${queryStringUrl}`;
+    }
+
+    return formUrl;
+};
+
 export {
     processLocationCookie,
-    onCustomSubmit
+    onCustomSubmit,
+    generateFormQueryUrl
 };

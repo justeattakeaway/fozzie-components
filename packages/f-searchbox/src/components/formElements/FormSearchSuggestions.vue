@@ -6,7 +6,8 @@
             type="button"
             :class="{
                 [$style['c-search-suggestions-item']]: true
-            }">
+            }"
+            @click="$emit('selected-suggestion', index)">
             {{ suggestionFormat(item) }}
         </button>
         <div :class="$style['c-search-poweredByGoogle']">

@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.4.0
+------------------------------
+*November 30, 2020*
+
+### Changed
+- `padding` and `font-size` for inline label.
+- `fill` for dropdown arrow, `color` and `background` hover state.
+
 v1.3.0
 ------------------------------
 *November 20, 2020*

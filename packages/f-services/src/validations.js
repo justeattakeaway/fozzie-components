@@ -1,3 +1,5 @@
+import utilities from './utilities';
+
 /**
  * Returns an object containing arrays of the names of valid and invalid validation rules.
  *
@@ -5,15 +7,19 @@
  * @return {Object} Containing two fields: validFields and invalidFields.
  */
 const getFormValidationState = $v => {
-    const fields = $v.$params;
     const invalidFields = [];
     const validFields = [];
+    const flattenedParams = $v.$flattenParams();
 
-    Object.keys(fields).forEach(key => {
-        if ($v[key].$invalid) {
-            invalidFields.push(key);
-        } else {
-            validFields.push(key);
+    flattenedParams.forEach(param => {
+        const deepObjectProperty = utilities.getDeepObjectByPath($v, param.path);
+        const propertyFullPath = param.path.join('.');
+
+        // Add the full path to the list of valid or invalid fields, as long as it doesn't already exist.
+        if (deepObjectProperty.$invalid && invalidFields.indexOf(propertyFullPath) === -1) {
+            invalidFields.push(propertyFullPath);
+        } else if (!deepObjectProperty.$invalid && validFields.indexOf(propertyFullPath) === -1) {
+            validFields.push(propertyFullPath);
         }
     });
 
