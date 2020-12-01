@@ -183,7 +183,7 @@ workflows:
           requires:
             - build
           context: web-core
-            filters:
+          filters:
             branches:
               ignore: 'gh-pages'
 
@@ -206,4 +206,6 @@ workflows:
           context: web-core
           requires:
             - deploy-storybook
-          only: master
+          filters:
+            branches:
+              only: master
