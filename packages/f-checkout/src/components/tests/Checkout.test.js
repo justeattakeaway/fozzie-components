@@ -5,13 +5,11 @@ import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../cons
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 import tenantConfigs from '../../tenants';
-// import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
 localVue.use(Vuex);
-// localVue.mixin(VueGlobalisationMixin);
 
 const fulfillmentTimes = [
     {
