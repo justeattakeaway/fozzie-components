@@ -67,11 +67,7 @@
 
 <script>
 import { validationMixin } from 'vuelidate';
-import {
-    required,
-    numeric,
-    minLength
-} from 'vuelidate/lib/validators';
+import { required } from 'vuelidate/lib/validators';
 
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
@@ -183,7 +179,7 @@ export default {
             * The $dirty boolean changes to true when the user has focused/lost
             * focus on the input field.
             */
-            const isMobileNumberValid = this.$v.customer.mobileNumber.required && this.$v.customer.mobileNumber.numeric && this.$v.customer.mobileNumber.minLength;
+            const isMobileNumberValid = this.$v.customer.mobileNumber.required && this.$v.customer.mobileNumber.isValidPhoneNumber;
             return !this.$v.customer.mobileNumber.$dirty || isMobileNumberValid;
         },
 
@@ -192,7 +188,7 @@ export default {
         },
 
         tenant () {
-            return TENANT_MAP[this.locale];
+            return TENANT_MAP[this.$i18n.locale];
         }
     },
 
@@ -324,6 +320,10 @@ export default {
             */
             this.$v.$touch();
             return !this.$v.$invalid;
+        },
+
+        isValidPhoneNumber () {
+            return validations.isValidPhoneNumber(this.customer.mobileNumber, this.$i18n.locale);
         }
     },
 
@@ -332,8 +332,7 @@ export default {
             customer: {
                 mobileNumber: {
                     required,
-                    numeric,
-                    minLength: minLength(10)
+                    isValidPhoneNumber: this.isValidPhoneNumber
                 }
             }
         };
