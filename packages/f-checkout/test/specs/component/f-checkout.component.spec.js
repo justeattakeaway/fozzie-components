@@ -35,24 +35,21 @@ describe('f-checkout component tests', () => {
         CheckoutComponent.submit();
     });
 
-    it('shows the dropdown of times and selects each element', () => {
-        // Assert
-        expect(CheckoutComponent.isTimeDropdownDisplayed()).toBe(true);
+    it('should show the dropdown of times in ascending order', () => {
 
         // Act
         CheckoutComponent.selectOption().forEach((element) => {
             element.click();
+            browser.pause(1000);
         });
-    });
-
-    it('shows the first option in the dropdown as the default', () => {
-        // Assert
-        expect(CheckoutComponent.firstOptionText()).toBe(' As soon as possible ');
-    });
-
-    it.only('should display times in descending order', () => {
+        
         // Assert
         expect(CheckoutComponent.secondOptionText()).toContain('00:15'); 
         expect(CheckoutComponent.thirdOptionText()).toContain('00:30');
-    }); 
+    });
+
+    it('should show the first option as the default, with text "As soon as possible"', () => {
+        // Assert
+        expect(CheckoutComponent.firstOptionText()).toBe(' As soon as possible ');
+    });
 });

@@ -8,14 +8,7 @@ const allergenLink = () => $('[data-test-id="allergy-button"]');
 
 // Dropdown Select
 
-const timeDropdown = () => $('[data-test-id="form-select"]');
-const defaultTime = () => $('[data-test-id="formDropdown-option-0"]');
-const list = () => $$("select option");
-
-exports.selectOption = () => $$("select option");
-
-
-// const listOfTimes = () => $$('*="formDropdown"')
+const dropdown = () => $$("select option");
 
 const goToPaymentButton = () => $('[data-test-id="confirm-payment-submit-button"]');
 
@@ -27,37 +20,14 @@ exports.inputs = {
     addressPostcode: () => $('[data-test-id="input-address-postcode"]')
 };
 
+exports.selectOption = () => $$("select option");
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
-exports.defaultTimeText = () => defaultTime().getText();
-exports.dropDownText = () => timeDropdown().getText();
-exports.isDefaultTimeDisplayed = () => listOfTimes().isDisplayed();
-exports.isOptionDisplayed = () => option().isDisplayedInViewport();
+exports.firstOptionText = () => dropdown()[0].getText();
+exports.secondOptionText = () => dropdown()[1].getText();
+exports.thirdOptionText = () => dropdown()[2].getText();
 
-exports.firstOptionText = () => list()[0].getText();
-exports.secondOptionText = () => list()[1].getText();
-exports.thirdOptionText = () => list()[2].getText();
-
-exports.isTimeDropdownDisplayed = () => timeDropdown().isDisplayed();
-exports.isDefaultTimeDisplayed = () => defaultTime().isDisplayed();
-
-  
-// const secondTime = () => {
-//     return listOfTimes()[1].getText().replace(/\D/g,'');
-// }
-// const thirdTime = () => {
-//    return listOfTimes()[2].getText().replace(/\D/g,'');
-// }
-
-exports.timeDescending = () => {
-    if (secondTime < thirdTime){
-        return true
-    } else {
-        return false
-    }
-}
- 
 /**
  * @description
  * Inputs address details into the checkout component.
