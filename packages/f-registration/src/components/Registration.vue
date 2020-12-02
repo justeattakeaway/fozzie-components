@@ -26,13 +26,10 @@
                 tabindex="0"
                 @click="formStart"
                 @focus="formStart"
-                @submit.prevent="onFormSubmit"
-            >
-                <!-- TODO WCB-1031 - Extract error messages into a separate component -->
+                @submit.prevent="onFormSubmit">
                 <error-message
                     v-if="genericErrorMessage"
                     :class="$style['c-registration-genericError']">
-                    >
                     {{ genericErrorMessage }}
                 </error-message>
                 <form-field
