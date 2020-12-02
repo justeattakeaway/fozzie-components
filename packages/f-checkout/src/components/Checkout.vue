@@ -322,6 +322,10 @@ export default {
             return !this.$v.$invalid;
         },
 
+        /*
+        * Use phone validation in `f-services` to check if customer number is
+        * valid in current locale
+        */
         isValidPhoneNumber () {
             return validations.isValidPhoneNumber(this.customer.mobileNumber, this.$i18n.locale);
         }
