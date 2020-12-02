@@ -29,16 +29,19 @@ describe('LogService', () => {
         expect(typeof logService.$logger).toBe('function');
     });
 
-    it.each`
-        key          | value
-        ${'info'}    | ${'logInfo'}
-        ${'warn'}    | ${'logWarn'}
-        ${'error'}   | ${'logError'}
-    `('should for each key call the callback with the relevant log data', ({ key, value }) => {
-        // Act
-        logService[key](TEST_LOG_MESSAGE, TEST_PAYLOAD);
+    /* eslint-disable indent */
+    describe('LogService > callbacks', () => {
+        it.each`
+            key          | value
+            ${'info'}    | ${'logInfo'}
+            ${'warn'}    | ${'logWarn'}
+            ${'error'}   | ${'logError'}
+        `('should for each key call the callback with the relevant log data', ({ key, value }) => {
+            // Act
+            logService[key](TEST_LOG_MESSAGE, TEST_PAYLOAD);
 
-        // Assert
-        expect($logger[value]).toHaveBeenCalledWith(TEST_LOG_MESSAGE, TEST_PAYLOAD);
+            // Assert
+            expect($logger[value]).toHaveBeenCalledWith(TEST_LOG_MESSAGE, TEST_PAYLOAD);
+        });
     });
 });

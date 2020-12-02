@@ -65,19 +65,6 @@ function contentCardsHandler (postCardsAppboy) {
     this.rawCardIndex = Object.fromEntries(this.rawCards.map((rawCard, idx) => [rawCard.id, idx]));
 }
 
-/**
- * Logger for braze dispatcher, utilizes a logging class to call the call back based on type
- * @param type - Function name being called on the class ( should be in ['info', 'warn', 'error'])
- * @param {string} logMessage - Describe what happened
- * @param {object} [payload={}] - Any additional properties you want to add to the logs
- */
-function logger (type, logMessage, payload) {
-    this.loggerCallbacks.forEach(callback => {
-        // eslint-disable-next-line no-unused-expressions
-        (new LogService(callback))[type]?.(logMessage, payload);
-    });
-}
-
 /* BrazeDispatcher */
 
 let dispatcherInstance;
@@ -165,14 +152,9 @@ class BrazeDispatcher {
             throw new Error('attempt to reinitialise appboy with different parameters');
         }
 
-        // checks for logging callbacks
-        if (loggerCallbacks.length > 0) {
-            logger.bind(this);
-            loggerCallbacks.filter(callback => typeof callback === 'function')
-                .forEach(callback => {
-                    this.loggerCallbacks.push(callback);
-                });
-        }
+        Object.keys(loggerCallbacks).forEach(key => {
+            this.loggerCallbacks.push(loggerCallbacks[key]);
+        });
 
         window.dataLayer = window.dataLayer || [];
 
@@ -309,6 +291,19 @@ class BrazeDispatcher {
             custom: {
                 braze: payload
             }
+        });
+    }
+
+    /**
+     * Logger for braze dispatcher, utilizes a logging class to call the call back based on type
+     * @param type - Function name being called on the class ( should be in ['info', 'warn', 'error'])
+     * @param {string} logMessage - Describe what happened
+     * @param {object} [payload={}] - Any additional properties you want to add to the logs
+     */
+    logger (type, logMessage, payload) {
+        this.loggerCallbacks.forEach(callback => {
+            // eslint-disable-next-line no-unused-expressions
+            (new LogService(callback))[type]?.(logMessage, payload);
         });
     }
 }

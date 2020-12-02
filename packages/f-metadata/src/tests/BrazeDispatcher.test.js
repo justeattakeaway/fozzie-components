@@ -5,6 +5,7 @@ import 'core-js/modules/es.object.from-entries';
 
 import isAppboyInitialised from '../utils/isAppboyInitialised';
 import ContentCards from '../services/contentCard.service';
+// import { LogService } from '../services/logging/logging.service';
 
 jest.mock('appboy-web-sdk');
 jest.mock('../utils/isAppboyInitialised');
@@ -21,6 +22,7 @@ const handleContentCards = jest.fn();
 const handleContentCardsGrouped = jest.fn();
 const interceptInAppMessages = jest.fn();
 const interceptInAppMessageClickEvents = jest.fn();
+const loggingCallback = jest.fn();
 
 const dataLayer = {
     push: jest.fn()
@@ -222,6 +224,9 @@ describe('BrazeDispatcher operation', () => {
             interceptInAppMessages,
             handleContentCards,
             handleContentCardsGrouped
+        },
+        loggerCallbacks: {
+            loggingCallback
         }
     };
 
@@ -243,6 +248,21 @@ describe('BrazeDispatcher operation', () => {
     });
 
     describe('callbacks', () => {
+        /* eslint-disable indent */
+        describe('logger', () => {
+            it.each`
+                key          | value
+                ${'info'}    | ${'logInfo'}
+                ${'warn'}    | ${'logWarn'}
+                ${'error'}   | ${'logError'}
+            `('should for each key call the callback with the relevant log data', ({ key, value }) => {
+                // Act
+                dispatcher.logger(key, 'message', { test: 'test' });
+
+                // Assert
+                expect(loggingCallback).toHaveBeenCalledWith(value, 'message', { test: 'test' });
+            });
+        });
         describe('contentCardsHandler', () => {
             const rawCards = [
                 { id: 'card1' },
