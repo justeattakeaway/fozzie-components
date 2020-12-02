@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.21.0
+------------------------------
+*December 1, 2020*
+
+### Added
+- Ability for CircleCI to post build statuses to slack.
+
+
 v2.20.0
 ------------------------------
 *November 30, 2020*
