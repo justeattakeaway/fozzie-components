@@ -26,7 +26,7 @@ const defaultState = {
     serviceType: CHECKOUT_METHOD_DELIVERY,
     customer: {
         firstName: 'John',
-        mobileNumber: '447111111111'
+        mobileNumber: '+447111111111'
     },
     fulfillment: {
         times: fulfillmentTimes,
