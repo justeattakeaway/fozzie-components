@@ -153,7 +153,7 @@ class BrazeDispatcher {
         }
 
         Object.keys(loggerCallbacks).forEach(key => {
-            this.loggerCallbacks.push(loggerCallbacks[key]);
+            this.loggerCallbacks.push((new LogService(loggerCallbacks[key])));
         });
 
         window.dataLayer = window.dataLayer || [];
@@ -303,7 +303,7 @@ class BrazeDispatcher {
     logger (type, logMessage, payload) {
         this.loggerCallbacks.forEach(callback => {
             // eslint-disable-next-line no-unused-expressions
-            (new LogService(callback))[type]?.(logMessage, payload);
+            callback[type]?.(logMessage, payload);
         });
     }
 }
