@@ -327,6 +327,9 @@ export default {
                 callbacks: {
                     handleContentCards: this.metadataContentCards,
                     handleContentCardsGrouped: this.metadataContentCardsGrouped
+                },
+                loggerCallbacks: {
+                    logger: this.handleLogging()
                 }
             })
             .then(dispatcher => {
@@ -539,6 +542,10 @@ export default {
             return groupIndex !== null ?
                 this.testId && `ContentCard-${this.testId}-${index}-${groupIndex}` :
                 this.testId && `ContentCard-${this.testId}-${index}`;
+        },
+
+        handleLogging () {
+
         }
     }
 };
