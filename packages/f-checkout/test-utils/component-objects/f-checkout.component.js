@@ -33,8 +33,6 @@ exports.showDropdownOption = (index) => {
    
      return element[index].getText();
 }
-
-exports.dropDownDefault = () => dropdownSelector().selectByAttribute('data-test-id', 'formDropdown-option-0');
 /**
  * @description
  * Inputs address details into the checkout component.
