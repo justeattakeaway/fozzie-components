@@ -31,6 +31,11 @@ const dataLayer = {
 const apiKey = '__API_KEY__';
 const userId = '__USER_ID__';
 
+const TEST_LOG_MESSAGE = '__TEST_MESSAGE__';
+const TEST_PAYLOAD = {
+    test: '__TEST_PAYLOAD__'
+};
+
 const enabledComponentParameters = {
     disableComponent: false,
     apiKey,
@@ -257,10 +262,10 @@ describe('BrazeDispatcher operation', () => {
                 ${'error'}   | ${'logError'}
             `('should for each key call the callback with the relevant log data', ({ key, value }) => {
                 // Act
-                dispatcher.logger(key, 'message', { test: 'test' });
+                dispatcher.logger(key, TEST_LOG_MESSAGE, TEST_PAYLOAD);
 
                 // Assert
-                expect(loggingCallback).toHaveBeenCalledWith(value, 'message', { test: 'test' });
+                expect(loggingCallback).toHaveBeenCalledWith(value, TEST_LOG_MESSAGE, TEST_PAYLOAD);
             });
         });
         describe('contentCardsHandler', () => {
