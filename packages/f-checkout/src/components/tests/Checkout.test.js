@@ -5,11 +5,13 @@ import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../cons
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 import tenantConfigs from '../../tenants';
+// import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
 localVue.use(Vuex);
+// localVue.mixin(VueGlobalisationMixin);
 
 const fulfillmentTimes = [
     {
@@ -27,7 +29,7 @@ const defaultState = {
     serviceType: CHECKOUT_METHOD_DELIVERY,
     customer: {
         firstName: 'John',
-        mobileNumber: '447111111111'
+        mobileNumber: '+447111111111'
     },
     fulfillment: {
         times: fulfillmentTimes,
