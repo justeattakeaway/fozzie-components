@@ -35,7 +35,9 @@ describe('f-checkout component tests', () => {
         CheckoutComponent.submit();
     });
 
-    it('should show the dropdown of times in ascending order', () => {
+    it('should display times in ascending order, with default text "As soon as possible" showing first', () => {
+        // Assert
+        expect(CheckoutComponent.isDropdownDisplayed()).toBe(true);
 
         // Act
         CheckoutComponent.selectOption().forEach((element) => {
@@ -44,12 +46,8 @@ describe('f-checkout component tests', () => {
         });
         
         // Assert
-        expect(CheckoutComponent.secondOptionText()).toContain('00:15'); 
-        expect(CheckoutComponent.thirdOptionText()).toContain('00:30');
-    });
-
-    it('should show the first option as the default, with text "As soon as possible"', () => {
-        // Assert
-        expect(CheckoutComponent.firstOptionText()).toBe(' As soon as possible ');
+        expect(CheckoutComponent.showDropdownOption(0)).toBe(' As soon as possible ');
+        expect(CheckoutComponent.showDropdownOption(1)).toContain('00:15');
+        expect(CheckoutComponent.showDropdownOption(2)).toContain('00:30');
     });
 });

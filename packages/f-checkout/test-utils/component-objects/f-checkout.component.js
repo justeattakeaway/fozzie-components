@@ -6,9 +6,11 @@ const userNoteInput = () => $('[data-test-id="user-note"] textarea');
 
 const allergenLink = () => $('[data-test-id="allergy-button"]');
 
-// Dropdown Select
+// Dropdown
 
-const dropdown = () => $$("select option");
+const dropdownSelector = () => $('[data-test-id="form-select"]');
+
+const dropdownOptions = () => $$("select option");
 
 const goToPaymentButton = () => $('[data-test-id="confirm-payment-submit-button"]');
 
@@ -20,14 +22,19 @@ exports.inputs = {
     addressPostcode: () => $('[data-test-id="input-address-postcode"]')
 };
 
-exports.selectOption = () => $$("select option");
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
-exports.firstOptionText = () => dropdown()[0].getText();
-exports.secondOptionText = () => dropdown()[1].getText();
-exports.thirdOptionText = () => dropdown()[2].getText();
+exports.isDropdownDisplayed = () => dropdownSelector().isDisplayed();
 
+exports.selectOption = () => $$("select option");
+exports.showDropdownOption = (index) => {
+    const element = dropdownOptions();
+   
+     return element[index].getText();
+}
+
+exports.dropDownDefault = () => dropdownSelector().selectByAttribute('data-test-id', 'formDropdown-option-0');
 /**
  * @description
  * Inputs address details into the checkout component.
