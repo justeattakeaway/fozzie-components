@@ -12,6 +12,7 @@
 <script>
 import { mapState } from 'vuex';
 import FormDropdown from '@justeat/f-form-field';
+import '@justeat/f-form-field/dist/f-form-field.css';
 import { CHECKOUT_METHOD_DELIVERY } from '../constants';
 
 export default {
