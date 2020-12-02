@@ -101,7 +101,7 @@ class BrazeDispatcher {
 
         this.dispatcherOptions = null;
 
-        this.loggerCallbacks = [];
+        this.loggerCallbackInstances = [];
         this.cardsCallbacks = [];
         this.groupedCardsCallback = [];
         this.inAppMessageClickEventCallbacks = [];
@@ -153,7 +153,7 @@ class BrazeDispatcher {
         }
 
         Object.keys(loggerCallbacks).forEach(key => {
-            this.loggerCallbacks.push((new LogService(loggerCallbacks[key])));
+            this.loggerCallbackInstances.push((new LogService(loggerCallbacks[key])));
         });
 
         window.dataLayer = window.dataLayer || [];
@@ -301,9 +301,9 @@ class BrazeDispatcher {
      * @param {object} [payload={}] - Any additional properties you want to add to the logs
      */
     logger (type, logMessage, payload) {
-        this.loggerCallbacks.forEach(callback => {
+        this.loggerCallbackInstances.forEach(instance => {
             // eslint-disable-next-line no-unused-expressions
-            callback[type]?.(logMessage, payload);
+            instance[type]?.(logMessage, payload);
         });
     }
 }
