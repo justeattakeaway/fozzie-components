@@ -233,6 +233,7 @@ workflows:
   deploy-storybook:
     jobs:
       - deploy-storybook:
+          context: web-core
           filters:
             branches:
               only: master
