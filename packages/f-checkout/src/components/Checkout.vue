@@ -45,12 +45,14 @@
 
                 <user-note data-test-id="user-note" />
 
-                <button-component
+                <!-- <button-component
                     :class="$style['c-checkout-allergyButton']"
                     button-type="link"
                     data-test-id="allergy-button">
                     {{ $t('allergyText') }}
-                </button-component>
+                </button-component> -->
+
+                <allergen-information :class="$style['o-btn--allergy']" />
 
                 <button-component
                     :class="$style['c-checkout-submitButton']"
@@ -87,6 +89,7 @@ import { mapState, mapActions } from 'vuex';
 import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
+import AllergenInformation from './allergens/AllergenInformation.vue';
 
 import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP } from '../constants';
 import tenantConfigs from '../tenants';
@@ -100,6 +103,7 @@ export default {
     components: {
         AddressBlock,
         Alert,
+        AllergenInformation,
         ButtonComponent,
         Card,
         ErrorMessage,
@@ -386,10 +390,6 @@ $checkout-padding                         : spacing(x5) 100px;
     .c-checkout-alert {
         width: $checkout-width;
         margin: 0 auto;
-    }
-
-    .c-checkout-allergyButton {
-        margin-top: spacing(x1.5);
     }
 
     .c-checkout-submitButton {
