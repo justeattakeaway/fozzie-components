@@ -6,7 +6,7 @@
                 [$style['c-formField--invalid']]: hasError
             }
         ]"
-        data-test-id="form-field-component">
+        :data-test-id="testId.container">
         <div
             :class="$style['c-formField-inputWrapper']">
             <form-label
@@ -14,7 +14,7 @@
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
                 :is-inline="isInline"
-                data-test-id="form-field-label">
+                :data-test-id="testId.label">
                 {{ labelText }}
             </form-label>
 
@@ -23,11 +23,11 @@
                 :id="`${uniqueId}`"
                 v-bind="$attrs"
                 :type="normalisedInputType"
-                :data-test-id="testId"
+                :data-test-id="testId.input"
                 :class="[
-                    $style['o-form-field'],
                     $style['c-formField-input'],
-                    $style['c-formField-input-inputFields--focus']
+                    $style['c-formField-dropdownContainer'],
+                    $style['c-formField-input--focus']
                 ]"
                 :dropdown-options="dropdownOptions"
                 @update="updateOption"
@@ -40,13 +40,10 @@
                 v-bind="$attrs"
                 :type="normalisedInputType"
                 placeholder=" "
-                :data-test-id="testId"
+                :data-test-id="testId.input"
                 :class="[
-                    $style['o-form-field'],
                     $style['c-formField-input'],
-                    $style['c-formField-input-textField'], {
-                        [$style['c-formField-input-inputFields--focus']]: isInputField
-                    }
+                    (isSelectionControl ? $style['c-formField-input--focus'] : '')
                 ]"
                 @input="updateValue"
                 v-on="listeners"
@@ -56,7 +53,7 @@
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
                 :is-inline="isInline"
-                data-test-id="form-field-label--inline">
+                :data-test-id="testId.label + '--inline'">
                 {{ labelText }}
             </form-label>
         </div>
@@ -121,11 +118,6 @@ export default {
             default: false
         },
 
-        dataTestId: {
-            type: String,
-            default: ''
-        },
-
         dropdownOptions: {
             type: Array,
             default: () => null
@@ -179,7 +171,13 @@ export default {
         },
 
         testId () {
-            return this.dataTestId || this.$attrs.name || false;
+            const formFieldName = this.$attrs.name;
+
+            return {
+                container: formFieldName ? `formfield-${formFieldName}` : 'formfield-container',
+                input: formFieldName ? `formfield-${formFieldName}-input` : 'formfield-input',
+                label: formFieldName ? `formfield-${formFieldName}-label` : 'formfield-label'
+            };
         },
 
         isInline () {
@@ -191,7 +189,7 @@ export default {
             return this.inputType === 'dropdown';
         },
 
-        isInputField () {
+        isSelectionControl () {
             return !(this.inputType === 'radio' || this.inputType === 'checkbox');
         }
     },
@@ -249,30 +247,19 @@ $form-input-focus                         : $blue--light;
         position: relative;
     }
 
-    .c-formField-input-textField {
-        padding: $form-input-padding;
-    }
-
-    .c-formField-input-inputFields--focus {
-        &:focus,
-        &:active,
-        &:focus-within {
-            box-shadow: 0 0 0 2pt $form-input-focus;
-            outline: none;
-        }
-    }
-
     .c-formField-input {
         width: 100%;
-        @include rem(height, $form-input-height); //convert height to rem
-        @include font-size($form-input-fontSize);
         font-family: $font-family-base;
-        color: $form-input-textColour;
+        @include font-size($form-input-fontSize);
         font-weight: $font-weight-base;
+        color: $form-input-textColour;
+        @include rem(height, $form-input-height); //convert height to rem
+
         background-color: $form-input-bg;
         border: $form-input-borderWidth solid $form-input-borderColour;
         border-radius: $form-input-borderRadius;
         background-clip: padding-box;
+        padding: $form-input-padding;
 
         &:hover {
             background-color: $form-input-bg--hover;
@@ -294,5 +281,18 @@ $form-input-focus                         : $blue--light;
             }
         }
     }
+
+    .c-formField-input--focus {
+        &:focus,
+        &:active,
+        &:focus-within {
+            box-shadow: 0 0 0 2pt $form-input-focus;
+            outline: none;
+        }
+    }
+
+        .c-formField-dropdownContainer {
+            padding: 0;
+        }
 
 </style>
