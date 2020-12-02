@@ -15,6 +15,15 @@ v0.14.0
 - Styling in `Selector` component.
 
 
+v0.13.0
+------------------------------
+*December 1, 2020*
+
+### Changed
+- `f-services` version.
+- Tests to match the new version of `f-services`.
+
+
 v0.12.0
 ------------------------------
 *December 1, 2020*
