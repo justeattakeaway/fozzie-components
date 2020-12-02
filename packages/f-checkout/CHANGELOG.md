@@ -7,11 +7,13 @@ v0.14.0
 ------------------------------
 *December 2, 2020*
 
+### Added
+- `max-length` to user note.
+
 ### Changed
 - Phone validation to use `f-services`.
 - Styling in `Selector` component.
-### Added
-- `max-length` to user note.
+
 
 v0.12.0
 ------------------------------
