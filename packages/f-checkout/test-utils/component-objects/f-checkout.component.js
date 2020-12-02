@@ -6,9 +6,16 @@ const userNoteInput = () => $('[data-test-id="user-note"] textarea');
 
 const allergenLink = () => $('[data-test-id="allergy-button"]');
 
-const fulfillmentTimeDropdown = () => $('[data-test-id="fulfillment-time"]');
-const listOfTimes = () => $$('[data-test-id="time-options"]');
-//first one might not always be the default
+// Dropdown Select
+
+const timeDropdown = () => $('[data-test-id="form-select"]');
+const defaultTime = () => $('[data-test-id="formDropdown-option-0"]');
+const list = () => $$("select option");
+
+exports.selectOption = () => $$("select option");
+
+
+// const listOfTimes = () => $$('*="formDropdown"')
 
 const goToPaymentButton = () => $('[data-test-id="confirm-payment-submit-button"]');
 
@@ -23,12 +30,25 @@ exports.inputs = {
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
-// exports.defaultTimeDisplayed = () => fulfillmentTimeOptions()[0].isDisplayed();
+exports.defaultTimeText = () => defaultTime().getText();
+exports.dropDownText = () => timeDropdown().getText();
+exports.isDefaultTimeDisplayed = () => listOfTimes().isDisplayed();
+exports.isOptionDisplayed = () => option().isDisplayedInViewport();
 
-exports.defaultTimeText = () => listOfTimes()[0].getText();
+exports.firstOptionText = () => list()[0].getText();
+exports.secondOptionText = () => list()[1].getText();
+exports.thirdOptionText = () => list()[2].getText();
 
-const secondTime = () => listOfTimes()[1].getText().replace(/\D/g,'');
-const thirdTime = () => listOfTimes()[2].getText().replace(/\D/g,'');
+exports.isTimeDropdownDisplayed = () => timeDropdown().isDisplayed();
+exports.isDefaultTimeDisplayed = () => defaultTime().isDisplayed();
+
+  
+// const secondTime = () => {
+//     return listOfTimes()[1].getText().replace(/\D/g,'');
+// }
+// const thirdTime = () => {
+//    return listOfTimes()[2].getText().replace(/\D/g,'');
+// }
 
 exports.timeDescending = () => {
     if (secondTime < thirdTime){
