@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 
 const appendStandardProperties = (logPayload, message, level, mode) => {
