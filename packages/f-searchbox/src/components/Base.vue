@@ -40,6 +40,10 @@ export default {
         dependentApiPromise: {
             type: Object,
             default: () => {}
+        },
+        copyOverride: {
+            type: Object,
+            default: () => {}
         }
     },
     data () {
@@ -50,7 +54,10 @@ export default {
         const service = Service(localeConfig.service);
 
         return {
-            copy: { ...localeConfig.copy },
+            copy: {
+                ...localeConfig.copy,
+                ...this.copyOverride
+            },
             componentConfig,
             componentLocale: locale,
             theme,

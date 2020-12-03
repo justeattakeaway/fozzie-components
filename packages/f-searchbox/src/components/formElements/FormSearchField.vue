@@ -24,7 +24,9 @@
                 }"
                 @input="$emit('input', $event.target.value)"
                 @focus="toggleEnterLeaveInput(true)"
-                @blur="toggleEnterLeaveInput(false)">
+                @blur="toggleEnterLeaveInput(false)"
+                @keydown.up="setKeyboardSuggestion(-1)"
+                @keydown.down="setKeyboardSuggestion(1)">
 
             <span :class="$style['c-search-placeholder']">{{ copy.fieldPlaceholder }}</span>
         </label>
@@ -104,7 +106,8 @@ export default {
 
     methods: {
         ...mapActions('searchbox', [
-            'setInputFocus'
+            'setInputFocus',
+            'setKeyboardSuggestion'
         ]),
 
         /**
