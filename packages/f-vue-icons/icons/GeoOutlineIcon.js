@@ -1,4 +1,4 @@
-  import _mergeJSXProps from "babel-helper-vue-jsx-merge-props";
+import _mergeJSXProps from "babel-helper-vue-jsx-merge-props";
 export default {
   name: 'GeoOutlineIcon',
   props: {},
