@@ -11,6 +11,7 @@ v0.15.0
 - Ability to change prop values in demo file for WebDriverIO component tests.
 - New `Demo.vue` for f-checkout controls.
 
+
 v0.14.0
 ------------------------------
 *December 2, 2020*
