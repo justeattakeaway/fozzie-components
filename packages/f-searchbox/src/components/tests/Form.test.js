@@ -113,7 +113,7 @@ describe('`Form`', () => {
                 });
 
                 describe('when `hasLastSavedAddress` is `truthy`', () => {
-                    it('should `preventDefault` so the we can post a payload correctly', () => {
+                    it('should `preventDefault` so that we can post a payload correctly', () => {
                         // Arrange
                         const address = 'AR511AR';
 

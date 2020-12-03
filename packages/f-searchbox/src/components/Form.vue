@@ -289,6 +289,10 @@ export default {
          * resolve / return specific cases. E.g. if we need more information
          * like the street number we flag this up to the component and display it.
          *
+         * 1. `this.address` is set either via the `index` (clicked on event) or
+         * `keyboardSuggestionIndex` (enter key event) depending on which was used
+         * the address is set accordingly.
+         *
          * */
         onSelectedSuggestion (index) {
             selectedSuggestion(
@@ -308,7 +312,6 @@ export default {
                 }
             });
 
-            // TODO pass through suggestion index for keyboard behaviour...
             this.address = this.suggestionFormat(this.suggestions[index || this.keyboardSuggestionIndex]);
         },
 
