@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-content-cards",
   "description": "Fozzie Content Cards",
-  "version": "2.2.0-beta.8",
+  "version": "2.2.0-beta.9",
   "main": "dist/f-content-cards.umd.min.js",
   "files": [
     "dist"
@@ -47,7 +47,7 @@
   "devDependencies": {
     "@justeat/f-vue-icons": "1.2.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
-    "@justeat/f-metadata": "3.0.0-beta.6",
+    "@justeat/f-metadata": "3.0.0-beta.7",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
