@@ -8,9 +8,9 @@ const allergenLink = () => $('[data-test-id="allergy-button"]');
 
 // Dropdown
 
-const dropdownSelector = () => $('[data-test-id="form-select"]');
+const selectTimeDropdownOptions = () => $('[data-test-id="form-select"]');
 
-const dropdownOptions = () => $$("select option");
+const timeDropdownOptions = () => $$("select option");
 
 const goToPaymentButton = () => $('[data-test-id="confirm-payment-submit-button"]');
 
@@ -25,13 +25,13 @@ exports.inputs = {
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
-exports.isDropdownDisplayed = () => dropdownSelector().isDisplayed();
+exports.isDropdownDisplayed = () => selectTimeDropdownOptions().isDisplayed();
 
 exports.selectOption = () => $$("select option");
-exports.showDropdownOption = (index) => {
-    const element = dropdownOptions();
+exports.getDropdownOptionText = (index) => {
+    const element = timeDropdownOptions();
    
-     return element[index].getText();
+    return element[index].getText();
 }
 /**
  * @description
@@ -57,10 +57,10 @@ exports.submitCheckoutForm = addressInfo => {
  * @description
  * Sets the value of the fulfillment time dropdown based on visible text.
  *
- * @param {String} fulfillmentTimeText The text visible text value of the fulfillment time
+ * @param {String} dropdownTime The text visible text value of the fulfillment time
  */
-exports.selectFulfillmentTime = fulfillmentTimeText => {
-    fulfillmentTimeDropdown().selectByVisibleText(fulfillmentTimeText);
+exports.selectDropdownTime = dropdownTime => {
+    selectTimeDropdownOptions().selectByVisibleText(dropdownTime);
 };
 
 /**

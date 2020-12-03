@@ -31,23 +31,20 @@ describe('f-checkout component tests', () => {
         // Act
         CheckoutComponent.submitCheckoutForm(addressInfo);
         CheckoutComponent.inputUserNote('No mushrooms!');
-        CheckoutComponent.selectFulfillmentTime('As soon as possible');
+        CheckoutComponent.selectDropdownTime('As soon as possible');
         CheckoutComponent.submit();
     });
 
-    it('should display times in ascending order, with default text "As soon as possible" showing first', () => {
-        // Assert
-        expect(CheckoutComponent.isDropdownDisplayed()).toBe(true);
-
+    it.only('should display times in ascending order, with default text "As soon as possible" showing first', () => {
         // Act
         CheckoutComponent.selectOption().forEach((element) => {
             element.click();
-            browser.pause(1000);
         });
-        
+
         // Assert
-        expect(CheckoutComponent.showDropdownOption(0)).toBe(' As soon as possible ');
-        expect(CheckoutComponent.showDropdownOption(1)).toContain('00:15');
-        expect(CheckoutComponent.showDropdownOption(2)).toContain('00:30');
+        expect(CheckoutComponent.isDropdownDisplayed()).toBe(true);
+        // expect(CheckoutComponent.getDropdownOptionText(0)).toBe('As soon as possible');
+        // expect(CheckoutComponent.getDropdownOptionText(1)).toBe('Monday 00:15');
+        // expect(CheckoutComponent.getDropdownOptionText(2)).toBe('Monday 00:30');
     });
 });
