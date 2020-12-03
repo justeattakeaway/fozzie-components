@@ -45,7 +45,7 @@
 
                 <user-note data-test-id="user-note" />
 
-                <allergen-information/>
+                <allergen-information />
 
                 <button-component
                     :class="$style['c-checkout-submitButton']"

@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style['c-allergen-linkButton']" >
+    <div :class="$style['c-allergen-linkButton']">
         <button-component
             button-type="link"
             data-test-id="allergy-button"
