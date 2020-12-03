@@ -7,34 +7,34 @@ describe('Tenant: `es-ES`', () => {
             it('should return errors for empty address', () => {
                 // Arrange
                 const service = Service(tenant.default.service);
-        
+
                 // Act
                 const result = service.isValid();
-        
+
                 // Assert
                 expect(result).toContain('ADDRESS_EMPTY');
             });
-    
+
             it('should return errors for empty string address', () => {
                 // Arrange
                 const service = Service(tenant.default.service);
-        
+
                 // Act
                 const result = service.isValid('     ');
-        
+
                 // Assert
                 expect(result).toContain('ADDRESS_EMPTY');
             });
         });
-    
+
         describe('when address is valid', () => {
             it('should return `true` for populated addresses', () => {
                 // Arrange
                 const service = Service(tenant.default.service);
-            
+
                 // Act
                 const result = service.isValid('Cleric Beast');
-            
+
                 // Assert
                 expect(result).toEqual(true);
             });

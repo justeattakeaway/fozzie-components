@@ -29,6 +29,8 @@ const search = ({
     } else {
         generatePostForm('/HomeCW/SearchResultByGeoLocation', payload);
     }
+
+    return false;
 };
 
 /**
