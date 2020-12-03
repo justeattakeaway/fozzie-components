@@ -53,8 +53,8 @@ exports.submitCheckoutForm = addressInfo => {
  *
  * @param {String} dropdownTime The visible text value of the order time
  */
-exports.selectOrderTime = dropdownTime => {
-    orderTimeDropdown().selectByVisibleText(dropdownTime);
+exports.selectOrderTime = orderTime => {
+    orderTimeDropdown().selectByVisibleText(orderTime);
 };
 
 /** 
@@ -65,7 +65,7 @@ exports.getOrderTimeOptionText = (index) => {
     const element = orderTimeDropdownOptions();
    
     return element[index].getText();
-}
+};
 
 /**
  * @description
