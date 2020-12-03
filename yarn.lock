@@ -1752,6 +1752,18 @@
   dependencies:
     window-or-global "^1.0.1"
 
+"@justeat/f-metadata@3.0.0-beta.6":
+  version "3.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@justeat/f-metadata/-/f-metadata-3.0.0-beta.6.tgz#3d2ea0d38192a7b40f3ac1a8bb3a1194ccd62338"
+  integrity sha512-ZCBCcMxk2nVYw58hWaJdf5kVtfdeUQVausrhvSFq/V3bpGvTh+OJV1W0OUOKyizqRc8FnGVUEJVhqzCFeBNpew==
+  dependencies:
+    appboy-web-sdk "2.5.2"
+    date-fns "2.16.1"
+    lodash.findindex "4.6.0"
+    lodash.orderby "4.6.0"
+    lodash.startswith "4.2.1"
+    lodash.uniq "4.5.0"
+
 "@justeat/f-services@0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-0.13.0.tgz#b0fc67948e94800ba176addb9d92cce444d28c8e"

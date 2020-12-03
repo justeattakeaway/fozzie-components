@@ -329,7 +329,7 @@ export default {
                     handleContentCardsGrouped: this.metadataContentCardsGrouped
                 },
                 loggerCallbacks: {
-                    logger: this.handleLogging
+                    logger: this.handleLogging(this.$logger)
                 }
             })
             .then(dispatcher => {
@@ -548,10 +548,10 @@ export default {
          * Handles logging from f-metadata (callback)
          * @returns {function(*, *=, *=): void}
          */
-        handleLogging () {
+        handleLogging (logger) {
             // eslint-disable-next-line func-names
             return function (type, logMessage, payload) {
-                if (this.$logger && this.$logger[type]) this.$logger[type](logMessage, null, payload);
+                if (logger && logger[type]) logger[type](logMessage, null, payload);
             };
         }
     }
