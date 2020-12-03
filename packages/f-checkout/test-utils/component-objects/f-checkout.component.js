@@ -26,7 +26,8 @@ exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
 exports.isOrderTimeDropdownDisplayed = () => orderTimeDropdown().isDisplayed();
-
+exports.userNoteMaxCharacterCount = () => userNoteInput().getAttribute('maxlength');
+exports.clickPaymentButton = () => goToPaymentButton().click();
 /**
  * @description
  * Inputs address details into the checkout component.
@@ -73,8 +74,9 @@ exports.getOrderTimeOptionText = (index) => {
  *
  * @param {String} userNote The user note value to be entered
  */
-exports.inputUserNote = userNote => {
+exports.inputUserNoteLength = userNote => {
     userNoteInput().setValue(userNote);
+    return userNoteInput().getValue().length
 };
 
 /**
@@ -84,3 +86,8 @@ exports.inputUserNote = userNote => {
 exports.submit = () => {
     goToPaymentButton().click();
 };
+
+exports.getCharacterLength = (userNote) => {
+userNoteInput().setValue(userNote);
+userNoteInput(userNote).getText().length
+}
