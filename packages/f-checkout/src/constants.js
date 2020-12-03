@@ -13,3 +13,5 @@ export const TENANT_MAP = {
     'it-IT': 'it',
     'nb-NO': 'no'
 };
+
+export const ALLERGEN_COOKIE_NAME = 'je-allergen-cta-interaction';
