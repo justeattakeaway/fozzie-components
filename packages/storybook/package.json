@@ -1,6 +1,6 @@
 {
   "name": "@justeat/storybook",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "scripts": {
     "storybook:build": "vue-cli-service storybook:build -s public -c config/storybook",
     "storybook:serve": "vue-cli-service storybook:serve -s public -p 6006 -c config/storybook"
@@ -16,6 +16,7 @@
     "@storybook/addon-knobs": "6.0.28",
     "@storybook/addon-links": "6.0.28",
     "@storybook/vue": "6.0.28",
+    "cookie-universal": "2.1.4",
     "eyeglass": "1.4.1",
     "node-sass-magic-importer": "5.3.2",
     "npm-run-all": "4.1.5",
