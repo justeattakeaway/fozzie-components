@@ -7,10 +7,12 @@
         <span :class="$style['c-geo-locator-tip']">{{ copy.geoTip }}</span>
 
         <geo-fill-icon
-            v-if="hasGeoSuggestionsResults" />
+            v-if="hasGeoSuggestionsResults"
+            :class="$style['c-geo-fill-icon']" />
 
         <geo-outline-icon
-            v-else />
+            v-else
+            :class="$style['c-geo-outline-icon']" />
     </button>
 </template>
 
@@ -103,5 +105,12 @@ export default {
     margin: -1px;
     overflow: hidden;
     position: absolute;
+}
+
+.c-geo-fill-icon,
+.c-geo-outline-icon {
+    path {
+        fill: $blue;
+    }
 }
 </style>

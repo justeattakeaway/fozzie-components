@@ -34,6 +34,7 @@
             aria-live="assertive"
             :suggestion-format="suggestionFormat"
             :suggestions="suggestions"
+            :keyboard-suggestion-selection="keyboardSuggestionIndex"
             @selected-suggestion="onSelectedSuggestion" />
 
         <error-message
@@ -128,7 +129,8 @@ export default {
             'streetNumberRequired',
             'isInputFocus',
             'streetNumber',
-            'isDirty'
+            'isDirty',
+            'keyboardSuggestionIndex'
         ]),
 
         /**
@@ -250,6 +252,7 @@ export default {
             this.setIsValid(this.service.isValid(this.address));
 
             if (this.hasLastSavedAddress) {
+                e.preventDefault();
                 return this.searchPreviouslySavedAddress(e);
             }
 
@@ -263,8 +266,7 @@ export default {
 
                 if (this.service.isAutocompleteEnabled) {
                     e.preventDefault();
-
-                    const info = await this.onSelectedSuggestion(0);
+                    const info = await this.onSelectedSuggestion();
 
                     // if the address is still missing fields, return here
                     if (!info) {
@@ -287,6 +289,10 @@ export default {
          * resolve / return specific cases. E.g. if we need more information
          * like the street number we flag this up to the component and display it.
          *
+         * 1. `this.address` is set either via the `index` (clicked on event) or
+         * `keyboardSuggestionIndex` (enter key event) depending on which was used
+         * the address is set accordingly.
+         *
          * */
         onSelectedSuggestion (index) {
             selectedSuggestion(
@@ -294,7 +300,8 @@ export default {
                 this.suggestions,
                 this.requiredFields,
                 this.streetNumber,
-                index
+                index,
+                this.keyboardSuggestionIndex
             ).then(value => {
                 if (value && value.errors) {
                     this.setErrors(value.errors);
@@ -305,8 +312,7 @@ export default {
                 }
             });
 
-            // TODO pass through suggestion index for keyboard behaviour...
-            this.address = this.suggestionFormat(this.suggestions[index]);
+            this.address = this.suggestionFormat(this.suggestions[index || this.keyboardSuggestionIndex]);
         },
 
         /**
@@ -321,11 +327,10 @@ export default {
                 onSubmit: this.onSubmit,
                 formUrl: this.formUrl,
                 form: this.$refs.form,
-                callback: getLastLocation,
                 event
             };
 
-            search(searchPayload);
+            search(searchPayload, getLastLocation());
         },
 
         /**
