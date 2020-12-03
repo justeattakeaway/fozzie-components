@@ -1,14 +1,5 @@
 <template>
     <div>
-        <!-- <button
-            :class="[
-                $style['o-btn--allergy'],
-                'o-btnLink'
-            ]"
-            data-test-id="allergy-button"
-            @click.prevent="showModal">
-
-        </button> -->
         <button-component
             :class="$style['c-checkout-allergyButton']"
             button-type="link"
@@ -79,7 +70,6 @@ export default {
     methods: {
         /* TODO - Add tracking (separate ticket) */
         showModal () {
-            console.log('We got to show the modal!');
             this.shouldShowModal = true;
         },
         hideModal () {

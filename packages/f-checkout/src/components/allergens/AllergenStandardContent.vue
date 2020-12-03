@@ -70,17 +70,21 @@ export default {
             'allergenPhoneNumber',
             'allergenUrl'
         ]),
+
         contactMethod () {
             const phone = this.allergenPhoneNumber ? 'phone' : 'nophone';
             const url = this.allergenUrl ? 'url' : 'nourl';
             return `${phone}_${url}`;
         },
+
         hasPhoneNumberAndAllergenUrl () {
             return this.contactMethod === 'phone_url';
         },
+
         hasPhoneNumberOnly () {
             return this.contactMethod === 'phone_nourl';
         },
+
         hasAllergenUrlOnly () {
             return this.contactMethod === 'nophone_url';
         }

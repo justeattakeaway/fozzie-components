@@ -45,14 +45,7 @@
 
                 <user-note data-test-id="user-note" />
 
-                <!-- <button-component
-                    :class="$style['c-checkout-allergyButton']"
-                    button-type="link"
-                    data-test-id="allergy-button">
-                    {{ $t('allergyText') }}
-                </button-component> -->
-
-                <allergen-information :class="$style['o-btn--allergy']" />
+                <allergen-information />
 
                 <button-component
                     :class="$style['c-checkout-submitButton']"
