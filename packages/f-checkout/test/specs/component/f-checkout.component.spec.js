@@ -31,20 +31,24 @@ describe('f-checkout component tests', () => {
         // Act
         CheckoutComponent.submitCheckoutForm(addressInfo);
         CheckoutComponent.inputUserNote('No mushrooms!');
-        CheckoutComponent.selectDropdownTime('As soon as possible');
+        CheckoutComponent.selectOrderTime('As soon as possible');
         CheckoutComponent.submit();
     });
 
-    it.only('should display times in ascending order, with default text "As soon as possible" showing first', () => {
+    it('should display times in ascending order, with default text "As soon as possible" showing first', () => {
+        // Assert
+        expect(CheckoutComponent.isOrderTimeDropdownDisplayed()).toBe(true);
+        // expect(CheckoutComponent.getOrderTimeOptionText(0)).toBe('As soon as possible');
+        // expect(CheckoutComponent.getOrderTimeOptionText(1)).toBe('Monday 00:15');
+        // expect(CheckoutComponent.getOrderTimeOptionText(2)).toBe('Monday 00:30');
+    });
+
+    it('should allow the user to click through different order times', () => {
         // Act
         CheckoutComponent.orderTimeDropdownOptions().forEach((element) => {
             element.click();
         });
 
-        // Assert
-        expect(CheckoutComponent.isOrderTimeDropdownDisplayed()).toBe(true);
-        expect(CheckoutComponent.getOrderTimeOptionText(0)).toBe('As soon as possible');
-        expect(CheckoutComponent.getOrderTimeOptionText(1)).toBe('Monday 00:15');
-        expect(CheckoutComponent.getOrderTimeOptionText(2)).toBe('Monday 00:30');
+        CheckoutComponent.selectOrderTime(' As soon as possible ');
     });
 });

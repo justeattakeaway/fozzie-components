@@ -1,16 +1,16 @@
 const checkoutComponent = () => $('[data-test-id="checkout-component"]');
 
 // Form Fields
-
 const userNoteInput = () => $('[data-test-id="user-note"] textarea');
-
 const allergenLink = () => $('[data-test-id="allergy-button"]');
 
 // Dropdown
-
-const orderTimeDropdown = () => $('[data-test-id="form-select"]');
+const orderTimeDropdown = () => $('[data-test-id="form-select"] select');
 const orderTimeDropdownOptions = () => $$('[data-test-id="form-select"] select option');
+
+// Submit
 const goToPaymentButton = () => $('[data-test-id="confirm-payment-submit-button"]');
+
 
 exports.inputs = {
     mobileNumber: () => $('[data-test-id="input-mobile-number"]'),
@@ -19,18 +19,14 @@ exports.inputs = {
     addressCity: () => $('[data-test-id="input-address-city"]'),
     addressPostcode: () => $('[data-test-id="input-address-postcode"]')
 };
+exports.orderTimeDropdownOptions = () => $$('[data-test-id="form-select"] select option');
+
 
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
 exports.isOrderTimeDropdownDisplayed = () => orderTimeDropdown().isDisplayed();
 
-exports.orderTimeDropdownOptions = () => $$('[data-test-id="form-select"] select option');
-exports.getOrderTimeOptionText = (index) => {
-    const element = orderTimeDropdownOptions();
-   
-    return element[index].getText();
-}
 /**
  * @description
  * Inputs address details into the checkout component.
@@ -53,13 +49,23 @@ exports.submitCheckoutForm = addressInfo => {
 
 /**
  * @description
- * Sets the value of the fulfillment time dropdown based on visible text.
+ * Sets the value of the order time dropdown based on visible text.
  *
- * @param {String} dropdownTime The text visible text value of the fulfillment time
+ * @param {String} dropdownTime The visible text value of the order time
  */
-exports.selectDropdownTime = dropdownTime => {
-    selectTimeDropdownOptions().selectByVisibleText(dropdownTime);
+exports.selectOrderTime = dropdownTime => {
+    orderTimeDropdown().selectByVisibleText(dropdownTime);
 };
+
+/** 
+ * @description
+ * The time of the order should increase when a higher index is applied.
+ */
+exports.getOrderTimeOptionText = (index) => {
+    const element = orderTimeDropdownOptions();
+   
+    return element[index].getText();
+}
 
 /**
  * @description
