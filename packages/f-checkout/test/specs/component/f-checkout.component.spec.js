@@ -1,7 +1,6 @@
+/* global browser*/
 import forEach from 'mocha-each';
 import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.component';
-// import WebdriverExtensions from '../../../../../test/utils/webdriverio-extensions';
-import { ERRORS } from '../../../test-utils/component-objects/f-checkout-selectors';
 
 describe('f-checkout component tests', () => {
     beforeEach(() => {
@@ -20,25 +19,20 @@ describe('f-checkout component tests', () => {
         expect(CheckoutComponent.isAllergenLinkDisplayed()).toBe(true);
     });
 
-    forEach(Object.keys(CheckoutComponent.errorMessages))
-                .it.only('each fields error message should be displayed', key => {
+    forEach(['mobileNumber', 'addressLine1', 'addressCity', 'addressPostcode'])
+                .it.only('each fields error message should be displayed', field => {
                     // Act
                     CheckoutComponent.submit();
-                    CheckoutComponent.WaitForErrorMessage(key);
 
                     // Assert
-                    expect(CheckoutComponent.errorMessages[key]().isDisplayed()).toBe(true);
+                    expect(CheckoutComponent.IsFieldErrorDisplayed(field)).toBe(true);
                 });
 
-    forEach(Object.keys(CheckoutComponent.errorMessages)).it('each fields error message should not be displayed by default', key => {
+    forEach(['mobileNumber', 'addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
+        .it('should display all fields', field => {
         // Assert
-        expect(CheckoutComponent.errorMessages[key]().isDisplayed()).toBe(false);
-    });
-
-    forEach(Object.keys(CheckoutComponent.inputs)).it('should display all fields', key => {
-        // Assert
-        expect(CheckoutComponent.inputs[key]().isDisplayed()).toBe(true);
-    });
+            expect(CheckoutComponent.IsFieldDisplayed(field)).toBe(true);
+        });
 
     it('should submit the checkout form', () => {
         // Arrange

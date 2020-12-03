@@ -1,5 +1,3 @@
-const factoryFunctions = browser => ({
+module.exports = browser => ({
     doesElementExist: selector => browser.findElements(selector).length > 0
 });
-
-export default factoryFunctions;
