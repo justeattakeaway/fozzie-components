@@ -5,7 +5,6 @@ import 'core-js/modules/es.object.from-entries';
 
 import isAppboyInitialised from '../utils/isAppboyInitialised';
 import ContentCards from '../services/contentCard.service';
-// import { LogService } from '../services/logging/logging.service';
 
 jest.mock('appboy-web-sdk');
 jest.mock('../utils/isAppboyInitialised');
