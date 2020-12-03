@@ -1,5 +1,9 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
+
+// Setup Context as a Web Host (I18n, Cookies etc)
+import '../../context/index';
+
 import { addDecorator } from '@storybook/vue';
 import { ENGLISH_LOCALE } from '../../constants/globalisation';
 
