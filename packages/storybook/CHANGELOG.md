@@ -7,7 +7,7 @@ v0.18.0
 ------------------------------
 *December 2, 2020*
 
-### Changed
+### Added
 - Add Cookie Universal into Context so Mono Repo components can do this.$cookies.get('my-cookie-name');
 
 
