@@ -33,6 +33,40 @@ describe('`contentCardService`', () => {
             // Assert
             expect(cardOrderValues).toEqual(['1', '3', '4']);
         });
+
+        it('should handle cards without `order` value by pinning them to the back', () => {
+            // Arrange
+            const cards = [
+                {
+                    title: 'Stephenson 2-18',
+                    extras: { }
+                },
+                {
+                    title: 'Kepler‑10b',
+                    extras: { order: '4' }
+                },
+                {
+                    title: 'Kepler‑69c',
+                    extras: { order: '3' }
+                },
+                {
+                    title: 'UY Scuti',
+                    extras: { }
+                },
+                {
+                    title: 'Kepler‑186f',
+                    extras: { order: '1' }
+                }
+            ];
+            const service = new ContentCardService({ cards });
+
+            // Act
+            const { cards: result } = service.orderCardsByOrderValue().output();
+            const cardOrderValues = result.map(({ order }) => order);
+
+            // Assert
+            expect(cardOrderValues).toEqual(['1', '3', '4', undefined, undefined]);
+        });
     });
 
     describe('`orderCardsByUpdateValue`, method', () => {

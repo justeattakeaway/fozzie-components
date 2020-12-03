@@ -3,6 +3,45 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.15.0
+------------------------------
+*December 3, 2020*
+
+### Added
+- Ability to change prop values in demo file for WebDriverIO component tests.
+- New `Demo.vue` for f-checkout controls.
+
+
+v0.14.0
+------------------------------
+*December 2, 2020*
+
+### Added
+- `max-length` to user note.
+
+### Changed
+- Phone validation to use `f-services`.
+- Styling in `Selector` component.
+
+
+v0.13.0
+------------------------------
+*December 1, 2020*
+
+### Changed
+- `f-services` version.
+- Tests to match the new version of `f-services`.
+
+
+v0.12.0
+------------------------------
+*December 1, 2020*
+
+### Changed
+- Selector component to use `f-form-field` dropdown component.
+- `f-button` version.
+
+
 v0.11.0
 ------------------------------
 *November 25, 2020*

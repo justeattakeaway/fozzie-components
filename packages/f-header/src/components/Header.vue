@@ -5,14 +5,17 @@
             'c-header--transparent c-header--gradient': showTransparentHeader
         }]">
         <skip-to-main
+            v-if="showSkipLink"
             :text="copy.skipToMainContentText"
             :transparent-bg="showTransparentHeader" />
+
         <div class="c-header-container">
             <logo
                 :theme="theme"
                 :company-name="copy.companyName"
                 :logo-gtm-label="copy.logo.gtm"
                 :header-background-theme="headerBackgroundTheme" />
+
             <navigation
                 :nav-links="copy.navLinks"
                 :help="copy.help"
@@ -45,11 +48,13 @@ import Navigation from './Navigation.vue';
 
 export default {
     name: 'VueHeader',
+
     components: {
         Logo,
         SkipToMain,
         Navigation
     },
+
     props: {
         locale: {
             type: String,
@@ -78,7 +83,7 @@ export default {
 
         showDeliveryEnquiry: {
             type: Boolean,
-            default: false
+            default: true
         },
 
         showLoginInfo: {
@@ -93,7 +98,12 @@ export default {
 
         showOffersLink: {
             type: Boolean,
-            default: false
+            default: true
+        },
+
+        showSkipLink: {
+            type: Boolean,
+            default: true
         },
 
         userInfoProp: {
@@ -106,6 +116,7 @@ export default {
             default: '/api/account/details'
         }
     },
+
     data () {
         const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
@@ -116,20 +127,25 @@ export default {
             mobileNavIsOpen
         };
     },
+
     computed: {
         theme () {
             return globalisationServices.getTheme(this.locale);
         },
+
         showDeliveryEnquiryWithContent () {
             return this.copy.deliveryEnquiry && this.showDeliveryEnquiry;
         },
+
         showTransparentHeader () {
             return this.headerBackgroundTheme === 'transparent' && !this.mobileNavIsOpen;
         },
+
         headerBackgroundClass () {
             return this.headerBackgroundTheme === 'highlight' ? 'c-header--highlightBg' : '';
         }
     },
+
     methods: {
         // This method emits `navIsOpen` state from the navigation component
         // to be able to deside when to show transparent header styles on mobile view
@@ -141,7 +157,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 .c-header {
     background-color: $header-bg;
     min-width : 300px;
@@ -288,5 +303,4 @@ export default {
     .c-header-button--secondary {
         right: 40px;
     }
-
 </style>

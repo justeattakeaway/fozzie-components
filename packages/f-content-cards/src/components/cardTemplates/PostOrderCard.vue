@@ -15,7 +15,7 @@
             :container-title="containerTitle"
             :is-carousel="isCarousel"
             :data-test-id="containerTestId()"
-            :apply-image-as-background="false">
+            :should-apply-image-as-background="false">
             <span
                 class="o-link--full o-link--bold u-color-link u-text-left"
                 :data-test-id="cardContentTestId()">

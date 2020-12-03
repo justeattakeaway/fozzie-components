@@ -3,6 +3,8 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2.1
+orbs:
+  slack: circleci/slack@4.1.3
 
 commands:
   set_deploy_key:
@@ -23,6 +25,100 @@ commands:
       - run: # Check UI packages all build as expected
           name: Build Packages
           command: yarn build
+
+  slack_notify_fail:
+    description: Sends a slack notifaction on job failure
+    steps:
+      - slack/notify:
+          branch_pattern: master
+          event: fail
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Your job *${CIRCLE_JOB}* has failed ⚠️"
+                  },
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Commiter*:${CIRCLE_USERNAME}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*SHA*:${CIRCLE_SHA1}"
+                    }
+                  ],
+                  "accessory": {
+                    "type": "image",
+                    "image_url": "https://avatars3.githubusercontent.com/u/30729620?s=400&u=61309ea885d27e19266fa986dac9194defb45197&v=4",
+                    "alt_text": "Fozzie Logo"
+                  }
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Job"
+                      },
+                      "url": "${CIRCLE_BUILD_URL}"
+                    }
+                  ]
+                }
+              ]
+            }
+
+  slack_notify_success:
+    description: Sends a slack notifaction on job success
+    steps:
+      - slack/notify:
+          branch_pattern: master
+          event: pass
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Your job *${CIRCLE_JOB}* has succeeded 🎉"
+                  },
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Commiter*:${CIRCLE_USERNAME}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*SHA*:${CIRCLE_SHA1}"
+                    }
+                  ],
+                  "accessory": {
+                    "type": "image",
+                    "image_url": "https://avatars3.githubusercontent.com/u/30729620?s=400&u=61309ea885d27e19266fa986dac9194defb45197&v=4",
+                    "alt_text": "Fozzie Logo"
+                  }
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Job"
+                      },
+                      "url": "${CIRCLE_BUILD_URL}"
+                    }
+                  ]
+                }
+              ]
+            }
 
 executors:
   node:
@@ -72,6 +168,8 @@ jobs:
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
+      - slack_notify_fail
+      - slack_notify_success
 
   deploy-storybook:
     executor: node
@@ -89,6 +187,8 @@ jobs:
       - run:
           name: Deploy
           command: yarn storybook:deploy --packages packages
+      - slack_notify_fail
+      - slack_notify_success
 
   # Stopping until Circle CI credit issue is resolved
   # npm-publish:
@@ -133,6 +233,7 @@ workflows:
   deploy-storybook:
     jobs:
       - deploy-storybook:
+          context: web-core
           filters:
             branches:
               only: master

@@ -21,6 +21,7 @@ const component = {
     isShellHidden: false,
     isCompressed: false,
     query: '',
+    queryString: '',
     shouldSetCookies: false,
     onSubmit: false,
     shouldAutoPopulateAddress: true,
@@ -40,7 +41,24 @@ const component = {
     suggestionFormat: suggestion => (suggestion.description || suggestion.formattedAddress)
 };
 
+const addressRegex = /^[^a-zA-Zñáéíóúü]+$/;
+
+const service = {
+    autocomplete: 'IE',
+    zipcodeAutocomplete: false,
+    validation: {
+        ADDRESS_EMPTY: (value = '') => !!String(value).trim()
+    },
+    presearchValidation: {
+        ADDRESS_EMPTY: (value = '') => {
+            const parsed = value.trim().replace(/\s/g, '');
+            return !addressRegex.test(parsed);
+        }
+    }
+};
+
 export default {
     copy,
-    component
+    component,
+    service
 };

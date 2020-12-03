@@ -10,6 +10,7 @@
             name="notePlaceholder"
             cols="30"
             rows="10"
+            maxlength="200"
             :class="$style['c-userNote-textArea']"
             :placeholder="notePlaceholder" />
     </div>

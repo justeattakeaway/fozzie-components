@@ -40,10 +40,10 @@ export default {
 $form-label-colour              : $grey--darkest; // Text colour of form labels
 $form-label-colour-inline       : $grey--dark;
 $form-label-fontSize            : 'body-s';
+$form-label-fontSize-inline     : 'body-l';
 $form-label-weight              : $font-weight-bold;
 $form-label-weight-inline       : $font-weight-base;
-$form-label-padding             : spacing(x1.5) spacing(x2);
-
+$form-label-padding             : spacing(x1.5);
 
 .c-formField-label {
     display: block;
@@ -57,10 +57,11 @@ $form-label-padding             : spacing(x1.5) spacing(x2);
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    @include font-size($form-label-fontSize);
+    @include font-size($form-label-fontSize-inline);
     font-weight: $form-label-weight-inline;
     color: $form-label-colour-inline;
     padding: $form-label-padding;
+    left: 1px;  // Adds pixel to match `FormField` border
     margin-bottom: 0;
     cursor: text; // make the cursor the same as the default input hover cursor
 }

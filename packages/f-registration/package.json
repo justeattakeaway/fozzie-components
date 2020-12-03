@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-registration",
   "description": "Fozzie Registration Form Component",
-  "version": "0.43.0",
+  "version": "0.43.1",
   "main": "dist/f-registration.umd.min.js",
   "files": [
     "dist",
@@ -33,6 +33,7 @@
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
+    "report": "cd ../.. && yarn report",
     "test": "vue-cli-service test:unit",
     "test:coverage": "yarn test --coverage",
     "test-component:chrome": "run-p --race demo webdriver:delay:chrome",

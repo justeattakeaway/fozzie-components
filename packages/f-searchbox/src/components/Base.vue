@@ -20,7 +20,6 @@ import SearchForm from './Form.vue';
 import SearchShell from './shells/Shell.vue';
 import NoSearchShell from './shells/NoShell.vue';
 import Service from '../services/core';
-// import SearchboxServiceApi from '../services/SearchboxServiceApi';
 
 export default {
     name: 'VueSearchbox',
@@ -41,6 +40,10 @@ export default {
         dependentApiPromise: {
             type: Object,
             default: () => {}
+        },
+        copyOverride: {
+            type: Object,
+            default: () => {}
         }
     },
     data () {
@@ -51,7 +54,10 @@ export default {
         const service = Service(localeConfig.service);
 
         return {
-            copy: { ...localeConfig.copy },
+            copy: {
+                ...localeConfig.copy,
+                ...this.copyOverride
+            },
             componentConfig,
             componentLocale: locale,
             theme,

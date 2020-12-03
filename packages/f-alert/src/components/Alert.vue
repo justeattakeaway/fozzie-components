@@ -19,7 +19,7 @@
                 {{ heading }}
             </h2>
             <button
-                v-if="isDismissable"
+                v-if="isDismissible"
                 type="button"
                 :class="[$style['c-alert-dismiss'], 'o-btn o-btn--icon']"
                 data-test-id="alert-dismiss"
@@ -73,7 +73,7 @@ export default {
             type: String,
             required: true
         },
-        isDismissable: {
+        isDismissible: {
             type: Boolean,
             default: false
         }

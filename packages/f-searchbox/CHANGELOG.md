@@ -3,12 +3,46 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (to be added to next release)
+v4.0.0-beta.7
 ------------------------------
-*November 26, 2020*
+*December 3, 2020*
 
 ### Added
+- Geo icons svg colour.
+- `copyOverride` prop to allow copy changes.
+- Further tenant specific tests.
+- Allow keyboard selection.
+
+### Fixed
+- Allow selection of pre-populated address when submit is hit.
+
+### Changed
+- Move `@justeat/browserslist-config-fozzie` to peerDependencies
+
+
+v4.0.0-beta.6
+------------------------------
+*December 1, 2020*
+
+### Removed
+- Optional chaining syntax (Breaks storybook).
+
+
+v4.0.0-beta.5
+------------------------------
+*December 1, 2020*
+
+### Added
+- Geo location feature plus components, `FormSearchGeo.vue`.
+- Tenant tests.
 - css/scss to `moduleNameMapper` in `jest.config.js`
+
+### Changed
+- Renamed street & geo location component to `FormSearchInnerFieldsWrapper.vue`.
+
+### Fixed
+- IE config missing validation properties.
+- General tidy up of values being passed around.
 
 
 v4.0.0-beta.4

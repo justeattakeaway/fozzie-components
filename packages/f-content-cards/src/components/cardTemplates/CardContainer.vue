@@ -1,18 +1,18 @@
 <template>
     <component
-        :is="url && ctaEnabled ? 'a' : 'div'"
-        :href="ctaEnabled && url"
+        :is="url && hasCta ? 'a' : 'div'"
+        :href="hasCta && url"
         :target="target.attribute"
         :rel="target.rel"
-        :class="[$style['c-contentCard'], { [$style['c-contentCard--isolateHeroImage']]: isolateHeroImage }]"
+        :class="[$style['c-contentCard'], { [$style['c-contentCard--isolateHeroImage']]: shouldIsolateHeroImage }]"
         :data-test-id="testId"
         @click="onClickContentCard"
     >
         <div
-            :style="{ 'background-image': applyImageAsBackground ? `url(${image})` : '' }"
+            :style="{ 'background-image': shouldApplyImageAsBackground ? `url(${image})` : '' }"
             :class="[{ [$style['c-contentCard-bgImg']]: !!image }]">
             <img
-                v-if="!applyImageAsBackground"
+                v-if="!shouldApplyImageAsBackground"
                 :class="$style['c-contentCard-img']"
                 :src="image"
                 :alt="title">
@@ -25,28 +25,25 @@
                 :class="$style['c-contentCard-thumbnail']">
             <div :class="$style['c-content-card-body']">
                 <h3
-                    :class="[$style['c-contentCard-title'], {
-                        [$style['c-contentCard-title-legacy']]: !boldTitle,
-                        [$style['c-emboldenedText--title']]: emboldenText
-                    }]">
+                    :class="[$style['c-contentCard-title']]">
                     {{ title }}
                 </h3>
-                <h4 :class="[$style['c-contentCard-subTitle'], { [$style['c-emboldenedText--subtitle']]: emboldenText }]">
+                <h4 :class="[$style['c-contentCard-subTitle'], { [$style['c-emboldenedText--subtitle']]: shouldEmboldenText }]">
                     {{ subtitle }}
                 </h4>
                 <slot
-                    v-if="bannerBeforeDescription"
+                    v-if="isBannerBeforeDescription"
                     name="banner" />
                 <template v-for="(textItem, textIndex) in description">
                     <p
                         :key="textIndex"
                         :data-test-id="testIdForItemWithIndex(textIndex)"
-                        :class="[$style['c-contentCard-text'], { [$style['c-emboldenedText--text']]: emboldenText }]">
+                        :class="[$style['c-contentCard-text'], { [$style['c-emboldenedText--text']]: shouldEmboldenText }]">
                         {{ textItem }}
                     </p>
                 </template>
                 <slot
-                    v-if="!bannerBeforeDescription"
+                    v-if="!isBannerBeforeDescription"
                     name="banner" />
             </div>
             <div :class="$style['c-contentCard-footer']">
@@ -67,37 +64,37 @@ export default {
             type: String,
             default: ''
         },
+        hasCta: {
+            type: Boolean,
+            default: true
+        },
+        isBannerBeforeDescription: {
+            type: Boolean,
+            default: false
+        },
         isCarousel: {
             type: Boolean,
             default: false
         },
-        ctaEnabled: {
+        shouldApplyImageAsBackground: {
             type: Boolean,
             default: true
+        },
+        shouldEmboldenText: {
+            type: Boolean,
+            default: false
+        },
+        shouldEmboldenTitle: {
+            type: Boolean,
+            default: false
+        },
+        shouldIsolateHeroImage: {
+            type: Boolean,
+            default: false
         },
         testId: {
             type: String,
             default: null
-        },
-        applyImageAsBackground: {
-            type: Boolean,
-            default: true
-        },
-        emboldenText: {
-            type: Boolean,
-            default: false
-        },
-        isolateHeroImage: {
-            type: Boolean,
-            default: false
-        },
-        bannerBeforeDescription: {
-            type: Boolean,
-            default: false
-        },
-        boldTitle: {
-            type: Boolean,
-            default: false
         }
     },
 
@@ -250,10 +247,6 @@ export default {
         display: -webkit-box; /* stylelint-disable-line value-no-vendor-prefix */
         -webkit-line-clamp: 2; // stop at 2 lines
         -webkit-box-orient: vertical;
-    }
-
-    .c-contentCard-title-legacy {
-        font-weight: normal;
     }
 
     .c-contentCard-subTitle {

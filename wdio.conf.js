@@ -1,3 +1,4 @@
+const video = require('wdio-video-reporter');
 exports.config = {
     //
     // ====================
@@ -125,6 +126,10 @@ exports.config = {
     // reporters: ['dot'],
 
     reporters: [
+        [video, {
+            saveAllVideos: false, // If true, also saves videos for successful test cases
+            videoSlowdownMultiplier: 3 // Higher to get slower videos, lower for faster videos [Value 1-100]
+        }],
         ['allure', {
             outputDir: '../../allure-results',
             disableWebdriverStepsReporting: false,
@@ -145,7 +150,7 @@ exports.config = {
         require: ['@babel/register'],
         ui: 'bdd',
         timeout: 60000
-    }
+    },
     //
     // =====
     // Hooks
@@ -205,8 +210,9 @@ exports.config = {
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
-    // beforeTest: function (test, context) {
-    // },
+    beforeTest: () => {
+        browser.url('http://localhost:8080');
+    },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
      * beforeEach in Mocha)
@@ -222,8 +228,10 @@ exports.config = {
     /**
      * Function to be executed after a test (in Mocha/Jasmine).
      */
-    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-    // },
+    afterTest: () => {
+        browser.url('http://localhost:8080');
+        browser.maximizeWindow();
+    }
 
 
     /**

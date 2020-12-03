@@ -1,8 +1,8 @@
 <template>
     <card-container
         :card="card"
-        :banner-before-description="true"
-        :bold-title="true"
+        :is-banner-before-description="true"
+        :should-embolden-title="true"
     >
         <template v-slot:banner>
             <span

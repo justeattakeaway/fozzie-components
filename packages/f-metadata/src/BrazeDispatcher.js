@@ -1,5 +1,8 @@
+import uniq from 'lodash.uniq';
+
 import ContentCards from './services/contentCard.service';
 import isAppboyInitialised from './utils/isAppboyInitialised';
+import { LogService } from './services/logging/logging.service';
 
 /* braze event handler callbacks */
 
@@ -49,7 +52,7 @@ function contentCardsHandler (postCardsAppboy) {
         groups
     } = new ContentCards(postCardsAppboy, { enabledCardTypes: this.dispatcherOptions.enabledCardTypes })
         .removeDuplicateContentCards()
-        .filterCards()
+        .filterCards(this.brands)
         .getTitleCard()
         .arrangeCardsByTitles()
         .output();
@@ -94,8 +97,11 @@ class BrazeDispatcher {
 
         this.appboyPromise = null;
 
+        this.brands = [];
+
         this.dispatcherOptions = null;
 
+        this.loggerCallbackInstances = [];
         this.cardsCallbacks = [];
         this.groupedCardsCallback = [];
         this.inAppMessageClickEventCallbacks = [];
@@ -127,8 +133,10 @@ class BrazeDispatcher {
             userId,
             disableComponent = false,
             callbacks = {},
+            loggerCallbacks = {},
             enableLogging,
-            enabledCardTypes = []
+            enabledCardTypes = [],
+            brands = []
         } = options;
 
         if (!this.dispatcherOptions) {
@@ -144,6 +152,10 @@ class BrazeDispatcher {
             throw new Error('attempt to reinitialise appboy with different parameters');
         }
 
+        Object.keys(loggerCallbacks).forEach(key => {
+            this.loggerCallbackInstances.push((new LogService(loggerCallbacks[key])));
+        });
+
         window.dataLayer = window.dataLayer || [];
 
         // Add callbacks to internal lists prior to attempting to configure appboy
@@ -151,6 +163,12 @@ class BrazeDispatcher {
         if (callbacks.interceptInAppMessages) this.inAppMessagesCallbacks.push(callbacks.interceptInAppMessages);
         if (callbacks.handleContentCards) this.cardsCallbacks.push(callbacks.handleContentCards);
         if (callbacks.handleContentCardsGrouped) this.groupedCardsCallback.push(callbacks.handleContentCardsGrouped);
+
+        // Concatenate brands to existing allowed brands for now
+        // TODO create registry of brands to apply before passing cards lists back to callbacks (has linked issue)
+        if (brands) {
+            this.brands = uniq([...this.brands, ...brands]);
+        }
 
         // Note that appBoyPromise will not be set if this is the first time running this method -
         // this is a guard against initialise() being called more than once, and attempting to
@@ -273,6 +291,19 @@ class BrazeDispatcher {
             custom: {
                 braze: payload
             }
+        });
+    }
+
+    /**
+     * Logger for braze dispatcher, utilizes a logging class to call the call back based on type
+     * @param type - Function name being called on the class ( should be in ['info', 'warn', 'error'])
+     * @param {string} logMessage - Describe what happened
+     * @param {object} [payload={}] - Any additional properties you want to add to the logs
+     */
+    logger (type, logMessage, payload) {
+        this.loggerCallbackInstances.forEach(instance => {
+            // eslint-disable-next-line no-unused-expressions
+            instance[type]?.(logMessage, payload);
         });
     }
 }

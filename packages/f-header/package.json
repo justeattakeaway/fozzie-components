@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-header",
   "description": "Fozzie Header – Globalised Header Component",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "main": "dist/f-header.umd.min.js",
   "files": [
     "dist",
@@ -32,6 +32,7 @@
     "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
+    "report": "cd ../.. && yarn report",
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "run-p --race demo webdriver:delay:chrome",
     "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js",

@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "2.18.0",
+  "version": "2.21.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -76,6 +76,7 @@
     "vue-svg-loader": "0.16.0",
     "vue-template-compiler": "2.6.10",
     "wdio-chromedriver-service": "6.0.3",
+    "wdio-video-reporter": "3.1.1",
     "webdriverio": "6.3.4"
   },
   "bugs": {

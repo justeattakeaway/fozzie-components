@@ -1,9 +1,9 @@
 <template>
     <card-container
         :card="card"
-        :cta-enabled="false"
-        :isolate-hero-image="isAnniversaryCard"
-        :embolden-text="isAnniversaryCard"
+        :has-cta="false"
+        :should-isolate-hero-image="isAnniversaryCard"
+        :should-embolden-text="isAnniversaryCard"
         :bold-title="true"
     >
         <button
