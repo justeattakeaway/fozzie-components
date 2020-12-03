@@ -9,7 +9,6 @@ const allergenLink = () => $('[data-test-id="allergy-button"]');
 // Dropdown
 
 const orderTimeDropdown = () => $('[data-test-id="form-select"]');
-// const timeDropdownOptions = () => $$("select option");
 const orderTimeDropdownOptions = () => $$('[data-test-id="form-select"] select option');
 const goToPaymentButton = () => $('[data-test-id="confirm-payment-submit-button"]');
 
