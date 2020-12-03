@@ -16,5 +16,9 @@ const i18n = new VueI18n({
 new Vue({
     i18n,
     store: new Vuex.Store({}),
-    render: h => h(VueSearchBox)
+    render: h => h(VueSearchBox, {
+        props: {
+            copyOverride: {}
+        }
+    })
 }).$mount('#app');

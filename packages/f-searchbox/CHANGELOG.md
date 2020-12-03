@@ -3,6 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.7
+------------------------------
+*December 1, 2020*
+
+### Added
+- Geo icons svg colour.
+- `copyOverride` prop to allow copy changes.
+- Further tenant specific tests.
+- Allow keyboard selection.
+
+### Fixed
+- Allow selection of pre-populated address when submit is hit.
+
+
 v4.0.0-beta.6
 ------------------------------
 *December 1, 2020*

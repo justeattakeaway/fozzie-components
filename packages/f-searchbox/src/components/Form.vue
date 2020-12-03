@@ -34,6 +34,7 @@
             aria-live="assertive"
             :suggestion-format="suggestionFormat"
             :suggestions="suggestions"
+            :keyboard-suggestion-selection="keyboardSuggestionIndex"
             @selected-suggestion="onSelectedSuggestion" />
 
         <error-message
@@ -128,7 +129,8 @@ export default {
             'streetNumberRequired',
             'isInputFocus',
             'streetNumber',
-            'isDirty'
+            'isDirty',
+            'keyboardSuggestionIndex'
         ]),
 
         /**
@@ -250,6 +252,7 @@ export default {
             this.setIsValid(this.service.isValid(this.address));
 
             if (this.hasLastSavedAddress) {
+                e.preventDefault();
                 return this.searchPreviouslySavedAddress(e);
             }
 
@@ -263,8 +266,7 @@ export default {
 
                 if (this.service.isAutocompleteEnabled) {
                     e.preventDefault();
-
-                    const info = await this.onSelectedSuggestion(0);
+                    const info = await this.onSelectedSuggestion();
 
                     // if the address is still missing fields, return here
                     if (!info) {
@@ -294,7 +296,8 @@ export default {
                 this.suggestions,
                 this.requiredFields,
                 this.streetNumber,
-                index
+                index,
+                this.keyboardSuggestionIndex
             ).then(value => {
                 if (value && value.errors) {
                     this.setErrors(value.errors);
@@ -306,7 +309,7 @@ export default {
             });
 
             // TODO pass through suggestion index for keyboard behaviour...
-            this.address = this.suggestionFormat(this.suggestions[index]);
+            this.address = this.suggestionFormat(this.suggestions[index || this.keyboardSuggestionIndex]);
         },
 
         /**
@@ -321,11 +324,10 @@ export default {
                 onSubmit: this.onSubmit,
                 formUrl: this.formUrl,
                 form: this.$refs.form,
-                callback: getLastLocation,
                 event
             };
 
-            search(searchPayload);
+            search(searchPayload, getLastLocation());
         },
 
         /**
