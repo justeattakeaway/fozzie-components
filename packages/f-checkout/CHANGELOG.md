@@ -8,7 +8,7 @@ v0.15.0
 *December 2, 2020*
 
 ### Added
-- Wedriver IO tests for dropdown in `Selector` component.
+- Webdriver IO tests for dropdown in `Selector` component.
 
 
 v0.14.0
