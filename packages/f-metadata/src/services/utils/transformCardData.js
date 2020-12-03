@@ -53,7 +53,7 @@ const transformCardData = card => {
         voucher_code: voucherCode,
         headline,
         display_times_json: displayTimesJson
-    } = extras;
+    } = (extras || {});
 
     const description = Object.keys(extras)
         .filter(key => key.indexOf('line_') !== -1)

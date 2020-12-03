@@ -51,6 +51,7 @@ import AllergenMcDonaldsContent from './AllergenMcDonaldsContent.vue';
 import AllergenStandardContent from './AllergenStandardContent.vue';
 import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 import tenantConfigs from '../../tenants';
+import { ALLERGEN_COOKIE_NAME } from '../../constants';
 
 export default {
     components: {
@@ -65,22 +66,36 @@ export default {
     computed: {
         ...mapState('checkout', [
             'isMcDonalds'
-        ])
+        ]),
+
+        isAllergenCookiePresent () {
+            return this.$cookies.get(ALLERGEN_COOKIE_NAME) === 1;
+        }
+    },
+    mounted () {
+        if (this.isAllergenCookiePresent) {
+            this.showModal();
+        }
     },
     methods: {
         /* TODO - Add tracking (separate ticket) */
         showModal () {
             this.shouldShowModal = true;
+
+            this.setAllergenCookie();
         },
+
         hideModal () {
             // this.pushAllergensInteraction('click_close');
             this.shouldShowModal = false;
         },
+
         pushAllergensInteraction (/* label */) {
             // this.trackAllergensInteraction({ label, method: this.contactMethod });
         },
-        onModalOpen () {
-            // this.pushAllergensInteraction('view_dialog');
+
+        setAllergenCookie () {
+            this.$cookies.set(ALLERGEN_COOKIE_NAME, 1);
         }
     }
 };

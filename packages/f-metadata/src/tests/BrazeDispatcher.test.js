@@ -21,6 +21,7 @@ const handleContentCards = jest.fn();
 const handleContentCardsGrouped = jest.fn();
 const interceptInAppMessages = jest.fn();
 const interceptInAppMessageClickEvents = jest.fn();
+const loggingCallback = jest.fn();
 
 const dataLayer = {
     push: jest.fn()
@@ -28,6 +29,11 @@ const dataLayer = {
 
 const apiKey = '__API_KEY__';
 const userId = '__USER_ID__';
+
+const TEST_LOG_MESSAGE = '__TEST_MESSAGE__';
+const TEST_PAYLOAD = {
+    test: '__TEST_PAYLOAD__'
+};
 
 const enabledComponentParameters = {
     disableComponent: false,
@@ -222,6 +228,9 @@ describe('BrazeDispatcher operation', () => {
             interceptInAppMessages,
             handleContentCards,
             handleContentCardsGrouped
+        },
+        loggerCallbacks: {
+            loggingCallback
         }
     };
 
@@ -243,6 +252,21 @@ describe('BrazeDispatcher operation', () => {
     });
 
     describe('callbacks', () => {
+        /* eslint-disable indent */
+        describe('logger', () => {
+            it.each`
+                key          | value
+                ${'info'}    | ${'logInfo'}
+                ${'warn'}    | ${'logWarn'}
+                ${'error'}   | ${'logError'}
+            `('should for each key call the callback with the relevant log data', ({ key, value }) => {
+                // Act
+                dispatcher.logger(key, TEST_LOG_MESSAGE, TEST_PAYLOAD);
+
+                // Assert
+                expect(loggingCallback).toHaveBeenCalledWith(value, TEST_LOG_MESSAGE, TEST_PAYLOAD);
+            });
+        });
         describe('contentCardsHandler', () => {
             const rawCards = [
                 { id: 'card1' },

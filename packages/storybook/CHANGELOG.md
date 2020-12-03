@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.18.0
+------------------------------
+*December 2, 2020*
+
+### Added
+- Add Cookie Universal into Context so Mono Repo components can do this.$cookies.get('my-cookie-name');
+
 
 v0.17.0
 ------------------------------
