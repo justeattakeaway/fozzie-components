@@ -18,7 +18,7 @@ describe('f-checkout component tests', () => {
     });
 
     // Skip until we have something to assert on
-    it.skip('should submit the checkout form', () => {
+    it('should submit the checkout form', () => {
         // Arrange
         const addressInfo = {
             mobileNumber: '07777777779',

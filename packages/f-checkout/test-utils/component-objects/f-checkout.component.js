@@ -2,14 +2,14 @@ const checkoutComponent = () => $('[data-test-id="checkout-component"]');
 
 // Form Fields
 const userNoteInput = () => $('[data-test-id="user-note"] textarea');
-const allergenLink = () => $('[data-test-id="allergy-button"]');
 
 // Dropdown
 const orderTimeDropdown = () => $('[data-test-id="form-select"] select');
 const orderTimeDropdownOptions = () => $$('[data-test-id="form-select"] select option');
 
-// Submit
+// Buttons
 const goToPaymentButton = () => $('[data-test-id="confirm-payment-submit-button"]');
+const allergenLink = () => $('[data-test-id="allergy-button"]');
 
 
 exports.inputs = {
