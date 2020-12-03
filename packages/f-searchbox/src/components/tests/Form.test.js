@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import Form from '../Form.vue';
 import * as processLocationCookie from '../../services/general.services';
 import * as searchService from '../../services/search.services';
-import { getLastLocation } from '../../utils/helpers';
+import * as helperService from '../../utils/helpers';
 
 const localVue = createLocalVue();
 
@@ -37,6 +37,7 @@ describe('`Form`', () => {
 
     beforeEach(() => {
         event = { preventDefault: jest.fn() };
+        window.HTMLFormElement.prototype.submit = () => {};
     });
 
     it('should be defined', () => {
@@ -459,6 +460,9 @@ describe('`Form`', () => {
                     wrapper.vm.$refs.form = '<form></form>';
                     wrapper.vm.locationForm = '';
                     const spy = jest.spyOn(searchService, 'search').mockImplementation(() => '');
+                    jest.spyOn(helperService, 'getLastLocation').mockImplementation(() => ({
+                        location: 'nebulae'
+                    }));
 
                     const searchPayload = {
                         onSubmit: false,
@@ -471,7 +475,9 @@ describe('`Form`', () => {
                     wrapper.vm.searchPreviouslySavedAddress(event);
 
                     // Assert
-                    expect(spy).toHaveBeenCalledWith(searchPayload, getLastLocation());
+                    expect(spy).toHaveBeenCalledWith(searchPayload, {
+                        location: 'nebulae'
+                    });
                 });
             });
         });

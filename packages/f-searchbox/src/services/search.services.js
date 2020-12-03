@@ -100,8 +100,8 @@ const selectedSuggestion = (
             // if street required but no street number available
             // display street number field
                 location.street
-            && requiredFields.includes('street')
-            && missingFields.includes('streetNumber')
+                && requiredFields.includes('street')
+                && missingFields.includes('streetNumber')
             ) {
                 return streetNumberRequired
                     ?
