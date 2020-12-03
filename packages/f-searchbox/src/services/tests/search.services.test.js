@@ -76,9 +76,9 @@ describe('`search.services`', () => {
                     form: { submit: jest.fn() },
                     event
                 };
-    
+
                 window.HTMLFormElement.prototype.submit = () => {};
-    
+
                 const spy = jest.spyOn(helpers, 'generatePostForm');
 
                 // Act
