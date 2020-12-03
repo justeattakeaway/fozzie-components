@@ -1,4 +1,3 @@
-/* global browser*/
 import forEach from 'mocha-each';
 import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.component';
 
