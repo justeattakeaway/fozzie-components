@@ -881,7 +881,7 @@ describe('ContentCards', () => {
             // Assert
             expect(instance.vm.$logger.logInfo).toHaveBeenCalledWith(testMessage, null, testPayload);
         });
-        it('should NOT return a function with the correct logging parameters when callback is called with incorrect logging type', async () => {
+        it('should NOT return a function when the callback is called with incorrect logging type', async () => {
             // Arrange
             const loggingType = 'foo';
             const instance = shallowMount(ContentCards, {

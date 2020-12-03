@@ -550,9 +550,9 @@ export default {
          */
         handleLogging (logger) {
             // eslint-disable-next-line func-names
-            return function (type, logMessage, payload) {
+            return ((type, logMessage, payload) => {
                 if (logger && logger[type]) logger[type](logMessage, null, payload);
-            };
+            });
         }
     }
 };
