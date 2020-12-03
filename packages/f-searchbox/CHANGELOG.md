@@ -16,6 +16,9 @@ v4.0.0-beta.7
 ### Fixed
 - Allow selection of pre-populated address when submit is hit.
 
+### Changed
+- Move `@justeat/browserslist-config-fozzie` to peerDependencies
+
 
 v4.0.0-beta.6
 ------------------------------
