@@ -20,7 +20,7 @@ describe('f-checkout component tests', () => {
     });
 
     forEach(['mobileNumber', 'addressLine1', 'addressCity', 'addressPostcode'])
-                .it.only('each fields error message should be displayed', field => {
+                .it('each fields error message should be displayed', field => {
                     // Act
                     CheckoutComponent.submit();
 
