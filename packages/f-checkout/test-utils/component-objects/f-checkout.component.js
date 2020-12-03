@@ -8,10 +8,9 @@ const allergenLink = () => $('[data-test-id="allergy-button"]');
 
 // Dropdown
 
-const selectTimeDropdownOptions = () => $('[data-test-id="form-select"]');
-
-const timeDropdownOptions = () => $$("select option");
-
+const orderTimeDropdown = () => $('[data-test-id="form-select"]');
+// const timeDropdownOptions = () => $$("select option");
+const orderTimeDropdownOptions = () => $$('[data-test-id="form-select"] select option');
 const goToPaymentButton = () => $('[data-test-id="confirm-payment-submit-button"]');
 
 exports.inputs = {
@@ -25,11 +24,11 @@ exports.inputs = {
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
-exports.isDropdownDisplayed = () => selectTimeDropdownOptions().isDisplayed();
+exports.isOrderTimeDropdownDisplayed = () => orderTimeDropdown().isDisplayed();
 
-exports.selectOption = () => $$("select option");
-exports.getDropdownOptionText = (index) => {
-    const element = timeDropdownOptions();
+exports.orderTimeDropdownOptions = () => $$('[data-test-id="form-select"] select option');
+exports.getOrderTimeOptionText = (index) => {
+    const element = orderTimeDropdownOptions();
    
     return element[index].getText();
 }
