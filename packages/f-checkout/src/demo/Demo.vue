@@ -8,10 +8,14 @@
                 name="checkoutMethod"
                 data-test-id="control-checkoutMethod"
                 @change="updateCheckoutMethod">
-                <option value="/checkout-delivery.json">
+                <option
+                    name="delivery"
+                    value="/checkout-delivery.json">
                     Delivery
                 </option>
-                <option value="/checkout-collection.json">
+                <option
+                    name="collection"
+                    value="/checkout-collection.json">
                     Collection
                 </option>
             </select>
