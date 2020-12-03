@@ -33,7 +33,7 @@ describe('Tenant: `es-ES`', () => {
                 const service = Service(tenant.default.service);
 
                 // Act
-                const result = service.isValid('Cleric Beast');
+                const result = service.isValid('Some Address');
 
                 // Assert
                 expect(result).toEqual(true);
