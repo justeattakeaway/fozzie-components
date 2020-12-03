@@ -21,9 +21,8 @@
             <form-dropdown
                 v-if="isDropdown"
                 :id="`${uniqueId}`"
-                v-bind="$attrs"
+                :attributes="$attrs"
                 :type="normalisedInputType"
-                :data-test-id="testId.input"
                 :class="[
                     $style['c-formField-input'],
                     $style['c-formField-dropdownContainer'],
@@ -53,7 +52,7 @@
                 :label-style="normalisedLabelStyle"
                 :for="uniqueId"
                 :is-inline="isInline"
-                :data-test-id="testId.label + '--inline'">
+                :data-test-id="`${testId.label}--inline`">
                 {{ labelText }}
             </form-label>
         </div>

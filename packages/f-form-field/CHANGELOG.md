@@ -8,8 +8,12 @@ v1.5.0
 *December 3, 2020*
 
 ### Changed
+- `data-test-id`'s updated across `FormField` and `FormDropdown` components.
 - Updating CSS variable names and classnames.
 - Updated `isInputField` to be called `isSelectionControl`.
+
+### Fixed
+- Extra space removed in `option` tag of dropdown component.
 
 
 v1.4.0

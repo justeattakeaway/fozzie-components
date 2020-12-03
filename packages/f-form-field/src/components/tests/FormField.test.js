@@ -158,7 +158,7 @@ describe('FormField', () => {
 
     describe('attrs ::', () => {
         describe('name ::', () => {
-            it('when name is not set, testId.container should be set to `formfield-container`', () => {
+            it('should set testId.container to `formfield-container when name is is not set`', () => {
                 // Arrange
                 const attrsData = {};
 
@@ -169,7 +169,7 @@ describe('FormField', () => {
                 expect(wrapper.attributes('data-test-id')).toBe('formfield-container');
             });
 
-            it('when name is set, it should be included in the generated testId.container data-test-id', () => {
+            it('should include attribute `name` in the generated container data-test-id when it is set', () => {
                 // Arrange
                 const attrsData = {
                     attrs: {
@@ -184,7 +184,7 @@ describe('FormField', () => {
                 expect(wrapper.attributes('data-test-id')).toBe(`formfield-${attrsData.attrs.name}`);
             });
 
-            it('when name is set, it should be included in the generated testId.input data-test-id', () => {
+            it('should include attribute `name` in the generated input data-test-id when it is set', () => {
                 // Arrange
                 const attrsData = {
                     attrs: {
