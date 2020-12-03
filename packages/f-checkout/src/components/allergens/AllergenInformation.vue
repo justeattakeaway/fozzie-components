@@ -1,7 +1,6 @@
 <template>
-    <div>
+    <div :class="$style['c-allergen-linkButton']" >
         <button-component
-            :class="$style['c-checkout-allergyButton']"
             button-type="link"
             data-test-id="allergy-button"
             @click.native.prevent="showModal">
@@ -26,12 +25,12 @@
                 {{ $t('allergies.allergenHeading') }}
             </h3>
 
-            <allergen-mc-donalds-content v-if="!isMcDonalds" />
+            <allergen-mc-donalds-content v-if="isMcDonalds" />
 
             <allergen-standard-content v-else />
 
             <button-component
-                :class="$style['c-checkout-closeButton']"
+                :class="$style['c-allergen-closeButton']"
                 button-type="primary"
                 data-test-id="allergy-modal-close-button"
                 is-full-width
@@ -114,11 +113,11 @@ export default {
         }
     }
 
-    .c-checkout-allergyButton {
-        margin-top: spacing(x2);
+    .c-allergen-linkButton {
+        margin-top: spacing(x1.5);
     }
 
-    .c-checkout-closeButton {
+    .c-allergen-closeButton {
         margin-top: spacing(x3);
     }
 </style>

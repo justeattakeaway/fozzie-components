@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class="$style['c-allergenAlert-standardContent-wrapper']">
         <p>{{ $t('allergies.mcDonaldsAllergy') }}</p>
 
         <a
@@ -53,6 +53,10 @@ export default {
 </script>
 
 <style lang="scss" module>
+    .c-allergenAlert-standardContent-wrapper {
+        margin-bottom: spacing(x3);
+    }
+
     .c-allergenAlert--link {
         display: block;
         text-decoration: none;
