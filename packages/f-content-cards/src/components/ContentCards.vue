@@ -544,10 +544,14 @@ export default {
                 this.testId && `ContentCard-${this.testId}-${index}`;
         },
 
+        /**
+         * Handles logging from f-metadata (callback)
+         * @returns {function(*, *=, *=): void}
+         */
         handleLogging () {
             // eslint-disable-next-line func-names
             return function (type, logMessage, payload) {
-                if (this.$logger) this.$logger[type](logMessage, payload);
+                if (this.$logger && this.$logger[type]) this.$logger[type](logMessage, null, payload);
             };
         }
     }
