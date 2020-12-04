@@ -2,6 +2,7 @@ import uniq from 'lodash.uniq';
 
 import ContentCards from './services/contentCard.service';
 import isAppboyInitialised from './utils/isAppboyInitialised';
+import { LogService } from './services/logging/logging.service';
 
 /* braze event handler callbacks */
 
@@ -100,6 +101,7 @@ class BrazeDispatcher {
 
         this.dispatcherOptions = null;
 
+        this.loggerCallbackInstances = [];
         this.cardsCallbacks = [];
         this.groupedCardsCallback = [];
         this.inAppMessageClickEventCallbacks = [];
@@ -131,6 +133,7 @@ class BrazeDispatcher {
             userId,
             disableComponent = false,
             callbacks = {},
+            loggerCallbacks = {},
             enableLogging,
             enabledCardTypes = [],
             brands = []
@@ -148,6 +151,10 @@ class BrazeDispatcher {
                 === JSON.stringify(this.dispatcherOptions.enabledCardTypes.slice().sort()))) {
             throw new Error('attempt to reinitialise appboy with different parameters');
         }
+
+        Object.keys(loggerCallbacks).forEach(key => {
+            this.loggerCallbackInstances.push((new LogService(loggerCallbacks[key])));
+        });
 
         window.dataLayer = window.dataLayer || [];
 
@@ -284,6 +291,19 @@ class BrazeDispatcher {
             custom: {
                 braze: payload
             }
+        });
+    }
+
+    /**
+     * Logger for braze dispatcher, utilizes a logging class to call the call back based on type
+     * @param type - Function name being called on the class ( should be in ['info', 'warn', 'error'])
+     * @param {string} logMessage - Describe what happened
+     * @param {object} [payload={}] - Any additional properties you want to add to the logs
+     */
+    logger (type, logMessage, payload) {
+        this.loggerCallbackInstances.forEach(instance => {
+            // eslint-disable-next-line no-unused-expressions
+            instance[type] && instance[type](logMessage, payload);
         });
     }
 }

@@ -3,6 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+Latest to be added to the next release
+------------------------------
+
+### Fixed
+- Removed optional chaining to fix storybook
+
+
+v3.0.0-beta.7
+------------------------------
+*December 2, 2020*
+
+### Added
+- Added a logging callbacks to the dispatcher. If provided it returns relevant logging data for each callback.
+- Added a logging function and class to support the above callbacks
+
 
 v3.0.0-beta.6
 ------------------------------

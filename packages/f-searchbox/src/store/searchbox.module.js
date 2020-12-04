@@ -7,7 +7,8 @@ import {
     SET_INPUT_FOCUS,
     SET_GEO_LOCATION_AVAILABILITY,
     SET_FOCUS_ON_INPUT,
-    SET_STREET_NUMBER_VALUE
+    SET_STREET_NUMBER_VALUE,
+    SET_KEYBOARD_SUGGESTION
 } from './mutation.types';
 
 export default {
@@ -21,7 +22,8 @@ export default {
         streetNumber: '',
         isInputFocus: false,
         isGeoLocationAvailable: false,
-        shouldInputFieldHaveFocus: false
+        shouldInputFieldHaveFocus: false,
+        keyboardSuggestionIndex: 0
     },
 
     actions: {
@@ -79,6 +81,30 @@ export default {
 
         setStreetNumber ({ commit }, payload) {
             commit(SET_STREET_NUMBER_VALUE, payload);
+        },
+
+        /**
+         * Allows keyboard selections to be made via the up/down keys.
+         *
+         * 1. Sets the initial list index.
+         * 2. Compare the set index to the suggestions available if we have a
+         * larger index start from the first suggestion again.
+         *
+         * @param commit
+         * @param state
+         * @param payload
+         */
+        setKeyboardSuggestion ({ commit, state }, payload) {
+            const setKeyBoardDirection = state.keyboardSuggestionIndex + payload;
+            const suggestionsLength = state.suggestions.length - 1;
+
+            commit(SET_KEYBOARD_SUGGESTION, setKeyBoardDirection);
+
+            if (state.keyboardSuggestionIndex > suggestionsLength) {
+                commit(SET_KEYBOARD_SUGGESTION, 0);
+            } else if (state.keyboardSuggestionIndex < 0) {
+                commit(SET_KEYBOARD_SUGGESTION, suggestionsLength);
+            }
         }
     },
 
@@ -117,6 +143,10 @@ export default {
 
         [SET_FOCUS_ON_INPUT]: (state, shouldInputFieldHaveFocus) => {
             state.shouldInputFieldHaveFocus = shouldInputFieldHaveFocus;
+        },
+
+        [SET_KEYBOARD_SUGGESTION]: (state, keyboardSuggestionIndex) => {
+            state.keyboardSuggestionIndex = keyboardSuggestionIndex;
         }
     }
 };

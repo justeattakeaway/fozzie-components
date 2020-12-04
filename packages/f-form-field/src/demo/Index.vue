@@ -9,7 +9,7 @@
         <form-field
             locale="en-GB"
             label-text="First Name"
-            data-test-id="form-field-input" />
+            name="firstname" />
     </div>
 </template>
 
