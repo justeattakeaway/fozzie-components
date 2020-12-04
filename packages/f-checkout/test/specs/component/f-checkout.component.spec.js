@@ -28,7 +28,7 @@ describe('f-checkout component tests', () => {
             postcode: 'AR51 1AA'
         };
 
-        const usernote = 'No mushrooms! Doorbell number 2 :)'
+        const usernote = 'No mushrooms! Doorbell number 2'
 
         // Act
         CheckoutComponent.submitCheckoutForm(addressInfo);
@@ -61,7 +61,7 @@ describe('f-checkout component tests', () => {
 
         // Assert
         expect(CheckoutComponent.userNoteMaxCharacterCount()).toEqual('200');
-        expect(CheckoutComponent.getUserNoteLength(maxUserNote)).toEqual(200)
+        expect(CheckoutComponent.getUserNoteLength(maxUserNote)).toEqual(200);
     });
 
     it('should enable a user to submit without adding a note', () => {

@@ -11,8 +11,6 @@ const orderTimeDropdownOptions = () => $$('[data-test-id="form-select"] select o
 const goToPaymentButton = () => $('[data-test-id="confirm-payment-submit-button"]');
 const allergenLink = () => $('[data-test-id="allergy-button"]');
 
-// Functions 
-
 /**
  * @description
  * Exports the list of data-test-ids for input fields, to be used by forEach iteration in spec.
@@ -76,7 +74,6 @@ exports.getOrderTimeOptionText = (index) => {
    
     return elements[index].getText();
 };
-
 /**
  * @description
  * Sets the value of the user note and grabs the length of characters.
@@ -85,7 +82,7 @@ exports.getOrderTimeOptionText = (index) => {
  */
 exports.getUserNoteLength = userNote => {
     userNoteInput().setValue(userNote);
-    return userNoteInput().getValue().length
+    return userNoteInput().getValue().length;
 };
 /**
  * @description
