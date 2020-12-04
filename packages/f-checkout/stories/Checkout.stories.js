@@ -19,11 +19,11 @@ const collectionUrl = '/checkout-collection.json';
 const restaurantUrl = '/restaurant.json';
 const restaurantMcDonaldsUrl = '/restaurant-mcdonalds.json';
 
-CheckoutMock.setupDelivery(deliveryUrl);
-CheckoutMock.setupCollection(collectionUrl);
+CheckoutMock.setupCheckoutMethod(deliveryUrl);
+CheckoutMock.setupCheckoutMethod(collectionUrl);
 
 CheckoutMock.setupRestaurant(restaurantUrl);
-CheckoutMock.setupRestaurantMcDonalds(restaurantMcDonaldsUrl);
+CheckoutMock.setupRestaurant(restaurantMcDonaldsUrl);
 
 export default {
     title: 'Components/Organisms',

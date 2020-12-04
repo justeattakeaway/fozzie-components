@@ -327,6 +327,9 @@ export default {
                 callbacks: {
                     handleContentCards: this.metadataContentCards,
                     handleContentCardsGrouped: this.metadataContentCardsGrouped
+                },
+                loggerCallbacks: {
+                    logger: this.handleLogging(this.$logger)
                 }
             })
             .then(dispatcher => {
@@ -539,6 +542,18 @@ export default {
             return groupIndex !== null ?
                 this.testId && `ContentCard-${this.testId}-${index}-${groupIndex}` :
                 this.testId && `ContentCard-${this.testId}-${index}`;
+        },
+
+        /**
+         * Handles logging from f-metadata (callback)
+         * @returns {function(*, *=, *=): void}
+         */
+        handleLogging (logger) {
+            return (type, logMessage, payload) => {
+                if (logger && logger[type]) {
+                    logger[type](logMessage, null, payload);
+                }
+            };
         }
     }
 };

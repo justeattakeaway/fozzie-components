@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.19.0
+------------------------------
+*December 3, 2020*
+
+### Added
+- Added Logger Context to allow writing to browser console within Storybook
+
+### Changed
+- Updated I18n Context Setup to follow new pattern
+
+
 v0.18.0
 ------------------------------
 *December 2, 2020*

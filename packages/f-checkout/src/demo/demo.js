@@ -1,12 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
-import VueCheckout from '../components/Checkout.vue';
+import VueDemo from './Demo.vue';
 import { ENGLISH_LOCALE } from '../../../storybook/constants/globalisation';
 import CheckoutMock from './checkoutMock';
 
-CheckoutMock.setupDelivery('/checkout-delivery.json');
-CheckoutMock.setupRestaurant('/restaurant.json');
+CheckoutMock.setupCheckoutMethod('/checkout-delivery.json');
 
 Vue.config.productionTip = false;
 
@@ -23,9 +22,6 @@ const i18n = new VueI18n({
 new Vue({
     i18n,
     store: new Vuex.Store({}),
-    render: h => h(VueCheckout, {
-        props: {
-            checkoutUrl: '/checkout-delivery.json'
-        }
-    })
+    components: { VueDemo },
+    render: h => h(VueDemo)
 }).$mount('#app');
