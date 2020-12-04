@@ -22,7 +22,7 @@ const fulfillmentTimes = [
     }
 ];
 
-const defaultState = {
+const defaultCheckoutState = {
     id: '',
     serviceType: CHECKOUT_METHOD_DELIVERY,
     customer: {
@@ -44,9 +44,25 @@ const defaultState = {
     messages: []
 };
 
-const defaultActions = {
+const defaultCheckoutActions = {
     getCheckout: jest.fn(),
     postCheckout: jest.fn()
+};
+
+const defaultRestaurantState = {
+    name: 'Tony\'s Kebabs',
+    allergenInformation: {
+        phoneNumber: '+447000000000',
+        url: 'https://tonyskebabstestrestaurant.com'
+    }
+};
+
+const defaultRestaurantActions = {
+    getRestaurant: jest.fn()
+};
+
+const defaultRestaurantGetters = {
+    isMcDonalds: jest.fn()
 };
 
 const i18n = {
@@ -54,12 +70,24 @@ const i18n = {
     messages: tenantConfigs['en-GB']
 };
 
-const createStore = (state = defaultState, actions = defaultActions) => new Vuex.Store({
+const createStore = (
+    checkoutState = defaultCheckoutState,
+    checkoutActions = defaultCheckoutActions,
+    restaurantState = defaultRestaurantState,
+    restaurantActions = defaultRestaurantActions,
+    restaurantGetters = defaultRestaurantGetters
+) => new Vuex.Store({
     modules: {
         checkout: {
             namespaced: true,
-            state,
-            actions
+            state: checkoutState,
+            actions: checkoutActions
+        },
+        restaurant: {
+            namespaced: true,
+            state: restaurantState,
+            actions: restaurantActions,
+            getters: restaurantGetters
         }
     },
     hasModule: jest.fn(() => true)
@@ -67,16 +95,22 @@ const createStore = (state = defaultState, actions = defaultActions) => new Vuex
 
 describe('Checkout', () => {
     allure.feature('Checkout');
-    const checkoutUrl = 'http://localhost/account/register';
+    const checkoutUrl = 'http://checkout';
+    const restaurantUrl = 'http://restaurant';
 
     it('should be defined', () => {
-        const propsData = { checkoutUrl };
+        const propsData = { checkoutUrl, restaurantUrl };
 
         const wrapper = shallowMount(VueCheckout, {
             i18n,
             store: createStore(),
             localVue,
-            propsData
+            propsData,
+            mocks: {
+                $cookies: {
+                    get: jest.fn()
+                }
+            }
         });
 
         expect(wrapper.exists()).toBe(true);
@@ -90,7 +124,8 @@ describe('Checkout', () => {
         it('should register the `checkout` module if it doesn\'t exist in the store', () => {
             // Arrange
             const propsData = {
-                checkoutUrl
+                checkoutUrl,
+                restaurantUrl
             };
 
             const store = new Vuex.Store({});
@@ -102,7 +137,12 @@ describe('Checkout', () => {
                 store,
                 i18n,
                 localVue,
-                propsData
+                propsData,
+                mocks: {
+                    $cookies: {
+                        get: jest.fn()
+                    }
+                }
             });
 
             // Assert
@@ -112,7 +152,8 @@ describe('Checkout', () => {
         it('should not register the `checkout` module if it already exists in the store', () => {
             // Arrange
             const propsData = {
-                checkoutUrl
+                checkoutUrl,
+                restaurantUrl
             };
 
             const store = createStore();
@@ -124,7 +165,12 @@ describe('Checkout', () => {
                 store,
                 i18n,
                 localVue,
-                propsData
+                propsData,
+                mocks: {
+                    $cookies: {
+                        get: jest.fn()
+                    }
+                }
             });
 
             // Assert
@@ -137,15 +183,21 @@ describe('Checkout', () => {
             it('should display the address block if set to `delivery`', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutUrl
+                    checkoutUrl,
+                    restaurantUrl
                 };
 
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_DELIVERY }),
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DELIVERY }),
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    mocks: {
+                        $cookies: {
+                            get: jest.fn()
+                        }
+                    }
                 });
 
                 const addressBlock = wrapper.find('[data-test-id="address-block"]');
@@ -157,15 +209,21 @@ describe('Checkout', () => {
             it('should not display the address block if set to `collection`', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutUrl
+                    checkoutUrl,
+                    restaurantUrl
                 };
 
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    mocks: {
+                        $cookies: {
+                            get: jest.fn()
+                        }
+                    }
                 });
 
                 const addressBlock = wrapper.find('[data-test-id="address-block"]');
@@ -181,7 +239,8 @@ describe('Checkout', () => {
             it('should capitalize `firstName` data', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutUrl
+                    checkoutUrl,
+                    restaurantUrl
                 };
 
                 // Act
@@ -189,13 +248,18 @@ describe('Checkout', () => {
                     store: createStore(),
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    mocks: {
+                        $cookies: {
+                            get: jest.fn()
+                        }
+                    }
                 });
 
                 const name = wrapper.find("[data-test-id='checkout-card-component']");
 
                 // Assert
-                expect(name.props('cardHeading')).toContain(defaultState.customer.firstName);
+                expect(name.props('cardHeading')).toContain(defaultCheckoutState.customer.firstName);
             });
         });
 
@@ -203,7 +267,8 @@ describe('Checkout', () => {
             it('should add `name` to title text', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutUrl
+                    checkoutUrl,
+                    restaurantUrl
                 };
 
                 // Act
@@ -211,13 +276,18 @@ describe('Checkout', () => {
                     store: createStore(),
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    mocks: {
+                        $cookies: {
+                            get: jest.fn()
+                        }
+                    }
                 });
 
                 const name = wrapper.find("[data-test-id='checkout-card-component']");
 
                 // Assert
-                expect(name.props('cardHeading')).toEqual(`${defaultState.customer.firstName}, confirm your details`);
+                expect(name.props('cardHeading')).toEqual(`${defaultCheckoutState.customer.firstName}, confirm your details`);
             });
         });
     });
@@ -225,17 +295,18 @@ describe('Checkout', () => {
     describe('when form submitted', () => {
         describe('if serviceType set to `collection`', () => {
             const propsData = {
-                checkoutUrl
+                checkoutUrl,
+                restaurantUrl
             };
 
             let wrapper;
 
             beforeEach(() => {
                 const state = {
-                    ...defaultState,
+                    ...defaultCheckoutState,
                     serviceType: CHECKOUT_METHOD_COLLECTION,
                     customer: {
-                        firstName: defaultState.customer.firstName
+                        firstName: defaultCheckoutState.customer.firstName
                     },
                     fulfillment: {
                         times: fulfillmentTimes,
@@ -244,16 +315,21 @@ describe('Checkout', () => {
                 };
 
                 wrapper = mount(VueCheckout, {
-                    store: createStore(state, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()), postCheckout: jest.fn(async () => Promise.resolve()) }),
+                    store: createStore(state, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.resolve()), postCheckout: jest.fn(async () => Promise.resolve()) }),
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    mocks: {
+                        $cookies: {
+                            get: jest.fn()
+                        }
+                    }
                 });
             });
 
             it('should emit success event when all the fields are populated correctly', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue(defaultState.customer.mobileNumber);
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue(defaultCheckoutState.customer.mobileNumber);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -316,17 +392,18 @@ describe('Checkout', () => {
 
         describe('if serviceType set to `delivery`', () => {
             const propsData = {
-                checkoutUrl
+                checkoutUrl,
+                restaurantUrl
             };
 
             let wrapper;
 
             beforeEach(() => {
                 const state = {
-                    ...defaultState,
+                    ...defaultCheckoutState,
                     serviceType: CHECKOUT_METHOD_DELIVERY,
                     customer: {
-                        firstName: defaultState.customer.firstName
+                        firstName: defaultCheckoutState.customer.firstName
                     },
                     fulfillment: {
                         times: fulfillmentTimes,
@@ -335,19 +412,24 @@ describe('Checkout', () => {
                 };
 
                 wrapper = mount(VueCheckout, {
-                    store: createStore(state, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()), postCheckout: jest.fn(async () => Promise.resolve()) }),
+                    store: createStore(state, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.resolve()), postCheckout: jest.fn(async () => Promise.resolve()) }),
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    mocks: {
+                        $cookies: {
+                            get: jest.fn()
+                        }
+                    }
                 });
             });
 
             it('should emit success event when all fields are populated correctly', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue(defaultState.customer.mobileNumber);
-                wrapper.find('[data-test-id="input-address-line-1"]').setValue(defaultState.fulfillment.address.line1);
-                wrapper.find('[data-test-id="input-address-city"]').setValue(defaultState.fulfillment.address.city);
-                wrapper.find('[data-test-id="input-address-postcode"]').setValue(defaultState.fulfillment.address.postcode);
+                wrapper.find('[data-test-id="input-mobile-number"]').setValue(defaultCheckoutState.customer.mobileNumber);
+                wrapper.find('[data-test-id="input-address-line-1"]').setValue(defaultCheckoutState.fulfillment.address.line1);
+                wrapper.find('[data-test-id="input-address-city"]').setValue(defaultCheckoutState.fulfillment.address.city);
+                wrapper.find('[data-test-id="input-address-postcode"]').setValue(defaultCheckoutState.fulfillment.address.postcode);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -430,7 +512,8 @@ describe('Checkout', () => {
 
     describe('when form is loaded', () => {
         const propsData = {
-            checkoutUrl
+            checkoutUrl,
+            restaurantUrl
         };
 
         describe('when request fails', () => {
@@ -438,10 +521,15 @@ describe('Checkout', () => {
 
             beforeEach(() => {
                 wrapper = mount(VueCheckout, {
-                    store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.reject()) }),
+                    store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject()) }),
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    mocks: {
+                        $cookies: {
+                            get: jest.fn()
+                        }
+                    }
                 });
             });
 
@@ -455,10 +543,15 @@ describe('Checkout', () => {
 
             beforeEach(() => {
                 wrapper = mount(VueCheckout, {
-                    store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()) }),
+                    store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.resolve()) }),
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    mocks: {
+                        $cookies: {
+                            get: jest.fn()
+                        }
+                    }
                 });
             });
 
@@ -468,14 +561,14 @@ describe('Checkout', () => {
             });
 
             it('should set mobile number', async () => {
-                expect(wrapper.find('[data-test-id="input-mobile-number"]').element.value).toBe(defaultState.customer.mobileNumber);
+                expect(wrapper.find('[data-test-id="input-mobile-number"]').element.value).toBe(defaultCheckoutState.customer.mobileNumber);
             });
 
             it('should set address fields', async () => {
-                expect(wrapper.find('[data-test-id="input-address-line-1"]').element.value).toBe(defaultState.fulfillment.address.line1);
-                expect(wrapper.find('[data-test-id="input-address-line-2"]').element.value).toBe(defaultState.fulfillment.address.line2);
-                expect(wrapper.find('[data-test-id="input-address-city"]').element.value).toBe(defaultState.fulfillment.address.city);
-                expect(wrapper.find('[data-test-id="input-address-postcode"]').element.value).toBe(defaultState.fulfillment.address.postcode);
+                expect(wrapper.find('[data-test-id="input-address-line-1"]').element.value).toBe(defaultCheckoutState.fulfillment.address.line1);
+                expect(wrapper.find('[data-test-id="input-address-line-2"]').element.value).toBe(defaultCheckoutState.fulfillment.address.line2);
+                expect(wrapper.find('[data-test-id="input-address-city"]').element.value).toBe(defaultCheckoutState.fulfillment.address.city);
+                expect(wrapper.find('[data-test-id="input-address-postcode"]').element.value).toBe(defaultCheckoutState.fulfillment.address.postcode);
             });
         });
     });
