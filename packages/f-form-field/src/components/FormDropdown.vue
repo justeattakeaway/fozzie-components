@@ -1,22 +1,21 @@
 <template>
     <div
         :class="$style['c-formDropdown']"
-        data-test-id="formDropdown">
+        :data-test-id="testId.container">
         <caret-icon
             :class="$style['c-formDropdown-icon']"
-            data-test-id="formDropdown-icon" />
+            :data-test-id="testId.icon" />
         <select
             id="time-selection"
             :class="$style['c-formDropdown-select']"
-            data-test-id="formDropdown-select"
+            :data-test-id="testId.select"
+            v-bind="attributes"
             @change="updateOption">
             <option
                 v-for="(option, index) in dropdownOptions"
                 :key="index"
-                :data-test-id="`formDropdown-option-${index}`"
-                :value="option">
-                {{ option }}
-            </option>
+                :data-test-id="`${testId.option}-${index}`"
+                :value="option">{{ option }}</option>
         </select>
     </div>
 </template>
@@ -32,9 +31,26 @@ export default {
     },
 
     props: {
+        attributes: {
+            type: Object,
+            default: () => {}
+        },
         dropdownOptions: {
             type: Array,
             default: () => null
+        }
+    },
+
+    computed: {
+        testId () {
+            const formFieldName = (this.attributes && this.attributes.name ? this.attributes.name : null);
+
+            return {
+                container: formFieldName ? `formfield-${formFieldName}-dropdown` : 'formfield-dropdown',
+                icon: formFieldName ? `formfield-${formFieldName}-dropdown-icon` : 'formfield-dropdown-icon',
+                select: formFieldName ? `formfield-${formFieldName}-dropdown-select` : 'formfield-dropdown-select',
+                option: formFieldName ? `formfield-${formFieldName}-dropdown-option` : 'formfield-dropdown-option'
+            };
         }
     },
 

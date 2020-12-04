@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import FormField from '../FormField.vue';
 import FormDropdown from '../FormDropdown.vue';
 import {
@@ -125,8 +125,8 @@ describe('FormField', () => {
                     // Act
                     const wrapper = await shallowMount(FormField, { propsData });
 
-                    const defaultLabel = wrapper.find('[data-test-id="form-field-label"]');
-                    const inlineLabel = wrapper.find('[data-test-id="form-field-label--inline"]');
+                    const defaultLabel = wrapper.find('[data-test-id="formfield-label"]');
+                    const inlineLabel = wrapper.find('[data-test-id="formfield-label--inline"]');
 
                     // Assert
                     expect(defaultLabel.exists()).toBe(true);
@@ -145,13 +145,75 @@ describe('FormField', () => {
                     // Act
                     const wrapper = await shallowMount(FormField, { propsData });
 
-                    const defaultLabel = wrapper.find('[data-test-id="form-field-label"]');
-                    const inlineLabel = wrapper.find('[data-test-id="form-field-label--inline"]');
+                    const defaultLabel = wrapper.find('[data-test-id="formfield-label"]');
+                    const inlineLabel = wrapper.find('[data-test-id="formfield-label--inline"]');
 
                     // Assert
                     expect(defaultLabel.exists()).toBe(false);
                     expect(inlineLabel.exists()).toBe(true);
                 });
+            });
+        });
+    });
+
+    describe('attrs ::', () => {
+        describe('name ::', () => {
+            it('should set testId.container to `formfield-container when name is is not set`', () => {
+                // Arrange
+                const attrsData = {};
+
+                // Act
+                const wrapper = shallowMount(FormField, { attrsData });
+
+                // Assert
+                expect(wrapper.attributes('data-test-id')).toBe('formfield-container');
+            });
+
+            it('should include attribute `name` in the generated container data-test-id when it is set', () => {
+                // Arrange
+                const attrsData = {
+                    attrs: {
+                        name: 'email'
+                    }
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, attrsData);
+
+                // Assert
+                expect(wrapper.attributes('data-test-id')).toBe(`formfield-${attrsData.attrs.name}`);
+            });
+
+            it('should include attribute `name` in the generated input data-test-id when it is set', () => {
+                // Arrange
+                const attrsData = {
+                    attrs: {
+                        name: 'email'
+                    }
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, attrsData);
+                const formInput = wrapper.find('input');
+
+                // Assert
+                expect(formInput.attributes('data-test-id')).toBe(`formfield-${attrsData.attrs.name}-input`);
+            });
+
+            it('when name is set, it should be included in the generated testId.input data-test-id', () => {
+                // Arrange
+                const attrsData = {
+                    attrs: {
+                        name: 'email'
+                    }
+                };
+
+                // Act
+                const wrapper = mount(FormField, attrsData);
+                const formLabel = wrapper.find('label');
+
+                // Assert
+                expect(formLabel.attributes('data-test-id')).toBe(`formfield-${attrsData.attrs.name}-label`);
             });
         });
     });
