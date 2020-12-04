@@ -22,11 +22,7 @@ export default {
         notes: [],
         isFulfillable: true,
         notices: [],
-        messages: [],
-        // TODO: remove this testing data
-        isMcDonalds: false,
-        allergenPhoneNumber: '125215982915',
-        allergenUrl: 'https://localhost'
+        messages: []
     }),
 
     actions: {

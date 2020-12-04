@@ -37,7 +37,7 @@ export default {
             tenantConfigs
         };
     },
-    computed: mapState('checkout', [
+    computed: mapState('restaurant', [
         'allergenPhoneNumber',
         'allergenUrl'
     ]),

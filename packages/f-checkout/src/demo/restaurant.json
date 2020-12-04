@@ -1,0 +1,55 @@
+{
+  "id": "108309",
+  "name": "Tony's Kebab",
+  "location": {
+    "streetAddress": "Fleet Place House, Fleet Place",
+    "postalCode": "EC4M 7RF",
+    "region": "Farringdon",
+    "city": "London",
+    "country": "United Kingdom",
+    "geoPosition": {
+      "type": "Point",
+      "coordinates": [
+        51.509865,
+        -0.118092
+      ]
+    }
+  },
+  "contactOptions": {
+    "emails": [
+      {
+        "email": "test@tonyskebab.com"
+      },
+      {
+        "usedFor": [
+          "Invoice",
+          "Default"
+        ]
+      }
+    ],
+    "phoneNumbers": [
+      {
+        "phoneNumber": "+44 7911 123456"
+      },
+      {
+        "usedFor": [
+          "Default",
+          "Owner",
+          "Alternative"
+        ]
+      }
+    ]
+  },
+  "allergenInformation": {
+    "phoneNumber": "+44 7911 123456",
+    "url": "http://test.com"
+  },
+  "legalInformation": {
+    "companyNumber": "12345",
+    "registeredName": "Tony's Kebab"
+  },
+  "cuisines": [
+    "Kebab",
+    "Turkish"
+  ]
+}

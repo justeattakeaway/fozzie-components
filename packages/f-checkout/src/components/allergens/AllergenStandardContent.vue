@@ -7,12 +7,12 @@
                 <template #number>
                     <a
                         data-test-id="allergen-phone-link"
-                        :href="`tel:${allergenPhoneNumber}`"
-                        @handleClick="onPhoneClick">{{ allergenPhoneNumber }}</a>
+                        :href="`tel:${allergenInformation.phoneNumber}`"
+                        @handleClick="onPhoneClick">{{ allergenInformation.phoneNumber }}</a>
                 </template>
                 <template #readMoreUrl>
                     <a
-                        :href="allergenUrl"
+                        :href="allergenInformation.url"
                         data-test-id="allergen-url-link"
                         target="_blank"
                         rel="noopener"
@@ -27,8 +27,8 @@
                 <template #number>
                     <a
                         data-test-id="allergen-phone-link"
-                        :href="`tel:${allergenPhoneNumber}`"
-                        @handleClick="onPhoneClick">{{ allergenPhoneNumber }}</a>
+                        :href="`tel:${allergenInformation.phoneNumber}`"
+                        @handleClick="onPhoneClick">{{ allergenInformation.phoneNumber }}</a>
                 </template>
             </i18n>
         </p>
@@ -38,7 +38,7 @@
                 path="allergies.urlOnly">
                 <template #readMoreUrl>
                     <a
-                        :href="allergenUrl"
+                        :href="allergenInformation.url"
                         data-test-id="allergen-url-link"
                         target="_blank"
                         rel="noopener"
@@ -66,14 +66,13 @@ export default {
         };
     },
     computed: {
-        ...mapState('checkout', [
-            'allergenPhoneNumber',
-            'allergenUrl'
+        ...mapState('restaurant', [
+            'allergenInformation'
         ]),
 
         contactMethod () {
-            const phone = this.allergenPhoneNumber ? 'phone' : 'nophone';
-            const url = this.allergenUrl ? 'url' : 'nourl';
+            const phone = this.allergenInformation.phoneNumber ? 'phone' : 'nophone';
+            const url = this.allergenInformation.url ? 'url' : 'nourl';
             return `${phone}_${url}`;
         },
 
@@ -106,6 +105,7 @@ export default {
 
 <style lang="scss" module>
     $line-height: 16px;
+
     .c-allergenAlert-standardContent-wrapper {
         margin: spacing(x3) 0;
     }

@@ -89,6 +89,7 @@ import tenantConfigs from '../tenants';
 import EventNames from '../event-names';
 
 import checkoutModule from '../store/checkout.module';
+import restaurantModule from '../store/restaurant.module';
 
 export default {
     name: 'VueCheckout',
@@ -109,6 +110,11 @@ export default {
 
     props: {
         checkoutUrl: {
+            type: String,
+            required: true
+        },
+
+        restaurantUrl: {
             type: String,
             required: true
         },
@@ -192,16 +198,25 @@ export default {
     watch: {
         async checkoutUrl () {
             await this.loadCheckout();
+        },
+
+        async restaurantUrl () {
+            await this.loadRestaurant();
         }
     },
 
     async mounted () {
         await this.loadCheckout();
+        await this.loadRestaurant();
     },
 
     created () {
         if (!this.$store.hasModule('checkout')) {
             this.$store.registerModule('checkout', checkoutModule);
+        }
+
+        if (!this.$store.hasModule('restaurant')) {
+            this.$store.registerModule('restaurant', restaurantModule);
         }
     },
 
@@ -219,6 +234,10 @@ export default {
         ...mapActions('checkout', [
             'getCheckout',
             'postCheckout'
+        ]),
+
+        ...mapActions('restaurant', [
+            'getRestaurant'
         ]),
 
         /**
@@ -263,6 +282,24 @@ export default {
                 this.$emit(EventNames.CheckoutGetSuccess); // TODO: Check these emitted events.
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutGetFailure, thrownErrors); // TODO: Check these emitted events.
+            }
+        },
+
+        /**
+         * Load the restaurant details while emitting events to communicate its success or failure.
+         *
+         */
+        async loadRestaurant () {
+            try {
+                await this.getRestaurant({
+                    url: this.restaurantUrl,
+                    tenant: this.tenant,
+                    timeout: this.getCheckoutTimeout
+                });
+
+                this.$emit(EventNames.RestaurantGetSuccess); // TODO: Check these emitted events.
+            } catch (thrownErrors) {
+                this.$emit(EventNames.RestaurantGetFailure, thrownErrors); // TODO: Check these emitted events.
             }
         },
 

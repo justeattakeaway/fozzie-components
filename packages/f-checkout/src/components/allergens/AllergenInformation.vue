@@ -46,7 +46,7 @@
 import MegaModal from '@justeat/f-mega-modal';
 import ButtonComponent from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 import AllergenMcDonaldsContent from './AllergenMcDonaldsContent.vue';
 import AllergenStandardContent from './AllergenStandardContent.vue';
 import '@justeat/f-mega-modal/dist/f-mega-modal.css';
@@ -64,7 +64,7 @@ export default {
         };
     },
     computed: {
-        ...mapState('checkout', [
+        ...mapGetters('restaurant', [
             'isMcDonalds'
         ]),
 

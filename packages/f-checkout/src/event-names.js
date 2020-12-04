@@ -7,6 +7,9 @@ const CheckoutBlocked = 'checkout-payment-blocked';
 const CheckoutGetSuccess = 'checkout-get-success';
 const CheckoutGetFailure = 'checkout-get-failure';
 
+const RestaurantGetSuccess = 'restaurant-get-success';
+const RestaurantGetFailure = 'restaurant-get-failure';
+
 export default {
     CheckoutSuccess,
     CheckoutFailure,
@@ -15,5 +18,7 @@ export default {
     CheckoutVisitPage,
     CheckoutBlocked,
     CheckoutGetSuccess,
-    CheckoutGetFailure
+    CheckoutGetFailure,
+    RestaurantGetSuccess,
+    RestaurantGetFailure
 };

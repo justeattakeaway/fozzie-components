@@ -6,6 +6,7 @@ import { ENGLISH_LOCALE } from '../../../storybook/constants/globalisation';
 import CheckoutMock from './checkoutMock';
 
 CheckoutMock.setupDelivery('/checkout-delivery.json');
+CheckoutMock.setupRestaurant('/restaurant.json');
 
 Vue.config.productionTip = false;
 
