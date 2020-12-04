@@ -1663,11 +1663,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/browserslist-config-fozzie/-/browserslist-config-fozzie-1.1.1.tgz#8f27a7b683f7c40469b6ff4049384370ae6530fc"
   integrity sha512-Ypr/5NqRlQyWqLqTOA29DawRQJ3EA5wctVvKsqHgLXo47ikW+A9nNeloySTnu6La5QUjXSw/FTJxyfnuTxkqBg==
 
-"@justeat/browserslist-config-fozzie@>=1.1.1":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/browserslist-config-fozzie/-/browserslist-config-fozzie-1.2.0.tgz#52d46d15c2ce8168c803af3135326554c81c27c6"
-  integrity sha512-hChL9H75HzClJJb3+Xbl/EvJLOUV6cXYNciUZN2TNwsGpBUj39l+YbN+d/r4Or+0o7qFshtoTjLL+Wn9HccCqw==
-
 "@justeat/eslint-config-fozzie@3.4.1":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@justeat/eslint-config-fozzie/-/eslint-config-fozzie-3.4.1.tgz#1c6b2348d39bf0ee9e732630be0fee35e24111b9"
@@ -1751,18 +1746,6 @@
   integrity sha512-owV/JWeve1Bc4HrSu2zFIgXjuAqAD5PYflw2iAMFk7SVbl2gGvewUgKszf61ZOg9qjADdxmCkW5sZPQkRzHmbQ==
   dependencies:
     window-or-global "^1.0.1"
-
-"@justeat/f-metadata@3.0.0-beta.6":
-  version "3.0.0-beta.6"
-  resolved "https://registry.yarnpkg.com/@justeat/f-metadata/-/f-metadata-3.0.0-beta.6.tgz#3d2ea0d38192a7b40f3ac1a8bb3a1194ccd62338"
-  integrity sha512-ZCBCcMxk2nVYw58hWaJdf5kVtfdeUQVausrhvSFq/V3bpGvTh+OJV1W0OUOKyizqRc8FnGVUEJVhqzCFeBNpew==
-  dependencies:
-    appboy-web-sdk "2.5.2"
-    date-fns "2.16.1"
-    lodash.findindex "4.6.0"
-    lodash.orderby "4.6.0"
-    lodash.startswith "4.2.1"
-    lodash.uniq "4.5.0"
 
 "@justeat/f-services@0.13.0":
   version "0.13.0"

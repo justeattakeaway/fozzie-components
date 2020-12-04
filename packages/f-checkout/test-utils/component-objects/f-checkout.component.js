@@ -43,8 +43,8 @@ const fields = {
     }
 };
 
-exports.IsFieldErrorDisplayed = fieldName => fields[fieldName].error().isDisplayed();
-exports.IsFieldDisplayed = fieldName => fields[fieldName].input().isDisplayed();
+exports.isFieldErrorDisplayed = fieldName => fields[fieldName].error().isDisplayed();
+exports.isFieldDisplayed = fieldName => fields[fieldName].input().isDisplayed();
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
@@ -62,11 +62,11 @@ exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
  */
 exports.populateCheckoutForm = addressInfo => {
     exports.waitForCheckoutComponent();
-    fields.mobileNumber.input.setValue(addressInfo.mobileNumber);
-    fields.addressLine1.input.setValue(addressInfo.line1);
-    fields.addressLine2.input.setValue(addressInfo.line2);
-    fields.addressCity.input.setValue(addressInfo.city);
-    fields.addressPostcode.input.setValue(addressInfo.postcode);
+    fields.mobileNumber.input().setValue(addressInfo.mobileNumber);
+    fields.addressLine1.input().setValue(addressInfo.line1);
+    fields.addressLine2.input().setValue(addressInfo.line2);
+    fields.addressCity.input().setValue(addressInfo.city);
+    fields.addressPostcode.input().setValue(addressInfo.postcode);
 };
 
 /**
@@ -97,6 +97,6 @@ exports.submit = () => {
     goToPaymentButton().click();
 };
 
-exports.WaitForErrorMessage = errorMessage => {
+exports.waitForErrorMessage = errorMessage => {
     doesElementExist(FIELDS[errorMessage].error);
 };

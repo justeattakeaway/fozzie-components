@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.16.0
 ------------------------------
-*December 3, 2020*
+*December 4, 2020*
 
 ### Added
 - Page object model constants for css selectors
