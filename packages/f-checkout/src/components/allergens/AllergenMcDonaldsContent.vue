@@ -3,8 +3,8 @@
         <p>{{ $t('allergies.mcDonaldsAllergy') }}</p>
 
         <a
-            v-if="allergenUrl"
-            :href="allergenUrl"
+            v-if="allergenInformation.url"
+            :href="allergenInformation.url"
             :class="$style['c-allergenAlert--link']"
             data-test-id="allergen-url-link"
             target="_blank"
@@ -14,7 +14,6 @@
         </a>
 
         <a
-            v-if="allergenPhoneNumber"
             :href="$t('allergies.mcDonaldsNutritionUrl')"
             :class="$style['c-allergenAlert--link']"
             data-test-id="nutrition-url-link"
@@ -37,8 +36,7 @@ export default {
         };
     },
     computed: mapState('restaurant', [
-        'allergenPhoneNumber',
-        'allergenUrl'
+        'allergenInformation'
     ]),
     methods: {
         /* TODO - Add tracking (separate ticket) */
