@@ -22,7 +22,8 @@
                 :service="service"
                 :should-display-custom-autocomplete="service.isAutocompleteEnabled"
                 :copy="copy"
-                :is-compressed="isCompressed" />
+                :is-compressed="isCompressed"
+                v-on="$listeners" />
 
             <form-search-button
                 :copy="copy"
@@ -56,13 +57,19 @@ import FormSearchField from './formElements/FormSearchField.vue';
 import FormSearchButton from './formElements/FormSearchButton.vue';
 import FormSearchSuggestions from './formElements/FormSearchSuggestions.vue';
 import searchboxModule from '../store/searchbox.module';
-import { getLastLocation } from '../utils/helpers';
+import { getLastLocation, normalisePostcode } from '../utils/helpers';
 import { search, selectedSuggestion } from '../services/search.services';
 import {
     processLocationCookie,
     onCustomSubmit,
     generateFormQueryUrl
 } from '../services/general.services';
+import {
+    SUBMIT_SAVED_ADDRESS,
+    SUBMIT_VALID_ADDRESS,
+    SEARCHBOX_ERROR,
+    TRACK_POSTCODE_CHANGED
+} from '../event-types';
 
 export default {
     components: {
@@ -253,6 +260,7 @@ export default {
 
             if (this.hasLastSavedAddress) {
                 e.preventDefault();
+                this.$emit(SUBMIT_SAVED_ADDRESS);
                 return this.searchPreviouslySavedAddress(e);
             }
 
@@ -263,6 +271,7 @@ export default {
                 processLocationCookie(this.shouldSetCookies, this.address);
                 this.clearAddressValue(this.shouldClearAddressOnValidSubmit);
                 onCustomSubmit(this.onSubmit, this.address, e);
+                this.verifyHasPostcodeChanged();
 
                 if (this.service.isAutocompleteEnabled) {
                     e.preventDefault();
@@ -275,9 +284,12 @@ export default {
 
                     // TODO process the je last location cookie for international markets...
                 }
+
+                this.$emit(SUBMIT_VALID_ADDRESS);
             } else {
                 e.preventDefault();
                 this.setErrors(this.isValid);
+                this.$emit(SEARCHBOX_ERROR, this.errors);
             }
 
             return true;
@@ -343,6 +355,21 @@ export default {
             if (shouldClearAddressOnValidSubmit) {
                 this.address = '';
                 this.setIsDirty(false);
+            }
+        },
+
+        /**
+         * Emits a track postcode change event if the users last address (i.e je-location)
+         * has changed. For example, if they were to change & submit a new valid address in
+         * searchbox.
+         *
+         */
+        verifyHasPostcodeChanged () {
+            if (
+                this.lastAddress
+                && normalisePostcode(this.lastAddress) !== normalisePostcode(this.address)
+            ) {
+                this.$emit(TRACK_POSTCODE_CHANGED);
             }
         }
     }
