@@ -303,7 +303,7 @@ class BrazeDispatcher {
     logger (type, logMessage, payload) {
         this.loggerCallbackInstances.forEach(instance => {
             // eslint-disable-next-line no-unused-expressions
-            instance[type]?.(logMessage, payload);
+            instance[type] && instance[type](logMessage, payload);
         });
     }
 }
