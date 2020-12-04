@@ -101,17 +101,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-    .u-showAboveMid {
-        @include media('<mid') {
-            display: none !important;
-        }
-    }
-
-    .u-showBelowMid {
-        @include media('>=mid') {
-            display: none !important;
-        }
-    }
+    @include trumps-rwd();
 
     .c-allergen-linkButton {
         margin-top: spacing(x1.5);
