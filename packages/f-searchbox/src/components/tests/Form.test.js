@@ -418,7 +418,7 @@ describe('`Form`', () => {
                         expect(spy).toHaveBeenCalledWith(['Error']);
                     });
 
-                    it('should `$emit` `searchbox-error` event when errors are received from an invalid submission', () => {
+                    it('should `$emit` `searchbox-error` event along with the error `types` when errors are received from an invalid submission', () => {
                         // Arrange
                         const address = 'AR511AR';
                         const errors = ['SOME_INVALID_MESSAGE'];
