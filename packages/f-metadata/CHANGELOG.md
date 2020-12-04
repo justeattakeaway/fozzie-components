@@ -9,6 +9,7 @@ Latest to be added to the next release
 ### Fixed
 - Removed optional chaining to fix storybook
 
+
 v3.0.0-beta.7
 ------------------------------
 *December 2, 2020*
