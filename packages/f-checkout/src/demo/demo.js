@@ -1,22 +1,17 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { VueI18n } from '@justeat/f-globalisation';
 import VueCheckout from '../components/Checkout.vue';
-import { ENGLISH_LOCALE } from '../../../storybook/constants/globalisation';
 import CheckoutMock from './checkoutMock';
+
+import i18n from '../../../storybook/context/i18n.context';
+import '../../../storybook/context/logger.context';
+import '../../../storybook/context/cookie.context';
 
 CheckoutMock.setupDelivery('/checkout-delivery.json');
 
 Vue.config.productionTip = false;
-
-Vue.use(VueI18n);
 Vue.use(Vuex);
 
-const i18n = new VueI18n({
-    locale: ENGLISH_LOCALE,
-    fallbackLocale: ENGLISH_LOCALE,
-    messages: {}
-});
 
 /* eslint-disable no-new */
 new Vue({
