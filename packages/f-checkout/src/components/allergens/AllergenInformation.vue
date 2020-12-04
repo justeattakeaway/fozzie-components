@@ -1,21 +1,20 @@
 <template>
-    <div>
+    <div :class="$style['c-allergen-linkButton']">
         <button-component
-            :class="$style['c-checkout-allergyButton']"
             button-type="link"
             data-test-id="allergy-button"
             @click.native.prevent="showModal">
             <span
-                class="u-showAboveMid"
+                :class="$style['u-showAboveMid']"
                 data-test-id="allergen-desktop-message">
                 {{ $t('allergies.allergy') }}
             </span>
 
-            <!-- <span
-                class="u-showBelowMid"
+            <span
+                :class="$style['u-showBelowMid']"
                 data-test-id="allergen-mobile-message">
                 {{ $t('allergies.allergyTap') }}
-            </span> -->
+            </span>
         </button-component>
 
         <mega-modal
@@ -31,7 +30,7 @@
             <allergen-standard-content v-else />
 
             <button-component
-                :class="$style['o-btn-close']"
+                :class="$style['c-allergen-closeButton']"
                 button-type="primary"
                 data-test-id="allergy-modal-close-button"
                 is-full-width
@@ -102,22 +101,23 @@ export default {
 </script>
 
 <style lang="scss" module>
-    $line-height: 16px;
-
-    button.o-btn--allergy {
-        padding: 0 spacing(x3);
-        @include font-size(body-l);
-        font-weight: $font-weight-bold;
-        line-height: $line-height;
-        margin: spacing() 0;
+    .u-showAboveMid {
+        @include media('<mid') {
+            display: none !important;
+        }
     }
 
-    button.o-btn-close {
-        margin: 0 auto;
-        max-width: 400px;
+    .u-showBelowMid {
+        @include media('>=mid') {
+            display: none !important;
+        }
     }
 
-    .c-checkout-allergyButton {
+    .c-allergen-linkButton {
         margin-top: spacing(x1.5);
+    }
+
+    .c-allergen-closeButton {
+        margin-top: spacing(x3);
     }
 </style>

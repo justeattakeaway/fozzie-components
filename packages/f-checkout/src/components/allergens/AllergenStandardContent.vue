@@ -1,6 +1,5 @@
 <template>
-    <div
-        :class="$style['c-allergenAlert-standardContent-wrapper']">
+    <div :class="$style['c-allergenAlert-standardContent-wrapper']">
         <p v-if="hasPhoneNumberAndAllergenUrl">
             <i18n
                 path="allergies.phoneNumberAndUrl">
@@ -103,10 +102,10 @@ export default {
 };
 </script>
 
+
 <style lang="scss" module>
-    $line-height: 16px;
 
     .c-allergenAlert-standardContent-wrapper {
-        margin: spacing(x3) 0;
+        margin-bottom: spacing(x3);
     }
 </style>

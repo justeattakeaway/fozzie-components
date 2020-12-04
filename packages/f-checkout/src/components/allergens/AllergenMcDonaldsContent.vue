@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class="$style['c-allergenAlert-standardContent-wrapper']">
         <p>{{ $t('allergies.mcDonaldsAllergy') }}</p>
 
         <a
@@ -13,9 +13,8 @@
             {{ $t('allergies.mcDonaldsReadMore') }}
         </a>
 
-        <br>
-
         <a
+            v-if="allergenPhoneNumber"
             :href="$t('allergies.mcDonaldsNutritionUrl')"
             :class="$style['c-allergenAlert--link']"
             data-test-id="nutrition-url-link"
@@ -54,27 +53,18 @@ export default {
 </script>
 
 <style lang="scss" module>
-    $line-height: 16px;
-
     .c-allergenAlert-standardContent-wrapper {
-        margin: spacing(x3) 0;
+        margin-bottom: spacing(x3);
     }
 
     .c-allergenAlert--link {
-        display: inline-block;
+        display: block;
         text-decoration: none;
+        margin-top: spacing(x3);
 
         &:hover,
         &:focus {
             text-decoration: underline;
-        }
-
-        &:first-of-type {
-            margin: spacing(x3) 0 spacing(x1.5);
-        }
-
-        &:last-of-type {
-            margin: spacing(x1.5) 0 spacing(x3);
         }
     }
 </style>
