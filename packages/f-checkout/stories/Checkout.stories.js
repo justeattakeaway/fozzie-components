@@ -16,8 +16,14 @@ Vue.use(Vuex);
 const deliveryUrl = '/checkout-delivery.json';
 const collectionUrl = '/checkout-collection.json';
 
+const restaurantUrl = '/restaurant.json';
+const restaurantMcDonaldsUrl = '/restaurant-mcdonalds.json';
+
 CheckoutMock.setupDelivery(deliveryUrl);
 CheckoutMock.setupCollection(collectionUrl);
+
+CheckoutMock.setupRestaurant(restaurantUrl);
+CheckoutMock.setupRestaurantMcDonalds(restaurantMcDonaldsUrl);
 
 export default {
     title: 'Components/Organisms',
@@ -32,11 +38,14 @@ export const CheckoutComponent = () => ({
         },
         checkoutUrl: {
             default: select('Checkout Url', [deliveryUrl, collectionUrl], deliveryUrl)
+        },
+        restaurantUrl: {
+            default: select('Restaurant Url', [restaurantUrl, restaurantMcDonaldsUrl], restaurantUrl)
         }
     },
     store: new Vuex.Store({}),
     template:
-        '<vue-checkout :checkoutUrl="checkoutUrl" :locale="locale" />'
+        '<vue-checkout :checkoutUrl="checkoutUrl" :restaurantUrl="restaurantUrl" :locale="locale" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';
