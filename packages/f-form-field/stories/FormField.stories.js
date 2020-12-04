@@ -17,7 +17,7 @@ export const FormFieldComponent = () => ({
             default: select('Locale', ['en-GB', 'en-AU'])
         },
         labelText: {
-            default: text('Label Text', 'First Name')
+            default: text('Label Text', 'First name')
         },
         inputType: {
             default: select('Input Type', VALID_INPUT_TYPES.concat(CUSTOM_INPUT_TYPES))

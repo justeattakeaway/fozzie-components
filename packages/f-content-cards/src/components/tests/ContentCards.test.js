@@ -851,4 +851,60 @@ describe('ContentCards', () => {
             expect(instance.find(`[data-test-id="ContentCard-${testId}-1-2"]`).exists()).toBeTruthy();
         });
     });
+    describe('logging callback', () => {
+        const testMessage = '__TEST_MESSAGE__';
+        const testPayload = { test: 'PAYLOAD' };
+        const testId = 'foo';
+
+        it('should return a function with the correct logging parameters when callback is called', async () => {
+            // Arrange
+            const loggingType = 'logInfo';
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId,
+                    groupCards: true,
+                    testId
+                },
+                mocks: {
+                    $logger: {
+                        logInfo: jest.fn()
+                    }
+                }
+            });
+
+            // Act
+            const loggingCallback = instance.vm.handleLogging(instance.vm.$logger);
+            loggingCallback(loggingType, testMessage, testPayload);
+            await instance.vm.$nextTick();
+
+            // Assert
+            expect(instance.vm.$logger.logInfo).toHaveBeenCalledWith(testMessage, null, testPayload);
+        });
+        it('should NOT return a function when the callback is called with incorrect logging type', async () => {
+            // Arrange
+            const loggingType = 'foo';
+            const instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId,
+                    groupCards: true,
+                    testId
+                },
+                mocks: {
+                    $logger: {
+                        logInfo: jest.fn()
+                    }
+                }
+            });
+
+            // Act
+            const loggingCallback = instance.vm.handleLogging(instance.vm.$logger);
+            loggingCallback(loggingType, testMessage, testPayload);
+            await instance.vm.$nextTick();
+
+            // Assert
+            expect(instance.vm.$logger.logInfo).not.toHaveBeenCalled();
+        });
+    });
 });

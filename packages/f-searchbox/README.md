@@ -129,3 +129,57 @@ Applies query parameters to the form URL to enable filters and other options on 
     }"
 />
 ```
+
+## Override copy
+
+You can override the `f-searchbox` copy using `copy-override`.
+This will also work with the headings.
+
+```vue
+<template>
+    <search-box
+        locale="en-GB"
+        :copy-override="{ buttonText: 'Confirm' }" />
+</template>
+```
+
+```js
+const copyOverrides = {
+    buttonText: "Confirm",
+    fieldLabel: "Enter your address",
+    // ...
+}
+```
+
+## Custom analytic events
+
+`f-searchbox` exposes a number of hooks that can be used to trigger functions in the consuming application.
+
+```js
+<search-box
+    @searchbox-error="handleSearchboxError"
+    @address-search-focus="addressFocus"
+    @submit-saved-address="validSavedAddressSearch"
+    @submit-valid-address="validSearch"
+    @track-postcode-changed="onPostcodeChanged"/>
+```
+
+### `@searchbox-error`
+
+Fires when an error is thrown by searchbox.
+
+### `@address-search-focus`
+
+Fires when the address input is focussed.
+
+### `@submit-saved-address`
+
+Fires if user submits an address with the same address as previously recorded by the searchbox.
+
+### `@submit-valid-address`
+
+Fires if an address is submitted with no errors.
+
+### `@track-postcode-changed`
+
+Fires when the address input value has changed from a previous address to a new valid address.

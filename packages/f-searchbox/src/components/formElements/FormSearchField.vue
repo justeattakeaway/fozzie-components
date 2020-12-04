@@ -24,7 +24,9 @@
                 }"
                 @input="$emit('input', $event.target.value)"
                 @focus="toggleEnterLeaveInput(true)"
-                @blur="toggleEnterLeaveInput(false)">
+                @blur="toggleEnterLeaveInput(false)"
+                @keydown.up="setKeyboardSuggestion(-1)"
+                @keydown.down="setKeyboardSuggestion(1)">
 
             <span :class="$style['c-search-placeholder']">{{ copy.fieldPlaceholder }}</span>
         </label>
@@ -38,6 +40,7 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import FormSearchInnerFieldWrapper from './FormSearchInnerFieldWrapper.vue';
+import { ADDRESS_SEARCH_FOCUS } from '../../event-types';
 
 const ALLOWED_SELECTION_TIME = 500;
 
@@ -104,7 +107,8 @@ export default {
 
     methods: {
         ...mapActions('searchbox', [
-            'setInputFocus'
+            'setInputFocus',
+            'setKeyboardSuggestion'
         ]),
 
         /**
@@ -117,9 +121,14 @@ export default {
          * @param {Boolean} value
          */
         toggleEnterLeaveInput (value) {
-            setTimeout(() => {
+            if (value) {
                 this.setInputFocus(value);
-            }, value ? 0 : ALLOWED_SELECTION_TIME);
+                this.$emit(ADDRESS_SEARCH_FOCUS);
+            } else {
+                setTimeout(() => {
+                    this.setInputFocus(value);
+                }, ALLOWED_SELECTION_TIME);
+            }
         }
     }
 };

@@ -1,4 +1,5 @@
 import * as searchServices from '../search.services';
+import * as helpers from '../../utils/helpers';
 
 describe('`search.services`', () => {
     let event;
@@ -47,23 +48,44 @@ describe('`search.services`', () => {
                 expect(event.preventDefault).toHaveBeenCalled();
             });
 
-            it('should call `form.submit` with a `callback` when `onSubmit` is `falsy` & `formUrl` is defined', () => {
+            it('should call `form.submit` with a `location` when `onSubmit` is `falsy` & `formUrl` is defined', () => {
                 // Arrange
                 const payload = {
                     onSubmit: false,
                     formUrl: 'search/AlphaAndromedae',
                     form: { submit: jest.fn() },
-                    callback: function getLastLocation () {},
                     event
                 };
+
+                const location = {};
 
                 const spy = jest.spyOn(payload.form, 'submit');
 
                 // Act
-                searchServices.search(payload);
+                searchServices.search(payload, {});
 
                 // Assert
-                expect(spy).toHaveBeenCalledWith(payload.callback());
+                expect(spy).toHaveBeenCalledWith(location);
+            });
+
+            it('should call `generatePostForm` with a `location` when `onSubmit` is `falsy` & `formUrl` is `falsy`', () => {
+                // Arrange
+                const payload = {
+                    onSubmit: false,
+                    formUrl: '',
+                    form: { submit: jest.fn() },
+                    event
+                };
+
+                window.HTMLFormElement.prototype.submit = () => {};
+
+                const spy = jest.spyOn(helpers, 'generatePostForm');
+
+                // Act
+                searchServices.search(payload, {});
+
+                // Assert
+                expect(spy).toHaveBeenCalledWith('/HomeCW/SearchResultByGeoLocation', { cuisine: '', query: '' });
             });
         });
     });

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { generatePostForm } from '../utils/helpers';
 /**
  * Submits a manual form submission with a given callback `getLastLocation`
@@ -6,7 +5,6 @@ import { generatePostForm } from '../utils/helpers';
  * @param onSubmit
  * @param formUrl
  * @param form
- * @param callback
  * @param event
  * @param location
  * @returns {boolean}
@@ -15,7 +13,6 @@ const search = ({
     onSubmit,
     formUrl,
     form,
-    callback,
     event
 }, location = {}) => {
     const payload = {
@@ -23,15 +20,17 @@ const search = ({
         cuisine: '',
         ...location
     };
-    
+
     if (onSubmit) {
         return false;
     } else if (formUrl) {
         event.preventDefault();
-        form.submit(callback());
+        form.submit(location);
     } else {
         generatePostForm('/HomeCW/SearchResultByGeoLocation', payload);
     }
+
+    return false;
 };
 
 /**
@@ -56,6 +55,7 @@ const search = ({
  * @param requiredFields
  * @param streetNumber
  * @param index
+ * @param keyboardSuggestionIndex
  * @returns {Promise.<TResult>}
  */
 const selectedSuggestion = (
@@ -63,64 +63,61 @@ const selectedSuggestion = (
     suggestions,
     requiredFields,
     streetNumber,
-    index
+    index,
+    keyboardSuggestionIndex
 ) => {
-    // TODO pass through suggestion index for keyboard behaviour..
-    const suggestion = suggestions[index || 0];
-    
+    const suggestion = suggestions[index || keyboardSuggestionIndex];
+
     // find current suggestion's location information
     const placeId = suggestion.place_id || suggestion.placeId;
     const streetNumberFormatted = streetNumber.trim();
-    
+
     return service.getLocationDetails(placeId)
         .then(location => service.getLocationPostcode(location, streetNumberFormatted))
         .then(location => {
             location.streetNumber = location.streetNumber || streetNumberFormatted;
             location.suggestion = suggestion.description;
-            
+
             const missingFields = requiredFields.reduce((allFields, field) => (
                 location[field]
                     ? allFields
                     : allFields.concat(field)
             ), []);
-        
-        const streetNumberRequired = requiredFields.includes('streetNumber') && !location.streetNumber;
-        
-        if (!missingFields.length) {
-            const payload = {
-                ...location,
-                city: location.locality,
-                houseNo: location.streetNumber,
-                where: location.postcode
-            };
 
-            search({}, payload);
-            return payload;
-        } else if (
+            const streetNumberRequired = requiredFields.includes('streetNumber') && !location.streetNumber;
+
+            if (!missingFields.length) {
+                const payload = {
+                    ...location,
+                    city: location.locality,
+                    houseNo: location.streetNumber,
+                    where: location.postcode
+                };
+
+                search({}, payload);
+                return payload;
+            } else if (
             // if street required but no street number available
             // display street number field
-            location.street
-            && requiredFields.includes('street')
-            && missingFields.includes('streetNumber')
-        ) {
-            
-            return streetNumberRequired
-                ?
-                {
-                    errors: ['STREET_NUMBER_MISSING'],
-                    requiresStreetNumber: streetNumberRequired
-                }
-                : '';
-            
-        } else {
+                location.street
+                && requiredFields.includes('street')
+                && missingFields.includes('streetNumber')
+            ) {
+                return streetNumberRequired
+                    ?
+                    {
+                        errors: ['STREET_NUMBER_MISSING'],
+                        requiresStreetNumber: streetNumberRequired
+                    }
+                    : '';
+            }
             // suggestion doesn't have desired fields
             // therefore search must be more specific
             return {
                 errors: ['MORE_SPECIFIC_SEARCH'],
                 requiresStreetNumber: streetNumberRequired
-            }
-        }
-    });
+            };
+        });
 };
 
 export {

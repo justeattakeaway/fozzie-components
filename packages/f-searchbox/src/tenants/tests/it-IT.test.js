@@ -3,26 +3,41 @@ import Service from '../../services/core';
 
 describe('Tenant: `it-IT`', () => {
     describe('service', () => {
-        it('should return errors for empty address', () => {
-            // Arrange
-            const service = Service(tenant.default.service);
+        describe('when address is invalid', () => {
+            it('should return errors for empty address', () => {
+                // Arrange
+                const service = Service(tenant.default.service);
 
-            // Act
-            const result = service.isValid();
+                // Act
+                const result = service.isValid();
 
-            // Assert
-            expect(result).toContain('ADDRESS_EMPTY');
+                // Assert
+                expect(result).toContain('ADDRESS_EMPTY');
+            });
+
+            it('should return errors for empty string address', () => {
+                // Arrange
+                const service = Service(tenant.default.service);
+
+                // Act
+                const result = service.isValid('     ');
+
+                // Assert
+                expect(result).toContain('ADDRESS_EMPTY');
+            });
         });
 
-        it('should return errors for empty string address', () => {
-            // Arrange
-            const service = Service(tenant.default.service);
+        describe('when address is valid', () => {
+            it('should return `true` for populated addresses', () => {
+                // Arrange
+                const service = Service(tenant.default.service);
 
-            // Act
-            const result = service.isValid('     ');
+                // Act
+                const result = service.isValid('Some Address');
 
-            // Assert
-            expect(result).toContain('ADDRESS_EMPTY');
+                // Assert
+                expect(result).toEqual(true);
+            });
         });
 
         it('should have location services enabled', () => {

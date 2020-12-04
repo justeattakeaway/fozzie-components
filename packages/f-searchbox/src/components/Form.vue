@@ -22,7 +22,8 @@
                 :service="service"
                 :should-display-custom-autocomplete="service.isAutocompleteEnabled"
                 :copy="copy"
-                :is-compressed="isCompressed" />
+                :is-compressed="isCompressed"
+                v-on="$listeners" />
 
             <form-search-button
                 :copy="copy"
@@ -34,6 +35,7 @@
             aria-live="assertive"
             :suggestion-format="suggestionFormat"
             :suggestions="suggestions"
+            :keyboard-suggestion-selection="keyboardSuggestionIndex"
             @selected-suggestion="onSelectedSuggestion" />
 
         <error-message
@@ -55,13 +57,19 @@ import FormSearchField from './formElements/FormSearchField.vue';
 import FormSearchButton from './formElements/FormSearchButton.vue';
 import FormSearchSuggestions from './formElements/FormSearchSuggestions.vue';
 import searchboxModule from '../store/searchbox.module';
-import { getLastLocation } from '../utils/helpers';
+import { getLastLocation, normalisePostcode } from '../utils/helpers';
 import { search, selectedSuggestion } from '../services/search.services';
 import {
     processLocationCookie,
     onCustomSubmit,
     generateFormQueryUrl
 } from '../services/general.services';
+import {
+    SUBMIT_SAVED_ADDRESS,
+    SUBMIT_VALID_ADDRESS,
+    SEARCHBOX_ERROR,
+    TRACK_POSTCODE_CHANGED
+} from '../event-types';
 
 export default {
     components: {
@@ -128,7 +136,8 @@ export default {
             'streetNumberRequired',
             'isInputFocus',
             'streetNumber',
-            'isDirty'
+            'isDirty',
+            'keyboardSuggestionIndex'
         ]),
 
         /**
@@ -250,6 +259,8 @@ export default {
             this.setIsValid(this.service.isValid(this.address));
 
             if (this.hasLastSavedAddress) {
+                e.preventDefault();
+                this.$emit(SUBMIT_SAVED_ADDRESS);
                 return this.searchPreviouslySavedAddress(e);
             }
 
@@ -260,11 +271,11 @@ export default {
                 processLocationCookie(this.shouldSetCookies, this.address);
                 this.clearAddressValue(this.shouldClearAddressOnValidSubmit);
                 onCustomSubmit(this.onSubmit, this.address, e);
+                this.verifyHasPostcodeChanged();
 
                 if (this.service.isAutocompleteEnabled) {
                     e.preventDefault();
-
-                    const info = await this.onSelectedSuggestion(0);
+                    const info = await this.onSelectedSuggestion();
 
                     // if the address is still missing fields, return here
                     if (!info) {
@@ -273,9 +284,12 @@ export default {
 
                     // TODO process the je last location cookie for international markets...
                 }
+
+                this.$emit(SUBMIT_VALID_ADDRESS);
             } else {
                 e.preventDefault();
                 this.setErrors(this.isValid);
+                this.$emit(SEARCHBOX_ERROR, this.errors);
             }
 
             return true;
@@ -287,6 +301,10 @@ export default {
          * resolve / return specific cases. E.g. if we need more information
          * like the street number we flag this up to the component and display it.
          *
+         * 1. `this.address` is set either via the `index` (clicked on event) or
+         * `keyboardSuggestionIndex` (enter key event) depending on which was used
+         * the address is set accordingly.
+         *
          * */
         onSelectedSuggestion (index) {
             selectedSuggestion(
@@ -294,7 +312,8 @@ export default {
                 this.suggestions,
                 this.requiredFields,
                 this.streetNumber,
-                index
+                index,
+                this.keyboardSuggestionIndex
             ).then(value => {
                 if (value && value.errors) {
                     this.setErrors(value.errors);
@@ -305,8 +324,7 @@ export default {
                 }
             });
 
-            // TODO pass through suggestion index for keyboard behaviour...
-            this.address = this.suggestionFormat(this.suggestions[index]);
+            this.address = this.suggestionFormat(this.suggestions[index || this.keyboardSuggestionIndex]);
         },
 
         /**
@@ -321,11 +339,10 @@ export default {
                 onSubmit: this.onSubmit,
                 formUrl: this.formUrl,
                 form: this.$refs.form,
-                callback: getLastLocation,
                 event
             };
 
-            search(searchPayload);
+            search(searchPayload, getLastLocation());
         },
 
         /**
@@ -338,6 +355,21 @@ export default {
             if (shouldClearAddressOnValidSubmit) {
                 this.address = '';
                 this.setIsDirty(false);
+            }
+        },
+
+        /**
+         * Emits a track postcode change event if the users last address (i.e je-location)
+         * has changed. For example, if they were to change & submit a new valid address in
+         * searchbox.
+         *
+         */
+        verifyHasPostcodeChanged () {
+            if (
+                this.lastAddress
+                && normalisePostcode(this.lastAddress) !== normalisePostcode(this.address)
+            ) {
+                this.$emit(TRACK_POSTCODE_CHANGED);
             }
         }
     }

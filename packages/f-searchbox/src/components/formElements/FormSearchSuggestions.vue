@@ -5,7 +5,8 @@
             :key="index"
             type="button"
             :class="{
-                [$style['c-search-suggestions-item']]: true
+                [$style['c-search-suggestions-item']]: true,
+                [$style.selected]: index === keyboardSuggestionSelection
             }"
             @click="$emit('selected-suggestion', index)">
             {{ suggestionFormat(item) }}
@@ -31,6 +32,11 @@ export default {
         suggestionFormat: {
             type: Function,
             default: () => ({})
+        },
+
+        keyboardSuggestionSelection: {
+            type: Number,
+            default: 0
         }
     },
 
