@@ -45,15 +45,6 @@ describe('f-checkout component tests', () => {
         // expect(CheckoutComponent.getOrderTimeOptionText(2)).toBe('Monday 00:30');
     });
 
-    it('should allow the user to click through different order times', () => {
-        // Act
-        CheckoutComponent.getOrderTimeDropdownOptions().forEach((element) => {
-            element.click();
-        });
-
-        CheckoutComponent.selectOrderTime(' As soon as possible ');
-    });
-
     it('should prevent user from writing a note of over 200 characters', () => {
         // Arrange 
         const usernote = 'A'

@@ -22,12 +22,6 @@ exports.inputs = {
     addressCity: () => $('[data-test-id="input-address-city"]'),
     addressPostcode: () => $('[data-test-id="input-address-postcode"]')
 };
-/**
- * @description
- * Exports array of time dropdown options, to be used by forEach iteration in spec.
- */
-exports.getOrderTimeDropdownOptions = () => $$('[data-test-id="form-select"] select option');
-
 
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
@@ -70,9 +64,7 @@ exports.selectOrderTime = orderTime => {
  * The time of the order should increase when a higher index is applied.
  */
 exports.getOrderTimeOptionText = (index) => {
-    const elements = orderTimeDropdownOptions();
-   
-    return elements[index].getText();
+    return orderTimeDropdownOptions()[index].getText();
 };
 /**
  * @description
