@@ -11,7 +11,12 @@ const orderTimeDropdownOptions = () => $$('[data-test-id="form-select"] select o
 const goToPaymentButton = () => $('[data-test-id="confirm-payment-submit-button"]');
 const allergenLink = () => $('[data-test-id="allergy-button"]');
 
+// Functions 
 
+/**
+ * @description
+ * Exports the list of data-test-ids for input fields, to be used by forEach iteration in spec.
+ */
 exports.inputs = {
     mobileNumber: () => $('[data-test-id="input-mobile-number"]'),
     addressLine1: () => $('[data-test-id="input-address-line-1"]'),
@@ -19,7 +24,11 @@ exports.inputs = {
     addressCity: () => $('[data-test-id="input-address-city"]'),
     addressPostcode: () => $('[data-test-id="input-address-postcode"]')
 };
-exports.orderTimeDropdownOptions = () => $$('[data-test-id="form-select"] select option');
+/**
+ * @description
+ * Exports array of time dropdown options, to be used by forEach iteration in spec.
+ */
+exports.getOrderTimeDropdownOptions = () => $$('[data-test-id="form-select"] select option');
 
 
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
@@ -28,6 +37,7 @@ exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
 exports.isOrderTimeDropdownDisplayed = () => orderTimeDropdown().isDisplayed();
 exports.userNoteMaxCharacterCount = () => userNoteInput().getAttribute('maxlength');
 exports.clickPaymentButton = () => goToPaymentButton().click();
+
 /**
  * @description
  * Inputs address details into the checkout component.
@@ -57,28 +67,26 @@ exports.submitCheckoutForm = addressInfo => {
 exports.selectOrderTime = orderTime => {
     orderTimeDropdown().selectByVisibleText(orderTime);
 };
-
 /** 
  * @description
  * The time of the order should increase when a higher index is applied.
  */
 exports.getOrderTimeOptionText = (index) => {
-    const element = orderTimeDropdownOptions();
+    const elements = orderTimeDropdownOptions();
    
-    return element[index].getText();
+    return elements[index].getText();
 };
 
 /**
  * @description
- * Sets the value of the user note.
+ * Sets the value of the user note and grabs the length of characters.
  *
  * @param {String} userNote The user note value to be entered
  */
-exports.inputUserNoteLength = userNote => {
+exports.getUserNoteLength = userNote => {
     userNoteInput().setValue(userNote);
     return userNoteInput().getValue().length
 };
-
 /**
  * @description
  * Submits the checkout form.
@@ -86,8 +94,3 @@ exports.inputUserNoteLength = userNote => {
 exports.submit = () => {
     goToPaymentButton().click();
 };
-
-exports.getCharacterLength = (userNote) => {
-userNoteInput().setValue(userNote);
-userNoteInput(userNote).getText().length
-}

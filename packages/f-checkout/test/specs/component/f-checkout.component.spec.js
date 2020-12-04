@@ -12,7 +12,7 @@ describe('f-checkout component tests', () => {
         expect(CheckoutComponent.isAllergenLinkDisplayed()).toBe(true);
     });
 
-    forEach(Object.keys(CheckoutComponent.inputs)).it.skip('should display all fields', key => {
+    forEach(Object.keys(CheckoutComponent.inputs)).it('should display all fields', key => {
         // Assert
         expect(CheckoutComponent.inputs[key]().isDisplayed()).toBe(true);
     });
@@ -47,7 +47,7 @@ describe('f-checkout component tests', () => {
 
     it('should allow the user to click through different order times', () => {
         // Act
-        CheckoutComponent.orderTimeDropdownOptions().forEach((element) => {
+        CheckoutComponent.getOrderTimeDropdownOptions().forEach((element) => {
             element.click();
         });
 
@@ -59,16 +59,14 @@ describe('f-checkout component tests', () => {
         const usernote = 'A'
         const maxUserNote = usernote.repeat(300);
 
-        console.log('HEYYY', CheckoutComponent.inputUserNoteLength(maxUserNote))
-
         // Assert
         expect(CheckoutComponent.userNoteMaxCharacterCount()).toEqual('200');
-        expect(CheckoutComponent.inputUserNoteLength(maxUserNote)).toEqual(200)
+        expect(CheckoutComponent.getUserNoteLength(maxUserNote)).toEqual(200)
     });
 
-    it.skip('should enable a user to submit without adding a note', () => {
+    it('should enable a user to submit without adding a note', () => {
         // Act
-        browser.refresh(); 
-        CheckoutComponent.clickPaymentButton(); 
-    })
+        CheckoutComponent.clickPaymentButton();
+        // Waiting for route here, so we can grab redirected url and prove form submits.
+    });
 });
