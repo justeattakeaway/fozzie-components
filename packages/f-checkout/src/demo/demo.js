@@ -1,4 +1,4 @@
-import initialiseDemo from '../../../../test/context/demo';
+import initialiseDemo from '../../../../services/f-development-context/webdriver.entry';
 
 import VueCheckout from '../components/Checkout.vue';
 import CheckoutMock from './checkoutMock';
