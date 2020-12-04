@@ -56,6 +56,17 @@
 
     ```
 
+3.  Call the component in your template:
+
+    ```
+    <vue-button buttonType="secondary" buttonSize="small" isFullWidth/>
+    ```
+
+    Accepted properties:
+    - buttonType - primary, secondary, outline, ghost, link, icon, default is primary
+    - buttonSize - large, medium, small, xsmall, default is medium
+    - isFullWidth - true/false, default is false
+
 ## Development
 
 Running below `yarn` commands from the component folder, starts a development
