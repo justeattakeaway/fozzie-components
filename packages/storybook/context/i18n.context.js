@@ -16,3 +16,5 @@ addDecorator(() => ({
     template: '<story/>',
     i18n
 }));
+
+export default i18n;
