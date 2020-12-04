@@ -12,12 +12,21 @@ describe('f-checkout component tests', () => {
         expect(CheckoutComponent.isAllergenLinkDisplayed()).toBe(true);
     });
 
-    forEach(Object.keys(CheckoutComponent.inputs)).it('should display all fields', key => {
-        // Assert
-        expect(CheckoutComponent.inputs[key]().isDisplayed()).toBe(true);
-    });
+    forEach(['mobileNumber', 'addressLine1', 'addressCity', 'addressPostcode'])
+                .it('each fields error message should be displayed', field => {
+                    // Act
+                    CheckoutComponent.submit();
 
-    // Skip until we have something to assert on
+                    // Assert
+                    expect(CheckoutComponent.isFieldErrorDisplayed(field)).toBe(true);
+                });
+
+    forEach(['mobileNumber', 'addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
+        .it('should display all fields', field => {
+        // Assert
+            expect(CheckoutComponent.isFieldDisplayed(field)).toBe(true);
+        });
+
     it.skip('should submit the checkout form', () => {
         // Arrange
         const addressInfo = {
@@ -29,7 +38,7 @@ describe('f-checkout component tests', () => {
         };
 
         // Act
-        CheckoutComponent.submitCheckoutForm(addressInfo);
+        CheckoutComponent.populateCheckoutForm(addressInfo);
         CheckoutComponent.inputUserNote('No mushrooms!');
         CheckoutComponent.selectFulfillmentTime('As soon as possible');
         CheckoutComponent.submit();
