@@ -1,28 +1,55 @@
-const checkoutComponent = () => $('[data-test-id="checkout-component"]');
+/* global browser, $ */
 
-// Form Fields
-const userNoteInput = () => $('[data-test-id="user-note"] textarea');
+import {
+    ALLERGEN_LINK,
+    CHECKOUT_COMPONENT,
+    FULFILLMENT_TIME_DROPDOWN,
+    USER_NOTE_INPUT,
+    GO_TO_PAYMENT_BUTTON,
+    FIELDS
+} from './f-checkout-selectors';
+
+const { doesElementExist } = require('../../../../test/utils/webdriverio-extensions')(browser);
+
+const checkoutComponent = () => $(CHECKOUT_COMPONENT);
 
 // Dropdown
-const orderTimeDropdown = () => $('[data-test-id="form-select"] select');
-const orderTimeDropdownOptions = () => $$('[data-test-id="form-select"] select option');
 
-// Buttons
-const goToPaymentButton = () => $('[data-test-id="confirm-payment-submit-button"]');
-const allergenLink = () => $('[data-test-id="allergy-button"]');
+const orderTimeDropdown = () => $(ORDER_TIME_DROPDOWN);
+const orderTimeDropdownOptions = () => $$(ORDER_TIME_DROPDOWN_OPTIONS);
 
-/**
- * @description
- * Exports the list of data-test-ids for input fields, to be used by forEach iteration in spec.
- */
-exports.inputs = {
-    mobileNumber: () => $('[data-test-id="input-mobile-number"]'),
-    addressLine1: () => $('[data-test-id="input-address-line-1"]'),
-    addressLine2: () => $('[data-test-id="input-address-line-2"]'),
-    addressCity: () => $('[data-test-id="input-address-city"]'),
-    addressPostcode: () => $('[data-test-id="input-address-postcode"]')
+// Form Fields
+
+const allergenLink = () => $(ALLERGEN_LINK);
+const fulfillmentTimeDropdown = () => $(FULFILLMENT_TIME_DROPDOWN);
+const goToPaymentButton = () => $(GO_TO_PAYMENT_BUTTON);
+const userNoteInput = () => $(USER_NOTE_INPUT);
+
+const fields = {
+    mobileNumber: {
+        input: () => $(FIELDS.mobileNumber.input),
+        error: () => $(FIELDS.mobileNumber.error)
+    },
+    addressLine1: {
+        input: () => $(FIELDS.addressLine1.input),
+        error: () => $(FIELDS.addressLine1.error)
+    },
+    addressLine2: {
+        input: () => $(FIELDS.addressLine2.input),
+        error: ''
+    },
+    addressCity: {
+        input: () => $(FIELDS.addressCity.input),
+        error: () => $(FIELDS.addressCity.error)
+    },
+    addressPostcode: {
+        input: () => $(FIELDS.addressPostcode.input),
+        error: () => $(FIELDS.addressPostcode.error)
+    }
 };
 
+exports.isFieldErrorDisplayed = fieldName => fields[fieldName].error().isDisplayed();
+exports.isFieldDisplayed = fieldName => fields[fieldName].input().isDisplayed();
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
@@ -41,13 +68,13 @@ exports.clickPaymentButton = () => goToPaymentButton().click();
  * @param {String} addressInfo.city City of the user's address
  * @param {String} addressInfo.postcode Postcode of the user's address
  */
-exports.submitCheckoutForm = addressInfo => {
+exports.populateCheckoutForm = addressInfo => {
     exports.waitForCheckoutComponent();
-    mobileNumberInput().setValue(addressInfo.mobileNumber);
-    addressLine1Input().setValue(addressInfo.line1);
-    addressLine2Input().setValue(addressInfo.line2);
-    addressCityInput().setValue(addressInfo.city);
-    addressPostcodeInput().setValue(addressInfo.postcode);
+    fields.mobileNumber.input().setValue(addressInfo.mobileNumber);
+    fields.addressLine1.input().setValue(addressInfo.line1);
+    fields.addressLine2.input().setValue(addressInfo.line2);
+    fields.addressCity.input().setValue(addressInfo.city);
+    fields.addressPostcode.input().setValue(addressInfo.postcode);
 };
 
 /**
@@ -82,4 +109,8 @@ exports.getUserNoteLength = userNote => {
  */
 exports.submit = () => {
     goToPaymentButton().click();
+};
+
+exports.waitForErrorMessage = errorMessage => {
+    doesElementExist(FIELDS[errorMessage].error);
 };
