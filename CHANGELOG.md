@@ -11,10 +11,6 @@ Latest (to be added to next release)
 ### Added
 - Colour-coding to success and fail messages
 - Fozzie bear now either approves or disapproves of your build!
-- Git tag to Slack notification
-
-### Removed
-- Build SHA from Slack notification
 
 
 v2.21.0
