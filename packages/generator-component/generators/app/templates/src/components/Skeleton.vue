@@ -8,12 +8,14 @@
 </template>
 
 <script>
-import VueGlobalisation from '@justeat/f-globalisation';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import tenantConfigs from '../tenants';<% if(needsTestingApiMocks) { %>
 import <%= name.filename%>ServiceApi from '../services/<%= name.filename%>ServiceApi';<%}%>
 
 export default {
     name: '<%= name.component %>',
+
+    mixins: [VueGlobalisationMixin],
 
     props: {
         locale: {
@@ -22,12 +24,10 @@ export default {
         }
     },
 
-    mixins: [VueGlobalisation],
-
     data () {
         return {
             tenantConfigs
-        }
+        };
     }
 };
 </script>

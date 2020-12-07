@@ -23,7 +23,7 @@ export const <%= name.component %>Component = () => ({
             default: select('Locale', VALID_LOCALES, ENGLISH_LOCALE)
         }
     },
-    template: `<<%= name.template %> :locale="locale" />`
+    template: '<<%= name.template %> :locale="locale" />'
 });
 
 <%= name.component %>Component.storyName = 'f-<%= name.default %>';
