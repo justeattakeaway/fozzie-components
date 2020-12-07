@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.16.1
+------------------------------
+*December 4, 2020*
+
+### Changed
+- Updated `Checkout.stories.js` to support new checkoutMock naming for Storybook.
+
+
 v0.16.0
 ------------------------------
 *December 4, 2020*
@@ -10,6 +19,7 @@ v0.16.0
 ### Added
 - Page object model constants for css selectors
 - New test to check for existance of error messages per field
+
 
 v0.15.0
 ------------------------------
