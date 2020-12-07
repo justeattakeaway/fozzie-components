@@ -3,7 +3,8 @@
 import {
     ALLERGEN_LINK,
     CHECKOUT_COMPONENT,
-    FULFILLMENT_TIME_DROPDOWN,
+    ORDER_TIME_DROPDOWN,
+    ORDER_TIME_DROPDOWN_OPTIONS,
     USER_NOTE_INPUT,
     GO_TO_PAYMENT_BUTTON,
     FIELDS
@@ -18,11 +19,13 @@ const checkoutComponent = () => $(CHECKOUT_COMPONENT);
 const orderTimeDropdown = () => $(ORDER_TIME_DROPDOWN);
 const orderTimeDropdownOptions = () => $$(ORDER_TIME_DROPDOWN_OPTIONS);
 
-// Form Fields
+// Buttons
 
 const allergenLink = () => $(ALLERGEN_LINK);
-const fulfillmentTimeDropdown = () => $(FULFILLMENT_TIME_DROPDOWN);
 const goToPaymentButton = () => $(GO_TO_PAYMENT_BUTTON);
+
+// Form Fields
+
 const userNoteInput = () => $(USER_NOTE_INPUT);
 
 const fields = {
@@ -45,6 +48,10 @@ const fields = {
     addressPostcode: {
         input: () => $(FIELDS.addressPostcode.input),
         error: () => $(FIELDS.addressPostcode.error)
+    }, 
+    userNote: {
+        input: () => $(FIELDS.userNote.input), 
+        error: ''
     }
 };
 
@@ -67,6 +74,7 @@ exports.clickPaymentButton = () => goToPaymentButton().click();
  * @param {String} addressInfo.line2 Second line of the user's address
  * @param {String} addressInfo.city City of the user's address
  * @param {String} addressInfo.postcode Postcode of the user's address
+ * @param {String} addressInfo.note The user's extra note
  */
 exports.populateCheckoutForm = addressInfo => {
     exports.waitForCheckoutComponent();
@@ -75,6 +83,7 @@ exports.populateCheckoutForm = addressInfo => {
     fields.addressLine2.input().setValue(addressInfo.line2);
     fields.addressCity.input().setValue(addressInfo.city);
     fields.addressPostcode.input().setValue(addressInfo.postcode);
+    fields.userNote.input().setValue(addressInfo.note);
 };
 
 /**

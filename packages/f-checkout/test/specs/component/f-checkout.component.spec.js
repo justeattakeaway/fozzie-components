@@ -11,6 +11,12 @@ describe('f-checkout component tests', () => {
         // Assert
         expect(CheckoutComponent.isAllergenLinkDisplayed()).toBe(true);
     });
+    
+    forEach(['mobileNumber', 'addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
+        .it('should display all fields', field => {
+        // Assert
+            expect(CheckoutComponent.isFieldDisplayed(field)).toBe(true);
+        });
 
     forEach(['mobileNumber', 'addressLine1', 'addressCity', 'addressPostcode'])
                 .it('each fields error message should be displayed', field => {
@@ -21,43 +27,29 @@ describe('f-checkout component tests', () => {
                     expect(CheckoutComponent.isFieldErrorDisplayed(field)).toBe(true);
                 });
 
-    forEach(['mobileNumber', 'addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
-        .it('should display all fields', field => {
-        // Assert
-            expect(CheckoutComponent.isFieldDisplayed(field)).toBe(true);
-        });
-
-    it.skip('should submit the checkout form', () => {
+    it.only('should submit the checkout form', () => {
         // Arrange
         const addressInfo = {
             mobileNumber: '07777777779',
             line1: 'Test House',
             line2: 'High Street',
             city: 'Test City',
-            postcode: 'AR51 1AA'
+            postcode: 'AR51 1AA', 
+            // note: 'No mushrooms! Doorbell number 2'
         };
 
-        const usernote = 'No mushrooms! Doorbell number 2'
-
         // Act
-<<<<<<< HEAD
-        CheckoutComponent.submitCheckoutForm(addressInfo);
-        CheckoutComponent.inputUserNote(usernote);
-        CheckoutComponent.selectOrderTime('As soon as possible');
-=======
         CheckoutComponent.populateCheckoutForm(addressInfo);
-        CheckoutComponent.inputUserNote('No mushrooms!');
-        CheckoutComponent.selectFulfillmentTime('As soon as possible');
->>>>>>> master
+        CheckoutComponent.selectOrderTime('As soon as possible');
         CheckoutComponent.submit();
     });
 
     it('should display times in ascending order, with default text "As soon as possible" showing first', () => {
         // Assert
         expect(CheckoutComponent.isOrderTimeDropdownDisplayed()).toBe(true);
-        // expect(CheckoutComponent.getOrderTimeOptionText(0)).toBe('As soon as possible');
-        // expect(CheckoutComponent.getOrderTimeOptionText(1)).toBe('Monday 00:15');
-        // expect(CheckoutComponent.getOrderTimeOptionText(2)).toBe('Monday 00:30');
+        expect(CheckoutComponent.getOrderTimeOptionText(0)).toBe('As soon as possible');
+        expect(CheckoutComponent.getOrderTimeOptionText(1)).toBe('Monday 00:15');
+        expect(CheckoutComponent.getOrderTimeOptionText(2)).toBe('Monday 00:30');
     });
 
     it('should prevent user from writing a note of over 200 characters', () => {
@@ -73,6 +65,6 @@ describe('f-checkout component tests', () => {
     it('should enable a user to submit without adding a note', () => {
         // Act
         CheckoutComponent.clickPaymentButton();
-        // Waiting for route here, so we can grab redirected url and prove form submits.
+        // Waiting for route here, so we can grab redirected url and show form submits.
     });
 });
