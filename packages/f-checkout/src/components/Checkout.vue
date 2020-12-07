@@ -25,6 +25,7 @@
                 <form-field
                     v-model="customer.mobileNumber"
                     name="mobile-number"
+                    data-test-id="input-mobile-number"
                     :label-text="$t('labels.mobileNumber')"
                     :has-error="!isMobileNumberValid">
                     <template #error>
