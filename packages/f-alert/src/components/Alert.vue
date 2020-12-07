@@ -18,7 +18,7 @@
                 data-test-id="alert-heading">
                 {{ heading }}
             </h2>
-            <vue-button
+            <button-component
                 v-if="isDismissible"
                 type="button"
                 :class="[$style['c-alert-dismiss']]"
@@ -32,7 +32,7 @@
                 <span class="is-visuallyHidden">
                     {{ copy.dismissAlertText }}
                 </span>
-            </vue-button>
+            </button-component>
         </div>
         <div
             :class="$style['c-alert-content']">
@@ -50,7 +50,7 @@ import {
     WarningIcon
 } from '@justeat/f-vue-icons';
 import { globalisationServices } from '@justeat/f-services';
-import VueButton from '@justeat/f-button';
+import ButtonComponent from '@justeat/f-button';
 import tenantConfigs from '../tenants';
 import '@justeat/f-button/dist/f-button.css';
 
@@ -62,7 +62,7 @@ export default {
         InfoIcon,
         SuccessIcon,
         WarningIcon,
-        VueButton
+        ButtonComponent
     },
     props: {
         locale: {
