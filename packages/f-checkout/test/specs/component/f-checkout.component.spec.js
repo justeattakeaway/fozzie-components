@@ -40,8 +40,11 @@ describe('f-checkout component tests', () => {
 
         // Act
         CheckoutComponent.populateCheckoutForm(addressInfo);
-        CheckoutComponent.selectOrderTime('As soon as possible');
+        CheckoutComponent.selectOrderTime('Monday 00:15');
         CheckoutComponent.submit();
+
+        // Assert
+        // Waiting for route here, so we can grab redirect url and show form submits.
     });
 
     it('should display times in ascending order, with default text "As soon as possible" showing first', () => {
@@ -54,17 +57,33 @@ describe('f-checkout component tests', () => {
 
     it('should prevent user from writing a note of over 200 characters', () => {
         // Arrange 
-        const usernote = 'A'
-        const maxUserNote = usernote.repeat(300);
+        const userNote = 'A'
+        const addressInfo = {
+            note: userNote.repeat(300)
+        };
 
         // Assert
         expect(CheckoutComponent.userNoteMaxCharacterCount()).toEqual('200');
-        expect(CheckoutComponent.getUserNoteLength(maxUserNote)).toEqual(200);
+        expect(CheckoutComponent.getUserNoteLength(addressInfo)).toEqual(200);
     });
 
     it('should enable a user to submit without adding a note', () => {
+        // Arrange
+        const addressInfo = {
+            mobileNumber: '07777777779',
+            line1: 'Test House',
+            line2: 'High Street',
+            city: 'Test City',
+            postcode: 'AR51 1AA', 
+            note: ''
+        };
+
         // Act
-        CheckoutComponent.clickPaymentButton();
-        // Waiting for route here, so we can grab redirected url and show form submits.
+        CheckoutComponent.populateCheckoutForm(addressInfo);
+        CheckoutComponent.selectOrderTime('Monday 00:30');
+        CheckoutComponent.submit();
+        
+        // Assert
+        // Waiting for route here, so we can grab redirect url and show form submits.
     });
 });

@@ -105,11 +105,11 @@ exports.getOrderTimeOptionText = (index) => {
 /**
  * @description
  * Sets the value of the user note and grabs the length of characters.
- *
- * @param {String} userNote The user note value to be entered
+ * @param {Object} addressInfo The user note value to be entered
+ * @param {String} addressInfo.note The user's extra note
  */
-exports.getUserNoteLength = userNote => {
-    userNoteInput().setValue(userNote);
+exports.getUserNoteLength = addressInfo => {
+    fields.userNote.input().setValue(addressInfo.note);;
     return userNoteInput().getValue().length;
 };
 /**
