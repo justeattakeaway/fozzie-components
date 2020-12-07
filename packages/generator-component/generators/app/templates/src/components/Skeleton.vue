@@ -1,35 +1,33 @@
 <template>
     <div
-        :data-theme="theme"
+        data-theme="jet"
         :class="$style['c-<%= name.class %>']"
         data-test-id='<%= name.class %>-component'>
-        {{ copy.text }}
+        {{ $t('text') }}
     </div>
 </template>
 
 <script>
-import { globalisationServices } from '@justeat/f-services';
+import VueGlobalisation from '@justeat/f-globalisation';
 import tenantConfigs from '../tenants';<% if(needsTestingApiMocks) { %>
 import <%= name.filename%>ServiceApi from '../services/<%= name.filename%>ServiceApi';<%}%>
 
 export default {
     name: '<%= name.component %>',
-    components: {},
+
     props: {
         locale: {
             type: String,
             default: ''
         }
     },
-    data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
-        const theme = globalisationServices.getTheme(locale);
 
+    mixins: [VueGlobalisation],
+
+    data () {
         return {
-            copy: { ...localeConfig },
-            theme
-        };
+            tenantConfigs
+        }
     }
 };
 </script>

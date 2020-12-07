@@ -30,6 +30,7 @@
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-<%= name.default %> ./src/index.js",
     "demo": "vue serve --port 8080 ./src/demo/Index.vue",
+    "test": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
@@ -50,6 +51,7 @@
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
+    "@justeat/f-globalisation": "0.2.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
