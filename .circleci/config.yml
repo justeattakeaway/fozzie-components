@@ -44,16 +44,16 @@ commands:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*Commiter*:${CIRCLE_USERNAME}"
+                      "text": "*Author*: ${CIRCLE_USERNAME}"
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "*SHA*:${CIRCLE_SHA1}"
+                      "text": "*Tag*: ${CIRCLE_TAG}"
                     }
                   ],
                   "accessory": {
                     "type": "image",
-                    "image_url": "https://avatars3.githubusercontent.com/u/30729620?s=400&u=61309ea885d27e19266fa986dac9194defb45197&v=4",
+                    "image_url": "https://user-images.githubusercontent.com/26894168/101182589-31708380-3646-11eb-80d5-b174d47bf7fb.png",
                     "alt_text": "Fozzie Logo"
                   }
                 },
@@ -70,7 +70,8 @@ commands:
                     }
                   ]
                 }
-              ]
+              ],
+              "color": "danger"
             }
 
   slack_notify_success:
@@ -91,16 +92,16 @@ commands:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*Commiter*:${CIRCLE_USERNAME}"
+                      "text": "*Author*: ${CIRCLE_USERNAME}"
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "*SHA*:${CIRCLE_SHA1}"
+                      "text": "*Tag*: ${CIRCLE_TAG}"
                     }
                   ],
                   "accessory": {
                     "type": "image",
-                    "image_url": "https://avatars3.githubusercontent.com/u/30729620?s=400&u=61309ea885d27e19266fa986dac9194defb45197&v=4",
+                    "image_url": "https://user-images.githubusercontent.com/26894168/101182641-4220f980-3646-11eb-8782-29a6a2213815.png",
                     "alt_text": "Fozzie Logo"
                   }
                 },
@@ -117,7 +118,8 @@ commands:
                     }
                   ]
                 }
-              ]
+              ],
+              "color": "good"
             }
 
 executors:
