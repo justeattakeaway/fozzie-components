@@ -35,44 +35,46 @@ commands:
           custom: |
             {
               "attachments": [
-                "blocks": [
-                  {
-                    "type": "section",
-                    "text": {
-                      "type": "mrkdwn",
-                      "text": "Your job *${CIRCLE_JOB}* has failed ⚠️"
-                    },
-                    "fields": [
-                      {
+                {
+                  "blocks": [
+                    {
+                      "type": "section",
+                      "text": {
                         "type": "mrkdwn",
-                        "text": "*Author*: ${CIRCLE_USERNAME}"
+                        "text": "Your job *${CIRCLE_JOB}* has failed ⚠️"
                       },
-                      {
-                        "type": "mrkdwn",
-                        "text": "*Commit*: ${CIRCLE_SHA1}"
-                      }
-                    ],
-                    "accessory": {
-                      "type": "image",
-                      "image_url": "https://user-images.githubusercontent.com/26894168/101182589-31708380-3646-11eb-80d5-b174d47bf7fb.png",
-                      "alt_text": "Fozzie Logo"
-                    }
-                  },
-                  {
-                    "type": "actions",
-                    "elements": [
-                      {
-                        "type": "button",
-                        "text": {
-                          "type": "plain_text",
-                          "text": "View Job"
+                      "fields": [
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Author*: ${CIRCLE_USERNAME}"
                         },
-                        "url": "${CIRCLE_BUILD_URL}"
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Commit*: ${CIRCLE_SHA1}"
+                        }
+                      ],
+                      "accessory": {
+                        "type": "image",
+                        "image_url": "https://user-images.githubusercontent.com/26894168/101182589-31708380-3646-11eb-80d5-b174d47bf7fb.png",
+                        "alt_text": "Fozzie Logo"
                       }
-                    ]
-                  }
-                ],
-                "color": "danger"
+                    },
+                    {
+                      "type": "actions",
+                      "elements": [
+                        {
+                          "type": "button",
+                          "text": {
+                            "type": "plain_text",
+                            "text": "View Job"
+                          },
+                          "url": "${CIRCLE_BUILD_URL}"
+                        }
+                      ]
+                    }
+                  ],
+                  "color": "danger"
+                }
               ]
             }
 
@@ -85,44 +87,46 @@ commands:
           custom: |
             {
               "attachments": [
-                "blocks": [
-                  {
-                    "type": "section",
-                    "text": {
-                      "type": "mrkdwn",
-                      "text": "Your job *${CIRCLE_JOB}* has succeeded 🎉"
-                    },
-                    "fields": [
-                      {
+                {
+                  "blocks": [
+                    {
+                      "type": "section",
+                      "text": {
                         "type": "mrkdwn",
-                        "text": "*Author*: ${CIRCLE_USERNAME}"
+                        "text": "Your job *${CIRCLE_JOB}* has succeeded 🎉"
                       },
-                      {
-                        "type": "mrkdwn",
-                        "text": "*Commit*: ${CIRCLE_SHA1}"
-                      }
-                    ],
-                    "accessory": {
-                      "type": "image",
-                      "image_url": "https://user-images.githubusercontent.com/26894168/101182641-4220f980-3646-11eb-8782-29a6a2213815.png",
-                      "alt_text": "Fozzie Logo"
-                    }
-                  },
-                  {
-                    "type": "actions",
-                    "elements": [
-                      {
-                        "type": "button",
-                        "text": {
-                          "type": "plain_text",
-                          "text": "View Job"
+                      "fields": [
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Author*: ${CIRCLE_USERNAME}"
                         },
-                        "url": "${CIRCLE_BUILD_URL}"
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Commit*: ${CIRCLE_SHA1}"
+                        }
+                      ],
+                      "accessory": {
+                        "type": "image",
+                        "image_url": "https://user-images.githubusercontent.com/26894168/101182641-4220f980-3646-11eb-8782-29a6a2213815.png",
+                        "alt_text": "Fozzie Logo"
                       }
-                    ]
-                  }
-                ],
-                "color": "good"
+                    },
+                    {
+                      "type": "actions",
+                      "elements": [
+                        {
+                          "type": "button",
+                          "text": {
+                            "type": "plain_text",
+                            "text": "View Job"
+                          },
+                          "url": "${CIRCLE_BUILD_URL}"
+                        }
+                      ]
+                    }
+                  ],
+                  "color": "good"
+                }
               ]
             }
 
