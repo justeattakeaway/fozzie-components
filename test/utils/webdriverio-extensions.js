@@ -1,3 +1,3 @@
 module.exports = browser => ({
-    doesElementExist: selector => browser.findElements(selector).length > 0
+    doesElementExist: selector => $$(selector).length > 0
 });
