@@ -253,7 +253,7 @@ describe('Checkout', () => {
 
             it('should emit success event when all the fields are populated correctly', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue(defaultState.customer.mobileNumber);
+                wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue(defaultState.customer.mobileNumber);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -265,7 +265,7 @@ describe('Checkout', () => {
 
             it('should show error message and emit failure event when the mobile number field is not populated', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue('');
+                wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue('');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -280,7 +280,7 @@ describe('Checkout', () => {
 
             it('should show error message and emit failure event when the mobile number field is populated with a < 10 numbers', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue('077777');
+                wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue('077777');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -295,7 +295,7 @@ describe('Checkout', () => {
 
             it('should show error message and emit failure event when the mobile number field is populated with non numeric value', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue('hs;-j`$e&1l');
+                wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue('hs;-j`$e&1l');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -344,10 +344,10 @@ describe('Checkout', () => {
 
             it('should emit success event when all fields are populated correctly', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-mobile-number"]').setValue(defaultState.customer.mobileNumber);
-                wrapper.find('[data-test-id="input-address-line-1"]').setValue(defaultState.fulfillment.address.line1);
-                wrapper.find('[data-test-id="input-address-city"]').setValue(defaultState.fulfillment.address.city);
-                wrapper.find('[data-test-id="input-address-postcode"]').setValue(defaultState.fulfillment.address.postcode);
+                wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue(defaultState.customer.mobileNumber);
+                wrapper.find('[data-test-id="formfield-address-line-1-input"]').setValue(defaultState.fulfillment.address.line1);
+                wrapper.find('[data-test-id="formfield-address-city-input"]').setValue(defaultState.fulfillment.address.city);
+                wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue(defaultState.fulfillment.address.postcode);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -392,7 +392,7 @@ describe('Checkout', () => {
 
             it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-address-postcode"]').setValue('?!hdb-se');
+                wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue('?!hdb-se');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -407,7 +407,7 @@ describe('Checkout', () => {
 
             it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-address-postcode"]').setValue('EC4M 7R');
+                wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue('EC4M 7R');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -468,14 +468,14 @@ describe('Checkout', () => {
             });
 
             it('should set mobile number', async () => {
-                expect(wrapper.find('[data-test-id="input-mobile-number"]').element.value).toBe(defaultState.customer.mobileNumber);
+                expect(wrapper.find('[data-test-id="formfield-mobile-number-input"]').element.value).toBe(defaultState.customer.mobileNumber);
             });
 
             it('should set address fields', async () => {
-                expect(wrapper.find('[data-test-id="input-address-line-1"]').element.value).toBe(defaultState.fulfillment.address.line1);
-                expect(wrapper.find('[data-test-id="input-address-line-2"]').element.value).toBe(defaultState.fulfillment.address.line2);
-                expect(wrapper.find('[data-test-id="input-address-city"]').element.value).toBe(defaultState.fulfillment.address.city);
-                expect(wrapper.find('[data-test-id="input-address-postcode"]').element.value).toBe(defaultState.fulfillment.address.postcode);
+                expect(wrapper.find('[data-test-id="formfield-address-line-1-input"]').element.value).toBe(defaultState.fulfillment.address.line1);
+                expect(wrapper.find('[data-test-id="formfield-address-line-2-input"]').element.value).toBe(defaultState.fulfillment.address.line2);
+                expect(wrapper.find('[data-test-id="formfield-address-city-input"]').element.value).toBe(defaultState.fulfillment.address.city);
+                expect(wrapper.find('[data-test-id="formfield-address-postcode-input"]').element.value).toBe(defaultState.fulfillment.address.postcode);
             });
         });
     });

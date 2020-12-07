@@ -9,7 +9,12 @@ v0.16.0
 
 ### Added
 - Page object model constants for css selectors
-- New test to check for existance of error messages per field
+- New test to check for existence of error messages per field
+
+### Changed
+- `f-form-field` version.
+- `data-test-id` references in tests.
+
 
 v0.15.0
 ------------------------------
