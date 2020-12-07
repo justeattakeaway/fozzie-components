@@ -27,7 +27,7 @@ export const FIELDS = {
         error: '[data-test-id="error-address-postcode-empty"]'
     },
     userNote: {
-        input: '[data-test-id="user-note"]', 
+        input: '[data-test-id="user-note"] textarea', 
         error: ''
     }
 };

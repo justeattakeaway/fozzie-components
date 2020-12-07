@@ -27,7 +27,7 @@ describe('f-checkout component tests', () => {
                     expect(CheckoutComponent.isFieldErrorDisplayed(field)).toBe(true);
                 });
 
-    it.only('should submit the checkout form', () => {
+    it('should submit the checkout form', () => {
         // Arrange
         const addressInfo = {
             mobileNumber: '07777777779',
@@ -35,7 +35,7 @@ describe('f-checkout component tests', () => {
             line2: 'High Street',
             city: 'Test City',
             postcode: 'AR51 1AA', 
-            // note: 'No mushrooms! Doorbell number 2'
+            note: 'No mushrooms! Doorbell number 2'
         };
 
         // Act
