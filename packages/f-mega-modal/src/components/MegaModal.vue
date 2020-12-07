@@ -38,8 +38,7 @@
                         data-test-id="close-modal"
                         @click.native="close">
                         <cross-icon
-                            :class="[$style['c-megaModal-closeIcon']]"
-                        />
+                            :class="[$style['c-megaModal-closeIcon']]" />
                         <span class="is-visuallyHidden">
                             {{ closeButtonCopy }}
                         </span>
