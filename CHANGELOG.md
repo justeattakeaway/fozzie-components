@@ -9,7 +9,6 @@ Latest (to be added to next release)
 *December 4, 2020*
 
 ### Added
-- Colour-coding to success and fail messages
 - Fozzie bear now either approves or disapproves of your build!
 
 
