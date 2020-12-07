@@ -8,10 +8,14 @@ v1.9.0
 *December 07, 2020*
 
 ### Added
-- F-Globalisation wiring to the component template
+- Wire Up F-Globalisation and F-Development-Context
 
 ### Removed
 - Erroneous props in the story template
+
+### Fixed
+- Test Script was wrongly removed
+- Yeoman dep was wrongly removed
 
 
 v1.8.0
