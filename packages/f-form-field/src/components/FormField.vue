@@ -250,85 +250,85 @@ $form-input-padding                       : spacing(x1.5) spacing(x2);
 $form-input-fontSize                      : 'body-l';
 $form-input-focus                         : $blue--light;
 
-.c-formField--unGrouped {
-    & + & {
-        margin-top: spacing(x2);
-    }
-}
-
-.c-formField-inputWrapper {
-    position: relative;
-}
-
-.c-formField-input {
-    width: 100%;
-    font-family: $font-family-base;
-    @include font-size($form-input-fontSize);
-    font-weight: $font-weight-base;
-    color: $form-input-textColour;
-    @include rem(height, $form-input-height); //convert height to rem
-
-    background-color: $form-input-bg;
-    border: $form-input-borderWidth solid $form-input-borderColour;
-    border-radius: $form-input-borderRadius;
-    background-clip: padding-box;
-    padding: $form-input-padding;
-
-    &:hover {
-        background-color: $form-input-bg--hover;
+    .c-formField-inputWrapper {
+        position: relative;
     }
 
-    .c-formField--invalid & {
-        border-color: $form-input-borderColour--invalid;
-    }
+    .c-formField-input {
+        width: 100%;
+        font-family: $font-family-base;
+        @include font-size($form-input-fontSize);
+        font-weight: $font-weight-base;
+        color: $form-input-textColour;
+        @include rem(height, $form-input-height); //convert height to rem
 
-    // Disabled state
-    &[disabled] {
-        cursor: not-allowed;
+        background-color: $form-input-bg;
+        border: $form-input-borderWidth solid $form-input-borderColour;
+        border-radius: $form-input-borderRadius;
+        background-clip: padding-box;
+        padding: $form-input-padding;
 
-        &,
         &:hover {
-            background-color: $form-input-bg--disabled;
-            color: $form-input-textColour--disabled;
-            border-color: $form-input-borderColour--disabled;
+            background-color: $form-input-bg--hover;
+        }
+
+        .c-formField--invalid & {
+            border-color: $form-input-borderColour--invalid;
+        }
+
+        // Disabled state
+        &[disabled] {
+            cursor: not-allowed;
+
+            &,
+            &:hover {
+                background-color: $form-input-bg--disabled;
+                color: $form-input-textColour--disabled;
+                border-color: $form-input-borderColour--disabled;
+            }
         }
     }
-}
 
-.c-formField-input--focus {
-    &:focus,
-    &:active,
-    &:focus-within {
-        box-shadow: 0 0 0 2pt $form-input-focus;
-        outline: none;
+    .c-formField-input--focus {
+        &:focus,
+        &:active,
+        &:focus-within {
+            box-shadow: 0 0 0 2pt $form-input-focus;
+            outline: none;
+        }
     }
-}
 
-.c-formField-dropdownContainer {
-    padding: 0;
-}
-
-.c-formField--groupedtop {
-    .c-formField-input {
-        border-radius: $form-input-borderRadius $form-input-borderRadius 0 0;
+    .c-formField-dropdownContainer {
+        padding: 0;
     }
-}
 
-.c-formField--groupedmiddle {
-    margin-top: 0;
-
-    .c-formField-input {
-        border-top: none;
-        border-radius: 0;
+    .c-formField--groupedtop {
+        .c-formField-input {
+            border-radius: $form-input-borderRadius $form-input-borderRadius 0 0;
+        }
     }
-}
 
-.c-formField--groupedbottom {
-    margin-top: 0;
+    .c-formField--groupedmiddle {
+        margin-top: 0;
 
-    .c-formField-input {
-        border-top: none;
-        border-radius: 0 0 $form-input-borderRadius $form-input-borderRadius;
+        .c-formField-input {
+            border-top: none;
+            border-radius: 0;
+        }
     }
-}
+
+    .c-formField--groupedbottom {
+        margin-top: 0;
+
+        .c-formField-input {
+            border-top: none;
+            border-radius: 0 0 $form-input-borderRadius $form-input-borderRadius;
+        }
+    }
+
+    .c-formField--unGrouped {
+        & + & {
+            margin-top: spacing(x2);
+        }
+    }
 </style>
