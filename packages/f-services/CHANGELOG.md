@@ -5,10 +5,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.7.0
 ------------------------------
-*December 1, 2020*
+*December 7, 2020*
 
 ### Added
 - `es-ES` validations to postcode and phone validations.
+
 ### Changed
 - `isValidPostcode` to accept locale.
 
@@ -19,6 +20,7 @@ v1.6.0
 
 ### Added
 - `getDeepObjectByPath` to `utilities.js` to traverse an object using a given path.
+
 ### Changed
 - `getFormValidationState` function to return the full path of a nested object.
 
