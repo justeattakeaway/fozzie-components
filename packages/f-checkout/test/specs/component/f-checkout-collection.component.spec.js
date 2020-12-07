@@ -4,7 +4,7 @@ import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.
 
 describe('f-checkout "collection" component tests', () => {
     forEach(['mobileNumber'])
-    .it.only('each fields error message should be displayed', field => {
+    .it('each fields error message should be displayed', field => {
         // Arrange
         DemoControls.selectCheckoutMethod('collection');
 
