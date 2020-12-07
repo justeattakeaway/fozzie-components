@@ -120,6 +120,5 @@ exports.submit = () => {
     goToPaymentButton().click();
 };
 
-exports.waitForErrorMessage = errorMessage => {
-    doesElementExist(FIELDS[errorMessage].error);
-};
+exports.doesErrorMessageExist = errorMessage => doesElementExist(FIELDS[errorMessage].error);
+exports.doesInputFieldExist = inputField => doesElementExist(FIELDS[inputField].input);

@@ -4,17 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (to be added to next release)
+v2.21.1
 ------------------------------
-*December 4, 2020*
+*December 7, 2020*
+
+### Fixed
+- Broken test helper function.
 
 ### Added
 - Colour-coding to success and fail messages
 - Fozzie bear now either approves or disapproves of your build!
-- Git tag to Slack notification
-
-### Removed
-- Build SHA from Slack notification
 
 
 v2.21.0
