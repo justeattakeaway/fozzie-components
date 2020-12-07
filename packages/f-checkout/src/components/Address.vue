@@ -12,8 +12,6 @@
                 data-test-id="input-address-line-1"
                 :label-text="$t('labels.line1')"
                 label-style="inline"
-                is-grouped
-                group-position="top"
                 :has-error="isAddressLine1Empty">
                 <template #error>
                     <error-message
@@ -29,8 +27,6 @@
                 v-model="fulfillment.address.line2"
                 :class="$style['c-address-formField']"
                 name="address-line-2"
-                is-grouped
-                group-position="bottom"
                 data-test-id="input-address-line-2"
                 :label-text="$t('labels.line2')"
                 label-style="inline" />
@@ -146,12 +142,14 @@ $address-weight-bold     : $font-weight-bold;
 }
 
 .c-address-group {
-    margin: spacing(x2) 0;
+    margin: spacing(x2) 0 spacing(x4);
     padding: 0;
     border: none;
     @include font-size($address-fontSize);
 
     .c-address-formField {
+        margin-bottom: -17px;
+
         &:focus-within,
         &:active {
             z-index: zIndex(high);

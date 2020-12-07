@@ -49,7 +49,7 @@
     "@justeat/f-button": "0.3.0",
     "@justeat/f-card": "0.8.0",
     "@justeat/f-error-message": "0.3.0",
-    "@justeat/f-form-field": "file:.yalc/@justeat/f-form-field",
+    "@justeat/f-form-field": "1.4.0",
     "@justeat/f-globalisation": "0.2.0",
     "@justeat/f-services": "1.6.0",
     "axios": "0.20.0",
