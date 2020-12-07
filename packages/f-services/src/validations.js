@@ -32,7 +32,7 @@ const getFormValidationState = $v => {
 const POSTCODE_REGEX = {
     // https://stackoverflow.com/questions/164979/uk-postcode-regex-comprehensive#164994
     'en-GB': /^([Gg][Ii][Rr]\s?0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/,
-    'es-ES': /^(?:0[1-9]|[1-4]\d|5[0-2])\d{3}$/
+    'es-ES': /^\d{5}$/
 };
 
 const isValidPostcode = (postcode, locale) => POSTCODE_REGEX[locale].test(postcode);
@@ -47,7 +47,7 @@ const meetsCharacterValidationRules = value => /^[\u0060\u00C0-\u00F6\u00F8-\u01
 
 const PHONE_REGEX = {
     'en-GB': /^(\+(44))?[0-9]{10,11}$/,
-    'es-ES': /^(\+(34))?[0-9]{9,}$/
+    'es-ES': /^\d{9,}$/
 };
 
 const isValidPhoneNumber = (number, locale) => PHONE_REGEX[locale].test(number);
