@@ -4,6 +4,8 @@
         :class="[
             $style['c-formField'], {
                 [$style['c-formField--invalid']]: hasError
+            }, {
+                [$style[`c-formField--grouped${groupPosition}`]]: isGrouped
             }
         ]"
         :data-test-id="testId.container">
@@ -71,6 +73,7 @@ import {
     DEFAULT_INPUT_TYPE,
     VALID_INPUT_TYPES,
     VALID_LABEL_STYLES,
+    VALID_GROUP_POSITION,
     MOBILE_WIDTH
 } from '../constants';
 
@@ -120,6 +123,17 @@ export default {
         dropdownOptions: {
             type: Array,
             default: () => null
+        },
+
+        isGrouped: {
+            type: Boolean,
+            default: false
+        },
+
+        groupPosition: {
+            type: String,
+            default: 'middle',
+            validator: value => (VALID_GROUP_POSITION.indexOf(value) !== -1) // The prop value must match one of the valid input types
         }
     },
 
@@ -242,6 +256,7 @@ $form-input-focus                         : $blue--light;
         margin-top: spacing(x2);
     }
 }
+
     .c-formField-inputWrapper {
         position: relative;
     }
@@ -290,8 +305,31 @@ $form-input-focus                         : $blue--light;
         }
     }
 
-        .c-formField-dropdownContainer {
-            padding: 0;
-        }
+    .c-formField-dropdownContainer {
+        padding: 0;
+    }
 
+    .c-formField--groupedtop {
+        .c-formField-input {
+            border-radius: $form-input-borderRadius $form-input-borderRadius 0 0;
+        }
+    }
+
+    .c-formField--groupedmiddle {
+        margin-top: 0;
+
+        .c-formField-input {
+            border-top: none;
+            border-radius: 0;
+        }
+    }
+
+    .c-formField--groupedbottom {
+        margin-top: 0;
+
+        .c-formField-input {
+            border-top: none;
+            border-radius: 0 0 $form-input-borderRadius $form-input-borderRadius;
+        }
+    }
 </style>
