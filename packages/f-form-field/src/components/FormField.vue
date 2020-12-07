@@ -73,7 +73,7 @@ import {
     DEFAULT_INPUT_TYPE,
     VALID_INPUT_TYPES,
     VALID_LABEL_STYLES,
-    VALID_GROUP_POSITION,
+    VALID_GROUP_POSITIONS,
     MOBILE_WIDTH
 } from '../constants';
 
@@ -133,7 +133,7 @@ export default {
         groupPosition: {
             type: String,
             default: 'middle',
-            validator: value => (VALID_GROUP_POSITION.indexOf(value) !== -1) // The prop value must match one of the valid input types
+            validator: value => (VALID_GROUP_POSITIONS.indexOf(value) !== -1)
         }
     },
 

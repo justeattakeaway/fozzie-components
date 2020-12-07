@@ -3,7 +3,7 @@ import {
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import FormField from '../src/components/FormField.vue';
-import { CUSTOM_INPUT_TYPES, VALID_INPUT_TYPES, VALID_LABEL_STYLES, VALID_GROUP_POSITION } from '../src/constants';
+import { CUSTOM_INPUT_TYPES, VALID_INPUT_TYPES, VALID_LABEL_STYLES, VALID_GROUP_POSITIONS } from '../src/constants';
 
 export default {
     title: 'Components/Atoms',
@@ -35,7 +35,7 @@ export const FormFieldComponent = () => ({
             default: boolean('isGrouped', false)
         },
         groupPosition: {
-            default: select('Group Position', VALID_GROUP_POSITION)
+            default: select('Group Position', VALID_GROUP_POSITIONS)
         }
     },
     parameters: {
