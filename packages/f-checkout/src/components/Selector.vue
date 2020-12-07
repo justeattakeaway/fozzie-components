@@ -1,7 +1,6 @@
 <template>
     <form-dropdown
         id="time-selection"
-        data-test-id="form-select"
         name="order-time"
         :class="$style['c-checkout-selector']"
         input-type="dropdown"
