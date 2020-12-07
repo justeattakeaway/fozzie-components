@@ -1,6 +1,6 @@
 import Vue from 'vue';
+import setupContext from '../../context';
 
-// Setup Context as a Web Host (I18n, Cookies etc)
-import '../../context/index';
+setupContext();
 
 Vue.config.devtools = true;

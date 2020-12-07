@@ -16,8 +16,8 @@ Vue.use(Vuex);
 const deliveryUrl = '/checkout-delivery.json';
 const collectionUrl = '/checkout-collection.json';
 
-CheckoutMock.setupDelivery(deliveryUrl);
-CheckoutMock.setupCollection(collectionUrl);
+CheckoutMock.setupCheckoutMethod(deliveryUrl);
+CheckoutMock.setupCheckoutMethod(collectionUrl);
 
 export default {
     title: 'Components/Organisms',

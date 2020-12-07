@@ -29,10 +29,13 @@ const getFormValidationState = $v => {
     };
 };
 
-// https://stackoverflow.com/questions/164979/uk-postcode-regex-comprehensive#164994
-const POSTCODE_REGEX = /^([Gg][Ii][Rr]\s?0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/;
+const POSTCODE_REGEX = {
+    // https://stackoverflow.com/questions/164979/uk-postcode-regex-comprehensive#164994
+    'en-GB': /^([Gg][Ii][Rr]\s?0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})$/,
+    'es-ES': /^\d{5}$/
+};
 
-const isValidPostcode = postcode => POSTCODE_REGEX.test(postcode);
+const isValidPostcode = (postcode, locale) => POSTCODE_REGEX[locale].test(postcode);
 
 /**
  * Tests for existence of valid chars only in a string.
@@ -42,7 +45,10 @@ const isValidPostcode = postcode => POSTCODE_REGEX.test(postcode);
  */
 const meetsCharacterValidationRules = value => /^[\u0060\u00C0-\u00F6\u00F8-\u017Fa-zA-Z-' ]*$/.test(value);
 
-const PHONE_REGEX = { 'en-GB': /^(\+(44))?[0-9]{10,11}$/ };
+const PHONE_REGEX = {
+    'en-GB': /^(\+(44))?[0-9]{10,11}$/,
+    'es-ES': /^\d{9,}$/
+};
 
 const isValidPhoneNumber = (number, locale) => PHONE_REGEX[locale].test(number);
 
