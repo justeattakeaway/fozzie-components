@@ -309,8 +309,6 @@ $form-input-focus                         : $blue--light;
     }
 
     .c-formField--groupedmiddle {
-        margin-top: 0;
-
         .c-formField-input {
             border-top: none;
             border-radius: 0;
@@ -318,8 +316,6 @@ $form-input-focus                         : $blue--light;
     }
 
     .c-formField--groupedbottom {
-        margin-top: 0;
-
         .c-formField-input {
             border-top: none;
             border-radius: 0 0 $form-input-borderRadius $form-input-borderRadius;
