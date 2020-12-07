@@ -1,6 +1,5 @@
 <template>
     <div
-        data-theme="jet"
         :class="$style['c-<%= name.class %>']"
         data-test-id='<%= name.class %>-component'>
         {{ $t('text') }}
