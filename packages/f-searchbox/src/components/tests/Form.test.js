@@ -308,6 +308,62 @@ describe('`Form`', () => {
                         // Assert
                         expect(spy).toHaveBeenCalledWith(true);
                     });
+
+                    it('should invoke `verifyHasPostcodeChanged` to check if a user has changed their postcode', () => {
+                        // Arrange
+                        const address = 'AR511AR';
+                        const propsData = {
+                            config: {
+                                address,
+                                locationFormat: () => jest.fn()
+                            },
+                            service: {
+                                isValid: jest.fn(() => true)
+                            }
+                        };
+                        const wrapper = shallowMount(Form, {
+                            propsData,
+                            store: createStore(),
+                            localVue
+                        });
+
+                        const spy = jest.spyOn(wrapper.vm, 'verifyHasPostcodeChanged');
+                        wrapper.setData({ address });
+
+                        // Act
+                        wrapper.vm.submit(event);
+
+                        // Assert
+                        expect(spy).toHaveBeenCalled();
+                    });
+
+                    it('should `$emit` with `submit-valid-address`', () => {
+                        // Arrange
+                        const address = 'AR511AR';
+                        const propsData = {
+                            config: {
+                                address,
+                                locationFormat: () => jest.fn()
+                            },
+                            service: {
+                                isValid: jest.fn(() => true)
+                            }
+                        };
+                        const wrapper = shallowMount(Form, {
+                            propsData,
+                            store: createStore(),
+                            localVue
+                        });
+
+                        const spy = jest.spyOn(wrapper.vm, '$emit');
+                        wrapper.setData({ address, lastAddress: '' });
+
+                        // Act
+                        wrapper.vm.submit(event);
+
+                        // Assert
+                        expect(spy).toHaveBeenCalledWith('submit-valid-address');
+                    });
                 });
 
                 describe('when `address` `isValid` is falsy', () => {
@@ -360,6 +416,37 @@ describe('`Form`', () => {
 
                         // Assert
                         expect(spy).toHaveBeenCalledWith(['Error']);
+                    });
+
+                    it('should `$emit` `searchbox-error` event along with the error `types` when errors are received from an invalid submission', () => {
+                        // Arrange
+                        const address = 'AR511AR';
+                        const errors = ['SOME_INVALID_MESSAGE'];
+                        const propsData = {
+                            config: {
+                                address,
+                                locationFormat: () => jest.fn()
+                            },
+                            service: {
+                                isValid: jest.fn(() => errors)
+                            }
+                        };
+                        const wrapper = shallowMount(Form, {
+                            propsData,
+                            store: createStore({
+                                errors
+                            }),
+                            localVue
+                        });
+
+                        const spy = jest.spyOn(wrapper.vm, '$emit');
+                        wrapper.setData({ address, lastAddress: '' });
+
+                        // Act
+                        wrapper.vm.submit(event);
+
+                        // Assert
+                        expect(spy).toHaveBeenCalledWith('searchbox-error', errors);
                     });
                 });
             });
@@ -477,6 +564,89 @@ describe('`Form`', () => {
                     // Assert
                     expect(spy).toHaveBeenCalledWith(searchPayload, {
                         location: 'nebulae'
+                    });
+                });
+            });
+        });
+
+        describe('`verifyHasPostcodeChanged`', () => {
+            it('should exist', () => {
+                // Arrange
+                const propsData = {
+                    config: {
+                        address: 'something',
+                        locationFormat: () => jest.fn()
+                    },
+                    service: {
+                        isValid: jest.fn(() => [])
+                    }
+                };
+                const wrapper = shallowMount(Form, {
+                    propsData,
+                    store: createStore(),
+                    localVue
+                });
+
+                // Assert
+                expect(wrapper.vm.verifyHasPostcodeChanged).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                describe('AND the `lastAddress` previously saved (je-location) matches the current address entered', () => {
+                    it('should not invoke `$emit`', () => {
+                        // Arrange
+                        const propsData = {
+                            config: {
+                                address: 'something',
+                                locationFormat: () => jest.fn()
+                            },
+                            service: {
+                                isValid: jest.fn(() => [])
+                            }
+                        };
+                        const wrapper = shallowMount(Form, {
+                            propsData,
+                            store: createStore(),
+                            localVue
+                        });
+                        const address = 'Eridanus';
+                        wrapper.setData({ address, lastAddress: address });
+                        const spy = jest.spyOn(wrapper.vm, '$emit');
+
+                        // Act
+                        wrapper.vm.verifyHasPostcodeChanged();
+
+                        // Assert
+                        expect(spy).not.toHaveBeenCalled();
+                    });
+                });
+
+                describe('AND the `lastAddress` previously saved (je-location) does not match the current address entered', () => {
+                    it('should invoke `$emit` with `track-postcode-changed` to indicate the user has changed to a new postcode', () => {
+                        // Arrange
+                        const propsData = {
+                            config: {
+                                address: 'something',
+                                locationFormat: () => jest.fn()
+                            },
+                            service: {
+                                isValid: jest.fn(() => [])
+                            }
+                        };
+                        const wrapper = shallowMount(Form, {
+                            propsData,
+                            store: createStore(),
+                            localVue
+                        });
+                        const address = 'Eridanus';
+                        wrapper.setData({ address, lastAddress: 'Theta Eridani' });
+                        const spy = jest.spyOn(wrapper.vm, '$emit');
+
+                        // Act
+                        wrapper.vm.verifyHasPostcodeChanged();
+
+                        // Assert
+                        expect(spy).toHaveBeenCalledWith('track-postcode-changed');
                     });
                 });
             });

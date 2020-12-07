@@ -40,6 +40,7 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import FormSearchInnerFieldWrapper from './FormSearchInnerFieldWrapper.vue';
+import { ADDRESS_SEARCH_FOCUS } from '../../event-types';
 
 const ALLOWED_SELECTION_TIME = 500;
 
@@ -120,9 +121,14 @@ export default {
          * @param {Boolean} value
          */
         toggleEnterLeaveInput (value) {
-            setTimeout(() => {
+            if (value) {
                 this.setInputFocus(value);
-            }, value ? 0 : ALLOWED_SELECTION_TIME);
+                this.$emit(ADDRESS_SEARCH_FOCUS);
+            } else {
+                setTimeout(() => {
+                    this.setInputFocus(value);
+                }, ALLOWED_SELECTION_TIME);
+            }
         }
     }
 };
