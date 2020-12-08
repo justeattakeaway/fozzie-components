@@ -85,7 +85,6 @@ exports.populateCheckoutForm = addressInfo => {
     fields.addressPostcode.input().setValue(addressInfo.postcode);
     fields.userNote.input().setValue(addressInfo.note);
 };
-
 /**
  * @description
  * Sets the value of the order time in dropdown based on visible text.
@@ -106,18 +105,26 @@ exports.getOrderTimeOptionText = (index) => {
 };
 /**
  * @description
- * Sets the value of the user note and grabs the length of characters.
+ * Sets the value of the user note.
  * 
  * @param {Object} addressInfo
  * @param {String} addressInfo.note The user's extra note
  */
-exports.getUserNoteLength = addressInfo => {
-    fields.userNote.input().setValue(addressInfo.note);;
+exports.inputUserNote = addressInfo => {
+    fields.userNote.input().setValue(addressInfo.note);
+};
+/**
+ * @description
+ * Grabs the length of characters of the user note.
+ * 
+ * @returns {number} The length of the user note
+ */
+exports.getUserNoteLength = () => {
     return userNoteInput().getValue().length;
 };
 /**
  * @description
- * Clicks 'Go to payment' to submit the form.
+ *Submit the checkout form.
  */
 exports.submit = () => {
     goToPaymentButton().click();

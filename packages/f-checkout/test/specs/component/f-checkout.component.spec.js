@@ -12,21 +12,6 @@ describe('f-checkout component tests', () => {
         expect(CheckoutComponent.isAllergenLinkDisplayed()).toBe(true);
     });
     
-    forEach(['mobileNumber', 'addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
-        .it('should display all fields', field => {
-        // Assert
-            expect(CheckoutComponent.isFieldDisplayed(field)).toBe(true);
-        });
-
-    forEach(['mobileNumber', 'addressLine1', 'addressCity', 'addressPostcode'])
-                .it('each fields error message should be displayed', field => {
-                    // Act
-                    CheckoutComponent.submit();
-
-                    // Assert
-                    expect(CheckoutComponent.isFieldErrorDisplayed(field)).toBe(true);
-                });
-
     it('should submit the checkout form', () => {
         // Arrange
         const addressInfo = {
@@ -58,16 +43,20 @@ describe('f-checkout component tests', () => {
         expect(CheckoutComponent.getOrderTimeOptionText(2)).toBe('Monday 00:30');
     });
 
-    it('should prevent user from writing a note of over 200 characters', () => {
+    it.only('should prevent user from writing a note of over 200 characters', () => {
         // Arrange 
         const userNote = 'A'
         const addressInfo = {
             note: userNote.repeat(300)
         };
 
+        // Act
+        CheckoutComponent.inputUserNote(addressInfo)
+        var noteLength = CheckoutComponent.getUserNoteLength();
+
         // Assert
         expect(CheckoutComponent.userNoteMaxCharacterCount()).toEqual('200');
-        expect(CheckoutComponent.getUserNoteLength(addressInfo)).toEqual(200);
+        expect(noteLength).toBe(200)
     });
 
     it('should enable a user to submit without adding a note', () => {
