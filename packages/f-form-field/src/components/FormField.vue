@@ -3,9 +3,10 @@
         :data-theme-formfield="theme"
         :class="[
             $style['c-formField'], {
-                [$style['c-formField--invalid']]: hasError
-            },
-            ( isGrouped ? $style[`c-formField--grouped${groupPosition}`] : $style[`c-formField--unGrouped`] )
+                [$style['c-formField--invalid']]: hasError,
+                [$style[`c-formField--grouped`]]: isGrouped,
+                [$style[`c-formField--grouped${groupPosition}`]]: isGrouped
+            }
         ]"
         :data-test-id="testId.container">
         <div
@@ -250,6 +251,18 @@ $form-input-padding                       : spacing(x1.5) spacing(x2);
 $form-input-fontSize                      : 'body-l';
 $form-input-focus                         : $blue--light;
 
+.c-formField {
+    & + & {
+        margin-top: spacing(x2);
+    }
+}
+
+.c-formField--grouped {
+    & + & {
+        margin-top: 0;
+    }
+}
+
     .c-formField-inputWrapper {
         position: relative;
     }
@@ -319,12 +332,6 @@ $form-input-focus                         : $blue--light;
         .c-formField-input {
             border-top: none;
             border-radius: 0 0 $form-input-borderRadius $form-input-borderRadius;
-        }
-    }
-
-    .c-formField--unGrouped {
-        & + & {
-            margin-top: spacing(x2);
         }
     }
 </style>
