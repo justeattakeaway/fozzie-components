@@ -14,7 +14,7 @@
     "storybook:build": "lerna run storybook:build",
     "storybook:serve": "lerna run storybook:serve --stream",
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
-    "test": "cross-env-shell \"lerna run $LERNA_ARGS test -- -u --stream\"",
+    "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
     "test-component:chrome": "lerna run test-component:chrome --concurrency 1 --stream",
     "test-component-ci:chrome": "lerna run webdriver:start:chrome --concurrency 1 --stream",
     "test:consumer": "lerna run test:consumer",
