@@ -30,9 +30,9 @@ const processLocationCookie = (shouldSetCookie, address) => {
             setJeCookie('latitude', address.latitude);
             setJeCookie('longitude', address.longitude);
         }
-    
+
         setCookie(JE_LOCATION, encodeURIComponent(normalisePostcode(address.postcode)), COOKIE_DAYS);
-    
+
         LOCATION_COOKIE_PROPS.forEach(item => setJeCookie(item, address[item]));
     }
 

@@ -28,23 +28,23 @@ describe('`general.services`', () => {
                     expect(spy).toHaveBeenCalledWith('je-location', address, 365);
                 });
             });
-    
+
             describe('AND `shouldSetCookie` is set to `true` & `address` does not match the `type` `string`', () => {
                 it('should invoke `setCookie` to manually set location cookies for `je-location`', () => {
                     // Arrange
                     const address = {
                         postcode: 'AR511AR'
                     };
-                    
+
                     const spy = jest.spyOn(helpers, 'setCookie');
-            
+
                     // Act
                     generalServices.processLocationCookie(true, address);
-            
+
                     // Assert
                     expect(spy).toHaveBeenCalledWith('je-location', address.postcode, 365);
                 });
-    
+
                 it('should invoke `setJeCookie` for each address component', () => {
                     // Arrange
                     const address = {
@@ -55,16 +55,16 @@ describe('`general.services`', () => {
                         sublocality: 'sublocality',
                         state: 'state'
                     };
-    
+
                     const spy = jest.spyOn(helpers, 'setJeCookie');
-    
+
                     // Act
                     generalServices.processLocationCookie(true, address);
-    
+
                     // Assert
                     expect(spy).toHaveBeenCalledTimes(6);
                 });
-    
+
                 it.each(LOCATION_COOKIE_PROPS)('set cookies correctly "%s"', type => {
                     // Arrange
                     const address = {
@@ -73,15 +73,14 @@ describe('`general.services`', () => {
                         street: 'Earth\'s northern hemisphere',
                         houseNo: '1',
                         city: 'H II',
-                        sublocality: 'Wisconsin Hα Mapper',
                         state: 'state'
                     };
 
                     const spy = jest.spyOn(helpers, 'setJeCookie');
-    
+
                     // Act
                     generalServices.processLocationCookie(true, address);
-    
+
                     // Assert
                     expect(spy).toHaveBeenCalledWith(type, address[type]);
                 });

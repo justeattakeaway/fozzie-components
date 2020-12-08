@@ -20,7 +20,7 @@ const search = ({
         cuisine: '',
         ...location
     };
-    
+
     debugger;
 
     if (onSubmit) {
@@ -97,9 +97,9 @@ const selectedSuggestion = (
                     houseNo: location.streetNumber,
                     where: location.postcode
                 };
-                
+
                 search({
-                    onSubmit: onSubmit
+                    onSubmit
                 }, payload);
                 return payload;
             } else if (

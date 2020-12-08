@@ -190,9 +190,9 @@ describe('`Form`', () => {
                     });
                     const address = 'AR511AR';
                     const spy = jest.spyOn(wrapper.vm, 'setIsValid');
-    
+
                     wrapper.setData({ address, lastAddress: '' });
-                    
+
                     // Act
                     wrapper.vm.submit(event);
 
@@ -244,7 +244,7 @@ describe('`Form`', () => {
                             store: createStore(),
                             localVue
                         });
-    
+
                         wrapper.setData({ address: '', lastAddress: '' });
 
                         // Act
@@ -299,7 +299,7 @@ describe('`Form`', () => {
                             store: createStore(),
                             localVue
                         });
-                        
+
                         wrapper.setData({ shouldClearAddressOnValidSubmit: true, lastAddress: '' });
 
                         const spy = jest.spyOn(wrapper.vm, 'clearAddressValue');
@@ -386,7 +386,7 @@ describe('`Form`', () => {
                             store: createStore(),
                             localVue
                         });
-                        
+
                         wrapper.setData({ address: '', lastAddress: '' });
 
                         // Act
