@@ -11,7 +11,7 @@ v0.18.0
 - `f-services` version.
 - Postcode validation.
 
-## Removed
+### Removed
 - Spanish Locale from storybook.
 
 
