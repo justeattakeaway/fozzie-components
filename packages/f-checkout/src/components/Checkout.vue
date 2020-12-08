@@ -25,7 +25,6 @@
                 <form-field
                     v-model="customer.mobileNumber"
                     name="mobile-number"
-                    data-test-id="input-mobile-number"
                     :label-text="$t('labels.mobileNumber')"
                     :has-error="!isMobileNumberValid">
                     <template #error>
@@ -41,7 +40,7 @@
                     v-if="isCheckoutMethodDelivery"
                     data-test-id="address-block" />
 
-                <form-selector data-test-id="selector" />
+                <form-selector/>
 
                 <user-note data-test-id="user-note" />
 

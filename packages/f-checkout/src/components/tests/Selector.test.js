@@ -92,7 +92,7 @@ describe('Selector', () => {
                     propsData
                 });
 
-                const selector = wrapper.find('[data-test-id="form-select"]');
+                const selector = wrapper.find('[data-test-id="formfield-order-time-dropdown-select"]');
 
                 // Assert
                 expect(selector.html()).toMatchSnapshot();
@@ -107,7 +107,7 @@ describe('Selector', () => {
                     propsData
                 });
 
-                const selector = wrapper.find('[data-test-id="form-select"]');
+                const selector = wrapper.find('[data-test-id="formfield-order-time-dropdown-select"]');
 
                 // Assert
                 expect(selector.html()).toMatchSnapshot();

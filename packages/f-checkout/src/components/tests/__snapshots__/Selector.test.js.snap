@@ -1,17 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Selector computed :: orderMethod should show the collection label when the \`serviceType\` is \`collection\` 1`] = `
-<div data-test-id="form-select" id="formField-19" type="text" class="FormField_c-formField-input_14HCA FormField_c-formField-input-inputFields--focus_TYUW8"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 7" data-test-id="formDropdown-icon" class="c-ficon c-ficon--caret FormDropdown_c-formDropdown-icon_22XsV">
-    <path d="M6.85 13.354l4.784-4.784a.518.518 0 01.732 0l4.784 4.784a.622.622 0 01-.44 1.063H7.29a.622.622 0 01-.44-1.063z" fill="#000" transform="translate(-6 -8)"></path>
-  </svg><select id="time-selection" data-test-id="formDropdown-select" class="FormDropdown_c-formDropdown-select_ROvjN">
-    <option data-test-id="formDropdown-option-0" value="time 1"> time 1 </option>
-  </select></div>
+<select id="time-selection" data-test-id="formfield-order-time-dropdown-select" name="order-time" class="FormDropdown_c-formDropdown-select_ROvjN">
+  <option data-test-id="formfield-order-time-dropdown-option-0" value="time 1">time 1</option>
+</select>
 `;
 
 exports[`Selector computed :: orderMethod should show the delivery label when the \`serviceType\` is \`delivery\` 1`] = `
-<div data-test-id="form-select" id="formField-11" type="text" class="FormField_c-formField-input_14HCA FormField_c-formField-input-inputFields--focus_TYUW8"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 7" data-test-id="formDropdown-icon" class="c-ficon c-ficon--caret FormDropdown_c-formDropdown-icon_22XsV">
-    <path d="M6.85 13.354l4.784-4.784a.518.518 0 01.732 0l4.784 4.784a.622.622 0 01-.44 1.063H7.29a.622.622 0 01-.44-1.063z" fill="#000" transform="translate(-6 -8)"></path>
-  </svg><select id="time-selection" data-test-id="formDropdown-select" class="FormDropdown_c-formDropdown-select_ROvjN">
-    <option data-test-id="formDropdown-option-0" value="time 1"> time 1 </option>
-  </select></div>
+<select id="time-selection" data-test-id="formfield-order-time-dropdown-select" name="order-time" class="FormDropdown_c-formDropdown-select_ROvjN">
+  <option data-test-id="formfield-order-time-dropdown-option-0" value="time 1">time 1</option>
+</select>
 `;

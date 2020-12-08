@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.22.1
+------------------------------
+*December 8, 2020*
+
+### Changed
+- Loglevel in `wdio.conf` to silent for less terminal-logging.
+
 
 v2.22.0
 ------------------------------

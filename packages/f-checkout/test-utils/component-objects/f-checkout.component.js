@@ -3,7 +3,8 @@
 import {
     ALLERGEN_LINK,
     CHECKOUT_COMPONENT,
-    FULFILLMENT_TIME_DROPDOWN,
+    ORDER_TIME_DROPDOWN,
+    ORDER_TIME_DROPDOWN_OPTIONS,
     USER_NOTE_INPUT,
     GO_TO_PAYMENT_BUTTON,
     FIELDS
@@ -13,11 +14,18 @@ const { doesElementExist } = require('../../../../test/utils/webdriverio-extensi
 
 const checkoutComponent = () => $(CHECKOUT_COMPONENT);
 
-// Form Fields
+// Dropdown
+
+const orderTimeDropdown = () => $(ORDER_TIME_DROPDOWN);
+const orderTimeDropdownOptions = () => $$(ORDER_TIME_DROPDOWN_OPTIONS);
+
+// Buttons
 
 const allergenLink = () => $(ALLERGEN_LINK);
-const fulfillmentTimeDropdown = () => $(FULFILLMENT_TIME_DROPDOWN);
 const goToPaymentButton = () => $(GO_TO_PAYMENT_BUTTON);
+
+// Form Fields
+
 const userNoteInput = () => $(USER_NOTE_INPUT);
 
 const fields = {
@@ -40,6 +48,10 @@ const fields = {
     addressPostcode: {
         input: () => $(FIELDS.addressPostcode.input),
         error: () => $(FIELDS.addressPostcode.error)
+    }, 
+    userNote: {
+        input: () => $(FIELDS.userNote.input), 
+        error: ''
     }
 };
 
@@ -48,6 +60,9 @@ exports.isFieldDisplayed = fieldName => fields[fieldName].input().isDisplayed();
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
+exports.isOrderTimeDropdownDisplayed = () => orderTimeDropdown().isDisplayed();
+exports.userNoteMaxCharacterCount = () => userNoteInput().getAttribute('maxlength');
+exports.clickPaymentButton = () => goToPaymentButton().click();
 
 /**
  * @description
@@ -59,6 +74,7 @@ exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
  * @param {String} addressInfo.line2 Second line of the user's address
  * @param {String} addressInfo.city City of the user's address
  * @param {String} addressInfo.postcode Postcode of the user's address
+ * @param {String} addressInfo.note The user's extra note
  */
 exports.populateCheckoutForm = addressInfo => {
     exports.waitForCheckoutComponent();
@@ -67,31 +83,48 @@ exports.populateCheckoutForm = addressInfo => {
     fields.addressLine2.input().setValue(addressInfo.line2);
     fields.addressCity.input().setValue(addressInfo.city);
     fields.addressPostcode.input().setValue(addressInfo.postcode);
+    fields.userNote.input().setValue(addressInfo.note);
 };
-
 /**
  * @description
- * Sets the value of the fulfillment time dropdown based on visible text.
- *
- * @param {String} fulfillmentTimeText The text visible text value of the fulfillment time
+ * Sets the value of the order time in dropdown based on visible text.
+ * 
+ * @param {String} orderTime The visible text value of the order time
  */
-exports.selectFulfillmentTime = fulfillmentTimeText => {
-    fulfillmentTimeDropdown().selectByVisibleText(fulfillmentTimeText);
+exports.selectOrderTime = orderTime => {
+    orderTimeDropdown().selectByVisibleText(orderTime);
 };
-
+/** 
+ * @description
+ * The time of the order should increase when a higher index is applied.
+ * 
+ * @param {Number} index The index of the `orderTimeDropdownOptions` array
+ */
+exports.getOrderTimeOptionText = (index) => {
+    return orderTimeDropdownOptions()[index].getText();
+};
 /**
  * @description
  * Sets the value of the user note.
- *
- * @param {String} userNote The user note value to be entered
+ * 
+ * @param {Object} addressInfo
+ * @param {String} addressInfo.note The user's extra note
  */
-exports.inputUserNote = userNote => {
-    userNoteInput().setValue(userNote);
+exports.inputUserNote = addressInfo => {
+    fields.userNote.input().setValue(addressInfo.note);
 };
-
 /**
  * @description
- * Submits the checkout form.
+ * Grabs the length of characters of the user note.
+ * 
+ * @returns {number} The length of the user note
+ */
+exports.getUserNoteLength = () => {
+    return userNoteInput().getValue().length;
+};
+/**
+ * @description
+ *Submit the checkout form.
  */
 exports.submit = () => {
     goToPaymentButton().click();
