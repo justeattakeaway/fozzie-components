@@ -12,7 +12,7 @@ v0.18.0
 - Postcode validation.
 
 ## Removed
-- Spanish Locale from storybook;=.
+- Spanish Locale from storybook.
 
 
 v0.17.0
