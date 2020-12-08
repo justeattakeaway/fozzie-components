@@ -8,6 +8,7 @@ $theme: 'jet' !default;
 @import '~include-media/dist/include-media'; // Cleaner media query declarations – http://include-media.com
 @import '~@justeat/fozzie/src/scss/settings/variables';
 @import '~@justeat/fozzie/src/scss/base/reset';
+@import '~@justeat/fozzie/src/scss/trumps/rwd';
 @import '~@justeat/fozzie-colour-palette/src/scss/';
 
 /**
