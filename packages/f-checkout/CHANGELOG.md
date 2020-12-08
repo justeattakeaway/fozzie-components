@@ -10,11 +10,11 @@ v0.18.0
 ### Added
 - Webdriver tests for dropdown in `Selector`
 - Webdriver tests for note-field character limit in `UserNote`
-- Loglevel to `silent` in wdio.conf
 
 ### Changed
 - `f-form-field` version.
 - `data-test-id` references in tests.
+- Loglevel to `silent` in wdio.conf
 
 
 v0.17.0
