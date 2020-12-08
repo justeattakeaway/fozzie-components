@@ -7,12 +7,12 @@ describe('f-header component tests', () => {
         HeaderComponent.waitForHeader();
     });
 
-    it('should display the f-header component', () => {
+    it.skip('should display the f-header component', () => {
         // Assert
         expect(HeaderComponent.isLogoDisplayed()).toBe(true);
     });
 
-    it('should alter visibility of navbar depending on window size', () => {
+    it.skip('should alter visibility of navbar depending on window size', () => {
         // Act
         browser.setWindowSize(500, 500);
 
@@ -30,7 +30,7 @@ describe('f-header component tests', () => {
         expect(HeaderComponent.isLoginLinkDisplayed()).toBe(true);
     });
 
-    it('should change url when help link is clicked', () => {
+    it.skip('should change url when help link is clicked', () => {
         // Act
         HeaderComponent.clickHelpLink();
 
