@@ -28,7 +28,7 @@ export const CheckoutComponent = () => ({
     components: { VueCheckout },
     props: {
         locale: {
-            default: select('Locale', VALID_LOCALES, ENGLISH_LOCALE)
+            default: select('Locale', [ENGLISH_LOCALE])
         },
         checkoutUrl: {
             default: select('Checkout Url', [deliveryUrl, collectionUrl], deliveryUrl)

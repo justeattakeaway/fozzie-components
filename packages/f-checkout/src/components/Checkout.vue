@@ -328,6 +328,10 @@ export default {
         */
         isValidPhoneNumber () {
             return validations.isValidPhoneNumber(this.customer.mobileNumber, this.$i18n.locale);
+        },
+
+        isValidPostcode () {
+            return validations.isValidPostcode(this.fulfillment.address.postcode, this.$i18n.locale);
         }
     },
 
@@ -352,7 +356,7 @@ export default {
                     },
                     postcode: {
                         required,
-                        isValidPostcode: validations.isValidPostcode
+                        isValidPostcode: this.isValidPostcode
                     }
                 }
             };

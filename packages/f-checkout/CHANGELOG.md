@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.18.0
+------------------------------
+*December 8, 2020*
+
+### Changed
+- `f-services` version.
+- Postcode validation.
+
+## Removed
+- Spanish Locale from storybook;=.
+
+
 v0.17.0
 ------------------------------
 *December 7, 2020*
