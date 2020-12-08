@@ -11,6 +11,14 @@ v2.21.2
 - Loglevel in `wdio.conf` to silent for less terminal-logging.
 
 
+v2.22.0
+------------------------------
+*December 7, 2020*
+
+### Fixed
+- Eslint ignore error for newlines around `option` tags.
+
+
 v2.21.1
 ------------------------------
 *December 7, 2020*
