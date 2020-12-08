@@ -89,7 +89,7 @@ exports.populateCheckoutForm = addressInfo => {
 /**
  * @description
  * Sets the value of the order time in dropdown based on visible text.
- *
+ * 
  * @param {String} orderTime The visible text value of the order time
  */
 exports.selectOrderTime = orderTime => {
@@ -98,6 +98,8 @@ exports.selectOrderTime = orderTime => {
 /** 
  * @description
  * The time of the order should increase when a higher index is applied.
+ * 
+ * @param {Number} index The index of the `orderTimeDropdownOptions` array
  */
 exports.getOrderTimeOptionText = (index) => {
     return orderTimeDropdownOptions()[index].getText();
@@ -105,6 +107,7 @@ exports.getOrderTimeOptionText = (index) => {
 /**
  * @description
  * Sets the value of the user note and grabs the length of characters.
+ * 
  * @param {Object} addressInfo
  * @param {String} addressInfo.note The user's extra note
  */
