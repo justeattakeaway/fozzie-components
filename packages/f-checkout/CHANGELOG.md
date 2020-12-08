@@ -14,7 +14,6 @@ v0.18.0
 ### Changed
 - `f-form-field` version.
 - `data-test-id` references in tests.
-- Loglevel to `silent` in wdio.conf
 
 
 v0.17.0
