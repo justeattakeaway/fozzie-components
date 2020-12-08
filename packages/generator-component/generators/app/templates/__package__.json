@@ -33,8 +33,8 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "report": "cd ../.. && yarn report",
-    "storybook:serve": "cd ../storybook && yarn storybook:serve -- --ci",
-    "test-component:chrome": "run-p --race storybook:serve webdriver:delay:chrome",
+    "storybook:serve-webdriver": "cd ../storybook && yarn storybook:serve -- --ci",
+    "test-component:chrome": "run-p --race storybook:serve-webdriver webdriver:delay:chrome",
     "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js",
     "webdriver:delay:chrome": "yarn test:wait-for-server && yarn webdriver:start:chrome",
     "webdriver:start:chrome": "wdio ../../wdio.conf.js"
