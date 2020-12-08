@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import VueAlert from '../Alert.vue';
+import FAlert from '../Alert.vue';
 
 const defaultPropsData = { heading: 'Alert title', type: 'info' };
 
@@ -11,7 +11,7 @@ describe('Alert', () => {
 
     it('should be defined', () => {
         // Arrange & Act
-        const wrapper = shallowMount(VueAlert, { propsData: defaultPropsData });
+        const wrapper = shallowMount(FAlert, { propsData: defaultPropsData });
 
         // Assert
         expect(wrapper.exists()).toBe(true);
@@ -19,7 +19,7 @@ describe('Alert', () => {
 
     it('should have the alert role for accessibility purposes', () => {
         // Arrange
-        const wrapper = shallowMount(VueAlert, { propsData: defaultPropsData });
+        const wrapper = shallowMount(FAlert, { propsData: defaultPropsData });
 
         // Act
         const alert = wrapper.find('[data-test-id="alert-component"]');
@@ -31,7 +31,7 @@ describe('Alert', () => {
     describe('icon', () => {
         it.each(['danger', 'success', 'info', 'warning'])('should show the %s icon for type %s', type => {
             // Arrange
-            const wrapper = shallowMount(VueAlert, { propsData: { heading: 'Alert title', type } });
+            const wrapper = shallowMount(FAlert, { propsData: { heading: 'Alert title', type } });
 
             // Act
             const icon = wrapper.find('[data-test-id="alert-icon"]');
@@ -44,7 +44,7 @@ describe('Alert', () => {
     describe('heading', () => {
         it('should render the heading passed into the alert', () => {
             // Arrange
-            const wrapper = shallowMount(VueAlert, { propsData: defaultPropsData });
+            const wrapper = shallowMount(FAlert, { propsData: defaultPropsData });
 
             // Act
             const heading = wrapper.find('[data-test-id="alert-heading"]');
@@ -57,7 +57,7 @@ describe('Alert', () => {
     describe('dismiss', () => {
         it('should render the dismiss button if `isDismissible` is true', () => {
             // Arrange
-            const wrapper = shallowMount(VueAlert, { propsData: { ...defaultPropsData, isDismissible: true } });
+            const wrapper = shallowMount(FAlert, { propsData: { ...defaultPropsData, isDismissible: true } });
 
             // Act
             const dismiss = wrapper.find('[data-test-id="alert-dismiss"]');
@@ -68,7 +68,7 @@ describe('Alert', () => {
 
         it('should not render the dismiss button if `isDismissible` is false', () => {
             // Arrange
-            const wrapper = shallowMount(VueAlert, { propsData: { ...defaultPropsData, isDismissible: false } });
+            const wrapper = shallowMount(FAlert, { propsData: { ...defaultPropsData, isDismissible: false } });
 
             // Act
             const dismiss = wrapper.find('[data-test-id="alert-dismiss"]');
@@ -79,9 +79,9 @@ describe('Alert', () => {
 
         it('should call `dismiss` when clicked', () => {
             // Arrange
-            const dismissSpy = jest.spyOn(VueAlert.methods, 'dismiss');
+            const dismissSpy = jest.spyOn(FAlert.methods, 'dismiss');
 
-            const wrapper = shallowMount(VueAlert, {
+            const wrapper = shallowMount(FAlert, {
                 propsData: { ...defaultPropsData, isDismissible: true }
             });
 
@@ -97,7 +97,7 @@ describe('Alert', () => {
         describe('type', () => {
             it('should be required', () => {
                 // Arrange
-                const wrapper = shallowMount(VueAlert, { propsData: defaultPropsData });
+                const wrapper = shallowMount(FAlert, { propsData: defaultPropsData });
 
                 // Act
                 const { type } = wrapper.vm.$options.props;
@@ -108,7 +108,7 @@ describe('Alert', () => {
 
             it('should only allow `danger`, `success`, `info` or `warning` to be passed in.', () => {
                 // Arrange
-                const wrapper = shallowMount(VueAlert, { propsData: defaultPropsData });
+                const wrapper = shallowMount(FAlert, { propsData: defaultPropsData });
 
                 // Act
                 const { type } = wrapper.vm.$options.props;
@@ -125,7 +125,7 @@ describe('Alert', () => {
         describe('heading', () => {
             it('should be required', () => {
                 // Arrange
-                const wrapper = shallowMount(VueAlert, { propsData: defaultPropsData });
+                const wrapper = shallowMount(FAlert, { propsData: defaultPropsData });
 
                 // Act
                 const { heading } = wrapper.vm.$options.props;
@@ -140,7 +140,7 @@ describe('Alert', () => {
         describe('dismiss', () => {
             it('should set `isDismissed` to `true`', () => {
                 // Arrange
-                const wrapper = shallowMount(VueAlert, { propsData: defaultPropsData });
+                const wrapper = shallowMount(FAlert, { propsData: defaultPropsData });
 
                 // Act
                 wrapper.vm.dismiss();
@@ -155,7 +155,7 @@ describe('Alert', () => {
         describe('icon', () => {
             it('should return the type with `Icon` camelCased', () => {
                 // Arrange
-                const wrapper = shallowMount(VueAlert, { propsData: defaultPropsData });
+                const wrapper = shallowMount(FAlert, { propsData: defaultPropsData });
 
                 // Act
                 const result = wrapper.vm.icon;

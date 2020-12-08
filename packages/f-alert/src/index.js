@@ -6,13 +6,13 @@
 
 
 // Import vue component
-import VueAlert from '@/components/Alert.vue';
+import FAlert from '@/components/Alert.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('VueAlert', VueAlert);
+    Vue.component('FAlert', FAlert);
 }
 
 // Create module definition for Vue.use()
@@ -32,4 +32,4 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export default VueAlert;
+export default FAlert;

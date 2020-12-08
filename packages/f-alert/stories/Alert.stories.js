@@ -1,7 +1,7 @@
 import { boolean, select, text
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import VueAlert from '../src/components/Alert.vue';
+import FAlert from '../src/components/Alert.vue';
 import VueCard from '../../f-card/src/components/Card.vue';
 
 export default {
@@ -10,7 +10,7 @@ export default {
 };
 
 export const AlertComponent = () => ({
-    components: { VueAlert, VueCard },
+    components: { FAlert, VueCard },
     props: {
         locale: {
             default: select('Locale', ['en-GB', 'es-ES'])
@@ -31,13 +31,13 @@ export const AlertComponent = () => ({
         is-rounded
         has-outline
         is-page-content-wrapper>
-        <vue-alert
+        <f-alert
             :locale="locale"
             :type="type"
             :isDismissible="isDismissible"
             :heading="heading">
             You can put any HTML here!
-        </vue-alert>
+        </f-alert>
         <p>
             Mollit aliqua labore excepteur voluptate consequat ut dolore
             ipsum nostrud magna elit proident laboris. Irure do nulla

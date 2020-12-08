@@ -32,17 +32,17 @@
     You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
     ```
-    import VueAlert from '@justeat/f-alert';
+    import FAlert from '@justeat/f-alert';
     import '@justeat/f-alert/dist/f-alert.css';
 
     export default {
         components: {
-            VueAlert
+            FAlert
         }
     }
     ```
 
-    If you are using Webpack, you can import the component dynamically to separate the `vue-alert` bundle from the main `bundle.client.js`:
+    If you are using Webpack, you can import the component dynamically to separate the `f-alert` bundle from the main `bundle.client.js`:
 
     ```
     import '@justeat/f-alert/dist/f-alert.css';
@@ -50,7 +50,7 @@
     export default {
         components: {
             ...
-            VueAlert: () => import(/* webpackChunkName: "vue-alert" */ '@justeat/f-alert')
+            FAlert: () => import(/* webpackChunkName: "f-alert" */ '@justeat/f-alert')
         }
     }
 

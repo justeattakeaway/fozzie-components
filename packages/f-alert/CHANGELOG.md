@@ -10,6 +10,7 @@ v0.4.0
 
 ### Changed
 - Regular button changed to vue button component
+- Renamed VueAlert to FAlert
 
 ### Updated
 - `f-vue-icons` to the latest version (1.13.0)
