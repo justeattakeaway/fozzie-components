@@ -3,13 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.43.3
+------------------------------
+*December 8, 2020*
+
+### Fixed
+- Remove tabindex from form element – results in visible border temporarily appearing around form when inputs are clicked.
+
+
 v0.43.2
 ------------------------------
 *December 7, 2020*
 
 ### Fixed
 - All tests now run in component spec files.
-
 
 
 v0.43.1
