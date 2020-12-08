@@ -95,17 +95,14 @@ $btn-sizeXSmall-lineHeight      : 1;
     font-family: $btn-default-font-family;
     @include font-size($btn-default-font-size);
     cursor: pointer;
-    margin: 0;
     padding: $btn-default-padding;
     overflow: visible;
     text-align: center;
     font-weight: $btn-default-weight;
-
     background-color: $btn-default-bgColor;
     border-radius: $btn-default-borderRadius;
     border: 1px solid transparent;
     user-select: none;
-
     color: $grey--dark;
     text-decoration: none;
 
@@ -148,7 +145,7 @@ $btn-sizeXSmall-lineHeight      : 1;
 
 /**
  * ==========================================================================
- * Btn Background Colour modifiers
+ * Btn Type modifiers
  * ==========================================================================
  */
 
@@ -256,6 +253,52 @@ $btn-sizeXSmall-lineHeight      : 1;
 }
 
 /**
+ * Modifier – .o-btn--link
+ *
+ * Make a button visually look like a default link
+ * Useful when we semantically want a button but don’t want all the default styling
+ *
+ * Should only be applied to buttons
+ */
+
+.o-btn--link {
+    border: 0;
+    background-color: transparent;
+    padding: 0;
+    color: $color-link-default;
+    font-weight: $font-weight-bold;
+
+    &:hover {
+        cursor: pointer;
+        color: $color-link-hover;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+    &:active,
+    &:focus {
+        color: $color-link-active;
+        background-color: transparent;
+    }
+}
+
+/**
+ * Modifier – .o-btn--icon
+ *
+ * Removes unneeded styles from button when only an icon is on it (like a close button)
+ */
+
+.o-btn--icon {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+
+    &:hover {
+        background-color: transparent;
+    }
+}
+
+
+/**
  * ==========================================================================
  * Btn Size Modifiers
  * ==========================================================================
@@ -294,7 +337,7 @@ $btn-sizeXSmall-lineHeight      : 1;
  */
 
 /**
- * Modifier – o-btn-fullWidth
+ * Modifier – o-btn--fullWidth
  *
  * Makes the btn full width
  */
@@ -307,37 +350,6 @@ $btn-sizeXSmall-lineHeight      : 1;
     // same as .o-btn--fullWidth + .o-btn--fullWidth
     & + & {
         margin-top: spacing();
-    }
-}
-
-
-/**
- * Modifier – .o-btn--onColour
- *
- * Make a button visually look like a default link
- * Useful when we semantically want a button but don’t want all the default styling
- *
- * Should only be applied to buttons
- */
-
-.o-btn--link {
-    border: 0;
-    background-color: transparent;
-    padding: 0;
-    margin: 0;
-    color: $color-link-default;
-    font-weight: $font-weight-bold;
-
-    &:hover {
-        cursor: pointer;
-        color: $color-link-hover;
-        background-color: transparent;
-        text-decoration: underline;
-    }
-    &:active,
-    &:focus {
-        color: $color-link-active;
-        background-color: transparent;
     }
 }
 

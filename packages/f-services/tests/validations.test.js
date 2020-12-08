@@ -141,9 +141,30 @@ describe('isValidPostcode', () => {
         ['BS! 4DJ', false],
         ['', false],
         [null, false]
-    ])('should validate %s as %s', (postcode, expected) => {
+    ])('should validate %s as %s with `en-GB` locale', (postcode, expected) => {
         // Act
-        const actual = isValidPostcode(postcode);
+        const actual = isValidPostcode(postcode, 'en-GB');
+
+        // Assert
+        expect(actual).toBe(expected);
+    });
+
+    it.each([
+        ['01000', true],
+        ['52430', true],
+        ['342567', false],
+        ['4521', false],
+        ['AR51 1AA', false],
+        ['ATEGD', false],
+        ['00 000', false],
+        ['23', false],
+        ['not even trying', false],
+        ['01!23', false],
+        ['', false],
+        [null, false]
+    ])('should validate %s as %s with `es-ES` locale', (postcode, expected) => {
+        // Act
+        const actual = isValidPostcode(postcode, 'es-ES');
 
         // Assert
         expect(actual).toBe(expected);
@@ -163,6 +184,21 @@ describe('isValidPhoneNumber', () => {
     ])('should validate %s as %s with `en-GB` locale', (number, expected) => {
         // Act
         const actual = isValidPhoneNumber(number, 'en-GB');
+
+        // Assert
+        expect(actual).toBe(expected);
+    });
+
+    it.each([
+        ['111111111', true],
+        ['11111111', false],
+        ['!askfjt%$', false],
+        ['not even trying', false],
+        ['', false],
+        [null, false]
+    ])('should validate %s as %s with `es-ES` locale', (number, expected) => {
+        // Act
+        const actual = isValidPhoneNumber(number, 'es-ES');
 
         // Assert
         expect(actual).toBe(expected);

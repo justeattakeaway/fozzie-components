@@ -4,7 +4,7 @@
   "customer": {
     "firstName": "Joe",
     "lastName": "Bloggs",
-    "phoneNumber": "+447111111111",
+    "phoneNumber": "",
     "dateOfBirth": "1980-01-30",
     "emailAddress": "joe.bloggs@justeattakeaway.com"
   },
