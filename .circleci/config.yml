@@ -173,6 +173,7 @@ jobs:
       - run: # Serve Storybook
           name: Serve Storybook
           command: yarn storybook:serve
+          background: true
       - run: # Run Component UI Tests
           name: Run WebDriverIO Component / Accessibility Tests
           command: yarn test-component-ci:chrome
