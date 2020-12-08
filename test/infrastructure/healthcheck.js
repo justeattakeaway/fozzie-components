@@ -27,6 +27,6 @@ const interval = setInterval(async () => {
         console.log('Attempt', attempts, error.code); // eslint-disable-line
     }
 
-}, 90000);
+}, 15000);
 
 intervalId = interval;
