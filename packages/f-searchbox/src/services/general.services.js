@@ -11,7 +11,7 @@ const COOKIE_DAYS = 365;
 /**
  *
  * Responsible for setting cookies in the browsers storage. This is configured via the
- * `shouldSetCookies: true` a prop passed through to the component when it's rendered. If the
+ * `shouldSetCookie: true` a prop passed through to the component when it's rendered. If the
  * type of address is a string e.g. 'AR511AR' we process the cookie as a `je-location`. Otherwise
  * we assume it's an international cookie and set the relevant `je-last-*` values.
  *
