@@ -32,17 +32,17 @@
     You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
     ```
-    import ButtonComponent from '@justeat/f-button';
+    import FButton from '@justeat/f-button';
     import '@justeat/f-button/dist/f-button.css';
 
     export default {
         components: {
-            ButtonComponent
+            FButton
         }
     }
     ```
 
-    If you are using Webpack, you can import the component dynamically to separate the `button-component` bundle from the main `bundle.client.js`:
+    If you are using Webpack, you can import the component dynamically to separate the `f-button` bundle from the main `bundle.client.js`:
 
     ```
     import '@justeat/f-button/dist/f-button.css';
@@ -50,7 +50,7 @@
     export default {
         components: {
             ...
-            ButtonComponent: () => import(/* webpackChunkName: "button-component" */ '@justeat/f-button')
+            FButton: () => import(/* webpackChunkName: "f-button" */ '@justeat/f-button')
         }
     }
 
@@ -59,7 +59,7 @@
 3.  Call the component in your template:
 
     ```
-    <button-component buttonType="secondary" buttonSize="small" isFullWidth />
+    <f-button buttonType="secondary" buttonSize="small" isFullWidth />
     ```
 
     Accepted properties:
