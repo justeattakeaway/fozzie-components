@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.19.0
+------------------------------
+*December 8, 2020*
+
+### Added
+- Webdriver tests for dropdown in `Selector`
+- Webdriver tests for note-field character limit in `UserNote`
+
+### Changed
+- `f-form-field` version.
+- `data-test-id` references in tests.
+
+
 v0.18.0
 ------------------------------
 *December 8, 2020*
@@ -40,7 +53,7 @@ v0.16.0
 
 ### Added
 - Page object model constants for css selectors
-- New test to check for existance of error messages per field
+- New test to check for existence of error messages per field
 
 
 v0.15.0

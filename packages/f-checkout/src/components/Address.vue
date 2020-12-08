@@ -9,7 +9,6 @@
                 v-model="fulfillment.address.line1"
                 :class="$style['c-address-formField']"
                 name="address-line-1"
-                data-test-id="input-address-line-1"
                 :label-text="$t('labels.line1')"
                 label-style="inline"
                 :has-error="isAddressLine1Empty">
@@ -27,7 +26,6 @@
                 v-model="fulfillment.address.line2"
                 :class="$style['c-address-formField']"
                 name="address-line-2"
-                data-test-id="input-address-line-2"
                 :label-text="$t('labels.line2')"
                 label-style="inline" />
         </fieldset>
@@ -35,7 +33,6 @@
         <form-field
             v-model="fulfillment.address.city"
             name="address-city"
-            data-test-id="input-address-city"
             :label-text="$t('labels.city')"
             :has-error="isAddressCityEmpty">
             <template #error>
@@ -50,7 +47,6 @@
         <form-field
             v-model="fulfillment.address.postcode"
             name="address-postcode"
-            data-test-id="input-address-postcode"
             :label-text="$t('labels.postcode')"
             :has-error="!isAddressPostcodeValid">
             <template #error>
