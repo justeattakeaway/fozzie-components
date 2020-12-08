@@ -4,7 +4,7 @@
   "customer": {
     "firstName": "Joe",
     "lastName": "Bloggs",
-    "phoneNumber": "+447111111111",
+    "phoneNumber": "",
     "dateOfBirth": "1980-01-30",
     "emailAddress": "joe.bloggs@justeattakeaway.com"
   },
@@ -37,13 +37,13 @@
     ],
     "address": {
       "lines": [
-        "1 Bristol Road",
-        "Flat 1",
         "",
-        "Bristol",
-        "Somerset"
+        "",
+        "",
+        "",
+        ""
       ],
-      "postalCode": "BS1 1AA"
+      "postalCode": ""
     }
   },
   "notes": [

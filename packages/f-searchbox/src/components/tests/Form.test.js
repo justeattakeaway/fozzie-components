@@ -456,7 +456,7 @@ describe('`Form`', () => {
             });
         });
 
-        xdescribe('`clearAddressValue`', () => {
+        describe('`clearAddressValue`', () => {
             it('should exist', () => {
                 // Arrange
                 const propsData = {
@@ -508,7 +508,7 @@ describe('`Form`', () => {
             });
         });
 
-        xdescribe('`searchPreviouslySavedAddress`', () => {
+        describe('`searchPreviouslySavedAddress`', () => {
             it('should exist', () => {
                 // Arrange
                 const propsData = {
@@ -573,7 +573,7 @@ describe('`Form`', () => {
             });
         });
 
-        xdescribe('`verifyHasPostcodeChanged`', () => {
+        describe('`verifyHasPostcodeChanged`', () => {
             it('should exist', () => {
                 // Arrange
                 const propsData = {

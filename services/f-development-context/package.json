@@ -1,0 +1,45 @@
+{
+  "name": "@justeat/f-development-context",
+  "description": "A package to provide development context options for Storybook and WebDriver",
+  "version": "1.0.0",
+  "main": "dist/f-development-context.umd.js",
+  "module": "dist/f-development-context.esm.js",
+  "source": "src/index.js",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/services/f-development-context",
+  "contributors": [
+    "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:justeat/fozzie-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/justeat/fozzie-components/issues"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "keywords": [
+    "fozzie"
+  ],
+  "scripts": {
+    "prepublishOnly": "yarn build",
+    "build": "rollup --config"
+  },
+  "browserslist": [
+    "extends @justeat/browserslist-config-fozzie"
+  ],
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "7.11.0",
+    "@rollup/plugin-commonjs": "11.0.2",
+    "@rollup/plugin-json": "4.0.2",
+    "@rollup/plugin-node-resolve": "7.1.1",
+    "rollup": "1.26.3",
+    "rollup-plugin-babel": "4.4.0",
+    "rollup-plugin-terser": "5.1.2"
+  }
+}

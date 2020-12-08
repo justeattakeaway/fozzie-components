@@ -146,7 +146,7 @@ This will also work with the headings.
 ```js
 const copyOverrides = {
     buttonText: "Confirm",
-    fieldLabel: "Enter you address",
+    fieldLabel: "Enter your address",
     // ...
 }
 ```
@@ -161,7 +161,7 @@ const copyOverrides = {
     @address-search-focus="addressFocus"
     @submit-saved-address="validSavedAddressSearch"
     @submit-valid-address="validSearch"
-    @track-postcode-changed="onostcodeChanged"/>
+    @track-postcode-changed="onPostcodeChanged"/>
 ```
 
 ### `@searchbox-error`
@@ -174,11 +174,11 @@ Fires when the address input is focussed.
 
 ### `@submit-saved-address`
 
-Fires if an address is submitted with no errors.
+Fires if user submits an address with the same address as previously recorded by the searchbox.
 
 ### `@submit-valid-address`
 
-Fires if user submits an address with the same address as previously recorded by the searchbox.
+Fires if an address is submitted with no errors.
 
 ### `@track-postcode-changed`
 

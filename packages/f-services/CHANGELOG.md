@@ -3,12 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.7.0
+------------------------------
+*December 7, 2020*
+
+### Added
+- `es-ES` validations to postcode and phone validations.
+
+### Changed
+- `isValidPostcode` to accept locale.
+
+
 v1.6.0
 ------------------------------
 *December 1, 2020*
 
 ### Added
 - `getDeepObjectByPath` to `utilities.js` to traverse an object using a given path.
+
 ### Changed
 - `getFormValidationState` function to return the full path of a nested object.
 

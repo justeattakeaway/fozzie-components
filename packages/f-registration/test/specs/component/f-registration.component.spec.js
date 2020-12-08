@@ -1,7 +1,7 @@
 import RegistrationComponent from '../../../test-utils/component-objects/f-registration.component';
 
 describe('f-registration component tests', () => {
-    it.only('should display errors if mandatory fields are empty', () => {
+    it('should display errors if mandatory fields are empty', () => {
         // Arrange
         const userInfo = {
             firstName: '',

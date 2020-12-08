@@ -34,41 +34,46 @@ commands:
           event: fail
           custom: |
             {
-              "blocks": [
+              "attachments": [
                 {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "Your job *${CIRCLE_JOB}* has failed ⚠️"
-                  },
-                  "fields": [
+                  "blocks": [
                     {
-                      "type": "mrkdwn",
-                      "text": "*Commiter*:${CIRCLE_USERNAME}"
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "Your job *${CIRCLE_JOB}* has failed ⚠️"
+                      },
+                      "fields": [
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Author*: ${CIRCLE_USERNAME}"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Commit*: ${CIRCLE_SHA1}"
+                        }
+                      ],
+                      "accessory": {
+                        "type": "image",
+                        "image_url": "https://user-images.githubusercontent.com/26894168/101182589-31708380-3646-11eb-80d5-b174d47bf7fb.png",
+                        "alt_text": "Fozzie Logo"
+                      }
                     },
                     {
-                      "type": "mrkdwn",
-                      "text": "*SHA*:${CIRCLE_SHA1}"
+                      "type": "actions",
+                      "elements": [
+                        {
+                          "type": "button",
+                          "text": {
+                            "type": "plain_text",
+                            "text": "View Job"
+                          },
+                          "url": "${CIRCLE_BUILD_URL}"
+                        }
+                      ]
                     }
                   ],
-                  "accessory": {
-                    "type": "image",
-                    "image_url": "https://avatars3.githubusercontent.com/u/30729620?s=400&u=61309ea885d27e19266fa986dac9194defb45197&v=4",
-                    "alt_text": "Fozzie Logo"
-                  }
-                },
-                {
-                  "type": "actions",
-                  "elements": [
-                    {
-                      "type": "button",
-                      "text": {
-                        "type": "plain_text",
-                        "text": "View Job"
-                      },
-                      "url": "${CIRCLE_BUILD_URL}"
-                    }
-                  ]
+                  "color": "danger"
                 }
               ]
             }
@@ -81,41 +86,46 @@ commands:
           event: pass
           custom: |
             {
-              "blocks": [
+              "attachments": [
                 {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "Your job *${CIRCLE_JOB}* has succeeded 🎉"
-                  },
-                  "fields": [
+                  "blocks": [
                     {
-                      "type": "mrkdwn",
-                      "text": "*Commiter*:${CIRCLE_USERNAME}"
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "Your job *${CIRCLE_JOB}* has succeeded 🎉"
+                      },
+                      "fields": [
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Author*: ${CIRCLE_USERNAME}"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Commit*: ${CIRCLE_SHA1}"
+                        }
+                      ],
+                      "accessory": {
+                        "type": "image",
+                        "image_url": "https://user-images.githubusercontent.com/26894168/101182641-4220f980-3646-11eb-8782-29a6a2213815.png",
+                        "alt_text": "Fozzie Logo"
+                      }
                     },
                     {
-                      "type": "mrkdwn",
-                      "text": "*SHA*:${CIRCLE_SHA1}"
+                      "type": "actions",
+                      "elements": [
+                        {
+                          "type": "button",
+                          "text": {
+                            "type": "plain_text",
+                            "text": "View Job"
+                          },
+                          "url": "${CIRCLE_BUILD_URL}"
+                        }
+                      ]
                     }
                   ],
-                  "accessory": {
-                    "type": "image",
-                    "image_url": "https://avatars3.githubusercontent.com/u/30729620?s=400&u=61309ea885d27e19266fa986dac9194defb45197&v=4",
-                    "alt_text": "Fozzie Logo"
-                  }
-                },
-                {
-                  "type": "actions",
-                  "elements": [
-                    {
-                      "type": "button",
-                      "text": {
-                        "type": "plain_text",
-                        "text": "View Job"
-                      },
-                      "url": "${CIRCLE_BUILD_URL}"
-                    }
-                  ]
+                  "color": "good"
                 }
               ]
             }

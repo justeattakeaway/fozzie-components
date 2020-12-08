@@ -16,7 +16,7 @@ describe('FormDropdown', () => {
                 // Arrange && Act
                 const propsData = { dropdownOptions };
                 const wrapper = shallowMount(FormDropdown, { propsData });
-                const option = wrapper.find('[data-test-id="formDropdown-option-0"]');
+                const option = wrapper.find('[data-test-id="formfield-dropdown-option-0"]');
 
                 // Assert
                 expect(option.text()).toEqual('option 0');
@@ -26,7 +26,7 @@ describe('FormDropdown', () => {
                 // Arrange && Act
                 const propsData = {};
                 const wrapper = shallowMount(FormDropdown, { propsData });
-                const option = wrapper.find('[data-test-id="formDropdown-option-0"]');
+                const option = wrapper.find('[data-test-id="formfield-dropdown-option-0"]');
 
                 // Assert
                 expect(option.exists()).toBe(false);
@@ -38,7 +38,7 @@ describe('FormDropdown', () => {
         describe('updateOption ::', () => {
             const propsData = { dropdownOptions };
 
-            it('should emit `update` whens option selected', async () => {
+            it('should emit `update` when an option is selected', async () => {
                 // Arrange
                 const wrapper = shallowMount(FormDropdown, { propsData });
 

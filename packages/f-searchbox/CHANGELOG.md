@@ -9,7 +9,7 @@ v4.0.0-beta.9
 
 ### Added
 - Cookie support for when `setCookies` is enabled via the consuming app.
-
+- Test coverage for changes.
 
 v4.0.0-beta.8
 ------------------------------

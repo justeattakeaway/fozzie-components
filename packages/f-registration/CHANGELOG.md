@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.43.2
+------------------------------
+*December 7, 2020*
+
+### Fixed
+- All tests now run in component spec files.
+
+
 
 v0.43.1
 ------------------------------

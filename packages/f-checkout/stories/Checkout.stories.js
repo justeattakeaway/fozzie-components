@@ -16,8 +16,8 @@ Vue.use(Vuex);
 const deliveryUrl = '/checkout-delivery.json';
 const collectionUrl = '/checkout-collection.json';
 
-CheckoutMock.setupDelivery(deliveryUrl);
-CheckoutMock.setupCollection(collectionUrl);
+CheckoutMock.setupCheckoutMethod(deliveryUrl);
+CheckoutMock.setupCheckoutMethod(collectionUrl);
 
 export default {
     title: 'Components/Organisms',
@@ -28,7 +28,7 @@ export const CheckoutComponent = () => ({
     components: { VueCheckout },
     props: {
         locale: {
-            default: select('Locale', VALID_LOCALES, ENGLISH_LOCALE)
+            default: select('Locale', [ENGLISH_LOCALE])
         },
         checkoutUrl: {
             default: select('Checkout Url', [deliveryUrl, collectionUrl], deliveryUrl)
