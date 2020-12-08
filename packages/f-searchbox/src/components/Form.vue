@@ -268,13 +268,13 @@ export default {
 
             if (this.isValid === true) {
                 this.setErrors([]);
-                processLocationCookie(this.shouldSetCookies, this.address);
                 this.clearAddressValue(this.shouldClearAddressOnValidSubmit);
                 onCustomSubmit(this.onSubmit, this.address, e);
                 this.verifyHasPostcodeChanged();
 
                 if (this.service.isAutocompleteEnabled) {
                     e.preventDefault();
+
                     const info = await this.onSelectedSuggestion();
 
                     // if the address is still missing fields, return here
@@ -282,7 +282,11 @@ export default {
                         return false;
                     }
 
-                    // TODO process the je last location cookie for international markets...
+                    // Process international based location cookies `je-last-*`
+                    processLocationCookie(this.shouldSetCookies, info);
+                } else {
+                    // Process standard address based location cookies `je-location`
+                    processLocationCookie(this.shouldSetCookies, this.address);
                 }
 
                 this.$emit(SUBMIT_VALID_ADDRESS);
@@ -305,16 +309,25 @@ export default {
          * `keyboardSuggestionIndex` (enter key event) depending on which was used
          * the address is set accordingly.
          *
+         * Returns a promise `locationInformation` so we can resolve/await the location information
+         * within the `submit` handler, used for processing & setting cookies when the consuming app
+         * needs to manually set them (e.g. menu).
+         *
          * */
         onSelectedSuggestion (index) {
-            selectedSuggestion(
+            this.address = this.suggestionFormat(this.suggestions[index || this.keyboardSuggestionIndex]);
+
+            const locationInformation = selectedSuggestion(
                 this.service,
                 this.suggestions,
                 this.requiredFields,
                 this.streetNumber,
                 index,
-                this.keyboardSuggestionIndex
-            ).then(value => {
+                this.keyboardSuggestionIndex,
+                this.onSubmit
+            );
+
+            locationInformation.then(value => {
                 if (value && value.errors) {
                     this.setErrors(value.errors);
                 }
@@ -324,7 +337,7 @@ export default {
                 }
             });
 
-            this.address = this.suggestionFormat(this.suggestions[index || this.keyboardSuggestionIndex]);
+            return locationInformation;
         },
 
         /**

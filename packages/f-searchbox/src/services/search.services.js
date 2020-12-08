@@ -56,6 +56,7 @@ const search = ({
  * @param streetNumber
  * @param index
  * @param keyboardSuggestionIndex
+ * @param onSubmit
  * @returns {Promise.<TResult>}
  */
 const selectedSuggestion = (
@@ -64,7 +65,8 @@ const selectedSuggestion = (
     requiredFields,
     streetNumber,
     index,
-    keyboardSuggestionIndex
+    keyboardSuggestionIndex,
+    onSubmit
 ) => {
     const suggestion = suggestions[index || keyboardSuggestionIndex];
 
@@ -94,7 +96,9 @@ const selectedSuggestion = (
                     where: location.postcode
                 };
 
-                search({}, payload);
+                search({
+                    onSubmit
+                }, payload);
                 return payload;
             } else if (
             // if street required but no street number available

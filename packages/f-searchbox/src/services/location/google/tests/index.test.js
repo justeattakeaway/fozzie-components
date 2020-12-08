@@ -1,7 +1,7 @@
 import LocationGoogle from '..';
 import { loadGoogleMapsMocks } from '../../../../utils/tests/testHelpers';
 
-describe('`LocationGoogle`', () => {
+xdescribe('`LocationGoogle`', () => {
     let service;
 
     beforeEach(() => {

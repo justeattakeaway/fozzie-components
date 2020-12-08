@@ -84,6 +84,20 @@ const generatePostForm = (url, data) => {
     document.body.removeChild(form);
 };
 
+/**
+ * Sets `je-last_*` based cookies. The `name` param is based of the response from google.
+ * For example: `city` or `sublocality` would be transformed to:
+ *
+ * 1. `je-last_city_used`
+ * 2. `je-last_sublocality_used`
+ *
+ * @param name
+ * @param value
+ */
+const setJeCookie = (name, value) => setCookie(`je-last_${name}_used`, value
+    ? value.toString().trim()
+    : '', 365);
+
 
 export {
     isPostcodeEmpty,
@@ -91,5 +105,6 @@ export {
     normalisePostcode,
     setCookie,
     getLastLocation,
-    generatePostForm
+    generatePostForm,
+    setJeCookie
 };
