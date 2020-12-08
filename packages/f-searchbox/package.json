@@ -29,13 +29,13 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-searchbox ./src/index.js",
-    "demo": "vue serve --port 8080 ./src/demo/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "report": "cd ../.. && yarn report",
+    "storybook:serve": "cd ../storybook && yarn storybook:serve",
     "test": "vue-cli-service test:unit",
-    "test-component:chrome": "run-p --race demo webdriver:delay:chrome",
+    "test-component:chrome": "run-p --race storybook:serve webdriver:delay:chrome",
     "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js",
     "webdriver:delay:chrome": "yarn test:wait-for-server && yarn webdriver:start:chrome",
     "webdriver:start:chrome": "wdio ../../wdio.conf.js"

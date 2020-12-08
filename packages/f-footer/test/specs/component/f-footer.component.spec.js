@@ -1,64 +1,70 @@
 import FooterComponent from '../../../test-utils/component-objects/f-footer.component';
 
 describe('f-footer component tests', () => {
+    beforeEach(() => {
+        browser.url('?path=/story/components-organisms--footer-component');
+        browser.switchToFrame(0);
+        FooterComponent.waitForFooter();
+    });
+
     it('should display the footer', () => {
-        //Assert
+        // Assert
         expect(FooterComponent.isFooterDisplayed()).toBe(true);
     });
 
     it('should display App Store Icons', () => {
-        //Assert
+        // Assert
         expect(FooterComponent.isIosIconDisplayed()).toBe(true);
         expect(FooterComponent.isAndroidIconDisplayed()).toBe(true);
     });
 
     it('App Store links should be correct', () => {
-        //Act
+        // Act
         FooterComponent.clickIosIcon();
 
-        //Assert
-        expect(browser.getUrl()).toContain("https://apps.apple.com");  
+        // Assert
+        expect(browser.getUrl()).toContain('https://apps.apple.com');
 
-        //Act
+        // Act
         browser.back();
+        browser.switchToFrame(0);
         FooterComponent.waitForFooter();
         FooterComponent.clickAndroidIcon();
 
-        //Assert
-        expect(browser.getUrl()).toContain("https://play.google.com/");
-
-        //Act
-        // browser.back();
+        // Assert
+        expect(browser.getUrl()).toContain('https://play.google.com/');
     });
 
     it('should display Social Media Icons', () => {
-        //Assert
+        // Assert
         expect(FooterComponent.isTwitterIconDisplayed()).toBe(true);
-        expect(FooterComponent.isInstagramIconDisplayed()).toBe(true);
+        expect(FooterComponent.isYoutubeIconDisplayed()).toBe(true);
         expect(FooterComponent.isFacebookIconDisplayed()).toBe(true);
     });
 
     it('Social Media links should be correct', () => {
         // Act
-        FooterComponent.clickFacebookIcon(); 
+        FooterComponent.clickFacebookIcon();
 
         // Assert
-        expect(browser.getUrl()).toContain("https://www.facebook.com");
+        expect(browser.getUrl()).toContain('https://www.facebook.com');
 
         // Act
-        browser.back(); 
+        browser.back();
+        browser.switchToFrame(0);
         FooterComponent.waitForFooter();
-        FooterComponent.clickTwitterIcon(); 
+        FooterComponent.clickTwitterIcon();
 
         // Assert
-        expect(browser.getUrl()).toContain("https://twitter.com");
+        expect(browser.getUrl()).toContain('https://twitter.com');
 
         // Act
-        browser.back(); 
-        FooterComponent.waitForFooter(); 
-        FooterComponent.clickInstagramIcon();
-        
+        browser.back();
+        browser.switchToFrame(0);
+        FooterComponent.waitForFooter();
+        FooterComponent.clickYoutubeIcon();
+
         // Assert
-        expect(browser.getUrl()).toContain("https://www.instagram.com");
+        expect(browser.getUrl()).toContain('https://www.youtube.com');
     });
 });

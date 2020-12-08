@@ -1,3 +1,4 @@
+const headerComponent = () => $('[data-test-id="header-component"]');
 const loginLink = () => $('[data-test-id="login-link"]');
 const offersLink = () => $$('[data-test-id="offers-link"]');
 const deliveryEnquiryLink = () => $('[data-test-id="delivery-link"]');
@@ -11,6 +12,10 @@ const mobileOffersIcon = () => {
 
 const navigationOffersLink = () => {
     return offersLink().filter(element => element.getAttribute('class').includes('u-showAboveMid'));
+};
+
+exports.waitForHeader = () => {
+    headerComponent().waitForExist();
 };
 
 exports.isMobileOffersIconDisplayed = () => {

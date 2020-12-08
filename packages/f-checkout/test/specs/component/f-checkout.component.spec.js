@@ -1,25 +1,30 @@
 import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.component';
-import forEach from 'mocha-each';
 
 describe('f-checkout component tests', () => {
-    it('should display the f-checkout component', () => {
+    beforeEach(() => {
+        browser.url('?path=/story/components-organisms--checkout-component');
+        browser.switchToFrame(0);
+        CheckoutComponent.waitForCheckoutComponent();
+    });
+
+    it.skip('should display the f-checkout component', () => {
         // Assert
         expect(CheckoutComponent.isCheckoutComponentDisplayed()).toBe(true);
     });
 
-    it('should display the allergen link', () => {
+    it.skip('should display the allergen link', () => {
         // Assert
         expect(CheckoutComponent.isAllergenLinkDisplayed()).toBe(true);
     });
-    
-    it('should submit the checkout form', () => {
+
+    it.skip('should submit the checkout form', () => {
         // Arrange
         const addressInfo = {
             mobileNumber: '07777777779',
             line1: 'Test House',
             line2: 'High Street',
             city: 'Test City',
-            postcode: 'AR51 1AA', 
+            postcode: 'AR51 1AA',
             note: 'Doorbell is broken'
         };
 
@@ -32,7 +37,7 @@ describe('f-checkout component tests', () => {
         // Waiting for route here, so we can grab redirect url and show form submits.
     });
 
-    it('should display times in ascending order, with default text "As soon as possible" showing first', () => {
+    it.skip('should display times in ascending order, with default text "As soon as possible" showing first', () => {
         // Act 
         CheckoutComponent.selectOrderTime('As soon as possible');
         
@@ -43,7 +48,7 @@ describe('f-checkout component tests', () => {
         expect(CheckoutComponent.getOrderTimeOptionText(2)).toBe('Monday 00:30');
     });
 
-    it.only('should prevent user from writing a note of over 200 characters', () => {
+    it.skip('should prevent user from writing a note of over 200 characters', () => {
         // Arrange 
         const userNote = 'A'
         const addressInfo = {
@@ -59,7 +64,7 @@ describe('f-checkout component tests', () => {
         expect(noteLength).toBe(200)
     });
 
-    it('should enable a user to submit without adding a note', () => {
+    it.skip('should enable a user to submit without adding a note', () => {
         // Arrange
         const addressInfo = {
             mobileNumber: '07777777779',
