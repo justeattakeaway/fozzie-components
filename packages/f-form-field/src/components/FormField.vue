@@ -5,7 +5,7 @@
             $style['c-formField'], {
                 [$style['c-formField--invalid']]: hasError,
                 [$style[`c-formField--grouped`]]: isGrouped,
-                [$style[`c-formField--grouped${groupPosition}`]]: isGrouped
+                [$style[`c-formField--${groupPosition}Group`]]: isGrouped
             }
         ]"
         :data-test-id="testId.container">
@@ -315,20 +315,20 @@ $form-input-focus                         : $blue--light;
         padding: 0;
     }
 
-    .c-formField--groupedtop {
+    .c-formField--topGroup {
         .c-formField-input {
             border-radius: $form-input-borderRadius $form-input-borderRadius 0 0;
         }
     }
 
-    .c-formField--groupedmiddle {
+    .c-formField--middleGroup {
         .c-formField-input {
             border-top: none;
             border-radius: 0;
         }
     }
 
-    .c-formField--groupedbottom {
+    .c-formField--bottomGroup {
         .c-formField-input {
             border-top: none;
             border-radius: 0 0 $form-input-borderRadius $form-input-borderRadius;
