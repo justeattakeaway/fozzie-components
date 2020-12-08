@@ -1,5 +1,6 @@
 import * as generalServices from '../general.services';
 import * as helpers from '../../utils/helpers';
+import { LOCATION_COOKIE_PROPS } from '../constants';
 
 describe('`general.services`', () => {
     describe('`processLocationCookie`', () => {
@@ -8,14 +9,14 @@ describe('`general.services`', () => {
         });
 
         describe('when invoked', () => {
-            describe('AND `shouldSetCookie` is not defined', () => {
+            describe('AND `shouldSetCookie` is set to `false`', () => {
                 it('should return `false`', () => {
                     expect(generalServices.processLocationCookie()).toBe(false);
                 });
             });
 
-            describe('AND `shouldSetCookie` is defined & `address` matches the correct `type`', () => {
-                it('should invoke `setCookie` to manually set a location cookie', () => {
+            describe('AND `shouldSetCookie` is set to `true` & `address` matches the correct `type` `string`', () => {
+                it('should invoke `setCookie` to manually set a location cookie for `je-location`', () => {
                     // Arrange
                     const address = 'AR511AR';
                     const spy = jest.spyOn(helpers, 'setCookie');
@@ -25,6 +26,60 @@ describe('`general.services`', () => {
 
                     // Assert
                     expect(spy).toHaveBeenCalledWith('je-location', address, 365);
+                });
+            });
+
+            describe('AND `shouldSetCookie` is set to `true` & `address` does not match the `type` `string`', () => {
+                it('should invoke `setCookie` to manually set location cookies for `je-location`', () => {
+                    // Arrange
+                    const address = {
+                        postcode: 'AR511AR'
+                    };
+
+                    const spy = jest.spyOn(helpers, 'setCookie');
+
+                    // Act
+                    generalServices.processLocationCookie(true, address);
+
+                    // Assert
+                    expect(spy).toHaveBeenCalledWith('je-location', address.postcode, 365);
+                });
+
+                it.each(LOCATION_COOKIE_PROPS)('set cookies correctly "%s"', type => {
+                    // Arrange
+                    const address = {
+                        sublocality: 'spectroscopic',
+                        unitNumber: 'Galactic interstellar',
+                        street: 'Earth\'s northern hemisphere',
+                        houseNo: '1',
+                        city: 'H II',
+                        state: 'state'
+                    };
+
+                    const spy = jest.spyOn(helpers, 'setJeCookie');
+
+                    // Act
+                    generalServices.processLocationCookie(true, address);
+
+                    // Assert
+                    expect(spy).toHaveBeenCalledWith(type, address[type]);
+                });
+                
+                it('should set the `latitude` & `longitude` if the address response contain them', () => {
+                    // Arrange
+                    const address = {
+                        latitude: 1.1,
+                        longitude: 1.2
+                    };
+    
+                    const spy = jest.spyOn(helpers, 'setJeCookie');
+    
+                    // Act
+                    generalServices.processLocationCookie(true, address);
+    
+                    // Assert
+                    expect(spy).toHaveBeenCalledWith('latitude', 1.1);
+                    expect(spy).toHaveBeenCalledWith('longitude', 1.2);
                 });
             });
         });
