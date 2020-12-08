@@ -21,8 +21,6 @@ const search = ({
         ...location
     };
 
-    debugger;
-
     if (onSubmit) {
         return false;
     } else if (formUrl) {

@@ -45,26 +45,6 @@ describe('`general.services`', () => {
                     expect(spy).toHaveBeenCalledWith('je-location', address.postcode, 365);
                 });
 
-                it('should invoke `setJeCookie` for each address component', () => {
-                    // Arrange
-                    const address = {
-                        unitNumber: '1',
-                        street: 'Some street',
-                        houseNo: 'houseNo',
-                        city: 'city',
-                        sublocality: 'sublocality',
-                        state: 'state'
-                    };
-
-                    const spy = jest.spyOn(helpers, 'setJeCookie');
-
-                    // Act
-                    generalServices.processLocationCookie(true, address);
-
-                    // Assert
-                    expect(spy).toHaveBeenCalledTimes(6);
-                });
-
                 it.each(LOCATION_COOKIE_PROPS)('set cookies correctly "%s"', type => {
                     // Arrange
                     const address = {

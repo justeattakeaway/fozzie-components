@@ -258,8 +258,6 @@ export default {
         async submit (e) {
             this.setIsValid(this.service.isValid(this.address));
 
-            debugger;
-
             if (this.hasLastSavedAddress) {
                 e.preventDefault();
                 this.$emit(SUBMIT_SAVED_ADDRESS);
@@ -276,9 +274,6 @@ export default {
 
                 if (this.service.isAutocompleteEnabled) {
                     e.preventDefault();
-
-                    debugger;
-
 
                     const info = await this.onSelectedSuggestion();
 
@@ -324,8 +319,6 @@ export default {
          * */
         onSelectedSuggestion (index) {
             this.address = this.suggestionFormat(this.suggestions[index || this.keyboardSuggestionIndex]);
-
-            debugger;
 
             const locationInformation = selectedSuggestion(
                 this.service,
