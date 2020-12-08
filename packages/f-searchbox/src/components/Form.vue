@@ -277,9 +277,6 @@ export default {
 
                     const info = await this.onSelectedSuggestion();
 
-                    console.log(info);
-
-
                     // if the address is still missing fields, return here
                     if (!info) {
                         return false;
