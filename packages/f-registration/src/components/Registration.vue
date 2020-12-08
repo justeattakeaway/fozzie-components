@@ -23,7 +23,6 @@
             <form
                 type="post"
                 :class="$style['c-registration-form']"
-                tabindex="0"
                 @click="formStart"
                 @focus="formStart"
                 @submit.prevent="onFormSubmit">
