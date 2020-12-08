@@ -161,7 +161,7 @@ const copyOverrides = {
     @address-search-focus="addressFocus"
     @submit-saved-address="validSavedAddressSearch"
     @submit-valid-address="validSearch"
-    @track-postcode-changed="onPostcodeChanged"/>
+    @track-postcode-changed="onostcodeChanged"/>
 ```
 
 ### `@searchbox-error`
