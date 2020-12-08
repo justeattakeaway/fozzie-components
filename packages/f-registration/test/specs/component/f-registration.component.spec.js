@@ -1,6 +1,12 @@
 import RegistrationComponent from '../../../test-utils/component-objects/f-registration.component';
 
 describe('f-registration component tests', () => {
+    beforeEach(() => {
+        browser.url('?path=/story/components-organisms--registration-component');
+        browser.switchToFrame(0);
+        RegistrationComponent.waitForRegistrationForm();
+    });
+
     it('should display errors if mandatory fields are empty', () => {
         // Arrange
         const userInfo = {

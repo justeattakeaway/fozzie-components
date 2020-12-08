@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Header should render default component markup 1`] = `
-<header data-theme="je" class="c-header c-header--transparent c-header--gradient">
+<header data-theme="je" data-test-id="header-component" class="c-header c-header--transparent c-header--gradient">
   <skip-to-main-stub text="Skip to main content" transparentbg="true"></skip-to-main-stub>
   <div class="c-header-container">
     <logo-stub theme="je" companyname="Just Eat" logogtmlabel="click_logo" headerbackgroundtheme="transparent"></logo-stub>

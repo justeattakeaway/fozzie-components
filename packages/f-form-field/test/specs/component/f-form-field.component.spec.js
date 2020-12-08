@@ -1,6 +1,12 @@
 import FormFieldComponent from '../../../test-utils/component-objects/f-form-field.component';
 
 describe('f-form-field component tests', () => {
+    beforeEach(() => {
+        browser.url('?path=/story/components-atoms--form-field-component');
+        browser.switchToFrame(0);
+        FormFieldComponent.waitForFormField();
+    });
+
     it('should display f-form-field', () => {
         // Assert
         expect(FormFieldComponent.isFormFieldDisplayed()).toBe(true);
@@ -12,12 +18,12 @@ describe('f-form-field component tests', () => {
     });
 
     it('should display user input', () => {
-        // Arrange  
+        // Arrange
         const userInput = {
             firstName: 'abcd'
         };
 
-        //Assert
+        // Assert
         expect(FormFieldComponent.displayUserInput(userInput)).toBeVisible;
     });
 });
