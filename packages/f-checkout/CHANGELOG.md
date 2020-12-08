@@ -5,11 +5,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.18.0
 ------------------------------
-*December 7, 2020*
+*December 8, 2020*
 
 ### Added
-- Webdriver tests for dropdown in `Selector` component
-- Webdriver tests for note-field character limit 
+- Webdriver tests for dropdown in `Selector`
+- Webdriver tests for note-field character limit in `UserNote`
 - Loglevel to `silent` in wdio.conf
 
 ### Changed

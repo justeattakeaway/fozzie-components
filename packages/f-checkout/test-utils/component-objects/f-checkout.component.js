@@ -88,9 +88,9 @@ exports.populateCheckoutForm = addressInfo => {
 
 /**
  * @description
- * Sets the value of the order time dropdown based on visible text.
+ * Sets the value of the order time in dropdown based on visible text.
  *
- * @param {String} dropdownTime The visible text value of the order time
+ * @param {String} orderTime The visible text value of the order time
  */
 exports.selectOrderTime = orderTime => {
     orderTimeDropdown().selectByVisibleText(orderTime);
@@ -105,7 +105,7 @@ exports.getOrderTimeOptionText = (index) => {
 /**
  * @description
  * Sets the value of the user note and grabs the length of characters.
- * @param {Object} addressInfo The user note value to be entered
+ * @param {Object} addressInfo
  * @param {String} addressInfo.note The user's extra note
  */
 exports.getUserNoteLength = addressInfo => {
@@ -114,7 +114,7 @@ exports.getUserNoteLength = addressInfo => {
 };
 /**
  * @description
- * Submits the checkout form.
+ * Clicks 'Go to payment' to submit the form.
  */
 exports.submit = () => {
     goToPaymentButton().click();

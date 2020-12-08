@@ -35,7 +35,7 @@ describe('f-checkout component tests', () => {
             line2: 'High Street',
             city: 'Test City',
             postcode: 'AR51 1AA', 
-            note: 'No mushrooms! Doorbell number 2'
+            note: 'Doorbell is broken'
         };
 
         // Act
@@ -48,6 +48,9 @@ describe('f-checkout component tests', () => {
     });
 
     it('should display times in ascending order, with default text "As soon as possible" showing first', () => {
+        // Act 
+        CheckoutComponent.selectOrderTime('As soon as possible');
+        
         // Assert
         expect(CheckoutComponent.isOrderTimeDropdownDisplayed()).toBe(true);
         expect(CheckoutComponent.getOrderTimeOptionText(0)).toBe('As soon as possible');
