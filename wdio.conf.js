@@ -18,8 +18,8 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './test/specs/component/*.spec.js', 
-        './test/specs/accessibility/*.spec.js'
+        './test/specs/component/*.spec.js'
+        // './test/specs/accessibility/*.spec.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -88,7 +88,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    // baseUrl: 'http://localhost:8080',
+    baseUrl: 'http://localhost:8080',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -210,9 +210,8 @@ exports.config = {
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
-    beforeTest: () => {
-        browser.url('http://localhost:8080');
-    },
+    // beforeTest: () => {
+    // },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
      * beforeEach in Mocha)
@@ -228,10 +227,8 @@ exports.config = {
     /**
      * Function to be executed after a test (in Mocha/Jasmine).
      */
-    afterTest: () => {
-        browser.url('http://localhost:8080');
-        browser.maximizeWindow();
-    }
+    // afterTest: () => {
+    //}
 
 
     /**
