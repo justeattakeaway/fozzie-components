@@ -4,7 +4,7 @@
         :class="[
             $style['c-formField'], {
                 [$style['c-formField--invalid']]: hasError,
-                [$style['c-formField--grouped']]: isGrouped
+                [$style['c-formField--grouped']]: isDeffinetlyGrouped
             }
         ]"
         :data-test-id="testId.container">
@@ -196,6 +196,10 @@ export default {
 
         isSelectionControl () {
             return !(this.inputType === 'radio' || this.inputType === 'checkbox');
+        },
+
+        isDeffinetlyGrouped () {
+            return this.isGrouped && !this.hasError;
         }
     },
 
