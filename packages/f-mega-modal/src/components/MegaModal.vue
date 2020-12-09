@@ -27,25 +27,22 @@
                 <slot
                     v-if="hasCloseButton"
                     name="close-button">
-                    <button
+                    <f-button
                         type="button"
-                        :class="['c-megaModal-closeBtn u-ir', $style['c-megaModal-closeBtn'], {
+                        :class="[$style['c-megaModal-closeBtn'], {
                             [$style['c-megaModal-closeBtn--rounded']]: isCloseRounded,
                             [$style['c-megaModal-closeBtn--fixed']]: isCloseFixed || isFullHeight
                         }]"
+                        button-type="icon"
+                        button-size="xsmall"
                         data-test-id="close-modal"
-                        @click="close">
-                        <svg
-                            :class="$style['c-megaModal-closeIcon']"
-                            viewBox="0 0 9 9"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.33 4.74L.83 8.25a.29.29 0 0 1-.41-.4l3.5-3.52L.43.83a.29.29 0 1 1 .4-.41l3.51 3.5L7.85.43a.29.29 0 0 1 .4.4l-3.51 3.5 3.51 3.52a.29.29 0 0 1-.4.4L4.33 4.74z" />
-                        </svg>
-
+                        @click.native="close">
+                        <cross-icon
+                            :class="[$style['c-megaModal-closeIcon']]" />
                         <span class="is-visuallyHidden">
                             {{ closeButtonCopy }}
                         </span>
-                    </button>
+                    </f-button>
                 </slot>
 
                 <slot />
@@ -55,9 +52,16 @@
 </template>
 
 <script>
+import { CrossIcon } from '@justeat/f-vue-icons';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import FButton from '@justeat/f-button';
+import '@justeat/f-button/dist/f-button.css';
 
 export default {
+    components: {
+        CrossIcon,
+        FButton
+    },
     props: {
         isOpen: {
             type: Boolean,
@@ -346,7 +350,6 @@ export default {
 }
 
 .c-megaModal-closeBtn {
-    padding: spacing();
     position: absolute;
     right: spacing(x2);
     top: spacing(x1.5);
@@ -354,10 +357,6 @@ export default {
 
     @include media('>=mid') {
         position: fixed;
-    }
-
-    &:hover {
-        cursor: pointer;
     }
 }
 
@@ -373,9 +372,6 @@ export default {
     }
 
 .c-megaModal-closeIcon {
-    background-size: contain;
-    background-position: center center;
-    background-repeat: no-repeat;
     display: block;
     height: 16px;
     speak: none;
