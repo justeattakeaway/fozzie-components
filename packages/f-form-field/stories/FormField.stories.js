@@ -30,13 +30,16 @@ export const FormFieldComponent = () => ({
         },
         dropdownOptions: {
             default: array('Dropdown Options', ['As soon as possible', 'Today in 5 minutes'], ',')
+        },
+        isGrouped: {
+            default: boolean('isGrouped', false)
         }
     },
     parameters: {
         notes: 'some documentation here'
     },
     template:
-        '<form-field :locale="locale" :labelText="labelText" :inputType="inputType" :labelStyle="labelStyle" :hasError="hasError" :dropdownOptions="dropdownOptions"/>'
+        '<form-field :locale="locale" :labelText="labelText" :inputType="inputType" :labelStyle="labelStyle" :hasError="hasError" :dropdownOptions="dropdownOptions" :isGrouped="isGrouped" />'
 });
 
 FormFieldComponent.storyName = 'f-form-field';
