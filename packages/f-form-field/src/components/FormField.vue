@@ -3,7 +3,8 @@
         :data-theme-formfield="theme"
         :class="[
             $style['c-formField'], {
-                [$style['c-formField--invalid']]: hasError
+                [$style['c-formField--invalid']]: hasError,
+                [$style['c-formField--grouped']]: isGrouped
             }
         ]"
         :data-test-id="testId.container">
@@ -120,6 +121,11 @@ export default {
         dropdownOptions: {
             type: Array,
             default: () => null
+        },
+
+        isGrouped: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -242,6 +248,7 @@ $form-input-focus                         : $blue--light;
         margin-top: spacing(x2);
     }
 }
+
     .c-formField-inputWrapper {
         position: relative;
     }
@@ -290,8 +297,30 @@ $form-input-focus                         : $blue--light;
         }
     }
 
-        .c-formField-dropdownContainer {
-            padding: 0;
-        }
+    .c-formField-dropdownContainer {
+        padding: 0;
+    }
 
+    .c-formField--grouped {
+        & + & {
+            margin-top: 0;
+
+            .c-formField-input {
+                border-radius: 0 0 $form-input-borderRadius $form-input-borderRadius;
+                border-top: 0;
+            }
+        }
+    }
+
+    .c-formField--grouped:not(:last-child) {
+        .c-formField-input {
+            border-radius: 0;
+        }
+    }
+
+    .c-formField--grouped:first-child {
+        .c-formField-input {
+            border-radius: $form-input-borderRadius $form-input-borderRadius 0 0;
+        }
+    }
 </style>
