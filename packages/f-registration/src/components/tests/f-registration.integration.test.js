@@ -11,7 +11,9 @@ const axiosMock = new MockAdapter(axios);
 
 const propsData = {
     locale: 'en-GB',
-    createAccountUrl: 'http://localhost/consumer/uk'
+    createAccountUrl: 'http://localhost/consumer/uk',
+    showLoginLink: true,
+    loginUrl: '/account/register'
 };
 
 let wrapper;
