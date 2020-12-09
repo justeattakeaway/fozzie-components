@@ -63,7 +63,6 @@ exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
 exports.isOrderTimeDropdownDisplayed = () => orderTimeDropdown().isDisplayed();
 exports.userNoteMaxCharacterCount = () => userNoteInput().getAttribute('maxlength');
 exports.clickPaymentButton = () => goToPaymentButton().click();
-exports.getTitleAttribute = fieldName => fields[fieldName].input().getAttribute('title');
 
 /**
  * @description

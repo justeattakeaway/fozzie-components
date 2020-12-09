@@ -22,14 +22,6 @@ describe('f-checkout "delivery" component tests', () => {
         expect(CheckoutComponent.isFieldDisplayed('mobileNumber')).toBe(true);
     });
 
-    it('should have a title matching the error on the field', () => {
-        // Arrange
-        const numberFieldTitle = 'Your phone number should be at least 10 characters long and shouldn\'t contain letters or special characters';
-
-        // Assert
-        expect(CheckoutComponent.getTitleAttribute('mobileNumber', 'title')).toBe(numberFieldTitle);
-    });
-
     it('should display an error message when a number format is incorrectly entered', () => {
         // Arrange
         const addressDetails = {
