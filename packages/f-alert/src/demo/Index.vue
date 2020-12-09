@@ -54,21 +54,21 @@
                 type="text"
                 data-test-id="control-heading">
         </div>
-        <vue-alert
+        <f-alert
             :locale="controls.locale"
             :type="controls.alertType"
             :is-dismissible="controls.isDismissible"
             :heading="controls.heading">
             You can put any HTML here!
-        </vue-alert>
+        </f-alert>
     </div>
 </template>
 
 <script>
-import VueAlert from '@/components/Alert.vue';
+import FAlert from '@/components/Alert.vue';
 
 export default {
-    components: { VueAlert },
+    components: { FAlert },
     data: () => ({
         controls: {
             locale: 'en-GB',

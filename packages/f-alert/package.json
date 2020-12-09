@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-alert",
   "description": "Fozzie Alert – Fozzie Alert Component",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "dist/f-alert.umd.min.js",
   "files": [
     "dist"
@@ -32,7 +32,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "report": "cd ../.. && yarn report",
-    "test": "vue-cli-service test:unit", 
+    "test": "vue-cli-service test:unit",
     "test-component:chrome": "run-p --race demo webdriver:delay:chrome",
     "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js",
     "webdriver:delay:chrome": "yarn test:wait-for-server && yarn webdriver:start:chrome",
@@ -47,8 +47,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.0.0",
-    "@justeat/f-vue-icons": "1.4.0"
+    "@justeat/f-services": "1.0.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
@@ -59,6 +58,8 @@
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
-    "node-sass-magic-importer": "5.3.2"
+    "node-sass-magic-importer": "5.3.2",
+    "@justeat/f-button": "0.4.0",
+    "@justeat/f-vue-icons": "1.13.0"
   }
 }

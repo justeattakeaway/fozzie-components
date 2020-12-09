@@ -6,15 +6,15 @@
         <meta
             name="viewport"
             content="width=device-width, initial-scale=1">
-        <vue-button />
+        <f-button />
     </div>
 </template>
 
 <script>
-import VueButton from '@/components/Button.vue';
+import FButton from '@/components/Button.vue';
 
 export default {
-    components: { VueButton }
+    components: { FButton }
 };
 </script>
 
