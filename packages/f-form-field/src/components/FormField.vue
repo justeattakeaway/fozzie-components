@@ -4,7 +4,7 @@
         :class="[
             $style['c-formField'], {
                 [$style['c-formField--invalid']]: hasError,
-                [$style['c-formField--grouped']]: isDeffinetlyGrouped
+                [$style['c-formField--grouped']]: isFieldGrouped
             }
         ]"
         :data-test-id="testId.container">
@@ -198,7 +198,7 @@ export default {
             return !(this.inputType === 'radio' || this.inputType === 'checkbox');
         },
 
-        isDeffinetlyGrouped () {
+        isFieldGrouped () {
             return this.isGrouped && !this.hasError;
         }
     },
