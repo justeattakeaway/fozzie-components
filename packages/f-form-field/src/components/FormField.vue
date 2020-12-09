@@ -4,7 +4,7 @@
         :class="[
             $style['c-formField'], {
                 [$style['c-formField--invalid']]: hasError,
-                [$style[`c-formField--grouped`]]: isGrouped
+                [$style['c-formField--grouped']]: isGrouped
             }
         ]"
         :data-test-id="testId.container">
