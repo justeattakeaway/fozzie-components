@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.4.0
+------------------------------
+*December 7, 2020*
+
+### Changed
+- Regular button changed to vue button component
+- Renamed VueAlert to FAlert
+
+### Updated
+- `f-vue-icons` to the latest version (1.13.0)
+
+
 v0.3.0
 ------------------------------
 *November 30, 2020*

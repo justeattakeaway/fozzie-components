@@ -18,19 +18,21 @@
                 data-test-id="alert-heading">
                 {{ heading }}
             </h2>
-            <button
+            <f-button
                 v-if="isDismissible"
                 type="button"
-                :class="[$style['c-alert-dismiss'], 'o-btn o-btn--icon']"
+                :class="[$style['c-alert-dismiss']]"
+                button-type="icon"
+                button-size="xsmall"
                 data-test-id="alert-dismiss"
-                @click="dismiss">
+                @click.native="dismiss">
                 <cross-icon
                     :class="[$style['c-alert-dismiss-icon']]"
                 />
                 <span class="is-visuallyHidden">
                     {{ copy.dismissAlertText }}
                 </span>
-            </button>
+            </f-button>
         </div>
         <div
             :class="$style['c-alert-content']">
@@ -48,16 +50,19 @@ import {
     WarningIcon
 } from '@justeat/f-vue-icons';
 import { globalisationServices } from '@justeat/f-services';
+import FButton from '@justeat/f-button';
 import tenantConfigs from '../tenants';
+import '@justeat/f-button/dist/f-button.css';
 
 export default {
-    name: 'VueAlert',
+    name: 'FAlert',
     components: {
         CrossIcon,
         DangerIcon,
         InfoIcon,
         SuccessIcon,
-        WarningIcon
+        WarningIcon,
+        FButton
     },
     props: {
         locale: {
@@ -158,7 +163,7 @@ $alert-borderRadius: $border-radius;
             margin-right: 10px;
         }
 
-    button.c-alert-dismiss { // TODO: Needed more specificity here.
+    .c-alert-dismiss {
         text-indent: 0;
         margin-left: auto;
         margin-right: spacing();
@@ -170,6 +175,10 @@ $alert-borderRadius: $border-radius;
     }
 
         .c-alert-dismiss-icon {
-            height: 13px;
+            height: 16px;
+
+            * {
+                fill: $color-border--interactive;
+            }
         }
 </style>
