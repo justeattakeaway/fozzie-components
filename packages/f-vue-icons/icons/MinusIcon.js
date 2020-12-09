@@ -9,13 +9,19 @@ export default {
     return h("svg", _mergeJSXProps([{
       attrs: {
         xmlns: "http://www.w3.org/2000/svg",
-        viewBox: "0 0 12 1"
+        viewBox: "0 0 14 2"
       },
       "class": "c-ficon c-ficon--minus"
-    }, ctx.data]), [h("path", {
+    }, ctx.data]), [h("defs", [h("path", {
       attrs: {
-        d: "M.33 1a.33.33 0 0 1 0-.67h11.34a.33.33 0 0 1 0 .67H.33z",
-        fill: "#333"
+        id: "minus-a",
+        d: "M18 11a1 1 0 010 2H6a1 1 0 010-2h12z"
+      }
+    })]), h("use", {
+      attrs: {
+        "fill-rule": "evenodd",
+        transform: "translate(-5 -11)",
+        href: "#minus-a"
       }
     })]);
   }
