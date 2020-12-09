@@ -4,8 +4,7 @@
         :class="[
             $style['c-formField'], {
                 [$style['c-formField--invalid']]: hasError,
-                [$style[`c-formField--grouped`]]: isGrouped,
-                [$style[`c-formField--${groupPosition}Group`]]: isGrouped
+                [$style[`c-formField--grouped`]]: isGrouped
             }
         ]"
         :data-test-id="testId.container">
@@ -73,7 +72,6 @@ import {
     DEFAULT_INPUT_TYPE,
     VALID_INPUT_TYPES,
     VALID_LABEL_STYLES,
-    VALID_GROUP_POSITIONS,
     MOBILE_WIDTH
 } from '../constants';
 
@@ -128,12 +126,6 @@ export default {
         isGrouped: {
             type: Boolean,
             default: false
-        },
-
-        groupPosition: {
-            type: String,
-            default: 'middle',
-            validator: value => (VALID_GROUP_POSITIONS.indexOf(value) !== -1)
         }
     },
 
@@ -257,12 +249,6 @@ $form-input-focus                         : $blue--light;
     }
 }
 
-.c-formField--grouped {
-    & + & {
-        margin-top: 0;
-    }
-}
-
     .c-formField-inputWrapper {
         position: relative;
     }
@@ -315,23 +301,26 @@ $form-input-focus                         : $blue--light;
         padding: 0;
     }
 
-    .c-formField--topGroup {
-        .c-formField-input {
-            border-radius: $form-input-borderRadius $form-input-borderRadius 0 0;
+    .c-formField--grouped {
+        & + & {
+            margin-top: 0;
+
+            .c-formField-input {
+                border-radius: 0 0 $form-input-borderRadius $form-input-borderRadius;
+                border-top: 0;
+            }
         }
     }
 
-    .c-formField--middleGroup {
+    .c-formField--grouped:not(:last-child) {
         .c-formField-input {
-            border-top: none;
             border-radius: 0;
         }
     }
 
-    .c-formField--bottomGroup {
+    .c-formField--grouped:first-child {
         .c-formField-input {
-            border-top: none;
-            border-radius: 0 0 $form-input-borderRadius $form-input-borderRadius;
+            border-radius: $form-input-borderRadius $form-input-borderRadius 0 0;
         }
     }
 </style>

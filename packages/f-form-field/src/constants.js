@@ -4,6 +4,4 @@ export const DEFAULT_INPUT_TYPE = 'text';
 
 export const VALID_LABEL_STYLES = ['default', 'inline', 'inlineNarrow'];
 
-export const VALID_GROUP_POSITIONS = ['middle', 'top', 'bottom'];
-
 export const MOBILE_WIDTH = 768;
