@@ -1710,11 +1710,6 @@
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "1.11.0"
 
-"@justeat/f-icons@2.12.0":
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.12.0.tgz#07b221b284b4827ddcc6e04841228f77f24df45d"
-  integrity sha512-5upDoB3PiSUTgg2IjddXpOVZ12LCLMBz+3ciQdhlasEvdYCHvsSO5QVB1KBgGCeKFfg0vIw0QkZWix6o54m3rQ==
-
 "@justeat/f-icons@2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.3.0.tgz#473cc1ce7edeb0ce58df674c9c4ee0ebf30171d8"
