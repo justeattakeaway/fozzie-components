@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.6.0
 ------------------------------
-*December 7, 2020*
+*December 9, 2020*
 
 ### Added
 - Grouped fields selection and styles.
