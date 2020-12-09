@@ -27,7 +27,7 @@
                 <slot
                     v-if="hasCloseButton"
                     name="close-button">
-                    <vue-button
+                    <f-button
                         type="button"
                         :class="[$style['c-megaModal-closeBtn'], {
                             [$style['c-megaModal-closeBtn--rounded']]: isCloseRounded,
@@ -42,7 +42,7 @@
                         <span class="is-visuallyHidden">
                             {{ closeButtonCopy }}
                         </span>
-                    </vue-button>
+                    </f-button>
                 </slot>
 
                 <slot />
@@ -54,13 +54,13 @@
 <script>
 import { CrossIcon } from '@justeat/f-vue-icons';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import VueButton from '@justeat/f-button';
+import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 
 export default {
     components: {
         CrossIcon,
-        VueButton
+        FButton
     },
     props: {
         isOpen: {

@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.3.0
 ------------------------------
-*December 7, 2020*
+*December 9, 2020*
 
 ### Added
 - Stylelint added to lint styling on build.
@@ -14,7 +14,7 @@ v0.3.0
 
 ### Changed
 - 'jet' theme instead of 'je'
-- Regular close button changed to vue-button
+- Regular close button changed to button component
 
 ### Removed
 - Bracket in Storybook file
