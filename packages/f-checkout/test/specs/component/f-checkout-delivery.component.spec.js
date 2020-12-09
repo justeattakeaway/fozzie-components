@@ -17,33 +17,30 @@ describe('f-checkout "delivery" component tests', () => {
         expect(CheckoutComponent.doesInputFieldExist(field)).toBe(true);
     });
 
-    forEach(['mobileNumber'])
-    .it('should display the mandatory fields', field => {
+    it('should display the mandatory fields', () => {
         // Assert
-        expect(CheckoutComponent.isFieldDisplayed(field)).toBe(true);
+        expect(CheckoutComponent.isFieldDisplayed('mobileNumber')).toBe(true);
     });
 
-    forEach(['mobileNumber'])
-    .it('should have a title matching the error on the field', field => {
+    it('should have a title matching the error on the field', () => {
         // Arrange
-        const mobileNumber = 'Your phone number should be at least 10 characters long and shouldn\'t contain letters or special characters';
+        const numberFieldTitle = 'Your phone number should be at least 10 characters long and shouldn\'t contain letters or special characters';
 
         // Assert
-        expect(CheckoutComponent.getAttributeValue(field, 'title')).toBe(mobileNumber);
+        expect(CheckoutComponent.getTitleAttribute('mobileNumber', 'title')).toBe(numberFieldTitle);
     });
 
-    forEach(['mobileNumber'])
-    .it('should display an error message when a number format is incorrectly entered', field => {
+    it('should display an error message when a number format is incorrectly entered', () => {
         // Arrange
-        const wrongNumber = {
+        const addressDetails = {
             mobileNumber: '+4512345678911'
         };
 
         // Act
-        CheckoutComponent.populateCheckoutForm(wrongNumber);
+        CheckoutComponent.populateCheckoutForm(addressDetails);
         CheckoutComponent.submit();
 
         // Assert
-        expect(CheckoutComponent.isFieldErrorDisplayed(field)).toBe(true);
+        expect(CheckoutComponent.isFieldErrorDisplayed('mobileNumber')).toBe(true);
     });
 });
