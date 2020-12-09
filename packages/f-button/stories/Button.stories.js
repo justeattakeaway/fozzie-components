@@ -2,7 +2,7 @@ import {
     withKnobs, select, boolean
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import VueButton from '../src/components/Button.vue';
+import FButton from '../src/components/Button.vue';
 
 export default {
     title: 'Components/Atoms',
@@ -10,7 +10,7 @@ export default {
 };
 
 export const ButtonComponent = () => ({
-    components: { VueButton },
+    components: { FButton },
     props: {
         buttonType: {
             default: select('Button Type', ['primary', 'secondary', 'outline', 'ghost', 'link', 'icon'], 'primary')
@@ -22,7 +22,7 @@ export const ButtonComponent = () => ({
             default: boolean('isFullWidth', false)
         }
     },
-    template: '<vue-button :buttonType="buttonType" :buttonSize="buttonSize" :isFullWidth="isFullWidth">Default Button Text</vue-button>'
+    template: '<f-button :buttonType="buttonType" :buttonSize="buttonSize" :isFullWidth="isFullWidth">Default Button Text</f-button>'
 });
 
 ButtonComponent.storyName = 'f-button';

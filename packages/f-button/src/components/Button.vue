@@ -14,7 +14,7 @@
 <script>
 
 export default {
-    name: 'VueButton',
+    name: 'FButton',
     components: {},
     props: {
         buttonType: {
