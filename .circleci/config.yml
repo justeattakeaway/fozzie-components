@@ -169,7 +169,7 @@ jobs:
           command: yarn test
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
-          command: yarn global add @vue/cli @vue/cli-service-global http-server
+          command: yarn global add @vue/cli @vue/cli-service-global
       - run: # Build Storybook
           name: Build Storybook
           command: yarn storybook:build
