@@ -3,8 +3,7 @@ import DemoControls from '../../../test-utils/component-objects/demo-controls';
 import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.component';
 
 describe('f-checkout "collection" component tests', () => {
-    forEach(['mobileNumber'])
-    .it('each fields error message should be displayed', field => {
+    it('each fields error message should be displayed', () => {
         // Arrange
         DemoControls.selectCheckoutMethod('collection');
 
@@ -12,7 +11,7 @@ describe('f-checkout "collection" component tests', () => {
         CheckoutComponent.submit();
 
         // Assert
-        expect(CheckoutComponent.isFieldErrorDisplayed(field)).toBe(true);
+        expect(CheckoutComponent.isFieldErrorDisplayed('mobileNumber')).toBe(true);
     });
 
     forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
@@ -24,12 +23,11 @@ describe('f-checkout "collection" component tests', () => {
         expect(CheckoutComponent.doesInputFieldExist(field)).toBe(false);
     });
 
-    forEach(['mobileNumber'])
-    .it('should display the mandatory fields', field => {
+    it('should display the mandatory fields', () => {
         // Arrange
         DemoControls.selectCheckoutMethod('collection');
 
         // Assert
-        expect(CheckoutComponent.isFieldDisplayed(field)).toBe(true);
+        expect(CheckoutComponent.isFieldDisplayed('mobileNumber')).toBe(true);
     });
 });
