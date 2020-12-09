@@ -11,9 +11,6 @@ v0.20.0
 - `f-form-field` version.
 - Styling in `Address` component.
 
-### Fixed
-- Updated `Selector` snapshot.
-
 
 v0.19.0
 ------------------------------
