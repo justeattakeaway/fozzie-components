@@ -2,12 +2,12 @@
 
 exports[`Selector computed :: orderMethod should show the collection label when the \`serviceType\` is \`collection\` 1`] = `
 <select id="time-selection" data-test-id="formfield-order-time-dropdown-select" name="order-time" class="FormDropdown_c-formDropdown-select_ROvjN">
-  <option data-test-id="formfield-order-time-dropdown-option-0" value="time 1">time 1</option>
+  <option data-test-id="formfield-order-time-dropdown-option-0" value="time 1"> time 1 </option>
 </select>
 `;
 
 exports[`Selector computed :: orderMethod should show the delivery label when the \`serviceType\` is \`delivery\` 1`] = `
 <select id="time-selection" data-test-id="formfield-order-time-dropdown-select" name="order-time" class="FormDropdown_c-formDropdown-select_ROvjN">
-  <option data-test-id="formfield-order-time-dropdown-option-0" value="time 1">time 1</option>
+  <option data-test-id="formfield-order-time-dropdown-option-0" value="time 1"> time 1 </option>
 </select>
 `;
