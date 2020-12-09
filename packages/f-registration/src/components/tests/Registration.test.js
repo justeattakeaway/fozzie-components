@@ -9,7 +9,9 @@ jest.mock('../../services/RegistrationServiceApi', () => ({ createAccount: jest.
 describe('Registration', () => {
     allure.feature('Registration');
     const propsData = {
-        createAccountUrl: 'http://localhost/account/register'
+        createAccountUrl: 'http://localhost/account/register',
+        showLoginLink: true,
+        loginUrl: '/account/register'
     };
 
     it('should be defined', () => {
@@ -33,7 +35,8 @@ describe('Registration', () => {
             const wrapper = shallowMount(Registration, {
                 propsData: {
                     createAccountUrl: 'http://localhost/account/register',
-                    showLoginLink: true
+                    showLoginLink: true,
+                    loginUrl: '/account/register'
                 }
             });
 
@@ -46,7 +49,8 @@ describe('Registration', () => {
             const wrapper = shallowMount(Registration, {
                 propsData: {
                     createAccountUrl: 'http://localhost/account/register',
-                    showLoginLink: false
+                    showLoginLink: false,
+                    loginUrl: ''
                 }
             });
 
@@ -66,7 +70,9 @@ describe('Registration', () => {
         it('should show emit VisitLoginPage event when login link is clicked.', () => {
             const wrapper = shallowMount(Registration, {
                 propsData: {
-                    createAccountUrl: 'http://localhost/account/register'
+                    createAccountUrl: 'http://localhost/account/register',
+                    showLoginLink: true,
+                    loginUrl: '/account/register'
                 }
             });
 
@@ -81,7 +87,9 @@ describe('Registration', () => {
             // Arrange
             const wrapper = shallowMount(Registration, {
                 propsData: {
-                    createAccountUrl: 'http://localhost/account/register'
+                    createAccountUrl: 'http://localhost/account/register',
+                    showLoginLink: true,
+                    loginUrl: '/account/register'
                 }
             });
 
