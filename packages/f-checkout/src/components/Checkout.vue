@@ -24,6 +24,7 @@
                 @submit.prevent="onFormSubmit">
                 <form-field
                     v-model="customer.mobileNumber"
+                    :title="$t('validationMessages.mobileNumber.requiredError')"
                     name="mobile-number"
                     :label-text="$t('labels.mobileNumber')"
                     :has-error="!isMobileNumberValid">
@@ -35,7 +36,6 @@
                         </error-message>
                     </template>
                 </form-field>
-
                 <address-block
                     v-if="isCheckoutMethodDelivery"
                     data-test-id="address-block" />

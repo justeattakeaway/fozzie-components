@@ -48,9 +48,9 @@ const fields = {
     addressPostcode: {
         input: () => $(FIELDS.addressPostcode.input),
         error: () => $(FIELDS.addressPostcode.error)
-    }, 
+    },
     userNote: {
-        input: () => $(FIELDS.userNote.input), 
+        input: () => $(FIELDS.userNote.input),
         error: ''
     }
 };
@@ -63,6 +63,7 @@ exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
 exports.isOrderTimeDropdownDisplayed = () => orderTimeDropdown().isDisplayed();
 exports.userNoteMaxCharacterCount = () => userNoteInput().getAttribute('maxlength');
 exports.clickPaymentButton = () => goToPaymentButton().click();
+exports.getAttributeValue = fieldName => fields[fieldName].input().getAttribute('title');
 
 /**
  * @description
@@ -88,16 +89,16 @@ exports.populateCheckoutForm = addressInfo => {
 /**
  * @description
  * Sets the value of the order time in dropdown based on visible text.
- * 
+ *
  * @param {String} orderTime The visible text value of the order time
  */
 exports.selectOrderTime = orderTime => {
     orderTimeDropdown().selectByVisibleText(orderTime);
 };
-/** 
+/**
  * @description
  * The time of the order should increase when a higher index is applied.
- * 
+ *
  * @param {Number} index The index of the `orderTimeDropdownOptions` array
  */
 exports.getOrderTimeOptionText = (index) => {
@@ -106,7 +107,7 @@ exports.getOrderTimeOptionText = (index) => {
 /**
  * @description
  * Sets the value of the user note.
- * 
+ *
  * @param {Object} addressInfo
  * @param {String} addressInfo.note The user's extra note
  */
@@ -116,7 +117,7 @@ exports.inputUserNote = addressInfo => {
 /**
  * @description
  * Grabs the length of characters of the user note.
- * 
+ *
  * @returns {number} The length of the user note
  */
 exports.getUserNoteLength = () => {
