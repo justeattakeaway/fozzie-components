@@ -11,6 +11,7 @@
                 name="address-line-1"
                 :label-text="$t('labels.line1')"
                 label-style="inline"
+                is-grouped
                 :has-error="isAddressLine1Empty">
                 <template #error>
                     <error-message
@@ -27,6 +28,7 @@
                 :class="$style['c-address-formField']"
                 name="address-line-2"
                 :label-text="$t('labels.line2')"
+                is-grouped
                 label-style="inline" />
         </fieldset>
 
@@ -144,8 +146,6 @@ $address-weight-bold     : $font-weight-bold;
     @include font-size($address-fontSize);
 
     .c-address-formField {
-        margin-bottom: -17px;
-
         &:focus-within,
         &:active {
             z-index: zIndex(high);

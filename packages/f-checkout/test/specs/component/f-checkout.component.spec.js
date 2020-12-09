@@ -51,11 +51,9 @@ describe('f-checkout component tests', () => {
 
         // Act
         CheckoutComponent.inputUserNote(addressInfo);
-        var noteLength = CheckoutComponent.getUserNoteLength();
 
         // Assert
         expect(CheckoutComponent.userNoteMaxCharacterCount()).toEqual('200');
-        expect(noteLength).toBe(200);
     });
 
     it('should enable a user to submit without adding a note', () => {

@@ -3,7 +3,7 @@ import DemoControls from '../../../test-utils/component-objects/demo-controls';
 import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.component';
 
 describe('f-checkout "collection" component tests', () => {
-    it('each fields error message should be displayed', () => {
+    it('should display "mobileNumber" error message when collection method is set', () => {
         // Arrange
         DemoControls.selectCheckoutMethod('collection');
 
@@ -23,7 +23,7 @@ describe('f-checkout "collection" component tests', () => {
         expect(CheckoutComponent.doesInputFieldExist(field)).toBe(false);
     });
 
-    it('should display the mandatory fields', () => {
+    it('should display the mandatory "mobileNumber" field', () => {
         // Arrange
         DemoControls.selectCheckoutMethod('collection');
 

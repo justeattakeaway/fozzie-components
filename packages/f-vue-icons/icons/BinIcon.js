@@ -1,6 +1,6 @@
 import _mergeJSXProps from "babel-helper-vue-jsx-merge-props";
 export default {
-  name: 'InfoIcon',
+  name: 'BinIcon',
   props: {},
   functional: true,
   render: function render(h, ctx) {
@@ -9,19 +9,19 @@ export default {
     return h("svg", _mergeJSXProps([{
       attrs: {
         xmlns: "http://www.w3.org/2000/svg",
-        viewBox: "0 0 20 20"
+        viewBox: "0 0 14 18"
       },
-      "class": "c-ficon c-ficon--info"
+      "class": "c-ficon c-ficon--bin"
     }, ctx.data]), [h("defs", [h("path", {
       attrs: {
-        id: "info-circle-filled-a",
-        d: "M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 9c.6 0 1 .5 1 1v4c0 .6-.5 1-1 1s-1-.5-1-1v-4c0-.6.5-1 1-1zm.5-4a1.3 1.3 0 11-1 2.4 1.3 1.3 0 011-2.5z"
+        id: "trash-a",
+        d: "M6 19c0 1.1.9 2 2 2h8a2 2 0 002-2V7H6v12zm3.8-8.8c.2 0 .5 0 .7.3L12 12l1.5-1.5a1 1 0 011.3-.1h.1a1 1 0 010 1.5l-1.5 1.5 1.5 1.5a1 1 0 01.1 1.3v.1a1 1 0 01-1.5 0L12 14.8l-1.5 1.5a1 1 0 01-1.3.1H9a1 1 0 010-1.5l1.5-1.5L9 11.9a1 1 0 01-.1-1.3v-.1c.2-.2.5-.3.8-.3zM14.5 3l1 1H19v2H5V4h3.5l1-1h5z"
       }
     })]), h("use", {
       attrs: {
         "fill-rule": "evenodd",
-        transform: "translate(-2 -2)",
-        href: "#info-circle-filled-a"
+        transform: "translate(-5 -3)",
+        href: "#trash-a"
       }
     })]);
   }
