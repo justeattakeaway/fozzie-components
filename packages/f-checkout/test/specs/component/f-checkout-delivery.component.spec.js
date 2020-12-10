@@ -23,9 +23,36 @@ describe('f-checkout "delivery" component tests', () => {
         expect(CheckoutComponent.doesInputFieldExist(field)).toBe(true);
     });
 
-    forEach(['mobileNumber'])
-    .it.skip('should display the mandatory fields', field => {
+    it.skip('should display the mandatory fields', () => {
         // Assert
-        expect(CheckoutComponent.isFieldDisplayed(field)).toBe(true);
+        expect(CheckoutComponent.isFieldDisplayed('mobileNumber')).toBe(true);
+    });
+
+    it.skip('should display a "mobileNumber" error message when a number format is incorrectly entered', () => {
+        // Arrange
+        const addressDetails = {
+            mobileNumber: '+4512345678911'
+        };
+
+        // Act
+        CheckoutComponent.populateCheckoutForm(addressDetails);
+        CheckoutComponent.submit();
+
+        // Assert
+        expect(CheckoutComponent.isFieldErrorDisplayed('mobileNumber')).toBe(true);
+    });
+
+    it.skip('should not display a "mobileNumber" error message when a number is formatted correctly', () => {
+        // Arrange
+        const addressDetails = {
+            mobileNumber: '+4412345678911'
+        };
+
+        // Act
+        CheckoutComponent.populateCheckoutForm(addressDetails);
+        CheckoutComponent.submit();
+
+        // Assert
+        expect(CheckoutComponent.isFieldErrorDisplayed('mobileNumber')).toBe(false);
     });
 });
