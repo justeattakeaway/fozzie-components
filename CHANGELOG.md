@@ -8,7 +8,8 @@ v2.24.0
 *December 11, 2020*
 
 ### Changed
-- package.json component test scripts to serve storybook inside every folder
+- package.json component test scripts
+
 
 v2.23.0
 ------------------------------
@@ -20,6 +21,7 @@ v2.23.0
 
 ### Removed
 - Component demo files
+
 
 v2.22.1
 ------------------------------
