@@ -72,9 +72,11 @@ yarn demo
 
 ## Documentation to be completed once module is in stable state.
 
-## Options
+## Configuration
 
-To apply these options, pass them through as part of an optional `config` prop.
+### Config example
+
+To apply these configs, pass them through as part of an optional `config` prop.
 
 E.g.
 
@@ -90,7 +92,7 @@ E.g.
 ```
 
 ```js
-const options = {                 // (opt) component settings
+const config = {                 // (opt) component settings
   address: '',                    // String - override default address field value
   cuisine: '',                    // String - override default cuisine field value
   isShellHidden: false,           // Boolean – hide/show search box shell
