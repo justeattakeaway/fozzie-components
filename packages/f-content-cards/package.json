@@ -27,7 +27,6 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-content-cards ./src/index.js",
-    "demo": "vue serve --open ./src/demo/Index.vue",
     "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",

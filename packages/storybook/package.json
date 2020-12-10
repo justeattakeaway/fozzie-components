@@ -3,9 +3,11 @@
   "version": "0.20.0",
   "scripts": {
     "storybook:build": "vue-cli-service storybook:build -s public -c config/storybook",
-    "storybook:serve": "vue-cli-service storybook:serve -s public -p 6006 -c config/storybook"
+    "storybook:serve": "vue-cli-service storybook:serve -s public -p 8080 -c config/storybook",
+    "storybook:serve-static": "http-server ./storybook-static"
   },
   "dependencies": {
+    "http-server": "0.12.3",
     "vue": "2.6.10",
     "vue-i18n": "8.22.1"
   },
