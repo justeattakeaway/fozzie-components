@@ -12,7 +12,7 @@ export const FIELDS = {
     },
     addressLine1: {
         input: '[data-test-id="formfield-address-line-1-input"]',
-        error: '[data-test-id="error-address-line1-empty"]' 
+        error: '[data-test-id="error-address-line1-empty"]'
     },
     addressLine2: {
         input: '[data-test-id="formfield-address-line-2-input"]',
@@ -24,11 +24,11 @@ export const FIELDS = {
     },
     addressPostcode: {
         input: '[data-test-id="formfield-address-postcode-input"]',
-        error: '[data-test-id="error-address-postcode-empty"]', 
+        error: '[data-test-id="error-address-postcode-empty"]',
         typeError: '[data-test-id="error-address-postcode-type-error"]'
     },
     userNote: {
-        input: '[data-test-id="user-note"] textarea', 
+        input: '[data-test-id="user-note"] textarea',
         error: ''
     }
 };
