@@ -35,7 +35,6 @@
                         </error-message>
                     </template>
                 </form-field>
-
                 <address-block
                     v-if="isCheckoutMethodDelivery"
                     data-test-id="address-block" />
