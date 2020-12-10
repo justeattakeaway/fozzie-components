@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "2.22.1",
+  "version": "2.23.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -11,12 +11,15 @@
     "prepublishOnly": "lerna run prepublishOnly --stream",
     "release": "lerna publish",
     "report": "allure generate allure-results --clean && allure open",
-    "storybook:build": "lerna run storybook:build",
+    "storybook:build": "lerna run storybook:build --stream",
     "storybook:serve": "lerna run storybook:serve --stream",
+    "storybook:serve-static": "lerna run storybook:serve-static --stream",
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
-    "test-component:chrome": "lerna run test-component:chrome --concurrency 1 --stream",
+    "test-component:chrome": "lerna run webdriver:start:chrome --concurrency 1 --stream",
+    "test-component-ci:chrome": "lerna run webdriver:start:chrome --concurrency 1 --stream",
     "test:consumer": "lerna run test:consumer",
+    "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
     "local:tests": "yarn test && yarn test-component:chrome"
   },
   "resolutions": {

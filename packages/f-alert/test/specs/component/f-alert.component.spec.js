@@ -1,16 +1,23 @@
 import AlertComponent from '../../../test-utils/component-objects/f-alert.component';
 
 describe('f-alert component tests', () => {
+
+    beforeEach(() => {
+        browser.url('?path=/story/components-atoms--alert-component');
+        browser.switchToFrame(0);
+        AlertComponent.waitForAlert();
+    });
+
     it('should display Alert', () => {
-        //Assert
+        // Assert
         expect(AlertComponent.isAlertDisplayed()).toBe(true);
     });
 
     it('should close alert when exit button is clicked', () => {
-        //Act
+        // Act
         AlertComponent.exitAlert(); 
-        
-        //Assert
+
+        // Assert
         expect(AlertComponent.isAlertDisplayed()).toBe(false);
     });
 });
