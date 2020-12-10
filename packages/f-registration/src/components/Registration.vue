@@ -21,7 +21,7 @@
                 <a :href="loginUrl">{{ copy.navLinks.login.text }}</a>
             </p>
             <form
-                type="post"
+                method="post"
                 :class="$style['c-registration-form']"
                 @click="formStart"
                 @focus="formStart"
