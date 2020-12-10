@@ -28,4 +28,43 @@ describe('f-checkout "delivery" component tests', () => {
         // Assert
         expect(CheckoutComponent.isFieldDisplayed(field)).toBe(true);
     });
+
+    it('should prevent user from submitting a postcode with illegal characters', () => {
+        // Arrange
+        const addressInfo = {
+            mobileNumber: '07777777779',
+            line1: 'Test House',
+            line2: 'High Street',
+            city: 'Test City',
+            postcode: 'TEST1A', 
+            note: ''
+        };
+        const field = 'addressPostcode'
+
+        // Act
+        CheckoutComponent.populateCheckoutForm(addressInfo);
+        CheckoutComponent.submit();
+        // Assert
+        expect(CheckoutComponent.isTypeErrorDisplayed(field)).toBe(true);
+    }); 
+
+    it('should enable a user to submit a postcode with correct characters', () => {
+           // Arrange
+           const addressInfo = {
+            mobileNumber: '07777777779',
+            line1: 'Test House',
+            line2: 'High Street',
+            city: 'Test City',
+            postcode: 'AR51 1AA', 
+            note: ''
+        };
+           const field = 'addressPostcode'
+
+        // Act
+        CheckoutComponent.populateCheckoutForm(addressInfo);
+        CheckoutComponent.submit();
+
+        // Assert
+        expect(CheckoutComponent.isTypeErrorDisplayed(field)).toBe(false);
+    });
 });

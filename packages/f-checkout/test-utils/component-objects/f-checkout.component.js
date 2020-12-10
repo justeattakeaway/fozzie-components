@@ -47,7 +47,8 @@ const fields = {
     },
     addressPostcode: {
         input: () => $(FIELDS.addressPostcode.input),
-        error: () => $(FIELDS.addressPostcode.error)
+        error: () => $(FIELDS.addressPostcode.error), 
+        typeError: () => $(FIELDS.addressPostcode.typeError)
     }, 
     userNote: {
         input: () => $(FIELDS.userNote.input), 
@@ -63,6 +64,7 @@ exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
 exports.isOrderTimeDropdownDisplayed = () => orderTimeDropdown().isDisplayed();
 exports.userNoteMaxCharacterCount = () => userNoteInput().getAttribute('maxlength');
 exports.clickPaymentButton = () => goToPaymentButton().click();
+exports.isTypeErrorDisplayed = fieldName => fields[fieldName].typeError().isDisplayed();
 
 /**
  * @description
