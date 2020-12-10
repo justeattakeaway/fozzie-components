@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.45.0
+------------------------------
+*December 10, 2020*
+
+### Changed
+- Moved justeat packages to the dev dependencies
+- Updated f-button component to the latest (0.4.1)
+- Renamed button-component to f-button for concistency between projects
+
+
 v0.44.1
 ------------------------------
 *December 10, 2020*

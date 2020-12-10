@@ -11,6 +11,16 @@ v0.22.0
 - Webdriver tests for postcode format in `f-checkout-delivery`.
 
 
+v0.22.0
+------------------------------
+*December 10, 2020*
+
+### Changed
+- Moved justeat packages to the dev dependencies
+- Updated f-button component to the latest (0.4.1)
+- Renamed button-component to f-button for concistency between projects
+
+
 v0.21.0
 ------------------------------
 *December 10, 2020*

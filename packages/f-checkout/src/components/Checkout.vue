@@ -43,21 +43,21 @@
 
                 <user-note data-test-id="user-note" />
 
-                <button-component
+                <f-button
                     :class="$style['c-checkout-allergyButton']"
                     button-type="link"
                     data-test-id="allergy-button">
                     {{ $t('allergyText') }}
-                </button-component>
+                </f-button>
 
-                <button-component
+                <f-button
                     :class="$style['c-checkout-submitButton']"
                     button-type="primary"
                     button-size="large"
                     is-full-width
                     data-test-id="confirm-payment-submit-button">
                     {{ $t('buttonText') }}
-                </button-component>
+                </f-button>
             </form>
         </card>
     </div>
@@ -69,7 +69,7 @@ import { required } from 'vuelidate/lib/validators';
 
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
-import ButtonComponent from '@justeat/f-button';
+import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import { validations } from '@justeat/f-services';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
@@ -98,7 +98,7 @@ export default {
     components: {
         AddressBlock,
         Alert,
-        ButtonComponent,
+        FButton,
         Card,
         ErrorMessage,
         FormField,
