@@ -3,7 +3,13 @@ import DemoControls from '../../../test-utils/component-objects/demo-controls';
 import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.component';
 
 describe('f-checkout "collection" component tests', () => {
-    it('should display "mobileNumber" error message when collection method is set', () => {
+      beforeEach(() => {
+        browser.url('?path=/story/components-organisms--checkout-component');
+        browser.switchToFrame(0);
+        CheckoutComponent.waitForCheckoutComponent();
+    });
+
+    it.skip('should display "mobileNumber" error message when collection method is set', () => {
         // Arrange
         DemoControls.selectCheckoutMethod('collection');
 
@@ -15,7 +21,7 @@ describe('f-checkout "collection" component tests', () => {
     });
 
     forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
-    .it('address fields should not exist', field => {
+    .it.skip('address fields should not exist', field => {
         // Arrange
         DemoControls.selectCheckoutMethod('collection');
 
@@ -23,7 +29,7 @@ describe('f-checkout "collection" component tests', () => {
         expect(CheckoutComponent.doesInputFieldExist(field)).toBe(false);
     });
 
-    it('should display the mandatory "mobileNumber" field', () => {
+    it.skip('should display the mandatory "mobileNumber" field', () => {
         // Arrange
         DemoControls.selectCheckoutMethod('collection');
 

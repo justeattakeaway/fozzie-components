@@ -253,16 +253,6 @@ Change directory to the `f-content-cards` package:
 $ cd packages/f-content-cards
 ```
 
-### Running the demo
-
-This package comes with a demo application which can be accessed as follows:
-
-> Please ensure you are in the f-content-card directory as outlined in the above instructions.
-
-```sh
-$ yarn demo
-```
-
 ### Running storybook
 
 Storybook can be used to develop new and existing components.

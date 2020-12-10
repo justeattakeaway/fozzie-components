@@ -1,17 +1,23 @@
 import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.component';
 
 describe('f-checkout component tests', () => {
-    it('should display the f-checkout component', () => {
+    beforeEach(() => {
+        browser.url('?path=/story/components-organisms--checkout-component');
+        browser.switchToFrame(0);
+        CheckoutComponent.waitForCheckoutComponent();
+    });
+
+    it.skip('should display the f-checkout component', () => {
         // Assert
         expect(CheckoutComponent.isCheckoutComponentDisplayed()).toBe(true);
     });
 
-    it('should display the allergen link', () => {
+    it.skip('should display the allergen link', () => {
         // Assert
         expect(CheckoutComponent.isAllergenLinkDisplayed()).toBe(true);
     });
 
-    it('should submit the checkout form', () => {
+    it.skip('should submit the checkout form', () => {
         // Arrange
         const addressInfo = {
             mobileNumber: '07777777779',
@@ -31,8 +37,8 @@ describe('f-checkout component tests', () => {
         // Waiting for route here, so we can grab redirect url and show form submits.
     });
 
-    it('should display times in ascending order, with default text "As soon as possible" showing first', () => {
-        // Act
+    it.skip('should display times in ascending order, with default text "As soon as possible" showing first', () => {
+        // Act 
         CheckoutComponent.selectOrderTime('As soon as possible');
 
         // Assert
@@ -42,8 +48,8 @@ describe('f-checkout component tests', () => {
         expect(CheckoutComponent.getOrderTimeOptionText(2)).toBe('Monday 00:30');
     });
 
-    it('should prevent user from writing a note of over 200 characters', () => {
-        // Arrange
+    it.skip('should prevent user from writing a note of over 200 characters', () => {
+        // Arrange 
         const userNote = 'A';
         const addressInfo = {
             note: userNote.repeat(300)
@@ -56,7 +62,7 @@ describe('f-checkout component tests', () => {
         expect(CheckoutComponent.userNoteMaxCharacterCount()).toEqual('200');
     });
 
-    it('should enable a user to submit without adding a note', () => {
+    it.skip('should enable a user to submit without adding a note', () => {
         // Arrange
         const addressInfo = {
             mobileNumber: '07777777779',

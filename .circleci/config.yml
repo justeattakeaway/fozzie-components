@@ -170,9 +170,19 @@ jobs:
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global
+      - run: # Build Storybook
+          name: Build Storybook
+          command: yarn storybook:build
+      - run: # Serve Storybook
+          name: Serve Storybook
+          command: yarn storybook:serve-static
+          background: true
+      - run: # Run Storybook healthcheck
+          name: Run Storybook healthcheck
+          command: yarn test:wait-for-server
       - run: # Run Component UI Tests
           name: Run WebDriverIO Component / Accessibility Tests
-          command: yarn test-component:chrome
+          command: yarn test-component-ci:chrome
       - store_artifacts:
           path: axe-violations/
       - run:
