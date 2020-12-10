@@ -135,6 +135,8 @@ The props that can be defined are as follows:
     @track-postcode-changed="onPostcodeChanged"/>
 ```
 
+### Available Events
+
 | Event | Description |
 | ----- | ----------- |
 | `@searchbox-error` | Fires when an error is thrown by `f-searchbox`. |
