@@ -8,7 +8,7 @@ Latest (to be added to next release)
 *December 10, 2020*
 
 ### Fixed
-- Changelog component reference.
+- Readme component reference.
 
 v0.3.0
 ------------------------------
