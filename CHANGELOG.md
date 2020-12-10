@@ -8,6 +8,14 @@ v2.23.0
 *December 9, 2020*
 
 ### Changed
+- README's for components to remove references to demo files.
+
+
+v2.23.0
+------------------------------
+*December 9, 2020*
+
+### Changed
 - CircleCI config to build / serve Storybook for component tests
 - package.json component test scripts
 
