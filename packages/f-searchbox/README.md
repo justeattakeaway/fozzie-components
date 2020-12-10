@@ -72,9 +72,11 @@ yarn demo
 
 ## Documentation to be completed once module is in stable state.
 
-## Options
+## Configuration
 
-To apply these options, pass them through as part of an optional `config` prop.
+### Config example
+
+To apply these configs, pass them through as part of an optional `config` prop.
 
 E.g.
 
@@ -82,24 +84,69 @@ E.g.
 <template>
     <vue-search-box
         locale="en-GB"
-        :config="{ hideShell: true }" />
+        :config="{
+            isShellHidden: true,
+            shouldSetCookies: false
+        }" />
 </template>
 ```
 
 ```js
-const options = {                 // (opt) component settings
+const config = {                 // (opt) component settings
   address: '',                    // String - override default address field value
   cuisine: '',                    // String - override default cuisine field value
   isShellHidden: false,           // Boolean – hide/show search box shell
   isCompressed: false,            // Boolean - hide/show compressed searchbox
   query: '',                      // String - override default query field value
   queryParams: {},                // Object - Query parameter overrides as key value pairs
-  onSubmit: a => void,            // Function - called when user selected a valid address, prevents form submit
+  onSubmit: a => void,            // Function - called when user selects a valid address, prevents f-searchbox from generating and submitting a custom post request and instead allows the consuming app to handle its own custom submit.
   shouldSetCookies: false,              // Boolean - sets je default location cookies
   shouldAutoPopulateAddress: true,      // Boolean - should the address value be auto-populated?
   shouldClearAddressOnValidSubmit: true // Boolean - should the address be cleared when a valid form is submitted?
 }
 ```
+
+## Configuration
+
+### Props
+
+`f-searchbox` has a number of props that allow you to customise its functionality.
+
+The props that can be defined are as follows:
+
+| Prop                      | Required       | Type          | Default | Description |
+| :---                      |     :---:      |     :---:     |  :---:  | :---        |
+| locale                    | false          | `string`      | `en-GB` | Sets the locale of the component (which determines what theme and translations to use |
+| config                    | false          | `object`      | `{}`    | When passed in `f-searchbox` will allow presentational & functional customisation (see options section) |
+| dependentApiPromise       | false          | `object`      | `{}`    | Allows a `Promise` to be passed through to `f-searchbox` so the client can resolve it. |
+| copyOverride              | false          | `object`      | `{}`    | Allows copy override within the component, see `Override copy` section for example. |
+
+
+### Events
+
+### Example usage
+
+`f-searchbox` exposes a number of hooks that can be used to trigger functions in the consuming application.
+
+```js
+<search-box
+    @searchbox-error="handleSearchboxError"
+    @address-search-focus="addressFocus"
+    @submit-saved-address="validSavedAddressSearch"
+    @submit-valid-address="validSearch"
+    @track-postcode-changed="onPostcodeChanged"/>
+```
+
+### Available Events
+
+| Event | Description |
+| ----- | ----------- |
+| `@searchbox-error` | Fires when an error is thrown by `f-searchbox`. |
+| `@address-search-focus` | Fires when the address input is focused. |
+| `@submit-saved-address` | Fires if user submits an address with the same address as previously recorded by the `f-searchbox`. |
+| `@submit-valid-address` | Fires if an address is submitted with no errors. |
+| `@track-postcode-changed` | Fires when the address input value has changed from a previous address to a new valid address. |
+
 
 ### `config.queryParams`
 
@@ -150,36 +197,3 @@ const copyOverrides = {
     // ...
 }
 ```
-
-## Custom analytic events
-
-`f-searchbox` exposes a number of hooks that can be used to trigger functions in the consuming application.
-
-```js
-<search-box
-    @searchbox-error="handleSearchboxError"
-    @address-search-focus="addressFocus"
-    @submit-saved-address="validSavedAddressSearch"
-    @submit-valid-address="validSearch"
-    @track-postcode-changed="onPostcodeChanged"/>
-```
-
-### `@searchbox-error`
-
-Fires when an error is thrown by searchbox.
-
-### `@address-search-focus`
-
-Fires when the address input is focussed.
-
-### `@submit-saved-address`
-
-Fires if user submits an address with the same address as previously recorded by the searchbox.
-
-### `@submit-valid-address`
-
-Fires if an address is submitted with no errors.
-
-### `@track-postcode-changed`
-
-Fires when the address input value has changed from a previous address to a new valid address.
