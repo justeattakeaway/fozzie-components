@@ -8,7 +8,7 @@
                 [$style['c-search-label']]: true,
                 [$style['has-error']]: errorMessage,
                 [$style['c-search-label--noBorder']]: isCompressed,
-                [$style['has-geo']]: isGeoAvailable,
+                [$style['has-geo']]: isGeoLocationAvailable,
                 [$style['has-streetNumber']]: streetNumberRequired
             }">
             <input
