@@ -140,7 +140,7 @@ $address-weight-bold     : $font-weight-bold;
 }
 
 .c-address-group {
-    margin: spacing(x2) 0 spacing(x4);
+    margin: spacing(x2) 0;
     padding: 0;
     border: none;
     @include font-size($address-fontSize);
@@ -155,6 +155,6 @@ $address-weight-bold     : $font-weight-bold;
 }
 
 .c-address-error {
-    margin-bottom: spacing(x5);
+    margin-bottom: spacing(x2);
 }
 </style>
