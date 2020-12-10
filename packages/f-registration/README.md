@@ -56,7 +56,7 @@
     ```
 
 ## Development
-It is reccommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
+It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
 
 ```bash
 # cd ./fozzie-components

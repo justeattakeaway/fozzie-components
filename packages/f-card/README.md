@@ -70,7 +70,7 @@ The props that can be defined are as follows:
 | cardHeadingPosition     | false           | `string`     | `left` | Sets the text alignment of the card component's heading.<br><br>When set to `left` the heading will aligned to the left.<br>When set to `center` the heading will be centrally aligned.<br>When set to `right` the heading will be aligned to the right. |
 
 ## Development
-It is reccommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
+It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
 
 ```bash
 # cd ./fozzie-components

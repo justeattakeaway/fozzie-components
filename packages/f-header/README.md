@@ -82,7 +82,7 @@ The props that can be defined are as follows:
 **Important:** if you're adding a new property to show/hide something on the navigation bar, you probably want to check the `hasNavigationLinks` computed property, since you might have to update it.
 
 ## Development
-It is reccommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
+It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
 
 ```bash
 # cd ./fozzie-components
