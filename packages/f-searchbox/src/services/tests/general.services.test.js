@@ -64,19 +64,19 @@ describe('`general.services`', () => {
                     // Assert
                     expect(spy).toHaveBeenCalledWith(type, address[type]);
                 });
-                
+
                 it('should set the `latitude` & `longitude` if the address response contain them', () => {
                     // Arrange
                     const address = {
                         latitude: 1.1,
                         longitude: 1.2
                     };
-    
+
                     const spy = jest.spyOn(helpers, 'setJeCookie');
-    
+
                     // Act
                     generalServices.processLocationCookie(true, address);
-    
+
                     // Assert
                     expect(spy).toHaveBeenCalledWith('latitude', 1.1);
                     expect(spy).toHaveBeenCalledWith('longitude', 1.2);
