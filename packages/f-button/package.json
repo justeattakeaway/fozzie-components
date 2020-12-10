@@ -32,7 +32,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "report": "cd ../.. && yarn report",
-    "storybook:serve-webdriver": "cd ../storybook && storybook:serve-static",
+    "storybook:serve-webdriver": "lerna run storybook:serve-static --stream",
     "test": "vue-cli-service test:unit", 
     "test-component:chrome": "run-p --race storybook:serve-webdriver webdriver:delay:chrome",
     "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js",
