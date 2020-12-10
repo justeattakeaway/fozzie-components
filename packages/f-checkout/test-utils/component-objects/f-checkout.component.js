@@ -58,13 +58,13 @@ const fields = {
 
 exports.isFieldErrorDisplayed = fieldName => fields[fieldName].error().isDisplayed();
 exports.isFieldDisplayed = fieldName => fields[fieldName].input().isDisplayed();
+exports.isFieldTypeErrorDisplayed = fieldName => fields[fieldName].typeError().isDisplayed();
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
 exports.isOrderTimeDropdownDisplayed = () => orderTimeDropdown().isDisplayed();
 exports.userNoteMaxCharacterCount = () => userNoteInput().getAttribute('maxlength');
 exports.clickPaymentButton = () => goToPaymentButton().click();
-exports.isTypeErrorDisplayed = fieldName => fields[fieldName].typeError().isDisplayed();
 
 /**
  * @description

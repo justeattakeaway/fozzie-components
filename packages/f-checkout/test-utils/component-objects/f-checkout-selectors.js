@@ -8,23 +8,19 @@ export const GO_TO_PAYMENT_BUTTON = '[data-test-id="confirm-payment-submit-butto
 export const FIELDS = {
     mobileNumber: {
         input: '[data-test-id="formfield-mobile-number-input"]',
-        error: '[data-test-id="error-mobile-number"]', 
-        typeError: ''
+        error: '[data-test-id="error-mobile-number"]'
     },
     addressLine1: {
         input: '[data-test-id="formfield-address-line-1-input"]',
-        error: '[data-test-id="error-address-line1-empty"]', 
-        typeError: ''
+        error: '[data-test-id="error-address-line1-empty"]' 
     },
     addressLine2: {
         input: '[data-test-id="formfield-address-line-2-input"]',
-        error: '', 
-        typeError: ''
+        error: ''
     },
     addressCity: {
         input: '[data-test-id="formfield-address-city-input"]',
-        error: '[data-test-id="error-address-city-empty"]', 
-        typeError: ''
+        error: '[data-test-id="error-address-city-empty"]'
     },
     addressPostcode: {
         input: '[data-test-id="formfield-address-postcode-input"]',
@@ -33,8 +29,7 @@ export const FIELDS = {
     },
     userNote: {
         input: '[data-test-id="user-note"] textarea', 
-        error: '', 
-        typeError: ''
+        error: ''
     }
 };
 
