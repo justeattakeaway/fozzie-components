@@ -3,6 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.10
+------------------------------
+*December 10, 2020*
+
+### Added
+- Readme improvements to the follow:
+  - Events table.
+  - Props table.
+
+### Fixed
+- Street number overlay issue when address is too long.
+- Geo location icon postion when street number is visible.
+
+
 v4.0.0-beta.9
 ------------------------------
 *December 8, 2020*

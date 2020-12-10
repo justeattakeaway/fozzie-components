@@ -7,83 +7,49 @@ import EventNames from '../../event-names';
 jest.mock('../../services/RegistrationServiceApi', () => ({ createAccount: jest.fn() }));
 
 describe('Registration', () => {
-    allure.feature('Registration');
     const propsData = {
         createAccountUrl: 'http://localhost/account/register',
         showLoginLink: true,
         loginUrl: '/account/register'
     };
 
+    beforeEach(() => {
+        allure.feature('Registration');
+    });
+
     it('should be defined', () => {
+        // Arrange & Act
         const wrapper = shallowMount(Registration, { propsData });
+
+        // Assert
         expect(wrapper.exists()).toBe(true);
     });
 
-    it('has a button', () => {
+    it('should have one form with method "post"', () => {
+        // Arrange
+        const wrapper = mount(Registration, { propsData });
+
+        // Act
+        const forms = wrapper.findAll('form');
+
+        // Assert
+        expect(forms.length).toBe(1);
+        expect(forms.wrappers[0].attributes('method')).toBe('post');
+    });
+
+    it('should have a button', () => {
+        // Arrange
         const wrapper = shallowMount(Registration, { propsData });
+
+        // Act
         const button = wrapper.find("[data-test-id='create-account-submit-button']");
+
+        // Assert
         expect(button.exists()).toBe(true);
     });
 
     describe(': props :', () => {
-        it('if `value` is specified, should assign the input field a value attribute', () => {
-            const wrapper = shallowMount(Registration, { propsData });
-            expect(wrapper.exists()).toBe(true);
-        });
-
         it('should show the login link if showLoginLink prop set to true.', () => {
-            const wrapper = shallowMount(Registration, {
-                propsData: {
-                    createAccountUrl: 'http://localhost/account/register',
-                    showLoginLink: true,
-                    loginUrl: '/account/register'
-                }
-            });
-
-            const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
-
-            expect(loginLink.exists()).toBe(true);
-        });
-
-        it('should not show the login link if showLoginLink is set to false.', () => {
-            const wrapper = shallowMount(Registration, {
-                propsData: {
-                    createAccountUrl: 'http://localhost/account/register',
-                    showLoginLink: false,
-                    loginUrl: ''
-                }
-            });
-
-            const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
-
-            expect(loginLink.exists()).toBe(false);
-        });
-
-        it('should show the login link if showLoginLink prop not set', () => {
-            const wrapper = shallowMount(Registration, { propsData });
-
-            const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
-
-            expect(loginLink.exists()).toBe(true);
-        });
-
-        it('should show emit VisitLoginPage event when login link is clicked.', () => {
-            const wrapper = shallowMount(Registration, {
-                propsData: {
-                    createAccountUrl: 'http://localhost/account/register',
-                    showLoginLink: true,
-                    loginUrl: '/account/register'
-                }
-            });
-
-            const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
-            loginLink.trigger('click');
-
-            // Assert
-            expect(wrapper.emitted(EventNames.VisitLoginPage).length).toBe(1);
-        });
-
-        it('should fallback to use the en-GB locale if no locale passed', () => {
             // Arrange
             const wrapper = shallowMount(Registration, {
                 propsData: {
@@ -93,16 +59,80 @@ describe('Registration', () => {
                 }
             });
 
+            // Act
+            const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
+
+            // Assert
+            expect(loginLink.exists()).toBe(true);
+        });
+
+        it('should not show the login link if showLoginLink is set to false.', () => {
+            // Arrange
+            const wrapper = shallowMount(Registration, {
+                propsData: {
+                    createAccountUrl: 'http://localhost/account/register',
+                    showLoginLink: false,
+                    loginUrl: ''
+                }
+            });
+
+            // Act
+            const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
+
+            // Assert
+            expect(loginLink.exists()).toBe(false);
+        });
+
+        it('should show the login link if showLoginLink prop not set', () => {
+            // Arrange
+            const wrapper = shallowMount(Registration, { propsData });
+
+            // Act
+            const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
+
+            // Assert
+            expect(loginLink.exists()).toBe(true);
+        });
+
+        it('should show emit VisitLoginPage event when login link is clicked.', () => {
+            // Arrange
+            const wrapper = shallowMount(Registration, {
+                propsData: {
+                    createAccountUrl: 'http://localhost/account/register',
+                    showLoginLink: true,
+                    loginUrl: '/account/register'
+                }
+            });
+
+            // Act
+            const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
+            loginLink.trigger('click');
+
+            // Assert
+            expect(wrapper.emitted(EventNames.VisitLoginPage).length).toBe(1);
+        });
+
+        it('should fallback to use the en-GB locale if no locale passed', () => {
+            // Arrange & Act
+            const wrapper = shallowMount(Registration, {
+                propsData: {
+                    createAccountUrl: 'http://localhost/account/register',
+                    showLoginLink: true,
+                    loginUrl: '/account/register'
+                }
+            });
+
+            // Assert
             expect(wrapper.vm.tenant).toBe('uk');
         });
     });
 
     describe('when creating an account', () => {
-        function mountComponentAndAttachToDocument () {
+        const mountComponentAndAttachToDocument = () => {
             const div = document.createElement('div');
             document.body.appendChild(div);
             return mount(Registration, { propsData, attachTo: div });
-        }
+        };
 
         describe('with a faulty registration service', () => {
             it('should populate generic error message and emit failure event when service responds with an error', async () => {
@@ -110,6 +140,7 @@ describe('Registration', () => {
                 RegistrationServiceApi.createAccount.mockImplementation(async () => { throw new Error('Conflict'); });
                 const wrapper = mountComponentAndAttachToDocument();
                 Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+
                 try {
                     // Act
                     await wrapper.vm.onFormSubmit();
@@ -129,6 +160,7 @@ describe('Registration', () => {
                 RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
                 const wrapper = mountComponentAndAttachToDocument();
                 Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+
                 try {
                     // Act
                     await wrapper.vm.onFormSubmit();
@@ -182,6 +214,7 @@ describe('Registration', () => {
                 RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
                 const wrapper = mountComponentAndAttachToDocument();
                 Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+
                 try {
                     // Act
                     await wrapper.vm.onFormSubmit();
@@ -201,6 +234,7 @@ describe('Registration', () => {
                 RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
                 const wrapper = mountComponentAndAttachToDocument();
                 Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
+
                 try {
                     // Act
                     await wrapper.vm.onFormSubmit();

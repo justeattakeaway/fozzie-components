@@ -7,7 +7,9 @@
             :class="{
                 [$style['c-search-label']]: true,
                 [$style['has-error']]: errorMessage,
-                [$style['c-search-label--noBorder']]: isCompressed
+                [$style['c-search-label--noBorder']]: isCompressed,
+                [$style['has-geo']]: isGeoLocationAvailable,
+                [$style['has-streetNumber']]: streetNumberRequired
             }">
             <input
                 ref="addressInput"
@@ -82,7 +84,9 @@ export default {
 
     computed: {
         ...mapState('searchbox', [
-            'shouldInputFieldHaveFocus'
+            'shouldInputFieldHaveFocus',
+            'streetNumberRequired',
+            'isGeoLocationAvailable'
         ]),
 
         getAddressValue () {
