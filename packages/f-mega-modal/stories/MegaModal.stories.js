@@ -84,13 +84,6 @@ export const MegaModalComponent = () => ({
 
             <p>Let's find another restaurant to order from.</p>
 
-            <a href="/area/ls18-west-yorkshire/chinese/" class="o-btn o-btn--block o-btn--rounded o-btn--primary">
-                More restaurants nearby
-            </a>
-
-            <button type="button" class="o-btn o-btn--block o-btn--rounded o-btn--tertiary">
-                I'm just browsing
-            </button>
         </mega-modal>
     `
 });

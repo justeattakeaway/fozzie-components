@@ -99,7 +99,7 @@ The following rudimentary example can be used as a guide for implementing this c
 
 ### Props
 
-`f-card` has a number of props that allow you to customise its functionality.
+`f-mega-modal` has a number of props that allow you to customise its functionality.
 
 The props that can be defined are as follows:
 

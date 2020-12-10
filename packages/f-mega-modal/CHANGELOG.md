@@ -3,19 +3,28 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
 Latest (to be added to next release)
 ------------------------------
-*October 26, 2020*
+*December 10, 2020*
+
+### Fixed
+- Readme component reference.
+
+v0.3.0
+------------------------------
+*December 9, 2020*
 
 ### Added
 - Stylelint added to lint styling on build.
+- `f-vue-icons` to use cross icon in the modal
 
 ### Changed
 - 'jet' theme instead of 'je'
+- Regular close button changed to button component
 
 ### Removed
 - Bracket in Storybook file
+- Hardcoded buttons from storybook file
 
 
 v0.2.0
