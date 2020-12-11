@@ -39,7 +39,7 @@
                     v-if="isCheckoutMethodDelivery"
                     data-test-id="address-block" />
 
-                <form-selector/>
+                <form-selector />
 
                 <user-note data-test-id="user-note" />
 

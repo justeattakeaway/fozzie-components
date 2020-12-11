@@ -48,14 +48,14 @@ const apiResponse = {
     ]
 };
 
-const mobileNumber = '+447111111111'
+const mobileNumber = '+447111111111';
 
 const expectedState = {
     id: '1234',
     serviceType: 'delivery',
     customer: {
         firstName: 'Joe',
-        mobileNumber: mobileNumber
+        mobileNumber
     },
     fulfillment: {
         time: {
@@ -76,7 +76,7 @@ const expectedState = {
     isFulfillable: true,
     notices: undefined,
     messages: undefined
-}
+};
 
 const state = CheckoutModule.state();
 
@@ -100,15 +100,15 @@ describe('CheckoutModule', () => {
         const commit = jest.fn();
 
         const url = 'http://localhost/account/checkout';
-        const tenant = 'en-GB'
-        const timeout = '1000'
+        const tenant = 'en-GB';
+        const timeout = '1000';
 
-        const axiosMock= new MockAdapter(axios);;
+        const axiosMock = new MockAdapter(axios);
 
         const payload = {
             url: 'http://localhost/account/checkout',
-            tenant: tenant,
-            timeout: timeout
+            tenant,
+            timeout
         };
 
         describe('getCheckout ::', () => {
@@ -118,7 +118,7 @@ describe('CheckoutModule', () => {
                     'Content-Type': 'application/json',
                     'Accept-Tenant': tenant
                 },
-                timeout: timeout
+                timeout
             };
 
             axiosMock.onGet(url, config).reply(200, {
@@ -127,7 +127,7 @@ describe('CheckoutModule', () => {
 
             it('should get the checkout details from the backend and update the state.', async () => {
                 // Arrange && Act
-                await getCheckout({ commit }, payload)
+                await getCheckout({ commit }, payload);
 
                 // Assert
                 expect(state).toEqual(expectedState);
@@ -136,14 +136,14 @@ describe('CheckoutModule', () => {
 
         describe('postCheckout ::', () => {
             payload.data = {
-                mobileNumber: mobileNumber
-            }
+                mobileNumber
+            };
 
             axiosMock.onPost(url).reply(200);
 
             it('should post the checkout details to the backend.', async () => {
                 // Arrange && Act
-                await postCheckout(payload)
+                await postCheckout(payload);
 
                 // Assert
                 expect(axiosMock.history.post.length).toBe(1);
