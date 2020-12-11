@@ -46,4 +46,4 @@ options.isFullAddressSearchEnabled = () => {
     return options.isFullAddressSearchActive;
 };
 
-export default options
+export default options;

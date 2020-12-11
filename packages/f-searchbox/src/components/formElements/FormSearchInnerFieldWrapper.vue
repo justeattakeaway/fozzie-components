@@ -9,8 +9,8 @@
         <input
             v-if="isStreetNumberRequired"
             ref="streetNumberInput"
-            data-test-id="streetNumberInput"
             v-model="streetNumber"
+            data-test-id="streetNumberInput"
             :class="$style['c-search-streetInput']"
             type="input"
             placeholder="N°"
