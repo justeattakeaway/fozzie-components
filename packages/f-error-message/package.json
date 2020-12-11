@@ -29,7 +29,7 @@
     "build": "vue-cli-service build --target lib --name f-error-message ./src/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
-    "lint:style": "vue-cli-service lint:style",
+    "lint:style": "vue-cli-service lint:style", 
     "storybook:serve-webdriver": "cd ../storybook && yarn storybook:serve -- --ci",
     "test": "vue-cli-service test:unit", 
     "test-component:chrome": "run-p --race storybook:serve-webdriver webdriver:delay:chrome"

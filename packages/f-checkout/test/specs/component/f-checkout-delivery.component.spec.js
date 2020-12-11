@@ -55,4 +55,32 @@ describe('f-checkout "delivery" component tests', () => {
         // Assert
         expect(CheckoutComponent.isFieldErrorDisplayed('mobileNumber')).toBe(false);
     });
+
+    it('should prevent user from submitting a postcode with illegal characters', () => {
+        // Arrange
+        const addressInfo = {
+            postcode: 'TEST1A'
+        };
+
+        // Act
+        CheckoutComponent.populateCheckoutForm(addressInfo);
+        CheckoutComponent.submit();
+
+        // Assert
+        expect(CheckoutComponent.isFieldTypeErrorDisplayed('addressPostcode')).toBe(true);
+    }); 
+
+    it('should enable a user to submit a postcode with correct characters', () => {
+        // Arrange
+        const addressInfo = {
+            postcode: 'AR51 1AA'
+        };
+
+        // Act
+        CheckoutComponent.populateCheckoutForm(addressInfo);
+        CheckoutComponent.submit();
+
+        // Assert
+        expect(CheckoutComponent.isFieldTypeErrorDisplayed('addressPostcode')).toBe(false);
+    });
 });

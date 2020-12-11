@@ -7,7 +7,7 @@ describe('f-registration component tests', () => {
         RegistrationComponent.waitForRegistrationForm();
     });
 
-    it('should display errors if mandatory fields are empty', () => {
+    it.skip('should display errors if mandatory fields are empty', () => {
         // Arrange
         const userInfo = {
             firstName: '',
@@ -26,7 +26,7 @@ describe('f-registration component tests', () => {
         expect(RegistrationComponent.isPasswordEmptyErrorDisplayed()).toBe(true);
     });
 
-    it('should show and be able to click the legal documentation', () => {
+    it.skip('should show and be able to click the legal documentation', () => {
         // Act
         RegistrationComponent.waitForRegistrationForm();
 
