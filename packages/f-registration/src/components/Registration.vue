@@ -135,7 +135,7 @@
                     </template>
                 </form-field>
 
-                <button-component
+                <f-button
                     :class="$style['c-registration-submit']"
                     data-test-id="create-account-submit-button"
                     button-type="primary"
@@ -143,7 +143,7 @@
                     is-full-width
                     :disabled="shouldDisableCreateAccountButton">
                     {{ copy.labels.createAccountBtn }}
-                </button-component>
+                </f-button>
             </form>
             <p :class="$style['c-registration-link']">
                 {{ copy.navLinks.termsAndConditions.prefix }}
@@ -176,7 +176,7 @@ import {
     maxLength
 } from 'vuelidate/lib/validators';
 import { BagCelebrateIcon } from '@justeat/f-vue-icons';
-import ButtonComponent from '@justeat/f-button';
+import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import CardComponent from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
@@ -219,7 +219,7 @@ export default {
     name: 'Registration',
 
     components: {
-        ButtonComponent,
+        FButton,
         CardComponent,
         FormField,
         BagCelebrateIcon,
