@@ -11,7 +11,7 @@ export default {
             mobileNumber: ''
         },
         fulfillment: {
-            times: [],
+            time: {},
             address: {
                 line1: '',
                 line2: '',
@@ -57,7 +57,7 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         // eslint-disable-next-line no-unused-vars
-        postCheckout: async ({ commit }, payload) => {
+        postCheckout: async (payload) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
             const {
                 url, tenant, data, timeout
@@ -79,16 +79,16 @@ export default {
 
     mutations: {
         updateState: (state, {
-            id,
+            restaurant,
             serviceType,
             customer,
-            fulfillment,
+            fulfilment,
             notes,
             isFulfillable,
             notices,
             messages
         }) => {
-            state.id = id;
+            state.id = restaurant.id;
             state.serviceType = serviceType;
 
             if (customer) {
@@ -96,16 +96,16 @@ export default {
                 state.customer.mobileNumber = customer.phoneNumber;
             }
 
-            state.fulfillment.times = fulfillment.times;
+            state.fulfillment.time = fulfilment.time;
 
-            if (fulfillment.address) {
+            if (fulfilment.address) {
                 /* eslint-disable prefer-destructuring */
-                state.fulfillment.address.line1 = fulfillment.address.lines[0];
-                state.fulfillment.address.line2 = fulfillment.address.lines[1];
-                state.fulfillment.address.city = fulfillment.address.lines[3];
+                state.fulfillment.address.line1 = fulfilment.address.lines[0];
+                state.fulfillment.address.line2 = fulfilment.address.lines[1];
+                state.fulfillment.address.city = fulfilment.address.lines[3];
                 /* eslint-enable prefer-destructuring */
 
-                state.fulfillment.address.postcode = fulfillment.address.postalCode;
+                state.fulfillment.address.postcode = fulfilment.address.postalCode;
             }
 
             state.notes = notes;
