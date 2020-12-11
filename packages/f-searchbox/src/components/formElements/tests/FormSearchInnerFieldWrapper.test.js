@@ -110,7 +110,7 @@ describe('`FormSearchInnerFieldWrapper`', () => {
         });
     
         describe('when `isStreetNumberRequired` is `falsy`', () => {
-            it('should display the street number component', () => {
+            it('should not display the street number component', () => {
                 // Arrange
                 const propsData = {
                     service: {}
@@ -149,7 +149,7 @@ describe('`FormSearchInnerFieldWrapper`', () => {
         });
         
         describe('when `isStreetNumberRequired` is `falsy`', () => {
-            it('should display the street number component', () => {
+            it('should not display the street number component', () => {
                 // Arrange
                 const propsData = {
                     service: {}
