@@ -16,16 +16,16 @@ import {
 export default {
     namespaced: true,
     state: {
-        isValid: false,
-        isDirty: false,
         errors: [],
         suggestions: [],
-        isStreetNumberRequired: false,
         streetNumber: '',
-        isInputFocus: false,
-        isGeoLocationAvailable: false,
         shouldInputFieldHaveFocus: false,
         keyboardSuggestionIndex: 0,
+        isValid: false,
+        isDirty: false,
+        isStreetNumberRequired: false,
+        isInputFocus: false,
+        isGeoLocationAvailable: false,
         isFullAddressSearchEnabled: false,
         isAutocompleteEnabled: false
     },
