@@ -57,16 +57,46 @@
     ```
 
 ## Development
-
-Running below `yarn` commands from the component folder, starts a development
-server displaying a preview example of the component implementation.
+It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
 
 ```bash
-# cd /packages/f-checkout
+# cd ./fozzie-components
 yarn install
 
-# followed by
-yarn demo
+## Testing
+Unit / Integration / Contract
+
+```bash
+# Run Unit / Integration / Contract tests for all components
+cd ./fozzie-components
+yarn test
 ```
 
+OR
+
+```bash
+# Run Unit / Integration / Contract tests for f-checkout
+cd ./fozzie-components/packages/f-checkout
+yarn test
+```
+
+Component Tests
+```bash
+# Run Component tests for all components
+# Note: Ensure Storybook is not running when running the following commands
+cd ./fozzie-components
+
+yarn storybook:build
+yarn storybook:serve-static
+yarn test-component:chrome
+```
+
+OR
+
+```bash
+# Run Component tests for f-checkout
+# Note: Ensure Storybook is not running when running the following commands
+cd ./fozzie-components/packages/f-checkout
+yarn test-component:chrome
+```
 ## Documentation to be completed once module is in stable state.

@@ -63,18 +63,46 @@
 
     This component extends [@justeat/browserslist-config-fozzie](https://github.com/justeat/browserslist-config-fozzie).
 
-1. Building the Module
+## Development
+It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
 
-    Run `yarn build`.
+```bash
+# cd ./fozzie-components
+yarn install
 
-1. Running locally
+## Testing
+Unit / Integration / Contract
 
-    Run `yarn demo` in `/packages/f-footer` to render testing wrapper component
+```bash
+# Run Unit / Integration / Contract tests for all components
+cd ./fozzie-components
+yarn test
+```
 
-1. Running the Tests
+OR
 
-    Run `yarn test`.
+```bash
+# Run Unit / Integration / Contract tests for f-footer
+cd ./fozzie-components/packages/f-footer
+yarn test
+```
 
-1. Running Lint check
+Component Tests
+```bash
+# Run Component tests for all components
+# Note: Ensure Storybook is not running when running the following commands
+cd ./fozzie-components
 
-    Run `yarn lint`.
+yarn storybook:build
+yarn storybook:serve-static
+yarn test-component:chrome
+```
+
+OR
+
+```bash
+# Run Component tests for f-footer
+# Note: Ensure Storybook is not running when running the following commands
+cd ./fozzie-components/packages/f-footer
+yarn test-component:chrome
+```
