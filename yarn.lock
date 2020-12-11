@@ -1633,14 +1633,6 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
-"@justeat/f-alert@0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-0.1.1.tgz#3ea11276f6c5931670c1f85f6810c1133601490b"
-  integrity sha512-Y1qpZwNiRuFkmwGtlgUmCRY1yyoSh5cI9bdPkFwfg+l8ToACbCkU/kGfwqNTfmUoOLCwrM5HMvK/NIcnwVXS2A==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeat/f-vue-icons" "1.4.0"
-
 "@justeat/f-build-config@0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-build-config/-/f-build-config-0.3.0.tgz#15b18304e792ee031e0eb6b71f944c3d3c797c1f"
@@ -1651,16 +1643,6 @@
     webpack-chain "5.2.4"
     webpack-cli "3.3.1"
     webpack-log "2.0.0"
-
-"@justeat/f-button@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.2.0.tgz#fc60c21ada40557aa894dd54ec26be1b5a5dc6f7"
-  integrity sha512-+bWE9+hxNlzpJhIesShTwzm0lJ/nm3iXZC7LWAipMX5CtgQ0xOpwrOBMr0nPP4rKCV54QW8qHG4/4AjnghUuEw==
-
-"@justeat/f-button@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.3.0.tgz#2bd258023bb57160a64c91a690f1e0a188ce9c1b"
-  integrity sha512-ed72BvakNr8eDXRGNDht3VnVlS0VkdozVRn52iwWJ9HHz8w440+AO/dZIBBSgIdOgIN4MaHf5QORhgRiY0T8cg==
 
 "@justeat/f-button@0.4.0":
   version "0.4.0"
