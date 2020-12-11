@@ -55,24 +55,6 @@
 
     ```
 
-## Development
-
-Running below `yarn` commands from the component folder, starts a development
-server displaying a preview example of the component implementation.
-
-```bash
-# cd /packages/f-card
-yarn install
-
-# followed by
-yarn demo
-```
-
-### Storybook
-
-The component is also available to demo through our storybook instance which can be served locally by running `yarn storybook:serve` from the mono-repo root.
-
-
 ## Props
 
 `f-card` has a number of props that allow you to customise its functionality.
@@ -86,3 +68,47 @@ The props that can be defined are as follows:
 | hasOutline               | false           | `boolean`     | `false` | When set to `true`, an outline is applied to the card component.  |
 | isPageContentWrapper     | false           | `boolean`     | `false` | When set to `true`, applies styles to make the card act like a page content wrapper.<br><br>The card will be full width on narrow devices, and then a fixed width above a certain breakpoint width (about 480px), when the card will be centred on the page. |
 | cardHeadingPosition     | false           | `string`     | `left` | Sets the text alignment of the card component's heading.<br><br>When set to `left` the heading will aligned to the left.<br>When set to `center` the heading will be centrally aligned.<br>When set to `right` the heading will be aligned to the right. |
+
+## Development
+It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
+
+```bash
+# cd ./fozzie-components
+yarn install
+
+## Testing
+Unit / Integration / Contract
+
+```bash
+# Run Unit / Integration / Contract tests for all components
+cd ./fozzie-components
+yarn test
+```
+
+OR
+
+```bash
+# Run Unit / Integration / Contract tests for f-card
+cd ./fozzie-components/packages/f-card
+yarn test
+```
+
+Component Tests
+```bash
+# Run Component tests for all components
+# Note: Ensure Storybook is not running when running the following commands
+cd ./fozzie-components
+
+yarn storybook:build
+yarn storybook:serve-static
+yarn test-component:chrome
+```
+
+OR
+
+```bash
+# Run Component tests for f-card
+# Note: Ensure Storybook is not running when running the following commands
+cd ./fozzie-components/packages/f-card
+yarn test-component:chrome
+```

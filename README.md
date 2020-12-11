@@ -23,6 +23,47 @@ There's two solutions you could try from the root of the project which may fix t
 1. yarn cache clean
 2. yarn build
 
+
+## Development
+It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
+
+## Testing
+Unit / Integration / Contract
+
+```bash
+# Run Unit / Integration / Contract tests for all components
+cd ./fozzie-components
+yarn test
+```
+
+OR
+
+```bash
+# Run Unit / Integration / Contract tests for individual f-* packag
+cd ./fozzie-components/packages/f-*
+yarn test
+```
+
+Component Tests
+```bash
+# Run Component tests for all components
+# Note: Ensure Storybook is not running when running the following commands
+cd ./fozzie-components
+
+yarn storybook:build
+yarn storybook:serve-static
+yarn test-component:chrome
+```
+
+OR
+
+```bash
+# Run Component tests for individual f-* package
+# Note: Ensure Storybook is not running when running the following commands
+cd ./fozzie-components/packages/f-*user-message*
+yarn test-component:chrome
+```
+
 ## Running Storybook
 
 To run storybook first you must run the following at the the top level

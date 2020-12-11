@@ -81,19 +81,48 @@ The props that can be defined are as follows:
 
 **Important:** if you're adding a new property to show/hide something on the navigation bar, you probably want to check the `hasNavigationLinks` computed property, since you might have to update it.
 
-## Demo and local development
-
-Running the command below from the component folder e.g. `./packages/f-header` will start a development server and allow to preview the component usually on http://localhost:8080/
+## Development
+It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
 
 ```bash
-# Local preview
-yarn demo
+# cd ./fozzie-components
+yarn install
 
-# Logged out user - http://localhost:8080/
-# Logged in user - http://localhost:8080/?testuser
+## Testing
+Unit / Integration / Contract
+
+```bash
+# Run Unit / Integration / Contract tests for all components
+cd ./fozzie-components
+yarn test
 ```
 
-In addition using a `?testuser` parameter will simulate a logged in state.
+OR
 
+```bash
+# Run Unit / Integration / Contract tests for f-header
+cd ./fozzie-components/packages/f-header
+yarn test
+```
+
+Component Tests
+```bash
+# Run Component tests for all components
+# Note: Ensure Storybook is not running when running the following commands
+cd ./fozzie-components
+
+yarn storybook:build
+yarn storybook:serve-static
+yarn test-component:chrome
+```
+
+OR
+
+```bash
+# Run Component tests for f-header
+# Note: Ensure Storybook is not running when running the following commands
+cd ./fozzie-components/packages/f-header
+yarn test-component:chrome
+```
 
 ## Documentation to be completed once module is in stable state.
