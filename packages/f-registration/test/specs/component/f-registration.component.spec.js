@@ -1,7 +1,13 @@
 import RegistrationComponent from '../../../test-utils/component-objects/f-registration.component';
 
 describe('f-registration component tests', () => {
-    it('should display errors if mandatory fields are empty', () => {
+    beforeEach(() => {
+        browser.url('?path=/story/components-organisms--registration-component');
+        browser.switchToFrame(0);
+        RegistrationComponent.waitForRegistrationForm();
+    });
+
+    it.skip('should display errors if mandatory fields are empty', () => {
         // Arrange
         const userInfo = {
             firstName: '',
@@ -20,7 +26,7 @@ describe('f-registration component tests', () => {
         expect(RegistrationComponent.isPasswordEmptyErrorDisplayed()).toBe(true);
     });
 
-    it('should show and be able to click the legal documentation', () => {
+    it.skip('should show and be able to click the legal documentation', () => {
         // Act
         RegistrationComponent.waitForRegistrationForm();
 

@@ -18,6 +18,7 @@ v4.0.0-beta.11
   -`SET_FULL_ADDRESS_SEARCH_CONFIGS`
   - `SET_AUTO_COMPLETE_AVAILABILITY`
 - `getCookie` & `safeParseJson` to be used for detecting and turning on Loqate.
+- `demo` related setup back in.
 
 ### Fixed
 - `streetNumberRequired` changed to `isStreetNumberRequired`.

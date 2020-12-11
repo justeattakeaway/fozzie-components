@@ -20,8 +20,7 @@ export default {
             suffix: '.'
         },
         login: {
-            text: 'Already on Just Eat?',
-            url: '/account/login'
+            text: 'Already on Just Eat?'
         }
     },
 

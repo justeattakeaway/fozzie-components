@@ -9,13 +9,13 @@ export default {
     return h("svg", _mergeJSXProps([{
       attrs: {
         xmlns: "http://www.w3.org/2000/svg",
-        viewBox: "0 0 16 16"
+        viewBox: "0 0 20 20"
       },
       "class": "c-ficon c-ficon--alert"
     }, ctx.data]), [h("path", {
       attrs: {
-        fill: "#D50525",
-        d: "M7.7 5a.3.3 0 1 1 .6 0v3.3a.3.3 0 1 1-.6 0V5zm.3 5.7a.7.7 0 1 1 0-1.4.7.7 0 0 1 0 1.4zm-5-8a.3.3 0 0 0-.3.3v10c0 .2.1.3.3.3h10a.3.3 0 0 0 .3-.3V3a.3.3 0 0 0-.3-.3H3zM3 2h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"
+        "fill-rule": "evenodd",
+        d: "M10 0a10 10 0 0110 10A10 10 0 1110 0zm0 16.3a1.5 1.5 0 100-2.9 1.5 1.5 0 000 3zm.3-4.3c.6-3 1.7-4.2 1.7-5.8C12 5 11.2 4 10 4S8 5 8 6.2C8 7.8 9 9 9.7 12h.6z"
       }
     })]);
   }

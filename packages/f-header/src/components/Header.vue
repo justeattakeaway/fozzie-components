@@ -3,7 +3,8 @@
         :data-theme="theme"
         :class="['c-header', headerBackgroundClass, {
             'c-header--transparent c-header--gradient': showTransparentHeader
-        }]">
+        }]"
+        data-test-id='header-component'>
         <skip-to-main
             v-if="showSkipLink"
             :text="copy.skipToMainContentText"

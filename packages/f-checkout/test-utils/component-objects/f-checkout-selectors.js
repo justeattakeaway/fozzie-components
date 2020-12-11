@@ -24,10 +24,11 @@ export const FIELDS = {
     },
     addressPostcode: {
         input: '[data-test-id="formfield-address-postcode-input"]',
-        error: '[data-test-id="error-address-postcode-empty"]'
+        error: '[data-test-id="error-address-postcode-empty"]',
+        typeError: '[data-test-id="error-address-postcode-type-error"]'
     },
     userNote: {
-        input: '[data-test-id="user-note"] textarea', 
+        input: '[data-test-id="user-note"] textarea',
         error: ''
     }
 };
