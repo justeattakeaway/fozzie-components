@@ -2,12 +2,14 @@
     <div :class="$style['c-search-innerFields']">
         <form-search-geo
             v-if="isGeoLocationAvailable"
+            data-test-id="geolocationButton"
             :copy="copy"
             :service="service" />
 
         <input
-            v-if="streetNumberRequired"
+            v-if="isStreetNumberRequired"
             ref="streetNumberInput"
+            data-test-id="streetNumberInput"
             v-model="streetNumber"
             :class="$style['c-search-streetInput']"
             type="input"
@@ -45,7 +47,7 @@ export default {
 
     computed: {
         ...mapState('searchbox', [
-            'streetNumberRequired',
+            'isStreetNumberRequired',
             'isGeoLocationAvailable'
         ])
     },

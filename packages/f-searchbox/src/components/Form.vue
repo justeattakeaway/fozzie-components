@@ -20,7 +20,6 @@
                 :error-message="errorMessage"
                 :address="address"
                 :service="service"
-                :should-display-custom-autocomplete="service.isAutocompleteEnabled"
                 :copy="copy"
                 :is-compressed="isCompressed"
                 v-on="$listeners" />
@@ -133,11 +132,11 @@ export default {
             'suggestions',
             'errors',
             'isValid',
-            'streetNumberRequired',
             'isInputFocus',
             'streetNumber',
             'isDirty',
-            'keyboardSuggestionIndex'
+            'keyboardSuggestionIndex',
+            'isFullAddressSearchEnabled'
         ]),
 
         /**
@@ -220,8 +219,8 @@ export default {
 
         this.formUrl = generateFormQueryUrl(this.queryString, this.formUrl);
 
-        // Set Geolocation state so we can display the geolocation icon button on small screens.
-        this.setGeoLocationAvailability(this.service.isGeoAvailable);
+        this.reinitialiseConfigSettings();
+        this.initialiseFullAddressSearch(this.config.isFullAddressSearchEnabled);
     },
 
     created () {
@@ -241,7 +240,9 @@ export default {
             'setErrors',
             'setIsDirty',
             'setStreetNumberRequired',
-            'setGeoLocationAvailability'
+            'setGeoLocationAvailability',
+            'setFullAddressSearchConfigs',
+            'setAutoCompleteAvailability'
         ]),
 
         /**
@@ -383,6 +384,32 @@ export default {
                 && normalisePostcode(this.lastAddress) !== normalisePostcode(this.address)
             ) {
                 this.$emit(TRACK_POSTCODE_CHANGED);
+            }
+        },
+
+        /**
+         * Initialise geo location & autocomplete features based on the clientInit.
+         */
+        reinitialiseConfigSettings () {
+            this.setGeoLocationAvailability(this.service.isGeoAvailable);
+            this.setAutoCompleteAvailability(this.service.isAutocompleteEnabled);
+        },
+
+        /**
+         * Initialise tenant specific full address feature if available. See en-gb as an
+         * example.
+         *
+         * @param isFullAddressSearchEnabled
+         */
+        initialiseFullAddressSearch (isFullAddressSearchEnabled) {
+            if (isFullAddressSearchEnabled) {
+                this.setFullAddressSearchConfigs({
+                    isFullAddressSearchEnabled: isFullAddressSearchEnabled()
+                });
+
+                if (this.isFullAddressSearchEnabled) {
+                    this.setAutoCompleteAvailability(true);
+                }
             }
         }
     }

@@ -98,13 +98,52 @@ const setJeCookie = (name, value) => setCookie(`je-last_${name}_used`, value
     ? value.toString().trim()
     : '', 365);
 
+/**
+ *
+ *
+ *
+ * @param name
+ * @returns {*}
+ */
+const getCookie = name => {
+    const nameEQ = `${name}=`;
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+};
+
+/**
+ * Wraps JSON.parse and returns null if it fails. Intended for use cases
+ * where the input could be from an untrusted source and we dont want
+ * malformed json throwing and halting execution.
+ *
+ * @param {string} json string
+ * @returns {object}
+ */
+const safeParseJson = string => {
+    try {
+        return JSON.parse(string);
+    } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log(`Could not parse json ${string}`);
+        return null;
+    }
+};
+
+
 
 export {
     isPostcodeEmpty,
     doesPostcodeMatchRegex,
     normalisePostcode,
     setCookie,
+    getCookie,
     getLastLocation,
     generatePostForm,
-    setJeCookie
+    setJeCookie,
+    safeParseJson
 };
