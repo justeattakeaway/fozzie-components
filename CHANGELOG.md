@@ -3,12 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v2.24.0
+v2.25.0
 ------------------------------
-*December 9, 2020*
+*December 11, 2020*
 
 ### Changed
 - README's for components to remove references to demo files.
+
+
+*December 11, 2020*
+
+### Changed
+- package.json component test scripts
 
 
 v2.23.0
@@ -21,6 +27,7 @@ v2.23.0
 
 ### Removed
 - Component demo files
+
 
 v2.22.1
 ------------------------------
