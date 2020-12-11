@@ -60,7 +60,10 @@
     "vuex": "3.5.1"
   },
   "devDependencies": {
+    "@justeat/f-button": "0.4.1",
+    "@justeat/f-error-message": "0.3.1",
     "@justeat/f-globalisation": "0.2.0",
+    "@justeat/f-vue-icons": "1.13.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
@@ -68,9 +71,6 @@
     "@vue/test-utils": "1.0.3",
     "node-sass-magic-importer": "5.3.2",
     "vue": "2.6.10",
-    "vuex": "3.5.1",
-    "@justeat/f-button": "0.4.1",
-    "@justeat/f-error-message": "0.3.1",
-    "@justeat/f-vue-icons": "1.13.0"
+    "vuex": "3.5.1"
   }
 }
