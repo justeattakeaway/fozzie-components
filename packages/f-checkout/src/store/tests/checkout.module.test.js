@@ -3,20 +3,24 @@ import MockAdapter from 'axios-mock-adapter';
 import CheckoutModule from '../checkout.module';
 
 const apiResponse = {
-    restaurant: {
-        id: '1234'
-    },
+    id: '1234',
     serviceType: 'delivery',
     customer: {
         firstName: 'Joe',
         lastName: 'Bloggs',
         phoneNumber: '+447111111111'
     },
-    fulfilment: {
-        time: {
-            from: '2020-01-01T00:30:00.000Z',
-            to: '2020-01-01T00:30:00.000Z'
-        },
+    fulfillment: {
+        times: [{
+            label:
+                {
+                    text: "As soon as possible"
+                },
+                "from": "2020-01-01T00:00+00:00",
+                "to": "2020-01-01T00:00+00:00",
+                "selected": true
+            }
+        ],
         address: {
             lines: [
                 '1 Bristol Road',
@@ -35,15 +39,18 @@ const apiResponse = {
         }
     ],
     isFulfillable: true,
-    issues: [
-        {
-            code: 'RESTAURANT_UNAVAILABLE'
-        },
-        {
-            code: 'MINIMUM_ORDER_VALUE_NOT_MET',
-            currency: 'GBP',
-            minimumOrderValue: 1000,
-            additionalSpendRequired: 100
+    notices: [{
+        "type": "allergy",
+        "notice": {
+            "text": "If you have a food allergy or intolerance (or someone you're ordering for has), <a href=\"https://greggs.co.uk/nutrition\" data-test-id=\"allergen-url-link\" target=\"_blank\" rel=\"noopener\">read what this restaurant has to say about allergies</a> before placing your order. Do not order if you cannot get the allergy information you need."
+        }
+    }],
+    messages: [{
+        type: "warning",
+        message:
+            {
+                text: "Please hurry, the restaurant is closing soon"
+            }
         }
     ]
 };
@@ -58,10 +65,14 @@ const expectedState = {
         mobileNumber
     },
     fulfillment: {
-        time: {
-            from: '2020-01-01T00:30:00.000Z',
-            to: '2020-01-01T00:30:00.000Z'
-        },
+        times: [{
+            label: {
+                text: "As soon as possible"
+            },
+            "from": "2020-01-01T00:00+00:00",
+            "to": "2020-01-01T00:00+00:00",
+            "selected": true
+        }],
         address: {
             line1: '1 Bristol Road',
             line2: '',
@@ -74,8 +85,20 @@ const expectedState = {
         note: 'Test note for delivery'
     }],
     isFulfillable: true,
-    notices: undefined,
-    messages: undefined
+    notices: [{
+        "type": "allergy",
+        "notice": {
+            "text": "If you have a food allergy or intolerance (or someone you're ordering for has), <a href=\"https://greggs.co.uk/nutrition\" data-test-id=\"allergen-url-link\" target=\"_blank\" rel=\"noopener\">read what this restaurant has to say about allergies</a> before placing your order. Do not order if you cannot get the allergy information you need."
+        }
+    }],
+    messages: [{
+        type: "warning",
+        message:
+            {
+                text: "Please hurry, the restaurant is closing soon"
+            }
+        }
+    ]
 };
 
 const state = CheckoutModule.state();
