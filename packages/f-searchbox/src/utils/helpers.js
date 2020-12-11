@@ -91,6 +91,8 @@ const generatePostForm = (url, data) => {
  * 1. `je-last_city_used`
  * 2. `je-last_sublocality_used`
  *
+ * TODO: Use universal cookie helper when consuming apps are ready.
+ *
  * @param name
  * @param value
  */
@@ -99,8 +101,9 @@ const setJeCookie = (name, value) => setCookie(`je-last_${name}_used`, value
     : '', 365);
 
 /**
+ * Gets a specific cookie based on the cookie name you provide it.
  *
- *
+ * TODO: Use universal cookie helper when consuming apps are ready.
  *
  * @param name
  * @returns {*}
