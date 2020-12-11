@@ -166,7 +166,7 @@ describe('CheckoutModule', () => {
 
             it('should post the checkout details to the backend.', async () => {
                 // Arrange && Act
-                await postCheckout(payload);
+                await postCheckout({ commit }, payload);
 
                 // Assert
                 expect(axiosMock.history.post.length).toBe(1);
