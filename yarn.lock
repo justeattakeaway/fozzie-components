@@ -1689,10 +1689,10 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.3.0.tgz#473cc1ce7edeb0ce58df674c9c4ee0ebf30171d8"
   integrity sha512-KQ19RSgGyMwfAV4ZOA7SU3BjyR6h9z7Ykc0K3DBcft4EJBDh1lmvtAZIaZJyhDTwKrggrJaLq5QubEHlB6gkew==
 
-"@justeat/f-icons@3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.0.1.tgz#93c75b9f7db02b7086601b78a9e63e1f7f68fff3"
-  integrity sha512-QPAouY26VKYGGFAJ5sXTer7UmqZpDHmu+dHYcZsI/BhG/KO+D1NXoV7jZkLnfmrh5Y1Bvx+UrB02tB0NTH14ew==
+"@justeat/f-icons@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.1.0.tgz#16f171b0d319cc5cd648cefb36a8e5ed35338f98"
+  integrity sha512-CL7M0w8ndbU8dY13tkcbohS0DPNZpWRG7mld0QAg2YwELNCWyKb6dr5563XvkMgIapwhFnOaM9aGOM6x5f5ODg==
 
 "@justeat/f-logger@0.8.1":
   version "0.8.1"
