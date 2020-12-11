@@ -47,8 +47,9 @@ const fields = {
     },
     addressPostcode: {
         input: () => $(FIELDS.addressPostcode.input),
-        error: () => $(FIELDS.addressPostcode.error)
-    },
+        error: () => $(FIELDS.addressPostcode.error), 
+        typeError: () => $(FIELDS.addressPostcode.typeError)
+    }, 
     userNote: {
         input: () => $(FIELDS.userNote.input),
         error: ''
@@ -57,6 +58,7 @@ const fields = {
 
 exports.isFieldErrorDisplayed = fieldName => fields[fieldName].error().isDisplayed();
 exports.isFieldDisplayed = fieldName => fields[fieldName].input().isDisplayed();
+exports.isFieldTypeErrorDisplayed = fieldName => fields[fieldName].typeError().isDisplayed();
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();

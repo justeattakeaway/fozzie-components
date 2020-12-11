@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "0.21.0",
+  "version": "0.22.0",
   "main": "dist/f-checkout.umd.min.js",
   "files": [
     "dist",
@@ -34,7 +34,7 @@
     "lint:style": "vue-cli-service lint:style",
     "report": "cd ../.. && yarn report",
     "test": "vue-cli-service test:unit",
-    "storybook:serve-webdriver": "cd ../storybook && storybook:serve-static", 
+    "storybook:serve-webdriver": "lerna run storybook:serve-static --stream", 
     "test:coverage": "yarn test --coverage",
     "test-component:chrome": "run-p --race storybook:serve-webdriver webdriver:delay:chrome",
     "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js",
