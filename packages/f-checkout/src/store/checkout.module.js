@@ -22,7 +22,9 @@ export default {
         notes: [],
         isFulfillable: true,
         notices: [],
-        messages: []
+        messages: [],
+        authToken: '',
+        isLoggedIn: false
     }),
 
     actions: {
@@ -112,6 +114,11 @@ export default {
             state.isFulfillable = isFulfillable;
             state.notices = notices;
             state.messages = messages;
+        },
+
+        updateAuth: (state, { authToken }) => {
+            state.authToken = authToken;
+            state.isLoggedIn = !!authToken;
         }
     }
 };

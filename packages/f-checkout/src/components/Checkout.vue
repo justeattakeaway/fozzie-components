@@ -81,7 +81,7 @@ import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
@@ -124,6 +124,12 @@ export default {
             type: Number,
             required: false,
             default: 1000
+        },
+
+        authToken: {
+            type: String,
+            required: false,
+            default: ''
         }
     },
 
@@ -193,6 +199,10 @@ export default {
     watch: {
         async checkoutUrl () {
             await this.loadCheckout();
+        },
+
+        authToken () {
+            this.updateAuth({ authToken: this.authToken });
         }
     },
 
@@ -221,6 +231,7 @@ export default {
             'getCheckout',
             'postCheckout'
         ]),
+        ...mapMutations('checkout', ['updateAuth']),
 
         /**
          * Submit the checkout details while emitting events to communicate its success or failure.
