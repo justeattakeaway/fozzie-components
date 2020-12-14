@@ -4,7 +4,6 @@ import { select, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 
 import {
-    VALID_LOCALES,
     ENGLISH_LOCALE
 } from '../../../../storybook/constants/globalisation';
 
@@ -40,12 +39,13 @@ export const CheckoutComponent = () => ({
         },
         authToken: {
             default: text('Auth token', '')
+        },
+        loginUrl: {
+            default: text('Login Url', '/login')
         }
     },
     store: new Vuex.Store({}),
-    template: '<vue-checkout'
-        + ' :checkoutUrl="checkoutUrl" :checkout-available-fulfilment-url="checkoutAvailableFulfilmentUrl" :authToken="authToken" :locale="locale"'
-        + ' :key="`${locale},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken}`" />'
+    template: `<vue-checkout :checkoutUrl="checkoutUrl" :locale="locale" :authToken="authToken" :login-url="loginUrl" :key="${locale},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken}" />`
 });
 
 CheckoutComponent.storyName = 'f-checkout';

@@ -22,6 +22,14 @@
                 type="post"
                 :class="$style['c-checkout-form']"
                 @submit.prevent="onFormSubmit">
+                <p
+                    :class="[
+                        $style['c-checkout-switchUserLink']
+                    ]"
+                    data-test-id="create-account-login-link"
+                    @click="visitLoginPage">
+                    <a :href="loginUrl">Not {{ name }}? Click here.</a>
+                </p>
                 <form-field
                     v-model="customer.mobileNumber"
                     name="mobile-number"
@@ -130,9 +138,13 @@ export default {
             required: false,
             default: 1000
         },
-
         authToken: {
             type: String,
+            default: ''
+        },
+        loginUrl: {
+            type: String,
+            required: true,
             default: ''
         }
     },
@@ -233,6 +245,9 @@ export default {
             'getAvailableFulfilment',
             'setAuthToken'
         ]),
+        visitLoginPage () {
+            this.$emit(EventNames.VisitLoginPage);
+        },
 
         /**
          * Submit the checkout details while emitting events to communicate its success or failure.
@@ -402,6 +417,21 @@ export default {
 $line-height                              : 16px;
 $checkout-width                           : 596px;
 $checkout-padding                         : spacing(x5) 100px;
+
+.c-checkout-switchUserLink {
+  text-align: center;
+
+  a {
+    // TODO: check default link styles in PIE and update fozzie // (should be able to remove these styles then)
+    text-decoration: none;
+    font-weight: $font-weight-bold;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+}
 
 .c-checkout {
     margin: auto;
