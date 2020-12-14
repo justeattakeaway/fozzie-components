@@ -122,7 +122,7 @@ describe('helpers', () => {
                     // Assert
                     expect(result).toEqual({
                         Apophis: '99942',
-                        isNearEath: true
+                        isNearEarth: true
                     });
                 });
             });
