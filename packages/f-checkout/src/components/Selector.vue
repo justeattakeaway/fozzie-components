@@ -5,7 +5,7 @@
         :class="$style['c-checkout-selector']"
         input-type="dropdown"
         :label-text="orderMethod"
-        :dropdown-options="fulfillmentTimes"
+        :dropdown-options="fulfilmentTimes"
         @input="selectionChanged" />
 </template>
 
@@ -20,7 +20,7 @@ export default {
 
     computed: {
         ...mapState('checkout', [
-            'fulfillment',
+            'fulfilment',
             'serviceType'
         ]),
 
@@ -31,24 +31,24 @@ export default {
         },
 
         /*
-        * Create an array from fulfillment times labels to
+        * Create an array from fulfilment times labels to
         * display as options in dropdown
         */
-        fulfillmentTimes () {
-            return this.fulfillment.times.map(time => time.label.text);
+        fulfilmentTimes () {
+            return this.fulfilment.times.map(time => time.label.text);
         }
     },
 
     methods: {
         /**
-        * Update all fulfillment.times.selected to false
-        * Update chosen fulfillment.times.selected to true
+        * Update all fulfilment.times.selected to false
+        * Update chosen fulfilment.times.selected to true
         *
         * @param {string} selectedTime The time emited when dropdown value is changed.
         **/
         selectionChanged (selectedTime) {
-            this.fulfillment.times.forEach(fulfillmentTime => {
-                fulfillmentTime.selected = fulfillmentTime.label.text === selectedTime;
+            this.fulfilment.times.forEach(fulfilmentTime => {
+                fulfilmentTime.selected = fulfilmentTime.label.text === selectedTime;
             });
         }
     }
