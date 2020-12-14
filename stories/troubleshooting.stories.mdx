@@ -28,17 +28,17 @@
 ### How can I test an unpublished version of my component in another project?
 > Sometimes we might want to test changes to a component before we submit a PR, you can use yalc to do this.
 
-- You can read more about yalc and find installation instructions here - https://github.com/whitecolor/yalc
+- Read more about yalc and find installation instructions here - https://github.com/whitecolor/yalc
 - Yalc works by creating a locally published directory on your machine, and allows other code bases to use it in place of a real dependency
 - Once installed you can run `yalc publish` in any component
 - Once published locally you can run `yalc add @justeat/f-myComponentName` in any NPM based project
-- You will need to republish and add each time you modify the component
+- You will need to republish your component and add it to your project each time you modify the component
 
 ### How can I create a new component?
 > We have streamlined the process for creating new components; but we would recommend talking to the team before you do
 
 1. If you haven't already, run the `First time setup` steps at the top of this page
-2. Navigate your terminal to the generator folder: `cd /packages`
+2. Navigate your terminal to the packages folder: `cd /packages`
 3. Run the generator command: `yo @justeat/f-component`
 4. Follow the generator wizard which will create a new component for you.
 
@@ -47,13 +47,13 @@
 ### When running tests I see the error `SyntaxError: Unexpected token 'export'`
 > We use WebDriver for interaction based testing, which includes integration and system tests
 
-- WebDriver does not support the import export syntax in the most recent ES versions
-- When writing code that is directly imported by WebDriver code, make sure to use `require` and `module.exports` based syntax in your code
+- WebDriver does not support the import export syntax available in the most recent ES versions
+- When writing code that is directly imported by WebDriver, make sure to use `require` and `module.exports` based syntax in your code
 
 ## Submitting Code changes
 
 ### Fozzie Bot is displaying a failed check on my PR
 > We use DangerJS to enforce some standards within the Pull Request process
 
-1. Make sure that your PR includes version bumps and change log entries for the affected components
+1. Make sure that your PR includes version bumps (In the package.json) and change log entries (in the changelog.md) for the affected components
 2. Make sure that your PR title includes the component and version, for example: `f-component@v0.1.0 - I did this thing`
