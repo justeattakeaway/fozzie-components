@@ -8,7 +8,7 @@ v0.24.0
 *December 14, 2020*
 
 ### Changed
-- Renamed 'fulfill' ocurrences to 'fulfil' to keep in line with the Checkout API.
+- Renamed 'fulfill' occurrences to 'fulfil' to keep in line with the Checkout API.
 
 
 v0.23.0
