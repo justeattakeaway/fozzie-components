@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+Latest (to be added to next release)
+------------------------------
+*December 14, 2020*
+
+### Added
+- Tests to helper.js.
+
+### Changed
+- Test helper directory `tests` > `testHelpers`.
+
+
 v4.0.0-beta.12
 ------------------------------
 *December 11, 2020*
