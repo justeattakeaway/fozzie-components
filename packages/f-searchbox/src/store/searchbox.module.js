@@ -8,22 +8,26 @@ import {
     SET_GEO_LOCATION_AVAILABILITY,
     SET_FOCUS_ON_INPUT,
     SET_STREET_NUMBER_VALUE,
-    SET_KEYBOARD_SUGGESTION
+    SET_KEYBOARD_SUGGESTION,
+    SET_FULL_ADDRESS_SEARCH_CONFIGS,
+    SET_AUTO_COMPLETE_AVAILABILITY
 } from './mutation.types';
 
 export default {
     namespaced: true,
     state: {
-        isValid: false,
-        isDirty: false,
         errors: [],
         suggestions: [],
-        streetNumberRequired: false,
         streetNumber: '',
+        shouldInputFieldHaveFocus: false,
+        keyboardSuggestionIndex: 0,
+        isValid: false,
+        isDirty: false,
+        isStreetNumberRequired: false,
         isInputFocus: false,
         isGeoLocationAvailable: false,
-        shouldInputFieldHaveFocus: false,
-        keyboardSuggestionIndex: 0
+        isFullAddressSearchEnabled: false,
+        isAutocompleteEnabled: false
     },
 
     actions: {
@@ -105,6 +109,21 @@ export default {
             } else if (state.keyboardSuggestionIndex < 0) {
                 commit(SET_KEYBOARD_SUGGESTION, suggestionsLength);
             }
+        },
+
+        setFullAddressSearchConfigs ({ commit }, payload) {
+            const { isFullAddressSearchEnabled } = payload;
+
+            commit(
+                SET_FULL_ADDRESS_SEARCH_CONFIGS,
+                {
+                    isFullAddressSearchEnabled
+                }
+            );
+        },
+
+        setAutoCompleteAvailability ({ commit }, payload) {
+            commit(SET_AUTO_COMPLETE_AVAILABILITY, payload);
         }
     },
 
@@ -125,8 +144,8 @@ export default {
             state.suggestions = suggestions;
         },
 
-        [SET_STREET_NUMBER_REQUIRED]: (state, streetNumberRequired) => {
-            state.streetNumberRequired = streetNumberRequired;
+        [SET_STREET_NUMBER_REQUIRED]: (state, isStreetNumberRequired) => {
+            state.isStreetNumberRequired = isStreetNumberRequired;
         },
 
         [SET_STREET_NUMBER_VALUE]: (state, streetNumber) => {
@@ -147,6 +166,14 @@ export default {
 
         [SET_KEYBOARD_SUGGESTION]: (state, keyboardSuggestionIndex) => {
             state.keyboardSuggestionIndex = keyboardSuggestionIndex;
+        },
+
+        [SET_FULL_ADDRESS_SEARCH_CONFIGS]: (state, { isFullAddressSearchEnabled }) => {
+            state.isFullAddressSearchEnabled = isFullAddressSearchEnabled;
+        },
+
+        [SET_AUTO_COMPLETE_AVAILABILITY]: (state, isAutocompleteEnabled) => {
+            state.isAutocompleteEnabled = isAutocompleteEnabled;
         }
     }
 };
