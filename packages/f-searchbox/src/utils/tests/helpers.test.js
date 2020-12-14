@@ -114,7 +114,7 @@ describe('helpers', () => {
             describe('AND a valid string is passed in as a param', () => {
                 it('should return a parsed JSON value', () => {
                     // Arrange
-                    const json = '{"Apophis": "99942", "isNearEath": true }';
+                    const json = '{"Apophis": "99942", "isNearEarth": true }';
 
                     // Act
                     const result = safeParseJson(json);
