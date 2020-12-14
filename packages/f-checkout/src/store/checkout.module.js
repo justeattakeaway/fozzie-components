@@ -56,23 +56,31 @@ export default {
          * Post the checkout details to the backend.
          *
          * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
+         * @param {Object} state - Automatically handled by Vuex to be able to retrieve state.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         // eslint-disable-next-line no-unused-vars
-        postCheckout: async ({ commit }, payload) => {
+        postCheckout: async ({ commit, state }, payload) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
             const {
                 url, tenant, data, timeout
             } = payload;
 
+            const authHeader = state.authToken && `Bearer ${state.authToken}`;
+
             const config = {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept-Tenant': tenant
+                    'Accept-Tenant': tenant,
+                    ...(state.isLoggedIn && {
+                        Authorization: authHeader
+                    })
                 },
                 timeout
             };
+
+            console.log(config);
 
             // eslint-disable-next-line no-unused-vars
             const response = await axios.post(url, data, config);
