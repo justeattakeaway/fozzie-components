@@ -1,12 +1,12 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import CheckoutModule from '../checkout.module';
-import { DELIVERY_RESPONSE } from './constants/delivery';
+import checkoutDelivery from '../../demo/checkout-delivery.json';
 
 const mobileNumber = '+447111111111';
 
 const expectedState = {
-    id: '1234',
+    id: '12345',
     serviceType: 'delivery',
     customer: {
         firstName: 'Joe',
@@ -20,10 +20,26 @@ const expectedState = {
             from: '2020-01-01T00:00+00:00',
             to: '2020-01-01T00:00+00:00',
             selected: true
+        },
+        {
+            label: {
+                text: 'Monday 00:15'
+            },
+            from: '2020-01-01T00:15+00:00',
+            to: '2020-01-01T00:15+00:00',
+            selected: false
+        },
+        {
+            label: {
+                text: 'Monday 00:30'
+            },
+            from: '2020-01-01T00:30+00:00',
+            to: '2020-01-01T00:30+00:00',
+            selected: false
         }],
         address: {
             line1: '1 Bristol Road',
-            line2: '',
+            line2: 'Flat 1',
             city: 'Bristol',
             postcode: 'BS1 1AA'
         }
@@ -41,12 +57,16 @@ const expectedState = {
     }],
     messages: [{
         type: 'warning',
-        message:
-            {
-                text: 'Please hurry, the restaurant is closing soon'
-            }
-    }
-    ]
+        message: {
+            text: 'Please hurry, the restaurant is closing soon'
+        }
+    },
+    {
+        type: 'information',
+        message: {
+            text: "We're sorry, some items in your basket are no longer available"
+        }
+    }]
 };
 
 const state = CheckoutModule.state();
@@ -58,7 +78,7 @@ describe('CheckoutModule', () => {
         describe('updateState ::', () => {
             it('should update state with delivery response.', () => {
                 // Arrange && Act
-                updateState(state, DELIVERY_RESPONSE);
+                updateState(state, checkoutDelivery);
 
                 // Assert
                 expect(state).toEqual(expectedState);
@@ -92,7 +112,7 @@ describe('CheckoutModule', () => {
             };
 
             axiosMock.onGet(url, config).reply(200, {
-                data: DELIVERY_RESPONSE
+                data: checkoutDelivery
             });
 
             it('should get the checkout details from the backend and update the state.', async () => {
