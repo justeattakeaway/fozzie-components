@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-import { getAddressComponentsMock } from '../../../../utils/tests/testHelpers';
+import { getAddressComponentsMock } from '../../../../utils/testHelpers/testHelpers';
 import { getAddressComponent, formatLocation } from '../helpers';
 
 describe('`LocationHelpers`', () => {
