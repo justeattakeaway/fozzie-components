@@ -13,7 +13,7 @@ describe('helpers', () => {
 
         describe('when invoked', () => {
             describe('AND a value is passed in', () => {
-                it('should return `falsy` to indicate a value was received', () => {
+                it('should return `falsy` to indicate a value was populated', () => {
                     // Arrange
                     const postcode = 'AR51 1AR';
 
@@ -26,7 +26,7 @@ describe('helpers', () => {
             });
 
             describe('AND a value is NOT passed in', () => {
-                it('should return `truthy` to indicate a value was not received', () => {
+                it('should return `truthy` to indicate a value was not populated', () => {
                     // Act
                     const result = isPostcodeEmpty('');
 
@@ -56,8 +56,8 @@ describe('helpers', () => {
                 });
             });
 
-            describe('AND the postcode passed in passes the regex test', () => {
-                it('should return `truthy`', () => {
+            describe('AND the postcode passed in does not pass the regex test', () => {
+                it('should return `falsy`', () => {
                     // Arrange
                     const postcode = 'NOT A POSTCODE';
 
@@ -111,7 +111,7 @@ describe('helpers', () => {
         });
 
         describe('when invoked', () => {
-            describe('AND a valid string is passed in as an param', () => {
+            describe('AND a valid string is passed in as a param', () => {
                 it('should return a parsed JSON value', () => {
                     // Arrange
                     const json = '{"Apophis": "99942", "isNearEath": true }';
@@ -127,7 +127,7 @@ describe('helpers', () => {
                 });
             });
 
-            describe('AND the string provided is invalid ', () => {
+            describe('AND the string provided is invalid i.e contains invalid JSO syntax', () => {
                 it('should return `null`', () => {
                     // Arrange
                     // Invalid json example which will throw.
