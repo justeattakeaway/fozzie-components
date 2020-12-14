@@ -127,7 +127,7 @@ describe('helpers', () => {
                 });
             });
 
-            describe('AND the string provided is invalid i.e contains invalid JSO syntax', () => {
+            describe('AND the string provided is invalid i.e contains invalid JSON syntax', () => {
                 it('should return `null`', () => {
                     // Arrange
                     // Invalid json example which will throw.
