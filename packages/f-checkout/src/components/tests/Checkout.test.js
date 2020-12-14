@@ -49,17 +49,22 @@ const defaultActions = {
     postCheckout: jest.fn()
 };
 
+const defaultMutations = {
+    updateAuth: jest.fn()
+};
+
 const i18n = {
     locale: 'en-GB',
     messages: tenantConfigs['en-GB']
 };
 
-const createStore = (state = defaultState, actions = defaultActions) => new Vuex.Store({
+const createStore = (state = defaultState, actions = defaultActions, mutations = defaultMutations) => new Vuex.Store({
     modules: {
         checkout: {
             namespaced: true,
             state,
-            actions
+            actions,
+            mutations
         }
     },
     hasModule: jest.fn(() => true)
@@ -172,6 +177,31 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(addressBlock.exists()).toBe(false);
+            });
+        });
+    });
+
+    describe('props ::', () => {
+        describe('authToken ::', () => {
+            it('should store auth token', async () => {
+                // Arrange
+                const propsData = {
+                    checkoutUrl,
+                    authToken: 'sampleToken'
+                };
+
+                const mutations = { updateAuth: jest.fn() };
+
+                // Act
+                shallowMount(VueCheckout, {
+                    store: createStore(defaultState, defaultActions, mutations),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(mutations.updateAuth).toHaveBeenCalledWith(defaultState, { authToken: 'sampleToken' });
             });
         });
     });

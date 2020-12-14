@@ -207,6 +207,7 @@ export default {
     },
 
     async mounted () {
+        this.updateAuth({ authToken: this.authToken });
         await this.loadCheckout();
     },
 
