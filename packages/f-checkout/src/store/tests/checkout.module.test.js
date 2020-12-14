@@ -50,7 +50,6 @@ const expectedState = {
 };
 
 const state = CheckoutModule.state();
-
 const { updateState } = CheckoutModule.mutations;
 const { getCheckout, postCheckout } = CheckoutModule.actions;
 
