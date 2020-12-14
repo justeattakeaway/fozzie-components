@@ -98,7 +98,6 @@ export default {
 
             state.fulfillment.times = fulfillment.times;
 
-
             if (fulfillment.address) {
                 /* eslint-disable prefer-destructuring */
                 state.fulfillment.address.line1 = fulfillment.address.lines[0];

@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.24.0
 ------------------------------
-*December 12, 2020*
+*December 14, 2020*
 
 ### Added
 - Tests for store `checkout.module.js`.
