@@ -11,7 +11,7 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
-const fulfillmentTimes = [
+const fulfilmentTimes = [
     {
         from: '2020-01-01T00:00+00:00',
         label: {
@@ -29,8 +29,8 @@ const defaultState = {
         firstName: 'John',
         mobileNumber: '+447111111111'
     },
-    fulfillment: {
-        times: fulfillmentTimes,
+    fulfilment: {
+        times: fulfilmentTimes,
         address: {
             line1: '1 Bristol Road',
             line2: 'Flat 1',
@@ -237,8 +237,8 @@ describe('Checkout', () => {
                     customer: {
                         firstName: defaultState.customer.firstName
                     },
-                    fulfillment: {
-                        times: fulfillmentTimes,
+                    fulfilment: {
+                        times: fulfilmentTimes,
                         address: {}
                     }
                 };
@@ -310,7 +310,7 @@ describe('Checkout', () => {
 
             it('should not create validations for address', () => {
                 // Assert
-                expect(wrapper.vm.$v.fulfillment).toBeUndefined();
+                expect(wrapper.vm.$v.fulfilment).toBeUndefined();
             });
         });
 
@@ -328,8 +328,8 @@ describe('Checkout', () => {
                     customer: {
                         firstName: defaultState.customer.firstName
                     },
-                    fulfillment: {
-                        times: fulfillmentTimes,
+                    fulfilment: {
+                        times: fulfilmentTimes,
                         address: {}
                     }
                 };
@@ -345,9 +345,9 @@ describe('Checkout', () => {
             it('should emit success event when all fields are populated correctly', async () => {
                 // Arrange
                 wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue(defaultState.customer.mobileNumber);
-                wrapper.find('[data-test-id="formfield-address-line-1-input"]').setValue(defaultState.fulfillment.address.line1);
-                wrapper.find('[data-test-id="formfield-address-city-input"]').setValue(defaultState.fulfillment.address.city);
-                wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue(defaultState.fulfillment.address.postcode);
+                wrapper.find('[data-test-id="formfield-address-line-1-input"]').setValue(defaultState.fulfilment.address.line1);
+                wrapper.find('[data-test-id="formfield-address-city-input"]').setValue(defaultState.fulfilment.address.city);
+                wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue(defaultState.fulfilment.address.postcode);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -365,7 +365,7 @@ describe('Checkout', () => {
                 // Assert
                 expect(addressLine1EmptyMessage).toMatchSnapshot();
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfillment.address.line1');
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.line1');
             });
 
             it('should emit failure event and display error message when city input field is empty', async () => {
@@ -376,7 +376,7 @@ describe('Checkout', () => {
                 // Assert
                 expect(addressCityEmptyMessage).toMatchSnapshot();
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfillment.address.city');
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.city');
             });
 
             it('should emit failure event and display error message when postcode input field is empty', async () => {
@@ -387,7 +387,7 @@ describe('Checkout', () => {
                 // Assert
                 expect(addressPostcodeEmptyMessage).toMatchSnapshot();
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfillment.address.postcode');
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.postcode');
             });
 
             it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
@@ -401,7 +401,7 @@ describe('Checkout', () => {
                 // Assert
                 expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfillment.address.postcode');
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.postcode');
             });
 
 
@@ -416,14 +416,14 @@ describe('Checkout', () => {
                 // Assert
                 expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfillment.address.postcode');
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.postcode');
             });
 
             it('should create validations for address', () => {
                 // Assert
-                expect(wrapper.vm.$v.fulfillment.address.line1).toBeDefined();
-                expect(wrapper.vm.$v.fulfillment.address.city).toBeDefined();
-                expect(wrapper.vm.$v.fulfillment.address.postcode).toBeDefined();
+                expect(wrapper.vm.$v.fulfilment.address.line1).toBeDefined();
+                expect(wrapper.vm.$v.fulfilment.address.city).toBeDefined();
+                expect(wrapper.vm.$v.fulfilment.address.postcode).toBeDefined();
             });
         });
     });
@@ -472,10 +472,10 @@ describe('Checkout', () => {
             });
 
             it('should set address fields', async () => {
-                expect(wrapper.find('[data-test-id="formfield-address-line-1-input"]').element.value).toBe(defaultState.fulfillment.address.line1);
-                expect(wrapper.find('[data-test-id="formfield-address-line-2-input"]').element.value).toBe(defaultState.fulfillment.address.line2);
-                expect(wrapper.find('[data-test-id="formfield-address-city-input"]').element.value).toBe(defaultState.fulfillment.address.city);
-                expect(wrapper.find('[data-test-id="formfield-address-postcode-input"]').element.value).toBe(defaultState.fulfillment.address.postcode);
+                expect(wrapper.find('[data-test-id="formfield-address-line-1-input"]').element.value).toBe(defaultState.fulfilment.address.line1);
+                expect(wrapper.find('[data-test-id="formfield-address-line-2-input"]').element.value).toBe(defaultState.fulfilment.address.line2);
+                expect(wrapper.find('[data-test-id="formfield-address-city-input"]').element.value).toBe(defaultState.fulfilment.address.city);
+                expect(wrapper.find('[data-test-id="formfield-address-postcode-input"]').element.value).toBe(defaultState.fulfilment.address.postcode);
             });
         });
     });

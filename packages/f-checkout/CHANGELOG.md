@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.24.0
+------------------------------
+*December 14, 2020*
+
+### Changed
+- Renamed 'fulfill' occurrences to 'fulfil' to keep in line with the Checkout API.
+
 
 v0.23.0
 ------------------------------

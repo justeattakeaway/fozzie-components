@@ -6,7 +6,7 @@
                 {{ $t('labels.addressGroup') }}
             </legend>
             <form-field
-                v-model="fulfillment.address.line1"
+                v-model="fulfilment.address.line1"
                 :class="$style['c-address-formField']"
                 name="address-line-1"
                 :label-text="$t('labels.line1')"
@@ -24,7 +24,7 @@
             </form-field>
 
             <form-field
-                v-model="fulfillment.address.line2"
+                v-model="fulfilment.address.line2"
                 :class="$style['c-address-formField']"
                 name="address-line-2"
                 :label-text="$t('labels.line2')"
@@ -33,7 +33,7 @@
         </fieldset>
 
         <form-field
-            v-model="fulfillment.address.city"
+            v-model="fulfilment.address.city"
             name="address-city"
             :label-text="$t('labels.city')"
             :has-error="isAddressCityEmpty">
@@ -47,7 +47,7 @@
         </form-field>
 
         <form-field
-            v-model="fulfillment.address.postcode"
+            v-model="fulfilment.address.postcode"
             name="address-postcode"
             :label-text="$t('labels.postcode')"
             :has-error="!isAddressPostcodeValid">
@@ -85,7 +85,7 @@ export default {
 
     computed: {
         ...mapState('checkout', [
-            'fulfillment'
+            'fulfilment'
         ]),
         /*
         * Validation methods return true if the validation conditions

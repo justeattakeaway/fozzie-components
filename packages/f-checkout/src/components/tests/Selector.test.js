@@ -10,7 +10,7 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
-const fulfillmentTimes = [
+const fulfilmentTimes = [
     {
         from: '2020-01-01T00:00+00:00',
         label: {
@@ -28,8 +28,8 @@ const defaultState = {
         firstName: 'John',
         mobileNumber: '+447111111111'
     },
-    fulfillment: {
-        times: fulfillmentTimes,
+    fulfilment: {
+        times: fulfilmentTimes,
         address: {
             line1: '1 Bristol Road',
             line2: 'Flat 1',
@@ -114,8 +114,8 @@ describe('Selector', () => {
             });
         });
 
-        describe('fulfillmentTimes', () => {
-            it('should create an array of labels from `fulfillment.times` state', () => {
+        describe('fulfilmentTimes', () => {
+            it('should create an array of labels from `fulfilment.times` state', () => {
                 // Arrange && Act
                 const wrapper = shallowMount(Selector, {
                     store: createStore({ ...defaultState }),
@@ -127,14 +127,14 @@ describe('Selector', () => {
                 const expectedTimes = ['time 1'];
 
                 // Assert
-                expect(wrapper.vm.fulfillmentTimes).toEqual(expectedTimes);
+                expect(wrapper.vm.fulfilmentTimes).toEqual(expectedTimes);
             });
         });
     });
 
     describe('methods ::', () => {
         describe('selectionChanged', () => {
-            it('should update `fulfillment.times` time to be selected', () => {
+            it('should update `fulfilment.times` time to be selected', () => {
                 // Arrange
                 const wrapper = shallowMount(Selector, {
                     store: createStore({ ...defaultState }),
@@ -147,7 +147,7 @@ describe('Selector', () => {
                 wrapper.vm.selectionChanged('time 1');
 
                 // Assert
-                expect(wrapper.vm.fulfillment.times[0].selected).toBe(true);
+                expect(wrapper.vm.fulfilment.times[0].selected).toBe(true);
             });
         });
     });
