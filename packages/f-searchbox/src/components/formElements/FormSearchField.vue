@@ -9,7 +9,7 @@
                 [$style['has-error']]: errorMessage,
                 [$style['c-search-label--noBorder']]: isCompressed,
                 [$style['has-geo']]: isGeoLocationAvailable,
-                [$style['has-streetNumber']]: streetNumberRequired
+                [$style['has-streetNumber']]: isStreetNumberRequired
             }">
             <input
                 ref="addressInput"
@@ -18,7 +18,7 @@
                 type="search"
                 data-test-id="address-box-input"
                 :aria-label="copy.fieldLabel"
-                :autocomplete="shouldDisplayCustomAutocomplete ? 'off' : 'on'"
+                :autocomplete="isAutocompleteEnabled ? 'off' : 'on'"
                 :aria-describedby="errorMessage ? 'errorMessage' : false"
                 :class="{
                     [$style['c-search-input']]: true,
@@ -71,11 +71,6 @@ export default {
             default:  () => ({})
         },
 
-        shouldDisplayCustomAutocomplete: {
-            type: Boolean,
-            default: false
-        },
-
         service: {
             type: Object,
             required: true
@@ -85,8 +80,9 @@ export default {
     computed: {
         ...mapState('searchbox', [
             'shouldInputFieldHaveFocus',
-            'streetNumberRequired',
-            'isGeoLocationAvailable'
+            'isStreetNumberRequired',
+            'isGeoLocationAvailable',
+            'isAutocompleteEnabled'
         ]),
 
         getAddressValue () {
