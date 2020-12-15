@@ -63,7 +63,6 @@ const fields = {
 exports.changeToCollectionMethod = () => {
     knobButton().click();
     knobCheckoutDropdown().selectByIndex(1);
-    browser.pause(500);
 };
 
 exports.isFieldErrorDisplayed = fieldName => fields[fieldName].error().isDisplayed();

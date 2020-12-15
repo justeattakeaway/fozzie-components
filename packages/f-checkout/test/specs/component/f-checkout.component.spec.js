@@ -1,7 +1,7 @@
 import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.component';
 
 describe('f-checkout component tests', () => {
-    beforeEach(() => {
+    before(() => {
         browser.url('?path=/story/components-organisms--checkout-component');
         browser.switchToFrame(0);
         CheckoutComponent.waitForCheckoutComponent();
