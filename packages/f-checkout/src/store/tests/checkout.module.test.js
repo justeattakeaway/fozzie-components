@@ -73,7 +73,7 @@ const expectedState = {
     notices: [{
         type: 'allergy',
         notice: {
-            text: 'If you have a food allergy or intolerance (or someone you\'re ordering for has), <a href=\"https://greggs.co.uk/nutrition\" data-test-id=\"allergen-url-link\" target=\"_blank\" rel=\"noopener\">read what this restaurant has to say about allergies</a> before placing your order. Do not order if you cannot get the allergy information you need.'
+            text: 'If you have a food allergy or intolerance (or someone you\'re ordering for has), <a href="https://greggs.co.uk/nutrition" data-test-id="allergen-url-link" target="_blank" rel="noopener">read what this restaurant has to say about allergies</a> before placing your order. Do not order if you cannot get the allergy information you need.'
         }
     }],
     messages: [{
@@ -95,7 +95,7 @@ const { getCheckout, postCheckout } = CheckoutModule.actions;
 let state = CheckoutModule.state();
 
 describe('CheckoutModule', () => {
-    it(('should create default state when initialised.'), () => {
+    it('should create default state when initialised.', () => {
         // Assert
         expect(state).toEqual(defaultState);
     });
