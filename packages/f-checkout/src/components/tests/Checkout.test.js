@@ -46,7 +46,8 @@ const defaultState = {
 
 const defaultActions = {
     getCheckout: jest.fn(),
-    postCheckout: jest.fn()
+    postCheckout: jest.fn(),
+    setAuthToken: jest.fn()
 };
 
 const i18n = {
@@ -172,6 +173,30 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(addressBlock.exists()).toBe(false);
+            });
+        });
+    });
+
+    describe('props ::', () => {
+        describe('authToken ::', () => {
+            it('should store auth token', async () => {
+                // Arrange
+                const propsData = {
+                    checkoutUrl,
+                    authToken: 'sampleToken'
+                };
+
+                const setAuthToken = jest.fn();
+                // Act
+                shallowMount(VueCheckout, {
+                    store: createStore(defaultState, { ...defaultActions, setAuthToken }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(setAuthToken).toHaveBeenCalled();
             });
         });
     });

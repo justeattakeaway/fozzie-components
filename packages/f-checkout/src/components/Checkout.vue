@@ -124,6 +124,11 @@ export default {
             type: Number,
             required: false,
             default: 1000
+        },
+
+        authToken: {
+            type: String,
+            default: ''
         }
     },
 
@@ -193,10 +198,15 @@ export default {
     watch: {
         async checkoutUrl () {
             await this.loadCheckout();
+        },
+
+        authToken () {
+            this.setAuthToken(this.authToken);
         }
     },
 
     async mounted () {
+        this.setAuthToken(this.authToken);
         await this.loadCheckout();
     },
 
@@ -219,7 +229,8 @@ export default {
     methods: {
         ...mapActions('checkout', [
             'getCheckout',
-            'postCheckout'
+            'postCheckout',
+            'setAuthToken'
         ]),
 
         /**
