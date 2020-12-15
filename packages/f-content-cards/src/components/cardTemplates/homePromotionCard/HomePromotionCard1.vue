@@ -7,14 +7,14 @@
             :data-test-id="containerTestId"
             :class="['l-container', 'c-contentCards-homePromotionCard1-container', $style['c-contentCards-homePromotionCard1-container']]"
             :style="{ maxWidth: `${containerMaxWidth}px` }">
-            <div :class="['c-contentCards-homePromotionCard1-icon', $style['c-contentCards-homePromotionCard1-icon']]">
+            <div :class="['c-contentCards-homePromotionCard1-iconPane', $style['c-contentCards-homePromotionCard1-iconPane']]">
                 <img
-                    :class="[$style['c-contentCards-homePromotionCard1-icon-img']]"
+                    :class="[$style['c-contentCards-homePromotionCard1-icon']]"
                     :src="icon"
                     alt="">
                 <h3
-                    :class="[$style['c-contentCards-homePromotionCard1-icon-subtitle'], {
-                        [$style['c-contentCards-homePromotionCard1-icon-subtitle--light']]: isLightSubtitle
+                    :class="[$style['c-contentCards-homePromotionCard1-subtitle'], {
+                        [$style['c-contentCards-homePromotionCard1-subtitle--light']]: isLightSubtitle
                     }]"
                 >
                     {{ subtitle }}
@@ -120,7 +120,7 @@ export default {
         margin: 0 auto;
     }
 
-    .c-contentCards-homePromotionCard1-icon {
+    .c-contentCards-homePromotionCard1-iconPane {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -134,20 +134,20 @@ export default {
         }
     }
 
-        .c-contentCards-homePromotionCard1-icon-img {
-            max-height: 88px;
-            max-width: 100%;
+    .c-contentCards-homePromotionCard1-icon {
+        max-height: 88px;
+        max-width: 100%;
+    }
+
+    .c-contentCards-homePromotionCard1-subtitle {
+        display: none;
+
+        @include media('>mid') {
+            display: unset;
         }
+    }
 
-        .c-contentCards-homePromotionCard1-icon-subtitle {
-            display: none;
-
-            @include media('>mid') {
-                display: unset;
-            }
-        }
-
-        .c-contentCards-homePromotionCard1-icon-subtitle--light {
+        .c-contentCards-homePromotionCard1-subtitle--light {
             color: $white;
         }
 
@@ -161,16 +161,16 @@ export default {
             padding-left: 0;
             padding-right: spacing(x4);
 
-            .c-contentCards-homePromotionCard2 {
+            :global(.c-contentCards-homePromotionCard2) {
                 padding-left: spacing(x5);
             }
 
-            h3 {
+            :global(.c-contentCards-homePromotionCard2-title) {
                 @include font-size(large);
                 margin-bottom: spacing();
             }
 
-            p {
+            :global(.c-contentCards-homePromotionCard2-text) {
                 @include font-size(mid);
                 margin-top: spacing();
             }

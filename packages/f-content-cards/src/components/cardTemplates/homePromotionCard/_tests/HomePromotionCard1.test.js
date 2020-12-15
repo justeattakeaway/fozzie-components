@@ -95,13 +95,13 @@ describe('contentCards › HomePromotionCard1', () => {
                 },
                 mocks: {
                     $style: {
-                        'c-contentCards-homePromotionCard1-icon-subtitle--light': 'c-contentCards-homePromotionCard1-icon-subtitle--light'
+                        'c-contentCards-homePromotionCard1-subtitle--light': 'c-contentCards-homePromotionCard1-subtitle--light'
                     }
                 }
             });
 
             // Assert
-            const lightSubtitle = wrapper.find('.c-contentCards-homePromotionCard1-icon-subtitle--light');
+            const lightSubtitle = wrapper.find('.c-contentCards-homePromotionCard1-subtitle--light');
             expect(lightSubtitle.exists()).toBe(true);
         });
     });
@@ -121,13 +121,13 @@ describe('contentCards › HomePromotionCard1', () => {
                 },
                 mocks: {
                     $style: {
-                        'c-contentCards-homePromotionCard1-icon-subtitle--light': 'c-contentCards-homePromotionCard1-icon-subtitle--light'
+                        'c-contentCards-homePromotionCard1-subtitle--light': 'c-contentCards-homePromotionCard1-subtitle--light'
                     }
                 }
             });
 
             // Assert
-            const lightSubtitle = wrapper.find('.c-contentCards-homePromotionCard1-icon-subtitle--light');
+            const lightSubtitle = wrapper.find('.c-contentCards-homePromotionCard1-subtitle--light');
             expect(lightSubtitle.exists()).toBe(false);
         });
     });
@@ -147,13 +147,13 @@ describe('contentCards › HomePromotionCard1', () => {
                 },
                 mocks: {
                     $style: {
-                        'c-contentCards-homePromotionCard1-icon-subtitle--light': 'c-contentCards-homePromotionCard1-icon-subtitle--light'
+                        'c-contentCards-homePromotionCard1-subtitle--light': 'c-contentCards-homePromotionCard1-subtitle--light'
                     }
                 }
             });
 
             // Assert
-            const lightSubtitle = wrapper.find('.c-contentCards-homePromotionCard1-icon-subtitle--light');
+            const lightSubtitle = wrapper.find('.c-contentCards-homePromotionCard1-subtitle--light');
             expect(lightSubtitle.exists()).toBe(true);
         });
     });
@@ -173,13 +173,13 @@ describe('contentCards › HomePromotionCard1', () => {
                 },
                 mocks: {
                     $style: {
-                        'c-contentCards-homePromotionCard1-icon-subtitle--light': 'c-contentCards-homePromotionCard1-icon-subtitle--light'
+                        'c-contentCards-homePromotionCard1-subtitle--light': 'c-contentCards-homePromotionCard1-subtitle--light'
                     }
                 }
             });
 
             // Assert
-            const lightSubtitle = wrapper.find('.c-contentCards-homePromotionCard1-icon-subtitle--light');
+            const lightSubtitle = wrapper.find('.c-contentCards-homePromotionCard1-subtitle--light');
             expect(lightSubtitle.exists()).toBe(false);
         });
     });
@@ -199,13 +199,13 @@ describe('contentCards › HomePromotionCard1', () => {
                 },
                 mocks: {
                     $style: {
-                        'c-contentCards-homePromotionCard1-icon-subtitle--light': 'c-contentCards-homePromotionCard1-icon-subtitle--light'
+                        'c-contentCards-homePromotionCard1-subtitle--light': 'c-contentCards-homePromotionCard1-subtitle--light'
                     }
                 }
             });
 
             // Assert
-            const lightSubtitle = wrapper.find('.c-contentCards-homePromotionCard1-icon-subtitle--light');
+            const lightSubtitle = wrapper.find('.c-contentCards-homePromotionCard1-subtitle--light');
             expect(lightSubtitle.exists()).toBe(true);
         });
     });
@@ -225,13 +225,13 @@ describe('contentCards › HomePromotionCard1', () => {
                 },
                 mocks: {
                     $style: {
-                        'c-contentCards-homePromotionCard1-icon-subtitle--light': 'c-contentCards-homePromotionCard1-icon-subtitle--light'
+                        'c-contentCards-homePromotionCard1-subtitle--light': 'c-contentCards-homePromotionCard1-subtitle--light'
                     }
                 }
             });
 
             // Assert
-            const lightSubtitle = wrapper.find('.c-contentCards-homePromotionCard1-icon-subtitle--light');
+            const lightSubtitle = wrapper.find('.c-contentCards-homePromotionCard1-subtitle--light');
             expect(lightSubtitle.exists()).toBe(false);
         });
     });
@@ -248,13 +248,13 @@ describe('contentCards › HomePromotionCard1', () => {
                 },
                 mocks: {
                     $style: {
-                        'c-contentCards-homePromotionCard1-icon-subtitle--light': 'c-contentCards-homePromotionCard1-icon-subtitle--light'
+                        'c-contentCards-homePromotionCard1-subtitle--light': 'c-contentCards-homePromotionCard1-subtitle--light'
                     }
                 }
             });
 
             // Assert
-            const lightSubtitle = wrapper.find('.c-contentCards-homePromotionCard1-icon-subtitle--light');
+            const lightSubtitle = wrapper.find('.c-contentCards-homePromotionCard1-subtitle--light');
             expect(lightSubtitle.exists()).toBeFalsy();
         });
     });
@@ -273,13 +273,13 @@ describe('contentCards › HomePromotionCard1', () => {
                 },
                 mocks: {
                     $style: {
-                        'c-contentCards-homePromotionCard1-icon-subtitle--light': 'c-contentCards-homePromotionCard1-icon-subtitle--light'
+                        'c-contentCards-homePromotionCard1-subtitle--light': 'c-contentCards-homePromotionCard1-subtitle--light'
                     }
                 }
             });
 
             // Assert
-            const lightSubtitle = wrapper.find('.c-contentCards-homePromotionCard1-icon-subtitle--light');
+            const lightSubtitle = wrapper.find('.c-contentCards-homePromotionCard1-subtitle--light');
             expect(lightSubtitle.exists()).toBeFalsy();
         });
     });

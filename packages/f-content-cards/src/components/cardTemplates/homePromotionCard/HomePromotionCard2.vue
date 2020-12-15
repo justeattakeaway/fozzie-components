@@ -8,10 +8,14 @@
         <div
             :class="['c-contentCards-homePromotionCard2-image', $style['c-contentCards-homePromotionCard2-image']]"
             :style="{ backgroundImage: `url('${image}')` }" />
-        <h3>{{ title }}</h3>
+        <h3
+            :class="['c-contentCards-homePromotionCard2-title', $style['c-contentCards-homePromotionCard2-title']]">
+            {{ title }}
+        </h3>
         <template v-for="(textItem, textIndex) in description">
             <p
-                :key="textIndex">
+                :key="textIndex"
+                :class="['c-contentCards-homePromotionCard2-text', $style['c-contentCards-homePromotionCard2-text']]">
                 {{ textItem }}
             </p>
         </template>
@@ -19,7 +23,13 @@
             <a
                 :href="url"
                 :data-test-id="ctaTestId"
-                class="o-link--full o-link--bold u-color-link u-text-left">{{ ctaText }}</a>
+                :class="[
+                    'o-link--full',
+                    'o-link--bold',
+                    'u-color-link',
+                    'u-text-left',
+                    $style['c-contentCards-homePromotionCard2-link']
+                ]">{{ ctaText }}</a>
         </p>
     </div>
 </template>
@@ -101,7 +111,10 @@ export default {
             padding-right: 208px;
         }
 
-        a {
+        .c-contentCards-homePromotionCard2-link {
+            text-decoration: none;
+            font-weight: $font-weight-bold;
+
             & {
                 color: $color-link-default;
             }
@@ -113,21 +126,18 @@ export default {
             &:active {
                 color: $color-link-active;
             }
-
-            text-decoration: none;
-            font-weight: $font-weight-bold;
         }
 
-        p {
+        .c-contentCards-homePromotionCard2-text {
             color: $grey--dark;
         }
 
         &.c-contentCards-homePromotionCard2--light {
-            p {
+            .c-contentCards-homePromotionCard2-text {
                 color: $white;
             }
 
-            h3 {
+            .c-contentCards-homePromotionCard2-title {
                 color: $grey--lighter;
             }
         }
