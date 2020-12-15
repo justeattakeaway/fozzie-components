@@ -6,7 +6,7 @@ export default {
     title: 'Components/Atoms/f-content-cards',
     argTypes: {
         title: { control: { type: 'text' } },
-        description: { control: { type: 'text' } },
+        description: { control: { type: 'array', separator: '--' } },
         image: { control: { type: 'text' } },
         icon: { control: { type: 'text' } },
         ctaText: { control: { type: 'text' } },
@@ -49,15 +49,25 @@ export const HomePromotionCard2Component = (args, { argTypes }) => ({
         };
     },
 
-    template: '<home-promotion-card :card="{title, backgroundColor, contentContainerBackground, ctaText, description, image, icon, url}" :tenant="tenant" />'
+    template: '<home-promotion-card'
+        // Setting key as per below forces re-render of the component when the supplied controls change
+        // eslint-disable-next-line no-template-curly-in-string
+        + ' :key="`${title},${backgroundColor},${contentBackgroundColor},${ctaText},${description},${image},${url},${tenant}`"'
+        + ' :card="{title, backgroundColor, contentBackgroundColor, ctaText, description, image, url}"'
+        + ' :tenant="tenant" '
+    + '/>'
 });
 
 HomePromotionCard2Component.storyName = 'home-promotion-card-2';
 
 HomePromotionCard2Component.args = {
     title: 'Treat them with a Just Eat gift card',
-    contentContainerBackground: 'white',
-    description: 'Whether you want to treat Mum to her Friday night favourite, or surprise your mate with a ‘KFC on me’, show them you care – the tasty way.',
+    contentBackgroundColor: 'white',
+    description: [
+        'Whether you want to treat Mum to her Friday night favourite ',
+        ' or surprise your mate with a ‘KFC on me’ ',
+        ' show them you care – the tasty way.'
+    ],
     image,
     ctaText: 'Purchase now',
     url: '#',
