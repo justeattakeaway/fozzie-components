@@ -1,4 +1,4 @@
-export const KNOB_BUTTON = '[id="tabbutton-knobs-2"]';
+export const KNOB_BUTTON = '[id$="tabbutton-knobs"]';
 export const KNOB_CHECKOUT_DROPDOWN = '[name="Checkout Url"]';
 export const ALLERGEN_LINK = '[data-test-id="allergy-button"]';
 export const CHECKOUT_COMPONENT = '[data-test-id="checkout-component"]';
@@ -38,7 +38,7 @@ export const FIELDS = {
 export default {
     ALLERGEN_LINK,
     CHECKOUT_COMPONENT,
-    ORDER_TIME_DROPDOWN, 
+    ORDER_TIME_DROPDOWN,
     ORDER_TIME_DROPDOWN_OPTIONS,
     USER_NOTE_INPUT,
     GO_TO_PAYMENT_BUTTON,
