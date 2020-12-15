@@ -45,7 +45,8 @@ export const CheckoutComponent = () => ({
         }
     },
     store: new Vuex.Store({}),
-    template: `<vue-checkout :checkoutUrl="checkoutUrl" :locale="locale" :authToken="authToken" :login-url="loginUrl" :key="${locale},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken}" />`
+    template:
+        `<vue-checkout :checkout-url="checkout-url" :locale="locale" :authToken="authToken" :login-url="login-url" :key="${locale},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken}"/>`
 });
 
 CheckoutComponent.storyName = 'f-checkout';
