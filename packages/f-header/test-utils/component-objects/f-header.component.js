@@ -1,10 +1,39 @@
-const headerComponent = () => $('[data-test-id="header-component"]');
-const loginLink = () => $('[data-test-id="login-link"]');
-const offersLink = () => $$('[data-test-id="offers-link"]');
-const deliveryEnquiryLink = () => $('[data-test-id="delivery-link"]');
-const helpLink = () => $('[data-test-id="help-link"]');
-const headerLogo = () => $('[data-test-id="header-logo"]');
-const mobileNavigation = () => $('[data-test-id="nav-toggle"]');
+import {
+    HEADER_COMPONENT, 
+    LOGIN_LINK, 
+    OFFERS_LINK, 
+    DELIVERY_ENQUIRY_LINK, 
+    HELP_LINK, 
+    HEADER_LOGO, 
+    MOBILE_NAVIGATION
+} from './f-header.selectors';
+
+const headerComponent = () => $(HEADER_COMPONENT);
+
+// Links 
+
+const loginLink = () => $(LOGIN_LINK);
+const offersLink = () => $$(OFFERS_LINK);
+const deliveryEnquiryLink = () => $(DELIVERY_ENQUIRY_LINK);
+const helpLink = () => $(HELP_LINK);
+
+// Logo
+
+const headerLogo = () => $(HEADER_LOGO);
+
+// Navigation
+
+const mobileNavigation = () => $(MOBILE_NAVIGATION);
+
+// Functions
+
+exports.waitForHeader = () => headerComponent().waitForExist();
+exports.isLogoDisplayed = () => headerLogo().isDisplayedInViewport();
+exports.isMobileNavigationVisible = () => mobileNavigation().isDisplayedInViewport();
+exports.isHelpLinkDisplayed = () => helpLink().isDisplayedInViewport(); 
+exports.isLoginLinkDisplayed = () => loginLink().isDisplayedInViewport();
+exports.isOffersLinkDesktopDisplayed = () => offersLinkDesktop().isDisplayedInViewport(); 
+
 
 const mobileOffersIcon = () => {
     return offersLink().filter(element => element.getAttribute('class').includes('u-showBelowMid'));
@@ -12,10 +41,6 @@ const mobileOffersIcon = () => {
 
 const navigationOffersLink = () => {
     return offersLink().filter(element => element.getAttribute('class').includes('u-showAboveMid'));
-};
-
-exports.waitForHeader = () => {
-    headerComponent().waitForExist();
 };
 
 exports.isMobileOffersIconDisplayed = () => {
@@ -50,8 +75,3 @@ exports.clickHelpLink = () => {
     helpLink().click();
 };
 
-exports.isLogoDisplayed = () => headerLogo().isDisplayedInViewport();
-exports.isMobileNavigationVisible = () => mobileNavigation().isDisplayedInViewport();
-exports.isHelpLinkDisplayed = () => helpLink().isDisplayedInViewport(); 
-exports.isLoginLinkDisplayed = () => loginLink().isDisplayedInViewport();
-exports.isOffersLinkDesktopDisplayed = () => offersLinkDesktop().isDisplayedInViewport(); 
