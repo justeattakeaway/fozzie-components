@@ -11,7 +11,7 @@ const defaultState = {
         firstName: '',
         mobileNumber: ''
     },
-    fulfillment: {
+    fulfilment: {
         times: [],
         address: {
             line1: '',
@@ -33,7 +33,7 @@ const expectedState = {
         firstName: 'Joe',
         mobileNumber
     },
-    fulfillment: {
+    fulfilment: {
         times: [{
             label: {
                 text: 'As soon as possible'
@@ -125,11 +125,11 @@ describe('CheckoutModule', () => {
 
             it('should leave address state empty if no address data is returned from the API.', () => {
                 // Arrange && Act
-                checkoutDelivery.fulfillment.address = null;
+                checkoutDelivery.fulfilment.address = null;
                 updateState(state, checkoutDelivery);
 
                 // Assert
-                expect(state.fulfillment.address).toEqual(defaultState.fulfillment.address);
+                expect(state.fulfilment.address).toEqual(defaultState.fulfilment.address);
             });
         });
     });
