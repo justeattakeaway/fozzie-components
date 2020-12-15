@@ -27,7 +27,7 @@
                         $style['c-checkout-switchUserLink']
                     ]"
                     data-test-id="create-account-login-link"
-                    @click="visitLoginPage">
+                    @click="onVisitLoginPage">
                     <a :href="loginUrl">Not {{ name }}? Click here.</a>
                 </p>
                 <form-field
@@ -144,7 +144,7 @@ export default {
         },
         loginUrl: {
             type: String,
-            required: true,
+            required: true
         }
     },
 
@@ -244,7 +244,7 @@ export default {
             'getAvailableFulfilment',
             'setAuthToken'
         ]),
-        visitLoginPage () {
+        onVisitLoginPage () {
             this.$emit(EventNames.VisitLoginPage);
         },
 
