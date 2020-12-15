@@ -1,9 +1,30 @@
 import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
 import CheckoutModule from '../checkout.module';
 import checkoutDelivery from '../../demo/checkout-delivery.json';
 
 const mobileNumber = '+447111111111';
+
+const defaultState = {
+    id: '',
+    serviceType: '',
+    customer: {
+        firstName: '',
+        mobileNumber: ''
+    },
+    fulfillment: {
+        times: [],
+        address: {
+            line1: '',
+            line2: '',
+            city: '',
+            postcode: ''
+        }
+    },
+    notes: [],
+    isFulfillable: true,
+    notices: [],
+    messages: []
+};
 
 const expectedState = {
     id: '12345',
@@ -69,13 +90,22 @@ const expectedState = {
     }]
 };
 
-const state = CheckoutModule.state();
 const { updateState } = CheckoutModule.mutations;
 const { getCheckout, postCheckout } = CheckoutModule.actions;
+let state = CheckoutModule.state();
 
 describe('CheckoutModule', () => {
+    it(('should create default state when initialised.'), () => {
+        // Assert
+        expect(state).toEqual(defaultState);
+    });
+
     describe('mutations ::', () => {
         describe('updateState ::', () => {
+            beforeEach(() => {
+                state = defaultState;
+            })
+
             it('should update state with delivery response.', () => {
                 // Arrange && Act
                 updateState(state, checkoutDelivery);
@@ -83,44 +113,52 @@ describe('CheckoutModule', () => {
                 // Assert
                 expect(state).toEqual(expectedState);
             });
+
+            it('should leave customer state empty if no customer data is returned from the API.', () => {
+                // Arrange && Act
+                checkoutDelivery.customer = null;
+                updateState(state, checkoutDelivery);
+
+                // Assert
+                expect(state.customer).toEqual(defaultState.customer);
+            });
+
+            it('should leave address state empty if no address data is returned from the API.', () => {
+                // Arrange && Act
+                checkoutDelivery.fulfillment.address = null;
+                updateState(state, checkoutDelivery);
+
+                // Assert
+                expect(state.fulfillment.address).toEqual(defaultState.fulfillment.address);
+            });
         });
     });
 
     describe('actions ::', () => {
-        const commit = jest.fn();
-
-        const url = 'http://localhost/account/checkout';
-        const tenant = 'en-GB';
-        const timeout = '1000';
-
-        const axiosMock = new MockAdapter(axios);
+        let commit;
 
         const payload = {
             url: 'http://localhost/account/checkout',
-            tenant,
-            timeout
+            tenant: 'en-GB',
+            timeout: '1000'
         };
 
-        describe('getCheckout ::', () => {
-            const config = {
-                method: 'get',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Tenant': tenant
-                },
-                timeout
-            };
+        beforeEach(() => {
+            commit = jest.fn();
+        });
 
-            axiosMock.onGet(url, config).reply(200, {
-                data: checkoutDelivery
+        describe('getCheckout ::', () => {
+            beforeEach(() => {
+                axios.get = jest.fn(() => Promise.resolve({ data: checkoutDelivery }));
             });
 
-            it('should get the checkout details from the backend and update the state.', async () => {
+            it('should get the checkout details from the backend and call `updateState` mutation.', async () => {
                 // Arrange && Act
                 await getCheckout({ commit }, payload);
 
                 // Assert
-                expect(state).toEqual(expectedState);
+                expect(axios.get).toHaveBeenCalled();
+                expect(commit).toHaveBeenCalledWith('updateState', checkoutDelivery);
             });
         });
 
@@ -129,15 +167,16 @@ describe('CheckoutModule', () => {
                 mobileNumber
             };
 
-            axiosMock.onPost(url).reply(200);
+            beforeEach(() => {
+                axios.post = jest.fn(() => Promise.resolve({ status: 200 }));
+            });
 
             it('should post the checkout details to the backend.', async () => {
                 // Arrange && Act
                 await postCheckout({ commit }, payload);
 
                 // Assert
-                expect(axiosMock.history.post.length).toBe(1);
-                expect(axiosMock.history.post[0].data).toBe(JSON.stringify(payload.data));
+                expect(axios.post).toHaveBeenCalled();
             });
         });
     });

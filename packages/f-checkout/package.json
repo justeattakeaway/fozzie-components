@@ -54,7 +54,6 @@
     "@justeat/f-globalisation": "0.2.0",
     "@justeat/f-services": "1.7.0",
     "axios": "0.20.0",
-    "axios-mock-adapter": "1.19.0",
     "vuelidate": "0.7.6"
   },
   "peerDependencies": {
