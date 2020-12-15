@@ -46,7 +46,7 @@ describe('`LocationGoogle`', () => {
 
         it('should call geocode method on google maps geocoder', () => {
             // Act & Assert
-            return service.getLocationFromGeo().then(() => {
+            service.getLocationFromGeo().then(() => {
                 expect(googleMapsMock.geoGetGeoCode).toHaveBeenCalledWith({
                     location: expect.any(Object)
                 }, expect.any(Function));
