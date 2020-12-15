@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CheckoutModule mutations :: updateState :: should update state with delivery response. 1`] = `
+Object {
+  "authToken": "",
+  "customer": Object {
+    "firstName": "Joe",
+    "mobileNumber": "+447111111111",
+  },
+  "fulfilment": Object {
+    "address": Object {
+      "city": "Bristol",
+      "line1": "1 Bristol Road",
+      "line2": "Flat 1",
+      "postcode": "BS1 1AA",
+    },
+    "times": Array [
+      Object {
+        "from": "2020-01-01T00:00+00:00",
+        "label": Object {
+          "text": "As soon as possible",
+        },
+        "selected": true,
+        "to": "2020-01-01T00:00+00:00",
+      },
+      Object {
+        "from": "2020-01-01T00:15+00:00",
+        "label": Object {
+          "text": "Monday 00:15",
+        },
+        "selected": false,
+        "to": "2020-01-01T00:15+00:00",
+      },
+      Object {
+        "from": "2020-01-01T00:30+00:00",
+        "label": Object {
+          "text": "Monday 00:30",
+        },
+        "selected": false,
+        "to": "2020-01-01T00:30+00:00",
+      },
+    ],
+  },
+  "id": "12345",
+  "isFulfillable": true,
+  "isLoggedIn": false,
+  "messages": Array [
+    Object {
+      "message": Object {
+        "text": "Please hurry, the restaurant is closing soon",
+      },
+      "type": "warning",
+    },
+    Object {
+      "message": Object {
+        "text": "We're sorry, some items in your basket are no longer available",
+      },
+      "type": "information",
+    },
+  ],
+  "notes": Array [
+    Object {
+      "note": "Test note for delivery",
+      "type": "delivery",
+    },
+  ],
+  "notices": Array [
+    Object {
+      "notice": Object {
+        "text": "If you have a food allergy or intolerance (or someone you're ordering for has), <a href=\\"https://greggs.co.uk/nutrition\\" data-test-id=\\"allergen-url-link\\" target=\\"_blank\\" rel=\\"noopener\\">read what this restaurant has to say about allergies</a> before placing your order. Do not order if you cannot get the allergy information you need.",
+      },
+      "type": "allergy",
+    },
+  ],
+  "serviceType": "delivery",
+}
+`;
