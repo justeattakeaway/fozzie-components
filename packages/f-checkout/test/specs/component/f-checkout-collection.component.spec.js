@@ -1,18 +1,15 @@
 import forEach from 'mocha-each';
-import DemoControls from '../../../test-utils/component-objects/demo-controls';
 import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.component';
 
 describe('f-checkout "collection" component tests', () => {
-      beforeEach(() => {
+    beforeEach(() => {
         browser.url('?path=/story/components-organisms--checkout-component');
+        CheckoutComponent.changeToCollectionMethod();
         browser.switchToFrame(0);
         CheckoutComponent.waitForCheckoutComponent();
     });
 
-    it.skip('should display "mobileNumber" error message when collection method is set', () => {
-        // Arrange
-        DemoControls.selectCheckoutMethod('collection');
-
+    it('should display "mobileNumber" error message when collection method is set', () => {
         // Act
         CheckoutComponent.submit();
 
@@ -21,18 +18,12 @@ describe('f-checkout "collection" component tests', () => {
     });
 
     forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
-    .it.skip('address fields should not exist', field => {
-        // Arrange
-        DemoControls.selectCheckoutMethod('collection');
-
+    .it('address fields should not exist', field => {
         // Assert
-        expect(CheckoutComponent.doesInputFieldExist(field)).toBe(false);
+        expect(CheckoutComponent.isFieldVisible(field)).toBe(false);
     });
 
-    it.skip('should display the mandatory "mobileNumber" field', () => {
-        // Arrange
-        DemoControls.selectCheckoutMethod('collection');
-
+    it('should display the mandatory "mobileNumber" field', () => {
         // Assert
         expect(CheckoutComponent.isFieldDisplayed('mobileNumber')).toBe(true);
     });

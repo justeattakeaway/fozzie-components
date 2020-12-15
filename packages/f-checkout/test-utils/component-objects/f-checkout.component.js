@@ -1,13 +1,15 @@
 /* global browser, $ */
 
 import {
+    KNOB_BUTTON,
     ALLERGEN_LINK,
     CHECKOUT_COMPONENT,
     ORDER_TIME_DROPDOWN,
     ORDER_TIME_DROPDOWN_OPTIONS,
     USER_NOTE_INPUT,
     GO_TO_PAYMENT_BUTTON,
-    FIELDS
+    FIELDS,
+    KNOB_CHECKOUT_DROPDOWN
 } from './f-checkout-selectors';
 
 const { doesElementExist } = require('../../../../test/utils/webdriverio-extensions')(browser);
@@ -18,11 +20,13 @@ const checkoutComponent = () => $(CHECKOUT_COMPONENT);
 
 const orderTimeDropdown = () => $(ORDER_TIME_DROPDOWN);
 const orderTimeDropdownOptions = () => $$(ORDER_TIME_DROPDOWN_OPTIONS);
+const knobCheckoutDropdown = () => $(KNOB_CHECKOUT_DROPDOWN);
 
 // Buttons
 
 const allergenLink = () => $(ALLERGEN_LINK);
 const goToPaymentButton = () => $(GO_TO_PAYMENT_BUTTON);
+const knobButton = () => $(KNOB_BUTTON);
 
 // Form Fields
 
@@ -47,13 +51,19 @@ const fields = {
     },
     addressPostcode: {
         input: () => $(FIELDS.addressPostcode.input),
-        error: () => $(FIELDS.addressPostcode.error), 
+        error: () => $(FIELDS.addressPostcode.error),
         typeError: () => $(FIELDS.addressPostcode.typeError)
-    }, 
+    },
     userNote: {
         input: () => $(FIELDS.userNote.input),
         error: ''
     }
+};
+
+exports.changeToCollectionMethod = () => {
+    knobButton().click();
+    knobCheckoutDropdown().selectByIndex(1);
+    browser.pause(500);
 };
 
 exports.isFieldErrorDisplayed = fieldName => fields[fieldName].error().isDisplayed();
@@ -134,3 +144,4 @@ exports.submit = () => {
 
 exports.doesErrorMessageExist = errorMessage => doesElementExist(FIELDS[errorMessage].error);
 exports.doesInputFieldExist = inputField => doesElementExist(FIELDS[inputField].input);
+exports.isFieldVisible = inputField => fields[inputField].input().isDisplayedInViewport();

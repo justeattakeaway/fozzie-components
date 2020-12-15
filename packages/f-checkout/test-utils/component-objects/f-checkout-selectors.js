@@ -1,3 +1,5 @@
+export const KNOB_BUTTON = '[id="tabbutton-knobs-2"]';
+export const KNOB_CHECKOUT_DROPDOWN = '[name="Checkout Url"]';
 export const ALLERGEN_LINK = '[data-test-id="allergy-button"]';
 export const CHECKOUT_COMPONENT = '[data-test-id="checkout-component"]';
 export const ORDER_TIME_DROPDOWN = '[data-test-id="formfield-order-time-dropdown-select"]';
