@@ -4,7 +4,7 @@ import { loadGoogleMapsMocks } from '../../../../utils/testHelpers/testHelpers';
 describe('`LocationGoogle`', () => {
     let service;
     let googleMapsMock;
-    
+
     beforeEach(() => {
         googleMapsMock = loadGoogleMapsMocks();
         jest.spyOn(window.google.maps.places, 'AutocompleteService');
@@ -25,7 +25,7 @@ describe('`LocationGoogle`', () => {
 
             it('should call getDetails method on google maps places service', () => {
                 const placeId = 123;
-    
+
                 return service.getLocationDetails(placeId).then(() => {
                     expect(googleMapsMock.placesGetDetails).toHaveBeenCalledWith(
                         expect.objectContaining({ placeId }),
@@ -71,7 +71,7 @@ describe('`LocationGoogle`', () => {
                 callback([]);
             });
         });
-        
+
         describe('when invoked', () => {
             it('should call `getPlacePredictions` method on google maps `autocomplete` service', () => {
                 // Arrange
@@ -81,7 +81,7 @@ describe('`LocationGoogle`', () => {
                     componentRestrictions: { country },
                     input: address
                 };
-                
+
                 // Act & Assert
                 return service.searchLocations(address, country).then(() => {
                     expect(googleMapsMock.autoCompleteGetPlace).toHaveBeenCalledWith(
@@ -91,21 +91,17 @@ describe('`LocationGoogle`', () => {
                 });
             });
 
-            it('should pass `sessionToken` to `getPlacePredictions`', () => {
-                return service.searchLocations('address', 'country').then(() => {
-                    expect(googleMapsMock.autoCompleteGetPlace).toHaveBeenCalledWith(
-                        expect.objectContaining({ sessionToken: service.getSessionToken() }),
-                        expect.any(Function)
-                    );
-                });
-            });
-            
-            it('should keep the `sessionToken` the same for subsequent calls', () => {
-                return service.searchLocations('address', 'country').then(() => {
-                    const newToken = service.getSessionToken();
-                    expect(newToken).toBe(service.getSessionToken());
-                });
-            });
+            it('should pass `sessionToken` to `getPlacePredictions`', () => service.searchLocations('address', 'country').then(() => {
+                expect(googleMapsMock.autoCompleteGetPlace).toHaveBeenCalledWith(
+                    expect.objectContaining({ sessionToken: service.getSessionToken() }),
+                    expect.any(Function)
+                );
+            }));
+
+            it('should keep the `sessionToken` the same for subsequent calls', () => service.searchLocations('address', 'country').then(() => {
+                const newToken = service.getSessionToken();
+                expect(newToken).toBe(service.getSessionToken());
+            }));
         });
     });
 
