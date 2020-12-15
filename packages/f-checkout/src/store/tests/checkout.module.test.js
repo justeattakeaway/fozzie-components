@@ -107,7 +107,7 @@ describe('CheckoutModule', () => {
             });
 
             it('should update state with delivery response.', () => {
-                // Arrange && Act
+                // Act
                 updateState(state, checkoutDelivery);
 
                 // Assert
@@ -115,8 +115,10 @@ describe('CheckoutModule', () => {
             });
 
             it('should leave customer state empty if no customer data is returned from the API.', () => {
-                // Arrange && Act
+                // Arrange
                 checkoutDelivery.customer = null;
+
+                // Act
                 updateState(state, checkoutDelivery);
 
                 // Assert
@@ -124,8 +126,10 @@ describe('CheckoutModule', () => {
             });
 
             it('should leave address state empty if no address data is returned from the API.', () => {
-                // Arrange && Act
+                // Arrange
                 checkoutDelivery.fulfilment.address = null;
+
+                // Act
                 updateState(state, checkoutDelivery);
 
                 // Assert
@@ -148,16 +152,27 @@ describe('CheckoutModule', () => {
         });
 
         describe('getCheckout ::', () => {
+            let config;
+
             beforeEach(() => {
+                config = {
+                    method: 'get',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept-Tenant': payload.tenant
+                    },
+                    timeout: payload.timeout
+                };
+
                 axios.get = jest.fn(() => Promise.resolve({ data: checkoutDelivery }));
             });
 
             it('should get the checkout details from the backend and call `updateState` mutation.', async () => {
-                // Arrange && Act
+                // Act
                 await getCheckout({ commit }, payload);
 
                 // Assert
-                expect(axios.get).toHaveBeenCalled();
+                expect(axios.get).toHaveBeenCalledWith(payload.url, config);
                 expect(commit).toHaveBeenCalledWith('updateState', checkoutDelivery);
             });
         });
@@ -167,7 +182,17 @@ describe('CheckoutModule', () => {
                 mobileNumber
             };
 
+            let config;
+
             beforeEach(() => {
+                config = {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept-Tenant': payload.tenant
+                    },
+                    timeout: payload.timeout
+                };
                 axios.post = jest.fn(() => Promise.resolve({ status: 200 }));
             });
 
@@ -176,7 +201,7 @@ describe('CheckoutModule', () => {
                 await postCheckout({ commit }, payload);
 
                 // Assert
-                expect(axios.post).toHaveBeenCalled();
+                expect(axios.post).toHaveBeenCalledWith(payload.url, payload.data, config);
             });
         });
     });
