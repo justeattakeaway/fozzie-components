@@ -30,72 +30,6 @@ const defaultState = {
     isLoggedIn: false
 };
 
-const expectedState = {
-    id: '12345',
-    serviceType: 'delivery',
-    customer: {
-        firstName: 'Joe',
-        mobileNumber
-    },
-    fulfilment: {
-        times: [{
-            label: {
-                text: 'As soon as possible'
-            },
-            from: '2020-01-01T00:00+00:00',
-            to: '2020-01-01T00:00+00:00',
-            selected: true
-        },
-        {
-            label: {
-                text: 'Monday 00:15'
-            },
-            from: '2020-01-01T00:15+00:00',
-            to: '2020-01-01T00:15+00:00',
-            selected: false
-        },
-        {
-            label: {
-                text: 'Monday 00:30'
-            },
-            from: '2020-01-01T00:30+00:00',
-            to: '2020-01-01T00:30+00:00',
-            selected: false
-        }],
-        address: {
-            line1: '1 Bristol Road',
-            line2: 'Flat 1',
-            city: 'Bristol',
-            postcode: 'BS1 1AA'
-        }
-    },
-    notes: [{
-        type: 'delivery',
-        note: 'Test note for delivery'
-    }],
-    isFulfillable: true,
-    notices: [{
-        type: 'allergy',
-        notice: {
-            text: 'If you have a food allergy or intolerance (or someone you\'re ordering for has), <a href="https://greggs.co.uk/nutrition" data-test-id="allergen-url-link" target="_blank" rel="noopener">read what this restaurant has to say about allergies</a> before placing your order. Do not order if you cannot get the allergy information you need.'
-        }
-    }],
-    messages: [{
-        type: 'warning',
-        message: {
-            text: 'Please hurry, the restaurant is closing soon'
-        }
-    },
-    {
-        type: 'information',
-        message: {
-            text: 'We\'re sorry, some items in your basket are no longer available'
-        }
-    }],
-    authToken: '',
-    isLoggedIn: false
-};
-
 const { updateState, updateAuth } = CheckoutModule.mutations;
 const { getCheckout, postCheckout, setAuthToken } = CheckoutModule.actions;
 let state = CheckoutModule.state();
@@ -117,7 +51,7 @@ describe('CheckoutModule', () => {
                 updateState(state, checkoutDelivery);
 
                 // Assert
-                expect(state).toEqual(expectedState);
+                expect(state).toMatchSnapshot();
             });
 
             it('should leave customer state empty if no customer data is returned from the API.', () => {
