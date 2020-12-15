@@ -145,7 +145,6 @@ export default {
         loginUrl: {
             type: String,
             required: true,
-            default: ''
         }
     },
 
