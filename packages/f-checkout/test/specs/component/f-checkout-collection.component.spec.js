@@ -2,7 +2,6 @@ import forEach from 'mocha-each';
 import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.component';
 
 describe('f-checkout "collection" component tests', () => {
-
     before(() => {
         browser.url('?path=/story/components-organisms--checkout-component');
         CheckoutComponent.changeToCollectionMethod();
