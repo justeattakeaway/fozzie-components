@@ -3,6 +3,37 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+Latest (to be added to next release)
+------------------------------
+*December 14, 2020*
+
+### Added
+- Tests to helper.js.
+
+### Changed
+- Test helper directory `tests` > `testHelpers`.
+
+
+v4.0.0-beta.12
+------------------------------
+*December 11, 2020*
+
+### Added
+- Tests for `FormSearchInnerFieldWrapper.vue`.
+- Tests for `Form.vue` changes.
+- Tenant `options` directory to allow individual tenants to specify further options.
+- Store actions added:
+  - `setFullAddressSearchConfigs` - Allow multiple configs values to be passed down at set.
+  - `setAutoCompleteAvailability` - Sets Autocomplete availability for both Loqate & Google Places.
+- Store Mutations added:
+  -`SET_FULL_ADDRESS_SEARCH_CONFIGS`
+  - `SET_AUTO_COMPLETE_AVAILABILITY`
+- `getCookie` & `safeParseJson` to be used for detecting and turning on Loqate.
+- `demo` related setup back in.
+
+### Fixed
+- `streetNumberRequired` changed to `isStreetNumberRequired`.
+
 
 v4.0.0-beta.11
 ------------------------------

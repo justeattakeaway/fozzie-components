@@ -10,7 +10,7 @@ export default {
             firstName: '',
             mobileNumber: ''
         },
-        fulfillment: {
+        fulfilment: {
             times: [],
             address: {
                 line1: '',
@@ -82,7 +82,7 @@ export default {
             id,
             serviceType,
             customer,
-            fulfillment,
+            fulfilment,
             notes,
             isFulfillable,
             notices,
@@ -96,16 +96,16 @@ export default {
                 state.customer.mobileNumber = customer.phoneNumber;
             }
 
-            state.fulfillment.times = fulfillment.times;
+            state.fulfilment.times = fulfilment.times;
 
-            if (fulfillment.address) {
+            if (fulfilment.address) {
                 /* eslint-disable prefer-destructuring */
-                state.fulfillment.address.line1 = fulfillment.address.lines[0];
-                state.fulfillment.address.line2 = fulfillment.address.lines[1];
-                state.fulfillment.address.city = fulfillment.address.lines[3];
+                state.fulfilment.address.line1 = fulfilment.address.lines[0];
+                state.fulfilment.address.line2 = fulfilment.address.lines[1];
+                state.fulfilment.address.city = fulfilment.address.lines[3];
                 /* eslint-enable prefer-destructuring */
 
-                state.fulfillment.address.postcode = fulfillment.address.postalCode;
+                state.fulfilment.address.postcode = fulfilment.address.postalCode;
             }
 
             state.notes = notes;

@@ -144,7 +144,7 @@ export default {
 
         Object.defineProperty($v, 'addressValidations', {
             enumerable: true,
-            get: () => this.$v.fulfillment.address
+            get: () => this.$v.fulfilment.address
         });
 
         return { $v };
@@ -155,7 +155,7 @@ export default {
             'id',
             'serviceType',
             'customer',
-            'fulfillment',
+            'fulfilment',
             'notes',
             'isFulfillable',
             'notices',
@@ -233,7 +233,7 @@ export default {
                 };
 
                 if (this.isCheckoutMethodDelivery) {
-                    checkoutData.address = this.fulfillment.address;
+                    checkoutData.address = this.fulfilment.address;
                 }
 
                 await this.postCheckout({
@@ -333,7 +333,7 @@ export default {
         * valid in current locale
         */
         isValidPostcode () {
-            return validations.isValidPostcode(this.fulfillment.address.postcode, this.$i18n.locale);
+            return validations.isValidPostcode(this.fulfilment.address.postcode, this.$i18n.locale);
         }
     },
 
@@ -348,7 +348,7 @@ export default {
         };
 
         if (this.isCheckoutMethodDelivery) {
-            deliveryDetails.fulfillment = {
+            deliveryDetails.fulfilment = {
                 address: {
                     line1: {
                         required

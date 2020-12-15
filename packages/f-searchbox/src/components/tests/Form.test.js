@@ -11,14 +11,17 @@ localVue.use(Vuex);
 
 const mockState = {
     errors: [],
-    isValid: true
+    isValid: true,
+    isFullAddressSearchEnabled: false
 };
 
 const mockActions = {
     setErrors: jest.fn(),
     setIsValid: jest.fn(),
     setIsDirty: jest.fn(),
-    setGeoLocationAvailability: jest.fn()
+    setGeoLocationAvailability: jest.fn(),
+    setAutoCompleteAvailability: jest.fn(),
+    setFullAddressSearchConfigs: jest.fn()
 };
 
 const createStore = (state = mockState, actions = mockActions) => new Vuex.Store({
@@ -652,6 +655,166 @@ describe('`Form`', () => {
                         // Assert
                         expect(spy).toHaveBeenCalledWith('track-postcode-changed');
                     });
+                });
+            });
+        });
+
+        describe('`initialiseFullAddressSearch`', () => {
+            it('should exist', () => {
+                // Arrange
+                const propsData = {
+                    config: {
+                        address: 'something',
+                        locationFormat: () => jest.fn()
+                    },
+                    service: {
+                        isValid: jest.fn(() => [])
+                    }
+                };
+                const wrapper = shallowMount(Form, {
+                    propsData,
+                    store: createStore(),
+                    localVue
+                });
+
+                // Assert
+                expect(wrapper.vm.initialiseFullAddressSearch).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                it('should dispatch `setFullAddressSearchConfigs` with the config `isFullAddressSearchEnabled` passed in', () => {
+                    // Arrange
+                    const propsData = {
+                        config: {
+                            address: 'something',
+                            isFullAddressSearchEnabled: jest.fn(),
+                            locationFormat: () => jest.fn()
+                        },
+                        service: {
+                            isValid: jest.fn(() => [])
+                        }
+                    };
+                    const wrapper = shallowMount(Form, {
+                        propsData,
+                        store: createStore(),
+                        localVue
+                    });
+                    const spy = jest.spyOn(wrapper.vm, 'setFullAddressSearchConfigs');
+
+                    // Act
+                    wrapper.vm.initialiseFullAddressSearch(propsData.config.isFullAddressSearchEnabled);
+
+                    // Assert
+                    expect(spy).toHaveBeenCalledWith({
+                        isFullAddressSearchEnabled: propsData.config.isFullAddressSearchEnabled()
+                    });
+                });
+
+                describe('when `isFullAddressSearchEnabled` is `truthy`', () => {
+                    it('should dispatch `setAutoCompleteAvailability` with a payload `true`', () => {
+                        // Arrange
+                        const propsData = {
+                            config: {
+                                address: 'something',
+                                isFullAddressSearchEnabled: jest.fn(),
+                                locationFormat: () => jest.fn()
+                            },
+                            service: {
+                                isValid: jest.fn(() => [])
+                            }
+                        };
+                        const wrapper = shallowMount(Form, {
+                            propsData,
+                            store: createStore({
+                                isFullAddressSearchEnabled: true
+                            }),
+                            localVue
+                        });
+                        const spy = jest.spyOn(wrapper.vm, 'setAutoCompleteAvailability');
+
+                        // Act
+                        wrapper.vm.initialiseFullAddressSearch(propsData.config.isFullAddressSearchEnabled);
+
+                        // Assert
+                        expect(spy).toHaveBeenCalledWith(true);
+                    });
+                });
+            });
+        });
+
+        describe('`reinitialiseConfigSettings`', () => {
+            it('should exist', () => {
+                // Arrange
+                const propsData = {
+                    config: {
+                        locationFormat: () => jest.fn()
+                    },
+                    service: {
+                        isValid: jest.fn(() => [])
+                    }
+                };
+                const wrapper = shallowMount(Form, {
+                    propsData,
+                    store: createStore(),
+                    localVue
+                });
+
+                // Assert
+                expect(wrapper.vm.reinitialiseConfigSettings).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                it('should dispatch `setGeoLocationAvailability` with a payload returned from the `service` `isGeoAvailable`', () => {
+                    // Arrange
+                    const propsData = {
+                        config: {
+                            locationFormat: () => jest.fn()
+                        },
+                        service: {
+                            isValid: jest.fn(() => []),
+                            isGeoAvailable: true
+                        }
+                    };
+                    const wrapper = shallowMount(Form, {
+                        propsData,
+                        store: createStore(),
+                        localVue
+                    });
+
+                    const spy = jest.spyOn(wrapper.vm, 'setGeoLocationAvailability');
+
+                    // Act
+                    wrapper.vm.reinitialiseConfigSettings();
+
+                    // Assert
+                    expect(spy).toHaveBeenCalledWith(true);
+                });
+
+                it('should dispatch `setAutoCompleteAvailability` with a payload returned from the `service` `isAutocompleteEnabled`', () => {
+                    // Arrange
+                    const propsData = {
+                        config: {
+                            locationFormat: () => jest.fn()
+                        },
+                        service: {
+                            isValid: jest.fn(() => []),
+                            isGeoAvailable: true,
+                            isAutocompleteEnabled: true
+                        }
+                    };
+                    const wrapper = shallowMount(Form, {
+                        propsData,
+                        store: createStore(),
+                        localVue
+                    });
+
+                    const spy = jest.spyOn(wrapper.vm, 'setAutoCompleteAvailability');
+
+                    // Act
+                    wrapper.vm.reinitialiseConfigSettings();
+
+                    // Assert
+                    expect(spy).toHaveBeenCalledWith(true);
                 });
             });
         });

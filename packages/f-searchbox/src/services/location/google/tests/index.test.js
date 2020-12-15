@@ -1,5 +1,5 @@
 import LocationGoogle from '..';
-import { loadGoogleMapsMocks } from '../../../../utils/tests/testHelpers';
+import { loadGoogleMapsMocks } from '../../../../utils/testHelpers/testHelpers';
 
 xdescribe('`LocationGoogle`', () => {
     let service;

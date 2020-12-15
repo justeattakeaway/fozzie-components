@@ -1,4 +1,5 @@
 import { isPostcodeEmpty, doesPostcodeMatchRegex } from '../utils/helpers';
+import options from './options/en-GB';
 
 const copy = {
     locale: 'en-GB',
@@ -31,14 +32,17 @@ const component = {
         type: 'text'
     },
     shouldClearAddressOnValidSubmit: false,
-    locationFormat: location => location.postcode
+    locationFormat: location => location.postcode,
+    isFullAddressSearchEnabled: options.isFullAddressSearchEnabled
 };
 
 const service = {
     validation: {
         POSTCODE_EMPTY: (value = '') => !isPostcodeEmpty(value),
         POSTCODE_INVALID: (value = '') => {
-            const parsed = value.trim().replace(/\s/g, '');
+            const parsed = options.isFullAddressSearchEnabled()
+                ? value.split(',')[0].trim().replace(/\s/g, '')
+                : value.trim().replace(/\s/g, '');
 
             return parsed.length < 8 &&
                 // If postcode is empty, don't raise POSTCODE_INVALID as well

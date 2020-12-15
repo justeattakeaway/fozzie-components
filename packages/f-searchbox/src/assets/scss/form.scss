@@ -79,6 +79,11 @@ $search-height-mid: 60px;
     font-weight: $font-weight-bold;
     height: $search-height-small;
 
+    // Hide the shadow dom search clear button.
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+
     &::placeholder {
       text-transform: none;
     }
