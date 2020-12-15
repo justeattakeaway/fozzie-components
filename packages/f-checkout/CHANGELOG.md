@@ -7,7 +7,7 @@ v0.25.0
 ------------------------------
 *December 14, 2020*
 
-### Changed
+### Added
 - Added 'authToken' property
 
 

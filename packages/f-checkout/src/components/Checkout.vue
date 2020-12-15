@@ -81,7 +81,7 @@ import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 
-import { mapState, mapActions, mapMutations } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
 import UserNote from './UserNote.vue';
@@ -202,12 +202,12 @@ export default {
         },
 
         authToken () {
-            this.updateAuth({ authToken: this.authToken });
+            this.setAuthToken({ authToken: this.authToken });
         }
     },
 
     async mounted () {
-        this.updateAuth({ authToken: this.authToken });
+        this.setAuthToken({ authToken: this.authToken });
         await this.loadCheckout();
     },
 
@@ -230,9 +230,9 @@ export default {
     methods: {
         ...mapActions('checkout', [
             'getCheckout',
-            'postCheckout'
+            'postCheckout',
+            'setAuthToken'
         ]),
-        ...mapMutations('checkout', ['updateAuth']),
 
         /**
          * Submit the checkout details while emitting events to communicate its success or failure.

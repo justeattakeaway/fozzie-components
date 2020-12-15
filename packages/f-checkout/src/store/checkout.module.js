@@ -82,6 +82,10 @@ export default {
 
             // eslint-disable-next-line no-unused-vars
             const response = await axios.post(url, data, config);
+        },
+
+        setAuthToken: ({ commit }, payload) => {
+            commit('updateAuth', payload);
         }
     },
 
