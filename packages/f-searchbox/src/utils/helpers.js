@@ -131,8 +131,6 @@ const safeParseJson = string => {
     try {
         return JSON.parse(string);
     } catch (e) {
-        // eslint-disable-next-line no-console
-        console.log(`Could not parse json ${string}`);
         return null;
     }
 };
