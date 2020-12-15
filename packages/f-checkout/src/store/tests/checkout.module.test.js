@@ -96,22 +96,22 @@ const expectedState = {
     isLoggedIn: false
 };
 
-const { updateState } = CheckoutModule.mutations;
-const { getCheckout, postCheckout } = CheckoutModule.actions;
+const { updateState, updateAuth } = CheckoutModule.mutations;
+const { getCheckout, postCheckout, setAuthToken } = CheckoutModule.actions;
 let state = CheckoutModule.state();
 
 describe('CheckoutModule', () => {
-    xit('should create default state when initialised.', () => {
+    it('should create default state when initialised.', () => {
         // Assert
         expect(state).toEqual(defaultState);
     });
 
-    xdescribe('mutations ::', () => {
-        describe('updateState ::', () => {
-            beforeEach(() => {
-                state = defaultState;
-            });
+    describe('mutations ::', () => {
+        beforeEach(() => {
+            state = defaultState;
+        });
 
+        describe('updateState ::', () => {
             it('should update state with delivery response.', () => {
                 // Act
                 updateState(state, checkoutDelivery);
@@ -142,6 +142,17 @@ describe('CheckoutModule', () => {
                 expect(state.fulfilment.address).toEqual(defaultState.fulfilment.address);
             });
         });
+
+        describe('updateAuth ::', () => {
+            it('should update state with authToken and set `isLoggedIn` to true', () => {
+                // Act
+                updateAuth(state, authToken);
+
+                // Assert
+                expect(state.authToken).toEqual(authToken);
+                expect(state.isLoggedIn).toBeTruthy();
+            });
+        });
     });
 
     describe('actions ::', () => {
@@ -157,7 +168,7 @@ describe('CheckoutModule', () => {
             commit = jest.fn();
         });
 
-        xdescribe('getCheckout ::', () => {
+        describe('getCheckout ::', () => {
             let config;
 
             beforeEach(() => {
@@ -195,6 +206,7 @@ describe('CheckoutModule', () => {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json',
+                        Authorization: `Bearer ${authToken}`,
                         'Accept-Tenant': payload.tenant
                     },
                     timeout: payload.timeout
@@ -203,11 +215,21 @@ describe('CheckoutModule', () => {
             });
 
             it('should post the checkout details to the backend.', async () => {
-                // Arrange && Act
+                // Act
                 await postCheckout({ commit, state }, payload);
 
                 // Assert
                 expect(axios.post).toHaveBeenCalledWith(payload.url, payload.data, config);
+            });
+        });
+
+        describe('setAuthToken ::', () => {
+            it('should call `updateAuth` mutation.', async () => {
+                // Act
+                setAuthToken({ commit }, authToken);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith('updateAuth', authToken);
             });
         });
     });
