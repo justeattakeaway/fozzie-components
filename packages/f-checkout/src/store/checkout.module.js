@@ -84,8 +84,8 @@ export default {
             const response = await axios.post(url, data, config);
         },
 
-        setAuthToken: ({ commit }, payload) => {
-            commit('updateAuth', payload);
+        setAuthToken: ({ commit }, authToken) => {
+            commit('updateAuth', authToken);
         }
     },
 
@@ -126,7 +126,7 @@ export default {
             state.messages = messages;
         },
 
-        updateAuth: (state, { authToken }) => {
+        updateAuth: (state, authToken) => {
             state.authToken = authToken;
             state.isLoggedIn = !!authToken;
         }

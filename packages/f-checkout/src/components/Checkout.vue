@@ -128,7 +128,6 @@ export default {
 
         authToken: {
             type: String,
-            required: false,
             default: ''
         }
     },
@@ -202,12 +201,12 @@ export default {
         },
 
         authToken () {
-            this.setAuthToken({ authToken: this.authToken });
+            this.setAuthToken(this.authToken);
         }
     },
 
     async mounted () {
-        this.setAuthToken({ authToken: this.authToken });
+        this.setAuthToken(this.authToken);
         await this.loadCheckout();
     },
 
