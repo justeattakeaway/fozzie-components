@@ -183,7 +183,6 @@ export default {
                     this.metadataDispatcher = dispatcher;
                 })
                 .catch(error => {
-                    console.log(error);
                     this.$emit('on-error', error);
                 });
         },
