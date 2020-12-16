@@ -4,6 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.2.0
+------------------------------
+*December 15, 2020*
+
+### Fixed
+- Styles to match designs in HPC 1&2
+- Correct stories for HPC 1&2
+
+### Updated
+- Dynamically change HPC1 subtitle and HPC2 title and text between light/dark based on
+  luminosity of BG colour(s)
+- Tests to check above behave correctly
+
+
 v2.2.0-beta.9
 ------------------------------
 *December 03, 2020*

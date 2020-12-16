@@ -6,15 +6,42 @@ import image from './images/burger-placeholder.jpg';
 export default {
     title: 'Components/Atoms/f-content-cards',
     argTypes: {
-        title: { control: { type: 'text' } },
-        description: { control: { type: 'text' } },
-        image: { control: { type: 'text' } },
-        icon: { control: { type: 'text' } },
-        ctaText: { control: { type: 'text' } },
-        backgroundColor: { control: { type: 'text' } },
-        contentContainerBackground: { control: { type: 'text' } },
-        url: { control: { type: 'text' } },
-        tenant: { control: { type: 'radio', options: ['uk', 'au', 'nz'] } }
+        title: {
+            control: { type: 'text' },
+            description: 'Title text for the inner card'
+        },
+        description: {
+            control: { type: 'array', separator: '--' },
+            description: 'Individual lines for the text in the inner card, lines separated by "--"'
+        },
+        image: {
+            control: { type: 'text' },
+            description: 'If given, a URL of the image used for the inner card'
+        },
+        icon: {
+            control: { type: 'text' },
+            description: 'If given, a URL for an icon that appears in the left/top portion of the card'
+        },
+        ctaText: {
+            control: { type: 'text' },
+            description: 'Display text used for the CTA link'
+        },
+        backgroundColor: {
+            control: { type: 'text' },
+            description: 'A custom css-compatible colour value given from CRM via braze for the left/top portion of the card'
+        },
+        contentBackgroundColor: {
+            control: { type: 'text' },
+            description: 'A custom css-compatible colour value given from CRM via braze for the right/inner portion of the card'
+        },
+        subtitle: {
+            control: { type: 'text' },
+            description: 'The subtitle that appears below the icon on mid-breakpoint and above only'
+        },
+        url: {
+            control: { type: 'text' },
+            description: 'The url that the CTA directs to'
+        }
     }
 };
 
@@ -50,7 +77,12 @@ export const HomePromotionCard1Component = (args, { argTypes }) => ({
         };
     },
 
-    template: '<home-promotion-card :card="{title, backgroundColor, contentContainerBackground, ctaText, description, image, icon, url}" :tenant="tenant" />'
+    template: '<home-promotion-card'
+        // Setting key as per below forces re-render of the component when the supplied controls change
+        // eslint-disable-next-line no-template-curly-in-string
+        + ' :key="`${title},${backgroundColor},${contentBackgroundColor},${ctaText},${description},${image},${icon},${url},${subtitle}`"'
+        + ' :card="{title, backgroundColor, contentBackgroundColor, ctaText, description, image, icon, url, subtitle}"'
+    + '/>'
 });
 
 HomePromotionCard1Component.storyName = 'home-promotion-card-1';
@@ -58,11 +90,15 @@ HomePromotionCard1Component.storyName = 'home-promotion-card-1';
 HomePromotionCard1Component.args = {
     title: 'Treat them with a Just Eat gift card',
     backgroundColor: '#da0006',
-    contentContainerBackground: 'white',
-    description: 'Whether you want to treat Mum to her Friday night favourite, or surprise your mate with a ‘KFC on me’, show them you care – the tasty way.',
+    contentBackgroundColor: 'white',
+    description: [
+        'Whether you want to treat Mum to her Friday night favourite ',
+        ' or surprise your mate with a ‘KFC on me’ ',
+        ' show them you care – the tasty way.'
+    ],
     image,
     icon,
     ctaText: 'Purchase now',
-    url: '#',
-    tenant: 'uk'
+    subtitle: 'Only from Just Eat',
+    url: '#'
 };
