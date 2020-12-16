@@ -10,11 +10,11 @@ if (!isTrivial) {
     const modifiedFiles = danger.git.modified_files;
 
     // Get an array of files in the root monorepo that have changed
-    const modifiedRootFiles = modifiedFiles.filter(filepath => !filepath.startsWith('packages/') && filepath !== 'yarn.lock');
+    const modifiedRootFiles = modifiedFiles.filter(filepath => (!filepath.startsWith('packages/') || !filepath.startsWith('services/')) && filepath !== 'yarn.lock');
 
-    // Get an array of packages that have changed, then make that array unique
-    const modifiedPackages = modifiedFiles.filter(filepath => filepath.startsWith('packages/'))
+    const modifiedPackages = modifiedFiles.filter(filepath => filepath.startsWith('packages/') || filepath.startsWith('services/'))
         .map(filepath => filepath.split('/')[1]);
+
     const uniqueModifiedPackages = new Set(modifiedPackages);
     const modifiedRootPackage = modifiedPackages.includes('');
 
