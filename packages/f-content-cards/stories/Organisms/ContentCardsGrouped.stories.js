@@ -34,17 +34,10 @@ const methods = {
 };
 
 const template = `<content-cards
-            @on-braze-init="onBrazeInit"
-            @get-card-count="getCardCount"
-            @has-loaded="hasLoaded"
-            @on-error="onError"
-            @custom-cards-callback="customCardsCallback"
             :userId="userId"
             :apiKey="apiKey"
-            :title="title"
             :locale="locale"
-            :group-cards="groupCards"
-            :enabled-card-types="enabledCardTypes" />`;
+            />`;
 
 export default {
     title: 'Components/Organisms/f-content-cards',
