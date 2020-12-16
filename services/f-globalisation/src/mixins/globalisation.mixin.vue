@@ -25,7 +25,14 @@ export default {
     methods: {
         setupLocale (locale, applyLocale = false) {
             const localeConfig = this.tenantConfigs[locale];
-            this.$i18n.setLocaleMessage(locale, localeConfig);
+
+            const messages = localeConfig.messages || localeConfig; // Backwards compatibility if a tenant file only has messages without the new structure.
+
+            this.$i18n.setLocaleMessage(locale, messages);
+
+            if (localeConfig.dateTimeFormats) {
+                this.$i18n.setDateTimeFormat(locale, localeConfig.dateTimeFormats);
+            }
 
             if (applyLocale) {
                 this.$i18n.locale = locale;
