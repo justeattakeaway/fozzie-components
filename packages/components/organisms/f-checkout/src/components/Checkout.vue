@@ -22,13 +22,15 @@
                 type="post"
                 :class="$style['c-checkout-form']"
                 @submit.prevent="onFormSubmit">
-                <a
-                    :href="loginUrl"
+                <p
                     :class="[
                         $style['c-checkout-link']
-                    ]"
-                    data-test-id="account-login-link"
-                    @click="onVisitLoginPage">Not {{ name }}? Click here.</a>
+                    ]">
+                    <a
+                        :href="loginUrl"
+                        data-test-id="account-login-link"
+                        @click="onVisitLoginPage">Not {{ name }}? Click here.</a>
+                </p>
                 <form-field
                     v-model="customer.mobileNumber"
                     name="mobile-number"
