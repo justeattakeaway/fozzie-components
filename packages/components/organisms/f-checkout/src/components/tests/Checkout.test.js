@@ -5,10 +5,12 @@ import { validations } from '@justeat/f-services';
 import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
+import Registration from '@justeat/f-registration/src/components/Registration';
 import {
     fulfilmentTimes, defaultState, defaultActions, i18n, createStore
 } from './helpers/setup';
 
+import tenantConfigs from '../../tenants';
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
@@ -45,9 +47,10 @@ describe('Checkout', () => {
     allure.feature('Checkout');
     const checkoutUrl = 'http://localhost/checkout';
     const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
+    const loginUrl = 'http://dummy-login.example.com';
 
     it('should be defined', () => {
-        const propsData = { checkoutUrl, checkoutAvailableFulfilmentUrl };
+        const propsData = { checkoutUrl };
 
         const wrapper = shallowMount(VueCheckout, {
             i18n,
@@ -57,6 +60,24 @@ describe('Checkout', () => {
         });
 
         expect(wrapper.exists()).toBe(true);
+    });
+
+    it('should show the login link.', () => {
+        const propsData = { checkoutUrl, loginUrl };
+
+        const wrapper = shallowMount(VueCheckout, {
+            i18n,
+            store: createStore(),
+            localVue,
+            propsData
+        });
+
+        // Act
+        const loginLink = wrapper.find("[data-test-id='account-login-link']");
+
+        // Assert
+        expect(loginLink.exists()).toBe(true);
+        expect(loginLink.text()).toBe(`Not ${defaultState.customer.firstName}? Click here.`)
     });
 
     describe('created :: ', () => {

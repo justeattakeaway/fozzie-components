@@ -22,14 +22,13 @@
                 type="post"
                 :class="$style['c-checkout-form']"
                 @submit.prevent="onFormSubmit">
-                <p
+                <a
+                    :href="loginUrl"
                     :class="[
-                        $style['c-checkout-switchUserLink']
+                        $style['c-checkout-link']
                     ]"
-                    data-test-id="create-account-login-link"
-                    @click="onVisitLoginPage">
-                    <a :href="loginUrl">Not {{ name }}? Click here.</a>
-                </p>
+                    data-test-id="account-login-link"
+                    @click="onVisitLoginPage">Not {{ name }}? Click here.</a>
                 <form-field
                     v-model="customer.mobileNumber"
                     name="mobile-number"
@@ -417,7 +416,7 @@ $line-height                              : 16px;
 $checkout-width                           : 596px;
 $checkout-padding                         : spacing(x5) 100px;
 
-.c-checkout-switchUserLink {
+.c-checkout-link {
   text-align: center;
 
   a {
