@@ -3,6 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.26.0
+------------------------------
+*December 15, 2020*
+
+### Added
+- Tests for store `checkout.module.js`.
+
+
+v0.25.0
+------------------------------
+*December 14, 2020*
+
+### Added
+- Added 'authToken' property
+
+
 v0.24.0
 ------------------------------
 *December 14, 2020*

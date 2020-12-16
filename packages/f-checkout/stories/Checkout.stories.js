@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { select } from '@storybook/addon-knobs';
+import { select, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 
 import {
@@ -32,11 +32,14 @@ export const CheckoutComponent = () => ({
         },
         checkoutUrl: {
             default: select('Checkout Url', [deliveryUrl, collectionUrl], deliveryUrl)
+        },
+        authToken: {
+            default: text('Auth token', '')
         }
     },
     store: new Vuex.Store({}),
     template:
-        '<vue-checkout :checkoutUrl="checkoutUrl" :locale="locale" />'
+        '<vue-checkout :checkoutUrl="checkoutUrl" :locale="locale" :authToken="authToken" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';
