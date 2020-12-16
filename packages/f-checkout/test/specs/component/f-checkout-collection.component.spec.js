@@ -4,7 +4,7 @@ import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.
 describe('f-checkout "collection" component tests', () => {
     before(() => {
         browser.url('?path=/story/components-organisms--checkout-component');
-        CheckoutComponent.changeToCollectionMethod();
+        CheckoutComponent.changeCheckoutPage(1);
         browser.switchToFrame(0);
         CheckoutComponent.waitForCheckoutComponent();
     });
@@ -20,7 +20,7 @@ describe('f-checkout "collection" component tests', () => {
     forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
     .it('address fields should not exist', field => {
         // Assert
-        expect(CheckoutComponent.isFieldVisible(field)).toBe(false);
+        expect(CheckoutComponent.doesFieldExist(field)).toBe(false);
     });
 
     it('should display the mandatory "mobileNumber" field', () => {

@@ -20,7 +20,7 @@ describe('f-checkout "delivery" component tests', () => {
     forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
     .it('address fields should exist', field => {
         // Assert
-        expect(CheckoutComponent.doesInputFieldExist(field)).toBe(true);
+        expect(CheckoutComponent.doesFieldExist(field)).toBe(true);
     });
 
     it('should display the mandatory fields', () => {

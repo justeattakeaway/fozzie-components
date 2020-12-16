@@ -60,9 +60,16 @@ const fields = {
     }
 };
 
-exports.changeToCollectionMethod = () => {
+/**
+ * @description
+ * Changes checkout page to reflect checkout method to either delivery or collection depending on index given.
+ *
+ * @param {Number} index The index of the drop down option
+ */
+
+exports.changeCheckoutPage = index => {
     knobButton().click();
-    knobCheckoutDropdown().selectByIndex(1);
+    knobCheckoutDropdown().selectByIndex(index);
 };
 
 exports.isFieldErrorDisplayed = fieldName => fields[fieldName].error().isDisplayed();
@@ -142,5 +149,4 @@ exports.submit = () => {
 };
 
 exports.doesErrorMessageExist = errorMessage => doesElementExist(FIELDS[errorMessage].error);
-exports.doesInputFieldExist = inputField => doesElementExist(FIELDS[inputField].input);
-exports.isFieldVisible = inputField => fields[inputField].input().isDisplayedInViewport();
+exports.doesFieldExist = inputField => doesElementExist(FIELDS[inputField].input);
