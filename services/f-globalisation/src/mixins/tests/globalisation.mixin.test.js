@@ -12,7 +12,12 @@ const ALTERNATIVE_LOCALE = 'es-ES';
 const defaultData = {
     tenantConfigs: {
         [DEFAULT_LOCALE]: {
-            test: 'Test message (EN)'
+            messages: {
+                test: 'Test message (EN)'
+            },
+            dateTimeFormats: {
+                short: { hour: 'numeric' }
+            }
         },
         [ALTERNATIVE_LOCALE]: {
             messages: {
@@ -219,41 +224,6 @@ describe('Globalisation', () => {
                 expect(setDateTimeFormatMock).toHaveBeenCalledTimes(1);
                 expect(setDateTimeFormatMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, defaultData.tenantConfigs[ALTERNATIVE_LOCALE].dateTimeFormats);
                 expect(i18n.locale).toBe(DEFAULT_LOCALE);
-            });
-
-            describe('legacy tenancy file support to ensure backwards compatibility', () => {
-                it('should not set the datetime formats if its not available in the tenancy file', () => {
-                    // Arrange
-                    const wrapper = shallowMount(component, {
-                        data () {
-                            return defaultData;
-                        },
-                        i18n
-                    });
-
-                    // Act
-                    wrapper.vm.setupLocale(DEFAULT_LOCALE, false);
-
-                    // Assert
-                    expect(setDateTimeFormatMock).toHaveBeenCalledTimes(0);
-                });
-
-                it('should set the messages if it\'s the only thing the tenancy file has', () => {
-                    // Arrange
-                    const wrapper = shallowMount(component, {
-                        data () {
-                            return defaultData;
-                        },
-                        i18n
-                    });
-
-                    // Act
-                    wrapper.vm.setupLocale(DEFAULT_LOCALE, false);
-
-                    // Assert
-                    expect(setLocaleMessageMock).toHaveBeenCalledTimes(1);
-                    expect(setLocaleMessageMock).toHaveBeenCalledWith(DEFAULT_LOCALE, defaultData.tenantConfigs[DEFAULT_LOCALE]);
-                });
             });
         });
     });
