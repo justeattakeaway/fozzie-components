@@ -12,10 +12,20 @@ const ALTERNATIVE_LOCALE = 'es-ES';
 const defaultData = {
     tenantConfigs: {
         [DEFAULT_LOCALE]: {
-            test: 'Test message (EN)'
+            messages: {
+                test: 'Test message (EN)'
+            },
+            dateTimeFormats: {
+                short: { hour: 'numeric' }
+            }
         },
         [ALTERNATIVE_LOCALE]: {
-            test: 'Test message (ES)'
+            messages: {
+                test: 'Test message (ES)'
+            },
+            dateTimeFormats: {
+                short: { hour: 'numeric' }
+            }
         }
     }
 };
@@ -169,12 +179,14 @@ describe('Globalisation', () => {
 
         describe('setupLocale', () => {
             let setLocaleMessageMock;
+            let setDateTimeFormatMock;
 
             beforeEach(() => {
                 setLocaleMessageMock = jest.spyOn(i18n, 'setLocaleMessage');
+                setDateTimeFormatMock = jest.spyOn(i18n, 'setDateTimeFormat');
             });
 
-            it('should set the messages for the provided locale and update the current i18n locale when `applyLocale` is `true`', () => {
+            it('should set the messages and datetime formats for the provided locale and update the current i18n locale when `applyLocale` is `true`', () => {
                 // Arrange
                 const wrapper = shallowMount(component, {
                     data () {
@@ -188,11 +200,13 @@ describe('Globalisation', () => {
 
                 // Assert
                 expect(setLocaleMessageMock).toHaveBeenCalledTimes(1);
-                expect(setLocaleMessageMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, defaultData.tenantConfigs[ALTERNATIVE_LOCALE]);
+                expect(setLocaleMessageMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, defaultData.tenantConfigs[ALTERNATIVE_LOCALE].messages);
+                expect(setDateTimeFormatMock).toHaveBeenCalledTimes(1);
+                expect(setDateTimeFormatMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, defaultData.tenantConfigs[ALTERNATIVE_LOCALE].dateTimeFormats);
                 expect(i18n.locale).toBe(ALTERNATIVE_LOCALE);
             });
 
-            it('should set the messages for the provided locale and not update the current i18n locale when `applyLocale` is `false`', () => {
+            it('should set the messages and datetime formats for the provided locale and not update the current i18n locale when `applyLocale` is `false`', () => {
                 // Arrange
                 const wrapper = shallowMount(component, {
                     data () {
@@ -206,7 +220,9 @@ describe('Globalisation', () => {
 
                 // Assert
                 expect(setLocaleMessageMock).toHaveBeenCalledTimes(1);
-                expect(setLocaleMessageMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, defaultData.tenantConfigs[ALTERNATIVE_LOCALE]);
+                expect(setLocaleMessageMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, defaultData.tenantConfigs[ALTERNATIVE_LOCALE].messages);
+                expect(setDateTimeFormatMock).toHaveBeenCalledTimes(1);
+                expect(setDateTimeFormatMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, defaultData.tenantConfigs[ALTERNATIVE_LOCALE].dateTimeFormats);
                 expect(i18n.locale).toBe(DEFAULT_LOCALE);
             });
         });
