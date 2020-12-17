@@ -23,7 +23,8 @@
                 :class="$style['c-checkout-form']"
                 @submit.prevent="onFormSubmit">
                 <form-field
-                    v-model="customer.mobileNumber"
+                    :value="customer.mobileNumber"
+                    @input="updateMobileNumber"
                     name="mobile-number"
                     :label-text="$t('labels.mobileNumber')"
                     :has-error="!isMobileNumberValid">
@@ -345,6 +346,9 @@ export default {
         */
         isValidPostcode () {
             return validations.isValidPostcode(this.fulfilment.address.postcode, this.$i18n.locale);
+        },
+        updateMobileNumber (value) {
+            this.$store.dispatch('checkout/updateMobileNumber', value)
         }
     },
 

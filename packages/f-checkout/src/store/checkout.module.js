@@ -49,7 +49,7 @@ export default {
 
             const { data } = await axios.get(url, config);
 
-            commit('updateState', data);
+            commit('UPDATE_STATE', data);
         },
 
         /**
@@ -85,12 +85,18 @@ export default {
         },
 
         setAuthToken: ({ commit }, authToken) => {
-            commit('updateAuth', authToken);
+            commit('UPDATE_AUTH', authToken);
+        },
+        updateFulfilmentAddress ({ commit }, payload) {
+            commit('UPDATE_FULFILMENT_ADDRESS', payload)
+        },
+        updateMobileNumber ({ commit }, payload) {
+            commit('UPDATE_MOBILE_NUMBER', payload)
         }
     },
 
     mutations: {
-        updateState: (state, {
+        UPDATE_STATE: (state, {
             id,
             serviceType,
             customer,
@@ -126,9 +132,18 @@ export default {
             state.messages = messages;
         },
 
-        updateAuth: (state, authToken) => {
+        UPDATE_AUTH: (state, authToken) => {
             state.authToken = authToken;
             state.isLoggedIn = !!authToken;
+        },
+        UPDATE_FULFILMENT_ADDRESS (state, address) {
+            state.fulfilment.address = {
+                ...state.fulfilment.address,
+                ...address
+            }
+        },
+        UPDATE_MOBILE_NUMBER (state, mobileNumber ) {
+            state.customer.mobileNumber = mobileNumber
         }
     }
 };
