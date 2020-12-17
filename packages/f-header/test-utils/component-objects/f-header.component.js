@@ -6,11 +6,14 @@ import {
     HELP_LINK, 
     HEADER_LOGO, 
     MOBILE_NAVIGATION, 
-    KNOB_BUTTON
+    KNOB_BUTTON, 
+    DELIVERY_ENQUIRY_ADD_ON, 
+    OFFERS_LINK_ADD_ON
 } from './f-header.selectors';
 
 const knobButton = () => $(KNOB_BUTTON)
-
+const offersLinkAddOn = () => $(OFFERS_LINK_ADD_ON)
+const deliveryEnquiryAddOn = () => $(DELIVERY_ENQUIRY_ADD_ON)
 const headerComponent = () => $(HEADER_COMPONENT);
 
 // Links 
@@ -38,8 +41,10 @@ const navigationOffersLink = () => {
 
 // Functions
 
-exports.selectKnobs = () => {
-   
+exports.selectAddOns = () => {
+   knobButton().click(); 
+   offersLinkAddOn().click();
+   deliveryEnquiryAddOn().click();
 }
 
 exports.waitForHeader = () => headerComponent().waitForExist();

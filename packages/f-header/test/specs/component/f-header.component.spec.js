@@ -3,6 +3,7 @@ import HeaderComponent from '../../../test-utils/component-objects/f-header.comp
 describe('f-header component tests', () => {
     before(() => {
         browser.url('?path=/story/components-organisms--header-component');
+        HeaderComponent.selectAddOns();
         browser.switchToFrame(0);
         HeaderComponent.waitForHeader();
     });

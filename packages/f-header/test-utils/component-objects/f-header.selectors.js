@@ -1,4 +1,6 @@
 export const KNOB_BUTTON = '[id$="tabbutton-knobs"]'
+export const OFFERS_LINK_ADD_ON = '[id="Show offers link"]'
+export const DELIVERY_ENQUIRY_ADD_ON = '[id="Show delivery enquiry"]'
 export const HEADER_COMPONENT = '[data-test-id="header-component"]'
 export const LOGIN_LINK = '[data-test-id="login-link"]'
 export const OFFERS_LINK = '[data-test-id="offers-link"]'
