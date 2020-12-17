@@ -1,18 +1,18 @@
 import HeaderComponent from '../../../test-utils/component-objects/f-header.component';
 
 describe('f-header component tests', () => {
-    beforeEach(() => {
+    before(() => {
         browser.url('?path=/story/components-organisms--header-component');
         browser.switchToFrame(0);
         HeaderComponent.waitForHeader();
     });
 
-    it.skip('should display the f-header component', () => {
+    it('should display the f-header component', () => {
         // Assert
         expect(HeaderComponent.isLogoDisplayed()).toBe(true);
     });
 
-    it.skip('should alter visibility of navbar depending on window size', () => {
+    it('should alter visibility of navbar depending on window size', () => {
         // Act
         browser.setWindowSize(500, 500);
 
@@ -30,7 +30,7 @@ describe('f-header component tests', () => {
         expect(HeaderComponent.isLoginLinkDisplayed()).toBe(true);
     });
 
-    it.skip('should change url when help link is clicked', () => {
+    it('should change url when help link is clicked', () => {
         // Act
         HeaderComponent.clickHelpLink();
 

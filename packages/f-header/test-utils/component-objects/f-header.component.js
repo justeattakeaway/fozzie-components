@@ -5,8 +5,11 @@ import {
     DELIVERY_ENQUIRY_LINK, 
     HELP_LINK, 
     HEADER_LOGO, 
-    MOBILE_NAVIGATION
+    MOBILE_NAVIGATION, 
+    KNOB_BUTTON
 } from './f-header.selectors';
+
+const knobButton = () => $(KNOB_BUTTON)
 
 const headerComponent = () => $(HEADER_COMPONENT);
 
@@ -25,16 +28,6 @@ const headerLogo = () => $(HEADER_LOGO);
 
 const mobileNavigation = () => $(MOBILE_NAVIGATION);
 
-// Functions
-
-exports.waitForHeader = () => headerComponent().waitForExist();
-exports.isLogoDisplayed = () => headerLogo().isDisplayedInViewport();
-exports.isMobileNavigationVisible = () => mobileNavigation().isDisplayedInViewport();
-exports.isHelpLinkDisplayed = () => helpLink().isDisplayedInViewport(); 
-exports.isLoginLinkDisplayed = () => loginLink().isDisplayedInViewport();
-exports.isOffersLinkDesktopDisplayed = () => offersLinkDesktop().isDisplayedInViewport(); 
-
-
 const mobileOffersIcon = () => {
     return offersLink().filter(element => element.getAttribute('class').includes('u-showBelowMid'));
 };
@@ -42,6 +35,19 @@ const mobileOffersIcon = () => {
 const navigationOffersLink = () => {
     return offersLink().filter(element => element.getAttribute('class').includes('u-showAboveMid'));
 };
+
+// Functions
+
+exports.selectKnobs = () => {
+   
+}
+
+exports.waitForHeader = () => headerComponent().waitForExist();
+exports.isLogoDisplayed = () => headerLogo().isDisplayedInViewport();
+exports.isMobileNavigationVisible = () => mobileNavigation().isDisplayedInViewport();
+exports.isHelpLinkDisplayed = () => helpLink().isDisplayedInViewport(); 
+exports.isLoginLinkDisplayed = () => loginLink().isDisplayedInViewport();
+exports.isOffersLinkDesktopDisplayed = () => offersLinkDesktop().isDisplayedInViewport(); 
 
 exports.isMobileOffersIconDisplayed = () => {
     const element = mobileOffersIcon();
