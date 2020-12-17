@@ -1750,6 +1750,14 @@
     lodash-es "4.17.15"
     window-or-global "1.0.1"
 
+"@justeat/f-services@1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.6.0.tgz#1c6afb320b398c8120a9400b50a7761f892def99"
+  integrity sha512-LT0FUXDh1JGpkvfSQPuNIzImUTA9X52NMyvjZ9OCMVNtzGPmEEg++1BLwIfugpt6ezcCSF9HtiS218IGlqzffA==
+  dependencies:
+    lodash-es "4.17.15"
+    window-or-global "1.0.1"
+
 "@justeat/f-utils@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-utils/-/f-utils-1.0.0.tgz#d4f38f6c2b2992fefa39789f1ce742dc083798b1"
@@ -7354,6 +7362,14 @@ color-string@^1.5.4:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
 
+color@3.1.3, color@^3.0.0:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/color/-/color-3.1.3.tgz#ca67fb4e7b97d611dcde39eceed422067d91596e"
+  integrity sha512-xgXAcTHa2HeFCGLE9Xs/R82hujGtu9Jd9x4NW3T34+OMs7VoPsjwzRczKHvTAHeJwWFwX5j15+MgAppE8ztObQ==
+  dependencies:
+    color-convert "^1.9.1"
+    color-string "^1.5.4"
+
 color@^0.11.0:
   version "0.11.4"
   resolved "https://registry.yarnpkg.com/color/-/color-0.11.4.tgz#6d7b5c74fb65e841cd48792ad1ed5e07b904d764"
@@ -7362,14 +7378,6 @@ color@^0.11.0:
     clone "^1.0.2"
     color-convert "^1.3.0"
     color-string "^0.3.0"
-
-color@^3.0.0:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/color/-/color-3.1.3.tgz#ca67fb4e7b97d611dcde39eceed422067d91596e"
-  integrity sha512-xgXAcTHa2HeFCGLE9Xs/R82hujGtu9Jd9x4NW3T34+OMs7VoPsjwzRczKHvTAHeJwWFwX5j15+MgAppE8ztObQ==
-  dependencies:
-    color-convert "^1.9.1"
-    color-string "^1.5.4"
 
 colorette@^1.2.1:
   version "1.2.1"

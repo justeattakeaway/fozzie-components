@@ -5,6 +5,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (to be added to next release)
 ------------------------------
+*December 15, 2020*
+
+### Fixed
+- Google test from failing silently in CI.
+
+
+Latest (to be added to next release)
+------------------------------
 *December 14, 2020*
 
 ### Added
