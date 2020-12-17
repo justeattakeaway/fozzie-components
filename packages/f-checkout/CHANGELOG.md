@@ -11,6 +11,14 @@ v0.27.0
 - Updated skipped tests to work with Storybook component tests.
 
 
+v0.26.0
+------------------------------
+*December 15, 2020*
+
+### Added
+- Tests for store `checkout.module.js`.
+
+
 v0.25.0
 ------------------------------
 *December 14, 2020*
