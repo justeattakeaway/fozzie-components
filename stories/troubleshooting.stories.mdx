@@ -30,12 +30,12 @@ Sometimes we might want to test changes to a component before we submit a PR. Yo
 
 - Read more [about yalc and how to install it](https://github.com/whitecolor/yalc)
 - Yalc works by creating a locally published directory on your machine, and allows other code bases to use it in place of a real dependency
-- Once installed you can run `yalc publish --push` in any component
-- Once published locally you can run `yalc add @justeat/f-myComponentName` in any NPM based project
-- Assets should be automatically updated when you change the component
+- Once installed you can run `yalc publish` in any component
+- Once published locally you can run `yalc add @justeat/f-myComponentName` in any NPM based project to add the local dependency
+- If you update the component locally and need the dependency to be updated, run `yalc publish --push` inside the component. You may also need to restart your consuming application if the new changes aren't picked up by hot-module reloading (HMR).
 
 ### How can I create a new component?
-We have streamlined the process for creating new components; but we would recommend talking to the team before you do.
+We have streamlined the process for creating new components, but we would recommend talking to the Web Core team before you do it yourself.
 
 1. If you haven't already, run the `First time setup` steps at the top of this page
 2. Navigate your terminal to the packages folder: `cd /packages`
