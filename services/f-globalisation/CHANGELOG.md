@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.0.0
 ------------------------------
-*December 16, 2020*
+*December 17, 2020*
 
 ### Added
 - Support for `dateTimeFormats`, which requires a change in the structure of the tenancy files.
