@@ -1,7 +1,7 @@
 import {
     HEADER_COMPONENT, 
     HEADER_LOGO, 
-    MOBILE_NAVIGATION, 
+    MOBILE_NAVIGATION_BAR, 
     NAVIGATION
 } from './f-header.selectors';
 
@@ -27,7 +27,7 @@ const navigation = {
         link: () => $(NAVIGATION.userAccount.link), 
     } 
 }
-const mobileNavigationBar = () => $(MOBILE_NAVIGATION);
+const mobileNavigationBar = () => $(MOBILE_NAVIGATION_BAR);
 const mobileOffersIcon = () => {
     return navigation.offers.icon().filter(element => element.getAttribute('class').includes('u-showBelowMid'));
 };
