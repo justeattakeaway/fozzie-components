@@ -1,10 +1,17 @@
-export const KNOB_BUTTON = '[id$="tabbutton-knobs"]'
-export const OFFERS_LINK_ADD_ON = '[id="Show offers link"]'
-export const DELIVERY_ENQUIRY_ADD_ON = '[id="Show delivery enquiry"]'
 export const HEADER_COMPONENT = '[data-test-id="header-component"]'
-export const LOGIN_LINK = '[data-test-id="login-link"]'
-export const OFFERS_LINK = '[data-test-id="offers-link"]'
-export const DELIVERY_ENQUIRY_LINK = '[data-test-id="offers-link"]'
-export const HELP_LINK = '[data-test-id="help-link"]'
 export const HEADER_LOGO = '[data-test-id="header-logo"]'
 export const MOBILE_NAVIGATION = '[data-test-id="nav-toggle"]'
+export const NAVIGATION = {
+    offers: {
+        link: '[data-test-id="offers-link"]', 
+    },
+    help: {
+        link: '[data-test-id="help-link"]', 
+    },  
+    delivery: {
+        link: '[data-test-id="delivery-link"]', 
+    }, 
+    userAccount: {
+        link: '[data-test-id="user-info-link"]', 
+    }
+}

@@ -1,58 +1,43 @@
 import {
     HEADER_COMPONENT, 
-    LOGIN_LINK, 
-    OFFERS_LINK, 
-    DELIVERY_ENQUIRY_LINK, 
-    HELP_LINK, 
     HEADER_LOGO, 
     MOBILE_NAVIGATION, 
-    KNOB_BUTTON, 
-    DELIVERY_ENQUIRY_ADD_ON, 
-    OFFERS_LINK_ADD_ON
+    NAVIGATION
 } from './f-header.selectors';
 
-const knobButton = () => $(KNOB_BUTTON)
-const offersLinkAddOn = () => $(OFFERS_LINK_ADD_ON)
-const deliveryEnquiryAddOn = () => $(DELIVERY_ENQUIRY_ADD_ON)
+// Component
 const headerComponent = () => $(HEADER_COMPONENT);
 
-// Links 
-
-const loginLink = () => $(LOGIN_LINK);
-const offersLink = () => $$(OFFERS_LINK);
-const deliveryEnquiryLink = () => $(DELIVERY_ENQUIRY_LINK);
-const helpLink = () => $(HELP_LINK);
-
 // Logo
-
 const headerLogo = () => $(HEADER_LOGO);
 
 // Navigation
-
-const mobileNavigation = () => $(MOBILE_NAVIGATION);
-
+const navigation = {
+    offers: {
+        link: () => $(NAVIGATION.offers.link), 
+        icon: () => $$(NAVIGATION.offers.link)
+    }, 
+    help: {
+        link: () => $(NAVIGATION.help.link), 
+    }, 
+    delivery: {
+        link: () => $(NAVIGATION.delivery.link), 
+    }, 
+    userAccount: {
+        link: () => $(NAVIGATION.userAccount.link), 
+    } 
+}
+const mobileNavigationBar = () => $(MOBILE_NAVIGATION);
 const mobileOffersIcon = () => {
-    return offersLink().filter(element => element.getAttribute('class').includes('u-showBelowMid'));
-};
-
-const navigationOffersLink = () => {
-    return offersLink().filter(element => element.getAttribute('class').includes('u-showAboveMid'));
+    return navigation.offers.icon().filter(element => element.getAttribute('class').includes('u-showBelowMid'));
 };
 
 // Functions
 
-exports.selectAddOns = () => {
-   knobButton().click(); 
-   offersLinkAddOn().click();
-   deliveryEnquiryAddOn().click();
-}
-
 exports.waitForHeader = () => headerComponent().waitForExist();
+exports.isFieldLinkDisplayed = fieldName => navigation[fieldName].link().isDisplayedInViewport();
 exports.isLogoDisplayed = () => headerLogo().isDisplayedInViewport();
-exports.isMobileNavigationVisible = () => mobileNavigation().isDisplayedInViewport();
-exports.isHelpLinkDisplayed = () => helpLink().isDisplayedInViewport(); 
-exports.isLoginLinkDisplayed = () => loginLink().isDisplayedInViewport();
-exports.isOffersLinkDesktopDisplayed = () => offersLinkDesktop().isDisplayedInViewport(); 
+exports.isMobileNavigationBarVisible = () => mobileNavigationBar().isDisplayedInViewport();
 
 exports.isMobileOffersIconDisplayed = () => {
     const element = mobileOffersIcon();
@@ -60,29 +45,14 @@ exports.isMobileOffersIconDisplayed = () => {
     return element.length === 1 && element[0].isDisplayedInViewport();
 };
 
-exports.isNavigationOffersLinkDisplayed = () => {
-    const element = navigationOffersLink();
-    
-    return element.length === 1 && element[0].isDisplayedInViewport();
-};
-
-exports.clickLoginLink = () => {
-    loginLink().click();
-};
-
 exports.clickOffersLink = () => {
-    navigationOffersLink()[0].click();
-};
-
-exports.openMobileNavigation = () => {
-    mobileNavigation().click();
-};
-
-exports.clickDeliveryEnquiryLink = () => {
-    deliveryEnquiryLink().click();
+    navigation.offers.link().click();
 };
 
 exports.clickHelpLink = () => {
-    helpLink().click();
+    navigation.help.link().click();
 };
 
+exports.openMobileNavigation = () => {
+    mobileNavigationBar().click();
+};
