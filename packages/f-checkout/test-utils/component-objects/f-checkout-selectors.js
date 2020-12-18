@@ -32,3 +32,13 @@ export const FIELDS = {
         error: ''
     }
 };
+
+export default {
+    ALLERGEN_LINK,
+    CHECKOUT_COMPONENT,
+    ORDER_TIME_DROPDOWN, 
+    ORDER_TIME_DROPDOWN_OPTIONS,
+    USER_NOTE_INPUT,
+    GO_TO_PAYMENT_BUTTON,
+    FIELDS
+};

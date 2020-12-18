@@ -8,7 +8,7 @@ import {
     USER_NOTE_INPUT,
     GO_TO_PAYMENT_BUTTON,
     FIELDS
-} from './f-checkout.selectors';
+} from './f-checkout-selectors';
 
 const { doesElementExist } = require('../../../../test/utils/webdriverio-extensions')(browser);
 
@@ -131,9 +131,6 @@ exports.getUserNoteLength = () => {
 exports.submit = () => {
     goToPaymentButton().click();
 };
-/**
- * @description
- *Submit the checkout form.
- */
+
 exports.doesErrorMessageExist = errorMessage => doesElementExist(FIELDS[errorMessage].error);
 exports.doesInputFieldExist = inputField => doesElementExist(FIELDS[inputField].input);

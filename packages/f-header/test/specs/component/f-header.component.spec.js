@@ -1,6 +1,6 @@
 import HeaderComponent from '../../../test-utils/component-objects/f-header.component';
 import forEach from 'mocha-each';
-const path = '/iframe.html?id=components-organisms--' // storybook url for all components - could move to config.
+const path = 'iframe.html?id=components-organisms--' // storybook url for all components - could move to config.
 const offers = '&knob-Show%20offers%20link=true'
 const delivery = '&knob-Show%20delivery%20enquiry=true'
 

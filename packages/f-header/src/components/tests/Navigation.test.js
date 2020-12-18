@@ -658,7 +658,7 @@ describe('Navigation', () => {
             });
 
             // Assert
-            expect(wrapper.find('[data-test-id="user-info-link"]').classes()).toContain('is-hidden');
+            expect(wrapper.find('[data-test-id="user-info-icon"]').classes()).toContain('is-hidden');
         });
     });
 
