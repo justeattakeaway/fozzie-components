@@ -71,7 +71,7 @@
                     v-if="showDeliveryEnquiry && !isBelowMid"
                     class="c-nav-list-item"
                     data-test-id="delivery-enquiry">
-                    <a 
+                    <a
                         data-test-id="delivery-link"
                         :data-trak='`{
                             "trakEvent": "click",
