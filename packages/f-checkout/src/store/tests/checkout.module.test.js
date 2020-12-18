@@ -30,7 +30,7 @@ const defaultState = {
     isLoggedIn: false
 };
 
-const { updateState, updateAuth } = CheckoutModule.mutations;
+const { UPDATE_STATE, UPDATE_AUTH } = CheckoutModule.mutations;
 const { getCheckout, postCheckout, setAuthToken } = CheckoutModule.actions;
 let state = CheckoutModule.state();
 
@@ -45,10 +45,10 @@ describe('CheckoutModule', () => {
             state = defaultState;
         });
 
-        describe('updateState ::', () => {
+        describe('UPDATE_STATE ::', () => {
             it('should update state with delivery response.', () => {
                 // Act
-                updateState(state, checkoutDelivery);
+                UPDATE_STATE(state, checkoutDelivery);
 
                 // Assert
                 expect(state).toMatchSnapshot();
@@ -59,7 +59,7 @@ describe('CheckoutModule', () => {
                 checkoutDelivery.customer = null;
 
                 // Act
-                updateState(state, checkoutDelivery);
+                UPDATE_STATE(state, checkoutDelivery);
 
                 // Assert
                 expect(state.customer).toEqual(defaultState.customer);
@@ -70,17 +70,17 @@ describe('CheckoutModule', () => {
                 checkoutDelivery.fulfilment.address = null;
 
                 // Act
-                updateState(state, checkoutDelivery);
+                UPDATE_STATE(state, checkoutDelivery);
 
                 // Assert
                 expect(state.fulfilment.address).toEqual(defaultState.fulfilment.address);
             });
         });
 
-        describe('updateAuth ::', () => {
+        describe('UPDATE_AUTH ::', () => {
             it('should update state with authToken and set `isLoggedIn` to true', () => {
                 // Act
-                updateAuth(state, authToken);
+                UPDATE_AUTH(state, authToken);
 
                 // Assert
                 expect(state.authToken).toEqual(authToken);
@@ -118,13 +118,13 @@ describe('CheckoutModule', () => {
                 axios.get = jest.fn(() => Promise.resolve({ data: checkoutDelivery }));
             });
 
-            it('should get the checkout details from the backend and call `updateState` mutation.', async () => {
+            it('should get the checkout details from the backend and call `UPDATE_STATE` mutation.', async () => {
                 // Act
                 await getCheckout({ commit }, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                expect(commit).toHaveBeenCalledWith('updateState', checkoutDelivery);
+                expect(commit).toHaveBeenCalledWith('UPDATE_STATE', checkoutDelivery);
             });
         });
 
@@ -158,12 +158,12 @@ describe('CheckoutModule', () => {
         });
 
         describe('setAuthToken ::', () => {
-            it('should call `updateAuth` mutation.', async () => {
+            it('should call `UPDATE_AUTH` mutation.', async () => {
                 // Act
                 setAuthToken({ commit }, authToken);
 
                 // Assert
-                expect(commit).toHaveBeenCalledWith('updateAuth', authToken);
+                expect(commit).toHaveBeenCalledWith('UPDATE_AUTH', authToken);
             });
         });
     });

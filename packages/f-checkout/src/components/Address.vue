@@ -131,22 +131,22 @@ export default {
             return this.$v.addressValidations[field].$dirty && !this.$v.addressValidations[field].required;
         },
         updateAddressLine1(value) {
-            this.$store.dispatch('checkout/updateFulfilmentAddress', {
+            this.updateFulfilmentAddress({
                 "line1": value
             })
         },
         updateAddressLine2(value) {
-            this.$store.dispatch('checkout/updateFulfilmentAddress', {
+            this.updateFulfilmentAddress({
                 "line2": value
             })
         },
         updateAddressCity(value) {
-            this.$store.dispatch('checkout/updateFulfilmentAddress', {
+            this.updateFulfilmentAddress({
                 "city": value
             })
         },
         updateAddressPostcode(value) {
-            this.$store.dispatch('checkout/updateFulfilmentAddress', {
+            this.updateFulfilmentAddress({
                 "postcode": value
             })
         }

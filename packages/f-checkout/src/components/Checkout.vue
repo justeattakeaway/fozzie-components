@@ -231,7 +231,8 @@ export default {
         ...mapActions('checkout', [
             'getCheckout',
             'postCheckout',
-            'setAuthToken'
+            'setAuthToken',
+            'updateMobileNumber'
         ]),
 
         /**
@@ -346,9 +347,6 @@ export default {
         */
         isValidPostcode () {
             return validations.isValidPostcode(this.fulfilment.address.postcode, this.$i18n.locale);
-        },
-        updateMobileNumber (value) {
-            this.$store.dispatch('checkout/updateMobileNumber', value)
         }
     },
 
