@@ -202,11 +202,11 @@ export default {
 
     watch: {
         async checkoutUrl () {
-            await Promise.all([this.loadCheckout(), this.loadAvailableFulfilment()]);
+            await this.loadCheckout();
         },
 
         async checkoutAvailableFulfilmentUrl () {
-            await Promise.all([this.loadCheckout(), this.loadAvailableFulfilment()]);
+            await this.loadAvailableFulfilment();
         },
 
         authToken () {
