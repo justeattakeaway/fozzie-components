@@ -97,7 +97,7 @@ export default {
          * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getAvailableFulfilment: async ({ commit }, payload) => {
+        getAvailableFulfilment: async ({ commit }, { url, tenant, timeout }) => {
             // TODO: deal with exceptions.
             const { url, tenant, timeout } = payload;
 
