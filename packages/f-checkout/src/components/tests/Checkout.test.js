@@ -269,6 +269,66 @@ describe('Checkout', () => {
         });
     });
 
+    describe('mounted ::', () => {
+        it('should call `setAuthToken`', () => {
+            // Arrange & Act
+            const setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
+
+            const propsData = {
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl,
+                authToken: 'mytoken'
+            };
+
+            shallowMount(VueCheckout, {
+                store: createStore(),
+                i18n,
+                localVue,
+                propsData
+            });
+
+            expect(setAuthTokenSpy).toHaveBeenCalledWith(propsData.authToken);
+        });
+
+        it('should call `loadCheckout`', () => {
+            // Arrange & Act
+            const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
+
+            const propsData = {
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl
+            };
+
+            shallowMount(VueCheckout, {
+                store: createStore(),
+                i18n,
+                localVue,
+                propsData
+            });
+
+            expect(loadCheckoutSpy).toHaveBeenCalled();
+        });
+
+        it('should call `loadAvailableFulfilment`', () => {
+            // Arrange & Act
+            const loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
+
+            const propsData = {
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl
+            };
+
+            shallowMount(VueCheckout, {
+                store: createStore(),
+                i18n,
+                localVue,
+                propsData
+            });
+
+            expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
+        });
+    });
+
     describe('when form submitted', () => {
         describe('if serviceType set to `collection`', () => {
             const propsData = {
@@ -479,55 +539,83 @@ describe('Checkout', () => {
         });
     });
 
-    describe('when form is loaded', () => {
+    describe('methods ::', () => {
         const propsData = {
             checkoutUrl,
             checkoutAvailableFulfilmentUrl
         };
 
-        describe('when request fails', () => {
-            let wrapper;
+        describe('loadCheckout ::', () => {
+            describe('when `getCheckout` request fails', () => {
+                let wrapper;
 
-            beforeEach(() => {
-                wrapper = mount(VueCheckout, {
-                    store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.reject()) }),
-                    i18n,
-                    localVue,
-                    propsData
+                beforeEach(() => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.reject()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should emit failure event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
                 });
             });
 
-            it('should emit failure event', async () => {
-                expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
+            describe('when `getCheckout` request succeeds', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should emit success event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutGetSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutGetFailure)).toBeUndefined();
+                });
             });
         });
 
-        describe('when request succeeds', () => {
-            let wrapper;
+        describe('loadAvailableFulfilment ::', () => {
+            describe('when `getAvailableFulfilment` request fails', () => {
+                let wrapper;
 
-            beforeEach(() => {
-                wrapper = mount(VueCheckout, {
-                    store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()) }),
-                    i18n,
-                    localVue,
-                    propsData
+                beforeEach(() => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, getAvailableFulfilment: jest.fn(async () => Promise.reject()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should emit failure event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure).length).toBe(1);
                 });
             });
 
-            it('should emit success event', async () => {
-                expect(wrapper.emitted(EventNames.CheckoutGetSuccess).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutGetFailure)).toBeUndefined();
-            });
+            describe('when `getAvailableFulfilment` request succeeds', () => {
+                let wrapper;
 
-            it('should set mobile number', async () => {
-                expect(wrapper.find('[data-test-id="formfield-mobile-number-input"]').element.value).toBe(defaultState.customer.mobileNumber);
-            });
+                beforeEach(() => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, getAvailableFulfilment: jest.fn(async () => Promise.resolve()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
 
-            it('should set address fields', async () => {
-                expect(wrapper.find('[data-test-id="formfield-address-line-1-input"]').element.value).toBe(defaultState.fulfilment.address.line1);
-                expect(wrapper.find('[data-test-id="formfield-address-line-2-input"]').element.value).toBe(defaultState.fulfilment.address.line2);
-                expect(wrapper.find('[data-test-id="formfield-address-city-input"]').element.value).toBe(defaultState.fulfilment.address.city);
-                expect(wrapper.find('[data-test-id="formfield-address-postcode-input"]').element.value).toBe(defaultState.fulfilment.address.postcode);
+                it('should emit success event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure)).toBeUndefined();
+                });
             });
         });
     });

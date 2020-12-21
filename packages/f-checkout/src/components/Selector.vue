@@ -37,8 +37,7 @@ export default {
         },
 
         /*
-        * Returns an array of formatted dates to
-        * display as options in a dropdown
+        * Returns an array of formatted dates to display as options in a dropdown
         */
         fulfilmentTimes () {
             const times = this.availableFulfilment.isAsapAvailable

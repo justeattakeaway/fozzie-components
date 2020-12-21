@@ -202,8 +202,11 @@ export default {
 
     watch: {
         async checkoutUrl () {
-            await this.loadCheckout();
-            await this.loadAvailableFulfilment();
+            await Promise.all([this.loadCheckout(), this.loadAvailableFulfilment()]);
+        },
+
+        async checkoutAvailableFulfilmentUrl () {
+            await Promise.all([this.loadCheckout(), this.loadAvailableFulfilment()]);
         },
 
         authToken () {
@@ -213,8 +216,7 @@ export default {
 
     async mounted () {
         this.setAuthToken(this.authToken);
-        await this.loadCheckout();
-        await this.loadAvailableFulfilment();
+        await Promise.all([this.loadCheckout(), this.loadAvailableFulfilment()]);
     },
 
     created () {
