@@ -205,7 +205,7 @@ describe('Selector', () => {
             it('should update `selectedAvailableFulfilmentTime` with the value passed', () => {
                 // Arrange
                 const wrapper = shallowMount(Selector, {
-                    store: createStore({ ...defaultState }),
+                    store: createStore(),
                     i18n,
                     localVue,
                     propsData
@@ -232,7 +232,7 @@ describe('Selector', () => {
             const selectionChangedSpy = jest.spyOn(Selector.methods, 'selectionChanged');
 
             shallowMount(Selector, {
-                store: createStore({ ...defaultState }),
+                store: createStore(),
                 i18n,
                 localVue,
                 propsData
@@ -247,7 +247,7 @@ describe('Selector', () => {
             const selectionChangedSpy = jest.spyOn(Selector.methods, 'selectionChanged');
 
             shallowMount(Selector, {
-                store: createStore({ ...defaultState }),
+                store: createStore(),
                 i18n,
                 localVue,
                 propsData,

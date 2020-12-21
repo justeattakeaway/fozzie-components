@@ -562,6 +562,7 @@ describe('Checkout', () => {
                 });
 
                 it('should emit failure event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
                 });
             });
@@ -599,6 +600,7 @@ describe('Checkout', () => {
                 });
 
                 it('should emit failure event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure).length).toBe(1);
                 });
             });
