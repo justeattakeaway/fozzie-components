@@ -445,7 +445,10 @@ describe('Checkout', () => {
 
                 wrapper = mount(VueCheckout, {
                     store: createStore(state, {
-                        ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()), postCheckout: jest.fn(async () => Promise.resolve()), getAvailableFulfilment: jest.fn(async () => Promise.resolve())
+                        ...defaultActions,
+                        getCheckout: jest.fn(async () => Promise.resolve()),
+                        postCheckout: jest.fn(async () => Promise.resolve()),
+                        getAvailableFulfilment: jest.fn(async () => Promise.resolve())
                     }),
                     i18n,
                     localVue,
