@@ -60,7 +60,9 @@ const defaultActions = {
 
 const i18n = {
     locale: 'en-GB',
-    messages: tenantConfigs['en-GB'].messages,
+    messages: {
+        'en-GB': tenantConfigs['en-GB'].messages
+    },
     dateTimeFormats: {
         'en-GB': tenantConfigs['en-GB'].dateTimeFormats
     }

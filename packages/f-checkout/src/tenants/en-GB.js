@@ -28,6 +28,8 @@ const messages = {
         }
     },
 
+    asapFulfilmentOption: 'As soon as possible',
+
     errorMessages: {
         errorHeading: 'Error',
         genericServerError: 'Something went wrong, please try again later'

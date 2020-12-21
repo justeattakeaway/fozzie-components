@@ -50,29 +50,23 @@ const defaultState = {
     messages: []
 };
 
-const defaultActions = {
-    getCheckout: jest.fn(),
-    postCheckout: jest.fn(),
-    getAvailableFulfilment: jest.fn()
-};
-
 const i18n = {
     locale: 'en-GB',
-    messages: tenantConfigs['en-GB'].messages,
+    messages: {
+        'en-GB': tenantConfigs['en-GB'].messages
+    },
     dateTimeFormats: {
         'en-GB': tenantConfigs['en-GB'].dateTimeFormats
     }
 };
 
-const createStore = (state = defaultState, actions = defaultActions) => new Vuex.Store({
+const createStore = (state = defaultState) => new Vuex.Store({
     modules: {
         checkout: {
             namespaced: true,
-            state,
-            actions
+            state
         }
-    },
-    hasModule: jest.fn(() => true)
+    }
 });
 
 describe('Selector', () => {
@@ -225,6 +219,23 @@ describe('Selector', () => {
                 // Assert
                 expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe(selectedTime);
             });
+        });
+    });
+
+    describe('mounted ::', () => {
+        it('should call `selectionChanged` with the first fulfilment time', () => {
+            // Arrange & Act
+            const selectionChangedSpy = jest.spyOn(Selector.methods, 'selectionChanged');
+
+            shallowMount(Selector, {
+                store: createStore({ ...defaultState }),
+                i18n,
+                localVue,
+                propsData
+            });
+
+            // Assert
+            expect(selectionChangedSpy).toHaveBeenCalledWith('As soon as possible');
         });
     });
 });

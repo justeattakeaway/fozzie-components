@@ -42,7 +42,7 @@ export default {
         */
         fulfilmentTimes () {
             const times = this.availableFulfilment.isAsapAvailable
-                ? ['As soon as possible']
+                ? [this.$t('asapFulfilmentOption')]
                 : [];
 
             this.availableFulfilment.times.forEach(time => {
