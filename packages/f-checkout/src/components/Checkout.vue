@@ -289,7 +289,7 @@ export default {
         },
 
         /**
-         * Load the checkout details while emitting events to communicate its success or failure.
+         * Load the available fulfilment details while emitting events to communicate its success or failure.
          *
          */
         async loadAvailableFulfilment () {
