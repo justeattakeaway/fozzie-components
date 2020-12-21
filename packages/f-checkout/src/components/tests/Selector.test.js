@@ -223,6 +223,10 @@ describe('Selector', () => {
     });
 
     describe('mounted ::', () => {
+        afterEach(() => {
+            jest.clearAllMocks();
+        });
+
         it('should call `selectionChanged` with the first fulfilment time', () => {
             // Arrange & Act
             const selectionChangedSpy = jest.spyOn(Selector.methods, 'selectionChanged');
@@ -236,6 +240,26 @@ describe('Selector', () => {
 
             // Assert
             expect(selectionChangedSpy).toHaveBeenCalledWith('As soon as possible');
+        });
+
+        it('should not call `selectionChanged` when there are no fulfilment times', () => {
+            // Arrange & Act
+            const selectionChangedSpy = jest.spyOn(Selector.methods, 'selectionChanged');
+
+            shallowMount(Selector, {
+                store: createStore({ ...defaultState }),
+                i18n,
+                localVue,
+                propsData,
+                computed: {
+                    fulfilmentTimes () {
+                        return [];
+                    }
+                }
+            });
+
+            // Assert
+            expect(selectionChangedSpy).not.toHaveBeenCalled();
         });
     });
 });

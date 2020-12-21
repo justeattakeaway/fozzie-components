@@ -55,7 +55,9 @@ export default {
     },
 
     mounted () {
-        this.selectionChanged(this.fulfilmentTimes[0]);
+        if (this.fulfilmentTimes.length > 0) {
+            this.selectionChanged(this.fulfilmentTimes[0]);
+        }
     },
 
     methods: {
