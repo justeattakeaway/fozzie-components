@@ -41,10 +41,8 @@ export default {
          * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getCheckout: async ({ commit }, payload) => {
+        getCheckout: async ({ commit }, { url, tenant, timeout }) => {
             // TODO: deal with exceptions.
-            const { url, tenant, timeout } = payload;
-
             const config = {
                 method: 'get',
                 headers: {
@@ -67,12 +65,10 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         // eslint-disable-next-line no-unused-vars
-        postCheckout: async ({ commit, state }, payload) => {
+        postCheckout: async ({ commit, state }, {
+            url, tenant, data, timeout
+        }) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
-            const {
-                url, tenant, data, timeout
-            } = payload;
-
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
             const config = {
@@ -99,8 +95,6 @@ export default {
          */
         getAvailableFulfilment: async ({ commit }, { url, tenant, timeout }) => {
             // TODO: deal with exceptions.
-            const { url, tenant, timeout } = payload;
-
             const config = {
                 method: 'get',
                 headers: {
