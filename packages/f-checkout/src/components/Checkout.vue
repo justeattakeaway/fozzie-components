@@ -114,6 +114,11 @@ export default {
             required: true
         },
 
+        checkoutAvailableFulfilmentUrl: {
+            type: String,
+            required: true
+        },
+
         checkoutTimeout: {
             type: Number,
             required: false,
@@ -198,6 +203,7 @@ export default {
     watch: {
         async checkoutUrl () {
             await this.loadCheckout();
+            await this.loadAvailableFulfilment();
         },
 
         authToken () {
@@ -208,6 +214,7 @@ export default {
     async mounted () {
         this.setAuthToken(this.authToken);
         await this.loadCheckout();
+        await this.loadAvailableFulfilment();
     },
 
     created () {
@@ -230,6 +237,7 @@ export default {
         ...mapActions('checkout', [
             'getCheckout',
             'postCheckout',
+            'getAvailableFulfilment',
             'setAuthToken'
         ]),
 
@@ -275,6 +283,24 @@ export default {
                 this.$emit(EventNames.CheckoutGetSuccess); // TODO: Check these emitted events.
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutGetFailure, thrownErrors); // TODO: Check these emitted events.
+            }
+        },
+
+        /**
+         * Load the checkout details while emitting events to communicate its success or failure.
+         *
+         */
+        async loadAvailableFulfilment () {
+            try {
+                await this.getAvailableFulfilment({
+                    url: this.checkoutAvailableFulfilmentUrl,
+                    tenant: this.tenant,
+                    timeout: this.getCheckoutTimeout
+                });
+
+                this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess); // TODO: Check these emitted events.
+            } catch (thrownErrors) {
+                this.$emit(EventNames.CheckoutAvailableFulfilmentGetFailure, thrownErrors); // TODO: Check these emitted events.
             }
         },
 

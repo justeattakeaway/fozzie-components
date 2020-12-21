@@ -1,4 +1,4 @@
-export default {
+const messages = {
     locale: 'en-GB',
 
     labels: {
@@ -36,4 +36,15 @@ export default {
     buttonText: 'Go to payment',
 
     allergyText: 'If you or someone you’re ordering for has a food allergy or intolerance, click here'
+};
+
+const dateTimeFormats = {
+    short: {
+        weekday: 'long', hour: 'numeric', minute: 'numeric', hour12: false
+    }
+};
+
+export default {
+    messages,
+    dateTimeFormats
 };

@@ -9,32 +9,10 @@
     "emailAddress": "joe.bloggs@justeattakeaway.com"
   },
   "fulfilment": {
-    "times": [
-      {
-        "label": {
-          "text": "As soon as possible"
-        },
-        "from": "2020-01-01T00:00+00:00",
-        "to": "2020-01-01T00:00+00:00",
-        "selected": true
-      },
-      {
-        "label": {
-          "text": "Monday 00:15"
-        },
-        "from": "2020-01-01T00:15+00:00",
-        "to": "2020-01-01T00:15+00:00",
-        "selected": false
-      },
-      {
-        "label": {
-          "text": "Monday 00:30"
-        },
-        "from": "2020-01-01T00:30+00:00",
-        "to": "2020-01-01T00:30+00:00",
-        "selected": false
-      }
-    ],
+    "time": {
+      "from": "2020-01-01T00:00+00:00",
+      "to": "2020-01-01T00:00+00:00"
+    },
     "address": {
       "lines": [
         "1 Bristol Road",

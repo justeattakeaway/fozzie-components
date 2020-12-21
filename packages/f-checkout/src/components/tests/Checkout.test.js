@@ -13,12 +13,12 @@ localVue.use(Vuex);
 
 const fulfilmentTimes = [
     {
-        from: '2020-01-01T00:00+00:00',
-        label: {
-            text: 'time 1'
-        },
-        selected: false,
-        to: '2020-01-01T00:00+00:00'
+        from: '2020-01-01T01:00:00.000Z',
+        to: '2020-01-01T01:00:00.000Z'
+    },
+    {
+        from: '2020-01-01T01:15:00.000Z',
+        to: '2020-01-01T01:15:00.000Z'
     }
 ];
 
@@ -30,13 +30,20 @@ const defaultState = {
         mobileNumber: '+447111111111'
     },
     fulfilment: {
-        times: fulfilmentTimes,
+        time: {
+            from: '',
+            to: ''
+        },
         address: {
             line1: '1 Bristol Road',
             line2: 'Flat 1',
             city: 'Bristol',
             postcode: 'BS1 1AA'
         }
+    },
+    availableFulfilment: {
+        times: fulfilmentTimes,
+        isAsapAvailable: true
     },
     notes: [],
     isFulfillable: true,
@@ -47,12 +54,16 @@ const defaultState = {
 const defaultActions = {
     getCheckout: jest.fn(),
     postCheckout: jest.fn(),
+    getAvailableFulfilment: jest.fn(),
     setAuthToken: jest.fn()
 };
 
 const i18n = {
     locale: 'en-GB',
-    messages: tenantConfigs['en-GB']
+    messages: tenantConfigs['en-GB'].messages,
+    dateTimeFormats: {
+        'en-GB': tenantConfigs['en-GB'].dateTimeFormats
+    }
 };
 
 const createStore = (state = defaultState, actions = defaultActions) => new Vuex.Store({
@@ -68,10 +79,11 @@ const createStore = (state = defaultState, actions = defaultActions) => new Vuex
 
 describe('Checkout', () => {
     allure.feature('Checkout');
-    const checkoutUrl = 'http://localhost/account/register';
+    const checkoutUrl = 'http://localhost/checkout';
+    const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
 
     it('should be defined', () => {
-        const propsData = { checkoutUrl };
+        const propsData = { checkoutUrl, checkoutAvailableFulfilmentUrl };
 
         const wrapper = shallowMount(VueCheckout, {
             i18n,
@@ -91,7 +103,8 @@ describe('Checkout', () => {
         it('should register the `checkout` module if it doesn\'t exist in the store', () => {
             // Arrange
             const propsData = {
-                checkoutUrl
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl
             };
 
             const store = new Vuex.Store({});
@@ -113,7 +126,8 @@ describe('Checkout', () => {
         it('should not register the `checkout` module if it already exists in the store', () => {
             // Arrange
             const propsData = {
-                checkoutUrl
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl
             };
 
             const store = createStore();
@@ -138,7 +152,8 @@ describe('Checkout', () => {
             it('should display the address block if set to `delivery`', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutUrl
+                    checkoutUrl,
+                    checkoutAvailableFulfilmentUrl
                 };
 
                 // Act
@@ -158,7 +173,8 @@ describe('Checkout', () => {
             it('should not display the address block if set to `collection`', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutUrl
+                    checkoutUrl,
+                    checkoutAvailableFulfilmentUrl
                 };
 
                 // Act
@@ -183,10 +199,12 @@ describe('Checkout', () => {
                 // Arrange
                 const propsData = {
                     checkoutUrl,
+                    checkoutAvailableFulfilmentUrl,
                     authToken: 'sampleToken'
                 };
 
                 const setAuthToken = jest.fn();
+
                 // Act
                 shallowMount(VueCheckout, {
                     store: createStore(defaultState, { ...defaultActions, setAuthToken }),
@@ -206,7 +224,8 @@ describe('Checkout', () => {
             it('should capitalize `firstName` data', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutUrl
+                    checkoutUrl,
+                    checkoutAvailableFulfilmentUrl
                 };
 
                 // Act
@@ -228,7 +247,8 @@ describe('Checkout', () => {
             it('should add `name` to title text', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutUrl
+                    checkoutUrl,
+                    checkoutAvailableFulfilmentUrl
                 };
 
                 // Act
@@ -250,7 +270,8 @@ describe('Checkout', () => {
     describe('when form submitted', () => {
         describe('if serviceType set to `collection`', () => {
             const propsData = {
-                checkoutUrl
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl
             };
 
             let wrapper;
@@ -341,7 +362,8 @@ describe('Checkout', () => {
 
         describe('if serviceType set to `delivery`', () => {
             const propsData = {
-                checkoutUrl
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl
             };
 
             let wrapper;
@@ -360,7 +382,9 @@ describe('Checkout', () => {
                 };
 
                 wrapper = mount(VueCheckout, {
-                    store: createStore(state, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()), postCheckout: jest.fn(async () => Promise.resolve()) }),
+                    store: createStore(state, {
+                        ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()), postCheckout: jest.fn(async () => Promise.resolve()), getAvailableFulfilment: jest.fn(async () => Promise.resolve())
+                    }),
                     i18n,
                     localVue,
                     propsData
@@ -455,7 +479,8 @@ describe('Checkout', () => {
 
     describe('when form is loaded', () => {
         const propsData = {
-            checkoutUrl
+            checkoutUrl,
+            checkoutAvailableFulfilmentUrl
         };
 
         describe('when request fails', () => {

@@ -3,6 +3,10 @@
 exports[`CheckoutModule mutations :: updateState :: should update state with delivery response. 1`] = `
 Object {
   "authToken": "",
+  "availableFulfilment": Object {
+    "isAsapAvailable": true,
+    "times": Array [],
+  },
   "customer": Object {
     "firstName": "Joe",
     "mobileNumber": "+447111111111",
@@ -14,32 +18,10 @@ Object {
       "line2": "Flat 1",
       "postcode": "BS1 1AA",
     },
-    "times": Array [
-      Object {
-        "from": "2020-01-01T00:00+00:00",
-        "label": Object {
-          "text": "As soon as possible",
-        },
-        "selected": true,
-        "to": "2020-01-01T00:00+00:00",
-      },
-      Object {
-        "from": "2020-01-01T00:15+00:00",
-        "label": Object {
-          "text": "Monday 00:15",
-        },
-        "selected": false,
-        "to": "2020-01-01T00:15+00:00",
-      },
-      Object {
-        "from": "2020-01-01T00:30+00:00",
-        "label": Object {
-          "text": "Monday 00:30",
-        },
-        "selected": false,
-        "to": "2020-01-01T00:30+00:00",
-      },
-    ],
+    "time": Object {
+      "from": "2020-01-01T00:00+00:00",
+      "to": "2020-01-01T00:00+00:00",
+    },
   },
   "id": "12345",
   "isFulfillable": true,

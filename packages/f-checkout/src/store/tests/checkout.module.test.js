@@ -14,7 +14,10 @@ const defaultState = {
         mobileNumber: ''
     },
     fulfilment: {
-        times: [],
+        time: {
+            from: '',
+            to: ''
+        },
         address: {
             line1: '',
             line2: '',
@@ -26,6 +29,10 @@ const defaultState = {
     isFulfillable: true,
     notices: [],
     messages: [],
+    availableFulfilment: {
+        times: [],
+        isAsapAvailable: true
+    },
     authToken: '',
     isLoggedIn: false
 };

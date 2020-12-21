@@ -15,9 +15,11 @@ Vue.use(Vuex);
 
 const deliveryUrl = '/checkout-delivery.json';
 const collectionUrl = '/checkout-collection.json';
+const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
 
 CheckoutMock.setupCheckoutMethod(deliveryUrl);
 CheckoutMock.setupCheckoutMethod(collectionUrl);
+CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentUrl);
 
 export default {
     title: 'Components/Organisms',
@@ -33,13 +35,16 @@ export const CheckoutComponent = () => ({
         checkoutUrl: {
             default: select('Checkout Url', [deliveryUrl, collectionUrl], deliveryUrl)
         },
+        checkoutAvailableFulfilmentUrl: {
+            default: select('Available Fulfilment Url', [checkoutAvailableFulfilmentUrl], checkoutAvailableFulfilmentUrl)
+        },
         authToken: {
             default: text('Auth token', '')
         }
     },
     store: new Vuex.Store({}),
     template:
-        '<vue-checkout :checkoutUrl="checkoutUrl" :locale="locale" :authToken="authToken" />'
+        '<vue-checkout :checkoutUrl="checkoutUrl" :checkout-available-fulfilment-url="checkoutAvailableFulfilmentUrl" :authToken="authToken" :locale="locale" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';

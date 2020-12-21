@@ -11,7 +11,10 @@ export default {
             mobileNumber: ''
         },
         fulfilment: {
-            times: [],
+            time: {
+                from: '',
+                to: ''
+            },
             address: {
                 line1: '',
                 line2: '',
@@ -23,6 +26,10 @@ export default {
         isFulfillable: true,
         notices: [],
         messages: [],
+        availableFulfilment: {
+            times: [],
+            isAsapAvailable: true
+        },
         authToken: '',
         isLoggedIn: false
     }),
@@ -84,6 +91,30 @@ export default {
             const response = await axios.post(url, data, config);
         },
 
+        /**
+         * Get the fulfilment details from the backend and update the state.
+         *
+         * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getAvailableFulfilment: async ({ commit }, payload) => {
+            // TODO: deal with exceptions.
+            const { url, tenant, timeout } = payload;
+
+            const config = {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Tenant': tenant
+                },
+                timeout
+            };
+
+            const { data } = await axios.get(url, config);
+
+            commit('updateAvailableFulfilment', data);
+        },
+
         setAuthToken: ({ commit }, authToken) => {
             commit('updateAuth', authToken);
         }
@@ -108,7 +139,7 @@ export default {
                 state.customer.mobileNumber = customer.phoneNumber;
             }
 
-            state.fulfilment.times = fulfilment.times;
+            state.fulfilment.time = fulfilment.time;
 
             if (fulfilment.address) {
                 /* eslint-disable prefer-destructuring */
@@ -124,6 +155,14 @@ export default {
             state.isFulfillable = isFulfillable;
             state.notices = notices;
             state.messages = messages;
+        },
+
+        updateAvailableFulfilment: (state, {
+            times,
+            asapAvailable
+        }) => {
+            state.availableFulfilment.times = times;
+            state.availableFulfilment.isAsapAvailable = asapAvailable;
         },
 
         updateAuth: (state, authToken) => {
