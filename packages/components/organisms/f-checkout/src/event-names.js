@@ -4,6 +4,7 @@ const CheckoutGetSuccess = 'checkout-get-success';
 const CheckoutGetFailure = 'checkout-get-failure';
 const CheckoutAvailableFulfilmentGetSuccess = 'checkout-available-fulfilment-get-success';
 const CheckoutAvailableFulfilmentGetFailure = 'checkout-available-fulfilment-get-failure';
+const CheckoutVisitLoginPage = 'checkout-visit-login-page';
 
 export default {
     CheckoutSuccess,
@@ -11,5 +12,6 @@ export default {
     CheckoutGetSuccess,
     CheckoutGetFailure,
     CheckoutAvailableFulfilmentGetSuccess,
-    CheckoutAvailableFulfilmentGetFailure
+    CheckoutAvailableFulfilmentGetFailure,
+    CheckoutVisitLoginPage
 };

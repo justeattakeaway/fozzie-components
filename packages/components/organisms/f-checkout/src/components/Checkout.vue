@@ -28,8 +28,12 @@
                     ]">
                     <a
                         :href="loginUrl"
-                        data-test-id="account-login-link"
-                        @click="onVisitLoginPage">Not {{ name }}? Click here.</a>
+                        data-test-id="switch-user-link"
+                        @click="onVisitLoginPage">
+                        <i18n
+                            path="switchUserText">
+                            <template #name>{{ name }}</template>
+                        </i18n></a>
                 </p>
                 <form-field
                     v-model="customer.mobileNumber"
@@ -246,7 +250,7 @@ export default {
             'setAuthToken'
         ]),
         onVisitLoginPage () {
-            this.$emit(EventNames.VisitLoginPage);
+            this.$emit(EventNames.CheckoutVisitLoginPage);
         },
 
         /**

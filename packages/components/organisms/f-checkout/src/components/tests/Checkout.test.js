@@ -5,6 +5,7 @@ import { validations } from '@justeat/f-services';
 import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
+import tenantConfigs from '../../tenants';
 import Registration from '@justeat/f-registration/src/components/Registration';
 import {
     fulfilmentTimes, defaultState, defaultActions, i18n, createStore
@@ -73,11 +74,11 @@ describe('Checkout', () => {
         });
 
         // Act
-        const loginLink = wrapper.find("[data-test-id='account-login-link']");
+        const loginLink = wrapper.find("[data-test-id='switch-user-link']");
 
         // Assert
         expect(loginLink.exists()).toBe(true);
-        expect(loginLink.text()).toBe(`Not ${defaultState.customer.firstName}? Click here.`)
+        expect(loginLink.text()).toBe(`Not ${defaultState.customer.firstName}? Click here.`);
     });
 
     describe('created :: ', () => {
@@ -129,6 +130,25 @@ describe('Checkout', () => {
 
             // Assert
             expect(registerModuleSpy).not.toHaveBeenCalled();
+        });
+
+        it('should show emit VisitLoginPage event when login link is clicked.', () => {
+            // Arrange
+            const propsData = { checkoutUrl, loginUrl };
+
+            const wrapper = shallowMount(VueCheckout, {
+                i18n,
+                store: createStore(),
+                localVue,
+                propsData
+            });
+
+            // Act
+            const loginLink = wrapper.find("[data-test-id='switch-user-link']");
+            loginLink.trigger('click');
+
+            // Assert
+            expect(wrapper.emitted(EventNames.CheckoutVisitLoginPage).length).toBe(1);
         });
     });
 
