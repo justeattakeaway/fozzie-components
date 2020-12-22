@@ -1,7 +1,6 @@
 import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import { CHECKOUT_METHOD_DELIVERY } from '../../constants';
 import Address from '../Address.vue';
 import tenantConfigs from '../../tenants';
 
@@ -23,13 +22,16 @@ const fulfilmentTimes = [
 
 const defaultState = {
     id: '',
-    serviceType: CHECKOUT_METHOD_DELIVERY,
+    serviceType: '',
     customer: {
         firstName: 'John',
         mobileNumber: '+447111111111'
     },
     fulfilment: {
-        times: fulfilmentTimes,
+        time: {
+            from: '',
+            to: ''
+        },
         address: {
             line1: '1 Bristol Road',
             line2: 'Flat 1',
@@ -37,15 +39,14 @@ const defaultState = {
             postcode: 'BS1 1AA'
         }
     },
+    availableFulfilment: {
+        times: fulfilmentTimes,
+        isAsapAvailable: true
+    },
     notes: [],
     isFulfillable: true,
     notices: [],
     messages: []
-};
-
-const defaultActions = {
-    getCheckout: jest.fn(),
-    postCheckout: jest.fn()
 };
 
 const i18n = {
@@ -53,15 +54,13 @@ const i18n = {
     messages: tenantConfigs['en-GB']
 };
 
-const createStore = (state = defaultState, actions = defaultActions) => new Vuex.Store({
+const createStore = (state = defaultState) => new Vuex.Store({
     modules: {
         checkout: {
             namespaced: true,
-            state,
-            actions
+            state
         }
-    },
-    hasModule: jest.fn(() => true)
+    }
 });
 
 const $v = {
