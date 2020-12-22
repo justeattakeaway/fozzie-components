@@ -1,7 +1,7 @@
 import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
-import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
-import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { CHECKOUT_METHOD_DELIVERY } from '../../constants';
 import Address from '../Address.vue';
 import tenantConfigs from '../../tenants';
 
@@ -89,7 +89,7 @@ describe('Address', () => {
 
     it('should be defined', () => {
         // Arrange
-        const wrapper = mount(Address, {
+        const wrapper = shallowMount(Address, {
             i18n,
             store: createStore(),
             localVue,
@@ -105,11 +105,12 @@ describe('Address', () => {
 
     describe('computed ::', () => {
         const isFieldEmptySpy = jest.spyOn(Address.methods, 'isFieldEmpty');
+        let wrapper;
 
         describe('isAddressLine1Empty ::', () => {
             it('should call `isFieldEmpty` with argument `line1`', async () => {
                 // Act
-                const wrapper = mount(Address, {
+                wrapper = shallowMount(Address, {
                     i18n,
                     store: createStore(),
                     localVue,
@@ -126,8 +127,8 @@ describe('Address', () => {
 
         describe('isAddressCityEmpty ::', () => {
             it('should call `isFieldEmpty` with argument `city`', async () => {
-                 // Arrange & Act
-                const wrapper = mount(Address, {
+                // Arrange & Act
+                wrapper = shallowMount(Address, {
                     i18n,
                     store: createStore(),
                     localVue,
@@ -144,8 +145,8 @@ describe('Address', () => {
 
         describe('isAddressPostcodeEmpty ::', () => {
             it('should call `isFieldEmpty` with argument `postcode`', async () => {
-                 // Arrange & Act
-                const wrapper = mount(Address, {
+                // Arrange & Act
+                wrapper = shallowMount(Address, {
                     i18n,
                     store: createStore(),
                     localVue,
@@ -161,12 +162,12 @@ describe('Address', () => {
         });
 
         describe('isAddressPostcodeValid ::', () => {
-            it('should return false if postcode field has been touched, is not Valid and is not empty', async () => {
+            it('should return `false` if postcode field has been touched, is not Valid and is not empty', async () => {
                 // Arrange && Act
-                $v.addressValidations.postcode.$dirty = true
+                $v.addressValidations.postcode.$dirty = true;
                 $v.addressValidations.postcode.isValidPostcode = false;
 
-                const wrapper = mount(Address, {
+                wrapper = shallowMount(Address, {
                     i18n,
                     store: createStore(),
                     localVue,
@@ -176,7 +177,7 @@ describe('Address', () => {
                     }),
                     computed: {
                         isAddressPostcodeEmpty () {
-                            return false
+                            return false;
                         }
                     }
                 });
@@ -185,12 +186,12 @@ describe('Address', () => {
                 expect(wrapper.vm.isAddressPostcodeValid).toEqual(false);
             });
 
-            it('should return true if postcode field has been touched, is Valid and is not empty', async () => {
+            it('should return `true` if postcode field has been touched, is Valid and is not empty', async () => {
                 // Arrange && Act
-                $v.addressValidations.postcode.$dirty = true
+                $v.addressValidations.postcode.$dirty = true;
                 $v.addressValidations.postcode.isValidPostcode = true;
 
-                const wrapper = mount(Address, {
+                wrapper = shallowMount(Address, {
                     i18n,
                     store: createStore(),
                     localVue,
@@ -200,7 +201,7 @@ describe('Address', () => {
                     }),
                     computed: {
                         isAddressPostcodeEmpty () {
-                            return false
+                            return false;
                         }
                     }
                 });
@@ -209,12 +210,12 @@ describe('Address', () => {
                 expect(wrapper.vm.isAddressPostcodeValid).toEqual(true);
             });
 
-            it('should return false if postcode field has been touched, is not Valid and is empty', async () => {
+            it('should return `false` if postcode field has been touched, is not Valid and is empty', async () => {
                 // Arrange && Act
-                $v.addressValidations.postcode.$dirty = true
+                $v.addressValidations.postcode.$dirty = true;
                 $v.addressValidations.postcode.isValidPostcode = false;
 
-                const wrapper = mount(Address, {
+                wrapper = shallowMount(Address, {
                     i18n,
                     store: createStore(),
                     localVue,
@@ -224,7 +225,7 @@ describe('Address', () => {
                     }),
                     computed: {
                         isAddressPostcodeEmpty () {
-                            return true
+                            return true;
                         }
                     }
                 });
@@ -239,7 +240,7 @@ describe('Address', () => {
         describe('isFieldEmpty ::', () => {
             const field = 'line1';
 
-            const wrapper = mount(Address, {
+            const wrapper = shallowMount(Address, {
                 i18n,
                 store: createStore(),
                 localVue,
