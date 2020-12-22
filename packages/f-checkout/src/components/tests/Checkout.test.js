@@ -352,7 +352,7 @@ describe('Checkout', () => {
                 };
 
                 wrapper = mount(VueCheckout, {
-                    store: createStore(state, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()), postCheckout: jest.fn(async () => Promise.resolve()) }),
+                    store: createStore(state, { ...defaultActions }),
                     i18n,
                     localVue,
                     propsData
@@ -567,7 +567,7 @@ describe('Checkout', () => {
 
                 beforeEach(() => {
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()) }),
+                        store: createStore(defaultState, { ...defaultActions }),
                         i18n,
                         localVue,
                         propsData
@@ -605,7 +605,7 @@ describe('Checkout', () => {
 
                 beforeEach(() => {
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions, getAvailableFulfilment: jest.fn(async () => Promise.resolve()) }),
+                        store: createStore(defaultState, { ...defaultActions }),
                         i18n,
                         localVue,
                         propsData
