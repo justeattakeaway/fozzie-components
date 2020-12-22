@@ -222,44 +222,53 @@ describe('Selector', () => {
         });
     });
 
-    describe('mounted ::', () => {
-        afterEach(() => {
-            jest.clearAllMocks();
-        });
+    describe('watch ::', () => {
+        describe('fulfilmentTimes ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+            it('should call `selectionChanged` with the first fulfilment time when there are fulfilment times', async () => {
+                // Arrange
+                const selectionChangedSpy = jest.spyOn(Selector.methods, 'selectionChanged');
 
-        it('should call `selectionChanged` with the first fulfilment time', () => {
-            // Arrange & Act
-            const selectionChangedSpy = jest.spyOn(Selector.methods, 'selectionChanged');
+                const wrapper = shallowMount(Selector, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
 
-            shallowMount(Selector, {
-                store: createStore(),
-                i18n,
-                localVue,
-                propsData
+                // Act
+                wrapper.vm.$options.watch.fulfilmentTimes.call(wrapper.vm);
+
+                // Assert
+                expect(selectionChangedSpy).toHaveBeenCalledWith('As soon as possible');
             });
 
-            // Assert
-            expect(selectionChangedSpy).toHaveBeenCalledWith('As soon as possible');
-        });
+            it('should not call `selectionChanged` when there are no fulfilment times', () => {
+                // Arrange
+                const selectionChangedSpy = jest.spyOn(Selector.methods, 'selectionChanged');
 
-        it('should not call `selectionChanged` when there are no fulfilment times', () => {
-            // Arrange & Act
-            const selectionChangedSpy = jest.spyOn(Selector.methods, 'selectionChanged');
+                const wrapper = shallowMount(Selector, {
+                    store: createStore({
+                        ...defaultState,
+                        availableFulfilment: {
+                            isAsapAvailable: false,
+                            times: []
+                        },
+                        serviceType: CHECKOUT_METHOD_DELIVERY
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
 
-            shallowMount(Selector, {
-                store: createStore(),
-                i18n,
-                localVue,
-                propsData,
-                computed: {
-                    fulfilmentTimes () {
-                        return [];
-                    }
-                }
+                // Act
+                wrapper.vm.$options.watch.fulfilmentTimes.call(wrapper.vm);
+
+                // Assert
+                expect(selectionChangedSpy).not.toHaveBeenCalled();
             });
-
-            // Assert
-            expect(selectionChangedSpy).not.toHaveBeenCalled();
         });
     });
 });

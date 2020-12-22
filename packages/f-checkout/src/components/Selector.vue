@@ -20,7 +20,7 @@ export default {
 
     data () {
         return {
-            selectedAvailableFulfilmentTime: null
+            selectedAvailableFulfilmentTime: ''
         };
     },
 
@@ -54,9 +54,11 @@ export default {
         }
     },
 
-    mounted () {
-        if (this.fulfilmentTimes.length > 0) {
-            this.selectionChanged(this.fulfilmentTimes[0]);
+    watch: {
+        'fulfilmentTimes' () {
+            if (this.fulfilmentTimes.length > 0) {
+                this.selectionChanged(this.fulfilmentTimes[0]);
+            }
         }
     },
 

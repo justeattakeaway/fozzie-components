@@ -4,7 +4,7 @@ exports[`CheckoutModule mutations :: updateState :: should update state with del
 Object {
   "authToken": "",
   "availableFulfilment": Object {
-    "isAsapAvailable": true,
+    "isAsapAvailable": false,
     "times": Array [],
   },
   "customer": Object {

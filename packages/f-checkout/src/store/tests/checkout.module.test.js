@@ -32,7 +32,7 @@ const defaultState = {
     messages: [],
     availableFulfilment: {
         times: [],
-        isAsapAvailable: true
+        isAsapAvailable: false
     },
     authToken: '',
     isLoggedIn: false
