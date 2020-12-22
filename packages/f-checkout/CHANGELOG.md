@@ -11,6 +11,9 @@ v0.27.0
 ### Added
 - Retrieving fulfilment information from a separate endpoint/file.
 
+### Removed
+- Watchers for Storybook. Replaced it with an object `:key` containing the different props.
+
 
 v0.26.0
 ------------------------------

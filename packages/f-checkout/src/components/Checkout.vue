@@ -200,20 +200,6 @@ export default {
         }
     },
 
-    watch: {
-        async checkoutUrl () {
-            await this.loadCheckout();
-        },
-
-        async checkoutAvailableFulfilmentUrl () {
-            await this.loadAvailableFulfilment();
-        },
-
-        authToken () {
-            this.setAuthToken(this.authToken);
-        }
-    },
-
     async mounted () {
         this.setAuthToken(this.authToken);
         await Promise.all([this.loadCheckout(), this.loadAvailableFulfilment()]);
