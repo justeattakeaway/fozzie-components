@@ -107,65 +107,34 @@ describe('Address', () => {
         const isFieldEmptySpy = jest.spyOn(Address.methods, 'isFieldEmpty');
         let wrapper;
 
-        describe('isAddressLine1Empty ::', () => {
-            it('should call `isFieldEmpty` with argument `line1`', async () => {
-                // Act
-                wrapper = shallowMount(Address, {
-                    i18n,
-                    store: createStore(),
-                    localVue,
-                    propsData,
-                    provide: () => ({
-                        $v
-                    })
-                });
-
-                // Assert
-                expect(isFieldEmptySpy).toHaveBeenCalledWith('line1');
+        it.each([
+            ['isAddressLine1Empty', 'line1'],
+            ['isAddressCityEmpty', 'city'],
+            ['isAddressPostcodeEmpty', 'postcode'],
+        ])('%s :: should call `isFieldEmpty` with argument %s', (property, field) => {
+            wrapper = shallowMount(Address, {
+                i18n,
+                store: createStore(),
+                localVue,
+                propsData,
+                provide: () => ({
+                    $v
+                })
             });
-        });
 
-        describe('isAddressCityEmpty ::', () => {
-            it('should call `isFieldEmpty` with argument `city`', async () => {
-                // Arrange & Act
-                wrapper = shallowMount(Address, {
-                    i18n,
-                    store: createStore(),
-                    localVue,
-                    propsData,
-                    provide: () => ({
-                        $v
-                    })
-                });
-
-                // Assert
-                expect(isFieldEmptySpy).toHaveBeenCalledWith('city');
-            });
-        });
-
-        describe('isAddressPostcodeEmpty ::', () => {
-            it('should call `isFieldEmpty` with argument `postcode`', async () => {
-                // Arrange & Act
-                wrapper = shallowMount(Address, {
-                    i18n,
-                    store: createStore(),
-                    localVue,
-                    propsData,
-                    provide: () => ({
-                        $v
-                    })
-                });
-
-                // Assert
-                expect(isFieldEmptySpy).toHaveBeenCalledWith('postcode');
-            });
-        });
+            // Assert
+            expect(isFieldEmptySpy).toHaveBeenCalledWith(field);
+        })
 
         describe('isAddressPostcodeValid ::', () => {
-            it('should return `false` if postcode field has been touched, is not Valid and is not empty', async () => {
+            it.each([
+                [false, true, false, false],
+                [true, true, true, false],
+                [false, true, false, true]
+            ])('should return %s if postcode.$dirty = %s, postcode.isValidPostCode = %s and isAddressPostcodeEmpty = %s', (expected, isDirty, isValid, isEmpty) => {
                 // Arrange && Act
-                $v.addressValidations.postcode.$dirty = true;
-                $v.addressValidations.postcode.isValidPostcode = false;
+                $v.addressValidations.postcode.$dirty = isDirty;
+                $v.addressValidations.postcode.isValidPostcode = isValid;
 
                 wrapper = shallowMount(Address, {
                     i18n,
@@ -176,62 +145,12 @@ describe('Address', () => {
                         $v
                     }),
                     computed: {
-                        isAddressPostcodeEmpty () {
-                            return false;
-                        }
+                        isAddressPostcodeEmpty: () => isEmpty
                     }
                 });
 
                 // Assert
-                expect(wrapper.vm.isAddressPostcodeValid).toEqual(false);
-            });
-
-            it('should return `true` if postcode field has been touched, is Valid and is not empty', async () => {
-                // Arrange && Act
-                $v.addressValidations.postcode.$dirty = true;
-                $v.addressValidations.postcode.isValidPostcode = true;
-
-                wrapper = shallowMount(Address, {
-                    i18n,
-                    store: createStore(),
-                    localVue,
-                    propsData,
-                    provide: () => ({
-                        $v
-                    }),
-                    computed: {
-                        isAddressPostcodeEmpty () {
-                            return false;
-                        }
-                    }
-                });
-
-                // Assert
-                expect(wrapper.vm.isAddressPostcodeValid).toEqual(true);
-            });
-
-            it('should return `false` if postcode field has been touched, is not Valid and is empty', async () => {
-                // Arrange && Act
-                $v.addressValidations.postcode.$dirty = true;
-                $v.addressValidations.postcode.isValidPostcode = false;
-
-                wrapper = shallowMount(Address, {
-                    i18n,
-                    store: createStore(),
-                    localVue,
-                    propsData,
-                    provide: () => ({
-                        $v
-                    }),
-                    computed: {
-                        isAddressPostcodeEmpty () {
-                            return true;
-                        }
-                    }
-                });
-
-                // Assert
-                expect(wrapper.vm.isAddressPostcodeValid).toEqual(false);
+                expect(wrapper.vm.isAddressPostcodeValid).toEqual(expected);
             });
         });
     });
@@ -250,22 +169,22 @@ describe('Address', () => {
                 })
             });
 
-            it('should return `false` if `field` has not been touched and input is required', async () => {
+            it('should return `false` if `field` has not been touched and input is required', () => {
                 // Act
                 $v.addressValidations[field].$dirty = false;
                 $v.addressValidations[field].required = true;
 
                 // Assert
-                expect(wrapper.vm.isFieldEmpty('line1')).toEqual(false);
+                expect(wrapper.vm.isFieldEmpty(field)).toEqual(false);
             });
 
-            it('should return `true` if `field` has been touched and input is required', async () => {
+            it('should return `true` if `field` has been touched and input is required', () => {
                 // Act
                 $v.addressValidations[field].$dirty = true;
                 $v.addressValidations[field].required = false;
 
                 // Assert
-                expect(wrapper.vm.isFieldEmpty('line1')).toEqual(true);
+                expect(wrapper.vm.isFieldEmpty(field)).toEqual(true);
             });
 
             it('should return `false` if `field` has been touched and input is not required`', () => {
