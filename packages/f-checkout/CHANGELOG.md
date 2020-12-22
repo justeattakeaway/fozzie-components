@@ -8,8 +8,8 @@ v0.29.0
 *December 23, 2020*
 
 ### Added
-- Tests for `checkoutHelpers` file.
-- Further tests for `Checkout` component.
+- `checkoutHelpers` file.
+- Tests for `Checkout` component methods.
 
 v0.28.0
 ------------------------------
