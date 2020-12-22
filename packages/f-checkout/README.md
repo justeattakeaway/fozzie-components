@@ -55,6 +55,20 @@
     }
 
     ```
+## Configuration
+
+### Props
+
+`f-checkout` has a number of props that allow you to customise its functionality.
+
+The props that can be defined are as follows:
+
+| Prop  | Type  | Default | Description |
+| ----- | ----- | ------- | ----------- |
+| `checkoutUrl` | `String` | - | Sets the url for the API called to load the Checkout Data.<br><br>The data returned from this API contains the serviceType, which determines if the Checkout component is created for Collection or Delivery. |
+| `checkoutTimeout | `Number` | `1000` | Sets the timeout for the API call when submitting the checkout form. |
+| `getCheckoutTimeout` | `Number` | `1000` | Sets the timeout for the API call when loading checkout data. |
+| `authToken` | `String` | `''` | Sets the API auth token. |
 
 ## Development
 It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
