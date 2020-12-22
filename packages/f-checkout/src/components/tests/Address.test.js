@@ -173,10 +173,6 @@ describe('Address', () => {
                 });
             });
 
-            afterEach(() => {
-                jest.clearAllMocks();
-            });
-
             it('should return `false` if `field` has not been touched and input is required', () => {
                 // Act
                 $v.addressValidations[field].$dirty = false;
