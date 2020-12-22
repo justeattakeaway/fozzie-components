@@ -66,7 +66,7 @@ const createStore = (state = defaultState, actions = defaultActions) => new Vuex
     hasModule: jest.fn(() => true)
 });
 
-xdescribe('Checkout', () => {
+describe('Checkout', () => {
     allure.feature('Checkout');
     const checkoutUrl = 'http://localhost/account/register';
 

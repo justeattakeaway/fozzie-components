@@ -110,7 +110,7 @@ describe('Address', () => {
         it.each([
             ['isAddressLine1Empty', 'line1'],
             ['isAddressCityEmpty', 'city'],
-            ['isAddressPostcodeEmpty', 'postcode'],
+            ['isAddressPostcodeEmpty', 'postcode']
         ])('%s :: should call `isFieldEmpty` with argument %s', (property, field) => {
             wrapper = shallowMount(Address, {
                 i18n,
@@ -124,7 +124,7 @@ describe('Address', () => {
 
             // Assert
             expect(isFieldEmptySpy).toHaveBeenCalledWith(field);
-        })
+        });
 
         describe('isAddressPostcodeValid ::', () => {
             it.each([

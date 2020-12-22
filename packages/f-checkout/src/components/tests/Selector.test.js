@@ -64,7 +64,7 @@ const createStore = (state = defaultState, actions = defaultActions) => new Vuex
     hasModule: jest.fn(() => true)
 });
 
-xdescribe('Selector', () => {
+describe('Selector', () => {
     allure.feature('Checkout-Selector');
     const propsData = {};
 
