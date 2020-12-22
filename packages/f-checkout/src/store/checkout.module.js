@@ -11,7 +11,10 @@ export default {
             mobileNumber: ''
         },
         fulfilment: {
-            times: [],
+            time: {
+                from: '',
+                to: ''
+            },
             address: {
                 line1: '',
                 line2: '',
@@ -23,6 +26,10 @@ export default {
         isFulfillable: true,
         notices: [],
         messages: [],
+        availableFulfilment: {
+            times: [],
+            isAsapAvailable: false
+        },
         authToken: '',
         isLoggedIn: false
     }),
@@ -34,10 +41,8 @@ export default {
          * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getCheckout: async ({ commit }, payload) => {
+        getCheckout: async ({ commit }, { url, tenant, timeout }) => {
             // TODO: deal with exceptions.
-            const { url, tenant, timeout } = payload;
-
             const config = {
                 method: 'get',
                 headers: {
@@ -60,12 +65,10 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         // eslint-disable-next-line no-unused-vars
-        postCheckout: async ({ commit, state }, payload) => {
+        postCheckout: async ({ commit, state }, {
+            url, tenant, data, timeout
+        }) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
-            const {
-                url, tenant, data, timeout
-            } = payload;
-
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
             const config = {
@@ -82,6 +85,28 @@ export default {
 
             // eslint-disable-next-line no-unused-vars
             const response = await axios.post(url, data, config);
+        },
+
+        /**
+         * Get the fulfilment details from the backend and update the state.
+         *
+         * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getAvailableFulfilment: async ({ commit }, { url, tenant, timeout }) => {
+            // TODO: deal with exceptions.
+            const config = {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Tenant': tenant
+                },
+                timeout
+            };
+
+            const { data } = await axios.get(url, config);
+
+            commit('updateAvailableFulfilment', data);
         },
 
         setAuthToken: ({ commit }, authToken) => {
@@ -108,7 +133,7 @@ export default {
                 state.customer.mobileNumber = customer.phoneNumber;
             }
 
-            state.fulfilment.times = fulfilment.times;
+            state.fulfilment.time = fulfilment.time;
 
             if (fulfilment.address) {
                 /* eslint-disable prefer-destructuring */
@@ -124,6 +149,14 @@ export default {
             state.isFulfillable = isFulfillable;
             state.notices = notices;
             state.messages = messages;
+        },
+
+        updateAvailableFulfilment: (state, {
+            times,
+            asapAvailable
+        }) => {
+            state.availableFulfilment.times = times;
+            state.availableFulfilment.isAsapAvailable = asapAvailable;
         },
 
         updateAuth: (state, authToken) => {
