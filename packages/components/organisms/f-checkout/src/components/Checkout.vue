@@ -30,10 +30,8 @@
                         :href="loginUrl"
                         data-test-id="switch-user-link"
                         @click="onVisitLoginPage">
-                        <i18n
-                            path="switchUserText">
-                            <template #name>{{ name }}</template>
-                        </i18n></a>
+                        {{ $t('switchUserText', { name: name }) }}
+                    </a>
                 </p>
                 <form-field
                     v-model="customer.mobileNumber"

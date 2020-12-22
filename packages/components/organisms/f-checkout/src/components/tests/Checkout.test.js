@@ -64,13 +64,16 @@ describe('Checkout', () => {
     });
 
     it('should show the login link.', () => {
+        const dummyName = 'Dave';
         const propsData = { checkoutUrl, loginUrl };
-
         const wrapper = shallowMount(VueCheckout, {
             i18n,
             store: createStore(),
             localVue,
-            propsData
+            propsData,
+            computed: {
+                name: () => dummyName
+            }
         });
 
         // Act
@@ -78,7 +81,7 @@ describe('Checkout', () => {
 
         // Assert
         expect(loginLink.exists()).toBe(true);
-        expect(loginLink.text()).toBe(`Not ${defaultState.customer.firstName}? Click here.`);
+        expect(loginLink.text()).toBe(`Not ${dummyName}? Click here.`);
     });
 
     describe('created :: ', () => {
