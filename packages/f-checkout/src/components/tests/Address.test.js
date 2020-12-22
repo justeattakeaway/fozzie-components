@@ -159,14 +159,22 @@ describe('Address', () => {
         describe('isFieldEmpty ::', () => {
             const field = 'line1';
 
-            const wrapper = shallowMount(Address, {
-                i18n,
-                store: createStore(),
-                localVue,
-                propsData,
-                provide: () => ({
-                    $v
-                })
+            let wrapper;
+
+            beforeEach(() => {
+                wrapper = shallowMount(Address, {
+                    i18n,
+                    store: createStore(),
+                    localVue,
+                    propsData,
+                    provide: () => ({
+                        $v
+                    })
+                });
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
             });
 
             it('should return `false` if `field` has not been touched and input is required', () => {
