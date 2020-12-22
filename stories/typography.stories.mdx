@@ -79,13 +79,13 @@ We currently use the JustEatBasis font on Just Eat platforms; a custom typeface 
 
 The base fontset comes with a huge number of glyphs and layout features that aren't required for use on the web. Therefore we optimise this base font using a process called font-subsetting. Subsetting is the process of removing parts of the base fontset, to leave only the glyphs and features that you require.
 
-For reference, the base Just Eat Regular font has the following properties:
+For reference, the base Just Eat Regular font has the following properties when ijnspected using the [Wakamai Fondue tool](https://wakamaifondue.com/):
 
 ![./public/justeatbasis-base.png](./public/justeatbasis-base.png)
 
 ### How to subset a font
 
-To subset a base font like the one we use, you will need to use a command line tool called `pyftsubset` which is [available as part of the fonttools library](https://github.com/fonttools/fonttools). For more information on installing `pyftsubset`, [see this blogpost](](https://markoskon.com/creating-font-subsets/#install-fonttools)) which explains how to do that and covers any associated dependencies you'll also need (such as `pip`).
+To subset a base font like the one we use, you will need to use a command line tool called `pyftsubset` which is [available as part of the fonttools library](https://github.com/fonttools/fonttools). For more information on installing `pyftsubset`, [see this blogpost](https://markoskon.com/creating-font-subsets/#install-fonttools) which explains how to do that and covers any associated dependencies you'll also need (such as `pip`).
 
 Once you have `pyftsubset` installed, you can then optimise your font!
 
