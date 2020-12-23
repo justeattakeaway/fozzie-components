@@ -55,6 +55,7 @@
     }
 
     ```
+
 ## Configuration
 
 ### Props
