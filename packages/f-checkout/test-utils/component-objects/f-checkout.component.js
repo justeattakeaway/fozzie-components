@@ -103,6 +103,23 @@ exports.populateCheckoutForm = addressInfo => {
     fields.addressPostcode.input().setValue(addressInfo.postcode);
     fields.userNote.input().setValue(addressInfo.note);
 };
+
+exports.clearCheckoutForm = () => {
+    exports.waitForCheckoutComponent();
+    fields.mobileNumber.input().setValue([' ', "\uE003"]);
+    fields.addressLine1.input().setValue([' ', "\uE003"]);
+    fields.addressLine2.input().setValue([' ', "\uE003"]);
+    fields.addressCity.input().setValue([' ', "\uE003"]);
+    fields.addressPostcode.input().setValue([' ', "\uE003"]);
+    fields.userNote.input().setValue([' ', "\uE003"]);
+};
+
+exports.populateCollectionCheckoutForm = addressInfo => {
+    exports.waitForCheckoutComponent();
+    fields.mobileNumber.input().setValue(addressInfo.mobileNumber);
+    fields.userNote.input().setValue(addressInfo.note);
+};
+
 /**
  * @description
  * Sets the value of the order time in dropdown based on visible text.
@@ -144,7 +161,7 @@ exports.getUserNoteLength = () => {
  * @description
  *Submit the checkout form.
  */
-exports.submit = () => {
+exports.goToPayment = () => {
     goToPaymentButton().click();
 };
 

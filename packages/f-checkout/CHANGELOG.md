@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.27.0
 ------------------------------
-*December 17, 2020*
+*December 23, 2020*
 
 ### Changed
 - Updated skipped tests to work with Storybook component tests.

@@ -5,13 +5,20 @@ describe('f-checkout "collection" component tests', () => {
     before(() => {
         browser.url('?path=/story/components-organisms--checkout-component');
         CheckoutComponent.changeCheckoutPage(1);
+        browser.pause(500);
         browser.switchToFrame(0);
         CheckoutComponent.waitForCheckoutComponent();
     });
 
-    it('should display "mobileNumber" error message when collection method is set', () => {
+    it('should display "mobileNumber" error message when collection method is set and number is incorrect', () => {
+        // Arrange
+        const incorrectMobileNumber = {
+            mobileNumber: '1234'
+        };
+
         // Act
-        CheckoutComponent.submit();
+        CheckoutComponent.populateCollectionCheckoutForm(incorrectMobileNumber);
+        CheckoutComponent.goToPayment();
 
         // Assert
         expect(CheckoutComponent.isFieldErrorDisplayed('mobileNumber')).toBe(true);

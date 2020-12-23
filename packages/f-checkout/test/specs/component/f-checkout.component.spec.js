@@ -31,7 +31,7 @@ describe('f-checkout component tests', () => {
         // Act
         CheckoutComponent.populateCheckoutForm(addressInfo);
         CheckoutComponent.selectOrderTime('Monday 00:15');
-        CheckoutComponent.submit();
+        CheckoutComponent.goToPayment();
 
         // Assert
         // Waiting for route here, so we can grab redirect url and show form submits.
@@ -76,7 +76,7 @@ describe('f-checkout component tests', () => {
         // Act
         CheckoutComponent.populateCheckoutForm(addressInfo);
         CheckoutComponent.selectOrderTime('Monday 00:30');
-        CheckoutComponent.submit();
+        CheckoutComponent.goToPayment();
 
         // Assert
         // Waiting for route here, so we can grab redirect url and show form submits.

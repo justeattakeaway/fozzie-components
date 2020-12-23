@@ -11,7 +11,8 @@ describe('f-checkout "delivery" component tests', () => {
     forEach(['mobileNumber', 'addressLine1', 'addressCity', 'addressPostcode'])
     .it('each fields error message should be displayed', field => {
         // Act
-        CheckoutComponent.submit();
+        CheckoutComponent.clearCheckoutForm();
+        CheckoutComponent.goToPayment();
 
         // Assert
         expect(CheckoutComponent.isFieldErrorDisplayed(field)).toBe(true);
@@ -36,7 +37,7 @@ describe('f-checkout "delivery" component tests', () => {
 
         // Act
         CheckoutComponent.populateCheckoutForm(addressDetails);
-        CheckoutComponent.submit();
+        CheckoutComponent.goToPayment();
 
         // Assert
         expect(CheckoutComponent.isFieldErrorDisplayed('mobileNumber')).toBe(true);
@@ -50,7 +51,7 @@ describe('f-checkout "delivery" component tests', () => {
 
         // Act
         CheckoutComponent.populateCheckoutForm(addressDetails);
-        CheckoutComponent.submit();
+        CheckoutComponent.goToPayment();
 
         // Assert
         expect(CheckoutComponent.isFieldErrorDisplayed('mobileNumber')).toBe(false);
@@ -64,7 +65,7 @@ describe('f-checkout "delivery" component tests', () => {
 
         // Act
         CheckoutComponent.populateCheckoutForm(addressInfo);
-        CheckoutComponent.submit();
+        CheckoutComponent.goToPayment();
 
         // Assert
         expect(CheckoutComponent.isFieldTypeErrorDisplayed('addressPostcode')).toBe(true);
@@ -78,7 +79,7 @@ describe('f-checkout "delivery" component tests', () => {
 
         // Act
         CheckoutComponent.populateCheckoutForm(addressInfo);
-        CheckoutComponent.submit();
+        CheckoutComponent.goToPayment();
 
         // Assert
         expect(CheckoutComponent.isFieldTypeErrorDisplayed('addressPostcode')).toBe(false);
