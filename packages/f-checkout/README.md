@@ -74,7 +74,7 @@ The props that can be defined are as follows:
 
 Checkout has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
 
-In addition to this, the modal exposes some classes which you can target in your application.
+In addition to this, checkout exposes some classes which you can target in your application.
 
 | Class | Description |
 | ----- | ----------- |
