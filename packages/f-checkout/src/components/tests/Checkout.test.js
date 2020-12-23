@@ -265,18 +265,13 @@ describe('Checkout', () => {
     });
 
     describe('methods ::', () => {
-        let propsData = {
+        const propsData = {
             checkoutUrl,
             checkoutAvailableFulfilmentUrl
         };
 
         describe('submitCheckout ::', () => {
             describe('if serviceType set to `collection`', () => {
-                propsData = {
-                    checkoutUrl,
-                    checkoutAvailableFulfilmentUrl
-                };
-
                 let wrapper;
 
                 beforeEach(() => {
@@ -364,11 +359,6 @@ describe('Checkout', () => {
             });
 
             describe('if serviceType set to `delivery`', () => {
-                propsData = {
-                    checkoutUrl,
-                    checkoutAvailableFulfilmentUrl
-                };
-
                 let wrapper;
 
                 beforeEach(() => {
