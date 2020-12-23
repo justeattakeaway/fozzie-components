@@ -11,7 +11,7 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collectio
       </g>
     </g>
   </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                        validationMessages.mobileNumber.requiredError
+                        Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
                     </span></p>
 `;
 
@@ -26,7 +26,7 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collectio
       </g>
     </g>
   </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                        validationMessages.mobileNumber.requiredError
+                        Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
                     </span></p>
 `;
 
@@ -41,7 +41,7 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collectio
       </g>
     </g>
   </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                        validationMessages.mobileNumber.requiredError
+                        Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
                     </span></p>
 `;
 
@@ -56,7 +56,7 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\
       </g>
     </g>
   </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                    validationMessages.addressLine1.requiredError
+                    Please enter the first line of your address
                 </span></p>
 `;
 
@@ -71,7 +71,7 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\
       </g>
     </g>
   </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                validationMessages.city.requiredError
+                Please enter your town or city
             </span></p>
 `;
 
@@ -86,7 +86,7 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\
       </g>
     </g>
   </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                validationMessages.postcode.invalidCharError
+                This doesn't look like a UK postcode, can you enter it again please?
             </span></p>
 `;
 
@@ -101,7 +101,7 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\
       </g>
     </g>
   </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                validationMessages.postcode.invalidCharError
+                This doesn't look like a UK postcode, can you enter it again please?
             </span></p>
 `;
 
@@ -116,6 +116,6 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\
       </g>
     </g>
   </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                validationMessages.postcode.requiredError
+                Please enter your full UK postcode
             </span></p>
 `;
