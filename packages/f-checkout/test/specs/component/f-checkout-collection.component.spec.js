@@ -4,19 +4,19 @@ import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.
 describe('f-checkout "collection" component tests', () => {
     before(() => {
         browser.url('?path=/story/components-organisms--checkout-component');
-        CheckoutComponent.changeCheckoutMethod(1);
+        CheckoutComponent.changeCheckoutMethod('collection');
         browser.switchToFrame(0);
         CheckoutComponent.waitForCheckoutComponent();
     });
 
     it('should display "mobileNumber" error message when collection method is set and number is incorrect', () => {
         // Arrange
-        const incorrectMobileNumber = {
+        const addressDetails = {
             mobileNumber: '1234'
         };
 
         // Act
-        CheckoutComponent.populateCollectionCheckoutForm(incorrectMobileNumber);
+        CheckoutComponent.populateCollectionCheckoutForm(addressDetails);
         CheckoutComponent.goToPayment();
 
         // Assert

@@ -64,12 +64,13 @@ const fields = {
  * @description
  * Changes checkout page to reflect checkout method to either delivery or collection depending on index given.
  *
- * @param {Number} index The index of the drop down option
+ * @param {string} method The collection type: either 'delivery' or 'collection'
  */
 
-exports.changeCheckoutMethod = index => {
+exports.changeCheckoutMethod = method => {
+    const file = `/checkout-${method}.json`;
     knobButton().click();
-    knobCheckoutDropdown().selectByIndex(index);
+    knobCheckoutDropdown().selectByVisibleText(file);
 };
 
 exports.isFieldErrorDisplayed = fieldName => fields[fieldName].error().isDisplayed();
@@ -104,14 +105,26 @@ exports.populateCheckoutForm = addressInfo => {
     fields.userNote.input().setValue(addressInfo.note);
 };
 
+/**
+ * @description
+ * Adds a space and backspaces to clear the value of the form field.
+ *
+ * @param {String} fieldName The name of the field input it is clearing
+ */
+exports.clearField = fieldName => {
+    const BACKSPACE_UNICODE = '\uE003';
+    fields[fieldName].input().setValue([' ', BACKSPACE_UNICODE]);
+};
+
+/**
+ * @description
+ * Adds a space and backspaces to clear the value of the form field.
+ *
+ * @param {String} fields Grabs the fields of the above object and runs a forEach loop to get the keys
+ */
 exports.clearCheckoutForm = () => {
     exports.waitForCheckoutComponent();
-    fields.mobileNumber.input().setValue([' ', "\uE003"]);
-    fields.addressLine1.input().setValue([' ', "\uE003"]);
-    fields.addressLine2.input().setValue([' ', "\uE003"]);
-    fields.addressCity.input().setValue([' ', "\uE003"]);
-    fields.addressPostcode.input().setValue([' ', "\uE003"]);
-    fields.userNote.input().setValue([' ', "\uE003"]);
+    Object.keys(fields).forEach(exports.clearField);
 };
 
 exports.populateCollectionCheckoutForm = addressInfo => {
@@ -129,6 +142,7 @@ exports.populateCollectionCheckoutForm = addressInfo => {
 exports.selectOrderTime = orderTime => {
     orderTimeDropdown().selectByVisibleText(orderTime);
 };
+
 /**
  * @description
  * The time of the order should increase when a higher index is applied.
@@ -138,6 +152,7 @@ exports.selectOrderTime = orderTime => {
 exports.getOrderTimeOptionText = (index) => {
     return orderTimeDropdownOptions()[index].getText();
 };
+
 /**
  * @description
  * Sets the value of the user note.
@@ -148,6 +163,7 @@ exports.getOrderTimeOptionText = (index) => {
 exports.inputUserNote = addressInfo => {
     fields.userNote.input().setValue(addressInfo.note);
 };
+
 /**
  * @description
  * Grabs the length of characters of the user note.
@@ -157,6 +173,7 @@ exports.inputUserNote = addressInfo => {
 exports.getUserNoteLength = () => {
     return userNoteInput().getValue().length;
 };
+
 /**
  * @description
  *Submit the checkout form.
