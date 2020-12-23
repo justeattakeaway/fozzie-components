@@ -3,71 +3,14 @@ import { VueI18n } from '@justeat/f-globalisation';
 import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
 import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
 import Selector from '../Selector.vue';
-import tenantConfigs from '../../tenants';
+import {
+    fulfilmentTimes, defaultState, i18n, createStore
+} from './helpers/setup';
 
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
 localVue.use(Vuex);
-
-const fulfilmentTimes = [
-    {
-        from: '2020-01-01T01:00:00.000Z',
-        to: '2020-01-01T01:00:00.000Z'
-    },
-    {
-        from: '2020-01-01T01:15:00.000Z',
-        to: '2020-01-01T01:15:00.000Z'
-    }
-];
-
-const defaultState = {
-    id: '',
-    serviceType: CHECKOUT_METHOD_DELIVERY,
-    customer: {
-        firstName: 'John',
-        mobileNumber: '+447111111111'
-    },
-    fulfilment: {
-        time: {
-            from: '',
-            to: ''
-        },
-        address: {
-            line1: '1 Bristol Road',
-            line2: 'Flat 1',
-            city: 'Bristol',
-            postcode: 'BS1 1AA'
-        }
-    },
-    availableFulfilment: {
-        times: fulfilmentTimes,
-        isAsapAvailable: true
-    },
-    notes: [],
-    isFulfillable: true,
-    notices: [],
-    messages: []
-};
-
-const i18n = {
-    locale: 'en-GB',
-    messages: {
-        'en-GB': tenantConfigs['en-GB'].messages
-    },
-    dateTimeFormats: {
-        'en-GB': tenantConfigs['en-GB'].dateTimeFormats
-    }
-};
-
-const createStore = (state = defaultState) => new Vuex.Store({
-    modules: {
-        checkout: {
-            namespaced: true,
-            state
-        }
-    }
-});
 
 describe('Selector', () => {
     allure.feature('Checkout-Selector');
