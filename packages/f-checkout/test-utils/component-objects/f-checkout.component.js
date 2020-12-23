@@ -108,6 +108,8 @@ exports.populateCheckoutForm = addressInfo => {
 /**
  * @description
  * Adds a space and backspaces to clear the value of the form field.
+ * For more information on this, you can check out the link below:
+ * https://github.com/webdriverio/webdriverio/issues/530#issuecomment-229435909
  *
  * @param {String} fieldName The name of the field input it is clearing
  */
