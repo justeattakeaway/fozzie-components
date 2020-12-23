@@ -5,7 +5,7 @@ import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../cons
 import Selector from '../Selector.vue';
 import {
     fulfilmentTimes, defaultState, i18n, createStore
-} from './helpers/checkoutHelpers';
+} from './helpers/setup';
 
 const localVue = createLocalVue();
 

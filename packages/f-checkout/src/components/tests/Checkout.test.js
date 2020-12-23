@@ -7,7 +7,7 @@ import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 import {
     fulfilmentTimes, defaultState, defaultActions, i18n, createStore
-} from './helpers/checkoutHelpers';
+} from './helpers/setup';
 
 const localVue = createLocalVue();
 
@@ -545,7 +545,7 @@ describe('Checkout', () => {
         });
 
         describe('handleErrorState ::', () => {
-            it('should emit failure event and update `genericErrorMessage` with first error message description', async () => {
+            it('should emit failure event and update `genericErrorMessage` with first error message description', () => {
                 // Arrange
                 const wrapper = mount(VueCheckout, {
                     store: createStore(),
@@ -575,7 +575,34 @@ describe('Checkout', () => {
                 expect(wrapper.vm.genericErrorMessage).toEqual(errorDescription);
             });
 
-            it('should emit failure event and update `genericErrorMessage` with error if single error', async () => {
+            it('should emit failure event and use tenant `genericErrorMessage` if returned errors have no description', () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const error = {
+                    response: {
+                        data: {
+                            errors: [{}]
+                        }
+                    }
+                };
+
+                const genericErrorMessage = 'Something went wrong, please try again later'
+
+                // Act
+                wrapper.vm.handleErrorState(error);
+
+                // Assert
+                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                expect(wrapper.vm.genericErrorMessage).toEqual(genericErrorMessage);
+            });
+
+            it('should emit failure event and update `genericErrorMessage` with error if single error', () => {
                 const wrapper = mount(VueCheckout, {
                     store: createStore(),
                     i18n,
@@ -595,7 +622,7 @@ describe('Checkout', () => {
         describe('isValidPhoneNumber ::', () => {
             const isValidPhoneNumberSpy = jest.spyOn(validations, 'isValidPhoneNumber');
 
-            it('should call `isValidPhoneNumber` from `f-services', async () => {
+            it('should call `isValidPhoneNumber` from `f-services', () => {
                 // Act
                 mount(VueCheckout, {
                     store: createStore(),
@@ -612,7 +639,7 @@ describe('Checkout', () => {
         describe('isValidPostcode ::', () => {
             const isValidPostcodeSpy = jest.spyOn(validations, 'isValidPostcode');
 
-            it('should call `isValidPostcode` from `f-services', async () => {
+            it('should call `isValidPostcode` from `f-services', () => {
                 // Act
                 mount(VueCheckout, {
                     store: createStore(),

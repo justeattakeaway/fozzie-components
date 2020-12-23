@@ -2,7 +2,7 @@ import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Address from '../Address.vue';
-import { i18n, createStore } from './helpers/checkoutHelpers';
+import { i18n, createStore } from './helpers/setup';
 
 const localVue = createLocalVue();
 
