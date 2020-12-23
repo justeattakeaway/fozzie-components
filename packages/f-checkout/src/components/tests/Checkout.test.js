@@ -270,82 +270,6 @@ describe('Checkout', () => {
             checkoutAvailableFulfilmentUrl
         };
 
-        describe('loadCheckout ::', () => {
-            describe('when `getCheckout` request fails', () => {
-                let wrapper;
-
-                beforeEach(() => {
-                    wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.reject()) }),
-                        i18n,
-                        localVue,
-                        propsData
-                    });
-                });
-
-                it('should emit failure event', async () => {
-                    expect(wrapper.emitted(EventNames.CheckoutGetSuccess)).toBeUndefined();
-                    expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
-                });
-            });
-
-            describe('when `getCheckout` request succeeds', () => {
-                let wrapper;
-
-                beforeEach(() => {
-                    wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions }),
-                        i18n,
-                        localVue,
-                        propsData
-                    });
-                });
-
-                it('should emit success event', async () => {
-                    expect(wrapper.emitted(EventNames.CheckoutGetSuccess).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutGetFailure)).toBeUndefined();
-                });
-            });
-        });
-
-        describe('loadAvailableFulfilment ::', () => {
-            describe('when `getAvailableFulfilment` request fails', () => {
-                let wrapper;
-
-                beforeEach(() => {
-                    wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions, getAvailableFulfilment: jest.fn(async () => Promise.reject()) }),
-                        i18n,
-                        localVue,
-                        propsData
-                    });
-                });
-
-                it('should emit failure event', async () => {
-                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess)).toBeUndefined();
-                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure).length).toBe(1);
-                });
-            });
-
-            describe('when `getAvailableFulfilment` request succeeds', () => {
-                let wrapper;
-
-                beforeEach(() => {
-                    wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions }),
-                        i18n,
-                        localVue,
-                        propsData
-                    });
-                });
-
-                it('should emit success event', async () => {
-                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure)).toBeUndefined();
-                });
-            });
-        });
-
         describe('submitCheckout ::', () => {
             describe('if serviceType set to `collection`', () => {
                 propsData = {
@@ -550,6 +474,82 @@ describe('Checkout', () => {
                     expect(wrapper.vm.$v.fulfilment.address.line1).toBeDefined();
                     expect(wrapper.vm.$v.fulfilment.address.city).toBeDefined();
                     expect(wrapper.vm.$v.fulfilment.address.postcode).toBeDefined();
+                });
+            });
+        });
+
+        describe('loadCheckout ::', () => {
+            describe('when `getCheckout` request fails', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.reject()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should emit failure event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutGetSuccess)).toBeUndefined();
+                    expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
+                });
+            });
+
+            describe('when `getCheckout` request succeeds', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should emit success event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutGetSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutGetFailure)).toBeUndefined();
+                });
+            });
+        });
+
+        describe('loadAvailableFulfilment ::', () => {
+            describe('when `getAvailableFulfilment` request fails', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, getAvailableFulfilment: jest.fn(async () => Promise.reject()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should emit failure event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess)).toBeUndefined();
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure).length).toBe(1);
+                });
+            });
+
+            describe('when `getAvailableFulfilment` request succeeds', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should emit success event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure)).toBeUndefined();
                 });
             });
         });
