@@ -66,6 +66,7 @@ The props that can be defined are as follows:
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
 | `checkoutUrl` | `String` | - | Sets the url for the API called to load the Checkout Data.<br><br>The data returned from this API contains the serviceType, which determines if the Checkout component is created for Collection or Delivery. |
+| `checkoutAvailableFulfilmentUrl` | `String` | - | Sets the url for the API called to load the Available Fulfilment data. |
 | `checkoutTimeout` | `Number` | `1000` | Sets the timeout when submitting the checkout form. |
 | `getCheckoutTimeout` | `Number` | `1000` | Sets the timeout when loading checkout data. |
 | `authToken` | `String` | `''` | Sets the authorisation token used when submitting the checkout form. |
@@ -95,14 +96,14 @@ In addition to this, checkout exposes some classes which you can target in your 
 
 | Event | Description |
 | ----- | ----------- |
-| `checkout-payment-success` | This event is emitted when checkout form is sucessfully submitted. |
-| `checkout-payment-failure` | This event is emitted when checkout form is fails when submitted. |
-| `checkout-get-success` | This event is emitted when checkout data is sucessfully loaded.  |
-| `checkout-get-failure` | This event is emitted when checkout data is fails to load. |
+| `checkout-payment-success` | This event is emitted when checkout form is successfully submitted. |
+| `checkout-payment-failure` | This event is emitted when checkout form fails when submitted. |
+| `checkout-get-success` | This event is emitted when checkout data is successfully loaded.  |
+| `checkout-get-failure` | This event is emitted when checkout data fails to load. |
 
 You can add event listeners for these like so
 
-```js
+```html
 <template>
   <vue-checkout
     @checkoutPaymentSuccess="onPaymentSuccess"

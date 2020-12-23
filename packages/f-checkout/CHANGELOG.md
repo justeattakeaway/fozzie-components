@@ -10,6 +10,9 @@ v0.30.0
 ### Changed
 - props, CSS class, and event descriptions added to `README`.
 
+### Removed
+- unused event names.
+
 
 v0.29.0
 ------------------------------
