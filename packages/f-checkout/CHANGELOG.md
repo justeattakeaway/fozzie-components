@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.30.0
+v0.31.0
 ------------------------------
 *December 23, 2020*
 
@@ -12,6 +12,17 @@ v0.30.0
 
 ### Added
 - New `clearCheckoutForm` function added to clear the fields in tests in the `f-checkout-component.js` file.
+
+
+v0.30.0
+------------------------------
+*December 23, 2020*
+
+### Added
+- props, CSS class, and event descriptions added to `README`.
+
+### Removed
+- unused event names.
 
 
 v0.29.0

@@ -56,6 +56,86 @@
 
     ```
 
+## Configuration
+
+### Props
+
+`f-checkout` has a number of props that allow you to customise its functionality.
+
+The props that can be defined are as follows:
+
+| Prop  | Type  | Default | Description |
+| ----- | ----- | ------- | ----------- |
+| `checkoutUrl` | `String` | - | Sets the url for the API called to load the Checkout Data.<br><br>The data returned from this API contains the serviceType, which determines if the Checkout component is created for Collection or Delivery. |
+| `checkoutAvailableFulfilmentUrl` | `String` | - | Sets the url for the API called to load the Available Fulfilment data. |
+| `checkoutTimeout` | `Number` | `1000` | Sets the timeout when submitting the checkout form. |
+| `getCheckoutTimeout` | `Number` | `1000` | Sets the timeout when loading checkout data. |
+| `authToken` | `String` | `''` | Sets the authorisation token used when submitting the checkout form. |
+
+### CSS Classes
+
+Checkout has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
+
+In addition to this, checkout exposes some classes which you can target in your application.
+
+| Class | Description |
+| ----- | ----------- |
+| `c-checkout` | Can be used to target the checkout wrapper element. |
+| `c-card--dimensions` | Can be used to target the checkout content dimensions. |
+| `c-checkout-alert`  | Can be used to target the checkout alert element when it is visible. |
+| `c-checkout-allergyButton` | Can be used to target the checkout allergy button. |
+| `c-checkout-submitButton` | Can be used to target the checkout submit button. |
+| `c-address-label` | Can be used to target the address group label when checkout is using the delivery method. |
+| `c-address-group` | Can be used to target the grouped address fields when checkout is using the delivery method. |
+| `c-address-error` | Can be used to target the error message spacing in the address element when checkout is using the delivery method. |
+| `c-userNote` | Can be used to target the checkout user note wrapper. |
+| `c-userNote-title` | Can be used to target the checkout user note title. |
+| `c-userNote-content` | Can be used to target the checkout user note text description. |
+| `c-userNote-textArea` | Can be used to target the checkout user note text area. |
+
+### Events
+
+| Event | Description |
+| ----- | ----------- |
+| `checkout-payment-success` | This event is emitted when checkout form is successfully submitted. |
+| `checkout-payment-failure` | This event is emitted when checkout form fails when submitted. |
+| `checkout-get-success` | This event is emitted when checkout data is successfully loaded.  |
+| `checkout-get-failure` | This event is emitted when checkout data fails to load. |
+
+You can add event listeners for these like so
+
+```html
+<template>
+  <vue-checkout
+    @checkoutPaymentSuccess="onPaymentSuccess"
+    @checkoutPaymentFailure="onPaymentFailure"
+    @checkoutGetPaymentSuccess="onGetPaymentSuccess"
+    @checkoutGetPaymentFailure="onGetPaymentFailure"
+  </vue-checkout>
+</template>
+
+<script>
+export default {
+  methods: {
+    onPaymentSuccess () {
+      // Do stuff here
+    },
+
+    onPaymentFailure () {
+      // Do stuff here
+    },
+
+    onGetPaymentSuccess () {
+      // Do stuff here
+    },
+
+    onGetPaymentFailure () {
+      // Do stuff here
+    }
+  }
+}
+</script>
+```
 ## Development
 It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
 

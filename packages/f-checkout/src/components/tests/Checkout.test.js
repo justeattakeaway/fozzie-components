@@ -592,7 +592,7 @@ describe('Checkout', () => {
                     }
                 };
 
-                const genericErrorMessage = 'Something went wrong, please try again later'
+                const genericErrorMessage = 'Something went wrong, please try again later';
 
                 // Act
                 wrapper.vm.handleErrorState(error);
