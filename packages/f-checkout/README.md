@@ -80,13 +80,13 @@ In addition to this, the modal exposes some classes which you can target in your
 | ----- | ----------- |
 | `c-checkout` | Can be used to target the checkout wrapper element. |
 | `c-card--dimensions` | Can be used to target the checkout content dimensions. |
-| `c-checkout-alert`  | Can be used to target the checkout alert elemnet when it is visible. |
+| `c-checkout-alert`  | Can be used to target the checkout alert element when it is visible. |
 | `c-checkout-allergyButton` | Can be used to target the checkout allergy button. |
 | `c-checkout-submitButton` | Can be used to target the checkout submit button. |
 | `c-address-label` | Can be used to target the address group label when checkout is using the delivery method. |
 | `c-address-group` | Can be used to target the grouped address fields when checkout is using the delivery method. |
-| `c-address-error` | Can be used to target the error message spacing in the address element. |
-| `c-userNote` | Can be used to target the checkout user note. |
+| `c-address-error` | Can be used to target the error message spacing in the address element when checkout is using the delivery method. |
+| `c-userNote` | Can be used to target the checkout user note wrapper. |
 | `c-userNote-title` | Can be used to target the checkout user note title. |
 | `c-userNote-content` | Can be used to target the checkout user note text description. |
 | `c-userNote-textArea` | Can be used to target the checkout user note text area. |
@@ -109,8 +109,6 @@ You can add event listeners for these like so
     @checkoutPaymentFailure="onPaymentFailure"
     @checkoutGetPaymentSuccess="onGetPaymentSuccess"
     @checkoutGetPaymentFailure="onGetPaymentFailure"
-    @close="onModalClose">
-    <p>Modal content</p>
   </vue-checkout>
 </template>
 
