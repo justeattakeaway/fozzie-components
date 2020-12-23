@@ -114,6 +114,11 @@ export default {
             required: true
         },
 
+        checkoutAvailableFulfilmentUrl: {
+            type: String,
+            required: true
+        },
+
         checkoutTimeout: {
             type: Number,
             required: false,
@@ -196,10 +201,6 @@ export default {
     },
 
     watch: {
-        async checkoutUrl () {
-            await this.loadCheckout();
-        },
-
         authToken () {
             this.setAuthToken(this.authToken);
         }
@@ -207,7 +208,7 @@ export default {
 
     async mounted () {
         this.setAuthToken(this.authToken);
-        await this.loadCheckout();
+        await Promise.all([this.loadCheckout(), this.loadAvailableFulfilment()]);
     },
 
     created () {
@@ -230,6 +231,7 @@ export default {
         ...mapActions('checkout', [
             'getCheckout',
             'postCheckout',
+            'getAvailableFulfilment',
             'setAuthToken'
         ]),
 
@@ -278,6 +280,24 @@ export default {
             }
         },
 
+        /**
+         * Load the available fulfilment details while emitting events to communicate its success or failure.
+         *
+         */
+        async loadAvailableFulfilment () {
+            try {
+                await this.getAvailableFulfilment({
+                    url: this.checkoutAvailableFulfilmentUrl,
+                    tenant: this.tenant,
+                    timeout: this.getCheckoutTimeout
+                });
+
+                this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess); // TODO: Check these emitted events.
+            } catch (thrownErrors) {
+                this.$emit(EventNames.CheckoutAvailableFulfilmentGetFailure, thrownErrors); // TODO: Check these emitted events.
+            }
+        },
+
         handleErrorState (error) {
             /*
             * Emit `CheckoutFailure` event with error data
@@ -294,7 +314,7 @@ export default {
 
             // TODO: Review this later - even though f-registration does something similar
             if (Array.isArray(thrownErrors)) {
-                this.genericErrorMessage = thrownErrors[0].description || this.copy.errorMessages.genericServerError;
+                this.genericErrorMessage = thrownErrors[0].description || this.$t('errorMessages.genericServerError');
             } else {
                 this.genericErrorMessage = error;
             }

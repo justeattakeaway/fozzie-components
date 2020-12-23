@@ -1,77 +1,26 @@
 import { shallowMount, mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
+import { validations } from '@justeat/f-services';
 import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
-import tenantConfigs from '../../tenants';
+import {
+    fulfilmentTimes, defaultState, defaultActions, i18n, createStore
+} from './helpers/setup';
 
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
-const fulfilmentTimes = [
-    {
-        from: '2020-01-01T00:00+00:00',
-        label: {
-            text: 'time 1'
-        },
-        selected: false,
-        to: '2020-01-01T00:00+00:00'
-    }
-];
-
-const defaultState = {
-    id: '',
-    serviceType: CHECKOUT_METHOD_DELIVERY,
-    customer: {
-        firstName: 'John',
-        mobileNumber: '+447111111111'
-    },
-    fulfilment: {
-        times: fulfilmentTimes,
-        address: {
-            line1: '1 Bristol Road',
-            line2: 'Flat 1',
-            city: 'Bristol',
-            postcode: 'BS1 1AA'
-        }
-    },
-    notes: [],
-    isFulfillable: true,
-    notices: [],
-    messages: []
-};
-
-const defaultActions = {
-    getCheckout: jest.fn(),
-    postCheckout: jest.fn(),
-    setAuthToken: jest.fn()
-};
-
-const i18n = {
-    locale: 'en-GB',
-    messages: tenantConfigs['en-GB']
-};
-
-const createStore = (state = defaultState, actions = defaultActions) => new Vuex.Store({
-    modules: {
-        checkout: {
-            namespaced: true,
-            state,
-            actions
-        }
-    },
-    hasModule: jest.fn(() => true)
-});
-
 describe('Checkout', () => {
     allure.feature('Checkout');
-    const checkoutUrl = 'http://localhost/account/register';
+    const checkoutUrl = 'http://localhost/checkout';
+    const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
 
     it('should be defined', () => {
-        const propsData = { checkoutUrl };
+        const propsData = { checkoutUrl, checkoutAvailableFulfilmentUrl };
 
         const wrapper = shallowMount(VueCheckout, {
             i18n,
@@ -91,7 +40,8 @@ describe('Checkout', () => {
         it('should register the `checkout` module if it doesn\'t exist in the store', () => {
             // Arrange
             const propsData = {
-                checkoutUrl
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl
             };
 
             const store = new Vuex.Store({});
@@ -113,7 +63,8 @@ describe('Checkout', () => {
         it('should not register the `checkout` module if it already exists in the store', () => {
             // Arrange
             const propsData = {
-                checkoutUrl
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl
             };
 
             const store = createStore();
@@ -138,7 +89,8 @@ describe('Checkout', () => {
             it('should display the address block if set to `delivery`', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutUrl
+                    checkoutUrl,
+                    checkoutAvailableFulfilmentUrl
                 };
 
                 // Act
@@ -158,7 +110,8 @@ describe('Checkout', () => {
             it('should not display the address block if set to `collection`', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutUrl
+                    checkoutUrl,
+                    checkoutAvailableFulfilmentUrl
                 };
 
                 // Act
@@ -183,10 +136,12 @@ describe('Checkout', () => {
                 // Arrange
                 const propsData = {
                     checkoutUrl,
+                    checkoutAvailableFulfilmentUrl,
                     authToken: 'sampleToken'
                 };
 
                 const setAuthToken = jest.fn();
+
                 // Act
                 shallowMount(VueCheckout, {
                     store: createStore(defaultState, { ...defaultActions, setAuthToken }),
@@ -206,7 +161,8 @@ describe('Checkout', () => {
             it('should capitalize `firstName` data', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutUrl
+                    checkoutUrl,
+                    checkoutAvailableFulfilmentUrl
                 };
 
                 // Act
@@ -228,7 +184,8 @@ describe('Checkout', () => {
             it('should add `name` to title text', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutUrl
+                    checkoutUrl,
+                    checkoutAvailableFulfilmentUrl
                 };
 
                 // Act
@@ -247,260 +204,487 @@ describe('Checkout', () => {
         });
     });
 
-    describe('when form submitted', () => {
-        describe('if serviceType set to `collection`', () => {
+    describe('mounted ::', () => {
+        it('should call `setAuthToken`', () => {
+            // Arrange & Act
+            const setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
+
             const propsData = {
-                checkoutUrl
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl,
+                authToken: 'mytoken'
             };
 
-            let wrapper;
+            shallowMount(VueCheckout, {
+                store: createStore(),
+                i18n,
+                localVue,
+                propsData
+            });
 
-            beforeEach(() => {
-                const state = {
-                    ...defaultState,
-                    serviceType: CHECKOUT_METHOD_COLLECTION,
-                    customer: {
-                        firstName: defaultState.customer.firstName
-                    },
-                    fulfilment: {
-                        times: fulfilmentTimes,
-                        address: {}
-                    }
-                };
+            expect(setAuthTokenSpy).toHaveBeenCalledWith(propsData.authToken);
+        });
 
-                wrapper = mount(VueCheckout, {
-                    store: createStore(state, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()), postCheckout: jest.fn(async () => Promise.resolve()) }),
-                    i18n,
-                    localVue,
-                    propsData
+        it('should call `loadCheckout`', () => {
+            // Arrange & Act
+            const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
+
+            const propsData = {
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl
+            };
+
+            shallowMount(VueCheckout, {
+                store: createStore(),
+                i18n,
+                localVue,
+                propsData
+            });
+
+            expect(loadCheckoutSpy).toHaveBeenCalled();
+        });
+
+        it('should call `loadAvailableFulfilment`', () => {
+            // Arrange & Act
+            const loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
+
+            const propsData = {
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl
+            };
+
+            shallowMount(VueCheckout, {
+                store: createStore(),
+                i18n,
+                localVue,
+                propsData
+            });
+
+            expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
+        });
+    });
+
+    describe('methods ::', () => {
+        const propsData = {
+            checkoutUrl,
+            checkoutAvailableFulfilmentUrl
+        };
+
+        describe('submitCheckout ::', () => {
+            describe('if serviceType set to `collection`', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    const state = {
+                        ...defaultState,
+                        serviceType: CHECKOUT_METHOD_COLLECTION,
+                        customer: {
+                            firstName: defaultState.customer.firstName
+                        },
+                        fulfilment: {
+                            times: fulfilmentTimes,
+                            address: {}
+                        }
+                    };
+
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(state, { ...defaultActions }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should emit success event when all the fields are populated correctly', async () => {
+                    // Arrange
+                    wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue(defaultState.customer.mobileNumber);
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
+                });
+
+                it('should show error message and emit failure event when the mobile number field is not populated', async () => {
+                    // Arrange
+                    wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue('');
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+                    const mobileNumberEmptyMessage = wrapper.find('[data-test-id="error-mobile-number"]');
+
+                    // Assert
+                    expect(wrapper.vm.isMobileNumberValid).toBe(false);
+                    expect(mobileNumberEmptyMessage).toMatchSnapshot();
+                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.mobileNumber');
+                });
+
+                it('should show error message and emit failure event when the mobile number field is populated with a < 10 numbers', async () => {
+                    // Arrange
+                    wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue('077777');
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+                    const mobileNumberEmptyMessage = wrapper.find('[data-test-id="error-mobile-number"]');
+
+                    // Assert
+                    expect(wrapper.vm.isMobileNumberValid).toBe(false);
+                    expect(mobileNumberEmptyMessage).toMatchSnapshot();
+                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.mobileNumber');
+                });
+
+                it('should show error message and emit failure event when the mobile number field is populated with non numeric value', async () => {
+                    // Arrange
+                    wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue('hs;-j`$e&1l');
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+                    const mobileNumberEmptyMessage = wrapper.find('[data-test-id="error-mobile-number"]');
+
+                    // Assert
+                    expect(wrapper.vm.isMobileNumberValid).toBe(false);
+                    expect(mobileNumberEmptyMessage).toMatchSnapshot();
+                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.mobileNumber');
+                });
+
+                it('should not create validations for address', () => {
+                    // Assert
+                    expect(wrapper.vm.$v.fulfilment).toBeUndefined();
                 });
             });
 
-            it('should emit success event when all the fields are populated correctly', async () => {
-                // Arrange
-                wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue(defaultState.customer.mobileNumber);
+            describe('if serviceType set to `delivery`', () => {
+                let wrapper;
 
-                // Act
-                await wrapper.vm.onFormSubmit();
+                beforeEach(() => {
+                    const state = {
+                        ...defaultState,
+                        serviceType: CHECKOUT_METHOD_DELIVERY,
+                        customer: {
+                            firstName: defaultState.customer.firstName
+                        },
+                        fulfilment: {
+                            times: fulfilmentTimes,
+                            address: {}
+                        }
+                    };
 
-                // Assert
-                expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
-            });
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(state),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
 
-            it('should show error message and emit failure event when the mobile number field is not populated', async () => {
-                // Arrange
-                wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue('');
+                it('should emit success event when all fields are populated correctly', async () => {
+                    // Arrange
+                    wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue(defaultState.customer.mobileNumber);
+                    wrapper.find('[data-test-id="formfield-address-line-1-input"]').setValue(defaultState.fulfilment.address.line1);
+                    wrapper.find('[data-test-id="formfield-address-city-input"]').setValue(defaultState.fulfilment.address.city);
+                    wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue(defaultState.fulfilment.address.postcode);
 
-                // Act
-                await wrapper.vm.onFormSubmit();
-                const mobileNumberEmptyMessage = wrapper.find('[data-test-id="error-mobile-number"]');
+                    // Act
+                    await wrapper.vm.onFormSubmit();
 
-                // Assert
-                expect(wrapper.vm.isMobileNumberValid).toBe(false);
-                expect(mobileNumberEmptyMessage).toMatchSnapshot();
-                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.mobileNumber');
-            });
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
+                });
 
-            it('should show error message and emit failure event when the mobile number field is populated with a < 10 numbers', async () => {
-                // Arrange
-                wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue('077777');
+                it('should emit failure event and display error message when address line1 input field is empty', async () => {
+                    // Arrange && Act
+                    await wrapper.vm.onFormSubmit();
+                    const addressLine1EmptyMessage = wrapper.find('[data-test-id="error-address-line1-empty"]');
 
-                // Act
-                await wrapper.vm.onFormSubmit();
-                const mobileNumberEmptyMessage = wrapper.find('[data-test-id="error-mobile-number"]');
+                    // Assert
+                    expect(addressLine1EmptyMessage).toMatchSnapshot();
+                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.line1');
+                });
 
-                // Assert
-                expect(wrapper.vm.isMobileNumberValid).toBe(false);
-                expect(mobileNumberEmptyMessage).toMatchSnapshot();
-                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.mobileNumber');
-            });
+                it('should emit failure event and display error message when city input field is empty', async () => {
+                    // Arrange && Act
+                    await wrapper.vm.onFormSubmit();
+                    const addressCityEmptyMessage = wrapper.find('[data-test-id="error-address-city-empty"]');
 
-            it('should show error message and emit failure event when the mobile number field is populated with non numeric value', async () => {
-                // Arrange
-                wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue('hs;-j`$e&1l');
+                    // Assert
+                    expect(addressCityEmptyMessage).toMatchSnapshot();
+                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.city');
+                });
 
-                // Act
-                await wrapper.vm.onFormSubmit();
-                const mobileNumberEmptyMessage = wrapper.find('[data-test-id="error-mobile-number"]');
+                it('should emit failure event and display error message when postcode input field is empty', async () => {
+                    // Arrange && Act
+                    await wrapper.vm.onFormSubmit();
+                    const addressPostcodeEmptyMessage = wrapper.find('[data-test-id="error-address-postcode-empty"]');
 
-                // Assert
-                expect(wrapper.vm.isMobileNumberValid).toBe(false);
-                expect(mobileNumberEmptyMessage).toMatchSnapshot();
-                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.mobileNumber');
-            });
+                    // Assert
+                    expect(addressPostcodeEmptyMessage).toMatchSnapshot();
+                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.postcode');
+                });
 
-            it('should not create validations for address', () => {
-                // Assert
-                expect(wrapper.vm.$v.fulfilment).toBeUndefined();
+                it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
+                    // Arrange
+                    wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue('?!hdb-se');
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+                    const addressPostcodeTypeErrorMessage = wrapper.find('[data-test-id="error-address-postcode-type-error"]');
+
+                    // Assert
+                    expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
+                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.postcode');
+                });
+
+
+                it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
+                    // Arrange
+                    wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue('EC4M 7R');
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+                    const addressPostcodeTypeErrorMessage = wrapper.find('[data-test-id="error-address-postcode-type-error"]');
+
+                    // Assert
+                    expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
+                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.postcode');
+                });
+
+                it('should create validations for address', () => {
+                    // Assert
+                    expect(wrapper.vm.$v.fulfilment.address.line1).toBeDefined();
+                    expect(wrapper.vm.$v.fulfilment.address.city).toBeDefined();
+                    expect(wrapper.vm.$v.fulfilment.address.postcode).toBeDefined();
+                });
             });
         });
 
-        describe('if serviceType set to `delivery`', () => {
-            const propsData = {
-                checkoutUrl
-            };
+        describe('loadCheckout ::', () => {
+            describe('when `getCheckout` request fails', () => {
+                let wrapper;
 
-            let wrapper;
+                beforeEach(() => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.reject()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
 
-            beforeEach(() => {
-                const state = {
-                    ...defaultState,
-                    serviceType: CHECKOUT_METHOD_DELIVERY,
-                    customer: {
-                        firstName: defaultState.customer.firstName
-                    },
-                    fulfilment: {
-                        times: fulfilmentTimes,
-                        address: {}
-                    }
-                };
+                it('should emit failure event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutGetSuccess)).toBeUndefined();
+                    expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
+                });
+            });
 
-                wrapper = mount(VueCheckout, {
-                    store: createStore(state, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()), postCheckout: jest.fn(async () => Promise.resolve()) }),
+            describe('when `getCheckout` request succeeds', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should emit success event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutGetSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutGetFailure)).toBeUndefined();
+                });
+            });
+        });
+
+        describe('loadAvailableFulfilment ::', () => {
+            describe('when `getAvailableFulfilment` request fails', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, getAvailableFulfilment: jest.fn(async () => Promise.reject()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should emit failure event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess)).toBeUndefined();
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure).length).toBe(1);
+                });
+            });
+
+            describe('when `getAvailableFulfilment` request succeeds', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should emit success event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure)).toBeUndefined();
+                });
+            });
+        });
+
+        describe('handleErrorState ::', () => {
+            it('should emit failure event and update `genericErrorMessage` with first error message description', () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
                     i18n,
                     localVue,
                     propsData
                 });
-            });
 
-            it('should emit success event when all fields are populated correctly', async () => {
-                // Arrange
-                wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue(defaultState.customer.mobileNumber);
-                wrapper.find('[data-test-id="formfield-address-line-1-input"]').setValue(defaultState.fulfilment.address.line1);
-                wrapper.find('[data-test-id="formfield-address-city-input"]').setValue(defaultState.fulfilment.address.city);
-                wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue(defaultState.fulfilment.address.postcode);
-
-                // Act
-                await wrapper.vm.onFormSubmit();
-
-                // Assert
-                expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
-            });
-
-            it('should emit failure event and display error message when address line1 input field is empty', async () => {
-                // Arrange && Act
-                await wrapper.vm.onFormSubmit();
-                const addressLine1EmptyMessage = wrapper.find('[data-test-id="error-address-line1-empty"]');
-
-                // Assert
-                expect(addressLine1EmptyMessage).toMatchSnapshot();
-                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.line1');
-            });
-
-            it('should emit failure event and display error message when city input field is empty', async () => {
-                // Arrange && Act
-                await wrapper.vm.onFormSubmit();
-                const addressCityEmptyMessage = wrapper.find('[data-test-id="error-address-city-empty"]');
-
-                // Assert
-                expect(addressCityEmptyMessage).toMatchSnapshot();
-                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.city');
-            });
-
-            it('should emit failure event and display error message when postcode input field is empty', async () => {
-                // Arrange && Act
-                await wrapper.vm.onFormSubmit();
-                const addressPostcodeEmptyMessage = wrapper.find('[data-test-id="error-address-postcode-empty"]');
-
-                // Assert
-                expect(addressPostcodeEmptyMessage).toMatchSnapshot();
-                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.postcode');
-            });
-
-            it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
-                // Arrange
-                wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue('?!hdb-se');
+                const errorDescription = 'Error Description';
+                const error = {
+                    response: {
+                        data: {
+                            errors: [
+                                {
+                                    description: errorDescription
+                                }
+                            ]
+                        }
+                    }
+                };
 
                 // Act
-                await wrapper.vm.onFormSubmit();
-                const addressPostcodeTypeErrorMessage = wrapper.find('[data-test-id="error-address-postcode-type-error"]');
+                wrapper.vm.handleErrorState(error);
 
                 // Assert
-                expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.postcode');
+                expect(wrapper.vm.genericErrorMessage).toEqual(errorDescription);
             });
 
-
-            it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
+            it('should emit failure event and use tenant `genericErrorMessage` if returned errors have no description', () => {
                 // Arrange
-                wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue('EC4M 7R');
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const error = {
+                    response: {
+                        data: {
+                            errors: [{}]
+                        }
+                    }
+                };
+
+                const genericErrorMessage = 'Something went wrong, please try again later'
 
                 // Act
-                await wrapper.vm.onFormSubmit();
-                const addressPostcodeTypeErrorMessage = wrapper.find('[data-test-id="error-address-postcode-type-error"]');
+                wrapper.vm.handleErrorState(error);
 
                 // Assert
-                expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.postcode');
+                expect(wrapper.vm.genericErrorMessage).toEqual(genericErrorMessage);
             });
 
-            it('should create validations for address', () => {
+            it('should emit failure event and update `genericErrorMessage` with error if single error', () => {
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const error = 'Unknown Error';
+
+                wrapper.vm.handleErrorState(error);
+
+                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                expect(wrapper.vm.genericErrorMessage).toEqual(error);
+            });
+        });
+
+        describe('isValidPhoneNumber ::', () => {
+            const isValidPhoneNumberSpy = jest.spyOn(validations, 'isValidPhoneNumber');
+
+            it('should call `isValidPhoneNumber` from `f-services', () => {
+                // Act
+                mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
                 // Assert
-                expect(wrapper.vm.$v.fulfilment.address.line1).toBeDefined();
-                expect(wrapper.vm.$v.fulfilment.address.city).toBeDefined();
-                expect(wrapper.vm.$v.fulfilment.address.postcode).toBeDefined();
+                expect(isValidPhoneNumberSpy).toBeCalledWith(defaultState.customer.mobileNumber, i18n.locale);
+            });
+        });
+
+        describe('isValidPostcode ::', () => {
+            const isValidPostcodeSpy = jest.spyOn(validations, 'isValidPostcode');
+
+            it('should call `isValidPostcode` from `f-services', () => {
+                // Act
+                mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                // expect(isValidPostcodeSpy).toBeCalledWith(defaultState.customer.mobileNumber, i18n.locale);
+                expect(isValidPostcodeSpy).toBeCalledWith(defaultState.fulfilment.address.postcode, i18n.locale);
             });
         });
     });
 
-    describe('when form is loaded', () => {
-        const propsData = {
-            checkoutUrl
-        };
+    describe('watch ::', () => {
+        describe('fulfilmentTimes ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
 
-        describe('when request fails', () => {
-            let wrapper;
+            it('should call `selectionChanged` with the first fulfilment time when there are fulfilment times', async () => {
+                // Arrange
+                const setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
 
-            beforeEach(() => {
-                wrapper = mount(VueCheckout, {
-                    store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.reject()) }),
+                const propsData = {
+                    checkoutUrl,
+                    checkoutAvailableFulfilmentUrl
+                };
+
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
                     i18n,
                     localVue,
                     propsData
                 });
-            });
 
-            it('should emit failure event', async () => {
-                expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
-            });
-        });
+                const newAuthToken = 'new authToken';
 
-        describe('when request succeeds', () => {
-            let wrapper;
+                // Act
+                wrapper.setProps({ authToken: newAuthToken });
+                await wrapper.vm.$nextTick();
 
-            beforeEach(() => {
-                wrapper = mount(VueCheckout, {
-                    store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()) }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-            });
-
-            it('should emit success event', async () => {
-                expect(wrapper.emitted(EventNames.CheckoutGetSuccess).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutGetFailure)).toBeUndefined();
-            });
-
-            it('should set mobile number', async () => {
-                expect(wrapper.find('[data-test-id="formfield-mobile-number-input"]').element.value).toBe(defaultState.customer.mobileNumber);
-            });
-
-            it('should set address fields', async () => {
-                expect(wrapper.find('[data-test-id="formfield-address-line-1-input"]').element.value).toBe(defaultState.fulfilment.address.line1);
-                expect(wrapper.find('[data-test-id="formfield-address-line-2-input"]').element.value).toBe(defaultState.fulfilment.address.line2);
-                expect(wrapper.find('[data-test-id="formfield-address-city-input"]').element.value).toBe(defaultState.fulfilment.address.city);
-                expect(wrapper.find('[data-test-id="formfield-address-postcode-input"]').element.value).toBe(defaultState.fulfilment.address.postcode);
+                // Assert
+                expect(setAuthTokenSpy).toHaveBeenCalledWith('new authToken');
             });
         });
     });

@@ -1684,6 +1684,13 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
+"@justeat/f-globalisation@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
+  integrity sha512-WXBBl/nu88HxVKIuEt1/1KYnAB2XUImi+CK9ZdKQt/FiQolDMe+9hqxTRr2YSbeLXulGXR17WOCDAJQKwHU2Og==
+  dependencies:
+    vue-i18n "8.0.0"
+
 "@justeat/f-icons@2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.3.0.tgz#473cc1ce7edeb0ce58df674c9c4ee0ebf30171d8"
@@ -1746,14 +1753,6 @@
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.4.0.tgz#e783b8455904b5f3879e3a90d744913bf01bd0a3"
   integrity sha512-EjeUhz++c0QlToz1SvBOtmFSsWO6qRccJoYXYWcws3eNNZKvQbckqFVZ6cvjxaHZ66kcue53kOiazCGN+rpbuw==
-  dependencies:
-    lodash-es "4.17.15"
-    window-or-global "1.0.1"
-
-"@justeat/f-services@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.6.0.tgz#1c6afb320b398c8120a9400b50a7761f892def99"
-  integrity sha512-LT0FUXDh1JGpkvfSQPuNIzImUTA9X52NMyvjZ9OCMVNtzGPmEEg++1BLwIfugpt6ezcCSF9HtiS218IGlqzffA==
   dependencies:
     lodash-es "4.17.15"
     window-or-global "1.0.1"

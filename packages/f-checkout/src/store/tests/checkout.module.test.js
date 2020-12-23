@@ -1,6 +1,7 @@
 import axios from 'axios';
 import CheckoutModule from '../checkout.module';
 import checkoutDelivery from '../../demo/checkout-delivery.json';
+import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 
 const mobileNumber = '+447111111111';
 
@@ -14,7 +15,10 @@ const defaultState = {
         mobileNumber: ''
     },
     fulfilment: {
-        times: [],
+        time: {
+            from: '',
+            to: ''
+        },
         address: {
             line1: '',
             line2: '',
@@ -26,12 +30,18 @@ const defaultState = {
     isFulfillable: true,
     notices: [],
     messages: [],
+    availableFulfilment: {
+        times: [],
+        isAsapAvailable: false
+    },
     authToken: '',
     isLoggedIn: false
 };
 
-const { updateState, updateAuth } = CheckoutModule.mutations;
-const { getCheckout, postCheckout, setAuthToken } = CheckoutModule.actions;
+const { updateState, updateAuth, updateAvailableFulfilment } = CheckoutModule.mutations;
+const {
+    getCheckout, postCheckout, setAuthToken, getAvailableFulfilment
+} = CheckoutModule.actions;
 let state = CheckoutModule.state();
 
 describe('CheckoutModule', () => {
@@ -85,6 +95,20 @@ describe('CheckoutModule', () => {
                 // Assert
                 expect(state.authToken).toEqual(authToken);
                 expect(state.isLoggedIn).toBeTruthy();
+            });
+        });
+
+        describe('updateAvailableFulfilment ::', () => {
+            it('should update state with the availableFulfilment response', () => {
+                // Arrange
+                const expectedAvailableFulfilmentTimes = checkoutAvailableFulfilment.times;
+
+                // Act
+                updateAvailableFulfilment(state, checkoutAvailableFulfilment);
+
+                // Assert
+                expect(state.availableFulfilment.times).toEqual(expectedAvailableFulfilmentTimes);
+                expect(state.availableFulfilment.isAsapAvailable).toBe(true);
             });
         });
     });
@@ -164,6 +188,32 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith('updateAuth', authToken);
+            });
+        });
+
+        describe('getAvailableFulfilment ::', () => {
+            let config;
+
+            beforeEach(() => {
+                config = {
+                    method: 'get',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept-Tenant': payload.tenant
+                    },
+                    timeout: payload.timeout
+                };
+
+                axios.get = jest.fn(() => Promise.resolve({ data: checkoutAvailableFulfilment }));
+            });
+
+            it('should get the checkout available fulfilment details from the backend and call `updateAvailableFulfilment` mutation.', async () => {
+                // Act
+                await getAvailableFulfilment({ commit }, payload);
+
+                // Assert
+                expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                expect(commit).toHaveBeenCalledWith('updateAvailableFulfilment', checkoutAvailableFulfilment);
             });
         });
     });

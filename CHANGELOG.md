@@ -5,13 +5,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.25.0
 ------------------------------
+*December 21, 2020*
+
+### Added
+- Documentation for font optimisation and subsetting.
+
+v2.24.0
+------------------------------
 *December 11, 2020*
 
 ### Changed
 - README's for components to remove references to demo files.
-
-
-*December 11, 2020*
 
 ### Changed
 - package.json component test scripts
