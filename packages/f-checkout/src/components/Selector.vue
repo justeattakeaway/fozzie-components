@@ -18,9 +18,15 @@ import { CHECKOUT_METHOD_DELIVERY } from '../constants';
 export default {
     components: { FormDropdown },
 
+    data () {
+        return {
+            selectedAvailableFulfilmentTime: ''
+        };
+    },
+
     computed: {
         ...mapState('checkout', [
-            'fulfilment',
+            'availableFulfilment',
             'serviceType'
         ]),
 
@@ -31,25 +37,39 @@ export default {
         },
 
         /*
-        * Create an array from fulfilment times labels to
-        * display as options in dropdown
+        * Returns an array of formatted dates to display as options in a dropdown
         */
         fulfilmentTimes () {
-            return this.fulfilment.times.map(time => time.label.text);
+            const times = this.availableFulfilment.isAsapAvailable
+                ? [this.$t('asapFulfilmentOption')]
+                : [];
+
+            this.availableFulfilment.times.forEach(time => {
+                const formattedTime = this.$d(new Date(time.from), 'short');
+
+                times.push(formattedTime);
+            });
+
+            return times;
+        }
+    },
+
+    watch: {
+        'fulfilmentTimes' () {
+            if (this.fulfilmentTimes.length > 0) {
+                this.selectionChanged(this.fulfilmentTimes[0]);
+            }
         }
     },
 
     methods: {
         /**
-        * Update all fulfilment.times.selected to false
-        * Update chosen fulfilment.times.selected to true
+        * Update the selected available fulfilment time.
         *
-        * @param {string} selectedTime The time emited when dropdown value is changed.
+        * @param {string} selectedFulfilmentTime The time emited when dropdown value is changed.
         **/
-        selectionChanged (selectedTime) {
-            this.fulfilment.times.forEach(fulfilmentTime => {
-                fulfilmentTime.selected = fulfilmentTime.label.text === selectedTime;
-            });
+        selectionChanged (selectedFulfilmentTime) {
+            this.selectedAvailableFulfilmentTime = selectedFulfilmentTime;
         }
     }
 };

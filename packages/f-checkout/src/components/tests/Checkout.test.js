@@ -13,12 +13,12 @@ localVue.use(Vuex);
 
 const fulfilmentTimes = [
     {
-        from: '2020-01-01T00:00+00:00',
-        label: {
-            text: 'time 1'
-        },
-        selected: false,
-        to: '2020-01-01T00:00+00:00'
+        from: '2020-01-01T01:00:00.000Z',
+        to: '2020-01-01T01:00:00.000Z'
+    },
+    {
+        from: '2020-01-01T01:15:00.000Z',
+        to: '2020-01-01T01:15:00.000Z'
     }
 ];
 
@@ -30,13 +30,20 @@ const defaultState = {
         mobileNumber: '+447111111111'
     },
     fulfilment: {
-        times: fulfilmentTimes,
+        time: {
+            from: '',
+            to: ''
+        },
         address: {
             line1: '1 Bristol Road',
             line2: 'Flat 1',
             city: 'Bristol',
             postcode: 'BS1 1AA'
         }
+    },
+    availableFulfilment: {
+        times: fulfilmentTimes,
+        isAsapAvailable: true
     },
     notes: [],
     isFulfillable: true,
@@ -47,12 +54,18 @@ const defaultState = {
 const defaultActions = {
     getCheckout: jest.fn(),
     postCheckout: jest.fn(),
+    getAvailableFulfilment: jest.fn(),
     setAuthToken: jest.fn()
 };
 
 const i18n = {
     locale: 'en-GB',
-    messages: tenantConfigs['en-GB']
+    messages: {
+        'en-GB': tenantConfigs['en-GB'].messages
+    },
+    dateTimeFormats: {
+        'en-GB': tenantConfigs['en-GB'].dateTimeFormats
+    }
 };
 
 const createStore = (state = defaultState, actions = defaultActions) => new Vuex.Store({
@@ -68,10 +81,11 @@ const createStore = (state = defaultState, actions = defaultActions) => new Vuex
 
 describe('Checkout', () => {
     allure.feature('Checkout');
-    const checkoutUrl = 'http://localhost/account/register';
+    const checkoutUrl = 'http://localhost/checkout';
+    const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
 
     it('should be defined', () => {
-        const propsData = { checkoutUrl };
+        const propsData = { checkoutUrl, checkoutAvailableFulfilmentUrl };
 
         const wrapper = shallowMount(VueCheckout, {
             i18n,
@@ -91,7 +105,8 @@ describe('Checkout', () => {
         it('should register the `checkout` module if it doesn\'t exist in the store', () => {
             // Arrange
             const propsData = {
-                checkoutUrl
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl
             };
 
             const store = new Vuex.Store({});
@@ -113,7 +128,8 @@ describe('Checkout', () => {
         it('should not register the `checkout` module if it already exists in the store', () => {
             // Arrange
             const propsData = {
-                checkoutUrl
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl
             };
 
             const store = createStore();
@@ -138,7 +154,8 @@ describe('Checkout', () => {
             it('should display the address block if set to `delivery`', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutUrl
+                    checkoutUrl,
+                    checkoutAvailableFulfilmentUrl
                 };
 
                 // Act
@@ -158,7 +175,8 @@ describe('Checkout', () => {
             it('should not display the address block if set to `collection`', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutUrl
+                    checkoutUrl,
+                    checkoutAvailableFulfilmentUrl
                 };
 
                 // Act
@@ -183,10 +201,12 @@ describe('Checkout', () => {
                 // Arrange
                 const propsData = {
                     checkoutUrl,
+                    checkoutAvailableFulfilmentUrl,
                     authToken: 'sampleToken'
                 };
 
                 const setAuthToken = jest.fn();
+
                 // Act
                 shallowMount(VueCheckout, {
                     store: createStore(defaultState, { ...defaultActions, setAuthToken }),
@@ -206,7 +226,8 @@ describe('Checkout', () => {
             it('should capitalize `firstName` data', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutUrl
+                    checkoutUrl,
+                    checkoutAvailableFulfilmentUrl
                 };
 
                 // Act
@@ -228,7 +249,8 @@ describe('Checkout', () => {
             it('should add `name` to title text', async () => {
                 // Arrange
                 const propsData = {
-                    checkoutUrl
+                    checkoutUrl,
+                    checkoutAvailableFulfilmentUrl
                 };
 
                 // Act
@@ -247,10 +269,71 @@ describe('Checkout', () => {
         });
     });
 
+    describe('mounted ::', () => {
+        it('should call `setAuthToken`', () => {
+            // Arrange & Act
+            const setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
+
+            const propsData = {
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl,
+                authToken: 'mytoken'
+            };
+
+            shallowMount(VueCheckout, {
+                store: createStore(),
+                i18n,
+                localVue,
+                propsData
+            });
+
+            expect(setAuthTokenSpy).toHaveBeenCalledWith(propsData.authToken);
+        });
+
+        it('should call `loadCheckout`', () => {
+            // Arrange & Act
+            const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
+
+            const propsData = {
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl
+            };
+
+            shallowMount(VueCheckout, {
+                store: createStore(),
+                i18n,
+                localVue,
+                propsData
+            });
+
+            expect(loadCheckoutSpy).toHaveBeenCalled();
+        });
+
+        it('should call `loadAvailableFulfilment`', () => {
+            // Arrange & Act
+            const loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
+
+            const propsData = {
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl
+            };
+
+            shallowMount(VueCheckout, {
+                store: createStore(),
+                i18n,
+                localVue,
+                propsData
+            });
+
+            expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
+        });
+    });
+
     describe('when form submitted', () => {
         describe('if serviceType set to `collection`', () => {
             const propsData = {
-                checkoutUrl
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl
             };
 
             let wrapper;
@@ -269,7 +352,7 @@ describe('Checkout', () => {
                 };
 
                 wrapper = mount(VueCheckout, {
-                    store: createStore(state, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()), postCheckout: jest.fn(async () => Promise.resolve()) }),
+                    store: createStore(state, { ...defaultActions }),
                     i18n,
                     localVue,
                     propsData
@@ -341,7 +424,8 @@ describe('Checkout', () => {
 
         describe('if serviceType set to `delivery`', () => {
             const propsData = {
-                checkoutUrl
+                checkoutUrl,
+                checkoutAvailableFulfilmentUrl
             };
 
             let wrapper;
@@ -360,7 +444,7 @@ describe('Checkout', () => {
                 };
 
                 wrapper = mount(VueCheckout, {
-                    store: createStore(state, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()), postCheckout: jest.fn(async () => Promise.resolve()) }),
+                    store: createStore(state),
                     i18n,
                     localVue,
                     propsData
@@ -453,54 +537,85 @@ describe('Checkout', () => {
         });
     });
 
-    describe('when form is loaded', () => {
+    describe('methods ::', () => {
         const propsData = {
-            checkoutUrl
+            checkoutUrl,
+            checkoutAvailableFulfilmentUrl
         };
 
-        describe('when request fails', () => {
-            let wrapper;
+        describe('loadCheckout ::', () => {
+            describe('when `getCheckout` request fails', () => {
+                let wrapper;
 
-            beforeEach(() => {
-                wrapper = mount(VueCheckout, {
-                    store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.reject()) }),
-                    i18n,
-                    localVue,
-                    propsData
+                beforeEach(() => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.reject()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should emit failure event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutGetSuccess)).toBeUndefined();
+                    expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
                 });
             });
 
-            it('should emit failure event', async () => {
-                expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
+            describe('when `getCheckout` request succeeds', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should emit success event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutGetSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutGetFailure)).toBeUndefined();
+                });
             });
         });
 
-        describe('when request succeeds', () => {
-            let wrapper;
+        describe('loadAvailableFulfilment ::', () => {
+            describe('when `getAvailableFulfilment` request fails', () => {
+                let wrapper;
 
-            beforeEach(() => {
-                wrapper = mount(VueCheckout, {
-                    store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.resolve()) }),
-                    i18n,
-                    localVue,
-                    propsData
+                beforeEach(() => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, getAvailableFulfilment: jest.fn(async () => Promise.reject()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should emit failure event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess)).toBeUndefined();
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure).length).toBe(1);
                 });
             });
 
-            it('should emit success event', async () => {
-                expect(wrapper.emitted(EventNames.CheckoutGetSuccess).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutGetFailure)).toBeUndefined();
-            });
+            describe('when `getAvailableFulfilment` request succeeds', () => {
+                let wrapper;
 
-            it('should set mobile number', async () => {
-                expect(wrapper.find('[data-test-id="formfield-mobile-number-input"]').element.value).toBe(defaultState.customer.mobileNumber);
-            });
+                beforeEach(() => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
 
-            it('should set address fields', async () => {
-                expect(wrapper.find('[data-test-id="formfield-address-line-1-input"]').element.value).toBe(defaultState.fulfilment.address.line1);
-                expect(wrapper.find('[data-test-id="formfield-address-line-2-input"]').element.value).toBe(defaultState.fulfilment.address.line2);
-                expect(wrapper.find('[data-test-id="formfield-address-city-input"]').element.value).toBe(defaultState.fulfilment.address.city);
-                expect(wrapper.find('[data-test-id="formfield-address-postcode-input"]').element.value).toBe(defaultState.fulfilment.address.postcode);
+                it('should emit success event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure)).toBeUndefined();
+                });
             });
         });
     });
