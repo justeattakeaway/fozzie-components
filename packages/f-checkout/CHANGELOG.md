@@ -8,7 +8,7 @@ v0.30.0
 *December 23, 2020*
 
 ### Changed
-- props, css class and event descriptions added to `README`.
+- props, CSS class, and event descriptions added to `README`.
 
 
 v0.29.0
