@@ -637,4 +637,38 @@ describe('Checkout', () => {
             });
         });
     });
+
+    describe('watch ::', () => {
+        describe('fulfilmentTimes ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should call `selectionChanged` with the first fulfilment time when there are fulfilment times', async () => {
+                // Arrange
+                const setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
+
+                const propsData = {
+                    checkoutUrl,
+                    checkoutAvailableFulfilmentUrl
+                };
+
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                const newAuthToken = 'new authToken';
+
+                // Act
+                wrapper.setProps({ authToken: newAuthToken });
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(setAuthTokenSpy).toHaveBeenCalledWith('new authToken');
+            });
+        });
+    });
 });

@@ -11,6 +11,7 @@ v0.29.0
 - `checkoutHelpers` file.
 - Tests for `Checkout` component methods.
 
+
 v0.28.0
 ------------------------------
 *December 22, 2020*
