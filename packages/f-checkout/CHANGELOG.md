@@ -8,7 +8,7 @@ v0.29.0
 *December 23, 2020*
 
 ### Added
-- `checkoutHelpers` file.
+- `setup` test helper file.
 - Tests for `Checkout` component methods.
 
 
