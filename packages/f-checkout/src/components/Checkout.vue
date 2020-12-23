@@ -314,7 +314,7 @@ export default {
 
             // TODO: Review this later - even though f-registration does something similar
             if (Array.isArray(thrownErrors)) {
-                this.genericErrorMessage = thrownErrors[0].description || this.copy.errorMessages.genericServerError;
+                this.genericErrorMessage = thrownErrors[0].description || this.$t('errorMessages.genericServerError');
             } else {
                 this.genericErrorMessage = error;
             }

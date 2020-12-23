@@ -2,66 +2,12 @@ import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Address from '../Address.vue';
-import tenantConfigs from '../../tenants';
+import { i18n, createStore } from './helpers/setup';
 
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
 localVue.use(Vuex);
-
-const fulfilmentTimes = [
-    {
-        from: '2020-01-01T00:00+00:00',
-        label: {
-            text: 'time 1'
-        },
-        selected: false,
-        to: '2020-01-01T00:00+00:00'
-    }
-];
-
-const defaultState = {
-    id: '',
-    serviceType: '',
-    customer: {
-        firstName: 'John',
-        mobileNumber: '+447111111111'
-    },
-    fulfilment: {
-        time: {
-            from: '',
-            to: ''
-        },
-        address: {
-            line1: '1 Bristol Road',
-            line2: 'Flat 1',
-            city: 'Bristol',
-            postcode: 'BS1 1AA'
-        }
-    },
-    availableFulfilment: {
-        times: fulfilmentTimes,
-        isAsapAvailable: true
-    },
-    notes: [],
-    isFulfillable: true,
-    notices: [],
-    messages: []
-};
-
-const i18n = {
-    locale: 'en-GB',
-    messages: tenantConfigs['en-GB']
-};
-
-const createStore = (state = defaultState) => new Vuex.Store({
-    modules: {
-        checkout: {
-            namespaced: true,
-            state
-        }
-    }
-});
 
 const $v = {
     addressValidations: {
