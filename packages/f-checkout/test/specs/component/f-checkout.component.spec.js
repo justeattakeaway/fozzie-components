@@ -30,7 +30,7 @@ describe('f-checkout component tests', () => {
 
         // Act
         CheckoutComponent.populateCheckoutForm(addressInfo);
-        CheckoutComponent.selectOrderTime('Monday 00:15');
+        CheckoutComponent.selectOrderTime('Wednesday 00:30');
         CheckoutComponent.goToPayment();
 
         // Assert
@@ -44,8 +44,8 @@ describe('f-checkout component tests', () => {
         // Assert
         expect(CheckoutComponent.isOrderTimeDropdownDisplayed()).toBe(true);
         expect(CheckoutComponent.getOrderTimeOptionText(0)).toBe('As soon as possible');
-        expect(CheckoutComponent.getOrderTimeOptionText(1)).toBe('Monday 00:15');
-        expect(CheckoutComponent.getOrderTimeOptionText(2)).toBe('Monday 00:30');
+        expect(CheckoutComponent.getOrderTimeOptionText(1)).toBe('Wednesday 00:30');
+        expect(CheckoutComponent.getOrderTimeOptionText(2)).toBe('Wednesday 00:45');
     });
 
     it('should prevent user from writing a note of over 200 characters', () => {
@@ -75,7 +75,7 @@ describe('f-checkout component tests', () => {
 
         // Act
         CheckoutComponent.populateCheckoutForm(addressInfo);
-        CheckoutComponent.selectOrderTime('Monday 00:30');
+        CheckoutComponent.selectOrderTime('Wednesday 00:30');
         CheckoutComponent.goToPayment();
 
         // Assert
