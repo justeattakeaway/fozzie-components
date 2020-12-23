@@ -4,8 +4,7 @@ import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.
 describe('f-checkout "collection" component tests', () => {
     before(() => {
         browser.url('?path=/story/components-organisms--checkout-component');
-        CheckoutComponent.changeCheckoutPage(1);
-        browser.pause(500);
+        CheckoutComponent.changeCheckoutMethod(1);
         browser.switchToFrame(0);
         CheckoutComponent.waitForCheckoutComponent();
     });

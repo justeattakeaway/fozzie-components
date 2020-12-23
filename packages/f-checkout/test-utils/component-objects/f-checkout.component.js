@@ -67,7 +67,7 @@ const fields = {
  * @param {Number} index The index of the drop down option
  */
 
-exports.changeCheckoutPage = index => {
+exports.changeCheckoutMethod = index => {
     knobButton().click();
     knobCheckoutDropdown().selectByIndex(index);
 };
