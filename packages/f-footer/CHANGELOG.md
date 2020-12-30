@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest (add to next release)
+------------------------------
+*December 30, 2020*
+
+### Changed
+- Updated config for latest `sass-loader`.
+- Switches import in `common.scss` in line with fozzie v5-beta.
+
+
 v4.4.2
 ------------------------------
 *November 10, 2020*
@@ -47,7 +56,7 @@ v4.2.0
 
 ### Changed
 - 'jet' theme instead of 'je'
-- Removed typo in component test 
+- Removed typo in component test
 - Updated dependencies.
 - Updated `f-services` imports to use new variables.
 

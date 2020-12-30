@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest (add to next release)
+------------------------------
+*December 30, 2020*
+
+### Fixed
+- Old references to font-size keys updated.
+### Changed
+- Updated config for latest `sass-loader`.
+- Switches import in `common.scss` in line with fozzie v5-beta.
+
+
 v2.2.0
 ------------------------------
 *December 15, 2020*
