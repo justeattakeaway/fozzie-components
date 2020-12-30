@@ -57,7 +57,6 @@ v2.21.1
 - Broken test helper function.
 
 ### Added
-- Colour-coding to success and fail messages
 - Fozzie bear now either approves or disapproves of your build!
 
 
