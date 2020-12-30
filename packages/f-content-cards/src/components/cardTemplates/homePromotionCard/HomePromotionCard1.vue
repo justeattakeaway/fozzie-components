@@ -166,12 +166,12 @@ export default {
             }
 
             :global(.c-contentCards-homePromotionCard2-title) {
-                @include font-size(large);
+                @include font-size(heading-m);
                 margin-bottom: spacing();
             }
 
             :global(.c-contentCards-homePromotionCard2-text) {
-                @include font-size(mid);
+                @include font-size(subheading-s);
                 margin-top: spacing();
             }
         }

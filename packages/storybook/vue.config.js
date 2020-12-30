@@ -3,7 +3,6 @@ const path = require('path');
 const rootDir = path.join(__dirname, '..', '..');
 const sassOptions = require('../../config/sassOptions')(rootDir);
 
-
 // vue.config.js
 module.exports = {
     chainWebpack: config => {
@@ -21,12 +20,12 @@ module.exports = {
                  * @param resourcePath
                  * @returns {string}
                  */
-                data ({ resourcePath }) {
+                additionalData (content, { resourcePath }) {
                     const levelsUpToSrc = resourcePath.split(path.sep).reverse().indexOf('src');
 
                     // Only attempt to add common styles when under a src dir
                     if (levelsUpToSrc === -1) {
-                        return '';
+                        return `${content}`;
                     }
 
                     const absPath = path.join(
@@ -41,7 +40,8 @@ module.exports = {
 @include reset();
 @include typography();
 @include links();
-@import "${relPath}";`;
+@import "${relPath}";
+${content}`;
                 }
             });
 

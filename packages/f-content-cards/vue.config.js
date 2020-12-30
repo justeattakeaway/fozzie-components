@@ -1,4 +1,8 @@
-const magicImporter = require('node-sass-magic-importer');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const path = require('path');
+
+const rootDir = path.join(__dirname, '..', '..');
+const sassOptions = require('../../config/sassOptions')(rootDir);
 
 // vue.config.js
 module.exports = {
@@ -9,8 +13,27 @@ module.exports = {
             .use('importer')
             .loader('sass-loader')
             .options({
-                importer: magicImporter(),
-                data: '@import "@/assets/scss/common.scss";'
+                ...sassOptions,
+                /**
+                 * Requires sass-loader 7.3.1 - works out the relative path for the common.scss file for each component
+                 *
+                 * @param resourcePath
+                 * @returns {string}
+                 */
+                additionalData (content, { resourcePath }) {
+                    const levelsUpToSrc = resourcePath.split(path.sep).reverse().indexOf('src');
+
+                    const absPath = path.join(
+                        resourcePath,
+                        ...(new Array(levelsUpToSrc).fill('..')),
+                        'assets/scss/common.scss'
+                    );
+                    const relPath = path.relative(path.dirname(resourcePath), absPath)
+                        .replace(new RegExp(path.sep.replace('\\', '\\\\'), 'g'), '/');
+
+                    return `@import "${relPath}";
+                            ${content}`;
+                }
             });
     },
     pluginOptions: {
