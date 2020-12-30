@@ -4,15 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (to be added to next release)
+Latest (add to next release)
 ------------------------------
-*October 26, 2020*
-
-### Added
-- Stylelint added to lint styling on build.
+*December 30, 2020*
 
 ### Changed
 - 'jet' theme instead of 'je'
+- Updated config for latest `sass-loader`.
+- Switches import in `common.scss` in line with fozzie v5-beta.
+
+### Added
+- Stylelint added to lint styling on build.
 
 
 v1.0.0-beta.1

@@ -6,8 +6,7 @@ module.exports = function init (rootDir) {
         eyeglass: {
             root: rootDir
         },
-        includePaths: ['node_modules/'],
-        sourceMap: true
+        includePaths: ['node_modules/']
     });
 
     sassOptions.importer = [
@@ -17,5 +16,13 @@ module.exports = function init (rootDir) {
         sassOptions.importer
     ];
 
-    return sassOptions;
+    return {
+        sassOptions: {
+            eyeglass: sassOptions.eyeglass,
+            functions: sassOptions.functions,
+            includePaths: sassOptions.includePaths,
+            importer: sassOptions.importer
+        },
+        sourceMap: true
+    };
 };

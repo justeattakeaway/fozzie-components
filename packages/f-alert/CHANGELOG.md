@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest (add to next release)
+------------------------------
+*December 30, 2020*
+
+### Changed
+- Updated config for latest `sass-loader`.
+- Switches import in `common.scss` in line with fozzie v5-beta.
+
+
 v0.4.0
 ------------------------------
 *December 7, 2020*
@@ -31,9 +40,9 @@ v0.2.0
 
 ### Added
 - Stylelint added to lint styling on build.
-- data-test IDs to Alert Component 
-- Basic tests for Alert 
-- Alert Component-Object 
+- data-test IDs to Alert Component
+- Basic tests for Alert
+- Alert Component-Object
 
 
 v0.1.1

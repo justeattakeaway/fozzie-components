@@ -65,7 +65,7 @@
 import { globalisationServices } from '@justeat/f-services';
 import FormDropdown from './FormDropdown.vue';
 import FormLabel from './FormLabel.vue';
-import Debounce from '../services/debounce';
+import debounce from '../services/debounce';
 import tenantConfigs from '../tenants';
 import {
     CUSTOM_INPUT_TYPES,
@@ -204,7 +204,7 @@ export default {
     },
 
     mounted () {
-        window.addEventListener('resize', Debounce(this.updateWidth, 100));
+        window.addEventListener('resize', debounce(this.updateWidth, 100));
         this.updateWidth();
     },
 

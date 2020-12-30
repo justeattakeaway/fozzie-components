@@ -1,4 +1,7 @@
-const magicImporter = require('node-sass-magic-importer');
+const path = require('path');
+
+const rootDir = path.join(__dirname, '..', '..');
+const sassOptions = require('../../config/sassOptions')(rootDir);
 const devServer = require('./vue.config.devServer');
 
 // vue.config.js
@@ -10,9 +13,9 @@ module.exports = {
             .use('importer')
             .loader('sass-loader')
             .options({
-                importer: magicImporter(),
+                ...sassOptions,
                 // eslint-disable-next-line quotes
-                data: `@import "@/assets/scss/common.scss";`
+                additionalData: `@import "../assets/scss/common.scss";`
             });
     },
     pluginOptions: {
