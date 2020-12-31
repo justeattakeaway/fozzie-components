@@ -14,7 +14,7 @@ if (!isTrivial) {
 
     // Get an array of packages that have changed, then make that array unique
     const modifiedPackages = modifiedFiles.filter(filepath => filepath.startsWith('packages/'))
-        .map(filepath => filepath.split('/')[1]);
+        .map(filepath => filepath.split(/\/(.+)/)[1]);
     const uniqueModifiedPackages = new Set(modifiedPackages);
     const modifiedRootPackage = modifiedPackages.includes('');
 
