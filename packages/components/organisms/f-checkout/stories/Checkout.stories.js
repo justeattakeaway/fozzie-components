@@ -20,6 +20,7 @@ const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
 CheckoutMock.setupCheckoutMethod(deliveryUrl);
 CheckoutMock.setupCheckoutMethod(collectionUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentUrl);
+CheckoutMock.passThroughAny();
 
 export default {
     title: 'Components/Organisms',
@@ -39,7 +40,7 @@ export const CheckoutComponent = () => ({
             default: select('Available Fulfilment Url', [checkoutAvailableFulfilmentUrl], checkoutAvailableFulfilmentUrl)
         },
         createGuestUrl: {
-            default: text('Create Guest Url', 'https://uk.api.just-eat.io/consumers/uk')
+            default: text('Create Guest Url', 'https://smartgateway.staging-uk.je-labs.com/consumers/uk')
         },
         authToken: {
             default: text('Auth token', '')

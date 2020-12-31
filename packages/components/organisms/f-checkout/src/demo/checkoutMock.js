@@ -21,5 +21,9 @@ export default {
             default:
                 throw new Error(`${path} is not valid`);
         }
+    },
+
+    passThroughAny () {
+        mock.onAny().passThrough();
     }
 };
