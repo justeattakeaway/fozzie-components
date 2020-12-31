@@ -98,11 +98,8 @@ export default {
         createGuestUser: async ({ commit, state }, {
             url, tenant, data, timeout
         }) => {
-            console.log('entering createGuestUser');
             const config = {
                 method: 'post',
-                crossDomain: true,
-                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept-Tenant': tenant
@@ -110,13 +107,10 @@ export default {
                 timeout
             };
 
-            try {
-                // eslint-disable-next-line no-unused-vars
-                const response = await axios.post(url, data, config);
-                console.log(response);
-            } catch (err) {
-                console.log(err);
-            }
+            const response = await axios.post(url, data, config);
+            let otac = response.data.token;
+            console.log(otac);
+            // TODO: Use otac to log the user in
         },
 
         /**
