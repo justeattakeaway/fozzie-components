@@ -1,4 +1,4 @@
-// import { getAccessibilityTestResults, processResults } from '../../../../../test/utils/axe-helper';
+// import { getAccessibilityTestResults, processResults } from '../../../../../../../test/utils/axe-helper';
 
 // describe('Accessibility tests', () => {
 //     it('a11y - should test f-registration component WCAG compliance', () => {

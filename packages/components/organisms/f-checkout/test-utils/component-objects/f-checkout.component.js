@@ -10,7 +10,7 @@ import {
     FIELDS
 } from './f-checkout-selectors';
 
-const { doesElementExist } = require('../../../../test/utils/webdriverio-extensions')(browser);
+const { doesElementExist } = require('../../../../../../test/utils/webdriverio-extensions')(browser);
 
 const checkoutComponent = () => $(CHECKOUT_COMPONENT);
 
@@ -47,9 +47,9 @@ const fields = {
     },
     addressPostcode: {
         input: () => $(FIELDS.addressPostcode.input),
-        error: () => $(FIELDS.addressPostcode.error), 
+        error: () => $(FIELDS.addressPostcode.error),
         typeError: () => $(FIELDS.addressPostcode.typeError)
-    }, 
+    },
     userNote: {
         input: () => $(FIELDS.userNote.input),
         error: ''
@@ -102,9 +102,7 @@ exports.selectOrderTime = orderTime => {
  *
  * @param {Number} index The index of the `orderTimeDropdownOptions` array
  */
-exports.getOrderTimeOptionText = (index) => {
-    return orderTimeDropdownOptions()[index].getText();
-};
+exports.getOrderTimeOptionText = index => orderTimeDropdownOptions()[index].getText();
 /**
  * @description
  * Sets the value of the user note.
@@ -121,9 +119,7 @@ exports.inputUserNote = addressInfo => {
  *
  * @returns {number} The length of the user note
  */
-exports.getUserNoteLength = () => {
-    return userNoteInput().getValue().length;
-};
+exports.getUserNoteLength = () => userNoteInput().getValue().length;
 /**
  * @description
  *Submit the checkout form.

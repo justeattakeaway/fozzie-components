@@ -1,4 +1,4 @@
-import { getAccessibilityTestResults } from '../../../../../test/utils/axe-helper';
+import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
 
 describe('Accessibility tests', () => {
     it.skip('a11y - should test f-searchbox component WCAG compliance', () => {
