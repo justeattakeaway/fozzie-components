@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "2.26.0",
+  "version": "3.0.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -31,9 +31,9 @@
     "@babel/preset-env": "7.10.4",
     "@justeat/browserslist-config-fozzie": "1.1.1",
     "@justeat/eslint-config-fozzie": "3.4.1",
-    "@justeat/f-utils": "1.0.0",
-    "@justeat/fozzie": "5.0.0-beta.0",
-    "@justeat/fozzie-colour-palette": "3.0.0",
+    "@justeat/f-utils": "1.1.0",
+    "@justeat/fozzie": "5.0.0-beta.2",
+    "@justeat/fozzie-colour-palette": "3.1.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",
     "@storybook/storybook-deployer": "2.8.6",
     "@vue/cli-plugin-babel": "4.4.6",
@@ -105,6 +105,10 @@
   },
   "workspaces": [
     "packages/*",
-    "services/*"
+    "packages/components/atoms/*",
+    "packages/components/molecules/*",
+    "packages/components/organisms/*",
+    "packages/services/*",
+    "packages/tools/*"
   ]
 }

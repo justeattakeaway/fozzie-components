@@ -3,7 +3,11 @@
   "npmClient": "yarn",
   "packages": [
     "packages/*",
-    "services/*"
+    "packages/components/atoms/*",
+    "packages/components/molecules/*",
+    "packages/components/organisms/*",
+    "packages/services/*",
+    "packages/tools/*"
   ],
   "useWorkspaces": true
 }
