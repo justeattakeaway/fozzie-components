@@ -28,6 +28,6 @@ module.exports = {
     testURL: 'http://localhost/',
 
     setupFilesAfterEnv: [
-        '../../jest.setup.js'
+        '../../../jest.setup.js'
     ]
 };
