@@ -38,6 +38,9 @@ export const CheckoutComponent = () => ({
         checkoutAvailableFulfilmentUrl: {
             default: select('Available Fulfilment Url', [checkoutAvailableFulfilmentUrl], checkoutAvailableFulfilmentUrl)
         },
+        createGuestUrl: {
+            default: text('Create Guest Url', 'https://uk.api.just-eat.io/consumers/uk')
+        },
         authToken: {
             default: text('Auth token', '')
         },

@@ -88,6 +88,38 @@ export default {
         },
 
         /**
+         * Post the guest user details to the backend.
+         *
+         * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
+         * @param {Object} state - Automatically handled by Vuex to be able to retrieve state.
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        // eslint-disable-next-line no-unused-vars
+        createGuestUser: async ({ commit, state }, {
+            url, tenant, data, timeout
+        }) => {
+            console.log('entering createGuestUser');
+            const config = {
+                method: 'post',
+                crossDomain: true,
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Tenant': tenant
+                },
+                timeout
+            };
+
+            try {
+                // eslint-disable-next-line no-unused-vars
+                const response = await axios.post(url, data, config);
+                console.log(response);
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+        /**
          * Get the fulfilment details from the backend and update the state.
          *
          * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.

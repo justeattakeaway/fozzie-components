@@ -130,6 +130,11 @@ export default {
             required: true
         },
 
+        createGuestUrl: {
+            type: String,
+            required: true
+        },
+
         checkoutTimeout: {
             type: Number,
             required: false,
@@ -139,6 +144,11 @@ export default {
         getCheckoutTimeout: {
             type: Number,
             required: false,
+            default: 1000
+        },
+
+        createGuestTimeout: {
+            type: Number,
             default: 1000
         },
 
@@ -185,7 +195,8 @@ export default {
             'notes',
             'isFulfillable',
             'notices',
-            'messages'
+            'messages',
+            'isLoggedIn'
         ]),
 
         name () {
@@ -247,7 +258,8 @@ export default {
             'getCheckout',
             'postCheckout',
             'getAvailableFulfilment',
-            'setAuthToken'
+            'setAuthToken',
+            'createGuestUser'
         ]),
 
         onVisitLoginPage () {
@@ -266,6 +278,22 @@ export default {
 
                 if (this.isCheckoutMethodDelivery) {
                     checkoutData.address = this.fulfilment.address;
+                }
+
+                if (!this.isLoggedIn) {
+                    const createGuestData = {
+                        emailAddress: 'pawel.kedziora+test1@just-eat.com',
+                        firstName: 'Pawel',
+                        lastName: 'Kedziora',
+                        registrationSource: 'Guest'
+                    };
+
+                    this.createGuestUser({
+                        url: this.createGuestUrl,
+                        tenant: this.tenant,
+                        data: createGuestData,
+                        timeout: this.createGuestTimeout
+                    });
                 }
 
                 await this.postCheckout({
