@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.0.0
+------------------------------
+*December 31, 2020*
+
+### Changed
+- Folder structure has changed to organise packages into subfolders. We now have `packages/components`, `packages/services` and `packages/tools`.
+- Note when upgrading to this version – if you have any build issues, delete your `yarn.lock` and `node_modules` folder in the base of the repo, and do a clean `yarn install`.
+
+
 v2.26.0
 ------------------------------
 *December 30, 2020*
