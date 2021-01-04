@@ -3,7 +3,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import mock, { proxy } from 'xhr-mock';
 import { defaultEnabledCardTypes } from '@justeat/f-metadata/src/services/contentCard.service';
 
-import ContentCards from '../src/components/ContentCards.vue';
+import { ContentCards } from '../src';
 
 import cards, { labelledMultiSelectAllowedValues } from './mockData/cards';
 import data from './mockData/data';
@@ -30,23 +30,22 @@ function resetBrazeData () {
 const methods = {
     onBrazeInit: action('on-braze-init'),
     getCardCount: action('get-card-count'),
-    getTitleCard: action('get-title-card'),
     hasLoaded: action('has-loaded'),
     onError: action('on-error'),
-    customCardsCallback: action('custom-cards-callback')
 };
 
 const template = `<content-cards
+            #default="{ cards }"
             @on-braze-init="onBrazeInit"
             @get-card-count="getCardCount"
             @has-loaded="hasLoaded"
             @on-error="onError"
-            @custom-cards-callback="customCardsCallback"
             :userId="userId"
             :apiKey="apiKey"
-            :title="title"
             :locale="locale"
-            :enabledCardTypes="enabledCardTypes" />`;
+            >
+                TEST
+            </content-cards>`;
 
 export default {
     title: 'Components/Organisms/f-content-cards',
@@ -55,7 +54,6 @@ export default {
         userId: { control: { type: 'text' } },
         title: { control: { type: 'text' } },
         locale: { control: { type: 'radio', options: ['da-DK', 'en-GB', 'en-AU'] } },
-        enabledCardTypes: { control: { type: 'multi-select', options: labelledMultiSelectAllowedValues } }
     },
     decorators: [withA11y]
 };

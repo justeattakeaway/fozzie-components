@@ -1,21 +1,15 @@
 <template>
     <div
         :data-test-id="testId"
-        :class="['c-contentCards-homePromotionCard2', $style['c-contentCards-homePromotionCard2'], {
-            [$style['c-contentCards-homePromotionCard2--light']]: isLightText
-        }]"
+        :class="['c-contentCards-homePromotionCard2', $style['c-contentCards-homePromotionCard2']]"
         :style="{ background: contentBackgroundColor }">
         <div
             :class="['c-contentCards-homePromotionCard2-image', $style['c-contentCards-homePromotionCard2-image']]"
             :style="{ backgroundImage: `url('${image}')` }" />
-        <h3
-            :class="['c-contentCards-homePromotionCard2-title', $style['c-contentCards-homePromotionCard2-title']]">
-            {{ title }}
-        </h3>
+        <h3>{{ title }}</h3>
         <template v-for="(textItem, textIndex) in description">
             <p
-                :key="textIndex"
-                :class="['c-contentCards-homePromotionCard2-text', $style['c-contentCards-homePromotionCard2-text']]">
+                :key="textIndex">
                 {{ textItem }}
             </p>
         </template>
@@ -23,20 +17,12 @@
             <a
                 :href="url"
                 :data-test-id="ctaTestId"
-                :class="[
-                    'o-link--full',
-                    'o-link--bold',
-                    'u-color-link',
-                    'u-text-left',
-                    $style['c-contentCards-homePromotionCard2-link']
-                ]">{{ ctaText }}</a>
+                class="o-link--full o-link--bold u-color-link u-text-left">{{ ctaText }}</a>
         </p>
     </div>
 </template>
 
 <script>
-import Color from 'color';
-
 export default {
     props: {
         card: {
@@ -52,7 +38,6 @@ export default {
         const {
             image,
             ctaText,
-            backgroundColor,
             contentBackgroundColor,
             title,
             url,
@@ -61,7 +46,6 @@ export default {
 
         return {
             title,
-            backgroundColor,
             contentBackgroundColor,
             image,
             ctaText,
@@ -72,27 +56,6 @@ export default {
     computed: {
         ctaTestId () {
             return this.testId ? `${this.testId}--cta` : false;
-        },
-
-        /**
-         * If background colour is set *and* dark, then use a light text colour for the title and text for A11y
-         * @return {boolean}
-         */
-        isLightText () {
-            if (this.contentBackgroundColor) {
-                try {
-                    return new Color(this.contentBackgroundColor).isDark();
-                } catch {
-                    // Fall through and try with backgroundColor from surrounding HPC1
-                }
-            }
-            try {
-                return this.backgroundColor
-                    ? (new Color(this.backgroundColor)).isDark()
-                    : false;
-            } catch {
-                return false;
-            }
         }
     }
 };
@@ -109,37 +72,6 @@ export default {
 
         @include media('>narrow') {
             padding-right: 208px;
-        }
-
-        .c-contentCards-homePromotionCard2-link {
-            text-decoration: none;
-            font-weight: $font-weight-bold;
-
-            & {
-                color: $color-link-default;
-            }
-
-            &:hover, &:focus {
-                color: $color-link-hover;
-            }
-
-            &:active {
-                color: $color-link-active;
-            }
-        }
-
-        .c-contentCards-homePromotionCard2-text {
-            color: $grey--dark;
-        }
-
-        &.c-contentCards-homePromotionCard2--light {
-            .c-contentCards-homePromotionCard2-text {
-                color: $white;
-            }
-
-            .c-contentCards-homePromotionCard2-title {
-                color: $grey--lighter;
-            }
         }
     }
 
