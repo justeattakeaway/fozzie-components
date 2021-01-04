@@ -7,10 +7,18 @@
             :data-test-id="containerTestId"
             :class="['l-container', 'c-contentCards-homePromotionCard1-container', $style['c-contentCards-homePromotionCard1-container']]"
             :style="{ maxWidth: `${containerMaxWidth}px` }">
-            <div :class="['c-contentCards-homePromotionCard1-icon', $style['c-contentCards-homePromotionCard1-icon']]">
+            <div :class="['c-contentCards-homePromotionCard1-iconPane', $style['c-contentCards-homePromotionCard1-iconPane']]">
                 <img
+                    :class="[$style['c-contentCards-homePromotionCard1-icon']]"
                     :src="icon"
                     alt="">
+                <h3
+                    :class="[$style['c-contentCards-homePromotionCard1-subtitle'], {
+                        [$style['c-contentCards-homePromotionCard1-subtitle--light']]: isLightSubtitle
+                    }]"
+                >
+                    {{ subtitle }}
+                </h3>
             </div>
             <div :class="['c-contentCards-homePromotionCard1-innerCard', $style['c-contentCards-homePromotionCard1-innerCard']]">
                 <home-promotion-card2 :card="card" />
@@ -20,6 +28,7 @@
 </template>
 
 <script>
+import Color from 'color';
 import HomePromotionCard2 from './HomePromotionCard2.vue';
 
 export default {
@@ -51,7 +60,8 @@ export default {
             icon,
             title,
             url,
-            description
+            description,
+            subtitle
         } = this.card;
 
         return {
@@ -64,7 +74,8 @@ export default {
             type,
             icon,
             url,
-            description
+            description,
+            subtitle
         };
     },
     computed: {
@@ -74,6 +85,20 @@ export default {
 
         containerTestId () {
             return this.testId ? `${this.testId}--container` : false;
+        },
+
+        /**
+         * If background colour is set *and* dark, then use a light text colour for the subtitle for A11y
+         * @return {boolean}
+         */
+        isLightSubtitle () {
+            try {
+                return this.backgroundColor
+                    ? (new Color(this.backgroundColor)).isDark()
+                    : false;
+            } catch {
+                return false;
+            }
         }
     }
 };
@@ -95,23 +120,36 @@ export default {
         margin: 0 auto;
     }
 
-    .c-contentCards-homePromotionCard1-icon {
+    .c-contentCards-homePromotionCard1-iconPane {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         width: 100%;
         margin-bottom: spacing(x3);
-
-        img {
-            max-height: 65px;
-            max-width: 100%;
-        }
 
         @include media('>mid') {
             width: 50%;
             margin-bottom: 0;
         }
     }
+
+    .c-contentCards-homePromotionCard1-icon {
+        max-height: 88px;
+        max-width: 100%;
+    }
+
+    .c-contentCards-homePromotionCard1-subtitle {
+        display: none;
+
+        @include media('>mid') {
+            display: unset;
+        }
+    }
+
+        .c-contentCards-homePromotionCard1-subtitle--light {
+            color: $white;
+        }
 
     .c-contentCards-homePromotionCard1-innerCard {
         width: 100%;
@@ -122,6 +160,20 @@ export default {
             width: 50%;
             padding-left: 0;
             padding-right: spacing(x4);
+
+            :global(.c-contentCards-homePromotionCard2) {
+                padding-left: spacing(x5);
+            }
+
+            :global(.c-contentCards-homePromotionCard2-title) {
+                @include font-size(heading-m);
+                margin-bottom: spacing();
+            }
+
+            :global(.c-contentCards-homePromotionCard2-text) {
+                @include font-size(subheading-s);
+                margin-top: spacing();
+            }
         }
     }
 </style>
