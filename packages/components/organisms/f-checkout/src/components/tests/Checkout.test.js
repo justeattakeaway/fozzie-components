@@ -47,7 +47,8 @@ describe('Checkout', () => {
     const checkoutUrl = 'http://localhost/checkout';
     const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
     const loginUrl = 'http://dummy-login.example.com';
-    const propsData = { checkoutUrl, loginUrl, checkoutAvailableFulfilmentUrl };
+    const createGuestUrl = 'http://localhost/createguestuser';
+    const propsData = { checkoutUrl, loginUrl, checkoutAvailableFulfilmentUrl , createGuestUrl };
     it('should be defined', () => {
         const wrapper = shallowMount(VueCheckout, {
             i18n,
@@ -82,6 +83,7 @@ describe('Checkout', () => {
 
         it('should register the `checkout` module if it doesn\'t exist in the store', () => {
             // Arrange
+
             const store = new Vuex.Store({});
 
             const registerModuleSpy = jest.spyOn(store, 'registerModule');
@@ -331,6 +333,7 @@ describe('Checkout', () => {
 
             const propsDataWithAuthToken = {
                 ...propsData,
+                createGuestUrl,
                 authToken: 'mytoken'
             };
 

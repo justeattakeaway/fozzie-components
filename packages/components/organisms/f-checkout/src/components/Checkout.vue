@@ -282,9 +282,9 @@ export default {
 
                 if (!this.isLoggedIn) {
                     const createGuestData = {
-                        emailAddress: 'pawel.kedziora+test1@just-eat.com',
-                        firstName: 'Pawel',
-                        lastName: 'Kedziora',
+                        emailAddress: this.customer.email,
+                        firstName: this.customer.firstName,
+                        lastName: this.customer.lastName,
                         registrationSource: 'Guest'
                     };
 

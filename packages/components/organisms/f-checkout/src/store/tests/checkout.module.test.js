@@ -12,6 +12,8 @@ const defaultState = {
     serviceType: '',
     customer: {
         firstName: '',
+        lastName: '',
+        email: '',
         mobileNumber: ''
     },
     fulfilment: {

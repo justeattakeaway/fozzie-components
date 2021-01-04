@@ -18,6 +18,8 @@ const defaultState = {
     serviceType: CHECKOUT_METHOD_DELIVERY,
     customer: {
         firstName: 'John',
+        lastName: 'Smith',
+        email: 'john@test.com',
         mobileNumber: '+447111111111'
     },
     fulfilment: {
@@ -46,7 +48,8 @@ const defaultActions = {
     getCheckout: jest.fn(),
     postCheckout: jest.fn(),
     getAvailableFulfilment: jest.fn(),
-    setAuthToken: jest.fn()
+    setAuthToken: jest.fn(),
+    createGuestUser: jest.fn()
 };
 
 const i18n = {
