@@ -281,19 +281,7 @@ export default {
                 }
 
                 if (!this.isLoggedIn) {
-                    const createGuestData = {
-                        emailAddress: this.customer.email,
-                        firstName: this.customer.firstName,
-                        lastName: this.customer.lastName,
-                        registrationSource: 'Guest'
-                    };
-
-                    this.createGuestUser({
-                        url: this.createGuestUrl,
-                        tenant: this.tenant,
-                        data: createGuestData,
-                        timeout: this.createGuestTimeout
-                    });
+                    await this.setupGuestUser();
                 }
 
                 await this.postCheckout({
@@ -307,6 +295,22 @@ export default {
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutFailure, thrownErrors);
             }
+        },
+
+        async setupGuestUser() {
+            const createGuestData = {
+                emailAddress: this.customer.email,
+                firstName: this.customer.firstName,
+                lastName: this.customer.lastName,
+                registrationSource: 'Guest'
+            };
+
+            this.createGuestUser({
+                url: this.createGuestUrl,
+                tenant: this.tenant,
+                data: createGuestData,
+                timeout: this.createGuestTimeout
+            });
         },
 
         /**
