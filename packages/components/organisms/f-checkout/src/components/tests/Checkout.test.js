@@ -262,15 +262,9 @@ describe('Checkout', () => {
 
         describe('isCheckoutMethodDelivery ::', () => {
             it('should return `true` if `serviceType` is set to Delivery', () => {
-                // Arrange
-                const state = {
-                    ...defaultState,
-                    serviceType: CHECKOUT_METHOD_DELIVERY
-                };
-
-                // Act
+                // Arrange and Act
                 const wrapper = shallowMount(VueCheckout, {
-                    store: createStore(state),
+                    store: createStore({...defaultState, serviceType: CHECKOUT_METHOD_DELIVERY}),
                     i18n,
                     localVue,
                     propsData
@@ -281,15 +275,9 @@ describe('Checkout', () => {
             });
 
             it('should return `false` if `serviceType` is set to Collection', () => {
-                // Arrange
-                const state = {
-                    ...defaultState,
-                    serviceType: CHECKOUT_METHOD_COLLECTION
-                };
-
-                // Act
+                // Arrange and Act
                 const wrapper = shallowMount(VueCheckout, {
-                    store: createStore(state),
+                    store: createStore({...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION}),
                     i18n,
                     localVue,
                     propsData
@@ -389,31 +377,15 @@ describe('Checkout', () => {
             describe('if serviceType set to `collection`', () => {
                 let wrapper;
 
-                beforeEach(() => {
-                    const state = {
-                        ...defaultState,
-                        serviceType: CHECKOUT_METHOD_COLLECTION,
-                        customer: {
-                            firstName: defaultState.customer.firstName
-                        },
-                        fulfilment: {
-                            times: fulfilmentTimes,
-                            address: {}
-                        }
-                    };
-
+                it('should emit success event when all the fields are populated correctly', async () => {
+                    // Arrange
                     wrapper = mount(VueCheckout, {
-                        store: createStore(state, { ...defaultActions }),
+                        store: createStore({...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION}),
                         i18n,
                         localVue,
                         propsData
                     });
-                });
-
-                it('should emit success event when all the fields are populated correctly', async () => {
-                    // Arrange
-                    wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue(defaultState.customer.mobileNumber);
-
+                    
                     // Act
                     await wrapper.vm.onFormSubmit();
 
@@ -424,14 +396,23 @@ describe('Checkout', () => {
 
                 it('should show error message and emit failure event when the mobile number field is not populated', async () => {
                     // Arrange
-                    wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue('');
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({...defaultState,
+                            serviceType: CHECKOUT_METHOD_COLLECTION,
+                            customer: {
+                            ...defaultState.customer,
+                            mobileNumber: ''
+                        }}),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
 
                     // Act
                     await wrapper.vm.onFormSubmit();
                     const mobileNumberEmptyMessage = wrapper.find('[data-test-id="error-mobile-number"]');
 
                     // Assert
-                    expect(wrapper.vm.isMobileNumberValid).toBe(false);
                     expect(mobileNumberEmptyMessage).toMatchSnapshot();
                     expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.mobileNumber');
@@ -439,7 +420,17 @@ describe('Checkout', () => {
 
                 it('should show error message and emit failure event when the mobile number field is populated with a < 10 numbers', async () => {
                     // Arrange
-                    wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue('077777');
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({...defaultState,
+                            serviceType: CHECKOUT_METHOD_COLLECTION,
+                            customer: {
+                            ...defaultState.customer,
+                            mobileNumber: '077777'
+                        }}),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
 
                     // Act
                     await wrapper.vm.onFormSubmit();
@@ -454,7 +445,17 @@ describe('Checkout', () => {
 
                 it('should show error message and emit failure event when the mobile number field is populated with non numeric value', async () => {
                     // Arrange
-                    wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue('hs;-j`$e&1l');
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({...defaultState,
+                            serviceType: CHECKOUT_METHOD_COLLECTION,
+                            customer: {
+                            ...defaultState.customer,
+                            mobileNumber: 'hs;-j`$e&1l'
+                        }}),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
 
                     // Act
                     await wrapper.vm.onFormSubmit();
@@ -468,6 +469,14 @@ describe('Checkout', () => {
                 });
 
                 it('should not create validations for address', () => {
+                    // Arrange
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION}),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
                     // Assert
                     expect(wrapper.vm.$v.fulfilment).toBeUndefined();
                 });
@@ -476,33 +485,14 @@ describe('Checkout', () => {
             describe('if serviceType set to `delivery`', () => {
                 let wrapper;
 
-                beforeEach(() => {
-                    const state = {
-                        ...defaultState,
-                        serviceType: CHECKOUT_METHOD_DELIVERY,
-                        customer: {
-                            firstName: defaultState.customer.firstName
-                        },
-                        fulfilment: {
-                            times: fulfilmentTimes,
-                            address: {}
-                        }
-                    };
-
+                it('should emit success event when all fields are populated correctly', async () => {
+                    // Arrange
                     wrapper = mount(VueCheckout, {
-                        store: createStore(state),
+                        store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_DELIVERY }),
                         i18n,
                         localVue,
                         propsData
                     });
-                });
-
-                it('should emit success event when all fields are populated correctly', async () => {
-                    // Arrange
-                    wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue(defaultState.customer.mobileNumber);
-                    wrapper.find('[data-test-id="formfield-address-line-1-input"]').setValue(defaultState.fulfilment.address.line1);
-                    wrapper.find('[data-test-id="formfield-address-city-input"]').setValue(defaultState.fulfilment.address.city);
-                    wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue(defaultState.fulfilment.address.postcode);
 
                     // Act
                     await wrapper.vm.onFormSubmit();
@@ -513,7 +503,24 @@ describe('Checkout', () => {
                 });
 
                 it('should emit failure event and display error message when address line1 input field is empty', async () => {
-                    // Arrange && Act
+                    // Arrange
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultState,
+                            serviceType: CHECKOUT_METHOD_DELIVERY,
+                            fulfilment: {
+                            ...defaultState.fulfilment,
+                            address: {
+                                ...defaultState.fulfilment.address,
+                                line1: ''
+                            }
+                        }}),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
                     await wrapper.vm.onFormSubmit();
                     const addressLine1EmptyMessage = wrapper.find('[data-test-id="error-address-line1-empty"]');
 
@@ -524,7 +531,24 @@ describe('Checkout', () => {
                 });
 
                 it('should emit failure event and display error message when city input field is empty', async () => {
-                    // Arrange && Act
+                    // Arrange
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultState,
+                            serviceType: CHECKOUT_METHOD_DELIVERY,
+                            fulfilment: {
+                            ...defaultState.fulfilment,
+                            address: {
+                                ...defaultState.fulfilment.address,
+                                city: ''
+                            }
+                        }}),
+                    i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
                     await wrapper.vm.onFormSubmit();
                     const addressCityEmptyMessage = wrapper.find('[data-test-id="error-address-city-empty"]');
 
@@ -535,7 +559,24 @@ describe('Checkout', () => {
                 });
 
                 it('should emit failure event and display error message when postcode input field is empty', async () => {
-                    // Arrange && Act
+                    // Arrange
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultState,
+                            serviceType: CHECKOUT_METHOD_DELIVERY,
+                            fulfilment: {
+                            ...defaultState.fulfilment,
+                            address: {
+                                ...defaultState.fulfilment.address,
+                                postcode: ''
+                            }
+                        }}),
+                    i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
                     await wrapper.vm.onFormSubmit();
                     const addressPostcodeEmptyMessage = wrapper.find('[data-test-id="error-address-postcode-empty"]');
 
@@ -547,7 +588,21 @@ describe('Checkout', () => {
 
                 it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
                     // Arrange
-                    wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue('?!hdb-se');
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultState,
+                            serviceType: CHECKOUT_METHOD_DELIVERY,
+                            fulfilment: {
+                            ...defaultState.fulfilment,
+                            address: {
+                                ...defaultState.fulfilment.address,
+                                postcode: '?!hdb-se'
+                            }
+                        }}),
+                    i18n,
+                        localVue,
+                        propsData
+                    });
 
                     // Act
                     await wrapper.vm.onFormSubmit();
@@ -562,7 +617,21 @@ describe('Checkout', () => {
 
                 it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
                     // Arrange
-                    wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue('EC4M 7R');
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultState,
+                            serviceType: CHECKOUT_METHOD_DELIVERY,
+                            fulfilment: {
+                            ...defaultState.fulfilment,
+                            address: {
+                                ...defaultState.fulfilment.address,
+                                postcode: 'EC4M 7R'
+                            }
+                        }}),
+                    i18n,
+                        localVue,
+                        propsData
+                    });
 
                     // Act
                     await wrapper.vm.onFormSubmit();
@@ -695,7 +764,7 @@ describe('Checkout', () => {
 
                 beforeEach(() => {
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions }),
+                        store: createStore(),
                         i18n,
                         localVue,
                         propsData
@@ -733,7 +802,7 @@ describe('Checkout', () => {
 
                 beforeEach(() => {
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions }),
+                        store: createStore(),
                         i18n,
                         localVue,
                         propsData

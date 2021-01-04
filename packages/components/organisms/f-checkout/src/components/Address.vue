@@ -6,7 +6,8 @@
                 {{ $t('labels.addressGroup') }}
             </legend>
             <form-field
-                v-model="fulfilment.address.line1"
+                :value="fulfilment.address.line1"
+                @input="updateAddressLine1"
                 :class="$style['c-address-formField']"
                 name="address-line-1"
                 :label-text="$t('labels.line1')"
@@ -24,7 +25,8 @@
             </form-field>
 
             <form-field
-                v-model="fulfilment.address.line2"
+                :value="fulfilment.address.line2"
+                @input="updateAddressLine2"
                 :class="$style['c-address-formField']"
                 name="address-line-2"
                 :label-text="$t('labels.line2')"
@@ -33,7 +35,8 @@
         </fieldset>
 
         <form-field
-            v-model="fulfilment.address.city"
+            :value="fulfilment.address.city"
+            @input="updateAddressCity"
             name="address-city"
             :label-text="$t('labels.city')"
             :has-error="isAddressCityEmpty">
@@ -47,7 +50,8 @@
         </form-field>
 
         <form-field
-            v-model="fulfilment.address.postcode"
+            :value="fulfilment.address.postcode"
+            @input="updateAddressPostcode"
             name="address-postcode"
             :label-text="$t('labels.postcode')"
             :has-error="!isAddressPostcodeValid">
@@ -72,7 +76,7 @@ import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
     components: { FormField, ErrorMessage },
@@ -115,6 +119,9 @@ export default {
     },
 
     methods: {
+        ...mapActions('checkout', [
+            'updateFulfilmentAddress'
+        ]),
         /*
         * Returns true if `field` has been touched and if it is still empty
         * The $dirty boolean changes to true when the user has focused/lost
@@ -122,6 +129,29 @@ export default {
         */
         isFieldEmpty (field) {
             return this.$v.addressValidations[field].$dirty && !this.$v.addressValidations[field].required;
+        },
+        /*
+        * Dispatches map action `updateFulfilmentAddress` to update input fields values in vuex
+        */
+        updateAddressLine1 (value) {
+            this.updateFulfilmentAddress({
+                "line1": value
+            })
+        },
+        updateAddressLine2 (value) {
+            this.updateFulfilmentAddress({
+                "line2": value
+            })
+        },
+        updateAddressCity (value) {
+            this.updateFulfilmentAddress({
+                "city": value
+            })
+        },
+        updateAddressPostcode (value) {
+            this.updateFulfilmentAddress({
+                "postcode": value
+            })
         }
     }
 };

@@ -40,7 +40,12 @@ const defaultState = {
     isLoggedIn: false
 };
 
-const { updateState, updateAuth, updateAvailableFulfilment } = CheckoutModule.mutations;
+const { 
+    UPDATE_STATE,
+    UPDATE_AUTH,
+    UPDATE_AVAILABLE_FULFILMENT_TIMES,
+    UPDATE_FULFILMENT_ADDRESS,
+    UPDATE_MOBILE_NUMBER } = CheckoutModule.mutations;
 const {
     getCheckout, postCheckout, createGuestUser, setAuthToken, getAvailableFulfilment
 } = CheckoutModule.actions;
@@ -57,10 +62,10 @@ describe('CheckoutModule', () => {
             state = defaultState;
         });
 
-        describe('updateState ::', () => {
+        describe('UPDATE_STATE ::', () => {
             it('should update state with delivery response.', () => {
                 // Act
-                updateState(state, checkoutDelivery);
+                UPDATE_STATE(state, checkoutDelivery);
 
                 // Assert
                 expect(state).toMatchSnapshot();
@@ -71,7 +76,7 @@ describe('CheckoutModule', () => {
                 checkoutDelivery.customer = null;
 
                 // Act
-                updateState(state, checkoutDelivery);
+                UPDATE_STATE(state, checkoutDelivery);
 
                 // Assert
                 expect(state.customer).toEqual(defaultState.customer);
@@ -82,17 +87,17 @@ describe('CheckoutModule', () => {
                 checkoutDelivery.fulfilment.address = null;
 
                 // Act
-                updateState(state, checkoutDelivery);
+                UPDATE_STATE(state, checkoutDelivery);
 
                 // Assert
                 expect(state.fulfilment.address).toEqual(defaultState.fulfilment.address);
             });
         });
 
-        describe('updateAuth ::', () => {
+        describe('UPDATE_AUTH ::', () => {
             it('should update state with authToken and set `isLoggedIn` to true', () => {
                 // Act
-                updateAuth(state, authToken);
+                UPDATE_AUTH(state, authToken);
 
                 // Assert
                 expect(state.authToken).toEqual(authToken);
@@ -100,13 +105,13 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe('updateAvailableFulfilment ::', () => {
+        describe('UPDATE_AVAILABLE_FULFILMENT_TIMES ::', () => {
             it('should update state with the availableFulfilment response', () => {
                 // Arrange
                 const expectedAvailableFulfilmentTimes = checkoutAvailableFulfilment.times;
 
                 // Act
-                updateAvailableFulfilment(state, checkoutAvailableFulfilment);
+                UPDATE_AVAILABLE_FULFILMENT_TIMES(state, checkoutAvailableFulfilment);
 
                 // Assert
                 expect(state.availableFulfilment.times).toEqual(expectedAvailableFulfilmentTimes);
@@ -144,13 +149,13 @@ describe('CheckoutModule', () => {
                 axios.get = jest.fn(() => Promise.resolve({ data: checkoutDelivery }));
             });
 
-            it('should get the checkout details from the backend and call `updateState` mutation.', async () => {
+            it('should get the checkout details from the backend and call `UPDATE_STATE` mutation.', async () => {
                 // Act
                 await getCheckout({ commit }, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                expect(commit).toHaveBeenCalledWith('updateState', checkoutDelivery);
+                expect(commit).toHaveBeenCalledWith('UPDATE_STATE', checkoutDelivery);
             });
         });
 
@@ -221,12 +226,12 @@ describe('CheckoutModule', () => {
         });
 
         describe('setAuthToken ::', () => {
-            it('should call `updateAuth` mutation.', async () => {
+            it('should call `UPDATE_AUTH` mutation.', async () => {
                 // Act
                 setAuthToken({ commit }, authToken);
 
                 // Assert
-                expect(commit).toHaveBeenCalledWith('updateAuth', authToken);
+                expect(commit).toHaveBeenCalledWith('UPDATE_AUTH', authToken);
             });
         });
 
@@ -246,13 +251,13 @@ describe('CheckoutModule', () => {
                 axios.get = jest.fn(() => Promise.resolve({ data: checkoutAvailableFulfilment }));
             });
 
-            it('should get the checkout available fulfilment details from the backend and call `updateAvailableFulfilment` mutation.', async () => {
+            it('should get the checkout available fulfilment details from the backend and call `UPDATE_AVAILABLE_FULFILMENT_TIMES` mutation.', async () => {
                 // Act
                 await getAvailableFulfilment({ commit }, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                expect(commit).toHaveBeenCalledWith('updateAvailableFulfilment', checkoutAvailableFulfilment);
+                expect(commit).toHaveBeenCalledWith('UPDATE_AVAILABLE_FULFILMENT_TIMES', checkoutAvailableFulfilment);
             });
         });
     });

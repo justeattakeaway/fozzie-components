@@ -34,7 +34,8 @@
                     </a>
                 </p>
                 <form-field
-                    v-model="customer.mobileNumber"
+                    :value="customer.mobileNumber"
+                    @input="updateMobileNumber"
                     name="mobile-number"
                     :label-text="$t('labels.mobileNumber')"
                     :has-error="!isMobileNumberValid">
@@ -259,7 +260,8 @@ export default {
             'getAvailableFulfilment',
             'getCheckout',
             'postCheckout',
-            'setAuthToken'
+            'setAuthToken',
+            'updateMobileNumber'
         ]),
 
         onVisitLoginPage () {
