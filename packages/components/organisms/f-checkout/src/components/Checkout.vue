@@ -30,7 +30,7 @@
                         :href="loginUrl"
                         data-test-id="switch-user-link"
                         @click="onVisitLoginPage">
-                        {{ $t('switchUserText', { name: name }) }}
+                        {{ $t('switchUserText', { name }) }}
                     </a>
                 </p>
                 <form-field
@@ -141,10 +141,12 @@ export default {
             required: false,
             default: 1000
         },
+
         authToken: {
             type: String,
             default: ''
         },
+
         loginUrl: {
             type: String,
             required: true
@@ -247,6 +249,7 @@ export default {
             'getAvailableFulfilment',
             'setAuthToken'
         ]),
+
         onVisitLoginPage () {
             this.$emit(EventNames.CheckoutVisitLoginPage);
         },
@@ -424,7 +427,6 @@ $checkout-padding                         : spacing(x5) 100px;
   text-align: center;
 
   a {
-    // TODO: check default link styles in PIE and update fozzie // (should be able to remove these styles then)
     text-decoration: none;
     font-weight: $font-weight-bold;
 

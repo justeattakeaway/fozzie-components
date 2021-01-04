@@ -20,12 +20,20 @@ v3.2.0
 - Fixes danger package checks.
 
 
-v3.1.0
+v3.1.1
 ------------------------------
 *January 4, 2020*
 
 ### Fixed
 - `bundlewatch` config updated in line with new structure.
+
+
+v3.1.0
+------------------------------
+*January 04, 2021*
+
+### Changed
+- Added a link to the checkout page to allow the user to correct who is logged in.
 
 
 v3.0.0
