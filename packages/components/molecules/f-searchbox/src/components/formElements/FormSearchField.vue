@@ -13,9 +13,9 @@
             }">
             <input
                 ref="addressInput"
+                v-set-attributes="customAttributeOverride"
                 :value="getAddressValue"
-                name="postcode"
-                type="search"
+                :type="setInputType()"
                 data-test-id="address-box-input"
                 :aria-label="copy.fieldLabel"
                 :autocomplete="isAutocompleteEnabled ? 'off' : 'on'"
@@ -74,6 +74,11 @@ export default {
         service: {
             type: Object,
             required: true
+        },
+
+        customAttributeOverride: {
+            type: Object,
+            default: () => ({})
         }
     },
 
@@ -105,6 +110,19 @@ export default {
         }
     },
 
+    directives: {
+        /**
+         * Extract object attributes and set them on the input component.
+         *
+         * */
+        setAttributes (element, directive) {
+            for (let i = 0, keys = Object.keys(directive.value); i < keys.length; i++) {
+                const key = keys[i];
+                element.setAttribute(key, directive.value[key]);
+            }
+        }
+    },
+
     methods: {
         ...mapActions('searchbox', [
             'setInputFocus',
@@ -129,6 +147,18 @@ export default {
                     this.setInputFocus(value);
                 }, ALLOWED_SELECTION_TIME);
             }
+        },
+
+        /**
+         * Sets the input field type so we can switch between numeric (DK & NO) or non
+         * numeric types (all the rest of the tenants).
+         *
+         * @returns {string}
+         */
+        setInputType () {
+            return this.customAttributeOverride.isNumeric
+                ? 'number'
+                : 'search';
         }
     }
 };
