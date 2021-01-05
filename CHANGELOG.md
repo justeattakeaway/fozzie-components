@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.1.0
+------------------------------
+*January 4, 2020*
+
+### Fixed
+- `bundlewatch` config updated in line with new structure.
+
+
 v3.0.0
 ------------------------------
 *December 31, 2020*
