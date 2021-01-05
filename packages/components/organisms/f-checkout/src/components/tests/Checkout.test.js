@@ -157,14 +157,13 @@ describe('Checkout', () => {
     });
 
     describe('computed ::', () => {
+        const propsData = {
+            checkoutUrl,
+            checkoutAvailableFulfilmentUrl
+        };
+
         describe('name ::', () => {
             it('should capitalize `firstName` data', async () => {
-                // Arrange
-                const propsData = {
-                    checkoutUrl,
-                    checkoutAvailableFulfilmentUrl
-                };
-
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
@@ -182,12 +181,6 @@ describe('Checkout', () => {
 
         describe('title ::', () => {
             it('should add `name` to title text', async () => {
-                // Arrange
-                const propsData = {
-                    checkoutUrl,
-                    checkoutAvailableFulfilmentUrl
-                };
-
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
@@ -205,6 +198,10 @@ describe('Checkout', () => {
     });
 
     describe('mounted ::', () => {
+        afterEach(() => {
+            jest.clearAllMocks();
+        });
+
         it('should call `setAuthToken`', () => {
             // Arrange & Act
             const setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
@@ -269,6 +266,10 @@ describe('Checkout', () => {
             checkoutUrl,
             checkoutAvailableFulfilmentUrl
         };
+
+        afterEach(() => {
+            jest.clearAllMocks();
+        });
 
         describe('submitCheckout ::', () => {
             describe('if serviceType set to `collection`', () => {
