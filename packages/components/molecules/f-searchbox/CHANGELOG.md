@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.0.0-beta.13
 ------------------------------
-*December 11, 2020*
+*January 05, 2020*
 
 ### Fixed
 - DK & NO field options - provides component with custom attributes, 
