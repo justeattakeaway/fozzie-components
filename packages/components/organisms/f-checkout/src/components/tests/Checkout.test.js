@@ -59,23 +59,21 @@ describe('Checkout', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    describe('rendered :: ', () => {
-        it('should show the login link.', () => {
-            const dummyName = defaultState.customer.firstName;
-            const wrapper = shallowMount(VueCheckout, {
-                i18n,
-                store: createStore(),
-                localVue,
-                propsData
-            });
-
-            // Act
-            const loginLink = wrapper.find("[data-test-id='switch-user-link']");
-
-            // Assert
-            expect(loginLink.exists()).toBe(true);
-            expect(loginLink.text()).toBe(`Not ${dummyName}? Click here.`);
+    it('should show the login link', () => {
+        const dummyName = defaultState.customer.firstName;
+        const wrapper = shallowMount(VueCheckout, {
+            i18n,
+            store: createStore(),
+            localVue,
+            propsData
         });
+
+        // Act
+        const loginLink = wrapper.find("[data-test-id='switch-user-link']");
+
+        // Assert
+        expect(loginLink.exists()).toBe(true);
+        expect(loginLink.text()).toBe(`Not ${dummyName}? Click here.`);
     });
 
     describe('created :: ', () => {
@@ -117,23 +115,6 @@ describe('Checkout', () => {
 
             // Assert
             expect(registerModuleSpy).not.toHaveBeenCalled();
-        });
-
-        it('should emit the `VisitLoginPage` event when login link is clicked.', () => {
-            // Arrange
-            const wrapper = shallowMount(VueCheckout, {
-                i18n,
-                store: createStore(),
-                localVue,
-                propsData
-            });
-
-            // Act
-            const loginLink = wrapper.find("[data-test-id='switch-user-link']");
-            loginLink.trigger('click');
-
-            // Assert
-            expect(wrapper.emitted(EventNames.CheckoutVisitLoginPage).length).toBe(1);
         });
     });
 
@@ -951,8 +932,27 @@ describe('Checkout', () => {
                 expect(isValidPostcodeSpy).toHaveBeenCalledWith(defaultState.fulfilment.address.postcode, i18n.locale);
             });
         });
-    });
 
+        describe('onVisitLoginPage ::', () => {
+            it('should emit the `VisitLoginPage` event when login link is clicked.', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    i18n,
+                    store: createStore(),
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const loginLink = wrapper.find("[data-test-id='switch-user-link']");
+                loginLink.trigger('click');
+
+                // Assert
+                expect(wrapper.emitted(EventNames.CheckoutVisitLoginPage).length).toBe(1);
+            });
+        });
+    });
+    
     describe('watch ::', () => {
         describe('fulfilmentTimes ::', () => {
             afterEach(() => {
