@@ -3,14 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
-Latest (add to next release)
+v0.31.0
 ------------------------------
-*December 30, 2020*
+*January 5, 2021*
 
 ### Changed
+- Tests for `Checkout` component methods and computed values.
 - Updated config for latest `sass-loader`.
 - Updated fozzie dependencies in `common.scss` to pull in v5-beta.
+
+### Added
+- `it-IT` tenant file.
 
 
 v0.30.0
