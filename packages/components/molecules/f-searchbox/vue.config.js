@@ -34,7 +34,7 @@ module.exports = {
                             ${content}`;
                 }
             });
-    
+
         config.module
             .rule('images')
             .use('url-loader')

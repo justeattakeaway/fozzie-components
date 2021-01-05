@@ -50,6 +50,20 @@ export default {
     components: {
         FormSearchInnerFieldWrapper
     },
+
+    directives: {
+        /**
+         * Extract object attributes and set them on the input component.
+         *
+         * */
+        setAttributes (element, directive) {
+            for (let i = 0, keys = Object.keys(directive.value); i < keys.length; i++) {
+                const key = keys[i];
+                element.setAttribute(key, directive.value[key]);
+            }
+        }
+    },
+
     props: {
         errorMessage: {
             type: [Boolean, String],
@@ -106,19 +120,6 @@ export default {
         shouldInputFieldHaveFocus (value) {
             if (value) {
                 this.$refs.addressInput.focus();
-            }
-        }
-    },
-
-    directives: {
-        /**
-         * Extract object attributes and set them on the input component.
-         *
-         * */
-        setAttributes (element, directive) {
-            for (let i = 0, keys = Object.keys(directive.value); i < keys.length; i++) {
-                const key = keys[i];
-                element.setAttribute(key, directive.value[key]);
             }
         }
     },
