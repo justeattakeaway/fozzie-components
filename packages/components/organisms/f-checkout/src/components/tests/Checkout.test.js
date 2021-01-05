@@ -816,6 +816,103 @@ describe('Checkout', () => {
             });
         });
 
+        describe('onFormSubmit ::', () => {
+            let isFormValidSpy;
+            let submitCheckoutSpy;
+
+            beforeEach(() => {
+                isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
+                submitCheckoutSpy = jest.spyOn(VueCheckout.methods, 'submitCheckout');
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should emit `CheckoutFailure` with validation state if form is invalid', async () => {
+                // Arrange
+                const mockValidationState = {
+                    validFields: [
+                        'customer.mobileNumber',
+                        'fulfilment.address.line1',
+                        'fulfilment.address.city',
+                        'fulfilment.address.postcode'
+                    ],
+                    invalidFields: []
+                };
+
+                const getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
+
+                getFormValidationStateSpy.mockReturnValue(mockValidationState);
+                isFormValidSpy.mockReturnValue(false);
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v
+                    }
+                });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+
+                // Assert
+                expect(isFormValidSpy).toBeCalled();
+                expect(getFormValidationStateSpy).toBeCalledWith($v);
+                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0]).toEqual(mockValidationState);
+            });
+
+            it('should try to call `submitCheckout` if form is Valid', async () => {
+                // Arrange
+                isFormValidSpy.mockReturnValue(true);
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v
+                    }
+                });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+
+                // Assert
+                expect(submitCheckoutSpy).toHaveBeenCalled();
+            });
+
+            it('should call `handleErrorState` if `submitCheckout` returns an error', async () => {
+                // Arrange
+                const handleErrorStateSpy = jest.spyOn(VueCheckout.methods, 'handleErrorState');
+                const error = new Error('errorMessage');
+
+                submitCheckoutSpy.mockImplementation(async () => { throw error; });
+                isFormValidSpy.mockReturnValue(true);
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v
+                    }
+                });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+
+                // Assert
+                expect(handleErrorStateSpy).toHaveBeenCalledWith(error);
+            });
+        });
+
         describe('isValidPhoneNumber ::', () => {
             afterEach(() => {
                 jest.clearAllMocks();
