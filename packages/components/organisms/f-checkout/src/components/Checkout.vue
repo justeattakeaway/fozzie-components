@@ -423,20 +423,6 @@ $line-height                              : 16px;
 $checkout-width                           : 596px;
 $checkout-padding                         : spacing(x5) 100px;
 
-.c-checkout-link {
-  text-align: center;
-
-  a {
-    text-decoration: none;
-    font-weight: $font-weight-bold;
-
-    &:hover,
-    &:focus {
-      text-decoration: underline;
-    }
-  }
-}
-
 .c-checkout {
     margin: auto;
     font-family: $font-family-base;
@@ -464,5 +450,19 @@ $checkout-padding                         : spacing(x5) 100px;
     .c-checkout-submitButton {
         margin: spacing(x4) 0 spacing(x0.5);
     }
+}
+
+.c-checkout-link {
+  text-align: center;
+
+  a {
+    text-decoration: none;
+    font-weight: $font-weight-bold;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
 }
 </style>

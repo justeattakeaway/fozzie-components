@@ -60,7 +60,6 @@ describe('Checkout', () => {
     });
 
     it('should show the login link', () => {
-        const dummyName = defaultState.customer.firstName;
         const wrapper = shallowMount(VueCheckout, {
             i18n,
             store: createStore(),
@@ -73,7 +72,7 @@ describe('Checkout', () => {
 
         // Assert
         expect(loginLink.exists()).toBe(true);
-        expect(loginLink.text()).toBe(`Not ${dummyName}? Click here.`);
+        expect(loginLink.text()).toBe(`Not ${defaultState.customer.firstName}? Click here.`);
     });
 
     describe('created :: ', () => {
@@ -952,7 +951,7 @@ describe('Checkout', () => {
             });
         });
     });
-    
+
     describe('watch ::', () => {
         describe('fulfilmentTimes ::', () => {
             afterEach(() => {
