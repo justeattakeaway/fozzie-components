@@ -14,6 +14,33 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
+const $v = {
+    customer: {
+        mobileNumber: {
+            $dirty: false,
+            isValidPhoneNumber: false
+        }
+    },
+    fulfilment: {
+        address: {
+            city: {
+                $dirty: false,
+                required: true
+            },
+            line1: {
+                $dirty: false,
+                required: false
+            },
+            postcode: {
+                $dirty: false,
+                required: true,
+                isValidPostcode: false
+            }
+        }
+    },
+    $touch: jest.fn()
+};
+
 describe('Checkout', () => {
     allure.feature('Checkout');
     const checkoutUrl = 'http://localhost/checkout';
@@ -724,6 +751,68 @@ describe('Checkout', () => {
 
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.vm.genericErrorMessage).toEqual(error);
+            });
+        });
+
+        describe('isFormValid ::', () => {
+            let touchSpy;
+
+            beforeEach(() => {
+                touchSpy = jest.spyOn($v, '$touch');
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should call `.touch()` ', () => {
+                // Act
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: { $v }
+                });
+
+                wrapper.vm.isFormValid();
+
+                // Assert
+                expect(touchSpy).toBeCalled();
+            });
+
+            it('should return `true` if `$v` is valid', () => {
+                // Arrange
+                $v.$invalid = false;
+
+                // Act
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: { $v }
+                });
+
+                // Assert
+                expect(wrapper.vm.isFormValid()).toBeTruthy();
+            });
+
+            it('should return `false` if `$v` is invalid', () => {
+                // Arrange
+                $v.$invalid = true;
+
+                // Act
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: { $v }
+                });
+
+                // Assert
+                expect(wrapper.vm.isFormValid()).toBeFalsy();
             });
         });
 
