@@ -1,19 +1,42 @@
 // https://bundlewatch.io/#/getting-started/using-a-config-file
 
-const fs = require('fs');
+const { readdirSync } = require('fs')
+
+const packageFolders = [
+    'packages/components/atoms',
+    'packages/components/molecules',
+    'packages/components/organisms',
+    'packages/services',
+    'packages/tools'
+]
 
 const excludedPackages = [
-    'f-metadata',
-    'generator-component',
-    'storybook'
+    'packages/services/f-metadata',
+    'packages/tools/generator-component',
+    'packages/tools/storybook'
 ];
 
-const packageNames = fs.readdirSync('packages/');
+/**
+ * Function to get subfolders of a given path.
+ *
+ * @param {String} source – Path string to check the contents of.
+ * @returns {Array} – A set of subfolder paths to each package found
+ */
+const getDirectories = source =>
+    readdirSync(source, { withFileTypes: true })
+        .filter(dirent => dirent.isDirectory())
+        .map(dirent => `${source}/${dirent.name}`)
+
+let packageNames = [];
+
+packageFolders.forEach(folder => {
+    packageNames = packageNames.concat(getDirectories(folder));
+});
 
 const filteredPackages = packageNames.filter(package => !excludedPackages.includes(package));
 
-const files = filteredPackages.map(name => ({
-    path: `packages/${name}/dist/*.js`,
+const files = filteredPackages.map(package => ({
+    path: `${package}/dist/*.js`,
     maxSize: '200kB'
 }));
 
