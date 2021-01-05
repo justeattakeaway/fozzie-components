@@ -48,7 +48,7 @@ describe('f-checkout component tests', () => {
         expect(CheckoutComponent.getOrderTimeOptionText(2)).toBe('Wednesday 00:45');
     });
 
-    it('should prevent user from writing a note of over 200 characters', () => {
+    it('should prevent a user from writing a note of over 200 characters', () => {
         // Arrange
         const userNote = 'A';
         const addressInfo = {
