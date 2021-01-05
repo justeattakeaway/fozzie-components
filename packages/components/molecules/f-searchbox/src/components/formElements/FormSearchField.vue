@@ -57,8 +57,8 @@ export default {
          *
          * */
         setAttributes (element, directive) {
-            Object.keys(directive.value).forEach(key => {
-                element.setAttribute(key, directive.value[key]);
+            Object.entries(directive.value).forEach(([key, value]) => {
+                element.setAttribute(key, value);
             });
         }
     },
