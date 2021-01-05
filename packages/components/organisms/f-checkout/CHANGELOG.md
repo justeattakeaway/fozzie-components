@@ -8,7 +8,7 @@ v0.31.0
 -------------------------------
 *January 5, 2021*
 
-### Changed	### Changed
+### Changed
 - Updated skipped tests to work with Storybook component tests.
 
 ### Added
