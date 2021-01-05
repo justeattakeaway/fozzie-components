@@ -12,6 +12,9 @@ v4.0.0-beta.13
 supplied via tenant config `addressField`.
 - DK & NO uses the `where` form value now.
 
+### Added
+- url-loader so we can inline the `powered by google` logo as a base64 URI.
+
 
 Latest (add to next release)
 ------------------------------
