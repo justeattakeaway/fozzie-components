@@ -10,6 +10,7 @@ v4.0.0-beta.13
 ### Fixed
 - DK & NO field options - provides component with custom attributes, 
 supplied via tenant config `addressField`.
+- DK & NO uses the `where` form value now.
 
 
 Latest (add to next release)
