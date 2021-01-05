@@ -860,8 +860,6 @@ describe('Checkout', () => {
                 await wrapper.vm.onFormSubmit();
 
                 // Assert
-                expect(isFormValidSpy).toBeCalled();
-                expect(getFormValidationStateSpy).toBeCalledWith($v);
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0]).toEqual(mockValidationState);
             });
@@ -892,7 +890,7 @@ describe('Checkout', () => {
                 const handleErrorStateSpy = jest.spyOn(VueCheckout.methods, 'handleErrorState');
                 const error = new Error('errorMessage');
 
-                submitCheckoutSpy.mockImplementation(async () => { throw error; });
+                submitCheckoutSpy.mockImplementation(() => { throw error; });
                 isFormValidSpy.mockReturnValue(true);
 
                 const wrapper = mount(VueCheckout, {
@@ -933,7 +931,7 @@ describe('Checkout', () => {
                 wrapper.vm.isValidPhoneNumber();
 
                 // Assert
-                expect(isValidPhoneNumberSpy).toBeCalledWith(defaultState.customer.mobileNumber, i18n.locale);
+                expect(isValidPhoneNumberSpy).toHaveBeenCalledWith(defaultState.customer.mobileNumber, i18n.locale);
             });
         });
 
