@@ -7,6 +7,13 @@ const isGlobalConfigUpdate = bodyAndTitle.includes('#globalconfig'); // turns of
 if (!isTrivial) {
     const failedChangelogs = [];
     const failedVersionBumps = [];
+    const packageDirectories = [
+        'packages/components/atoms/',
+        'packages/components/molecules/',
+        'packages/components/organisms/',
+        'packages/services/',
+        'packages/tools/'
+    ];
     const modifiedFiles = danger.git.modified_files;
 
     // Get an array of files in the root monorepo that have changed
@@ -14,7 +21,11 @@ if (!isTrivial) {
 
     // Get an array of packages that have changed, then make that array unique
     const modifiedPackages = modifiedFiles.filter(filepath => filepath.startsWith('packages/'))
-        .map(filepath => `${filepath.split('/')[1]}/${filepath.split('/')[2]})`);
+        .map(filepath => {
+            const directoryMatch = packageDirectories.filter(subDirectory => filepath.includes(subDirectory));
+            return (filepath.split(directoryMatch)[1]) // splits the string based on the matching directory
+                .split('/')[0]; // and then get the first part of the string that's left (the package name)
+        });
     const uniqueModifiedPackages = new Set(modifiedPackages);
     const modifiedRootPackage = modifiedPackages.includes('');
 
