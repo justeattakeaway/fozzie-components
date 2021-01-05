@@ -41,7 +41,9 @@ const defaultState = {
     notes: [],
     isFulfillable: true,
     notices: [],
-    messages: []
+    messages: [],
+    authToken: '',
+    isLoggedIn: false
 };
 
 const defaultActions = {

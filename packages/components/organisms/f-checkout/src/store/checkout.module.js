@@ -108,11 +108,10 @@ export default {
                 },
                 timeout
             };
-            debugger;
+
             const response = await axios.post(url, data, config);
             // eslint-disable-next-line no-unused-vars
-            let otac = response.data.token;
-            console.log(otac);
+            const otac = response.data.token;
             // TODO: Use otac to log the user in
         },
 

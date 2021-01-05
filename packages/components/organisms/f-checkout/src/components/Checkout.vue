@@ -297,7 +297,7 @@ export default {
             }
         },
 
-        async setupGuestUser() {
+        async setupGuestUser () {
             const createGuestData = {
                 emailAddress: this.customer.email,
                 firstName: this.customer.firstName,
