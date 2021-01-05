@@ -22,7 +22,7 @@ const processLocationCookie = (shouldSetCookie, address) => {
     if (!shouldSetCookie) {
         return false;
     }
-    
+
     if (typeof address === 'string') {
         setCookie(JE_LOCATION, normalisePostcode(address), COOKIE_DAYS);
     } else {
