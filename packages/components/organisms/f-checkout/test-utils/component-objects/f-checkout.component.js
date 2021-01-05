@@ -7,7 +7,9 @@ import {
     ORDER_TIME_DROPDOWN_OPTIONS,
     USER_NOTE_INPUT,
     GO_TO_PAYMENT_BUTTON,
-    FIELDS
+    FIELDS,
+    KNOB_CHECKOUT_DROPDOWN,
+    KNOB_BUTTON
 } from './f-checkout-selectors';
 
 const { doesElementExist } = require('../../../../../../test/utils/webdriverio-extensions')(browser);
@@ -18,11 +20,13 @@ const checkoutComponent = () => $(CHECKOUT_COMPONENT);
 
 const orderTimeDropdown = () => $(ORDER_TIME_DROPDOWN);
 const orderTimeDropdownOptions = () => $$(ORDER_TIME_DROPDOWN_OPTIONS);
+const knobCheckoutDropdown = () => $(KNOB_CHECKOUT_DROPDOWN);
 
 // Buttons
 
 const allergenLink = () => $(ALLERGEN_LINK);
 const goToPaymentButton = () => $(GO_TO_PAYMENT_BUTTON);
+const knobButton = () => $(KNOB_BUTTON);
 
 // Form Fields
 
@@ -56,6 +60,21 @@ const fields = {
     }
 };
 
+/**
+ * @description
+ * Changes checkout page to reflect checkout method to either delivery or collection depending on index given.
+ *
+ * @param {string} method The collection type: either 'delivery' or 'collection'
+ */
+
+exports.changeCheckoutMethod = method => {
+    const file = `/checkout-${method}.json`;
+    knobButton().click();
+    knobCheckoutDropdown().selectByVisibleText(file);
+};
+
+
+
 exports.isFieldErrorDisplayed = fieldName => fields[fieldName].error().isDisplayed();
 exports.isFieldDisplayed = fieldName => fields[fieldName].input().isDisplayed();
 exports.isFieldTypeErrorDisplayed = fieldName => fields[fieldName].typeError().isDisplayed();
@@ -87,6 +106,37 @@ exports.populateCheckoutForm = addressInfo => {
     fields.addressPostcode.input().setValue(addressInfo.postcode);
     fields.userNote.input().setValue(addressInfo.note);
 };
+
+/**
+ * @description
+ * Adds a space and backspaces to clear the value of the form field.
+ * For more information on this, you can check out the link below:
+ * https://github.com/webdriverio/webdriverio/issues/530#issuecomment-229435909
+ *
+ * @param {String} fieldName The name of the field input it is clearing
+ */
+exports.clearField = fieldName => {
+    const BACKSPACE_UNICODE = '\uE003';
+    fields[fieldName].input().setValue([' ', BACKSPACE_UNICODE]);
+};
+
+/**
+ * @description
+ * Adds a space and backspaces to clear the value of the form field.
+ *
+ * @param {String} fields Grabs the fields of the above object and runs a forEach loop to get the keys
+ */
+exports.clearCheckoutForm = () => {
+    exports.waitForCheckoutComponent();
+    Object.keys(fields).forEach(exports.clearField);
+};
+
+exports.populateCollectionCheckoutForm = addressInfo => {
+    exports.waitForCheckoutComponent();
+    fields.mobileNumber.input().setValue(addressInfo.mobileNumber);
+    fields.userNote.input().setValue(addressInfo.note);
+};
+
 /**
  * @description
  * Sets the value of the order time in dropdown based on visible text.
@@ -96,6 +146,7 @@ exports.populateCheckoutForm = addressInfo => {
 exports.selectOrderTime = orderTime => {
     orderTimeDropdown().selectByVisibleText(orderTime);
 };
+
 /**
  * @description
  * The time of the order should increase when a higher index is applied.
@@ -103,6 +154,7 @@ exports.selectOrderTime = orderTime => {
  * @param {Number} index The index of the `orderTimeDropdownOptions` array
  */
 exports.getOrderTimeOptionText = index => orderTimeDropdownOptions()[index].getText();
+
 /**
  * @description
  * Sets the value of the user note.
@@ -113,6 +165,7 @@ exports.getOrderTimeOptionText = index => orderTimeDropdownOptions()[index].getT
 exports.inputUserNote = addressInfo => {
     fields.userNote.input().setValue(addressInfo.note);
 };
+
 /**
  * @description
  * Grabs the length of characters of the user note.
@@ -120,13 +173,14 @@ exports.inputUserNote = addressInfo => {
  * @returns {number} The length of the user note
  */
 exports.getUserNoteLength = () => userNoteInput().getValue().length;
+
 /**
  * @description
  *Submit the checkout form.
  */
-exports.submit = () => {
+exports.goToPayment = () => {
     goToPaymentButton().click();
 };
 
 exports.doesErrorMessageExist = errorMessage => doesElementExist(FIELDS[errorMessage].error);
-exports.doesInputFieldExist = inputField => doesElementExist(FIELDS[inputField].input);
+exports.doesFieldExist = inputField => doesElementExist(FIELDS[inputField].input);

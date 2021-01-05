@@ -1,18 +1,18 @@
 import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.component';
 
 describe('f-checkout component tests', () => {
-    beforeEach(() => {
+    before(() => {
         browser.url('?path=/story/components-organisms--checkout-component');
         browser.switchToFrame(0);
         CheckoutComponent.waitForCheckoutComponent();
     });
 
-    it.skip('should display the f-checkout component', () => {
+    it('should display the f-checkout component', () => {
         // Assert
         expect(CheckoutComponent.isCheckoutComponentDisplayed()).toBe(true);
     });
 
-    it.skip('should display the allergen link', () => {
+    it('should display the allergen link', () => {
         // Assert
         expect(CheckoutComponent.isAllergenLinkDisplayed()).toBe(true);
     });
@@ -30,26 +30,26 @@ describe('f-checkout component tests', () => {
 
         // Act
         CheckoutComponent.populateCheckoutForm(addressInfo);
-        CheckoutComponent.selectOrderTime('Monday 00:15');
-        CheckoutComponent.submit();
+        CheckoutComponent.selectOrderTime('Wednesday 00:30');
+        CheckoutComponent.goToPayment();
 
         // Assert
         // Waiting for route here, so we can grab redirect url and show form submits.
     });
 
-    it.skip('should display times in ascending order, with default text "As soon as possible" showing first', () => {
-        // Act 
+    it('should display times in ascending order, with default text "As soon as possible" showing first', () => {
+        // Act
         CheckoutComponent.selectOrderTime('As soon as possible');
 
         // Assert
         expect(CheckoutComponent.isOrderTimeDropdownDisplayed()).toBe(true);
         expect(CheckoutComponent.getOrderTimeOptionText(0)).toBe('As soon as possible');
-        expect(CheckoutComponent.getOrderTimeOptionText(1)).toBe('Monday 00:15');
-        expect(CheckoutComponent.getOrderTimeOptionText(2)).toBe('Monday 00:30');
+        expect(CheckoutComponent.getOrderTimeOptionText(1)).toBe('Wednesday 00:30');
+        expect(CheckoutComponent.getOrderTimeOptionText(2)).toBe('Wednesday 00:45');
     });
 
-    it.skip('should prevent user from writing a note of over 200 characters', () => {
-        // Arrange 
+    it('should prevent a user from writing a note of over 200 characters', () => {
+        // Arrange
         const userNote = 'A';
         const addressInfo = {
             note: userNote.repeat(300)
@@ -75,8 +75,8 @@ describe('f-checkout component tests', () => {
 
         // Act
         CheckoutComponent.populateCheckoutForm(addressInfo);
-        CheckoutComponent.selectOrderTime('Monday 00:30');
-        CheckoutComponent.submit();
+        CheckoutComponent.selectOrderTime('Wednesday 00:30');
+        CheckoutComponent.goToPayment();
 
         // Assert
         // Waiting for route here, so we can grab redirect url and show form submits.
