@@ -14,6 +14,33 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
+const $v = {
+    customer: {
+        mobileNumber: {
+            $dirty: false,
+            isValidPhoneNumber: false
+        }
+    },
+    fulfilment: {
+        address: {
+            city: {
+                $dirty: false,
+                required: true
+            },
+            line1: {
+                $dirty: false,
+                required: false
+            },
+            postcode: {
+                $dirty: false,
+                required: true,
+                isValidPostcode: false
+            }
+        }
+    },
+    $touch: jest.fn()
+};
+
 describe('Checkout', () => {
     allure.feature('Checkout');
     const checkoutUrl = 'http://localhost/checkout';
@@ -157,14 +184,13 @@ describe('Checkout', () => {
     });
 
     describe('computed ::', () => {
+        const propsData = {
+            checkoutUrl,
+            checkoutAvailableFulfilmentUrl
+        };
+
         describe('name ::', () => {
             it('should capitalize `firstName` data', async () => {
-                // Arrange
-                const propsData = {
-                    checkoutUrl,
-                    checkoutAvailableFulfilmentUrl
-                };
-
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
@@ -182,12 +208,6 @@ describe('Checkout', () => {
 
         describe('title ::', () => {
             it('should add `name` to title text', async () => {
-                // Arrange
-                const propsData = {
-                    checkoutUrl,
-                    checkoutAvailableFulfilmentUrl
-                };
-
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
@@ -202,9 +222,120 @@ describe('Checkout', () => {
                 expect(name.props('cardHeading')).toEqual(`${defaultState.customer.firstName}, confirm your details`);
             });
         });
+
+        describe('isMobileNumberValid ::', () => {
+            let wrapper;
+
+            beforeEach(() => {
+                wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: { $v }
+                });
+            });
+
+            it('should return `true` if mobileNumber field has not been touched', () => {
+                // Act
+                wrapper.vm.$v.customer.mobileNumber.$dirty = false;
+
+                // Assert
+                expect(wrapper.vm.isMobileNumberValid).toBeTruthy();
+            });
+
+            it('should return `false` if mobileNumber field has been touched but mobileNumber is not valid', () => {
+                // Act
+                wrapper.vm.$v.customer.mobileNumber.$dirty = true;
+                wrapper.vm.$v.customer.mobileNumber.isValidPhoneNumber = false;
+
+                // Assert
+                expect(wrapper.vm.isMobileNumberValid).toBeFalsy();
+            });
+
+            it('should return `true` if mobileNumber field has been touched and mobileNumber is valid', () => {
+                // Act
+                wrapper.vm.$v.customer.mobileNumber.$dirty = true;
+                wrapper.vm.$v.customer.mobileNumber.isValidPhoneNumber = true;
+
+                // Assert
+                expect(wrapper.vm.isMobileNumberValid).toBeTruthy();
+            });
+        });
+
+        describe('isCheckoutMethodDelivery ::', () => {
+            it('should return `true` if `serviceType` is set to Delivery', () => {
+                // Arrange
+                const state = {
+                    ...defaultState,
+                    serviceType: CHECKOUT_METHOD_DELIVERY
+                };
+
+                // Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(state),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.isCheckoutMethodDelivery).toBeTruthy();
+            });
+
+            it('should return `false` if `serviceType` is set to Collection', () => {
+                // Arrange
+                const state = {
+                    ...defaultState,
+                    serviceType: CHECKOUT_METHOD_COLLECTION
+                };
+
+                // Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(state),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.isCheckoutMethodDelivery).toBeFalsy();
+            });
+        });
+
+        describe('tenant ::', () => {
+            it.each([
+                ['en-AU', 'au'],
+                ['en-NZ', 'nz'],
+                ['da-DK', 'dk'],
+                ['es-ES', 'es'],
+                ['en-IE', 'ie'],
+                ['it-IT', 'it'],
+                ['nb-NO', 'no'],
+                ['en-GB', 'uk']
+            ])('should return %s when i18n is set to %s', (locale, tenant) => {
+                // Arrange
+                i18n.locale = locale;
+
+                // Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.tenant).toEqual(tenant);
+            });
+        });
     });
 
     describe('mounted ::', () => {
+        afterEach(() => {
+            jest.clearAllMocks();
+        });
+
         it('should call `setAuthToken`', () => {
             // Arrange & Act
             const setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
@@ -269,6 +400,10 @@ describe('Checkout', () => {
             checkoutUrl,
             checkoutAvailableFulfilmentUrl
         };
+
+        afterEach(() => {
+            jest.clearAllMocks();
+        });
 
         describe('submitCheckout ::', () => {
             describe('if serviceType set to `collection`', () => {
@@ -619,38 +754,208 @@ describe('Checkout', () => {
             });
         });
 
-        describe('isValidPhoneNumber ::', () => {
-            const isValidPhoneNumberSpy = jest.spyOn(validations, 'isValidPhoneNumber');
+        describe('isFormValid ::', () => {
+            let touchSpy;
 
-            it('should call `isValidPhoneNumber` from `f-services', () => {
+            beforeEach(() => {
+                touchSpy = jest.spyOn($v, '$touch');
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should call `.touch()` ', () => {
                 // Act
-                mount(VueCheckout, {
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: { $v }
+                });
+
+                wrapper.vm.isFormValid();
+
+                // Assert
+                expect(touchSpy).toBeCalled();
+            });
+
+            it('should return `true` if `$v` is valid', () => {
+                // Arrange
+                $v.$invalid = false;
+
+                // Act
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: { $v }
+                });
+
+                // Assert
+                expect(wrapper.vm.isFormValid()).toBeTruthy();
+            });
+
+            it('should return `false` if `$v` is invalid', () => {
+                // Arrange
+                $v.$invalid = true;
+
+                // Act
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: { $v }
+                });
+
+                // Assert
+                expect(wrapper.vm.isFormValid()).toBeFalsy();
+            });
+        });
+
+        describe('onFormSubmit ::', () => {
+            let isFormValidSpy;
+            let submitCheckoutSpy;
+
+            beforeEach(() => {
+                isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
+                submitCheckoutSpy = jest.spyOn(VueCheckout.methods, 'submitCheckout');
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should emit `CheckoutFailure` with validation state if form is invalid', async () => {
+                // Arrange
+                const mockValidationState = {
+                    validFields: [
+                        'customer.mobileNumber',
+                        'fulfilment.address.line1',
+                        'fulfilment.address.city',
+                        'fulfilment.address.postcode'
+                    ],
+                    invalidFields: []
+                };
+
+                const getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
+
+                getFormValidationStateSpy.mockReturnValue(mockValidationState);
+                isFormValidSpy.mockReturnValue(false);
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v
+                    }
+                });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+
+                // Assert
+                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0]).toEqual(mockValidationState);
+            });
+
+            it('should try to call `submitCheckout` if form is Valid', async () => {
+                // Arrange
+                isFormValidSpy.mockReturnValue(true);
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v
+                    }
+                });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+
+                // Assert
+                expect(submitCheckoutSpy).toHaveBeenCalled();
+            });
+
+            it('should call `handleErrorState` if `submitCheckout` returns an error', async () => {
+                // Arrange
+                const handleErrorStateSpy = jest.spyOn(VueCheckout.methods, 'handleErrorState');
+                const error = new Error('errorMessage');
+
+                submitCheckoutSpy.mockImplementation(() => { throw error; });
+                isFormValidSpy.mockReturnValue(true);
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v
+                    }
+                });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+
+                // Assert
+                expect(handleErrorStateSpy).toHaveBeenCalledWith(error);
+            });
+        });
+
+        describe('isValidPhoneNumber ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should call `isValidPhoneNumber` from `f-services`', () => {
+                // Arrange
+                const isValidPhoneNumberSpy = jest.spyOn(validations, 'isValidPhoneNumber');
+
+                const wrapper = mount(VueCheckout, {
                     store: createStore(),
                     i18n,
                     localVue,
                     propsData
                 });
 
+                // Act
+                wrapper.vm.isValidPhoneNumber();
+
                 // Assert
-                expect(isValidPhoneNumberSpy).toBeCalledWith(defaultState.customer.mobileNumber, i18n.locale);
+                expect(isValidPhoneNumberSpy).toHaveBeenCalledWith(defaultState.customer.mobileNumber, i18n.locale);
             });
         });
 
         describe('isValidPostcode ::', () => {
-            const isValidPostcodeSpy = jest.spyOn(validations, 'isValidPostcode');
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
 
-            it('should call `isValidPostcode` from `f-services', () => {
-                // Act
-                mount(VueCheckout, {
+            it('should call `isValidPostcode` from `f-services`', () => {
+                // Arrange
+                const isValidPostcodeSpy = jest.spyOn(validations, 'isValidPostcode');
+
+                const wrapper = mount(VueCheckout, {
                     store: createStore(),
                     i18n,
                     localVue,
                     propsData
                 });
 
+                // Act
+                wrapper.vm.isValidPostcode();
+
                 // Assert
-                // expect(isValidPostcodeSpy).toBeCalledWith(defaultState.customer.mobileNumber, i18n.locale);
-                expect(isValidPostcodeSpy).toBeCalledWith(defaultState.fulfilment.address.postcode, i18n.locale);
+                expect(isValidPostcodeSpy).toHaveBeenCalledWith(defaultState.fulfilment.address.postcode, i18n.locale);
             });
         });
     });
