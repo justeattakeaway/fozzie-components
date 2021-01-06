@@ -305,7 +305,7 @@ export default {
                 registrationSource: 'Guest'
             };
 
-            this.createGuestUser({
+            await this.createGuestUser({
                 url: this.createGuestUrl,
                 tenant: this.tenant,
                 data: createGuestData,
