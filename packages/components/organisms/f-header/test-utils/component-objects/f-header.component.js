@@ -31,8 +31,11 @@ const mobileNavigationBar = () => $(MOBILE_NAVIGATION_BAR);
 const mobileOffersIcon = () => {
     return navigation.offers.icon().filter(element => element.getAttribute('class').includes('u-showBelowMid'));
 };
+const webOffersIcon = () => {
+    return navigation.offers.icon().filter(element => element.getAttribute('class').includes('u-showAboveMid'));
+};
 
-//Functions
+// Functions
 
 exports.waitForHeader = () => headerComponent().waitForExist();
 exports.isFieldLinkDisplayed = fieldName => navigation[fieldName].link().isDisplayedInViewport();
@@ -44,6 +47,12 @@ exports.isMobileOffersIconDisplayed = () => {
 
     return element.length === 1 && element[0].isDisplayedInViewport();
 };
+
+exports.isWebOffersIconDisplayed = () => {
+    const element = webOffersIcon();
+
+    return element.length === 1 && element[0].isDisplayedInViewport();
+}
 
 exports.clickOffersLink = () => {
     navigation.offers.link().click();
