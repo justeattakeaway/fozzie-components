@@ -6,7 +6,7 @@
         <template v-if="groupCards">
             <template v-for="({ title, cards: subCards, id: groupId }, groupIndex) in cardsGrouped">
                 <h2
-                    v-if="groupId"
+                    v-if="groupId && subCards.length > 0"
                     :key="groupIndex"
                     :class="[$style['c-contentCards--group-title'], 'c-contentCards--group-title']"
                     :data-test-id="`${groupIndex}_${groupId}`"
