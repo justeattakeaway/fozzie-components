@@ -16,10 +16,12 @@ Vue.use(Vuex);
 const deliveryUrl = '/checkout-delivery.json';
 const collectionUrl = '/checkout-collection.json';
 const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
+const createGuestUrl = '/create-guest.json';
 
 CheckoutMock.setupCheckoutMethod(deliveryUrl);
 CheckoutMock.setupCheckoutMethod(collectionUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentUrl);
+CheckoutMock.setupCheckoutMethod(createGuestUrl);
 CheckoutMock.passThroughAny();
 
 export default {
@@ -40,7 +42,7 @@ export const CheckoutComponent = () => ({
             default: select('Available Fulfilment Url', [checkoutAvailableFulfilmentUrl], checkoutAvailableFulfilmentUrl)
         },
         createGuestUrl: {
-            default: text('Create Guest Url', 'https://smartgateway.staging-uk.je-labs.com/consumers/uk')
+            default: text('Create Guest Url', createGuestUrl)
         },
         authToken: {
             default: text('Auth token', '')
