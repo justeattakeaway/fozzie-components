@@ -62,7 +62,7 @@ describe('f-header component tests', () => {
         HeaderComponent.clickHelpLink();
 
         // Assert
-        expect(browser.getUrl()).toContain("/help");
+        expect(browser.getUrl()).toContain('/help');
     });
 
     it('should change the url to offers when offers link is clicked', () => {
@@ -70,7 +70,7 @@ describe('f-header component tests', () => {
         HeaderComponent.clickOffersLink();
 
         // Assert
-        expect(browser.getUrl()).toContain("/offers");
+        expect(browser.getUrl()).toContain('/offers');
     });
 
     forEach(['offers', 'help', 'delivery', 'userAccount'])

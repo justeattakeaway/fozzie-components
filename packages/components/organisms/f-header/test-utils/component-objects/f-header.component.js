@@ -28,12 +28,11 @@ const navigation = {
     } 
 }
 const mobileNavigationBar = () => $(MOBILE_NAVIGATION_BAR);
-const mobileOffersIcon = () => {
-    return navigation.offers.icon().filter(element => element.getAttribute('class').includes('u-showBelowMid'));
-};
-const webOffersIcon = () => {
-    return navigation.offers.icon().filter(element => element.getAttribute('class').includes('u-showAboveMid'));
-};
+const mobileOffersIcon = () => 
+    navigation.offers.icon().filter(element => element.getAttribute('class').includes('u-showBelowMid'));
+    
+const webOffersIcon = () =>
+    navigation.offers.icon().filter(element => element.getAttribute('class').includes('u-showAboveMid'));
 
 // Functions
 
