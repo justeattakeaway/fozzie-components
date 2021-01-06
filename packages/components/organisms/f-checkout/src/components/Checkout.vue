@@ -187,8 +187,7 @@ export default {
             * The $dirty boolean changes to true when the user has focused/lost
             * focus on the input field.
             */
-            const isMobileNumberValid = this.$v.customer.mobileNumber.required && this.$v.customer.mobileNumber.isValidPhoneNumber;
-            return !this.$v.customer.mobileNumber.$dirty || isMobileNumberValid;
+            return !this.$v.customer.mobileNumber.$dirty || this.$v.customer.mobileNumber.isValidPhoneNumber;
         },
 
         isCheckoutMethodDelivery () {
@@ -372,7 +371,6 @@ export default {
         const deliveryDetails = {
             customer: {
                 mobileNumber: {
-                    required,
                     isValidPhoneNumber: this.isValidPhoneNumber
                 }
             }
