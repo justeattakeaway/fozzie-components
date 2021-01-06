@@ -42,7 +42,7 @@ const defaultState = {
 
 const { updateState, updateAuth, updateAvailableFulfilment } = CheckoutModule.mutations;
 const {
-    getCheckout, postCheckout, setAuthToken, getAvailableFulfilment
+    getCheckout, postCheckout, createGuestUser, setAuthToken, getAvailableFulfilment
 } = CheckoutModule.actions;
 let state = CheckoutModule.state();
 
@@ -177,6 +177,44 @@ describe('CheckoutModule', () => {
             it('should post the checkout details to the backend.', async () => {
                 // Act
                 await postCheckout({ commit, state }, payload);
+
+                // Assert
+                expect(axios.post).toHaveBeenCalledWith(payload.url, payload.data, config);
+            });
+        });
+
+        describe('createGuestUser ::', () => {
+            payload.url = 'http://localhost/account/createguest';
+            payload.data = {
+                firstName: 'Joe',
+                lastName: 'Bloggs',
+                email: 'joe@test.com'
+            };
+
+            let config;
+
+            beforeEach(() => {
+                config = {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept-Tenant': payload.tenant
+                    },
+                    timeout: payload.timeout
+                };
+
+                axios.post = jest.fn(() => Promise.resolve({
+                    status: 200,
+                    data: {
+                        token: 'otacToken',
+                        type: 'otac'
+                    }
+                }));
+            });
+
+            it('should post the create guest user request to the backend.', async () => {
+                // Act
+                await createGuestUser({ commit, state }, payload);
 
                 // Assert
                 expect(axios.post).toHaveBeenCalledWith(payload.url, payload.data, config);
