@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.13
+------------------------------
+*January 05, 2021*
+
+### Fixed
+- DK & NO field options - provides component with custom attributes, 
+supplied via tenant config `addressField`.
+- DK & NO uses the `where` form value now.
+
+### Added
+- url-loader so we can inline the `powered by google` logo as a base64 URI.
+
 
 Latest (add to next release)
 ------------------------------
