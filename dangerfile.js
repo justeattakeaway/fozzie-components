@@ -7,16 +7,34 @@ const isGlobalConfigUpdate = bodyAndTitle.includes('#globalconfig'); // turns of
 if (!isTrivial) {
     const failedChangelogs = [];
     const failedVersionBumps = [];
+    const packageDirectories = [
+        'packages/components/atoms/',
+        'packages/components/molecules/',
+        'packages/components/organisms/',
+        'packages/services/',
+        'packages/tools/'
+    ];
     const modifiedFiles = danger.git.modified_files;
 
-    // Get an array of files in the root monorepo that have changed
-    const modifiedRootFiles = modifiedFiles.filter(filepath => !filepath.startsWith('packages/') && filepath !== 'yarn.lock');
+    // Get an array of package paths that have changed
+    const modifiedPackagePaths = modifiedFiles.filter(filepath => filepath.startsWith('packages/'));
+    const modifiedPackages = {};
 
-    // Get an array of packages that have changed, then make that array unique
-    const modifiedPackages = modifiedFiles.filter(filepath => filepath.startsWith('packages/'))
-        .map(filepath => `${filepath.split('/')[1]}/${filepath.split('/')[2]})`);
-    const uniqueModifiedPackages = new Set(modifiedPackages);
-    const modifiedRootPackage = modifiedPackages.includes('');
+    // loop through package paths and return an object with the package name and path to that package
+    modifiedPackagePaths.forEach(filepath => {
+        const directoryMatch = packageDirectories.filter(subDirectory => filepath.includes(subDirectory));
+        // eslint-disable-next-line prefer-destructuring
+        const packageName = (filepath.split(directoryMatch)[1]) // splits the string based on the matching directory
+            .split('/')[0]; // and then get the first part of the string that's left (the package name)
+
+        modifiedPackages[packageName] = {
+            path: directoryMatch[0]
+        };
+    });
+
+    // Get an Array of just the package names, and then make that Array unique
+    const modifiedPackageNames = Object.keys(modifiedPackages);
+    const uniqueModifiedPackages = new Set(modifiedPackageNames);
 
     // Fail if the title of the PR isn't in the format of a version i.e. {package-name}@vX.X.X (such as f-header@v1.4.0)
     const versionRegex = /^([a-z\-]+@v?[0-9]+\.[0-9]+\.[0-9]+)/;
@@ -25,7 +43,11 @@ if (!isTrivial) {
         fail(':exclamation: PR title should start with the package version in the format {package-name}@v(x.x.x) (such as f-header@v1.4.0)');
     }
 
-    if (modifiedRootFiles.length && !modifiedRootFiles.includes('CHANGELOG.md')) {
+    // Get an array of files in the root monorepo that have changed
+    const modifiedRootFiles = modifiedFiles.filter(filepath => !filepath.startsWith('packages/') && filepath !== 'yarn.lock');
+    const modifiedRootPackage = modifiedRootFiles.length > 0; // check for changes in the root package
+
+    if (modifiedRootPackage && !modifiedRootFiles.includes('CHANGELOG.md')) {
         const changelogLink = 'https://github.com/justeat/fozzie-components/blob/master/CHANGELOG.md';
         fail(`:memo: Please include a <code>CHANGELOG</code> entry for the root mono-repo. You can find the current version at <a href="${changelogLink}">CHANGELOG.md</a>`);
     }
@@ -58,8 +80,8 @@ if (!isTrivial) {
          */
         const checkPackageDiff = (pkg, resolve) => {
             // Check for version update
-            const hasPackageJsonChanged = danger.git.modified_files.includes(`packages/${pkg}/package.json`);
-            const packageDiff = danger.git.JSONDiffForFile(`packages/${pkg}/package.json`);
+            const hasPackageJsonChanged = danger.git.modified_files.includes(`${modifiedPackages[pkg].path}${pkg}/package.json`);
+            const packageDiff = danger.git.JSONDiffForFile(`${modifiedPackages[pkg].path}${pkg}/package.json`);
 
             packageDiff.then(result => {
                 if (!hasPackageJsonChanged || (hasPackageJsonChanged && !result.version)) {
@@ -76,7 +98,7 @@ if (!isTrivial) {
         // Loops through each package that includes files that been modified and runs DangerJS checks for each
         const requests = Array.from(uniqueModifiedPackages).map(pkg => {
             // Add package to `failedChangelogs` if there isn’t a CHANGELOG entry – should update for every PR
-            if (!danger.git.modified_files.includes(`packages/${pkg}/CHANGELOG.md`)) {
+            if (!danger.git.modified_files.includes(`${modifiedPackages[pkg].path}${pkg}/CHANGELOG.md`)) {
                 failedChangelogs.push(pkg);
             }
 

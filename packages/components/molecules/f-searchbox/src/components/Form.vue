@@ -18,6 +18,7 @@
             <form-search-field
                 v-model="address"
                 :error-message="errorMessage"
+                :custom-attribute-override="addressField"
                 :address="address"
                 :service="service"
                 :copy="copy"
