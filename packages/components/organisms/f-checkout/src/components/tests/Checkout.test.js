@@ -157,6 +157,7 @@ describe('Checkout', () => {
         describe('authToken ::', () => {
             it('should store auth token', async () => {
                 // Arrange
+                    createGuestUrl
                 const setAuthToken = jest.fn();
 
                 // Act
