@@ -37,7 +37,7 @@ describe('f-checkout component tests', () => {
         // Waiting for route here, so we can grab redirect url and show form submits.
     });
 
-    it('should display a "mobileNumber" error message when an unsupported country code is used in the mobile number', () => {
+    it('should display a "mobileNumber" error message when an unsupported country code is used in the mobile number field', () => {
         // Arrange
         const addressDetails = {
             mobileNumber: '+8112345678911'
