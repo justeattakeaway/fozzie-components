@@ -585,113 +585,89 @@ describe('Checkout', () => {
                 });
 
                 it('should call `setupGuestUser`', async () => {
+                    // Arrange
                     const state = {
                         ...defaultState,
                         isLoggedIn: false
                     };
-
                     const setupGuestUserSpy = jest.spyOn(VueCheckout.methods, 'setupGuestUser');
 
+                    // Act
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore(state),
                         i18n,
                         localVue,
                         propsData
                     });
-
                     await wrapper.vm.onFormSubmit();
 
+                    // Assert
                     expect(setupGuestUserSpy).toHaveBeenCalled();
                 });
             });
 
             describe('if `isLoggedIn` set to `true`', () => {
                 it('should not call `setupGuestUser`', async () => {
+                    // Arrange
                     const state = {
                         ...defaultState,
                         authToken: 'sampleToken',
                         isLoggedIn: true
                     };
-
                     const setupGuestUserSpy = jest.spyOn(VueCheckout.methods, 'setupGuestUser');
 
+                    // Act
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore(state),
                         i18n,
                         localVue,
                         propsData
                     });
-
                     await wrapper.vm.onFormSubmit();
 
+                    // Assert
                     expect(setupGuestUserSpy).not.toHaveBeenCalled();
                 });
             });
         });
 
         describe('setupGuestUser ::', () => {
-            describe('if `isLoggedIn` set to `false`', () => {
-                it('should call `createGuestUser`', async () => {
-                    const customer = {
-                        firstName: 'Joe',
-                        lastName: 'Bloggs',
-                        email: 'joe@test.com',
-                        mobileNumber: '+447111111111'
-                    };
+            it('should call `createGuestUser`', async () => {
+                // Arrange
+                const customer = {
+                    firstName: 'Joe',
+                    lastName: 'Bloggs',
+                    email: 'joe@test.com',
+                    mobileNumber: '+447111111111'
+                };
+                const state = {
+                    ...defaultState,
+                    customer
+                };
+                const createGuestUserSpy = jest.spyOn(VueCheckout.methods, 'createGuestUser');
 
-                    const state = {
-                        ...defaultState,
-                        customer,
-                        isLoggedIn: false
-                    };
-
-                    const createGuestUserSpy = jest.spyOn(VueCheckout.methods, 'createGuestUser');
-
-                    const wrapper = shallowMount(VueCheckout, {
-                        store: createStore(state),
-                        i18n,
-                        localVue,
-                        propsData
-                    });
-
-                    const expected = {
-                        url: createGuestUrl,
-                        tenant: wrapper.vm.tenant,
-                        data: {
-                            firstName: customer.firstName,
-                            lastName: customer.lastName,
-                            emailAddress: customer.email,
-                            registrationSource: 'Guest'
-                        },
-                        timeout: 1000
-                    };
-
-                    await wrapper.vm.onFormSubmit();
-
-                    expect(createGuestUserSpy).toHaveBeenCalledWith(expected);
+                // Act
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(state),
+                    i18n,
+                    localVue,
+                    propsData
                 });
-            });
+                await wrapper.vm.setupGuestUser();
 
-            describe('if `isLoggedIn` set to `true`', () => {
-                it('should not call `createGuestUser`', async () => {
-                    const state = {
-                        ...defaultState,
-                        isLoggedIn: true
-                    };
-
-                    const createGuestUserSpy = jest.spyOn(VueCheckout.methods, 'createGuestUser');
-
-                    const wrapper = shallowMount(VueCheckout, {
-                        store: createStore(state),
-                        i18n,
-                        localVue,
-                        propsData
-                    });
-
-                    await wrapper.vm.onFormSubmit();
-
-                    expect(createGuestUserSpy).not.toHaveBeenCalled();
-                });
+                // Assert
+                const expected = {
+                    url: createGuestUrl,
+                    tenant: wrapper.vm.tenant,
+                    data: {
+                        firstName: customer.firstName,
+                        lastName: customer.lastName,
+                        emailAddress: customer.email,
+                        registrationSource: 'Guest'
+                    },
+                    timeout: 1000
+                };
+                expect(createGuestUserSpy).toHaveBeenCalledWith(expected);
             });
         });
 
