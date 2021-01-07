@@ -48,7 +48,13 @@ describe('Checkout', () => {
     const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
     const loginUrl = 'http://dummy-login.example.com';
     const createGuestUrl = 'http://localhost/createguestuser';
-    const propsData = { checkoutUrl, loginUrl, checkoutAvailableFulfilmentUrl , createGuestUrl };
+    const propsData = {
+        checkoutUrl,
+        loginUrl,
+        checkoutAvailableFulfilmentUrl,
+        createGuestUrl
+    };
+
     it('should be defined', () => {
         const wrapper = shallowMount(VueCheckout, {
             i18n,
@@ -157,7 +163,6 @@ describe('Checkout', () => {
         describe('authToken ::', () => {
             it('should store auth token', async () => {
                 // Arrange
-
                 const setAuthToken = jest.fn();
 
                 // Act
@@ -334,7 +339,6 @@ describe('Checkout', () => {
 
             const propsDataWithAuthToken = {
                 ...propsData,
-                createGuestUrl,
                 authToken: 'mytoken'
             };
 
