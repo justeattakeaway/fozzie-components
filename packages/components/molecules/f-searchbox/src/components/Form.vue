@@ -328,7 +328,6 @@ export default {
          *
          * */
         onSelectedSuggestion (index) {
-            debugger;
             this.address = this.suggestionFormat(this.suggestions[index || this.keyboardSuggestionIndex]);
 
             const locationInformation = selectedSuggestion(
