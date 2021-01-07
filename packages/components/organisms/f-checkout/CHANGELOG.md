@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.34.1
+------------------------------
+*January 7, 2021*
+
+### Changed
+- Mobile number tests naming convention for `Checkout` component to make clear differences in tests.
+- Mobile number test for `Checkout` component to an unused number format.
+- Updated the location of the mobile number tests.
+
+
 v0.34.0
 -------------------------------
 *January 6, 2021*
