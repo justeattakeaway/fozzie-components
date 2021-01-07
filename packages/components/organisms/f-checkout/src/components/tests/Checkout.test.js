@@ -5,6 +5,7 @@ import { validations } from '@justeat/f-services';
 import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
+
 import {
     fulfilmentTimes, defaultState, defaultActions, i18n, createStore
 } from './helpers/setup';
@@ -45,10 +46,9 @@ describe('Checkout', () => {
     allure.feature('Checkout');
     const checkoutUrl = 'http://localhost/checkout';
     const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
-
+    const loginUrl = 'http://dummy-login.example.com';
+    const propsData = { checkoutUrl, loginUrl, checkoutAvailableFulfilmentUrl };
     it('should be defined', () => {
-        const propsData = { checkoutUrl, checkoutAvailableFulfilmentUrl };
-
         const wrapper = shallowMount(VueCheckout, {
             i18n,
             store: createStore(),
@@ -59,6 +59,22 @@ describe('Checkout', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
+    it('should show the login link', () => {
+        const wrapper = shallowMount(VueCheckout, {
+            i18n,
+            store: createStore(),
+            localVue,
+            propsData
+        });
+
+        // Act
+        const loginLink = wrapper.find("[data-test-id='switch-user-link']");
+
+        // Assert
+        expect(loginLink.exists()).toBe(true);
+        expect(loginLink.text()).toBe(`Not ${defaultState.customer.firstName}? Click here.`);
+    });
+
     describe('created :: ', () => {
         afterEach(() => {
             jest.clearAllMocks();
@@ -66,11 +82,6 @@ describe('Checkout', () => {
 
         it('should register the `checkout` module if it doesn\'t exist in the store', () => {
             // Arrange
-            const propsData = {
-                checkoutUrl,
-                checkoutAvailableFulfilmentUrl
-            };
-
             const store = new Vuex.Store({});
 
             const registerModuleSpy = jest.spyOn(store, 'registerModule');
@@ -89,11 +100,6 @@ describe('Checkout', () => {
 
         it('should not register the `checkout` module if it already exists in the store', () => {
             // Arrange
-            const propsData = {
-                checkoutUrl,
-                checkoutAvailableFulfilmentUrl
-            };
-
             const store = createStore();
 
             const registerModuleSpy = jest.spyOn(store, 'registerModule');
@@ -114,12 +120,6 @@ describe('Checkout', () => {
     describe('data ::', () => {
         describe('serviceType ::', () => {
             it('should display the address block if set to `delivery`', async () => {
-                // Arrange
-                const propsData = {
-                    checkoutUrl,
-                    checkoutAvailableFulfilmentUrl
-                };
-
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_DELIVERY }),
@@ -135,12 +135,6 @@ describe('Checkout', () => {
             });
 
             it('should not display the address block if set to `collection`', async () => {
-                // Arrange
-                const propsData = {
-                    checkoutUrl,
-                    checkoutAvailableFulfilmentUrl
-                };
-
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
@@ -161,12 +155,6 @@ describe('Checkout', () => {
         describe('authToken ::', () => {
             it('should store auth token', async () => {
                 // Arrange
-                const propsData = {
-                    checkoutUrl,
-                    checkoutAvailableFulfilmentUrl,
-                    authToken: 'sampleToken'
-                };
-
                 const setAuthToken = jest.fn();
 
                 // Act
@@ -184,11 +172,6 @@ describe('Checkout', () => {
     });
 
     describe('computed ::', () => {
-        const propsData = {
-            checkoutUrl,
-            checkoutAvailableFulfilmentUrl
-        };
-
         describe('name ::', () => {
             it('should capitalize `firstName` data', async () => {
                 // Act
@@ -208,12 +191,18 @@ describe('Checkout', () => {
 
         describe('title ::', () => {
             it('should add `name` to title text', async () => {
+                // Arrange
+                const propsDataWithAuthToken = {
+                    ...propsData,
+                    authToken: 'mytoken'
+                };
+
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
                     i18n,
                     localVue,
-                    propsData
+                    propsData: propsDataWithAuthToken
                 });
 
                 const name = wrapper.find("[data-test-id='checkout-card-component']");
@@ -340,9 +329,8 @@ describe('Checkout', () => {
             // Arrange & Act
             const setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
 
-            const propsData = {
-                checkoutUrl,
-                checkoutAvailableFulfilmentUrl,
+            const propsDataWithAuthToken = {
+                ...propsData,
                 authToken: 'mytoken'
             };
 
@@ -350,20 +338,15 @@ describe('Checkout', () => {
                 store: createStore(),
                 i18n,
                 localVue,
-                propsData
+                propsData: propsDataWithAuthToken
             });
 
-            expect(setAuthTokenSpy).toHaveBeenCalledWith(propsData.authToken);
+            expect(setAuthTokenSpy).toHaveBeenCalledWith(propsDataWithAuthToken.authToken);
         });
 
         it('should call `loadCheckout`', () => {
             // Arrange & Act
             const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
-
-            const propsData = {
-                checkoutUrl,
-                checkoutAvailableFulfilmentUrl
-            };
 
             shallowMount(VueCheckout, {
                 store: createStore(),
@@ -379,11 +362,6 @@ describe('Checkout', () => {
             // Arrange & Act
             const loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
 
-            const propsData = {
-                checkoutUrl,
-                checkoutAvailableFulfilmentUrl
-            };
-
             shallowMount(VueCheckout, {
                 store: createStore(),
                 i18n,
@@ -396,15 +374,10 @@ describe('Checkout', () => {
     });
 
     describe('methods ::', () => {
-        const propsData = {
-            checkoutUrl,
-            checkoutAvailableFulfilmentUrl
-        };
 
         afterEach(() => {
             jest.clearAllMocks();
         });
-
         describe('submitCheckout ::', () => {
             describe('if serviceType set to `collection`', () => {
                 let wrapper;
@@ -958,6 +931,25 @@ describe('Checkout', () => {
                 expect(isValidPostcodeSpy).toHaveBeenCalledWith(defaultState.fulfilment.address.postcode, i18n.locale);
             });
         });
+
+        describe('onVisitLoginPage ::', () => {
+            it('should emit the `VisitLoginPage` event when login link is clicked.', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    i18n,
+                    store: createStore(),
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const loginLink = wrapper.find("[data-test-id='switch-user-link']");
+                loginLink.trigger('click');
+
+                // Assert
+                expect(wrapper.emitted(EventNames.CheckoutVisitLoginPage).length).toBe(1);
+            });
+        });
     });
 
     describe('watch ::', () => {
@@ -969,11 +961,6 @@ describe('Checkout', () => {
             it('should call `selectionChanged` with the first fulfilment time when there are fulfilment times', async () => {
                 // Arrange
                 const setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
-
-                const propsData = {
-                    checkoutUrl,
-                    checkoutAvailableFulfilmentUrl
-                };
 
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
