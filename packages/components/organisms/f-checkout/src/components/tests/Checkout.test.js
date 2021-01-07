@@ -2,7 +2,7 @@ import { shallowMount, mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
 import { validations } from '@justeat/f-services';
-import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
+import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION, TENANT_MAP } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
@@ -644,21 +644,9 @@ describe('Checkout', () => {
                     ...defaultState,
                     customer
                 };
-                const createGuestUserSpy = jest.spyOn(VueCheckout.methods, 'createGuestUser');
-
-                // Act
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore(state),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-                await wrapper.vm.setupGuestUser();
-
-                // Assert
                 const expected = {
                     url: createGuestUrl,
-                    tenant: wrapper.vm.tenant,
+                    tenant: TENANT_MAP[i18n.locale],
                     data: {
                         firstName: customer.firstName,
                         lastName: customer.lastName,
@@ -667,6 +655,18 @@ describe('Checkout', () => {
                     },
                     timeout: 1000
                 };
+                const createGuestUserSpy = jest.spyOn(VueCheckout.methods, 'createGuestUser');
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(state),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                await wrapper.vm.setupGuestUser();
+
+                // Assert
                 expect(createGuestUserSpy).toHaveBeenCalledWith(expected);
             });
         });

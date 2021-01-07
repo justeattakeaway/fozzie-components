@@ -184,14 +184,13 @@ describe('CheckoutModule', () => {
         });
 
         describe('createGuestUser ::', () => {
+            let config;
             payload.url = 'http://localhost/account/createguest';
             payload.data = {
                 firstName: 'Joe',
                 lastName: 'Bloggs',
                 email: 'joe@test.com'
             };
-
-            let config;
 
             beforeEach(() => {
                 config = {

@@ -297,6 +297,10 @@ export default {
             }
         },
 
+        /**
+         * Setup a new guest user account. This method will be called when isLoggedIn is false.
+         *
+         */
         async setupGuestUser () {
             const createGuestData = {
                 emailAddress: this.customer.email,
