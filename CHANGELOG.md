@@ -11,6 +11,14 @@ v3.3.0
 - Automated Axe Core tests for UI components
 
 
+v3.2.1
+------------------------------
+*January 6, 2020*
+
+### Fixed
+- Addressed issue with danger checks not correctly identifying package changes with new paths.
+
+
 v3.2.0
 ------------------------------
 *January 5, 2020*

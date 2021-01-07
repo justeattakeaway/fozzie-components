@@ -22,6 +22,17 @@
                 type="post"
                 :class="$style['c-checkout-form']"
                 @submit.prevent="onFormSubmit">
+                <p
+                    :class="[
+                        $style['c-checkout-link']
+                    ]">
+                    <a
+                        :href="loginUrl"
+                        data-test-id="switch-user-link"
+                        @click="onVisitLoginPage">
+                        {{ $t('switchUserText', { name }) }}
+                    </a>
+                </p>
                 <form-field
                     v-model="customer.mobileNumber"
                     name="mobile-number"
@@ -119,6 +130,11 @@ export default {
             required: true
         },
 
+        createGuestUrl: {
+            type: String,
+            required: true
+        },
+
         checkoutTimeout: {
             type: Number,
             required: false,
@@ -131,9 +147,19 @@ export default {
             default: 1000
         },
 
+        createGuestTimeout: {
+            type: Number,
+            default: 1000
+        },
+
         authToken: {
             type: String,
             default: ''
+        },
+
+        loginUrl: {
+            type: String,
+            required: true
         }
     },
 
@@ -162,14 +188,15 @@ export default {
 
     computed: {
         ...mapState('checkout', [
-            'id',
-            'serviceType',
             'customer',
             'fulfilment',
-            'notes',
+            'id',
             'isFulfillable',
+            'isLoggedIn',
+            'messages',
+            'notes',
             'notices',
-            'messages'
+            'serviceType'
         ]),
 
         name () {
@@ -187,8 +214,7 @@ export default {
             * The $dirty boolean changes to true when the user has focused/lost
             * focus on the input field.
             */
-            const isMobileNumberValid = this.$v.customer.mobileNumber.required && this.$v.customer.mobileNumber.isValidPhoneNumber;
-            return !this.$v.customer.mobileNumber.$dirty || isMobileNumberValid;
+            return !this.$v.customer.mobileNumber.$dirty || this.$v.customer.mobileNumber.isValidPhoneNumber;
         },
 
         isCheckoutMethodDelivery () {
@@ -229,11 +255,16 @@ export default {
 
     methods: {
         ...mapActions('checkout', [
+            'createGuestUser',
+            'getAvailableFulfilment',
             'getCheckout',
             'postCheckout',
-            'getAvailableFulfilment',
             'setAuthToken'
         ]),
+
+        onVisitLoginPage () {
+            this.$emit(EventNames.CheckoutVisitLoginPage);
+        },
 
         /**
          * Submit the checkout details while emitting events to communicate its success or failure.
@@ -249,6 +280,10 @@ export default {
                     checkoutData.address = this.fulfilment.address;
                 }
 
+                if (!this.isLoggedIn) {
+                    await this.setupGuestUser();
+                }
+
                 await this.postCheckout({
                     url: 'myPostUrl',
                     tenant: this.tenant,
@@ -260,6 +295,26 @@ export default {
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutFailure, thrownErrors);
             }
+        },
+
+        /**
+         * Setup a new guest user account. This method will be called when isLoggedIn is false.
+         *
+         */
+        async setupGuestUser () {
+            const createGuestData = {
+                emailAddress: this.customer.email,
+                firstName: this.customer.firstName,
+                lastName: this.customer.lastName,
+                registrationSource: 'Guest'
+            };
+
+            await this.createGuestUser({
+                url: this.createGuestUrl,
+                tenant: this.tenant,
+                data: createGuestData,
+                timeout: this.createGuestTimeout
+            });
         },
 
         /**
@@ -372,7 +427,6 @@ export default {
         const deliveryDetails = {
             customer: {
                 mobileNumber: {
-                    required,
                     isValidPhoneNumber: this.isValidPhoneNumber
                 }
             }
@@ -432,5 +486,19 @@ $checkout-padding                         : spacing(x5) 100px;
     .c-checkout-submitButton {
         margin: spacing(x4) 0 spacing(x0.5);
     }
+}
+
+.c-checkout-link {
+  text-align: center;
+
+  a {
+    text-decoration: none;
+    font-weight: $font-weight-bold;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
 }
 </style>

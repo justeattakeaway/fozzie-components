@@ -29,34 +29,6 @@ describe('f-checkout "delivery" component tests', () => {
         expect(CheckoutComponent.isFieldDisplayed('mobileNumber')).toBe(true);
     });
 
-    it('should display a "mobileNumber" error message when a number format is incorrectly entered', () => {
-        // Arrange
-        const addressDetails = {
-            mobileNumber: '+4512345678911'
-        };
-
-        // Act
-        CheckoutComponent.populateCheckoutForm(addressDetails);
-        CheckoutComponent.goToPayment();
-
-        // Assert
-        expect(CheckoutComponent.isFieldErrorDisplayed('mobileNumber')).toBe(true);
-    });
-
-    it('should not display a "mobileNumber" error message when a number is formatted correctly', () => {
-        // Arrange
-        const addressDetails = {
-            mobileNumber: '+4412345678911'
-        };
-
-        // Act
-        CheckoutComponent.populateCheckoutForm(addressDetails);
-        CheckoutComponent.goToPayment();
-
-        // Assert
-        expect(CheckoutComponent.isFieldErrorDisplayed('mobileNumber')).toBe(false);
-    });
-
     it('should prevent user from submitting a postcode with illegal characters', () => {
         // Arrange
         const addressInfo = {
