@@ -8,7 +8,9 @@ Object {
     "times": Array [],
   },
   "customer": Object {
+    "email": "",
     "firstName": "Joe",
+    "lastName": "",
     "mobileNumber": "+447111111111",
   },
   "fulfilment": Object {

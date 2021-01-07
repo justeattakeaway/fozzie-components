@@ -16,10 +16,13 @@ Vue.use(Vuex);
 const deliveryUrl = '/checkout-delivery.json';
 const collectionUrl = '/checkout-collection.json';
 const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
+const createGuestUrl = '/create-guest.json';
 
 CheckoutMock.setupCheckoutMethod(deliveryUrl);
 CheckoutMock.setupCheckoutMethod(collectionUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentUrl);
+CheckoutMock.setupCheckoutMethod(createGuestUrl);
+CheckoutMock.passThroughAny();
 
 export default {
     title: 'Components/Organisms',
@@ -38,6 +41,9 @@ export const CheckoutComponent = () => ({
         checkoutAvailableFulfilmentUrl: {
             default: select('Available Fulfilment Url', [checkoutAvailableFulfilmentUrl], checkoutAvailableFulfilmentUrl)
         },
+        createGuestUrl: {
+            default: text('Create Guest Url', createGuestUrl)
+        },
         authToken: {
             default: text('Auth token', '')
         },
@@ -49,11 +55,12 @@ export const CheckoutComponent = () => ({
     template: '<vue-checkout ' +
         ':checkoutUrl="checkoutUrl" ' +
         ':checkout-available-fulfilment-url="checkoutAvailableFulfilmentUrl" ' +
+        ':create-guest-url="createGuestUrl" ' +
         ':authToken="authToken" ' +
         ':locale="locale" ' +
         ':loginUrl="loginUrl" ' +
         // eslint-disable-next-line no-template-curly-in-string
-        ' :key="`${locale},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken}`" />'
+        ' :key="`${locale},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';

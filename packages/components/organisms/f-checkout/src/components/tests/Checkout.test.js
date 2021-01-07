@@ -2,7 +2,7 @@ import { shallowMount, mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
 import { validations } from '@justeat/f-services';
-import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
+import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION, TENANT_MAP } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
@@ -47,7 +47,14 @@ describe('Checkout', () => {
     const checkoutUrl = 'http://localhost/checkout';
     const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
     const loginUrl = 'http://dummy-login.example.com';
-    const propsData = { checkoutUrl, loginUrl, checkoutAvailableFulfilmentUrl };
+    const createGuestUrl = 'http://localhost/createguestuser';
+    const propsData = {
+        checkoutUrl,
+        loginUrl,
+        checkoutAvailableFulfilmentUrl,
+        createGuestUrl
+    };
+
     it('should be defined', () => {
         const wrapper = shallowMount(VueCheckout, {
             i18n,
@@ -82,6 +89,7 @@ describe('Checkout', () => {
 
         it('should register the `checkout` module if it doesn\'t exist in the store', () => {
             // Arrange
+
             const store = new Vuex.Store({});
 
             const registerModuleSpy = jest.spyOn(store, 'registerModule');
@@ -374,7 +382,6 @@ describe('Checkout', () => {
     });
 
     describe('methods ::', () => {
-
         afterEach(() => {
             jest.clearAllMocks();
         });
@@ -573,6 +580,94 @@ describe('Checkout', () => {
                     expect(wrapper.vm.$v.fulfilment.address.city).toBeDefined();
                     expect(wrapper.vm.$v.fulfilment.address.postcode).toBeDefined();
                 });
+            });
+
+            describe('if `isLoggedIn` set to `false`', () => {
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
+                it('should call `setupGuestUser`', async () => {
+                    // Arrange
+                    const setupGuestUserSpy = jest.spyOn(VueCheckout.methods, 'setupGuestUser');
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultState,
+                            isLoggedIn: false
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(setupGuestUserSpy).toHaveBeenCalled();
+                });
+            });
+
+            describe('if `isLoggedIn` set to `true`', () => {
+                it('should not call `setupGuestUser`', async () => {
+                    // Arrange
+                    const setupGuestUserSpy = jest.spyOn(VueCheckout.methods, 'setupGuestUser');
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultState,
+                            authToken: 'sampleToken',
+                            isLoggedIn: true
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(setupGuestUserSpy).not.toHaveBeenCalled();
+                });
+            });
+        });
+
+        describe('setupGuestUser ::', () => {
+            it('should call `createGuestUser`', async () => {
+                // Arrange
+                const customer = {
+                    firstName: 'Joe',
+                    lastName: 'Bloggs',
+                    email: 'joe@test.com',
+                    mobileNumber: '+447111111111'
+                };
+                const expected = {
+                    url: createGuestUrl,
+                    tenant: TENANT_MAP[i18n.locale],
+                    data: {
+                        firstName: customer.firstName,
+                        lastName: customer.lastName,
+                        emailAddress: customer.email,
+                        registrationSource: 'Guest'
+                    },
+                    timeout: 1000
+                };
+                const createGuestUserSpy = jest.spyOn(VueCheckout.methods, 'createGuestUser');
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultState,
+                        customer
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                await wrapper.vm.setupGuestUser();
+
+                // Assert
+                expect(createGuestUserSpy).toHaveBeenCalledWith(expected);
             });
         });
 
