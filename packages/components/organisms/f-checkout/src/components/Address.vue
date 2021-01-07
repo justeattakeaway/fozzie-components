@@ -7,7 +7,7 @@
             </legend>
             <form-field
                 :value="fulfilment.address.line1"
-                @input="updateAddressLine1"
+                @input="updateAddressDetails('line1', $event)"
                 :class="$style['c-address-formField']"
                 name="address-line-1"
                 :label-text="$t('labels.line1')"
@@ -26,7 +26,7 @@
 
             <form-field
                 :value="fulfilment.address.line2"
-                @input="updateAddressLine2"
+                @input="updateAddressDetails('line2', $event)"
                 :class="$style['c-address-formField']"
                 name="address-line-2"
                 :label-text="$t('labels.line2')"
@@ -36,7 +36,7 @@
 
         <form-field
             :value="fulfilment.address.city"
-            @input="updateAddressCity"
+            @input="updateAddressDetails('city', $event)"
             name="address-city"
             :label-text="$t('labels.city')"
             :has-error="isAddressCityEmpty">
@@ -51,7 +51,7 @@
 
         <form-field
             :value="fulfilment.address.postcode"
-            @input="updateAddressPostcode"
+            @input="updateAddressDetails('postcode', $event)"
             name="address-postcode"
             :label-text="$t('labels.postcode')"
             :has-error="!isAddressPostcodeValid">
@@ -133,28 +133,8 @@ export default {
         /*
         * Dispatches map action `updateFulfilmentAddress` to update input fields values in vuex
         */
-        updateAddressLine1 (value) {
-            this.updateFulfilmentAddress({
-                "line1": value
-            })
-        },
-
-        updateAddressLine2 (value) {
-            this.updateFulfilmentAddress({
-                "line2": value
-            })
-        },
-
-        updateAddressCity (value) {
-            this.updateFulfilmentAddress({
-                "city": value
-            })
-        },
-
-        updateAddressPostcode (value) {
-            this.updateFulfilmentAddress({
-                "postcode": value
-            })
+        updateAddressDetails (key, event) {
+            this.updateFulfilmentAddress({ [key]: event })
         }
     }
 };
