@@ -37,8 +37,7 @@
             :suggestion-format="suggestionFormat"
             :suggestions="suggestions"
             :keyboard-suggestion-selection="keyboardSuggestionIndex"
-            @selected-suggestion="onSelectedSuggestion">
-        </component>
+            @selected-suggestion="onSelectedSuggestion" />
 
         <error-message
             v-if="errorMessage"
@@ -439,7 +438,6 @@ export default {
             return this.isFullAddressSearchEnabled
                 ? 'form-full-address-search-suggestions'
                 : 'form-search-suggestions';
-
         }
     }
 };

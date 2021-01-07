@@ -128,10 +128,10 @@ export default {
         setAutoCompleteAvailability ({ commit }, payload) {
             commit(SET_AUTO_COMPLETE_AVAILABILITY, payload);
         },
-    
+
         async getMatchedAreaAddressResults ({ commit }, payload) {
             const fullAddressResponse = await fullAddressService.getPartialAddressSearch(payload);
-        
+
             if (fullAddressResponse) {
                 commit(GET_PARTIAL_ADDRESS_SEARCH, fullAddressResponse);
             }
@@ -186,7 +186,7 @@ export default {
         [SET_AUTO_COMPLETE_AVAILABILITY]: (state, isAutocompleteEnabled) => {
             state.isAutocompleteEnabled = isAutocompleteEnabled;
         },
-    
+
         /**
          * Map API response items and filter on `Postcode` value. We don't want to
          * return `Address` types here only postcode results for users.
@@ -200,7 +200,7 @@ export default {
                 Text,
                 Id,
                 Type
-                }) => ({
+            }) => ({
                 Description,
                 Text,
                 Id,

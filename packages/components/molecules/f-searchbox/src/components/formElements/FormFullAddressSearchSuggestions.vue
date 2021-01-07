@@ -90,10 +90,11 @@ export default {
                 .suggestionFormat(item)
                 .Description
                 .trim();
-        },
+        }
     }
 };
 </script>
+
 <style lang="scss" module>
 @import '../../assets/scss/common';
 
