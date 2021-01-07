@@ -8,6 +8,8 @@ export default {
         serviceType: '',
         customer: {
             firstName: '',
+            lastName: '',
+            email: '',
             mobileNumber: ''
         },
         fulfilment: {
@@ -85,6 +87,32 @@ export default {
 
             // eslint-disable-next-line no-unused-vars
             const response = await axios.post(url, data, config);
+        },
+
+        /**
+         * Post the guest user details to the backend.
+         *
+         * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
+         * @param {Object} state - Automatically handled by Vuex to be able to retrieve state.
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        // eslint-disable-next-line no-unused-vars
+        createGuestUser: async ({ commit, state }, {
+            url, tenant, data, timeout
+        }) => {
+            const config = {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Tenant': tenant
+                },
+                timeout
+            };
+
+            const response = await axios.post(url, data, config);
+            // eslint-disable-next-line no-unused-vars
+            const otac = response.data.token;
+            // TODO: Use otac to log the user in
         },
 
         /**

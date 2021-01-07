@@ -4,7 +4,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.33.1
+v0.34.1
 ------------------------------
 *January 7, 2021*
 
@@ -12,6 +12,15 @@ v0.33.1
 - Mobile number tests naming convention for `Checkout` component to make clear differences in tests.
 - Mobile number test for `Checkout` component to an unused number format.
 - Updated the location of the mobile number tests.
+
+
+v0.34.0
+-------------------------------
+*January 6, 2021*
+
+### Added
+
+-  Call to create a guest user when submitting checkout form and the user is not authenticated
 
 
 v0.33.0
