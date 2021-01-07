@@ -1114,6 +1114,27 @@ describe('Checkout', () => {
                 expect(wrapper.emitted(EventNames.CheckoutVisitLoginPage).length).toBe(1);
             });
         });
+
+        describe('updateMobileNumber', () => {
+            it('should be called with new input value on user input', async () => {
+                // Arrange
+                const updateMobileNumberSpy = jest.spyOn(VueCheckout.methods, 'updateMobileNumber');
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+                const newNumber = '+447111111112'
+
+                // Act
+                await wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue(newNumber);
+                await wrapper.vm.$nextTick();
+                // Assert
+                expect(updateMobileNumberSpy).toHaveBeenCalledWith(newNumber);
+            })
+        });
     });
 
     describe('watch ::', () => {

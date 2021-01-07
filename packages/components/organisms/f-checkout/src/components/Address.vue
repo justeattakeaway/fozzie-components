@@ -138,16 +138,19 @@ export default {
                 "line1": value
             })
         },
+
         updateAddressLine2 (value) {
             this.updateFulfilmentAddress({
                 "line2": value
             })
         },
+
         updateAddressCity (value) {
             this.updateFulfilmentAddress({
                 "city": value
             })
         },
+
         updateAddressPostcode (value) {
             this.updateFulfilmentAddress({
                 "postcode": value

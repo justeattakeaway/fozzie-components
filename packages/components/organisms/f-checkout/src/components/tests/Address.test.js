@@ -1,6 +1,6 @@
 import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
 import Address from '../Address.vue';
 import { i18n, createStore } from './helpers/setup';
 
@@ -144,6 +144,84 @@ describe('Address', () => {
                 // Assert
                 expect(wrapper.vm.isFieldEmpty(field)).toEqual(false);
             });
+        });
+
+        describe('updateAddressLine1', () => {
+            it('should be called with new input value on user input', async () => {
+                // Arrange
+                jest.clearAllMocks();
+                const updateAddressLine1Spy = jest.spyOn(Address.methods, 'updateAddressLine1');
+
+                const wrapper = mount(Address, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    provide: () => ({
+                        $v
+                    })
+                });
+                const newValue = 'New Street'
+
+                // Act
+                await wrapper.find('[data-test-id="formfield-address-line-1-input"]').setValue(newValue);
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(updateAddressLine1Spy).toHaveBeenCalledWith(newValue);
+            })
+        });
+
+        describe('updateAddressCity', () => {
+            it('should be called with new input value on user input', async () => {
+                // Arrange
+                jest.clearAllMocks();
+                const updateAddressCitySpy = jest.spyOn(Address.methods, 'updateAddressCity');
+
+                const wrapper = mount(Address, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    provide: () => ({
+                        $v
+                    })
+                });
+                const newValue = 'New City'
+
+                // Act
+                await wrapper.find('[data-test-id="formfield-address-city-input"]').setValue(newValue);
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(updateAddressCitySpy).toHaveBeenCalledWith(newValue);
+            })
+        });
+
+        describe('updateAddressPostcode', () => {
+            it('should be called with new input value on user input', async () => {
+                // Arrange
+                jest.clearAllMocks();
+                const updateAddressPostcodeSpy = jest.spyOn(Address.methods, 'updateAddressPostcode');
+
+                const wrapper = mount(Address, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    provide: () => ({
+                        $v
+                    })
+                });
+                const newValue = 'New Postcode'
+
+                // Act
+                await wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue(newValue);
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(updateAddressPostcodeSpy).toHaveBeenCalledWith(newValue);
+            })
         });
     });
 });
