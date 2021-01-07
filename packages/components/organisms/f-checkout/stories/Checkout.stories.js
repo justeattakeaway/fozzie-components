@@ -55,11 +55,12 @@ export const CheckoutComponent = () => ({
     template: '<vue-checkout ' +
         ':checkoutUrl="checkoutUrl" ' +
         ':checkout-available-fulfilment-url="checkoutAvailableFulfilmentUrl" ' +
+        ':create-guest-url="createGuestUrl" ' +
         ':authToken="authToken" ' +
         ':locale="locale" ' +
         ':loginUrl="loginUrl" ' +
         // eslint-disable-next-line no-template-curly-in-string
-        ' :key="`${locale},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken}`" />'
+        ' :key="`${locale},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';
