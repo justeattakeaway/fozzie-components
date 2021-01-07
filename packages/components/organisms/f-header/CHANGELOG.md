@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.4.0
 ------------------------------
-*January 6, 2021*
+*January 7, 2021*
 
 ### Changed
 - Updated Webdriver test-utils to include `selector` file.
