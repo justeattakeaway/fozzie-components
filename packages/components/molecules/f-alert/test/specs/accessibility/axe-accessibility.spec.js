@@ -3,7 +3,7 @@ import AlertComponent from '../../../test-utils/component-objects/f-alert.compon
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-atoms--button-component');
+        browser.url('?path=/story/components-molecules--alert-component');
         browser.switchToFrame(0);
         AlertComponent.waitForAlert();
     });
