@@ -1,6 +1,7 @@
 const { source } = require('axe-core');
 const AxeReports = require('axe-reports');
 const { exec } = require('child_process');
+const fs = require('fs');
 
 /**
  * Runs the WCAG accessibility tests on the curent page of the global browser
