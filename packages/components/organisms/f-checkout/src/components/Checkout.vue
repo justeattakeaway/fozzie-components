@@ -188,15 +188,15 @@ export default {
 
     computed: {
         ...mapState('checkout', [
-            'id',
-            'serviceType',
             'customer',
             'fulfilment',
-            'notes',
+            'id',
             'isFulfillable',
-            'notices',
+            'isLoggedIn',
             'messages',
-            'isLoggedIn'
+            'notes',
+            'notices',
+            'serviceType'
         ]),
 
         name () {
@@ -255,11 +255,11 @@ export default {
 
     methods: {
         ...mapActions('checkout', [
+            'createGuestUser',
+            'getAvailableFulfilment',
             'getCheckout',
             'postCheckout',
-            'getAvailableFulfilment',
-            'setAuthToken',
-            'createGuestUser'
+            'setAuthToken'
         ]),
 
         onVisitLoginPage () {
