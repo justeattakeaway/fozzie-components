@@ -382,7 +382,6 @@ describe('Checkout', () => {
     });
 
     describe('methods ::', () => {
-
         afterEach(() => {
             jest.clearAllMocks();
         });
