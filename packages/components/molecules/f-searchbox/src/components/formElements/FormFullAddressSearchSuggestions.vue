@@ -52,7 +52,7 @@ export default {
         ]),
 
         /**
-         * Return suggestions from store and filters by postcode.
+         * Return suggestions from store and filter by postcode.
          *
          * @returns {props.suggestions|{type, default}|*|suggestions|Array|null}
          */

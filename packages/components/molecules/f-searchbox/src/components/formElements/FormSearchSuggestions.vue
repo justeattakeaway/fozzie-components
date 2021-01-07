@@ -30,7 +30,7 @@ export default {
             default: () => []
         },
         suggestionFormat: {
-            type: Function,
+            type: Object,
             default: () => ({
                 suggestionFormat: suggestion => suggestion
             })
