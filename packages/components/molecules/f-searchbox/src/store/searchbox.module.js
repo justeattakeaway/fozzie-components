@@ -13,7 +13,7 @@ import {
     SET_KEYBOARD_SUGGESTION,
     SET_FULL_ADDRESS_SEARCH_CONFIGS,
     SET_AUTO_COMPLETE_AVAILABILITY,
-    GET_PARTIAL_ADDRESS_SEARCH
+    SET_PARTIAL_ADDRESS_SUGGESTIONS
 } from './mutation.types';
 
 export default {
@@ -133,7 +133,7 @@ export default {
             const fullAddressResponse = await fullAddressService.getPartialAddressSearch(payload);
 
             if (fullAddressResponse) {
-                commit(GET_PARTIAL_ADDRESS_SEARCH, fullAddressResponse);
+                commit(SET_PARTIAL_ADDRESS_SUGGESTIONS, fullAddressResponse);
             }
         }
     },
@@ -194,7 +194,7 @@ export default {
          * @param state
          * @param suggestions
          */
-        [GET_PARTIAL_ADDRESS_SEARCH]: (state, suggestions) => {
+        [SET_PARTIAL_ADDRESS_SUGGESTIONS]: (state, suggestions) => {
             state.suggestions = suggestions.Items.map(({
                 Description,
                 Text,
