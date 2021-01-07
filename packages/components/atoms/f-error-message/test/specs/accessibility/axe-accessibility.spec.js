@@ -1,16 +1,16 @@
 import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
-import FormFieldComponent from '../../../test-utils/component-objects/f-form-field.component';
+import ErrorMessageComponent from '../../../test-utils/component-objects/f-error-message.component';
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-atoms--form-field-component');
+        browser.url('?path=/story/components-atoms--error-message-component');
         browser.switchToFrame(0);
-        FormFieldComponent.waitForFormField();
+        ErrorMessageComponent.waitForErrorMessage();
     });
 
     it('a11y - should test f-formField component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-form-field');
+        const axeResults = getAccessibilityTestResults('f-error-message');
         // Assert
         expect(axeResults.violations.length).toBe(0);
     });

@@ -18,8 +18,8 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './test/specs/component/*.spec.js'
-        // './test/specs/accessibility/*.spec.js'
+        // './test/specs/component/*.spec.js'
+        './test/specs/accessibility/*.spec.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -131,7 +131,7 @@ exports.config = {
             videoSlowdownMultiplier: 3 // Higher to get slower videos, lower for faster videos [Value 1-100]
         }],
         ['allure', {
-            outputDir: '../../allure-results',
+            outputDir: '../../../../allure-results',
             disableWebdriverStepsReporting: false,
             disableWebdriverScreenshotsReporting: false
         }]

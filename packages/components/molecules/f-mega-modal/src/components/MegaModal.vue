@@ -4,6 +4,7 @@
         :class="['c-megaModal', $style['c-megaModal'], {
             [$style['u-overlay']]: showOverlay
         }]"
+        data-test-id='mega-modal-component'
         :aria-hidden="!isOpen"
         @click.self="overlayClose">
         <div
