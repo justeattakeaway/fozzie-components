@@ -31,7 +31,9 @@ export default {
         },
         suggestionFormat: {
             type: Function,
-            default: () => ({})
+            default: () => ({
+                suggestionFormat: suggestion => suggestion
+            })
         },
 
         keyboardSuggestionSelection: {

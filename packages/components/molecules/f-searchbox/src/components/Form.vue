@@ -30,13 +30,15 @@
                 :is-compressed="isCompressed" />
         </div>
 
-        <form-search-suggestions
+        <component
+            :is="setSuggestionType()"
             v-if="shouldDisplaySuggestions"
             aria-live="assertive"
             :suggestion-format="suggestionFormat"
             :suggestions="suggestions"
             :keyboard-suggestion-selection="keyboardSuggestionIndex"
-            @selected-suggestion="onSelectedSuggestion" />
+            @selected-suggestion="onSelectedSuggestion">
+        </component>
 
         <error-message
             v-if="errorMessage"
@@ -56,6 +58,7 @@ import '@justeat/f-error-message/dist/f-error-message.css';
 import FormSearchField from './formElements/FormSearchField.vue';
 import FormSearchButton from './formElements/FormSearchButton.vue';
 import FormSearchSuggestions from './formElements/FormSearchSuggestions.vue';
+import FormFullAddressSearchSuggestions from './formElements/FormFullAddressSearchSuggestions.vue';
 import searchboxModule from '../store/searchbox.module';
 import { getLastLocation, normalisePostcode } from '../utils/helpers';
 import { search, selectedSuggestion } from '../services/search.services';
@@ -76,7 +79,8 @@ export default {
         ErrorMessage,
         FormSearchField,
         FormSearchButton,
-        FormSearchSuggestions
+        FormSearchSuggestions,
+        FormFullAddressSearchSuggestions
     },
 
     props: {
@@ -149,7 +153,7 @@ export default {
          *
          * */
         shouldDisplaySuggestions () {
-            return this.service.isAutocompleteEnabled
+            return (this.service.isAutocompleteEnabled || this.isFullAddressSearchEnabled)
                     && this.isInputFocus
                     && !!this.suggestions.length
                     && (!this.errors.length || this.isDirty);
@@ -204,6 +208,13 @@ export default {
                 } else {
                     this.setSuggestions(this.service.search(value));
                 }
+
+                if (this.isFullAddressSearchEnabled) {
+                    this.getMatchedAreaAddressResults({
+                        address: this.address,
+                        streetLevelAddress: ''
+                    });
+                }
             },
             500,
             { maxWait: 1500 }
@@ -243,7 +254,8 @@ export default {
             'setStreetNumberRequired',
             'setGeoLocationAvailability',
             'setFullAddressSearchConfigs',
-            'setAutoCompleteAvailability'
+            'setAutoCompleteAvailability',
+            'getMatchedAreaAddressResults'
         ]),
 
         /**
@@ -317,6 +329,7 @@ export default {
          *
          * */
         onSelectedSuggestion (index) {
+            debugger;
             this.address = this.suggestionFormat(this.suggestions[index || this.keyboardSuggestionIndex]);
 
             const locationInformation = selectedSuggestion(
@@ -412,6 +425,13 @@ export default {
                     this.setAutoCompleteAvailability(true);
                 }
             }
+        },
+
+        setSuggestionType () {
+            return this.isFullAddressSearchEnabled
+                ? 'form-full-address-search-suggestions'
+                : 'form-search-suggestions';
+
         }
     }
 };
