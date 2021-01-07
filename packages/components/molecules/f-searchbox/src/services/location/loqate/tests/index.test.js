@@ -37,7 +37,7 @@ describe('`Loqate`', () => {
                            Field1Format: '',
                            Field2Format: '',
                            Id: '',
-                           Key: 'KK28-HF54-YE69-RA96',
+                           Key: '',
                            Limit: '20',
                            Text: 'S54'
                        }

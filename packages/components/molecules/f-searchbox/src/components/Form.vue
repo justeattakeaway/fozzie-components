@@ -147,7 +147,7 @@ export default {
         /**
          * Display API suggestions in component: `form-search-suggestions`:
          *
-         * 1. Service layer should contain `autocomplete`.
+         * 1. Service layer should contain `autocomplete` or `isFullAddressSearchEnabled`.
          * 2. The form should have focus.
          * 3. There should be suggestions.
          *
@@ -427,6 +427,14 @@ export default {
             }
         },
 
+        /**
+         * Switch between two suggestion dropdown types:
+         *
+         * One for `Google Places: form-search-suggestions` & one for
+         * `Loqate: form-full-address-search-suggestions` full address search.
+         *
+         * @returns {string}
+         */
         setSuggestionType () {
             return this.isFullAddressSearchEnabled
                 ? 'form-full-address-search-suggestions'
