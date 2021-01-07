@@ -37,6 +37,34 @@ describe('f-checkout component tests', () => {
         // Waiting for route here, so we can grab redirect url and show form submits.
     });
 
+    it('should display a "mobileNumber" error message when an unsupported country code is used in the mobile number field', () => {
+        // Arrange
+        const addressDetails = {
+            mobileNumber: '+8112345678911'
+        };
+
+        // Act
+        CheckoutComponent.populateCheckoutForm(addressDetails);
+        CheckoutComponent.goToPayment();
+
+        // Assert
+        expect(CheckoutComponent.isFieldErrorDisplayed('mobileNumber')).toBe(true);
+    });
+
+    it('should not display a "mobileNumber" error message when a number is formatted with a supported country code', () => {
+        // Arrange
+        const addressDetails = {
+            mobileNumber: '+4412345678911'
+        };
+
+        // Act
+        CheckoutComponent.populateCheckoutForm(addressDetails);
+        CheckoutComponent.goToPayment();
+
+        // Assert
+        expect(CheckoutComponent.isFieldErrorDisplayed('mobileNumber')).toBe(false);
+    });
+
     it('should display times in ascending order, with default text "As soon as possible" showing first', () => {
         // Act
         CheckoutComponent.selectOrderTime('As soon as possible');
