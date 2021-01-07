@@ -133,8 +133,8 @@ export default {
         /*
         * Dispatches map action `updateFulfilmentAddress` to update input fields values in vuex
         */
-        updateAddressDetails (key, event) {
-            this.updateFulfilmentAddress({ [key]: event });
+        updateAddressDetails (key, value) {
+            this.updateFulfilmentAddress({ [key]: value });
         }
     }
 };
