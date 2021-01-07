@@ -2,14 +2,14 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { select, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-
-import {
-    VALID_LOCALES,
-    ENGLISH_LOCALE
-} from '../../../../storybook/constants/globalisation';
-
+import { ENGLISH_LOCALE } from '../../../../storybook/constants/globalisation';
 import VueCheckout from '../src/components/Checkout.vue';
 import CheckoutMock from '../src/demo/checkoutMock';
+
+export default {
+    title: 'Components/Organisms',
+    decorators: [withA11y]
+};
 
 Vue.use(Vuex);
 
@@ -20,11 +20,6 @@ const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
 CheckoutMock.setupCheckoutMethod(deliveryUrl);
 CheckoutMock.setupCheckoutMethod(collectionUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentUrl);
-
-export default {
-    title: 'Components/Organisms',
-    decorators: [withA11y]
-};
 
 export const CheckoutComponent = () => ({
     components: { VueCheckout },
