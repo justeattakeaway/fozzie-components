@@ -130,6 +130,11 @@ export default {
             required: true
         },
 
+        createGuestUrl: {
+            type: String,
+            required: true
+        },
+
         checkoutTimeout: {
             type: Number,
             required: false,
@@ -139,6 +144,11 @@ export default {
         getCheckoutTimeout: {
             type: Number,
             required: false,
+            default: 1000
+        },
+
+        createGuestTimeout: {
+            type: Number,
             default: 1000
         },
 
@@ -178,14 +188,15 @@ export default {
 
     computed: {
         ...mapState('checkout', [
-            'id',
-            'serviceType',
             'customer',
             'fulfilment',
-            'notes',
+            'id',
             'isFulfillable',
+            'isLoggedIn',
+            'messages',
+            'notes',
             'notices',
-            'messages'
+            'serviceType'
         ]),
 
         name () {
@@ -244,9 +255,10 @@ export default {
 
     methods: {
         ...mapActions('checkout', [
+            'createGuestUser',
+            'getAvailableFulfilment',
             'getCheckout',
             'postCheckout',
-            'getAvailableFulfilment',
             'setAuthToken'
         ]),
 
@@ -268,6 +280,10 @@ export default {
                     checkoutData.address = this.fulfilment.address;
                 }
 
+                if (!this.isLoggedIn) {
+                    await this.setupGuestUser();
+                }
+
                 await this.postCheckout({
                     url: 'myPostUrl',
                     tenant: this.tenant,
@@ -279,6 +295,26 @@ export default {
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutFailure, thrownErrors);
             }
+        },
+
+        /**
+         * Setup a new guest user account. This method will be called when isLoggedIn is false.
+         *
+         */
+        async setupGuestUser () {
+            const createGuestData = {
+                emailAddress: this.customer.email,
+                firstName: this.customer.firstName,
+                lastName: this.customer.lastName,
+                registrationSource: 'Guest'
+            };
+
+            await this.createGuestUser({
+                url: this.createGuestUrl,
+                tenant: this.tenant,
+                data: createGuestData,
+                timeout: this.createGuestTimeout
+            });
         },
 
         /**

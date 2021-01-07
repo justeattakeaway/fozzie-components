@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.34.0
+-------------------------------
+*January 6, 2021*
+
+### Added
+
+-  Call to create a guest user when submitting checkout form and the user is not authenticated
+
 
 v0.33.0
 ------------------------------
