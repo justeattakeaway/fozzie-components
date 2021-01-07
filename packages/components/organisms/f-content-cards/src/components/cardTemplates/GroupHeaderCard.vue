@@ -11,7 +11,6 @@ export default {
     name: 'GroupHeaderCard',
     props: {
         title: {
-            default: '',
             required: true,
             type: String
         }
@@ -20,11 +19,13 @@ export default {
 </script>
 
 <style lang="scss" module>
-    .c-contentCards--group-title {
-        width: 100%;
-        &:not(:first-child) {
-            margin-top: spacing(x3);
-        }
-        margin-bottom: spacing(x2);
+.c-contentCards--group-title {
+    width: 100%;
+    margin-bottom: spacing(x2);
+
+    &:not(:first-child) {
+        margin-top: spacing(x3);
     }
+
+}
 </style>
