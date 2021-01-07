@@ -8,7 +8,7 @@ describe('Accessibility tests', () => {
         CardComponent.waitForCard();
     });
 
-    it('a11y - should test f-formField component WCAG compliance', () => {
+    it('a11y - should test f-card component WCAG compliance', () => {
         // Act
         const axeResults = getAccessibilityTestResults('f-card');
     });
