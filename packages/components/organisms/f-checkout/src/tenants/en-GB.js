@@ -37,7 +37,9 @@ const messages = {
 
     buttonText: 'Go to payment',
 
-    allergyText: 'If you or someone you’re ordering for has a food allergy or intolerance, click here'
+    allergyText: 'If you or someone you’re ordering for has a food allergy or intolerance, click here',
+
+    switchUserText: 'Not {name}? Click here.'
 };
 
 const dateTimeFormats = {

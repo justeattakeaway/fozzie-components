@@ -6,7 +6,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import {
     VALID_LOCALES,
     ENGLISH_LOCALE
-} from '../../../../storybook/constants/globalisation';
+} from '@justeat/storybook/constants/globalisation';
 
 import VueCheckout from '../src/components/Checkout.vue';
 import CheckoutMock from '../src/demo/checkoutMock';
@@ -40,12 +40,20 @@ export const CheckoutComponent = () => ({
         },
         authToken: {
             default: text('Auth token', '')
+        },
+        loginUrl: {
+            default: text('Login Url', '/login')
         }
     },
     store: new Vuex.Store({}),
-    template: '<vue-checkout'
-        + ' :checkoutUrl="checkoutUrl" :checkout-available-fulfilment-url="checkoutAvailableFulfilmentUrl" :authToken="authToken" :locale="locale"'
-        + ' :key="`${locale},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken}`" />'
+    template: '<vue-checkout ' +
+        ':checkoutUrl="checkoutUrl" ' +
+        ':checkout-available-fulfilment-url="checkoutAvailableFulfilmentUrl" ' +
+        ':authToken="authToken" ' +
+        ':locale="locale" ' +
+        ':loginUrl="loginUrl" ' +
+        // eslint-disable-next-line no-template-curly-in-string
+        ' :key="`${locale},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';

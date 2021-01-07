@@ -22,6 +22,17 @@
                 type="post"
                 :class="$style['c-checkout-form']"
                 @submit.prevent="onFormSubmit">
+                <p
+                    :class="[
+                        $style['c-checkout-link']
+                    ]">
+                    <a
+                        :href="loginUrl"
+                        data-test-id="switch-user-link"
+                        @click="onVisitLoginPage">
+                        {{ $t('switchUserText', { name }) }}
+                    </a>
+                </p>
                 <form-field
                     v-model="customer.mobileNumber"
                     name="mobile-number"
@@ -134,6 +145,11 @@ export default {
         authToken: {
             type: String,
             default: ''
+        },
+
+        loginUrl: {
+            type: String,
+            required: true
         }
     },
 
@@ -233,6 +249,10 @@ export default {
             'getAvailableFulfilment',
             'setAuthToken'
         ]),
+
+        onVisitLoginPage () {
+            this.$emit(EventNames.CheckoutVisitLoginPage);
+        },
 
         /**
          * Submit the checkout details while emitting events to communicate its success or failure.
@@ -430,5 +450,19 @@ $checkout-padding                         : spacing(x5) 100px;
     .c-checkout-submitButton {
         margin: spacing(x4) 0 spacing(x0.5);
     }
+}
+
+.c-checkout-link {
+  text-align: center;
+
+  a {
+    text-decoration: none;
+    font-weight: $font-weight-bold;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
 }
 </style>
