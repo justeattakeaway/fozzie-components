@@ -543,7 +543,7 @@ describe('Checkout', () => {
                                 city: ''
                             }
                         }}),
-                    i18n,
+                        i18n,
                         localVue,
                         propsData
                     });
@@ -571,7 +571,7 @@ describe('Checkout', () => {
                                 postcode: ''
                             }
                         }}),
-                    i18n,
+                        i18n,
                         localVue,
                         propsData
                     });
@@ -599,7 +599,7 @@ describe('Checkout', () => {
                                 postcode: '?!hdb-se'
                             }
                         }}),
-                    i18n,
+                        i18n,
                         localVue,
                         propsData
                     });
@@ -628,7 +628,7 @@ describe('Checkout', () => {
                                 postcode: 'EC4M 7R'
                             }
                         }}),
-                    i18n,
+                        i18n,
                         localVue,
                         propsData
                     });
@@ -1131,6 +1131,7 @@ describe('Checkout', () => {
                 // Act
                 await wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue(newNumber);
                 await wrapper.vm.$nextTick();
+
                 // Assert
                 expect(updateMobileNumberSpy).toHaveBeenCalledWith(newNumber);
             })
