@@ -590,19 +590,18 @@ describe('Checkout', () => {
 
                 it('should call `setupGuestUser`', async () => {
                     // Arrange
-                    const state = {
-                        ...defaultState,
-                        isLoggedIn: false
-                    };
                     const setupGuestUserSpy = jest.spyOn(VueCheckout.methods, 'setupGuestUser');
-
-                    // Act
                     const wrapper = shallowMount(VueCheckout, {
-                        store: createStore(state),
+                        store: createStore({
+                            ...defaultState,
+                            isLoggedIn: false
+                        }),
                         i18n,
                         localVue,
                         propsData
                     });
+
+                    // Act
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
@@ -613,20 +612,19 @@ describe('Checkout', () => {
             describe('if `isLoggedIn` set to `true`', () => {
                 it('should not call `setupGuestUser`', async () => {
                     // Arrange
-                    const state = {
-                        ...defaultState,
-                        authToken: 'sampleToken',
-                        isLoggedIn: true
-                    };
                     const setupGuestUserSpy = jest.spyOn(VueCheckout.methods, 'setupGuestUser');
-
-                    // Act
                     const wrapper = shallowMount(VueCheckout, {
-                        store: createStore(state),
+                        store: createStore({
+                            ...defaultState,
+                            authToken: 'sampleToken',
+                            isLoggedIn: true
+                        }),
                         i18n,
                         localVue,
                         propsData
                     });
+
+                    // Act
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
@@ -644,10 +642,6 @@ describe('Checkout', () => {
                     email: 'joe@test.com',
                     mobileNumber: '+447111111111'
                 };
-                const state = {
-                    ...defaultState,
-                    customer
-                };
                 const expected = {
                     url: createGuestUrl,
                     tenant: TENANT_MAP[i18n.locale],
@@ -661,7 +655,10 @@ describe('Checkout', () => {
                 };
                 const createGuestUserSpy = jest.spyOn(VueCheckout.methods, 'createGuestUser');
                 const wrapper = shallowMount(VueCheckout, {
-                    store: createStore(state),
+                    store: createStore({
+                        ...defaultState,
+                        customer
+                    }),
                     i18n,
                     localVue,
                     propsData
