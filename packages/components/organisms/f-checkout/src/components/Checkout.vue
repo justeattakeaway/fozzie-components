@@ -35,10 +35,10 @@
                 </p>
                 <form-field
                     :value="customer.mobileNumber"
-                    @input="updateMobileNumber"
                     name="mobile-number"
                     :label-text="$t('labels.mobileNumber')"
-                    :has-error="!isMobileNumberValid">
+                    :has-error="!isMobileNumberValid"
+                    @input="updateMobileNumber">
                     <template #error>
                         <error-message
                             v-if="!isMobileNumberValid"

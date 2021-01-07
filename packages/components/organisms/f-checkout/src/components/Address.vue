@@ -7,13 +7,13 @@
             </legend>
             <form-field
                 :value="fulfilment.address.line1"
-                @input="updateAddressDetails('line1', $event)"
                 :class="$style['c-address-formField']"
                 name="address-line-1"
                 :label-text="$t('labels.line1')"
                 label-style="inline"
                 is-grouped
-                :has-error="isAddressLine1Empty">
+                :has-error="isAddressLine1Empty"
+                @input="updateAddressDetails('line1', $event)">
                 <template #error>
                     <error-message
                         v-if="isAddressLine1Empty"
@@ -26,20 +26,20 @@
 
             <form-field
                 :value="fulfilment.address.line2"
-                @input="updateAddressDetails('line2', $event)"
                 :class="$style['c-address-formField']"
                 name="address-line-2"
                 :label-text="$t('labels.line2')"
                 is-grouped
-                label-style="inline" />
+                label-style="inline"
+                @input="updateAddressDetails('line2', $event)" />
         </fieldset>
 
         <form-field
             :value="fulfilment.address.city"
-            @input="updateAddressDetails('city', $event)"
             name="address-city"
             :label-text="$t('labels.city')"
-            :has-error="isAddressCityEmpty">
+            :has-error="isAddressCityEmpty"
+            @input="updateAddressDetails('city', $event)">
             <template #error>
                 <error-message
                     v-if="isAddressCityEmpty"
@@ -51,10 +51,10 @@
 
         <form-field
             :value="fulfilment.address.postcode"
-            @input="updateAddressDetails('postcode', $event)"
             name="address-postcode"
             :label-text="$t('labels.postcode')"
-            :has-error="!isAddressPostcodeValid">
+            :has-error="!isAddressPostcodeValid"
+            @input="updateAddressDetails('postcode', $event)">
             <template #error>
                 <error-message
                     v-if="isAddressPostcodeEmpty"
@@ -134,7 +134,7 @@ export default {
         * Dispatches map action `updateFulfilmentAddress` to update input fields values in vuex
         */
         updateAddressDetails (key, event) {
-            this.updateFulfilmentAddress({ [key]: event })
+            this.updateFulfilmentAddress({ [key]: event });
         }
     }
 };

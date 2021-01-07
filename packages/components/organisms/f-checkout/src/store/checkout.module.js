@@ -142,11 +142,11 @@ export default {
         },
 
         updateFulfilmentAddress ({ commit }, payload) {
-            commit('UPDATE_FULFILMENT_ADDRESS', payload)
+            commit('UPDATE_FULFILMENT_ADDRESS', payload);
         },
 
         updateMobileNumber ({ commit }, payload) {
-            commit('UPDATE_MOBILE_NUMBER', payload)
+            commit('UPDATE_MOBILE_NUMBER', payload);
         }
     },
 
@@ -204,11 +204,11 @@ export default {
             state.fulfilment.address = {
                 ...state.fulfilment.address,
                 ...address
-            }
+            };
         },
 
-        UPDATE_MOBILE_NUMBER (state, mobileNumber ) {
-            state.customer.mobileNumber = mobileNumber
+        UPDATE_MOBILE_NUMBER (state, mobileNumber) {
+            state.customer.mobileNumber = mobileNumber;
         }
     }
 };

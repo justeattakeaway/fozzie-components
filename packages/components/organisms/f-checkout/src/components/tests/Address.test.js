@@ -164,13 +164,13 @@ describe('Address', () => {
                 });
             });
 
-            afterEach(()=> {
+            afterEach(() => {
                 jest.clearAllMocks();
-            })
+            });
 
             it('should be called with new input value when called on address field 1', async () => {
                 // Arrange
-                const newLine1Value = 'New Street'
+                const newLine1Value = 'New Street';
 
                 // Act
                 await wrapper.find('[data-test-id="formfield-address-line-1-input"]').setValue(newLine1Value);
@@ -179,10 +179,10 @@ describe('Address', () => {
                 // Assert
                 expect(updateAddressDetailsSpy).toHaveBeenCalledWith('line1', newLine1Value);
             });
-            
+
             it('should be called with new input value when called on address field 2', async () => {
                 // Arrange
-                const newLine2Value = 'New Street'
+                const newLine2Value = 'New Street';
 
                 // Act
                 await wrapper.find('[data-test-id="formfield-address-line-2-input"]').setValue(newLine2Value);
@@ -194,7 +194,7 @@ describe('Address', () => {
 
             it('should be called with new input value when called on address city field', async () => {
                 // Arrange
-                const newCityValue = 'New City'
+                const newCityValue = 'New City';
 
                 // Act
                 await wrapper.find('[data-test-id="formfield-address-city-input"]').setValue(newCityValue);
@@ -206,7 +206,7 @@ describe('Address', () => {
 
             it('should be called with new input value when called on address postcode field', async () => {
                 // Arrange
-                const newPoscodeValue = 'New Postcode'
+                const newPoscodeValue = 'New Postcode';
 
                 // Act
                 await wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue(newPoscodeValue);

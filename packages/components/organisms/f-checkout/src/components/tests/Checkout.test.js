@@ -7,7 +7,7 @@ import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
 import {
-    fulfilmentTimes, defaultState, defaultActions, i18n, createStore
+    defaultState, defaultActions, i18n, createStore
 } from './helpers/setup';
 
 const localVue = createLocalVue();
@@ -264,7 +264,7 @@ describe('Checkout', () => {
             it('should return `true` if `serviceType` is set to Delivery', () => {
                 // Arrange and Act
                 const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({...defaultState, serviceType: CHECKOUT_METHOD_DELIVERY}),
+                    store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_DELIVERY }),
                     i18n,
                     localVue,
                     propsData
@@ -277,7 +277,7 @@ describe('Checkout', () => {
             it('should return `false` if `serviceType` is set to Collection', () => {
                 // Arrange and Act
                 const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION}),
+                    store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
                     i18n,
                     localVue,
                     propsData
@@ -380,12 +380,12 @@ describe('Checkout', () => {
                 it('should emit success event when all the fields are populated correctly', async () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
-                        store: createStore({...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION}),
+                        store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
                         i18n,
                         localVue,
                         propsData
                     });
-                    
+
                     // Act
                     await wrapper.vm.onFormSubmit();
 
@@ -397,12 +397,14 @@ describe('Checkout', () => {
                 it('should show error message and emit failure event when the mobile number field is not populated', async () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
-                        store: createStore({...defaultState,
+                        store: createStore({
+                            ...defaultState,
                             serviceType: CHECKOUT_METHOD_COLLECTION,
                             customer: {
-                            ...defaultState.customer,
-                            mobileNumber: ''
-                        }}),
+                                ...defaultState.customer,
+                                mobileNumber: ''
+                            }
+                        }),
                         i18n,
                         localVue,
                         propsData
@@ -421,12 +423,14 @@ describe('Checkout', () => {
                 it('should show error message and emit failure event when the mobile number field is populated with a < 10 numbers', async () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
-                        store: createStore({...defaultState,
+                        store: createStore({
+                            ...defaultState,
                             serviceType: CHECKOUT_METHOD_COLLECTION,
                             customer: {
-                            ...defaultState.customer,
-                            mobileNumber: '077777'
-                        }}),
+                                ...defaultState.customer,
+                                mobileNumber: '077777'
+                            }
+                        }),
                         i18n,
                         localVue,
                         propsData
@@ -446,12 +450,14 @@ describe('Checkout', () => {
                 it('should show error message and emit failure event when the mobile number field is populated with non numeric value', async () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
-                        store: createStore({...defaultState,
+                        store: createStore({
+                            ...defaultState,
                             serviceType: CHECKOUT_METHOD_COLLECTION,
                             customer: {
-                            ...defaultState.customer,
-                            mobileNumber: 'hs;-j`$e&1l'
-                        }}),
+                                ...defaultState.customer,
+                                mobileNumber: 'hs;-j`$e&1l'
+                            }
+                        }),
                         i18n,
                         localVue,
                         propsData
@@ -471,7 +477,7 @@ describe('Checkout', () => {
                 it('should not create validations for address', () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
-                        store: createStore({...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION}),
+                        store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
                         i18n,
                         localVue,
                         propsData
@@ -509,12 +515,13 @@ describe('Checkout', () => {
                             ...defaultState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
                             fulfilment: {
-                            ...defaultState.fulfilment,
-                            address: {
-                                ...defaultState.fulfilment.address,
-                                line1: ''
+                                ...defaultState.fulfilment,
+                                address: {
+                                    ...defaultState.fulfilment.address,
+                                    line1: ''
+                                }
                             }
-                        }}),
+                        }),
                         i18n,
                         localVue,
                         propsData
@@ -537,12 +544,13 @@ describe('Checkout', () => {
                             ...defaultState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
                             fulfilment: {
-                            ...defaultState.fulfilment,
-                            address: {
-                                ...defaultState.fulfilment.address,
-                                city: ''
+                                ...defaultState.fulfilment,
+                                address: {
+                                    ...defaultState.fulfilment.address,
+                                    city: ''
+                                }
                             }
-                        }}),
+                        }),
                         i18n,
                         localVue,
                         propsData
@@ -565,12 +573,13 @@ describe('Checkout', () => {
                             ...defaultState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
                             fulfilment: {
-                            ...defaultState.fulfilment,
-                            address: {
-                                ...defaultState.fulfilment.address,
-                                postcode: ''
+                                ...defaultState.fulfilment,
+                                address: {
+                                    ...defaultState.fulfilment.address,
+                                    postcode: ''
+                                }
                             }
-                        }}),
+                        }),
                         i18n,
                         localVue,
                         propsData
@@ -593,12 +602,13 @@ describe('Checkout', () => {
                             ...defaultState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
                             fulfilment: {
-                            ...defaultState.fulfilment,
-                            address: {
-                                ...defaultState.fulfilment.address,
-                                postcode: '?!hdb-se'
+                                ...defaultState.fulfilment,
+                                address: {
+                                    ...defaultState.fulfilment.address,
+                                    postcode: '?!hdb-se'
+                                }
                             }
-                        }}),
+                        }),
                         i18n,
                         localVue,
                         propsData
@@ -622,12 +632,13 @@ describe('Checkout', () => {
                             ...defaultState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
                             fulfilment: {
-                            ...defaultState.fulfilment,
-                            address: {
-                                ...defaultState.fulfilment.address,
-                                postcode: 'EC4M 7R'
+                                ...defaultState.fulfilment,
+                                address: {
+                                    ...defaultState.fulfilment.address,
+                                    postcode: 'EC4M 7R'
+                                }
                             }
-                        }}),
+                        }),
                         i18n,
                         localVue,
                         propsData
@@ -1126,7 +1137,7 @@ describe('Checkout', () => {
                     localVue,
                     propsData
                 });
-                const newNumber = '+447111111112'
+                const newNumber = '+447111111112';
 
                 // Act
                 await wrapper.find('[data-test-id="formfield-mobile-number-input"]').setValue(newNumber);
@@ -1134,7 +1145,7 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(updateMobileNumberSpy).toHaveBeenCalledWith(newNumber);
-            })
+            });
         });
     });
 
