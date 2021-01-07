@@ -70,7 +70,7 @@ exports.processResults = (results, componentName) => {
             console.error(err);
         }
 
-        AxeReports.processResults(results, 'csv', ciFilePath, false);
+        AxeReports.processResults(results, 'csv', ciFileName, false);
     } else {
         AxeReports.processResults(results, 'csv', localFilePath, false);
     }
