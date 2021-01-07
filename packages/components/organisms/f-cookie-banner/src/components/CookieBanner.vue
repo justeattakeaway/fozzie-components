@@ -37,9 +37,7 @@
                         :href="copy.linkHref"
                         :class="$style['c-cookieBanner-link']"
                         target="_blank">
-                        {{ copy.linkText }}
-                    </a>
-                    {{ copy.text4 }}
+                        {{ copy.linkText }}</a>{{ copy.text4 }}
                 </p>
             </div>
 

@@ -11,7 +11,7 @@ export const CookieBannerComponent = () => ({
     components: { CookieBanner },
     props: {
         locale: {
-            default: select('Locale', ['en-GB', 'es-ES'])
+            default: select('Locale', ['da-DK', 'en-AU', 'en-GB', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO'])
         },
 
         isHidden: {
