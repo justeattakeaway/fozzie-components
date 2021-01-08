@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -63,6 +63,7 @@
     "eslint": "6.8.0",
     "eslint-import-resolver-webpack": "0.12.2",
     "eslint-plugin-vue": "6.2.2",
+    "eslint-plugin-vuejs-accessibility": "0.6.0",
     "eyeglass": "3.0.2",
     "include-media": "1.4.9",
     "jest-allure2": "1.2.3",

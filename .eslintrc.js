@@ -1,7 +1,8 @@
 module.exports = {
     root: true,
     extends: [
-        '@justeat/eslint-config-fozzie'
+        '@justeat/eslint-config-fozzie',
+        'plugin:vuejs-accessibility/recommended'
     ],
     rules: {
         'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
@@ -53,11 +54,26 @@ module.exports = {
                 'video']
         }],
         'import/no-extraneous-dependencies': 'off',
+
+        // Setting these to warn temporarily otherwise it breaks the dev experience
+        // and makes it hard to actually fix them.
+        // Once the existing issues are fixed we can remove the rules so they default back to error.
+        'vuejs-accessibility/alt-text': 'warn',
+        'vuejs-accessibility/anchor-has-content': 'warn',
+        'vuejs-accessibility/form-control-has-label': 'warn',
+        'vuejs-accessibility/label-has-for': [
+            'warn',
+            {
+                required: {
+                    some: ['nesting', 'id']
+                }
+            }
+        ]
     },
     parserOptions: {
         parser: 'babel-eslint',
         ecmaVersion: 2017,
-        sourceType: "module",
+        sourceType: 'module',
     },
     settings: {
         'import/resolver': {
@@ -67,6 +83,6 @@ module.exports = {
         }
     },
     globals: {
-        "allure": "readonly"
+        allure: 'readonly'
     }
 };

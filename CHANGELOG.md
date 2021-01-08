@@ -4,9 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.2.2
+------------------------------
+*January 8, 2021*
+
+### Added
+- `eslint-plugin-vuejs-accessibility` dependency to add accessibility checks to linter
+  - Existing issues are currently set to `warn` to avoid breaking the build.
+
+
 v3.2.1
 ------------------------------
-*January 6, 2020*
+*January 6, 2021*
 
 ### Fixed
 - Addressed issue with danger checks not correctly identifying package changes with new paths.
@@ -14,7 +23,7 @@ v3.2.1
 
 v3.2.0
 ------------------------------
-*January 5, 2020*
+*January 5, 2021*
 
 ### Fixed
 - Fixes danger package checks.
@@ -22,7 +31,7 @@ v3.2.0
 
 v3.1.0
 ------------------------------
-*January 4, 2020*
+*January 4, 2021*
 
 ### Fixed
 - `bundlewatch` config updated in line with new structure.
