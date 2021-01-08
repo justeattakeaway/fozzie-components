@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { select, text } from '@storybook/addon-knobs';
+import { select, text, boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 
 import {
@@ -17,6 +17,7 @@ const deliveryUrl = '/checkout-delivery.json';
 const collectionUrl = '/checkout-collection.json';
 const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
 const createGuestUrl = '/create-guest.json';
+
 
 CheckoutMock.setupCheckoutMethod(deliveryUrl);
 CheckoutMock.setupCheckoutMethod(collectionUrl);
@@ -49,6 +50,9 @@ export const CheckoutComponent = () => ({
         },
         loginUrl: {
             default: text('Login Url', '/login')
+        },
+        isGuest: {
+            default: boolean('isGuest', false)
         }
     },
     store: new Vuex.Store({}),
@@ -59,8 +63,10 @@ export const CheckoutComponent = () => ({
         ':authToken="authToken" ' +
         ':locale="locale" ' +
         ':loginUrl="loginUrl" ' +
+        ':isGuest="isGuest" ' +
         // eslint-disable-next-line no-template-curly-in-string
         ' :key="`${locale},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';
+

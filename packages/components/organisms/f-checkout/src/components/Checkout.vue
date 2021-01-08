@@ -11,28 +11,26 @@
             {{ genericErrorMessage }}
         </alert>
         <card
-            :card-heading="title"
             is-rounded
             has-outline
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="checkout-card-component"
             :class="$style['c-card--dimensions']">
+
+            <checkout-header
+                :is-guest="isGuest"
+                :name="name"
+                :loginUrl="loginUrl"/>
+
             <form
                 type="post"
                 :class="$style['c-checkout-form']"
                 @submit.prevent="onFormSubmit">
-                <p
-                    :class="[
-                        $style['c-checkout-link']
-                    ]">
-                    <a
-                        :href="loginUrl"
-                        data-test-id="switch-user-link"
-                        @click="onVisitLoginPage">
-                        {{ $t('switchUserText', { name }) }}
-                    </a>
-                </p>
+
+
+                <guest-block v-if="isGuest"/>
+
                 <form-field
                     :value="customer.mobileNumber"
                     name="mobile-number"
@@ -96,6 +94,8 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 import { mapState, mapActions } from 'vuex';
 import AddressBlock from './Address.vue';
 import FormSelector from './Selector.vue';
+import GuestBlock from './Guest.vue';
+import CheckoutHeader from './Header.vue';
 import UserNote from './UserNote.vue';
 
 import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP } from '../constants';
@@ -115,6 +115,8 @@ export default {
         ErrorMessage,
         FormField,
         FormSelector,
+        GuestBlock,
+        CheckoutHeader,
         UserNote
     },
 
@@ -160,6 +162,11 @@ export default {
 
         loginUrl: {
             type: String,
+            required: true
+        },
+
+        isGuest: {
+            type: Boolean,
             required: true
         }
     },
@@ -263,10 +270,6 @@ export default {
             'setAuthToken',
             'updateMobileNumber'
         ]),
-
-        onVisitLoginPage () {
-            this.$emit(EventNames.CheckoutVisitLoginPage);
-        },
 
         /**
          * Submit the checkout details while emitting events to communicate its success or failure.
@@ -488,19 +491,5 @@ $checkout-padding                         : spacing(x5) 100px;
     .c-checkout-submitButton {
         margin: spacing(x4) 0 spacing(x0.5);
     }
-}
-
-.c-checkout-link {
-  text-align: center;
-
-  a {
-    text-decoration: none;
-    font-weight: $font-weight-bold;
-
-    &:hover,
-    &:focus {
-      text-decoration: underline;
-    }
-  }
 }
 </style>

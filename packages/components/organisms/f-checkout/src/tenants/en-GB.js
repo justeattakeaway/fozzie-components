@@ -9,7 +9,10 @@ const messages = {
         city: 'City',
         postcode: 'Postcode',
         deliveryOrderMethod: 'Delivery time',
-        collectionOrderMethod: 'Collection time'
+        collectionOrderMethod: 'Collection time',
+        firstName: 'First name',
+        lastName: 'Last name',
+        email: 'Email'
     },
 
     validationMessages: {
@@ -25,6 +28,15 @@ const messages = {
         postcode: {
             requiredError: 'Please enter your full UK postcode',
             invalidCharError: 'This doesn\'t look like a UK postcode, can you enter it again please?'
+        },
+        guestFirstName: {
+            requiredError: 'Please enter your first name'
+        },
+        guestLastName: {
+            requiredError: 'Please enter your last name'
+        },
+        guestEmail: {
+            invalidError: 'Please enter a valid email address',
         }
     },
 
@@ -37,9 +49,20 @@ const messages = {
 
     buttonText: 'Go to payment',
 
+    loginButtonText: 'Log in or sign up',
+
+    guestHeader: 'How do you want to continue?',
+
+    guestTitle: 'Checkout as guest',
+
+    guestOption: 'or',
+
+    guestDeliveryHeader: 'Please confirm your delivery details',
+
     allergyText: 'If you or someone you’re ordering for has a food allergy or intolerance, click here',
 
     switchUserText: 'Not {name}? Click here.'
+
 };
 
 const dateTimeFormats = {
