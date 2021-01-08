@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.35.0
+-------------------------------
+*January 7, 2021*
+
+### Added
+- Tests to cover new methods, actions and mutations
+
+### Changed
+- Replaced direct state manipulations with mutations and actions
+
+
 v0.34.1
 ------------------------------
 *January 7, 2021*
@@ -19,7 +30,6 @@ v0.34.0
 *January 6, 2021*
 
 ### Added
-
 -  Call to create a guest user when submitting checkout form and the user is not authenticated
 
 

@@ -4,13 +4,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v3.2.2
+v3.4.0
 ------------------------------
 *January 8, 2021*
 
 ### Added
 - `eslint-plugin-vuejs-accessibility` dependency to add accessibility checks to linter
   - Existing issues are currently set to `warn` to avoid breaking the build.
+
+
+v3.3.0
+------------------------------
+*January 8, 2021*
+
+### Added
+- Automated Axe Core tests for UI components
 
 
 v3.2.1
