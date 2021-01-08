@@ -5,7 +5,7 @@ const copy = {
     headlineSubtitle: 'Ordina online dai tuoi ristoranti preferiti',
     headlineTitle: 'Il bello è prenderci gusto',
     geoTip: 'Trova la mia posizione',
-    streetNumberLabel: 'Per favore inserisci il tuo indirizzo di consegna',
+    streetNumberLabel: 'Per favore indica anche il tuo numero civico, così da trovare tutti i ristoranti che consegnano al tuo indirizzo',
     errors: {
         ADDRESS_EMPTY: 'Compila correttamente l\'indirizzo di ricerca',
         GEO_ERROR: 'Impossibile trovare la posizione',
