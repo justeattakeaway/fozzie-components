@@ -130,7 +130,7 @@ jobs:
 
   working_directory: ~/repo
 
-  build:
+  build_1:
     executor: node
     environment:
       # required to prevent ENOMEM errors
@@ -151,6 +151,13 @@ jobs:
           name: Run PR Checks
           command: yarn danger ci
       - build_packages
+
+  build_2:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps: # a collection of executable commands
       - run: # Lint packages
           name: Run Lint Tasks on Packages
           command: yarn lint
@@ -225,7 +232,12 @@ workflows:
 
   build:
     jobs:
-      - build:
+      - build_1:
+          context: web-core
+          filters:
+            branches:
+              ignore: 'gh-pages'
+      - build_2:
           context: web-core
           filters:
             branches:
