@@ -2,7 +2,7 @@
     <div :class="$style.shell">
         <button
             v-for="(item, index) in getAddressItems"
-            :key="index"
+            :key="`${index}_ getAddressItem`"
             type="button"
             :class="[
                 $style.item

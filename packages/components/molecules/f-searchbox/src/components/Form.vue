@@ -31,7 +31,7 @@
         </div>
 
         <component
-            :is="setSuggestionType()"
+            :is="setSuggestionType"
             v-if="shouldDisplaySuggestions"
             aria-live="assertive"
             :suggestion-format="suggestionFormat"
@@ -185,6 +185,20 @@ export default {
             return this.lastAddress
                     && this.address === this.lastAddress
                     && this.isValid === true;
+        },
+
+        /**
+         * Switch between two suggestion dropdown types:
+         *
+         * One for `Google Places: form-search-suggestions` & one for
+         * `Loqate: form-full-address-search-suggestions` full address search.
+         *
+         * @returns {string}
+         */
+        setSuggestionType () {
+            return this.isFullAddressSearchEnabled
+                ? 'form-full-address-search-suggestions'
+                : 'form-search-suggestions';
         }
     },
 
@@ -423,20 +437,6 @@ export default {
                     this.setAutoCompleteAvailability(true);
                 }
             }
-        },
-
-        /**
-         * Switch between two suggestion dropdown types:
-         *
-         * One for `Google Places: form-search-suggestions` & one for
-         * `Loqate: form-full-address-search-suggestions` full address search.
-         *
-         * @returns {string}
-         */
-        setSuggestionType () {
-            return this.isFullAddressSearchEnabled
-                ? 'form-full-address-search-suggestions'
-                : 'form-search-suggestions';
         }
     }
 };
