@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.3.0
+------------------------------
+*January 8, 2020*
+
+### Added
+- Automated Axe Core tests for UI components
+
 
 v3.2.1
 ------------------------------

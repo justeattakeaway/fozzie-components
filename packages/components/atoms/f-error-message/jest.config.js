@@ -21,6 +21,10 @@ module.exports = {
         '^~@justeat/(.*)$': '<rootDir>../../node_modules/@justeat/$1'
     },
 
+    modulePathIgnorePatterns: [
+        './test/specs/accessibility'
+    ],
+
     snapshotSerializers: [
         'jest-serializer-vue'
     ],
