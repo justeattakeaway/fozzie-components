@@ -146,7 +146,7 @@ export default {
         /**
          * Display API suggestions in component: `form-search-suggestions`:
          *
-         * 1. Service layer should contain `autocomplete` or `isFullAddressSearchEnabled`.
+         * 1. Service layer should map to the option `autocomplete` or `isFullAddressSearchEnabled`.
          * 2. The form should have focus.
          * 3. There should be suggestions.
          *
