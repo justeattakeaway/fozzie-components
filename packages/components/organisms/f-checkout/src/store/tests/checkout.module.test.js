@@ -7,11 +7,20 @@ const mobileNumber = '+447111111111';
 
 const authToken = 'sampleToken';
 
+const address = {
+    line1: 'line 1',
+    line2: 'line 2',
+    city: 'city',
+    postcode: 'postcode'
+};
+
 const defaultState = {
     id: '',
     serviceType: '',
     customer: {
         firstName: '',
+        lastName: '',
+        email: '',
         mobileNumber: ''
     },
     fulfilment: {
@@ -38,10 +47,24 @@ const defaultState = {
     isLoggedIn: false
 };
 
-const { updateState, updateAuth, updateAvailableFulfilment } = CheckoutModule.mutations;
 const {
-    getCheckout, postCheckout, setAuthToken, getAvailableFulfilment
+    UPDATE_STATE,
+    UPDATE_AUTH,
+    UPDATE_AVAILABLE_FULFILMENT_TIMES,
+    UPDATE_FULFILMENT_ADDRESS,
+    UPDATE_MOBILE_NUMBER
+} = CheckoutModule.mutations;
+
+const {
+    getCheckout,
+    postCheckout,
+    setAuthToken,
+    getAvailableFulfilment,
+    updateFulfilmentAddress,
+    updateMobileNumber,
+    createGuestUser
 } = CheckoutModule.actions;
+
 let state = CheckoutModule.state();
 
 describe('CheckoutModule', () => {
@@ -55,10 +78,10 @@ describe('CheckoutModule', () => {
             state = defaultState;
         });
 
-        describe('updateState ::', () => {
+        describe('UPDATE_STATE ::', () => {
             it('should update state with delivery response.', () => {
                 // Act
-                updateState(state, checkoutDelivery);
+                UPDATE_STATE(state, checkoutDelivery);
 
                 // Assert
                 expect(state).toMatchSnapshot();
@@ -69,7 +92,7 @@ describe('CheckoutModule', () => {
                 checkoutDelivery.customer = null;
 
                 // Act
-                updateState(state, checkoutDelivery);
+                UPDATE_STATE(state, checkoutDelivery);
 
                 // Assert
                 expect(state.customer).toEqual(defaultState.customer);
@@ -80,17 +103,17 @@ describe('CheckoutModule', () => {
                 checkoutDelivery.fulfilment.address = null;
 
                 // Act
-                updateState(state, checkoutDelivery);
+                UPDATE_STATE(state, checkoutDelivery);
 
                 // Assert
                 expect(state.fulfilment.address).toEqual(defaultState.fulfilment.address);
             });
         });
 
-        describe('updateAuth ::', () => {
+        describe('UPDATE_AUTH ::', () => {
             it('should update state with authToken and set `isLoggedIn` to true', () => {
                 // Act
-                updateAuth(state, authToken);
+                UPDATE_AUTH(state, authToken);
 
                 // Assert
                 expect(state.authToken).toEqual(authToken);
@@ -98,17 +121,37 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe('updateAvailableFulfilment ::', () => {
+        describe('UPDATE_AVAILABLE_FULFILMENT_TIMES ::', () => {
             it('should update state with the availableFulfilment response', () => {
                 // Arrange
                 const expectedAvailableFulfilmentTimes = checkoutAvailableFulfilment.times;
 
                 // Act
-                updateAvailableFulfilment(state, checkoutAvailableFulfilment);
+                UPDATE_AVAILABLE_FULFILMENT_TIMES(state, checkoutAvailableFulfilment);
 
                 // Assert
                 expect(state.availableFulfilment.times).toEqual(expectedAvailableFulfilmentTimes);
                 expect(state.availableFulfilment.isAsapAvailable).toBe(true);
+            });
+        });
+
+        describe('UPDATE_FULFILMENT_ADDRESS ::', () => {
+            it('should update state with received value', () => {
+                // Arrange and Act
+                UPDATE_FULFILMENT_ADDRESS(state, address);
+
+                // Assert
+                expect(state.fulfilment.address).toEqual(address);
+            });
+        });
+
+        describe('UPDATE_MOBILE_NUMBER ::', () => {
+            it('should update state with received value', () => {
+                // Arrange and Act
+                UPDATE_MOBILE_NUMBER(state, mobileNumber);
+
+                // Assert
+                expect(state.customer.mobileNumber).toEqual(mobileNumber);
             });
         });
     });
@@ -142,13 +185,13 @@ describe('CheckoutModule', () => {
                 axios.get = jest.fn(() => Promise.resolve({ data: checkoutDelivery }));
             });
 
-            it('should get the checkout details from the backend and call `updateState` mutation.', async () => {
+            it('should get the checkout details from the backend and call `UPDATE_STATE` mutation.', async () => {
                 // Act
                 await getCheckout({ commit }, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                expect(commit).toHaveBeenCalledWith('updateState', checkoutDelivery);
+                expect(commit).toHaveBeenCalledWith('UPDATE_STATE', checkoutDelivery);
             });
         });
 
@@ -181,13 +224,50 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe('createGuestUser ::', () => {
+            let config;
+            payload.url = 'http://localhost/account/createguest';
+            payload.data = {
+                firstName: 'Joe',
+                lastName: 'Bloggs',
+                email: 'joe@test.com'
+            };
+
+            beforeEach(() => {
+                config = {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept-Tenant': payload.tenant
+                    },
+                    timeout: payload.timeout
+                };
+
+                axios.post = jest.fn(() => Promise.resolve({
+                    status: 200,
+                    data: {
+                        token: 'otacToken',
+                        type: 'otac'
+                    }
+                }));
+            });
+
+            it('should post the create guest user request to the backend.', async () => {
+                // Act
+                await createGuestUser({ commit, state }, payload);
+
+                // Assert
+                expect(axios.post).toHaveBeenCalledWith(payload.url, payload.data, config);
+            });
+        });
+
         describe('setAuthToken ::', () => {
-            it('should call `updateAuth` mutation.', async () => {
+            it('should call `UPDATE_AUTH` mutation.', async () => {
                 // Act
                 setAuthToken({ commit }, authToken);
 
                 // Assert
-                expect(commit).toHaveBeenCalledWith('updateAuth', authToken);
+                expect(commit).toHaveBeenCalledWith('UPDATE_AUTH', authToken);
             });
         });
 
@@ -207,13 +287,33 @@ describe('CheckoutModule', () => {
                 axios.get = jest.fn(() => Promise.resolve({ data: checkoutAvailableFulfilment }));
             });
 
-            it('should get the checkout available fulfilment details from the backend and call `updateAvailableFulfilment` mutation.', async () => {
+            it('should get the checkout available fulfilment details from the backend and call `UPDATE_AVAILABLE_FULFILMENT_TIMES` mutation.', async () => {
                 // Act
                 await getAvailableFulfilment({ commit }, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                expect(commit).toHaveBeenCalledWith('updateAvailableFulfilment', checkoutAvailableFulfilment);
+                expect(commit).toHaveBeenCalledWith('UPDATE_AVAILABLE_FULFILMENT_TIMES', checkoutAvailableFulfilment);
+            });
+        });
+
+        describe('updateFulfilmentAddress ::', () => {
+            it('should call `UPDATE_FULFILMENT_ADDRESS` mutation with passed value.', async () => {
+                // Act
+                updateFulfilmentAddress({ commit }, address);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith('UPDATE_FULFILMENT_ADDRESS', address);
+            });
+        });
+
+        describe('updateMobileNumber ::', () => {
+            it('should call `UPDATE_MOBILE_NUMBER` mutation with passed value.', async () => {
+                // Act
+                updateMobileNumber({ commit }, mobileNumber);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith('UPDATE_MOBILE_NUMBER', mobileNumber);
             });
         });
     });

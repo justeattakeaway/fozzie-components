@@ -72,6 +72,7 @@
                     class="c-nav-list-item"
                     data-test-id="delivery-enquiry">
                     <a
+                        data-test-id="delivery-link"
                         :data-trak='`{
                             "trakEvent": "click",
                             "category": "engagement",
@@ -80,8 +81,7 @@
                         }`'
                         :href="deliveryEnquiry.url"
                         target="_blank"
-                        class="c-nav-list-link"
-                        data-test-id="delivery-link">
+                        class="c-nav-list-link">
                         <delivery-icon class="c-nav-icon c-nav-icon--delivery" />
                         {{ deliveryEnquiry.text }}
                     </a>
@@ -96,6 +96,7 @@
                     v-on="isBelowMid ? null : { mouseover: openNav, mouseleave: closeNav }"
                     @keyup.esc="closeNav">
                     <a
+                        data-test-id="user-info-link"
                         :tabindex="isBelowMid ? -1 : 0"
                         :aria-expanded="!isBelowMid && navIsOpen ? 'true' : 'false'"
                         :aria-haspopup="isBelowMid ? false : true"
