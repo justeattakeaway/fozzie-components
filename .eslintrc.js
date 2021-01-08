@@ -2,6 +2,8 @@ module.exports = {
     root: true,
     extends: [
         '@justeat/eslint-config-fozzie',
+
+        // https://github.com/vue-a11y/eslint-plugin-vuejs-accessibility/tree/master/docs
         'plugin:vuejs-accessibility/recommended'
     ],
     rules: {
