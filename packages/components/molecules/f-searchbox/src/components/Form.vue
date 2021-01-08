@@ -30,7 +30,8 @@
                 :is-compressed="isCompressed" />
         </div>
 
-        <form-search-suggestions
+        <component
+            :is="setSuggestionType"
             v-if="shouldDisplaySuggestions"
             aria-live="assertive"
             :suggestion-format="suggestionFormat"
@@ -56,6 +57,7 @@ import '@justeat/f-error-message/dist/f-error-message.css';
 import FormSearchField from './formElements/FormSearchField.vue';
 import FormSearchButton from './formElements/FormSearchButton.vue';
 import FormSearchSuggestions from './formElements/FormSearchSuggestions.vue';
+import FormFullAddressSearchSuggestions from './formElements/FormFullAddressSearchSuggestions.vue';
 import searchboxModule from '../store/searchbox.module';
 import { getLastLocation, normalisePostcode } from '../utils/helpers';
 import { search, selectedSuggestion } from '../services/search.services';
@@ -76,7 +78,8 @@ export default {
         ErrorMessage,
         FormSearchField,
         FormSearchButton,
-        FormSearchSuggestions
+        FormSearchSuggestions,
+        FormFullAddressSearchSuggestions
     },
 
     props: {
@@ -143,13 +146,13 @@ export default {
         /**
          * Display API suggestions in component: `form-search-suggestions`:
          *
-         * 1. Service layer should contain `autocomplete`.
+         * 1. Service layer should map to the option `autocomplete` or `isFullAddressSearchEnabled`.
          * 2. The form should have focus.
          * 3. There should be suggestions.
          *
          * */
         shouldDisplaySuggestions () {
-            return this.service.isAutocompleteEnabled
+            return (this.service.isAutocompleteEnabled || this.isFullAddressSearchEnabled)
                     && this.isInputFocus
                     && !!this.suggestions.length
                     && (!this.errors.length || this.isDirty);
@@ -182,6 +185,20 @@ export default {
             return this.lastAddress
                     && this.address === this.lastAddress
                     && this.isValid === true;
+        },
+
+        /**
+         * Switch between two suggestion dropdown types:
+         *
+         * One for `Google Places: form-search-suggestions` & one for
+         * `Loqate: form-full-address-search-suggestions` full address search.
+         *
+         * @returns {string}
+         */
+        setSuggestionType () {
+            return this.isFullAddressSearchEnabled
+                ? 'form-full-address-search-suggestions'
+                : 'form-search-suggestions';
         }
     },
 
@@ -203,6 +220,13 @@ export default {
                     this.setSuggestions(Promise.reject(new Error(errors[0])));
                 } else {
                     this.setSuggestions(this.service.search(value));
+                }
+
+                if (this.isFullAddressSearchEnabled) {
+                    this.getMatchedAreaAddressResults({
+                        address: this.address,
+                        streetLevelAddress: ''
+                    });
                 }
             },
             500,
@@ -243,7 +267,8 @@ export default {
             'setStreetNumberRequired',
             'setGeoLocationAvailability',
             'setFullAddressSearchConfigs',
-            'setAutoCompleteAvailability'
+            'setAutoCompleteAvailability',
+            'getMatchedAreaAddressResults'
         ]),
 
         /**

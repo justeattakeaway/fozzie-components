@@ -30,8 +30,10 @@ export default {
             default: () => []
         },
         suggestionFormat: {
-            type: Function,
-            default: () => ({})
+            type: Object,
+            default: () => ({
+                suggestionFormat: suggestion => suggestion
+            })
         },
 
         keyboardSuggestionSelection: {
