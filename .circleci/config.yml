@@ -130,7 +130,7 @@ jobs:
 
   working_directory: ~/repo
 
-  build_1:
+  set_up:
     executor: node
     environment:
       # required to prevent ENOMEM errors
@@ -150,17 +150,31 @@ jobs:
       - run: # Run PR Checks
           name: Run PR Checks
           command: yarn danger ci
-      - build_packages
 
-  build_2:
+  build:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps: # a collection of executable commands
+      - build_packages
+    
+  linting:
     executor: node
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - run: # Lint packages
-          name: Run Lint Tasks on Packages
-          command: yarn lint
+        name: Run Lint Tasks on Packages
+        command: yarn lint
+    
+  tests:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps: # a collection of executable commands
       - run: # Run Tests
           name: Run Unit / Integration Tests
           command: yarn test
@@ -180,11 +194,25 @@ jobs:
       - run: # Run Component UI Tests
           name: Run WebDriverIO Component / Accessibility Tests
           command: yarn test-component-ci:chrome
-      - store_artifacts:
-          path: axe-violations/
+
+  bundlewatch:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps: # a collection of executable commands
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
+
+  reporting:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps: # a collection of executable commands
+      - store_artifacts:
+          path: axe-violations/
       - slack_notify_fail
       - slack_notify_success
 
@@ -232,13 +260,43 @@ workflows:
 
   build:
     jobs:
-      - build_1:
+      - set_up:
           context: web-core
           filters:
             branches:
               ignore: 'gh-pages'
-      - build_2:
+      - build:
           context: web-core
+          requires:
+            - set_up
+          filters:
+            branches:
+              ignore: 'gh-pages'
+      - bundlewatch:
+          context: web-core
+          requires:
+            - set_up
+          filters:
+            branches:
+              ignore: 'gh-pages'
+       - linting:
+          context: web-core
+          requires:
+            - set_up
+          filters:
+            branches:
+              ignore: 'gh-pages'
+      - test:
+          context: web-core
+          requires:
+            - build
+          filters:
+            branches:
+              ignore: 'gh-pages'
+      - reporting:
+          context: web-core
+          requires:
+            - test
           filters:
             branches:
               ignore: 'gh-pages'
