@@ -4,6 +4,7 @@ const copy = {
     fieldPlaceholder: 'E.g. 21 Stonewall Drive, Saggart Abbey, Dublin 24, D24 TF12',
     headlineSubtitle: 'Find restaurants delivering right now, near you',
     headlineTitle: 'Tuck into a takeaway today',
+    streetNumberLabel: 'Location needs to be more specific',
     errors: {
         ADDRESS_EMPTY: 'Please enter a location',
         NO_SUGGESTION_FOUND: 'No suggestions found',

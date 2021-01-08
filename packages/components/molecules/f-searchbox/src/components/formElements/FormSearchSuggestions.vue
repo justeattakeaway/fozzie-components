@@ -14,6 +14,7 @@
         <div :class="$style['c-search-poweredByGoogle']">
             <img
                 :src="poweredByGoogle"
+                alt=""
                 data-test-id="poweredByGoogle">
         </div>
     </div>
