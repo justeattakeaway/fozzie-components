@@ -139,7 +139,7 @@ export default {
     height: calc(100vh - #{$shell-top-offset}px);
 
     @include media('>=784px') {
-        box-shadow: 0 17px 40px rgba(0,0,0, 0.16);
+        box-shadow: 0 17px 40px rgba(0, 0, 0, 0.16);
         top: 62px;
         max-height: 400px;
         height: auto;
