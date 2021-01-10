@@ -17,7 +17,7 @@ commands:
   install_node_dependencies:
     description: Installs the node dependencies
     steps:
-      - run: yarn install
+      - run: yarn install --freeze-lockfile
 
   build_packages:
     description: Locally builds all packages in the monorepo
@@ -140,11 +140,11 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-              - yarn-packages-{{ .Branch }}-test3-{{ checksum "yarn.lock" }}
+              - yarn-packages-{{ .Branch }}-test4-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - save_cache:
           name: Save Yarn Package Cache
-          key: yarn-packages-{{ .Branch }}-test3-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ .Branch }}-test4-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
             - node_modules
@@ -162,7 +162,7 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ .Branch }}-test3-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}-test4-{{ checksum "yarn.lock" }}
       - build_packages
     
   linting:
@@ -175,7 +175,7 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ .Branch }}-test3-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}-test4-{{ checksum "yarn.lock" }}
       - run: # Lint packages
           name: Run Lint Tasks on Packages
           command: yarn lint
@@ -190,7 +190,7 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ .Branch }}-test3-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}-test4-{{ checksum "yarn.lock" }}
       - run: # Run Tests
           name: Run Unit / Integration Tests
           command: yarn test
@@ -221,7 +221,7 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ .Branch }}-test3-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}-test4-{{ checksum "yarn.lock" }}
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
@@ -248,7 +248,7 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ .Branch }}-test3-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}-test4-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - build_packages
       - run:
