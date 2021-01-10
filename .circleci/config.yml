@@ -162,7 +162,7 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .BuildNum }}-{{ checksum "yarn.lock" }}
       - build_packages
     
   linting:
