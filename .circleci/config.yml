@@ -140,34 +140,14 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-              - yarn-packages-{{ .Branch }}-test7-{{ checksum "yarn.lock" }}
+              - yarn-packages-{{ .Branch }}-test8-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - save_cache:
           name: Save Yarn Package Cache
-          key: yarn-packages-{{ .Branch }}-test7-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ .Branch }}-test8-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
             - node_modules
-            - packages/components/atoms/f-button/node_modules
-            - packages/components/atoms/f-error-message/node_modules
-            - packages/components/atoms/f-form-field/node_modules
-            - packages/components/molecules/f-alert/node_modules
-            - packages/components/molecules/f-mega-modal/node_modules
-            - packages/components/molecules/f-searchbox/node_modules
-            - packages/components/molecules/f-user-message/node_modules
-            - packages/components/organisms/f-checkout/node_modules
-            - packages/components/organisms/f-content-cards/node_modules
-            - packages/components/organisms/f-footer/node_modules
-            - packages/components/organisms/f-header/node_modules
-            - packages/components/organisms/f-registration/node_modules
-            - packages/services/f-development-context/node_modules
-            -  packages/services/f-development-context/node_modules
-            -  packages/services/f-globalisation/node_modules
-            -  packages/services/f-metadata/node_modules
-            -  packages/services/f-services/node_modules
-            -  packages/storybook/node_modules
-            -  packages/tools/f-vue-icons/node_modules
-            -  packages/tools/f-generator-component/node_modules
       - run: # Run PR Checks
           name: Run PR Checks
           command: yarn danger ci
@@ -182,7 +162,8 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ .Branch }}-test7-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}-test8-{{ checksum "yarn.lock" }}
+      - install_node_dependencies
       - build_packages
     
   linting:
@@ -195,7 +176,8 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ .Branch }}-test7-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}-test8-{{ checksum "yarn.lock" }}
+      - install_node_dependencies
       - run: # Lint packages
           name: Run Lint Tasks on Packages
           command: yarn lint
@@ -210,7 +192,8 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ .Branch }}-test7-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}-test8-{{ checksum "yarn.lock" }}
+      - install_node_dependencies
       - run: # Run Tests
           name: Run Unit / Integration Tests
           command: yarn test
@@ -230,6 +213,11 @@ jobs:
       - run: # Run Component UI Tests
           name: Run WebDriverIO Component / Accessibility Tests
           command: yarn test-component-ci:chrome
+      - save_cache:
+          name: Save Axe violations Folder
+          key: axe-violations-{{ .Branch }}-{{ .BuildNum }}
+          paths:
+            - axe-violations
 
   bundlewatch:
     executor: node
@@ -241,7 +229,8 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ .Branch }}-test7-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}-test8-{{ checksum "yarn.lock" }}
+      - install_node_dependencies
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
@@ -253,6 +242,10 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
+      - restore_cache:
+          name: Restore Axe Violations Folder
+          keys:
+            - axe-violations-{{ .Branch }}-{{ .BuildNum }}
       - store_artifacts:
           path: axe-violations/
       - slack_notify_fail
@@ -268,7 +261,7 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ .Branch }}-test7-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}-test8-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - build_packages
       - run:
