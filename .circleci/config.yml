@@ -157,6 +157,11 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - build_packages
     
   linting:
@@ -165,6 +170,11 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run: # Lint packages
           name: Run Lint Tasks on Packages
           command: yarn lint
@@ -175,6 +185,11 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run: # Run Tests
           name: Run Unit / Integration Tests
           command: yarn test
@@ -201,6 +216,11 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
@@ -211,6 +231,7 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
       - store_artifacts:
           path: axe-violations/
       - slack_notify_fail
