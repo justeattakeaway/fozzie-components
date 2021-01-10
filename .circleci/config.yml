@@ -266,7 +266,7 @@ workflows:
           filters:
             branches:
               ignore: 'gh-pages'
-      - test:
+      - tests:
           context: web-core
           requires:
             - build
@@ -276,7 +276,7 @@ workflows:
       - reporting:
           context: web-core
           requires:
-            - test
+            - tests
           filters:
             branches:
               ignore: 'gh-pages'
