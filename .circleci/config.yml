@@ -146,6 +146,7 @@ jobs:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
+            - ~/.cache/yarn
             - node_modules
       - run: # Run PR Checks
           name: Run PR Checks
