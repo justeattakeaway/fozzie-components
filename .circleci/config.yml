@@ -1,11 +1,3 @@
-# version: 2.1 # use CircleCI 2.1
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2.1
-orbs:
-  slack: circleci/slack@4.1.3
-
 commands:
   set_deploy_key:
     description: Sets the ssh key for project access
@@ -235,26 +227,6 @@ jobs:
       - slack_notify_fail
       - slack_notify_success
 
-  # Stopping until Circle CI credit issue is resolved
-  # npm-publish:
-  #   executor: node
-  #   environment:
-  #     # required to prevent ENOMEM errors
-  #     LERNA_ARGS: --concurrency 1
-  #   steps:
-  #     - checkout
-  #     - restore_cache:
-  #         name: Restore Yarn Package Cache
-  #         keys:
-  #           - yarn-packages-{{ checksum "yarn.lock" }}
-  #     - install_node_dependencies
-  #     - run:
-  #         name: authenticate with npm
-  #         command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
-  #     - run:
-  #         name: npm publish
-  #         command: npm publish
-
 workflows:
   version: 2
 
@@ -279,7 +251,7 @@ workflows:
           filters:
             branches:
               ignore: 'gh-pages'
-       - linting:
+      - linting:
           context: web-core
           requires:
             - set_up
@@ -300,15 +272,6 @@ workflows:
           filters:
             branches:
               ignore: 'gh-pages'
-
-  # Stopping until Circle CI credit issue is resolved
-  # npm-publish:
-  #   jobs:
-  #     - npm-publish:
-  #         context: web-core
-  #         filters:
-  #           branches:
-  #             only: 'master'
 
   deploy-storybook:
     jobs:
