@@ -147,7 +147,6 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-            - ~/.cache/yarn
       - run: # Run PR Checks
           name: Run PR Checks
           command: yarn danger ci
@@ -162,7 +161,7 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}-test-{{ checksum "yarn.lock" }}
       - build_packages
     
   linting:
