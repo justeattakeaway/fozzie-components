@@ -147,7 +147,6 @@ jobs:
           key: yarn-packages-{{ .Branch }}-test4-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
-            - node_modules
       - run: # Run PR Checks
           name: Run PR Checks
           command: yarn danger ci
