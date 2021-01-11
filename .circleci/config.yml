@@ -158,7 +158,7 @@ jobs:
     executor: node
     environment:
       # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
+      LERNA_ARGS: --concurrency 2
     steps: # a collection of executable commands
       - restore_cache:
           name: Restore Working Directory Cache
@@ -175,7 +175,7 @@ jobs:
     executor: node
     environment:
       # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
+      LERNA_ARGS: --concurrency 2
     steps: # a collection of executable commands
       - restore_cache:
           name: Restore Working Directory + Bundles Cache
@@ -237,8 +237,10 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 2
     steps: # a collection of executable commands
-      - attach_workspace:
-          at: ~/project
+      - restore_cache:
+          name: Restore Working Directory + Bundles Cache
+          keys:
+              - working-directory-dist{{ .Branch }}-{{ .Revision }}
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
