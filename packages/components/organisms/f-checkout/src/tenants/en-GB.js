@@ -28,15 +28,6 @@ const messages = {
         postcode: {
             requiredError: 'Please enter your full UK postcode',
             invalidCharError: 'This doesn\'t look like a UK postcode, can you enter it again please?'
-        },
-        guestFirstName: {
-            requiredError: 'Please enter your first name'
-        },
-        guestLastName: {
-            requiredError: 'Please enter your last name'
-        },
-        guestEmail: {
-            invalidError: 'Please enter a valid email address',
         }
     },
 
@@ -61,7 +52,22 @@ const messages = {
 
     allergyText: 'If you or someone you’re ordering for has a food allergy or intolerance, click here',
 
-    switchUserText: 'Not {name}? Click here.'
+    switchUserText: 'Not {name}? Click here.',
+
+    termsAndConditions: {
+        text1: 'By placing an order you agree to our ',
+        text2: ' Please read our Privacy Policy ',
+        text3: ' and ',
+
+        termsAndConditionsLinkText: 'Terms and Conditions.',
+        termsAndConditionsLinkUrl: 'https://www.just-eat.co.uk/termsandconditions',
+
+        privacyPolicyLinkText: 'Privacy Policy',
+        privacyPolicyLinkUrl: 'https://www.just-eat.co.uk/privacypolicy',
+
+        cookiePolicyLinkText: 'Cookie Policy.',
+        cookiePolicyLinkUrl: 'https://www.just-eat.co.uk/cookies-policy'
+    }
 
 };
 

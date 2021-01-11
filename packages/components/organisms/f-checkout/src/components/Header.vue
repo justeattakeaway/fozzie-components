@@ -1,5 +1,5 @@
 <template>
-    <div data-test-id='header-component'>
+    <div data-test-id='header-component' :class="$style['c-header']">
         <div data-test-id='guest-header' v-if="isGuest">
             <h2 :class="$style['c-header-title']">{{ $t('guestHeader') }}</h2>
             <f-button
@@ -20,8 +20,8 @@
             <p :class="$style['c-header-confirmation']">{{ $t('guestDeliveryHeader') }}</p>
         </div>
 
-        <div data-test-id='user-header' :class="$style['c-header']" v-else>
-            <h2>{{ title }}</h2>
+        <div data-test-id='user-header' v-else>
+            <h2 data-test-id='user-title'>{{ title }}</h2>
             <p
                 :class="[
                     $style['c-checkout-link']
@@ -61,7 +61,7 @@ export default {
         loginUrl: {
             type: String,
             required: true
-        },
+        }
     },
 
     computed: {

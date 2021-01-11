@@ -24,7 +24,7 @@
                 :loginUrl="loginUrl"/>
 
             <form
-                type="post"
+                method="post"
                 :class="$style['c-checkout-form']"
                 @submit.prevent="onFormSubmit">
 
@@ -69,7 +69,12 @@
                     {{ $t('buttonText') }}
                 </f-button>
             </form>
+
+            <terms-and-conditions
+                v-if="isGuest"
+                :class="$style['c-checkout-termsAndConditions']"/>
         </card>
+
     </div>
 </template>
 
@@ -97,6 +102,7 @@ import FormSelector from './Selector.vue';
 import GuestBlock from './Guest.vue';
 import CheckoutHeader from './Header.vue';
 import UserNote from './UserNote.vue';
+import TermsAndConditions from './TermsAndConditions.vue';
 
 import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP } from '../constants';
 import tenantConfigs from '../tenants';
@@ -117,7 +123,8 @@ export default {
         FormSelector,
         GuestBlock,
         CheckoutHeader,
-        UserNote
+        UserNote,
+        TermsAndConditions
     },
 
     mixins: [validationMixin, VueGlobalisationMixin],
@@ -461,7 +468,7 @@ export default {
 
 <style lang="scss" module>
 $line-height                              : 16px;
-$checkout-width                           : 596px;
+$checkout-width                           : 460px;
 $checkout-padding                         : spacing(x5) 100px;
 
 .c-checkout {
@@ -469,10 +476,11 @@ $checkout-padding                         : spacing(x5) 100px;
     font-family: $font-family-base;
     color: $color-text;
     font-weight: $font-weight-base;
+    position: relative;
 
     .c-card--dimensions {
-        width: $checkout-width;
-        padding: $checkout-padding;
+        padding-top: spacing(x7);
+        padding-bottom: spacing(x6);
     }
 
     .c-checkout-form {
@@ -490,6 +498,11 @@ $checkout-padding                         : spacing(x5) 100px;
 
     .c-checkout-submitButton {
         margin: spacing(x4) 0 spacing(x0.5);
+    }
+
+    .c-checkout-termsAndConditions {
+        width: Calc($checkout-width - 2px);
+        // bottom: spacing(x10);
     }
 }
 </style>
