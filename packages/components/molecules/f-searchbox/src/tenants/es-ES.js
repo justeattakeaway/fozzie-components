@@ -5,6 +5,7 @@ const copy = {
     headlineSubtitle: 'Comida a domicilio online cerca de ti',
     headlineTitle: 'Pide lo que te pida el cuerpo',
     geoTip: 'Trova la mia posizione',
+    streetNumberLabel: 'Por favor, indícanos el número de la calle',
     errors: {
         ADD_STREET: 'Por favor introduce una calle',
         ADDRESS_EMPTY: 'Por favor introduce una dirección para que podamos llevarte tu pedido',
