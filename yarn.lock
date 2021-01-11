@@ -1627,11 +1627,6 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
-"@justeat/f-button@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.4.0.tgz#3abe0c470eaa0fc90ab9d03a4ffa86464d84f926"
-  integrity sha512-gi+BSTUE5SVNuDRvmMScsnwTRqLoLJZ7YqH5C6pPwOrXCIcsuexIBT/dA/o6TD1QEgC2fPk7QYL0oWcb/8nNqA==
-
 "@justeat/f-card@0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-0.7.0.tgz#3179bcee050625c4391a4e97d39884a660feed8f"
@@ -1652,21 +1647,6 @@
   integrity sha512-1XNBr7loJ6o6TlWZxSx38jSZld4Q9zAlH+waNe0TXCdf3AgsR+pe5IHCQYgkmdHCXhHq9hLZW6NXZnz42UnORg==
   dependencies:
     qwery "4.0.0"
-
-"@justeat/f-error-message@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-0.3.0.tgz#53645fbfd34a352dbd348670cac9dd483d6f0c11"
-  integrity sha512-zO9f6kIgnqwh+/3IFobdT2g6Tvs0wbUpcs8oATel6zMkm687VwgTnK1XuRAQUIDPiEmyISrDV0HZQXjnLJ7G0Q==
-  dependencies:
-    "@justeat/f-vue-icons" "1.10.0"
-
-"@justeat/f-form-field@1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-1.4.0.tgz#4f5151996e2f80419bc74f6b126741161db7128a"
-  integrity sha512-LLiZ8McS9i8BTWrzujL0lWru7TlqDPp2JWjW3eUFCW8nUEbEIoDV5HJzQ1M21oLY7wSr0OH6wCqfNUfnRI5q/Q==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeat/f-vue-icons" "1.11.0"
 
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
