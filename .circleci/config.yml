@@ -151,14 +151,13 @@ jobs:
           command: yarn danger ci
                     
   lintingAndBuild:
-    - attach_workspace:
-      at: ~/repo
     executor: node
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
-      - checkout # special step to check out source code to working directory
+      - attach_workspace:
+        at: ~/repo
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -175,14 +174,13 @@ jobs:
           command: yarn lint
     
   tests:
-    - attach_workspace:
-      at: ~/repo
     executor: node
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
-      - checkout # special step to check out source code to working directory
+      - attach_workspace:
+        at: ~/repo
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -214,14 +212,13 @@ jobs:
             - axe-violations
 
   bundlewatch:
-    - attach_workspace:
-      at: ~/repo
     executor: node
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
-      - checkout # special step to check out source code to working directory
+      - attach_workspace:
+        at: ~/repo
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -232,14 +229,13 @@ jobs:
           command: yarn bundlewatch
 
   reporting:
-    - attach_workspace:
-      at: ~/repo
     executor: node
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
-      - checkout # special step to check out source code to working directory
+      - attach_workspace:
+        at: ~/repo
       - restore_cache:
           name: Restore Axe Violations Folder
           keys:
