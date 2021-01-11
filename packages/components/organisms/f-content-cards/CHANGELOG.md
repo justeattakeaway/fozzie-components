@@ -4,15 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (add to next release)
+v3.0.0-beta.1
 ------------------------------
-*December 30, 2020*
+*January 05, 2021*
 
 ### Fixed
 - Old references to font-size keys updated.
 ### Changed
 - Updated config for latest `sass-loader`.
 - Switches import in `common.scss` in line with fozzie v5-beta.
+- Updated the content cards component to be a a renderless scoped slot component to reduce implementation complexity
+- Removed the grouping, this is now done by flex if needed in consuming application.
+- Updated tests to reflect change in content cards
+- Changed the index.js file, no longer default installs component, instead now exports all components as type of library
 
 
 v2.2.0
