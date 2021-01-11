@@ -184,7 +184,7 @@ jobs:
     executor: node
     environment:
       # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 3
+      LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - attach_workspace:
           at: ~/project
@@ -196,7 +196,7 @@ jobs:
     executor: node
     environment:
       # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 3
+      LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - attach_workspace:
           at: ~/project
