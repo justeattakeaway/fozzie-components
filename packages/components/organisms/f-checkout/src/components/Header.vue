@@ -2,14 +2,13 @@
     <div data-test-id='header-component' :class="$style['c-header']">
         <div data-test-id='guest-header' v-if="isGuest">
             <h2 :class="$style['c-header-title']">{{ $t('guestHeader') }}</h2>
-            <f-button
-                button-type="primary"
-                button-size="large"
-                is-full-width
+            <a
+                :href="loginUrl"
                 data-test-id="guest-login-button"
-                :class="$style['c-header-loginButton']">
+                :class="$style['c-header-loginButton']"
+                @click="onVisitLoginPage">
                 {{ $t('loginButtonText') }}
-            </f-button>
+            </a>
 
             <div
                 :class="$style['c-header-option']">
@@ -23,9 +22,7 @@
         <div data-test-id='user-header' v-else>
             <h2 data-test-id='user-title'>{{ title }}</h2>
             <p
-                :class="[
-                    $style['c-checkout-link']
-                ]">
+                :class="$style['c-header-loginLink']">
                 <a
                     :href="loginUrl"
                     data-test-id="switch-user-link"
@@ -38,15 +35,9 @@
 </template>
 
 <script>
-import FButton from '@justeat/f-button';
-import '@justeat/f-button/dist/f-button.css';
 import EventNames from '../event-names';
 
-// import { mapState } from 'vuex';
-
 export default {
-    components: { FButton },
-
     props: {
         isGuest: {
             type: Boolean,
@@ -80,65 +71,91 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-header {
     text-align: center;
 }
 
 .c-header-title {
-    margin-bottom: spacing();
-    @include font-size('heading-m');
+    margin-top: 0;
+    margin-bottom: spacing(x0.5);
+    @include font-size('heading-s');
 }
 
 .c-header-loginButton {
-    margin: spacing(x3) 0;
+    display: inline-block;
+    width: 100%;
+    background-color: $orange;
+    padding: spacing(x2) 0;
+    margin-top: spacing(x2);
+    border: 1px solid transparent;
+    border-radius: $border-radius;
+    text-align: center;
+    font-weight: $font-weight-bold;
+    @include font-size('body-l');
+    text-decoration: none;
+    color: $white;
+    cursor: pointer;
+
+    &:hover,
+    &:active,
+    &:focus {
+        color: $white;
+    }
+
+    &:hover {
+        background-color: $orange--dark;
+    }
+
+    &:active {
+        background-color: $orange--darkest;
+    }
 }
 
 .c-header-confirmation {
-    // margin-top: -16px;
-    margin-bottom: spacing(x2);
+    margin-top: spacing(x0.5);
+    margin-bottom: 0;
     @include font-size('body-s');
+    font-weight: $font-weight-bold;
     color: $grey--dark;
+
 }
 
 .c-header-option {
     display: block;
-    margin-top: spacing(x3);
-    margin-bottom: 20px;
+    margin-top: spacing(x2);
+    margin-bottom: spacing(x2);
     text-transform: uppercase;
-    text-align: center;
-    // font-weight: 300;
+    font-weight: 300;
     overflow: hidden;
-    white-space: nowrap;
+
+    > span {
+        @include font-size('caption');
+        position: relative;
+        display: inline-block;
+
+        &::before {
+            right: 100%;
+            margin-right: 60px;
+        }
+
+        &::after {
+            left: 100%;
+            margin-left: 60px;
+        }
+
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 9999px;
+            height: 1px;
+            background: $grey--mid;
+        }
+    }
 }
 
-.c-header-option > span {
-    // @include font-size('caption');
-    position: relative;
-    display: inline-block;
-}
-
-.c-header-option > span:before,
-.c-header-option > span:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 9999px;
-    height: 1px;
-    background: $grey--mid;
-}
-
-.c-header-option > span:before {
-    right: 100%;
-    margin-right: 60px;
-}
-
-.c-header-option > span:after {
-    left: 100%;
-    margin-left: 60px;
-}
-
-.c-checkout-link {
+.c-header-loginLink {
     text-align: center;
 
     a {
@@ -147,7 +164,7 @@ export default {
 
         &:hover,
         &:focus {
-        text-decoration: underline;
+            text-decoration: underline;
         }
     }
 }

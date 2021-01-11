@@ -44,7 +44,7 @@ const messages = {
 
     guestHeader: 'How do you want to continue?',
 
-    guestTitle: 'Checkout as guest',
+    guestTitle: 'Checkout as a guest',
 
     guestOption: 'or',
 
@@ -56,16 +56,16 @@ const messages = {
 
     termsAndConditions: {
         text1: 'By placing an order you agree to our ',
-        text2: ' Please read our Privacy Policy ',
+        text2: '. Please read our Privacy Policy ',
         text3: ' and ',
 
-        termsAndConditionsLinkText: 'Terms and Conditions.',
+        termsAndConditionsLinkText: 'Terms and Conditions',
         termsAndConditionsLinkUrl: 'https://www.just-eat.co.uk/termsandconditions',
 
         privacyPolicyLinkText: 'Privacy Policy',
         privacyPolicyLinkUrl: 'https://www.just-eat.co.uk/privacypolicy',
 
-        cookiePolicyLinkText: 'Cookie Policy.',
+        cookiePolicyLinkText: 'Cookie Policy',
         cookiePolicyLinkUrl: 'https://www.just-eat.co.uk/cookies-policy'
     }
 

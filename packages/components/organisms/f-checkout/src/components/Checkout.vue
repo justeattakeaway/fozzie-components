@@ -467,8 +467,8 @@ export default {
 </script>
 
 <style lang="scss" module>
-$line-height                              : 16px;
 $checkout-width                           : 460px;
+$checkout-width                           : 596px;
 $checkout-padding                         : spacing(x5) 100px;
 
 .c-checkout {
@@ -476,11 +476,10 @@ $checkout-padding                         : spacing(x5) 100px;
     font-family: $font-family-base;
     color: $color-text;
     font-weight: $font-weight-base;
-    position: relative;
 
     .c-card--dimensions {
-        padding-top: spacing(x7);
-        padding-bottom: spacing(x6);
+        width: $checkout-width;
+        padding: $checkout-padding;
     }
 
     .c-checkout-form {
@@ -501,8 +500,7 @@ $checkout-padding                         : spacing(x5) 100px;
     }
 
     .c-checkout-termsAndConditions {
-        width: Calc($checkout-width - 2px);
-        // bottom: spacing(x10);
+        width: Calc($checkout-width - 2px); // -2px for border width
     }
 }
 </style>
