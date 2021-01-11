@@ -129,7 +129,16 @@ export default {
             commit(SET_AUTO_COMPLETE_AVAILABILITY, payload);
         },
 
+        /**
+         * Attempt to make a call to Loqate's API once the min criteria has been reached.
+         *
+         * @param commit
+         * @param payload
+         * @returns {Promise.<void>}
+         */
         async getMatchedAreaAddressResults ({ commit }, payload) {
+            if (!fullAddressService.hasMinimumAddressCriteria(payload.address)) return;
+
             const fullAddressResponse = await fullAddressService.getPartialAddressSearch(payload);
 
             if (fullAddressResponse) {

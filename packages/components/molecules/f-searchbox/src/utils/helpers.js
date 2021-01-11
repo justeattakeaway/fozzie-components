@@ -135,6 +135,12 @@ const safeParseJson = string => {
     }
 };
 
+/**
+ * Remove whitespace from a string.
+ *
+ * @param {string} item string
+ */
+const removeWhitespace = item => item.trim().replace(/\s/g, '');
 
 
 export {
@@ -146,5 +152,6 @@ export {
     getLastLocation,
     generatePostForm,
     setJeCookie,
-    safeParseJson
+    safeParseJson,
+    removeWhitespace
 };
