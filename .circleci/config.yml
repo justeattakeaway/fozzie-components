@@ -127,10 +127,8 @@ executors:
       - image: circleci/node:12.18.4-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
 
 jobs:
-
-  working_directory: ~/repo
-
   set_up:
+    working_directory: ~/repo
     executor: node
     environment:
       # required to prevent ENOMEM errors
@@ -153,6 +151,8 @@ jobs:
           command: yarn danger ci
                     
   lintingAndBuild:
+    - attach_workspace:
+      at: ~/repo
     executor: node
     environment:
       # required to prevent ENOMEM errors
@@ -166,11 +166,17 @@ jobs:
             - build-dist-{{ .Branch }}-{{ .BuildNum }}
       - install_node_dependencies
       - build_packages
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - packages/*/*/*/dist
       - run: # Lint packages
           name: Run Lint Tasks on Packages
           command: yarn lint
     
   tests:
+    - attach_workspace:
+      at: ~/repo
     executor: node
     environment:
       # required to prevent ENOMEM errors
@@ -208,6 +214,8 @@ jobs:
             - axe-violations
 
   bundlewatch:
+    - attach_workspace:
+      at: ~/repo
     executor: node
     environment:
       # required to prevent ENOMEM errors
@@ -224,6 +232,8 @@ jobs:
           command: yarn bundlewatch
 
   reporting:
+    - attach_workspace:
+      at: ~/repo
     executor: node
     environment:
       # required to prevent ENOMEM errors
@@ -240,6 +250,7 @@ jobs:
       - slack_notify_success
 
   deploy-storybook:
+    working_directory: ~/repo
     executor: node
     environment:
       # required to prevent ENOMEM errors
