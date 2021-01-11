@@ -167,7 +167,7 @@ jobs:
       - build_packages
       - save_cache:
         name: Save Yarn Package Cache
-        key: - build-dist-{{ .Branch }}-{{ .BuildNum }}
+        key: build-dist-{{ .Branch }}-{{ .BuildNum }}
         paths:
           - packages/components/atoms/f-button/dist
     
