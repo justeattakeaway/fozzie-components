@@ -12,6 +12,7 @@ Latest (add to next release)
 - Updated config for latest `sass-loader`.
 - Switches import in `common.scss` in line with fozzie v5-beta.
 
+
 v0.4.0
 ------------------------------
 *December 7, 2020*
