@@ -282,13 +282,6 @@ workflows:
           filters:
             branches:
               ignore: 'gh-pages'
-      - lintingAndBuild:
-          context: web-core
-          requires:
-            - set_up
-          filters:
-            branches:
-              ignore: 'gh-pages'
       - tests:
           context: web-core
           requires:
