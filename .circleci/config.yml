@@ -158,7 +158,7 @@ jobs:
     executor: node
     environment:
       # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
+      LERNA_ARGS: --concurrency 2
     steps: # a collection of executable commands
       - attach_workspace:
           at: ~/project
@@ -171,17 +171,26 @@ jobs:
           paths:
             - .
     
-  tests:
+  unit_tests:
     executor: node
     environment:
       # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
+      LERNA_ARGS: --concurrency 2
     steps: # a collection of executable commands
       - attach_workspace:
           at: ~/project
       - run: # Run Tests
           name: Run Unit / Integration Tests
           command: yarn test
+     
+  component_tests:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 2
+    steps: # a collection of executable commands
+      - attach_workspace:
+          at: ~/project
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global
@@ -272,7 +281,14 @@ workflows:
           filters:
             branches:
               ignore: 'gh-pages'
-      - tests:
+      - unit_tests:
+          context: web-core
+          requires:
+            - lintingAndBuild
+          filters:
+            branches:
+              ignore: 'gh-pages'
+      - component_tests:
           context: web-core
           requires:
             - lintingAndBuild
