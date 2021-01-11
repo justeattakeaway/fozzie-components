@@ -298,7 +298,7 @@ workflows:
       - reporting:
           context: web-core
           requires:
-            - tests
+            - component_tests
           filters:
             branches:
               ignore: 'gh-pages'
