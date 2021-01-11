@@ -164,7 +164,7 @@ jobs:
           at: ~/project
       - build_packages
       - persist_to_workspace:
-          root: ~/project-postbuild
+          root: ~/project
           paths:
             - .
 
@@ -175,7 +175,7 @@ jobs:
       LERNA_ARGS: --concurrency 2
     steps: # a collection of executable commands
       - attach_workspace:
-          at: ~/project--postbuild
+          at: ~/project
       - run: # Lint packages
           name: Run Lint Tasks on Packages
           command: yarn lint
@@ -187,7 +187,7 @@ jobs:
       LERNA_ARGS: --concurrency 2
     steps: # a collection of executable commands
       - attach_workspace:
-          at: ~/project-postbuild
+          at: ~/project
       - run: # Run Tests
           name: Run Unit / Integration Tests
           command: yarn test
@@ -199,7 +199,7 @@ jobs:
       LERNA_ARGS: --concurrency 2
     steps: # a collection of executable commands
       - attach_workspace:
-          at: ~/project-postbuild
+          at: ~/project
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global
@@ -217,7 +217,7 @@ jobs:
           name: Run WebDriverIO Component / Accessibility Tests
           command: yarn test-component-ci:chrome
       - persist_to_workspace:
-          root: ~/project-posttests
+          root: ~/project
           paths:
             - .
 
@@ -228,7 +228,7 @@ jobs:
       LERNA_ARGS: --concurrency 2
     steps: # a collection of executable commands
       - attach_workspace:
-          at: ~/project-postbuild
+          at: ~/project
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
@@ -240,7 +240,7 @@ jobs:
       LERNA_ARGS: --concurrency 2
     steps: # a collection of executable commands
       - attach_workspace:
-          at: ~/project-posttests
+          at: ~/project
       - store_artifacts:
           path: axe-violations/
       - slack_notify_fail
