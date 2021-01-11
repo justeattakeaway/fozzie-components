@@ -1,12 +1,8 @@
 /* eslint indent: ["error", 4, {ignoredNodes: ["TemplateLiteral > *"]}] */
-import { shallowMount, mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import Vue from 'vue';
 import initialiseMetadata from '@justeat/f-metadata';
-import ContentCards, { CARDSOURCE_METADATA, CARDSOURCE_CUSTOM } from '../ContentCards.vue';
-import cardTemplates from '../cardTemplates';
-import CardContainer from '../cardTemplates/CardContainer.vue';
-import HomePromotionCard1 from '../cardTemplates/homePromotionCard/HomePromotionCard1.vue';
-import HomePromotionCard2 from '../cardTemplates/homePromotionCard/HomePromotionCard2.vue';
+import ContentCards, { CARDSOURCE_METADATA, CARDSOURCE_CUSTOM } from '../ContentCards';
 
 jest.mock('@justeat/f-metadata');
 
@@ -42,19 +38,6 @@ const createCard = type => ({
 
 const createMetadataCards = cardTypes => cardTypes.map(type => createCard(type));
 
-const createMetadataCardsGrouped = cardTypes => cardTypes.reduce((acc, type) => {
-    const card = createCard(type);
-
-    if (type === 'Header_Card' || type === 'Terms_And_Conditions_Card') {
-        return [...acc, { ...card, cards: [] }];
-    }
-    if (!acc.length) {
-        return [{ title: '', cards: [card] }];
-    }
-    acc[acc.length - 1].cards.push(card);
-    return acc;
-}, []);
-
 beforeEach(() => {
     jest.resetAllMocks();
     initialiseMetadata.mockResolvedValue(metadataDispatcher);
@@ -62,21 +45,6 @@ beforeEach(() => {
 
 describe('ContentCards', () => {
     allure.feature('Content Cards');
-    it('should emit a custom content callback when mounted', () => {
-        // Arrange & Act
-        const instance = shallowMount(ContentCards, {
-            propsData: {
-                apiKey,
-                userId
-            }
-        });
-
-        // Assert
-        expect(instance.emitted()['custom-cards-callback']).toBeTruthy(); // Correct event emitted
-        expect(instance.emitted()['custom-cards-callback'].length).toBe(1); // Once
-        expect(instance.emitted()['custom-cards-callback'][0].length).toBe(1); // With one argument
-        expect(instance.emitted()['custom-cards-callback'][0][0]).toBeInstanceOf(Function); // That is a callback
-    });
 
     it('should call intitialiseMetadata when mounted', () => {
         // Arrange & Act
@@ -84,6 +52,9 @@ describe('ContentCards', () => {
             propsData: {
                 apiKey,
                 userId
+            },
+            scopedSlots: {
+                default: '<div></div>'
             }
         });
 
@@ -105,6 +76,9 @@ describe('ContentCards', () => {
             propsData: {
                 apiKey,
                 userId
+            },
+            scopedSlots: {
+                default: '<div></div>'
             }
         });
         await instance.vm.$nextTick();
@@ -115,7 +89,7 @@ describe('ContentCards', () => {
         expect(instance.emitted()['on-error'][0]).toEqual([error]);
     });
 
-    it('should format and display allowed card types', async () => {
+    it('should format and provide allowed card types', async () => {
         // Arrange
         const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
         const cards = createMetadataCards(cardTypes);
@@ -125,170 +99,79 @@ describe('ContentCards', () => {
             propsData: {
                 apiKey,
                 userId
+            },
+            scopedSlots: {
+                default: `
+                    <div slot-scope="{ cards }">
+                        <div :data-test-id="card.type" v-for="card in cards"></div>
+                    </div>
+                `
             }
         });
         instance.vm.metadataContentCards(cards);
         await instance.vm.$nextTick();
 
         // Assert
-        expect(instance.findAllComponents(cardTemplates.PromotionCard).length).toBe(2);
-        expect(instance.findAllComponents(cardTemplates.PostOrderCard).length).toBe(1);
+        expect(instance.find('[data-test-id="Promotion_Card_1"]').exists()).toBe(true);
+        expect(instance.find('[data-test-id="Promotion_Card_2"]').exists()).toBe(true);
+        expect(instance.find('[data-test-id="Post_Order_Card_1"]').exists()).toBe(true);
     });
 
 
-    it('should format and display injected custom cards', async () => {
+    it('should format and provide passed custom cards', async () => {
         // Arrange
         const cardTypes = ['Post_Order_Card_1'];
-        const cards = createMetadataCards(cardTypes);
-
-        // Act
-        const instance = shallowMount(ContentCards, {
-            propsData: {
-                apiKey,
-                userId
-            }
-        });
-        instance.vm.customContentCards(cards);
-        await instance.vm.$nextTick();
-
-        // Assert
-        expect(instance.findAllComponents(cardTemplates.PostOrderCard).length).toBe(1);
-    });
-
-    it.each`
-            type                             | component
-            ${'Anniversary_Card_1'}          | ${'VoucherCard'}
-            ${'Voucher_Card_1'}              | ${'VoucherCard'}
-            ${'Restaurant_FTC_Offer_Card'}   | ${'FirstTimeCustomerCard'}
-            ${'Post_Order_Card_1'}           | ${'PostOrderCard'}
-            ${'Promotion_Card_1'}            | ${'PromotionCard'}
-            ${'Promotion_Card_2'}            | ${'PromotionCard'}
-            ${'Terms_And_Conditions_Card'}   | ${'TermsAndConditionsCard'}
-            ${'Terms_And_Conditions_Card_2'} | ${'TermsAndConditionsCard'}
-            ${'Home_Promotion_Card_1'}       | ${'HomePromotionCard1'}
-            ${'Home_Promotion_Card_2'}       | ${'HomePromotionCard2'}
-        `('should map `$type` card type to `$component` component', async ({ type, component }) => {
-        // Arrange
-        const cardTypes = [type];
-        const cards = createMetadataCards(cardTypes);
-
-        // Act
-        const instance = shallowMount(ContentCards, {
-            propsData: {
-                apiKey,
-                userId
-            }
-        });
-        instance.vm.metadataContentCards(cards);
-        await instance.vm.$nextTick();
-
-        // Assert
-        expect(instance.findAllComponents(cardTemplates[component]).length).toBe(1);
-    });
-
-    it('should not render invalid card types as components', async () => {
-        // Arrange
-        const cardTypes = ['INVALID'];
-        const cards = createMetadataCards(cardTypes);
+        const customCards = createMetadataCards(cardTypes);
 
         // Act
         const instance = shallowMount(ContentCards, {
             propsData: {
                 apiKey,
                 userId,
-                testId: 'empty-content-cards'
+                customCards
+            },
+            scopedSlots: {
+                default: `
+                    <div slot-scope="{ cards }">
+                        <div :data-test-id="card.type" v-for="card in cards"></div>
+                    </div>
+                `
             }
         });
-        instance.vm.metadataContentCards(cards);
+        instance.vm.metadataContentCards([]);
         await instance.vm.$nextTick();
 
+        console.log(instance.html());
+
         // Assert
-        expect(() => instance.get('[data-test-id="empty-content-cards"] *')).toThrowError();
+        expect(instance.find('[data-test-id="Post_Order_Card_1"]').exists()).toBe(true);
     });
 
     describe('loading state', () => {
-        it('should show a skeleton loading card before Metadata has initialised', async () => {
-            // Arrange
-            const { SkeletonLoader } = cardTemplates;
-
-            // Act
-            const instance = shallowMount(ContentCards, {
-                propsData: {
-                    apiKey,
-                    userId
-                }
-            });
-
-            // Assert
-            expect(instance.findComponent(SkeletonLoader).exists()).toBe(true);
-        });
-
-        it('should hide the skeleton loading card after Metadata has initialised', async () => {
+        it('should emit a "has-loaded" event when cards have loaded', async () => {
             // Arrange
             const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
             const cards = createMetadataCards(cardTypes);
-            const { SkeletonLoader } = cardTemplates;
 
             // Act
             const instance = shallowMount(ContentCards, {
                 propsData: {
                     apiKey,
                     userId
+                },
+                scopedSlots: {
+                    default: `
+                    <div slot-scope="{ cards }">
+                        <div :data-test-id="card.type" v-for="card in cards"></div>
+                    </div>
+                `
                 }
             });
             instance.vm.metadataContentCards(cards);
             await instance.vm.$nextTick();
 
             // Assert
-            expect(instance.findComponent(SkeletonLoader).exists()).toBe(false);
-        });
-
-        it('should NOT show a skeleton loading card whilst initialising Metadata if "showLoadingState" prop is false"', async () => {
-            // Arrange
-            const showLoadingState = false;
-            const { SkeletonLoader } = cardTemplates;
-
-            // Act
-            const instance = shallowMount(ContentCards, {
-                propsData: {
-                    apiKey,
-                    userId,
-                    showLoadingState
-                }
-            });
-
-            // Assert
-            expect(instance.findComponent(SkeletonLoader).exists()).toBe(false);
-        });
-
-        it('should default to "promo" skeleton loading card', () => {
-            // Assemble & Act
-            const instance = shallowMount(ContentCards, {
-                propsData: {
-                    apiKey,
-                    userId
-                }
-            });
-
-            // Assert
-            expect(instance.vm.$data.loadingCard).toEqual({ type: 'promo', count: 3 });
-        });
-
-        it('should request a "postOrder" skeleton loading card when all card types are "Post_Order_Card_1"', () => {
-            // Arrange
-            const enabledCardTypes = ['Post_Order_Card_1'];
-
-            // Act
-            const instance = shallowMount(ContentCards, {
-                propsData: {
-                    apiKey,
-                    userId,
-                    enabledCardTypes
-                }
-            });
-
-            // Assert
-            expect(instance.vm.$data.loadingCard).toEqual({ type: 'postOrder', count: 1 });
+            expect(instance.emitted()['has-loaded']).toBeTruthy();
         });
     });
 
@@ -302,6 +185,13 @@ describe('ContentCards', () => {
             propsData: {
                 apiKey,
                 userId
+            },
+            scopedSlots: {
+                default: `
+                    <div slot-scope="{ cards }">
+                        <div :data-test-id="card.type" v-for="card in cards"></div>
+                    </div>
+                `
             }
         });
         instance.vm.metadataContentCards(cards);
@@ -329,6 +219,13 @@ describe('ContentCards', () => {
                 },
                 stubs: {
                     PromotionCard
+                },
+                scopedSlots: {
+                    default: `
+                        <div slot-scope="{ cards }">
+                            <promotion-card v-for="(card, i) in cards" :key="i"></promotion-card>
+                        </div>
+                    `
                 }
             });
             const cardClickHandler = jest.spyOn(instance.vm._provided, 'emitCardClick');
@@ -579,60 +476,6 @@ describe('ContentCards', () => {
         });
     });
 
-    describe('when test id prop provided', () => {
-        const testId = 'foo';
-        let instance;
-
-        beforeEach(async () => {
-            // Arrange
-            const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
-            const cards = createMetadataCards(cardTypes);
-            initialiseMetadata.mockResolvedValue(metadataDispatcher);
-
-            // Act
-            instance = shallowMount(ContentCards, {
-                propsData: {
-                    apiKey,
-                    userId,
-                    testId
-                }
-            });
-            instance.vm.metadataContentCards(cards);
-            await instance.vm.$nextTick();
-        });
-
-        it('should generate test id attribute on content cards container', async () => {
-            // Assert
-            expect(instance.find(`[data-test-id=${testId}]`).exists()).toBeTruthy();
-        });
-
-        it('should generate test id attributes on child content cards components', async () => {
-            // Assert
-            expect(instance.find(`[data-test-id="ContentCard-${testId}-0"]`).exists()).toBeTruthy();
-            expect(instance.find(`[data-test-id="ContentCard-${testId}-1"]`).exists()).toBeTruthy();
-            expect(instance.find(`[data-test-id="ContentCard-${testId}-2"]`).exists()).toBeTruthy();
-        });
-    });
-
-    it('should not generate test id attribute on self or children when no test id provided', async () => {
-        // Arrange
-        const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
-        const cards = createMetadataCards(cardTypes);
-
-        // Act
-        const instance = shallowMount(ContentCards, {
-            propsData: {
-                apiKey,
-                userId
-            }
-        });
-        instance.vm.metadataContentCards(cards);
-        await instance.vm.$nextTick();
-
-        // Assert
-        expect(instance.find('[data-test-id]').exists()).toBeFalsy();
-    });
-
     describe('emitters', () => {
         const cards = createMetadataCards(['Post_Order_Card_1']);
 
@@ -642,6 +485,13 @@ describe('ContentCards', () => {
                 propsData: {
                     apiKey,
                     userId
+                },
+                scopedSlots: {
+                    default: `
+                        <div slot-scope="{ cards }">
+                            <div :data-test-id="card.type" v-for="card in cards"></div>
+                        </div>
+                    `
                 }
             });
 
@@ -673,184 +523,6 @@ describe('ContentCards', () => {
         });
     });
 
-    describe('when `cardLimit` prop is set', () => {
-        const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
-        const cards = createMetadataCards(cardTypes);
-
-        const mountWithArguments = async (cardLimit, ingestedCards = cards, enabledCardTypes = cardTypes) => {
-            const instance = mount(ContentCards, {
-                propsData: {
-                    apiKey,
-                    userId,
-                    cardLimit,
-                    enabledCardTypes
-                }
-            });
-            instance.vm.metadataContentCards(ingestedCards);
-            await instance.vm.$nextTick();
-            return instance;
-        };
-
-        it('should retain all cards if count is -1', async () => {
-            // Act
-            const component = await mountWithArguments(-1);
-
-            // Assert
-            const allCards = component.findComponent(ContentCards).findAllComponents(CardContainer);
-            expect(allCards).toHaveLength(cardTypes.length);
-        });
-
-        it('should limit cards by the given count', async () => {
-            // Act
-            const component = await mountWithArguments(2);
-
-            // Assert
-            const allCards = component.findComponent(ContentCards).findAllComponents(CardContainer);
-            expect(allCards).toHaveLength(2);
-        });
-
-        it('should apply card limits using enabledCardType order when limit is set to 1 - Correct card first', async () => {
-            // Arrange
-            const enabledCardTypes = ['Home_Promotion_Card_1', 'Home_Promotion_Card_2'];
-            const orderedCards = createMetadataCards(['Home_Promotion_Card_1', 'Home_Promotion_Card_2']);
-
-            // Act
-            const component = await mountWithArguments(1, orderedCards, enabledCardTypes);
-
-            // Assert
-            expect(component.findComponent(ContentCards).findAllComponents(HomePromotionCard1)).toHaveLength(1);
-            expect(component.findComponent(ContentCards).findAllComponents(HomePromotionCard2)).toHaveLength(1); // HPC2 is nested within HPC1
-        });
-
-        it('should apply card limits using enabledCardType order when limit is set to 1 - Correct card last', async () => {
-            // Arrange
-            const enabledCardTypes = ['Home_Promotion_Card_2', 'Home_Promotion_Card_1'];
-            const orderedCards = createMetadataCards(['Home_Promotion_Card_1', 'Home_Promotion_Card_2']);
-
-            // Act
-            const component = await mountWithArguments(1, orderedCards, enabledCardTypes);
-
-            // Assert
-            expect(component.findComponent(ContentCards).findAllComponents(HomePromotionCard1)).toHaveLength(0);
-            expect(component.findComponent(ContentCards).findAllComponents(HomePromotionCard2)).toHaveLength(1);
-        });
-    });
-
-    describe('when `groupCards` prop is set', () => {
-        it('should group cards by Header_Card or Terms_And_Conditions_Card', async () => {
-            // Arrange
-            const cardTypes = ['Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1'];
-            const cardsGrouped = createMetadataCardsGrouped(cardTypes);
-
-            // Act
-            const instance = shallowMount(ContentCards, {
-                propsData: {
-                    apiKey,
-                    userId,
-                    groupCards: true
-                }
-            });
-            instance.vm.metadataContentCardsGrouped(cardsGrouped);
-            await instance.vm.$nextTick();
-            const postOrderCards = instance.findAllComponents(cardTemplates.PostOrderCard);
-            const [, { id: groupId1, title: title1Text }, { id: groupId2, title: title2Text }] = cardsGrouped;
-            const title1 = instance.find(`[data-test-id="${1}_${groupId1}"]`);
-            const title2 = instance.find(`[data-test-id="${2}_${groupId2}"]`);
-
-            // Assert - one for each child
-            expect(postOrderCards).toHaveLength(5);
-            expect(title1.text()).toBe(title1Text);
-            expect(title2.text()).toBe(title2Text);
-        });
-
-        it('should emit an event with the grouped content card count of 3 when appboy is initialised', async () => {
-            // Arrange
-            const cardTypes = ['Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1'];
-            const cardsGrouped = createMetadataCardsGrouped(cardTypes);
-
-            // Act
-            const instance = shallowMount(ContentCards, {
-                propsData: {
-                    apiKey,
-                    userId,
-                    groupCards: true
-                }
-            });
-            instance.vm.metadataContentCardsGrouped(cardsGrouped);
-            await instance.vm.$nextTick();
-
-            // Assert
-            expect(instance.emitted('get-group-count')[0]).toEqual([3]);
-        });
-
-        it('should call logCardImpressions from f-metadata with data from all displayed cards including the header cards minus the groups with no ID', async () => {
-            // Arrange
-            const cardTypes = ['Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1'];
-            const cardsGrouped = createMetadataCardsGrouped(cardTypes);
-
-            // Act
-            const instance = shallowMount(ContentCards, {
-                propsData: {
-                    apiKey,
-                    userId,
-                    groupCards: true
-                }
-            });
-            instance.vm.metadataContentCardsGrouped(cardsGrouped);
-            await instance.vm.$nextTick();
-
-            const cardsReduced = cardsGrouped.reduce((acc, { cards, id: groupId }) => [...acc, ...[groupId, ...cards.map(({ id: cardId }) => cardId)]], []).filter(cardID => cardID !== undefined);
-
-            // Assert - Check to see all card Id's are present excluding cards with with no ID
-            expect(metadataDispatcher.logCardImpressions).toHaveBeenCalledWith(cardsReduced);
-        });
-
-        it('should call logCardImpressions from f-metadata ONCE and make sure the normal logCardImpressions from cards watcher is not being fired when the groupCards prop is set to true', async () => {
-            // Arrange
-            const cardTypes = ['Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1'];
-            const cardsGrouped = createMetadataCardsGrouped(cardTypes);
-
-            // Act
-            const instance = shallowMount(ContentCards, {
-                propsData: {
-                    apiKey,
-                    userId,
-                    groupCards: true
-                }
-            });
-            instance.vm.metadataContentCardsGrouped(cardsGrouped);
-            await instance.vm.$nextTick();
-
-            // Assert
-            expect(metadataDispatcher.logCardImpressions).toHaveBeenCalledTimes(1);
-        });
-
-        it('should generate test id attributes on child content cards components within a group', async () => {
-            // Arrange
-            const testId = 'foo';
-            const cardTypes = ['Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1', 'Header_Card', 'Post_Order_Card_1', 'Post_Order_Card_1'];
-            const cardsGrouped = createMetadataCardsGrouped(cardTypes);
-
-            // Act
-            const instance = shallowMount(ContentCards, {
-                propsData: {
-                    apiKey,
-                    userId,
-                    groupCards: true,
-                    testId
-                }
-            });
-            instance.vm.metadataContentCardsGrouped(cardsGrouped);
-            await instance.vm.$nextTick();
-
-            // Assert
-            expect(instance.find(`[data-test-id="ContentCard-${testId}-0-0"]`).exists()).toBeTruthy();
-            expect(instance.find(`[data-test-id="ContentCard-${testId}-0-1"]`).exists()).toBeTruthy();
-            expect(instance.find(`[data-test-id="ContentCard-${testId}-1-1"]`).exists()).toBeTruthy();
-            expect(instance.find(`[data-test-id="ContentCard-${testId}-0-2"]`).exists()).toBeTruthy();
-            expect(instance.find(`[data-test-id="ContentCard-${testId}-1-2"]`).exists()).toBeTruthy();
-        });
-    });
     describe('logging callback', () => {
         const testMessage = '__TEST_MESSAGE__';
         const testPayload = { test: 'PAYLOAD' };
@@ -870,6 +542,13 @@ describe('ContentCards', () => {
                     $logger: {
                         logInfo: jest.fn()
                     }
+                },
+                scopedSlots: {
+                    default: `
+                        <div slot-scope="{ cards }">
+                            <div :data-test-id="card.type" v-for="card in cards"></div>
+                        </div>
+                    `
                 }
             });
 
@@ -895,6 +574,13 @@ describe('ContentCards', () => {
                     $logger: {
                         logInfo: jest.fn()
                     }
+                },
+                scopedSlots: {
+                    default: `
+                        <div slot-scope="{ cards }">
+                            <div :data-test-id="card.type" v-for="card in cards"></div>
+                        </div>
+                    `
                 }
             });
 
