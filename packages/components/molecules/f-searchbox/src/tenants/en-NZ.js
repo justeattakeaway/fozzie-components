@@ -5,6 +5,7 @@ const copy = {
     headlineSubtitle: 'Your favourite local restaurants delivered',
     headlineTitle: 'Did somebody say Menulog',
     geoTip: '',
+    streetNumberLabel: 'Enter your location to find food near you',
     errors: {
         ADDRESS_EMPTY: 'Enter your location to find food near you',
         GEO_ERROR: 'Unable to find location',

@@ -2,7 +2,8 @@ import {
     isPostcodeEmpty,
     doesPostcodeMatchRegex,
     normalisePostcode,
-    safeParseJson
+    safeParseJson,
+    removeWhitespace
 } from '../helpers';
 
 describe('helpers', () => {
@@ -139,6 +140,22 @@ describe('helpers', () => {
                     // Assert
                     expect(result).toBe(null);
                 });
+            });
+        });
+    });
+
+    describe('`removeWhitespace`', () => {
+        it('should exist', () => {
+            expect(removeWhitespace).toBeDefined();
+        });
+
+        describe('when invoked', () => {
+            it('should remove spaces from a string if they exist', () => {
+                // Act
+                const result = removeWhitespace('Gliese 667');
+
+                // Assert
+                expect(result).toBe('Gliese667');
             });
         });
     });
