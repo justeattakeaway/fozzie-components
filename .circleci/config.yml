@@ -154,7 +154,7 @@ jobs:
           paths:
             - .
                     
-  lintingAndBuild:
+  build:
     executor: node
     environment:
       # required to prevent ENOMEM errors
@@ -163,13 +163,22 @@ jobs:
       - attach_workspace:
           at: ~/project
       - build_packages
-      - run: # Lint packages
-          name: Run Lint Tasks on Packages
-          command: yarn lint
       - persist_to_workspace:
           root: ~/project
           paths:
             - .
+
+  linting:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 2
+    steps: # a collection of executable commands
+      - attach_workspace:
+          at: ~/project
+      - run: # Lint packages
+          name: Run Lint Tasks on Packages
+          command: yarn lint
     
   unit_tests:
     executor: node
@@ -267,13 +276,20 @@ workflows:
           filters:
             branches:
               ignore: 'gh-pages'
-      - lintingAndBuild:
+      - build:
           context: web-core
           requires:
             - set_up
           filters:
             branches:
               ignore: 'gh-pages'
+      - linting:
+          context: web-core
+          requires:
+            - set_up
+          filters:
+            branches:
+              ignore: 'gh-pages'    
       - bundlewatch:
           context: web-core
           requires:
@@ -284,14 +300,14 @@ workflows:
       - unit_tests:
           context: web-core
           requires:
-            - lintingAndBuild
+            - set_up
           filters:
             branches:
               ignore: 'gh-pages'
       - component_tests:
           context: web-core
           requires:
-            - lintingAndBuild
+            - build
           filters:
             branches:
               ignore: 'gh-pages'
