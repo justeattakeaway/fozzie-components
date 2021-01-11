@@ -151,27 +151,8 @@ jobs:
       - run: # Run PR Checks
           name: Run PR Checks
           command: yarn danger ci
-
-  build:
-    executor: node
-    environment:
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
-    steps: # a collection of executable commands
-      - checkout # special step to check out source code to working directory
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ .Branch }}-test8-{{ checksum "yarn.lock" }}
-      - install_node_dependencies
-      - build_packages
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: build-dist-{{ .Branch }}-{{ .BuildNum }}
-          paths:
-            - packages/components/atoms/f-button/dist
-    
-  linting:
+                    
+  lintingAndBuild:
     executor: node
     environment:
       # required to prevent ENOMEM errors
@@ -184,6 +165,7 @@ jobs:
             - yarn-packages-{{ .Branch }}-test8-{{ checksum "yarn.lock" }}
             - build-dist-{{ .Branch }}-{{ .BuildNum }}
       - install_node_dependencies
+      - build_packages
       - run: # Lint packages
           name: Run Lint Tasks on Packages
           command: yarn lint
@@ -300,17 +282,17 @@ workflows:
           filters:
             branches:
               ignore: 'gh-pages'
-      - linting:
+      - lintingAndBuild:
           context: web-core
           requires:
-            - build
+            - set_up
           filters:
             branches:
               ignore: 'gh-pages'
       - tests:
           context: web-core
           requires:
-            - build
+            - lintingAndBuild
           filters:
             branches:
               ignore: 'gh-pages'
