@@ -150,7 +150,7 @@ jobs:
           command: yarn danger ci
       - save_cache:
           name: Save Working Directory Cache
-          key: working-directory-{{ .Branch }}-{{ .BuildNum }}
+          key: working-directory-{{ .Branch }}-{{ .Revision }}
           paths:
             - ~/project
                     
@@ -163,11 +163,11 @@ jobs:
       - restore_cache:
           name: Restore Working Directory Cache
           keys:
-              - working-directory-{{ .Branch }}-{{ .BuildNum }}
+              - working-directory-{{ .Branch }}-{{ .Revision }}
       - build_packages
       - save_cache:
           name: Save Working Directory + Bundles Cache
-          key: working-directory-dist{{ .Branch }}-{{ .BuildNum }}
+          key: working-directory-dist{{ .Branch }}-{{ .Revision }}
           paths:
             - ~/project
 
@@ -180,7 +180,7 @@ jobs:
       - restore_cache:
           name: Restore Working Directory + Bundles Cache
           keys:
-              - working-directory-dist{{ .Branch }}-{{ .BuildNum }}
+              - working-directory-dist{{ .Branch }}-{{ .Revision }}
       - run: # Lint packages
           name: Run Lint Tasks on Packages
           command: yarn lint
@@ -194,7 +194,7 @@ jobs:
       - restore_cache:
           name: Restore Working Directory + Bundles Cache
           keys:
-              - working-directory-dist{{ .Branch }}-{{ .BuildNum }}
+              - working-directory-dist{{ .Branch }}-{{ .Revision }}
       - run: # Run Tests
           name: Run Unit / Integration Tests
           command: yarn test
@@ -208,7 +208,7 @@ jobs:
       - restore_cache:
           name: Restore Working Directory + Bundles Cache
           keys:
-              - working-directory-dist{{ .Branch }}-{{ .BuildNum }}
+              - working-directory-dist{{ .Branch }}-{{ .Revision }}
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global
@@ -227,7 +227,7 @@ jobs:
           command: yarn test-component-ci:chrome
       - save_cache:
           name: Save Axe Violation Cache
-          key: axe-violations-{{ .Branch }}-{{ .BuildNum }}
+          key: axe-violations-{{ .Branch }}-{{ .Revision }}
           paths:
             - ~/project/axe-violations
 
