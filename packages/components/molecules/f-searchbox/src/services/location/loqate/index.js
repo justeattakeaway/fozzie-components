@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { removeWhitespace } from '../../../utils/helpers';
 
 const config = {
     baseURL: 'https://api.addressy.com/Capture/Interactive',
@@ -27,5 +28,21 @@ export default {
         .catch(error => {
             throw Error(error);
         });
+    },
+    
+    /**
+     * Used to check that the `address` matches our requirement before we make a call to Loqate
+     * to retrieve results.
+     *
+     * @param address
+     * @returns {boolean}
+     */
+    hasMinimumAddressCriteria (address) {
+        if (!address) return false;
+        
+        const parsedAddress = removeWhitespace(address);
+        
+        return parsedAddress
+            && (parsedAddress.length > 2 && parsedAddress.length < 8);
     }
 };
