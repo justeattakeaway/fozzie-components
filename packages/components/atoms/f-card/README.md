@@ -1,9 +1,10 @@
 <div align="center">
-<h1>f-card</h1>
+  <h1>f-card</h1>
 
-<img width="125" alt="Fozzie Bear" src="../../bear.png" />
+  <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
-<p>Card Component – Used for providing wrapper card styling to an element (or group of elements).</p>
+  <p>Card Component – Used for providing wrapper card styling to an element (or group of elements).</p>
+</div>
 
 
 ---
@@ -16,44 +17,46 @@
 
 ## Usage
 
-1.  Install the module using NPM or Yarn:
+### Installation
 
-    ```bash
-    yarn add @justeat/f-card
-    ```
+This package can be installed using npm or yarn:
 
-    ```bash
-    npm install @justeat/f-card
-    ```
+```sh
+yarn add @justeat/f-card
+```
 
-2.  Import the component
+```sh
+npm install @justeat/f-card
+```
 
-    You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+### Vue Applications
 
-    ```
-    import CardComponent from '@justeat/f-card';
-    import '@justeat/f-card/dist/f-card.css';
+You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
-    export default {
-        components: {
-            CardComponent
-        }
+```js
+import CardComponent from '@justeat/f-card';
+import '@justeat/f-card/dist/f-card.css';
+
+export default {
+    components: {
+        CardComponent
     }
-    ```
+}
+```
 
-    If you are using Webpack, you can import the component dynamically to separate the header bundle from the main `bundle.client.js`:
+If you are using Webpack, you can import the component dynamically to separate the `f-card` bundle from the main `bundle.client.js`:
 
-    ```
-    import '@justeat/f-card/dist/f-card.css';
+```js
+import '@justeat/f-card/dist/f-card.css';
 
-    export default {
-        components: {
-            ...
-            CardComponent: () => import(/* webpackChunkName: "vue-card" */ '@justeat/f-card')
-        }
+export default {
+    components: {
+        ...
+        CardComponent: () => import(/* webpackChunkName: "vue-card" */ '@justeat/f-card')
     }
+}
 
-    ```
+```
 
 ## Props
 
@@ -61,54 +64,48 @@
 
 The props that can be defined are as follows:
 
-| Prop                      | Required       | Type          | Default | Description |
+| Prop                      | Type       | Required          | Default | Description |
 | :---                      |     :---:      |     :---:     |  :---:  | :---        |
-| locale                    | false          | `String`      | `en-GB` | Sets the locale of the component (which determines what theme and translations to use.<br><br>If the application consuming the `f-card` component is using the vue `i18n` module, then the locale from that module will be used when this prop isn't defined. When this prop is defined, it takes precedence over the locale defined by the `i18n` module.<br><br>If not defined and the `i18n` module isn't present, the default locale used is `en-GB`.|
-| isRounded                 | false          | `Boolean`     | `false` | When set to `true`, rounded corners are applied to the card component. |
-| hasOutline                | false          | `Boolean`     | `false` | When set to `true`, an outline is applied to the card component.  |
-| isPageContentWrapper      | false          | `Boolean`     | `false` | When set to `true`, applies styles to make the card act like a page content wrapper.<br><br>The card will be full width on narrow devices, and then a fixed width above a certain breakpoint width (about 480px), when the card will be centred on the page. |
-| cardHeadingPosition      | false          | `String`     | `left` | Sets the text alignment of the card component's heading.<br><br>When set to `left` the heading will aligned to the left.<br>When set to `center` the heading will be centrally aligned.<br>When set to `right` the heading will be aligned to the right. |
+| locale                    | `String`      | No          | `en-GB` | Sets the locale of the component (which determines what theme and translations to use.<br><br>If the application consuming the `f-card` component is using the vue `i18n` module, then the locale from that module will be used when this prop isn't defined. When this prop is defined, it takes precedence over the locale defined by the `i18n` module.<br><br>If not defined and the `i18n` module isn't present, the default locale used is `en-GB`.|
+| isRounded                 | `Boolean`     |  No          | `false` | When set to `true`, rounded corners are applied to the card component. |
+| hasOutline                | `Boolean`     |  No          | `false` | When set to `true`, an outline is applied to the card component.  |
+| isPageContentWrapper      | `Boolean`     |  No          | `false` | When set to `true`, applies styles to make the card act like a page content wrapper.<br><br>The card will be full width on narrow devices, and then a fixed width above a certain breakpoint width (about 480px), when the card will be centred on the page. |
+| cardHeadingPosition      | `String`     |  No          | `left` | Sets the text alignment of the card component's heading.<br><br>When set to `left` the heading will aligned to the left.<br>When set to `center` the heading will be centrally aligned.<br>When set to `right` the heading will be aligned to the right. |
+
+### CSS Classes
+
+`f-card` has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
 
 ## Development
-It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
 
-```bash
-# cd ./fozzie-components
-yarn install
+Start by cloning the repository and installing the required dependencies:
 
-## Testing
-Unit / Integration / Contract
-
-```bash
-# Run Unit / Integration / Contract tests for all components
-cd ./fozzie-components
-yarn test
+```sh
+$ git clone git@github.com:justeat/fozzie-components.git
+$ cd fozzie-components
+$ yarn
 ```
 
-OR
+Change directory to the `f-card` package:
 
-```bash
-# Run Unit / Integration / Contract tests for f-card
-cd ./fozzie-components/packages/f-card
-yarn test
+```sh
+$ cd packages/components/atoms/f-card
 ```
 
-Component Tests
-```bash
-# Run Component tests for all components
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components
+### Running storybook
 
-yarn storybook:build
-yarn storybook:serve-static
-yarn test-component:chrome
+Storybook can be used to develop new and existing components.
+
+To start storybook:
+
+> Please ensure you are in the f-card directory as outlined in the above instructions.
+
+```sh
+# cd to the storybook package
+$ cd ../../../storybook
+
+# Run storybook
+$ yarn storybook:serve
 ```
 
-OR
-
-```bash
-# Run Component tests for f-card
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components/packages/f-card
-yarn test-component:chrome
-```
+This will build and serve storybook at [http://localhost:8080](http://localhost:8080).
