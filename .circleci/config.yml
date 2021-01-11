@@ -182,6 +182,7 @@ jobs:
           name: Restore Yarn Package Cache
           keys:
             - yarn-packages-{{ .Branch }}-test8-{{ checksum "yarn.lock" }}
+            - build-dist-{{ .Branch }}-{{ .BuildNum }}
       - install_node_dependencies
       - run: # Lint packages
           name: Run Lint Tasks on Packages
