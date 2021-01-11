@@ -32,6 +32,10 @@ module.exports = {
         }
     },
 
+    modulePathIgnorePatterns: [
+        './test/specs/accessibility'
+    ],
+
     testURL: 'http://localhost/',
 
     setupFilesAfterEnv: [

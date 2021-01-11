@@ -1,3 +1,5 @@
+import fullAddressService from '../services/location/loqate';
+
 import {
     SET_SUGGESTIONS,
     SET_ERRORS,
@@ -10,7 +12,8 @@ import {
     SET_STREET_NUMBER_VALUE,
     SET_KEYBOARD_SUGGESTION,
     SET_FULL_ADDRESS_SEARCH_CONFIGS,
-    SET_AUTO_COMPLETE_AVAILABILITY
+    SET_AUTO_COMPLETE_AVAILABILITY,
+    SET_PARTIAL_ADDRESS_SUGGESTIONS
 } from './mutation.types';
 
 export default {
@@ -124,6 +127,14 @@ export default {
 
         setAutoCompleteAvailability ({ commit }, payload) {
             commit(SET_AUTO_COMPLETE_AVAILABILITY, payload);
+        },
+
+        async getMatchedAreaAddressResults ({ commit }, payload) {
+            const fullAddressResponse = await fullAddressService.getPartialAddressSearch(payload);
+
+            if (fullAddressResponse) {
+                commit(SET_PARTIAL_ADDRESS_SUGGESTIONS, fullAddressResponse);
+            }
         }
     },
 
@@ -174,6 +185,27 @@ export default {
 
         [SET_AUTO_COMPLETE_AVAILABILITY]: (state, isAutocompleteEnabled) => {
             state.isAutocompleteEnabled = isAutocompleteEnabled;
+        },
+
+        /**
+         * Map API response items and filter on `Postcode` value. We don't want to
+         * return `Address` types here only postcode results for users.
+         *
+         * @param state
+         * @param suggestions
+         */
+        [SET_PARTIAL_ADDRESS_SUGGESTIONS]: (state, suggestions) => {
+            state.suggestions = suggestions.Items.map(({
+                Description,
+                Text,
+                Id,
+                Type
+            }) => ({
+                Description,
+                Text,
+                Id,
+                Type
+            })).filter(addressDetails => addressDetails.Type === 'Postcode');
         }
     }
 };

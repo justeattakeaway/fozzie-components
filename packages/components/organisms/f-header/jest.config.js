@@ -18,7 +18,8 @@ module.exports = {
     testURL: 'http://localhost/',
 
     modulePathIgnorePatterns: [
-        './test/specs/'
+        './test/specs/component/',
+        './test/specs/accessibility'
     ],
 
     setupFilesAfterEnv: [
