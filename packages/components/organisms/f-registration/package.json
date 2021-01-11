@@ -52,7 +52,7 @@
   ],
   "dependencies": {
     "@justeat/f-services": "1.4.0",
-    "axios": "0.21.0",
+    "axios": "0.21.1",
     "vuelidate": "0.7.6"
   },
   "peerDependencies": {

@@ -6,11 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (add to next release)
 ------------------------------
-*December 30, 2020*
+*January 11, 2021*
 
 ### Changed
 - Updated config for latest `sass-loader`.
 - Switches import in `common.scss` in line with fozzie v5-beta.
+- Update version of `f-button`.
 
 
 v0.4.0

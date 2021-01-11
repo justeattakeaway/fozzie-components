@@ -53,7 +53,7 @@
   "dependencies": {
     "@justeat/f-globalisation": "1.0.0",
     "@justeat/f-services": "1.7.0",
-    "axios": "0.20.0",
+    "axios": "0.21.1",
     "vuelidate": "0.7.6"
   },
   "peerDependencies": {
