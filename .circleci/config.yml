@@ -128,7 +128,7 @@ executors:
 
 jobs:
   set_up:
-    working_directory: ~/repo
+    working_directory: ~/project
     executor: node
     environment:
       # required to prevent ENOMEM errors
@@ -138,17 +138,21 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-              - yarn-packages-{{ .Branch }}-test9-{{ checksum "yarn.lock" }}
+              - yarn-packages-{{ .Branch }}-test10-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - save_cache:
           name: Save Yarn Package Cache
-          key: yarn-packages-{{ .Branch }}-test9-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ .Branch }}-test10-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
             - node_modules
       - run: # Run PR Checks
           name: Run PR Checks
           command: yarn danger ci
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
                     
   lintingAndBuild:
     executor: node
@@ -157,21 +161,15 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - attach_workspace:
-          at: ~/repo
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ .Branch }}-test9-{{ checksum "yarn.lock" }}
-            - build-dist-{{ .Branch }}-{{ .BuildNum }}
-      - install_node_dependencies
+          at: ~/project
       - build_packages
-      - persist_to_workspace:
-          root: ~/repo
-          paths:
-            - packages/*/*/*/dist
       - run: # Lint packages
           name: Run Lint Tasks on Packages
           command: yarn lint
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
     
   tests:
     executor: node
@@ -180,12 +178,7 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - attach_workspace:
-          at: ~/repo
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ .Branch }}-test9-{{ checksum "yarn.lock" }}
-      - install_node_dependencies
+          at: ~/project
       - run: # Run Tests
           name: Run Unit / Integration Tests
           command: yarn test
@@ -205,11 +198,10 @@ jobs:
       - run: # Run Component UI Tests
           name: Run WebDriverIO Component / Accessibility Tests
           command: yarn test-component-ci:chrome
-      - save_cache:
-          name: Save Axe violations Folder
-          key: axe-violations-{{ .Branch }}-{{ .BuildNum }}
+      - persist_to_workspace:
+          root: ~/project
           paths:
-            - axe-violations
+            - .
 
   bundlewatch:
     executor: node
@@ -218,12 +210,7 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - attach_workspace:
-          at: ~/repo
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ .Branch }}-test9-{{ checksum "yarn.lock" }}
-      - install_node_dependencies
+          at: ~/project
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
@@ -235,18 +222,14 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - attach_workspace:
-          at: ~/repo
-      - restore_cache:
-          name: Restore Axe Violations Folder
-          keys:
-            - axe-violations-{{ .Branch }}-{{ .BuildNum }}
+          at: ~/project
       - store_artifacts:
           path: axe-violations/
       - slack_notify_fail
       - slack_notify_success
 
   deploy-storybook:
-    working_directory: ~/repo
+    working_directory: ~/project
     executor: node
     environment:
       # required to prevent ENOMEM errors
@@ -256,7 +239,7 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ .Branch }}-test9-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}-test10-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - build_packages
       - run:
