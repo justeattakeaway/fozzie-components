@@ -286,21 +286,21 @@ workflows:
       - linting:
           context: web-core
           requires:
-            - set_up
+            - build
           filters:
             branches:
               ignore: 'gh-pages'    
       - bundlewatch:
           context: web-core
           requires:
-            - set_up
+            - build
           filters:
             branches:
               ignore: 'gh-pages'
       - unit_tests:
           context: web-core
           requires:
-            - set_up
+            - build
           filters:
             branches:
               ignore: 'gh-pages'
