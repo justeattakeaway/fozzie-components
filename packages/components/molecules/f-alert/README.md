@@ -2,7 +2,7 @@
 <div align="center">
   <h1>f-alert</h1>
 
-  <img width="125" alt="Fozzie Bear" src="../../bear.png" />
+  <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
   <p>Fozzie Alert Component</p>
 </div>
