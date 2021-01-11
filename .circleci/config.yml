@@ -157,7 +157,7 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - attach_workspace:
-        at: ~/repo
+          at: ~/repo
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -180,7 +180,7 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - attach_workspace:
-        at: ~/repo
+          at: ~/repo
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -218,7 +218,7 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - attach_workspace:
-        at: ~/repo
+          at: ~/repo
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -235,7 +235,7 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - attach_workspace:
-        at: ~/repo
+          at: ~/repo
       - restore_cache:
           name: Restore Axe Violations Folder
           keys:
