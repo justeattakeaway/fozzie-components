@@ -71,12 +71,12 @@ describe('`Loqate`', () => {
             });
         });
     });
-    
+
     describe('`hasMinimumAddressCriteria`', () => {
         it('should exist', () => {
             expect(loqate.hasMinimumAddressCriteria).toBeDefined();
         });
-        
+
         describe('when invoked', () => {
             describe('AND a `parsedAddress` has been passed', () => {
                 it('should return `true`', () => {
@@ -84,14 +84,14 @@ describe('`Loqate`', () => {
                     expect(loqate.hasMinimumAddressCriteria('AR511AR')).toBe(true);
                 });
             });
-            
+
             describe('AND a `parsedAddress` has been passed but it does not meet the requirements', () => {
                 it('should return `false`', () => {
                     // Act & Assert
                     expect(loqate.hasMinimumAddressCriteria('AR')).toBe(false);
                 });
             });
-            
+
             describe('AND a `parsedAddress` has not been passed', () => {
                 it('should return `false`', () => {
                     // Act & Assert

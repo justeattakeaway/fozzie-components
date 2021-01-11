@@ -29,7 +29,7 @@ export default {
             throw Error(error);
         });
     },
-    
+
     /**
      * Used to check that the `address` matches our requirement before we make a call to Loqate
      * to retrieve results.
@@ -39,9 +39,9 @@ export default {
      */
     hasMinimumAddressCriteria (address) {
         if (!address) return false;
-        
+
         const parsedAddress = removeWhitespace(address);
-        
+
         return parsedAddress
             && (parsedAddress.length > 2 && parsedAddress.length < 8);
     }

@@ -5,12 +5,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.0.0-beta.16
 ------------------------------
-*January 08, 2021*
+*January 11, 2021*
 
 ### Added
 - `hasMinimumAddressCriteria` check calls to Loqate happen when required.
 - Tests to cover changes.
-- 
 
 
 v4.0.0-beta.15
