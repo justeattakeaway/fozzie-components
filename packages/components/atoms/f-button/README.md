@@ -2,7 +2,7 @@
 <div align="center">
   <h1>f-button</h1>
 
-  <img width="125" alt="Fozzie Bear" src="../../bear.png" />
+  <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
   <p>The generic button component</p>
 </div>
@@ -17,99 +17,110 @@
 
 ## Usage
 
-1.  Install the module using NPM or Yarn:
+### Installation
 
-    ```bash
-    yarn add @justeat/f-button
-    ```
+This package can be installed using npm or yarn:
 
-    ```bash
-    npm install @justeat/f-button
-    ```
+```sh
+yarn add @justeat/f-button
+```
 
-2.  Import the component
+```sh
+npm install @justeat/f-button
+```
 
-    You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+### Vue Applications
 
-    ```
-    import FButton from '@justeat/f-button';
-    import '@justeat/f-button/dist/f-button.css';
+You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
-    export default {
-        components: {
-            FButton
-        }
+
+```js
+import FButton from '@justeat/f-button';
+import '@justeat/f-button/dist/f-button.css';
+
+export default {
+    components: {
+        FButton
     }
-    ```
+}
+```
 
-    If you are using Webpack, you can import the component dynamically to separate the `f-button` bundle from the main `bundle.client.js`:
+If you are using Webpack, you can import the component dynamically to separate the `f-button` bundle from the main `bundle.client.js`:
 
-    ```
-    import '@justeat/f-button/dist/f-button.css';
+```js
+import '@justeat/f-button/dist/f-button.css';
 
-    export default {
-        components: {
-            ...
-            FButton: () => import(/* webpackChunkName: "f-button" */ '@justeat/f-button')
-        }
+export default {
+    components: {
+        ...
+        FButton: () => import(/* webpackChunkName: "f-button" */ '@justeat/f-button')
     }
+}
 
-    ```
+```
 
-3.  Call the component in your template:
+Call the component in your template:
 
-    ```
-    <f-button buttonType="secondary" buttonSize="small" isFullWidth />
-    ```
+```js
+<f-button buttonType="secondary" buttonSize="small">Button Text</f-button>
+```
 
-    Accepted properties:
-    - buttonType - primary, secondary, outline, ghost, link, icon, default is primary
-    - buttonSize - large, medium, small, xsmall, default is medium
-    - isFullWidth - true/false, default is false
+## Configuration
+
+### Props
+
+`f-button` has a number of props that allow you to customise its functionality.
+
+The props that can be defined are as follows:
+
+| Prop  | Type  | Required | Default | Description |
+| ----- | ----- | -------- |------- | ----------- |
+| `buttonType` | `String` | No |`primary` | Sets the modifier theme for styling. Options: `primary`, `secondary`, `outline`, `ghost`, `link`, `icon`. |
+| `buttonSize` | `String` | No |`medium` | Sets the size `large`, `medium`, `small`, `xsmall` |
+| `isFullWidth` | `Boolean` | No |  `false` | Controls whether or not to apply fullWidth modifier class |
+
+### CSS Classes
+
+`f-button` has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
+
+### Events
+
+You can use the `.native` modifier for `v-on` to listen directly to a native event on the root element.
+
+```js
+<f-button @click.native="myMethod">Button Text</f-button>
+```
 
 ## Development
-It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
 
-```bash
-# cd ./fozzie-components
-yarn install
+Start by cloning the repository and installing the required dependencies:
 
-## Testing
-Unit / Integration / Contract
-
-```bash
-# Run Unit / Integration / Contract tests for all components
-cd ./fozzie-components
-yarn test
+```sh
+$ git clone git@github.com:justeat/fozzie-components.git
+$ cd fozzie-components
+$ yarn
 ```
 
-OR
+Change directory to the `f-button` package:
 
-```bash
-# Run Unit / Integration / Contract tests for f-button
-cd ./fozzie-components/packages/f-button
-yarn test
+```sh
+$ cd packages/components/atoms/f-button
 ```
 
-Component Tests
-```bash
-# Run Component tests for all components
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components
+### Running storybook
 
-yarn storybook:build
-yarn storybook:serve-static
-yarn test-component:chrome
+Storybook can be used to develop new and existing components.
+
+To start storybook:
+
+> Please ensure you are in the f-button directory as outlined in the above instructions.
+
+```sh
+# cd to the storybook package
+$ cd ../../../storybook
+
+# Run storybook
+$ yarn storybook:serve
 ```
 
-OR
-
-```bash
-# Run Component tests for f-button
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components/packages/f-button
-yarn test-component:chrome
-```
-
-
-## Documentation to be completed once module is in stable state.
+This will build and serve storybook at [http://localhost:8080](http://localhost:8080).
