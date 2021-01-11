@@ -166,10 +166,10 @@ jobs:
       - install_node_dependencies
       - build_packages
       - save_cache:
-        name: Save Yarn Package Cache
-        key: build-dist-{{ .Branch }}-{{ .BuildNum }}
-        paths:
-          - packages/components/atoms/f-button/dist
+          name: Save Yarn Package Cache
+          key: build-dist-{{ .Branch }}-{{ .BuildNum }}
+          paths:
+            - packages/components/atoms/f-button/dist
     
   linting:
     executor: node
