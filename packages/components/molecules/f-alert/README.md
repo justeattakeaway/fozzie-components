@@ -66,12 +66,12 @@ export default {
 
 The props that can be defined are as follows:
 
-| Prop  | Type  | Default | Description |
-| ----- | ----- | ------- | ----------- |
-| `locale` | `String` | `` | Sets locale for I18n. |
-| `type` | `String` | `success` | Sets the modifier theme for styling. Options:  `success`, `warning`, `info`, `danger`. |
-| `heading` | `String` | `` | The title text of the alert |
-| `isDismissible` | `Boolean` | `false` | Controls whether or not to display the alert close button. |
+| Prop  | Type  | Required | Default | Description |
+| ----- | ----- | -------- |------- | ----------- |
+| `locale` | `String` | No |`` | Sets locale for I18n. |
+| `type` | `String` | Yes |`success` | Sets the modifier theme for styling. Options:  `success`, `warning`, `info`, `danger`. |
+| `heading` | `String` | Yes |`` | The title text of the alert |
+| `isDismissible` | `Boolean` | No |  `false` | Controls whether or not to display the alert close button. |
 
 ### CSS Classes
 
