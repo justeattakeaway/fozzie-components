@@ -6,7 +6,9 @@ exports.local = () => ({
         './test/specs/accessibility/*.spec.js'
     ],
     bail: 0,
-    allureOutputFolder: '../../../../allure-results'
+    allureOutputFolder: '../../../../allure-results',
+    maxinstances: 1,
+    loglevel: 'info'
 });
 
 exports.ci = () => ({
@@ -19,7 +21,9 @@ exports.ci = () => ({
         './packages/components/organisms/**/test/specs/accessibility/axe-accessibility.spec.js'
     ],
     bail: 1,
-    allureOutputFolder: './allure-results'
+    allureOutputFolder: './allure-results',
+    maxinstances: 2,
+    loglevel: 'silent'
 });
 
 exports.setTestType = () => (CIRCLE_CI ? exports.ci() : exports.local());

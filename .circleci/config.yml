@@ -223,7 +223,7 @@ jobs:
           command: yarn test:wait-for-server
       - run: # Run Component UI Tests
           name: Run WebDriverIO Component
-          command: yarn test-component-ci:chrome
+          command: yarn test-component:chrome
       - store_artifacts:
           path: _results_/*.mp4
 
@@ -243,8 +243,8 @@ jobs:
           name: Run Storybook healthcheck
           command: yarn test:wait-for-server
       - run: # Run Accessibility UI Tests
-          name: Run WebDriverIO Component
-          command: yarn test-accessibility-ci:chrome
+          name: Run WebDriverIO Accessibility Tests
+          command: yarn test-a11y:chrome
       - store_artifacts:
           path: axe-violations/
 
