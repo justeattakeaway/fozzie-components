@@ -6,17 +6,7 @@ exports.local = () => ({
         './test/specs/accessibility/*.spec.js'
     ],
     bail: 0,
-    reporters: [
-        [video, {
-            saveAllVideos: false, // If true, also saves videos for successful test cases
-            videoSlowdownMultiplier: 3 // Higher to get slower videos, lower for faster videos [Value 1-100]
-        }],
-        ['allure', {
-            outputDir: '../../../../allure-results',
-            disableWebdriverStepsReporting: false,
-            disableWebdriverScreenshotsReporting: false
-        }]
-    ]
+    allureOutputFolder: '../../../../allure-results'
 });
 
 exports.ci = () => ({
@@ -29,7 +19,7 @@ exports.ci = () => ({
         './packages/components/organisms/**/test/specs/accessibility/axe-accessibility.spec.js'
     ],
     bail: 1,
-    reporters: null
+    allureOutputFolder: './allure-results'
 });
 
 exports.setTestType = () => (CIRCLE_CI ? exports.ci() : exports.local());
