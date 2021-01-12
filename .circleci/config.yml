@@ -127,10 +127,8 @@ executors:
       - image: circleci/node:12.18.4-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
 
 jobs:
-
-  working_directory: ~/repo
-
   build:
+    working_directory: ~/project
     executor: node
     environment:
       # required to prevent ENOMEM errors
@@ -139,12 +137,12 @@ jobs:
       - checkout # special step to check out source code to working directory
       - restore_cache:
           name: Restore Yarn Package Cache
-          keys:
-              - yarn-packages-{{ .Branch }}-test11-{{ checksum "yarn.lock" }}
+          keys: 
+            - yarn-packages-{{ .Branch }}-test11-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - save_cache:
           name: Save Yarn Package Cache
-          - yarn-packages-{{ .Branch }}-test11-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ .Branch }}-test11-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
       - run: # Run PR Checks
@@ -159,33 +157,36 @@ jobs:
           command: yarn bundlewatch
       - slack_notify_fail
       - slack_notify_success
+      - save_cache:
+          name: Save Working Directory Cache
+          key: working-directory-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ~/project
 
-  unit_tests:
+  unit-tests:
     executor: node
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - restore_cache:
-          name: Restore Yarn Package Cache
+          name: Restore Working Directory Cache
           keys:
-              - yarn-packages-{{ .Branch }}-test11-{{ checksum "yarn.lock" }}
-      - install_node_dependencies
+            - working-directory-{{ .Branch }}-{{ .Revision }}
       - run: # Run Tests
           name: Run Unit / Integration Tests
           command: yarn test
 
-  component_tests:
+  component-tests:
     executor: node
     environment:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
        - restore_cache:
-          name: Restore Yarn Package Cache
+          name: Restore Working Directory Cache
           keys:
-              - yarn-packages-{{ .Branch }}-test11-{{ checksum "yarn.lock" }}
-      - install_node_dependencies
+            - working-directory-{{ .Branch }}-{{ .Revision }}
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global
@@ -213,7 +214,7 @@ jobs:
     steps:
       - restore_cache:
           name: Restore Yarn Package Cache
-          keys:
+          keys: 
             - yarn-packages-{{ .Branch }}-test11-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - build_packages
@@ -253,18 +254,14 @@ workflows:
           filters:
             branches:
               ignore: 'gh-pages'
-  unit_tests:
-    jobs:
-      - build:
+      - unit-tests:
           context: web-core
           requires:
             - build
           filters:
             branches:
               ignore: 'gh-pages'
-  component_tests:
-    jobs:
-      - build:
+      - component-tests:
           context: web-core
           requires:
             - build
