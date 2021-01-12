@@ -224,6 +224,8 @@ jobs:
       - run: # Run Component UI Tests
           name: Run WebDriverIO Component
           command: yarn test-component-ci:chrome
+      - store_artifacts:
+          path: _results_/*.mp4
 
   accessibility_tests:
     executor: node
