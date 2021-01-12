@@ -1,4 +1,4 @@
-const CIRCLE_CI = process.env.CIRCLECI.toLowerCase();
+const CIRCLE_CI = process.env.CIRCLECI;
 
 exports.local = () => ({
     bail: 0,
@@ -21,12 +21,5 @@ exports.ci = () => ({
 });
 
 exports.setTestType = () => {
-    switch (CIRCLE_CI) {
-        case true:
-            return exports.ci();
-        case false:
-            return exports.local();
-        default:
-            throw new Error(`Sorry, ${CIRCLE_CI} is not recognised.`);
-    }
+    return CIRCLE_CI ? exports.ci() : exports.local();
 };
