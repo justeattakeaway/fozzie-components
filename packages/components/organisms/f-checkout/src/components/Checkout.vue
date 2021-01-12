@@ -448,7 +448,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-// $checkout-width                           : 460px;
 $checkout-width                           : 596px;
 $checkout-padding                         : spacing(x5) 100px;
 
