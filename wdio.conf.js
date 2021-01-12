@@ -150,7 +150,7 @@ exports.config = {
             disableWebdriverStepsReporting: false,
             disableWebdriverScreenshotsReporting: false
         }]
-    ]
+    ],
 
     afterTest: () => {
         browser.takeScreenshot();
