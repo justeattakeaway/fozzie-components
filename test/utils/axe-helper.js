@@ -32,7 +32,7 @@ exports.getAccessibilityTestResults = (componentName) => {
 
     if(results.violations.length > 0)
     {
-        this.processResults(results, componentName);
+        exports.processResults(results, componentName);
     }
 
     return results;
