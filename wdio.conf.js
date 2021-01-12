@@ -25,6 +25,20 @@ exports.config = {
     exclude: [
         // 'path/to/excluded/files'
     ],
+
+    // Suites
+    suites: {
+        component: [
+            './packages/components/atoms/**/test/specs/component/*.component.spec.js',
+            './packages/components/molecules/**/test/specs/component/*.component.spec.js',
+            './packages/components/organisms/**/test/specs/component/*.component.spec.js'
+        ],
+        accessibility: [
+            './packages/components/atoms/**/test/specs/accessibility/axe-accessibility.spec.js',
+            './packages/components/molecules/**/test/specs/accessibility/axe-accessibility.spec.js',
+            './packages/components/organisms/**/test/specs/accessibility/axe-accessibility.spec.js'
+        ]
+    },
     //
     // ============
     // Capabilities

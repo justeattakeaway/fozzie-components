@@ -165,11 +165,15 @@ jobs:
           keys:
               - working-directory-{{ .Branch }}-{{ .Revision }}
       - build_packages
+      - run: # Install WebDriverIO Test Dependencies
+          name: Install Component Test Dependencies
+          command: yarn global add @vue/cli @vue/cli-service-global
       - save_cache:
           name: Save Working Directory + Bundles Cache
           key: working-directory-dist{{ .Branch }}-{{ .Revision }}
           paths:
             - ~/project
+            - ~/.yarn/bin
 
   linting:
     executor: node
@@ -198,7 +202,7 @@ jobs:
       - run: # Run Tests
           name: Run Unit / Integration Tests
           command: yarn test
-     
+
   component_tests:
     executor: node
     environment:
@@ -209,9 +213,6 @@ jobs:
           name: Restore Working Directory + Bundles Cache
           keys:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
-      - run: # Install Component Test Dependencies
-          name: Install Component Test Dependencies
-          command: yarn global add @vue/cli @vue/cli-service-global
       - run: # Build Storybook
           name: Build Storybook
           command: yarn storybook:build
@@ -223,8 +224,32 @@ jobs:
           name: Run Storybook healthcheck
           command: yarn test:wait-for-server
       - run: # Run Component UI Tests
-          name: Run WebDriverIO Component / Accessibility Tests
+          name: Run WebDriverIO Component
           command: yarn test-component-ci:chrome
+
+  accessibility_tests:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps: # a collection of executable commands
+      - restore_cache:
+          name: Restore Working Directory + Bundles Cache
+          keys:
+              - working-directory-dist{{ .Branch }}-{{ .Revision }}
+      - run: # Build Storybook
+          name: Build Storybook
+          command: yarn storybook:build
+      - run: # Serve Storybook
+          name: Serve Storybook
+          command: yarn storybook:serve-static
+          background: true
+      - run: # Run Storybook healthcheck
+          name: Run Storybook healthcheck
+          command: yarn test:wait-for-server
+      - run: # Run Accessibility UI Tests
+          name: Run WebDriverIO Component
+          command: yarn test-accessibility-ci:chrome
       - save_cache:
           name: Save Axe Violation Cache
           key: axe-violations-{{ .Branch }}-{{ .Revision }}
@@ -317,6 +342,13 @@ workflows:
             branches:
               ignore: 'gh-pages'
       - component_tests:
+          context: web-core
+          requires:
+            - build
+          filters:
+            branches:
+              ignore: 'gh-pages'
+      - accessibility_tests:
           context: web-core
           requires:
             - build
