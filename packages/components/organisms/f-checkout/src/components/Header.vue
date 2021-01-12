@@ -156,7 +156,7 @@ export default {
 
         &:before,
         &:after {
-            content: "";
+            content: '';
             position: absolute;
             top: 50%;
             width: 9999px;
