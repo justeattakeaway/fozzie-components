@@ -55,6 +55,11 @@ export default {
                     gtm: 'click_cuisine_kebab'
                 },
                 {
+                    url: '/domicilio/vicino-a-me/hamburger',
+                    text: 'Hamburger a domicilio',
+                    gtm: 'click_cuisine_hamburger'
+                },
+                {
                     url: '/domicilio/vicino-a-me/',
                     text: 'Tutti i tipi di cucine',
                     gtm: 'click_cuisine_view_all'
