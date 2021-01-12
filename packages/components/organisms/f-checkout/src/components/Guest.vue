@@ -5,15 +5,15 @@
         <form-field
             v-model="guest.firstName"
             name="guest-first-name"
-            :label-text="$t('guest.labels.firstName')" />
+            :label-text="$t('guest.firstName')" />
         <form-field
             v-model="guest.lastName"
             name="guest-last-name"
-            :label-text="$t('guest.labels.lastName')" />
+            :label-text="$t('guest.lastName')" />
         <form-field
             v-model="guest.email"
             name="guest-email"
-            :label-text="$t('guest.labels.email')" />
+            :label-text="$t('guest.email')" />
     </div>
 </template>
 
@@ -24,6 +24,7 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 export default {
     components: { FormField },
 
+    // TODO: Use store here to update customer
     data () {
         return {
             guest: {

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { select, text, boolean } from '@storybook/addon-knobs';
+import { select, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 
 import {
@@ -64,4 +64,3 @@ export const CheckoutComponent = () => ({
 });
 
 CheckoutComponent.storyName = 'f-checkout';
-

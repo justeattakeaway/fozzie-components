@@ -5,7 +5,6 @@
         <div
             v-if="isLoggedIn"
             data-test-id='user-header'>
-
             <h2 data-test-id='user-title'>
                 {{ $t('header.user.title', { name }) }}
             </h2>
@@ -24,7 +23,7 @@
             v-else
             data-test-id='guest-header'>
             <h2 :class="$style['c-header-title']">
-                {{ $t('header.guest.header') }}
+                {{ $t('header.guest.guestTitle') }}
             </h2>
 
             <a
@@ -32,7 +31,7 @@
                 data-test-id="guest-login-button"
                 :class="$style['c-header-loginButton']"
                 @click="onVisitLoginPage">
-                {{ $t('header.guest.login') }}
+                {{ $t('header.guest.loginButton') }}
             </a>
 
             <div
@@ -41,11 +40,11 @@
             </div>
 
             <h2 :class="$style['c-header-title']">
-                {{ $t('header.guest.title') }}
+                {{ $t('header.guest.guestTitle') }}
             </h2>
 
             <p :class="$style['c-header-confirmation']">
-                {{ $t('header.guest.deliveryHeader') }}
+                {{ $t('header.guest.confirmation') }}
             </p>
         </div>
     </div>
@@ -78,7 +77,6 @@ export default {
         onVisitLoginPage () {
             this.$emit(EventNames.CheckoutVisitLoginPage);
         }
-
     }
 };
 </script>
@@ -94,6 +92,7 @@ export default {
     @include font-size('heading-s');
 }
 
+// TODO: Add link button to f-button
 .c-header-loginButton {
     display: inline-block;
     width: 100%;

@@ -35,17 +35,15 @@ const messages = {
         genericServerError: 'Something went wrong, please try again later'
     },
 
-    guest: {
-        labels: {
-            firstName: 'First name',
-            lastName: 'Last name',
-            email: 'Email'
-        },
-    },
-
     buttonText: 'Go to payment',
 
     allergyText: 'If you or someone you’re ordering for has a food allergy or intolerance, click here',
+
+    guest: {
+        firstName: 'First name',
+        lastName: 'Last name',
+        email: 'Email'
+    },
 
     header: {
         user: {
@@ -53,11 +51,11 @@ const messages = {
             switchUser: 'Not {name}? Click here.'
         },
         guest: {
-            header: 'How do you want to continue?',
-            title: 'Checkout as a guest',
+            loginTitle: 'How do you want to continue?',
+            loginButton: 'Log in or sign up',
             option: 'or',
-            deliveryHeader: 'Please confirm your delivery details',
-            login: 'Log in or sign up'
+            guestTitle: 'Checkout as a guest',
+            confirmation: 'Please confirm your delivery details'
         }
     },
 
@@ -75,7 +73,6 @@ const messages = {
         cookiePolicyLinkText: 'Cookie Policy',
         cookiePolicyLinkUrl: 'https://www.just-eat.co.uk/cookies-policy'
     }
-
 };
 
 const dateTimeFormats = {

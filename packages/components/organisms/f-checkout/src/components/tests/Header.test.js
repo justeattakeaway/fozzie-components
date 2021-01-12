@@ -74,7 +74,7 @@ describe('Header', () => {
                     expect(guestHeader).toBeDefined();
                 });
 
-                it('should show the login link', () => {
+                it('should show the login button', () => {
                     // Arrange
                     const loginbutton = wrapper.find("[data-test-id='guest-login-button']");
 
