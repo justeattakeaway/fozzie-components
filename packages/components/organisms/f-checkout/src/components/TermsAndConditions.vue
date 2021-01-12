@@ -1,29 +1,23 @@
 <template>
     <div
-        data-test-id='terms-and-coniditions-component'
-        :class="$style['c-termsAndConditions']">
-        {{ $t('termsAndConditions.text1') }}
-        <a :href="$t('termsAndConditions.termsAndConditionsLinkUrl')">
-            <span>{{ $t('termsAndConditions.termsAndConditionsLinkText') }}</span>
-        </a>{{ $t('termsAndConditions.text2') }}
-        <a :href="$t('termsAndConditions.privacyPolicyLinkUrl')">
-            {{ $t('termsAndConditions.privacyPolicyLinkText') }}
+        data-test-id='checkoutTerms-and-conditions-component'
+        :class="$style['c-checkoutTermsAndConditions']">
+        {{ $t('checkoutTermsAndConditions.text1') }}
+        <a :href="$t('checkoutTermsAndConditions.checkoutTermsAndConditionsLinkUrl')">
+            <span>{{ $t('checkoutTermsAndConditions.checkoutTermsAndConditionsLinkText') }}</span>
+        </a>{{ $t('checkoutTermsAndConditions.text2') }}
+        <a :href="$t('checkoutTermsAndConditions.privacyPolicyLinkUrl')">
+            {{ $t('checkoutTermsAndConditions.privacyPolicyLinkText') }}
         </a>
-        {{ $t('termsAndConditions.text3') }}
-        <a :href="$t('termsAndConditions.cookiePolicyLinkUrl')">
-            <span>{{ $t('termsAndConditions.cookiePolicyLinkText') }}</span>
+        {{ $t('checkoutTermsAndConditions.text3') }}
+        <a :href="$t('checkoutTermsAndConditions.cookiePolicyLinkUrl')">
+            <span>{{ $t('checkoutTermsAndConditions.cookiePolicyLinkText') }}</span>
         </a>.
     </div>
 </template>
 
-<script>
-
-export default {
-};
-</script>
-
 <style lang="scss" module>
-.c-termsAndConditions {
+.c-checkoutTermsAndConditions {
     margin-left: -100px;
     margin-bottom: -(spacing(x5));
     margin-top: spacing(x6);

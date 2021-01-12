@@ -1,50 +1,50 @@
 <template>
     <div
-        data-test-id='header-component'
-        :class="$style['c-header']">
+        data-test-id='checkoutHeader-component'
+        :class="$style['c-checkoutHeader']">
         <div
             v-if="isLoggedIn"
-            data-test-id='user-header'>
+            data-test-id='user-checkoutHeader'>
             <h2 data-test-id='user-title'>
-                {{ $t('header.user.title', { name }) }}
+                {{ $t('checkoutHeader.user.title', { name }) }}
             </h2>
 
-            <p :class="$style['c-header-loginLink']">
+            <p :class="$style['c-checkoutHeader-loginLink']">
                 <a
                     :href="loginUrl"
                     data-test-id="switch-user-link"
                     @click="onVisitLoginPage">
-                    {{ $t('header.user.switchUser', { name }) }}
+                    {{ $t('checkoutHeader.user.switchUser', { name }) }}
                 </a>
             </p>
         </div>
 
         <div
             v-else
-            data-test-id='guest-header'>
-            <h2 :class="$style['c-header-title']">
-                {{ $t('header.guest.guestTitle') }}
+            data-test-id='guest-checkoutHeader'>
+            <h2 :class="$style['c-checkoutHeader-title']">
+                {{ $t('checkoutHeader.guest.guestTitle') }}
             </h2>
 
             <a
                 :href="loginUrl"
                 data-test-id="guest-login-button"
-                :class="$style['c-header-loginButton']"
+                :class="$style['c-checkoutHeader-loginButton']"
                 @click="onVisitLoginPage">
-                {{ $t('header.guest.loginButton') }}
+                {{ $t('checkoutHeader.guest.loginButton') }}
             </a>
 
             <div
-                :class="$style['c-header-option']">
-                <span>{{ $t('header.guest.option') }}</span>
+                :class="$style['c-checkoutHeader-option']">
+                <span>{{ $t('checkoutHeader.guest.option') }}</span>
             </div>
 
-            <h2 :class="$style['c-header-title']">
-                {{ $t('header.guest.guestTitle') }}
+            <h2 :class="$style['c-checkoutHeader-title']">
+                {{ $t('checkoutHeader.guest.guestTitle') }}
             </h2>
 
-            <p :class="$style['c-header-confirmation']">
-                {{ $t('header.guest.confirmation') }}
+            <p :class="$style['c-checkoutHeader-confirmation']">
+                {{ $t('checkoutHeader.guest.confirmation') }}
             </p>
         </div>
     </div>
@@ -82,18 +82,18 @@ export default {
 </script>
 
 <style lang="scss" module>
-.c-header {
+.c-checkoutHeader {
     text-align: center;
 }
 
-.c-header-title {
+.c-checkoutHeader-title {
     margin-top: 0;
     margin-bottom: spacing(x0.5);
     @include font-size('heading-s');
 }
 
 // TODO: Add link button to f-button
-.c-header-loginButton {
+.c-checkoutHeader-loginButton {
     display: inline-block;
     width: 100%;
     background-color: $orange;
@@ -123,7 +123,7 @@ export default {
     }
 }
 
-.c-header-confirmation {
+.c-checkoutHeader-confirmation {
     margin-top: spacing(x0.5);
     margin-bottom: 0;
     @include font-size('body-s');
@@ -131,7 +131,7 @@ export default {
     color: $grey--dark;
 }
 
-.c-header-option {
+.c-checkoutHeader-option {
     display: block;
     margin-top: spacing(x2);
     margin-bottom: spacing(x2);
@@ -144,12 +144,12 @@ export default {
         position: relative;
         display: inline-block;
 
-        &::before {
+        &:before {
             right: 100%;
             margin-right: 60px;
         }
 
-        &::after {
+        &:after {
             left: 100%;
             margin-left: 60px;
         }
@@ -166,7 +166,7 @@ export default {
     }
 }
 
-.c-header-loginLink {
+.c-checkoutHeader-loginLink {
     text-align: center;
 
     a {
