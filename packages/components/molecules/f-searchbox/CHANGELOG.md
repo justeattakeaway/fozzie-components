@@ -3,6 +3,32 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.16
+------------------------------
+*January 11, 2021*
+
+### Added
+- `hasMinimumAddressCriteria` check calls to Loqate happen when required.
+- Tests to cover changes.
+
+
+v4.0.0-beta.15
+------------------------------
+*January 08, 2021*
+
+### Fixed
+- Accessibility warnings for street number input field & Powered by Google alt tag.
+
+
+v4.0.0-beta.14
+------------------------------
+*January 07, 2021*
+
+### Added
+- Loqate core functionality, initial Axios call & display of results.
+- Tests to cover Loqate functionality.
+
+
 v4.0.0-beta.13
 ------------------------------
 *January 05, 2021*

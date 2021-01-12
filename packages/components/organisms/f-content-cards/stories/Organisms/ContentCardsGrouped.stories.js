@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import mock, { proxy } from 'xhr-mock';
-import ContentCards from '../../src/components/ContentCards.vue';
+import { ContentCards } from '../../src';
 import data from '../mockData/data';
 import cards from '../mockData/cards';
 
@@ -27,24 +27,22 @@ function resetBrazeData () {
 const methods = {
     onBrazeInit: action('on-braze-init'),
     getCardCount: action('get-card-count'),
-    getTitleCard: action('get-title-card'),
     hasLoaded: action('has-loaded'),
     onError: action('on-error'),
-    customCardsCallback: action('custom-cards-callback')
 };
 
 const template = `<content-cards
+            #default="{ cards }"
             @on-braze-init="onBrazeInit"
             @get-card-count="getCardCount"
             @has-loaded="hasLoaded"
             @on-error="onError"
-            @custom-cards-callback="customCardsCallback"
             :userId="userId"
             :apiKey="apiKey"
-            :title="title"
             :locale="locale"
-            :group-cards="groupCards"
-            :enabled-card-types="enabledCardTypes" />`;
+            >
+                TEST
+            </content-cards>`;
 
 export default {
     title: 'Components/Organisms/f-content-cards',

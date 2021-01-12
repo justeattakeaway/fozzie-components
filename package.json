@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "3.2.1",
+  "version": "3.4.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -49,7 +49,7 @@
     "@wdio/spec-reporter": "6.4.0",
     "@wdio/sync": "6.4.0",
     "allure-commandline": "2.13.0",
-    "axe-core": "4.0.2",
+    "axe-core": "4.1.1",
     "axe-reports": "1.1.11",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
@@ -63,6 +63,7 @@
     "eslint": "6.8.0",
     "eslint-import-resolver-webpack": "0.12.2",
     "eslint-plugin-vue": "6.2.2",
+    "eslint-plugin-vuejs-accessibility": "0.6.0",
     "eyeglass": "3.0.2",
     "include-media": "1.4.9",
     "jest-allure2": "1.2.3",
