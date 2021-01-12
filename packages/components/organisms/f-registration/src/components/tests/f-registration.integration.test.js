@@ -18,6 +18,14 @@ const propsData = {
 
 let wrapper;
 
+const setFormFieldValues = wrapper => {
+    wrapper.find('[data-test-id="formfield-firstName-input"]').setValue(CONSUMERS_REQUEST_DATA.firstName);
+    wrapper.find('[data-test-id="formfield-lastName-input"]').setValue(CONSUMERS_REQUEST_DATA.lastName);
+    wrapper.find('[data-test-id="formfield-email-input"]').setValue(CONSUMERS_REQUEST_DATA.emailAddress);
+    wrapper.find('[data-test-id="formfield-password-input"]').setValue(CONSUMERS_REQUEST_DATA.password);
+    // TODO: Add marketing preferences checkbox when it exists
+};
+
 describe('Registration API service', () => {
     allure.feature('Registration API');
     beforeEach(() => {
@@ -34,13 +42,7 @@ describe('Registration API service', () => {
     it('responds with 201 when request is made with valid details', async () => {
         // Arrange
         axiosMock.onPost(propsData.createAccountUrl, CONSUMERS_REQUEST_DATA).reply(201);
-
-        // Act
-        wrapper.find('[data-test-id="input-first-name"]').setValue(CONSUMERS_REQUEST_DATA.firstName);
-        wrapper.find('[data-test-id="input-last-name"]').setValue(CONSUMERS_REQUEST_DATA.lastName);
-        wrapper.find('[data-test-id="input-email"]').setValue(CONSUMERS_REQUEST_DATA.emailAddress);
-        wrapper.find('[data-test-id="input-password"]').setValue(CONSUMERS_REQUEST_DATA.password);
-        // TODO: Add marketing preferences checkbox when it exists
+        setFormFieldValues(wrapper);
 
         // Act
         await wrapper.vm.onFormSubmit();
@@ -63,12 +65,7 @@ describe('Registration API service', () => {
             ]
         });
 
-        // Act
-        wrapper.find('[data-test-id="input-first-name"]').setValue(CONSUMERS_REQUEST_DATA.firstName);
-        wrapper.find('[data-test-id="input-last-name"]').setValue(CONSUMERS_REQUEST_DATA.lastName);
-        wrapper.find('[data-test-id="input-email"]').setValue(CONSUMERS_REQUEST_DATA.emailAddress);
-        wrapper.find('[data-test-id="input-password"]').setValue(CONSUMERS_REQUEST_DATA.password);
-        // TODO: Add marketing preferences checkbox when it exists
+        setFormFieldValues(wrapper);
 
         // Act
         await wrapper.vm.onFormSubmit();
@@ -92,12 +89,7 @@ describe('Registration API service', () => {
             ]
         });
 
-        // Act
-        wrapper.find('[data-test-id="input-first-name"]').setValue(CONSUMERS_REQUEST_DATA.firstName);
-        wrapper.find('[data-test-id="input-last-name"]').setValue(CONSUMERS_REQUEST_DATA.lastName);
-        wrapper.find('[data-test-id="input-email"]').setValue(CONSUMERS_REQUEST_DATA.emailAddress);
-        wrapper.find('[data-test-id="input-password"]').setValue(CONSUMERS_REQUEST_DATA.password);
-        // TODO: Add marketing preferences checkbox when it exists
+        setFormFieldValues(wrapper);
 
         // Act
         await wrapper.vm.onFormSubmit();

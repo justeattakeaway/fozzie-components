@@ -6,6 +6,8 @@ import EventNames from '../../event-names';
 
 jest.mock('../../services/RegistrationServiceApi', () => ({ createAccount: jest.fn() }));
 
+let wrapper;
+
 describe('Registration', () => {
     const propsData = {
         createAccountUrl: 'http://localhost/account/register',
@@ -19,7 +21,7 @@ describe('Registration', () => {
 
     it('should be defined', () => {
         // Arrange & Act
-        const wrapper = shallowMount(Registration, { propsData });
+        wrapper = shallowMount(Registration, { propsData });
 
         // Assert
         expect(wrapper.exists()).toBe(true);
@@ -27,7 +29,7 @@ describe('Registration', () => {
 
     it('should have one form with method "post"', () => {
         // Arrange
-        const wrapper = mount(Registration, { propsData });
+        wrapper = mount(Registration, { propsData });
 
         // Act
         const forms = wrapper.findAll('form');
@@ -39,7 +41,7 @@ describe('Registration', () => {
 
     it('should have a button', () => {
         // Arrange
-        const wrapper = shallowMount(Registration, { propsData });
+        wrapper = shallowMount(Registration, { propsData });
 
         // Act
         const button = wrapper.find("[data-test-id='create-account-submit-button']");
@@ -51,7 +53,7 @@ describe('Registration', () => {
     describe(': props :', () => {
         it('should show the login link if showLoginLink prop set to true.', () => {
             // Arrange
-            const wrapper = shallowMount(Registration, {
+            wrapper = shallowMount(Registration, {
                 propsData: {
                     createAccountUrl: 'http://localhost/account/register',
                     showLoginLink: true,
@@ -68,7 +70,7 @@ describe('Registration', () => {
 
         it('should not show the login link if showLoginLink is set to false.', () => {
             // Arrange
-            const wrapper = shallowMount(Registration, {
+            wrapper = shallowMount(Registration, {
                 propsData: {
                     createAccountUrl: 'http://localhost/account/register',
                     showLoginLink: false,
@@ -85,7 +87,7 @@ describe('Registration', () => {
 
         it('should show the login link if showLoginLink prop not set', () => {
             // Arrange
-            const wrapper = shallowMount(Registration, { propsData });
+            wrapper = shallowMount(Registration, { propsData });
 
             // Act
             const loginLink = wrapper.find("[data-test-id='create-account-login-link']");
@@ -96,7 +98,7 @@ describe('Registration', () => {
 
         it('should show emit VisitLoginPage event when login link is clicked.', () => {
             // Arrange
-            const wrapper = shallowMount(Registration, {
+            wrapper = shallowMount(Registration, {
                 propsData: {
                     createAccountUrl: 'http://localhost/account/register',
                     showLoginLink: true,
@@ -114,7 +116,7 @@ describe('Registration', () => {
 
         it('should fallback to use the en-GB locale if no locale passed', () => {
             // Arrange & Act
-            const wrapper = shallowMount(Registration, {
+            wrapper = shallowMount(Registration, {
                 propsData: {
                     createAccountUrl: 'http://localhost/account/register',
                     showLoginLink: true,
@@ -134,44 +136,40 @@ describe('Registration', () => {
             return mount(Registration, { propsData, attachTo: div });
         };
 
+        afterEach(() => {
+            wrapper.destroy();
+        });
+
         describe('with a faulty registration service', () => {
             it('should populate generic error message and emit failure event when service responds with an error', async () => {
                 // Arrange
                 RegistrationServiceApi.createAccount.mockImplementation(async () => { throw new Error('Conflict'); });
-                const wrapper = mountComponentAndAttachToDocument();
+                wrapper = mountComponentAndAttachToDocument();
                 Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
 
-                try {
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-                    await flushPromises();
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
 
-                    // Assert
-                    expect(wrapper.vm.genericErrorMessage).not.toBeNull();
-                    expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-                } finally {
-                    wrapper.destroy();
-                }
+                // Assert
+                expect(wrapper.vm.genericErrorMessage).not.toBeNull();
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             });
 
             it('should show error message and emit failure event when service responds with a 409', async () => {
                 // Arrange
                 const err = { response: { data: { faultId: '123', traceId: '123', errors: [{ description: 'The specified email already exists', errorCode: '409' }] } } };
                 RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
-                const wrapper = mountComponentAndAttachToDocument();
+                wrapper = mountComponentAndAttachToDocument();
                 Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
 
-                try {
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-                    await flushPromises();
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
 
-                    // Assert
-                    expect(wrapper.vm.shouldShowEmailAlreadyExistsError).toBe(true);
-                    expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-                } finally {
-                    wrapper.destroy();
-                }
+                // Assert
+                expect(wrapper.vm.shouldShowEmailAlreadyExistsError).toBe(true);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             });
 
             it('should emit login blocked event when service responds with a 403', async () => {
@@ -191,75 +189,59 @@ describe('Registration', () => {
                         }
                     }
                 };
+
                 RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
-                const wrapper = mountComponentAndAttachToDocument();
+                wrapper = mountComponentAndAttachToDocument();
                 Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
 
-                try {
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-                    await flushPromises();
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
 
-                    // Assert
-                    expect(wrapper.emitted(EventNames.LoginBlocked).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
-                } finally {
-                    wrapper.destroy();
-                }
+                // Assert
+                expect(wrapper.emitted(EventNames.LoginBlocked).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
             });
 
             it('should populate generic error message and emit failure event when service responds with a 400', async () => {
                 // Arrange
                 const err = { response: { data: { faultId: '123', traceId: '123', errors: [{ description: 'The Password field is required', errorCode: '400' }] } } };
                 RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
-                const wrapper = mountComponentAndAttachToDocument();
+                wrapper = mountComponentAndAttachToDocument();
                 Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
 
-                try {
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-                    await flushPromises();
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
 
-                    // Assert
-                    expect(wrapper.vm.genericErrorMessage).toEqual('The Password field is required');
-                    expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-                } finally {
-                    wrapper.destroy();
-                }
+                // Assert
+                expect(wrapper.vm.genericErrorMessage).toEqual('The Password field is required');
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             });
 
             it('should show default error message and emit failure event when service with an error with no description', async () => {
                 // Arrange
                 const err = { response: { data: { errors: [{ errorCode: 'XXX' }] } } };
                 RegistrationServiceApi.createAccount.mockImplementation(async () => { throw err; });
-                const wrapper = mountComponentAndAttachToDocument();
+                wrapper = mountComponentAndAttachToDocument();
                 Object.defineProperty(wrapper.vm.$v, '$invalid', { get: jest.fn(() => false) });
 
-                try {
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-                    await flushPromises();
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
 
-                    // Assert
-                    expect(wrapper.vm.genericErrorMessage).toEqual('Something went wrong, please try again later');
-                    expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
-                } finally {
-                    wrapper.destroy();
-                }
+                // Assert
+                expect(wrapper.vm.genericErrorMessage).toEqual('Something went wrong, please try again later');
+                expect(wrapper.emitted(EventNames.CreateAccountFailure).length).toBe(1);
             });
         });
 
         describe('with a working registration service', () => {
-            let wrapper;
             beforeEach(() => {
                 RegistrationServiceApi.createAccount.mockClear();
                 RegistrationServiceApi.createAccount.mockImplementation(async () => Promise.resolve());
 
                 wrapper = mountComponentAndAttachToDocument();
-            });
-
-            afterEach(() => {
-                wrapper.destroy();
             });
 
             it('should post correct data and emit success event when service succeeds', async () => {
@@ -290,7 +272,7 @@ describe('Registration', () => {
 
             it('should show error message and emit failure event when the first name field is populated with invalid input', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-first-name"]').setValue('wh4t @ w3!rd |\\|ame');
+                wrapper.find('[data-test-id="formfield-firstName-input"]').setValue('wh4t @ w3!rd |\\|ame');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -304,7 +286,7 @@ describe('Registration', () => {
 
             it('should show error message and emit inline failure event when the first name field is populated with invalid input and focus is lost', async () => {
                 // Arrange
-                const firstNameInput = wrapper.find('[data-test-id="input-first-name"]');
+                const firstNameInput = wrapper.find('[data-test-id="formfield-firstName-input"]');
                 firstNameInput.setValue('wh4t @ w3!rd |\\|ame');
 
                 // Act
@@ -320,7 +302,7 @@ describe('Registration', () => {
             it('should show error message and emit failure event when the first name field is populated with too long an input', async () => {
                 // Arrange
                 const longValue = 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij';
-                wrapper.find('[data-test-id="input-first-name"]').setValue(longValue);
+                wrapper.find('[data-test-id="formfield-firstName-input"]').setValue(longValue);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -334,7 +316,7 @@ describe('Registration', () => {
 
             it('should show error message and emit failure event when the last name field is not populated', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-first-name"]').setValue('Adam');
+                wrapper.find('[data-test-id="formfield-firstName-input"]').setValue('Adam');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -348,7 +330,7 @@ describe('Registration', () => {
 
             it('should show error message and emit failure event when the last name field is populated with invalid input', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-last-name"]').setValue('wh4t @ w3!rd |\\|ame');
+                wrapper.find('[data-test-id="formfield-lastName-input"]').setValue('wh4t @ w3!rd |\\|ame');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -363,7 +345,7 @@ describe('Registration', () => {
             it('should show error message and emit failure event when the last name field is populated with too long an input', async () => {
                 // Arrange
                 const longValue = 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij';
-                wrapper.find('[data-test-id="input-last-name"]').setValue(longValue);
+                wrapper.find('[data-test-id="formfield-lastName-input"]').setValue(longValue);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -378,7 +360,7 @@ describe('Registration', () => {
             it('should show error message and emit inline failure event when the last name field is populated with too long an input and focus is lost', async () => {
                 // Arrange
                 const longValue = 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij';
-                const lastNameInput = wrapper.find('[data-test-id="input-last-name"]');
+                const lastNameInput = wrapper.find('[data-test-id="formfield-lastName-input"]');
                 lastNameInput.setValue(longValue);
 
                 // Act
@@ -393,10 +375,10 @@ describe('Registration', () => {
 
             it('should allow input and emit success event when the password field is populated with a long input', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-first-name"]').setValue('Ashton');
-                wrapper.find('[data-test-id="input-last-name"]').setValue('Adamms');
-                wrapper.find('[data-test-id="input-email"]').setValue('ashton.adamms+jetest@just-eat.com');
-                wrapper.find('[data-test-id="input-password"]').setValue('llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch');
+                wrapper.find('[data-test-id="formfield-firstName-input"]').setValue('Ashton');
+                wrapper.find('[data-test-id="formfield-lastName-input"]').setValue('Adamms');
+                wrapper.find('[data-test-id="formfield-email-input"]').setValue('ashton.adamms+jetest@just-eat.com');
+                wrapper.find('[data-test-id="formfield-password-input"]').setValue('llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -408,7 +390,7 @@ describe('Registration', () => {
 
             it('should show error message and emit failure event when the password field is populated with too short an input', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-password"]').setValue('dog');
+                wrapper.find('[data-test-id="formfield-password-input"]').setValue('dog');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -422,7 +404,7 @@ describe('Registration', () => {
 
             it('should show error message and emit inline failure event when the password field is populated with too short an input and focus is lost', async () => {
                 // Arrange
-                const passwordInput = wrapper.find('[data-test-id="input-password"]');
+                const passwordInput = wrapper.find('[data-test-id="formfield-password-input"]');
                 passwordInput.setValue('dog');
 
                 // Act
@@ -438,7 +420,7 @@ describe('Registration', () => {
             it('should show error message and emit failure event when the email field is populated with too long an input', async () => {
                 // Arrange
                 const longEmail = 'test-user-with-somewhat-long-email@justeattakeaway.com';
-                wrapper.find('[data-test-id="input-email"]').setValue(longEmail);
+                wrapper.find('[data-test-id="formfield-email-input"]').setValue(longEmail);
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -452,7 +434,7 @@ describe('Registration', () => {
 
             it('should show error message and emit inline failure event when the email field is invalid and focus is lost', async () => {
                 // Arrange
-                const emailInput = wrapper.find('[data-test-id="input-email"]');
+                const emailInput = wrapper.find('[data-test-id="formfield-email-input"]');
                 emailInput.setValue('invalid email');
 
                 // Act
@@ -467,10 +449,10 @@ describe('Registration', () => {
 
             it('should emit success event when all fields are populated correctly', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="input-first-name"]').setValue('James');
-                wrapper.find('[data-test-id="input-last-name"]').setValue('O\'Neil-Wight');
-                wrapper.find('[data-test-id="input-email"]').setValue('ashton.adamms+jetest@just-eat.com');
-                wrapper.find('[data-test-id="input-password"]').setValue('Secure123');
+                wrapper.find('[data-test-id="formfield-firstName-input"]').setValue('James');
+                wrapper.find('[data-test-id="formfield-lastName-input"]').setValue('O\'Neil-Wight');
+                wrapper.find('[data-test-id="formfield-email-input"]').setValue('ashton.adamms+jetest@just-eat.com');
+                wrapper.find('[data-test-id="formfield-password-input"]').setValue('Secure123');
 
                 // Act
                 await wrapper.vm.onFormSubmit();

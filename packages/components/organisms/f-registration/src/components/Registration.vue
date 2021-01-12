@@ -34,7 +34,6 @@
                 <form-field
                     v-model="firstName"
                     name="firstName"
-                    data-test-id="input-first-name"
                     :label-text="copy.labels.firstName"
                     input-type="text"
                     @blur="formFieldBlur('firstName')">
@@ -60,7 +59,6 @@
                 <form-field
                     v-model="lastName"
                     name="lastName"
-                    data-test-id="input-last-name"
                     :label-text="copy.labels.lastName"
                     input-type="text"
                     @blur="formFieldBlur('lastName')">
@@ -86,7 +84,6 @@
                 <form-field
                     v-model="email"
                     name="email"
-                    data-test-id="input-email"
                     :label-text="copy.labels.email"
                     input-type="email"
                     @blur="formFieldBlur('email')">
@@ -117,7 +114,6 @@
                 <form-field
                     v-model="password"
                     name="password"
-                    data-test-id="input-password"
                     :label-text="copy.labels.password"
                     input-type="password"
                     @blur="formFieldBlur('password')">
