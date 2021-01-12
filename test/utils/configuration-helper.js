@@ -20,6 +20,4 @@ exports.ci = () => ({
     reporters: null
 });
 
-exports.setTestType = () => {
-    return CIRCLE_CI ? exports.ci() : exports.local();
-};
+exports.setTestType = () => (CIRCLE_CI ? exports.ci() : exports.local());
