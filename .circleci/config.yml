@@ -140,11 +140,11 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-              - yarn-packages-{{ checksum "yarn.lock" }}
+              - yarn-packages-{{ .Branch }}-test11-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - save_cache:
           name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          - yarn-packages-{{ .Branch }}-test11-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
       - run: # Run PR Checks
@@ -169,7 +169,7 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-              - yarn-packages-{{ checksum "yarn.lock" }}
+              - yarn-packages-{{ .Branch }}-test11-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - run: # Run Tests
           name: Run Unit / Integration Tests
@@ -184,7 +184,7 @@ jobs:
        - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-              - yarn-packages-{{ checksum "yarn.lock" }}
+              - yarn-packages-{{ .Branch }}-test11-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
@@ -214,7 +214,7 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}-test11-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - build_packages
       - run:
