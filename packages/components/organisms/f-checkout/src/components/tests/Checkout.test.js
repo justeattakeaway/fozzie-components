@@ -86,23 +86,6 @@ describe('Checkout', () => {
         expect(forms.wrappers[0].attributes('method')).toBe('post');
     });
 
-    it('should show the login link', () => {
-        // Arrange
-        const wrapper = mount(VueCheckout, {
-            i18n,
-            store: createStore(),
-            localVue,
-            propsData
-        });
-
-        // Act
-        const loginLink = wrapper.find("[data-test-id='switch-user-link']");
-
-        // Assert
-        expect(loginLink.exists()).toBe(true);
-        expect(loginLink.text()).toBe(`Not ${defaultState.customer.firstName}? Click here.`);
-    });
-
     describe('created :: ', () => {
         afterEach(() => {
             jest.clearAllMocks();
@@ -201,29 +184,6 @@ describe('Checkout', () => {
     });
 
     describe('computed ::', () => {
-        describe('name ::', () => {
-            it('should capitalize `firstName` data', async () => {
-                // Act
-                const wrapper = mount(VueCheckout, {
-                    store: createStore({
-                        ...defaultState,
-                        customer: {
-                            ...defaultState.customer,
-                            firstName: 'joe'
-                        }
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                const name = wrapper.vm.name;
-
-                // Assert
-                expect(name).toEqual('Joe');;
-            });
-        });
-
         describe('isMobileNumberValid ::', () => {
             let wrapper;
 

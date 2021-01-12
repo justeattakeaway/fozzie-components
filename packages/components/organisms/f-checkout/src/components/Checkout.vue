@@ -17,19 +17,14 @@
             card-heading-position="center"
             data-test-id="checkout-card-component"
             :class="$style['c-card--dimensions']">
-
             <checkout-header
-                :is-guest="isGuest"
-                :name="name"
-                :loginUrl="loginUrl"/>
+                :login-url="loginUrl" />
 
             <form
                 method="post"
                 :class="$style['c-checkout-form']"
                 @submit.prevent="onFormSubmit">
-
-
-                <guest-block v-if="isGuest"/>
+                <guest-block v-if="!isLoggedIn" />
 
                 <form-field
                     :value="customer.mobileNumber"
@@ -71,10 +66,9 @@
             </form>
 
             <terms-and-conditions
-                v-if="isGuest"
-                :class="$style['c-checkout-termsAndConditions']"/>
+                v-if="!isLoggedIn"
+                :class="$style['c-checkout-termsAndConditions']" />
         </card>
-
     </div>
 </template>
 
@@ -170,11 +164,6 @@ export default {
         loginUrl: {
             type: String,
             required: true
-        },
-
-        isGuest: {
-            type: Boolean,
-            required: true
         }
     },
 
@@ -213,10 +202,6 @@ export default {
             'notices',
             'serviceType'
         ]),
-
-        name () {
-            return (this.customer.firstName.charAt(0).toUpperCase() + this.customer.firstName.slice(1));
-        },
 
         title () {
             return `${this.name}, confirm your details`;

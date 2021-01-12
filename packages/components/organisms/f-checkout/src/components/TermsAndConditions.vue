@@ -1,15 +1,17 @@
 <template>
-    <div data-test-id='terms-and-coniditions-component' :class="$style['c-termsAndConditions']">
-            {{ $t('termsAndConditions.text1') }}
-            <a :href="$t('termsAndConditions.termsAndConditionsLinkUrl')">
-                {{ $t('termsAndConditions.termsAndConditionsLinkText') }}</a>{{ $t('termsAndConditions.text2') }}
-            <a :href="$t('termsAndConditions.privacyPolicyLinkUrl')">
-                {{ $t('termsAndConditions.privacyPolicyLinkText') }}
-            </a>
-            {{ $t('termsAndConditions.text3') }}
-            <a :href="$t('termsAndConditions.cookiePolicyLinkUrl')">
-                <span>{{ $t('termsAndConditions.cookiePolicyLinkText') }}</span>
-            </a>.
+    <div
+        data-test-id='terms-and-coniditions-component'
+        :class="$style['c-termsAndConditions']">
+        {{ $t('termsAndConditions.text1') }}
+        <a :href="$t('termsAndConditions.termsAndConditionsLinkUrl')">
+            {{ $t('termsAndConditions.termsAndConditionsLinkText') }}</a>{{ $t('termsAndConditions.text2') }}
+        <a :href="$t('termsAndConditions.privacyPolicyLinkUrl')">
+            {{ $t('termsAndConditions.privacyPolicyLinkText') }}
+        </a>
+        {{ $t('termsAndConditions.text3') }}
+        <a :href="$t('termsAndConditions.cookiePolicyLinkUrl')">
+            <span>{{ $t('termsAndConditions.cookiePolicyLinkText') }}</span>
+        </a>.
     </div>
 </template>
 

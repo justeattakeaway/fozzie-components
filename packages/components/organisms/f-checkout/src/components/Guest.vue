@@ -1,20 +1,19 @@
 <template>
-    <div data-test-id='guest-component' :class="$style['c-guest']">
+    <div
+        data-test-id='guest-component'
+        :class="$style['c-guest']">
         <form-field
             v-model="guest.firstName"
             name="guest-first-name"
-            :label-text="$t('labels.firstName')">
-        </form-field>
+            :label-text="$t('labels.firstName')" />
         <form-field
             v-model="guest.lastName"
             name="guest-last-name"
-            :label-text="$t('labels.lastName')">
-        </form-field>
+            :label-text="$t('labels.lastName')" />
         <form-field
             v-model="guest.email"
             name="guest-email"
-            :label-text="$t('labels.email')">
-        </form-field>
+            :label-text="$t('labels.email')" />
     </div>
 </template>
 
@@ -32,7 +31,7 @@ export default {
                 lastName: '',
                 email: ''
             }
-        }
+        };
     }
 };
 </script>

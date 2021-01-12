@@ -1,26 +1,13 @@
 <template>
-    <div data-test-id='header-component' :class="$style['c-header']">
-        <div data-test-id='guest-header' v-if="isGuest">
-            <h2 :class="$style['c-header-title']">{{ $t('guestHeader') }}</h2>
-            <a
-                :href="loginUrl"
-                data-test-id="guest-login-button"
-                :class="$style['c-header-loginButton']"
-                @click="onVisitLoginPage">
-                {{ $t('loginButtonText') }}
-            </a>
-
-            <div
-                :class="$style['c-header-option']">
-                    <span>{{ $t('guestOption') }}</span>
-            </div>
-
-            <h2 :class="$style['c-header-title']">{{ $t('guestTitle') }}</h2>
-            <p :class="$style['c-header-confirmation']">{{ $t('guestDeliveryHeader') }}</p>
-        </div>
-
-        <div data-test-id='user-header' v-else>
-            <h2 data-test-id='user-title'>{{ title }}</h2>
+    <div
+        data-test-id='header-component'
+        :class="$style['c-header']">
+        <div
+            v-if="isLoggedIn"
+            data-test-id='user-header'>
+            <h2 data-test-id='user-title'>
+                {{ title }}
+            </h2>
             <p
                 :class="$style['c-header-loginLink']">
                 <a
@@ -31,24 +18,42 @@
                 </a>
             </p>
         </div>
+
+        <div
+            v-else
+            data-test-id='guest-header'>
+            <h2 :class="$style['c-header-title']">
+                {{ $t('guestHeader') }}
+            </h2>
+            <a
+                :href="loginUrl"
+                data-test-id="guest-login-button"
+                :class="$style['c-header-loginButton']"
+                @click="onVisitLoginPage">
+                {{ $t('loginButtonText') }}
+            </a>
+
+            <div
+                :class="$style['c-header-option']">
+                <span>{{ $t('guestOption') }}</span>
+            </div>
+
+            <h2 :class="$style['c-header-title']">
+                {{ $t('guestTitle') }}
+            </h2>
+            <p :class="$style['c-header-confirmation']">
+                {{ $t('guestDeliveryHeader') }}
+            </p>
+        </div>
     </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import EventNames from '../event-names';
 
 export default {
     props: {
-        isGuest: {
-            type: Boolean,
-            required: true
-        },
-
-        name: {
-            type: String,
-            required: true
-        },
-
         loginUrl: {
             type: String,
             required: true
@@ -56,6 +61,15 @@ export default {
     },
 
     computed: {
+        ...mapState('checkout', [
+            'customer',
+            'isLoggedIn'
+        ]),
+
+        name () {
+            return (this.customer.firstName.charAt(0).toUpperCase() + this.customer.firstName.slice(1));
+        },
+
         title () {
             return `${this.name}, confirm your details`;
         }
@@ -64,7 +78,7 @@ export default {
     methods: {
         onVisitLoginPage () {
             this.$emit(EventNames.CheckoutVisitLoginPage);
-        },
+        }
 
     }
 };

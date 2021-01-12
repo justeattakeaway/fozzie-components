@@ -18,7 +18,6 @@ const collectionUrl = '/checkout-collection.json';
 const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
 const createGuestUrl = '/create-guest.json';
 
-
 CheckoutMock.setupCheckoutMethod(deliveryUrl);
 CheckoutMock.setupCheckoutMethod(collectionUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentUrl);
@@ -46,13 +45,10 @@ export const CheckoutComponent = () => ({
             default: text('Create Guest Url', createGuestUrl)
         },
         authToken: {
-            default: text('Auth token', '')
+            default: select('Auth token', ['authToken', null], 'authToken')
         },
         loginUrl: {
             default: text('Login Url', '/login')
-        },
-        isGuest: {
-            default: boolean('isGuest', false)
         }
     },
     store: new Vuex.Store({}),
@@ -63,7 +59,6 @@ export const CheckoutComponent = () => ({
         ':authToken="authToken" ' +
         ':locale="locale" ' +
         ':loginUrl="loginUrl" ' +
-        ':isGuest="isGuest" ' +
         // eslint-disable-next-line no-template-curly-in-string
         ' :key="`${locale},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl}`" />'
 });
