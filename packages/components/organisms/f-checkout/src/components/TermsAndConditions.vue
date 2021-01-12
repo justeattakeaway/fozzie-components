@@ -2,24 +2,31 @@
     <div
         data-test-id='checkoutTerms-and-conditions-component'
         :class="$style['c-checkoutTermsAndConditions']">
-        {{ $t('checkoutTermsAndConditions.text1') }}
-        <a :href="$t('checkoutTermsAndConditions.checkoutTermsAndConditionsLinkUrl')">
-            <span>{{ $t('checkoutTermsAndConditions.checkoutTermsAndConditionsLinkText') }}</span>
-        </a>{{ $t('checkoutTermsAndConditions.text2') }}
-        <a :href="$t('checkoutTermsAndConditions.privacyPolicyLinkUrl')">
-            {{ $t('checkoutTermsAndConditions.privacyPolicyLinkText') }}
-        </a>
-        {{ $t('checkoutTermsAndConditions.text3') }}
-        <a :href="$t('checkoutTermsAndConditions.cookiePolicyLinkUrl')">
-            <span>{{ $t('checkoutTermsAndConditions.cookiePolicyLinkText') }}</span>
-        </a>.
+        <i18n
+            path="checkoutTermsAndConditions">
+            <template #termsAndConditions>
+                <a :href="$t('termsAndConditionsLinkUrl')">
+                    <span>{{ $t('termsAndConditionsLinkText') }}</span>
+                </a>
+            </template>
+            <template #privacyPolicy>
+                <a :href="$t('privacyPolicyLinkUrl')">
+                    {{ $t('privacyPolicyLinkText') }}
+                </a>
+            </template>
+            <template #cookiePolicy>
+                <a :href="$t('cookiePolicyLinkUrl')">
+                    <span>{{ $t('cookiePolicyLinkText') }}</span>
+                </a>
+            </template>
+        </i18n>
     </div>
 </template>
 
 <style lang="scss" module>
 .c-checkoutTermsAndConditions {
-    margin-left: -100px;
-    margin-bottom: -(spacing(x5));
+    margin-left: -81px;
+    margin-bottom: -(spacing(x6));
     margin-top: spacing(x6);
     padding: spacing(x2);
     border-radius: 0 0 $border-radius $border-radius;

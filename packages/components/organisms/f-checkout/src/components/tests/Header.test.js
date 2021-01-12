@@ -33,14 +33,18 @@ describe('Header', () => {
     describe('computed ::', () => {
         describe('isLoggedIn ::', () => {
             describe('when set to true', () => {
-                const wrapper = shallowMount(Header, {
-                    store: createStore({ ...defaultState, isLoggedIn: true }),
-                    i18n,
-                    localVue,
-                    propsData
+                let wrapper;
+
+                beforeEach(() => {
+                    wrapper = shallowMount(Header, {
+                        store: createStore({ ...defaultState, isLoggedIn: true }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
                 });
 
-                it('should render the user header', () => {
+                it('should render the authenticated user header', () => {
                     // Arrange
                     const userHeader = wrapper.find('[data-test-id="user-header"]');
 
@@ -48,7 +52,7 @@ describe('Header', () => {
                     expect(userHeader).toBeDefined();
                 });
 
-                it('should show the login link', () => {
+                it('should show the link to switch users', () => {
                     // Arrange
                     const loginLink = wrapper.find("[data-test-id='switch-user-link']");
 
@@ -59,11 +63,15 @@ describe('Header', () => {
             });
 
             describe('when set to false', () => {
-                const wrapper = shallowMount(Header, {
-                    i18n,
-                    localVue,
-                    store: createStore({ ...defaultState, isLoggedIn: false }),
-                    propsData
+                let wrapper;
+
+                beforeEach(() => {
+                    wrapper = shallowMount(Header, {
+                        store: createStore({ ...defaultState, isLoggedIn: false }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
                 });
 
                 it('should render the guest header', () => {
@@ -74,12 +82,12 @@ describe('Header', () => {
                     expect(guestHeader).toBeDefined();
                 });
 
-                it('should show the login button', () => {
+                it('should show the button to register or login', () => {
                     // Arrange
-                    const loginbutton = wrapper.find("[data-test-id='guest-login-button']");
+                    const loginButton = wrapper.find("[data-test-id='guest-login-button']");
 
                     // Assert
-                    expect(loginbutton).toBeDefined();
+                    expect(loginButton).toBeDefined();
                 });
             });
         });

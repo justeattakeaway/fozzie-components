@@ -59,20 +59,16 @@ const messages = {
         }
     },
 
-    checkoutTermsAndConditions: {
-        text1: 'By placing an order you agree to our ',
-        text2: '. Please read our Privacy Policy ',
-        text3: ' and ',
+    checkoutTermsAndConditions: 'By placing an order you agree to our {termsAndConditions}. Please read our {privacyPolicy} and {cookiePolicy}.',
 
-        checkoutTermsAndConditionsLinkText: 'Terms and Conditions',
-        checkoutTermsAndConditionsLinkUrl: 'https://www.just-eat.co.uk/termsandconditions',
+    termsAndConditionsLinkText: 'Terms and Conditions',
+    termsAndConditionsLinkUrl: 'https://www.just-eat.co.uk/termsandconditions',
 
-        privacyPolicyLinkText: 'Privacy Policy',
-        privacyPolicyLinkUrl: 'https://www.just-eat.co.uk/privacypolicy',
+    privacyPolicyLinkText: 'Privacy Policy',
+    privacyPolicyLinkUrl: 'https://www.just-eat.co.uk/privacypolicy',
 
-        cookiePolicyLinkText: 'Cookie Policy',
-        cookiePolicyLinkUrl: 'https://www.just-eat.co.uk/cookies-policy'
-    }
+    cookiePolicyLinkText: 'Cookie Policy',
+    cookiePolicyLinkUrl: 'https://www.just-eat.co.uk/cookies-policy'
 };
 
 const dateTimeFormats = {

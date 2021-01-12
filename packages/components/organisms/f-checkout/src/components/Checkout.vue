@@ -448,7 +448,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-$checkout-width                           : 596px;
+$checkout-width                           : 460px;
 $checkout-padding                         : spacing(x5) 100px;
 
 .c-checkout {
@@ -458,8 +458,19 @@ $checkout-padding                         : spacing(x5) 100px;
     font-weight: $font-weight-base;
 
     .c-card--dimensions {
-        width: $checkout-width;
-        padding: $checkout-padding;
+        padding-top: spacing(x7);
+        padding-bottom: spacing(x6);
+
+        @include media('<mid') {
+            padding-bottom: spacing(x4);
+        }
+
+        @include media('>=narrow') {
+            // TODO: box shadow value will eventually come from PIE design tokens, but hard coding here for now
+            box-shadow: 0 1px 1px 0 rgba($black, 0.03),
+                    0 2px 1px -1px rgba($black, 0.07),
+                    0 1px 3px 0 rgba($black, 0.06);
+        }
     }
 
     .c-checkout-form {
