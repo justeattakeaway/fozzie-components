@@ -1,4 +1,8 @@
 const video = require('wdio-video-reporter');
+const { setTestType } = require('./test/utils/configuration-helper');
+
+const testType = setTestType();
+
 exports.config = {
     //
     // ====================
@@ -96,7 +100,7 @@ exports.config = {
     //
     // If you only want to run your tests until a specific amount of tests have failed use
     // bail (default is 0 - don't bail, run all tests).
-    bail: 0,
+    bail: testType.bail,
     //
     // Set a base URL in order to shorten url command calls. If your `url` parameter starts
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
@@ -139,18 +143,7 @@ exports.config = {
     // see also: https://webdriver.io/docs/dot-reporter.html
     // reporters: ['dot'],
 
-    reporters:
-        process.env.CIRCLECI ? [''] : [
-            [video, {
-                saveAllVideos: false, // If true, also saves videos for successful test cases
-                videoSlowdownMultiplier: 3 // Higher to get slower videos, lower for faster videos [Value 1-100]
-            }],
-            ['allure', {
-                outputDir: '../../../../allure-results',
-                disableWebdriverStepsReporting: false,
-                disableWebdriverScreenshotsReporting: false
-            }]
-        ],
+    reporters: testType.reporters,
 
     afterTest: () => {
         browser.takeScreenshot();
