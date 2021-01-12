@@ -27,6 +27,6 @@ exports.setTestType = () => {
         case false:
             return exports.local();
         default:
-            throw new Error(`Sorry, ${TEST_TYPE} is not recognised.`);
+            throw new Error(`Sorry, ${CIRCLE_CI} is not recognised.`);
     }
 };
