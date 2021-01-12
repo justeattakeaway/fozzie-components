@@ -168,6 +168,9 @@ jobs:
       - run: # Install WebDriverIO Test Dependencies
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global
+      - run: # Build Storybook
+          name: Build Storybook
+          command: yarn storybook:build
       - save_cache:
           name: Save Working Directory + Bundles Cache
           key: working-directory-dist{{ .Branch }}-{{ .Revision }}
@@ -213,9 +216,6 @@ jobs:
           name: Restore Working Directory + Bundles Cache
           keys:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
-      - run: # Build Storybook
-          name: Build Storybook
-          command: yarn storybook:build
       - run: # Serve Storybook
           name: Serve Storybook
           command: yarn storybook:serve-static
@@ -237,9 +237,6 @@ jobs:
           name: Restore Working Directory + Bundles Cache
           keys:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
-      - run: # Build Storybook
-          name: Build Storybook
-          command: yarn storybook:build
       - run: # Serve Storybook
           name: Serve Storybook
           command: yarn storybook:serve-static
@@ -250,11 +247,8 @@ jobs:
       - run: # Run Accessibility UI Tests
           name: Run WebDriverIO Component
           command: yarn test-accessibility-ci:chrome
-      - save_cache:
-          name: Save Axe Violation Cache
-          key: axe-violations-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - ~/project/axe-violations
+      - store_artifacts:
+          path: axe-violations/
 
   bundlewatch:
     executor: node
@@ -270,16 +264,10 @@ jobs:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
 
-  reporting:
+  slack_reporting:
     executor: node
     environment:
     steps: # a collection of executable commands
-      - restore_cache:
-          name: Restore Axe Violation Cache
-          keys:
-              - axe-violations-{{ .Branch }}-{{ .BuildNum }}
-      - store_artifacts:
-          path: axe-violations/
       - slack_notify_fail
       - slack_notify_success
 
@@ -355,10 +343,14 @@ workflows:
           filters:
             branches:
               ignore: 'gh-pages'
-      - reporting:
+      - slack_reporting:
           context: web-core
           requires:
+            - bundlewatch
             - component_tests
+            - linting
+            - unit_tests
+            - accessibility_tests
           filters:
             branches:
               ignore: 'gh-pages'
