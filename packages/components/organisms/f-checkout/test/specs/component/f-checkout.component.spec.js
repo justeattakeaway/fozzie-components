@@ -12,11 +12,6 @@ describe('f-checkout component tests', () => {
         expect(CheckoutComponent.isCheckoutComponentDisplayed()).toBe(true);
     });
 
-    it('should display the allergen link', () => {
-        // Assert
-        expect(CheckoutComponent.isAllergenLinkDisplayed()).toBe(true);
-    });
-
     it.skip('should submit the checkout form', () => {
         // Arrange
         const addressInfo = {
