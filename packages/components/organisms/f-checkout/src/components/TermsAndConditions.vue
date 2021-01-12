@@ -24,7 +24,10 @@
 </template>
 
 <style lang="scss" module>
+$checkout-width                           : 460px;
+
 .c-checkoutTermsAndConditions {
+    width: Calc($checkout-width - 2px); // -2px for border width
     margin-left: -81px;
     margin-bottom: -(spacing(x6));
     margin-top: spacing(x6);

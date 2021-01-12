@@ -478,9 +478,5 @@ $checkout-padding                         : spacing(x5) 100px;
     .c-checkout-submitButton {
         margin: spacing(x4) 0 spacing(x0.5);
     }
-
-    .c-checkout-termsAndConditions {
-        width: Calc($checkout-width - 2px); // -2px for border width
-    }
 }
 </style>
