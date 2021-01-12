@@ -1,7 +1,6 @@
 /* global browser, $ */
 
 import {
-    ALLERGEN_LINK,
     CHECKOUT_COMPONENT,
     ORDER_TIME_DROPDOWN,
     ORDER_TIME_DROPDOWN_OPTIONS,
@@ -23,8 +22,6 @@ const orderTimeDropdownOptions = () => $$(ORDER_TIME_DROPDOWN_OPTIONS);
 const knobCheckoutDropdown = () => $(KNOB_CHECKOUT_DROPDOWN);
 
 // Buttons
-
-const allergenLink = () => $(ALLERGEN_LINK);
 const goToPaymentButton = () => $(GO_TO_PAYMENT_BUTTON);
 const knobButton = () => $(KNOB_BUTTON);
 
@@ -80,7 +77,6 @@ exports.isFieldDisplayed = fieldName => fields[fieldName].input().isDisplayed();
 exports.isFieldTypeErrorDisplayed = fieldName => fields[fieldName].typeError().isDisplayed();
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
-exports.isAllergenLinkDisplayed = () => allergenLink().isDisplayed();
 exports.isOrderTimeDropdownDisplayed = () => orderTimeDropdown().isDisplayed();
 exports.userNoteMaxCharacterCount = () => userNoteInput().getAttribute('maxlength');
 exports.clickPaymentButton = () => goToPaymentButton().click();
