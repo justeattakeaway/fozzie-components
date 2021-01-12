@@ -139,18 +139,18 @@ exports.config = {
     // see also: https://webdriver.io/docs/dot-reporter.html
     // reporters: ['dot'],
 
-    reporters: [
-        [video, {
-            saveAllVideos: false, // If true, also saves videos for successful test cases
-            videoSlowdownMultiplier: 3 // Higher to get slower videos, lower for faster videos [Value 1-100]
-        }],
-
-        process.env.CIRCLECI ? [] : ['allure', {
-            outputDir: '../../../../allure-results',
-            disableWebdriverStepsReporting: false,
-            disableWebdriverScreenshotsReporting: false
-        }]
-    ],
+    reporters:
+        process.env.CIRCLECI ? [] : [
+            [video, {
+                saveAllVideos: false, // If true, also saves videos for successful test cases
+                videoSlowdownMultiplier: 3 // Higher to get slower videos, lower for faster videos [Value 1-100]
+            }],
+            ['allure', {
+                outputDir: '../../../../allure-results',
+                disableWebdriverStepsReporting: false,
+                disableWebdriverScreenshotsReporting: false
+            }]
+        ],
 
     afterTest: () => {
         browser.takeScreenshot();
