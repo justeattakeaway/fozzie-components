@@ -56,13 +56,6 @@
                 <user-note data-test-id="user-note" />
 
                 <f-button
-                    :class="$style['c-checkout-allergyButton']"
-                    button-type="link"
-                    data-test-id="allergy-button">
-                    {{ $t('allergyText') }}
-                </f-button>
-
-                <f-button
                     :class="$style['c-checkout-submitButton']"
                     button-type="primary"
                     button-size="large"
@@ -479,10 +472,6 @@ $checkout-padding                         : spacing(x5) 100px;
     .c-checkout-alert {
         width: $checkout-width;
         margin: 0 auto;
-    }
-
-    .c-checkout-allergyButton {
-        margin-top: spacing(x1.5);
     }
 
     .c-checkout-submitButton {
