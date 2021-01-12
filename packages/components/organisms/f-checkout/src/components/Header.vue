@@ -5,16 +5,17 @@
         <div
             v-if="isLoggedIn"
             data-test-id='user-header'>
+
             <h2 data-test-id='user-title'>
-                {{ title }}
+                {{ $t('header.user.title', { name }) }}
             </h2>
-            <p
-                :class="$style['c-header-loginLink']">
+
+            <p :class="$style['c-header-loginLink']">
                 <a
                     :href="loginUrl"
                     data-test-id="switch-user-link"
                     @click="onVisitLoginPage">
-                    {{ $t('switchUserText', { name }) }}
+                    {{ $t('header.user.switchUser', { name }) }}
                 </a>
             </p>
         </div>
@@ -23,26 +24,28 @@
             v-else
             data-test-id='guest-header'>
             <h2 :class="$style['c-header-title']">
-                {{ $t('guestHeader') }}
+                {{ $t('header.guest.header') }}
             </h2>
+
             <a
                 :href="loginUrl"
                 data-test-id="guest-login-button"
                 :class="$style['c-header-loginButton']"
                 @click="onVisitLoginPage">
-                {{ $t('loginButtonText') }}
+                {{ $t('header.guest.login') }}
             </a>
 
             <div
                 :class="$style['c-header-option']">
-                <span>{{ $t('guestOption') }}</span>
+                <span>{{ $t('header.guest.option') }}</span>
             </div>
 
             <h2 :class="$style['c-header-title']">
-                {{ $t('guestTitle') }}
+                {{ $t('header.guest.title') }}
             </h2>
+
             <p :class="$style['c-header-confirmation']">
-                {{ $t('guestDeliveryHeader') }}
+                {{ $t('header.guest.deliveryHeader') }}
             </p>
         </div>
     </div>
@@ -68,10 +71,6 @@ export default {
 
         name () {
             return (this.customer.firstName.charAt(0).toUpperCase() + this.customer.firstName.slice(1));
-        },
-
-        title () {
-            return `${this.name}, confirm your details`;
         }
     },
 
@@ -131,7 +130,6 @@ export default {
     @include font-size('body-s');
     font-weight: $font-weight-bold;
     color: $grey--dark;
-
 }
 
 .c-header-option {

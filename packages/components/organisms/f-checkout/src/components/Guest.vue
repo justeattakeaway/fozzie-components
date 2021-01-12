@@ -5,15 +5,15 @@
         <form-field
             v-model="guest.firstName"
             name="guest-first-name"
-            :label-text="$t('labels.firstName')" />
+            :label-text="$t('guest.labels.firstName')" />
         <form-field
             v-model="guest.lastName"
             name="guest-last-name"
-            :label-text="$t('labels.lastName')" />
+            :label-text="$t('guest.labels.lastName')" />
         <form-field
             v-model="guest.email"
             name="guest-email"
-            :label-text="$t('labels.email')" />
+            :label-text="$t('guest.labels.email')" />
     </div>
 </template>
 

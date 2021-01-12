@@ -46,14 +46,13 @@ describe('Checkout', () => {
     allure.feature('Checkout');
     const checkoutUrl = 'http://localhost/checkout';
     const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
-    const loginUrl = 'http://dummy-login.example.com';
+    const loginUrl = 'http://localhost/login';
     const createGuestUrl = 'http://localhost/createguestuser';
     const propsData = {
         checkoutUrl,
         loginUrl,
         checkoutAvailableFulfilmentUrl,
-        createGuestUrl,
-        isGuest: false
+        createGuestUrl
     };
 
     it('should be defined', () => {

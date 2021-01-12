@@ -9,10 +9,7 @@ const messages = {
         city: 'City',
         postcode: 'Postcode',
         deliveryOrderMethod: 'Delivery time',
-        collectionOrderMethod: 'Collection time',
-        firstName: 'First name',
-        lastName: 'Last name',
-        email: 'Email'
+        collectionOrderMethod: 'Collection time'
     },
 
     validationMessages: {
@@ -38,21 +35,31 @@ const messages = {
         genericServerError: 'Something went wrong, please try again later'
     },
 
+    guest: {
+        labels: {
+            firstName: 'First name',
+            lastName: 'Last name',
+            email: 'Email'
+        },
+    },
+
     buttonText: 'Go to payment',
-
-    loginButtonText: 'Log in or sign up',
-
-    guestHeader: 'How do you want to continue?',
-
-    guestTitle: 'Checkout as a guest',
-
-    guestOption: 'or',
-
-    guestDeliveryHeader: 'Please confirm your delivery details',
 
     allergyText: 'If you or someone you’re ordering for has a food allergy or intolerance, click here',
 
-    switchUserText: 'Not {name}? Click here.',
+    header: {
+        user: {
+            title: '{name}, confirm your details',
+            switchUser: 'Not {name}? Click here.'
+        },
+        guest: {
+            header: 'How do you want to continue?',
+            title: 'Checkout as a guest',
+            option: 'or',
+            deliveryHeader: 'Please confirm your delivery details',
+            login: 'Log in or sign up'
+        }
+    },
 
     termsAndConditions: {
         text1: 'By placing an order you agree to our ',

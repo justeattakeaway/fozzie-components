@@ -4,7 +4,8 @@
         :class="$style['c-termsAndConditions']">
         {{ $t('termsAndConditions.text1') }}
         <a :href="$t('termsAndConditions.termsAndConditionsLinkUrl')">
-            {{ $t('termsAndConditions.termsAndConditionsLinkText') }}</a>{{ $t('termsAndConditions.text2') }}
+            <span>{{ $t('termsAndConditions.termsAndConditionsLinkText') }}</span>
+        </a>{{ $t('termsAndConditions.text2') }}
         <a :href="$t('termsAndConditions.privacyPolicyLinkUrl')">
             {{ $t('termsAndConditions.privacyPolicyLinkText') }}
         </a>

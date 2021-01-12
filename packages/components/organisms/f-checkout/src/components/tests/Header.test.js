@@ -14,7 +14,7 @@ describe('Header', () => {
     allure.feature('Checkout-Header');
 
     const propsData = {
-        loginUrl: 'http://dummy-login.example.com'
+        loginUrl: 'http://localhost/login'
     };
 
     it('should be defined', () => {
@@ -104,23 +104,6 @@ describe('Header', () => {
 
                 // Assert
                 expect(name).toEqual('Joe');
-            });
-        });
-
-        describe('title ::', () => {
-            it('should add `name` to title text', async () => {
-                // Act
-                const wrapper = shallowMount(Header, {
-                    store: createStore({ ...defaultState, isLoggedIn: true }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                const title = wrapper.find("[data-test-id='user-title']");
-
-                // Assert
-                expect(title.text()).toEqual(`${defaultState.customer.firstName}, confirm your details`);
             });
         });
     });

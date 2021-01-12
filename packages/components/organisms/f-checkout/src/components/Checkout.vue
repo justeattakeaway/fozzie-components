@@ -92,9 +92,9 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 
 import { mapState, mapActions } from 'vuex';
 import AddressBlock from './Address.vue';
+import CheckoutHeader from './Header.vue';
 import FormSelector from './Selector.vue';
 import GuestBlock from './Guest.vue';
-import CheckoutHeader from './Header.vue';
 import UserNote from './UserNote.vue';
 import TermsAndConditions from './TermsAndConditions.vue';
 
@@ -112,11 +112,11 @@ export default {
         Alert,
         FButton,
         Card,
+        CheckoutHeader,
         ErrorMessage,
         FormField,
         FormSelector,
         GuestBlock,
-        CheckoutHeader,
         UserNote,
         TermsAndConditions
     },
@@ -202,10 +202,6 @@ export default {
             'notices',
             'serviceType'
         ]),
-
-        title () {
-            return `${this.name}, confirm your details`;
-        },
 
         isMobileNumberValid () {
             /*
@@ -452,7 +448,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-$checkout-width                           : 460px;
+// $checkout-width                           : 460px;
 $checkout-width                           : 596px;
 $checkout-padding                         : spacing(x5) 100px;
 
