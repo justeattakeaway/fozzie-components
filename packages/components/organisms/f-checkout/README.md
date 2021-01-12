@@ -84,7 +84,6 @@ In addition to this, checkout exposes some classes that you can target in your a
 | `c-checkout` | Targets the checkout wrapper element. |
 | `c-card--dimensions` | Targets the checkout content dimensions. |
 | `c-checkout-alert`  | Targets the checkout alert element when it is visible. |
-| `c-checkout-allergyButton` | Targets the checkout allergy button. |
 | `c-checkout-submitButton` | Targets the checkout submit button. |
 | `c-address-label` | Targets the address group label when checkout is using the delivery method. |
 | `c-address-group` | Targets the grouped address fields when checkout is using the delivery method. |
