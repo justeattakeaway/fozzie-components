@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.10.1
 ------------------------------
-*January 11, 2021*
+*January 12, 2021*
 
 ### Changed
 - Update axios version for security advisory
