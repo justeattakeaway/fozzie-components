@@ -16,8 +16,6 @@ const propsData = {
     loginUrl: '/account/register'
 };
 
-let wrapper;
-
 const setFormFieldValues = wrapper => {
     wrapper.find('[data-test-id="formfield-firstName-input"]').setValue(CONSUMERS_REQUEST_DATA.firstName);
     wrapper.find('[data-test-id="formfield-lastName-input"]').setValue(CONSUMERS_REQUEST_DATA.lastName);
@@ -27,6 +25,8 @@ const setFormFieldValues = wrapper => {
 };
 
 describe('Registration API service', () => {
+    let wrapper;
+
     allure.feature('Registration API');
     beforeEach(() => {
         const div = document.createElement('div');
