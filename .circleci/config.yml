@@ -138,11 +138,11 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-              - yarn-packages-{{ .Branch }}-test10-{{ checksum "yarn.lock" }}
+              - yarn-packages-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - save_cache:
           name: Save Yarn Package Cache
-          key: yarn-packages-{{ .Branch }}-test10-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
       - run: # Run PR Checks
@@ -280,7 +280,7 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ .Branch }}-test10-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - install_node_dependencies
       - build_packages
       - run:

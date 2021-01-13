@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+Latest (add to next release)
+------------------------------
+*January 12, 2021*
+
+### Changed
+- Update axios version for security advisory
+
+
 v4.0.0-beta.16
 ------------------------------
 *January 11, 2021*
@@ -14,7 +23,7 @@ v4.0.0-beta.16
 
 v4.0.0-beta.15
 ------------------------------
-*January 08, 2021*
+*January 8, 2021*
 
 ### Fixed
 - Accessibility warnings for street number input field & Powered by Google alt tag.
@@ -22,7 +31,7 @@ v4.0.0-beta.15
 
 v4.0.0-beta.14
 ------------------------------
-*January 07, 2021*
+*January 7, 2021*
 
 ### Added
 - Loqate core functionality, initial Axios call & display of results.
@@ -31,37 +40,20 @@ v4.0.0-beta.14
 
 v4.0.0-beta.13
 ------------------------------
-*January 05, 2021*
+*January 5, 2021*
 
 ### Fixed
-- DK & NO field options - provides component with custom attributes, 
-supplied via tenant config `addressField`.
+- DK & NO field options - provides component with custom attributes, supplied via tenant config `addressField`.
 - DK & NO uses the `where` form value now.
+- Google test from failing silently in CI.
 
 ### Added
 - url-loader so we can inline the `powered by google` logo as a base64 URI.
-
-
-Latest (add to next release)
-------------------------------
-*December 30, 2020*
+- Tests to helper.js.
 
 ### Changed
 - Updated config for latest `sass-loader`.
 - Switches import in `common.scss` in line with fozzie v5-beta.
-
-### Fixed
-- Google test from failing silently in CI.
-
-
-Latest (to be added to next release)
-------------------------------
-*December 14, 2020*
-
-### Added
-- Tests to helper.js.
-
-### Changed
 - Test helper directory `tests` > `testHelpers`.
 
 
@@ -116,6 +108,7 @@ v4.0.0-beta.9
 ### Added
 - Cookie support for when `setCookies` is enabled via the consuming app.
 - Test coverage for changes.
+
 
 v4.0.0-beta.8
 ------------------------------
@@ -179,15 +172,12 @@ v4.0.0-beta.4
 *November 25, 2020*
 
 ### Added
-
 - demo.js & index.html to serve up local instance of the component.
 
 ### Removed
-
 - Demo.vue in favour of demo.js & index.html
 
 ### Fixed
-
 - Vuex store mappings in form component, now using `mapState` & `mapActions`.
 
 
@@ -196,7 +186,6 @@ v4.0.0-beta.3
 *November 20, 2020*
 
 ### Added
-
 - Some accessibility improvements to google places, suggestion dropdown now reads out to the user & result items are `button` elements.
 - Tests to cover changes.
 - `copy` per tenant.
@@ -236,17 +225,10 @@ v4.0.0-beta.1
 - Base components: Shell, No Shell & form.
 - Styles carried over from current f-searchbox.
 - Base config setup to allow `config` to be passed through to searchbox.
+- Stylelint added to lint styling on build.
 
 ### Changed
 - f-vue-icons > 1.8.0
-
-
-Latest (to be added to next release)
-------------------------------
-*October 23, 2020*
-
-### Added
-- Stylelint added to lint styling on build.
 
 
 v4.0.0-beta.0
@@ -256,10 +238,12 @@ v4.0.0-beta.0
 ### Added
 - Initial generated component setup.
 
+
 ------------------------------
 *BETA RELEASE FOR PORTING F-SEARCHBOX
 TO FOZZIE-COMPONENTS*
 ------------------------------
+
 
 v3.0.3
 ------------------------------
