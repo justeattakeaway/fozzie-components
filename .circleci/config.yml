@@ -34,9 +34,9 @@ commands:
         type: string
     steps:
       - restore_cache:
-          name: Restore Yarn Package Cache
+          name: Restore Working Directory + Bundles Cache
           keys:
-              - yarn-packages-{{ checksum "yarn.lock" }}
+              - working-directory-dist{{ .Branch }}-{{ .Revision }}
       - run:
           name: "Build << parameters.pkg >>"
           command: |
@@ -49,9 +49,9 @@ commands:
         type: string
     steps:
       - restore_cache:
-          name: Restore Yarn Package Cache
+          name: Restore Working Directory + Bundles Cache
           keys:
-              - yarn-packages-{{ checksum "yarn.lock" }}
+              - working-directory-dist{{ .Branch }}-{{ .Revision }}
       - run:
           name: "Should Build << parameters.path >>"
           command: |
