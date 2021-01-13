@@ -50,7 +50,7 @@
   ],
   "dependencies": {
     "@justeat/f-services": "1.0.0"<% if(needsTestingApiMocks) { %>,
-    "axios": "0.19.2"<% } %>
+    "axios": "0.21.1"<% } %>
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
