@@ -1,4 +1,8 @@
 const video = require('wdio-video-reporter');
+const { setTestType } = require('./test/utils/configuration-helper');
+
+const testType = setTestType();
+
 exports.config = {
     //
     // ====================
@@ -17,14 +21,25 @@ exports.config = {
     // NPM script (see https://docs.npmjs.com/cli/run-script) then the current working
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
-    specs: [
-        './test/specs/component/*.spec.js',
-        './test/specs/accessibility/*.spec.js'
-    ],
+    specs: testType.specs,
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
     ],
+
+    // Suites
+    suites: {
+        component: [
+            './packages/components/atoms/**/test/specs/component/*.component.spec.js',
+            './packages/components/molecules/**/test/specs/component/*.component.spec.js',
+            './packages/components/organisms/**/test/specs/component/*.component.spec.js'
+        ],
+        accessibility: [
+            './packages/components/atoms/**/test/specs/accessibility/axe-accessibility.spec.js',
+            './packages/components/molecules/**/test/specs/accessibility/axe-accessibility.spec.js',
+            './packages/components/organisms/**/test/specs/accessibility/axe-accessibility.spec.js'
+        ]
+    },
     //
     // ============
     // Capabilities
@@ -41,7 +56,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 1,
+    maxInstances: testType.maxinstances,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -64,7 +79,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'silent',
+    logLevel: testType.loglevel,
     //
     // Set specific log levels per logger
     // loggers:
@@ -82,7 +97,7 @@ exports.config = {
     //
     // If you only want to run your tests until a specific amount of tests have failed use
     // bail (default is 0 - don't bail, run all tests).
-    bail: 0,
+    bail: testType.bail,
     //
     // Set a base URL in order to shorten url command calls. If your `url` parameter starts
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
@@ -131,7 +146,7 @@ exports.config = {
             videoSlowdownMultiplier: 3 // Higher to get slower videos, lower for faster videos [Value 1-100]
         }],
         ['allure', {
-            outputDir: '../../../../allure-results',
+            outputDir: testType.allureOutputFolder,
             disableWebdriverStepsReporting: false,
             disableWebdriverScreenshotsReporting: false
         }]
