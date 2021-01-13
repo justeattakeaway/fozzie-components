@@ -8,7 +8,7 @@ v4.6.0
 *January 12, 2021*
 
 ### Changed
-- Added extra cuisne link for IT
+- Added extra cuisine link for IT
 
 
 v4.5.0
