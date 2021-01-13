@@ -24,6 +24,7 @@ v4.0.0-beta.17
 - Vuex Actions:
   - Modified: `getMatchedAreaAddressResults` so we can set the street ID correctly for the retrieval
   call (Retrieve: Returns the full address details based on the Id). Renamed some variables.
+- Update axios version for security advisory
 
 
 v4.0.0-beta.16
