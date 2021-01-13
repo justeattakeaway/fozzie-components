@@ -33,6 +33,10 @@ commands:
       pkg:
         type: string
     steps:
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+              - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: "Build << parameters.pkg >>"
           command: |
@@ -187,10 +191,6 @@ jobs:
         type: string
     executor: node
     steps:
-      - restore_cache:
-          name: Restore Working Directory Cache
-          keys:
-              - working-directory-{{ .Branch }}-{{ .Revision }}
       - should_build:
           path: << parameters.path >>
       - build_package:
