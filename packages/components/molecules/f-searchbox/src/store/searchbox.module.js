@@ -151,7 +151,7 @@ export default {
                 commit(SET_PARTIAL_ADDRESS_SUGGESTIONS, { suggestions, payload });
             }
         },
-    
+
         setContinueWithDetails ({ commit }, payload) {
             commit(SET_CONTINUE_WITH_SUGGESTION, payload);
         }
@@ -215,7 +215,7 @@ export default {
          */
         [SET_PARTIAL_ADDRESS_SUGGESTIONS]: (state, { suggestions, payload }) => {
             const hasSelectedPartialAddress = payload && payload.streetLevelAddress;
-            
+
             const results = suggestions.Items.map(({
                 Description,
                 Text,
@@ -230,13 +230,13 @@ export default {
 
             state.suggestions = hasSelectedPartialAddress
                 ? [...results, state.continueWithSuggestionDetails]
-                : results.filter(addressDetails => addressDetails.type === 'Postcode')
+                : results.filter(addressDetails => addressDetails.type === 'Postcode');
         },
-        
+
         [SET_CONTINUE_WITH_SUGGESTION]: (state, continueWithSuggestionDetails) => {
             state.continueWithSuggestionDetails = continueWithSuggestionDetails;
         },
-    
+
         [SET_SELECTED_STREET_LEVEL_ADDRESS_ID]: (state, selectedStreetLevelAddressId) => {
             state.selectedStreetLevelAddressId =
                 (selectedStreetLevelAddressId && selectedStreetLevelAddressId.streetLevelAddress);

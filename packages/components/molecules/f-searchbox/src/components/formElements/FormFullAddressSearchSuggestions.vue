@@ -45,7 +45,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import { MapPinIcon } from '@justeat/f-vue-icons';
-import ContinueWithSuggestion from '../formElements/FormFullAddressContinueWithSuggestion.vue';
+import ContinueWithSuggestion from './FormFullAddressContinueWithSuggestion.vue';
 
 export default {
     components: {
@@ -69,7 +69,7 @@ export default {
         copy: {
             type: Object,
             default:  () => ({})
-        },
+        }
     },
 
     data: () => ({
@@ -96,8 +96,8 @@ export default {
 
     watch: {
         /**
-         * 1. Checks the selected value so we can scroll to the address within the
-         * `fullAddressSuggestions` container.
+         * Checks the `keyboardSuggestionIndex` value so we can scroll to the address within the
+         * `fullAddressSuggestions` container, allowing keyboard navigation.
          *
          * @param {Number} value
          */

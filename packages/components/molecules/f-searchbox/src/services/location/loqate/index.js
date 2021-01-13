@@ -6,7 +6,7 @@ const config = {
     params: {
         Countries: 'GB',
         Limit: '20',
-        Key: 'DM49-BM94-EZ78-AZ63',
+        Key: '',
         Text: '',
         Container: '',
         Id: '',

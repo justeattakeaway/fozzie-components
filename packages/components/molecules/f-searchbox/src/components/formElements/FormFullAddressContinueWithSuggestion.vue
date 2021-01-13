@@ -36,6 +36,12 @@ export default {
             'continueWithSuggestionDetails'
         ]),
 
+        /**
+         * Returns a formatted `generic` address that the user can use to
+         * continue with.
+         *
+         * @returns {string}
+         */
         getFormattedSelectedAddress () {
             const address = this.continueWithSuggestionDetails
                 .street

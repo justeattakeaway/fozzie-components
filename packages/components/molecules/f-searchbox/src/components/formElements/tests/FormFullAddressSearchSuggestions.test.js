@@ -53,15 +53,15 @@ describe('`FullAddressSuggestions`', () => {
             event
         };
     }
-    
+
     describe('`methods`', () => {
         describe('`getDescription`', () => {
             it('should exist', () => {
                 const { wrapper } = bootstrap();
-            
+
                 expect(wrapper.vm.getDescription).toBeDefined();
             });
-        
+
             describe('when invoked', () => {
                 it('should return the whole `Description` correctly', () => {
                     // Arrange
@@ -69,23 +69,23 @@ describe('`FullAddressSuggestions`', () => {
                     const address = {
                         description: ' Hill 400, Burgberg - 15 address '
                     };
-                
+
                     // Act
                     const result = wrapper.vm.getDescription(address);
-                
+
                     // Assert
                     expect(result).toEqual('Hill 400, Burgberg - 15 address');
                 });
             });
         });
-    
+
         describe('`getMatchedPostcodes`', () => {
             it('should exist', () => {
                 const { wrapper } = bootstrap();
-            
+
                 expect(wrapper.vm.getMatchedPostcodes).toBeDefined();
             });
-        
+
             describe('when invoked', () => {
                 it('should return the matched `postcode`', () => {
                     // Arrange
@@ -93,54 +93,54 @@ describe('`FullAddressSuggestions`', () => {
                     const address = {
                         text: 'Hill_900'
                     };
-                
+
                     // Act
                     const result = wrapper.vm.getMatchedPostcodes(address);
-                
+
                     // Assert
                     expect(result).toEqual('Hill_900');
                 });
             });
         });
-    
+
         describe('`getSelectedStreetAddress`', () => {
             it('should exist', () => {
                 const { wrapper } = bootstrap();
-        
+
                 expect(wrapper.vm.getSelectedStreetAddress).toBeDefined();
             });
-            
+
             describe('when invoked', () => {
-               it('should prevent the default button behaviour', () => {
-                   // Arrange
-                   const { wrapper } = bootstrap();
-                   const event = { preventDefault: jest.fn() };
-                   const items = [{ id: 'GB|RM|A|20388007' }];
-                   
-                   // Act
-                   wrapper.vm.getSelectedStreetAddress(event, items);
-                   
-                   //Assert
-                   expect(event.preventDefault).toHaveBeenCalled();
-               });
-               
-               it('should invoke `getMatchedAreaAddressResults` to display further results after the users initial selection', () => {
-                   // Arrange
-                   const { wrapper } = bootstrap();
-                   const event = { preventDefault: jest.fn() };
-                   const items = { id: 'GB|RM|A|20388007' };
-                   const spy = jest.spyOn(wrapper.vm, 'getMatchedAreaAddressResults');
-    
-                   // Act
-                   wrapper.vm.getSelectedStreetAddress(event, items);
-    
-                   //Assert
-                   expect(spy).toHaveBeenCalledWith({
-                       address: '',
-                       streetLevelAddress: 'GB|RM|A|20388007'
-                   });
-               });
-    
+                it('should prevent the default button behaviour', () => {
+                    // Arrange
+                    const { wrapper } = bootstrap();
+                    const event = { preventDefault: jest.fn() };
+                    const items = [{ id: 'GB|RM|A|20388007' }];
+
+                    // Act
+                    wrapper.vm.getSelectedStreetAddress(event, items);
+
+                    // Assert
+                    expect(event.preventDefault).toHaveBeenCalled();
+                });
+
+                it('should invoke `getMatchedAreaAddressResults` to display further results after the users initial selection', () => {
+                    // Arrange
+                    const { wrapper } = bootstrap();
+                    const event = { preventDefault: jest.fn() };
+                    const items = { id: 'GB|RM|A|20388007' };
+                    const spy = jest.spyOn(wrapper.vm, 'getMatchedAreaAddressResults');
+
+                    // Act
+                    wrapper.vm.getSelectedStreetAddress(event, items);
+
+                    // Assert
+                    expect(spy).toHaveBeenCalledWith({
+                        address: '',
+                        streetLevelAddress: 'GB|RM|A|20388007'
+                    });
+                });
+
                 it('should invoke `setContinueWithDetails` to allow a user to continue with a default generic address without having to select their actual address', () => {
                     // Arrange
                     const { wrapper } = bootstrap();
@@ -151,11 +151,11 @@ describe('`FullAddressSuggestions`', () => {
                         description: 'Middle of nowhere'
                     };
                     const spy = jest.spyOn(wrapper.vm, 'setContinueWithDetails');
-        
+
                     // Act
                     wrapper.vm.getSelectedStreetAddress(event, items);
-        
-                    //Assert
+
+                    // Assert
                     expect(spy).toHaveBeenCalledWith({
                         postcode: 'AR511AR',
                         street: 'Middle of nowhere'

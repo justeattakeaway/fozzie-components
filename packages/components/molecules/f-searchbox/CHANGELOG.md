@@ -23,7 +23,7 @@ v4.0.0-beta.17
 ### Changed
 - Vuex Actions:
   - Modified: `getMatchedAreaAddressResults` so we can set the street ID correctly for the retrieval
-  call (Retrieve: Returns the full address details based on the Id). Renamed some variable.
+  call (Retrieve: Returns the full address details based on the Id). Renamed some variables.
 
 
 v4.0.0-beta.16
