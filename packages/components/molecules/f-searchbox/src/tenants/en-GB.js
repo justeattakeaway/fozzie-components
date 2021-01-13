@@ -8,6 +8,12 @@ const copy = {
     fieldPlaceholder: 'Enter your postcode',
     headlineSubtitle: 'Find restaurants delivering right now, near you',
     headlineTitle: 'Tuck into a takeaway today',
+    fullAddressSearchSuggestions: {
+        buttonCancel: 'Cancel',
+        notSeeingYourAddress: 'Not seeing your address?',
+        continueWith: 'Continue with',
+        clearSearchBtn: 'Clear search'
+    },
     errors: {
         POSTCODE_EMPTY: 'Please enter a postcode',
         POSTCODE_INVALID: 'Please enter a full, valid postcode',

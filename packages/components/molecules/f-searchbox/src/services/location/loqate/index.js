@@ -6,7 +6,7 @@ const config = {
     params: {
         Countries: 'GB',
         Limit: '20',
-        Key: '',
+        Key: 'DM49-BM94-EZ78-AZ63',
         Text: '',
         Container: '',
         Id: '',
@@ -16,9 +16,17 @@ const config = {
 };
 
 export default {
+    /**
+     * Calls Loqate's Find API, returns matching postcode results from users search.
+     *
+     * Example: Searching: `AR5` > Returns results: `AR511AR, AR521AR, AR513AR`.
+     *
+     * @param location
+     * @returns {Promise.<TResult>}
+     */
     getPartialAddressSearch (location) {
-        config.params.Text = location.address;
-        config.params.Container = location.streetLevelAddress;
+        config.params.Text = location && location.address;
+        config.params.Container = location && location.streetLevelAddress;
 
         return axios.get('/Find/v1.10/json3.ws', config)
         .then(res => {

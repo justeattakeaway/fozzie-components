@@ -3,6 +3,29 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.17
+------------------------------
+*January 13, 2021*
+
+### Added
+- Ability to select postcode results, returns address results now.
+- Tests to cover changes.
+- Test IDs added so integration tests in build agent can run against DOM elements.
+- Ability for users to continue with generic postcode & area `FormFullAddressContinueWithSuggestion.vue`.
+- Copy to en-GB.js for Loqate specific translations.
+- Vuex Mutations:
+  - `SET_PARTIAL_ADDRESS_SUGGESTIONS`
+  - `SET_CONTINUE_WITH_SUGGESTION`
+  - `SET_SELECTED_STREET_LEVEL_ADDRESS_ID`
+ - Actions:
+  - `setContinueWithDetails`
+
+### Changed
+- Vuex Actions:
+  - Modified: `getMatchedAreaAddressResults` so we can set the street ID correctly for the retrieval
+  call (Retrieve: Returns the full address details based on the Id). Renamed some variable.
+
+
 v4.0.0-beta.16
 ------------------------------
 *January 11, 2021*
