@@ -50,7 +50,7 @@ commands:
             SHOULD_BUILD=$(yarn entria-deploy hasChanged $CIRCLE_COMPARE_URL << parameters.path >>)
             echo $SHOULD_BUILD
             if [ "$SHOULD_BUILD" == false ]; then
-                circleci-agent step halt || exit 0
+                exit 0
             fi
   
   slack_notify_fail:
