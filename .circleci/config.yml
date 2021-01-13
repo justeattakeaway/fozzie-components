@@ -231,9 +231,6 @@ workflows:
           filters:
             branches:
               ignore: 'gh-pages'
-          filters:
-            branches:
-              ignore: 'gh-pages'
       - conditional_build_package:
           path: "packages/components/atoms/f-button"
           pkg: "@justeat/f-button"
