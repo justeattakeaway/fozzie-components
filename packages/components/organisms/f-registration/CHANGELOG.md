@@ -10,7 +10,6 @@ Latest (add to next release)
 
 ### Changed
 - Update axios version for security advisory.
-- Use latest version of `f-button`.
 - Use latest version of `f-form-field`.
   - Updated tests to handle new `data-test-id` attributes.
 

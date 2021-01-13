@@ -10,7 +10,7 @@ Latest (add to next release)
 
 ### Changed
 - Update axios version for security advisory.
-- Use latest version of `f-button` and `f-error-message`.
+- Use latest version of `f-error-message`.
 
 
 v0.35.0
