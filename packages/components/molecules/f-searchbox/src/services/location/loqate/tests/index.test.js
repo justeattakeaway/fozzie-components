@@ -64,10 +64,15 @@ describe('`Loqate`', () => {
                 expect(response).toEqual(result);
             });
 
-            it('should `throw` if the call fails', () => {
-                axios.get = jest.fn(() => Promise.reject(new Error()));
-
-                expect(() => loqate.getPartialAddressSearch()).toThrow();
+            it('should `throw` if the call fails', async () => {
+                // Arrange
+                const errorMessage = 'Error status: F97 X3 M';
+                axios.get.mockImplementationOnce(() =>
+                    Promise.reject(new Error(errorMessage)),
+                );
+                
+                // Act & Assert
+                await expect(loqate.getPartialAddressSearch()).rejects.toThrow(errorMessage);
             });
         });
     });
