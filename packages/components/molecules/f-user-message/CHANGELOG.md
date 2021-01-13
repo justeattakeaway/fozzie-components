@@ -6,12 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (add to next release)
 ------------------------------
-*December 30, 2020*
+*January 12, 2021*
 
 ### Changed
 - 'jet' theme instead of 'je'
 - Updated config for latest `sass-loader`.
 - Switches import in `common.scss` in line with fozzie v5-beta.
+- Update axios version for security advisory
 
 ### Added
 - Stylelint added to lint styling on build.
