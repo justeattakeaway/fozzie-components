@@ -180,7 +180,7 @@ export default {
                 },
                 {
                     url: 'https://partner.justeat.it/',
-                    text: 'Partner Center',
+                    text: 'Partner Centre',
                     gtm: 'click_about_partner_centre'
                 }
             ]
