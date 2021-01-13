@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.37.0
 -------------------------------
-*January 14, 2021*
+*January 13, 2021*
 
 ### Added
 - `Guest`, `Header` and `TermsAndConditions` components.
