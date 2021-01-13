@@ -57,7 +57,7 @@
                 </f-button>
             </form>
 
-            <terms-and-conditions
+            <checkout-terms-and-conditions
                 v-if="!isLoggedIn" />
         </card>
     </div>
@@ -84,10 +84,10 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 import { mapState, mapActions } from 'vuex';
 import AddressBlock from './Address.vue';
 import CheckoutHeader from './Header.vue';
+import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import FormSelector from './Selector.vue';
 import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
-import TermsAndConditions from './TermsAndConditions.vue';
 
 import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP } from '../constants';
 import tenantConfigs from '../tenants';
@@ -104,12 +104,12 @@ export default {
         FButton,
         Card,
         CheckoutHeader,
+        CheckoutTermsAndConditions,
         ErrorMessage,
         FormField,
         FormSelector,
         GuestBlock,
-        UserNote,
-        TermsAndConditions
+        UserNote
     },
 
     mixins: [validationMixin, VueGlobalisationMixin],

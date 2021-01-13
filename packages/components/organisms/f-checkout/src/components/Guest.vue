@@ -1,6 +1,6 @@
 <template>
     <div
-        data-test-id='guest-component'
+        data-test-id="guest-component"
         :class="$style['c-guest']">
         <form-field
             v-model="guest.firstName"

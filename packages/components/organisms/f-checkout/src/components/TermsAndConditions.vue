@@ -1,6 +1,6 @@
 <template>
     <div
-        data-test-id='terms-and-conditions-component'
+        data-test-id="checkout-terms-and-conditions-component"
         :class="$style['c-checkoutTermsAndConditions']">
         <i18n
             path="checkoutTermsAndConditions">

@@ -1,11 +1,11 @@
 <template>
     <div
-        data-test-id='checkoutHeader-component'
+        data-test-id="checkoutHeader-component"
         :class="$style['c-checkoutHeader']">
         <div
             v-if="isLoggedIn"
-            data-test-id='user-checkoutHeader'>
-            <h2 data-test-id='user-title'>
+            data-test-id="user-checkoutHeader">
+            <h2 data-test-id="user-title">
                 {{ $t('header.user.title', { name }) }}
             </h2>
 
@@ -21,7 +21,7 @@
 
         <div
             v-else
-            data-test-id='guest-checkoutHeader'>
+            data-test-id="guest-checkoutHeader">
             <h2 :class="$style['c-checkoutHeader-title']">
                 {{ $t('header.guest.guestTitle') }}
             </h2>
