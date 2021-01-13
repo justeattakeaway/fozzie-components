@@ -1,6 +1,6 @@
 <template>
     <div
-        data-test-id='checkoutTerms-and-conditions-component'
+        data-test-id='terms-and-conditions-component'
         :class="$style['c-checkoutTermsAndConditions']">
         <i18n
             path="checkoutTermsAndConditions">
@@ -11,7 +11,7 @@
             </template>
             <template #privacyPolicy>
                 <a :href="$t('privacyPolicyLinkUrl')">
-                    {{ $t('privacyPolicyLinkText') }}
+                    <span>{{ $t('privacyPolicyLinkText') }}</span>
                 </a>
             </template>
             <template #cookiePolicy>
@@ -28,12 +28,13 @@ $checkout-width                           : 460px;
 
 .c-checkoutTermsAndConditions {
     width: Calc($checkout-width - 2px); // -2px for border width
-    margin-left: -81px;
+    background: $grey--offWhite;
+    margin-left: -(spacing(x10));
     margin-bottom: -(spacing(x6));
     margin-top: spacing(x6);
-    padding: spacing(x2);
+    text-align: center;
     border-radius: 0 0 $border-radius $border-radius;
-    background: $grey--offWhite;
+    padding: spacing(x2);
     @include font-size('body-s');
     text-align: center;
     color: $grey--dark;

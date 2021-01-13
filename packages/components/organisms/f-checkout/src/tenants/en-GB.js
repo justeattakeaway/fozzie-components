@@ -49,7 +49,7 @@ const messages = {
         email: 'Email'
     },
 
-    checkoutHeader: {
+    header: {
         user: {
             title: '{name}, confirm your details',
             switchUser: 'Not {name}? Click here.'
@@ -63,7 +63,7 @@ const messages = {
         }
     },
 
-    checkoutTermsAndConditions: 'By placing an order you agree to our {termsAndConditions}. Please read our {privacyPolicy} and {cookiePolicy}.',
+    termsAndConditions: 'By placing an order you agree to our {termsAndConditions}. Please read our {privacyPolicy} and {cookiePolicy}.',
 
     termsAndConditionsLinkText: 'Terms and Conditions',
     termsAndConditionsLinkUrl: 'https://www.just-eat.co.uk/termsandconditions',

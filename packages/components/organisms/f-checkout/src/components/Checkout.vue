@@ -1,7 +1,6 @@
 <template>
     <div
         data-theme="jet"
-        :class="$style['c-checkout']"
         data-test-id="checkout-component">
         <alert
             v-if="genericErrorMessage"
@@ -16,7 +15,7 @@
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="checkout-card-component"
-            :class="$style['c-card--dimensions']">
+            :class="$style['c-checkout-card']">
             <checkout-header
                 :login-url="loginUrl" />
 
@@ -441,41 +440,29 @@ export default {
 
 <style lang="scss" module>
 $checkout-width                           : 460px;
-$checkout-padding                         : spacing(x5) 100px;
 
-.c-checkout {
-    margin: auto;
-    font-family: $font-family-base;
-    color: $color-text;
-    font-weight: $font-weight-base;
+.c-checkout-card {
+    padding-top: spacing(x6);
+    padding-bottom: spacing(x6);
+    // background: green;
 
-    .c-card--dimensions {
-        padding-top: spacing(x7);
-        padding-bottom: spacing(x6);
-
-        @include media('<mid') {
-            padding-bottom: spacing(x4);
-        }
-
-        @include media('>=narrow') {
-            // TODO: box shadow value will eventually come from PIE design tokens, but hard coding here for now
-            box-shadow: 0 1px 1px 0 rgba($black, 0.03),
-                    0 2px 1px -1px rgba($black, 0.07),
-                    0 1px 3px 0 rgba($black, 0.06);
-        }
+    @include media('<=narrow') {
+        border: none;
+        padding-top: spacing(x2);
+        padding-bottom: spacing(x2);
     }
+}
 
-    .c-checkout-form {
-        margin-top: spacing(x3);
-    }
+.c-checkout-form {
+    margin-top: spacing(x3);
+}
 
-    .c-checkout-alert {
-        width: $checkout-width;
-        margin: 0 auto;
-    }
+.c-checkout-alert {
+    width: $checkout-width;
+    margin: 0 auto;
+}
 
-    .c-checkout-submitButton {
-        margin: spacing(x4) 0 spacing(x0.5);
-    }
+.c-checkout-submitButton {
+    margin: spacing(x4) 0 spacing(x0.5);
 }
 </style>
