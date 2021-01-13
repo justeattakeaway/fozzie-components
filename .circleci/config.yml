@@ -187,8 +187,10 @@ jobs:
         type: string
     executor: node
     steps:
-      - attach_workspace:
-            at: ~/app
+      - restore_cache:
+          name: Restore Working Directory Cache
+          keys:
+              - working-directory-{{ .Branch }}-{{ .Revision }}
       - should_build:
           path: << parameters.path >>
       - build_package:
