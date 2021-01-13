@@ -1,7 +1,7 @@
 <div align="center">
 <h1>f-vue-icons</h1>
 
-<img width="125" alt="Fozzie Bear" src="../../bear.png" />
+<img width="125" alt="Fozzie Bear" src="../../../bear.png" />
 
 <p>Shared Icon Components for Vue.js.</p>
 </div>
@@ -14,8 +14,9 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-vue-icons/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-vue-icons?targetFile=package.json)
 
 ---
+## Usage
 
-## Install
+### Installation
 
 Add the module to your project
 
@@ -23,7 +24,7 @@ Add the module to your project
 yarn add @justeat/f-vue-icons
 ```
 
-## Usage
+### Vue Applications
 
 ```js
 // Only import what you need!
@@ -54,7 +55,7 @@ Within the context of a Vue app, that will look like:
 ## TODO – setup a page with an example of all the icons somewhere – See all icons and usage here: https://f-vue-icons.netlify.com
 
 
-## Tree shaking
+### Tree shaking
 
 By using ES imports like `import { AlertIcon } from '@justeat/f-vue-icons'` with Webpack v4 or Rollup, unused exports in this module will be automatically eliminated.
 
@@ -65,6 +66,8 @@ If you can't use a tree-shaking compatible build tool, then you can use the per-
 
 The component extends [@justeat/browserslist-config-fozzie](https://github.com/justeat/browserslist-config-fozzie) package for the list of browsers to support.
 
+
+## Development
 
 ### Building the Module
 
