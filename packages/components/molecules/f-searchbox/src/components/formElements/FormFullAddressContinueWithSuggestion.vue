@@ -84,7 +84,7 @@ export default {
     &:hover,
     &:focus,
     &.selected {
-        background: #eaeaea
+        background: #eaeaea;
     }
 }
 

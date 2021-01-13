@@ -102,10 +102,12 @@ export default {
          * @param {Number} value
          */
         keyboardSuggestionIndex (value) {
+            const suggestionItem = this.$refs[`suggestion${[value]}`];
+
             if ((value || value === 0)
-                && this.$refs[`suggestion${[value]}`]
-                && this.$refs[`suggestion${[value]}`][0]) {
-                this.$refs.fullAddressSuggestions.scrollTop = this.$refs[`suggestion${[value]}`][0].offsetTop;
+                && suggestionItem
+                && suggestionItem[0]) {
+                this.$refs.fullAddressSuggestions.scrollTop = suggestionItem[0].offsetTop;
             }
 
             this.hasSelectedContinueWithSuggestion =

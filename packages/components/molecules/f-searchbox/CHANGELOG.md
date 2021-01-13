@@ -61,31 +61,15 @@ v4.0.0-beta.13
 - DK & NO field options - provides component with custom attributes, 
 supplied via tenant config `addressField`.
 - DK & NO uses the `where` form value now.
+- Google test from failing silently in CI.
 
 ### Added
 - url-loader so we can inline the `powered by google` logo as a base64 URI.
-
-
-Latest (add to next release)
-------------------------------
-*December 30, 2020*
+- Tests to helper.js.
 
 ### Changed
 - Updated config for latest `sass-loader`.
 - Switches import in `common.scss` in line with fozzie v5-beta.
-
-### Fixed
-- Google test from failing silently in CI.
-
-
-Latest (to be added to next release)
-------------------------------
-*December 14, 2020*
-
-### Added
-- Tests to helper.js.
-
-### Changed
 - Test helper directory `tests` > `testHelpers`.
 
 
