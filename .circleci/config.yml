@@ -34,9 +34,9 @@ commands:
         type: string
     steps:
       - restore_cache:
-          name: Restore Working Directory + Bundles Cache
+          name: Restore Working Directory Cache
           keys:
-              - working-directory-dist{{ .Branch }}-{{ .Revision }}
+              - working-directory{{ .Branch }}-{{ .Revision }}
       - run:
           name: "Build << parameters.pkg >>"
           command: |
@@ -49,9 +49,9 @@ commands:
         type: string
     steps:
       - restore_cache:
-          name: Restore Working Directory + Bundles Cache
+          name: Restore Working Directory Cache
           keys:
-              - working-directory-dist{{ .Branch }}-{{ .Revision }}
+              - working-directory{{ .Branch }}-{{ .Revision }}
       - run:
           name: "Should Build << parameters.path >>"
           command: |
