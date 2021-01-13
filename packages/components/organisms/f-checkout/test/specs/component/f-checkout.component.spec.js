@@ -104,4 +104,8 @@ describe('f-checkout component tests', () => {
         // Assert
         // Waiting for route here, so we can grab redirect url and show form submits.
     });
+
+    it('have switch user link is displayed', () => {
+        expect(CheckoutComponent.switchUserLinkIsDisplayed()).toBe(true);
+    });
 });
