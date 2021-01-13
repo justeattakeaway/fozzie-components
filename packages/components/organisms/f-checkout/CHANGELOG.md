@@ -9,6 +9,7 @@ v0.37.0
 
 ### Added
 - `Guest`, `Header` and `TermsAndConditions` components.
+- `Checkout` mobile view.
 
 ### Changed
 - `Checkout` form method.

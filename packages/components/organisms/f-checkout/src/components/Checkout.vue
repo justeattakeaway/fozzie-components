@@ -444,7 +444,6 @@ $checkout-width                           : 460px;
 .c-checkout-card {
     padding-top: spacing(x6);
     padding-bottom: spacing(x6);
-    // background: green;
 
     @include media('<=narrow') {
         border: none;

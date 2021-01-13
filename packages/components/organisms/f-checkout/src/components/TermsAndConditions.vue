@@ -32,7 +32,6 @@ $checkout-width                           : 460px;
     margin-left: -(spacing(x10));
     margin-bottom: -(spacing(x6));
     margin-top: spacing(x6);
-    text-align: center;
     border-radius: 0 0 $border-radius $border-radius;
     padding: spacing(x2);
     @include font-size('body-s');

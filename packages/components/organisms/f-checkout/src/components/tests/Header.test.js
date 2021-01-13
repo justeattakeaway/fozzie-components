@@ -118,7 +118,7 @@ describe('Header', () => {
 
     describe('methods ::', () => {
         describe('onVisitLoginPage ::', () => {
-            it('should emit the `VisitLoginPage` event when login link is clicked.', () => {
+            it('should emit the `VisitLoginPage` event when switch user link is clicked.', () => {
                 // Arrange
                 const wrapper = shallowMount(Header, {
                     store: createStore({ ...defaultState, isLoggedIn: true }),
@@ -135,7 +135,7 @@ describe('Header', () => {
                 expect(wrapper.emitted(EventNames.CheckoutVisitLoginPage).length).toBe(1);
             });
 
-            it('should emit the `VisitLoginPage` event when login button is clicked.', () => {
+            it('should emit the `VisitLoginPage` event when guest login button is clicked.', () => {
                 // Arrange
                 const wrapper = shallowMount(Header, {
                     store: createStore({ ...defaultState, isLoggedIn: false }),
