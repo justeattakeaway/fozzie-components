@@ -6,6 +6,13 @@ version: 2.1
 orbs:
   slack: circleci/slack@4.1.3
 
+defaults: &defaults
+  environment:
+    LERNA_ARGS: --concurrency 1
+    CIRCLE_COMPARE_URL: << pipeline.project.git_url >>/compare/<< pipeline.git.base_revision >>...<<pipeline.git.revision>>
+    BASE_REF: 'master'
+  working_directory: ~/project
+
 commands:
   set_deploy_key:
     description: Sets the ssh key for project access
@@ -18,14 +25,34 @@ commands:
     description: Installs the node dependencies
     steps:
       - run: yarn install --freeze-lockfile
+  
 
-  build_packages:
-    description: Locally builds all packages in the monorepo
+  build_package:
+    description: "build a single package"
+    parameters:
+      pkg:
+        type: string
     steps:
-      - run: # Check UI packages all build as expected
-          name: Build Packages
-          command: yarn build
+      - run:
+          name: "Build << parameters.pkg >>"
+          command: |
+            yarn workspace << parameters.pkg >> build
 
+  should_build:
+    description: "Determines if a package should be built"
+    parameters:
+      path:
+        type: string
+    steps:
+      - run:
+          name: "Should Build << parameters.path >>"
+          command: |
+            SHOULD_BUILD=$(yarn entria-deploy hasChanged $CIRCLE_COMPARE_URL << parameters.path >>)
+            echo $SHOULD_BUILD
+            if [ "$SHOULD_BUILD" == false ]; then
+                circleci-agent step halt || exit 0
+            fi
+  
   slack_notify_fail:
     description: Sends a slack notifaction on job failure
     steps:
@@ -72,7 +99,6 @@ commands:
                 }
               ]
             }
-
   slack_notify_success:
     description: Sends a slack notifaction on job success
     steps:
@@ -119,22 +145,20 @@ commands:
                 }
               ]
             }
-
 executors:
   node:
+    <<: *defaults
     docker:
       # specify the version you desire here
       - image: circleci/node:12.18.4-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
 
 jobs:
   set_up:
-    working_directory: ~/project
     executor: node
-    environment:
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
+      - run: echo "This is pipeline ID << pipeline.id >>"
+      - run: echo $CIRCLE_COMPARE_URL
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -154,140 +178,41 @@ jobs:
           paths:
             - ~/project
                     
-  build:
+  conditional_build_package:
+    description: "conditional build a package"
+    parameters:
+      pkg:
+        type: string
+      path:
+        type: string
     executor: node
-    environment:
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
-    steps: # a collection of executable commands
-      - restore_cache:
-          name: Restore Working Directory Cache
-          keys:
-              - working-directory-{{ .Branch }}-{{ .Revision }}
-      - build_packages
-      - run: # Install WebDriverIO Test Dependencies
-          name: Install Component Test Dependencies
-          command: yarn global add @vue/cli @vue/cli-service-global
-      - run: # Build Storybook
-          name: Build Storybook
-          command: yarn storybook:build
-      - save_cache:
-          name: Save Working Directory + Bundles Cache
-          key: working-directory-dist{{ .Branch }}-{{ .Revision }}
-          paths:
-            - ~/project
-            - ~/.yarn/bin
-
-  linting:
-    executor: node
-    environment:
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 2
-    steps: # a collection of executable commands
-      - restore_cache:
-          name: Restore Working Directory + Bundles Cache
-          keys:
-              - working-directory-dist{{ .Branch }}-{{ .Revision }}
-      - run: # Lint packages
-          name: Run Lint Tasks on Packages
-          command: yarn lint
+    steps:
+      - attach_workspace:
+            at: ~/app
+      - should_build:
+          path: << parameters.path >>
+      - build_package:
+          pkg: << parameters.pkg >>
     
   unit_tests:
     executor: node
-    environment:
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - restore_cache:
           name: Restore Working Directory + Bundles Cache
           keys:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
-      - run: # Run Tests
-          name: Run Unit / Integration Tests
-          command: yarn test
-
-  component_tests:
-    executor: node
-    environment:
-    steps: # a collection of executable commands
-      - restore_cache:
-          name: Restore Working Directory + Bundles Cache
-          keys:
-              - working-directory-dist{{ .Branch }}-{{ .Revision }}
-      - run: # Serve Storybook
-          name: Serve Storybook
-          command: yarn storybook:serve-static
-          background: true
-      - run: # Run Storybook healthcheck
-          name: Run Storybook healthcheck
-          command: yarn test:wait-for-server
-      - run: # Run Component UI Tests
-          name: Run WebDriverIO Component
-          command: yarn test-component:chrome
-      - store_artifacts:
-          path: _results_/*.mp4
-
-  accessibility_tests:
-    executor: node
-    environment:
-    steps: # a collection of executable commands
-      - restore_cache:
-          name: Restore Working Directory + Bundles Cache
-          keys:
-              - working-directory-dist{{ .Branch }}-{{ .Revision }}
-      - run: # Serve Storybook
-          name: Serve Storybook
-          command: yarn storybook:serve-static
-          background: true
-      - run: # Run Storybook healthcheck
-          name: Run Storybook healthcheck
-          command: yarn test:wait-for-server
-      - run: # Run Accessibility UI Tests
-          name: Run WebDriverIO Accessibility Tests
-          command: yarn test-a11y:chrome
-      - store_artifacts:
-          path: axe-violations/
-
-  bundlewatch:
-    executor: node
-    environment:
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 2
-    steps: # a collection of executable commands
-      - restore_cache:
-          name: Restore Working Directory + Bundles Cache
-          keys:
-              - working-directory-dist{{ .Branch }}-{{ .Revision }}
+      - run: echo $CIRCLE_COMPARE_URL
       - run:
-          name: Run Bundlewatch checks
-          command: yarn bundlewatch
-
-  slack_reporting:
-    executor: node
-    environment:
-    steps: # a collection of executable commands
-      - slack_notify_fail
-      - slack_notify_success
-
-  deploy-storybook:
-    working_directory: ~/project
-    executor: node
-    environment:
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
-    steps:
-      - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - install_node_dependencies
-      - build_packages
-      - run:
-          name: Deploy
-          command: yarn storybook:deploy --packages packages
-      - slack_notify_fail
-      - slack_notify_success
+          name: "Run only needed tests"
+          command: |
+            FILES_CHANGED=$(yarn --silent entria-deploy changes ${CIRCLE_COMPARE_URL} --baseRef ${BASE_REF})
+            echo $FILES_CHANGED
+            TESTFILES=$(yarn --silent jest --findRelatedTests --listTests $FILES_CHANGED)
+            echo $TESTFILES
+            if [ ! -z "$TESTFILES" ];
+              then
+                yarn jest --passWithNoTests --coverage --forceExit --ci --maxWorkers=7 $TESTFILES
+            fi
 
 workflows:
   version: 2
@@ -306,57 +231,21 @@ workflows:
           filters:
             branches:
               ignore: 'gh-pages'
-      - linting:
-          context: web-core
-          requires:
-            - build
-          filters:
-            branches:
-              ignore: 'gh-pages'    
-      - bundlewatch:
-          context: web-core
-          requires:
-            - build
           filters:
             branches:
               ignore: 'gh-pages'
-      - unit_tests:
-          context: web-core
+      - conditional_build_package:
+          path: "packages/components/atoms/f-button"
+          pkg: "@justeat/f-button"
           requires:
-            - build
-          filters:
-            branches:
-              ignore: 'gh-pages'
-      - component_tests:
-          context: web-core
+            - set_up
+      - conditional_build_package:
+          path: "packages/components/atoms/f-card"
+          pkg: "@justeat/f-card"
           requires:
-            - build
-          filters:
-            branches:
-              ignore: 'gh-pages'
-      - accessibility_tests:
-          context: web-core
+            - set_up
+      - conditional_build_package:
+          path: "packages/components/organisms/f-checkout"
+          pkg: "@justeat/f-checkout"
           requires:
-            - build
-          filters:
-            branches:
-              ignore: 'gh-pages'
-      - slack_reporting:
-          context: web-core
-          requires:
-            - bundlewatch
-            - component_tests
-            - linting
-            - unit_tests
-            - accessibility_tests
-          filters:
-            branches:
-              ignore: 'gh-pages'
-
-  deploy-storybook:
-    jobs:
-      - deploy-storybook:
-          context: web-core
-          filters:
-            branches:
-              only: master
+            - set_up

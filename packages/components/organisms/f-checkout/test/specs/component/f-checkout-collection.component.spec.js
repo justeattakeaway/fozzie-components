@@ -9,7 +9,7 @@ describe('f-checkout "collection" component tests', () => {
         CheckoutComponent.waitForCheckoutComponent();
     });
 
-    it('should display "mobileNumber" error message when collection method is set and number is incorrect', () => {
+    it('FOO should display "mobileNumber" error message when collection method is set and number is incorrect', () => {
         // Arrange
         const addressDetails = {
             mobileNumber: '1234'
