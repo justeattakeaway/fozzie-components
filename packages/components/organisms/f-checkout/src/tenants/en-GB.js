@@ -37,6 +37,12 @@ const messages = {
 
     buttonText: 'Go to payment',
 
+    userNote: {
+        title: 'Leave a note',
+        text: 'Leave a note for the resturant with anything they need to know (e.g. the doorbell doesn\'t work). Do not include details about any allergies here.',
+        placeholder: 'e.g. the doorbell doesn\'t work. Do not include details about any allergies here. \n\nWe\'re working with resturants to cut waste. Please don\'t ask for plastic cutlery.'
+    },
+
     guest: {
         firstName: 'First name',
         lastName: 'Last name',

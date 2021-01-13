@@ -59,8 +59,7 @@
             </form>
 
             <terms-and-conditions
-                v-if="!isLoggedIn"
-                :class="$style['c-checkout-termsAndConditions']" />
+                v-if="!isLoggedIn" />
         </card>
     </div>
 </template>

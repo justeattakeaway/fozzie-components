@@ -12,7 +12,9 @@ v0.37.0
 
 ### Changed
 - `Checkout` form method.
+- `Checkout` card width.
 - `Checkout` title and login link into `Header` component.
+- `userNote` label.
 
 
 v0.36.0
