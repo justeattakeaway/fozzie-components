@@ -6,7 +6,7 @@
             v-if="isLoggedIn"
             data-test-id="user-checkoutHeader">
             <h2 data-test-id="user-title">
-                {{ $t('header.user.title', { name }) }}
+                {{ $t('checkoutHeader.user.title', { name }) }}
             </h2>
 
             <p :class="$style['c-checkoutHeader-loginLink']">
@@ -14,7 +14,7 @@
                     :href="loginUrl"
                     data-test-id="switch-user-link"
                     @click="onVisitLoginPage">
-                    {{ $t('header.user.switchUser', { name }) }}
+                    {{ $t('checkoutHeader.user.switchUser', { name }) }}
                 </a>
             </p>
         </div>
@@ -23,7 +23,7 @@
             v-else
             data-test-id="guest-checkoutHeader">
             <h2 :class="$style['c-checkoutHeader-title']">
-                {{ $t('header.guest.guestTitle') }}
+                {{ $t('checkoutHeader.guest.guestTitle') }}
             </h2>
 
             <a
@@ -31,20 +31,20 @@
                 data-test-id="guest-login-button"
                 :class="$style['c-checkoutHeader-loginButton']"
                 @click="onVisitLoginPage">
-                {{ $t('header.guest.loginButton') }}
+                {{ $t('checkoutHeader.guest.loginButton') }}
             </a>
 
             <div
                 :class="$style['c-checkoutHeader-option']">
-                <span>{{ $t('header.guest.option') }}</span>
+                <span>{{ $t('checkoutHeader.guest.option') }}</span>
             </div>
 
             <h2 :class="$style['c-checkoutHeader-title']">
-                {{ $t('header.guest.guestTitle') }}
+                {{ $t('checkoutHeader.guest.guestTitle') }}
             </h2>
 
             <p :class="$style['c-checkoutHeader-confirmation']">
-                {{ $t('header.guest.confirmation') }}
+                {{ $t('checkoutHeader.guest.confirmation') }}
             </p>
         </div>
     </div>

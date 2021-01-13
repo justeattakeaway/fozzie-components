@@ -49,7 +49,7 @@ const messages = {
         email: 'Email'
     },
 
-    header: {
+    checkoutHeader: {
         user: {
             title: '{name}, confirm your details',
             switchUser: 'Not {name}? Click here.'
