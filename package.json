@@ -16,11 +16,11 @@
     "storybook:serve-static": "lerna run storybook:serve-static --stream",
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
-    "test-component:chrome": "wdio ./wdio.conf.js --suite component",
-    "test-a11y:chrome": "wdio ./wdio.conf.js --suite accessibility",
+    "test-component:chrome": "cross-env ROOT_DIRECTORY=true wdio ./wdio.conf.js --suite component",
+    "test-a11y:chrome": "cross-env ROOT_DIRECTORY=true wdio ./wdio.conf.js --suite accessibility",
     "test:consumer": "lerna run test:consumer",
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
-    "local:tests": "yarn test && yarn test-component:chrome && yarn test-a11y"
+    "local:tests": "cross-env ROOT_DIRECTORY=true yarn test && yarn test-component:chrome && yarn test-a11y"
   },
   "resolutions": {
     "webpack": "4.36.0"
