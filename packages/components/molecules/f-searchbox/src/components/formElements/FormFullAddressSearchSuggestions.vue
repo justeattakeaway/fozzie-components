@@ -158,7 +158,7 @@ export default {
 
         /**
          * Selects an address `item` either from the `index` (clicked on)
-         * or `selected`.
+         * or `selected` (Keyboard enter event).
          *
          * 1. `getMatchedAreaAddressResults` - Returns results based on
          * the `streetLevelAddress` value.
