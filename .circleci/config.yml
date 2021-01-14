@@ -135,6 +135,11 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
+    - name: Fetch all history for all tags and branches
+      run: git fetch
+      - run:
+          name: Fetch all history for all tags and branches
+          command: git fetch
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
