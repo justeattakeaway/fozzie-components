@@ -74,6 +74,9 @@ export default {
     },
 
     methods: {
+        /*
+        * Dispatches map action `updateFulfilmentAddress` to update input fields values in vuex
+        */
         onVisitLoginPage () {
             this.$emit(EventNames.CheckoutVisitLoginPage);
         }
@@ -114,7 +117,8 @@ export default {
         color: $white;
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
         background-color: $orange--dark;
     }
 

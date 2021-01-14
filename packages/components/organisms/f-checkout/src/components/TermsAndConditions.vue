@@ -5,17 +5,23 @@
         <i18n
             path="checkoutTermsAndConditions">
             <template #termsAndConditions>
-                <a :href="$t('termsAndConditionsLinkUrl')">
+                <a
+                    :href="$t('termsAndConditionsLinkUrl')"
+                    target="_blank">
                     <span>{{ $t('termsAndConditionsLinkText') }}</span>
                 </a>
             </template>
             <template #privacyPolicy>
-                <a :href="$t('privacyPolicyLinkUrl')">
+                <a
+                    :href="$t('privacyPolicyLinkUrl')"
+                    target="_blank">
                     <span>{{ $t('privacyPolicyLinkText') }}</span>
                 </a>
             </template>
             <template #cookiePolicy>
-                <a :href="$t('cookiePolicyLinkUrl')">
+                <a
+                    :href="$t('cookiePolicyLinkUrl')"
+                    target="_blank">
                     <span>{{ $t('cookiePolicyLinkText') }}</span>
                 </a>
             </template>
