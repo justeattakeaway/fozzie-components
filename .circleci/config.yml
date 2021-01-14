@@ -135,9 +135,6 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
-      - run:
-          name: Fetch all history for all tags and branches
-          command: git fetch --all
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -167,6 +164,9 @@ jobs:
           name: Restore Working Directory Cache
           keys:
               - working-directory-{{ .Branch }}-{{ .Revision }}
+      - run:
+          name: Fetch all history for all tags and branches
+          command: git fetch --all
       - build_packages
       - run: # Install WebDriverIO Test Dependencies
           name: Install Component Test Dependencies
