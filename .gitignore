@@ -35,5 +35,5 @@ coverage/
 allure-report
 allure-results
 _results_
-axe-violations/
-!axe-violations/README.md
+**/axe-violations/*
+!**/axe-violations/README.md
