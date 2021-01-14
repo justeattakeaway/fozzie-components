@@ -29,6 +29,7 @@ const knobButton = () => $(KNOB_BUTTON);
 // Form Fields
 
 const userNoteInput = () => $(USER_NOTE_INPUT);
+const switchUserLink = () => $(SWITCH_USER_LINK);
 
 const fields = {
     mobileNumber: {
