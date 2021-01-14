@@ -24,7 +24,7 @@ commands:
     steps:
       - run: # Check UI packages all build as expected
           name: Build Packages
-          command: yarn build
+          command: yarn ci:build
 
   slack_notify_fail:
     description: Sends a slack notifaction on job failure
@@ -190,7 +190,7 @@ jobs:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
       - run: # Lint packages
           name: Run Lint Tasks on Packages
-          command: yarn lint
+          command: yarn ci:lint
     
   unit_tests:
     executor: node
@@ -204,7 +204,7 @@ jobs:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
       - run: # Run Tests
           name: Run Unit / Integration Tests
-          command: yarn test
+          command: yarn ci:test
 
   component_tests:
     executor: node
@@ -260,7 +260,7 @@ jobs:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
       - run:
           name: Run Bundlewatch checks
-          command: yarn bundlewatch
+          command: yarn ci:bundlewatch
 
   slack_reporting:
     executor: node
