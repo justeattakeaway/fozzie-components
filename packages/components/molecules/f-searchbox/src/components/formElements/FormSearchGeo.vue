@@ -2,6 +2,7 @@
     <button
         :class="$style['c-geo-locator']"
         type="button"
+        data-test-id="geo-locator-tip"
         @click="getSuggestions"
         @keypress.enter="getSuggestions">
         <span :class="$style['c-geo-locator-tip']">{{ copy.geoTip }}</span>
