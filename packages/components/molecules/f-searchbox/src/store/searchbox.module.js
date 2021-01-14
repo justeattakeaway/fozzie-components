@@ -13,7 +13,9 @@ import {
     SET_KEYBOARD_SUGGESTION,
     SET_FULL_ADDRESS_SEARCH_CONFIGS,
     SET_AUTO_COMPLETE_AVAILABILITY,
-    SET_PARTIAL_ADDRESS_SUGGESTIONS
+    SET_PARTIAL_ADDRESS_SUGGESTIONS,
+    SET_CONTINUE_WITH_SUGGESTION,
+    SET_SELECTED_STREET_LEVEL_ADDRESS_ID
 } from './mutation.types';
 
 export default {
@@ -22,6 +24,7 @@ export default {
         errors: [],
         suggestions: [],
         streetNumber: '',
+        streetLevelSelectionDetails: {},
         shouldInputFieldHaveFocus: false,
         keyboardSuggestionIndex: 0,
         isValid: false,
@@ -30,7 +33,9 @@ export default {
         isInputFocus: false,
         isGeoLocationAvailable: false,
         isFullAddressSearchEnabled: false,
-        isAutocompleteEnabled: false
+        isAutocompleteEnabled: false,
+        continueWithSuggestionDetails: {},
+        selectedStreetLevelAddressId: ''
     },
 
     actions: {
@@ -65,7 +70,7 @@ export default {
                 },
                 error => {
                     /**
-                     * If there's an error we need to clear the sugguestions & set the expected error.
+                     * If there's an error we need to clear the suggestions & set the expected error.
                      */
                     commit(SET_IS_DIRTY, true);
                     commit(SET_SUGGESTIONS, []);
@@ -139,11 +144,16 @@ export default {
         async getMatchedAreaAddressResults ({ commit }, payload) {
             if (!fullAddressService.hasMinimumAddressCriteria(payload.address)) return;
 
-            const fullAddressResponse = await fullAddressService.getPartialAddressSearch(payload);
+            const suggestions = await fullAddressService.getPartialAddressSearch(payload);
 
-            if (fullAddressResponse) {
-                commit(SET_PARTIAL_ADDRESS_SUGGESTIONS, fullAddressResponse);
+            if (suggestions) {
+                commit(SET_SELECTED_STREET_LEVEL_ADDRESS_ID, payload);
+                commit(SET_PARTIAL_ADDRESS_SUGGESTIONS, { suggestions, payload });
             }
+        },
+
+        setContinueWithDetails ({ commit }, payload) {
+            commit(SET_CONTINUE_WITH_SUGGESTION, payload);
         }
     },
 
@@ -203,18 +213,33 @@ export default {
          * @param state
          * @param suggestions
          */
-        [SET_PARTIAL_ADDRESS_SUGGESTIONS]: (state, suggestions) => {
-            state.suggestions = suggestions.Items.map(({
+        [SET_PARTIAL_ADDRESS_SUGGESTIONS]: (state, { suggestions, payload }) => {
+            const hasSelectedPartialAddress = payload && payload.streetLevelAddress;
+
+            const results = suggestions.Items.map(({
                 Description,
                 Text,
                 Id,
                 Type
             }) => ({
-                Description,
-                Text,
-                Id,
-                Type
-            })).filter(addressDetails => addressDetails.Type === 'Postcode');
+                description: Description,
+                text: Text,
+                id: Id,
+                type: Type
+            }));
+
+            state.suggestions = hasSelectedPartialAddress
+                ? [...results, state.continueWithSuggestionDetails]
+                : results.filter(addressDetails => addressDetails.type === 'Postcode');
+        },
+
+        [SET_CONTINUE_WITH_SUGGESTION]: (state, continueWithSuggestionDetails) => {
+            state.continueWithSuggestionDetails = continueWithSuggestionDetails;
+        },
+
+        [SET_SELECTED_STREET_LEVEL_ADDRESS_ID]: (state, selectedStreetLevelAddressId) => {
+            state.selectedStreetLevelAddressId =
+                (selectedStreetLevelAddressId && selectedStreetLevelAddressId.streetLevelAddress);
         }
     }
 };
