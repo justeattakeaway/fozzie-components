@@ -74,9 +74,6 @@ export default {
     },
 
     methods: {
-        /*
-        * Dispatches map action `updateFulfilmentAddress` to update input fields values in vuex
-        */
         onVisitLoginPage () {
             this.$emit(EventNames.CheckoutVisitLoginPage);
         }
