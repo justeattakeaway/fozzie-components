@@ -138,6 +138,19 @@ jobs:
       - run:
           name: Fetch all history for all tags and branches
           command: git fetch --all
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+              - yarn-packages-{{ checksum "yarn.lock" }}
+      - install_node_dependencies
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run: # Run PR Checks
+          name: Run PR Checks
+          command: yarn danger ci
       - build_packages
 
   deploy-storybook:
