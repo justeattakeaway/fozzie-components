@@ -43,7 +43,7 @@ export const CheckoutComponent = () => ({
             default: text('Create Guest Url', createGuestUrl)
         },
         authToken: {
-            default: text('Auth token', '')
+            default: select('Auth token', ['authToken', null], 'authToken')
         },
         loginUrl: {
             default: text('Login Url', '/login')

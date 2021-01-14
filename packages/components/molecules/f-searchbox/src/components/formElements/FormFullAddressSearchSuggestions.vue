@@ -1,15 +1,22 @@
 <template>
-    <div :class="$style.shell">
+    <div
+        ref="fullAddressSuggestions"
+        :class="$style.shell">
         <button
             v-for="(item, index) in getAddressItems"
-            :key="`${index}_ getAddressItem`"
-            type="button"
+            :key="`${index}_getAddressItem`"
+            :ref="`suggestion${index}`"
             :class="[
-                $style.item
-            ]">
+                $style.item,
+                { [$style.selected]: index === keyboardSuggestionIndex }
+            ]"
+            data-test-id="suggestion-item"
+            @click="getSelectedStreetAddress($event, item, index, keyboardSuggestionIndex)">
             <map-pin-icon :class="$style['c-locationIcon']" />
 
-            <div :class="$style['c-fullAddressSuggestion']">
+            <div
+                v-if="!selectedStreetLevelAddressId"
+                :class="$style['c-fullAddressSuggestion']">
                 <p :class="$style['c-fullAddressSuggestion-postcodeMatch']">
                     {{ getMatchedPostcodes(item) }}
                 </p>
@@ -19,16 +26,30 @@
                     {{ getDescription(item) }}
                 </p>
             </div>
+            <div v-else>
+                <div :class="$style['c-fullAddressSuggestion']">
+                    <p :class="$style['c-fullAddressSuggestion-streetLevelMatch']">
+                        {{ getMatchedPostcodes(item) }} {{ getDescription(item) }}
+                    </p>
+                </div>
+            </div>
         </button>
+
+        <continue-with-suggestion
+            v-if="selectedStreetLevelAddressId"
+            :copy="copy.fullAddressSearchSuggestions"
+            :selected="hasSelectedContinueWithSuggestion" />
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import { MapPinIcon } from '@justeat/f-vue-icons';
+import ContinueWithSuggestion from './FormFullAddressContinueWithSuggestion.vue';
 
 export default {
     components: {
+        ContinueWithSuggestion,
         MapPinIcon
     },
 
@@ -40,15 +61,26 @@ export default {
             })
         },
 
-        keyboardSuggestionSelection: {
-            type: Number,
-            default: 0
+        address: {
+            type: String,
+            default: ''
+        },
+
+        copy: {
+            type: Object,
+            default:  () => ({})
         }
     },
 
+    data: () => ({
+        hasSelectedContinueWithSuggestion: false
+    }),
+
     computed: {
         ...mapState('searchbox', [
-            'suggestions'
+            'suggestions',
+            'selectedStreetLevelAddressId',
+            'keyboardSuggestionIndex'
         ]),
 
         /**
@@ -62,7 +94,34 @@ export default {
         }
     },
 
+    watch: {
+        /**
+         * Checks the `keyboardSuggestionIndex` value so we can scroll to the address within the
+         * `fullAddressSuggestions` container, allowing keyboard navigation.
+         *
+         * @param {Number} value
+         */
+        keyboardSuggestionIndex (value) {
+            const suggestionItem = this.$refs[`suggestion${[value]}`];
+
+            if ((value || value === 0)
+                && suggestionItem
+                && suggestionItem[0]) {
+                this.$refs.fullAddressSuggestions.scrollTop = suggestionItem[0].offsetTop;
+            }
+
+            this.hasSelectedContinueWithSuggestion =
+                !!(this.selectedStreetLevelAddressId && value === this.suggestions.length - 1);
+        }
+    },
+
     methods: {
+        ...mapActions('searchbox', [
+            'getMatchedAreaAddressResults',
+            'setInputFocus',
+            'setContinueWithDetails'
+        ]),
+
         /**
          * Returns the `postcode`, part of the API response, held in `Text`.
          *
@@ -74,7 +133,7 @@ export default {
         getMatchedPostcodes (item) {
             return this.params
                 .suggestionFormat(item)
-                .Text;
+                .text;
         },
 
         /**
@@ -88,8 +147,35 @@ export default {
         getDescription (item) {
             return this.params
                 .suggestionFormat(item)
-                .Description
+                .description
                 .trim();
+        },
+
+        /**
+         * Selects an address `item` either from the `index` (clicked on)
+         * or `selected` (keyboard entry - @todo not working right now).
+         *
+         * 1. `getMatchedAreaAddressResults` - Returns results based on
+         * the `streetLevelAddress` value.
+         *
+         * 2. `setContinueWithDetails` Will set a fallback options for users so
+         * they can continue without selecting a full addresss.
+         *
+         * @param e
+         * @param item
+         */
+        getSelectedStreetAddress (e, item) {
+            e.preventDefault();
+
+            this.getMatchedAreaAddressResults({
+                address: this.address,
+                streetLevelAddress: item.id
+            });
+
+            this.setContinueWithDetails({
+                postcode:  item.text,
+                street: item.description
+            });
         }
     }
 };

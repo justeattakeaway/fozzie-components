@@ -28,16 +28,18 @@
             <form-search-button
                 :copy="copy"
                 :is-compressed="isCompressed" />
-        </div>
 
-        <component
-            :is="setSuggestionType"
-            v-if="shouldDisplaySuggestions"
-            aria-live="assertive"
-            :suggestion-format="suggestionFormat"
-            :suggestions="suggestions"
-            :keyboard-suggestion-selection="keyboardSuggestionIndex"
-            @selected-suggestion="onSelectedSuggestion" />
+            <component
+                :is="setSuggestionType"
+                v-if="shouldDisplaySuggestions"
+                data-test-id="suggestions"
+                aria-live="assertive"
+                :address="address"
+                :copy="copy"
+                :suggestion-format="suggestionFormat"
+                :suggestions="suggestions"
+                :keyboard-suggestion-selection="keyboardSuggestionIndex" />
+        </div>
 
         <error-message
             v-if="errorMessage"
@@ -224,8 +226,7 @@ export default {
 
                 if (this.isFullAddressSearchEnabled) {
                     this.getMatchedAreaAddressResults({
-                        address: this.address,
-                        streetLevelAddress: ''
+                        address: this.address
                     });
                 }
             },

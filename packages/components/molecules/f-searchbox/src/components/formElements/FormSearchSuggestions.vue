@@ -3,12 +3,12 @@
         <button
             v-for="(item, index) in suggestions"
             :key="index"
+            data-test-id="suggestion-item"
             type="button"
             :class="{
                 [$style['c-search-suggestions-item']]: true,
                 [$style.selected]: index === keyboardSuggestionSelection
-            }"
-            @click="$emit('selected-suggestion', index)">
+            }">
             {{ suggestionFormat(item) }}
         </button>
         <div :class="$style['c-search-poweredByGoogle']">
