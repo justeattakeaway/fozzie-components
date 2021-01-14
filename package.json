@@ -5,6 +5,7 @@
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
     "bundlewatch": "cross-env-shell \"yarn build && bundlewatch --config bundlewatch.config.js\"",
+    "lerna-version": "lerna version --conventional-commits --yes",
     "lint": "cross-env-shell \"lerna run $LERNA_ARGS lint --stream\"",
     "lint:fix": "lerna run lint -- --fix",
     "lint:style": "lerna run lint:style --stream",
