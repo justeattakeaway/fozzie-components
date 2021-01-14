@@ -61,7 +61,7 @@ export default {
             })
         },
 
-        // Prop should named `selected` for keyboard purposes.
+        // Prop should be named `selected` for keyboard purposes.
         selected: {
             type: Number,
             default: 0
