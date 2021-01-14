@@ -30,8 +30,6 @@
 </template>
 
 <style lang="scss" module>
-$checkout-width                           : 460px;
-
 .c-checkoutTermsAndConditions {
     width: Calc($checkout-width - 2px); // -2px for border width
     background: $grey--offWhite;

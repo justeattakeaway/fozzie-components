@@ -15,7 +15,7 @@
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="checkout-card-component"
-            :class="$style['c-checkout-card']">
+            :class="$style['c-checkout']">
             <checkout-header
                 :login-url="loginUrl" />
 
@@ -439,9 +439,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-$checkout-width                           : 460px;
-
-.c-checkout-card {
+.c-checkout {
     padding-top: spacing(x6);
     padding-bottom: spacing(x6);
 
