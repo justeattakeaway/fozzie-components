@@ -1,35 +1,23 @@
 <template>
     <div :class="$style['c-userNote']">
-        <div :class="$style['c-userNote-title']">
-            Leave a note
-        </div>
+        <label
+            for="userNote"
+            :class="$style['c-userNote-title']">
+            {{ $t('userNote.title') }}
+        </label>
         <div :class="$style['c-userNote-content']">
-            {{ noteText }}
+            {{ $t('userNote.text') }}
         </div>
         <textarea
+            id="userNote"
             name="notePlaceholder"
             cols="30"
             rows="10"
             maxlength="200"
             :class="$style['c-userNote-textArea']"
-            :placeholder="notePlaceholder" />
+            :placeholder="$t('userNote.placeholder')" />
     </div>
 </template>
-
-<script>
-export default {
-    props: {
-        noteText: {
-            type: String,
-            default: "Leave a note for the resturant with anything they need to know (e.g. the doorbell doesn't work). Do not include details about any allergies here."
-        },
-        notePlaceholder: {
-            type: String,
-            default: "e.g. the doorbell doesn't work. Do not include details about any allergies here. \n\nWe're working with resturants to cut waste. Please don't ask for plastic cutlery."
-        }
-    }
-};
-</script>
 
 <style lang="scss" module>
 $userNote-textArea-borderRadius                  : $border-radius;
