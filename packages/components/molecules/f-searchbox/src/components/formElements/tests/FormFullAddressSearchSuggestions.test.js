@@ -7,7 +7,16 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 const mockState = {
-    suggestions: [{ description: 'NASA' }, { postcode: 'SpaceX' }]
+    suggestions: [
+        {
+            description: 'NASA',
+            id: 'GB|RM|A|20388007',
+            text: 'AR511AR'
+        },
+        {
+            postcode: 'SpaceX'
+        }
+    ]
 };
 
 const mockActions = {
@@ -115,10 +124,11 @@ describe('`FullAddressSuggestions`', () => {
                     // Arrange
                     const { wrapper } = bootstrap();
                     const event = { preventDefault: jest.fn() };
-                    const items = [{ id: 'GB|RM|A|20388007' }];
+                    const index = 0;
+                    const selected = 0;
 
                     // Act
-                    wrapper.vm.getSelectedStreetAddress(event, items);
+                    wrapper.vm.getSelectedStreetAddress(event, index, selected);
 
                     // Assert
                     expect(event.preventDefault).toHaveBeenCalled();
@@ -128,11 +138,12 @@ describe('`FullAddressSuggestions`', () => {
                     // Arrange
                     const { wrapper } = bootstrap();
                     const event = { preventDefault: jest.fn() };
-                    const items = { id: 'GB|RM|A|20388007' };
                     const spy = jest.spyOn(wrapper.vm, 'getMatchedAreaAddressResults');
+                    const index = 0;
+                    const selected = 0;
 
                     // Act
-                    wrapper.vm.getSelectedStreetAddress(event, items);
+                    wrapper.vm.getSelectedStreetAddress(event, index, selected);
 
                     // Assert
                     expect(spy).toHaveBeenCalledWith({
@@ -145,20 +156,17 @@ describe('`FullAddressSuggestions`', () => {
                     // Arrange
                     const { wrapper } = bootstrap();
                     const event = { preventDefault: jest.fn() };
-                    const items = {
-                        id: 'GB|RM|A|20388007',
-                        text: 'AR511AR',
-                        description: 'Middle of nowhere'
-                    };
                     const spy = jest.spyOn(wrapper.vm, 'setContinueWithDetails');
+                    const index = 0;
+                    const selected = 0;
 
                     // Act
-                    wrapper.vm.getSelectedStreetAddress(event, items);
+                    wrapper.vm.getSelectedStreetAddress(event, index, selected);
 
                     // Assert
                     expect(spy).toHaveBeenCalledWith({
                         postcode: 'AR511AR',
-                        street: 'Middle of nowhere'
+                        street: 'NASA'
                     });
                 });
             });
@@ -182,7 +190,13 @@ describe('`FullAddressSuggestions`', () => {
                     const result = wrapper.vm.getAddressItems;
 
                     // Assert
-                    expect(result).toEqual([{ description: 'NASA' }]);
+                    expect(result).toEqual([
+                        {
+                            description: 'NASA',
+                            id: 'GB|RM|A|20388007',
+                            text: 'AR511AR'
+                        }
+                    ]);
                 });
             });
         });

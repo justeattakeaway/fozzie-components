@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.18
+------------------------------
+*January 14, 2021*
+
+### Fixed
+- Keyboard selection event when Loqate is displaying results.
+- Tests so they pass with changes.
+- Double dropdrop flicker issue.
+
+
 v4.0.0-beta.17
 ------------------------------
 *January 13, 2021*
