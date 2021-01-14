@@ -34,10 +34,11 @@
                     </a>
                 </p>
                 <form-field
-                    v-model="customer.mobileNumber"
+                    :value="customer.mobileNumber"
                     name="mobile-number"
                     :label-text="$t('labels.mobileNumber')"
-                    :has-error="!isMobileNumberValid">
+                    :has-error="!isMobileNumberValid"
+                    @input="updateMobileNumber">
                     <template #error>
                         <error-message
                             v-if="!isMobileNumberValid"
@@ -53,13 +54,6 @@
                 <form-selector />
 
                 <user-note data-test-id="user-note" />
-
-                <f-button
-                    :class="$style['c-checkout-allergyButton']"
-                    button-type="link"
-                    data-test-id="allergy-button">
-                    {{ $t('allergyText') }}
-                </f-button>
 
                 <f-button
                     :class="$style['c-checkout-submitButton']"
@@ -259,7 +253,8 @@ export default {
             'getAvailableFulfilment',
             'getCheckout',
             'postCheckout',
-            'setAuthToken'
+            'setAuthToken',
+            'updateMobileNumber'
         ]),
 
         onVisitLoginPage () {
@@ -477,10 +472,6 @@ $checkout-padding                         : spacing(x5) 100px;
     .c-checkout-alert {
         width: $checkout-width;
         margin: 0 auto;
-    }
-
-    .c-checkout-allergyButton {
-        margin-top: spacing(x1.5);
     }
 
     .c-checkout-submitButton {

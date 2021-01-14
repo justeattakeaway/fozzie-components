@@ -14,6 +14,7 @@
             :class="$style['c-search-streetInput']"
             type="input"
             placeholder="N°"
+            :aria-label="copy.streetNumberLabel"
             @input="onStreetNumberEntered">
     </div>
 </template>

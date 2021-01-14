@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "3.2.1",
+  "version": "3.5.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -16,11 +16,11 @@
     "storybook:serve-static": "lerna run storybook:serve-static --stream",
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
-    "test-component:chrome": "lerna run webdriver:start:chrome --concurrency 1 --stream",
-    "test-component-ci:chrome": "lerna run webdriver:start:chrome --concurrency 1 --stream",
+    "test-component:chrome": "cross-env ROOT_DIRECTORY=true wdio ./wdio.conf.js --suite component",
+    "test-a11y:chrome": "cross-env ROOT_DIRECTORY=true wdio ./wdio.conf.js --suite accessibility",
     "test:consumer": "lerna run test:consumer",
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
-    "local:tests": "yarn test && yarn test-component:chrome"
+    "local:tests": "cross-env ROOT_DIRECTORY=true yarn test && yarn test-component:chrome && yarn test-a11y"
   },
   "resolutions": {
     "webpack": "4.36.0"
@@ -49,7 +49,7 @@
     "@wdio/spec-reporter": "6.4.0",
     "@wdio/sync": "6.4.0",
     "allure-commandline": "2.13.0",
-    "axe-core": "4.0.2",
+    "axe-core": "4.1.1",
     "axe-reports": "1.1.11",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
@@ -63,6 +63,7 @@
     "eslint": "6.8.0",
     "eslint-import-resolver-webpack": "0.12.2",
     "eslint-plugin-vue": "6.2.2",
+    "eslint-plugin-vuejs-accessibility": "0.6.0",
     "eyeglass": "3.0.2",
     "include-media": "1.4.9",
     "jest-allure2": "1.2.3",

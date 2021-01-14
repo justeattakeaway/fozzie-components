@@ -1,4 +1,3 @@
-export const ALLERGEN_LINK = '[data-test-id="allergy-button"]';
 export const CHECKOUT_COMPONENT = '[data-test-id="checkout-component"]';
 export const ORDER_TIME_DROPDOWN = '[data-test-id="formfield-order-time-dropdown-select"]';
 export const ORDER_TIME_DROPDOWN_OPTIONS = '[data-test-id="formfield-order-time-dropdown-select"] option';
@@ -36,7 +35,6 @@ export const FIELDS = {
 };
 
 export default {
-    ALLERGEN_LINK,
     CHECKOUT_COMPONENT,
     ORDER_TIME_DROPDOWN,
     ORDER_TIME_DROPDOWN_OPTIONS,

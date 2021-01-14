@@ -1,6 +1,7 @@
 const { source } = require('axe-core');
 const AxeReports = require('axe-reports');
 const { exec } = require('child_process');
+const fs = require('fs');
 
 /**
  * Runs the WCAG accessibility tests on the curent page of the global browser
@@ -31,7 +32,7 @@ exports.getAccessibilityTestResults = (componentName) => {
 
     if(results.violations.length > 0)
     {
-        this.processResults(results, componentName);
+        exports.processResults(results, componentName);
     }
 
     return results;
@@ -69,7 +70,7 @@ exports.processResults = (results, componentName) => {
             console.error(err);
         }
 
-        AxeReports.processResults(results, 'csv', ciFilePath, false);
+        AxeReports.processResults(results, 'csv', ciFileName, false);
     } else {
         AxeReports.processResults(results, 'csv', localFilePath, false);
     }

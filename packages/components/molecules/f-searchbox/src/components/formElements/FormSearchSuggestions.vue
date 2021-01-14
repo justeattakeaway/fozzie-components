@@ -14,6 +14,7 @@
         <div :class="$style['c-search-poweredByGoogle']">
             <img
                 :src="poweredByGoogle"
+                alt=""
                 data-test-id="poweredByGoogle">
         </div>
     </div>
@@ -30,8 +31,10 @@ export default {
             default: () => []
         },
         suggestionFormat: {
-            type: Function,
-            default: () => ({})
+            type: Object,
+            default: () => ({
+                suggestionFormat: suggestion => suggestion
+            })
         },
 
         keyboardSuggestionSelection: {

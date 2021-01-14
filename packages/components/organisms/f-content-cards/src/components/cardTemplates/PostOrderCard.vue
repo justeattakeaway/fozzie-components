@@ -95,7 +95,8 @@ export default {
         border: 1px solid $color-border;
         border-radius: $post-order-card-radius;
         padding: spacing(x3);
-        width: 100%;
+        max-width: 100%;
+        flex: 1 1 0%; // do not remove unit its intentional for IE11
 
         @include media ('<mid') {
             border: none;

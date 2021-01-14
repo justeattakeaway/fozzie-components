@@ -1,7 +1,7 @@
 <div align="center">
 <h1>f-metadata</h1>
 
-<img width="125" alt="Fozzie Bear" src="../../bear.png" />
+<img width="125" alt="Fozzie Bear" src="../../../bear.png" />
 
 <p>Braze Content Cards Interface</p>
 </div>
@@ -15,7 +15,9 @@
 
 This package provides an interface for initialising Braze and handling content cards and in-app messages.
 
-## Installation
+## Usage
+
+### Installation
 
 Install the module using NPM or Yarn:
 
@@ -36,8 +38,6 @@ import initialiseBraze from '@justeat/f-metadata';
 // or require
 const initialiseBraze = require('@justeat/f-metadata');
 ```
-
-## Usage
 
 ### Initialisation
 
