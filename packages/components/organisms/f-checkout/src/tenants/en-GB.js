@@ -37,7 +37,42 @@ const messages = {
 
     buttonText: 'Go to payment',
 
-    switchUserText: 'Not {name}? Click here.'
+    userNote: {
+        title: 'Leave a note',
+        text: 'Leave a note for the resturant with anything they need to know (e.g. the doorbell doesn\'t work). Do not include details about any allergies here.',
+        placeholder: 'e.g. the doorbell doesn\'t work. Do not include details about any allergies here. \n\nWe\'re working with resturants to cut waste. Please don\'t ask for plastic cutlery.'
+    },
+
+    guest: {
+        firstName: 'First name',
+        lastName: 'Last name',
+        email: 'Email'
+    },
+
+    checkoutHeader: {
+        user: {
+            title: '{name}, confirm your details',
+            switchUser: 'Not {name}? Click here.'
+        },
+        guest: {
+            loginTitle: 'How do you want to continue?',
+            loginButton: 'Log in or sign up',
+            option: 'or',
+            guestTitle: 'Checkout as a guest',
+            confirmation: 'Please confirm your delivery details'
+        }
+    },
+
+    checkoutTermsAndConditions: 'By placing an order you agree to our {termsAndConditions}. Please read our {privacyPolicy} and {cookiePolicy}.',
+
+    termsAndConditionsLinkText: 'Terms and Conditions',
+    termsAndConditionsLinkUrl: 'https://www.just-eat.co.uk/termsandconditions',
+
+    privacyPolicyLinkText: 'Privacy Policy',
+    privacyPolicyLinkUrl: 'https://www.just-eat.co.uk/privacypolicy',
+
+    cookiePolicyLinkText: 'Cookie Policy',
+    cookiePolicyLinkUrl: 'https://www.just-eat.co.uk/cookies-policy'
 };
 
 const dateTimeFormats = {
