@@ -67,12 +67,12 @@ describe('f-footer component tests', () => {
         expect(browser.getUrl()).toContain('https://www.youtube.com');
     });
 
-    it('Does not show courier links on en-GB locale if courier links is set to false', () => {
+    it('Should not show courier links on en-GB locale if courier links is set to false', () => {
         // Assert
         expect(FooterComponent.isCourierLinksDisplayed()).toBe(false);
     });
 
-    it('Does not show courier links on en-GB locale if courier links is set to true', () => {
+    it('Should not show courier links on en-GB locale if courier links is set to true', () => {
         // Act
         browser.url(`${path}footer-component${locale}${links}`);
 

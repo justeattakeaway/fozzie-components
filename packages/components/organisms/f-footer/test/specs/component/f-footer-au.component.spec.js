@@ -9,7 +9,7 @@ describe('f-footer component tests', () => {
         FooterComponent.waitForFooter();
     });
 
-    it('Does not show courier links on en-AU if courier links is set to false', () => {
+    it('Should not show courier links on en-AU if courier links is set to false', () => {
         // Assert
         expect(FooterComponent.isCourierLinksDisplayed()).toBe(false);
     });
