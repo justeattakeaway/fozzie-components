@@ -157,7 +157,7 @@ export default {
         },
 
         /**
-         * Selects an address `item` either from the `index` (clicked on)
+         * Selects an address `suggestion` either from the `index` (clicked on)
          * or `selected` (Keyboard enter event).
          *
          * 1. `getMatchedAreaAddressResults` - Returns results based on
@@ -167,7 +167,6 @@ export default {
          * they can continue without selecting a full addresss.
          *
          * @param e
-         * @param item
          * @param index
          * @param selected
          */
