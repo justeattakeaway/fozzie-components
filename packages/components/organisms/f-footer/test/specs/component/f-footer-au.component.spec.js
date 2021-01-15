@@ -14,7 +14,7 @@ describe('f-footer component tests', () => {
         expect(FooterComponent.isCourierLinksDisplayed()).toBe(false);
     });
 
-    it('Shows courier links on en-AU locale', () => {
+    it('Should show courier links on en-AU locale', () => {
         // Act
         browser.url(`${path}footer-component${locale}${links}`);
 
