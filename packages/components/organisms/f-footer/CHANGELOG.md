@@ -3,7 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## v4.6.1
+v4.7.0
+------------------------------
+*January 15, 2021*
+
+### Added
+- Added new tests to test courier links are visible based on tenant.
+
+### Changed
+- Changes and refactoring to component tests that bypass the use of testing within the Storybook view.
+
+
+
+v4.6.1
 ------------------------------
 _January 14, 2021_
 
