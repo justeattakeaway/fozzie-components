@@ -26,7 +26,7 @@
                 :is-compressed="isCompressed"
                 v-on="$listeners" />
 
-            <form-full-address-search-suggestions
+            <component
                 :is="setSuggestionType"
                 v-if="shouldDisplaySuggestions"
                 data-test-id="suggestions"

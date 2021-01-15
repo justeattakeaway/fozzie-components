@@ -10,7 +10,7 @@ v4.0.0-beta.18
 ### Fixed
 - Keyboard selection event when Loqate is displaying results.
 - Tests so they pass with changes.
-- Double dropdrop flicker issue.
+- Flicker issue between suggestions drop down.
 
 
 v4.0.0-beta.17
