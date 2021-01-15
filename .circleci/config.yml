@@ -260,7 +260,7 @@ jobs:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
       - run:
           name: Run Bundlewatch checks
-          command: yarn ci:bundlewatch
+          command: yarn bundlewatch
 
   slack_reporting:
     executor: node

@@ -14,11 +14,11 @@ exports.ci = () => ({
 });
 
 exports.a11y = () => ({
-    specs: './test/specs/accessibility/axe-accessibility.spec.js'
+    specs: ['./test/specs/accessibility/axe-accessibility.spec.js']
 })
 
 exports.component = () => ({
-    specs: './test/specs/component/*.component.spec.js'
+    specs: ['./test/specs/component/*.component.spec.js']
 })
 
 exports.setTestEnvironment = () => (CIRCLE_CI ? exports.ci() : exports.local());
