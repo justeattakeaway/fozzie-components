@@ -39,7 +39,7 @@ commands:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Your workflow ${CIRCLE_BUILD_URL} has failed ⚠️"
+                    "text": "Your workflow *Build* has failed ⚠️"
                   },
                   "fields": [
                     {
@@ -86,7 +86,7 @@ commands:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Your workflow ${CIRCLE_BUILD_URL} has succeeded 🎉"
+                    "text": "Your workflow *Build* has succeeded 🎉"
                   },
                   "fields": [
                     {
