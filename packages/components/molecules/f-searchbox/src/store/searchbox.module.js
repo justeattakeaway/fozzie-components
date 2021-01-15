@@ -148,6 +148,7 @@ export default {
 
             if (suggestions) {
                 commit(SET_SELECTED_STREET_LEVEL_ADDRESS_ID, payload);
+                commit(SET_KEYBOARD_SUGGESTION, 0);
                 commit(SET_PARTIAL_ADDRESS_SUGGESTIONS, { suggestions, payload });
             }
         },
