@@ -3,12 +3,36 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.37.0
+-------------------------------
+*January 14, 2021*
+
+### Added
+- `Guest`, `Header` and `TermsAndConditions` components.
+- `Checkout` mobile view.
+
+### Changed
+- `Checkout` form method.
+- `Checkout` card width.
+- `Checkout` title and login link into `Header` component.
+- `userNote` label.
+
+
 v0.36.0
 -------------------------------
 *January 12, 2021*
 
 ### Removed
 - Allergen information link.
+
+
+Latest (add to next release)
+------------------------------
+*January 12, 2021*
+
+### Changed
+- Update axios version for security advisory.
+- Use latest version of `f-error-message`.
 
 
 v0.35.0
@@ -65,15 +89,11 @@ v0.31.0
 
 ### Changed
 - Updated skipped tests to work with Storybook component tests.
+- Updated config for latest `sass-loader`.
+- Updated fozzie dependencies in `common.scss` to pull in v5-beta.
 
 ### Added
 - New `clearCheckoutForm` function added to clear the fields in tests in the `f-checkout-component.js` file.
-
-*December 30, 2020*
-
-### Changed
-- Updated config for latest `sass-loader`.
-- Updated fozzie dependencies in `common.scss` to pull in v5-beta.
 
 
 v0.30.0

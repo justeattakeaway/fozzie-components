@@ -46,7 +46,7 @@ describe('Checkout', () => {
     allure.feature('Checkout');
     const checkoutUrl = 'http://localhost/checkout';
     const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
-    const loginUrl = 'http://dummy-login.example.com';
+    const loginUrl = 'http://localhost/login';
     const createGuestUrl = 'http://localhost/createguestuser';
     const propsData = {
         checkoutUrl,
@@ -56,6 +56,7 @@ describe('Checkout', () => {
     };
 
     it('should be defined', () => {
+        // Arrange
         const wrapper = shallowMount(VueCheckout, {
             i18n,
             store: createStore(),
@@ -63,10 +64,12 @@ describe('Checkout', () => {
             propsData
         });
 
+        // Assert
         expect(wrapper.exists()).toBe(true);
     });
 
-    it('should show the login link', () => {
+    it('should have one form with method "post"', () => {
+        // Arrange
         const wrapper = shallowMount(VueCheckout, {
             i18n,
             store: createStore(),
@@ -75,11 +78,11 @@ describe('Checkout', () => {
         });
 
         // Act
-        const loginLink = wrapper.find("[data-test-id='switch-user-link']");
+        const forms = wrapper.findAll('form');
 
         // Assert
-        expect(loginLink.exists()).toBe(true);
-        expect(loginLink.text()).toBe(`Not ${defaultState.customer.firstName}? Click here.`);
+        expect(forms.length).toBe(1);
+        expect(forms.wrappers[0].attributes('method')).toBe('post');
     });
 
     describe('created :: ', () => {
@@ -180,46 +183,6 @@ describe('Checkout', () => {
     });
 
     describe('computed ::', () => {
-        describe('name ::', () => {
-            it('should capitalize `firstName` data', async () => {
-                // Act
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                const name = wrapper.find("[data-test-id='checkout-card-component']");
-
-                // Assert
-                expect(name.props('cardHeading')).toContain(defaultState.customer.firstName);
-            });
-        });
-
-        describe('title ::', () => {
-            it('should add `name` to title text', async () => {
-                // Arrange
-                const propsDataWithAuthToken = {
-                    ...propsData,
-                    authToken: 'mytoken'
-                };
-
-                // Act
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData: propsDataWithAuthToken
-                });
-
-                const name = wrapper.find("[data-test-id='checkout-card-component']");
-
-                // Assert
-                expect(name.props('cardHeading')).toEqual(`${defaultState.customer.firstName}, confirm your details`);
-            });
-        });
-
         describe('isMobileNumberValid ::', () => {
             let wrapper;
 
@@ -1104,25 +1067,6 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(isValidPostcodeSpy).toHaveBeenCalledWith(defaultState.fulfilment.address.postcode, i18n.locale);
-            });
-        });
-
-        describe('onVisitLoginPage ::', () => {
-            it('should emit the `VisitLoginPage` event when login link is clicked.', () => {
-                // Arrange
-                const wrapper = shallowMount(VueCheckout, {
-                    i18n,
-                    store: createStore(),
-                    localVue,
-                    propsData
-                });
-
-                // Act
-                const loginLink = wrapper.find("[data-test-id='switch-user-link']");
-                loginLink.trigger('click');
-
-                // Assert
-                expect(wrapper.emitted(EventNames.CheckoutVisitLoginPage).length).toBe(1);
             });
         });
 

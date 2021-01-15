@@ -3,6 +3,40 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.18
+------------------------------
+*January 14, 2021*
+
+### Fixed
+- Keyboard selection event when Loqate is displaying results.
+- Tests so they pass with changes.
+- Flicker issue between suggestions drop down.
+
+
+v4.0.0-beta.17
+------------------------------
+*January 13, 2021*
+
+### Added
+- Ability to select postcode results, returns address results now.
+- Tests to cover changes.
+- Test IDs added so integration tests in build agent can run against DOM elements.
+- Ability for users to continue with generic postcode & area `FormFullAddressContinueWithSuggestion.vue`.
+- Copy to en-GB.js for Loqate specific translations.
+- Vuex Mutations:
+  - `SET_PARTIAL_ADDRESS_SUGGESTIONS`
+  - `SET_CONTINUE_WITH_SUGGESTION`
+  - `SET_SELECTED_STREET_LEVEL_ADDRESS_ID`
+ - Actions:
+  - `setContinueWithDetails`
+
+### Changed
+- Vuex Actions:
+  - Modified: `getMatchedAreaAddressResults` so we can set the street ID correctly for the retrieval
+  call (Retrieve: Returns the full address details based on the Id). Renamed some variables.
+- Update axios version for security advisory
+
+
 v4.0.0-beta.16
 ------------------------------
 *January 11, 2021*
@@ -37,31 +71,15 @@ v4.0.0-beta.13
 - DK & NO field options - provides component with custom attributes, 
 supplied via tenant config `addressField`.
 - DK & NO uses the `where` form value now.
+- Google test from failing silently in CI.
 
 ### Added
 - url-loader so we can inline the `powered by google` logo as a base64 URI.
-
-
-Latest (add to next release)
-------------------------------
-*December 30, 2020*
+- Tests to helper.js.
 
 ### Changed
 - Updated config for latest `sass-loader`.
 - Switches import in `common.scss` in line with fozzie v5-beta.
-
-### Fixed
-- Google test from failing silently in CI.
-
-
-Latest (to be added to next release)
-------------------------------
-*December 14, 2020*
-
-### Added
-- Tests to helper.js.
-
-### Changed
 - Test helper directory `tests` > `testHelpers`.
 
 

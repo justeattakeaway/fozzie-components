@@ -141,8 +141,6 @@ describe('ContentCards', () => {
         instance.vm.metadataContentCards([]);
         await instance.vm.$nextTick();
 
-        console.log(instance.html());
-
         // Assert
         expect(instance.find('[data-test-id="Post_Order_Card_1"]').exists()).toBe(true);
     });
