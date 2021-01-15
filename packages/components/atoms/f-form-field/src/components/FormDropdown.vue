@@ -6,7 +6,7 @@
             :class="$style['c-formDropdown-icon']"
             :data-test-id="testId.icon" />
         <select
-            id="time-selection"
+            :id="$attrs.id"
             :class="$style['c-formDropdown-select']"
             :data-test-id="testId.select"
             v-bind="attributes"
@@ -29,6 +29,8 @@ export default {
     components: {
         CaretIcon
     },
+
+    inheritAttrs: false,
 
     props: {
         attributes: {
