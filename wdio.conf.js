@@ -1,6 +1,7 @@
 const video = require('wdio-video-reporter');
-const { setTestType } = require('./test/utils/configuration-helper');
+const { setTestEnvironment, setTestType } = require('./test/utils/configuration-helper');
 
+const testEnvironment = setTestEnvironment();
 const testType = setTestType();
 
 exports.config = {
@@ -30,14 +31,10 @@ exports.config = {
     // Suites
     suites: {
         component: [
-            './packages/components/atoms/**/test/specs/component/*.component.spec.js',
-            './packages/components/molecules/**/test/specs/component/*.component.spec.js',
-            './packages/components/organisms/**/test/specs/component/*.component.spec.js'
+            './test/specs/component/*.component.spec.js',
         ],
         accessibility: [
-            './packages/components/atoms/**/test/specs/accessibility/axe-accessibility.spec.js',
-            './packages/components/molecules/**/test/specs/accessibility/axe-accessibility.spec.js',
-            './packages/components/organisms/**/test/specs/accessibility/axe-accessibility.spec.js'
+            './test/specs/accessibility/axe-accessibility.spec.js',
         ]
     },
     //
@@ -56,7 +53,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: testType.maxinstances,
+    maxInstances: testEnvironment.maxinstances,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -79,7 +76,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: testType.loglevel,
+    logLevel: testEnvironment.loglevel,
     //
     // Set specific log levels per logger
     // loggers:
@@ -97,7 +94,7 @@ exports.config = {
     //
     // If you only want to run your tests until a specific amount of tests have failed use
     // bail (default is 0 - don't bail, run all tests).
-    bail: testType.bail,
+    bail: testEnvironment.bail,
     //
     // Set a base URL in order to shorten url command calls. If your `url` parameter starts
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
@@ -146,7 +143,7 @@ exports.config = {
             videoSlowdownMultiplier: 3 // Higher to get slower videos, lower for faster videos [Value 1-100]
         }],
         ['allure', {
-            outputDir: testType.allureOutputFolder,
+            outputDir: '../../../../allure-results',
             disableWebdriverStepsReporting: false,
             disableWebdriverScreenshotsReporting: false
         }]

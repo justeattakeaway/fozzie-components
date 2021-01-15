@@ -16,15 +16,17 @@
     "storybook:serve-static": "lerna run storybook:serve-static --stream",
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
     "test": "cross-env-shell \"lerna run $LERNA_ARGS test --stream\"",
-    "test-component:chrome": "cross-env ROOT_DIRECTORY=true wdio ./wdio.conf.js --suite component",
-    "test-a11y:chrome": "cross-env ROOT_DIRECTORY=true wdio ./wdio.conf.js --suite accessibility",
+    "test-component:chrome": "cross-env-shell TEST_TYPE=component lerna run webdriver:start:chrome --concurrency 1 --stream",
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y lerna run webdriver:start:chrome --concurrency 1 --stream",
     "test:consumer": "lerna run test:consumer",
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
-    "local:tests": "cross-env ROOT_DIRECTORY=true yarn test && yarn test-component:chrome && yarn test-a11y",
-    "ci:build": "cross-env-shell \"lerna run $LERNA_ARGS build --since origin/master --stream\"",
+    "local:tests": "cross-env yarn test && yarn test-component:chrome && yarn test-a11y",
+    "ci:build": "cross-env-shell \"lerna run $LERNA_ARGS build --since origin/master --include-dependencies --stream\"",
     "ci:bundlewatch": "cross-env-shell \"bundlewatch --config bundlewatch.config.js\"",
     "ci:lint": "cross-env-shell \"lerna run $LERNA_ARGS lint --since origin/master --stream\"",
-    "ci:test": "cross-env-shell \"lerna run $LERNA_ARGS test --since origin/master --stream\""
+    "ci:test": "cross-env-shell \"lerna run $LERNA_ARGS test --since origin/master --stream\"",
+    "ci:test-component:chrome": "cross-env-shell TEST_TYPE=component lerna run webdriver:start:chrome --concurrency 1 --stream",
+    "ci:test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y lerna run webdriver:start:chrome --concurrency 1 --stream"
   },
   "resolutions": {
     "webpack": "4.36.0"

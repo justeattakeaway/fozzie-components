@@ -33,7 +33,8 @@
     "report": "cd ../.. && yarn report",
     "storybook:serve-webdriver": "lerna run storybook:serve-static --stream",
     "test": "vue-cli-service test:unit",
-    "test-component:chrome": "run-p --race storybook:serve-webdriver webdriver:delay:chrome",
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=component run-p --race storybook:serve-webdriver webdriver:delay:chrome",
+    "test-component:chrome": "cross-env-shell TEST_TYPE=component run-p --race storybook:serve-webdriver webdriver:delay:chrome",
     "test:wait-for-server": "node ../../../../test/infrastructure/healthcheck.js",
     "webdriver:delay:chrome": "yarn test:wait-for-server && yarn webdriver:start:chrome",
     "webdriver:start:chrome": "wdio ../../../../wdio.conf.js"
