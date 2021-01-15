@@ -4,13 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (add to next release)
+v1.7.0
 ------------------------------
-*December 30, 2020*
+*January 14, 2021*
 
 ### Changed
 - Updated config for latest `sass-loader`.
 - Switches import in `common.scss` in line with fozzie v5-beta.
+
+### Fixed
+- Axe accessibility violation: `Ensures every form element has a label`
 
 
 v1.6.1
