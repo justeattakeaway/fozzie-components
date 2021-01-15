@@ -14,7 +14,6 @@ v4.7.0
 - Changes and refactoring to component tests that bypass the use of testing within the Storybook view.
 
 
-
 v4.6.1
 ------------------------------
 _January 14, 2021_
