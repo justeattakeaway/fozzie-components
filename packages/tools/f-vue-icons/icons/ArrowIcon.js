@@ -9,13 +9,29 @@ export default {
     return h("svg", _mergeJSXProps([{
       attrs: {
         xmlns: "http://www.w3.org/2000/svg",
-        viewBox: "0 0 28 28"
+        viewBox: "0 0 24 24"
       },
       "class": "c-ficon c-ficon--arrow"
-    }, ctx.data]), [h("path", {
+    }, ctx.data]), [h("defs", [h("path", {
       attrs: {
-        d: "M21.342 14l-4.838-4.838a.583.583 0 0 1 .825-.824l5.833 5.833a.583.583 0 0 1 0 .825l-5.833 5.833a.583.583 0 1 1-.825-.825l4.838-4.837H5.25a.583.583 0 0 1 0-1.167h16.092z"
+        d: "M5 11h11.167l-4.708-4.71a1 1 0 010-1.418 1 1 0 011.417 0l6.417 6.417a1 1 0 010 1.417l-6.417 6.416a1 1 0 01-1.417 0 1 1 0 010-1.416L16.167 13H5a1 1 0 010-2z",
+        id: "a"
       }
-    })]);
+    })]), h("g", {
+      attrs: {
+        fill: "none",
+        "fill-rule": "evenodd"
+      }
+    }, [h("path", {
+      attrs: {
+        d: "M24 0H0v24h24z"
+      }
+    }), h("use", {
+      attrs: {
+        fill: "#172026",
+        "fill-rule": "nonzero",
+        href: "#a"
+      }
+    })])]);
   }
 };
