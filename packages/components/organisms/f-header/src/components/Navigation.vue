@@ -8,7 +8,7 @@
                 'is-open': navIsOpen
             }]"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
-            :aria-label="openMenuText"
+            :aria-label="copy.openMenuText"
             data-test-id="nav-toggle"
             type="button"
             @click="onNavToggle">
@@ -25,7 +25,7 @@
             :class="['c-nav-toggle is-hidden is-shown--noJS', navToggleThemeClass, {
                 'is-open': navIsOpen
             }]"
-            :aria-label="openMenuText"
+            :aria-label="copy.openMenuText"
             for="nav-trigger">
             <span class="c-nav-toggle-icon" />
         </label>
@@ -39,11 +39,11 @@
                 "action": "click - navigation",
                 "label": "offers_icon"
             }'
-            :href="offersCopy.url"
+            :href="copy.offers.url"
             class="c-nav-featureLink u-showBelowMid">
             <gift-icon class="c-nav-icon c-nav-icon--offers" />
             <span class="is-visuallyHidden">
-                {{ offersCopy.text }}
+                {{ copy.offers.text }}
             </span>
         </a>
 
@@ -61,10 +61,10 @@
                             "action": "click - navigation",
                             "label": "offers"
                         }'
-                        :href="offersCopy.url"
+                        :href="copy.offers.url"
                         class="c-nav-list-link u-showAboveMid">
                         <gift-icon class="c-nav-icon c-nav-icon--offers" />
-                        {{ offersCopy.text }}
+                        {{ copy.offers.text }}
                     </a>
                 </li>
                 <li
@@ -77,13 +77,13 @@
                             "trakEvent": "click",
                             "category": "engagement",
                             "action": "header",
-                            "label": "${deliveryEnquiry.gtm}"
+                            "label": "${copy.deliveryEnquiry.gtm}"
                         }`'
-                        :href="deliveryEnquiry.url"
+                        :href="copy.deliveryEnquiry.url"
                         target="_blank"
                         class="c-nav-list-link">
-                        <delivery-icon class="c-nav-icon c-nav-icon--delivery" />
-                        {{ deliveryEnquiry.text }}
+                        <moped-icon class="c-nav-icon c-nav-icon--delivery" />
+                        {{ copy.deliveryEnquiry.text }}
                     </a>
                 </li>
 
@@ -116,7 +116,7 @@
                         :aria-label="userInfo.friendlyName"
                         class="c-nav-popoverList">
                         <li
-                            v-for="(link, index) in navLinks"
+                            v-for="(link, index) in copy.navLinks"
                             :key="index"
                             data-test-id="nav-links"
                             class="c-nav-list-item">
@@ -147,12 +147,12 @@
                                     "trakEvent": "click",
                                     "category": "engagement",
                                     "action": "header",
-                                    "label": "${accountLogout.gtm}"
+                                    "label": "${copy.accountLogout.gtm}"
                                 }`'
                                 class="c-nav-list-link"
                                 @blur="closeNav"
                                 @focus="openNav">
-                                {{ accountLogout.text }}
+                                {{ copy.accountLogout.text }}
                             </a>
                         </li>
                     </ul>
@@ -168,12 +168,12 @@
                             "trakEvent": "click",
                             "category": "engagement",
                             "action": "header",
-                            "label": "${accountLogin.gtm}"
+                            "label": "${copy.accountLogin.gtm}"
                         }`'
                         rel="nofollow"
                         class="c-nav-list-link"
                         data-test-id="login-link">
-                        {{ accountLogin.text }}
+                        {{ copy.accountLogin.text }}
                     </a>
                 </li>
 
@@ -181,17 +181,17 @@
                     v-if="showHelpLink"
                     class="c-nav-list-item c-nav-list-item--support">
                     <a
-                        :href="help.url"
+                        :href="copy.help.url"
                         :data-trak='`{
                                 "trakEvent": "click",
                                 "category": "engagement",
                                 "action": "header",
-                                "label": "${help.gtm}"
+                                "label": "${copy.help.gtm}"
                             }`'
                         class="c-nav-list-link"
                         data-test-id="help-link"
                         v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
-                        {{ help.text }}
+                        {{ copy.help.text }}
                     </a>
                 </li>
 
@@ -206,13 +206,24 @@
                                 "trakEvent": "click",
                                 "category": "engagement",
                                 "action": "header",
-                                "label": "${accountLogout.gtm}"
+                                "label": "${copy.accountLogout.gtm}"
                             }`'
                         class="c-nav-list-link"
                         v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
-                        {{ accountLogout.text }}
+                        {{ copy.accountLogout.text }}
                     </a>
                 </li>
+
+                <country-selector
+                    v-if="showCountrySelector"
+                    ref="countrySelector"
+                    :is-below-mid="isBelowMid"
+                    :current-country-key="copy.currentCountryKey"
+                    :change-country-text="copy.changeCurrentCountry"
+                    :select-your-country-text="copy.selectYourCountryText"
+                    :close-nav="closeNav"
+                    :open-nav="openNav"
+                    v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null" />
             </ul>
         </div>
     </nav>
@@ -220,7 +231,7 @@
 
 <script>
 import {
-    DeliveryIcon,
+    MopedIcon,
     GiftIcon,
     ProfileIcon
 } from '@justeat/f-vue-icons';
@@ -228,41 +239,19 @@ import {
     axiosServices,
     windowServices
 } from '@justeat/f-services';
+import CountrySelector from './CountrySelector.vue';
+
 
 export default {
     components: {
-        DeliveryIcon,
+        MopedIcon,
         GiftIcon,
-        ProfileIcon
+        ProfileIcon,
+        CountrySelector
     },
 
     props: {
-        accountLogin: {
-            type: Object,
-            default: () => ({})
-        },
-
-        accountLogout: {
-            type: Object,
-            default: () => ({})
-        },
-
-        navLinks: {
-            type: Object,
-            required: true
-        },
-
-        help: {
-            type: Object,
-            default: () => ({})
-        },
-
-        openMenuText: {
-            type: String,
-            default: ''
-        },
-
-        deliveryEnquiry: {
+        copy: {
             type: Object,
             default: () => ({})
         },
@@ -270,11 +259,6 @@ export default {
         showDeliveryEnquiry: {
             type: Boolean,
             default: false
-        },
-
-        offersCopy: {
-            type: Object,
-            default: () => ({})
         },
 
         showOffersLink: {
@@ -320,6 +304,10 @@ export default {
         headerBackgroundTheme: {
             type: String,
             default: 'white'
+        },
+        showCountrySelector: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -328,7 +316,8 @@ export default {
             navIsOpen: false,
             currentScreenWidth: null,
             userInfo: this.userInfoProp,
-            localOrderCountExpires: false
+            localOrderCountExpires: false,
+            countrySelectorIsOpen: false
         };
     },
 
@@ -348,11 +337,11 @@ export default {
         },
 
         returnLoginUrl () {
-            return `${this.accountLogin.url}?returnurl=${this.returnUrl}`;
+            return `${this.copy.accountLogin.url}?returnurl=${this.returnUrl}`;
         },
 
         returnLogoutUrl () {
-            return `${this.accountLogout.url}?returnurl=${this.returnUrl}`;
+            return `${this.copy.accountLogout.url}?returnurl=${this.returnUrl}`;
         },
 
         // if the order count is supported and there is no blob in local storage then return true
@@ -409,6 +398,7 @@ export default {
     methods: {
         onNavToggle () {
             this.navIsOpen = !this.navIsOpen;
+            this.$refs.countrySelector.closeCountrySelector();
             // This is added to remove the ability to scroll the page content when the mobile navigation is open
             this.handleMobileNavState();
         },
@@ -626,7 +616,8 @@ $nav-popover-padding               : spacing(x2);
 
     // we have a nav container so that we don’t have to make the inner list 100% height
     // this is so we can position the logout button last on mobile
-    & .c-nav-container {
+    & .c-nav-container,
+    .c-nav-panel {
         @include media('<mid') {
             position: fixed;
             top: $header-height--narrow;
@@ -648,6 +639,8 @@ $nav-popover-padding               : spacing(x2);
         }
     }
 }
+
+
 
 .c-nav-list {
     position: relative;
@@ -808,8 +801,8 @@ $nav-popover-padding               : spacing(x2);
     }
 
     .c-nav-icon--delivery {
-        width: 27px;
-        height: 22px;
+        width: 20px;
+        height: 20px;
     }
 
     .c-nav-icon--offers {
@@ -913,7 +906,8 @@ $nav-popover-padding               : spacing(x2);
         display: none;
     }
 
-    &:checked ~ .c-nav-container {
+    &:checked ~ .c-nav-container,
+    &:checked ~ .c-nav-panel {
         @include media('<mid') {
             @include nav-container-visible();
         }

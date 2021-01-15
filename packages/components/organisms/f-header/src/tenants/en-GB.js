@@ -70,5 +70,15 @@ export default {
     offers: {
         text: 'For you',
         url: '/offers'
-    }
+    },
+    countryListInfo: {
+        key: 'gb',
+        localisedName: 'United Kingdom',
+        siteUrl: 'https://www.just-eat.co.uk',
+        gtm: 'click_country_gb'
+    },
+    selectYourCountryText: 'Select your country',
+    currentCountryName: 'United Kingdom',
+    currentCountryKey: 'gb',
+    changeCurrentCountry: 'You are on the UK website, click here to change.'
 };
