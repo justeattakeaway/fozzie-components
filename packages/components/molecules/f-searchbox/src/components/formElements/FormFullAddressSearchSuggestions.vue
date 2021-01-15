@@ -8,10 +8,10 @@
             :ref="`suggestion${index}`"
             :class="[
                 $style.item,
-                { [$style.selected]: index === keyboardSuggestionIndex }
+                { [$style.selected]: index === selected }
             ]"
             data-test-id="suggestion-item"
-            @click="getSelectedStreetAddress($event, item, index, keyboardSuggestionIndex)">
+            @click="getSelectedStreetAddress($event, index, selected)">
             <map-pin-icon :class="$style['c-locationIcon']" />
 
             <div
@@ -61,6 +61,12 @@ export default {
             })
         },
 
+        // Prop should be named `selected` for keyboard purposes.
+        selected: {
+            type: Number,
+            default: 0
+        },
+
         address: {
             type: String,
             default: ''
@@ -79,8 +85,7 @@ export default {
     computed: {
         ...mapState('searchbox', [
             'suggestions',
-            'selectedStreetLevelAddressId',
-            'keyboardSuggestionIndex'
+            'selectedStreetLevelAddressId'
         ]),
 
         /**
@@ -96,12 +101,12 @@ export default {
 
     watch: {
         /**
-         * Checks the `keyboardSuggestionIndex` value so we can scroll to the address within the
+         * Checks the `selected` value so we can scroll to the address within the
          * `fullAddressSuggestions` container, allowing keyboard navigation.
          *
          * @param {Number} value
          */
-        keyboardSuggestionIndex (value) {
+        selected (value) {
             const suggestionItem = this.$refs[`suggestion${[value]}`];
 
             if ((value || value === 0)
@@ -152,8 +157,8 @@ export default {
         },
 
         /**
-         * Selects an address `item` either from the `index` (clicked on)
-         * or `selected` (keyboard entry - @todo not working right now).
+         * Selects an address `suggestion` either from the `index` (clicked on)
+         * or `selected` (Keyboard enter event).
          *
          * 1. `getMatchedAreaAddressResults` - Returns results based on
          * the `streetLevelAddress` value.
@@ -162,19 +167,21 @@ export default {
          * they can continue without selecting a full addresss.
          *
          * @param e
-         * @param item
+         * @param index
+         * @param selected
          */
-        getSelectedStreetAddress (e, item) {
+        getSelectedStreetAddress (e, index, selected) {
+            const selectedAddress = this.suggestions[index || selected];
             e.preventDefault();
 
             this.getMatchedAreaAddressResults({
                 address: this.address,
-                streetLevelAddress: item.id
+                streetLevelAddress: selectedAddress.id
             });
 
             this.setContinueWithDetails({
-                postcode:  item.text,
-                street: item.description
+                postcode:  selectedAddress.text,
+                street: selectedAddress.description
             });
         }
     }
