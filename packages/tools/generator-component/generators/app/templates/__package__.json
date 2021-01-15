@@ -34,7 +34,7 @@
     "lint:style": "vue-cli-service lint:style",
     "report": "cd ../.. && yarn report",
     "storybook:serve-webdriver": "cd ../storybook && storybook:serve-static",
-    "test-a11y:chrome": "cross-env-shell TEST_TYPE=component run-p --race storybook:serve-webdriver webdriver:delay:chrome",
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y run-p --race storybook:serve-webdriver webdriver:delay:chrome",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component run-p --race storybook:serve-webdriver webdriver:delay:chrome",
     "test:wait-for-server": "node ../../test/infrastructure/healthcheck.js",
     "webdriver:delay:chrome": "yarn test:wait-for-server && yarn webdriver:start:chrome",
