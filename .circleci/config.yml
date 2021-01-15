@@ -262,7 +262,7 @@ jobs:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
 
-  build_report:
+  slack_reporting:
     executor: node
     environment:
     steps: # a collection of executable commands
