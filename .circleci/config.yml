@@ -39,7 +39,7 @@ commands:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Your workflow *Build* has failed⚠️"
+                    "text": "Your workflow *Build* has failed ⚠️"
                   },
                   "fields": [
                     {
