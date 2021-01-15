@@ -2,7 +2,7 @@ import {
     FOOTER_COMPONENT,
     FOOTER_ICONS,
     COURIER_LINKS
-} from './f-footer.selctors';
+} from './f-footer.selectors';
 
 // Component
 const footerComponent = () => $(FOOTER_COMPONENT);
