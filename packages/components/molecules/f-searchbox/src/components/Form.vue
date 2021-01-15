@@ -4,6 +4,7 @@
         :action="formUrl"
         :class="$style['c-search']"
         method="post"
+        novalidate
         @submit.stop="submit">
         <input
             v-model="cuisine"
@@ -25,10 +26,6 @@
                 :is-compressed="isCompressed"
                 v-on="$listeners" />
 
-            <form-search-button
-                :copy="copy"
-                :is-compressed="isCompressed" />
-
             <component
                 :is="setSuggestionType"
                 v-if="shouldDisplaySuggestions"
@@ -38,7 +35,11 @@
                 :copy="copy"
                 :suggestion-format="suggestionFormat"
                 :suggestions="suggestions"
-                :keyboard-suggestion-selection="keyboardSuggestionIndex" />
+                :selected="keyboardSuggestionIndex" />
+
+            <form-search-button
+                :copy="copy"
+                :is-compressed="isCompressed" />
         </div>
 
         <error-message
