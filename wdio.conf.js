@@ -33,7 +33,7 @@ exports.config = {
         component: [
             './test/specs/component/*.component.spec.js',
         ],
-        accessibility: [
+        a11y: [
             './test/specs/accessibility/axe-accessibility.spec.js',
         ]
     },
