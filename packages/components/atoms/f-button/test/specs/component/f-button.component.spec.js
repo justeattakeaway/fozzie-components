@@ -9,6 +9,7 @@ describe('f-button component tests', () => {
 
     it('should display the f-button component', () => {
         // Assert
+        // TEST CHANGE
         expect(ButtonComponent.isButtonComponentDisplayed()).toBe(true);
     });
 });
