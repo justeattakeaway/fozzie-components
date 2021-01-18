@@ -1,6 +1,6 @@
 import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
 import Guest from '../Guest.vue';
 import { i18n, createStore } from './helpers/setup';
 import checkoutValidationsMixin from '../../mixins/validations.mixin';
@@ -53,7 +53,7 @@ describe('Guest', () => {
         let wrapper;
 
         beforeEach(() => {
-            wrapper = shallowMount(Guest, {
+            wrapper = mount(Guest, {
                 i18n,
                 store: createStore(),
                 localVue,
@@ -73,9 +73,6 @@ describe('Guest', () => {
             ['isLastNameEmpty', 'lastName'],
             ['isEmailValid', 'email']
         ])('%s :: should call `isFieldEmpty` with argument %s', (property, field) => {
-            // Act
-            wrapper.vm[property];
-
             // Assert
             expect(isFieldEmptySpy).toHaveBeenCalledWith(component, field);
         });

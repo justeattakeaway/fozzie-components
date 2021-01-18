@@ -986,7 +986,7 @@ describe('Checkout', () => {
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0]).toEqual(mockValidationState);
             });
 
-            ('should try to call `submitCheckout` if form is Valid', async () => {
+            it('should try to call `submitCheckout` if form is Valid', async () => {
                 // Arrange
                 isFormValidSpy.mockReturnValue(true);
 

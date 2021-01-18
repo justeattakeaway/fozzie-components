@@ -66,7 +66,7 @@ describe('Checkout Methods', () => {
 
     describe('updateFulfilmentDetails ::', () => {
         let wrapper;
-        const dispatch = jest.fn()
+        const dispatch = jest.fn();
 
         beforeEach(() => {
             wrapper = shallowMount(checkoutValidations, {
@@ -89,8 +89,8 @@ describe('Checkout Methods', () => {
             ['Address', 'city', 'London']
         ])('should be dispatch appropriate action with the correct payload', (component, field, newValue) => {
             // Arrange
-            const action = `checkout/update${component}Details`
-            const payload = { [field]: newValue}
+            const action = `checkout/update${component}Details`;
+            const payload = { [field]: newValue };
 
             // Act
             wrapper.vm.updateFulfilmentDetails(component, field, newValue);

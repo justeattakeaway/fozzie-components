@@ -51,8 +51,9 @@ describe('Address', () => {
 
     describe('computed ::', () => {
         const isFieldEmptySpy = jest.spyOn(checkoutValidationsMixin.methods, 'isFieldEmpty');
-        let wrapper;
         const component = 'address';
+
+        let wrapper;
 
         beforeEach(() => {
             wrapper = shallowMount(Address, {
@@ -66,14 +67,15 @@ describe('Address', () => {
             });
         });
 
+        afterEach(() => {
+            jest.clearAllMocks();
+        });
+
         it.each([
             ['isAddressLine1Empty', 'line1'],
             ['isAddressCityEmpty', 'city'],
             ['isAddressPostcodeEmpty', 'postcode']
         ])('%s :: should call `isFieldEmpty` with argument %s', (property, field) => {
-            // Act
-            // wrapper.vm[property];
-
             // Assert
             expect(isFieldEmptySpy).toHaveBeenCalledWith(component, field);
         });
