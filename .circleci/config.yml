@@ -214,6 +214,7 @@ jobs:
     executor: node
     environment:
       WORKFLOW_ID: build
+      LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - restore_cache:
           name: Restore Working Directory + Bundles Cache
@@ -236,6 +237,7 @@ jobs:
     executor: node
     environment:
       WORKFLOW_ID: build
+      LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - restore_cache:
           name: Restore Working Directory + Bundles Cache
