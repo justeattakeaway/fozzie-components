@@ -1,4 +1,3 @@
-
 <div align="center">
   <h1>f-mega-modal</h1>
 
@@ -15,9 +14,9 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-mega-modal/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-mega-modal?targetFile=package.json)
 
 
-## Usage
+# Usage
 
-### Installation
+## Installation
 
 This package can be installed using npm or yarn:
 
