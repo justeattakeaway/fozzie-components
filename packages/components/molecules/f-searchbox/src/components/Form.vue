@@ -4,6 +4,7 @@
         :action="formUrl"
         :class="$style['c-search']"
         method="post"
+        novalidate
         @submit.stop="submit">
         <input
             v-model="cuisine"
@@ -25,19 +26,21 @@
                 :is-compressed="isCompressed"
                 v-on="$listeners" />
 
+            <component
+                :is="setSuggestionType"
+                v-if="shouldDisplaySuggestions"
+                data-test-id="suggestions"
+                aria-live="assertive"
+                :address="address"
+                :copy="copy"
+                :suggestion-format="suggestionFormat"
+                :suggestions="suggestions"
+                :selected="keyboardSuggestionIndex" />
+
             <form-search-button
                 :copy="copy"
                 :is-compressed="isCompressed" />
         </div>
-
-        <component
-            :is="setSuggestionType"
-            v-if="shouldDisplaySuggestions"
-            aria-live="assertive"
-            :suggestion-format="suggestionFormat"
-            :suggestions="suggestions"
-            :keyboard-suggestion-selection="keyboardSuggestionIndex"
-            @selected-suggestion="onSelectedSuggestion" />
 
         <error-message
             v-if="errorMessage"
@@ -224,8 +227,7 @@ export default {
 
                 if (this.isFullAddressSearchEnabled) {
                     this.getMatchedAreaAddressResults({
-                        address: this.address,
-                        streetLevelAddress: ''
+                        address: this.address
                     });
                 }
             },

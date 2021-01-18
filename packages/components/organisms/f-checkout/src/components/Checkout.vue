@@ -1,7 +1,6 @@
 <template>
     <div
         data-theme="jet"
-        :class="$style['c-checkout']"
         data-test-id="checkout-component">
         <alert
             v-if="genericErrorMessage"
@@ -11,28 +10,21 @@
             {{ genericErrorMessage }}
         </alert>
         <card
-            :card-heading="title"
             is-rounded
             has-outline
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="checkout-card-component"
-            :class="$style['c-card--dimensions']">
+            :class="$style['c-checkout']">
+            <checkout-header
+                :login-url="loginUrl" />
+
             <form
-                type="post"
+                method="post"
                 :class="$style['c-checkout-form']"
                 @submit.prevent="onFormSubmit">
-                <p
-                    :class="[
-                        $style['c-checkout-link']
-                    ]">
-                    <a
-                        :href="loginUrl"
-                        data-test-id="switch-user-link"
-                        @click="onVisitLoginPage">
-                        {{ $t('switchUserText', { name }) }}
-                    </a>
-                </p>
+                <guest-block v-if="!isLoggedIn" />
+
                 <form-field
                     :value="customer.mobileNumber"
                     name="mobile-number"
@@ -64,6 +56,9 @@
                     {{ $t('buttonText') }}
                 </f-button>
             </form>
+
+            <checkout-terms-and-conditions
+                v-if="!isLoggedIn" />
         </card>
     </div>
 </template>
@@ -88,7 +83,10 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 
 import { mapState, mapActions } from 'vuex';
 import AddressBlock from './Address.vue';
+import CheckoutHeader from './Header.vue';
+import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import FormSelector from './Selector.vue';
+import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
 
 import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP } from '../constants';
@@ -105,9 +103,12 @@ export default {
         Alert,
         FButton,
         Card,
+        CheckoutHeader,
+        CheckoutTermsAndConditions,
         ErrorMessage,
         FormField,
         FormSelector,
+        GuestBlock,
         UserNote
     },
 
@@ -193,14 +194,6 @@ export default {
             'serviceType'
         ]),
 
-        name () {
-            return (this.customer.firstName.charAt(0).toUpperCase() + this.customer.firstName.slice(1));
-        },
-
-        title () {
-            return `${this.name}, confirm your details`;
-        },
-
         isMobileNumberValid () {
             /*
             * Validation methods return true if the validation conditions
@@ -256,10 +249,6 @@ export default {
             'setAuthToken',
             'updateMobileNumber'
         ]),
-
-        onVisitLoginPage () {
-            this.$emit(EventNames.CheckoutVisitLoginPage);
-        },
 
         /**
          * Submit the checkout details while emitting events to communicate its success or failure.
@@ -450,46 +439,27 @@ export default {
 </script>
 
 <style lang="scss" module>
-$line-height                              : 16px;
-$checkout-width                           : 596px;
-$checkout-padding                         : spacing(x5) 100px;
-
 .c-checkout {
-    margin: auto;
-    font-family: $font-family-base;
-    color: $color-text;
-    font-weight: $font-weight-base;
+    padding-top: spacing(x6);
+    padding-bottom: spacing(x6);
 
-    .c-card--dimensions {
-        width: $checkout-width;
-        padding: $checkout-padding;
-    }
-
-    .c-checkout-form {
-        margin-top: spacing(x3);
-    }
-
-    .c-checkout-alert {
-        width: $checkout-width;
-        margin: 0 auto;
-    }
-
-    .c-checkout-submitButton {
-        margin: spacing(x4) 0 spacing(x0.5);
+    @include media('<=narrow') {
+        border: none;
+        padding-top: spacing(x2);
+        padding-bottom: spacing(x2);
     }
 }
 
-.c-checkout-link {
-  text-align: center;
+.c-checkout-form {
+    margin-top: spacing(x3);
+}
 
-  a {
-    text-decoration: none;
-    font-weight: $font-weight-bold;
+.c-checkout-alert {
+    width: $checkout-width;
+    margin: 0 auto;
+}
 
-    &:hover,
-    &:focus {
-      text-decoration: underline;
-    }
-  }
+.c-checkout-submitButton {
+    margin: spacing(x4) 0 spacing(x0.5);
 }
 </style>

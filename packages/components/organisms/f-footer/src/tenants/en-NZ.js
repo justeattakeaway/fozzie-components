@@ -5,7 +5,7 @@ export default {
             title: 'Customer service',
             links: [
                 {
-                    url: '/content/contact-us/',
+                    url: '/info/contact-us',
                     text: 'Contact us',
                     gtm: 'click_service_contact_us'
                 },
