@@ -39,7 +39,7 @@ commands:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Your workflow *Build* has failed ⚠️"
+                    "text": "Your workflow *${CIRCLE_JOB}* has failed ⚠️"
                   },
                   "fields": [
                     {
@@ -86,7 +86,7 @@ commands:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Your workflow *Build* has succeeded 🎉"
+                    "text": "Your workflow *${CIRCLE_JOB}* has succeeded 🎉"
                   },
                   "fields": [
                     {
@@ -154,7 +154,7 @@ jobs:
           paths:
             - ~/project
                     
-  build:
+  run_build:
     executor: node
     environment:
       # required to prevent ENOMEM errors
@@ -262,7 +262,7 @@ jobs:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
 
-  slack_reporting:
+  build:
     executor: node
     environment:
     steps: # a collection of executable commands
@@ -299,7 +299,7 @@ workflows:
           filters:
             branches:
               ignore: 'gh-pages'
-      - build:
+      - run_build:
           context: web-core
           requires:
             - set_up
@@ -309,35 +309,35 @@ workflows:
       - linting:
           context: web-core
           requires:
-            - build
+            - run_build
           filters:
             branches:
               ignore: 'gh-pages'    
       - bundlewatch:
           context: web-core
           requires:
-            - build
+            - run_build
           filters:
             branches:
               ignore: 'gh-pages'
       - unit_tests:
           context: web-core
           requires:
-            - build
+            - run_build
           filters:
             branches:
               ignore: 'gh-pages'
       - component_tests:
           context: web-core
           requires:
-            - build
+            - run_build
           filters:
             branches:
               ignore: 'gh-pages'
       - accessibility_tests:
           context: web-core
           requires:
-            - build
+            - run_build
           filters:
             branches:
               ignore: 'gh-pages'
