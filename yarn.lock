@@ -1648,6 +1648,14 @@
   dependencies:
     qwery "4.0.0"
 
+"@justeat/f-form-field@1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-1.6.1.tgz#47b014847a42467737b65997cfcab212d0385ba7"
+  integrity sha512-E7aLPJhJBUoHcBWyaiCdOUyXyNtO24P/PhtNRpKJh50amCZU9yeYJjuT1rlifmS+h00kcIcoXfTcwb6VI7b/wg==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+    "@justeat/f-vue-icons" "1.11.0"
+
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
@@ -1660,10 +1668,10 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-2.3.0.tgz#473cc1ce7edeb0ce58df674c9c4ee0ebf30171d8"
   integrity sha512-KQ19RSgGyMwfAV4ZOA7SU3BjyR6h9z7Ykc0K3DBcft4EJBDh1lmvtAZIaZJyhDTwKrggrJaLq5QubEHlB6gkew==
 
-"@justeat/f-icons@3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.2.0.tgz#b42c3e4e8ab98b2771a9d5df88482b30aca9449f"
-  integrity sha512-vbAEC3w4UbXAZlyUoKqqRG6oaHPpaeByBM8G7hfzsGEQmkbC5ifshIlXZfZmlDrg/decqA7qWpcPg122xab9HQ==
+"@justeat/f-icons@3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.3.0.tgz#ffcdc8e6bb9879fe1008a0af0e56a1142ed4a0f1"
+  integrity sha512-5mcxbk6Xb5ja19oY9BOUWtPf1KDBsAmJGw8IWaqLIrc0oG/JTkM+AbEUEWSa/mi+OcEfRrV7+I5t1BdD/LyakQ==
 
 "@justeat/f-logger@0.8.1":
   version "0.8.1"
