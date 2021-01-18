@@ -39,7 +39,7 @@ commands:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Your job *${CIRCLE_JOB}* has failed ⚠️"
+                    "text": "Your job *${WORKFLOW_ID}* has failed ⚠️"
                   },
                   "fields": [
                     {
@@ -86,7 +86,7 @@ commands:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Your job *${CIRCLE_JOB}* has succeeded 🎉"
+                    "text": "Your job *${WORKFLOW_ID}* has succeeded 🎉"
                   },
                   "fields": [
                     {
@@ -131,6 +131,7 @@ jobs:
     working_directory: ~/project
     executor: node
     environment:
+      WORKFLOW_ID: build
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
@@ -157,6 +158,7 @@ jobs:
   build:
     executor: node
     environment:
+      WORKFLOW_ID: build
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
@@ -181,6 +183,7 @@ jobs:
   linting:
     executor: node
     environment:
+      WORKFLOW_ID: build
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 2
     steps: # a collection of executable commands
@@ -195,6 +198,7 @@ jobs:
   unit_tests:
     executor: node
     environment:
+      WORKFLOW_ID: build
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
@@ -209,6 +213,7 @@ jobs:
   component_tests:
     executor: node
     environment:
+      WORKFLOW_ID: build
     steps: # a collection of executable commands
       - restore_cache:
           name: Restore Working Directory + Bundles Cache
@@ -230,6 +235,7 @@ jobs:
   accessibility_tests:
     executor: node
     environment:
+      WORKFLOW_ID: build
     steps: # a collection of executable commands
       - restore_cache:
           name: Restore Working Directory + Bundles Cache
@@ -251,6 +257,7 @@ jobs:
   bundlewatch:
     executor: node
     environment:
+      WORKFLOW_ID: build
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 2
     steps: # a collection of executable commands
@@ -265,6 +272,7 @@ jobs:
   slack_reporting:
     executor: node
     environment:
+      WORKFLOW_ID: build
     steps: # a collection of executable commands
       - slack_notify_fail
       - slack_notify_success
@@ -273,6 +281,7 @@ jobs:
     working_directory: ~/project
     executor: node
     environment:
+      WORKFLOW_ID: deploy_storybook
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps:

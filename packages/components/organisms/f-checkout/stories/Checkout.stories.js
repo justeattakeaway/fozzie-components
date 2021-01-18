@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import { select, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import {
+    VALID_LOCALES,
     ENGLISH_LOCALE
 } from '@justeat/storybook/constants/globalisation';
 
