@@ -13,7 +13,7 @@
                 label-style="inline"
                 is-grouped
                 :has-error="isAddressLine1Empty"
-                @input="updateAddressDetails('line1', $event)">
+                @input="updateFulfilmentDetails('Address', 'line1', $event)">
                 <template #error>
                     <error-message
                         v-if="isAddressLine1Empty"
@@ -31,7 +31,7 @@
                 :label-text="$t('labels.line2')"
                 is-grouped
                 label-style="inline"
-                @input="updateAddressDetails('line2', $event)" />
+                @input="updateFulfilmentDetails('Address', 'line2', $event)" />
         </fieldset>
 
         <form-field
@@ -39,7 +39,7 @@
             name="address-city"
             :label-text="$t('labels.city')"
             :has-error="isAddressCityEmpty"
-            @input="updateAddressDetails('city', $event)">
+            @input="updateFulfilmentDetails('Address', 'city', $event)">
             <template #error>
                 <error-message
                     v-if="isAddressCityEmpty"
@@ -54,7 +54,7 @@
             name="address-postcode"
             :label-text="$t('labels.postcode')"
             :has-error="!isAddressPostcodeValid"
-            @input="updateAddressDetails('postcode', $event)">
+            @input="updateFulfilmentDetails('Address', 'postcode', $event)">
             <template #error>
                 <error-message
                     v-if="isAddressPostcodeEmpty"
@@ -76,10 +76,15 @@ import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import { mapState, mapActions } from 'vuex';
+import { mapState } from 'vuex';
+import checkoutValidations from '../mixins/validations.mixin';
 
 export default {
     components: { FormField, ErrorMessage },
+
+    mixins: [
+        checkoutValidations
+    ],
 
     /*
     * Provide/Inject allows nested `Address` component to inherit `Checkout`
@@ -91,23 +96,23 @@ export default {
         ...mapState('checkout', [
             'fulfilment'
         ]),
+
         /*
         * Validation methods return true if the validation conditions
         * have not been met and the field has been `touched` by a user.
         * The $dirty boolean changes to true when the user has focused/lost
         * focus on the input field.
         */
-
         isAddressLine1Empty () {
-            return this.isFieldEmpty('line1');
+            return this.isFieldEmpty('address', 'line1');
         },
 
         isAddressCityEmpty () {
-            return this.isFieldEmpty('city');
+            return this.isFieldEmpty('address', 'city');
         },
 
         isAddressPostcodeEmpty () {
-            return this.isFieldEmpty('postcode');
+            return this.isFieldEmpty('address', 'postcode');
         },
 
         /*
@@ -115,26 +120,6 @@ export default {
         */
         isAddressPostcodeValid () {
             return (!this.$v.addressValidations.postcode.$dirty || this.$v.addressValidations.postcode.isValidPostcode) && !this.isAddressPostcodeEmpty;
-        }
-    },
-
-    methods: {
-        ...mapActions('checkout', [
-            'updateFulfilmentAddress'
-        ]),
-        /*
-        * Returns true if `field` has been touched and if it is still empty
-        * The $dirty boolean changes to true when the user has focused/lost
-        * focus on the input field.
-        */
-        isFieldEmpty (field) {
-            return this.$v.addressValidations[field].$dirty && !this.$v.addressValidations[field].required;
-        },
-        /*
-        * Dispatches map action `updateFulfilmentAddress` to update input fields values in vuex
-        */
-        updateAddressDetails (key, value) {
-            this.updateFulfilmentAddress({ [key]: value });
         }
     }
 };
