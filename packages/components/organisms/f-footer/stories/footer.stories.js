@@ -25,7 +25,7 @@ export const FooterComponent = () => ({
             default: select('Locale', ['en-GB', 'en-AU'])
         },
         showCourierLinks: {
-            default: boolean('Show courier links', true)
+            default: boolean('Show courier links', false)
         }
     },
     template: '<vue-footer :showCourierLinks="showCourierLinks" :locale="locale" />'
