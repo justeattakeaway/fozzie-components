@@ -11,6 +11,7 @@ export default {
     buttonText2: 'Aksepter alle informasjonskapsler',
 
     config: {
+        displayLegacy: false,
         cookieExclusionList: [
             '_dc_gtm_',
             '_ga',

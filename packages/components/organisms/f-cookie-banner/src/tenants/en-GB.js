@@ -9,8 +9,11 @@ export default {
     text4: '.  Using this banner will set a cookie on your device to remember your preferences.',
     buttonText1: 'Accept only required cookies',
     buttonText2: 'Accept all cookies',
+    legacyBannerText: 'We use cookies to improve your browsing experience. By continuing, you agree to receive cookies on our website.',
+    legacyBannerLinkText: 'Learn more about our cookies policy.',
 
     config: {
+        displayLegacy: true,
         cookieExclusionList: [
             '_dc_gtm_',
             '_ga',
