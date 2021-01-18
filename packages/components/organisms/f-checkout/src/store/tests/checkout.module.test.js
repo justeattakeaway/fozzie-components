@@ -177,7 +177,8 @@ describe('CheckoutModule', () => {
                     method: 'get',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept-Tenant': payload.tenant
+                        'Accept-Tenant': payload.tenant,
+                        Authorization: `Bearer ${state.authToken}`
                     },
                     timeout: payload.timeout
                 };
@@ -187,7 +188,7 @@ describe('CheckoutModule', () => {
 
             it('should get the checkout details from the backend and call `UPDATE_STATE` mutation.', async () => {
                 // Act
-                await getCheckout({ commit }, payload);
+                await getCheckout({ commit, state }, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
