@@ -660,6 +660,135 @@ describe('Checkout', () => {
                     // Assert
                     expect(setupGuestUserSpy).toHaveBeenCalled();
                 });
+
+                it('should emit success event when all the fields are populated correctly', async() => {
+                    // Arrange
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultState,
+                            serviceType: CHECKOUT_METHOD_COLLECTION,
+                            isLoggedIn: false
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
+                });
+
+                it('should show error message and emit failure event when the first name field is not populated', async () => {
+                    // Arrange
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultState,
+                            serviceType: CHECKOUT_METHOD_COLLECTION,
+                            customer: {
+                                ...defaultState.customer,
+                                firstName: ''
+                            },
+                            isLoggedIn: false
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+                    const firstNameEmptyMessage = wrapper.find('[data-test-id="error-first-name-empty"]');
+
+                    // Assert
+                    expect(firstNameEmptyMessage).toMatchSnapshot();
+                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.firstName');
+                });
+
+                it('should show error message and emit failure event when the last name field is not populated', async () => {
+                    // Arrange
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultState,
+                            serviceType: CHECKOUT_METHOD_COLLECTION,
+                            customer: {
+                                ...defaultState.customer,
+                                lastName: ''
+                            },
+                            isLoggedIn: false
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+                    const lastNameEmptyMessage = wrapper.find('[data-test-id="error-last-name-empty"]');
+
+                    // Assert
+                    expect(lastNameEmptyMessage).toMatchSnapshot();
+                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.lastName');
+                });
+
+                it('should show error message and emit failure event when the email field is not populated', async () => {
+                    // Arrange
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultState,
+                            serviceType: CHECKOUT_METHOD_COLLECTION,
+                            customer: {
+                                ...defaultState.customer,
+                                email: ''
+                            },
+                            isLoggedIn: false
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+                    const emailEmptyMessage = wrapper.find('[data-test-id="error-email-invalid"]');
+
+                    // Assert
+                    expect(emailEmptyMessage).toMatchSnapshot();
+                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.email');
+                });
+
+                it('should show error message and emit failure event when the email field is invalid', async () => {
+                    // Arrange
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultState,
+                            serviceType: CHECKOUT_METHOD_COLLECTION,
+                            customer: {
+                                ...defaultState.customer,
+                                email: '£Gs7asd263('
+                            },
+                            isLoggedIn: false
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+                    const emailInvalidMessage = wrapper.find('[data-test-id="error-email-invalid"]');
+
+                    // Assert
+                    expect(emailInvalidMessage).toMatchSnapshot();
+                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.email');
+                });
             });
 
             describe('if `isLoggedIn` set to `true`', () => {
@@ -682,6 +811,25 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(setupGuestUserSpy).not.toHaveBeenCalled();
+                });
+
+                it('should not create validations for guest', () => {
+                    // Arrange
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultState,
+                            authToken: 'sampleToken',
+                            isLoggedIn: true
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Assert
+                    expect(wrapper.vm.$v.customer.firstName).toBeUndefined();
+                    expect(wrapper.vm.$v.customer.lastName).toBeUndefined();
+                    expect(wrapper.vm.$v.customer.email).toBeUndefined();
                 });
             });
         });
