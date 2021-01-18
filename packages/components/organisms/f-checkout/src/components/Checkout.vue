@@ -30,7 +30,7 @@
                     name="mobile-number"
                     :label-text="$t('labels.mobileNumber')"
                     :has-error="!isMobileNumberValid"
-                    @input="updateMobileNumber">
+                    @input="updateFulfilmentDetails('Customer', 'mobileNumber', $event)">
                     <template #error>
                         <error-message
                             v-if="!isMobileNumberValid"
@@ -65,7 +65,7 @@
 
 <script>
 import { validationMixin } from 'vuelidate';
-import { required } from 'vuelidate/lib/validators';
+import { required, email } from 'vuelidate/lib/validators';
 
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
@@ -94,6 +94,7 @@ import tenantConfigs from '../tenants';
 import EventNames from '../event-names';
 
 import checkoutModule from '../store/checkout.module';
+import checkoutValidationsMixin from '../mixins/validations.mixin';
 
 export default {
     name: 'VueCheckout',
@@ -112,7 +113,7 @@ export default {
         UserNote
     },
 
-    mixins: [validationMixin, VueGlobalisationMixin],
+    mixins: [validationMixin, VueGlobalisationMixin, checkoutValidationsMixin],
 
     props: {
         checkoutUrl: {
@@ -176,6 +177,11 @@ export default {
         Object.defineProperty($v, 'addressValidations', {
             enumerable: true,
             get: () => this.$v.fulfilment.address
+        });
+
+        Object.defineProperty($v, 'guestValidations', {
+            enumerable: true,
+            get: () => this.$v.customer
         });
 
         return { $v };
@@ -246,8 +252,7 @@ export default {
             'getAvailableFulfilment',
             'getCheckout',
             'postCheckout',
-            'setAuthToken',
-            'updateMobileNumber'
+            'setAuthToken'
         ]),
 
         /**
@@ -415,6 +420,22 @@ export default {
                 }
             }
         };
+
+        if (!this.isLoggedIn) {
+            deliveryDetails.customer = {
+                ...deliveryDetails.customer,
+                firstName: {
+                    required
+                },
+                lastName: {
+                    required
+                },
+                email: {
+                    required,
+                    email
+                }
+            };
+        }
 
         if (this.isCheckoutMethodDelivery) {
             deliveryDetails.fulfilment = {
