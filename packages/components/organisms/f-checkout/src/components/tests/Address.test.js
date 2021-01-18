@@ -51,9 +51,8 @@ describe('Address', () => {
 
     describe('computed ::', () => {
         const isFieldEmptySpy = jest.spyOn(checkoutValidationsMixin.methods, 'isFieldEmpty');
-        const component = 'address';
-
         let wrapper;
+        const component = 'address';
 
         beforeEach(() => {
             wrapper = shallowMount(Address, {
