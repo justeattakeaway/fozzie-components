@@ -5,6 +5,7 @@ import { validations } from '@justeat/f-services';
 import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION, TENANT_MAP } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
+import checkoutValidationsMixin from '../../mixins/validations.mixin';
 
 import {
     defaultState, defaultActions, i18n, createStore
@@ -20,6 +21,16 @@ const $v = {
         mobileNumber: {
             $dirty: false,
             isValidPhoneNumber: false
+        },
+        firstName: {
+            $dirty: false
+        },
+        lastName: {
+            $dirty: false
+        },
+        email: {
+            $dirty: false,
+            email: false
         }
     },
     fulfilment: {
@@ -975,7 +986,7 @@ describe('Checkout', () => {
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0]).toEqual(mockValidationState);
             });
 
-            it('should try to call `submitCheckout` if form is Valid', async () => {
+            ('should try to call `submitCheckout` if form is Valid', async () => {
                 // Arrange
                 isFormValidSpy.mockReturnValue(true);
 
@@ -1073,7 +1084,7 @@ describe('Checkout', () => {
         describe('updateMobileNumber', () => {
             it('should be called with new input value on user input', async () => {
                 // Arrange
-                const updateMobileNumberSpy = jest.spyOn(VueCheckout.methods, 'updateMobileNumber');
+                const updateFulfilmentDetailsSpy = jest.spyOn(checkoutValidationsMixin.methods, 'updateFulfilmentDetails');
 
                 const wrapper = mount(VueCheckout, {
                     store: createStore(),
@@ -1088,7 +1099,7 @@ describe('Checkout', () => {
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(updateMobileNumberSpy).toHaveBeenCalledWith(newNumber);
+                expect(updateFulfilmentDetailsSpy).toHaveBeenCalledWith('Customer', 'mobileNumber', newNumber);
             });
         });
     });
