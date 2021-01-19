@@ -316,49 +316,63 @@ workflows:
           context: web-core
           filters:
             branches:
-              ignore: 'gh-pages'
+              ignore:
+                - 'gh-pages'
+                - 'master'
       - build:
           context: web-core
           requires:
             - set_up
           filters:
             branches:
-              ignore: 'gh-pages'
+              ignore:
+                - 'gh-pages'
+                - 'master'
       - linting:
           context: web-core
           requires:
             - build
           filters:
             branches:
-              ignore: 'gh-pages'    
+              ignore:
+                - 'gh-pages'
+                - 'master'  
       - bundlewatch:
           context: web-core
           requires:
             - build
           filters:
             branches:
-              ignore: 'gh-pages'
+              ignore:
+                - 'gh-pages'
+                - 'master'
       - unit_tests:
           context: web-core
           requires:
             - build
           filters:
             branches:
-              ignore: 'gh-pages'
+              ignore:
+                - 'gh-pages'
+                - 'master'
       - component_tests:
           context: web-core
           requires:
             - build
           filters:
             branches:
-              ignore: 'gh-pages'
+              ignore:
+                - 'gh-pages'
+                - 'master'
       - accessibility_tests:
           context: web-core
           requires:
             - build
           filters:
             branches:
-              ignore: 'gh-pages'
+              ignore:
+                - 'gh-pages'
+                - 'master'
       - slack_reporting:
           context: web-core
           requires:
@@ -369,7 +383,9 @@ workflows:
             - accessibility_tests
           filters:
             branches:
-              ignore: 'gh-pages'
+              ignore:
+                - 'gh-pages'
+                - 'master'
 
   deploy-storybook:
     jobs:
