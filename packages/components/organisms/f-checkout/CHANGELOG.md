@@ -5,11 +5,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.40.0
 -------------------------------
-*January 19, 2021*
+*January 20, 2021*
 
 ### Added
 - `validations` mixin.
 - `Guest` component validations.
+- `VALIDATIONS` constant.
 
 ### Changed
 - `updateAddressDetails` and `updateCustomerDetails` store actions.
