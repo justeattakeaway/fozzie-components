@@ -39,7 +39,7 @@ commands:
           keys:
               - changedPackages-{{ .Branch }}-{{ .Revision }}
       - run: |
-            if [ echo $(cat changedPackages) = "false" ]; then
+            if [ echo $(cat changedPackages) == "false" ]; then
                 circleci-agent step halt
             fi
 
@@ -163,6 +163,20 @@ executors:
       - image: circleci/node:12.18.4-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
 
 jobs:
+
+  get_changed_packages:
+    working_directory: ~/project
+    executor: node
+    environment:
+      WORKFLOW_ID: build
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps: # a collection of executable commands
+      - checkout
+      - run: # Install Lerna
+          name: Install Lerna
+          command: yarn global add lerna
+      - check_package_changes
 
   set_up:
     working_directory: ~/project
@@ -349,11 +363,19 @@ jobs:
 
 workflows:
   version: 2
-
   build:
     jobs:
+      - get_changed_packages:
+          context: web-core
+          filters:
+            branches:
+              ignore:
+                - 'gh-pages'
+                - 'master'
       - set_up:
           context: web-core
+          requires:
+            - get_changed_packages
           filters:
             branches:
               ignore:
