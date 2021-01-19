@@ -179,7 +179,7 @@ jobs:
           command: |
             cat changedPackages
       - when:
-          condition: grep -w true changedPackages
+          condition: $(grep -w true changedPackages)
           steps:
             - install_node_dependencies
             - save_cache:
