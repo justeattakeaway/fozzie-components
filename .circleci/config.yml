@@ -156,9 +156,9 @@ jobs:
           command: |
             echo $CHANGED_PACKAGES
       - run: |
-        if [ "$CHANGED_PACKAGES" = "false" ]; then
-            circleci-agent step halt
-        fi
+            if [ "$CHANGED_PACKAGES" = "false" ]; then
+                circleci-agent step halt
+            fi
 
 
   set_up:
