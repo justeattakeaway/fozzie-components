@@ -35,7 +35,7 @@ commands:
       #     keys:
       #         - changedPackages-{{ .Branch }}-{{ .Revision }}
       - run: |
-            if [ echo $( (( $(npx lerna list --since origin/master | wc -l) > 0 )) && echo "true" || echo "false" )]; then
+            if [ echo $( (( $(npx lerna list --since origin/master | wc -l) = 0 )) && echo "true" || echo "false" )]; then
                 circleci-agent step halt
             fi
 
