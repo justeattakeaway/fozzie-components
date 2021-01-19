@@ -46,6 +46,14 @@ v0.37.0
 - `userNote` label.
 
 
+Latest (roll into next release)
+-------------------------------
+*January 13, 2021*
+
+### Added
+- Test to confirm switch user link is displayed.
+
+
 v0.36.0
 -------------------------------
 *January 12, 2021*

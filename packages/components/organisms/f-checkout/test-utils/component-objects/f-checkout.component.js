@@ -8,7 +8,8 @@ import {
     GO_TO_PAYMENT_BUTTON,
     FIELDS,
     KNOB_CHECKOUT_DROPDOWN,
-    KNOB_BUTTON
+    KNOB_BUTTON,
+    SWITCH_USER_LINK
 } from './f-checkout-selectors';
 
 const { doesElementExist } = require('../../../../../../test/utils/webdriverio-extensions')(browser);
@@ -28,6 +29,7 @@ const knobButton = () => $(KNOB_BUTTON);
 // Form Fields
 
 const userNoteInput = () => $(USER_NOTE_INPUT);
+const switchUserLink = () => $(SWITCH_USER_LINK);
 
 const fields = {
     mobileNumber: {
@@ -80,6 +82,7 @@ exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isOrderTimeDropdownDisplayed = () => orderTimeDropdown().isDisplayed();
 exports.userNoteMaxCharacterCount = () => userNoteInput().getAttribute('maxlength');
 exports.clickPaymentButton = () => goToPaymentButton().click();
+exports.switchUserLinkIsDisplayed = () => switchUserLink().isDisplayed();
 
 /**
  * @description

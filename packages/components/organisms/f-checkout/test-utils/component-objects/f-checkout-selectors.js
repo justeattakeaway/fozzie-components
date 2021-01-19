@@ -5,6 +5,7 @@ export const USER_NOTE_INPUT = '[data-test-id="user-note"] textarea';
 export const GO_TO_PAYMENT_BUTTON = '[data-test-id="confirm-payment-submit-button"]';
 export const KNOB_BUTTON = '[id$="tabbutton-knobs"]';
 export const KNOB_CHECKOUT_DROPDOWN = '[name="Checkout Url"]';
+export const SWITCH_USER_LINK = '[data-test-id="switch-user-link"]';
 
 export const FIELDS = {
     mobileNumber: {
@@ -40,5 +41,6 @@ export default {
     ORDER_TIME_DROPDOWN_OPTIONS,
     USER_NOTE_INPUT,
     GO_TO_PAYMENT_BUTTON,
+    SWITCH_USER_LINK,
     FIELDS
 };
