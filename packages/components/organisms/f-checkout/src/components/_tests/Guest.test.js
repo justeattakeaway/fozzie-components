@@ -4,6 +4,7 @@ import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
 import Guest from '../Guest.vue';
 import { i18n, createStore } from './helpers/setup';
 import checkoutValidationsMixin from '../../mixins/validations.mixin';
+import { VALIDATIONS } from '../../constants';
 
 const localVue = createLocalVue();
 
@@ -48,7 +49,7 @@ describe('Guest', () => {
 
     describe('computed ::', () => {
         const isFieldEmptySpy = jest.spyOn(checkoutValidationsMixin.methods, 'isFieldEmpty');
-        const component = 'guest';
+        const type = VALIDATIONS.guest;
 
         let wrapper;
 
@@ -74,7 +75,7 @@ describe('Guest', () => {
             ['isEmailValid', 'email']
         ])('%s :: should call `isFieldEmpty` with argument %s', (property, field) => {
             // Assert
-            expect(isFieldEmptySpy).toHaveBeenCalledWith(component, field);
+            expect(isFieldEmptySpy).toHaveBeenCalledWith(type, field);
         });
 
         describe('isEmailValid ::', () => {

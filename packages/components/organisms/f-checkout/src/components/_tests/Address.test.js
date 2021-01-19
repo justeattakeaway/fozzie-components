@@ -4,6 +4,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Address from '../Address.vue';
 import { i18n, createStore } from './helpers/setup';
 import checkoutValidationsMixin from '../../mixins/validations.mixin';
+import { VALIDATIONS } from '../../constants';
 
 const localVue = createLocalVue();
 
@@ -52,7 +53,7 @@ describe('Address', () => {
     describe('computed ::', () => {
         const isFieldEmptySpy = jest.spyOn(checkoutValidationsMixin.methods, 'isFieldEmpty');
         let wrapper;
-        const component = 'address';
+        const type = VALIDATIONS.address;
 
         beforeEach(() => {
             wrapper = shallowMount(Address, {
@@ -76,7 +77,7 @@ describe('Address', () => {
             ['isAddressPostcodeEmpty', 'postcode']
         ])('%s :: should call `isFieldEmpty` with argument %s', (property, field) => {
             // Assert
-            expect(isFieldEmptySpy).toHaveBeenCalledWith(component, field);
+            expect(isFieldEmptySpy).toHaveBeenCalledWith(type, field);
         });
 
         describe('isAddressPostcodeValid ::', () => {

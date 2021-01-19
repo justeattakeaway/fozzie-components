@@ -89,7 +89,7 @@ import FormSelector from './Selector.vue';
 import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
 
-import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP } from '../constants';
+import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants';
 import tenantConfigs from '../tenants';
 import EventNames from '../event-names';
 
@@ -174,12 +174,12 @@ export default {
     provide () {
         const $v = {};
 
-        Object.defineProperty($v, 'addressValidations', {
+        Object.defineProperty($v, VALIDATIONS.address, {
             enumerable: true,
             get: () => this.$v.fulfilment.address
         });
 
-        Object.defineProperty($v, 'guestValidations', {
+        Object.defineProperty($v, VALIDATIONS.guest, {
             enumerable: true,
             get: () => this.$v.customer
         });

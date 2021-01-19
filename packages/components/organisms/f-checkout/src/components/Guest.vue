@@ -53,6 +53,7 @@ import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import { mapState } from 'vuex';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
+import { VALIDATIONS } from '../constants';
 
 export default {
     components: { FormField, ErrorMessage },
@@ -77,18 +78,18 @@ export default {
         * focus on the input field.
         */
         isFirstNameEmpty () {
-            return this.isFieldEmpty('guest', 'firstName');
+            return this.isFieldEmpty(VALIDATIONS.guest, 'firstName');
         },
 
         isLastNameEmpty () {
-            return this.isFieldEmpty('guest', 'lastName');
+            return this.isFieldEmpty(VALIDATIONS.guest, 'lastName');
         },
 
         /*
         * Checks that email field is not empty and is a valid email address.
         */
         isEmailValid () {
-            return !this.isFieldEmpty('guest', 'email') && this.$v.guestValidations.email.email;
+            return !this.isFieldEmpty(VALIDATIONS.guest, 'email') && this.$v[VALIDATIONS.guest].email.email;
         }
     }
 };

@@ -1,5 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import checkoutValidations from '../validations.mixin';
+import { VALIDATIONS } from '../../constants';
 
 const localVue = createLocalVue();
 
@@ -23,7 +24,7 @@ const $v = {
 
 describe('Checkout Methods', () => {
     describe('isFieldEmpty', () => {
-        const component = 'address';
+        const type = VALIDATIONS.address;
         const field = 'line1';
         let wrapper;
 
@@ -42,7 +43,7 @@ describe('Checkout Methods', () => {
             $v.addressValidations[field].required = true;
 
             // Assert
-            expect(wrapper.vm.isFieldEmpty(component, field)).toEqual(false);
+            expect(wrapper.vm.isFieldEmpty(type, field)).toEqual(false);
         });
 
         it('should return `true` if `field` has been touched and input is required', () => {
@@ -51,7 +52,7 @@ describe('Checkout Methods', () => {
             $v.addressValidations[field].required = false;
 
             // Assert
-            expect(wrapper.vm.isFieldEmpty(component, field)).toEqual(true);
+            expect(wrapper.vm.isFieldEmpty(type, field)).toEqual(true);
         });
 
         it('should return `false` if `field` has been touched and input is not required`', () => {
@@ -60,7 +61,7 @@ describe('Checkout Methods', () => {
             $v.addressValidations[field].required = true;
 
             // Assert
-            expect(wrapper.vm.isFieldEmpty(component, field)).toEqual(false);
+            expect(wrapper.vm.isFieldEmpty(type, field)).toEqual(false);
         });
     });
 
@@ -85,12 +86,12 @@ describe('Checkout Methods', () => {
         });
 
         it.each([
-            ['Guest', 'firstName', 'Jim'],
+            ['Customer', 'firstName', 'Jim'],
             ['Address', 'city', 'London']
         ])('should be dispatch appropriate action with the correct payload', (component, field, newValue) => {
             // Arrange
-            const action = `checkout/update${component}Details`;
             const payload = { [field]: newValue };
+            const action = `checkout/update${component}Details`;
 
             // Act
             wrapper.vm.updateFulfilmentDetails(component, field, newValue);

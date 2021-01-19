@@ -77,12 +77,13 @@ import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import { mapState } from 'vuex';
-import checkoutValidations from '../mixins/validations.mixin';
+import checkoutValidationsMixin from '../mixins/validations.mixin';
+import { VALIDATIONS } from '../constants';
 
 export default {
     components: { FormField, ErrorMessage },
 
-    mixins: [checkoutValidations],
+    mixins: [checkoutValidationsMixin],
 
     /*
     * Provide/Inject allows nested `Address` component to inherit `Checkout`
@@ -102,22 +103,22 @@ export default {
         * focus on the input field.
         */
         isAddressLine1Empty () {
-            return this.isFieldEmpty('address', 'line1');
+            return this.isFieldEmpty(VALIDATIONS.address, 'line1');
         },
 
         isAddressCityEmpty () {
-            return this.isFieldEmpty('address', 'city');
+            return this.isFieldEmpty(VALIDATIONS.address, 'city');
         },
 
         isAddressPostcodeEmpty () {
-            return this.isFieldEmpty('address', 'postcode');
+            return this.isFieldEmpty(VALIDATIONS.address, 'postcode');
         },
 
         /*
         * Checks that postcode is a valid postcode and that the field is not empty.
         */
         isAddressPostcodeValid () {
-            return (!this.$v.addressValidations.postcode.$dirty || this.$v.addressValidations.postcode.isValidPostcode) && !this.isAddressPostcodeEmpty;
+            return (!this.$v[VALIDATIONS.address].postcode.$dirty || this.$v[VALIDATIONS.address].postcode.isValidPostcode) && !this.isAddressPostcodeEmpty;
         }
     }
 };

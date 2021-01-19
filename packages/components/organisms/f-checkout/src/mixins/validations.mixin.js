@@ -5,11 +5,10 @@ export default {
         * The $dirty boolean changes to true when the user has focused/lost
         * focus on the input field.
         *
-        * @param component {string} The component being validated. (`Address` or `Guest`)
+        * @param type {string} The type being validated. (`Address` or `Guest`)
         * @param field {string} The field to be checked.
         */
-        isFieldEmpty (component, field) {
-            const type = `${component}Validations`;
+        isFieldEmpty (type, field) {
             return this.$v[type][field].$dirty && !this.$v[type][field].required;
         },
 

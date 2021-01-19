@@ -661,7 +661,7 @@ describe('Checkout', () => {
                     expect(setupGuestUserSpy).toHaveBeenCalled();
                 });
 
-                it('should emit success event when all the fields are populated correctly', async() => {
+                it('should emit success event when all the fields are populated correctly', async () => {
                     // Arrange
                     const wrapper = mount(VueCheckout, {
                         store: createStore({
