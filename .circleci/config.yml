@@ -14,28 +14,28 @@ commands:
           fingerprints:
             - "0e:50:82:ad:81:17:a5:31:04:13:fd:6e:c7:72:c9:18"
 
-  check_package_changes:
-    description: Check if packages have been changed.
-    steps:
-      - run:
-          name: Check for changed packages
-          command: |
-            echo CHANGED_PACKAGES=$( (( $(npx lerna list --since origin/master | wc -l) > 0 )) && echo "true" || echo "false" ) >> changedPackages
-      - save_cache:
-          name: Save result of package change check
-          key: changedPackages-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - changedPackages
+  # check_package_changes:
+  #   description: Check if packages have been changed.
+  #   steps:
+  #     - run:
+  #         name: Check for changed packages
+  #         command: |
+  #           echo CHANGED_PACKAGES=$( (( $(npx lerna list --since origin/master | wc -l) > 0 )) && echo "true" || echo "false" ) >> $CHANGED_PACKAGES
+  #     - save_cache:
+  #         name: Save result of package change check
+  #         key: changedPackages-{{ .Branch }}-{{ .Revision }}
+  #         paths:
+  #           - changedPackages
 
   halt_if_no_package_changes:
     description: Stops the build if no packages have been changed.
     steps:
-      - restore_cache:
-          name: Restore Package Change Cache
-          keys:
-              - changedPackages-{{ .Branch }}-{{ .Revision }}
+      # - restore_cache:
+      #     name: Restore Package Change Cache
+      #     keys:
+      #         - changedPackages-{{ .Branch }}-{{ .Revision }}
       - run: |
-            if [ echo $(cat changedPackages) == "false" ]; then
+            if [ echo CHANGED_PACKAGES=$( (( $(npx lerna list --since origin/master | wc -l) > 0 )) && echo "true" || echo "false" ) >> $CHANGED_PACKAGES ]; then
                 circleci-agent step halt
             fi
 
@@ -358,13 +358,13 @@ workflows:
   version: 2
   build:
     jobs:
-      - get_changed_packages:
-          context: web-core
-          filters:
-            branches:
-              ignore:
-                - 'gh-pages'
-                - 'master'
+      # - get_changed_packages:
+      #     context: web-core
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - 'gh-pages'
+      #           - 'master'
       - set_up:
           context: web-core
           requires:
