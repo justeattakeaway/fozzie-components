@@ -47,7 +47,7 @@ export const CheckoutComponent = () => ({
             default: select('Auth token', ['authToken', null], 'authToken')
         },
         loginUrl: {
-            default: text('foo Url', '/login')
+            default: text('Login Url', '/login')
         }
     },
     store: new Vuex.Store({}),
