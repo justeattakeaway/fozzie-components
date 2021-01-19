@@ -14,19 +14,32 @@ commands:
           fingerprints:
             - "0e:50:82:ad:81:17:a5:31:04:13:fd:6e:c7:72:c9:18"
 
-  halt_no_package_changes:
+  check_package_changes:
     description: Stops the build if no packages have been changed.
     steps:
       - run:
           name: Check for changed packages
           command: |
-            echo CHANGED_PACKAGES=$( (( $(npx lerna list --since origin/master | wc -l) > 0 )) && echo "true" || echo "false" ) >> $BASH_ENV
+            echo CHANGED_PACKAGES=$( (( $(npx lerna list --since origin/master | wc -l) > 0 )) && echo "true" || echo "false" ) >> changedPackages
       - run:
           name: echo changed packages
           command: |
-            echo $CHANGED_PACKAGES
+            echo $(cat changedPackages)
+      - save_cache:
+          name: Save result of package change check
+          key: changedPackages-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - changedPackages
+
+  halt_if_no_package_changes:
+    description: Stops the build if no packages have been changed.
+    steps:
+      - restore_cache:
+          name: Restore Package Change Cache
+          keys:
+              - changedPackages-{{ .Branch }}-{{ .Revision }}
       - run: |
-            if [ "$CHANGED_PACKAGES" = "false" ]; then
+            if [ echo $(cat changedPackages) = "false" ]; then
                 circleci-agent step halt
             fi
 
@@ -159,11 +172,12 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
+      - halt_if_no_package_changes
       - checkout
       - run: # Install Lerna
           name: Install Lerna
           command: yarn global add lerna
-      - halt_no_package_changes
+      - check_package_changes
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -190,11 +204,11 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
+      - halt_if_no_package_changes
       - restore_cache:
           name: Restore Working Directory Cache
           keys:
               - working-directory-{{ .Branch }}-{{ .Revision }}
-      - halt_no_package_changes
       - build_changed_packages
       - run: # Install WebDriverIO Test Dependencies
           name: Install Component Test Dependencies
@@ -216,11 +230,11 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 2
     steps: # a collection of executable commands
+      - halt_if_no_package_changes
       - restore_cache:
           name: Restore Working Directory + Bundles Cache
           keys:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
-      - halt_no_package_changes
       - run: # Lint packages
           name: Run Lint Tasks on Packages
           command: yarn ci:lint
@@ -232,11 +246,11 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
+      - halt_if_no_package_changes
       - restore_cache:
           name: Restore Working Directory + Bundles Cache
           keys:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
-      - halt_no_package_changes
       - run: # Run Tests
           name: Run Unit / Integration Tests
           command: yarn ci:test
@@ -247,11 +261,11 @@ jobs:
       WORKFLOW_ID: build
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
+      - halt_if_no_package_changes
       - restore_cache:
           name: Restore Working Directory + Bundles Cache
           keys:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
-      - halt_no_package_changes
       - run: # Serve Storybook
           name: Serve Storybook
           command: yarn storybook:serve-static
@@ -271,11 +285,11 @@ jobs:
       WORKFLOW_ID: build
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
+      - halt_if_no_package_changes
       - restore_cache:
           name: Restore Working Directory + Bundles Cache
           keys:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
-      - halt_no_package_changes
       - run: # Serve Storybook
           name: Serve Storybook
           command: yarn storybook:serve-static
@@ -296,11 +310,11 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 2
     steps: # a collection of executable commands
+      - halt_if_no_package_changes
       - restore_cache:
           name: Restore Working Directory + Bundles Cache
           keys:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
-      - halt_no_package_changes
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
