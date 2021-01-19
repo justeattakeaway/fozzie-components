@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.6.0
+------------------------------
+*January 18, 2021*
+
+### Changes
+- Unit test directories updated so that they are named `_tests/` to match our previously agreed frontend guidelines.
+
+
 v3.5.0
 ------------------------------
 *January 12, 2021*
