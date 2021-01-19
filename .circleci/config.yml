@@ -150,7 +150,7 @@ jobs:
       - run:
           name: Check for changed packages
           command: |
-            CHANGED_PACKAGES=$( ! [[ $(yarn lerna list --since master) =~ "found 0 packages" ]] || echo "true")
+            CHANGED_PACKAGES=$( ! [[ $(npx lerna list --since master) =~ "found 0 packages" ]] || echo "true")
             echo $CHANGED_PACKAGES
       - save_cache:
           name: Save Working Directory Cache
