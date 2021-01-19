@@ -35,6 +35,9 @@ commands:
       #     keys:
       #         - changedPackages-{{ .Branch }}-{{ .Revision }}
       - checkout
+      - run: # Install Lerna
+          name: Install Lerna
+          command: yarn global add lerna
       - run: |
             if [ echo $( (( $(npx lerna list --since origin/master | wc -l) == 0 )) && echo "true" || echo "false" )]; then
                 circleci-agent step halt
@@ -184,7 +187,6 @@ jobs:
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
       - halt_if_no_package_changes
-      - checkout
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
