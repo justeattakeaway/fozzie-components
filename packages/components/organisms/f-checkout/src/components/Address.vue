@@ -82,9 +82,7 @@ import checkoutValidations from '../mixins/validations.mixin';
 export default {
     components: { FormField, ErrorMessage },
 
-    mixins: [
-        checkoutValidations
-    ],
+    mixins: [ checkoutValidations ],
 
     /*
     * Provide/Inject allows nested `Address` component to inherit `Checkout`
