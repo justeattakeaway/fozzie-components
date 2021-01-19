@@ -367,8 +367,8 @@ workflows:
       #           - 'master'
       - set_up:
           context: web-core
-          requires:
-            - get_changed_packages
+          # requires:
+          #   - get_changed_packages
           filters:
             branches:
               ignore:
