@@ -13,7 +13,7 @@
                 label-style="inline"
                 is-grouped
                 :has-error="isAddressLine1Empty"
-                @input="updateFulfilmentDetails('Address', 'line1', $event)">
+                @input="updateAddressDetails({ ['line1']: $event })">
                 <template #error>
                     <error-message
                         v-if="isAddressLine1Empty"
@@ -31,7 +31,7 @@
                 :label-text="$t('labels.line2')"
                 is-grouped
                 label-style="inline"
-                @input="updateFulfilmentDetails('Address', 'line2', $event)" />
+                @input="updateAddressDetails({ ['line2']: $event })" />
         </fieldset>
 
         <form-field
@@ -39,7 +39,7 @@
             name="address-city"
             :label-text="$t('labels.city')"
             :has-error="isAddressCityEmpty"
-            @input="updateFulfilmentDetails('Address', 'city', $event)">
+            @input="updateAddressDetails({ ['city']: $event })">
             <template #error>
                 <error-message
                     v-if="isAddressCityEmpty"
@@ -54,7 +54,7 @@
             name="address-postcode"
             :label-text="$t('labels.postcode')"
             :has-error="!isAddressPostcodeValid"
-            @input="updateFulfilmentDetails('Address', 'postcode', $event)">
+            @input="updateAddressDetails({ ['postcode']: $event })">
             <template #error>
                 <error-message
                     v-if="isAddressPostcodeEmpty"
@@ -76,7 +76,7 @@ import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import { VALIDATIONS } from '../constants';
 
@@ -120,6 +120,12 @@ export default {
         isAddressPostcodeValid () {
             return (!this.$v[VALIDATIONS.address].postcode.$dirty || this.$v[VALIDATIONS.address].postcode.isValidPostcode) && !this.isAddressPostcodeEmpty;
         }
+    },
+
+    methods: {
+        ...mapActions('checkout', [
+            'updateAddressDetails'
+        ])
     }
 };
 </script>

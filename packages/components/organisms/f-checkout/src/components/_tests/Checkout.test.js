@@ -5,7 +5,6 @@ import { validations } from '@justeat/f-services';
 import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION, TENANT_MAP } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
-import checkoutValidationsMixin from '../../mixins/validations.mixin';
 
 import {
     defaultState, defaultActions, i18n, createStore
@@ -1232,7 +1231,7 @@ describe('Checkout', () => {
         describe('updateMobileNumber', () => {
             it('should be called with new input value on user input', async () => {
                 // Arrange
-                const updateFulfilmentDetailsSpy = jest.spyOn(checkoutValidationsMixin.methods, 'updateFulfilmentDetails');
+                const updateCustomerDetailsSpy = jest.spyOn(VueCheckout.methods, 'updateCustomerDetails');
 
                 const wrapper = mount(VueCheckout, {
                     store: createStore(),
@@ -1247,7 +1246,7 @@ describe('Checkout', () => {
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(updateFulfilmentDetailsSpy).toHaveBeenCalledWith('Customer', 'mobileNumber', newNumber);
+                expect(updateCustomerDetailsSpy).toHaveBeenCalledWith({ mobileNumber: newNumber });
             });
         });
     });

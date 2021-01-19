@@ -6,7 +6,7 @@
             v-model="customer.firstName"
             name="guest-first-name"
             :label-text="$t('guest.firstName')"
-            @input="updateFulfilmentDetails('Customer', 'firstName', $event)">
+            @input="updateCustomerDetails({ 'firstName': $event })">
             <template #error>
                 <error-message
                     v-if="isFirstNameEmpty"
@@ -20,7 +20,7 @@
             v-model="customer.lastName"
             name="guest-last-name"
             :label-text="$t('guest.lastName')"
-            @input="updateFulfilmentDetails('Customer', 'lastName', $event)">
+            @input="updateCustomerDetails({ 'lastName': $event })">
             <template #error>
                 <error-message
                     v-if="isLastNameEmpty"
@@ -34,7 +34,7 @@
             v-model="customer.email"
             name="guest-email"
             :label-text="$t('guest.email')"
-            @input="updateFulfilmentDetails('Customer', 'email', $event)">
+            @input="updateCustomerDetails({ 'email': $event })">
             <template #error>
                 <error-message
                     v-if="!isEmailValid"
@@ -51,7 +51,7 @@ import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import { VALIDATIONS } from '../constants';
 
@@ -91,6 +91,12 @@ export default {
         isEmailValid () {
             return !this.isFieldEmpty(VALIDATIONS.guest, 'email') && this.$v[VALIDATIONS.guest].email.email;
         }
+    },
+
+    methods: {
+        ...mapActions('checkout', [
+            'updateCustomerDetails'
+        ])
     }
 };
 </script>

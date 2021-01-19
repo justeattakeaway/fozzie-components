@@ -105,4 +105,65 @@ describe('Guest', () => {
             });
         });
     });
+
+    describe('methods ::', () => {
+        describe('updateCustomerDetails ::', () => {
+            let wrapper;
+            let updateCustomerDetailsSpy;
+
+            beforeEach(() => {
+                updateCustomerDetailsSpy = jest.spyOn(Guest.methods, 'updateCustomerDetails');
+
+                wrapper = mount(Guest, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    provide: () => ({
+                        $v
+                    })
+                });
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should be called with new input value when called on firstName field', async () => {
+                // Arrange
+                const newFirstNameValue = 'John';
+
+                // Act
+                await wrapper.find('[data-test-id="formfield-guest-first-name-input"]').setValue(newFirstNameValue);
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(updateCustomerDetailsSpy).toHaveBeenCalledWith({ firstName: newFirstNameValue });
+            });
+
+            it('should be called with new input value when called on lastName field', async () => {
+                // Arrange
+                const newLastNameValue = 'Johnson';
+
+                // Act
+                await wrapper.find('[data-test-id="formfield-guest-last-name-input"]').setValue(newLastNameValue);
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(updateCustomerDetailsSpy).toHaveBeenCalledWith({ lastName: newLastNameValue });
+            });
+
+            it('should be called with new input value when called on guest email field', async () => {
+                // Arrange
+                const newEmailValue = 'test@test.com';
+
+                // Act
+                await wrapper.find('[data-test-id="formfield-guest-email-input"]').setValue(newEmailValue);
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(updateCustomerDetailsSpy).toHaveBeenCalledWith({ email: newEmailValue });
+            });
+        });
+    });
 });

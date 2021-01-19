@@ -30,7 +30,7 @@
                     name="mobile-number"
                     :label-text="$t('labels.mobileNumber')"
                     :has-error="!isMobileNumberValid"
-                    @input="updateFulfilmentDetails('Customer', 'mobileNumber', $event)">
+                    @input="updateCustomerDetails({ ['mobileNumber']: $event })">
                     <template #error>
                         <error-message
                             v-if="!isMobileNumberValid"
@@ -252,7 +252,8 @@ export default {
             'getAvailableFulfilment',
             'getCheckout',
             'postCheckout',
-            'setAuthToken'
+            'setAuthToken',
+            'updateCustomerDetails'
         ]),
 
         /**

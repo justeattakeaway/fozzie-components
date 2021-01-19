@@ -1,8 +1,6 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import checkoutValidations from '../validations.mixin';
 import { VALIDATIONS } from '../../constants';
-
-const localVue = createLocalVue();
 
 const $v = {
     addressValidations: {
@@ -62,42 +60,6 @@ describe('Checkout Methods', () => {
 
             // Assert
             expect(wrapper.vm.isFieldEmpty(type, field)).toEqual(false);
-        });
-    });
-
-    describe('updateFulfilmentDetails ::', () => {
-        let wrapper;
-        const dispatch = jest.fn();
-
-        beforeEach(() => {
-            wrapper = shallowMount(checkoutValidations, {
-                render () {},
-                localVue,
-                mocks: {
-                    $store: {
-                        dispatch
-                    }
-                }
-            });
-        });
-
-        afterEach(() => {
-            jest.clearAllMocks();
-        });
-
-        it.each([
-            ['Customer', 'firstName', 'Jim'],
-            ['Address', 'city', 'London']
-        ])('should be dispatch appropriate action with the correct payload', (component, field, newValue) => {
-            // Arrange
-            const payload = { [field]: newValue };
-            const action = `checkout/update${component}Details`;
-
-            // Act
-            wrapper.vm.updateFulfilmentDetails(component, field, newValue);
-
-            // Assert
-            expect(dispatch).toHaveBeenCalledWith(action, payload);
         });
     });
 });
