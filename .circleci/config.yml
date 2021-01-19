@@ -19,12 +19,19 @@ commands:
     steps:
       - run: yarn install --freeze-lockfile
 
-  build_packages:
-    description: Locally builds all packages in the monorepo
+  build_changed_packages:
+    description: Locally builds changed packages in the monorepo
     steps:
       - run: # Check UI packages all build as expected
           name: Build Packages
           command: yarn ci:build
+
+  build_all_packages:
+    description: Locally builds all packages in the monorepo
+    steps:
+      - run: # Check UI packages all build as expected
+          name: Build Packages
+          command: yarn build
 
   slack_notify_fail:
     description: Sends a slack notifaction on job failure
@@ -166,7 +173,7 @@ jobs:
           name: Restore Working Directory Cache
           keys:
               - working-directory-{{ .Branch }}-{{ .Revision }}
-      - build_packages
+      - build_changed_packages
       - run: # Install WebDriverIO Test Dependencies
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global
@@ -293,7 +300,7 @@ jobs:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - install_node_dependencies
-      - build_packages
+      - build_all_packages
       - run:
           name: Deploy
           command: yarn storybook:deploy --packages packages
