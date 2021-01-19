@@ -168,25 +168,29 @@ jobs:
       WORKFLOW_ID: build
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
-    steps: # a collection of executable commands
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-              - yarn-packages-{{ checksum "yarn.lock" }}
-      - install_node_dependencies
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-      - run: # Run PR Checks
-          name: Run PR Checks
-          command: yarn danger ci
-      - save_cache:
-          name: Save Working Directory Cache
-          key: working-directory-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - ~/project
+    steps:
+      - when:
+          condition: $CHANGED_PACKAGES
+          steps:
+            - restore_cache:
+                name: Restore Yarn Package Cache + Working directory
+                keys:
+                    - working-directory-{{ .Branch }}-{{ .Revision }}
+                    - yarn-packages-{{ checksum "yarn.lock" }}
+            - install_node_dependencies
+            - save_cache:
+                name: Save Yarn Package Cache
+                key: yarn-packages-{{ checksum "yarn.lock" }}
+                paths:
+                  - ~/.cache/yarn
+            - run: # Run PR Checks
+                name: Run PR Checks
+                command: yarn danger ci
+            - save_cache:
+                name: Save Working Directory Cache
+                key: working-directory-{{ .Branch }}-{{ .Revision }}
+                paths:
+                  - ~/project
                     
   build:
     executor: node
