@@ -150,16 +150,16 @@ jobs:
       - run:
           name: Check for changed packages
           command: |
-            echo $( (( $(npx lerna list --since origin/master | wc -l) > 0 )) && echo "true" || echo "false" ) >> changedPackages
+            echo CHANGED_PACKAGES=$( (( $(npx lerna list --since master | wc -l) > 0 )) && echo "true" || echo "false" ) >> $BASH_ENV
       - run:
           name: echo changed packages
           command: |
-            cat changedPackages
-      - save_cache:
-          name: Save Working Directory Cache
-          key: working-directory-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - ~/project
+            echo $CHANGED_PACKAGES
+      - run: |
+        if [ "$CHANGED_PACKAGES" = "false" ]; then
+            circleci-agent step halt
+        fi
+
 
   set_up:
     working_directory: ~/project
@@ -168,33 +168,25 @@ jobs:
       WORKFLOW_ID: build
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
-    steps:
+    steps: # a collection of executable commands
       - restore_cache:
-          name: Restore Yarn Package Cache + Working directory
+          name: Restore Yarn Package Cache
           keys:
-              - working-directory-{{ .Branch }}-{{ .Revision }}
               - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: echo changed packages
-          command: |
-            cat changedPackages
-      - when:
-          condition: $(grep -w true changedPackages)
-          steps:
-            - install_node_dependencies
-            - save_cache:
-                name: Save Yarn Package Cache
-                key: yarn-packages-{{ checksum "yarn.lock" }}
-                paths:
-                  - ~/.cache/yarn
-            - run: # Run PR Checks
-                name: Run PR Checks
-                command: yarn danger ci
-            - save_cache:
-                name: Save Working Directory Cache
-                key: working-directory-{{ .Branch }}-{{ .Revision }}
-                paths:
-                  - ~/project
+      - install_node_dependencies
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run: # Run PR Checks
+          name: Run PR Checks
+          command: yarn danger ci
+      - save_cache:
+          name: Save Working Directory Cache
+          key: working-directory-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ~/project
                     
   build:
     executor: node
