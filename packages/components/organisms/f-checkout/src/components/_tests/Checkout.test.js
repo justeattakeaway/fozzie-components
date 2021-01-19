@@ -1228,7 +1228,7 @@ describe('Checkout', () => {
             });
         });
 
-        describe('updateMobileNumber', () => {
+        describe('updateCustomerDetails', () => {
             it('should be called with new input value on user input', async () => {
                 // Arrange
                 const updateCustomerDetailsSpy = jest.spyOn(VueCheckout.methods, 'updateCustomerDetails');

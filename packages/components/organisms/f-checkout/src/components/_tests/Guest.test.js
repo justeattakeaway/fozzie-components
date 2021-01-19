@@ -12,7 +12,7 @@ localVue.use(VueI18n);
 localVue.use(Vuex);
 
 const $v = {
-    guestValidations: {
+    [VALIDATIONS.guest]: {
         firstName: {
             $dirty: false
         },
@@ -86,7 +86,7 @@ describe('Guest', () => {
                 [false, false, true]
             ])('should return %s if email.email = %s and `isFieldEmpty` returns %s for email field', (expected, email, isEmpty) => {
                 // Arrange
-                $v.guestValidations.email.email = email;
+                $v[VALIDATIONS.guest].email.email = email;
                 isFieldEmptySpy.mockReturnValue(isEmpty);
 
                 // Act

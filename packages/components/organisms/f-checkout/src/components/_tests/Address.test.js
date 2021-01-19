@@ -12,7 +12,7 @@ localVue.use(VueI18n);
 localVue.use(Vuex);
 
 const $v = {
-    addressValidations: {
+    [VALIDATIONS.address]: {
         city: {
             $dirty: false,
             required: true
@@ -87,8 +87,8 @@ describe('Address', () => {
                 [false, true, false, true]
             ])('should return %s if postcode.$dirty = %s, postcode.isValidPostCode = %s and isAddressPostcodeEmpty = %s', (expected, isDirty, isValid, isEmpty) => {
                 // Arrange && Act
-                $v.addressValidations.postcode.$dirty = isDirty;
-                $v.addressValidations.postcode.isValidPostcode = isValid;
+                $v[VALIDATIONS.address].postcode.$dirty = isDirty;
+                $v[VALIDATIONS.address].postcode.isValidPostcode = isValid;
 
                 wrapper = shallowMount(Address, {
                     i18n,

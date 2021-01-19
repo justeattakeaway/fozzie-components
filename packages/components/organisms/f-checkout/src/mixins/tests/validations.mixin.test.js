@@ -3,7 +3,7 @@ import checkoutValidations from '../validations.mixin';
 import { VALIDATIONS } from '../../constants';
 
 const $v = {
-    addressValidations: {
+    [VALIDATIONS.address]: {
         city: {
             $dirty: false,
             required: true
@@ -37,8 +37,8 @@ describe('Checkout Methods', () => {
 
         it('should return `false` if `field` has not been touched and input is required', () => {
             // Arrange
-            $v.addressValidations[field].$dirty = false;
-            $v.addressValidations[field].required = true;
+            $v[VALIDATIONS.address][field].$dirty = false;
+            $v[VALIDATIONS.address][field].required = true;
 
             // Assert
             expect(wrapper.vm.isFieldEmpty(type, field)).toEqual(false);
@@ -46,8 +46,8 @@ describe('Checkout Methods', () => {
 
         it('should return `true` if `field` has been touched and input is required', () => {
             // Act
-            $v.addressValidations[field].$dirty = true;
-            $v.addressValidations[field].required = false;
+            $v[VALIDATIONS.address][field].$dirty = true;
+            $v[VALIDATIONS.address][field].required = false;
 
             // Assert
             expect(wrapper.vm.isFieldEmpty(type, field)).toEqual(true);
@@ -55,8 +55,8 @@ describe('Checkout Methods', () => {
 
         it('should return `false` if `field` has been touched and input is not required`', () => {
             // Act
-            $v.addressValidations[field].$dirty = true;
-            $v.addressValidations[field].required = true;
+            $v[VALIDATIONS.address][field].$dirty = true;
+            $v[VALIDATIONS.address][field].required = true;
 
             // Assert
             expect(wrapper.vm.isFieldEmpty(type, field)).toEqual(false);
