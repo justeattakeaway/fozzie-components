@@ -1,7 +1,7 @@
 <div align="center">
   <h1>f-mega-modal</h1>
 
-  <img width="125" alt="Fozzie Bear" src="../../bear.png" />
+  <img width="125px" alt="Fozzie Bear" src="../../../../bear.png" />
 
   <p>A Vue.js modal component</p>
 </div>
@@ -13,12 +13,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-mega-modal/badge.svg)](https://coveralls.io/github/justeat/f-mega-modal)
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-mega-modal/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-mega-modal?targetFile=package.json)
 
-
 # Usage
 
 ## Installation
-
-This package can be installed using npm or yarn:
 
 ```sh
 yarn add @justeat/f-mega-modal
@@ -30,7 +27,7 @@ npm install @justeat/f-mega-modal
 
 ### Vue Applications
 
-You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+> Styles have to be imported separately.
 
 ```js
 import MegaModal from '@justeat/f-mega-modal';
@@ -43,7 +40,9 @@ export default {
 }
 ```
 
-If you are using Webpack, you can import the component dynamically to separate the `mega-modal` bundle from the main `bundle.client.js`:
+### Webpack
+
+Import the component dynamically to separate the `mega-modal` bundle from the main `bundle.client.js`.
 
 ```js
 import '@justeat/f-mega-modal/dist/f-mega-modal.css';
@@ -54,53 +53,11 @@ export default {
         MegaModal: () => import(/* webpackChunkName: "mega-modal" */ '@justeat/f-mega-modal')
     }
 }
-
-```
-
-### Non-Vue Applications
-
-This module can be ran as a micro front-end for applications that don't make use of the Vue framework.
-
-The following rudimentary example can be used as a guide for implementing this component in an existing static application:
-
-```html
-<!doctype html>
-<html lang="en">
-<head>
-    <title>Mega Modal Example</title>
-    <link rel="stylesheet" href="https://unpkg.com/@justeat/f-mega-modal/dist/f-mega-modal.css">
-</head>
-<body>
-    <div data-app>
-        <mega-modal is-open>
-          <p>Modal content</p>
-        </mega-modal>
-    </div>
-    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
-    <script src="https://unpkg.com/@justeat/f-mega-modal/dist/f-mega-modal.umd.min.js"></script>
-    <script>
-        (function() {
-            if (typeof Vue === 'undefined') return null;
-
-            Vue.config.devtools = false;
-            Vue.config.productionTip = false;
-
-            return new Vue({
-                el: '[data-app]'
-            });
-    	})();
-    </script>
-</body>
-</html>
 ```
 
 ## Configuration
 
 ### Props
-
-`f-mega-modal` has a number of props that allow you to customise its functionality.
-
-The props that can be defined are as follows:
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
@@ -119,10 +76,6 @@ The props that can be defined are as follows:
 
 ### CSS Classes
 
-The modal has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
-
-In addition to this, the modal exposes some classes which you can target in your application.
-
 | Class | Description |
 | ----- | ----------- |
 | `c-megaModal` | Can be used to target the modal wrapper element. |
@@ -139,35 +92,7 @@ In addition to this, the modal exposes some classes which you can target in your
 | `open` | This event is emitted when the modal is opened. |
 | `close` | This event is emitted when the modal is closed. |
 
-You can add event listeners for these like so
-
-```vue
-<template>
-  <mega-modal
-    @open="onModalOpen"
-    @close="onModalClose">
-    <p>Modal content</p>
-  </mega-modal>
-</template>
-
-<script>
-export default {
-  methods: {
-    onModalOpen () {
-      // Do stuff here
-    },
-
-    onModalClose () {
-      // Do stuff here
-    }
-  }
-}
-</script>
-```
-
 ## Development
-
-Start by cloning the repository and installing the required dependencies:
 
 ```sh
 $ git clone git@github.com:justeat/fozzie-components.git
@@ -175,17 +100,7 @@ $ cd fozzie-components
 $ yarn
 ```
 
-Change directory to the `f-mega-modal` package:
-
-```sh
-$ cd packages/components/molecules/f-mega-modal
-```
-
 ### Running storybook
-
-Storybook can be used to develop new and existing components.
-
-To start storybook:
 
 From the **root** directory run:
 
@@ -193,5 +108,4 @@ From the **root** directory run:
 $ yarn storybook:serve
 ```
 
-This will build and serve storybook at [http://localhost:6006](http://localhost:6006).
-
+Serve storybook at [http://localhost:6006](http://localhost:6006).
