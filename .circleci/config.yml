@@ -19,6 +19,11 @@ commands:
     steps:
       - run: yarn install --freeze-lockfile
 
+  install_node_dependencies:
+    description: Installs the node dependencies
+    steps:
+      - run: yarn install --freeze-lockfile
+
   build_changed_packages:
     description: Locally builds changed packages in the monorepo
     steps:
@@ -135,7 +140,7 @@ executors:
 
 jobs:
 
-  get_changed_packages:
+  set_up:
     working_directory: ~/project
     executor: node
     environment:
@@ -143,7 +148,7 @@ jobs:
       # required to prevent ENOMEM errors
       LERNA_ARGS: --concurrency 1
     steps: # a collection of executable commands
-      - checkout # special step to check out source code to working directory
+      - checkout
       - run: # Install Lerna
           name: Install Lerna
           command: yarn global add lerna
@@ -159,16 +164,6 @@ jobs:
             if [ "$CHANGED_PACKAGES" = "false" ]; then
                 circleci-agent step halt
             fi
-
-
-  set_up:
-    working_directory: ~/project
-    executor: node
-    environment:
-      WORKFLOW_ID: build
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
-    steps: # a collection of executable commands
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
