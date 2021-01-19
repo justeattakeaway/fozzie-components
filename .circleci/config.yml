@@ -34,6 +34,7 @@ commands:
       #     name: Restore Package Change Cache
       #     keys:
       #         - changedPackages-{{ .Branch }}-{{ .Revision }}
+      - checkout
       - run: |
             if [ echo $( (( $(npx lerna list --since origin/master | wc -l) == 0 )) && echo "true" || echo "false" )]; then
                 circleci-agent step halt
