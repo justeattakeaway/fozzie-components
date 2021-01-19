@@ -151,6 +151,9 @@ jobs:
           name: Check for changed packages
           command: |
             CHANGED_PACKAGES=$( ! [[ $(npx lerna list --since master) =~ "found 0 packages" ]] || echo "true")
+      - run:
+          name: echo changed packages
+          command: |
             echo $CHANGED_PACKAGES
       - save_cache:
           name: Save Working Directory Cache
