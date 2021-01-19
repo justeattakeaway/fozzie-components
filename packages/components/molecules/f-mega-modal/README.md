@@ -141,7 +141,7 @@ In addition to this, the modal exposes some classes which you can target in your
 
 You can add event listeners for these like so
 
-```js
+```vue
 <template>
   <mega-modal
     @open="onModalOpen"
@@ -178,7 +178,7 @@ $ yarn
 Change directory to the `f-mega-modal` package:
 
 ```sh
-$ cd packages/f-mega-modal
+$ cd packages/components/molecules/f-mega-modal
 ```
 
 ### Running storybook
@@ -187,13 +187,9 @@ Storybook can be used to develop new and existing components.
 
 To start storybook:
 
-> Please ensure you are in the f-mega-modal directory as outlined in the above instructions.
+From the **root** directory run:
 
 ```sh
-# cd to the storybook package
-$ cd ../storybook
-
-# Run storybook
 $ yarn storybook:serve
 ```
 
