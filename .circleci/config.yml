@@ -333,17 +333,8 @@ workflows:
 
   build:
     jobs:
-      - get_changed_packages:
-          context: web-core
-          filters:
-            branches:
-              ignore:
-                - 'gh-pages'
-                - 'master'
       - set_up:
           context: web-core
-          requires:
-            - get_changed_packages
           filters:
             branches:
               ignore:
