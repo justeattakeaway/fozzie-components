@@ -14,10 +14,21 @@ commands:
           fingerprints:
             - "0e:50:82:ad:81:17:a5:31:04:13:fd:6e:c7:72:c9:18"
 
-  install_node_dependencies:
-    description: Installs the node dependencies
+  halt_no_package_changes:
+    description: Stops the build if no packages have been changed.
     steps:
-      - run: yarn install --freeze-lockfile
+      - run:
+          name: Check for changed packages
+          command: |
+            echo CHANGED_PACKAGES=$( (( $(npx lerna list --since origin/master | wc -l) > 0 )) && echo "true" || echo "false" ) >> $BASH_ENV
+      - run:
+          name: echo changed packages
+          command: |
+            echo $CHANGED_PACKAGES
+      - run: |
+            if [ "$CHANGED_PACKAGES" = "false" ]; then
+                circleci-agent step halt
+            fi
 
   install_node_dependencies:
     description: Installs the node dependencies
@@ -152,18 +163,7 @@ jobs:
       - run: # Install Lerna
           name: Install Lerna
           command: yarn global add lerna
-      - run:
-          name: Check for changed packages
-          command: |
-            echo CHANGED_PACKAGES=$( (( $(npx lerna list --since origin/master | wc -l) > 0 )) && echo "true" || echo "false" ) >> $BASH_ENV
-      - run:
-          name: echo changed packages
-          command: |
-            echo $CHANGED_PACKAGES
-      - run: |
-            if [ "$CHANGED_PACKAGES" = "false" ]; then
-                circleci-agent step halt
-            fi
+      - halt_no_package_changes
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -194,6 +194,7 @@ jobs:
           name: Restore Working Directory Cache
           keys:
               - working-directory-{{ .Branch }}-{{ .Revision }}
+      - halt_no_package_changes
       - build_changed_packages
       - run: # Install WebDriverIO Test Dependencies
           name: Install Component Test Dependencies
@@ -219,6 +220,7 @@ jobs:
           name: Restore Working Directory + Bundles Cache
           keys:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
+      - halt_no_package_changes
       - run: # Lint packages
           name: Run Lint Tasks on Packages
           command: yarn ci:lint
@@ -234,6 +236,7 @@ jobs:
           name: Restore Working Directory + Bundles Cache
           keys:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
+      - halt_no_package_changes
       - run: # Run Tests
           name: Run Unit / Integration Tests
           command: yarn ci:test
@@ -248,6 +251,7 @@ jobs:
           name: Restore Working Directory + Bundles Cache
           keys:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
+      - halt_no_package_changes
       - run: # Serve Storybook
           name: Serve Storybook
           command: yarn storybook:serve-static
@@ -271,6 +275,7 @@ jobs:
           name: Restore Working Directory + Bundles Cache
           keys:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
+      - halt_no_package_changes
       - run: # Serve Storybook
           name: Serve Storybook
           command: yarn storybook:serve-static
@@ -295,6 +300,7 @@ jobs:
           name: Restore Working Directory + Bundles Cache
           keys:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
+      - halt_no_package_changes
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
