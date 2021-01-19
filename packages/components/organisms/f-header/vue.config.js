@@ -2,8 +2,8 @@ const path = require('path');
 
 const rootDir = path.join(__dirname, '..', '..');
 const sassOptions = require('../../../../config/sassOptions')(rootDir);
-const responseLoggedIn = require('./src/components/tests/__mocks__/api.account.details.json');
-const responseLoggedOut = require('./src/components/tests/__mocks__/api.account.details.loggedout.json');
+const responseLoggedIn = require('./src/components/_tests/__mocks__/api.account.details.json');
+const responseLoggedOut = require('./src/components/_tests/__mocks__/api.account.details.loggedout.json');
 
 // vue.config.js
 module.exports = {
