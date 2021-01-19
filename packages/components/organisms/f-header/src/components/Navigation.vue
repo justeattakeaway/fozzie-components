@@ -548,6 +548,7 @@ $nav-text-weight                   : $font-weight-bold;
 $nav-text-subFont                  : $font-family-base;
 $nav-icon-color                    : $color-secondary;
 $nav-icon-color--transparent       : $white;
+$nav-icon-color--mobileWhiteBg     : $grey--mid;
 $nav-transition-duration           : 250ms;
 
 $nav-featureLinkIcon-width         : 28px;
@@ -798,6 +799,14 @@ $nav-popover-padding               : spacing(x2);
     .c-nav-icon--profile {
         width: 20px;
         height: 22px;
+
+        @include media('<mid') {
+            width: 33px;
+            height: 33px;
+            * {
+                fill: $nav-icon-color--mobileWhiteBg;
+            }
+        }
     }
 
     .c-nav-icon--delivery {

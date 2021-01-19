@@ -107,7 +107,10 @@ describe('Navigation', () => {
         wrapper = shallowMount(Navigation, {
             propsData: {
                 ...defaultPropsData,
-                navLinks: {}
+                copy: {
+                    ...defaultPropsData.copy,
+                    navLinks: {}
+                }
             }
         });
 
@@ -141,7 +144,10 @@ describe('Navigation', () => {
         wrapper = shallowMount(Navigation, {
             propsData: {
                 ...defaultPropsData,
-                navLinks: {}
+                copy: {
+                    ...defaultPropsData.copy,
+                    navLinks: {}
+                }
             },
             data () {
                 return {
@@ -175,14 +181,9 @@ describe('Navigation', () => {
     });
 
     it('should NOT show the navbar if there are no navigation links', () => {
-        // Arrange
-        const propsData = {
-            ...defaultPropsData
-        };
-
-        // Act
+        // Arrange and Act
         wrapper = shallowMount(Navigation, {
-            propsData,
+            propsData: defaultPropsData,
             computed: {
                 hasNavigationLinks () {
                     return false;
@@ -203,7 +204,10 @@ describe('Navigation', () => {
                 wrapper = shallowMount(Navigation, {
                     propsData: {
                         ...defaultPropsData,
-                        navLinks: {}
+                        copy: {
+                            ...defaultPropsData.copy,
+                            navLinks: {}
+                        }
                     }
                 });
 
@@ -673,7 +677,10 @@ describe('Navigation', () => {
             wrapper = shallowMount(Navigation, {
                 propsData: {
                     ...defaultPropsData,
-                    [navLink]: true
+                    copy: {
+                        ...defaultPropsData.copy,
+                        [navLink]: true
+                    }
                 }
             });
 

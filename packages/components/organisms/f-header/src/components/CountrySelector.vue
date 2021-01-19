@@ -17,7 +17,7 @@
                     :country-code="currentCountryKey"
                     class="c-countrySelector-flag c-countrySelector-flag--current" />
             </span>
-            <span :class="['c-countrySelector-title',{'is-visuallyHidden': !isBelowMid}]">
+            <span :class="['c-countrySelector-title',{ 'is-visuallyHidden': !isBelowMid }]">
                 {{ selectYourCountryText }}
             </span>
         </a>
@@ -217,6 +217,12 @@ $contrySelector-flag-height : 16px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @include media('<mid') {
+        &.c-nav-list-text {
+            border-bottom: none;
+        }
+    }
 }
 
 .c-countrySelector-country {
