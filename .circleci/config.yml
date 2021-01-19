@@ -150,7 +150,7 @@ jobs:
       - run:
           name: Check for changed packages
           command: |
-            echo 'export CHANGED_PACKAGES=(( $(lerna list --since master | wc -l) > 0 )) && echo "true"' >> $BASH_ENV
+            echo 'export CHANGED_PACKAGES=$(( $(lerna list --since master | wc -l) > 0 )) && echo "true"' >> $BASH_ENV
       - run:
           name: echo changed packages
           command: |
