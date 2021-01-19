@@ -89,6 +89,7 @@ describe('CookieBanner', () => {
                     propsData
                 });
                 wrapper.vm.$cookies.set('je-cookieConsent', cookieValue);
+                wrapper.vm.legacyBanner = false;
                 wrapper.vm.checkCookieBannerCookie();
 
                 // Assert
