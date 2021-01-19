@@ -3,6 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.39.0
+-------------------------------
+*January 18, 2021*
+
+### Changed
+- `getCheckout` store method passes authentication token to the api endpoint.
+
+
+v0.38.0
+-------------------------------
+*January 15, 2021*
+
+### Changed
+- Use the latest version of `f-form-field`.
+
 v0.37.0
 -------------------------------
 *January 14, 2021*
