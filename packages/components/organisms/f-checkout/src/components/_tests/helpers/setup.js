@@ -52,8 +52,8 @@ const defaultActions = {
     getAvailableFulfilment: jest.fn(),
     setAuthToken: jest.fn(),
     createGuestUser: jest.fn(),
-    updateFulfilmentAddress: jest.fn(),
-    updateMobileNumber: jest.fn()
+    updateAddressDetails: jest.fn(),
+    updateCustomerDetails: jest.fn()
 };
 
 const i18n = {
