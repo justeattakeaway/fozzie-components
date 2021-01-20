@@ -24,8 +24,8 @@
     "ci:build": "cross-env-shell \"lerna run $LERNA_ARGS build --since origin/master --include-dependencies --stream\"",
     "ci:lint": "cross-env-shell \"lerna run $LERNA_ARGS lint --since origin/master --stream\"",
     "ci:test": "cross-env-shell \"lerna run $LERNA_ARGS test --since origin/master --stream\"",
-    "ci:test-component:chrome": "cross-env-shell TEST_TYPE=component lerna run test-component:chrome --since origin/master --concurrency 1 --stream",
-    "ci:test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y lerna run test-a11y:chrome --since origin/master --concurrency 1 --stream"
+    "ci:test-component:chrome": "cross-env-shell TEST_TYPE=component lerna run $LERNA_ARGS test-component:chrome --since origin/master --concurrency 1 --stream",
+    "ci:test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y lerna run $LERNA_ARGS test-a11y:chrome --since origin/master --concurrency 1 --stream"
   },
   "resolutions": {
     "webpack": "4.36.0"

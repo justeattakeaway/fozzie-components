@@ -21,7 +21,7 @@ commands:
       - when:
           condition:
             not:
-              equal: [ "master", << pipeline.git.branch >> ]
+              equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
           steps:
             - run: # Install Lerna
                 name: Install Lerna
@@ -193,13 +193,13 @@ jobs:
               - working-directory-{{ .Branch }}-{{ .Revision }}
       - when:
           condition:
-            equal: [ "master", << pipeline.git.branch >> ]
+            equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
           steps:
             - build_all_packages
       - when:
           condition:
             not:
-              equal: [ "master", << pipeline.git.branch >> ]
+              equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
           steps:
             - build_changed_packages
       - run: # Install WebDriverIO Test Dependencies
@@ -229,7 +229,7 @@ jobs:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
       - when:
           condition:
-            equal: [ "master", << pipeline.git.branch >> ]
+            equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
           steps:
             - run: # Lint packages
                 name: Run Lint Tasks on all Packages
@@ -237,7 +237,7 @@ jobs:
       - when:
           condition:
             not:
-              equal: [ "master", << pipeline.git.branch >> ]
+              equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
           steps:
             - run: # Lint packages
                 name: Run Lint Tasks on changed Packages
@@ -257,7 +257,7 @@ jobs:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
       - when:
           condition:
-            equal: [ "master", << pipeline.git.branch >> ]
+            equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
           steps:
             - run: # Run Unit / Integration Tests
                 name: Run Unit / Integration Tests on changed packages
@@ -265,7 +265,7 @@ jobs:
       - when:
           condition:
             not:
-              equal: [ "master", << pipeline.git.branch >> ]
+              equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
           steps:
             - run: # Run Unit / Integration Tests
                 name: Run Unit / Integration Tests on all packages
@@ -291,7 +291,7 @@ jobs:
           command: yarn test:wait-for-server
       - when:
           condition:
-            equal: [ "master", << pipeline.git.branch >> ]
+            equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
           steps:
             - run: # Run Component UI Tests
                 name: Run WebDriverIO Component on changed packages
@@ -299,7 +299,7 @@ jobs:
       - when:
           condition:
             not:
-              equal: [ "master", << pipeline.git.branch >> ]
+              equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
           steps:
             - run: # Run Component UI Tests
                 name: Run WebDriverIO Component on all packages
@@ -327,7 +327,7 @@ jobs:
           command: yarn test:wait-for-server
       - when:
           condition:
-            equal: [ "master", << pipeline.git.branch >> ]
+            equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
           steps:
             - run: # Run Accessibility UI Tests
                 name: Run Accessibility UI Tests on changed packages
@@ -335,7 +335,7 @@ jobs:
       - when:
           condition:
             not:
-              equal: [ "master", << pipeline.git.branch >> ]
+              equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
           steps:
             - run: # Run Accessibility UI Tests
                 name: Run WebDriverIO Component on all packages
