@@ -20,7 +20,7 @@
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y lerna run test-a11y:chrome --concurrency 1 --stream",
     "test:consumer": "lerna run test:consumer",
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
-    "local:tests": "cross-env yarn test && yarn test-component:chrome && yarn test-a11y:chrome",
+    "local:tests": "cross-env yarn test && yarn test-component:chrome && yarn test-a11y:chrome"
   },
   "resolutions": {
     "webpack": "4.36.0"
