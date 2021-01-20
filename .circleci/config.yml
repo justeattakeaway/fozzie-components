@@ -20,7 +20,8 @@ commands:
       - checkout
       - when:
           condition:
-            not: [ "master", << pipeline.git.branch >> ]
+            not:
+              equal: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: # Install Lerna
                 name: Install Lerna
@@ -197,7 +198,8 @@ jobs:
             - build_all_packages
       - when:
           condition:
-            not: [ "master", << pipeline.git.branch >> ]
+            not:
+              equal: [ "master", << pipeline.git.branch >> ]
           steps:
             - build_changed_packages
       - run: # Install WebDriverIO Test Dependencies
@@ -234,7 +236,8 @@ jobs:
                 command: yarn lint
       - when:
           condition:
-            not: [ "master", << pipeline.git.branch >> ]
+            not:
+              equal: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: # Lint packages
                 name: Run Lint Tasks on changed Packages
@@ -261,7 +264,8 @@ jobs:
                 command: yarn test
       - when:
           condition:
-            not: [ "master", << pipeline.git.branch >> ]
+            not:
+              equal: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: # Run Unit / Integration Tests
                 name: Run Unit / Integration Tests on all packages
@@ -294,7 +298,8 @@ jobs:
                 command: yarn test-component:chrome
       - when:
           condition:
-            not: [ "master", << pipeline.git.branch >> ]
+            not:
+              equal: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: # Run Component UI Tests
                 name: Run WebDriverIO Component on all packages
@@ -329,7 +334,8 @@ jobs:
                 command: yarn test-a11y:chrome
       - when:
           condition:
-            not: [ "master", << pipeline.git.branch >> ]
+            not:
+              equal: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: # Run Accessibility UI Tests
                 name: Run WebDriverIO Component on all packages
