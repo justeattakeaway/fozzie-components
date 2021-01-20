@@ -13,3 +13,8 @@ export const TENANT_MAP = {
     'it-IT': 'it',
     'nb-NO': 'no'
 };
+
+export const VALIDATIONS = {
+    address: 'addressValidations',
+    guest: 'guestValidations'
+};

@@ -25,6 +25,15 @@ const messages = {
         postcode: {
             requiredError: 'Please enter your full UK postcode',
             invalidCharError: 'This doesn\'t look like a UK postcode, can you enter it again please?'
+        },
+        firstName: {
+            requiredError: 'Please enter your first name'
+        },
+        lastName: {
+            requiredError: 'Please enter your last name'
+        },
+        email: {
+            requiredError: 'Please enter a valid email address'
         }
     },
 

@@ -146,12 +146,12 @@ export default {
             commit('UPDATE_AUTH', authToken);
         },
 
-        updateFulfilmentAddress ({ commit }, payload) {
+        updateAddressDetails ({ commit }, payload) {
             commit('UPDATE_FULFILMENT_ADDRESS', payload);
         },
 
-        updateMobileNumber ({ commit }, payload) {
-            commit('UPDATE_MOBILE_NUMBER', payload);
+        updateCustomerDetails ({ commit }, payload) {
+            commit('UPDATE_CUSTOMER_DETAILS', payload);
         }
     },
 
@@ -212,8 +212,11 @@ export default {
             };
         },
 
-        UPDATE_MOBILE_NUMBER (state, mobileNumber) {
-            state.customer.mobileNumber = mobileNumber;
+        UPDATE_CUSTOMER_DETAILS (state, customer) {
+            state.customer = {
+                ...state.customer,
+                ...customer
+            };
         }
     }
 };
