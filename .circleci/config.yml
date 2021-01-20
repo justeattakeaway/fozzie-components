@@ -25,10 +25,7 @@ commands:
           steps:
             - run: # Install Lerna
                 name: Install Lerna
-                command: yarn global add lerna danger
-            - run: # Run PR Checks
-                name: Run PR Checks
-                command: npx danger ci
+                command: yarn global add lerna
             # Runs 'npx lerna list --since origin/master'
             # Pipes the output to 'wc' (word count)
             # Returns true if no packages have changed (output of 0)
@@ -162,6 +159,22 @@ executors:
       - image: circleci/node:12.18.4-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
 
 jobs:
+  danger_check:
+    working_directory: ~/project
+    executor: node
+    environment:
+      WORKFLOW_ID: build
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps: # a collection of executable commands
+      - checkout
+      - run: # Install Danger
+          name: Install Lerna
+          command: yarn global add danger
+      - run: # Run PR Checks
+          name: Run PR Checks
+          command: npx danger ci
+
   set_up:
     working_directory: ~/project
     executor: node
@@ -400,6 +413,13 @@ workflows:
   version: 2
   build:
     jobs:
+      - danger_check:
+          context: web-core
+          filters:
+            branches:
+              ignore:
+                - 'gh-pages'
+                - 'master'
       - set_up:
           context: web-core
           filters:
