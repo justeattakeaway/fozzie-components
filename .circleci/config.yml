@@ -226,9 +226,6 @@ jobs:
       - run: # Install WebDriverIO Test Dependencies
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global
-      - run: # Build Storybook
-          name: Build Storybook
-          command: yarn storybook:build
       - save_cache:
           name: Save Working Directory + Bundles Cache
           key: working-directory-dist{{ .Branch }}-{{ .Revision }}
@@ -305,7 +302,7 @@ jobs:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
       - run: # Serve Storybook
           name: Serve Storybook
-          command: yarn storybook:serve-static
+          command: yarn storybook:serve
           background: true
       - run: # Run Storybook healthcheck
           name: Run Storybook healthcheck
@@ -341,7 +338,7 @@ jobs:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
       - run: # Serve Storybook
           name: Serve Storybook
-          command: yarn storybook:serve-static
+          command: yarn storybook:serve
           background: true
       - run: # Run Storybook healthcheck
           name: Run Storybook healthcheck
