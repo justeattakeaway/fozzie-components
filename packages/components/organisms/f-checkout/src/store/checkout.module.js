@@ -5,6 +5,8 @@ export default {
 
     state: () => ({
         id: '',
+        restaurantId: '',
+        menuGroupId: '',
         serviceType: '',
         customer: {
             firstName: '',
@@ -139,6 +141,40 @@ export default {
             commit('UPDATE_AVAILABLE_FULFILMENT_TIMES', data);
         },
 
+        /**
+         * Get the checkout details from the backend and update the state.
+         *
+         * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getBasket: async ({ commit }, {
+            url,
+            tenant,
+            language,
+            timeout
+        }) => {
+            // TODO: deal with exceptions.
+            const config = {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Tenant': tenant,
+                    'Accept-Language': language
+                },
+                timeout
+            };
+
+            const { data } = await axios.get(url, config);
+            const basketDetails = {
+                restaurantId: data.RestaurantId,
+                menuGroupId: data.MenuGroupId,
+                serviceType: data.ServiceType.toLowerCase()
+            };
+
+            debugger;
+            commit('UPDATE_BASKET_DETAILS', basketDetails);
+        },
+
         setAuthToken: ({ commit }, authToken) => {
             commit('UPDATE_AUTH', authToken);
         },
@@ -214,6 +250,12 @@ export default {
                 ...state.customer,
                 ...customer
             };
+        },
+        
+        UPDATE_BASKET_DETAILS (state, { restaurantId, menuGroupId, serviceType }) {
+            state.restaurantId = restaurantId;
+            state.menuGroupId = menuGroupId;
+            state.serviceType = serviceType;
         }
     }
 };

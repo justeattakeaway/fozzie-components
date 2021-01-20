@@ -22,11 +22,13 @@ const deliveryUrl = '/checkout-delivery.json';
 const collectionUrl = '/checkout-collection.json';
 const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
 const createGuestUrl = '/create-guest.json';
+const getBasketUrl = '/get-basket.json';
 
 CheckoutMock.setupCheckoutMethod(deliveryUrl);
 CheckoutMock.setupCheckoutMethod(collectionUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentUrl);
 CheckoutMock.setupCheckoutMethod(createGuestUrl);
+CheckoutMock.setupCheckoutMethod(getBasketUrl);
 CheckoutMock.passThroughAny();
 
 export const CheckoutComponent = () => ({
@@ -44,6 +46,9 @@ export const CheckoutComponent = () => ({
         createGuestUrl: {
             default: text('Create Guest Url', createGuestUrl)
         },
+        getBasketUrl: {
+            default: text('Get Basket Url', getBasketUrl)
+        },
         authToken: {
             default: select('Auth token', ['authToken', null], 'authToken')
         },
@@ -60,11 +65,12 @@ export const CheckoutComponent = () => ({
         ':checkoutUrl="checkoutUrl" ' +
         ':checkout-available-fulfilment-url="checkoutAvailableFulfilmentUrl" ' +
         ':create-guest-url="createGuestUrl" ' +
+        ':get-basket-url="getBasketUrl" ' +
         ':authToken="authToken" ' +
         ':locale="locale" ' +
         ':loginUrl="loginUrl" ' +
         // eslint-disable-next-line no-template-curly-in-string
-        ' :key="`${locale},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl}`" />'
+        ' :key="`${locale},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';
