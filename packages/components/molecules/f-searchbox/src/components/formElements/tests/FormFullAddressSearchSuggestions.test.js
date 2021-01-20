@@ -7,20 +7,31 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 const mockState = {
+    address: '',
     suggestions: [
         {
             description: 'NASA',
             id: 'GB|RM|A|20388007',
-            text: 'AR511AR'
+            text: 'AR511AR',
+            type: 'Postcode'
         },
         {
-            postcode: 'SpaceX'
+            description: 'NASA',
+            id: 'GB|RM|A|20388007',
+            text: 'Somewhere',
+            type: 'Address'
+        },
+        {
+            postcode: 'SpaceX',
+            street: 'Hawthorne'
         }
     ]
 };
 
 const mockActions = {
+    setAddress: jest.fn(),
     getMatchedAreaAddressResults: jest.fn(),
+    getFinalAddressSelectionDetails: jest.fn(),
     setContinueWithDetails: jest.fn()
 };
 
@@ -134,6 +145,66 @@ describe('`FullAddressSuggestions`', () => {
                     expect(event.preventDefault).toHaveBeenCalled();
                 });
 
+                it('should set the `continueWithDetails`', () => {
+                    const { wrapper } = bootstrap();
+                    const event = { preventDefault: jest.fn() };
+                    const index = 0;
+                    const selected = 0;
+                    const spy = jest.spyOn(wrapper.vm, 'setContinueWithDetails');
+
+                    wrapper.vm.getSelectedStreetAddress(event, index, selected);
+
+                    expect(spy).toHaveBeenCalledWith({
+                        postcode: 'AR511AR',
+                        street: 'NASA'
+                    });
+                });
+
+                describe('AND `selectedAddress` contains a `postcode` key', () => {
+                    it('should invoke `setAddress` with the available postcode value', () => {
+                        const { wrapper } = bootstrap();
+                        const event = { preventDefault: jest.fn() };
+                        const index = 0;
+                        const selected = 2;
+                        const spy = jest.spyOn(wrapper.vm, 'setAddress');
+
+                        wrapper.vm.getSelectedStreetAddress(event, index, selected);
+
+                        expect(spy).toHaveBeenCalledWith('SpaceX');
+                    });
+                });
+
+                describe('When type of `Address` is selected', () => {
+                    it('should invoke `getFinalAddressSelectionDetails` so we can `Retrieve` the final address selection step via Loqate', () => {
+                        const { wrapper } = bootstrap();
+                        const event = { preventDefault: jest.fn() };
+                        const index = 0;
+                        const selected = 1;
+                        const spy = jest.spyOn(wrapper.vm, 'getFinalAddressSelectionDetails');
+
+                        wrapper.vm.getSelectedStreetAddress(event, index, selected);
+
+                        expect(spy).toHaveBeenCalledWith('GB|RM|A|20388007');
+                    });
+                });
+
+                describe('When type of `Postcode` is selected', () => {
+                    it('should invoke `getMatchedAreaAddressResults` so we can `Find` the street level address results via Loqate', () => {
+                        const { wrapper } = bootstrap();
+                        const event = { preventDefault: jest.fn() };
+                        const index = 0;
+                        const selected = 0;
+                        const spy = jest.spyOn(wrapper.vm, 'getMatchedAreaAddressResults');
+
+                        wrapper.vm.getSelectedStreetAddress(event, index, selected);
+
+                        expect(spy).toHaveBeenCalledWith({
+                            address: '',
+                            streetLevelAddress: 'GB|RM|A|20388007'
+                        });
+                    });
+                });
+
                 it('should invoke `getMatchedAreaAddressResults` to display further results after the users initial selection', () => {
                     // Arrange
                     const { wrapper } = bootstrap();
@@ -194,7 +265,14 @@ describe('`FullAddressSuggestions`', () => {
                         {
                             description: 'NASA',
                             id: 'GB|RM|A|20388007',
-                            text: 'AR511AR'
+                            text: 'AR511AR',
+                            type: 'Postcode'
+                        },
+                        {
+                            description: 'NASA',
+                            id: 'GB|RM|A|20388007',
+                            text: 'Somewhere',
+                            type: 'Address'
                         }
                     ]);
                 });

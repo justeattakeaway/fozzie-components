@@ -6,7 +6,8 @@
                 { [$style.selected]: selected }
             ]"
             tabindex="0"
-            type="button">
+            type="button"
+            @click="setContinueWithSuggestion">
             <p>{{ copy.notSeeingYourAddress }}</p>
             <p :class="$style['c-continueWithSuggestion-area']">
                 {{ copy.continueWith }} {{ getFormattedSelectedAddress }}
@@ -16,7 +17,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
     props: {
@@ -52,6 +53,16 @@ export default {
                 : address[0].trim();
 
             return `'${this.continueWithSuggestionDetails.postcode}, ${formattedAddress}'`;
+        }
+    },
+
+    methods: {
+        ...mapActions('searchbox', [
+            'setAddress'
+        ]),
+
+        setContinueWithSuggestion () {
+            this.setAddress(this.continueWithSuggestionDetails.postcode);
         }
     }
 };
