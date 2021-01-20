@@ -55,7 +55,8 @@ const defaultPropsData = {
     showOffersLink: false,
     showHelpLink: false,
     userInfoProp: false,
-    headerBackgroundTheme: 'white'
+    headerBackgroundTheme: 'white',
+    showCountrySelector: false
 };
 
 const defaultData = {

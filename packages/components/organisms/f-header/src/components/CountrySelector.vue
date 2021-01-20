@@ -3,6 +3,7 @@
         :class="['c-nav-list-item has-sublist', {
             'open': countrySelectorIsOpen
         }]"
+        data-test-id="countrySelector-toggle"
         v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: closeCountrySelector }"
         @keyup.esc="closeCountrySelector">
         <a
@@ -40,7 +41,8 @@
                     <li
                         v-for="(country, i) in countries"
                         :key="i + '_Country'"
-                        class="c-countrySelector-country">
+                        class="c-countrySelector-country"
+                        :data-test-id="['countrySelector-countryList-' + country.key]">
                         <a
                             :data-trak='`{
                                 "trakEvent": "click",
@@ -98,10 +100,6 @@ export default {
         selectYourCountryText: {
             type: String,
             default: ''
-        },
-        closeNav: {
-            type: Function,
-            default: () => (() => {})
         },
         openNav: {
             type: Function,

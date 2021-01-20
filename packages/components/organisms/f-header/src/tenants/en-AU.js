@@ -49,5 +49,9 @@ export default {
     offers: {
         text: 'For you',
         url: '/offers'
-    }
+    },
+    selectYourCountryText: 'Select your country',
+    currentCountryName: 'Australia',
+    currentCountryKey: 'au',
+    changeCurrentCountry: 'You are on the AU website, click here to change'
 };

@@ -221,8 +221,8 @@
                     :current-country-key="copy.currentCountryKey"
                     :change-country-text="copy.changeCurrentCountry"
                     :select-your-country-text="copy.selectYourCountryText"
-                    :close-nav="closeNav"
                     :open-nav="openNav"
+                    data-test-id="country-selector"
                     v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null" />
             </ul>
         </div>

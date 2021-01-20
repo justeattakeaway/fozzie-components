@@ -56,8 +56,8 @@ export default {
         url: '/account/logout',
         gtm: 'click_logout'
     },
-    offers: {
-        text: '%OFFERS%',
-        url: '/offers'
-    }
+    selectYourCountryText: 'Seleziona il tuo paese',
+    currentCountryName: 'Italia',
+    currentCountryKey: 'it',
+    changeCurrentCountry: 'Sei sul sito Italiano, licca qui per cambiare stato'
 };

@@ -113,7 +113,7 @@ export default {
         },
         showCountrySelector: {
             type: Boolean,
-            default: true
+            default: false
         }
     },
 

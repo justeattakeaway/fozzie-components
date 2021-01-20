@@ -49,5 +49,9 @@ export default {
     offers: {
         text: 'For you',
         url: '/offers'
-    }
+    },
+    selectYourCountryText: 'Select your country',
+    currentCountryName: 'New Zealand',
+    currentCountryKey: 'nz',
+    changeCurrentCountry: 'You are on the NZ website, click here to change'
 };

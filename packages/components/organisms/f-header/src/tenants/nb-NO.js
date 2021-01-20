@@ -56,8 +56,8 @@ export default {
         url: '/account/logout',
         gtm: 'click_logout'
     },
-    offers: {
-        text: '%OFFERS%',
-        url: '/offers'
-    }
+    selectYourCountryText: 'Velg land',
+    currentCountryName: 'Norge',
+    currentCountryKey: 'no',
+    changeCurrentCountry: 'Du er på den norske nettsiden, klikk her for å endre'
 };
