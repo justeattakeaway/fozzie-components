@@ -63,7 +63,7 @@
             </div>
         </div>
         <div v-if="legacyBanner">
-            <div :class="$style['c-cookieWarning']">
+            <div :class="[$style['c-cookieWarning'], { [$style['c-cookieBanner--hidden']]: hideBanner }]">
                 <div :class="$style['c-cookieWarning-inner']">
                     <p>
                         {{ copy.legacyBannerText }}
@@ -76,7 +76,8 @@
                     <button
                         class="c-cookieWarning-btn"
                         data-test-id="cookieBanner-close-button"
-                        aria-label="Close" />
+                        aria-label="Close"
+                        @click="hideLegacyBanner" />
                 </div>
             </div>
         </div>
@@ -163,6 +164,7 @@ export default {
          */
         acceptActions () {
             this.setCookieBannerCookie('full');
+            this.setLegacyCookieBannerCookie();
             this.dataLayerPush('full');
             this.hideBanner = true;
         },
@@ -171,6 +173,7 @@ export default {
          */
         nonAcceptActions () {
             this.setCookieBannerCookie('necessary');
+            this.setLegacyCookieBannerCookie();
             this.dataLayerPush('necessary');
             this.resendEvents();
             this.removeUnnecessaryCookies();
@@ -183,6 +186,12 @@ export default {
             this.$refs.cookieBannerHeadingFocus.focus();
         },
         /**
+         * hide legacy banner
+         */
+        hideLegacyBanner () {
+            this.hideBanner = true;
+        },
+        /**
          * Check if the cookie banner has been shown to this user
          */
         checkLegacyBannerFlag () {
@@ -193,7 +202,8 @@ export default {
          */
         checkCookieBannerCookie () {
             if (this.legacyBanner) {
-                this.hideBanner = this.$cookies.get('je-banner_cookie') === '2';
+                this.hideBanner = this.$cookies.get('je-banner_cookie') === 2;
+                this.setLegacyCookieBannerCookie();
             } else {
                 this.hideBanner = this.$cookies.get('je-cookieConsent') === 'full' || this.$cookies.get('je-cookieConsent') === 'necessary';
             }
