@@ -15,3 +15,9 @@ export const NAVIGATION = {
         link: '[data-test-id="user-info-link"]', 
     }
 } 
+export const URLS = {
+    default : '/iframe.html?id=components-organisms--header-component',
+    offers : '&knob-Show%20offers%20link=true',
+    delivery : '&knob-Show%20delivery%20enquiry=true', 
+    userAccount: '&knob-Show%20login%2Fuser%20info%20link=true'
+} 
