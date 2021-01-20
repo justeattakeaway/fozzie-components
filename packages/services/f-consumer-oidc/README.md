@@ -46,8 +46,6 @@ silentSignIn(OidcClient, optionalSettings, force)
 * `optionalSettings` can override the settings that initialise the `UserManager` object from the [`oidc-client`](https://github.com/IdentityModel/oidc-client-js/wiki#usermanager) library.
 * `force` is an optional flag that can be provided to force the signin process to begin, regardless of the current state (defaults to false).
 
-For more detail see flow diagram at bottom of this document.
-
 ### 2. `userManagerFactory`
 
 This function returns a `UserManager` object from the [`oidc-client`](https://github.com/IdentityModel/oidc-client-js/wiki#usermanager) library,
