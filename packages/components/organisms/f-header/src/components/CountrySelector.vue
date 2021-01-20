@@ -6,12 +6,12 @@
         data-test-id="countrySelector-toggle"
         v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: closeCountrySelector }"
         @keyup.esc="closeCountrySelector">
-        <a
+        <f-button
+            button-type="icon"
             class="c-nav-list-text c-country-selector-list-item"
-            href="/"
             :aria-expanded="!isBelowMid && countrySelectorIsOpen ? 'true' : 'false'"
             :aria-haspopup="isBelowMid ? false : true"
-            @click.prevent="onCountrySelectorToggle"
+            @click.native="onCountrySelectorToggle"
             v-on="isBelowMid ? { focus: openNav } : null">
             <span class="c-countrySelector-currentFlag-wrapper">
                 <flag-icon
@@ -21,7 +21,7 @@
             <span :class="['c-countrySelector-title',{ 'is-visuallyHidden': !isBelowMid }]">
                 {{ selectYourCountryText }}
             </span>
-        </a>
+        </f-button>
 
         <div :class="['c-nav-panel', { 'is-visible': countrySelectorIsOpen }]">
             <div class="c-nav-popoverList c-nav-popoverList--countrySelector">
@@ -192,6 +192,10 @@ $contrySelector-flag-height : 16px;
     height: $contrySelector-flag-height;
     width: $contrySelector-flag-width;
 
+    @include media('<mid') {
+        margin-right: spacing();
+    }
+
     .c-header--highlightBg &,
     .c-header--transparent & {
         @include media('>=mid') {
@@ -219,6 +223,9 @@ $contrySelector-flag-height : 16px;
     @include media('<mid') {
         &.c-nav-list-text {
             border-bottom: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 }
