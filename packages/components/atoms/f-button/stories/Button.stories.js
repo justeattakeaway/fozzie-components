@@ -1,5 +1,5 @@
 import {
-    withKnobs, select, boolean
+    withKnobs, select, boolean, text
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import FButton from '../src/components/Button.vue';
@@ -20,9 +20,12 @@ export const ButtonComponent = () => ({
         },
         isFullWidth: {
             default: boolean('isFullWidth', false)
+        },
+        href: {
+            default: text('href', '')
         }
     },
-    template: '<f-button :buttonType="buttonType" :buttonSize="buttonSize" :isFullWidth="isFullWidth">Default Button Text</f-button>'
+    template: '<f-button :buttonType="buttonType" :buttonSize="buttonSize" :isFullWidth="isFullWidth" :href="href">Default Button Text</f-button>'
 });
 
 ButtonComponent.storyName = 'f-button';
