@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import Action from './Action';
-import Link from './Link';
+import ActionButton from './Action.vue';
+import LinkButton from './Link.vue';
 
 export default {
     name: 'FButton',
-    components: {Action, Link},
+    components: { ActionButton, LinkButton },
     props: {
         buttonType: {
             type: String,
@@ -54,7 +54,7 @@ export default {
          * Renders `Link` component if `href` prop is not an empty string
          */
         componentType () {
-            return this.href === '' ? 'action' : 'link'
+            return this.href === '' ? 'action-button' : 'link-button';
         }
     }
 };

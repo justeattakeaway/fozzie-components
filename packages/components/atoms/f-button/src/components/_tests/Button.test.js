@@ -13,7 +13,7 @@ describe('Button', () => {
         describe('buttonSizeClassname :: ', () => {
             it('should capitalise to first letter of `buttonSize` prop :: ', () => {
                 // Arrange
-                const propsData = {buttonSize: 'medium'};
+                const propsData = { buttonSize: 'medium' };
 
                 // Act
                 const wrapper = shallowMount(FButton, { propsData });
@@ -24,7 +24,7 @@ describe('Button', () => {
 
             it('should capitalise to first two letters of `buttonSize` prop if `xsmall` :: ', () => {
                 // Arrange
-                const propsData = {buttonSize: 'xsmall'};
+                const propsData = { buttonSize: 'xsmall' };
 
                 // Act
                 const wrapper = shallowMount(FButton, { propsData });
@@ -36,14 +36,14 @@ describe('Button', () => {
 
         describe('componentType :: ', () => {
             describe('when `href` prop is an empty string :: :: ', () => {
-                const propsData = {href: ''};
+                const propsData = { href: '' };
 
                 it('should return `action`', () => {
                     // Act
                     const wrapper = shallowMount(FButton, { propsData });
 
                     // Assert
-                    expect(wrapper.vm.componentType).toEqual('action');
+                    expect(wrapper.vm.componentType).toEqual('action-button');
                 });
 
                 it('should render `Action` component', () => {
@@ -51,19 +51,19 @@ describe('Button', () => {
                     const wrapper = mount(FButton, { propsData });
 
                     // Assert
-                    expect(wrapper.find('[data-test-id="action-component"]').exists()).toBeTruthy();
+                    expect(wrapper.find('[data-test-id="action-button-component"]').exists()).toBeTruthy();
                 });
             });
 
             describe('when `href` prop is not an empty string :: :: ', () => {
-                const propsData = {href: 'http://www.just-eat.co.uk'};
+                const propsData = { href: 'http://www.just-eat.co.uk' };
 
                 it('should return `link`', () => {
                     // Act
                     const wrapper = shallowMount(FButton, { propsData });
 
                     // Assert
-                    expect(wrapper.vm.componentType).toEqual('link');
+                    expect(wrapper.vm.componentType).toEqual('link-button');
                 });
 
                 it('should render `Link` component', () => {
@@ -71,7 +71,7 @@ describe('Button', () => {
                     const wrapper = mount(FButton, { propsData });
 
                     // Assert
-                    expect(wrapper.find('[data-test-id="link-component"]').exists()).toBeTruthy();
+                    expect(wrapper.find('[data-test-id="link-button-component"]').exists()).toBeTruthy();
                 });
             });
         });
