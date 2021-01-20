@@ -29,10 +29,18 @@ commands:
             - run: # Run PR Checks
                 name: Run PR Checks
                 command: yarn danger ci
-                - run: |
-                  if echo $( (( $(npx lerna list --since origin/master | wc -l) == 0 )) && echo "true" || echo "false" ); then
-                      circleci-agent step halt
-                  fi
+              # Runs 'npx lerna list --since origin/master'
+              # Pipes the output to 'wc' (word count)
+              # Returns true if no packages have changed (output of 0)
+              # Returns false if packages have changed (output > 0)
+              # Halts the job if true 
+              
+              # Note: Ideally, this would be in an env var
+              # but they can't be shared across Circle Jobs so we run this command before every job.
+            - run: |
+              if echo $( (( $(npx lerna list --since origin/master | wc -l) == 0 )) && echo "true" || echo "false" ); then
+                  circleci-agent step halt
+              fi
 
   install_node_dependencies:
     description: Installs the node dependencies
