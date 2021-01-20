@@ -30,7 +30,7 @@
                     name="mobile-number"
                     :label-text="$t('labels.mobileNumber')"
                     :has-error="!isMobileNumberValid"
-                    @input="updateMobileNumber">
+                    @input="updateCustomerDetails({ ['mobileNumber']: $event })">
                     <template #error>
                         <error-message
                             v-if="!isMobileNumberValid"
@@ -65,7 +65,7 @@
 
 <script>
 import { validationMixin } from 'vuelidate';
-import { required } from 'vuelidate/lib/validators';
+import { required, email } from 'vuelidate/lib/validators';
 
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
@@ -89,11 +89,12 @@ import FormSelector from './Selector.vue';
 import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
 
-import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP } from '../constants';
+import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants';
 import tenantConfigs from '../tenants';
 import EventNames from '../event-names';
 
 import checkoutModule from '../store/checkout.module';
+import checkoutValidationsMixin from '../mixins/validations.mixin';
 
 export default {
     name: 'VueCheckout',
@@ -112,7 +113,7 @@ export default {
         UserNote
     },
 
-    mixins: [validationMixin, VueGlobalisationMixin],
+    mixins: [validationMixin, VueGlobalisationMixin, checkoutValidationsMixin],
 
     props: {
         checkoutUrl: {
@@ -173,9 +174,14 @@ export default {
     provide () {
         const $v = {};
 
-        Object.defineProperty($v, 'addressValidations', {
+        Object.defineProperty($v, VALIDATIONS.address, {
             enumerable: true,
             get: () => this.$v.fulfilment.address
+        });
+
+        Object.defineProperty($v, VALIDATIONS.guest, {
+            enumerable: true,
+            get: () => this.$v.customer
         });
 
         return { $v };
@@ -247,7 +253,7 @@ export default {
             'getCheckout',
             'postCheckout',
             'setAuthToken',
-            'updateMobileNumber'
+            'updateCustomerDetails'
         ]),
 
         /**
@@ -415,6 +421,22 @@ export default {
                 }
             }
         };
+
+        if (!this.isLoggedIn) {
+            deliveryDetails.customer = {
+                ...deliveryDetails.customer,
+                firstName: {
+                    required
+                },
+                lastName: {
+                    required
+                },
+                email: {
+                    required,
+                    email
+                }
+            };
+        }
 
         if (this.isCheckoutMethodDelivery) {
             deliveryDetails.fulfilment = {
