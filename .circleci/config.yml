@@ -14,34 +14,21 @@ commands:
           fingerprints:
             - "0e:50:82:ad:81:17:a5:31:04:13:fd:6e:c7:72:c9:18"
 
-  # check_package_changes:
-  #   description: Check if packages have been changed.
-  #   steps:
-  #     - run:
-  #         name: Check for changed packages
-  #         command: |
-  #           echo CHANGED_PACKAGES=$( (( $(npx lerna list --since origin/master | wc -l) > 0 )) && echo "true" || echo "false" ) >> $CHANGED_PACKAGES
-  #     - save_cache:
-  #         name: Save result of package change check
-  #         key: changedPackages-{{ .Branch }}-{{ .Revision }}
-  #         paths:
-  #           - changedPackages
-
   halt_if_no_package_changes:
     description: Stops the build if no packages have been changed.
     steps:
-      # - restore_cache:
-      #     name: Restore Package Change Cache
-      #     keys:
-      #         - changedPackages-{{ .Branch }}-{{ .Revision }}
       - checkout
-      - run: # Install Lerna
-          name: Install Lerna
-          command: yarn global add lerna
-      - run: |
-            if echo $( (( $(npx lerna list --since origin/master | wc -l) == 0 )) && echo "true" || echo "false" ); then
-                circleci-agent step halt
-            fi
+      - when:
+          condition:
+            not: [ "master", << pipeline.git.branch >> ]
+          steps:
+            - run: # Install Lerna
+                name: Install Lerna
+                command: yarn global add lerna
+            - run: |
+                  if echo $( (( $(npx lerna list --since origin/master | wc -l) == 0 )) && echo "true" || echo "false" ); then
+                      circleci-agent step halt
+                  fi
 
   install_node_dependencies:
     description: Installs the node dependencies
@@ -163,21 +150,6 @@ executors:
       - image: circleci/node:12.18.4-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
 
 jobs:
-
-  get_changed_packages:
-    working_directory: ~/project
-    executor: node
-    environment:
-      WORKFLOW_ID: build
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
-    steps: # a collection of executable commands
-      - checkout
-      - run: # Install Lerna
-          name: Install Lerna
-          command: yarn global add lerna
-      - check_package_changes
-
   set_up:
     working_directory: ~/project
     executor: node
@@ -218,7 +190,16 @@ jobs:
           name: Restore Working Directory Cache
           keys:
               - working-directory-{{ .Branch }}-{{ .Revision }}
-      - build_changed_packages
+      - when:
+          condition:
+            equal: [ "master", << pipeline.git.branch >> ]
+          steps:
+            - build_all_packages
+      - when:
+          condition:
+            not: [ "master", << pipeline.git.branch >> ]
+          steps:
+            - build_changed_packages
       - run: # Install WebDriverIO Test Dependencies
           name: Install Component Test Dependencies
           command: yarn global add @vue/cli @vue/cli-service-global
@@ -244,9 +225,20 @@ jobs:
           name: Restore Working Directory + Bundles Cache
           keys:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
-      - run: # Lint packages
-          name: Run Lint Tasks on Packages
-          command: yarn ci:lint
+      - when:
+          condition:
+            equal: [ "master", << pipeline.git.branch >> ]
+          steps:
+            - run: # Lint packages
+                name: Run Lint Tasks on all Packages
+                command: yarn lint
+      - when:
+          condition:
+            not: [ "master", << pipeline.git.branch >> ]
+          steps:
+            - run: # Lint packages
+                name: Run Lint Tasks on changed Packages
+                command: yarn ci:lint
     
   unit_tests:
     executor: node
@@ -260,9 +252,20 @@ jobs:
           name: Restore Working Directory + Bundles Cache
           keys:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
-      - run: # Run Tests
-          name: Run Unit / Integration Tests
-          command: yarn ci:test
+      - when:
+          condition:
+            equal: [ "master", << pipeline.git.branch >> ]
+          steps:
+            - run: # Run Unit / Integration Tests
+                name: Run Unit / Integration Tests on changed packages
+                command: yarn test
+      - when:
+          condition:
+            not: [ "master", << pipeline.git.branch >> ]
+          steps:
+            - run: # Run Unit / Integration Tests
+                name: Run Unit / Integration Tests on all packages
+                command: yarn ci:test
 
   component_tests:
     executor: node
@@ -282,9 +285,20 @@ jobs:
       - run: # Run Storybook healthcheck
           name: Run Storybook healthcheck
           command: yarn test:wait-for-server
-      - run: # Run Component UI Tests
-          name: Run WebDriverIO Component
-          command: yarn ci:test-component:chrome
+      - when:
+          condition:
+            equal: [ "master", << pipeline.git.branch >> ]
+          steps:
+            - run: # Run Component UI Tests
+                name: Run WebDriverIO Component on changed packages
+                command: yarn test-component:chrome
+      - when:
+          condition:
+            not: [ "master", << pipeline.git.branch >> ]
+          steps:
+            - run: # Run Component UI Tests
+                name: Run WebDriverIO Component on all packages
+                command: yarn ci:test-component:chrome
       - store_artifacts:
           path: _results_/*.mp4
 
@@ -306,9 +320,20 @@ jobs:
       - run: # Run Storybook healthcheck
           name: Run Storybook healthcheck
           command: yarn test:wait-for-server
-      - run: # Run Accessibility UI Tests
-          name: Run WebDriverIO Accessibility Tests
-          command: yarn ci:test-a11y:chrome
+      - when:
+          condition:
+            equal: [ "master", << pipeline.git.branch >> ]
+          steps:
+            - run: # Run Accessibility UI Tests
+                name: Run Accessibility UI Tests on changed packages
+                command: yarn test-a11y:chrome
+      - when:
+          condition:
+            not: [ "master", << pipeline.git.branch >> ]
+          steps:
+            - run: # Run Accessibility UI Tests
+                name: Run WebDriverIO Component on all packages
+                command: yarn ci:test-a11y:chrome
       - store_artifacts:
           path: axe-violations/
 
@@ -361,17 +386,8 @@ workflows:
   version: 2
   build:
     jobs:
-      # - get_changed_packages:
-      #     context: web-core
-      #     filters:
-      #       branches:
-      #         ignore:
-      #           - 'gh-pages'
-      #           - 'master'
       - set_up:
           context: web-core
-          # requires:
-          #   - get_changed_packages
           filters:
             branches:
               ignore:
