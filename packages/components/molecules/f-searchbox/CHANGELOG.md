@@ -9,6 +9,7 @@ v4.0.0-beta.19
 
 ### Changed
 - `Address` so it comes from state instead of config.
+- `created` hook to `beforeCreate` to resolve Vuex module registration issues with v-model.
 
 ### Removed
 - `Address` reference from tenant config.
