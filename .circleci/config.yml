@@ -229,7 +229,7 @@ jobs:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
       - when:
           condition:
-            equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
+            equal: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: # Lint packages
                 name: Run Lint Tasks on all Packages
@@ -237,7 +237,7 @@ jobs:
       - when:
           condition:
             not:
-              equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
+              equal: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: # Lint packages
                 name: Run Lint Tasks on changed Packages
@@ -257,18 +257,18 @@ jobs:
               - working-directory-dist{{ .Branch }}-{{ .Revision }}
       - when:
           condition:
-            equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
+            equal: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: # Run Unit / Integration Tests
-                name: Run Unit / Integration Tests on changed packages
+                name: Run Unit / Integration Tests on all packages
                 command: yarn test
       - when:
           condition:
             not:
-              equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
+              equal: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: # Run Unit / Integration Tests
-                name: Run Unit / Integration Tests on all packages
+                name: Run Unit / Integration Tests on changed packages
                 command: yarn ci:test
 
   component_tests:
@@ -291,7 +291,7 @@ jobs:
           command: yarn test:wait-for-server
       - when:
           condition:
-            equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
+            equal: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: # Run Component UI Tests
                 name: Run WebDriverIO Component on changed packages
@@ -299,7 +299,7 @@ jobs:
       - when:
           condition:
             not:
-              equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
+              equal: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: # Run Component UI Tests
                 name: Run WebDriverIO Component on all packages
@@ -327,18 +327,18 @@ jobs:
           command: yarn test:wait-for-server
       - when:
           condition:
-            equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
+            equal: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: # Run Accessibility UI Tests
-                name: Run Accessibility UI Tests on changed packages
+                name: Run Accessibility UI Tests on all packages
                 command: yarn test-a11y:chrome
       - when:
           condition:
             not:
-              equal: [ "fix-circleci-master", << pipeline.git.branch >> ]
+              equal: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: # Run Accessibility UI Tests
-                name: Run WebDriverIO Component on all packages
+                name: Run WebDriverIO Component on changed packages
                 command: yarn ci:test-a11y:chrome
       - store_artifacts:
           path: axe-violations/
