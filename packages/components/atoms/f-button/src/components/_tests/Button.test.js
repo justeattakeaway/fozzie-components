@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import FButton from '../Button.vue';
 
 describe('Button', () => {
@@ -48,30 +48,30 @@ describe('Button', () => {
 
                 it('should render `Action` component', () => {
                     // Act
-                    const wrapper = shallowMount(FButton, { propsData });
+                    const wrapper = mount(FButton, { propsData });
 
                     // Assert
-                    expect(wrapper.find('action-stub').exists()).toBeTruthy();
+                    expect(wrapper.find('[data-test-id="action-component"]').exists()).toBeTruthy();
                 });
             });
 
             describe('when `href` prop is not an empty string :: :: ', () => {
-                const propsData = {href: 'http://www.google.com'};
+                const propsData = {href: 'http://www.just-eat.co.uk'};
 
-                it('should return `navigation`', () => {
+                it('should return `link`', () => {
                     // Act
                     const wrapper = shallowMount(FButton, { propsData });
 
                     // Assert
-                    expect(wrapper.vm.componentType).toEqual('navigation');
+                    expect(wrapper.vm.componentType).toEqual('link');
                 });
 
-                it('should render `Navigation` component', () => {
+                it('should render `Link` component', () => {
                     // Act
-                    const wrapper = shallowMount(FButton, { propsData });
+                    const wrapper = mount(FButton, { propsData });
 
                     // Assert
-                    expect(wrapper.find('navigation-stub').exists()).toBeTruthy();
+                    expect(wrapper.find('[data-test-id="link-component"]').exists()).toBeTruthy();
                 });
             });
         });

@@ -8,19 +8,19 @@
             (isFullWidth ? $style['o-btn--fullWidth'] : '')
         ]"
         :attributes="$attrs"
-        :href="href"
-        data-test-id='button-component'>
+        :data-test-id="`${componentType}-component`"
+        :href="href">
         <slot />
     </component>
 </template>
 
 <script>
 import Action from './Action';
-import Navigation from './Navigation';
+import Link from './Link';
 
 export default {
     name: 'FButton',
-    components: {Action, Navigation},
+    components: {Action, Link},
     props: {
         buttonType: {
             type: String,
@@ -51,10 +51,10 @@ export default {
         },
         /**
          * Renders `Action` component if `href` prop is an empty string
-         * Renders `Navigation` component if `href` prop is not an empty string
+         * Renders `Link` component if `href` prop is not an empty string
          */
         componentType () {
-            return this.href === '' ? 'action' : 'navigation'
+            return this.href === '' ? 'action' : 'link'
         }
     }
 };
