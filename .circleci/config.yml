@@ -28,7 +28,7 @@ commands:
                 command: yarn global add lerna danger
             - run: # Run PR Checks
                 name: Run PR Checks
-                command: yarn danger ci
+                command: npx danger ci
             # Runs 'npx lerna list --since origin/master'
             # Pipes the output to 'wc' (word count)
             # Returns true if no packages have changed (output of 0)
