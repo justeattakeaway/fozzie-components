@@ -20,7 +20,7 @@
             <navigation
                 :copy="copy"
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
-                :show-offers-link="showOffersLink"
+                :show-offers-link="showOffersLinkWithContent"
                 :show-help-link="showHelpLink"
                 :error-log="errorLog"
                 :user-info-prop="userInfoProp"
@@ -143,6 +143,9 @@ export default {
 
         headerBackgroundClass () {
             return this.headerBackgroundTheme === 'highlight' ? 'c-header--highlightBg' : '';
+        },
+        showOffersLinkWithContent () {
+            return this.copy.offers && this.showOffersLink;
         }
     },
 
