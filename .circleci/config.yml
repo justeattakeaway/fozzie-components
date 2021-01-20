@@ -392,7 +392,6 @@ workflows:
             branches:
               ignore:
                 - 'gh-pages'
-                - 'master'
       - build:
           context: web-core
           requires:
@@ -401,7 +400,6 @@ workflows:
             branches:
               ignore:
                 - 'gh-pages'
-                - 'master'
       - linting:
           context: web-core
           requires:
@@ -409,8 +407,7 @@ workflows:
           filters:
             branches:
               ignore:
-                - 'gh-pages'
-                - 'master'  
+                - 'gh-pages' 
       - bundlewatch:
           context: web-core
           requires:
@@ -419,7 +416,6 @@ workflows:
             branches:
               ignore:
                 - 'gh-pages'
-                - 'master'
       - unit_tests:
           context: web-core
           requires:
@@ -428,7 +424,6 @@ workflows:
             branches:
               ignore:
                 - 'gh-pages'
-                - 'master'
       - component_tests:
           context: web-core
           requires:
@@ -437,7 +432,6 @@ workflows:
             branches:
               ignore:
                 - 'gh-pages'
-                - 'master'
       - accessibility_tests:
           context: web-core
           requires:
@@ -446,7 +440,6 @@ workflows:
             branches:
               ignore:
                 - 'gh-pages'
-                - 'master'
       - slack_reporting:
           context: web-core
           requires:
@@ -459,7 +452,6 @@ workflows:
             branches:
               ignore:
                 - 'gh-pages'
-                - 'master'
 
   deploy-storybook:
     jobs:
