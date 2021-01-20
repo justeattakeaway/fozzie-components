@@ -47,20 +47,21 @@ export const HeaderComponent = () => ({
         },
         showCountrySelector: {
             default: boolean('Show country selector', true)
-        },
+        }
     },
     parameters: {
         notes: 'some documentation here'
     },
-    template: `<vue-header
-                    :userInfoProp="userInfoProp"
-                    :showOffersLink="showOffersLink"
-                    :showHelpLink="showHelpLink"
-                    :locale="locale"
-                    :headerBackgroundTheme="headerBackgroundTheme"
-                    :showDeliveryEnquiry="showDeliveryEnquiry"
-                    :showLoginInfo="showLoginInfo"
-                    :showCountrySelector="showCountrySelector" />`
+    template: `
+        <vue-header
+            :userInfoProp="userInfoProp"
+            :showOffersLink="showOffersLink"
+            :showHelpLink="showHelpLink"
+            :locale="locale"
+            :headerBackgroundTheme="headerBackgroundTheme"
+            :showDeliveryEnquiry="showDeliveryEnquiry"
+            :showLoginInfo="showLoginInfo"
+            :showCountrySelector="showCountrySelector" />`
 });
 
 HeaderComponent.storyName = 'f-header';

@@ -222,6 +222,7 @@
                     :change-country-text="copy.changeCurrentCountry"
                     :select-your-country-text="copy.selectYourCountryText"
                     :open-nav="openNav"
+                    :close-nav="closeNav"
                     data-test-id="country-selector"
                     v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null" />
             </ul>

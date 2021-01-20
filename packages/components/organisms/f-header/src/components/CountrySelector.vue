@@ -11,14 +11,15 @@
             class="c-nav-list-text c-country-selector-list-item"
             :aria-expanded="!isBelowMid && countrySelectorIsOpen ? 'true' : 'false'"
             :aria-haspopup="isBelowMid ? false : true"
+            :aria-label="changeCountryText"
             @click.native="onCountrySelectorToggle"
-            v-on="isBelowMid ? { focus: openNav } : null">
+            v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
             <span class="c-countrySelector-currentFlag-wrapper">
                 <flag-icon
                     :country-code="currentCountryKey"
                     class="c-countrySelector-flag c-countrySelector-flag--current" />
             </span>
-            <span :class="['c-countrySelector-title',{ 'is-visuallyHidden': !isBelowMid }]">
+            <span class='c-countrySelector-title'>
                 {{ selectYourCountryText }}
             </span>
         </f-button>
@@ -30,6 +31,7 @@
                         button-type="icon"
                         button-size="xsmall"
                         class="c-nav-popoverList-header-button"
+                        aria-label="Go back to main menu"
                         @click.native="closeCountrySelector">
                         <arrow-icon class="c-nav-popoverList-go-back-icon" />
                     </f-button>
@@ -37,7 +39,7 @@
                     <h3>{{ selectYourCountryText }}</h3>
                 </header>
 
-                <ul :aria-label="changeCountryText">
+                <ul class="c-country-selector-list">
                     <li
                         v-for="(country, i) in countries"
                         :key="i + '_Country'"
@@ -87,11 +89,11 @@ export default {
     props: {
         isBelowMid: {
             type: Boolean,
-            defauld: false
+            default: false
         },
         currentCountryKey: {
             type: String,
-            default: ''
+            required: true
         },
         changeCountryText: {
             type: String,
@@ -102,6 +104,10 @@ export default {
             default: ''
         },
         openNav: {
+            type: Function,
+            default: () => (() => {})
+        },
+        closeNav: {
             type: Function,
             default: () => (() => {})
         }
@@ -211,28 +217,37 @@ $contrySelector-flag-height : 16px;
 }
 
 .c-countrySelector-title {
-    font-size: 16px;
+    width: 0;
+    overflow: hidden;
+    @include font-size(heading-s, true, narrow);
+
+    @include media('<mid') {
+        width: auto;
+    }
+}
+
+.c-country-selector-list {
+    margin: 0;
+
+    & > li:before {
+        display: none;
+    }
 }
 
 .c-country-selector-list-item {
-    border-bottom: none;
     display: flex;
     align-items: center;
     justify-content: center;
+}
 
-    @include media('<mid') {
-        &.c-nav-list-text {
-            border-bottom: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    }
+.c-nav-list-item .c-country-selector-list-item {
+    border-bottom: none;
 }
 
 .c-countrySelector-country {
     padding: spacing(x2);
     white-space: nowrap;
+    margin-bottom: 0;
 
     &:hover {
         background: $countrySelector-text-hover;
@@ -242,8 +257,8 @@ $contrySelector-flag-height : 16px;
 .c-countrySelector-link {
     text-decoration: none;
     color: $contrySelector-text-color;
-    font-size: 16px;
-    padding-bottom: 24px;
+    @include font-size(body-l);
+    padding-bottom: spacing(x3);
 }
 
 .c-nav-popoverList.c-nav-popoverList--countrySelector {
@@ -265,7 +280,7 @@ $contrySelector-flag-height : 16px;
 
         // tooltip arrow
         &:before {
-            right: 4%;
+            right: 4.5%;
         }
     }
 }
