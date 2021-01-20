@@ -169,7 +169,7 @@ jobs:
     steps: # a collection of executable commands
       - checkout
       - run: # Install Danger
-          name: Install Lerna
+          name: Install Danger
           command: yarn global add danger
       - run: # Run PR Checks
           name: Run PR Checks
