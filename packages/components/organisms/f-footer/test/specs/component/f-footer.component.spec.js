@@ -1,9 +1,11 @@
 import FooterComponent from '../../../test-utils/component-objects/f-footer.component';
+const path = 'iframe.html?id=components-organisms--' // storybook url for all components - could move to config.
+const locale = '&knob-Locale=en-GB'
+const links = '&knob-Show%20courier%20links=true'
 
 describe('f-footer component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-organisms--footer-component');
-        browser.switchToFrame(0);
+        browser.url(`${path}footer-component${locale}`);
         FooterComponent.waitForFooter();
     });
 
@@ -27,7 +29,6 @@ describe('f-footer component tests', () => {
 
         // Act
         browser.back();
-        browser.switchToFrame(0);
         FooterComponent.waitForFooter();
         FooterComponent.clickAndroidIcon();
 
@@ -51,7 +52,6 @@ describe('f-footer component tests', () => {
 
         // Act
         browser.back();
-        browser.switchToFrame(0);
         FooterComponent.waitForFooter();
         FooterComponent.clickTwitterIcon();
 
@@ -60,11 +60,23 @@ describe('f-footer component tests', () => {
 
         // Act
         browser.back();
-        browser.switchToFrame(0);
         FooterComponent.waitForFooter();
         FooterComponent.clickYoutubeIcon();
 
         // Assert
         expect(browser.getUrl()).toContain('https://www.youtube.com');
+    });
+
+    it('Should not show courier links on en-GB locale if courier links is set to false', () => {
+        // Assert
+        expect(FooterComponent.isCourierLinksDisplayed()).toBe(false);
+    });
+
+    it('Should not show courier links on en-GB locale if courier links is set to true', () => {
+        // Act
+        browser.url(`${path}footer-component${locale}${links}`);
+
+        // Assert
+        expect(FooterComponent.isCourierLinksDisplayed()).toBe(false);
     });
 });

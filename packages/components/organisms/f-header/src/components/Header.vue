@@ -99,7 +99,7 @@ export default {
 
         showOffersLink: {
             type: Boolean,
-            default: true
+            default: false
         },
 
         showSkipLink: {

@@ -3,6 +3,35 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.40.0
+-------------------------------
+*January 20, 2021*
+
+### Added
+- `validations` mixin.
+- `Guest` component validations.
+- `VALIDATIONS` constant.
+
+### Changed
+- `updateAddressDetails` and `updateCustomerDetails` store actions.
+
+
+v0.39.0
+-------------------------------
+*January 18, 2021*
+
+### Changed
+- `getCheckout` store method passes authentication token to the api endpoint.
+
+
+v0.38.0
+-------------------------------
+*January 15, 2021*
+
+### Changed
+- Use the latest version of `f-form-field`.
+
+
 v0.37.0
 -------------------------------
 *January 14, 2021*
@@ -16,6 +45,14 @@ v0.37.0
 - `Checkout` card width.
 - `Checkout` title and login link into `Header` component.
 - `userNote` label.
+
+
+Latest (roll into next release)
+-------------------------------
+*January 13, 2021*
+
+### Added
+- Test to confirm switch user link is displayed.
 
 
 v0.36.0

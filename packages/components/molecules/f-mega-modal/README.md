@@ -1,4 +1,3 @@
-
 <div align="center">
   <h1>f-mega-modal</h1>
 
@@ -15,9 +14,9 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-mega-modal/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-mega-modal?targetFile=package.json)
 
 
-## Usage
+# Usage
 
-### Installation
+## Installation
 
 This package can be installed using npm or yarn:
 
@@ -142,7 +141,7 @@ In addition to this, the modal exposes some classes which you can target in your
 
 You can add event listeners for these like so
 
-```js
+```vue
 <template>
   <mega-modal
     @open="onModalOpen"
@@ -179,7 +178,7 @@ $ yarn
 Change directory to the `f-mega-modal` package:
 
 ```sh
-$ cd packages/f-mega-modal
+$ cd packages/components/molecules/f-mega-modal
 ```
 
 ### Running storybook
@@ -188,13 +187,9 @@ Storybook can be used to develop new and existing components.
 
 To start storybook:
 
-> Please ensure you are in the f-mega-modal directory as outlined in the above instructions.
+From the **root** directory run:
 
 ```sh
-# cd to the storybook package
-$ cd ../storybook
-
-# Run storybook
 $ yarn storybook:serve
 ```
 

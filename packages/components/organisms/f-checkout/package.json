@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "0.37.0",
+  "version": "0.40.0",
   "main": "dist/f-checkout.umd.min.js",
   "files": [
     "dist",
@@ -34,18 +34,9 @@
     "lint:style": "vue-cli-service lint:style",
     "report": "cd ../.. && yarn report",
     "test": "vue-cli-service test:unit",
-    "storybook:serve-webdriver": "lerna run storybook:serve-static --stream",
     "test:coverage": "yarn test --coverage",
-    "test-component:chrome": "run-p --race storybook:serve-webdriver webdriver:delay:chrome",
-    "test:wait-for-server": "node ../../../../test/infrastructure/healthcheck.js",
-    "webdriver:delay:chrome": "yarn test:wait-for-server && yarn webdriver:start:chrome",
-    "webdriver:start:chrome": "wdio ../../../../wdio.conf.js"
-  },
-  "scriptsInfo": {
-    "test-component:chrome": "Runs the functional test suite against Chrome.",
-    "test:wait-for-server": "Waits for Storybook to be served.",
-    "webdriver:delay:chrome": "Waits for Storybook to start before running the Chrome webdriver to prevent a race condition. Not for direct use.",
-    "webdriver:start:chrome": "Runs the Chrome webdriver. Not for direct use."
+    "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
+    "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -65,7 +56,7 @@
     "@justeat/f-button": "0.4.1",
     "@justeat/f-card": "0.8.0",
     "@justeat/f-error-message": "0.3.1",
-    "@justeat/f-form-field": "1.6.1",
+    "@justeat/f-form-field": "1.7.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",

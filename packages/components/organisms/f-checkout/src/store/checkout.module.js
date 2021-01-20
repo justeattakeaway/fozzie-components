@@ -43,13 +43,18 @@ export default {
          * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getCheckout: async ({ commit }, { url, tenant, timeout }) => {
+        getCheckout: async ({ commit, state }, { url, tenant, timeout }) => {
+            const authHeader = state.authToken && `Bearer ${state.authToken}`;
+
             // TODO: deal with exceptions.
             const config = {
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept-Tenant': tenant
+                    'Accept-Tenant': tenant,
+                    ...(state.isLoggedIn && {
+                        Authorization: authHeader
+                    })
                 },
                 timeout
             };
@@ -141,12 +146,12 @@ export default {
             commit('UPDATE_AUTH', authToken);
         },
 
-        updateFulfilmentAddress ({ commit }, payload) {
+        updateAddressDetails ({ commit }, payload) {
             commit('UPDATE_FULFILMENT_ADDRESS', payload);
         },
 
-        updateMobileNumber ({ commit }, payload) {
-            commit('UPDATE_MOBILE_NUMBER', payload);
+        updateCustomerDetails ({ commit }, payload) {
+            commit('UPDATE_CUSTOMER_DETAILS', payload);
         }
     },
 
@@ -207,8 +212,11 @@ export default {
             };
         },
 
-        UPDATE_MOBILE_NUMBER (state, mobileNumber) {
-            state.customer.mobileNumber = mobileNumber;
+        UPDATE_CUSTOMER_DETAILS (state, customer) {
+            state.customer = {
+                ...state.customer,
+                ...customer
+            };
         }
     }
 };
