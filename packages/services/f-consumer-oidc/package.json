@@ -1,0 +1,32 @@
+{
+  "name": "@justeat/f-consumer-oidc",
+  "version": "1.0.0",
+  "description": "Authentication helper to communicate with open apis",
+  "main": "dist/f-consumer-oidc.js",
+  "scripts": {
+    "prepublishOnly": "yarn build",
+    "build": "webpack",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "7.9.0",
+    "@babel/preset-env": "7.9.0",
+    "babel-loader": "8.1.0",
+    "jest": "25.4.0",
+    "jest-teamcity": "1.7.0",
+    "js-cookie": "2.2.1",
+    "webpack": "4.42.1",
+    "webpack-cli": "3.3.11"
+  },
+  "peerDependencies": {
+    "js-cookie": ">=2.2.1"
+  },
+  "jest": {
+    "reporters": [
+      "default",
+      "jest-teamcity"
+    ]
+  }
+}
