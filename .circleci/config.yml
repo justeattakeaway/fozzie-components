@@ -177,9 +177,9 @@ jobs:
           name: Run WebDriverIO Component Tests
           command: yarn test-a11y:chrome
       - store_artifacts:
-          path:
-            - axe-violations/
-            - _results_/
+          path: axe-violations/
+      - store_artifacts:
+          path: _results_/
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch
