@@ -35,6 +35,10 @@ export default {
         isFullWidth: {
             type: Boolean,
             default: false
+        },
+        actionType: {
+            type: String,
+            default: 'button'
         }
     },
     computed: {
@@ -52,7 +56,11 @@ export default {
          * Renders `Link` component if `href` prop is not an empty string
          */
         componentType () {
-            return this.$attrs.href ? 'link-button' : 'action-button';
+            if (this.$attrs.href) {
+                return 'link-button'
+            }
+            this.$attrs.type = this.actionType
+            return 'action-button';
         }
     }
 };

@@ -21,11 +21,14 @@ export const ButtonComponent = () => ({
         isFullWidth: {
             default: boolean('isFullWidth', false)
         },
+        actionType: {
+            default: select('Action Type', ['button', 'submit', 'reset'], 'button')
+        },
         href: {
             default: text('href', '')
         }
     },
-    template: '<f-button :buttonType="buttonType" :buttonSize="buttonSize" :isFullWidth="isFullWidth" :href="href">Default Button Text</f-button>'
+    template: '<f-button :buttonType="buttonType" :buttonSize="buttonSize" :isFullWidth="isFullWidth" :actionType="actionType" :href="href">Default Button Text</f-button>'
 });
 
 ButtonComponent.storyName = 'f-button';

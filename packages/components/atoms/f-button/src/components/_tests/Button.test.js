@@ -38,8 +38,14 @@ describe('Button', () => {
             let propsData;
 
             describe('when `href` prop is empty :: ', () => {
+                let actionType;
+
                 beforeEach(() => {
-                    propsData = { href: null };
+                    actionType = 'button';
+                    propsData = {
+                        href: null,
+                        actionType
+                    };
                 })
 
                 it('should return `componentType` of `action-button`', () => {
@@ -56,6 +62,14 @@ describe('Button', () => {
 
                     // Assert
                     expect(wrapper.find('[data-test-id="action-button-component"]').exists()).toBeTruthy();
+                });
+
+                it('should apply `type` attribute', () => {
+                    // Act
+                    const wrapper = mount(FButton, { propsData });
+
+                    // Assert
+                    expect(wrapper.attributes('type')).toEqual(actionType);
                 });
             });
 
