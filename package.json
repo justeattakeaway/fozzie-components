@@ -20,12 +20,7 @@
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y lerna run test-a11y:chrome --concurrency 1 --stream",
     "test:consumer": "lerna run test:consumer",
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
-    "local:tests": "cross-env yarn test && yarn test-component:chrome && yarn test-a11y:chrome",
-    "ci:build": "cross-env-shell \"lerna run $LERNA_ARGS build --since origin/master --include-dependencies --stream\"",
-    "ci:lint": "cross-env-shell \"lerna run $LERNA_ARGS lint --since origin/master --stream\"",
-    "ci:test": "cross-env-shell \"lerna run $LERNA_ARGS test --since origin/master --stream\"",
-    "ci:test-component:chrome": "cross-env-shell TEST_TYPE=component lerna run test-component:chrome --since origin/master --concurrency 1 --stream",
-    "ci:test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y lerna run test-a11y:chrome --since origin/master --concurrency 1 --stream"
+    "local:tests": "cross-env yarn test && yarn test-component:chrome && yarn test-a11y:chrome"
   },
   "resolutions": {
     "webpack": "4.36.0"
