@@ -33,7 +33,8 @@
                 :copy="copy"
                 :suggestion-format="suggestionFormat"
                 :suggestions="suggestions"
-                :selected="keyboardSuggestionIndex" />
+                :selected="keyboardSuggestionIndex"
+                @selected-suggestion="onSelectedSuggestion" />
 
             <form-search-button
                 :copy="copy"
