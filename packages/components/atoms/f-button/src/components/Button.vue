@@ -52,8 +52,11 @@ export default {
             return this.buttonSize.charAt(0).toUpperCase() + this.buttonSize.slice(1); // capitalize the first letter of the prop
         },
         /**
-         * Renders `Action` component if `href` prop is an empty string
-         * Renders `Link` component if `href` prop is not an empty string
+         * Renders `Link` component if a `href` attribute is applied to the component
+         * + adds `href` attribute to link
+         *
+         * Renders `Action` component if no `href` attrivute is applied to the component
+         * + adds `actionType` prop to button type
          */
         componentType () {
             if (this.$attrs.href) {
