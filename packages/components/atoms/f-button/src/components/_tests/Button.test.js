@@ -56,7 +56,8 @@ describe('Button', () => {
             });
 
             describe('when `href` prop is not an empty string :: :: ', () => {
-                const propsData = { href: 'http://www.just-eat.co.uk' };
+                const link = 'http://www.just-eat.co.uk';
+                const propsData = { href: link };
 
                 it('should return `link`', () => {
                     // Act
@@ -72,6 +73,14 @@ describe('Button', () => {
 
                     // Assert
                     expect(wrapper.find('[data-test-id="link-button-component"]').exists()).toBeTruthy();
+                });
+
+                it('should apply `href` attribute', () => {
+                    // Act
+                    const wrapper = mount(FButton, { propsData });
+
+                    // Assert
+                    expect(wrapper.attributes('href')).toEqual(link);
                 });
             });
         });

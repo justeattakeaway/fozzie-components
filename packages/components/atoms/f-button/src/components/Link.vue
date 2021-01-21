@@ -1,7 +1,5 @@
 <template>
-    <a
-        :href="$attrs.href"
-        target="_blank">
+    <a>
         <slot />
     </a>
 </template>

@@ -8,8 +8,7 @@
             (isFullWidth ? $style['o-btn--fullWidth'] : '')
         ]"
         :attributes="$attrs"
-        :data-test-id="`${componentType}-component`"
-        :href="href">
+        :data-test-id="`${componentType}-component`">
         <slot />
     </component>
 </template>
@@ -20,7 +19,10 @@ import LinkButton from './Link.vue';
 
 export default {
     name: 'FButton',
-    components: { ActionButton, LinkButton },
+    components: {
+        ActionButton,
+        LinkButton
+    },
     props: {
         buttonType: {
             type: String,
@@ -33,10 +35,6 @@ export default {
         isFullWidth: {
             type: Boolean,
             default: false
-        },
-        href: {
-            type: String,
-            default: ''
         }
     },
     computed: {
@@ -54,7 +52,7 @@ export default {
          * Renders `Link` component if `href` prop is not an empty string
          */
         componentType () {
-            return this.href === '' ? 'action-button' : 'link-button';
+            return this.$attrs.href ? 'link-button' : 'action-button';
         }
     }
 };
