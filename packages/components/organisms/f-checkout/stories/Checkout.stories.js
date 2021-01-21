@@ -22,13 +22,15 @@ const deliveryUrl = '/checkout-delivery.json';
 const collectionUrl = '/checkout-collection.json';
 const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
 const createGuestUrl = '/create-guest.json';
-const getBasketUrl = '/get-basket.json';
+const getBasketDeliveryUrl = '/get-basket-delivery.json';
+const getBasketCollectionUrl = '/get-basket-collection.json';
 
 CheckoutMock.setupCheckoutMethod(deliveryUrl);
 CheckoutMock.setupCheckoutMethod(collectionUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentUrl);
 CheckoutMock.setupCheckoutMethod(createGuestUrl);
-CheckoutMock.setupCheckoutMethod(getBasketUrl);
+CheckoutMock.setupCheckoutMethod(getBasketDeliveryUrl);
+CheckoutMock.setupCheckoutMethod(getBasketCollectionUrl);
 CheckoutMock.passThroughAny();
 
 export const CheckoutComponent = () => ({
@@ -47,7 +49,7 @@ export const CheckoutComponent = () => ({
             default: text('Create Guest Url', createGuestUrl)
         },
         getBasketUrl: {
-            default: text('Get Basket Url', getBasketUrl)
+            default: select('Get Basket Url', [getBasketDeliveryUrl, getBasketCollectionUrl], getBasketDeliveryUrl)
         },
         authToken: {
             default: select('Auth token', ['authToken', null], 'authToken')
