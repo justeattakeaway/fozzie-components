@@ -28,6 +28,7 @@ Object {
   "id": "12345",
   "isFulfillable": true,
   "isLoggedIn": false,
+  "menuGroupId": "",
   "messages": Array [
     Object {
       "message": Object {
@@ -56,6 +57,7 @@ Object {
       "type": "allergy",
     },
   ],
+  "restaurantId": "",
   "serviceType": "delivery",
 }
 `;

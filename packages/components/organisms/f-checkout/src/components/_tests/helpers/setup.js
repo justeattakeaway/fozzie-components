@@ -15,6 +15,8 @@ const fulfilmentTimes = [
 
 const defaultState = {
     id: '',
+    restaurantId: '',
+    menuGroupId: '',
     serviceType: CHECKOUT_METHOD_DELIVERY,
     customer: {
         firstName: 'John',
@@ -54,6 +56,7 @@ const defaultActions = {
     createGuestUser: jest.fn(),
     updateAddressDetails: jest.fn(),
     updateCustomerDetails: jest.fn()
+    getBasket: jest.fn()
 };
 
 const i18n = {

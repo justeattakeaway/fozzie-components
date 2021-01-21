@@ -16,6 +16,8 @@ const address = {
 
 const defaultState = {
     id: '',
+    restaurantId: '',
+    menuGroupId: '',
     serviceType: '',
     customer: {
         firstName: '',

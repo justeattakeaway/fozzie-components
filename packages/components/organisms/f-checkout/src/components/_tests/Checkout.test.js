@@ -1,5 +1,6 @@
 import { shallowMount, mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
+import flushPromises from 'flush-promises';
 import { VueI18n } from '@justeat/f-globalisation';
 import { validations } from '@justeat/f-services';
 import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION, TENANT_MAP } from '../../constants';
@@ -58,11 +59,13 @@ describe('Checkout', () => {
     const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
     const loginUrl = 'http://localhost/login';
     const createGuestUrl = 'http://localhost/createguestuser';
+    const getBasketUrl = 'http://localhost/getbasket';
     const propsData = {
         checkoutUrl,
         loginUrl,
         checkoutAvailableFulfilmentUrl,
-        createGuestUrl
+        createGuestUrl,
+        getBasketUrl
     };
 
     it('should be defined', () => {
@@ -317,7 +320,7 @@ describe('Checkout', () => {
                 expect(setAuthTokenSpy).toHaveBeenCalledWith(propsDataWithAuthToken.authToken);
             });
 
-            it('should call `loadCheckout`', () => {
+        it('should call `loadCheckout`', async () => {
                 // Arrange & Act
                 const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
 
@@ -327,11 +330,12 @@ describe('Checkout', () => {
                     localVue,
                     propsData
                 });
+            await flushPromises();
 
                 expect(loadCheckoutSpy).toHaveBeenCalled();
             });
 
-            it('should call `loadAvailableFulfilment`', () => {
+        it('should call `loadAvailableFulfilment`', async () => {
                 // Arrange & Act
                 const loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
 
@@ -341,6 +345,7 @@ describe('Checkout', () => {
                     localVue,
                     propsData
                 });
+            await flushPromises();
 
                 expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
             });
@@ -876,7 +881,7 @@ describe('Checkout', () => {
             describe('when `getCheckout` request fails', () => {
                 let wrapper;
 
-                beforeEach(() => {
+                beforeEach(async () => {
                     wrapper = mount(VueCheckout, {
                         store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.reject()) }),
                         i18n,
@@ -894,7 +899,7 @@ describe('Checkout', () => {
             describe('when `getCheckout` request succeeds', () => {
                 let wrapper;
 
-                beforeEach(() => {
+                beforeEach(async () => {
                     wrapper = mount(VueCheckout, {
                         store: createStore(),
                         i18n,
@@ -914,7 +919,7 @@ describe('Checkout', () => {
             describe('when `getAvailableFulfilment` request fails', () => {
                 let wrapper;
 
-                beforeEach(() => {
+                beforeEach(async () => {
                     wrapper = mount(VueCheckout, {
                         store: createStore(defaultState, { ...defaultActions, getAvailableFulfilment: jest.fn(async () => Promise.reject()) }),
                         i18n,
@@ -932,7 +937,7 @@ describe('Checkout', () => {
             describe('when `getAvailableFulfilment` request succeeds', () => {
                 let wrapper;
 
-                beforeEach(() => {
+                beforeEach(async () => {
                     wrapper = mount(VueCheckout, {
                         store: createStore(),
                         i18n,
