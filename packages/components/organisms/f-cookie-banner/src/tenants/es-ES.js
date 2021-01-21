@@ -7,8 +7,8 @@ export default {
     text2: 'También nos gustaría usar cookies opcionales para ayudarnos a mejorar nuestra plataforma recopilando información sobre cómo la utiliza.',
     text3: 'Para más detalles sobre las cookies y tecnologías que usamos, visite nuestro ',
     text4: '. El uso de este banner provocará que se instale una cookie en su dispositivo para recordar sus preferencias.',
-    buttonText1: 'Aceptar solo las cookies necesarias',
-    buttonText2: 'Aceptar todas las cookies',
+    nonAcceptButtonText: 'Aceptar solo las cookies necesarias',
+    acceptButtonText: 'Aceptar todas las cookies',
 
     config: {
         displayLegacy: false,

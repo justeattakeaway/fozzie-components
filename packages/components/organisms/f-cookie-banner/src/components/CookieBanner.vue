@@ -48,7 +48,7 @@
                     role="button"
                     is-full-width
                     @click.native="acceptActions">
-                    {{ copy.buttonText2 }}
+                    {{ copy.acceptButtonText }}
                 </button-component>
                 <button-component
                     tabindex="0"
@@ -56,7 +56,7 @@
                     button-type="ghost"
                     is-full-width
                     @click.native="nonAcceptActions">
-                    {{ copy.buttonText1 }}
+                    {{ copy.nonAcceptButtonText }}
                 </button-component>
             </div>
         </div>

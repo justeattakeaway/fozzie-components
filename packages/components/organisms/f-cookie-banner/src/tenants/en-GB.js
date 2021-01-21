@@ -7,8 +7,8 @@ export default {
     text2: 'We\'d also like to use optional cookies to help us improve our platform by collecting information on how you use it.',
     text3: 'For details about the cookies and technologies we use, see our ',
     text4: '.  Using this banner will set a cookie on your device to remember your preferences.',
-    buttonText1: 'Accept only required cookies',
-    buttonText2: 'Accept all cookies',
+    nonAcceptButtonText: 'Accept only required cookies',
+    acceptButtonText: 'Accept all cookies',
     legacyBannerText: 'We use cookies to improve your browsing experience. By continuing, you agree to receive cookies on our website.',
     legacyBannerLinkText: 'Learn more about our cookies policy.',
 

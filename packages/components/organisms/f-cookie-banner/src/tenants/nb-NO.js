@@ -7,8 +7,8 @@ export default {
     text2: 'Vi ønsker også å bruke valgfrie informasjonskapsler for å hjelpe oss med å forbedre plattformen vår ved å samle inn informasjon om hvordan du bruker den.',
     text3: 'For detaljer om hvilke informasjonskapsler og teknologier vi bruker, se vår ',
     text4: '. Ved å bruke dette banneret, plasseres en informasjonskapsel på enheten din for å huske dine preferanser.',
-    buttonText1: 'Aksepterer kun nødvendige informasjonskapsler',
-    buttonText2: 'Aksepter alle informasjonskapsler',
+    nonAcceptButtonText: 'Aksepterer kun nødvendige informasjonskapsler',
+    acceptButtonText: 'Aksepter alle informasjonskapsler',
 
     config: {
         displayLegacy: false,

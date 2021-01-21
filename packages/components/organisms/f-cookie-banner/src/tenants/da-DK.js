@@ -7,8 +7,8 @@ export default {
     text2: 'Vi vil også gerne bruge valgfri cookies til forbedring af platformen ved at indsamle oplysninger om, hvordan du bruger den.',
     text3: 'For nærmere oplysninger om de anvendte cookies og teknologier henviser vi til vores ',
     text4: '. Ved brug af denne banner placeres en cookie på din enhed, som husker dine præferencer.',
-    buttonText1: 'Accepter kun nødvendige cookies',
-    buttonText2: 'Accepter alle cookies',
+    nonAcceptButtonText: 'Accepter kun nødvendige cookies',
+    acceptButtonText: 'Accepter alle cookies',
 
     config: {
         displayLegacy: false,
