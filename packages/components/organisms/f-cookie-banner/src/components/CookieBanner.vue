@@ -133,18 +133,10 @@ export default {
 
     watch: {
         isHidden (newVal) {
-            if (newVal) {
-                this.hideBanner = true;
-            } else {
-                this.hideBanner = false;
-            }
+            this.hideBanner = !!newVal;
         },
         showLegacyBanner (newVal) {
-            if (newVal) {
-                this.legacyBanner = true;
-            } else {
-                this.legacyBanner = false;
-            }
+            this.legacyBanner = !!newVal;
         }
     },
 

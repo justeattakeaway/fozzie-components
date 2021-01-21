@@ -23,7 +23,7 @@ describe('CookieBanner', () => {
     });
 
     describe('methods', () => {
-        describe('isNotExcluded() should be false for cookies that will not be deleted', () => {
+        describe('isNotExcluded()', () => {
             it.each([
                 [false, 'je-location'],
                 [false, '_ga'],
@@ -48,7 +48,7 @@ describe('CookieBanner', () => {
         });
 
         describe('dataLayerPush()', () => {
-            it('should push `consentLevel` to the dataLayer', () => {
+            it('should push the consent level to the dataLayer', () => {
                 // Arrange
                 const propsData = {};
                 const expected = { event: 'trackConsent', userData: { consent: 'full' } };
@@ -76,7 +76,7 @@ describe('CookieBanner', () => {
                 [false, 'random value'],
                 [true, 'full'],
                 [true, 'necessary']
-            ])('should show/hide banner according to `je-cookieConsent` value', (
+            ])('hideBanner should "%s" when `je-cookieConsent` value is "%s"', (
                 expected,
                 cookieValue
             ) => {
