@@ -1,9 +1,10 @@
-<div align="center">
-<h1>f-footer</h1>
+<div style="text-align: center">
 
-<img width="125" alt="Fozzie Bear" src="../../bear.png" />
+# f-footer
 
-<p>Global Footer Component for Vue.js.</p>
+<img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
+
+Global Footer Component for Vue.js.
 </div>
 
 ---
@@ -15,94 +16,111 @@
 
 ---
 
-1. Add the module to your project
+## Usage
 
-    ```bash
-    yarn add @justeat/f-footer
-    ```
+### Installation
 
-1. Import the component
+```sh
+yarn add @justeat/f-footer
+```
 
-    You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+```sh
+npm install @justeat/f-footer
+```
 
-    ```
-    import VueFooter from '@justeat/f-footer';
-    import '@justeat/f-footer/dist/f-footer.css';
+#### Vue Applications
 
-    export default {
-        components: {
-            VueFooter
-        }
+```js
+import VueFooter from '@justeat/f-footer';
+import '@justeat/f-footer/dist/f-footer.css';
+
+export default {
+    components: {
+        VueFooter
     }
-    ```
+}
+```
 
-    If you are using Webpack, you can import the component dynamically to separate the footer bundle from the main `bundle.client.js`:
+#### Webpack
 
-    ```
-    import '@justeat/f-footer/dist/f-footer.css';
+Import the component dynamically to separate the _footer_ bundle from the main `bundle.client.js`:
 
-    export default {
-        components: {
-            ...
-            VueFooter: () => import(/* webpackChunkName: "vue-footer" */ '@justeat/f-footer')
-        }
+```js
+import '@justeat/f-footer/dist/f-footer.css';
+
+export default {
+    components: {
+        ...
+        VueFooter: () => import(/* webpackChunkName: "vue-footer" */ '@justeat/f-footer')
     }
+}
+```
 
-    ```
+If there's a _vue-i18n_ plugin in the project, _footer_ can be called without any props.
 
-    - If there is a vue-i18n plugin in the project, footer component can be called without any props:
+e.g.:
 
-    `<vue-footer />`
+```vue
+<vue-footer />
+```
 
-    - Or you can pass locale as a property to specify the tenant:
+Or you can pass locale as a property to specify the tenant:
 
-    `<vue-footer
-        locale="en-GB" />`
+```vue
+<vue-footer locale="en-GB" />`
+```
 
-1. Browser Support
+## Browser Support
 
-    This component extends [@justeat/browserslist-config-fozzie](https://github.com/justeat/browserslist-config-fozzie).
+The component extends [@justeat/browserslist-config-fozzie](https://github.com/justeat/browserslist-config-fozzie).
+
+## Configuration
+
+### Props
+
+| Prop  | Type  | Default | Description |
+| ----- | ----- | ------- | ----------- |
+| `locale` | `String` | Empty | Set the translation file to use. |
+| `showCourierLinks` | `bool` | `true` | Show/hide the courier link buttons |
+
+### CSS Classes
+
+| Class | Description |
+| ----- | ----------- |
+
+### Events
+
+| Event | Description |
+| ----- | ----------- |
 
 ## Development
-It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
 
-```bash
-# cd ./fozzie-components
-yarn install
-
+```sh
+git clone git@github.com:justeat/fozzie-components.git
+cd fozzie-components
+yarn
+```
 ## Testing
-Unit / Integration / Contract
 
-```bash
-# Run Unit / Integration / Contract tests for all components
-cd ./fozzie-components
+### Unit, Integration and Contract
+
+Run from the `f-footer` directory.
+
+```sh
 yarn test
 ```
 
-OR
+## Component Tests
 
-```bash
-# Run Unit / Integration / Contract tests for f-footer
-cd ./fozzie-components/packages/f-footer
-yarn test
-```
+If storybook is not running, start it:
 
-Component Tests
-```bash
-# Run Component tests for all components
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components
-
+```sh
 yarn storybook:build
 yarn storybook:serve-static
-yarn test-component:chrome
 ```
 
-OR
+Once Storybook is listening, run the following from with the root or the component directory.
 
-```bash
-# Run Component tests for f-footer
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components/packages/f-footer
+```sh
 yarn test-component:chrome
 ```

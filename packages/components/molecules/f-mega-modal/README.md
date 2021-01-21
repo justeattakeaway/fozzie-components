@@ -44,7 +44,7 @@ export default {
 
 #### Webpack
 
-Import the component dynamically to separate the `mega-modal` bundle from the main `bundle.client.js`.
+Import the component dynamically to separate the _mega-modal_ bundle from the main `bundle.client.js`.
 
 ```js
 import '@justeat/f-mega-modal/dist/f-mega-modal.css';
