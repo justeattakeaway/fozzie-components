@@ -2,8 +2,7 @@ import RegistrationComponent from '../../../test-utils/component-objects/f-regis
 
 describe('f-registration component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-organisms--registration-component');
-        browser.switchToFrame(0);
+        browser.url('/iframe.html?id=components-organisms--registration-component');
         RegistrationComponent.waitForRegistrationForm();
     });
 
