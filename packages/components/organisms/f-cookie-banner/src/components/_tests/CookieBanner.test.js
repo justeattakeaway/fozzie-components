@@ -148,7 +148,7 @@ describe('CookieBanner', () => {
         });
 
         describe('acceptActions()', () => {
-            it('should set the banner consent cookie to `full`, push `full` to dataLayer and hide the banner', () => {
+            it('should set the banner consent cookie to `full`', () => {
                 // Arrange
                 const propsData = {};
                 
@@ -158,19 +158,47 @@ describe('CookieBanner', () => {
                     propsData
                 });
                 const cookieSpy = jest.spyOn(wrapper.vm, 'setCookieBannerCookie');
-                const dataLayerSpy = jest.spyOn(wrapper.vm, 'dataLayerPush');
                 
                 wrapper.vm.acceptActions();
 
                 // Assert
                 expect(cookieSpy).toHaveBeenCalledWith('full');
+            });
+            it('should push `full` to dataLayer', () => {
+                // Arrange
+                const propsData = {};
+                
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    propsData
+                });
+                const dataLayerSpy = jest.spyOn(wrapper.vm, 'dataLayerPush');
+                
+                wrapper.vm.acceptActions();
+
+                // Assert
                 expect(dataLayerSpy).toHaveBeenCalledWith('full');
+            });
+            it('should hide the banner', () => {
+                // Arrange
+                const propsData = {};
+                
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    propsData
+                });
+
+                wrapper.vm.acceptActions();
+
+                // Assert
                 expect(wrapper.vm.hideBanner).toBe(true);
             });
         });
 
         describe('nonAcceptActions()', () => {
-            it('should set the banner consent cookie to `necessary`, push `necessary` to dataLayer, remove unnecessary cookies, resend GTM events and hide the banner', () => {
+            it('should set the banner consent cookie to `necessary`', () => {
                 // Arrange
                 const propsData = {};
                 
@@ -180,17 +208,73 @@ describe('CookieBanner', () => {
                     propsData
                 });
                 const cookieSpy = jest.spyOn(wrapper.vm, 'setCookieBannerCookie');
-                const dataLayerSpy = jest.spyOn(wrapper.vm, 'dataLayerPush');
-                const resendSpy = jest.spyOn(wrapper.vm, 'resendEvents');
-                const removeCookiesSpy = jest.spyOn(wrapper.vm, 'removeUnnecessaryCookies');
                 
                 wrapper.vm.nonAcceptActions();
 
                 // Assert
                 expect(cookieSpy).toHaveBeenCalledWith('necessary');
+            });
+            it('should push `necessary` to dataLayer', () => {
+                // Arrange
+                const propsData = {};
+                
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    propsData
+                });
+                const dataLayerSpy = jest.spyOn(wrapper.vm, 'dataLayerPush');
+                
+                wrapper.vm.nonAcceptActions();
+
+                // Assert
                 expect(dataLayerSpy).toHaveBeenCalledWith('necessary');
-                expect(resendSpy).toHaveBeenCalled();
+            });
+            it('should remove unnecessary cookies', () => {
+                // Arrange
+                const propsData = {};
+                
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    propsData
+                });
+                const removeCookiesSpy = jest.spyOn(wrapper.vm, 'removeUnnecessaryCookies');
+                
+                wrapper.vm.nonAcceptActions();
+
+                // Assert
                 expect(removeCookiesSpy).toHaveBeenCalled();
+            });
+            it('should resend GTM events', () => {
+                // Arrange
+                const propsData = {};
+                
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    propsData
+                });
+                const resendSpy = jest.spyOn(wrapper.vm, 'resendEvents');
+                
+                wrapper.vm.nonAcceptActions();
+
+                // Assert
+                expect(resendSpy).toHaveBeenCalled();
+            });
+            it('should hide the banner', () => {
+                // Arrange
+                const propsData = {};
+                
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    propsData
+                });
+                
+                wrapper.vm.nonAcceptActions();
+
+                // Assert
                 expect(wrapper.vm.hideBanner).toBe(true);
             });
         });

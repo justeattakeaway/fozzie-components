@@ -75,7 +75,7 @@
                         class="c-cookieWarning-btn"
                         data-test-id="cookieBanner-close-button"
                         aria-label="Close"
-                        @click="hideLegacyBanner" />
+                        @click="hideBanner = true" />
                 </div>
             </div>
         </div>
@@ -180,12 +180,6 @@ export default {
          */
         focusOnTitle () {
             this.$refs.cookieBannerHeadingFocus.focus();
-        },
-        /**
-         * hide legacy banner
-         */
-        hideLegacyBanner () {
-            this.hideBanner = true;
         },
         /**
          * Check if the cookie banner has been shown to this user
