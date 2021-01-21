@@ -53,17 +53,19 @@ export default {
         },
         /**
          * Renders `Link` component if a `href` attribute is applied to the component
-         * + adds `href` attribute to link
-         *
          * Renders `Action` component if no `href` attrivute is applied to the component
-         * + adds `actionType` prop to button type
          */
         componentType () {
-            if (this.$attrs.href) {
-                return 'link-button'
-            }
-            this.$attrs.type = this.actionType
-            return 'action-button';
+            return this.$attrs.href ? 'link-button' : 'action-button';
+        }
+    },
+
+    /**
+     * If no `href` attribut has been applied, set the the button type to `actionType` prop
+     */
+    created () {
+        if (!this.$attrs.href) {
+            this.$attrs.type = this.actionType;
         }
     }
 };

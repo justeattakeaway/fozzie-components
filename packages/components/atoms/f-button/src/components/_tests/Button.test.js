@@ -46,7 +46,7 @@ describe('Button', () => {
                         href: null,
                         actionType
                     };
-                })
+                });
 
                 it('should return `componentType` of `action-button`', () => {
                     // Act
@@ -79,7 +79,7 @@ describe('Button', () => {
                 beforeEach(() => {
                     link = 'http://www.just-eat.co.uk';
                     propsData = { href: link };
-                })
+                });
 
                 it('should return `componentType` of `link-button`', () => {
                     // Act
