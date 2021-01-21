@@ -67,11 +67,6 @@ export default {
             default: 0
         },
 
-        address: {
-            type: String,
-            default: ''
-        },
-
         copy: {
             type: Object,
             default:  () => ({})
@@ -84,6 +79,9 @@ export default {
 
     computed: {
         ...mapState('searchbox', [
+            'address',
+            'fullAddressDetails',
+            'inputTimeoutValue',
             'suggestions',
             'selectedStreetLevelAddressId'
         ]),
@@ -117,14 +115,20 @@ export default {
 
             this.hasSelectedContinueWithSuggestion =
                 !!(this.selectedStreetLevelAddressId && value === this.suggestions.length - 1);
+        },
+
+        fullAddressDetails (value) {
+            this.setSelectedFullAddressDetails(value);
         }
     },
 
     methods: {
         ...mapActions('searchbox', [
             'getMatchedAreaAddressResults',
-            'setInputFocus',
-            'setContinueWithDetails'
+            'getFinalAddressSelectionDetails',
+            'setAddress',
+            'setContinueWithDetails',
+            'setSelectedFullAddressDetails'
         ]),
 
         /**
@@ -166,23 +170,38 @@ export default {
          * 2. `setContinueWithDetails` Will set a fallback options for users so
          * they can continue without selecting a full addresss.
          *
+         * 3. `isAddressType` Determines the type of call we make to Loqate:
+         *      - `true` = Make a final `retrieve` call to get full address details selected.
+         *      - `false` = Make a partial call to Loqate to get street address information, either
+         *      postcode based results or address results & then set the continue with details.
+         *
          * @param e
          * @param index
          * @param selected
          */
         getSelectedStreetAddress (e, index, selected) {
             const selectedAddress = this.suggestions[index || selected];
+            const isAddressType = selectedAddress && selectedAddress.type === 'Address';
             e.preventDefault();
 
-            this.getMatchedAreaAddressResults({
-                address: this.address,
-                streetLevelAddress: selectedAddress.id
-            });
+            if (selectedAddress.postcode) {
+                this.setAddress(selectedAddress.postcode);
+                return;
+            }
 
-            this.setContinueWithDetails({
-                postcode:  selectedAddress.text,
-                street: selectedAddress.description
-            });
+            if (isAddressType) {
+                this.getFinalAddressSelectionDetails(selectedAddress.id);
+            } else {
+                this.getMatchedAreaAddressResults({
+                    address: this.address,
+                    streetLevelAddress: selectedAddress.id
+                });
+
+                this.setContinueWithDetails({
+                    postcode:  selectedAddress.text,
+                    street: selectedAddress.description
+                });
+            }
         }
     }
 };

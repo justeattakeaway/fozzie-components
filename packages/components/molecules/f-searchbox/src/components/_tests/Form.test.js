@@ -10,6 +10,7 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 const mockState = {
+    address: '',
     errors: [],
     isValid: true,
     isFullAddressSearchEnabled: false
@@ -19,6 +20,7 @@ const mockActions = {
     setErrors: jest.fn(),
     setIsValid: jest.fn(),
     setIsDirty: jest.fn(),
+    setAddress: jest.fn(),
     setGeoLocationAvailability: jest.fn(),
     setAutoCompleteAvailability: jest.fn(),
     setFullAddressSearchConfigs: jest.fn()
@@ -71,7 +73,6 @@ describe('`Form`', () => {
                 // Arrange
                 const propsData = {
                     config: {
-                        address: 'something',
                         locationFormat: () => jest.fn()
                     },
                     service: {
@@ -94,7 +95,6 @@ describe('`Form`', () => {
                     // Arrange
                     const propsData = {
                         config: {
-                            address: 'something',
                             locationFormat: () => jest.fn()
                         },
                         service: {
@@ -104,16 +104,25 @@ describe('`Form`', () => {
                     const wrapper = shallowMount(Form, {
                         propsData,
                         store: createStore(),
-                        localVue
+                        localVue,
+                        computed: {
+                            address: {
+                                get () {
+                                    return '';
+                                },
+                                set () {
+                                    jest.fn();
+                                }
+                            }
+                        }
                     });
-                    const address = 'Eridanus';
-                    wrapper.setData({ address, lastAddress: '' });
+                    wrapper.setData({ lastAddress: '' });
 
                     // Act
                     wrapper.vm.submit(event);
 
                     // Assert
-                    expect(wrapper.vm.service.isValid).toHaveBeenCalledWith(address);
+                    expect(wrapper.vm.service.isValid).toHaveBeenCalledWith('');
                 });
 
                 describe('when `hasLastSavedAddress` is `truthy`', () => {
@@ -123,7 +132,6 @@ describe('`Form`', () => {
 
                         const propsData = {
                             config: {
-                                address,
                                 locationFormat: () => jest.fn()
                             },
                             service: {
@@ -132,7 +140,19 @@ describe('`Form`', () => {
                         };
                         const wrapper = shallowMount(Form, {
                             propsData,
-                            store: createStore(),
+                            store: createStore({
+                                address
+                            }),
+                            computed: {
+                                address: {
+                                    get () {
+                                        return '';
+                                    },
+                                    set () {
+                                        jest.fn();
+                                    }
+                                }
+                            },
                             localVue
                         });
 
@@ -151,7 +171,6 @@ describe('`Form`', () => {
 
                         const propsData = {
                             config: {
-                                address,
                                 locationFormat: () => jest.fn()
                             },
                             service: {
@@ -160,11 +179,25 @@ describe('`Form`', () => {
                         };
                         const wrapper = shallowMount(Form, {
                             propsData,
-                            store: createStore(),
+                            store: createStore({
+                                address
+                            }),
+                            computed: {
+                                hasLastSavedAddress: () => true,
+                                address: {
+                                    get () {
+                                        return '';
+                                    },
+                                    set () {
+                                        jest.fn();
+                                    }
+                                }
+                            },
                             localVue
                         });
 
                         const spy = jest.spyOn(wrapper.vm, 'searchPreviouslySavedAddress');
+
                         wrapper.setData({ address, lastAddress: address });
 
                         // Act
@@ -189,7 +222,17 @@ describe('`Form`', () => {
                     const wrapper = shallowMount(Form, {
                         propsData,
                         store: createStore(),
-                        localVue
+                        localVue,
+                        computed: {
+                            address: {
+                                get () {
+                                    return '';
+                                },
+                                set () {
+                                    jest.fn();
+                                }
+                            }
+                        }
                     });
                     const address = 'AR511AR';
                     const spy = jest.spyOn(wrapper.vm, 'setIsValid');
@@ -217,7 +260,17 @@ describe('`Form`', () => {
                     const wrapper = shallowMount(Form, {
                         propsData,
                         store: createStore(),
-                        localVue
+                        localVue,
+                        computed: {
+                            address: {
+                                get () {
+                                    return '';
+                                },
+                                set () {
+                                    jest.fn();
+                                }
+                            }
+                        }
                     });
                     const address = 'Eridanus';
                     wrapper.setData({ address, lastAddress: '' });
@@ -235,7 +288,6 @@ describe('`Form`', () => {
                         // Arrange
                         const propsData = {
                             config: {
-                                address: 'AR511AR',
                                 locationFormat: () => jest.fn()
                             },
                             service: {
@@ -248,7 +300,7 @@ describe('`Form`', () => {
                             localVue
                         });
 
-                        wrapper.setData({ address: '', lastAddress: '' });
+                        wrapper.setData({ lastAddress: '' });
 
                         // Act
                         wrapper.vm.submit(event);
@@ -259,30 +311,39 @@ describe('`Form`', () => {
 
                     it('should invoke `processLocationCookie` to set je location cookies manually', async () => {
                         // Arrange
-                        const address = 'AR511AR';
                         const propsData = {
                             config: {
-                                address,
                                 locationFormat: () => jest.fn()
                             },
                             service: {
                                 isValid: jest.fn(() => true)
                             }
                         };
+
                         const wrapper = shallowMount(Form, {
                             propsData,
                             store: createStore(),
-                            localVue
+                            localVue,
+                            computed: {
+                                address: {
+                                    get () {
+                                        return 'AR511AR';
+                                    },
+                                    set () {
+                                        jest.fn();
+                                    }
+                                }
+                            }
                         });
 
                         const spy = jest.spyOn(processLocationCookie, 'processLocationCookie');
-                        wrapper.setData({ shouldSetCookies: false, address, lastAddress: '' });
+                        wrapper.setData({ shouldSetCookies: false, lastAddress: '' });
 
                         // Act
                         await wrapper.vm.submit(event);
 
                         // Assert
-                        expect(spy).toHaveBeenCalledWith(false, address);
+                        expect(spy).toHaveBeenCalledWith(false, 'AR511AR');
                     });
 
                     it('should invoke `clearAddressValueOnSubmit` attempt to clear address value when', () => {
@@ -300,7 +361,17 @@ describe('`Form`', () => {
                         const wrapper = shallowMount(Form, {
                             propsData,
                             store: createStore(),
-                            localVue
+                            localVue,
+                            computed: {
+                                address: {
+                                    get () {
+                                        return '';
+                                    },
+                                    set () {
+                                        jest.fn();
+                                    }
+                                }
+                            }
                         });
 
                         wrapper.setData({ shouldClearAddressOnValidSubmit: true, lastAddress: '' });
@@ -329,7 +400,17 @@ describe('`Form`', () => {
                         const wrapper = shallowMount(Form, {
                             propsData,
                             store: createStore(),
-                            localVue
+                            localVue,
+                            computed: {
+                                address: {
+                                    get () {
+                                        return 'AR511AR';
+                                    },
+                                    set () {
+                                        jest.fn();
+                                    }
+                                }
+                            }
                         });
 
                         const spy = jest.spyOn(wrapper.vm, 'verifyHasPostcodeChanged');
@@ -357,7 +438,17 @@ describe('`Form`', () => {
                         const wrapper = shallowMount(Form, {
                             propsData,
                             store: createStore(),
-                            localVue
+                            localVue,
+                            computed: {
+                                address: {
+                                    get () {
+                                        return 'AR511AR';
+                                    },
+                                    set () {
+                                        jest.fn();
+                                    }
+                                }
+                            }
                         });
 
                         const spy = jest.spyOn(wrapper.vm, '$emit');
@@ -387,7 +478,17 @@ describe('`Form`', () => {
                         const wrapper = shallowMount(Form, {
                             propsData,
                             store: createStore(),
-                            localVue
+                            localVue,
+                            computed: {
+                                address: {
+                                    get () {
+                                        return 'AR511AR';
+                                    },
+                                    set () {
+                                        jest.fn();
+                                    }
+                                }
+                            }
                         });
 
                         wrapper.setData({ address: '', lastAddress: '' });
@@ -443,7 +544,17 @@ describe('`Form`', () => {
                             store: createStore({
                                 errors
                             }),
-                            localVue
+                            localVue,
+                            computed: {
+                                address: {
+                                    get () {
+                                        return 'AR511AR';
+                                    },
+                                    set () {
+                                        jest.fn();
+                                    }
+                                }
+                            }
                         });
 
                         const spy = jest.spyOn(wrapper.vm, '$emit');
@@ -604,7 +715,6 @@ describe('`Form`', () => {
                         // Arrange
                         const propsData = {
                             config: {
-                                address: 'something',
                                 locationFormat: () => jest.fn()
                             },
                             service: {
@@ -613,11 +723,12 @@ describe('`Form`', () => {
                         };
                         const wrapper = shallowMount(Form, {
                             propsData,
-                            store: createStore(),
+                            store: createStore({
+                                address: 'AR511AR'
+                            }),
                             localVue
                         });
-                        const address = 'Eridanus';
-                        wrapper.setData({ address, lastAddress: address });
+                        wrapper.setData({ lastAddress: 'AR511AR' });
                         const spy = jest.spyOn(wrapper.vm, '$emit');
 
                         // Act
@@ -643,7 +754,17 @@ describe('`Form`', () => {
                         const wrapper = shallowMount(Form, {
                             propsData,
                             store: createStore(),
-                            localVue
+                            localVue,
+                            computed: {
+                                address: {
+                                    get () {
+                                        return 'AR511AR';
+                                    },
+                                    set () {
+                                        jest.fn();
+                                    }
+                                }
+                            }
                         });
                         const address = 'Eridanus';
                         wrapper.setData({ address, lastAddress: 'Theta Eridani' });

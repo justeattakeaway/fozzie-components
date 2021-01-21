@@ -15,27 +15,33 @@ import {
     SET_AUTO_COMPLETE_AVAILABILITY,
     SET_PARTIAL_ADDRESS_SUGGESTIONS,
     SET_CONTINUE_WITH_SUGGESTION,
-    SET_SELECTED_STREET_LEVEL_ADDRESS_ID
+    SET_SELECTED_STREET_LEVEL_ADDRESS_ID,
+    SET_FULL_ADDRESS_DETAILS,
+    SHOW_FULL_ADDRESS_DETAILS,
+    SET_ADDRESS
 } from './mutation.types';
 
 export default {
     namespaced: true,
     state: {
+        address: '',
+        continueWithSuggestionDetails: {},
         errors: [],
+        fullAddressDetails: [],
+        formattedFullAddress: '',
+        keyboardSuggestionIndex: 0,
+        selectedStreetLevelAddressId: '',
         suggestions: [],
         streetNumber: '',
         streetLevelSelectionDetails: {},
         shouldInputFieldHaveFocus: false,
-        keyboardSuggestionIndex: 0,
         isValid: false,
         isDirty: false,
         isStreetNumberRequired: false,
         isInputFocus: false,
         isGeoLocationAvailable: false,
         isFullAddressSearchEnabled: false,
-        isAutocompleteEnabled: false,
-        continueWithSuggestionDetails: {},
-        selectedStreetLevelAddressId: ''
+        isAutocompleteEnabled: false
     },
 
     actions: {
@@ -48,6 +54,11 @@ export default {
         setErrors ({ commit }, payload) {
             commit(SET_ERRORS, payload);
         },
+
+        setAddress ({ commit }, payload) {
+            commit(SET_ADDRESS, payload);
+        },
+
         /**
          * Takes the given payload (if successful a valid address search response or unsuccessful; a rejection) & commits the
          * relevant states.
@@ -61,11 +72,6 @@ export default {
                 results => {
                     commit(SET_SUGGESTIONS, results);
                     commit(SET_ERRORS, []);
-                    /**
-                     * @Todo
-                     * Handle street number behaviour here i.e when it's required as an input.
-                     */
-
                     commit(SET_FOCUS_ON_INPUT, true);
                 },
                 error => {
@@ -153,6 +159,26 @@ export default {
             }
         },
 
+        /**
+         * Retrieves the final address selection made by the user. The Payload represents
+         * the ID for the chosen address.
+         *
+         * @param commit
+         * @param payload
+         * @returns {Promise.<void>}
+         */
+        async getFinalAddressSelectionDetails ({ commit }, payload) {
+            const retrievedAddress = await fullAddressService.getFullAddressDetails(payload);
+
+            if (retrievedAddress) {
+                commit(SET_FULL_ADDRESS_DETAILS, retrievedAddress);
+            }
+        },
+
+        setSelectedFullAddressDetails ({ commit }, payload) {
+            commit(SHOW_FULL_ADDRESS_DETAILS, payload);
+        },
+
         setContinueWithDetails ({ commit }, payload) {
             commit(SET_CONTINUE_WITH_SUGGESTION, payload);
         }
@@ -234,6 +260,67 @@ export default {
                 : results.filter(addressDetails => addressDetails.type === 'Postcode');
         },
 
+        /**
+         *
+         * Updates the payload based on previously selected `Item.id` (From the retrieve API call).
+         *
+         * We also manually need to remove duplicate IDs from Loqate's response.
+         * (Bug in their response).
+         *
+         * @param state
+         * @param fullAddressDetails
+         */
+        [SET_FULL_ADDRESS_DETAILS]: (state, fullAddressDetails) => {
+            state.fullAddressDetails = fullAddressDetails.Items.reduce((seed, val) => {
+                if (!seed.some(s => s.Id === val.Id)) {
+                    seed.push(val);
+                }
+                return seed;
+            }, []).map(({
+                PostalCode,
+                Line1,
+                Line2,
+                Line3,
+                Line4,
+                Line5,
+                City,
+                Company,
+                Field1,
+                Field2
+            }) => ({
+                postcode: PostalCode,
+                line1: Company ? `${Company}, ${Line1}` : Line1,
+                line2: Line2,
+                line3: Line3,
+                line4: Line4,
+                line5: Line5,
+                city: City,
+                field1: Field1,
+                field2: Field2
+            }));
+        },
+
+        /**
+         * Format the response from `SET_FULL_ADDRESS_DETAILS` & set a formatted address
+         * string in state so we can display this to the user.
+         *
+         * @param state
+         * @param address
+         */
+        [SHOW_FULL_ADDRESS_DETAILS]: (state, address) => {
+            const addressValues = [];
+
+            address.forEach(obj => {
+                Object.keys(obj).forEach(key => {
+                    if (!(key.indexOf('field1') !== -1) && !(key.indexOf('field2') !== -1)) {
+                        addressValues.push(obj[key]);
+                    }
+                });
+            });
+
+            state.address = addressValues.filter(Boolean).join(', ');
+        },
+
         [SET_CONTINUE_WITH_SUGGESTION]: (state, continueWithSuggestionDetails) => {
             state.continueWithSuggestionDetails = continueWithSuggestionDetails;
         },
@@ -241,6 +328,10 @@ export default {
         [SET_SELECTED_STREET_LEVEL_ADDRESS_ID]: (state, selectedStreetLevelAddressId) => {
             state.selectedStreetLevelAddressId =
                 (selectedStreetLevelAddressId && selectedStreetLevelAddressId.streetLevelAddress);
+        },
+
+        [SET_ADDRESS]: (state, address) => {
+            state.address = address;
         }
     }
 };

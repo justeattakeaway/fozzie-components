@@ -17,10 +17,9 @@
 
         <div :class="$style['c-search-fieldWrapper']">
             <form-search-field
-                v-model="address"
+                v-model="addressValue"
                 :error-message="errorMessage"
                 :custom-attribute-override="addressField"
-                :address="address"
                 :service="service"
                 :copy="copy"
                 :is-compressed="isCompressed"
@@ -31,11 +30,11 @@
                 v-if="shouldDisplaySuggestions"
                 data-test-id="suggestions"
                 aria-live="assertive"
-                :address="address"
                 :copy="copy"
                 :suggestion-format="suggestionFormat"
                 :suggestions="suggestions"
-                :selected="keyboardSuggestionIndex" />
+                :selected="keyboardSuggestionIndex"
+                @selected-suggestion="onSelectedSuggestion" />
 
             <form-search-button
                 :copy="copy"
@@ -102,7 +101,6 @@ export default {
 
     data () {
         const {
-            address,
             cuisine,
             query,
             formUrl,
@@ -118,7 +116,6 @@ export default {
         } = this.config;
 
         return {
-            address: this.lastAddress || address,
             cuisine,
             query,
             formUrl,
@@ -130,12 +127,14 @@ export default {
             onSubmit,
             shouldAutoPopulateAddress,
             suggestionFormat,
-            requiredFields
+            requiredFields,
+            lastAddress: ''
         };
     },
 
     computed: {
         ...mapState('searchbox', [
+            'address',
             'suggestions',
             'errors',
             'isValid',
@@ -143,8 +142,20 @@ export default {
             'streetNumber',
             'isDirty',
             'keyboardSuggestionIndex',
-            'isFullAddressSearchEnabled'
+            'isFullAddressSearchEnabled',
+            'formattedFullAddress',
+            'selectedStreetLevelAddressId'
         ]),
+
+        addressValue: {
+            get () {
+                return this.address;
+            },
+
+            set (value) {
+                this.setAddress(value);
+            }
+        },
 
         /**
          * Display API suggestions in component: `form-search-suggestions`:
@@ -186,7 +197,7 @@ export default {
          */
         hasLastSavedAddress () {
             return this.lastAddress
-                    && this.address === this.lastAddress
+                    && this.addressValue === this.lastAddress
                     && this.isValid === true;
         },
 
@@ -213,7 +224,7 @@ export default {
          * search suggestions component dropdown.
          *
          * */
-        address: debounce(
+        addressValue: debounce(
             function invoker (value) {
                 const { preSearchValidation } = this.service.options;
                 const errors = !!preSearchValidation && this.service.isValid(value, preSearchValidation);
@@ -221,13 +232,13 @@ export default {
                 if (Array.isArray(errors)) {
                     this.setIsDirty(true);
                     this.setSuggestions(Promise.reject(new Error(errors[0])));
-                } else {
+                } else if (this.service.isAutocompleteEnabled) {
                     this.setSuggestions(this.service.search(value));
                 }
 
                 if (this.isFullAddressSearchEnabled) {
                     this.getMatchedAreaAddressResults({
-                        address: this.address
+                        address: this.addressValue
                     });
                 }
             },
@@ -241,7 +252,8 @@ export default {
         this.lastAddress = this.config.locationFormat(getLastLocation());
 
         if (this.lastAddress) {
-            this.address = this.shouldAutoPopulateAddress ? this.lastAddress : '';
+            const address = this.shouldAutoPopulateAddress ? this.lastAddress : '';
+            this.setAddress(address);
         }
 
         this.formUrl = generateFormQueryUrl(this.queryString, this.formUrl);
@@ -250,7 +262,7 @@ export default {
         this.initialiseFullAddressSearch(this.config.isFullAddressSearchEnabled);
     },
 
-    created () {
+    beforeCreate () {
         if (!this.$store.hasModule('searchbox')) {
             this.$store.registerModule('searchbox', searchboxModule);
         }
@@ -262,6 +274,7 @@ export default {
 
     methods: {
         ...mapActions('searchbox', [
+            'setAddress',
             'setSuggestions',
             'setIsValid',
             'setErrors',
@@ -285,7 +298,7 @@ export default {
          * @param e
          */
         async submit (e) {
-            this.setIsValid(this.service.isValid(this.address));
+            this.setIsValid(this.service.isValid(this.addressValue));
 
             if (this.hasLastSavedAddress) {
                 e.preventDefault();
@@ -298,7 +311,7 @@ export default {
             if (this.isValid === true) {
                 this.setErrors([]);
                 this.clearAddressValue(this.shouldClearAddressOnValidSubmit);
-                onCustomSubmit(this.onSubmit, this.address, e);
+                onCustomSubmit(this.onSubmit, this.addressValue, e);
                 this.verifyHasPostcodeChanged();
 
                 if (this.service.isAutocompleteEnabled) {
@@ -315,7 +328,7 @@ export default {
                     processLocationCookie(this.shouldSetCookies, info);
                 } else {
                     // Process standard address based location cookies `je-location`
-                    processLocationCookie(this.shouldSetCookies, this.address);
+                    processLocationCookie(this.shouldSetCookies, this.addressValue);
                 }
 
                 this.$emit(SUBMIT_VALID_ADDRESS);
@@ -334,7 +347,7 @@ export default {
          * resolve / return specific cases. E.g. if we need more information
          * like the street number we flag this up to the component and display it.
          *
-         * 1. `this.address` is set either via the `index` (clicked on event) or
+         * 1. `this.addressValue` is set either via the `index` (clicked on event) or
          * `keyboardSuggestionIndex` (enter key event) depending on which was used
          * the address is set accordingly.
          *
@@ -344,7 +357,7 @@ export default {
          *
          * */
         onSelectedSuggestion (index) {
-            this.address = this.suggestionFormat(this.suggestions[index || this.keyboardSuggestionIndex]);
+            this.setAddress(this.suggestionFormat(this.suggestions[index || this.keyboardSuggestionIndex]));
 
             const locationInformation = selectedSuggestion(
                 this.service,
@@ -395,7 +408,7 @@ export default {
          */
         clearAddressValue (shouldClearAddressOnValidSubmit) {
             if (shouldClearAddressOnValidSubmit) {
-                this.address = '';
+                this.setAddress('');
                 this.setIsDirty(false);
             }
         },
@@ -409,7 +422,7 @@ export default {
         verifyHasPostcodeChanged () {
             if (
                 this.lastAddress
-                && normalisePostcode(this.lastAddress) !== normalisePostcode(this.address)
+                && normalisePostcode(this.lastAddress) !== normalisePostcode(this.addressValue)
             ) {
                 this.$emit(TRACK_POSTCODE_CHANGED);
             }

@@ -154,7 +154,70 @@ function getAddressComponentsMock () {
     };
 }
 
+function getLoqateFullResponseMock () {
+    return [{
+        Id: 'GB|AB|U100022229005',
+        DomesticId: '100022229005',
+        Language: 'ENG',
+        LanguageAlternatives: 'ENG',
+        Department: '',
+        Company: '',
+        SubBuilding: '',
+        BuildingNumber: '181',
+        BuildingName: '',
+        SecondaryStreet: '',
+        Street: 'New North Road',
+        Block: '',
+        Neighbourhood: '',
+        District: '',
+        City: 'Mars',
+        Line1: 'Aquarius',
+        Line2: '',
+        Line3: '',
+        Line4: '',
+        Line5: '',
+        AdminAreaName: 'Space',
+        AdminAreaCode: '',
+        Province: 'Outer Space',
+        ProvinceName: 'Space',
+        ProvinceCode: '',
+        PostalCode: '-08° 07 41',
+        CountryName: 'Space',
+        CountryIso2: 'GB',
+        CountryIso3: 'GBR',
+        CountryIsoNumber: 826,
+        SortingNumber1: '',
+        SortingNumber2: '',
+        Barcode: '',
+        POBoxNumber: '',
+        Label: 'Space Road\nSPACE\nSomewhere\nMARS',
+        Type: 'Residential',
+        DataLevel: 'Premise',
+        Field1: '',
+        Field2: '',
+        Field3: '',
+        Field4: '',
+        Field5: '',
+        Field6: '',
+        Field7: '',
+        Field8: '',
+        Field9: '',
+        Field10: '',
+        Field11: '',
+        Field12: '',
+        Field13: '',
+        Field14: '',
+        Field15: '',
+        Field16: '',
+        Field17: '',
+        Field18: '',
+        Field19: '',
+        Field20: ''
+    }];
+}
+
 export {
     loadGoogleMapsMocks,
-    getAddressComponentsMock
+    getAddressComponentsMock,
+    getLoqateFullResponseMock
 };
