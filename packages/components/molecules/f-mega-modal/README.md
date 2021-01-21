@@ -1,9 +1,11 @@
-<div align="center">
-  <h1>f-mega-modal</h1>
+<div style="text-align: center">
 
-  <img width="125px" alt="Fozzie Bear" src="../../../../bear.png" />
+# f-mega-modal
 
-  <p>A Vue.js modal component</p>
+<img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
+
+Vue.js modal component
+
 </div>
 
 ---
@@ -13,9 +15,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-mega-modal/badge.svg)](https://coveralls.io/github/justeat/f-mega-modal)
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-mega-modal/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-mega-modal?targetFile=package.json)
 
-# Usage
+## Usage
 
-## Installation
+### Installation
 
 ```sh
 yarn add @justeat/f-mega-modal
@@ -25,7 +27,7 @@ yarn add @justeat/f-mega-modal
 npm install @justeat/f-mega-modal
 ```
 
-### Vue Applications
+#### Vue Applications
 
 > Styles have to be imported separately.
 
@@ -40,7 +42,7 @@ export default {
 }
 ```
 
-### Webpack
+#### Webpack
 
 Import the component dynamically to separate the `mega-modal` bundle from the main `bundle.client.js`.
 
@@ -55,9 +57,9 @@ export default {
 }
 ```
 
-## Configuration
+### Configuration
 
-### Props
+#### Props
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
@@ -74,7 +76,7 @@ export default {
 | `close-on-blur` | `Boolean` | `true` | Controls whether or not to close the modal when the user clicks outside of the modal. |
 | `close-button-copy` | `String` | `"Close modal"` | Sets the hidden text value for the close button which is used by screen-readers. |
 
-### CSS Classes
+#### CSS Classes
 
 | Class | Description |
 | ----- | ----------- |
@@ -85,27 +87,27 @@ export default {
 | `c-megaModal-document--scrollable` | Can be used to target the modal document element when it is scrollable. |
 | `c-megaModal-closeBtn` | Can be used to target the modal close button element. |
 
-### Events
+#### Events
 
 | Event | Description |
 | ----- | ----------- |
 | `open` | This event is emitted when the modal is opened. |
 | `close` | This event is emitted when the modal is closed. |
 
-## Development
+### Development
 
 ```sh
-$ git clone git@github.com:justeat/fozzie-components.git
-$ cd fozzie-components
-$ yarn
+git clone git@github.com:justeat/fozzie-components.git
+cd fozzie-components
+yarn
 ```
 
-### Running storybook
+#### Running storybook
 
 From the **root** directory run:
 
 ```sh
-$ yarn storybook:serve
+yarn storybook:serve
 ```
 
-Serve storybook at [http://localhost:6006](http://localhost:6006).
+This serves storybook at [http://localhost:6006](http://localhost:6006).

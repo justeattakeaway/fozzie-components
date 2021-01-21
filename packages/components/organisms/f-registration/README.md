@@ -1,10 +1,12 @@
-<div align="center">
-<h1>f-registration</h1>
+<div style="text-align: center">
 
-<img width="125" alt="Fozzie Bear" src="../../bear.png" />
+# f-registration
 
-<p>Registration Component.</p>
+<img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
+Vue.js modal component
+
+</div>
 
 ---
 
@@ -16,87 +18,100 @@
 
 ## Usage
 
-1.  Install the module using NPM or Yarn:
+## Installation
 
-    ```bash
-    yarn add @justeat/f-registration
-    ```
+```sh
+yarn add @justeat/f-registration
+```
 
-    ```bash
-    npm install @justeat/f-registration
-    ```
+```sh
+npm install @justeat/f-registration
+```
 
-2.  Import the component
+### Vue Applications
 
-    You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+> Styles have to be imported separately.
 
-    ```
-    import RegistrationComponent from '@justeat/f-registration';
-    import '@justeat/f-registration/dist/f-registration.css';
+```js
+import RegistrationComponent from '@justeat/f-registration';
+import '@justeat/f-registration/dist/f-registration.css';
 
-    export default {
-        components: {
-            RegistrationComponent
-        }
+export default {
+    components: {
+        RegistrationComponent
     }
-    ```
+}
+```
 
-    If you are using Webpack, you can import the component dynamically to separate the header bundle from the main `bundle.client.js`:
+### Webpack
 
-    ```
-    import '@justeat/f-registration/dist/f-registration.css';
+Import the component dynamically to separate the `mega-modal` bundle from the main `bundle.client.js`.
 
-    export default {
-        components: {
-            ...
-            RegistrationComponent: () => import(/* webpackChunkName: "vue-registration" */ '@justeat/f-registration')
-        }
+```js
+import '@justeat/f-registration/dist/f-registration.css';
+
+export default {
+    components: {
+        ...
+        RegistrationComponent: () => import(/* webpackChunkName: "vue-registration" */ '@justeat/f-registration')
     }
+}
+```
 
-    ```
+## Configuration
+
+### Props
+
+| Prop  | Type  | Default | Description |
+| ----- | ----- | ------- | ----------- |
+| `local` | `String` | `en-gb` | Sets the translation file to use. |
+| `createAccountUrl` | `String` | Required | URL to forward user to on navigation to their account page. |
+| `createAccountTimeout` | `Number` | `1000` | **???** |
+| `showLoginLink` | `Boolean` | Required | |
+| `loginUrl` | `String` | Required | URL to forward the user to on navigation to the login page. |
+
+### CSS Classes
+
+| Class | Description |
+| ----- | ----------- |
+| `.c-registration-card` | Container for the Registration component. |
+| `.c-registration-genericError` | Container of any error message(s). |
+
+### Events
+
+| Event | Description |
+| ----- | ----------- |
 
 ## Development
-It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
 
-```bash
-# cd ./fozzie-components
-yarn install
+
+```sh
+git clone git@github.com:justeat/fozzie-components.git
+cd fozzie-components
+yarn
+```
 
 ## Testing
-Unit / Integration / Contract
 
-```bash
-# Run Unit / Integration / Contract tests for all components
-cd ./fozzie-components
+## Unit, Integration and Contract
+
+Run from the `f-registration` directory.
+
+```sh
 yarn test
 ```
 
-OR
+## Component Tests
 
-```bash
-# Run Unit / Integration / Contract tests for f-registration
-cd ./fozzie-components/packages/f-registration
-yarn test
-```
+If storybook is not running, start it:
 
-Component Tests
-```bash
-# Run Component tests for all components
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components
-
+```sh
 yarn storybook:build
 yarn storybook:serve-static
-yarn test-component:chrome
 ```
 
-OR
+Once Storybook is listening, run the following from either the root _or_ the component directory.
 
-```bash
-# Run Component tests for f-registration
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components/packages/f-registration
+```sh
 yarn test-component:chrome
 ```
-
-## Documentation to be completed once module is in stable state.
