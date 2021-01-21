@@ -12,13 +12,11 @@ const headerComponent = () => $(HEADER_COMPONENT);
 // Logo
 const headerLogo = () => $(HEADER_LOGO);
 
-export const URL = URLS.default
+exports.URL = () => URLS.default;
+exports.offers = () => URLS.offers;
+exports.delivery = () => URLS.delivery;
+exports.userAccount = () => URLS.userAccount;
 
-exports.URL = () => URLS.default
-exports.offers = () => URLS.offers
-exports.delivery = () => URLS.delivery
-exports.userAccount = () => URLS.userAccount
- 
 // export const urls = {
 //     default: () => URLS.default,
 //     offers: () => URLS.offers,

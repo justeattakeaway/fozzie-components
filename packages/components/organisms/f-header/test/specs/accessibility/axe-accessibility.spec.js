@@ -3,8 +3,7 @@ import HeaderComponent from '../../../test-utils/component-objects/f-header.comp
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-organisms--header-component');
-        browser.switchToFrame(0);
+        browser.url(`${HeaderComponent.URL()}${HeaderComponent.offers()}${HeaderComponent.delivery()}${HeaderComponent.userAccount()}`);
         HeaderComponent.waitForHeader();
     });
 

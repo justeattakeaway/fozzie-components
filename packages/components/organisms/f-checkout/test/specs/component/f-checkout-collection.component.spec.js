@@ -3,9 +3,7 @@ import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.
 
 describe('f-checkout "collection" component tests', () => {
     before(() => {
-        browser.url('?path=/story/components-organisms--checkout-component');
-        CheckoutComponent.changeCheckoutMethod('collection');
-        browser.switchToFrame(0);
+        browser.url('/iframe.html?id=components-organisms--checkout-component&knob-Checkout%20Url=%2Fcheckout-collection.json');
         CheckoutComponent.waitForCheckoutComponent();
     });
 
