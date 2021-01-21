@@ -2,7 +2,7 @@ import CookieBannerComponent from '../../../test-utils/component-objects/f-cooki
 
 describe('f-cookieBanner component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-organisms--cookie-banner-component'); //This URL may be wrong, worth checking in storybook!
+        browser.url('?path=/story/components-organisms--cookie-banner-component');
         browser.switchToFrame(0);
         CookieBannerComponent .waitForCookieBannerComponent();
     });

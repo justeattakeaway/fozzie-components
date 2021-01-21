@@ -5,6 +5,11 @@ module.exports = {
         'vue'
     ],
 
+    modulePathIgnorePatterns: [
+        './test/specs/component/',
+        './test/specs/accessibility'
+    ],
+    
     transform: {
         '^.+\\.js$': 'babel-jest',
         '^.+\\.vue$': 'vue-jest',

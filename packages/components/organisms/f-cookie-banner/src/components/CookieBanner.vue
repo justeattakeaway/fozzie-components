@@ -46,7 +46,6 @@
                 <button-component
                     tabindex="0"
                     role="button"
-                    data-button-accept
                     is-full-width
                     @click.native="acceptActions">
                     {{ copy.buttonText2 }}
@@ -55,7 +54,6 @@
                     tabindex="0"
                     role="button"
                     button-type="ghost"
-                    data-button-nonaccept
                     is-full-width
                     @click.native="nonAcceptActions">
                     {{ copy.buttonText1 }}
