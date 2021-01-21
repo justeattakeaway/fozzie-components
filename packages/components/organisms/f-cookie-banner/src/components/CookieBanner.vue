@@ -2,13 +2,13 @@
     <div
         ref="cookieBanner"
         :class="[$style['c-cookieBanner'], $style['c-cookieBanner-overlay'], { [$style['c-cookieBanner--hidden']]: hideBanner }]"
-        attr="data-cookie-consent-overlay"
-        :aria-hidden="isHidden">
+        data-cookie-consent-overlay
+        data-test-id="cookieBanner-component"
+        :aria-hidden="hideBanner">
         <div
             v-if="!legacyBanner"
             :class="$style['c-cookieBanner-card']">
             <div
-                id="dialog1"
                 :class="$style['c-cookieBanner-content']"
                 role="dialog"
                 aria-labelledby="cookieConsentLabel"
@@ -124,14 +124,12 @@ export default {
         const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
         const theme = globalisationServices.getTheme(locale);
-        const hideBanner = false;
-        const legacyBanner = false;
 
         return {
             copy: { ...localeConfig },
             theme,
-            hideBanner,
-            legacyBanner
+            hideBanner: false,
+            legacyBanner: false
         };
     },
 
@@ -205,7 +203,8 @@ export default {
                 this.hideBanner = this.$cookies.get('je-banner_cookie') === 2;
                 this.setLegacyCookieBannerCookie();
             } else {
-                this.hideBanner = this.$cookies.get('je-cookieConsent') === 'full' || this.$cookies.get('je-cookieConsent') === 'necessary';
+                const cookieConsent = this.$cookies.get('je-cookieConsent');
+                this.hideBanner = cookieConsent === 'full' || cookieConsent === 'necessary';
             }
         },
         /**
