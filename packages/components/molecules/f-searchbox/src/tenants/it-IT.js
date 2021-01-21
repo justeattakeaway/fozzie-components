@@ -18,7 +18,6 @@ const copy = {
 
 const component = {
     formUrl: undefined,
-    address: '',
     cuisine: '',
     isShellHidden: false,
     isCompressed: false,

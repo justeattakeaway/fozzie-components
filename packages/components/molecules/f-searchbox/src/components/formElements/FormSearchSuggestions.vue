@@ -7,8 +7,9 @@
             type="button"
             :class="{
                 [$style['c-search-suggestions-item']]: true,
-                [$style.selected]: index === keyboardSuggestionSelection
-            }">
+                [$style.selected]: index === selected
+            }"
+            @click="$emit('selected-suggestion', index)">
             {{ suggestionFormat(item) }}
         </button>
         <div :class="$style['c-search-poweredByGoogle']">
@@ -37,7 +38,7 @@ export default {
             })
         },
 
-        keyboardSuggestionSelection: {
+        selected: {
             type: Number,
             default: 0
         }

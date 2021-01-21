@@ -23,7 +23,6 @@ const copy = {
 
 const component = {
     formUrl: '/search/do',
-    address: '',
     cuisine: '',
     isShellHidden: false,
     isCompressed: false,

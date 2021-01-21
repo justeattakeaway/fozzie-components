@@ -3,6 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.19
+------------------------------
+*January 20, 2021*
+
+### Changed
+- `Address` so it comes from state instead of config.
+- `created` hook to `beforeCreate` to resolve Vuex module registration issues with v-model.
+
+### Removed
+- `Address` reference from tenant config.
+
+### Added
+- Ability to set address via Vuex action `setAddress`.
+- Tests to cover changes.
+- `Loqate` - Allow user to continue with a suggested address.
+- `Loqate` - Allow user to pick their address from street level results.
+
+
 v4.0.0-beta.18
 ------------------------------
 *January 14, 2021*

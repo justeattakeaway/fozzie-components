@@ -69,11 +69,6 @@ export default {
             default: false
         },
 
-        address: {
-            type: String,
-            default: ''
-        },
-
         isCompressed: {
             type: Boolean,
             default: true
@@ -97,6 +92,7 @@ export default {
 
     computed: {
         ...mapState('searchbox', [
+            'address',
             'shouldInputFieldHaveFocus',
             'isStreetNumberRequired',
             'isGeoLocationAvailable',
@@ -125,7 +121,9 @@ export default {
 
     methods: {
         ...mapActions('searchbox', [
+            'setAddress',
             'setInputFocus',
+            'setInputTimeoutValue',
             'setKeyboardSuggestion'
         ]),
 

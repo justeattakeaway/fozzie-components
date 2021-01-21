@@ -1,5 +1,6 @@
 import axios from 'axios';
 import loqate from '..';
+import { getLoqateFullResponseMock } from '../../../../utils/testHelpers/testHelpers';
 
 describe('`Loqate`', () => {
     describe('`getPartialAddressSearch`', () => {
@@ -71,6 +72,54 @@ describe('`Loqate`', () => {
 
                 // Act & Assert
                 await expect(loqate.getPartialAddressSearch()).rejects.toThrow(errorMessage);
+            });
+        });
+    });
+
+    describe('`getFullAddressDetails`', () => {
+        it('should exist', () => {
+            expect(loqate.getFullAddressDetails).toBeDefined();
+        });
+
+        describe('when invoked', () => {
+            beforeEach(() => {
+                axios.get = jest.fn(() => Promise.resolve({ data: 'E46 SMG' }));
+            });
+
+            afterEach(() => {
+                axios.get.mockClear();
+            });
+
+            it('should make a call to the `loqate` endpoint with correct url & params passed', () => {
+                // Act
+                loqate.getFullAddressDetails('BMW|RHD|B|S55E46');
+
+                // Assert
+                expect(axios.get).toHaveBeenCalledWith(
+                    '/Retrieve/v1/json3.ws',
+                    {
+                        baseURL: 'https://api.addressy.com/Capture/Interactive',
+                        params: {
+                            Countries: 'GB',
+                            Field1Format: '{Latitude}',
+                            Field2Format: '{Longitude}',
+                            Id: 'BMW|RHD|B|S55E46',
+                            Key: '',
+                            Limit: '20'
+                        }
+                    }
+                );
+            });
+
+            it('should return a response from the `loqate` api once resolved `ok`', async () => {
+                const result = getLoqateFullResponseMock();
+                axios.get = jest.fn().mockImplementation(() => new Promise(resolve => {
+                    resolve({ data: result });
+                }));
+
+                const response = await loqate.getFullAddressDetails('BMW|RHD|B|S55E46');
+
+                expect(response).toEqual(result);
             });
         });
     });
