@@ -8,6 +8,7 @@
             (isFullWidth ? $style['o-btn--fullWidth'] : '')
         ]"
         :attributes="$attrs"
+        :actionType="actionType"
         :data-test-id="`${componentType}-component`">
         <slot />
     </component>
@@ -57,15 +58,6 @@ export default {
          */
         componentType () {
             return this.$attrs.href ? 'link-button' : 'action-button';
-        }
-    },
-
-    /**
-     * If no `href` attribut has been applied, set the the button type to `actionType` prop
-     */
-    created () {
-        if (!this.$attrs.href) {
-            this.$attrs.type = this.actionType;
         }
     }
 };

@@ -1,5 +1,16 @@
 <template>
-    <button :type="$attrs.type">
+    <button :type="actionType">
         <slot />
     </button>
 </template>
+
+<script>
+export default {
+    props: {
+        actionType: {
+            type: String,
+            required: true
+        }
+    }
+}
+</script>

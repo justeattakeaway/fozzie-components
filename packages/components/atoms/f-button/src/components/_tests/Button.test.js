@@ -3,8 +3,10 @@ import FButton from '../Button.vue';
 
 describe('Button', () => {
     allure.feature('Button');
+    const actionType = 'button';
+
     it('should be defined', () => {
-        const propsData = {};
+        const propsData = { actionType };
         const wrapper = shallowMount(FButton, { propsData });
         expect(wrapper.exists()).toBe(true);
     });
@@ -13,7 +15,10 @@ describe('Button', () => {
         describe('buttonSizeClassname :: ', () => {
             it('should capitalise to first letter of `buttonSize` prop :: ', () => {
                 // Arrange
-                const propsData = { buttonSize: 'medium' };
+                const propsData = {
+                    buttonSize: 'medium',
+                    actionType
+                };
 
                 // Act
                 const wrapper = shallowMount(FButton, { propsData });
@@ -24,7 +29,10 @@ describe('Button', () => {
 
             it('should capitalise to first two letters of `buttonSize` prop if `xsmall` :: ', () => {
                 // Arrange
-                const propsData = { buttonSize: 'xsmall' };
+                const propsData = {
+                    buttonSize: 'xsmall',
+                    actionType
+                };
 
                 // Act
                 const wrapper = shallowMount(FButton, { propsData });
@@ -38,10 +46,7 @@ describe('Button', () => {
             let propsData;
 
             describe('when `href` prop is empty :: ', () => {
-                let actionType;
-
                 beforeEach(() => {
-                    actionType = 'button';
                     propsData = {
                         href: null,
                         actionType
