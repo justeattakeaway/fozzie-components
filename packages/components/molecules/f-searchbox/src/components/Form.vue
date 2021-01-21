@@ -231,7 +231,7 @@ export default {
                 if (Array.isArray(errors)) {
                     this.setIsDirty(true);
                     this.setSuggestions(Promise.reject(new Error(errors[0])));
-                } else if (this.isAutocompleteEnabled) {
+                } else if (this.service.isAutocompleteEnabled) {
                     this.setSuggestions(this.service.search(value));
                 }
 
