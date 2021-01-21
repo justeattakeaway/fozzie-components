@@ -35,10 +35,14 @@ describe('Button', () => {
         });
 
         describe('componentType :: ', () => {
-            describe('when `href` prop is an empty string :: :: ', () => {
-                const propsData = { href: '' };
+            let propsData;
 
-                it('should return `action`', () => {
+            describe('when `href` prop is empty :: ', () => {
+                beforeEach(() => {
+                    propsData = { href: null };
+                })
+
+                it('should return `componentType` of `action-button`', () => {
                     // Act
                     const wrapper = shallowMount(FButton, { propsData });
 
@@ -55,11 +59,15 @@ describe('Button', () => {
                 });
             });
 
-            describe('when `href` prop is not an empty string :: :: ', () => {
-                const link = 'http://www.just-eat.co.uk';
-                const propsData = { href: link };
+            describe('when `href` prop is not an empty string :: ', () => {
+                let link;
 
-                it('should return `link`', () => {
+                beforeEach(() => {
+                    link = 'http://www.just-eat.co.uk';
+                    propsData = { href: link };
+                })
+
+                it('should return `componentType` of `link-button`', () => {
                     // Act
                     const wrapper = shallowMount(FButton, { propsData });
 
