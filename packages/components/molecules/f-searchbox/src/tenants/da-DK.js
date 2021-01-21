@@ -15,7 +15,6 @@ const copy = {
 
 const component = {
     formUrl: '/homecw/searchresult/',
-    address: '',
     cuisine: '',
     isShellHidden: false,
     isCompressed: false,
