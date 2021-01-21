@@ -3,10 +3,13 @@ import FButton from '../Button.vue';
 
 describe('Button', () => {
     allure.feature('Button');
+
     const actionType = 'button';
+    const link = 'http://www.just-eat.co.uk';
+
 
     it('should be defined', () => {
-        const propsData = { actionType };
+        const propsData = { };
         const wrapper = shallowMount(FButton, { propsData });
         expect(wrapper.exists()).toBe(true);
     });
@@ -68,21 +71,10 @@ describe('Button', () => {
                     // Assert
                     expect(wrapper.find('[data-test-id="action-button-component"]').exists()).toBeTruthy();
                 });
-
-                it('should apply `type` attribute', () => {
-                    // Act
-                    const wrapper = mount(FButton, { propsData });
-
-                    // Assert
-                    expect(wrapper.attributes('type')).toEqual(actionType);
-                });
             });
 
             describe('when `href` prop is not an empty string :: ', () => {
-                let link;
-
                 beforeEach(() => {
-                    link = 'http://www.just-eat.co.uk';
                     propsData = { href: link };
                 });
 
@@ -108,6 +100,40 @@ describe('Button', () => {
 
                     // Assert
                     expect(wrapper.attributes('href')).toEqual(link);
+                });
+            });
+        });
+
+        describe('buttonActionType :: ', () => {
+            describe('when `href` prop is empty :: ', () => {
+                it('should add `type` attribute', () => {
+                    // Arrange
+                    const propsData = {
+                        href: null,
+                        actionType
+                    };
+
+                    // Act
+                    const wrapper = mount(FButton, { propsData });
+
+                    // Assert
+                    expect(wrapper.attributes('type')).toEqual(actionType);
+                });
+            });
+
+            describe('when `href` prop is not an empty string :: ', () => {
+                it('should not add `type` attribute', () => {
+                    // Arrange
+                    const propsData = {
+                        href: link,
+                        actionType
+                    };
+
+                    // Act
+                    const wrapper = mount(FButton, { propsData });
+
+                    // Assert
+                    expect(wrapper.attributes('type')).toBeUndefined();
                 });
             });
         });
