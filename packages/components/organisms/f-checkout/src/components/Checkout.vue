@@ -220,18 +220,16 @@ export default {
     },
 
     watch: {
-        authToken () {
-            this.setAuthToken(this.authToken);
+        async authToken () {
+            console.log('watch'); // eslint-disable-line
+            await this.gadget();
         }
     },
 
-    async mounted () {
-        this.setAuthToken(this.authToken);
-        await Promise.all([this.loadCheckout(), this.loadAvailableFulfilment()]);
-    },
-
     created () {
+        console.log('CREATED FIRED'); // eslint-disable-line
         if (!this.$store.hasModule('checkout')) {
+            console.log('ADDED MOduLE'); // eslint-disable-line
             this.$store.registerModule('checkout', checkoutModule);
         }
     },
@@ -255,6 +253,12 @@ export default {
             'setAuthToken',
             'updateCustomerDetails'
         ]),
+
+        async gadget () {
+            console.log('gadget'); // eslint-disable-line
+            this.setAuthToken(this.authToken);
+            await Promise.all([this.loadCheckout(), this.loadAvailableFulfilment()]);
+        },
 
         /**
          * Submit the checkout details while emitting events to communicate its success or failure.
