@@ -276,7 +276,6 @@ export default {
 
                 await this.postCheckout({
                     url: 'myPostUrl',
-                    tenant: this.tenant,
                     data: checkoutData,
                     timeout: this.checkoutTimeout
                 });
@@ -315,7 +314,6 @@ export default {
             try {
                 await this.getCheckout({
                     url: this.checkoutUrl,
-                    tenant: this.tenant,
                     timeout: this.getCheckoutTimeout
                 });
 
@@ -333,7 +331,6 @@ export default {
             try {
                 await this.getAvailableFulfilment({
                     url: this.checkoutAvailableFulfilmentUrl,
-                    tenant: this.tenant,
                     timeout: this.getCheckoutTimeout
                 });
 
