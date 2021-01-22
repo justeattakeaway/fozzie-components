@@ -1,12 +1,10 @@
 import FooterComponent from '../../../test-utils/component-objects/f-footer.component';
-const path = 'iframe.html?id=components-organisms--' // storybook url for all components - could move to config.
-const locale = '&knob-Locale=en-GB'
-const links = '&knob-Show%20courier%20links=true'
+import { KNOBS } from '../../../test-utils/component-objects/f-footer.selectors';
+import { ORGANISMS, GB_LOCALE } from '../../../../../../../url.selectors'
 
 describe('f-footer component tests', () => {
     beforeEach(() => {
-        browser.url(`${path}footer-component${locale}`);
-        FooterComponent.waitForFooter();
+        browser.url(`${ORGANISMS}footer-component${GB_LOCALE}`);
     });
 
     it('should display the footer', () => {
@@ -74,7 +72,7 @@ describe('f-footer component tests', () => {
 
     it('Should not show courier links on en-GB locale if courier links is set to true', () => {
         // Act
-        browser.url(`${path}footer-component${locale}${links}`);
+        browser.url(`${ORGANISMS}footer-component${GB_LOCALE}${KNOBS}`);
 
         // Assert
         expect(FooterComponent.isCourierLinksDisplayed()).toBe(false);

@@ -4,7 +4,7 @@ import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.
 describe('f-checkout "delivery" component tests', () => {
     before(() => {
         browser.url('/iframe.html?id=components-organisms--checkout-component');
-        CheckoutComponent.waitForCheckoutComponent();
+        // CheckoutComponent.waitForCheckoutComponent();
     });
 
     forEach(['mobileNumber', 'addressLine1', 'addressCity', 'addressPostcode'])

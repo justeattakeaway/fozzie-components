@@ -3,7 +3,7 @@ import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.
 describe('f-checkout component tests', () => {
     before(() => {
         browser.url('/iframe.html?id=components-organisms--checkout-component');
-        CheckoutComponent.waitForCheckoutComponent();
+        // CheckoutComponent.waitForCheckoutComponent();
     });
 
     it('should display the f-checkout component', () => {

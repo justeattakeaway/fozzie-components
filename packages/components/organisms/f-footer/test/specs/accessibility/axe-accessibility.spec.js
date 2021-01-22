@@ -1,15 +1,18 @@
 import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
-import FooterComponent from '../../../test-utils/component-objects/f-footer.component';
+import { KNOBS } from '../../../test-utils/component-objects/f-footer.selectors';
+import { ORGANISMS, GB_LOCALE, AU_LOCALE } from '../../../../../../../url.selectors'
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        browser.url('?path=/story/components-organisms--footer-component');
-        browser.switchToFrame(0);
-        FooterComponent.waitForFooter();
+
+    it('a11y - should test f-footer component WCAG compliance', () => {
+        // Act
+        browser.url(`${ORGANISMS}footer-component${GB_LOCALE}${KNOBS}`);
+        const axeResults = getAccessibilityTestResults('f-footer');
     });
 
     it('a11y - should test f-footer component WCAG compliance', () => {
         // Act
+        browser.url(`${ORGANISMS}footer-component${AU_LOCALE}${KNOBS}`);
         const axeResults = getAccessibilityTestResults('f-footer');
     });
 });
