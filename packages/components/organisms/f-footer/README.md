@@ -1,9 +1,11 @@
-<div align="center">
-<h1>f-footer</h1>
+<div style="text-align: center">
 
-<img width="125" alt="Fozzie Bear" src="../../bear.png" />
+# f-footer
 
-<p>Global Footer Component for Vue.js.</p>
+<img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
+
+Global Footer Component for Vue.js.
+
 </div>
 
 ---

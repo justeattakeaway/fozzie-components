@@ -1,5 +1,5 @@
 
-<div align="center">
+<div style="text-align: center">
   <h1>f-<%= name.default %></h1>
 
   <img width="125" alt="Fozzie Bear" src="../../bear.png" />
