@@ -12,7 +12,7 @@ v4.0.0-beta.20
 - Ability to hide dropdown when final address is picked.
 
 ### Fixed
-- Drop down minor flicker when setTimeout is used.
+- Drop down flicker when setTimeout is used.
 
 
 v4.0.0-beta.19
