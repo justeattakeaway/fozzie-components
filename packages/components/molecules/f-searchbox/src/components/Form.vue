@@ -135,16 +135,17 @@ export default {
     computed: {
         ...mapState('searchbox', [
             'address',
-            'suggestions',
             'errors',
+            'formattedFullAddress',
             'isValid',
             'isInputFocus',
-            'streetNumber',
             'isDirty',
-            'keyboardSuggestionIndex',
             'isFullAddressSearchEnabled',
-            'formattedFullAddress',
-            'selectedStreetLevelAddressId'
+            'keyboardSuggestionIndex',
+            'suggestions',
+            'streetNumber',
+            'selectedStreetLevelAddressId',
+            'shouldDisplaySuggestionsDropdown'
         ]),
 
         addressValue: {
@@ -168,6 +169,7 @@ export default {
         shouldDisplaySuggestions () {
             return (this.service.isAutocompleteEnabled || this.isFullAddressSearchEnabled)
                     && this.isInputFocus
+                    && this.shouldDisplaySuggestionsDropdown
                     && !!this.suggestions.length
                     && (!this.errors.length || this.isDirty);
         },
