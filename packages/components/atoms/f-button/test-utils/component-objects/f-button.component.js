@@ -1,4 +1,4 @@
-const buttonComponent = () => $('[data-test-id="button-component"]');
+const buttonComponent = () => $('[data-test-id="action-button-component"]');
 
 exports.waitForButtonComponent = () => buttonComponent().waitForExist();
 
