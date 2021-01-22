@@ -1,11 +1,12 @@
 <div align="center">
-<h1>f-registration</h1>
 
-<img width="125" alt="Fozzie Bear" src="../../bear.png" />
+# f-registration
 
-<p>Registration Component.</p>
+<img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
+Registration Component.
 
+</div>
 ---
 
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-registration.svg)](https://badge.fury.io/js/%40justeat%2Ff-registration)

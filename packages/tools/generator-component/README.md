@@ -1,9 +1,11 @@
-<div align="center">
-  <h1>generator-component</h1>
+<div style="text-align: center">
 
-  <img width="125" alt="Fozzie Bear" src="../../bear.png" />
+# generator-component
 
-  <p>A generator for Fozzie components</p>
+<img width="125" alt="Fozzie Bear" src="../../../bear.png" />
+
+A generator for Fozzie components.
+
 </div>
 
 ---
