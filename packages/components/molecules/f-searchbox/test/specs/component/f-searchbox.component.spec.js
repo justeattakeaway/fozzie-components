@@ -1,10 +1,9 @@
 import SearchboxComponent from '../../../test-utils/component-objects/f-searchbox.component';
+import { MOLECULES } from '../../../../../../../url.selectors';
 
 describe('f-searchbox component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-molecules--vue-searchbox-component');
-        browser.switchToFrame(0);
-        SearchboxComponent.waitForSearchboxComponent();
+        browser.url(`${MOLECULES}searchbox-component`);
     });
 
     it.skip('should display the f-searchbox component', () => {
