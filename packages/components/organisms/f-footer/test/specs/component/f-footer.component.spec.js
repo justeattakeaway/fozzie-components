@@ -1,5 +1,5 @@
 import FooterComponent from '../../../test-utils/component-objects/f-footer.component';
-import { KNOBS } from '../../../test-utils/component-objects/f-footer.selectors';
+import { COURIERS } from '../../../test-utils/component-objects/f-footer.selectors';
 import { ORGANISMS, GB_LOCALE } from '../../../../../../../url.selectors'
 
 describe('f-footer component tests', () => {
@@ -72,7 +72,7 @@ describe('f-footer component tests', () => {
 
     it('Should not show courier links on en-GB locale if courier links is set to true', () => {
         // Act
-        browser.url(`${ORGANISMS}footer-component${GB_LOCALE}${KNOBS}`);
+        browser.url(`${ORGANISMS}footer-component${GB_LOCALE}${COURIERS}`);
 
         // Assert
         expect(FooterComponent.isCourierLinksDisplayed()).toBe(false);

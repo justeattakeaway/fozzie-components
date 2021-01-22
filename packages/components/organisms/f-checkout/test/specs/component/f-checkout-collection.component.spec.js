@@ -1,9 +1,11 @@
 import forEach from 'mocha-each';
 import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.component';
+import { COLLECTION } from '../../../test-utils/component-objects/f-checkout-selectors';
+import { ORGANISMS } from '../../../../../../../url.selectors'
 
 describe('f-checkout "collection" component tests', () => {
     before(() => {
-        browser.url('/iframe.html?id=components-organisms--checkout-component&knob-Checkout%20Url=%2Fcheckout-collection.json');
+        browser.url(`${ORGANISMS}checkout-component${COLLECTION}`);
     });
 
     it('should display "mobileNumber" error message when collection method is set and number is incorrect', () => {

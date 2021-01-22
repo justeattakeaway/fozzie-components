@@ -6,6 +6,7 @@ export const GO_TO_PAYMENT_BUTTON = '[data-test-id="confirm-payment-submit-butto
 export const KNOB_BUTTON = '[id$="tabbutton-knobs"]';
 export const KNOB_CHECKOUT_DROPDOWN = '[name="Checkout Url"]';
 export const SWITCH_USER_LINK = '[data-test-id="switch-user-link"]';
+export const COLLECTION = '&knob-Checkout%20Url=%2Fcheckout-collection.json'
 
 export const FIELDS = {
     mobileNumber: {
