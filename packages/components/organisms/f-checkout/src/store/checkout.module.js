@@ -43,7 +43,7 @@ export default {
          * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getCheckout: async ({ commit, state }, { url, tenant, timeout }) => {
+        getCheckout: async ({ commit, state }, { url, timeout }) => {
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
             // TODO: deal with exceptions.
@@ -51,7 +51,6 @@ export default {
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept-Tenant': tenant,
                     ...(state.isLoggedIn && {
                         Authorization: authHeader
                     })
@@ -73,7 +72,7 @@ export default {
          */
         // eslint-disable-next-line no-unused-vars
         postCheckout: async ({ commit, state }, {
-            url, tenant, data, timeout
+            url, data, timeout
         }) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
@@ -82,7 +81,6 @@ export default {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept-Tenant': tenant,
                     ...(state.isLoggedIn && {
                         Authorization: authHeader
                     })
@@ -126,13 +124,12 @@ export default {
          * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getAvailableFulfilment: async ({ commit }, { url, tenant, timeout }) => {
+        getAvailableFulfilment: async ({ commit }, { url, timeout }) => {
             // TODO: deal with exceptions.
             const config = {
                 method: 'get',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Accept-Tenant': tenant
+                    'Content-Type': 'application/json'
                 },
                 timeout
             };
