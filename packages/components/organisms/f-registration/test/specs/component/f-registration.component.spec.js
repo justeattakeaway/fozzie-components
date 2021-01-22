@@ -1,9 +1,9 @@
 import RegistrationComponent from '../../../test-utils/component-objects/f-registration.component';
+import { ORGANISMS } from '../../../../../../../url.selectors';
 
 describe('f-registration component tests', () => {
     beforeEach(() => {
-        browser.url('/iframe.html?id=components-organisms--registration-component');
-        RegistrationComponent.waitForRegistrationForm();
+        browser.url(`${ORGANISMS}registration-component`);
     });
 
     it.skip('should display errors if mandatory fields are empty', () => {

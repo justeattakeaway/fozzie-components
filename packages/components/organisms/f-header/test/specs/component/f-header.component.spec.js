@@ -1,10 +1,11 @@
 import HeaderComponent from '../../../test-utils/component-objects/f-header.component';
 import forEach from 'mocha-each';
-//hover test would be useful
+import { ORGANISMS } from '../../../../../../../url.selectors';
+import { OFFERS, DELIVERY, USER_ACCOUNT } from '../../../test-utils/component-objects/f-header.selectors';
 
 describe('f-header component tests', () => {
     beforeEach(() => {
-        browser.url(`${HeaderComponent.URL()}${HeaderComponent.offers()}${HeaderComponent.delivery()}${HeaderComponent.userAccount()}`);
+        browser.url(`${ORGANISMS}header-component${OFFERS}${DELIVERY}${USER_ACCOUNT}`);
     });
 
     it('should display the f-header component', () => {
@@ -14,7 +15,7 @@ describe('f-header component tests', () => {
 
     it('should only show the default navigation fields', () => {
         // Act
-        browser.url(`${HeaderComponent.URL()}`);
+        browser.url(`${ORGANISMS}header-component`);
         
         // Assert
         expect(HeaderComponent.isFieldLinkDisplayed('offers')).toBe(false); 
@@ -66,7 +67,7 @@ describe('f-header component tests', () => {
 
     it('should change the url to offers when offers link is clicked', () => {
         // Act
-        browser.url(`${HeaderComponent.URL()}${HeaderComponent.offers()}`);
+        browser.url(`${ORGANISMS}header-component${OFFERS}`);
         HeaderComponent.clickOffersLink();
 
         // Assert

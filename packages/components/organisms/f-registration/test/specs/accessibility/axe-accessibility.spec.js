@@ -1,10 +1,9 @@
 import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
-import RegistrationComponent from '../../../test-utils/component-objects/f-registration.component';
+import { ORGANISMS } from '../../../../../../../url.selectors';
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        browser.url('/iframe.html?id=components-organisms--registration-component');
-        RegistrationComponent.waitForRegistrationForm();
+        browser.url(`${ORGANISMS}registration-component`);
     });
 
     it('a11y - should test f-registration component WCAG compliance', () => {

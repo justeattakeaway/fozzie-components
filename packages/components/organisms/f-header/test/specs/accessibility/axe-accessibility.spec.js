@@ -1,10 +1,10 @@
 import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
-import HeaderComponent from '../../../test-utils/component-objects/f-header.component';
+import { ORGANISMS } from '../../../../../../../url.selectors';
+import { OFFERS, DELIVERY, USER_ACCOUNT } from '../../../test-utils/component-objects/f-header.selectors';
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        browser.url(`${HeaderComponent.URL()}${HeaderComponent.offers()}${HeaderComponent.delivery()}${HeaderComponent.userAccount()}`);
-        HeaderComponent.waitForHeader();
+        browser.url(`${ORGANISMS}header-component${OFFERS}${DELIVERY}${USER_ACCOUNT}`);
     });
 
     it('a11y - should test f-header component WCAG compliance', () => {
