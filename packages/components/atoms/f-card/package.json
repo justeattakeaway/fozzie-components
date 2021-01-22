@@ -32,6 +32,7 @@
     "lint:style": "vue-cli-service lint:style",
     "report": "cd ../.. && yarn report",
     "test": "vue-cli-service test:unit",
+    "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
     "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
   },
   "browserslist": [

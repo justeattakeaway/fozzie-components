@@ -1,11 +1,9 @@
 import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
-import MegaModalComponent from '../../../test-utils/component-objects/f-mega-modal.component';
+import { MOLECULES } from '../../../../../../../url.selectors';
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-molecules--mega-modal-component');
-        browser.switchToFrame(0);
-        MegaModalComponent.waitForMegaModal();
+        browser.url(`${MOLECULES}mega-modal-component`);
     });
 
     it('a11y - should test f-mega-modal component WCAG compliance', () => {
