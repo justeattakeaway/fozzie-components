@@ -177,7 +177,6 @@ describe('CheckoutModule', () => {
                     method: 'get',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept-Tenant': payload.tenant,
                         Authorization: `Bearer ${state.authToken}`
                     },
                     timeout: payload.timeout
@@ -208,8 +207,7 @@ describe('CheckoutModule', () => {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `Bearer ${authToken}`,
-                        'Accept-Tenant': payload.tenant
+                        Authorization: `Bearer ${authToken}`
                     },
                     timeout: payload.timeout
                 };
@@ -279,8 +277,7 @@ describe('CheckoutModule', () => {
                 config = {
                     method: 'get',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Accept-Tenant': payload.tenant
+                        'Content-Type': 'application/json'
                     },
                     timeout: payload.timeout
                 };

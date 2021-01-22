@@ -39,6 +39,25 @@ export default {
     },
 
     /**
+     * Calls Loqate's Retrieve API, Returns the full address details based on the Id.
+     *
+     * Note: This method will consume API credit.
+     *
+     * @param addressId
+     */
+    getFullAddressDetails (addressId) {
+        config.params.Id = addressId;
+        config.params.Field1Format = '{Latitude}';
+        config.params.Field2Format = '{Longitude}';
+
+        return axios.get('/Retrieve/v1/json3.ws', config)
+        .then(res => {
+            if (res.data) return res.data;
+            return false;
+        });
+    },
+
+    /**
      * Used to check that the `address` matches our requirement before we make a call to Loqate
      * to retrieve results.
      *
