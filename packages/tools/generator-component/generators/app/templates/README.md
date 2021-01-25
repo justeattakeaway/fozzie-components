@@ -97,18 +97,18 @@ $ cd fozzie-components
 $ yarn
 ```
 
-Change directory to the `f-footer` package:
+Change directory to the `f-<%= name.default %>` package:
 
 ```sh
-$ cd packages/components/molecules/f-footer
+$ cd packages/components/molecules/`f-<%= name.default %>`
 ```
 
 ## Testing
 
 ### Unit, Integration and Contract
 
-To test all components, run from root directory.
-To test only `f-<%= name.default %>`, run from the `./fozzie-components/packages/f-<%= name.default %>` directory.
+* To test all components, run from root directory.
+* To test only `f-<%= name.default %>`, run from the `./fozzie-components/packages/f-<%= name.default %>` directory.
 
 ```sh
 yarn test
@@ -116,22 +116,16 @@ yarn test
 
 ### Component Tests
 
-```bash
-# Run Component tests for all components
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components
+Start Storybook if it is not already running by running the following from the root directory.
 
+```sh
 yarn storybook:build
 yarn storybook:serve-static
-yarn test-component:chrome
 ```
 
-OR
+* To run _all_ the component tests, run the following from the root directory.
+* To run only the `f-<%= name.default %>` component tests, run the following from the `f-form-field` directory.
 
-```bash
-# Run Component tests for f-<%= name.default %>
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components/packages/f-<%= name.default %>
+```sh
 yarn test-component:chrome
 ```
-## Documentation to be completed once module is in stable state.

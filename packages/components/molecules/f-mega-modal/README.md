@@ -188,23 +188,24 @@ $ cd packages/components/molecules/f-mega-modal
 ### Unit, Integration and Contract
 
 To test all components, run from root directory.
-To test only `f-form-field`, run from the `./fozzie-components/packages/f-form-field` directory.
+To test only `f-mega-modal`, run from the `./fozzie-components/packages/f-mega-modal` directory.
 
 ```sh
 yarn test
 ```
 
-### Running storybook
+### Component Tests
 
-Storybook can be used to develop new and existing components.
-
-To start storybook:
-
-From the **root** directory run:
+Start Storybook if it is not already running by running the following from the root directory.
 
 ```sh
-$ yarn storybook:serve
+yarn storybook:build
+yarn storybook:serve-static
 ```
 
-This will build and serve storybook at [http://localhost:6006](http://localhost:6006).
+* To run _all_ the component tests, run the following from the root directory.
+* To run only the `f-mega-modal` component tests, run the following from the `f-mega-modal` directory.
 
+```sh
+yarn test-component:chrome
+```

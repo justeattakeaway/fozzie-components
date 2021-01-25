@@ -122,28 +122,23 @@ $ cd packages/components/molecules/f-footer
 ### Unit, Integration and Contract
 
 To test all components, run from root directory.
-To test only `f-form-field`, run from the `./fozzie-components/packages/f-form-field` directory.
+To test only `f-footer`, run from the `./fozzie-components/packages/f-footer` directory.
 
 ```sh
 yarn test
 ```
-
 ### Component Tests
-```bash
-# Run Component tests for all components
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components
 
+Start Storybook if it is not already running by running the following from the root directory.
+
+```sh
 yarn storybook:build
 yarn storybook:serve-static
-yarn test-component:chrome
 ```
 
-OR
+* To run _all_ the component tests, run the following from the root directory.
+* To run only the `f-footer` component tests, run the following from the `f-footer` directory.
 
-```bash
-# Run Component tests for f-footer
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components/packages/f-footer
+```sh
 yarn test-component:chrome
 ```

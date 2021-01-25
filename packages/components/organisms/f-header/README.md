@@ -112,25 +112,18 @@ To test only `f-header`, run from the `./fozzie-components/packages/f-header` di
 yarn test
 ```
 
-## Component Tests
+### Component Tests
 
-```bash
-# Run Component tests for all components
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components
+Start Storybook if it is not already running by running the following from the root directory.
 
+```sh
 yarn storybook:build
 yarn storybook:serve-static
-yarn test-component:chrome
 ```
 
-OR
+* To run _all_ the component tests, run the following from the root directory.
+* To run only the `f-header` component tests, run the following from the `f-header` directory.
 
-```bash
-# Run Component tests for f-header
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components/packages/f-header
+```sh
 yarn test-component:chrome
 ```
-
-## Documentation to be completed once module is in stable state.
