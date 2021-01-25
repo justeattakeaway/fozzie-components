@@ -140,7 +140,7 @@ export default {
         },
 
         /**
-         * Get the checkout details from the backend and update the state.
+         * Get the basket details from the backend and update the state.
          *
          * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
          * @param {Object} payload - Parameter with the different configurations for the request.
