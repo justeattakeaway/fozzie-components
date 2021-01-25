@@ -75,9 +75,11 @@ The props that can be defined are as follows:
 
 | Prop  | Type  | Required | Default | Description |
 | ----- | ----- | -------- |------- | ----------- |
-| `buttonType` | `String` | No |`primary` | Sets the modifier theme for styling. Options: `primary`, `secondary`, `outline`, `ghost`, `link`, `icon`. |
-| `buttonSize` | `String` | No |`medium` | Sets the size `large`, `medium`, `small`, `xsmall` |
+| `buttonType` | `String` | No |`primary` | Sets the modifier theme for styling.<br>Options: `primary`, `secondary`, `outline`, `ghost`, `link`, `icon`. |
+| `buttonSize` | `String` | No |`medium` | Sets the size.<br>Options: `large`, `medium`, `small`, `xsmall`. |
 | `isFullWidth` | `Boolean` | No |  `false` | Controls whether or not to apply fullWidth modifier class |
+| `actionType` | `String` | No |`button` | Sets the action button type.<br>Options: `button`, `submit`, `reset`. |
+| `href` | `String` | No |  N/A | If provided, replaces `Action` button or `Link` button. |
 
 ### CSS Classes
 
