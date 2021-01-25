@@ -31,8 +31,9 @@ export default {
             type: Array,
             default: () => []
         },
+
         suggestionFormat: {
-            type: Object,
+            type: Function,
             default: () => ({
                 suggestionFormat: suggestion => suggestion
             })

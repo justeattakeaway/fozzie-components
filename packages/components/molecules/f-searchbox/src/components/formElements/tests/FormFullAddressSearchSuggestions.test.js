@@ -8,6 +8,7 @@ localVue.use(Vuex);
 
 const mockState = {
     address: '',
+    inputTimeoutValue: 123,
     suggestions: [
         {
             description: 'NASA',
@@ -29,7 +30,9 @@ const mockState = {
 };
 
 const mockActions = {
+    setFocusOnInput: jest.fn(),
     setAddress: jest.fn(),
+    shouldShowSuggestionsDropdown: jest.fn(),
     getMatchedAreaAddressResults: jest.fn(),
     getFinalAddressSelectionDetails: jest.fn(),
     setContinueWithDetails: jest.fn()
@@ -201,6 +204,38 @@ describe('`FullAddressSuggestions`', () => {
                         expect(spy).toHaveBeenCalledWith({
                             address: '',
                             streetLevelAddress: 'GB|RM|A|20388007'
+                        });
+                    });
+
+                    it('should invoke `setFocusOnInput` so we can focus back on the input field after selection', () => {
+                        // Arrange
+                        const { wrapper } = bootstrap();
+                        const event = { preventDefault: jest.fn() };
+                        const index = 0;
+                        const selected = 0;
+                        const spy = jest.spyOn(wrapper.vm, 'setFocusOnInput');
+
+                        // Act
+                        wrapper.vm.getSelectedStreetAddress(event, index, selected);
+
+                        // Assert
+                        expect(spy).toHaveBeenCalledWith(true);
+                    });
+
+                    describe('AND a timeout value `inputTimeoutValue` already exists', () => {
+                        it('should call `clearTimeout` with `inputTimeoutValue` to clear the timeout value', () => {
+                            // Arrange
+                            const { wrapper } = bootstrap();
+                            const event = { preventDefault: jest.fn() };
+                            const index = 0;
+                            const selected = 0;
+                            const spy = jest.spyOn(window, 'clearTimeout');
+
+                            // Act
+                            wrapper.vm.getSelectedStreetAddress(event, index, selected);
+
+                            // Assert
+                            expect(spy).toHaveBeenCalledWith(123);
                         });
                     });
                 });

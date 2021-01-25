@@ -5,6 +5,7 @@
                 $style['c-continueWithSuggestion-btn'],
                 { [$style.selected]: selected }
             ]"
+            data-test-id="continue-with-suggestion"
             tabindex="0"
             type="button"
             @click="setContinueWithSuggestion">
