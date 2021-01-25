@@ -5,8 +5,6 @@ export default {
 
     state: () => ({
         id: '',
-        restaurantId: '',
-        menuGroupId: '',
         serviceType: '',
         customer: {
             firstName: '',
@@ -166,8 +164,6 @@ export default {
 
             const { data } = await axios.get(url, config);
             const basketDetails = {
-                restaurantId: data.RestaurantId,
-                menuGroupId: data.MenuGroupId,
                 serviceType: data.ServiceType.toLowerCase()
             };
 
@@ -251,9 +247,7 @@ export default {
             };
         },
 
-        UPDATE_BASKET_DETAILS (state, { restaurantId, menuGroupId, serviceType }) {
-            state.restaurantId = restaurantId;
-            state.menuGroupId = menuGroupId;
+        UPDATE_BASKET_DETAILS (state, { serviceType }) {
             state.serviceType = serviceType;
         }
     }
