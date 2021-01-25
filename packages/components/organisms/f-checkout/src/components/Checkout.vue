@@ -238,7 +238,6 @@ export default {
 
     async mounted () {
         await this.initialise();
-        await this.loadBasket();
     },
 
     methods: {
@@ -258,6 +257,10 @@ export default {
          */
         async initialise () {
             this.setAuthToken(this.authToken);
+            if (!this.isLoggedIn) {
+                await this.loadBasket();
+            }
+
             await Promise.all([this.loadCheckout(), this.loadAvailableFulfilment()]);
         },
 

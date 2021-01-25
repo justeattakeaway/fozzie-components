@@ -320,7 +320,7 @@ describe('Checkout', () => {
                 expect(setAuthTokenSpy).toHaveBeenCalledWith(propsDataWithAuthToken.authToken);
             });
 
-        it('should call `loadCheckout`', async () => {
+            it('should call `loadCheckout`', async () => {
                 // Arrange & Act
                 const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
 
@@ -330,12 +330,12 @@ describe('Checkout', () => {
                     localVue,
                     propsData
                 });
-            await flushPromises();
+                await flushPromises();
 
                 expect(loadCheckoutSpy).toHaveBeenCalled();
             });
 
-        it('should call `loadAvailableFulfilment`', async () => {
+            it('should call `loadAvailableFulfilment`', async () => {
                 // Arrange & Act
                 const loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
 
@@ -345,7 +345,7 @@ describe('Checkout', () => {
                     localVue,
                     propsData
                 });
-            await flushPromises();
+                await flushPromises();
 
                 expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
             });
