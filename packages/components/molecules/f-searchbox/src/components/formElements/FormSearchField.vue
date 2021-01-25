@@ -31,6 +31,12 @@
                 @keydown.down="setKeyboardSuggestion(1)">
 
             <span :class="$style['c-search-placeholder']">{{ copy.fieldPlaceholder }}</span>
+
+            <div
+                v-if="shouldDisplayLoadingIndicator"
+                :class="$style['c-spinner-wrapper']">
+                <div :class="$style['c-spinner']" />
+            </div>
         </label>
 
         <form-search-inner-field-wrapper
@@ -93,14 +99,25 @@ export default {
     computed: {
         ...mapState('searchbox', [
             'address',
-            'shouldInputFieldHaveFocus',
             'isStreetNumberRequired',
             'isGeoLocationAvailable',
-            'isAutocompleteEnabled'
+            'isAutocompleteEnabled',
+            'isFullAddressSearchEnabled',
+            'isLoadingResults',
+            'shouldInputFieldHaveFocus',
+            'shouldDisplaySuggestionsDropdown'
         ]),
 
         getAddressValue () {
             return this.address;
+        },
+
+        /**
+         * Only display loading spinner for Loqate feature for now.
+         *
+         * */
+        shouldDisplayLoadingIndicator () {
+            return this.isFullAddressSearchEnabled && this.isLoadingResults;
         }
     },
 
@@ -124,6 +141,7 @@ export default {
             'setAddress',
             'setInputFocus',
             'setInputTimeoutValue',
+            'setFocusOnInput',
             'setKeyboardSuggestion'
         ]),
 
@@ -141,9 +159,11 @@ export default {
                 this.setInputFocus(value);
                 this.$emit(ADDRESS_SEARCH_FOCUS);
             } else {
-                setTimeout(() => {
+                const inputTimeoutValue = setTimeout(() => {
                     this.setInputFocus(value);
                 }, ALLOWED_SELECTION_TIME);
+
+                this.setInputTimeoutValue(inputTimeoutValue);
             }
         },
 
