@@ -1,4 +1,4 @@
-<div style="text-align: center">
+<div align="center">
 
 # f-metadata
 
@@ -19,25 +19,29 @@ This package provides an interface for initialising Braze and handling content c
 
 ## Usage
 
+
 ### Installation
 
 Install the module using NPM or Yarn:
 
-```bash
-// yarn
-$ yarn add @justeat/f-metadata
-
-// or npm
-$ npm install @justeat/f-metadata
+```sh
+yarn add @justeat/f-metadata
 ```
 
-The package can then be imported into your application:
+```sh
+npm install @justeat/f-metadata
+```
+
+### Vue Applications
+
+You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+
+You can use with `import` or `require` syntax.
+```js
+import initialiseBraze from '@justeat/f-metadata';
+````
 
 ```js
-// import
-import initialiseBraze from '@justeat/f-metadata';
-
-// or require
 const initialiseBraze = require('@justeat/f-metadata');
 ```
 
@@ -49,7 +53,7 @@ This method returns an instance of the BrazeDispatcher class, which can also be 
 
 All other functionality, such as handling content cards or intercepting in-app messages can be done with callbacks passed through config.
 
-**Basic Example**
+#### Basic Example
 
 ```js
 import initialise from '@justeat/f-metadata'
@@ -91,43 +95,42 @@ brazePromise.then(brazeDispatcher => {
 
 ### Config Object
 
-
-#### `config.apiKey`
+`config.apiKey`
 
 The Braze API key used when invoking calls to the Braze SDK. This can be found in the Braze Dashboard at *App Settings->Developer Console->Rest API Keys*.
 
-#### `config.brands`
+`config.brands`
 
 Sets the brands that the consumers have an interest in. Is concatenated to the current list of brands held
 by the Braze adapter.
 
-#### `config.userId`
+`config.userId`
 
 The user ID to retrieve data for.
 
-#### `config.enableLogging`
+`config.enableLogging`
 
 Enable/Disable verbose logging from the Braze SDK used for debugging.
 
-#### `config.disableComponent`
+ `config.disableComponent`
 
 Enable/Disable the Braze SDK when running experiments or feature toggling.
 
-### `config.callbacks.handleContentCards`
+`config.callbacks.handleContentCards`
 
 A callback to be invoked when content cards have been retrieved.
 
-### `config.callbacks.handleContentCardsGrouped`
+`config.callbacks.handleContentCardsGrouped`
 
 A callback to be invoked when content cards have been retrieved, grouped by header card title.
 
-### `config.callbacks.interceptInAppMessages`
+`config.callbacks.interceptInAppMessages`
 
 A callback to be invoked when in-app messages have been retrieved.
 
-> **Please note:** The dispatcher fires callbacks registered for in-app messages before it triggers the messages.
+> The dispatcher fires callbacks registered for in-app messages before it triggers the messages.
 
-### `config.callbacks.interceptInAppMessageClickEvents`
+`config.callbacks.interceptInAppMessageClickEvents`
 
 The callback to be invoked when in-app messages have been clicked.
 
