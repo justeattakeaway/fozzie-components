@@ -85,6 +85,14 @@ The props that can be defined are as follows:
 
 `f-button` has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
 
+### Events	
+
+You can use the `.native` modifier for `v-on` to listen directly to a native event on the root element.	
+
+```js	
+<f-button @click.native="myMethod">Button Text</f-button>	
+```
+
 ## Development
 
 Start by cloning the repository and installing the required dependencies:

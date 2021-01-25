@@ -1,7 +1,5 @@
 <template>
-    <button
-        :type="actionType"
-        v-on="$listeners">
+    <button :type="actionType">
         <slot />
     </button>
 </template>

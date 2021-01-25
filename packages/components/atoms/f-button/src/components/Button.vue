@@ -9,8 +9,7 @@
         ]"
         :attributes="$attrs"
         :action-type="buttonActionType"
-        :data-test-id="`${componentType}-component`"
-        v-on="$listeners">
+        :data-test-id="`${componentType}-component`">
         <slot />
     </component>
 </template>
