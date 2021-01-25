@@ -997,8 +997,11 @@ describe('Checkout', () => {
                 });
 
                 it('should emit failure event', async () => {
-                    expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure).length).toBe(1);
+                });
+
+                it('should not emit success event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess)).toBeUndefined();
                 });
             });
 
@@ -1012,6 +1015,9 @@ describe('Checkout', () => {
 
                 it('should emit success event', async () => {
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess).length).toBe(1);
+                });
+
+                it('should not emit failure event', async () => {
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure)).toBeUndefined();
                 });
             });

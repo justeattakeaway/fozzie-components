@@ -233,21 +233,21 @@ export default {
             state.isLoggedIn = !!authToken;
         },
 
-        UPDATE_FULFILMENT_ADDRESS (state, address) {
+        UPDATE_FULFILMENT_ADDRESS: (state, address) => {
             state.fulfilment.address = {
                 ...state.fulfilment.address,
                 ...address
             };
         },
 
-        UPDATE_CUSTOMER_DETAILS (state, customer) {
+        UPDATE_CUSTOMER_DETAILS: (state, customer) => {
             state.customer = {
                 ...state.customer,
                 ...customer
             };
         },
 
-        UPDATE_BASKET_DETAILS (state, { serviceType }) {
+        UPDATE_BASKET_DETAILS: (state, { serviceType }) => {
             state.serviceType = serviceType;
         }
     }
