@@ -1258,16 +1258,20 @@ describe('Checkout', () => {
             });
 
             it('should call `initialise`', async () => {
-            // Arrange
+                // Arrange
                 const initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
 
-                // Act
-                shallowMount(VueCheckout, {
+                const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
                     i18n,
                     localVue,
                     propsData
                 });
+
+                jest.clearAllMocks(); // Reset the mock calls given the initialise function gets called upon mount.
+
+                // Act
+                await wrapper.vm.$options.watch.authToken[0].call(wrapper.vm);
 
                 // Assert
                 expect(initialiseSpy).toHaveBeenCalled();
