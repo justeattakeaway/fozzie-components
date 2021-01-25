@@ -8,6 +8,7 @@ import {
 } from '@justeat/storybook/constants/globalisation';
 
 import VueCheckout from '../src/components/Checkout.vue';
+import CheckoutModule from '../src/store/checkout.module';
 import CheckoutMock from '../src/demo/checkoutMock';
 
 export default {
@@ -50,7 +51,11 @@ export const CheckoutComponent = () => ({
             default: text('Login Url', '/login')
         }
     },
-    store: new Vuex.Store({}),
+    store: new Vuex.Store({
+        modules: {
+            checkout: CheckoutModule
+        }
+    }),
     template: '<vue-checkout ' +
         ':checkoutUrl="checkoutUrl" ' +
         ':checkout-available-fulfilment-url="checkoutAvailableFulfilmentUrl" ' +

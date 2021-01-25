@@ -93,7 +93,6 @@ import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants'
 import tenantConfigs from '../tenants';
 import EventNames from '../event-names';
 
-import checkoutModule from '../store/checkout.module';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 
 export default {
@@ -221,28 +220,13 @@ export default {
 
     watch: {
         async authToken () {
-            console.log('watch'); // eslint-disable-line
-            await this.gadget();
+            await this.initialise();
         }
     },
 
-    created () {
-        console.log('CREATED FIRED'); // eslint-disable-line
-        if (!this.$store.hasModule('checkout')) {
-            console.log('ADDED MOduLE'); // eslint-disable-line
-            this.$store.registerModule('checkout', checkoutModule);
-        }
+    async mounted () {
+        await this.initialise();
     },
-
-    /*
-        TODO: in the future, we should actually try to deregister modules.
-        However, right now, given we might have several instances of the same component, we don't want to remove the module for all of them.
-        We tried generating a dynamic module name (so we could add and remove a module per component),
-        but we couldn't get it to work. It needs more investigation when this is really needed, not now.
-    */
-    // beforeDestroy () {
-    // this.$store.unregisterModule('checkout');
-    // },
 
     methods: {
         ...mapActions('checkout', [
@@ -254,8 +238,11 @@ export default {
             'updateCustomerDetails'
         ]),
 
-        async gadget () {
-            console.log('gadget'); // eslint-disable-line
+        /**
+         * Loads the necessary data to render a meaningful checkout component.
+         *
+         */
+        async initialise () {
             this.setAuthToken(this.authToken);
             await Promise.all([this.loadCheckout(), this.loadAvailableFulfilment()]);
         },

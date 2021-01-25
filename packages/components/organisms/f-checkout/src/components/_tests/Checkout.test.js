@@ -100,25 +100,6 @@ describe('Checkout', () => {
             jest.clearAllMocks();
         });
 
-        it('should register the `checkout` module if it doesn\'t exist in the store', () => {
-            // Arrange
-
-            const store = new Vuex.Store({});
-
-            const registerModuleSpy = jest.spyOn(store, 'registerModule');
-
-            // Act
-            shallowMount(VueCheckout, {
-                store,
-                i18n,
-                localVue,
-                propsData
-            });
-
-            // Assert
-            expect(registerModuleSpy).toHaveBeenCalledWith('checkout', expect.any(Object));
-        });
-
         it('should not register the `checkout` module if it already exists in the store', () => {
             // Arrange
             const store = createStore();
@@ -294,29 +275,11 @@ describe('Checkout', () => {
             jest.clearAllMocks();
         });
 
-        it('should call `setAuthToken`', () => {
-            // Arrange & Act
-            const setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
+        it('should call `initialise`', () => {
+            // Arrange
+            const initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
 
-            const propsDataWithAuthToken = {
-                ...propsData,
-                authToken: 'mytoken'
-            };
-
-            shallowMount(VueCheckout, {
-                store: createStore(),
-                i18n,
-                localVue,
-                propsData: propsDataWithAuthToken
-            });
-
-            expect(setAuthTokenSpy).toHaveBeenCalledWith(propsDataWithAuthToken.authToken);
-        });
-
-        it('should call `loadCheckout`', () => {
-            // Arrange & Act
-            const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
-
+            // Act
             shallowMount(VueCheckout, {
                 store: createStore(),
                 i18n,
@@ -324,21 +287,8 @@ describe('Checkout', () => {
                 propsData
             });
 
-            expect(loadCheckoutSpy).toHaveBeenCalled();
-        });
-
-        it('should call `loadAvailableFulfilment`', () => {
-            // Arrange & Act
-            const loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
-
-            shallowMount(VueCheckout, {
-                store: createStore(),
-                i18n,
-                localVue,
-                propsData
-            });
-
-            expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
+            // Assert
+            expect(initialiseSpy).toHaveBeenCalled();
         });
     });
 
@@ -346,6 +296,56 @@ describe('Checkout', () => {
         afterEach(() => {
             jest.clearAllMocks();
         });
+
+        describe('initialise ::', () => {
+            it('should call `setAuthToken`', () => {
+                // Arrange & Act
+                const setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
+
+                const propsDataWithAuthToken = {
+                    ...propsData,
+                    authToken: 'mytoken'
+                };
+
+                shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData: propsDataWithAuthToken
+                });
+
+                expect(setAuthTokenSpy).toHaveBeenCalledWith(propsDataWithAuthToken.authToken);
+            });
+
+            it('should call `loadCheckout`', () => {
+                // Arrange & Act
+                const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
+
+                shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                expect(loadCheckoutSpy).toHaveBeenCalled();
+            });
+
+            it('should call `loadAvailableFulfilment`', () => {
+                // Arrange & Act
+                const loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
+
+                shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
+            });
+        });
+
         describe('submitCheckout ::', () => {
             describe('if serviceType set to `collection`', () => {
                 let wrapper;
@@ -1252,30 +1252,25 @@ describe('Checkout', () => {
     });
 
     describe('watch ::', () => {
-        describe('fulfilmentTimes ::', () => {
+        describe('authToken ::', () => {
             afterEach(() => {
                 jest.clearAllMocks();
             });
 
-            it('should call `selectionChanged` with the first fulfilment time when there are fulfilment times', async () => {
-                // Arrange
-                const setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
+            it('should call `initialise`', async () => {
+            // Arrange
+                const initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
 
-                const wrapper = shallowMount(VueCheckout, {
+                // Act
+                shallowMount(VueCheckout, {
                     store: createStore(),
                     i18n,
                     localVue,
                     propsData
                 });
 
-                const newAuthToken = 'new authToken';
-
-                // Act
-                wrapper.setProps({ authToken: newAuthToken });
-                await wrapper.vm.$nextTick();
-
                 // Assert
-                expect(setAuthTokenSpy).toHaveBeenCalledWith('new authToken');
+                expect(initialiseSpy).toHaveBeenCalled();
             });
         });
     });
