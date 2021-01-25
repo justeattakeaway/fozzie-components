@@ -221,7 +221,7 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                expect(commit).toHaveBeenCalledWith('UPDATE_BASKET_DETAILS', { serviceType: 'delivery' });
+                expect(commit).toHaveBeenCalledWith('UPDATE_BASKET_DETAILS', { serviceType: basketDelivery.ServiceType.toLowerCase() });
             });
         });
 
