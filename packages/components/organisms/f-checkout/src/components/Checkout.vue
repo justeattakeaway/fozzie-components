@@ -93,11 +93,9 @@ import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
 
 import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants';
-import checkoutModule from '../store/checkout.module';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
-
 
 export default {
     name: 'VueCheckout',
