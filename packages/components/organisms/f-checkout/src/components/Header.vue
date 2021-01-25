@@ -26,13 +26,16 @@
                 {{ $t('checkoutHeader.guest.guestTitle') }}
             </h2>
 
-            <a
-                :href="loginUrl"
-                data-test-id="guest-login-button"
+            <f-button
+                button-type="primary"
+                button-size="large"
+                is-full-width
                 :class="$style['c-checkoutHeader-loginButton']"
-                @click="onVisitLoginPage">
+                data-test-id="guest-login-button"
+                :href="loginUrl"
+                @click.native="onVisitLoginPage">
                 {{ $t('checkoutHeader.guest.loginButton') }}
-            </a>
+            </f-button>
 
             <div
                 :class="$style['c-checkoutHeader-option']">
@@ -43,18 +46,26 @@
                 {{ $t('checkoutHeader.guest.guestTitle') }}
             </h2>
 
-            <p :class="$style['c-checkoutHeader-confirmation']">
-                {{ $t('checkoutHeader.guest.confirmation') }}
+            <p
+                :class="$style['c-checkoutHeader-confirmation']"
+                data-test-id="service-type-confirmation">
+                {{ $t('checkoutHeader.guest.confirmation', { serviceType }) }}
             </p>
         </div>
     </div>
 </template>
 
 <script>
+import FButton from '@justeat/f-button';
+import '@justeat/f-button/dist/f-button.css';
 import { mapState } from 'vuex';
 import EventNames from '../event-names';
 
 export default {
+    components: {
+        FButton
+    },
+
     props: {
         loginUrl: {
             type: String,
@@ -65,7 +76,8 @@ export default {
     computed: {
         ...mapState('checkout', [
             'customer',
-            'isLoggedIn'
+            'isLoggedIn',
+            'serviceType'
         ]),
 
         name () {
@@ -92,36 +104,8 @@ export default {
     @include font-size('heading-s');
 }
 
-// TODO: Add link button to f-button
 .c-checkoutHeader-loginButton {
-    display: inline-block;
-    width: 100%;
-    background-color: $orange;
-    padding: spacing(x2) 0;
     margin-top: spacing(x2);
-    border: 1px solid transparent;
-    border-radius: $border-radius;
-    text-align: center;
-    font-weight: $font-weight-bold;
-    @include font-size('body-l');
-    text-decoration: none;
-    color: $white;
-    cursor: pointer;
-
-    &:hover,
-    &:active,
-    &:focus {
-        color: $white;
-    }
-
-    &:hover,
-    &:focus {
-        background-color: $orange--dark;
-    }
-
-    &:active {
-        background-color: $orange--darkest;
-    }
 }
 
 .c-checkoutHeader-confirmation {

@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.42.0
+-------------------------------
+*January 22, 2021*
+
+### Changed
+- `f-button` version.
+- `Header` component `login` button to use `f-button`.
+
+
 v0.41.0
 -------------------------------
 *January 22, 2021*
