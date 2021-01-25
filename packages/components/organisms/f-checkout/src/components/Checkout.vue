@@ -257,6 +257,7 @@ export default {
          */
         async initialise () {
             this.setAuthToken(this.authToken);
+
             if (!this.isLoggedIn) {
                 await this.loadBasket();
             }

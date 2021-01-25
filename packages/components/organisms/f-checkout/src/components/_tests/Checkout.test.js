@@ -366,6 +366,23 @@ describe('Checkout', () => {
                     expect(loadBasketSpy).toHaveBeenCalled();
                 });
             });
+
+            describe('if isLoggedIn set to `true`', () => {
+                it('should not call `loadBasket`', async () => {
+                    // Arrange & Act
+                    const loadBasketSpy = jest.spyOn(VueCheckout.methods, 'loadBasket');
+
+                    shallowMount(VueCheckout, {
+                        store: createStore({ ...defaultState, isLoggedIn: true }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                    await flushPromises();
+
+                    expect(loadBasketSpy).not.toHaveBeenCalled();
+                });
+            });
         });
 
         describe('submitCheckout ::', () => {
@@ -972,15 +989,11 @@ describe('Checkout', () => {
 
         describe('loadBasket ::', () => {
             describe('when `getBasket` request fails', () => {
-                let wrapper;
-
-                beforeEach(async () => {
-                    wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions, getBasket: jest.fn(async () => Promise.reject()) }),
-                        i18n,
-                        localVue,
-                        propsData
-                    });
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(defaultState, { ...defaultActions, getBasket: jest.fn(async () => Promise.reject()) }),
+                    i18n,
+                    localVue,
+                    propsData
                 });
 
                 it('should emit failure event', async () => {
@@ -990,15 +1003,11 @@ describe('Checkout', () => {
             });
 
             describe('when `getBasket` request succeeds', () => {
-                let wrapper;
-
-                beforeEach(async () => {
-                    wrapper = mount(VueCheckout, {
-                        store: createStore(),
-                        i18n,
-                        localVue,
-                        propsData
-                    });
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
                 });
 
                 it('should emit success event', async () => {
