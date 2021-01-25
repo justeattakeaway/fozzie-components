@@ -1893,6 +1893,11 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.4.1.tgz#6b735093286422f579bd41cee93400a4d32d1b2d"
   integrity sha512-SL7eTooEY3gZ0DdpPJvsN9W9EZElgxkSEpjYPfiPBHbkGt31Yfnb8OmDmC6MAtlK3Nq5GM5KaZ7bXybljSlPeA==
 
+"@justeat/f-button@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.npmjs.org/@justeat/f-button/-/f-button-0.5.0.tgz#3a2b680b6729c6af8107dbf0a8a35fcf0b51c392"
+  integrity sha512-UTTgcb5IbHIn0k89aO2o4XGu+bFzFKoOAQTTdm63Ew4sgZ0uVQvS+c5A5HsLlmoo5l0iCDyNRCysti1POLUdqg==
+
 "@justeat/f-card@0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-0.7.0.tgz#3179bcee050625c4391a4e97d39884a660feed8f"
@@ -10729,7 +10734,7 @@ flow-parser@0.*:
   resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.142.0.tgz#68792438f2593a9e3d862a5ce2278493991619aa"
   integrity sha512-gkdbagtuYQw7fo/D1AwCsDpMyxp/bdZkgfq95ev2MoETD1OW84PhU+vitupwte+6AJc2MRJyCdgfWhan8AGhzA==
 
-flush-promises@1.0.2:
+flush-promises@1.0.2, flush-promises@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flush-promises/-/flush-promises-1.0.2.tgz#4948fd58f15281fed79cbafc86293d5bb09b2ced"
   integrity sha512-G0sYfLQERwKz4+4iOZYQEZVpOt9zQrlItIxQAAYAWpfby3gbHrx0osCHz5RLl/XoXevXk0xoN4hDFky/VV9TrA==

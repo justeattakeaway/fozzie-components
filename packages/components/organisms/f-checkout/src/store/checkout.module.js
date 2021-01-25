@@ -171,7 +171,6 @@ export default {
                 serviceType: data.ServiceType.toLowerCase()
             };
 
-            debugger;
             commit('UPDATE_BASKET_DETAILS', basketDetails);
         },
 
@@ -251,7 +250,7 @@ export default {
                 ...customer
             };
         },
-        
+
         UPDATE_BASKET_DETAILS (state, { restaurantId, menuGroupId, serviceType }) {
             state.restaurantId = restaurantId;
             state.menuGroupId = menuGroupId;
