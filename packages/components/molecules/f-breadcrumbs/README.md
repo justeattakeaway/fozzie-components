@@ -1,6 +1,6 @@
 
 <div align="center">
-  <h1>f-bread-crumbs</h1>
+  <h1>f-breadcrumbs</h1>
 
   <img width="125" alt="Fozzie Bear" src="../../bear.png" />
 
@@ -9,10 +9,10 @@
 
 ---
 
-[![npm version](https://badge.fury.io/js/%40justeat%2Ff-bread-crumbs.svg)](https://badge.fury.io/js/%40justeat%2Ff-bread-crumbs)
+[![npm version](https://badge.fury.io/js/%40justeat%2Ff-breadcrumbsf-breadcrumbs.svg)](https://badge.fury.io/js/%40justeat%2Ff-breadcrumbs)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
-[![Coverage Status](https://coveralls.io/repos/github/justeat/f-bread-crumbs/badge.svg)](https://coveralls.io/github/justeat/f-bread-crumbs)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-bread-crumbs/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-bread-crumbs?targetFile=package.json)
+[![Coverage Status](https://coveralls.io/repos/github/justeat/f-breadcrumbs/badge.svg)](https://coveralls.io/github/justeat/f-breadcrumbs)
+[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-breadcrumbs/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-breadcrumbs?targetFile=package.json)
 
 
 ## Usage
@@ -32,8 +32,8 @@
     You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
     ```
-    import BreadCrumbs from '@justeat/f-bread-crumbs';
-    import '@justeat/f-bread-crumbs/dist/f-bread-crumbs.css';
+    import BreadCrumbs from '@justeat/f-breadcrumbs';
+    import '@justeat/f-breadcrumbs/dist/f-breadcrumbs.css';
 
     export default {
         components: {
@@ -45,12 +45,12 @@
     If you are using Webpack, you can import the component dynamically to separate the `bread-crumbs` bundle from the main `bundle.client.js`:
 
     ```
-    import '@justeat/f-bread-crumbs/dist/f-bread-crumbs.css';
+    import '@justeat/f-breadcrumbs/dist/f-breadcrumbs.css';
 
     export default {
         components: {
             ...
-            BreadCrumbs: () => import(/* webpackChunkName: "bread-crumbs" */ '@justeat/f-bread-crumbs')
+            BreadCrumbs: () => import(/* webpackChunkName: "bread-crumbs" */ '@justeat/f-breadcrumbs')
         }
     }
 

@@ -1,6 +1,5 @@
 <template>
     <div
-        :data-theme="theme"
         :class="$style['c-breadCrumbs']"
         data-test-id="breadCrumbs-component">
         {{ copy.text }}
@@ -23,11 +22,9 @@ export default {
     data () {
         const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
-        const theme = globalisationServices.getTheme(locale);
 
         return {
             copy: { ...localeConfig },
-            theme
         };
     }
 };

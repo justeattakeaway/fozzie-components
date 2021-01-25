@@ -1,7 +1,7 @@
 /**
  * @overview Fozzie Bread Crumbs Component JS Wrapper
  *
- * @module f-bread-crumbs
+ * @module f-breadcrumbs
  */
 
 
