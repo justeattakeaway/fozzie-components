@@ -1,6 +1,6 @@
 <template>
     <li
-        :class="['c-nav-list-item has-sublist', {
+        :class="['c-countrySelector c-nav-list-item has-sublist', {
             'open': countrySelectorIsOpen
         }]"
         data-test-id="countrySelector-toggle"
@@ -8,19 +8,19 @@
         @keyup.esc="closeCountrySelector">
         <f-button
             button-type="icon"
-            class="c-nav-list-text c-country-selector-list-item"
+            class="c-nav-list-text c-countrySelector-btn"
             :aria-expanded="!isBelowMid && countrySelectorIsOpen ? 'true' : 'false'"
             :aria-haspopup="isBelowMid ? false : true"
-            :aria-label="changeCountryText"
-            @click.native="onCountrySelectorToggle"
+            :aria-label="copy.changeCountryText"
+            @click="onCountrySelectorToggle"
             v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
             <span class="c-countrySelector-currentFlag-wrapper">
                 <flag-icon
-                    :country-code="currentCountryKey"
+                    :country-code="copy.currentCountryKey"
                     class="c-countrySelector-flag c-countrySelector-flag--current" />
             </span>
             <span class='c-countrySelector-title'>
-                {{ selectYourCountryText }}
+                {{ copy.selectYourCountryText }}
             </span>
         </f-button>
 
@@ -32,14 +32,14 @@
                         button-size="xsmall"
                         class="c-nav-popoverList-header-button"
                         aria-label="Go back to main menu"
-                        @click.native="closeCountrySelector">
+                        @click="closeCountrySelector">
                         <arrow-icon class="c-nav-popoverList-go-back-icon" />
                     </f-button>
 
-                    <h3>{{ selectYourCountryText }}</h3>
+                    <h3>{{ copy.selectYourCountryText }}</h3>
                 </header>
 
-                <ul class="c-country-selector-list">
+                <ul class="c-countrySelector-list">
                     <li
                         v-for="(country, i) in countries"
                         :key="i + '_Country'"
@@ -91,17 +91,9 @@ export default {
             type: Boolean,
             default: false
         },
-        currentCountryKey: {
-            type: String,
-            required: true
-        },
-        changeCountryText: {
-            type: String,
-            default: ''
-        },
-        selectYourCountryText: {
-            type: String,
-            default: ''
+        copy: {
+            type: Object,
+            default: () => ({})
         },
         openNav: {
             type: Function,
@@ -226,7 +218,7 @@ $contrySelector-flag-height : 16px;
     }
 }
 
-.c-country-selector-list {
+.c-countrySelector-list {
     margin: 0;
 
     & > li:before {
@@ -234,13 +226,13 @@ $contrySelector-flag-height : 16px;
     }
 }
 
-.c-country-selector-list-item {
+.c-countrySelector-btn {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.c-nav-list-item .c-country-selector-list-item {
+.c-nav-list-item .c-countrySelector-btn {
     border-bottom: none;
 }
 
