@@ -3,6 +3,7 @@ import { VueI18n } from '@justeat/f-globalisation';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Header from '../Header.vue';
 import { i18n, defaultState, createStore } from './helpers/setup';
+import { CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY } from '../../constants';
 import EventNames from '../../event-names';
 
 const localVue = createLocalVue();
@@ -58,7 +59,7 @@ describe('Header', () => {
 
                     // Assert
                     expect(loginLink).toBeDefined();
-                    expect(loginLink.text()).toBe(`Not ${defaultState.customer.firstName}? Click here.`);
+                    expect(loginLink.text()).toBe(`Not ${defaultState.customer.firstName}? Click here`);
                 });
             });
 
@@ -112,6 +113,32 @@ describe('Header', () => {
 
                 // Assert
                 expect(name).toEqual('Joe');
+            });
+        });
+
+        describe('serviceType ::', () => {
+            it.each([
+                [CHECKOUT_METHOD_DELIVERY],
+                [CHECKOUT_METHOD_COLLECTION]
+            ])('should update serviceType confirmation with the %s service type', serviceType => {
+                // Arrange
+                const wrapper = shallowMount(Header, {
+                    store: createStore({
+                        ...defaultState,
+                        isLoggedIn: false,
+                        serviceType
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const confirmation = wrapper.find("[data-test-id='service-type-confirmation']");
+                const received = `Please confirm your ${serviceType} details`;
+
+                // Assert
+                expect(confirmation.text()).toEqual(received);
             });
         });
     });
