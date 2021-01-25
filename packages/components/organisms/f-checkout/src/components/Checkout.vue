@@ -9,6 +9,7 @@
             :heading="$t('errorMessages.errorHeading')">
             {{ genericErrorMessage }}
         </alert>
+
         <card
             is-rounded
             has-outline
@@ -39,6 +40,7 @@
                         </error-message>
                     </template>
                 </form-field>
+
                 <address-block
                     v-if="isCheckoutMethodDelivery"
                     data-test-id="address-block" />
@@ -52,6 +54,7 @@
                     button-type="primary"
                     button-size="large"
                     is-full-width
+                    action-type="submit"
                     data-test-id="confirm-payment-submit-button">
                     {{ $t('buttonText') }}
                 </f-button>
@@ -66,14 +69,12 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import { required, email } from 'vuelidate/lib/validators';
+import { mapState, mapActions } from 'vuex';
 
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
-import { validations } from '@justeat/f-services';
-import { VueGlobalisationMixin } from '@justeat/f-globalisation';
-
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import ErrorMessage from '@justeat/f-error-message';
@@ -81,7 +82,9 @@ import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 
-import { mapState, mapActions } from 'vuex';
+import { validations } from '@justeat/f-services';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
+
 import AddressBlock from './Address.vue';
 import CheckoutHeader from './Header.vue';
 import CheckoutTermsAndConditions from './TermsAndConditions.vue';
@@ -90,11 +93,11 @@ import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
 
 import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants';
-import tenantConfigs from '../tenants';
-import EventNames from '../event-names';
-
 import checkoutModule from '../store/checkout.module';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
+import EventNames from '../event-names';
+import tenantConfigs from '../tenants';
+
 
 export default {
     name: 'VueCheckout',
@@ -470,7 +473,7 @@ export default {
 }
 
 .c-checkout-form {
-    margin-top: spacing(x3);
+    margin-top: spacing(x2);
 }
 
 .c-checkout-alert {

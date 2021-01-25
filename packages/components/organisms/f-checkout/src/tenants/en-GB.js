@@ -61,14 +61,14 @@ const messages = {
     checkoutHeader: {
         user: {
             title: '{name}, confirm your details',
-            switchUser: 'Not {name}? Click here.'
+            switchUser: 'Not {name}? Click here'
         },
         guest: {
             loginTitle: 'How do you want to continue?',
             loginButton: 'Log in or sign up',
             option: 'or',
             guestTitle: 'Checkout as a guest',
-            confirmation: 'Please confirm your delivery details'
+            confirmation: 'Please confirm your {serviceType} details'
         }
     },
 
