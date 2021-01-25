@@ -27,18 +27,24 @@
     npm install @justeat/f-checkout
     ```
 
-2.  Import the component
+2.  Import the component and its module, ensuring the latter is registered in the Vuex store upon creation.
 
     You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
     ```
-    import VueCheckout from '@justeat/f-checkout';
+    import { VueCheckout, CheckoutModule } from '@justeat/f-checkout';
     import '@justeat/f-checkout/dist/f-checkout.css';
 
     export default {
         components: {
             VueCheckout
-        }
+        },
+
+        created () {
+            if (!this.$store.hasModule('checkout')) {
+                this.$store.registerModule('checkout', CheckoutModule);
+            }
+        },
     }
     ```
 
