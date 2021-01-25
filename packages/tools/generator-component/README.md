@@ -1,4 +1,4 @@
-<div style="text-align: center">
+<div align="center">
 
 # generator-component
 
@@ -20,11 +20,11 @@ A generator for Fozzie components.
 
 1.  Install its dependencies:
 
-    ```bash
+    ```sh
     yarn install
     ```
 
-    ```bash
+    ```sh
     npm install
     ```
 
