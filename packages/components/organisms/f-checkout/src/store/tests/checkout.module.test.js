@@ -199,10 +199,9 @@ describe('CheckoutModule', () => {
         });
 
         describe('getBasket ::', () => {
-            let config;
-
-            beforeEach(() => {
-                config = {
+            it('should get the basket details from the backend and call `UPDATE_BASKET_DETAILS` mutation.', async () => {
+                // Arrange
+                const config = {
                     method: 'get',
                     headers: {
                         'Content-Type': 'application/json',
@@ -213,9 +212,7 @@ describe('CheckoutModule', () => {
                 };
 
                 axios.get = jest.fn(() => Promise.resolve({ data: basketDelivery }));
-            });
 
-            it('should get the basket details from the backend and call `UPDATE_BASKET_DETAILS` mutation.', async () => {
                 // Act
                 await getBasket({ commit, state }, payload);
 
