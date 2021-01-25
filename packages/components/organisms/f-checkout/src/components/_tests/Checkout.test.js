@@ -349,6 +349,23 @@ describe('Checkout', () => {
 
                 expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
             });
+
+            describe('if isLoggedIn set to `false`', () => {
+                it('should call `loadBasket`', async () => {
+                    // Arrange & Act
+                    const loadBasketSpy = jest.spyOn(VueCheckout.methods, 'loadBasket');
+
+                    shallowMount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                    await flushPromises();
+
+                    expect(loadBasketSpy).toHaveBeenCalled();
+                });
+            });
         });
 
         describe('submitCheckout ::', () => {
@@ -949,6 +966,44 @@ describe('Checkout', () => {
                 it('should emit success event', async () => {
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure)).toBeUndefined();
+                });
+            });
+        });
+
+        describe('loadBasket ::', () => {
+            describe('when `getBasket` request fails', () => {
+                let wrapper;
+
+                beforeEach(async () => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, getBasket: jest.fn(async () => Promise.reject()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should emit failure event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess)).toBeUndefined();
+                    expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure).length).toBe(1);
+                });
+            });
+
+            describe('when `getBasket` request succeeds', () => {
+                let wrapper;
+
+                beforeEach(async () => {
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should emit success event', async () => {
+                    expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure)).toBeUndefined();
                 });
             });
         });
