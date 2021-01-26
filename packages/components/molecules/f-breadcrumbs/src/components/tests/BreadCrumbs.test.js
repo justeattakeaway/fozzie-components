@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import BreadCrumbs from '../BreadCrumbs.vue';
+import BreadCrumbs from '../Breadcrumbs.vue';
 
 describe('BreadCrumbs', () => {
     it('should be defined', () => {

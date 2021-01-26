@@ -3,15 +3,15 @@
 //     withKnobs, select, boolean
 // } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import BreadCrumbs from '../src/components/BreadCrumbs.vue';
+import Breadcrumbs from '../src/components/Breadcrumbs.vue';
 
 export default {
     title: 'Components',
     decorators: [withA11y]
 };
 
-export const BreadCrumbsComponent = () => ({
-    components: { BreadCrumbs },
+export const BreadcrumbsComponent = () => ({
+    components: { Breadcrumbs },
     // props: {
     //     buttonType: {
     //         default: select('Button Type', ['primary', 'primaryAlt', 'secondary', 'tertiary', 'link'])
@@ -20,7 +20,7 @@ export const BreadCrumbsComponent = () => ({
     //         default: boolean('fullWidth', false)
     //     }
     // },
-    template: '<bread-crumbs />'
+    template: '<breadcrumbs />'
 });
 
-BreadCrumbsComponent.storyName = 'f-breadcrumbs';
+BreadcrumbsComponent.storyName = 'f-breadcrumbs';

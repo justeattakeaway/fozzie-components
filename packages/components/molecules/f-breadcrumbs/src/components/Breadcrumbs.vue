@@ -1,7 +1,7 @@
 <template>
     <div
         :class="$style['c-breadCrumbs']"
-        data-test-id="breadCrumbs-component">
+        data-test-id="breadcrumbs-component">
         {{ copy.text }}
     </div>
 </template>
