@@ -4,6 +4,8 @@ import checkoutDelivery from './checkout-delivery.json';
 import checkoutCollection from './checkout-collection.json';
 import checkoutAvailableFulfilment from './checkout-available-fulfilment.json';
 import createGuest from './create-guest.json';
+import getBasketDelivery from './get-basket-delivery.json';
+import getBasketCollection from './get-basket-collection.json';
 
 const mock = new MockAdapter(axios);
 
@@ -21,6 +23,12 @@ export default {
                 break;
             case '/create-guest.json':
                 mock.onPost(path).reply(200, createGuest);
+                break;
+            case '/get-basket-delivery.json':
+                mock.onGet(path).reply(200, getBasketDelivery);
+                break;
+            case '/get-basket-collection.json':
+                mock.onGet(path).reply(200, getBasketCollection);
                 break;
             default:
                 throw new Error(`${path} is not valid`);
