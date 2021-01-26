@@ -1,4 +1,4 @@
 export default {
     locale: 'en-AU',
-    text: 'I am a BreadCrumbs Component (AU)'
+    text: 'I am a Breadcrumbs Component (AU)'
 };

@@ -1,6 +1,6 @@
 <template>
     <div
-        :class="$style['c-breadCrumbs']"
+        :class="$style['c-breadcrumbs']"
         data-test-id="breadcrumbs-component">
         {{ copy.text }}
     </div>
@@ -11,7 +11,7 @@ import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 
 export default {
-    name: 'BreadCrumbs',
+    name: 'Breadcrumbs',
     components: {},
     props: {
         locale: {
@@ -32,7 +32,7 @@ export default {
 
 <style lang="scss" module>
 
-.c-breadCrumbs {
+.c-breadcrumbs {
     display: flex;
     justify-content: center;
     min-height: 80vh;

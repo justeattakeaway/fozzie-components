@@ -1,4 +1,4 @@
 export default {
     locale: 'da-DK',
-    text: 'I am a BreadCrumbs Component (DK)'
+    text: 'I am a Breadcrumbs Component (DK)'
 };
