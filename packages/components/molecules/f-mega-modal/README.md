@@ -61,7 +61,7 @@ export default {
 
 ### Non-Vue Applications
 
-This module can be ran as a micro front-end for applications that don't make use of the Vue framework.
+This module can be run as a micro front-end for applications that don't make use of the Vue framework.
 
 The following rudimentary example can be used as a guide for implementing this component in an existing static application:
 
