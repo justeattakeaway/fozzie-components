@@ -1,21 +1,30 @@
 <template>
-    <button
+    <component
+        :is="componentType"
         :class="[
             $style['o-btn'],
             $style[`o-btn--${buttonType}`],
             $style[`o-btn--size${buttonSizeClassname}`],
             (isFullWidth ? $style['o-btn--fullWidth'] : '')
         ]"
-        data-test-id='button-component'>
+        :attributes="$attrs"
+        :action-type="buttonActionType"
+        :data-test-id="`${componentType}-component`"
+        v-on="$listeners">
         <slot />
-    </button>
+    </component>
 </template>
 
 <script>
+import ActionButton from './Action.vue';
+import LinkButton from './Link.vue';
 
 export default {
     name: 'FButton',
-    components: {},
+    components: {
+        ActionButton,
+        LinkButton
+    },
     props: {
         buttonType: {
             type: String,
@@ -28,6 +37,10 @@ export default {
         isFullWidth: {
             type: Boolean,
             default: false
+        },
+        actionType: {
+            type: String,
+            default: 'button'
         }
     },
     computed: {
@@ -39,6 +52,19 @@ export default {
                 return this.buttonSize.slice(0, 2).toUpperCase() + this.buttonSize.slice(2); // xsmall -> XSmall
             }
             return this.buttonSize.charAt(0).toUpperCase() + this.buttonSize.slice(1); // capitalize the first letter of the prop
+        },
+        /**
+         * Renders `Link` component if a `href` attribute is applied to the component
+         * Renders `Action` component if no `href` attrivute is applied to the component
+         */
+        componentType () {
+            return this.$attrs.href ? 'link-button' : 'action-button';
+        },
+        /**
+         * Passes `actionType` prop to action button if no `href` attribute is applied to the component
+         */
+        buttonActionType () {
+            return !this.$attrs.href ? this.actionType : null;
         }
     }
 };

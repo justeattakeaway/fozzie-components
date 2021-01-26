@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.20
+------------------------------
+*January 22, 2021*
+
+### Added
+- Spinner loading indicator for Loqate.
+- Ability to hide dropdown when final address is picked.
+
+### Fixed
+- Drop down flicker when setTimeout is used.
+
+
 v4.0.0-beta.19
 ------------------------------
 *January 20, 2021*

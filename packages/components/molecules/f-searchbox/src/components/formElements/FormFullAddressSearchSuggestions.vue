@@ -80,8 +80,9 @@ export default {
     computed: {
         ...mapState('searchbox', [
             'address',
-            'fullAddressDetails',
+            'isInputFocus',
             'inputTimeoutValue',
+            'fullAddressDetails',
             'suggestions',
             'selectedStreetLevelAddressId'
         ]),
@@ -128,7 +129,9 @@ export default {
             'getFinalAddressSelectionDetails',
             'setAddress',
             'setContinueWithDetails',
-            'setSelectedFullAddressDetails'
+            'setSelectedFullAddressDetails',
+            'shouldShowSuggestionsDropdown',
+            'setFocusOnInput'
         ]),
 
         /**
@@ -179,7 +182,7 @@ export default {
          * @param index
          * @param selected
          */
-        getSelectedStreetAddress (e, index, selected) {
+        async getSelectedStreetAddress (e, index, selected) {
             const selectedAddress = this.suggestions[index || selected];
             const isAddressType = selectedAddress && selectedAddress.type === 'Address';
             e.preventDefault();
@@ -190,12 +193,32 @@ export default {
             }
 
             if (isAddressType) {
-                this.getFinalAddressSelectionDetails(selectedAddress.id);
+                await this.getFinalAddressSelectionDetails(selectedAddress.id);
+                this.shouldShowSuggestionsDropdown(false);
             } else {
                 this.getMatchedAreaAddressResults({
                     address: this.address,
                     streetLevelAddress: selectedAddress.id
                 });
+
+                /**
+                 * We need to clear the delayed timeout on the input field
+                 * so we don't get a flash between postcode > address selection
+                 * in Loqate. The initial delayed timeout value is there because
+                 * blur events are called before click events, so selections won't be possible.
+                 *
+                 */
+
+                if (this.inputTimeoutValue) {
+                    clearTimeout(this.inputTimeoutValue);
+                }
+
+                /**
+                 * Set focus back to the input field so the user does not lose
+                 * focus after they're shown the second dropdown.
+                 *
+                 */
+                this.setFocusOnInput(true);
 
                 this.setContinueWithDetails({
                     postcode:  selectedAddress.text,

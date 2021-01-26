@@ -4,9 +4,29 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (add to next release)
+v0.6.1
 ------------------------------
-*December 30, 2020*
+*January 25, 2021*
+
+### Added
+- Add a previous change to `$listeners` prop down to Action.vue
+
+
+v0.6.0
+------------------------------
+*January 25, 2021*
+
+### Added
+- Forward `$listeners` prop to button component to be able to add events listeners to it without `.native`
+
+
+v0.5.0
+------------------------------
+*January 21, 2021*
+
+### Added
+- `Action` component for standard buttons.
+- `Link` component for links styled as buttons.
 
 ### Changed
 - Updated config for latest `sass-loader`.

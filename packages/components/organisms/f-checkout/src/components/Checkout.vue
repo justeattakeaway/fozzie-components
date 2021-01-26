@@ -9,6 +9,7 @@
             :heading="$t('errorMessages.errorHeading')">
             {{ genericErrorMessage }}
         </alert>
+
         <card
             is-rounded
             has-outline
@@ -39,6 +40,7 @@
                         </error-message>
                     </template>
                 </form-field>
+
                 <address-block
                     v-if="isCheckoutMethodDelivery"
                     data-test-id="address-block" />
@@ -52,6 +54,7 @@
                     button-type="primary"
                     button-size="large"
                     is-full-width
+                    action-type="submit"
                     data-test-id="confirm-payment-submit-button">
                     {{ $t('buttonText') }}
                 </f-button>
@@ -66,14 +69,12 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import { required, email } from 'vuelidate/lib/validators';
+import { mapState, mapActions } from 'vuex';
 
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
-import { validations } from '@justeat/f-services';
-import { VueGlobalisationMixin } from '@justeat/f-globalisation';
-
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import ErrorMessage from '@justeat/f-error-message';
@@ -81,7 +82,9 @@ import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 
-import { mapState, mapActions } from 'vuex';
+import { validations } from '@justeat/f-services';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
+
 import AddressBlock from './Address.vue';
 import CheckoutHeader from './Header.vue';
 import CheckoutTermsAndConditions from './TermsAndConditions.vue';
@@ -90,11 +93,9 @@ import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
 
 import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants';
-import tenantConfigs from '../tenants';
-import EventNames from '../event-names';
-
-import checkoutModule from '../store/checkout.module';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
+import EventNames from '../event-names';
+import tenantConfigs from '../tenants';
 
 export default {
     name: 'VueCheckout',
@@ -131,6 +132,11 @@ export default {
             required: true
         },
 
+        getBasketUrl: {
+            type: String,
+            required: true
+        },
+
         checkoutTimeout: {
             type: Number,
             required: false,
@@ -144,6 +150,11 @@ export default {
         },
 
         createGuestTimeout: {
+            type: Number,
+            default: 1000
+        },
+
+        getBasketTimeout: {
             type: Number,
             default: 1000
         },
@@ -220,41 +231,39 @@ export default {
     },
 
     watch: {
-        authToken () {
-            this.setAuthToken(this.authToken);
+        async authToken () {
+            await this.initialise();
         }
     },
 
     async mounted () {
-        this.setAuthToken(this.authToken);
-        await Promise.all([this.loadCheckout(), this.loadAvailableFulfilment()]);
+        await this.initialise();
     },
-
-    created () {
-        if (!this.$store.hasModule('checkout')) {
-            this.$store.registerModule('checkout', checkoutModule);
-        }
-    },
-
-    /*
-        TODO: in the future, we should actually try to deregister modules.
-        However, right now, given we might have several instances of the same component, we don't want to remove the module for all of them.
-        We tried generating a dynamic module name (so we could add and remove a module per component),
-        but we couldn't get it to work. It needs more investigation when this is really needed, not now.
-    */
-    // beforeDestroy () {
-    // this.$store.unregisterModule('checkout');
-    // },
 
     methods: {
         ...mapActions('checkout', [
             'createGuestUser',
             'getAvailableFulfilment',
+            'getBasket',
             'getCheckout',
             'postCheckout',
             'setAuthToken',
             'updateCustomerDetails'
         ]),
+
+        /**
+         * Loads the necessary data to render a meaningful checkout component.
+         *
+         */
+        async initialise () {
+            this.setAuthToken(this.authToken);
+
+            if (!this.isLoggedIn) {
+                await this.loadBasket();
+            }
+
+            await Promise.all([this.loadCheckout(), this.loadAvailableFulfilment()]);
+        },
 
         /**
          * Submit the checkout details while emitting events to communicate its success or failure.
@@ -276,7 +285,6 @@ export default {
 
                 await this.postCheckout({
                     url: 'myPostUrl',
-                    tenant: this.tenant,
                     data: checkoutData,
                     timeout: this.checkoutTimeout
                 });
@@ -315,13 +323,31 @@ export default {
             try {
                 await this.getCheckout({
                     url: this.checkoutUrl,
-                    tenant: this.tenant,
                     timeout: this.getCheckoutTimeout
                 });
 
                 this.$emit(EventNames.CheckoutGetSuccess); // TODO: Check these emitted events.
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutGetFailure, thrownErrors); // TODO: Check these emitted events.
+            }
+        },
+
+        /**
+         * Load the basket details while emitting events to communicate its success or failure.
+         *
+         */
+        async loadBasket () {
+            try {
+                await this.getBasket({
+                    url: this.getBasketUrl,
+                    tenant: this.tenant,
+                    language: this.$i18n.locale,
+                    timeout: this.getBasketTimeout
+                });
+
+                this.$emit(EventNames.CheckoutBasketGetSuccess); // TODO: Check these emitted events.
+            } catch (thrownErrors) {
+                this.$emit(EventNames.CheckoutBasketGetFailure, thrownErrors); // TODO: Check these emitted events.
             }
         },
 
@@ -333,7 +359,6 @@ export default {
             try {
                 await this.getAvailableFulfilment({
                     url: this.checkoutAvailableFulfilmentUrl,
-                    tenant: this.tenant,
                     timeout: this.getCheckoutTimeout
                 });
 
@@ -473,7 +498,7 @@ export default {
 }
 
 .c-checkout-form {
-    margin-top: spacing(x3);
+    margin-top: spacing(x2);
 }
 
 .c-checkout-alert {

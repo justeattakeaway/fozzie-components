@@ -53,7 +53,8 @@ const defaultActions = {
     setAuthToken: jest.fn(),
     createGuestUser: jest.fn(),
     updateAddressDetails: jest.fn(),
-    updateCustomerDetails: jest.fn()
+    updateCustomerDetails: jest.fn(),
+    getBasket: jest.fn()
 };
 
 const i18n = {

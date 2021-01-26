@@ -18,7 +18,10 @@ import {
     SET_SELECTED_STREET_LEVEL_ADDRESS_ID,
     SET_FULL_ADDRESS_DETAILS,
     SHOW_FULL_ADDRESS_DETAILS,
-    SET_ADDRESS
+    SET_ADDRESS,
+    SET_SHOULD_SHOW_SUGGESTIONS_DROPDOWN,
+    SET_INPUT_TIMEOUT_VALUE,
+    SET_IS_LOADING_RESULTS
 } from './mutation.types';
 
 export default {
@@ -35,6 +38,9 @@ export default {
         streetNumber: '',
         streetLevelSelectionDetails: {},
         shouldInputFieldHaveFocus: false,
+        shouldDisplaySuggestionsDropdown: true,
+        inputTimeoutValue: null,
+        isLoadingResults: false,
         isValid: false,
         isDirty: false,
         isStreetNumberRequired: false,
@@ -93,12 +99,24 @@ export default {
             commit(SET_INPUT_FOCUS, payload);
         },
 
+        setFocusOnInput ({ commit }, payload) {
+            commit(SET_FOCUS_ON_INPUT, payload);
+        },
+
+        setInputTimeoutValue ({ commit }, payload) {
+            commit(SET_INPUT_TIMEOUT_VALUE, payload);
+        },
+
         setGeoLocationAvailability ({ commit }, payload) {
             commit(SET_GEO_LOCATION_AVAILABILITY, payload);
         },
 
         setStreetNumber ({ commit }, payload) {
             commit(SET_STREET_NUMBER_VALUE, payload);
+        },
+
+        shouldShowSuggestionsDropdown ({ commit }, payload) {
+            commit(SET_SHOULD_SHOW_SUGGESTIONS_DROPDOWN, payload);
         },
 
         /**
@@ -150,6 +168,9 @@ export default {
         async getMatchedAreaAddressResults ({ commit }, payload) {
             if (!fullAddressService.hasMinimumAddressCriteria(payload.address)) return;
 
+            commit(SET_SHOULD_SHOW_SUGGESTIONS_DROPDOWN, true);
+            commit(SET_IS_LOADING_RESULTS, true);
+
             const suggestions = await fullAddressService.getPartialAddressSearch(payload);
 
             if (suggestions) {
@@ -157,6 +178,8 @@ export default {
                 commit(SET_KEYBOARD_SUGGESTION, 0);
                 commit(SET_PARTIAL_ADDRESS_SUGGESTIONS, { suggestions, payload });
             }
+
+            commit(SET_IS_LOADING_RESULTS, false);
         },
 
         /**
@@ -205,6 +228,10 @@ export default {
             state.isStreetNumberRequired = isStreetNumberRequired;
         },
 
+        [SET_SHOULD_SHOW_SUGGESTIONS_DROPDOWN]: (state, shouldDisplaySuggestionsDropdown) => {
+            state.shouldDisplaySuggestionsDropdown = shouldDisplaySuggestionsDropdown;
+        },
+
         [SET_STREET_NUMBER_VALUE]: (state, streetNumber) => {
             state.streetNumber = streetNumber;
         },
@@ -219,6 +246,10 @@ export default {
 
         [SET_FOCUS_ON_INPUT]: (state, shouldInputFieldHaveFocus) => {
             state.shouldInputFieldHaveFocus = shouldInputFieldHaveFocus;
+        },
+
+        [SET_INPUT_TIMEOUT_VALUE]: (state, inputTimeoutValue) => {
+            state.inputTimeoutValue = inputTimeoutValue;
         },
 
         [SET_KEYBOARD_SUGGESTION]: (state, keyboardSuggestionIndex) => {
@@ -332,6 +363,10 @@ export default {
 
         [SET_ADDRESS]: (state, address) => {
             state.address = address;
+        },
+
+        [SET_IS_LOADING_RESULTS]: (state, isLoadingResults) => {
+            state.isLoadingResults = isLoadingResults;
         }
     }
 };

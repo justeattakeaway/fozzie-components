@@ -1,6 +1,7 @@
 import axios from 'axios';
 import CheckoutModule from '../checkout.module';
 import checkoutDelivery from '../../demo/checkout-delivery.json';
+import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 
 const mobileNumber = '+447111111111';
@@ -62,7 +63,8 @@ const {
     getAvailableFulfilment,
     updateAddressDetails,
     updateCustomerDetails,
-    createGuestUser
+    createGuestUser,
+    getBasket
 } = CheckoutModule.actions;
 
 let state = CheckoutModule.state();
@@ -161,7 +163,8 @@ describe('CheckoutModule', () => {
 
         const payload = {
             url: 'http://localhost/account/checkout',
-            tenant: 'en-GB',
+            tenant: 'uk',
+            language: 'en-GB',
             timeout: '1000'
         };
 
@@ -177,7 +180,6 @@ describe('CheckoutModule', () => {
                     method: 'get',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept-Tenant': payload.tenant,
                         Authorization: `Bearer ${state.authToken}`
                     },
                     timeout: payload.timeout
@@ -196,6 +198,30 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe('getBasket ::', () => {
+            it('should get the basket details from the backend and call `UPDATE_BASKET_DETAILS` mutation.', async () => {
+                // Arrange
+                const config = {
+                    method: 'get',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept-Tenant': payload.tenant,
+                        'Accept-Language': payload.language
+                    },
+                    timeout: payload.timeout
+                };
+
+                axios.get = jest.fn(() => Promise.resolve({ data: basketDelivery }));
+
+                // Act
+                await getBasket({ commit, state }, payload);
+
+                // Assert
+                expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                expect(commit).toHaveBeenCalledWith('UPDATE_BASKET_DETAILS', { serviceType: basketDelivery.ServiceType.toLowerCase() });
+            });
+        });
+
         describe('postCheckout ::', () => {
             payload.data = {
                 mobileNumber
@@ -208,8 +234,7 @@ describe('CheckoutModule', () => {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `Bearer ${authToken}`,
-                        'Accept-Tenant': payload.tenant
+                        Authorization: `Bearer ${authToken}`
                     },
                     timeout: payload.timeout
                 };
@@ -279,8 +304,7 @@ describe('CheckoutModule', () => {
                 config = {
                     method: 'get',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Accept-Tenant': payload.tenant
+                        'Content-Type': 'application/json'
                     },
                     timeout: payload.timeout
                 };
