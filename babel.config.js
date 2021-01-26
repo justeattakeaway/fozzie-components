@@ -3,17 +3,18 @@ module.exports = api => {
     const isTest = api.env('test');
     const presets = [];
     const plugins = [
-        '@babel/plugin-proposal-optional-chaining'
+        '@babel/plugin-proposal-optional-chaining', 
+        "@babel/plugin-proposal-class-properties"
     ];
     const builtIns = (api.env('development') ? 'entry' : false);
 
     if (!isTest) {
         api.cache(true);
         presets.push(['@vue/app', { useBuiltIns: builtIns }]);
-        presets.push('@babel/env');
+        presets.push('@babel/preset-env');
     } else {
         // use current node version for transpiling test files
-        presets.push(['@babel/env', { targets: { node: 'current' } }]);
+        presets.push(['@babel/preset-env', { targets: { node: 'current' } }]);
     }
 
     return {

@@ -1,30 +1,90 @@
-const registrationComponent = () => $('[data-test-id="registration-component"]');
-const firstNameInput = () => registrationComponent().$('[data-test-id="input-first-name"]');
-const lastNameInput = () => registrationComponent().$('[data-test-id="input-last-name"]');
-const emailInput = () => registrationComponent().$('[data-test-id="input-email"]');
-const passwordInput = () => registrationComponent().$('[data-test-id="input-password"]');
-const createAccountButton = () => registrationComponent().$('[data-test-id="create-account-submit-button"]');
+import Page from "../../../../../../test/utils/page.object";
 
-const termsAndConditionsLink = () => registrationComponent().$('[data-test-id="ts-and-cs-link"]');
-const privacyPolicyLink = () => registrationComponent().$('[data-test-id="privacy-policy-link"]');
-const cookiesPolicyLink = () => registrationComponent().$('[data-test-id="cookies-policy-link"]');
+import {
+    REGISTRATION_COMPONENT, 
+    FIRST_NAME_INPUT, 
+    LAST_NAME_INPUT, 
+    EMAIL_INPUT, 
+    PASSWORD_INPUT, 
+    CREATE_ACCOUNT_BUTTON, 
+    TERMS_AND_CONDITIONS_LINK, 
+    PRIVACY_POLICY_LINK, 
+    COOKIES_POLICY_LINK, 
+    FIRST_NAME_EMPTY_ERROR, 
+    FIRST_NAME_MAX_LENGTH_ERROR, 
+    FIRST_NAME_INVALID_ERROR, 
+    LAST_NAME_EMPTY_ERROR, 
+    LAST_NAME_MAX_LENGTH_ERROR, 
+    LAST_NAME_INVALID_ERROR,
+    EMAIL_EMPTY_ERROR, 
+    EMAIL_EXISTS_ERROR, 
+    EMAIL_INVALID_ERROR, 
+    PASSWORD_EMPTY_ERROR, 
+} from './f-registration.selectors';
 
-// Validation errors
-const firstNameEmptyError = () => $('[data-test-id="error-first-name-empty"]');
-const firstNameMaxLengthError = () => $('[data-test-id="error-first-name-maxlength"]');
-const firstNameInvalidError = () => $('[data-test-id="error-first-name-invalid"]');
+export default class Registration extends Page {
 
-const lastNameEmptyError = () => $('[data-test-id="error-last-name-empty"]');
-const lastNameMaxLengthError = () => $('[data-test-id="error-last-name-maxlength"]');
-const lastNameInvalidError = () => $('[data-test-id="error-last-name-invalid"]');
+    get component () { return $(REGISTRATION_COMPONENT) }
+    get createAccountButton () { return $(CREATE_ACCOUNT_BUTTON) }
+    get termsAndConditionsLink () { return $(TERMS_AND_CONDITIONS_LINK) }
+    get privacyPolicyLink () { return $(PRIVACY_POLICY_LINK) }
+    get cookiesPolicyLink () { return $(COOKIES_POLICY_LINK) }
+  
+    fields = {
+        firstName: {
+            get input () { return $(FIRST_NAME_INPUT) }, 
+            get emptyError () { return $(FIRST_NAME_EMPTY_ERROR) }, 
+            get maxLengthError () { return $(FIRST_NAME_MAX_LENGTH_ERROR) } , 
+            get firstNameInvalidError () { return $(FIRST_NAME_INVALID_ERROR) }
+        }, 
+        lastName: {
+            get input () { return $(LAST_NAME_INPUT) }, 
+            get emptyError () { return $(LAST_NAME_EMPTY_ERROR) }, 
+            get maxLengthError () { return $(LAST_NAME_MAX_LENGTH_ERROR) }, 
+            get lastNameInvalidError () { return  $(LAST_NAME_INVALID_ERROR) }
+        }, 
+        email: {
+            get input () { return $(EMAIL_INPUT) }, 
+            get emptyError () { return $(EMAIL_EMPTY_ERROR) }, 
+            get emailExistsError () { return $(EMAIL_EXISTS_ERROR) }, 
+            get emailInvalidError () { return $(EMAIL_INVALID_ERROR) }
+        }, 
+        password: {
+            get input () { return $(PASSWORD_INPUT) }, 
+            get emptyError () { return $(PASSWORD_EMPTY_ERROR) }
+        }
+    };
 
-const emailEmptyError = () => $('[data-test-id="error-email-empty"]');
-const emailInvalidError = () => $('[data-test-id="error-email-invalid"]');
-const emailExistsError = () => $('[data-test-id="error-email-exists"]');
+    isInputFieldDisplayed(fieldName){
+        return this.fields[fieldName].input.isDisplayed();
+    }
 
-const passwordEmptyError = () => $('[data-test-id="error-password-empty"]');
+    isEmptyErrorDisplayed(fieldName){
 
-/**
+    }
+
+
+    open() {
+        super.openOrganism('registration-component')
+    }
+
+    waitForComponent(){
+        super.waitForComponent(this.component)
+    };
+
+    isComponentDisplayed () {
+        return this.component.isDisplayed();
+    }
+
+    isFirstNameEmptyErrorDisplayed(){
+        this.firstNameEmptyError.isDisplayed();
+    }
+
+
+
+
+
+       /**
  * @description
  * Inputs user details into the registration component and submits the form.
  *
@@ -34,33 +94,60 @@ const passwordEmptyError = () => $('[data-test-id="error-password-empty"]');
  * @param {String} userInfo.email The user's e-mail address
  * @param {String} userInfo.password The user's password
  */
-exports.submitRegistrationForm = (userInfo) => {
-    exports.waitForRegistrationForm();
-    firstNameInput().setValue(userInfo.firstName);
-    lastNameInput().setValue(userInfo.lastName);
-    emailInput().setValue(userInfo.email);
-    passwordInput().setValue(userInfo.password);
-    createAccountButton().click();
-};
 
-exports.waitForRegistrationForm = () => {
-    registrationComponent().waitForExist();
-};
+submitForm(userInfo){
+    // waitForComponent();
+
+    this.firstNameInput.setValue(userInfo.firstName)
+    this.createAccountButton.click();
+
+    // this.firstNameInput.setValue(userInfo.firstName);
+    // this.lastNameInput.setValue(userInfo.lastName);
+    // this.emailInput.setValue(userInfo.email);
+    // this.passwordInput.setValue(userInfo.password);
+    // this.createAccountButton.click();
+    };
+}
+
+// page Object model - put generic functions here - e.g.$
+
+// // isDisplayed(element){
+// //     element.isDisplayed()
+// // }
 
 exports.isFirstNameEmptyErrorDisplayed = () => firstNameEmptyError().isDisplayed();
 exports.isFirstNameMaxLengthErrorDisplayed = () => firstNameMaxLengthError().isDisplayed();
 exports.isFirstNameInvalidErrorDisplayed = () => firstNameInvalidError().isDisplayed();
 
-exports.isLastNameEmptyErrorDisplayed = () => lastNameEmptyError().isDisplayed();
-exports.isLastNameMaxLengthErrorDisplayed = () => lastNameMaxLengthError().isDisplayed();
-exports.isLastNameInvalidErrorDisplayed = () => lastNameInvalidError().isDisplayed();
+// exports.isLastNameEmptyErrorDisplayed = () => lastNameEmptyError().isDisplayed();
+// exports.isLastNameMaxLengthErrorDisplayed = () => lastNameMaxLengthError().isDisplayed();
+// exports.isLastNameInvalidErrorDisplayed = () => lastNameInvalidError().isDisplayed();
 
-exports.isEmailEmptyErrorDisplayed = () => emailEmptyError().isDisplayed();
-exports.isEmailInvalidErrorDisplayed = () => emailInvalidError().isDisplayed();
-exports.isEmailExistsErrorDisplayed = () => emailExistsError().isDisplayed();
-exports.isPasswordEmptyErrorDisplayed = () => passwordEmptyError().isDisplayed();
+// exports.isEmailEmptyErrorDisplayed = () => emailEmptyError().isDisplayed();
+// exports.isEmailInvalidErrorDisplayed = () => emailInvalidError().isDisplayed();
+// exports.isEmailExistsErrorDisplayed = () => emailExistsError().isDisplayed();
+// exports.isPasswordEmptyErrorDisplayed = () => passwordEmptyError().isDisplayed();
 
-exports.termsAndConditionsLinkCanBeClicked = () => termsAndConditionsLink().isClickable();
-exports.privacyPolicyLinkCanBeClicked = () => privacyPolicyLink().isClickable();
-exports.cookiesPolicyLinkCanBeClicked = () => cookiesPolicyLink().isClickable();
+// exports.termsAndConditionsLinkCanBeClicked = () => termsAndConditionsLink().isClickable();
+// exports.privacyPolicyLinkCanBeClicked = () => privacyPolicyLink().isClickable();
+// exports.cookiesPolicyLinkCanBeClicked = () => cookiesPolicyLink().isClickable();
 
+  // get firstNameInput () { return $(FIRST_NAME_INPUT) }
+    // get lastNameInput () { return $(LAST_NAME_INPUT) }
+    // get emailInput () { return $(EMAIL_INPUT) }
+    // get passwordInput () { return $(PASSWORD_INPUT) }
+
+    
+    // get firstNameEmptyError () { return $(FIRST_NAME_EMPTY_ERROR) }
+    // get firstNameMaxLengthError () { return $(FIRST_NAME_MAX_LENGTH_ERROR) }
+    // get firstNameInvalidError () { return $(FIRST_NAME_INVALID_ERROR) }
+    
+    // get lastNameEmptyError () { return $(LAST_NAME_EMPTY_ERROR) }
+    // get lastNameMaxLengthError () { return $(LAST_NAME_MAX_LENGTH_ERROR) }
+    // get lastNameInvalidError () { return $(LAST_NAME_INVALID_ERROR) }
+    
+    // get emailEmptyError () { return $(EMAIL_EMPTY_ERROR) }
+    // get emailExistsError () { return $(EMAIL_EXISTS_ERROR) }
+    // get emailInvalidError () { return $(EMAIL_INVALID_ERROR) }
+    
+    // get passwordEmptyError () { return $(PASSWORD_EMPTY_ERROR) }

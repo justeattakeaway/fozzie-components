@@ -111,5 +111,8 @@
     "packages/components/organisms/*",
     "packages/services/*",
     "packages/tools/*"
-  ]
+  ],
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.1"
+  }
 }

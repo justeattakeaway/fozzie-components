@@ -3,7 +3,8 @@ module.exports = api => {
     const isTest = api.env('test');
     const presets = [];
     const plugins = [
-        '@babel/plugin-proposal-optional-chaining' // https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining
+        '@babel/plugin-proposal-optional-chaining', // https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining
+        "@babel/plugin-proposal-class-properties"
     ];
 
     const builtIns = (api.env('development') ? 'entry' : false);
@@ -14,10 +15,10 @@ module.exports = api => {
         // Alias for @babel/preset-env
         // Hooks into browserslist to provide smart Babel transforms
         // https://babeljs.io/docs/en/babel-preset-env
-        presets.push('@babel/env');
+        presets.push('@babel/preset-env');
     } else {
         // use current node version for transpiling test files
-        presets.push(['@babel/env', { targets: { node: 'current' } }]);
+        presets.push(['@babel/preset-env', { targets: { node: 'current' } }]);
     }
 
     return {
