@@ -320,21 +320,6 @@ describe('Checkout', () => {
                 expect(setAuthTokenSpy).toHaveBeenCalledWith(propsDataWithAuthToken.authToken);
             });
 
-            it('should call `loadCheckout`', async () => {
-                // Arrange & Act
-                const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
-
-                shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-                await flushPromises();
-
-                expect(loadCheckoutSpy).toHaveBeenCalled();
-            });
-
             it('should call `loadAvailableFulfilment`', async () => {
                 // Arrange & Act
                 const loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
@@ -365,6 +350,21 @@ describe('Checkout', () => {
 
                     expect(loadBasketSpy).toHaveBeenCalled();
                 });
+
+                it('should not call `loadCheckout`', async () => {
+                    // Arrange & Act
+                    const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
+
+                    shallowMount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                    await flushPromises();
+
+                    expect(loadCheckoutSpy).not.toHaveBeenCalled();
+                });
             });
 
             describe('if isLoggedIn set to `true`', () => {
@@ -381,6 +381,21 @@ describe('Checkout', () => {
                     await flushPromises();
 
                     expect(loadBasketSpy).not.toHaveBeenCalled();
+                });
+
+                it('should call `loadCheckout`', async () => {
+                    // Arrange & Act
+                    const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
+
+                    shallowMount(VueCheckout, {
+                        store: createStore({ ...defaultState, isLoggedIn: true }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                    await flushPromises();
+
+                    expect(loadCheckoutSpy).toHaveBeenCalled();
                 });
             });
         });
@@ -912,37 +927,47 @@ describe('Checkout', () => {
         });
 
         describe('loadCheckout ::', () => {
-            describe('when `getCheckout` request fails', () => {
-                let wrapper;
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
 
-                beforeEach(async () => {
-                    wrapper = mount(VueCheckout, {
+            describe('when `getCheckout` request fails', () => {
+                it('should emit failure event', async () => {
+                    // Arrange
+                    jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
+
+                    const wrapper = mount(VueCheckout, {
                         store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.reject()) }),
                         i18n,
                         localVue,
                         propsData
                     });
-                });
 
-                it('should emit failure event', async () => {
+                    // Act
+                    await wrapper.vm.loadCheckout();
+
+                    // Assert
                     expect(wrapper.emitted(EventNames.CheckoutGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
                 });
             });
 
             describe('when `getCheckout` request succeeds', () => {
-                let wrapper;
+                it('should emit success event', async () => {
+                    // Arrange
+                    jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
-                beforeEach(async () => {
-                    wrapper = mount(VueCheckout, {
+                    const wrapper = mount(VueCheckout, {
                         store: createStore(),
                         i18n,
                         localVue,
                         propsData
                     });
-                });
 
-                it('should emit success event', async () => {
+                    // Act
+                    await wrapper.vm.loadCheckout();
+
+                    // Assert
                     expect(wrapper.emitted(EventNames.CheckoutGetSuccess).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutGetFailure)).toBeUndefined();
                 });
@@ -950,37 +975,47 @@ describe('Checkout', () => {
         });
 
         describe('loadAvailableFulfilment ::', () => {
-            describe('when `getAvailableFulfilment` request fails', () => {
-                let wrapper;
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
 
-                beforeEach(async () => {
-                    wrapper = mount(VueCheckout, {
+            describe('when `getAvailableFulfilment` request fails', () => {
+                it('should emit failure event', async () => {
+                    // Arrange
+                    jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
+
+                    const wrapper = mount(VueCheckout, {
                         store: createStore(defaultState, { ...defaultActions, getAvailableFulfilment: jest.fn(async () => Promise.reject()) }),
                         i18n,
                         localVue,
                         propsData
                     });
-                });
 
-                it('should emit failure event', async () => {
+                    // Act
+                    await wrapper.vm.loadAvailableFulfilment();
+
+                    // Assert
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure).length).toBe(1);
                 });
             });
 
             describe('when `getAvailableFulfilment` request succeeds', () => {
-                let wrapper;
+                it('should emit success event', async () => {
+                    // Arrange
+                    jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
-                beforeEach(async () => {
-                    wrapper = mount(VueCheckout, {
+                    const wrapper = mount(VueCheckout, {
                         store: createStore(),
                         i18n,
                         localVue,
                         propsData
                     });
-                });
 
-                it('should emit success event', async () => {
+                    // Act
+                    await wrapper.vm.loadAvailableFulfilment();
+
+                    // Assert
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure)).toBeUndefined();
                 });
@@ -988,36 +1023,48 @@ describe('Checkout', () => {
         });
 
         describe('loadBasket ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
             describe('when `getBasket` request fails', () => {
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(defaultState, { ...defaultActions, getBasket: jest.fn(async () => Promise.reject()) }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
                 it('should emit failure event', async () => {
-                    expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure).length).toBe(1);
-                });
+                    // Arrange
+                    jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
-                it('should not emit success event', async () => {
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, getBasket: jest.fn(async () => Promise.reject()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.loadBasket();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess)).toBeUndefined();
                 });
             });
 
             describe('when `getBasket` request succeeds', () => {
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
                 it('should emit success event', async () => {
-                    expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess).length).toBe(1);
-                });
+                    // Arrange
+                    jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
-                it('should not emit failure event', async () => {
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.loadBasket();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure)).toBeUndefined();
                 });
             });
