@@ -1,9 +1,14 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import CookieBanner from '../CookieBanner.vue';
 import Cookie from 'cookie-universal';
+import { VueI18n } from '@justeat/f-globalisation';
 
 const localVue = createLocalVue();
 localVue.prototype.$cookies = Cookie();
+localVue.use(VueI18n);
+const i18n = {
+    locale: 'en-GB'
+};
 
 describe('CookieBanner', () => {
     describe('components', () => {
@@ -14,6 +19,7 @@ describe('CookieBanner', () => {
             // Act
             const wrapper = shallowMount(CookieBanner, {
                 localVue,
+                i18n,
                 propsData
             });
 
@@ -39,6 +45,7 @@ describe('CookieBanner', () => {
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
+                    i18n,
                     propsData
                 });
 
@@ -61,6 +68,7 @@ describe('CookieBanner', () => {
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
+                    i18n,
                     propsData
                 });
                 wrapper.vm.dataLayerPush('full');
@@ -86,6 +94,7 @@ describe('CookieBanner', () => {
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
+                    i18n,
                     propsData
                 });
                 wrapper.vm.$cookies.set('je-cookieConsent', cookieValue);
@@ -105,6 +114,7 @@ describe('CookieBanner', () => {
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
+                    i18n,
                     propsData
                 });
                 const cookieSpy = jest.spyOn(wrapper.vm.$cookies, 'set');
@@ -130,6 +140,7 @@ describe('CookieBanner', () => {
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
+                    i18n,
                     propsData
                 });
                 const cookieSpy = jest.spyOn(wrapper.vm.$cookies, 'set');
@@ -155,6 +166,7 @@ describe('CookieBanner', () => {
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
+                    i18n,
                     propsData
                 });
                 const cookieSpy = jest.spyOn(wrapper.vm, 'setCookieBannerCookie');
@@ -171,6 +183,7 @@ describe('CookieBanner', () => {
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
+                    i18n,
                     propsData
                 });
                 const dataLayerSpy = jest.spyOn(wrapper.vm, 'dataLayerPush');
@@ -187,6 +200,7 @@ describe('CookieBanner', () => {
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
+                    i18n,
                     propsData
                 });
 
@@ -205,6 +219,7 @@ describe('CookieBanner', () => {
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
+                    i18n,
                     propsData
                 });
                 const cookieSpy = jest.spyOn(wrapper.vm, 'setCookieBannerCookie');
@@ -221,6 +236,7 @@ describe('CookieBanner', () => {
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
+                    i18n,
                     propsData
                 });
                 const dataLayerSpy = jest.spyOn(wrapper.vm, 'dataLayerPush');
@@ -237,6 +253,7 @@ describe('CookieBanner', () => {
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
+                    i18n,
                     propsData
                 });
                 const removeCookiesSpy = jest.spyOn(wrapper.vm, 'removeUnnecessaryCookies');
@@ -253,6 +270,7 @@ describe('CookieBanner', () => {
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
+                    i18n,
                     propsData
                 });
                 const resendSpy = jest.spyOn(wrapper.vm, 'resendEvents');
@@ -269,6 +287,7 @@ describe('CookieBanner', () => {
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
+                    i18n,
                     propsData
                 });
                 

@@ -21,24 +21,28 @@
                         name="cookieConsentTitle"
                         tabindex="0"
                         data-consent-title>
-                        {{ copy.mainTitle }}
+                        {{ $t('mainTitle') }}
                     </a>
                 </h2>
 
                 <p :class="$style['c-cookieBanner-text']">
-                    {{ copy.text1 }}
+                    {{ $t('textLine1') }}
                 </p>
                 <p :class="$style['c-cookieBanner-text']">
-                    {{ copy.text2 }}
+                    {{ $t('textLine2') }}
                 </p>
                 <p
                     :class="$style['c-cookieBanner-text']">
-                    {{ copy.text3 }}
-                    <a
-                        :href="copy.linkHref"
-                        :class="$style['c-cookieBanner-link']"
-                        target="_blank">
-                        {{ copy.linkText }}</a>{{ copy.text4 }}
+                    <i18n
+                        path="textLine3">
+                        <template #cookiePolicy>
+                            <a
+                                :href="$t('cookiePolicyLinkUrl')"
+                                target="_blank">
+                                <span>{{ $t('cookiePolicyLinkText') }}</span>
+                            </a>
+                        </template>
+                    </i18n>
                 </p>
             </div>
 
@@ -48,7 +52,7 @@
                     role="button"
                     is-full-width
                     @click.native="acceptActions">
-                    {{ copy.acceptButtonText }}
+                    {{ $t('acceptButtonText') }}
                 </button-component>
                 <button-component
                     tabindex="0"
@@ -56,19 +60,19 @@
                     button-type="ghost"
                     is-full-width
                     @click.native="nonAcceptActions">
-                    {{ copy.nonAcceptButtonText }}
+                    {{ $t('nonAcceptButtonText') }}
                 </button-component>
             </div>
         </div>
-        <div v-if="legacyBanner">
+        <div v-else>
             <div :class="[$style['c-cookieWarning'], { [$style['c-cookieBanner--hidden']]: hideBanner }]">
                 <div :class="$style['c-cookieWarning-inner']">
                     <p>
-                        {{ copy.legacyBannerText }}
+                        {{ $t('legacyBannerText') }}
                         <a
                             class="c-cookieWarning-link"
-                            :href="copy.linkHref">
-                            {{ copy.legacyBannerLinkText }}
+                            :href="$t('cookiePolicyLinkUrl')">
+                            {{ $t('legacyBannerLinkText') }}
                         </a>
                     </p>
                     <button
@@ -84,6 +88,7 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 
 import ButtonComponent from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
@@ -96,7 +101,10 @@ export default {
         ButtonComponent
     },
 
+    mixins: [VueGlobalisationMixin],
+
     props: {
+
         locale: {
             type: String,
             default: 'en-GB'
@@ -124,7 +132,8 @@ export default {
         const theme = globalisationServices.getTheme(locale);
 
         return {
-            copy: { ...localeConfig },
+            config: { ...localeConfig },
+            tenantConfigs,
             theme,
             hideBanner: false,
             legacyBanner: false
@@ -135,6 +144,7 @@ export default {
         isHidden (newVal) {
             this.hideBanner = !!newVal;
         },
+
         showLegacyBanner (newVal) {
             this.legacyBanner = !!newVal;
         }
@@ -177,7 +187,7 @@ export default {
          * Check if the cookie banner has been shown to this user
          */
         checkLegacyBannerFlag () {
-            this.legacyBanner = this.copy.config.displayLegacy;
+            this.legacyBanner = this.config.displayLegacy;
         },
         /**
          * Check if the cookie banner has been shown to this user
@@ -220,7 +230,7 @@ export default {
          * Check for excluded cookies/storage
          */
         isNotExcluded (cookieName) {
-            return this.copy.config.cookieExclusionList.every(arrVal => cookieName.lastIndexOf(arrVal, arrVal.length - 1) === -1);
+            return this.config.cookieExclusionList.every(arrVal => cookieName.lastIndexOf(arrVal, arrVal.length - 1) === -1);
         },
         /**
          * Remove unnecessary cookies

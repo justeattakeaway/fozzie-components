@@ -41,6 +41,7 @@
   ],
   "dependencies": {
     "@justeat/f-button": "0.4.1",
+    "@justeat/f-globalisation": "1.0.0",
     "@justeat/f-services": "1.7.0"
   },
   "peerDependencies": {
