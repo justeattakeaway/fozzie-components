@@ -46,7 +46,7 @@ export default {
 }
 ```
 
-If you are using Webpack, you can import the component dynamically to separate the `mega-modal` bundle from the main `bundle.client.js`:
+If you are using Webpack, you can import the component dynamically to separate the `f-form-field` bundle from the main `bundle.client.js`:
 
 ```js
 import '@justeat/f-form-field/dist/f-form-field.css';

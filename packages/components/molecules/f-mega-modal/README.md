@@ -46,7 +46,7 @@ export default {
 }
 ```
 
-If you are using Webpack, you can import the component dynamically to separate the `mega-modal` bundle from the main `bundle.client.js`:
+If you are using Webpack, you can import the component dynamically to separate the `f-mega-modal` bundle from the main `bundle.client.js`:
 
 ```js
 import '@justeat/f-mega-modal/dist/f-mega-modal.css';
@@ -187,8 +187,8 @@ $ cd packages/components/molecules/f-mega-modal
 
 ### Unit, Integration and Contract
 
-To test all components, run from root directory.
-To test only `f-mega-modal`, run from the `./fozzie-components/packages/f-mega-modal` directory.
+* To test all components, run from root directory.
+* To test only `f-mega-modal`, run from the `./fozzie-components/packages/f-mega-modal` directory.
 
 ```sh
 yarn test

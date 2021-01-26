@@ -95,42 +95,42 @@ brazePromise.then(brazeDispatcher => {
 
 ### Config Object
 
-`config.apiKey`
+####`config.apiKey`
 
 The Braze API key used when invoking calls to the Braze SDK. This can be found in the Braze Dashboard at *App Settings->Developer Console->Rest API Keys*.
 
-`config.brands`
+####`config.brands`
 
 Sets the brands that the consumers have an interest in. Is concatenated to the current list of brands held
 by the Braze adapter.
 
-`config.userId`
+#### `config.userId`
 
 The user ID to retrieve data for.
 
-`config.enableLogging`
+#### `config.enableLogging`
 
 Enable/Disable verbose logging from the Braze SDK used for debugging.
 
- `config.disableComponent`
+#### `config.disableComponent`
 
 Enable/Disable the Braze SDK when running experiments or feature toggling.
 
-`config.callbacks.handleContentCards`
+#### `config.callbacks.handleContentCards`
 
 A callback to be invoked when content cards have been retrieved.
 
-`config.callbacks.handleContentCardsGrouped`
+#### `config.callbacks.handleContentCardsGrouped`
 
 A callback to be invoked when content cards have been retrieved, grouped by header card title.
 
-`config.callbacks.interceptInAppMessages`
+#### `config.callbacks.interceptInAppMessages`
 
 A callback to be invoked when in-app messages have been retrieved.
 
 > The dispatcher fires callbacks registered for in-app messages before it triggers the messages.
 
-`config.callbacks.interceptInAppMessageClickEvents`
+#### `config.callbacks.interceptInAppMessageClickEvents`
 
 The callback to be invoked when in-app messages have been clicked.
 
