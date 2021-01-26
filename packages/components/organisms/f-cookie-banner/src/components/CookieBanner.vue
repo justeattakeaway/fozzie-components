@@ -7,7 +7,7 @@
         :aria-hidden="hideBanner">
         <div
             v-if="!legacyBanner"
-            :class="$style['c-cookieBanner-card']">
+            :class="[$style['c-cookieBanner-card'], { [$style['c-cookieBanner-ios']]: checkIosSafari() }]">
             <div
                 :class="$style['c-cookieBanner-content']"
                 role="dialog"
@@ -92,6 +92,7 @@ import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 
 import ButtonComponent from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
+
 import tenantConfigs from '../tenants';
 
 export default {
@@ -203,6 +204,7 @@ export default {
         },
         /**
          * Set the cookie for the user's choice
+         * @param {String} cookieValue
          */
         setCookieBannerCookie (cookieValue) {
             this.$cookies.set('je-cookieConsent', cookieValue, {
@@ -221,6 +223,7 @@ export default {
         },
         /**
          * Push tracking events
+         * @param {String} consentLevel
          */
         dataLayerPush (consentLevel) {
             const dataLayer = window.dataLayer || [];
@@ -228,6 +231,8 @@ export default {
         },
         /**
          * Check for excluded cookies/storage
+         * @param {String} cookieName
+         * @returns {Bool}
          */
         isNotExcluded (cookieName) {
             return this.config.cookieExclusionList.every(arrVal => cookieName.lastIndexOf(arrVal, arrVal.length - 1) === -1);
@@ -240,6 +245,13 @@ export default {
             for (let i = 0; i < cookies.length; i++) {
                 if (this.isNotExcluded(cookies[i])) this.$cookies.remove(cookies[i]);
             }
+        },
+        /**
+         * Check for iOS browser
+         * @returns {Bool}
+         */
+        checkIosSafari () {
+            return /(iPhone|iPad).*Safari/.test(navigator.userAgent);
         },
         /**
          * Resend GTM events
@@ -375,6 +387,10 @@ export default {
         .c-cookieBanner-card {
             flex-direction: column;
             padding: spacing(x2) 0;
+        }
+
+        .c-cookieBanner-ios {
+            padding-bottom: 80px;
         }
 
         .c-cookieBanner-content,
