@@ -6,7 +6,7 @@ describe('f-breadCrumbs component tests', () => {
         browser.switchToFrame(0);
         BreadcrumbsComponent.waitForBreadCrumbsComponent();
     });
-    it('should display the f-breadCrumbs component', () => {
+    it('should display the f-breadcrumbs component', () => {
         // Assert
         expect(BreadcrumbsComponent.isBreadCrumbsComponentDisplayed()).toBe(true);
     });
