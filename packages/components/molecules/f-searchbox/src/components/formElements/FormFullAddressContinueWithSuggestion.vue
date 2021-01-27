@@ -35,7 +35,8 @@ export default {
 
     computed: {
         ...mapState('searchbox', [
-            'continueWithSuggestionDetails'
+            'continueWithSuggestionDetails',
+            'isBelowMid'
         ]),
 
         /**
@@ -59,11 +60,18 @@ export default {
 
     methods: {
         ...mapActions('searchbox', [
-            'setAddress'
+            'setAddress',
+            'setShouldShowSuggestionModel',
+            'clearSuggestions'
         ]),
 
         setContinueWithSuggestion () {
             this.setAddress(this.continueWithSuggestionDetails.postcode);
+
+            if (this.isBelowMid) {
+                this.setShouldShowSuggestionModel(false);
+                this.clearSuggestions([]);
+            }
         }
     }
 };

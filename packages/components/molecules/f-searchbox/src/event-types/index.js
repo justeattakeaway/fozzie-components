@@ -3,3 +3,4 @@ export const SUBMIT_SAVED_ADDRESS = 'submit-saved-address';
 export const SUBMIT_VALID_ADDRESS = 'submit-valid-address';
 export const SEARCHBOX_ERROR = 'searchbox-error';
 export const TRACK_POSTCODE_CHANGED = 'track-postcode-changed';
+export const ON_FULL_ADDRESS_MODAL_CLOSED = 'on-full-address-modal-closed';

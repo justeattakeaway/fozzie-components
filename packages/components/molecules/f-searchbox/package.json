@@ -63,6 +63,7 @@
     "@justeat/f-button": "0.4.1",
     "@justeat/f-error-message": "0.3.1",
     "@justeat/f-globalisation": "0.2.0",
+    "@justeat/f-mega-modal": "0.3.0",
     "@justeat/f-vue-icons": "1.13.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
