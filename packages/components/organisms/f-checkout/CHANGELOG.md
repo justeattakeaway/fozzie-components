@@ -5,6 +5,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.44.0
 -------------------------------
+*January 27, 2021*
+
+### Changed
+- Only call the Checkout `GET` endpoint when the user is logged in.
+- Refactored tests.
+
+
+v0.44.0
+-------------------------------
 *January 25, 2021*
 
 ### Added
