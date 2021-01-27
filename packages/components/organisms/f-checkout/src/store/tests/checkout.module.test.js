@@ -62,7 +62,7 @@ const {
 
 const {
     getCheckout,
-    postCheckout,
+    patchCheckout,
     setAuthToken,
     getAvailableFulfilment,
     updateAddressDetails,
@@ -192,7 +192,6 @@ describe('CheckoutModule', () => {
 
             beforeEach(() => {
                 config = {
-                    method: 'get',
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${state.authToken}`
@@ -217,7 +216,6 @@ describe('CheckoutModule', () => {
             it('should get the basket details from the backend and call `UPDATE_BASKET_DETAILS` mutation.', async () => {
                 // Arrange
                 const config = {
-                    method: 'get',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept-Tenant': payload.tenant,
@@ -237,7 +235,7 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe('postCheckout ::', () => {
+        describe('patchCheckout ::', () => {
             payload.data = {
                 mobileNumber
             };
@@ -246,22 +244,21 @@ describe('CheckoutModule', () => {
 
             beforeEach(() => {
                 config = {
-                    method: 'post',
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${authToken}`
                     },
                     timeout: payload.timeout
                 };
-                axios.post = jest.fn(() => Promise.resolve({ status: 200 }));
+                axios.patch = jest.fn(() => Promise.resolve({ status: 200 }));
             });
 
             it('should post the checkout details to the backend.', async () => {
                 // Act
-                await postCheckout({ commit, state }, payload);
+                await patchCheckout({ commit, state }, payload);
 
                 // Assert
-                expect(axios.post).toHaveBeenCalledWith(payload.url, payload.data, config);
+                expect(axios.patch).toHaveBeenCalledWith(payload.url, payload.data, config);
             });
         });
 
@@ -276,7 +273,6 @@ describe('CheckoutModule', () => {
 
             beforeEach(() => {
                 config = {
-                    method: 'post',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept-Tenant': payload.tenant
@@ -317,7 +313,6 @@ describe('CheckoutModule', () => {
 
             beforeEach(() => {
                 config = {
-                    method: 'get',
                     headers: {
                         'Content-Type': 'application/json'
                     },
