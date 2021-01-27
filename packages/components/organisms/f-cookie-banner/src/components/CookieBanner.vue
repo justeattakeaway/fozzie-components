@@ -1,13 +1,20 @@
 <template>
     <div
         ref="cookieBanner"
-        :class="[$style['c-cookieBanner'], $style['c-cookieBanner-overlay'], { [$style['c-cookieBanner--hidden']]: hideBanner }]"
+        :class="[
+            $style['c-cookieBanner'],
+            $style['c-cookieBanner-overlay'],
+            { [$style['c-cookieBanner--hidden']]: hideBanner }
+        ]"
         data-cookie-consent-overlay
         data-test-id="cookieBanner-component"
         :aria-hidden="hideBanner">
         <div
             v-if="!legacyBanner"
-            :class="[$style['c-cookieBanner-card'], { [$style['c-cookieBanner-ios']]: checkIosSafari() }]">
+            :class="[
+                $style['c-cookieBanner-card'],
+                { [$style['c-cookieBanner-ios']]: checkIosSafari() }
+            ]">
             <div
                 :class="$style['c-cookieBanner-content']"
                 role="dialog"
