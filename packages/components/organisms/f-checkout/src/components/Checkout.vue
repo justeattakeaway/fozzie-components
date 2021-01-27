@@ -262,7 +262,11 @@ export default {
                 await this.loadBasket();
             }
 
-            await Promise.all([this.loadCheckout(), this.loadAvailableFulfilment()]);
+            const promises = this.isLoggedIn
+                ? [this.loadCheckout(), this.loadAvailableFulfilment()]
+                : [this.loadAvailableFulfilment()];
+
+            await Promise.all(promises);
         },
 
         /**
