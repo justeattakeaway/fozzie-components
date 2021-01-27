@@ -91,11 +91,11 @@ brazePromise.then(brazeDispatcher => {
 
 ### Config Object
 
-`config.apiKey`
+#### `config.apiKey`
 
 The Braze API key used when invoking calls to the Braze SDK. This can be found in the Braze Dashboard at *App Settings->Developer Console->Rest API Keys*.
 
-`config.brands`
+#### `config.brands`
 
 Sets the brands that the consumers have an interest in. Is concatenated to the current list of brands held
 by the Braze adapter.
@@ -124,7 +124,7 @@ A callback to be invoked when content cards have been retrieved, grouped by head
 
 A callback to be invoked when in-app messages have been retrieved.
 
-> The dispatcher fires callbacks registered for in-app messages before it triggers the messages.
+> **Please note:** The dispatcher fires callbacks registered for in-app messages before it triggers the messages.
 
 #### `config.callbacks.interceptInAppMessageClickEvents`
 
@@ -142,14 +142,14 @@ Cards are now accessible on `myCallbackMethod.cards`.
 
 ```js
 // v1 implementation
-const myCallback = cards => console.log(cards); // […cards]
+const myCallback = cards => console.log(cards); // [...cards]
 appboy.requestImmediateRefresh();
-// […cards]
+// [...cards]
 
 // v2 implementation
-const myCallback = cardsInstance => console.log(cardsInstance); // {cards: […cards]}
+const myCallback = cardsInstance => console.log(cardsInstance); // {cards: [...cards]}
 appboy.requestImmediateRefresh();
-// { cards: […cards]}
+// { cards: [...cards]}
 ```
 
 ## Resources
