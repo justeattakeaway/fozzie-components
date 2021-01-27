@@ -32,19 +32,6 @@ yarn add @justeat/f-metadata
 npm install @justeat/f-metadata
 ```
 
-### Vue Applications
-
-You can import it in your Vue SFC like this (please note that styles have to be imported separately):
-
-You can use with `import` or `require` syntax.
-```js
-import initialiseBraze from '@justeat/f-metadata';
-````
-
-```js
-const initialiseBraze = require('@justeat/f-metadata');
-```
-
 ### Initialisation
 
 The package comes with one method for initialising Braze, or retrieving the already initialised module.
