@@ -20,6 +20,16 @@
     </div>
 </template>
 
+<script>
+export default {
+    data () {
+        return {
+            hideBanner: false
+        };
+    }
+};
+</script>
+
 <style lang="scss" module>
     .c-cookieWarning {
         box-sizing: border-box;
