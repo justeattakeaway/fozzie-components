@@ -380,6 +380,7 @@ describe('Checkout', () => {
                     });
                     await flushPromises();
 
+                    // Assert
                     expect(loadBasketSpy).not.toHaveBeenCalled();
                 });
 
@@ -395,6 +396,7 @@ describe('Checkout', () => {
                     });
                     await flushPromises();
 
+                    // Assert
                     expect(loadCheckoutSpy).toHaveBeenCalled();
                 });
             });
