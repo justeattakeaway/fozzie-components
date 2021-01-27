@@ -90,7 +90,7 @@
                 <li
                     :class="['c-nav-list-item has-sublist', {
                         'is-hidden': !userInfo || !showLoginInfo,
-                        'open': navIsOpen
+                        'is-open': navIsOpen
                     }]"
                     data-test-id="user-info-icon"
                     v-on="isBelowMid ? null : { mouseover: openNav, mouseleave: closeNav }"
@@ -222,7 +222,7 @@
                     :open-nav="openNav"
                     :close-nav="closeNav"
                     data-test-id="country-selector"
-                    v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null" />
+                    :nav-is-open="navIsOpen" />
             </ul>
         </div>
     </nav>
@@ -890,7 +890,7 @@ $nav-popover-padding               : spacing(x2);
             }
 
         // display the popover when our parent item is hovered(recieved class .open)
-        .has-sublist.open & {
+        .has-sublist.is-open & {
             opacity: 1;
             z-index: zIndex(high);
             right: 0;

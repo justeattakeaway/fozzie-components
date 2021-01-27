@@ -54,7 +54,7 @@ describe('CountrySelector ::', () => {
         await wrapper.vm.openCountrySelector();
 
         // Assert
-        expect(wrapper.find('[data-test-id="countrySelector-toggle"]').classes()).toContain('open');
+        expect(wrapper.find('[data-test-id="countrySelector-toggle"]').classes()).toContain('is-open');
     });
 
     it('should not be shown when `countrySelectorIsOpen: false`', async () => {
@@ -62,6 +62,6 @@ describe('CountrySelector ::', () => {
         await wrapper.vm.closeCountrySelector();
 
         // Assert
-        expect(wrapper.find('[data-test-id="countrySelector-toggle"]').classes()).not.toContain('open');
+        expect(wrapper.find('[data-test-id="countrySelector-toggle"]').classes()).not.toContain('is-open');
     });
 });

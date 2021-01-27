@@ -55,7 +55,7 @@ export default {
     props: {
         countryCode: {
             type: String,
-            required: true
+            default: 'gb'
         }
     },
 

@@ -1,19 +1,20 @@
 <template>
     <li
         :class="['c-countrySelector c-nav-list-item has-sublist', {
-            'open': countrySelectorIsOpen
+            'is-open': countrySelectorIsOpen
         }]"
         data-test-id="countrySelector-toggle"
         v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: closeCountrySelector }"
         @keyup.esc="closeCountrySelector">
         <f-button
+            :tabindex="isBelowMid && !navIsOpen ? -1 : 0"
             button-type="icon"
             class="c-nav-list-text c-countrySelector-btn"
             :aria-expanded="!isBelowMid && countrySelectorIsOpen ? 'true' : 'false'"
             :aria-haspopup="isBelowMid ? false : true"
-            :aria-label="copy.changeCountryText"
+            :aria-label="copy.changeCurrentCountry"
             @click="onCountrySelectorToggle"
-            v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
+            v-on="isBelowMid && !countrySelectorIsOpen ? { blur: closeNav, focus: openNav } : null">
             <span class="c-countrySelector-currentFlag-wrapper">
                 <flag-icon
                     :country-code="copy.currentCountryKey"
@@ -102,6 +103,10 @@ export default {
         closeNav: {
             type: Function,
             default: () => (() => {})
+        },
+        navIsOpen: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
