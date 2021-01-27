@@ -6,6 +6,7 @@ export const GO_TO_PAYMENT_BUTTON = '[data-test-id="confirm-payment-submit-butto
 export const KNOB_BUTTON = '[id$="tabbutton-knobs"]';
 export const KNOB_CHECKOUT_DROPDOWN = '[name="Checkout Url"]';
 export const SWITCH_USER_LINK = '[data-test-id="switch-user-link"]';
+export const GUEST_LOGIN_SIGNUP_LINK = '[data-test-id="guest-login-button"]';
 
 export const FIELDS = {
     mobileNumber: {
@@ -42,5 +43,6 @@ export default {
     USER_NOTE_INPUT,
     GO_TO_PAYMENT_BUTTON,
     SWITCH_USER_LINK,
-    FIELDS
+    FIELDS,
+    GUEST_LOGIN_SIGNUP_LINK
 };
