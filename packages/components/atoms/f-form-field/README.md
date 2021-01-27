@@ -1,10 +1,11 @@
+<div style="text-align: center">
 
-<div align="center">
-  <h1>f-form-field</h1>
+# f-form-field
 
-  <img width="125" alt="Fozzie Bear" src="../../bear.png" />
+<img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
-  <p>Fozzie Form Field Component</p>
+Fozzie Form Field Component.
+
 </div>
 
 ---

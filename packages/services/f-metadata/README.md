@@ -1,9 +1,11 @@
-<div align="center">
-<h1>f-metadata</h1>
+<div style="text-align: center">
+
+# f-metadata
 
 <img width="125" alt="Fozzie Bear" src="../../../bear.png" />
 
-<p>Braze Content Cards Interface</p>
+Braze Content Cards Interface.
+
 </div>
 
 ---
