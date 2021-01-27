@@ -83,17 +83,6 @@ The props that can be defined are as follows (if any):
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
 
-### CSS Classes
-
-f-footer has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
-
-In addition to this, f-footer exposes some classes which you can target in your application.
-
-The classes that can be defined are as follows (if any):
-
-| Class | Description |
-| ----- | ----------- |
-
 ### Events
 
 The events that can be subscribed to are as follows (if any):
@@ -122,7 +111,7 @@ $ cd packages/components/molecules/f-footer
 ### Unit, Integration and Contract
 
 To test all components, run from root directory.
-To test only `f-form-field`, run from the `./fozzie-components/packages/f-form-field` directory.
+To test only `f-footer`, run from the `./fozzie-components/packages/f-footer` directory.
 
 ```sh
 yarn test

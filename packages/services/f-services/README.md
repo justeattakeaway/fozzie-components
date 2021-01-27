@@ -1,3 +1,4 @@
+<!--suppress SpellCheckingInspection -->
 <div align="center">
 
 # f-services
@@ -29,7 +30,7 @@ npm install @justeat/f-services
 
 ### Import the package
 
-You can import it in your like this (please note that styles have to be imported separately)
+You can import it in your component/application like this (please note that styles have to be imported separately)
 
 ```js
 import { windowServices } from '@justeat/f-services';

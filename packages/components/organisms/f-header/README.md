@@ -46,7 +46,7 @@ export default {
 }
 ```
 
-If you are using Webpack, you can import the component dynamically to separate the `mega-modal` bundle from the main `bundle.client.js`:
+If you are using Webpack, you can import the component dynamically to separate the `f-header` bundle from the main `bundle.client.js`:
 
 ```js
 import '@justeat/f-header/dist/f-header.css';
@@ -59,6 +59,8 @@ export default {
 }
 ```
 
+
+## Configuration
 
 ### Props
 
@@ -84,6 +86,14 @@ The props that can be defined are as follows:
 `showLoginInfo` - Optional Boolean property with `true` as a default value, defines whether the login / user info icon should be shown in the navigation.
 
 **Important:** if you're adding a new property to show/hide something on the navigation bar, you probably want to check the `hasNavigationLinks` computed property, since you might have to update it.
+
+### Events
+
+The events that can be subscribed to are as follows (if any):
+
+| Event | Description |
+| ----- | ----------- |
+
 
 ## Development
 

@@ -69,16 +69,6 @@ The props that can be defined are as follows (if any):
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
 
-### CSS Classes
-
-<%= name.component %> has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
-In addition to this, <%= name.component %> exposes some classes which you can target in your application.
-
-The classes that can be defined are as follows (if any):
-
-| Class | Description |
-| ----- | ----------- |
-
 ### Events
 
 The events that can be subscribed to are as follows (if any):
