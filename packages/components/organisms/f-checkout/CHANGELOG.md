@@ -11,6 +11,14 @@ Latest (roll into next release)
 - Test to confirm guest login/sign up link navigates to correct url when clicked
 
 
+v0.45.0
+-------------------------------
+*January 27, 2021*
+
+### Changed
+- Only call the Checkout `GET` endpoint when the user is logged in.
+- Refactored tests.
+
 v0.44.0
 -------------------------------
 *January 25, 2021*
