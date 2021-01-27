@@ -238,8 +238,7 @@ NOTE: You need to provide Vue with an instance of Vuex for f-searchbox to work c
 added after Vue has been included. Including the `unpkg` Vuex script, like the below example, will automatically install Vuex.
 
 The version of Vuex required must be no earlier than `vuex@3.2.0` as f-searchbox under the hood registers
-the store module using `this.$store.hasModule('searchbox')`, `hasModule` was added in `v3.2.0`, earlier Vuex versions
-will break store registration.
+the store module using `this.$store.hasModule('searchbox')`, `hasModule` was added in `v3.2.0`, earlier Vuex versions will break store registration.
 
 
 ```html
