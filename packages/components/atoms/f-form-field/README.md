@@ -46,7 +46,7 @@ export default {
 }
 ```
 
-If you are using Webpack, you can import the component dynamically to separate the `mega-modal` bundle from the main `bundle.client.js`:
+If you are using Webpack, you can import the component dynamically to separate the `f-form-field` bundle from the main `bundle.client.js`:
 
 ```js
 import '@justeat/f-form-field/dist/f-form-field.css';
@@ -72,9 +72,9 @@ The props that can be defined are as follows (if any):
 
 ### CSS Classes
 
-The modal has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
+f-form-field has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
 
-In addition to this, the modal exposes some classes which you can target in your application.
+In addition to this, f-form-field exposes some classes which you can target in your application.
 
 The classes that can be defined are as follows (if any):
 
