@@ -242,7 +242,7 @@ $contrySelector-flag-height : 16px;
 }
 
 .c-countrySelector-country {
-    padding: spacing(x2);
+    padding: 0;
     white-space: nowrap;
     margin-bottom: 0;
 
@@ -252,10 +252,12 @@ $contrySelector-flag-height : 16px;
 }
 
 .c-countrySelector-link {
+    display: block;
     text-decoration: none;
     color: $contrySelector-text-color;
     @include font-size(body-l);
-    padding-bottom: spacing(x3);
+    padding: spacing(x1.5) spacing(x3);
+    width: 100%;
 }
 
 .c-nav-popoverList.c-nav-popoverList--countrySelector {
