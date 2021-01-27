@@ -1,9 +1,11 @@
-<div align="center">
-  <h1>f-mega-modal</h1>
+<div style="text-align: center">
 
-  <img width="125" alt="Fozzie Bear" src="../../bear.png" />
+# f-mega-modal
 
-  <p>A Vue.js modal component</p>
+<img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
+
+A Vue.js modal component
+
 </div>
 
 ---
