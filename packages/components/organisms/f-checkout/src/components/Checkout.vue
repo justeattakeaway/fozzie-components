@@ -247,7 +247,7 @@ export default {
             'getAvailableFulfilment',
             'getBasket',
             'getCheckout',
-            'postCheckout',
+            'patchCheckout',
             'setAuthToken',
             'updateCustomerDetails'
         ]),
@@ -299,7 +299,7 @@ export default {
                     await this.setupGuestUser();
                 }
 
-                await this.postCheckout({
+                await this.patchCheckout({
                     url: `${this.tenant}/checkout`,
                     data: checkoutData,
                     timeout: this.checkoutTimeout

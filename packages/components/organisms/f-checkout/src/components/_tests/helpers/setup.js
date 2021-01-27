@@ -46,7 +46,7 @@ const defaultState = {
 
 const defaultActions = {
     getCheckout: jest.fn(),
-    postCheckout: jest.fn(),
+    patchCheckout: jest.fn(),
     getAvailableFulfilment: jest.fn(),
     setAuthToken: jest.fn(),
     createGuestUser: jest.fn(),
