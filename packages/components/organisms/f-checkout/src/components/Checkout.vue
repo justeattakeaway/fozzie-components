@@ -256,17 +256,17 @@ export default {
          *
          */
         async initialise () {
-            const initialLoadPromises = [this.loadAvailableFulfilment()];
-
             this.setAuthToken(this.authToken);
 
-            if (this.isLoggedIn) {
-                initialLoadPromises.push(this.loadCheckout());
-            } else {
+            if (!this.isLoggedIn) {
                 await this.loadBasket();
             }
 
-            await Promise.all(initialLoadPromises);
+            const promises = this.isLoggedIn
+                ? [this.loadCheckout(), this.loadAvailableFulfilment()]
+                : [this.loadAvailableFulfilment()];
+
+            await Promise.all(promises);
         },
 
         /**
