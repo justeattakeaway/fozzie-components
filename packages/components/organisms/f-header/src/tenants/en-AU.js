@@ -52,5 +52,6 @@ export default {
     },
     selectYourCountryText: 'Select your country',
     currentCountryKey: 'au',
-    changeCurrentCountry: 'You are on the AU website, click here to change'
+    changeCurrentCountry: 'You are on the AU website, click here to change',
+    goBackToMainMenu: 'Go back to main menu'
 };

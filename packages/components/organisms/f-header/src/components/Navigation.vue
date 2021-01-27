@@ -304,6 +304,7 @@ export default {
             type: String,
             default: 'white'
         },
+
         showCountrySelector: {
             type: Boolean,
             default: false

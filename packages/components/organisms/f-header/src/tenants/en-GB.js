@@ -73,5 +73,6 @@ export default {
     },
     selectYourCountryText: 'Select your country',
     currentCountryKey: 'gb',
-    changeCurrentCountry: 'You are on the UK website, click here to change.'
+    changeCurrentCountry: 'You are on the UK website, click here to change',
+    goBackToMainMenu: 'Go back to main menu'
 };

@@ -58,5 +58,6 @@ export default {
     },
     selectYourCountryText: 'Velg land',
     currentCountryKey: 'no',
-    changeCurrentCountry: 'Du er på den norske nettsiden, klikk her for å endre'
+    changeCurrentCountry: 'Du er på den norske nettsiden, klikk her for å endre',
+    goBackToMainMenu: 'Go back to main menu'
 };

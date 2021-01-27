@@ -10,11 +10,11 @@
             :tabindex="isBelowMid && !navIsOpen ? -1 : 0"
             button-type="icon"
             class="c-nav-list-text c-countrySelector-btn"
-            :aria-expanded="!isBelowMid && countrySelectorIsOpen ? 'true' : 'false'"
-            :aria-haspopup="isBelowMid ? false : true"
+            :aria-expanded="countrySelectorIsOpenOnDesktopView ? 'true' : 'false'"
+            :aria-haspopup="!isBelowMid"
             :aria-label="copy.changeCurrentCountry"
             @click="onCountrySelectorToggle"
-            v-on="isBelowMid && !countrySelectorIsOpen ? { blur: closeNav, focus: openNav } : null">
+            v-on="countrySelectorIsClosedOnMobileView ? { blur: closeNav, focus: openNav } : null">
             <span class="c-countrySelector-currentFlag-wrapper">
                 <flag-icon
                     :country-code="copy.currentCountryKey"
@@ -32,7 +32,7 @@
                         button-type="icon"
                         button-size="xsmall"
                         class="c-nav-popoverList-header-button"
-                        aria-label="Go back to main menu"
+                        :aria-label="copy.goBackToMainMenu"
                         @click="closeCountrySelector">
                         <arrow-icon class="c-nav-popoverList-go-back-icon" />
                     </f-button>
@@ -115,6 +115,14 @@ export default {
             countrySelectorIsOpen: false
         };
     },
+    computed: {
+        countrySelectorIsClosedOnMobileView () {
+            return this.isBelowMid && !this.countrySelectorIsOpen;
+        },
+        countrySelectorIsOpenOnDesktopView () {
+            return !this.isBelowMid && this.countrySelectorIsOpen
+        }
+    },
     methods: {
         onCountrySelectorToggle () {
             this.countrySelectorIsOpen = !this.countrySelectorIsOpen;
@@ -127,17 +135,16 @@ export default {
         openCountrySelector () {
             this.countrySelectorIsOpen = true;
         }
-
     }
 };
 </script>
 
 <style lang="scss">
 
-$contrySelector-icon-color  : $color-secondary;
-$contrySelector-text-color  : $grey--darkest;
+$countrySelector-icon-color : $color-secondary;
+$countrySelector-text-color : $grey--darkest;
 $countrySelector-text-hover : $color-bg--darker;
-$contrySelector-flag-width  : 16px;
+$countrySelector-flag-width : 16px;
 $contrySelector-flag-height : 16px;
 
 .c-nav-popoverList-header {
@@ -177,13 +184,13 @@ $contrySelector-flag-height : 16px;
     display: inline-block;
 
     use {
-        fill: $contrySelector-icon-color;
+        fill: $countrySelector-icon-color;
     }
 }
 
 .c-countrySelector-flag {
     height: $contrySelector-flag-height;
-    width: $contrySelector-flag-width;
+    width: $countrySelector-flag-width;
     margin-right: spacing();
 }
 
@@ -193,7 +200,7 @@ $contrySelector-flag-height : 16px;
 
 .c-countrySelector-currentFlag-wrapper {
     height: $contrySelector-flag-height;
-    width: $contrySelector-flag-width;
+    width: $countrySelector-flag-width;
 
     @include media('<mid') {
         margin-right: spacing();
@@ -254,7 +261,7 @@ $contrySelector-flag-height : 16px;
 .c-countrySelector-link {
     display: block;
     text-decoration: none;
-    color: $contrySelector-text-color;
+    color: $countrySelector-text-color;
     @include font-size(body-l);
     padding: spacing(x1.5) spacing(x3);
     width: 100%;

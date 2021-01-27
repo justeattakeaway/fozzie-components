@@ -61,7 +61,8 @@ export const HeaderComponent = () => ({
             :headerBackgroundTheme="headerBackgroundTheme"
             :showDeliveryEnquiry="showDeliveryEnquiry"
             :showLoginInfo="showLoginInfo"
-            :showCountrySelector="showCountrySelector" />`
+            :showCountrySelector="showCountrySelector"
+            :key="locale" />`
 });
 
 HeaderComponent.storyName = 'f-header';

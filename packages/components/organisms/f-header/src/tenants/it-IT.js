@@ -58,5 +58,6 @@ export default {
     },
     selectYourCountryText: 'Seleziona il tuo paese',
     currentCountryKey: 'it',
-    changeCurrentCountry: 'Sei sul sito Italiano, licca qui per cambiare stato'
+    changeCurrentCountry: 'Sei sul sito Italiano, licca qui per cambiare stato',
+    goBackToMainMenu: 'Go back to main menu'
 };

@@ -111,6 +111,7 @@ export default {
             type: String,
             default: '/api/account/details'
         },
+
         showCountrySelector: {
             type: Boolean,
             default: false
@@ -144,6 +145,7 @@ export default {
         headerBackgroundClass () {
             return this.headerBackgroundTheme === 'highlight' ? 'c-header--highlightBg' : '';
         },
+
         showOffersLinkWithContent () {
             return this.copy.offers && this.showOffersLink;
         }
