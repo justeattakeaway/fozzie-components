@@ -317,6 +317,7 @@ describe('Checkout', () => {
                     propsData: propsDataWithAuthToken
                 });
 
+                // Assert
                 expect(setAuthTokenSpy).toHaveBeenCalledWith(propsDataWithAuthToken.authToken);
             });
 
@@ -332,6 +333,7 @@ describe('Checkout', () => {
                 });
                 await flushPromises();
 
+                // Assert
                 expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
             });
 
@@ -348,6 +350,7 @@ describe('Checkout', () => {
                     });
                     await flushPromises();
 
+                    // Assert
                     expect(loadBasketSpy).toHaveBeenCalled();
                 });
 
@@ -363,6 +366,7 @@ describe('Checkout', () => {
                     });
                     await flushPromises();
 
+                    // Assert
                     expect(loadCheckoutSpy).not.toHaveBeenCalled();
                 });
             });
