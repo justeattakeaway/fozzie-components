@@ -22,7 +22,7 @@ This package provides an interface for initialising Braze and handling content c
 
 ### Installation
 
-Install the module using NPM or Yarn:
+Install the module using npm or Yarn:
 
 ```sh
 yarn add @justeat/f-metadata
@@ -30,6 +30,15 @@ yarn add @justeat/f-metadata
 
 ```sh
 npm install @justeat/f-metadata
+```
+The package can then be imported into your application.  You can use with `import` or `require` syntax:
+
+```js
+import initialiseBraze from '@justeat/f-metadata';
+````
+
+```js
+const initialiseBraze = require('@justeat/f-metadata');
 ```
 
 ### Initialisation

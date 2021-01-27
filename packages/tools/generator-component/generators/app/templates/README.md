@@ -20,7 +20,7 @@
 
 ### Installation
 
-Install the module using NPM or Yarn:
+Install the module using npm or Yarn:
 
 ```sh
 yarn add @justeat/f-<%= name.default %>
@@ -45,7 +45,7 @@ export default {
 }
 ```
 
-If you are using Webpack, you can import the component dynamically to separate the `mega-modal` bundle from the main `bundle.client.js`:
+If you are using Webpack, you can import the component dynamically to separate the `<%= name.template%>` bundle from the main `bundle.client.js`:
 
 ```js
 import '@justeat/f-<%= name.default %>/dist/f-<%= name.default %>.css';
@@ -71,9 +71,8 @@ The props that can be defined are as follows (if any):
 
 ### CSS Classes
 
-The modal has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
-
-In addition to this, the modal exposes some classes which you can target in your application.
+<%= name.component %> has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
+In addition to this, <%= name.component %> exposes some classes which you can target in your application.
 
 The classes that can be defined are as follows (if any):
 
@@ -97,10 +96,10 @@ $ cd fozzie-components
 $ yarn
 ```
 
-Change directory to the `f-footer` package:
+Change directory to the `<%= name.component %>` package:
 
 ```sh
-$ cd packages/components/molecules/f-footer
+$ cd packages/components/molecules/<%= name.component %>
 ```
 
 ## Testing

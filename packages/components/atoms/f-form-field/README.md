@@ -21,14 +21,14 @@ Fozzie Form Field Component.
 
 ### Installation
 
-Install the module using NPM or Yarn:
+Install the module using npm or Yarn:
 
 ```sh
-yarn add @justeat/f-form-field
+yarn add @justeat/f-footer
 ```
 
 ```sh
-npm install @justeat/f-form-field
+npm install @justeat/f-footer
 ```
 
 ### Vue Applications

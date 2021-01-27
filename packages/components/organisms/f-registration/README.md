@@ -21,7 +21,7 @@ Registration Component.
 
 ### Installation
 
-Install the module using NPM or Yarn:
+Install the module using npm or Yarn:
 
 ```sh
 yarn add @justeat/f-registration
