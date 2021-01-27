@@ -15,10 +15,10 @@ module.exports = api => {
         // Alias for @babel/preset-env
         // Hooks into browserslist to provide smart Babel transforms
         // https://babeljs.io/docs/en/babel-preset-env
-        presets.push('@babel/preset-env');
+        presets.push('@babel/env');
     } else {
         // use current node version for transpiling test files
-        presets.push(['@babel/preset-env', { targets: { node: 'current' } }]);
+        presets.push(['@babel/env', { targets: { node: 'current' } }]);
     }
 
     return {

@@ -20,6 +20,8 @@ import {
     EMAIL_EXISTS_ERROR, 
     EMAIL_INVALID_ERROR, 
     PASSWORD_EMPTY_ERROR, 
+    REQUEST_ERROR
+
 } from './f-registration.selectors';
 
 export default class Registration extends Page {
@@ -29,40 +31,31 @@ export default class Registration extends Page {
     get termsAndConditionsLink () { return $(TERMS_AND_CONDITIONS_LINK) }
     get privacyPolicyLink () { return $(PRIVACY_POLICY_LINK) }
     get cookiesPolicyLink () { return $(COOKIES_POLICY_LINK) }
+    get requestError () { return $(REQUEST_ERROR) }
   
     fields = {
         firstName: {
             get input () { return $(FIRST_NAME_INPUT) }, 
             get emptyError () { return $(FIRST_NAME_EMPTY_ERROR) }, 
             get maxLengthError () { return $(FIRST_NAME_MAX_LENGTH_ERROR) } , 
-            get firstNameInvalidError () { return $(FIRST_NAME_INVALID_ERROR) }
+            get invalidError () { return $(FIRST_NAME_INVALID_ERROR) }
         }, 
         lastName: {
             get input () { return $(LAST_NAME_INPUT) }, 
             get emptyError () { return $(LAST_NAME_EMPTY_ERROR) }, 
             get maxLengthError () { return $(LAST_NAME_MAX_LENGTH_ERROR) }, 
-            get lastNameInvalidError () { return  $(LAST_NAME_INVALID_ERROR) }
+            get invalidError () { return  $(LAST_NAME_INVALID_ERROR) }
         }, 
         email: {
             get input () { return $(EMAIL_INPUT) }, 
             get emptyError () { return $(EMAIL_EMPTY_ERROR) }, 
-            get emailExistsError () { return $(EMAIL_EXISTS_ERROR) }, 
-            get emailInvalidError () { return $(EMAIL_INVALID_ERROR) }
+            get invalidError () { return $(EMAIL_INVALID_ERROR) }
         }, 
         password: {
             get input () { return $(PASSWORD_INPUT) }, 
             get emptyError () { return $(PASSWORD_EMPTY_ERROR) }
         }
     };
-
-    isInputFieldDisplayed(fieldName){
-        return this.fields[fieldName].input.isDisplayed();
-    }
-
-    isEmptyErrorDisplayed(fieldName){
-
-    }
-
 
     open() {
         super.openOrganism('registration-component')
@@ -73,81 +66,55 @@ export default class Registration extends Page {
     };
 
     isComponentDisplayed () {
-        return this.component.isDisplayed();
-    }
-
-    isFirstNameEmptyErrorDisplayed(){
-        this.firstNameEmptyError.isDisplayed();
-    }
-
-
-
-
-
-       /**
- * @description
- * Inputs user details into the registration component and submits the form.
- *
- * @param {Object} userInfo
- * @param {String} userInfo.firstName The user's first name
- * @param {String} userInfo.lastName The user's last name
- * @param {String} userInfo.email The user's e-mail address
- * @param {String} userInfo.password The user's password
- */
-
-submitForm(userInfo){
-    // waitForComponent();
-
-    this.firstNameInput.setValue(userInfo.firstName)
-    this.createAccountButton.click();
-
-    // this.firstNameInput.setValue(userInfo.firstName);
-    // this.lastNameInput.setValue(userInfo.lastName);
-    // this.emailInput.setValue(userInfo.email);
-    // this.passwordInput.setValue(userInfo.password);
-    // this.createAccountButton.click();
+        return this.component.isDisplayedInViewport();
     };
-}
 
-// page Object model - put generic functions here - e.g.$
+    isInputFieldDisplayed(fieldName){
+        return this.fields[fieldName].input.isDisplayedInViewport();
+    };
+    /**
+     * @description
+     * Inputs user details into the registration component and submits the form.
+     *
+     * @param {Object} userInfo
+     * @param {String} userInfo.firstName The user's first name
+     * @param {String} userInfo.lastName The user's last name
+     * @param {String} userInfo.email The user's e-mail address
+     * @param {String} userInfo.password The user's password
+     */
+    submitForm(userInfo){
+        this.fields.firstName.input.setValue(userInfo.firstName); 
+        this.fields.lastName.input.setValue(userInfo.lastName);
+        this.fields.email.input.setValue(userInfo.email);
+        this.fields.password.input.setValue(userInfo.password);
+        this.createAccountButton.click();
+    };
 
-// // isDisplayed(element){
-// //     element.isDisplayed()
-// // }
+    isEmptyErrorDisplayed(fieldName){
+        return this.fields[fieldName].emptyError.isDisplayedInViewport();
+    };
 
-exports.isFirstNameEmptyErrorDisplayed = () => firstNameEmptyError().isDisplayed();
-exports.isFirstNameMaxLengthErrorDisplayed = () => firstNameMaxLengthError().isDisplayed();
-exports.isFirstNameInvalidErrorDisplayed = () => firstNameInvalidError().isDisplayed();
+    isMaxLengthErrorDisplayed(fieldName) {
+        return this.fields[fieldName].maxLengthError.isDisplayedInViewport();
+    };
 
-// exports.isLastNameEmptyErrorDisplayed = () => lastNameEmptyError().isDisplayed();
-// exports.isLastNameMaxLengthErrorDisplayed = () => lastNameMaxLengthError().isDisplayed();
-// exports.isLastNameInvalidErrorDisplayed = () => lastNameInvalidError().isDisplayed();
-
-// exports.isEmailEmptyErrorDisplayed = () => emailEmptyError().isDisplayed();
-// exports.isEmailInvalidErrorDisplayed = () => emailInvalidError().isDisplayed();
-// exports.isEmailExistsErrorDisplayed = () => emailExistsError().isDisplayed();
-// exports.isPasswordEmptyErrorDisplayed = () => passwordEmptyError().isDisplayed();
-
-// exports.termsAndConditionsLinkCanBeClicked = () => termsAndConditionsLink().isClickable();
-// exports.privacyPolicyLinkCanBeClicked = () => privacyPolicyLink().isClickable();
-// exports.cookiesPolicyLinkCanBeClicked = () => cookiesPolicyLink().isClickable();
-
-  // get firstNameInput () { return $(FIRST_NAME_INPUT) }
-    // get lastNameInput () { return $(LAST_NAME_INPUT) }
-    // get emailInput () { return $(EMAIL_INPUT) }
-    // get passwordInput () { return $(PASSWORD_INPUT) }
-
+    isInvalidErrorDisplayed(fieldName) {
+        return this.fields[fieldName].invalidError.isDisplayedInViewport();
+    };
     
-    // get firstNameEmptyError () { return $(FIRST_NAME_EMPTY_ERROR) }
-    // get firstNameMaxLengthError () { return $(FIRST_NAME_MAX_LENGTH_ERROR) }
-    // get firstNameInvalidError () { return $(FIRST_NAME_INVALID_ERROR) }
+    hasFormBeenSubmitted(){
+        return this.requestError.isDisplayedInViewport();
+    }
+
+    termsAndConditionsLinkCanBeClicked(){
+        return this.termsAndConditionsLink.isClickable();
+    };
+
+    privacyPolicyLinkCanBeClicked(){
+        return this.privacyPolicyLink.isClickable();
+    };
     
-    // get lastNameEmptyError () { return $(LAST_NAME_EMPTY_ERROR) }
-    // get lastNameMaxLengthError () { return $(LAST_NAME_MAX_LENGTH_ERROR) }
-    // get lastNameInvalidError () { return $(LAST_NAME_INVALID_ERROR) }
-    
-    // get emailEmptyError () { return $(EMAIL_EMPTY_ERROR) }
-    // get emailExistsError () { return $(EMAIL_EXISTS_ERROR) }
-    // get emailInvalidError () { return $(EMAIL_INVALID_ERROR) }
-    
-    // get passwordEmptyError () { return $(PASSWORD_EMPTY_ERROR) }
+    cookiesPolicyLinkCanBeClicked(){
+        return this.cookiesPolicyLink.isClickable();
+    };
+};

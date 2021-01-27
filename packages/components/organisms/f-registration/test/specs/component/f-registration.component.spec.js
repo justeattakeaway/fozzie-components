@@ -5,14 +5,21 @@ import forEach from 'mocha-each';
 describe('f-registration component tests', () => {
     beforeEach(() => {
         registration.open();
-        // registration.waitForComponent();
+        registration.waitForComponent();
     });
 
     it('should display component', () => {
         expect(registration.isComponentDisplayed()).toBe(true);
     });
 
-    it.skip('should display errors if mandatory fields are empty', () => {
+    forEach(['firstName', 'lastName', 'email', 'password'])
+    .it('should display input field', field => {
+        // Assert
+        expect(registration.isInputFieldDisplayed(field)).toBe(true);
+    });
+
+    forEach(['firstName', 'lastName', 'email', 'password'])
+    .it('should display error when fields are empty', field => {
         // Arrange
         const userInfo = {
             firstName: '',
@@ -23,28 +30,67 @@ describe('f-registration component tests', () => {
 
         // Act
         registration.submitForm(userInfo);
-
+        
         // Assert
-        expect(registration.isFirstNameEmptyErrorDisplayed()).toBe(true);
-        console.log(registration.fields.firstname.emptyError())
-        // expect(RegistrationPage.isLastNameEmptyErrorDisplayed()).toBe(true);
-        // expect(RegistrationPage.isEmailEmptyErrorDisplayed()).toBe(true);
-        // expect(RegistrationPage.isPasswordEmptyErrorDisplayed()).toBe(true);
+        expect(registration.isEmptyErrorDisplayed(field)).toBe(true);
+    });
+
+    forEach(['firstName', 'lastName', 'email'])
+    .it('should display error when input is invalid', field => {
+        // Arrange
+        const userInfo = {
+            firstName: '123*',
+            lastName: '456*',
+            email: '***@**', 
+            password: 'llanfairpwllgwyngyllgogerychwyr'
+        };
+
+        // Act
+        registration.submitForm(userInfo);
+        
+        // Assert
+        expect(registration.isInvalidErrorDisplayed(field)).toBe(true);
+    });
+
+    forEach(['firstName', 'lastName'])
+    .it('should display error when input is too long', field => {
+        // Arrange
+        const userInfo = {
+            firstName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',
+            lastName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',
+            email: 'ashton.adamms+jetest@just-eat.com', 
+            password: 'llanfairpwllgwyngyllgogerychwyr'
+        };
+
+        // Act
+        registration.submitForm(userInfo);
+        
+        // Assert
+        expect(registration.isMaxLengthErrorDisplayed(field)).toBe(true);
     });
 
     forEach(['firstName', 'lastName', 'email', 'password'])
-    .it('should display input field', field => {
+    .it('should emit no errors when fields are populated successfully', field => {
+        // Arrange
+        const userInfo = {
+            firstName: 'Ashton',
+            lastName: 'Adamms',
+            email: 'ashton.adamms+jetest@just-eat.com', 
+            password: 'llanfairpwllgwyngyllgogerychwyr'
+        };
+
+        // Act
+        registration.submitForm(userInfo);
+        
         // Assert
-        expect(registration.isInputFieldDisplayed(field)).toBe(true);
+        expect(registration.hasFormBeenSubmitted(field)).toBe(true);
     });
 
-    // it.skip('should show and be able to click the legal documentation', () => {
-    //     // Act
-    //     RegistrationComponent.waitForRegistrationForm();
 
-    //     // Assert
-    //     expect(RegistrationComponent.termsAndConditionsLinkCanBeClicked()).toBe(true);
-    //     expect(RegistrationComponent.privacyPolicyLinkCanBeClicked()).toBe(true);
-    //     expect(RegistrationComponent.cookiesPolicyLinkCanBeClicked()).toBe(true);
-    // });
+    it('should show and be able to click the legal documentation', () => {
+        // Assert
+        expect(registration.termsAndConditionsLinkCanBeClicked()).toBe(true);
+        expect(registration.privacyPolicyLinkCanBeClicked()).toBe(true);
+        expect(registration.cookiesPolicyLinkCanBeClicked()).toBe(true);
+    });
 });
