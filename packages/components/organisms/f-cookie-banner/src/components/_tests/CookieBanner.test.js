@@ -29,7 +29,7 @@ describe('CookieBanner', () => {
     });
 
     describe('methods', () => {
-        describe('isNotExcluded()', () => {
+        describe('isNotExcluded', () => {
             it.each([
                 [false, 'je-location'],
                 [false, '_ga'],
@@ -54,7 +54,7 @@ describe('CookieBanner', () => {
             });
         });
 
-        describe('dataLayerPush()', () => {
+        describe('dataLayerPush', () => {
             it('should push the consent level to the dataLayer', () => {
                 // Arrange
                 const propsData = {};
@@ -78,7 +78,7 @@ describe('CookieBanner', () => {
             });
         });
 
-        describe('checkCookieBannerCookie()', () => {
+        describe('checkCookieBannerCookie', () => {
             it.each([
                 [false, ''],
                 [false, 'random value'],
@@ -106,7 +106,7 @@ describe('CookieBanner', () => {
             });
         });
 
-        describe('setCookieBannerCookie()', () => {
+        describe('setCookieBannerCookie', () => {
             it('should set the cookie consent banner cookie', () => {
                 // Arrange
                 const propsData = {};
@@ -132,7 +132,7 @@ describe('CookieBanner', () => {
             });
         });
 
-        describe('setLegacyCookieBannerCookie()', () => {
+        describe('setLegacyCookieBannerCookie', () => {
             it('should set the legacy cookie banner cookie', () => {
                 // Arrange
                 const propsData = {};
@@ -158,7 +158,7 @@ describe('CookieBanner', () => {
             });
         });
 
-        describe('acceptActions()', () => {
+        describe('acceptActions', () => {
             it('should set the banner consent cookie to `full`', () => {
                 // Arrange
                 const propsData = {};
@@ -211,7 +211,7 @@ describe('CookieBanner', () => {
             });
         });
 
-        describe('nonAcceptActions()', () => {
+        describe('nonAcceptActions', () => {
             it('should set the banner consent cookie to `necessary`', () => {
                 // Arrange
                 const propsData = {};
