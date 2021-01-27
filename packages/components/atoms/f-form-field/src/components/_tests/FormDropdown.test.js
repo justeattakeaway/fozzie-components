@@ -3,11 +3,11 @@ import FormDropdown from '../FormDropdown.vue';
 
 describe('FormDropdown', () => {
     const dropdownOptions = [
-        {text: 'text 0', value: 'value 0'},
-        {text: 'text 1', value: 'value 1'},
-        {text: 'text 2', value: 'value 2'},
-        {text: 'text 3', value: 'value 3'},
-        {text: 'text 4', value: 'value 4'}
+        { text: 'text 0', value: 'value 0' },
+        { text: 'text 1', value: 'value 1' },
+        { text: 'text 2', value: 'value 2' },
+        { text: 'text 3', value: 'value 3' },
+        { text: 'text 4', value: 'value 4' }
     ];
 
     it('should be defined', () => {
