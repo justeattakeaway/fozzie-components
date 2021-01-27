@@ -1,6 +1,6 @@
 import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.component';
 
-describe('f-checkout component tests', () => {
+describe('f-checkout guest component tests', () => {
     before(() => {
         browser.url('?path=/story/components-organisms--checkout-component&knob-Auth token=');
         browser.switchToFrame(0);
