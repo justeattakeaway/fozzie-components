@@ -12,17 +12,15 @@ export default {
             email: '',
             mobileNumber: ''
         },
-        fulfilment: {
-            time: {
-                from: '',
-                to: ''
-            },
-            address: {
-                line1: '',
-                line2: '',
-                city: '',
-                postcode: ''
-            }
+        time: {
+            from: '',
+            to: ''
+        },
+        address: {
+            line1: '',
+            line2: '',
+            city: '',
+            postcode: ''
         },
         notes: [],
         isFulfillable: true,
@@ -180,6 +178,10 @@ export default {
 
         updateCustomerDetails ({ commit }, payload) {
             commit('UPDATE_CUSTOMER_DETAILS', payload);
+        },
+
+        updateFulfilmentTime ({ commit }, payload) {
+            commit('UPDATE_FULFILMENT_TIME', payload);
         }
     },
 
@@ -188,7 +190,8 @@ export default {
             id,
             serviceType,
             customer,
-            fulfilment,
+            address,
+            time,
             notes,
             isFulfillable,
             notices,
@@ -202,16 +205,16 @@ export default {
                 state.customer.mobileNumber = customer.phoneNumber;
             }
 
-            state.fulfilment.time = fulfilment.time;
+            state.time = time;
 
-            if (fulfilment.address) {
+            if (address) {
                 /* eslint-disable prefer-destructuring */
-                state.fulfilment.address.line1 = fulfilment.address.lines[0];
-                state.fulfilment.address.line2 = fulfilment.address.lines[1];
-                state.fulfilment.address.city = fulfilment.address.lines[3];
+                state.address.line1 = address.lines[0];
+                state.address.line2 = address.lines[1];
+                state.address.city = address.lines[3];
                 /* eslint-enable prefer-destructuring */
 
-                state.fulfilment.address.postcode = fulfilment.address.postalCode;
+                state.address.postcode = address.postalCode;
             }
 
             state.notes = notes;
@@ -234,8 +237,8 @@ export default {
         },
 
         UPDATE_FULFILMENT_ADDRESS: (state, address) => {
-            state.fulfilment.address = {
-                ...state.fulfilment.address,
+            state.address = {
+                ...state.address,
                 ...address
             };
         },
@@ -249,6 +252,13 @@ export default {
 
         UPDATE_BASKET_DETAILS: (state, { serviceType }) => {
             state.serviceType = serviceType;
+        },
+
+        UPDATE_FULFILMENT_TIME: (state, time) => {
+            state.time = {
+                ...state.time,
+                ...time
+            };
         }
     }
 };

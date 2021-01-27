@@ -22,17 +22,15 @@ const defaultState = {
         email: 'john@test.com',
         mobileNumber: '+447111111111'
     },
-    fulfilment: {
-        time: {
-            from: '',
-            to: ''
-        },
-        address: {
-            line1: '1 Bristol Road',
-            line2: 'Flat 1',
-            city: 'Bristol',
-            postcode: 'BS1 1AA'
-        }
+    time: {
+        from: '',
+        to: ''
+    },
+    address: {
+        line1: '1 Bristol Road',
+        line2: 'Flat 1',
+        city: 'Bristol',
+        postcode: 'BS1 1AA'
     },
     availableFulfilment: {
         times: fulfilmentTimes,
@@ -54,6 +52,7 @@ const defaultActions = {
     createGuestUser: jest.fn(),
     updateAddressDetails: jest.fn(),
     updateCustomerDetails: jest.fn(),
+    updateFulfilmentTime: jest.fn(),
     getBasket: jest.fn()
 };
 

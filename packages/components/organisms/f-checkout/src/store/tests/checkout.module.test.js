@@ -15,6 +15,11 @@ const address = {
     postcode: 'postcode'
 };
 
+const time = {
+    from: 'fromTime',
+    to: 'toTime'
+};
+
 const defaultState = {
     id: '',
     serviceType: '',
@@ -24,17 +29,15 @@ const defaultState = {
         email: '',
         mobileNumber: ''
     },
-    fulfilment: {
-        time: {
-            from: '',
-            to: ''
-        },
-        address: {
-            line1: '',
-            line2: '',
-            city: '',
-            postcode: ''
-        }
+    time: {
+        from: '',
+        to: ''
+    },
+    address: {
+        line1: '',
+        line2: '',
+        city: '',
+        postcode: ''
     },
     notes: [],
     isFulfillable: true,
@@ -53,7 +56,8 @@ const {
     UPDATE_AUTH,
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
     UPDATE_FULFILMENT_ADDRESS,
-    UPDATE_CUSTOMER_DETAILS
+    UPDATE_CUSTOMER_DETAILS,
+    UPDATE_FULFILMENT_TIME
 } = CheckoutModule.mutations;
 
 const {
@@ -63,6 +67,7 @@ const {
     getAvailableFulfilment,
     updateAddressDetails,
     updateCustomerDetails,
+    updateFulfilmentTime,
     createGuestUser,
     getBasket
 } = CheckoutModule.actions;
@@ -102,13 +107,13 @@ describe('CheckoutModule', () => {
 
             it('should leave address state empty if no address data is returned from the API.', () => {
                 // Arrange
-                checkoutDelivery.fulfilment.address = null;
+                checkoutDelivery.address = null;
 
                 // Act
                 UPDATE_STATE(state, checkoutDelivery);
 
                 // Assert
-                expect(state.fulfilment.address).toEqual(defaultState.fulfilment.address);
+                expect(state.address).toEqual(defaultState.address);
             });
         });
 
@@ -139,21 +144,31 @@ describe('CheckoutModule', () => {
 
         describe('UPDATE_FULFILMENT_ADDRESS ::', () => {
             it('should update state with received value', () => {
-                // Arrange and Act
+                // Arrange & Act
                 UPDATE_FULFILMENT_ADDRESS(state, address);
 
                 // Assert
-                expect(state.fulfilment.address).toEqual(address);
+                expect(state.address).toEqual(address);
             });
         });
 
-        describe('UPDATE_CUSTOMER_DETAILS  ::', () => {
+        describe('UPDATE_CUSTOMER_DETAILS ::', () => {
             it('should update state with received value', () => {
-                // Arrange and Act
+                // Arrange & Act
                 UPDATE_CUSTOMER_DETAILS(state, mobileNumber);
 
                 // Assert
                 expect(state.customer.mobileNumber).toEqual(mobileNumber);
+            });
+        });
+
+        describe('UPDATE_FULFILMENT_TIME ::', () => {
+            it('should update state with received value', () => {
+                // Arrange & Act
+                UPDATE_FULFILMENT_TIME(state, time);
+
+                // Assert
+                expect(state.time).toEqual(time);
             });
         });
     });
@@ -341,6 +356,15 @@ describe('CheckoutModule', () => {
                 expect(commit).toHaveBeenCalledWith('UPDATE_CUSTOMER_DETAILS', mobileNumber);
             });
         });
+
+        describe('updateFulfilmentTime ::', () => {
+            it('should call `UPDATE_FULFILMENT_TIME` mutation with passed value.', async () => {
+                // Act
+                updateFulfilmentTime({ commit }, time);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith('UPDATE_FULFILMENT_TIME', time);
+            });
+        });
     });
 });
-
