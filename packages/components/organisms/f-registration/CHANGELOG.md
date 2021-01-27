@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (add to next release)
 ------------------------------
+
+*January 27, 2021*
+
+### Changed
+- Updated feature tests and component object
+
+### Added
+- `selector.js` file for referencing attributes
+
 *January 12, 2021*
 
 ### Changed
