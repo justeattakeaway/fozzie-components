@@ -13,7 +13,7 @@
             v-if="!legacyBanner"
             :class="[
                 $style['c-cookieBanner-card'],
-                { [$style['c-cookieBanner-ios']]: checkIosSafari() }
+                { [$style['c-cookieBanner-ios']]: isIosBrowser() }
             ]">
             <div
                 :class="$style['c-cookieBanner-content']"
@@ -245,7 +245,7 @@ export default {
          * Check for iOS browser
          * @returns {Bool}
          */
-        checkIosSafari () {
+        isIosBrowser () {
             return /(iPhone|iPad).*Safari/.test(navigator.userAgent);
         },
         /**
