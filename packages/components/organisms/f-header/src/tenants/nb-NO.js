@@ -57,7 +57,6 @@ export default {
         gtm: 'click_logout'
     },
     selectYourCountryText: 'Velg land',
-    currentCountryName: 'Norge',
     currentCountryKey: 'no',
     changeCurrentCountry: 'Du er på den norske nettsiden, klikk her for å endre'
 };

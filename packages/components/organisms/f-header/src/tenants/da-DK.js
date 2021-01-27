@@ -57,7 +57,6 @@ export default {
         gtm: 'click_logout'
     },
     selectYourCountryText: 'Vælg land',
-    currentCountryName: 'Danmark',
     currentCountryKey: 'dk',
     changeCurrentCountry: 'Du er på den danske website, klik her for at skifte'
 };

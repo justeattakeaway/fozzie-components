@@ -61,7 +61,6 @@ export default {
         url: '/offers'
     },
     selectYourCountryText: 'Select your country',
-    currentCountryName: 'Ireland',
     currentCountryKey: 'ie',
     changeCurrentCountry: 'You are on the Irish website, click here to change'
 };

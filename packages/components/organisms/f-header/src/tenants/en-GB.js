@@ -72,7 +72,6 @@ export default {
         url: '/offers'
     },
     selectYourCountryText: 'Select your country',
-    currentCountryName: 'United Kingdom',
     currentCountryKey: 'gb',
     changeCurrentCountry: 'You are on the UK website, click here to change.'
 };

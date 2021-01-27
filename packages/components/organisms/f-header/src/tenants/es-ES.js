@@ -57,7 +57,6 @@ export default {
         gtm: 'click_logout'
     },
     selectYourCountryText: 'Selecciona tu país',
-    currentCountryName: 'España',
     currentCountryKey: 'es',
     changeCurrentCountry: 'Estás en Just Eat España, haz clic aquí para cambiar país'
 };

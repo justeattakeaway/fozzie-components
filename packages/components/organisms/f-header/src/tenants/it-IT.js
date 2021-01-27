@@ -57,7 +57,6 @@ export default {
         gtm: 'click_logout'
     },
     selectYourCountryText: 'Seleziona il tuo paese',
-    currentCountryName: 'Italia',
     currentCountryKey: 'it',
     changeCurrentCountry: 'Sei sul sito Italiano, licca qui per cambiare stato'
 };
