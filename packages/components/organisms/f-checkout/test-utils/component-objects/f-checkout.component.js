@@ -32,6 +32,18 @@ const userNoteInput = () => $(USER_NOTE_INPUT);
 const switchUserLink = () => $(SWITCH_USER_LINK);
 
 const fields = {
+    firstName: {
+        input: () => $(FIELDS.firstName.input),
+        error: () => $(FIELDS.firstName.error)
+    },
+    lastName: {
+        input: () => $(FIELDS.lastName.input),
+        error: () => $(FIELDS.lastName.error)
+    },
+    emailAddress: {
+        input: () => $(FIELDS.emailAddress.input),
+        error: () => $(FIELDS.emailAddress.error)
+    },
     mobileNumber: {
         input: () => $(FIELDS.mobileNumber.input),
         error: () => $(FIELDS.mobileNumber.error)
@@ -125,9 +137,9 @@ exports.clearField = fieldName => {
  *
  * @param {String} fields Grabs the fields of the above object and runs a forEach loop to get the keys
  */
-exports.clearCheckoutForm = () => {
+exports.clearCheckoutForm = fieldName => {
     exports.waitForCheckoutComponent();
-    Object.keys(fields).forEach(exports.clearField);
+    exports.clearField(fieldName);
 };
 
 exports.populateCollectionCheckoutForm = addressInfo => {

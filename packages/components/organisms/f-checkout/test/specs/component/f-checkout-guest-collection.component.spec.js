@@ -3,8 +3,20 @@ import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.
 
 describe('f-checkout "collection" component tests', () => {
     before(() => {
-        browser.url('iframe.html?id=components-organisms--checkout-component&knob-Checkout%20Url=%2Fcheckout-collection.json&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json&knob-Create%20Guest%20Url=%2Fcreate-guest.json&knob-Auth%20token=a&knob-Login%20Url=%2Flogin&viewMode=story');
+        browser.url('iframe.html?id=components-organisms--checkout-component&knob-Checkout%20Url=%2Fcheckout-collection.json&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json&knob-Create%20Guest%20Url=%2Fcreate-guest.json&knob-Auth%20token=&knob-Login%20Url=%2Flogin&viewMode=story');
         CheckoutComponent.waitForCheckoutComponent();
+    });
+
+    forEach(['firstName', 'lastName', 'emailAddress', 'mobileNumber'])
+    .it('should show the guest checkout fields', field => {
+        // Assert
+        expect(CheckoutComponent.doesFieldExist(field)).toBe(true);
+    });
+
+    forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
+    .it('should not show address fields', field => {
+        // Assert
+        expect(CheckoutComponent.doesFieldExist(field)).toBe(false);
     });
 
     it('should display "mobileNumber" error message when collection method is set and number is incorrect', () => {
@@ -19,12 +31,6 @@ describe('f-checkout "collection" component tests', () => {
 
         // Assert
         expect(CheckoutComponent.isFieldErrorDisplayed('mobileNumber')).toBe(true);
-    });
-
-    forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
-    .it('should check that address fields should not exist', field => {
-        // Assert
-        expect(CheckoutComponent.doesFieldExist(field)).toBe(false);
     });
 
     it('should display the mandatory "mobileNumber" field', () => {

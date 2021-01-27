@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.45.0
+-------------------------------
+*January 27, 2021*
+
+### Added
+- `f-checkout-guest.spec` files for `guest checkout` tests.
+- Guest Checkout tests.
+
+### Changed
+- Links directly to test pages have been changed from testing within Storybook to its own page.
+
+
 v0.44.0
 -------------------------------
 *January 25, 2021*

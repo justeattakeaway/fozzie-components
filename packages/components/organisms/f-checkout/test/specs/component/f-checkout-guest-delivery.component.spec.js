@@ -3,11 +3,11 @@ import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.
 
 describe('f-checkout "delivery" component tests', () => {
     before(() => {
-        browser.url('iframe.html?id=components-organisms--checkout-component&knob-Checkout%20Url=%2Fcheckout-delivery.json&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json&knob-Create%20Guest%20Url=%2Fcreate-guest.json&knob-Auth%20token=a&knob-Login%20Url=%2Flogin&viewMode=story');
+        browser.url('iframe.html?id=components-organisms--checkout-component&knob-Checkout%20Url=%2Fcheckout-delivery.json&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json&knob-Create%20Guest%20Url=%2Fcreate-guest.json&knob-Auth%20token=&knob-Login%20Url=%2Flogin&viewMode=story');
         CheckoutComponent.waitForCheckoutComponent();
     });
 
-    forEach(['mobileNumber', 'addressLine1', 'addressCity', 'addressPostcode'])
+    forEach(['firstName', 'lastName', 'emailAddress', 'mobileNumber', 'addressLine1', 'addressCity', 'addressPostcode'])
     .it('should display each fields error message', field => {
         // Act
         CheckoutComponent.clearCheckoutForm(field);
@@ -17,8 +17,8 @@ describe('f-checkout "delivery" component tests', () => {
         expect(CheckoutComponent.isFieldErrorDisplayed(field)).toBe(true);
     });
 
-    forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
-    .it('should check if address fields exist', field => {
+    forEach(['firstName', 'lastName', 'emailAddress', 'addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
+    .it('should show the address fields', field => {
         // Assert
         expect(CheckoutComponent.doesFieldExist(field)).toBe(true);
     });
@@ -26,6 +26,20 @@ describe('f-checkout "delivery" component tests', () => {
     it('should display the mandatory fields', () => {
         // Assert
         expect(CheckoutComponent.isFieldDisplayed('mobileNumber')).toBe(true);
+    });
+
+    it('should prevent user from submitting an invalid email address', () => {
+        // Arrange
+        const emailAddress = {
+            emailAddress: 'abc@abc'
+        };
+
+        // Act
+        CheckoutComponent.populateCheckoutForm(emailAddress);
+        CheckoutComponent.goToPayment();
+
+        // Assert
+        expect(CheckoutComponent.isFieldErrorDisplayed('emailAddress')).toBe(true);
     });
 
     it('should prevent user from submitting a postcode with illegal characters', () => {
