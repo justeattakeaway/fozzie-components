@@ -59,5 +59,5 @@ export default {
     selectYourCountryText: 'Selecciona tu país',
     currentCountryKey: 'es',
     changeCurrentCountry: 'Estás en Just Eat España, haz clic aquí para cambiar país',
-    goBackToMainMenu: 'Go back to main menu'
+    goBackToMainMenu: 'Vuelve al menú principal'
 };

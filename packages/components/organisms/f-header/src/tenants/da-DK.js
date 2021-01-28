@@ -59,5 +59,5 @@ export default {
     selectYourCountryText: 'Vælg land',
     currentCountryKey: 'dk',
     changeCurrentCountry: 'Du er på den danske website, klik her for at skifte',
-    goBackToMainMenu: 'Go back to main menu'
+    goBackToMainMenu: 'Gå tilbage til hovedmenuen'
 };
