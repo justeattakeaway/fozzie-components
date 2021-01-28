@@ -212,21 +212,21 @@ export default {
         setContinueWithDetails ({ commit }, payload) {
             commit(SET_CONTINUE_WITH_SUGGESTION, payload);
         },
-    
+
         setIsBelowMid ({ commit }, payload) {
             const isBelowMid = payload < 768;
-            
+
             commit(SET_IS_BELOW_MID, isBelowMid);
         },
 
         setShouldHaveInputElevation ({ commit }, payload) {
             commit(SET_HAS_INPUT_ELEVATION, payload);
         },
-        
+
         setShouldShowSuggestionModel ({ commit }, payload) {
             commit(SET_SHOULD_SUGGESTIONS_MODEL, payload);
         },
-        
+
         clearSuggestions ({ commit }, payload) {
             commit(CLEAR_FULL_ADDRESS_SUGGESTIONS, payload);
         }
@@ -393,19 +393,19 @@ export default {
         [SET_IS_LOADING_RESULTS]: (state, isLoadingResults) => {
             state.isLoadingResults = isLoadingResults;
         },
-        
+
         [SET_IS_BELOW_MID]: (state, isBelowMid) => {
             state.isBelowMid = isBelowMid;
         },
-    
+
         [SET_HAS_INPUT_ELEVATION]: (state, hasInputElevation) => {
             state.hasInputElevation = hasInputElevation;
         },
-        
+
         [SET_SHOULD_SUGGESTIONS_MODEL]: (state, shouldShowSuggestionsModal) => {
             state.shouldShowSuggestionsModal = shouldShowSuggestionsModal;
         },
-        
+
         [CLEAR_FULL_ADDRESS_SUGGESTIONS]: (state, suggestions) => {
             state.suggestions = suggestions;
         }

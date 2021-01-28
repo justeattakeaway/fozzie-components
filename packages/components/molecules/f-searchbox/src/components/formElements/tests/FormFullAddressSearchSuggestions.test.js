@@ -292,68 +292,68 @@ describe('`FullAddressSuggestions`', () => {
                 });
             });
         });
-        
+
         describe('`resetSearch`', () => {
-           it('should exist', () => {
-               const { wrapper } = bootstrap();
-    
-               expect(wrapper.vm.resetSearch).toBeDefined();
-           });
-           
-           describe('when invoked', () => {
-               it('should make a call to `shouldShowSuggestionsDropdown` to hide the suggestions drop down', () => {
-                   // Arrange
-                   const { wrapper } = bootstrap();
-                   const spy = jest.spyOn(wrapper.vm, 'shouldShowSuggestionsDropdown');
-                   
-                   // Act
-                   wrapper.vm.resetSearch();
-    
-                   // Assert
-                   expect(spy).toHaveBeenCalledWith(false);
-               });
-    
-               it('should make a call to `clearSuggestions` to clear the `suggestions` results from the API', () => {
-                   // Arrange
-                   const { wrapper } = bootstrap();
-                   const spy = jest.spyOn(wrapper.vm, 'clearSuggestions');
-        
-                   // Act
-                   wrapper.vm.resetSearch();
-        
-                   // Assert
-                   expect(spy).toHaveBeenCalledWith([]);
-               });
-    
-               describe('AND `isBelowMid` is `falsy`', () => {
-                   it('should make a call to `setShouldShowSuggestionModel` to hide the modal overlay on small screens', () => {
-                       // Arrange
-                       const { wrapper } = bootstrap();
-                       const spy = jest.spyOn(wrapper.vm, 'setShouldShowSuggestionModel');
-            
-                       // Act
-                       wrapper.vm.resetSearch();
-            
-                       // Assert
-                       expect(spy).not.toHaveBeenCalled();
-                   });
-               });
-               
-               describe('AND `isBelowMid` is `truthy`', () => {
-                   it('should NOT make a call to `setShouldShowSuggestionModel`', () => {
-                       // Arrange
-                       const { wrapper } = bootstrap();
-                       const spy = jest.spyOn(wrapper.vm, 'setShouldShowSuggestionModel');
-                       wrapper.vm.isBelowMid = true;
-    
-                       // Act
-                       wrapper.vm.resetSearch();
-    
-                       // Assert
-                       expect(spy).not.toHaveBeenCalledWith(false);
-                   });
-               });
-           });
+            it('should exist', () => {
+                const { wrapper } = bootstrap();
+
+                expect(wrapper.vm.resetSearch).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                it('should make a call to `shouldShowSuggestionsDropdown` to hide the suggestions drop down', () => {
+                    // Arrange
+                    const { wrapper } = bootstrap();
+                    const spy = jest.spyOn(wrapper.vm, 'shouldShowSuggestionsDropdown');
+
+                    // Act
+                    wrapper.vm.resetSearch();
+
+                    // Assert
+                    expect(spy).toHaveBeenCalledWith(false);
+                });
+
+                it('should make a call to `clearSuggestions` to clear the `suggestions` results from the API', () => {
+                    // Arrange
+                    const { wrapper } = bootstrap();
+                    const spy = jest.spyOn(wrapper.vm, 'clearSuggestions');
+
+                    // Act
+                    wrapper.vm.resetSearch();
+
+                    // Assert
+                    expect(spy).toHaveBeenCalledWith([]);
+                });
+
+                describe('AND `isBelowMid` is `falsy`', () => {
+                    it('should make a call to `setShouldShowSuggestionModel` to hide the modal overlay on small screens', () => {
+                        // Arrange
+                        const { wrapper } = bootstrap();
+                        const spy = jest.spyOn(wrapper.vm, 'setShouldShowSuggestionModel');
+
+                        // Act
+                        wrapper.vm.resetSearch();
+
+                        // Assert
+                        expect(spy).not.toHaveBeenCalled();
+                    });
+                });
+
+                describe('AND `isBelowMid` is `truthy`', () => {
+                    it('should NOT make a call to `setShouldShowSuggestionModel`', () => {
+                        // Arrange
+                        const { wrapper } = bootstrap();
+                        const spy = jest.spyOn(wrapper.vm, 'setShouldShowSuggestionModel');
+                        wrapper.vm.isBelowMid = true;
+
+                        // Act
+                        wrapper.vm.resetSearch();
+
+                        // Assert
+                        expect(spy).not.toHaveBeenCalledWith(false);
+                    });
+                });
+            });
         });
     });
 

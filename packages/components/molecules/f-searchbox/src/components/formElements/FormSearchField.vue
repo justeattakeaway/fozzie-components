@@ -46,8 +46,8 @@
         <form-full-address-search-overlay
             v-if="isFullAddressSearchEnabled"
             :copy="copy"
-            @on-full-address-modal-closed="onCloseModal"
-            :should-display-modal-overlay="shouldShowSuggestionsModal" />
+            :should-display-modal-overlay="shouldShowSuggestionsModal"
+            @on-full-address-modal-closed="onCloseModal" />
     </div>
 </template>
 

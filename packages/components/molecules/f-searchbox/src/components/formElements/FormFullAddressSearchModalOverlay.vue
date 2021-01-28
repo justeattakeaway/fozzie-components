@@ -7,8 +7,8 @@
             :is-open="shouldDisplayModalOverlay"
             :class="$style['c-megaModal--isFullWidth']"
             @close="onModalClose">
-
-            <div :class="[
+            <div
+                :class="[
                     $style['c-fullAddressFinder-inner'],
                     { [$style['has-elevation']]: hasInputElevation }
                 ]">
@@ -24,8 +24,8 @@
                             [$style['c-search-input-overlay']]: true,
                             [$style['is-notEmpty']]: true
                         }"
-                        @input="address = $event.target.value"
-                        type="search">
+                        type="search"
+                        @input="address = $event.target.value">
                     <span :class="$style['c-search-placeholder']">{{ copy.fieldLabel }}</span>
                 </label>
 
@@ -35,13 +35,13 @@
                     @click.native="onModalClose">
                     {{ copy.fullAddressSearchSuggestions.buttonCancel }}
                 </cancel-button>
-             </div>
+            </div>
 
             <full-address-search-suggestions
                 v-if="hasSuggestionsToDisplay"
                 data-test-id="full-address-modal-suggestions"
                 :copy="copy"
-                :suggestions="suggestions"/>
+                :suggestions="suggestions" />
         </full-address-overlay-search>
     </div>
 </template>
@@ -53,7 +53,7 @@ import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 import CancelButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import FullAddressSearchSuggestions from './FormFullAddressSearchSuggestions.vue';
-import { ON_FULL_ADDRESS_MODAL_CLOSED } from '../../event-types/';
+import { ON_FULL_ADDRESS_MODAL_CLOSED } from '../../event-types';
 
 export default {
     components: {
@@ -78,7 +78,7 @@ export default {
         return {
             address: '',
             modalActive: false
-        }
+        };
     },
 
     computed: {
