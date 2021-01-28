@@ -269,10 +269,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-    .c-cookieBanner {
-        font-family: $font-family-base;
-    }
-
     .c-cookieBanner-overlay {
         position: fixed;
         top: 0;
