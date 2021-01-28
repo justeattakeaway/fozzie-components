@@ -40,7 +40,6 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-button": "0.6.1",
     "@justeat/f-globalisation": "1.0.0",
     "@justeat/f-services": "1.7.0"
   },
@@ -48,6 +47,7 @@
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
+    "@justeat/f-button": "0.6.1",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
