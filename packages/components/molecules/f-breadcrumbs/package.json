@@ -1,13 +1,13 @@
 {
-  "name": "@justeat/f-button",
-  "description": "Fozzie Button – The generic button component",
-  "version": "0.7.0",
-  "main": "dist/f-button.umd.min.js",
+  "name": "@justeat/f-breadcrumbs",
+  "description": "Fozzie Bread Crumbs – Provides clickable paths back to previous pages",
+  "version": "0.1.0",
+  "main": "dist/f-breadcrumbs.umd.min.js",
   "files": [
     "dist",
     "test-utils"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/atoms/f-button",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-breadcrumbs",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -27,11 +27,11 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-button ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-breadcrumbs src/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
-    "report": "cd ../.. && yarn report",
+    "report": "cd ../../../tools && yarn report",
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
     "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
@@ -45,6 +45,9 @@
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
+  "dependencies": {
+    "@justeat/f-services": "1.0.0"
+  },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
