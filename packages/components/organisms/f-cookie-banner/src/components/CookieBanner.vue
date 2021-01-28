@@ -24,7 +24,7 @@
                     id="cookieConsentLabel"
                     :class="$style['c-cookieBanner-title']">
                     <a
-                        ref="cookieBannerHeadingFocus"
+                        ref="cookieBannerHeading"
                         name="cookieConsentTitle"
                         tabindex="0"
                         data-consent-title>
@@ -53,7 +53,7 @@
                 </p>
             </div>
 
-            <div :class="$style['c-cookieBanner-CTA']">
+            <div :class="$style['c-cookieBanner-cta']">
                 <button-component
                     is-full-width
                     @click.native="acceptActions">
@@ -173,7 +173,7 @@ export default {
          * Set focus to the cookie consent banner title for accessibility
          */
         focusOnTitle () {
-            this.$refs.cookieBannerHeadingFocus.focus();
+            this.$refs.cookieBannerHeading.focus();
         },
         /**
          * Check if the cookie banner has been shown to this user
@@ -299,7 +299,7 @@ export default {
         z-index: 99999992;
     }
 
-    .c-cookieBanner-CTA {
+    .c-cookieBanner-cta {
         min-width: 352px;
     }
 
@@ -327,7 +327,7 @@ export default {
     }
 
     .c-cookieBanner-content,
-    .c-cookieBanner-CTA {
+    .c-cookieBanner-cta {
         margin: 0 auto;
         padding: spacing(x4);
     }
@@ -343,11 +343,11 @@ export default {
         }
 
         .c-cookieBanner-content,
-        .c-cookieBanner-CTA {
+        .c-cookieBanner-cta {
             padding: spacing(x0.5) spacing(x3);
         }
 
-        .c-cookieBanner-CTA {
+        .c-cookieBanner-cta {
             min-width: initial;
             display: flex;
             flex-direction: row-reverse;
@@ -360,7 +360,7 @@ export default {
             @include font-size(heading-s);
         }
 
-        .c-cookieBanner-CTA {
+        .c-cookieBanner-cta {
             display: block;
             margin: 0;
         }
