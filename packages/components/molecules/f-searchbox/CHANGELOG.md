@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v4.0.0-beta.20
+v4.0.0-beta.21
 ------------------------------
 *January 28, 2021*
 
@@ -11,7 +11,9 @@ v4.0.0-beta.20
 - Readme information on how to render f-searchbox in non-vue instances.
 - Tests to cover changes.
 - `FormFullAddressSearchModalOverlay.vue` - Allows small screens to display results in a modal (`f-mega-modal`).
-- 
+
+### Fixed
+- Caseing in readme non-vue instructions.
 
 v4.0.0-beta.20
 ------------------------------
