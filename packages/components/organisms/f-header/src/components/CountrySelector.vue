@@ -141,11 +141,11 @@ export default {
 
 <style lang="scss">
 
-$countrySelector-icon-color : $color-secondary;
-$countrySelector-text-color : $grey--darkest;
-$countrySelector-text-hover : $color-bg--darker;
-$countrySelector-flag-width : 16px;
-$contrySelector-flag-height : 16px;
+$countrySelector-icon-color  : $color-secondary;
+$countrySelector-text-color  : $grey--darkest;
+$countrySelector-text-hover  : $color-bg--darker;
+$countrySelector-flag-width  : 16px;
+$countrySelector-flag-height : 16px;
 
 .c-nav-popoverList-header {
     display: flex;
@@ -189,7 +189,7 @@ $contrySelector-flag-height : 16px;
 }
 
 .c-countrySelector-flag {
-    height: $contrySelector-flag-height;
+    height: $countrySelector-flag-height;
     width: $countrySelector-flag-width;
     margin-right: spacing();
 }
@@ -199,7 +199,7 @@ $contrySelector-flag-height : 16px;
 }
 
 .c-countrySelector-currentFlag-wrapper {
-    height: $contrySelector-flag-height;
+    height: $countrySelector-flag-height;
     width: $countrySelector-flag-width;
 
     @include media('<mid') {
