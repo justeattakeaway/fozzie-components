@@ -117,6 +117,11 @@ export default {
     mixins: [validationMixin, VueGlobalisationMixin, checkoutValidationsMixin],
 
     props: {
+        checkoutId: {
+            type: String,
+            required: true
+        },
+
         checkoutUrl: {
             type: String,
             required: true
@@ -300,7 +305,7 @@ export default {
                 }
 
                 await this.patchCheckout({
-                    url: `${this.tenant}/checkout`,
+                    url: `checkout/${this.tenant}/${this.checkoutId}`,
                     data: checkoutData,
                     timeout: this.checkoutTimeout
                 });
