@@ -84,7 +84,7 @@ describe('CookieBanner', () => {
                 [false, 'random value'],
                 [true, 'full'],
                 [true, 'necessary']
-            ])('hideBanner should "%s" when `je-cookieConsent` value is "%s"', (
+            ])('shouldHideBanner should "%s" when `je-cookieConsent` value is "%s"', (
                 expected,
                 cookieValue
             ) => {
@@ -102,7 +102,7 @@ describe('CookieBanner', () => {
                 wrapper.vm.checkCookieBannerCookie();
 
                 // Assert
-                expect(wrapper.vm.hideBanner).toBe(expected);
+                expect(wrapper.vm.shouldHideBanner).toBe(expected);
             });
         });
 
@@ -207,7 +207,7 @@ describe('CookieBanner', () => {
                 wrapper.vm.acceptAllCookiesActions();
 
                 // Assert
-                expect(wrapper.vm.hideBanner).toBe(true);
+                expect(wrapper.vm.shouldHideBanner).toBe(true);
             });
         });
 
@@ -294,7 +294,7 @@ describe('CookieBanner', () => {
                 wrapper.vm.acceptOnlyNecessaryCookiesActions();
 
                 // Assert
-                expect(wrapper.vm.hideBanner).toBe(true);
+                expect(wrapper.vm.shouldHideBanner).toBe(true);
             });
         });
     });

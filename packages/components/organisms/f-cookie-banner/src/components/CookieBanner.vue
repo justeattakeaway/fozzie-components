@@ -4,11 +4,11 @@
         :class="[
             $style['c-cookieBanner'],
             $style['c-cookieBanner--overlay'],
-            { [$style['c-cookieBanner--is-hidden']]: hideBanner }
+            { [$style['c-cookieBanner--is-hidden']]: shouldHideBanner }
         ]"
         data-cookie-consent-overlay
         data-test-id="cookieBanner-component"
-        :aria-hidden="hideBanner">
+        :aria-hidden="shouldHideBanner">
         <div
             v-if="!legacyBanner"
             :class="[
@@ -69,7 +69,7 @@
         </div>
         <legacy-banner
             v-else
-            @hide-legacy-banner="hideBanner = true"
+            @hide-legacy-banner="shouldHideBanner = true"
         />
     </div>
 </template>
@@ -127,14 +127,14 @@ export default {
             config: { ...localeConfig },
             tenantConfigs,
             theme,
-            hideBanner: false,
+            shouldHideBanner: false,
             legacyBanner: false
         };
     },
 
     watch: {
         isHidden (newVal) {
-            this.hideBanner = !!newVal;
+            this.shouldHideBanner = !!newVal;
         },
 
         showLegacyBanner (newVal) {
@@ -156,7 +156,7 @@ export default {
             this.setCookieBannerCookie('full');
             this.setLegacyCookieBannerCookie();
             this.dataLayerPush('full');
-            this.hideBanner = true;
+            this.shouldHideBanner = true;
         },
         /**
          * Actions for "Accept only required cookies" button
@@ -167,7 +167,7 @@ export default {
             this.dataLayerPush('necessary');
             this.resendEvents();
             this.removeUnnecessaryCookies();
-            this.hideBanner = true;
+            this.shouldHideBanner = true;
         },
         /**
          * Set focus to the cookie consent banner title for accessibility
@@ -186,11 +186,11 @@ export default {
          */
         checkCookieBannerCookie () {
             if (this.legacyBanner) {
-                this.hideBanner = this.$cookies.get('je-banner_cookie') === 2;
+                this.shouldHideBanner = this.$cookies.get('je-banner_cookie') === 2;
                 this.setLegacyCookieBannerCookie();
             } else {
                 const cookieConsent = this.$cookies.get('je-cookieConsent');
-                this.hideBanner = cookieConsent === 'full' || cookieConsent === 'necessary';
+                this.shouldHideBanner = cookieConsent === 'full' || cookieConsent === 'necessary';
             }
         },
         /**
