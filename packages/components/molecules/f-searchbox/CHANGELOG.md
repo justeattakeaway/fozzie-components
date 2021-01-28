@@ -13,7 +13,7 @@ v4.0.0-beta.21
 - `FormFullAddressSearchModalOverlay.vue` - Allows small screens to display results in a modal (`f-mega-modal`).
 
 ### Fixed
-- Caseing in readme non-vue instructions.
+- Casing in readme non-vue instructions.
 
 v4.0.0-beta.20
 ------------------------------
