@@ -144,7 +144,7 @@ $btn-sizeXSmall-lineHeight      : 1;
 
     // Show focus styles on keyboard focus.
     &:focus-visible {
-        outline: 2px solid $btn-default-outline-color;
+        outline: 2px dotted $btn-default-outline-color;
     }
 
     &:hover,
