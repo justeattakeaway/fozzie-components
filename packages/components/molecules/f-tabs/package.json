@@ -1,12 +1,13 @@
 {
-  "name": "@justeat/f-form-field",
-  "description": "Fozzie Form Field – Fozzie Form Field Component",
-  "version": "1.8.0",
-  "main": "dist/f-form-field.umd.min.js",
+  "name": "@justeat/f-tabs",
+  "description": "Fozzie Tabs – Switchable slots for content&#34;",
+  "version": "0.1.0",
+  "main": "dist/f-tabs.umd.min.js",
   "files": [
-    "dist"
+    "dist",
+    "test-utils"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-form-field",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-tabs",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -26,20 +27,19 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-form-field ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-tabs src/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
-    "report": "cd ../.. && yarn report",
-    "test": "vue-cli-service test:unit",
+    "report": "cd ../../../tools && yarn report",
+    "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
     "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.0.0",
-    "@justeat/f-vue-icons": "1.11.0"
+    "@justeat/f-services": "1.0.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
