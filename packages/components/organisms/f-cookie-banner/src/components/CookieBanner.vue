@@ -56,13 +56,13 @@
             <div :class="$style['c-cookieBanner-cta']">
                 <button-component
                     is-full-width
-                    @click.native="acceptActions">
+                    @click.native="acceptAllCookiesActions">
                     {{ $t('acceptButtonText') }}
                 </button-component>
                 <button-component
                     button-type="ghost"
                     is-full-width
-                    @click.native="nonAcceptActions">
+                    @click.native="acceptOnlyNecessaryCookiesActions">
                     {{ $t('nonAcceptButtonText') }}
                 </button-component>
             </div>
@@ -152,7 +152,7 @@ export default {
         /**
          * Actions for "Accept all cookies" button
          */
-        acceptActions () {
+        acceptAllCookiesActions () {
             this.setCookieBannerCookie('full');
             this.setLegacyCookieBannerCookie();
             this.dataLayerPush('full');
@@ -161,7 +161,7 @@ export default {
         /**
          * Actions for "Accept only required cookies" button
          */
-        nonAcceptActions () {
+        acceptOnlyNecessaryCookiesActions () {
             this.setCookieBannerCookie('necessary');
             this.setLegacyCookieBannerCookie();
             this.dataLayerPush('necessary');

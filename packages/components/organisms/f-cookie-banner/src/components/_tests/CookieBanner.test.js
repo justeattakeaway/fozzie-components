@@ -158,7 +158,7 @@ describe('CookieBanner', () => {
             });
         });
 
-        describe('acceptActions', () => {
+        describe('acceptAllCookiesActions', () => {
             it('should set the banner consent cookie to `full`', () => {
                 // Arrange
                 const propsData = {};
@@ -171,7 +171,7 @@ describe('CookieBanner', () => {
                 });
                 const cookieSpy = jest.spyOn(wrapper.vm, 'setCookieBannerCookie');
                 
-                wrapper.vm.acceptActions();
+                wrapper.vm.acceptAllCookiesActions();
 
                 // Assert
                 expect(cookieSpy).toHaveBeenCalledWith('full');
@@ -188,7 +188,7 @@ describe('CookieBanner', () => {
                 });
                 const dataLayerSpy = jest.spyOn(wrapper.vm, 'dataLayerPush');
                 
-                wrapper.vm.acceptActions();
+                wrapper.vm.acceptAllCookiesActions();
 
                 // Assert
                 expect(dataLayerSpy).toHaveBeenCalledWith('full');
@@ -204,14 +204,14 @@ describe('CookieBanner', () => {
                     propsData
                 });
 
-                wrapper.vm.acceptActions();
+                wrapper.vm.acceptAllCookiesActions();
 
                 // Assert
                 expect(wrapper.vm.hideBanner).toBe(true);
             });
         });
 
-        describe('nonAcceptActions', () => {
+        describe('acceptOnlyNecessaryCookiesActions', () => {
             it('should set the banner consent cookie to `necessary`', () => {
                 // Arrange
                 const propsData = {};
@@ -224,7 +224,7 @@ describe('CookieBanner', () => {
                 });
                 const cookieSpy = jest.spyOn(wrapper.vm, 'setCookieBannerCookie');
                 
-                wrapper.vm.nonAcceptActions();
+                wrapper.vm.acceptOnlyNecessaryCookiesActions();
 
                 // Assert
                 expect(cookieSpy).toHaveBeenCalledWith('necessary');
@@ -241,7 +241,7 @@ describe('CookieBanner', () => {
                 });
                 const dataLayerSpy = jest.spyOn(wrapper.vm, 'dataLayerPush');
                 
-                wrapper.vm.nonAcceptActions();
+                wrapper.vm.acceptOnlyNecessaryCookiesActions();
 
                 // Assert
                 expect(dataLayerSpy).toHaveBeenCalledWith('necessary');
@@ -258,7 +258,7 @@ describe('CookieBanner', () => {
                 });
                 const removeCookiesSpy = jest.spyOn(wrapper.vm, 'removeUnnecessaryCookies');
                 
-                wrapper.vm.nonAcceptActions();
+                wrapper.vm.acceptOnlyNecessaryCookiesActions();
 
                 // Assert
                 expect(removeCookiesSpy).toHaveBeenCalled();
@@ -275,7 +275,7 @@ describe('CookieBanner', () => {
                 });
                 const resendSpy = jest.spyOn(wrapper.vm, 'resendEvents');
                 
-                wrapper.vm.nonAcceptActions();
+                wrapper.vm.acceptOnlyNecessaryCookiesActions();
 
                 // Assert
                 expect(resendSpy).toHaveBeenCalled();
@@ -291,7 +291,7 @@ describe('CookieBanner', () => {
                     propsData
                 });
                 
-                wrapper.vm.nonAcceptActions();
+                wrapper.vm.acceptOnlyNecessaryCookiesActions();
 
                 // Assert
                 expect(wrapper.vm.hideBanner).toBe(true);
