@@ -1,9 +1,11 @@
 <div align="center">
-  <h1>generator-component</h1>
 
-  <img width="125" alt="Fozzie Bear" src="../../bear.png" />
+# generator-component
 
-  <p>A generator for Fozzie components</p>
+<img width="125" alt="Fozzie Bear" src="../../../bear.png" />
+
+A generator for Fozzie components.
+
 </div>
 
 ---
@@ -18,11 +20,11 @@
 
 1.  Install its dependencies:
 
-    ```bash
+    ```sh
     yarn install
     ```
 
-    ```bash
+    ```sh
     npm install
     ```
 

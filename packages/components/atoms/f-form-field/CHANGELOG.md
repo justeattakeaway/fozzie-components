@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.8.0
+------------------------------
+*January 27, 2021*
+
+### Changed
+- `dropdownOptions` prop should now be an array of objects with the properties `text` and `value` rather than an array of strings.
+
+
 v1.7.0
 ------------------------------
 *January 14, 2021*

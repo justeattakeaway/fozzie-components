@@ -93,11 +93,9 @@ import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
 
 import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants';
-import checkoutModule from '../store/checkout.module';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
-
 
 export default {
     name: 'VueCheckout',
@@ -134,6 +132,11 @@ export default {
             required: true
         },
 
+        getBasketUrl: {
+            type: String,
+            required: true
+        },
+
         checkoutTimeout: {
             type: Number,
             required: false,
@@ -147,6 +150,11 @@ export default {
         },
 
         createGuestTimeout: {
+            type: Number,
+            default: 1000
+        },
+
+        getBasketTimeout: {
             type: Number,
             default: 1000
         },
@@ -223,41 +231,43 @@ export default {
     },
 
     watch: {
-        authToken () {
-            this.setAuthToken(this.authToken);
+        async authToken () {
+            await this.initialise();
         }
     },
 
     async mounted () {
-        this.setAuthToken(this.authToken);
-        await Promise.all([this.loadCheckout(), this.loadAvailableFulfilment()]);
+        await this.initialise();
     },
-
-    created () {
-        if (!this.$store.hasModule('checkout')) {
-            this.$store.registerModule('checkout', checkoutModule);
-        }
-    },
-
-    /*
-        TODO: in the future, we should actually try to deregister modules.
-        However, right now, given we might have several instances of the same component, we don't want to remove the module for all of them.
-        We tried generating a dynamic module name (so we could add and remove a module per component),
-        but we couldn't get it to work. It needs more investigation when this is really needed, not now.
-    */
-    // beforeDestroy () {
-    // this.$store.unregisterModule('checkout');
-    // },
 
     methods: {
         ...mapActions('checkout', [
             'createGuestUser',
             'getAvailableFulfilment',
+            'getBasket',
             'getCheckout',
             'postCheckout',
             'setAuthToken',
             'updateCustomerDetails'
         ]),
+
+        /**
+         * Loads the necessary data to render a meaningful checkout component.
+         *
+         */
+        async initialise () {
+            this.setAuthToken(this.authToken);
+
+            if (!this.isLoggedIn) {
+                await this.loadBasket();
+            }
+
+            const promises = this.isLoggedIn
+                ? [this.loadCheckout(), this.loadAvailableFulfilment()]
+                : [this.loadAvailableFulfilment()];
+
+            await Promise.all(promises);
+        },
 
         /**
          * Submit the checkout details while emitting events to communicate its success or failure.
@@ -323,6 +333,25 @@ export default {
                 this.$emit(EventNames.CheckoutGetSuccess); // TODO: Check these emitted events.
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutGetFailure, thrownErrors); // TODO: Check these emitted events.
+            }
+        },
+
+        /**
+         * Load the basket details while emitting events to communicate its success or failure.
+         *
+         */
+        async loadBasket () {
+            try {
+                await this.getBasket({
+                    url: this.getBasketUrl,
+                    tenant: this.tenant,
+                    language: this.$i18n.locale,
+                    timeout: this.getBasketTimeout
+                });
+
+                this.$emit(EventNames.CheckoutBasketGetSuccess); // TODO: Check these emitted events.
+            } catch (thrownErrors) {
+                this.$emit(EventNames.CheckoutBasketGetFailure, thrownErrors); // TODO: Check these emitted events.
             }
         },
 
