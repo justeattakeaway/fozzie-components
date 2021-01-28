@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+(To be rolled into the next release)
+------------------------------
+*January 27, 2021*
+
+### Added
+- Readme information on how to render f-searchbox in non-vue instances.
+
+
 v4.0.0-beta.20
 ------------------------------
 *January 22, 2021*
