@@ -17,10 +17,10 @@
                     button-size="xsmall"
                     data-test-id="cookieBanner-close-button"
                     aria-label="Close"
-                    @click="$emit('hide-legacy-banner')">
+                    @click.native="$emit('hide-legacy-banner')">
                     <cross-icon />
                     <span class="is-visuallyHidden">
-                        Close banner
+                        {{ $t('legacyBannerCloseBannerText') }}
                     </span>
                 </button-component>
             </div>
@@ -29,7 +29,16 @@
 </template>
 
 <script>
+import ButtonComponent from '@justeat/f-button';
+import '@justeat/f-button/dist/f-button.css';
+
+import { CrossIcon } from '@justeat/f-vue-icons';
+
 export default {
+    components: {
+        ButtonComponent,
+        CrossIcon
+    },
     data () {
         return {
             hideBanner: false

@@ -56,13 +56,13 @@
             <div :class="$style['c-cookieBanner-CTA']">
                 <button-component
                     is-full-width
-                    @click="acceptActions">
+                    @click.native="acceptActions">
                     {{ $t('acceptButtonText') }}
                 </button-component>
                 <button-component
                     button-type="ghost"
                     is-full-width
-                    @click="nonAcceptActions">
+                    @click.native="nonAcceptActions">
                     {{ $t('nonAcceptButtonText') }}
                 </button-component>
             </div>
@@ -219,7 +219,7 @@ export default {
         dataLayerPush (consentLevel) {
             const dataLayer = window.dataLayer || [];
             dataLayer.push({ event: 'trackConsent', userData: { consent: consentLevel } });
-            dataLayer.push({ platformData: { consentLoading:true } });
+            dataLayer.push({ platformData: { consentLoading: true } });
         },
         /**
          * Check for excluded cookies/storage

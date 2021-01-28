@@ -9,7 +9,8 @@ const messages = {
     cookiePolicyLinkText: 'cookies notice',
     cookiePolicyLinkUrl: 'https://www.just-eat.co.uk/info/cookies-policy',
     legacyBannerText: 'We use cookies to improve your browsing experience. By continuing, you agree to receive cookies on our website.',
-    legacyBannerLinkText: 'Learn more about our cookies policy.'
+    legacyBannerLinkText: 'Learn more about our cookies policy.',
+    legacyBannerCloseBannerText: 'Close cookie banner'
 };
 
 const displayLegacy = true;
