@@ -1,8 +1,7 @@
-
 <div align="center">
   <h1>f-cookie-banner</h1>
 
-  <img width="125" alt="Fozzie Bear" src="../../bear.png" />
+  <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
   <p>Cookie Banner</p>
 </div>
@@ -17,44 +16,51 @@
 
 ## Usage
 
-1.  Install the module using NPM or Yarn:
+### Installation
 
-    ```bash
-    yarn add @justeat/f-cookie-banner
-    ```
+This package can be installed using npm or yarn:
 
-    ```bash
-    npm install @justeat/f-cookie-banner
-    ```
+```sh
+yarn add @justeat/f-cookie-banner
+```
 
-2.  Import the component
+```sh
+npm install @justeat/f-cookie-banner
+```
 
-    You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+### Vue Applications
 
-    ```
-    import CookieBanner from '@justeat/f-cookie-banner';
-    import '@justeat/f-cookie-banner/dist/f-cookie-banner.css';
+You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
-    export default {
-        components: {
-            CookieBanner
-        }
+```js
+import CookieBanner from '@justeat/f-cookie-banner';
+import '@justeat/f-cookie-banner/dist/f-cookie-banner.css';
+
+export default {
+    components: {
+        CookieBanner
     }
-    ```
+}
+```
 
-    If you are using Webpack, you can import the component dynamically to separate the `cookie-banner` bundle from the main `bundle.client.js`:
+If you are using Webpack, you can import the component dynamically to separate the `cookie-banner` bundle from the main `bundle.client.js`:
 
-    ```
-    import '@justeat/f-cookie-banner/dist/f-cookie-banner.css';
+```js
+import '@justeat/f-cookie-banner/dist/f-cookie-banner.css';
 
-    export default {
-        components: {
-            ...
-            CookieBanner: () => import(/* webpackChunkName: "cookie-banner" */ '@justeat/f-cookie-banner')
-        }
+export default {
+    components: {
+        ...
+        CookieBanner: () => import(/* webpackChunkName: "cookie-banner" */ '@justeat/f-cookie-banner')
     }
+}
+```
 
-    ```
+Call the component in your template:
+
+```js
+<f-cookie-banner />
+```
 
 ## Configuration
 
@@ -68,20 +74,43 @@ The props that can be defined are as follows:
 | ----- | ----- | ------- | ----------- |
 | `locale` | `String` | `'en-GB'` | Set the tenant for localisation ['da-DK', 'en-AU', 'en-GB', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO']. |
 | `isHidden` | `Boolean` | `false` | show/hide the cookie consent banner. |
-| `showLegacyBanner` | `Boolean` | `false` | Use the legacy "passive" banner markup. |
+| `showLegacyBanner` | `Boolean` | `false` | Use the legacy "passive" banner markup (UK only). |
 | `cookieExpiry` | `Number` | `7776000` | Expiry time of cookies written to the browser. |
+
+### CSS Classes
+
+`f-cookie-banner` has its own styles which are scoped to the component using CSS modules to prevent conflicts with existing styles on the page.
 
 ## Development
 
-Running below `yarn` commands from the component folder, starts a development
-server displaying a preview example of the component implementation.
+Start by cloning the repository and installing the required dependencies:
 
-```bash
-# cd /packages/f-cookie-banner
-yarn install
-
-# followed by
-yarn demo
+```sh
+$ git clone git@github.com:justeat/fozzie-components.git
+$ cd fozzie-components
+$ yarn
 ```
 
-## Documentation to be completed once module is in stable state.
+Change directory to the `f-cookie-banner` package:
+
+```sh
+$ cd packages/components/organisms/f-cookie-banner
+```
+
+### Running storybook
+
+Storybook can be used to develop new and existing components.
+
+To start storybook:
+
+> Please ensure you are in the f-cookie-banner directory as outlined in the above instructions.
+
+```sh
+# cd to the storybook package
+$ cd ../../../storybook
+
+# Run storybook
+$ yarn storybook:serve
+```
+
+This will build and serve storybook at [http://localhost:8080](http://localhost:8080).

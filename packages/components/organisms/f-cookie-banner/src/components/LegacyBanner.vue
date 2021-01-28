@@ -10,11 +10,19 @@
                         {{ $t('legacyBannerLinkText') }}
                     </a>
                 </p>
-                <button
-                    class="c-cookieWarning-btn"
+                <button-component
+                    type="button"
+                    :class="[$style['c-cookieWarning-btn']]"
+                    button-type="icon"
+                    button-size="xsmall"
                     data-test-id="cookieBanner-close-button"
                     aria-label="Close"
-                    @click="$emit('hide-legacy-banner')" />
+                    @click="$emit('hide-legacy-banner')">
+                    <cross-icon />
+                    <span class="is-visuallyHidden">
+                        Close banner
+                    </span>
+                </button-component>
             </div>
         </div>
     </div>
