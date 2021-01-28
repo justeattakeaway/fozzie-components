@@ -132,6 +132,11 @@ export default {
             required: true
         },
 
+        getBasketUrl: {
+            type: String,
+            required: true
+        },
+
         checkoutTimeout: {
             type: Number,
             required: false,
@@ -145,6 +150,11 @@ export default {
         },
 
         createGuestTimeout: {
+            type: Number,
+            default: 1000
+        },
+
+        getBasketTimeout: {
             type: Number,
             default: 1000
         },
@@ -234,6 +244,7 @@ export default {
         ...mapActions('checkout', [
             'createGuestUser',
             'getAvailableFulfilment',
+            'getBasket',
             'getCheckout',
             'postCheckout',
             'setAuthToken',
@@ -246,7 +257,16 @@ export default {
          */
         async initialise () {
             this.setAuthToken(this.authToken);
-            await Promise.all([this.loadCheckout(), this.loadAvailableFulfilment()]);
+
+            if (!this.isLoggedIn) {
+                await this.loadBasket();
+            }
+
+            const promises = this.isLoggedIn
+                ? [this.loadCheckout(), this.loadAvailableFulfilment()]
+                : [this.loadAvailableFulfilment()];
+
+            await Promise.all(promises);
         },
 
         /**
@@ -313,6 +333,25 @@ export default {
                 this.$emit(EventNames.CheckoutGetSuccess); // TODO: Check these emitted events.
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutGetFailure, thrownErrors); // TODO: Check these emitted events.
+            }
+        },
+
+        /**
+         * Load the basket details while emitting events to communicate its success or failure.
+         *
+         */
+        async loadBasket () {
+            try {
+                await this.getBasket({
+                    url: this.getBasketUrl,
+                    tenant: this.tenant,
+                    language: this.$i18n.locale,
+                    timeout: this.getBasketTimeout
+                });
+
+                this.$emit(EventNames.CheckoutBasketGetSuccess); // TODO: Check these emitted events.
+            } catch (thrownErrors) {
+                this.$emit(EventNames.CheckoutBasketGetFailure, thrownErrors); // TODO: Check these emitted events.
             }
         },
 

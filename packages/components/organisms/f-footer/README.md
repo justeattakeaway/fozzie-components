@@ -1,9 +1,11 @@
 <div align="center">
-<h1>f-footer</h1>
 
-<img width="125" alt="Fozzie Bear" src="../../bear.png" />
+# f-footer
 
-<p>Global Footer Component for Vue.js.</p>
+<img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
+
+Global Footer Component for Vue.js.
+
 </div>
 
 ---
@@ -15,40 +17,47 @@
 
 ---
 
-1. Add the module to your project
+## Usage
 
-    ```bash
-    yarn add @justeat/f-footer
-    ```
+### Installation
 
-1. Import the component
+Install the module using npm or Yarn:
 
-    You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+```sh
+yarn add @justeat/f-footer
+```
 
-    ```
-    import VueFooter from '@justeat/f-footer';
-    import '@justeat/f-footer/dist/f-footer.css';
+```sh
+npm install @justeat/f-footer
+```
 
-    export default {
-        components: {
-            VueFooter
-        }
+### Vue Applications
+
+You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+
+```sh
+import VueFooter from '@justeat/f-footer';
+import '@justeat/f-footer/dist/f-footer.css';
+
+export default {
+    components: {
+        VueFooter
     }
-    ```
+}
+```
 
-    If you are using Webpack, you can import the component dynamically to separate the footer bundle from the main `bundle.client.js`:
+If you are using Webpack, you can import the component dynamically to separate the `f-footer` bundle from the main `bundle.client.js`:
 
-    ```
-    import '@justeat/f-footer/dist/f-footer.css';
+```js
+import '@justeat/f-footer/dist/f-footer.css';
 
-    export default {
-        components: {
-            ...
-            VueFooter: () => import(/* webpackChunkName: "vue-footer" */ '@justeat/f-footer')
-        }
+export default {
+    components: {
+      // …
+        VueFooter: () => import(/* webpackChunkName: "vue-footer" */ '@justeat/f-footer')
     }
-
-    ```
+}
+```
 
     - If there is a vue-i18n plugin in the project, footer component can be called without any props:
 
@@ -63,31 +72,52 @@
 
     This component extends [@justeat/browserslist-config-fozzie](https://github.com/justeat/browserslist-config-fozzie).
 
-## Development
-It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
+## Configuration
 
-```bash
-# cd ./fozzie-components
-yarn install
+### Props
+
+There may be props that allow you to customise its functionality.
+
+The props that can be defined are as follows (if any):
+
+| Prop  | Type  | Default | Description |
+| ----- | ----- | ------- | ----------- |
+
+### Events
+
+The events that can be subscribed to are as follows (if any):
+
+| Event | Description |
+| ----- | ----------- |
+
+## Development
+
+Start by cloning the repository and installing the required dependencies:
+
+```sh
+$ git clone git@github.com:justeat/fozzie-components.git
+$ cd fozzie-components
+$ yarn
+```
+
+Change directory to the `f-footer` package:
+
+```sh
+$ cd packages/components/molecules/f-footer
+```
 
 ## Testing
-Unit / Integration / Contract
 
-```bash
-# Run Unit / Integration / Contract tests for all components
-cd ./fozzie-components
+### Unit, Integration and Contract
+
+To test all components, run from root directory.
+To test only `f-footer`, run from the `./fozzie-components/packages/f-footer` directory.
+
+```sh
 yarn test
 ```
 
-OR
-
-```bash
-# Run Unit / Integration / Contract tests for f-footer
-cd ./fozzie-components/packages/f-footer
-yarn test
-```
-
-Component Tests
+### Component Tests
 ```bash
 # Run Component tests for all components
 # Note: Ensure Storybook is not running when running the following commands

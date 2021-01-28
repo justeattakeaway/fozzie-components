@@ -139,6 +139,37 @@ export default {
             commit('UPDATE_AVAILABLE_FULFILMENT_TIMES', data);
         },
 
+        /**
+         * Get the basket details from the backend and update the state.
+         *
+         * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getBasket: async ({ commit }, {
+            url,
+            tenant,
+            language,
+            timeout
+        }) => {
+            // TODO: deal with exceptions.
+            const config = {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Tenant': tenant,
+                    'Accept-Language': language
+                },
+                timeout
+            };
+
+            const { data } = await axios.get(url, config);
+            const basketDetails = {
+                serviceType: data.ServiceType.toLowerCase()
+            };
+
+            commit('UPDATE_BASKET_DETAILS', basketDetails);
+        },
+
         setAuthToken: ({ commit }, authToken) => {
             commit('UPDATE_AUTH', authToken);
         },
@@ -202,18 +233,22 @@ export default {
             state.isLoggedIn = !!authToken;
         },
 
-        UPDATE_FULFILMENT_ADDRESS (state, address) {
+        UPDATE_FULFILMENT_ADDRESS: (state, address) => {
             state.fulfilment.address = {
                 ...state.fulfilment.address,
                 ...address
             };
         },
 
-        UPDATE_CUSTOMER_DETAILS (state, customer) {
+        UPDATE_CUSTOMER_DETAILS: (state, customer) => {
             state.customer = {
                 ...state.customer,
                 ...customer
             };
+        },
+
+        UPDATE_BASKET_DETAILS: (state, { serviceType }) => {
+            state.serviceType = serviceType;
         }
     }
 };
