@@ -6,6 +6,8 @@ export const GO_TO_PAYMENT_BUTTON = '[data-test-id="confirm-payment-submit-butto
 export const KNOB_BUTTON = '[id$="tabbutton-knobs"]';
 export const KNOB_CHECKOUT_DROPDOWN = '[name="Checkout Url"]';
 export const SWITCH_USER_LINK = '[data-test-id="switch-user-link"]';
+export const GUEST_CHECKOUT_LOGIN_BUTTON = '[data-test-id="guest-login-button"]';
+export const GUEST_CHECKOUT_HEADER = '[data-test-id="guest-checkoutHeader"]';
 
 export const FIELDS = {
     firstName: {

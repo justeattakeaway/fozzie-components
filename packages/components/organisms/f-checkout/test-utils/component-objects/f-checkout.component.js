@@ -9,12 +9,15 @@ import {
     FIELDS,
     KNOB_CHECKOUT_DROPDOWN,
     KNOB_BUTTON,
-    SWITCH_USER_LINK
+    SWITCH_USER_LINK,
+    GUEST_CHECKOUT_LOGIN_BUTTON,
+    GUEST_CHECKOUT_HEADER
 } from './f-checkout-selectors';
 
 const { doesElementExist } = require('../../../../../../test/utils/webdriverio-extensions')(browser);
 
 const checkoutComponent = () => $(CHECKOUT_COMPONENT);
+const guestCheckoutHeader = () => $(GUEST_CHECKOUT_HEADER);
 
 // Dropdown
 
@@ -25,6 +28,7 @@ const knobCheckoutDropdown = () => $(KNOB_CHECKOUT_DROPDOWN);
 // Buttons
 const goToPaymentButton = () => $(GO_TO_PAYMENT_BUTTON);
 const knobButton = () => $(KNOB_BUTTON);
+const guestCheckoutLoginButton = () => $(GUEST_CHECKOUT_LOGIN_BUTTON);
 
 // Form Fields
 
@@ -95,6 +99,8 @@ exports.isOrderTimeDropdownDisplayed = () => orderTimeDropdown().isDisplayed();
 exports.userNoteMaxCharacterCount = () => userNoteInput().getAttribute('maxlength');
 exports.clickPaymentButton = () => goToPaymentButton().click();
 exports.switchUserLinkIsDisplayed = () => switchUserLink().isDisplayed();
+exports.isGuestCheckoutLoginButtonDisplayed = () => guestCheckoutLoginButton().isDisplayed();
+exports.isGuestCheckoutHeaderDisplayed = () => guestCheckoutHeader().isDisplayed();
 
 /**
  * @description

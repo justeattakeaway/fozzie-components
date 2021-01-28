@@ -1,9 +1,11 @@
 <div align="center">
-  <h1>f-mega-modal</h1>
 
-  <img width="125" alt="Fozzie Bear" src="../../bear.png" />
+# f-mega-modal
 
-  <p>A Vue.js modal component</p>
+<img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
+
+A Vue.js modal component
+
 </div>
 
 ---
@@ -13,12 +15,13 @@
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-mega-modal/badge.svg)](https://coveralls.io/github/justeat/f-mega-modal)
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-mega-modal/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-mega-modal?targetFile=package.json)
 
+---
 
-# Usage
+## Usage
 
-## Installation
+### Installation
 
-This package can be installed using npm or yarn:
+Install the module using NPM or Yarn:
 
 ```sh
 yarn add @justeat/f-mega-modal
@@ -50,11 +53,10 @@ import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 
 export default {
     components: {
-        ...
+// …
         MegaModal: () => import(/* webpackChunkName: "mega-modal" */ '@justeat/f-mega-modal')
     }
 }
-
 ```
 
 ### Non-Vue Applications
@@ -179,6 +181,17 @@ Change directory to the `f-mega-modal` package:
 
 ```sh
 $ cd packages/components/molecules/f-mega-modal
+```
+
+## Testing
+
+### Unit, Integration and Contract
+
+To test all components, run from root directory.
+To test only `f-form-field`, run from the `./fozzie-components/packages/f-form-field` directory.
+
+```sh
+yarn test
 ```
 
 ### Running storybook

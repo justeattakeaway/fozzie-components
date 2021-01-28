@@ -1,5 +1,5 @@
 import {
-    withKnobs, select, text, boolean, array
+    withKnobs, select, text, boolean, object
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import FormField from '../src/components/FormField.vue';
@@ -29,7 +29,10 @@ export const FormFieldComponent = () => ({
             default: boolean('hasError', false)
         },
         dropdownOptions: {
-            default: array('Dropdown Options', ['As soon as possible', 'Today in 5 minutes'], ',')
+            default: object('Dropdown Options', [
+                { text: 'As soon as possible', value: '2021-01-01T01:00:00.000Z' },
+                { text: 'Today in 5 minutes', value: '2021-01-01T01:05:00.000Z' }
+            ])
         },
         isGrouped: {
             default: boolean('isGrouped', false)

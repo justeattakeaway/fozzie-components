@@ -14,7 +14,7 @@ describe('f-checkout "collection" component tests', () => {
     });
 
     forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
-    .it('should not show address fields', field => {
+    .it.only('should not show address fields', field => {
         // Assert
         expect(CheckoutComponent.doesFieldExist(field)).toBe(false);
     });
