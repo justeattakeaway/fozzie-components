@@ -4,7 +4,7 @@
         :class="[
             $style['c-cookieBanner'],
             $style['c-cookieBanner--overlay'],
-            { [$style['c-cookieBanner--hidden']]: hideBanner }
+            { [$style['c-cookieBanner--is-hidden']]: hideBanner }
         ]"
         data-cookie-consent-overlay
         data-test-id="cookieBanner-component"
@@ -279,7 +279,7 @@ export default {
         z-index: 99999991;
     }
 
-    .c-cookieBanner--hidden {
+    .c-cookieBanner--is-hidden {
         display: none;
     }
 
