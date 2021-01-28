@@ -176,7 +176,7 @@ export default {
             this.$refs.cookieBannerHeading.focus();
         },
         /**
-         * Check if the cookie banner has been shown to this user
+         * Check if the legacy cookie banner should be used
          */
         checkLegacyBannerFlag () {
             this.legacyBanner = this.config.displayLegacy;
