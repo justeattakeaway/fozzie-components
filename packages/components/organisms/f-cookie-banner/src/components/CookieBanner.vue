@@ -355,7 +355,7 @@ export default {
         }
     }
 
-    @media (max-width: 600px) {
+    @media ('<narrowMid') {
         .c-cookieBanner-title {
             @include font-size(heading-s);
         }
