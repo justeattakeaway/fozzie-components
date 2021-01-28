@@ -350,7 +350,7 @@ describe('`FullAddressSuggestions`', () => {
                        wrapper.vm.resetSearch();
     
                        // Assert
-                       expect(spy).toHaveBeenCalledWith(false);
+                       expect(spy).not.toHaveBeenCalledWith(false);
                    });
                });
            });

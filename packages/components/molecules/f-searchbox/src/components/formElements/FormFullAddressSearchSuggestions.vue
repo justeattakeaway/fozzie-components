@@ -70,11 +70,6 @@ export default {
         copy: {
             type: Object,
             default:  () => ({})
-        },
-
-        hideSmallScreen: {
-            type: Boolean,
-            default: false
         }
     },
 

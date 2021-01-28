@@ -239,7 +239,7 @@ export default {
                     this.setSuggestions(this.service.search(value));
                 }
 
-                if (this.isFullAddressSearchEnabled) {
+                if (this.isFullAddressSearchEnabled && !this.isBelowMid) {
                     this.getMatchedAreaAddressResults({
                         address: this.addressValue
                     });

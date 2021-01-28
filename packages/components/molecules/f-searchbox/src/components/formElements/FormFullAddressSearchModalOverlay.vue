@@ -71,11 +71,6 @@ export default {
         shouldDisplayModalOverlay: {
             type: Boolean,
             default: false
-        },
-
-        shouldDisplayOnSmallScreens: {
-            type: Boolean,
-            default: false
         }
     },
 
@@ -116,8 +111,8 @@ export default {
 
     methods: {
         ...mapActions('searchbox', [
-            'setAddress',
-            'getMatchedAreaAddressResults'
+            'getMatchedAreaAddressResults',
+            'setAddress'
         ]),
 
         onModalClose () {
