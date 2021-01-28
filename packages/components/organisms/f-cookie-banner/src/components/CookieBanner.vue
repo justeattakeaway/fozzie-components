@@ -308,10 +308,6 @@ export default {
         padding: 0;
     }
 
-    .c-cookieBanner-link {
-        color: $color-link-default;
-    }
-
     .c-cookieBanner-title {
         @include font-size(heading-m);
         font-weight: $font-weight-bold;
@@ -332,7 +328,7 @@ export default {
         padding: spacing(x4);
     }
 
-    @media (max-width: 768px) {
+    @include media ('<mid') {
         .c-cookieBanner-card {
             flex-direction: column;
             padding: spacing(x2) 0;
@@ -355,7 +351,7 @@ export default {
         }
     }
 
-    @media ('<narrowMid') {
+    @include media('<=narrow') {
         .c-cookieBanner-title {
             @include font-size(heading-s);
         }
