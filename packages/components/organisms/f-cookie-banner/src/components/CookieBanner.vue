@@ -96,7 +96,6 @@ export default {
     mixins: [VueGlobalisationMixin],
 
     props: {
-
         locale: {
             type: String,
             default: 'en-GB'
