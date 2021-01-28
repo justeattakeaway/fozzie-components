@@ -84,11 +84,6 @@ The props that can be defined are as follows:
 | showCountrySelector       | `Boolean`     | `false` | Defines whether the country selector should be shown in the navigation. |
 
 
-<<<<<<< HEAD
-`showLoginInfo` - Optional Boolean property with `true` as a default value, defines whether the login / user info icon should be shown in the navigation.
-
-=======
->>>>>>> 886f255... Check for offers prop to have a content + readme
 **Important:** if you're adding a new property to show/hide something on the navigation bar, you probably want to check the `hasNavigationLinks` computed property, since you might have to update it.
 
 ### Events
