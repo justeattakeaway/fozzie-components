@@ -3,24 +3,32 @@
 //     withKnobs, select, boolean
 // } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import VueTabs from '../src/components/Tabs.vue';
+import Tabs from '../src/components/Tabs.vue';
+import Tab from '../src/components/Tab.vue';
 
 export default {
-    title: 'Components',
+    title: 'Components/Molecules',
     decorators: [withA11y]
 };
 
 export const VueTabsComponent = () => ({
-    components: { VueTabs },
-    // props: {
-    //     buttonType: {
-    //         default: select('Button Type', ['primary', 'primaryAlt', 'secondary', 'tertiary', 'link'])
-    //     },
-    //     fullWidth: {
-    //         default: boolean('fullWidth', false)
-    //     }
-    // },
-    template: '<vue-tabs />'
+    components: { Tabs, Tab },
+    template: `
+        <tabs :animate="true">
+            <tab name="a" title="Your Stampcards" :selected="true">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
+                temporibus deleniti quas dolor eos et delectus eveniet sequi dolore,
+                minus vel ad nesciunt voluptatibus numquam nulla distinctio modi,
+                voluptas exercitationem?
+            </tab>
+            <tab name="b" title="How it works">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi eaque
+                dicta quisquam voluptate inventore repellendus ut itaque, animi, magni
+                consectetur dolore, sapiente error! Eos cupiditate harum quidem sit illo
+                dicta!
+            </tab>
+        </tabs>
+    `
 });
 
 VueTabsComponent.storyName = 'f-tabs';

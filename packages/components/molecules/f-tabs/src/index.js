@@ -6,13 +6,15 @@
 
 
 // Import vue component
-import VueTabs from '@/components/Tabs.vue';
+import Tabs from '@/components/Tabs.vue';
+import Tab from '@/components/Tab.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('VueTabs', VueTabs);
+    Vue.component('Tabs', Tabs);
+    Vue.component('Tab', Tab);
 }
 
 // Create module definition for Vue.use()
@@ -32,4 +34,7 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export default VueTabs;
+export {
+    Tabs,
+    Tab
+};
