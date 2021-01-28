@@ -10,7 +10,7 @@
             :tabindex="isBelowMid && !navIsOpen ? -1 : 0"
             button-type="icon"
             class="c-nav-list-text c-countrySelector-btn"
-            :aria-expanded="countrySelectorIsOpenOnDesktopView"
+            :aria-expanded="countrySelectorIsOpenOnDesktopView ? 'true' : 'false'"
             :aria-haspopup="!isBelowMid"
             :aria-label="copy.changeCurrentCountry"
             @click="onCountrySelectorToggle"
