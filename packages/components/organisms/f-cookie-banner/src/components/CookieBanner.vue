@@ -3,7 +3,7 @@
         ref="cookieBanner"
         :class="[
             $style['c-cookieBanner'],
-            $style['c-cookieBanner-overlay'],
+            $style['c-cookieBanner--overlay'],
             { [$style['c-cookieBanner--hidden']]: hideBanner }
         ]"
         data-cookie-consent-overlay
@@ -269,7 +269,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-    .c-cookieBanner-overlay {
+    .c-cookieBanner--overlay {
         position: fixed;
         top: 0;
         bottom: 0;
