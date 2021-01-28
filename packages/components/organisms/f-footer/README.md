@@ -80,8 +80,11 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop  | Type  | Default | Description |
-| ----- | ----- | ------- | ----------- |
+| Prop | Type | Required | Default | Description |
+| ------------------- | ----- | -------- | ------- | ----------------------------------------------------- |
+| `locale`| `String` | No | '' | Should be passed if [vue-i18n](https://kazupon.github.io/vue-i18n/) plugin not used by consuming application |
+| `showCourierLinks` | `Bool` | No | true | Controls whether to show courier links in footer |
+| `showCountrySelector`| `Bool` | No | true | Controls whether to show country selector in footer |
 
 ### Events
 

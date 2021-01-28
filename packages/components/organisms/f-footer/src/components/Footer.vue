@@ -49,7 +49,8 @@
                 :current-country-name="copy.currentCountryName"
                 :current-country-key="copy.currentCountryKey"
                 :countries="countryList"
-                :change-country-text="copy.changeCurrentCountry" />
+                :change-country-text="copy.changeCurrentCountry"
+                :show-country-selector="showCountrySelector" />
 
             <legal-field
                 v-if="metaLegalFieldEnabled"
@@ -88,6 +89,10 @@ export default {
         },
 
         showCourierLinks: {
+            type: Boolean,
+            default: true
+        },
+        showCountrySelector: {
             type: Boolean,
             default: true
         }
