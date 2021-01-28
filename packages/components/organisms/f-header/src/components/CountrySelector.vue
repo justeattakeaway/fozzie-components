@@ -120,7 +120,7 @@ export default {
             return this.isBelowMid && !this.countrySelectorIsOpen;
         },
         countrySelectorIsOpenOnDesktopView () {
-            return !this.isBelowMid && this.countrySelectorIsOpen
+            return !this.isBelowMid && this.countrySelectorIsOpen;
         }
     },
     methods: {

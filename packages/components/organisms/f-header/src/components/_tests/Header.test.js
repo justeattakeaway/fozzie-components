@@ -71,47 +71,51 @@ describe('Header', () => {
 describe('showDeliveryEnquiryWithContext', () => {
     it.each([
         [undefined, true, undefined],
-        [false, false, {text: 'Deliver with us', link: 'link'}],
-        [true, true, {text: 'Deliver with us', link: 'link'}]
-    ])('should be "%s" if `showDeliveryEnquiry` prop is "%s" and `deliveryEnquiry` prop is "%s"',
-    (expected, showDeliveryEnquiryValue, deliveryEnquiryValue) => {
+        [false, false, { text: 'Deliver with us', link: 'link' }],
+        [true, true, { text: 'Deliver with us', link: 'link' }]
+    ])(
+        'should be "%s" if `showDeliveryEnquiry` prop is "%s" and `deliveryEnquiry` prop is "%s"',
+        (expected, showDeliveryEnquiryValue, deliveryEnquiryValue) => {
         // Arrange & Act
-        const wrapper = shallowMount(Header, {
-            propsData: { showDeliveryEnquiry: showDeliveryEnquiryValue },
-            data() {
-                return {
-                    copy: {
-                        deliveryEnquiry: deliveryEnquiryValue
-                    }
+            const wrapper = shallowMount(Header, {
+                propsData: { showDeliveryEnquiry: showDeliveryEnquiryValue },
+                data () {
+                    return {
+                        copy: {
+                            deliveryEnquiry: deliveryEnquiryValue
+                        }
+                    };
                 }
-            }
-        });
+            });
 
-        // Assert
-        expect(wrapper.vm.showDeliveryEnquiryWithContent).toBe(expected);
-    })
+            // Assert
+            expect(wrapper.vm.showDeliveryEnquiryWithContent).toBe(expected);
+        }
+    );
 });
 
 describe('showOffersLinkWithContent', () => {
     it.each([
         [undefined, true, undefined],
-        [false, false, {text: 'For you', link: 'link'}],
-        [true, true, {text: 'For you', link: 'link'}]
-    ])('should be "%s" if `showDeliveryEnquiry` prop is "%s" and `offers` prop is "%s"',
-    (expected, showOffersLinkValue, offersValue) => {
+        [false, false, { text: 'For you', link: 'link' }],
+        [true, true, { text: 'For you', link: 'link' }]
+    ])(
+        'should be "%s" if `showDeliveryEnquiry` prop is "%s" and `offers` prop is "%s"',
+        (expected, showOffersLinkValue, offersValue) => {
         // Arrange & Act
-        const wrapper = shallowMount(Header, {
-            propsData: { showOffersLink: showOffersLinkValue },
-            data() {
-                return {
-                    copy: {
-                        offers: offersValue
-                    }
+            const wrapper = shallowMount(Header, {
+                propsData: { showOffersLink: showOffersLinkValue },
+                data () {
+                    return {
+                        copy: {
+                            offers: offersValue
+                        }
+                    };
                 }
-            }
-        });
+            });
 
-        // Assert
-        expect(wrapper.vm.showOffersLinkWithContent).toBe(expected);
-    })
-})
+            // Assert
+            expect(wrapper.vm.showOffersLinkWithContent).toBe(expected);
+        }
+    );
+});
