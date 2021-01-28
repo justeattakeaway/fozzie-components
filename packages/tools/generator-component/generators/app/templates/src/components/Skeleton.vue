@@ -1,8 +1,10 @@
 <template>
     <div
         :class="$style['c-<%= name.class %>']"
-        data-test-id="<%= name.class %>">
-        {{ copy.text }}
+        data-test-id="<%= name.class %>"><% if (config.needsComponentTranslations) { %>
+        {{ copy.text }}<%
+        } else { %>
+        I am a <%= name.component %> Component (GB)<% } %>
     </div>
 </template>
 
@@ -22,15 +24,15 @@ export default {
             type: String,
             default: ''
         }
-<%} %>    },
+<%} %>    }<% if (config.needsComponentTranslations) { %>,
     data () {
-<% if (config.needsComponentTranslations) { %>        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
+        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
 
         return {
             copy: { ...localeConfig }
         };
-<%} %>    }
+    }<% } %>
 };
 </script>
 

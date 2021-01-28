@@ -1,4 +1,4 @@
-const <%= name.class %>Component = () => $('[data-test-id="<%= name.class %>-component"]');
+const <%= name.class %>Component = () => $('[data-test-id="<%= name.class %>"]');
 
 exports.waitFor<%= name.filename%>Component = () => <%= name.class%>Component().waitForExist();
 

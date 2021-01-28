@@ -49,12 +49,12 @@ Yeoman Generator version: {white v${pkg.version}}
             const { componentCategory } = this.answers;
             const categoryCapitalised = componentCategory.charAt(0).toUpperCase() + componentCategory.slice(1);
             this.storybook = {
-                path: `story/components-${componentCategory}s--${this.nameTransformations.class}`,
+                path: `story/components-${componentCategory}s--${this.nameTransformations.default}-component`,
                 componentCategory: `${categoryCapitalised}s`
             };
         }
 
-        this.ignoreTestPatterns = [
+        this.ignorePatterns = [
             ...(this.config.needsComponentTests ? [] : ['**/*/test/specs/component']),
             ...(this.config.needsComponentTranslations ? [] : ['**/*/src/tenants']),
             ...(this.config.needsTestingApiMocks ? [] : ['**/*/src/services']),
@@ -93,13 +93,14 @@ Yeoman Generator version: {white v${pkg.version}}
                 config: this.config,
                 description: this.answers.description,
                 componentCategory: this.componentCategory,
-                storybook: this.storybook
+                storybook: this.storybook,
+                componentFolder: this.componentDistFolder
             },
             null,
             {
                 globOptions: {
                     dot: true,
-                    ignore: this.ignoreTestPatterns
+                    ignore: this.ignorePatterns
                 }
             }
         );
