@@ -222,12 +222,12 @@ export default {
             dataLayer.push({ platformData: { consentLoading: true } });
         },
         /**
-         * Check for excluded cookies/storage
+         * Check whether a cookie with name `cookieName` is to be excluded from being removed
          * @param {String} cookieName
          * @returns {Bool}
          */
         isNotExcluded (cookieName) {
-            return this.config.cookieExclusionList.every(arrVal => cookieName.lastIndexOf(arrVal, arrVal.length - 1) === -1);
+            return this.config.cookieExclusionList.every(excludedCookieName => cookieName.lastIndexOf(excludedCookieName, excludedCookieName.length - 1) === -1);
         },
         /**
          * Remove unnecessary cookies
