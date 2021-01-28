@@ -69,6 +69,14 @@ The props that can be defined are as follows (if any):
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
+| `locale` | `String` | `''` | **??** |
+| `labelText` | `String` | `''` | **??** |
+| `inputType` | `String` | `DEFAULT_INPUT_TYPE` | **??** |
+| `labelStyle` | `String` | `'default'` | **??** |
+| `value` | `[String` | `''` | **??** |
+| `hasError` | `Boolean` | `false` | **??** |
+| `dropdownOptions` | `Array` | `() => null` | **??** |
+| `isGrouped` | `Boolean` | `false` | **??** |
 
 ### Events
 
@@ -76,6 +84,7 @@ The events that can be subscribed to are as follows (if any):
 
 | Event | Description |
 | ----- | ----------- |
+| `input` | Fired when a user changes a field, args contain details of the change and it's context. |
 
 ## Development
 
