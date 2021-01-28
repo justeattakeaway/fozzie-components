@@ -59,14 +59,18 @@ export default {
 }
 ```
 
-    - If there is a vue-i18n plugin in the project, footer component can be called without any props:
 
-    `<vue-footer />`
+- If there's a vue-i18n plugin in the project, footer component can be called without any props:
 
-    - Or you can pass locale as a property to specify the tenant:
+```Vue
+<vue-footer />
+```
 
-    `<vue-footer
-        locale="en-GB" />`
+- Or you can pass locale as a property to specify the tenant:
+
+```Vue
+    <vue-footer locale="en-GB" />
+```
 
 1. Browser Support
 
@@ -80,11 +84,11 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop | Type | Required | Default | Description |
-| ------------------- | ----- | -------- | ------- | ----------------------------------------------------- |
-| `locale`| `String` | No | '' | Should be passed if [vue-i18n](https://kazupon.github.io/vue-i18n/) plugin not used by consuming application |
-| `showCourierLinks` | `Bool` | No | true | Controls whether to show courier links in footer |
-| `showCountrySelector`| `Bool` | No | true | Controls whether to show country selector in footer |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `locale`| `String` | `''` | Should be passed if [vue-i18n](https://kazupon.github.io/vue-i18n/) plugin not used by consuming application. |
+| `showCourierLinks` | `Bool` | `true` | Controls whether to show courier links in footer. |
+| `showCountrySelector`| `Bool` | `true` | Controls whether to show country selector in footer. |
 
 ### Events
 
