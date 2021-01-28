@@ -45,20 +45,22 @@ If you are using Webpack, you can import the component dynamically to separate t
 ### Services in the bundle:
 
 #### axios
-- `createClient` - Create an axios client.
-- `createCamelCaseClient` - Create an axios client with all response JSON transformed to camelCase.
-- `getNetworkDetails` - Uses the navigator API (falling back to moz/webkit) to return network information.
-- `objectToCamelCase` - Recursively converts object's property names to camelCase.
+
+- `createClient` — Create an axios client.
+- `createCamelCaseClient` — Create an axios client with all response JSON transformed to camelCase.
+- `getNetworkDetails` — Uses the navigator API (falling back to moz/webkit) to return network information.
+- `objectToCamelCase` — Recursively converts object's property names to camelCase.
 
 #### globalisation
 
-- `getLocale` - Returns the locale for the current tenant, if the configuration for that locale is present, otherwise returns the default locale.
-- `getTheme` - Returns the theme based on the user's locale. Either `ml` for Menulog or `je` for Just Eat.
+- `getLocale` — Returns the locale for the current tenant, if the configuration for that locale is present, otherwise returns the default locale.
+- `getTheme` — Returns the theme based on the user's locale. Either `ml` for Menulog or `je` for Just Eat.
 
 #### window
 
 Uses the `window-or-global` module for SSR compatibility.
-- `addEvent` - Add an event listener with a callback function. Optional throttling. Returns the function that will be called by the listener.
-- `getWindowHeight` - Returns the current innerHeight.
-- `getWindowWidth` - Returns the current innerWidth.
-- `removeEvent` - Remove an event listener. To remove a throttled event, pass in the value returned by `addEvent` when the listener was added.
+
+- `addEvent` — Add an event listener with a callback function. Optional throttling. Returns the function that will be called by the listener.
+- `getWindowHeight` — Returns the current innerHeight.
+- `getWindowWidth` — Returns the current innerWidth.
+- `removeEvent` — Remove an event listener. To remove a throttled event, pass in the value returned by `addEvent` when the listener was added.
