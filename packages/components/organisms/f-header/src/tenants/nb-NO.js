@@ -56,8 +56,10 @@ export default {
         url: '/account/logout',
         gtm: 'click_logout'
     },
-    selectYourCountryText: 'Velg land',
-    currentCountryKey: 'no',
-    changeCurrentCountry: 'Du er på den norske nettsiden, klikk her for å endre',
-    goBackToMainMenu: 'Gå tilbake til hovedmenyen'
+    countrySelector: {
+        selectYourCountryText: 'Velg land',
+        currentCountryKey: 'no',
+        changeCurrentCountry: 'Du er på den norske nettsiden, klikk her for å endre',
+        goBackToMainMenu: 'Gå tilbake til hovedmenyen'
+    }
 };

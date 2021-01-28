@@ -5,10 +5,15 @@ let wrapper;
 
 const defaultPropsData = {
     isBelowMid: false,
-    currentCountryKey: 'gb',
-    changeCountryText: 'You are on the UK website, click here to change.',
-    selectYourCountryText: 'Select your country',
-    openNav: jest.fn()
+    openNav: jest.fn(),
+    copy: {
+        countrySelector: {
+            selectYourCountryText: 'Select your country',
+            currentCountryKey: 'gb',
+            changeCurrentCountry: 'You are on the UK website, click here to change',
+            goBackToMainMenu: 'Go back to main menu'
+        }
+    }
 };
 
 const defaultData = {

@@ -12,16 +12,16 @@
             class="c-nav-list-text c-countrySelector-btn"
             :aria-expanded="countrySelectorIsOpenOnDesktopView ? 'true' : 'false'"
             :aria-haspopup="!isBelowMid"
-            :aria-label="copy.changeCurrentCountry"
+            :aria-label="copy.countrySelector.changeCurrentCountry"
             @click="onCountrySelectorToggle"
             v-on="countrySelectorIsClosedOnMobileView ? { blur: closeNav, focus: openNav } : null">
             <span class="c-countrySelector-currentFlag-wrapper">
                 <flag-icon
-                    :country-code="copy.currentCountryKey"
+                    :country-code="copy.countrySelector.currentCountryKey"
                     class="c-countrySelector-flag c-countrySelector-flag--current" />
             </span>
             <span class='c-countrySelector-title'>
-                {{ copy.selectYourCountryText }}
+                {{ copy.countrySelector.selectYourCountryText }}
             </span>
         </f-button>
 
@@ -32,12 +32,12 @@
                         button-type="icon"
                         button-size="xsmall"
                         class="c-nav-popoverList-header-button"
-                        :aria-label="copy.goBackToMainMenu"
+                        :aria-label="copy.countrySelector.goBackToMainMenu"
                         @click="closeCountrySelector">
                         <arrow-icon class="c-nav-popoverList-go-back-icon" />
                     </f-button>
 
-                    <h3>{{ copy.selectYourCountryText }}</h3>
+                    <h3>{{ copy.countrySelector.selectYourCountryText }}</h3>
                 </header>
 
                 <ul class="c-countrySelector-list">
@@ -98,11 +98,11 @@ export default {
         },
         openNav: {
             type: Function,
-            default: () => (() => {})
+            default: () => {}
         },
         closeNav: {
             type: Function,
-            default: () => (() => {})
+            default: () => {}
         },
         navIsOpen: {
             type: Boolean,

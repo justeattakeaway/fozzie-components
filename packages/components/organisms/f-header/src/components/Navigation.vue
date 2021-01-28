@@ -398,7 +398,9 @@ export default {
     methods: {
         onNavToggle () {
             this.navIsOpen = !this.navIsOpen;
-            this.$refs.countrySelector.closeCountrySelector();
+            if (this.showCountrySelector) {
+                this.$refs.countrySelector.closeCountrySelector();
+            }
             // This is added to remove the ability to scroll the page content when the mobile navigation is open
             this.handleMobileNavState();
         },

@@ -71,8 +71,10 @@ export default {
         text: 'For you',
         url: '/offers'
     },
-    selectYourCountryText: 'Select your country',
-    currentCountryKey: 'gb',
-    changeCurrentCountry: 'You are on the UK website, click here to change',
-    goBackToMainMenu: 'Go back to main menu'
+    countrySelector: {
+        selectYourCountryText: 'Select your country',
+        currentCountryKey: 'gb',
+        changeCurrentCountry: 'You are on the UK website, click here to change',
+        goBackToMainMenu: 'Go back to main menu'
+    }
 };

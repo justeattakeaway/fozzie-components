@@ -60,8 +60,10 @@ export default {
         text: 'For you',
         url: '/offers'
     },
-    selectYourCountryText: 'Select your country',
-    currentCountryKey: 'ie',
-    changeCurrentCountry: 'You are on the Irish website, click here to change',
-    goBackToMainMenu: 'Go back to main menu'
+    countrySelector: {
+        selectYourCountryText: 'Select your country',
+        currentCountryKey: 'ie',
+        changeCurrentCountry: 'You are on the Irish website, click here to change',
+        goBackToMainMenu: 'Go back to main menu'
+    }
 };

@@ -50,8 +50,10 @@ export default {
         text: 'For you',
         url: '/offers'
     },
-    selectYourCountryText: 'Select your country',
-    currentCountryKey: 'au',
-    changeCurrentCountry: 'You are on the AU website, click here to change',
-    goBackToMainMenu: 'Go back to main menu'
+    countrySelector: {
+        selectYourCountryText: 'Select your country',
+        currentCountryKey: 'au',
+        changeCurrentCountry: 'You are on the AU website, click here to change',
+        goBackToMainMenu: 'Go back to main menu'
+    }
 };
