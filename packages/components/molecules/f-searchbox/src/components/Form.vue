@@ -27,7 +27,7 @@
 
             <component
                 :is="setSuggestionType"
-                v-if="true"
+                v-if="shouldDisplaySuggestions"
                 data-test-id="suggestions"
                 aria-live="assertive"
                 :copy="copy"
