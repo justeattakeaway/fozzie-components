@@ -2,14 +2,14 @@ const CIRCLE_CI = process.env.CIRCLECI;
 const TEST_TYPE = process.env.TEST_TYPE;
 
 exports.local = () => ({
-        bail: 0,
-        maxinstances: 1,
-        loglevel: 'info'
-    });
+    bail: 0,
+    maxinstances: 1,
+    loglevel: 'info'
+});
 
 exports.ci = () => ({
     bail: 1,
-    maxinstances: 2,
+    maxinstances: 1,
     loglevel: 'silent'
 });
 
