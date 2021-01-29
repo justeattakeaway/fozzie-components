@@ -154,6 +154,7 @@ export default {
 
     methods: {
         ...mapActions('searchbox', [
+            'clearSuggestions',
             'setAddress',
             'setInputFocus',
             'setInputTimeoutValue',
@@ -206,6 +207,7 @@ export default {
          * @param {Boolean}
          * */
         onCloseModal (value) {
+            this.clearSuggestions([]);
             this.isFullAddressModalClosed = true;
             this.setShouldShowSuggestionModel(value);
         },
