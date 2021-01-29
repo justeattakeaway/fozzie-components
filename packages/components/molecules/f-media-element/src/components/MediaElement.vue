@@ -2,19 +2,17 @@
     <div
         :class="$style['c-mediaElement']"
         data-test-id="mediaElement-component">
-        mediaElement
+        {{ componentName }}
     </div>
 </template>
 
 <script>
 
 export default {
-    name: 'MediaElement',
-    components: {},
-    props: {
-    },
     data () {
-        return {};
+        return {
+            componentName: 'MediaElement'
+        };
     }
 };
 </script>
