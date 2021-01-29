@@ -80,10 +80,9 @@ The props that can be defined are as follows:
 | showHelpLink              | `Boolean`     | `true` | Defines whether the help link should be shown in the navigation. |
 | showLoginInfo             | `Boolean`     | `true` | Defines whether the login & user info icon should be shown in the navigation. |
 | userInfoProp              | `Object`      | `{}`     | Optional object conaining user details. If not provided `userInfoProp` is set via XHR call to `/api/account/details` |
-| userInfoUrl               | `String`      | `false` | URL to call to retrieve the userInfo (when `userInfoProp` isn't set). |
+| userInfoUrl               | `String`      | `/api/account/details` | URL to call to retrieve the userInfo (when `userInfoProp` isn't set). |
+| showCountrySelector       | `Boolean`     | `false` | Defines whether the country selector should be shown in the navigation. |
 
-
-`showLoginInfo` - Optional Boolean property with `true` as a default value, defines whether the login / user info icon should be shown in the navigation.
 
 **Important:** if you're adding a new property to show/hide something on the navigation bar, you probably want to check the `hasNavigationLinks` computed property, since you might have to update it.
 

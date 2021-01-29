@@ -56,8 +56,10 @@ export default {
         url: '/account/logout',
         gtm: 'click_logout'
     },
-    offers: {
-        text: '%OFFERS%',
-        url: '/offers'
+    countrySelector: {
+        selectYourCountryText: 'Seleziona il tuo paese',
+        currentCountryKey: 'it',
+        changeCurrentCountry: 'Sei sul sito Italiano, licca qui per cambiare stato',
+        goBackToMainMenu: 'Torna al menu principale'
     }
 };
