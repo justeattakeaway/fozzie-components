@@ -9,4 +9,4 @@ v0.1.0
 *January 29, 2021*
 
 ### Added
-- Add your change under the following headings: `Added`/`Changed`/`Deprecated`/`Removed`/`Fixed`/`Security`
+- Add generated output to start component
