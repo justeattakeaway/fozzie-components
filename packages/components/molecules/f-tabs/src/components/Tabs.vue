@@ -1,5 +1,7 @@
 <template>
-    <div :class="$style['c-tabs']">
+    <div
+        data-test-id="tabs-component"
+        :class="$style['c-tabs']">
         <div :class="$style['c-tabs-header']">
             <div :class="$style['c-tabs-buttons']">
                 <button

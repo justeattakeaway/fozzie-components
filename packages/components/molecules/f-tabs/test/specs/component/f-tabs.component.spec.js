@@ -2,7 +2,7 @@ import TabsComponent from '../../../test-utils/component-objects/f-tabs.componen
 
 describe('f-tabs component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components--vue-tabs-component');
+        browser.url('?path=/story/components-molecules--vue-tabs-component');
         browser.switchToFrame(0);
         TabsComponent.waitForTabsComponent();
     });
