@@ -2,7 +2,7 @@
   "name": "@justeat/f-consumer-oidc",
   "version": "1.0.0",
   "description": "Authentication helper to communicate with open apis",
-  "main": "dist/f-consumer-oidc.js",
+  "main": "dist/f-consumer-oidc.umd.min.js",
   "scripts": {
     "prepublishOnly": "yarn build",
     "build": "webpack",

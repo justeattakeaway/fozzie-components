@@ -11,7 +11,9 @@ const packageFolders = [
 ]
 
 const excludedPackages = [
+    'packages/services/f-development-context',
     'packages/services/f-metadata',
+    'packages/services/f-services',
     'packages/tools/generator-component',
     'packages/tools/storybook'
 ];
