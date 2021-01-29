@@ -2,7 +2,7 @@ import MediaElementComponent from '../../../test-utils/component-objects/f-media
 
 describe('f-mediaElement component tests', () => {
     beforeEach(() => {
-        browser.url('?path=story/components-molecules--mediaElement');
+        browser.url('?path=/story/components-molecules--media-element-component');
         browser.switchToFrame(0);
         MediaElementComponent.waitForMediaElementComponent();
     });

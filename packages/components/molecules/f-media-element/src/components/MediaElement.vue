@@ -1,8 +1,8 @@
 <template>
     <div
         :class="$style['c-mediaElement']"
-        data-test-id="mediaElement">
-        {{ copy.text }}
+        data-test-id="mediaElement-component">
+        mediaElement
     </div>
 </template>
 
@@ -14,6 +14,7 @@ export default {
     props: {
     },
     data () {
+        return {};
     }
 };
 </script>
