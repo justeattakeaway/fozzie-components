@@ -3,7 +3,7 @@
         :class="[$style['c-iconList'], {
             [$style['c-iconList--apps']]: isApps,
             [$style['c-iconList--payments']]: isPayments,
-            [$style['c-iconList--rightAligned']]: isPayments && rightAligned,
+            [$style['c-iconList--rightAligned']]: isPayments,
             [$style['c-iconList--social']]: isSocial
         }]"
         data-test-id="footerBrands-column">
@@ -88,10 +88,6 @@ export default {
         locale: {
             type: String,
             default: 'en-GB'
-        },
-        rightAligned: {
-            type: Boolean,
-            default: false
         }
     },
 
@@ -164,10 +160,6 @@ export default {
     svg {
         max-width: 67px;
     }
-}
-
-.c-iconList--rightAligned {
-    justify-content: flex-end;
 }
 
 </style>

@@ -12,7 +12,7 @@ v4.8.1
 
 ### Added
 - Tests to cover this change
-- Styles for right aligned icon list
+- Styles for right aligned footer row
 
 
 v4.8.0

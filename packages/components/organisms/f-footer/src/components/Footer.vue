@@ -44,7 +44,8 @@
         </div>
 
         <div
-            class="c-footer-container c-footer-row c-footer-row--combined c-footer-row--notEqualTopAndBottomPad c-footer-row--noPadBelowWide">
+            :class="['c-footer-container c-footer-row c-footer-row--combined c-footer-row--notEqualTopAndBottomPad c-footer-row--noPadBelowWide',
+                     { 'c-footer-row--rightAlignedOnDesktopView': !showCountrySelector }]">
             <country-selector
                 v-if="showCountrySelector"
                 data-test-id="country-selector"
@@ -59,7 +60,6 @@
 
             <icon-list
                 :icons="copy.paymentIcons"
-                :right-aligned="!showCountrySelector"
                 is-payments />
         </div>
     </footer>
@@ -212,6 +212,12 @@ $footer-heading-font-size: 'heading-s';
 
 .c-footer-row--noBottomPad {
     padding-bottom: 0;
+}
+
+.c-footer-row--rightAlignedOnDesktopView {
+    @include media('>=mid') {
+        justify-content: flex-end;
+    }
 }
 
 .c-footer-list {
