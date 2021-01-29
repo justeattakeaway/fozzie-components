@@ -110,7 +110,7 @@ $tabs-link-border-colour  : $brand--orange;
     height: 100%;
 
     @include media('<narrowMid') {
-        width:100%;
+        width: 100%;
     }
 
 }
@@ -123,7 +123,9 @@ $tabs-link-border-colour  : $brand--orange;
     outline: none;
 
     @include media('<narrowMid') {
+        /* stylelint-disable */
         flex: 1 1 0px;// important px for IE
+        /* stylelint-enable */
     }
 
 }
