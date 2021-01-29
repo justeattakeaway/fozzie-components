@@ -46,11 +46,12 @@
         <div
             class="c-footer-container c-footer-row c-footer-row--combined c-footer-row--notEqualTopAndBottomPad c-footer-row--noPadBelowWide">
             <country-selector
+                v-if="showCountrySelector"
+                data-test-id="country-selector"
                 :current-country-name="copy.currentCountryName"
                 :current-country-key="copy.currentCountryKey"
                 :countries="countryList"
-                :change-country-text="copy.changeCurrentCountry"
-                :show-country-selector="showCountrySelector" />
+                :change-country-text="copy.changeCurrentCountry" />
 
             <legal-field
                 v-if="metaLegalFieldEnabled"
@@ -58,6 +59,7 @@
 
             <icon-list
                 :icons="copy.paymentIcons"
+                :right-aligned="!showCountrySelector"
                 is-payments />
         </div>
     </footer>
