@@ -7,3 +7,5 @@ export const LOCATION_COOKIE_PROPS = [
     'state'
 ];
 export const JE_LOCATION = 'je-location';
+
+export const JE_FULL_ADDRESS_DETAILS = 'je-full-address-details';

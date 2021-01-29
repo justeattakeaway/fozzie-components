@@ -124,6 +124,10 @@ export default {
         }
     },
 
+    mounted () {
+        this.setInputElevation();
+    },
+
     methods: {
         ...mapActions('searchbox', [
             'getMatchedAreaAddressResults',
@@ -268,10 +272,6 @@ export default {
                 this.setShouldShowSuggestionModel(false);
             }
         }
-    },
-
-    mounted () {
-        this.setInputElevation();
     }
 };
 </script>

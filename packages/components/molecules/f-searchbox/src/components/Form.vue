@@ -63,10 +63,12 @@ import FormFullAddressSearchSuggestions from './formElements/FormFullAddressSear
 import searchboxModule from '../store/searchbox.module';
 import { getLastLocation, normalisePostcode } from '../utils/helpers';
 import { search, selectedSuggestion } from '../services/search.services';
+import { JE_FULL_ADDRESS_DETAILS } from '../services/constants';
 import {
     processLocationCookie,
     onCustomSubmit,
-    generateFormQueryUrl
+    generateFormQueryUrl,
+    fullAddressLocalStorageService
 } from '../services/general.services';
 import {
     SUBMIT_SAVED_ADDRESS,
@@ -136,6 +138,7 @@ export default {
         ...mapState('searchbox', [
             'address',
             'errors',
+            'fullAddressDetails',
             'formattedFullAddress',
             'isBelowMid',
             'isValid',
@@ -293,6 +296,7 @@ export default {
             'setGeoLocationAvailability',
             'setFullAddressSearchConfigs',
             'setAutoCompleteAvailability',
+            'setSavedFullAddressDetails',
             'getMatchedAreaAddressResults'
         ]),
 
@@ -336,6 +340,13 @@ export default {
 
                     // Process international based location cookies `je-last-*`
                     processLocationCookie(this.shouldSetCookies, info);
+                } else if (this.isFullAddressSearchEnabled) {
+                    this.setSavedFullAddressDetails({
+                        fullAddress: this.fullAddressDetails,
+                        address: this.address
+                    });
+                    // Save selected Loqate address to localstorage on submit.
+                    fullAddressLocalStorageService.setItem(JE_FULL_ADDRESS_DETAILS, this.fullAddressDetails);
                 } else {
                     // Process standard address based location cookies `je-location`
                     processLocationCookie(this.shouldSetCookies, this.addressValue);
@@ -460,6 +471,9 @@ export default {
 
                 if (this.isFullAddressSearchEnabled) {
                     this.setAutoCompleteAvailability(true);
+                } else {
+                    // clear localStorage if feature is off.
+                    fullAddressLocalStorageService.removeItem(JE_FULL_ADDRESS_DETAILS);
                 }
             }
         },

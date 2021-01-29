@@ -1,6 +1,7 @@
 import fullAddressService from '../services/location/loqate';
 
 import {
+    CLEAR_FULL_ADDRESS_SUGGESTIONS,
     SET_SUGGESTIONS,
     SET_ERRORS,
     SET_IS_VALID,
@@ -25,7 +26,7 @@ import {
     SET_IS_BELOW_MID,
     SET_HAS_INPUT_ELEVATION,
     SET_SHOULD_SUGGESTIONS_MODEL,
-    CLEAR_FULL_ADDRESS_SUGGESTIONS
+    SET_SAVED_FULL_ADDRESS_DETAILS
 } from './mutation.types';
 
 export default {
@@ -37,6 +38,7 @@ export default {
         fullAddressDetails: [],
         formattedFullAddress: '',
         keyboardSuggestionIndex: 0,
+        savedFullAddressDetails: {},
         selectedStreetLevelAddressId: '',
         suggestions: [],
         streetNumber: '',
@@ -229,6 +231,10 @@ export default {
 
         clearSuggestions ({ commit }, payload) {
             commit(CLEAR_FULL_ADDRESS_SUGGESTIONS, payload);
+        },
+    
+        setSavedFullAddressDetails ({ commit }, payload) {
+            commit(SET_SAVED_FULL_ADDRESS_DETAILS, payload);
         }
     },
 
@@ -408,6 +414,13 @@ export default {
 
         [CLEAR_FULL_ADDRESS_SUGGESTIONS]: (state, suggestions) => {
             state.suggestions = suggestions;
+        },
+        
+        [SET_SAVED_FULL_ADDRESS_DETAILS]: (state, savedFullAddressDetails) => {
+            const { address, fullAddress } = savedFullAddressDetails;
+            debugger;
+            fullAddress.push(address);
+            state.savedFullAddressDetails = savedFullAddressDetails;
         }
     }
 };
