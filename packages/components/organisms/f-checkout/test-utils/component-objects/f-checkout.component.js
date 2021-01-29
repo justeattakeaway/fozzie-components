@@ -67,7 +67,7 @@ const fields = {
     addressPostcode: {
         input: () => $(FIELDS.addressPostcode.input),
         error: () => $(FIELDS.addressPostcode.error),
-        typeError: () => $(FIELDS.addressPostcode.typeError)
+        typeError: () => $$(FIELDS.addressPostcode.typeError)
     },
     userNote: {
         input: () => $(FIELDS.userNote.input),
@@ -92,7 +92,7 @@ exports.changeCheckoutMethod = method => {
 
 exports.isFieldErrorDisplayed = fieldName => fields[fieldName].error().isDisplayed();
 exports.isFieldDisplayed = fieldName => fields[fieldName].input().isDisplayed();
-exports.isFieldTypeErrorDisplayed = fieldName => fields[fieldName].typeError().isDisplayed();
+exports.isPostCodeTypeErrorDisplayed = () => fields.addressPostcode.typeError().length > 0;
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isOrderTimeDropdownDisplayed = () => orderTimeDropdown().isDisplayed();

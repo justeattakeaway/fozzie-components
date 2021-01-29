@@ -9,7 +9,7 @@ exports.local = () => ({
 
 exports.ci = () => ({
     bail: 1,
-    maxinstances: 1,
+    maxinstances: 2,
     loglevel: 'info'
 });
 
