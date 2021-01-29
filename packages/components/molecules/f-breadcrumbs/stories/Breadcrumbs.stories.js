@@ -20,7 +20,10 @@ export const BreadcrumbsComponent = () => ({
     //         default: boolean('fullWidth', false)
     //     }
     // },
-    template: '<breadcrumbs />'
+    template: '<breadcrumbs :links="links" />',
+    data: () => ({
+        links: ['Home', 'For you', 'Stamp Cards']
+    })
 });
 
 BreadcrumbsComponent.storyName = 'f-breadcrumbs';

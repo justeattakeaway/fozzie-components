@@ -1,21 +1,19 @@
 <template>
     <div :class="$style['c-breadcrumbs']">
         <ul :class="$style['c-breadcrumbs-list']">
-            <li :class="$style['c-breadcrumbs-item']">
-                <a :class="$style['c-breadcrumbs-link']">Home</a>
-            </li>
-            <li :class="$style['c-breadcrumbs-separator']">
-                >
-            </li>
-            <li :class="$style['c-breadcrumbs-item']">
-                <a :class="$style['c-breadcrumbs-link']">For You</a>
-            </li>
-            <li :class="$style['c-breadcrumbs-separator']">
-                >
-            </li>
-            <li :class="$style['c-breadcrumbs-item']">
-                <a :class="[$style['c-breadcrumbs-link'], $style['c-breadcrumbs-link--active']]">Stamp Cards</a>
-            </li>
+            <template v-for="(link, index) in links">
+                <li
+                    v-if="index !== 0"
+                    :key="`${index}_link`"
+                    :class="$style['c-breadcrumbs-separator']">
+                    >
+                </li>
+                <li
+                    :key="`${index}_separator`"
+                    :class="$style['c-breadcrumbs-item']">
+                    <a :class="[$style['c-breadcrumbs-link'], { [$style['c-breadcrumbs-link--active']]: index === links.length - 1 }]">{{ link }}</a>
+                </li>
+            </template>
         </ul>
     </div>
 </template>
@@ -66,7 +64,6 @@ $breadcrumbs-active-font-weight: $font-weight-base;
     margin: 0;
     padding: 0;
     display: flex;
-    flex-flow: row;
     align-items: center;
 }
 .c-breadcrumbs-item {
@@ -89,6 +86,7 @@ $breadcrumbs-active-font-weight: $font-weight-base;
     cursor: pointer;
     &:hover {
         text-decoration: underline;
+        color: $breadcrumbs-text-colour;
     }
 }
 .c-breadcrumbs-separator {
