@@ -8,7 +8,7 @@
     "test-utils",
     "src/services"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-searchbox",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-searchbox",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],

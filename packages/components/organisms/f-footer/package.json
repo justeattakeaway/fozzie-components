@@ -6,7 +6,7 @@
     "dist",
     "test-utils"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-footer",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-footer",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
