@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.46.0
 -------------------------------
-*January 28, 2021*
+*January 29, 2021*
 
 ### Added
 - `f-checkout-guest.spec` files for `guest checkout` tests.
