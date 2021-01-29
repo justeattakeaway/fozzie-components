@@ -10,16 +10,16 @@ exports.local = () => ({
 exports.ci = () => ({
     bail: 1,
     maxinstances: 1,
-    loglevel: 'silent'
+    loglevel: 'info'
 });
 
 exports.a11y = () => ({
     specs: ['./test/specs/accessibility/axe-accessibility.spec.js']
-})
+});
 
 exports.component = () => ({
     specs: ['./test/specs/component/*.component.spec.js']
-})
+});
 
 exports.setTestEnvironment = () => (CIRCLE_CI ? exports.ci() : exports.local());
 exports.setTestType = () => (TEST_TYPE === 'component' ? exports.component() : exports.a11y());
