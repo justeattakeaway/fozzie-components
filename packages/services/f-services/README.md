@@ -44,6 +44,8 @@ If you are using Webpack, you can import the component dynamically to separate t
 
 ### Services in the bundle:
 
+----
+
 #### Axios
 
 ##### `createClient`
@@ -61,6 +63,8 @@ Uses the navigator API (falling back to moz/webkit) to return network informatio
 
 Recursively converts object's property names to camelCase.
 
+----
+
 #### Globalisation
 
 ##### `getLocale`
@@ -70,6 +74,8 @@ Returns the locale for the current tenant, if the configuration for that locale 
 ##### `getTheme`
 
 Returns the theme based on the user's locale. Either `ml` for Menulog or `je` for Just Eat.
+
+----
 
 #### Window
 
@@ -91,11 +97,15 @@ Returns the current innerWidth.
 
 Remove an event listener. To remove a throttled event, pass in the value returned by `addEvent` when the listener was added.
 
+----
+
 #### Utilities
 
 ##### default export
 
 Returns a deep object by traversing following the provided path.
+
+----
 
 #### Validations
 
@@ -105,8 +115,8 @@ Returns an object containing arrays of the names of valid and invalid validation
 
 ##### `isValidPostcode`
 
-Returns a boolean of if a provided postcode is valid in the provided locale.
+Returns a boolean indicating whether the provided postcode is valid in the provided locale.
 
 ##### `isValidPhoneNumber`
 
-Returns a boolean of if a provided phone number is valid in the provided locale.
+Returns a boolean indicating whether the provided phone number is valid in the provided locale.x
