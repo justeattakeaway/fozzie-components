@@ -38,7 +38,7 @@ export default {
         fullAddressDetails: [],
         formattedFullAddress: '',
         keyboardSuggestionIndex: 0,
-        savedFullAddressDetails: {},
+        savedFullAddressDetails: null,
         selectedStreetLevelAddressId: '',
         suggestions: [],
         streetNumber: '',
@@ -418,9 +418,31 @@ export default {
         
         [SET_SAVED_FULL_ADDRESS_DETAILS]: (state, savedFullAddressDetails) => {
             const { address, fullAddress } = savedFullAddressDetails;
-            debugger;
-            fullAddress.push(address);
-            state.savedFullAddressDetails = savedFullAddressDetails;
+    
+            const savedAddressResult = fullAddress.map(({
+                city,
+                field1,
+                field2,
+                line1,
+                line2,
+                line3,
+                line4,
+                line5,
+                postcode
+            }) => ({
+                city,
+                field1,
+                field2,
+                line1,
+                line2,
+                line3,
+                line4,
+                line5,
+                postcode,
+                searchBoxAddress: address
+            }));
+
+            state.savedFullAddressDetails = savedAddressResult;
         }
     }
 };

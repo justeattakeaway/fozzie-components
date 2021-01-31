@@ -146,6 +146,7 @@ export default {
             'isDirty',
             'isFullAddressSearchEnabled',
             'keyboardSuggestionIndex',
+            'savedFullAddressDetails',
             'suggestions',
             'streetNumber',
             'selectedStreetLevelAddressId',
@@ -346,7 +347,7 @@ export default {
                         address: this.address
                     });
                     // Save selected Loqate address to localstorage on submit.
-                    fullAddressLocalStorageService.setItem(JE_FULL_ADDRESS_DETAILS, this.fullAddressDetails);
+                    fullAddressLocalStorageService.setItem(JE_FULL_ADDRESS_DETAILS, ...this.savedFullAddressDetails);
                 } else {
                     // Process standard address based location cookies `je-location`
                     processLocationCookie(this.shouldSetCookies, this.addressValue);
@@ -471,6 +472,7 @@ export default {
 
                 if (this.isFullAddressSearchEnabled) {
                     this.setAutoCompleteAvailability(true);
+                    this.fetchLocalStorageAddress();
                 } else {
                     // clear localStorage if feature is off.
                     fullAddressLocalStorageService.removeItem(JE_FULL_ADDRESS_DETAILS);
@@ -486,7 +488,20 @@ export default {
          */
         onResize: debounce(function resize () {
             this.setIsBelowMid(document.body.clientWidth);
-        }, 100)
+        }, 100),
+
+        /**
+         * Fetch previous searched addresses from LocalStorage if it exists & then
+         * pre-populate searchbox with this address.
+         *
+         */
+        fetchLocalStorageAddress () {
+            const addressFromLocalStorage = fullAddressLocalStorageService.getItem(JE_FULL_ADDRESS_DETAILS);
+
+            if (addressFromLocalStorage && addressFromLocalStorage.searchBoxAddress) {
+                this.setAddress(addressFromLocalStorage.searchBoxAddress);
+            }
+        }
     }
 };
 </script>
