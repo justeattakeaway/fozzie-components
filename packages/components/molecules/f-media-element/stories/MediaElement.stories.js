@@ -19,11 +19,13 @@ export const MediaElementComponent = (args, { argTypes }) => ({
 MediaElementComponent.storyName = 'f-media-element';
 
 MediaElementComponent.args = {
-    title: 'Earn',
-    text: 'Each stamp you collect from a restaurant is worth up to 15% of your order’s value and will be saved under its own StampCard.',
-    stacked: true,
+    title: 'Stampcards',
+    text: 'See the stamps you’ve collected and any discounts you’ve earned.',
+    stacked: false,
     reverse: true,
-    contentAlign: 'center',
+    contentAlign: 'left',
     imageAlign: 'center',
-    imageUrl: 'https://via.placeholder.com/250'
+    imageUrl: 'https://via.placeholder.com/250',
+    titleLarge: true,
+    textLarge: true
 };

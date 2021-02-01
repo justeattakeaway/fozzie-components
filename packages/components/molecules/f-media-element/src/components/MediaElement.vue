@@ -3,17 +3,17 @@
         data-test-id="mediaElement-component"
         :class="[$style['c-mediaElement'], { [$style['c-mediaElement--stack']]: stacked }, { [$style['c-mediaElement--reverse']]: reverse }]">
         <div :class="[$style['c-mediaElement-content'], contentAlignClass]">
-            <h3 :class="$style['c-mediaElement-title']">
+            <h3 :class="[$style['c-mediaElement-title'], { [$style['c-mediaElement-title--large']]: titleLarge }]">
                 {{ title }}
             </h3>
-            <p :class="$style['c-mediaElement-text']">
+            <p :class="[$style['c-mediaElement-text'], { [$style['c-mediaElement-text--large']]: textLarge }]">
                 {{ text }}
             </p>
         </div>
         <div :class="[$style['c-mediaElement-imgWrapper'], imageAlignClass]">
             <img
                 :class="$style['c-mediaBlock-img']"
-                src="https://via.placeholder.com/250"
+                :src="imageUrl"
                 alt="test image">
         </div>
     </div>
@@ -56,6 +56,14 @@ export default {
         imageAlign: {
             type: String,
             default: ALIGN.LEFT
+        },
+        titleLarge: {
+            type: Boolean,
+            default: false
+        },
+        textLarge: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
@@ -124,7 +132,11 @@ export default {
 }
 
 .c-mediaElement-title {
-    @include font-size(subheading-l);
+    @include font-size(heading-m);
+    &--large {
+        @include font-size(heading-xl);
+        margin-bottom: spacing(x0.5);
+    }
 }
 
 .c-mediaElement--stack .c-mediaElement-title {
@@ -134,6 +146,9 @@ export default {
 .c-mediaElement-text {
     @include font-size(body-l);
     margin-top: spacing(x0.5);
+    &--large {
+        @include font-size(subheading-s);
+    }
 }
 
 .c-mediaElement-imgWrapper {
