@@ -48,4 +48,28 @@ describe('Footer', () => {
         // Assert
         expect(wrapper.attributes('data-theme')).toBe('je');
     });
+
+    it('should not render country selector if `showCountrySelector` is false', () => {
+        // Arrange & Act
+        const propsData = {
+            locale: 'en-GB',
+            showCountrySelector: false
+        };
+        const wrapper = shallowMount(Footer, { propsData });
+
+        // Assert
+        expect(wrapper.find('[data-test-id="country-selector"]').exists()).toBe(false);
+    });
+
+    it('should render country selector if `showCountrySelector` is true', () => {
+        // Arrange & Act
+        const propsData = {
+            locale: 'en-GB',
+            showCountrySelector: true
+        };
+        const wrapper = shallowMount(Footer, { propsData });
+
+        // Assert
+        expect(wrapper.find('[data-test-id="country-selector"]').exists()).toBe(true);
+    });
 });
