@@ -137,6 +137,7 @@ export default {
             'address',
             'errors',
             'formattedFullAddress',
+            'isBelowMid',
             'isValid',
             'isInputFocus',
             'isDirty',
@@ -238,7 +239,7 @@ export default {
                     this.setSuggestions(this.service.search(value));
                 }
 
-                if (this.isFullAddressSearchEnabled) {
+                if (this.isFullAddressSearchEnabled && !this.isBelowMid) {
                     this.getMatchedAreaAddressResults({
                         address: this.addressValue
                     });
@@ -262,6 +263,12 @@ export default {
 
         this.reinitialiseConfigSettings();
         this.initialiseFullAddressSearch(this.config.isFullAddressSearchEnabled);
+        this.setIsBelowMid(document.body.clientWidth);
+        window.addEventListener('resize', this.onResize);
+    },
+
+    destroyed () {
+        window.removeEventListener('resize', this.onResize);
     },
 
     beforeCreate () {
@@ -281,6 +288,7 @@ export default {
             'setIsValid',
             'setErrors',
             'setIsDirty',
+            'setIsBelowMid',
             'setStreetNumberRequired',
             'setGeoLocationAvailability',
             'setFullAddressSearchConfigs',
@@ -454,7 +462,17 @@ export default {
                     this.setAutoCompleteAvailability(true);
                 }
             }
-        }
+        },
+
+        /**
+         * Update state `isBelowMid` when the browser resizes, so
+         * we can keep track of when we should trigger the
+         * `FormFullAddressSearchModalOverlay.vue`.
+         *
+         */
+        onResize: debounce(function resize () {
+            this.setIsBelowMid(document.body.clientWidth);
+        }, 100)
     }
 };
 </script>
