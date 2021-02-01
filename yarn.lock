@@ -1959,6 +1959,11 @@
   dependencies:
     window-or-global "^1.0.1"
 
+"@justeat/f-mega-modal@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-0.3.0.tgz#58a88476ee204264988640b3cd47ac5d295bde4a"
+  integrity sha512-Cr6CDlrZAHoM3ZUJ2sOMLYAVYz+cka5R6THi24va3mhI8kgOSA4ZVzvx607QskTyasIX4xNfrju0HKity1Lq9w==
+
 "@justeat/f-services@0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-0.13.0.tgz#b0fc67948e94800ba176addb9d92cce444d28c8e"

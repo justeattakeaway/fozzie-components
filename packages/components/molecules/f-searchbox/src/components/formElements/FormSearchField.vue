@@ -24,7 +24,7 @@
                     [$style['c-search-input']]: true,
                     [$style['is-notEmpty']]: address
                 }"
-                @input="$emit('input', $event.target.value)"
+                @input="onUpdateAddress($event)"
                 @focus="toggleEnterLeaveInput(true)"
                 @blur="toggleEnterLeaveInput(false)"
                 @keydown.up="setKeyboardSuggestion(-1)"
@@ -42,19 +42,27 @@
         <form-search-inner-field-wrapper
             :copy="copy"
             :service="service" />
+
+        <form-full-address-search-overlay
+            v-if="isFullAddressSearchEnabled"
+            :copy="copy"
+            :should-display-modal-overlay="shouldShowSuggestionsModal"
+            @on-full-address-modal-closed="onCloseModal" />
     </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
 import FormSearchInnerFieldWrapper from './FormSearchInnerFieldWrapper.vue';
+import FormFullAddressSearchOverlay from './FormFullAddressSearchModalOverlay.vue';
 import { ADDRESS_SEARCH_FOCUS } from '../../event-types';
 
 const ALLOWED_SELECTION_TIME = 500;
 
 export default {
     components: {
-        FormSearchInnerFieldWrapper
+        FormSearchInnerFieldWrapper,
+        FormFullAddressSearchOverlay
     },
 
     directives: {
@@ -96,16 +104,24 @@ export default {
         }
     },
 
+    data () {
+        return {
+            isFullAddressModalClosed: false
+        };
+    },
+
     computed: {
         ...mapState('searchbox', [
             'address',
+            'isBelowMid',
             'isStreetNumberRequired',
             'isGeoLocationAvailable',
             'isAutocompleteEnabled',
             'isFullAddressSearchEnabled',
             'isLoadingResults',
             'shouldInputFieldHaveFocus',
-            'shouldDisplaySuggestionsDropdown'
+            'shouldDisplaySuggestionsDropdown',
+            'shouldShowSuggestionsModal'
         ]),
 
         getAddressValue () {
@@ -138,11 +154,13 @@ export default {
 
     methods: {
         ...mapActions('searchbox', [
+            'clearSuggestions',
             'setAddress',
             'setInputFocus',
             'setInputTimeoutValue',
             'setFocusOnInput',
-            'setKeyboardSuggestion'
+            'setKeyboardSuggestion',
+            'setShouldShowSuggestionModel'
         ]),
 
         /**
@@ -155,6 +173,10 @@ export default {
          * @param {Boolean} value
          */
         toggleEnterLeaveInput (value) {
+            if (this.isBelowMid) {
+                this.handleFullAddressModal(value);
+            }
+
             if (value) {
                 this.setInputFocus(value);
                 this.$emit(ADDRESS_SEARCH_FOCUS);
@@ -177,6 +199,58 @@ export default {
             return this.customAttributeOverride.isNumeric
                 ? 'number'
                 : 'search';
+        },
+
+        /**
+         * Handles closing the `FormFullAddressSearchModalOverlay` modal.
+         *
+         * @param {Boolean}
+         * */
+        onCloseModal (value) {
+            this.clearSuggestions([]);
+            this.isFullAddressModalClosed = true;
+            this.setShouldShowSuggestionModel(value);
+        },
+
+        /**
+         * Handles opening the `FormFullAddressSearchModalOverlay` modal.
+         *
+         * @param {Boolean}
+         * */
+        onOpenModal (value) {
+            this.isFullAddressModalClosed = false;
+            this.setShouldShowSuggestionModel(value);
+        },
+
+        /**
+         * 1. Emit the input value up to the parent component so v-model can use it.
+         * 2. Open `FormFullAddressSearchModalOverlay` component on small screens & when
+         * Loqate is turned on.
+         *
+         * @param {event}
+         * */
+        onUpdateAddress ($event) {
+            this.$emit('input', $event.target.value);
+
+            if (this.isBelowMid && this.isFullAddressSearchEnabled) {
+                this.onOpenModal(true);
+            }
+        },
+
+        /**
+         * Toggles showing f-mega-modal on smaller screens. We use
+         * this modal to display search results for smaller screens only.
+         *
+         * @param value
+         */
+        handleFullAddressModal (value) {
+            if (value
+                    && !this.isFullAddressModalClosed
+                    && this.isFullAddressSearchEnabled) {
+                this.setShouldShowSuggestionModel(true);
+            } else {
+                this.isFullAddressModalClosed = false;
+            }
         }
     }
 };
