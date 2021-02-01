@@ -36,7 +36,7 @@ packageFolders.forEach(folder => {
 const filteredPackages = packageNames.filter(package => !excludedPackages.includes(package));
 
 const files = filteredPackages.map(package => ({
-    path: `${package}/dist/*+(.min|.min.umd|es.js).js`,
+    path: `${package}/dist/*+(.min|.min.umd).js`,
     maxSize: '100kB'
 }));
 
