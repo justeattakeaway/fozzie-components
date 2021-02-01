@@ -8,7 +8,7 @@
     "test-utils",
     "src/services"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-registration",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-registration",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],

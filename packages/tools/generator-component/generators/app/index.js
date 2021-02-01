@@ -1,80 +1,112 @@
-const rename = require('gulp-rename');
 const Generator = require('yeoman-generator');
-const utils = require('./utils.js');
+const chalk = require('chalk');
+const rename = require('gulp-rename');
+const updateNotifier = require('update-notifier');
+
+const prompts = require('./prompts');
+const services = require('./services');
+const pkg = require('../../package.json');
+
 
 module.exports = class extends Generator {
+    async initializing () {
+        const generatorWelcome = chalk`
+{yellow  ____  __  ____  ____  __  ____ }
+{yellow (  __)/  \\(__  )(__  )(  )(  __)}
+{yellow  ) _)(  O )/ _/  / _/  )(  ) _) }
+{yellow (__)  \\__/(____)(____)(__)(____)}
+
+{white.bold A Yeoman generator for Fozzie Components}
+Yeoman Generator version: {white v${pkg.version}}
+{yellow.bold Fozzie} is open-source & maintained by the {rgb(243, 109, 0) Just Eat Takeaway} Team: {yellow https://github.com/justeat}.
+`;
+
+        // Have Yeoman greet the user.
+        this.log(generatorWelcome);
+
+        // Checks for available update and displays prompt if needed
+        updateNotifier({ pkg }).notify();
+    }
+
     async prompting () {
-        this.answers = await this.prompt([
-            {
-                message: "What's your new component name (without the 'f-' prefix)? e.g. 'user-message'",
-                name: 'name',
-                type: 'input'
-            },
-            {
-                message: 'How would you describe your new component?',
-                name: 'description',
-                type: 'input'
-            },
-            {
-                message: 'Does the component require browser-based Component Tests?',
-                name: 'needsComponentTests',
-                type: 'confirm',
-                default: false
-            },
-            {
-                message: 'Does the component interact with any API\'s?',
-                name: 'needsTestingApiMocks',
-                type: 'confirm',
-                default: false
-            }
-        ]);
+        this.answers = await this.prompt(prompts);
+    }
+
+    async configuring () {
+        // setup some base config which will be changed based on certain answers
+        this.config = {
+            isComponent: (this.answers.componentType === 'uiComponent'),
+            needsComponentTests: (this.answers.componentType === 'service' ? false : this.answers.needsComponentTests),
+            needsComponentTranslations: (this.answers.componentType === 'service' ? false : this.answers.needsComponentTranslations),
+            needsTestingApiMocks: (this.answers.componentType === 'service' ? false : this.answers.needsTestingApiMocks)
+        };
+
+        this.nameTransformations = services.transformName(this.answers.name);
+        this.currentDate = services.setDate();
+        this.componentDistFolder = services.setDestinationFolder(this.answers);
+
+        if (this.answers.componentType === 'uiComponent') {
+            const { componentCategory } = this.answers;
+            const categoryCapitalised = componentCategory.charAt(0).toUpperCase() + componentCategory.slice(1);
+            this.storybook = {
+                path: `story/components-${componentCategory}s--${this.nameTransformations.default}-component`,
+                componentCategory: `${categoryCapitalised}s`
+            };
+        }
+
+        this.ignorePatterns = [
+            ...(this.config.needsComponentTests ? [] : ['**/*/test/specs/component']),
+            ...(this.config.needsComponentTranslations ? [] : ['**/*/src/tenants']),
+            ...(this.config.needsTestingApiMocks ? [] : ['**/*/src/services']),
+            ...(this.config.isComponent ? [] : [
+                '**/*/vue.config.js',
+                '**/*/src/assets',
+                '**/*/src/components',
+                '**/*/stories',
+                '**/*/test',
+                '**/*/test-utils'
+            ])
+        ];
     }
 
     async writing () {
-        const name = this.answers.name.toLowerCase();
-
-        const nameTransformations = {
-            class: utils.getComponentClassName(name), // (c-)header or (c-)userMessage,
-            component: utils.getComponentName(name), // e.g VueHeader or UserMessage,
-            default: name, // e.g. header or user-message
-            filename: utils.getComponentFilename(name), // Header(.vue) or UserMessage(.vue)
-            readme: utils.getReadmeName(name), // Header or User Message
-            template: utils.getComponentTemplateName(name) // vue-header or user-message,
-        };
-
+        // Registers a tranform stream which modifies the template files as they are written to the destination directory
         this.registerTransformStream(rename(path => {
             path.basename = path.basename
-                                .replace(/(Skeleton)/g, nameTransformations.filename)
-                                .replace(/(f-skeleton)/g, `f-${nameTransformations.class}`)
-                                .replace(/__/g, ''); // We don't want to have file names such as .test.js or .stories.js, otherwise Jest or Storybook will pick them up from the templates folder.
+                // Modify any files containing the keyword `Skeleton` to be replaced with the name of the component
+                .replace(/(Skeleton)/g, this.nameTransformations.filename)
+                // Modify any files containing the keyword `f-skeleton` to be replaced with the name of the component
+                .replace(/(f-skeleton)/g, `f-${this.nameTransformations.class}`)
+                // Certain template files have been prefixed with "__" to stop them being indexed by our tooling (such as Jest and Storybook files)
+                // So we need to remove these prefixes before writing the files to our dest directory
+                .replace(/__/g, '');
         }));
-        let ignoreTestPattern = this.answers.needsComponentTests ? [] : ['**/*/test/specs/component'];
-        const ignoreApiMockPattern = this.answers.needsTestingApiMocks ? [] : ['**/*/src/services'];
-    
-        ignoreTestPattern = ignoreTestPattern.concat(ignoreApiMockPattern);
 
-        const date = new Date();
-        const month = date.toLocaleString('en-GB', { month: 'long' });
-        const day = date.toLocaleString('en-GB', { day: 'numeric' });
-        const year = date.toLocaleString('en-GB', { year: 'numeric' });
+        this.componentPath = `${this.componentDistFolder}f-${this.nameTransformations.default}/`;
 
         this.fs.copyTpl(
             this.templatePath('**/*'),
-            this.destinationPath(`f-${nameTransformations.default}/`),
+            this.destinationPath(this.componentPath),
             {
+                name: this.nameTransformations,
+                changelogDate: `${this.currentDate.month} ${this.currentDate.day}, ${this.currentDate.year}`,
+                config: this.config,
                 description: this.answers.description,
-                name: nameTransformations,
-                needsComponentTests: this.answers.needsComponentTests,
-                needsTestingApiMocks: this.answers.needsTestingApiMocks,
-                changelogDate: `${month} ${day}, ${year}`
+                componentCategory: this.componentCategory,
+                storybook: this.storybook,
+                componentFolder: this.componentDistFolder
             },
             null,
             {
                 globOptions: {
                     dot: true,
-                    ignore: ignoreTestPattern
+                    ignore: this.ignorePatterns
                 }
             }
         );
+    }
+
+    async end () {
+        this.log(chalk`{yellow.bold Your component has been created at} {white ${this.componentPath}}`);
     }
 };

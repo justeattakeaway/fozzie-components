@@ -28,8 +28,10 @@ describe('UserMessage component', () => {
         // Arrange
         axiosMock.onGet('/user-message.json').reply(200, {
             [_locale]: {
-                userMessageText: 'test message',
-                userMessageEnabled: true
+                weatherWarning: {
+                    messageText: 'test message',
+                    isEnabled: true
+                }
             }
         });
 
@@ -53,8 +55,10 @@ describe('UserMessage component', () => {
         spy = jest.spyOn(userMessageService, 'getUserMessage');
         axiosMock.onGet('/user-message.json').reply(200, {
             [_locale]: {
-                userMessageText: 'test message',
-                userMessageEnabled: true
+                weatherWarning: {
+                    messageText: 'test message',
+                    isEnabled: true
+                }
             }
         });
 
@@ -71,8 +75,10 @@ describe('should be displayed when', () => {
         // Arrange
         axiosMock.onGet('/user-message.json').reply(200, {
             [_locale]: {
-                userMessageText: 'test message',
-                userMessageEnabled: true
+                weatherWarning: {
+                    messageText: 'test message',
+                    isEnabled: true
+                }
             }
         });
 
@@ -91,8 +97,10 @@ describe('should contain message when', () => {
         // Arrange
         axiosMock.onGet('/user-message.json').reply(200, {
             [_locale]: {
-                userMessageText: 'test message',
-                userMessageEnabled: true
+                weatherWarning: {
+                    messageText: 'test message',
+                    isEnabled: true
+                }
             }
         });
 
@@ -110,8 +118,10 @@ describe('should not contain message when', () => {
     it('user message is present but disabled', async () => {
         axiosMock.onGet('/user-message.json').reply(200, {
             [_locale]: {
-                userMessageText: 'test message',
-                userMessageEnabled: false
+                weatherWarning: {
+                    messageText: 'test message',
+                    isEnabled: false
+                }
             }
         });
 
@@ -127,8 +137,10 @@ describe('should not contain message when', () => {
     it('user message is enabled but empty', async () => {
         axiosMock.onGet('/user-message.json').reply(200, {
             [_locale]: {
-                userMessageText: '',
-                userMessageEnabled: true
+                weatherWarning: {
+                    messageText: '',
+                    isEnabled: true
+                }
             }
         });
 
@@ -144,8 +156,10 @@ describe('should not contain message when', () => {
     it('user message is enabled and empty', async () => {
         axiosMock.onGet('/user-message.json').reply(200, {
             [_locale]: {
-                userMessageText: '',
-                userMessageEnabled: true
+                weatherWarning: {
+                    messageText: '',
+                    isEnabled: true
+                }
             }
         });
 
@@ -163,8 +177,10 @@ describe('should not be displayed when', () => {
     it('user message is present but disabled', async () => {
         axiosMock.onGet('/user-message.json').reply(200, {
             [_locale]: {
-                userMessageText: 'test message',
-                userMessageEnabled: false
+                weatherWarning: {
+                    messageText: 'test message',
+                    isEnabled: false
+                }
             }
         });
 
@@ -180,8 +196,10 @@ describe('should not be displayed when', () => {
     it('user message is enabled but empty', async () => {
         axiosMock.onGet('/user-message.json').reply(200, {
             [_locale]: {
-                userMessageText: '',
-                userMessageEnabled: true
+                weatherWarning: {
+                    messageText: '',
+                    isEnabled: true
+                }
             }
         });
 
@@ -197,8 +215,10 @@ describe('should not be displayed when', () => {
     it('user message is enabled and empty', async () => {
         axiosMock.onGet('/user-message.json').reply(200, {
             [_locale]: {
-                userMessageText: 'test message',
-                userMessageEnabled: false
+                weatherWarning: {
+                    messageText: 'test message',
+                    isEnabled: false
+                }
             }
         });
 

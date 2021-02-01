@@ -44,8 +44,11 @@
         </div>
 
         <div
-            class="c-footer-container c-footer-row c-footer-row--combined c-footer-row--notEqualTopAndBottomPad c-footer-row--noPadBelowWide">
+            :class="['c-footer-container c-footer-row c-footer-row--combined c-footer-row--notEqualTopAndBottomPad c-footer-row--noPadBelowWide',
+                     { 'c-footer-row--rightAlignedOnDesktopView': !showCountrySelector }]">
             <country-selector
+                v-if="showCountrySelector"
+                data-test-id="country-selector"
                 :current-country-name="copy.currentCountryName"
                 :current-country-key="copy.currentCountryKey"
                 :countries="countryList"
@@ -88,6 +91,10 @@ export default {
         },
 
         showCourierLinks: {
+            type: Boolean,
+            default: true
+        },
+        showCountrySelector: {
             type: Boolean,
             default: true
         }
@@ -205,6 +212,14 @@ $footer-heading-font-size: 'heading-s';
 
 .c-footer-row--noBottomPad {
     padding-bottom: 0;
+}
+
+.c-footer-row--rightAlignedOnDesktopView {
+    justify-content: flex-end;
+
+    @include media('<wide') {
+        justify-content: flex-start;
+    }
 }
 
 .c-footer-list {

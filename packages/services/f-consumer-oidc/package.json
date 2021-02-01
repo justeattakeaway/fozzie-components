@@ -1,15 +1,34 @@
 {
   "name": "@justeat/f-consumer-oidc",
-  "version": "1.0.0",
   "description": "Authentication helper to communicate with open apis",
+  "version": "1.0.0",
   "main": "dist/f-consumer-oidc.js",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-consumer-oidc",
+  "contributors": [
+    "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:justeat/fozzie-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/justeat/fozzie-components/issues"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "keywords": [
+    "fozzie"
+  ],
   "scripts": {
     "prepublishOnly": "yarn build",
     "build": "webpack",
     "test": "jest"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@babel/core": "7.9.0",
     "@babel/preset-env": "7.9.0",
@@ -22,11 +41,5 @@
   },
   "peerDependencies": {
     "js-cookie": ">=2.2.1"
-  },
-  "jest": {
-    "reporters": [
-      "default",
-      "jest-teamcity"
-    ]
   }
 }

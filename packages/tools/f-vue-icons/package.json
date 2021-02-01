@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "main": "dist/f-vue-icons.cjs.js",
   "cdn": "dist/f-vue-icons.min.js",
   "unpkg": "dist/f-vue-icons.min.js",
@@ -10,7 +10,7 @@
     "icons"
   ],
   "sideEffects": false,
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-vue-icons",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/tools/f-vue-icons",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -47,7 +47,7 @@
     "babel-helper-vue-jsx-merge-props": "2.0.3"
   },
   "devDependencies": {
-    "@justeat/f-icons": "3.3.0",
+    "@justeat/f-icons": "3.3.1",
     "@vue/cli-plugin-babel": "4.5.8",
     "@vue/cli-plugin-eslint": "4.5.8",
     "@vue/cli-plugin-unit-jest": "4.5.8",
