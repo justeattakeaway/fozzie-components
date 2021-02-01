@@ -6,7 +6,7 @@
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-card",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/atoms/f-card",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],

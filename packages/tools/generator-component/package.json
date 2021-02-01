@@ -5,7 +5,7 @@
   "files": [
     "generators"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/generator-component",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/tools/generator-component",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],

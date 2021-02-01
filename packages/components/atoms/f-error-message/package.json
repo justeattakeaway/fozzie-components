@@ -6,7 +6,7 @@
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-error-message",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/atoms/f-error-message",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -29,7 +29,7 @@
     "build": "vue-cli-service build --target lib --name f-error-message ./src/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
-    "lint:style": "vue-cli-service lint:style", 
+    "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
     "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
   },
