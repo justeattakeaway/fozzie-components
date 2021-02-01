@@ -7,10 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 Latest (add to next release)
 ------------------------------
 
-*January 27, 2021*
+*February 1, 2021*
 
 ### Changed
-- Updated feature tests and component object
+- Updated feature tests
+- Changed component object to class that imports `page.object`
 
 ### Added
 - `selector.js` file for referencing attributes
