@@ -1,8 +1,8 @@
 {
   "name": "@justeat/f-services",
   "description": "Fozzie Services - Shared Services for Components and projects",
-  "version": "1.7.0",
-  "main": "dist/f-services.umd.js",
+  "version": "1.7.1",
+  "main": "dist/f-services.umd.min.js",
   "module": "dist/f-services.esm.js",
   "source": "src/index.js",
   "files": [

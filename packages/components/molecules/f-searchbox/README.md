@@ -250,7 +250,7 @@ the store module using `this.$store.hasModule('searchbox')`, `hasModule` was add
 </head>
 <body>
     <div data-app>
-        <vue-Searchbox locale="en-GB" />
+        <vue-searchbox locale="en-GB" />
     </div>
     <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
     <script src="https://unpkg.com/vuex@3.2.0/dist/vuex.js"></script>

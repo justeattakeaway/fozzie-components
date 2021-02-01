@@ -80,6 +80,7 @@ export default {
     computed: {
         ...mapState('searchbox', [
             'address',
+            'isBelowMid',
             'isInputFocus',
             'inputTimeoutValue',
             'fullAddressDetails',
@@ -131,7 +132,10 @@ export default {
             'setContinueWithDetails',
             'setSelectedFullAddressDetails',
             'shouldShowSuggestionsDropdown',
-            'setFocusOnInput'
+            'setFocusOnInput',
+            'setShouldHaveInputElevation',
+            'setShouldShowSuggestionModel',
+            'clearSuggestions'
         ]),
 
         /**
@@ -194,7 +198,7 @@ export default {
 
             if (isAddressType) {
                 await this.getFinalAddressSelectionDetails(selectedAddress.id);
-                this.shouldShowSuggestionsDropdown(false);
+                this.resetSearch();
             } else {
                 this.getMatchedAreaAddressResults({
                     address: this.address,
@@ -225,7 +229,49 @@ export default {
                     street: selectedAddress.description
                 });
             }
+        },
+
+        /**
+         * After results appear on small screens and the user has scrolled past the
+         * first item in that results list we want to set a drop shadow (elevation) so there's
+         * a clear separation between the results and the input search field area, making it more
+         * obvious that they have scrolled past earlier results. (Small Screens only)
+         *
+         * Method:
+         *
+         * Emits a boolean up to the parent element so we can toggle the style on and off.
+         *
+         */
+        setInputElevation () {
+            if ('IntersectionObserver' in window
+                    && this.$refs.suggestion0
+                    && this.$refs.suggestion0[0]) {
+                const observer = new IntersectionObserver(entries => {
+                    this.setShouldHaveInputElevation(!entries[0].intersectionRatio > 0);
+                });
+
+                // Observe the first item in the results list only.
+                observer.observe(this.$refs.suggestion0[0]);
+            }
+        },
+
+        /**
+         * Hide dropdown & clear suggestions. We also want to remove the modal on small
+         * screens when the final address is selected.
+         *
+         */
+        resetSearch () {
+            this.shouldShowSuggestionsDropdown(false);
+            this.clearSuggestions([]);
+
+            if (this.isBelowMid) {
+                this.setShouldShowSuggestionModel(false);
+            }
         }
+    },
+
+    mounted () {
+        this.setInputElevation();
     }
 };
 </script>
@@ -264,18 +310,19 @@ export default {
     background: $white;
     border-bottom-left-radius: $shell-border-radius;
     border-bottom-right-radius: $shell-border-radius;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: #{$shell-top-offset}px;
     box-sizing: border-box;
     overflow-y: scroll;
     z-index: 1000;
+    margin-top: 5px;
     height: calc(100vh - #{$shell-top-offset}px);
 
-    @include media('>=784px') {
+    @include media('>=mid') {
+        position: absolute;
+        left: 0;
+        right: 0;
         box-shadow: 0 17px 40px rgba(0, 0, 0, 0.16);
         top: 62px;
+        margin-top: 0;
         max-height: 400px;
         height: auto;
     }
