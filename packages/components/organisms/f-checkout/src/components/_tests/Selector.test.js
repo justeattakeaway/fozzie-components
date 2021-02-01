@@ -155,7 +155,7 @@ describe('Selector', () => {
             afterEach(() => {
                 jest.clearAllMocks();
             });
-            it('should call `selectionChanged` with the first fulfilment time when there are fulfilment times', async () => {
+            it('should call `selectionChanged` with the first fulfilment time when there are fulfilment times', () => {
                 // Arrange
                 const expected = '2020-01-01T01:00:00.000Z';
                 const selectionChangedSpy = jest.spyOn(Selector.methods, 'selectionChanged');
@@ -168,7 +168,12 @@ describe('Selector', () => {
                 });
 
                 // Act
-                wrapper.vm.$options.watch.fulfilmentTimes.call(wrapper.vm);
+                wrapper.vm.$options.watch.fulfilmentTimes.call(wrapper.vm, [
+                    {
+                        text: 'Wednesday 01:00',
+                        value: '2020-01-01T01:00:00.000Z'
+                    }
+                ]);
 
                 // Assert
                 expect(selectionChangedSpy).toHaveBeenCalledWith(expected);
@@ -193,7 +198,7 @@ describe('Selector', () => {
                 });
 
                 // Act
-                wrapper.vm.$options.watch.fulfilmentTimes.call(wrapper.vm);
+                wrapper.vm.$options.watch.fulfilmentTimes.call(wrapper.vm, []);
 
                 // Assert
                 expect(selectionChangedSpy).not.toHaveBeenCalled();

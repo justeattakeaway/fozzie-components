@@ -53,12 +53,14 @@ const $v = {
 
 describe('Checkout', () => {
     allure.feature('Checkout');
+    const checkoutId = 'abc123def456';
     const checkoutUrl = 'http://localhost/checkout';
     const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
     const loginUrl = 'http://localhost/login';
     const createGuestUrl = 'http://localhost/createguestuser';
     const getBasketUrl = 'http://localhost/getbasket';
     const propsData = {
+        checkoutId,
         checkoutUrl,
         loginUrl,
         checkoutAvailableFulfilmentUrl,

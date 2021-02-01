@@ -59,9 +59,9 @@ export default {
     },
 
     watch: {
-        'fulfilmentTimes' () {
-            if (this.fulfilmentTimes.length > 0) {
-                this.selectionChanged(this.fulfilmentTimes[0].value);
+        fulfilmentTimes (newFulfilmentTimes) {
+            if (newFulfilmentTimes.length) {
+                this.selectionChanged(newFulfilmentTimes[0].value);
             }
         }
     },
@@ -78,6 +78,8 @@ export default {
         **/
         selectionChanged (selectedFulfilmentTime) {
             this.selectedAvailableFulfilmentTime = selectedFulfilmentTime;
+
+            // TODO - Update to use different from/to times when the API supports it
             this.updateFulfilmentTime({
                 from: selectedFulfilmentTime,
                 to: selectedFulfilmentTime

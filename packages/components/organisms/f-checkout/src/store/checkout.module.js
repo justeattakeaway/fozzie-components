@@ -1,5 +1,15 @@
 import axios from 'axios';
 
+import {
+    UPDATE_AUTH,
+    UPDATE_AVAILABLE_FULFILMENT_TIMES,
+    UPDATE_BASKET_DETAILS,
+    UPDATE_CUSTOMER_DETAILS,
+    UPDATE_FULFILMENT_ADDRESS,
+    UPDATE_FULFILMENT_TIME,
+    UPDATE_STATE
+} from './mutation-types';
+
 export default {
     namespaced: true,
 
@@ -57,7 +67,7 @@ export default {
 
             const { data } = await axios.get(url, config);
 
-            commit('UPDATE_STATE', data);
+            commit(UPDATE_STATE, data);
         },
 
         /**
@@ -130,7 +140,7 @@ export default {
 
             const { data } = await axios.get(url, config);
 
-            commit('UPDATE_AVAILABLE_FULFILMENT_TIMES', data);
+            commit(UPDATE_AVAILABLE_FULFILMENT_TIMES, data);
         },
 
         /**
@@ -160,28 +170,28 @@ export default {
                 serviceType: data.ServiceType.toLowerCase()
             };
 
-            commit('UPDATE_BASKET_DETAILS', basketDetails);
+            commit(UPDATE_BASKET_DETAILS, basketDetails);
         },
 
         setAuthToken: ({ commit }, authToken) => {
-            commit('UPDATE_AUTH', authToken);
+            commit(UPDATE_AUTH, authToken);
         },
 
         updateAddressDetails ({ commit }, payload) {
-            commit('UPDATE_FULFILMENT_ADDRESS', payload);
+            commit(UPDATE_FULFILMENT_ADDRESS, payload);
         },
 
         updateCustomerDetails ({ commit }, payload) {
-            commit('UPDATE_CUSTOMER_DETAILS', payload);
+            commit(UPDATE_CUSTOMER_DETAILS, payload);
         },
 
         updateFulfilmentTime ({ commit }, payload) {
-            commit('UPDATE_FULFILMENT_TIME', payload);
+            commit(UPDATE_FULFILMENT_TIME, payload);
         }
     },
 
     mutations: {
-        UPDATE_STATE: (state, {
+        [UPDATE_STATE]: (state, {
             id,
             serviceType,
             customer,
@@ -218,7 +228,12 @@ export default {
             state.messages = messages;
         },
 
-        UPDATE_AVAILABLE_FULFILMENT_TIMES: (state, {
+        [UPDATE_AUTH]: (state, authToken) => {
+            state.authToken = authToken;
+            state.isLoggedIn = !!authToken;
+        },
+
+        [UPDATE_AVAILABLE_FULFILMENT_TIMES]: (state, {
             times,
             asapAvailable
         }) => {
@@ -226,30 +241,25 @@ export default {
             state.availableFulfilment.isAsapAvailable = asapAvailable;
         },
 
-        UPDATE_AUTH: (state, authToken) => {
-            state.authToken = authToken;
-            state.isLoggedIn = !!authToken;
+        [UPDATE_BASKET_DETAILS]: (state, { serviceType }) => {
+            state.serviceType = serviceType;
         },
 
-        UPDATE_FULFILMENT_ADDRESS: (state, address) => {
-            state.address = {
-                ...state.address,
-                ...address
-            };
-        },
-
-        UPDATE_CUSTOMER_DETAILS: (state, customer) => {
+        [UPDATE_CUSTOMER_DETAILS]: (state, customer) => {
             state.customer = {
                 ...state.customer,
                 ...customer
             };
         },
 
-        UPDATE_BASKET_DETAILS: (state, { serviceType }) => {
-            state.serviceType = serviceType;
+        [UPDATE_FULFILMENT_ADDRESS]: (state, address) => {
+            state.address = {
+                ...state.address,
+                ...address
+            };
         },
 
-        UPDATE_FULFILMENT_TIME: (state, time) => {
+        [UPDATE_FULFILMENT_TIME]: (state, time) => {
             state.time = {
                 ...state.time,
                 ...time

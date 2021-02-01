@@ -31,7 +31,7 @@
                     name="mobile-number"
                     :label-text="$t('labels.mobileNumber')"
                     :has-error="!isMobileNumberValid"
-                    @input="updateCustomerDetails({ ['mobileNumber']: $event })">
+                    @input="updateCustomerDetails({ mobileNumber: $event })">
                     <template #error>
                         <error-message
                             v-if="!isMobileNumberValid"
