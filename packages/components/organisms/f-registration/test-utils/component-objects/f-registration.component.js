@@ -1,5 +1,4 @@
-const Page = require ('../../../../../../pageObject/page.object');
-
+const Page = require ('../../../../../../page.object');
 const {
     REGISTRATION_COMPONENT, 
     CREATE_ACCOUNT_BUTTON, 
