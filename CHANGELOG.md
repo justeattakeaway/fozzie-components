@@ -8,7 +8,8 @@ v3.7.0
 *January 29, 2021*
 
 ### Changes
-- Bundle watch maxSize value to `100kb` & target files `umd.min.js`.
+- Bundle watch maxSize value to `100kb` & target files `umd.min.js, .min, & es.js`.
+
 
 v3.6.0
 ------------------------------
