@@ -215,8 +215,10 @@ $footer-heading-font-size: 'heading-s';
 }
 
 .c-footer-row--rightAlignedOnDesktopView {
-    @include media('>=mid') {
-        justify-content: flex-end;
+    justify-content: flex-end;
+
+    @include media('<wide') {
+        justify-content: flex-start;
     }
 }
 
