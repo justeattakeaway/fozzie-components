@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.7.0
+------------------------------
+*January 29, 2021*
+
+### Changes
+- Bundle watch maxSize value to `100kb` & target files `umd.min.js, .min & .es.js`.
+
 
 v3.7.0
 ------------------------------
