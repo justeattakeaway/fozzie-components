@@ -1959,6 +1959,13 @@
   dependencies:
     window-or-global "^1.0.1"
 
+"@justeat/f-registration@file:packages/components/organisms/f-registration/.yalc/@justeat/f-registration":
+  version "0.46.0"
+  dependencies:
+    "@justeat/f-services" "1.4.0"
+    axios "0.21.1"
+    vuelidate "0.7.6"
+
 "@justeat/f-services@0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-0.13.0.tgz#b0fc67948e94800ba176addb9d92cce444d28c8e"

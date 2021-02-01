@@ -1,37 +1,35 @@
-import Page from "../../../../../../test/utils/page.object";
+const Page = require ('../../../../../../pageObject/page.object');
 
-import {
+const {
     REGISTRATION_COMPONENT, 
-    FIRST_NAME_INPUT, 
-    LAST_NAME_INPUT, 
-    EMAIL_INPUT, 
-    PASSWORD_INPUT, 
     CREATE_ACCOUNT_BUTTON, 
     TERMS_AND_CONDITIONS_LINK, 
     PRIVACY_POLICY_LINK, 
-    COOKIES_POLICY_LINK, 
-    FIRST_NAME_EMPTY_ERROR, 
-    FIRST_NAME_MAX_LENGTH_ERROR, 
-    FIRST_NAME_INVALID_ERROR, 
-    LAST_NAME_EMPTY_ERROR, 
-    LAST_NAME_MAX_LENGTH_ERROR, 
+    COOKIES_POLICY_LINK,
+    FIRST_NAME_INPUT,
+    FIRST_NAME_EMPTY_ERROR,
+    FIRST_NAME_MAX_LENGTH_ERROR,
+    FIRST_NAME_INVALID_ERROR,
+    LAST_NAME_INPUT,
+    LAST_NAME_EMPTY_ERROR,
+    LAST_NAME_MAX_LENGTH_ERROR,
     LAST_NAME_INVALID_ERROR,
-    EMAIL_EMPTY_ERROR, 
-    EMAIL_EXISTS_ERROR, 
-    EMAIL_INVALID_ERROR, 
+    EMAIL_INPUT,
+    EMAIL_EMPTY_ERROR,
+    EMAIL_INVALID_ERROR,
+    PASSWORD_INPUT,
     PASSWORD_EMPTY_ERROR, 
-    REQUEST_ERROR
+    ALL_ERROR_FIELDS
+} = require('./f-registration.selectors');
 
-} from './f-registration.selectors';
-
-export default class Registration extends Page {
+class Registration extends Page {
 
     get component () { return $(REGISTRATION_COMPONENT) }
     get createAccountButton () { return $(CREATE_ACCOUNT_BUTTON) }
     get termsAndConditionsLink () { return $(TERMS_AND_CONDITIONS_LINK) }
     get privacyPolicyLink () { return $(PRIVACY_POLICY_LINK) }
     get cookiesPolicyLink () { return $(COOKIES_POLICY_LINK) }
-    get requestError () { return $(REQUEST_ERROR) }
+    get errors () { return $$(ALL_ERROR_FIELDS)}
   
     fields = {
         firstName: {
@@ -58,11 +56,11 @@ export default class Registration extends Page {
     };
 
     open() {
-        super.openOrganism('registration-component')
+        super.openOrganism('registration-component');
     }
 
     waitForComponent(){
-        super.waitForComponent(this.component)
+        super.waitForComponent(this.component);
     };
 
     isComponentDisplayed () {
@@ -90,6 +88,10 @@ export default class Registration extends Page {
         this.createAccountButton.click();
     };
 
+    countOfErrorsDisplayed(){
+        return this.errors.length;
+    }
+
     isEmptyErrorDisplayed(fieldName){
         return this.fields[fieldName].emptyError.isDisplayedInViewport();
     };
@@ -102,9 +104,9 @@ export default class Registration extends Page {
         return this.fields[fieldName].invalidError.isDisplayedInViewport();
     };
     
-    hasFormBeenSubmitted(){
-        return this.requestError.isDisplayedInViewport();
-    }
+    displayRequestErrorText(){
+        return this.errors[0].getText();
+    };
 
     termsAndConditionsLinkCanBeClicked(){
         return this.termsAndConditionsLink.isClickable();
@@ -118,3 +120,5 @@ export default class Registration extends Page {
         return this.cookiesPolicyLink.isClickable();
     };
 };
+
+module.exports = Registration;

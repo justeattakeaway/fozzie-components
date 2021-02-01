@@ -1,6 +1,6 @@
-import Registration from '../../../test-utils/component-objects/f-registration.component';
+const Registration = require ('../../../test-utils/component-objects/f-registration.component');
 const registration = new Registration();
-import forEach from 'mocha-each';
+const forEach = require('mocha-each');
 
 describe('f-registration component tests', () => {
     beforeEach(() => {
@@ -32,6 +32,7 @@ describe('f-registration component tests', () => {
         registration.submitForm(userInfo);
         
         // Assert
+        expect(registration.countOfErrorsDisplayed()).toEqual(4)
         expect(registration.isEmptyErrorDisplayed(field)).toBe(true);
     });
 
@@ -70,7 +71,7 @@ describe('f-registration component tests', () => {
     });
 
     forEach(['firstName', 'lastName', 'email', 'password'])
-    .it('should emit no errors when fields are populated successfully', field => {
+    .it('should only display 405 request error when form is populated successfully', field => {
         // Arrange
         const userInfo = {
             firstName: 'Ashton',
@@ -78,16 +79,18 @@ describe('f-registration component tests', () => {
             email: 'ashton.adamms+jetest@just-eat.com', 
             password: 'llanfairpwllgwyngyllgogerychwyr'
         };
+        const requestError = "Error: Request failed with status code 405"
 
         // Act
         registration.submitForm(userInfo);
         
-        // Assert
-        expect(registration.hasFormBeenSubmitted(field)).toBe(true);
+        // Assert;
+        expect(registration.countOfErrorsDisplayed()).toEqual(1);
+        expect(registration.displayRequestErrorText()).toContain(requestError);
     });
 
 
-    it('should show and be able to click the legal documentation', () => {
+    it('should display and be able to click the legal documentation', () => {
         // Assert
         expect(registration.termsAndConditionsLinkCanBeClicked()).toBe(true);
         expect(registration.privacyPolicyLinkCanBeClicked()).toBe(true);

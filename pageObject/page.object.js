@@ -11,7 +11,7 @@ class Page {
         browser.url(`/iframe.html?id=components-atoms--${path}`)
     }
 
-    openMolecule(path) {
+    openMolecules(path) {
         browser.url(`/iframe.html?id=components-molecules--${path}`)
     }
 
