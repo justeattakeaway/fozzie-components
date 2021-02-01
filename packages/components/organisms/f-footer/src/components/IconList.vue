@@ -3,6 +3,7 @@
         :class="[$style['c-iconList'], {
             [$style['c-iconList--apps']]: isApps,
             [$style['c-iconList--payments']]: isPayments,
+            [$style['c-iconList--rightAligned']]: isPayments,
             [$style['c-iconList--social']]: isSocial
         }]"
         data-test-id="footerBrands-column">
