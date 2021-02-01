@@ -3,10 +3,10 @@
         data-test-id="mediaElement-component"
         :class="[$style['c-mediaElement'], { [$style['c-mediaElement--stack']]: stacked }, { [$style['c-mediaElement--reverse']]: reverse }]">
         <div :class="[$style['c-mediaElement-content'], contentAlignClass]">
-            <h3 :class="[$style['c-mediaElement-title'], { [$style['c-mediaElement-title--large']]: titleLarge }]">
+            <h3 :class="[$style['c-mediaElement-title'], $style['c-mediaElement-text'], textSizeClass]">
                 {{ title }}
             </h3>
-            <p :class="[$style['c-mediaElement-text'], { [$style['c-mediaElement-text--large']]: textLarge }]">
+            <p :class="[$style['c-mediaElement-text'], textSizeClass]">
                 {{ text }}
             </p>
         </div>
@@ -20,12 +20,7 @@
 </template>
 
 <script>
-
-const ALIGN = {
-    LEFT: 'left',
-    RIGHT: 'right',
-    CENTER: 'center'
-};
+import { ALIGN, TEXT_SIZE } from '../config';
 
 export default {
     props: {
@@ -57,13 +52,9 @@ export default {
             type: String,
             default: ALIGN.LEFT
         },
-        titleLarge: {
-            type: Boolean,
-            default: false
-        },
-        textLarge: {
-            type: Boolean,
-            default: false
+        textSize: {
+            type: String,
+            default: 'md'
         }
     },
     data () {
@@ -72,6 +63,10 @@ export default {
         };
     },
     computed: {
+        /**
+         * Returns the class to modify the alignment of the content based on the prop contentAlign
+         * @returns {*}
+         */
         contentAlignClass () {
             switch (this.contentAlign) {
                 case ALIGN.LEFT:
@@ -84,6 +79,10 @@ export default {
                     return this.$style['c-mediaElement-content--left'];
             }
         },
+        /**
+         * Returns the class to modify the alignment of the image based on the prop imageAlign
+         * @returns {*}
+         */
         imageAlignClass () {
             switch (this.imageAlign) {
                 case ALIGN.LEFT:
@@ -94,6 +93,26 @@ export default {
                     return this.$style['c-mediaElement-imgWrapper--center'];
                 default:
                     return this.$style['c-mediaElement-imgWrapper--left'];
+            }
+        },
+        /**
+         * Returns the class to modify the font size of the content based on the prop textSize
+         * @returns {*}
+         */
+        textSizeClass () {
+            switch (this.textSize) {
+                case TEXT_SIZE.SM:
+                    return this.$style['c-mediaElement-text--sm'];
+                case TEXT_SIZE.MD:
+                    return this.$style['c-mediaElement-text--md'];
+                case TEXT_SIZE.LG:
+                    return this.$style['c-mediaElement-text--lg'];
+                case TEXT_SIZE.XL:
+                    return this.$style['c-mediaElement-text--xl'];
+                case TEXT_SIZE.XXL:
+                    return this.$style['c-mediaElement-text--xxl'];
+                default:
+                    return this.$style['c-mediaElement-text--md'];
             }
         }
     }
@@ -131,10 +150,23 @@ export default {
     }
 }
 
-.c-mediaElement-title {
-    @include font-size(heading-m);
-    &--large {
+.c-mediaElement-title.c-mediaElement-text {
+    &--sm {
+        @include font-size(heading-s);
+    }
+    &--md {
+        @include font-size(heading-m);
+    }
+    &--lg {
+        @include font-size(heading-l);
+        margin-bottom: spacing(x0.5);
+    }
+    &--xl {
         @include font-size(heading-xl);
+        margin-bottom: spacing(x0.5);
+    }
+    &--xxl {
+        @include font-size(heading-xxl);
         margin-bottom: spacing(x0.5);
     }
 }
@@ -146,8 +178,23 @@ export default {
 .c-mediaElement-text {
     @include font-size(body-l);
     margin-top: spacing(x0.5);
-    &--large {
+    &--sm {
+        @include font-size(body-s);
+    }
+    &--md {
+        @include font-size(body-l);
+    }
+    &--lg {
         @include font-size(subheading-s);
+        margin-bottom: spacing(x0.5);
+    }
+    &--xl {
+        @include font-size(subheading-s);
+        margin-bottom: spacing(x0.5);
+    }
+    &--xxl {
+        @include font-size(subheading-l);
+        margin-bottom: spacing(x0.5);
     }
 }
 

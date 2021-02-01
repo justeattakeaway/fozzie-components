@@ -26,6 +26,5 @@ MediaElementComponent.args = {
     contentAlign: 'left',
     imageAlign: 'center',
     imageUrl: 'https://via.placeholder.com/250',
-    titleLarge: true,
-    textLarge: true
+    textSize: 'xxl'
 };
