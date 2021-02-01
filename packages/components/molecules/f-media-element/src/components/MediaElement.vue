@@ -3,10 +3,10 @@
         data-test-id="mediaElement-component"
         :class="[$style['c-mediaElement'], { [$style['c-mediaElement--stack']]: stacked }, { [$style['c-mediaElement--reverse']]: reverse }]">
         <div :class="[$style['c-mediaElement-content'], contentAlignClass]">
-            <h3 :class="[$style['c-mediaElement-title'], $style['c-mediaElement-text'], textSizeClass]">
+            <h3 :class="[$style['c-mediaElement-title'], fontSizeClass]">
                 {{ title }}
             </h3>
-            <p :class="[$style['c-mediaElement-text'], textSizeClass]">
+            <p :class="[$style['c-mediaElement-text'], fontSizeClass]">
                 {{ text }}
             </p>
         </div>
@@ -99,20 +99,20 @@ export default {
          * Returns the class to modify the font size of the content based on the prop textSize
          * @returns {*}
          */
-        textSizeClass () {
+        fontSizeClass () {
             switch (this.textSize) {
                 case TEXT_SIZE.SM:
-                    return this.$style['c-mediaElement-text--sm'];
+                    return this.$style['c-mediaElement-fontSize--sm'];
                 case TEXT_SIZE.MD:
-                    return this.$style['c-mediaElement-text--md'];
+                    return this.$style['c-mediaElement-fontSize--md'];
                 case TEXT_SIZE.LG:
-                    return this.$style['c-mediaElement-text--lg'];
+                    return this.$style['c-mediaElement-fontSize--lg'];
                 case TEXT_SIZE.XL:
-                    return this.$style['c-mediaElement-text--xl'];
+                    return this.$style['c-mediaElement-fontSize--xl'];
                 case TEXT_SIZE.XXL:
-                    return this.$style['c-mediaElement-text--xxl'];
+                    return this.$style['c-mediaElement-fontSize--xxl'];
                 default:
-                    return this.$style['c-mediaElement-text--md'];
+                    return this.$style['c-mediaElement-fontSize--md'];
             }
         }
     }
@@ -150,7 +150,7 @@ export default {
     }
 }
 
-.c-mediaElement-title.c-mediaElement-text {
+.c-mediaElement-title.c-mediaElement-fontSize {
     &--sm {
         @include font-size(heading-s);
     }
@@ -175,7 +175,7 @@ export default {
     margin-top: spacing(x3);
 }
 
-.c-mediaElement-text {
+.c-mediaElement-text.c-mediaElement-fontSize {
     @include font-size(body-l);
     margin-top: spacing(x0.5);
     &--sm {
