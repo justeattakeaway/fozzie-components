@@ -5,6 +5,7 @@
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
 <%= description %>
+
 </div>
 
 ---
@@ -29,6 +30,8 @@ yarn add @justeat/f-<%= name.default %>
 ```sh
 npm install @justeat/f-<%= name.default %>
 ```
+
+<% if (config.isComponent) { %>
 
 ### Vue Applications
 
@@ -89,7 +92,7 @@ $ yarn
 Change directory to the `<%= name.component %>` package:
 
 ```sh
-$ cd packages/components/molecules/<%= name.component %>
+$ cd packages/components/<%= componentCategory %>/<%= name.component %>
 ```
 
 ## Testing
@@ -124,3 +127,5 @@ cd ./fozzie-components/packages/f-<%= name.default %>
 yarn test-component:chrome
 ```
 ## Documentation to be completed once module is in stable state.
+
+<% } %>

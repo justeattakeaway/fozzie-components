@@ -32,14 +32,15 @@ module.exports = {
         }
     },
 
+    modulePathIgnorePatterns: [
+        './test/specs/accessibility/',
+        './test/specs/component/'
+    ],
+
     testURL: 'http://localhost/',
 
     setupFilesAfterEnv: [
         '../../../../jest.setup.js'
-    ],
-
-    modulePathIgnorePatterns: [
-        './test/specs/accessibility/',
-        './test/specs/component/'
     ]
+
 };

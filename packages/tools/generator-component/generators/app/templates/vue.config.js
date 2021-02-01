@@ -1,7 +1,7 @@
 const path = require('path');
 
 const rootDir = path.join(__dirname, '..', '..');
-const sassOptions = require('../../config/sassOptions')(rootDir);
+const sassOptions = require('../../../../config/sassOptions')(rootDir);
 
 // vue.config.js
 module.exports = {
