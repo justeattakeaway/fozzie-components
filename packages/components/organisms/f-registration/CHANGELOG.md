@@ -10,8 +10,8 @@ Latest (add to next release)
 *February 1, 2021*
 
 ### Changed
-- Updated feature tests
-- Changed component object to class that imports `page.object`
+- component feature tests
+- component object into a class that imports `page.object`
 
 ### Added
 - `selector.js` file for referencing attributes
