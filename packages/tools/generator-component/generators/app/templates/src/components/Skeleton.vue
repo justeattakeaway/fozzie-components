@@ -1,36 +1,38 @@
 <template>
     <div
-        :data-theme="theme"
         :class="$style['c-<%= name.class %>']"
-        data-test-id='<%= name.class %>-component'>
-        {{ copy.text }}
+        data-test-id="<%= name.class %>"><% if (config.needsComponentTranslations) { %>
+        {{ copy.text }}<%
+        } else { %>
+        I am a <%= name.component %> Component (GB)<% } %>
     </div>
 </template>
 
 <script>
-import { globalisationServices } from '@justeat/f-services';
-import tenantConfigs from '../tenants';<% if(needsTestingApiMocks) { %>
-import <%= name.filename%>ServiceApi from '../services/<%= name.filename%>ServiceApi';<%}%>
-
+<% if (config.needsComponentTranslations) { %>import { globalisationServices } from '@justeat/f-services';
+import tenantConfigs from '../tenants';
+<%
+}
+if (config.needsTestingApiMocks) { %>import <%= name.filename%>ServiceApi from '../services/<%= name.filename%>ServiceApi';
+<%
+} %>
 export default {
     name: '<%= name.component %>',
     components: {},
     props: {
-        locale: {
+<% if (config.needsComponentTranslations) { %>        locale: {
             type: String,
             default: ''
         }
-    },
+<%} %>    }<% if (config.needsComponentTranslations) { %>,
     data () {
         const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
-        const theme = globalisationServices.getTheme(locale);
 
         return {
-            copy: { ...localeConfig },
-            theme
+            copy: { ...localeConfig }
         };
-    }
+    }<% } %>
 };
 </script>
 

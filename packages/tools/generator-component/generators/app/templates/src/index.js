@@ -1,3 +1,4 @@
+<% if (config.isComponent) { %>
 /**
  * @overview Fozzie <%= name.readme %> Component JS Wrapper
  *
@@ -33,3 +34,17 @@ if (GlobalVue) {
 
 // To allow use as module (npm/webpack/etc.) export component
 export default <%= name.component %>;
+
+<% } else { %>
+
+/**
+* @overview Add description of service here
+*
+* @module f-<%= name.default %>
+*/
+
+export {
+};
+
+
+<% } %>

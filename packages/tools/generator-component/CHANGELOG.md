@@ -3,13 +3,35 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.0.0
+------------------------------
+*January 27, 2021*
+
+### Added
+- `.yo-rc.json` to signify the destination root of the generator (to use the base of the mono-repo as our root directory, wherever the generator is run).
+- Generator will now generate to a destination based on the users answers. For example, if it's specified that the component is an atom, the component will be generated into the `components/atoms` directory.
+- Welcome prompt and update prompt which displays if the generator being run is out-of-date with the current published version.
+- Option to exclude translations/`i18n` config when component doesn't need these.
+- Excludes a number of directories and code when generated component is a service.
+
+### Fixed
+- `yeoman-generator` added to dependencies so that local testing doesn't error on missing dependency.
+
+### Changed
+- Structure of generator tidied up. Now uses `initializing` and `configuring` contexts rather than having all logic in the `writing` context.
+- Prompts moved out into separate file.
+- `_tests` folder updated (previously `tests`).
+- `scripts` in `package.json` updated inline with recent changes to webdriver config.
+- Unnecessary `scripts` removed based on yeoman options chosen.
+- Sass loader config updated.
+
 
 v1.10.1
 ------------------------------
 *January 12, 2021*
 
 ### Changed
-- Update axios version for security advisory
+- Update axios version for security advisory.
 
 
 v1.10.0
