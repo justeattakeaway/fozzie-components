@@ -56,7 +56,7 @@ class Registration extends Page {
 
     open() {
         super.openOrganism('registration-component');
-    }
+    };
 
     waitForComponent(){
         super.waitForComponent(this.component);
@@ -89,7 +89,7 @@ class Registration extends Page {
 
     countOfErrorsDisplayed(){
         return this.errors.length;
-    }
+    };
 
     isEmptyErrorDisplayed(fieldName){
         return this.fields[fieldName].emptyError.isDisplayedInViewport();
