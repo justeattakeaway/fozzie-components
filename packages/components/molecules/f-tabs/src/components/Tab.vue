@@ -30,7 +30,6 @@ export default {
             type: String
         },
         selected: {
-            required: false,
             type: Boolean,
             default: false
         }

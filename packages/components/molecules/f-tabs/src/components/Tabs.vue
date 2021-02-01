@@ -29,7 +29,6 @@ const DIRECTION = {
 
 export default {
     name: 'Tabs',
-    components: {},
     props: {
         locale: {
             type: String,
@@ -45,7 +44,6 @@ export default {
         activeTab: '',
         tabs: []
     }),
-    computed: {},
     provide () {
         const component = this;
         const tabsComponent = {};
