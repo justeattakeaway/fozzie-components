@@ -8,7 +8,7 @@
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/services/f-development-context",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-development-context",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],

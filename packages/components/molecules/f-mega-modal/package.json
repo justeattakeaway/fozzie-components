@@ -6,7 +6,7 @@
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-mega-modal",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-mega-modal",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],

@@ -11,6 +11,14 @@ v3.7.0
 - Bundle watch maxSize value to `100kb` & target files `umd.min.js, .min, & es.js`.
 
 
+v3.7.0
+------------------------------
+*January 28, 2021*
+
+### Added
+- `.yo-rc.json` to signify the destination root of the generator (to use the base of the mono-repo as our root directory, wherever the generator is run).
+
+
 v3.6.0
 ------------------------------
 *January 18, 2021*

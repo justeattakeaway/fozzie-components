@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (add to next release)
 ------------------------------
+
+v1.1.0
+*January 29, 2021*
+
+### Added
+- Added the component to storybook
+
+### Changed
+- Update service to use new values as the contract has changed
+
+
 *January 12, 2021*
 
 ### Changed
