@@ -73,7 +73,7 @@ $breadcrumbs-active-font-weight: $font-weight-base;
     }
 }
 .c-breadcrumbs-item, .c-breadcrumbs-separator {
-    @include media('<narrowMid'){
+    @include media('<narrowMid') {
         display: none;
         &:nth-last-child(-n+4):not(:nth-last-child(-n+2)) {
             display: block;
