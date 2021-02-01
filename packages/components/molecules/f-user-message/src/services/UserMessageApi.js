@@ -4,7 +4,7 @@ export default {
     async getUserMessage (culture) {
         return axios.get('/user-message.json')
             .then(response => response.data[culture])
-            .then(c => (c.userMessageEnabled ? c.userMessageText : ''))
+            .then(c => (c.weatherWarning.isEnabled ? c.weatherWarning.messageText : ''))
             .catch(() => '');
     }
 };
