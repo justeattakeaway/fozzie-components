@@ -23,4 +23,4 @@ exports.EMAIL_EXISTS_ERROR = '[data-test-id="error-email-exists"]';
 exports.PASSWORD_INPUT = '[data-test-id="formfield-password-input"]'
 exports.PASSWORD_EMPTY_ERROR = '[data-test-id="error-password-empty"]';
 
-exports.ALL_ERROR_FIELDS = '[data-test-id="content"]'  //to be renamed in f-error-message
+exports.ALL_ERROR_FIELDS = '[data-test-id="content"]';
