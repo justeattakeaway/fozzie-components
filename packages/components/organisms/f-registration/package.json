@@ -43,6 +43,7 @@
   ],
   "dependencies": {
     "@justeat/f-services": "1.4.0",
+    "@justeat/f-wdio-utils": "file:.yalc/@justeat/f-wdio-utils",
     "axios": "0.21.1",
     "vuelidate": "0.7.6"
   },

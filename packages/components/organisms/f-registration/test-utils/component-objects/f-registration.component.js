@@ -1,4 +1,6 @@
-const Page = require ('../../../../../../page.object');
+// const Page = require ('../../../../../services/f-wdio-utils/page.object');
+const Page = require('@justeat/f-wdio-utils/src/page.object');
+
 const {
     REGISTRATION_COMPONENT, 
     CREATE_ACCOUNT_BUTTON, 
@@ -15,6 +17,7 @@ const {
     LAST_NAME_INVALID_ERROR,
     EMAIL_INPUT,
     EMAIL_EMPTY_ERROR,
+    EMAIL_EXISTS_ERROR,
     EMAIL_INVALID_ERROR,
     PASSWORD_INPUT,
     PASSWORD_EMPTY_ERROR, 
@@ -46,7 +49,8 @@ class Registration extends Page {
         email: {
             get input () { return $(EMAIL_INPUT) }, 
             get emptyError () { return $(EMAIL_EMPTY_ERROR) }, 
-            get invalidError () { return $(EMAIL_INVALID_ERROR) }
+            get invalidError () { return $(EMAIL_INVALID_ERROR) }, 
+            get existsError () { return $(EMAIL_EXISTS_ERROR) }
         }, 
         password: {
             get input () { return $(PASSWORD_INPUT) }, 
@@ -98,6 +102,10 @@ class Registration extends Page {
     isMaxLengthErrorDisplayed(fieldName) {
         return this.fields[fieldName].maxLengthError.isDisplayedInViewport();
     };
+
+    isEmailExistsErrorDisplayed(){
+        return this.fields.email.existsError.isDisplayedInViewport();
+    }
 
     isInvalidErrorDisplayed(fieldName) {
         return this.fields[fieldName].invalidError.isDisplayedInViewport();
