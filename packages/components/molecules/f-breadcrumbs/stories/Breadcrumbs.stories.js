@@ -10,20 +10,32 @@ export default {
     decorators: [withA11y]
 };
 
-export const BreadcrumbsComponent = () => ({
+export const BreadcrumbsComponent = (args, { argTypes }) => ({
     components: { Breadcrumbs },
-    // props: {
-    //     buttonType: {
-    //         default: select('Button Type', ['primary', 'primaryAlt', 'secondary', 'tertiary', 'link'])
-    //     },
-    //     fullWidth: {
-    //         default: boolean('fullWidth', false)
-    //     }
-    // },
-    template: '<breadcrumbs :links="links" />',
-    data: () => ({
-        links: ['Home', 'For you', 'Stamp Cards']
-    })
+    props: Object.keys(argTypes),
+    template: '<breadcrumbs v-bind="$props" />'
 });
 
 BreadcrumbsComponent.storyName = 'f-breadcrumbs';
+
+/**
+ * Arguments without specified controls
+ * @type {{routerLinks: boolean}}
+ */
+BreadcrumbsComponent.args = {
+    links: [
+        {
+            name: 'Home',
+            url: '/'
+        },
+        {
+            name: 'For You',
+            url: '/offers'
+        },
+        {
+            name: 'Stampcards',
+            url: '/offers/stamp-cards'
+        }
+    ],
+    routerLinks: false
+};

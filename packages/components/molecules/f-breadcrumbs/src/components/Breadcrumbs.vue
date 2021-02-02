@@ -1,7 +1,7 @@
 <template>
     <div :class="$style['c-breadcrumbs']">
         <ul :class="$style['c-breadcrumbs-list']">
-            <template v-for="(link, index) in links">
+            <template v-for="({ name, url }, index) in links">
                 <li
                     v-if="index !== 0"
                     :key="`${index}_link`"
@@ -11,7 +11,18 @@
                 <li
                     :key="`${index}_separator`"
                     :class="$style['c-breadcrumbs-item']">
-                    <a :class="[$style['c-breadcrumbs-link'], { [$style['c-breadcrumbs-link--active']]: index === links.length - 1 }]">{{ link }}</a>
+                    <router-link
+                        v-if="routerLinks"
+                        :to="url"
+                        :class="[$style['c-breadcrumbs-link'], linkActiveClass(index)]">
+                        {{ name }}
+                    </router-link>
+                    <a
+                        v-else
+                        :href="url"
+                        :class="[$style['c-breadcrumbs-link'], linkActiveClass(index)]">
+                        {{ name }}
+                    </a>
                 </li>
             </template>
         </ul>
@@ -19,29 +30,23 @@
 </template>
 
 <script>
-import { globalisationServices } from '@justeat/f-services';
-import tenantConfigs from '../tenants';
 
 export default {
     name: 'Breadcrumbs',
-    components: {},
     props: {
-        locale: {
-            type: String,
-            default: ''
-        },
         links: {
             type: Array,
             default: () => []
+        },
+        routerLinks: {
+            type: Boolean,
+            default: true
         }
     },
-    data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
-
-        return {
-            copy: { ...localeConfig }
-        };
+    methods: {
+        linkActiveClass (index) {
+            return index === this.links.length - 1 ? this.$style['c-breadcrumbs-link--active'] : '';
+        }
     }
 };
 </script>
@@ -84,6 +89,7 @@ $breadcrumbs-active-font-weight: $font-weight-base;
     color: $breadcrumbs-text-colour;
     font-weight: $breadcrumbs-not-active-font-weight;
     cursor: pointer;
+    text-decoration: none;
     &:hover {
         text-decoration: underline;
         color: $breadcrumbs-text-colour;
