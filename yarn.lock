@@ -2061,11 +2061,6 @@
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
-"@justeat/f-wdio-utils@file:packages/components/organisms/f-registration/.yalc/@justeat/f-wdio-utils":
-  version "0.1.0"
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
 "@justeat/fozzie-colour-palette@3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@justeat/fozzie-colour-palette/-/fozzie-colour-palette-3.1.0.tgz#3bbe51404025c5ef8c5e8bf8280a266e51d2a640"
