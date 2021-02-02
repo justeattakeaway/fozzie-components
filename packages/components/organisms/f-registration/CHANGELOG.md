@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 Latest (add to next release)
 ------------------------------
 
-*February 1, 2021*
+*February 2, 2021*
 
 ### Changed
 - component feature tests

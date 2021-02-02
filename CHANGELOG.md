@@ -5,10 +5,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.9.0
 ------------------------------
-*February 1, 2021*
+*February 2, 2021*
 
 ### Added
-- `page.object` to separate URLS for all feature tests and import into component objects.
+- `f-wdio-utils` package in the services folder - for the `page-object` file and other webdriverio utils. 
 
 
 v3.8.0

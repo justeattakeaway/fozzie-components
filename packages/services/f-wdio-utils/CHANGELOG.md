@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.1.0
 ------------------------------
-*February 1, 2021*
+*February 2, 2021*
 
 ### Added
-- Added `f-wdio-utils` folder to contain page.object and other exportable webdriver files.
+- Added `f-wdio-utils` folder to contain page.object and other exportable webdriverIO files.
