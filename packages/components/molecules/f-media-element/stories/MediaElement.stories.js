@@ -4,6 +4,7 @@
 // } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import MediaElement from '../src/components/MediaElement.vue';
+import { ALIGN, FONT_SIZE } from '../src/constants';
 
 export default {
     title: 'Components/Molecules',
@@ -23,8 +24,20 @@ MediaElementComponent.args = {
     text: 'See the stamps you’ve collected and any discounts you’ve earned.',
     stacked: false,
     reverse: true,
-    contentAlign: 'left',
-    imageAlign: 'center',
     imageUrl: 'https://via.placeholder.com/250',
-    textSize: 'xxl'
+};
+
+MediaElementComponent.argTypes = {
+    textSize: {
+        control: { type: 'select', options: [...Object.entries(FONT_SIZE).map(([, value]) => value)] },
+        defaultValue: 'xxl'
+    },
+    contentAlign: {
+        control: { type: 'select', options: [...Object.entries(ALIGN).map(([, value]) => value)] },
+        defaultValue: 'left'
+    },
+    imageAlign: {
+        control: { type: 'select', options: [...Object.entries(ALIGN).map(([, value]) => value)] },
+        defaultValue: 'center'
+    }
 };

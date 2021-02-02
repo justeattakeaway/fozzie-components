@@ -4,7 +4,7 @@ export const ALIGN = {
     CENTER: 'center'
 };
 
-export const TEXT_SIZE = {
+export const FONT_SIZE = {
     SM: 'sm',
     MD: 'md',
     LG: 'lg',

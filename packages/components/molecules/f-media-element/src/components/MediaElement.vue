@@ -1,26 +1,46 @@
 <template>
     <div
         data-test-id="mediaElement-component"
-        :class="[$style['c-mediaElement'], { [$style['c-mediaElement--stack']]: stacked }, { [$style['c-mediaElement--reverse']]: reverse }]">
-        <div :class="[$style['c-mediaElement-content'], contentAlignClass]">
-            <h3 :class="[$style['c-mediaElement-title'], fontSizeClass]">
+        :class="[
+            $style['c-mediaElement'],
+            (stacked ? $style['c-mediaElement--stack'] : ''),
+            (reverse ? $style['c-mediaElement--reverse'] : '')
+        ]">
+        <div
+            :class="[
+                $style['c-mediaElement-content'],
+                contentAlignClass
+            ]">
+            <h3
+                :class="[
+                    $style['c-mediaElement-title'],
+                    fontSizeClass
+                ]">
                 {{ title }}
             </h3>
-            <p :class="[$style['c-mediaElement-text'], fontSizeClass]">
+            <p
+                :class="[
+                    $style['c-mediaElement-text'],
+                    fontSizeClass
+                ]">
                 {{ text }}
             </p>
         </div>
-        <div :class="[$style['c-mediaElement-imgWrapper'], imageAlignClass]">
+        <div
+            :class="[
+                $style['c-mediaElement-imgWrapper'],
+                imageAlignClass
+            ]">
             <img
-                :class="$style['c-mediaBlock-img']"
+                :class="[$style['c-mediaElement-img'], 'c-mediaElement-img--override']"
                 :src="imageUrl"
-                alt="test image">
+                alt="Media Element Image">
         </div>
     </div>
 </template>
 
 <script>
-import { ALIGN, TEXT_SIZE } from '../config';
+import { ALIGN, FONT_SIZE } from '../constants';
 
 export default {
     props: {
@@ -101,15 +121,15 @@ export default {
          */
         fontSizeClass () {
             switch (this.textSize) {
-                case TEXT_SIZE.SM:
+                case FONT_SIZE.SM:
                     return this.$style['c-mediaElement-fontSize--sm'];
-                case TEXT_SIZE.MD:
+                case FONT_SIZE.MD:
                     return this.$style['c-mediaElement-fontSize--md'];
-                case TEXT_SIZE.LG:
+                case FONT_SIZE.LG:
                     return this.$style['c-mediaElement-fontSize--lg'];
-                case TEXT_SIZE.XL:
+                case FONT_SIZE.XL:
                     return this.$style['c-mediaElement-fontSize--xl'];
-                case TEXT_SIZE.XXL:
+                case FONT_SIZE.XXL:
                     return this.$style['c-mediaElement-fontSize--xxl'];
                 default:
                     return this.$style['c-mediaElement-fontSize--md'];
@@ -205,21 +225,12 @@ export default {
 
     &--center {
         align-items: center;
-        .c-mediaBlock-img {
-            align-self: center;
-        }
     }
     &--left {
         align-items: flex-start;
-        .c-mediaBlock-img {
-            align-self: flex-start;
-        }
     }
     &--right {
         align-items: flex-end;
-        .c-mediaBlock-img {
-            align-self: flex-end;
-        }
     }
 }
 
