@@ -9,7 +9,7 @@ v4.0.0-beta.22
 
 ### Added
 - Ability to save full address to local storage.
-- Ability to retrieve existing full address to local storage.
+- Ability to retrieve existing full address from local storage.
 - Ability to remove full address from local storage when feature is turned off.
 - Tests to cover changes.
 
