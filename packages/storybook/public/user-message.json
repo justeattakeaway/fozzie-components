@@ -1,0 +1,82 @@
+{
+  "en-GB": {
+    "weatherWarning": {
+      "messageText": "The current adverse weather conditions mean that deliveries might take a little longer than usual. Call the restaurant if you've got any questions about your order.",
+      "isEnabled": true
+    },
+    "paymentsWarning": {
+      "messageText": "The current adverse weather conditions mean that deliveries might take a little longer than usual. Call the restaurant if you've got any questions about your order.",
+      "isEnabled": true
+    }
+  },
+  "en-AU": {
+    "weatherWarning": {
+      "messageText": "",
+      "isEnabled": true
+    },
+    "paymentsWarning": {
+      "messageText": "",
+      "isEnabled": true
+    }
+  },
+  "en-NZ": {
+    "weatherWarning": {
+      "messageText": "",
+      "isEnabled": true
+    },
+    "paymentsWarning": {
+      "messageText": "",
+      "isEnabled": true
+    }
+  },
+  "en-IE": {
+    "weatherWarning": {
+      "messageText": "Due to ongoing adverse weather conditions, Just Eat deliveries may be affected or unavailable in some areas. This is in the interest of driver safety and at the discretion of our restaurant partners. Thank you for your patience during this time. The Just Eat team.",
+      "isEnabled": true
+    },
+    "paymentsWarning": {
+      "messageText": "Due to ongoing adverse weather conditions, Just Eat deliveries may be affected or unavailable in some areas. This is in the interest of driver safety and at the discretion of our restaurant partners. Thank you for your patience during this time. The Just Eat team.",
+      "isEnabled": true
+    }
+  },
+  "es-ES": {
+    "weatherWarning": {
+      "messageText": "",
+      "isEnabled": true
+    },
+    "paymentsWarning": {
+      "messageText": "",
+      "isEnabled": true
+    }
+  },
+  "it-IT": {
+    "weatherWarning": {
+      "messageText": "",
+      "isEnabled": true
+    },
+    "paymentsWarning": {
+      "messageText": "",
+      "isEnabled": true
+    }
+  },
+  "nb-NO": {
+    "weatherWarning": {
+      "messageText": "",
+      "isEnabled": true
+    },
+    "paymentsWarning": {
+      "messageText": "",
+      "isEnabled": true
+    }
+  },
+  "dk-DK": {
+    "weatherWarning": {
+      "messageText": "",
+      "isEnabled": true
+    },
+    "paymentsWarning": {
+      "messageText": "",
+      "isEnabled": true
+    }
+  }
+}

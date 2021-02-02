@@ -1,10 +1,11 @@
+<div align="center">
 
-<div style="text-align: center">
-  <h1>f-<%= name.default %></h1>
+# f-<%= name.default %></h1>
 
-  <img width="125" alt="Fozzie Bear" src="../../bear.png" />
+<img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
-  <p><%= description %></p>
+<%= description %>
+
 </div>
 
 ---
@@ -14,73 +15,99 @@
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-<%= name.default %>/badge.svg)](https://coveralls.io/github/justeat/f-<%= name.default %>)
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-<%= name.default %>/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-<%= name.default %>?targetFile=package.json)
 
+---
 
 ## Usage
 
-1.  Install the module using NPM or Yarn:
+### Installation
 
-    ```bash
-    yarn add @justeat/f-<%= name.default %>
-    ```
+Install the module using npm or Yarn:
 
-    ```bash
-    npm install @justeat/f-<%= name.default %>
-    ```
+```sh
+yarn add @justeat/f-<%= name.default %>
+```
 
-2.  Import the component
+```sh
+npm install @justeat/f-<%= name.default %>
+```
 
-    You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+<% if (config.isComponent) { %>
 
-    ```
-    import <%= name.component %> from '@justeat/f-<%= name.default %>';
-    import '@justeat/f-<%= name.default %>/dist/f-<%= name.default %>.css';
+### Vue Applications
 
-    export default {
-        components: {
-            <%= name.component %>
-        }
+You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+
+```js
+import <%= name.component %> from '@justeat/f-<%= name.default %>';
+import '@justeat/f-<%= name.default %>/dist/f-<%= name.default %>.css';
+
+export default {
+    components: {
+        <%= name.component %>
     }
-    ```
+}
+```
 
-    If you are using Webpack, you can import the component dynamically to separate the `<%= name.template%>` bundle from the main `bundle.client.js`:
+If you are using Webpack, you can import the component dynamically to separate the `<%= name.template%>` bundle from the main `bundle.client.js`:
 
-    ```
-    import '@justeat/f-<%= name.default %>/dist/f-<%= name.default %>.css';
+```js
+import '@justeat/f-<%= name.default %>/dist/f-<%= name.default %>.css';
 
-    export default {
-        components: {
-            ...
-            <%= name.component %>: () => import(/* webpackChunkName: "<%= name.template%>" */ '@justeat/f-<%= name.default %>')
-        }
+export default {
+    components: {
+        // …
+        <%= name.component %>: () => import(/* webpackChunkName: "<%= name.template%>" */ '@justeat/f-<%= name.default %>')
     }
+}
+```
 
-    ```
+## Configuration
+
+### Props
+
+There may be props that allow you to customise its functionality.
+
+The props that can be defined are as follows (if any):
+
+| Prop  | Type  | Default | Description |
+| ----- | ----- | ------- | ----------- |
+
+### Events
+
+The events that can be subscribed to are as follows (if any):
+
+| Event | Description |
+| ----- | ----------- |
 
 ## Development
-It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
 
-```bash
-# cd ./fozzie-components
-yarn install
+Start by cloning the repository and installing the required dependencies:
+
+```sh
+$ git clone git@github.com:justeat/fozzie-components.git
+$ cd fozzie-components
+$ yarn
+```
+
+Change directory to the `<%= name.component %>` package:
+
+```sh
+$ cd packages/components/<%= componentCategory %>/<%= name.component %>
+```
 
 ## Testing
-Unit / Integration / Contract
 
-```bash
-# Run Unit / Integration / Contract tests for all components
-cd ./fozzie-components
+### Unit, Integration and Contract
+
+To test all components, run from root directory.
+To test only `f-<%= name.default %>`, run from the `./fozzie-components/packages/f-<%= name.default %>` directory.
+
+```sh
 yarn test
 ```
 
-OR
+### Component Tests
 
-```bash
-# Run Unit / Integration / Contract tests for f-<%= name.default %>
-cd ./fozzie-components/packages/f-<%= name.default %>
-yarn test
-```
-
-Component Tests
 ```bash
 # Run Component tests for all components
 # Note: Ensure Storybook is not running when running the following commands
@@ -100,3 +127,5 @@ cd ./fozzie-components/packages/f-<%= name.default %>
 yarn test-component:chrome
 ```
 ## Documentation to be completed once module is in stable state.
+
+<% } %>

@@ -1,14 +1,14 @@
 {
   "name": "@justeat/f-development-context",
   "description": "A package to provide development context options for Storybook and WebDriver",
-  "version": "1.0.0",
-  "main": "dist/f-development-context.umd.js",
+  "version": "1.0.1",
+  "main": "dist/f-development-context.umd.min.js",
   "module": "dist/f-development-context.esm.js",
   "source": "src/index.js",
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/services/f-development-context",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-development-context",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],

@@ -17,6 +17,7 @@ const mockState = {
 };
 
 const mockActions = {
+    setIsBelowMid: jest.fn(),
     setErrors: jest.fn(),
     setIsValid: jest.fn(),
     setIsDirty: jest.fn(),

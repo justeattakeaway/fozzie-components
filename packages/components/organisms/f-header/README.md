@@ -1,4 +1,4 @@
-<div style="text-align: center">
+<div align="center">
 
 # f-header
 
@@ -18,45 +18,49 @@ Global Header Component for Vue.js.
 
 ## Usage
 
-1.  Install the module using NPM or Yarn:
 
-    ```bash
-    yarn add @justeat/f-header
-    ```
+### Installation
 
-    ```bash
-    npm install @justeat/f-header
-    ```
+Install the module using NPM or Yarn:
 
-2.  Import the component
+```sh
+yarn add @justeat/f-header
+```
 
-    You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+```sh
+npm install @justeat/f-header
+```
 
-    ```JavaScript
-    import VueHeader from '@justeat/f-header';
-    import '@justeat/f-header/dist/f-header.css';
+### Vue Applications
 
-    export default {
-        components: {
-            VueHeader
-        }
+You can import it in your Vue SFC like this (please note that styles have to be imported separately):
+
+```js
+import VueHeader from '@justeat/f-header';
+import '@justeat/f-header/dist/f-header.css';
+
+export default {
+    components: {
+        VueHeader
     }
-    ```
+}
+```
 
-    If you are using Webpack, you can import the component dynamically to separate the header bundle from the main `bundle.client.js`:
+If you are using Webpack, you can import the component dynamically to separate the `f-header` bundle from the main `bundle.client.js`:
 
-    ```JavaScript
-    import '@justeat/f-header/dist/f-header.css';
+```js
+import '@justeat/f-header/dist/f-header.css';
 
-    export default {
-        components: {
-            // ...
-            VueHeader: () => import(/* webpackChunkName: "vue-header" */ '@justeat/f-header')
-        }
+export default {
+    components: {
+      // …
+        VueHeader: () => import(/* webpackChunkName: "vue-header" */ '@justeat/f-header')
     }
+}
+```
 
-    ```
 
+## Configuration
 
 ### Props
 
@@ -76,38 +80,49 @@ The props that can be defined are as follows:
 | showHelpLink              | `Boolean`     | `true` | Defines whether the help link should be shown in the navigation. |
 | showLoginInfo             | `Boolean`     | `true` | Defines whether the login & user info icon should be shown in the navigation. |
 | userInfoProp              | `Object`      | `{}`     | Optional object conaining user details. If not provided `userInfoProp` is set via XHR call to `/api/account/details` |
-| userInfoUrl               | `String`      | `false` | URL to call to retrieve the userInfo (when `userInfoProp` isn't set). |
+| userInfoUrl               | `String`      | `/api/account/details` | URL to call to retrieve the userInfo (when `userInfoProp` isn't set). |
+| showCountrySelector       | `Boolean`     | `false` | Defines whether the country selector should be shown in the navigation. |
 
-
-    `showLoginInfo` - Optional Boolean property with `true` as a default value, defines whether the login / user info icon should be shown in the navigation.
 
 **Important:** if you're adding a new property to show/hide something on the navigation bar, you probably want to check the `hasNavigationLinks` computed property, since you might have to update it.
 
-## Development
-It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
+### Events
 
-```bash
-# cd ./fozzie-components
-yarn install
+The events that can be subscribed to are as follows (if any):
+
+| Event | Description |
+| ----- | ----------- |
+
+
+## Development
+
+Start by cloning the repository and installing the required dependencies:
+
+```sh
+$ git clone git@github.com:justeat/fozzie-components.git
+$ cd fozzie-components
+$ yarn
+```
+
+Change directory to the `f-header` package:
+
+```sh
+$ cd packages/components/molecules/f-header
+```
 
 ## Testing
-Unit / Integration / Contract
 
-```bash
-# Run Unit / Integration / Contract tests for all components
-cd ./fozzie-components
+### Unit, Integration and Contract
+
+To test all components, run from root directory.
+To test only `f-header`, run from the `./fozzie-components/packages/f-header` directory.
+
+```sh
 yarn test
 ```
 
-OR
+## Component Tests
 
-```bash
-# Run Unit / Integration / Contract tests for f-header
-cd ./fozzie-components/packages/f-header
-yarn test
-```
-
-Component Tests
 ```bash
 # Run Component tests for all components
 # Note: Ensure Storybook is not running when running the following commands

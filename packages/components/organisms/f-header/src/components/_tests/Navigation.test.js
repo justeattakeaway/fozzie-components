@@ -107,7 +107,10 @@ describe('Navigation', () => {
         wrapper = shallowMount(Navigation, {
             propsData: {
                 ...defaultPropsData,
-                navLinks: {}
+                copy: {
+                    ...defaultPropsData.copy,
+                    navLinks: {}
+                }
             }
         });
 
@@ -141,7 +144,10 @@ describe('Navigation', () => {
         wrapper = shallowMount(Navigation, {
             propsData: {
                 ...defaultPropsData,
-                navLinks: {}
+                copy: {
+                    ...defaultPropsData.copy,
+                    navLinks: {}
+                }
             },
             data () {
                 return {
@@ -175,14 +181,9 @@ describe('Navigation', () => {
     });
 
     it('should NOT show the navbar if there are no navigation links', () => {
-        // Arrange
-        const propsData = {
-            ...defaultPropsData
-        };
-
-        // Act
+        // Arrange and Act
         wrapper = shallowMount(Navigation, {
-            propsData,
+            propsData: defaultPropsData,
             computed: {
                 hasNavigationLinks () {
                     return false;
@@ -203,7 +204,10 @@ describe('Navigation', () => {
                 wrapper = shallowMount(Navigation, {
                     propsData: {
                         ...defaultPropsData,
-                        navLinks: {}
+                        copy: {
+                            ...defaultPropsData.copy,
+                            navLinks: {}
+                        }
                     }
                 });
 
@@ -258,19 +262,6 @@ describe('Navigation', () => {
 
 
     describe('offers link', () => {
-        it('prop flag should be passed through', () => {
-            // Arrange & Act
-            wrapper = shallowMount(Navigation, {
-                propsData: {
-                    ...defaultPropsData,
-                    showOffersLink: true
-                }
-            });
-
-            // Assert
-            expect(wrapper.vm.showOffersLink).toBe(true);
-        });
-
         it('should be shown on desktop when "showOffersLink" is true', () => {
             // Arrange & Act
             wrapper = shallowMount(Navigation, {
@@ -619,7 +610,7 @@ describe('Navigation', () => {
     });
 
     describe('showLoginInfo', () => {
-        it('should NOT show "login" if `showLoginInfo: false`"', async () => {
+        it('should NOT show "login" if `showLoginInfo: false`', async () => {
             // Arrange & Act
             wrapper = shallowMount(Navigation, {
                 propsData: {
@@ -673,7 +664,10 @@ describe('Navigation', () => {
             wrapper = shallowMount(Navigation, {
                 propsData: {
                     ...defaultPropsData,
-                    [navLink]: true
+                    copy: {
+                        ...defaultPropsData.copy,
+                        [navLink]: true
+                    }
                 }
             });
 
@@ -695,6 +689,34 @@ describe('Navigation', () => {
 
             // Assert
             expect(wrapper.vm.hasNavigationLinks).toBe(false);
+        });
+    });
+
+    describe('country selector', () => {
+        it('should be shown when "showCountrySelector" is true', () => {
+            // Arrange & Act
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showCountrySelector: true
+                }
+            });
+
+            // Assert
+            expect(wrapper.find('[data-test-id="country-selector"]').exists()).toBe(true);
+        });
+
+        it('should not be shown when "showCountrySelector" is false', () => {
+            // Arrange & Act
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showCountrySelector: false
+                }
+            });
+
+            // Assert
+            expect(wrapper.find('[data-test-id="country-selector"]').exists()).toBe(false);
         });
     });
 });
