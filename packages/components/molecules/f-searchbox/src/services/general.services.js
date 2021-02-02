@@ -79,8 +79,33 @@ const generateFormQueryUrl = (queryString, formUrl) => {
     return formUrl;
 };
 
+const fullAddressLocalStorageService = {
+    setItem (key, value = {}) {
+        if (window.localStorage) {
+            window.localStorage.setItem(key, window.JSON.stringify(value));
+        }
+    },
+
+    getItem (key) {
+        if (window.localStorage) {
+            const item = window.localStorage.getItem(key);
+
+            return item ? window.JSON.parse(item) : false;
+        }
+
+        return false;
+    },
+
+    removeItem (key) {
+        if (window.localStorage) {
+            window.localStorage.removeItem(key);
+        }
+    }
+};
+
 export {
     processLocationCookie,
     onCustomSubmit,
-    generateFormQueryUrl
+    generateFormQueryUrl,
+    fullAddressLocalStorageService
 };

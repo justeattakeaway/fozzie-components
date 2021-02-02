@@ -198,4 +198,119 @@ describe('`general.services`', () => {
             });
         });
     });
+
+    describe('`fullAddressLocalStorageService`', () => {
+        let localStorage;
+
+        beforeEach(() => {
+            localStorage = (function storage () {
+                const store = {};
+
+                return {
+                    getItem: function getItem (key) {
+                        return store[key];
+                    },
+
+                    setItem: function setItem (key, value) {
+                        store[key] = value.toString();
+                    },
+
+                    removeItem: function removeItem (key) {
+                        delete store[key];
+                    }
+                };
+            }());
+
+            Object.defineProperty(window, 'localStorage', { value: localStorage });
+        });
+
+        it('should exist', () => {
+            expect(generalServices.fullAddressLocalStorageService).toBeDefined();
+        });
+
+        describe('`setItem`', () => {
+            it('should contain the ability to saveItem to localStorage', () => {
+                expect(generalServices.fullAddressLocalStorageService.setItem).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                describe('AND window.localStorage exists', () => {
+                    it('should call `setItem` with the given `key` & value', () => {
+                        // Arrange
+                        const spy = jest.spyOn(window.localStorage, 'setItem');
+
+                        // Act
+                        generalServices.fullAddressLocalStorageService.setItem('key', { city: 'london' });
+
+                        // Assert
+                        expect(spy).toHaveBeenCalledWith('key', '{"city":"london"}');
+                    });
+                });
+            });
+        });
+
+        describe('`getItem`', () => {
+            it('should contain the ability to retrieve: `getItem` from localStorage', () => {
+                expect(generalServices.fullAddressLocalStorageService.setItem).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                describe('AND window.localStorage exists', () => {
+                    it('should call `getItem` with the given `key`', () => {
+                        // Arrange
+                        const spy = jest.spyOn(window.localStorage, 'getItem');
+
+                        // Act
+                        generalServices.fullAddressLocalStorageService.getItem('key');
+
+                        // Assert
+                        expect(spy).toHaveBeenCalledWith('key');
+                    });
+
+                    it('should return an item when the key exists in localStorage', () => {
+                        // Arrange
+                        jest.spyOn(window.localStorage, 'getItem');
+
+                        // Act
+                        const result = generalServices.fullAddressLocalStorageService.getItem('key');
+
+                        // Assert
+                        expect(result).toEqual({ city: 'london' });
+                    });
+
+                    it('should return false when the key does NOT exists in localStorage', () => {
+                        // Arrange
+                        jest.spyOn(window.localStorage, 'getItem');
+
+                        // Act
+                        const result = generalServices.fullAddressLocalStorageService.getItem('non-existing-key');
+
+                        // Assert
+                        expect(result).toBe(false);
+                    });
+                });
+            });
+        });
+
+        describe('`removeItem`', () => {
+            it('should contain the ability to remove: `removeItem` from localStorage', () => {
+                expect(generalServices.fullAddressLocalStorageService.setItem).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                describe('AND window.localStorage exists', () => {
+                    it('should call `removeItem` with the given `key`', () => {
+                        // Arrange
+                        const spy = jest.spyOn(window.localStorage, 'removeItem');
+
+                        // Act
+                        generalServices.fullAddressLocalStorageService.removeItem('key');
+
+                        // Assert
+                        expect(spy).toHaveBeenCalledWith('key');
+                    });
+                });
+            });
+        });
+    });
 });
