@@ -64,7 +64,7 @@ describe('Selector', () => {
 
         describe('fulfilmentTimes', () => {
             it('should create an array of formatted fulfilment times', () => {
-                // Arrange && Act
+                // Arrange & Act
                 const wrapper = shallowMount(Selector, {
                     store: createStore({ ...defaultState }),
                     i18n,
@@ -72,14 +72,17 @@ describe('Selector', () => {
                     propsData
                 });
 
-                const expectedTimes = ['As soon as possible', 'Wednesday 01:00', 'Wednesday 01:15'];
+                const expectedTimes = [
+                    { text: 'As soon as possible', value: '2020-01-01T01:00:00.000Z' },
+                    { text: 'Wednesday 01:15', value: '2020-01-01T01:15:00.000Z' }
+                ];
 
                 // Assert
                 expect(wrapper.vm.fulfilmentTimes).toEqual(expectedTimes);
             });
 
             it('should create an array of formatted fulfilment times without `as soon as possible` if `isAsapAvailable` is `false`', () => {
-                // Arrange && Act
+                // Arrange & Act
                 const wrapper = shallowMount(Selector, {
                     store: createStore({
                         ...defaultState,
@@ -93,35 +96,17 @@ describe('Selector', () => {
                     propsData
                 });
 
-                const expectedTimes = ['Wednesday 01:00', 'Wednesday 01:15'];
-
-                // Assert
-                expect(wrapper.vm.fulfilmentTimes).toEqual(expectedTimes);
-            });
-
-            it('should create an array of formatted fulfilment times with only `as soon as possible` when there are no other times available', () => {
-                // Arrange && Act
-                const wrapper = shallowMount(Selector, {
-                    store: createStore({
-                        ...defaultState,
-                        availableFulfilment: {
-                            times: [],
-                            isAsapAvailable: true
-                        }
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                const expectedTimes = ['As soon as possible'];
+                const expectedTimes = [
+                    { text: 'Wednesday 01:00', value: '2020-01-01T01:00:00.000Z' },
+                    { text: 'Wednesday 01:15', value: '2020-01-01T01:15:00.000Z' }
+                ];
 
                 // Assert
                 expect(wrapper.vm.fulfilmentTimes).toEqual(expectedTimes);
             });
 
             it('should create an empty array when there are no times available and `isAsapAvailable` is `false`', () => {
-                // Arrange && Act
+                // Arrange & Act
                 const wrapper = shallowMount(Selector, {
                     store: createStore({
                         ...defaultState,
@@ -154,7 +139,7 @@ describe('Selector', () => {
                     propsData
                 });
 
-                const selectedTime = 'Wednesday 13:30';
+                const selectedTime = '2020-01-01T01:00:00.000Z';
 
                 // Act
                 wrapper.vm.selectionChanged(selectedTime);
@@ -170,8 +155,9 @@ describe('Selector', () => {
             afterEach(() => {
                 jest.clearAllMocks();
             });
-            it('should call `selectionChanged` with the first fulfilment time when there are fulfilment times', async () => {
+            it('should call `selectionChanged` with the first fulfilment time when there are fulfilment times', () => {
                 // Arrange
+                const expected = '2020-01-01T01:00:00.000Z';
                 const selectionChangedSpy = jest.spyOn(Selector.methods, 'selectionChanged');
 
                 const wrapper = shallowMount(Selector, {
@@ -182,13 +168,18 @@ describe('Selector', () => {
                 });
 
                 // Act
-                wrapper.vm.$options.watch.fulfilmentTimes.call(wrapper.vm);
+                wrapper.vm.$options.watch.fulfilmentTimes.call(wrapper.vm, [
+                    {
+                        text: 'Wednesday 01:00',
+                        value: '2020-01-01T01:00:00.000Z'
+                    }
+                ]);
 
                 // Assert
-                expect(selectionChangedSpy).toHaveBeenCalledWith('As soon as possible');
+                expect(selectionChangedSpy).toHaveBeenCalledWith(expected);
             });
 
-            it('should not call `selectionChanged` when there are no fulfilment times', () => {
+            it('should call `selectionChanged` with `undefined` when there are no fulfilment times', () => {
                 // Arrange
                 const selectionChangedSpy = jest.spyOn(Selector.methods, 'selectionChanged');
 
@@ -207,10 +198,10 @@ describe('Selector', () => {
                 });
 
                 // Act
-                wrapper.vm.$options.watch.fulfilmentTimes.call(wrapper.vm);
+                wrapper.vm.$options.watch.fulfilmentTimes.call(wrapper.vm, []);
 
                 // Assert
-                expect(selectionChangedSpy).not.toHaveBeenCalled();
+                expect(selectionChangedSpy).toHaveBeenCalledWith(undefined);
             });
         });
     });
