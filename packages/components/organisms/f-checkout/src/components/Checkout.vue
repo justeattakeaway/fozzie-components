@@ -47,7 +47,9 @@
 
                 <form-selector />
 
-                <user-note data-test-id="user-note" />
+                <user-note
+                    data-test-id="user-note"
+                    @input="updateUserNote($event.target.value)" />
 
                 <f-button
                     :class="$style['c-checkout-submitButton']"
@@ -212,7 +214,6 @@ export default {
             'isFulfillable',
             'isLoggedIn',
             'messages',
-            'notes',
             'notices',
             'serviceType'
         ]),
@@ -254,7 +255,8 @@ export default {
             'getCheckout',
             'patchCheckout',
             'setAuthToken',
-            'updateCustomerDetails'
+            'updateCustomerDetails',
+            'updateUserNote'
         ]),
 
         /**
@@ -296,8 +298,7 @@ export default {
                             } : {}),
                             geolocation: null
                         }
-                    },
-                    notes: this.notes
+                    }
                 };
 
                 if (!this.isLoggedIn) {

@@ -7,7 +7,8 @@ import {
     UPDATE_CUSTOMER_DETAILS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
-    UPDATE_STATE
+    UPDATE_STATE,
+    UPDATE_USER_NOTE
 } from './mutation-types';
 
 export default {
@@ -32,7 +33,7 @@ export default {
             city: '',
             postcode: ''
         },
-        notes: [],
+        userNote: '',
         isFulfillable: true,
         notices: [],
         messages: [],
@@ -187,6 +188,10 @@ export default {
 
         updateFulfilmentTime ({ commit }, payload) {
             commit(UPDATE_FULFILMENT_TIME, payload);
+        },
+
+        updateUserNote ({ commit }, payload) {
+            commit(UPDATE_USER_NOTE, payload);
         }
     },
 
@@ -197,7 +202,6 @@ export default {
             customer,
             address,
             time,
-            notes,
             isFulfillable,
             notices,
             messages
@@ -222,7 +226,6 @@ export default {
                 state.address.postcode = address.postalCode;
             }
 
-            state.notes = notes;
             state.isFulfillable = isFulfillable;
             state.notices = notices;
             state.messages = messages;
@@ -264,6 +267,10 @@ export default {
                 ...state.time,
                 ...time
             };
+        },
+
+        [UPDATE_USER_NOTE]: (state, userNote) => {
+            state.userNote = userNote;
         }
     }
 };

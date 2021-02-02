@@ -36,12 +36,6 @@ Object {
       "type": "information",
     },
   ],
-  "notes": Array [
-    Object {
-      "note": "Test note for delivery",
-      "type": "delivery",
-    },
-  ],
   "notices": Array [
     Object {
       "notice": Object {

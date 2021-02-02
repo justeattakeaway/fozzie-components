@@ -67,7 +67,6 @@ const defaultState = {
         city: '',
         postcode: ''
     },
-    notes: [],
     isFulfillable: true,
     notices: [],
     messages: [],

@@ -36,7 +36,6 @@ const defaultState = {
         times: fulfilmentTimes,
         isAsapAvailable: true
     },
-    notes: [],
     isFulfillable: true,
     notices: [],
     messages: [],
