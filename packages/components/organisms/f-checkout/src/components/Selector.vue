@@ -60,9 +60,7 @@ export default {
 
     watch: {
         fulfilmentTimes (newFulfilmentTimes) {
-            if (newFulfilmentTimes.length) {
-                this.selectionChanged(newFulfilmentTimes[0].value);
-            }
+            this.selectionChanged(newFulfilmentTimes[0] && newFulfilmentTimes[0].value);
         }
     },
 
