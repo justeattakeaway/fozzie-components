@@ -351,7 +351,7 @@ describe('CheckoutModule', () => {
             });
         });
 
-        xdescribe('updateCustomerDetails ::', () => {
+        describe('updateCustomerDetails ::', () => {
             it(`should call ${UPDATE_CUSTOMER_DETAILS} mutation with passed value.`, async () => {
                 // Act
                 updateCustomerDetails({ commit }, customerDetails);
