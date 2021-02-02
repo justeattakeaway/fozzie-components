@@ -8,7 +8,7 @@ describe('f-checkout "delivery" component tests', () => {
     });
 
     forEach(['mobileNumber', 'addressLine1', 'addressCity', 'addressPostcode'])
-    .it.skip('should display each fields error message', field => {
+    .it('should display each fields error message', field => {
         // Act
         CheckoutComponent.clearCheckoutForm(field);
         CheckoutComponent.goToPayment();
@@ -28,7 +28,7 @@ describe('f-checkout "delivery" component tests', () => {
         expect(CheckoutComponent.isFieldDisplayed('mobileNumber')).toBe(true);
     });
 
-    it.skip('should prevent user from submitting a postcode with illegal characters', () => {
+    it('should prevent user from submitting a postcode with illegal characters', () => {
         // Arrange
         const addressInfo = {
             postcode: 'TEST1A'
@@ -42,7 +42,7 @@ describe('f-checkout "delivery" component tests', () => {
         expect(CheckoutComponent.isPostCodeTypeErrorDisplayed()).toBe(true);
     });
 
-    it.skip('should enable a user to submit a postcode with correct characters', () => {
+    it('should enable a user to submit a postcode with correct characters', () => {
         // Arrange
         const addressInfo = {
             postcode: 'AR51 1AA'
