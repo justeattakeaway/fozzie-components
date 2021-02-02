@@ -466,11 +466,12 @@ export default {
          */
         initialiseFullAddressSearch (isFullAddressSearchEnabled) {
             if (isFullAddressSearchEnabled) {
-                this.setFullAddressSearchConfigs({
-                    isFullAddressSearchEnabled: isFullAddressSearchEnabled()
-                });
+                const isActive = isFullAddressSearchEnabled();
 
-                if (this.isFullAddressSearchEnabled) {
+                if (isActive) {
+                    this.setFullAddressSearchConfigs({
+                        isFullAddressSearchEnabled: isActive
+                    });
                     this.setAutoCompleteAvailability(true);
                     this.fetchLocalStorageAddress();
                 } else {

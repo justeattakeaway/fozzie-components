@@ -810,7 +810,9 @@ describe('`Form`', () => {
                     const propsData = {
                         config: {
                             address: 'something',
-                            isFullAddressSearchEnabled: jest.fn(),
+                            isFullAddressSearchEnabled: jest.fn().mockImplementation(() => {
+                                return true;
+                            }),
                             locationFormat: () => jest.fn()
                         },
                         service: {
@@ -829,7 +831,7 @@ describe('`Form`', () => {
 
                     // Assert
                     expect(spy).toHaveBeenCalledWith({
-                        isFullAddressSearchEnabled: propsData.config.isFullAddressSearchEnabled()
+                        isFullAddressSearchEnabled: true
                     });
                 });
 
@@ -839,7 +841,9 @@ describe('`Form`', () => {
                         const propsData = {
                             config: {
                                 address: 'something',
-                                isFullAddressSearchEnabled: jest.fn(),
+                                isFullAddressSearchEnabled: jest.fn().mockImplementation(() => {
+                                    return true;
+                                }),
                                 locationFormat: () => jest.fn()
                             },
                             service: {
@@ -867,7 +871,9 @@ describe('`Form`', () => {
                         const propsData = {
                             config: {
                                 address: 'something',
-                                isFullAddressSearchEnabled: jest.fn(),
+                                isFullAddressSearchEnabled: jest.fn().mockImplementation(() => {
+                                    return true;
+                                }),
                                 locationFormat: () => jest.fn()
                             },
                             service: {
@@ -888,6 +894,38 @@ describe('`Form`', () => {
     
                         // Assert
                         expect(spy).toHaveBeenCalled();
+                    });
+                });
+                
+                describe('when `isFullAddressSearchEnabled` is `falsy`', () => {
+                    it('should remove any previously saved addresses from `localStorage`', () => {
+                        // Arrange
+                        const propsData = {
+                            config: {
+                                address: 'AR511AR',
+                                isFullAddressSearchEnabled: jest.fn().mockImplementation(() => {
+                                    return false;
+                                }),
+                                locationFormat: () => jest.fn()
+                            },
+                            service: {
+                                isValid: jest.fn(() => [])
+                            }
+                        };
+                        const wrapper = shallowMount(Form, {
+                            propsData,
+                            store: createStore({
+                                isFullAddressSearchEnabled: false
+                            }),
+                            localVue
+                        });
+                        const spy = jest.spyOn(generalServices.fullAddressLocalStorageService, 'removeItem');
+    
+                        // Act
+                        wrapper.vm.initialiseFullAddressSearch(propsData.config.isFullAddressSearchEnabled);
+    
+                        // Assert
+                        expect(spy).toHaveBeenCalledWith(JE_FULL_ADDRESS_DETAILS);
                     });
                 });
             });
