@@ -22,6 +22,7 @@
                 aria-modal="true">
                 <h2
                     id="cookieConsentLabel"
+                    ref="cookieBannerHeading"
                     :class="$style['c-cookieBanner-title']"
                     tabindex="0"
                     data-consent-title>
@@ -206,7 +207,7 @@ export default {
          * Set the legacy cookie banner cookie
          */
         setLegacyCookieBannerCookie () {
-            this.$cookies.set(legacyConsentCookieName, '2', {
+            this.$cookies.set(this.legacyConsentCookieName, '2', {
                 path: '/',
                 maxAge: this.cookieExpiry
             });
@@ -283,7 +284,7 @@ export default {
     }
 
     .c-cookieBanner-card {
-        position: fixed;
+        position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
