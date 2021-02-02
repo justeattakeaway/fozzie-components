@@ -9,20 +9,13 @@
         <div
             :class="[
                 $style['c-mediaElement-content'],
-                contentAlignClass
+                contentAlignClass,
+                fontSizeClass
             ]">
-            <h3
-                :class="[
-                    $style['c-mediaElement-title'],
-                    fontSizeClass
-                ]">
+            <h3 :class="$style['c-mediaElement-title']">
                 {{ title }}
             </h3>
-            <p
-                :class="[
-                    $style['c-mediaElement-text'],
-                    fontSizeClass
-                ]">
+            <p :class="$style['c-mediaElement-text']">
                 {{ text }}
             </p>
         </div>
@@ -34,7 +27,7 @@
             <img
                 :class="[$style['c-mediaElement-img'], 'c-mediaElement-img--override']"
                 :src="imageUrl"
-                alt="Media Element Image">
+                :alt="altText">
         </div>
     </div>
 </template>
@@ -75,6 +68,10 @@ export default {
         textSize: {
             type: String,
             default: 'md'
+        },
+        altText: {
+            type: String,
+            default: 'Media Element Image'
         }
     },
     data () {
@@ -122,17 +119,17 @@ export default {
         fontSizeClass () {
             switch (this.textSize) {
                 case FONT_SIZE.SM:
-                    return this.$style['c-mediaElement-fontSize--sm'];
+                    return this.$style['c-mediaElement--fontSizeSmall'];
                 case FONT_SIZE.MD:
-                    return this.$style['c-mediaElement-fontSize--md'];
+                    return this.$style['c-mediaElement--fontSizeMedium'];
                 case FONT_SIZE.LG:
-                    return this.$style['c-mediaElement-fontSize--lg'];
+                    return this.$style['c-mediaElement--fontSizeLarge'];
                 case FONT_SIZE.XL:
-                    return this.$style['c-mediaElement-fontSize--xl'];
+                    return this.$style['c-mediaElement--fontSizeXLarge'];
                 case FONT_SIZE.XXL:
-                    return this.$style['c-mediaElement-fontSize--xxl'];
+                    return this.$style['c-mediaElement--fontSizeXXLarge'];
                 default:
-                    return this.$style['c-mediaElement-fontSize--md'];
+                    return this.$style['c-mediaElement--fontSizeMedium'];
             }
         }
     }
@@ -141,15 +138,58 @@ export default {
 
 <style lang="scss" module>
 
+$font-sizes: (
+    fontSizeSmall: (
+        title: heading-s,
+        text: body-s,
+    ),
+    fontSizeMedium: (
+        title: heading-m,
+        text: body-l,
+    ),
+    fontSizeLarge: (
+        title: heading-l,
+        text: subheading-s,
+    ),
+    fontSizeXLarge: (
+        title: heading-xl,
+        text: subheading-s,
+    ),
+    fontSizeXXLarge: (
+        title: heading-xxl,
+        text: subheading-l,
+    )
+);
+
 .c-mediaElement {
     display: flex;
     width: 100%;
 }
+
+/**
+ * Modifier – .c-mediaElement--stack
+ *
+ * Applies flex direction column
+ */
 .c-mediaElement--stack {
     flex-direction: column;
-}
-.c-mediaElement--stack.c-mediaElement--reverse {
-    flex-direction: column-reverse;
+
+    /**
+     * Modifier – .c-mediaElement--reverse
+     *
+     * When stacked in flex col applies col-reverse
+     */
+    &.c-mediaElement--reverse {
+        flex-direction: column-reverse;
+
+        & .c-mediaElement-text {
+            margin-bottom: spacing(x3);
+        }
+    }
+
+    & .c-mediaElement-title {
+        margin-top: spacing(x3);
+    }
 }
 
 .c-mediaElement-content {
@@ -158,63 +198,31 @@ export default {
     justify-content: center;
     flex: 1 1 0;
 
-    &--center {
+    /**
+     * Modifier – .c-mediaElement-content--center
+     *
+     * Aligns the content center using flex within the container
+     */
+    &.c-mediaElement-content--center {
         align-items: center;
         text-align: center;
     }
-    &--left {
+    /**
+     * Modifier – .c-mediaElement-content--left
+     *
+     * Aligns the content left using flex within the container
+     */
+    &.c-mediaElement-content--left {
         align-items: flex-start;
     }
-    &--right {
+    /**
+     * Modifier – .c-mediaElement-content--right
+     *
+     * Aligns the content right using flex within the container
+     */
+    &.c-mediaElement-content--right {
         align-items: flex-end;
-    }
-}
-
-.c-mediaElement-title.c-mediaElement-fontSize {
-    &--sm {
-        @include font-size(heading-s);
-    }
-    &--md {
-        @include font-size(heading-m);
-    }
-    &--lg {
-        @include font-size(heading-l);
-        margin-bottom: spacing(x0.5);
-    }
-    &--xl {
-        @include font-size(heading-xl);
-        margin-bottom: spacing(x0.5);
-    }
-    &--xxl {
-        @include font-size(heading-xxl);
-        margin-bottom: spacing(x0.5);
-    }
-}
-
-.c-mediaElement--stack .c-mediaElement-title {
-    margin-top: spacing(x3);
-}
-
-.c-mediaElement-text.c-mediaElement-fontSize {
-    @include font-size(body-l);
-    margin-top: spacing(x0.5);
-    &--sm {
-        @include font-size(body-s);
-    }
-    &--md {
-        @include font-size(body-l);
-    }
-    &--lg {
-        @include font-size(subheading-s);
-        margin-bottom: spacing(x0.5);
-    }
-    &--xl {
-        @include font-size(subheading-s);
-        margin-bottom: spacing(x0.5);
-    }
-    &--xxl {
-        @include font-size(subheading-l);
-        margin-bottom: spacing(x0.5);
+        text-align: right;
     }
 }
 
@@ -223,14 +231,52 @@ export default {
     flex-direction: column;
     flex: 1 1 0;
 
-    &--center {
+    /**
+     * Modifier – .c-mediaElement-imgWrapper--center
+     *
+     * Aligns the image center using flex within the container
+     */
+    &.c-mediaElement-imgWrapper--center {
         align-items: center;
     }
-    &--left {
+    /**
+     * Modifier – .c-mediaElement-imgWrapper--left
+     *
+     * Aligns the image left using flex within the container
+     */
+    &.c-mediaElement-imgWrapper--left {
         align-items: flex-start;
     }
-    &--right {
+    /**
+     * Modifier – .c-mediaElement-imgWrapper--right
+     *
+     * Aligns the image right using flex within the container
+     */
+    &.c-mediaElement-imgWrapper--right {
         align-items: flex-end;
+    }
+}
+
+/**
+ * Modifier – .c-mediaElement--$size
+ *
+ * For each of the above map values under $font-sizes we loop over them applying the value to both title
+ * and text depending on the key using map-get()
+ */
+@each $size, $value in $font-sizes {
+    .c-mediaElement--#{$size} {
+        & .c-mediaElement-title {
+            @include font-size(map-get($value, 'title'));
+        }
+        & .c-mediaElement-text {
+            @include font-size(map-get($value, 'text'));
+            @if $size == fontSizeSmall {
+                margin-top: spacing(x0.5);
+            }
+            @else if $size == fontSizeMedium {
+                margin-top: spacing();
+            }
+        }
     }
 }
 

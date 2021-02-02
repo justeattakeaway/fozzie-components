@@ -24,6 +24,7 @@ MediaElementComponent.args = {
     text: 'See the stamps you’ve collected and any discounts you’ve earned.',
     stacked: false,
     reverse: true,
+    altText: 'Test alt text',
     imageUrl: 'https://via.placeholder.com/250',
 };
 
