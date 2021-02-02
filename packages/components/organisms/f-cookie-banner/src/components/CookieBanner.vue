@@ -117,13 +117,17 @@ export default {
         const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
         const theme = globalisationServices.getTheme(locale);
+        const consentCookieName = 'je-cookieConsent';
+        const legacyConsentCookieName = 'je-banner_cookie';
 
         return {
             config: { ...localeConfig },
             tenantConfigs,
             theme,
             shouldHideBanner: false,
-            legacyBanner: false
+            legacyBanner: false,
+            consentCookieName,
+            legacyConsentCookieName
         };
     },
 
@@ -181,10 +185,10 @@ export default {
          */
         checkCookieBannerCookie () {
             if (this.legacyBanner) {
-                this.shouldHideBanner = this.$cookies.get('je-banner_cookie') === 2;
+                this.shouldHideBanner = this.$cookies.get(this.legacyConsentCookieName) === 2;
                 this.setLegacyCookieBannerCookie();
             } else {
-                const cookieConsent = this.$cookies.get('je-cookieConsent');
+                const cookieConsent = this.$cookies.get(this.consentCookieName);
                 this.shouldHideBanner = cookieConsent === 'full' || cookieConsent === 'necessary';
             }
         },
@@ -193,7 +197,7 @@ export default {
          * @param {String} cookieValue
          */
         setCookieBannerCookie (cookieValue) {
-            this.$cookies.set('je-cookieConsent', cookieValue, {
+            this.$cookies.set(this.consentCookieName, cookieValue, {
                 path: '/',
                 maxAge: this.cookieExpiry
             });
@@ -202,7 +206,7 @@ export default {
          * Set the legacy cookie banner cookie
          */
         setLegacyCookieBannerCookie () {
-            this.$cookies.set('je-banner_cookie', '2', {
+            this.$cookies.set(legacyConsentCookieName, '2', {
                 path: '/',
                 maxAge: this.cookieExpiry
             });
