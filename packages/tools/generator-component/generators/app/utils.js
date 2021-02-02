@@ -18,14 +18,14 @@ function hasMultipleWords (str) {
         .length > 1;
 }
 
-function prefixWithVue (str) {
-    return `vue-${str}`;
+function prefixWithV (str) {
+    return `v-${str}`;
 }
 
 function getComponentName (str) {
     return hasMultipleWords(str)
         ? toTitleCase(str)
-        : toTitleCase(prefixWithVue(str));
+        : toTitleCase(prefixWithV(str));
 }
 
 function getComponentFilename (str) {
@@ -35,7 +35,7 @@ function getComponentFilename (str) {
 function getComponentTemplateName (str) {
     return hasMultipleWords(str)
         ? str
-        : prefixWithVue(str);
+        : prefixWithV(str);
 }
 
 function getComponentClassName (str) {

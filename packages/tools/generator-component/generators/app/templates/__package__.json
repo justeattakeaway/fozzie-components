@@ -1,14 +1,14 @@
 {
   "name": "@justeat/f-<%= name.default %>",
-  "description": "Fozzie <%= name.readme %> – <%= description %>",
+  "description": "Fozzie <%= name.readme %> - <%= description %>",
   "version": "0.1.0",
   "main": "dist/f-<%= name.default %>.umd.min.js",
   "files": [
-    "dist"<% if(needsComponentTests) { %>,
-    "test-utils"<% } %> <% if(needsTestingApiMocks) { %>,
+    "dist"<% if(config.needsComponentTests) { %>,
+    "test-utils"<% } %> <% if(config.needsTestingApiMocks) { %>,
     "src/services"<% } %>
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-<%= name.default %>",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/<%= componentFolder %>f-<%= name.default %>",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -30,28 +30,29 @@
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-<%= name.default %> ./src/index.js",
     "lint": "vue-cli-service lint",
-    "lint:fix": "yarn lint --fix",
-    "lint:style": "vue-cli-service lint:style",
+    "lint:fix": "yarn lint --fix"<% if(config.isComponent) { %>,
+    "lint:style": "vue-cli-service lint:style"<% } %>,
     "report": "cd ../.. && yarn report",
-    "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
+    "test": "vue-cli-service test:unit"<% if(config.needsComponentTests) { %>,
+    "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component"<% } %>,
     "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.0.0"<% if(needsTestingApiMocks) { %>,
+    "@justeat/f-services": "1.7.0"<% if(config.needsTestingApiMocks) { %>,
     "axios": "0.21.1"<% } %>
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.1.1"
+    "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
-    "@vue/test-utils": "1.0.3",
-    "node-sass-magic-importer": "5.3.2"
+    "@vue/test-utils": "1.0.3"<% if(config.isComponent) { %>,
+    "node-sass-magic-importer": "5.3.2"<% } %>
   }
 }
