@@ -1,4 +1,4 @@
-const Page = require ('../../../../../services/f-wdio-utils/page.object');
+const Page = require ('../../../../../services/f-wdio-utils/src/page.object');
 // const Page = require('@justeat/f-wdio-utils/src/page.object');  //noting this out until `f-wdio-utils` is published - have tested locally with yalc. 
 const {
     REGISTRATION_COMPONENT, 
