@@ -66,8 +66,8 @@ describe('f-checkout component tests', () => {
         // Assert
         expect(CheckoutComponent.isOrderTimeDropdownDisplayed()).toBe(true);
         expect(CheckoutComponent.getOrderTimeOptionText(0)).toBe('As soon as possible');
-        expect(CheckoutComponent.getOrderTimeOptionText(1)).toBe('Wednesday 00:30');
-        expect(CheckoutComponent.getOrderTimeOptionText(2)).toBe('Wednesday 00:45');
+        expect(CheckoutComponent.getOrderTimeOptionText(1)).toBe('Wednesday 00:45');
+        expect(CheckoutComponent.getOrderTimeOptionText(2)).toBe('Wednesday 01:00');
     });
 
     it('should prevent a user from writing a note of over 200 characters', () => {

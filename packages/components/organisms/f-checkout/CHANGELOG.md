@@ -3,9 +3,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.46.0
+v0.47.0
 -------------------------------
-*January 29, 2021*
+*February 2, 2021*
 
 ### Added
 - `f-checkout-guest.spec` files for `guest checkout` tests.
@@ -13,6 +13,18 @@ v0.46.0
 
 ### Changed
 - Links directly to test pages have been changed from testing within Storybook to its own page.
+
+
+v0.46.0
+-------------------------------
+*February 2, 2021*
+
+### Changed
+- Reduce nesting within state by moving `address` and `time` out of `fulfilment`.
+- Update checkout URL.
+- Flesh out checkout submit data.
+- Use `f-form-field@1.8.0` with separate text/value in `dropdownOptions`.
+- Checkout method from POST to PATCH.
 
 
 v0.45.0

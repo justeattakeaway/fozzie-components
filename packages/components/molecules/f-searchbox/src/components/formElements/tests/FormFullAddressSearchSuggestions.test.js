@@ -342,9 +342,19 @@ describe('`FullAddressSuggestions`', () => {
                 describe('AND `isBelowMid` is `truthy`', () => {
                     it('should NOT make a call to `setShouldShowSuggestionModel`', () => {
                         // Arrange
-                        const { wrapper } = bootstrap();
+                        const { wrapper } = bootstrap({
+                            computed: {
+                                isBelowMid: {
+                                    get () {
+                                        return true;
+                                    },
+                                    set () {
+                                        jest.fn();
+                                    }
+                                }
+                            }
+                        });
                         const spy = jest.spyOn(wrapper.vm, 'setShouldShowSuggestionModel');
-                        wrapper.vm.isBelowMid = true;
 
                         // Act
                         wrapper.vm.resetSearch();
