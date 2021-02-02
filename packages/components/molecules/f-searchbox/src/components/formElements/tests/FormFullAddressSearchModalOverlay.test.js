@@ -32,6 +32,7 @@ const createStore = (state = mockState, actions = mockActions) => new Vuex.Store
 describe('`FormFullAddressSearchModalOverlay`', () => {
     describe('`shouldDisplayModalOverlay`', () => {
         it('should exist', () => {
+            // Arrange
             const wrapper = shallowMount(FormFullAddressSearchModalOverlay, {
                 propsData: {
                     copy: {}
@@ -40,12 +41,13 @@ describe('`FormFullAddressSearchModalOverlay`', () => {
                 localVue
             });
 
+            // Assert
             expect(wrapper.vm.shouldDisplayModalOverlay).toBeDefined();
         });
 
         describe('when invoked', () => {
             describe('AND the param `value` passed in is `falsy`', () => {
-                it('should `$emit` `ON_FULL_ADDRESS_MODAL_CLOSED` to indicate that the modal should close', () => {
+                it('should `$emit` `ON_FULL_ADDRESS_MODAL_CLOSED` with `false` to indicate that the modal should close', () => {
                     // Arrange
                     const wrapper = shallowMount(FormFullAddressSearchModalOverlay, {
                         propsData: {
@@ -90,6 +92,7 @@ describe('`FormFullAddressSearchModalOverlay`', () => {
 
     describe('`address`', () => {
         it('should exist', () => {
+            // Arrange
             const wrapper = shallowMount(FormFullAddressSearchModalOverlay, {
                 propsData: {
                     copy: {}
@@ -98,6 +101,7 @@ describe('`FormFullAddressSearchModalOverlay`', () => {
                 localVue
             });
 
+            // Act
             expect(wrapper.vm.address).toBeDefined();
         });
 

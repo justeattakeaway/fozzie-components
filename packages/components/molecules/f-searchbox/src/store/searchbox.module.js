@@ -232,7 +232,7 @@ export default {
         clearSuggestions ({ commit }, payload) {
             commit(CLEAR_FULL_ADDRESS_SUGGESTIONS, payload);
         },
-    
+
         setSavedFullAddressDetails ({ commit }, payload) {
             commit(SET_SAVED_FULL_ADDRESS_DETAILS, payload);
         }
@@ -415,10 +415,10 @@ export default {
         [CLEAR_FULL_ADDRESS_SUGGESTIONS]: (state, suggestions) => {
             state.suggestions = suggestions;
         },
-        
+
         [SET_SAVED_FULL_ADDRESS_DETAILS]: (state, savedFullAddressDetails) => {
             const { address, fullAddress } = savedFullAddressDetails;
-    
+
             const savedAddressResult = fullAddress.map(({
                 city,
                 field1,

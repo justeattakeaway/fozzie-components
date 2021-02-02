@@ -137,14 +137,20 @@ $btn-sizeXSmall-lineHeight      : 1;
         background-color: $btn-default-bgColor--hover;
     }
 
-    &:focus {
+    // Hide focus styles if they're not needed, for example, when an element receives focus via the mouse.
+    &:focus:not(:focus-visible) {
+        outline: 0;
+    }
+
+    // Show focus styles on keyboard focus.
+    &:focus-visible {
         outline: 2px dotted $btn-default-outline-color;
     }
 
     &:hover,
     &:active {
         &:not(.o-btnLink) {
-            outline: none; // no need as already has a focus/active state
+            outline: 0; // no need as already has a focus/active state
         }
     }
 

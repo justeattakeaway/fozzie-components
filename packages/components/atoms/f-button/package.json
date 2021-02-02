@@ -1,13 +1,13 @@
 {
   "name": "@justeat/f-button",
   "description": "Fozzie Button – The generic button component",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "main": "dist/f-button.umd.min.js",
   "files": [
     "dist",
     "test-utils"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-button",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/atoms/f-button",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -45,7 +45,6 @@
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
-  "dependencies": {},
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },

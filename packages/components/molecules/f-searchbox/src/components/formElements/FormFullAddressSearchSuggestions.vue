@@ -316,7 +316,7 @@ export default {
     margin-top: 5px;
     height: calc(100vh - #{$shell-top-offset}px);
 
-    @include media('>767px') {
+    @include media('>=mid') {
         position: absolute;
         left: 0;
         right: 0;

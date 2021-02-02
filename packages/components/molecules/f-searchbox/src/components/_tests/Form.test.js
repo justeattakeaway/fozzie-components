@@ -810,9 +810,7 @@ describe('`Form`', () => {
                     const propsData = {
                         config: {
                             address: 'something',
-                            isFullAddressSearchEnabled: jest.fn().mockImplementation(() => {
-                                return true;
-                            }),
+                            isFullAddressSearchEnabled: jest.fn().mockImplementation(() => true),
                             locationFormat: () => jest.fn()
                         },
                         service: {
@@ -841,9 +839,7 @@ describe('`Form`', () => {
                         const propsData = {
                             config: {
                                 address: 'something',
-                                isFullAddressSearchEnabled: jest.fn().mockImplementation(() => {
-                                    return true;
-                                }),
+                                isFullAddressSearchEnabled: jest.fn().mockImplementation(() => true),
                                 locationFormat: () => jest.fn()
                             },
                             service: {
@@ -865,15 +861,13 @@ describe('`Form`', () => {
                         // Assert
                         expect(spy).toHaveBeenCalledWith(true);
                     });
-                    
-                    it ('should make a call to `fetchLocalStorageAddress` to fetch saved addresses', () => {
+
+                    it('should make a call to `fetchLocalStorageAddress` to fetch saved addresses', () => {
                         // Arrange
                         const propsData = {
                             config: {
                                 address: 'something',
-                                isFullAddressSearchEnabled: jest.fn().mockImplementation(() => {
-                                    return true;
-                                }),
+                                isFullAddressSearchEnabled: jest.fn().mockImplementation(() => true),
                                 locationFormat: () => jest.fn()
                             },
                             service: {
@@ -888,24 +882,22 @@ describe('`Form`', () => {
                             localVue
                         });
                         const spy = jest.spyOn(wrapper.vm, 'fetchLocalStorageAddress');
-    
+
                         // Act
                         wrapper.vm.initialiseFullAddressSearch(propsData.config.isFullAddressSearchEnabled);
-    
+
                         // Assert
                         expect(spy).toHaveBeenCalled();
                     });
                 });
-                
+
                 describe('when `isFullAddressSearchEnabled` is `falsy`', () => {
                     it('should remove any previously saved addresses from `localStorage`', () => {
                         // Arrange
                         const propsData = {
                             config: {
                                 address: 'AR511AR',
-                                isFullAddressSearchEnabled: jest.fn().mockImplementation(() => {
-                                    return false;
-                                }),
+                                isFullAddressSearchEnabled: jest.fn().mockImplementation(() => false),
                                 locationFormat: () => jest.fn()
                             },
                             service: {
@@ -920,10 +912,10 @@ describe('`Form`', () => {
                             localVue
                         });
                         const spy = jest.spyOn(generalServices.fullAddressLocalStorageService, 'removeItem');
-    
+
                         // Act
                         wrapper.vm.initialiseFullAddressSearch(propsData.config.isFullAddressSearchEnabled);
-    
+
                         // Assert
                         expect(spy).toHaveBeenCalledWith(JE_FULL_ADDRESS_DETAILS);
                     });
@@ -1007,11 +999,11 @@ describe('`Form`', () => {
                 });
             });
         });
-        
+
         describe('`fetchLocalStorageAddress`', () => {
             let propsData;
             let wrapper;
-            
+
             beforeEach(() => {
                 propsData = {
                     config: {
@@ -1027,12 +1019,12 @@ describe('`Form`', () => {
                     localVue
                 });
             });
-            
+
             it('should exist', () => {
                 // Assert
                 expect(wrapper.vm.fetchLocalStorageAddress).toBeDefined();
             });
-            
+
             describe('when invoked', () => {
                 it('should attempt to retrieve the users local storage address', () => {
                     // Arrange
@@ -1040,44 +1032,40 @@ describe('`Form`', () => {
 
                     // Act
                     wrapper.vm.fetchLocalStorageAddress();
-                    
-                    //Assert
+
+                    // Assert
                     expect(spy).toHaveBeenCalledWith(JE_FULL_ADDRESS_DETAILS);
                 });
-    
+
                 describe('AND the `searchBoxAddress` key does NOT exist in the localStorage object', () => {
                     it('should NOT invoke `setAddress`', () => {
                         // Arrange
-                        jest.spyOn(generalServices.fullAddressLocalStorageService, 'getItem').mockImplementation(() => {
-                            return {
-                                searchBoxAddress: null
-                            }
-                        });
-                        const spy = jest.spyOn(wrapper.vm, 'setAddress');
-            
-                        // Act
-                        wrapper.vm.fetchLocalStorageAddress();
-            
-                        //Assert
-                        expect(spy).not.toHaveBeenCalled();
-                    });
-                });
-                
-                describe('AND the `searchBoxAddress` key exists in the localStorage object', () => {
-                    it('should invoke `setAddress` to set the address in the input field', () => {
-                        // Arrange
-                        const searchBoxAddress = 'AR511AR, unknown location, Hemwick';
-                        jest.spyOn(generalServices.fullAddressLocalStorageService, 'getItem').mockImplementation(() => {
-                            return {
-                                searchBoxAddress
-                            }
-                        });
+                        jest.spyOn(generalServices.fullAddressLocalStorageService, 'getItem').mockImplementation(() => ({
+                            searchBoxAddress: null
+                        }));
                         const spy = jest.spyOn(wrapper.vm, 'setAddress');
 
                         // Act
                         wrapper.vm.fetchLocalStorageAddress();
-    
-                        //Assert
+
+                        // Assert
+                        expect(spy).not.toHaveBeenCalled();
+                    });
+                });
+
+                describe('AND the `searchBoxAddress` key exists in the localStorage object', () => {
+                    it('should invoke `setAddress` to set the address in the input field', () => {
+                        // Arrange
+                        const searchBoxAddress = 'AR511AR, unknown location, Hemwick';
+                        jest.spyOn(generalServices.fullAddressLocalStorageService, 'getItem').mockImplementation(() => ({
+                            searchBoxAddress
+                        }));
+                        const spy = jest.spyOn(wrapper.vm, 'setAddress');
+
+                        // Act
+                        wrapper.vm.fetchLocalStorageAddress();
+
+                        // Assert
                         expect(spy).toHaveBeenCalledWith(searchBoxAddress);
                     });
                 });

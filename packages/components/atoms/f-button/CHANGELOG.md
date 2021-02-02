@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.7.0
+------------------------------
+*January 28, 2021*
+
+### Changed
+- Updated focus styles to provide more control over when focus outlines are displayed. See this article for more info - https://matthiasott.com/notes/focus-visible-is-here.
+- Updated focus style to match the style used in the Fozzie SCSS.
+- Updated package URL to match new structure.
+
+
 v0.6.1
 ------------------------------
 *January 25, 2021*

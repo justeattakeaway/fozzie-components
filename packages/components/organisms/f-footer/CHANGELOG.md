@@ -3,6 +3,25 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.8.1
+------------------------------
+*January 29, 2021*
+### Changed
+- Fixed a condition to show country selector
+
+### Added
+- Tests to cover this change
+- Styles for right aligned footer row
+
+
+v4.8.0
+------------------------------
+*January 28, 2021*
+### Added
+- `showCountrySelector` property to turn it off if there is one in the header
+
+
 v4.7.0
 ------------------------------
 *January 15, 2021*
@@ -16,10 +35,9 @@ v4.7.0
 
 v4.6.1
 ------------------------------
-_January 14, 2021_
+*January 14, 2021*
 
 ### Changed
-
 - Fix broken link for NZ (Menulog)
 
 

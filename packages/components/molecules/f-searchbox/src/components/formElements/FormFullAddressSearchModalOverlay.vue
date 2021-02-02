@@ -30,9 +30,8 @@
                 </label>
 
                 <cancel-button
-                    type="button"
                     :class="$style['c-fullAddressFinder-btn']"
-                    @click.native="onModalClose">
+                    @click="onModalClose">
                     {{ copy.fullAddressSearchSuggestions.buttonCancel }}
                 </cancel-button>
             </div>
