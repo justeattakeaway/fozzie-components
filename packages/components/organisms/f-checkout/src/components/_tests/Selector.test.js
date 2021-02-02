@@ -179,7 +179,7 @@ describe('Selector', () => {
                 expect(selectionChangedSpy).toHaveBeenCalledWith(expected);
             });
 
-            it('should not call `selectionChanged` when there are no fulfilment times', () => {
+            it('should call `selectionChanged` with `undefined` when there are no fulfilment times', () => {
                 // Arrange
                 const selectionChangedSpy = jest.spyOn(Selector.methods, 'selectionChanged');
 
@@ -201,7 +201,7 @@ describe('Selector', () => {
                 wrapper.vm.$options.watch.fulfilmentTimes.call(wrapper.vm, []);
 
                 // Assert
-                expect(selectionChangedSpy).not.toHaveBeenCalled();
+                expect(selectionChangedSpy).toHaveBeenCalledWith(undefined);
             });
         });
     });
