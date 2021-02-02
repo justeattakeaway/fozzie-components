@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.46.0
 -------------------------------
-*January 28, 2021*
+*February 2, 2021*
 
 ### Changed
 - Reduce nesting within state by moving `address` and `time` out of `fulfilment`.
