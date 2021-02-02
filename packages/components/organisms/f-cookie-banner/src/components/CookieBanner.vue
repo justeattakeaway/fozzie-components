@@ -22,14 +22,10 @@
                 aria-modal="true">
                 <h2
                     id="cookieConsentLabel"
-                    :class="$style['c-cookieBanner-title']">
-                    <a
-                        ref="cookieBannerHeading"
-                        name="cookieConsentTitle"
-                        tabindex="0"
-                        data-consent-title>
-                        {{ $t('mainTitle') }}
-                    </a>
+                    :class="$style['c-cookieBanner-title']"
+                    tabindex="0"
+                    data-consent-title>
+                    {{ $t('mainTitle') }}
                 </h2>
 
                 <p :class="$style['c-cookieBanner-text']">
