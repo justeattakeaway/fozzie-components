@@ -40,7 +40,7 @@ describe('`FormFullAddressSearchModalOverlay`', () => {
                 store: createStore(),
                 localVue
             });
-
+            
             // Assert
             expect(wrapper.vm.shouldDisplayModalOverlay).toBeDefined();
         });
@@ -100,7 +100,7 @@ describe('`FormFullAddressSearchModalOverlay`', () => {
                 store: createStore(),
                 localVue
             });
-
+            
             // Act
             expect(wrapper.vm.address).toBeDefined();
         });
