@@ -6,7 +6,7 @@ const config = {
     params: {
         Countries: 'GB',
         Limit: '20',
-        Key: 'NZ25-WB19-RK92-UH65',
+        Key: '',
         Text: '',
         Container: '',
         Id: '',

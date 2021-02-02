@@ -20,6 +20,7 @@ const mockState = {
 };
 
 const mockActions = {
+    clearSuggestions: jest.fn(),
     setAddress: jest.fn(),
     setInputFocus: jest.fn(),
     setInputTimeoutValue: jest.fn(),
