@@ -1,6 +1,6 @@
 class Page {
     constructor() {
-        this.title = 'Component URLS'
+        this.title = 'Component URLs'
     }
 
     openOrganism(path) {
