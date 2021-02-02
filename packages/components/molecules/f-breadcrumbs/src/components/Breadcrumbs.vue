@@ -1,5 +1,7 @@
 <template>
-    <div :class="$style['c-breadcrumbs']">
+    <div
+        data-test-id="breadcrumbs-component"
+        :class="$style['c-breadcrumbs']">
         <ul :class="$style['c-breadcrumbs-list']">
             <template v-for="({ name, url }, index) in links">
                 <li
