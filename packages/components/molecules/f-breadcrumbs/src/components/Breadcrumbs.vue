@@ -14,13 +14,19 @@
                     <router-link
                         v-if="routerLinks"
                         :to="url"
-                        :class="[$style['c-breadcrumbs-link'], linkActiveClass(index)]">
+                        :class="[
+                            $style['c-breadcrumbs-link'],
+                            linkActiveClass(index)
+                        ]">
                         {{ name }}
                     </router-link>
                     <a
                         v-else
                         :href="url"
-                        :class="[$style['c-breadcrumbs-link'], linkActiveClass(index)]">
+                        :class="[
+                            $style['c-breadcrumbs-link'],
+                            linkActiveClass(index)
+                        ]">
                         {{ name }}
                     </a>
                 </li>
