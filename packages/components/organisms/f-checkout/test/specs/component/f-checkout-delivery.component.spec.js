@@ -18,12 +18,12 @@ describe('f-checkout "delivery" component tests', () => {
     });
 
     forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
-    .it.skip('should check if address fields exist', field => {
+    .it('should check if address fields exist', field => {
         // Assert
         expect(CheckoutComponent.doesFieldExist(field)).toBe(true);
     });
 
-    it.skip('should display the mandatory fields', () => {
+    it('should display the mandatory fields', () => {
         // Assert
         expect(CheckoutComponent.isFieldDisplayed('mobileNumber')).toBe(true);
     });
