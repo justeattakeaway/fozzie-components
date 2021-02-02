@@ -56,8 +56,10 @@ export default {
         url: '/account/logout',
         gtm: 'click_logout'
     },
-    offers: {
-        text: '%OFFERS%',
-        url: '/offers'
+    countrySelector: {
+        selectYourCountryText: 'Velg land',
+        currentCountryKey: 'no',
+        changeCurrentCountry: 'Du er på den norske nettsiden, klikk her for å endre',
+        goBackToMainMenu: 'Gå tilbake til hovedmenyen'
     }
 };

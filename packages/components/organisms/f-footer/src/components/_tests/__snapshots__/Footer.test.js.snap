@@ -20,7 +20,7 @@ exports[`Footer should render default component markup 1`] = `
     </div>
   </div>
   <div class="c-footer-container c-footer-row c-footer-row--combined c-footer-row--notEqualTopAndBottomPad c-footer-row--noPadBelowWide">
-    <country-selector-stub currentcountryname="United Kingdom" currentcountrykey="gb" countries="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" changecountrytext="You are on the UK website, click here to change." show-country-selector="true"></country-selector-stub>
+    <country-selector-stub currentcountryname="United Kingdom" currentcountrykey="gb" countries="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" changecountrytext="You are on the UK website, click here to change." data-test-id="country-selector"></country-selector-stub>
     <!---->
     <icon-list-stub icons="[object Object],[object Object],[object Object]" title="" ispayments="true" locale="en-GB"></icon-list-stub>
   </div>

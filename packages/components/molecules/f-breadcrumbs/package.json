@@ -7,7 +7,7 @@
     "dist",
     "test-utils"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-breadcrumbs",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-breadcrumbs",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],

@@ -18,25 +18,36 @@ A generator for Fozzie components.
 
 ## Usage
 
-1.  Install its dependencies:
+### Installation
 
-    ```sh
-    yarn install
-    ```
+First, install `yeoman` if you haven't already done so:
 
-    ```sh
-    npm install
-    ```
+```sh
+$ npm install --global yo
+```
 
-2.  Run the generator
+And then install the component generator:
 
-    ```bash
-    yo @justeat/component
-    ```
-3.  By following the interactive instructions, provide a name and a description.
+```sh
+$ npm install --global @justeat/generator-component
+```
 
-4.  Navigate to your newly scaffolded template 🎉
+### Running the generator
 
-## Development
+To run the generator, use this command from any directory within the `fozzie-components` repo:
 
-In order to develop the `generator-component`, you basically need to follow the instructions above and verify you're seeing what you expected to see in your newly created component.
+```sh
+yo @justeat/component
+```
+
+An interactive prompt should now be displayed asking for a Component name, description and a number of options for you to define the component that you are creating.
+
+Once you have completed all the prompts, your scaffolded component will be generated 🎉
+
+## Contributing
+
+In order to contribute to the `generator-component`, it's advised to link your local build of the generator to Yeoman.
+
+To do this, run `yarn link` from the root of the `generator-component` folder in the mono-repo.
+
+Once you have done this, running `yo @justeat/component` will run your local copy of the generator (rather than the version installed globally via NPM).
