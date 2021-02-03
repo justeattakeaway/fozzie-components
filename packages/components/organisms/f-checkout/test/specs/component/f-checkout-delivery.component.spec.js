@@ -28,7 +28,7 @@ describe('f-checkout "delivery" component tests', () => {
         expect(CheckoutComponent.isFieldDisplayed('mobileNumber')).toBe(true);
     });
 
-    it('should prevent user from submitting a postcode with illegal characters', () => {
+    it('should prevent user from submitting a postcode with an illegal postcode', () => {
         // Arrange
         const addressInfo = {
             postcode: 'TEST1A'
