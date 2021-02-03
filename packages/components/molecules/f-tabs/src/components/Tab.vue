@@ -4,20 +4,22 @@
         :name="transitionName">
         <div
             v-show="isActive"
-            :class="[$style['c-tab']]">
+            :class="$style['c-tab']">
             <slot />
         </div>
     </transition>
     <div v-else>
         <div
             v-show="isActive"
-            :class="[$style['c-tab']]">
+            :class="$style['c-tab']">
             <slot />
         </div>
     </div>
 </template>
 
 <script>
+import { DIRECTION } from '../constants';
+
 export default {
     name: 'Tab',
     props: {
@@ -40,7 +42,7 @@ export default {
             return this.tabsComponent.activeTab === this.name;
         },
         transitionName () {
-            return this.tabsComponent.animationDirection === 'LEFT' ?
+            return this.tabsComponent.animationDirection === DIRECTION.LEFT ?
                 this.$style['fade-in-right'] : this.$style['fade-in-left'];
         },
         animateTab () {
@@ -58,16 +60,22 @@ export default {
 </script>
 
 <style lang="scss" module>
-/* stylelint-disable -- does not understand syntax. */
+
+$fade-out-transition-duration: 0.3s;
+$fade-in-transition-duration: 0.7s;
+$fade-in-transition-distance: 40px;
+
+
 .c-tab {
     padding: spacing() 0;
     left: 0;
     top: 0;
     grid-area: 1/1;
 }
+
 @keyframes fadeInLeft {
     from {
-        transform: translate3d(-40px, 0, 0);
+        transform: translate3d(-#{$fade-in-transition-distance}, 0, 0);
     }
 
     to {
@@ -77,24 +85,27 @@ export default {
 }
 
 .fade-in-left {
+    /* stylelint-disable -- does not understand syntax. */
     &:global(-enter-to) {
         opacity: 0;
-        animation-duration: 0.7s;
+        animation-duration: $fade-in-transition-duration;
         animation-fill-mode: both;
         animation-name: fadeInLeft;
     }
     &:global(-enter) {
         opacity: 0;
-        transform: translate3d(-40px, 0, 0);
+        transform: translate3d(-#{$fade-in-transition-distance}, 0, 0);
     }
     &:global(-leave-to) {
         opacity: 0;
-        transition: opacity 0.3s;
+        transition: opacity $fade-out-transition-duration;
     }
+    /* stylelint-enable */
 }
+
 @keyframes fadeInRight {
     from {
-        transform: translate3d(40px, 0, 0);
+        transform: translate3d($fade-in-transition-distance, 0, 0);
     }
 
     to {
@@ -104,19 +115,21 @@ export default {
 }
 
 .fade-in-right {
+    /* stylelint-disable -- does not understand syntax. */
     &:global(-enter-to) {
         opacity: 0;
-        animation-duration: 0.7s;
+        animation-duration: $fade-in-transition-duration;
         animation-fill-mode: both;
         animation-name: fadeInRight;
     }
     &:global(-enter) {
         opacity: 0;
-        transform: translate3d(40px, 0, 0);
+        transform: translate3d($fade-in-transition-distance, 0, 0);
     }
     &:global(-leave-to) {
         opacity: 0;
-        transition: opacity 0.3s;
+        transition: opacity $fade-out-transition-duration;
     }
+    /* stylelint-enable */
 }
 </style>

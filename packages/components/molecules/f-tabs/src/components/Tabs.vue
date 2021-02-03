@@ -7,7 +7,10 @@
                 <button
                     v-for="({ name, title }, i) in tabs"
                     :key="i"
-                    :class="[{ [$style['c-tabs-button--active']]: activeTab === name }, $style['c-tabs-button']]"
+                    :class="[
+                        { [$style['c-tabs-button--active']]: activeTab === name },
+                        $style['c-tabs-button']
+                    ]"
                     @click="selectTabIndex(name)"
                 >
                     {{ title }}
@@ -22,18 +25,11 @@
 
 <script>
 
-const DIRECTION = {
-    LEFT: 'LEFT',
-    RIGHT: 'RIGHT'
-};
+import { DIRECTION } from '../constants';
 
 export default {
     name: 'Tabs',
     props: {
-        locale: {
-            type: String,
-            default: ''
-        },
         animate: {
             type: Boolean,
             default: false
@@ -67,6 +63,11 @@ export default {
         };
     },
     methods: {
+        /**
+         * This function is used to select the tab index and set the active tab while applying the correct animation
+         * uses the tab name to select index
+         * @param name
+         */
         selectTabIndex (name) {
             const previousIndex = this.tabs.findIndex(t => t.name === this.activeTab);
             const newIndex = this.tabs.findIndex(t => t.name === name);
@@ -77,6 +78,10 @@ export default {
             }
             this.activeTab = name;
         },
+        /**
+         * This function adds a tab that is calling the register tab callback
+         * @param tab
+         */
         addTab (tab) {
             if (tab.selected) {
                 this.activeTab = tab.name;
