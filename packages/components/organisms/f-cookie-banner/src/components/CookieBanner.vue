@@ -66,7 +66,7 @@
         </div>
         <legacy-banner
             v-else
-            @hide-legacy-banner="shouldHideBanner = true"
+            @hide-legacy-banner="hideBanner"
         />
     </div>
 </template>
@@ -174,6 +174,12 @@ export default {
          */
         focusOnTitle () {
             this.$refs.cookieBannerHeading.focus();
+        },
+        /**
+         * Hide the banner
+         */
+        hideBanner () {
+            this.shouldHideBanner = true;
         },
         /**
          * Check if the legacy cookie banner should be used
