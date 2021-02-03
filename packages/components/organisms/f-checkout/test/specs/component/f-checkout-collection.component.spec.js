@@ -7,28 +7,9 @@ describe('f-checkout "collection" component tests', () => {
         CheckoutComponent.waitForCheckoutComponent();
     });
 
-    it('should display "mobileNumber" error message when collection method is set and number is incorrect', () => {
-        // Arrange
-        const addressDetails = {
-            mobileNumber: '1234'
-        };
-
-        // Act
-        CheckoutComponent.populateCollectionCheckoutForm(addressDetails);
-        CheckoutComponent.goToPayment();
-
-        // Assert
-        expect(CheckoutComponent.isFieldErrorDisplayed('mobileNumber')).toBe(true);
-    });
-
     forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
     .it('should check that address fields should not exist', field => {
         // Assert
         expect(CheckoutComponent.doesFieldExist(field)).toBe(false);
-    });
-
-    it('should display the mandatory "mobileNumber" field', () => {
-        // Assert
-        expect(CheckoutComponent.isFieldDisplayed('mobileNumber')).toBe(true);
     });
 });

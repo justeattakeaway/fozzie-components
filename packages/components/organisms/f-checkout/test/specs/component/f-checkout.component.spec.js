@@ -31,6 +31,11 @@ describe('f-checkout component tests', () => {
         // Waiting for route here, so we can grab redirect url and show form submits.
     });
 
+    it('should display the mandatory "mobileNumber" field', () => {
+        // Assert
+        expect(CheckoutComponent.isFieldDisplayed('mobileNumber')).toBe(true);
+    });
+
     it('should display a "mobileNumber" error message when an unsupported country code is used in the mobile number field', () => {
         // Arrange
         const addressDetails = {

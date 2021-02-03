@@ -15,4 +15,34 @@ describe('f-checkout component tests', () => {
         // Assert
         expect(CheckoutComponent.isGuestCheckoutLoginButtonDisplayed()).toBe(true);
     });
+
+    forEach(['firstName', 'lastName', 'emailAddress'])
+    .it('should show the guest checkout fields', field => {
+        // Assert
+        expect(CheckoutComponent.doesFieldExist(field)).toBe(true);
+    });
+
+    forEach(['firstName', 'lastName', 'emailAddress'])
+    .it('should display each fields error message', field => {
+        // Act
+        CheckoutComponent.clearCheckoutForm(field);
+        CheckoutComponent.goToPayment();
+
+        // Assert
+        expect(CheckoutComponent.isFieldErrorDisplayed(field)).toBe(true);
+    });
+
+    it('should prevent user from submitting an invalid email address', () => {
+        // Arrange
+        const emailAddress = {
+            emailAddress: 'abc@abc'
+        };
+
+        // Act
+        CheckoutComponent.populateCheckoutForm(emailAddress);
+        CheckoutComponent.goToPayment();
+
+        // Assert
+        expect(CheckoutComponent.isFieldErrorDisplayed('emailAddress')).toBe(true);
+    });
 });
