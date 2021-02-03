@@ -152,8 +152,6 @@ export default {
     },
 
     methods: {
-        // This method emits `navIsOpen` state from the navigation component
-        // to be able to deside when to show transparent header styles on mobile view
         mobileNavToggled (value) {
             this.mobileNavIsOpen = value;
         }
