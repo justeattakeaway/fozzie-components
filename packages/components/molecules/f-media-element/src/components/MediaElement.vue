@@ -119,17 +119,17 @@ export default {
         fontSizeClass () {
             switch (this.textSize) {
                 case FONT_SIZE.SM:
-                    return this.$style['c-mediaElement--fontSizeSmall'];
+                    return this.$style['c-mediaElement-content--fontSizeSmall'];
                 case FONT_SIZE.MD:
-                    return this.$style['c-mediaElement--fontSizeMedium'];
+                    return this.$style['c-mediaElement-content--fontSizeMedium'];
                 case FONT_SIZE.LG:
-                    return this.$style['c-mediaElement--fontSizeLarge'];
+                    return this.$style['c-mediaElement-content--fontSizeLarge'];
                 case FONT_SIZE.XL:
-                    return this.$style['c-mediaElement--fontSizeXLarge'];
+                    return this.$style['c-mediaElement-content--fontSizeXLarge'];
                 case FONT_SIZE.XXL:
-                    return this.$style['c-mediaElement--fontSizeXXLarge'];
+                    return this.$style['c-mediaElement-content--fontSizeXXLarge'];
                 default:
-                    return this.$style['c-mediaElement--fontSizeMedium'];
+                    return this.$style['c-mediaElement-content--fontSizeMedium'];
             }
         }
     }
@@ -264,7 +264,7 @@ $font-sizes: (
  * and text depending on the key using map-get()
  */
 @each $size, $value in $font-sizes {
-    .c-mediaElement--#{$size} {
+    .c-mediaElement-content--#{$size} {
         & .c-mediaElement-title {
             @include font-size(map-get($value, 'title'));
         }
