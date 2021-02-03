@@ -72,6 +72,7 @@ The props that can be defined are as follows:
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
+| `checkoutId` | `String` | This prop is required | Unique ID for the checkout.<br><br>Currently this is the basket ID. |
 | `checkoutUrl` | `String` | - | URL for the API called to load the Checkout Data.<br><br>The data returned from this API contains the serviceType, which determines if the Checkout component is created for Collection or Delivery when the user is authenticated. |
 | `checkoutAvailableFulfilmentUrl` | `String` | - | URL for the API called to load the Available Fulfilment data. |
 | `createGuestUrl` | `String` | - | URL for the API called to load the Create a Guest User. |
@@ -109,7 +110,7 @@ You can add event listeners for these like so
     @checkoutGetPaymentSuccess="onGetPaymentSuccess"
     @checkoutGetPaymentFailure="onGetPaymentFailure"
     @checkoutGetBasketSuccess="onGetBasketSuccess"
-    @checkoutGetBasketFailure="onGetBasketFailure"
+    @checkoutGetBasketFailure="onGetBasketFailure">
   </vue-checkout>
 </template>
 
