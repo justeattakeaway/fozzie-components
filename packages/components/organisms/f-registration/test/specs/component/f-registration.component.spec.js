@@ -32,7 +32,6 @@ describe('f-registration component tests', () => {
         registration.submitForm(userInfo);
         
         // Assert
-        expect(registration.countOfErrorsDisplayed()).toEqual(4)
         expect(registration.isEmptyErrorDisplayed(field)).toBe(true);
     });
 
@@ -68,25 +67,6 @@ describe('f-registration component tests', () => {
         
         // Assert
         expect(registration.isMaxLengthErrorDisplayed(field)).toBe(true);
-    });
-
-    forEach(['firstName', 'lastName', 'email', 'password'])
-    .it('should only display 405 request error when form is populated successfully', field => {
-        // Arrange
-        const userInfo = {
-            firstName: 'Ashton',
-            lastName: 'Adamms',
-            email: 'ashton.adamms+jetest@just-eat.com', 
-            password: 'llanfairpwllgwyngyllgogerychwyr'
-        };
-        const requestError = "Error: Request failed with status code 405"
-
-        // Act
-        registration.submitForm(userInfo);
-        
-        // Assert;
-        expect(registration.countOfErrorsDisplayed()).toEqual(1);
-        expect(registration.displayRequestErrorText()).toContain(requestError);
     });
 
 

@@ -20,7 +20,6 @@ const {
     EMAIL_INVALID_ERROR,
     PASSWORD_INPUT,
     PASSWORD_EMPTY_ERROR, 
-    ALL_ERROR_FIELDS
 } = require('./f-registration.selectors');
 
 class Registration extends Page {
@@ -30,7 +29,6 @@ class Registration extends Page {
     get termsAndConditionsLink () { return $(TERMS_AND_CONDITIONS_LINK) }
     get privacyPolicyLink () { return $(PRIVACY_POLICY_LINK) }
     get cookiesPolicyLink () { return $(COOKIES_POLICY_LINK) }
-    get errors () { return $$(ALL_ERROR_FIELDS)}
   
     fields = {
         firstName: {
@@ -58,7 +56,7 @@ class Registration extends Page {
     };
 
     open() {
-        super.openOrganism('registration-component');
+        super.openComponent('organism', 'registration-component');
     };
 
     waitForComponent(){
@@ -90,10 +88,6 @@ class Registration extends Page {
         this.createAccountButton.click();
     };
 
-    countOfErrorsDisplayed(){
-        return this.errors.length;
-    };
-
     isEmptyErrorDisplayed(fieldName){
         return this.fields[fieldName].emptyError.isDisplayedInViewport();
     };
@@ -108,10 +102,6 @@ class Registration extends Page {
 
     isInvalidErrorDisplayed(fieldName) {
         return this.fields[fieldName].invalidError.isDisplayedInViewport();
-    };
-    
-    displayRequestErrorText(){
-        return this.errors[0].getText();
     };
 
     termsAndConditionsLinkCanBeClicked(){
