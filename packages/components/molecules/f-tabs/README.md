@@ -29,15 +29,20 @@
 
 2.  Import the component
 
+    This component has two exports `Tab.vue` and `Tabs.vue`. The reasoning behind this is that due to the ability to
+    register a tab with provide / inject, you may wish in a particular circumstance create your own tab and register
+    it manually, therefore removing the need to import `Tab.vue`.
+
     You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
     ```
-    import VueTabs from '@justeat/f-tabs';
+    import { Tabs, Tab } from '@justeat/f-tabs';
     import '@justeat/f-tabs/dist/f-tabs.css';
 
     export default {
         components: {
-            VueTabs
+            Tabs,
+            Tab
         }
     }
     ```
