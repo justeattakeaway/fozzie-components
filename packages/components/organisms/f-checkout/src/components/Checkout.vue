@@ -98,7 +98,7 @@ import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants'
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
-import { mapCheckoutRequest } from '../services/mapper';
+import mapCheckoutRequest from '../services/mapper';
 
 export default {
     name: 'VueCheckout',

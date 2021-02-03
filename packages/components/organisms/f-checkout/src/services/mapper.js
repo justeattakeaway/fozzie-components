@@ -37,6 +37,4 @@ const mapCheckoutRequest = ({
     ]
 });
 
-export {
-    mapCheckoutRequest
-};
+export default mapCheckoutRequest;
