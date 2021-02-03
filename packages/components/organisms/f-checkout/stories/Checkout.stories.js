@@ -18,6 +18,7 @@ export default {
 
 Vue.use(Vuex);
 
+const checkoutId = 'checkoutId';
 const deliveryUrl = '/checkout-delivery.json';
 const collectionUrl = '/checkout-collection.json';
 const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
@@ -38,6 +39,9 @@ export const CheckoutComponent = () => ({
     props: {
         locale: {
             default: select('Locale', [ENGLISH_LOCALE])
+        },
+        checkoutId: {
+            default: text('Checkout ID', checkoutId)
         },
         checkoutUrl: {
             default: select('Checkout Url', [deliveryUrl, collectionUrl], deliveryUrl)
@@ -64,6 +68,7 @@ export const CheckoutComponent = () => ({
         }
     }),
     template: '<vue-checkout ' +
+        ':checkoutId="checkoutId" ' +
         ':checkoutUrl="checkoutUrl" ' +
         ':checkout-available-fulfilment-url="checkoutAvailableFulfilmentUrl" ' +
         ':create-guest-url="createGuestUrl" ' +
@@ -72,7 +77,7 @@ export const CheckoutComponent = () => ({
         ':locale="locale" ' +
         ':loginUrl="loginUrl" ' +
         // eslint-disable-next-line no-template-curly-in-string
-        ' :key="`${locale},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl}`" />'
+        ' :key="`${locale},${checkoutId},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';

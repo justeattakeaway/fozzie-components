@@ -2,6 +2,12 @@
 
 exports[`CheckoutModule mutations :: UPDATE_STATE :: should update state with delivery response. 1`] = `
 Object {
+  "address": Object {
+    "city": "Bristol",
+    "line1": "1 Bristol Road",
+    "line2": "Flat 1",
+    "postcode": "BS1 1AA",
+  },
   "authToken": "",
   "availableFulfilment": Object {
     "isAsapAvailable": false,
@@ -12,18 +18,6 @@ Object {
     "firstName": "Joe",
     "lastName": "",
     "mobileNumber": "+447111111111",
-  },
-  "fulfilment": Object {
-    "address": Object {
-      "city": "Bristol",
-      "line1": "1 Bristol Road",
-      "line2": "Flat 1",
-      "postcode": "BS1 1AA",
-    },
-    "time": Object {
-      "from": "2020-01-01T00:00+00:00",
-      "to": "2020-01-01T00:00+00:00",
-    },
   },
   "id": "12345",
   "isFulfillable": true,
@@ -57,5 +51,9 @@ Object {
     },
   ],
   "serviceType": "delivery",
+  "time": Object {
+    "from": "2020-01-01T00:00+00:00",
+    "to": "2020-01-01T00:00+00:00",
+  },
 }
 `;
