@@ -18,8 +18,9 @@ exports.getAccessibilityTestResults = (componentName) => {
                 values: ['wcag2a']
             },
             rules: {
-                'duplicate-id': { enabled: false }
-            }
+				'duplicate-id': { enabled: false },
+				'bypass': { enabled: false }
+			}
         };
 
         axe.run(document, options, (err, results) => {

@@ -5,11 +5,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.8.0
 ------------------------------
-*February 2, 2021*
+*February 3, 2021*
 
 ### Changes
 - Updated `package.json` with `chromedriver` version to `88.0.0`.
 - Updated CircleCI `config.yml` to support updated `chromedriver` version.
+
+
+v3.7.1
+------------------------------
+*February 3, 2021*
+
+### Changes
+- Update Axe Helper
 
 
 v3.7.0
