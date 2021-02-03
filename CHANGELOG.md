@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.9.0
 ------------------------------
-*February 2, 2021*
+*February 3, 2021*
 
 ### Added
 - `f-wdio-utils` package in the services folder - for the `page-object` file and other webdriverio utils. 
