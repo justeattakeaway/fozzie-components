@@ -71,8 +71,8 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collectio
       </g>
     </g>
   </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                        Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
-                    </span></p>
+                            Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
+                        </span></p>
 `;
 
 exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collection\` should show error message and emit failure event when the mobile number field is populated with a < 10 numbers 1`] = `
@@ -86,8 +86,8 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collectio
       </g>
     </g>
   </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                        Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
-                    </span></p>
+                            Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
+                        </span></p>
 `;
 
 exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collection\` should show error message and emit failure event when the mobile number field is populated with non numeric value 1`] = `
@@ -101,8 +101,8 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collectio
       </g>
     </g>
   </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                        Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
-                    </span></p>
+                            Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
+                        </span></p>
 `;
 
 exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\` should emit failure event and display error message when address line1 input field is empty 1`] = `

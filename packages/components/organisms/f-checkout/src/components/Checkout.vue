@@ -1,9 +1,7 @@
 <template>
     <div>
-        <error v-if="hasLoadingFailed" />
-
         <div
-            v-else
+            v-if="hasCheckoutLoadedSuccessfully"
             data-theme="jet"
             data-test-id="checkout-component">
             <alert
@@ -68,6 +66,8 @@
                     v-if="!isLoggedIn" />
             </card>
         </div>
+
+        <error v-else />
     </div>
 </template>
 
@@ -182,7 +182,7 @@ export default {
             tenantConfigs,
             genericErrorMessage: null,
             shouldDisableCheckoutButton: false,
-            hasLoadingFailed: true
+            hasCheckoutLoadedSuccessfully: true
         };
     },
 
@@ -341,6 +341,7 @@ export default {
                 this.$emit(EventNames.CheckoutGetSuccess); // TODO: Check these emitted events.
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutGetFailure, thrownErrors); // TODO: Check these emitted events.
+                this.hasCheckoutLoadedSuccessfully = false;
             }
         },
 
@@ -360,6 +361,7 @@ export default {
                 this.$emit(EventNames.CheckoutBasketGetSuccess); // TODO: Check these emitted events.
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutBasketGetFailure, thrownErrors); // TODO: Check these emitted events.
+                this.hasCheckoutLoadedSuccessfully = false;
             }
         },
 
@@ -377,6 +379,7 @@ export default {
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess); // TODO: Check these emitted events.
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetFailure, thrownErrors); // TODO: Check these emitted events.
+                this.hasCheckoutLoadedSuccessfully = false;
             }
         },
 

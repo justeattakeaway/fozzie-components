@@ -4,7 +4,7 @@
         has-outline
         is-page-content-wrapper
         card-heading-position="center"
-        data-test-id="checkout-error-component"
+        data-test-id="checkout-error-page-component"
         :class="$style['c-checkout-error']"
     >
         <img

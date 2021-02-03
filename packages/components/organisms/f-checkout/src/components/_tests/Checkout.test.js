@@ -154,6 +154,52 @@ describe('Checkout', () => {
                 expect(addressBlock.exists()).toBe(false);
             });
         });
+
+        describe('hasCheckoutLoadedSuccessfully ::', () => {
+            it('should render the checkout form and not the error page when set to `true`', () => {
+                // Arrange & Act
+                const wrapper = mount(VueCheckout, {
+                    i18n,
+                    store: createStore(),
+                    localVue,
+                    propsData,
+                    data () {
+                        return {
+                            hasCheckoutLoadedSuccessfully: true
+                        };
+                    }
+                });
+
+                const checkoutForm = wrapper.find('[data-test-id="checkout-component"]');
+                const errorPage = wrapper.find('[data-test-id="checkout-error-page-component"]');
+
+                // Assert
+                expect(checkoutForm.exists()).toBe(true);
+                expect(errorPage.exists()).toBe(false);
+            });
+
+            it('should render the error page and not the checkout form when set to `false`', () => {
+                // Arrange & Act
+                const wrapper = mount(VueCheckout, {
+                    i18n,
+                    store: createStore(),
+                    localVue,
+                    propsData,
+                    data () {
+                        return {
+                            hasCheckoutLoadedSuccessfully: false
+                        };
+                    }
+                });
+
+                const checkoutForm = wrapper.find('[data-test-id="checkout-component"]');
+                const errorPage = wrapper.find('[data-test-id="checkout-error-page-component"]');
+
+                // Assert
+                expect(checkoutForm.exists()).toBe(false);
+                expect(errorPage.exists()).toBe(true);
+            });
+        });
     });
 
     describe('props ::', () => {
@@ -938,7 +984,7 @@ describe('Checkout', () => {
             });
 
             describe('when `getCheckout` request fails', () => {
-                it('should emit failure event', async () => {
+                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
                     // Arrange
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
@@ -955,6 +1001,7 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
+                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
                 });
             });
 
@@ -986,7 +1033,7 @@ describe('Checkout', () => {
             });
 
             describe('when `getAvailableFulfilment` request fails', () => {
-                it('should emit failure event', async () => {
+                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
                     // Arrange
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
@@ -1003,6 +1050,7 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure).length).toBe(1);
+                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
                 });
             });
 
@@ -1034,7 +1082,7 @@ describe('Checkout', () => {
             });
 
             describe('when `getBasket` request fails', () => {
-                it('should emit failure event', async () => {
+                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
                     // Arrange
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
@@ -1051,6 +1099,7 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess)).toBeUndefined();
+                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
                 });
             });
 
