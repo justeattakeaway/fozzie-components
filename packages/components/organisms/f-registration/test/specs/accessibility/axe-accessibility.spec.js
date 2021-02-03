@@ -1,5 +1,5 @@
-import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
-import Registration from '../../../test-utils/component-objects/f-registration.component';
+const { getAccessibilityTestResults } = require('../../../../../../../test/utils/axe-helper');
+const Registration = require ('../../../test-utils/component-objects/f-registration.component');
 const registration = new Registration();
 
 describe('Accessibility tests', () => {
