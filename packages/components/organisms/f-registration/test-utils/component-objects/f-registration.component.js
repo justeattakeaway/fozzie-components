@@ -64,11 +64,11 @@ class Registration extends Page {
     };
 
     isComponentDisplayed () {
-        return this.component.isDisplayedInViewport();
+        return this.component.isDisplayed();
     };
 
     isInputFieldDisplayed(fieldName){
-        return this.fields[fieldName].input.isDisplayedInViewport();
+        return this.fields[fieldName].input.isDisplayed();
     };
     /**
      * @description
@@ -89,19 +89,19 @@ class Registration extends Page {
     };
 
     isEmptyErrorDisplayed(fieldName){
-        return this.fields[fieldName].emptyError.isDisplayedInViewport();
+        return this.fields[fieldName].emptyError.isDisplayed();
     };
 
     isMaxLengthErrorDisplayed(fieldName) {
-        return this.fields[fieldName].maxLengthError.isDisplayedInViewport();
+        return this.fields[fieldName].maxLengthError.isDisplayed();
     };
 
     isEmailExistsErrorDisplayed(){
-        return this.fields.email.existsError.isDisplayedInViewport();
+        return this.fields.email.existsError.isDisplayed();
     }
 
     isInvalidErrorDisplayed(fieldName) {
-        return this.fields[fieldName].invalidError.isDisplayedInViewport();
+        return this.fields[fieldName].invalidError.isDisplayed();
     };
 
     termsAndConditionsLinkCanBeClicked(){
