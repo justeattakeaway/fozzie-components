@@ -1,13 +1,13 @@
 {
-  "name": "@justeat/f-media-element",
-  "description": "Fozzie Media Element - provides ability to display text and an image in different orientations",
-  "version": "0.2.0",
-  "main": "dist/f-media-element.umd.min.js",
+  "name": "@justeat/f-cookie-banner",
+  "description": "Fozzie Cookie Banner – Cookie Banner",
+  "version": "0.1.0",
+  "main": "dist/f-cookie-banner.umd.min.js",
   "files": [
     "dist",
     "test-utils"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-media-element",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-cookie-banner",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -27,11 +27,11 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-media-element ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-cookie-banner ./src/index.js",
+    "demo": "vue serve --port 8080 ./src/demo/Index.vue",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
-    "report": "cd ../.. && yarn report",
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
     "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
@@ -40,12 +40,15 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
+    "@justeat/f-globalisation": "1.0.0",
     "@justeat/f-services": "1.7.0"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.2.0"
+    "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
+    "@justeat/f-button": "0.7.0",
+    "@justeat/f-vue-icons": "2.3.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",

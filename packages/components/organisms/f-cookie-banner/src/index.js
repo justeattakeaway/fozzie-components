@@ -1,20 +1,18 @@
 /**
- * @overview Fozzie Tabs Component JS Wrapper
+ * @overview Fozzie Cookie Banner Component JS Wrapper
  *
- * @module f-tabs
+ * @module f-cookie-banner
  */
 
 
 // Import vue component
-import Tabs from '@/components/Tabs.vue';
-import Tab from '@/components/Tab.vue';
+import CookieBanner from '@/components/CookieBanner.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('Tabs', Tabs);
-    Vue.component('Tab', Tab);
+    Vue.component('CookieBanner', CookieBanner);
 }
 
 // Create module definition for Vue.use()
@@ -34,7 +32,4 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export {
-    Tabs,
-    Tab
-};
+export default CookieBanner;

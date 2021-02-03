@@ -3,7 +3,8 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v3.9.0
+<<<<<<< HEAD
+v3.8.0
 ------------------------------
 *February 3, 2021*
 
@@ -11,7 +12,15 @@ v3.9.0
 - `f-wdio-utils` package in the services folder - for the `page-object` file and other webdriverio utils. 
 
 
-v3.8.0
+v3.7.1
+------------------------------
+*February 3, 2021*
+
+### Changes
+- Update Axe Helper
+
+
+v3.7.0
 ------------------------------
 *January 29, 2021*
 
