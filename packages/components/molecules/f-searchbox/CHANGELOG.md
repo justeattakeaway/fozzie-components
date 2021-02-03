@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.22
+------------------------------
+*February 2, 2021*
+
+### Added
+- Ability to save full address to local storage.
+- Ability to retrieve existing full address from local storage.
+- Ability to remove full address from local storage when feature is turned off.
+- Tests to cover changes.
+
+
 v4.0.0-beta.21
 ------------------------------
 *January 28, 2021*

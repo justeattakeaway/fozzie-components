@@ -98,6 +98,7 @@ import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants'
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
+import { mapCheckoutRequest } from '../services/mapper';
 
 export default {
     name: 'VueCheckout',
@@ -207,15 +208,16 @@ export default {
 
     computed: {
         ...mapState('checkout', [
-            'customer',
-            'time',
             'address',
+            'customer',
             'id',
             'isFulfillable',
             'isLoggedIn',
             'messages',
             'notices',
-            'serviceType'
+            'serviceType',
+            'time',
+            'userNote'
         ]),
 
         isMobileNumberValid () {
@@ -283,31 +285,13 @@ export default {
          */
         async submitCheckout () {
             try {
-                const checkoutData = {
-                    customer: {
-                        firstName: this.customer.firstName,
-                        lastName: this.customer.lastName,
-                        phoneNumber: this.customer.mobileNumber,
-                        dateOfBirth: ''
-                    },
-                    fulfilment: {
-                        time: this.time,
-                        location: {
-                            ...(this.isCheckoutMethodDelivery ? {
-                                address: this.address
-                            } : {}),
-                            geolocation: null
-                        }
-                    }
-                };
-
                 if (!this.isLoggedIn) {
                     await this.setupGuestUser();
                 }
 
                 await this.patchCheckout({
                     url: `checkout/${this.tenant}/${this.checkoutId}`,
-                    data: checkoutData,
+                    data: mapCheckoutRequest(this),
                     timeout: this.checkoutTimeout
                 });
 
