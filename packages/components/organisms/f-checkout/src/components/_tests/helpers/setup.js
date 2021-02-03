@@ -40,7 +40,8 @@ const defaultState = {
     notices: [],
     messages: [],
     authToken: '',
-    isLoggedIn: false
+    isLoggedIn: false,
+    userNote: ''
 };
 
 const defaultActions = {

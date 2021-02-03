@@ -75,7 +75,8 @@ const defaultState = {
         isAsapAvailable: false
     },
     authToken: '',
-    isLoggedIn: false
+    isLoggedIn: false,
+    userNote: ''
 };
 
 let state = CheckoutModule.state();
