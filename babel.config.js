@@ -4,7 +4,7 @@ module.exports = api => {
     const presets = [];
     const plugins = [
         '@babel/plugin-proposal-optional-chaining', 
-        "@babel/plugin-proposal-class-properties"
+        '@babel/plugin-proposal-class-properties'
     ];
     const builtIns = (api.env('development') ? 'entry' : false);
 
