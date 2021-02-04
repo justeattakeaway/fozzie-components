@@ -31,6 +31,7 @@
                 data-test-id="suggestions"
                 aria-live="assertive"
                 :copy="copy"
+                :config="config"
                 :suggestion-format="suggestionFormat"
                 :suggestions="suggestions"
                 :selected="keyboardSuggestionIndex"
@@ -266,7 +267,7 @@ export default {
         this.formUrl = generateFormQueryUrl(this.queryString, this.formUrl);
 
         this.reinitialiseConfigSettings();
-        this.initialiseFullAddressSearch(this.config.isFullAddressSearchEnabled);
+        this.initialiseFullAddressSearch(this.config);
         this.setIsBelowMid(document.body.clientWidth);
         window.addEventListener('resize', this.onResize);
     },
@@ -288,6 +289,7 @@ export default {
     methods: {
         ...mapActions('searchbox', [
             'setAddress',
+            'setAutoNavigateToSerp',
             'setSuggestions',
             'setIsValid',
             'setErrors',
@@ -416,7 +418,9 @@ export default {
                 onSubmit: this.onSubmit,
                 formUrl: this.formUrl,
                 form: this.$refs.form,
-                event
+                event,
+                query: this.query,
+                cuisine: this.cuisine
             };
 
             search(searchPayload, getLastLocation());
@@ -462,16 +466,19 @@ export default {
          * Initialise tenant specific full address feature if available. See en-gb as an
          * example.
          *
-         * @param isFullAddressSearchEnabled
+         * @param config
          */
-        initialiseFullAddressSearch (isFullAddressSearchEnabled) {
-            if (isFullAddressSearchEnabled) {
-                const isActive = isFullAddressSearchEnabled();
+        initialiseFullAddressSearch (config) {
+            if (config.isFullAddressSearchEnabled) {
+                const isActive = config.isFullAddressSearchEnabled();
+                const isFullAddressNavigateToSerpActive = config.isFullAddressNavigateToSerpEnabled
+                        && config.isFullAddressNavigateToSerpEnabled();
 
                 if (isActive) {
                     this.setFullAddressSearchConfigs({
                         isFullAddressSearchEnabled: isActive
                     });
+                    this.setAutoNavigateToSerp(isFullAddressNavigateToSerpActive);
                     this.setAutoCompleteAvailability(true);
                     this.fetchLocalStorageAddress();
                 } else {

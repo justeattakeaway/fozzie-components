@@ -46,6 +46,8 @@
 import { mapState, mapActions } from 'vuex';
 import { MapPinIcon } from '@justeat/f-vue-icons';
 import ContinueWithSuggestion from './FormFullAddressContinueWithSuggestion.vue';
+import { extractPostcode } from '../../services/general.services';
+import { generatePostForm } from '../../utils/helpers';
 
 export default {
     components: {
@@ -70,6 +72,11 @@ export default {
         copy: {
             type: Object,
             default:  () => ({})
+        },
+
+        config: {
+            type: Object,
+            default:  () => ({})
         }
     },
 
@@ -85,7 +92,8 @@ export default {
             'inputTimeoutValue',
             'fullAddressDetails',
             'suggestions',
-            'selectedStreetLevelAddressId'
+            'selectedStreetLevelAddressId',
+            'shouldAutoNavigateToSerp'
         ]),
 
         /**
@@ -203,6 +211,16 @@ export default {
             if (isAddressType) {
                 await this.getFinalAddressSelectionDetails(selectedAddress.id);
                 this.resetSearch();
+
+                /**
+                 * Auto navigate to SERP on address selection.
+                 * Make sure there's no `onSubmit` handler passed to avoid navigation
+                 * in places like Menu.
+                 *
+                 * */
+                if (this.shouldAutoNavigateToSerp && !this.config.onSubmit) {
+                    this.navigateToSerpOnAddressSelection();
+                }
             } else {
                 this.getMatchedAreaAddressResults({
                     address: this.address,
@@ -271,6 +289,20 @@ export default {
             if (this.isBelowMid) {
                 this.setShouldShowSuggestionModel(false);
             }
+        },
+
+        /**
+         * Automatically navigate to SERP when `shouldAutoNavigateToSerp` is `true`.
+         */
+        navigateToSerpOnAddressSelection () {
+            const { query, formUrl } = this.config;
+
+            const payload = {
+                postcode: extractPostcode(this.address),
+                query
+            };
+
+            generatePostForm(formUrl, payload);
         }
     }
 };

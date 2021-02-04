@@ -26,7 +26,8 @@ import {
     SET_IS_BELOW_MID,
     SET_HAS_INPUT_ELEVATION,
     SET_SHOULD_SUGGESTIONS_MODEL,
-    SET_SAVED_FULL_ADDRESS_DETAILS
+    SET_SAVED_FULL_ADDRESS_DETAILS,
+    SET_AUTO_NAVIGATE_TO_SERP
 } from './mutation.types';
 
 export default {
@@ -46,6 +47,7 @@ export default {
         shouldInputFieldHaveFocus: false,
         shouldDisplaySuggestionsDropdown: true,
         shouldShowSuggestionsModal: false,
+        shouldAutoNavigateToSerp: false,
         inputTimeoutValue: null,
         isLoadingResults: false,
         isValid: false,
@@ -235,6 +237,10 @@ export default {
 
         setSavedFullAddressDetails ({ commit }, payload) {
             commit(SET_SAVED_FULL_ADDRESS_DETAILS, payload);
+        },
+    
+        setAutoNavigateToSerp ({ commit }, payload) {
+            commit(SET_AUTO_NAVIGATE_TO_SERP, payload);
         }
     },
 
@@ -443,6 +449,10 @@ export default {
             }));
 
             state.savedFullAddressDetails = savedAddressResult;
-        }
+        },
+    
+        [SET_AUTO_NAVIGATE_TO_SERP]: (state, shouldAutoNavigateToSerp) => {
+            state.shouldAutoNavigateToSerp = shouldAutoNavigateToSerp;
+        },
     }
 };

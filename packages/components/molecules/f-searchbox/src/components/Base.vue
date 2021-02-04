@@ -38,8 +38,8 @@ export default {
             default: () => {}
         },
         dependentApiPromise: {
-            type: Object,
-            default: () => {}
+            type: Promise,
+            default: undefined
         },
         copyOverride: {
             type: Object,
