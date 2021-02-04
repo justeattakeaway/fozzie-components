@@ -12,6 +12,27 @@ v0.48.0
 - Tests to cover changes.
 
 
+v0.48.0
+-------------------------------
+*February 4, 2021*
+
+### Added
+- Mapper service for creation of checkout PATCH payload.
+- Handling of user note and including it in the PATCH request.
+
+
+v0.47.0
+-------------------------------
+*February 3, 2021*
+
+### Added
+- `f-checkout-guest.spec` files for `guest checkout` tests.
+- Guest Checkout tests.
+
+### Changed
+- Links directly to test pages have been changed from testing within Storybook to its own page.
+
+
 v0.46.0
 -------------------------------
 *February 2, 2021*

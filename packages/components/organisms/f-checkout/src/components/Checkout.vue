@@ -47,7 +47,9 @@
 
                 <form-selector />
 
-                <user-note data-test-id="user-note" />
+                <user-note
+                    data-test-id="user-note"
+                    @input="updateUserNote($event.target.value)" />
 
                 <f-button
                     :class="$style['c-checkout-submitButton']"
@@ -96,6 +98,7 @@ import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants'
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
+import mapUpdateCheckoutRequest from '../services/mapper';
 
 export default {
     name: 'VueCheckout',
@@ -205,16 +208,16 @@ export default {
 
     computed: {
         ...mapState('checkout', [
-            'customer',
-            'time',
             'address',
+            'customer',
             'id',
             'isFulfillable',
             'isLoggedIn',
             'messages',
-            'notes',
             'notices',
-            'serviceType'
+            'serviceType',
+            'time',
+            'userNote'
         ]),
 
         isMobileNumberValid () {
@@ -254,7 +257,8 @@ export default {
             'getCheckout',
             'patchCheckout',
             'setAuthToken',
-            'updateCustomerDetails'
+            'updateCustomerDetails',
+            'updateUserNote'
         ]),
 
         /**
@@ -281,32 +285,21 @@ export default {
          */
         async submitCheckout () {
             try {
-                const checkoutData = {
-                    customer: {
-                        firstName: this.customer.firstName,
-                        lastName: this.customer.lastName,
-                        phoneNumber: this.customer.mobileNumber,
-                        dateOfBirth: ''
-                    },
-                    fulfilment: {
-                        time: this.time,
-                        location: {
-                            ...(this.isCheckoutMethodDelivery ? {
-                                address: this.address
-                            } : {}),
-                            geolocation: null
-                        }
-                    },
-                    notes: this.notes
-                };
-
                 if (!this.isLoggedIn) {
                     await this.setupGuestUser();
                 }
 
+                const data = mapUpdateCheckoutRequest({
+                    address: this.address,
+                    customer: this.customer,
+                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
+                    time: this.time,
+                    userNote: this.userNote
+                });
+
                 await this.patchCheckout({
                     url: `checkout/${this.tenant}/${this.checkoutId}`,
-                    data: checkoutData,
+                    data,
                     timeout: this.checkoutTimeout
                 });
 
