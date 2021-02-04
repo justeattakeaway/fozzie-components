@@ -56,26 +56,28 @@ describe('checkout mapper', () => {
         ]);
     });
 
-    it('should not map address if checkout method is not delivery', () => {
-        // Arrange
-        const address = {
-            line1: '1 Bristol Road',
-            line2: 'Flat 1',
-            city: 'Bristol',
-            postcode: 'BS1 1AA'
-        };
-
+    describe('when checkout method is not delivery', () => {
         const isCheckoutMethodDelivery = false;
 
-        // Act
-        const requestBody = mapUpdateCheckoutRequest({
-            ...defaultParams,
-            address,
-            isCheckoutMethodDelivery
-        });
+        it('should not map the address', () => {
+            // Arrange
+            const address = {
+                line1: '1 Bristol Road',
+                line2: 'Flat 1',
+                city: 'Bristol',
+                postcode: 'BS1 1AA'
+            };
 
-        // Assert
-        expect(requestBody.fulfilment.location.address).toBeUndefined();
+            // Act
+            const requestBody = mapUpdateCheckoutRequest({
+                ...defaultParams,
+                address,
+                isCheckoutMethodDelivery
+            });
+
+            // Assert
+            expect(requestBody.fulfilment.location.address).toBeUndefined();
+        });
     });
 
     it('should map user note correctly', () => {
