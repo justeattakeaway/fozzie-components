@@ -150,6 +150,11 @@ export default {
             title: 'Brands',
             links: [
                 {
+                    url: '/takeaway/brands/mcdonalds',
+                    text: 'McDonald&#39;s Delivery',
+                    gtm: 'click_brands_takeaway_brands_mcdonalds'
+                },
+                {
                     url: '/content/brands/hungry-jacks/',
                     text: "Hungry Jack's Delivery",
                     gtm: 'click_brands_hungry-jacks'
@@ -208,11 +213,6 @@ export default {
                     url: '/info/about-us',
                     text: 'About Menulog',
                     gtm: 'click_about_us'
-                },
-                {
-                    url: '/info/our-price-promise',
-                    text: 'Our Price Promise',
-                    gtm: 'click_about_price_promise'
                 },
                 {
                     url: '/info/partner-with-us/',
