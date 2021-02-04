@@ -98,7 +98,7 @@ import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants'
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
-import mapCheckoutRequest from '../services/mapper';
+import mapUpdateCheckoutRequest from '../services/mapper';
 
 export default {
     name: 'VueCheckout',
@@ -289,7 +289,7 @@ export default {
                     await this.setupGuestUser();
                 }
 
-                const data = mapCheckoutRequest({
+                const data = mapUpdateCheckoutRequest({
                     address: this.address,
                     customer: this.customer,
                     isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,

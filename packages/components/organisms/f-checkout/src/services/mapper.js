@@ -1,4 +1,4 @@
-const mapCheckoutRequest = ({
+const mapUpdateCheckoutRequest = ({
     address,
     customer = {},
     isCheckoutMethodDelivery,
@@ -37,4 +37,4 @@ const mapCheckoutRequest = ({
     ]
 });
 
-export default mapCheckoutRequest;
+export default mapUpdateCheckoutRequest;

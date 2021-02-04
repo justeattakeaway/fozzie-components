@@ -1,4 +1,4 @@
-import mapCheckoutRequest from '../mapper';
+import mapUpdateCheckoutRequest from '../mapper';
 
 const defaultParams = {
     address: {},
@@ -18,7 +18,7 @@ describe('checkout mapper', () => {
         };
 
         // Act
-        const requestBody = mapCheckoutRequest({
+        const requestBody = mapUpdateCheckoutRequest({
             ...defaultParams,
             customer
         });
@@ -40,7 +40,7 @@ describe('checkout mapper', () => {
         };
 
         // Act
-        const requestBody = mapCheckoutRequest({
+        const requestBody = mapUpdateCheckoutRequest({
             ...defaultParams,
             address
         });
@@ -68,7 +68,7 @@ describe('checkout mapper', () => {
         const isCheckoutMethodDelivery = false;
 
         // Act
-        const requestBody = mapCheckoutRequest({
+        const requestBody = mapUpdateCheckoutRequest({
             ...defaultParams,
             address,
             isCheckoutMethodDelivery
@@ -83,7 +83,7 @@ describe('checkout mapper', () => {
         const userNote = 'Beware of the dachshund';
 
         // Act
-        const requestBody = mapCheckoutRequest({
+        const requestBody = mapUpdateCheckoutRequest({
             ...defaultParams,
             userNote
         });
