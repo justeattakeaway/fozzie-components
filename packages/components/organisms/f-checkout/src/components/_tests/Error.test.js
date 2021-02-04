@@ -1,10 +1,9 @@
 import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
-import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
-import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Error from '../Error.vue';
 import {
-    fulfilmentTimes, defaultState, i18n, createStore
+    i18n, createStore
 } from './helpers/setup';
 
 const localVue = createLocalVue();
