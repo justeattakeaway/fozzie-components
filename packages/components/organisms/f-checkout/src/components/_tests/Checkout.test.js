@@ -449,8 +449,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(mobileNumberEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.mobileNumber');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.mobileNumber');
                 });
 
                 it('should show error message and emit failure event when the mobile number field is populated with a < 10 numbers', async () => {
@@ -476,8 +476,8 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.vm.isMobileNumberValid).toBe(false);
                     expect(mobileNumberEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.mobileNumber');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.mobileNumber');
                 });
 
                 it('should show error message and emit failure event when the mobile number field is populated with non numeric value', async () => {
@@ -503,8 +503,8 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.vm.isMobileNumberValid).toBe(false);
                     expect(mobileNumberEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.mobileNumber');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.mobileNumber');
                 });
 
                 it('should not create validations for address', () => {
@@ -563,8 +563,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(addressLine1EmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address.line1');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.line1');
                 });
 
                 it('should emit failure event and display error message when city input field is empty', async () => {
@@ -589,8 +589,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(addressCityEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address.city');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.city');
                 });
 
                 it('should emit failure event and display error message when postcode input field is empty', async () => {
@@ -615,8 +615,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(addressPostcodeEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address.postcode');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.postcode');
                 });
 
                 it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
@@ -641,8 +641,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address.postcode');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.postcode');
                 });
 
 
@@ -668,8 +668,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address.postcode');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.postcode');
                 });
 
                 it('should create validations for address', () => {
@@ -749,8 +749,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(firstNameEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.firstName');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.firstName');
                 });
 
                 it('should show error message and emit failure event when the last name field is not populated', async () => {
@@ -776,8 +776,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(lastNameEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.lastName');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.lastName');
                 });
 
                 it('should show error message and emit failure event when the email field is not populated', async () => {
@@ -803,8 +803,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(emailEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.email');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.email');
                 });
 
                 it('should show error message and emit failure event when the email field is invalid', async () => {
@@ -830,8 +830,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(emailInvalidMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.email');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.email');
                 });
             });
 
@@ -914,6 +914,52 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(createGuestUserSpy).toHaveBeenCalledWith(expected);
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            describe('when `createGuestUser` request fails', () => {
+                it('should emit failure event', async () => {
+                    // Arrange
+                    jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
+
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, createGuestUser: jest.fn(async () => Promise.reject()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.setupGuestUser();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutSetupGuestSuccess)).toBeUndefined();
+                    expect(wrapper.emitted(EventNames.CheckoutSetupGuestFailure).length).toBe(1);
+                });
+            });
+
+            describe('when `createGuestUser` request succeeds', () => {
+                it('should emit failure event', async () => {
+                    // Arrange
+                    jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
+
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.setupGuestUser();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutSetupGuestSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutSetupGuestFailure)).toBeUndefined();
+                });
             });
         });
 
@@ -1211,7 +1257,7 @@ describe('Checkout', () => {
                 jest.clearAllMocks();
             });
 
-            it('should emit `CheckoutFailure` with validation state if form is invalid', async () => {
+            it('should emit `CheckoutValidationError` with validation state if form is invalid', async () => {
                 // Arrange
                 const mockValidationState = {
                     validFields: [
@@ -1242,8 +1288,8 @@ describe('Checkout', () => {
                 await wrapper.vm.onFormSubmit();
 
                 // Assert
-                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0]).toEqual(mockValidationState);
+                expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0]).toEqual(mockValidationState);
             });
 
             it('should try to call `submitCheckout` if form is Valid', async () => {
