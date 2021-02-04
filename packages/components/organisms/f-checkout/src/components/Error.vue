@@ -5,7 +5,7 @@
         is-page-content-wrapper
         card-heading-position="center"
         data-test-id="checkout-error-page-component"
-        :class="$style['c-checkout-error']"
+        :class="[$style['c-checkout-error'], $style['c-checkout-error--verticalPadding']]"
     >
         <img
             src="../assets/images/jet-sad-bag.svg"
@@ -35,18 +35,20 @@ export default {
 </script>
 
 <style lang="scss" module>
-div.c-checkout-error {
+.c-checkout-error {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 
-    padding: spacing(x8) spacing() spacing(x4);
+    &.c-checkout-error--verticalPadding {
+        padding: spacing(x8) spacing() spacing(x4);
 
-    @include media('<=narrow') {
-        border: none;
-        padding-top: spacing(x2);
-        padding-bottom: spacing(x2);
+        @include media('<=narrow') {
+            border: none;
+            padding-top: spacing(x2);
+            padding-bottom: spacing(x2);
+        }
     }
 
     .c-checkout-error-heading {
