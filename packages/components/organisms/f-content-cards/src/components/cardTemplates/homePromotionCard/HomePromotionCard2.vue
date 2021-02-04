@@ -1,6 +1,6 @@
 <template>
     <div
-        data-test-id="content-card-component"
+        :data-test-id="testId"
         :class="['c-contentCards-homePromotionCard2', $style['c-contentCards-homePromotionCard2'], {
             [$style['c-contentCards-homePromotionCard2--light']]: isLightText
         }]"
@@ -45,7 +45,7 @@ export default {
         },
         testId: {
             type: String,
-            default: null
+            default: 'home-promotion-2'
         }
     },
     data () {

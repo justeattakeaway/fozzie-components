@@ -46,7 +46,7 @@ export default {
         },
         testId: {
             type: String,
-            default: 'content-cards'
+            default: 'home-promotion-1'
         }
     },
     data () {

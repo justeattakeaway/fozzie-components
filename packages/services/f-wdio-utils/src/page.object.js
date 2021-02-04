@@ -11,7 +11,7 @@ class Page {
             formattedUrl = `/iframe.html?id=components-atoms--${path}`
             break;
           case 'molecule':
-            formattedUrl = `/iframe.html?id=components-molecules--${path}`
+            formattedUrl = `/iframe.html?id=components-molecules-${path}`
             break;
           case 'organism':
             formattedUrl = `/iframe.html?id=components-organisms--${path}`

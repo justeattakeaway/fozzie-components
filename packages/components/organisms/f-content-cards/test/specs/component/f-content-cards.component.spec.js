@@ -1,22 +1,14 @@
-import AlertComponent from '../../../test-utils/component-objects/f-alert.component';
+const ContentCard = require('../../../test-utils/component-objects/f-content-cards.component');
+const contentCard = new ContentCard();
 
-describe('f-alert component tests', () => {
+describe('f-content-card component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-molecules--alert-component');
-        browser.switchToFrame(0);
-        AlertComponent.waitForAlert();
+        contentCard.open();
+        contentCard.waitForComponent();
     });
 
-    it('should display Alert', () => {
+    it('should display Content Card component', () => {
         // Assert
-        expect(AlertComponent.isAlertDisplayed()).toBe(true);
-    });
-
-    it('should close alert when exit button is clicked', () => {
-        // Act
-        AlertComponent.exitAlert();
-
-        // Assert
-        expect(AlertComponent.isAlertDisplayed()).toBe(false);
+        expect(contentCard.isContentCardDisplayed()).toBe(true);
     });
 });

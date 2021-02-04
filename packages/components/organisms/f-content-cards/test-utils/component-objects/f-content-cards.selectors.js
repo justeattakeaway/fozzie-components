@@ -1,1 +1,1 @@
-exports.CONTENT_CARDS_COMPONENT = '[data-test-id="content-card-component"]';
+exports.CONTENT_CARDS_COMPONENT = '[data-test-id="home-promotion-1"]';
