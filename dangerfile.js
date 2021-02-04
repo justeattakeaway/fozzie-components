@@ -13,7 +13,7 @@ if (!isTrivial) {
         'packages/components/organisms/',
         'packages/services/',
         'packages/tools/',
-        'packages/'
+        'packages/storybook'
     ];
     const modifiedFiles = danger.git.modified_files;
 
