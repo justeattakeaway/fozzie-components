@@ -28,6 +28,7 @@
   "devDependencies": {
     "@babel/cli": "7.10.5",
     "@babel/plugin-proposal-optional-chaining": "7.10.4",
+    "@babel/plugin-proposal-class-properties": "7.12.1",
     "@babel/preset-env": "7.10.4",
     "@justeat/browserslist-config-fozzie": "1.1.1",
     "@justeat/eslint-config-fozzie": "3.4.1",
