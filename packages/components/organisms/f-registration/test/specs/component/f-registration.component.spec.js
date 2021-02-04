@@ -9,6 +9,7 @@ describe('f-registration component tests', () => {
     });
 
     it('should display component', () => {
+        // Assert
         expect(registration.isComponentDisplayed()).toBe(true);
     });
 
