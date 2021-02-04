@@ -101,6 +101,7 @@ exports.clickPaymentButton = () => goToPaymentButton().click();
 exports.switchUserLinkIsDisplayed = () => switchUserLink().isDisplayed();
 exports.isGuestCheckoutLoginButtonDisplayed = () => guestCheckoutLoginButton().isDisplayed();
 exports.isGuestCheckoutHeaderDisplayed = () => guestCheckoutHeader().isDisplayed();
+exports.clickGuestCheckoutLogin = () => guestCheckoutLoginButton().click();
 
 /**
  * @description
