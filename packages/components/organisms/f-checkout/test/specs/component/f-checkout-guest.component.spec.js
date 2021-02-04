@@ -46,4 +46,17 @@ describe('f-checkout component tests', () => {
         // Assert
         expect(CheckoutComponent.isFieldErrorDisplayed('emailAddress')).toBe(true);
     });
+
+
+    it('should navigate to correct url when the login link is clicked', () => {
+        // Arrange
+        const loginPath = '/login';
+
+        // Act
+        CheckoutComponent.clickGuestCheckoutLogin();
+        const { pathname } = new URL(browser.getUrl());
+
+        // Assert
+        expect(pathname).toEqual(loginPath);
+    });
 });

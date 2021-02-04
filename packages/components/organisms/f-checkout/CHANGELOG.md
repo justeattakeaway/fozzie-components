@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+Latest (roll into next release)
+-------------------------------
+*February 4, 2021*
+
+### Added
+- Test to confirm guest login/sign up link navigates to correct url when clicked
+
 
 v0.48.0
 -------------------------------
