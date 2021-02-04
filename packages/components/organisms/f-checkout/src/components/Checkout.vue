@@ -33,7 +33,7 @@
                         name="mobile-number"
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="!isMobileNumberValid"
-                        @input="updateCustomerDetails({ ['mobileNumber']: $event })">
+                        @input="updateCustomerDetails({ mobileNumber: $event })">
                         <template #error>
                             <error-message
                                 v-if="!isMobileNumberValid"
@@ -67,7 +67,7 @@
             </card>
         </div>
 
-        <error v-else />
+        <error-page v-else />
     </div>
 </template>
 
@@ -96,7 +96,7 @@ import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import FormSelector from './Selector.vue';
 import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
-import Error from './Error.vue';
+import ErrorPage from './Error.vue';
 
 import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
@@ -113,7 +113,7 @@ export default {
         Card,
         CheckoutHeader,
         CheckoutTermsAndConditions,
-        Error,
+        ErrorPage,
         ErrorMessage,
         FormField,
         FormSelector,

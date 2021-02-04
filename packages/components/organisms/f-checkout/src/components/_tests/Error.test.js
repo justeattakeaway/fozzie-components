@@ -28,7 +28,7 @@ describe('Error', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    it('should show the header', () => {
+    it('should show the heading', () => {
         // Arrange & Act
         const wrapper = shallowMount(Error, {
             store: createStore(),
@@ -37,10 +37,10 @@ describe('Error', () => {
             propsData
         });
 
-        const header = wrapper.find('[data-test-id="checkout-error-page-header"]');
+        const heading = wrapper.find('[data-test-id="checkout-error-page-heading"]');
 
         // Assert
-        expect(header.text()).toMatchSnapshot();
+        expect(heading.text()).toMatchSnapshot();
     });
 
     it('should show the description', () => {

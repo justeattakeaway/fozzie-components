@@ -12,8 +12,8 @@
             alt="">
 
         <h1
-            :class="$style['c-checkout-error-header']"
-            data-test-id="checkout-error-page-header">
+            :class="$style['c-checkout-error-heading']"
+            data-test-id="checkout-error-page-heading">
             {{ $t('errorMessages.pageLoad.heading') }}
         </h1>
 
@@ -41,9 +41,7 @@ div.c-checkout-error {
     align-items: center;
     text-align: center;
 
-    padding-top: spacing(x8);
-    padding-left: spacing();
-    padding-right: spacing();
+    padding: spacing(x8) spacing() spacing(x4);
 
     @include media('<=narrow') {
         border: none;
@@ -51,7 +49,7 @@ div.c-checkout-error {
         padding-bottom: spacing(x2);
     }
 
-    .c-checkout-error-header {
+    .c-checkout-error-heading {
         @include font-size(heading-s);
         margin-top: spacing(x8);
         margin-bottom: 0;
