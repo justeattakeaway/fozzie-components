@@ -11,6 +11,18 @@ v0.49.0
 - `Error.vue` component to display a user-friendly error page when we cannot load the necessary information to render the page.
 
 
+v0.47.0
+-------------------------------
+*February 3, 2021*
+
+### Added
+- `f-checkout-guest.spec` files for `guest checkout` tests.
+- Guest Checkout tests.
+
+### Changed
+- Links directly to test pages have been changed from testing within Storybook to its own page.
+
+
 v0.46.0
 -------------------------------
 *February 2, 2021*

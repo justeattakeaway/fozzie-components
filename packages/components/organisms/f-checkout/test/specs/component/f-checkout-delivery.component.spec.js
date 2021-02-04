@@ -3,15 +3,14 @@ import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.
 
 describe('f-checkout "delivery" component tests', () => {
     before(() => {
-        browser.url('?path=/story/components-organisms--checkout-component');
-        browser.switchToFrame(0);
+        browser.url('iframe.html?id=components-organisms--checkout-component&knob-Checkout%20Url=%2Fcheckout-delivery.json&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json&knob-Create%20Guest%20Url=%2Fcreate-guest.json&knob-Get%20Basket%20Url=%2Fget-basket-delivery.json&knob-Auth%20token=a&knob-Login%20Url=%2Flogin&viewMode=story');
         CheckoutComponent.waitForCheckoutComponent();
     });
 
     forEach(['mobileNumber', 'addressLine1', 'addressCity', 'addressPostcode'])
-    .it('each fields error message should be displayed', field => {
+    .it('should display each fields error message', field => {
         // Act
-        CheckoutComponent.clearCheckoutForm();
+        CheckoutComponent.clearCheckoutForm(field);
         CheckoutComponent.goToPayment();
 
         // Assert
@@ -19,7 +18,7 @@ describe('f-checkout "delivery" component tests', () => {
     });
 
     forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
-    .it('address fields should exist', field => {
+    .it('should check if address fields exist', field => {
         // Assert
         expect(CheckoutComponent.doesFieldExist(field)).toBe(true);
     });
@@ -29,7 +28,7 @@ describe('f-checkout "delivery" component tests', () => {
         expect(CheckoutComponent.isFieldDisplayed('mobileNumber')).toBe(true);
     });
 
-    it('should prevent user from submitting a postcode with illegal characters', () => {
+    it('should prevent user from submitting a postcode with an illegal postcode', () => {
         // Arrange
         const addressInfo = {
             postcode: 'TEST1A'
@@ -40,7 +39,7 @@ describe('f-checkout "delivery" component tests', () => {
         CheckoutComponent.goToPayment();
 
         // Assert
-        expect(CheckoutComponent.isFieldTypeErrorDisplayed('addressPostcode')).toBe(true);
+        expect(CheckoutComponent.isPostCodeTypeErrorDisplayed()).toBe(true);
     });
 
     it('should enable a user to submit a postcode with correct characters', () => {
@@ -54,6 +53,6 @@ describe('f-checkout "delivery" component tests', () => {
         CheckoutComponent.goToPayment();
 
         // Assert
-        expect(CheckoutComponent.isFieldTypeErrorDisplayed('addressPostcode')).toBe(false);
+        expect(CheckoutComponent.isPostCodeTypeErrorDisplayed()).toBe(false);
     });
 });

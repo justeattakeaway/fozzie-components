@@ -56,7 +56,7 @@ export const CheckoutComponent = () => ({
             default: select('Get Basket Url', [getBasketDeliveryUrl, getBasketCollectionUrl], getBasketDeliveryUrl)
         },
         authToken: {
-            default: select('Auth token', ['authToken', null], 'authToken')
+            default: text('Auth token', '')
         },
         loginUrl: {
             default: text('Login Url', '/login')
