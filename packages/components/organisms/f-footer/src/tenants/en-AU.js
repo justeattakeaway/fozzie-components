@@ -151,8 +151,8 @@ export default {
             links: [
                 {
                     url: '/takeaway/brands/mcdonalds',
-                    text: 'McDonald&#39;s Delivery',
-                    gtm: 'click_brands_takeaway_brands_mcdonalds'
+                    text: "McDonald's Delivery",
+                    gtm: 'click_brands_mcdonalds'
                 },
                 {
                     url: '/content/brands/hungry-jacks/',
