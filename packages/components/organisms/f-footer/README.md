@@ -59,7 +59,6 @@ export default {
 }
 ```
 
-
 - If there's a vue-i18n plugin in the project, footer component can be called without any props:
 
 ```Vue
@@ -74,7 +73,7 @@ export default {
 
 1. Browser Support
 
-    This component extends [@justeat/browserslist-config-fozzie](https://github.com/justeat/browserslist-config-fozzie).
+   This component extends [@justeat/browserslist-config-fozzie](https://github.com/justeat/browserslist-config-fozzie).
 
 ## Configuration
 
@@ -84,11 +83,11 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `locale`| `String` | `''` | Should be passed if [vue-i18n](https://kazupon.github.io/vue-i18n/) plugin not used by consuming application. |
-| `showCourierLinks` | `Bool` | `true` | Controls whether to show courier links in footer. |
-| `showCountrySelector`| `Bool` | `true` | Controls whether to show country selector in footer. |
+| Prop                  | Type     | Default | Description                                                                                                   |
+| --------------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------- |
+| `locale`              | `String` | `''`    | Should be passed if [vue-i18n](https://kazupon.github.io/vue-i18n/) plugin not used by consuming application. |
+| `showCourierLinks`    | `Bool`   | `true`  | Controls whether to show courier links in footer.                                                             |
+| `showCountrySelector` | `Bool`   | `true`  | Controls whether to show country selector in footer.                                                          |
 
 ### Events
 
@@ -96,6 +95,7 @@ The events that can be subscribed to are as follows (if any):
 
 | Event | Description |
 | ----- | ----------- |
+
 
 ## Development
 
@@ -118,13 +118,14 @@ $ cd packages/components/molecules/f-footer
 ### Unit, Integration and Contract
 
 To test all components, run from root directory.
-To test only `f-footer`, run from the `./fozzie-components/packages/f-footer` directory.
+To test only `f-footer`, run from the `./packages/components/organisms/f-footer` directory.
 
 ```sh
 yarn test
 ```
 
 ### Component Tests
+
 ```bash
 # Run Component tests for all components
 # Note: Ensure Storybook is not running when running the following commands
@@ -140,6 +141,6 @@ OR
 ```bash
 # Run Component tests for f-footer
 # Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components/packages/f-footer
+cd ./packages/components/organisms/f-footer
 yarn test-component:chrome
 ```
