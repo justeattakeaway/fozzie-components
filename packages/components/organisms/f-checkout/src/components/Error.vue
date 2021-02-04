@@ -8,16 +8,18 @@
         :class="$style['c-checkout-error']"
     >
         <img
-            :src="sadBagSvg"
+            src="../assets/images/jet-sad-bag.svg"
             alt="">
 
         <h1
-            :class="$style['c-checkout-error-header']">
+            :class="$style['c-checkout-error-header']"
+            data-test-id="checkout-error-page-header">
             {{ $t('errorMessages.pageLoad.heading') }}
         </h1>
 
         <p
-            :class="$style['c-checkout-error-description']">
+            :class="$style['c-checkout-error-description']"
+            data-test-id="checkout-error-page-description">
             {{ $t('errorMessages.pageLoad.description') }}
         </p>
     </card>
@@ -28,12 +30,7 @@ import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 
 export default {
-    components: { Card },
-    data () {
-        return {
-            sadBagSvg: require('../assets/jet-sad-bag.svg') //eslint-disable-line
-        };
-    }
+    components: { Card }
 };
 </script>
 

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error should show the description 1`] = `"It's a problem at our end, sorry. Your basket is safe and sound, though, so try again soon."`;
+
+exports[`Error should show the header 1`] = `"We can't show you the page"`;

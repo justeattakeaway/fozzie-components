@@ -40,7 +40,7 @@ export const CheckoutComponent = () => ({
             default: select('Locale', [ENGLISH_LOCALE])
         },
         checkoutUrl: {
-            default: select('Checkout Url', [deliveryUrl, collectionUrl], deliveryUrl)
+            default: select('Checkout Url', [deliveryUrl, collectionUrl, 'An invalid URL'], deliveryUrl)
         },
         checkoutAvailableFulfilmentUrl: {
             default: select('Available Fulfilment Url', [checkoutAvailableFulfilmentUrl], checkoutAvailableFulfilmentUrl)
