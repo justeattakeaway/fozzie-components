@@ -8,7 +8,7 @@ v4.8.2
 ------------------------------
 *February 04, 2021*
 ### Changed
-- [CHAD-4892] Updated link lists for AUS Menulog
+- Updated link lists for AUS Menulog
 
 ### Added
 - "McDonald's delivery" to "Brands" section
