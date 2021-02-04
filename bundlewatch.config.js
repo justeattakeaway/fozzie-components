@@ -13,7 +13,8 @@ const packageFolders = [
 const excludedPackages = [
     'packages/services/f-metadata',
     'packages/tools/generator-component',
-    'packages/tools/storybook'
+    'packages/tools/storybook', 
+    'packages/services/f-wdio-utils'
 ];
 
 /**
