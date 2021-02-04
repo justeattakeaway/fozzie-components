@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import FormDropdown from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import { CHECKOUT_METHOD_DELIVERY } from '../constants';
@@ -40,29 +40,35 @@ export default {
         * Returns an array of formatted dates to display as options in a dropdown
         */
         fulfilmentTimes () {
-            const times = this.availableFulfilment.isAsapAvailable
-                ? [this.$t('asapFulfilmentOption')]
-                : [];
-
+            const times = [];
             this.availableFulfilment.times.forEach(time => {
                 const formattedTime = this.$d(new Date(time.from), 'short');
 
-                times.push(formattedTime);
+                times.push({
+                    text: formattedTime,
+                    value: time.from
+                });
             });
+
+            if (this.availableFulfilment.isAsapAvailable && times.length) {
+                times[0].text = this.$t('asapFulfilmentOption');
+            }
 
             return times;
         }
     },
 
     watch: {
-        'fulfilmentTimes' () {
-            if (this.fulfilmentTimes.length > 0) {
-                this.selectionChanged(this.fulfilmentTimes[0]);
-            }
+        fulfilmentTimes (newFulfilmentTimes) {
+            this.selectionChanged(newFulfilmentTimes[0] && newFulfilmentTimes[0].value);
         }
     },
 
     methods: {
+        ...mapActions('checkout', [
+            'updateFulfilmentTime'
+        ]),
+
         /**
         * Update the selected available fulfilment time.
         *
@@ -70,6 +76,12 @@ export default {
         **/
         selectionChanged (selectedFulfilmentTime) {
             this.selectedAvailableFulfilmentTime = selectedFulfilmentTime;
+
+            // TODO - Update to use different from/to times when the API supports it
+            this.updateFulfilmentTime({
+                from: selectedFulfilmentTime,
+                to: selectedFulfilmentTime
+            });
         }
     }
 };
@@ -80,4 +92,3 @@ export default {
     margin-top: spacing(x2);
 }
 </style>
-

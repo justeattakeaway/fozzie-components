@@ -6,6 +6,7 @@ import es from './es-ES';
 import ie from './en-IE';
 import it from './it-IT';
 import no from './nb-NO';
+import countries from './countryList';
 
 const tenantConfigs = {
     'en-GB': uk,
@@ -18,4 +19,4 @@ const tenantConfigs = {
     'nb-NO': no
 };
 
-export default tenantConfigs;
+export { tenantConfigs, countries };

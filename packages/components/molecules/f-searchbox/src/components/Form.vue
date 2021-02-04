@@ -63,10 +63,12 @@ import FormFullAddressSearchSuggestions from './formElements/FormFullAddressSear
 import searchboxModule from '../store/searchbox.module';
 import { getLastLocation, normalisePostcode } from '../utils/helpers';
 import { search, selectedSuggestion } from '../services/search.services';
+import { JE_FULL_ADDRESS_DETAILS } from '../services/constants';
 import {
     processLocationCookie,
     onCustomSubmit,
-    generateFormQueryUrl
+    generateFormQueryUrl,
+    fullAddressLocalStorageService
 } from '../services/general.services';
 import {
     SUBMIT_SAVED_ADDRESS,
@@ -136,12 +138,15 @@ export default {
         ...mapState('searchbox', [
             'address',
             'errors',
+            'fullAddressDetails',
             'formattedFullAddress',
+            'isBelowMid',
             'isValid',
             'isInputFocus',
             'isDirty',
             'isFullAddressSearchEnabled',
             'keyboardSuggestionIndex',
+            'savedFullAddressDetails',
             'suggestions',
             'streetNumber',
             'selectedStreetLevelAddressId',
@@ -238,7 +243,7 @@ export default {
                     this.setSuggestions(this.service.search(value));
                 }
 
-                if (this.isFullAddressSearchEnabled) {
+                if (this.isFullAddressSearchEnabled && !this.isBelowMid) {
                     this.getMatchedAreaAddressResults({
                         address: this.addressValue
                     });
@@ -262,6 +267,12 @@ export default {
 
         this.reinitialiseConfigSettings();
         this.initialiseFullAddressSearch(this.config.isFullAddressSearchEnabled);
+        this.setIsBelowMid(document.body.clientWidth);
+        window.addEventListener('resize', this.onResize);
+    },
+
+    destroyed () {
+        window.removeEventListener('resize', this.onResize);
     },
 
     beforeCreate () {
@@ -281,10 +292,12 @@ export default {
             'setIsValid',
             'setErrors',
             'setIsDirty',
+            'setIsBelowMid',
             'setStreetNumberRequired',
             'setGeoLocationAvailability',
             'setFullAddressSearchConfigs',
             'setAutoCompleteAvailability',
+            'setSavedFullAddressDetails',
             'getMatchedAreaAddressResults'
         ]),
 
@@ -328,6 +341,13 @@ export default {
 
                     // Process international based location cookies `je-last-*`
                     processLocationCookie(this.shouldSetCookies, info);
+                } else if (this.isFullAddressSearchEnabled) {
+                    this.setSavedFullAddressDetails({
+                        fullAddress: this.fullAddressDetails,
+                        address: this.address
+                    });
+                    // Save selected Loqate address to localstorage on submit.
+                    fullAddressLocalStorageService.setItem(JE_FULL_ADDRESS_DETAILS, ...this.savedFullAddressDetails);
                 } else {
                     // Process standard address based location cookies `je-location`
                     processLocationCookie(this.shouldSetCookies, this.addressValue);
@@ -446,13 +466,41 @@ export default {
          */
         initialiseFullAddressSearch (isFullAddressSearchEnabled) {
             if (isFullAddressSearchEnabled) {
-                this.setFullAddressSearchConfigs({
-                    isFullAddressSearchEnabled: isFullAddressSearchEnabled()
-                });
+                const isActive = isFullAddressSearchEnabled();
 
-                if (this.isFullAddressSearchEnabled) {
+                if (isActive) {
+                    this.setFullAddressSearchConfigs({
+                        isFullAddressSearchEnabled: isActive
+                    });
                     this.setAutoCompleteAvailability(true);
+                    this.fetchLocalStorageAddress();
+                } else {
+                    // clear localStorage if feature is off.
+                    fullAddressLocalStorageService.removeItem(JE_FULL_ADDRESS_DETAILS);
                 }
+            }
+        },
+
+        /**
+         * Update state `isBelowMid` when the browser resizes, so
+         * we can keep track of when we should trigger the
+         * `FormFullAddressSearchModalOverlay.vue`.
+         *
+         */
+        onResize: debounce(function resize () {
+            this.setIsBelowMid(document.body.clientWidth);
+        }, 100),
+
+        /**
+         * Fetch previous searched addresses from LocalStorage if it exists & then
+         * pre-populate searchbox with this address.
+         *
+         */
+        fetchLocalStorageAddress () {
+            const addressFromLocalStorage = fullAddressLocalStorageService.getItem(JE_FULL_ADDRESS_DETAILS);
+
+            if (addressFromLocalStorage && addressFromLocalStorage.searchBoxAddress) {
+                this.setAddress(addressFromLocalStorage.searchBoxAddress);
             }
         }
     }

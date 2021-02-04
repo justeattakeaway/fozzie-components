@@ -63,19 +63,40 @@ export default {
 
 ### Props
 
-There may be props that allow you to customise its functionality.
-
-The props that can be defined are as follows (if any):
-
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
+| `local` | `String` | `en-gb` | Sets the translation file to use. |
+| `createAccountUrl` | `String` | Required | URL to register a new user account. |
+| `createAccountTimeout` | `Number` | `1000` | Timeout when submitting the registration form. |
+| `showLoginLink` | `Boolean` | Required | If `true`, 'Already on Just Eat` login link will be displayed. |
+| `loginUrl` | `String` | Required | URL to forward the user to on navigation to the login page. |
 
 ### Events
 
-The events that can be subscribed to are as follows (if any):
-
 | Event | Description |
 | ----- | ----------- |
+| `registration-create-account-success` | Registration form has been successfully submitted. |
+| `registration-create-account-failure` | Registration form submission has failed. |
+| `registration-create-account-start` | User has begun interacting with registration form. |
+| `registration-create-account-inline-error` | Validation on form fields has failed. |
+| `registration-visit-login-page` | User clicked 'Already on Just Eat` login link. |
+| `registration-login-blocked` | 'FailedUserAuthentication' error has been returned when submitting the registration form. |
+
+## Development
+
+Start by cloning the repository and installing the required dependencies:
+
+```sh
+$ git clone git@github.com:justeat/fozzie-components.git
+$ cd fozzie-components
+$ yarn
+```
+
+Change directory to the `f-registration` package:
+
+```sh
+$ cd packages/components/molecules/f-registration
+```
 
 ## Development
 
@@ -104,24 +125,16 @@ To test only `f-registration`, run from the `./fozzie-components/packages/f-regi
 yarn test
 ```
 
-### Component Tests
-```bash
-# Run Component tests for all components
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components
+### Running storybook
 
-yarn storybook:build
-yarn storybook:serve-static
-yarn test-component:chrome
+Storybook can be used to develop new and existing components.
+
+To start storybook:
+
+From the **root** directory run:
+
+```sh
+$ yarn storybook:serve
 ```
 
-OR
-
-```bash
-# Run Component tests for f-registration
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components/packages/f-registration
-yarn test-component:chrome
-```
-
-## Documentation to be completed once module is in stable state.
+This will build and serve storybook at [http://localhost:6006](http://localhost:6006).

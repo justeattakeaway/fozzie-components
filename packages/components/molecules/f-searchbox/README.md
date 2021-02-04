@@ -227,3 +227,47 @@ const copyOverrides = {
     // ...
 }
 ```
+
+### Non-Vue Applications
+
+This module can be ran as a micro front-end for applications that don't make use of the Vue framework.
+
+The following rudimentary example can be used as a guide for implementing this component in an existing static application.
+
+NOTE: You need to provide Vue with an instance of Vuex for f-searchbox to work correctly. This should be
+added after Vue has been included. Including the `unpkg` Vuex script, like the below example, will automatically install Vuex.
+
+The version of Vuex required must be no earlier than `vuex@3.2.0` as f-searchbox under the hood registers
+the store module using `this.$store.hasModule('searchbox')`, `hasModule` was added in `v3.2.0`, earlier Vuex versions will break store registration.
+
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+    <title>f-searchbox example standalone</title>
+    <link rel="stylesheet" href="https://unpkg.com/@justeat/f-searchbox/dist/f-searchbox.css">
+</head>
+<body>
+    <div data-app>
+        <vue-searchbox locale="en-GB" />
+    </div>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex@3.2.0/dist/vuex.js"></script>
+    <script src="https://unpkg.com/@justeat/f-searchbox/dist/f-searchbox.umd.min.js"></script>
+    <script>
+        (function() {
+            if (typeof Vue === 'undefined') return null;
+
+            Vue.config.devtools = false;
+            Vue.config.productionTip = false;
+
+            return new Vue({
+                store: new Vuex.Store({}), // init empty Vuex store here.
+                el: '[data-app]'
+            });
+    	})();
+    </script>
+</body>
+</html>
+```

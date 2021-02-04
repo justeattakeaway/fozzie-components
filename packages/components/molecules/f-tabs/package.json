@@ -1,13 +1,13 @@
 {
   "name": "@justeat/f-tabs",
   "description": "Fozzie Tabs – Switchable slots for content&#34;",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "dist/f-tabs.umd.min.js",
   "files": [
     "dist",
     "test-utils"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/f-tabs",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-tabs",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -32,6 +32,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "report": "cd ../../../tools && yarn report",
+    "test": "vue-cli-service test:unit",
     "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
     "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
   },

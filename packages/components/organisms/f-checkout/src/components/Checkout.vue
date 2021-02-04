@@ -124,6 +124,11 @@ export default {
     mixins: [validationMixin, VueGlobalisationMixin, checkoutValidationsMixin],
 
     props: {
+        checkoutId: {
+            type: String,
+            required: true
+        },
+
         checkoutUrl: {
             type: String,
             required: true
@@ -195,7 +200,7 @@ export default {
 
         Object.defineProperty($v, VALIDATIONS.address, {
             enumerable: true,
-            get: () => this.$v.fulfilment.address
+            get: () => this.$v.address
         });
 
         Object.defineProperty($v, VALIDATIONS.guest, {
@@ -209,7 +214,8 @@ export default {
     computed: {
         ...mapState('checkout', [
             'customer',
-            'fulfilment',
+            'time',
+            'address',
             'id',
             'isFulfillable',
             'isLoggedIn',
@@ -254,7 +260,7 @@ export default {
             'getAvailableFulfilment',
             'getBasket',
             'getCheckout',
-            'postCheckout',
+            'patchCheckout',
             'setAuthToken',
             'updateCustomerDetails'
         ]),
@@ -284,19 +290,30 @@ export default {
         async submitCheckout () {
             try {
                 const checkoutData = {
-                    mobileNumber: this.customer.mobileNumber
+                    customer: {
+                        firstName: this.customer.firstName,
+                        lastName: this.customer.lastName,
+                        phoneNumber: this.customer.mobileNumber,
+                        dateOfBirth: ''
+                    },
+                    fulfilment: {
+                        time: this.time,
+                        location: {
+                            ...(this.isCheckoutMethodDelivery ? {
+                                address: this.address
+                            } : {}),
+                            geolocation: null
+                        }
+                    },
+                    notes: this.notes
                 };
-
-                if (this.isCheckoutMethodDelivery) {
-                    checkoutData.address = this.fulfilment.address;
-                }
 
                 if (!this.isLoggedIn) {
                     await this.setupGuestUser();
                 }
 
-                await this.postCheckout({
-                    url: 'myPostUrl',
+                await this.patchCheckout({
+                    url: `checkout/${this.tenant}/${this.checkoutId}`,
                     data: checkoutData,
                     timeout: this.checkoutTimeout
                 });
@@ -449,7 +466,7 @@ export default {
         * valid in current locale
         */
         isValidPostcode () {
-            return validations.isValidPostcode(this.fulfilment.address.postcode, this.$i18n.locale);
+            return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
         }
     },
 
@@ -479,18 +496,16 @@ export default {
         }
 
         if (this.isCheckoutMethodDelivery) {
-            deliveryDetails.fulfilment = {
-                address: {
-                    line1: {
-                        required
-                    },
-                    city: {
-                        required
-                    },
-                    postcode: {
-                        required,
-                        isValidPostcode: this.isValidPostcode
-                    }
+            deliveryDetails.address = {
+                line1: {
+                    required
+                },
+                city: {
+                    required
+                },
+                postcode: {
+                    required,
+                    isValidPostcode: this.isValidPostcode
                 }
             };
         }

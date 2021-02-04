@@ -3,6 +3,29 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.22
+------------------------------
+*February 2, 2021*
+
+### Added
+- Ability to save full address to local storage.
+- Ability to retrieve existing full address from local storage.
+- Ability to remove full address from local storage when feature is turned off.
+- Tests to cover changes.
+
+
+v4.0.0-beta.21
+------------------------------
+*January 28, 2021*
+
+### Added
+- Readme information on how to render f-searchbox in non-vue instances.
+- Tests to cover changes.
+- `FormFullAddressSearchModalOverlay.vue` - Allows small screens to display results in a modal (`f-mega-modal`).
+
+### Fixed
+- Casing in readme non-vue instructions.
+
 v4.0.0-beta.20
 ------------------------------
 *January 22, 2021*

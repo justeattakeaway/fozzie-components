@@ -18,15 +18,9 @@
                 :header-background-theme="headerBackgroundTheme" />
 
             <navigation
-                :nav-links="copy.navLinks"
-                :help="copy.help"
-                :account-logout="copy.accountLogout"
-                :account-login="copy.accountLogin"
-                :open-menu-text="copy.openMenuText"
-                :delivery-enquiry="copy.deliveryEnquiry"
+                :copy="copy"
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
-                :offers-copy="copy.offers"
-                :show-offers-link="showOffersLink"
+                :show-offers-link="showOffersLinkWithContent"
                 :show-help-link="showHelpLink"
                 :error-log="errorLog"
                 :user-info-prop="userInfoProp"
@@ -35,6 +29,7 @@
                 :is-order-count-supported="isOrderCountSupported"
                 :header-background-theme="headerBackgroundTheme"
                 :show-login-info="showLoginInfo"
+                :show-country-selector="showCountrySelector"
                 @onMobileNavToggle="mobileNavToggled" />
         </div>
     </header>
@@ -44,7 +39,7 @@
 import { globalisationServices } from '@justeat/f-services';
 import Logo from './Logo.vue';
 import SkipToMain from './SkipToMain.vue';
-import tenantConfigs from '../tenants';
+import { tenantConfigs } from '../tenants';
 import Navigation from './Navigation.vue';
 
 export default {
@@ -115,6 +110,11 @@ export default {
         userInfoUrl: {
             type: String,
             default: '/api/account/details'
+        },
+
+        showCountrySelector: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -144,12 +144,14 @@ export default {
 
         headerBackgroundClass () {
             return this.headerBackgroundTheme === 'highlight' ? 'c-header--highlightBg' : '';
+        },
+
+        showOffersLinkWithContent () {
+            return this.copy.offers && this.showOffersLink;
         }
     },
 
     methods: {
-        // This method emits `navIsOpen` state from the navigation component
-        // to be able to deside when to show transparent header styles on mobile view
         mobileNavToggled (value) {
             this.mobileNavIsOpen = value;
         }

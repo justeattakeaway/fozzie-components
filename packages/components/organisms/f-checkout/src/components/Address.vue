@@ -6,7 +6,7 @@
                 {{ $t('labels.addressGroup') }}
             </legend>
             <form-field
-                :value="fulfilment.address.line1"
+                :value="address.line1"
                 :class="$style['c-address-formField']"
                 name="address-line-1"
                 :label-text="$t('labels.line1')"
@@ -25,7 +25,7 @@
             </form-field>
 
             <form-field
-                :value="fulfilment.address.line2"
+                :value="address.line2"
                 :class="$style['c-address-formField']"
                 name="address-line-2"
                 :label-text="$t('labels.line2')"
@@ -35,7 +35,7 @@
         </fieldset>
 
         <form-field
-            :value="fulfilment.address.city"
+            :value="address.city"
             name="address-city"
             :label-text="$t('labels.city')"
             :has-error="isAddressCityEmpty"
@@ -50,7 +50,7 @@
         </form-field>
 
         <form-field
-            :value="fulfilment.address.postcode"
+            :value="address.postcode"
             name="address-postcode"
             :label-text="$t('labels.postcode')"
             :has-error="!isAddressPostcodeValid"
@@ -93,7 +93,7 @@ export default {
 
     computed: {
         ...mapState('checkout', [
-            'fulfilment'
+            'address'
         ]),
 
         /*

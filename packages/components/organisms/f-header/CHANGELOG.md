@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.6.0
+------------------------------
+*January 27, 2021*
+
+### Added
+- Country selector
+
+### Changed
+- Check not only that `showOffersLink` if true but that there is offers content to show offers link
+- Header icons to match new designs
+
+
 v4.5.0
 ------------------------------
 *January 18, 2021*

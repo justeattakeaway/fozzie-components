@@ -8,6 +8,7 @@ localVue.use(Vuex);
 
 const mockState = {
     address: '',
+    isBelowMid: false,
     inputTimeoutValue: 123,
     suggestions: [
         {
@@ -30,12 +31,14 @@ const mockState = {
 };
 
 const mockActions = {
+    clearSuggestions: jest.fn(),
     setFocusOnInput: jest.fn(),
     setAddress: jest.fn(),
     shouldShowSuggestionsDropdown: jest.fn(),
     getMatchedAreaAddressResults: jest.fn(),
     getFinalAddressSelectionDetails: jest.fn(),
-    setContinueWithDetails: jest.fn()
+    setContinueWithDetails: jest.fn(),
+    setShouldShowSuggestionModel: jest.fn()
 };
 
 const createStore = (state = mockState, actions = mockActions) => new Vuex.Store({
@@ -189,6 +192,18 @@ describe('`FullAddressSuggestions`', () => {
 
                         expect(spy).toHaveBeenCalledWith('GB|RM|A|20388007');
                     });
+
+                    it('should invoke `resetSearch` so we can reset dropdown & modal states', async () => {
+                        const { wrapper } = bootstrap();
+                        const event = { preventDefault: jest.fn() };
+                        const index = 0;
+                        const selected = 1;
+                        const spy = jest.spyOn(wrapper.vm, 'resetSearch');
+
+                        await wrapper.vm.getSelectedStreetAddress(event, index, selected);
+
+                        expect(spy).toHaveBeenCalled();
+                    });
                 });
 
                 describe('When type of `Postcode` is selected', () => {
@@ -273,6 +288,79 @@ describe('`FullAddressSuggestions`', () => {
                     expect(spy).toHaveBeenCalledWith({
                         postcode: 'AR511AR',
                         street: 'NASA'
+                    });
+                });
+            });
+        });
+
+        describe('`resetSearch`', () => {
+            it('should exist', () => {
+                const { wrapper } = bootstrap();
+
+                expect(wrapper.vm.resetSearch).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                it('should make a call to `shouldShowSuggestionsDropdown` to hide the suggestions drop down', () => {
+                    // Arrange
+                    const { wrapper } = bootstrap();
+                    const spy = jest.spyOn(wrapper.vm, 'shouldShowSuggestionsDropdown');
+
+                    // Act
+                    wrapper.vm.resetSearch();
+
+                    // Assert
+                    expect(spy).toHaveBeenCalledWith(false);
+                });
+
+                it('should make a call to `clearSuggestions` to clear the `suggestions` results from the API', () => {
+                    // Arrange
+                    const { wrapper } = bootstrap();
+                    const spy = jest.spyOn(wrapper.vm, 'clearSuggestions');
+
+                    // Act
+                    wrapper.vm.resetSearch();
+
+                    // Assert
+                    expect(spy).toHaveBeenCalledWith([]);
+                });
+
+                describe('AND `isBelowMid` is `falsy`', () => {
+                    it('should make a call to `setShouldShowSuggestionModel` to hide the modal overlay on small screens', () => {
+                        // Arrange
+                        const { wrapper } = bootstrap();
+                        const spy = jest.spyOn(wrapper.vm, 'setShouldShowSuggestionModel');
+
+                        // Act
+                        wrapper.vm.resetSearch();
+
+                        // Assert
+                        expect(spy).not.toHaveBeenCalled();
+                    });
+                });
+
+                describe('AND `isBelowMid` is `truthy`', () => {
+                    it('should NOT make a call to `setShouldShowSuggestionModel`', () => {
+                        // Arrange
+                        const { wrapper } = bootstrap({
+                            computed: {
+                                isBelowMid: {
+                                    get () {
+                                        return true;
+                                    },
+                                    set () {
+                                        jest.fn();
+                                    }
+                                }
+                            }
+                        });
+                        const spy = jest.spyOn(wrapper.vm, 'setShouldShowSuggestionModel');
+
+                        // Act
+                        wrapper.vm.resetSearch();
+
+                        // Assert
+                        expect(spy).not.toHaveBeenCalledWith(false);
                     });
                 });
             });

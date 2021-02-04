@@ -56,8 +56,10 @@ export default {
         url: '/account/logout',
         gtm: 'click_logout'
     },
-    offers: {
-        text: '%OFFERS%',
-        url: '/offers'
+    countrySelector: {
+        selectYourCountryText: 'Selecciona tu país',
+        currentCountryKey: 'es',
+        changeCurrentCountry: 'Estás en Just Eat España, haz clic aquí para cambiar país',
+        goBackToMainMenu: 'Vuelve al menú principal'
     }
 };

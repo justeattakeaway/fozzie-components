@@ -33,21 +33,19 @@ const $v = {
             email: false
         }
     },
-    fulfilment: {
-        address: {
-            city: {
-                $dirty: false,
-                required: true
-            },
-            line1: {
-                $dirty: false,
-                required: false
-            },
-            postcode: {
-                $dirty: false,
-                required: true,
-                isValidPostcode: false
-            }
+    address: {
+        city: {
+            $dirty: false,
+            required: true
+        },
+        line1: {
+            $dirty: false,
+            required: false
+        },
+        postcode: {
+            $dirty: false,
+            required: true,
+            isValidPostcode: false
         }
     },
     $touch: jest.fn()
@@ -55,12 +53,14 @@ const $v = {
 
 describe('Checkout', () => {
     allure.feature('Checkout');
+    const checkoutId = 'abc123def456';
     const checkoutUrl = 'http://localhost/checkout';
     const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
     const loginUrl = 'http://localhost/login';
     const createGuestUrl = 'http://localhost/createguestuser';
     const getBasketUrl = 'http://localhost/getbasket';
     const propsData = {
+        checkoutId,
         checkoutUrl,
         loginUrl,
         checkoutAvailableFulfilmentUrl,
@@ -593,12 +593,9 @@ describe('Checkout', () => {
                         store: createStore({
                             ...defaultState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
-                            fulfilment: {
-                                ...defaultState.fulfilment,
-                                address: {
-                                    ...defaultState.fulfilment.address,
-                                    line1: ''
-                                }
+                            address: {
+                                ...defaultState.address,
+                                line1: ''
                             }
                         }),
                         i18n,
@@ -613,7 +610,7 @@ describe('Checkout', () => {
                     // Assert
                     expect(addressLine1EmptyMessage).toMatchSnapshot();
                     expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.line1');
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address.line1');
                 });
 
                 it('should emit failure event and display error message when city input field is empty', async () => {
@@ -622,12 +619,9 @@ describe('Checkout', () => {
                         store: createStore({
                             ...defaultState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
-                            fulfilment: {
-                                ...defaultState.fulfilment,
-                                address: {
-                                    ...defaultState.fulfilment.address,
-                                    city: ''
-                                }
+                            address: {
+                                ...defaultState.address,
+                                city: ''
                             }
                         }),
                         i18n,
@@ -642,7 +636,7 @@ describe('Checkout', () => {
                     // Assert
                     expect(addressCityEmptyMessage).toMatchSnapshot();
                     expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.city');
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address.city');
                 });
 
                 it('should emit failure event and display error message when postcode input field is empty', async () => {
@@ -651,12 +645,9 @@ describe('Checkout', () => {
                         store: createStore({
                             ...defaultState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
-                            fulfilment: {
-                                ...defaultState.fulfilment,
-                                address: {
-                                    ...defaultState.fulfilment.address,
-                                    postcode: ''
-                                }
+                            address: {
+                                ...defaultState.address,
+                                postcode: ''
                             }
                         }),
                         i18n,
@@ -671,7 +662,7 @@ describe('Checkout', () => {
                     // Assert
                     expect(addressPostcodeEmptyMessage).toMatchSnapshot();
                     expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.postcode');
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address.postcode');
                 });
 
                 it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
@@ -680,12 +671,9 @@ describe('Checkout', () => {
                         store: createStore({
                             ...defaultState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
-                            fulfilment: {
-                                ...defaultState.fulfilment,
-                                address: {
-                                    ...defaultState.fulfilment.address,
-                                    postcode: '?!hdb-se'
-                                }
+                            address: {
+                                ...defaultState.address,
+                                postcode: '?!hdb-se'
                             }
                         }),
                         i18n,
@@ -700,7 +688,7 @@ describe('Checkout', () => {
                     // Assert
                     expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
                     expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.postcode');
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address.postcode');
                 });
 
 
@@ -710,12 +698,9 @@ describe('Checkout', () => {
                         store: createStore({
                             ...defaultState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
-                            fulfilment: {
-                                ...defaultState.fulfilment,
-                                address: {
-                                    ...defaultState.fulfilment.address,
-                                    postcode: 'EC4M 7R'
-                                }
+                            address: {
+                                ...defaultState.address,
+                                postcode: 'EC4M 7R'
                             }
                         }),
                         i18n,
@@ -730,14 +715,14 @@ describe('Checkout', () => {
                     // Assert
                     expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
                     expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('fulfilment.address.postcode');
+                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address.postcode');
                 });
 
                 it('should create validations for address', () => {
                     // Assert
-                    expect(wrapper.vm.$v.fulfilment.address.line1).toBeDefined();
-                    expect(wrapper.vm.$v.fulfilment.address.city).toBeDefined();
-                    expect(wrapper.vm.$v.fulfilment.address.postcode).toBeDefined();
+                    expect(wrapper.vm.$v.address.line1).toBeDefined();
+                    expect(wrapper.vm.$v.address.city).toBeDefined();
+                    expect(wrapper.vm.$v.address.postcode).toBeDefined();
                 });
             });
 
@@ -1280,9 +1265,9 @@ describe('Checkout', () => {
                 const mockValidationState = {
                     validFields: [
                         'customer.mobileNumber',
-                        'fulfilment.address.line1',
-                        'fulfilment.address.city',
-                        'fulfilment.address.postcode'
+                        'address.line1',
+                        'address.city',
+                        'address.postcode'
                     ],
                     invalidFields: []
                 };
@@ -1401,7 +1386,7 @@ describe('Checkout', () => {
                 wrapper.vm.isValidPostcode();
 
                 // Assert
-                expect(isValidPostcodeSpy).toHaveBeenCalledWith(defaultState.fulfilment.address.postcode, i18n.locale);
+                expect(isValidPostcodeSpy).toHaveBeenCalledWith(defaultState.address.postcode, i18n.locale);
             });
         });
 

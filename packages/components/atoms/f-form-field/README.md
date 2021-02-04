@@ -69,6 +69,14 @@ The props that can be defined are as follows (if any):
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
+| `locale` | `String` | `''` | Sets locale for I18n. |
+| `labelText` | `String` | `''` | The text that will be displayed in the form field label. |
+| `inputType` | `Sting` | `text` | The type of input needed. <br>Options: `text`, `email`, `password`, `radio`, `checkbox` |
+| `labelStyle` | `String` | `'default'` | Defines where the label will be rendered in relation to the form field. <br>Options: <br>`default` - Displays the label above the form field, <br>`inline` Displays the label inside the form field,<br>`inlineNarrow` Displays the label above the form field when in web/tablet. Displays the label inside the form field when in mobile.<br>|
+| `value` | `String` or `Number` | `''` | The value of the form field. |
+| `hasError` | `Boolean` | `false` | When `true` border colour changes to red. |
+| `dropdownOptions` | `Array` | `null` | The options to be displayed in the dropdown. |
+| `isGrouped` | `Boolean` | `false` | When `true` will remove margin between all grouped form fields. |
 
 ### Events
 
@@ -76,6 +84,7 @@ The events that can be subscribed to are as follows (if any):
 
 | Event | Description |
 | ----- | ----------- |
+| `input` | Fired when a user changes the value of the form field, args contain details of the change and it's context. |
 
 ## Development
 

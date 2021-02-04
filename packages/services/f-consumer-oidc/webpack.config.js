@@ -1,4 +1,5 @@
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = [
     'source-map'
@@ -18,10 +19,16 @@ module.exports = [
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'f-consumer-oidc.js',
+        filename: 'f-consumer-oidc.umd.min.js',
         library: 'f-consumer-oidc',
         libraryTarget: 'umd',
         globalObject: 'this'
+    },
+    optimization: {
+        minimize: true,
+        minimizer: [new UglifyJsPlugin({
+            include: /\.min\.js$/
+        })]
     },
     externals: {
         'js-cookie': 'js-cookie'

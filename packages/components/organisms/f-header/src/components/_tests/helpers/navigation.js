@@ -15,29 +15,48 @@ const setDesktopViewport = () => resizeWindow(desktopWidth, desktopHeight);
 const setMobileViewport = () => resizeWindow(mobileWidth, mobileHeight);
 
 const defaultPropsData = {
-    accountLogin: {},
-    accountLogout: {},
-    navLinks: {
-        orderHistory: {
-            text: 'Your orders',
-            url: '/order-history',
-            gtm: 'click_account_your_orders'
+    copy: {
+        accountLogin: {
+            text: 'Log in',
+            url: '/account/login',
+            gtm: 'click_login'
         },
-        savedCards: {
-            text: 'Your saved cards',
-            url: '/account/saved-cards',
-            gtm: 'click_account_saved_cards'
+        accountLogout: {
+            text: 'Log out',
+            url: '/account/logout',
+            gtm: 'click_logout'
+        },
+        navLinks: {
+            orderHistory: {
+                text: 'Your orders',
+                url: '/order-history',
+                gtm: 'click_account_your_orders'
+            },
+            savedCards: {
+                text: 'Your saved cards',
+                url: '/account/saved-cards',
+                gtm: 'click_account_saved_cards'
+            }
+        },
+        openMenuText: 'Open menu',
+        deliveryEnquiry: {},
+        help: {
+            text: 'Help',
+            url: '/help',
+            gtm: 'click_help'
+        },
+        offers: {
+            text: 'For you',
+            url: '/offers'
         }
     },
-    openMenuText: 'Open menu',
-    deliveryEnquiry: {},
     showDeliveryEnquiry: false,
     isOrderCountSupported: true,
-    offersCopy: {},
     showOffersLink: false,
     showHelpLink: false,
     userInfoProp: false,
-    headerBackgroundTheme: 'white'
+    headerBackgroundTheme: 'white',
+    showCountrySelector: false
 };
 
 const defaultData = {
