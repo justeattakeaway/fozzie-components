@@ -289,9 +289,17 @@ export default {
                     await this.setupGuestUser();
                 }
 
+                const data = mapCheckoutRequest({
+                    address: this.address,
+                    customer: this.customer,
+                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
+                    time: this.time,
+                    userNote: this.userNote
+                });
+
                 await this.patchCheckout({
                     url: `checkout/${this.tenant}/${this.checkoutId}`,
-                    data: mapCheckoutRequest(this),
+                    data,
                     timeout: this.checkoutTimeout
                 });
 
