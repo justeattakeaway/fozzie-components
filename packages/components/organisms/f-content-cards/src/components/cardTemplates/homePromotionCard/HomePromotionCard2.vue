@@ -1,6 +1,6 @@
 <template>
     <div
-        :data-test-id="testId"
+        data-test-id="content-card-component"
         :class="['c-contentCards-homePromotionCard2', $style['c-contentCards-homePromotionCard2'], {
             [$style['c-contentCards-homePromotionCard2--light']]: isLightText
         }]"

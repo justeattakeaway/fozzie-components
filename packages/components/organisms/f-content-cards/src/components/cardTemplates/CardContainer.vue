@@ -94,7 +94,7 @@ export default {
         },
         testId: {
             type: String,
-            default: null
+            default: 'card-container'
         }
     },
 
