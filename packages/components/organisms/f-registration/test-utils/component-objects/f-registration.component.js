@@ -1,66 +1,120 @@
-const registrationComponent = () => $('[data-test-id="registration-component"]');
-const firstNameInput = () => registrationComponent().$('[data-test-id="input-first-name"]');
-const lastNameInput = () => registrationComponent().$('[data-test-id="input-last-name"]');
-const emailInput = () => registrationComponent().$('[data-test-id="input-email"]');
-const passwordInput = () => registrationComponent().$('[data-test-id="input-password"]');
-const createAccountButton = () => registrationComponent().$('[data-test-id="create-account-submit-button"]');
+const Page = require ('../../../../../services/f-wdio-utils/src/page.object');
+// const Page = require('@justeat/f-wdio-utils/src/page.object');  //noting this out until `f-wdio-utils` is published - have tested locally with yalc. 
+const {
+    REGISTRATION_COMPONENT, 
+    CREATE_ACCOUNT_BUTTON, 
+    TERMS_AND_CONDITIONS_LINK, 
+    PRIVACY_POLICY_LINK, 
+    COOKIES_POLICY_LINK,
+    FIRST_NAME_INPUT,
+    FIRST_NAME_EMPTY_ERROR,
+    FIRST_NAME_MAX_LENGTH_ERROR,
+    FIRST_NAME_INVALID_ERROR,
+    LAST_NAME_INPUT,
+    LAST_NAME_EMPTY_ERROR,
+    LAST_NAME_MAX_LENGTH_ERROR,
+    LAST_NAME_INVALID_ERROR,
+    EMAIL_INPUT,
+    EMAIL_EMPTY_ERROR,
+    EMAIL_EXISTS_ERROR,
+    EMAIL_INVALID_ERROR,
+    PASSWORD_INPUT,
+    PASSWORD_EMPTY_ERROR, 
+} = require('./f-registration.selectors');
 
-const termsAndConditionsLink = () => registrationComponent().$('[data-test-id="ts-and-cs-link"]');
-const privacyPolicyLink = () => registrationComponent().$('[data-test-id="privacy-policy-link"]');
-const cookiesPolicyLink = () => registrationComponent().$('[data-test-id="cookies-policy-link"]');
+class Registration extends Page {
 
-// Validation errors
-const firstNameEmptyError = () => $('[data-test-id="error-first-name-empty"]');
-const firstNameMaxLengthError = () => $('[data-test-id="error-first-name-maxlength"]');
-const firstNameInvalidError = () => $('[data-test-id="error-first-name-invalid"]');
+    get component () { return $(REGISTRATION_COMPONENT) }
+    get createAccountButton () { return $(CREATE_ACCOUNT_BUTTON) }
+    get termsAndConditionsLink () { return $(TERMS_AND_CONDITIONS_LINK) }
+    get privacyPolicyLink () { return $(PRIVACY_POLICY_LINK) }
+    get cookiesPolicyLink () { return $(COOKIES_POLICY_LINK) }
+  
+    fields = {
+        firstName: {
+            get input () { return $(FIRST_NAME_INPUT) }, 
+            get emptyError () { return $(FIRST_NAME_EMPTY_ERROR) }, 
+            get maxLengthError () { return $(FIRST_NAME_MAX_LENGTH_ERROR) } , 
+            get invalidError () { return $(FIRST_NAME_INVALID_ERROR) }
+        }, 
+        lastName: {
+            get input () { return $(LAST_NAME_INPUT) }, 
+            get emptyError () { return $(LAST_NAME_EMPTY_ERROR) }, 
+            get maxLengthError () { return $(LAST_NAME_MAX_LENGTH_ERROR) }, 
+            get invalidError () { return  $(LAST_NAME_INVALID_ERROR) }
+        }, 
+        email: {
+            get input () { return $(EMAIL_INPUT) }, 
+            get emptyError () { return $(EMAIL_EMPTY_ERROR) }, 
+            get invalidError () { return $(EMAIL_INVALID_ERROR) }, 
+            get existsError () { return $(EMAIL_EXISTS_ERROR) }
+        }, 
+        password: {
+            get input () { return $(PASSWORD_INPUT) }, 
+            get emptyError () { return $(PASSWORD_EMPTY_ERROR) }
+        }
+    };
 
-const lastNameEmptyError = () => $('[data-test-id="error-last-name-empty"]');
-const lastNameMaxLengthError = () => $('[data-test-id="error-last-name-maxlength"]');
-const lastNameInvalidError = () => $('[data-test-id="error-last-name-invalid"]');
+    open() {
+        super.openComponent('organism', 'registration-component');
+    };
 
-const emailEmptyError = () => $('[data-test-id="error-email-empty"]');
-const emailInvalidError = () => $('[data-test-id="error-email-invalid"]');
-const emailExistsError = () => $('[data-test-id="error-email-exists"]');
+    waitForComponent(){
+        super.waitForComponent(this.component);
+    };
 
-const passwordEmptyError = () => $('[data-test-id="error-password-empty"]');
+    isComponentDisplayed () {
+        return this.component.isDisplayed();
+    };
 
-/**
- * @description
- * Inputs user details into the registration component and submits the form.
- *
- * @param {Object} userInfo
- * @param {String} userInfo.firstName The user's first name
- * @param {String} userInfo.lastName The user's last name
- * @param {String} userInfo.email The user's e-mail address
- * @param {String} userInfo.password The user's password
- */
-exports.submitRegistrationForm = (userInfo) => {
-    exports.waitForRegistrationForm();
-    firstNameInput().setValue(userInfo.firstName);
-    lastNameInput().setValue(userInfo.lastName);
-    emailInput().setValue(userInfo.email);
-    passwordInput().setValue(userInfo.password);
-    createAccountButton().click();
+    isInputFieldDisplayed(fieldName){
+        return this.fields[fieldName].input.isDisplayed();
+    };
+    /**
+     * @description
+     * Inputs user details into the registration component and submits the form.
+     *
+     * @param {Object} userInfo
+     * @param {String} userInfo.firstName The user's first name
+     * @param {String} userInfo.lastName The user's last name
+     * @param {String} userInfo.email The user's e-mail address
+     * @param {String} userInfo.password The user's password
+     */
+    submitForm(userInfo){
+        this.fields.firstName.input.setValue(userInfo.firstName); 
+        this.fields.lastName.input.setValue(userInfo.lastName);
+        this.fields.email.input.setValue(userInfo.email);
+        this.fields.password.input.setValue(userInfo.password);
+        this.createAccountButton.click();
+    };
+
+    isEmptyErrorDisplayed(fieldName){
+        return this.fields[fieldName].emptyError.isDisplayed();
+    };
+
+    isMaxLengthErrorDisplayed(fieldName) {
+        return this.fields[fieldName].maxLengthError.isDisplayed();
+    };
+
+    isEmailExistsErrorDisplayed(){
+        return this.fields.email.existsError.isDisplayed();
+    }
+
+    isInvalidErrorDisplayed(fieldName) {
+        return this.fields[fieldName].invalidError.isDisplayed();
+    };
+
+    termsAndConditionsLinkCanBeClicked(){
+        return this.termsAndConditionsLink.isClickable();
+    };
+
+    privacyPolicyLinkCanBeClicked(){
+        return this.privacyPolicyLink.isClickable();
+    };
+    
+    cookiesPolicyLinkCanBeClicked(){
+        return this.cookiesPolicyLink.isClickable();
+    };
 };
 
-exports.waitForRegistrationForm = () => {
-    registrationComponent().waitForExist();
-};
-
-exports.isFirstNameEmptyErrorDisplayed = () => firstNameEmptyError().isDisplayed();
-exports.isFirstNameMaxLengthErrorDisplayed = () => firstNameMaxLengthError().isDisplayed();
-exports.isFirstNameInvalidErrorDisplayed = () => firstNameInvalidError().isDisplayed();
-
-exports.isLastNameEmptyErrorDisplayed = () => lastNameEmptyError().isDisplayed();
-exports.isLastNameMaxLengthErrorDisplayed = () => lastNameMaxLengthError().isDisplayed();
-exports.isLastNameInvalidErrorDisplayed = () => lastNameInvalidError().isDisplayed();
-
-exports.isEmailEmptyErrorDisplayed = () => emailEmptyError().isDisplayed();
-exports.isEmailInvalidErrorDisplayed = () => emailInvalidError().isDisplayed();
-exports.isEmailExistsErrorDisplayed = () => emailExistsError().isDisplayed();
-exports.isPasswordEmptyErrorDisplayed = () => passwordEmptyError().isDisplayed();
-
-exports.termsAndConditionsLinkCanBeClicked = () => termsAndConditionsLink().isClickable();
-exports.privacyPolicyLinkCanBeClicked = () => privacyPolicyLink().isClickable();
-exports.cookiesPolicyLinkCanBeClicked = () => cookiesPolicyLink().isClickable();
-
+module.exports = Registration;
