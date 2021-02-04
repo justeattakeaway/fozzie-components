@@ -1,11 +1,11 @@
-import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
-import RegistrationComponent from '../../../test-utils/component-objects/f-registration.component';
+const { getAccessibilityTestResults } = require('../../../../../../../test/utils/axe-helper');
+const Registration = require ('../../../test-utils/component-objects/f-registration.component');
+const registration = new Registration();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-organisms--registration-component');
-        browser.switchToFrame(0);
-        RegistrationComponent.waitForRegistrationForm();
+        registration.open();
+        registration.waitForComponent();
     });
 
     it('a11y - should test f-registration component WCAG compliance', () => {
