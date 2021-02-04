@@ -1,0 +1,1 @@
+exports.CONTENT_CARDS_COMPONENT = '[data-test-id="content-card-component"]';
