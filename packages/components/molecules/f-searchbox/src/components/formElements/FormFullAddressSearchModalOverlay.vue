@@ -28,7 +28,7 @@
                         @input="address = $event.target.value">
                     <span :class="$style['c-search-placeholder']">{{ copy.fieldLabel }}</span>
 
-                   <loading-indicator />
+                    <loading-indicator />
                 </label>
 
                 <cancel-button

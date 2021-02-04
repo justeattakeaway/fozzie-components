@@ -238,7 +238,7 @@ export default {
         setSavedFullAddressDetails ({ commit }, payload) {
             commit(SET_SAVED_FULL_ADDRESS_DETAILS, payload);
         },
-    
+
         setAutoNavigateToSerp ({ commit }, payload) {
             commit(SET_AUTO_NAVIGATE_TO_SERP, payload);
         }
@@ -450,9 +450,9 @@ export default {
 
             state.savedFullAddressDetails = savedAddressResult;
         },
-    
+
         [SET_AUTO_NAVIGATE_TO_SERP]: (state, shouldAutoNavigateToSerp) => {
             state.shouldAutoNavigateToSerp = shouldAutoNavigateToSerp;
-        },
+        }
     }
 };

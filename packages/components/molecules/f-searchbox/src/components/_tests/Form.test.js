@@ -855,14 +855,14 @@ describe('`Form`', () => {
                             localVue
                         });
                         const spy = jest.spyOn(wrapper.vm, 'setAutoNavigateToSerp');
-        
+
                         // Act
                         wrapper.vm.initialiseFullAddressSearch(propsData.config);
-        
+
                         // Assert
                         expect(spy).toHaveBeenCalledWith(true);
                     });
-                    
+
                     it('should dispatch `setAutoCompleteAvailability` with a payload `true`', () => {
                         // Arrange
                         const propsData = {

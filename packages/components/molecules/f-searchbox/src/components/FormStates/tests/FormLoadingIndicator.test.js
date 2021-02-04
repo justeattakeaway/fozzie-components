@@ -49,11 +49,11 @@ describe('`FormLoadingIndicator`', () => {
                     }),
                     localVue
                 });
-                
+
                 expect(wrapper.find('[data-test-id="loading-spinner-indicator"]').exists()).toBeTruthy();
             });
         });
-    
+
         describe('when `falsy`', () => {
             it('should NOT display the loading indicator', () => {
                 const wrapper = shallowMount(FormLoadingIndicator, {
@@ -67,7 +67,7 @@ describe('`FormLoadingIndicator`', () => {
                     }),
                     localVue
                 });
-            
+
                 expect(wrapper.find('[data-test-id="loading-spinner-indicator"]').exists()).toBeFalsy();
             });
         });

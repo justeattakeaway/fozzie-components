@@ -53,7 +53,7 @@ options.isFullAddressNavigateToSerpEnabled = () => {
     if (!options.isFullAddressNavigateToSerpActive) {
         options.isFullAddressNavigateToSerpActive = isNavigateToSerpEnabled();
     }
-    
+
     return options.isFullAddressNavigateToSerpActive;
 };
 
