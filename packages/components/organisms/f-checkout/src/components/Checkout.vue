@@ -333,7 +333,6 @@ export default {
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutSetupGuestFailure, thrownErrors);
             }
-
         },
 
         /**
@@ -411,7 +410,6 @@ export default {
 
                 this.$emit(EventNames.CheckoutFailure, error);
             }
-
         },
 
         async onFormSubmit () {
