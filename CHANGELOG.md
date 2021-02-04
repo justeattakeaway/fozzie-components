@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.9.0
+------------------------------
+*February 4, 2021*
+
+### Changes
+- Updated `package.json` with `chromedriver` version to `88.0.0`.
+- Updated CircleCI `config.yml` to support updated `chromedriver` version.
+
 
 v3.8.0
 ------------------------------
