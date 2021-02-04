@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.47.0
+-------------------------------
+*February 4, 2021*
+
+### Added
+- `Error.vue` component to display a user-friendly error page when we cannot load the necessary information to render the page.
+
 
 v0.46.0
 -------------------------------
