@@ -49,7 +49,7 @@ export default {
         /**
          * Get the checkout details from the backend and update the state.
          *
-         * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getCheckout: async ({ commit, state }, { url, timeout }) => {
@@ -74,12 +74,11 @@ export default {
         /**
          * Post the checkout details to the backend.
          *
-         * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
-         * @param {Object} state - Automatically handled by Vuex to be able to retrieve state.
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         // eslint-disable-next-line no-unused-vars
-        patchCheckout: async ({ commit, state }, {
+        patchCheckout: async ({ state }, {
             url, data, timeout
         }) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
@@ -102,12 +101,10 @@ export default {
         /**
          * Post the guest user details to the backend.
          *
-         * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
-         * @param {Object} state - Automatically handled by Vuex to be able to retrieve state.
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        // eslint-disable-next-line no-unused-vars
-        createGuestUser: async ({ commit, state }, {
+        createGuestUser: async (context, {
             url, tenant, data, timeout
         }) => {
             const config = {
@@ -127,7 +124,7 @@ export default {
         /**
          * Get the fulfilment details from the backend and update the state.
          *
-         * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getAvailableFulfilment: async ({ commit }, { url, timeout }) => {
@@ -147,7 +144,7 @@ export default {
         /**
          * Get the basket details from the backend and update the state.
          *
-         * @param {Object} commit - Automatically handled by Vuex to be able to commit mutations.
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getBasket: async ({ commit }, {
