@@ -3,7 +3,7 @@
         data-test-id="breadcrumbs-component"
         :class="$style['c-breadcrumbs']">
         <ul :class="$style['c-breadcrumbs-list']">
-            <template v-for="({ name, url }, index) in links">
+            <template v-for="({ name, url, routerLink }, index) in links">
                 <li
                     v-if="index !== 0"
                     :key="`${index}_link`"
@@ -14,7 +14,7 @@
                     :key="`${index}_separator`"
                     :class="$style['c-breadcrumbs-item']">
                     <router-link
-                        v-if="routerLinks"
+                        v-if="routerLink"
                         :to="url"
                         :class="[
                             $style['c-breadcrumbs-link'],
@@ -45,10 +45,6 @@ export default {
         links: {
             type: Array,
             default: () => []
-        },
-        routerLinks: {
-            type: Boolean,
-            default: true
         }
     },
     methods: {

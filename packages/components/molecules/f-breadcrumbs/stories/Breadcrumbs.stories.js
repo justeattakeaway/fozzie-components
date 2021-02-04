@@ -26,16 +26,18 @@ BreadcrumbsComponent.args = {
     links: [
         {
             name: 'Home',
-            url: '/'
+            url: '/',
+            routerLink: false
         },
         {
             name: 'For You',
-            url: '/offers'
+            url: '/offers',
+            routerLink: false
         },
         {
             name: 'Stampcards',
-            url: '/offers/stamp-cards'
+            url: '/offers/stamp-cards',
+            routerLink: false
         }
-    ],
-    routerLinks: false
+    ]
 };
