@@ -11,21 +11,23 @@ import {
     UPDATE_CUSTOMER_DETAILS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
-    UPDATE_STATE
+    UPDATE_STATE,
+    UPDATE_USER_NOTE
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutModule;
 
 const {
+    createGuestUser,
+    getAvailableFulfilment,
+    getBasket,
     getCheckout,
     patchCheckout,
     setAuthToken,
-    getAvailableFulfilment,
     updateAddressDetails,
     updateCustomerDetails,
     updateFulfilmentTime,
-    createGuestUser,
-    getBasket
+    updateUserNote
 } = actions;
 
 const mobileNumber = '+447111111111';
@@ -47,6 +49,8 @@ const time = {
     from: 'fromTime',
     to: 'toTime'
 };
+
+const userNote = 'Beware of the dachshund';
 
 const defaultState = {
     id: '',
@@ -176,6 +180,16 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(state.time).toEqual(time);
+            });
+        });
+
+        describe(`${UPDATE_USER_NOTE} ::`, () => {
+            it('should update state with received value', () => {
+                // Arrange & Act
+                mutations[UPDATE_USER_NOTE](state, userNote);
+
+                // Assert
+                expect(state.userNote).toEqual(userNote);
             });
         });
     });
@@ -368,6 +382,16 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_TIME, time);
+            });
+        });
+
+        describe('updateUserNote ::', () => {
+            it(`should call ${UPDATE_USER_NOTE}`, () => {
+                // Act
+                updateUserNote({ commit }, userNote);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_USER_NOTE, userNote);
             });
         });
     });

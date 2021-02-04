@@ -16,7 +16,7 @@
             maxlength="200"
             :class="$style['c-userNote-textArea']"
             :placeholder="$t('userNote.placeholder')"
-            @input="onNoteUpdate" />
+            @input="updateUserNote($event.target.value)" />
     </div>
 </template>
 
@@ -27,11 +27,7 @@ export default {
     methods: {
         ...mapActions('checkout', [
             'updateUserNote'
-        ]),
-
-        onNoteUpdate (event) {
-            this.updateUserNote(event.target.value);
-        }
+        ])
     }
 };
 </script>
