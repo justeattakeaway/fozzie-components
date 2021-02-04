@@ -11,6 +11,15 @@ v0.49.0
 - `Error.vue` component to display a user-friendly error page when we cannot load the necessary information to render the page.
 
 
+v0.48.0
+-------------------------------
+*February 4, 2021*
+
+### Added
+- Mapper service for creation of checkout PATCH payload.
+- Handling of user note and including it in the PATCH request.
+
+
 v0.47.0
 -------------------------------
 *February 3, 2021*
