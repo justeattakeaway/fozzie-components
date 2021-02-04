@@ -921,7 +921,7 @@ describe('Checkout', () => {
             });
 
             describe('when `createGuestUser` request fails', () => {
-                it('should emit failure event', async () => {
+                it('should emit `CheckoutSetupGuestFailure` event', async () => {
                     // Arrange
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
@@ -942,7 +942,7 @@ describe('Checkout', () => {
             });
 
             describe('when `createGuestUser` request succeeds', () => {
-                it('should emit failure event', async () => {
+                it('should emit `CheckoutSetupGuestSuccess` event', async () => {
                     // Arrange
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
