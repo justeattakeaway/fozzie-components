@@ -48,6 +48,11 @@ export default {
         }
     },
     methods: {
+        /**
+       * Function to add active class to the last link
+       * @param index
+       * @returns {*|string}
+       */
         linkActiveClass (index) {
             return index === this.links.length - 1 ? this.$style['c-breadcrumbs-link--active'] : '';
         }
@@ -81,7 +86,8 @@ $breadcrumbs-active-font-weight: $font-weight-base;
         padding: spacing(x0.5) spacing(x2) spacing(x0.5) spacing();
     }
 }
-.c-breadcrumbs-item, .c-breadcrumbs-separator {
+.c-breadcrumbs-item,
+.c-breadcrumbs-separator {
     @include media('<narrowMid') {
         display: none;
         &:nth-last-child(-n+4):not(:nth-last-child(-n+2)) {

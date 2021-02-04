@@ -6,7 +6,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import Breadcrumbs from '../src/components/Breadcrumbs.vue';
 
 export default {
-    title: 'Components/molecules',
+    title: 'Components/Molecules',
     decorators: [withA11y]
 };
 
