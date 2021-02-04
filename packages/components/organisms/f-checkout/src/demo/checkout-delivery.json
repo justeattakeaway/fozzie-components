@@ -22,12 +22,6 @@
     ],
     "postalCode": "BS1 1AA"
   },
-  "notes": [
-    {
-      "type": "delivery",
-      "note": "Test note for delivery"
-    }
-  ],
   "isFulfillable": true,
   "notices": [
     {
