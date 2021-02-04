@@ -33,21 +33,17 @@
             <span :class="$style['c-search-placeholder']">{{ copy.fieldPlaceholder }}</span>
 
             <clear-button
-                v-if="false"
+                v-if="shouldDisplayClearButton"
                 :class="$style['c-search-btn-clear']"
-                type="button"
-                data-test-id="searchBtnClear">
+                data-test-id="search-btn-clear"
+                @click.native="onClearAddress">
                 <cross-icon />
                 <span :class="$style['is-visuallyHidden']">
                     {{ copy.fullAddressSearchSuggestions.clearSearchBtn }}
                 </span>
             </clear-button>
 
-            <div
-                v-if="shouldDisplayLoadingIndicator"
-                :class="$style['c-spinner-wrapper']">
-                <div :class="$style['c-spinner']" />
-            </div>
+            <loading-indicator />
         </label>
 
         <form-search-inner-field-wrapper
@@ -69,6 +65,7 @@ import ClearButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import FormSearchInnerFieldWrapper from './FormSearchInnerFieldWrapper.vue';
 import FormFullAddressSearchOverlay from './FormFullAddressSearchModalOverlay.vue';
+import LoadingIndicator from '../FormStates/FormLoadingIndicator.vue';
 import { ADDRESS_SEARCH_FOCUS } from '../../event-types';
 
 const ALLOWED_SELECTION_TIME = 500;
@@ -78,7 +75,8 @@ export default {
         FormSearchInnerFieldWrapper,
         FormFullAddressSearchOverlay,
         CrossIcon,
-        ClearButton
+        ClearButton,
+        LoadingIndicator
     },
 
     directives: {
@@ -130,6 +128,7 @@ export default {
         ...mapState('searchbox', [
             'address',
             'isBelowMid',
+            'inputTimeoutValue',
             'isStreetNumberRequired',
             'isGeoLocationAvailable',
             'isAutocompleteEnabled',
@@ -150,6 +149,13 @@ export default {
          * */
         shouldDisplayLoadingIndicator () {
             return this.isFullAddressSearchEnabled && this.isLoadingResults;
+        },
+
+        shouldDisplayClearButton () {
+            return this.isFullAddressSearchEnabled
+                    && !this.isLoadingResults
+                    && !this.isBelowMid
+                    && this.address.length;
         }
     },
 
@@ -267,6 +273,18 @@ export default {
             } else {
                 this.isFullAddressModalClosed = false;
             }
+        },
+
+        /**
+         * Clear address field when the user clicks the clear button.
+         * Reset suggestions & clear inputTimeoutValue so we can show results again
+         * if the user searches.
+         *
+         */
+        onClearAddress () {
+            this.setAddress('');
+            clearTimeout(this.inputTimeoutValue);
+            this.clearSuggestions([]);
         }
     }
 };

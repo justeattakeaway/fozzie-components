@@ -27,10 +27,11 @@
                         type="search"
                         @input="address = $event.target.value">
                     <span :class="$style['c-search-placeholder']">{{ copy.fieldLabel }}</span>
+
+                   <loading-indicator />
                 </label>
 
                 <cancel-button
-                    type="button"
                     :class="$style['c-fullAddressFinder-btn']"
                     @click.native="onModalClose">
                     {{ copy.fullAddressSearchSuggestions.buttonCancel }}
@@ -53,13 +54,15 @@ import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 import CancelButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import FullAddressSearchSuggestions from './FormFullAddressSearchSuggestions.vue';
+import LoadingIndicator from '../FormStates/FormLoadingIndicator.vue';
 import { ON_FULL_ADDRESS_MODAL_CLOSED } from '../../event-types';
 
 export default {
     components: {
         FullAddressOverlaySearch,
         FullAddressSearchSuggestions,
-        CancelButton
+        CancelButton,
+        LoadingIndicator
     },
 
     props: {
