@@ -9,12 +9,15 @@ import {
     FIELDS,
     KNOB_CHECKOUT_DROPDOWN,
     KNOB_BUTTON,
-    SWITCH_USER_LINK
+    SWITCH_USER_LINK,
+    GUEST_CHECKOUT_LOGIN_BUTTON,
+    GUEST_CHECKOUT_HEADER
 } from './f-checkout-selectors';
 
 const { doesElementExist } = require('../../../../../../test/utils/webdriverio-extensions')(browser);
 
 const checkoutComponent = () => $(CHECKOUT_COMPONENT);
+const guestCheckoutHeader = () => $(GUEST_CHECKOUT_HEADER);
 
 // Dropdown
 
@@ -25,6 +28,7 @@ const knobCheckoutDropdown = () => $(KNOB_CHECKOUT_DROPDOWN);
 // Buttons
 const goToPaymentButton = () => $(GO_TO_PAYMENT_BUTTON);
 const knobButton = () => $(KNOB_BUTTON);
+const guestCheckoutLoginButton = () => $(GUEST_CHECKOUT_LOGIN_BUTTON);
 
 // Form Fields
 
@@ -32,6 +36,18 @@ const userNoteInput = () => $(USER_NOTE_INPUT);
 const switchUserLink = () => $(SWITCH_USER_LINK);
 
 const fields = {
+    firstName: {
+        input: () => $(FIELDS.firstName.input),
+        error: () => $(FIELDS.firstName.error)
+    },
+    lastName: {
+        input: () => $(FIELDS.lastName.input),
+        error: () => $(FIELDS.lastName.error)
+    },
+    emailAddress: {
+        input: () => $(FIELDS.emailAddress.input),
+        error: () => $(FIELDS.emailAddress.error)
+    },
     mobileNumber: {
         input: () => $(FIELDS.mobileNumber.input),
         error: () => $(FIELDS.mobileNumber.error)
@@ -51,7 +67,7 @@ const fields = {
     addressPostcode: {
         input: () => $(FIELDS.addressPostcode.input),
         error: () => $(FIELDS.addressPostcode.error),
-        typeError: () => $(FIELDS.addressPostcode.typeError)
+        typeError: () => $$(FIELDS.addressPostcode.typeError)
     },
     userNote: {
         input: () => $(FIELDS.userNote.input),
@@ -76,13 +92,15 @@ exports.changeCheckoutMethod = method => {
 
 exports.isFieldErrorDisplayed = fieldName => fields[fieldName].error().isDisplayed();
 exports.isFieldDisplayed = fieldName => fields[fieldName].input().isDisplayed();
-exports.isFieldTypeErrorDisplayed = fieldName => fields[fieldName].typeError().isDisplayed();
+exports.isPostCodeTypeErrorDisplayed = () => fields.addressPostcode.typeError().length > 0;
 exports.waitForCheckoutComponent = () => checkoutComponent().waitForExist();
 exports.isCheckoutComponentDisplayed = () => checkoutComponent().isDisplayed();
 exports.isOrderTimeDropdownDisplayed = () => orderTimeDropdown().isDisplayed();
 exports.userNoteMaxCharacterCount = () => userNoteInput().getAttribute('maxlength');
 exports.clickPaymentButton = () => goToPaymentButton().click();
 exports.switchUserLinkIsDisplayed = () => switchUserLink().isDisplayed();
+exports.isGuestCheckoutLoginButtonDisplayed = () => guestCheckoutLoginButton().isDisplayed();
+exports.isGuestCheckoutHeaderDisplayed = () => guestCheckoutHeader().isDisplayed();
 
 /**
  * @description
@@ -125,9 +143,9 @@ exports.clearField = fieldName => {
  *
  * @param {String} fields Grabs the fields of the above object and runs a forEach loop to get the keys
  */
-exports.clearCheckoutForm = () => {
+exports.clearCheckoutForm = fieldName => {
     exports.waitForCheckoutComponent();
-    Object.keys(fields).forEach(exports.clearField);
+    exports.clearField(fieldName);
 };
 
 exports.populateCollectionCheckoutForm = addressInfo => {
