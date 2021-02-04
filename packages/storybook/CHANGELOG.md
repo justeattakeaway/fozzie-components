@@ -4,6 +4,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.22.0
+------------------------------
+*February 4, 2021*
+
+### Fixed
+- `ul` bullet styling updated to show in mdx files.
+- `stories` glob updated to find stories within subfolders of the `stories/` directory.
+
+### Changed
+- Base theme config added to mdx files (including `JustEatBasis` font).
+- Font size and margins for sidebar subheadings has been decreased.
+- Story ordering added to Storybook config (via `storySort` object in `preview.js`).
+- Documentation stories moved into sub-folder structure.
+
+
 v0.21.0
 ------------------------------
 *December 30, 2020*
