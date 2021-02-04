@@ -12,12 +12,23 @@ v3.9.0
 - Updated CircleCI `config.yml` to support updated `chromedriver` version.
 
 
+v3.9.0
+------------------------------
+*February 4, 2021*
+
+### Changed
+- Re-organisation of the `/stories` folder.
+
+### Fixed
+- Danger not checking `storybook` package changes correctly, because path wasn't present in directory match.
+
+
 v3.8.0
 ------------------------------
 *February 4, 2021*
 
 ### Added
-- `f-wdio-utils` package in the services folder - for the `page-object` file and other webdriverio utils. 
+- `f-wdio-utils` package in the services folder - for the `page-object` file and other webdriverio utils.
 
 
 v3.7.1
