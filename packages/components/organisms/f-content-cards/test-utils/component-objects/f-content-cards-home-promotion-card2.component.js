@@ -9,7 +9,7 @@ const {
 
 class HomePromotionCard2 extends Page {
 
-    card2 = {
+    card = {
         get component () { return $(PROMOTION_CARD_2_COMPONENT) },
         get callToAction () { return $(CTA) },
         get text () { return $(TEXT) },
@@ -22,27 +22,27 @@ class HomePromotionCard2 extends Page {
     };
 
     waitForComponent(){
-        super.waitForComponent(this.card2.component);
+        super.waitForComponent(this.card.component);
     };
 
-    isCard2Displayed(){
-        return this.card2.component.isDisplayed();
+    isCardDisplayed(){
+        return this.card.component.isDisplayed();
     };
 
-    isCard2CallToActionDisplayed(){
-        return this.card2.callToAction.isDisplayed();
+    isCardCallToActionDisplayed(){
+        return this.card.callToAction.isDisplayed();
     }; 
 
-    isCard2TextDisplayed(){
-        return this.card2.text.isDisplayed();
+    isCardTextDisplayed(){
+        return this.card.text.isDisplayed();
     }; 
 
-    isCard2TitleDisplayed(){
-        return this.card2.title.isDisplayed();
+    isCardTitleDisplayed(){
+        return this.card.title.isDisplayed();
     }; 
 
-    isCard2BackgroundImageDisplayed(){
-        return this.card2.backgroundImage.isDisplayed();
+    isCardBackgroundImageDisplayed(){
+        return this.card.backgroundImage.isDisplayed();
     }; 
 }
 
