@@ -76,12 +76,15 @@ export default {
         ctaTestId () {
             return this.testId ? `${this.testId}--cta` : false;
         },
+
         textTestId () {
             return this.testId ? `${this.testId}--text` : false;
         },
+
         titleTestId () {
             return this.testId ? `${this.testId}--title` : false;
         },
+        
         imageTestId () {
             return this.testId ? `${this.testId}--image` : false;
         },

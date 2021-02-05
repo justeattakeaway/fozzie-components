@@ -86,15 +86,19 @@ export default {
         ctaTestId () {
             return this.testId ? `${this.testId}--cta` : false;
         },
+
         containerTestId () {
             return this.testId ? `${this.testId}--container` : false;
         },
+
         headerTestId () {
             return this.testId ? `${this.testId}--header` : false;
         },
+
         logoTestId () {
             return this.testId ? `${this.testId}--logo` : false;
         },
+        
         subtitleTestId () {
             return this.testId ? `${this.testId}--subtitle` : false;
         },
