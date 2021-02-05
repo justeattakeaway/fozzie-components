@@ -10,6 +10,8 @@ import updateCheckout from './update-checkout.json';
 
 const mock = new MockAdapter(axios);
 
+const updateCheckoutRegex = new RegExp('checkout/[a-z]{2}/*');
+
 export default {
     setupCheckoutMethod (path) {
         switch (path) {
@@ -32,8 +34,7 @@ export default {
                 mock.onGet(path).reply(200, getBasketCollection);
                 break;
             case '/update-checkout.json':
-                const regex = new RegExp("checkout/[a-z]{2}/*");
-                mock.onPatch(regex).reply(200, updateCheckout);
+                mock.onPatch(updateCheckoutRegex).reply(200, updateCheckout);
                 break;
             default:
                 throw new Error(`${path} is not valid`);

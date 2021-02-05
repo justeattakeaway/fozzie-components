@@ -11,6 +11,8 @@ import {
     UPDATE_CUSTOMER_DETAILS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
+    UPDATE_IS_FULFILLABLE,
+    UPDATE_ISSUES,
     UPDATE_STATE,
     UPDATE_USER_NOTE
 } from '../mutation-types';
@@ -50,6 +52,14 @@ const time = {
     to: 'toTime'
 };
 
+const isFulfillable = false;
+
+const issues = [
+    {
+        code: 'RESTAURANT_UNAVAILABLE'
+    }
+];
+
 const userNote = 'Beware of the dachshund';
 
 const defaultState = {
@@ -72,6 +82,7 @@ const defaultState = {
         postcode: ''
     },
     isFulfillable: true,
+    issues: [],
     notices: [],
     messages: [],
     availableFulfilment: {
@@ -183,6 +194,26 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe(`${UPDATE_IS_FULFILLABLE} ::`, () => {
+            it('should update state with received value', () => {
+                // Arrange & Act
+                mutations[UPDATE_IS_FULFILLABLE](state, isFulfillable);
+
+                // Assert
+                expect(state.isFulfillable).toEqual(isFulfillable);
+            });
+        });
+
+        describe(`${UPDATE_ISSUES} ::`, () => {
+            it('should update state with received value', () => {
+                // Arrange & Act
+                mutations[UPDATE_ISSUES](state, issues);
+
+                // Assert
+                expect(state.issues).toEqual(issues);
+            });
+        });
+
         describe(`${UPDATE_USER_NOTE} ::`, () => {
             it('should update state with received value', () => {
                 // Arrange & Act
@@ -273,7 +304,13 @@ describe('CheckoutModule', () => {
                     },
                     timeout: payload.timeout
                 };
-                axios.patch = jest.fn(() => Promise.resolve({ status: 200 }));
+                axios.patch = jest.fn(() => Promise.resolve({
+                    status: 200,
+                    data: {
+                        // isFulfillable: true,
+                        // issues: []
+                    }
+                }));
             });
 
             it('should post the checkout details to the backend.', async () => {

@@ -9,8 +9,8 @@ v0.51.0
 *February 5, 2021*
 
 ### Added
-- Axios mock to Storybook for checkout PATCH requests
-  - Note that currently nothing is done with the response
+- Axios mock to Storybook for checkout PATCH requests.
+- PATCH response handling, by adding `issues` and `isFulfillable` to state.
 
 
 v0.50.0
