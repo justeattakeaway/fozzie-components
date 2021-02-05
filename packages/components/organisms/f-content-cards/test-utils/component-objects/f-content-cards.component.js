@@ -43,7 +43,7 @@ class HomePromotion extends Page {
         return this.card1.component.isDisplayed();
     };
 
-    isCard1ContainerDisplayed(){
+    isCard1InnerContainerDisplayed(){
         return this.card1.innerContainer.isDisplayed();
     };
 
@@ -60,7 +60,7 @@ class HomePromotion extends Page {
     };
 
     isCard2Displayed(){
-        return this.card1.component.isDisplayed();
+        return this.card2.component.isDisplayed();
     };
 
     isCard2CallToActionDisplayed(){

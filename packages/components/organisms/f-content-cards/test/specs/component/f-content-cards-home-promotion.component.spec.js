@@ -15,7 +15,7 @@ describe('f-content-card component tests', () => {
 
     it('should display the elements of Card 1', () => {
         // Assert
-        expect(homePromotion.isCard1ContainerDisplayed()).toBe(true);
+        expect(homePromotion.isCard1InnerContainerDisplayed()).toBe(true);
         expect(homePromotion.isCard1HeaderDisplayed()).toBe(true);
         expect(homePromotion.isCard1ImageDisplayed()).toBe(true); 
         expect(homePromotion.isCard1SubtitleDisplayed()).toBe(true);
