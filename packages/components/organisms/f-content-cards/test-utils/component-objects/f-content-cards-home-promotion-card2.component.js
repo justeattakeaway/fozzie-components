@@ -28,7 +28,7 @@ class HomePromotionCard2 extends Page {
     };
 
     isCardCallToActionDisplayed(){
-        return this.card.callToAction.isDisplayed();
+        return this.callToAction.isDisplayed();
     }; 
 
     isCardTextDisplayed(){

@@ -17,74 +17,58 @@ const {
 
 class HomePromotionCard1 extends Page {
 
-    // constructor() {
-    //     super();
-    //     this.homePromotionCard2 = new HomePromotionCard2();
-    // }
-
-    card1 = {
-        get component () { return $(PROMOTION_CARD_1_COMPONENT) },
-        get innerContainer () { return $(INNER_CONTAINER) }, 
-        get header () { return $(HEADER) }, 
-        get image () { return $(IMAGE) },
-        get subtitle () { return $(SUBTITLE) }
-    };
-
-    // card2 = {
-    //     get component () { return $(PROMOTION_CARD_2_COMPONENT) },
-    //     get callToAction () { return $(CTA) },
-    //     get text () { return $(TEXT) },
-    //     get title () { return $(TITLE) },
-    //     get backgroundImage () { return $(BACKGROUND_IMAGE) }
-    // };
+    get component () { return $(PROMOTION_CARD_1_COMPONENT) }
+    get innerContainer () { return $(INNER_CONTAINER) }
+    get header () { return $(HEADER) }
+    get image () { return $(IMAGE) }
+    get subtitle () { return $(SUBTITLE) }
 
     open() {
         super.openComponent('molecule', 'f-content-cards--home-promotion-card-1-component');
     };
 
-    waitForComponents(){
+    waitForComponent(){
         super.waitForComponent(this.card1.component);
-        super.waitForComponent(this.card2.component);
     };
 
-    isCard1Displayed(){
+    isCardDisplayed(){
         return this.card1.component.isDisplayed();
     };
 
-    isCard1InnerContainerDisplayed(){
+    isCardInnerContainerDisplayed(){
         return this.card1.innerContainer.isDisplayed();
     };
 
-    isCard1HeaderDisplayed(){
+    isCardHeaderDisplayed(){
         return this.card1.header.isDisplayed();
     };
 
-    isCard1ImageDisplayed(){
+    isCardImageDisplayed(){
         return this.card1.image.isDisplayed();
     };
 
-    isCard1SubtitleDisplayed(){
+    isCardSubtitleDisplayed(){
         return this.card1.subtitle.isDisplayed();
     };
 
-    isCard2Displayed(){
+    isInnerCardDisplayed(){
         return homePromotionCard2.isCardDisplayed();
     };
 
-    isCard2CallToActionDisplayed(){
-        return this.card2.callToAction.isDisplayed();
+    isInnerCardCallToActionDisplayed(){
+        return homePromotionCard2.isCardCallToActionDisplayed();
     }; 
 
-    isCard2TextDisplayed(){
-        return this.card2.text.isDisplayed();
+    isInnerCardTextDisplayed(){
+        return homePromotionCard2.isCardTextDisplayed();
     }; 
 
-    isCard2TitleDisplayed(){
-        return this.card2.title.isDisplayed();
+    isInnerCardTitleDisplayed(){
+        return homePromotionCard2.isCardTitleDisplayed();
     }; 
 
-    isCard2BackgroundImageDisplayed(){
-        return this.card2.backgroundImage.isDisplayed();
+    isInnerCardBackgroundImageDisplayed(){
+        return homePromotionCard2.isCardBackgroundImageDisplayed();
     }; 
 };
 

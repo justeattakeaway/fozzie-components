@@ -4,7 +4,7 @@ const card = new HomePromotionCard1();
 describe('home promotion card 1 component tests', () => {
     beforeEach(() => {
         card.open();
-        card.waitForComponents();
+        card.waitForComponent();
     });
 
     it('should display cards 1 and 2', () => {
@@ -21,11 +21,11 @@ describe('home promotion card 1 component tests', () => {
         expect(card.isCard1SubtitleDisplayed()).toBe(true);
     });
 
-    it('should display the elements of card 2', () => {
+    it.only('should display the elements of card 2', () => {
         // Assert
-        expect(card.isCard2CallToActionDisplayed()).toBe(true);
-        expect(card.isCard2TextDisplayed()).toBe(true);
-        expect(card.isCard2TitleDisplayed()).toBe(true); 
-        expect(card.isCard2BackgroundImageDisplayed()).toBe(true);
+        expect(card.isInnerCardCallToActionDisplayed()).toBe(true);
+        // expect(card.isCard2TextDisplayed()).toBe(true);
+        // expect(card.isCard2TitleDisplayed()).toBe(true); 
+        // expect(card.isCard2BackgroundImageDisplayed()).toBe(true);
     });
 });
