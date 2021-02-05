@@ -2,7 +2,7 @@ import BreadcrumbsComponent from '../../../test-utils/component-objects/f-breadc
 
 describe('f-breadcrumbs component tests', () => {
     beforeEach(() => {
-        browser.url('/?path=/story/components--breadcrumbs-component');
+        browser.url('/?path=/story/components-molecules--breadcrumbs-component');
         browser.switchToFrame(0);
         BreadcrumbsComponent.waitForBreadcrumbsComponent();
     });
