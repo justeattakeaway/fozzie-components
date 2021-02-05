@@ -1,4 +1,7 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object'); 
+const HomePromotionCard2 = require('./f-content-cards-home-promotion-card2.component');
+const homePromotionCard2 = new HomePromotionCard2();
+
 const { 
     PROMOTION_CARD_1_COMPONENT,
     INNER_CONTAINER,
@@ -14,6 +17,11 @@ const {
 
 class HomePromotionCard1 extends Page {
 
+    // constructor() {
+    //     super();
+    //     this.homePromotionCard2 = new HomePromotionCard2();
+    // }
+
     card1 = {
         get component () { return $(PROMOTION_CARD_1_COMPONENT) },
         get innerContainer () { return $(INNER_CONTAINER) }, 
@@ -22,13 +30,13 @@ class HomePromotionCard1 extends Page {
         get subtitle () { return $(SUBTITLE) }
     };
 
-    card2 = {
-        get component () { return $(PROMOTION_CARD_2_COMPONENT) },
-        get callToAction () { return $(CTA) },
-        get text () { return $(TEXT) },
-        get title () { return $(TITLE) },
-        get backgroundImage () { return $(BACKGROUND_IMAGE) }
-    };
+    // card2 = {
+    //     get component () { return $(PROMOTION_CARD_2_COMPONENT) },
+    //     get callToAction () { return $(CTA) },
+    //     get text () { return $(TEXT) },
+    //     get title () { return $(TITLE) },
+    //     get backgroundImage () { return $(BACKGROUND_IMAGE) }
+    // };
 
     open() {
         super.openComponent('molecule', 'f-content-cards--home-promotion-card-1-component');
@@ -60,7 +68,7 @@ class HomePromotionCard1 extends Page {
     };
 
     isCard2Displayed(){
-        return this.card2.component.isDisplayed();
+        return homePromotionCard2.isCardDisplayed();
     };
 
     isCard2CallToActionDisplayed(){

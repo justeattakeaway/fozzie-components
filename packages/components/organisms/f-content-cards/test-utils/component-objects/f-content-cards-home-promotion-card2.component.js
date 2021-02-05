@@ -9,13 +9,11 @@ const {
 
 class HomePromotionCard2 extends Page {
 
-    card = {
-        get component () { return $(PROMOTION_CARD_2_COMPONENT) },
-        get callToAction () { return $(CTA) },
-        get text () { return $(TEXT) },
-        get title () { return $(TITLE) },
-        get backgroundImage () { return $(BACKGROUND_IMAGE) }
-    };
+    get component () { return $(PROMOTION_CARD_2_COMPONENT) }
+    get callToAction () { return $(CTA) }
+    get text () { return $(TEXT) }
+    get title () { return $(TITLE) }
+    get backgroundImage () { return $(BACKGROUND_IMAGE) }
 
     open() {
         super.openComponent('molecule', 'f-content-cards--home-promotion-card-2-component');
@@ -26,7 +24,7 @@ class HomePromotionCard2 extends Page {
     };
 
     isCardDisplayed(){
-        return this.card.component.isDisplayed();
+        return this.component.isDisplayed();
     };
 
     isCardCallToActionDisplayed(){
