@@ -1,7 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import FullAddressSuggestions from '../FormFullAddressSearchSuggestions.vue';
-import * as helperService from '../../../utils/helpers';
 
 const localVue = createLocalVue();
 
@@ -363,41 +362,6 @@ describe('`FullAddressSuggestions`', () => {
                         // Assert
                         expect(spy).not.toHaveBeenCalledWith(false);
                     });
-                });
-            });
-        });
-
-        describe('`navigateToSerpOnAddressSelection`', () => {
-            it('should exist', () => {
-                const { wrapper } = bootstrap();
-
-                expect(wrapper.vm.navigateToSerpOnAddressSelection).toBeDefined();
-            });
-
-            describe('when invoked', () => {
-                it('should make a call to `generatePostForm` with the correct payload for SERP', () => {
-                    // Arrange
-                    const propsData = {
-                        config: {
-                            query: '?refine_with_discounts',
-                            formUrl: 'search/do'
-                        }
-                    };
-                    const wrapper = shallowMount(FullAddressSuggestions, {
-                        localVue,
-                        propsData,
-                        store: createStore({
-                            address: 'AR511AR, Central Yarnham, outskirts'
-                        })
-                    });
-                    window.HTMLFormElement.prototype.submit = () => {};
-                    const spy = jest.spyOn(helperService, 'generatePostForm');
-
-                    // Act
-                    wrapper.vm.navigateToSerpOnAddressSelection();
-
-                    // Assert
-                    expect(spy).toHaveBeenCalledWith('search/do', { postcode: 'AR511AR', query: '?refine_with_discounts' });
                 });
             });
         });

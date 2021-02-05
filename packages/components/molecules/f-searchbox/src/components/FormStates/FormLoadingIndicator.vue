@@ -2,8 +2,8 @@
     <div
         v-if="shouldDisplayLoadingIndicator"
         data-test-id="loading-spinner-indicator"
-        :class="$style['c-spinner-wrapper']">
-        <div :class="$style['c-spinner']" />
+        :class="$style['c-spinner']">
+        <div :class="$style['c-spinner-icon']" />
     </div>
 </template>
 

@@ -36,7 +36,7 @@
                 v-if="shouldDisplayClearButton"
                 :class="$style['c-search-btn-clear']"
                 data-test-id="search-btn-clear"
-                @click.native="onClearAddress">
+                @click="onClearAddress">
                 <cross-icon />
                 <span :class="$style['is-visuallyHidden']">
                     {{ copy.fullAddressSearchSuggestions.clearSearchBtn }}
@@ -53,6 +53,7 @@
         <form-full-address-search-overlay
             v-if="isFullAddressSearchEnabled"
             :copy="copy"
+            :config="config"
             :should-display-modal-overlay="shouldShowSuggestionsModal"
             @on-full-address-modal-closed="onCloseModal" />
     </div>
@@ -113,6 +114,11 @@ export default {
         },
 
         customAttributeOverride: {
+            type: Object,
+            default: () => ({})
+        },
+
+        config: {
             type: Object,
             default: () => ({})
         }
@@ -332,7 +338,7 @@ export default {
         position: absolute;
 
         g {
-            fill: #535353;
+            fill: $grey--midDark;
         }
     }
 

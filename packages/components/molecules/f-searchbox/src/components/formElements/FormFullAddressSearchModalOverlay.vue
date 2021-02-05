@@ -1,6 +1,7 @@
 <template>
     <div v-if="isBelowMid">
         <full-address-overlay-search
+            data-test-id="full-address-overlay"
             is-full-height
             is-scrollable
             :has-close-button="false"
@@ -33,7 +34,7 @@
 
                 <cancel-button
                     :class="$style['c-fullAddressFinder-btn']"
-                    @click.native="onModalClose">
+                    @click="onModalClose">
                     {{ copy.fullAddressSearchSuggestions.buttonCancel }}
                 </cancel-button>
             </div>
@@ -42,6 +43,7 @@
                 v-if="hasSuggestionsToDisplay"
                 data-test-id="full-address-modal-suggestions"
                 :copy="copy"
+                :config="config"
                 :suggestions="suggestions" />
         </full-address-overlay-search>
     </div>
@@ -74,6 +76,11 @@ export default {
         shouldDisplayModalOverlay: {
             type: Boolean,
             default: false
+        },
+
+        config: {
+            type: Object,
+            default: () => ({})
         }
     },
 

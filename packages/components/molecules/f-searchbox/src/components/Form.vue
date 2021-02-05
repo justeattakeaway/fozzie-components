@@ -21,6 +21,7 @@
                 :error-message="errorMessage"
                 :custom-attribute-override="addressField"
                 :service="service"
+                :config="config"
                 :copy="copy"
                 :is-compressed="isCompressed"
                 v-on="$listeners" />

@@ -10,12 +10,12 @@
                 $style.item,
                 { [$style.selected]: index === selected }
             ]"
-            data-test-id="suggestion-item"
             @click="getSelectedStreetAddress($event, index, selected)">
             <map-pin-icon :class="$style['c-locationIcon']" />
 
             <div
                 v-if="!selectedStreetLevelAddressId"
+                data-test-id="suggestion-postcode-item"
                 :class="$style['c-fullAddressSuggestion']">
                 <p :class="$style['c-fullAddressSuggestion-postcodeMatch']">
                     {{ getMatchedPostcodes(item) }}
@@ -26,7 +26,9 @@
                     {{ getDescription(item) }}
                 </p>
             </div>
-            <div v-else>
+            <div
+                data-test-id="suggestion-address-item"
+                v-else>
                 <div :class="$style['c-fullAddressSuggestion']">
                     <p :class="$style['c-fullAddressSuggestion-streetLevelMatch']">
                         {{ getMatchedPostcodes(item) }} {{ getDescription(item) }}
@@ -38,7 +40,8 @@
         <continue-with-suggestion
             v-if="selectedStreetLevelAddressId"
             :copy="copy.fullAddressSearchSuggestions"
-            :selected="hasSelectedContinueWithSuggestion" />
+            :selected="hasSelectedContinueWithSuggestion"
+            :config="config"/>
     </div>
 </template>
 
@@ -46,14 +49,17 @@
 import { mapState, mapActions } from 'vuex';
 import { MapPinIcon } from '@justeat/f-vue-icons';
 import ContinueWithSuggestion from './FormFullAddressContinueWithSuggestion.vue';
-import { extractPostcode } from '../../services/general.services';
-import { generatePostForm } from '../../utils/helpers';
+import fullAddressSearchMixin from '../../mixin/fullAddressSearch.mixin';
 
 export default {
     components: {
         ContinueWithSuggestion,
         MapPinIcon
     },
+
+    mixins: [
+        fullAddressSearchMixin
+    ],
 
     props: {
         params: {
@@ -218,6 +224,7 @@ export default {
                  * in places like Menu.
                  *
                  * */
+                debugger;
                 if (this.shouldAutoNavigateToSerp && !this.config.onSubmit) {
                     this.navigateToSerpOnAddressSelection();
                 }
@@ -289,20 +296,6 @@ export default {
             if (this.isBelowMid) {
                 this.setShouldShowSuggestionModel(false);
             }
-        },
-
-        /**
-         * Automatically navigate to SERP when `shouldAutoNavigateToSerp` is `true`.
-         */
-        navigateToSerpOnAddressSelection () {
-            const { query, formUrl } = this.config;
-
-            const payload = {
-                postcode: extractPostcode(this.address),
-                query
-            };
-
-            generatePostForm(formUrl, payload);
         }
     }
 };

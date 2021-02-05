@@ -19,8 +19,13 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import fullAddressSearchMixin from '../../mixin/fullAddressSearch.mixin';
 
 export default {
+    mixins: [
+        fullAddressSearchMixin
+    ],
+
     props: {
         copy: {
             type: Object,
@@ -30,13 +35,19 @@ export default {
         selected: {
             type: Boolean,
             default: false
+        },
+
+        config: {
+            type: Object,
+            default:  () => ({})
         }
     },
 
     computed: {
         ...mapState('searchbox', [
             'continueWithSuggestionDetails',
-            'isBelowMid'
+            'isBelowMid',
+            'shouldAutoNavigateToSerp'
         ]),
 
         /**
@@ -60,17 +71,26 @@ export default {
 
     methods: {
         ...mapActions('searchbox', [
+            'clearSuggestions',
             'setAddress',
-            'setShouldShowSuggestionModel',
-            'clearSuggestions'
+            'setShouldShowSuggestionModel'
         ]),
 
+        /**
+         * Set address to the continue with suggestion & auto navigate to SERP on selection
+         * if the flag is set to true.
+         *
+         */
         setContinueWithSuggestion () {
             this.setAddress(this.continueWithSuggestionDetails.postcode);
 
             if (this.isBelowMid) {
                 this.setShouldShowSuggestionModel(false);
                 this.clearSuggestions([]);
+            }
+
+            if (this.shouldAutoNavigateToSerp && !this.config.onSubmit) {
+                this.navigateToSerpOnAddressSelection();
             }
         }
     }

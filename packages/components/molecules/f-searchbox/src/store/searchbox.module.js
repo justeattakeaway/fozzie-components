@@ -424,30 +424,48 @@ export default {
 
         [SET_SAVED_FULL_ADDRESS_DETAILS]: (state, savedFullAddressDetails) => {
             const { address, fullAddress } = savedFullAddressDetails;
-
-            const savedAddressResult = fullAddress.map(({
-                city,
-                field1,
-                field2,
-                line1,
-                line2,
-                line3,
-                line4,
-                line5,
-                postcode
-            }) => ({
-                city,
-                field1,
-                field2,
-                line1,
-                line2,
-                line3,
-                line4,
-                line5,
-                postcode,
+            let savedAddressResult;
+            
+            if (!address) return false;
+            
+            savedAddressResult = [{
+                Line1: null,
+                Line2: null,
+                Line3: null,
+                Line4: null,
+                Line5: null,
+                City: null,
+                Field1: null,
+                Field2: null,
+                PostalCode: null,
                 searchBoxAddress: address
-            }));
-
+            }];
+            
+            if (fullAddress && fullAddress.length) {
+                savedAddressResult = fullAddress.map(({
+                    city,
+                    field1,
+                    field2,
+                    line1,
+                    line2,
+                    line3,
+                    line4,
+                    line5,
+                    postcode
+                }) => ({
+                    city,
+                    field1,
+                    field2,
+                    line1,
+                    line2,
+                    line3,
+                    line4,
+                    line5,
+                    postcode,
+                    searchBoxAddress: address
+                }));
+            }
+    
             state.savedFullAddressDetails = savedAddressResult;
         },
 
