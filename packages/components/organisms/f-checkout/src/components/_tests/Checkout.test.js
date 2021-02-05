@@ -489,7 +489,6 @@ describe('Checkout', () => {
                     });
                 });
 
-
                 it('should show error message and emit failure event when the mobile number field is not populated', async () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
@@ -606,7 +605,7 @@ describe('Checkout', () => {
                         expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
                     });
 
-                    it('success event should include `serviceType` and authentication status', async () => {
+                    it('success event should include `serviceType` and user authentication status', async () => {
                         const payload = {
                             isLoggedIn: false,
                             serviceType: CHECKOUT_METHOD_DELIVERY
@@ -1190,15 +1189,19 @@ describe('Checkout', () => {
         });
 
         describe('handleErrorState ::', () => {
-            it('should emit failure event and update `genericErrorMessage` with first error message description', () => {
-                // Arrange
-                const wrapper = mount(VueCheckout, {
+            let wrapper;
+
+            beforeEach(() => {
+                wrapper = mount(VueCheckout, {
                     store: createStore(),
                     i18n,
                     localVue,
                     propsData
                 });
+            });
 
+            it('should emit failure event and update `genericErrorMessage` with first error message description', () => {
+                // Arrange
                 const errorDescription = 'Error Description';
                 const error = {
                     response: {
@@ -1222,13 +1225,6 @@ describe('Checkout', () => {
 
             it('should emit failure event and use tenant `genericErrorMessage` if returned errors have no description', () => {
                 // Arrange
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
                 const error = {
                     response: {
                         data: {
@@ -1248,13 +1244,7 @@ describe('Checkout', () => {
             });
 
             it('should emit failure event and update `genericErrorMessage` with error if single error', () => {
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
+                // Arrange
                 const error = 'Unknown Error';
 
                 wrapper.vm.handleErrorState(error);
@@ -1264,13 +1254,7 @@ describe('Checkout', () => {
             });
 
             it('should emit failure with `serviceType` user authentication status and error details', () => {
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
+                // Arrange
                 const error = 'Unknown Error';
 
                 const payload = {
