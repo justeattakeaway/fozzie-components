@@ -3,11 +3,8 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
-Latest (add to next release)
-------------------------------
-
 v1.2.0
+------------------------------
 *February 5, 2021*
 
 ### Added
@@ -15,25 +12,19 @@ v1.2.0
 
 
 v1.1.0
+------------------------------
 *January 29, 2021*
 
 ### Added
 - Added the component to storybook
+- Stylelint added to lint styling on build.
 
 ### Changed
 - Update service to use new values as the contract has changed
-
-
-*January 12, 2021*
-
-### Changed
 - 'jet' theme instead of 'je'
 - Updated config for latest `sass-loader`.
 - Switches import in `common.scss` in line with fozzie v5-beta.
 - Update axios version for security advisory
-
-### Added
-- Stylelint added to lint styling on build.
 
 
 v1.0.0-beta.1
