@@ -224,7 +224,7 @@ export default {
                  * in places like Menu.
                  *
                  * */
-                debugger;
+
                 if (this.shouldAutoNavigateToSerp && !this.config.onSubmit) {
                     this.navigateToSerpOnAddressSelection();
                 }

@@ -25,8 +25,6 @@ export default {
                 address: this.address
             });
 
-            debugger;
-
             fullAddressLocalStorageService.setItem(JE_FULL_ADDRESS_DETAILS, ...this.savedFullAddressDetails);
 
             const payload = {
