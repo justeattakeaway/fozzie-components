@@ -15,9 +15,22 @@
             rows="10"
             maxlength="200"
             :class="$style['c-userNote-textArea']"
-            :placeholder="$t('userNote.placeholder')" />
+            :placeholder="$t('userNote.placeholder')"
+            @input="updateUserNote($event.target.value)" />
     </div>
 </template>
+
+<script>
+import { mapActions } from 'vuex';
+
+export default {
+    methods: {
+        ...mapActions('checkout', [
+            'updateUserNote'
+        ])
+    }
+};
+</script>
 
 <style lang="scss" module>
 $userNote-textArea-borderRadius                  : $border-radius;

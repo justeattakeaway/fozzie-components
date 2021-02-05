@@ -3,6 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.10.0
+------------------------------
+*February 5, 2021*
+
+### Added
+- Documentation ported over from the old docs site for `Development Principles`, `Accessibility Overview` and `Accessibility Checklist`.
+- Some (horrible but necessary) inline CSS styles added for mdx pages in Storybook.
+
+
+v3.9.1
+------------------------------
+*February 4, 2021*
+
+### Fixes
+- Dangerfile path fix for storybook checks.
+
+
 v3.9.0
 ------------------------------
 *February 4, 2021*

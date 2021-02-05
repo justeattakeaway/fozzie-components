@@ -1,68 +1,75 @@
 <template>
-    <div
-        data-theme="jet"
-        data-test-id="checkout-component">
-        <alert
-            v-if="genericErrorMessage"
-            type="danger"
-            :class="$style['c-checkout-alert']"
-            :heading="$t('errorMessages.errorHeading')">
-            {{ genericErrorMessage }}
-        </alert>
+    <div>
+        <div
+            v-if="hasCheckoutLoadedSuccessfully"
+            data-theme="jet"
+            data-test-id="checkout-component">
+            <alert
+                v-if="genericErrorMessage"
+                type="danger"
+                :class="$style['c-checkout-alert']"
+                :heading="$t('errorMessages.errorHeading')">
+                {{ genericErrorMessage }}
+            </alert>
 
-        <card
-            is-rounded
-            has-outline
-            is-page-content-wrapper
-            card-heading-position="center"
-            data-test-id="checkout-card-component"
-            :class="$style['c-checkout']">
-            <checkout-header
-                :login-url="loginUrl" />
+            <card
+                is-rounded
+                has-outline
+                is-page-content-wrapper
+                card-heading-position="center"
+                data-test-id="checkout-card-component"
+                :class="$style['c-checkout']">
+                <checkout-header
+                    :login-url="loginUrl" />
 
-            <form
-                method="post"
-                :class="$style['c-checkout-form']"
-                @submit.prevent="onFormSubmit">
-                <guest-block v-if="!isLoggedIn" />
+                <form
+                    method="post"
+                    :class="$style['c-checkout-form']"
+                    @submit.prevent="onFormSubmit">
+                    <guest-block v-if="!isLoggedIn" />
 
-                <form-field
-                    :value="customer.mobileNumber"
-                    name="mobile-number"
-                    :label-text="$t('labels.mobileNumber')"
-                    :has-error="!isMobileNumberValid"
-                    @input="updateCustomerDetails({ mobileNumber: $event })">
-                    <template #error>
-                        <error-message
-                            v-if="!isMobileNumberValid"
-                            data-test-id="error-mobile-number">
-                            {{ $t('validationMessages.mobileNumber.requiredError') }}
-                        </error-message>
-                    </template>
-                </form-field>
+                    <form-field
+                        :value="customer.mobileNumber"
+                        name="mobile-number"
+                        :label-text="$t('labels.mobileNumber')"
+                        :has-error="!isMobileNumberValid"
+                        @input="updateCustomerDetails({ mobileNumber: $event })">
+                        <template #error>
+                            <error-message
+                                v-if="!isMobileNumberValid"
+                                data-test-id="error-mobile-number">
+                                {{ $t('validationMessages.mobileNumber.requiredError') }}
+                            </error-message>
+                        </template>
+                    </form-field>
 
-                <address-block
-                    v-if="isCheckoutMethodDelivery"
-                    data-test-id="address-block" />
+                    <address-block
+                        v-if="isCheckoutMethodDelivery"
+                        data-test-id="address-block" />
 
-                <form-selector />
+                    <form-selector />
 
-                <user-note data-test-id="user-note" />
+                    <user-note
+                        data-test-id="user-note"
+                        @input="updateUserNote($event.target.value)" />
 
-                <f-button
-                    :class="$style['c-checkout-submitButton']"
-                    button-type="primary"
-                    button-size="large"
-                    is-full-width
-                    action-type="submit"
-                    data-test-id="confirm-payment-submit-button">
-                    {{ $t('buttonText') }}
-                </f-button>
-            </form>
+                    <f-button
+                        :class="$style['c-checkout-submitButton']"
+                        button-type="primary"
+                        button-size="large"
+                        is-full-width
+                        action-type="submit"
+                        data-test-id="confirm-payment-submit-button">
+                        {{ $t('buttonText') }}
+                    </f-button>
+                </form>
 
-            <checkout-terms-and-conditions
-                v-if="!isLoggedIn" />
-        </card>
+                <checkout-terms-and-conditions
+                    v-if="!isLoggedIn" />
+            </card>
+        </div>
+
+        <error-page v-else />
     </div>
 </template>
 
@@ -91,11 +98,13 @@ import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import FormSelector from './Selector.vue';
 import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
+import ErrorPage from './Error.vue';
 
 import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
+import mapUpdateCheckoutRequest from '../services/mapper';
 
 export default {
     name: 'VueCheckout',
@@ -107,6 +116,7 @@ export default {
         Card,
         CheckoutHeader,
         CheckoutTermsAndConditions,
+        ErrorPage,
         ErrorMessage,
         FormField,
         FormSelector,
@@ -179,7 +189,8 @@ export default {
         return {
             tenantConfigs,
             genericErrorMessage: null,
-            shouldDisableCheckoutButton: false
+            shouldDisableCheckoutButton: false,
+            hasCheckoutLoadedSuccessfully: true
         };
     },
 
@@ -205,16 +216,16 @@ export default {
 
     computed: {
         ...mapState('checkout', [
-            'customer',
-            'time',
             'address',
+            'customer',
             'id',
             'isFulfillable',
             'isLoggedIn',
             'messages',
-            'notes',
             'notices',
-            'serviceType'
+            'serviceType',
+            'time',
+            'userNote'
         ]),
 
         isMobileNumberValid () {
@@ -254,7 +265,8 @@ export default {
             'getCheckout',
             'patchCheckout',
             'setAuthToken',
-            'updateCustomerDetails'
+            'updateCustomerDetails',
+            'updateUserNote'
         ]),
 
         /**
@@ -281,32 +293,21 @@ export default {
          */
         async submitCheckout () {
             try {
-                const checkoutData = {
-                    customer: {
-                        firstName: this.customer.firstName,
-                        lastName: this.customer.lastName,
-                        phoneNumber: this.customer.mobileNumber,
-                        dateOfBirth: ''
-                    },
-                    fulfilment: {
-                        time: this.time,
-                        location: {
-                            ...(this.isCheckoutMethodDelivery ? {
-                                address: this.address
-                            } : {}),
-                            geolocation: null
-                        }
-                    },
-                    notes: this.notes
-                };
-
                 if (!this.isLoggedIn) {
                     await this.setupGuestUser();
                 }
 
+                const data = mapUpdateCheckoutRequest({
+                    address: this.address,
+                    customer: this.customer,
+                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
+                    time: this.time,
+                    userNote: this.userNote
+                });
+
                 await this.patchCheckout({
                     url: `checkout/${this.tenant}/${this.checkoutId}`,
-                    data: checkoutData,
+                    data,
                     timeout: this.checkoutTimeout
                 });
 
@@ -350,6 +351,7 @@ export default {
                 this.$emit(EventNames.CheckoutGetSuccess); // TODO: Check these emitted events.
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutGetFailure, thrownErrors); // TODO: Check these emitted events.
+                this.hasCheckoutLoadedSuccessfully = false;
             }
         },
 
@@ -369,6 +371,7 @@ export default {
                 this.$emit(EventNames.CheckoutBasketGetSuccess); // TODO: Check these emitted events.
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutBasketGetFailure, thrownErrors); // TODO: Check these emitted events.
+                this.hasCheckoutLoadedSuccessfully = false;
             }
         },
 
@@ -386,6 +389,7 @@ export default {
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess); // TODO: Check these emitted events.
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetFailure, thrownErrors); // TODO: Check these emitted events.
+                this.hasCheckoutLoadedSuccessfully = false;
             }
         },
 

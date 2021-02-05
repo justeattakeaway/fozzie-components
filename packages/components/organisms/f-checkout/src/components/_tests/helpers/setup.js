@@ -36,12 +36,12 @@ const defaultState = {
         times: fulfilmentTimes,
         isAsapAvailable: true
     },
-    notes: [],
     isFulfillable: true,
     notices: [],
     messages: [],
     authToken: '',
-    isLoggedIn: false
+    isLoggedIn: false,
+    userNote: ''
 };
 
 const defaultActions = {
