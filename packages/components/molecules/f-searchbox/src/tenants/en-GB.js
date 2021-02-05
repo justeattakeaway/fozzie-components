@@ -38,7 +38,8 @@ const component = {
     },
     shouldClearAddressOnValidSubmit: false,
     locationFormat: location => location.postcode,
-    isFullAddressSearchEnabled: options.isFullAddressSearchEnabled
+    isFullAddressSearchEnabled: options.isFullAddressSearchEnabled,
+    isFullAddressNavigateToSerpEnabled: options.isFullAddressNavigateToSerpEnabled
 };
 
 const service = {

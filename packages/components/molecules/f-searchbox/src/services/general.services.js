@@ -103,9 +103,22 @@ const fullAddressLocalStorageService = {
     }
 };
 
+/**
+ * Extract postcode from address in agreed format
+ * @param {string} address A address string
+ */
+const extractPostcode = address => {
+    try {
+        return address.split(',')[0];
+    } catch (e) {
+        return null;
+    }
+};
+
 export {
     processLocationCookie,
     onCustomSubmit,
     generateFormQueryUrl,
-    fullAddressLocalStorageService
+    fullAddressLocalStorageService,
+    extractPostcode
 };

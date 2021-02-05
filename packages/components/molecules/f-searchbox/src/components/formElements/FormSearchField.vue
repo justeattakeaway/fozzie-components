@@ -32,11 +32,18 @@
 
             <span :class="$style['c-search-placeholder']">{{ copy.fieldPlaceholder }}</span>
 
-            <div
-                v-if="shouldDisplayLoadingIndicator"
-                :class="$style['c-spinner-wrapper']">
-                <div :class="$style['c-spinner']" />
-            </div>
+            <clear-button
+                v-if="shouldDisplayClearButton"
+                :class="$style['c-search-btn-clear']"
+                data-test-id="search-btn-clear"
+                @click="onClearAddress">
+                <cross-icon />
+                <span :class="$style['is-visuallyHidden']">
+                    {{ copy.fullAddressSearchSuggestions.clearSearchBtn }}
+                </span>
+            </clear-button>
+
+            <loading-indicator />
         </label>
 
         <form-search-inner-field-wrapper
@@ -46,6 +53,7 @@
         <form-full-address-search-overlay
             v-if="isFullAddressSearchEnabled"
             :copy="copy"
+            :config="config"
             :should-display-modal-overlay="shouldShowSuggestionsModal"
             @on-full-address-modal-closed="onCloseModal" />
     </div>
@@ -53,8 +61,12 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
+import { CrossIcon } from '@justeat/f-vue-icons';
+import ClearButton from '@justeat/f-button';
+import '@justeat/f-button/dist/f-button.css';
 import FormSearchInnerFieldWrapper from './FormSearchInnerFieldWrapper.vue';
 import FormFullAddressSearchOverlay from './FormFullAddressSearchModalOverlay.vue';
+import LoadingIndicator from '../FormStates/FormLoadingIndicator.vue';
 import { ADDRESS_SEARCH_FOCUS } from '../../event-types';
 
 const ALLOWED_SELECTION_TIME = 500;
@@ -62,7 +74,10 @@ const ALLOWED_SELECTION_TIME = 500;
 export default {
     components: {
         FormSearchInnerFieldWrapper,
-        FormFullAddressSearchOverlay
+        FormFullAddressSearchOverlay,
+        CrossIcon,
+        ClearButton,
+        LoadingIndicator
     },
 
     directives: {
@@ -101,6 +116,11 @@ export default {
         customAttributeOverride: {
             type: Object,
             default: () => ({})
+        },
+
+        config: {
+            type: Object,
+            default: () => ({})
         }
     },
 
@@ -114,6 +134,7 @@ export default {
         ...mapState('searchbox', [
             'address',
             'isBelowMid',
+            'inputTimeoutValue',
             'isStreetNumberRequired',
             'isGeoLocationAvailable',
             'isAutocompleteEnabled',
@@ -134,6 +155,13 @@ export default {
          * */
         shouldDisplayLoadingIndicator () {
             return this.isFullAddressSearchEnabled && this.isLoadingResults;
+        },
+
+        shouldDisplayClearButton () {
+            return this.isFullAddressSearchEnabled
+                    && !this.isLoadingResults
+                    && !this.isBelowMid
+                    && this.address.length;
         }
     },
 
@@ -251,6 +279,18 @@ export default {
             } else {
                 this.isFullAddressModalClosed = false;
             }
+        },
+
+        /**
+         * Clear address field when the user clicks the clear button.
+         * Reset suggestions & clear inputTimeoutValue so we can show results again
+         * if the user searches.
+         *
+         */
+        onClearAddress () {
+            this.setAddress('');
+            clearTimeout(this.inputTimeoutValue);
+            this.clearSuggestions([]);
         }
     }
 };
@@ -274,6 +314,60 @@ export default {
 .c-search-inputWrapper--fullWidth {
     @include media('>=mid') {
         position: static;
+    }
+}
+
+.c-search-btn-clear {
+    $btn-size: 52px;
+    $icon-size: 14px;
+
+    background: $white;
+    border: none;
+    width: $btn-size;
+    height: $btn-size;
+    right: 5px;
+    top: 5px;
+    position: absolute;
+    cursor: pointer;
+
+    svg {
+        width: $icon-size;
+        height: $icon-size;
+        top: 18px;
+        left: 19px;
+        position: absolute;
+
+        g {
+            fill: $grey--midDark;
+        }
+    }
+
+    &:hover,
+    &:focus {
+        background-color: $grey--offWhite;
+    }
+}
+
+// Hide only visually, but have it available for screenreaders: h5bp.com/v
+.is-visuallyHidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+
+    // Extends the .is-visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p
+    &.focusable:active,
+    &.focusable:focus {
+        clip: auto;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+        position: static;
+        width: auto;
     }
 }
 
