@@ -15,7 +15,7 @@ class HomePromotionCard2 extends Page {
         get text () { return $(TEXT) },
         get title () { return $(TITLE) },
         get backgroundImage () { return $(BACKGROUND_IMAGE) }
-    }
+    };
 
     open() {
         super.openComponent('molecule', 'f-content-cards--home-promotion-card-2-component');
@@ -44,6 +44,6 @@ class HomePromotionCard2 extends Page {
     isCardBackgroundImageDisplayed(){
         return this.card.backgroundImage.isDisplayed();
     }; 
-}
+};
 
 module.exports = HomePromotionCard2;
