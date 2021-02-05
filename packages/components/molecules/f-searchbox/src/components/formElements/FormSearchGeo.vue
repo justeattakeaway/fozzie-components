@@ -89,6 +89,8 @@ export default {
     padding: spacing();
     vertical-align: middle;
     border: none;
+    position: relative;
+    top: -10px;
 
     @include media('>=narrowMid') {
         display: none;

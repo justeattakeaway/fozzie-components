@@ -1,7 +1,8 @@
 import { safeParseJson, getCookie } from '../../utils/helpers';
 
 const options = {
-    isFullAddressSearchActive: false
+    isFullAddressSearchActive: false,
+    isFullAddressNavigateToSerpActive: false
 };
 
 /**
@@ -28,6 +29,33 @@ function isFullAddressSearchCookieEnabled () {
     const fullAddressSearchCookie = getCookie('je-full-address-search-enabled');
     return !!fullAddressSearchCookie && fullAddressSearchCookie.toLowerCase() === 'true';
 }
+
+/**
+ * Reads from local storage and determines if we allow navigation to SERP directly on user
+ * full address selection.
+ *
+ * `shouldNavigateToSerp` values:
+ *
+ * 1. False: User needs to manually click search.
+ * 2. True: User will automatically navigate to SERP on full address selection or 'continue with postcode'.
+ *
+ * @returns {boolean}
+ */
+function isNavigateToSerpEnabled () {
+    if (!window.localStorage) { return false; }
+    const detailsJson = window.localStorage.getItem('je-experiment-details');
+    const details = safeParseJson(detailsJson);
+    return !!details
+        && !!details.shouldNavigateToSerp;
+}
+
+options.isFullAddressNavigateToSerpEnabled = () => {
+    if (!options.isFullAddressNavigateToSerpActive) {
+        options.isFullAddressNavigateToSerpActive = isNavigateToSerpEnabled();
+    }
+
+    return options.isFullAddressNavigateToSerpActive;
+};
 
 /**
  * Check to see if full address search is active or not. We use two checks here:
