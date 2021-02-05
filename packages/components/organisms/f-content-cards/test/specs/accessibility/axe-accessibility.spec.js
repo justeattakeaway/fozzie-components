@@ -1,11 +1,11 @@
 const { getAccessibilityTestResults } = require('../../../../../../../test/utils/axe-helper');
-const ContentCard = require ('../../../test-utils/component-objects/f-content-card.component');
-const contentCard = new ContentCard();
+const HomePromotion = require('../../../test-utils/component-objects/f-content-cards.component');
+const homePromotion = new HomePromotion();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        contentCard.open();
-        contentCard.waitForComponent();
+        homePromotion.open();
+        homePromotion.waitForComponents();
     });
 
     it('a11y - should test f-contentCard component WCAG compliance', () => {

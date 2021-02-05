@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.1.0
+------------------------------
+*February 5, 2020*
+
+### Added
+- `data-test-ids` for home promotion cards
+- `test` folder with `axe-accessibility.spec` and `f-content-cards-home-promotion.spec`.
+- `test-utils` folder with page object model - `f-content-cards.selectors` and `f-content-cards.component`
+
 
 v3.0.0-beta.1
 ------------------------------
