@@ -84,7 +84,7 @@ export default {
         titleTestId () {
             return this.testId ? `${this.testId}--title` : false;
         },
-        
+
         imageTestId () {
             return this.testId ? `${this.testId}--image` : false;
         },

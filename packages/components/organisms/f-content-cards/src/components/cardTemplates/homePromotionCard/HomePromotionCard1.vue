@@ -98,7 +98,7 @@ export default {
         logoTestId () {
             return this.testId ? `${this.testId}--logo` : false;
         },
-        
+
         subtitleTestId () {
             return this.testId ? `${this.testId}--subtitle` : false;
         },
