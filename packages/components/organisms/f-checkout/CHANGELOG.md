@@ -14,7 +14,7 @@ v0.50.0
 
 v0.49.0
 -------------------------------
-*February 5, 2021*
+*February 4, 2021*
 
 ### Added
 - `Error.vue` component to display a user-friendly error page when we cannot load the necessary information to render the page.
