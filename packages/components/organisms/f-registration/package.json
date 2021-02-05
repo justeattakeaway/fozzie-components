@@ -43,6 +43,7 @@
   ],
   "dependencies": {
     "@justeat/f-services": "1.4.0",
+    "@justeat/f-wdio-utils": "0.1.0",
     "axios": "0.21.1",
     "vuelidate": "0.7.6"
   },
