@@ -306,10 +306,7 @@ describe('CheckoutModule', () => {
                 };
                 axios.patch = jest.fn(() => Promise.resolve({
                     status: 200,
-                    data: {
-                        // isFulfillable: true,
-                        // issues: []
-                    }
+                    data: {}
                 }));
             });
 
