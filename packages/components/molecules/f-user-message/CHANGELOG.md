@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 Latest (add to next release)
 ------------------------------
 
+v1.2.0
+*February 5, 2021*
+
+### Added
+- New Prop 'isFlush' for when the component needs to sit flush with the content around it
+
+
 v1.1.0
 *January 29, 2021*
 

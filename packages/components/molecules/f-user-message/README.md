@@ -62,6 +62,8 @@
      component can be called without locale property, otherwise it accepts it
      in format like 'en-GB'
 
+     `isFlush` - When the component needs to sit flush with the content around it (default: true)
+
 ## Development
 It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
 

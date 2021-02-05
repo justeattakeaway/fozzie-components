@@ -2,7 +2,10 @@
     <div
         v-if="userMessageEnabled"
         :data-theme="theme"
-        :class="$style['c-userMessage']"
+        :class="[
+            $style['c-userMessage'],
+            (isFlush ? $style['c-userMessage--flush'] : '')
+        ]"
         class="l-container">
         <div class="l-row">
             <div
@@ -32,7 +35,12 @@ export default {
         locale: {
             type: String,
             default: ''
+        },
+        isFlush: {
+            type: Boolean,
+            default: true
         }
+
     },
     data () {
         const locale = sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
@@ -65,6 +73,11 @@ export default {
     color: $white;
     background-color: $orange;
     max-width: 100%;
+    margin: spacing(x2) 0;
+}
+
+.c-userMessage--flush {
+    margin: 0;
 }
 
 .c-userMessage-container {
