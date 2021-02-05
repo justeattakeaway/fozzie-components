@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.51.0
+-------------------------------
+*February 5, 2021*
+
+### Added
+- Axios mock to Storybook for checkout PATCH requests
+  - Note that currently nothing is done with the response
+
+
 v0.50.0
 -------------------------------
 *February 5, 2021*
