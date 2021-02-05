@@ -1,0 +1,66 @@
+<Meta title="Documentation/Getting Started/Development Principles"/>
+
+# Development Principles
+
+UI across Just Eat encompasses many different projects and platforms.
+
+Although we have language specific principles, our fundamental front-end principles are:
+
+- [Think in terms of components](#components)
+- [Reuse as much as possible: technologies and components](#reuse)
+- [Try to leave code in a better state than you found it](#improve)
+- [Our UI code should look like one person wrote it (or a team of people using the same rules)](#consistency)
+- [Ensure that we can pivot away from a dependency/pattern if needed](#pivot)
+- [Keep it simple](#simple)
+
+
+<a name="components"></a><h2 class="sg-sectionHeading">Think in terms of Components</h2>
+
+When developing, think about the thing you are building and break it down as much as possible. The simpler you can make that piece of functionality, the easier it will be for other developers to pick up at a later date (or yourself down the line).
+
+The Just Eat Consumer website is built of many small UI components pieced together to make a more complex application. By writing small components, we can change smaller pieces of our platform without worrying about the implications across whole templates and pages.
+
+When done well, this also vastly speeds up the time needed to create new functionality, as we can reuse tested, accessible components that are already productionised on our platform, extending this functionality to our needs.
+
+
+<a name="reuse"></a><h2 class="sg-sectionHeading">Reuse as much as possible</h2>
+
+Try to follow existing patterns as much as possible.
+
+Inconsistency soon manifests as complexity and then technical debt. What we are aiming to build is a maintainable platform where developers can move between applications with a low barrier to entry. [The best tool for the job, isn’t always](https://medium.com/@bentlegen/the-best-tool-for-the-job-isnt-always-6ed364f3f775) by Ben Vinegar covers this concept perfectly.
+
+Sometimes reusing code will take more initial work but it shouldn't be avoided. When building new features, try to identify reusable parts which can be abstracted to help other developers in the future.
+
+
+<a name="improve"></a><h2 class="sg-sectionHeading">Improve upon what's been built</h2>
+
+Try to leave code in a better state than you found it.
+
+If you notice that a piece of code can be improved while you are fixing a bug or adding a feature, take the time to make that change (within reason).
+
+Teams don't often get dedicated time to simply 'make the codebase better'. It's every developers job to ensure the UI code is the best it can be.
+
+
+<a name="consistency"></a><h2 class="sg-sectionHeading">Consistency in our conventions</h2>
+
+As a team, we should decide on conventions to adhere to and stick to them.
+
+If done well, this leads to code that looks like anyone in the team could have written it, rather than every CSS and JavaScript file using a different set of conventions.
+
+We encourage the use of automation tools to help with this as much as possible.
+
+
+<a name="pivot"></a><h2 class="sg-sectionHeading">Ensure we can Pivot</h2>
+
+When making broad decisions about any project that you are working on, trust your expertise, but realise that things will change and we will likely need to pivot away from the technologies you choose (as front-end technology moves fast). There is a cost to removing something from the codebase which far outweighs the cost of adding it.
+
+Everything is up for discussion, but pivoting on such a large codebase can be a slow process so it's always worth spending the extra time to consider how deeply we would be tied into the decision and how quickly we could change course if needed.
+
+
+<a name="simple"></a><h2 class="sg-sectionHeading">Keep it Simple</h2>
+
+If the code you're writing looks complicated to you, it's likely going to look complicated to the next developer to come across it.
+
+Try to make sure the code you write is as simple as possible. If a function you're writing in JavaScript is getting unwieldy, break it up into smaller functions.
+
+While it's not always possible to write code that is self documenting, it's always possible to comment your code. We encourage the liberal use of code comments – especially when describing JS functions and parameters, or when explaining what a component is used for in CSS.

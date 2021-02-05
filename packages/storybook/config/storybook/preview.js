@@ -22,6 +22,13 @@ export const parameters = {
                         'Troubleshooting'
                     ],
                     'Standards',
+                    [
+                        'Accessibility',
+                        [
+                            'Overview',
+                            'Checklist'
+                        ]
+                    ],
                     'Setup Guides'
                 ],
                 'Components']

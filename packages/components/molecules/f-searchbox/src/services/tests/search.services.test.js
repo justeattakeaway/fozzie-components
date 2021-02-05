@@ -74,7 +74,9 @@ describe('`search.services`', () => {
                     onSubmit: false,
                     formUrl: '',
                     form: { submit: jest.fn() },
-                    event
+                    event,
+                    cuisine: '',
+                    query: ''
                 };
 
                 window.HTMLFormElement.prototype.submit = () => {};

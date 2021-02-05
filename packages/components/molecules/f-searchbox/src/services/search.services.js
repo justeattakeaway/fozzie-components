@@ -6,18 +6,22 @@ import { generatePostForm } from '../utils/helpers';
  * @param formUrl
  * @param form
  * @param event
- * @param location
+ * @param query
+ * @param event
+ * @param cuisine
  * @returns {boolean}
  */
 const search = ({
     onSubmit,
     formUrl,
     form,
-    event
+    event,
+    query,
+    cuisine
 }, location = {}) => {
     const payload = {
-        query: '',
-        cuisine: '',
+        query,
+        cuisine,
         ...location
     };
 

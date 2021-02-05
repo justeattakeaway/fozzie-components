@@ -44,7 +44,7 @@ export const CheckoutComponent = () => ({
             default: text('Checkout ID', checkoutId)
         },
         checkoutUrl: {
-            default: select('Checkout Url', [deliveryUrl, collectionUrl], deliveryUrl)
+            default: select('Checkout Url', [deliveryUrl, collectionUrl, 'An invalid URL'], deliveryUrl)
         },
         checkoutAvailableFulfilmentUrl: {
             default: select('Available Fulfilment Url', [checkoutAvailableFulfilmentUrl], checkoutAvailableFulfilmentUrl)
