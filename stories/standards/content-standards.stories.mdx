@@ -1,0 +1,32 @@
+import LinkTo from '@storybook/addon-links/react';
+
+<Meta title="Documentation/Standards/Content Standards"/>
+
+# Content Standards (MoSCoW)
+
+In principle, all pertinent page content - including server-rendered JavaScript pages - will adhere to the same guidelines as traditional "flat HTML" pages and CMS templates.
+
+<h2 class="sg-sectionHeading">Must</h2>
+
+* Use <LinkTo kind="Documentation/Standards/Accessibility/Checklist" story="page">valid, well-structured, semantic</LinkTo> HTML5
+* Have all key content present in the response markup [before the browser processes the page](https://www.elephate.com/blog/everything-you-know-about-javascript-indexing-is-wrong/)
+* Each page/view of significant content has a canonical, meaningful URL (without params)
+* Implement standard anchor links (`<a href="...">`) for connections to other content
+* Respect our <LinkTo kind="Documentation/Standards/Browser Support" story="page">latest matrix of supported browsers</LinkTo>
+
+_For reference, Elephate offers a comprehensive guide to [server-side rendered JavaScript SEO best practices](https://www.elephate.com/blog/ultimate-guide-javascript-seo/), which should be observed and adhered to as much as possible._
+
+<h2 class="sg-sectionHeading">Should</h2>
+
+* Load as fast as possible
+* Aim for a baseline Lighthouse score of 50/100
+* Make effective use of [appropriate ARIA/HTML5 &lsquo;roles&rsquo;](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques) to enrich the semantic user experience
+
+<h2 class="sg-sectionHeading">Could</h2>
+
+* Aim for [a Lighthouse score of 90+](https://checklyhq.com/blog/2018/08/how-we-got-a-100-lighthouse-performance-score-for-our-vue.js-app/)
+
+<h2 class="sg-sectionHeading">Would</h2>
+
+* Be easy and reliable to [cache properly, and flush/update reliably](https://developers.google.com/web/tools/workbox/guides/precache-files/cli)
+* Provide a seamless offline experience for non-volatile pages (e.g. menus, restaurant pages)
