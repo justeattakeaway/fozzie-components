@@ -7,12 +7,16 @@
             :data-test-id="containerTestId"
             :class="['l-container', 'c-contentCards-homePromotionCard1-container', $style['c-contentCards-homePromotionCard1-container']]"
             :style="{ maxWidth: `${containerMaxWidth}px` }">
-            <div :class="['c-contentCards-homePromotionCard1-iconPane', $style['c-contentCards-homePromotionCard1-iconPane']]">
+            <div
+                :data-test-id="headerTestId"
+                :class="['c-contentCards-homePromotionCard1-iconPane', $style['c-contentCards-homePromotionCard1-iconPane']]">
                 <img
+                    :data-test-id="logoTestId"
                     :class="[$style['c-contentCards-homePromotionCard1-icon']]"
                     :src="icon"
                     alt="">
                 <h3
+                    :data-test-id="subtitleTestId"
                     :class="[$style['c-contentCards-homePromotionCard1-subtitle'], {
                         [$style['c-contentCards-homePromotionCard1-subtitle--light']]: isLightSubtitle
                     }]"
@@ -82,11 +86,18 @@ export default {
         ctaTestId () {
             return this.testId ? `${this.testId}--cta` : false;
         },
-
         containerTestId () {
             return this.testId ? `${this.testId}--container` : false;
         },
-
+        headerTestId () {
+            return this.testId ? `${this.testId}--header` : false;
+        },
+        logoTestId () {
+            return this.testId ? `${this.testId}--logo` : false;
+        },
+        subtitleTestId () {
+            return this.testId ? `${this.testId}--subtitle` : false;
+        },
         /**
          * If background colour is set *and* dark, then use a light text colour for the subtitle for A11y
          * @return {boolean}
