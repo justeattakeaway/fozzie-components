@@ -9,6 +9,7 @@ v0.49.0
 
 ### Added
 - `Error.vue` component to display a user-friendly error page when we cannot load the necessary information to render the page.
+- Test to confirm guest login/sign up link navigates to correct url when clicked
 
 
 v0.48.0
