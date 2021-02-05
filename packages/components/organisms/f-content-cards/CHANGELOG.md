@@ -10,7 +10,8 @@ Latest (add to next release)
 ### Added
 - `data-test-ids` for home promotion cards
 - `test` folder with `axe-accessibility.spec` and `f-content-cards-home-promotion.spec`.
-- `test-utils` folder with page object model - `f-content-cards.selectors` and `f-content-cards.component`
+- `test-utils` folder with `f-content-cards.selectors` and `f-content-cards.component`
+- imported `@justeat/f-wdio-utils` for page object model
 
 
 v3.0.0-beta.1
