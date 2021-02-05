@@ -86,7 +86,7 @@ export default {
         },
 
         imageTestId () {
-            return this.testId ? `${this.testId}--image` : false;
+            return this.testId ? `${this.testId}--backgroundImage` : false;
         },
         /**
          * If background colour is set *and* dark, then use a light text colour for the title and text for A11y

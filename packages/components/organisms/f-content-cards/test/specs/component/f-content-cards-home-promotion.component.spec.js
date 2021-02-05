@@ -17,7 +17,7 @@ describe('f-content-card component tests', () => {
         // Assert
         expect(homePromotion.isCard1ContainerDisplayed()).toBe(true);
         expect(homePromotion.isCard1HeaderDisplayed()).toBe(true);
-        expect(homePromotion.isCard1LogoDisplayed()).toBe(true); 
+        expect(homePromotion.isCard1ImageDisplayed()).toBe(true); 
         expect(homePromotion.isCard1SubtitleDisplayed()).toBe(true);
     });
 
@@ -26,6 +26,6 @@ describe('f-content-card component tests', () => {
         expect(homePromotion.isCard2CallToActionDisplayed()).toBe(true);
         expect(homePromotion.isCard2TextDisplayed()).toBe(true);
         expect(homePromotion.isCard2TitleDisplayed()).toBe(true); 
-        expect(homePromotion.isCard2ImageDisplayed()).toBe(true);
+        expect(homePromotion.isCard2BackgroundImageDisplayed()).toBe(true);
     });
 });

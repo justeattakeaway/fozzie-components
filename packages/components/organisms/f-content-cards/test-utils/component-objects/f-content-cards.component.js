@@ -3,13 +3,13 @@ const {
     PROMOTION_CARD_1_COMPONENT,
     INNER_CONTAINER,
     HEADER, 
-    LOGO, 
+    IMAGE, 
     SUBTITLE, 
     PROMOTION_CARD_2_COMPONENT,
     CTA, 
     TEXT, 
     TITLE,
-    IMAGE
+    BACKGROUND_IMAGE
 } = require('./f-content-cards.selectors');
 
 class HomePromotion extends Page {
@@ -18,7 +18,7 @@ class HomePromotion extends Page {
         get component () { return $(PROMOTION_CARD_1_COMPONENT) },
         get innerContainer () { return $(INNER_CONTAINER) }, 
         get header () { return $(HEADER) }, 
-        get logo () { return $(LOGO) },
+        get image () { return $(IMAGE) },
         get subtitle () { return $(SUBTITLE) }
     }
 
@@ -27,7 +27,7 @@ class HomePromotion extends Page {
         get callToAction () { return $(CTA) },
         get text () { return $(TEXT) },
         get title () { return $(TITLE) },
-        get image () { return $(IMAGE) }
+        get backgroundImage () { return $(BACKGROUND_IMAGE) }
     }
 
     open() {
@@ -51,8 +51,8 @@ class HomePromotion extends Page {
         return this.card1.header.isDisplayed();
     };
 
-    isCard1LogoDisplayed(){
-        return this.card1.logo.isDisplayed();
+    isCard1ImageDisplayed(){
+        return this.card1.image.isDisplayed();
     };
 
     isCard1SubtitleDisplayed(){
@@ -75,8 +75,8 @@ class HomePromotion extends Page {
         return this.card2.title.isDisplayed();
     }; 
 
-    isCard2ImageDisplayed(){
-        return this.card2.image.isDisplayed();
+    isCard2BackgroundImageDisplayed(){
+        return this.card2.backgroundImage.isDisplayed();
     }; 
 }
 

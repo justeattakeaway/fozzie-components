@@ -11,7 +11,7 @@
                 :data-test-id="headerTestId"
                 :class="['c-contentCards-homePromotionCard1-iconPane', $style['c-contentCards-homePromotionCard1-iconPane']]">
                 <img
-                    :data-test-id="logoTestId"
+                    :data-test-id="imageTestId"
                     :class="[$style['c-contentCards-homePromotionCard1-icon']]"
                     :src="icon"
                     alt="">
@@ -95,8 +95,8 @@ export default {
             return this.testId ? `${this.testId}--header` : false;
         },
 
-        logoTestId () {
-            return this.testId ? `${this.testId}--logo` : false;
+        imageTestId () {
+            return this.testId ? `${this.testId}--image` : false;
         },
 
         subtitleTestId () {
