@@ -40,7 +40,6 @@ export default {
             type: Boolean,
             default: true
         }
-
     },
     data () {
         const locale = sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
