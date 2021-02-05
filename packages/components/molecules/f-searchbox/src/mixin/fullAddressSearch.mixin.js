@@ -8,32 +8,32 @@ export default {
         'address',
         'savedFullAddressDetails'
     ]),
-    
+
     methods: {
         ...mapActions('searchbox', [
             'setSavedFullAddressDetails'
         ]),
-    
+
         /**
          * Automatically navigate to SERP when `shouldAutoNavigateToSerp` is `true`.
          */
         navigateToSerpOnAddressSelection () {
             const { query, formUrl } = this.config;
-            
+
             this.setSavedFullAddressDetails({
                 fullAddress: this.fullAddressDetails,
                 address: this.address
             });
-            
+
             debugger;
-        
+
             fullAddressLocalStorageService.setItem(JE_FULL_ADDRESS_DETAILS, ...this.savedFullAddressDetails);
-        
+
             const payload = {
                 postcode: extractPostcode(this.address),
                 query
             };
-        
+
             generatePostForm(formUrl, payload);
         }
     }

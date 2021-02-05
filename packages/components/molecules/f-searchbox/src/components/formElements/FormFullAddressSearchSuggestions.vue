@@ -27,8 +27,8 @@
                 </p>
             </div>
             <div
-                data-test-id="suggestion-address-item"
-                v-else>
+                v-else
+                data-test-id="suggestion-address-item">
                 <div :class="$style['c-fullAddressSuggestion']">
                     <p :class="$style['c-fullAddressSuggestion-streetLevelMatch']">
                         {{ getMatchedPostcodes(item) }} {{ getDescription(item) }}
@@ -41,7 +41,7 @@
             v-if="selectedStreetLevelAddressId"
             :copy="copy.fullAddressSearchSuggestions"
             :selected="hasSelectedContinueWithSuggestion"
-            :config="config"/>
+            :config="config" />
     </div>
 </template>
 

@@ -425,9 +425,9 @@ export default {
         [SET_SAVED_FULL_ADDRESS_DETAILS]: (state, savedFullAddressDetails) => {
             const { address, fullAddress } = savedFullAddressDetails;
             let savedAddressResult;
-            
-            if (!address) return false;
-            
+
+            if (!address) return;
+
             savedAddressResult = [{
                 Line1: null,
                 Line2: null,
@@ -440,7 +440,7 @@ export default {
                 PostalCode: null,
                 searchBoxAddress: address
             }];
-            
+
             if (fullAddress && fullAddress.length) {
                 savedAddressResult = fullAddress.map(({
                     city,
@@ -465,7 +465,7 @@ export default {
                     searchBoxAddress: address
                 }));
             }
-    
+
             state.savedFullAddressDetails = savedAddressResult;
         },
 
