@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 v4.8.2
 ------------------------------
 _February 04, 2021_
+
 ### Changed
 - AUS Menulog footer links update
 
