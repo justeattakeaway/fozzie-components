@@ -1,0 +1,125 @@
+<Meta title="Documentation/Standards/Accessibility/Overview"/>
+
+# Accessibility – An Overview
+
+> Just Eat websites should be inclusive experiences that are accessible to all.
+
+Okay great, but what does that mean to me as a developer? This page introduces tools and techniques you can use to weave accessibility into your workflow. It covers just a small part of this massive topic, but following the recommendations on this page will make a big difference.
+
+<h2 class="sg-sectionHeading">What is Accessibility?</h2>
+
+Accessibility (*AXS* or *a11y*) is an inclusive effort to support as many users as possible, especially those with a disability. These users may use *assitive technology* like a *screen reader* to access the web. We need to code with them in mind.
+
+
+<h2 class="sg-sectionHeading">Before we get started</h2>
+
+This page assumes that you have a good understanding of the semantic elements in HTML5. You should also know that ARIA (Accessible Rich Internet Applications) is a set of special attributes that we can add to HTML. There are links to these topics and more in the [resources](#resources) section.
+
+### Development tools
+
+There are two really useful free tools that help you develop and test your work. Add [Accessibility developer tools](https://chrome.google.com/webstore/detail/accessibility-developer-t/fpkknkljclfencbdbgkenhalefipecmb?hl=en) to Chrome to to bring accessibility inspection and auditing to DevTools. Install the [Chromevox](https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn?hl=en) screen reader to experience your site as a blind user would. There's a bit of a learning curve with these tools but it's well worth the effort.
+
+
+<h2 class="sg-sectionHeading">Accessible markup</h2>
+
+Unexpected markup confuses assitive tech, make sure that pages are standards compliant HTML5. Regularly check for validity as you go with a tool like the [W3C validator](https://validator.w3.org/).
+
+### Structure and landmarks
+
+Give pages structure by using tags like `section` and `header` appropriately. This helps users of assistive tech navigate the page. As well as semantic markup you can use ARIA landmarks if you need to.
+
+DOM order is really important here too, assistive technologies read through pages in source order. Test this by removing CSS from your page and reading it from top to bottom. Does it make sense?
+
+### Semantic content
+
+As well as for structure, semantics are just as important for content. If a sentence has emphases, `span.emphasis` will not convey this to a screen reader but `em` will.
+
+Similarly, interactive elements need to declare themselves as such semantically. With CSS and JavaScript you can make a `div` look and behave like a button, but it wont be a button for a blind user. In this case you would either have to re-implement semantics with `role="button"` or much better, just use a `button` tag. That may mean that more CSS work is needed, but it results in a button that everyone can use.
+
+Don't forget labelling. Form controls need labels even if they don't visually appear to. All `img` elements need an `alt` attribute. If an image doesn't warrant alternative text, use an empty string as the `alt` tag rather than omit it.
+
+
+<h2 class="sg-sectionHeading">Support the keyboard</h2>
+
+An accessible site may be navigated and interacted with using just the keyboard. Try it with the pages you're building – you should be able to reach every interactive element (and *only* interactive elements) with the Tab key.
+
+### Tab stops
+
+As you tab through the page by repeatedly hitting the Tab key, each interactive element (a 'tab stop') will be focussed and may be controlled with the keyboard. Anchors, buttons and other interactive controls are focusable by default and their focus state is clearly styled. Some users depend on this.
+
+If you've added interactive elements that don't use native tags, make sure these are focusable by setting `tabindex="0"`. The zero means that this tab stop will be arrived at as the element is reached in DOM order – which is probably what you want assuming that you've grouped and ordered your HTML semantically.
+
+### Other keys
+
+Notice how native components like buttons, select dropdowns and alert dialogs work with the keyboard. The Enter or Space keys follow a link or 'click' a button, the arrow keys move between options in a menu, the `Esc` key dismisses a dialog.
+
+These conventions are important. Make sure that your JavaScript doesn't interfere with them and follow them if you make your own composite components.
+
+### Focus management
+
+When you try to use your pages with the keyboard you may notice interactions where you 'drop focus'.
+
+Consider a button that opens a modal window — when the user focusses that button (with Tab) and follows it (with Space or Enter), ensure the focus is moved to the modal that opens or the first button within it. When the user follows a modal button that dismisses the modal and it disappears, don't drop focus, hand it back to the page or the opening button.
+
+This can sound confusing but it's easy to discover and test if you interact with your page using just the keyboard.
+
+
+<h2 class="sg-sectionHeading">Composite widgets and complex pages</h2>
+
+You may be creating a more complex widget for which there isn't a native tag. For example a set of tabs, a carousel, or an expandable tree. Composite widgets need to be constructed carefully so that they work well with assitive tech.
+
+Before you roll your own, consider components in existing JavaScript frameworks that are good at accessibility. Customise or at least learn from a component that's already benefited from lots of community development.
+
+If you do build composite widgets from scratch, or your pages involve complex interactivity or asynchronous content, you might need to understand screen reader modes, composite roles, dynamic states and properties, live content and more. Hopefully the [resources](#resources) below will point you in the right direction.
+
+
+<a name="aria-resources"></a><h2 class="sg-sectionHeading">Resources</h2>
+
+  - [W3C validator](https://validator.w3.org/)
+  - [HTML5 semantic elements](https://www.w3schools.com/html/html5_semantic_elements.asp)
+  - [Chromevox](https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn?hl=en], its [keyboard shortcuts](http://www.chromevox.com/keyboard_shortcuts.html] and [tutorial](http:/)www.chromevox.com/tutorial/index.html]
+  - [Making accessible Web Apps Using HTML5 and ChromeVox](https://www.youtube.com/watch?v=x18vEEfpK3g)
+  - [Accessibility developer tools](https://chrome.google.com/webstore/detail/accessibility-developer-t/fpkknkljclfencbdbgkenhalefipecmb?hl=en)
+  - Google's excellent [Introduction to Web Accessibility](https://webaccessibility.withgoogle.com/course)
+  - [MDN on ARIA](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA)
+  - [Using ARIA in HTML](http://html5doctor.com/using-aria-in-html/)
+
+
+<h2 class="sg-sectionHeading">Summary</h2>
+
+By following the steps above you've made a dramatic difference to disabled users. These are real people, using our sites every day.
+
+Here's some of the feedback we've received over the last couple of years, good and bad, to show the impact our website can have on users.
+
+> "WELL DONE! You have locked every BLIND person out of Just Eat by using a security system that BLIND people can't SEE! I tried to login but because I use a screen reader, I can't get past the sign in page. YOU HAVE LOST ME AS A CUSTOMER..... I bet you don't even respond to this message."
+
+>Love this website, first time we have used it and found it very easy to use. Finding a takeaway and ordering what we wanted was straight forward it was 100%easy and because my husband is disabled which means I cannot always get out to a takeaway this is very handy and reliable thank you for an easy transaction.
+
+>hello i tried to click the keep up to date for exclusive offers and it lets me put in name and email but no matter what way i do my postcode it will not accept it- I am disabled so maybe i am doing it wrong i tried XX16 7AX XX167AX CAN YOU PLEASE LET ME KNOW HOW TO DO IT AS I AM A REGULAR JUST EAT USER IN BRISTOL AND WOULD LIKE TO TAKE ADVANTAGE IF ANY OFFERS APPLY TO ME- SORRY TO BE BOTHER X
+
+>I find just eat very good,as I live in an isolated spot and am disabled
+
+>I am a long-time customer who was satisfied until today. I am blind, and use a screen reader to access your site. four days ago, all functions of the site were readable and usable with my screen reader. Today, I can't add anything to my order. Whatever was changed on how the add to basket function is displayed rendored it unclickable for me. It used to be a plus button, and now my screen reader says it is a clickable element which does nothing when clicked. In effect, the site has become absolutely and completely useless to me. Since I doubt that this one comment will change anything, I'll say so long. It was a great run.
+
+[Chromevox]: https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn?hl=en
+
+[Accessibility developer tools]: https://chrome.google.com/webstore/detail/accessibility-developer-t/fpkknkljclfencbdbgkenhalefipecmb?hl=en
+
+[Introdcution to Web Accessibility]: https://webaccessibility.withgoogle.com/course
+
+
+[keyboard shortcuts]: http://www.chromevox.com/keyboard_shortcuts.html
+
+[tutorial]: http://www.chromevox.com/tutorial/index.html
+
+[Making accessible Web Apps Using HTML5 and ChromeVox]: https://www.youtube.com/watch?v=x18vEEfpK3g
+
+[implementing live regions]: http://www.w3.org/TR/wai-aria-practices/#LiveRegions
+
+[Using ARIA in HTML]: http://html5doctor.com/using-aria-in-html/
+
+[W3C validator]: https://validator.w3.org/
+
+[HTML5 semantic elements]: http://www.w3schools.com/html/html5_semantic_elements.asp
+
+[MDN on ARIA]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA

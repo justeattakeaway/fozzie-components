@@ -1,0 +1,173 @@
+<Meta title="Documentation/Standards/Accessibility/Checklist"/>
+
+# Accessibility Checklist
+
+<a name="htmlvalid"></a><h2 class="sg-sectionHeading">HTML is valid</h2>
+
+Paste your markup into a validator a fix any reported issues. As well as reporting markup issues, the W3C Markup Validation Service will also report incorrect use of ARIA attributes.
+
+### Tools
+- [W3C Markup Validation Service](https://validator.w3.org/)
+
+### Learn more
+- [Why Validate?](https://validator.w3.org/docs/why.html#why_pros)
+
+
+<a name="htmlstructure"></a><h2 class="sg-sectionHeading">HTML is well structured</h2>
+
+Think about the structure of the tags you're using. Are elements like `header` and `section` used appropriately? Are headings structured in a logical order according to level of importance? Have the correct type of lists been used? i.e. ordered / unordered.
+
+### Tools
+- Use the [WAVE Evaluation Tool](https://chrome.google.com/webstore/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh) to analyse the document outline.
+
+### Learn more
+- [HTML Document Structure](http://html.com/document/)
+- [Semantic Structure](http://webaim.org/techniques/semanticstructure/)
+
+### Reference
+- [HTML5 Doctor](http://html5doctor.com/)
+- [HTML element reference](https://developer.mozilla.org/en/docs/Web/HTML/Element)
+
+
+<a name="htmlorder"></a><h2 class="sg-sectionHeading">HTML is well ordered</h2>
+
+Turn off CSS and read the page from top to bottom. Is it possible to read the document? Does it make sense?
+
+Use heading order to show importance.
+
+### Tools
+- Use the [Web Developer Toolbar](http://chrispederick.com/work/web-developer/) to disable CSS (look in the CSS tab).
+- Use the [WAVE Evaluation Tool](https://chrome.google.com/webstore/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh) to analyse the document outline.
+
+
+<a name="htmlsemantic"></a><h2 class="sg-sectionHeading">HTML is semantic</h2>
+
+Ensure semantics are conveyed with tags or roles (if necessary), not with style. E.g. `em` not `class="italic"` and `button` or `role="button"` not `div`.
+
+### Learn more
+- [Semantic Markup](http://html.com/semantic-markup/)
+- [Why do semantics matter? (video)](https://www.youtube.com/watch?v=g2tzEil5TL0)
+- [ARIA Landmark Roles and HTML5 Implicit Mapping](http://a11yproject.com/posts/aria-landmark-roles/)
+
+### Reference
+- [ARIA - Definitions of States and Properties](https://www.w3.org/TR/wai-aria-1.1/#state_prop_def)
+- [Check the HTML5 accessibility website to see if an element requires additional role attributes](http://www.html5accessibility.com/#support)
+
+
+<a name="htmllabelled"></a><h2 class="sg-sectionHeading">HTML is labelled</h2>
+
+Controls and images must be labelled.
+
+Form elements should have an associated `label`, even those with `placeholder`, and the label must always be visible. Alternatively they may make use of ARIA attributes such as `aria-described-by` or `aria-label`.
+
+Images must have an `alt` attribute, even if it's empty. Think about the context of the image; is it followed by descriptive text? Is it contained within a link? Is it a decorative image?
+
+### Learn more
+- [Writing Accessible HTML (video)](https://youtu.be/fUt5pLJp0HQ?t=1s)
+- [Alternative Text Basics](http://webaim.org/techniques/alttext/#basics)
+- [Ways to label with ARIA (video)](https://youtu.be/LjUT2T29bDw?t=18s)
+- [WCAG Checklist - Non-text Content](http://webaim.org/standards/wcag/checklist#g1.1)
+
+### Reference
+- [How to Meet WCAG 2.0 - Text alternatives](https://www.w3.org/WAI/WCAG20/quickref/#text-equiv)
+- WAI-ARIA - [aria-describedby](https://www.w3.org/TR/wai-aria-1.1/#aria-describedby) [aria-labelledby](https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby) [aria-label](https://www.w3.org/TR/wai-aria-1.1/#aria-label)
+
+
+<a name="audit"></a><h2 class="sg-sectionHeading">Passed an accessibility audit</h2>
+
+Run an in-browser audit and fix any issues.
+
+Paste your markup into a validator such as the [Web Accessibility Checker](http://achecker.ca/checker/) and fix any reported issues. The [W3C Markup Validation Service](https://validator.w3.org/) will also report some accessibility related issues.
+
+### Tools
+- [WAVE Evaluation Tool](https://chrome.google.com/webstore/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh)
+- [Accessibility Developer Tools](https://chrome.google.com/webstore/detail/accessibility-developer-t/fpkknkljclfencbdbgkenhalefipecmb?hl=en)
+- [Web Accessibility Toolbar](https://www.paciellogroup.com/resources/wat/)
+
+
+<a name="keyboard"></a><h2 class="sg-sectionHeading">Keyboard is supported</h2>
+
+Using only the keyboard, check the following.
+
+- You should be able to action links and buttons with Space or Enter
+- Dialogues may be dismissed and menus closed with Escape
+- Composite components (such as dropdown menus) support arrow keys.
+
+Follow the conventions in native web components.
+
+### Learn more
+- [WebAIM - Keyboard Testing](http://webaim.org/techniques/keyboard/#testing)
+
+### Reference
+- [ARIA authoring practices document](https://www.w3.org/TR/wai-aria-practices/#intro)
+
+
+<a name="tabstops"></a><h2 class="sg-sectionHeading">Tab stops in place</h2>
+
+Using only the keyboard, you should be able to navigate to every interactive element (and *only* interactive elements) with the Tab key. Use `tabindex="0"` on interactive elements that aren't natively focusable.
+
+### Learn more
+- [Using the tabindex attribute](https://www.paciellogroup.com/blog/2014/08/using-the-tabindex-attribute/)
+- [Controlling focus with tabindex (video)](https://www.youtube.com/watch?v=Pe0Ce1WtnUM)
+
+### Reference
+- [HTML 5.1 - The tabindex attribute](http://w3c.github.io/html/editing.html#the-tabindex-attribute)
+
+
+<a name="focus"></a><h2 class="sg-sectionHeading">Focus is managed</h2>
+
+Using only the keyboard, interact with any scripted components and ensure focus is never 'dropped'. For example opening a dialogue (Space or Enter) focusses a button within that dialogue, dismissing the dialogue (Escape) hands focus back to the element which opened it.
+
+### Learn more
+- [Creating An Accessible Modal Dialog](https://bitsofco.de/accessible-modal-dialog/)
+- [What is Focus?](https://www.youtube.com/watch?v=EFv9ubbZLKw)
+- [Modals and Keyboard Traps (video)](https://www.youtube.com/watch?v=BoAsayPVogE)
+
+### Reference
+- [WAI-ARIA - Managing Focus](https://www.w3.org/TR/wai-aria-1.1/#managingfocus)
+
+
+<a name="state"></a><h2 class="sg-sectionHeading">States are updated</h2>
+
+Examine the live DOM (devtools) and manipulate the site (open, close, expand elements). Any states, such as `aria-valuenow` and `aria-expanded`, update accordingly.
+
+### Reference
+- [Definitions of States and Properties](https://www.w3.org/TR/wai-aria-1.1/#state_prop_def)
+- [Allowed ARIA roles, states and properties](https://www.w3.org/TR/html-aria/#allowed-aria-roles-states-and-properties)
+
+
+<a name="wellspoken"></a><h2 class="sg-sectionHeading">Page is well spoken</h2>
+
+Use the site with a screen reader (and if you can, switch off your monitor).
+
+Landmarks mean it is easy to navigate the page. Semantic elements and attributes tell a meaningful story. Dynamic content is spoken as a live region. All content and functionality is available without seeing or using a mouse/trackpad.
+
+### Tools
+- [Chromevox](https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn)
+- [NVDA](http://www.nvaccess.org/download/)
+
+### Learn more
+- [Screen Reader Basics: NVDA](https://www.youtube.com/watch?v=Jao3s_CwdRU)
+- [Screen Reader Basics: VoiceOver](https://www.youtube.com/watch?v=5R-6WvAihms)
+
+### Reference
+- [Live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions)
+
+
+<a name="example"></a><h2 class="sg-sectionHeading">Examples</h2>
+
+### Adding text for assistive software
+
+Use a class helper to hide text visually:
+
+```markup
+<button>Add <span class="is-visuallyHidden">burger to basket</span></button>
+```
+
+When you have an element which uses a graphic to indicate its purpose, make sure you label it as such.
+
+```markup
+<button aria-label="Add burger to basket">Add</button>
+```
+
+*Only the `aria-label` value will be used*
