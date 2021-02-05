@@ -1941,8 +1941,8 @@
 
 "@justeat/f-icons@3.4.0":
   version "3.4.0"
-  resolved "http://packages.je-labs.com/npm/private-npm/@justeat/f-icons/-/f-icons-3.4.0.tgz#dbdeb97c562926dc1c4b98685b25203a97dbd5ff"
-  integrity sha1-2965fFYpJtwcS5hoWyUgOpfb1f8=
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.4.0.tgz#dbdeb97c562926dc1c4b98685b25203a97dbd5ff"
+  integrity sha512-Sjd3Bc20M2vwaZvFcyTzjpTG6gv+cbeZmsoNtxwWqN+SF88Uvfyll/+1+e1pI2OV7j6ero3010TQNQzD/6jL7w==
 
 "@justeat/f-logger@0.8.1":
   version "0.8.1"
