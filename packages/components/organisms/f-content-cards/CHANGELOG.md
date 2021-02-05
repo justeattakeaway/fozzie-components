@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (add to next release)
+v3.1.0
 ------------------------------
 *February 5, 2020*
 
@@ -11,7 +11,7 @@ Latest (add to next release)
 - `data-test-ids` for home promotion cards
 - `test` folder with `axe-accessibility.spec` and `f-content-cards-home-promotion.spec`.
 - `test-utils` folder with `f-content-cards.selectors` and `f-content-cards.component`
-- imported `@justeat/f-wdio-utils` for page object model
+- Added `@justeat/f-wdio-utils` package
 
 
 v3.0.0-beta.1
