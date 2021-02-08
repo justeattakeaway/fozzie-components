@@ -11,6 +11,7 @@
                         { [$style['c-tabs-button--active']]: activeTab === name },
                         $style['c-tabs-button']
                     ]"
+                    :data-test-id="`tab-${name}`"
                     @click="selectTabIndex(name)"
                 >
                     {{ title }}
