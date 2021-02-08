@@ -150,52 +150,57 @@ export default {
             title: 'Brands',
             links: [
                 {
-                    url: '/content/brands/hungry-jacks/',
+                    url: '/takeaway/brands/mcdonalds',
+                    text: "McDonald's Delivery",
+                    gtm: 'click_brands_mcdonalds'
+                },
+                {
+                    url: '/takeaway/brands/hungry-jacks',
                     text: "Hungry Jack's Delivery",
                     gtm: 'click_brands_hungry-jacks'
                 },
                 {
-                    url: '/content/brands/kfc/',
+                    url: '/takeaway/brands/kfc',
                     text: 'KFC Delivery',
                     gtm: 'click_brands_kfc'
                 },
                 {
-                    url: '/content/brands/crust/',
+                    url: '/takeaway/brands/crust-gourmet-pizza',
                     text: 'Crust Delivery',
                     gtm: 'click_brands_crust'
                 },
                 {
-                    url: '/content/brands/hogs-breath/',
+                    url: '/takeaway/brands/hogs-australias-steakhouse',
                     text: "Hog's Breath Delivery",
                     gtm: 'click_brands_hogs-breath'
                 },
                 {
-                    url: '/content/brands/oporto/',
+                    url: '/takeaway/brands/oporto',
                     text: 'Oporto Delivery',
                     gtm: 'click_brands_oporto'
                 },
                 {
-                    url: '/content/brands/pizza-hut/',
+                    url: '/takeaway/brands/pizza-hut',
                     text: 'Pizza Hut Delivery',
                     gtm: 'click_brands_pizza-hut'
                 },
                 {
-                    url: '/content/brands/red-rooster/',
+                    url: '/takeaway/brands/red-rooster',
                     text: 'Red Rooster Delivery',
                     gtm: 'click_brands_red-rooster'
                 },
                 {
-                    url: '/content/brands/subway/',
+                    url: '/takeaway/brands/subway',
                     text: 'Subway Delivery',
                     gtm: 'click_brands_subway'
                 },
                 {
-                    url: '/content/brands/zambrero/',
+                    url: '/takeaway/brands/zambrero',
                     text: 'Zambrero Delivery',
                     gtm: 'click_brands_zambrero'
                 },
                 {
-                    url: '/browse/',
+                    url: '/takeaway',
                     text: 'Browse more brands',
                     gtm: 'click_brands_view_all'
                 }
@@ -208,11 +213,6 @@ export default {
                     url: '/info/about-us',
                     text: 'About Menulog',
                     gtm: 'click_about_us'
-                },
-                {
-                    url: '/info/our-price-promise',
-                    text: 'Our Price Promise',
-                    gtm: 'click_about_price_promise'
                 },
                 {
                     url: '/info/partner-with-us/',

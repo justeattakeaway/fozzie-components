@@ -35,7 +35,7 @@ describe('`Base`', () => {
             const wrapper = shallowMount(Base, { propsData });
 
             // Assert
-            expect(wrapper.vm.element).toBe('search-shell');
+            expect(wrapper.vm.element).toEqual('search-shell');
         });
 
         it('should set the correct `shell` element to `no-search-shell` when `isShellHidden` is set to `true` ', () => {
@@ -48,7 +48,7 @@ describe('`Base`', () => {
             const wrapper = shallowMount(Base, { propsData });
 
             // Assert
-            expect(wrapper.vm.element).toBe('no-search-shell');
+            expect(wrapper.vm.element).toEqual('search-no-shell');
         });
     });
 

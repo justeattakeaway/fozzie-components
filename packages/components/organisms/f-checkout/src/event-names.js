@@ -7,6 +7,9 @@ const CheckoutAvailableFulfilmentGetFailure = 'checkout-available-fulfilment-get
 const CheckoutVisitLoginPage = 'checkout-visit-login-page';
 const CheckoutBasketGetSuccess = 'checkout-basket-get-success';
 const CheckoutBasketGetFailure = 'checkout-basket-get-failure';
+const CheckoutSetupGuestSuccess = 'checkout-setup-guest-success';
+const CheckoutSetupGuestFailure = 'checkout-setup-guest-failure';
+const CheckoutValidationError = 'checkout-validation-error';
 
 export default {
     CheckoutSuccess,
@@ -17,5 +20,8 @@ export default {
     CheckoutAvailableFulfilmentGetFailure,
     CheckoutVisitLoginPage,
     CheckoutBasketGetSuccess,
-    CheckoutBasketGetFailure
+    CheckoutBasketGetFailure,
+    CheckoutSetupGuestSuccess,
+    CheckoutSetupGuestFailure,
+    CheckoutValidationError
 };

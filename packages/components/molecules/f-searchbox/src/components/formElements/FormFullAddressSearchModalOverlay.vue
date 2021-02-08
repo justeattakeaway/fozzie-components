@@ -1,6 +1,7 @@
 <template>
     <div v-if="isBelowMid">
         <full-address-overlay-search
+            data-test-id="full-address-overlay"
             is-full-height
             is-scrollable
             :has-close-button="false"
@@ -27,6 +28,8 @@
                         type="search"
                         @input="address = $event.target.value">
                     <span :class="$style['c-search-placeholder']">{{ copy.fieldLabel }}</span>
+
+                    <loading-indicator />
                 </label>
 
                 <cancel-button
@@ -40,6 +43,7 @@
                 v-if="hasSuggestionsToDisplay"
                 data-test-id="full-address-modal-suggestions"
                 :copy="copy"
+                :config="config"
                 :suggestions="suggestions" />
         </full-address-overlay-search>
     </div>
@@ -52,13 +56,15 @@ import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 import CancelButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import FullAddressSearchSuggestions from './FormFullAddressSearchSuggestions.vue';
+import LoadingIndicator from '../FormStates/FormLoadingIndicator.vue';
 import { ON_FULL_ADDRESS_MODAL_CLOSED } from '../../event-types';
 
 export default {
     components: {
         FullAddressOverlaySearch,
         FullAddressSearchSuggestions,
-        CancelButton
+        CancelButton,
+        LoadingIndicator
     },
 
     props: {
@@ -70,6 +76,11 @@ export default {
         shouldDisplayModalOverlay: {
             type: Boolean,
             default: false
+        },
+
+        config: {
+            type: Object,
+            default: () => ({})
         }
     },
 

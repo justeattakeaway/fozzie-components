@@ -3,6 +3,25 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.51.0
+-------------------------------
+*February 5, 2021*
+
+### Added
+- Axios mock to Storybook for checkout PATCH requests.
+- PATCH response handling, by adding `issues` and `isFulfillable` to state.
+
+
+v0.50.0
+-------------------------------
+*February 5, 2021*
+
+### Added
+- `CheckoutSetupGuestSuccess`, `CheckoutSetupGuestFailure`, `CheckoutValidationError` events.
+- Tests to cover changes.
+
+
 v0.49.0
 -------------------------------
 *February 4, 2021*
