@@ -1,12 +1,12 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object'); 
+const Page = require('../../../../../services/f-wdio-utils/src/page.object');
 const HomePromotionCard2 = require('./f-content-cards-home-promotion-card2.component');
 const card2 = new HomePromotionCard2();
 
-const { 
+const {
     PROMOTION_CARD_1_COMPONENT,
     INNER_CONTAINER,
-    HEADER, 
-    IMAGE, 
+    HEADER,
+    IMAGE,
     SUBTITLE
 } = require('./f-content-cards-home-promotion.selectors');
 
@@ -18,9 +18,9 @@ class HomePromotionCard1 extends Page {
     get image () { return $(IMAGE) }
     get subtitle () { return $(SUBTITLE) }
 
-    open () {
-        super.openComponent('molecule', 'f-content-cards--home-promotion-card-1-component');
-    }
+    open() {
+        super.openComponent('molecule-folder', 'f-content-cards--home-promotion-card-1-component');
+    };
 
     waitForComponent () {
         super.waitForComponent(this.component);

@@ -1,8 +1,8 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object'); 
-const { 
+const Page = require('../../../../../services/f-wdio-utils/src/page.object');
+const {
     PROMOTION_CARD_2_COMPONENT,
-    CTA, 
-    TEXT, 
+    CTA,
+    TEXT,
     TITLE,
     BACKGROUND_IMAGE
 } = require('./f-content-cards-home-promotion.selectors');
@@ -16,32 +16,32 @@ class HomePromotionCard2 extends Page {
     get backgroundImage () { return $(BACKGROUND_IMAGE) }
 
     open() {
-        super.openComponent('molecule', 'f-content-cards--home-promotion-card-2-component');
-    };
+        super.openComponent('molecule-folder', 'f-content-cards--home-promotion-card-2-component');
+    }
 
-    waitForComponent(){
+    waitForComponent () {
         super.waitForComponent(this.component);
-    };
+    }
 
-    isComponentDisplayed(){
+    isComponentDisplayed () {
         return this.component.isDisplayed();
-    };
+    }
 
-    isCallToActionDisplayed(){
+    isCallToActionDisplayed () {
         return this.callToAction.isDisplayed();
-    }; 
+    }
 
-    isTextDisplayed(){
+    isTextDisplayed () {
         return this.text.isDisplayed();
-    }; 
+    }
 
-    isTitleDisplayed(){
+    isTitleDisplayed () {
         return this.title.isDisplayed();
-    }; 
+    }
 
-    isBackgroundImageDisplayed(){
+    isBackgroundImageDisplayed () {
         return this.backgroundImage.isDisplayed();
-    }; 
-};
+    }
+}
 
 module.exports = HomePromotionCard2;
