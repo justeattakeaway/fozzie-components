@@ -97,15 +97,12 @@ export default {
                 timeout
             };
 
-            try {
-                const { data: responseData } = await axios.patch(url, data, config);
-                const { issues, isFulfillable } = responseData;
+            // TODO - Handle and log any errors
+            const { data: responseData } = await axios.patch(url, data, config);
+            const { issues, isFulfillable } = responseData;
 
-                commit(UPDATE_IS_FULFILLABLE, isFulfillable);
-                commit(UPDATE_ISSUES, issues);
-            } catch (error) {
-                throw error; // TODO - Log error
-            }
+            commit(UPDATE_IS_FULFILLABLE, isFulfillable);
+            commit(UPDATE_ISSUES, issues);
         },
 
         /**
