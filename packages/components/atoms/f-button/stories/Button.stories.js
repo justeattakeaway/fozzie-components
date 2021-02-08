@@ -26,9 +26,12 @@ export const ButtonComponent = () => ({
         },
         href: {
             default: text('href', '')
+        },
+        isIcon: {
+            default: boolean('isIcon', false)
         }
     },
-    template: '<f-button :buttonType="buttonType" :buttonSize="buttonSize" :isFullWidth="isFullWidth" :actionType="actionType" :href="href">Default Button Text</f-button>'
+    template: '<f-button :buttonType="buttonType" :buttonSize="buttonSize" :isFullWidth="isFullWidth" :actionType="actionType" :href="href" :isIcon="isIcon">Default Button Text</f-button>'
 });
 
 ButtonComponent.storyName = 'f-button';

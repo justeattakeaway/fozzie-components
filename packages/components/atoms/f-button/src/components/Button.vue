@@ -4,8 +4,10 @@
         :class="[
             $style['o-btn'],
             $style[`o-btn--${buttonType}`],
-            $style[`o-btn--size${buttonSizeClassname}`],
-            (isFullWidth ? $style['o-btn--fullWidth'] : '')
+            (isIcon ? $style[`o-icon-size${buttonSizeClassname}`] :
+                $style[`o-btn--size${buttonSizeClassname}`]),
+            (isFullWidth ? $style['o-btn--fullWidth'] : ''),
+            (isIcon ? $style['o-icon'] : '')
         ]"
         :attributes="$attrs"
         :action-type="buttonActionType"
@@ -41,6 +43,10 @@ export default {
         actionType: {
             type: String,
             default: 'button'
+        },
+        isIcon: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -114,6 +120,15 @@ $btn-sizeSmall-padding          : 7px 1em 9px;
 $btn-sizeXSmall-padding         : 5px 0.5em 7px;
 $btn-sizeXSmall-lineHeight      : 1;
 
+$icon-bgColor                   : $blue--offWhite;
+$icon-bgColor--hover            : $blue--offWhite--dark;
+$icon-bgColor--active           : $blue--offWhite--darkest;
+
+$icon-default-width             : 1.5em;
+$icon-sizeSmall-width           : 1em;
+$icon-sizeLarge-width           : 2em;
+
+$icon-default-padding           : 3px;
 
 .o-btn {
     display: inline-block;
@@ -361,6 +376,34 @@ $btn-sizeXSmall-lineHeight      : 1;
     line-height: $btn-sizeXSmall-lineHeight;
 }
 
+/**
+* ==========================================================================
+* Icon Size Modifiers
+* ==========================================================================
+*/
+
+.o-icon {
+    background-color: $icon-bgColor;
+    border-radius: 50%;
+    width: $icon-default-width;
+    vertical-align: middle;
+    padding: $icon-default-padding;
+
+    &:hover {
+        background-color: $icon-bgColor--hover;
+    }
+    &:active {
+        background-color: $icon-bgColor--active;
+    }
+}
+
+.o-icon--sizeSmall {
+    width: $icon-sizeSmall-width;
+}
+
+.o-icon-sizeLarge {
+    width: $icon-sizeLarge-width;
+}
 
 /**
  * ==========================================================================
