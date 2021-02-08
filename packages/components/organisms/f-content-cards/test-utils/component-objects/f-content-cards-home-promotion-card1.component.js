@@ -19,7 +19,7 @@ class HomePromotionCard1 extends Page {
     get subtitle () { return $(SUBTITLE) }
 
     open() {
-        super.openComponent('molecule', 'f-content-cards--home-promotion-card-1-component');
+        super.openComponent('molecule-folder', 'f-content-cards--home-promotion-card-1-component');
     };
 
     waitForComponent(){
