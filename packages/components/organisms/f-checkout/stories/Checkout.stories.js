@@ -25,6 +25,7 @@ const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
 const createGuestUrl = '/create-guest.json';
 const getBasketDeliveryUrl = '/get-basket-delivery.json';
 const getBasketCollectionUrl = '/get-basket-collection.json';
+const updateCheckout = '/update-checkout.json';
 
 CheckoutMock.setupCheckoutMethod(deliveryUrl);
 CheckoutMock.setupCheckoutMethod(collectionUrl);
@@ -32,6 +33,7 @@ CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentUrl);
 CheckoutMock.setupCheckoutMethod(createGuestUrl);
 CheckoutMock.setupCheckoutMethod(getBasketDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getBasketCollectionUrl);
+CheckoutMock.setupCheckoutMethod(updateCheckout);
 CheckoutMock.passThroughAny();
 
 export const CheckoutComponent = () => ({

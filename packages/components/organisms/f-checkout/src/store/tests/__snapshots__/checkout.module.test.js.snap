@@ -22,6 +22,7 @@ Object {
   "id": "12345",
   "isFulfillable": true,
   "isLoggedIn": false,
+  "issues": Array [],
   "messages": Array [
     Object {
       "message": Object {
