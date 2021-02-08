@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.24.0
+------------------------------
+*February 5, 2021*
+
+### Added
+- Small additions to styling for browser checklist tables.
+
+
+v0.23.0
+------------------------------
+*February 5, 2021*
+
+### Added
+- Some (horrible but necessary) inline CSS styles added for mdx pages in Storybook.
+
+
 v0.22.0
 ------------------------------
 *February 4, 2021*

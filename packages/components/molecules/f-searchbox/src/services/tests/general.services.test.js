@@ -313,4 +313,35 @@ describe('`general.services`', () => {
             });
         });
     });
+
+    describe('`extractPostcode`', () => {
+        it('should exist', () => {
+            expect(generalServices.extractPostcode).toBeDefined();
+        });
+
+        describe('when invoked', () => {
+            describe('AND `address` exists', () => {
+                it('should return the correct part of the address', () => {
+                    // Arrange
+                    const address = 'AR511AR, Central, Yarnham';
+
+                    // Act
+                    const result = generalServices.extractPostcode(address);
+
+                    // Assert
+                    expect(result).toBe('AR511AR');
+                });
+            });
+
+            describe('AND `address` does not exist', () => {
+                it('should return `null`', () => {
+                    // Act
+                    const result = generalServices.extractPostcode();
+
+                    // Assert
+                    expect(result).toBe(null);
+                });
+            });
+        });
+    });
 });

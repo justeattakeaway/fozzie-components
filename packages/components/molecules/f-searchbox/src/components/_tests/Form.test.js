@@ -14,10 +14,12 @@ const mockState = {
     address: '',
     errors: [],
     isValid: true,
-    isFullAddressSearchEnabled: false
+    isFullAddressSearchEnabled: false,
+    shouldAutoNavigateToSerp: false
 };
 
 const mockActions = {
+    setAutoNavigateToSerp: jest.fn(),
     setIsBelowMid: jest.fn(),
     setErrors: jest.fn(),
     setIsValid: jest.fn(),
@@ -825,7 +827,7 @@ describe('`Form`', () => {
                     const spy = jest.spyOn(wrapper.vm, 'setFullAddressSearchConfigs');
 
                     // Act
-                    wrapper.vm.initialiseFullAddressSearch(propsData.config.isFullAddressSearchEnabled);
+                    wrapper.vm.initialiseFullAddressSearch(propsData.config);
 
                     // Assert
                     expect(spy).toHaveBeenCalledWith({
@@ -834,6 +836,33 @@ describe('`Form`', () => {
                 });
 
                 describe('when `isFullAddressSearchEnabled` is `truthy`', () => {
+                    it('should dispatch `setAutoNavigateToSerp` with the `isFullAddressNavigateToSerpEnabled` value', () => {
+                        // Arrange
+                        const propsData = {
+                            config: {
+                                address: 'something',
+                                isFullAddressSearchEnabled: jest.fn().mockImplementation(() => true),
+                                isFullAddressNavigateToSerpEnabled: jest.fn().mockImplementation(() => true),
+                                locationFormat: () => jest.fn()
+                            },
+                            service: {
+                                isValid: jest.fn(() => [])
+                            }
+                        };
+                        const wrapper = shallowMount(Form, {
+                            propsData,
+                            store: createStore(),
+                            localVue
+                        });
+                        const spy = jest.spyOn(wrapper.vm, 'setAutoNavigateToSerp');
+
+                        // Act
+                        wrapper.vm.initialiseFullAddressSearch(propsData.config);
+
+                        // Assert
+                        expect(spy).toHaveBeenCalledWith(true);
+                    });
+
                     it('should dispatch `setAutoCompleteAvailability` with a payload `true`', () => {
                         // Arrange
                         const propsData = {
@@ -856,7 +885,7 @@ describe('`Form`', () => {
                         const spy = jest.spyOn(wrapper.vm, 'setAutoCompleteAvailability');
 
                         // Act
-                        wrapper.vm.initialiseFullAddressSearch(propsData.config.isFullAddressSearchEnabled);
+                        wrapper.vm.initialiseFullAddressSearch(propsData.config);
 
                         // Assert
                         expect(spy).toHaveBeenCalledWith(true);
@@ -884,7 +913,7 @@ describe('`Form`', () => {
                         const spy = jest.spyOn(wrapper.vm, 'fetchLocalStorageAddress');
 
                         // Act
-                        wrapper.vm.initialiseFullAddressSearch(propsData.config.isFullAddressSearchEnabled);
+                        wrapper.vm.initialiseFullAddressSearch(propsData.config);
 
                         // Assert
                         expect(spy).toHaveBeenCalled();
@@ -914,7 +943,7 @@ describe('`Form`', () => {
                         const spy = jest.spyOn(generalServices.fullAddressLocalStorageService, 'removeItem');
 
                         // Act
-                        wrapper.vm.initialiseFullAddressSearch(propsData.config.isFullAddressSearchEnabled);
+                        wrapper.vm.initialiseFullAddressSearch(propsData.config);
 
                         // Assert
                         expect(spy).toHaveBeenCalledWith(JE_FULL_ADDRESS_DETAILS);

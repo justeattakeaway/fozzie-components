@@ -96,7 +96,9 @@ The props that can be defined are as follows:
 | `checkout-available-fulfilment-get-failure` | Emitted when available fulfilment times fail to load. |
 | `checkout-visit-login-page` | Emitted when user clicks the _Not you?_ link |
 | `checkout-basket-get-success` | Emitted when basket data is successfully loaded. |
-| `checkout-basket-get-failure` | Emitted when basket data fails to load. |
+| `checkout-setup-guest-success` | Emitted when guest user is created successfully. |
+| `checkout-setup-guest-failure` | Emitted when guest user is not created successfully. |
+| `checkout-validation-error` | Emitted validation error occurs. |
 
 You can add event listeners for these like so
 
@@ -110,7 +112,10 @@ You can add event listeners for these like so
     @checkoutGetPaymentSuccess="onGetPaymentSuccess"
     @checkoutGetPaymentFailure="onGetPaymentFailure"
     @checkoutGetBasketSuccess="onGetBasketSuccess"
-    @checkoutGetBasketFailure="onGetBasketFailure">
+    @checkoutGetBasketFailure="onGetBasketFailure"
+    @checkoutSetupGuestSuccess="onSetupGuestSuccess"
+    @checkoutSetupGuestFailure="onSetupGuestFailure"
+    @checkoutValidationError="onValidationError">
   </vue-checkout>
 </template>
 

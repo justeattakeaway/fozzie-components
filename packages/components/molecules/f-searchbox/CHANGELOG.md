@@ -3,6 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.24
+------------------------------
+*February 8, 2021*
+
+### Changed
+- Full address keys saves as capitalisation.
+
+
+v4.0.0-beta.23
+------------------------------
+*February 4, 2021*
+
+### Added
+- Clear button to Loqate feature so addresses can be cleared.
+- Refactor loading indicator component so it's shared.
+- Added tests.
+
+
 v4.0.0-beta.22
 ------------------------------
 *February 2, 2021*

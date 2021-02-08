@@ -26,7 +26,8 @@ import {
     SET_IS_BELOW_MID,
     SET_HAS_INPUT_ELEVATION,
     SET_SHOULD_SUGGESTIONS_MODEL,
-    SET_SAVED_FULL_ADDRESS_DETAILS
+    SET_SAVED_FULL_ADDRESS_DETAILS,
+    SET_AUTO_NAVIGATE_TO_SERP
 } from './mutation.types';
 
 export default {
@@ -46,6 +47,7 @@ export default {
         shouldInputFieldHaveFocus: false,
         shouldDisplaySuggestionsDropdown: true,
         shouldShowSuggestionsModal: false,
+        shouldAutoNavigateToSerp: false,
         inputTimeoutValue: null,
         isLoadingResults: false,
         isValid: false,
@@ -235,6 +237,10 @@ export default {
 
         setSavedFullAddressDetails ({ commit }, payload) {
             commit(SET_SAVED_FULL_ADDRESS_DETAILS, payload);
+        },
+
+        setAutoNavigateToSerp ({ commit }, payload) {
+            commit(SET_AUTO_NAVIGATE_TO_SERP, payload);
         }
     },
 
@@ -418,31 +424,53 @@ export default {
 
         [SET_SAVED_FULL_ADDRESS_DETAILS]: (state, savedFullAddressDetails) => {
             const { address, fullAddress } = savedFullAddressDetails;
+            let savedAddressResult;
 
-            const savedAddressResult = fullAddress.map(({
-                city,
-                field1,
-                field2,
-                line1,
-                line2,
-                line3,
-                line4,
-                line5,
-                postcode
-            }) => ({
-                city,
-                field1,
-                field2,
-                line1,
-                line2,
-                line3,
-                line4,
-                line5,
-                postcode,
+            if (!address) return;
+
+            savedAddressResult = [{
+                Line1: null,
+                Line2: null,
+                Line3: null,
+                Line4: null,
+                Line5: null,
+                City: null,
+                Field1: null,
+                Field2: null,
+                PostalCode: null,
                 searchBoxAddress: address
-            }));
+            }];
+
+            if (fullAddress && fullAddress.length) {
+                savedAddressResult = fullAddress.map(({
+                    city,
+                    field1,
+                    field2,
+                    line1,
+                    line2,
+                    line3,
+                    line4,
+                    line5,
+                    postcode
+                }) => ({
+                    City: city,
+                    Field1: field1,
+                    Field2: field2,
+                    Line1: line1,
+                    Line2: line2,
+                    Line3: line3,
+                    Line4: line4,
+                    Line5: line5,
+                    PostalCode: postcode,
+                    searchBoxAddress: address
+                }));
+            }
 
             state.savedFullAddressDetails = savedAddressResult;
+        },
+
+        [SET_AUTO_NAVIGATE_TO_SERP]: (state, shouldAutoNavigateToSerp) => {
+            state.shouldAutoNavigateToSerp = shouldAutoNavigateToSerp;
         }
     }
 };

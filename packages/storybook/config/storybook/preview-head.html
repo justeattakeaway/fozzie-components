@@ -13,4 +13,44 @@
     body {
         font-feature-settings: 'tnum'; /* Enable tabular numbers */
     }
+
+    h1.sbdocs-h1:first-of-type {
+        margin-bottom: 16px;
+    }
+
+    h2.sbdocs-h2,
+    h2.sbdocs-h2:first-of-type {
+        border-top: 1px solid #c5ccd3;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .os-content {
+        background-color: #333;
+    }
+
+    .os-viewport .os-content pre code {
+        color: #fff;
+    }
+
+    .sbdocs.sbdocs-p code,
+    .sbdocs.sbdocs-li code {
+        background-color: rgba(0, 0, 0, 0.06);
+        border: 1px solid #ccc;
+    }
+
+    /* will one day look to hook up storybook styles to SCSS */
+    .o-table.c-matrix {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 32px;
+    }
+
+    .c-matrix th {
+        background-color: #e7f1fe;
+    }
+
+    .c-matrix-gradeA { background-color: #e5faef; }
+    .c-matrix-gradeB { background-color: #fff9df; }
+    .c-matrix-gradeC { background-color: #ffe9ea; }
 </style>

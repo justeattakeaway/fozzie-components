@@ -18,7 +18,7 @@ import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 import SearchForm from './Form.vue';
 import SearchShell from './shells/Shell.vue';
-import NoSearchShell from './shells/NoShell.vue';
+import SearchNoShell from './shells/NoShell.vue';
 import Service from '../services/core';
 
 export default {
@@ -26,7 +26,7 @@ export default {
     components: {
         SearchForm,
         SearchShell,
-        NoSearchShell
+        SearchNoShell
     },
     props: {
         locale: {
@@ -38,8 +38,8 @@ export default {
             default: () => {}
         },
         dependentApiPromise: {
-            type: Object,
-            default: () => {}
+            type: Promise,
+            default: undefined
         },
         copyOverride: {
             type: Object,
@@ -50,20 +50,32 @@ export default {
         const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
         const theme = globalisationServices.getTheme(locale);
-        const componentConfig = { ...localeConfig.component, ...this.config };
         const service = Service(localeConfig.service);
 
         return {
+            localeConfig,
             copy: {
                 ...localeConfig.copy,
                 ...this.copyOverride
             },
-            componentConfig,
             componentLocale: locale,
             theme,
-            service,
-            element: componentConfig.isShellHidden ? 'no-search-shell' : 'search-shell'
+            service
         };
+    },
+
+    computed: {
+        element () {
+            if (this.config && this.config.isShellHidden) {
+                return 'search-no-shell';
+            }
+
+            return 'search-shell';
+        },
+
+        componentConfig () {
+            return { ...this.localeConfig.component, ...this.config };
+        }
     },
 
     /**

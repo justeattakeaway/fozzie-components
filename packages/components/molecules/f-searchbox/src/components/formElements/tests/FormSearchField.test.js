@@ -9,6 +9,7 @@ localVue.use(Vuex);
 const mockState = {
     address: '',
     isBelowMid: false,
+    inputTimeoutValue: null,
     isStreetNumberRequired: false,
     isGeoLocationAvailable: false,
     isAutocompleteEnabled: false,
@@ -383,6 +384,153 @@ describe('`FormSearchField`', () => {
                     // Assert
                     expect(spy).toHaveBeenCalledWith(true);
                 });
+            });
+        });
+    });
+
+    describe('`onClearAddress`', () => {
+        it('should exist', () => {
+            // Arrange
+            const wrapper = shallowMount(FormSearchField, {
+                propsData: {
+                    copy: {},
+                    service: {}
+                },
+                store: createStore(),
+                localVue
+            });
+
+            // Act & Assert
+            expect(wrapper.vm.onClearAddress).toBeDefined();
+        });
+
+        describe('when invoked', () => {
+            it('should `setAddress` to an empty string to clear the input field', () => {
+                // Arrange
+                const wrapper = shallowMount(FormSearchField, {
+                    propsData: {
+                        copy: {},
+                        service: {}
+                    },
+                    store: createStore(),
+                    localVue
+                });
+                const spy = jest.spyOn(wrapper.vm, 'setAddress');
+
+                // Act
+                wrapper.vm.onClearAddress();
+
+                // Assert
+                expect(spy).toHaveBeenCalledWith('');
+            });
+
+            it('should `clearTimeout` on the `inputTimeoutValue` so new searches can resume', () => {
+                // Arrange
+                const wrapper = shallowMount(FormSearchField, {
+                    propsData: {
+                        copy: {},
+                        service: {}
+                    },
+                    store: createStore({
+                        inputTimeoutValue: 40
+                    }),
+                    localVue
+                });
+                const spy = jest.spyOn(window, 'clearTimeout');
+
+                // Act
+                wrapper.vm.onClearAddress();
+
+                // Assert
+                expect(spy).toHaveBeenCalledWith(40);
+            });
+
+            it('should call `clearSuggestions` to reset results', () => {
+                // Arrange
+                const wrapper = shallowMount(FormSearchField, {
+                    propsData: {
+                        copy: {},
+                        service: {}
+                    },
+                    store: createStore(),
+                    localVue
+                });
+                const spy = jest.spyOn(wrapper.vm, 'clearSuggestions');
+
+                // Act
+                wrapper.vm.onClearAddress();
+
+                // Assert
+                expect(spy).toHaveBeenCalledWith([]);
+            });
+        });
+    });
+
+    describe('`shouldDisplayClearButton`', () => {
+        it('should exist', () => {
+            // Arrange
+            const wrapper = shallowMount(FormSearchField, {
+                propsData: {
+                    copy: {},
+                    service: {}
+                },
+                store: createStore(),
+                localVue
+            });
+
+            // Act & Assert
+            expect(wrapper.vm.shouldDisplayClearButton).toBeDefined();
+        });
+
+        describe('when `truthy`', () => {
+            it('should display the clear button component', () => {
+                // Arrange
+                const wrapper = shallowMount(FormSearchField, {
+                    propsData: {
+                        copy: {
+                            fullAddressSearchSuggestions: {
+                                clearSearchBtn: 'Clear search'
+                            }
+                        },
+                        service: {}
+                    },
+                    store: createStore({
+                        isFullAddressSearchEnabled: true,
+                        isLoadingResults: false,
+                        isBelowMid: false,
+                        address: 'AR511AR'
+                    }),
+                    localVue
+                });
+
+                // Act & Assert
+                expect(wrapper.find('[data-test-id="search-btn-clear"]').exists()).toBeTruthy();
+            });
+        });
+
+        describe('when `falsy`', () => {
+            it('should NOT display the clear button component', () => {
+                // Arrange
+                const wrapper = shallowMount(FormSearchField, {
+                    propsData: {
+                        copy: {
+                            fullAddressSearchSuggestions: {
+                                clearSearchBtn: 'Clear search'
+                            }
+                        },
+                        service: {}
+                    },
+                    store: createStore({
+                        isFullAddressSearchEnabled: true,
+                        isLoadingResults: false,
+                        isBelowMid: true,
+                        address: 'AR511AR'
+                    }),
+                    localVue
+                });
+
+                // Act & Assert
+                expect(wrapper.find('[data-test-id="search-btn-clear"]').exists()).toBeFalsy();
             });
         });
     });

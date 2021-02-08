@@ -154,6 +154,52 @@ describe('Checkout', () => {
                 expect(addressBlock.exists()).toBe(false);
             });
         });
+
+        describe('hasCheckoutLoadedSuccessfully ::', () => {
+            it('should render the checkout form and not the error page when set to `true`', () => {
+                // Arrange & Act
+                const wrapper = mount(VueCheckout, {
+                    i18n,
+                    store: createStore(),
+                    localVue,
+                    propsData,
+                    data () {
+                        return {
+                            hasCheckoutLoadedSuccessfully: true
+                        };
+                    }
+                });
+
+                const checkoutForm = wrapper.find('[data-test-id="checkout-component"]');
+                const errorPage = wrapper.find('[data-test-id="checkout-error-page-component"]');
+
+                // Assert
+                expect(checkoutForm.exists()).toBe(true);
+                expect(errorPage.exists()).toBe(false);
+            });
+
+            it('should render the error page and not the checkout form when set to `false`', () => {
+                // Arrange & Act
+                const wrapper = mount(VueCheckout, {
+                    i18n,
+                    store: createStore(),
+                    localVue,
+                    propsData,
+                    data () {
+                        return {
+                            hasCheckoutLoadedSuccessfully: false
+                        };
+                    }
+                });
+
+                const checkoutForm = wrapper.find('[data-test-id="checkout-component"]');
+                const errorPage = wrapper.find('[data-test-id="checkout-error-page-component"]');
+
+                // Assert
+                expect(checkoutForm.exists()).toBe(false);
+                expect(errorPage.exists()).toBe(true);
+            });
+        });
     });
 
     describe('props ::', () => {
@@ -410,21 +456,37 @@ describe('Checkout', () => {
             describe('if serviceType set to `collection`', () => {
                 let wrapper;
 
-                it('should emit success event when all the fields are populated correctly', async () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
-                        i18n,
-                        localVue,
-                        propsData
+                describe('when all the fields are populated correctly', () => {
+                    beforeEach(() => {
+                        wrapper = mount(VueCheckout, {
+                            store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
+                            i18n,
+                            localVue,
+                            propsData
+                        });
                     });
 
-                    // Act
-                    await wrapper.vm.onFormSubmit();
+                    it('should emit success event', async () => {
+                        // Act
+                        await wrapper.vm.onFormSubmit();
 
-                    // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
+                        // Assert
+                        expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
+                        expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
+                    });
+
+                    it('success event should include `serviceType` and user authentication status', async () => {
+                        const payload = {
+                            isLoggedIn: false,
+                            serviceType: CHECKOUT_METHOD_COLLECTION
+                        };
+
+                        // Act
+                        await wrapper.vm.onFormSubmit();
+
+                        // Assert
+                        expect(wrapper.emitted(EventNames.CheckoutSuccess)[0][0]).toEqual(payload);
+                    });
                 });
 
                 it('should show error message and emit failure event when the mobile number field is not populated', async () => {
@@ -449,8 +511,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(mobileNumberEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.mobileNumber');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.mobileNumber');
                 });
 
                 it('should show error message and emit failure event when the mobile number field is populated with a < 10 numbers', async () => {
@@ -476,8 +538,8 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.vm.isMobileNumberValid).toBe(false);
                     expect(mobileNumberEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.mobileNumber');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.mobileNumber');
                 });
 
                 it('should show error message and emit failure event when the mobile number field is populated with non numeric value', async () => {
@@ -503,8 +565,8 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.vm.isMobileNumberValid).toBe(false);
                     expect(mobileNumberEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.mobileNumber');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.mobileNumber');
                 });
 
                 it('should not create validations for address', () => {
@@ -524,21 +586,37 @@ describe('Checkout', () => {
             describe('if serviceType set to `delivery`', () => {
                 let wrapper;
 
-                it('should emit success event when all fields are populated correctly', async () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_DELIVERY }),
-                        i18n,
-                        localVue,
-                        propsData
+                describe('when all the fields are populated correctly', () => {
+                    beforeEach(() => {
+                        wrapper = mount(VueCheckout, {
+                            store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_DELIVERY }),
+                            i18n,
+                            localVue,
+                            propsData
+                        });
                     });
 
-                    // Act
-                    await wrapper.vm.onFormSubmit();
+                    it('should emit success event', async () => {
+                        // Act
+                        await wrapper.vm.onFormSubmit();
 
-                    // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
+                        // Assert
+                        expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
+                        expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
+                    });
+
+                    it('success event should include `serviceType` and user authentication status', async () => {
+                        const payload = {
+                            isLoggedIn: false,
+                            serviceType: CHECKOUT_METHOD_DELIVERY
+                        };
+
+                        // Act
+                        await wrapper.vm.onFormSubmit();
+
+                        // Assert
+                        expect(wrapper.emitted(EventNames.CheckoutSuccess)[0][0]).toEqual(payload);
+                    });
                 });
 
                 it('should emit failure event and display error message when address line1 input field is empty', async () => {
@@ -563,8 +641,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(addressLine1EmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address.line1');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.line1');
                 });
 
                 it('should emit failure event and display error message when city input field is empty', async () => {
@@ -589,8 +667,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(addressCityEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address.city');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.city');
                 });
 
                 it('should emit failure event and display error message when postcode input field is empty', async () => {
@@ -615,8 +693,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(addressPostcodeEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address.postcode');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.postcode');
                 });
 
                 it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
@@ -641,8 +719,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address.postcode');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.postcode');
                 });
 
 
@@ -668,8 +746,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('address.postcode');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.postcode');
                 });
 
                 it('should create validations for address', () => {
@@ -749,8 +827,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(firstNameEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.firstName');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.firstName');
                 });
 
                 it('should show error message and emit failure event when the last name field is not populated', async () => {
@@ -776,8 +854,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(lastNameEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.lastName');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.lastName');
                 });
 
                 it('should show error message and emit failure event when the email field is not populated', async () => {
@@ -803,8 +881,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(emailEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.email');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.email');
                 });
 
                 it('should show error message and emit failure event when the email field is invalid', async () => {
@@ -830,8 +908,8 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(emailInvalidMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0].invalidFields).toContain('customer.email');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.email');
                 });
             });
 
@@ -915,6 +993,52 @@ describe('Checkout', () => {
                 // Assert
                 expect(createGuestUserSpy).toHaveBeenCalledWith(expected);
             });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            describe('when `createGuestUser` request fails', () => {
+                it('should emit `CheckoutSetupGuestFailure` event', async () => {
+                    // Arrange
+                    jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
+
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, createGuestUser: jest.fn(async () => Promise.reject()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.setupGuestUser();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutSetupGuestSuccess)).toBeUndefined();
+                    expect(wrapper.emitted(EventNames.CheckoutSetupGuestFailure).length).toBe(1);
+                });
+            });
+
+            describe('when `createGuestUser` request succeeds', () => {
+                it('should emit `CheckoutSetupGuestSuccess` event', async () => {
+                    // Arrange
+                    jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
+
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.setupGuestUser();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutSetupGuestSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutSetupGuestFailure)).toBeUndefined();
+                });
+            });
         });
 
         describe('loadCheckout ::', () => {
@@ -923,7 +1047,7 @@ describe('Checkout', () => {
             });
 
             describe('when `getCheckout` request fails', () => {
-                it('should emit failure event', async () => {
+                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
                     // Arrange
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
@@ -940,6 +1064,7 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
+                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
                 });
             });
 
@@ -971,7 +1096,7 @@ describe('Checkout', () => {
             });
 
             describe('when `getAvailableFulfilment` request fails', () => {
-                it('should emit failure event', async () => {
+                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
                     // Arrange
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
@@ -988,6 +1113,7 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure).length).toBe(1);
+                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
                 });
             });
 
@@ -1019,7 +1145,7 @@ describe('Checkout', () => {
             });
 
             describe('when `getBasket` request fails', () => {
-                it('should emit failure event', async () => {
+                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
                     // Arrange
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
@@ -1036,6 +1162,7 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess)).toBeUndefined();
+                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
                 });
             });
 
@@ -1062,15 +1189,19 @@ describe('Checkout', () => {
         });
 
         describe('handleErrorState ::', () => {
-            it('should emit failure event and update `genericErrorMessage` with first error message description', () => {
-                // Arrange
-                const wrapper = mount(VueCheckout, {
+            let wrapper;
+
+            beforeEach(() => {
+                wrapper = mount(VueCheckout, {
                     store: createStore(),
                     i18n,
                     localVue,
                     propsData
                 });
+            });
 
+            it('should emit failure event and update `genericErrorMessage` with first error message description', () => {
+                // Arrange
                 const errorDescription = 'Error Description';
                 const error = {
                     response: {
@@ -1094,13 +1225,6 @@ describe('Checkout', () => {
 
             it('should emit failure event and use tenant `genericErrorMessage` if returned errors have no description', () => {
                 // Arrange
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
                 const error = {
                     response: {
                         data: {
@@ -1120,19 +1244,29 @@ describe('Checkout', () => {
             });
 
             it('should emit failure event and update `genericErrorMessage` with error if single error', () => {
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
+                // Arrange
                 const error = 'Unknown Error';
 
                 wrapper.vm.handleErrorState(error);
 
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.vm.genericErrorMessage).toEqual(error);
+            });
+
+            it('should emit failure with `serviceType` user authentication status and error details', () => {
+                // Arrange
+                const error = 'Unknown Error';
+
+                const payload = {
+                    errors: error,
+                    isLoggedIn: false,
+                    serviceType: CHECKOUT_METHOD_DELIVERY
+                };
+
+                wrapper.vm.handleErrorState(error);
+
+                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0]).toEqual(payload);
             });
         });
 
@@ -1211,7 +1345,7 @@ describe('Checkout', () => {
                 jest.clearAllMocks();
             });
 
-            it('should emit `CheckoutFailure` with validation state if form is invalid', async () => {
+            it('should emit `CheckoutValidationError` with validation state if form is invalid', async () => {
                 // Arrange
                 const mockValidationState = {
                     validFields: [
@@ -1242,8 +1376,8 @@ describe('Checkout', () => {
                 await wrapper.vm.onFormSubmit();
 
                 // Assert
-                expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0]).toEqual(mockValidationState);
+                expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0]).toEqual(mockValidationState);
             });
 
             it('should try to call `submitCheckout` if form is Valid', async () => {

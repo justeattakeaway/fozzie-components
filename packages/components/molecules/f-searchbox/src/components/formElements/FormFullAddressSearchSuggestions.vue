@@ -10,12 +10,12 @@
                 $style.item,
                 { [$style.selected]: index === selected }
             ]"
-            data-test-id="suggestion-item"
             @click="getSelectedStreetAddress($event, index, selected)">
             <map-pin-icon :class="$style['c-locationIcon']" />
 
             <div
                 v-if="!selectedStreetLevelAddressId"
+                data-test-id="suggestion-postcode-item"
                 :class="$style['c-fullAddressSuggestion']">
                 <p :class="$style['c-fullAddressSuggestion-postcodeMatch']">
                     {{ getMatchedPostcodes(item) }}
@@ -26,7 +26,9 @@
                     {{ getDescription(item) }}
                 </p>
             </div>
-            <div v-else>
+            <div
+                v-else
+                data-test-id="suggestion-address-item">
                 <div :class="$style['c-fullAddressSuggestion']">
                     <p :class="$style['c-fullAddressSuggestion-streetLevelMatch']">
                         {{ getMatchedPostcodes(item) }} {{ getDescription(item) }}
@@ -38,7 +40,8 @@
         <continue-with-suggestion
             v-if="selectedStreetLevelAddressId"
             :copy="copy.fullAddressSearchSuggestions"
-            :selected="hasSelectedContinueWithSuggestion" />
+            :selected="hasSelectedContinueWithSuggestion"
+            :config="config" />
     </div>
 </template>
 
@@ -46,12 +49,17 @@
 import { mapState, mapActions } from 'vuex';
 import { MapPinIcon } from '@justeat/f-vue-icons';
 import ContinueWithSuggestion from './FormFullAddressContinueWithSuggestion.vue';
+import fullAddressSearchMixin from '../../mixin/fullAddressSearch.mixin';
 
 export default {
     components: {
         ContinueWithSuggestion,
         MapPinIcon
     },
+
+    mixins: [
+        fullAddressSearchMixin
+    ],
 
     props: {
         params: {
@@ -70,6 +78,11 @@ export default {
         copy: {
             type: Object,
             default:  () => ({})
+        },
+
+        config: {
+            type: Object,
+            default:  () => ({})
         }
     },
 
@@ -85,7 +98,8 @@ export default {
             'inputTimeoutValue',
             'fullAddressDetails',
             'suggestions',
-            'selectedStreetLevelAddressId'
+            'selectedStreetLevelAddressId',
+            'shouldAutoNavigateToSerp'
         ]),
 
         /**
@@ -203,6 +217,17 @@ export default {
             if (isAddressType) {
                 await this.getFinalAddressSelectionDetails(selectedAddress.id);
                 this.resetSearch();
+
+                /**
+                 * Auto navigate to SERP on address selection.
+                 * Make sure there's no `onSubmit` handler passed to avoid navigation
+                 * in places like Menu.
+                 *
+                 * */
+
+                if (this.shouldAutoNavigateToSerp && !this.config.onSubmit) {
+                    this.navigateToSerpOnAddressSelection();
+                }
             } else {
                 this.getMatchedAreaAddressResults({
                     address: this.address,

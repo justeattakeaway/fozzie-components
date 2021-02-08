@@ -4,6 +4,33 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.51.0
+-------------------------------
+*February 5, 2021*
+
+### Added
+- Axios mock to Storybook for checkout PATCH requests.
+- PATCH response handling, by adding `issues` and `isFulfillable` to state.
+
+
+v0.50.0
+-------------------------------
+*February 5, 2021*
+
+### Added
+- `CheckoutSetupGuestSuccess`, `CheckoutSetupGuestFailure`, `CheckoutValidationError` events.
+- Tests to cover changes.
+
+
+v0.49.0
+-------------------------------
+*February 4, 2021*
+
+### Added
+- `Error.vue` component to display a user-friendly error page when we cannot load the necessary information to render the page.
+- Test to confirm guest login/sign up link navigates to correct url when clicked
+
+
 v0.48.0
 -------------------------------
 *February 4, 2021*
