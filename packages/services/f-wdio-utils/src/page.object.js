@@ -1,4 +1,8 @@
 class Page {
+
+    constructor(){
+      this.page = 'componentURLS';
+    }
   
     openComponent(componentType, path) {
         let formattedUrl = ''
@@ -10,9 +14,9 @@ class Page {
           case 'molecule':
             formattedUrl = `/iframe.html?id=components-molecules--${path}`
             break;
-          case 'molecule-folder':
-            formattedUrl = `/iframe.html?id=components-molecules-${path}`
-            break;
+            case 'molecule-folder':
+              formattedUrl = `/iframe.html?id=components-molecules-${path}`
+              break;
           case 'organism':
             formattedUrl = `/iframe.html?id=components-organisms--${path}`
             break;
