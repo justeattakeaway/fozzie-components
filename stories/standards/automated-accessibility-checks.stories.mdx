@@ -1,0 +1,19 @@
+<Meta title="Documentation/Standards/Accessibility/Automated Checks"/>
+
+# Automated Accessibility Checks
+
+To find and fix problems earlier we added automated accessibility checks to our development process. At the moment we have axe core test as part of out CI build and `eslint-plugin-vuejs-accessibility` for linter.
+
+## Axe Core tests
+These checks are not blocking the build but fire as warnings. They can be found under `test/accessibility/axe-accessibility.spec.js` for every component.
+
+In order to see if there's any a11y issues, you can either:
+
+- Start storybook locally (`yarn build:storybook` > `yarn storybook:serve-static`)
+- run the a11y test (`yarn test-a11y:chrome`)
+
+or on CircleCI, look at your build and see if there's any .CSV files on the artefact tab, like [here](https://app.circleci.com/pipelines/github/justeat/fozzie-components/4547/workflows/7df6a3be-0284-4838-a21f-7807441907c3/jobs/5998/artifacts).
+
+## eslint-plugin-vuejs-accessibility
+
+This is accessibility checks in linter. These checks are not blocking the build but fire as warnings. You will see them in console when running `yarn build` of the component, you are working on.
