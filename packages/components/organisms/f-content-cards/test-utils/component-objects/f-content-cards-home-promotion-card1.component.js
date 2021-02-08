@@ -18,53 +18,53 @@ class HomePromotionCard1 extends Page {
     get image () { return $(IMAGE) }
     get subtitle () { return $(SUBTITLE) }
 
-    open() {
+    open () {
         super.openComponent('molecule', 'f-content-cards--home-promotion-card-1-component');
-    };
+    }
 
-    waitForComponent(){
+    waitForComponent () {
         super.waitForComponent(this.component);
-    };
+    }
 
-    isComponentDisplayed(){
+    isComponentDisplayed () {
         return this.component.isDisplayed();
-    };
+    }
 
-    isInnerContainerDisplayed(){
+    isInnerContainerDisplayed () {
         return this.innerContainer.isDisplayed();
-    };
+    }
 
-    isHeaderDisplayed(){
+    isHeaderDisplayed () {
         return this.header.isDisplayed();
-    };
+    }
 
-    isImageDisplayed(){
+    isImageDisplayed () {
         return this.image.isDisplayed();
-    };
+    }
 
-    isSubtitleDisplayed(){
+    isSubtitleDisplayed () {
         return this.subtitle.isDisplayed();
-    };
+    }
 
-    isInnerCardDisplayed(){
+    isInnerCardDisplayed () {
         return card2.isComponentDisplayed();
-    };
+    }
 
-    isInnerCardCallToActionDisplayed(){
+    isInnerCardCallToActionDisplayed () {
         return card2.isCallToActionDisplayed();
-    }; 
+    }
 
-    isInnerCardTextDisplayed(){
+    isInnerCardTextDisplayed () {
         return card2.isTextDisplayed();
-    }; 
+    }
 
-    isInnerCardTitleDisplayed(){
+    isInnerCardTitleDisplayed () {
         return card2.isTitleDisplayed();
-    }; 
+    }
 
-    isInnerCardBackgroundImageDisplayed(){
+    isInnerCardBackgroundImageDisplayed () {
         return card2.isBackgroundImageDisplayed();
-    }; 
-};
+    }
+}
 
 module.exports = HomePromotionCard1;
