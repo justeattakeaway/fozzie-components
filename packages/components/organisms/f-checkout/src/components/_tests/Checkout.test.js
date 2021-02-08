@@ -59,13 +59,15 @@ describe('Checkout', () => {
     const loginUrl = 'http://localhost/login';
     const createGuestUrl = 'http://localhost/createguestuser';
     const getBasketUrl = 'http://localhost/getbasket';
+    const getAddressUrl = 'http://localhost/getaddress';
     const propsData = {
         updateCheckoutUrl,
         getCheckoutUrl,
         loginUrl,
         checkoutAvailableFulfilmentUrl,
         createGuestUrl,
-        getBasketUrl
+        getBasketUrl,
+        getAddressUrl
     };
 
     it('should be defined', () => {
