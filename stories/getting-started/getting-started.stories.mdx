@@ -1,10 +1,12 @@
 <Meta title="Documentation/Getting Started/Intro"/>
 
-# Fozzie-components mono-repo
+# UI Component Mono-repo
 
 ## Introduction
 
-Mono-repo is a single repository where all components reside. Using multi-package repository reduces the time and space requirements for numerous copies of packages in development and build environments - normally a downside of dividing a project into many separate NPM packages. 
+A mono-repo is a single repository containing multiple packages – in our case UI components and services. 
+
+Using multi-package repository reduces the time and space requirements for numerous copies of packages in development and build environments - normally a downside of dividing a project into many separate NPM packages. Updating common configuration across components is also much simpler as these dependencies can be shared and updated from the root of the mono-repo; for example linting or test dependencies.
 
 Each individual component can be found in the [`components`](https://github.com/justeat/fozzie-components/tree/master/packages/components) directory, and are all controlled from a top level `packages.json`.
 
@@ -59,7 +61,7 @@ The general naming convention for a Fozzie package is to use `f-{your-package-na
 
 ### Optional Badges
 
-* To report the build status you can [add a Travis CI badge](https://travis-ci.org/justeat/)
+* To report the build status you can [add a CircleCI badge](https://circleci.com/gh/justeat/workflows/fozzie-components)
 * If there are JavaScript unit tests in the package you can [add a coveralls badge](https://coveralls.io/github/justeat/)
 * Check for known vulnerabilities in your package with a [Snyk.io badge](https://snyk.io/test/)
 
