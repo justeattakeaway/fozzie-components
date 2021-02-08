@@ -385,6 +385,46 @@ describe('Checkout', () => {
                 expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
             });
 
+            describe('if shouldLoadAddress returns `false`', () => {
+                it('should not call `loadAddress`', async () => {
+                    // Arrange & Act
+                    const loadAddressSpy = jest.spyOn(VueCheckout.methods, 'loadAddress');
+                    const shouldLoadAddressSpy = jest.spyOn(VueCheckout.methods, 'shouldLoadAddress');
+                    shouldLoadAddressSpy.mockReturnValue(false);
+
+                    shallowMount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                    await flushPromises();
+
+                    // Assert
+                    expect(loadAddressSpy).not.toHaveBeenCalled();
+                });
+            });
+
+            describe('if shouldLoadAddress returns `true`', () => {
+                it('should call `loadAddress`', async () => {
+                    // Arrange & Act
+                    const loadAddressSpy = jest.spyOn(VueCheckout.methods, 'loadAddress');
+                    const shouldLoadAddressSpy = jest.spyOn(VueCheckout.methods, 'shouldLoadAddress');
+                    shouldLoadAddressSpy.mockReturnValue(true);
+
+                    shallowMount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                    await flushPromises();
+
+                    // Assert
+                    expect(loadAddressSpy).toHaveBeenCalled();
+                });
+            });
+
             describe('if isLoggedIn set to `false`', () => {
                 it('should call `loadBasket`', async () => {
                     // Arrange & Act
