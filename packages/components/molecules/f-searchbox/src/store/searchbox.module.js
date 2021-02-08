@@ -453,15 +453,15 @@ export default {
                     line5,
                     postcode
                 }) => ({
-                    city,
-                    field1,
-                    field2,
-                    line1,
-                    line2,
-                    line3,
-                    line4,
-                    line5,
-                    postcode,
+                    City: city,
+                    Field1: field1,
+                    Field2: field2,
+                    Line1: line1,
+                    Line2: line2,
+                    Line3: line3,
+                    Line4: line4,
+                    Line5: line5,
+                    PostalCode: postcode,
                     searchBoxAddress: address
                 }));
             }
