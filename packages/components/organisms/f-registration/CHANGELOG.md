@@ -9,6 +9,11 @@ Latest (add to next release)
 
 *February 4, 2021*
 
+### Added
+- `f-wdio-utils` npm package to `f-registration-component`
+
+*February 4, 2021*
+
 ### Changed
 - component feature tests
 - component object into a class that imports `page.object`
