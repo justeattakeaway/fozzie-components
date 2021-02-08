@@ -187,6 +187,16 @@ export default {
         loginUrl: {
             type: String,
             required: true
+        },
+
+        getAddressUrl: {
+            type: String,
+            required: true
+        },
+
+        getAddressTimeout: {
+            type: Number,
+            default: 1000
         }
     },
 
@@ -266,6 +276,7 @@ export default {
         ...mapActions('checkout', [
             'createGuestUser',
             'getAvailableFulfilment',
+            'getAddress',
             'getBasket',
             'getCheckout',
             'updateCheckout',
@@ -290,8 +301,21 @@ export default {
                 : [this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
+
+            if (this.shouldLoadAddress()) {
+                await this.loadAddress();
+            }
         },
 
+        /**
+         * Check if address should be loaded from a getAddress API endpoint
+         *
+         */
+        shouldLoadAddress () {
+            return this.isLoggedIn &&
+            this.isCheckoutMethodDelivery &&
+            (!this.address || !this.address.line1);
+        },
         /**
          * Submit the checkout details while emitting events to communicate its success or failure.
          *
@@ -407,6 +431,26 @@ export default {
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess);
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetFailure, thrownErrors);
+                this.hasCheckoutLoadedSuccessfully = false;
+            }
+        },
+
+        /**
+         * Load the customer address while emitting events to communicate its success or failure.
+         *
+         */
+        async loadAddress () {
+            debugger;
+            try {
+                await this.getAddress({
+                    url: this.getAddressUrl,
+                    language: this.$i18n.locale,
+                    timeout: this.getAddressTimeout
+                });
+
+                this.$emit(EventNames.CheckoutAddressGetSuccess);
+            } catch (thrownErrors) {
+                this.$emit(EventNames.CheckoutAddressGetFailure, thrownErrors);
                 this.hasCheckoutLoadedSuccessfully = false;
             }
         },
