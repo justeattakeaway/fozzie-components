@@ -2,10 +2,9 @@
     <div
         v-if="userMessageEnabled"
         :data-theme="theme"
-        :class="[
-            $style['c-userMessage'],
-            (isFlush ? $style['c-userMessage--flush'] : '')
-        ]"
+        :class="[$style['c-userMessage'], {
+            [$style['c-userMessage--flush']]: isFlush
+        }]"
         class="l-container">
         <div class="l-row">
             <div
