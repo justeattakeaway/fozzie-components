@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.8.0
+------------------------------
+*February 8, 2021*
+
+### Added
+- Added `isIcon` prop to the f-button
+- Added styles to display the icons properly if button is ddisplayed as an icon
+
 
 v0.7.0
 ------------------------------
