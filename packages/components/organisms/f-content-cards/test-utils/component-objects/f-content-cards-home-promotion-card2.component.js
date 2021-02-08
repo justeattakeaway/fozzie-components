@@ -20,27 +20,27 @@ class HomePromotionCard2 extends Page {
     };
 
     waitForComponent(){
-        super.waitForComponent(this.card.component);
+        super.waitForComponent(this.component);
     };
 
-    isCardDisplayed(){
+    isComponentDisplayed(){
         return this.component.isDisplayed();
     };
 
-    isCardCallToActionDisplayed(){
+    isCallToActionDisplayed(){
         return this.callToAction.isDisplayed();
     }; 
 
-    isCardTextDisplayed(){
-        return this.card.text.isDisplayed();
+    isTextDisplayed(){
+        return this.text.isDisplayed();
     }; 
 
-    isCardTitleDisplayed(){
-        return this.card.title.isDisplayed();
+    isTitleDisplayed(){
+        return this.title.isDisplayed();
     }; 
 
-    isCardBackgroundImageDisplayed(){
-        return this.card.backgroundImage.isDisplayed();
+    isBackgroundImageDisplayed(){
+        return this.backgroundImage.isDisplayed();
     }; 
 };
 

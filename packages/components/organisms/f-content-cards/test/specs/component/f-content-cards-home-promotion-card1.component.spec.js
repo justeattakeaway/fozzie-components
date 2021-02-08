@@ -7,25 +7,25 @@ describe('home promotion card 1 component tests', () => {
         card.waitForComponent();
     });
 
-    it('should display cards 1 and 2', () => {
+    it('should display card', () => {
         // Assert
-        expect(card.isCard1Displayed()).toBe(true);
-        expect(card.isCard2Displayed()).toBe(true);
+        expect(card.isComponentDisplayed()).toBe(true);
     });
 
-    it('should display the elements of card 1', () => {
+    it('should display the elements of card', () => {
         // Assert
-        expect(card.isCard1InnerContainerDisplayed()).toBe(true);
-        expect(card.isCard1HeaderDisplayed()).toBe(true);
-        expect(card.isCard1ImageDisplayed()).toBe(true); 
-        expect(card.isCard1SubtitleDisplayed()).toBe(true);
+        expect(card.isInnerContainerDisplayed()).toBe(true);
+        expect(card.isHeaderDisplayed()).toBe(true);
+        expect(card.isImageDisplayed()).toBe(true); 
+        expect(card.isSubtitleDisplayed()).toBe(true);
     });
 
-    it.only('should display the elements of card 2', () => {
+    it.only('should display the elements of the inner card', () => {
         // Assert
+        expect(card.isInnerCardDisplayed()).toBe(true);
         expect(card.isInnerCardCallToActionDisplayed()).toBe(true);
-        // expect(card.isCard2TextDisplayed()).toBe(true);
-        // expect(card.isCard2TitleDisplayed()).toBe(true); 
-        // expect(card.isCard2BackgroundImageDisplayed()).toBe(true);
+        expect(card.isInnerCardTextDisplayed()).toBe(true);
+        expect(card.isInnerCardTitleDisplayed()).toBe(true); 
+        expect(card.isInnerCardBackgroundImageDisplayed()).toBe(true);
     });
 });

@@ -7,12 +7,7 @@ const {
     INNER_CONTAINER,
     HEADER, 
     IMAGE, 
-    SUBTITLE, 
-    PROMOTION_CARD_2_COMPONENT,
-    CTA, 
-    TEXT, 
-    TITLE,
-    BACKGROUND_IMAGE
+    SUBTITLE
 } = require('./f-content-cards-home-promotion.selectors');
 
 class HomePromotionCard1 extends Page {
@@ -28,47 +23,47 @@ class HomePromotionCard1 extends Page {
     };
 
     waitForComponent(){
-        super.waitForComponent(this.card1.component);
+        super.waitForComponent(this.component);
     };
 
-    isCardDisplayed(){
-        return this.card1.component.isDisplayed();
+    isComponentDisplayed(){
+        return this.component.isDisplayed();
     };
 
-    isCardInnerContainerDisplayed(){
-        return this.card1.innerContainer.isDisplayed();
+    isInnerContainerDisplayed(){
+        return this.innerContainer.isDisplayed();
     };
 
-    isCardHeaderDisplayed(){
-        return this.card1.header.isDisplayed();
+    isHeaderDisplayed(){
+        return this.header.isDisplayed();
     };
 
-    isCardImageDisplayed(){
-        return this.card1.image.isDisplayed();
+    isImageDisplayed(){
+        return this.image.isDisplayed();
     };
 
-    isCardSubtitleDisplayed(){
-        return this.card1.subtitle.isDisplayed();
+    isSubtitleDisplayed(){
+        return this.subtitle.isDisplayed();
     };
 
     isInnerCardDisplayed(){
-        return homePromotionCard2.isCardDisplayed();
+        return homePromotionCard2.isComponentDisplayed();
     };
 
     isInnerCardCallToActionDisplayed(){
-        return homePromotionCard2.isCardCallToActionDisplayed();
+        return homePromotionCard2.isCallToActionDisplayed();
     }; 
 
     isInnerCardTextDisplayed(){
-        return homePromotionCard2.isCardTextDisplayed();
+        return homePromotionCard2.isTextDisplayed();
     }; 
 
     isInnerCardTitleDisplayed(){
-        return homePromotionCard2.isCardTitleDisplayed();
+        return homePromotionCard2.isTitleDisplayed();
     }; 
 
     isInnerCardBackgroundImageDisplayed(){
-        return homePromotionCard2.isCardBackgroundImageDisplayed();
+        return homePromotionCard2.isBackgroundImageDisplayed();
     }; 
 };
 
