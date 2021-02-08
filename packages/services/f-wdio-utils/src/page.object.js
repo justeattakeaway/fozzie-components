@@ -1,7 +1,7 @@
 class Page {
-    // constructor () {
-    //     this.title = 'Component URLS';
-    // }
+    constructor () {
+        this.title = 'Component URLS';
+    }
 
     openComponent(componentType, path) {
         let formattedUrl = ''

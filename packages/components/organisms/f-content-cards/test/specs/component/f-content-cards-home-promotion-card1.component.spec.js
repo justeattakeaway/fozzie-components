@@ -20,7 +20,7 @@ describe('home promotion card 1 component tests', () => {
         expect(card.isSubtitleDisplayed()).toBe(true);
     });
 
-    it.only('should display the elements of the inner card', () => {
+    it('should display the elements of the inner card', () => {
         // Assert
         expect(card.isInnerCardDisplayed()).toBe(true);
         expect(card.isInnerCardCallToActionDisplayed()).toBe(true);

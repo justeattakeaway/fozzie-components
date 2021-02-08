@@ -1,6 +1,6 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object'); 
 const HomePromotionCard2 = require('./f-content-cards-home-promotion-card2.component');
-const homePromotionCard2 = new HomePromotionCard2();
+const card2 = new HomePromotionCard2();
 
 const { 
     PROMOTION_CARD_1_COMPONENT,
@@ -47,23 +47,23 @@ class HomePromotionCard1 extends Page {
     };
 
     isInnerCardDisplayed(){
-        return homePromotionCard2.isComponentDisplayed();
+        return card2.isComponentDisplayed();
     };
 
     isInnerCardCallToActionDisplayed(){
-        return homePromotionCard2.isCallToActionDisplayed();
+        return card2.isCallToActionDisplayed();
     }; 
 
     isInnerCardTextDisplayed(){
-        return homePromotionCard2.isTextDisplayed();
+        return card2.isTextDisplayed();
     }; 
 
     isInnerCardTitleDisplayed(){
-        return homePromotionCard2.isTitleDisplayed();
+        return card2.isTitleDisplayed();
     }; 
 
     isInnerCardBackgroundImageDisplayed(){
-        return homePromotionCard2.isBackgroundImageDisplayed();
+        return card2.isBackgroundImageDisplayed();
     }; 
 };
 
