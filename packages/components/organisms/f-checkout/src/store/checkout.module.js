@@ -190,7 +190,6 @@ export default {
             timeout
         }) => {
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
-            debugger;
             const config = {
                 headers: {
                     'Content-Type': 'application/json',

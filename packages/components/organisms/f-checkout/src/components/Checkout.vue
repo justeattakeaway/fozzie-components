@@ -440,7 +440,6 @@ export default {
          *
          */
         async loadAddress () {
-            debugger;
             try {
                 await this.getAddress({
                     url: this.getAddressUrl,

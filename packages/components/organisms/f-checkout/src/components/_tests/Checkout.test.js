@@ -390,7 +390,7 @@ describe('Checkout', () => {
                     // Arrange & Act
                     const loadAddressSpy = jest.spyOn(VueCheckout.methods, 'loadAddress');
                     const shouldLoadAddressSpy = jest.spyOn(VueCheckout.methods, 'shouldLoadAddress');
-                    shouldLoadAddressSpy.mockReturnValue(false);
+                    shouldLoadAddressSpy.mockReturnValueOnce(false);
 
                     shallowMount(VueCheckout, {
                         store: createStore(),
@@ -410,7 +410,7 @@ describe('Checkout', () => {
                     // Arrange & Act
                     const loadAddressSpy = jest.spyOn(VueCheckout.methods, 'loadAddress');
                     const shouldLoadAddressSpy = jest.spyOn(VueCheckout.methods, 'shouldLoadAddress');
-                    shouldLoadAddressSpy.mockReturnValue(true);
+                    shouldLoadAddressSpy.mockReturnValueOnce(true);
 
                     shallowMount(VueCheckout, {
                         store: createStore(),
@@ -1227,6 +1227,81 @@ describe('Checkout', () => {
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure)).toBeUndefined();
                 });
+            });
+        });
+
+        describe('shouldLoadAddress ::', () => {
+            it('should return `true` for delivery order without address when user is not logged in', () => {
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultState,
+                        isLoggedIn: true,
+                        serviceType: CHECKOUT_METHOD_DELIVERY,
+                        address: {}
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadAddress();
+
+                // Assert
+                expect(result).toBe(true);
+            });
+
+            it('should return `false` if `isLoggedIn` is `false`', () => {
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultState,
+                        isLoggedIn: false,
+                        serviceType: CHECKOUT_METHOD_DELIVERY,
+                        address: {}
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadAddress();
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should return `false` if `serviceType` is `collection`', async () => {
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+                const result = await wrapper.vm.shouldLoadAddress();
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should return `false` if address is set', () => {
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultState,
+                        isLoggedIn: true,
+                        serviceType: CHECKOUT_METHOD_DELIVERY,
+                        address: { line1: 'Fleet Place House', postcode: 'EC4M 7RF', city: 'London' }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadAddress();
+
+                // Assert
+                expect(result).toBe(false);
             });
         });
 
