@@ -9,7 +9,7 @@ v0.8.0
 
 ### Added
 - Added `isIcon` prop to the f-button
-- Added styles to display the icons properly if button is ddisplayed as an icon
+- Added styles to display the icons properly if button is displayed as an icon
 
 
 v0.7.0
