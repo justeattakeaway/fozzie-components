@@ -3,7 +3,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import VoucherCard from '../src/components/cardTemplates/voucherCard/VoucherCard.vue';
 
 export default {
-    title: 'Components/Molecules/f-content-cards',
+    title: 'Components/Molecules',
     decorators: [withKnobs, withA11y]
 };
 

@@ -1,7 +1,7 @@
 import FirstTimeCustomerCard from '../src/components/cardTemplates/FirstTimeCustomerCard.vue';
 
 export default {
-    title: 'Components/Molecules/f-content-cards',
+    title: 'Components/Molecules',
     argTypes: {
         cardTitle: { control: { type: 'text' } },
         subtitle: { control: { type: 'text' } },

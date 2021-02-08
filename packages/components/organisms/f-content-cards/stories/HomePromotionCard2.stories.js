@@ -3,7 +3,7 @@ import image from './images/burger-placeholder.jpg';
 
 
 export default {
-    title: 'Components/Molecules/f-content-cards',
+    title: 'Components/Molecules',
     argTypes: {
         title: {
             control: { type: 'text' },

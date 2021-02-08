@@ -5,7 +5,7 @@ import jeBackground from './images/je-marketing.jpg';
 import jeIcon from './images/je-icon.png';
 
 export default {
-    title: 'Components/Molecules/f-content-cards',
+    title: 'Components/Molecules',
     decorators: [withKnobs, withA11y]
 };
 

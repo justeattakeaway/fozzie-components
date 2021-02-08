@@ -45,7 +45,7 @@ const template = `<content-cards
             </content-cards>`;
 
 export default {
-    title: 'Components/Organisms/f-content-cards',
+    title: 'Components/Organisms',
     argTypes: {
         apiKey: { control: { type: 'text' } },
         userId: { control: { type: 'text' } },

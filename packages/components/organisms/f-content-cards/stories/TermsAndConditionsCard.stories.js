@@ -3,7 +3,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import TermsAndConditionsCard from '../src/components/cardTemplates/TermsAndConditionsCard.vue';
 
 export default {
-    title: 'Components/Molecules/f-content-cards',
+    title: 'Components/Molecules',
     decorators: [withKnobs, withA11y]
 };
 
