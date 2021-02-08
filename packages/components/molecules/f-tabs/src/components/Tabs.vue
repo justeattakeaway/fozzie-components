@@ -30,32 +30,39 @@ import { DIRECTION } from '../constants';
 
 export default {
     name: 'Tabs',
+
     props: {
         animate: {
             type: Boolean,
             default: false
         }
     },
+
     data: () => ({
         direction: null,
         activeTab: '',
         tabs: []
     }),
+
     provide () {
         const component = this;
         const tabsComponent = {};
+
         Object.defineProperty(tabsComponent, 'activeTab', {
             enumerable: true,
             get: () => this.activeTab
         });
+
         Object.defineProperty(tabsComponent, 'animationDirection', {
             enumerable: true,
             get: () => this.direction
         });
+
         Object.defineProperty(tabsComponent, 'animate', {
             enumerable: true,
             get: () => this.animate
         });
+
         return {
             register (tab) {
                 component.addTab(tab);
@@ -64,6 +71,7 @@ export default {
         };
     },
     methods: {
+
         /**
          * This function is used to select the tab index and set the active tab while applying the correct animation
          * uses the tab name to select index
@@ -79,6 +87,7 @@ export default {
             }
             this.activeTab = name;
         },
+
         /**
          * This function adds a tab that is calling the register tab callback
          * @param tab
