@@ -3,7 +3,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import SkeletonLoader from '../src/components/cardTemplates/SkeletonLoader.vue';
 
 export default {
-    title: 'Components/Molecules',
+    title: 'Components/Molecules/f-content-cards',
     decorators: [withKnobs, withA11y]
 };
 

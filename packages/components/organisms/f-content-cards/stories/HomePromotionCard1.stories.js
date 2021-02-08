@@ -4,7 +4,7 @@ import image from './images/burger-placeholder.jpg';
 
 
 export default {
-    title: 'Components/Organisms',
+    title: 'Components/Molecules/f-content-cards',
     argTypes: {
         title: {
             control: { type: 'text' },

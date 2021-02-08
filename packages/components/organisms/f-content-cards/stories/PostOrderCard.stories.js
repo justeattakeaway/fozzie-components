@@ -1,7 +1,7 @@
 import PostOrderCard from '../src/components/cardTemplates/PostOrderCard.vue';
 
 export default {
-    title: 'Components/Molecules',
+    title: 'Components/Molecules/f-content-cards',
     argTypes: {
         headline: { control: { type: 'text' } },
         cardTitle: { control: { type: 'text' } },
