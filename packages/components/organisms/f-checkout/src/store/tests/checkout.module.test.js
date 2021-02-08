@@ -164,64 +164,28 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe(`${UPDATE_FULFILMENT_ADDRESS} ::`, () => {
-            it('should update state with received value', () => {
-                // Arrange & Act
-                mutations[UPDATE_FULFILMENT_ADDRESS](state, address);
-
-                // Assert
-                expect(state.address).toEqual(address);
-            });
-        });
-
         describe(`${UPDATE_CUSTOMER_DETAILS} ::`, () => {
             it('should update state with received value', () => {
                 // Arrange & Act
-                mutations[UPDATE_CUSTOMER_DETAILS](state, mobileNumber);
+                mutations[UPDATE_CUSTOMER_DETAILS](state, { mobileNumber });
 
                 // Assert
                 expect(state.customer.mobileNumber).toEqual(mobileNumber);
             });
         });
 
-        describe(`${UPDATE_FULFILMENT_TIME} ::`, () => {
-            it('should update state with received value', () => {
-                // Arrange & Act
-                mutations[UPDATE_FULFILMENT_TIME](state, time);
+        it.each([
+            [UPDATE_FULFILMENT_ADDRESS, 'address', address],
+            [UPDATE_FULFILMENT_TIME, 'time', time],
+            [UPDATE_IS_FULFILLABLE, 'isFulfillable', isFulfillable],
+            [UPDATE_ISSUES, 'issues', issues],
+            [UPDATE_USER_NOTE, 'userNote', userNote]
+        ])('%s :: should update state with received value', (mutationName, propertyName, propertyValue) => {
+            // Arrange & Act
+            mutations[mutationName](state, propertyValue);
 
-                // Assert
-                expect(state.time).toEqual(time);
-            });
-        });
-
-        describe(`${UPDATE_IS_FULFILLABLE} ::`, () => {
-            it('should update state with received value', () => {
-                // Arrange & Act
-                mutations[UPDATE_IS_FULFILLABLE](state, isFulfillable);
-
-                // Assert
-                expect(state.isFulfillable).toEqual(isFulfillable);
-            });
-        });
-
-        describe(`${UPDATE_ISSUES} ::`, () => {
-            it('should update state with received value', () => {
-                // Arrange & Act
-                mutations[UPDATE_ISSUES](state, issues);
-
-                // Assert
-                expect(state.issues).toEqual(issues);
-            });
-        });
-
-        describe(`${UPDATE_USER_NOTE} ::`, () => {
-            it('should update state with received value', () => {
-                // Arrange & Act
-                mutations[UPDATE_USER_NOTE](state, userNote);
-
-                // Assert
-                expect(state.userNote).toEqual(userNote);
-            });
+            // Assert
+            expect(state[propertyName]).toEqual(propertyValue);
         });
     });
 
@@ -355,16 +319,6 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe('setAuthToken ::', () => {
-            it(`should call ${UPDATE_AUTH} mutation.`, async () => {
-                // Act
-                setAuthToken({ commit }, authToken);
-
-                // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_AUTH, authToken);
-            });
-        });
-
         describe('getAvailableFulfilment ::', () => {
             let config;
 
@@ -389,44 +343,19 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe('updateAddressDetails ::', () => {
-            it(`should call ${UPDATE_FULFILMENT_ADDRESS} mutation with passed value.`, async () => {
-                // Act
-                updateAddressDetails({ commit }, address);
 
-                // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, address);
-            });
-        });
+        it.each([
+            [setAuthToken, UPDATE_AUTH, authToken],
+            [updateAddressDetails, UPDATE_FULFILMENT_ADDRESS, address],
+            [updateCustomerDetails, UPDATE_CUSTOMER_DETAILS, customerDetails],
+            [updateFulfilmentTime, UPDATE_FULFILMENT_TIME, time],
+            [updateUserNote, UPDATE_USER_NOTE, userNote]
+        ])('%s should call %s mutation with passed value', (action, mutation, value) => {
+            // Act
+            action({ commit }, value);
 
-        describe('updateCustomerDetails ::', () => {
-            it(`should call ${UPDATE_CUSTOMER_DETAILS} mutation with passed value.`, async () => {
-                // Act
-                updateCustomerDetails({ commit }, customerDetails);
-
-                // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_CUSTOMER_DETAILS, customerDetails);
-            });
-        });
-
-        describe('updateFulfilmentTime ::', () => {
-            it(`should call ${UPDATE_FULFILMENT_TIME} mutation with passed value.`, async () => {
-                // Act
-                updateFulfilmentTime({ commit }, time);
-
-                // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_TIME, time);
-            });
-        });
-
-        describe('updateUserNote ::', () => {
-            it(`should call ${UPDATE_USER_NOTE}`, () => {
-                // Act
-                updateUserNote({ commit }, userNote);
-
-                // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_USER_NOTE, userNote);
-            });
+            // Assert
+            expect(commit).toHaveBeenCalledWith(mutation, value);
         });
     });
 });
