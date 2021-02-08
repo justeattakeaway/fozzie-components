@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import Tabs from '../Tabs.vue';
 
-const registeredTabs = [
+const registeredTabsMock = [
     {
         name: '__TEST_TAB_1__',
         title: '__TEST_TAB_1_TITLE__',
@@ -31,8 +31,8 @@ describe('Tabs', () => {
 
         it('should register a tab when addTab method is called', async () => {
             // Act
-            await wrapper.vm.addTab(registeredTabs[0]);
-            const tabButton = wrapper.find(`[data-test-id="tab-${registeredTabs[0].name}"]`);
+            await wrapper.vm.addTab(registeredTabsMock[0]);
+            const tabButton = wrapper.find(`[data-test-id="tab-${registeredTabsMock[0].name}"]`);
 
             // Assert
             expect(tabButton.exists()).toBe(true);
@@ -41,7 +41,7 @@ describe('Tabs', () => {
         it('should display a button for each registered tab', async () => {
             // Act
             const tabs = [];
-            registeredTabs.forEach(tab => {
+            registeredTabsMock.forEach(tab => {
                 wrapper.vm.addTab(tab);
                 tabs.push(wrapper.find(`[data-test-id="tab-${tab.name}"]`));
             });
@@ -53,11 +53,11 @@ describe('Tabs', () => {
 
         it('should display the name of the registered tab inside the button', async () => {
             // Act
-            await wrapper.vm.addTab(registeredTabs[0]);
-            const tabButton = wrapper.find(`[data-test-id="tab-${registeredTabs[0].name}"]`);
+            await wrapper.vm.addTab(registeredTabsMock[0]);
+            const tabButton = wrapper.find(`[data-test-id="tab-${registeredTabsMock[0].name}"]`);
 
             // Assert
-            expect(tabButton.text()).toBe(registeredTabs[0].title);
+            expect(tabButton.text()).toBe(registeredTabsMock[0].title);
         });
     });
 
@@ -77,13 +77,13 @@ describe('Tabs', () => {
 
         it('should apply a active class to the selected tab when selectTabIndex method is called', async () => {
             // Act
-            registeredTabs.forEach(tab => {
+            registeredTabsMock.forEach(tab => {
                 wrapper.vm.addTab(tab);
             });
 
             await wrapper.vm.$nextTick();
 
-            const tabButton = wrapper.find(`[data-test-id="tab-${registeredTabs[0].name}"]`);
+            const tabButton = wrapper.find(`[data-test-id="tab-${registeredTabsMock[0].name}"]`);
             await tabButton.trigger('click');
 
             // Assert
@@ -92,13 +92,13 @@ describe('Tabs', () => {
 
         it('should set the direction to RIGHT when new index > old index', async () => {
             // Act
-            registeredTabs.forEach(tab => {
+            registeredTabsMock.forEach(tab => {
                 wrapper.vm.addTab(tab);
             });
 
             await wrapper.vm.$nextTick();
 
-            await wrapper.find(`[data-test-id="tab-${registeredTabs[1].name}"]`).trigger('click');
+            await wrapper.find(`[data-test-id="tab-${registeredTabsMock[1].name}"]`).trigger('click');
 
             // Assert
             expect(wrapper.vm.direction).toEqual('RIGHT');
@@ -106,14 +106,14 @@ describe('Tabs', () => {
 
         it('should set the direction to LEFT when new index <= old index', async () => {
             // Act
-            registeredTabs.forEach(tab => {
+            registeredTabsMock.forEach(tab => {
                 wrapper.vm.addTab(tab);
             });
 
             await wrapper.vm.$nextTick();
 
-            await wrapper.find(`[data-test-id="tab-${registeredTabs[1].name}"]`).trigger('click');
-            await wrapper.find(`[data-test-id="tab-${registeredTabs[0].name}"]`).trigger('click');
+            await wrapper.find(`[data-test-id="tab-${registeredTabsMock[1].name}"]`).trigger('click');
+            await wrapper.find(`[data-test-id="tab-${registeredTabsMock[0].name}"]`).trigger('click');
 
             // Assert
             expect(wrapper.vm.direction).toEqual('LEFT');
