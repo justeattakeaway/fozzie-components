@@ -9,7 +9,7 @@ To be added to the latest release
 *Fabruary 9, 2021*
 
 ### Added
-- All tenants to a tenant prop for storybook f-footer story
+- All tenants to a tenant prop for storybook f-header story
 
 
 v4.6.0
