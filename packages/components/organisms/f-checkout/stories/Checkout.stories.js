@@ -18,14 +18,13 @@ export default {
 
 Vue.use(Vuex);
 
-const checkoutId = 'checkoutId';
 const deliveryUrl = '/checkout-delivery.json';
 const collectionUrl = '/checkout-collection.json';
 const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
 const createGuestUrl = '/create-guest.json';
 const getBasketDeliveryUrl = '/get-basket-delivery.json';
 const getBasketCollectionUrl = '/get-basket-collection.json';
-const updateCheckout = '/update-checkout.json';
+const updateCheckoutUrl = '/update-checkout.json';
 
 CheckoutMock.setupCheckoutMethod(deliveryUrl);
 CheckoutMock.setupCheckoutMethod(collectionUrl);
@@ -33,7 +32,7 @@ CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentUrl);
 CheckoutMock.setupCheckoutMethod(createGuestUrl);
 CheckoutMock.setupCheckoutMethod(getBasketDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getBasketCollectionUrl);
-CheckoutMock.setupCheckoutMethod(updateCheckout);
+CheckoutMock.setupCheckoutMethod(updateCheckoutUrl);
 CheckoutMock.passThroughAny();
 
 export const CheckoutComponent = () => ({
@@ -42,8 +41,8 @@ export const CheckoutComponent = () => ({
         locale: {
             default: select('Locale', [ENGLISH_LOCALE])
         },
-        checkoutId: {
-            default: text('Checkout ID', checkoutId)
+        updateCheckoutUrl: {
+            default: select('Update Checkout Url', [updateCheckoutUrl], updateCheckoutUrl)
         },
         checkoutUrl: {
             default: select('Checkout Url', [deliveryUrl, collectionUrl, 'An invalid URL'], deliveryUrl)
