@@ -1,0 +1,19 @@
+<Meta title="Documentation/Getting Started/What not to do"/>
+
+# What not to do guide
+
+Here is a list of common mistakes we see in submitted PRs. Avoiding them will help us to review PRs quicker.
+
+* **Don’t add `^` to dependencies.**
+
+  As a standard we have strict versioning for all the project's dependencies.
+
+* **Don’t commit in yalc dependencies in package.json files.**
+
+  Yalc is a great tool for local testing but don't forget to switch back to published version of the dependencies when you finished testing.
+
+* **Don’t use internal projects references in your PRs:**
+
+  Fozzie-components is an open source repo and can't have internal projects references in it
+  * Don't link private github repos in PR’s or comments. 
+  * Don’t link to organisational tools (such as links to our private task management tickets). 

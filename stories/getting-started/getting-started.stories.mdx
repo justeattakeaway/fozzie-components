@@ -1,6 +1,14 @@
 <Meta title="Documentation/Getting Started/Intro"/>
 
-# Getting Started
+# UI Component Mono-repo
+
+## Introduction
+
+A mono-repo is a single repository containing multiple packages – in our case UI components and services. 
+
+Using multi-package repository reduces the time and space requirements for numerous copies of packages in development and build environments - normally a downside of dividing a project into many separate NPM packages. Updating common configuration across components is also much simpler as these dependencies can be shared and updated from the root of the mono-repo; for example linting or test dependencies.
+
+Each individual component can be found in the [`components`](https://github.com/justeat/fozzie-components/tree/master/packages/components) directory, and are all controlled from a top level `packages.json`.
 
 ## Folder Structure
 
@@ -40,3 +48,26 @@ Currently, we have the following tools:
 - [`f-vue-icons`](https://github.com/justeat/fozzie-components/tree/master/packages/tools/f-vue-icons) – Provides an interface for our Vue components to use icons defined in  the [`f-icons` package](https://github.com/justeat/f-icons).
 - [`generator-component`](https://github.com/justeat/fozzie-components/tree/master/packages/tools/generator-component) – A yeoman generator that should be used when creating new packages to provide a base folder structure to start from.
 - [`storybook`](https://github.com/justeat/fozzie-components/tree/master/packages/tools/storybook) – Our component library documentation tool that allows us to preview and test components in isolation before being integrated into JE web applications.
+
+## Naming your packages in the mono-repo
+
+The general naming convention for a Fozzie package is to use `f-{your-package-name}` e.g. [`f-footer`](https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-footer), [`f-header`](https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-header), [`f-checkout`](https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-checkout).
+
+## Badges for README.md
+
+### General Badges (should be added to all packages)
+
+* npm version badge from [badge.fury.io](https://badge.fury.io/)
+
+### Optional Badges
+
+* To report the build status you can [add a CircleCI badge](https://circleci.com/gh/justeat/workflows/fozzie-components)
+* If there are JavaScript unit tests in the package you can [add a coveralls badge](https://coveralls.io/github/justeat/)
+* Check for known vulnerabilities in your package with a [Snyk.io badge](https://snyk.io/test/)
+
+## Publishing to npm
+
+To publish a package to **npm**, please first ensure that you have registered an account.
+Internal contributors (Just Eat employees) can request to be added to the Just Eat npm org by asking in the #guild-ui Slack channel and providing your npm account details. External contributors should raise a pull request and the release will be handled for you once approved.
+
+Once you are happy that the package is ready to be published to the npm registry, ensure you are on the correct branch — typically the master branch with the latest changes pulled — then run `npm publish` on the command line.
