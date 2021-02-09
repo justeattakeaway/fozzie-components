@@ -10,6 +10,9 @@ v0.52.0
 ### Added
 - `updateCheckoutUrl` and `updateCheckoutTimeout` props.
 
+### Changed
+- Renamed `checkoutUrl` prop to `getCheckoutUrl`.
+
 ### Removed
 - `checkoutId` prop.
 

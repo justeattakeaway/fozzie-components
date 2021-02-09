@@ -73,7 +73,7 @@ The props that can be defined are as follows:
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
 | `updateCheckoutUrl` | `String` | - | URL for the API called to update the Checkout Data |
-| `checkoutUrl` | `String` | - | URL for the API called to load the Checkout Data.<br><br>The data returned from this API contains the serviceType, which determines if the Checkout component is created for Collection or Delivery when the user is authenticated. |
+| `getCheckoutUrl` | `String` | - | URL for the API called to load the Checkout Data.<br><br>The data returned from this API contains the serviceType, which determines if the Checkout component is created for Collection or Delivery when the user is authenticated. |
 | `checkoutAvailableFulfilmentUrl` | `String` | - | URL for the API called to load the Available Fulfilment data. |
 | `createGuestUrl` | `String` | - | URL for the API called to load the Create a Guest User. |
 | `getBasketUrl` | `String` | - | URL for the API called to get Basket Details.<br><br>The data returned from this API contains the serviceType, which determines if the Checkout component is created for Collection or Delivery when the user is not authenticated. |

@@ -127,7 +127,7 @@ export default {
     mixins: [validationMixin, VueGlobalisationMixin, checkoutValidationsMixin],
 
     props: {
-        checkoutUrl: {
+        getCheckoutUrl: {
             type: String,
             required: true
         },
@@ -362,7 +362,7 @@ export default {
         async loadCheckout () {
             try {
                 await this.getCheckout({
-                    url: this.checkoutUrl,
+                    url: this.getCheckoutUrl,
                     timeout: this.getCheckoutTimeout
                 });
 
