@@ -6,8 +6,8 @@ describe('f-user-message component tests', () => {
         userMessage.open();
         userMessage.waitForComponent();
     });
-    
-    it('should display the user message component', field => {
+
+    it('should display the user message component', () => {
         // Assert
         expect(userMessage.isComponentDisplayed()).toBe(true);
     });
