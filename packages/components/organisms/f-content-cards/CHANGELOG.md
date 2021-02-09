@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.1.0
 ------------------------------
-*February 8, 2020*
+*February 9, 2020*
 
 ### Added
 - `data-test-ids` for home promotion card components

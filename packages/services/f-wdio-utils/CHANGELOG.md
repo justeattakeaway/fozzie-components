@@ -6,10 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.1.1
 ------------------------------
-*February 8, 2021*
+*February 9, 2021*
 
 ### Added
-- Added case for molecule folder inside `page object`.
+- case for molecule folder inside `page object`.
 
 
 v0.1.0
