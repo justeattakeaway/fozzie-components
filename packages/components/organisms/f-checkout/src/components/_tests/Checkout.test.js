@@ -1230,6 +1230,51 @@ describe('Checkout', () => {
             });
         });
 
+        describe('loadAddress ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            describe('when `getAddress` request fails', () => {
+                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
+                    // Arrange
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, getAddress: jest.fn(async () => Promise.reject()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.loadAddress();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutAddressGetFailure).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutAddressGetSuccess)).toBeUndefined();
+                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
+                });
+            });
+
+            describe('when `getAddress` request succeeds', () => {
+                it('should emit success event', async () => {
+                    // Arrange
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.loadAddress();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutAddressGetSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutAddressGetFailure)).toBeUndefined();
+                });
+            });
+        });
+
         describe('shouldLoadAddress ::', () => {
             it('should return `true` for delivery order without address when user is not logged in', () => {
                 const wrapper = shallowMount(VueCheckout, {
