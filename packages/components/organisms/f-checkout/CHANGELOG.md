@@ -17,6 +17,15 @@ v0.52.0
 - `checkoutId` prop.
 
 
+## v0.52.0
+
+_February 9, 2021_
+
+### Added
+
+-   Loading customer address from API endpoint if Checkout endpoint did not return it
+
+
 v0.51.0
 -------------------------------
 *February 5, 2021*
