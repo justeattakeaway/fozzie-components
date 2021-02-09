@@ -78,6 +78,7 @@ export { default as LoyaltyStampIcon } from '../icons/LoyaltyStampIcon';
 export { default as MapPinIcon } from '../icons/MapPinIcon';
 export { default as MinusIcon } from '../icons/MinusIcon';
 export { default as MopedIcon } from '../icons/MopedIcon';
+export { default as MoreVerticalIcon } from '../icons/MoreVerticalIcon';
 export { default as OfferIcon } from '../icons/OfferIcon';
 export { default as PadlockIcon } from '../icons/PadlockIcon';
 export { default as PaymentAmexSafekeyIcon } from '../icons/PaymentAmexSafekeyIcon';
