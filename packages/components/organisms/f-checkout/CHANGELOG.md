@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.51.0
+-------------------------------
+*February 09, 2021*
+
+### Changed
+- Added test cases to f-checkout-guest.component.spec.js
+
 v0.50.0
 -------------------------------
 *February 5, 2021*
