@@ -45,7 +45,7 @@
 
         <div
             :class="['c-footer-container c-footer-row c-footer-row--combined c-footer-row--notEqualTopAndBottomPad c-footer-row--noPadBelowWide',
-                     { 'c-footer-row--rightAlignedOnDesktopView': !showCountrySelector }]">
+                     { 'c-footer-row--rightAlignedAboveWide': !showCountrySelector }]">
             <country-selector
                 v-if="showCountrySelector"
                 data-test-id="country-selector"
@@ -56,6 +56,7 @@
 
             <legal-field
                 v-if="metaLegalFieldEnabled"
+                :class="[{ 'c-footer-row-item--fullWidthAboveWide': !showCountrySelector }]"
                 :info="copy.metaLegalField" />
 
             <icon-list
@@ -214,11 +215,17 @@ $footer-heading-font-size: 'heading-s';
     padding-bottom: 0;
 }
 
-.c-footer-row--rightAlignedOnDesktopView {
+.c-footer-row--rightAlignedAboveWide {
     justify-content: flex-end;
 
     @include media('<wide') {
         justify-content: flex-start;
+    }
+}
+
+.c-footer-row-item--fullWidthAboveWide {
+    @include media('>=wide') {
+        flex: 1;
     }
 }
 

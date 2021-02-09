@@ -22,13 +22,20 @@ export const FooterComponent = () => ({
     components: { VueFooter },
     props: {
         locale: {
-            default: select('Locale', ['en-GB', 'en-AU'])
+            default: select('Locale', ['en-GB', 'en-AU', 'da-DK', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO'])
         },
         showCourierLinks: {
             default: boolean('Show courier links', false)
+        },
+        showCountrySelector: {
+            default: boolean('Show country selector', false)
         }
     },
-    template: '<vue-footer :showCourierLinks="showCourierLinks" :locale="locale" />'
+    template: `
+        <vue-footer
+            :showCourierLinks="showCourierLinks"
+            :locale="locale"
+            :showCountrySelector="showCountrySelector" />`
 });
 
 FooterComponent.storyName = 'f-footer';
