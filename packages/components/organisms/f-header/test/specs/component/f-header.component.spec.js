@@ -26,9 +26,9 @@ describe('f-header component tests', () => {
     });
 
     forEach(['offers', 'help', 'delivery', 'userAccount', 'countrySelector'])
-    .it('should show extra links as well as default when selected', field => {
+    .it('should show extra fields as well as default when selected', field => {
         // Act
-        header.openExtraFeatures()
+        header.openWithExtraFeatures()
         // Assert
         expect(header.isFieldLinkDisplayed(field)).toBe(true);
     });
@@ -36,22 +36,34 @@ describe('f-header component tests', () => {
     forEach(['help', 'delivery', 'userAccount', 'countrySelector'])
     .it('should hide navigation links when in mobile mode', field => {
         // Act
-        browser.setWindowSize(500, 500);
+        header.openWithExtraFeatures()
+        browser.setWindowSize(500, 1000);
 
         // Assert
-        expect(header.isMobileNavigationBarVisible()).toBe(true);
+        expect(header.isMobileNavigationBarDisplayed()).toBe(true);
         expect(header.isFieldLinkDisplayed(field)).toBe(false);
     });
 
-    forEach(['help', 'countrySelector'])
-    .it('should show navigation fields when mobile-navigation has been opened', field => {
+    forEach(['help', 'countrySelector', 'userAccount'])
+    .it('should show navigation fields when burger menu has been opened', field => {
         // Act
         browser.setWindowSize(500, 1000);
         header.openMobileNavigation();
 
         // Assert
-        expect(HeaderComponent.isFieldLinkDisplayed(field)).toBe(true);
+        expect(header.isFieldLinkDisplayed(field)).toBe(true);
     });
+
+    forEach(['GB', 'AU', 'FR', 'IT', 'ES', 'NZ'])
+    .it('should change header logo depending on which locale is chosen', field => {
+        // Act
+        header.openWithLocale(field);
+    
+        // Assert
+        // expect(header.isCountrySelectorIconDisplayed('AU')).toBe(true);
+        // expect(header.isCountrySelectorIconDisplayed('GB')).toBe(false);
+    });
+    
 
     // it('should only show one offers icon in desktop view and two in mobile', () => {
     //     // Act
@@ -82,9 +94,19 @@ describe('f-header component tests', () => {
 
     it('should change the url to offers when offers link is clicked', () => {
         // Act
+        header.openWithExtraFeatures();
         header.clickOffersLink();
 
         // Assert
         expect(browser.getUrl()).toContain('/offers');
     });
+
+    forEach(['gb', 'au'])
+    .it.only('should display all flags when mouse moves to country selector icon', field => {
+        // Act
+        header.moveToCountrySelector();
+
+        // Assert
+        expect(header.isFlagDisplayed(field)).toBe(true);
+    })
 });

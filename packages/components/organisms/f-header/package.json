@@ -47,6 +47,7 @@
     "@justeat/f-trak": ">=0.6.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.13",
     "@justeat/f-button": "0.6.1",
     "@justeat/f-vue-icons": "2.3.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",

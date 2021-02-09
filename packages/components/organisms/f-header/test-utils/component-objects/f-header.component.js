@@ -27,32 +27,45 @@ class Header extends Page {
             get link () { return $(NAVIGATION.userAccount.link) }
         }, 
         countrySelector: {
-            get link () { return $(NAVIGATION.userAccount.link) },
-            countries : {
-                get gb () { return $(NAVIGATION.countrySelector.countries.gb) },
-                get au () { return $(NAVIGATION.countrySelector.countries.au) },
-                get fr () { return $(NAVIGATION.countrySelector.countries.fr) },
-                get it () { return $(NAVIGATION.countrySelector.countries.it) },
-                get nz () { return $(NAVIGATION.countrySelector.countries.nz) },
-                get es () { return $(NAVIGATION.countrySelector.countries.es) }
+            get link () { return $(NAVIGATION.countrySelector.link) },
+            gb: {
+                get flag () { return $(NAVIGATION.countrySelector.gb.flag) }
+            }, 
+            au: {
+                get flag () { return $(NAVIGATION.countrySelector.au.flag) }
             }
         }
     }
 
     get mobileOffersIcon () { 
-        return navigation.offers.icon.filter(element => element.getAttribute('class').includes('u-showBelowMid')); 
+        return this.navigation.offers.icon.filter(element => element.getAttribute('class').includes('u-showBelowMid')); 
     }
     get webOffersIcon () { 
-        return navigation.offers.icon.filter(element => element.getAttribute('class').includes('u-showAboveMid')) 
+        return this.navigation.offers.icon.filter(element => element.getAttribute('class').includes('u-showAboveMid')) 
     }
 
     open(){
         super.openComponent('organism', 'header-component');
     }
 
-    openExtraFeatures(){
+    openWithExtraFeatures(){
         super.openComponent('organism', 'header-component&knob-Show%20offers%20link=true&knob-Show%20delivery%20enquiry=true')
     }
+
+    openWithLocale(locale){
+        super.openComponent('organism', `header-component&knob-Locale=en-${locale}`)
+    }
+
+    isCountrySelectorIconDisplayed(locale) {
+        locale.toLowerCase();
+        let icon = this.navigation.countrySelector.link.filter(element => element.getAttribute('class').includes(`flag.${locale}.round`));
+        return icon.isDisplayedInViewport();
+    }
+
+    isFlagDisplayed(field){
+        this.navigation.countrySelector[field].flag.isDisplayed();
+        // browser.debug();
+    };
 
     waitForComponent(){
         super.waitForComponent(this.component);
@@ -63,8 +76,12 @@ class Header extends Page {
     }
 
     isFieldLinkDisplayed(fieldName){
-        return this.navigation[fieldName].link.isDisplayed();
+        return this.navigation[fieldName].link.isDisplayedInViewport();
     }
+
+    // isCountrySelectorFlagDisplayed(fieldName){
+    //     return this.navigation.countrySelector[fieldName].isDisplayedInViewport();
+    // }
 
     isLogoDisplayed(){
         return this.logo.isDisplayed();
@@ -90,8 +107,16 @@ class Header extends Page {
         return this.navigation.help.link.click();
     }
 
+    openCountrySelector(){
+        return this.navigation.countrySelector.link.click();
+    }
+
     openMobileNavigation(){
         return this.mobileNavigationBar.click();
+    }
+
+    moveToCountrySelector(){
+        this.navigation.countrySelector.link.moveTo();
     }
   
 }
