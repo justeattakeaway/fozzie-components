@@ -13,5 +13,16 @@ export const NAVIGATION = {
     }, 
     userAccount: {
         link: '[data-test-id="user-info-link"]', 
+    }, 
+    countrySelector: {
+        link: '[data-test-id="country-selector"]', 
+        countries : {
+            gb: '[data-test-id="countrySelector-countryList-gb"]', 
+            au: '[data-test-id="countrySelector-countryList-au"]',
+            fr: '[data-test-id="countrySelector-countryList-fr"]',
+            it: '[data-test-id="countrySelector-countryList-it"]',
+            nz: '[data-test-id="countrySelector-countryList-nz"]',
+            es: '[data-test-id="countrySelector-countryList-es"]'
+        }
     }
 } 
