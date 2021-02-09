@@ -1,5 +1,5 @@
 import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
-const UserMessage = require ('../../../test-utils/component-objects/f-user-message.component');
+const UserMessage = require('../../../test-utils/component-objects/f-user-message.component');
 const userMessage = new UserMessage();
 
 describe('Accessibility tests', () => {

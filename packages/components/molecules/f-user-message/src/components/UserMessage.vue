@@ -12,7 +12,7 @@
                 <clock-icon />
                 <p
                     :class="$style['c-userMessage-text']"
-                    data-test-id="content">
+                    data-test-id="user-message-content">
                     {{ userMessageText }}
                 </p>
             </div>
