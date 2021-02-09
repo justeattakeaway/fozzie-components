@@ -9,5 +9,4 @@ v0.1.0
 *February 9, 2021*
 
 ### Added
-
 - Base generated component structure.
