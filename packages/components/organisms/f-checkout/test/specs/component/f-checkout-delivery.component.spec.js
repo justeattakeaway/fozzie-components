@@ -3,7 +3,7 @@ import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.
 
 describe('f-checkout "delivery" component tests', () => {
     before(() => {
-        browser.url('iframe.html?id=components-organisms--checkout-component&knob-Checkout%20Url=%2Fcheckout-delivery.json&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json&knob-Create%20Guest%20Url=%2Fcreate-guest.json&knob-Get%20Basket%20Url=%2Fget-basket-delivery.json&knob-Auth%20token=a&knob-Login%20Url=%2Flogin&viewMode=story');
+        browser.url('iframe.html?id=components-organisms--checkout-component&knob-Get%20Checkout%20Url=%2Fcheckout-delivery.json&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json&knob-Create%20Guest%20Url=%2Fcreate-guest.json&knob-Get%20Basket%20Url=%2Fget-basket-delivery.json&knob-Auth%20token=a&knob-Login%20Url=%2Flogin&viewMode=story');
         CheckoutComponent.waitForCheckoutComponent();
     });
 

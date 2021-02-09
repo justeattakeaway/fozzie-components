@@ -6,15 +6,18 @@
         }]"
         :style="{ background: contentBackgroundColor }">
         <div
+            :data-test-id="imageTestId"
             :class="['c-contentCards-homePromotionCard2-image', $style['c-contentCards-homePromotionCard2-image']]"
             :style="{ backgroundImage: `url('${image}')` }" />
         <h3
+            :data-test-id="titleTestId"
             :class="['c-contentCards-homePromotionCard2-title', $style['c-contentCards-homePromotionCard2-title']]">
             {{ title }}
         </h3>
         <template v-for="(textItem, textIndex) in description">
             <p
                 :key="textIndex"
+                :data-test-id="textTestId"
                 :class="['c-contentCards-homePromotionCard2-text', $style['c-contentCards-homePromotionCard2-text']]">
                 {{ textItem }}
             </p>
@@ -45,7 +48,7 @@ export default {
         },
         testId: {
             type: String,
-            default: null
+            default: 'home-promotion-2'
         }
     },
     data () {
@@ -74,6 +77,17 @@ export default {
             return this.testId ? `${this.testId}--cta` : false;
         },
 
+        textTestId () {
+            return this.testId ? `${this.testId}--text` : false;
+        },
+
+        titleTestId () {
+            return this.testId ? `${this.testId}--title` : false;
+        },
+
+        imageTestId () {
+            return this.testId ? `${this.testId}--backgroundImage` : false;
+        },
         /**
          * If background colour is set *and* dark, then use a light text colour for the title and text for A11y
          * @return {boolean}

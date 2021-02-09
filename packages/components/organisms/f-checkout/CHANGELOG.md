@@ -8,8 +8,13 @@ v0.52.0
 *February 9, 2021*
 
 ### Added
-- Utilised `vue-svg-loader` for error page SVG
-- Added `vue-svg-loader` to Webpack config
+- `updateCheckoutUrl` and `updateCheckoutTimeout` props.
+
+### Changed
+- Renamed `checkoutUrl` prop to `getCheckoutUrl`.
+
+### Removed
+- `checkoutId` prop.
 
 
 v0.51.0
