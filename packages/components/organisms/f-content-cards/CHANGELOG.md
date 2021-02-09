@@ -10,7 +10,7 @@ v3.1.0
 ### Added
 - `data-test-ids` for home promotion card components
 - `test` folder with `accessibility` and `component` specs for home promotion cards 1 and 2
-- `test-utils` folder with `selectors` file for home promotion tests and component classses for cards 1 and 2
+- `test-utils` folder with `selectors` file for home promotion tests and component classes for cards 1 and 2
 - `@justeat/f-wdio-utils` package
 
 
