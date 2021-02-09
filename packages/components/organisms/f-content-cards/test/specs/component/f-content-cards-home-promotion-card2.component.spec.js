@@ -7,7 +7,7 @@ describe('home promotion card 2 component tests', () => {
         card.waitForComponent();
     });
 
-    it('should display home promotion card', () => {
+    it('should display card', () => {
         // Assert
         expect(card.isComponentDisplayed()).toBe(true);
     });

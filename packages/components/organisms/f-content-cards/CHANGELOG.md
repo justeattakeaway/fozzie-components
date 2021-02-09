@@ -9,7 +9,7 @@ v3.1.0
 
 ### Added
 - `data-test-ids` for home promotion card components
-- `test` folder with `axe-accessibility.spec` and `f-content-cards-home-promotion.spec`.
+- `test` folder with `axe-accessibility.spec` and `f-content-cards-home-promotion.spec`
 - `test-utils` folder with `f-content-cards.selectors` and `f-content-cards.component`
 - `@justeat/f-wdio-utils` package
 
