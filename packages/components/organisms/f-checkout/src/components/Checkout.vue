@@ -177,7 +177,7 @@ export default {
         updateCheckoutTimeout: {
             type: Number,
             default: 1000
-        },        
+        },
 
         authToken: {
             type: String,
