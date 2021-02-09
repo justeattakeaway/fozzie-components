@@ -389,8 +389,7 @@ describe('Checkout', () => {
                 it('should not call `loadAddress`', async () => {
                     // Arrange & Act
                     const loadAddressSpy = jest.spyOn(VueCheckout.methods, 'loadAddress');
-                    const shouldLoadAddressSpy = jest.spyOn(VueCheckout.methods, 'shouldLoadAddress');
-                    shouldLoadAddressSpy.mockReturnValueOnce(false);
+                    jest.spyOn(VueCheckout.methods, 'shouldLoadAddress').mockReturnValueOnce(false);
 
                     shallowMount(VueCheckout, {
                         store: createStore(),
@@ -409,8 +408,7 @@ describe('Checkout', () => {
                 it('should call `loadAddress`', async () => {
                     // Arrange & Act
                     const loadAddressSpy = jest.spyOn(VueCheckout.methods, 'loadAddress');
-                    const shouldLoadAddressSpy = jest.spyOn(VueCheckout.methods, 'shouldLoadAddress');
-                    shouldLoadAddressSpy.mockReturnValueOnce(true);
+                    jest.spyOn(VueCheckout.methods, 'shouldLoadAddress').mockReturnValueOnce(true);
 
                     shallowMount(VueCheckout, {
                         store: createStore(),
@@ -1277,6 +1275,7 @@ describe('Checkout', () => {
 
         describe('shouldLoadAddress ::', () => {
             it('should return `true` for delivery order without address when user is not logged in', () => {
+                // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
                         ...defaultState,
@@ -1297,6 +1296,7 @@ describe('Checkout', () => {
             });
 
             it('should return `false` if `isLoggedIn` is `false`', () => {
+                // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
                         ...defaultState,
@@ -1317,8 +1317,14 @@ describe('Checkout', () => {
             });
 
             it('should return `false` if `serviceType` is `collection`', async () => {
+                // Arrange
                 const wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
+                    store: createStore({
+                        ...defaultState,
+                        isLoggedIn: true,
+                        serviceType: CHECKOUT_METHOD_COLLECTION,
+                        address: {}
+                    }),
                     i18n,
                     localVue,
                     propsData
@@ -1330,6 +1336,7 @@ describe('Checkout', () => {
             });
 
             it('should return `false` if address is set', () => {
+                // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
                         ...defaultState,
