@@ -25,7 +25,7 @@ export const HeaderComponent = () => ({
     components: { VueHeader },
     props: {
         locale: {
-            default: select('Locale', ['en-GB', 'en-AU'])
+            default: select('Locale', ['en-GB', 'en-AU', 'da-DK', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO'])
         },
         showOffersLink: {
             default: boolean('Show offers link', false)
