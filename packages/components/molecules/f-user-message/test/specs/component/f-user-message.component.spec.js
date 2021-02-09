@@ -11,4 +11,9 @@ describe('f-user-message component tests', () => {
         // Assert
         expect(userMessage.isComponentDisplayed()).toBe(true);
     });
+
+    it('should display the user message content', () => {
+        // Assert
+        expect(userMessage.isContentDisplayed()).toBe(true);
+    });
 });
