@@ -5,7 +5,7 @@ const card = new HomePromotionCard1();
 describe('Accessibility tests', () => {
     beforeEach(() => {
         card.open();
-        card.waitForComponents();
+        card.waitForComponent();
     });
 
     it('a11y - should test f-contentCard component WCAG compliance', () => {
