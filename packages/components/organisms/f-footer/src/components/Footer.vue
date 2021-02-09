@@ -56,6 +56,7 @@
 
             <legal-field
                 v-if="metaLegalFieldEnabled"
+                :class="[{ 'c-footer-row-item--fullWidthOnDesktopView': !showCountrySelector }]"
                 :info="copy.metaLegalField" />
 
             <icon-list
@@ -219,6 +220,12 @@ $footer-heading-font-size: 'heading-s';
 
     @include media('<wide') {
         justify-content: flex-start;
+    }
+}
+
+.c-footer-row-item--fullWidthOnDesktopView {
+    @include media('>=wide') {
+        flex: 1;
     }
 }
 
