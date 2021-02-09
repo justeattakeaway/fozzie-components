@@ -24,7 +24,7 @@ const {
     getAvailableFulfilment,
     getBasket,
     getCheckout,
-    patchCheckout,
+    updateCheckout,
     setAuthToken,
     updateAddressDetails,
     updateCustomerDetails,
@@ -253,7 +253,7 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe('patchCheckout ::', () => {
+        describe('updateCheckout ::', () => {
             payload.data = {
                 mobileNumber
             };
@@ -276,7 +276,7 @@ describe('CheckoutModule', () => {
 
             it('should post the checkout details to the backend.', async () => {
                 // Act
-                await patchCheckout({ commit, state }, payload);
+                await updateCheckout({ commit, state }, payload);
 
                 // Assert
                 expect(axios.patch).toHaveBeenCalledWith(payload.url, payload.data, config);
