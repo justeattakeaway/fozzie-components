@@ -127,12 +127,7 @@ export default {
     mixins: [validationMixin, VueGlobalisationMixin, checkoutValidationsMixin],
 
     props: {
-        checkoutId: {
-            type: String,
-            required: true
-        },
-
-        checkoutUrl: {
+        getCheckoutUrl: {
             type: String,
             required: true
         },
@@ -148,6 +143,11 @@ export default {
         },
 
         getBasketUrl: {
+            type: String,
+            required: true
+        },
+
+        updateCheckoutUrl: {
             type: String,
             required: true
         },
@@ -170,6 +170,11 @@ export default {
         },
 
         getBasketTimeout: {
+            type: Number,
+            default: 1000
+        },
+
+        updateCheckoutTimeout: {
             type: Number,
             default: 1000
         },
@@ -263,7 +268,7 @@ export default {
             'getAvailableFulfilment',
             'getBasket',
             'getCheckout',
-            'patchCheckout',
+            'updateCheckout',
             'setAuthToken',
             'updateCustomerDetails',
             'updateUserNote'
@@ -305,10 +310,10 @@ export default {
                     userNote: this.userNote
                 });
 
-                await this.patchCheckout({
-                    url: `checkout/${this.tenant}/${this.checkoutId}`,
+                await this.updateCheckout({
+                    url: this.updateCheckoutUrl,
                     data,
-                    timeout: this.checkoutTimeout
+                    timeout: this.updateCheckoutTimeout
                 });
 
                 this.$emit(EventNames.CheckoutSuccess, {
@@ -357,7 +362,7 @@ export default {
         async loadCheckout () {
             try {
                 await this.getCheckout({
-                    url: this.checkoutUrl,
+                    url: this.getCheckoutUrl,
                     timeout: this.getCheckoutTimeout
                 });
 

@@ -72,15 +72,16 @@ The props that can be defined are as follows:
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
-| `checkoutId` | `String` | This prop is required | Unique ID for the checkout.<br><br>Currently this is the basket ID. |
-| `checkoutUrl` | `String` | - | URL for the API called to load the Checkout Data.<br><br>The data returned from this API contains the serviceType, which determines if the Checkout component is created for Collection or Delivery when the user is authenticated. |
+| `updateCheckoutUrl` | `String` | - | URL for the API called to update the Checkout Data |
+| `getCheckoutUrl` | `String` | - | URL for the API called to load the Checkout Data.<br><br>The data returned from this API contains the serviceType, which determines if the Checkout component is created for Collection or Delivery when the user is authenticated. |
 | `checkoutAvailableFulfilmentUrl` | `String` | - | URL for the API called to load the Available Fulfilment data. |
 | `createGuestUrl` | `String` | - | URL for the API called to load the Create a Guest User. |
 | `getBasketUrl` | `String` | - | URL for the API called to get Basket Details.<br><br>The data returned from this API contains the serviceType, which determines if the Checkout component is created for Collection or Delivery when the user is not authenticated. |
 | `checkoutTimeout` | `Number` | 1000 | Timeout when submitting the checkout form. |
 | `getCheckoutTimeout` | `Number` | 1000 | Timeout when loading checkout data. |
-| `createGuestTimeout` | `Number` | 1000 | Timeout when creating a guest user.  |
-| `getBasketTimeout` | `Number` | 1000 | Timeout when loading basket data.  |
+| `createGuestTimeout` | `Number` | 1000 | Timeout when creating a guest user. |
+| `getBasketTimeout` | `Number` | 1000 | Timeout when loading basket data. |
+| `updateCheckoutTimeout` | `Number` | 1000 | Timeout when updating checkout data. |
 | `authToken` | `String` | `''` | Authorisation token used when submitting the checkout form. |
 | `loginUrl` | `String` | `-` | URL to navigate to if the user wishes to change account. |
 
