@@ -5,6 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 v1.2.0
+------------------------------
 *February 9, 2021*
 
 ### Added
@@ -13,6 +14,7 @@ v1.2.0
 
 
 v1.1.0
+------------------------------
 *January 29, 2021*
 
 ### Added
