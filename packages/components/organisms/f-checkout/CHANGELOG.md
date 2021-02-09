@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.52.0
 -------------------------------
-*February 5, 2021*
+*February 9, 2021*
 
 ### Added
 - `updateCheckoutUrl` and `updateCheckoutTimeout` props.
