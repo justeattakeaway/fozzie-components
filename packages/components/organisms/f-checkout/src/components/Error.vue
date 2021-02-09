@@ -7,6 +7,7 @@
         data-test-id="checkout-error-page-component"
         :class="[$style['c-checkout-error'], $style['c-checkout-error--verticalPadding']]"
     >
+        // TODO: Load image from CDN in future
         <sad-bag-icon />
 
         <h1
