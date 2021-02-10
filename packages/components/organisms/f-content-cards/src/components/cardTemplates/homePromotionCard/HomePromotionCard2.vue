@@ -118,14 +118,18 @@ export default {
         display: block;
         width: 100%;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-        border-radius: $post-order-card-radius;
-        padding: spacing(x3) calc(35% + 8px) spacing(x3) spacing(x3);
+        border-radius: 4px;
+        padding: spacing(x2) calc(35% + 8px) spacing(x2) spacing(x2);
+        max-width: 800px; //to replicate max-width of searchbox
+        margin: auto;
 
         @include media('>narrow') {
             padding-right: 208px;
+            width: 95%; //to replicate width of searchbox
         }
 
         .c-contentCards-homePromotionCard2-link {
+            @include font-size('body-l', false);
             text-decoration: none;
             font-weight: $font-weight-bold;
 
@@ -154,6 +158,14 @@ export default {
             .c-contentCards-homePromotionCard2-title {
                 color: $grey--lighter;
             }
+        }
+    }
+
+    .c-contentCards-homePromotionCard2-title {
+        @include font-size(heading-m);
+
+        @include media('<=narrow') {
+            @include font-size(heading-m, true, narrow);
         }
     }
 
