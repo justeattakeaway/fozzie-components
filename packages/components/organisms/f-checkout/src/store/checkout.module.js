@@ -182,6 +182,44 @@ export default {
             commit(UPDATE_BASKET_DETAILS, basketDetails);
         },
 
+        /**
+         * Get the address details from the backend and update the state.
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getAddress: async ({ commit, state }, {
+            url,
+            language,
+            timeout
+        }) => {
+            const authHeader = state.authToken && `Bearer ${state.authToken}`;
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Language': language,
+                    ...(state.isLoggedIn && {
+                        Authorization: authHeader
+                    })
+                },
+                timeout
+            };
+
+            const { data } = await axios.get(url, config);
+
+            // TODO: Implement logic to select best address. For now, select the first address
+            const [selectedAddress] = data.Addresses;
+
+            const addressDetails = {
+                line1: selectedAddress.Line1,
+                line2: selectedAddress.Line2,
+                city: selectedAddress.City,
+                postcode: selectedAddress.ZipCode
+            };
+
+            commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
+        },
+
         setAuthToken: ({ commit }, authToken) => {
             commit(UPDATE_AUTH, authToken);
         },

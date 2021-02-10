@@ -14,6 +14,14 @@ v0.54.0
 - Now always calling `loadBasket` regardless of if it's a guest or authenticated user.
 
 
+v0.53.0
+-------------------------------
+*_February 9, 2021_*
+
+### Added
+- Loading customer address from API endpoint if Checkout endpoint did not return it
+
+
 v0.52.0
 -------------------------------
 *February 9, 2021*
