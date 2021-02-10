@@ -1,0 +1,58 @@
+{
+  "name": "@justeat/f-status-banner",
+  "description": "Fozzie Status Banner - Global status page",
+  "version": "0.1.0",
+  "main": "dist/f-status-banner.umd.min.js",
+  "files": [
+    "dist",
+    "test-utils" ,
+    "src/services"
+  ],
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-status-banner",
+  "contributors": [
+    "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:justeat/fozzie-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/justeat/fozzie-components/issues"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "keywords": [
+    "fozzie"
+  ],
+  "scripts": {
+    "prepublishOnly": "yarn lint && yarn test && yarn build",
+    "build": "vue-cli-service build --target lib --name f-status-banner ./src/index.js",
+    "lint": "vue-cli-service lint",
+    "lint:fix": "yarn lint --fix",
+    "lint:style": "vue-cli-service lint:style",
+    "report": "cd ../.. && yarn report",
+    "test": "vue-cli-service test:unit",
+    "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
+    "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
+  },
+  "browserslist": [
+    "extends @justeat/browserslist-config-fozzie"
+  ],
+  "dependencies": {
+    "@justeat/f-services": "1.7.0",
+    "axios": "0.21.1"
+  },
+  "peerDependencies": {
+    "@justeat/browserslist-config-fozzie": ">=1.2.0"
+  },
+  "devDependencies": {
+    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
+    "@vue/cli-plugin-babel": "4.4.6",
+    "@vue/cli-plugin-eslint": "3.9.2",
+    "@vue/cli-plugin-unit-jest": "4.4.6",
+    "@vue/test-utils": "1.0.3",
+    "node-sass-magic-importer": "5.3.2"
+  }
+}
