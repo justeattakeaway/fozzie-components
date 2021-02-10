@@ -3,11 +3,10 @@
         :is="componentType"
         :class="[
             $style['o-btn'],
+            (isIcon ? $style['o-btn--icon'] : ''),
             $style[`o-btn--${buttonType}`],
-            (isIcon ? $style[`o-icon-size${buttonSizeClassname}`] :
-                $style[`o-btn--size${buttonSizeClassname}`]),
-            (isFullWidth ? $style['o-btn--fullWidth'] : ''),
-            (isIcon ? $style['o-icon'] : '')
+            $style[`o-btn--size${buttonSizeClassname}`],
+            (isFullWidth ? $style['o-btn--fullWidth'] : '')
         ]"
         :attributes="$attrs"
         :action-type="buttonActionType"
@@ -328,22 +327,63 @@ $icon-default-padding           : 3px;
     }
 }
 
+
 /**
- * Modifier – .o-btn--icon
- *
- * Removes unneeded styles from button when only an icon is on it (like a close button)
+ * ==========================================================================
+ * Icon style and modifiers
+ * ==========================================================================
  */
 
 .o-btn--icon {
-    background-color: transparent;
-    border: 0;
-    padding: 0;
-
-    &:hover {
-        background-color: transparent;
+    border-radius: 50%;
+    svg {
+        width: 90%;
+        height: 80%;
     }
-}
 
+ &.o-btn--primary {
+     path {
+          fill: $btn-primary-textColor;
+     }
+ }
+
+ &.o-btn--secondary {
+     path {
+          fill: $btn-secondary-textColor;
+     }
+ }
+
+ &.o-btn--outline {
+     path {
+          fill: $btn-outline-textColor;
+     }
+ }
+
+ &.o-btn--ghost {
+     path {
+          fill: $btn-ghost-textColor;
+     }
+ }
+
+ &.o-btn--link {
+     path {
+          fill: $color-link-default;
+     }
+
+      &:hover {
+          path {
+               fill: $color-link-hover;
+          }
+      }
+
+      &:active,
+      &:focus {
+          path {
+               fill: $color-link-active;
+          }
+      }
+ }
+}
 
 /**
  * ==========================================================================
@@ -376,34 +416,6 @@ $icon-default-padding           : 3px;
     line-height: $btn-sizeXSmall-lineHeight;
 }
 
-/**
-* ==========================================================================
-* Icon Size Modifiers
-* ==========================================================================
-*/
-
-.o-icon {
-    background-color: $icon-bgColor;
-    border-radius: 50%;
-    width: $icon-default-width;
-    vertical-align: middle;
-    padding: $icon-default-padding;
-
-    &:hover {
-        background-color: $icon-bgColor--hover;
-    }
-    &:active {
-        background-color: $icon-bgColor--active;
-    }
-}
-
-.o-icon--sizeSmall {
-    width: $icon-sizeSmall-width;
-}
-
-.o-icon-sizeLarge {
-    width: $icon-sizeLarge-width;
-}
 
 /**
  * ==========================================================================

@@ -13,7 +13,7 @@ export const ButtonComponent = () => ({
     components: { FButton },
     props: {
         buttonType: {
-            default: select('Button Type', ['primary', 'secondary', 'outline', 'ghost', 'link', 'icon'], 'primary')
+            default: select('Button Type', ['primary', 'secondary', 'outline', 'ghost', 'link'], 'primary')
         },
         buttonSize: {
             default: select('Button Size', ['xsmall', 'small', 'medium', 'large'], 'medium')
