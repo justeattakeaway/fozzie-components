@@ -69,7 +69,7 @@
             </card>
         </div>
 
-        <error-page v-else />
+        <error v-else />
     </div>
 </template>
 
@@ -98,7 +98,7 @@ import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import FormSelector from './Selector.vue';
 import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
-import ErrorPage from './Error.vue';
+import Error from './Error.vue';
 
 import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
