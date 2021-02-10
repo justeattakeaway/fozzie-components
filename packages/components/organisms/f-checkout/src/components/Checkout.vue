@@ -201,7 +201,7 @@ export default {
 
     /*
     * Provide/Inject allows nested `Address` component to inherit `Checkout`
-    * validator scope, `$v`.
+    * validator scope, `$v`. Needless comment here for test PR
     */
     provide () {
         const $v = {};
