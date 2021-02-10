@@ -1,6 +1,6 @@
 <div align="center">
 
-# f-status-banner</h1>
+# f-status-banner
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
