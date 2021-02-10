@@ -1,3 +1,9 @@
 {
-  "ServiceType": "Delivery"
+  "ServiceType": "Delivery",
+  "RestaurantId": "99999",
+  "BasketSummary": {
+    "BasketTotals": {
+      "Total": 23.55
+    }
+  }
 }
