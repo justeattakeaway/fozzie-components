@@ -13,6 +13,7 @@ v0.54.0
 ### Changed
 - Utilised `vue-svg-loader` for error page SVG
 
+
 v0.53.0
 -------------------------------
 *_February 9, 2021_*
