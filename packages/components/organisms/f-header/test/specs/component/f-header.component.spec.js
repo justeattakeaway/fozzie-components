@@ -54,17 +54,6 @@ describe('f-header component tests', () => {
         expect(header.isFieldLinkDisplayed(field)).toBe(true);
     });
 
-    forEach(['GB', 'AU', 'FR', 'IT', 'ES', 'NZ'])
-    .it('should change header logo depending on which locale is chosen', field => {
-        // Act
-        header.openWithLocale(field);
-    
-        // Assert
-        // expect(header.isCountrySelectorIconDisplayed('AU')).toBe(true);
-        // expect(header.isCountrySelectorIconDisplayed('GB')).toBe(false);
-    });
-    
-
     // it('should only show one offers icon in desktop view and two in mobile', () => {
     //     // Act
     //     browser.setWindowSize(500, 500);
@@ -85,7 +74,7 @@ describe('f-header component tests', () => {
 
     it('should change url when help-link is clicked', () => {
         // Act
-        browser.setWindowSize(1000, 1000);
+        browser.setWindowSize(1200, 1200);
         header.clickHelpLink();
 
         // Assert
@@ -101,13 +90,26 @@ describe('f-header component tests', () => {
         expect(browser.getUrl()).toContain('/offers');
     });
 
-    forEach(['gb'])
+    forEach(['gb', 'au', 'at', 'be', 'bg', 'ca', 'ca', 'dk', 'fr', 'de', 'ie', 'il', 'it', 'lu', 'nz', 'no', 'pl', 'pt', 'ro', 'es', 'ch', 'ch', 'ch'])
     .it.only('should display all flags when mouse moves to country selector icon', country => {
         // Act
+        browser.maximizeWindow();
         header.moveToCountrySelector();
+        header.flag = country;
 
         // Assert
         expect(header.isCountrySelectorOpen()).toBe(true);
-        expect(header.isFlagDisplayed(country)).toBe(true);
-    })
+        expect(header.isFlagDisplayed()).toBe(true);
+    });
+
+    forEach(['gb', 'au', 'at'])
+    .it('should change header logo depending on which locale is chosen', country => {
+        // Act
+        header.openWithLocale(country);
+        header.icon = country;
+    
+        // Assert
+        expect(header.isCorrectIconDisplayed()).toBe(true);
+        // expect(header.isCountrySelectorIconDisplayed('GB')).toBe(false);
+    });
 });

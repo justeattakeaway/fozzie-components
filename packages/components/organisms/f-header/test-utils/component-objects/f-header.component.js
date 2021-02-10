@@ -28,18 +28,10 @@ class Header extends Page {
             get link () { return $(NAVIGATION.userAccount.link) }
         }, 
         countrySelector: {
-            get link () { return $$(NAVIGATION.countrySelector.link) },
-            get flagsVisible () { return  $(NAVIGATION.countrySelector.flagsVisible) }, 
-            get list () { return $$(NAVIGATION.countrySelector.list) }
-        }
-    }
-
-    flags = {
-        gb: {
-            get flag () { return $(FLAGS.gb.id) },
-        }, 
-        au: {
-            get flag () { return $(FLAGS.au.id)}
+            get link () { return  $(NAVIGATION.countrySelector.link) },
+            get icons () { return  $$(NAVIGATION.countrySelector.link) },
+            get open () { return  $(NAVIGATION.countrySelector.open) }, 
+            get flags() { return $$(NAVIGATION.countrySelector.listOfFlags) }
         }
     }
 
@@ -50,9 +42,21 @@ class Header extends Page {
         return this.navigation.offers.icon.filter(element => element.getAttribute('class').includes('u-showAboveMid')) 
     }
 
-    // get openCountrySelector(){
-    //     return this.navigation.countrySelector.link.filter(element => element.getAttribute('class').includes('is-open'));
-    // };
+    set flag(country) {
+        this.flagValue = this.navigation.countrySelector.flags.filter(element => element.getAttribute('data-test-id').includes(country));
+    }
+
+    set icon(country) {
+        this.iconValue = this.navigation.countrySelector.icons.filter(element => element.getAttribute('class').includes(country));
+    }
+
+    get flag(){
+        return this.flagValue;
+    }
+
+    get icon(){
+        return this.iconValue;
+    }
 
     open(){
         super.openComponent('organism', 'header-component');
@@ -63,25 +67,9 @@ class Header extends Page {
     }
 
     openWithLocale(locale){
+        locale.toUpperCase();
         super.openComponent('organism', `header-component&knob-Locale=en-${locale}`)
     }
-
-    isCountrySelectorOpen(){
-        return this.navigation.countrySelector.flagsVisible.isDisplayed();
-    }
-
-
-
-    isCountrySelectorIconDisplayed(locale) {
-        locale.toLowerCase();
-        let icon = this.navigation.countrySelector.link.filter(element => element.getAttribute('class').includes(`flag.${locale}.round`));
-        return icon.isDisplayedInViewport();
-    }
-
-    isFlagDisplayed(country){
-        this.flags[country].flag.isDisplayed();
-        // browser.debug();
-    };
 
     waitForComponent(){
         super.waitForComponent(this.component);
@@ -90,6 +78,24 @@ class Header extends Page {
     isComponentDisplayed(){
         return this.component.isDisplayed();
     }
+
+    isCountrySelectorOpen(){
+        return this.navigation.countrySelector.open.isDisplayed();
+    }
+
+    isFlagDisplayed(){
+        return this.flag[0].isDisplayed();
+    }
+
+    isCorrectIconDisplayed(){
+        return this.icon[0].isDisplayed();
+    }
+
+    // isCountrySelectorIconDisplayed(locale) {
+    //     locale.toLowerCase();
+    //     let icon = this.navigation.countrySelector.link.filter(element => element.getAttribute('class').includes(`flag.${locale}.round`));
+    //     return icon.isDisplayedInViewport();
+    // }
 
     isFieldLinkDisplayed(fieldName){
         return this.navigation[fieldName].link.isDisplayedInViewport();
@@ -132,7 +138,7 @@ class Header extends Page {
     }
 
     moveToCountrySelector(){
-        this.navigation.countrySelector.link[0].moveTo();
+        this.navigation.countrySelector.link.moveTo();
     }
   
 }
