@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-error-page",
-  "description": "Fozzie Error Page - ",
+  "description": "Fozzie Error Page - Global error page",
   "version": "0.1.0",
   "main": "dist/f-error-page.umd.min.js",
   "files": [
