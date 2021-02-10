@@ -123,7 +123,7 @@ OR
 ```bash
 # Run Component tests for f-status-banner
 # Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components/packages/f-status-banner
+cd ./fozzie-components/packages/components/organisms/f-status-banner
 yarn test-component:chrome
 ```
 ## Documentation to be completed once module is in stable state.
