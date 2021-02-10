@@ -1,6 +1,6 @@
 import StatusBannerComponent from '../../../test-utils/component-objects/f-statusBanner.component';
 
-describe('f-statusBanner component tests', () => {
+xdescribe('f-statusBanner component tests', () => {
     beforeEach(() => {
         browser.url('?path=story/components-organisms--status-banner-component');
         browser.switchToFrame(0);
