@@ -259,6 +259,12 @@ export default {
 
         tenant () {
             return TENANT_MAP[this.$i18n.locale];
+        },
+
+        shouldLoadAddress () {
+            return this.isLoggedIn &&
+            this.isCheckoutMethodDelivery &&
+            (!this.address || !this.address.line1);
         }
     },
 
@@ -302,20 +308,11 @@ export default {
 
             await Promise.all(promises);
 
-            if (this.shouldLoadAddress()) {
+            if (this.shouldLoadAddress) {
                 await this.loadAddress();
             }
         },
 
-        /**
-         * Check if address should be loaded from a getAddress API endpoint
-         *
-         */
-        shouldLoadAddress () {
-            return this.isLoggedIn &&
-            this.isCheckoutMethodDelivery &&
-            (!this.address || !this.address.line1);
-        },
         /**
          * Submit the checkout details while emitting events to communicate its success or failure.
          *
