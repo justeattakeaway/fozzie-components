@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-user-message",
   "description": "Fozzie User Message – Globalised User Message Component",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "dist/f-user-message.umd.min.js",
   "files": [
     "dist"
@@ -30,7 +30,9 @@
     "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
-    "test": "vue-cli-service test:unit"
+    "test": "vue-cli-service test:unit",
+    "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
+    "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -38,6 +40,7 @@
   "dependencies": {
     "@justeat/f-services": "0.13.2",
     "@justeat/f-vue-icons": "1.2.0",
+    "@justeat/f-wdio-utils": "0.1.0",
     "axios": "0.21.1",
     "lodash-es": "4.17.15"
   },
