@@ -30,13 +30,13 @@ export default [
         gtm: 'click_country_bg'
     },
     {
-        key: 'ca',
+        key: 'ca_en',
         localisedName: 'Canada',
         siteUrl: 'https://www.skipthedishes.com',
         gtm: 'click_country_ca_en'
     },
     {
-        key: 'ca',
+        key: 'ca_fr',
         localisedName: 'Canada',
         siteUrl: 'https://www.skipthedishes.com/fr',
         gtm: 'click_country_ca_fr'
@@ -48,7 +48,7 @@ export default [
         gtm: 'click_country_dk'
     },
     {
-        key: 'fr',
+        key: 'jet_fr',
         localisedName: 'France',
         siteUrl: 'https://www.just-eat.fr',
         gtm: 'click_country_fr'
@@ -126,19 +126,19 @@ export default [
         gtm: 'click_country_es'
     },
     {
-        key: 'ch',
+        key: 'ch_ch',
         localisedName: 'Schweiz',
         siteUrl: 'https://www.eat.ch',
         gtm: 'click_country_ch'
     },
     {
-        key: 'ch',
+        key: 'ch_en',
         localisedName: 'Switzerland',
         siteUrl: 'https://www.eat.ch/en',
         gtm: 'click_country_ch_en'
     },
     {
-        key: 'ch',
+        key: 'ch_fr',
         localisedName: 'Suisse',
         siteUrl: 'https://www.eat.ch/fr',
         gtm: 'click_country_ch_fr'

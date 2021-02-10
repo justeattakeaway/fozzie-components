@@ -90,12 +90,15 @@ describe('f-header component tests', () => {
         expect(browser.getUrl()).toContain('/offers');
     });
 
-    forEach([['gb', '.co.uk'], ['au', 'au'], ['at', 'at'], ['be', 'be-en'], ['bg', 'bg'], ['ca', 'skipthedishes.com'], ['ca', 'skipthedishes.com/fr'], ['dk', '.dk'], ['fr', '.fr'], ['de', '.de'], ['ie', '.ie'], ['il', '.il'], ['it', '.it'], ['lu', 'lu-en'], ['nl', '.nl'], ['nz', '.nz'], ['no', '.no'], ['pl', '.pl'], ['pt', '/pt'], ['ro', '/ro'], ['es', '.es'], ['ch', '.ch'], ['ch', '/en'], ['ch', '/fr'] ])
+    forEach([['gb', '.co.uk'], ['au', 'au'], ['at', 'at'], ['be', 'be-en'], ['bg', 'bg'], ['ca_en', 'skipthedishes.com'], ['ca_fr', 'skipthedishes.com/fr'], ['dk', '.dk'], ['jet_fr', '.fr'], ['de', '.de'], ['ie', '.ie'], ['il', '.il'], ['it', '.it'], 
+    ['lu', 'lu-en'], ['nl', '.nl'], ['nz', '.nz'], ['no', '.no'], ['pl', '.pl'], ['pt', '/pt'], ['ro', '/ro'], ['es', '.es'], ['ch_ch', '.ch'], ['ch_en', '/en'], ['ch_fr', '/fr'] ])
     .it.only('should display all flags when mouse hovers over country selector icon', (country, expectedUrl) => {
         // Act
         browser.maximizeWindow();
         header.moveToCountrySelector();
         header.expectedCountryFlag = country;
+
+        console.log('heyyy', country)
 
         // Assert
         expect(header.isCountrySelectorOpen()).toBe(true);
