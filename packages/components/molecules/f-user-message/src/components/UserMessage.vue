@@ -3,13 +3,16 @@
         v-if="userMessageEnabled"
         :data-theme="theme"
         :class="$style['c-userMessage']"
+        data-test-id="user-message-component"
         class="l-container">
         <div class="l-row">
             <div
                 :class="$style['c-userMessage-container']"
                 class="l-container--inner">
                 <clock-icon />
-                <p :class="$style['c-userMessage-text']">
+                <p
+                    :class="$style['c-userMessage-text']"
+                    data-test-id="user-message-content">
                     {{ userMessageText }}
                 </p>
             </div>
