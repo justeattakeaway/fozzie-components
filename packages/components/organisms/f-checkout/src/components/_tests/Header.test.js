@@ -2,7 +2,7 @@ import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Header from '../Header.vue';
-import { i18n, defaultState, createStore } from './helpers/setup';
+import { i18n, defaultState, createStore, $logger } from './helpers/setup';
 import { CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY } from '../../constants';
 import EventNames from '../../event-names';
 
@@ -145,13 +145,16 @@ describe('Header', () => {
 
     describe('methods ::', () => {
         describe('onVisitLoginPage ::', () => {
-            it('should emit the `VisitLoginPage` event when switch user link is clicked.', () => {
+            it('should emit the `VisitLoginPage` event and call `logInfo` when switch user link is clicked.', () => {
                 // Arrange
                 const wrapper = shallowMount(Header, {
                     store: createStore({ ...defaultState, isLoggedIn: true }),
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
                 });
 
                 // Act
@@ -160,6 +163,7 @@ describe('Header', () => {
 
                 // Assert
                 expect(wrapper.emitted(EventNames.CheckoutVisitLoginPage).length).toBe(1);
+                expect($logger.logInfo).toHaveBeenCalled();
             });
 
             it('should emit the `VisitLoginPage` event when guest login button is clicked.', () => {
@@ -168,7 +172,10 @@ describe('Header', () => {
                     store: createStore({ ...defaultState, isLoggedIn: false }),
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
                 });
 
                 // Act
@@ -177,6 +184,7 @@ describe('Header', () => {
 
                 // Assert
                 expect(wrapper.emitted(EventNames.CheckoutVisitLoginPage).length).toBe(1);
+                expect($logger.logInfo).toHaveBeenCalled();
             });
         });
     });
