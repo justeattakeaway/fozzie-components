@@ -453,6 +453,22 @@ describe('Checkout', () => {
                 expect(setAuthTokenSpy).toHaveBeenCalledWith(propsDataWithAuthToken.authToken);
             });
 
+            it('should call `loadBasket`', async () => {
+                // Arrange & Act
+                const loadBasketSpy = jest.spyOn(VueCheckout.methods, 'loadBasket');
+
+                shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+                await flushPromises();
+
+                // Assert
+                expect(loadBasketSpy).toHaveBeenCalled();
+            });
+
             it('should call `loadAvailableFulfilment`', async () => {
                 // Arrange & Act
                 const loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
@@ -508,22 +524,6 @@ describe('Checkout', () => {
             });
 
             describe('if isLoggedIn set to `false`', () => {
-                it('should call `loadBasket`', async () => {
-                    // Arrange & Act
-                    const loadBasketSpy = jest.spyOn(VueCheckout.methods, 'loadBasket');
-
-                    shallowMount(VueCheckout, {
-                        store: createStore(),
-                        i18n,
-                        localVue,
-                        propsData
-                    });
-                    await flushPromises();
-
-                    // Assert
-                    expect(loadBasketSpy).toHaveBeenCalled();
-                });
-
                 it('should not call `loadCheckout`', async () => {
                     // Arrange & Act
                     const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
@@ -542,22 +542,6 @@ describe('Checkout', () => {
             });
 
             describe('if isLoggedIn set to `true`', () => {
-                it('should not call `loadBasket`', async () => {
-                    // Arrange & Act
-                    const loadBasketSpy = jest.spyOn(VueCheckout.methods, 'loadBasket');
-
-                    shallowMount(VueCheckout, {
-                        store: createStore({ ...defaultState, isLoggedIn: true }),
-                        i18n,
-                        localVue,
-                        propsData
-                    });
-                    await flushPromises();
-
-                    // Assert
-                    expect(loadBasketSpy).not.toHaveBeenCalled();
-                });
-
                 it('should call `loadCheckout`', async () => {
                     // Arrange & Act
                     const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');

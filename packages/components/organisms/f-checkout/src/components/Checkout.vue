@@ -298,13 +298,9 @@ export default {
         async initialise () {
             this.setAuthToken(this.authToken);
 
-            if (!this.isLoggedIn) {
-                await this.loadBasket();
-            }
-
             const promises = this.isLoggedIn
-                ? [this.loadCheckout(), this.loadAvailableFulfilment()]
-                : [this.loadAvailableFulfilment()];
+                ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
+                : [this.loadBasket(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
 
