@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.53.0
+-------------------------------
+*_February 9, 2021_*
+
+### Added
+- Loading customer address from API endpoint if Checkout endpoint did not return it
+
+
 v0.52.0
 -------------------------------
 *February 9, 2021*

@@ -3,6 +3,7 @@ import CheckoutModule from '../checkout.module';
 import checkoutDelivery from '../../demo/checkout-delivery.json';
 import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
+import customerAddresses from '../../demo/get-address.json';
 
 import {
     UPDATE_AUTH,
@@ -21,6 +22,7 @@ const { actions, mutations } = CheckoutModule;
 
 const {
     createGuestUser,
+    getAddress,
     getAvailableFulfilment,
     getBasket,
     getCheckout,
@@ -249,6 +251,35 @@ describe('CheckoutModule', () => {
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
                 expect(commit).toHaveBeenCalledWith(UPDATE_BASKET_DETAILS, {
                     serviceType: basketDelivery.ServiceType.toLowerCase()
+                });
+            });
+        });
+
+        describe('getAddress ::', () => {
+            it(`should get the address details from the backend and call ${UPDATE_FULFILMENT_ADDRESS} mutation.`, async () => {
+                // Arrange
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept-Language': payload.language,
+                        Authorization: `Bearer ${state.authToken}`
+                    },
+                    timeout: payload.timeout
+                };
+
+                axios.get = jest.fn(() => Promise.resolve({ data: customerAddresses }));
+                const [expectedAddress] = customerAddresses.Addresses;
+
+                // Act
+                await getAddress({ commit, state }, payload);
+
+                // Assert
+                expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, {
+                    line1: expectedAddress.Line1,
+                    line2: expectedAddress.Line2,
+                    city: expectedAddress.City,
+                    postcode: expectedAddress.ZipCode
                 });
             });
         });
