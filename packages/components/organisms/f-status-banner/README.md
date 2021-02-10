@@ -100,7 +100,7 @@ $ cd packages/components//StatusBanner
 ### Unit, Integration and Contract
 
 To test all components, run from root directory.
-To test only `f-status-banner`, run from the `./fozzie-components/packages/f-status-banner` directory.
+To test only `f-status-banner`, run from the `./fozzie-components/packages/components/organisms/f-status-banner` directory.
 
 ```sh
 yarn test
