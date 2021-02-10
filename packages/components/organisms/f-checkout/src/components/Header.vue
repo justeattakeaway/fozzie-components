@@ -89,7 +89,7 @@ export default {
         onVisitLoginPage () {
             this.$emit(EventNames.CheckoutVisitLoginPage);
 
-            this.$logger.logInfo('Consumer Visit Login Page', this.$store)
+            this.$logger.logInfo('Consumer Visit Login Page', this.$store);
         }
     }
 };

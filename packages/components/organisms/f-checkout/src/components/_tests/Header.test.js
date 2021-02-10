@@ -2,7 +2,9 @@ import Vuex from 'vuex';
 import { VueI18n } from '@justeat/f-globalisation';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Header from '../Header.vue';
-import { i18n, defaultState, createStore, $logger } from './helpers/setup';
+import {
+    i18n, defaultState, createStore, $logger
+} from './helpers/setup';
 import { CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY } from '../../constants';
 import EventNames from '../../event-names';
 

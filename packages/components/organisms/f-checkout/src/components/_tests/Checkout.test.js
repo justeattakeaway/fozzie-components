@@ -1462,7 +1462,7 @@ describe('Checkout', () => {
                 const error = 'Unknown Error';
 
                 const payload = {
-                    error: error,
+                    error,
                     isLoggedIn: false,
                     serviceType: CHECKOUT_METHOD_DELIVERY
                 };

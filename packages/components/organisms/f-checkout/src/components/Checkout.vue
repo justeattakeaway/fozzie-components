@@ -328,7 +328,6 @@ export default {
                     this.$store,
                     eventData
                 );
-
             } catch (thrownErrors) {
                 eventData.errors = thrownErrors;
 
@@ -463,7 +462,7 @@ export default {
             const eventData = {
                 isLoggedIn: this.isLoggedIn,
                 serviceType: this.serviceType
-            }
+            };
 
             // TODO: Review this later - even though f-registration does something similar
             if (Array.isArray(thrownErrors)) {
