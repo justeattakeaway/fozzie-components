@@ -268,7 +268,7 @@ describe('CheckoutModule', () => {
                 };
 
                 axios.get = jest.fn(() => Promise.resolve({ data: customerAddresses }));
-                const [exptectedAddress] = customerAddresses.Addresses;
+                const [expectedAddress] = customerAddresses.Addresses;
 
                 // Act
                 await getAddress({ commit, state }, payload);
@@ -276,10 +276,10 @@ describe('CheckoutModule', () => {
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
                 expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, {
-                    line1: exptectedAddress.Line1,
-                    line2: exptectedAddress.Line2,
-                    city: exptectedAddress.City,
-                    postcode: exptectedAddress.ZipCode
+                    line1: expectedAddress.Line1,
+                    line2: expectedAddress.Line2,
+                    city: expectedAddress.City,
+                    postcode: expectedAddress.ZipCode
                 });
             });
         });
