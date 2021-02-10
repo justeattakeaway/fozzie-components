@@ -89,10 +89,10 @@ $ cd fozzie-components
 $ yarn
 ```
 
-Change directory to the `StatusBanner` package:
+Change directory to the `f-status-banner` package:
 
 ```sh
-$ cd packages/components//StatusBanner
+$ cd packages/components/organisms/f-status-banner
 ```
 
 ## Testing
