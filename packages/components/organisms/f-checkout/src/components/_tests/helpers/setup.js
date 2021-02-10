@@ -85,5 +85,10 @@ const $logger = {
 };
 
 export {
-    fulfilmentTimes, defaultState, defaultActions, i18n, createStore, $logger
+    fulfilmentTimes,
+    defaultState,
+    defaultActions,
+    i18n,
+    createStore,
+    $logger
 };
