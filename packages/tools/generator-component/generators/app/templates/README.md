@@ -89,10 +89,10 @@ $ cd fozzie-components
 $ yarn
 ```
 
-Change directory to the `<%= name.component %>` package:
+Change directory to the `f-<%= name.default %>` package:
 
 ```sh
-$ cd packages/components/<%= componentCategory %>/<%= name.component %>
+$ cd <%= componentFolder %>f-<%= name.default %>
 ```
 
 ## Testing
