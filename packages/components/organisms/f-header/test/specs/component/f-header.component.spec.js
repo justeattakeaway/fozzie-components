@@ -101,12 +101,13 @@ describe('f-header component tests', () => {
         expect(browser.getUrl()).toContain('/offers');
     });
 
-    forEach(['gb', 'au'])
-    .it.only('should display all flags when mouse moves to country selector icon', field => {
+    forEach(['gb'])
+    .it.only('should display all flags when mouse moves to country selector icon', country => {
         // Act
         header.moveToCountrySelector();
 
         // Assert
-        expect(header.isFlagDisplayed(field)).toBe(true);
+        expect(header.isCountrySelectorOpen()).toBe(true);
+        expect(header.isFlagDisplayed(country)).toBe(true);
     })
 });
