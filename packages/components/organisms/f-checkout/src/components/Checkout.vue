@@ -297,7 +297,7 @@ export default {
          *
          */
         async submitCheckout () {
-            const loggerPayload = {
+            const eventData = {
                 isLoggedIn: this.isLoggedIn,
                 serviceType: this.serviceType
             };
@@ -321,23 +321,23 @@ export default {
                     timeout: this.updateCheckoutTimeout
                 });
 
-                this.$emit(EventNames.CheckoutSuccess, loggerPayload);
+                this.$emit(EventNames.CheckoutSuccess, eventData);
 
                 this.$logger.logInfo(
                     'Consumer Checkout Successful',
                     this.$store,
-                    loggerPayload
+                    eventData
                 );
 
             } catch (thrownErrors) {
-                loggerPayload.errors = thrownErrors;
+                eventData.errors = thrownErrors;
 
-                this.$emit(EventNames.CheckoutFailure, loggerPayload);
+                this.$emit(EventNames.CheckoutFailure, eventData);
 
                 this.$logger.logError(
                     'Consumer Checkout Failure',
                     this.$store,
-                    loggerPayload
+                    eventData
                 );
             }
         },
@@ -460,7 +460,7 @@ export default {
                 thrownErrors = error.response.data.errors;
             }
 
-            const loggerPayload = {
+            const eventData = {
                 isLoggedIn: this.isLoggedIn,
                 serviceType: this.serviceType
             }
@@ -469,20 +469,20 @@ export default {
             if (Array.isArray(thrownErrors)) {
                 this.genericErrorMessage = thrownErrors[0].description || this.$t('errorMessages.genericServerError');
 
-                loggerPayload.error = thrownErrors;
+                eventData.error = thrownErrors;
 
-                this.$emit(EventNames.CheckoutFailure, loggerPayload);
+                this.$emit(EventNames.CheckoutFailure, eventData);
             } else {
                 this.genericErrorMessage = error;
 
-                loggerPayload.error = error;
+                eventData.error = error;
 
-                this.$emit(EventNames.CheckoutFailure, loggerPayload);
+                this.$emit(EventNames.CheckoutFailure, eventData);
 
                 this.$logger.logError(
                     'Consumer Checkout Failure',
                     this.$store,
-                    loggerPayload
+                    eventData
                 );
             }
         },
