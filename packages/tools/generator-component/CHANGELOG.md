@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.0.1
+------------------------------
+*February 10, 2021*
+
+### Fixed
+- Couple of path updates in the `README` and closing tag for `h1` removed.
+
+
 v2.0.0
 ------------------------------
 *January 27, 2021*
