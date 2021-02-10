@@ -297,7 +297,6 @@ export default {
          *
          */
         async submitCheckout () {
-
             const loggerPayload = {
                 isLoggedIn: this.isLoggedIn,
                 serviceType: this.serviceType
@@ -322,11 +321,11 @@ export default {
                     timeout: this.updateCheckoutTimeout
                 });
 
-                this.$emit(EventNames.CheckoutSuccess, this.loggerPayload);
+                this.$emit(EventNames.CheckoutSuccess, loggerPayload);
 
-                this.handleLogging(
-                    'logInfo',
+                this.$logger.logInfo(
                     'Consumer Checkout Successful',
+                    this.$store,
                     loggerPayload
                 );
 
@@ -335,9 +334,9 @@ export default {
 
                 this.$emit(EventNames.CheckoutFailure, loggerPayload);
 
-                this.handleLogging(
-                    'logError',
+                this.$logger.logError(
                     'Consumer Checkout Failure',
+                    this.$store,
                     loggerPayload
                 );
             }
@@ -367,9 +366,9 @@ export default {
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutSetupGuestFailure, thrownErrors);
 
-                this.handleLogging(
-                    'logError',
+                this.$logger.logError(
                     'Checkout Setup Guest Failure',
+                    this.$store,
                     thrownErrors
                 );
             }
@@ -391,9 +390,9 @@ export default {
                 this.$emit(EventNames.CheckoutGetFailure, thrownErrors);
                 this.hasCheckoutLoadedSuccessfully = false;
 
-                this.handleLogging(
-                    'logError',
+                this.$logger.logError(
                     'Get Checkout Failure',
+                    this.$store,
                     thrownErrors
                 );
             }
@@ -417,9 +416,9 @@ export default {
                 this.$emit(EventNames.CheckoutBasketGetFailure, thrownErrors);
                 this.hasCheckoutLoadedSuccessfully = false;
 
-                this.handleLogging(
-                    'logError',
+                this.$logger.logError(
                     'Get Checkout Basket Failure',
+                    this.$store,
                     thrownErrors
                 );
             }
@@ -441,9 +440,9 @@ export default {
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetFailure, thrownErrors);
                 this.hasCheckoutLoadedSuccessfully = false;
 
-                this.handleLogging(
-                    'logError',
+                this.$logger.logError(
                     'Get Checkout Available Fulfilment Times Failure',
+                    this.$store,
                     thrownErrors
                 );
             }
@@ -480,9 +479,9 @@ export default {
 
                 this.$emit(EventNames.CheckoutFailure, loggerPayload);
 
-                this.handleLogging(
-                    'logError',
+                this.$logger.logError(
                     'Consumer Checkout Failure',
+                    this.$store,
                     loggerPayload
                 );
             }
@@ -498,9 +497,9 @@ export default {
                 const validationState = validations.getFormValidationState(this.$v);
                 this.$emit(EventNames.CheckoutValidationError, validationState);
 
-                this.handleLogging(
-                    'logWarn',
+                this.$logger.logWarn(
                     'Checkout Validation Error',
+                    this.$store,
                     validationState
                 );
                 return;
@@ -539,10 +538,6 @@ export default {
         */
         isValidPostcode () {
             return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
-        },
-
-        handleLogging(type, message, payload) {
-            this.$logger[type](message, this.$store, payload)
         }
     },
 
