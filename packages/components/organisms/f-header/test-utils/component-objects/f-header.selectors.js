@@ -17,8 +17,8 @@ export const NAVIGATION = {
     }, 
     countrySelector: {
         link: '[data-test-id="country-selector"]', 
-        icons: '[span="c-countrySelector-currentFlag-wrapper"]', 
+        currentIcon: '[data-test-id="action-button-component"] svg[class*="current"]',
         open: '[class="c-countrySelector c-nav-list-item has-sublist is-open"]',
-        listOfFlags: '[class="c-countrySelector-list"] li'
+        flagList: '[class="c-countrySelector-list"] li'
     }
 }

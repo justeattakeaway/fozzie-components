@@ -29,9 +29,9 @@ class Header extends Page {
         }, 
         countrySelector: {
             get link () { return  $(NAVIGATION.countrySelector.link) },
-            get icons () { return $(NAVIGATION.countrySelector.icons) },
+            get currentIcon () { return $(NAVIGATION.countrySelector.currentIcon) },
             get open () { return  $(NAVIGATION.countrySelector.open) }, 
-            get flags() { return $$(NAVIGATION.countrySelector.listOfFlags) }
+            get flags() { return $$(NAVIGATION.countrySelector.flagList) }
         }
     }
 
@@ -42,21 +42,39 @@ class Header extends Page {
         return this.navigation.offers.icon.filter(element => element.getAttribute('class').includes('u-showAboveMid')) 
     }
 
-    set flag(country) {
-        this.flagValue = this.navigation.countrySelector.flags.filter(element => element.getAttribute('data-test-id').includes(country));
-    }
-
-    set icon(country) {
-        this.iconValue = this.navigation.countrySelector.icons.getAttribute('class').includes(country);
+    set expectedCountryFlag(country) {
+        this.flagValue = this.navigation.countrySelector.flags.filter(element => element.getAttribute('data-test-id').includes(country))[0];
     }
 
     get flag(){
+        if (this.flagValue === null){
+            throw new Error ('Please set a flag value');
+        } else {
         return this.flagValue;
+        }
     }
 
-    get icon(){
+    // set expectedCurrentCountryIcon(country){
+    //     this.formattedSelector = this.navigation.countrySelector.currentIcon.replace('[0]', country)
+    //     this.iconValue = this.formattedSelector;
+    //     console.log(this.iconValue.isDisplayed());
+    // }
+
+    get currentCountryIcon(){
+        if (this.iconValue === null){
+            throw new Error ('Please set a current country icon value');
+        } else {
         return this.iconValue;
+        }
     }
+
+    // set icon(country) {
+    //     this.iconValue = this.navigation.countrySelector.icons.getAttribute('class').includes(country);
+    // }
+
+    // get icon(){
+    //     return this.iconValue;
+    // }
 
     open(){
         super.openComponent('organism', 'header-component');
@@ -67,8 +85,31 @@ class Header extends Page {
     }
 
     openWithLocale(locale){
-        locale.toUpperCase();
-        super.openComponent('organism', `header-component&knob-Locale=en-${locale}`)
+        let countryFormatted = locale.toUpperCase();
+        let formattedLocale = '';
+        switch ( countryFormatted ){
+            case 'GB':
+            case 'AU':
+            case 'NZ':
+            case 'IE':
+                formattedLocale = `en-${countryFormatted}`
+                break
+            case 'DK':
+                formattedLocale = `da-${countryFormatted}`
+                break
+            case 'ES':
+                formattedLocale = `es-${countryFormatted}`
+                break
+            case 'IT':
+                formattedLocale = `it-${countryFormatted}`
+                break
+            case 'NO':
+                formattedLocale = `nb-${countryFormatted}`
+                break
+            default:
+                throw new Error (`locale ${countryFormatted} is not supported`)
+        }
+        super.openComponent('organism', `header-component&knob-Locale=${formattedLocale}`)
     }
 
     waitForComponent(){
@@ -84,16 +125,18 @@ class Header extends Page {
     }
 
     isFlagDisplayed(){
-        return this.flag[0].isDisplayed();
+        return this.flag.isDisplayed();
     }
 
-    isCorrectIconDisplayed(){
-        console.log(this.icon[0]);
-        return this.icon.isDisplayed();
+    isCurrentCountryIconDisplayed(country){
+       let expectedIcon = this.navigation.countrySelector.currentIcon.getAttribute('class').includes(`c-ficon--flag.${country}.round`);
+       console.log('HEYY', expectedIcon)
+       
+       return expectedIcon ? this.navigation.countrySelector.currentIcon.isDisplayed() : false
     }
 
-    clickFlag(){
-        return this.flag[0].click();
+    clickFlagListItem(){
+        return this.flag.click();
     }
 
     // isCountrySelectorIconDisplayed(locale) {

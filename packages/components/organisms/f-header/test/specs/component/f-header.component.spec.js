@@ -90,40 +90,32 @@ describe('f-header component tests', () => {
         expect(browser.getUrl()).toContain('/offers');
     });
 
-    forEach(['gb', 'au', 'at', 'be', 'bg', 'ca', 'ca', 'dk', 'fr', 'de', 'ie', 'il', 'it', 'lu', 'nz', 'no', 'pl', 'pt', 'ro', 'es', 'ch', 'ch', 'ch'])
-    .it('should display all flags when mouse hovers over country selector icon', country => {
+    forEach([['gb', '.co.uk'], ['au', 'au'], ['at', 'at'], ['be', 'be-en'], ['bg', 'bg'], ['ca', 'skipthedishes.com'], ['ca', 'skipthedishes.com/fr'], ['dk', '.dk'], ['fr', '.fr'], ['de', '.de'], ['ie', '.ie'], ['il', '.il'], ['it', '.it'], ['lu', 'lu-en'], ['nl', '.nl'], ['nz', '.nz'], ['no', '.no'], ['pl', '.pl'], ['pt', '/pt'], ['ro', '/ro'], ['es', '.es'], ['ch', '.ch'], ['ch', '/en'], ['ch', '/fr'] ])
+    .it.only('should display all flags when mouse hovers over country selector icon', (country, expectedUrl) => {
         // Act
         browser.maximizeWindow();
         header.moveToCountrySelector();
-        header.flag = country;
+        header.expectedCountryFlag = country;
 
         // Assert
         expect(header.isCountrySelectorOpen()).toBe(true);
         expect(header.isFlagDisplayed()).toBe(true);
+
+        // Act
+        header.clickFlagListItem();
+
+        // Assert
+        expect(browser.getUrl()).toContain(expectedUrl);
+        
     });
 
-    // forEach(['gb', 'au', 'at', 'be', 'bg', 'ca', 'ca', 'dk', 'fr', 'de', 'ie', 'il', 'it', 'lu', 'nz', 'no', 'pl', 'pt', 'ro', 'es', 'ch', 'ch', 'ch'])
-    // .it('should display all flags when mouse hovers over country selector icon', country => {
-    //     // Act
-    //     browser.maximizeWindow();
-    //     header.moveToCountrySelector();
-    //     header.flag = country;
-
-    //     // Assert
-    //     expect(header.isCountrySelectorOpen()).toBe(true);
-    //     expect(header.isFlagDisplayed()).toBe(true);
-    // });
-
-
-
-    forEach(['gb', 'au', 'at'])
-    .it.skip('should change header logo depending on which locale is chosen', country => {
+    forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
+    .it('should change header logo depending on which locale is chosen', country => {
         // Act
         header.openWithLocale(country);
-        header.icon = country;
+        // header.expectedCurrentCountryIcon = country
     
         // Assert
-        expect(header.isCorrectIconDisplayed()).toBe(true);
-        // expect(header.isCountrySelectorIconDisplayed('GB')).toBe(false);
+        expect(header.isCurrentCountryIconDisplayed(country)).toBe(true);
     });
 });
