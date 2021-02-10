@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.54.0
+-------------------------------
+*February 10, 2021*
+
+### Added
+- `basketTotal` and `restaurantId` to the state, being retrieved from the Basket API.
+
+### Changed
+- Now always calling `loadBasket` regardless of if it's a guest or authenticated user.
+
+
 v0.52.0
 -------------------------------
 *February 9, 2021*

@@ -65,6 +65,8 @@ const userNote = 'Beware of the dachshund';
 const defaultState = {
     id: '',
     serviceType: '',
+    restaurantId: '',
+    basketTotal: 0,
     customer: {
         firstName: '',
         lastName: '',
@@ -248,7 +250,9 @@ describe('CheckoutModule', () => {
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
                 expect(commit).toHaveBeenCalledWith(UPDATE_BASKET_DETAILS, {
-                    serviceType: basketDelivery.ServiceType.toLowerCase()
+                    serviceType: basketDelivery.ServiceType.toLowerCase(),
+                    restaurantId: basketDelivery.RestaurantId,
+                    basketTotal: basketDelivery.BasketSummary.BasketTotals.Total
                 });
             });
         });

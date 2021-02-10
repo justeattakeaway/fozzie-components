@@ -19,6 +19,8 @@ export default {
     state: () => ({
         id: '',
         serviceType: '',
+        restaurantId: '',
+        basketTotal: 0,
         customer: {
             firstName: '',
             lastName: '',
@@ -172,7 +174,9 @@ export default {
 
             const { data } = await axios.get(url, config);
             const basketDetails = {
-                serviceType: data.ServiceType.toLowerCase()
+                serviceType: data.ServiceType.toLowerCase(),
+                restaurantId: data.RestaurantId,
+                basketTotal: data.BasketSummary.BasketTotals.Total
             };
 
             commit(UPDATE_BASKET_DETAILS, basketDetails);
