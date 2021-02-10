@@ -17,6 +17,7 @@ export const NAVIGATION = {
     }, 
     countrySelector: {
         link: '[data-test-id="country-selector"]', 
+        icons: '[span="c-countrySelector-currentFlag-wrapper"]', 
         open: '[class="c-countrySelector c-nav-list-item has-sublist is-open"]',
         listOfFlags: '[class="c-countrySelector-list"] li'
     }

@@ -91,7 +91,7 @@ describe('f-header component tests', () => {
     });
 
     forEach(['gb', 'au', 'at', 'be', 'bg', 'ca', 'ca', 'dk', 'fr', 'de', 'ie', 'il', 'it', 'lu', 'nz', 'no', 'pl', 'pt', 'ro', 'es', 'ch', 'ch', 'ch'])
-    .it.only('should display all flags when mouse moves to country selector icon', country => {
+    .it('should display all flags when mouse hovers over country selector icon', country => {
         // Act
         browser.maximizeWindow();
         header.moveToCountrySelector();
@@ -102,8 +102,22 @@ describe('f-header component tests', () => {
         expect(header.isFlagDisplayed()).toBe(true);
     });
 
+    // forEach(['gb', 'au', 'at', 'be', 'bg', 'ca', 'ca', 'dk', 'fr', 'de', 'ie', 'il', 'it', 'lu', 'nz', 'no', 'pl', 'pt', 'ro', 'es', 'ch', 'ch', 'ch'])
+    // .it('should display all flags when mouse hovers over country selector icon', country => {
+    //     // Act
+    //     browser.maximizeWindow();
+    //     header.moveToCountrySelector();
+    //     header.flag = country;
+
+    //     // Assert
+    //     expect(header.isCountrySelectorOpen()).toBe(true);
+    //     expect(header.isFlagDisplayed()).toBe(true);
+    // });
+
+
+
     forEach(['gb', 'au', 'at'])
-    .it('should change header logo depending on which locale is chosen', country => {
+    .it.skip('should change header logo depending on which locale is chosen', country => {
         // Act
         header.openWithLocale(country);
         header.icon = country;

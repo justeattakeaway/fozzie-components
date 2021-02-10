@@ -29,7 +29,7 @@ class Header extends Page {
         }, 
         countrySelector: {
             get link () { return  $(NAVIGATION.countrySelector.link) },
-            get icons () { return  $$(NAVIGATION.countrySelector.link) },
+            get icons () { return $(NAVIGATION.countrySelector.icons) },
             get open () { return  $(NAVIGATION.countrySelector.open) }, 
             get flags() { return $$(NAVIGATION.countrySelector.listOfFlags) }
         }
@@ -47,7 +47,7 @@ class Header extends Page {
     }
 
     set icon(country) {
-        this.iconValue = this.navigation.countrySelector.icons.filter(element => element.getAttribute('class').includes(country));
+        this.iconValue = this.navigation.countrySelector.icons.getAttribute('class').includes(country);
     }
 
     get flag(){
@@ -88,7 +88,12 @@ class Header extends Page {
     }
 
     isCorrectIconDisplayed(){
-        return this.icon[0].isDisplayed();
+        console.log(this.icon[0]);
+        return this.icon.isDisplayed();
+    }
+
+    clickFlag(){
+        return this.flag[0].click();
     }
 
     // isCountrySelectorIconDisplayed(locale) {
