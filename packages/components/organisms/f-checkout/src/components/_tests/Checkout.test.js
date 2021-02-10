@@ -59,13 +59,15 @@ describe('Checkout', () => {
     const loginUrl = 'http://localhost/login';
     const createGuestUrl = 'http://localhost/createguestuser';
     const getBasketUrl = 'http://localhost/getbasket';
+    const getAddressUrl = 'http://localhost/getaddress';
     const propsData = {
         updateCheckoutUrl,
         getCheckoutUrl,
         loginUrl,
         checkoutAvailableFulfilmentUrl,
         createGuestUrl,
-        getBasketUrl
+        getBasketUrl,
+        getAddressUrl
     };
 
     it('should be defined', () => {
@@ -317,6 +319,90 @@ describe('Checkout', () => {
                 expect(wrapper.vm.tenant).toEqual(tenant);
             });
         });
+
+        describe('shouldLoadAddress ::', () => {
+            it('should return `true` for delivery order without address when user is logged in', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultState,
+                        isLoggedIn: true,
+                        serviceType: CHECKOUT_METHOD_DELIVERY,
+                        address: {}
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadAddress;
+
+                // Assert
+                expect(result).toBe(true);
+            });
+
+            it('should return `false` if `isLoggedIn` is `false`', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultState,
+                        isLoggedIn: false,
+                        serviceType: CHECKOUT_METHOD_DELIVERY,
+                        address: {}
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadAddress;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should return `false` if `serviceType` is `collection`', async () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultState,
+                        isLoggedIn: true,
+                        serviceType: CHECKOUT_METHOD_COLLECTION,
+                        address: {}
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+                const result = await wrapper.vm.shouldLoadAddress;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should return `false` if address is set', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultState,
+                        isLoggedIn: true,
+                        serviceType: CHECKOUT_METHOD_DELIVERY,
+                        address: { line1: 'Fleet Place House', postcode: 'EC4M 7RF', city: 'London' }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadAddress;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+        });
     });
 
     describe('mounted ::', () => {
@@ -367,6 +453,22 @@ describe('Checkout', () => {
                 expect(setAuthTokenSpy).toHaveBeenCalledWith(propsDataWithAuthToken.authToken);
             });
 
+            it('should call `loadBasket`', async () => {
+                // Arrange & Act
+                const loadBasketSpy = jest.spyOn(VueCheckout.methods, 'loadBasket');
+
+                shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+                await flushPromises();
+
+                // Assert
+                expect(loadBasketSpy).toHaveBeenCalled();
+            });
+
             it('should call `loadAvailableFulfilment`', async () => {
                 // Arrange & Act
                 const loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
@@ -383,10 +485,11 @@ describe('Checkout', () => {
                 expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
             });
 
-            describe('if isLoggedIn set to `false`', () => {
-                it('should call `loadBasket`', async () => {
+            describe('if shouldLoadAddress returns `false`', () => {
+                it('should not call `loadAddress`', async () => {
                     // Arrange & Act
-                    const loadBasketSpy = jest.spyOn(VueCheckout.methods, 'loadBasket');
+                    const loadAddressSpy = jest.spyOn(VueCheckout.methods, 'loadAddress');
+                    jest.spyOn(VueCheckout.computed, 'shouldLoadAddress').mockReturnValueOnce(false);
 
                     shallowMount(VueCheckout, {
                         store: createStore(),
@@ -397,9 +500,30 @@ describe('Checkout', () => {
                     await flushPromises();
 
                     // Assert
-                    expect(loadBasketSpy).toHaveBeenCalled();
+                    expect(loadAddressSpy).not.toHaveBeenCalled();
                 });
+            });
 
+            describe('if shouldLoadAddress returns `true`', () => {
+                it('should call `loadAddress`', async () => {
+                    // Arrange & Act
+                    const loadAddressSpy = jest.spyOn(VueCheckout.methods, 'loadAddress');
+                    jest.spyOn(VueCheckout.computed, 'shouldLoadAddress').mockReturnValueOnce(true);
+
+                    shallowMount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                    await flushPromises();
+
+                    // Assert
+                    expect(loadAddressSpy).toHaveBeenCalled();
+                });
+            });
+
+            describe('if isLoggedIn set to `false`', () => {
                 it('should not call `loadCheckout`', async () => {
                     // Arrange & Act
                     const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
@@ -418,22 +542,6 @@ describe('Checkout', () => {
             });
 
             describe('if isLoggedIn set to `true`', () => {
-                it('should not call `loadBasket`', async () => {
-                    // Arrange & Act
-                    const loadBasketSpy = jest.spyOn(VueCheckout.methods, 'loadBasket');
-
-                    shallowMount(VueCheckout, {
-                        store: createStore({ ...defaultState, isLoggedIn: true }),
-                        i18n,
-                        localVue,
-                        propsData
-                    });
-                    await flushPromises();
-
-                    // Assert
-                    expect(loadBasketSpy).not.toHaveBeenCalled();
-                });
-
                 it('should call `loadCheckout`', async () => {
                     // Arrange & Act
                     const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
@@ -1384,6 +1492,51 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure)).toBeUndefined();
+                });
+            });
+        });
+
+        describe('loadAddress ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            describe('when `getAddress` request fails', () => {
+                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
+                    // Arrange
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, getAddress: jest.fn(async () => Promise.reject()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.loadAddress();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutAddressGetFailure).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutAddressGetSuccess)).toBeUndefined();
+                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
+                });
+            });
+
+            describe('when `getAddress` request succeeds', () => {
+                it('should emit success event', async () => {
+                    // Arrange
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.loadAddress();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutAddressGetSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutAddressGetFailure)).toBeUndefined();
                 });
             });
         });

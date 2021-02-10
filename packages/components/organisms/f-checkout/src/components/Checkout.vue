@@ -187,6 +187,16 @@ export default {
         loginUrl: {
             type: String,
             required: true
+        },
+
+        getAddressUrl: {
+            type: String,
+            required: true
+        },
+
+        getAddressTimeout: {
+            type: Number,
+            default: 1000
         }
     },
 
@@ -249,6 +259,12 @@ export default {
 
         tenant () {
             return TENANT_MAP[this.$i18n.locale];
+        },
+
+        shouldLoadAddress () {
+            return this.isLoggedIn &&
+            this.isCheckoutMethodDelivery &&
+            (!this.address || !this.address.line1);
         }
     },
 
@@ -266,6 +282,7 @@ export default {
         ...mapActions('checkout', [
             'createGuestUser',
             'getAvailableFulfilment',
+            'getAddress',
             'getBasket',
             'getCheckout',
             'updateCheckout',
@@ -281,15 +298,15 @@ export default {
         async initialise () {
             this.setAuthToken(this.authToken);
 
-            if (!this.isLoggedIn) {
-                await this.loadBasket();
-            }
-
             const promises = this.isLoggedIn
-                ? [this.loadCheckout(), this.loadAvailableFulfilment()]
-                : [this.loadAvailableFulfilment()];
+                ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
+                : [this.loadBasket(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
+
+            if (this.shouldLoadAddress) {
+                await this.loadAddress();
+            }
         },
 
         /**
@@ -444,6 +461,25 @@ export default {
                     this.$store,
                     thrownErrors
                 );
+            }
+        },
+
+        /**
+         * Load the customer address while emitting events to communicate its success or failure.
+         *
+         */
+        async loadAddress () {
+            try {
+                await this.getAddress({
+                    url: this.getAddressUrl,
+                    language: this.$i18n.locale,
+                    timeout: this.getAddressTimeout
+                });
+
+                this.$emit(EventNames.CheckoutAddressGetSuccess);
+            } catch (thrownErrors) {
+                this.$emit(EventNames.CheckoutAddressGetFailure, thrownErrors);
+                this.hasCheckoutLoadedSuccessfully = false;
             }
         },
 

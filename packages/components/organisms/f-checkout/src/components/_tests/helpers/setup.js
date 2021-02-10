@@ -53,7 +53,8 @@ const defaultActions = {
     updateAddressDetails: jest.fn(),
     updateCustomerDetails: jest.fn(),
     updateFulfilmentTime: jest.fn(),
-    getBasket: jest.fn()
+    getBasket: jest.fn(),
+    getAddress: jest.fn()
 };
 
 const i18n = {
