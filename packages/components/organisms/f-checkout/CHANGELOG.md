@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.56.1
 -------------------------------
-*_February 11, 2021_*
+*February 11, 2021*
 
 ### Changed
 - Used correct comment format to prevent it being shown on UI
@@ -14,7 +14,7 @@ v0.56.1
 
 v0.56.0
 -------------------------------
-*_February 11, 2021_*
+*February 11, 2021*
 
 ### Added
 - logging to `Checkout` and `Header` components.
@@ -23,7 +23,7 @@ v0.56.0
 
 v0.55.0
 -------------------------------
-*_February 11, 2021_*
+*February 11, 2021*
 ### Added
 - Added `vue-svg-loader` to Webpack config
 
@@ -33,7 +33,7 @@ v0.55.0
 
 v0.54.0
 -------------------------------
-*_February 10, 2021_*
+*February 10, 2021*
 
 ### Added
 - `basketTotal` and `restaurantId` to the state, being retrieved from the Basket API.
@@ -44,7 +44,7 @@ v0.54.0
 
 v0.53.0
 -------------------------------
-*_February 9, 2021_*
+*February 9, 2021*
 
 ### Added
 - Loading customer address from API endpoint if Checkout endpoint did not return it
