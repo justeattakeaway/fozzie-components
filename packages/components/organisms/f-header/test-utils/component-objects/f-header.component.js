@@ -32,10 +32,10 @@ class Header extends Page {
         }
     }
 
-    get countryLink()  { return this.linkValue != null ?  this.linkValue : 'Please set a link value'; }
+    get countryLink()  { return this.countryValue != null ?  this.countryValue : 'Please set a country value'; }
 
     set expectedCountry(country) {
-        this.linkValue = this.navigation.countrySelector.countries.filter(element => element.getAttribute('data-test-id').includes(country))[0];
+        this.countryValue = this.navigation.countrySelector.countries.filter(element => element.getAttribute('data-test-id').includes(country))[0];
     }
 
     open(){
