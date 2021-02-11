@@ -37,8 +37,8 @@ describe('f-header component tests', () => {
     forEach(['help', 'delivery', 'userAccount', 'countrySelector'])
     .it('should hide all navigation links, except offers link, when in mobile mode', field => {
         // Act
-        header.openWithExtraFeatures()
         browser.setWindowSize(500, 1000);
+        header.openWithExtraFeatures()
 
         // Assert
         expect(header.isMobileNavigationBarDisplayed()).toBe(true);
