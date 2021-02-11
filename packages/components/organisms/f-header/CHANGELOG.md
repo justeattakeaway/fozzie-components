@@ -11,6 +11,11 @@ v4.7.0
 - Country selector feature tests
 - dataTestKeys into country selector component
 
+*Fabruary 9, 2021*
+
+### Added
+- All tenants to a tenant prop for storybook f-header story
+
 
 v4.6.0
 ------------------------------

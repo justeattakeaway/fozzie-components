@@ -3,6 +3,57 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.56.0
+-------------------------------
+*_February 11, 2021_*
+
+### Added
+- logging to `Checkout` and `Header` components.
+- Tests to cover changes.
+
+
+v0.55.0
+-------------------------------
+*_February 11, 2021_*
+### Added
+- Added `vue-svg-loader` to Webpack config
+
+### Changed
+- Utilised `vue-svg-loader` for error page SVG
+
+
+v0.54.0
+-------------------------------
+*_February 10, 2021_*
+
+### Added
+- `basketTotal` and `restaurantId` to the state, being retrieved from the Basket API.
+
+### Changed
+- Now always calling `loadBasket` regardless of if it's a guest or authenticated user.
+
+
+v0.53.0
+-------------------------------
+*_February 9, 2021_*
+
+### Added
+- Loading customer address from API endpoint if Checkout endpoint did not return it
+
+
+v0.52.0
+-------------------------------
+*February 9, 2021*
+
+### Added
+- `updateCheckoutUrl` and `updateCheckoutTimeout` props.
+
+### Changed
+- Renamed `checkoutUrl` prop to `getCheckoutUrl`.
+
+### Removed
+- `checkoutId` prop.
+
 
 v0.51.0
 -------------------------------

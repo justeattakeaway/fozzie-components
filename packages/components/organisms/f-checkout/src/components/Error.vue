@@ -7,9 +7,8 @@
         data-test-id="checkout-error-page-component"
         :class="[$style['c-checkout-error'], $style['c-checkout-error--verticalPadding']]"
     >
-        <img
-            src="../assets/images/jet-sad-bag.svg"
-            alt="">
+        // TODO: Load image from CDN in future
+        <sad-bag-icon-decorator />
 
         <h1
             :class="$style['c-checkout-error-heading']"
@@ -27,10 +26,14 @@
 
 <script>
 import Card from '@justeat/f-card';
+import SadBagIconDecorator from '../assets/images/jet-sad-bag.svg';
 import '@justeat/f-card/dist/f-card.css';
 
 export default {
-    components: { Card }
+    components: {
+        Card,
+        SadBagIconDecorator
+    }
 };
 </script>
 
