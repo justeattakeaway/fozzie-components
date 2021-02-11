@@ -8,25 +8,25 @@ describe('f-header component tests', () => {
         header.waitForComponent();
     });
 
-    it('should display the header component', () => {
+    it('should display component', () => {
         // Assert
         expect(header.isComponentDisplayed()).toBe(true);
     });
 
-    it('should displayed the header logo', () => {
+    it('should display logo', () => {
         // Assert
         expect(header.isLogoDisplayed()).toBe(true);
     })
 
     forEach(['help', 'countrySelector', 'userAccount'])
-    .it('should only show the default navigation fields', field => {
+    .it('should only display the default navigation fields', field => {
         // Assert
         expect(header.isFieldLinkDisplayed(field)).toBe(true); 
         expect(header.isFieldLinkDisplayed('offers')).toBe(false);
     });
 
     forEach(['offers', 'help', 'delivery', 'userAccount', 'countrySelector'])
-    .it('should show extra fields as well as default when selected', field => {
+    .it('should display extra fields as well as default when selected', field => {
         // Act
         header.openWithExtraFeatures();
 
@@ -47,7 +47,7 @@ describe('f-header component tests', () => {
     });
 
     forEach(['help', 'countrySelector', 'userAccount'])
-    .it('should show navigation fields when burger menu has been opened', field => {
+    .it('should display navigation fields when burger menu has been opened', field => {
         // Act
         browser.setWindowSize(500, 1000);
         header.openMobileNavigation();
@@ -105,7 +105,7 @@ describe('f-header component tests', () => {
     });
 
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
-    .it('should show correct country selector icon depending on which locale is chosen', country => {
+    .it('should display correct country selector icon depending on which locale is chosen', country => {
         // Act
         browser.maximizeWindow();
         header.openWithLocale(country);
