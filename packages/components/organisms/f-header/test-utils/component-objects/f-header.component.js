@@ -82,8 +82,12 @@ class Header extends Page {
         return this.component.isDisplayed();
     }
 
-    isCountryLinkDisplayed(){
-        return this.countryLink.isDisplayed();
+    isLogoDisplayed(){
+        return this.logo.isDisplayed();
+    }
+
+    isFieldLinkDisplayed(fieldName){
+        return this.navigation[fieldName].link.isDisplayedInViewport();
     }
 
     isCurrentCountryIconDisplayed(country){
@@ -91,24 +95,12 @@ class Header extends Page {
        return expectedIcon ? this.navigation.countrySelector.currentIcon.isDisplayed() : false
     }
 
-    clickCountryListItem(){
-        return this.countryLink.click();
-    }
-
-    isFieldLinkDisplayed(fieldName){
-        return this.navigation[fieldName].link.isDisplayedInViewport();
-    }
-
-    isLogoDisplayed(){
-        return this.logo.isDisplayed();
+    isCountryLinkDisplayed(){
+        return this.countryLink.isDisplayed();
     }
 
     isMobileNavigationBarDisplayed(){
         return this.mobileNavigationBar.isDisplayed();
-    }
-
-    isOffersIconDisplayed(){
-        return this.navigation.offers.link.isDisplayed();
     }
 
     // saving these for another ticket
@@ -128,16 +120,20 @@ class Header extends Page {
         return this.navigation.help.link.click();
     }
 
+    moveToCountrySelector(){
+        this.navigation.countrySelector.link.moveTo();
+    }
+
     openCountrySelector(){
         return this.navigation.countrySelector.link.click();
     }
 
-    openMobileNavigation(){
-        return this.mobileNavigationBar.click();
+    clickCountryListItem(){
+        return this.countryLink.click();
     }
 
-    moveToCountrySelector(){
-        this.navigation.countrySelector.link.moveTo();
+    openMobileNavigation(){
+        return this.mobileNavigationBar.click();
     }
 }
 
