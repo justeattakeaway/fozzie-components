@@ -12,8 +12,9 @@ v0.56.0
 - Tests to cover changes.
 
 
-*February 11, 2021*
+v0.55.0
 -------------------------------
+*February 11, 2021*
 ### Added
 - Added `vue-svg-loader` to Webpack config
 
