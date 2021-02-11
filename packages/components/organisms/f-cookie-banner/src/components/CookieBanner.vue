@@ -1,5 +1,6 @@
 <template>
     <div
+        v-if="!legacyBanner"
         ref="cookieBanner"
         :class="[
             $style['c-cookieBanner'],
@@ -10,7 +11,6 @@
         data-test-id="cookieBanner-component"
         :aria-hidden="shouldHideBanner">
         <div
-            v-if="!legacyBanner"
             :class="[
                 $style['c-cookieBanner-card'],
                 { [$style['c-cookieBanner-ios']]: isIosBrowser() }
@@ -64,11 +64,12 @@
                 </button-component>
             </div>
         </div>
-        <legacy-banner
-            v-else
-            @hide-legacy-banner="hideBanner"
-        />
     </div>
+    <legacy-banner
+        v-else
+        :should-hide-legacy-banner="shouldHideBanner"
+        @hide-legacy-banner="hideBanner"
+    />
 </template>
 
 <script>
@@ -249,7 +250,10 @@ export default {
          * @returns {Bool}
          */
         isIosBrowser () {
-            return /(iPhone|iPad).*Safari/.test(navigator.userAgent);
+            if (process.browser) {
+                return /(iPhone|iPad).*Safari/.test(navigator.userAgent);
+            }
+            return false;
         },
         /**
          * Resend GTM events

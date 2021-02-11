@@ -1,6 +1,9 @@
 <template>
     <div>
-        <div :class="[$style['c-cookieWarning'], { [$style['c-cookieBanner--hidden']]: hideBanner }]">
+        <div
+            :class="[$style['c-cookieWarning'], { [$style['c-cookieWarning--is-hidden']]: shouldHideLegacyBanner }]"
+            :aria-hidden="shouldHideLegacyBanner"
+            data-test-id="cookieBanner-component">
             <div :class="$style['c-cookieWarning-inner']">
                 <p>
                     {{ $t('legacyBannerText') }}
@@ -39,10 +42,11 @@ export default {
         ButtonComponent,
         CrossIcon
     },
-    data () {
-        return {
-            hideBanner: false
-        };
+    props: {
+        shouldHideLegacyBanner: {
+            type: Boolean,
+            default: false
+        }
     }
 };
 </script>
@@ -52,6 +56,8 @@ export default {
         box-sizing: border-box;
         background-color: $grey--darkest;
         position: fixed;
+        left: 0;
+        right: 0;
         bottom: 0;
         width: 100%;
         z-index: 99999990;
@@ -89,5 +95,9 @@ export default {
                 border: none;
                 cursor: pointer;
             }
+    }
+
+    .c-cookieWarning--is-hidden {
+        display: none;
     }
 </style>
