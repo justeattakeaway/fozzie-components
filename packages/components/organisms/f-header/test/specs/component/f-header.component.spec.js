@@ -58,7 +58,7 @@ describe('f-header component tests', () => {
 
     it('should change url when help-link is clicked', () => {
         // Act
-        browser.setWindowSize(1200, 1200);
+        browser.setWindowSize(1000, 1000);
         header.clickHelpLink();
 
         // Assert
