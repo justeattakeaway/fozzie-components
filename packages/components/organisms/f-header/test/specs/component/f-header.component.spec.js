@@ -85,7 +85,6 @@ describe('f-header component tests', () => {
         console.log(country);
 
         // Assert
-        expect(header.isCountrySelectorOpen()).toBe(true);
         expect(header.isCountryLinkDisplayed()).toBe(true);
 
         // Act
@@ -96,15 +95,14 @@ describe('f-header component tests', () => {
     });
 
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
-    .it.only('should display all countries when in mobile mode', country => {
+    .it('should display all countries when in mobile mode', country => {
         // Act
         browser.setWindowSize(500, 1000);
         header.openMobileNavigation();
-        header.openMobileCountrySelector();
+        header.openCountrySelector();
         header.expectedCountry = country;
 
         // Assert
-        expect(header.isCountrySelectorOpen()).toBe(true);
         expect(header.isCountryLinkDisplayed()).toBe(true);
     });
 

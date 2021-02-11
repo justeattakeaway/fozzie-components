@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.7.0
+------------------------------
+*February 11, 2021*
+
+### Added
+- Country selector feature tests
+- dataTestKeys into country selector component
+
 
 v4.6.0
 ------------------------------

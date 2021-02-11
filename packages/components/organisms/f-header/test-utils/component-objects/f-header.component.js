@@ -29,9 +29,7 @@ class Header extends Page {
         countrySelector: {
             get link () { return  $(NAVIGATION.countrySelector.link) },
             get currentIcon () { return $(NAVIGATION.countrySelector.currentIcon) },
-            get open () { return  $(NAVIGATION.countrySelector.open) }, 
-            get countries() { return $$(NAVIGATION.countrySelector.countryList) },
-            get mobileLink() { return $(NAVIGATION.countrySelector.mobileLink) }, 
+            get countries() { return $$(NAVIGATION.countrySelector.countryList) } 
         }
     }
 
@@ -85,10 +83,6 @@ class Header extends Page {
         return this.component.isDisplayed();
     }
 
-    isCountrySelectorOpen(){
-        return this.navigation.countrySelector.open.isDisplayed();
-    }
-
     isCountryLinkDisplayed(){
         return this.countryLink.isDisplayed();
     }
@@ -133,10 +127,6 @@ class Header extends Page {
 
     clickHelpLink(){
         return this.navigation.help.link.click();
-    }
-
-    openMobileCountrySelector(){
-        return this.navigation.countrySelector.mobileLink.click();
     }
 
     openCountrySelector(){

@@ -16,11 +16,8 @@ export const NAVIGATION = {
         link: '[data-test-id="user-info-link"]', 
     }, 
     countrySelector: {
-        link: '[data-test-id="country-selector"]', 
+        link: '[data-test-id="country-selector"] button', 
         currentIcon: '[data-test-id="action-button-component"] svg[class*="current"]',
-        open: '[class="c-countrySelector c-nav-list-item has-sublist is-open"]',
         countryList: '[class="c-countrySelector-list"] li', 
-        countryIcon: 'li [class="c-countrySelector-country"]', 
-        mobileLink: '[data-test-id="action-button-component"]'
     }
 }
