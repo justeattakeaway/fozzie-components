@@ -3,8 +3,7 @@ const {
     HEADER_COMPONENT, 
     HEADER_LOGO, 
     MOBILE_NAVIGATION_BAR, 
-    NAVIGATION, 
-    FLAGS
+    NAVIGATION
 } = require ('./f-header.selectors');
 
 class Header extends Page {
@@ -31,50 +30,16 @@ class Header extends Page {
             get link () { return  $(NAVIGATION.countrySelector.link) },
             get currentIcon () { return $(NAVIGATION.countrySelector.currentIcon) },
             get open () { return  $(NAVIGATION.countrySelector.open) }, 
-            get flags() { return $$(NAVIGATION.countrySelector.flagList) }
+            get countries() { return $$(NAVIGATION.countrySelector.countryList) },
+            get mobileLink() { return $(NAVIGATION.countrySelector.mobileLink) }, 
         }
     }
 
-    get mobileOffersIcon () { 
-        return this.navigation.offers.icon.filter(element => element.getAttribute('class').includes('u-showBelowMid')); 
+    get countryLink()  { return this.linkValue != null ?  this.linkValue : 'Please set a link value'; }
+
+    set expectedCountry(country) {
+        this.linkValue = this.navigation.countrySelector.countries.filter(element => element.getAttribute('data-test-id').includes(country))[0];
     }
-    get webOffersIcon () { 
-        return this.navigation.offers.icon.filter(element => element.getAttribute('class').includes('u-showAboveMid')) 
-    }
-
-    set expectedCountryFlag(country) {
-        this.flagValue = this.navigation.countrySelector.flags.filter(element => element.getAttribute('data-test-id').includes(country))[0];
-    }
-
-    get flag(){
-        if (this.flagValue === null){
-            throw new Error ('Please set a flag value');
-        } else {
-        return this.flagValue;
-        }
-    }
-
-    // set expectedCurrentCountryIcon(country){
-    //     this.formattedSelector = this.navigation.countrySelector.currentIcon.replace('[0]', country)
-    //     this.iconValue = this.formattedSelector;
-    //     console.log(this.iconValue.isDisplayed());
-    // }
-
-    get currentCountryIcon(){
-        if (this.iconValue === null){
-            throw new Error ('Please set a current country icon value');
-        } else {
-        return this.iconValue;
-        }
-    }
-
-    // set icon(country) {
-    //     this.iconValue = this.navigation.countrySelector.icons.getAttribute('class').includes(country);
-    // }
-
-    // get icon(){
-    //     return this.iconValue;
-    // }
 
     open(){
         super.openComponent('organism', 'header-component');
@@ -124,34 +89,22 @@ class Header extends Page {
         return this.navigation.countrySelector.open.isDisplayed();
     }
 
-    isFlagDisplayed(){
-        return this.flag.isDisplayed();
+    isCountryLinkDisplayed(){
+        return this.countryLink.isDisplayed();
     }
 
     isCurrentCountryIconDisplayed(country){
        let expectedIcon = this.navigation.countrySelector.currentIcon.getAttribute('class').includes(`c-ficon--flag.${country}.round`);
-       console.log('HEYY', expectedIcon)
-       
        return expectedIcon ? this.navigation.countrySelector.currentIcon.isDisplayed() : false
     }
 
-    clickFlagListItem(){
-        return this.flag.click();
+    clickCountryListItem(){
+        return this.countryLink.click();
     }
-
-    // isCountrySelectorIconDisplayed(locale) {
-    //     locale.toLowerCase();
-    //     let icon = this.navigation.countrySelector.link.filter(element => element.getAttribute('class').includes(`flag.${locale}.round`));
-    //     return icon.isDisplayedInViewport();
-    // }
 
     isFieldLinkDisplayed(fieldName){
         return this.navigation[fieldName].link.isDisplayedInViewport();
     }
-
-    // isCountrySelectorFlagDisplayed(fieldName){
-    //     return this.navigation.countrySelector[fieldName].isDisplayedInViewport();
-    // }
 
     isLogoDisplayed(){
         return this.logo.isDisplayed();
@@ -161,13 +114,18 @@ class Header extends Page {
         return this.mobileNavigationBar.isDisplayed();
     }
 
-    isMobileOffersIconDisplayed(){
-        return this.mobileOffersIcon.length === 1 && element[0].isDisplayed();
+    isOffersIconDisplayed(){
+        return this.navigation.offers.link.isDisplayed();
     }
 
-    isWebOffersIconDisplayed(){
-        return this.webOffersIcon.length === 1 && element[0].isDisplayed();
-    }
+    // saving these for another ticket
+    // isMobileOffersIconDisplayed(){
+    //     return this.mobileOffersIcon.length === 1 && element[0].isDisplayed();
+    // }
+
+    // isWebOffersIconDisplayed(){
+    //     return this.webOffersIcon.length === 1 && element[0].isDisplayed();
+    // }
 
     clickOffersLink(){
         return this.navigation.offers.link.click();
@@ -175,6 +133,10 @@ class Header extends Page {
 
     clickHelpLink(){
         return this.navigation.help.link.click();
+    }
+
+    openMobileCountrySelector(){
+        return this.navigation.countrySelector.mobileLink.click();
     }
 
     openCountrySelector(){
@@ -188,38 +150,6 @@ class Header extends Page {
     moveToCountrySelector(){
         this.navigation.countrySelector.link.moveTo();
     }
-  
 }
-
-// // Functions
-
-// exports.waitForHeader = () => headerComponent().waitForExist();
-// exports.isFieldLinkDisplayed = fieldName => navigation[fieldName].link().isDisplayedInViewport();
-// exports.isLogoDisplayed = () => headerLogo().isDisplayedInViewport();
-// exports.isMobileNavigationBarVisible = () => mobileNavigationBar().isDisplayedInViewport();
-
-// exports.isMobileOffersIconDisplayed = () => {
-//     const element = mobileOffersIcon();
-
-//     return element.length === 1 && element[0].isDisplayedInViewport();
-// };
-
-// exports.isWebOffersIconDisplayed = () => {
-//     const element = webOffersIcon();
-
-//     return element.length === 1 && element[0].isDisplayedInViewport();
-// }
-
-// exports.clickOffersLink = () => {
-//     navigation.offers.link().click();
-// };
-
-// exports.clickHelpLink = () => {
-//     navigation.help.link().click();
-// };
-
-// exports.openMobileNavigation = () => {
-//     mobileNavigationBar().click();
-// };
 
 module.exports = Header;

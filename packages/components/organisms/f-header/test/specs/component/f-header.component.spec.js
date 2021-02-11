@@ -29,12 +29,13 @@ describe('f-header component tests', () => {
     .it('should show extra fields as well as default when selected', field => {
         // Act
         header.openWithExtraFeatures()
+
         // Assert
         expect(header.isFieldLinkDisplayed(field)).toBe(true);
     });
 
     forEach(['help', 'delivery', 'userAccount', 'countrySelector'])
-    .it('should hide navigation links when in mobile mode', field => {
+    .it('should hide all navigation links, except offers link, when in mobile mode', field => {
         // Act
         header.openWithExtraFeatures()
         browser.setWindowSize(500, 1000);
@@ -42,6 +43,7 @@ describe('f-header component tests', () => {
         // Assert
         expect(header.isMobileNavigationBarDisplayed()).toBe(true);
         expect(header.isFieldLinkDisplayed(field)).toBe(false);
+        expect(header.isFieldLinkDisplayed('offers')).toBe(true);
     });
 
     forEach(['help', 'countrySelector', 'userAccount'])
@@ -53,24 +55,6 @@ describe('f-header component tests', () => {
         // Assert
         expect(header.isFieldLinkDisplayed(field)).toBe(true);
     });
-
-    // it('should only show one offers icon in desktop view and two in mobile', () => {
-    //     // Act
-    //     browser.setWindowSize(500, 500);
-    //     HeaderComponent.openMobileNavigation();
-
-    //     // Assert
-    //     expect(HeaderComponent.isMobileOffersIconDisplayed()).toBe(true);
-    //     expect(HeaderComponent.isWebOffersIconDisplayed()).toBe(true);
-
-    //     // Act
-    //     browser.setWindowSize(1000, 1000);
-
-    //     // Assert
-    //     // expect(HeaderComponent.isMobileOffersIconDisplayed()).toBe(false);
-    //     //this is currently showing as true due to error in navigation component
-    //     expect(HeaderComponent.isWebOffersIconDisplayed()).toBe(true);
-    // });
 
     it('should change url when help-link is clicked', () => {
         // Act
@@ -92,31 +76,42 @@ describe('f-header component tests', () => {
 
     forEach([['gb', '.co.uk'], ['au', 'au'], ['at', 'at'], ['be', 'be-en'], ['bg', 'bg'], ['ca_en', 'skipthedishes.com'], ['ca_fr', 'skipthedishes.com/fr'], ['dk', '.dk'], ['jet_fr', '.fr'], ['de', '.de'], ['ie', '.ie'], ['il', '.il'], ['it', '.it'], 
     ['lu', 'lu-en'], ['nl', '.nl'], ['nz', '.nz'], ['no', '.no'], ['pl', '.pl'], ['pt', '/pt'], ['ro', '/ro'], ['es', '.es'], ['ch_ch', '.ch'], ['ch_en', '/en'], ['ch_fr', '/fr'] ])
-    .it.only('should display all flags when mouse hovers over country selector icon', (country, expectedUrl) => {
+    .it('should display all countries and redirect to correct URL', (country, expectedUrl) => {
         // Act
         browser.maximizeWindow();
         header.moveToCountrySelector();
-        header.expectedCountryFlag = country;
+        header.expectedCountry = country;
 
-        console.log('heyyy', country)
+        console.log(country);
 
         // Assert
         expect(header.isCountrySelectorOpen()).toBe(true);
-        expect(header.isFlagDisplayed()).toBe(true);
+        expect(header.isCountryLinkDisplayed()).toBe(true);
 
         // Act
-        header.clickFlagListItem();
+        header.clickCountryListItem();
 
         // Assert
         expect(browser.getUrl()).toContain(expectedUrl);
-        
     });
 
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
-    .it('should change header logo depending on which locale is chosen', country => {
+    .it.only('should display all countries when in mobile mode', country => {
+        // Act
+        browser.setWindowSize(500, 1000);
+        header.openMobileNavigation();
+        header.openMobileCountrySelector();
+        header.expectedCountry = country;
+
+        // Assert
+        expect(header.isCountrySelectorOpen()).toBe(true);
+        expect(header.isCountryLinkDisplayed()).toBe(true);
+    });
+
+    forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
+    .it('should show correct country selector icon depending on which locale is chosen', country => {
         // Act
         header.openWithLocale(country);
-        // header.expectedCurrentCountryIcon = country
     
         // Assert
         expect(header.isCurrentCountryIconDisplayed(country)).toBe(true);
