@@ -12,7 +12,7 @@ v4.7.0
 - dataTestKeys into country selector component
 
 ### Changed
-- f-header component tests to use page object model
+- component tests to use page object model
 
 *Fabruary 9, 2021*
 
