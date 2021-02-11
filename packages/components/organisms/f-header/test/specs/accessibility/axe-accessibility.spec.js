@@ -1,11 +1,11 @@
-import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
-import HeaderComponent from '../../../test-utils/component-objects/f-header.component';
+const { getAccessibilityTestResults } = require('../../../../../../../test/utils/axe-helper');
+const Header = require('../../../test-utils/component-objects/f-header.component');
+const header = new Header();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-organisms--header-component');
-        browser.switchToFrame(0);
-        HeaderComponent.waitForHeader();
+        header.open();
+        header.waitForComponent();
     });
 
     it('a11y - should test f-header component WCAG compliance', () => {
