@@ -141,7 +141,7 @@ export default {
         align-items: center;
         justify-content: center;
         width: 100%;
-        margin-bottom: spacing(x3);
+        margin-bottom: spacing(x2);
 
         @include media('>mid') {
             width: 50%;
@@ -159,6 +159,7 @@ export default {
 
         @include media('>mid') {
             display: unset;
+            @include font-size(heading-m);
         }
     }
 
@@ -168,13 +169,10 @@ export default {
 
     .c-contentCards-homePromotionCard1-innerCard {
         width: 100%;
-        padding-left: spacing(x2);
-        padding-right: spacing(x2);
+        padding: 0;
 
         @include media('>mid') {
             width: 50%;
-            padding-left: 0;
-            padding-right: spacing(x4);
 
             :global(.c-contentCards-homePromotionCard2) {
                 padding-left: spacing(x5);
