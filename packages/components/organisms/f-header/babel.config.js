@@ -3,7 +3,7 @@ module.exports = api => {
     const isTest = api.env('test');
     const presets = [];
     const plugins = [
-        '@babel/plugin-proposal-optional-chaining', 
+        '@babel/plugin-proposal-optional-chaining',
         '@babel/plugin-proposal-class-properties'
     ];
     const builtIns = (api.env('development') ? 'entry' : false);
