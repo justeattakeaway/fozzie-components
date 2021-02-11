@@ -107,6 +107,7 @@ describe('f-header component tests', () => {
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
     .it('should show correct country selector icon depending on which locale is chosen', country => {
         // Act
+        browser.maximizeWindow();
         header.openWithLocale(country);
     
         // Assert
