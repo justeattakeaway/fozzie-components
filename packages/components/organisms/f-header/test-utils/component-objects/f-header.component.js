@@ -14,8 +14,7 @@ class Header extends Page {
 
     navigation = {
         offers: {
-            get link () { return $(NAVIGATION.offers.link) },
-            get icon () { return $$(NAVIGATION.offers.link) }
+            get link () { return $(NAVIGATION.offers.link) }
         }, 
         help: {
             get link () { return $(NAVIGATION.help.link) }

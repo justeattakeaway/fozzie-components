@@ -8,8 +8,11 @@ v4.7.0
 *February 11, 2021*
 
 ### Added
-- Country selector feature tests
+- Country selector component tests
 - dataTestKeys into country selector component
+
+### Changed
+- f-header component tests to use page object model
 
 *Fabruary 9, 2021*
 
