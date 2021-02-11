@@ -20,7 +20,10 @@ export default {
         id: '',
         serviceType: '',
         restaurantId: '',
-        basketTotal: 0,
+        basket: {
+            id: '',
+            total: 0
+        },
         customer: {
             firstName: '',
             lastName: '',
@@ -176,7 +179,10 @@ export default {
             const basketDetails = {
                 serviceType: data.ServiceType.toLowerCase(),
                 restaurantId: data.RestaurantId,
-                basketTotal: data.BasketSummary.BasketTotals.Total
+                basket: {
+                    id: data.BasketId,
+                    total: data.BasketSummary.BasketTotals.Total
+                }
             };
 
             commit(UPDATE_BASKET_DETAILS, basketDetails);
@@ -290,8 +296,10 @@ export default {
             state.availableFulfilment.isAsapAvailable = asapAvailable;
         },
 
-        [UPDATE_BASKET_DETAILS]: (state, { serviceType }) => {
+        [UPDATE_BASKET_DETAILS]: (state, { serviceType, basket, restaurantId }) => {
             state.serviceType = serviceType;
+            state.basket = basket;
+            state.restaurantId = restaurantId;
         },
 
         [UPDATE_CUSTOMER_DETAILS]: (state, customer) => {

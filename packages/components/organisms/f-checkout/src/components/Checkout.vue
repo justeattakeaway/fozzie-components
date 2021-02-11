@@ -105,6 +105,7 @@ import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import mapUpdateCheckoutRequest from '../services/mapper';
+import { trackInitialLoad } from '../services/analytics';
 
 export default {
     name: 'VueCheckout',
@@ -240,7 +241,9 @@ export default {
             'notices',
             'serviceType',
             'time',
-            'userNote'
+            'userNote',
+            'restaurantId',
+            'basket'
         ]),
 
         isMobileNumberValid () {
@@ -276,6 +279,34 @@ export default {
 
     async mounted () {
         await this.initialise();
+
+        window.dataLayer = window.dataLayer || [];
+
+
+        trackInitialLoad({
+            basket: {
+                id: this.basket.id,
+                total: this.basket.total,
+            },
+            restaurantId: this.restaurantId
+        });
+
+        // Trak.event({
+        //     "checkout":{
+        //         "step": 1
+        //     },
+        //     "basket":{
+        //         "id": "EnKTS8mX8UqPu82Dx05wbw",
+        //         "total" 16.95
+        //     },
+        //         "restaurant":{
+        //         "id": 12345
+        //     },
+        //     "pageData":{
+        //         "name": "Checkout 1 Overview", //or "Checkout 1 Guest"
+        //         "group": "Checkout"
+        //     }
+        // });
     },
 
     methods: {
