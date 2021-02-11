@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.55.0
+*February 11, 2021*
+
+### Added
+- Added `vue-svg-loader` to Webpack config
+
+### Changed
+- Utilised `vue-svg-loader` for error page SVG
+
+
 v0.54.0
 -------------------------------
 *February 10, 2021*
