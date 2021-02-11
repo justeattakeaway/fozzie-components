@@ -3,6 +3,7 @@
         :is="componentType"
         :class="[
             $style['o-btn'],
+            (isIcon ? $style['o-btn--icon'] : ''),
             $style[`o-btn--${buttonType}`],
             $style[`o-btn--size${buttonSizeClassname}`],
             (isFullWidth ? $style['o-btn--fullWidth'] : '')
@@ -41,6 +42,10 @@ export default {
         actionType: {
             type: String,
             default: 'button'
+        },
+        isIcon: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -313,22 +318,65 @@ $btn-sizeXSmall-lineHeight      : 1;
     }
 }
 
+
 /**
+ * ==========================================================================
  * Modifier – .o-btn--icon
  *
- * Removes unneeded styles from button when only an icon is on it (like a close button)
+ * Handles styling when only an icon is displayed within the button component
+ * ==========================================================================
  */
 
 .o-btn--icon {
-    background-color: transparent;
-    border: 0;
-    padding: 0;
+    border-radius: 50%;
+    svg {
+        width: 90%;
+        height: 80%;
+    }
 
-    &:hover {
-        background-color: transparent;
+    &.o-btn--primary {
+        path {
+            fill: $btn-primary-textColor;
+        }
+    }
+
+    &.o-btn--secondary {
+        path {
+            fill: $btn-secondary-textColor;
+        }
+    }
+
+    &.o-btn--outline {
+        path {
+            fill: $btn-outline-textColor;
+        }
+    }
+
+    &.o-btn--ghost {
+        path {
+            fill: $btn-ghost-textColor;
+        }
+    }
+
+    &.o-btn--link {
+        path {
+            fill: $color-link-default;
+        }
+
+        &:hover {
+            path {
+                fill: $color-link-hover;
+            }
+        }
+
+        &:active,
+        &:focus {
+            path {
+                fill: $color-link-active;
+            }
+        }
     }
 }
-
 
 /**
  * ==========================================================================
