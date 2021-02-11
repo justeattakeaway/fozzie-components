@@ -28,7 +28,7 @@ describe('f-header component tests', () => {
     forEach(['offers', 'help', 'delivery', 'userAccount', 'countrySelector'])
     .it('should show extra fields as well as default when selected', field => {
         // Act
-        header.openWithExtraFeatures()
+        header.openWithExtraFeatures();
 
         // Assert
         expect(header.isFieldLinkDisplayed(field)).toBe(true);
@@ -38,7 +38,7 @@ describe('f-header component tests', () => {
     .it('should hide all navigation links, except offers link, when in mobile mode', field => {
         // Act
         browser.setWindowSize(500, 1000);
-        header.openWithExtraFeatures()
+        header.openWithExtraFeatures();
 
         // Assert
         expect(header.isMobileNavigationBarDisplayed()).toBe(true);
@@ -56,7 +56,7 @@ describe('f-header component tests', () => {
         expect(header.isFieldLinkDisplayed(field)).toBe(true);
     });
 
-    it('should change url when help-link is clicked', () => {
+    it('should change the url to "help" when help-link is clicked', () => {
         // Act
         browser.setWindowSize(1000, 1000);
         header.clickHelpLink();
@@ -65,7 +65,7 @@ describe('f-header component tests', () => {
         expect(browser.getUrl()).toContain('/help');
     });
 
-    it('should change the url to offers when offers link is clicked', () => {
+    it('should change the url to "offers" when offers link is clicked', () => {
         // Act
         header.openWithExtraFeatures();
         header.clickOffersLink();
@@ -81,8 +81,6 @@ describe('f-header component tests', () => {
         browser.maximizeWindow();
         header.moveToCountrySelector();
         header.expectedCountry = country;
-
-        console.log(country);
 
         // Assert
         expect(header.isCountryLinkDisplayed()).toBe(true);

@@ -43,7 +43,7 @@ class Header extends Page {
     }
 
     openWithExtraFeatures(){
-        super.openComponent('organism', 'header-component&knob-Show%20offers%20link=true&knob-Show%20delivery%20enquiry=true')
+        super.openComponent('organism', 'header-component&knob-Show%20offers%20link=true&knob-Show%20delivery%20enquiry=true');
     }
 
     openWithLocale(locale){
@@ -71,7 +71,7 @@ class Header extends Page {
             default:
                 throw new Error (`locale ${countryFormatted} is not supported`)
         }
-        super.openComponent('organism', `header-component&knob-Locale=${formattedLocale}`)
+        super.openComponent('organism', `header-component&knob-Locale=${formattedLocale}`);
     }
 
     waitForComponent(){
