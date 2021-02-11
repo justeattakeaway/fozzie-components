@@ -82,7 +82,7 @@ The props that can be defined are as follows:
 | `isFullWidth` | `Boolean` | No |  `false` | Controls whether or not to apply fullWidth modifier class |
 | `actionType` | `String` | No |`button` | Sets the action button type.<br>Options: `button`, `submit`, `reset`. |
 | `href` | `String` | No |  N/A | If provided, replaces `Action` button or `Link` button. |
-| `isIcon` | `Boolean` | No |  `false` | Sets the buttin style to be displayed like an icon . |
+| `isIcon` | `Boolean` | No |  `false` | Sets the button style to be displayed like an icon . |
 
 ### CSS Classes
 

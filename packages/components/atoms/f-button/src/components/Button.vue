@@ -119,15 +119,6 @@ $btn-sizeSmall-padding          : 7px 1em 9px;
 $btn-sizeXSmall-padding         : 5px 0.5em 7px;
 $btn-sizeXSmall-lineHeight      : 1;
 
-$icon-bgColor                   : $blue--offWhite;
-$icon-bgColor--hover            : $blue--offWhite--dark;
-$icon-bgColor--active           : $blue--offWhite--darkest;
-
-$icon-default-width             : 1.5em;
-$icon-sizeSmall-width           : 1em;
-$icon-sizeLarge-width           : 2em;
-
-$icon-default-padding           : 3px;
 
 .o-btn {
     display: inline-block;
@@ -330,7 +321,9 @@ $icon-default-padding           : 3px;
 
 /**
  * ==========================================================================
- * Icon style and modifiers
+ * Modifier – .o-btn--icon
+ *
+ * Handles styling when only an icon is displayed within the button component
  * ==========================================================================
  */
 
@@ -341,48 +334,48 @@ $icon-default-padding           : 3px;
         height: 80%;
     }
 
- &.o-btn--primary {
-     path {
-          fill: $btn-primary-textColor;
-     }
- }
+    &.o-btn--primary {
+        path {
+            fill: $btn-primary-textColor;
+        }
+    }
 
- &.o-btn--secondary {
-     path {
-          fill: $btn-secondary-textColor;
-     }
- }
+    &.o-btn--secondary {
+        path {
+            fill: $btn-secondary-textColor;
+        }
+    }
 
- &.o-btn--outline {
-     path {
-          fill: $btn-outline-textColor;
-     }
- }
+    &.o-btn--outline {
+        path {
+            fill: $btn-outline-textColor;
+        }
+    }
 
- &.o-btn--ghost {
-     path {
-          fill: $btn-ghost-textColor;
-     }
- }
+    &.o-btn--ghost {
+        path {
+            fill: $btn-ghost-textColor;
+        }
+    }
 
- &.o-btn--link {
-     path {
-          fill: $color-link-default;
-     }
+    &.o-btn--link {
+        path {
+            fill: $color-link-default;
+        }
 
-      &:hover {
-          path {
-               fill: $color-link-hover;
-          }
-      }
+        &:hover {
+            path {
+                fill: $color-link-hover;
+            }
+        }
 
-      &:active,
-      &:focus {
-          path {
-               fill: $color-link-active;
-          }
-      }
- }
+        &:active,
+        &:focus {
+            path {
+                fill: $color-link-active;
+            }
+        }
+    }
 }
 
 /**
