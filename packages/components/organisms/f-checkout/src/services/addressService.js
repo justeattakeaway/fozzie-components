@@ -13,7 +13,7 @@ function toFormattedPostcode (postcode) {
         return '';
     }
 
-    let formatted = cleanupPostcode(postcode);
+    let formatted = postcode.replaceAll(' ', '').replaceAll('-', '');
 
     if (isFullPostCode(formatted)) {
         const last3 = formatted.Substring(formatted.Length - 3);
@@ -51,7 +51,7 @@ function getDefaultAddress (addresses) {
     return addresses.find(a => a && a.IsDefault);
 }
 
-function getAddressClosestToPostcode(postcode, addresses) {
+function getAddressClosestToPostcode (postcode, addresses) {
     if (!postcode) {
         return getDefaultAddress(addresses);
     }
