@@ -82,6 +82,9 @@ const dataLayerPushPageData = locale => {
     });
 };
 
+/**
+ * Required for MenuWeb rollout. Can be removed once MenuWeb is out 100%.
+ */
 const trackMenuWebPageExperiment = () => {
     const dataLayer = window.dataLayer || [];
     const isMenuPage = window.location.pathname.toLowerCase().indexOf('/restaurants-') >= 0;
