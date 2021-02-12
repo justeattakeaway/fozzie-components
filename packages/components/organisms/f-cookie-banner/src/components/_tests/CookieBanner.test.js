@@ -1,7 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import CookieBanner from '../CookieBanner.vue';
 import Cookie from 'cookie-universal';
 import { VueI18n } from '@justeat/f-globalisation';
+import CookieBanner from '../CookieBanner.vue';
 
 const localVue = createLocalVue();
 localVue.prototype.$cookies = Cookie();
@@ -59,12 +59,12 @@ describe('CookieBanner', () => {
                 // Arrange
                 const propsData = {};
                 const expected = { event: 'trackConsent', userData: { consent: 'full' } };
-                Object.defineProperty(global, "window", {
+                Object.defineProperty(global, 'window', {
                     value: {
                         dataLayer: []
                     }
                 });
-                
+
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
@@ -95,10 +95,12 @@ describe('CookieBanner', () => {
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
                     i18n,
-                    propsData
+                    propsData,
+                    computed: {
+                        legacyBanner: () => false
+                    }
                 });
                 wrapper.vm.$cookies.set('je-cookieConsent', cookieValue);
-                wrapper.vm.legacyBanner = false;
                 wrapper.vm.checkCookieBannerCookie();
 
                 // Assert
@@ -136,7 +138,7 @@ describe('CookieBanner', () => {
             it('should set the legacy cookie banner cookie', () => {
                 // Arrange
                 const propsData = {};
-                
+
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
@@ -162,7 +164,7 @@ describe('CookieBanner', () => {
             it('should set the banner consent cookie to `full`', () => {
                 // Arrange
                 const propsData = {};
-                
+
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
@@ -170,7 +172,7 @@ describe('CookieBanner', () => {
                     propsData
                 });
                 const cookieSpy = jest.spyOn(wrapper.vm, 'setCookieBannerCookie');
-                
+
                 wrapper.vm.acceptAllCookiesActions();
 
                 // Assert
@@ -179,7 +181,7 @@ describe('CookieBanner', () => {
             it('should push `full` to dataLayer', () => {
                 // Arrange
                 const propsData = {};
-                
+
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
@@ -187,7 +189,7 @@ describe('CookieBanner', () => {
                     propsData
                 });
                 const dataLayerSpy = jest.spyOn(wrapper.vm, 'dataLayerPush');
-                
+
                 wrapper.vm.acceptAllCookiesActions();
 
                 // Assert
@@ -196,7 +198,7 @@ describe('CookieBanner', () => {
             it('should hide the banner', () => {
                 // Arrange
                 const propsData = {};
-                
+
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
@@ -215,7 +217,7 @@ describe('CookieBanner', () => {
             it('should set the banner consent cookie to `necessary`', () => {
                 // Arrange
                 const propsData = {};
-                
+
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
@@ -223,7 +225,7 @@ describe('CookieBanner', () => {
                     propsData
                 });
                 const cookieSpy = jest.spyOn(wrapper.vm, 'setCookieBannerCookie');
-                
+
                 wrapper.vm.acceptOnlyNecessaryCookiesActions();
 
                 // Assert
@@ -232,7 +234,7 @@ describe('CookieBanner', () => {
             it('should push `necessary` to dataLayer', () => {
                 // Arrange
                 const propsData = {};
-                
+
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
@@ -240,7 +242,7 @@ describe('CookieBanner', () => {
                     propsData
                 });
                 const dataLayerSpy = jest.spyOn(wrapper.vm, 'dataLayerPush');
-                
+
                 wrapper.vm.acceptOnlyNecessaryCookiesActions();
 
                 // Assert
@@ -249,7 +251,7 @@ describe('CookieBanner', () => {
             it('should remove unnecessary cookies', () => {
                 // Arrange
                 const propsData = {};
-                
+
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
@@ -257,7 +259,7 @@ describe('CookieBanner', () => {
                     propsData
                 });
                 const removeCookiesSpy = jest.spyOn(wrapper.vm, 'removeUnnecessaryCookies');
-                
+
                 wrapper.vm.acceptOnlyNecessaryCookiesActions();
 
                 // Assert
@@ -266,7 +268,7 @@ describe('CookieBanner', () => {
             it('should resend GTM events', () => {
                 // Arrange
                 const propsData = {};
-                
+
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
@@ -274,7 +276,7 @@ describe('CookieBanner', () => {
                     propsData
                 });
                 const resendSpy = jest.spyOn(wrapper.vm, 'resendEvents');
-                
+
                 wrapper.vm.acceptOnlyNecessaryCookiesActions();
 
                 // Assert
@@ -283,14 +285,14 @@ describe('CookieBanner', () => {
             it('should hide the banner', () => {
                 // Arrange
                 const propsData = {};
-                
+
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
                     localVue,
                     i18n,
                     propsData
                 });
-                
+
                 wrapper.vm.acceptOnlyNecessaryCookiesActions();
 
                 // Assert
