@@ -47,7 +47,7 @@ export const CheckoutComponent = () => ({
             default: select('Update Checkout Url', [updateCheckoutUrl], updateCheckoutUrl)
         },
         getCheckoutUrl: {
-            default: select('Get Checkout Url', [getCheckoutDeliveryUrl, getCheckoutCollectionUrl, 'An invalid URL'], getCheckoutDeliveryUrl)
+            default: select('Get Checkout Url', [getCheckoutDeliveryUrl, getCheckoutCollectionUrl, 'An invalid URL'], getCheckoutCollectionUrl)
         },
         checkoutAvailableFulfilmentUrl: {
             default: select('Available Fulfilment Url', [checkoutAvailableFulfilmentUrl], checkoutAvailableFulfilmentUrl)
@@ -59,7 +59,7 @@ export const CheckoutComponent = () => ({
             default: select('Get Basket Url', [getBasketDeliveryUrl, getBasketCollectionUrl], getBasketDeliveryUrl)
         },
         authToken: {
-            default: text('Auth token', '')
+            default: text('Auth token', 'asdas')
         },
         loginUrl: {
             default: text('Login Url', '/login')
