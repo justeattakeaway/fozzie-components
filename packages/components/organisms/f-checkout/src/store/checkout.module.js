@@ -10,7 +10,8 @@ import {
     UPDATE_IS_FULFILLABLE,
     UPDATE_ISSUES,
     UPDATE_STATE,
-    UPDATE_USER_NOTE
+    UPDATE_USER_NOTE,
+    UPDATE_FIELD_CHANGES
 } from './mutation-types';
 
 export default {
@@ -50,7 +51,8 @@ export default {
             isAsapAvailable: false
         },
         authToken: '',
-        isLoggedIn: false
+        isLoggedIn: false,
+        changes: []
     }),
 
     actions: {
@@ -231,10 +233,16 @@ export default {
         },
 
         updateAddressDetails ({ commit }, payload) {
+            const field = Object.keys(payload);
+
+            commit(UPDATE_FIELD_CHANGES, field[0]);
             commit(UPDATE_FULFILMENT_ADDRESS, payload);
         },
 
         updateCustomerDetails ({ commit }, payload) {
+            const field = Object.keys(payload);
+
+            commit(UPDATE_FIELD_CHANGES, field[0]);
             commit(UPDATE_CUSTOMER_DETAILS, payload);
         },
 
@@ -333,6 +341,12 @@ export default {
 
         [UPDATE_USER_NOTE]: (state, userNote) => {
             state.userNote = userNote;
+        },
+
+        [UPDATE_FIELD_CHANGES]: (state, field) => {
+            if (!state.changes.includes(field)) {
+                state.changes.push(field);
+            }
         }
     }
 };

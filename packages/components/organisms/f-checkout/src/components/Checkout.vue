@@ -105,7 +105,7 @@ import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import mapUpdateCheckoutRequest from '../services/mapper';
-import { trackInitialLoad } from '../services/analytics';
+import { trackInitialLoad, trackFormInteraction } from '../services/analytics';
 
 export default {
     name: 'VueCheckout',
@@ -243,7 +243,8 @@ export default {
             'time',
             'userNote',
             'restaurantId',
-            'basket'
+            'basket',
+            'changes'
         ]),
 
         isMobileNumberValid () {
@@ -282,31 +283,21 @@ export default {
 
         window.dataLayer = window.dataLayer || [];
 
-
         trackInitialLoad({
             basket: {
                 id: this.basket.id,
-                total: this.basket.total,
+                total: this.basket.total
             },
-            restaurantId: this.restaurantId
+            restaurantId: this.restaurantId,
+            isLoggedIn: this.isLoggedIn
         });
 
-        // Trak.event({
-        //     "checkout":{
-        //         "step": 1
-        //     },
-        //     "basket":{
-        //         "id": "EnKTS8mX8UqPu82Dx05wbw",
-        //         "total" 16.95
-        //     },
-        //         "restaurant":{
-        //         "id": 12345
-        //     },
-        //     "pageData":{
-        //         "name": "Checkout 1 Overview", //or "Checkout 1 Guest"
-        //         "group": "Checkout"
-        //     }
-        // });
+        trackFormInteraction({
+            action: 'start',
+            error: null,
+            isLoggedIn: this.isLoggedIn,
+            changes: this.changes
+        });
     },
 
     methods: {
@@ -516,9 +507,23 @@ export default {
             * If form is valid try to call `submitCheckout`
             * Catch and handle any errors
             */
+            trackFormInteraction({
+                action: 'submit',
+                error: null,
+                isLoggedIn: this.isLoggedIn,
+                changes: this.changes
+            });
+
             if (!this.isFormValid()) {
                 const validationState = validations.getFormValidationState(this.$v);
                 this.$emit(EventNames.CheckoutValidationError, validationState);
+
+                trackFormInteraction({
+                    action: 'inline_error',
+                    error: validationState.invalidFields,
+                    isLoggedIn: this.isLoggedIn,
+                    changes: this.changes
+                });
                 return;
             }
 
@@ -526,6 +531,13 @@ export default {
 
             try {
                 await this.submitCheckout();
+
+                trackFormInteraction({
+                    action: 'success',
+                    error: null,
+                    isLoggedIn: this.isLoggedIn,
+                    changes: this.changes
+                });
             } catch (error) {
                 this.handleErrorState(error);
             } finally {
