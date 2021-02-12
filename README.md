@@ -36,7 +36,6 @@ Note: Importing the optional mixin and using `@include` in the `common.scss` fil
 ```sass
 <style lang="scss" module>
 @include pageBanner();
-@include loadingIndicator();
 </style>
 ```
 
