@@ -209,15 +209,7 @@ export default {
 
             const { data } = await axios.get(url, config);
 
-            const addressTmp = addressService.getClosestAddress(data.Addresses, tenant);
-            const [selectedAddress] = data.Addresses;
-
-            const addressDetails = {
-                line1: selectedAddress.Line1,
-                line2: selectedAddress.Line2,
-                city: selectedAddress.City,
-                postcode: selectedAddress.ZipCode
-            };
+            const addressDetails = addressService.getClosestAddress(data.Addresses, tenant);
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
         },

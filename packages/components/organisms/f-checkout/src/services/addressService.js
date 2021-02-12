@@ -1,12 +1,4 @@
-import getCookie from '../utils/helpers';
-
-function cleanupPostcode (postcode) {
-    if (!postcode) {
-        return '';
-    }
-
-    return postcode.replaceAll(' ', '').replaceAll('-', '');
-}
+import { getCookie } from '../utils/helpers';
 
 function isFullPostCode (postcode) {
     if (!postcode) {
@@ -32,39 +24,61 @@ function toFormattedPostcode (postcode) {
     return formatted.toUpperCase();
 }
 
-function mapAddress (postcode, address) {
+function getAddress (postcode, address) {
+    if (!address) {
+        return {
+            line1: '',
+            line2: '',
+            postcode: toFormattedPostcode(postcode)
+        };
+    }
+
+    const lines = [address.Line2, address.Line3];
+
     return {
-        line1: (address && address.Line1) || '',
-        line2: (address && address.Line2) || '',
-        city: (address && address.City) || '',
-        postcode: (address && address.ZipCode) || toFormattedPostcode(postcode)
+        line1: address.Line1,
+        line2: lines.filter(l => l).join(', '),
+        city: address.City,
+        postcode: address.ZipCode
     };
+}
+
+function getDefaultAddress (addresses) {
+    if (!addresses) {
+        return null;
+    }
+
+    return addresses.find(a => a && a.IsDefault);
+}
+
+function getAddressClosestToPostcode(postcode, addresses) {
+    if (!postcode) {
+        return getDefaultAddress(addresses);
+    }
+
+    let formattedPostcode = postcode.replaceAll(' ', '').replaceAll('-', '');
+
+    let address = addresses.find(a => a.ZipCode === formattedPostcode);
+
+    if (isFullPostCode(formattedPostcode)) {
+        formattedPostcode = formattedPostcode.splice(postcode.length - 3);
+    }
+
+    address = address ?? addresses.find(a => a && a.ZipCode.startsWith(formattedPostcode));
+
+    return address;
 }
 
 export default {
     getClosestAddress (addresses, tenant) {
-        let selectedAddress = {};
-
         if (tenant !== 'uk') {
-            // For tenants other than uk just select the first address
-            // TODO: Add proper implementation for tenants other than uk
-            [selectedAddress] = addresses;
+            // TODO: Add implementation for other tenants
+            return getAddress('', {});
         }
 
-        const postcode = cleanupPostcode(getCookie('je-location'));
-        if (addresses) {
-            selectedAddress = addresses.find(a => a.IsDefault);
-        }
+        const postcode = getCookie('je-location') || '';
+        const address = getAddressClosestToPostcode(postcode, addresses);
 
-        if (!selectedAddress) {
-            let shortPostcode = postcode;
-            if (isFullPostCode(postcode)) {
-                shortPostcode = postcode.splice(postcode.length - 3);
-            }
-
-            selectedAddress = addresses.find(a => !!a && a.ZipCode.startsWith(shortPostcode));
-        }
-
-        return mapAddress(postcode, selectedAddress);
+        return getAddress(postcode, address);
     }
 };
