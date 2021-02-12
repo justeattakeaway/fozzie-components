@@ -19,6 +19,7 @@ export const parameters = {
                     [
                         'Intro',
                         'Development Principles',
+                        'Contributing',
                         'Troubleshooting'
                     ],
                     'Standards',

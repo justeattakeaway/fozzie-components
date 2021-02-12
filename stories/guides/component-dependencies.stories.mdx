@@ -1,0 +1,137 @@
+import LinkTo from '@storybook/addon-links/react';
+
+<Meta title="Documentation/Setup Guides/Dependencies"/>
+
+# Component Dependencies
+
+When using components, we expect consuming applications to include the following dependencies for them to display as intended.
+
+## Fonts
+
+Just Eat and Menulog branded websites make use of `JustEatBasis` as it's main typeface (`Regular` and `Bold` variants).
+
+To load in the required fonts, we recommend following our <LinkTo kind="Documentation/Setup Guides/Typography" story="page">typography setup guide</LinkTo> which covers how to load the font in your application.
+
+## Fozzie SCSS framework
+
+When working on a set of common components, it's useful to be able to share common SCSS utilities and base styles between them.  For this we use the [Fozzie SCSS utility framework](https://github.com/justeat/fozzie/tree/v5.0.0) (v5 or later).
+
+By default, when importing this SCSS framework, the only thing output by the framework are the shared SCSS variables, mixins and functions we use to create component styles – no SCSS classes or styles will be added to your compiled CSS unless you subsequently opt in to them in your application.
+
+The framework provides a method to include a number of styles when needed via optional mixins. As a minimum, we expect consuming applications to include the following base styles, to avoid having to set these styles within each component:
+
+### Reset Styles
+
+It's common best practice in CSS to apply a set of reset styles to an application. Rather than setting these styles inside each component, we expect the consuming application to include the reset styles that we've defined in the fozzie SCSS framework.
+
+These reset styles can be included via an optional mixin – `@include reset();` – once the SCSS framework has been imported into your applications SCSS.
+
+### Typographic defaults
+
+Including global typographic styles in every component – setting the default size for tags like headings (`h1`, `h2` etc) and paragraphs for instance – would lead to a large amount of duplication, as well as failing to utilise one of CSS's most valuable features; the cascade.
+
+Although our components will function without these defaults, they won't look as intended without these being included in a consuming application.
+
+We expect consuming applications to include the optional mixins for global typography and link styles – via `@include typography();` and `@include links();`. Similar to the reset styles, these mixins can only be included once the Fozzie SCSS framework has been imported, due to the mixins being reliant on SCSS variables, mixins and functions that are defined there.
+
+### Utility classes
+
+In specific styling situations, it's useful to have a set of "trump" utility classes; such as to hide or show information for accessibility purposes (for example `.is-visuallyHidden`).
+
+We are working on bringing these utility classes to fozzie v5 in a way that is shareable between components, but this is currently a work in progress – we're currently working on making a set of utility classes available across components, for common situations like needing to hide or show information for accessibility purposes (for example `.is-visuallyHidden`).
+
+Once these have been defined, these utility classes will be available for use in components and to consuming applications.
+
+## Importing the Fozzie SCSS framework
+
+Including the Fozzie SCSS framework in any application is straightforward, but will likely be subtly different depending on the CLI or bundling tool you are using.
+
+If you are creating a new UI component, the configuration needed to include the base utility variables, mixins and functions will be automatically setup for you when using our Yeoman component generator tool.
+
+### VueCLI (via webpack-chain)
+
+*_These setup instructions are correct with respect to `sass-loader` v10. Future releases may change the configuration slightly._*
+
+The Fozzie SCSS utility library has a couple of dependencies that need to be included by any consuming application (via NPM or Yarn). These are:
+
+- `fozzie` (>= v5.0.0-beta.2)
+- `node-sass-magic-importer` (>= v5.3.2)
+- `eyeglass` (>= v3.0.2)
+
+
+Both of these dependencies are used to handle the path links into `node_modules` that are included as part of the utility library.
+
+If you‘re using your own Webpack configuration, rather than VueCLI, you'll need to also include the latest version of `sass-loader` (at time of writing, we're using `v10.1.0`).
+
+You'll then need to create a new config file, that contains the following config for `sass-loader`:
+
+```js
+const magicImporter = require('node-sass-magic-importer');
+const eyeglass = require('eyeglass');
+
+module.exports = function init (rootDir) {
+    const sassOptions = eyeglass({
+        eyeglass: {
+            root: rootDir
+        },
+        includePaths: ['node_modules/']
+    });
+
+    sassOptions.importer = [
+        magicImporter({
+            cwd: rootDir
+        }),
+        sassOptions.importer
+    ];
+
+    return {
+        sassOptions: {
+            eyeglass: sassOptions.eyeglass,
+            functions: sassOptions.functions,
+            includePaths: sassOptions.includePaths,
+            importer: sassOptions.importer
+        },
+        sourceMap: true
+    };
+};
+```
+
+This essentially configures `node-sass-magic-importer` and `eyeglass` to work alongside `sass-loader` when Webpack runs, outputting the config as an object to be passed into `sass-loader`.
+
+When using VueCLI, we can then add the following to out `vue.config.js`:
+
+```js
+const path = require('path');
+const rootDir = path.join(__dirname, '..', '..');
+const sassOptions = require('__PATH_TO_FILE_CREATED_ABOVE__')(rootDir);
+
+// vue.config.js
+module.exports = {
+    chainWebpack: config => {
+        config.module
+            .rule('scss-importer')
+            .test(/\.scss$/)
+            .use('importer')
+            .loader('sass-loader')
+            .options({
+                ...sassOptions,
+                // eslint-disable-next-line quotes
+                additionalData: `
+@import "@justeat/fozzie/src/scss/fozzie";
+@include reset();
+@include typography();
+@include links();`
+            });
+    }
+};
+```
+
+This passes the `sassOptions` config that has been imported from our previous configuration file, before `@import`ing the fozzie utility framework and then including the mixins needed to define the global style dependencies mentioned above.
+
+### Nuxt
+
+This section of the docs is in progress – reach out to us directly to find more information on this topic in the meantime.
+
+### Troubleshooting
+
+If you have any issues integrating the Fozzie SCSS Utility framework, reach out to the Core Web Team or through the UI Guild and we'll help get you setup.
