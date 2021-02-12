@@ -1,4 +1,7 @@
 export default {
     locale: 'en-IE',
-    text: 'I am a StatusBanner Component (IE)'
+    statusBannerContent: {
+        searchboxHeading: 'Page not found',
+        searchboxSubHeading: "Sorry, we couldn't find that page. Please enter your address and search for a restaurant"
+    }
 };
