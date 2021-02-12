@@ -1,19 +1,19 @@
-import * as analyticsService from '../../services/analytics.service';
+import * as analyticsService from '../analytics.service';
 
 describe('`dataLayerPushPageData`', () => {
     it('should be defined', () => {
         // Act & Assert
         expect(analyticsService.dataLayerPushPageData).toBeDefined();
     });
-    
+
     describe('when invoked', () => {
         it('should push `pageData` & `platformData` to the dataLayer with the correct values', () => {
             // Arrange
             const spy = jest.spyOn(Array.prototype, 'push');
-            
+
             // Act
             analyticsService.dataLayerPushPageData('en-GB');
-            
+
             // Assert
             expect(spy).toHaveBeenCalledWith({
                 pageData: {

@@ -3,12 +3,12 @@ import MainBannerContainer from '../MainBannerContainer.vue';
 import * as analyticsService from '../../services/analytics.service';
 
 describe('`MainBannerContainer`', () => {
-    let spy;
-    
+    let spyLoadAnalyticsAccount;
+
     beforeEach(() => {
-        spy = jest.spyOn(analyticsService, 'loadAnalyticsAccount').mockImplementation(() => ()=> {});
+        spyLoadAnalyticsAccount = jest.spyOn(analyticsService, 'loadAnalyticsAccount').mockImplementation(() => () => {});
     });
-    
+
     it('should be defined', () => {
         // Arrange
         const propsData = {
@@ -20,29 +20,29 @@ describe('`MainBannerContainer`', () => {
             }
         };
         const wrapper = shallowMount(MainBannerContainer, { propsData });
-        
+
         // Act & Assert
         expect(wrapper.exists()).toBe(true);
     });
-    
+
     describe('`loadAnalyticsAccount`', () => {
-       it('should fire when the component is mounted', () => {
-           // Arrange
-           const propsData = {
-               copy: {
-                   statusBannerContent: {
-                       searchboxHeading: '',
-                       searchboxSubHeading: ''
-                   }
-               }
-           };
-           shallowMount(MainBannerContainer, { propsData });
-           
-           // Assert
-           expect(spy).toHaveBeenCalled();
-       });
+        it('should fire when the component is mounted', () => {
+            // Arrange
+            const propsData = {
+                copy: {
+                    statusBannerContent: {
+                        searchboxHeading: '',
+                        searchboxSubHeading: ''
+                    }
+                }
+            };
+            shallowMount(MainBannerContainer, { propsData });
+
+            // Assert
+            expect(spyLoadAnalyticsAccount).toHaveBeenCalled();
+        });
     });
-    
+
     describe('`trackMenuWebPageExperiment`', () => {
         it('should fire when the component is mounted', () => {
             // Arrange
@@ -56,12 +56,12 @@ describe('`MainBannerContainer`', () => {
             };
             const spy = jest.spyOn(analyticsService, 'trackMenuWebPageExperiment');
             shallowMount(MainBannerContainer, { propsData });
-            
+
             // Assert
             expect(spy).toHaveBeenCalled();
         });
     });
-    
+
     describe('`dataLayerPushPageData`', () => {
         it('should fire when the component is mounted & pass through a `locale`', () => {
             // Arrange
@@ -76,7 +76,7 @@ describe('`MainBannerContainer`', () => {
             };
             const spy = jest.spyOn(analyticsService, 'dataLayerPushPageData');
             shallowMount(MainBannerContainer, { propsData });
-            
+
             // Assert
             expect(spy).toHaveBeenCalledWith('en-GB');
         });
