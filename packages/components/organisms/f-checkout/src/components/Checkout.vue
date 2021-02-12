@@ -385,7 +385,7 @@ export default {
                 this.$logger.logError(
                     'Checkout Setup Guest Failure',
                     this.$store,
-                    thrownErrors
+                    { thrownErrors }
                 );
             }
         },
@@ -409,7 +409,7 @@ export default {
                 this.$logger.logError(
                     'Get Checkout Failure',
                     this.$store,
-                    thrownErrors
+                    { thrownErrors }
                 );
             }
         },
@@ -435,7 +435,7 @@ export default {
                 this.$logger.logError(
                     'Get Checkout Basket Failure',
                     this.$store,
-                    thrownErrors
+                    { thrownErrors }
                 );
             }
         },
@@ -459,7 +459,7 @@ export default {
                 this.$logger.logError(
                     'Get Checkout Available Fulfilment Times Failure',
                     this.$store,
-                    thrownErrors
+                    { thrownErrors }
                 );
             }
         },
@@ -507,6 +507,12 @@ export default {
                 eventData.error = thrownErrors;
 
                 this.$emit(EventNames.CheckoutFailure, eventData);
+
+                this.$logger.logError(
+                    'Consumer Checkout Failure',
+                    this.$store,
+                    { eventData }
+                );
             } else {
                 this.genericErrorMessage = error;
 
@@ -517,7 +523,7 @@ export default {
                 this.$logger.logError(
                     'Consumer Checkout Failure',
                     this.$store,
-                    eventData
+                    { eventData }
                 );
             }
         },
