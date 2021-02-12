@@ -31,16 +31,17 @@ const london3LinesDefault = {
 };
 
 describe('addressService', () => {
+    const tenant = 'uk';
+    const allAddresses = [area511Line, bristol2Lines, london3LinesDefault];
+
     describe('getClosestAddress ::', () => {
         it('should return default address when there is no postcode', () => {
             // Arrange
             const postcode = '';
-            const tenant = 'uk';
-            const addresses = [area511Line, bristol2Lines, london3LinesDefault];
             getCookie.mockReturnValue(postcode);
 
             // Act
-            const actual = addressService.getClosestAddress(addresses, tenant);
+            const actual = addressService.getClosestAddress(allAddresses, tenant);
 
             // Assert
             expect(actual).toEqual({
@@ -48,6 +49,23 @@ describe('addressService', () => {
                 line2: `${london3LinesDefault.Line2}, ${london3LinesDefault.Line3}`,
                 city: london3LinesDefault.City,
                 postcode: london3LinesDefault.ZipCode
+            });
+        });
+
+        it('should return empty address with postcode when postcode does not match', () => {
+            // Arrange
+            const postcode = 'EN1 1AA';
+            getCookie.mockReturnValue(postcode);
+
+            // Act
+            const actual = addressService.getClosestAddress(allAddresses, tenant);
+
+            // Assert
+            expect(actual).toEqual({
+                line1: '',
+                line2: '',
+                city: '',
+                postcode
             });
         });
     });
