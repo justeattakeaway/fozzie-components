@@ -3,9 +3,34 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.55.0
+v0.56.2
+-------------------------------
+*February 12, 2021*
+
+### Fixed
+- Endpoint error logging.
+
+
+v0.56.1
+-------------------------------
 *February 11, 2021*
 
+### Changed
+- Used correct comment format to prevent it being shown on UI
+
+
+v0.56.0
+-------------------------------
+*February 11, 2021*
+
+### Added
+- logging to `Checkout` and `Header` components.
+- Tests to cover changes.
+
+
+v0.55.0
+-------------------------------
+*February 11, 2021*
 ### Added
 - Added `vue-svg-loader` to Webpack config
 
@@ -26,7 +51,7 @@ v0.54.0
 
 v0.53.0
 -------------------------------
-*_February 9, 2021_*
+*February 9, 2021*
 
 ### Added
 - Loading customer address from API endpoint if Checkout endpoint did not return it

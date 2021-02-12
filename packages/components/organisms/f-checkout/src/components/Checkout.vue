@@ -341,6 +341,11 @@ export default {
          *
          */
         async submitCheckout () {
+            const eventData = {
+                isLoggedIn: this.isLoggedIn,
+                serviceType: this.serviceType
+            };
+
             try {
                 if (!this.isLoggedIn) {
                     await this.setupGuestUser();
@@ -360,16 +365,23 @@ export default {
                     timeout: this.updateCheckoutTimeout
                 });
 
-                this.$emit(EventNames.CheckoutSuccess, {
-                    isLoggedIn: this.isLoggedIn,
-                    serviceType: this.serviceType
-                });
+                this.$emit(EventNames.CheckoutSuccess, eventData);
+
+                this.$logger.logInfo(
+                    'Consumer Checkout Successful',
+                    this.$store,
+                    eventData
+                );
             } catch (thrownErrors) {
-                this.$emit(EventNames.CheckoutFailure, {
-                    errors: thrownErrors,
-                    isLoggedIn: this.isLoggedIn,
-                    serviceType: this.serviceType
-                });
+                eventData.errors = thrownErrors;
+
+                this.$emit(EventNames.CheckoutFailure, eventData);
+
+                this.$logger.logError(
+                    'Consumer Checkout Failure',
+                    this.$store,
+                    eventData
+                );
             }
         },
 
@@ -396,6 +408,12 @@ export default {
                 this.$emit(EventNames.CheckoutSetupGuestSuccess);
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutSetupGuestFailure, thrownErrors);
+
+                this.$logger.logError(
+                    'Checkout Setup Guest Failure',
+                    this.$store,
+                    { thrownErrors }
+                );
             }
         },
 
@@ -414,6 +432,12 @@ export default {
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutGetFailure, thrownErrors);
                 this.hasCheckoutLoadedSuccessfully = false;
+
+                this.$logger.logError(
+                    'Get Checkout Failure',
+                    this.$store,
+                    { thrownErrors }
+                );
             }
         },
 
@@ -434,6 +458,12 @@ export default {
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutBasketGetFailure, thrownErrors);
                 this.hasCheckoutLoadedSuccessfully = false;
+
+                this.$logger.logError(
+                    'Get Checkout Basket Failure',
+                    this.$store,
+                    { thrownErrors }
+                );
             }
         },
 
@@ -452,6 +482,12 @@ export default {
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetFailure, thrownErrors);
                 this.hasCheckoutLoadedSuccessfully = false;
+
+                this.$logger.logError(
+                    'Get Checkout Available Fulfilment Times Failure',
+                    this.$store,
+                    { thrownErrors }
+                );
             }
         },
 
@@ -486,23 +522,36 @@ export default {
                 thrownErrors = error.response.data.errors;
             }
 
+            const eventData = {
+                isLoggedIn: this.isLoggedIn,
+                serviceType: this.serviceType
+            };
+
             // TODO: Review this later - even though f-registration does something similar
             if (Array.isArray(thrownErrors)) {
                 this.genericErrorMessage = thrownErrors[0].description || this.$t('errorMessages.genericServerError');
 
-                this.$emit(EventNames.CheckoutFailure, {
-                    errors: thrownErrors,
-                    isLoggedIn: this.isLoggedIn,
-                    serviceType: this.serviceType
-                });
+                eventData.error = thrownErrors;
+
+                this.$emit(EventNames.CheckoutFailure, eventData);
+
+                this.$logger.logError(
+                    'Consumer Checkout Failure',
+                    this.$store,
+                    { eventData }
+                );
             } else {
                 this.genericErrorMessage = error;
 
-                this.$emit(EventNames.CheckoutFailure, {
-                    errors: error,
-                    isLoggedIn: this.isLoggedIn,
-                    serviceType: this.serviceType
-                });
+                eventData.error = error;
+
+                this.$emit(EventNames.CheckoutFailure, eventData);
+
+                this.$logger.logError(
+                    'Consumer Checkout Failure',
+                    this.$store,
+                    { eventData }
+                );
             }
         },
 
@@ -531,6 +580,12 @@ export default {
                     changes: this.changes,
                     autofill: this.autofill
                 });
+
+                this.$logger.logWarn(
+                    'Checkout Validation Error',
+                    this.$store,
+                    validationState
+                );
                 return;
             }
 

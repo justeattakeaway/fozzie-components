@@ -13,7 +13,7 @@ export const ButtonComponent = () => ({
     components: { FButton },
     props: {
         buttonType: {
-            default: select('Button Type', ['primary', 'secondary', 'outline', 'ghost', 'link', 'icon'], 'primary')
+            default: select('Button Type', ['primary', 'secondary', 'outline', 'ghost', 'link'], 'primary')
         },
         buttonSize: {
             default: select('Button Size', ['xsmall', 'small', 'medium', 'large'], 'medium')
@@ -26,9 +26,12 @@ export const ButtonComponent = () => ({
         },
         href: {
             default: text('href', '')
+        },
+        isIcon: {
+            default: boolean('isIcon', false)
         }
     },
-    template: '<f-button :buttonType="buttonType" :buttonSize="buttonSize" :isFullWidth="isFullWidth" :actionType="actionType" :href="href">Default Button Text</f-button>'
+    template: '<f-button :buttonType="buttonType" :buttonSize="buttonSize" :isFullWidth="isFullWidth" :actionType="actionType" :href="href" :isIcon="isIcon">Default Button Text</f-button>'
 });
 
 ButtonComponent.storyName = 'f-button';
