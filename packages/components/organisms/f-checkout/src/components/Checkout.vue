@@ -244,7 +244,8 @@ export default {
             'userNote',
             'restaurantId',
             'basket',
-            'changes'
+            'changes',
+            'autofill'
         ]),
 
         isMobileNumberValid () {
@@ -289,14 +290,18 @@ export default {
                 total: this.basket.total
             },
             restaurantId: this.restaurantId,
-            isLoggedIn: this.isLoggedIn
+            isLoggedIn: this.isLoggedIn,
+            autofill: this.autofill
         });
+
+        console.log(this.autofill); // eslint-disable-line no-console
 
         trackFormInteraction({
             action: 'start',
             error: null,
             isLoggedIn: this.isLoggedIn,
-            changes: this.changes
+            changes: this.changes,
+            autofill: this.autofill
         });
     },
 
@@ -511,7 +516,8 @@ export default {
                 action: 'submit',
                 error: null,
                 isLoggedIn: this.isLoggedIn,
-                changes: this.changes
+                changes: this.changes,
+                autofill: this.autofill
             });
 
             if (!this.isFormValid()) {
@@ -522,7 +528,8 @@ export default {
                     action: 'inline_error',
                     error: validationState.invalidFields,
                     isLoggedIn: this.isLoggedIn,
-                    changes: this.changes
+                    changes: this.changes,
+                    autofill: this.autofill
                 });
                 return;
             }

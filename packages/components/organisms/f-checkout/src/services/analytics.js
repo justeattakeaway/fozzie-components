@@ -39,6 +39,7 @@ const trackFormInteraction = eventData => {
 
     const error = eventData.error && cleanFields(eventData.error);
     const changes = eventData.changes && cleanFields(eventData.changes);
+    const autofill = eventData.autofill && cleanFields(eventData.autofill);
 
     const formName = isLoggedIn ? 'checkout' : 'checkout_guest';
 
@@ -49,7 +50,7 @@ const trackFormInteraction = eventData => {
                 name: formName,
                 action,
                 error,
-                autofill: [],
+                autofill,
                 changes
             }
 

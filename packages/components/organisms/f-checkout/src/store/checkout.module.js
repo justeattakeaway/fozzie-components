@@ -11,7 +11,8 @@ import {
     UPDATE_ISSUES,
     UPDATE_STATE,
     UPDATE_USER_NOTE,
-    UPDATE_FIELD_CHANGES
+    UPDATE_FIELD_CHANGES,
+    UPDATE_AUTO_FILL
 } from './mutation-types';
 
 export default {
@@ -52,6 +53,7 @@ export default {
         },
         authToken: '',
         isLoggedIn: false,
+        autofill: [],
         changes: []
     }),
 
@@ -79,6 +81,11 @@ export default {
             const { data } = await axios.get(url, config);
 
             commit(UPDATE_STATE, data);
+            // TODO : customer needs to remove name fields and email if not guest
+            const customer = Object.keys(data.customer)
+            // TODO : address only if delivery
+            const address = Object.keys(data.address)
+            commit(UPDATE_AUTO_FILL, customer.concat(address));
         },
 
         /**
@@ -226,6 +233,7 @@ export default {
             };
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
+            commit(UPDATE_AUTO_FILL, Object.keys(addressDetails));
         },
 
         setAuthToken: ({ commit }, authToken) => {
@@ -347,6 +355,14 @@ export default {
             if (!state.changes.includes(field)) {
                 state.changes.push(field);
             }
+        },
+
+        [UPDATE_AUTO_FILL]: (state, fields) => {
+            fields.forEach(field => {
+                if (!state.autofill.includes(field)) {
+                    state.autofill.push(field);
+                }
+            });
         }
     }
 };
