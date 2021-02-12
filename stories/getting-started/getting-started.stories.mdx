@@ -1,14 +1,20 @@
+import LinkTo from '@storybook/addon-links/react';
+
 <Meta title="Documentation/Getting Started/Intro"/>
 
 # UI Component Mono-repo
 
 ## Introduction
 
-A mono-repo is a single repository containing multiple packages – in our case UI components and services. 
+A mono-repo is a single repository containing multiple packages – in our case UI components and services.
 
 Using multi-package repository reduces the time and space requirements for numerous copies of packages in development and build environments - normally a downside of dividing a project into many separate NPM packages. Updating common configuration across components is also much simpler as these dependencies can be shared and updated from the root of the mono-repo; for example linting or test dependencies.
 
 Each individual component can be found in the [`components`](https://github.com/justeat/fozzie-components/tree/master/packages/components) directory, and are all controlled from a top level `packages.json`.
+
+## Dependencies
+
+For more information on the dependencies needed when including these shared UI components as part of your application, check out our <LinkTo kind="Documentation/Setup Guides/Dependencies" story="page">Component Dependency guide</LinkTo>.
 
 ## Folder Structure
 
@@ -65,9 +71,6 @@ The general naming convention for a Fozzie package is to use `f-{your-package-na
 * If there are JavaScript unit tests in the package you can [add a coveralls badge](https://coveralls.io/github/justeat/)
 * Check for known vulnerabilities in your package with a [Snyk.io badge](https://snyk.io/test/)
 
-## Publishing to npm
+## Contributing
 
-To publish a package to **npm**, please first ensure that you have registered an account.
-Internal contributors (Just Eat employees) can request to be added to the Just Eat npm org by asking in the #guild-ui Slack channel and providing your npm account details. External contributors should raise a pull request and the release will be handled for you once approved.
-
-Once you are happy that the package is ready to be published to the npm registry, ensure you are on the correct branch — typically the master branch with the latest changes pulled — then run `npm publish` on the command line.
+For mre information on contributing and how to publish components, <LinkTo kind="Documentation/Getting Started/Contributing" story="page">see our Contributing Guide</LinkTo>.
