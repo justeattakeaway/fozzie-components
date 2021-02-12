@@ -27,6 +27,19 @@ There's two solutions you could try from the root of the project which may fix t
 ## Development
 It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
 
+## Importing optional SCSS helpers from Fozzie
+We have created several optional mixin helpers in [Fozzie](https://github.com/justeat/fozzie/tree/master/src/scss/components/optional).
+Here's an example of how to use it:
+
+Note: Importing the optional mixin and using `@include` in the `common.scss` file of your component doesn't work if you have `module` enabled on your SFC.
+
+```sass
+<style lang="scss" module>
+@include pageBanner();
+@include loadingIndicator();
+</style>
+```
+
 ## Testing
 Unit / Integration / Contract
 
