@@ -29,9 +29,15 @@ describe('contentCards › HomePromotionCard2', () => {
     });
 
     it('should call the injected `emitCardView` event when mounted', () => {
-        // Arrange & Act
+        // Arrange
+        const card = {
+            foo: 'bar'
+        };
+
+        // Act
         shallowMount(HomePromotionCard2, {
             propsData: {
+                card,
                 testId
             },
             provide
@@ -39,6 +45,7 @@ describe('contentCards › HomePromotionCard2', () => {
 
         // Assert
         expect(provide.emitCardView).toHaveBeenCalled();
+        expect(provide.emitCardView).toHaveBeenCalledWith(card);
     });
 
     it('should display a CTA label', () => {
@@ -82,6 +89,7 @@ describe('contentCards › HomePromotionCard2', () => {
         const container = wrapper.find(`[data-test-id="${testId}"]`);
 
         // Assert
+        expect(container.element.tagName).toBe('A');
         expect(container.attributes('href')).toBe(url);
     });
 
@@ -104,6 +112,7 @@ describe('contentCards › HomePromotionCard2', () => {
 
         // Assert
         expect(provide.emitCardClick).toHaveBeenCalled();
+        expect(provide.emitCardClick).toHaveBeenCalledWith(card);
     });
 
     describe('when `no-link` prop is truthy', () => {

@@ -66,6 +66,7 @@ describe('contentCards › HomePromotionCard1', () => {
         const container = wrapper.find(`[data-test-id="${testId}"]`);
 
         // Assert
+        expect(container.element.tagName).toBe('A');
         expect(container.attributes('href')).toBe(url);
     });
 
@@ -88,6 +89,7 @@ describe('contentCards › HomePromotionCard1', () => {
 
         // Assert
         expect(provide.emitCardClick).toHaveBeenCalled();
+        expect(provide.emitCardClick).toHaveBeenCalledWith(card);
     });
 
     describe('when `backgroundColor` is "#000" ::', () => {
