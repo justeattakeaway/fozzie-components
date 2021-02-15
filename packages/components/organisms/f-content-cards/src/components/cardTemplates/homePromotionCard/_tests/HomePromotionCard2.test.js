@@ -5,20 +5,39 @@ const testId = '__TEST_ID__';
 const ctaText = '__CTA_TEXT__';
 const url = '__URL__';
 
+const provide = {
+    emitCardView: jest.fn(),
+    emitCardClick: jest.fn()
+};
+
 describe('contentCards › HomePromotionCard2', () => {
     it('should apply the given test ID', () => {
         // Arrange & Act
         const wrapper = shallowMount(HomePromotionCard2, {
             propsData: {
                 testId
-            }
+            },
+            provide
         });
 
         // Assert
         expect(wrapper.find(`[data-test-id="${testId}"]`).exists()).toBe(true);
     });
 
-    it('should display a CTA link and label', () => {
+    it('should call the injected `emitCardView` event when mounted', () => {
+        // Arrange & Act
+        shallowMount(HomePromotionCard2, {
+            propsData: {
+                testId
+            },
+            provide
+        });
+
+        // Assert
+        expect(provide.emitCardView).toHaveBeenCalled();
+    });
+
+    it('should display a CTA label', () => {
         // Arrange
         const card = {
             ctaText,
@@ -30,14 +49,57 @@ describe('contentCards › HomePromotionCard2', () => {
             propsData: {
                 card,
                 testId
-            }
+            },
+            provide
         });
 
         const cta = wrapper.find(`[data-test-id="${testId}--cta"]`);
 
         // Assert
         expect(cta.text()).toBe(ctaText);
-        expect(cta.attributes('href')).toBe(url);
+    });
+
+    it('should render the container as a link', () => {
+        // Arrange
+        const card = {
+            ctaText,
+            url
+        };
+
+        // Act
+        const wrapper = shallowMount(HomePromotionCard2, {
+            propsData: {
+                card,
+                testId
+            },
+            provide
+        });
+
+        const container = wrapper.find(`[data-test-id="${testId}"]`);
+
+        // Assert
+        expect(container.attributes('href')).toBe(url);
+    });
+
+    it('should call the injected `emitCardClick` event when clicked', () => {
+        // Arrange
+        const card = {
+            ctaText,
+            url
+        };
+        const wrapper = shallowMount(HomePromotionCard2, {
+            propsData: {
+                card,
+                testId
+            },
+            provide
+        });
+
+        // Act
+        wrapper.find(`[data-test-id="${testId}"]`).trigger('click');
+
+        // Assert
+        expect(provide.emitCardClick).toHaveBeenCalled();
     });
 
     // Check contentBackgroundColour is the dominant factor
@@ -58,7 +120,8 @@ describe('contentCards › HomePromotionCard2', () => {
                     $style: {
                         'c-contentCards-homePromotionCard2--light': 'c-contentCards-homePromotionCard2--light'
                     }
-                }
+                },
+                provide
             });
 
             // Assert
@@ -84,7 +147,8 @@ describe('contentCards › HomePromotionCard2', () => {
                     $style: {
                         'c-contentCards-homePromotionCard2--light': 'c-contentCards-homePromotionCard2--light'
                     }
-                }
+                },
+                provide
             });
 
             // Assert
@@ -110,7 +174,8 @@ describe('contentCards › HomePromotionCard2', () => {
                     $style: {
                         'c-contentCards-homePromotionCard2--light': 'c-contentCards-homePromotionCard2--light'
                     }
-                }
+                },
+                provide
             });
 
             // Assert
@@ -135,7 +200,8 @@ describe('contentCards › HomePromotionCard2', () => {
                     $style: {
                         'c-contentCards-homePromotionCard2--light': 'c-contentCards-homePromotionCard2--light'
                     }
-                }
+                },
+                provide
             });
 
             // Assert
@@ -161,7 +227,8 @@ describe('contentCards › HomePromotionCard2', () => {
                     $style: {
                         'c-contentCards-homePromotionCard2--light': 'c-contentCards-homePromotionCard2--light'
                     }
-                }
+                },
+                provide
             });
 
             // Assert
@@ -186,7 +253,8 @@ describe('contentCards › HomePromotionCard2', () => {
                     $style: {
                         'c-contentCards-homePromotionCard2--light': 'c-contentCards-homePromotionCard2--light'
                     }
-                }
+                },
+                provide
             });
 
             // Assert
@@ -210,7 +278,8 @@ describe('contentCards › HomePromotionCard2', () => {
                     $style: {
                         'c-contentCards-homePromotionCard2--light': 'c-contentCards-homePromotionCard2--light'
                     }
-                }
+                },
+                provide
             });
 
             // Assert
@@ -237,7 +306,8 @@ describe('contentCards › HomePromotionCard2', () => {
                     $style: {
                         'c-contentCards-homePromotionCard2--light': 'c-contentCards-homePromotionCard2--light'
                     }
-                }
+                },
+                provide
             });
 
             // Assert

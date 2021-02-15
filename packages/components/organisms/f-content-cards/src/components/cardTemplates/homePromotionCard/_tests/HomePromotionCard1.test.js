@@ -3,6 +3,12 @@ import Color from 'color';
 import HomePromotionCard1 from '../HomePromotionCard1.vue';
 
 const testId = '__TEST_ID__';
+const ctaText = '__CTA_TEXT__';
+const url = '__URL__';
+
+const provide = {
+    emitCardClick: jest.fn()
+};
 
 describe('contentCards › HomePromotionCard1', () => {
     it('should apply the given test ID', () => {
@@ -10,7 +16,8 @@ describe('contentCards › HomePromotionCard1', () => {
         const wrapper = shallowMount(HomePromotionCard1, {
             propsData: {
                 testId
-            }
+            },
+            provide
         });
 
         // Assert
@@ -26,13 +33,57 @@ describe('contentCards › HomePromotionCard1', () => {
             propsData: {
                 testId,
                 containerMaxWidth
-            }
+            },
+            provide
         });
 
         const styles = wrapper.find(`[data-test-id="${testId}--container"]`).attributes('style');
 
         // Assert
         expect(styles.indexOf(`max-width: ${containerMaxWidth}px;`)).toBe(0);
+    });
+
+    it('should render the container as a link', () => {
+        // Arrange
+        const card = {
+            ctaText,
+            url
+        };
+
+        // Act
+        const wrapper = shallowMount(HomePromotionCard1, {
+            propsData: {
+                card,
+                testId
+            },
+            provide
+        });
+
+        const container = wrapper.find(`[data-test-id="${testId}"]`);
+
+        // Assert
+        expect(container.attributes('href')).toBe(url);
+    });
+
+    it('should call the injected `emitCardClick` event when clicked', () => {
+        // Arrange
+        const card = {
+            ctaText,
+            url
+        };
+        const wrapper = shallowMount(HomePromotionCard1, {
+            propsData: {
+                card,
+                testId
+            },
+            provide
+        });
+
+        // Act
+        wrapper.find(`[data-test-id="${testId}"]`).trigger('click');
+
+        // Assert
+        expect(provide.emitCardClick).toHaveBeenCalled();
     });
 
     describe('when `backgroundColor` is "#000" ::', () => {
@@ -49,7 +100,8 @@ describe('contentCards › HomePromotionCard1', () => {
                 propsData: {
                     testId,
                     card
-                }
+                },
+                provide
             });
 
             // Assert
@@ -71,7 +123,8 @@ describe('contentCards › HomePromotionCard1', () => {
                 propsData: {
                     testId,
                     card
-                }
+                },
+                provide
             });
 
             // Assert
@@ -97,7 +150,8 @@ describe('contentCards › HomePromotionCard1', () => {
                     $style: {
                         'c-contentCards-homePromotionCard1-subtitle--light': 'c-contentCards-homePromotionCard1-subtitle--light'
                     }
-                }
+                },
+                provide
             });
 
             // Assert
@@ -123,7 +177,8 @@ describe('contentCards › HomePromotionCard1', () => {
                     $style: {
                         'c-contentCards-homePromotionCard1-subtitle--light': 'c-contentCards-homePromotionCard1-subtitle--light'
                     }
-                }
+                },
+                provide
             });
 
             // Assert
@@ -149,7 +204,8 @@ describe('contentCards › HomePromotionCard1', () => {
                     $style: {
                         'c-contentCards-homePromotionCard1-subtitle--light': 'c-contentCards-homePromotionCard1-subtitle--light'
                     }
-                }
+                },
+                provide
             });
 
             // Assert
@@ -175,7 +231,8 @@ describe('contentCards › HomePromotionCard1', () => {
                     $style: {
                         'c-contentCards-homePromotionCard1-subtitle--light': 'c-contentCards-homePromotionCard1-subtitle--light'
                     }
-                }
+                },
+                provide
             });
 
             // Assert
@@ -201,7 +258,8 @@ describe('contentCards › HomePromotionCard1', () => {
                     $style: {
                         'c-contentCards-homePromotionCard1-subtitle--light': 'c-contentCards-homePromotionCard1-subtitle--light'
                     }
-                }
+                },
+                provide
             });
 
             // Assert
@@ -227,7 +285,8 @@ describe('contentCards › HomePromotionCard1', () => {
                     $style: {
                         'c-contentCards-homePromotionCard1-subtitle--light': 'c-contentCards-homePromotionCard1-subtitle--light'
                     }
-                }
+                },
+                provide
             });
 
             // Assert
@@ -250,7 +309,8 @@ describe('contentCards › HomePromotionCard1', () => {
                     $style: {
                         'c-contentCards-homePromotionCard1-subtitle--light': 'c-contentCards-homePromotionCard1-subtitle--light'
                     }
-                }
+                },
+                provide
             });
 
             // Assert
@@ -275,7 +335,8 @@ describe('contentCards › HomePromotionCard1', () => {
                     $style: {
                         'c-contentCards-homePromotionCard1-subtitle--light': 'c-contentCards-homePromotionCard1-subtitle--light'
                     }
-                }
+                },
+                provide
             });
 
             // Assert
