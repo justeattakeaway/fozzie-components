@@ -1,0 +1,37 @@
+import LinkTo from '@storybook/addon-links/react';
+
+<Meta title="Documentation/Guides/Utility Tools"/>
+
+# Utility Tools
+
+## Danger.js
+<a name="dangerjs"></a>
+
+[Danger.js](http://danger.systems/js/) is a tool that we use to automate certain aspects of our code review process.
+
+Checks that we automate include:
+
+- Ensuring that the `package.json` has been updated so that a package can be successfully published to NPM.
+- Making sure that each code change has an entry in the packages `CHANGELOG` so that the history is kept up to date.
+
+We automate Danger.js checks through CircleCI and they appear via our `fozzie-bot` github bot.
+
+---
+
+### Configuring Danger.js
+
+All of the checks that Danger.js performs are configured inside a `dangerfile.js` file [located at the root of the mono-repo](https://github.com/justeat/fozzie-components/blob/master/dangerfile.js).
+
+If you want to add, edit or remove any of the checks that Danger.js performs, you will need to edit this file. For information on the API that Danger exposes for us to hook onto, check out their [reference guide](https://danger.systems/js/reference.html).
+
+
+### Testing Danger.js locally
+
+To test changes you've made to a dangerfile locally against an existing public PR, simply run:
+
+```sh
+danger pr {URL_TO_PR}
+```
+
+Replacing `{URL_TO_PR}` with the relevant URL. This will enable you to test changes without having to run a full CircleCI build (which can be slow when testing script changes like this).
+
