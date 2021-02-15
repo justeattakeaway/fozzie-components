@@ -1,7 +1,7 @@
 import Trak from '@justeat/f-trak';
 
 const trackInitialLoad = eventData => {
-    const { basket, restaurantId, isLoggedIn } = eventData;
+    const { basket, restaurantId, isLoggedIn, checkoutData } = eventData;
 
     const pageName = isLoggedIn ? 'Overview' : 'Guest';
 
@@ -23,6 +23,8 @@ const trackInitialLoad = eventData => {
             }
         }
     });
+
+    trackFormInteraction(checkoutData)
 };
 
 const cleanFields = errors => {
@@ -42,6 +44,8 @@ const trackFormInteraction = eventData => {
     const autofill = eventData.autofill && cleanFields(eventData.autofill);
 
     const formName = isLoggedIn ? 'checkout' : 'checkout_guest';
+
+    console.log(error); // eslint-disable-line no-console
 
     Trak.event({
         event: 'Form',

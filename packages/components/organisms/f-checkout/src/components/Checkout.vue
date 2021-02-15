@@ -291,17 +291,7 @@ export default {
             },
             restaurantId: this.restaurantId,
             isLoggedIn: this.isLoggedIn,
-            autofill: this.autofill
-        });
-
-        console.log(this.autofill); // eslint-disable-line no-console
-
-        trackFormInteraction({
-            action: 'start',
-            error: null,
-            isLoggedIn: this.isLoggedIn,
-            changes: this.changes,
-            autofill: this.autofill
+            checkoutData: this.trackingData('start')
         });
     },
 
@@ -561,25 +551,13 @@ export default {
             * If form is valid try to call `submitCheckout`
             * Catch and handle any errors
             */
-            trackFormInteraction({
-                action: 'submit',
-                error: null,
-                isLoggedIn: this.isLoggedIn,
-                changes: this.changes,
-                autofill: this.autofill
-            });
+            trackFormInteraction(this.trackingData('submit'));
 
             if (!this.isFormValid()) {
                 const validationState = validations.getFormValidationState(this.$v);
                 this.$emit(EventNames.CheckoutValidationError, validationState);
 
-                trackFormInteraction({
-                    action: 'inline_error',
-                    error: validationState.invalidFields,
-                    isLoggedIn: this.isLoggedIn,
-                    changes: this.changes,
-                    autofill: this.autofill
-                });
+                trackFormInteraction(this.trackingData('inline_error', validationState.invalidFields));
 
                 this.$logger.logWarn(
                     'Checkout Validation Error',
@@ -594,12 +572,7 @@ export default {
             try {
                 await this.submitCheckout();
 
-                trackFormInteraction({
-                    action: 'success',
-                    error: null,
-                    isLoggedIn: this.isLoggedIn,
-                    changes: this.changes
-                });
+                trackFormInteraction(this.trackingData('success'));
             } catch (error) {
                 this.handleErrorState(error);
             } finally {
@@ -629,6 +602,18 @@ export default {
         */
         isValidPostcode () {
             return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
+        },
+
+        trackingData ( action, error ){
+            const data = {
+                action,
+                error: error ? error : null,
+                isLoggedIn: this.isLoggedIn,
+                changes: this.changes,
+                autofill: this.autofill
+            };
+
+            return data;
         }
     },
 
