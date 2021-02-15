@@ -4,6 +4,7 @@
         :name="transitionName">
         <div
             v-show="isActive"
+            :data-test-id="`transition-tab-${name}`"
             :class="$style['c-tab']">
             <slot />
         </div>
@@ -11,6 +12,7 @@
     <div v-else>
         <div
             v-show="isActive"
+            :data-test-id="`no-transition-tab-${name}`"
             :class="$style['c-tab']">
             <slot />
         </div>
@@ -22,29 +24,38 @@ import { DIRECTION } from '../constants';
 
 export default {
     name: 'Tab',
+
     props: {
+
         title: {
             required: true,
             type: String
         },
+
         name: {
             required: true,
             type: String
         },
+
         selected: {
             type: Boolean,
             default: false
         }
     },
+
     inject: ['register', 'tabsComponent'],
+
     computed: {
+
         isActive () {
             return this.tabsComponent.activeTab === this.name;
         },
+
         transitionName () {
             return this.tabsComponent.animationDirection === DIRECTION.LEFT ?
                 this.$style['fade-in-right'] : this.$style['fade-in-left'];
         },
+
         animateTab () {
             return this.tabsComponent.animate;
         }
