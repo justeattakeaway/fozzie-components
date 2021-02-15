@@ -81,6 +81,31 @@ describe('contentCards › HomePromotionCard2', () => {
         expect(container.attributes('href')).toBe(url);
     });
 
+    describe('when `no-link` prop is truthy', () => {
+        it('should NOT render the container as a link', () => {
+            // Arrange
+            const card = {
+                ctaText,
+                url
+            };
+
+            // Act
+            const wrapper = shallowMount(HomePromotionCard2, {
+                propsData: {
+                    card,
+                    testId,
+                    noLink: true
+                },
+                provide
+            });
+
+            const container = wrapper.find(`[data-test-id="${testId}"]`);
+
+            // Assert
+            expect(container.attributes('href')).toBeUndefined();
+        });
+    });
+
     it('should call the injected `emitCardClick` event when clicked', () => {
         // Arrange
         const card = {
