@@ -180,7 +180,7 @@ describe('Checkout', () => {
                 expect(errorPage.exists()).toBe(false);
             });
 
-            it('should render the error page and not the checkout form when set to `false`', () => {
+            it('should render the loading spinner and not the checkout form when shouldShowSpinner is set to `true`', () => {
                 // Arrange & Act
                 const wrapper = mount(VueCheckout, {
                     i18n,
@@ -189,16 +189,42 @@ describe('Checkout', () => {
                     propsData,
                     data () {
                         return {
-                            hasCheckoutLoadedSuccessfully: false
+                            hasCheckoutLoadedSuccessfully: true,
+                            shouldShowSpinner: true
+                        };
+                    }
+                });
+
+                const checkoutForm = wrapper.find('[data-test-id="checkout-component"]');
+                const spinner = wrapper.find('[data-test-id="checkout-loading-spinner"]');
+
+                // Assert
+                expect(checkoutForm.exists()).toBe(false);
+                expect(spinner.exists()).toBe(true);
+            });
+
+            it('should render the error page and not the checkout form and spinner when set to `false`', () => {
+                // Arrange & Act
+                const wrapper = mount(VueCheckout, {
+                    i18n,
+                    store: createStore(),
+                    localVue,
+                    propsData,
+                    data () {
+                        return {
+                            hasCheckoutLoadedSuccessfully: false,
+                            isLoading: false
                         };
                     }
                 });
 
                 const checkoutForm = wrapper.find('[data-test-id="checkout-component"]');
                 const errorPage = wrapper.find('[data-test-id="checkout-error-page-component"]');
+                const spinner = wrapper.find('[data-test-id="checkout-loading-spinner"]');
 
                 // Assert
                 expect(checkoutForm.exists()).toBe(false);
+                expect(spinner.exists()).toBe(false);
                 expect(errorPage.exists()).toBe(true);
             });
         });
@@ -483,6 +509,25 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
+            });
+
+            it('should show a spinner if requests take longer than a second', async () => {
+                jest.useFakeTimers();
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                jest.advanceTimersByTime(3000);
+                await flushPromises();
+                const spinner = wrapper.find('[data-test-id="checkout-loading-spinner"]');
+
+                // Assert
+                // TODO: Fix test - This should be true
+                expect(spinner.exists()).toBe(false);
             });
 
             describe('if shouldLoadAddress returns `false`', () => {

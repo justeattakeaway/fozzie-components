@@ -1,7 +1,14 @@
 <template>
     <div>
         <div
-            v-if="hasCheckoutLoadedSuccessfully"
+            v-if="shouldShowSpinner"
+            :class="$style['c-spinner-wrapper']"
+            data-test-id="checkout-loading-spinner"
+        >
+            <div :class="$style['c-spinner']" />
+        </div>
+        <div
+            v-else-if="shouldShowCheckoutForm"
             data-theme="jet"
             data-test-id="checkout-component">
             <alert
@@ -69,7 +76,7 @@
             </card>
         </div>
 
-        <error-page v-else />
+        <error-page v-else-if="shouldShowErrorPage" />
     </div>
 </template>
 
@@ -205,7 +212,9 @@ export default {
             tenantConfigs,
             genericErrorMessage: null,
             shouldDisableCheckoutButton: false,
-            hasCheckoutLoadedSuccessfully: true
+            hasCheckoutLoadedSuccessfully: true,
+            showSpinner: false,
+            isLoading: false
         };
     },
 
@@ -265,6 +274,14 @@ export default {
             return this.isLoggedIn &&
             this.isCheckoutMethodDelivery &&
             (!this.address || !this.address.line1);
+        },
+
+        shouldShowCheckoutForm () {
+            return !this.loading && this.hasCheckoutLoadedSuccessfully;
+        },
+
+        shouldShowErrorPage () {
+            return !this.hasCheckoutLoadedSuccessfully;
         }
     },
 
@@ -296,13 +313,22 @@ export default {
          *
          */
         async initialise () {
+            this.isLoading = true;
             this.setAuthToken(this.authToken);
+
+            setTimeout(() => {
+                if (this.isLoading) {
+                    this.shouldShowSpinner = true;
+                }
+            }, 1000);
 
             const promises = this.isLoggedIn
                 ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
                 : [this.loadBasket(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
+            this.isLoading = false;
+            this.shouldShowSpinner = false;
 
             if (this.shouldLoadAddress) {
                 await this.loadAddress();
@@ -628,6 +654,38 @@ export default {
 </script>
 
 <style lang="scss" module>
+$loading-indicator-size                      : 48px;
+$loading-indicator-color                     : $orange;
+$loading-indicator-borderSize                : 3px;
+$loading-indicator-borderColorOpaque         : rgba(243, 109, 0, 0.2);
+$loading-indicator-spacing                   : 20px;
+
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+.c-spinner-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.c-spinner {
+    width: $loading-indicator-size;
+    height: $loading-indicator-size;
+    margin-right: $loading-indicator-spacing;
+    border: $loading-indicator-borderSize solid $loading-indicator-color;
+    border-top: $loading-indicator-borderSize solid $loading-indicator-borderColorOpaque;
+    border-radius: 50%;
+    animation: spin 1s linear 0s infinite;
+}
+
 .c-checkout {
     padding-top: spacing(x6);
     padding-bottom: spacing(x6);
