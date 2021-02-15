@@ -81,11 +81,33 @@ export default {
             const { data } = await axios.get(url, config);
 
             commit(UPDATE_STATE, data);
-            // TODO : customer needs to remove name fields and email if not guest
-            const customer = Object.keys(data.customer)
-            // TODO : address only if delivery
-            const address = Object.keys(data.address)
-            commit(UPDATE_AUTO_FILL, customer.concat(address));
+            if (state.isLoggedIn) {
+                let payload = [];
+                // TODO : customer only needs phone
+                // TODO : need to check it's not null
+                data.customer.phoneNumber ? payload.push('phone') : null;
+                if (state.serviceType === 'delivery') {
+                    data.address.postalCode ? payload.push('postcode') : null;
+                    data.address.lines[0] ? payload.push('address_line1') : null;
+                    data.address.lines[1] ? payload.push('address_line2') : null;
+                    data.address.lines[3] ? payload.push('address_city') : null;
+                }
+
+                commit(UPDATE_AUTO_FILL, payload);
+
+                // state.address.line1 = address.lines[0];
+                // state.address.line2 = address.lines[1];
+                // state.address.city = address.lines[3];
+                // if (state.serviceType === 'delivery') {
+                //     // TODO : address only showing index not checking if filled
+                //     const address = Object.keys(data.address.lines)
+                //     data.address.postalCode ? address.push('postcode') : null;
+                //     commit(UPDATE_AUTO_FILL, customer.concat(address));
+                // } else {
+                //     commit(UPDATE_AUTO_FILL, customer);
+
+                // }
+            }
         },
 
         /**
