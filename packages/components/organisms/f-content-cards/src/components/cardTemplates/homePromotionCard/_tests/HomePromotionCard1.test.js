@@ -11,6 +11,10 @@ const provide = {
 };
 
 describe('contentCards › HomePromotionCard1', () => {
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
+
     it('should apply the given test ID', () => {
         // Arrange & Act
         const wrapper = shallowMount(HomePromotionCard1, {

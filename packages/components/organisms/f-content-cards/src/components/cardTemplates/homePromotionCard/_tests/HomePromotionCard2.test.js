@@ -11,6 +11,10 @@ const provide = {
 };
 
 describe('contentCards › HomePromotionCard2', () => {
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
+
     it('should apply the given test ID', () => {
         // Arrange & Act
         const wrapper = shallowMount(HomePromotionCard2, {
@@ -81,6 +85,27 @@ describe('contentCards › HomePromotionCard2', () => {
         expect(container.attributes('href')).toBe(url);
     });
 
+    it('should call the injected `emitCardClick` event when clicked', () => {
+        // Arrange
+        const card = {
+            ctaText,
+            url
+        };
+        const wrapper = shallowMount(HomePromotionCard2, {
+            propsData: {
+                card,
+                testId
+            },
+            provide
+        });
+
+        // Act
+        wrapper.find(`[data-test-id="${testId}"]`).trigger('click');
+
+        // Assert
+        expect(provide.emitCardClick).toHaveBeenCalled();
+    });
+
     describe('when `no-link` prop is truthy', () => {
         it('should NOT render the container as a link', () => {
             // Arrange
@@ -104,27 +129,28 @@ describe('contentCards › HomePromotionCard2', () => {
             // Assert
             expect(container.attributes('href')).toBeUndefined();
         });
-    });
 
-    it('should call the injected `emitCardClick` event when clicked', () => {
-        // Arrange
-        const card = {
-            ctaText,
-            url
-        };
-        const wrapper = shallowMount(HomePromotionCard2, {
-            propsData: {
-                card,
-                testId
-            },
-            provide
+        it('should NOT call the injected `emitCardClick` event when clicked', () => {
+            // Arrange
+            const card = {
+                ctaText,
+                url
+            };
+            const wrapper = shallowMount(HomePromotionCard2, {
+                propsData: {
+                    card,
+                    testId,
+                    noLink: true
+                },
+                provide
+            });
+
+            // Act
+            wrapper.find(`[data-test-id="${testId}"]`).trigger('click');
+
+            // Assert
+            expect(provide.emitCardClick).not.toHaveBeenCalled();
         });
-
-        // Act
-        wrapper.find(`[data-test-id="${testId}"]`).trigger('click');
-
-        // Assert
-        expect(provide.emitCardClick).toHaveBeenCalled();
     });
 
     // Check contentBackgroundColour is the dominant factor

@@ -14,6 +14,7 @@ v3.2.0
 - Home Promotion Cards 1 & 2 now render as a link for the full banner, rather than
   just a link for the CTA
 
+
 v3.1.1
 ------------------------------
 *February 10, 2020*

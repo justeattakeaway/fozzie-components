@@ -145,7 +145,9 @@ export default {
         },
 
         onClickContentCard () {
-            this.emitCardClick(this.card);
+            if (!this.noLink) {
+                this.emitCardClick(this.card);
+            }
         }
     }
 };
