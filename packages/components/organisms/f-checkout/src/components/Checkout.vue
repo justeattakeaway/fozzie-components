@@ -213,7 +213,7 @@ export default {
             genericErrorMessage: null,
             shouldDisableCheckoutButton: false,
             hasCheckoutLoadedSuccessfully: true,
-            showSpinner: false,
+            shouldShowSpinner: false,
             isLoading: false
         };
     },
@@ -316,19 +316,14 @@ export default {
             this.isLoading = true;
             this.setAuthToken(this.authToken);
 
-            setTimeout(() => {
-                if (this.isLoading) {
-                    this.shouldShowSpinner = true;
-                }
-            }, 1000);
+            this.startSpinnerCountdown();
 
             const promises = this.isLoggedIn
                 ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
                 : [this.loadBasket(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
-            this.isLoading = false;
-            this.shouldShowSpinner = false;
+            this.resetLoadingState();
 
             if (this.shouldLoadAddress) {
                 await this.loadAddress();
@@ -605,6 +600,19 @@ export default {
         */
         isValidPostcode () {
             return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
+        },
+
+        resetLoadingState () {
+            this.isLoading = false;
+            this.shouldShowSpinner = false;
+        },
+
+        startSpinnerCountdown () {
+            setTimeout(() => {
+                if (this.isLoading) {
+                    this.shouldShowSpinner = true;
+                }
+            }, 1000);
         }
     },
 
@@ -654,6 +662,7 @@ export default {
 </script>
 
 <style lang="scss" module>
+// TODO: Bring this spinner in from fozzie (lines 658 - 688)
 $loading-indicator-size                      : 48px;
 $loading-indicator-color                     : $orange;
 $loading-indicator-borderSize                : 3px;
@@ -674,12 +683,12 @@ $loading-indicator-spacing                   : 20px;
     position: absolute;
     top: 50%;
     left: 50%;
+    transform: translate(-50%,-50%);
 }
 
 .c-spinner {
     width: $loading-indicator-size;
     height: $loading-indicator-size;
-    margin-right: $loading-indicator-spacing;
     border: $loading-indicator-borderSize solid $loading-indicator-color;
     border-top: $loading-indicator-borderSize solid $loading-indicator-borderColorOpaque;
     border-radius: 50%;
