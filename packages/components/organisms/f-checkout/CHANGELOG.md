@@ -8,7 +8,7 @@ v0.57.0
 *February 15, 2021*
 
 ### Added
-- logic to choose closest address for uk tenant
+- Logic to choose closest address for uk tenant
 
 
 v0.56.2
