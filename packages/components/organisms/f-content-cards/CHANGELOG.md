@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.2.0
+------------------------------
+*February 15, 2020*
+
+### Changed
+- Home Promotion Cards 1 & 2 now use the tracking as supplied to the containing
+  Content Cards component
+- Home Promotion Cards 1 & 2 now render as a link for the full banner, rather than
+  just a link for the CTA
+
 v3.1.1
 ------------------------------
 *February 10, 2020*
