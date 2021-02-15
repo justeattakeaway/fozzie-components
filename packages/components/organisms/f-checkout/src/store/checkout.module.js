@@ -1,4 +1,5 @@
 import axios from 'axios';
+import addressService from '../services/addressService';
 
 import {
     UPDATE_AUTH,
@@ -190,6 +191,7 @@ export default {
          */
         getAddress: async ({ commit, state }, {
             url,
+            tenant,
             language,
             timeout
         }) => {
@@ -207,15 +209,7 @@ export default {
 
             const { data } = await axios.get(url, config);
 
-            // TODO: Implement logic to select best address. For now, select the first address
-            const [selectedAddress] = data.Addresses;
-
-            const addressDetails = {
-                line1: selectedAddress.Line1,
-                line2: selectedAddress.Line2,
-                city: selectedAddress.City,
-                postcode: selectedAddress.ZipCode
-            };
+            const addressDetails = addressService.getClosestAddress(data.Addresses, tenant);
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
         },
