@@ -65,7 +65,7 @@ function getAddressClosestToPostcode (postcode, addresses) {
         formattedPostcode = formattedPostcode.slice(0, formattedPostcode.length - 3);
     }
 
-    address = address ?? addresses.find(a => a && a.ZipCode.startsWith(formattedPostcode));
+    address = address || addresses.find(a => a && a.ZipCode.startsWith(formattedPostcode));
 
     return address;
 }
