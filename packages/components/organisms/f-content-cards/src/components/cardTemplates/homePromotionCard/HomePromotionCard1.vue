@@ -143,6 +143,8 @@ export default {
 
 <style lang="scss" module>
     .c-contentCards-homePromotionCard1 {
+        text-decoration: initial;
+        display: block;
         padding: spacing(x3) 0 spacing(x2);
         width: 100%;
 

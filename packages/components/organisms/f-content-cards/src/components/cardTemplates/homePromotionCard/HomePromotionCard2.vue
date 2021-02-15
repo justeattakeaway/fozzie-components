@@ -153,6 +153,7 @@ export default {
 
 <style lang="scss" module>
     .c-contentCards-homePromotionCard2 {
+        text-decoration: initial;
         position: relative;
         display: block;
         width: 100%;
