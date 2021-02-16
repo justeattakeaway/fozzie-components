@@ -1,5 +1,10 @@
 import Trak from '@justeat/f-trak';
 
+/**
+ * Pushes initial state of checkout to the dataLayer.
+ *
+ * @param {object} eventData An object containing data to be pushed to the dataLayer
+ */
 const trackInitialLoad = eventData => {
     const { basket, restaurantId, isLoggedIn, checkoutData } = eventData;
 
@@ -25,21 +30,32 @@ const trackInitialLoad = eventData => {
     });
 
     if (checkoutData) {
-        console.log('here'); // eslint-disable-line no-console
-        console.log(trackFormInteraction); // eslint-disable-line no-console
+        // console.log('here'); // eslint-disable-line no-console
+        // console.log(trackFormInteraction); // eslint-disable-line no-console
         trackFormInteraction(checkoutData);
     };
 };
 
-const cleanFields = errors => {
-    errors = errors.map(item => item.replace('customer.', ''));
-    errors = errors.map(item => item.replace('address.', 'address_'));
-    errors = errors.map(item => (item === 'mobileNumber' ? 'phone' : item));
+/**
+ * Updates passed fields to match analytics requirements.
+ *
+ * @param {array} fields An array of fields
+ * @return {array} An array of sorted fields with the correct field name for analytics.
+ */
+const cleanFields = fields => {
+    fields = fields.map(item => item.replace('customer.', ''));
+    fields = fields.map(item => item.replace('address.', 'address_'));
+    fields = fields.map(item => (item === 'mobileNumber' ? 'phone' : item));
 
     // TODO: input events don't contain 'address_'
-    return errors.sort();
+    return fields.sort();
 };
 
+/**
+ * Pushes `form` event to the data layer with correct data
+ *
+ * @param {object} eventData An object containing data to be pushed to the dataLayer
+ */
 const trackFormInteraction = eventData => {
     const { action, isLoggedIn } = eventData;
 
@@ -49,7 +65,7 @@ const trackFormInteraction = eventData => {
 
     const formName = isLoggedIn ? 'checkout' : 'checkout_guest';
 
-    console.log('error'); // eslint-disable-line no-console
+    // console.log('error'); // eslint-disable-line no-console
 
     Trak.event({
         event: 'Form',
@@ -65,4 +81,5 @@ const trackFormInteraction = eventData => {
         }
     });
 };
-export { trackInitialLoad, trackFormInteraction };
+
+export default { trackInitialLoad, trackFormInteraction };

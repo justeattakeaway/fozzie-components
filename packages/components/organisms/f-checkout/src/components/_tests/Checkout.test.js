@@ -3,9 +3,11 @@ import Vuex from 'vuex';
 import flushPromises from 'flush-promises';
 import { VueI18n } from '@justeat/f-globalisation';
 import { validations } from '@justeat/f-services';
+import analytics from '../../services/analytics';
 import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION, TENANT_MAP } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
+// import { analytics } from '../../services/analytics';
 
 import {
     defaultState, defaultActions, i18n, createStore, $logger
@@ -424,6 +426,30 @@ describe('Checkout', () => {
 
             // Assert
             expect(initialiseSpy).toHaveBeenCalled();
+        });
+
+        xit('should call `trackInitialLoad`', () => {
+            // Arrange
+            // const trackInitialLoadSpy = jest.spyOn(analytics, 'trackInitialLoad');
+            const trackInitialLoadSpy = jest.spyOn(analytics, 'trackInitialLoad');
+            analytics.trackInitialLoad.mockImplementation();
+            console.log(analytics); // eslint-disable-line no-console
+
+            // const trackInitialLoadMock = jest.fn()
+
+            // Act
+            shallowMount(VueCheckout, {
+                store: createStore(),
+                i18n,
+                localVue,
+                propsData,
+                mocks: {
+                    trackInitialLoad: trackInitialLoadSpy
+                }
+            });
+
+            // Assert
+            expect(trackInitialLoadSpy).toHaveBeenCalled();
         });
     });
 
@@ -1889,7 +1915,11 @@ describe('Checkout', () => {
         });
 
         describe('trackingData ::', () => {
-            const action = 'start';
+            const expectedData = {
+                isLoggedIn: defaultState.isLoggedIn,
+                changes: defaultState.changes,
+                autofill: defaultState.autofill
+            };
 
             it('should return `isLoggedIn`, `changes` and `autofill` from the store', () => {
                 // Arrange
@@ -1901,11 +1931,6 @@ describe('Checkout', () => {
                 });
 
                 // Act
-                const expectedData = {
-                    isLoggedIn: defaultState.isLoggedIn,
-                    changes: defaultState.changes,
-                    autofill: defaultState.autofill
-                };
 
                 const returnedData = wrapper.vm.trackingData();
 
@@ -1913,6 +1938,27 @@ describe('Checkout', () => {
                 expect(returnedData.isLoggedIn).toEqual(expectedData.isLoggedIn);
                 expect(returnedData.changes).toEqual(expectedData.changes);
                 expect(returnedData.autofill).toEqual(expectedData.autofill);
+            });
+
+            it('should return object containing passed action and error', () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const action = 'start';
+                const error = 'error';
+
+
+                const returnedData = wrapper.vm.trackingData(action, error);
+
+                // Assert
+                expect(returnedData.action).toEqual(action);
+                expect(returnedData.error).toEqual(error);
             });
         });
     });

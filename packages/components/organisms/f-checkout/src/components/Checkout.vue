@@ -105,7 +105,7 @@ import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import mapUpdateCheckoutRequest from '../services/mapper';
-import { trackInitialLoad, trackFormInteraction } from '../services/analytics';
+import Analytics from '../services/analytics';
 
 export default {
     name: 'VueCheckout',
@@ -284,7 +284,7 @@ export default {
 
         window.dataLayer = window.dataLayer || [];
 
-        trackInitialLoad({
+        Analytics.trackInitialLoad({
             basket: {
                 id: this.basket.id,
                 total: this.basket.total
@@ -551,13 +551,13 @@ export default {
             * If form is valid try to call `submitCheckout`
             * Catch and handle any errors
             */
-            trackFormInteraction(this.trackingData('submit'));
+            Analytics.trackFormInteraction(this.trackingData('submit'));
 
             if (!this.isFormValid()) {
                 const validationState = validations.getFormValidationState(this.$v);
                 this.$emit(EventNames.CheckoutValidationError, validationState);
 
-                trackFormInteraction(this.trackingData('inline_error', validationState.invalidFields));
+                Analytics.trackFormInteraction(this.trackingData('inline_error', validationState.invalidFields));
 
                 this.$logger.logWarn(
                     'Checkout Validation Error',
@@ -572,7 +572,7 @@ export default {
             try {
                 await this.submitCheckout();
 
-                trackFormInteraction(this.trackingData('success'));
+                Analytics.trackFormInteraction(this.trackingData('success'));
             } catch (error) {
                 this.handleErrorState(error);
             } finally {
@@ -604,6 +604,11 @@ export default {
             return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
         },
 
+        /**
+         * Return object of passed action and error
+         * along with state values `isLoggedIn`, `changes` and `autofill`
+         *
+         */
         trackingData ( action, error ){
             const data = {
                 action,
