@@ -3,12 +3,31 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.27.0
+------------------------------
+*February 15, 2021*
+
+### Changed
+- Ordering of sub-pages updated with new documentation added.
+
+
+v0.26.0
+------------------------------
+*February 9, 2021*
+
+### Fixed
+- Storybook helper popup now visible (previously had black text on black bg).
+- Link styling in Storybook content updated so the links are clearly visible.
+
+
 v0.25.0
 ------------------------------
 *February 9, 2021*
 
 ### Added
 - `vue-svg-loader` to Webpack config
+
 
 v0.24.0
 ------------------------------

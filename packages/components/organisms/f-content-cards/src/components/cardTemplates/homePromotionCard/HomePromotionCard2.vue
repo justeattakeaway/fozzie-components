@@ -1,10 +1,14 @@
 <template>
-    <div
+    <component
+        :is="showLink ? 'a' : 'div'"
+        :href="showLink ? url : null"
         :data-test-id="testId"
         :class="['c-contentCards-homePromotionCard2', $style['c-contentCards-homePromotionCard2'], {
             [$style['c-contentCards-homePromotionCard2--light']]: isLightText
         }]"
-        :style="{ background: contentBackgroundColor }">
+        :style="{ background: contentBackgroundColor }"
+        @click="onClickContentCard"
+    >
         <div
             :data-test-id="imageTestId"
             :class="['c-contentCards-homePromotionCard2-image', $style['c-contentCards-homePromotionCard2-image']]"
@@ -23,8 +27,7 @@
             </p>
         </template>
         <p v-if="url">
-            <a
-                :href="url"
+            <span
                 :data-test-id="ctaTestId"
                 :class="[
                     'o-link--full',
@@ -32,9 +35,9 @@
                     'u-color-link',
                     'u-text-left',
                     $style['c-contentCards-homePromotionCard2-link']
-                ]">{{ ctaText }}</a>
+                ]">{{ ctaText }}</span>
         </p>
-    </div>
+    </component>
 </template>
 
 <script>
@@ -46,11 +49,18 @@ export default {
             type: Object,
             default: () => ({})
         },
+
+        noLink: {
+            type: Boolean,
+            default: false
+        },
+
         testId: {
             type: String,
             default: 'home-promotion-2'
         }
     },
+
     data () {
         const {
             image,
@@ -72,6 +82,7 @@ export default {
             description
         };
     },
+
     computed: {
         ctaTestId () {
             return this.testId ? `${this.testId}--cta` : false;
@@ -88,6 +99,7 @@ export default {
         imageTestId () {
             return this.testId ? `${this.testId}--backgroundImage` : false;
         },
+
         /**
          * If background colour is set *and* dark, then use a light text colour for the title and text for A11y
          * @return {boolean}
@@ -107,6 +119,35 @@ export default {
             } catch {
                 return false;
             }
+        },
+
+        /**
+         * Encapsulated behaviour to ensure that the link is only shown when not contained within an HPC1 card
+         * @return {boolean}
+         */
+        showLink () {
+            return this.url && !this.noLink;
+        }
+    },
+
+    inject: [
+        'emitCardView',
+        'emitCardClick'
+    ],
+
+    mounted () {
+        this.onViewContentCard();
+    },
+
+    methods: {
+        onViewContentCard () {
+            this.emitCardView(this.card);
+        },
+
+        onClickContentCard () {
+            if (!this.noLink) {
+                this.emitCardClick(this.card);
+            }
         }
     }
 };
@@ -114,6 +155,7 @@ export default {
 
 <style lang="scss" module>
     .c-contentCards-homePromotionCard2 {
+        text-decoration: initial;
         position: relative;
         display: block;
         width: 100%;

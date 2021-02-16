@@ -13,7 +13,7 @@
         <div
             :class="[
                 $style['c-cookieBanner-card'],
-                { [$style['c-cookieBanner-ios']]: isIosBrowser() }
+                { [$style['c-cookieBanner-ios']]: isIosBrowser }
             ]">
             <div
                 :class="$style['c-cookieBanner-content']"
@@ -32,9 +32,11 @@
                 <p :class="$style['c-cookieBanner-text']">
                     {{ $t('textLine1') }}
                 </p>
+
                 <p :class="$style['c-cookieBanner-text']">
                     {{ $t('textLine2') }}
                 </p>
+
                 <p
                     :class="$style['c-cookieBanner-text']">
                     <i18n
@@ -56,6 +58,7 @@
                     @click.native="acceptAllCookiesActions">
                     {{ $t('acceptButtonText') }}
                 </button-component>
+
                 <button-component
                     button-type="ghost"
                     is-full-width
@@ -65,6 +68,7 @@
             </div>
         </div>
     </div>
+
     <legacy-banner
         v-else
         :should-hide-legacy-banner="shouldHideBanner"
@@ -84,14 +88,14 @@ import LegacyBanner from './LegacyBanner.vue';
 import tenantConfigs from '../tenants';
 
 export default {
-    name: 'CookieBanner',
-
     components: {
         ButtonComponent,
         LegacyBanner
     },
 
-    mixins: [VueGlobalisationMixin],
+    mixins: [
+        VueGlobalisationMixin
+    ],
 
     props: {
         locale: {
@@ -127,26 +131,32 @@ export default {
             tenantConfigs,
             theme,
             shouldHideBanner: false,
-            legacyBanner: false,
             consentCookieName,
-            legacyConsentCookieName
+            legacyConsentCookieName,
+            isIosBrowser: false
         };
+    },
+
+    computed: {
+        /**
+         * Check if the legacy cookie banner should be used
+         */
+        legacyBanner () {
+            return this.config.displayLegacy;
+        }
     },
 
     watch: {
         isHidden (newVal) {
             this.shouldHideBanner = !!newVal;
-        },
-
-        showLegacyBanner (newVal) {
-            this.legacyBanner = !!newVal;
         }
     },
 
     mounted () {
-        this.checkLegacyBannerFlag();
         this.checkCookieBannerCookie();
         this.focusOnTitle();
+
+        this.isIosBrowser = /(iPhone|iPad).*Safari/.test(navigator.userAgent);
     },
 
     methods: {
@@ -159,6 +169,7 @@ export default {
             this.dataLayerPush('full');
             this.shouldHideBanner = true;
         },
+
         /**
          * Actions for "Accept only required cookies" button
          */
@@ -170,24 +181,23 @@ export default {
             this.removeUnnecessaryCookies();
             this.shouldHideBanner = true;
         },
+
         /**
          * Set focus to the cookie consent banner title for accessibility
          */
         focusOnTitle () {
-            this.$refs.cookieBannerHeading.focus();
+            if (!this.legacyBanner) {
+                this.$refs.cookieBannerHeading.focus();
+            }
         },
+
         /**
          * Hide the banner
          */
         hideBanner () {
             this.shouldHideBanner = true;
         },
-        /**
-         * Check if the legacy cookie banner should be used
-         */
-        checkLegacyBannerFlag () {
-            this.legacyBanner = this.config.displayLegacy;
-        },
+
         /**
          * Check if the cookie banner has been shown to this user
          */
@@ -200,6 +210,7 @@ export default {
                 this.shouldHideBanner = cookieConsent === 'full' || cookieConsent === 'necessary';
             }
         },
+
         /**
          * Set the cookie for the user's choice
          * @param {String} cookieValue
@@ -210,6 +221,7 @@ export default {
                 maxAge: this.cookieExpiry
             });
         },
+
         /**
          * Set the legacy cookie banner cookie
          */
@@ -219,6 +231,7 @@ export default {
                 maxAge: this.cookieExpiry
             });
         },
+
         /**
          * Push tracking events
          * @param {String} consentLevel
@@ -228,6 +241,7 @@ export default {
             dataLayer.push({ event: 'trackConsent', userData: { consent: consentLevel } });
             dataLayer.push({ platformData: { consentLoading: true } });
         },
+
         /**
          * Check whether a cookie with name `cookieName` is to be excluded from being removed
          * @param {String} cookieName
@@ -236,6 +250,7 @@ export default {
         isNotExcluded (cookieName) {
             return this.config.cookieExclusionList.every(excludedCookieName => cookieName.lastIndexOf(excludedCookieName, excludedCookieName.length - 1) === -1);
         },
+
         /**
          * Remove unnecessary cookies
          */
@@ -245,16 +260,7 @@ export default {
                 if (this.isNotExcluded(cookies[i])) this.$cookies.remove(cookies[i]);
             }
         },
-        /**
-         * Check for iOS browser
-         * @returns {Bool}
-         */
-        isIosBrowser () {
-            if (process.browser) {
-                return /(iPhone|iPad).*Safari/.test(navigator.userAgent);
-            }
-            return false;
-        },
+
         /**
          * Resend GTM events
          */

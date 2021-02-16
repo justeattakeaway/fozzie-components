@@ -1,73 +1,31 @@
+import LinkTo from '@storybook/addon-links/react';
+
 <Meta title="Documentation/Getting Started/Intro"/>
 
 # UI Component Mono-repo
 
 ## Introduction
 
-A mono-repo is a single repository containing multiple packages – in our case UI components and services. 
+A mono-repo is a single repository containing multiple packages – in our case UI components and services.
 
 Using multi-package repository reduces the time and space requirements for numerous copies of packages in development and build environments - normally a downside of dividing a project into many separate NPM packages. Updating common configuration across components is also much simpler as these dependencies can be shared and updated from the root of the mono-repo; for example linting or test dependencies.
 
 Each individual component can be found in the [`components`](https://github.com/justeat/fozzie-components/tree/master/packages/components) directory, and are all controlled from a top level `packages.json`.
 
-## Folder Structure
+## Dependencies
 
-The mono-repo folder structure has been organised to differentiate between several distinct types of packages. These are:
+For more information on the dependencies needed when including these shared UI components as part of your application, check out our <LinkTo kind="Documentation/Guides/Component Dependencies" story="page">Component Dependency guide</LinkTo>.
 
-- Components
-- Services
-- Tools
+## Repo Structure
 
-### Components
+Full details on the mono-repo structure – and an explanation of how we categorise components and packages – can be found on the <LinkTo kind="Documentation/Getting Started/Structure" story="page">Mono-repo Structure page</LinkTo>.
 
-UI components written in Vue.js, which can be pulled into a Vue application as a shared library component.
 
-Components are organised into sub-folders loosely matching the [Atomic Design Methodology](https://bradfrost.com/blog/post/atomic-web-design/), such as **Atoms**, **Molecules** and **Organisms**.
+## Contributing
 
-As a rough guide:
-- **Atom** = Basic building blocks of an application.
-- **Molecule** = A group of component atoms that form a small fundamental component.
-- **Organism** = A group of molecules joined together to form a relatively complex, distinct section of an interface.
+For more information on creating, contributing to and publishing components, <LinkTo kind="Documentation/Getting Started/Contributing" story="page">see our Contributing Guide</LinkTo>.
 
-As a general rule, if a component depends on another UI component (for example, it contains a `button` component), it will be at the very least a molecule in size. Atoms by their definition are the simplest form of components.
 
-### Services
+## Having Issues?
 
-Services are packages that are written solely in JavaScript and provide a distinct piece of client-side or middleware functionality.
-
-For instance, it would make sense to write a specific package to handle how components handle globalisation and internationalisation via the Vue i18n module – and we have a package that does just that (`f-globalisation`).
-
-We currently have a shared package called `f-services` which defines a number of client-side utility services that components can make use of.
-
-### Tools
-
-Tools are packages that are used to provide a specific piece of functionality that is used by components or more generally in the mono-repo.
-
-Currently, we have the following tools:
-
-- [`f-vue-icons`](https://github.com/justeat/fozzie-components/tree/master/packages/tools/f-vue-icons) – Provides an interface for our Vue components to use icons defined in  the [`f-icons` package](https://github.com/justeat/f-icons).
-- [`generator-component`](https://github.com/justeat/fozzie-components/tree/master/packages/tools/generator-component) – A yeoman generator that should be used when creating new packages to provide a base folder structure to start from.
-- [`storybook`](https://github.com/justeat/fozzie-components/tree/master/packages/tools/storybook) – Our component library documentation tool that allows us to preview and test components in isolation before being integrated into JE web applications.
-
-## Naming your packages in the mono-repo
-
-The general naming convention for a Fozzie package is to use `f-{your-package-name}` e.g. [`f-footer`](https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-footer), [`f-header`](https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-header), [`f-checkout`](https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-checkout).
-
-## Badges for README.md
-
-### General Badges (should be added to all packages)
-
-* npm version badge from [badge.fury.io](https://badge.fury.io/)
-
-### Optional Badges
-
-* To report the build status you can [add a CircleCI badge](https://circleci.com/gh/justeat/workflows/fozzie-components)
-* If there are JavaScript unit tests in the package you can [add a coveralls badge](https://coveralls.io/github/justeat/)
-* Check for known vulnerabilities in your package with a [Snyk.io badge](https://snyk.io/test/)
-
-## Publishing to npm
-
-To publish a package to **npm**, please first ensure that you have registered an account.
-Internal contributors (Just Eat employees) can request to be added to the Just Eat npm org by asking in the #guild-ui Slack channel and providing your npm account details. External contributors should raise a pull request and the release will be handled for you once approved.
-
-Once you are happy that the package is ready to be published to the npm registry, ensure you are on the correct branch — typically the master branch with the latest changes pulled — then run `npm publish` on the command line.
+If you are having any issues, please check out our <LinkTo kind="Documentation/Getting Started/Troubleshooting" story="page">Troubleshooting Guide</LinkTo>, send us a message in `#guild-ui` or [open an issue](https://github.com/justeat/fozzie-components/issues) on the repo.
