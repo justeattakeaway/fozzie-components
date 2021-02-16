@@ -3,7 +3,7 @@
         <header-component
             data-test-id="header-component"
             :locale="componentLocale"
-            :is-transparent="true" />
+            is-transparent />
 
         <main-banner-container
             data-test-id="main-banner-container"
