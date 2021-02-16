@@ -24,7 +24,11 @@ const trackInitialLoad = eventData => {
         }
     });
 
-    trackFormInteraction(checkoutData)
+    if (checkoutData) {
+        console.log('here'); // eslint-disable-line no-console
+        console.log(trackFormInteraction); // eslint-disable-line no-console
+        trackFormInteraction(checkoutData);
+    };
 };
 
 const cleanFields = errors => {
@@ -45,7 +49,7 @@ const trackFormInteraction = eventData => {
 
     const formName = isLoggedIn ? 'checkout' : 'checkout_guest';
 
-    console.log(error); // eslint-disable-line no-console
+    console.log('error'); // eslint-disable-line no-console
 
     Trak.event({
         event: 'Form',
@@ -61,5 +65,4 @@ const trackFormInteraction = eventData => {
         }
     });
 };
-
 export { trackInitialLoad, trackFormInteraction };

@@ -68,7 +68,10 @@ const defaultState = {
     id: '',
     serviceType: '',
     restaurantId: '',
-    basketTotal: 0,
+    basket: {
+        id: '',
+        total: 0
+    },
     customer: {
         firstName: '',
         lastName: '',
@@ -95,7 +98,9 @@ const defaultState = {
     },
     authToken: '',
     isLoggedIn: false,
-    userNote: ''
+    userNote: '',
+    autofill: [],
+    changes: []
 };
 
 let state = CheckoutModule.state();
@@ -254,7 +259,10 @@ describe('CheckoutModule', () => {
                 expect(commit).toHaveBeenCalledWith(UPDATE_BASKET_DETAILS, {
                     serviceType: basketDelivery.ServiceType.toLowerCase(),
                     restaurantId: basketDelivery.RestaurantId,
-                    basketTotal: basketDelivery.BasketSummary.BasketTotals.Total
+                    basket: {
+                        id: basketDelivery.BasketId,
+                        total: basketDelivery.BasketSummary.BasketTotals.Total
+                    }
                 });
             });
         });

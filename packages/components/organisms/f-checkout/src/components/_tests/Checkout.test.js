@@ -1866,7 +1866,7 @@ describe('Checkout', () => {
             });
         });
 
-        describe('updateCustomerDetails', () => {
+        describe('updateCustomerDetails ::', () => {
             it('should be called with new input value on user input', async () => {
                 // Arrange
                 const updateCustomerDetailsSpy = jest.spyOn(VueCheckout.methods, 'updateCustomerDetails');
@@ -1885,6 +1885,34 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(updateCustomerDetailsSpy).toHaveBeenCalledWith({ mobileNumber: newNumber });
+            });
+        });
+
+        describe('trackingData ::', () => {
+            const action = 'start';
+
+            it('should return `isLoggedIn`, `changes` and `autofill` from the store', () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const expectedData = {
+                    isLoggedIn: defaultState.isLoggedIn,
+                    changes: defaultState.changes,
+                    autofill: defaultState.autofill
+                };
+
+                const returnedData = wrapper.vm.trackingData();
+
+                // Assert
+                expect(returnedData.isLoggedIn).toEqual(expectedData.isLoggedIn);
+                expect(returnedData.changes).toEqual(expectedData.changes);
+                expect(returnedData.autofill).toEqual(expectedData.autofill);
             });
         });
     });

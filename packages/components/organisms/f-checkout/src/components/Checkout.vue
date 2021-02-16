@@ -618,6 +618,7 @@ export default {
     },
 
     validations () {
+
         const deliveryDetails = {
             customer: {
                 mobileNumber: {

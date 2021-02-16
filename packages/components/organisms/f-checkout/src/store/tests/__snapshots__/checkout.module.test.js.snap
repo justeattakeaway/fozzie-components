@@ -9,11 +9,16 @@ Object {
     "postcode": "BS1 1AA",
   },
   "authToken": "",
+  "autofill": Array [],
   "availableFulfilment": Object {
     "isAsapAvailable": false,
     "times": Array [],
   },
-  "basketTotal": 0,
+  "basket": Object {
+    "id": "",
+    "total": 0,
+  },
+  "changes": Array [],
   "customer": Object {
     "email": "",
     "firstName": "Joe",

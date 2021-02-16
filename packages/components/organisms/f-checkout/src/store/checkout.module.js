@@ -85,12 +85,13 @@ export default {
                 let payload = [];
                 // TODO : customer only needs phone
                 // TODO : need to check it's not null
-                data.customer.phoneNumber ? payload.push('phone') : null;
+                state.customer.phoneNumber ? payload.push('phone') : null;
+
                 if (state.serviceType === 'delivery') {
-                    data.address.postalCode ? payload.push('postcode') : null;
-                    data.address.lines[0] ? payload.push('address_line1') : null;
-                    data.address.lines[1] ? payload.push('address_line2') : null;
-                    data.address.lines[3] ? payload.push('address_city') : null;
+                    state.address.postalCode ? payload.push('postcode') : null;
+                    state.address.line1 ? payload.push('address_line1') : null;
+                    state.address.line2 ? payload.push('address_line2') : null;
+                    state.address.city ? payload.push('address_city') : null;
                 }
 
                 commit(UPDATE_AUTO_FILL, payload);
