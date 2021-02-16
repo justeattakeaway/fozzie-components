@@ -8,6 +8,14 @@ v3.14.0
 ------------------------------
 *February 15, 2021*
 
+### Changed
+- Bumped up fozzie dependency to 5.0.0.beta3
+  
+
+v3.14.0
+------------------------------
+*February 15, 2021*
+
 ### Added
 - `Utility Tools` page to Storybook docs.
 
