@@ -147,6 +147,11 @@ export default {
             required: true
         },
 
+        placeOrderUrl: {
+            type: String,
+            required: true
+        },
+
         updateCheckoutUrl: {
             type: String,
             required: true
@@ -170,6 +175,11 @@ export default {
         },
 
         getBasketTimeout: {
+            type: Number,
+            default: 1000
+        },
+
+        placeOrderTimeout: {
             type: Number,
             default: 1000
         },
@@ -288,7 +298,8 @@ export default {
             'updateCheckout',
             'setAuthToken',
             'updateCustomerDetails',
-            'updateUserNote'
+            'updateUserNote',
+            'placeOrder'
         ]),
 
         /**
@@ -338,6 +349,8 @@ export default {
                     timeout: this.updateCheckoutTimeout
                 });
 
+                await this.submitOrder();
+
                 this.$emit(EventNames.CheckoutSuccess, eventData);
 
                 this.$logger.logInfo(
@@ -356,6 +369,30 @@ export default {
                     eventData
                 );
             }
+        },
+
+        /**
+         * Place the order and then redirect to the payment page.
+         */
+        async submitOrder () {
+            const data = {
+                basketId: 'MzRkZGU4MDktYjVmNi00Nz-v1', // TODO: de-hardcode :)
+                applicationId: 7, // Responsive Web
+                customerNotes: {
+                    noteForDriver: this.userNote
+                },
+                applicationName: 'CoreWeb',
+                applicationVersion: '1',
+                referralState: 'None',
+                deviceId: '123', // TODO: TBC
+                deviceName: 'test' // TODO: TBC
+            };
+
+            await this.placeOrder({
+                url: this.placerOrderUrl,
+                data,
+                timeout: this.placerOrderTimeout
+            });
         },
 
         /**
