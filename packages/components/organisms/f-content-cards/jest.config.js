@@ -37,6 +37,7 @@ module.exports = {
     testURL: 'http://localhost/',
 
     modulePathIgnorePatterns: [
+        './.yalc/', // Don't run tests in yalc-linked packages
         './test/specs/component/',
         './test/specs/accessibility'
     ],

@@ -493,6 +493,7 @@ export default {
             try {
                 await this.getAddress({
                     url: this.getAddressUrl,
+                    tenant: this.tenant,
                     language: this.$i18n.locale,
                     timeout: this.getAddressTimeout
                 });

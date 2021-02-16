@@ -8,6 +8,12 @@ New components should use [generator-component](https://github.com/justeat/fozzi
 
 All of our components and services are published to NPM, so that they can be consumed as versioned packages. More information on versioning and publishing a component can be found below.
 
+
+## Naming your packages in the mono-repo
+
+The general naming convention for a Fozzie package is to use `f-{your-package-name}` e.g. [`f-footer`](https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-footer), [`f-header`](https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-header), [`f-checkout`](https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-checkout).
+
+
 ## Versioning
 
 We use [Semantic Versioning](http://semver.org/spec/v2.0.0.html) to publish all of our npm packages.
@@ -17,6 +23,19 @@ The basic premise of semantic versioning is that given a version number MAJOR.MI
 - MAJOR version when you make incompatible API changes,
 - MINOR version when you add functionality in a backwards compatible manner, and
 - PATCH version when you make backwards compatible bug fixes.
+
+
+## Badges for README.md
+
+### General Badges (should be added to all packages)
+
+* npm version badge from [badge.fury.io](https://badge.fury.io/)
+
+### Optional Badges
+
+* To report the build status you can [add a CircleCI badge](https://circleci.com/gh/justeat/workflows/fozzie-components)
+* If there are JavaScript unit tests in the package you can [add a coveralls badge](https://coveralls.io/github/justeat/)
+* Check for known vulnerabilities in your package with a [Snyk.io badge](https://snyk.io/test/)
 
 
 ## Publishing via npm
