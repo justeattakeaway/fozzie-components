@@ -17,6 +17,11 @@ module.exports = {
                 additionalData: `@import "../assets/scss/common.scss";`
             });
     },
+    configureWebpack: {
+        externals: [
+            '@justeat/f-vue-icons'
+        ]
+    },
     pluginOptions: {
         lintStyleOnBuild: true
     }

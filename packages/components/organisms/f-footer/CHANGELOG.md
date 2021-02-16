@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.9.0
+------------------------------
+*February 16, 2021*
+
+### Changed
+- Marked `f-vue-icons` as external via config.
+- Move `f-vue-icons` to peer `peerDependencies`.
+
 
 v4.8.3
 ------------------------------
