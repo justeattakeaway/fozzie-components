@@ -277,7 +277,7 @@ export default {
         },
 
         shouldShowCheckoutForm () {
-            return !this.loading && this.hasCheckoutLoadedSuccessfully;
+            return !this.isLoading && this.hasCheckoutLoadedSuccessfully;
         },
 
         shouldShowErrorPage () {
@@ -662,38 +662,18 @@ export default {
 </script>
 
 <style lang="scss" module>
-// TODO: Bring this spinner in from fozzie (lines 658 - 688)
-$loading-indicator-size                      : 48px;
-$loading-indicator-color                     : $orange;
-$loading-indicator-borderSize                : 3px;
-$loading-indicator-borderColorOpaque         : rgba(243, 109, 0, 0.2);
-$loading-indicator-spacing                   : 20px;
-
-@keyframes spin {
-    from {
-        transform: rotate(0);
-    }
-
-    to {
-        transform: rotate(359deg);
-    }
-}
+@include loadingIndicator('large');
 
 .c-spinner-wrapper {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
-}
+    transform: translate(-50%, -50%);
 
-.c-spinner {
-    width: $loading-indicator-size;
-    height: $loading-indicator-size;
-    border: $loading-indicator-borderSize solid $loading-indicator-color;
-    border-top: $loading-indicator-borderSize solid $loading-indicator-borderColorOpaque;
-    border-radius: 50%;
-    animation: spin 1s linear 0s infinite;
-}
+    .c-spinner {
+        margin: 0 auto;
+    }
+  }
 
 .c-checkout {
     padding-top: spacing(x6);

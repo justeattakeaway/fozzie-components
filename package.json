@@ -33,7 +33,7 @@
     "@justeat/browserslist-config-fozzie": "1.1.1",
     "@justeat/eslint-config-fozzie": "3.4.1",
     "@justeat/f-utils": "1.1.0",
-    "@justeat/fozzie": "5.0.0-beta.2",
+    "@justeat/fozzie": "5.0.0-beta.3",
     "@justeat/fozzie-colour-palette": "3.1.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",
     "@storybook/storybook-deployer": "2.8.6",
