@@ -1,24 +1,22 @@
-import FooterComponent from '../../../test-utils/component-objects/f-footer.component';
-const path = 'iframe.html?id=components-organisms--' // storybook url for all components - could move to config.
-const locale = '&knob-Locale=en-AU'
-const links = '&knob-Show%20courier%20links=true'
+const Footer = require('../../../test-utils/component-objects/f-footer.component');
+const footer = new Footer();
 
 describe('f-footer component tests', () => {
     beforeEach(() => {
-        browser.url(`${path}footer-component${locale}`);
-        FooterComponent.waitForFooter();
+        footer.openWithLocale('au');
+        footer.waitForComponent();
     });
 
     it('Should not show courier links on en-AU if courier links is set to false', () => {
         // Assert
-        expect(FooterComponent.isCourierLinksDisplayed()).toBe(false);
+        expect(footer.areCourierLinksDisplayed()).toBe(false);
     });
 
     it('Should show courier links on en-AU locale', () => {
         // Act
-        browser.url(`${path}footer-component${locale}${links}`);
+        footer.openAUWithExtraFeatures();
 
         // Assert
-        expect(FooterComponent.isCourierLinksDisplayed()).toBe(true);
+        expect(footer.areCourierLinksDisplayed()).toBe(true);
     });
 });
