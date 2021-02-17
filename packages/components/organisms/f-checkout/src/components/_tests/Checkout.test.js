@@ -431,9 +431,14 @@ describe('Checkout', () => {
         xit('should call `trackInitialLoad`', () => {
             // Arrange
             // const trackInitialLoadSpy = jest.spyOn(analytics, 'trackInitialLoad');
-            const trackInitialLoadSpy = jest.spyOn(analytics, 'trackInitialLoad');
-            analytics.trackInitialLoad.mockImplementation();
-            console.log(analytics); // eslint-disable-line no-console
+            // const trackInitialLoadSpy = jest.spyOn(analytics, 'trackInitialLoad');
+            // analytics.trackInitialLoad.mockImplementation();
+            // console.log(analytics); // eslint-disable-line no-console
+            const trackInitialLoadMock = jest.fn()
+
+            const Analytics = {
+                trackInitialLoad: trackInitialLoadMock
+            }
 
             // const trackInitialLoadMock = jest.fn()
 
@@ -444,12 +449,12 @@ describe('Checkout', () => {
                 localVue,
                 propsData,
                 mocks: {
-                    trackInitialLoad: trackInitialLoadSpy
+                    Analytics
                 }
             });
 
             // Assert
-            expect(trackInitialLoadSpy).toHaveBeenCalled();
+            expect(trackInitialLoadMock).toHaveBeenCalled();
         });
     });
 

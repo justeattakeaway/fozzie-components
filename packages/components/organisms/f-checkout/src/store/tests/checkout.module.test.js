@@ -15,7 +15,9 @@ import {
     UPDATE_IS_FULFILLABLE,
     UPDATE_ISSUES,
     UPDATE_STATE,
-    UPDATE_USER_NOTE
+    UPDATE_USER_NOTE,
+    UPDATE_FIELD_CHANGES,
+    UPDATE_AUTO_FILL
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutModule;
@@ -183,6 +185,66 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe(`${UPDATE_FIELD_CHANGES} ::`, () => {
+            it('should update state with received value', () => {
+                // Arrange & Act
+                mutations[UPDATE_FIELD_CHANGES](state, 'phone');
+
+                // Assert
+                expect(state.changes).toEqual(['phone']);
+            });
+        });
+
+        describe(`${UPDATE_AUTO_FILL} ::`, () => {
+            it('should update `autofill` with an empty array if `customer` and `address` are empty', () => {
+                // Arrange & Act
+                state = {
+                    ...state,
+                    customer: {
+                        firstName: '',
+                        lastName: '',
+                        email: '',
+                        mobileNumber: ''
+                    },
+                    address: {
+                        line1: '',
+                        line2: '',
+                        city: '',
+                        postcode: ''
+                    }
+                }
+
+                mutations[UPDATE_AUTO_FILL](state);
+
+                // Assert
+                expect(state.autofill).toEqual([]);
+            });
+
+            it('should update `autofill` with an array of filled fields', () => {
+                // Arrange & Act
+                state = {
+                    ...state,
+                    customer: {
+                        firstName: '',
+                        lastName: '',
+                        email: '',
+                        mobileNumber: '+447111111111'
+                    },
+                    address: {
+                        line1: '',
+                        line2: '',
+                        city: 'London',
+                        postcode: ''
+                    }
+                }
+
+                mutations[UPDATE_AUTO_FILL](state);
+
+                // Assert
+                expect(state.autofill).toEqual(['phone', 'address.city']);
+            });
+        });
+
         it.each([
             [UPDATE_FULFILMENT_ADDRESS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
@@ -234,6 +296,15 @@ describe('CheckoutModule', () => {
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
                 expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
+            });
+
+            it(`should call ${UPDATE_AUTO_FILL} mutation with an array of updated field names.`, async () => {
+                // Act
+                await getCheckout({ commit, state }, payload);
+
+                // Assert
+                // TODO: Check this
+                expect(commit).toHaveBeenCalledWith(UPDATE_AUTO_FILL);
             });
         });
 
@@ -293,6 +364,15 @@ describe('CheckoutModule', () => {
                     city: expectedAddress.City,
                     postcode: expectedAddress.ZipCode
                 });
+            });
+
+            it(`should call ${UPDATE_AUTO_FILL} mutation with an array of updated field names.`, async () => {
+                // Act
+                await getAddress({ commit, state }, payload);
+
+                // Assert
+                // TODO: Check this
+                expect(commit).toHaveBeenCalledWith(UPDATE_AUTO_FILL);
             });
         });
 
@@ -393,12 +473,25 @@ describe('CheckoutModule', () => {
             [updateCustomerDetails, UPDATE_CUSTOMER_DETAILS, customerDetails],
             [updateFulfilmentTime, UPDATE_FULFILMENT_TIME, time],
             [updateUserNote, UPDATE_USER_NOTE, userNote]
-        ])('%s should call %s mutation with passed value', (action, mutation, value) => {
+        ])('%s should call `%s` mutation with passed value', (action, mutation, value) => {
             // Act
             action({ commit }, value);
 
             // Assert
             expect(commit).toHaveBeenCalledWith(mutation, value);
+        });
+
+        it.each([
+            [updateAddressDetails, address],
+            [updateCustomerDetails, customerDetails],
+        ])('%s should call `UPDATE_FIELD_CHANGES` mutation with first key of passed value', (action, value) => {
+            // Act
+            action({ commit }, value);
+
+            const field = Object.keys(value)[0];
+
+            // Assert
+            expect(commit).toHaveBeenCalledWith(UPDATE_FIELD_CHANGES, field);
         });
     });
 });

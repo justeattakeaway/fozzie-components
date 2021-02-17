@@ -282,8 +282,6 @@ export default {
     async mounted () {
         await this.initialise();
 
-        window.dataLayer = window.dataLayer || [];
-
         Analytics.trackInitialLoad({
             basket: {
                 id: this.basket.id,
@@ -372,6 +370,8 @@ export default {
                     this.$store,
                     eventData
                 );
+
+
             }
         },
 
@@ -575,6 +575,7 @@ export default {
                 Analytics.trackFormInteraction(this.trackingData('success'));
             } catch (error) {
                 this.handleErrorState(error);
+                Analytics.trackFormInteraction(this.trackingData('error', 'notOrderable'));
             } finally {
                 this.shouldDisableCheckoutButton = false;
             }
@@ -623,7 +624,6 @@ export default {
     },
 
     validations () {
-
         const deliveryDetails = {
             customer: {
                 mobileNumber: {

@@ -81,33 +81,9 @@ export default {
             const { data } = await axios.get(url, config);
 
             commit(UPDATE_STATE, data);
+
             if (state.isLoggedIn) {
-                let payload = [];
-                // TODO : customer only needs phone
-                // TODO : need to check it's not null
-                state.customer.phoneNumber ? payload.push('phone') : null;
-
-                if (state.serviceType === 'delivery') {
-                    state.address.postalCode ? payload.push('postcode') : null;
-                    state.address.line1 ? payload.push('address_line1') : null;
-                    state.address.line2 ? payload.push('address_line2') : null;
-                    state.address.city ? payload.push('address_city') : null;
-                }
-
-                commit(UPDATE_AUTO_FILL, payload);
-
-                // state.address.line1 = address.lines[0];
-                // state.address.line2 = address.lines[1];
-                // state.address.city = address.lines[3];
-                // if (state.serviceType === 'delivery') {
-                //     // TODO : address only showing index not checking if filled
-                //     const address = Object.keys(data.address.lines)
-                //     data.address.postalCode ? address.push('postcode') : null;
-                //     commit(UPDATE_AUTO_FILL, customer.concat(address));
-                // } else {
-                //     commit(UPDATE_AUTO_FILL, customer);
-
-                // }
+                commit(UPDATE_AUTO_FILL);
             }
         },
 
@@ -256,7 +232,7 @@ export default {
             };
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
-            commit(UPDATE_AUTO_FILL, Object.keys(addressDetails));
+            commit(UPDATE_AUTO_FILL);
         },
 
         setAuthToken: ({ commit }, authToken) => {
@@ -264,16 +240,16 @@ export default {
         },
 
         updateAddressDetails ({ commit }, payload) {
-            const field = Object.keys(payload);
+            const field = Object.keys(payload)[0];
 
-            commit(UPDATE_FIELD_CHANGES, field[0]);
+            commit(UPDATE_FIELD_CHANGES, field);
             commit(UPDATE_FULFILMENT_ADDRESS, payload);
         },
 
         updateCustomerDetails ({ commit }, payload) {
-            const field = Object.keys(payload);
+            const field = Object.keys(payload)[0];
 
-            commit(UPDATE_FIELD_CHANGES, field[0]);
+            commit(UPDATE_FIELD_CHANGES, field);
             commit(UPDATE_CUSTOMER_DETAILS, payload);
         },
 
@@ -380,12 +356,19 @@ export default {
             }
         },
 
-        [UPDATE_AUTO_FILL]: (state, fields) => {
-            fields.forEach(field => {
-                if (!state.autofill.includes(field)) {
-                    state.autofill.push(field);
-                }
-            });
+        [UPDATE_AUTO_FILL]: (state) => {
+            let payload = [];
+
+            state.customer.mobileNumber ? payload.push('phone') : null;
+
+            if (state.serviceType === 'delivery') {
+                state.address.postcode ? payload.push('address.postcode') : null;
+                state.address.line1 ? payload.push('address.line1') : null;
+                state.address.line2 ? payload.push('address.line2') : null;
+                state.address.city ? payload.push('address.city') : null;
+            }
+
+            state.autofill = payload;
         }
     }
 };
