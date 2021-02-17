@@ -168,10 +168,10 @@ export default {
             return stamps;
         },
         statusText () {
-            return this.description[0];
+            return this.card.subtitle;
         },
         subStatusText () {
-            return this.description.slice(1);
+            return this.description;
         },
 
         testIdForSection () {

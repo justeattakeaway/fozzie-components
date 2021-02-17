@@ -77,7 +77,7 @@ export const InProgressStampCard1Component = (args, { argTypes }) => ({
 
     template: '<stamp-card'
         + ' :test-id="testId"'
-        + ' :card="{title, description, image, url, discountPercentage, earnedStamps, expiryDate, expiryLine, isReadyToClaim, totalRequiredStamps}"'
+        + ' :card="{title, description, image, url, discountPercentage, earnedStamps, expiryDate, expiryLine, isReadyToClaim, subtitle, totalRequiredStamps}"'
         + '/>'
 });
 
@@ -86,9 +86,8 @@ InProgressStampCard1Component.storyName = 'In Progress';
 InProgressStampCard1Component.args = {
     testId: 'stampCard1-inProgress',
     title: 'An Viet',
-    description: [
-        'You’ve accumulated £6.83 so far'
-    ],
+    subtitle: 'You’ve accumulated £6.83 so far',
+    description: [],
     image,
     url: 'https://example.com/the-burger-place',
     discountPercentage: 15,
@@ -122,7 +121,7 @@ export const ClaimableStampCard1Component = (args, { argTypes }) => ({
 
     template: '<stamp-card'
         + ' :test-id="testId"'
-        + ' :card="{title, description, image, url, discountPercentage, earnedStamps, expiryDate, expiryLine, isReadyToClaim, totalRequiredStamps}"'
+        + ' :card="{title, description, image, url, discountPercentage, earnedStamps, expiryDate, expiryLine, isReadyToClaim, subtitle, totalRequiredStamps}"'
         + '/>'
 });
 
@@ -131,8 +130,8 @@ ClaimableStampCard1Component.storyName = 'Claimable';
 ClaimableStampCard1Component.args = {
     testId: 'stampCard1-claimable',
     title: 'An Viet',
+    subtitle: 'Time to claim your <strong>$20.75</strong> discount',
     description: [
-        'Time to claim your <strong>$20.75</strong> discount',
         'This will be taken off your next order from this restaurant automatically (your order must be more than this discount).'
     ],
     image,

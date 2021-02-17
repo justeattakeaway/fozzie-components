@@ -8,7 +8,8 @@ const cardType = 'Stamp_Card_1';
 const card = {
     type: cardType,
     title: 'title line',
-    description: ['statusTextLine', 'subStatusText1', 'subStatusText2'],
+    subtitle: 'statusTextLine',
+    description: ['subStatusText1', 'subStatusText2'],
     image: '/path/to/image',
     url: 'https://foo.com/bar',
     discountPercentage: 15,
@@ -59,12 +60,12 @@ describe('contentCards › StampCard1', () => {
         expect(wrapper.find('[data-test-id="stampCard1--image"]').attributes('src')).toBe(card.image);
     });
 
-    it('should display the status text from the first element in the description', () => {
+    it('should display the status text from the subtitle', () => {
         // Arrange & Act
         const wrapper = getWrapper();
 
         // Assert
-        expect(wrapper.find('[data-test-id="stampCard1--statusText"]').text()).toBe(card.description[0]);
+        expect(wrapper.find('[data-test-id="stampCard1--statusText"]').text()).toBe(card.subtitle);
     });
 
     describe('when card is in progress', () => {
@@ -116,10 +117,10 @@ describe('contentCards › StampCard1', () => {
             expect(wrapper.find('[data-test-id="stampCard1--redemptionDetails"]').exists()).toBe(true);
         });
 
-        it('should display the sub status text from elements in the description after the first', () => {
+        it('should display the sub status text from elements in the description', () => {
             // Assert
-            expect(wrapper.find('[data-test-id="stampCard1--subStatusText--0"]').text()).toBe(card.description[1]);
-            expect(wrapper.find('[data-test-id="stampCard1--subStatusText--1"]').text()).toBe(card.description[2]);
+            expect(wrapper.find('[data-test-id="stampCard1--subStatusText--0"]').text()).toBe(card.description[0]);
+            expect(wrapper.find('[data-test-id="stampCard1--subStatusText--1"]').text()).toBe(card.description[1]);
         });
 
         it('should display the expiry info section', () => {
