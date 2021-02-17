@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.1.3
+------------------------------
+*February 17, 2021*
+
+### Changed
+- Use js-cookie instead of universal-cookie.
+
+### Removed
+- Remove Storybook 'knob' for setting legacy banner.
+
 v0.1.2
 ------------------------------
 *February 12, 2021*
