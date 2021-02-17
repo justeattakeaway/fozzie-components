@@ -1,10 +1,9 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Cookie from 'cookie-universal';
 import { VueI18n } from '@justeat/f-globalisation';
 import CookieBanner from '../CookieBanner.vue';
+import CookieHelper from 'js-cookie';
 
 const localVue = createLocalVue();
-localVue.prototype.$cookies = Cookie();
 localVue.use(VueI18n);
 const i18n = {
     locale: 'en-GB'
@@ -100,7 +99,7 @@ describe('CookieBanner', () => {
                         legacyBanner: () => false
                     }
                 });
-                wrapper.vm.$cookies.set('je-cookieConsent', cookieValue);
+                CookieHelper.set('je-cookieConsent', cookieValue);
                 wrapper.vm.checkCookieBannerCookie();
 
                 // Assert
@@ -119,18 +118,18 @@ describe('CookieBanner', () => {
                     i18n,
                     propsData
                 });
-                const cookieSpy = jest.spyOn(wrapper.vm.$cookies, 'set');
+                const mockCookieHelper = jest.spyOn(CookieHelper, 'set').mockImplementation(() => {});
                 const payloadName = 'je-cookieConsent';
                 const payloadValue = 'foo';
                 const payloadObj = {
                     path: '/',
-                    maxAge: 7776000
+                    expires: 7776000
                 };
 
                 wrapper.vm.setCookieBannerCookie('foo');
 
                 // Assert
-                expect(cookieSpy).toHaveBeenCalledWith(payloadName, payloadValue, payloadObj);
+                expect(mockCookieHelper).toHaveBeenCalledWith(payloadName, payloadValue, payloadObj);
             });
         });
 
@@ -145,18 +144,18 @@ describe('CookieBanner', () => {
                     i18n,
                     propsData
                 });
-                const cookieSpy = jest.spyOn(wrapper.vm.$cookies, 'set');
+                const mockCookieHelper = jest.spyOn(CookieHelper, 'set').mockImplementation(() => {});
                 const payloadName = 'je-banner_cookie';
-                const payloadValue = '2';
+                const payloadValue = '130315';
                 const payloadObj = {
                     path: '/',
-                    maxAge: 7776000
+                    expires: 7776000
                 };
 
                 wrapper.vm.setLegacyCookieBannerCookie();
 
                 // Assert
-                expect(cookieSpy).toHaveBeenCalledWith(payloadName, payloadValue, payloadObj);
+                expect(mockCookieHelper).toHaveBeenCalledWith(payloadName, payloadValue, payloadObj);
             });
         });
 
