@@ -60,6 +60,9 @@ describe('Checkout', () => {
     const createGuestUrl = 'http://localhost/createguestuser';
     const getBasketUrl = 'http://localhost/getbasket';
     const getAddressUrl = 'http://localhost/getaddress';
+    const placeOrderUrl = 'http://localhost/placeorder';
+    const paymentPageUrl = 'http://localhost/paymentpage';
+
     const propsData = {
         updateCheckoutUrl,
         getCheckoutUrl,
@@ -67,8 +70,16 @@ describe('Checkout', () => {
         checkoutAvailableFulfilmentUrl,
         createGuestUrl,
         getBasketUrl,
-        getAddressUrl
+        getAddressUrl,
+        placeOrderUrl,
+        paymentPageUrl
     };
+
+    jest.spyOn(window.location, 'assign').mockImplementation();
+
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
 
     it('should be defined', () => {
         // Arrange
@@ -1187,6 +1198,46 @@ describe('Checkout', () => {
                     expect(wrapper.vm.$v.customer.email).toBeUndefined();
                 });
             });
+
+            it('should call `submitOrder`', async () => {
+                // Arrange
+                const submitOrderSpy = jest.spyOn(VueCheckout.methods, 'submitOrder');
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
+                });
+
+                // Act
+                await wrapper.vm.submitCheckout();
+
+                // Assert
+                expect(submitOrderSpy).toHaveBeenCalled();
+            });
+
+            it('should call `redirectToPayment`', async () => {
+                // Arrange
+                const redirectToPaymentSpy = jest.spyOn(VueCheckout.methods, 'redirectToPayment');
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
+                });
+
+                // Act
+                await wrapper.vm.submitCheckout();
+
+                // Assert
+                expect(redirectToPaymentSpy).toHaveBeenCalled();
+            });            
         });
 
         describe('setupGuestUser ::', () => {
@@ -1866,7 +1917,7 @@ describe('Checkout', () => {
             });
         });
 
-        describe('updateCustomerDetails', () => {
+        describe('updateCustomerDetails ::', () => {
             it('should be called with new input value on user input', async () => {
                 // Arrange
                 const updateCustomerDetailsSpy = jest.spyOn(VueCheckout.methods, 'updateCustomerDetails');
@@ -1887,6 +1938,94 @@ describe('Checkout', () => {
                 expect(updateCustomerDetailsSpy).toHaveBeenCalledWith({ mobileNumber: newNumber });
             });
         });
+
+        describe('redirectToPayment ::', () => {
+            beforeEach(() => {
+                jest.useFakeTimers()
+            });
+
+            afterEach(() => {
+                jest.clearAllMocks();
+                jest.clearAllTimers()
+            });
+
+            it('should redirect to the payment page after 1 second', () => {
+                // Arrange
+                const windowLocationSpy = jest.spyOn(window.location, 'assign');
+
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                wrapper.vm.redirectToPayment();
+
+                jest.advanceTimersByTime(1000);
+
+                // Assert
+                expect(windowLocationSpy).toHaveBeenCalledWith(`${paymentPageUrl}/MzRkZGU4MDktYjVmNi00Nz-v1`);
+            });
+
+            it('should not redirect to the payment page before 1 second', () => {
+                // Arrange
+                const windowLocationSpy = jest.spyOn(window.location, 'assign');
+
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                wrapper.vm.redirectToPayment();
+
+                jest.advanceTimersByTime(999);
+
+                // Assert
+                expect(windowLocationSpy).not.toHaveBeenCalled();
+            });            
+        });        
+
+        describe('submitOrder ::', () => {
+            it('should be called with new input value on user input', async () => {
+                // Arrange
+                const placeOrderSpy = jest.spyOn(VueCheckout.methods, 'placeOrder');
+
+                const expected = {
+                    url: placeOrderUrl,
+                    data: {
+                        basketId: 'MzRkZGU4MDktYjVmNi00Nz-v1', // TODO: de-hardcode :)
+                        applicationId: 7, // Responsive Web
+                        customerNotes: {
+                            noteForRestaurant: defaultState.userNote
+                        },
+                        applicationName: 'CoreWeb',
+                        applicationVersion: '1',
+                        referralState: 'None',
+                        deviceId: '123', // TODO: TBC
+                        deviceName: 'test' // TODO: TBC
+                    },
+                    timeout: 1000
+                };
+
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                await wrapper.vm.submitOrder();
+
+                // Assert
+                expect(placeOrderSpy).toHaveBeenCalledWith(expected);
+            });
+        });          
     });
 
     describe('watch ::', () => {

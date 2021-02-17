@@ -41,7 +41,7 @@ const defaultState = {
     messages: [],
     authToken: '',
     isLoggedIn: false,
-    userNote: ''
+    userNote: 'No ketchup, please.'
 };
 
 const defaultActions = {
@@ -54,7 +54,8 @@ const defaultActions = {
     updateCustomerDetails: jest.fn(),
     updateFulfilmentTime: jest.fn(),
     getBasket: jest.fn(),
-    getAddress: jest.fn()
+    getAddress: jest.fn(),
+    placeOrder: jest.fn()
 };
 
 const i18n = {

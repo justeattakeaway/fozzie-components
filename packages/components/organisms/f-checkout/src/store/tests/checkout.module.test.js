@@ -75,6 +75,7 @@ const defaultState = {
         email: '',
         mobileNumber: ''
     },
+    orderId: '',
     time: {
         from: '',
         to: ''

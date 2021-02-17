@@ -152,6 +152,11 @@ export default {
             required: true
         },
 
+        paymentPageUrl: {
+            type: String,
+            required: true
+        },
+
         updateCheckoutUrl: {
             type: String,
             required: true
@@ -358,6 +363,8 @@ export default {
                     this.$store,
                     eventData
                 );
+
+                this.redirectToPayment();
             } catch (thrownErrors) {
                 eventData.errors = thrownErrors;
 
@@ -372,14 +379,23 @@ export default {
         },
 
         /**
-         * Place the order and then redirect to the payment page.
+         * Redirect to the payment page.
+         */
+        redirectToPayment () {
+            setTimeout(() => { // TODO: remove this when the order team handles this automatically.
+                window.location.assign(`${this.paymentPageUrl}/MzRkZGU4MDktYjVmNi00Nz-v1`); // TODO: de-hardcode :)
+            }, 1000);
+        },
+
+        /**
+         * Place the order.
          */
         async submitOrder () {
             const data = {
                 basketId: 'MzRkZGU4MDktYjVmNi00Nz-v1', // TODO: de-hardcode :)
                 applicationId: 7, // Responsive Web
                 customerNotes: {
-                    noteForDriver: this.userNote
+                    noteForRestaurant: this.userNote
                 },
                 applicationName: 'CoreWeb',
                 applicationVersion: '1',
@@ -389,9 +405,9 @@ export default {
             };
 
             await this.placeOrder({
-                url: this.placerOrderUrl,
+                url: this.placeOrderUrl,
                 data,
-                timeout: this.placerOrderTimeout
+                timeout: this.placeOrderTimeout
             });
         },
 
