@@ -4,6 +4,10 @@ import image from './images/an-viet.png';
 export default {
     title: 'Components/Molecules/f-content-cards/stamp-card-1',
     argTypes: {
+        testId: {
+            control: { type: 'text' },
+            description: 'Id for adding as attribute to card in test scenarios'
+        },
         title: {
             control: { type: 'text' },
             description: 'Title text for the card - typically the restaurant name'
@@ -72,6 +76,7 @@ export const InProgressStampCard1Component = (args, { argTypes }) => ({
     },
 
     template: '<stamp-card'
+        + ' :test-id="testId"'
         + ' :card="{title, description, image, url, discountPercentage, earnedStamps, expiryDate, expiryLine, isReadyToClaim, totalRequiredStamps}"'
         + '/>'
 });
@@ -79,6 +84,7 @@ export const InProgressStampCard1Component = (args, { argTypes }) => ({
 InProgressStampCard1Component.storyName = 'In Progress';
 
 InProgressStampCard1Component.args = {
+    testId: 'stampCard1-inProgress',
     title: 'An Viet',
     description: [
         'You’ve accumulated £6.83 so far'
@@ -115,6 +121,7 @@ export const ClaimableStampCard1Component = (args, { argTypes }) => ({
     },
 
     template: '<stamp-card'
+        + ' :test-id="testId"'
         + ' :card="{title, description, image, url, discountPercentage, earnedStamps, expiryDate, expiryLine, isReadyToClaim, totalRequiredStamps}"'
         + '/>'
 });
@@ -122,6 +129,7 @@ export const ClaimableStampCard1Component = (args, { argTypes }) => ({
 ClaimableStampCard1Component.storyName = 'Claimable';
 
 ClaimableStampCard1Component.args = {
+    testId: 'stampCard1-claimable',
     title: 'An Viet',
     description: [
         'Time to claim your <strong>$20.75</strong> discount',

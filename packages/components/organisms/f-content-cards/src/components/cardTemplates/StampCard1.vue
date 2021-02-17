@@ -1,7 +1,12 @@
 <template>
-    <div :class="[
-        $style['c-stampCard1']
-    ]"
+    <component
+        :is="url ? 'a' : 'div'"
+        :href="url"
+        :data-test-id="testId"
+        :class="[
+            $style['c-stampCard1']
+        ]"
+        @click="onClickContentCard"
     >
         <div
             :class="[
@@ -12,6 +17,7 @@
                 :class="[
                     $style['c-stampCard1-icon']
                 ]"
+                :data-test-id="testIdForSection('image')"
                 :src="image"
                 :alt="title"
             >
@@ -19,6 +25,7 @@
                 :class="[
                     $style['c-stampCard1-title']
                 ]"
+                :data-test-id="testIdForSection('title')"
             >
                 {{ title }}
             </h3>
@@ -27,6 +34,7 @@
                 :class="[
                     $style['c-stampCard1-statusText']
                 ]"
+                :data-test-id="testIdForSection('statusText')"
                 v-html="statusText"
             />
         </div>
@@ -35,6 +43,7 @@
             :class="[
                 $style['c-stampCard1-redemptionDetails']
             ]"
+            :data-test-id="testIdForSection('redemptionDetails')"
         >
             <div
                 v-for="(subStatusLine, index) in subStatusText"
@@ -42,6 +51,7 @@
                 :class="[
                     $style['c-stampCard1-subStatusText']
                 ]"
+                :data-test-id="testIdForSection('subStatusText', index)"
             >
                 {{ subStatusLine }}
             </div>
@@ -49,6 +59,7 @@
                 :class="[
                     $style['c-stampCard1-expiryInfo']
                 ]"
+                :data-test-id="testIdForSection('expiryInfo')"
             >
                 {{ expiryLine }}
             </div>
@@ -58,6 +69,7 @@
             :class="[
                 $style['c-stampCard1-stamps']
             ]"
+            :data-test-id="testIdForSection('stamps')"
         >
             <div
                 v-for="({ stampImage, classSuffix }, index) in stamps"
@@ -67,6 +79,7 @@
                     :class="[
                         $style[`c-stampCard1-stamp`]
                     ]"
+                    :data-test-id="testIdForSection(`stamp${classSuffix}`)"
                 >
                     <component
                         :is="stampImage"
@@ -78,7 +91,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </component>
 </template>
 
 <script>
@@ -97,6 +110,11 @@ export default {
         card: {
             type: Object,
             required: true
+        },
+
+        testId: {
+            type: String,
+            default: null
         }
     },
 
@@ -139,10 +157,10 @@ export default {
             for (let i = 0; i < this.totalRequiredStamps; i++) {
                 const full = (i < this.earnedStamps);
                 stamps.push(full ? {
-                    stampImage: 'full-stamp',
+                    stampImage: 'FullStamp',
                     classSuffix: 'Full'
                 } : {
-                    stampImage: 'empty-stamp',
+                    stampImage: 'EmptyStamp',
                     classSuffix: 'Empty'
                 });
             }
@@ -154,6 +172,31 @@ export default {
         },
         subStatusText () {
             return this.description.slice(1);
+        },
+
+        testIdForSection () {
+            return (section, index) => (this.testId
+                ? `${this.testId}--${section}${index === undefined ? '' : `--${index}`}`
+                : false);
+        }
+    },
+
+    mounted () {
+        this.onViewContentCard();
+    },
+
+    inject: [
+        'emitCardView',
+        'emitCardClick'
+    ],
+
+    methods: {
+        onViewContentCard () {
+            this.emitCardView(this.card);
+        },
+
+        onClickContentCard () {
+            this.emitCardClick(this.card);
         }
     }
 };
@@ -167,6 +210,7 @@ $stampCard-expiryInfo-colour: $grey--dark;
 $stampCard-responsive-mobileViewBreakpoint: '<narrowMid';
 
 .c-stampCard1 {
+    text-decoration: initial;
     width: 392px;
     display: flex;
     flex-direction: column;
@@ -175,6 +219,13 @@ $stampCard-responsive-mobileViewBreakpoint: '<narrowMid';
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03),
     0 3px 1px -2px rgba(0, 0, 0, 0.07),
     0 1px 5px 0 rgba(0, 0, 0, 0.06);
+
+    &,
+    &:hover,
+    &:visited,
+    &:focus {
+        color: $color-text;
+    }
 
     @include media($stampCard-responsive-mobileViewBreakpoint) {
         width: auto;
@@ -233,12 +284,6 @@ $stampCard-responsive-mobileViewBreakpoint: '<narrowMid';
     }
 }
 
-.c-stampCard1-stampContainer {
-
-    @include media($stampCard-responsive-mobileViewBreakpoint) {
-    }
-}
-
 .c-stampCard1-stamp {
     position: relative;
     height: 0;
@@ -258,7 +303,7 @@ $stampCard-responsive-mobileViewBreakpoint: '<narrowMid';
     top: 0;
 }
 
-.c-stampCard1-stampEmpty { /* Required to handle positioning of SVG relative to the 'full' graphic */
+.c-stampCard1-stampEmpty { /* Required to handle positioning of `empty` SVG relative to the 'full' graphic */
     margin-top: 5px;
     height: 89%;
     width: 89%;
