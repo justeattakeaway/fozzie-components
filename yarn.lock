@@ -1963,6 +1963,13 @@
   dependencies:
     vue-i18n "8.0.0"
 
+"@justeat/f-header@4.6.0":
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-header/-/f-header-4.6.0.tgz#e5a384729f73b8803794aa3b41c0ee53e2218478"
+  integrity sha512-sAphBaWPj073+0uP6Hr75SgV9I3OMUCd0hgyCAjDRcpHiZka9J83ySzHU/lf6VRvN22U01++p2T8LuIP95YgyQ==
+  dependencies:
+    "@justeat/f-services" "1.3.0"
+
 "@justeat/f-icons@3.4.0":
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.4.0.tgz#dbdeb97c562926dc1c4b98685b25203a97dbd5ff"
@@ -1979,6 +1986,18 @@
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-0.3.0.tgz#58a88476ee204264988640b3cd47ac5d295bde4a"
   integrity sha512-Cr6CDlrZAHoM3ZUJ2sOMLYAVYz+cka5R6THi24va3mhI8kgOSA4ZVzvx607QskTyasIX4xNfrju0HKity1Lq9w==
+
+"@justeat/f-metadata@3.0.0-beta.7":
+  version "3.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@justeat/f-metadata/-/f-metadata-3.0.0-beta.7.tgz#a531714c80cd2ee7dd528b0ecd4c7f9e2b8cf6b7"
+  integrity sha512-rpElVBHSYtHxIznaddUlGEYlPaWoSH16w1zdISXic9vNMqV4xoix2X5K7F7j9YOPhLL4mSrYR7rbYn1kxHh86Q==
+  dependencies:
+    appboy-web-sdk "2.5.2"
+    date-fns "2.16.1"
+    lodash.findindex "4.6.0"
+    lodash.orderby "4.6.0"
+    lodash.startswith "4.2.1"
+    lodash.uniq "4.5.0"
 
 "@justeat/f-searchbox@3.10.0":
   version "3.10.0"

@@ -9,6 +9,9 @@ v3.0.0
 ### Added
 - Properties for stamp-cards card
 
+### Changed
+- Renamed package f-braze-adapter from f-metadata
+
 ### Fixed
 - Removed optional chaining to fix storybook
 
