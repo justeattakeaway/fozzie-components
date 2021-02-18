@@ -86,6 +86,10 @@ export default {
         locale: {
             type: String,
             default: ''
+        },
+        testId: {
+            type: String,
+            default: null
         }
     },
     data: () => ({
@@ -131,6 +135,13 @@ export default {
                 this.state = STATE_NO_CARDS;
             }
         },
+
+        customCards (current) {
+            if (!this.cards.length && current.length) {
+                this.customContentCards(current);
+            }
+        },
+
         /**
          * Monitors the loaded flag to emit the has-loaded event if necessary
          * @param {Boolean} current
@@ -173,7 +184,7 @@ export default {
              * Emits voucher code click event with given ongoing url
              **/
             emitVoucherCodeClick (url) {
-                component.$emit('voucherCodeClick', {
+                component.$emit('voucher-code-click', {
                     url
                 });
             },
@@ -242,10 +253,8 @@ export default {
                 return failCallback();
             }
 
-            if (cards.length > 0) {
+            if (!(source === CARDSOURCE_METADATA && this.cards.length !== 0)) {
                 this.cards = cards.map(card => Object.assign(card, { source }));
-            } else {
-                this.cards = [...this.customCards];
             }
 
             return successCallback();
@@ -264,6 +273,17 @@ export default {
                 }
             }, cards);
         },
+
+        /**
+         * Handles custom card ingestion
+         * @param {Card[]} cards
+         **/
+        customContentCards (cards) {
+            this.contentCards({
+                source: CARDSOURCE_CUSTOM
+            }, cards);
+        },
+
         /**
          * Takes appropriate response for click event for given card object based on its source
          * @param card
@@ -352,7 +372,10 @@ export default {
             ? h(
                 'div',
                 {
-                    class: `c-contentCards-${this.state}`
+                    class: `c-contentCards-${this.state}`,
+                    attrs: {
+                        'data-test-id': this.testId
+                    }
                 },
                 this.$scopedSlots[this.state]({
                     cards: this.cards

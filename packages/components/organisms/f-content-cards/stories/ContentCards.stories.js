@@ -8,6 +8,7 @@ import {
     FirstTimeCustomerCard,
     PromotionCard,
     TermsAndConditionsCard,
+    PostOrderCard,
     StampCard1
 } from '../src';
 
@@ -15,7 +16,7 @@ import {
     STATE_LOADING,
     STATE_ERROR,
     STATE_DEFAULT,
-    STATE_NO_CARDS,
+    STATE_NO_CARDS
 } from '../src/components/ContentCards';
 
 import cards from './mockData/cards';
@@ -27,6 +28,7 @@ const components = {
     FirstTimeCustomerCard,
     PromotionCard,
     TermsAndConditionsCard,
+    PostOrderCard,
     StampCard1
 };
 
@@ -83,7 +85,7 @@ function notReturningMockSetup () {
     resetBrazeData();
     mock.teardown();
     mock.setup();
-    mock.post(/\/api\/v3\/content_cards\/sync\/?/, () => new Promise((resolve, reject) => {
+    mock.post(/\/api\/v3\/content_cards\/sync\/?/, () => new Promise(resolve => {
         this.rejectMockPromise = resolve;
     }));
     mock.post(/\/api\/v3\/data\/?/, {
@@ -113,6 +115,8 @@ const methods = {
                 return 'TermsAndConditionsCard';
             case 'Stamp_Card_1':
                 return 'StampCard1';
+            case 'Post_Order_Card_1':
+                return 'PostOrderCard';
             default:
                 break;
         }
@@ -125,9 +129,10 @@ const template = `<content-cards
             @get-card-count="getCardCount"
             @has-loaded="hasLoaded"
             @on-error="onError"
-            :userId="userId"
-            :apiKey="apiKey"
+            :user-id="userId"
+            :api-key="apiKey"
             :locale="locale"
+            :custom-cards="customCards"
             :key="locale"
             >
                 <template #${STATE_DEFAULT}="{ cards }">
@@ -192,7 +197,7 @@ export function ContentCardsBraze (args, { argTypes }) {
     };
 }
 
-ContentCardsBraze.storyName = 'braze cards only';
+ContentCardsBraze.storyName = 'Braze Cards only (mocked API response)';
 
 ContentCardsBraze.args = {
     apiKey: '00000000-0000-0000-0000-000000000000',
@@ -203,14 +208,15 @@ ContentCardsBraze.args = {
 export function ContentCardsCustom (args, { argTypes }) {
     return {
         components: {
-            ContentCards
+            ContentCards,
+            PostOrderCard
         },
 
         props: Object.keys(argTypes),
 
         data () {
             return {
-                applyCustomCards: () => {}
+                customCards: []
             };
         },
 
@@ -219,27 +225,22 @@ export function ContentCardsCustom (args, { argTypes }) {
             getCardCount (count) {
                 methods.getCardCount.bind(this)(count);
                 if (count === 0) {
-                    this.applyCustomCards([
-                        {
-                            ctaText: 'A special link',
-                            description: [],
-                            headline: 'The below card has been injected dynamically.',
-                            icon: 'https://picsum.photos/seed/My-original-card-seed-icon/48/48',
-                            image: 'https://picsum.photos/seed/My-original-card-seed-image/384/216?blur=3',
-                            pinned: true,
-                            subtitle: 'You didn\'t expect that, did you?',
-                            target: {
-                                attribute: '_self'
-                            },
-                            title: 'Surprise!',
-                            type: 'Post_Order_Card_1',
-                            url: null
-                        }
-                    ]);
+                    this.customCards.push({
+                        ctaText: 'A special link',
+                        description: [],
+                        headline: 'The below card has been injected dynamically.',
+                        icon: 'https://picsum.photos/seed/My-original-card-seed-icon/48/48',
+                        image: 'https://picsum.photos/seed/My-original-card-seed-image/384/216?blur=3',
+                        pinned: true,
+                        subtitle: 'You didn\'t expect that, did you?',
+                        target: {
+                            attribute: '_self'
+                        },
+                        title: 'Surprise!',
+                        type: 'Post_Order_Card_1',
+                        url: null
+                    });
                 }
-            },
-            customCardsCallback (callback) {
-                this.applyCustomCards = callback;
             }
         },
 
@@ -252,7 +253,7 @@ export function ContentCardsCustom (args, { argTypes }) {
     };
 }
 
-ContentCardsCustom.storyName = 'custom card';
+ContentCardsCustom.storyName = 'Custom card';
 
 ContentCardsCustom.args = {
     apiKey: '00000000-0000-0000-0000-000000000000',
@@ -292,6 +293,59 @@ ContentCardsLoading.storyName = 'Loading state';
 
 ContentCardsLoading.args = {
     apiKey: '00000000-0000-0000-0000-000000000000',
+    userId: 'test-user-id',
+    locale: 'en-GB'
+};
+
+export function ContentCardsNoCards (args, { argTypes }) {
+    return {
+        components: {
+            ContentCards
+        },
+
+        props: Object.keys(argTypes),
+
+        methods,
+
+        /**
+         * Ensures that card mocks are set up
+         */
+        beforeCreate: zeroCardsMockSetup,
+
+        template
+    };
+}
+
+ContentCardsNoCards.storyName = 'No Cards state';
+
+ContentCardsNoCards.args = {
+    apiKey: '00000000-0000-0000-0000-000000000000',
+    userId: 'test-user-id',
+    locale: 'en-GB'
+};
+
+export function ContentCardsError (args, { argTypes }) {
+    return {
+        components: {
+            ContentCards
+        },
+
+        props: Object.keys(argTypes),
+
+        methods,
+
+        /**
+         * Ensures that card mocks are set up
+         */
+        beforeCreate: zeroCardsMockSetup,
+
+        template
+    };
+}
+
+ContentCardsError.storyName = 'Error state';
+
+ContentCardsError.args = {
     userId: 'test-user-id',
     locale: 'en-GB'
 };
