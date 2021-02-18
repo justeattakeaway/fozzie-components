@@ -77,6 +77,8 @@
 </template>
 
 <script>
+import CookieHelper from 'js-cookie';
+
 import { globalisationServices } from '@justeat/f-services';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 
@@ -203,10 +205,10 @@ export default {
          */
         checkCookieBannerCookie () {
             if (this.legacyBanner) {
-                this.shouldHideBanner = this.$cookies.get(this.legacyConsentCookieName) === 2;
+                this.shouldHideBanner = CookieHelper.get(this.legacyConsentCookieName) === 2;
                 this.setLegacyCookieBannerCookie();
             } else {
-                const cookieConsent = this.$cookies.get(this.consentCookieName);
+                const cookieConsent = CookieHelper.get(this.consentCookieName);
                 this.shouldHideBanner = cookieConsent === 'full' || cookieConsent === 'necessary';
             }
         },
@@ -216,9 +218,9 @@ export default {
          * @param {String} cookieValue
          */
         setCookieBannerCookie (cookieValue) {
-            this.$cookies.set(this.consentCookieName, cookieValue, {
+            CookieHelper.set(this.consentCookieName, cookieValue, {
                 path: '/',
-                maxAge: this.cookieExpiry
+                expires: this.cookieExpiry
             });
         },
 
@@ -226,9 +228,9 @@ export default {
          * Set the legacy cookie banner cookie
          */
         setLegacyCookieBannerCookie () {
-            this.$cookies.set(this.legacyConsentCookieName, '2', {
+            CookieHelper.set(this.legacyConsentCookieName, '130315', {
                 path: '/',
-                maxAge: this.cookieExpiry
+                expires: this.cookieExpiry
             });
         },
 
@@ -255,9 +257,9 @@ export default {
          * Remove unnecessary cookies
          */
         removeUnnecessaryCookies () {
-            const cookies = Object.keys(this.$cookies.getAll());
+            const cookies = Object.keys(CookieHelper.get());
             for (let i = 0; i < cookies.length; i++) {
-                if (this.isNotExcluded(cookies[i])) this.$cookies.remove(cookies[i]);
+                if (this.isNotExcluded(cookies[i])) CookieHelper.remove(cookies[i]);
             }
         },
 
