@@ -37,46 +37,6 @@ const trackInitialLoad = (basket, restaurantId, isLoggedIn, checkoutData) => {
 };
 
 /**
- * Updates passed fields to match analytics requirements.
- *
- * @param {array} fields An array of fields
- * @return {array} An array of sorted fields with the correct field name for analytics.
- */
-const cleanFields = fields => {
-    const address = ['line1', 'line2', 'city', 'postcode']
-
-    const names = {
-        "address.line1": "address_line1",
-        "address_line1": "address_line1",
-        "line1": "address_line1",
-        "address.line2": "address_line2",
-        "address_line2": "address_line2",
-        "line2": "address_line2",
-        "address.city": "address_city",
-        "address_city": "address_city",
-        "city": "address_city",
-        "address.postcode": "address_postcode",
-        "address_postcode": "address_postcode",
-        "postcode": "address_postcode",
-        "customer.firstName": "firstName",
-        "customer.lastName": "lastName",
-        "mobilePhone": "phone",
-        "customer.email": "email"
-    }
-
-    // fields = fields.map(item => {
-    //     console.log(item); // eslint-disable-line no-console
-    //     console.log(names[item]); // eslint-disable-line no-console
-    // });
-    // fields = fields.map(item => item.replace('customer.', ''));
-    // fields = fields.map(item => item.replace('address.', 'address_'));
-    // fields = fields.map(item => (item === 'mobileNumber' ? 'phone' : item));
-    // fields = fields.map(item => (address.includes(item) ? `address_${item}` : item));
-
-    return fields.map(item => name[item]).sort();
-};
-
-/**
  * Pushes `form` event to the data layer with correct data
  *
  * @param {object} eventData An object containing data to be pushed to the dataLayer
@@ -107,4 +67,48 @@ const trackFormInteraction = eventData => {
     });
 };
 
+
 export { trackInitialLoad, trackFormInteraction };
+
+
+// /**
+//  * Updates passed fields to match analytics requirements.
+//  *
+//  * @param {array} fields An array of fields
+//  * @return {array} An array of sorted fields with the correct field name for analytics.
+//  */
+// const cleanFields = fields => {
+//     const address = ['line1', 'line2', 'city', 'postcode']
+
+//     const names = {
+//         "address.line1": "address_line1",
+//         "address_line1": "address_line1",
+//         "line1": "address_line1",
+//         "address.line2": "address_line2",
+//         "address_line2": "address_line2",
+//         "line2": "address_line2",
+//         "address.city": "address_city",
+//         "address_city": "address_city",
+//         "city": "address_city",
+//         "address.postcode": "address_postcode",
+//         "address_postcode": "address_postcode",
+//         "postcode": "address_postcode",
+//         "customer.firstName": "firstName",
+//         "customer.lastName": "lastName",
+//         "mobilePhone": "phone",
+//         "customer.email": "email"
+//     }
+
+//     // fields = fields.map(item => {
+//     //     console.log(item); // eslint-disable-line no-console
+//     //     console.log(names[item]); // eslint-disable-line no-console
+//     // });
+//     // fields = fields.map(item => item.replace('customer.', ''));
+//     // fields = fields.map(item => item.replace('address.', 'address_'));
+//     // fields = fields.map(item => (item === 'mobileNumber' ? 'phone' : item));
+//     // fields = fields.map(item => (address.includes(item) ? `address_${item}` : item));
+
+//     return fields.map(item => name[item]).sort();
+// };
+
+

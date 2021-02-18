@@ -7,7 +7,7 @@ describe('checkout analytics', () => {
 
     beforeEach(() => {
         eventSpy = jest.spyOn(Trak, 'event').mockImplementation();
-        // trackSpy = jest.spyOn(analytics, 'trackFormInteraction').mockImplementation();
+        trackSpy = jest.spyOn(analytics, 'trackFormInteraction').mockImplementation();
     });
 
     afterEach(() => {
@@ -81,7 +81,7 @@ describe('checkout analytics', () => {
             expect(eventSpy).toHaveBeenCalledWith(expectedEvent);
         });
 
-        xit('should call `trackFormInteraction` if `eventData` contains `checkoutData`', () => {
+        it('should call `trackFormInteraction` if `eventData` contains `checkoutData`', () => {
             // Arrange
             const checkoutData = 'data';
             analytics.trackFormInteraction =jest.fn();
@@ -91,7 +91,7 @@ describe('checkout analytics', () => {
             console.log(analytics.trackFormInteraction); // eslint-disable-line no-console
 
             // Assert
-            expect(analytics.trackFormInteraction).toHaveBeenCalled();
+            expect(trackSpy).toHaveBeenCalled();
         });
     });
 

@@ -367,8 +367,6 @@ export default {
                     this.$store,
                     eventData
                 );
-
-
             }
         },
 

@@ -52,6 +52,14 @@ const $v = {
     $touch: jest.fn()
 };
 
+const trackingDataMock = {
+    action: '',
+    error: null,
+    isLoggedIn: false,
+    changes: [],
+    autofill: []
+};
+
 describe('Checkout', () => {
     allure.feature('Checkout');
     const updateCheckoutUrl = 'http://localhost/updatecheckout';
@@ -406,15 +414,20 @@ describe('Checkout', () => {
         });
     });
 
-    xdescribe('mounted ::', () => {
+    describe('mounted ::', () => {
+        let initialiseSpy;
+        let trackInitialLoadSpy
+
+        beforeEach(() => {
+            initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
+            trackInitialLoadSpy = jest.spyOn(analytics, 'trackInitialLoad').mockImplementation();
+        });
+
         afterEach(() => {
             jest.clearAllMocks();
         });
 
         it('should call `initialise`', () => {
-            // Arrange
-            const initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
-
             // Act
             shallowMount(VueCheckout, {
                 store: createStore(),
@@ -427,9 +440,8 @@ describe('Checkout', () => {
             expect(initialiseSpy).toHaveBeenCalled();
         });
 
-        xit('should call `trackInitialLoad`', () => {
+        it('should call `trackInitialLoad`', () => {
             // Arrange
-            const trackInitialLoadSpy = jest.spyOn(analytics, 'trackInitialLoad');
 
             // Act
             shallowMount(VueCheckout, {
@@ -440,6 +452,7 @@ describe('Checkout', () => {
             });
 
             // Assert
+            // expect(trackFormInteractionSpy).toHaveBeenCalled();
             expect(trackInitialLoadSpy).toHaveBeenCalled();
         });
     });
@@ -1715,85 +1728,23 @@ describe('Checkout', () => {
             });
         });
 
-        xdescribe('onFormSubmit ::', () => {
+        describe('onFormSubmit ::', () => {
             let isFormValidSpy;
             let submitCheckoutSpy;
+            let trackFormInteractionSpy;
 
             beforeEach(() => {
                 isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
                 submitCheckoutSpy = jest.spyOn(VueCheckout.methods, 'submitCheckout');
+                trackFormInteractionSpy = jest.spyOn(analytics, 'trackFormInteraction').mockImplementation();
             });
 
             afterEach(() => {
                 jest.clearAllMocks();
             });
 
-            it('should emit `CheckoutValidationError` with validation state if form is invalid', async () => {
-                // Arrange
-                const mockValidationState = {
-                    validFields: [
-                        'customer.mobileNumber',
-                        'address.line1',
-                        'address.city',
-                        'address.postcode'
-                    ],
-                    invalidFields: []
-                };
-
-                const getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
-
-                getFormValidationStateSpy.mockReturnValue(mockValidationState);
-                isFormValidSpy.mockReturnValue(false);
-
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: {
-                        $v,
-                        $logger
-                    }
-                });
-
-                // Act
-                await wrapper.vm.onFormSubmit();
-
-                // Assert
-                expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
-                expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0]).toEqual(mockValidationState);
-            });
-
-            it('should try to call `submitCheckout` if form is Valid', async () => {
-                // Arrange
-                isFormValidSpy.mockReturnValue(true);
-
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: {
-                        $v,
-                        $logger
-                    }
-                });
-
-                // Act
-                await wrapper.vm.onFormSubmit();
-
-                // Assert
-                expect(submitCheckoutSpy).toHaveBeenCalled();
-            });
-
             it('should call `handleErrorState` if `submitCheckout` returns an error', async () => {
                 // Arrange
-                const handleErrorStateSpy = jest.spyOn(VueCheckout.methods, 'handleErrorState');
-                const error = new Error('errorMessage');
-
-                submitCheckoutSpy.mockImplementation(() => { throw error; });
-                isFormValidSpy.mockReturnValue(true);
-
                 const wrapper = mount(VueCheckout, {
                     store: createStore(),
                     i18n,
@@ -1805,14 +1756,154 @@ describe('Checkout', () => {
                     }
                 });
 
+                trackingDataMock.action = 'submit';
+
                 // Act
                 await wrapper.vm.onFormSubmit();
 
                 // Assert
-                expect(handleErrorStateSpy).toHaveBeenCalledWith(error);
+                expect(trackFormInteractionSpy).toHaveBeenCalledWith(trackingDataMock);
             });
 
-            it('should call `logWarn` if form is Invalid', async () => {
+            xdescribe('when form is Invalid', () => {
+                let wrapper;
+                let mockValidationState;
+                let getFormValidationStateSpy;
+
+                beforeEach(() => {
+                    mockValidationState = {
+                        validFields: [
+                            'customer.mobileNumber',
+                            'address.line1',
+                            'address.city',
+                            'address.postcode'
+                        ],
+                        invalidFields: []
+                    };
+
+                    getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
+
+
+                    getFormValidationStateSpy.mockReturnValue(mockValidationState);
+                    isFormValidSpy.mockReturnValue(false);
+
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $v,
+                            $logger
+                        }
+                    });
+                })
+
+                it('should emit `CheckoutValidationError` with validation state', async () => {
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                });
+
+                it('should call `trackFormInteraction` with correct `trackingData`', async () => {
+                    // Arrange
+                    trackingDataMock.action = 'inline_error';
+                    trackingDataMock.error = mockValidationState.invalidFields;
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(trackingDataMock);
+                });
+            });
+
+            xdescribe('when form is valid', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    isFormValidSpy.mockReturnValue(true);
+
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $v,
+                            $logger
+                        }
+                    });
+                });
+
+                it('should try to call `submitCheckout`', async () => {
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(submitCheckoutSpy).toHaveBeenCalled();
+                });
+
+                it('should try to call `trackFormInteractionSpy` with correct `trackingData`', async () => {
+                    // Arrange
+                    trackingDataMock.action = 'success';
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(trackingDataMock);
+                });
+            });
+
+            xdescribe('when `submitCheckout` returns an error', () => {
+                let wrapper;
+                let handleErrorStateSpy;
+                let error;
+
+                beforeEach(() => {
+                    handleErrorStateSpy = jest.spyOn(VueCheckout.methods, 'handleErrorState');
+                    error = new Error('errorMessage');
+
+                    submitCheckoutSpy.mockImplementation(() => { throw error; });
+                    isFormValidSpy.mockReturnValue(true);
+
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $v,
+                            $logger
+                        }
+                    });
+                });
+
+                it('should call `handleErrorState`', async () => {
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(handleErrorStateSpy).toHaveBeenCalledWith(error);
+                });
+
+                it('should try to call `trackFormInteractionSpy` with correct `trackingData`', async () => {
+                    // Arrange
+                    trackingDataMock.action = 'error';
+                    trackingDataMock.error = 'notOrderable';
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(trackingDataMock);
+                });
+            });
+
+            xit('should call `logWarn` if form is Invalid', async () => {
                 // Arrange
                 isFormValidSpy.mockReturnValue(false);
 
