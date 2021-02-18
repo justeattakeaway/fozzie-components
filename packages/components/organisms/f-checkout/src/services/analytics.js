@@ -5,10 +5,9 @@ import Trak from '@justeat/f-trak';
  *
  * @param {object} eventData An object containing data to be pushed to the dataLayer
  */
-const trackInitialLoad = eventData => {
+const trackInitialLoad = (basket, restaurantId, isLoggedIn, checkoutData) => {
+    trackFormInteraction(checkoutData);
     window.dataLayer = window.dataLayer || [];
-
-    const { basket, restaurantId, isLoggedIn, checkoutData } = eventData;
 
     const pageName = isLoggedIn ? 'Overview' : 'Guest';
 
@@ -32,8 +31,8 @@ const trackInitialLoad = eventData => {
     });
 
     if (checkoutData) {
-        // console.log('here'); // eslint-disable-line no-console
-        // console.log(trackFormInteraction); // eslint-disable-line no-console
+        console.log('here'); // eslint-disable-line no-console
+        console.log(trackFormInteraction); // eslint-disable-line no-console
         trackFormInteraction(checkoutData);
     };
 };
@@ -86,13 +85,14 @@ const cleanFields = fields => {
 const trackFormInteraction = eventData => {
     const { action, isLoggedIn, error, changes, autofill } = eventData;
 
+    console.log('called'); // eslint-disable-line no-console
+
     // const error = eventData.error && cleanFields(eventData.error);
     // const changes = eventData.changes && cleanFields(eventData.changes);
     // const autofill = eventData.autofill && cleanFields(eventData.autofill);
 
     const formName = isLoggedIn ? 'checkout' : 'checkout_guest';
 
-    // console.log('error'); // eslint-disable-line no-console
 
     Trak.event({
         event: 'Form',
@@ -104,9 +104,8 @@ const trackFormInteraction = eventData => {
                 autofill,
                 changes
             }
-
         }
     });
 };
 
-export default { trackInitialLoad, trackFormInteraction };
+export { trackInitialLoad, trackFormInteraction };

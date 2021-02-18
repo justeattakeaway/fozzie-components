@@ -185,6 +185,26 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe(`${UPDATE_BASKET_DETAILS} ::`, () => {
+            it('should update state with received value', () => {
+                // Arrange & Act
+                const eventData = {
+                    serviceType: 'delivery',
+                    basket: {
+                        id: '11111',
+                        total: '12.50'
+                    },
+                    resturantId: '22222'
+                }
+                mutations[UPDATE_BASKET_DETAILS](state, eventData);
+
+                // Assert
+                expect(state.serviceType).toEqual(eventData.serviceType);
+                expect(state.basket).toEqual(eventData.basket);
+                expect(state.resturant).toEqual(eventData.resturant);
+            });
+        });
+
         describe(`${UPDATE_FIELD_CHANGES} ::`, () => {
             it('should update state with received value', () => {
                 // Arrange & Act
@@ -488,7 +508,7 @@ describe('CheckoutModule', () => {
             // Act
             action({ commit }, value);
 
-            const field = Object.keys(value)[0];
+            const [field] = Object.keys(value);
 
             // Assert
             expect(commit).toHaveBeenCalledWith(UPDATE_FIELD_CHANGES, field);

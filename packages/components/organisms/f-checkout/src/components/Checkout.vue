@@ -105,7 +105,7 @@ import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import mapUpdateCheckoutRequest from '../services/mapper';
-import Analytics from '../services/analytics';
+import { trackInitialLoad, trackFormInteraction } from '../services/analytics';
 
 export default {
     name: 'VueCheckout',
@@ -282,15 +282,12 @@ export default {
     async mounted () {
         await this.initialise();
 
-        Analytics.trackInitialLoad({
-            basket: {
-                id: this.basket.id,
-                total: this.basket.total
-            },
-            restaurantId: this.restaurantId,
-            isLoggedIn: this.isLoggedIn,
-            checkoutData: this.trackingData('start')
-        });
+        trackInitialLoad(
+            this.basket,
+            this.restaurantId,
+            this.isLoggedIn,
+            this.trackingData('start')
+        );
     },
 
     methods: {
@@ -551,13 +548,13 @@ export default {
             * If form is valid try to call `submitCheckout`
             * Catch and handle any errors
             */
-            Analytics.trackFormInteraction(this.trackingData('submit'));
+            trackFormInteraction(this.trackingData('submit'));
 
             if (!this.isFormValid()) {
                 const validationState = validations.getFormValidationState(this.$v);
                 this.$emit(EventNames.CheckoutValidationError, validationState);
 
-                Analytics.trackFormInteraction(this.trackingData('inline_error', validationState.invalidFields));
+                trackFormInteraction(this.trackingData('inline_error', validationState.invalidFields));
 
                 this.$logger.logWarn(
                     'Checkout Validation Error',
@@ -572,10 +569,10 @@ export default {
             try {
                 await this.submitCheckout();
 
-                Analytics.trackFormInteraction(this.trackingData('success'));
+                trackFormInteraction(this.trackingData('success'));
             } catch (error) {
                 this.handleErrorState(error);
-                Analytics.trackFormInteraction(this.trackingData('error', 'notOrderable'));
+                trackFormInteraction(this.trackingData('error', 'notOrderable'));
             } finally {
                 this.shouldDisableCheckoutButton = false;
             }

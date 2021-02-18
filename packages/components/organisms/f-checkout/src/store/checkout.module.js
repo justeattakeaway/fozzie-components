@@ -240,17 +240,17 @@ export default {
         },
 
         updateAddressDetails ({ commit }, payload) {
-            const field = Object.keys(payload)[0];
+            const [field] = Object.keys(payload);
 
             commit(UPDATE_FIELD_CHANGES, field);
             commit(UPDATE_FULFILMENT_ADDRESS, payload);
         },
 
         updateCustomerDetails ({ commit }, payload) {
-            const field = Object.keys(payload)[0];
+            const [field] = Object.keys(payload);
 
-            commit(UPDATE_FIELD_CHANGES, field);
             commit(UPDATE_CUSTOMER_DETAILS, payload);
+            commit(UPDATE_FIELD_CHANGES, field);
         },
 
         updateFulfilmentTime ({ commit }, payload) {
