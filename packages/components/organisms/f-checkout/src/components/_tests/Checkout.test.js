@@ -1966,7 +1966,7 @@ describe('Checkout', () => {
                 jest.advanceTimersByTime(1000);
 
                 // Assert
-                expect(windowLocationSpy).toHaveBeenCalledWith(`${paymentPageUrl}/MzRkZGU4MDktYjVmNi00Nz-v1`);
+                expect(windowLocationSpy).toHaveBeenCalledWith(paymentPageUrl);
             });
 
             it('should not redirect to the payment page before 1 second', () => {

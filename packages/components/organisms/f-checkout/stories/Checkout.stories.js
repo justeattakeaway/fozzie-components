@@ -26,6 +26,8 @@ const getBasketDeliveryUrl = '/get-basket-delivery.json';
 const getBasketCollectionUrl = '/get-basket-collection.json';
 const updateCheckoutUrl = '/update-checkout.json';
 const getAddressUrl = '/get-address.json';
+const placeOrderUrl = '/place-order.json';
+const paymentPageUrl = ''; // So that it redirects to the `f-checkout` component page in Storybook again.
 
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutCollectionUrl);
@@ -35,6 +37,7 @@ CheckoutMock.setupCheckoutMethod(getBasketDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getBasketCollectionUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutUrl);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
+CheckoutMock.setupCheckoutMethod(placeOrderUrl);
 CheckoutMock.passThroughAny();
 
 export const CheckoutComponent = () => ({
@@ -66,7 +69,13 @@ export const CheckoutComponent = () => ({
         },
         getAddressUrl: {
             default: text('Get Address Url', getAddressUrl)
-        }
+        },
+        placeOrderUrl: {
+            default: select('Place Order Url', [placeOrderUrl], placeOrderUrl)
+        },
+        paymentPageUrl: {
+            default: text('Payment Page Url', paymentPageUrl)
+        },                
     },
     store: new Vuex.Store({
         modules: {
@@ -83,8 +92,10 @@ export const CheckoutComponent = () => ({
         ':locale="locale" ' +
         ':loginUrl="loginUrl" ' +
         ':getAddressUrl="getAddressUrl" ' +
+        ':placeOrderUrl="placeOrderUrl" ' +
+        ':paymentPageUrl="paymentPageUrl" ' +
         // eslint-disable-next-line no-template-curly-in-string
-        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl}`" />'
+        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrl}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';

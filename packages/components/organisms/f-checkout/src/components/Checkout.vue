@@ -383,7 +383,7 @@ export default {
          */
         redirectToPayment () {
             setTimeout(() => { // TODO: remove this when the order team handles this automatically.
-                window.location.assign(`${this.paymentPageUrl}/MzRkZGU4MDktYjVmNi00Nz-v1`); // TODO: de-hardcode :)
+                window.location.assign(this.paymentPageUrl);
             }, 1000);
         },
 
