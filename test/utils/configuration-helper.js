@@ -4,7 +4,7 @@ const TEST_TYPE = process.env.TEST_TYPE;
 exports.local = () => ({
     bail: 0,
     maxinstances: 1,
-    loglevel: 'info'
+    loglevel: 'silent'
 });
 
 exports.ci = () => ({
