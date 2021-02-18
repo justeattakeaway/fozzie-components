@@ -1,5 +1,6 @@
 <template>
     <div
+        v-if="!legacyBanner"
         ref="cookieBanner"
         :class="[
             $style['c-cookieBanner'],
@@ -10,10 +11,9 @@
         data-test-id="cookieBanner-component"
         :aria-hidden="shouldHideBanner">
         <div
-            v-if="!legacyBanner"
             :class="[
                 $style['c-cookieBanner-card'],
-                { [$style['c-cookieBanner-ios']]: isIosBrowser() }
+                { [$style['c-cookieBanner-ios']]: isIosBrowser }
             ]">
             <div
                 :class="$style['c-cookieBanner-content']"
@@ -32,9 +32,11 @@
                 <p :class="$style['c-cookieBanner-text']">
                     {{ $t('textLine1') }}
                 </p>
+
                 <p :class="$style['c-cookieBanner-text']">
                     {{ $t('textLine2') }}
                 </p>
+
                 <p
                     :class="$style['c-cookieBanner-text']">
                     <i18n
@@ -56,6 +58,7 @@
                     @click.native="acceptAllCookiesActions">
                     {{ $t('acceptButtonText') }}
                 </button-component>
+
                 <button-component
                     button-type="ghost"
                     is-full-width
@@ -64,14 +67,18 @@
                 </button-component>
             </div>
         </div>
-        <legacy-banner
-            v-else
-            @hide-legacy-banner="hideBanner"
-        />
     </div>
+
+    <legacy-banner
+        v-else
+        :should-hide-legacy-banner="shouldHideBanner"
+        @hide-legacy-banner="hideBanner"
+    />
 </template>
 
 <script>
+import CookieHelper from 'js-cookie';
+
 import { globalisationServices } from '@justeat/f-services';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 
@@ -83,14 +90,14 @@ import LegacyBanner from './LegacyBanner.vue';
 import tenantConfigs from '../tenants';
 
 export default {
-    name: 'CookieBanner',
-
     components: {
         ButtonComponent,
         LegacyBanner
     },
 
-    mixins: [VueGlobalisationMixin],
+    mixins: [
+        VueGlobalisationMixin
+    ],
 
     props: {
         locale: {
@@ -126,26 +133,32 @@ export default {
             tenantConfigs,
             theme,
             shouldHideBanner: false,
-            legacyBanner: false,
             consentCookieName,
-            legacyConsentCookieName
+            legacyConsentCookieName,
+            isIosBrowser: false
         };
+    },
+
+    computed: {
+        /**
+         * Check if the legacy cookie banner should be used
+         */
+        legacyBanner () {
+            return this.config.displayLegacy;
+        }
     },
 
     watch: {
         isHidden (newVal) {
             this.shouldHideBanner = !!newVal;
-        },
-
-        showLegacyBanner (newVal) {
-            this.legacyBanner = !!newVal;
         }
     },
 
     mounted () {
-        this.checkLegacyBannerFlag();
         this.checkCookieBannerCookie();
         this.focusOnTitle();
+
+        this.isIosBrowser = /(iPhone|iPad).*Safari/.test(navigator.userAgent);
     },
 
     methods: {
@@ -158,6 +171,7 @@ export default {
             this.dataLayerPush('full');
             this.shouldHideBanner = true;
         },
+
         /**
          * Actions for "Accept only required cookies" button
          */
@@ -169,55 +183,57 @@ export default {
             this.removeUnnecessaryCookies();
             this.shouldHideBanner = true;
         },
+
         /**
          * Set focus to the cookie consent banner title for accessibility
          */
         focusOnTitle () {
-            this.$refs.cookieBannerHeading.focus();
+            if (!this.legacyBanner) {
+                this.$refs.cookieBannerHeading.focus();
+            }
         },
+
         /**
          * Hide the banner
          */
         hideBanner () {
             this.shouldHideBanner = true;
         },
-        /**
-         * Check if the legacy cookie banner should be used
-         */
-        checkLegacyBannerFlag () {
-            this.legacyBanner = this.config.displayLegacy;
-        },
+
         /**
          * Check if the cookie banner has been shown to this user
          */
         checkCookieBannerCookie () {
             if (this.legacyBanner) {
-                this.shouldHideBanner = this.$cookies.get(this.legacyConsentCookieName) === 2;
+                this.shouldHideBanner = CookieHelper.get(this.legacyConsentCookieName) === 2;
                 this.setLegacyCookieBannerCookie();
             } else {
-                const cookieConsent = this.$cookies.get(this.consentCookieName);
+                const cookieConsent = CookieHelper.get(this.consentCookieName);
                 this.shouldHideBanner = cookieConsent === 'full' || cookieConsent === 'necessary';
             }
         },
+
         /**
          * Set the cookie for the user's choice
          * @param {String} cookieValue
          */
         setCookieBannerCookie (cookieValue) {
-            this.$cookies.set(this.consentCookieName, cookieValue, {
+            CookieHelper.set(this.consentCookieName, cookieValue, {
                 path: '/',
-                maxAge: this.cookieExpiry
+                expires: this.cookieExpiry
             });
         },
+
         /**
          * Set the legacy cookie banner cookie
          */
         setLegacyCookieBannerCookie () {
-            this.$cookies.set(this.legacyConsentCookieName, '2', {
+            CookieHelper.set(this.legacyConsentCookieName, '130315', {
                 path: '/',
-                maxAge: this.cookieExpiry
+                expires: this.cookieExpiry
             });
         },
+
         /**
          * Push tracking events
          * @param {String} consentLevel
@@ -227,6 +243,7 @@ export default {
             dataLayer.push({ event: 'trackConsent', userData: { consent: consentLevel } });
             dataLayer.push({ platformData: { consentLoading: true } });
         },
+
         /**
          * Check whether a cookie with name `cookieName` is to be excluded from being removed
          * @param {String} cookieName
@@ -235,22 +252,17 @@ export default {
         isNotExcluded (cookieName) {
             return this.config.cookieExclusionList.every(excludedCookieName => cookieName.lastIndexOf(excludedCookieName, excludedCookieName.length - 1) === -1);
         },
+
         /**
          * Remove unnecessary cookies
          */
         removeUnnecessaryCookies () {
-            const cookies = Object.keys(this.$cookies.getAll());
+            const cookies = Object.keys(CookieHelper.get());
             for (let i = 0; i < cookies.length; i++) {
-                if (this.isNotExcluded(cookies[i])) this.$cookies.remove(cookies[i]);
+                if (this.isNotExcluded(cookies[i])) CookieHelper.remove(cookies[i]);
             }
         },
-        /**
-         * Check for iOS browser
-         * @returns {Bool}
-         */
-        isIosBrowser () {
-            return /(iPhone|iPad).*Safari/.test(navigator.userAgent);
-        },
+
         /**
          * Resend GTM events
          */

@@ -4,8 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-To be added to the latest release
+v4.7.0
 ------------------------------
+*February 11, 2021*
+
+### Added
+- Country selector component tests
+- dataTestKeys into country selector component
+
+### Changed
+- component tests to use page object model
+
 *Fabruary 9, 2021*
 
 ### Added

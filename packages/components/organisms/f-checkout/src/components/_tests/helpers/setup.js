@@ -78,6 +78,17 @@ const createStore = (state = defaultState, actions = defaultActions) => new Vuex
     }
 });
 
+const $logger = {
+    logInfo: jest.fn(),
+    logWarn: jest.fn(),
+    logError: jest.fn()
+};
+
 export {
-    fulfilmentTimes, defaultState, defaultActions, i18n, createStore
+    fulfilmentTimes,
+    defaultState,
+    defaultActions,
+    i18n,
+    createStore,
+    $logger
 };

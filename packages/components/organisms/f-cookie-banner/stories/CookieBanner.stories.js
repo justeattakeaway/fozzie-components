@@ -16,16 +16,11 @@ export const CookieBannerComponent = () => ({
 
         isHidden: {
             default: boolean('Is hidden', false)
-        },
-        
-        showLegacyBanner: {
-            default: boolean('Show legacy banner', false)
         }
     },
     template: `<cookie-banner
         :locale="locale"
         :is-hidden="isHidden"
-        :show-legacy-banner="showLegacyBanner"
         :key="locale"/>`
 });
 

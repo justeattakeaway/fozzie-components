@@ -3,12 +3,40 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.15.0
+------------------------------
+*February 18, 2021*
+
+### Added
+- Instructions for using `Fozzie` option mixins.
+
+v3.14.0
+------------------------------
+*February 15, 2021*
+
+### Added
+- `Utility Tools` page to Storybook docs.
+
+### Changed
+- `Setup Guides` just changed to `Guides` in Storybook sidebar.
+- Content moved out of `Getting Started` and into separate sub-pages.
+
+
 v3.13.0
 ------------------------------
 *February 12, 2021*
 
 ### Added
-- Instructions for using `Fozzie` option mixins.
+- `Contributing Guide` to Storybook docs.
+- `Dependencies Guide` to Storybook docs.
+
+### Changed
+- `Getting Started` guide updated with links to new sections.
+- `CONTRIBUTING.md` updated with new info to be in-line with the Storybook docs.
+
+### Fixed
+- Image path in `Typography Setup Guide`.
+
 
 v3.12.0
 ------------------------------

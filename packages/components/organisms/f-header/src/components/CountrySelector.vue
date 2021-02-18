@@ -45,7 +45,7 @@
                         v-for="(country, i) in countries"
                         :key="i + '_Country'"
                         class="c-countrySelector-country"
-                        :data-test-id="['countrySelector-countryList-' + country.key]">
+                        :data-test-id="['countrySelector-countryList-' + country.dataTestKey]">
                         <a
                             :data-trak='`{
                                 "trakEvent": "click",
