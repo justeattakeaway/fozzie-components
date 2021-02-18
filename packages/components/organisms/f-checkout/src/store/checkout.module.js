@@ -350,19 +350,22 @@ export default {
             }
         },
 
-        [UPDATE_AUTO_FILL]: (state) => {
-            let payload = [];
+        [UPDATE_AUTO_FILL]: state => {
+            const autofill = [];
 
-            state.customer.mobileNumber ? payload.push('phone') : null;
-
-            if (state.serviceType === 'delivery') {
-                state.address.postcode ? payload.push('address.postcode') : null;
-                state.address.line1 ? payload.push('address.line1') : null;
-                state.address.line2 ? payload.push('address.line2') : null;
-                state.address.city ? payload.push('address.city') : null;
+            if (state.customer.mobileNumber) {
+                autofill.push('phone');
             }
 
-            state.autofill = payload;
+            if (state.serviceType === 'delivery') {
+                Object.entries(state.address).forEach(([key, value]) => {
+                    if (value) {
+                        autofill.push(`address.${key}`);
+                    }
+                });
+            }
+
+            state.autofill = autofill;
         }
     }
 };

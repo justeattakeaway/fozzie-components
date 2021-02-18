@@ -195,7 +195,7 @@ describe('CheckoutModule', () => {
                         total: '12.50'
                     },
                     resturantId: '22222'
-                }
+                };
                 mutations[UPDATE_BASKET_DETAILS](state, eventData);
 
                 // Assert
@@ -232,7 +232,7 @@ describe('CheckoutModule', () => {
                         city: '',
                         postcode: ''
                     }
-                }
+                };
 
                 mutations[UPDATE_AUTO_FILL](state);
 
@@ -256,7 +256,7 @@ describe('CheckoutModule', () => {
                         city: 'London',
                         postcode: ''
                     }
-                }
+                };
 
                 mutations[UPDATE_AUTO_FILL](state);
 
@@ -503,7 +503,7 @@ describe('CheckoutModule', () => {
 
         it.each([
             [updateAddressDetails, address],
-            [updateCustomerDetails, customerDetails],
+            [updateCustomerDetails, customerDetails]
         ])('%s should call `UPDATE_FIELD_CHANGES` mutation with first key of passed value', (action, value) => {
             // Act
             action({ commit }, value);

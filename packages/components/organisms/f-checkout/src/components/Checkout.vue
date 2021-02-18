@@ -285,9 +285,10 @@ export default {
         trackInitialLoad(
             this.basket,
             this.restaurantId,
-            this.isLoggedIn,
-            this.trackingData('start')
+            this.isLoggedIn
         );
+
+        trackFormInteraction(this.trackingData('start'));
     },
 
     methods: {
@@ -606,10 +607,10 @@ export default {
          * along with state values `isLoggedIn`, `changes` and `autofill`
          *
          */
-        trackingData ( action, error ){
+        trackingData (action, error) {
             const data = {
                 action,
-                error: error ? error : null,
+                error: error || null,
                 isLoggedIn: this.isLoggedIn,
                 changes: this.changes,
                 autofill: this.autofill

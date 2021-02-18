@@ -79,7 +79,7 @@ describe('Checkout', () => {
         getAddressUrl
     };
 
-    xit('should be defined', () => {
+    it('should be defined', () => {
         // Arrange
         const wrapper = shallowMount(VueCheckout, {
             i18n,
@@ -92,7 +92,7 @@ describe('Checkout', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    xit('should have one form with method "post"', () => {
+    it('should have one form with method "post"', () => {
         // Arrange
         const wrapper = shallowMount(VueCheckout, {
             i18n,
@@ -109,7 +109,7 @@ describe('Checkout', () => {
         expect(forms.wrappers[0].attributes('method')).toBe('post');
     });
 
-    xdescribe('created :: ', () => {
+    describe('created :: ', () => {
         afterEach(() => {
             jest.clearAllMocks();
         });
@@ -133,7 +133,7 @@ describe('Checkout', () => {
         });
     });
 
-    xdescribe('data ::', () => {
+    describe('data ::', () => {
         describe('serviceType ::', () => {
             it('should display the address block if set to `delivery`', async () => {
                 // Act
@@ -213,7 +213,7 @@ describe('Checkout', () => {
         });
     });
 
-    xdescribe('props ::', () => {
+    describe('props ::', () => {
         describe('authToken ::', () => {
             it('should store auth token', async () => {
                 // Arrange
@@ -233,7 +233,7 @@ describe('Checkout', () => {
         });
     });
 
-    xdescribe('computed ::', () => {
+    describe('computed ::', () => {
         describe('isMobileNumberValid ::', () => {
             let wrapper;
 
@@ -416,11 +416,13 @@ describe('Checkout', () => {
 
     describe('mounted ::', () => {
         let initialiseSpy;
-        let trackInitialLoadSpy
+        let trackInitialLoadSpy;
+        let trackFormInteractionSpy;
 
         beforeEach(() => {
             initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
             trackInitialLoadSpy = jest.spyOn(analytics, 'trackInitialLoad').mockImplementation();
+            trackFormInteractionSpy = jest.spyOn(analytics, 'trackFormInteraction').mockImplementation();
         });
 
         afterEach(() => {
@@ -441,8 +443,6 @@ describe('Checkout', () => {
         });
 
         it('should call `trackInitialLoad`', () => {
-            // Arrange
-
             // Act
             shallowMount(VueCheckout, {
                 store: createStore(),
@@ -452,8 +452,20 @@ describe('Checkout', () => {
             });
 
             // Assert
-            // expect(trackFormInteractionSpy).toHaveBeenCalled();
             expect(trackInitialLoadSpy).toHaveBeenCalled();
+        });
+
+        it('should call `trackFormInteraction`', () => {
+            // Act
+            shallowMount(VueCheckout, {
+                store: createStore(),
+                i18n,
+                localVue,
+                propsData
+            });
+
+            // Assert
+            expect(trackFormInteractionSpy).toHaveBeenCalled();
         });
     });
 
@@ -462,7 +474,7 @@ describe('Checkout', () => {
             jest.clearAllMocks();
         });
 
-        xdescribe('initialise ::', () => {
+        describe('initialise ::', () => {
             it('should call `setAuthToken`', () => {
                 // Arrange & Act
                 const setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
@@ -590,7 +602,7 @@ describe('Checkout', () => {
             });
         });
 
-        xdescribe('submitCheckout ::', () => {
+        describe('submitCheckout ::', () => {
             describe('if serviceType set to `collection`', () => {
                 let wrapper;
 
@@ -1219,7 +1231,7 @@ describe('Checkout', () => {
             });
         });
 
-        xdescribe('setupGuestUser ::', () => {
+        describe('setupGuestUser ::', () => {
             it('should call `createGuestUser`', async () => {
                 // Arrange
                 const customer = {
@@ -1328,7 +1340,7 @@ describe('Checkout', () => {
             });
         });
 
-        xdescribe('loadCheckout ::', () => {
+        describe('loadCheckout ::', () => {
             afterEach(() => {
                 jest.clearAllMocks();
             });
@@ -1394,7 +1406,7 @@ describe('Checkout', () => {
             });
         });
 
-        xdescribe('loadAvailableFulfilment ::', () => {
+        describe('loadAvailableFulfilment ::', () => {
             afterEach(() => {
                 jest.clearAllMocks();
             });
@@ -1460,7 +1472,7 @@ describe('Checkout', () => {
             });
         });
 
-        xdescribe('loadBasket ::', () => {
+        describe('loadBasket ::', () => {
             afterEach(() => {
                 jest.clearAllMocks();
             });
@@ -1526,7 +1538,7 @@ describe('Checkout', () => {
             });
         });
 
-        xdescribe('loadAddress ::', () => {
+        describe('loadAddress ::', () => {
             afterEach(() => {
                 jest.clearAllMocks();
             });
@@ -1571,7 +1583,7 @@ describe('Checkout', () => {
             });
         });
 
-        xdescribe('handleErrorState ::', () => {
+        describe('handleErrorState ::', () => {
             let wrapper;
 
             beforeEach(() => {
@@ -1666,7 +1678,7 @@ describe('Checkout', () => {
             });
         });
 
-        xdescribe('isFormValid ::', () => {
+        describe('isFormValid ::', () => {
             let touchSpy;
 
             beforeEach(() => {
@@ -1743,8 +1755,10 @@ describe('Checkout', () => {
                 jest.clearAllMocks();
             });
 
-            it('should call `handleErrorState` if `submitCheckout` returns an error', async () => {
+            it('should call `trackFormInteractionSpy` with `trackingData`', async () => {
                 // Arrange
+                isFormValidSpy.mockReturnValue(true);
+
                 const wrapper = mount(VueCheckout, {
                     store: createStore(),
                     i18n,
@@ -1765,25 +1779,22 @@ describe('Checkout', () => {
                 expect(trackFormInteractionSpy).toHaveBeenCalledWith(trackingDataMock);
             });
 
-            xdescribe('when form is Invalid', () => {
+            describe('when form is Invalid', () => {
                 let wrapper;
-                let mockValidationState;
                 let getFormValidationStateSpy;
 
+                const mockValidationState = {
+                    validFields: [
+                        'customer.mobileNumber',
+                        'address.line1',
+                        'address.city',
+                        'address.postcode'
+                    ],
+                    invalidFields: []
+                };
+
                 beforeEach(() => {
-                    mockValidationState = {
-                        validFields: [
-                            'customer.mobileNumber',
-                            'address.line1',
-                            'address.city',
-                            'address.postcode'
-                        ],
-                        invalidFields: []
-                    };
-
                     getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
-
-
                     getFormValidationStateSpy.mockReturnValue(mockValidationState);
                     isFormValidSpy.mockReturnValue(false);
 
@@ -1797,7 +1808,7 @@ describe('Checkout', () => {
                             $logger
                         }
                     });
-                })
+                });
 
                 it('should emit `CheckoutValidationError` with validation state', async () => {
                     // Act
@@ -1820,7 +1831,7 @@ describe('Checkout', () => {
                 });
             });
 
-            xdescribe('when form is valid', () => {
+            describe('when form is valid', () => {
                 let wrapper;
 
                 beforeEach(() => {
@@ -1846,9 +1857,10 @@ describe('Checkout', () => {
                     expect(submitCheckoutSpy).toHaveBeenCalled();
                 });
 
-                it('should try to call `trackFormInteractionSpy` with correct `trackingData`', async () => {
+                it('should call `trackFormInteractionSpy` with correct `trackingData`', async () => {
                     // Arrange
                     trackingDataMock.action = 'success';
+                    trackingDataMock.error = null;
 
                     // Act
                     await wrapper.vm.onFormSubmit();
@@ -1858,14 +1870,13 @@ describe('Checkout', () => {
                 });
             });
 
-            xdescribe('when `submitCheckout` returns an error', () => {
+            describe('when `submitCheckout` returns an error', () => {
                 let wrapper;
                 let handleErrorStateSpy;
-                let error;
+                const error = new Error('errorMessage');
 
                 beforeEach(() => {
                     handleErrorStateSpy = jest.spyOn(VueCheckout.methods, 'handleErrorState');
-                    error = new Error('errorMessage');
 
                     submitCheckoutSpy.mockImplementation(() => { throw error; });
                     isFormValidSpy.mockReturnValue(true);
@@ -1890,7 +1901,7 @@ describe('Checkout', () => {
                     expect(handleErrorStateSpy).toHaveBeenCalledWith(error);
                 });
 
-                it('should try to call `trackFormInteractionSpy` with correct `trackingData`', async () => {
+                it('should call `trackFormInteractionSpy` with correct `trackingData`', async () => {
                     // Arrange
                     trackingDataMock.action = 'error';
                     trackingDataMock.error = 'notOrderable';
@@ -1903,7 +1914,7 @@ describe('Checkout', () => {
                 });
             });
 
-            xit('should call `logWarn` if form is Invalid', async () => {
+            it('should call `logWarn` if form is Invalid', async () => {
                 // Arrange
                 isFormValidSpy.mockReturnValue(false);
 
@@ -1926,7 +1937,7 @@ describe('Checkout', () => {
             });
         });
 
-        xdescribe('isValidPhoneNumber ::', () => {
+        describe('isValidPhoneNumber ::', () => {
             afterEach(() => {
                 jest.clearAllMocks();
             });
@@ -1950,7 +1961,7 @@ describe('Checkout', () => {
             });
         });
 
-        xdescribe('isValidPostcode ::', () => {
+        describe('isValidPostcode ::', () => {
             afterEach(() => {
                 jest.clearAllMocks();
             });
@@ -1974,7 +1985,7 @@ describe('Checkout', () => {
             });
         });
 
-        xdescribe('updateCustomerDetails ::', () => {
+        describe('updateCustomerDetails ::', () => {
             it('should be called with new input value on user input', async () => {
                 // Arrange
                 const updateCustomerDetailsSpy = jest.spyOn(VueCheckout.methods, 'updateCustomerDetails');
@@ -1996,7 +2007,7 @@ describe('Checkout', () => {
             });
         });
 
-        xdescribe('trackingData ::', () => {
+        describe('trackingData ::', () => {
             const expectedData = {
                 isLoggedIn: defaultState.isLoggedIn,
                 changes: defaultState.changes,
@@ -2043,7 +2054,7 @@ describe('Checkout', () => {
         });
     });
 
-    xdescribe('watch ::', () => {
+    describe('watch ::', () => {
         describe('authToken ::', () => {
             afterEach(() => {
                 jest.clearAllMocks();

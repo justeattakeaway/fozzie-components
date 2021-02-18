@@ -1,11 +1,43 @@
 import Trak from '@justeat/f-trak';
 
 /**
+ * Pushes `form` event to the data layer with correct data
+ *
+ * @param {object} eventData An object containing data to be pushed to the dataLayer
+ */
+const trackFormInteraction = eventData => {
+    const {
+        action, isLoggedIn, error, changes, autofill
+    } = eventData;
+
+    // const error = eventData.error && cleanFields(eventData.error);
+    // const changes = eventData.changes && cleanFields(eventData.changes);
+    // const autofill = eventData.autofill && cleanFields(eventData.autofill);
+
+    const formName = isLoggedIn ? 'checkout' : 'checkout_guest';
+
+
+    Trak.event({
+        event: 'Form',
+        custom: {
+            form: {
+                name: formName,
+                action,
+                error,
+                autofill,
+                changes
+            }
+        }
+    });
+};
+
+
+/**
  * Pushes initial state of checkout to the dataLayer.
  *
  * @param {object} eventData An object containing data to be pushed to the dataLayer
  */
-const trackInitialLoad = (basket, restaurantId, isLoggedIn, checkoutData) => {
+const trackInitialLoad = (basket, restaurantId, isLoggedIn) => {
     window.dataLayer = window.dataLayer || [];
 
     const pageName = isLoggedIn ? 'Overview' : 'Guest';
@@ -25,43 +57,6 @@ const trackInitialLoad = (basket, restaurantId, isLoggedIn, checkoutData) => {
             pageData: {
                 name: `Checkout 1 ${pageName}`,
                 group: 'Checkout'
-            }
-        }
-    });
-
-    if (checkoutData) {
-        console.log('here'); // eslint-disable-line no-console
-        console.log(trackFormInteraction); // eslint-disable-line no-console
-        trackFormInteraction(checkoutData);
-    };
-};
-
-/**
- * Pushes `form` event to the data layer with correct data
- *
- * @param {object} eventData An object containing data to be pushed to the dataLayer
- */
-const trackFormInteraction = eventData => {
-    const { action, isLoggedIn, error, changes, autofill } = eventData;
-
-    console.log('called'); // eslint-disable-line no-console
-
-    // const error = eventData.error && cleanFields(eventData.error);
-    // const changes = eventData.changes && cleanFields(eventData.changes);
-    // const autofill = eventData.autofill && cleanFields(eventData.autofill);
-
-    const formName = isLoggedIn ? 'checkout' : 'checkout_guest';
-
-
-    Trak.event({
-        event: 'Form',
-        custom: {
-            form: {
-                name: formName,
-                action,
-                error,
-                autofill,
-                changes
             }
         }
     });

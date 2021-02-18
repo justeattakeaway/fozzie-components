@@ -1,28 +1,26 @@
 import Trak from '@justeat/f-trak';
-import * as analytics  from '../analytics';
+import { trackInitialLoad, trackFormInteraction } from '../analytics';
 
 describe('checkout analytics', () => {
-    let eventSpy;
-    let trackSpy;
+    let trackEventSpy;
 
     beforeEach(() => {
-        eventSpy = jest.spyOn(Trak, 'event').mockImplementation();
-        trackSpy = jest.spyOn(analytics, 'trackFormInteraction').mockImplementation();
+        trackEventSpy = jest.spyOn(Trak, 'event').mockImplementation();
     });
 
     afterEach(() => {
         jest.clearAllMocks();
     });
 
-    describe('analytics.trackInitialLoad :: ', () => {
-        const basket =  {
+    describe('trackInitialLoad :: ', () => {
+        const basket = {
             id: '11111',
             total: '12.25'
         };
-        const restaurantId =  '22222';
-        const isLoggedIn =  true;
+        const restaurantId = '22222';
+        const isLoggedIn = true;
 
-        xit('should call `event` method of `f-trak`', () => {
+        it('should call `event` method of `f-trak`', () => {
             // Arrange
             const expectedEvent = {
                 custom: {
@@ -37,23 +35,23 @@ describe('checkout analytics', () => {
                         id: restaurantId
                     },
                     pageData: {
-                        name: `Checkout 1 Overview`,
+                        name: 'Checkout 1 Overview',
                         group: 'Checkout'
                     }
                 }
             };
 
             // Act
-            analytics.trackInitialLoad(basket, restaurantId, isLoggedIn);
+            trackInitialLoad(basket, restaurantId, isLoggedIn);
 
             // Assert
-            expect(eventSpy).toHaveBeenCalledWith(expectedEvent);
+            expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
         });
 
-        xit.each([
+        it.each([
             ['Checkout 1 Overview', true],
             ['Checkout 1 Guest', false]
-        ])('should set `pageData.name` to %s if isLoggedIn is %s', (expectedName, isLoggedIn) => {
+        ])('should set `pageData.name` to %s if isLoggedIn is %s', (expectedName, isLoggedInState) => {
             // Arrange
             const expectedEvent = {
                 custom: {
@@ -72,30 +70,17 @@ describe('checkout analytics', () => {
                         group: 'Checkout'
                     }
                 }
-            }
+            };
 
             // Act
-            analytics.trackInitialLoad(basket, restaurantId, isLoggedIn);
+            trackInitialLoad(basket, restaurantId, isLoggedInState);
 
             // Assert
-            expect(eventSpy).toHaveBeenCalledWith(expectedEvent);
-        });
-
-        it('should call `trackFormInteraction` if `eventData` contains `checkoutData`', () => {
-            // Arrange
-            const checkoutData = 'data';
-            analytics.trackFormInteraction =jest.fn();
-
-            // Act
-            analytics.trackInitialLoad(basket, restaurantId, isLoggedIn, checkoutData);
-            console.log(analytics.trackFormInteraction); // eslint-disable-line no-console
-
-            // Assert
-            expect(trackSpy).toHaveBeenCalled();
+            expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
         });
     });
 
-    xdescribe('trackFormInteraction :: ', () => {
+    describe('trackFormInteraction :: ', () => {
         const eventData = {
             action: 'start',
             isLoggedIn: true,
@@ -120,18 +105,18 @@ describe('checkout analytics', () => {
             };
 
             // Act
-            analytics.trackFormInteraction(eventData);
+            trackFormInteraction(eventData);
 
             // Assert
-            expect(eventSpy).toHaveBeenCalledWith(expectedEvent);
+            expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
         });
 
         it.each([
             ['checkout', true],
             ['checkout_guest', false]
-        ])('should set `name` to %s if isLoggedIn is %s', (expectedName, isLoggedIn) => {
+        ])('should set `name` to %s if isLoggedIn is %s', (expectedName, isLoggedInState) => {
             // Arrange
-            eventData.isLoggedIn = isLoggedIn;
+            eventData.isLoggedIn = isLoggedInState;
 
             const expectedEvent = {
                 event: 'Form',
@@ -147,10 +132,10 @@ describe('checkout analytics', () => {
             };
 
             // Act
-            analytics.trackFormInteraction(eventData);
+            trackFormInteraction(eventData);
 
             // Assert
-            expect(eventSpy).toHaveBeenCalledWith(expectedEvent);
+            expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
         });
     });
 });
