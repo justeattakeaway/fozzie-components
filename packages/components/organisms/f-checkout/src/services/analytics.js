@@ -6,7 +6,6 @@ import Trak from '@justeat/f-trak';
  * @param {object} eventData An object containing data to be pushed to the dataLayer
  */
 const trackInitialLoad = (basket, restaurantId, isLoggedIn, checkoutData) => {
-    trackFormInteraction(checkoutData);
     window.dataLayer = window.dataLayer || [];
 
     const pageName = isLoggedIn ? 'Overview' : 'Guest';
