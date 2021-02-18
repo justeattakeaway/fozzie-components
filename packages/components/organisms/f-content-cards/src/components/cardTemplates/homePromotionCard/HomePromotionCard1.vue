@@ -1,8 +1,12 @@
 <template>
-    <div
+    <component
+        :is="url ? 'a' : 'div'"
+        :href="url"
         :data-test-id="testId"
         :style="{ background: backgroundColor }"
-        :class="['c-contentCards-homePromotionCard1', $style['c-contentCards-homePromotionCard1']]">
+        :class="['c-contentCards-homePromotionCard1', $style['c-contentCards-homePromotionCard1']]"
+        @click="onClickContentCard"
+    >
         <div
             :data-test-id="containerTestId"
             :class="['l-container', 'c-contentCards-homePromotionCard1-container', $style['c-contentCards-homePromotionCard1-container']]"
@@ -25,10 +29,13 @@
                 </h3>
             </div>
             <div :class="['c-contentCards-homePromotionCard1-innerCard', $style['c-contentCards-homePromotionCard1-innerCard']]">
-                <home-promotion-card2 :card="card" />
+                <home-promotion-card2
+                    :card="card"
+                    :no-link="true"
+                />
             </div>
         </div>
-    </div>
+    </component>
 </template>
 
 <script>
@@ -39,20 +46,24 @@ export default {
     components: {
         HomePromotionCard2
     },
+
     props: {
         card: {
             type: Object,
             default: () => ({})
         },
+
         containerMaxWidth: {
             type: Number,
             default: 1272
         },
+
         testId: {
             type: String,
             default: 'home-promotion-1'
         }
     },
+
     data () {
         const {
             image,
@@ -82,6 +93,7 @@ export default {
             subtitle
         };
     },
+
     computed: {
         ctaTestId () {
             return this.testId ? `${this.testId}--cta` : false;
@@ -115,12 +127,24 @@ export default {
                 return false;
             }
         }
+    },
+
+    inject: [
+        'emitCardClick'
+    ],
+
+    methods: {
+        onClickContentCard () {
+            this.emitCardClick(this.card);
+        }
     }
 };
 </script>
 
 <style lang="scss" module>
     .c-contentCards-homePromotionCard1 {
+        text-decoration: initial;
+        display: block;
         padding: spacing(x3) 0 spacing(x2);
         width: 100%;
 

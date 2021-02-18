@@ -523,7 +523,7 @@ export default {
     width: 100%;
     max-width: 610px;
 
-    @include media('>=narrow') {
+    @include media('>narrow') {
         min-height: 90px;
     }
 }
