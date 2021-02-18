@@ -1,7 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import mock, { proxy } from 'xhr-mock';
-import { defaultEnabledCardTypes } from '@justeat/f-braze-adapter/src/services/contentCard.service';
 
 import {
     ContentCards,
@@ -12,8 +11,24 @@ import {
     StampCard1
 } from '../src';
 
-import cards, { labelledMultiSelectAllowedValues } from './mockData/cards';
+import {
+    STATE_LOADING,
+    STATE_ERROR,
+    STATE_DEFAULT,
+    STATE_NO_CARDS,
+} from '../src/components/ContentCards';
+
+import cards from './mockData/cards';
 import data from './mockData/data';
+
+const components = {
+    ContentCards,
+    VoucherCard,
+    FirstTimeCustomerCard,
+    PromotionCard,
+    TermsAndConditionsCard,
+    StampCard1
+};
 
 /**
  * Resets all locally stored braze data so that the stubbed data is always fresh on page load
@@ -32,6 +47,50 @@ function resetBrazeData () {
         .forEach(storageItem => {
             localStorage.removeItem(storageItem);
         });
+}
+
+function zeroCardsMockSetup () {
+    resetBrazeData();
+    mock.teardown();
+    mock.setup();
+    mock.post(/\/api\/v3\/content_cards\/sync\/?/, {
+        status: 201,
+        body: JSON.stringify({ cards: [] })
+    });
+    mock.post(/\/api\/v3\/data\/?/, {
+        status: 201,
+        body: JSON.stringify(data())
+    });
+    mock.use(proxy);
+}
+
+function allCardsMockSetup () {
+    resetBrazeData();
+    mock.teardown();
+    mock.setup();
+    mock.post(/\/api\/v3\/content_cards\/sync\/?/, {
+        status: 201,
+        body: JSON.stringify(cards())
+    });
+    mock.post(/\/api\/v3\/data\/?/, {
+        status: 201,
+        body: JSON.stringify(data())
+    });
+    mock.use(proxy);
+}
+
+function notReturningMockSetup () {
+    resetBrazeData();
+    mock.teardown();
+    mock.setup();
+    mock.post(/\/api\/v3\/content_cards\/sync\/?/, () => new Promise((resolve, reject) => {
+        this.rejectMockPromise = resolve;
+    }));
+    mock.post(/\/api\/v3\/data\/?/, {
+        status: 201,
+        body: JSON.stringify(data())
+    });
+    mock.use(proxy);
 }
 
 const methods = {
@@ -62,7 +121,6 @@ const methods = {
 };
 
 const template = `<content-cards
-            #default="{ cards }"
             @on-braze-init="onBrazeInit"
             @get-card-count="getCardCount"
             @has-loaded="hasLoaded"
@@ -70,17 +128,38 @@ const template = `<content-cards
             :userId="userId"
             :apiKey="apiKey"
             :locale="locale"
+            :key="locale"
             >
-                <div>
-                    <template v-for="(card, i) in cards">
-                        <component
-                            :is="handleCustomCardType(card.type)"
-                            :key="i"
-                            :card="card"
-                            :tenant="tenant"
-                        />
-                    </template>
-                </div>
+                <template #${STATE_DEFAULT}="{ cards }">
+                    <blockquote>
+                        Note that this is demo injected content for the purposes of storybook
+                    </blockquote>
+                    <component
+                        v-for="(card, i) in cards"
+                        :is="handleCustomCardType(card.type)"
+                        :key="i"
+                        :card="card"
+                        :tenant="tenant"
+                    />
+                </template>
+                <template #${STATE_NO_CARDS}="{ status }">
+                    <blockquote>
+                        Note that this is demo injected content for the purposes of storybook
+                    </blockquote>
+                    NO CARDS
+                </template>
+                <template #${STATE_ERROR}="{ status }">
+                    <blockquote>
+                        Note that this is demo injected content for the purposes of storybook
+                    </blockquote>
+                    ERROR
+                </template>
+                <template #${STATE_LOADING}="{ status }">
+                    <blockquote>
+                        Note that this is demo injected content for the purposes of storybook
+                    </blockquote>
+                    LOADING
+                </template>
             </content-cards>`;
 
 export default {
@@ -98,14 +177,7 @@ export function ContentCardsBraze (args, { argTypes }) {
     return {
         name: 'Content Cards Braze',
 
-        components: {
-            ContentCards,
-            VoucherCard,
-            FirstTimeCustomerCard,
-            PromotionCard,
-            TermsAndConditionsCard,
-            StampCard1
-        },
+        components,
 
         props: Object.keys(argTypes),
 
@@ -114,20 +186,7 @@ export function ContentCardsBraze (args, { argTypes }) {
         /**
          * Ensures that card mocks are set up
          */
-        beforeCreate () {
-            resetBrazeData();
-            mock.teardown();
-            mock.setup();
-            mock.post(/\/api\/v3\/content_cards\/sync\/?/, {
-                status: 201,
-                body: JSON.stringify(cards())
-            });
-            mock.post(/\/api\/v3\/data\/?/, {
-                status: 201,
-                body: JSON.stringify(data())
-            });
-            mock.use(proxy);
-        },
+        beforeCreate: allCardsMockSetup,
 
         template
     };
@@ -138,9 +197,7 @@ ContentCardsBraze.storyName = 'braze cards only';
 ContentCardsBraze.args = {
     apiKey: '00000000-0000-0000-0000-000000000000',
     userId: 'test-user-id',
-    title: 'Promotional Offers',
-    locale: 'en-GB',
-    enabledCardTypes: [...defaultEnabledCardTypes, 'Stamp_Card_1']
+    locale: 'en-GB'
 };
 
 export function ContentCardsCustom (args, { argTypes }) {
@@ -189,20 +246,7 @@ export function ContentCardsCustom (args, { argTypes }) {
         /**
          * Ensures that card mocks are set up
          */
-        beforeCreate () {
-            resetBrazeData();
-            mock.teardown();
-            mock.setup();
-            mock.post(/\/api\/v3\/content_cards\/sync\/?/, {
-                status: 201,
-                body: JSON.stringify({ cards: [] })
-            });
-            mock.post(/\/api\/v3\/data\/?/, {
-                status: 201,
-                body: JSON.stringify(data())
-            });
-            mock.use(proxy);
-        },
+        beforeCreate: zeroCardsMockSetup,
 
         template
     };
@@ -213,7 +257,41 @@ ContentCardsCustom.storyName = 'custom card';
 ContentCardsCustom.args = {
     apiKey: '00000000-0000-0000-0000-000000000000',
     userId: 'test-user-id',
-    title: 'Promotional Offers',
-    locale: 'en-GB',
-    enabledCardTypes: defaultEnabledCardTypes
+    locale: 'en-GB'
+};
+
+export function ContentCardsLoading (args, { argTypes }) {
+    return {
+        components: {
+            ContentCards
+        },
+
+        props: Object.keys(argTypes),
+
+        methods,
+
+        /**
+         * Ensures that card mocks are set up
+         */
+        beforeCreate: notReturningMockSetup,
+
+        /**
+         * Reject the promise set up by the above mock
+         */
+        beforeDestroy () {
+            this.rejectMockPromise({
+                status: 500
+            });
+        },
+
+        template
+    };
+}
+
+ContentCardsLoading.storyName = 'Loading state';
+
+ContentCardsLoading.args = {
+    apiKey: '00000000-0000-0000-0000-000000000000',
+    userId: 'test-user-id',
+    locale: 'en-GB'
 };

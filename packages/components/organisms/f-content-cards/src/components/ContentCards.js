@@ -5,6 +5,11 @@ import tenantConfigs from '../tenants';
 export const CARDSOURCE_METADATA = 'metadata';
 export const CARDSOURCE_CUSTOM = 'custom';
 
+export const STATE_DEFAULT = 'default';
+export const STATE_ERROR = 'error';
+export const STATE_NO_CARDS = 'no-cards';
+export const STATE_LOADING = 'loading';
+
 /**
  * Generates card-specific analytics data suitable for sending back to GTM via f-trak
  *
@@ -85,7 +90,8 @@ export default {
     },
     data: () => ({
         cards: [],
-        hasLoaded: false
+        hasLoaded: false,
+        state: STATE_LOADING
     }),
     computed: {
         /**
@@ -118,7 +124,11 @@ export default {
                 this.metadataDispatcher.logCardImpressions(this.cards.map(({ id }) => id));
             }
             if ((current.length > 0) && (previous.length === 0)) {
+                this.state = STATE_DEFAULT;
                 this.hasLoaded = true;
+            }
+            if (current.length === 0) {
+                this.state = STATE_NO_CARDS;
             }
         },
         /**
@@ -211,6 +221,7 @@ export default {
                     this.metadataDispatcher = dispatcher;
                 })
                 .catch(error => {
+                    this.state = STATE_ERROR;
                     this.$emit('on-error', error);
                 });
         },
@@ -336,9 +347,17 @@ export default {
             };
         }
     },
-    render () {
-        return this.$scopedSlots.default({
-            cards: this.cards
-        });
+    render (h) {
+        return this.$scopedSlots[this.state]
+            ? h(
+                'div',
+                {
+                    class: `c-contentCards-${this.state}`
+                },
+                this.$scopedSlots[this.state]({
+                    cards: this.cards
+                })
+            )
+            : h('');
     }
 };
