@@ -23,11 +23,13 @@ describe('checkout mapper', () => {
             customer
         });
 
+        const customerRequest = requestBody[0].value;
+
         // Assert
-        expect(requestBody.customer.firstName).toBe(customer.firstName);
-        expect(requestBody.customer.lastName).toBe(customer.lastName);
-        expect(requestBody.customer.phoneNumber).toBe(customer.mobileNumber);
-        expect(requestBody.customer.dateOfBirth).toBe(null);
+        expect(customerRequest.firstName).toBe(customer.firstName);
+        expect(customerRequest.lastName).toBe(customer.lastName);
+        expect(customerRequest.phoneNumber).toBe(customer.mobileNumber);
+        expect(customerRequest.dateOfBirth).toBe(null);
     });
 
     it('should map address correctly', () => {
@@ -45,15 +47,36 @@ describe('checkout mapper', () => {
             address
         });
 
+        const locationRequest = requestBody[1].value.location;
+
         // Assert
-        expect(requestBody.fulfilment.location.address.postalCode).toBe(address.postcode);
-        expect(requestBody.fulfilment.location.address.lines).toStrictEqual([
+        expect(locationRequest.address.postalCode).toBe(address.postcode);
+        expect(locationRequest.address.lines).toStrictEqual([
             address.line1,
             address.line2,
             '',
             address.city,
             ''
         ]);
+    });
+
+    it('should map time correctly', () => {
+        // Arrange
+        const time = {
+            from: '2021-01-01T01:00:00+0000',
+            to: '2021-01-01T01:00:00+0000'
+        };
+
+        // Act
+        const requestBody = mapUpdateCheckoutRequest({
+            ...defaultParams,
+            time
+        });
+
+        const timeRequest = requestBody[1].value.time;
+
+        // Assert
+        expect(timeRequest).toBe(time);
     });
 
     describe('when checkout method is not delivery', () => {
@@ -75,8 +98,10 @@ describe('checkout mapper', () => {
                 isCheckoutMethodDelivery
             });
 
+            const locationRequest = requestBody[1].value.location;
+
             // Assert
-            expect(requestBody.fulfilment.location.address).toBeUndefined();
+            expect(locationRequest.address).toBeUndefined();
         });
     });
 
@@ -90,8 +115,10 @@ describe('checkout mapper', () => {
             userNote
         });
 
+        const notesRequest = requestBody[2].value;
+
         // Assert
-        expect(requestBody.notes.length).toBe(1);
-        expect(requestBody.notes[0].note).toBe(userNote);
+        expect(notesRequest.length).toBe(1);
+        expect(notesRequest[0].note).toBe(userNote);
     });
 });
