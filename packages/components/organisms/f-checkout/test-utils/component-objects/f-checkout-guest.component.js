@@ -31,6 +31,26 @@ class GuestCheckout extends Page {
     clickLoginButton(){
         return this.loginButton.click();
     }
+
+    doesFieldExist(field){
+       return checkout.doesFieldExist(field);
+    }
+
+    clearCheckoutForm(field){
+        return checkout.clearCheckoutForm(field);
+    }
+
+    goToPayment(){
+        return checkout.goToPayment();
+    }
+
+    isFieldErrorDisplayed(field){
+        return checkout.isFieldErrorDisplayed(field);
+    }
+
+    populateCheckoutForm(field){
+        return checkout.populateCheckoutForm(field)
+    }
 }
 
 module.exports = GuestCheckout;
