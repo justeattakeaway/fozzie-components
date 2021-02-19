@@ -1,27 +1,33 @@
 <template>
-    <div
+    <component
+        :is="showLink ? 'a' : 'div'"
+        :href="showLink ? url : null"
         :data-test-id="testId"
         :class="['c-contentCards-homePromotionCard2', $style['c-contentCards-homePromotionCard2'], {
             [$style['c-contentCards-homePromotionCard2--light']]: isLightText
         }]"
-        :style="{ background: contentBackgroundColor }">
+        :style="{ background: contentBackgroundColor }"
+        @click="onClickContentCard"
+    >
         <div
+            :data-test-id="imageTestId"
             :class="['c-contentCards-homePromotionCard2-image', $style['c-contentCards-homePromotionCard2-image']]"
             :style="{ backgroundImage: `url('${image}')` }" />
         <h3
+            :data-test-id="titleTestId"
             :class="['c-contentCards-homePromotionCard2-title', $style['c-contentCards-homePromotionCard2-title']]">
             {{ title }}
         </h3>
         <template v-for="(textItem, textIndex) in description">
             <p
                 :key="textIndex"
+                :data-test-id="textTestId"
                 :class="['c-contentCards-homePromotionCard2-text', $style['c-contentCards-homePromotionCard2-text']]">
                 {{ textItem }}
             </p>
         </template>
         <p v-if="url">
-            <a
-                :href="url"
+            <span
                 :data-test-id="ctaTestId"
                 :class="[
                     'o-link--full',
@@ -29,9 +35,9 @@
                     'u-color-link',
                     'u-text-left',
                     $style['c-contentCards-homePromotionCard2-link']
-                ]">{{ ctaText }}</a>
+                ]">{{ ctaText }}</span>
         </p>
-    </div>
+    </component>
 </template>
 
 <script>
@@ -43,11 +49,18 @@ export default {
             type: Object,
             default: () => ({})
         },
+
+        noLink: {
+            type: Boolean,
+            default: false
+        },
+
         testId: {
             type: String,
-            default: null
+            default: 'home-promotion-2'
         }
     },
+
     data () {
         const {
             image,
@@ -69,9 +82,22 @@ export default {
             description
         };
     },
+
     computed: {
         ctaTestId () {
             return this.testId ? `${this.testId}--cta` : false;
+        },
+
+        textTestId () {
+            return this.testId ? `${this.testId}--text` : false;
+        },
+
+        titleTestId () {
+            return this.testId ? `${this.testId}--title` : false;
+        },
+
+        imageTestId () {
+            return this.testId ? `${this.testId}--backgroundImage` : false;
         },
 
         /**
@@ -93,6 +119,35 @@ export default {
             } catch {
                 return false;
             }
+        },
+
+        /**
+         * Encapsulated behaviour to ensure that the link is only shown when not contained within an HPC1 card
+         * @return {boolean}
+         */
+        showLink () {
+            return this.url && !this.noLink;
+        }
+    },
+
+    inject: [
+        'emitCardView',
+        'emitCardClick'
+    ],
+
+    mounted () {
+        this.onViewContentCard();
+    },
+
+    methods: {
+        onViewContentCard () {
+            this.emitCardView(this.card);
+        },
+
+        onClickContentCard () {
+            if (!this.noLink) {
+                this.emitCardClick(this.card);
+            }
         }
     }
 };
@@ -100,18 +155,23 @@ export default {
 
 <style lang="scss" module>
     .c-contentCards-homePromotionCard2 {
+        text-decoration: initial;
         position: relative;
         display: block;
         width: 100%;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-        border-radius: $post-order-card-radius;
-        padding: spacing(x3) calc(35% + 8px) spacing(x3) spacing(x3);
+        border-radius: 4px;
+        padding: spacing(x2) calc(35% + #{spacing()}) spacing(x2) spacing(x2);
+        max-width: 800px; //to replicate max-width of searchbox
+        margin: auto;
 
         @include media('>narrow') {
             padding-right: 208px;
+            width: 95%; //to replicate width of searchbox
         }
 
         .c-contentCards-homePromotionCard2-link {
+            @include font-size('body-l', false);
             text-decoration: none;
             font-weight: $font-weight-bold;
 
@@ -140,6 +200,14 @@ export default {
             .c-contentCards-homePromotionCard2-title {
                 color: $grey--lighter;
             }
+        }
+    }
+
+    .c-contentCards-homePromotionCard2-title {
+        @include font-size(heading-m);
+
+        @include media('<=narrow') {
+            @include font-size(heading-m, true, narrow);
         }
     }
 

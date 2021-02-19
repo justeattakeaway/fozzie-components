@@ -1,18 +1,26 @@
 <template>
-    <div
+    <component
+        :is="url ? 'a' : 'div'"
+        :href="url"
         :data-test-id="testId"
         :style="{ background: backgroundColor }"
-        :class="['c-contentCards-homePromotionCard1', $style['c-contentCards-homePromotionCard1']]">
+        :class="['c-contentCards-homePromotionCard1', $style['c-contentCards-homePromotionCard1']]"
+        @click="onClickContentCard"
+    >
         <div
             :data-test-id="containerTestId"
             :class="['l-container', 'c-contentCards-homePromotionCard1-container', $style['c-contentCards-homePromotionCard1-container']]"
             :style="{ maxWidth: `${containerMaxWidth}px` }">
-            <div :class="['c-contentCards-homePromotionCard1-iconPane', $style['c-contentCards-homePromotionCard1-iconPane']]">
+            <div
+                :data-test-id="headerTestId"
+                :class="['c-contentCards-homePromotionCard1-iconPane', $style['c-contentCards-homePromotionCard1-iconPane']]">
                 <img
+                    :data-test-id="imageTestId"
                     :class="[$style['c-contentCards-homePromotionCard1-icon']]"
                     :src="icon"
                     alt="">
                 <h3
+                    :data-test-id="subtitleTestId"
                     :class="[$style['c-contentCards-homePromotionCard1-subtitle'], {
                         [$style['c-contentCards-homePromotionCard1-subtitle--light']]: isLightSubtitle
                     }]"
@@ -21,10 +29,13 @@
                 </h3>
             </div>
             <div :class="['c-contentCards-homePromotionCard1-innerCard', $style['c-contentCards-homePromotionCard1-innerCard']]">
-                <home-promotion-card2 :card="card" />
+                <home-promotion-card2
+                    :card="card"
+                    :no-link="true"
+                />
             </div>
         </div>
-    </div>
+    </component>
 </template>
 
 <script>
@@ -35,20 +46,24 @@ export default {
     components: {
         HomePromotionCard2
     },
+
     props: {
         card: {
             type: Object,
             default: () => ({})
         },
+
         containerMaxWidth: {
             type: Number,
             default: 1272
         },
+
         testId: {
             type: String,
-            default: null
+            default: 'home-promotion-1'
         }
     },
+
     data () {
         const {
             image,
@@ -78,6 +93,7 @@ export default {
             subtitle
         };
     },
+
     computed: {
         ctaTestId () {
             return this.testId ? `${this.testId}--cta` : false;
@@ -87,6 +103,17 @@ export default {
             return this.testId ? `${this.testId}--container` : false;
         },
 
+        headerTestId () {
+            return this.testId ? `${this.testId}--header` : false;
+        },
+
+        imageTestId () {
+            return this.testId ? `${this.testId}--image` : false;
+        },
+
+        subtitleTestId () {
+            return this.testId ? `${this.testId}--subtitle` : false;
+        },
         /**
          * If background colour is set *and* dark, then use a light text colour for the subtitle for A11y
          * @return {boolean}
@@ -100,12 +127,24 @@ export default {
                 return false;
             }
         }
+    },
+
+    inject: [
+        'emitCardClick'
+    ],
+
+    methods: {
+        onClickContentCard () {
+            this.emitCardClick(this.card);
+        }
     }
 };
 </script>
 
 <style lang="scss" module>
     .c-contentCards-homePromotionCard1 {
+        text-decoration: initial;
+        display: block;
         padding: spacing(x3) 0 spacing(x2);
         width: 100%;
 
@@ -126,7 +165,7 @@ export default {
         align-items: center;
         justify-content: center;
         width: 100%;
-        margin-bottom: spacing(x3);
+        margin-bottom: spacing(x2);
 
         @include media('>mid') {
             width: 50%;
@@ -144,6 +183,7 @@ export default {
 
         @include media('>mid') {
             display: unset;
+            @include font-size(heading-m);
         }
     }
 
@@ -153,13 +193,10 @@ export default {
 
     .c-contentCards-homePromotionCard1-innerCard {
         width: 100%;
-        padding-left: spacing(x2);
-        padding-right: spacing(x2);
+        padding: 0;
 
         @include media('>mid') {
             width: 50%;
-            padding-left: 0;
-            padding-right: spacing(x4);
 
             :global(.c-contentCards-homePromotionCard2) {
                 padding-left: spacing(x5);

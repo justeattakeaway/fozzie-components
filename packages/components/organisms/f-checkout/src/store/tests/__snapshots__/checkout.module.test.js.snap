@@ -13,6 +13,7 @@ Object {
     "isAsapAvailable": false,
     "times": Array [],
   },
+  "basketTotal": 0,
   "customer": Object {
     "email": "",
     "firstName": "Joe",
@@ -22,6 +23,7 @@ Object {
   "id": "12345",
   "isFulfillable": true,
   "isLoggedIn": false,
+  "issues": Array [],
   "messages": Array [
     Object {
       "message": Object {
@@ -44,6 +46,7 @@ Object {
       "type": "allergy",
     },
   ],
+  "restaurantId": "",
   "serviceType": "delivery",
   "time": Object {
     "from": "2020-01-01T00:00+00:00",

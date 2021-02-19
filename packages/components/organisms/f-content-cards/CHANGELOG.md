@@ -4,12 +4,43 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.2.0
+------------------------------
+*February 15, 2020*
+
+### Changed
+- Home Promotion Cards 1 & 2 now use the tracking as supplied to the containing
+  Content Cards component
+- Home Promotion Cards 1 & 2 now render as a link for the full banner, rather than
+  just a link for the CTA
+
+
+v3.1.1
+------------------------------
+*February 10, 2020*
+
+### Changed
+- Some style changes for home promotion cards
+
+
+v3.1.0
+------------------------------
+*February 9, 2020*
+
+### Added
+- `data-test-ids` for home promotion card components
+- `test` folder with `accessibility` and `component` specs for home promotion cards 1 and 2
+- `test-utils` folder with `selectors` file for home promotion tests and component classes for cards 1 and 2
+- `@justeat/f-wdio-utils` package
+
+
 v3.0.0-beta.1
 ------------------------------
 *January 05, 2021*
 
 ### Fixed
 - Old references to font-size keys updated.
+
 ### Changed
 - Updated config for latest `sass-loader`.
 - Switches import in `common.scss` in line with fozzie v5-beta.

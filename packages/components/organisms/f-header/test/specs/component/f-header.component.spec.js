@@ -1,85 +1,116 @@
-import HeaderComponent from '../../../test-utils/component-objects/f-header.component';
-import forEach from 'mocha-each';
-const path = 'iframe.html?id=components-organisms--' // storybook url for all components - could move to config.
-const offers = '&knob-Show%20offers%20link=true'
-const delivery = '&knob-Show%20delivery%20enquiry=true'
+const Header = require('../../../test-utils/component-objects/f-header.component');
+const header = new Header();
+const forEach = require('mocha-each');
 
 describe('f-header component tests', () => {
     beforeEach(() => {
-        browser.url(`${path}header-component${offers}${delivery}`);
+        header.open();
+        header.waitForComponent();
     });
 
-    it('should display the f-header component', () => {
+    it('should display component', () => {
         // Assert
-        expect(HeaderComponent.isLogoDisplayed()).toBe(true);
+        expect(header.isComponentDisplayed()).toBe(true);
     });
 
-    it('should only show the default navigation fields', () => {
+    it('should display logo', () => {
+        // Assert
+        expect(header.isLogoDisplayed()).toBe(true);
+    })
+
+    forEach(['help', 'countrySelector', 'userAccount'])
+    .it('should only display the default navigation fields', field => {
+        // Assert
+        expect(header.isFieldLinkDisplayed(field)).toBe(true); 
+        expect(header.isFieldLinkDisplayed('offers')).toBe(false);
+    });
+
+    forEach(['offers', 'help', 'delivery', 'userAccount', 'countrySelector'])
+    .it('should display extra fields as well as default when selected', field => {
         // Act
-        browser.url(`${path}header-component`);
+        header.openWithExtraFeatures();
 
         // Assert
-        expect(HeaderComponent.isFieldLinkDisplayed('offers')).toBe(false); 
-        expect(HeaderComponent.isFieldLinkDisplayed('help')).toBe(true);
+        expect(header.isFieldLinkDisplayed(field)).toBe(true);
     });
 
-    forEach(['offers', 'help', 'delivery', 'userAccount'])
-    .it('should show all the links and icons', field => {
-        // Assert
-        expect(HeaderComponent.isFieldLinkDisplayed(field)).toBe(true);
-    });
-
-    it('should alter visibility of navbar depending on window size', () => {
+    forEach(['help', 'delivery', 'userAccount', 'countrySelector'])
+    .it('should hide all navigation links, except offers link, when in mobile mode', field => {
         // Act
-        browser.setWindowSize(500, 500);
+        browser.setWindowSize(500, 1000);
+        header.openWithExtraFeatures();
 
         // Assert
-        expect(HeaderComponent.isMobileNavigationBarVisible()).toBe(true);
-        expect(HeaderComponent.isFieldLinkDisplayed('help')).toBe(false);
+        expect(header.isMobileNavigationBarDisplayed()).toBe(true);
+        expect(header.isFieldLinkDisplayed(field)).toBe(false);
+        expect(header.isFieldLinkDisplayed('offers')).toBe(true);
     });
 
-    it('should only show one offers icon in desktop view and two in mobile', () => {
+    forEach(['help', 'countrySelector', 'userAccount'])
+    .it('should display navigation fields when burger menu has been opened', field => {
         // Act
-        browser.setWindowSize(500, 500);
-        HeaderComponent.openMobileNavigation();
+        browser.setWindowSize(500, 1000);
+        header.openMobileNavigation();
 
         // Assert
-        expect(HeaderComponent.isMobileOffersIconDisplayed()).toBe(true);
-        expect(HeaderComponent.isWebOffersIconDisplayed()).toBe(true);
+        expect(header.isFieldLinkDisplayed(field)).toBe(true);
+    });
 
+    it('should change the url to "help" when help-link is clicked', () => {
         // Act
         browser.setWindowSize(1000, 1000);
-
-        // Assert
-        // expect(HeaderComponent.isMobileOffersIconDisplayed()).toBe(false);
-        //this is currently showing as true due to error in navigation component
-        expect(HeaderComponent.isWebOffersIconDisplayed()).toBe(true);
-    });
-
-    it('should change url when help-link is clicked', () => {
-        // Act
-        browser.setWindowSize(1000, 1000);
-        HeaderComponent.clickHelpLink();
+        header.clickHelpLink();
 
         // Assert
         expect(browser.getUrl()).toContain('/help');
     });
 
-    it('should change the url to offers when offers link is clicked', () => {
+    it('should change the url to "offers" when offers link is clicked', () => {
         // Act
-        HeaderComponent.clickOffersLink();
+        header.openWithExtraFeatures();
+        header.clickOffersLink();
 
         // Assert
         expect(browser.getUrl()).toContain('/offers');
     });
 
-    forEach(['offers', 'help', 'delivery', 'userAccount'])
-    .it.skip('should show navigation fields when mobile-navigation has been opened', field => {
+    forEach([['gb', '.co.uk'], ['au', 'au'], ['at', 'at'], ['be', 'be-en'], ['bg', 'bg'], ['ca_en', 'skipthedishes.com'], ['ca_fr', 'skipthedishes.com/fr'], ['dk', '.dk'], ['jet_fr', '.fr'], ['de', '.de'], ['ie', '.ie'], ['il', '.il'], ['it', '.it'], 
+    ['lu', 'lu-en'], ['nl', '.nl'], ['nz', '.nz'], ['no', '.no'], ['pl', '.pl'], ['pt', '/pt'], ['ro', '/ro'], ['es', '.es'], ['ch_ch', '.ch'], ['ch_en', '/en'], ['ch_fr', '/fr'] ])
+    .it('should display all countries and redirect to correct URL', (country, expectedUrl) => {
         // Act
-        browser.setWindowSize(500, 1000);
-        HeaderComponent.openMobileNavigation();
+        browser.maximizeWindow();
+        header.moveToCountrySelector();
+        header.expectedCountry = country;
 
         // Assert
-        expect(HeaderComponent.isFieldLinkDisplayed(field)).toBe(true);
+        expect(header.isCountryLinkDisplayed()).toBe(true);
+
+        // Act
+        header.clickCountryListItem();
+
+        // Assert
+        expect(browser.getUrl()).toContain(expectedUrl);
+    });
+
+    forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
+    .it('should display all countries when in mobile mode', country => {
+        // Act
+        browser.setWindowSize(500, 1000);
+        header.openMobileNavigation();
+        header.openCountrySelector();
+        header.expectedCountry = country;
+
+        // Assert
+        expect(header.isCountryLinkDisplayed()).toBe(true);
+    });
+
+    forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
+    .it('should display correct country selector icon depending on which locale is chosen', country => {
+        // Act
+        browser.maximizeWindow();
+        header.openWithLocale(country);
+    
+        // Assert
+        expect(header.isCurrentCountryIconDisplayed(country)).toBe(true);
     });
 });

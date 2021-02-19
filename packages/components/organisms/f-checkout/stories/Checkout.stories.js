@@ -18,20 +18,23 @@ export default {
 
 Vue.use(Vuex);
 
-const checkoutId = 'checkoutId';
-const deliveryUrl = '/checkout-delivery.json';
-const collectionUrl = '/checkout-collection.json';
+const getCheckoutDeliveryUrl = '/checkout-delivery.json';
+const getCheckoutCollectionUrl = '/checkout-collection.json';
 const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
 const createGuestUrl = '/create-guest.json';
 const getBasketDeliveryUrl = '/get-basket-delivery.json';
 const getBasketCollectionUrl = '/get-basket-collection.json';
+const updateCheckoutUrl = '/update-checkout.json';
+const getAddressUrl = '/get-address.json';
 
-CheckoutMock.setupCheckoutMethod(deliveryUrl);
-CheckoutMock.setupCheckoutMethod(collectionUrl);
+CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUrl);
+CheckoutMock.setupCheckoutMethod(getCheckoutCollectionUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentUrl);
 CheckoutMock.setupCheckoutMethod(createGuestUrl);
 CheckoutMock.setupCheckoutMethod(getBasketDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getBasketCollectionUrl);
+CheckoutMock.setupCheckoutMethod(updateCheckoutUrl);
+CheckoutMock.setupCheckoutMethod(getAddressUrl);
 CheckoutMock.passThroughAny();
 
 export const CheckoutComponent = () => ({
@@ -40,11 +43,11 @@ export const CheckoutComponent = () => ({
         locale: {
             default: select('Locale', [ENGLISH_LOCALE])
         },
-        checkoutId: {
-            default: text('Checkout ID', checkoutId)
+        updateCheckoutUrl: {
+            default: select('Update Checkout Url', [updateCheckoutUrl], updateCheckoutUrl)
         },
-        checkoutUrl: {
-            default: select('Checkout Url', [deliveryUrl, collectionUrl, 'An invalid URL'], deliveryUrl)
+        getCheckoutUrl: {
+            default: select('Get Checkout Url', [getCheckoutDeliveryUrl, getCheckoutCollectionUrl, 'An invalid URL'], getCheckoutDeliveryUrl)
         },
         checkoutAvailableFulfilmentUrl: {
             default: select('Available Fulfilment Url', [checkoutAvailableFulfilmentUrl], checkoutAvailableFulfilmentUrl)
@@ -60,6 +63,9 @@ export const CheckoutComponent = () => ({
         },
         loginUrl: {
             default: text('Login Url', '/login')
+        },
+        getAddressUrl: {
+            default: text('Get Address Url', getAddressUrl)
         }
     },
     store: new Vuex.Store({
@@ -68,16 +74,17 @@ export const CheckoutComponent = () => ({
         }
     }),
     template: '<vue-checkout ' +
-        ':checkoutId="checkoutId" ' +
-        ':checkoutUrl="checkoutUrl" ' +
+        ':getCheckoutUrl="getCheckoutUrl" ' +
+        ':updateCheckoutUrl="updateCheckoutUrl" ' +
         ':checkout-available-fulfilment-url="checkoutAvailableFulfilmentUrl" ' +
         ':create-guest-url="createGuestUrl" ' +
         ':get-basket-url="getBasketUrl" ' +
         ':authToken="authToken" ' +
         ':locale="locale" ' +
         ':loginUrl="loginUrl" ' +
+        ':getAddressUrl="getAddressUrl" ' +
         // eslint-disable-next-line no-template-curly-in-string
-        ' :key="`${locale},${checkoutId},${checkoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl}`" />'
+        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';

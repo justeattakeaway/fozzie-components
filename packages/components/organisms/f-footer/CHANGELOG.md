@@ -4,6 +4,29 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.8.3
+------------------------------
+*February 9, 2021*
+
+### Added
+- All tenants to a tenant prop for storybook f-footer story
+- New modifier css class to fix footer items alignment 
+
+
+v4.8.2
+------------------------------
+*February 4, 2021*
+
+### Changed
+- AUS Menulog footer links update
+
+### Added
+- "McDonald's delivery" to "Brands" section
+
+### Removed
+- "Our Price Promise" from "A bit more about us" section
+
+
 v4.8.1
 ------------------------------
 *January 29, 2021*

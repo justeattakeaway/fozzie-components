@@ -3,12 +3,90 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.51.0
+v0.57.0
 -------------------------------
-*February 09, 2021*
+*February 15, 2021*
+
+### Added
+- Logic to choose closest address for uk tenant
+
+
+v0.56.2
+-------------------------------
+*February 12, 2021*
+
+### Fixed
+- Endpoint error logging.
+
+
+v0.56.1
+-------------------------------
+*February 11, 2021*
 
 ### Changed
-- Added test cases to f-checkout-guest.component.spec.js
+- Used correct comment format to prevent it being shown on UI
+
+
+v0.56.0
+-------------------------------
+*February 11, 2021*
+
+### Added
+- logging to `Checkout` and `Header` components.
+- Tests to cover changes.
+
+
+v0.55.0
+-------------------------------
+*February 11, 2021*
+### Added
+- Added `vue-svg-loader` to Webpack config
+
+### Changed
+- Utilised `vue-svg-loader` for error page SVG
+
+
+v0.54.0
+-------------------------------
+*February 10, 2021*
+
+### Added
+- `basketTotal` and `restaurantId` to the state, being retrieved from the Basket API.
+
+### Changed
+- Now always calling `loadBasket` regardless of if it's a guest or authenticated user.
+
+
+v0.53.0
+-------------------------------
+*February 9, 2021*
+
+### Added
+- Loading customer address from API endpoint if Checkout endpoint did not return it
+
+
+v0.52.0
+-------------------------------
+*February 9, 2021*
+
+### Added
+- `updateCheckoutUrl` and `updateCheckoutTimeout` props.
+
+### Changed
+- Renamed `checkoutUrl` prop to `getCheckoutUrl`.
+
+### Removed
+- `checkoutId` prop.
+
+
+v0.51.0
+-------------------------------
+*February 5, 2021*
+
+### Added
+- Axios mock to Storybook for checkout PATCH requests.
+- PATCH response handling, by adding `issues` and `isFulfillable` to state.
+
 
 v0.50.0
 -------------------------------

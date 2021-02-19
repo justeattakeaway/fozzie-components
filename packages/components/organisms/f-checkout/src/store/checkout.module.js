@@ -1,4 +1,5 @@
 import axios from 'axios';
+import addressService from '../services/addressService';
 
 import {
     UPDATE_AUTH,
@@ -7,6 +8,8 @@ import {
     UPDATE_CUSTOMER_DETAILS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
+    UPDATE_IS_FULFILLABLE,
+    UPDATE_ISSUES,
     UPDATE_STATE,
     UPDATE_USER_NOTE
 } from './mutation-types';
@@ -17,6 +20,8 @@ export default {
     state: () => ({
         id: '',
         serviceType: '',
+        restaurantId: '',
+        basketTotal: 0,
         customer: {
             firstName: '',
             lastName: '',
@@ -35,6 +40,7 @@ export default {
         },
         userNote: '',
         isFulfillable: true,
+        issues: [],
         notices: [],
         messages: [],
         availableFulfilment: {
@@ -78,7 +84,7 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         // eslint-disable-next-line no-unused-vars
-        patchCheckout: async ({ state }, {
+        updateCheckout: async ({ commit, state }, {
             url, data, timeout
         }) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
@@ -94,8 +100,12 @@ export default {
                 timeout
             };
 
-            // eslint-disable-next-line no-unused-vars
-            const response = await axios.patch(url, data, config);
+            // TODO - Handle and log any errors
+            const { data: responseData } = await axios.patch(url, data, config);
+            const { issues, isFulfillable } = responseData;
+
+            commit(UPDATE_IS_FULFILLABLE, isFulfillable);
+            commit(UPDATE_ISSUES, issues);
         },
 
         /**
@@ -165,10 +175,43 @@ export default {
 
             const { data } = await axios.get(url, config);
             const basketDetails = {
-                serviceType: data.ServiceType.toLowerCase()
+                serviceType: data.ServiceType.toLowerCase(),
+                restaurantId: data.RestaurantId,
+                basketTotal: data.BasketSummary.BasketTotals.Total
             };
 
             commit(UPDATE_BASKET_DETAILS, basketDetails);
+        },
+
+        /**
+         * Get the address details from the backend and update the state.
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getAddress: async ({ commit, state }, {
+            url,
+            tenant,
+            language,
+            timeout
+        }) => {
+            const authHeader = state.authToken && `Bearer ${state.authToken}`;
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept-Language': language,
+                    ...(state.isLoggedIn && {
+                        Authorization: authHeader
+                    })
+                },
+                timeout
+            };
+
+            const { data } = await axios.get(url, config);
+
+            const addressDetails = addressService.getClosestAddress(data.Addresses, tenant);
+
+            commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
         },
 
         setAuthToken: ({ commit }, authToken) => {
@@ -264,6 +307,14 @@ export default {
                 ...state.time,
                 ...time
             };
+        },
+
+        [UPDATE_IS_FULFILLABLE]: (state, isFulfillable) => {
+            state.isFulfillable = isFulfillable;
+        },
+
+        [UPDATE_ISSUES]: (state, issues) => {
+            state.issues = issues;
         },
 
         [UPDATE_USER_NOTE]: (state, userNote) => {

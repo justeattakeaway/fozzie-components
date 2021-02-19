@@ -8,7 +8,7 @@ import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
 import {
-    defaultState, defaultActions, i18n, createStore
+    defaultState, defaultActions, i18n, createStore, $logger
 } from './helpers/setup';
 
 const localVue = createLocalVue();
@@ -53,19 +53,21 @@ const $v = {
 
 describe('Checkout', () => {
     allure.feature('Checkout');
-    const checkoutId = 'abc123def456';
-    const checkoutUrl = 'http://localhost/checkout';
+    const updateCheckoutUrl = 'http://localhost/updatecheckout';
+    const getCheckoutUrl = 'http://localhost/checkout';
     const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
     const loginUrl = 'http://localhost/login';
     const createGuestUrl = 'http://localhost/createguestuser';
     const getBasketUrl = 'http://localhost/getbasket';
+    const getAddressUrl = 'http://localhost/getaddress';
     const propsData = {
-        checkoutId,
-        checkoutUrl,
+        updateCheckoutUrl,
+        getCheckoutUrl,
         loginUrl,
         checkoutAvailableFulfilmentUrl,
         createGuestUrl,
-        getBasketUrl
+        getBasketUrl,
+        getAddressUrl
     };
 
     it('should be defined', () => {
@@ -317,6 +319,90 @@ describe('Checkout', () => {
                 expect(wrapper.vm.tenant).toEqual(tenant);
             });
         });
+
+        describe('shouldLoadAddress ::', () => {
+            it('should return `true` for delivery order without address when user is logged in', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultState,
+                        isLoggedIn: true,
+                        serviceType: CHECKOUT_METHOD_DELIVERY,
+                        address: {}
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadAddress;
+
+                // Assert
+                expect(result).toBe(true);
+            });
+
+            it('should return `false` if `isLoggedIn` is `false`', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultState,
+                        isLoggedIn: false,
+                        serviceType: CHECKOUT_METHOD_DELIVERY,
+                        address: {}
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadAddress;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should return `false` if `serviceType` is `collection`', async () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultState,
+                        isLoggedIn: true,
+                        serviceType: CHECKOUT_METHOD_COLLECTION,
+                        address: {}
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+                const result = await wrapper.vm.shouldLoadAddress;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should return `false` if address is set', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultState,
+                        isLoggedIn: true,
+                        serviceType: CHECKOUT_METHOD_DELIVERY,
+                        address: { line1: 'Fleet Place House', postcode: 'EC4M 7RF', city: 'London' }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadAddress;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+        });
     });
 
     describe('mounted ::', () => {
@@ -367,6 +453,22 @@ describe('Checkout', () => {
                 expect(setAuthTokenSpy).toHaveBeenCalledWith(propsDataWithAuthToken.authToken);
             });
 
+            it('should call `loadBasket`', async () => {
+                // Arrange & Act
+                const loadBasketSpy = jest.spyOn(VueCheckout.methods, 'loadBasket');
+
+                shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+                await flushPromises();
+
+                // Assert
+                expect(loadBasketSpy).toHaveBeenCalled();
+            });
+
             it('should call `loadAvailableFulfilment`', async () => {
                 // Arrange & Act
                 const loadAvailableFulfilmentSpy = jest.spyOn(VueCheckout.methods, 'loadAvailableFulfilment');
@@ -383,10 +485,11 @@ describe('Checkout', () => {
                 expect(loadAvailableFulfilmentSpy).toHaveBeenCalled();
             });
 
-            describe('if isLoggedIn set to `false`', () => {
-                it('should call `loadBasket`', async () => {
+            describe('if shouldLoadAddress returns `false`', () => {
+                it('should not call `loadAddress`', async () => {
                     // Arrange & Act
-                    const loadBasketSpy = jest.spyOn(VueCheckout.methods, 'loadBasket');
+                    const loadAddressSpy = jest.spyOn(VueCheckout.methods, 'loadAddress');
+                    jest.spyOn(VueCheckout.computed, 'shouldLoadAddress').mockReturnValueOnce(false);
 
                     shallowMount(VueCheckout, {
                         store: createStore(),
@@ -397,9 +500,30 @@ describe('Checkout', () => {
                     await flushPromises();
 
                     // Assert
-                    expect(loadBasketSpy).toHaveBeenCalled();
+                    expect(loadAddressSpy).not.toHaveBeenCalled();
                 });
+            });
 
+            describe('if shouldLoadAddress returns `true`', () => {
+                it('should call `loadAddress`', async () => {
+                    // Arrange & Act
+                    const loadAddressSpy = jest.spyOn(VueCheckout.methods, 'loadAddress');
+                    jest.spyOn(VueCheckout.computed, 'shouldLoadAddress').mockReturnValueOnce(true);
+
+                    shallowMount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                    await flushPromises();
+
+                    // Assert
+                    expect(loadAddressSpy).toHaveBeenCalled();
+                });
+            });
+
+            describe('if isLoggedIn set to `false`', () => {
                 it('should not call `loadCheckout`', async () => {
                     // Arrange & Act
                     const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
@@ -418,22 +542,6 @@ describe('Checkout', () => {
             });
 
             describe('if isLoggedIn set to `true`', () => {
-                it('should not call `loadBasket`', async () => {
-                    // Arrange & Act
-                    const loadBasketSpy = jest.spyOn(VueCheckout.methods, 'loadBasket');
-
-                    shallowMount(VueCheckout, {
-                        store: createStore({ ...defaultState, isLoggedIn: true }),
-                        i18n,
-                        localVue,
-                        propsData
-                    });
-                    await flushPromises();
-
-                    // Assert
-                    expect(loadBasketSpy).not.toHaveBeenCalled();
-                });
-
                 it('should call `loadCheckout`', async () => {
                     // Arrange & Act
                     const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
@@ -462,7 +570,10 @@ describe('Checkout', () => {
                             store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
                             i18n,
                             localVue,
-                            propsData
+                            propsData,
+                            mocks: {
+                                $logger
+                            }
                         });
                     });
 
@@ -487,6 +598,14 @@ describe('Checkout', () => {
                         // Assert
                         expect(wrapper.emitted(EventNames.CheckoutSuccess)[0][0]).toEqual(payload);
                     });
+
+                    it('should call `logInfo`', async () => {
+                        // Act
+                        await wrapper.vm.onFormSubmit();
+
+                        // Assert
+                        expect($logger.logInfo).toHaveBeenCalled();
+                    });
                 });
 
                 it('should show error message and emit failure event when the mobile number field is not populated', async () => {
@@ -502,7 +621,10 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -528,7 +650,10 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -555,7 +680,10 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -575,11 +703,40 @@ describe('Checkout', () => {
                         store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Assert
                     expect(wrapper.vm.$v.fulfilment).toBeUndefined();
+                });
+
+                it('should call `logWarn` if field is invalid', async () => {
+                    // Arrange
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultState,
+                            serviceType: CHECKOUT_METHOD_DELIVERY,
+                            customer: {
+                                ...defaultState.customer,
+                                mobileNumber: ''
+                            }
+                        }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
+                    });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect($logger.logWarn).toHaveBeenCalled();
                 });
             });
 
@@ -592,7 +749,10 @@ describe('Checkout', () => {
                             store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_DELIVERY }),
                             i18n,
                             localVue,
-                            propsData
+                            propsData,
+                            mocks: {
+                                $logger
+                            }
                         });
                     });
 
@@ -617,6 +777,14 @@ describe('Checkout', () => {
                         // Assert
                         expect(wrapper.emitted(EventNames.CheckoutSuccess)[0][0]).toEqual(payload);
                     });
+
+                    it('should call `logInfo`', async () => {
+                        // Act
+                        await wrapper.vm.onFormSubmit();
+
+                        // Assert
+                        expect($logger.logInfo).toHaveBeenCalled();
+                    });
                 });
 
                 it('should emit failure event and display error message when address line1 input field is empty', async () => {
@@ -632,7 +800,10 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -658,7 +829,10 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -684,7 +858,10 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -710,7 +887,10 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -737,7 +917,10 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -756,6 +939,32 @@ describe('Checkout', () => {
                     expect(wrapper.vm.$v.address.city).toBeDefined();
                     expect(wrapper.vm.$v.address.postcode).toBeDefined();
                 });
+
+                it('should call `logWarn` if field is invalid', async () => {
+                    // Arrange
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultState,
+                            serviceType: CHECKOUT_METHOD_DELIVERY,
+                            address: {
+                                ...defaultState.address,
+                                postcode: 'EC4M 7R'
+                            }
+                        }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
+                    });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect($logger.logWarn).toHaveBeenCalled();
+                });
             });
 
             describe('if `isLoggedIn` set to `false`', () => {
@@ -773,7 +982,10 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -793,7 +1005,10 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -818,7 +1033,10 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -845,7 +1063,10 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -872,7 +1093,10 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -899,7 +1123,10 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -925,7 +1152,10 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -945,7 +1175,10 @@ describe('Checkout', () => {
                         }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Assert
@@ -984,7 +1217,10 @@ describe('Checkout', () => {
                     }),
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
                 });
 
                 // Act
@@ -999,23 +1235,41 @@ describe('Checkout', () => {
             });
 
             describe('when `createGuestUser` request fails', () => {
-                it('should emit `CheckoutSetupGuestFailure` event', async () => {
-                    // Arrange
+                let wrapper;
+
+                beforeEach(() => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
-                    const wrapper = mount(VueCheckout, {
+                    wrapper = mount(VueCheckout, {
                         store: createStore(defaultState, { ...defaultActions, createGuestUser: jest.fn(async () => Promise.reject()) }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
+                });
 
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
+                it('should emit `CheckoutSetupGuestFailure` event', async () => {
                     // Act
                     await wrapper.vm.setupGuestUser();
 
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutSetupGuestSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutSetupGuestFailure).length).toBe(1);
+                });
+
+                it('should call `logError`', async () => {
+                    // Act
+                    await wrapper.vm.setupGuestUser();
+
+                    // Assert
+                    expect($logger.logError).toHaveBeenCalled();
                 });
             });
 
@@ -1028,7 +1282,10 @@ describe('Checkout', () => {
                         store: createStore(),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -1047,17 +1304,23 @@ describe('Checkout', () => {
             });
 
             describe('when `getCheckout` request fails', () => {
-                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
-                    // Arrange
+                let wrapper;
+
+                beforeEach(() => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
-                    const wrapper = mount(VueCheckout, {
+                    wrapper = mount(VueCheckout, {
                         store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.reject()) }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
+                });
 
+                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
                     // Act
                     await wrapper.vm.loadCheckout();
 
@@ -1065,6 +1328,14 @@ describe('Checkout', () => {
                     expect(wrapper.emitted(EventNames.CheckoutGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutGetFailure).length).toBe(1);
                     expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
+                });
+
+                it('should call `logError`', async () => {
+                    // Act
+                    await wrapper.vm.loadCheckout();
+
+                    // Assert
+                    expect($logger.logError).toHaveBeenCalled();
                 });
             });
 
@@ -1077,7 +1348,10 @@ describe('Checkout', () => {
                         store: createStore(),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -1096,17 +1370,23 @@ describe('Checkout', () => {
             });
 
             describe('when `getAvailableFulfilment` request fails', () => {
-                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
-                    // Arrange
+                let wrapper;
+
+                beforeEach(() => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
-                    const wrapper = mount(VueCheckout, {
+                    wrapper = mount(VueCheckout, {
                         store: createStore(defaultState, { ...defaultActions, getAvailableFulfilment: jest.fn(async () => Promise.reject()) }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
+                });
 
+                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
                     // Act
                     await wrapper.vm.loadAvailableFulfilment();
 
@@ -1114,6 +1394,14 @@ describe('Checkout', () => {
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess)).toBeUndefined();
                     expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure).length).toBe(1);
                     expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
+                });
+
+                it('should call `logError`', async () => {
+                    // Act
+                    await wrapper.vm.loadAvailableFulfilment();
+
+                    // Assert
+                    expect($logger.logError).toHaveBeenCalled();
                 });
             });
 
@@ -1126,7 +1414,10 @@ describe('Checkout', () => {
                         store: createStore(),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -1145,17 +1436,23 @@ describe('Checkout', () => {
             });
 
             describe('when `getBasket` request fails', () => {
-                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
-                    // Arrange
+                let wrapper;
+
+                beforeEach(() => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
-                    const wrapper = mount(VueCheckout, {
+                    wrapper = mount(VueCheckout, {
                         store: createStore(defaultState, { ...defaultActions, getBasket: jest.fn(async () => Promise.reject()) }),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
+                });
 
+                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
                     // Act
                     await wrapper.vm.loadBasket();
 
@@ -1163,6 +1460,14 @@ describe('Checkout', () => {
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetFailure).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutBasketGetSuccess)).toBeUndefined();
                     expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
+                });
+
+                it('should call `logError`', async () => {
+                    // Act
+                    await wrapper.vm.loadBasket();
+
+                    // Assert
+                    expect($logger.logError).toHaveBeenCalled();
                 });
             });
 
@@ -1175,7 +1480,10 @@ describe('Checkout', () => {
                         store: createStore(),
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -1188,6 +1496,51 @@ describe('Checkout', () => {
             });
         });
 
+        describe('loadAddress ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            describe('when `getAddress` request fails', () => {
+                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
+                    // Arrange
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, getAddress: jest.fn(async () => Promise.reject()) }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.loadAddress();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutAddressGetFailure).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutAddressGetSuccess)).toBeUndefined();
+                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
+                });
+            });
+
+            describe('when `getAddress` request succeeds', () => {
+                it('should emit success event', async () => {
+                    // Arrange
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
+                    // Act
+                    await wrapper.vm.loadAddress();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutAddressGetSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutAddressGetFailure)).toBeUndefined();
+                });
+            });
+        });
+
         describe('handleErrorState ::', () => {
             let wrapper;
 
@@ -1196,7 +1549,10 @@ describe('Checkout', () => {
                     store: createStore(),
                     i18n,
                     localVue,
-                    propsData
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
                 });
             });
 
@@ -1247,6 +1603,7 @@ describe('Checkout', () => {
                 // Arrange
                 const error = 'Unknown Error';
 
+                // Act
                 wrapper.vm.handleErrorState(error);
 
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
@@ -1258,15 +1615,24 @@ describe('Checkout', () => {
                 const error = 'Unknown Error';
 
                 const payload = {
-                    errors: error,
+                    error,
                     isLoggedIn: false,
                     serviceType: CHECKOUT_METHOD_DELIVERY
                 };
 
+                // Act
                 wrapper.vm.handleErrorState(error);
 
                 expect(wrapper.emitted(EventNames.CheckoutFailure).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CheckoutFailure)[0][0]).toEqual(payload);
+            });
+
+            it('should call `logError`', () => {
+                // Act
+                wrapper.vm.handleErrorState();
+
+                // Assert
+                expect($logger.logError).toHaveBeenCalled();
             });
         });
 
@@ -1368,7 +1734,8 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $v
+                        $v,
+                        $logger
                     }
                 });
 
@@ -1390,7 +1757,8 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $v
+                        $v,
+                        $logger
                     }
                 });
 
@@ -1415,7 +1783,8 @@ describe('Checkout', () => {
                     localVue,
                     propsData,
                     mocks: {
-                        $v
+                        $v,
+                        $logger
                     }
                 });
 
@@ -1424,6 +1793,28 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(handleErrorStateSpy).toHaveBeenCalledWith(error);
+            });
+
+            it('should call `logWarn` if form is Invalid', async () => {
+                // Arrange
+                isFormValidSpy.mockReturnValue(false);
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $v,
+                        $logger
+                    }
+                });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+
+                // Assert
+                expect($logger.logWarn).toHaveBeenCalled();
             });
         });
 

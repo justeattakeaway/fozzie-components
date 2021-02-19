@@ -1,6 +1,6 @@
 <div align="center">
 
-# f-<%= name.default %></h1>
+# f-<%= name.default %>
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
@@ -89,10 +89,10 @@ $ cd fozzie-components
 $ yarn
 ```
 
-Change directory to the `<%= name.component %>` package:
+Change directory to the `f-<%= name.default %>` package:
 
 ```sh
-$ cd packages/components/<%= componentCategory %>/<%= name.component %>
+$ cd <%= componentFolder %>f-<%= name.default %>
 ```
 
 ## Testing
@@ -100,7 +100,7 @@ $ cd packages/components/<%= componentCategory %>/<%= name.component %>
 ### Unit, Integration and Contract
 
 To test all components, run from root directory.
-To test only `f-<%= name.default %>`, run from the `./fozzie-components/packages/f-<%= name.default %>` directory.
+To test only `f-<%= name.default %>`, run from the `./fozzie-components/<%= componentFolder %>f-<%= name.default %>` directory.
 
 ```sh
 yarn test
@@ -123,7 +123,7 @@ OR
 ```bash
 # Run Component tests for f-<%= name.default %>
 # Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components/packages/f-<%= name.default %>
+cd ./fozzie-components/<%= componentFolder %>f-<%= name.default %>
 yarn test-component:chrome
 ```
 ## Documentation to be completed once module is in stable state.
