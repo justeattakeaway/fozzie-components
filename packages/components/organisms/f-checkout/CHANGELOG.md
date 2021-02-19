@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.58.0
+-------------------------------
+*February 19, 2021*
+
+### Added
+- additional guest checkout tests
+
 v0.57.0
 -------------------------------
 *February 15, 2021*
