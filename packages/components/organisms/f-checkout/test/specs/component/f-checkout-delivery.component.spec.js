@@ -18,42 +18,42 @@ describe('f-checkout "delivery" component tests', () => {
         expect(checkout.isFieldErrorDisplayed(field)).toBe(true);
     });
 
-    // forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
-    // .it('should check if address fields exist', field => {
-    //     // Assert
-    //     expect(checkout.doesFieldExist(field)).toBe(true);
-    // });
+    forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
+    .it('should check if address fields exist', field => {
+        // Assert
+        expect(checkout.doesFieldExist(field)).toBe(true);
+    });
 
-    // it('should display the mandatory fields', () => {
-    //     // Assert
-    //     expect(checkout.isFieldDisplayed('mobileNumber')).toBe(true);
-    // });
+    it('should display the mandatory fields', () => {
+        // Assert
+        expect(checkout.isFieldDisplayed('mobileNumber')).toBe(true);
+    });
 
-    // it('should prevent user from submitting a postcode with an illegal postcode', () => {
-    //     // Arrange
-    //     const addressInfo = {
-    //         postcode: 'TEST1A'
-    //     };
+    it('should prevent user from submitting a postcode with an illegal postcode', () => {
+        // Arrange
+        const addressInfo = {
+            postcode: 'TEST1A'
+        };
 
-    //     // Act
-    //     checkout.populateCheckoutForm(addressInfo);
-    //     checkout.goToPayment();
+        // Act
+        checkout.populateCheckoutForm(addressInfo);
+        checkout.goToPayment();
 
-    //     // Assert
-    //     expect(checkout.isPostCodeTypeErrorDisplayed()).toBe(true);
-    // });
+        // Assert
+        expect(checkout.isPostcodeTypeErrorDisplayed()).toBe(true);
+    });
 
-    // it('should enable a user to submit a postcode with correct characters', () => {
-    //     // Arrange
-    //     const addressInfo = {
-    //         postcode: 'AR51 1AA'
-    //     };
+    it('should enable a user to submit a postcode with correct characters', () => {
+        // Arrange
+        const addressInfo = {
+            postcode: 'AR51 1AA'
+        };
 
-    //     // Act
-    //     checkout.populateCheckoutForm(addressInfo);
-    //     checkout.goToPayment();
+        // Act
+        checkout.populateCheckoutForm(addressInfo);
+        checkout.goToPayment();
 
-    //     // Assert
-    //     expect(checkout.isPostCodeTypeErrorDisplayed()).toBe(false);
-    // });
+        // Assert
+        expect(checkout.isPostcodeTypeErrorDisplayed()).toBe(false);
+    });
 });

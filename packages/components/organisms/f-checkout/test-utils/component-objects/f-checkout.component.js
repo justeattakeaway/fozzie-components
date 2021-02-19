@@ -18,7 +18,7 @@ class Checkout extends Page {
     get component () { return $(CHECKOUT_COMPONENT) }
 
     get orderTimeDropdown () { return $(ORDER_TIME_DROPDOWN) }
-    get orderTimeDropdownOptions () { return $(ORDER_TIME_DROPDOWN_OPTIONS) }
+    get orderTimeDropdownOptions () { return $$(ORDER_TIME_DROPDOWN_OPTIONS) }
     get knobCheckoutDropdown () { return $(KNOB_CHECKOUT_DROPDOWN) }
 
     get goToPaymentButton () { return $(GO_TO_PAYMENT_BUTTON) }
@@ -52,7 +52,7 @@ class Checkout extends Page {
             get input () { return $(FIELDS.addressLine2.input) }, 
             get error () { return $(FIELDS.addressLine2.error) }
         },
-        AddressCity: {
+        addressCity: {
             get input () { return $(FIELDS.addressCity.input) }, 
             get error () { return $(FIELDS.addressCity.error) }
         },
@@ -69,12 +69,12 @@ class Checkout extends Page {
 
     open(checkoutType){
         let checkoutUrl = ''
-        switch(checkoutType.toLowerCase()) {
+        switch(checkoutType) {
             case 'delivery':
-              checkoutUrl = 'checkout-component&knob-Get%20Checkout%20Url=%2Fcheckout-collection.json&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json&knob-Create%20Guest%20Url=%2Fcreate-guest.json&knob-Auth%20token=a&knob-Login%20Url=%2Flogin&viewMode=story'
+              checkoutUrl = 'checkout-component&knob-Get%20Checkout%20Url=%2Fcheckout-delivery.json&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json&knob-Create%20Guest%20Url=%2Fcreate-guest.json&knob-Get%20Basket%20Url=%2Fget-basket-delivery.json&knob-Auth%20token=a&knob-Login%20Url=%2Flogin&viewMode=story'
               break;
             case 'collection':
-              checkoutUrl = 'checkout-component&knob-Get%20Checkout%20Url=%2Fcheckout-delivery.json&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json&knob-Create%20Guest%20Url=%2Fcreate-guest.json&knob-Get%20Basket%20Url=%2Fget-basket-delivery.json&knob-Auth%20token=a&knob-Login%20Url=%2Flogin&viewMode=story'
+              checkoutUrl = 'checkout-component&knob-Get%20Checkout%20Url=%2Fcheckout-collection.json&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json&knob-Create%20Guest%20Url=%2Fcreate-guest.json&knob-Auth%20token=a&knob-Login%20Url=%2Flogin&viewMode=story'
               break;
             default:
               throw new Error(`${checkoutType} is not a valid checkout-type. Please use 'delivery' or 'collection`);
@@ -95,12 +95,12 @@ class Checkout extends Page {
         return this.fields[fieldName].error.isDisplayed();
     }
 
-    isFieldInputDisplayed(fieldName){
+    isFieldDisplayed(fieldName){
         return this.fields[fieldName].input.isDisplayed();
     }
 
     isPostcodeTypeErrorDisplayed(){
-        return this.fields.addressPostcode.typeError.length > 0;
+         return this.fields.addressPostcode.typeError.isDisplayed();
     }
 
     isOrderTimeDropdownDisplayed(){
@@ -108,7 +108,7 @@ class Checkout extends Page {
     }
 
     userNoteMaxCharacterCount(){
-        return this.userNoteInpute.getAttribute('maxlength');
+        return this.userNoteInput.getAttribute('maxlength');
     }
 
     clickPaymentButton(){
@@ -211,7 +211,7 @@ class Checkout extends Page {
     * @param {String} orderTime The visible text value of the order time
     */
     selectOrderTime(orderTime){
-        return this.orderTimeDropdown.selectByVisibleText(orderTime);
+         this.orderTimeDropdown.selectByVisibleText(orderTime);
     };
 
     /**
@@ -221,7 +221,7 @@ class Checkout extends Page {
     * @param {Number} index The index of the `orderTimeDropdownOptions` array
     */
     getOrderTimeOptionText(index){
-        this.orderTimeDropdownOptions[index].getText();
+       return this.orderTimeDropdownOptions[index].getText();
     }
 
     /**
@@ -254,11 +254,11 @@ class Checkout extends Page {
     };
 
     doesErrorMessageExist(errorMessage){
-        return doesElementExist(this.fields[errorMessage].error);
+        return this.fields[errorMessage].error.isExisting();
     }
 
     doesFieldExist(inputField){
-       return doesElementExist(this.fields[inputField].input);
+        return this.fields[inputField].input.isExisting();
     }
 }
 
