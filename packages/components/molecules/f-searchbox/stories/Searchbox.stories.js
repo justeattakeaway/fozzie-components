@@ -19,7 +19,7 @@ export const VueSearchboxComponent = () => ({
     components: { VueSearchbox },
     props: {
         buttonType: {
-            default: select('Button Type', ['secondary'])
+            default: select('Button Type', ['primary', 'primaryAlt', 'secondary', 'tertiary', 'link'])
         },
         fullWidth: {
             default: boolean('fullWidth', false)
