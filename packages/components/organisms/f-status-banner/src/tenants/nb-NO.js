@@ -1,4 +1,7 @@
 export default {
     locale: 'nb-NO',
-    text: 'I am a StatusBanner Component (NO)'
+    statusBannerContent: {
+        searchboxHeading: 'Side ikke funnet',
+        searchboxSubHeading: 'Beklager, vi kan ikke finne siden du leter etter. Klikk under for å finne restauranter som du kan bestille online i fra.'
+    }
 };
