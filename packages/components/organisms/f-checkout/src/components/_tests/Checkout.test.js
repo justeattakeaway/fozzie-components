@@ -63,6 +63,8 @@ describe('Checkout', () => {
     const placeOrderUrl = 'http://localhost/placeorder';
     const paymentPageUrl = 'http://localhost/paymentpage';
 
+    const applicationName = 'Jest';
+
     const propsData = {
         updateCheckoutUrl,
         getCheckoutUrl,
@@ -72,7 +74,8 @@ describe('Checkout', () => {
         getBasketUrl,
         getAddressUrl,
         placeOrderUrl,
-        paymentPageUrl
+        paymentPageUrl,
+        applicationName
     };
 
     jest.spyOn(window.location, 'assign').mockImplementation();
@@ -1237,7 +1240,7 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(redirectToPaymentSpy).toHaveBeenCalled();
-            });            
+            });
         });
 
         describe('setupGuestUser ::', () => {
@@ -1941,12 +1944,12 @@ describe('Checkout', () => {
 
         describe('redirectToPayment ::', () => {
             beforeEach(() => {
-                jest.useFakeTimers()
+                jest.useFakeTimers();
             });
 
             afterEach(() => {
                 jest.clearAllMocks();
-                jest.clearAllTimers()
+                jest.clearAllTimers();
             });
 
             it('should redirect to the payment page after 1 second', () => {
@@ -1987,33 +1990,41 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(windowLocationSpy).not.toHaveBeenCalled();
-            });            
-        });        
+            });
+        });
 
         describe('submitOrder ::', () => {
             it('should be called with new input value on user input', async () => {
                 // Arrange
                 const placeOrderSpy = jest.spyOn(VueCheckout.methods, 'placeOrder');
 
+                const basketId = 'myBasketId-v1';
+                const testUserAgent = 'Mozilla/5.0 (win32) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/11.12.0';
+
                 const expected = {
                     url: placeOrderUrl,
                     data: {
-                        basketId: 'MzRkZGU4MDktYjVmNi00Nz-v1', // TODO: de-hardcode :)
-                        applicationId: 7, // Responsive Web
+                        basketId,
+                        applicationId: 7,
                         customerNotes: {
                             noteForRestaurant: defaultState.userNote
                         },
-                        applicationName: 'CoreWeb',
+                        applicationName,
                         applicationVersion: '1',
                         referralState: 'None',
-                        deviceId: '123', // TODO: TBC
-                        deviceName: 'test' // TODO: TBC
+                        deviceId: '127.0.0.1',
+                        deviceName: testUserAgent
                     },
                     timeout: 1000
                 };
 
                 const wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
+                    store: createStore({
+                        ...defaultState,
+                        basket: {
+                            id: basketId
+                        }
+                    }),
                     i18n,
                     localVue,
                     propsData
@@ -2025,7 +2036,7 @@ describe('Checkout', () => {
                 // Assert
                 expect(placeOrderSpy).toHaveBeenCalledWith(expected);
             });
-        });          
+        });
     });
 
     describe('watch ::', () => {

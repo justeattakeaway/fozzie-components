@@ -3,7 +3,6 @@ import Vuex from 'vuex';
 import { select, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import {
-    VALID_LOCALES,
     ENGLISH_LOCALE
 } from '@justeat/storybook/constants/globalisation';
 
@@ -75,7 +74,7 @@ export const CheckoutComponent = () => ({
         },
         paymentPageUrl: {
             default: text('Payment Page Url', paymentPageUrl)
-        },                
+        }
     },
     store: new Vuex.Store({
         modules: {
@@ -94,6 +93,7 @@ export const CheckoutComponent = () => ({
         ':getAddressUrl="getAddressUrl" ' +
         ':placeOrderUrl="placeOrderUrl" ' +
         ':paymentPageUrl="paymentPageUrl" ' +
+        'applicationName="Storybook" ' +
         // eslint-disable-next-line no-template-curly-in-string
         ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrl}`" />'
 });

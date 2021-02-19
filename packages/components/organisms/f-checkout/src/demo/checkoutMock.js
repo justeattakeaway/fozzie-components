@@ -41,7 +41,7 @@ export default {
                 break;
             case '/place-order.json':
                 mock.onPost(path).reply(200, placeOrder);
-                break;                
+                break;
             default:
                 throw new Error(`${path} is not valid`);
         }

@@ -212,6 +212,11 @@ export default {
         getAddressTimeout: {
             type: Number,
             default: 1000
+        },
+
+        applicationName: {
+            type: String,
+            required: true
         }
     },
 
@@ -255,7 +260,8 @@ export default {
             'notices',
             'serviceType',
             'time',
-            'userNote'
+            'userNote',
+            'basket'
         ]),
 
         isMobileNumberValid () {
@@ -392,16 +398,16 @@ export default {
          */
         async submitOrder () {
             const data = {
-                basketId: 'MzRkZGU4MDktYjVmNi00Nz-v1', // TODO: de-hardcode :)
+                basketId: this.basket.id,
                 applicationId: 7, // Responsive Web
                 customerNotes: {
                     noteForRestaurant: this.userNote
                 },
-                applicationName: 'CoreWeb',
+                applicationName: this.applicationName,
                 applicationVersion: '1',
                 referralState: 'None',
-                deviceId: '123', // TODO: TBC
-                deviceName: 'test' // TODO: TBC
+                deviceId: '127.0.0.1', // TODO: TBC
+                deviceName: window.navigator.userAgent
             };
 
             await this.placeOrder({
