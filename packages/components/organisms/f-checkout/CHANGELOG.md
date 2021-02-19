@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.58.0
 -------------------------------
-*February 16, 2021*
+*February 18, 2021*
 
 ### Added
 - Loading spinner if async requests take over a second
