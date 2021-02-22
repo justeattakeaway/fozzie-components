@@ -10,12 +10,7 @@ const trackFormInteraction = eventData => {
         action, isLoggedIn, error, changes, autofill
     } = eventData;
 
-    // const error = eventData.error && cleanFields(eventData.error);
-    // const changes = eventData.changes && cleanFields(eventData.changes);
-    // const autofill = eventData.autofill && cleanFields(eventData.autofill);
-
     const formName = isLoggedIn ? 'checkout' : 'checkout_guest';
-
 
     Trak.event({
         event: 'Form',
@@ -107,3 +102,7 @@ export { trackInitialLoad, trackFormInteraction };
 // };
 
 
+
+    // const error = eventData.error && cleanFields(eventData.error);
+    // const changes = eventData.changes && cleanFields(eventData.changes);
+    // const autofill = eventData.autofill && cleanFields(eventData.autofill);
