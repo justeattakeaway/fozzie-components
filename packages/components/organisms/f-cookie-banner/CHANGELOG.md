@@ -3,6 +3,34 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.2.0
+------------------------------
+*February 17, 2021*
+
+### Changed
+- Use js-cookie instead of universal-cookie.
+
+### Removed
+- Remove Storybook 'knob' for setting legacy banner.
+
+v0.1.2
+------------------------------
+*February 12, 2021*
+
+### Changed
+- Set `isIosBrowser` property on page mount so that we can avoid using `process` check which caused issues with SSR.
+- Minor lint updates.
+- Moved legacy banner check into computed property in order to avoid the flash of the modern cookie banner on page load.
+
+v0.1.1
+------------------------------
+*February 11, 2021*
+
+### Changed
+- Amend class name on legacy banner
+- Move legacy banner out of overlay
+- Include hide class for legacy banner
+- Wrap `navigator` call in conditional for `process.browser`
 
 v0.1.0
 ------------------------------

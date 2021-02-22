@@ -13,6 +13,14 @@ Latest (add to next release)
 - Refactored component and accessibility tests
 
 
+v0.2.1
+------------------------------
+*February 08, 2021*
+
+### Added
+- Added unit tests for the tabs component
+
+
 v0.2.0
 ------------------------------
 *January 28, 2021*

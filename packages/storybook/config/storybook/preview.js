@@ -18,7 +18,9 @@ export const parameters = {
                     'Getting Started',
                     [
                         'Intro',
+                        'Structure',
                         'Development Principles',
+                        'Contributing',
                         'Troubleshooting'
                     ],
                     'Standards',
@@ -29,7 +31,13 @@ export const parameters = {
                             'Checklist'
                         ]
                     ],
-                    'Setup Guides'
+                    'Guides',
+                    [
+                        [
+                            'Component Dependencies',
+                            'Typography'
+                        ]
+                    ]
                 ],
                 'Components']
         }

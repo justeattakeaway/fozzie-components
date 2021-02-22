@@ -13,6 +13,30 @@ Latest (add to next release)
 - Refactored component and accessibility tests
 
 
+v0.58.0
+-------------------------------
+*February 18, 2021*
+
+### Added
+- Loading spinner if async requests take over a second
+
+
+v0.57.0
+-------------------------------
+*February 15, 2021*
+
+### Added
+- Logic to choose closest address for uk tenant
+
+
+v0.56.2
+-------------------------------
+*February 12, 2021*
+
+### Fixed
+- Endpoint error logging.
+
+
 v0.56.1
 -------------------------------
 *February 11, 2021*

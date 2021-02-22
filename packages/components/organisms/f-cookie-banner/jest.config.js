@@ -9,7 +9,7 @@ module.exports = {
         './test/specs/component/',
         './test/specs/accessibility'
     ],
-    
+
     transform: {
         '^.+\\.js$': 'babel-jest',
         '^.+\\.vue$': 'vue-jest',
