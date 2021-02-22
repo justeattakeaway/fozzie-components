@@ -16,7 +16,7 @@ module.exports = {
                 // eslint-disable-next-line quotes
                 additionalData: `@import "../assets/scss/common.scss";`
             });
-        
+
         config.externals({
             'js-cookie': 'js-cookie'
         });

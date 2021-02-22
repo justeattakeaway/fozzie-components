@@ -205,7 +205,7 @@ export default {
          */
         checkCookieBannerCookie () {
             if (this.legacyBanner) {
-                this.shouldHideBanner = CookieHelper.get(this.legacyConsentCookieName) === 2;
+                this.shouldHideBanner = CookieHelper.get(this.legacyConsentCookieName) === 130315;
                 this.setLegacyCookieBannerCookie();
             } else {
                 const cookieConsent = CookieHelper.get(this.consentCookieName);
