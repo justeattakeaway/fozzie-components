@@ -1987,18 +1987,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-0.3.0.tgz#58a88476ee204264988640b3cd47ac5d295bde4a"
   integrity sha512-Cr6CDlrZAHoM3ZUJ2sOMLYAVYz+cka5R6THi24va3mhI8kgOSA4ZVzvx607QskTyasIX4xNfrju0HKity1Lq9w==
 
-"@justeat/f-metadata@3.0.0-beta.7":
-  version "3.0.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@justeat/f-metadata/-/f-metadata-3.0.0-beta.7.tgz#a531714c80cd2ee7dd528b0ecd4c7f9e2b8cf6b7"
-  integrity sha512-rpElVBHSYtHxIznaddUlGEYlPaWoSH16w1zdISXic9vNMqV4xoix2X5K7F7j9YOPhLL4mSrYR7rbYn1kxHh86Q==
-  dependencies:
-    appboy-web-sdk "2.5.2"
-    date-fns "2.16.1"
-    lodash.findindex "4.6.0"
-    lodash.orderby "4.6.0"
-    lodash.startswith "4.2.1"
-    lodash.uniq "4.5.0"
-
 "@justeat/f-searchbox@3.10.0":
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-3.10.0.tgz#1a6b235494f1e22de14bd1d6eea146fd575f419b"
