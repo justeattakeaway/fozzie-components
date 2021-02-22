@@ -10,6 +10,7 @@ Latest (merge into next release)
 
 ### Updated
 - package json reference from f-metadata to f-braze-adapter to fix optional chaining loader error
+- References svgTransform in global test utils in prep for upcoming stamp cards changes
 
 
 v3.2.0
