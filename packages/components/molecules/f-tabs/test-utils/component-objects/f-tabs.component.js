@@ -1,5 +1,20 @@
-const tabsComponent = () => $('[data-test-id="tabs-component"]');
+const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-exports.waitForTabsComponent = () => tabsComponent().waitForExist();
+class Tabs extends Page {
 
-exports.isTabsComponentDisplayed = () => tabsComponent().isDisplayed();
+    get component () { return $('[data-test-id="tabs-component"]')}
+
+    open(){
+        super.openComponent('molecule', 'vue-tabs-component');
+    }
+
+    waitForComponent(){
+        super.waitForComponent(this.component);
+    }
+
+    isComponentDisplayed(){
+        return this.component.isDisplayed();
+    }
+}
+
+module.exports = Tabs;
