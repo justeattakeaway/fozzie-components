@@ -5,12 +5,11 @@ import Trak from '@justeat/f-trak';
  *
  * @param {object} eventData An object containing data to be pushed to the dataLayer
  */
-const trackFormInteraction = eventData => {
-    const {
-        action, isLoggedIn, error, changes, autofill
-    } = eventData;
-
-    const formName = isLoggedIn ? 'checkout' : 'checkout_guest';
+const trackFormInteraction = (action, data, errorData) => {
+    const changes = JSON.parse(JSON.stringify(data.changes));
+    const autofill = JSON.parse(JSON.stringify(data.autofill));
+    const error = errorData && cleanFields(errorData);
+    const formName = data.isLoggedIn ? 'checkout' : 'checkout_guest';
 
     Trak.event({
         event: 'Form',
@@ -18,7 +17,7 @@ const trackFormInteraction = eventData => {
             form: {
                 name: formName,
                 action,
-                error,
+                error: error ? error : null,
                 autofill,
                 changes
             }
@@ -32,8 +31,12 @@ const trackFormInteraction = eventData => {
  *
  * @param {object} eventData An object containing data to be pushed to the dataLayer
  */
-const trackInitialLoad = (basket, restaurantId, isLoggedIn) => {
+const trackInitialLoad = (data, error) => {
     window.dataLayer = window.dataLayer || [];
+    const {
+            isLoggedIn, basket, restaurantId
+    } = data;
+
 
     const pageName = isLoggedIn ? 'Overview' : 'Guest';
 
@@ -57,49 +60,38 @@ const trackInitialLoad = (basket, restaurantId, isLoggedIn) => {
     });
 };
 
+const names = {
+    "address.line1": "addressLine1",
+    "line1": "addressLine1",
+    "address.line2": "addressLine2",
+    "line2": "addressLine2",
+    "address.city": "addressCity",
+    "city": "addressCity",
+    "address.postcode": "addressPostcode",
+    "postcode": "addressPostcode",
+    "customer.firstName": "firstName",
+    "customer.lastName": "lastName",
+    "customer.mobileNumber": "phone",
+    "customer.email": "email"
+};
 
-export { trackInitialLoad, trackFormInteraction };
+/**
+ * Updates passed fields to match analytics requirements.
+ *
+ * @param {array} fields An array of fields
+ * @return {array} An array of sorted fields with the correct field name for analytics.
+ */
+const cleanFields = fields => {
+    return Array.isArray(fields) ? fields.map(item => names[item]).sort() : cleanField(fields);
+};
+
+const cleanField = field => {
+    return names[field] ? names[field] : field;
+};
+
+export { trackInitialLoad, trackFormInteraction, cleanFields };
 
 
-// /**
-//  * Updates passed fields to match analytics requirements.
-//  *
-//  * @param {array} fields An array of fields
-//  * @return {array} An array of sorted fields with the correct field name for analytics.
-//  */
-// const cleanFields = fields => {
-//     const address = ['line1', 'line2', 'city', 'postcode']
-
-//     const names = {
-//         "address.line1": "address_line1",
-//         "address_line1": "address_line1",
-//         "line1": "address_line1",
-//         "address.line2": "address_line2",
-//         "address_line2": "address_line2",
-//         "line2": "address_line2",
-//         "address.city": "address_city",
-//         "address_city": "address_city",
-//         "city": "address_city",
-//         "address.postcode": "address_postcode",
-//         "address_postcode": "address_postcode",
-//         "postcode": "address_postcode",
-//         "customer.firstName": "firstName",
-//         "customer.lastName": "lastName",
-//         "mobilePhone": "phone",
-//         "customer.email": "email"
-//     }
-
-//     // fields = fields.map(item => {
-//     //     console.log(item); // eslint-disable-line no-console
-//     //     console.log(names[item]); // eslint-disable-line no-console
-//     // });
-//     // fields = fields.map(item => item.replace('customer.', ''));
-//     // fields = fields.map(item => item.replace('address.', 'address_'));
-//     // fields = fields.map(item => (item === 'mobileNumber' ? 'phone' : item));
-//     // fields = fields.map(item => (address.includes(item) ? `address_${item}` : item));
-
-//     return fields.map(item => name[item]).sort();
-// };
 
 
 

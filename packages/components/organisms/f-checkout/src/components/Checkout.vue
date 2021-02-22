@@ -76,7 +76,7 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import { required, email } from 'vuelidate/lib/validators';
-import { mapState, mapActions } from 'vuex';
+import { mapGetters, mapState, mapActions } from 'vuex';
 
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
@@ -248,6 +248,10 @@ export default {
             'autofill'
         ]),
 
+        ...mapGetters('checkout', [
+            'analyticsData'
+        ]),
+
         isMobileNumberValid () {
             /*
             * Validation methods return true if the validation conditions
@@ -282,13 +286,9 @@ export default {
     async mounted () {
         await this.initialise();
 
-        trackInitialLoad(
-            this.basket,
-            this.restaurantId,
-            this.isLoggedIn
-        );
+        trackInitialLoad( this.analyticsData );
 
-        trackFormInteraction(this.trackingData('start'));
+        trackFormInteraction('start', this.analyticsData );
     },
 
     methods: {
@@ -548,13 +548,13 @@ export default {
             * If form is valid try to call `submitCheckout`
             * Catch and handle any errors
             */
-            trackFormInteraction(this.trackingData('submit'));
+            trackFormInteraction('submit', this.analyticsData);
 
             if (!this.isFormValid()) {
                 const validationState = validations.getFormValidationState(this.$v);
                 this.$emit(EventNames.CheckoutValidationError, validationState);
 
-                trackFormInteraction(this.trackingData('inline_error', validationState.invalidFields));
+                trackFormInteraction('inline_error', this.analyticsData, validationState.invalidFields);
 
                 this.$logger.logWarn(
                     'Checkout Validation Error',
@@ -569,10 +569,10 @@ export default {
             try {
                 await this.submitCheckout();
 
-                trackFormInteraction(this.trackingData('success'));
+                trackFormInteraction('success', this.analyticsData);
             } catch (error) {
                 this.handleErrorState(error);
-                trackFormInteraction(this.trackingData('error', 'notOrderable'));
+                trackFormInteraction('error', this.analyticsData, 'notOrderable');
             } finally {
                 this.shouldDisableCheckoutButton = false;
             }

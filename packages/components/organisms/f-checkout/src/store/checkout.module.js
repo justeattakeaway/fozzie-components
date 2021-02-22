@@ -1,5 +1,6 @@
 import axios from 'axios';
 import addressService from '../services/addressService';
+import { cleanFields } from '../services/analytics';
 
 import {
     UPDATE_AUTH,
@@ -55,8 +56,21 @@ export default {
         authToken: '',
         isLoggedIn: false,
         autofill: [],
-        changes: []
+        changes: [],
+        mounted: false
     }),
+
+    getters: {
+        analyticsData: state => {
+            return {
+                isLoggedIn: state.isLoggedIn,
+                basket: state.basket,
+                restaurantId: state.restaurantId,
+                changes: state.changes,
+                autofill: state.autofill
+            }
+        }
+    },
 
     actions: {
         /**
@@ -247,7 +261,9 @@ export default {
             commit(UPDATE_FIELD_CHANGES, field);
         },
 
-        updateFulfilmentTime ({ commit }, payload) {
+        updateFulfilmentTime ({ commit, state }, payload) {
+            state.mounted ? commit(UPDATE_FIELD_CHANGES, 'orderTime') : state.mounted = true;
+
             commit(UPDATE_FULFILMENT_TIME, payload);
         },
 
@@ -345,8 +361,10 @@ export default {
         },
 
         [UPDATE_FIELD_CHANGES]: (state, field) => {
-            if (!state.changes.includes(field)) {
-                state.changes.push(field);
+            console.log(field); // eslint-disable-line no-console
+            const cleanedField = cleanFields(field);
+            if (!state.changes.includes(cleanedField)) {
+                state.changes.push(cleanedField);
             }
         },
 
@@ -360,7 +378,7 @@ export default {
             if (state.serviceType === 'delivery') {
                 Object.entries(state.address).forEach(([key, value]) => {
                     if (value) {
-                        autofill.push(`address.${key}`);
+                        cleanFields(key);
                     }
                 });
             }
