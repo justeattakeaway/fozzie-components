@@ -61,7 +61,6 @@ describe('f-checkout component tests', () => {
 
     it('should display times in ascending order, with default text "As soon as possible" showing first', () => {
         // Act
-        browser.debug();
         CheckoutComponent.selectOrderTime('As soon as possible');
 
         // Assert
