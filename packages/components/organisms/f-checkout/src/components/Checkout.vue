@@ -105,7 +105,7 @@ import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import mapUpdateCheckoutRequest from '../services/mapper';
-import { trackInitialLoad, trackFormInteraction } from '../services/analytics';
+import { trackInitialLoad, trackFormInteraction, cleanFields } from '../services/analytics';
 
 export default {
     name: 'VueCheckout',
@@ -286,9 +286,9 @@ export default {
     async mounted () {
         await this.initialise();
 
-        trackInitialLoad( this.analyticsData );
+        trackInitialLoad(this.analyticsData);
 
-        trackFormInteraction('start', this.analyticsData );
+        trackFormInteraction('start', this.analyticsData);
     },
 
     methods: {
@@ -552,9 +552,11 @@ export default {
 
             if (!this.isFormValid()) {
                 const validationState = validations.getFormValidationState(this.$v);
+                const analyticsValidations = cleanFields(validationState.invalidFields);
+
                 this.$emit(EventNames.CheckoutValidationError, validationState);
 
-                trackFormInteraction('inline_error', this.analyticsData, validationState.invalidFields);
+                trackFormInteraction('inline_error', this.analyticsData, analyticsValidations);
 
                 this.$logger.logWarn(
                     'Checkout Validation Error',

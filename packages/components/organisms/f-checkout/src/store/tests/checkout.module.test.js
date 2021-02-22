@@ -250,13 +250,19 @@ describe('CheckoutModule', () => {
                         lastName: '',
                         email: '',
                         mobileNumber: '+447111111111'
+                    },
+                    address: {
+                        line1: 'Line One',
+                        line2: '',
+                        city: '',
+                        postcode: ''
                     }
                 };
 
                 mutations[UPDATE_AUTO_FILL](state);
 
                 // Assert
-                expect(state.autofill).toEqual(['phone']);
+                expect(state.autofill).toEqual(['phone', 'addressLine1']);
             });
         });
 

@@ -216,9 +216,11 @@ describe('Checkout', () => {
                     store: createStore(
                         defaultState,
                         defaultGetters,
-                        { ...defaultActions,
+                        {
+                            ...defaultActions,
                             setAuthToken
-                    }),
+                        }
+                    ),
                     i18n,
                     localVue,
                     propsData
@@ -449,7 +451,7 @@ describe('Checkout', () => {
             });
 
             // Assert
-            expect(trackInitialLoadSpy).toHaveBeenCalled();
+            expect(trackInitialLoadSpy).toHaveBeenCalledWith(analyticsData);
         });
 
         it('should call `trackFormInteraction`', () => {
@@ -462,7 +464,7 @@ describe('Checkout', () => {
             });
 
             // Assert
-            expect(trackFormInteractionSpy).toHaveBeenCalled();
+            expect(trackFormInteractionSpy).toHaveBeenCalledWith('start', analyticsData);
         });
     });
 
@@ -1283,9 +1285,11 @@ describe('Checkout', () => {
                         store: createStore(
                             defaultState,
                             defaultGetters,
-                            { ...defaultActions,
+                            {
+                                ...defaultActions,
                                 createGuestUser: jest.fn(async () => Promise.reject())
-                        }),
+                            }
+                        ),
                         i18n,
                         localVue,
                         propsData,
@@ -1357,9 +1361,11 @@ describe('Checkout', () => {
                         store: createStore(
                             defaultState,
                             defaultGetters,
-                            { ...defaultActions,
+                            {
+                                ...defaultActions,
                                 getCheckout: jest.fn(async () => Promise.reject())
-                        }),
+                            }
+                        ),
                         i18n,
                         localVue,
                         propsData,
@@ -1428,9 +1434,11 @@ describe('Checkout', () => {
                         store: createStore(
                             defaultState,
                             defaultGetters,
-                            { ...defaultActions,
+                            {
+                                ...defaultActions,
                                 getAvailableFulfilment: jest.fn(async () => Promise.reject())
-                        }),
+                            }
+                        ),
                         i18n,
                         localVue,
                         propsData,
@@ -1499,9 +1507,11 @@ describe('Checkout', () => {
                         store: createStore(
                             defaultState,
                             defaultGetters,
-                            { ...defaultActions,
+                            {
+                                ...defaultActions,
                                 getBasket: jest.fn(async () => Promise.reject())
-                            }),
+                            }
+                        ),
                         i18n,
                         localVue,
                         propsData,
@@ -1567,9 +1577,11 @@ describe('Checkout', () => {
                         store: createStore(
                             defaultState,
                             defaultGetters,
-                            { ...defaultActions,
+                            {
+                                ...defaultActions,
                                 getAddress: jest.fn(async () => Promise.reject())
-                        }),
+                            }
+                        ),
                         i18n,
                         localVue,
                         propsData
@@ -1777,7 +1789,7 @@ describe('Checkout', () => {
                 jest.clearAllMocks();
             });
 
-            it('should call `trackFormInteractionSpy` with action `submit`', async () => {
+            it('should call `trackFormInteractionSpy` with correct `action`', async () => {
                 // Arrange
                 isFormValidSpy.mockReturnValue(true);
 
@@ -1793,8 +1805,6 @@ describe('Checkout', () => {
                 });
 
                 const action = 'submit';
-
-                // console.log(wrapper.vm.$store); // eslint-disable-line no-console
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -1842,7 +1852,7 @@ describe('Checkout', () => {
                     expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
                 });
 
-                it('should call `trackFormInteraction` with and action and an error', async () => {
+                it('should call `trackFormInteraction` with and correct `action` and `error`', async () => {
                     // Arrange
                     const action = 'inline_error';
                     const error = mockValidationState.invalidFields;
@@ -1927,13 +1937,13 @@ describe('Checkout', () => {
                 it('should call `trackFormInteractionSpy` with correct action and error', async () => {
                     // Arrange
                     const action = 'error';
-                    const error = 'notOrderable';
+                    const analyticsError = 'notOrderable';
 
                     // Act
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(action, analyticsData, error);
+                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(action, analyticsData, analyticsError);
                 });
             });
 

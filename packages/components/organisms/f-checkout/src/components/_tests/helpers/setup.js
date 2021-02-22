@@ -70,11 +70,11 @@ const analyticsData = {
     restaurantId: defaultState.restaurantId,
     changes: defaultState.changes,
     autofill: defaultState.autofill
-}
+};
 
 const defaultGetters = {
     analyticsData: jest.fn(() => analyticsData)
-}
+};
 
 const i18n = {
     locale: 'en-GB',

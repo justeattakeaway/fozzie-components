@@ -61,15 +61,13 @@ export default {
     }),
 
     getters: {
-        analyticsData: state => {
-            return {
-                isLoggedIn: state.isLoggedIn,
-                basket: state.basket,
-                restaurantId: state.restaurantId,
-                changes: state.changes,
-                autofill: state.autofill
-            }
-        }
+        analyticsData: state => ({
+            isLoggedIn: state.isLoggedIn,
+            basket: state.basket,
+            restaurantId: state.restaurantId,
+            changes: state.changes,
+            autofill: state.autofill
+        })
     },
 
     actions: {
@@ -262,7 +260,11 @@ export default {
         },
 
         updateFulfilmentTime ({ commit, state }, payload) {
-            state.mounted ? commit(UPDATE_FIELD_CHANGES, 'orderTime') : state.mounted = true;
+            if (state.mounted) {
+                commit(UPDATE_FIELD_CHANGES, 'orderTime');
+            } else {
+                state.mounted = true;
+            }
 
             commit(UPDATE_FULFILMENT_TIME, payload);
         },
@@ -361,8 +363,8 @@ export default {
         },
 
         [UPDATE_FIELD_CHANGES]: (state, field) => {
-            console.log(field); // eslint-disable-line no-console
             const cleanedField = cleanFields(field);
+
             if (!state.changes.includes(cleanedField)) {
                 state.changes.push(cleanedField);
             }
@@ -378,7 +380,7 @@ export default {
             if (state.serviceType === 'delivery') {
                 Object.entries(state.address).forEach(([key, value]) => {
                     if (value) {
-                        cleanFields(key);
+                        autofill.push(cleanFields(key));
                     }
                 });
             }

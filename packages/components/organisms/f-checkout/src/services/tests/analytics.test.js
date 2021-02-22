@@ -1,5 +1,5 @@
 import Trak from '@justeat/f-trak';
-import { trackInitialLoad, trackFormInteraction } from '../analytics';
+import { trackInitialLoad, trackFormInteraction, cleanFields } from '../analytics';
 import {
     analyticsData
 } from '../../components/_tests/helpers/setup';
@@ -129,6 +129,51 @@ describe('checkout analytics', () => {
 
             // Assert
             expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
+        });
+    });
+
+    describe('cleanFields :: ', () => {
+        it.each([
+            ['address.line1', 'addressLine1'],
+            ['line1', 'addressLine1'],
+            ['address.line2', 'addressLine2'],
+            ['line2', 'addressLine2'],
+            ['address.city', 'addressCity'],
+            ['city', 'addressCity'],
+            ['address.postcode', 'addressPostcode'],
+            ['postcode', 'addressPostcode'],
+            ['customer.firstName', 'firstName'],
+            ['customer.lastName', 'lastName'],
+            ['customer.mobileNumber', 'phone'],
+            ['mobileNumber', 'phone'],
+            ['customer.email', 'email']
+        ])('should correct %s to %s', (provided, cleaned) => {
+            // Act & Assert
+            expect(cleanFields(provided)).toEqual(cleaned);
+        });
+
+        it('should correctly clean an array of fields', () => {
+            // Arrange
+            const provided = [
+                'mobilePhone',
+                'address.line1',
+                'customer.firstName',
+                'lastName',
+                'customer.email',
+                'city'
+            ];
+
+            const expected = [
+                'addressCity',
+                'addressLine1',
+                'email',
+                'firstName',
+                'lastName',
+                'mobilePhone'
+            ];
+
+            // Act & Assert
+            expect(cleanFields(provided)).toEqual(expected);
         });
     });
 });
