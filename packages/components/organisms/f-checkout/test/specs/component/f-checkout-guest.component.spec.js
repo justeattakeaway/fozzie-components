@@ -19,7 +19,7 @@ describe('f-checkout component tests', () => {
     });
 
     forEach(['firstName', 'lastName', 'emailAddress'])
-    .it.only('should show the guest checkout fields', field => {
+    .it('should show the guest checkout fields', field => {
         // Assert
         expect(checkout.doesFieldExist(field)).toBe(true);
     });
@@ -54,7 +54,7 @@ describe('f-checkout component tests', () => {
         const loginPath = '/login';
 
         // Act
-        checkout.clickGuestCheckoutLogin();
+        checkout.clickLoginButton();
         const { pathname } = new URL(browser.getUrl());
 
         // Assert

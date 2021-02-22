@@ -1,6 +1,6 @@
 import forEach from 'mocha-each';
-const CheckoutComponent = require('../../../test-utils/component-objects/f-checkout.component');
-const checkout = new CheckoutComponent();
+const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
+const checkout = new Checkout();
 
 describe('f-checkout "delivery" component tests', () => {
     before(() => {
