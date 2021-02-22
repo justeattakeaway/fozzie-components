@@ -14,7 +14,7 @@ describe('f-footer component tests', () => {
     });
 
     forEach([['ios', 'apple'], ['android', 'google'], ['huawei', 'appgallery']])
-    .it('should display download Icons and link to correct URL', (icon, expectedUrl) => {
+    .it('should display download icons and link to correct URL', (icon, expectedUrl) => {
         // Act
         footer.expectedDownloadIcon = icon;
 
@@ -29,7 +29,7 @@ describe('f-footer component tests', () => {
     });
 
     forEach([['twitter', 'twitter.com'], ['facebook', 'facebook.com'], ['youtube', 'youtube.com']])
-    .it('should display Social Media Icons', (icon, expectedUrl) => {
+    .it('should display social media icons', (icon, expectedUrl) => {
         // Act
         footer.expectedSocialIcon = icon;
 

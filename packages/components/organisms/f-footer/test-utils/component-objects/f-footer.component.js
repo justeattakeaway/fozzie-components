@@ -45,12 +45,10 @@ class Footer extends Page {
 
 
     openAUWithExtraFeatures(){
-        // return '&knob-Show%20courier%20links=true';
         super.openComponent('organism', 'footer-component&knob-Show%20courier%20links=true&knob-Locale=en-AU');
     }
 
     openGBWithExtraFeatures(){
-        // return '&knob-Show%20courier%20links=true';
         super.openComponent('organism', 'footer-component&knob-Show%20courier%20links=true&knob-Locale=en-GB');
     }
 
