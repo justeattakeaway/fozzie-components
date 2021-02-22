@@ -1,6 +1,6 @@
 // https://bundlewatch.io/#/getting-started/using-a-config-file
 
-const { readdirSync } = require('fs')
+const { readdirSync } = require('fs');
 
 const packageFolders = [
     'packages/components/atoms',
@@ -8,13 +8,14 @@ const packageFolders = [
     'packages/components/organisms',
     'packages/services',
     'packages/tools'
-]
+];
 
 const excludedPackages = [
-    'packages/services/f-metadata',
+    'packages/services/f-braze-adapter',
     'packages/tools/generator-component',
-    'packages/tools/storybook', 
-    'packages/services/f-wdio-utils'
+    'packages/tools/storybook',
+    'packages/services/f-wdio-utils',
+    'packages/components/organisms/f-status-banner' // Excluding as the footer is pushing this package over the 100kb.
 ];
 
 /**
@@ -26,7 +27,7 @@ const excludedPackages = [
 const getDirectories = source =>
     readdirSync(source, { withFileTypes: true })
         .filter(dirent => dirent.isDirectory())
-        .map(dirent => `${source}/${dirent.name}`)
+        .map(dirent => `${source}/${dirent.name}`);
 
 let packageNames = [];
 
