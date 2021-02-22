@@ -5,21 +5,21 @@ const checkout = new Checkout();
 
 describe('Accessibility tests', () => {
 
-    it('a11y - should test f-contentCard component WCAG compliance', () => {
+    it('a11y - should test f-checkout component (delivery) WCAG compliance', () => {
         // Act
         checkout.open('delivery');
         checkout.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-checkout-delivery');
     });
 
-    it('a11y - should test f-contentCard component WCAG compliance', () => {
+    it('a11y - should test f-checkout component (collection) WCAG compliance', () => {
         // Act
         checkout.open('collection');
         checkout.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-checkout-collection');
     });
 
-    it('a11y - should test f-contentCard component WCAG compliance', () => {
+    it('a11y - should test f-checkout component (guest) WCAG compliance', () => {
         // Act
         checkout.open('guest');
         checkout.waitForComponent();
