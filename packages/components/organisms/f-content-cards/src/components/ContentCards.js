@@ -1,4 +1,4 @@
-import initialiseMetadataDispatcher from '@justeat/f-metadata';
+import initialiseMetadataDispatcher from '@justeat/f-braze-adapter';
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 

@@ -1,6 +1,6 @@
 <div align="center">
 
-# f-metadata
+# f-braze-adapter
 
 <img width="125" alt="Fozzie Bear" src="../../../bear.png" />
 
@@ -10,10 +10,10 @@ Braze Content Cards Interface.
 
 ---
 
-[![npm version](https://badge.fury.io/js/%40justeat%2Ff-metadata.svg)](https://badge.fury.io/js/%40justeat%2Ff-metadata)
+[![npm version](https://badge.fury.io/js/%40justeat%2Ff-braze-adapter.svg)](https://badge.fury.io/js/%40justeat%2Ff-braze-adapter)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
-[![Coverage Status](https://coveralls.io/repos/github/justeat/f-metadata/badge.svg)](https://coveralls.io/github/justeat/f-metadata)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-metadata/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-metadata?targetFile=package.json)
+[![Coverage Status](https://coveralls.io/repos/github/justeat/f-braze-adapter/badge.svg)](https://coveralls.io/github/justeat/f-braze-adapter)
+[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-braze-adapter/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-braze-adapter?targetFile=package.json)
 
 This package provides an interface for initialising Braze and handling content cards and in-app messages.
 
@@ -25,20 +25,20 @@ This package provides an interface for initialising Braze and handling content c
 Install the module using npm or Yarn:
 
 ```sh
-yarn add @justeat/f-metadata
+yarn add @justeat/f-braze-adapter
 ```
 
 ```sh
-npm install @justeat/f-metadata
+npm install @justeat/f-braze-adapter
 ```
 The package can then be imported into your application.  You can use with `import` or `require` syntax:
 
 ```js
-import initialiseBraze from '@justeat/f-metadata';
+import initialiseBraze from '@justeat/f-braze-adapter';
 ````
 
 ```js
-const initialiseBraze = require('@justeat/f-metadata');
+const initialiseBraze = require('@justeat/f-braze-adapter');
 ```
 
 ### Initialisation
@@ -52,7 +52,7 @@ All other functionality, such as handling content cards or intercepting in-app m
 #### Basic Example
 
 ```js
-import initialise from '@justeat/f-metadata'
+import initialise from '@justeat/f-braze-adapter'
 
 const config = {
   apiKey: '1234-1234-1234',
