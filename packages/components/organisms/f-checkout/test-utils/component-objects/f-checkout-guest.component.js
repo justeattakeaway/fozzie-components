@@ -24,6 +24,10 @@ class GuestCheckout extends Page {
         return this.loginButton.isDisplayed();
     }
 
+    clickLoginButton(){
+        return this.loginButton.click();
+    }
+
     isHeaderDisplayed(){
         return this.header.isDisplayed();
     }
