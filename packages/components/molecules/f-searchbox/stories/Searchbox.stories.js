@@ -1,9 +1,14 @@
 // Uncomment the import below to add prop controls to your Story (and add `withKnobs` to the decorators array)
-// import {
-//     withKnobs, select, boolean
-// } from '@storybook/addon-knobs';
+import {
+    select, boolean
+} from '@storybook/addon-knobs';
+import Vue from 'vue';
+import Vuex from 'vuex';
 import { withA11y } from '@storybook/addon-a11y';
 import VueSearchbox from '../src/components/Base.vue';
+import SearchboxModule from '../src/store/searchbox.module';
+
+Vue.use(Vuex);
 
 export default {
     title: 'Components/Molecules',
@@ -20,6 +25,11 @@ export const VueSearchboxComponent = () => ({
             default: boolean('fullWidth', false)
         }
     },
+    store: new Vuex.Store({
+        modules: {
+            checkout: SearchboxModule
+        }
+    }),
     template: '<vue-searchbox />'
 });
 

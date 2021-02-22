@@ -34,6 +34,7 @@
     "lint:style": "vue-cli-service lint:style",
     "report": "cd ../.. && yarn report",
     "test": "vue-cli-service test:unit",
+    "test:watch": "vue-cli-service test:unit --watch",
     "test:coverage": "yarn test --coverage",
     "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
     "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
