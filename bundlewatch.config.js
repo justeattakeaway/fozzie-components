@@ -11,7 +11,7 @@ const packageFolders = [
 ];
 
 const excludedPackages = [
-    'packages/services/f-metadata',
+    'packages/services/f-braze-adapter',
     'packages/tools/generator-component',
     'packages/tools/storybook',
     'packages/services/f-wdio-utils',
