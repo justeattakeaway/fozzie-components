@@ -10,7 +10,9 @@ const {
     FIELDS,
     KNOB_CHECKOUT_DROPDOWN,
     KNOB_BUTTON,
-    SWITCH_USER_LINK
+    SWITCH_USER_LINK,
+    GUEST_CHECKOUT_HEADER,
+    GUEST_CHECKOUT_LOGIN_BUTTON
 } = require('./f-checkout-selectors');
 
 class Checkout extends Page {
@@ -26,6 +28,9 @@ class Checkout extends Page {
 
     get userNoteInput () { return $(USER_NOTE_INPUT) }
     get switchUserLink () { return $(SWITCH_USER_LINK) }
+
+    get guestCheckoutHeader () { return $(GUEST_CHECKOUT_HEADER) }
+    get guestCheckoutLoginButton () { return $(GUEST_CHECKOUT_LOGIN_BUTTON) }
 
     fields = {
         firstName: {
@@ -76,8 +81,11 @@ class Checkout extends Page {
             case 'collection':
               checkoutUrl = 'checkout-component&knob-Get%20Checkout%20Url=%2Fcheckout-collection.json&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json&knob-Create%20Guest%20Url=%2Fcreate-guest.json&knob-Auth%20token=a&knob-Login%20Url=%2Flogin&viewMode=story'
               break;
+            case 'guest':
+              checkoutUrl = 'checkout-component&knob-Get%20Checkout%20Url=%2Fcheckout-delivery.json&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json&knob-Create%20Guest%20Url=%2Fcreate-guest.json&knob-Get%20Basket%20Url=%2Fget-basket-delivery.json&knob-Auth%20token=&knob-Login%20Url=%2Flogin&viewMode=story'
+              break;
             default:
-              throw new Error(`${checkoutType} is not a valid checkout-type. Please use 'delivery' or 'collection`);
+              throw new Error(`${checkoutType} is not a valid checkout-type. Please use 'delivery', 'collection' or 'guest'`);
           }
 
         super.openComponent('organism', checkoutUrl);
@@ -117,6 +125,18 @@ class Checkout extends Page {
 
     switchUserLinkIsDisplayed(){
         return this.switchUserLink.isDisplayed();
+    }
+
+    isGuestCheckoutLoginButtonDisplayed(){
+        return this.guestCheckoutLoginButton.isDisplayed();
+    }
+
+    clickGuestCheckoutLoginButton(){
+        return this.guestCheckoutLoginButton.click();
+    }
+
+    isGuestCheckoutHeaderDisplayed(){
+        return this.guestCheckoutHeader.isDisplayed();
     }
 
 

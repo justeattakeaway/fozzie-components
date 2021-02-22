@@ -3,7 +3,7 @@ const checkout = new Checkout();
 
 describe('f-checkout component tests', () => {
     before(() => {
-        checkout.open('delivery')
+        checkout.open('delivery');
         checkout.waitForComponent();
     });
 

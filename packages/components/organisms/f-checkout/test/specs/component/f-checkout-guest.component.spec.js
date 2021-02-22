@@ -1,21 +1,21 @@
 import forEach from 'mocha-each';
-const GuestCheckout = require('../../../test-utils/component-objects/f-checkout-guest.component');
-const checkout = new GuestCheckout();
+const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
+const checkout = new Checkout();
 
 describe('f-checkout component tests', () => {
     before(() => {
-        checkout.open()
+        checkout.open('guest');
         checkout.waitForComponent();
     });
 
     it('should display the guest checkout header component', () => {
         // Assert
-        expect(checkout.isHeaderDisplayed()).toBe(true);
+        expect(checkout.isGuestCheckoutHeaderDisplayed()).toBe(true);
     });
 
     it('should display the guest checkout login button', () => {
         // Assert
-        expect(checkout.isLoginButtonDisplayed()).toBe(true);
+        expect(checkout.isGuestCheckoutLoginButtonDisplayed()).toBe(true);
     });
 
     forEach(['firstName', 'lastName', 'emailAddress'])
@@ -54,7 +54,7 @@ describe('f-checkout component tests', () => {
         const loginPath = '/login';
 
         // Act
-        checkout.clickLoginButton();
+        checkout.clickGuestCheckoutLoginButton();
         const { pathname } = new URL(browser.getUrl());
 
         // Assert

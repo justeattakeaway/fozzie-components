@@ -1,15 +1,28 @@
 import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
-import CheckoutComponent from '../../../test-utils/component-objects/f-checkout.component';
+const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
+const checkout = new Checkout();
+
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        browser.url('?path=/story/components-organisms--checkout-component');
-        browser.switchToFrame(0);
-        CheckoutComponent.waitForCheckoutComponent();
+
+    it('a11y - should test f-contentCard component WCAG compliance', () => {
+        // Act
+        checkout.open('delivery');
+        checkout.waitForComponent();
+        const axeResults = getAccessibilityTestResults('f-checkout-delivery');
     });
 
-    it('a11y - should test f-checkout component WCAG compliance', () => {
+    it('a11y - should test f-contentCard component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-checkout');
+        checkout.open('collection');
+        checkout.waitForComponent();
+        const axeResults = getAccessibilityTestResults('f-checkout-collection');
+    });
+
+    it('a11y - should test f-contentCard component WCAG compliance', () => {
+        // Act
+        checkout.open('guest');
+        checkout.waitForComponent();
+        const axeResults = getAccessibilityTestResults('f-checkout-guest');
     });
 });

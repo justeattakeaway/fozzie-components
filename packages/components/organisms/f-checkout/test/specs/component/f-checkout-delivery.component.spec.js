@@ -4,7 +4,7 @@ const checkout = new Checkout();
 
 describe('f-checkout "delivery" component tests', () => {
     before(() => {
-        checkout.open('delivery')
+        checkout.open('delivery');
         checkout.waitForComponent();
     });
 
