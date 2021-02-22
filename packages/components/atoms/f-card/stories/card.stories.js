@@ -11,8 +11,7 @@ export default {
                 { name: 'Dark', value: '#333' }
             ],
             default: 'Grey'
-        },
-        notes: 'some documentation here'
+        }
     }
 };
 
@@ -20,7 +19,7 @@ export const CardComponent = (args, { argTypes }) => ({
     components: { Card },
     props: Object.keys(argTypes),
     template:
-        '<card :locale="locale" :cardHeading="cardHeading" :cardHeadingPosition="cardHeadingPosition" :isRounded="isRounded" :hasOutline="hasOutline" :isPageContentWrapper="isPageContentWrapper"><p>Some Card Content</p></card>'
+        '<card :cardHeading="cardHeading" :cardHeadingPosition="cardHeadingPosition" :isRounded="isRounded" :hasOutline="hasOutline" :isPageContentWrapper="isPageContentWrapper"><p>Some Card Content</p></card>'
 });
 
 CardComponent.args = {
