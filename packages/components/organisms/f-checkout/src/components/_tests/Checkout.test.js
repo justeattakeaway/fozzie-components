@@ -9,7 +9,7 @@ import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
 import {
-    defaultState, defaultActions, i18n, createStore, $logger
+    defaultState, defaultGetters, defaultActions, analyticsData, i18n, createStore, $logger
 } from './helpers/setup';
 
 const localVue = createLocalVue();
@@ -50,14 +50,6 @@ const $v = {
         }
     },
     $touch: jest.fn()
-};
-
-const trackingDataMock = {
-    action: '',
-    error: null,
-    isLoggedIn: false,
-    changes: [],
-    autofill: []
 };
 
 describe('Checkout', () => {
@@ -221,7 +213,12 @@ describe('Checkout', () => {
 
                 // Act
                 shallowMount(VueCheckout, {
-                    store: createStore(defaultState, { ...defaultActions, setAuthToken }),
+                    store: createStore(
+                        defaultState,
+                        defaultGetters,
+                        { ...defaultActions,
+                            setAuthToken
+                    }),
                     i18n,
                     localVue,
                     propsData
@@ -1283,7 +1280,12 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions, createGuestUser: jest.fn(async () => Promise.reject()) }),
+                        store: createStore(
+                            defaultState,
+                            defaultGetters,
+                            { ...defaultActions,
+                                createGuestUser: jest.fn(async () => Promise.reject())
+                        }),
                         i18n,
                         localVue,
                         propsData,
@@ -1352,7 +1354,12 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.reject()) }),
+                        store: createStore(
+                            defaultState,
+                            defaultGetters,
+                            { ...defaultActions,
+                                getCheckout: jest.fn(async () => Promise.reject())
+                        }),
                         i18n,
                         localVue,
                         propsData,
@@ -1418,7 +1425,12 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions, getAvailableFulfilment: jest.fn(async () => Promise.reject()) }),
+                        store: createStore(
+                            defaultState,
+                            defaultGetters,
+                            { ...defaultActions,
+                                getAvailableFulfilment: jest.fn(async () => Promise.reject())
+                        }),
                         i18n,
                         localVue,
                         propsData,
@@ -1484,7 +1496,12 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions, getBasket: jest.fn(async () => Promise.reject()) }),
+                        store: createStore(
+                            defaultState,
+                            defaultGetters,
+                            { ...defaultActions,
+                                getBasket: jest.fn(async () => Promise.reject())
+                            }),
                         i18n,
                         localVue,
                         propsData,
@@ -1547,7 +1564,12 @@ describe('Checkout', () => {
                 it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
                     // Arrange
                     const wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions, getAddress: jest.fn(async () => Promise.reject()) }),
+                        store: createStore(
+                            defaultState,
+                            defaultGetters,
+                            { ...defaultActions,
+                                getAddress: jest.fn(async () => Promise.reject())
+                        }),
                         i18n,
                         localVue,
                         propsData
@@ -1755,7 +1777,7 @@ describe('Checkout', () => {
                 jest.clearAllMocks();
             });
 
-            it('should call `trackFormInteractionSpy` with `trackingData`', async () => {
+            it('should call `trackFormInteractionSpy` with action `submit`', async () => {
                 // Arrange
                 isFormValidSpy.mockReturnValue(true);
 
@@ -1770,13 +1792,15 @@ describe('Checkout', () => {
                     }
                 });
 
-                trackingDataMock.action = 'submit';
+                const action = 'submit';
+
+                // console.log(wrapper.vm.$store); // eslint-disable-line no-console
 
                 // Act
                 await wrapper.vm.onFormSubmit();
 
                 // Assert
-                expect(trackFormInteractionSpy).toHaveBeenCalledWith(trackingDataMock);
+                expect(trackFormInteractionSpy).toHaveBeenCalledWith(action, analyticsData);
             });
 
             describe('when form is Invalid', () => {
@@ -1818,16 +1842,16 @@ describe('Checkout', () => {
                     expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
                 });
 
-                it('should call `trackFormInteraction` with correct `trackingData`', async () => {
+                it('should call `trackFormInteraction` with and action and an error', async () => {
                     // Arrange
-                    trackingDataMock.action = 'inline_error';
-                    trackingDataMock.error = mockValidationState.invalidFields;
+                    const action = 'inline_error';
+                    const error = mockValidationState.invalidFields;
 
                     // Act
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(trackingDataMock);
+                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(action, analyticsData, error);
                 });
             });
 
@@ -1857,16 +1881,15 @@ describe('Checkout', () => {
                     expect(submitCheckoutSpy).toHaveBeenCalled();
                 });
 
-                it('should call `trackFormInteractionSpy` with correct `trackingData`', async () => {
+                it('should call `trackFormInteractionSpy` with correct action', async () => {
                     // Arrange
-                    trackingDataMock.action = 'success';
-                    trackingDataMock.error = null;
+                    const action = 'success';
 
                     // Act
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(trackingDataMock);
+                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(action, analyticsData);
                 });
             });
 
@@ -1901,16 +1924,16 @@ describe('Checkout', () => {
                     expect(handleErrorStateSpy).toHaveBeenCalledWith(error);
                 });
 
-                it('should call `trackFormInteractionSpy` with correct `trackingData`', async () => {
+                it('should call `trackFormInteractionSpy` with correct action and error', async () => {
                     // Arrange
-                    trackingDataMock.action = 'error';
-                    trackingDataMock.error = 'notOrderable';
+                    const action = 'error';
+                    const error = 'notOrderable';
 
                     // Act
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(trackingDataMock);
+                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(action, analyticsData, error);
                 });
             });
 
@@ -2004,52 +2027,6 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(updateCustomerDetailsSpy).toHaveBeenCalledWith({ mobileNumber: newNumber });
-            });
-        });
-
-        describe('trackingData ::', () => {
-            const expectedData = {
-                isLoggedIn: defaultState.isLoggedIn,
-                changes: defaultState.changes,
-                autofill: defaultState.autofill
-            };
-
-            it('should return `isLoggedIn`, `changes` and `autofill` from the store', () => {
-                // Arrange
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Act
-                const returnedData = wrapper.vm.trackingData();
-
-                // Assert
-                expect(returnedData.isLoggedIn).toEqual(expectedData.isLoggedIn);
-                expect(returnedData.changes).toEqual(expectedData.changes);
-                expect(returnedData.autofill).toEqual(expectedData.autofill);
-            });
-
-            it('should return object containing passed action and error', () => {
-                // Arrange
-                const wrapper = mount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                const action = 'start';
-                const error = 'error';
-
-                // Act
-                const returnedData = wrapper.vm.trackingData(action, error);
-
-                // Assert
-                expect(returnedData.action).toEqual(action);
-                expect(returnedData.error).toEqual(error);
             });
         });
     });

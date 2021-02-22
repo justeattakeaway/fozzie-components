@@ -600,23 +600,6 @@ export default {
         */
         isValidPostcode () {
             return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
-        },
-
-        /**
-         * Return object of passed action and error
-         * along with state values `isLoggedIn`, `changes` and `autofill`
-         *
-         */
-        trackingData (action, error) {
-            const data = {
-                action,
-                error: error || null,
-                isLoggedIn: this.isLoggedIn,
-                changes: this.changes,
-                autofill: this.autofill
-            };
-
-            return data;
         }
     },
 

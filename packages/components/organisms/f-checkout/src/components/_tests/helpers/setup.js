@@ -64,6 +64,18 @@ const defaultActions = {
     getAddress: jest.fn()
 };
 
+const analyticsData = {
+    isLoggedIn: defaultState.isLoggedIn,
+    basket: defaultState.basket,
+    restaurantId: defaultState.restaurantId,
+    changes: defaultState.changes,
+    autofill: defaultState.autofill
+}
+
+const defaultGetters = {
+    analyticsData: jest.fn(() => analyticsData)
+}
+
 const i18n = {
     locale: 'en-GB',
     messages: {
@@ -74,11 +86,12 @@ const i18n = {
     }
 };
 
-const createStore = (state = defaultState, actions = defaultActions) => new Vuex.Store({
+const createStore = (state = defaultState, getters = defaultGetters, actions = defaultActions) => new Vuex.Store({
     modules: {
         checkout: {
             namespaced: true,
             state,
+            getters,
             actions
         },
         hasModule: jest.fn(() => true)
@@ -94,7 +107,9 @@ const $logger = {
 export {
     fulfilmentTimes,
     defaultState,
+    defaultGetters,
     defaultActions,
+    analyticsData,
     i18n,
     createStore,
     $logger

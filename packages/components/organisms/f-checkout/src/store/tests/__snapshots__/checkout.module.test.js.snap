@@ -43,6 +43,7 @@ Object {
       "type": "information",
     },
   ],
+  "mounted": false,
   "notices": Array [
     Object {
       "notice": Object {

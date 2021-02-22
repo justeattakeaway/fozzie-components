@@ -102,7 +102,8 @@ const defaultState = {
     isLoggedIn: false,
     userNote: '',
     autofill: [],
-    changes: []
+    changes: [],
+    mounted: false
 };
 
 let state = CheckoutModule.state();
@@ -249,19 +250,13 @@ describe('CheckoutModule', () => {
                         lastName: '',
                         email: '',
                         mobileNumber: '+447111111111'
-                    },
-                    address: {
-                        line1: '',
-                        line2: '',
-                        city: 'London',
-                        postcode: ''
                     }
                 };
 
                 mutations[UPDATE_AUTO_FILL](state);
 
                 // Assert
-                expect(state.autofill).toEqual(['phone', 'address.city']);
+                expect(state.autofill).toEqual(['phone']);
             });
         });
 
@@ -486,12 +481,21 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe('updateFulfilmentTime ::', () => {
+            it(`should call ${UPDATE_FULFILMENT_TIME} mutation.`, () => {
+                // Act
+                updateFulfilmentTime({ commit, state }, time);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_TIME, time);
+            });
+        });
+
 
         it.each([
             [setAuthToken, UPDATE_AUTH, authToken],
             [updateAddressDetails, UPDATE_FULFILMENT_ADDRESS, address],
             [updateCustomerDetails, UPDATE_CUSTOMER_DETAILS, customerDetails],
-            [updateFulfilmentTime, UPDATE_FULFILMENT_TIME, time],
             [updateUserNote, UPDATE_USER_NOTE, userNote]
         ])('%s should call `%s` mutation with passed value', (action, mutation, value) => {
             // Act

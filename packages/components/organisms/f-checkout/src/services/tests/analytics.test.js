@@ -1,5 +1,8 @@
 import Trak from '@justeat/f-trak';
 import { trackInitialLoad, trackFormInteraction } from '../analytics';
+import {
+    analyticsData
+} from '../../components/_tests/helpers/setup';
 
 describe('checkout analytics', () => {
     let trackEventSpy;
@@ -13,13 +16,6 @@ describe('checkout analytics', () => {
     });
 
     describe('trackInitialLoad :: ', () => {
-        const basket = {
-            id: '11111',
-            total: '12.25'
-        };
-        const restaurantId = '22222';
-        const isLoggedIn = true;
-
         it('should call `event` method of `f-trak`', () => {
             // Arrange
             const expectedEvent = {
@@ -28,21 +24,21 @@ describe('checkout analytics', () => {
                         step: 1
                     },
                     basket: {
-                        id: basket.id,
-                        total: basket.total
+                        id: analyticsData.basket.id,
+                        total: analyticsData.basket.total
                     },
                     restaurant: {
-                        id: restaurantId
+                        id: analyticsData.restaurantId
                     },
                     pageData: {
-                        name: 'Checkout 1 Overview',
+                        name: 'Checkout 1 Guest',
                         group: 'Checkout'
                     }
                 }
             };
 
             // Act
-            trackInitialLoad(basket, restaurantId, isLoggedIn);
+            trackInitialLoad(analyticsData);
 
             // Assert
             expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
@@ -52,6 +48,8 @@ describe('checkout analytics', () => {
             ['Checkout 1 Overview', true],
             ['Checkout 1 Guest', false]
         ])('should set `pageData.name` to %s if isLoggedIn is %s', (expectedName, isLoggedInState) => {
+            analyticsData.isLoggedIn = isLoggedInState;
+
             // Arrange
             const expectedEvent = {
                 custom: {
@@ -59,11 +57,11 @@ describe('checkout analytics', () => {
                         step: 1
                     },
                     basket: {
-                        id: basket.id,
-                        total: basket.total
+                        id: analyticsData.basket.id,
+                        total: analyticsData.basket.total
                     },
                     restaurant: {
-                        id: restaurantId
+                        id: analyticsData.restaurantId
                     },
                     pageData: {
                         name: expectedName,
@@ -73,7 +71,7 @@ describe('checkout analytics', () => {
             };
 
             // Act
-            trackInitialLoad(basket, restaurantId, isLoggedInState);
+            trackInitialLoad(analyticsData);
 
             // Assert
             expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
@@ -81,13 +79,8 @@ describe('checkout analytics', () => {
     });
 
     describe('trackFormInteraction :: ', () => {
-        const eventData = {
-            action: 'start',
-            isLoggedIn: true,
-            error: 'postcodeNotCovered',
-            autofill: 'address.line1',
-            changes: 'address.line1'
-        };
+        const action = 'start';
+        const error = 'postcodeNotCovered';
 
         it('should call `event` method of `f-trak`', () => {
             // Arrange
@@ -95,17 +88,17 @@ describe('checkout analytics', () => {
                 event: 'Form',
                 custom: {
                     form: {
-                        name: 'checkout',
-                        action: eventData.action,
-                        error: eventData.error,
-                        autofill: eventData.autofill,
-                        changes: eventData.changes
+                        name: 'checkout_guest',
+                        action,
+                        error,
+                        autofill: analyticsData.autofill,
+                        changes: analyticsData.changes
                     }
                 }
             };
 
             // Act
-            trackFormInteraction(eventData);
+            trackFormInteraction(action, analyticsData, error);
 
             // Assert
             expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
@@ -116,23 +109,23 @@ describe('checkout analytics', () => {
             ['checkout_guest', false]
         ])('should set `name` to %s if isLoggedIn is %s', (expectedName, isLoggedInState) => {
             // Arrange
-            eventData.isLoggedIn = isLoggedInState;
+            analyticsData.isLoggedIn = isLoggedInState;
 
             const expectedEvent = {
                 event: 'Form',
                 custom: {
                     form: {
                         name: expectedName,
-                        action: eventData.action,
-                        error: eventData.error,
-                        autofill: eventData.autofill,
-                        changes: eventData.changes
+                        action,
+                        error,
+                        autofill: analyticsData.autofill,
+                        changes: analyticsData.changes
                     }
                 }
             };
 
             // Act
-            trackFormInteraction(eventData);
+            trackFormInteraction(action, analyticsData, error);
 
             // Assert
             expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
