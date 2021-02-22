@@ -3,7 +3,7 @@ const footer = new Footer();
 
 describe('f-footer component tests', () => {
     beforeEach(() => {
-        footer.openWithLocale('au');
+        footer.open('au');
         footer.waitForComponent();
     });
 

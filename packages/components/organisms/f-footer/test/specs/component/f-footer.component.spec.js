@@ -4,7 +4,7 @@ const forEach = require('mocha-each');
 
 describe('f-footer component tests', () => {
     beforeEach(() => {
-        footer.open();
+        footer.open('gb');
         footer.waitForComponent();
     });
 

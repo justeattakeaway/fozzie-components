@@ -25,11 +25,7 @@ class Footer extends Page {
         this.socialIconValue = this.socialIcons.filter(element => element.getAttribute('data-test-id').includes(icon))[0];
     }
 
-    open(){
-        super.openComponent('organism', 'footer-component');
-    }
-
-    openWithLocale(locale){
+    open(locale = 'gb'){
         let countryFormatted = locale.toUpperCase();
         let formattedLocale = '';
         switch ( countryFormatted ){
