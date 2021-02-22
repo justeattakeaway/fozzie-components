@@ -3,12 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.15.1
+------------------------------
+*February 18, 2021*
+
+### Changed
+- Bumped up fozzie dependency to 5.0.0.beta3
+  
+
 v3.15.0
 ------------------------------
 *February 18, 2021*
 
 ### Added
 - Instructions for using `Fozzie` option mixins.
+
 
 v3.14.0
 ------------------------------
