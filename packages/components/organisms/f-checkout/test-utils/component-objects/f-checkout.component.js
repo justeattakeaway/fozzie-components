@@ -71,24 +71,29 @@ class Checkout extends Page {
             get error () { return '' }, 
         }
     }
+      /**
+     * @description
+     * Sets the data for the checkout component.
+     *
+     * @param {Object} checkout
+     * @param {String} checkout.type The checkout type
+     * @param {String} checkout.isAuthenticated The checkout authentication
+     * @param {String} checkout.isValid The checkout validation
+     */
 
-    open(checkoutType){
-        let checkoutUrl = ''
-        switch(checkoutType) {
-            case 'delivery':
-              checkoutUrl = 'checkout-component&knob-Get%20Checkout%20Url=%2Fcheckout-delivery.json&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json&knob-Create%20Guest%20Url=%2Fcreate-guest.json&knob-Get%20Basket%20Url=%2Fget-basket-delivery.json&knob-Auth%20token=a&knob-Login%20Url=%2Flogin&viewMode=story'
-              break;
-            case 'collection':
-              checkoutUrl = 'checkout-component&knob-Get%20Checkout%20Url=%2Fcheckout-collection.json&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json&knob-Create%20Guest%20Url=%2Fcreate-guest.json&knob-Auth%20token=a&knob-Login%20Url=%2Flogin&viewMode=story'
-              break;
-            case 'guest':
-              checkoutUrl = 'checkout-component&knob-Get%20Checkout%20Url=%2Fcheckout-delivery.json&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json&knob-Create%20Guest%20Url=%2Fcreate-guest.json&knob-Get%20Basket%20Url=%2Fget-basket-delivery.json&knob-Auth%20token=&knob-Login%20Url=%2Flogin&viewMode=story'
-              break;
-            default:
-              throw new Error(`${checkoutType} is not a valid checkout-type. Please use 'delivery', 'collection' or 'guest'`);
-          }
+    open(checkout){
+        let authQueryString = ''; 
+        let createGuestUrl = '&knob-Create%20Guest%20Url=%2Fcreate-guest.json';
+        let checkoutUrl = checkout.isValid ? `&knob-Get%20Checkout%20Url=%2Fcheckout-${checkout.type}.json` : '';
+        let basketUrl = `&knob-Get%20Basket%20Url=%2Fget-basket-${checkout.type}.json`
 
-        super.openComponent('organism', checkoutUrl);
+        if ( checkout.isAuthenticated ) {
+            authQueryString = '&knob-Auth%20token=a'; 
+            createGuestUrl = '';
+        }
+        
+        let url = `checkout-component${checkoutUrl}&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json${authQueryString}${basketUrl}${createGuestUrl}`
+        super.openComponent('organism', url);
     }
 
     waitForComponent(){

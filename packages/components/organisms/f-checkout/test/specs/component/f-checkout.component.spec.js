@@ -3,7 +3,14 @@ const checkout = new Checkout();
 
 describe('f-checkout component tests', () => {
     before(() => {
-        checkout.open('delivery');
+
+        const checkoutData = {
+            type: 'delivery', 
+            isAuthenticated: true, 
+            isValid: true
+        }
+
+        checkout.open(checkoutData);
         checkout.waitForComponent();
     });
 

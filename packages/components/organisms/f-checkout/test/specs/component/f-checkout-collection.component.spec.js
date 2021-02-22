@@ -4,7 +4,14 @@ const checkout = new Checkout();
 
 describe('f-checkout "collection" component tests', () => {
     before(() => {
-        checkout.open('collection');
+
+        const checkoutData = {
+            type: 'collection', 
+            isAuthenticated: true, 
+            isValid: true
+        }
+
+        checkout.open(checkoutData);
         checkout.waitForComponent();
     });
 
