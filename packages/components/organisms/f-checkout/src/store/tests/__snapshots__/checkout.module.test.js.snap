@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CheckoutModule getters :: analyticsData :: should return \`isLoggedIn 1`] = `
+Object {
+  "autofill": Array [],
+  "basket": Object {
+    "id": "",
+    "total": 0,
+  },
+  "changes": Array [],
+  "isLoggedIn": false,
+  "restaurantId": "",
+}
+`;
+
 exports[`CheckoutModule mutations :: UPDATE_STATE :: should update state with delivery response. 1`] = `
 Object {
   "address": Object {

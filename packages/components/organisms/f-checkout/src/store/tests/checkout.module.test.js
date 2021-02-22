@@ -4,6 +4,7 @@ import checkoutDelivery from '../../demo/checkout-delivery.json';
 import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
+import * as analytics from '../../services/analytics';
 
 import {
     UPDATE_AUTH,
@@ -20,7 +21,11 @@ import {
     UPDATE_AUTO_FILL
 } from '../mutation-types';
 
-const { actions, mutations } = CheckoutModule;
+const { actions, getters, mutations } = CheckoutModule;
+
+const {
+    analyticsData
+} = getters;
 
 const {
     createGuestUser,
@@ -114,6 +119,14 @@ describe('CheckoutModule', () => {
         expect(state).toEqual(defaultState);
     });
 
+    describe('getters ::', () => {
+        describe('analyticsData ::', () => {
+            it('should return `isLoggedIn', () => {
+                expect(analyticsData(state)).toMatchSnapshot();
+            })
+        });
+    });
+
     describe('mutations ::', () => {
         beforeEach(() => {
             state = defaultState;
@@ -195,24 +208,54 @@ describe('CheckoutModule', () => {
                         id: '11111',
                         total: '12.50'
                     },
-                    resturantId: '22222'
+                    restaurantId: '22222'
                 };
                 mutations[UPDATE_BASKET_DETAILS](state, eventData);
 
                 // Assert
                 expect(state.serviceType).toEqual(eventData.serviceType);
                 expect(state.basket).toEqual(eventData.basket);
-                expect(state.resturant).toEqual(eventData.resturant);
+                expect(state.restaurantId).toEqual(eventData.restaurantId);
             });
         });
 
         describe(`${UPDATE_FIELD_CHANGES} ::`, () => {
-            it('should update state with received value', () => {
-                // Arrange & Act
-                mutations[UPDATE_FIELD_CHANGES](state, 'phone');
+            const field = 'phone';
+            let cleanFieldsSpy;
+
+            beforeEach(() => {
+                cleanFieldsSpy = jest.spyOn(analytics, 'cleanFields');
+            });
+
+            it('should call `cleanFields`', () => {
+                // Arrange
+                cleanFieldsSpy = jest.spyOn(analytics, 'cleanFields');
+
+                // Act
+                mutations[UPDATE_FIELD_CHANGES](state, field);
 
                 // Assert
-                expect(state.changes).toEqual(['phone']);
+                expect(cleanFieldsSpy).toHaveBeenCalledWith(field);
+            });
+
+            it('should update state with received value', () => {
+                // Arrange & Act
+                mutations[UPDATE_FIELD_CHANGES](state, field);
+
+                // Assert
+                expect(state.changes).toEqual([field]);
+            });
+
+            it('should only add changes once per field', () => {
+                // Arrange
+                state.changes = [field]
+
+                //Act
+                mutations[UPDATE_FIELD_CHANGES](state, field);
+
+                // Assert
+                expect(state.changes).not.toEqual([field, field]);
+                expect(state.changes).toEqual([field]);
             });
         });
 

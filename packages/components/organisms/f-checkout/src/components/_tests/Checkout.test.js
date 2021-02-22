@@ -1815,6 +1815,7 @@ describe('Checkout', () => {
 
             describe('when form is Invalid', () => {
                 let wrapper;
+                let cleanFieldsSpy;
                 let getFormValidationStateSpy;
 
                 const mockValidationState = {
@@ -1828,6 +1829,7 @@ describe('Checkout', () => {
                 };
 
                 beforeEach(() => {
+                    cleanFieldsSpy = jest.spyOn(analytics, 'cleanFields');
                     getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
                     getFormValidationStateSpy.mockReturnValue(mockValidationState);
                     isFormValidSpy.mockReturnValue(false);
@@ -1850,6 +1852,17 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                });
+
+                it('should call `cleanFields` with `invalidFields`', async () => {
+                    // Arrange
+                    const invalidFields = mockValidationState.invalidFields;
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(cleanFieldsSpy).toHaveBeenCalledWith(invalidFields);
                 });
 
                 it('should call `trackFormInteraction` with and correct `action` and `error`', async () => {
@@ -1891,7 +1904,7 @@ describe('Checkout', () => {
                     expect(submitCheckoutSpy).toHaveBeenCalled();
                 });
 
-                it('should call `trackFormInteractionSpy` with correct action', async () => {
+                it('should call `trackFormInteractionSpy` with correct `action`', async () => {
                     // Arrange
                     const action = 'success';
 
@@ -1934,7 +1947,7 @@ describe('Checkout', () => {
                     expect(handleErrorStateSpy).toHaveBeenCalledWith(error);
                 });
 
-                it('should call `trackFormInteractionSpy` with correct action and error', async () => {
+                it('should call `trackFormInteractionSpy` with correct `action` and `error`', async () => {
                     // Arrange
                     const action = 'error';
                     const analyticsError = 'notOrderable';
