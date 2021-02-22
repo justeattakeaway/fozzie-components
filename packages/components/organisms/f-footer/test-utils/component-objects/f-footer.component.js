@@ -38,7 +38,7 @@ class Footer extends Page {
                 formattedLocale = `en-${countryFormatted}`
                 break
             default: 
-                throw new Error (`locale ${countryFormatted} is not supported`)
+                throw new Error (`locale ${countryFormatted} is not supported`);
         }
         super.openComponent('organism', `footer-component&knob-Locale=${formattedLocale}`);
     }
