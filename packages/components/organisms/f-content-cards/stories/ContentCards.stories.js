@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import mock, { proxy } from 'xhr-mock';
-import { defaultEnabledCardTypes } from '@justeat/f-metadata/src/services/contentCard.service';
+import { defaultEnabledCardTypes } from '@justeat/f-braze-adapter/src/services/contentCard.service';
 
 import { ContentCards } from '../src';
 

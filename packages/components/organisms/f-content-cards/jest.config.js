@@ -13,7 +13,7 @@ module.exports = {
     },
 
     transformIgnorePatterns: [
-        'node_modules/(?!(lodash-es|@justeat/f-metadata)/)'
+        'node_modules/(?!(lodash-es|@justeat/f-braze-adapter)/)'
     ],
 
     moduleNameMapper: {

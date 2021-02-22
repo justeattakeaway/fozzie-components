@@ -8,7 +8,7 @@ const appboy = {
     })
 };
 
-describe('f-metadata › isAppboyInitialised', () => {
+describe('f-braze-adapter › isAppboyInitialised', () => {
     afterEach(() => {
         jest.resetAllMocks();
     });

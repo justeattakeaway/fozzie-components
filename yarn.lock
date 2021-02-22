@@ -1963,6 +1963,13 @@
   dependencies:
     vue-i18n "8.0.0"
 
+"@justeat/f-header@4.6.0":
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-header/-/f-header-4.6.0.tgz#e5a384729f73b8803794aa3b41c0ee53e2218478"
+  integrity sha512-sAphBaWPj073+0uP6Hr75SgV9I3OMUCd0hgyCAjDRcpHiZka9J83ySzHU/lf6VRvN22U01++p2T8LuIP95YgyQ==
+  dependencies:
+    "@justeat/f-services" "1.3.0"
+
 "@justeat/f-icons@3.4.0":
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.4.0.tgz#dbdeb97c562926dc1c4b98685b25203a97dbd5ff"
