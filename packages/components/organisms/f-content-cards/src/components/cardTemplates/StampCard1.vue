@@ -1,7 +1,7 @@
 <template>
     <component
-        :is="url ? 'a' : 'div'"
-        :href="url"
+        :is="card.url ? 'a' : 'div'"
+        :href="card.url"
         :data-test-id="testId"
         :class="[$style['c-stampCard1']]"
         @click="onClickContentCard"
@@ -10,27 +10,27 @@
             <img
                 :class="[$style['c-stampCard1-icon']]"
                 :data-test-id="testIdForSection('image')"
-                :src="image"
-                :alt="title">
+                :src="card.image"
+                :alt="card.title">
             <h3
                 :class="[$style['c-stampCard1-title']]"
                 :data-test-id="testIdForSection('title')">
-                {{ title }}
+                {{ card.title }}
             </h3>
 
             <p
                 :class="[$style['c-stampCard1-statusText']]"
                 :data-test-id="testIdForSection('statusText')"
-                v-html="statusText" />
+                v-html="card.subtitle" />
         </div>
         <div
-            v-if="isReadyToClaim"
+            v-if="card.isReadyToClaim"
             :class="[
                 $style['c-stampCard1-redemptionDetails']
             ]"
             :data-test-id="testIdForSection('redemptionDetails')">
             <div
-                v-for="(subStatusLine, index) in subStatusText"
+                v-for="(subStatusLine, index) in card.description"
                 :key="index"
                 :class="[$style['c-stampCard1-subStatusText']]"
                 :data-test-id="testIdForSection('subStatusText', index)">
@@ -39,7 +39,7 @@
             <div
                 :class="[$style['c-stampCard1-expiryInfo']]"
                 :data-test-id="testIdForSection('expiryInfo')">
-                {{ expiryLine }}
+                {{ card.expiryLine }}
             </div>
         </div>
         <div
@@ -98,47 +98,11 @@ export default {
     },
 
     computed: {
-        title () {
-            return this.card.title;
-        },
-
-        description () {
-            return this.card.description;
-        },
-
-        image () {
-            return this.card.image;
-        },
-
-        url () {
-            return this.card.url;
-        },
-
-        discountPercentage () {
-            return this.card.discountPercentage;
-        },
-
-        earnedStamps () {
-            return this.card.earnedStamps;
-        },
-
-        expiryDate () {
-            return this.card.expiryDate;
-        },
-
-        expiryLine () {
-            return this.card.expiryLine;
-        },
-
-        isReadyToClaim () {
-            return !!this.card.isReadyToClaim;
-        },
-
         stamps () {
             const stamps = [];
 
-            for (let i = 0; i < this.totalRequiredStamps; i++) {
-                const full = (i < this.earnedStamps);
+            for (let i = 0; i < this.card.totalRequiredStamps; i++) {
+                const full = (i < this.card.earnedStamps);
                 stamps.push(full ? {
                     stampImage: 'FullStamp',
                     classSuffix: 'Full'
@@ -149,14 +113,6 @@ export default {
             }
 
             return stamps;
-        },
-
-        statusText () {
-            return this.card.subtitle;
-        },
-
-        subStatusText () {
-            return this.description;
         },
 
         testIdForSection () {
