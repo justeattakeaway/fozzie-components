@@ -44,7 +44,7 @@ export default [
     {
         key: 'ca',
         dataTestKey: 'ca_fr',
-        localisedName: 'Canada',
+        localisedName: 'Canada (FR)',
         siteUrl: 'https://www.skipthedishes.com/fr',
         gtm: 'click_country_ca_fr'
     },

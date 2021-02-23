@@ -6,9 +6,8 @@
         data-test-id="countrySelector-toggle"
         v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: closeCountrySelector }"
         @keyup.esc="closeCountrySelector">
-        <f-button
+        <button
             :tabindex="isBelowMid && !navIsOpen ? -1 : 0"
-            button-type="icon"
             class="c-nav-list-text c-countrySelector-btn"
             :aria-expanded="countrySelectorIsOpenOnDesktopView ? 'true' : 'false'"
             :aria-haspopup="!isBelowMid"
@@ -23,14 +22,14 @@
             <span class='c-countrySelector-title'>
                 {{ copy.countrySelector.selectYourCountryText }}
             </span>
-        </f-button>
+        </button>
 
         <div :class="['c-nav-panel', { 'is-visible': countrySelectorIsOpen }]">
             <div class="c-nav-popoverList c-nav-popoverList--countrySelector">
                 <header class="c-nav-popoverList-header">
                     <f-button
-                        button-type="icon"
-                        button-size="xsmall"
+                        button-type="ghost"
+                        is-icon
                         class="c-nav-popoverList-header-button"
                         :aria-label="copy.countrySelector.goBackToMainMenu"
                         @click="closeCountrySelector">
@@ -175,16 +174,12 @@ $countrySelector-flag-height : 16px;
     @include media('>=mid') {
         display: none;
     }
-}
 
-.c-nav-popoverList-go-back-icon {
-    transform: rotate(180deg);
-    width: 28px;
-    height: 28px;
-    display: inline-block;
-
-    use {
-        fill: $countrySelector-icon-color;
+    .c-nav-popoverList-go-back-icon {
+        transform: rotate(180deg);
+        display: inline-block;
+        width: 28px;
+        height: 28px;
     }
 }
 
@@ -242,6 +237,8 @@ $countrySelector-flag-height : 16px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 0;
+    background: transparent;
 }
 
 .c-nav-list-item .c-countrySelector-btn {
