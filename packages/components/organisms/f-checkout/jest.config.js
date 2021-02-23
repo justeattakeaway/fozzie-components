@@ -9,7 +9,7 @@ module.exports = {
         '^.+\\.js$': 'babel-jest',
         '^.+\\.vue$': 'vue-jest',
         '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
-        '^.+\\.svg$': './svgTransform.js'
+        '^.+\\.svg$': './../../../../test/utils/svgTransform.js'
     },
 
     transformIgnorePatterns: [

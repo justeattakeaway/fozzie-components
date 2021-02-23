@@ -12,7 +12,7 @@ let sessionTimeoutInSeconds,
 
 jest.mock('../BrazeDispatcher');
 
-describe('f-metadata initialise', () => {
+describe('f-braze-adapter initialise', () => {
     beforeEach(() => {
         jest.resetAllMocks();
         jest.isolateModules(() => {
