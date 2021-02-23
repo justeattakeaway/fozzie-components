@@ -1,27 +1,12 @@
 <template>
-    <div>
-        <header-component
-            data-test-id="header-component"
-            :locale="componentLocale"
-            is-transparent />
-
-        <main-banner-container
-            data-test-id="main-banner-container"
-            :base-hero-url="baseHeroUrl"
-            :copy="copy"
-            :locale="componentLocale" />
-
-        <footer-component
-            data-test-id="footer-component"
-            :locale="componentLocale" />
-    </div>
+    <main-banner-container
+        data-test-id="main-banner-container"
+        :base-hero-url="baseHeroUrl"
+        :copy="copy"
+        :locale="componentLocale" />
 </template>
 
 <script>
-import HeaderComponent from '@justeat/f-header';
-import '@justeat/f-header/dist/f-header.css';
-import FooterComponent from '@justeat/f-footer';
-import '@justeat/f-footer/dist/f-footer.css';
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 import MainBannerContainer from './MainBannerContainer.vue';
@@ -29,8 +14,6 @@ import { BASE_HERO_URL } from '../constants';
 
 export default {
     components: {
-        HeaderComponent,
-        FooterComponent,
         MainBannerContainer
     },
 
@@ -46,8 +29,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss" module>
-
-
-</style>

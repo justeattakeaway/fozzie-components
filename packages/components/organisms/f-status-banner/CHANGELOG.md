@@ -3,12 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
-(To be added to the next release)
+v1.1.0
 ------------------------------
-*February 19, 2021*
+*February 23, 2021*
 
-### Fixed
+### Removed
+- `header` & `footer` components so the consuming application can render their own.
+- Tests that covered header & footer.
 - Storybook dispatch error.
 
 
