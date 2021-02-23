@@ -10,6 +10,7 @@ v0.59.0
 
 ### Added
 - `placeOrder` to call the Order Placement API.
+
 ### Changed
 - Extracted svgTransform to global test utils for reference by other packages
 - How we pass the parameters to the `PATCH` Checkout request.
