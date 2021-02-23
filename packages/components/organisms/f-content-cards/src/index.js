@@ -14,7 +14,8 @@ import {
     VoucherCard,
     HomePromotionCard1,
     HomePromotionCard2,
-    GroupHeaderCard
+    GroupHeaderCard,
+    StampCard1
 } from './components/cardTemplates';
 
 export {
@@ -29,5 +30,6 @@ export {
     VoucherCard,
     HomePromotionCard1,
     HomePromotionCard2,
-    GroupHeaderCard
+    GroupHeaderCard,
+    StampCard1
 };
