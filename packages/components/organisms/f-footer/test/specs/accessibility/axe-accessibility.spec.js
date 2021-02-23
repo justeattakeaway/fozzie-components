@@ -6,7 +6,7 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-footer component WCAG compliance for AU Locale', () => {
         // Act
-        footer.openWithLocale('au');
+        footer.open('au');
         const axeResults = getAccessibilityTestResults('f-footer');
     });
 

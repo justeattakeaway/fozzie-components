@@ -2,7 +2,7 @@ const Tabs = require ('../../../test-utils/component-objects/f-tabs.component');
 const tabs = new Tabs();
 
 describe('f-tabs component tests', () => {
-    before(() => {
+    beforeEach(() => {
         tabs.open();
         tabs.waitForComponent();
     });
