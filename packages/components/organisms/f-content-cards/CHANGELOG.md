@@ -10,6 +10,7 @@ v4.0.0
 
 ### Updated
 - ContentCards component now surfaces card state via several named 'slots' as documented in README.md
+- PostOrderCard now always opens its link in a new tab
 
 
 v3.4.0
