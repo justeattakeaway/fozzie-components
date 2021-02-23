@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 
 import asyncUserDetails from './__mocks__/api.account.details.json';
 import {
@@ -72,7 +72,7 @@ describe('Navigation', () => {
 
     it('should show "logout" if the user is logged in and has nav link data', async () => {
         // Arrange
-        wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
+        wrapper = mount(Navigation, { propsData: defaultPropsData });
 
         // Act
         await wrapper.setData({
@@ -88,7 +88,7 @@ describe('Navigation', () => {
 
     it('should show "navLinks" if the user is logged in and has nav link data', async () => {
         // Arrange
-        wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
+        wrapper = mount(Navigation, { propsData: defaultPropsData });
 
         // Act
         await wrapper.setData({
