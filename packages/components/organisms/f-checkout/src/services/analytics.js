@@ -1,6 +1,6 @@
 import Trak from '@justeat/f-trak';
 
-const names = {
+const fieldMapper = {
     'address.line1': 'addressLine1',
     line1: 'addressLine1',
     'address.line2': 'addressLine2',
@@ -15,7 +15,6 @@ const names = {
     mobileNumber: 'phone',
     'customer.email': 'email'
 };
-
 
 /**
  * Pushes `form` event to the data layer with correct data
@@ -75,11 +74,11 @@ const trackInitialLoad = data => {
 /**
  * Updates passed fields to match analytics requirements.
  */
-const cleanFields = fields => {
+const mapFieldNames = fields => {
     if (Array.isArray(fields)) {
-        return fields.map(item => (names[item] ? names[item] : item)).sort();
+        return fields.map(field => (fieldMapper[field] ? fieldMapper[field] : field)).sort();
     }
-    return names[fields] ? names[fields] : fields;
+    return fieldMapper[fields] ? fieldMapper[fields] : fields;
 };
 
-export { trackInitialLoad, trackFormInteraction, cleanFields };
+export { trackInitialLoad, trackFormInteraction, mapFieldNames };

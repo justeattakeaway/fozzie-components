@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CheckoutModule getters :: analyticsData :: should return \`isLoggedIn 1`] = `
+exports[`CheckoutModule getters :: analyticsData\` :: should return \`isLoggedIn 1`] = `
 Object {
   "autofill": Array [],
   "basket": Object {

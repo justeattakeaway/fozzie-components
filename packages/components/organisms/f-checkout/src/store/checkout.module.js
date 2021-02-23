@@ -1,6 +1,6 @@
 import axios from 'axios';
 import addressService from '../services/addressService';
-import { cleanFields } from '../services/analytics';
+import { mapFieldNames } from '../services/analytics';
 
 import {
     UPDATE_AUTH,
@@ -14,7 +14,7 @@ import {
     UPDATE_STATE,
     UPDATE_USER_NOTE,
     UPDATE_FIELD_CHANGES,
-    UPDATE_AUTO_FILL
+    UPDATE_AUTOFILL
 } from './mutation-types';
 
 export default {
@@ -96,7 +96,7 @@ export default {
             commit(UPDATE_STATE, data);
 
             if (state.isLoggedIn) {
-                commit(UPDATE_AUTO_FILL);
+                commit(UPDATE_AUTOFILL);
             }
         },
 
@@ -238,7 +238,7 @@ export default {
             const addressDetails = addressService.getClosestAddress(data.Addresses, tenant);
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
-            commit(UPDATE_AUTO_FILL);
+            commit(UPDATE_AUTOFILL);
         },
 
         setAuthToken: ({ commit }, authToken) => {
@@ -363,14 +363,14 @@ export default {
         },
 
         [UPDATE_FIELD_CHANGES]: (state, field) => {
-            const cleanedField = cleanFields(field);
+            const cleanedField = mapFieldNames(field);
 
             if (!state.changes.includes(cleanedField)) {
                 state.changes.push(cleanedField);
             }
         },
 
-        [UPDATE_AUTO_FILL]: state => {
+        [UPDATE_AUTOFILL]: state => {
             const autofill = [];
 
             if (state.customer.mobileNumber) {
@@ -380,7 +380,7 @@ export default {
             if (state.serviceType === 'delivery') {
                 Object.entries(state.address).forEach(([key, value]) => {
                     if (value) {
-                        autofill.push(cleanFields(key));
+                        autofill.push(mapFieldNames(key));
                     }
                 });
             }

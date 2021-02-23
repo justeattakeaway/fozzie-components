@@ -76,7 +76,7 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import { required, email } from 'vuelidate/lib/validators';
-import { mapGetters, mapState, mapActions } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
@@ -105,7 +105,7 @@ import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import mapUpdateCheckoutRequest from '../services/mapper';
-import { trackInitialLoad, trackFormInteraction, cleanFields } from '../services/analytics';
+import { mapFieldNames, trackFormInteraction, trackInitialLoad } from '../services/analytics';
 
 export default {
     name: 'VueCheckout',
@@ -287,7 +287,6 @@ export default {
         await this.initialise();
 
         trackInitialLoad(this.analyticsData);
-
         trackFormInteraction('start', this.analyticsData);
     },
 
@@ -497,11 +496,11 @@ export default {
             }
         },
 
+        /**
+         * Emit `CheckoutFailure` event with error data
+         * Update `genericErrorMessage` to display correct errorMessage for passed error
+         */
         handleErrorState (error) {
-            /*
-            * Emit `CheckoutFailure` event with error data
-            * Update `genericErrorMessage` to display correct errorMessage for passed error
-            */
             let thrownErrors = error;
 
             // Ideally we would use optional chaining but it doesn't currently work with Storybook
@@ -542,21 +541,22 @@ export default {
             }
         },
 
+        /**
+         * Check for is valid - no inline messages
+         * If form is valid try to call `submitCheckout`
+         * Catch and handle any errors
+         */
         async onFormSubmit () {
-            /*
-            * Check for is valid - no inline messages
-            * If form is valid try to call `submitCheckout`
-            * Catch and handle any errors
-            */
             trackFormInteraction('submit', this.analyticsData);
 
             if (!this.isFormValid()) {
                 const validationState = validations.getFormValidationState(this.$v);
-                const analyticsValidations = cleanFields(validationState.invalidFields);
+                const analyticsValidations = mapFieldNames(validationState.invalidFields);
 
                 this.$emit(EventNames.CheckoutValidationError, validationState);
 
                 trackFormInteraction('inline_error', this.analyticsData, analyticsValidations);
+                trackFormInteraction('error', this.analyticsData, 'basketNotOrderable');
 
                 this.$logger.logWarn(
                     'Checkout Validation Error',
@@ -574,32 +574,32 @@ export default {
                 trackFormInteraction('success', this.analyticsData);
             } catch (error) {
                 this.handleErrorState(error);
-                trackFormInteraction('error', this.analyticsData, 'notOrderable');
+                trackFormInteraction('error', this.analyticsData, 'basketNotOrderable');
             } finally {
                 this.shouldDisableCheckoutButton = false;
             }
         },
 
+        /**
+         * Check to see if any `Vuelidate` validation errors
+         */
         isFormValid () {
-            /*
-            * Check to see if any `Vuelidate` validation errors
-            */
             this.$v.$touch();
             return !this.$v.$invalid;
         },
 
-        /*
-        * Use phone validation in `f-services` to check if customer number is
-        * valid in current locale
-        */
+        /**
+         * Use phone validation in `f-services` to check if customer number is
+         * valid in current locale
+         */
         isValidPhoneNumber () {
             return validations.isValidPhoneNumber(this.customer.mobileNumber, this.$i18n.locale);
         },
 
-        /*
-        * Use postcode validation in `f-services` to check if customer postcode is
-        * valid in current locale
-        */
+        /**
+         * Use postcode validation in `f-services` to check if customer postcode is
+         * valid in current locale
+         */
         isValidPostcode () {
             return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
         }

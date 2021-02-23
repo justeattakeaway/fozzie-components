@@ -1,5 +1,5 @@
 import Trak from '@justeat/f-trak';
-import { trackInitialLoad, trackFormInteraction, cleanFields } from '../analytics';
+import { trackInitialLoad, trackFormInteraction, mapFieldNames } from '../analytics';
 import {
     analyticsData
 } from '../../components/_tests/helpers/setup';
@@ -132,7 +132,7 @@ describe('checkout analytics', () => {
         });
     });
 
-    describe('cleanFields :: ', () => {
+    describe('mapFieldNames :: ', () => {
         it.each([
             ['address.line1', 'addressLine1'],
             ['line1', 'addressLine1'],
@@ -147,12 +147,12 @@ describe('checkout analytics', () => {
             ['customer.mobileNumber', 'phone'],
             ['mobileNumber', 'phone'],
             ['customer.email', 'email']
-        ])('should correct %s to %s', (provided, cleaned) => {
+        ])('should correct %s to %s', (provided, expected) => {
             // Act & Assert
-            expect(cleanFields(provided)).toEqual(cleaned);
+            expect(mapFieldNames(provided)).toEqual(expected);
         });
 
-        it('should correctly clean an array of fields', () => {
+        it('should correctly map an array of field names', () => {
             // Arrange
             const provided = [
                 'mobilePhone',
@@ -173,7 +173,7 @@ describe('checkout analytics', () => {
             ];
 
             // Act & Assert
-            expect(cleanFields(provided)).toEqual(expected);
+            expect(mapFieldNames(provided)).toEqual(expected);
         });
     });
 });

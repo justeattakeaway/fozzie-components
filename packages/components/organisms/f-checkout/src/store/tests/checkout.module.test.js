@@ -18,7 +18,7 @@ import {
     UPDATE_STATE,
     UPDATE_USER_NOTE,
     UPDATE_FIELD_CHANGES,
-    UPDATE_AUTO_FILL
+    UPDATE_AUTOFILL
 } from '../mutation-types';
 
 const { actions, getters, mutations } = CheckoutModule;
@@ -120,10 +120,10 @@ describe('CheckoutModule', () => {
     });
 
     describe('getters ::', () => {
-        describe('analyticsData ::', () => {
+        describe('analyticsData` ::', () => {
             it('should return `isLoggedIn', () => {
                 expect(analyticsData(state)).toMatchSnapshot();
-            })
+            });
         });
     });
 
@@ -201,7 +201,7 @@ describe('CheckoutModule', () => {
 
         describe(`${UPDATE_BASKET_DETAILS} ::`, () => {
             it('should update state with received value', () => {
-                // Arrange & Act
+                // Arrange
                 const eventData = {
                     serviceType: 'delivery',
                     basket: {
@@ -210,6 +210,8 @@ describe('CheckoutModule', () => {
                     },
                     restaurantId: '22222'
                 };
+
+                // Act
                 mutations[UPDATE_BASKET_DETAILS](state, eventData);
 
                 // Assert
@@ -221,21 +223,21 @@ describe('CheckoutModule', () => {
 
         describe(`${UPDATE_FIELD_CHANGES} ::`, () => {
             const field = 'phone';
-            let cleanFieldsSpy;
+            let mapFieldNamesSpy;
 
             beforeEach(() => {
-                cleanFieldsSpy = jest.spyOn(analytics, 'cleanFields');
+                mapFieldNamesSpy = jest.spyOn(analytics, 'mapFieldNames');
             });
 
-            it('should call `cleanFields`', () => {
+            it('should call `mapFieldNames`', () => {
                 // Arrange
-                cleanFieldsSpy = jest.spyOn(analytics, 'cleanFields');
+                mapFieldNamesSpy = jest.spyOn(analytics, 'mapFieldNames');
 
                 // Act
                 mutations[UPDATE_FIELD_CHANGES](state, field);
 
                 // Assert
-                expect(cleanFieldsSpy).toHaveBeenCalledWith(field);
+                expect(mapFieldNamesSpy).toHaveBeenCalledWith(field);
             });
 
             it('should update state with received value', () => {
@@ -248,9 +250,9 @@ describe('CheckoutModule', () => {
 
             it('should only add changes once per field', () => {
                 // Arrange
-                state.changes = [field]
+                state.changes = [field];
 
-                //Act
+                // Act
                 mutations[UPDATE_FIELD_CHANGES](state, field);
 
                 // Assert
@@ -259,9 +261,9 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe(`${UPDATE_AUTO_FILL} ::`, () => {
+        describe(`${UPDATE_AUTOFILL} ::`, () => {
             it('should update `autofill` with an empty array if `customer` and `address` are empty', () => {
-                // Arrange & Act
+                // Arrange
                 state = {
                     ...state,
                     customer: {
@@ -278,14 +280,15 @@ describe('CheckoutModule', () => {
                     }
                 };
 
-                mutations[UPDATE_AUTO_FILL](state);
+                // Act
+                mutations[UPDATE_AUTOFILL](state);
 
                 // Assert
                 expect(state.autofill).toEqual([]);
             });
 
             it('should update `autofill` with an array of filled fields', () => {
-                // Arrange & Act
+                // Arrange
                 state = {
                     ...state,
                     customer: {
@@ -302,7 +305,8 @@ describe('CheckoutModule', () => {
                     }
                 };
 
-                mutations[UPDATE_AUTO_FILL](state);
+                // Act
+                mutations[UPDATE_AUTOFILL](state);
 
                 // Assert
                 expect(state.autofill).toEqual(['phone', 'addressLine1']);
@@ -362,13 +366,12 @@ describe('CheckoutModule', () => {
                 expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
             });
 
-            it(`should call ${UPDATE_AUTO_FILL} mutation with an array of updated field names.`, async () => {
+            it(`should call ${UPDATE_AUTOFILL} mutation with an array of updated field names.`, async () => {
                 // Act
                 await getCheckout({ commit, state }, payload);
 
                 // Assert
-                // TODO: Check this
-                expect(commit).toHaveBeenCalledWith(UPDATE_AUTO_FILL);
+                expect(commit).toHaveBeenCalledWith(UPDATE_AUTOFILL);
             });
         });
 
@@ -430,13 +433,12 @@ describe('CheckoutModule', () => {
                 });
             });
 
-            it(`should call ${UPDATE_AUTO_FILL} mutation with an array of updated field names.`, async () => {
+            it(`should call ${UPDATE_AUTOFILL} mutation with an array of updated field names.`, async () => {
                 // Act
                 await getAddress({ commit, state }, payload);
 
                 // Assert
-                // TODO: Check this
-                expect(commit).toHaveBeenCalledWith(UPDATE_AUTO_FILL);
+                expect(commit).toHaveBeenCalledWith(UPDATE_AUTOFILL);
             });
         });
 
