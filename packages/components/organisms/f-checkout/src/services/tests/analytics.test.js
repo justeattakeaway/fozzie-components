@@ -4,7 +4,7 @@ import {
     analyticsData
 } from '../../components/_tests/helpers/setup';
 
-describe('checkout analytics', () => {
+describe('Checkout Analytics', () => {
     let trackEventSpy;
 
     beforeEach(() => {
