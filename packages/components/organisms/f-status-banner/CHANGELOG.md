@@ -10,7 +10,8 @@ v1.1.0
 ### Removed
 - `header` & `footer` components so the consuming application can render their own.
 - Tests that covered header & footer.
- 
+- Storybook dispatch error.
+
 
 v1.0.0
 ------------------------------

@@ -1,12 +1,12 @@
 {
-  "name": "@justeat/f-metadata",
-  "description": "Fozzie Metadata Component",
-  "version": "3.0.0-beta.7",
+  "name": "@justeat/f-braze-adapter",
+  "description": "Fozzie Metadata Service",
+  "version": "3.0.0",
   "main": "src/index.js",
   "files": [
     "src"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-metadata",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-braze-adapter",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
