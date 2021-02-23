@@ -7,6 +7,14 @@ v1.0.0
 ------------------------------
 *February 12, 2021*
 
+### Removed
+- `header` & `footer` components so the consuming application can render their own.
+- Tests that covered header & footer.
+
+v1.0.0
+------------------------------
+*February 12, 2021*
+
 ### Added
 - `PageBanner.vue`, `MainBannerContainer.vue` components.
 - Copy for each tenant.
