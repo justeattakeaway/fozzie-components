@@ -2117,10 +2117,10 @@
   resolved "https://registry.yarnpkg.com/@justeat/fozzie-colour-palette/-/fozzie-colour-palette-3.1.0.tgz#3bbe51404025c5ef8c5e8bf8280a266e51d2a640"
   integrity sha512-QWkVa0Hv1xQ6nqxY3S1V37fAQUdIaTO1RtAhCKIe5YmNKBKEegW0PbmFIcPk3ojBVnL6Q1hzUhs3wGvOLJAMbg==
 
-"@justeat/fozzie@5.0.0-beta.2":
-  version "5.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-5.0.0-beta.2.tgz#ed91461310351697d8bcc1167a24dbc56407ab4e"
-  integrity sha512-cROpcQUrdqZzjvvTtkQXcqHvvNknxYtLWgjDm0x3hQCaRV/aDiaiBLEiFYBhF2ZSSjjT/9EXpKDahh4pRtub1A==
+"@justeat/fozzie@5.0.0-beta.3":
+  version "5.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-5.0.0-beta.3.tgz#13baadeb6774567991bc6f3ed622e8fceb8b1327"
+  integrity sha512-aqgDOC1yvAu5hP1Nxji2cQTGAGFE4e5iLPfRC4VfBMqcHp3iAC4CnQjw5phMpTSw9J9/dducptzEd+yaxmnTLQ==
   dependencies:
     "@justeat/f-dom" "1.1.0"
     "@justeat/f-logger" "0.8.1"

@@ -1,7 +1,14 @@
 <template>
     <div>
         <div
-            v-if="hasCheckoutLoadedSuccessfully"
+            v-if="shouldShowSpinner"
+            :class="$style['c-spinner-wrapper']"
+            data-test-id="checkout-loading-spinner"
+        >
+            <div :class="$style['c-spinner']" />
+        </div>
+        <div
+            v-else-if="shouldShowCheckoutForm"
             data-theme="jet"
             data-test-id="checkout-component">
             <alert
@@ -69,7 +76,7 @@
             </card>
         </div>
 
-        <error-page v-else />
+        <error-page v-else-if="shouldShowErrorPage" />
     </div>
 </template>
 
@@ -206,7 +213,9 @@ export default {
             tenantConfigs,
             genericErrorMessage: null,
             shouldDisableCheckoutButton: false,
-            hasCheckoutLoadedSuccessfully: true
+            hasCheckoutLoadedSuccessfully: true,
+            shouldShowSpinner: false,
+            isLoading: false
         };
     },
 
@@ -274,6 +283,14 @@ export default {
             return this.isLoggedIn &&
             this.isCheckoutMethodDelivery &&
             (!this.address || !this.address.line1);
+        },
+
+        shouldShowCheckoutForm () {
+            return !this.isLoading && this.hasCheckoutLoadedSuccessfully;
+        },
+
+        shouldShowErrorPage () {
+            return !this.hasCheckoutLoadedSuccessfully;
         }
     },
 
@@ -308,13 +325,17 @@ export default {
          *
          */
         async initialise () {
+            this.isLoading = true;
             this.setAuthToken(this.authToken);
+
+            this.startSpinnerCountdown();
 
             const promises = this.isLoggedIn
                 ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
                 : [this.loadBasket(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
+            this.resetLoadingState();
 
             if (this.shouldLoadAddress) {
                 await this.loadAddress();
@@ -602,6 +623,19 @@ export default {
          */
         isValidPostcode () {
             return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
+        },
+
+        resetLoadingState () {
+            this.isLoading = false;
+            this.shouldShowSpinner = false;
+        },
+
+        startSpinnerCountdown () {
+            setTimeout(() => {
+                if (this.isLoading) {
+                    this.shouldShowSpinner = true;
+                }
+            }, 1000);
         }
     },
 
@@ -651,6 +685,19 @@ export default {
 </script>
 
 <style lang="scss" module>
+@include loadingIndicator('large');
+
+.c-spinner-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .c-spinner {
+        margin: 0 auto;
+    }
+  }
+
 .c-checkout {
     padding-top: spacing(x6);
     padding-bottom: spacing(x6);

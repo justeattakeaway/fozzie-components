@@ -9,11 +9,12 @@ module.exports = {
     transform: {
         '^.+\\.js$': 'babel-jest',
         '^.+\\.vue$': 'vue-jest',
-        '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub'
+        '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+        '^.+\\.svg$': './../../../../test/utils/svgTransform.js'
     },
 
     transformIgnorePatterns: [
-        'node_modules/(?!(lodash-es|@justeat/f-metadata)/)'
+        'node_modules/(?!(lodash-es|@justeat/f-braze-adapter)/)'
     ],
 
     moduleNameMapper: {

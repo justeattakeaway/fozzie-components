@@ -3,6 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+Latest (add to next release)
+------------------------------
+*February 22, 2021*
+
+### Changed
+- Extracted svgTransform to global test utils for reference by other packages
+
+
+v0.58.0
+-------------------------------
+*February 18, 2021*
+
+### Added
+- Loading spinner if async requests take over a second
+
+
 v0.57.0
 -------------------------------
 *February 15, 2021*

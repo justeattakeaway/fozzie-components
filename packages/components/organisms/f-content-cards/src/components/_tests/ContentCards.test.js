@@ -1,10 +1,10 @@
 /* eslint indent: ["error", 4, {ignoredNodes: ["TemplateLiteral > *"]}] */
 import { shallowMount } from '@vue/test-utils';
 import Vue from 'vue';
-import initialiseMetadata from '@justeat/f-metadata';
+import initialiseMetadata from '@justeat/f-braze-adapter';
 import ContentCards, { CARDSOURCE_METADATA, CARDSOURCE_CUSTOM } from '../ContentCards';
 
-jest.mock('@justeat/f-metadata');
+jest.mock('@justeat/f-braze-adapter');
 
 const apiKey = '__API_KEY__';
 const userId = '__USER_ID__';
