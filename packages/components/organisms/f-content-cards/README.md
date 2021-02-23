@@ -237,6 +237,22 @@ Called with a boolean indicating that the component has initialised.
 
 Called with an Error object if appboy fails to initialise.
 
+## Cards
+
+The following 'cards' are given as named exports by this package, for use by consuming
+applications within the contained slots:
+
+* `FirstTimeCustomerCard`
+* `PromotionCard`
+* `PostOrderCard`
+* `SkeletonLoader`
+* `TermsAndConditionsCard`
+* `VoucherCard`
+* `HomePromotionCard1`
+* `HomePromotionCard2`
+* `GroupHeaderCard`
+* [`StampCard1`](./docs/StampCard1.md)
+
 ## Development
 
 Start by cloning the repository and installing the required dependencies:

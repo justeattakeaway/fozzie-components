@@ -4,9 +4,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (merge into next release)
+v3.3.0
 ------------------------------
 *February 22, 2020*
+
+### Added
+- Stamp Card component, card Type and story
 
 ### Updated
 - package json reference from f-metadata to f-braze-adapter to fix optional chaining loader error
