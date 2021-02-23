@@ -10,6 +10,7 @@ v0.59.0
 
 ### Added
 - `placeOrder` to call the Order Placement API.
+- Redirect to the payment page after the order has been placed.
 
 ### Changed
 - Extracted svgTransform to global test utils for reference by other packages

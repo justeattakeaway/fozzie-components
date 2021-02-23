@@ -223,7 +223,7 @@ export default {
         },
 
         /**
-         * Post the guest user details to the backend.
+         * Post the order details to the Order Placement API and get the `orderId` from the response.
          *
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
