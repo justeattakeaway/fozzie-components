@@ -27,6 +27,7 @@ const defaultState = {
         email: 'john@test.com',
         mobileNumber: '+447111111111'
     },
+    orderId: 'ORDER111',
     time: {
         from: '',
         to: ''

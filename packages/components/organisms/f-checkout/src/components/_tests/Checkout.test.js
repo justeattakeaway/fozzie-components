@@ -61,7 +61,7 @@ describe('Checkout', () => {
     const getBasketUrl = 'http://localhost/getbasket';
     const getAddressUrl = 'http://localhost/getaddress';
     const placeOrderUrl = 'http://localhost/placeorder';
-    const paymentPageUrl = 'http://localhost/paymentpage';
+    const paymentPageUrlPrefix = 'http://localhost/paymentpage';
 
     const applicationName = 'Jest';
 
@@ -74,11 +74,15 @@ describe('Checkout', () => {
         getBasketUrl,
         getAddressUrl,
         placeOrderUrl,
-        paymentPageUrl,
+        paymentPageUrlPrefix,
         applicationName
     };
 
-    jest.spyOn(window.location, 'assign').mockImplementation();
+    let windowLocationSpy;
+
+    beforeEach(() => {
+        windowLocationSpy = jest.spyOn(window.location, 'assign').mockImplementation();
+    });
 
     afterEach(() => {
         jest.clearAllMocks();
@@ -2117,8 +2121,6 @@ describe('Checkout', () => {
 
             it('should redirect to the payment page after 1 second', () => {
                 // Arrange
-                const windowLocationSpy = jest.spyOn(window.location, 'assign');
-
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
                     i18n,
@@ -2132,13 +2134,11 @@ describe('Checkout', () => {
                 jest.advanceTimersByTime(1000);
 
                 // Assert
-                expect(windowLocationSpy).toHaveBeenCalledWith(paymentPageUrl);
+                expect(windowLocationSpy).toHaveBeenCalledWith(`${paymentPageUrlPrefix}/${defaultState.orderId}`);
             });
 
             it('should not redirect to the payment page before 1 second', () => {
                 // Arrange
-                const windowLocationSpy = jest.spyOn(window.location, 'assign');
-
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
                     i18n,

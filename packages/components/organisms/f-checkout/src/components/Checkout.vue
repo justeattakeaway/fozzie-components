@@ -159,7 +159,7 @@ export default {
             required: true
         },
 
-        paymentPageUrl: {
+        paymentPageUrlPrefix: {
             type: String,
             required: true
         },
@@ -270,7 +270,8 @@ export default {
             'serviceType',
             'time',
             'userNote',
-            'basket'
+            'basket',
+            'orderId'
         ]),
 
         isMobileNumberValid () {
@@ -410,7 +411,7 @@ export default {
          */
         redirectToPayment () {
             setTimeout(() => { // TODO: remove this when the order team handles this automatically.
-                window.location.assign(this.paymentPageUrl);
+                window.location.assign(`${this.paymentPageUrlPrefix}/${this.orderId}`);
             }, 1000);
         },
 
