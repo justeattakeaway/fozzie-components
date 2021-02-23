@@ -3,16 +3,10 @@
         :is="url ? 'a' : 'div'"
         :href="url"
         :data-test-id="testId"
-        :class="[
-            $style['c-stampCard1']
-        ]"
+        :class="[$style['c-stampCard1'] ]"
         @click="onClickContentCard"
     >
-        <div
-            :class="[
-                $style['c-stampCard1-headerDetails']
-            ]"
-        >
+        <div :class="[$style['c-stampCard1-headerDetails']]">
             <img
                 :class="[
                     $style['c-stampCard1-icon']
@@ -21,19 +15,12 @@
                 :src="image"
                 :alt="title"
             >
-            <h3
-                :class="[
-                    $style['c-stampCard1-title']
-                ]"
-                :data-test-id="testIdForSection('title')"
-            >
+            <h3 :class="[$style['c-stampCard1-title']]"
+                :data-test-id="testIdForSection('title')">
                 {{ title }}
             </h3>
 
-            <p
-                :class="[
-                    $style['c-stampCard1-statusText']
-                ]"
+            <p :class="[$style['c-stampCard1-statusText']]"
                 :data-test-id="testIdForSection('statusText')"
                 v-html="statusText"
             />
