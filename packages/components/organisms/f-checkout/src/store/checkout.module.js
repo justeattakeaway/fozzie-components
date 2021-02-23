@@ -229,14 +229,13 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         placeOrder: async ({ commit, state }, {
-            url, tenant, data, timeout
+            url, data, timeout
         }) => {
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
             const config = {
                 headers: {
                     'Content-Type': 'application/json;v=1',
-                    'Accept-Tenant': tenant,
                     'x-je-feature': data.applicationName,
                     ...(state.isLoggedIn && {
                         Authorization: authHeader
