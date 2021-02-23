@@ -22,6 +22,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import FormSearchGeo from './FormSearchGeo.vue';
+import { VUEX_MODULE_NAMESPACE } from '../../services/constants';
 
 export default {
     components: {
@@ -47,14 +48,14 @@ export default {
     },
 
     computed: {
-        ...mapState('searchbox', [
+        ...mapState(VUEX_MODULE_NAMESPACE, [
             'isStreetNumberRequired',
             'isGeoLocationAvailable'
         ])
     },
 
     methods: {
-        ...mapActions('searchbox', [
+        ...mapActions(VUEX_MODULE_NAMESPACE, [
             'setStreetNumber'
         ]),
 

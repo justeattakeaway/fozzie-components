@@ -43,7 +43,7 @@ const mockActions = {
 
 const createStore = (state = mockState, actions = mockActions) => new Vuex.Store({
     modules: {
-        searchbox: {
+        fSearchboxModule: {
             namespaced: true,
             state,
             actions

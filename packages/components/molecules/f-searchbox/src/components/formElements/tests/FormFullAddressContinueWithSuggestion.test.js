@@ -12,7 +12,7 @@ const mockState = {
 
 const createStore = (state = mockState) => new Vuex.Store({
     modules: {
-        searchbox: {
+        fSearchboxModule: {
             namespaced: true,
             state
         }
