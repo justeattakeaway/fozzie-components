@@ -2160,9 +2160,15 @@ describe('Checkout', () => {
             it('should be called with new input value on user input', async () => {
                 // Arrange
                 const placeOrderSpy = jest.spyOn(VueCheckout.methods, 'placeOrder');
-
+                const userAgent = 'userAgent';
                 const basketId = 'myBasketId-v1';
-                const testUserAgent = 'Mozilla/5.0 (win32) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/11.12.0';
+
+                Object.defineProperty(window, 'navigator', {
+                    value: {
+                        userAgent
+                    },
+                    writable: true
+                });
 
                 const expected = {
                     url: placeOrderUrl,
@@ -2176,7 +2182,7 @@ describe('Checkout', () => {
                         applicationVersion: '1',
                         referralState: 'None',
                         deviceId: '127.0.0.1',
-                        deviceName: testUserAgent
+                        deviceName: userAgent
                     },
                     timeout: 1000
                 };
