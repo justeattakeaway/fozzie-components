@@ -3,7 +3,7 @@ const Checkout = require('../../../test-utils/component-objects/f-checkout.compo
 const checkout = new Checkout();
 
 describe('f-checkout component tests', () => {
-    before(() => {
+    beforeEach(() => {
 
         const checkoutData = {
             type: 'delivery', 
@@ -55,7 +55,6 @@ describe('f-checkout component tests', () => {
         expect(checkout.isFieldErrorDisplayed('emailAddress')).toBe(true);
     });
 
-
     it('should navigate to correct url when the login link is clicked', () => {
         // Arrange
         const loginPath = '/login';
@@ -66,5 +65,58 @@ describe('f-checkout component tests', () => {
 
         // Assert
         expect(pathname).toEqual(loginPath);
+    });
+
+    it('should display times in ascending order, with default text "As soon as possible" showing first', () => {
+        // Act
+        checkout.selectOrderTime('As soon as possible');
+
+        // Assert
+        expect(checkout.isOrderTimeDropdownDisplayed()).toBe(true);
+        expect(checkout.getOrderTimeOptionText(0)).toBe('As soon as possible');
+        expect(checkout.getOrderTimeOptionText(1)).toBe('Wednesday 00:45');
+        expect(checkout.getOrderTimeOptionText(2)).toBe('Wednesday 01:00');
+    });
+
+    it('should display a "mobileNumber" error message when an unsupported country code is used in the mobile number field', () => {
+        // Arrange
+        const addressDetails = {
+            mobileNumber: '+8112345678911'
+        };
+
+        // Act
+        checkout.populateCheckoutForm(addressDetails);
+        checkout.goToPayment();
+
+        // Assert
+        expect(checkout.isFieldErrorDisplayed('mobileNumber')).toBe(true);
+    });
+
+    it('should not display a "mobileNumber" error message when a number is formatted with a supported country code', () => {
+        // Arrange
+        const addressDetails = {
+            mobileNumber: '+4412345678911'
+        };
+
+        // Act
+        checkout.populateCheckoutForm(addressDetails);
+        checkout.goToPayment();
+
+        // Assert
+        expect(checkout.isFieldErrorDisplayed('mobileNumber')).toBe(false);
+    });
+
+    it('should prevent a user from writing a note of over 200 characters', () => {
+        // Arrange
+        const userNote = 'A';
+        const addressInfo = {
+            note: userNote.repeat(300)
+        };
+
+        // Act
+        checkout.inputUserNote(addressInfo);
+
+        // Assert
+        expect(checkout.userNoteMaxCharacterCount()).toEqual('200');
     });
 });

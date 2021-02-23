@@ -11,17 +11,6 @@ describe('`StatusBanner`', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    describe('`Header component`', () => {
-        it('should be rendered', () => {
-            // Arrange
-            const propsData = {};
-            const wrapper = shallowMount(StatusBanner, { propsData });
-
-            // Act & Assert
-            expect(wrapper.find('[data-test-id="header-component"]').exists()).toBeTruthy();
-        });
-    });
-
     describe('`Main Banner component`', () => {
         it('should be rendered', () => {
             // Arrange
@@ -30,17 +19,6 @@ describe('`StatusBanner`', () => {
 
             // Act & Assert
             expect(wrapper.find('[data-test-id="main-banner-container"]').exists()).toBeTruthy();
-        });
-    });
-
-    describe('`Footer component`', () => {
-        it('should be rendered', () => {
-            // Arrange
-            const propsData = {};
-            const wrapper = shallowMount(StatusBanner, { propsData });
-
-            // Act & Assert
-            expect(wrapper.find('[data-test-id="footer-component"]').exists()).toBeTruthy();
         });
     });
 });
