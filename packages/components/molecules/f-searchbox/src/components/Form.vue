@@ -288,7 +288,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('fSearchboxModule', [
+        ...mapActions(VUEX_MODULE_NAMESPACE, [
             'setAddress',
             'setAutoNavigateToSerp',
             'setSuggestions',
