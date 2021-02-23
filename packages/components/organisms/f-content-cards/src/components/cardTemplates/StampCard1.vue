@@ -3,71 +3,55 @@
         :is="url ? 'a' : 'div'"
         :href="url"
         :data-test-id="testId"
-        :class="[$style['c-stampCard1'] ]"
+        :class="[$style['c-stampCard1']]"
         @click="onClickContentCard"
     >
         <div :class="[$style['c-stampCard1-headerDetails']]">
             <img
-                :class="[
-                    $style['c-stampCard1-icon']
-                ]"
+                :class="[$style['c-stampCard1-icon']]"
                 :data-test-id="testIdForSection('image')"
                 :src="image"
-                :alt="title"
-            >
-            <h3 :class="[$style['c-stampCard1-title']]"
+                :alt="title">
+            <h3
+                :class="[$style['c-stampCard1-title']]"
                 :data-test-id="testIdForSection('title')">
                 {{ title }}
             </h3>
 
-            <p :class="[$style['c-stampCard1-statusText']]"
+            <p
+                :class="[$style['c-stampCard1-statusText']]"
                 :data-test-id="testIdForSection('statusText')"
-                v-html="statusText"
-            />
+                v-html="statusText" />
         </div>
         <div
             v-if="isReadyToClaim"
             :class="[
                 $style['c-stampCard1-redemptionDetails']
             ]"
-            :data-test-id="testIdForSection('redemptionDetails')"
-        >
+            :data-test-id="testIdForSection('redemptionDetails')">
             <div
                 v-for="(subStatusLine, index) in subStatusText"
                 :key="index"
-                :class="[
-                    $style['c-stampCard1-subStatusText']
-                ]"
-                :data-test-id="testIdForSection('subStatusText', index)"
-            >
+                :class="[$style['c-stampCard1-subStatusText']]"
+                :data-test-id="testIdForSection('subStatusText', index)">
                 {{ subStatusLine }}
             </div>
             <div
-                :class="[
-                    $style['c-stampCard1-expiryInfo']
-                ]"
-                :data-test-id="testIdForSection('expiryInfo')"
-            >
+                :class="[$style['c-stampCard1-expiryInfo']]"
+                :data-test-id="testIdForSection('expiryInfo')">
                 {{ expiryLine }}
             </div>
         </div>
         <div
             v-else
-            :class="[
-                $style['c-stampCard1-stamps']
-            ]"
-            :data-test-id="testIdForSection('stamps')"
-        >
+            :class="[$style['c-stampCard1-stamps']]"
+            :data-test-id="testIdForSection('stamps')">
             <div
                 v-for="({ stampImage, classSuffix }, index) in stamps"
-                :key="index"
-            >
+                :key="index">
                 <div
-                    :class="[
-                        $style[`c-stampCard1-stamp`]
-                    ]"
-                    :data-test-id="testIdForSection(`stamp${classSuffix}`)"
-                >
+                    :class="[$style[`c-stampCard1-stamp`]]"
+                    :data-test-id="testIdForSection(`stamp${classSuffix}`)">
                     <component
                         :is="stampImage"
                         :class="[
@@ -105,39 +89,51 @@ export default {
         }
     },
 
+    data () {
+        return {
+            // Here for reference, TBC by product - currently this.card.totalRequiredStamps is provided but we have no
+            // way of catering for any amount other than 5 when passed as part of the card data
+            totalRequiredStamps: 5
+        };
+    },
+
     computed: {
         title () {
             return this.card.title;
         },
+
         description () {
             return this.card.description;
         },
+
         image () {
             return this.card.image;
         },
+
         url () {
             return this.card.url;
         },
+
         discountPercentage () {
             return this.card.discountPercentage;
         },
+
         earnedStamps () {
             return this.card.earnedStamps;
         },
+
         expiryDate () {
             return this.card.expiryDate;
         },
+
         expiryLine () {
             return this.card.expiryLine;
         },
+
         isReadyToClaim () {
             return !!this.card.isReadyToClaim;
         },
-        totalRequiredStamps () {
-            // TBC by product - currently this.card.totalRequiredStamps is provided but we have no way of catering for
-            // any amount other than 5 here
-            return 5;
-        },
+
         stamps () {
             const stamps = [];
 
@@ -154,9 +150,11 @@ export default {
 
             return stamps;
         },
+
         statusText () {
             return this.card.subtitle;
         },
+
         subStatusText () {
             return this.description;
         },
@@ -194,6 +192,9 @@ export default {
 $stampCard-subStatus-colour: #017a39; /* $color-green in PIE - not in fozzie-colour-palette yet */
 $stampCard-expiryInfo-colour: $grey--dark;
 
+$stampCard-iconSize-landscape: 56px;
+$stampCard-iconSize-portrait: 48px;
+
 $stampCard-responsive-mobileViewBreakpoint: '<narrowMid';
 
 .c-stampCard1 {
@@ -227,13 +228,13 @@ $stampCard-responsive-mobileViewBreakpoint: '<narrowMid';
 .c-stampCard1-icon {
     float: left;
     margin-right: spacing(x2);
-    width: spacing(x7);
-    height: spacing(x7);
+    width: $stampCard-iconSize-landscape;
+    height: $stampCard-iconSize-landscape;
     border-radius: $border-radius;
 
     @include media($stampCard-responsive-mobileViewBreakpoint) {
-        width: spacing(x6);
-        height: spacing(x6);
+        width: $stampCard-iconSize-portrait;
+        height: $stampCard-iconSize-portrait;
     }
 }
 
