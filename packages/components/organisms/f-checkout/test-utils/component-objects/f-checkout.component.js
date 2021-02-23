@@ -1,5 +1,3 @@
-/* global browser, $ */
-const { doesElementExist } = require('../../../../../../test/utils/webdriverio-extensions')(browser); // could put this in page object for now
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 const {
     CHECKOUT_COMPONENT,
