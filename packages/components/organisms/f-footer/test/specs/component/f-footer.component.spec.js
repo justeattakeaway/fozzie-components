@@ -1,82 +1,58 @@
-import FooterComponent from '../../../test-utils/component-objects/f-footer.component';
-const path = 'iframe.html?id=components-organisms--' // storybook url for all components - could move to config.
-const locale = '&knob-Locale=en-GB'
-const links = '&knob-Show%20courier%20links=true'
+const Footer = require('../../../test-utils/component-objects/f-footer.component');
+const footer = new Footer();
+const forEach = require('mocha-each');
 
 describe('f-footer component tests', () => {
     beforeEach(() => {
-        browser.url(`${path}footer-component${locale}`);
-        FooterComponent.waitForFooter();
+        footer.open('gb');
+        footer.waitForComponent();
     });
 
     it('should display the footer', () => {
         // Assert
-        expect(FooterComponent.isFooterDisplayed()).toBe(true);
+        expect(footer.isComponentDisplayed()).toBe(true);
     });
 
-    it('should display App Store Icons', () => {
+    forEach([['ios', 'apple'], ['android', 'google'], ['huawei', 'appgallery']])
+    .it('should display download icons and link to correct URL', (icon, expectedUrl) => {
+        // Act
+        footer.expectedDownloadIcon = icon;
+
         // Assert
-        expect(FooterComponent.isIosIconDisplayed()).toBe(true);
-        expect(FooterComponent.isAndroidIconDisplayed()).toBe(true);
+        expect(footer.isDownloadIconDisplayed()).toBe(true);
+
+         // Act
+         footer.clickDownloadIcon();
+
+         // Assert
+         expect(browser.getUrl()).toContain(expectedUrl);
     });
 
-    it('App Store links should be correct', () => {
+    forEach([['twitter', 'twitter.com'], ['facebook', 'facebook.com'], ['youtube', 'youtube.com']])
+    .it('should display social media icons', (icon, expectedUrl) => {
         // Act
-        FooterComponent.clickIosIcon();
+        footer.expectedSocialIcon = icon;
 
         // Assert
-        expect(browser.getUrl()).toContain('https://apps.apple.com');
-
-        // Act
-        browser.back();
-        FooterComponent.waitForFooter();
-        FooterComponent.clickAndroidIcon();
-
-        // Assert
-        expect(browser.getUrl()).toContain('https://play.google.com/');
-    });
-
-    it('should display Social Media Icons', () => {
-        // Assert
-        expect(FooterComponent.isTwitterIconDisplayed()).toBe(true);
-        expect(FooterComponent.isYoutubeIconDisplayed()).toBe(true);
-        expect(FooterComponent.isFacebookIconDisplayed()).toBe(true);
-    });
-
-    it('Social Media links should be correct', () => {
-        // Act
-        FooterComponent.clickFacebookIcon();
-
-        // Assert
-        expect(browser.getUrl()).toContain('https://www.facebook.com');
+        expect(footer.isSocialIconDisplayed()).toBe(true);
 
         // Act
-        browser.back();
-        FooterComponent.waitForFooter();
-        FooterComponent.clickTwitterIcon();
+        footer.clickSocialIcon();
 
         // Assert
-        expect(browser.getUrl()).toContain('https://twitter.com');
-
-        // Act
-        browser.back();
-        FooterComponent.waitForFooter();
-        FooterComponent.clickYoutubeIcon();
-
-        // Assert
-        expect(browser.getUrl()).toContain('https://www.youtube.com');
+        expect(browser.getUrl()).toContain(expectedUrl);
     });
 
     it('Should not show courier links on en-GB locale if courier links is set to false', () => {
         // Assert
-        expect(FooterComponent.isCourierLinksDisplayed()).toBe(false);
+        expect(footer.areCourierLinksDisplayed()).toBe(false);
     });
 
     it('Should not show courier links on en-GB locale if courier links is set to true', () => {
         // Act
-        browser.url(`${path}footer-component${locale}${links}`);
+        footer.openGBWithExtraFeatures();
 
         // Assert
-        expect(FooterComponent.isCourierLinksDisplayed()).toBe(false);
+        expect(footer.areCourierLinksDisplayed()).toBe(false);
     });
 });
