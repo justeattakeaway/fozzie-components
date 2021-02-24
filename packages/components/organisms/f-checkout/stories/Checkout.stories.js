@@ -26,7 +26,7 @@ const getBasketCollectionUrl = '/get-basket-collection.json';
 const updateCheckoutUrl = '/update-checkout.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
-const paymentPageUrlPrefix = '/pay';
+const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
 
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutCollectionUrl);
