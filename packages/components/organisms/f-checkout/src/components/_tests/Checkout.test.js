@@ -3,13 +3,13 @@ import Vuex from 'vuex';
 import flushPromises from 'flush-promises';
 import { VueI18n } from '@justeat/f-globalisation';
 import { validations } from '@justeat/f-services';
-import * as analytics from '../../services/analytics';
+import * as mapper from '../../services/mapper';
 import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION, TENANT_MAP } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
 import {
-    defaultState, defaultGetters, defaultActions, analyticsData, i18n, createStore, $logger
+    defaultState, defaultActions, i18n, createStore, $logger
 } from './helpers/setup';
 
 const localVue = createLocalVue();
@@ -244,7 +244,6 @@ describe('Checkout', () => {
                 shallowMount(VueCheckout, {
                     store: createStore(
                         defaultState,
-                        defaultGetters,
                         {
                             ...defaultActions,
                             setAuthToken
@@ -445,12 +444,10 @@ describe('Checkout', () => {
     describe('mounted ::', () => {
         let initialiseSpy;
         let trackInitialLoadSpy;
-        let trackFormInteractionSpy;
 
         beforeEach(() => {
             initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
-            trackInitialLoadSpy = jest.spyOn(analytics, 'trackInitialLoad');
-            trackFormInteractionSpy = jest.spyOn(analytics, 'trackFormInteraction');
+            trackInitialLoadSpy = jest.spyOn(VueCheckout.methods, 'trackInitialLoad');
         });
 
         afterEach(() => {
@@ -480,20 +477,7 @@ describe('Checkout', () => {
             });
 
             // Assert
-            expect(trackInitialLoadSpy).toHaveBeenCalledWith(analyticsData);
-        });
-
-        it('should call `trackFormInteraction`', () => {
-            // Act
-            shallowMount(VueCheckout, {
-                store: createStore(),
-                i18n,
-                localVue,
-                propsData
-            });
-
-            // Assert
-            expect(trackFormInteractionSpy).toHaveBeenCalledWith('start', analyticsData);
+            expect(trackInitialLoadSpy).toHaveBeenCalled();
         });
     });
 
@@ -1447,7 +1431,6 @@ describe('Checkout', () => {
                     wrapper = mount(VueCheckout, {
                         store: createStore(
                             defaultState,
-                            defaultGetters,
                             {
                                 ...defaultActions,
                                 createGuestUser: jest.fn(async () => Promise.reject())
@@ -1523,7 +1506,6 @@ describe('Checkout', () => {
                     wrapper = mount(VueCheckout, {
                         store: createStore(
                             defaultState,
-                            defaultGetters,
                             {
                                 ...defaultActions,
                                 getCheckout: jest.fn(async () => Promise.reject())
@@ -1596,7 +1578,6 @@ describe('Checkout', () => {
                     wrapper = mount(VueCheckout, {
                         store: createStore(
                             defaultState,
-                            defaultGetters,
                             {
                                 ...defaultActions,
                                 getAvailableFulfilment: jest.fn(async () => Promise.reject())
@@ -1669,7 +1650,6 @@ describe('Checkout', () => {
                     wrapper = mount(VueCheckout, {
                         store: createStore(
                             defaultState,
-                            defaultGetters,
                             {
                                 ...defaultActions,
                                 getBasket: jest.fn(async () => Promise.reject())
@@ -1739,7 +1719,6 @@ describe('Checkout', () => {
                     const wrapper = mount(VueCheckout, {
                         store: createStore(
                             defaultState,
-                            defaultGetters,
                             {
                                 ...defaultActions,
                                 getAddress: jest.fn(async () => Promise.reject())
@@ -1945,7 +1924,7 @@ describe('Checkout', () => {
             beforeEach(() => {
                 isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
                 submitCheckoutSpy = jest.spyOn(VueCheckout.methods, 'submitCheckout');
-                trackFormInteractionSpy = jest.spyOn(analytics, 'trackFormInteraction');
+                trackFormInteractionSpy = jest.spyOn(VueCheckout.methods, 'trackFormInteraction');
             });
 
             afterEach(() => {
@@ -1967,18 +1946,20 @@ describe('Checkout', () => {
                     }
                 });
 
-                const action = 'submit';
+                const payload = {
+                    action: 'submit'
+                };
 
                 // Act
                 await wrapper.vm.onFormSubmit();
 
                 // Assert
-                expect(trackFormInteractionSpy).toHaveBeenCalledWith(action, analyticsData);
+                expect(trackFormInteractionSpy).toHaveBeenCalledWith(payload);
             });
 
             describe('when the form is Invalid', () => {
                 let wrapper;
-                let mapFieldNamesSpy;
+                let mapAnalyticsFieldNamesSpy;
                 let getFormValidationStateSpy;
 
                 const mockValidationState = {
@@ -1994,7 +1975,7 @@ describe('Checkout', () => {
                 beforeEach(() => {
                     isFormValidSpy.mockReturnValue(false);
 
-                    mapFieldNamesSpy = jest.spyOn(analytics, 'mapFieldNames');
+                    mapAnalyticsFieldNamesSpy = jest.spyOn(mapper, 'mapAnalyticsFieldNames');
                     getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
 
                     getFormValidationStateSpy.mockReturnValue(mockValidationState);
@@ -2019,7 +2000,7 @@ describe('Checkout', () => {
                     expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
                 });
 
-                it('should call `mapFieldNames` with `invalidFields`', async () => {
+                it('should call `mapAnalyticsFieldNames` with `invalidFields`', async () => {
                     // Arrange
                     const { invalidFields } = mockValidationState;
 
@@ -2027,31 +2008,35 @@ describe('Checkout', () => {
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(mapFieldNamesSpy).toHaveBeenCalledWith(invalidFields);
+                    expect(mapAnalyticsFieldNamesSpy).toHaveBeenCalledWith(invalidFields);
                 });
 
                 it('should call `trackFormInteraction` with and action `inline_error` and validation errors', async () => {
                     // Arrange
-                    const action = 'inline_error';
-                    const error = mockValidationState.invalidFields;
+                    const payload = {
+                        action: 'inline_error',
+                        error: mockValidationState.invalidFields
+                    };
 
                     // Act
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(action, analyticsData, error);
+                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(payload);
                 });
 
                 it('should call `trackFormInteractionSpy` with action `error` and error `basketNotOrderable`', async () => {
                     // Arrange
-                    const action = 'error';
-                    const analyticsError = 'basketNotOrderable';
+                    const payload = {
+                        action: 'error',
+                        error: 'basketNotOrderable'
+                    };
 
                     // Act
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(action, analyticsData, analyticsError);
+                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(payload);
                 });
             });
 
@@ -2083,13 +2068,15 @@ describe('Checkout', () => {
 
                 it('should call `trackFormInteractionSpy` with correct `action`', async () => {
                     // Arrange
-                    const action = 'success';
+                    const payload = {
+                        action: 'success'
+                    };
 
                     // Act
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(action, analyticsData);
+                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(payload);
                 });
             });
 
@@ -2126,14 +2113,16 @@ describe('Checkout', () => {
 
                 it('should call `trackFormInteractionSpy` with correct `action` and `error`', async () => {
                     // Arrange
-                    const action = 'error';
-                    const analyticsError = 'basketNotOrderable';
+                    const payload = {
+                        action: 'error',
+                        error: 'basketNotOrderable'
+                    };
 
                     // Act
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(action, analyticsData, analyticsError);
+                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(payload);
                 });
             });
 

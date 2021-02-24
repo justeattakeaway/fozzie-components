@@ -4,7 +4,6 @@ import checkoutDelivery from '../../demo/checkout-delivery.json';
 import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
-import * as analytics from '../../services/analytics';
 
 import {
     UPDATE_AUTH,
@@ -16,16 +15,10 @@ import {
     UPDATE_IS_FULFILLABLE,
     UPDATE_ISSUES,
     UPDATE_STATE,
-    UPDATE_USER_NOTE,
-    UPDATE_FIELD_CHANGES,
-    UPDATE_AUTOFILL
+    UPDATE_USER_NOTE
 } from '../mutation-types';
 
-const { actions, getters, mutations } = CheckoutModule;
-
-const {
-    analyticsData
-} = getters;
+const { actions, mutations } = CheckoutModule;
 
 const {
     createGuestUser,
@@ -105,10 +98,7 @@ const defaultState = {
     },
     authToken: '',
     isLoggedIn: false,
-    userNote: '',
-    autofill: [],
-    changes: [],
-    mounted: false
+    userNote: ''
 };
 
 let state = CheckoutModule.state();
@@ -117,14 +107,6 @@ describe('CheckoutModule', () => {
     it('should create default state when initialised.', () => {
         // Assert
         expect(state).toEqual(defaultState);
-    });
-
-    describe('getters ::', () => {
-        describe('analyticsData` ::', () => {
-            it('should return `isLoggedIn', () => {
-                expect(analyticsData(state)).toMatchSnapshot();
-            });
-        });
     });
 
     describe('mutations ::', () => {
@@ -221,98 +203,6 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe(`${UPDATE_FIELD_CHANGES} ::`, () => {
-            const field = 'phone';
-            let mapFieldNamesSpy;
-
-            beforeEach(() => {
-                mapFieldNamesSpy = jest.spyOn(analytics, 'mapFieldNames');
-            });
-
-            it('should call `mapFieldNames`', () => {
-                // Arrange
-                mapFieldNamesSpy = jest.spyOn(analytics, 'mapFieldNames');
-
-                // Act
-                mutations[UPDATE_FIELD_CHANGES](state, field);
-
-                // Assert
-                expect(mapFieldNamesSpy).toHaveBeenCalledWith(field);
-            });
-
-            it('should update state with received value', () => {
-                // Arrange & Act
-                mutations[UPDATE_FIELD_CHANGES](state, field);
-
-                // Assert
-                expect(state.changes).toEqual([field]);
-            });
-
-            it('should only add changes once per field', () => {
-                // Arrange
-                state.changes = [field];
-
-                // Act
-                mutations[UPDATE_FIELD_CHANGES](state, field);
-
-                // Assert
-                expect(state.changes).not.toEqual([field, field]);
-                expect(state.changes).toEqual([field]);
-            });
-        });
-
-        describe(`${UPDATE_AUTOFILL} ::`, () => {
-            it('should update `autofill` with an empty array if `customer` and `address` are empty', () => {
-                // Arrange
-                state = {
-                    ...state,
-                    customer: {
-                        firstName: '',
-                        lastName: '',
-                        email: '',
-                        mobileNumber: ''
-                    },
-                    address: {
-                        line1: '',
-                        line2: '',
-                        city: '',
-                        postcode: ''
-                    }
-                };
-
-                // Act
-                mutations[UPDATE_AUTOFILL](state);
-
-                // Assert
-                expect(state.autofill).toEqual([]);
-            });
-
-            it('should update `autofill` with an array of filled fields', () => {
-                // Arrange
-                state = {
-                    ...state,
-                    customer: {
-                        firstName: '',
-                        lastName: '',
-                        email: '',
-                        mobileNumber: '+447111111111'
-                    },
-                    address: {
-                        line1: 'Line One',
-                        line2: '',
-                        city: '',
-                        postcode: ''
-                    }
-                };
-
-                // Act
-                mutations[UPDATE_AUTOFILL](state);
-
-                // Assert
-                expect(state.autofill).toEqual(['phone', 'addressLine1']);
-            });
-        });
-
         it.each([
             [UPDATE_FULFILMENT_ADDRESS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
@@ -330,6 +220,7 @@ describe('CheckoutModule', () => {
 
     describe('actions ::', () => {
         let commit;
+        let dispatch;
 
         const payload = {
             url: 'http://localhost/account/checkout',
@@ -340,6 +231,7 @@ describe('CheckoutModule', () => {
 
         beforeEach(() => {
             commit = jest.fn();
+            dispatch = jest.fn();
         });
 
         describe('getCheckout ::', () => {
@@ -359,19 +251,19 @@ describe('CheckoutModule', () => {
 
             it(`should get the checkout details from the backend and call ${UPDATE_STATE} mutation.`, async () => {
                 // Act
-                await getCheckout({ commit, state }, payload);
+                await getCheckout({ commit, state, dispatch }, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
                 expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
             });
 
-            it(`should call ${UPDATE_AUTOFILL} mutation with an array of updated field names.`, async () => {
+            it('should call `analytics/updateState` mutation with an array of updated field names.', async () => {
                 // Act
-                await getCheckout({ commit, state }, payload);
+                await getCheckout({ commit, state, dispatch }, payload);
 
                 // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_AUTOFILL);
+                expect(dispatch).toHaveBeenCalledWith('analytics/updateState', state, { root: true });
             });
         });
 
@@ -390,7 +282,7 @@ describe('CheckoutModule', () => {
                 axios.get = jest.fn(() => Promise.resolve({ data: basketDelivery }));
 
                 // Act
-                await getBasket({ commit, state }, payload);
+                await getBasket({ commit, state, dispatch }, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
@@ -421,7 +313,7 @@ describe('CheckoutModule', () => {
                 const [expectedAddress] = customerAddresses.Addresses;
 
                 // Act
-                await getAddress({ commit, state }, payload);
+                await getAddress({ commit, state, dispatch }, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
@@ -433,12 +325,12 @@ describe('CheckoutModule', () => {
                 });
             });
 
-            it(`should call ${UPDATE_AUTOFILL} mutation with an array of updated field names.`, async () => {
+            it('should call `analytics/updateState` mutation with an array of updated field names.', async () => {
                 // Act
-                await getAddress({ commit, state }, payload);
+                await getAddress({ commit, state, dispatch }, payload);
 
                 // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_AUTOFILL);
+                expect(dispatch).toHaveBeenCalledWith('analytics/updateState', state, { root: true });
             });
         });
 
@@ -542,7 +434,6 @@ describe('CheckoutModule', () => {
             });
         });
 
-
         it.each([
             [setAuthToken, UPDATE_AUTH, authToken],
             [updateAddressDetails, UPDATE_FULFILMENT_ADDRESS, address],
@@ -550,7 +441,7 @@ describe('CheckoutModule', () => {
             [updateUserNote, UPDATE_USER_NOTE, userNote]
         ])('%s should call `%s` mutation with passed value', (action, mutation, value) => {
             // Act
-            action({ commit }, value);
+            action({ commit, dispatch }, value);
 
             // Assert
             expect(commit).toHaveBeenCalledWith(mutation, value);
@@ -559,14 +450,14 @@ describe('CheckoutModule', () => {
         it.each([
             [updateAddressDetails, address],
             [updateCustomerDetails, customerDetails]
-        ])('%s should call `UPDATE_FIELD_CHANGES` mutation with first key of passed value', (action, value) => {
+        ])('%s should dispatch `analytics/updateFieldChanges` action with first key of passed value', (action, value) => {
             // Act
-            action({ commit }, value);
+            action({ commit, dispatch }, value);
 
             const [field] = Object.keys(value);
 
             // Assert
-            expect(commit).toHaveBeenCalledWith(UPDATE_FIELD_CHANGES, field);
+            expect(dispatch).toHaveBeenCalledWith('analytics/updateFieldChanges', field, { root: true });
         });
     });
 });

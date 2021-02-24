@@ -9,9 +9,9 @@ v0.59.0
 *February 23, 2021*
 
 ### Added
-- `analytics` service.
-- `autofill` and `changes` states and related actions/mutations to vuex store.
+- `analytics.module` to store.
 - Analytics tracking to `Checkout` component.
+- Tests to cover changes.
 
 
 *February 22, 2021*

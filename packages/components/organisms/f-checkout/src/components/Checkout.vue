@@ -83,7 +83,7 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import { required, email } from 'vuelidate/lib/validators';
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
@@ -111,8 +111,8 @@ import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants'
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
-import mapUpdateCheckoutRequest from '../services/mapper';
-import { mapFieldNames, trackFormInteraction, trackInitialLoad } from '../services/analytics';
+import { mapUpdateCheckoutRequest, mapAnalyticsFieldNames } from '../services/mapper';
+
 
 export default {
     name: 'VueCheckout',
@@ -252,13 +252,7 @@ export default {
             'time',
             'userNote',
             'restaurantId',
-            'basket',
-            'changes',
-            'autofill'
-        ]),
-
-        ...mapGetters('checkout', [
-            'analyticsData'
+            'basket'
         ]),
 
         isMobileNumberValid () {
@@ -303,8 +297,7 @@ export default {
     async mounted () {
         await this.initialise();
 
-        trackInitialLoad(this.analyticsData);
-        trackFormInteraction('start', this.analyticsData);
+        this.trackInitialLoad();
     },
 
     methods: {
@@ -318,6 +311,11 @@ export default {
             'setAuthToken',
             'updateCustomerDetails',
             'updateUserNote'
+        ]),
+
+        ...mapActions('analytics', [
+            'trackInitialLoad',
+            'trackFormInteraction'
         ]),
 
         /**
@@ -563,21 +561,21 @@ export default {
         },
 
         /**
-         * Check for is valid - no inline messages
+         * Check form is valid - no inline messages
          * If form is valid try to call `submitCheckout`
          * Catch and handle any errors
          */
         async onFormSubmit () {
-            trackFormInteraction('submit', this.analyticsData);
+            this.trackFormInteraction({ action: 'submit' });
 
             if (!this.isFormValid()) {
                 const validationState = validations.getFormValidationState(this.$v);
-                const analyticsValidations = mapFieldNames(validationState.invalidFields);
+                const analyticsValidations = mapAnalyticsFieldNames(validationState.invalidFields);
 
                 this.$emit(EventNames.CheckoutValidationError, validationState);
 
-                trackFormInteraction('inline_error', this.analyticsData, analyticsValidations);
-                trackFormInteraction('error', this.analyticsData, 'basketNotOrderable');
+                this.trackFormInteraction({ action: 'inline_error', error: analyticsValidations });
+                this.trackFormInteraction({ action: 'error', error: 'basketNotOrderable' });
 
                 this.$logger.logWarn(
                     'Checkout Validation Error',
@@ -592,10 +590,10 @@ export default {
             try {
                 await this.submitCheckout();
 
-                trackFormInteraction('success', this.analyticsData);
+                this.trackFormInteraction({ action: 'success' });
             } catch (error) {
                 this.handleErrorState(error);
-                trackFormInteraction('error', this.analyticsData, 'basketNotOrderable');
+                this.trackFormInteraction({ action: 'error', error: 'basketNotOrderable' });
             } finally {
                 this.shouldDisableCheckoutButton = false;
             }

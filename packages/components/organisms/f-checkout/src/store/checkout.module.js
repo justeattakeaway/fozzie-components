@@ -1,6 +1,5 @@
 import axios from 'axios';
 import addressService from '../services/addressService';
-import { mapFieldNames } from '../services/analytics';
 
 import {
     UPDATE_AUTH,
@@ -12,9 +11,7 @@ import {
     UPDATE_IS_FULFILLABLE,
     UPDATE_ISSUES,
     UPDATE_STATE,
-    UPDATE_USER_NOTE,
-    UPDATE_FIELD_CHANGES,
-    UPDATE_AUTOFILL
+    UPDATE_USER_NOTE
 } from './mutation-types';
 
 export default {
@@ -54,21 +51,8 @@ export default {
             isAsapAvailable: false
         },
         authToken: '',
-        isLoggedIn: false,
-        autofill: [],
-        changes: [],
-        mounted: false
+        isLoggedIn: false
     }),
-
-    getters: {
-        analyticsData: state => ({
-            isLoggedIn: state.isLoggedIn,
-            basket: state.basket,
-            restaurantId: state.restaurantId,
-            changes: state.changes,
-            autofill: state.autofill
-        })
-    },
 
     actions: {
         /**
@@ -77,7 +61,7 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getCheckout: async ({ commit, state }, { url, timeout }) => {
+        async getCheckout ({ commit, state, dispatch }, { url, timeout }) {
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
             // TODO: deal with exceptions.
@@ -95,9 +79,7 @@ export default {
 
             commit(UPDATE_STATE, data);
 
-            if (state.isLoggedIn) {
-                commit(UPDATE_AUTOFILL);
-            }
+            dispatch('analytics/updateState', state, { root: true });
         },
 
         /**
@@ -180,7 +162,7 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getBasket: async ({ commit }, {
+        getBasket: async ({ commit, dispatch, state }, {
             url,
             tenant,
             language,
@@ -207,6 +189,7 @@ export default {
             };
 
             commit(UPDATE_BASKET_DETAILS, basketDetails);
+            dispatch('analytics/updateState', state, { root: true });
         },
 
         /**
@@ -215,7 +198,7 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getAddress: async ({ commit, state }, {
+        getAddress: async ({ commit, state, dispatch }, {
             url,
             tenant,
             language,
@@ -238,39 +221,34 @@ export default {
             const addressDetails = addressService.getClosestAddress(data.Addresses, tenant);
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
-            commit(UPDATE_AUTOFILL);
+            dispatch('analytics/updateState', state, { root: true });
         },
 
         setAuthToken: ({ commit }, authToken) => {
             commit(UPDATE_AUTH, authToken);
         },
 
-        updateAddressDetails ({ commit }, payload) {
+        updateAddressDetails ({ commit, dispatch }, payload) {
             const [field] = Object.keys(payload);
 
-            commit(UPDATE_FIELD_CHANGES, field);
+            dispatch('analytics/updateFieldChanges', field, { root: true });
             commit(UPDATE_FULFILMENT_ADDRESS, payload);
         },
 
-        updateCustomerDetails ({ commit }, payload) {
+        updateCustomerDetails ({ commit, dispatch }, payload) {
             const [field] = Object.keys(payload);
 
+            dispatch('analytics/updateFieldChanges', field, { root: true });
             commit(UPDATE_CUSTOMER_DETAILS, payload);
-            commit(UPDATE_FIELD_CHANGES, field);
         },
 
-        updateFulfilmentTime ({ commit, state }, payload) {
-            if (state.mounted) {
-                commit(UPDATE_FIELD_CHANGES, 'orderTime');
-            } else {
-                state.mounted = true;
-            }
-
+        updateFulfilmentTime ({ commit }, payload) {
             commit(UPDATE_FULFILMENT_TIME, payload);
         },
 
-        updateUserNote ({ commit }, payload) {
+        updateUserNote ({ commit, dispatch }, payload) {
             commit(UPDATE_USER_NOTE, payload);
+            dispatch('analytics/updateFieldChanges', 'note', { root: true });
         }
     },
 
@@ -360,32 +338,6 @@ export default {
 
         [UPDATE_USER_NOTE]: (state, userNote) => {
             state.userNote = userNote;
-        },
-
-        [UPDATE_FIELD_CHANGES]: (state, field) => {
-            const cleanedField = mapFieldNames(field);
-
-            if (!state.changes.includes(cleanedField)) {
-                state.changes.push(cleanedField);
-            }
-        },
-
-        [UPDATE_AUTOFILL]: state => {
-            const autofill = [];
-
-            if (state.customer.mobileNumber) {
-                autofill.push('phone');
-            }
-
-            if (state.serviceType === 'delivery') {
-                Object.entries(state.address).forEach(([key, value]) => {
-                    if (value) {
-                        autofill.push(mapFieldNames(key));
-                    }
-                });
-            }
-
-            state.autofill = autofill;
         }
     }
 };
