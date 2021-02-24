@@ -1,6 +1,18 @@
 import StampCard1 from '../src/components/cardTemplates/StampCard1.vue';
 import image from './images/an-viet.png';
 
+const copy = {
+    locale: 'en-EN',
+    stampCardStatus: {
+        0: 'Zero stamps earned out of five',
+        1: 'One stamp earned out of five',
+        2: 'Two stamps earned out of five',
+        3: 'Three stamps earned out of five',
+        4: 'Four stamps earned out of five',
+        5: 'Five stamps earned out of five'
+    }
+};
+
 export default {
     title: 'Components/Molecules/f-content-cards/stamp-card-1',
     argTypes: {
@@ -70,6 +82,7 @@ export const InProgressStampCard1Component = (args, { argTypes }) => ({
      */
     provide () {
         return {
+            copy,
             emitCardView () { },
             emitCardClick () { }
         };
@@ -92,8 +105,8 @@ InProgressStampCard1Component.args = {
     url: 'https://example.com/the-burger-place',
     discountPercentage: 15,
     earnedStamps: 2,
-    expiryDate: undefined,
-    expiryLine: 'Discount expires 31/02',
+    expiryDate: '2021-02-28T23:59:59',
+    expiryLine: 'Discount expires',
     isReadyToClaim: false,
     totalRequiredStamps: 5
 };
@@ -114,6 +127,7 @@ export const ClaimableStampCard1Component = (args, { argTypes }) => ({
      */
     provide () {
         return {
+            copy,
             emitCardView () { },
             emitCardClick () { }
         };
@@ -138,8 +152,8 @@ ClaimableStampCard1Component.args = {
     url: 'https://example.com/an-viet',
     discountPercentage: 15,
     earnedStamps: 5,
-    expiryDate: '2021-02-31T23:59:59',
-    expiryLine: 'Discount expires 31/02',
+    expiryDate: '2021-02-28T23:59:59',
+    expiryLine: 'Discount expires',
     isReadyToClaim: true,
     totalRequiredStamps: 5
 };
