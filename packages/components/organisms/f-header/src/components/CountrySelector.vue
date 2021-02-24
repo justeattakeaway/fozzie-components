@@ -7,6 +7,8 @@
         v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: closeCountrySelector }"
         @keyup.esc="closeCountrySelector">
         <button
+            type="button"
+            data-test-id="action-button-component"
             :tabindex="isBelowMid && !navIsOpen ? -1 : 0"
             class="c-nav-list-text c-countrySelector-btn"
             :aria-expanded="countrySelectorIsOpenOnDesktopView ? 'true' : 'false'"
