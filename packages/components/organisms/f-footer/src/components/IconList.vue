@@ -31,7 +31,7 @@
                         "action": "footer",
                         "label": "${icon.gtm}"
                     }`'
-                    data-test-id="footerIcon">
+                    :data-test-id="`footerIcon ${icon.name}`">
                     <component
                         :is="iconChoice"
                         v-bind="icon"

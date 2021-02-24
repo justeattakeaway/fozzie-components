@@ -1,41 +1,39 @@
-import {
-    withKnobs, boolean, select, text
-} from '@storybook/addon-knobs';
-import Card from '../src/components/Card.vue';
 import { withA11y } from '@storybook/addon-a11y';
+import Card from '../src/components/Card.vue';
 
 export default {
     title: 'Components/Atoms',
-    decorators: [withKnobs, withA11y]
+    decorators: [withA11y],
+    parameters: {
+        backgrounds: {
+            values: [
+                { name: 'Grey', value: '#f5f5f5' },
+                { name: 'Dark', value: '#333' }
+            ],
+            default: 'Grey'
+        }
+    }
 };
 
-export const CardComponent = () => ({
+export const CardComponent = (args, { argTypes }) => ({
     components: { Card },
-    props: {
-        locale: {
-            default: select('Locale', ['en-GB', 'en-AU'])
-        },
-        cardHeading: {
-            default: text('Card Heading', 'My Card Heading')
-        },
-        cardHeadingPosition: {
-            default: select('Card Heading Position', ['left', 'center', 'right'])
-        },
-        isRounded: {
-            default: boolean('isRounded', false)
-        },
-        hasOutline: {
-            default: boolean('hasOutline', false)
-        },
-        isPageContentWrapper: {
-            default: boolean('isPageContentWrapper', false)
-        }
-    },
-    parameters: {
-        notes: 'some documentation here'
-    },
+    props: Object.keys(argTypes),
     template:
-        '<card :locale="locale" :cardHeading="cardHeading" :cardHeadingPosition="cardHeadingPosition" :isRounded="isRounded" :hasOutline="hasOutline" :isPageContentWrapper="isPageContentWrapper"><p>Some Card Content</p></card>'
+        '<card :cardHeading="cardHeading" :cardHeadingPosition="cardHeadingPosition" :isRounded="isRounded" :hasOutline="hasOutline" :isPageContentWrapper="isPageContentWrapper"><p>Some Card Content</p></card>'
 });
+
+CardComponent.args = {
+    cardHeading: 'My Card Heading',
+    cardHeadingPosition: 'left',
+    isRounded: false,
+    hasOutline: false,
+    isPageContentWrapper: false
+};
+
+CardComponent.argTypes = {
+    cardHeadingPosition: {
+        control: { type: 'select', options: ['left', 'center', 'right'] }
+    }
+};
 
 CardComponent.storyName = 'f-card';
