@@ -154,6 +154,16 @@ export default {
             required: true
         },
 
+        placeOrderUrl: {
+            type: String,
+            required: true
+        },
+
+        paymentPageUrlPrefix: {
+            type: String,
+            required: true
+        },
+
         updateCheckoutUrl: {
             type: String,
             required: true
@@ -181,6 +191,11 @@ export default {
             default: 1000
         },
 
+        placeOrderTimeout: {
+            type: Number,
+            default: 1000
+        },
+
         updateCheckoutTimeout: {
             type: Number,
             default: 1000
@@ -204,6 +219,11 @@ export default {
         getAddressTimeout: {
             type: Number,
             default: 1000
+        },
+
+        applicationName: {
+            type: String,
+            required: true
         }
     },
 
@@ -249,7 +269,9 @@ export default {
             'notices',
             'serviceType',
             'time',
-            'userNote'
+            'userNote',
+            'basket',
+            'orderId'
         ]),
 
         isMobileNumberValid () {
@@ -305,7 +327,8 @@ export default {
             'updateCheckout',
             'setAuthToken',
             'updateCustomerDetails',
-            'updateUserNote'
+            'updateUserNote',
+            'placeOrder'
         ]),
 
         /**
@@ -359,6 +382,8 @@ export default {
                     timeout: this.updateCheckoutTimeout
                 });
 
+                await this.submitOrder();
+
                 this.$emit(EventNames.CheckoutSuccess, eventData);
 
                 this.$logger.logInfo(
@@ -366,6 +391,8 @@ export default {
                     this.$store,
                     eventData
                 );
+
+                this.redirectToPayment();
             } catch (thrownErrors) {
                 eventData.errors = thrownErrors;
 
@@ -377,6 +404,39 @@ export default {
                     eventData
                 );
             }
+        },
+
+        /**
+         * Redirect to the payment page.
+         */
+        redirectToPayment () {
+            setTimeout(() => { // TODO: remove this when the order team handles this automatically.
+                window.location.assign(`${this.paymentPageUrlPrefix}/${this.orderId}`);
+            }, 1000);
+        },
+
+        /**
+         * Place the order.
+         */
+        async submitOrder () {
+            const data = {
+                basketId: this.basket.id,
+                applicationId: 7, // Responsive Web
+                customerNotes: {
+                    noteForRestaurant: this.userNote
+                },
+                applicationName: this.applicationName,
+                applicationVersion: '1',
+                referralState: 'None',
+                deviceId: '127.0.0.1', // TODO: TBC
+                deviceName: window.navigator.userAgent
+            };
+
+            await this.placeOrder({
+                url: this.placeOrderUrl,
+                data,
+                timeout: this.placeOrderTimeout
+            });
         },
 
         /**

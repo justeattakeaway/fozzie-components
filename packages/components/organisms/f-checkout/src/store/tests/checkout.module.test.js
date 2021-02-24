@@ -68,13 +68,17 @@ const defaultState = {
     id: '',
     serviceType: '',
     restaurantId: '',
-    basketTotal: 0,
+    basket: {
+        id: '',
+        total: 0
+    },
     customer: {
         firstName: '',
         lastName: '',
         email: '',
         mobileNumber: ''
     },
+    orderId: '',
     time: {
         from: '',
         to: ''
@@ -178,6 +182,26 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe(`${UPDATE_BASKET_DETAILS} ::`, () => {
+            it('should update state with received value', () => {
+                // Arrange & Act
+                const eventData = {
+                    serviceType: 'delivery',
+                    basket: {
+                        id: '11111',
+                        total: 12.50
+                    },
+                    resturantId: '22222'
+                };
+                mutations[UPDATE_BASKET_DETAILS](state, eventData);
+
+                // Assert
+                expect(state.serviceType).toEqual(eventData.serviceType);
+                expect(state.basket).toEqual(eventData.basket);
+                expect(state.resturant).toEqual(eventData.resturant);
+            });
+        });
+
         it.each([
             [UPDATE_FULFILMENT_ADDRESS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
@@ -254,7 +278,10 @@ describe('CheckoutModule', () => {
                 expect(commit).toHaveBeenCalledWith(UPDATE_BASKET_DETAILS, {
                     serviceType: basketDelivery.ServiceType.toLowerCase(),
                     restaurantId: basketDelivery.RestaurantId,
-                    basketTotal: basketDelivery.BasketSummary.BasketTotals.Total
+                    basket: {
+                        id: basketDelivery.BasketId,
+                        total: basketDelivery.BasketSummary.BasketTotals.Total
+                    }
                 });
             });
         });
