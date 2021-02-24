@@ -8,6 +8,7 @@ import getBasketDelivery from './get-basket-delivery.json';
 import getBasketCollection from './get-basket-collection.json';
 import updateCheckout from './update-checkout.json';
 import getAddress from './get-address.json';
+import placeOrder from './place-order.json';
 
 const mock = new MockAdapter(axios);
 
@@ -37,6 +38,9 @@ export default {
                 break;
             case '/get-address.json':
                 mock.onGet(path).reply(200, getAddress);
+                break;
+            case '/place-order.json':
+                mock.onPost(path).reply(200, placeOrder);
                 break;
             default:
                 throw new Error(`${path} is not valid`);

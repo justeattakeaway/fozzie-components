@@ -4,14 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (add to next release)
+v0.59.0
 ------------------------------
 *February 24, 2021*
+
+### Added
+- `placeOrder` to call the Order Placement API.
+- Redirect to the payment page after the order has been placed.
 
 ### Changed
 - Restructured component object into page object model
 - Refactored component and accessibility tests
 - Extracted svgTransform to global test utils for reference by other packages
+- How we pass the parameters to the `PATCH` Checkout request.
 
 
 v0.58.0
