@@ -19,7 +19,7 @@ describe('f-footer component tests', () => {
         footer.expectedDownloadIcon = icon;
 
         // Assert
-        expect(footer.isDowloadIconDisplayed()).toBe(true);
+        expect(footer.isDownloadIconDisplayed()).toBe(true);
 
          // Act
          footer.clickDownloadIcon();

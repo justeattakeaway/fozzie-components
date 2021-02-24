@@ -56,7 +56,7 @@ class Footer extends Page {
         return this.component.isDisplayed();
     }
 
-    isDowloadIconDisplayed(){
+    isDownloadIconDisplayed(){
         return this.downloadIcon.isDisplayed();
     }
 
