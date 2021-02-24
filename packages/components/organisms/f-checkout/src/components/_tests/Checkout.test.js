@@ -242,13 +242,7 @@ describe('Checkout', () => {
 
                 // Act
                 shallowMount(VueCheckout, {
-                    store: createStore(
-                        defaultState,
-                        {
-                            ...defaultActions,
-                            setAuthToken
-                        }
-                    ),
+                    store: createStore(defaultState, { ...defaultActions, setAuthToken }),
                     i18n,
                     localVue,
                     propsData
@@ -1429,13 +1423,7 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(
-                            defaultState,
-                            {
-                                ...defaultActions,
-                                createGuestUser: jest.fn(async () => Promise.reject())
-                            }
-                        ),
+                        store: createStore(defaultState, { ...defaultActions, createGuestUser: jest.fn(async () => Promise.reject()) }),
                         i18n,
                         localVue,
                         propsData,
@@ -1504,13 +1492,7 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(
-                            defaultState,
-                            {
-                                ...defaultActions,
-                                getCheckout: jest.fn(async () => Promise.reject())
-                            }
-                        ),
+                        store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.reject()) }),
                         i18n,
                         localVue,
                         propsData,
@@ -1576,13 +1558,7 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(
-                            defaultState,
-                            {
-                                ...defaultActions,
-                                getAvailableFulfilment: jest.fn(async () => Promise.reject())
-                            }
-                        ),
+                        store: createStore(defaultState, { ...defaultActions, getAvailableFulfilment: jest.fn(async () => Promise.reject()) }),
                         i18n,
                         localVue,
                         propsData,
@@ -1648,13 +1624,7 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(
-                            defaultState,
-                            {
-                                ...defaultActions,
-                                getBasket: jest.fn(async () => Promise.reject())
-                            }
-                        ),
+                        store: createStore(defaultState, { ...defaultActions, getBasket: jest.fn(async () => Promise.reject()) }),
                         i18n,
                         localVue,
                         propsData,
@@ -1717,13 +1687,7 @@ describe('Checkout', () => {
                 it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
                     // Arrange
                     const wrapper = mount(VueCheckout, {
-                        store: createStore(
-                            defaultState,
-                            {
-                                ...defaultActions,
-                                getAddress: jest.fn(async () => Promise.reject())
-                            }
-                        ),
+                        store: createStore(defaultState, { ...defaultActions, getAddress: jest.fn(async () => Promise.reject()) }),
                         i18n,
                         localVue,
                         propsData

@@ -18,7 +18,7 @@ export default {
             total: 0
         },
         isLoggedIn: false,
-        changes: [],
+        changedFields: [],
         autofill: []
     }),
 
@@ -78,7 +78,7 @@ export default {
         /**
          * Pushes `form` event to the dataLayer with correct data
          */
-        async trackFormInteraction ({ state }, { action, error }) {
+        trackFormInteraction ({ state }, { action, error }) {
             const formName = state.isLoggedIn ? 'checkout' : 'checkout_guest';
 
             Trak.event({
@@ -89,7 +89,7 @@ export default {
                         action,
                         error: error || null,
                         autofill: JSON.parse(JSON.stringify(state.autofill)),
-                        changes: JSON.parse(JSON.stringify(state.changes))
+                        changes: JSON.parse(JSON.stringify(state.changedFields))
                     }
                 }
             });
@@ -105,10 +105,10 @@ export default {
         },
 
         [UPDATE_CHANGED_FIELDS]: (state, field) => {
-            const cleanedField = mapAnalyticsFieldNames(field);
+            const analyticsNames = mapAnalyticsFieldNames(field);
 
-            if (!state.changes.includes(cleanedField)) {
-                state.changes.push(cleanedField);
+            if (!state.changedFields.includes(analyticsNames)) {
+                state.changedFields.push(analyticsNames);
             }
         },
 

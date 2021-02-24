@@ -113,7 +113,6 @@ import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import { mapUpdateCheckoutRequest, mapAnalyticsFieldNames } from '../services/mapper';
 
-
 export default {
     name: 'VueCheckout',
 
@@ -250,9 +249,7 @@ export default {
             'notices',
             'serviceType',
             'time',
-            'userNote',
-            'restaurantId',
-            'basket'
+            'userNote'
         ]),
 
         isMobileNumberValid () {
@@ -589,7 +586,6 @@ export default {
 
             try {
                 await this.submitCheckout();
-
                 this.trackFormInteraction({ action: 'success' });
             } catch (error) {
                 this.handleErrorState(error);
@@ -694,7 +690,7 @@ export default {
     .c-spinner {
         margin: 0 auto;
     }
-  }
+}
 
 .c-checkout {
     padding-top: spacing(x6);

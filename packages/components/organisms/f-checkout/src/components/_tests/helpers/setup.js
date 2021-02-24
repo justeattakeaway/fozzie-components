@@ -46,20 +46,19 @@ const defaultState = {
     messages: [],
     authToken: '',
     isLoggedIn: false,
-    userNote: '',
-    autofill: [],
-    changes: []
+    userNote: ''
 };
 
 const defaultAnalyticsState = {
-    serviceType: CHECKOUT_METHOD_DELIVERY,
+    serviceType: '',
     restaurantId: '',
     basket: {
         id: '',
         total: 0
     },
+    isLoggedIn: false,
     autofill: [],
-    changes: []
+    changedFields: []
 };
 
 const defaultActions = {
@@ -123,6 +122,7 @@ export {
     fulfilmentTimes,
     defaultState,
     defaultActions,
+    defaultAnalyticsState,
     i18n,
     createStore,
     $logger

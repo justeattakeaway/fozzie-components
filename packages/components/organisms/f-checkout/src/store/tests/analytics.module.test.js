@@ -1,7 +1,7 @@
 import Trak from '@justeat/f-trak';
 import AnalyticsModule from '../analytics.module';
 import * as mapper from '../../services/mapper';
-import { defaultState } from '../../components/_tests/helpers/setup';
+import { defaultState, defaultAnalyticsState } from '../../components/_tests/helpers/setup';
 
 import {
     UPDATE_ANALYTICS_STATE,
@@ -18,18 +18,6 @@ const {
     trackFormInteraction
 } = actions;
 
-const analyticsState = {
-    serviceType: '',
-    restaurantId: '',
-    basket: {
-        id: '',
-        total: 0
-    },
-    isLoggedIn: false,
-    changes: [],
-    autofill: []
-};
-
 const checkoutState = defaultState;
 
 describe('AnalyticsModule', () => {
@@ -37,21 +25,20 @@ describe('AnalyticsModule', () => {
 
     it('should create default state when initialised.', () => {
         // Assert
-        expect(state).toEqual(analyticsState);
+        expect(state).toEqual(defaultAnalyticsState);
     });
 
     describe('actions ::', () => {
         let commit;
         let dispatch;
         let trackEventSpy;
-
         const rootState = { checkout: checkoutState };
 
         beforeEach(() => {
             commit = jest.fn();
             dispatch = jest.fn();
-            trackEventSpy = jest.spyOn(Trak, 'event').mockImplementation();
             state = AnalyticsModule.state();
+            trackEventSpy = jest.spyOn(Trak, 'event');
         });
 
         afterEach(() => {
@@ -59,7 +46,7 @@ describe('AnalyticsModule', () => {
         });
 
         describe('updateState ::', () => {
-            it(`should call ${UPDATE_ANALYTICS_STATE} with necessary checkoutState`, () => {
+            it(`should call ${UPDATE_ANALYTICS_STATE} with required checkoutState values`, () => {
                 // Arrange
                 const requiredState = {
                     serviceType: checkoutState.serviceType,
@@ -166,7 +153,7 @@ describe('AnalyticsModule', () => {
                         action: payload.action,
                         error: payload.error,
                         autofill: state.autofill,
-                        changes: state.changes
+                        changes: state.changedFields
                     }
                 }
             };
@@ -203,15 +190,15 @@ describe('AnalyticsModule', () => {
 
         describe(`${UPDATE_ANALYTICS_STATE} ::`, () => {
             it('should update state with passed `checkoutState', () => {
+                // Arrange
                 checkoutState.restaurantId = '11111';
 
-                // Arrange
                 const expectedState = {
                     isLoggedIn: checkoutState.isLoggedIn,
                     basket: checkoutState.basket,
                     restaurantId: checkoutState.restaurantId,
                     serviceType: checkoutState.serviceType,
-                    changes: [],
+                    changedFields: [],
                     autofill: []
                 };
 
@@ -241,24 +228,24 @@ describe('AnalyticsModule', () => {
 
             it('should update state if `changedFields` does not include passed fields', () => {
                 // Arrange
-                state.changes = [];
+                state.changedFields = [];
 
                 // Act
                 mutations[UPDATE_CHANGED_FIELDS](state, field);
 
                 // Assert
-                expect(state.changes).toEqual([field]);
+                expect(state.changedFields).toEqual([field]);
             });
 
-            it('should not update state if `changedFields` includes passed fields', () => {
+            it('should not update state if `changedFields` include passed fields', () => {
                 // Arrange
-                state.changes = [field];
+                state.changedFields = [field];
 
                 // Act
                 mutations[UPDATE_CHANGED_FIELDS](state, field);
 
                 // Assert
-                expect(state.changes).toEqual([field]);
+                expect(state.changedFields).toEqual([field]);
             });
         });
 

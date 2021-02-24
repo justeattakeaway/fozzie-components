@@ -61,7 +61,7 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        async getCheckout ({ commit, state, dispatch }, { url, timeout }) {
+        getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
             // TODO: deal with exceptions.
