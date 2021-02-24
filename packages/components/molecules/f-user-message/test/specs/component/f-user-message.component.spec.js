@@ -2,7 +2,7 @@ const UserMessage = require ('../../../test-utils/component-objects/f-user-messa
 const userMessage = new UserMessage();
 
 describe('f-user-message component tests', () => {
-    before(() => {
+    beforeEach(() => {
         userMessage.open();
         userMessage.waitForComponent();
     });

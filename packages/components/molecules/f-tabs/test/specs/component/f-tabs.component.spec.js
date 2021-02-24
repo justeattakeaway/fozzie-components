@@ -1,13 +1,14 @@
-import TabsComponent from '../../../test-utils/component-objects/f-tabs.component';
+const Tabs = require ('../../../test-utils/component-objects/f-tabs.component');
+const tabs = new Tabs();
 
 describe('f-tabs component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-molecules--vue-tabs-component');
-        browser.switchToFrame(0);
-        TabsComponent.waitForTabsComponent();
+        tabs.open();
+        tabs.waitForComponent();
     });
+
     it('should display the f-tabs component', () => {
         // Assert
-        expect(TabsComponent.isTabsComponentDisplayed()).toBe(true);
+        expect(tabs.isComponentDisplayed()).toBe(true);
     });
 });
