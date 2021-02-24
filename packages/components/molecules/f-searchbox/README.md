@@ -104,6 +104,10 @@ yarn test-component:chrome
 
 ## Configuration
 
+### Vuex namespacing
+
+The Vuex store in this application uses `fSearchboxModule` as its namespace. When registering modules in your own application please be mindful that naming a Vuex store in your application the same as the one that's registered here will cause Vuex errors.
+
 ### Config example
 
 To apply these configs, pass them through as part of an optional `config` prop.

@@ -68,6 +68,7 @@ import FormSearchInnerFieldWrapper from './FormSearchInnerFieldWrapper.vue';
 import FormFullAddressSearchOverlay from './FormFullAddressSearchModalOverlay.vue';
 import LoadingIndicator from '../FormStates/FormLoadingIndicator.vue';
 import { ADDRESS_SEARCH_FOCUS } from '../../event-types';
+import { VUEX_MODULE_NAMESPACE } from '../../services/constants';
 
 const ALLOWED_SELECTION_TIME = 500;
 
@@ -131,7 +132,7 @@ export default {
     },
 
     computed: {
-        ...mapState('searchbox', [
+        ...mapState(VUEX_MODULE_NAMESPACE, [
             'address',
             'isBelowMid',
             'inputTimeoutValue',
@@ -181,7 +182,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('searchbox', [
+        ...mapActions(VUEX_MODULE_NAMESPACE, [
             'clearSuggestions',
             'setAddress',
             'setInputFocus',

@@ -4,7 +4,7 @@ import Form from '../Form.vue';
 import * as generalServices from '../../services/general.services';
 import * as searchService from '../../services/search.services';
 import * as helperService from '../../utils/helpers';
-import { JE_FULL_ADDRESS_DETAILS } from '../../services/constants';
+import { JE_FULL_ADDRESS_DETAILS, VUEX_MODULE_NAMESPACE } from '../../services/constants';
 
 const localVue = createLocalVue();
 
@@ -32,7 +32,7 @@ const mockActions = {
 
 const createStore = (state = mockState, actions = mockActions) => new Vuex.Store({
     modules: {
-        searchbox: {
+        [VUEX_MODULE_NAMESPACE]: {
             namespaced: true,
             state,
             actions
