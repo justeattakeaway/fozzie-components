@@ -50,6 +50,7 @@ import { mapState, mapActions } from 'vuex';
 import { MapPinIcon } from '@justeat/f-vue-icons';
 import ContinueWithSuggestion from './FormFullAddressContinueWithSuggestion.vue';
 import fullAddressSearchMixin from '../../mixin/fullAddressSearch.mixin';
+import { VUEX_MODULE_NAMESPACE } from '../../services/constants';
 
 export default {
     components: {
@@ -91,7 +92,7 @@ export default {
     }),
 
     computed: {
-        ...mapState('searchbox', [
+        ...mapState(VUEX_MODULE_NAMESPACE, [
             'address',
             'isBelowMid',
             'isInputFocus',
@@ -143,7 +144,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('searchbox', [
+        ...mapActions(VUEX_MODULE_NAMESPACE, [
             'getMatchedAreaAddressResults',
             'getFinalAddressSelectionDetails',
             'setAddress',

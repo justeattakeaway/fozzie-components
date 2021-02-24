@@ -9,10 +9,11 @@
 
 <script>
 import { mapState } from 'vuex';
+import { VUEX_MODULE_NAMESPACE } from '../../services/constants';
 
 export default {
     computed: {
-        ...mapState('searchbox', [
+        ...mapState(VUEX_MODULE_NAMESPACE, [
             'isFullAddressSearchEnabled',
             'isLoadingResults'
         ]),
