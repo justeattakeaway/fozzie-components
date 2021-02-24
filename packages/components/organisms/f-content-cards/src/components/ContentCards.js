@@ -367,6 +367,13 @@ export default {
             };
         }
     },
+
+    /**
+     * Render function for the component - chooses one slot based on the current state
+     * @param h - conventional shorthand for createElement - see
+     *            https://vuejs.org/v2/guide/render-function.html#JSX
+     * @return {VNode}
+     */
     render (h) {
         return this.$scopedSlots[this.state]
             ? h(
