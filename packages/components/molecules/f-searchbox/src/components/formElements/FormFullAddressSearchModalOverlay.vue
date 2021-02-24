@@ -58,6 +58,7 @@ import '@justeat/f-button/dist/f-button.css';
 import FullAddressSearchSuggestions from './FormFullAddressSearchSuggestions.vue';
 import LoadingIndicator from '../FormStates/FormLoadingIndicator.vue';
 import { ON_FULL_ADDRESS_MODAL_CLOSED } from '../../event-types';
+import { VUEX_MODULE_NAMESPACE } from '../../services/constants';
 
 export default {
     components: {
@@ -92,7 +93,7 @@ export default {
     },
 
     computed: {
-        ...mapState('searchbox', [
+        ...mapState(VUEX_MODULE_NAMESPACE, [
             'isBelowMid',
             'isFullAddressSearchEnabled',
             'suggestions',
@@ -120,7 +121,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('searchbox', [
+        ...mapActions(VUEX_MODULE_NAMESPACE, [
             'getMatchedAreaAddressResults',
             'setAddress'
         ]),

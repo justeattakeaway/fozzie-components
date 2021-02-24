@@ -1,10 +1,11 @@
 {
   "name": "@justeat/f-content-cards",
   "description": "Fozzie Content Cards",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "main": "dist/f-content-cards.umd.min.js",
   "files": [
-    "dist"
+    "dist",
+    "docs"
   ],
   "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-content-cards",
   "contributors": [
