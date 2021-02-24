@@ -26,7 +26,7 @@ const getBasketCollectionUrl = '/get-basket-collection.json';
 const updateCheckoutUrl = '/update-checkout.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
-const paymentPageUrl = ''; // So that it redirects to the `f-checkout` component page in Storybook again.
+const paymentPageUrlPrefix = '/pay';
 
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutCollectionUrl);
@@ -72,8 +72,8 @@ export const CheckoutComponent = () => ({
         placeOrderUrl: {
             default: select('Place Order Url', [placeOrderUrl], placeOrderUrl)
         },
-        paymentPageUrl: {
-            default: text('Payment Page Url', paymentPageUrl)
+        paymentPageUrlPrefix: {
+            default: text('Payment Page Url Prefix', paymentPageUrlPrefix)
         }
     },
     store: new Vuex.Store({
@@ -92,10 +92,10 @@ export const CheckoutComponent = () => ({
         ':loginUrl="loginUrl" ' +
         ':getAddressUrl="getAddressUrl" ' +
         ':placeOrderUrl="placeOrderUrl" ' +
-        ':paymentPageUrl="paymentPageUrl" ' +
+        ':paymentPageUrlPrefix="paymentPageUrlPrefix" ' +
         'applicationName="Storybook" ' +
         // eslint-disable-next-line no-template-curly-in-string
-        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrl}`" />'
+        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';
