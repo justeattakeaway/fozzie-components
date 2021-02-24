@@ -87,6 +87,7 @@ export const HomePromotionCard1Component = (args, { argTypes }) => ({
 
 HomePromotionCard1Component.storyName = 'home-promotion-card-1';
 
+
 HomePromotionCard1Component.args = {
     title: 'Treat them with a Just Eat gift card',
     backgroundColor: '#da0006',

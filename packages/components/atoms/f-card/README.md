@@ -64,13 +64,13 @@ export default {
 
 The props that can be defined are as follows:
 
-| Prop                      | Type       | Required          | Default | Description |
-| :---                      |     :---:      |     :---:     |  :---:  | :---        |
-| locale                    | `String`      | No          | `en-GB` | Sets the locale of the component (which determines what theme and translations to use.<br><br>If the application consuming the `f-card` component is using the vue `i18n` module, then the locale from that module will be used when this prop isn't defined. When this prop is defined, it takes precedence over the locale defined by the `i18n` module.<br><br>If not defined and the `i18n` module isn't present, the default locale used is `en-GB`.|
-| isRounded                 | `Boolean`     |  No          | `false` | When set to `true`, rounded corners are applied to the card component. |
-| hasOutline                | `Boolean`     |  No          | `false` | When set to `true`, an outline is applied to the card component.  |
-| isPageContentWrapper      | `Boolean`     |  No          | `false` | When set to `true`, applies styles to make the card act like a page content wrapper.<br><br>The card will be full width on narrow devices, and then a fixed width above a certain breakpoint width (about 480px), when the card will be centred on the page. |
-| cardHeadingPosition      | `String`     |  No          | `left` | Sets the text alignment of the card component's heading.<br><br>When set to `left` the heading will aligned to the left.<br>When set to `center` the heading will be centrally aligned.<br>When set to `right` the heading will be aligned to the right. |
+| Prop                      | Type       | Required   | Default | Description |
+| :---                      | :---:      | :---:      | :---:   | :---        |
+| `cardHeadingPosition`     | `String`   |  No        | `left`  | Sets the text alignment of the card component's heading.<br><br>When set to `left` the heading will aligned to the left.<br>When set to `center` the heading will be centrally aligned.<br>When set to `right` the heading will be aligned to the right. |
+| `cardHeading`             | `String`   |  No        | `''`    | When set, will add a heading to the top of the card component. |
+| `hasOutline`              | `Boolean`  |  No        | `false` | When set to `true`, an outline is applied to the card component.  |
+| `isPageContentWrapper`    | `Boolean`  |  No        | `false` | When set to `true`, applies styles to make the card act like a page content wrapper.<br><br>The card will be full width on narrow devices, and then a fixed width above a certain breakpoint width (about 480px), when the card will be centred on the page. |
+| `isRounded`               | `Boolean`  |  No        | `false` | When set to `true`, rounded corners are applied to the card component. |
 
 ### CSS Classes
 

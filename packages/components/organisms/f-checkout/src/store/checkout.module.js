@@ -10,6 +10,7 @@ import {
     UPDATE_FULFILMENT_TIME,
     UPDATE_IS_FULFILLABLE,
     UPDATE_ISSUES,
+    UPDATE_ORDER_PLACED,
     UPDATE_STATE,
     UPDATE_USER_NOTE
 } from './mutation-types';
@@ -31,6 +32,7 @@ export default {
             email: '',
             mobileNumber: ''
         },
+        orderId: '',
         time: {
             from: '',
             to: ''
@@ -224,6 +226,35 @@ export default {
             dispatch('analytics/updateState', state, { root: true });
         },
 
+        /**
+         * Post the order details to the Order Placement API and get the `orderId` from the response.
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        placeOrder: async ({ commit, state }, {
+            url, data, timeout
+        }) => {
+            const authHeader = state.authToken && `Bearer ${state.authToken}`;
+
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json;v=1',
+                    'x-je-feature': data.applicationName,
+                    ...(state.isLoggedIn && {
+                        Authorization: authHeader
+                    })
+                },
+                timeout
+            };
+
+            const response = await axios.post(url, data, config);
+
+            const { orderId } = response.data;
+
+            commit(UPDATE_ORDER_PLACED, orderId);
+        },
+
         setAuthToken: ({ commit }, authToken) => {
             commit(UPDATE_AUTH, authToken);
         },
@@ -338,6 +369,10 @@ export default {
 
         [UPDATE_USER_NOTE]: (state, userNote) => {
             state.userNote = userNote;
+        },
+
+        [UPDATE_ORDER_PLACED]: (state, orderId) => {
+            state.orderId = orderId;
         }
     }
 };

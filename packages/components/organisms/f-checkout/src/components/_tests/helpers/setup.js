@@ -27,6 +27,7 @@ const defaultState = {
         email: 'john@test.com',
         mobileNumber: '+447111111111'
     },
+    orderId: 'ORDER111',
     time: {
         from: '',
         to: ''
@@ -46,7 +47,7 @@ const defaultState = {
     messages: [],
     authToken: '',
     isLoggedIn: false,
-    userNote: ''
+    userNote: 'No ketchup, please.'
 };
 
 const defaultAnalyticsState = {
@@ -71,7 +72,8 @@ const defaultActions = {
     updateCustomerDetails: jest.fn(),
     updateFulfilmentTime: jest.fn(),
     getBasket: jest.fn(),
-    getAddress: jest.fn()
+    getAddress: jest.fn(),
+    placeOrder: jest.fn()
 };
 
 const defaultAnalyticsActions = {

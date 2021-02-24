@@ -78,6 +78,7 @@ const defaultState = {
         email: '',
         mobileNumber: ''
     },
+    orderId: '',
     time: {
         from: '',
         to: ''
@@ -183,23 +184,21 @@ describe('CheckoutModule', () => {
 
         describe(`${UPDATE_BASKET_DETAILS} ::`, () => {
             it('should update state with received value', () => {
-                // Arrange
+                // Arrange & Act
                 const eventData = {
                     serviceType: 'delivery',
                     basket: {
                         id: '11111',
-                        total: '12.50'
+                        total: 12.50
                     },
                     restaurantId: '22222'
                 };
-
-                // Act
                 mutations[UPDATE_BASKET_DETAILS](state, eventData);
 
                 // Assert
                 expect(state.serviceType).toEqual(eventData.serviceType);
                 expect(state.basket).toEqual(eventData.basket);
-                expect(state.restaurantId).toEqual(eventData.restaurantId);
+                expect(state.restaurant).toEqual(eventData.restaurant);
             });
         });
 

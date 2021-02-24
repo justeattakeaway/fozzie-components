@@ -20,6 +20,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import fullAddressSearchMixin from '../../mixin/fullAddressSearch.mixin';
+import { VUEX_MODULE_NAMESPACE } from '../../services/constants';
 
 export default {
     mixins: [
@@ -44,7 +45,7 @@ export default {
     },
 
     computed: {
-        ...mapState('searchbox', [
+        ...mapState(VUEX_MODULE_NAMESPACE, [
             'continueWithSuggestionDetails',
             'isBelowMid',
             'shouldAutoNavigateToSerp'
@@ -70,7 +71,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('searchbox', [
+        ...mapActions(VUEX_MODULE_NAMESPACE, [
             'clearSuggestions',
             'setAddress',
             'setShouldShowSuggestionModel'

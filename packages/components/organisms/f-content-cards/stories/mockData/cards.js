@@ -50,6 +50,10 @@ const cardTypes = {
     Voucher_Card_1: {
         label: 'Voucher',
         fields: ['button_1', 'line_3', 'voucher_code', 'image_1', 'icon_1']
+    },
+    Stamp_Card_1: {
+        label: 'Stamp Card',
+        fields: ['line_3', 'discount_percentage', 'earned_stamps', 'expiry_date', 'expiry_line', 'is_ready_to_claim', 'total_required_stamps']
     }
 };
 /* eslint-enable camelcase */
@@ -74,9 +78,14 @@ const fieldTypeToFaker = {
             { Start: '00:00', End: '23:59' }
         ]
     }),
+    discount_percentage: faker.random.number.bind(faker.random, { min: 1, max: 99 }),
+    earned_stamps: faker.random.number.bind(faker.random, { min: 1, max: 4 }),
+    expiry_date: faker.random.number.bind(faker.random, { min: 1, max: 4 }),
+    expiry_line: randomSentence,
     footer: randomSentence,
     headline: randomSentence,
     icon_1: type => `https://picsum.photos/seed/${type}_icon_1/48/48`,
+    is_ready_to_claim: () => false,
     image_1: type => `https://picsum.photos/seed/${type}_image_1/384/216?blur=3`,
     line3: randomSentence,
     line4: randomSentence,
@@ -89,6 +98,7 @@ const fieldTypeToFaker = {
     restaurant_image_url: type => `https://picsum.photos/seed/${type}_restaurant_image_url/384/216?blur=3`,
     restaurant_logo_url: type => `https://picsum.photos/seed/${type}_restaurant_logo_url/48/48`,
     subtitle: randomSentence,
+    total_required_stamps: () => 5,
     voucher_code: faker.lorem.slug.bind(faker.lorem, undefined)
 };
 /* eslint-enable camelcase */
@@ -141,7 +151,7 @@ function seededRandomCardOfType (type) {
         });
 
     const id = btoa([`5d79109d167e923a83d3d7db_$_cc=${faker.random.uuid()}`, 'mv=5d79109d167e923a83d3d7dd', 'pi=cmp'].join('&'));
-    const tt = faker.lorem.sentence();
+    const tt = faker.lorem.sentence(3);
     const ds = faker.lorem.sentence();
     const dm = faker.internet.domainName();
 
@@ -188,7 +198,8 @@ export default () => {
             seededRandomCardOfType('Home_Promotion_Card_2'),
             seededRandomCardOfType('Post_Order_Card_1'),
             seededRandomCardOfType('Anniversary_Card_1'),
-            seededRandomCardOfType('Restaurant_FTC_Offer_Card')
+            seededRandomCardOfType('Restaurant_FTC_Offer_Card'),
+            seededRandomCardOfType('Stamp_Card_1')
         ],
         /* eslint-disable camelcase */
         last_full_sync_at: nowMinus5Hours,

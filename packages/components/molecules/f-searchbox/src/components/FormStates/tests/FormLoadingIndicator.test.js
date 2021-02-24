@@ -1,6 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import FormLoadingIndicator from '../FormLoadingIndicator.vue';
+import { VUEX_MODULE_NAMESPACE } from '../../../services/constants';
 
 const localVue = createLocalVue();
 
@@ -13,7 +14,7 @@ const mockState = {
 
 const createStore = (state = mockState) => new Vuex.Store({
     modules: {
-        searchbox: {
+        [VUEX_MODULE_NAMESPACE]: {
             namespaced: true,
             state
         }
