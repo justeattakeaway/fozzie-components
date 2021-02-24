@@ -14,62 +14,66 @@ const {
 } = require('./f-checkout-selectors');
 
 class Checkout extends Page {
+    get component () { return $(CHECKOUT_COMPONENT); }
 
-    get component () { return $(CHECKOUT_COMPONENT) }
+    get orderTimeDropdown () { return $(ORDER_TIME_DROPDOWN); }
 
-    get orderTimeDropdown () { return $(ORDER_TIME_DROPDOWN) }
-    get orderTimeDropdownOptions () { return $$(ORDER_TIME_DROPDOWN_OPTIONS) }
-    get knobCheckoutDropdown () { return $(KNOB_CHECKOUT_DROPDOWN) }
+    get orderTimeDropdownOptions () { return $$(ORDER_TIME_DROPDOWN_OPTIONS); }
 
-    get goToPaymentButton () { return $(GO_TO_PAYMENT_BUTTON) }
-    get knobButton () { return $(KNOB_BUTTON) }
+    get knobCheckoutDropdown () { return $(KNOB_CHECKOUT_DROPDOWN); }
 
-    get userNoteInput () { return $(USER_NOTE_INPUT) }
-    get switchUserLink () { return $(SWITCH_USER_LINK) }
+    get goToPaymentButton () { return $(GO_TO_PAYMENT_BUTTON); }
 
-    get guestCheckoutHeader () { return $(GUEST_CHECKOUT_HEADER) }
-    get guestCheckoutLoginButton () { return $(GUEST_CHECKOUT_LOGIN_BUTTON) }
+    get knobButton () { return $(KNOB_BUTTON); }
+
+    get userNoteInput () { return $(USER_NOTE_INPUT); }
+
+    get switchUserLink () { return $(SWITCH_USER_LINK); }
+
+    get guestCheckoutHeader () { return $(GUEST_CHECKOUT_HEADER); }
+
+    get guestCheckoutLoginButton () { return $(GUEST_CHECKOUT_LOGIN_BUTTON); }
 
     fields = {
         firstName: {
-            get input () { return $(FIELDS.firstName.input) }, 
-            get error () { return $(FIELDS.firstName.error) }
-        }, 
+            get input () { return $(FIELDS.firstName.input); },
+            get error () { return $(FIELDS.firstName.error); }
+        },
         lastName: {
-            get input () { return $(FIELDS.lastName.input) }, 
-            get error () { return $(FIELDS.lastName.error) }
-        }, 
+            get input () { return $(FIELDS.lastName.input); },
+            get error () { return $(FIELDS.lastName.error); }
+        },
         emailAddress: {
-            get input () { return $(FIELDS.emailAddress.input) }, 
-            get error () { return $(FIELDS.emailAddress.error) }
+            get input () { return $(FIELDS.emailAddress.input); },
+            get error () { return $(FIELDS.emailAddress.error); }
         },
         mobileNumber: {
-            get input () { return $(FIELDS.mobileNumber.input) }, 
-            get error () { return $(FIELDS.mobileNumber.error) }
+            get input () { return $(FIELDS.mobileNumber.input); },
+            get error () { return $(FIELDS.mobileNumber.error); }
         },
         addressLine1: {
-            get input () { return $(FIELDS.addressLine1.input) }, 
-            get error () { return $(FIELDS.addressLine1.error) }
+            get input () { return $(FIELDS.addressLine1.input); },
+            get error () { return $(FIELDS.addressLine1.error); }
         },
         addressLine2: {
-            get input () { return $(FIELDS.addressLine2.input) }, 
-            get error () { return $(FIELDS.addressLine2.error) }
+            get input () { return $(FIELDS.addressLine2.input); },
+            get error () { return $(FIELDS.addressLine2.error); }
         },
         addressCity: {
-            get input () { return $(FIELDS.addressCity.input) }, 
-            get error () { return $(FIELDS.addressCity.error) }
+            get input () { return $(FIELDS.addressCity.input); },
+            get error () { return $(FIELDS.addressCity.error); }
         },
         addressPostcode: {
-            get input () { return $(FIELDS.addressPostcode.input) }, 
-            get error () { return $(FIELDS.addressPostcode.error) }, 
-            get typeError () { return $(FIELDS.addressPostcode.typeError) }
-        }, 
+            get input () { return $(FIELDS.addressPostcode.input); },
+            get error () { return $(FIELDS.addressPostcode.error); },
+            get typeError () { return $(FIELDS.addressPostcode.typeError); }
+        },
         userNote: {
-            get input () { return $(FIELDS.userNote.input) }, 
-            get error () { return '' }, 
+            get input () { return $(FIELDS.userNote.input); },
+            get error () { return ''; }
         }
     }
-      /**
+    /**
      * @description
      * Sets the data for the checkout component.
      *
@@ -79,66 +83,68 @@ class Checkout extends Page {
      * @param {String} checkout.isValid The checkout validation
      */
 
-    open(checkout){
-        let authQueryString = ''; 
+    open (checkout) {
+        let authQueryString = '';
         let createGuestUrl = '&knob-Create%20Guest%20Url=%2Fcreate-guest.json';
-        let checkoutUrl = checkout.isValid ? `&knob-Get%20Checkout%20Url=%2Fcheckout-${checkout.type}.json` : '';
-        let basketUrl = `&knob-Get%20Basket%20Url=%2Fget-basket-${checkout.type}.json`
+        const checkoutUrl = checkout.isValid ? `&knob-Get%20Checkout%20Url=%2Fcheckout-${checkout.type}.json` : '';
+        const basketUrl = `&knob-Get%20Basket%20Url=%2Fget-basket-${checkout.type}.json`;
+        const placeOrderUrl = '&knob-Place%20Order%20Url=%2Fplace-order.json';
+        const paymentPageUrlPrefix = '&knob-Payment%20Page%20Url%20Prefix=%23%2Fpay';
 
-        if ( checkout.isAuthenticated ) {
-            authQueryString = '&knob-Auth%20token=a'; 
+        if (checkout.isAuthenticated) {
+            authQueryString = '&knob-Auth%20token=a';
             createGuestUrl = '';
         }
-        
-        let url = `checkout-component${checkoutUrl}&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json${authQueryString}${basketUrl}${createGuestUrl}`
+
+        const url = `checkout-component${checkoutUrl}&knob-Available%20Fulfilment%20Url=%2Fcheckout-available-fulfilment.json${authQueryString}${basketUrl}${createGuestUrl}${placeOrderUrl}${paymentPageUrlPrefix}`;
         super.openComponent('organism', url);
     }
 
-    waitForComponent(){
+    waitForComponent () {
         super.waitForComponent(this.component);
     }
 
-    isComponentDisplayed(){
+    isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    isFieldErrorDisplayed(fieldName){
+    isFieldErrorDisplayed (fieldName) {
         return this.fields[fieldName].error.isDisplayed();
     }
 
-    isFieldDisplayed(fieldName){
+    isFieldDisplayed (fieldName) {
         return this.fields[fieldName].input.isDisplayed();
     }
 
-    isPostcodeTypeErrorDisplayed(){
-         return this.fields.addressPostcode.typeError.isDisplayed();
+    isPostcodeTypeErrorDisplayed () {
+        return this.fields.addressPostcode.typeError.isDisplayed();
     }
 
-    isOrderTimeDropdownDisplayed(){
+    isOrderTimeDropdownDisplayed () {
         return this.orderTimeDropdown.isDisplayed();
     }
 
-    userNoteMaxCharacterCount(){
+    userNoteMaxCharacterCount () {
         return this.userNoteInput.getAttribute('maxlength');
     }
 
-    clickPaymentButton(){
+    clickPaymentButton () {
         return this.goToPaymentButton.click();
     }
 
-    switchUserLinkIsDisplayed(){
+    switchUserLinkIsDisplayed () {
         return this.switchUserLink.isDisplayed();
     }
 
-    isGuestCheckoutLoginButtonDisplayed(){
+    isGuestCheckoutLoginButtonDisplayed () {
         return this.guestCheckoutLoginButton.isDisplayed();
     }
 
-    clickGuestCheckoutLoginButton(){
+    clickGuestCheckoutLoginButton () {
         return this.guestCheckoutLoginButton.click();
     }
 
-    isGuestCheckoutHeaderDisplayed(){
+    isGuestCheckoutHeaderDisplayed () {
         return this.guestCheckoutHeader.isDisplayed();
     }
 
@@ -153,8 +159,8 @@ class Checkout extends Page {
     * @param {String} userInfo.email The user's e-mail address
     * @param {String} userInfo.password The user's password
     */
-    submitForm(){
-        this.fields.firstName.input.setValue(userInfo.firstName); 
+    submitForm () {
+        this.fields.firstName.input.setValue(userInfo.firstName);
         this.fields.lastName.input.setValue(userInfo.lastName);
         this.fields.email.input.setValue(userInfo.email);
         this.fields.password.input.setValue(userInfo.password);
@@ -173,7 +179,7 @@ class Checkout extends Page {
     * @param {String} addressInfo.postcode Postcode of the user's address
     * @param {String} addressInfo.note The user's extra note
     */
-    populateCheckoutForm(addressInfo){
+    populateCheckoutForm (addressInfo) {
         this.waitForComponent();
         this.fields.mobileNumber.input.setValue(addressInfo.mobileNumber);
         this.fields.addressLine1.input.setValue(addressInfo.line1);
@@ -181,7 +187,7 @@ class Checkout extends Page {
         this.fields.addressCity.input.setValue(addressInfo.city);
         this.fields.addressPostcode.input.setValue(addressInfo.postcode);
         this.fields.userNote.input.setValue(addressInfo.note);
-    };
+    }
 
     /**
     * @description
@@ -190,7 +196,7 @@ class Checkout extends Page {
     * @param {string} method The collection type: either 'delivery' or 'collection'
     */
 
-    changeCheckoutMethod(method) {
+    changeCheckoutMethod (method) {
         const file = `/checkout-${method}.json`;
         this.knobButton.click();
         this.knobCheckoutDropdown.selectByVisibleText(file);
@@ -205,10 +211,10 @@ class Checkout extends Page {
     *
     * @param {String} fieldName The name of the field input it is clearing
     */
-    clearField(fieldName){
+    clearField (fieldName) {
         const BACKSPACE_UNICODE = '\uE003';
         this.fields[fieldName].input.setValue([' ', BACKSPACE_UNICODE]);
-    };
+    }
 
     /**
      * @description
@@ -216,16 +222,16 @@ class Checkout extends Page {
      *
      * @param {String} fields Grabs the fields of the above object and runs a forEach loop to get the keys
      */
-    clearCheckoutForm(fieldName){
+    clearCheckoutForm (fieldName) {
         this.waitForComponent();
         this.clearField(fieldName);
-    };
+    }
 
-    populateCollectionCheckoutForm(addressInfo){
+    populateCollectionCheckoutForm (addressInfo) {
         this.waitForComponent();
         this.fields.mobileNumber.input.setValue(addressInfo.mobileNumber);
         this.fields.userNote.input.setValue(addressInfo.note);
-    };
+    }
 
     /**
     * @description
@@ -233,9 +239,9 @@ class Checkout extends Page {
     *
     * @param {String} orderTime The visible text value of the order time
     */
-    selectOrderTime(orderTime){
-         this.orderTimeDropdown.selectByVisibleText(orderTime);
-    };
+    selectOrderTime (orderTime) {
+        this.orderTimeDropdown.selectByVisibleText(orderTime);
+    }
 
     /**
     * @description
@@ -243,8 +249,8 @@ class Checkout extends Page {
     *
     * @param {Number} index The index of the `orderTimeDropdownOptions` array
     */
-    getOrderTimeOptionText(index){
-       return this.orderTimeDropdownOptions[index].getText();
+    getOrderTimeOptionText (index) {
+        return this.orderTimeDropdownOptions[index].getText();
     }
 
     /**
@@ -254,9 +260,9 @@ class Checkout extends Page {
      * @param {Object} addressInfo
      * @param {String} addressInfo.note The user's extra note
      */
-    inputUserNote(addressInfo) {
+    inputUserNote (addressInfo) {
         this.fields.userNote.input.setValue(addressInfo.note);
-    };
+    }
 
     /**
     * @description
@@ -264,7 +270,7 @@ class Checkout extends Page {
     *
     * @returns {number} The length of the user note
     */
-    getUserNoteLength(){
+    getUserNoteLength () {
         return this.userNoteInput.getValue().length;
     }
 
@@ -272,15 +278,15 @@ class Checkout extends Page {
     * @description
     *Submit the checkout form.
     */
-    goToPayment(){
+    goToPayment () {
         this.goToPaymentButton.click();
-    };
+    }
 
-    doesErrorMessageExist(errorMessage){
+    doesErrorMessageExist (errorMessage) {
         return this.fields[errorMessage].error.isExisting();
     }
 
-    doesFieldExist(inputField){
+    doesFieldExist (inputField) {
         return this.fields[inputField].input.isExisting();
     }
 }
