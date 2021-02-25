@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.60.0
 -------------------------------
-*February 25, 2021*
+*February 26, 2021*
 
 ### Added
 - `analytics.module` to store.

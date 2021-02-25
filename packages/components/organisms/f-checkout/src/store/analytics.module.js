@@ -17,6 +17,7 @@ export default {
     actions: {
         /**
          * Calls `UPDATE_AUTOFILL` with an Array of autofill fields.
+         * `CheckoutState` will only contain customer address if serviceType is delivery.
          */
         updateAutofill ({ commit }, checkoutState) {
             let autofill = [];
@@ -80,6 +81,10 @@ export default {
             const formName = rootState.checkout.isLoggedIn ? 'checkout' : 'checkout_guest';
 
             const mappedError = error ? mapAnalyticsFieldArray(error) : null;
+
+            console.log(state.autofill); // eslint-disable-line no-console
+            console.log(JSON.stringify(state.autofill)); // eslint-disable-line no-console
+            console.log(JSON.parse(JSON.stringify(state.autofill))); // eslint-disable-line no-console
 
             Trak.event({
                 event: 'Form',
