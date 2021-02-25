@@ -5,15 +5,15 @@ module.exports = class <%= name.filename %> extends Page {
 
     get component () { return $(COMPONENT); }
 
-    open() {
-        super.openComponent('', '<%= name.class %>-component')
+    open () {
+        super.openComponent('<%= storybook.componentCategory.toLowerCase().replace('s','') %>', '<%= name.class %>-component');
     }
 
-    waitForTestComponent(){
+    waitForTestComponent () 
         super.waitForComponent(this.component);
     }
 
-    isComponentDisplayed(){
+    isComponentDisplayed () {
         this.component.isDisplayed();
     }
 }
