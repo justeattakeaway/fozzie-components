@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (add to next release)
 ------------------------------
-*January 25, 2021*
+*February 25, 2021*
 
 ### Changed
 - Restructured component object into page object model
