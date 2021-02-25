@@ -3,9 +3,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.2.1
+v0.3.0
 ------------------------------
-*February 21, 2021*
+*February 25, 2021*
 
 ### Changed
 - Update tests to use js-cookie.
