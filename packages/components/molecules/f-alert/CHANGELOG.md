@@ -9,6 +9,13 @@ Latest (add to next release)
 *January 12, 2021*
 
 ### Changed
+- Restructured component object into page object model
+- Refactored component and accessibility tests
+
+
+*January 12, 2021*
+
+### Changed
 - Updated config for latest `sass-loader`.
 - Switches import in `common.scss` in line with fozzie v5-beta.
 - Update version of `f-button`.
