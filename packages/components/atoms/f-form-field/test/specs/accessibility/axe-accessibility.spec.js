@@ -3,8 +3,7 @@ import FormFieldComponent from '../../../test-utils/component-objects/f-form-fie
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-atoms--form-field-component');
-        browser.switchToFrame(0);
+        browser.url('iframe.html?id=components-atoms--form-field-component');
         FormFieldComponent.waitForFormField();
     });
 

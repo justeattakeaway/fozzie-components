@@ -2,8 +2,7 @@ import CardComponent from '../../../test-utils/component-objects/f-card.componen
 
 describe('f-card component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-atoms--card-component');
-        browser.switchToFrame(0);
+        browser.url('iframe.html?id=components-atoms--card-component');
         CardComponent.waitForCard();
     });
 

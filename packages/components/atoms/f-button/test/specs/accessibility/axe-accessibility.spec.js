@@ -3,9 +3,7 @@ import ButtonComponent from '../../../test-utils/component-objects/f-button.comp
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-atoms--button-component');
-        browser.switchToFrame(0);
-        ButtonComponent.waitForButtonComponent();
+        browser.url('iframe.html?id=components-atoms--button-component');
     });
 
     it('a11y - should test f-button component WCAG compliance', () => {

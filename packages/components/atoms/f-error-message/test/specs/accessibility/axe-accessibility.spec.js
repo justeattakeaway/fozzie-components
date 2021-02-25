@@ -3,8 +3,7 @@ import ErrorMessageComponent from '../../../test-utils/component-objects/f-error
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-atoms--error-message-component');
-        browser.switchToFrame(0);
+        browser.url('iframe.html?id=components-atoms--error-message-component');
         ErrorMessageComponent.waitForErrorMessage();
     });
 

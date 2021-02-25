@@ -2,8 +2,7 @@ import ButtonComponent from '../../../test-utils/component-objects/f-button.comp
 
 describe('f-button component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-atoms--button-component');
-        browser.switchToFrame(0);
+        browser.url('iframe.html?id=components-atoms--button-component');
         ButtonComponent.waitForButtonComponent();
     });
 

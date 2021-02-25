@@ -2,8 +2,7 @@ import FormFieldComponent from '../../../test-utils/component-objects/f-form-fie
 
 describe('f-form-field component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-atoms--form-field-component');
-        browser.switchToFrame(0);
+        browser.url('iframe.html?id=components-atoms--form-field-component');
         FormFieldComponent.waitForFormField();
     });
 
