@@ -1,5 +1,21 @@
-const <%= name.class %>Component = () => $('[data-test-id="<%= name.class %>"]');
+const Page = require('@justeat/f-wdio-utils/src/page.object');
+const { COMPONENT } = require('./f-<%= name.class %>-selectors')
 
-exports.waitFor<%= name.filename%>Component = () => <%= name.class%>Component().waitForExist();
+class <%= name.filename %> extends Page {
 
-exports.is<%= name.filename %>ComponentDisplayed = () => <%= name.class %>Component().isDisplayed();
+    get component () { return $(COMPONENT); }
+
+    open() {
+        super.openComponent('', '<%= name.class %>-component')
+    }
+
+    waitForTestComponent(){
+        super.waitForComponent(this.component);
+    }
+
+    isComponentDisplayed(){
+        this.component.isDisplayed();
+    }
+}
+
+module.exports = <%= name.filename %>
