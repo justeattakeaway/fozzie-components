@@ -23,7 +23,7 @@ The `StampCard1` component supports the following keys of the `card` prop, with 
 
   A URL to the menu of the related restaurant for the customers' ongoing journey
 
-* `isReadyToClaim` - `Boolean`
+* `isReadyToClaim` - `Boolean`|`'true'`|`'false'`
 
   An indication of whether the stamps status should be rendered
 
@@ -42,9 +42,9 @@ The `StampCard1` component supports the following keys of the `card` prop, with 
 
 * `expiryDate` - `String`
 
-  A date in ISO8601 format - currently disregarded
+  A date in ISO8601 format
 
 * `expiryLine` - `String`
 
-  A human-readable description of the above date and how it relates to the card content
+  A human-readable line giving context to a rendered version of the above date
 

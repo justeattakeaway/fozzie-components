@@ -14,9 +14,9 @@ const card = {
     url: 'https://foo.com/bar',
     discountPercentage: 15,
     earnedStamps: 0,
-    expiryDate: '2021-02-31T23:59:59',
-    expiryLine: 'Discount expires 31/02',
-    isReadyToClaim: false,
+    expiryDate: '2021-02-28T23:59:59',
+    expiryLine: 'Discount expires',
+    isReadyToClaim: 'false',
     totalRequiredStamps: 5
 };
 
@@ -103,7 +103,7 @@ describe('contentCards › StampCard1', () => {
         beforeEach(() => {
             // Arrange & Act
             wrapper = getWrapper({
-                isReadyToClaim: true
+                isReadyToClaim: 'true'
             });
         });
 
@@ -126,6 +126,11 @@ describe('contentCards › StampCard1', () => {
         it('should display the expiry info section', () => {
             // Assert
             expect(wrapper.find('[data-test-id="stampCard1--expiryInfo"]').exists()).toBe(true);
+        });
+
+        it('should format the expiry date into the expiry line', () => {
+            // Assert
+            expect(wrapper.find('[data-test-id="stampCard1--expiryInfo"]').text()).toBe('Discount expires 28/02');
         });
     });
 

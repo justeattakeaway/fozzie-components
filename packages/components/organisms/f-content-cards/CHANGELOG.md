@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.4.0
+------------------------------
+*February 24, 2020*
+
+### Updated
+- f-content-cards now uses `vue-svg-loader` to bundle in SVG assets
+- `isReadyToClaim` card prop for `StampCard1` can now be the string literal `'false'`
+- `StampCard1`'s `expiryDate` is now interpreted as an ISO8601 date and formatted on
+  the end of `expiryLine`
+- `date-fns` is added as a devDependency
+
+
 v3.3.0
 ------------------------------
 *February 22, 2020*
