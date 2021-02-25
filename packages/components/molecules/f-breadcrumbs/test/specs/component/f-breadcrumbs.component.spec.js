@@ -1,13 +1,13 @@
-import BreadcrumbsComponent from '../../../test-utils/component-objects/f-breadcrumbs.component';
+const Breadcrumbs = require('../../../test-utils/component-objects/f-breadcrumbs.component');
+const breadcrumbs = new Breadcrumbs();
 
 describe('f-breadcrumbs component tests', () => {
     beforeEach(() => {
-        browser.url('/?path=/story/components-molecules--breadcrumbs-component');
-        browser.switchToFrame(0);
-        BreadcrumbsComponent.waitForBreadcrumbsComponent();
+        breadcrumbs.open();
+        breadcrumbs.waitForComponent();
     });
     it('should display the f-breadcrumbs component', () => {
         // Assert
-        expect(BreadcrumbsComponent.isBreadcrumbsComponentDisplayed()).toBe(true);
+        expect(breadcrumbs.isComponentDisplayed()).toBe(true);
     });
 });

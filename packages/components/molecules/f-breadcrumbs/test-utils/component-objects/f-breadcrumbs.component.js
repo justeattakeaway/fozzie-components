@@ -1,5 +1,17 @@
-const breadcrumbsComponent = () => $('[data-test-id="breadcrumbs-component"]');
+const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-exports.waitForBreadcrumbsComponent = () => breadcrumbsComponent().waitForExist();
+module.exports = class Breadcrumbs extends Page {
+    get component () { return $('[data-test-id="breadcrumbs-component"]'); }
 
-exports.isBreadcrumbsComponentDisplayed = () => breadcrumbsComponent().isDisplayed();
+    open () {
+        super.openComponent('molecule', 'breadcrumbs-component');
+    }
+
+    waitForComponent () {
+        super.waitForComponent(this.component);
+    }
+
+    isComponentDisplayed () {
+        return this.component.isDisplayed();
+    }
+};
