@@ -10,6 +10,7 @@ import {
     UPDATE_FULFILMENT_TIME,
     UPDATE_IS_FULFILLABLE,
     UPDATE_ISSUES,
+    UPDATE_ORDER_PLACED,
     UPDATE_STATE,
     UPDATE_USER_NOTE
 } from './mutation-types';
@@ -21,13 +22,17 @@ export default {
         id: '',
         serviceType: '',
         restaurantId: '',
-        basketTotal: 0,
+        basket: {
+            id: '',
+            total: 0
+        },
         customer: {
             firstName: '',
             lastName: '',
             email: '',
             mobileNumber: ''
         },
+        orderId: '',
         time: {
             from: '',
             to: ''
@@ -177,7 +182,10 @@ export default {
             const basketDetails = {
                 serviceType: data.ServiceType.toLowerCase(),
                 restaurantId: data.RestaurantId,
-                basketTotal: data.BasketSummary.BasketTotals.Total
+                basket: {
+                    id: data.BasketId,
+                    total: data.BasketSummary.BasketTotals.Total
+                }
             };
 
             commit(UPDATE_BASKET_DETAILS, basketDetails);
@@ -212,6 +220,35 @@ export default {
             const addressDetails = addressService.getClosestAddress(data.Addresses, tenant);
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
+        },
+
+        /**
+         * Post the order details to the Order Placement API and get the `orderId` from the response.
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        placeOrder: async ({ commit, state }, {
+            url, data, timeout
+        }) => {
+            const authHeader = state.authToken && `Bearer ${state.authToken}`;
+
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json;v=1',
+                    'x-je-feature': data.applicationName,
+                    ...(state.isLoggedIn && {
+                        Authorization: authHeader
+                    })
+                },
+                timeout
+            };
+
+            const response = await axios.post(url, data, config);
+
+            const { orderId } = response.data;
+
+            commit(UPDATE_ORDER_PLACED, orderId);
         },
 
         setAuthToken: ({ commit }, authToken) => {
@@ -284,8 +321,10 @@ export default {
             state.availableFulfilment.isAsapAvailable = asapAvailable;
         },
 
-        [UPDATE_BASKET_DETAILS]: (state, { serviceType }) => {
+        [UPDATE_BASKET_DETAILS]: (state, { serviceType, basket, restaurantId }) => {
             state.serviceType = serviceType;
+            state.basket = basket;
+            state.restaurantId = restaurantId;
         },
 
         [UPDATE_CUSTOMER_DETAILS]: (state, customer) => {
@@ -319,6 +358,10 @@ export default {
 
         [UPDATE_USER_NOTE]: (state, userNote) => {
             state.userNote = userNote;
+        },
+
+        [UPDATE_ORDER_PLACED]: (state, orderId) => {
+            state.orderId = orderId;
         }
     }
 };

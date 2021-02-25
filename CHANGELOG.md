@@ -3,6 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.18.0
+------------------------------
+*February 23, 2021*
+
+### Removed
+- `bundlewatch` exclude reverted for `f-status-banner`.
+
+
+v3.17.0
+------------------------------
+*February 22, 2021*
+
+### Changed
+- Extracted svgTransform from f-checkout to global test utils for reference by other packages
+- Vue SFC files given an indent value of 4 in .editorconfig
+
+
 v3.16.0
 ------------------------------
 *February 22, 2021*

@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-card",
   "description": "Fozzie Card Component – Used for providing wrapper card styling to an element (or group of elements)",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "main": "dist/f-card.umd.min.js",
   "files": [
     "dist"

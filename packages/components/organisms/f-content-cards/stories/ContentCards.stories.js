@@ -3,7 +3,14 @@ import { withA11y } from '@storybook/addon-a11y';
 import mock, { proxy } from 'xhr-mock';
 import { defaultEnabledCardTypes } from '@justeat/f-braze-adapter/src/services/contentCard.service';
 
-import { ContentCards } from '../src';
+import {
+    ContentCards,
+    VoucherCard,
+    FirstTimeCustomerCard,
+    PromotionCard,
+    TermsAndConditionsCard,
+    StampCard1
+} from '../src';
 
 import cards, { labelledMultiSelectAllowedValues } from './mockData/cards';
 import data from './mockData/data';
@@ -32,6 +39,26 @@ const methods = {
     getCardCount: action('get-card-count'),
     hasLoaded: action('has-loaded'),
     onError: action('on-error'),
+    handleCustomCardType (type) {
+        switch (type) {
+            case 'Anniversary_Card_1':
+            case 'Voucher_Card_1':
+                return 'VoucherCard';
+            case 'Restaurant_FTC_Offer_Card':
+                return 'FirstTimeCustomerCard';
+            case 'Promotion_Card_1':
+            case 'Promotion_Card_2':
+                return 'PromotionCard';
+            case 'Terms_And_Conditions_Card':
+            case 'Terms_And_Conditions_Card_2':
+                return 'TermsAndConditionsCard';
+            case 'Stamp_Card_1':
+                return 'StampCard1';
+            default:
+                break;
+        }
+        return false;
+    }
 };
 
 const template = `<content-cards
@@ -44,7 +71,16 @@ const template = `<content-cards
             :apiKey="apiKey"
             :locale="locale"
             >
-                TEST
+                <div>
+                    <template v-for="(card, i) in cards">
+                        <component
+                            :is="handleCustomCardType(card.type)"
+                            :key="i"
+                            :card="card"
+                            :tenant="tenant"
+                        />
+                    </template>
+                </div>
             </content-cards>`;
 
 export default {
@@ -53,15 +89,22 @@ export default {
         apiKey: { control: { type: 'text' } },
         userId: { control: { type: 'text' } },
         title: { control: { type: 'text' } },
-        locale: { control: { type: 'radio', options: ['da-DK', 'en-GB', 'en-AU'] } },
+        locale: { control: { type: 'radio', options: ['da-DK', 'en-GB', 'en-AU'] } }
     },
     decorators: [withA11y]
 };
 
 export function ContentCardsBraze (args, { argTypes }) {
     return {
+        name: 'Content Cards Braze',
+
         components: {
-            ContentCards
+            ContentCards,
+            VoucherCard,
+            FirstTimeCustomerCard,
+            PromotionCard,
+            TermsAndConditionsCard,
+            StampCard1
         },
 
         props: Object.keys(argTypes),
@@ -97,7 +140,7 @@ ContentCardsBraze.args = {
     userId: 'test-user-id',
     title: 'Promotional Offers',
     locale: 'en-GB',
-    enabledCardTypes: defaultEnabledCardTypes
+    enabledCardTypes: [...defaultEnabledCardTypes, 'Stamp_Card_1']
 };
 
 export function ContentCardsCustom (args, { argTypes }) {

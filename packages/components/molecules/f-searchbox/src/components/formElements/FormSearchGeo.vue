@@ -20,6 +20,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import { GeoOutlineIcon, GeoFillIcon } from '@justeat/f-vue-icons';
+import { VUEX_MODULE_NAMESPACE } from '../../services/constants';
 
 export default {
     components: {
@@ -40,7 +41,7 @@ export default {
     },
 
     computed: {
-        ...mapState('searchbox', [
+        ...mapState(VUEX_MODULE_NAMESPACE, [
             'suggestions'
         ]),
 
@@ -56,7 +57,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('searchbox', [
+        ...mapActions(VUEX_MODULE_NAMESPACE, [
             'setSuggestions',
             'setIsDirty'
         ]),
