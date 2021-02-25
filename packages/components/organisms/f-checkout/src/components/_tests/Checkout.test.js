@@ -8,7 +8,7 @@ import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
 import {
-    defaultState, defaultActions, i18n, createStore, $logger
+    defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger
 } from './helpers/setup';
 
 const localVue = createLocalVue();
@@ -147,7 +147,7 @@ describe('Checkout', () => {
             it('should display the address block if set to `delivery`', async () => {
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_DELIVERY }),
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DELIVERY }),
                     i18n,
                     localVue,
                     propsData
@@ -162,7 +162,7 @@ describe('Checkout', () => {
             it('should not display the address block if set to `collection`', async () => {
                 // Act
                 const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
                     i18n,
                     localVue,
                     propsData
@@ -259,7 +259,7 @@ describe('Checkout', () => {
 
                 // Act
                 shallowMount(VueCheckout, {
-                    store: createStore(defaultState, { ...defaultActions, setAuthToken }),
+                    store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, setAuthToken }),
                     i18n,
                     localVue,
                     propsData
@@ -316,7 +316,7 @@ describe('Checkout', () => {
             it('should return `true` if `serviceType` is set to Delivery', () => {
                 // Arrange and Act
                 const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_DELIVERY }),
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DELIVERY }),
                     i18n,
                     localVue,
                     propsData
@@ -329,7 +329,7 @@ describe('Checkout', () => {
             it('should return `false` if `serviceType` is set to Collection', () => {
                 // Arrange and Act
                 const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
                     i18n,
                     localVue,
                     propsData
@@ -372,7 +372,7 @@ describe('Checkout', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
-                        ...defaultState,
+                        ...defaultCheckoutState,
                         isLoggedIn: true,
                         serviceType: CHECKOUT_METHOD_DELIVERY,
                         address: {}
@@ -393,7 +393,7 @@ describe('Checkout', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
-                        ...defaultState,
+                        ...defaultCheckoutState,
                         isLoggedIn: false,
                         serviceType: CHECKOUT_METHOD_DELIVERY,
                         address: {}
@@ -414,7 +414,7 @@ describe('Checkout', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
-                        ...defaultState,
+                        ...defaultCheckoutState,
                         isLoggedIn: true,
                         serviceType: CHECKOUT_METHOD_COLLECTION,
                         address: {}
@@ -433,7 +433,7 @@ describe('Checkout', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
-                        ...defaultState,
+                        ...defaultCheckoutState,
                         isLoggedIn: true,
                         serviceType: CHECKOUT_METHOD_DELIVERY,
                         address: { line1: 'Fleet Place House', postcode: 'EC4M 7RF', city: 'London' }
@@ -648,7 +648,7 @@ describe('Checkout', () => {
                     const loadCheckoutSpy = jest.spyOn(VueCheckout.methods, 'loadCheckout');
 
                     shallowMount(VueCheckout, {
-                        store: createStore({ ...defaultState, isLoggedIn: true }),
+                        store: createStore({ ...defaultCheckoutState, isLoggedIn: true }),
                         i18n,
                         localVue,
                         propsData
@@ -768,7 +768,7 @@ describe('Checkout', () => {
                 describe('when all the fields are populated correctly', () => {
                     beforeEach(() => {
                         wrapper = mount(VueCheckout, {
-                            store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
+                            store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
                             i18n,
                             localVue,
                             propsData,
@@ -813,10 +813,10 @@ describe('Checkout', () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_COLLECTION,
                             customer: {
-                                ...defaultState.customer,
+                                ...defaultCheckoutState.customer,
                                 mobileNumber: ''
                             }
                         }),
@@ -842,10 +842,10 @@ describe('Checkout', () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_COLLECTION,
                             customer: {
-                                ...defaultState.customer,
+                                ...defaultCheckoutState.customer,
                                 mobileNumber: '077777'
                             }
                         }),
@@ -872,10 +872,10 @@ describe('Checkout', () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_COLLECTION,
                             customer: {
-                                ...defaultState.customer,
+                                ...defaultCheckoutState.customer,
                                 mobileNumber: 'hs;-j`$e&1l'
                             }
                         }),
@@ -901,7 +901,7 @@ describe('Checkout', () => {
                 it('should not create validations for address', () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
-                        store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
+                        store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
                         i18n,
                         localVue,
                         propsData,
@@ -918,10 +918,10 @@ describe('Checkout', () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
                             customer: {
-                                ...defaultState.customer,
+                                ...defaultCheckoutState.customer,
                                 mobileNumber: ''
                             }
                         }),
@@ -947,7 +947,7 @@ describe('Checkout', () => {
                 describe('when all the fields are populated correctly', () => {
                     beforeEach(() => {
                         wrapper = mount(VueCheckout, {
-                            store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_DELIVERY }),
+                            store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DELIVERY }),
                             i18n,
                             localVue,
                             propsData,
@@ -992,10 +992,10 @@ describe('Checkout', () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
                             address: {
-                                ...defaultState.address,
+                                ...defaultCheckoutState.address,
                                 line1: ''
                             }
                         }),
@@ -1021,10 +1021,10 @@ describe('Checkout', () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
                             address: {
-                                ...defaultState.address,
+                                ...defaultCheckoutState.address,
                                 city: ''
                             }
                         }),
@@ -1050,10 +1050,10 @@ describe('Checkout', () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
                             address: {
-                                ...defaultState.address,
+                                ...defaultCheckoutState.address,
                                 postcode: ''
                             }
                         }),
@@ -1079,10 +1079,10 @@ describe('Checkout', () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
                             address: {
-                                ...defaultState.address,
+                                ...defaultCheckoutState.address,
                                 postcode: '?!hdb-se'
                             }
                         }),
@@ -1109,10 +1109,10 @@ describe('Checkout', () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
                             address: {
-                                ...defaultState.address,
+                                ...defaultCheckoutState.address,
                                 postcode: 'EC4M 7R'
                             }
                         }),
@@ -1145,10 +1145,10 @@ describe('Checkout', () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_DELIVERY,
                             address: {
-                                ...defaultState.address,
+                                ...defaultCheckoutState.address,
                                 postcode: 'EC4M 7R'
                             }
                         }),
@@ -1178,7 +1178,7 @@ describe('Checkout', () => {
                     const setupGuestUserSpy = jest.spyOn(VueCheckout.methods, 'setupGuestUser');
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             isLoggedIn: false
                         }),
                         i18n,
@@ -1200,7 +1200,7 @@ describe('Checkout', () => {
                     // Arrange
                     const wrapper = mount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_COLLECTION,
                             isLoggedIn: false
                         }),
@@ -1224,10 +1224,10 @@ describe('Checkout', () => {
                     // Arrange
                     const wrapper = mount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_COLLECTION,
                             customer: {
-                                ...defaultState.customer,
+                                ...defaultCheckoutState.customer,
                                 firstName: ''
                             },
                             isLoggedIn: false
@@ -1254,10 +1254,10 @@ describe('Checkout', () => {
                     // Arrange
                     const wrapper = mount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_COLLECTION,
                             customer: {
-                                ...defaultState.customer,
+                                ...defaultCheckoutState.customer,
                                 lastName: ''
                             },
                             isLoggedIn: false
@@ -1284,10 +1284,10 @@ describe('Checkout', () => {
                     // Arrange
                     const wrapper = mount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_COLLECTION,
                             customer: {
-                                ...defaultState.customer,
+                                ...defaultCheckoutState.customer,
                                 email: ''
                             },
                             isLoggedIn: false
@@ -1314,10 +1314,10 @@ describe('Checkout', () => {
                     // Arrange
                     const wrapper = mount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_COLLECTION,
                             customer: {
-                                ...defaultState.customer,
+                                ...defaultCheckoutState.customer,
                                 email: '£Gs7asd263('
                             },
                             isLoggedIn: false
@@ -1347,7 +1347,7 @@ describe('Checkout', () => {
                     const setupGuestUserSpy = jest.spyOn(VueCheckout.methods, 'setupGuestUser');
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             authToken: 'sampleToken',
                             isLoggedIn: true
                         }),
@@ -1370,7 +1370,7 @@ describe('Checkout', () => {
                     // Arrange
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore({
-                            ...defaultState,
+                            ...defaultCheckoutState,
                             authToken: 'sampleToken',
                             isLoggedIn: true
                         }),
@@ -1453,7 +1453,7 @@ describe('Checkout', () => {
                 const createGuestUserSpy = jest.spyOn(VueCheckout.methods, 'createGuestUser');
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
-                        ...defaultState,
+                        ...defaultCheckoutState,
                         customer
                     }),
                     i18n,
@@ -1482,7 +1482,7 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions, createGuestUser: jest.fn(async () => Promise.reject()) }),
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, createGuestUser: jest.fn(async () => Promise.reject()) }),
                         i18n,
                         localVue,
                         propsData,
@@ -1551,7 +1551,7 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions, getCheckout: jest.fn(async () => Promise.reject()) }),
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getCheckout: jest.fn(async () => Promise.reject()) }),
                         i18n,
                         localVue,
                         propsData,
@@ -1617,7 +1617,7 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions, getAvailableFulfilment: jest.fn(async () => Promise.reject()) }),
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAvailableFulfilment: jest.fn(async () => Promise.reject()) }),
                         i18n,
                         localVue,
                         propsData,
@@ -1683,7 +1683,7 @@ describe('Checkout', () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
                     wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions, getBasket: jest.fn(async () => Promise.reject()) }),
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getBasket: jest.fn(async () => Promise.reject()) }),
                         i18n,
                         localVue,
                         propsData,
@@ -1746,7 +1746,7 @@ describe('Checkout', () => {
                 it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
                     // Arrange
                     const wrapper = mount(VueCheckout, {
-                        store: createStore(defaultState, { ...defaultActions, getAddress: jest.fn(async () => Promise.reject()) }),
+                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAddress: jest.fn(async () => Promise.reject()) }),
                         i18n,
                         localVue,
                         propsData
@@ -2020,7 +2020,7 @@ describe('Checkout', () => {
                     expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
                 });
 
-                it('should call `trackFormInteraction` with and action `inline_error` and validation errors', async () => {
+                it('should call `trackFormInteraction` with an action `inline_error` and validation errors', async () => {
                     // Arrange
                     const payload = {
                         action: 'inline_error',
@@ -2150,7 +2150,7 @@ describe('Checkout', () => {
                 wrapper.vm.isValidPhoneNumber();
 
                 // Assert
-                expect(isValidPhoneNumberSpy).toHaveBeenCalledWith(defaultState.customer.mobileNumber, i18n.locale);
+                expect(isValidPhoneNumberSpy).toHaveBeenCalledWith(defaultCheckoutState.customer.mobileNumber, i18n.locale);
             });
         });
 
@@ -2174,7 +2174,7 @@ describe('Checkout', () => {
                 wrapper.vm.isValidPostcode();
 
                 // Assert
-                expect(isValidPostcodeSpy).toHaveBeenCalledWith(defaultState.address.postcode, i18n.locale);
+                expect(isValidPostcodeSpy).toHaveBeenCalledWith(defaultCheckoutState.address.postcode, i18n.locale);
             });
         });
 
@@ -2225,7 +2225,7 @@ describe('Checkout', () => {
                 jest.advanceTimersByTime(1000);
 
                 // Assert
-                expect(windowLocationSpy).toHaveBeenCalledWith(`${paymentPageUrlPrefix}/${defaultState.orderId}`);
+                expect(windowLocationSpy).toHaveBeenCalledWith(`${paymentPageUrlPrefix}/${defaultCheckoutState.orderId}`);
             });
 
             it('should not redirect to the payment page before 1 second', () => {
@@ -2267,7 +2267,7 @@ describe('Checkout', () => {
                         basketId,
                         applicationId: 7,
                         customerNotes: {
-                            noteForRestaurant: defaultState.userNote
+                            noteForRestaurant: defaultCheckoutState.userNote
                         },
                         applicationName,
                         applicationVersion: '1',
@@ -2280,7 +2280,7 @@ describe('Checkout', () => {
 
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
-                        ...defaultState,
+                        ...defaultCheckoutState,
                         basket: {
                             id: basketId
                         }

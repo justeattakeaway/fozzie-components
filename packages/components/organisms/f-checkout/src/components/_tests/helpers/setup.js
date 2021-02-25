@@ -13,7 +13,7 @@ const fulfilmentTimes = [
     }
 ];
 
-const defaultState = {
+const defaultCheckoutState = {
     id: '',
     serviceType: CHECKOUT_METHOD_DELIVERY,
     restaurantId: '',
@@ -51,18 +51,11 @@ const defaultState = {
 };
 
 const defaultAnalyticsState = {
-    serviceType: '',
-    restaurantId: '',
-    basket: {
-        id: '',
-        total: 0
-    },
-    isLoggedIn: false,
     autofill: [],
     changedFields: []
 };
 
-const defaultActions = {
+const defaultCheckoutActions = {
     getCheckout: jest.fn(),
     updateCheckout: jest.fn(),
     getAvailableFulfilment: jest.fn(),
@@ -77,8 +70,8 @@ const defaultActions = {
 };
 
 const defaultAnalyticsActions = {
-    updateState: jest.fn(),
-    updateChangedFields: jest.fn(),
+    updateAutofill: jest.fn(),
+    updateChangedField: jest.fn(),
     trackInitialLoad: jest.fn(),
     trackFormInteraction: jest.fn()
 };
@@ -94,16 +87,16 @@ const i18n = {
 };
 
 const createStore = (
-    state = defaultState,
-    actions = defaultActions,
+    checkoutState = defaultCheckoutState,
+    checkoutActions = defaultCheckoutActions,
     analyticsState = defaultAnalyticsState,
     analyticsActions = defaultAnalyticsActions
 ) => new Vuex.Store({
     modules: {
         checkout: {
             namespaced: true,
-            state,
-            actions
+            state: checkoutState,
+            actions: checkoutActions
         },
         analytics: {
             namespaced: true,
@@ -122,8 +115,8 @@ const $logger = {
 
 export {
     fulfilmentTimes,
-    defaultState,
-    defaultActions,
+    defaultCheckoutState,
+    defaultCheckoutActions,
     defaultAnalyticsState,
     i18n,
     createStore,

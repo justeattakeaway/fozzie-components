@@ -81,7 +81,7 @@ export default {
 
             commit(UPDATE_STATE, data);
 
-            dispatch('analytics/updateState', state, { root: true });
+            dispatch('analytics/updateAutofill', state, { root: true });
         },
 
         /**
@@ -191,7 +191,7 @@ export default {
             };
 
             commit(UPDATE_BASKET_DETAILS, basketDetails);
-            dispatch('analytics/updateState', state, { root: true });
+            dispatch('analytics/updateAutofill', state, { root: true });
         },
 
         /**
@@ -223,7 +223,7 @@ export default {
             const addressDetails = addressService.getClosestAddress(data.Addresses, tenant);
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
-            dispatch('analytics/updateState', state, { root: true });
+            dispatch('analytics/updateAutofill', state, { root: true });
         },
 
         /**
@@ -262,14 +262,14 @@ export default {
         updateAddressDetails ({ commit, dispatch }, payload) {
             const [field] = Object.keys(payload);
 
-            dispatch('analytics/updateChangedFields', field, { root: true });
+            dispatch('analytics/updateChangedField', field, { root: true });
             commit(UPDATE_FULFILMENT_ADDRESS, payload);
         },
 
         updateCustomerDetails ({ commit, dispatch }, payload) {
             const [field] = Object.keys(payload);
 
-            dispatch('analytics/updateChangedFields', field, { root: true });
+            dispatch('analytics/updateChangedField', field, { root: true });
             commit(UPDATE_CUSTOMER_DETAILS, payload);
         },
 
@@ -279,7 +279,7 @@ export default {
 
         updateUserNote ({ commit, dispatch }, payload) {
             commit(UPDATE_USER_NOTE, payload);
-            dispatch('analytics/updateChangedFields', 'note', { root: true });
+            dispatch('analytics/updateChangedField', 'note', { root: true });
         }
     },
 

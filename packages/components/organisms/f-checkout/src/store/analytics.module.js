@@ -1,9 +1,8 @@
 import Trak from '@justeat/f-trak';
-import { mapAnalyticsFieldNames } from '../services/mapper';
+import { mapAnalyticsField, mapAnalyticsFieldArray } from '../services/mapper';
 
 import {
-    UPDATE_ANALYTICS_STATE,
-    UPDATE_CHANGED_FIELDS,
+    UPDATE_CHANGED_FIELD,
     UPDATE_AUTOFILL
 } from './mutation-types';
 
@@ -11,59 +10,58 @@ export default {
     namespaced: true,
 
     state: () => ({
-        serviceType: '',
-        restaurantId: '',
-        basket: {
-            id: '',
-            total: 0
-        },
-        isLoggedIn: false,
         changedFields: [],
         autofill: []
     }),
 
     actions: {
-        updateState ({ rootState, commit }, payload) {
-            const checkoutState = {
-                isLoggedIn: rootState.checkout.isLoggedIn,
-                basket: rootState.checkout.basket,
-                restaurantId: rootState.checkout.restaurantId,
-                serviceType: rootState.checkout.serviceType
-            };
+        /**
+         * Calls `UPDATE_AUTOFILL` with an Array of autofill fields.
+         */
+        updateAutofill ({ commit }, checkoutState) {
+            let autofill = [];
 
-            if (checkoutState.isLoggedIn) {
-                commit(UPDATE_AUTOFILL, JSON.parse(JSON.stringify(payload)));
+            if (checkoutState.customer.mobileNumber) {
+                autofill.push('phone');
             }
 
-            commit(UPDATE_ANALYTICS_STATE, checkoutState);
+            Object.entries(checkoutState.address).forEach(([field, value]) => {
+                if (value) {
+                    autofill.push(field);
+                }
+            });
+
+            autofill = mapAnalyticsFieldArray(autofill);
+
+            commit(UPDATE_AUTOFILL, autofill);
+        },
+
+        /**
+         * Maps a passed field too an analytics field name
+         * Calls `UPDATE_CHANGED_FIELD` analytics field name.
+         */
+        updateChangedField ({ commit }, field) {
+            const analyticsName = mapAnalyticsField(field);
+
+            commit(UPDATE_CHANGED_FIELD, analyticsName);
         },
 
         /**
          * Pushes initial state of checkout to the dataLayer.
          */
-        updateChangedFields ({ commit }, field) {
-            commit(UPDATE_CHANGED_FIELDS, field);
-        },
-
-        /**
-         * Pushes initial state of checkout to the dataLayer.
-         */
-        trackInitialLoad ({ state, dispatch }) {
+        trackInitialLoad ({ rootState, dispatch }) {
             window.dataLayer = window.dataLayer || [];
 
-            const pageName = state.isLoggedIn ? 'Overview' : 'Guest';
+            const pageName = rootState.checkout.isLoggedIn ? 'Overview' : 'Guest';
 
             Trak.event({
                 custom: {
                     checkout: {
                         step: 1
                     },
-                    basket: {
-                        id: state.basket.id,
-                        total: state.basket.total
-                    },
+                    basket: JSON.parse(JSON.stringify(rootState.checkout.basket)),
                     restaurant: {
-                        id: state.restaurantId
+                        id: rootState.checkout.restaurantId
                     },
                     pageData: {
                         name: `Checkout 1 ${pageName}`,
@@ -78,8 +76,10 @@ export default {
         /**
          * Pushes `form` event to the dataLayer with correct data
          */
-        trackFormInteraction ({ state }, { action, error }) {
-            const formName = state.isLoggedIn ? 'checkout' : 'checkout_guest';
+        trackFormInteraction ({ state, rootState }, { action, error }) {
+            const formName = rootState.checkout.isLoggedIn ? 'checkout' : 'checkout_guest';
+
+            const mappedError = error ? mapAnalyticsFieldArray(error) : null;
 
             Trak.event({
                 event: 'Form',
@@ -87,9 +87,9 @@ export default {
                     form: {
                         name: formName,
                         action,
-                        error: mapAnalyticsFieldNames(error) || null,
+                        error: mappedError,
                         autofill: JSON.parse(JSON.stringify(state.autofill)),
-                        changes: JSON.parse(JSON.stringify(state.changedFields))
+                        changes: JSON.parse(JSON.stringify(state.changedFields)).sort()
                     }
                 }
             });
@@ -97,35 +97,14 @@ export default {
     },
 
     mutations: {
-        [UPDATE_ANALYTICS_STATE]: (state, checkoutState) => {
-            state.isLoggedIn = checkoutState.isLoggedIn || null;
-            state.basket = checkoutState.basket || null;
-            state.restaurantId = checkoutState.restaurantId || null;
-            state.serviceType = checkoutState.serviceType || null;
-        },
-
-        [UPDATE_CHANGED_FIELDS]: (state, field) => {
-            const analyticsNames = mapAnalyticsFieldNames(field);
-
-            if (!state.changedFields.includes(analyticsNames)) {
-                state.changedFields.push(analyticsNames);
+        [UPDATE_CHANGED_FIELD]: (state, field) => {
+            if (!state.changedFields.includes(field)) {
+                state.changedFields.push(field);
             }
         },
 
-        [UPDATE_AUTOFILL]: (state, payload) => {
-            const { customer, address, serviceType } = payload;
-
-            if (customer.mobileNumber) {
-                state.autofill.push('phone');
-            }
-
-            if (serviceType === 'delivery') {
-                Object.entries(address).forEach(([field, value]) => {
-                    if (value) {
-                        state.autofill.push(mapAnalyticsFieldNames(field));
-                    }
-                });
-            }
+        [UPDATE_AUTOFILL]: (state, autofill) => {
+            state.autofill = autofill;
         }
     }
 };

@@ -257,12 +257,12 @@ describe('CheckoutModule', () => {
                 expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
             });
 
-            it('should call `analytics/updateState` mutation with an array of updated field names.', async () => {
+            it('should call `analytics/updateAutofill` mutation with an array of updated field names.', async () => {
                 // Act
                 await getCheckout({ commit, state, dispatch }, payload);
 
                 // Assert
-                expect(dispatch).toHaveBeenCalledWith('analytics/updateState', state, { root: true });
+                expect(dispatch).toHaveBeenCalledWith('analytics/updateAutofill', state, { root: true });
             });
         });
 
@@ -324,12 +324,12 @@ describe('CheckoutModule', () => {
                 });
             });
 
-            it('should call `analytics/updateState` mutation with an array of updated field names.', async () => {
+            it('should call `analytics/updateAutofill` mutation with an array of updated field names.', async () => {
                 // Act
                 await getAddress({ commit, state, dispatch }, payload);
 
                 // Assert
-                expect(dispatch).toHaveBeenCalledWith('analytics/updateState', state, { root: true });
+                expect(dispatch).toHaveBeenCalledWith('analytics/updateAutofill', state, { root: true });
             });
         });
 
@@ -456,7 +456,7 @@ describe('CheckoutModule', () => {
             const [field] = Object.keys(value);
 
             // Assert
-            expect(dispatch).toHaveBeenCalledWith('analytics/updateChangedFields', field, { root: true });
+            expect(dispatch).toHaveBeenCalledWith('analytics/updateChangedField', field, { root: true });
         });
     });
 });

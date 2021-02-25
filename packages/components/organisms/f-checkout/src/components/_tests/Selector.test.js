@@ -4,7 +4,7 @@ import { shallowMount, createLocalVue, mount } from '@vue/test-utils';
 import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION } from '../../constants';
 import Selector from '../Selector.vue';
 import {
-    fulfilmentTimes, defaultState, i18n, createStore
+    fulfilmentTimes, defaultCheckoutState, i18n, createStore
 } from './helpers/setup';
 
 const localVue = createLocalVue();
@@ -34,7 +34,7 @@ describe('Selector', () => {
             it('should show the delivery label when the `serviceType` is `delivery`', () => {
                 // Arrange & Act
                 const wrapper = mount(Selector, {
-                    store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_DELIVERY }),
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DELIVERY }),
                     i18n,
                     localVue,
                     propsData
@@ -49,7 +49,7 @@ describe('Selector', () => {
             it('should show the collection label when the `serviceType` is `collection`', () => {
                 // Arrange & Act
                 const wrapper = mount(Selector, {
-                    store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION }),
+                    store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
                     i18n,
                     localVue,
                     propsData
@@ -66,7 +66,7 @@ describe('Selector', () => {
             it('should create an array of formatted fulfilment times', () => {
                 // Arrange & Act
                 const wrapper = shallowMount(Selector, {
-                    store: createStore({ ...defaultState }),
+                    store: createStore({ ...defaultCheckoutState }),
                     i18n,
                     localVue,
                     propsData
@@ -85,7 +85,7 @@ describe('Selector', () => {
                 // Arrange & Act
                 const wrapper = shallowMount(Selector, {
                     store: createStore({
-                        ...defaultState,
+                        ...defaultCheckoutState,
                         availableFulfilment: {
                             times: fulfilmentTimes,
                             isAsapAvailable: false
@@ -109,7 +109,7 @@ describe('Selector', () => {
                 // Arrange & Act
                 const wrapper = shallowMount(Selector, {
                     store: createStore({
-                        ...defaultState,
+                        ...defaultCheckoutState,
                         availableFulfilment: {
                             times: [],
                             isAsapAvailable: false
@@ -130,17 +130,32 @@ describe('Selector', () => {
 
     describe('methods ::', () => {
         describe('selectionChanged', () => {
-            it('should update `selectedAvailableFulfilmentTime` with the value passed', () => {
-                // Arrange
-                const wrapper = shallowMount(Selector, {
+            const field = 'orderTime';
+            const selectedTime = '2020-01-01T01:00:00.000Z';
+
+            let wrapper;
+            let updateChangedFieldSpy;
+
+            beforeEach(() => {
+                updateChangedFieldSpy = jest.spyOn(Selector.methods, 'updateChangedField');
+
+                wrapper = shallowMount(Selector, {
                     store: createStore(),
                     i18n,
                     localVue,
                     propsData
                 });
+            });
 
-                const selectedTime = '2020-01-01T01:00:00.000Z';
+            it('should call `updateChangedField` with `orderTime`', () => {
+                // Act
+                wrapper.vm.selectionChanged(selectedTime);
 
+                // Assert
+                expect(updateChangedFieldSpy).toHaveBeenCalledWith(field);
+            });
+
+            it('should update `selectedAvailableFulfilmentTime` with the value passed', () => {
                 // Act
                 wrapper.vm.selectionChanged(selectedTime);
 
@@ -185,7 +200,7 @@ describe('Selector', () => {
 
                 const wrapper = shallowMount(Selector, {
                     store: createStore({
-                        ...defaultState,
+                        ...defaultCheckoutState,
                         availableFulfilment: {
                             isAsapAvailable: false,
                             times: []

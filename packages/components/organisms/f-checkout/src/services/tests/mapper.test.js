@@ -1,4 +1,4 @@
-import { mapUpdateCheckoutRequest, mapAnalyticsFieldNames } from '../mapper';
+import { mapUpdateCheckoutRequest, mapAnalyticsField, mapAnalyticsFieldArray } from '../mapper';
 
 const defaultParams = {
     address: {},
@@ -123,51 +123,31 @@ describe('checkout mapper', () => {
     });
 });
 
-describe('mapAnalyticsFieldNames :: ', () => {
-    it.each([
-        ['address.line1', 'addressLine1'],
-        ['line1', 'addressLine1'],
-        ['address.line2', 'addressLine2'],
-        ['line2', 'addressLine2'],
-        ['address.city', 'addressCity'],
-        ['city', 'addressCity'],
-        ['address.postcode', 'addressPostcode'],
-        ['postcode', 'addressPostcode'],
-        ['customer.firstName', 'firstName'],
-        ['customer.lastName', 'lastName'],
-        ['customer.mobileNumber', 'phone'],
-        ['mobileNumber', 'phone'],
-        ['customer.email', 'email']
-    ])('should map the fieldname %s to the analytics value %s', (provided, expected) => {
-        // Act & Assert
-        expect(mapAnalyticsFieldNames(provided)).toEqual(expected);
+describe('mapAnalyticsField :: ', () => {
+    describe('mapAnalyticsField :: ', () => {
+        it.each([
+            ['address.line1', 'addressLine1'],
+            ['line1', 'addressLine1'],
+            ['address.line2', 'addressLine2'],
+            ['line2', 'addressLine2'],
+            ['address.city', 'addressCity'],
+            ['city', 'addressCity'],
+            ['address.postcode', 'addressPostcode'],
+            ['postcode', 'addressPostcode'],
+            ['customer.firstName', 'firstName'],
+            ['customer.lastName', 'lastName'],
+            ['customer.mobileNumber', 'phone'],
+            ['mobileNumber', 'phone'],
+            ['customer.email', 'email']
+        ])('should map the fieldname %s to the analytics value %s', (provided, expected) => {
+            // Act & Assert
+            expect(mapAnalyticsField(provided)).toEqual(expected);
+        });
     });
+});
 
+describe('mapAnalyticsFieldArray :: ', () => {
     it('should correctly map an array of field names and sort alphabetically', () => {
-        // Arrange
-        const provided = [
-            'city',
-            'address.line1',
-            'customer.email',
-            'customer.firstName',
-            'lastName',
-            'mobilePhone'
-        ];
-
-        const expected = [
-            'addressCity',
-            'addressLine1',
-            'email',
-            'firstName',
-            'lastName',
-            'mobilePhone'
-        ];
-
-        // Act & Assert
-        expect(mapAnalyticsFieldNames(provided)).toEqual(expected);
-    });
-
-    it('should sort corrected field names alphabetically', () => {
         // Arrange
         const provided = [
             'mobilePhone',
@@ -188,6 +168,6 @@ describe('mapAnalyticsFieldNames :: ', () => {
         ];
 
         // Act & Assert
-        expect(mapAnalyticsFieldNames(provided)).toEqual(expected);
+        expect(mapAnalyticsFieldArray(provided)).toEqual(expected);
     });
 });

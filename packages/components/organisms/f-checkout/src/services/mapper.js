@@ -72,14 +72,14 @@ const analyticFieldNameMapper = {
 };
 
 /**
- * Updates passed field names to match the expected analytics name requirements.
- * If passed fields are an array. Sorts the array alphabetically
+ * Updates passed field name to match the expected analytics name requirements.
  */
-const mapAnalyticsFieldNames = fields => {
-    if (Array.isArray(fields)) {
-        return fields.map(field => (analyticFieldNameMapper[field] ? analyticFieldNameMapper[field] : field)).sort();
-    }
-    return analyticFieldNameMapper[fields] ? analyticFieldNameMapper[fields] : fields;
-};
+const mapAnalyticsField = field => (analyticFieldNameMapper[field] ? analyticFieldNameMapper[field] : field);
 
-export { mapUpdateCheckoutRequest, mapAnalyticsFieldNames };
+/**
+ * Updates passed field names to match the expected analytics name requirements.
+ * When fields have been mapped, sorts the array alphabetically.
+ */
+const mapAnalyticsFieldArray = fields => fields.map(field => (analyticFieldNameMapper[field] ? analyticFieldNameMapper[field] : field)).sort();
+
+export { mapUpdateCheckoutRequest, mapAnalyticsField, mapAnalyticsFieldArray };
