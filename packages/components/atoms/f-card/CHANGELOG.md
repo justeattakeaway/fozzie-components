@@ -9,7 +9,7 @@ Latest (add to next release)
 *February 25, 2021*
 
 ### Changed
-- beforehook in component object 
+- beforehook in component and accessibility tests 
 
 
 v1.0.0
