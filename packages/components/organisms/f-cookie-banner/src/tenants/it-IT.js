@@ -5,7 +5,8 @@ const messages = {
     acceptButtonText: 'Accetta tutti i cookie',
     textLine1: 'Utilizziamo i cookie necessari (e tecnologie simili) per far funzionare la nostra piattaforma.',
     textLine2: 'Vorremmo anche utilizzare cookies facoltativi che ci aiutano a migliorare la nostra piattaforma raccogliendo informazioni su come la utilizzi.',
-    textLine3: 'Per i dettagli sui cookie e sulle tecnologie che utilizziamo puoi leggere {cookiePolicy}. L\'utilizzo di questo banner imposterá; un cookie sul tuo dispositivo per ricordare le tue preferenze.',
+    textLine3: 'Per i dettagli sui cookie e sulle tecnologie che utilizziamo puoi leggere ',
+    textLine4: '. L\'utilizzo di questo banner imposterá; un cookie sul tuo dispositivo per ricordare le tue preferenze.',
     cookiePolicyLinkText: 'la nostra informativa sui cookie',
     cookiePolicyLinkUrl: 'https://www.justeat.it/informazioni/politica-dei-cookie'
 };

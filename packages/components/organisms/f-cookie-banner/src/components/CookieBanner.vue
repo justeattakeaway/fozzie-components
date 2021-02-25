@@ -26,29 +26,26 @@
                     :class="$style['c-cookieBanner-title']"
                     tabindex="0"
                     data-consent-title>
-                    {{ $t('mainTitle') }}
+                    {{ copy.mainTitle }}
                 </h2>
 
                 <p :class="$style['c-cookieBanner-text']">
-                    {{ $t('textLine1') }}
+                    {{ copy.textLine1 }}
                 </p>
 
                 <p :class="$style['c-cookieBanner-text']">
-                    {{ $t('textLine2') }}
+                    {{ copy.textLine2 }}
                 </p>
 
-                <p
-                    :class="$style['c-cookieBanner-text']">
-                    <i18n
-                        path="textLine3">
-                        <template #cookiePolicy>
-                            <a
-                                :href="$t('cookiePolicyLinkUrl')"
-                                target="_blank">
-                                <span>{{ $t('cookiePolicyLinkText') }}</span>
-                            </a>
-                        </template>
-                    </i18n>
+                <p :class="$style['c-cookieBanner-text']">
+                    {{ copy.textLine3 }}
+                    <a
+                        :href="copy.cookiePolicyLinkUrl"
+                        :class="$style['c-cookieBanner-link']"
+                        target="_blank">
+                        {{ copy.cookiePolicyLinkText }}
+                    </a>
+                    {{ copy.textLine4 }}
                 </p>
             </div>
 
@@ -56,14 +53,14 @@
                 <button-component
                     is-full-width
                     @click.native="acceptAllCookiesActions">
-                    {{ $t('acceptButtonText') }}
+                    {{ copy.acceptButtonText }}
                 </button-component>
 
                 <button-component
                     button-type="ghost"
                     is-full-width
                     @click.native="acceptOnlyNecessaryCookiesActions">
-                    {{ $t('nonAcceptButtonText') }}
+                    {{ copy.nonAcceptButtonText }}
                 </button-component>
             </div>
         </div>
@@ -72,6 +69,10 @@
     <legacy-banner
         v-else
         :should-hide-legacy-banner="shouldHideBanner"
+        :legacy-banner-text="copy.legacyBannerText"
+        :cookie-policy-link-url="copy.cookiePolicyLinkUrl"
+        :legacy-banner-link-text="copy.legacyBannerLinkText"
+        :legacy-banner-close-banner-text="copy.legacyBannerCloseBannerText"
         @hide-legacy-banner="hideBanner"
     />
 </template>
@@ -80,7 +81,6 @@
 import CookieHelper from 'js-cookie';
 
 import { globalisationServices } from '@justeat/f-services';
-import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 
 import ButtonComponent from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
@@ -94,10 +94,6 @@ export default {
         ButtonComponent,
         LegacyBanner
     },
-
-    mixins: [
-        VueGlobalisationMixin
-    ],
 
     props: {
         locale: {
@@ -125,13 +121,14 @@ export default {
         const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
         const theme = globalisationServices.getTheme(locale);
+        const copy = localeConfig.messages;
         const consentCookieName = 'je-cookieConsent';
         const legacyConsentCookieName = 'je-banner_cookie';
 
         return {
             config: { ...localeConfig },
-            tenantConfigs,
             theme,
+            copy,
             shouldHideBanner: false,
             consentCookieName,
             legacyConsentCookieName,
@@ -205,7 +202,7 @@ export default {
          */
         checkCookieBannerCookie () {
             if (this.legacyBanner) {
-                this.shouldHideBanner = CookieHelper.get(this.legacyConsentCookieName) === 2;
+                this.shouldHideBanner = CookieHelper.get(this.legacyConsentCookieName) === '130315';
                 this.setLegacyCookieBannerCookie();
             } else {
                 const cookieConsent = CookieHelper.get(this.consentCookieName);

@@ -5,7 +5,8 @@ const messages = {
     acceptButtonText: 'Accept all cookies',
     textLine1: 'We use required cookies (and similar technologies) to make our platform work.',
     textLine2: 'We\'d also like to use optional cookies to help us improve our platform by collecting information on how you use it.',
-    textLine3: 'For details about the cookies and technologies we use, see our {cookiePolicy}.  Using this banner will set a cookie on your device to remember your preferences.',
+    textLine3: 'For details about the cookies and technologies we use, see our ',
+    textLine4: '.  Using this banner will set a cookie on your device to remember your preferences.',
     cookiePolicyLinkText: 'cookies notice',
     cookiePolicyLinkUrl: 'https://www.menulog.com.au/info/cookies-policy'
 };

@@ -6,11 +6,11 @@
             data-test-id="cookieBanner-component">
             <div :class="$style['c-cookieWarning-inner']">
                 <p>
-                    {{ $t('legacyBannerText') }}
+                    {{ legacyBannerText }}
                     <a
                         class="c-cookieWarning-link"
-                        :href="$t('cookiePolicyLinkUrl')">
-                        {{ $t('legacyBannerLinkText') }}
+                        :href="cookiePolicyLinkUrl">
+                        {{ legacyBannerLinkText }}
                     </a>
                 </p>
                 <button-component
@@ -23,7 +23,7 @@
                     @click.native="$emit('hide-legacy-banner')">
                     <cross-icon />
                     <span class="is-visuallyHidden">
-                        {{ $t('legacyBannerCloseBannerText') }}
+                        {{ legacyBannerCloseBannerText }}
                     </span>
                 </button-component>
             </div>
@@ -46,6 +46,22 @@ export default {
         shouldHideLegacyBanner: {
             type: Boolean,
             default: false
+        },
+        legacyBannerText: {
+            type: String,
+            required: true
+        },
+        cookiePolicyLinkUrl: {
+            type: String,
+            required: true
+        },
+        legacyBannerLinkText: {
+            type: String,
+            required: true
+        },
+        legacyBannerCloseBannerText: {
+            type: String,
+            required: true
         }
     }
 };

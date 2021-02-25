@@ -1,7 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
-import CookieBanner from '../CookieBanner.vue';
 import CookieHelper from 'js-cookie';
+import CookieBanner from '../CookieBanner.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
