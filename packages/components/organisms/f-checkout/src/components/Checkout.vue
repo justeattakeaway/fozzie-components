@@ -204,6 +204,16 @@ export default {
         getAddressTimeout: {
             type: Number,
             default: 1000
+        },
+
+        getGeoLocationUrl: {
+            type: String,
+            required: true
+        },
+
+        getGeoLocationTimeout: {
+            type: Number,
+            default: 1000
         }
     },
 
@@ -249,7 +259,8 @@ export default {
             'notices',
             'serviceType',
             'time',
-            'userNote'
+            'userNote',
+            'geolocation'
         ]),
 
         isMobileNumberValid () {
@@ -305,7 +316,8 @@ export default {
             'updateCheckout',
             'setAuthToken',
             'updateCustomerDetails',
-            'updateUserNote'
+            'updateUserNote',
+            'getGeoLocation'
         ]),
 
         /**
@@ -345,12 +357,15 @@ export default {
                     await this.setupGuestUser();
                 }
 
+                await this.lookupGeoLocation();
+
                 const data = mapUpdateCheckoutRequest({
                     address: this.address,
                     customer: this.customer,
                     isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
                     time: this.time,
-                    userNote: this.userNote
+                    userNote: this.userNote,
+                    geolocation: this.geolocation
                 });
 
                 await this.updateCheckout({
@@ -502,6 +517,35 @@ export default {
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutAddressGetFailure, thrownErrors);
                 this.hasCheckoutLoadedSuccessfully = false;
+            }
+        },
+
+        /**
+         * Look up the geo details for the customers address, skip on failure.
+         *
+         */
+        async lookupGeoLocation () {
+            const postData = { addressLines: [] };
+            Object.keys(this.address).forEach(propName => {
+                if (this.address[propName]) {
+                    postData.addressLines.push(this.address[propName]);
+                }
+            });
+
+            try {
+                if (postData.addressLines.length) {
+                    await this.getGeoLocation({
+                        url: this.getGeoLocationUrl,
+                        data: postData,
+                        timeout: this.getGeoLocationTimeout
+                    });
+                }
+            } catch (error) {
+                this.$logger.logWarn(
+                    'Geo location lookup failed',
+                    this.$store,
+                    { error }
+                );
             }
         },
 

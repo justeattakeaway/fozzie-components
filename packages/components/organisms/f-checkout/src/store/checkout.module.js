@@ -11,7 +11,8 @@ import {
     UPDATE_IS_FULFILLABLE,
     UPDATE_ISSUES,
     UPDATE_STATE,
-    UPDATE_USER_NOTE
+    UPDATE_USER_NOTE,
+    UPDATE_GEO_LOCATION
 } from './mutation-types';
 
 export default {
@@ -48,7 +49,8 @@ export default {
             isAsapAvailable: false
         },
         authToken: '',
-        isLoggedIn: false
+        isLoggedIn: false,
+        geolocation: null
     }),
 
     actions: {
@@ -214,6 +216,25 @@ export default {
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
         },
 
+        /**
+         * Get the geo details from the address and update the state.
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getGeoLocation: async ({ commit }, { url, postData, timeout }) => {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                timeout
+            };
+
+            const { data } = await axios.post(url, postData, config);
+
+            commit(UPDATE_GEO_LOCATION, data.geometry.coordinates);
+        },
+
         setAuthToken: ({ commit }, authToken) => {
             commit(UPDATE_AUTH, authToken);
         },
@@ -319,6 +340,10 @@ export default {
 
         [UPDATE_USER_NOTE]: (state, userNote) => {
             state.userNote = userNote;
+        },
+
+        [UPDATE_GEO_LOCATION]: (state, [lng, lat]) => {
+            state.geolocation = { latitude: lat, longitude: lng };
         }
     }
 };

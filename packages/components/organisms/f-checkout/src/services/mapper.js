@@ -3,7 +3,8 @@ const mapUpdateCheckoutRequest = ({
     customer = {},
     isCheckoutMethodDelivery,
     time,
-    userNote
+    userNote,
+    geolocation
 }) => ({
     customer: {
         firstName: customer.firstName || null,
@@ -26,7 +27,7 @@ const mapUpdateCheckoutRequest = ({
                     postalCode: address.postcode || null
                 }
             } : {}),
-            geolocation: null
+            geolocation
         }
     },
     notes: [
