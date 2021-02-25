@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { select, text } from '@storybook/addon-knobs';
+import { select, text, boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import {
     ENGLISH_LOCALE
@@ -42,38 +42,69 @@ CheckoutMock.passThroughAny();
 export const CheckoutComponent = () => ({
     components: { VueCheckout },
     props: {
+        isLoggedIn: {
+            default: boolean('Is User Logged In', false)
+        },
+
+        serviceType: {
+            default: select('Service Type', ['Collection', 'Delivery'], 'Collection')
+        },
+
         locale: {
             default: select('Locale', [ENGLISH_LOCALE])
         },
-        updateCheckoutUrl: {
-            default: select('Update Checkout Url', [updateCheckoutUrl], updateCheckoutUrl)
-        },
-        getCheckoutUrl: {
-            default: select('Get Checkout Url', [getCheckoutDeliveryUrl, getCheckoutCollectionUrl, 'An invalid URL'], getCheckoutDeliveryUrl)
-        },
+
         checkoutAvailableFulfilmentUrl: {
             default: select('Available Fulfilment Url', [checkoutAvailableFulfilmentUrl], checkoutAvailableFulfilmentUrl)
         },
+
+        updateCheckoutUrl: {
+            default: select('Update Checkout Url', [updateCheckoutUrl], updateCheckoutUrl)
+        },
+
         createGuestUrl: {
             default: text('Create Guest Url', createGuestUrl)
         },
-        getBasketUrl: {
-            default: select('Get Basket Url', [getBasketDeliveryUrl, getBasketCollectionUrl], getBasketDeliveryUrl)
-        },
-        authToken: {
-            default: text('Auth token', '')
-        },
+
         loginUrl: {
             default: text('Login Url', '/login')
         },
+
         getAddressUrl: {
             default: text('Get Address Url', getAddressUrl)
         },
+
         placeOrderUrl: {
             default: select('Place Order Url', [placeOrderUrl], placeOrderUrl)
         },
+
         paymentPageUrlPrefix: {
             default: text('Payment Page Url Prefix', paymentPageUrlPrefix)
+        }
+    },
+    computed: {
+        getCheckoutUrl () {
+            if (this.serviceType === 'Collection') {
+                return getCheckoutCollectionUrl;
+            } else if (this.serviceType === 'Delivery') {
+                return getCheckoutDeliveryUrl;
+            } else {
+                return 'An invalid URL';
+            }
+        },
+
+        getBasketUrl () {
+            if (this.serviceType === 'Collection') {
+                return getBasketCollectionUrl;
+            } else if (this.serviceType === 'Delivery') {
+                return getBasketDeliveryUrl;
+            } else {
+                return 'An invalid URL';
+            }
+        },
+
+        authToken () {
+            return this.isLoggedIn ? 'Auth Token' : ''
         }
     },
     store: new Vuex.Store({
@@ -86,7 +117,7 @@ export const CheckoutComponent = () => ({
         ':updateCheckoutUrl="updateCheckoutUrl" ' +
         ':checkout-available-fulfilment-url="checkoutAvailableFulfilmentUrl" ' +
         ':create-guest-url="createGuestUrl" ' +
-        ':get-basket-url="getBasketUrl" ' +
+        ':getBasketUrl="getBasketUrl" ' +
         ':authToken="authToken" ' +
         ':locale="locale" ' +
         ':loginUrl="loginUrl" ' +
