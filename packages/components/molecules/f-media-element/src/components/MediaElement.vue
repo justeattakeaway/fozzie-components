@@ -196,7 +196,7 @@ $font-sizes: (
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex: 1 1 0;
+    flex: 1 1 0%;
 
     /**
      * Modifier – .c-mediaElement-content--center
@@ -229,7 +229,7 @@ $font-sizes: (
 .c-mediaElement-imgWrapper {
     display: flex;
     flex-direction: column;
-    flex: 1 1 0;
+    flex: 1 1 0%;
 
     /**
      * Modifier – .c-mediaElement-imgWrapper--center
