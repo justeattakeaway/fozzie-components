@@ -10,6 +10,7 @@ v0.2.1
 ### Changed
 - Update tests to use js-cookie.
 - Update legacy cookie value
+- Remove f-globalisation mixin
 
 v0.2.0
 ------------------------------
