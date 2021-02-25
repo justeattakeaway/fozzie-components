@@ -1,7 +1,7 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 const { COMPONENT } = require('./f-<%= name.class %>-selectors')
 
-class <%= name.filename %> extends Page {
+module.exports = class <%= name.filename %> extends Page {
 
     get component () { return $(COMPONENT); }
 
@@ -17,5 +17,3 @@ class <%= name.filename %> extends Page {
         this.component.isDisplayed();
     }
 }
-
-module.exports = <%= name.filename %>
