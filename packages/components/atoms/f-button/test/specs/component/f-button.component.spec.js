@@ -1,14 +1,14 @@
-import ButtonComponent from '../../../test-utils/component-objects/f-button.component';
+const Button = require('../../../test-utils/component-objects/f-button.component');
+const button = new Button();
 
 describe('f-button component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-atoms--button-component');
-        browser.switchToFrame(0);
-        ButtonComponent.waitForButtonComponent();
+        button.open();
+        button.waitForComponent();
     });
 
     it('should display the f-button component', () => {
         // Assert
-        expect(ButtonComponent.isButtonComponentDisplayed()).toBe(true);
+        expect(button.isComponentDisplayed()).toBe(true);
     });
 });
