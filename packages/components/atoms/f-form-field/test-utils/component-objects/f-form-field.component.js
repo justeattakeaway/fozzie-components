@@ -30,11 +30,10 @@ module.exports = class FormField extends Page {
     * The below function adds and displays the user's first name into the form-field component.
     */
     addUserInput (userInput) {
-        this.input.setValue(userInput);
+        this.input.setValue(userInput.firstName);
     }
 
-    isUserInputDisplayed () {
-        const value = this.input.getValue();
-        value.isDisplayed();
+    getUserInput () {
+        return this.input.getValue();
     }
 };

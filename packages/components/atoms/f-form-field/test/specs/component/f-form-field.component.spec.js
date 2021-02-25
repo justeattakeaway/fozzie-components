@@ -27,6 +27,6 @@ describe('f-form-field component tests', () => {
         formfield.addUserInput(userInput);
 
         // Assert
-        expect(formfield.isUserInputDisplayed()).toBe(true);
+        expect(formfield.getUserInput()).toEqual('abcd');
     });
 });
