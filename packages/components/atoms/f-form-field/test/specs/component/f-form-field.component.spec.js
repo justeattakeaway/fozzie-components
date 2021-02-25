@@ -1,20 +1,20 @@
-import FormFieldComponent from '../../../test-utils/component-objects/f-form-field.component';
+const FormField = require('../../../test-utils/component-objects/f-form-field.component');
+const formfield = new FormField();
 
 describe('f-form-field component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-atoms--form-field-component');
-        browser.switchToFrame(0);
-        FormFieldComponent.waitForFormField();
+        formfield.open();
+        formfield.waitForComponent();
     });
 
     it('should display f-form-field', () => {
         // Assert
-        expect(FormFieldComponent.isFormFieldDisplayed()).toBe(true);
+        expect(formfield.isComponentDisplayed()).toBe(true);
     });
 
     it('should display Label', () => {
         // Assert
-        expect(FormFieldComponent.isLabelDisplayed()).toBe(true);
+        expect(formfield.isLabelDisplayed()).toBe(true);
     });
 
     it('should display user input', () => {
@@ -23,7 +23,10 @@ describe('f-form-field component tests', () => {
             firstName: 'abcd'
         };
 
+        // Act
+        formfield.addUserInput(userInput);
+
         // Assert
-        expect(FormFieldComponent.displayUserInput(userInput)).toBeVisible;
+        expect(formfield.isUserInputDisplayed()).toBe(true);
     });
 });
