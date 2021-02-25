@@ -262,14 +262,14 @@ export default {
         updateAddressDetails ({ commit, dispatch }, payload) {
             const [field] = Object.keys(payload);
 
-            dispatch('analytics/updateFieldChanges', field, { root: true });
+            dispatch('analytics/updateChangedFields', field, { root: true });
             commit(UPDATE_FULFILMENT_ADDRESS, payload);
         },
 
         updateCustomerDetails ({ commit, dispatch }, payload) {
             const [field] = Object.keys(payload);
 
-            dispatch('analytics/updateFieldChanges', field, { root: true });
+            dispatch('analytics/updateChangedFields', field, { root: true });
             commit(UPDATE_CUSTOMER_DETAILS, payload);
         },
 
@@ -279,7 +279,7 @@ export default {
 
         updateUserNote ({ commit, dispatch }, payload) {
             commit(UPDATE_USER_NOTE, payload);
-            dispatch('analytics/updateFieldChanges', 'note', { root: true });
+            dispatch('analytics/updateChangedFields', 'note', { root: true });
         }
     },
 

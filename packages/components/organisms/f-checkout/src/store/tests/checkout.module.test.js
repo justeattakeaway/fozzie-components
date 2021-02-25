@@ -438,7 +438,7 @@ describe('CheckoutModule', () => {
             [updateAddressDetails, UPDATE_FULFILMENT_ADDRESS, address],
             [updateCustomerDetails, UPDATE_CUSTOMER_DETAILS, customerDetails],
             [updateUserNote, UPDATE_USER_NOTE, userNote]
-        ])('%s should call `%s` mutation with passed value', (action, mutation, value) => {
+        ])('%s should call %s mutation with passed value', (action, mutation, value) => {
             // Act
             action({ commit, dispatch }, value);
 
@@ -449,14 +449,14 @@ describe('CheckoutModule', () => {
         it.each([
             [updateAddressDetails, address],
             [updateCustomerDetails, customerDetails]
-        ])('%s should dispatch `analytics/updateFieldChanges` action with first key of passed value', (action, value) => {
+        ])('%s should dispatch `analytics/updateChangedFields` action with first key of passed value', (action, value) => {
             // Act
             action({ commit, dispatch }, value);
 
             const [field] = Object.keys(value);
 
             // Assert
-            expect(dispatch).toHaveBeenCalledWith('analytics/updateFieldChanges', field, { root: true });
+            expect(dispatch).toHaveBeenCalledWith('analytics/updateChangedFields', field, { root: true });
         });
     });
 });

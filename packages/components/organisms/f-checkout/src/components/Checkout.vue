@@ -111,7 +111,7 @@ import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants'
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
-import { mapUpdateCheckoutRequest, mapAnalyticsFieldNames } from '../services/mapper';
+import { mapUpdateCheckoutRequest } from '../services/mapper';
 
 export default {
     name: 'VueCheckout',
@@ -315,7 +315,6 @@ export default {
 
     async mounted () {
         await this.initialise();
-
         this.trackInitialLoad();
     },
 
@@ -627,12 +626,9 @@ export default {
 
             if (!this.isFormValid()) {
                 const validationState = validations.getFormValidationState(this.$v);
-                const analyticsValidations = mapAnalyticsFieldNames(validationState.invalidFields);
 
                 this.$emit(EventNames.CheckoutValidationError, validationState);
-
-                this.trackFormInteraction({ action: 'inline_error', error: analyticsValidations });
-                this.trackFormInteraction({ action: 'error', error: 'basketNotOrderable' });
+                this.trackFormInteraction({ action: 'inline_error', error: validationState.invalidFields });
 
                 this.$logger.logWarn(
                     'Checkout Validation Error',
@@ -649,7 +645,6 @@ export default {
                 this.trackFormInteraction({ action: 'success' });
             } catch (error) {
                 this.handleErrorState(error);
-                this.trackFormInteraction({ action: 'error', error: 'basketNotOrderable' });
             } finally {
                 this.shouldDisableCheckoutButton = false;
             }

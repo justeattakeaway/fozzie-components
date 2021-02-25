@@ -78,7 +78,7 @@ const defaultActions = {
 
 const defaultAnalyticsActions = {
     updateState: jest.fn(),
-    updateFieldChanges: jest.fn(),
+    updateChangedFields: jest.fn(),
     trackInitialLoad: jest.fn(),
     trackFormInteraction: jest.fn()
 };

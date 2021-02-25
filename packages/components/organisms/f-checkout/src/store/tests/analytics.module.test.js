@@ -13,7 +13,7 @@ const { actions, mutations } = AnalyticsModule;
 
 const {
     updateState,
-    updateFieldChanges,
+    updateChangedFields,
     trackInitialLoad,
     trackFormInteraction
 } = actions;
@@ -46,9 +46,9 @@ describe('AnalyticsModule', () => {
         });
 
         describe('updateState ::', () => {
-            it(`should call ${UPDATE_ANALYTICS_STATE} with required checkoutState values`, () => {
+            it(`should call ${UPDATE_ANALYTICS_STATE} with checkoutState values`, () => {
                 // Arrange
-                const requiredState = {
+                const expectedState = {
                     serviceType: checkoutState.serviceType,
                     restaurantId: checkoutState.restaurantId,
                     basket: checkoutState.basket,
@@ -59,7 +59,7 @@ describe('AnalyticsModule', () => {
                 updateState({ rootState, commit }, checkoutState);
 
                 // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_ANALYTICS_STATE, requiredState);
+                expect(commit).toHaveBeenCalledWith(UPDATE_ANALYTICS_STATE, expectedState);
             });
 
             it(`should call ${UPDATE_AUTOFILL} if 'isLoggedIn' is true`, () => {
@@ -74,13 +74,13 @@ describe('AnalyticsModule', () => {
             });
         });
 
-        describe('updateFieldChanges ::', () => {
-            it(`should call ${UPDATE_CHANGED_FIELDS} with passed field`, async () => {
+        describe('updateChangedFields ::', () => {
+            it(`should call ${UPDATE_CHANGED_FIELDS} with passed field`, () => {
                 // Arrange
                 const field = 'firstName';
 
                 // Act
-                updateFieldChanges({ commit }, field);
+                updateChangedFields({ commit }, field);
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith(UPDATE_CHANGED_FIELDS, field);
@@ -140,10 +140,16 @@ describe('AnalyticsModule', () => {
         });
 
         describe('trackFormInteraction ::', () => {
+            let mapAnalyticsFieldNamesSpy;
+
             const payload = {
                 action: 'start',
                 error: 'postcodeNotCovered'
             };
+
+            beforeEach(() => {
+                mapAnalyticsFieldNamesSpy = jest.spyOn(mapper, 'mapAnalyticsFieldNames').mockImplementation(() => payload.error);
+            });
 
             const expectedEvent = {
                 event: 'Form',
@@ -157,6 +163,14 @@ describe('AnalyticsModule', () => {
                     }
                 }
             };
+
+            it('should call `mapAnalyticsFieldNames` with error', () => {
+                // Act
+                trackFormInteraction({ state }, payload);
+
+                // Assert
+                expect(mapAnalyticsFieldNamesSpy).toHaveBeenCalledWith(payload.error);
+            });
 
             it('should call `event` method of `f-trak`', () => {
                 // Act

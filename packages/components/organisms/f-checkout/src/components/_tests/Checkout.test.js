@@ -3,7 +3,6 @@ import Vuex from 'vuex';
 import flushPromises from 'flush-promises';
 import { VueI18n } from '@justeat/f-globalisation';
 import { validations } from '@justeat/f-services';
-import * as mapper from '../../services/mapper';
 import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION, TENANT_MAP } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
@@ -488,7 +487,7 @@ describe('Checkout', () => {
                 propsData
             });
 
-            await wrapper.vm.initialise()
+            await wrapper.vm.initialise();
 
             // Assert
             expect(trackInitialLoadSpy).toHaveBeenCalled();
@@ -1983,7 +1982,6 @@ describe('Checkout', () => {
 
             describe('when the form is Invalid', () => {
                 let wrapper;
-                let mapAnalyticsFieldNamesSpy;
                 let getFormValidationStateSpy;
 
                 const mockValidationState = {
@@ -1999,9 +1997,7 @@ describe('Checkout', () => {
                 beforeEach(() => {
                     isFormValidSpy.mockReturnValue(false);
 
-                    mapAnalyticsFieldNamesSpy = jest.spyOn(mapper, 'mapAnalyticsFieldNames');
                     getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
-
                     getFormValidationStateSpy.mockReturnValue(mockValidationState);
 
                     wrapper = mount(VueCheckout, {
@@ -2024,36 +2020,11 @@ describe('Checkout', () => {
                     expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
                 });
 
-                it('should call `mapAnalyticsFieldNames` with `invalidFields`', async () => {
-                    // Arrange
-                    const { invalidFields } = mockValidationState;
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-
-                    // Assert
-                    expect(mapAnalyticsFieldNamesSpy).toHaveBeenCalledWith(invalidFields);
-                });
-
                 it('should call `trackFormInteraction` with and action `inline_error` and validation errors', async () => {
                     // Arrange
                     const payload = {
                         action: 'inline_error',
                         error: mockValidationState.invalidFields
-                    };
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-
-                    // Assert
-                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(payload);
-                });
-
-                it('should call `trackFormInteractionSpy` with action `error` and error `basketNotOrderable`', async () => {
-                    // Arrange
-                    const payload = {
-                        action: 'error',
-                        error: 'basketNotOrderable'
                     };
 
                     // Act
@@ -2133,20 +2104,6 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(handleErrorStateSpy).toHaveBeenCalledWith(error);
-                });
-
-                it('should call `trackFormInteractionSpy` with correct `action` and `error`', async () => {
-                    // Arrange
-                    const payload = {
-                        action: 'error',
-                        error: 'basketNotOrderable'
-                    };
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-
-                    // Assert
-                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(payload);
                 });
             });
 

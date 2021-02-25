@@ -41,7 +41,7 @@ export default {
         /**
          * Pushes initial state of checkout to the dataLayer.
          */
-        updateFieldChanges ({ commit }, field) {
+        updateChangedFields ({ commit }, field) {
             commit(UPDATE_CHANGED_FIELDS, field);
         },
 
@@ -87,7 +87,7 @@ export default {
                     form: {
                         name: formName,
                         action,
-                        error: error || null,
+                        error: mapAnalyticsFieldNames(error) || null,
                         autofill: JSON.parse(JSON.stringify(state.autofill)),
                         changes: JSON.parse(JSON.stringify(state.changedFields))
                     }
@@ -120,9 +120,9 @@ export default {
             }
 
             if (serviceType === 'delivery') {
-                Object.entries(address).forEach(([key, value]) => {
+                Object.entries(address).forEach(([field, value]) => {
                     if (value) {
-                        state.autofill.push(mapAnalyticsFieldNames(key));
+                        state.autofill.push(mapAnalyticsFieldNames(field));
                     }
                 });
             }
