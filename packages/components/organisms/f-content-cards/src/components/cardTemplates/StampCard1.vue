@@ -24,7 +24,7 @@
                 v-html="card.subtitle" />
         </div>
         <div
-            v-if="card.isReadyToClaim"
+            v-if="isReadyToClaim"
             :class="[
                 $style['c-stampCard1-redemptionDetails']
             ]"
@@ -39,7 +39,7 @@
             <div
                 :class="[$style['c-stampCard1-expiryInfo']]"
                 :data-test-id="testIdForSection('expiryInfo')">
-                {{ card.expiryLine }}
+                {{ expiryLine }}
             </div>
         </div>
         <div
@@ -66,6 +66,9 @@
 </template>
 
 <script>
+import parseISO from 'date-fns/parseISO';
+import lightFormat from 'date-fns/format';
+
 import EmptyStamp from './images/stamp-empty-15.svg';
 import FullStamp from './images/stamp-full-15.svg';
 
@@ -98,6 +101,19 @@ export default {
     },
 
     computed: {
+        expiryLine () {
+            const expiryDate = parseISO(this.card.expiryDate);
+
+            return `${this.card.expiryLine} ${Number.isNaN(expiryDate.valueOf())
+                ? ''
+                : lightFormat(expiryDate, 'dd/MM')
+            }`;
+        },
+
+        isReadyToClaim () {
+            return [true, 'true'].includes(this.card.isReadyToClaim);
+        },
+
         stamps () {
             const stamps = [];
 
