@@ -82,10 +82,6 @@ export default {
 
             const mappedError = error ? mapAnalyticsFieldArray(error) : null;
 
-            console.log(state.autofill); // eslint-disable-line no-console
-            console.log(JSON.stringify(state.autofill)); // eslint-disable-line no-console
-            console.log(JSON.parse(JSON.stringify(state.autofill))); // eslint-disable-line no-console
-
             Trak.event({
                 event: 'Form',
                 custom: {
@@ -93,8 +89,8 @@ export default {
                         name: formName,
                         action,
                         error: mappedError,
-                        autofill: JSON.parse(JSON.stringify(state.autofill)),
-                        changes: JSON.parse(JSON.stringify(state.changedFields)).sort()
+                        autofill: state.autofill,
+                        changes: state.changedFields.sort()
                     }
                 }
             });
