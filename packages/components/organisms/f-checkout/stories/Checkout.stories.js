@@ -41,6 +41,17 @@ CheckoutMock.passThroughAny();
 
 export const CheckoutComponent = () => ({
     components: { VueCheckout },
+    data () {
+        return {
+            placeOrderUrl,
+            paymentPageUrlPrefix,
+            getAddressUrl,
+            loginUrl: '/login',
+            createGuestUrl,
+            updateCheckoutUrl,
+            checkoutAvailableFulfilmentUrl
+        }
+    },
     props: {
         isLoggedIn: {
             default: boolean('Is User Logged In', false)
@@ -52,34 +63,6 @@ export const CheckoutComponent = () => ({
 
         locale: {
             default: select('Locale', [ENGLISH_LOCALE])
-        },
-
-        checkoutAvailableFulfilmentUrl: {
-            default: select('Available Fulfilment Url', [checkoutAvailableFulfilmentUrl], checkoutAvailableFulfilmentUrl)
-        },
-
-        updateCheckoutUrl: {
-            default: select('Update Checkout Url', [updateCheckoutUrl], updateCheckoutUrl)
-        },
-
-        createGuestUrl: {
-            default: text('Create Guest Url', createGuestUrl)
-        },
-
-        loginUrl: {
-            default: text('Login Url', '/login')
-        },
-
-        getAddressUrl: {
-            default: text('Get Address Url', getAddressUrl)
-        },
-
-        placeOrderUrl: {
-            default: select('Place Order Url', [placeOrderUrl], placeOrderUrl)
-        },
-
-        paymentPageUrlPrefix: {
-            default: text('Payment Page Url Prefix', paymentPageUrlPrefix)
         }
     },
     computed: {
