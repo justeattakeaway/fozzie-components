@@ -1,4 +1,4 @@
-import { mapUpdateCheckoutRequest, mapAnalyticsField, mapAnalyticsFieldArray } from '../mapper';
+import { mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames } from '../mapper';
 
 const defaultParams = {
     address: {},
@@ -123,8 +123,8 @@ describe('checkout mapper', () => {
     });
 });
 
-describe('mapAnalyticsField :: ', () => {
-    describe('mapAnalyticsField :: ', () => {
+describe('mapAnalyticsName :: ', () => {
+    describe('mapAnalyticsName :: ', () => {
         it.each([
             ['address.line1', 'addressLine1'],
             ['line1', 'addressLine1'],
@@ -141,12 +141,12 @@ describe('mapAnalyticsField :: ', () => {
             ['customer.email', 'email']
         ])('should map the fieldname %s to the analytics value %s', (provided, expected) => {
             // Act & Assert
-            expect(mapAnalyticsField(provided)).toEqual(expected);
+            expect(mapAnalyticsName(provided)).toEqual(expected);
         });
     });
 });
 
-describe('mapAnalyticsFieldArray :: ', () => {
+describe('mapAnalyticsNames :: ', () => {
     it('should correctly map an array of field names and sort alphabetically', () => {
         // Arrange
         const provided = [
@@ -168,6 +168,6 @@ describe('mapAnalyticsFieldArray :: ', () => {
         ];
 
         // Act & Assert
-        expect(mapAnalyticsFieldArray(provided)).toEqual(expected);
+        expect(mapAnalyticsNames(provided)).toEqual(expected);
     });
 });

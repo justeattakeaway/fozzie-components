@@ -10,6 +10,7 @@ v0.60.0
 
 ### Added
 - `analytics.module` to store.
+- `mapAnalyticsName` and `mapAnalyticsNames` to `mapper` service.
 - Analytics tracking to `Checkout` component.
 - Tests to cover changes.
 

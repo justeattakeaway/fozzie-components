@@ -1,5 +1,5 @@
 import Trak from '@justeat/f-trak';
-import { mapAnalyticsField, mapAnalyticsFieldArray } from '../services/mapper';
+import { mapAnalyticsName, mapAnalyticsNames } from '../services/mapper';
 
 import {
     UPDATE_CHANGED_FIELD,
@@ -32,7 +32,7 @@ export default {
                 }
             });
 
-            autofill = mapAnalyticsFieldArray(autofill);
+            autofill = mapAnalyticsNames(autofill);
 
             commit(UPDATE_AUTOFILL, autofill);
         },
@@ -42,7 +42,7 @@ export default {
          * Calls `UPDATE_CHANGED_FIELD` analytics field name.
          */
         updateChangedField ({ commit }, field) {
-            const analyticsName = mapAnalyticsField(field);
+            const analyticsName = mapAnalyticsName(field);
 
             commit(UPDATE_CHANGED_FIELD, analyticsName);
         },
@@ -80,7 +80,7 @@ export default {
         trackFormInteraction ({ state, rootState }, { action, error }) {
             const formName = rootState.checkout.isLoggedIn ? 'checkout' : 'checkout_guest';
 
-            const mappedError = error ? mapAnalyticsFieldArray(error) : null;
+            const mappedError = error ? mapAnalyticsNames(error) : null;
 
             Trak.event({
                 event: 'Form',

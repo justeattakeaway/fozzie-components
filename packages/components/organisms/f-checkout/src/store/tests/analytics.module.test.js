@@ -44,7 +44,7 @@ describe('AnalyticsModule', () => {
 
         describe('updateAutofill ::', () => {
             let autofillFields = [];
-            let mapAnalyticsFieldArraySpy;
+            let mapAnalyticsNamesSpy;
             let field;
 
             let checkoutState = {
@@ -64,7 +64,7 @@ describe('AnalyticsModule', () => {
             };
 
             beforeEach(() => {
-                mapAnalyticsFieldArraySpy = jest.spyOn(mapper, 'mapAnalyticsFieldArray');
+                mapAnalyticsNamesSpy = jest.spyOn(mapper, 'mapAnalyticsNames');
             });
 
             afterEach(() => {
@@ -85,7 +85,7 @@ describe('AnalyticsModule', () => {
 
                     field = ['phone'];
                     autofillFields = field;
-                    mapAnalyticsFieldArraySpy.mockImplementation(() => field);
+                    mapAnalyticsNamesSpy.mockImplementation(() => field);
                 });
 
                 it(`should call ${UPDATE_AUTOFILL} with correct correct field`, () => {
@@ -96,7 +96,7 @@ describe('AnalyticsModule', () => {
                     expect(commit).toHaveBeenCalledWith(UPDATE_AUTOFILL, autofillFields);
                 });
 
-                it('should call `mapAnalyticsFieldArray` with correct correct field', () => {
+                it('should call `mapAnalyticsNames` with correct correct field', () => {
                     // Act
                     updateAutofill({ commit }, checkoutState);
 
@@ -119,7 +119,7 @@ describe('AnalyticsModule', () => {
 
                     field = ['addressLine1'];
                     autofillFields = field;
-                    mapAnalyticsFieldArraySpy.mockImplementation(() => field);
+                    mapAnalyticsNamesSpy.mockImplementation(() => field);
                 });
 
                 it(`should call ${UPDATE_AUTOFILL} with correct field`, () => {
@@ -130,7 +130,7 @@ describe('AnalyticsModule', () => {
                     expect(commit).toHaveBeenCalledWith(UPDATE_AUTOFILL, autofillFields);
                 });
 
-                it('should call `mapAnalyticsFieldArray` with correct field', () => {
+                it('should call `mapAnalyticsNames` with correct field', () => {
                     // Act
                     updateAutofill({ commit }, checkoutState);
 
@@ -142,18 +142,18 @@ describe('AnalyticsModule', () => {
 
         describe('updateChangedField ::', () => {
             const field = 'firstName';
-            let mapAnalyticsFieldSpy;
+            let mapAnalyticsNameSpy;
 
             beforeEach(() => {
-                mapAnalyticsFieldSpy = jest.spyOn(mapper, 'mapAnalyticsField').mockImplementation(() => field);
+                mapAnalyticsNameSpy = jest.spyOn(mapper, 'mapAnalyticsName').mockImplementation(() => field);
             });
 
-            it('should call `mapAnalyticsField` with passed field', () => {
+            it('should call `mapAnalyticsName` with passed field', () => {
                 // Act
                 updateChangedField({ commit }, field);
 
                 // Assert
-                expect(mapAnalyticsFieldSpy).toHaveBeenCalledWith(field);
+                expect(mapAnalyticsNameSpy).toHaveBeenCalledWith(field);
             });
 
             it(`should call ${UPDATE_CHANGED_FIELD} with passed field`, () => {
@@ -235,7 +235,7 @@ describe('AnalyticsModule', () => {
         });
 
         describe('trackFormInteraction ::', () => {
-            let mapAnalyticsFieldArraySpy;
+            let mapAnalyticsNamesSpy;
 
             const payload = {
                 action: 'start',
@@ -255,7 +255,7 @@ describe('AnalyticsModule', () => {
             };
 
             beforeEach(() => {
-                mapAnalyticsFieldArraySpy = jest.spyOn(mapper, 'mapAnalyticsFieldArray');
+                mapAnalyticsNamesSpy = jest.spyOn(mapper, 'mapAnalyticsNames');
             });
 
             afterEach(() => {
@@ -265,16 +265,16 @@ describe('AnalyticsModule', () => {
             describe('when an error is provided', () => {
                 beforeEach(() => {
                     payload.error = 'postcodeNotDefined';
-                    mapAnalyticsFieldArraySpy.mockImplementation(() => payload.error);
+                    mapAnalyticsNamesSpy.mockImplementation(() => payload.error);
                     expectedEvent.custom.form.error = payload.error;
                 });
 
-                it('should call `mapAnalyticsFieldArray` with error', () => {
+                it('should call `mapAnalyticsNames` with error', () => {
                     // Act
                     trackFormInteraction({ state, rootState }, payload);
 
                     // Assert
-                    expect(mapAnalyticsFieldArraySpy).toHaveBeenCalledWith(payload.error);
+                    expect(mapAnalyticsNamesSpy).toHaveBeenCalledWith(payload.error);
                 });
 
                 it('should call `event` method of `f-trak` with expected event', () => {
@@ -289,16 +289,16 @@ describe('AnalyticsModule', () => {
             describe('when no error is provided', () => {
                 beforeEach(() => {
                     payload.error = null;
-                    mapAnalyticsFieldArraySpy.mockImplementation(() => payload.error);
+                    mapAnalyticsNamesSpy.mockImplementation(() => payload.error);
                     expectedEvent.custom.form.error = payload.error;
                 });
 
-                it('should not call `mapAnalyticsFieldArray`', () => {
+                it('should not call `mapAnalyticsNames`', () => {
                     // Act
                     trackFormInteraction({ state, rootState }, payload);
 
                     // Assert
-                    expect(mapAnalyticsFieldArraySpy).not.toHaveBeenCalled();
+                    expect(mapAnalyticsNamesSpy).not.toHaveBeenCalled();
                 });
 
                 it('should call `event` method of `f-trak` with expected event', () => {

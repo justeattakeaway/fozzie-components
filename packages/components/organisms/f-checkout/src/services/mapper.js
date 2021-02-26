@@ -74,12 +74,12 @@ const analyticFieldNameMapper = {
 /**
  * Updates passed field name to match the expected analytics name requirements.
  */
-const mapAnalyticsField = field => (analyticFieldNameMapper[field] || field);
+const mapAnalyticsName = field => (analyticFieldNameMapper[field] || field);
 
 /**
  * Updates passed field names to match the expected analytics name requirements.
  * When fields have been mapped, sorts the array alphabetically.
  */
-const mapAnalyticsFieldArray = fields => fields.map(mapAnalyticsField).sort();
+const mapAnalyticsNames = fields => fields.map(mapAnalyticsName).sort();
 
-export { mapUpdateCheckoutRequest, mapAnalyticsField, mapAnalyticsFieldArray };
+export { mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames };
