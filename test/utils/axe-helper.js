@@ -48,7 +48,7 @@ exports.processResults = (results, componentName) => {
     console.log('Creating .CSV artifact for Axe violations');
 
     const fileName = `${componentName}-a11y-violations`;
-    const localFilePath = `${__dirname}../../../axe-violations/${fileName}`;
+    const localFilePath = `${__dirname}../../../test/results/axe-violations/${fileName}`;
     // axe-reports can't create the CSV in CI due to permissions so we have to create the file ourselves.
     if (process.env.CIRCLECI) {
         const ciFileName = `/home/circleci/project/axe-violations/${fileName}`;

@@ -5,6 +5,7 @@ const testEnvironment = setTestEnvironment();
 const testType = setTestType();
 
 exports.config = {
+
     //
     // ====================
     // Runner Configuration
@@ -141,10 +142,10 @@ exports.config = {
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases
             videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
-            outputDir: '../../../../_results_'
+            outputDir: `${__dirname}/test/results/allure/failure-videos`
         }],
         ['allure', {
-            outputDir: '../../../../allure-results',
+            outputDir: `${__dirname}/test/results/allure`,
             disableWebdriverStepsReporting: false,
             disableWebdriverScreenshotsReporting: false
         }]

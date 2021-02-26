@@ -32,8 +32,7 @@ coverage/
 /packages/f-content-cards/stories/mocks/
 
 # Test result folders
-allure-report
-allure-results
-_results_
-**/axe-violations/*
-!**/axe-violations/README.md
+**/test/results/allure/*
+!**/test/results/allure/README.md
+**/test/results/axe-violations/*
+!**/test/results/axe-violations/README.md

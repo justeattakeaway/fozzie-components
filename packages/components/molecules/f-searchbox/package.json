@@ -33,7 +33,6 @@
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
-    "report": "cd ../.. && yarn report",
     "storybook:serve-webdriver": "lerna run storybook:serve-static --stream",
     "test": "vue-cli-service test:unit",
     "test:wait-for-server": "node ../../../../test/infrastructure/healthcheck.js",

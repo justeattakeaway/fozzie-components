@@ -32,7 +32,6 @@
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
-    "report": "cd ../.. && yarn report",
     "test": "vue-cli-service test:unit",
     "test:coverage": "yarn test --coverage",
     "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
