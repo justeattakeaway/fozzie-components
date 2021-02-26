@@ -1,1 +1,1 @@
-This directory should remain empty. Files generated in this directory are use to generate the allure test reporter.
+This directory should remain empty. Files are automatically created in this directory to generate the allure test reporter.
