@@ -60,7 +60,7 @@ export default {
                     checkout: {
                         step: 1
                     },
-                    basket: JSON.parse(JSON.stringify(rootState.checkout.basket)),
+                    basket: rootState.checkout.basket,
                     restaurant: {
                         id: rootState.checkout.restaurantId
                     },
