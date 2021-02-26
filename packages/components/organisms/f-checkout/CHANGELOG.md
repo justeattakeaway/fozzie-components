@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.60.0
+-------------------------------
+*February 26, 2021*
+
+### Added
+- `analytics.module` to store.
+- `mapAnalyticsName` and `mapAnalyticsNames` to `mapper` service.
+- Analytics tracking to `Checkout` component.
+- Tests to cover changes.
+
+
 v0.59.0
 ------------------------------
 *February 24, 2021*

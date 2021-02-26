@@ -191,14 +191,14 @@ describe('CheckoutModule', () => {
                         id: '11111',
                         total: 12.50
                     },
-                    resturantId: '22222'
+                    restaurantId: '22222'
                 };
                 mutations[UPDATE_BASKET_DETAILS](state, eventData);
 
                 // Assert
                 expect(state.serviceType).toEqual(eventData.serviceType);
                 expect(state.basket).toEqual(eventData.basket);
-                expect(state.resturant).toEqual(eventData.resturant);
+                expect(state.restaurant).toEqual(eventData.restaurant);
             });
         });
 
@@ -219,6 +219,7 @@ describe('CheckoutModule', () => {
 
     describe('actions ::', () => {
         let commit;
+        let dispatch;
 
         const payload = {
             url: 'http://localhost/account/checkout',
@@ -229,6 +230,7 @@ describe('CheckoutModule', () => {
 
         beforeEach(() => {
             commit = jest.fn();
+            dispatch = jest.fn();
         });
 
         describe('getCheckout ::', () => {
@@ -248,11 +250,19 @@ describe('CheckoutModule', () => {
 
             it(`should get the checkout details from the backend and call ${UPDATE_STATE} mutation.`, async () => {
                 // Act
-                await getCheckout({ commit, state }, payload);
+                await getCheckout({ commit, state, dispatch }, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
                 expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
+            });
+
+            it('should call `analytics/updateAutofill` mutation with an array of updated field names.', async () => {
+                // Act
+                await getCheckout({ commit, state, dispatch }, payload);
+
+                // Assert
+                expect(dispatch).toHaveBeenCalledWith('analytics/updateAutofill', state, { root: true });
             });
         });
 
@@ -271,7 +281,7 @@ describe('CheckoutModule', () => {
                 axios.get = jest.fn(() => Promise.resolve({ data: basketDelivery }));
 
                 // Act
-                await getBasket({ commit, state }, payload);
+                await getBasket({ commit, state, dispatch }, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
@@ -302,7 +312,7 @@ describe('CheckoutModule', () => {
                 const [expectedAddress] = customerAddresses.Addresses;
 
                 // Act
-                await getAddress({ commit, state }, payload);
+                await getAddress({ commit, state, dispatch }, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
@@ -312,6 +322,14 @@ describe('CheckoutModule', () => {
                     city: expectedAddress.City,
                     postcode: expectedAddress.ZipCode
                 });
+            });
+
+            it('should call `analytics/updateAutofill` mutation with an array of updated field names.', async () => {
+                // Act
+                await getAddress({ commit, state, dispatch }, payload);
+
+                // Assert
+                expect(dispatch).toHaveBeenCalledWith('analytics/updateAutofill', state, { root: true });
             });
         });
 
@@ -405,19 +423,40 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe('updateFulfilmentTime ::', () => {
+            it(`should call ${UPDATE_FULFILMENT_TIME} mutation.`, () => {
+                // Act
+                updateFulfilmentTime({ commit, state }, time);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_TIME, time);
+            });
+        });
 
         it.each([
             [setAuthToken, UPDATE_AUTH, authToken],
             [updateAddressDetails, UPDATE_FULFILMENT_ADDRESS, address],
             [updateCustomerDetails, UPDATE_CUSTOMER_DETAILS, customerDetails],
-            [updateFulfilmentTime, UPDATE_FULFILMENT_TIME, time],
             [updateUserNote, UPDATE_USER_NOTE, userNote]
         ])('%s should call %s mutation with passed value', (action, mutation, value) => {
             // Act
-            action({ commit }, value);
+            action({ commit, dispatch }, value);
 
             // Assert
             expect(commit).toHaveBeenCalledWith(mutation, value);
+        });
+
+        it.each([
+            [updateAddressDetails, address],
+            [updateCustomerDetails, customerDetails]
+        ])('%s should dispatch `analytics/updateChangedFields` action with first key of passed value', (action, value) => {
+            // Act
+            action({ commit, dispatch }, value);
+
+            const [field] = Object.keys(value);
+
+            // Assert
+            expect(dispatch).toHaveBeenCalledWith('analytics/updateChangedField', field, { root: true });
         });
     });
 });
