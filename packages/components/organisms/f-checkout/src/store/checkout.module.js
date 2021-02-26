@@ -63,7 +63,7 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getCheckout: async ({ commit, state }, { url, timeout }) => {
+        getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
             // TODO: deal with exceptions.
@@ -80,6 +80,8 @@ export default {
             const { data } = await axios.get(url, config);
 
             commit(UPDATE_STATE, data);
+
+            dispatch('analytics/updateAutofill', state, { root: true });
         },
 
         /**
@@ -162,7 +164,7 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getBasket: async ({ commit }, {
+        getBasket: async ({ commit, dispatch, state }, {
             url,
             tenant,
             language,
@@ -189,6 +191,7 @@ export default {
             };
 
             commit(UPDATE_BASKET_DETAILS, basketDetails);
+            dispatch('analytics/updateAutofill', state, { root: true });
         },
 
         /**
@@ -197,7 +200,7 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getAddress: async ({ commit, state }, {
+        getAddress: async ({ commit, state, dispatch }, {
             url,
             tenant,
             language,
@@ -220,6 +223,7 @@ export default {
             const addressDetails = addressService.getClosestAddress(data.Addresses, tenant);
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
+            dispatch('analytics/updateAutofill', state, { root: true });
         },
 
         /**
@@ -255,11 +259,17 @@ export default {
             commit(UPDATE_AUTH, authToken);
         },
 
-        updateAddressDetails ({ commit }, payload) {
+        updateAddressDetails ({ commit, dispatch }, payload) {
+            const [field] = Object.keys(payload);
+
+            dispatch('analytics/updateChangedField', field, { root: true });
             commit(UPDATE_FULFILMENT_ADDRESS, payload);
         },
 
-        updateCustomerDetails ({ commit }, payload) {
+        updateCustomerDetails ({ commit, dispatch }, payload) {
+            const [field] = Object.keys(payload);
+
+            dispatch('analytics/updateChangedField', field, { root: true });
             commit(UPDATE_CUSTOMER_DETAILS, payload);
         },
 
@@ -267,8 +277,9 @@ export default {
             commit(UPDATE_FULFILMENT_TIME, payload);
         },
 
-        updateUserNote ({ commit }, payload) {
+        updateUserNote ({ commit, dispatch }, payload) {
             commit(UPDATE_USER_NOTE, payload);
+            dispatch('analytics/updateChangedField', 'note', { root: true });
         }
     },
 
