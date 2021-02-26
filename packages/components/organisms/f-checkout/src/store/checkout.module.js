@@ -217,22 +217,27 @@ export default {
         },
 
         /**
-         * Get the geo details from the address and update the state.
+         * Get the geo details from the address and update the state (If not logged in then skip).
          *
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getGeoLocation: async ({ commit }, { url, postData, timeout }) => {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                timeout
-            };
+        getGeoLocation: async ({ commit, state }, { url, postData, timeout }) => {
+            if (state.isLoggedIn) {
+                const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
-            const { data } = await axios.post(url, postData, config);
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: authHeader
+                    },
+                    timeout
+                };
 
-            commit(UPDATE_GEO_LOCATION, data.geometry.coordinates);
+                const { data } = await axios.post(url, postData, config);
+
+                commit(UPDATE_GEO_LOCATION, data.geometry.coordinates);
+            }
         },
 
         setAuthToken: ({ commit }, authToken) => {
@@ -343,7 +348,10 @@ export default {
         },
 
         [UPDATE_GEO_LOCATION]: (state, [lng, lat]) => {
-            state.geolocation = { latitude: lat, longitude: lng };
+            state.geolocation = {
+                latitude: lat,
+                longitude: lng
+            };
         }
     }
 };

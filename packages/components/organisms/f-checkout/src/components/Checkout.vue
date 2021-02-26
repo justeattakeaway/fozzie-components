@@ -525,18 +525,12 @@ export default {
          *
          */
         async lookupGeoLocation () {
-            const postData = { addressLines: [] };
-            Object.keys(this.address).forEach(propName => {
-                if (this.address[propName]) {
-                    postData.addressLines.push(this.address[propName]);
-                }
-            });
-
+            const locationData = { addressLines: Object.values(this.address).filter(addressLine => !!addressLine) };
             try {
-                if (postData.addressLines.length) {
+                if (locationData.addressLines.length) {
                     await this.getGeoLocation({
                         url: this.getGeoLocationUrl,
-                        data: postData,
+                        postData: locationData,
                         timeout: this.getGeoLocationTimeout
                     });
                 }
