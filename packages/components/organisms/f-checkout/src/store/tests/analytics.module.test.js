@@ -96,7 +96,7 @@ describe('AnalyticsModule', () => {
                     expect(commit).toHaveBeenCalledWith(UPDATE_AUTOFILL, autofillFields);
                 });
 
-                it('should call `mapAnalyticsNames` with correct correct field', () => {
+                it('should call `mapAnalyticsNames` with correct field', () => {
                     // Act
                     updateAutofill({ commit }, checkoutState);
 
@@ -166,24 +166,28 @@ describe('AnalyticsModule', () => {
         });
 
         describe('trackInitialLoad ::', () => {
-            const expectedEvent = {
-                custom: {
-                    checkout: {
-                        step: 1
-                    },
-                    basket: {
-                        id: rootState.checkout.basket.id,
-                        total: rootState.checkout.basket.total
-                    },
-                    restaurant: {
-                        id: rootState.checkout.restaurantId
-                    },
-                    pageData: {
-                        name: 'Checkout 1 Guest',
-                        group: 'Checkout'
+            let expectedEvent;
+
+            beforeEach(() => {
+                expectedEvent = {
+                    custom: {
+                        checkout: {
+                            step: 1
+                        },
+                        basket: {
+                            id: rootState.checkout.basket.id,
+                            total: rootState.checkout.basket.total
+                        },
+                        restaurant: {
+                            id: rootState.checkout.restaurantId
+                        },
+                        pageData: {
+                            name: 'Checkout 1 Guest',
+                            group: 'Checkout'
+                        }
                     }
-                }
-            };
+                };
+            });
 
             it('should call `event` method of `f-trak`', () => {
                 // Act
@@ -236,25 +240,27 @@ describe('AnalyticsModule', () => {
 
         describe('trackFormInteraction ::', () => {
             let mapAnalyticsNamesSpy;
-
-            const payload = {
-                action: 'start',
-                error: null
-            };
-
-            const expectedEvent = {
-                event: 'Form',
-                custom: {
-                    form: {
-                        name: 'checkout_guest',
-                        action: payload.action,
-                        autofill: state.autofill,
-                        changes: state.changedFields
-                    }
-                }
-            };
+            let payload;
+            let expectedEvent;
 
             beforeEach(() => {
+                payload = {
+                    action: 'start',
+                    error: null
+                };
+                expectedEvent = {
+                    event: 'Form',
+                    custom: {
+                        form: {
+                            name: 'checkout_guest',
+                            action: payload.action,
+                            error: null,
+                            autofill: state.autofill,
+                            changes: state.changedFields
+                        }
+                    }
+                };
+
                 mapAnalyticsNamesSpy = jest.spyOn(mapper, 'mapAnalyticsNames');
             });
 
