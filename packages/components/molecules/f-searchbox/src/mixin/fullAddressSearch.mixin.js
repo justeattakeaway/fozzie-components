@@ -1,16 +1,16 @@
 import { mapState, mapActions } from 'vuex';
 import { extractPostcode, fullAddressLocalStorageService } from '../services/general.services';
 import { generatePostForm } from '../utils/helpers';
-import { JE_FULL_ADDRESS_DETAILS } from '../services/constants';
+import { JE_FULL_ADDRESS_DETAILS, VUEX_MODULE_NAMESPACE } from '../services/constants';
 
 export default {
-    computed: mapState('searchbox', [
+    computed: mapState(VUEX_MODULE_NAMESPACE, [
         'address',
         'savedFullAddressDetails'
     ]),
 
     methods: {
-        ...mapActions('searchbox', [
+        ...mapActions(VUEX_MODULE_NAMESPACE, [
             'setSavedFullAddressDetails'
         ]),
 

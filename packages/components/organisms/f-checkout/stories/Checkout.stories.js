@@ -3,7 +3,6 @@ import Vuex from 'vuex';
 import { select, text } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import {
-    VALID_LOCALES,
     ENGLISH_LOCALE
 } from '@justeat/storybook/constants/globalisation';
 
@@ -26,6 +25,8 @@ const getBasketDeliveryUrl = '/get-basket-delivery.json';
 const getBasketCollectionUrl = '/get-basket-collection.json';
 const updateCheckoutUrl = '/update-checkout.json';
 const getAddressUrl = '/get-address.json';
+const placeOrderUrl = '/place-order.json';
+const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
 const getGeoLocationUrl = '/get-geo-location.json';
 
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUrl);
@@ -36,6 +37,7 @@ CheckoutMock.setupCheckoutMethod(getBasketDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getBasketCollectionUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutUrl);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
+CheckoutMock.setupCheckoutMethod(placeOrderUrl);
 CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
 CheckoutMock.passThroughAny();
 
@@ -69,6 +71,12 @@ export const CheckoutComponent = () => ({
         getAddressUrl: {
             default: text('Get Address Url', getAddressUrl)
         },
+        placeOrderUrl: {
+            default: select('Place Order Url', [placeOrderUrl], placeOrderUrl)
+        },
+        paymentPageUrlPrefix: {
+            default: text('Payment Page Url Prefix', paymentPageUrlPrefix)
+        },
         getGeoLocationUrl: {
             default: text('Get Geo Location Url', getGeoLocationUrl)
         }
@@ -88,9 +96,12 @@ export const CheckoutComponent = () => ({
         ':locale="locale" ' +
         ':loginUrl="loginUrl" ' +
         ':getAddressUrl="getAddressUrl" ' +
+        ':placeOrderUrl="placeOrderUrl" ' +
+        ':paymentPageUrlPrefix="paymentPageUrlPrefix" ' +
         ':getGeoLocationUrl="getGeoLocationUrl" ' +
+        'applicationName="Storybook" ' +
         // eslint-disable-next-line no-template-curly-in-string
-        ':key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${getGeoLocationUrl}`" />'
+        ':key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';

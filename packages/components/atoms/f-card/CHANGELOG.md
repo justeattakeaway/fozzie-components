@@ -4,11 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (add to next release)
+v1.0.0
 ------------------------------
-*December 30, 2020*
+*February 22, 2021*
+
+### Removed
+- `tenant` and `theme` config, as not used in Card component.
 
 ### Changed
+- Storybook config switched over to using `controls` rather than `knobs`.
+- Reordered props (Alphabetical order).
+- Updated README.
 - Updated config for latest `sass-loader`.
 - Switches import in `common.scss` in line with fozzie v5-beta.
 

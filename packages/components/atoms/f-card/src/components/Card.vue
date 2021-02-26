@@ -1,6 +1,5 @@
 <template>
     <div
-        :data-theme-card="theme"
         data-test-id="card-component"
         :class="[
             $style['c-card'],
@@ -23,17 +22,10 @@
 </template>
 
 <script>
-import sharedServices from '@justeat/f-services';
-import tenantConfigs from '../tenants';
-
 export default {
     name: 'CardComponent',
     components: {},
     props: {
-        locale: {
-            type: String,
-            default: ''
-        },
         cardHeading: {
             type: String,
             default: ''
@@ -43,10 +35,6 @@ export default {
             default: 'left',
             validator: value => ['left', 'right', 'center'].indexOf(value) !== -1
         },
-        isRounded: {
-            type: Boolean,
-            default: false
-        },
         hasOutline: {
             type: Boolean,
             default: false
@@ -54,18 +42,10 @@ export default {
         isPageContentWrapper: {
             type: Boolean,
             default: false
-        }
-    },
-    computed: {
-        cardLocale () {
-            return sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         },
-        copy () {
-            const localeConfig = tenantConfigs[this.cardLocale];
-            return { ...localeConfig };
-        },
-        theme () {
-            return sharedServices.getTheme(this.cardLocale);
+        isRounded: {
+            type: Boolean,
+            default: false
         }
     }
 };

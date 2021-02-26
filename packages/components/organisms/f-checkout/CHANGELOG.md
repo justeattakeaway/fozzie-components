@@ -3,13 +3,31 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
-Latest (add to next release)
+v0.60.0
 ------------------------------
-*February 22, 2021*
+*February 26, 2021*
+
+### Added
+- `getGeoLocation` to call the location services api [(AddressGeocodingAPI )](https://pages.github.je-labs.com/Architecture/api_specifications/#tag/Location-Services/paths/~1geocode~1{tenant}/post) with graceful failure as tier 3 requirement.
 
 ### Changed
+- Called the api during the Submit.
+- Mapped the results into the `PATCH` Checkout request model.
+- Refactored/Added unit tests.
+
+v0.59.0
+------------------------------
+*February 24, 2021*
+
+### Added
+- `placeOrder` to call the Order Placement API.
+- Redirect to the payment page after the order has been placed.
+
+### Changed
+- Restructured component object into page object model
+- Refactored component and accessibility tests
 - Extracted svgTransform to global test utils for reference by other packages
+- How we pass the parameters to the `PATCH` Checkout request.
 
 
 v0.58.0

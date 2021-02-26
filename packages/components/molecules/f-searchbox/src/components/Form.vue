@@ -65,7 +65,7 @@ import FormFullAddressSearchSuggestions from './formElements/FormFullAddressSear
 import searchboxModule from '../store/searchbox.module';
 import { getLastLocation, normalisePostcode } from '../utils/helpers';
 import { search, selectedSuggestion } from '../services/search.services';
-import { JE_FULL_ADDRESS_DETAILS } from '../services/constants';
+import { JE_FULL_ADDRESS_DETAILS, VUEX_MODULE_NAMESPACE } from '../services/constants';
 import {
     processLocationCookie,
     onCustomSubmit,
@@ -137,7 +137,7 @@ export default {
     },
 
     computed: {
-        ...mapState('searchbox', [
+        ...mapState(VUEX_MODULE_NAMESPACE, [
             'address',
             'errors',
             'fullAddressDetails',
@@ -278,17 +278,17 @@ export default {
     },
 
     beforeCreate () {
-        if (!this.$store.hasModule('searchbox')) {
-            this.$store.registerModule('searchbox', searchboxModule);
+        if (!this.$store.hasModule(VUEX_MODULE_NAMESPACE)) {
+            this.$store.registerModule(VUEX_MODULE_NAMESPACE, searchboxModule);
         }
     },
 
     beforeDestroy () {
-        this.$store.unregisterModule('searchbox');
+        this.$store.unregisterModule(VUEX_MODULE_NAMESPACE);
     },
 
     methods: {
-        ...mapActions('searchbox', [
+        ...mapActions(VUEX_MODULE_NAMESPACE, [
             'setAddress',
             'setAutoNavigateToSerp',
             'setSuggestions',

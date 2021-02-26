@@ -16,12 +16,18 @@ const fulfilmentTimes = [
 const defaultState = {
     id: '',
     serviceType: CHECKOUT_METHOD_DELIVERY,
+    restaurantId: '',
+    basket: {
+        id: '',
+        total: 0
+    },
     customer: {
         firstName: 'John',
         lastName: 'Smith',
         email: 'john@test.com',
         mobileNumber: '+447111111111'
     },
+    orderId: 'ORDER111',
     time: {
         from: '',
         to: ''
@@ -41,7 +47,7 @@ const defaultState = {
     messages: [],
     authToken: '',
     isLoggedIn: false,
-    userNote: ''
+    userNote: 'No ketchup, please.'
 };
 
 const defaultActions = {
@@ -54,7 +60,8 @@ const defaultActions = {
     updateCustomerDetails: jest.fn(),
     updateFulfilmentTime: jest.fn(),
     getBasket: jest.fn(),
-    getAddress: jest.fn()
+    getAddress: jest.fn(),
+    placeOrder: jest.fn()
 };
 
 const i18n = {
