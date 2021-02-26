@@ -193,7 +193,7 @@ describe('AnalyticsModule', () => {
                 expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
             });
 
-            describe('when user is loggedIn is true', () => {
+            describe('when user `isLoggedIn` is true', () => {
                 it('should set `name` to `Checkout 1 Overview`', () => {
                     // Arrange
                     const expectedName = 'Checkout 1 Overview';
@@ -209,7 +209,7 @@ describe('AnalyticsModule', () => {
                 });
             });
 
-            describe('when user is loggedIn is false', () => {
+            describe('when user `isLoggedIn` is false', () => {
                 it('should set `name` to `Checkout 1 Guest`', () => {
                     // Arrange
                     const expectedName = 'Checkout 1 Guest';
@@ -310,7 +310,7 @@ describe('AnalyticsModule', () => {
                 });
             });
 
-            describe('when user is loggedIn is true', () => {
+            describe('when user `isLoggedIn` is true', () => {
                 it('should set `name` to `checkout`', () => {
                     // Arrange
                     const expectedName = 'checkout';
@@ -326,7 +326,7 @@ describe('AnalyticsModule', () => {
                 });
             });
 
-            describe('when user is loggedIn is false', () => {
+            describe('when user `isLoggedIn` is false', () => {
                 it('should set `name` to `checkout_guest`', () => {
                     // Arrange
                     const expectedName = 'checkout_guest';
