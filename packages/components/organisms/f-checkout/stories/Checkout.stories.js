@@ -43,13 +43,13 @@ export const CheckoutComponent = () => ({
     components: { VueCheckout },
     data () {
         return {
-            placeOrderUrl,
-            paymentPageUrlPrefix,
+            checkoutAvailableFulfilmentUrl,
+            createGuestUrl,
             getAddressUrl,
             loginUrl: '/login',
-            createGuestUrl,
-            updateCheckoutUrl,
-            checkoutAvailableFulfilmentUrl
+            paymentPageUrlPrefix,
+            placeOrderUrl,
+            updateCheckoutUrl
         }
     },
     props: {
