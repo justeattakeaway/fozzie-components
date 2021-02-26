@@ -1,20 +1,17 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-class Tabs extends Page {
+module.exports = class Tabs extends Page {
+    get component () { return $('[data-test-id="tabs-component"]'); }
 
-    get component () { return $('[data-test-id="tabs-component"]') }
-
-    open(){
+    open () {
         super.openComponent('molecule', 'vue-tabs-component');
     }
 
-    waitForComponent(){
+    waitForComponent () {
         super.waitForComponent(this.component);
     }
 
-    isComponentDisplayed(){
+    isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 }
-
-module.exports = Tabs;
