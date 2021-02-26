@@ -8,7 +8,7 @@ v0.60.0
 *February 26, 2021*
 
 ### Changed
-- Storybook knobs to be more easy to use.
+- Storybook knobs to be easier to use.
 
 
 v0.59.0
