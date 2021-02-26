@@ -58,7 +58,7 @@ export const CheckoutComponent = () => ({
         },
 
         serviceType: {
-            default: select('Service Type', ['Collection', 'Delivery'], 'Collection')
+            default: select('Service Type', ['Collection', 'Delivery', 'Invalid URL'], 'Collection')
         },
 
         locale: {
@@ -100,7 +100,7 @@ export const CheckoutComponent = () => ({
         ':updateCheckoutUrl="updateCheckoutUrl" ' +
         ':checkout-available-fulfilment-url="checkoutAvailableFulfilmentUrl" ' +
         ':create-guest-url="createGuestUrl" ' +
-        ':getBasketUrl="getBasketUrl" ' +
+        ':get-basket-url="getBasketUrl" ' +
         ':authToken="authToken" ' +
         ':locale="locale" ' +
         ':loginUrl="loginUrl" ' +
