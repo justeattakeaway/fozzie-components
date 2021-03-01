@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.8.0
+------------------------------
+*February 24, 2021*
+
+### Changed
+- f-button and f-vue-icons packages version bump
+- Country selector buttons updated
+- Language specified for french link for Canada in country selector
+
+
 v4.7.0
 ------------------------------
 *February 11, 2021*
