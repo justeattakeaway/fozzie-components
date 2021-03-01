@@ -129,7 +129,7 @@ The `ContentCards` component makes heavy use of slots in order to surface differ
 
 ### `loading`
 
-The `loading` slot can used by the consuming code to surface a loading state to the user before card data has
+The `loading` slot can be used by the consuming code to surface a loading state to the user before card data has
 been retrieved
 
 ### `default`
@@ -139,12 +139,12 @@ alternatively injected via the `custom-cards` prop.
 
 ### `no-cards`
 
-The `no-cards` slot can used to surface a message to the user when no cards have been received from the
+The `no-cards` slot can be used to surface a message to the user when no cards have been received from the
 cards source(s)
 
 ### `error`
 
-The `error` slot can used by the consuming code to surface a message to the user when an error has been
+The `error` slot can be used by the consuming code to surface a message to the user when an error has been
 encountered upon initialising the cards source instance
 
 
