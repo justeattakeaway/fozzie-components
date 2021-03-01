@@ -38,7 +38,9 @@
     "test": "vue-cli-service test:unit",
     "test:wait-for-server": "node ../../../../test/infrastructure/healthcheck.js",
     "webdriver:delay:chrome": "yarn test:wait-for-server && yarn webdriver:start:chrome",
-    "webdriver:start:chrome": "wdio ../../../../wdio.conf.js"
+    "webdriver:start:chrome": "wdio ../../../../wdio.conf.js", 
+    "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component", 
+    "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
   },
   "scriptsInfo": {
     "test-component:chrome": "Runs the functional test suite against Chrome.",

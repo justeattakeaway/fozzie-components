@@ -11,6 +11,17 @@ v0.60.0
 - Storybook knobs to be easier to use.
 
 
+v0.60.0
+-------------------------------
+*February 26, 2021*
+
+### Added
+- `analytics.module` to store.
+- `mapAnalyticsName` and `mapAnalyticsNames` to `mapper` service.
+- Analytics tracking to `Checkout` component.
+- Tests to cover changes.
+
+
 v0.59.0
 ------------------------------
 *February 24, 2021*

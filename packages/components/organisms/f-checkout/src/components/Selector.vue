@@ -69,6 +69,10 @@ export default {
             'updateFulfilmentTime'
         ]),
 
+        ...mapActions('analytics', [
+            'updateChangedField'
+        ]),
+
         /**
         * Update the selected available fulfilment time.
         *
@@ -76,6 +80,7 @@ export default {
         **/
         selectionChanged (selectedFulfilmentTime) {
             this.selectedAvailableFulfilmentTime = selectedFulfilmentTime;
+            this.updateChangedField('orderTime');
 
             // TODO - Update to use different from/to times when the API supports it
             this.updateFulfilmentTime({

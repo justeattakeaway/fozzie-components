@@ -1,4 +1,4 @@
-import mapUpdateCheckoutRequest from '../mapper';
+import { mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames } from '../mapper';
 
 const defaultParams = {
     address: {},
@@ -120,5 +120,54 @@ describe('checkout mapper', () => {
         // Assert
         expect(notesRequest.length).toBe(1);
         expect(notesRequest[0].note).toBe(userNote);
+    });
+});
+
+describe('mapAnalyticsName :: ', () => {
+    describe('mapAnalyticsName :: ', () => {
+        it.each([
+            ['address.line1', 'addressLine1'],
+            ['line1', 'addressLine1'],
+            ['address.line2', 'addressLine2'],
+            ['line2', 'addressLine2'],
+            ['address.city', 'addressCity'],
+            ['city', 'addressCity'],
+            ['address.postcode', 'addressPostcode'],
+            ['postcode', 'addressPostcode'],
+            ['customer.firstName', 'firstName'],
+            ['customer.lastName', 'lastName'],
+            ['customer.mobileNumber', 'phone'],
+            ['mobileNumber', 'phone'],
+            ['customer.email', 'email']
+        ])('should map the fieldname %s to the analytics value %s', (provided, expected) => {
+            // Act & Assert
+            expect(mapAnalyticsName(provided)).toEqual(expected);
+        });
+    });
+});
+
+describe('mapAnalyticsNames :: ', () => {
+    it('should correctly map an array of field names and sort alphabetically', () => {
+        // Arrange
+        const provided = [
+            'mobilePhone',
+            'address.line1',
+            'customer.firstName',
+            'lastName',
+            'customer.email',
+            'city'
+        ];
+
+        const expected = [
+            'addressCity',
+            'addressLine1',
+            'email',
+            'firstName',
+            'lastName',
+            'mobilePhone'
+        ];
+
+        // Act & Assert
+        expect(mapAnalyticsNames(provided)).toEqual(expected);
     });
 });

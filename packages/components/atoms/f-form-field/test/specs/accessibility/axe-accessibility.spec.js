@@ -1,11 +1,11 @@
 import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
-import FormFieldComponent from '../../../test-utils/component-objects/f-form-field.component';
+const FormField = require('../../../test-utils/component-objects/f-form-field.component');
+const formfield = new FormField();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-atoms--form-field-component');
-        browser.switchToFrame(0);
-        FormFieldComponent.waitForFormField();
+        formfield.open();
+        formfield.waitForComponent();
     });
 
     it('a11y - should test f-formField component WCAG compliance', () => {
