@@ -62,6 +62,7 @@ describe('Checkout', () => {
     const getAddressUrl = 'http://localhost/getaddress';
     const placeOrderUrl = 'http://localhost/placeorder';
     const paymentPageUrlPrefix = 'http://localhost/paymentpage';
+    const getGeoLocationUrl = 'http://localhost/geolocation';
 
     const applicationName = 'Jest';
 
@@ -75,6 +76,7 @@ describe('Checkout', () => {
         getAddressUrl,
         placeOrderUrl,
         paymentPageUrlPrefix,
+        getGeoLocationUrl,
         applicationName
     };
 
@@ -919,6 +921,27 @@ describe('Checkout', () => {
                     // Assert
                     expect($logger.logWarn).toHaveBeenCalled();
                 });
+
+                it('should not need to make a `getGeoLocation` call', async () => {
+                    // Arrange
+                    const getGeoLocationSpy = jest.spyOn(VueCheckout.methods, 'getGeoLocation');
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION, address: {} }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
+                    });
+                    await flushPromises();
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(getGeoLocationSpy).not.toHaveBeenCalled();
+                });
             });
 
             describe('if serviceType set to `delivery`', () => {
@@ -1083,7 +1106,6 @@ describe('Checkout', () => {
                     expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.postcode');
                 });
-
 
                 it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
                     // Arrange
@@ -1623,6 +1645,62 @@ describe('Checkout', () => {
 
                     // Assert
                     expect($logger.logError).toHaveBeenCalled();
+                });
+            });
+
+            describe('when `getAvailableFulfilment` request succeeds', () => {
+                it('should emit success event', async () => {
+                    // Arrange
+                    jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
+
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
+                    });
+
+                    // Act
+                    await wrapper.vm.loadAvailableFulfilment();
+
+                    // Assert
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess).length).toBe(1);
+                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure)).toBeUndefined();
+                });
+            });
+        });
+
+        describe('getGeoLocation ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            describe('when `getGeoLocation` request fails', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
+
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(defaultState, { ...defaultActions, getGeoLocation: jest.fn(async () => Promise.reject()) }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
+                    });
+                });
+
+                it('should call `logWarn`', async () => {
+                    // Act
+                    await wrapper.vm.getGeoLocation();
+
+                    // Assert
+                    expect($logger.logWarn).toHaveBeenCalled();
                 });
             });
 

@@ -99,7 +99,8 @@ const defaultState = {
     },
     authToken: '',
     isLoggedIn: false,
-    userNote: ''
+    userNote: '',
+    geolocation: null
 };
 
 let state = CheckoutModule.state();
