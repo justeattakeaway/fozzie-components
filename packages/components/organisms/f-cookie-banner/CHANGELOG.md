@@ -5,6 +5,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.3.0
 ------------------------------
+*March 1, 2021*
+
+### Changed
+- `shouldHideBanner` data property defaults to `true` in order to avoid flash of cookie banner after it has been dismissed.
+
+v0.3.0
+------------------------------
 *February 25, 2021*
 
 ### Changed

@@ -129,7 +129,7 @@ export default {
             config: { ...localeConfig },
             theme,
             copy,
-            shouldHideBanner: false,
+            shouldHideBanner: true,
             consentCookieName,
             legacyConsentCookieName,
             isIosBrowser: false
