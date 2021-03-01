@@ -3,9 +3,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.60.0
+v0.61.0
 ------------------------------
-*February 26, 2021*
+*March 1, 2021*
 
 ### Added
 - `getGeoLocation` to call the location services api [(AddressGeocodingAPI )](https://pages.github.je-labs.com/Architecture/api_specifications/#tag/Location-Services/paths/~1geocode~1{tenant}/post) with graceful failure as tier 3 requirement.

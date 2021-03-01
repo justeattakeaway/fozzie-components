@@ -613,9 +613,9 @@ export default {
         },
 
         /**
-        * Emit `CheckoutFailure` event with error data
-        * Update `genericErrorMessage` to display correct errorMessage for passed error
-        */
+         * Emit `CheckoutFailure` event with error data
+         * Update `genericErrorMessage` to display correct errorMessage for passed error
+         */
         handleErrorState (error) {
             let thrownErrors = error;
 
@@ -659,9 +659,9 @@ export default {
 
         /**
          * Check form is valid - no inline messages
-            * If form is valid try to call `submitCheckout`
-            * Catch and handle any errors
-            */
+         * If form is valid try to call `submitCheckout`
+         * Catch and handle any errors
+         */
         async onFormSubmit () {
             this.trackFormInteraction({ action: 'submit' });
 
@@ -692,25 +692,25 @@ export default {
         },
 
         /**
-            * Check to see if any `Vuelidate` validation errors
-            */
+         * Check to see if any `Vuelidate` validation errors
+         */
         isFormValid () {
             this.$v.$touch();
             return !this.$v.$invalid;
         },
 
         /**
-        * Use phone validation in `f-services` to check if customer number is
-        * valid in current locale
-        */
+         * Use phone validation in `f-services` to check if customer number is
+         * valid in current locale
+         */
         isValidPhoneNumber () {
             return validations.isValidPhoneNumber(this.customer.mobileNumber, this.$i18n.locale);
         },
 
         /**
-        * Use postcode validation in `f-services` to check if customer postcode is
-        * valid in current locale
-        */
+         * Use postcode validation in `f-services` to check if customer postcode is
+         * valid in current locale
+         */
         isValidPostcode () {
             return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
         },
