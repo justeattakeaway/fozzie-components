@@ -921,27 +921,6 @@ describe('Checkout', () => {
                     // Assert
                     expect($logger.logWarn).toHaveBeenCalled();
                 });
-
-                it('should not need to make a `getGeoLocation` call', async () => {
-                    // Arrange
-                    const getGeoLocationSpy = jest.spyOn(VueCheckout.methods, 'getGeoLocation');
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({ ...defaultState, serviceType: CHECKOUT_METHOD_COLLECTION, address: {} }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-                    await flushPromises();
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-
-                    // Assert
-                    expect(getGeoLocationSpy).not.toHaveBeenCalled();
-                });
             });
 
             describe('if serviceType set to `delivery`', () => {
@@ -1673,12 +1652,53 @@ describe('Checkout', () => {
             });
         });
 
-        describe('getGeoLocation ::', () => {
+        describe('lookupGeoLocation ::', () => {
             afterEach(() => {
                 jest.clearAllMocks();
             });
 
+            describe('when `getGeoLocation` request succeeds', () => {
+                // Arrange
+                let wrapper;
+                let getGeoLocationSpy;
+
+                beforeEach(async () => {
+                    jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
+
+                    getGeoLocationSpy = jest.spyOn(VueCheckout.methods, 'getGeoLocation');
+
+                    wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
+                    });
+
+                    await flushPromises();
+                });
+
+                it('then it should not call `logWarn`', async () => {
+                    // Act
+                    await wrapper.vm.lookupGeoLocation();
+
+                    // Assert
+                    expect($logger.logWarn).not.toHaveBeenCalledWith();
+                });
+
+                it('then it should call `getGeoLocation`', async () => {
+                    // Act
+                    await wrapper.vm.lookupGeoLocation();
+
+                    // Assert
+                    expect(getGeoLocationSpy).toHaveBeenCalled();
+                });
+            });
+
             describe('when `getGeoLocation` request fails', () => {
+                // Arrange
                 let wrapper;
 
                 beforeEach(() => {
@@ -1695,22 +1715,31 @@ describe('Checkout', () => {
                     });
                 });
 
-                it('should call `logWarn`', async () => {
+                it('then it should call `logWarn`', async () => {
                     // Act
-                    await wrapper.vm.getGeoLocation();
+                    await wrapper.vm.lookupGeoLocation();
 
                     // Assert
-                    expect($logger.logWarn).toHaveBeenCalled();
+                    expect($logger.logWarn).toHaveBeenCalledWith(
+                        'Geo location lookup failed',
+                        expect.anything(),
+                        expect.anything()
+                    );
                 });
             });
 
-            describe('when `getAvailableFulfilment` request succeeds', () => {
-                it('should emit success event', async () => {
-                    // Arrange
+            describe('when adddress is empty', () => {
+                // Arrange
+                let wrapper;
+                let getGeoLocationSpy;
+
+                beforeEach(async () => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
-                    const wrapper = mount(VueCheckout, {
-                        store: createStore(),
+                    getGeoLocationSpy = jest.spyOn(VueCheckout.methods, 'getGeoLocation');
+
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({ ...defaultState, address: {} }),
                         i18n,
                         localVue,
                         propsData,
@@ -1719,12 +1748,23 @@ describe('Checkout', () => {
                         }
                     });
 
+                    await flushPromises();
+                });
+
+                it('then it should not call `logWarn`', async () => {
                     // Act
-                    await wrapper.vm.loadAvailableFulfilment();
+                    await wrapper.vm.lookupGeoLocation();
 
                     // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetSuccess).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutAvailableFulfilmentGetFailure)).toBeUndefined();
+                    expect($logger.logWarn).not.toHaveBeenCalledWith();
+                });
+
+                it('then it should not call `getGeoLocation`', async () => {
+                    // Act
+                    await wrapper.vm.lookupGeoLocation();
+
+                    // Assert
+                    expect(getGeoLocationSpy).not.toHaveBeenCalled();
                 });
             });
         });
