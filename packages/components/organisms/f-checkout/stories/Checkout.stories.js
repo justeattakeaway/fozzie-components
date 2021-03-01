@@ -59,7 +59,7 @@ export const CheckoutComponent = () => ({
         },
 
         serviceType: {
-            default: select('Service Type', ['Collection', 'Delivery', 'Invalid URL'], 'Collection')
+            default: select('Service Type', ['collection', 'delivery', 'Invalid URL'], 'collection')
         },
 
         locale: {
@@ -68,9 +68,9 @@ export const CheckoutComponent = () => ({
     },
     computed: {
         getCheckoutUrl () {
-            if (this.serviceType === 'Collection') {
+            if (this.serviceType === 'collection') {
                 return getCheckoutCollectionUrl;
-            } else if (this.serviceType === 'Delivery') {
+            } else if (this.serviceType === 'delivery') {
                 return getCheckoutDeliveryUrl;
             } else {
                 return 'An invalid URL';
@@ -78,9 +78,9 @@ export const CheckoutComponent = () => ({
         },
 
         getBasketUrl () {
-            if (this.serviceType === 'Collection') {
+            if (this.serviceType === 'collection') {
                 return getBasketCollectionUrl;
-            } else if (this.serviceType === 'Delivery') {
+            } else if (this.serviceType === 'delivery') {
                 return getBasketDeliveryUrl;
             } else {
                 return 'An invalid URL';
