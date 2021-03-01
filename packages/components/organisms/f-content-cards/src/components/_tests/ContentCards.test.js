@@ -10,6 +10,13 @@ import ContentCards, {
     STATE_ERROR,
     STATE_LOADING
 } from '../ContentCards';
+import {
+    GET_CARD_COUNT,
+    HAS_LOADED,
+    ON_ERROR,
+    ON_METADATA_INIT,
+    VOUCHER_CODE_CLICK
+} from '../../events';
 
 jest.mock('@justeat/f-braze-adapter');
 
@@ -108,11 +115,11 @@ describe('ContentCards', () => {
             await instance.vm.$nextTick();
         });
 
-        it('should emit an "on-error" event', () => {
+        it(`should emit an "${ON_ERROR}" event`, () => {
             // Assert
-            expect(instance.emitted()['on-error']).toBeTruthy();
-            expect(instance.emitted()['on-error'].length).toBe(1);
-            expect(instance.emitted()['on-error'][0]).toEqual([error]);
+            expect(instance.emitted()[ON_ERROR]).toBeTruthy();
+            expect(instance.emitted()[ON_ERROR].length).toBe(1);
+            expect(instance.emitted()[ON_ERROR][0]).toEqual([error]);
         });
 
         it('should display the "error" slot', () => {
@@ -200,9 +207,9 @@ describe('ContentCards', () => {
                 });
             });
 
-            it('should not emit a "has-loaded" event', () => {
+            it(`should not emit a "${HAS_LOADED}" event`, () => {
                 // Assert
-                expect(instance.emitted()['has-loaded']).toBeFalsy();
+                expect(instance.emitted()[HAS_LOADED]).toBeFalsy();
             });
 
             it('should display the "loading" slot', () => {
@@ -230,10 +237,10 @@ describe('ContentCards', () => {
                 await instance.vm.$nextTick();
             });
 
-            it('should emit a "get-card-count" event with `0` as payload', () => {
+            it(`should emit a "${GET_CARD_COUNT}" event with \`0\` as payload`, () => {
                 // Assert
-                expect(instance.emitted()['get-card-count']).toBeTruthy();
-                expect(instance.emitted()['get-card-count'][0][0]).toBe(0);
+                expect(instance.emitted()[GET_CARD_COUNT]).toBeTruthy();
+                expect(instance.emitted()[GET_CARD_COUNT][0][0]).toBe(0);
             });
 
             it('should display the "no-cards" slot', () => {
@@ -263,9 +270,9 @@ describe('ContentCards', () => {
                 await instance.vm.$nextTick();
             });
 
-            it('should emit a "has-loaded" event', () => {
+            it(`should emit a "${HAS_LOADED}" event`, () => {
                 // Assert
-                expect(instance.emitted()['has-loaded']).toBeTruthy();
+                expect(instance.emitted()[HAS_LOADED]).toBeTruthy();
             });
 
             it('should display the "default" slot', () => {
@@ -561,9 +568,9 @@ describe('ContentCards', () => {
                 instance.find('[data-promotion-card="true"]').vm.emitVoucherCodeClick(url);
 
                 // Assert
-                expect(instance.emitted()['voucher-code-click']).toBeTruthy();
-                expect(instance.emitted()['voucher-code-click'].length).toBe(1);
-                expect(instance.emitted()['voucher-code-click'][0]).toEqual([{
+                expect(instance.emitted()[VOUCHER_CODE_CLICK]).toBeTruthy();
+                expect(instance.emitted()[VOUCHER_CODE_CLICK].length).toBe(1);
+                expect(instance.emitted()[VOUCHER_CODE_CLICK][0]).toEqual([{
                     url
                 }]);
             });
@@ -599,15 +606,15 @@ describe('ContentCards', () => {
             const appboy = '__APPBOY__';
             window.appboy = appboy;
 
-            await testEmitter('on-metadata-init', appboy);
+            await testEmitter(ON_METADATA_INIT, appboy);
         });
 
         it('should emit an event containing the content card count when appboy is initialised', async () => {
-            await testEmitter('get-card-count', 1);
+            await testEmitter(GET_CARD_COUNT, 1);
         });
 
         it('should emit an event containing the loading status when appboy is initialised', async () => {
-            await testEmitter('has-loaded', true);
+            await testEmitter(HAS_LOADED, true);
         });
     });
 

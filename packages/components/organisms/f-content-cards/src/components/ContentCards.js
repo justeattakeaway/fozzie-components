@@ -1,6 +1,13 @@
 import initialiseMetadataDispatcher from '@justeat/f-braze-adapter';
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
+import {
+    GET_CARD_COUNT,
+    HAS_LOADED,
+    ON_ERROR,
+    ON_METADATA_INIT,
+    VOUCHER_CODE_CLICK
+} from '../events';
 
 export const CARDSOURCE_METADATA = 'metadata';
 export const CARDSOURCE_CUSTOM = 'custom';
@@ -122,7 +129,7 @@ export default {
          * @param {Card[]} previous
          **/
         cards (current, previous) {
-            this.$emit('get-card-count', current.length);
+            this.$emit(GET_CARD_COUNT, current.length);
 
             if (current.length && (current.length !== previous.length)) {
                 this.metadataDispatcher.logCardImpressions(this.cards.map(({ id }) => id));
@@ -149,7 +156,7 @@ export default {
          **/
         hasLoaded (current, previous) {
             if (current && !previous) {
-                this.$emit('has-loaded', true);
+                this.$emit(HAS_LOADED, true);
             }
         }
     },
@@ -184,7 +191,7 @@ export default {
              * Emits voucher code click event with given ongoing url
              **/
             emitVoucherCodeClick (url) {
-                component.$emit('voucher-code-click', {
+                component.$emit(VOUCHER_CODE_CLICK, {
                     url
                 });
             },
@@ -233,7 +240,7 @@ export default {
                 })
                 .catch(error => {
                     this.state = STATE_ERROR;
-                    this.$emit('on-error', error);
+                    this.$emit(ON_ERROR, error);
                 });
         },
         /**
@@ -268,8 +275,8 @@ export default {
             this.contentCards({
                 source: CARDSOURCE_METADATA,
                 successCallback: () => {
-                    this.$emit('on-braze-init', window.appboy); // for backward compatibility
-                    this.$emit('on-metadata-init', window.appboy);
+                    this.$emit('on-braze-init', window.appboy); // deprecated -- for backward compatibility
+                    this.$emit(ON_METADATA_INIT, window.appboy);
                 }
             }, cards);
         },
