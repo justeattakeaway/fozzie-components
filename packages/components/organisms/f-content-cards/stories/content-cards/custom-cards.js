@@ -48,30 +48,30 @@ export default function ContentCardsCustom (args, { argTypes }) {
         beforeCreate: zeroCardsMockSetup,
 
         template: `
-<content-cards
-    @on-braze-init="onBrazeInit"
-    @get-card-count="getCardCount"
-    @has-loaded="hasLoaded"
-    @on-error="onError"
-    :user-id="userId"
-    :api-key="apiKey"
-    :locale="locale"
-    :custom-cards="customCards"
-    :key="locale"
->
-    <template #${STATE_DEFAULT}="{ cards }">
-        <blockquote>
-            Note that this is demo injected content for the purposes of storybook
-        </blockquote>
-        <component
-            v-for="(card, i) in cards"
-            :is="handleCustomCardType(card.type)"
-            :key="i"
-            :card="card"
-            :tenant="tenant"
-        />
-    </template>
-</content-cards>`
+            <content-cards
+                @on-braze-init="onBrazeInit"
+                @get-card-count="getCardCount"
+                @has-loaded="hasLoaded"
+                @on-error="onError"
+                :user-id="userId"
+                :api-key="apiKey"
+                :locale="locale"
+                :custom-cards="customCards"
+                :key="locale"
+            >
+                <template #${STATE_DEFAULT}="{ cards }">
+                    <blockquote>
+                        Note that this is demo injected content for the purposes of storybook
+                    </blockquote>
+                    <component
+                        v-for="(card, i) in cards"
+                        :is="handleCustomCardType(card.type)"
+                        :key="i"
+                        :card="card"
+                        :tenant="tenant"
+                    />
+                </template>
+            </content-cards>`
     };
 }
 

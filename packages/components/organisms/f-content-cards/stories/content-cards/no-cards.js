@@ -19,24 +19,24 @@ export default function ContentCardsNoCards (args, { argTypes }) {
         beforeCreate: zeroCardsMockSetup,
 
         template: `
-<content-cards
-    @on-braze-init="onBrazeInit"
-    @get-card-count="getCardCount"
-    @has-loaded="hasLoaded"
-    @on-error="onError"
-    :user-id="userId"
-    :api-key="apiKey"
-    :locale="locale"
-    :custom-cards="customCards"
-    :key="locale"
->
-    <template #${STATE_NO_CARDS}="{ status }">
-        <blockquote>
-            Note that this is demo injected content for the purposes of storybook
-        </blockquote>
-        NO CARDS
-    </template>
-</content-cards>`
+            <content-cards
+                @on-braze-init="onBrazeInit"
+                @get-card-count="getCardCount"
+                @has-loaded="hasLoaded"
+                @on-error="onError"
+                :user-id="userId"
+                :api-key="apiKey"
+                :locale="locale"
+                :custom-cards="customCards"
+                :key="locale"
+            >
+                <template #${STATE_NO_CARDS}="{ status }">
+                    <blockquote>
+                        Note that this is demo injected content for the purposes of storybook
+                    </blockquote>
+                    NO CARDS
+                </template>
+            </content-cards>`
     };
 }
 
