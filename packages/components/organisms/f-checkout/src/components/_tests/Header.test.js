@@ -3,7 +3,7 @@ import { VueI18n } from '@justeat/f-globalisation';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Header from '../Header.vue';
 import {
-    i18n, defaultState, createStore, $logger
+    i18n, defaultCheckoutState, createStore, $logger
 } from './helpers/setup';
 import { CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY } from '../../constants';
 import EventNames from '../../event-names';
@@ -40,7 +40,7 @@ describe('Header', () => {
 
                 beforeEach(() => {
                     wrapper = shallowMount(Header, {
-                        store: createStore({ ...defaultState, isLoggedIn: true }),
+                        store: createStore({ ...defaultCheckoutState, isLoggedIn: true }),
                         i18n,
                         localVue,
                         propsData
@@ -61,7 +61,7 @@ describe('Header', () => {
 
                     // Assert
                     expect(loginLink).toBeDefined();
-                    expect(loginLink.text()).toBe(`Not ${defaultState.customer.firstName}? Click here`);
+                    expect(loginLink.text()).toBe(`Not ${defaultCheckoutState.customer.firstName}? Click here`);
                 });
             });
 
@@ -70,7 +70,7 @@ describe('Header', () => {
 
                 beforeEach(() => {
                     wrapper = shallowMount(Header, {
-                        store: createStore({ ...defaultState, isLoggedIn: false }),
+                        store: createStore({ ...defaultCheckoutState, isLoggedIn: false }),
                         i18n,
                         localVue,
                         propsData
@@ -100,9 +100,9 @@ describe('Header', () => {
                 // Act
                 const wrapper = shallowMount(Header, {
                     store: createStore({
-                        ...defaultState,
+                        ...defaultCheckoutState,
                         customer: {
-                            ...defaultState.customer,
+                            ...defaultCheckoutState.customer,
                             firstName: 'joe'
                         }
                     }),
@@ -126,7 +126,7 @@ describe('Header', () => {
                 // Arrange
                 const wrapper = shallowMount(Header, {
                     store: createStore({
-                        ...defaultState,
+                        ...defaultCheckoutState,
                         isLoggedIn: false,
                         serviceType
                     }),
@@ -150,7 +150,7 @@ describe('Header', () => {
             it('should emit the `VisitLoginPage` event and call `logInfo` when switch user link is clicked.', () => {
                 // Arrange
                 const wrapper = shallowMount(Header, {
-                    store: createStore({ ...defaultState, isLoggedIn: true }),
+                    store: createStore({ ...defaultCheckoutState, isLoggedIn: true }),
                     i18n,
                     localVue,
                     propsData,
@@ -171,7 +171,7 @@ describe('Header', () => {
             it('should emit the `VisitLoginPage` event when guest login button is clicked.', () => {
                 // Arrange
                 const wrapper = shallowMount(Header, {
-                    store: createStore({ ...defaultState, isLoggedIn: false }),
+                    store: createStore({ ...defaultCheckoutState, isLoggedIn: false }),
                     i18n,
                     localVue,
                     propsData,

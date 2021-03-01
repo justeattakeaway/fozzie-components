@@ -50,4 +50,37 @@ const mapUpdateCheckoutRequest = ({
     }
 ]);
 
-export default mapUpdateCheckoutRequest;
+/**
+ * Maps checkout names to required GA names.
+ *
+ * Keys -`checkout` names.
+ * Values - required analytics names.
+ */
+const analyticFieldNameMapper = {
+    'address.line1': 'addressLine1',
+    line1: 'addressLine1',
+    'address.line2': 'addressLine2',
+    line2: 'addressLine2',
+    'address.city': 'addressCity',
+    city: 'addressCity',
+    'address.postcode': 'addressPostcode',
+    postcode: 'addressPostcode',
+    'customer.firstName': 'firstName',
+    'customer.lastName': 'lastName',
+    'customer.mobileNumber': 'phone',
+    mobileNumber: 'phone',
+    'customer.email': 'email'
+};
+
+/**
+ * Updates passed field name to match the expected analytics name requirements.
+ */
+const mapAnalyticsName = field => (analyticFieldNameMapper[field] || field);
+
+/**
+ * Updates passed field names to match the expected analytics name requirements.
+ * When fields have been mapped, sorts the array alphabetically.
+ */
+const mapAnalyticsNames = fields => fields.map(mapAnalyticsName).sort();
+
+export { mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames };

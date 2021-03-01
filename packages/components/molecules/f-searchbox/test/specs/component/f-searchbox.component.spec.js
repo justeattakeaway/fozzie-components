@@ -1,14 +1,14 @@
-import SearchboxComponent from '../../../test-utils/component-objects/f-searchbox.component';
+const Searchbox = require('../../../test-utils/component-objects/f-searchbox.component');
+const searchbox = new Searchbox();
 
 describe('f-searchbox component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-molecules--vue-searchbox-component');
-        browser.switchToFrame(0);
-        SearchboxComponent.waitForSearchboxComponent();
+        searchbox.open();
+        searchbox.waitForComponent();
     });
 
     it.skip('should display the f-searchbox component', () => {
         // Assert
-        expect(SearchboxComponent.isSearchboxComponentDisplayed()).toBe(true);
+        expect(searchbox.isComponentDisplayed()).toBe(true);
     });
 });

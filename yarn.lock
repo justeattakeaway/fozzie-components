@@ -1917,11 +1917,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.5.0.tgz#3a2b680b6729c6af8107dbf0a8a35fcf0b51c392"
   integrity sha512-UTTgcb5IbHIn0k89aO2o4XGu+bFzFKoOAQTTdm63Ew4sgZ0uVQvS+c5A5HsLlmoo5l0iCDyNRCysti1POLUdqg==
 
-"@justeat/f-button@0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.6.1.tgz#433c386f55b8bfbe701ab8ab7b3eeb90f5ec3187"
-  integrity sha512-PspRXVxm2MwvT7jqnwZqQmHRZjEtQH8nnAXcLApIqFLnpKs8aYG2SEqYC43nxh2wPAZjxzHSyh5wY/TTZG1y0w==
-
 "@justeat/f-button@0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.7.0.tgz#cb4afe9e8773385e5ad84b50f51de90a8020ce69"
@@ -1940,6 +1935,13 @@
   integrity sha512-e1/BbN3UpeD/rnN8BBCd5a0QBuvEFenONz9bOQttvX8HzwWuZnhS2Lx/bhKICFvFtaGjHm9AuOoZ36FBdvKG+Q==
   dependencies:
     "@justeat/f-services" "0.13.0"
+
+"@justeat/f-dom@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
+  integrity sha512-NalPlKTMQjAgbRa90gGqNc0Ddgu2nCDWbwj/XnrT6YQOZSAP/TRW+WcgheB9Tmptz5sPg/boZOjSaMR/1ms4dQ==
+  dependencies:
+    qwery "^4.0.0"
 
 "@justeat/f-dom@1.1.0":
   version "1.1.0"
@@ -2043,6 +2045,13 @@
   dependencies:
     lodash-es "4.17.15"
     window-or-global "1.0.1"
+
+"@justeat/f-trak@0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-trak/-/f-trak-0.7.1.tgz#0ea1650e3a8749e1f8333b4eb72546339ce980be"
+  integrity sha512-6XpaZPZWNjDkh7EJBFHL43ab5ExjVoQ4kU2bMJWVldUKoo+7DrcEpktkhkQT8D0IYiNfXKn82mGpqB8v2eDvFw==
+  dependencies:
+    "@justeat/f-dom" "0.4.0"
 
 "@justeat/f-utils@1.1.0":
   version "1.1.0"
@@ -8884,7 +8893,7 @@ date-fns@2.16.1:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.16.1.tgz#05775792c3f3331da812af253e1a935851d3834b"
   integrity sha512-sAJVKx/FqrLYHAQeN7VpJrPhagZc9R4ImZIWYRFZaaohR3KzmuK88touwsSwSVT8Qcbd4zoDsnGfX4GFB4imyQ==
 
-date-fns@^2.17.0:
+date-fns@2.17.0:
   version "2.17.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.17.0.tgz#afa55daea539239db0a64e236ce716ef3d681ba1"
   integrity sha512-ZEhqxUtEZeGgg9eHNSOAJ8O9xqSgiJdrL0lzSSfMF54x6KXWJiOH/xntSJ9YomJPrYH/p08t6gWjGWq1SDJlSA==
@@ -19081,7 +19090,7 @@ quick-lru@^5.1.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-5.1.1.tgz#366493e6b3e42a3a6885e2e99d18f80fb7a8c932"
   integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
 
-qwery@4.0.0:
+qwery@4.0.0, qwery@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/qwery/-/qwery-4.0.0.tgz#7d21e3b4f7e9eed7e68728f4dab4de8b7303febe"
   integrity sha1-fSHjtPfp7tfmhyj02rTei3MD/r4=

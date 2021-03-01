@@ -1,11 +1,11 @@
-import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
-import ButtonComponent from '../../../test-utils/component-objects/f-button.component';
+const { getAccessibilityTestResults } = require('../../../../../../../test/utils/axe-helper');
+const Button = require('../../../test-utils/component-objects/f-button.component');
+const button = new Button();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-atoms--button-component');
-        browser.switchToFrame(0);
-        ButtonComponent.waitForButtonComponent();
+        button.open();
+        button.waitForComponent();
     });
 
     it('a11y - should test f-button component WCAG compliance', () => {
