@@ -22,7 +22,7 @@ exports.local = () => ({
 
 exports.ci = () => ({
     bail: 1,
-    maxinstances: process.env.WDIO_MAX_INSTANCES || 2,
+    maxinstances: parseInt(process.env.WDIO_MAX_INSTANCES) || 2,
     loglevel: process.env.WDIO_LOG_LEVEL || 'info',
     reporters: [
         [video, {
