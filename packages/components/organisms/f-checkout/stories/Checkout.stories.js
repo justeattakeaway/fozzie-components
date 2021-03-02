@@ -76,13 +76,12 @@ export const CheckoutComponent = () => ({
         getBasketUrl () {
             return `/get-basket-${this.serviceType}.json`;
         },
-        paymentPageUrlPrefix: {
-            default: text('Payment Page Url Prefix', paymentPageUrlPrefix)
+
+        authToken () {
+            return this.isLoggedIn ? 'Auth Token' : '';
         },
         getGeoLocationUrl: {
             default: text('Get Geo Location Url', getGeoLocationUrl)
-        authToken () {
-            return this.isLoggedIn ? 'Auth Token' : '';
         }
     },
     store: new Vuex.Store({
@@ -103,10 +102,10 @@ export const CheckoutComponent = () => ({
         ':getAddressUrl="getAddressUrl" ' +
         ':placeOrderUrl="placeOrderUrl" ' +
         ':paymentPageUrlPrefix="paymentPageUrlPrefix" ' +
-        ':getGeoLocationUrl="getGeoLocationUrl" ' +
         'applicationName="Storybook" ' +
+        ':getGeoLocationUrl="getGeoLocationUrl" ' +
         // eslint-disable-next-line no-template-curly-in-string
-        ':key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl}`" />'
+        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';
