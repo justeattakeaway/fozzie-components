@@ -139,6 +139,11 @@ export default {
                     gtm: 'click_about_privacy_policy'
                 },
                 {
+                    url: '/informazioni/codice-etico/',
+                    text: 'Codice Etico',
+                    gtm: 'click_about_ethical-code'
+                },
+                {
                     url: '/informazioni/termini-e-condizioni',
                     text: 'Termini e Condizioni',
                     gtm: 'click_about_tandcs'
