@@ -52,8 +52,9 @@ export const CheckoutComponent = () => ({
             loginUrl: '/login',
             paymentPageUrlPrefix,
             placeOrderUrl,
-            updateCheckoutUrl
-        }
+            updateCheckoutUrl,
+            getGeoLocationUrl
+        };
     },
     props: {
         isLoggedIn: {
