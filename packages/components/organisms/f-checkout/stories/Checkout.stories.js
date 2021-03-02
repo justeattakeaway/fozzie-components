@@ -18,12 +18,8 @@ export default {
 
 Vue.use(Vuex);
 
-const getCheckoutDeliveryUrl = '/checkout-delivery.json';
-const getCheckoutCollectionUrl = '/checkout-collection.json';
 const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
 const createGuestUrl = '/create-guest.json';
-const getBasketDeliveryUrl = '/get-basket-delivery.json';
-const getBasketCollectionUrl = '/get-basket-collection.json';
 const updateCheckoutUrl = '/update-checkout.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
@@ -59,7 +55,7 @@ export const CheckoutComponent = () => ({
         },
 
         serviceType: {
-            default: select('Service Type', ['collection', 'delivery', 'Invalid URL'], 'collection')
+            default: select('Service Type', ['collection', 'delivery', 'Invalid URL'], 'delivery')
         },
 
         locale: {
@@ -68,27 +64,15 @@ export const CheckoutComponent = () => ({
     },
     computed: {
         getCheckoutUrl () {
-            if (this.serviceType === 'collection') {
-                return getCheckoutCollectionUrl;
-            } else if (this.serviceType === 'delivery') {
-                return getCheckoutDeliveryUrl;
-            } else {
-                return 'An invalid URL';
-            }
+            return `/checkout-${this.serviceType}.json`;
         },
 
         getBasketUrl () {
-            if (this.serviceType === 'collection') {
-                return getBasketCollectionUrl;
-            } else if (this.serviceType === 'delivery') {
-                return getBasketDeliveryUrl;
-            } else {
-                return 'An invalid URL';
-            }
+            return `/get-basket-${serviceType}.json`;
         },
 
         authToken () {
-            return this.isLoggedIn ? 'Auth Token' : ''
+            return this.isLoggedIn ? 'Auth Token' : '';
         }
     },
     store: new Vuex.Store({
