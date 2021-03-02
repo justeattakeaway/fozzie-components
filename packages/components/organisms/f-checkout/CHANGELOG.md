@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.61.0
 ------------------------------
-*March 1, 2021*
+*March 2, 2021*
 
 ### Added
 - `getGeoLocation` to call the location services api [(AddressGeocodingAPI )](https://pages.github.je-labs.com/Architecture/api_specifications/#tag/Location-Services/paths/~1geocode~1{tenant}/post) with graceful failure as tier 3 requirement.
@@ -14,6 +14,14 @@ v0.61.0
 - Called the api during the Submit.
 - Mapped the results into the `PATCH` Checkout request model.
 - Refactored/Added unit tests.
+
+Latest (add to next release)
+------------------------------
+*March 2, 2021*
+
+### Changed
+- Storybook knobs to be easier to use.
+- `open` function for component tests to match changes.
 
 v0.60.0
 -------------------------------

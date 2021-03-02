@@ -1,9 +1,21 @@
 import initialiseMetadataDispatcher from '@justeat/f-braze-adapter';
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
+import {
+    GET_CARD_COUNT,
+    HAS_LOADED,
+    ON_ERROR,
+    ON_METADATA_INIT,
+    VOUCHER_CODE_CLICK
+} from '../events';
 
 export const CARDSOURCE_METADATA = 'metadata';
 export const CARDSOURCE_CUSTOM = 'custom';
+
+export const STATE_DEFAULT = 'default';
+export const STATE_ERROR = 'error';
+export const STATE_NO_CARDS = 'no-cards';
+export const STATE_LOADING = 'loading';
 
 /**
  * Generates card-specific analytics data suitable for sending back to GTM via f-trak
@@ -81,11 +93,16 @@ export default {
         locale: {
             type: String,
             default: ''
+        },
+        testId: {
+            type: String,
+            default: null
         }
     },
     data: () => ({
         cards: [],
-        hasLoaded: false
+        hasLoaded: false,
+        state: STATE_LOADING
     }),
     computed: {
         /**
@@ -112,15 +129,26 @@ export default {
          * @param {Card[]} previous
          **/
         cards (current, previous) {
-            this.$emit('get-card-count', current.length);
+            this.$emit(GET_CARD_COUNT, current.length);
 
             if (current.length && (current.length !== previous.length)) {
                 this.metadataDispatcher.logCardImpressions(this.cards.map(({ id }) => id));
             }
             if ((current.length > 0) && (previous.length === 0)) {
+                this.state = STATE_DEFAULT;
                 this.hasLoaded = true;
             }
+            if (current.length === 0) {
+                this.state = STATE_NO_CARDS;
+            }
         },
+
+        customCards (current) {
+            if (!this.cards.length && current.length) {
+                this.customContentCards(current);
+            }
+        },
+
         /**
          * Monitors the loaded flag to emit the has-loaded event if necessary
          * @param {Boolean} current
@@ -128,7 +156,7 @@ export default {
          **/
         hasLoaded (current, previous) {
             if (current && !previous) {
-                this.$emit('has-loaded', true);
+                this.$emit(HAS_LOADED, true);
             }
         }
     },
@@ -163,7 +191,7 @@ export default {
              * Emits voucher code click event with given ongoing url
              **/
             emitVoucherCodeClick (url) {
-                component.$emit('voucherCodeClick', {
+                component.$emit(VOUCHER_CODE_CLICK, {
                     url
                 });
             },
@@ -211,7 +239,8 @@ export default {
                     this.metadataDispatcher = dispatcher;
                 })
                 .catch(error => {
-                    this.$emit('on-error', error);
+                    this.state = STATE_ERROR;
+                    this.$emit(ON_ERROR, error);
                 });
         },
         /**
@@ -231,10 +260,8 @@ export default {
                 return failCallback();
             }
 
-            if (cards.length > 0) {
+            if (!(source === CARDSOURCE_METADATA && this.cards.length !== 0)) {
                 this.cards = cards.map(card => Object.assign(card, { source }));
-            } else {
-                this.cards = [...this.customCards];
             }
 
             return successCallback();
@@ -248,11 +275,22 @@ export default {
             this.contentCards({
                 source: CARDSOURCE_METADATA,
                 successCallback: () => {
-                    this.$emit('on-braze-init', window.appboy); // for backward compatibility
-                    this.$emit('on-metadata-init', window.appboy);
+                    this.$emit('on-braze-init', window.appboy); // deprecated -- for backward compatibility
+                    this.$emit(ON_METADATA_INIT, window.appboy);
                 }
             }, cards);
         },
+
+        /**
+         * Handles custom card ingestion
+         * @param {Card[]} cards
+         **/
+        customContentCards (cards) {
+            this.contentCards({
+                source: CARDSOURCE_CUSTOM
+            }, cards);
+        },
+
         /**
          * Takes appropriate response for click event for given card object based on its source
          * @param card
@@ -336,9 +374,27 @@ export default {
             };
         }
     },
-    render () {
-        return this.$scopedSlots.default({
-            cards: this.cards
-        });
+
+    /**
+     * Render function for the component - chooses one slot based on the current state
+     * @param h - conventional shorthand for createElement - see
+     *            https://vuejs.org/v2/guide/render-function.html#JSX
+     * @return {VNode}
+     */
+    render (h) {
+        return this.$scopedSlots[this.state]
+            ? h(
+                'div',
+                {
+                    class: `c-contentCards-${this.state}`,
+                    attrs: {
+                        'data-test-id': this.testId
+                    }
+                },
+                this.$scopedSlots[this.state]({
+                    cards: this.cards
+                })
+            )
+            : h('');
     }
 };

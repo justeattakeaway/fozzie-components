@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { select, text } from '@storybook/addon-knobs';
+import { select, boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import {
     ENGLISH_LOCALE
@@ -44,42 +44,45 @@ CheckoutMock.passThroughAny();
 
 export const CheckoutComponent = () => ({
     components: { VueCheckout },
+    data () {
+        return {
+            checkoutAvailableFulfilmentUrl,
+            createGuestUrl,
+            getAddressUrl,
+            loginUrl: '/login',
+            paymentPageUrlPrefix,
+            placeOrderUrl,
+            updateCheckoutUrl
+        }
+    },
     props: {
+        isLoggedIn: {
+            default: boolean('Is User Logged In', false)
+        },
+
+        serviceType: {
+            default: select('Service Type', ['collection', 'delivery', 'invalid-url'], 'delivery')
+        },
+
         locale: {
             default: select('Locale', [ENGLISH_LOCALE])
+        }
+    },
+    computed: {
+        getCheckoutUrl () {
+            return `/checkout-${this.serviceType}.json`;
         },
-        updateCheckoutUrl: {
-            default: select('Update Checkout Url', [updateCheckoutUrl], updateCheckoutUrl)
-        },
-        getCheckoutUrl: {
-            default: select('Get Checkout Url', [getCheckoutDeliveryUrl, getCheckoutCollectionUrl, 'An invalid URL'], getCheckoutDeliveryUrl)
-        },
-        checkoutAvailableFulfilmentUrl: {
-            default: select('Available Fulfilment Url', [checkoutAvailableFulfilmentUrl], checkoutAvailableFulfilmentUrl)
-        },
-        createGuestUrl: {
-            default: text('Create Guest Url', createGuestUrl)
-        },
-        getBasketUrl: {
-            default: select('Get Basket Url', [getBasketDeliveryUrl, getBasketCollectionUrl], getBasketDeliveryUrl)
-        },
-        authToken: {
-            default: text('Auth token', '')
-        },
-        loginUrl: {
-            default: text('Login Url', '/login')
-        },
-        getAddressUrl: {
-            default: text('Get Address Url', getAddressUrl)
-        },
-        placeOrderUrl: {
-            default: select('Place Order Url', [placeOrderUrl], placeOrderUrl)
+
+        getBasketUrl () {
+            return `/get-basket-${this.serviceType}.json`;
         },
         paymentPageUrlPrefix: {
             default: text('Payment Page Url Prefix', paymentPageUrlPrefix)
         },
         getGeoLocationUrl: {
             default: text('Get Geo Location Url', getGeoLocationUrl)
+        authToken () {
+            return this.isLoggedIn ? 'Auth Token' : '';
         }
     },
     store: new Vuex.Store({

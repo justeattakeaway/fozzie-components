@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.3.1
+------------------------------
+*March 2, 2021*
+
+### Fixed
+- `shouldHideBanner` data property defaults to `true` in order to avoid flash of cookie banner after it has been dismissed.
+
 v0.3.0
 ------------------------------
 *February 25, 2021*

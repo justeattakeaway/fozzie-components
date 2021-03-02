@@ -1,13 +1,28 @@
 /* eslint indent: ["error", 4, {ignoredNodes: ["TemplateLiteral > *"]}] */
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import Vue from 'vue';
 import initialiseMetadata from '@justeat/f-braze-adapter';
-import ContentCards, { CARDSOURCE_METADATA, CARDSOURCE_CUSTOM } from '../ContentCards';
+import ContentCards, {
+    CARDSOURCE_METADATA,
+    CARDSOURCE_CUSTOM,
+    STATE_NO_CARDS,
+    STATE_DEFAULT,
+    STATE_ERROR,
+    STATE_LOADING
+} from '../ContentCards';
+import {
+    GET_CARD_COUNT,
+    HAS_LOADED,
+    ON_ERROR,
+    ON_METADATA_INIT,
+    VOUCHER_CODE_CLICK
+} from '../../events';
 
 jest.mock('@justeat/f-braze-adapter');
 
 const apiKey = '__API_KEY__';
 const userId = '__USER_ID__';
+const testId = '__TEST_ID__';
 
 const url = '__URL__';
 const button = '__BUTTON__';
@@ -38,6 +53,17 @@ const createCard = type => ({
 
 const createMetadataCards = cardTypes => cardTypes.map(type => createCard(type));
 
+const scopedSlots = {
+    [STATE_NO_CARDS]: `<div data-test-id="slot-${STATE_NO_CARDS}"/>`,
+    [STATE_DEFAULT]: `
+        <div data-test-id="slot-${STATE_NO_CARDS}" slot-scope="{ cards }">
+            <div :data-test-id="card.type" v-for="card in cards"></div>
+        </div>
+    `,
+    [STATE_ERROR]: `<div data-test-id="slot-${STATE_ERROR}"/>`,
+    [STATE_LOADING]: `<div data-test-id="slot-${STATE_LOADING}"/>`
+};
+
 beforeEach(() => {
     jest.resetAllMocks();
     initialiseMetadata.mockResolvedValue(metadataDispatcher);
@@ -65,28 +91,41 @@ describe('ContentCards', () => {
         expect(settings.enableLogging).toBe(false);
     });
 
-    it('should handle rejections from the promise returned by intitialiseMetadata by emitting an onError event', async () => {
-        // Arrange
-        initialiseMetadata.mockReset();
+
+
+    describe('when a rejection from the promise returned by intitialiseMetadata has been encountered during loading', () => {
         const error = new Error('foo');
-        initialiseMetadata.mockRejectedValue(error);
+        let instance;
 
-        // Act
-        const instance = shallowMount(ContentCards, {
-            propsData: {
-                apiKey,
-                userId
-            },
-            scopedSlots: {
-                default: '<div></div>'
-            }
+        beforeEach(async () => {
+            // Arrange
+            initialiseMetadata.mockReset();
+            initialiseMetadata.mockRejectedValue(error);
+
+            // Act
+            instance = shallowMount(ContentCards, {
+                propsData: {
+                    apiKey,
+                    userId
+                },
+                scopedSlots: {
+                    default: '<div></div>'
+                }
+            });
+            await instance.vm.$nextTick();
         });
-        await instance.vm.$nextTick();
 
-        // Assert
-        expect(instance.emitted()['on-error']).toBeTruthy();
-        expect(instance.emitted()['on-error'].length).toBe(1);
-        expect(instance.emitted()['on-error'][0]).toEqual([error]);
+        it(`should emit an "${ON_ERROR}" event`, () => {
+            // Assert
+            expect(instance.emitted()[ON_ERROR]).toBeTruthy();
+            expect(instance.emitted()[ON_ERROR].length).toBe(1);
+            expect(instance.emitted()[ON_ERROR][0]).toEqual([error]);
+        });
+
+        it('should display the "error" slot', () => {
+            // Assert
+            expect(instance.find('[data-test-id="slot-error"]').exists).toBeTruthy();
+        });
     });
 
     it('should format and provide allowed card types', async () => {
@@ -100,13 +139,7 @@ describe('ContentCards', () => {
                 apiKey,
                 userId
             },
-            scopedSlots: {
-                default: `
-                    <div slot-scope="{ cards }">
-                        <div :data-test-id="card.type" v-for="card in cards"></div>
-                    </div>
-                `
-            }
+            scopedSlots
         });
         instance.vm.metadataContentCards(cards);
         await instance.vm.$nextTick();
@@ -122,54 +155,130 @@ describe('ContentCards', () => {
         // Arrange
         const cardTypes = ['Post_Order_Card_1'];
         const customCards = createMetadataCards(cardTypes);
+        const instance = mount({
+            name: 'shell-stub',
+            components: {
+                ContentCards
+            },
+            data () {
+                return {
+                    customCards: []
+                };
+            },
+            methods: {
+                async testCustomCards () {
+                    this.$children[0].metadataContentCards([]);
+                    await this.$nextTick();
+                    this.customCards = customCards;
+                    await this.$nextTick();
+                }
+            },
+            template: `
+                <content-cards
+                    api-key="${apiKey}"
+                    user-id="${userId}"
+                    :custom-cards="customCards"
+                    #default="{ cards }">
+                    <div :data-test-id="card.type" v-for="card in cards"></div>
+                </content-cards>
+            `
+        });
 
         // Act
-        const instance = shallowMount(ContentCards, {
-            propsData: {
-                apiKey,
-                userId,
-                customCards
-            },
-            scopedSlots: {
-                default: `
-                    <div slot-scope="{ cards }">
-                        <div :data-test-id="card.type" v-for="card in cards"></div>
-                    </div>
-                `
-            }
-        });
-        instance.vm.metadataContentCards([]);
-        await instance.vm.$nextTick();
+        await instance.vm.testCustomCards();
 
         // Assert
         expect(instance.find('[data-test-id="Post_Order_Card_1"]').exists()).toBe(true);
     });
 
     describe('loading state', () => {
-        it('should emit a "has-loaded" event when cards have loaded', async () => {
-            // Arrange
-            const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
-            const cards = createMetadataCards(cardTypes);
+        describe('before cards have loaded', () => {
+            let instance;
 
-            // Act
-            const instance = shallowMount(ContentCards, {
-                propsData: {
-                    apiKey,
-                    userId
-                },
-                scopedSlots: {
-                    default: `
-                    <div slot-scope="{ cards }">
-                        <div :data-test-id="card.type" v-for="card in cards"></div>
-                    </div>
-                `
-                }
+            beforeEach(async () => {
+                // Arrange & Act
+                instance = shallowMount(ContentCards, {
+                    propsData: {
+                        apiKey,
+                        userId,
+                        testId
+                    },
+                    scopedSlots
+                });
             });
-            instance.vm.metadataContentCards(cards);
-            await instance.vm.$nextTick();
 
-            // Assert
-            expect(instance.emitted()['has-loaded']).toBeTruthy();
+            it(`should not emit a "${HAS_LOADED}" event`, () => {
+                // Assert
+                expect(instance.emitted()[HAS_LOADED]).toBeFalsy();
+            });
+
+            it('should display the "loading" slot', () => {
+                // Assert
+                expect(instance.find('[data-test-id="slot-loading"]').exists).toBeTruthy();
+            });
+        });
+
+        describe('when the card source instance has returned an empty array', () => {
+            let instance;
+
+            beforeEach(async () => {
+                // Arrange
+                instance = shallowMount(ContentCards, {
+                    propsData: {
+                        apiKey,
+                        userId,
+                        testId
+                    },
+                    scopedSlots
+                });
+
+                // Act
+                instance.vm.metadataContentCards([]);
+                await instance.vm.$nextTick();
+            });
+
+            it(`should emit a "${GET_CARD_COUNT}" event with \`0\` as payload`, () => {
+                // Assert
+                expect(instance.emitted()[GET_CARD_COUNT]).toBeTruthy();
+                expect(instance.emitted()[GET_CARD_COUNT][0][0]).toBe(0);
+            });
+
+            it('should display the "no-cards" slot', () => {
+                // Assert
+                expect(instance.find('[data-test-id="slot-no-cards"]').exists).toBeTruthy();
+            });
+        });
+
+        describe('when cards have loaded', () => {
+            let instance;
+
+            beforeEach(async () => {
+                // Arrange
+                const cardTypes = ['Promotion_Card_1', 'Promotion_Card_2', 'Post_Order_Card_1'];
+                const cards = createMetadataCards(cardTypes);
+
+                // Act
+                instance = shallowMount(ContentCards, {
+                    propsData: {
+                        apiKey,
+                        userId,
+                        testId
+                    },
+                    scopedSlots
+                });
+                instance.vm.metadataContentCards(cards);
+                await instance.vm.$nextTick();
+            });
+
+            it(`should emit a "${HAS_LOADED}" event`, () => {
+                // Assert
+                expect(instance.emitted()[HAS_LOADED]).toBeTruthy();
+            });
+
+            it('should display the "default" slot', () => {
+                // Assert
+                expect(instance.find('[data-test-id="slot-default"]').exists).toBeTruthy();
+            });
         });
     });
 
@@ -184,13 +293,7 @@ describe('ContentCards', () => {
                 apiKey,
                 userId
             },
-            scopedSlots: {
-                default: `
-                    <div slot-scope="{ cards }">
-                        <div :data-test-id="card.type" v-for="card in cards"></div>
-                    </div>
-                `
-            }
+            scopedSlots
         });
         instance.vm.metadataContentCards(cards);
         await instance.vm.$nextTick();
@@ -465,9 +568,9 @@ describe('ContentCards', () => {
                 instance.find('[data-promotion-card="true"]').vm.emitVoucherCodeClick(url);
 
                 // Assert
-                expect(instance.emitted().voucherCodeClick).toBeTruthy();
-                expect(instance.emitted().voucherCodeClick.length).toBe(1);
-                expect(instance.emitted().voucherCodeClick[0]).toEqual([{
+                expect(instance.emitted()[VOUCHER_CODE_CLICK]).toBeTruthy();
+                expect(instance.emitted()[VOUCHER_CODE_CLICK].length).toBe(1);
+                expect(instance.emitted()[VOUCHER_CODE_CLICK][0]).toEqual([{
                     url
                 }]);
             });
@@ -484,13 +587,7 @@ describe('ContentCards', () => {
                     apiKey,
                     userId
                 },
-                scopedSlots: {
-                    default: `
-                        <div slot-scope="{ cards }">
-                            <div :data-test-id="card.type" v-for="card in cards"></div>
-                        </div>
-                    `
-                }
+                scopedSlots
             });
 
             // Act
@@ -509,22 +606,21 @@ describe('ContentCards', () => {
             const appboy = '__APPBOY__';
             window.appboy = appboy;
 
-            await testEmitter('on-metadata-init', appboy);
+            await testEmitter(ON_METADATA_INIT, appboy);
         });
 
         it('should emit an event containing the content card count when appboy is initialised', async () => {
-            await testEmitter('get-card-count', 1);
+            await testEmitter(GET_CARD_COUNT, 1);
         });
 
         it('should emit an event containing the loading status when appboy is initialised', async () => {
-            await testEmitter('has-loaded', true);
+            await testEmitter(HAS_LOADED, true);
         });
     });
 
     describe('logging callback', () => {
         const testMessage = '__TEST_MESSAGE__';
         const testPayload = { test: 'PAYLOAD' };
-        const testId = 'foo';
 
         it('should return a function with the correct logging parameters when callback is called', async () => {
             // Arrange
@@ -541,13 +637,7 @@ describe('ContentCards', () => {
                         logInfo: jest.fn()
                     }
                 },
-                scopedSlots: {
-                    default: `
-                        <div slot-scope="{ cards }">
-                            <div :data-test-id="card.type" v-for="card in cards"></div>
-                        </div>
-                    `
-                }
+                scopedSlots
             });
 
             // Act
@@ -573,13 +663,7 @@ describe('ContentCards', () => {
                         logInfo: jest.fn()
                     }
                 },
-                scopedSlots: {
-                    default: `
-                        <div slot-scope="{ cards }">
-                            <div :data-test-id="card.type" v-for="card in cards"></div>
-                        </div>
-                    `
-                }
+                scopedSlots
             });
 
             // Act

@@ -10,7 +10,7 @@
             {{ headline }}
         </h2>
         <card-container
-            :card="card"
+            :card="cardContainerCard"
             :class="[cardContainerStyles['c-postOrderCardContainer'] , { [cardContainerStyles['c-postOrderCard--condensed']]: !image && icon }]"
             :container-title="containerTitle"
             :is-carousel="isCarousel"
@@ -77,6 +77,18 @@ export default {
             icon,
             headline
         };
+    },
+
+    computed: {
+        cardContainerCard () {
+            return {
+                ...this.card,
+                target: {
+                    attribute: '_blank',
+                    rel: 'noopener'
+                }
+            };
+        }
     },
 
     methods: {
