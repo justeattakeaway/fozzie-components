@@ -5,10 +5,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (add to next release)
 ------------------------------
-*March 1, 2021*
+*March 2, 2021*
 
 ### Changed
 - Storybook knobs to be easier to use.
+- `open` function for component tests to match changes.
 
 
 v0.60.0

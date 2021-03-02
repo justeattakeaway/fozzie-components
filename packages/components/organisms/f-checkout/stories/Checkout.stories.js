@@ -68,7 +68,7 @@ export const CheckoutComponent = () => ({
         },
 
         getBasketUrl () {
-            return `/get-basket-${serviceType}.json`;
+            return `/get-basket-${this.serviceType}.json`;
         },
 
         authToken () {
