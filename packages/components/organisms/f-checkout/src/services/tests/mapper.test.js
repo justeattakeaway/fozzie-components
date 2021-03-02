@@ -123,41 +123,23 @@ describe('checkout mapper', () => {
         expect(notesRequest[0].note).toBe(userNote);
     });
 
-    describe('when geo location', () => {
-        it('is present then should map geo location correctly', () => {
-            // Arrange
-            const geolocation = {
-                latitude: 1.234,
-                longitude: 50.234
-            };
+    it('when geo location is present then should map geo location correctly', () => {
+        // Arrange
+        const geolocation = {
+            latitude: 1.234,
+            longitude: 50.234
+        };
 
-            // Act
-            const requestBody = mapUpdateCheckoutRequest({
-                ...defaultParams,
-                geolocation
-            });
-
-            const geolocationRequest = requestBody[1].value.location.geolocation;
-
-            // Assert
-            expect(geolocationRequest).toBe(geolocation);
+        // Act
+        const requestBody = mapUpdateCheckoutRequest({
+            ...defaultParams,
+            geolocation
         });
 
-        it('is not present then should map geo location correctly', () => {
-            // Arrange
-            const geolocation = null;
+        const geolocationRequest = requestBody[1].value.location.geolocation;
 
-            // Act
-            const requestBody = mapUpdateCheckoutRequest({
-                ...defaultParams,
-                geolocation
-            });
-
-            const geolocationRequest = requestBody[1].value.location.geolocation;
-
-            // Assert
-            expect(geolocationRequest).toBe(geolocation);
-        });
+        // Assert
+        expect(geolocationRequest).toBe(geolocation);
     });
 });
 
