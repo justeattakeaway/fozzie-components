@@ -36,7 +36,7 @@ exports.ci = () => ({
             disableWebdriverScreenshotsReporting: false
         }],
         ['junit', {
-            outputDir: `${global.baseDir}/test/ci`,
+            outputDir: `${global.baseDir}/test/results/ci`,
             outputFileFormat: function(options) { // optional
                 return `${options.cid}-${options.capabilities.browserName}-results.xml`
             }
