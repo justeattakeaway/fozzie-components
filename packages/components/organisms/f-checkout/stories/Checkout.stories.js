@@ -79,9 +79,6 @@ export const CheckoutComponent = () => ({
 
         authToken () {
             return this.isLoggedIn ? 'Auth Token' : '';
-        },
-        getGeoLocationUrl: {
-            default: text('Get Geo Location Url', getGeoLocationUrl)
         }
     },
     store: new Vuex.Store({
