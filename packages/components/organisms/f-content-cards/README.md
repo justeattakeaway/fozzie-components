@@ -64,7 +64,7 @@ $ yarn add @justeat/f-content-cards
 You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
 ```js
-import ContentCards from '@justeat/f-content-cards';
+import { ContentCards } from '@justeat/f-content-cards';
 import '@justeat/f-content-cards/dist/f-content-cards.css';
 
 export default {
@@ -122,120 +122,43 @@ The following rudimentary example can be used as a guide for implementing this c
 </html>
 ```
 
+
+## Slots
+
+The `ContentCards` component makes heavy use of slots in order to surface different states of data retrieval
+
+| Slot name | scoped data | Description |
+| :---      | :---:       | :---        |
+| `loading` | `{}` | The `loading` slot can be used by the consuming code to surface a loading state to the user before card data has been retrieved |
+| `default` | `{ cards }` | The `default` slot is used to display the cards when they have been received from the cards source instance, or alternatively injected via the `custom-cards` prop. |
+| `no-cards` | `{}` | The `no-cards` slot can be used to surface a message to the user when no cards have been received from the cards source(s) |
+| `error` | `{}` | The `error` slot can be used by the consuming code to surface a message to the user when an error has been encountered upon initialising the cards source instance |
+
+
 ## Configuration
 
 The following props can be used to configure the component:
 
-### `api-key`
-
-**Type:** string
-**Required:** false
-
-The Braze SDK api key.
-
-> If no apiKey is provided the component will look for an existing appboy implementation at `window.appboy`.
-
-### `brands`
-
-**Type:** array
-**Required:** false
-
-List of brands for user's current postcode.
-
-> Only required when displaying Home Promotion Card 1 and 2
-
-### `user-id`
-
-**Type:** string
-**Required:** false
-
-The Braze User ID associated to the current authenticated user.
-
-> If no userId is provided the component will look for an existing appboy implementation at `window.appboy`.
-
-### `enabled-card-types`
-
-**Type:** array
-**Required:** false
-
-An array of custom content card types to display.
-
-> If no array is passed the component will default to showing all supported content card types.
-
-### `locale`
-
-**Type:** string
-**Required:** true _if_ [vue-i18n](https://kazupon.github.io/vue-i18n/) plugin not used by consuming application
-
-Locale in `lang_COUNTRY` format - e.g. `en-GB`
-
-### `pushToDataLayer`
-
-**Type:** function
-**Required:** false
-
-A callback for feeding back analytics regarding content cards to the consuming application
-
-> If no function is passed then this will be replaced with a noop function
-
-### `testId`
-
-**Type:** string
-**Required:** false
-
-Indicates the test id attribute of the component root element.
-
-> If this is missing or nully, all child components will also be rendered without test id
-> attributes.
-
-### `showLoadingState`
-
-**Type:** boolean
-**Required:** false
-
-Whether or not to show a skeleton loading state whilst initialising Braze. Defaults to `true`.
-For configurations where the enabled card types includes cards other than Post Order cards, the
-number of loading state cards shown is limited to the lowest of either `3` or the limit set in
-`cardLimit`
-
-### `cardLimit`
-
-**Type:** number
-**Required:** false
-
-Limit the amount of cards to show. Defaults to `-1` which shows all cards.
+| Prop                      | Type           | Required      | Default | Description  | Comment |
+| :---                      |     :---:      |     :---:     |  :---:  | :---:        | :---    |
+| `api-key`                 | string         | false         |    -    | The Braze SDK api key. | If no apiKey is provided the component will look for an existing appboy implementation at `window.appboy`. |
+| `user-id`                 | string         | false         |    -    | The Braze User ID associated to the current authenticated user. |  If no userId is provided the component will look for an existing appboy implementation at `window.appboy`. |
+| `custom-cards`            | array          | false         |    -    | Can be used to inject custom card data in the event that no data is received from braze. | |
+| `pushToDataLayer`         | function       | false         |    -    | A callback for feeding back analytics regarding content cards to the consuming application | If no function is passed then this will be replaced with a noop function |
+| `locale`                  | string         | true _if_ [vue-i18n](https://kazupon.github.io/vue-i18n/) plugin not used by consuming application | 'en-GB | Locale in `lang_COUNTRY` format - e.g. `en-GB` | |
+| `testId`                  | string         | false         |   null  | Indicates the test id attribute of the component root element. | If this is missing or nully, all child components will also be rendered without test id attributes. |
 
 ## Events
 
 The following events can be emitted by the component, with the shape given:
 
-### `@voucherCodeClick`
-
-```json5
-{
-    "url": "http://example.org/test" // Forwarding Url for the card containing the voucher code that was clicked
-}
-```
-
-### `@custom-cards-callback`
-
-Called with a function that can be used by the consuming code to inject custom content cards
-
-### `@on-braze-init`
-
-Called with the appboy instance once appboy has initialised.
-
-### `@get-card-count`
-
-Called with a number outlining the total card count once Appboy has initialised.
-
-### `@has-loaded`
-
-Called with a boolean indicating that the component has initialised.
-
-### `@on-error`
-
-Called with an Error object if appboy fails to initialise.
+| Event                 | Description                   | Example Payload |
+| -----                 | -----------                   | --------------- |
+| `@voucher-code-click` | Emitted when a voucher card contained within the component has been clicked | `{ "url": "http://example.org/test" }` |
+| `@on-metadata-init`   | Emitted with the cards source instance once it has initialised. | `appboy` |
+| `@get-card-count`     | Emitted with a number outlining the total card count once Appboy has initialised. | `3` |
+| `@has-loaded`         | Emitted with a boolean indicating that the component has initialised. | true |
+| `@on-error`           | Emitted with an Error object if appboy fails to initialise. | `{ Error }`
 
 ## Cards
 
