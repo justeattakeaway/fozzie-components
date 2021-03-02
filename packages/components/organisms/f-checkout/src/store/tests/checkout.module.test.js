@@ -487,7 +487,7 @@ describe('CheckoutModule', () => {
                     state.isLoggedIn = true;
                 });
 
-                it(`then should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation.`, async () => {
+                it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation.`, async () => {
                     // Act
                     await getGeoLocation({ commit, state }, payload);
 
@@ -502,7 +502,7 @@ describe('CheckoutModule', () => {
                     state.isLoggedIn = false;
                 });
 
-                it('then should not make api call and should not call mutation.', async () => {
+                it('should not make api call and should not call mutation.', async () => {
                     // Act
                     await getGeoLocation({ commit, state }, payload);
 

@@ -123,7 +123,7 @@ describe('checkout mapper', () => {
         expect(notesRequest[0].note).toBe(userNote);
     });
 
-    it('when geo location is present then should map geo location correctly', () => {
+    it('should map geo location correctly', () => {
         // Arrange
         const geolocation = {
             latitude: 1.234,
