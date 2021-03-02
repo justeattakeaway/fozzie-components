@@ -3,18 +3,38 @@
 //     withKnobs, select, boolean
 // } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import VPopover from '../src/components/Popover.vue';
+import Popover from '../src/components/Popover.vue';
+import Card from '../../f-card/src/components/Card.vue';
 
 export default {
     title: 'Components/Atoms',
     decorators: [withA11y]
 };
 
-export const VPopoverComponent = () => ({
-    components: { VPopover },
+export const PopoverComponent = () => ({
+    components: { Popover, Card },
     props: {
     },
-    template: `<v-popover />`
+    template: `
+        <div style="position: relative; padding: 16px;">
+            Some text
+            <popover 
+                style="position: absolute;
+                        top: 100%;
+                        width: 300px;
+                        opacity: 1;
+                        z-index: 99999;
+                        left: 0;">
+                <card
+                    cardHeading="Popover card"
+                    cardHeadingPosition="left"
+                    :isRounded="false"
+                    :hasOutline="false"
+                    :isPageContentWrapper="false">
+                        <p>Card component rendered inside a popover</p>
+                </card>
+            </popover>
+        </div>`
 });
 
-VPopoverComponent.storyName = 'f-popover';
+PopoverComponent.storyName = 'f-popover';
