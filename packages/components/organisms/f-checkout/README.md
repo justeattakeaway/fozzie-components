@@ -78,7 +78,7 @@ The props that can be defined are as follows:
 | `createGuestUrl` | `String` | - | URL for the API called to load the Create a Guest User. |
 | `getBasketUrl` | `String` | - | URL for the API called to get Basket Details.<br><br>The data returned from this API contains the serviceType, which determines if the Checkout component is created for Collection or Delivery when the user is not authenticated. |
 | `placeOrderUrl` | `String` | - | URL for the API called to place the order.<br><br>The data returned from this API contains the orderId, which is needed to redirect the user to the payment page. |
-| `getGeoLocationUrl` | `String` | - | URL for the API that can return geo location information (Latitude and Longitude) for a given address.<br>The `tenant` must be provided as the last segment of the URL and all calls must be authenticated [(Api Specification Link).](https://pages.github.je-labs.com/Architecture/api_specifications/#tag/Location-Services/paths/~1geocode~1{tenant}/post) |
+| `getGeoLocationUrl` | `String` | - | URL for the API that can return geo location information (Latitude and Longitude) for a given address.<br>The `tenant` must be provided as the last segment of the URL and all calls must be authenticated. |
 | `checkoutTimeout` | `Number` | 1000 | Timeout when submitting the checkout form. |
 | `getCheckoutTimeout` | `Number` | 1000 | Timeout when loading checkout data. |
 | `createGuestTimeout` | `Number` | 1000 | Timeout when creating a guest user. |
