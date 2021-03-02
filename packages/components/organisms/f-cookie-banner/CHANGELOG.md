@@ -8,7 +8,7 @@ v0.4.0
 *March 2, 2021*
 
 ### Changed
-- Default locale prop value`en-GB` to be `''`.
+- Default locale prop value `en-GB` to be `''`.
 
 
 v0.3.2
