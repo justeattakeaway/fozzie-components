@@ -106,7 +106,7 @@ export default {
                 right: 8px;
                 width: 10px;
                 height: 10px;
-                background: url('//dy3erx8o0a6nh.cloudfront.net/images/icon-close-banner.png') no-repeat 50%;
+                background: url('https://dy3erx8o0a6nh.cloudfront.net/images/icon-close-banner.png') no-repeat 50%;
                 background-size: 10px 10px;
                 border: none;
                 cursor: pointer;
