@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { select, text, boolean } from '@storybook/addon-knobs';
+import { select, boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import {
     ENGLISH_LOCALE
@@ -18,8 +18,12 @@ export default {
 
 Vue.use(Vuex);
 
+const getCheckoutDeliveryUrl = '/checkout-delivery.json';
+const getCheckoutCollectionUrl = '/checkout-collection.json';
 const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
 const createGuestUrl = '/create-guest.json';
+const getBasketDeliveryUrl = '/get-basket-delivery.json';
+const getBasketCollectionUrl = '/get-basket-collection.json';
 const updateCheckoutUrl = '/update-checkout.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
@@ -55,7 +59,7 @@ export const CheckoutComponent = () => ({
         },
 
         serviceType: {
-            default: select('Service Type', ['collection', 'delivery', 'Invalid URL'], 'delivery')
+            default: select('Service Type', ['collection', 'delivery', 'invalid-url'], 'delivery')
         },
 
         locale: {
