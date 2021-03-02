@@ -4,7 +4,7 @@
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
-recieves content to render as a popover
+renders recieved content as a popover
 
 </div>
 
@@ -92,7 +92,7 @@ $ yarn
 Change directory to the `f-popover` package:
 
 ```sh
-$ cd packages/components/molecules/f-popover
+$ cd packages/components/atoms/f-popover
 ```
 
 ## Testing
@@ -100,7 +100,7 @@ $ cd packages/components/molecules/f-popover
 ### Unit, Integration and Contract
 
 To test all components, run from root directory.
-To test only `f-popover`, run from the `./fozzie-components/packages/components/molecules/f-popover` directory.
+To test only `f-popover`, run from the `./fozzie-components/packages/components/atoms/f-popover` directory.
 
 ```sh
 yarn test
@@ -123,7 +123,7 @@ OR
 ```bash
 # Run Component tests for f-popover
 # Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components/packages/components/molecules/f-popover
+cd ./fozzie-components/packages/components/atoms/f-popover
 yarn test-component:chrome
 ```
 ## Documentation to be completed once module is in stable state.

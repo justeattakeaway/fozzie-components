@@ -6,7 +6,7 @@ module.exports = class Popover extends Page {
     get component () { return $(COMPONENT); }
 
     open () {
-        super.openComponent('molecule', 'popover-component');
+        super.openComponent('atom', 'popover-component');
     }
 
     waitForTestComponent () 

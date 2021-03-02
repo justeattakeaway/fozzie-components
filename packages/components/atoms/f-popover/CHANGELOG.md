@@ -9,4 +9,4 @@ v0.1.0
 *March 2, 2021*
 
 ### Added
-- Add your change under the following headings: `Added`/`Changed`/`Deprecated`/`Removed`/`Fixed`/`Security`
+- Initial commit

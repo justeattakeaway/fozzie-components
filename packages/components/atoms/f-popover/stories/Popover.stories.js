@@ -6,7 +6,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import VPopover from '../src/components/Popover.vue';
 
 export default {
-    title: 'Components/Molecules',
+    title: 'Components/Atoms',
     decorators: [withA11y]
 };
 
