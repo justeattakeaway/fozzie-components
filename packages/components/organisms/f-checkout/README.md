@@ -78,12 +78,7 @@ The props that can be defined are as follows:
 | `createGuestUrl` | `String` | - | URL for the API called to load the Create a Guest User. |
 | `getBasketUrl` | `String` | - | URL for the API called to get Basket Details.<br><br>The data returned from this API contains the serviceType, which determines if the Checkout component is created for Collection or Delivery when the user is not authenticated. |
 | `placeOrderUrl` | `String` | - | URL for the API called to place the order.<br><br>The data returned from this API contains the orderId, which is needed to redirect the user to the payment page. |
-| `checkoutTimeout` | `Number` | 1000 | Timeout when submitting the checkout form. |
-| `getCheckoutTimeout` | `Number` | 1000 | Timeout when loading checkout data. |
-| `createGuestTimeout` | `Number` | 1000 | Timeout when creating a guest user. |
-| `getBasketTimeout` | `Number` | 1000 | Timeout when loading basket data. |
-| `placeOrderTimeout` | `Number` | 1000 | Timeout when placing the order. |
-| `updateCheckoutTimeout` | `Number` | 1000 | Timeout when updating checkout data. |
+| `checkoutTimeout` | `Number` | 1000 | Timeout for the different API calls in the component. |
 | `authToken` | `String` | `''` | Authorisation token used when submitting the checkout form. |
 | `loginUrl` | `String` | `-` | URL to navigate to if the user wishes to change account. |
 | `paymentPageUrlPrefix` | `String` | `-` | URL prefix to navigate to after the order has been successfully placed, so the user can pay. The `orderId` will be appended to this URL to form the full URL. |
