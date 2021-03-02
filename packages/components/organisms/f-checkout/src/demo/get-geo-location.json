@@ -7,7 +7,7 @@
   },
   "geometry": {
     "type": "Point",
-    "_comment": "I have verified with the Location Services Team and Longitute will be the first element and Latitude will be the second",
+    "_comment": "I have verified with the Location Services Team and Longitude will be the first element and Latitude will be the second",
     "coordinates": [
       -0.10358,
       51.51469
