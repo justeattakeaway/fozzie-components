@@ -26,33 +26,41 @@ This library takes care of making the decision of whether and how to fetch an OI
 
 If the token turns out to be expired, Smart Gateway will return a 401. Due to the variety of ways the HTTP request could be sent, this library does not help with the detection of the 401.  If a 401 is received, you should call `silentSignIn()` again, this time passing `true` for `force`.  This will bypass the caching and request a new token. 
 
-An example of the usage
+An example of how a wrapper function that applies these rules every time might look:
 
 ```javascript
 
-function useTokenExample(token) {
-    if (token) {
-        return callSmartGatewayApi(token);
-    } else {
-        //if no token available (user logged out) you could either make an anonymous call, or do something else (e.g. redirect to login page)
-    }
-}
+import { silentSignIn } from '@justeat/je-consumer-oidc';
 
-function getAndUseToken(useToken, OidcClient, optionalSettings, force) {  
-    return silentSignIn(OidcClient, optionalSettings, force)
-        .then((token) => useToken(token))
-        .catch((error) => {
-            if (error.statusCode === 401 && !force) {
-                return getAndUseToken(useToken, OidcClient, optionalSettings, true);
-            }
-            throw error;
+async function makeApiCall(url) {
+    function makeApiCallWithToken(token){
+        if (token){ //this assumes we are happy to make the call with no token.
+                    //if the functionality always require a token we should do something else if token is null
+            headers.Authorization = `Bearer ${token}`;
+        }
+
+        return fetch(url, {
+            headers,
+            credentials: 'include'
         });
-}
+    }
 
-//now *every time* we want to call the Smart Gateway we go:
-getAndUseToken(useTokenExample, OidcClient, settings)
-  .then((response) => /* do stuff */)
-  .catch((error) => /* handle errors */);
+    const token = await silentSignIn();
+
+    try {
+        return makeApiCallWithToken(token)
+    } 
+    catch (error) {
+        if (error.response && error.response.status === 401){
+            var token = await silentSignIn(true);
+
+            return makeApiCallWithToken(token);
+        }
+
+        throw error;
+    }
+    
+}
 
 ```
 
