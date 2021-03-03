@@ -111,14 +111,15 @@
                         </span>
                     </a>
 
-                    <nav-panel
-                        :is-open="navIsOpen"
-                        :is-below-mid="isBelowMid"
-                        :copy="copy"
-                        :return-logout-url="returnLogoutUrl"
-                        class="c-nav-popover"
-                        @activateNav="openNav"
-                        @deactivateNav="closeNav" />
+                    <v-popover class="c-nav-popover">
+                        <user-navigation-panel
+                            :is-open="navIsOpen"
+                            :is-below-mid="isBelowMid"
+                            :copy="copy"
+                            :return-logout-url="returnLogoutUrl"
+                            @activateNav="openNav"
+                            @deactivateNav="closeNav" />
+                    </v-popover>
                 </li>
 
                 <li
@@ -189,30 +190,30 @@
                         type="button"
                         data-test-id="action-button-component"
                         :tabindex="isBelowMid && !navIsOpen ? -1 : 0"
-                        class="c-nav-list-text c-countrySelector-btn"
+                        class="c-nav-list-text c-nav-list-btn"
                         :aria-expanded="countrySelectorIsOpenOnDesktopView ? 'true' : 'false'"
                         :aria-haspopup="!isBelowMid"
                         :aria-label="copy.countrySelector.changeCurrentCountry"
                         @click="onCountrySelectorToggle"
                         v-on="countrySelectorIsClosedOnMobileView ? { blur: closeNav, focus: openNav } : null">
-                        <span class="c-countrySelector-currentFlag-wrapper">
+                        <span class="c-nav-list-iconWrapper">
                             <flag-icon
                                 :country-code="copy.countrySelector.currentCountryKey"
-                                class="c-countrySelector-flag c-countrySelector-flag--current" />
+                                class="c-nav-list-icon--flag c-nav-list-icon--flagCurrent" />
                         </span>
-                        <span class='c-countrySelector-title'>
+                        <span class='c-nav-list-title'>
                             {{ copy.countrySelector.selectYourCountryText }}
                         </span>
                     </button>
 
-                    <nav-panel
-                        component-type="country-selector"
-                        :copy="copy"
-                        :is-open="countrySelectorIsOpen"
-                        class="c-nav-popover c-nav-popover--countrySelector"
-                        @goBackButtonClick="closeCountrySelector"
-                        @blurOnLink="closeCountrySelector"
-                        @focusOnLink="openCountrySelector" />
+                    <v-popover class="c-nav-popover c-nav-popover--countrySelector">
+                        <country-selector-panel
+                            :copy="copy"
+                            :is-open="countrySelectorIsOpen"
+                            @goBackButtonClick="closeCountrySelector"
+                            @blurOnLink="closeCountrySelector"
+                            @focusOnLink="openCountrySelector" />
+                    </v-popover>
                 </li>
             </ul>
         </div>
@@ -229,17 +230,22 @@ import {
     axiosServices,
     windowServices
 } from '@justeat/f-services';
+import VPopover from '@justeat/f-popover';
 import FlagIcon from './FlagIcon.vue';
-import NavPanel from './Popover.vue';
+import CountrySelectorPanel from './CountrySelectorPanel.vue';
+import UserNavigationPanel from './UserNavigationPanel.vue';
+import '@justeat/f-popover/dist/f-popover.css';
 import { countries } from '../tenants';
 
 export default {
     components: {
-        MopedIcon,
+        CountrySelectorPanel,
+        FlagIcon,
         GiftIcon,
+        MopedIcon,
         ProfileIcon,
-        NavPanel,
-        FlagIcon
+        UserNavigationPanel,
+        VPopover
     },
 
     props: {
@@ -586,6 +592,9 @@ $nav-popover-transition-delay      : 200ms;
 $nav-popover-transition-duration   : 200ms;
 $nav-popover-width                 : 300px;
 
+$countrySelector-flag-width  : 16px;
+$countrySelector-flag-height : 16px;
+
 @mixin nav-container-visible () {
     overflow-y: auto;
     left: 0;
@@ -652,7 +661,6 @@ $nav-popover-width                 : 300px;
 
 .c-nav-list {
     position: relative;
-    padding: 0;
 }
 .c-nav-list,
 .c-nav-popoverList {
@@ -660,6 +668,7 @@ $nav-popover-width                 : 300px;
     margin-left: 0;
     list-style: none;
     list-style-image: none;
+    padding: 0;
 
     & > li {
         margin-bottom: 0;
@@ -674,6 +683,12 @@ $nav-popover-width                 : 300px;
         flex-direction: column;
     }
 }
+
+    .c-nav-popoverList--twoColumns {
+        @include media('>=mid') {
+            column-count: 2;
+        }
+    }
 
     // TODO: MAKE THIS NOT USE FLOATS
     // global modifier for list items horizontally aligned
@@ -757,6 +772,14 @@ $nav-popover-width                 : 300px;
                     }
                 }
             }
+        }
+
+        .c-nav-list-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            background: transparent;
         }
 
     .has-sublist {
@@ -948,6 +971,7 @@ $nav-popover-width                 : 300px;
 
 .c-nav-popover {
     @include media('>=mid') {
+        min-width: 300px;
         position: absolute;
         top: 100%;
         right: 99999px; // offscreen, so can’t ever be hovered over by default
@@ -966,23 +990,24 @@ $nav-popover-width                 : 300px;
             transition: opacity $nav-popover-transition-duration ease-in-out,
                         z-index 0s linear;
         }
+
+        // tooltip arrow
+        &:before {
+            right: 10%;
+        }
     }
 }
 
-$countrySelector-flag-width  : 16px;
-$countrySelector-flag-height : 16px;
-
-.c-countrySelector-flag {
-    height: $countrySelector-flag-height;
-    width: $countrySelector-flag-width;
-    margin-right: spacing();
+.c-nav-popover.c-nav-popover--countrySelector {
+    @include media('>=mid') {
+        // tooltip arrow
+        &:before {
+            right: 4%;
+        }
+    }
 }
 
-.c-countrySelector-flag--current {
-    margin-right: 0;
-}
-
-.c-countrySelector-currentFlag-wrapper {
+.c-nav-list-iconWrapper {
     height: $countrySelector-flag-height;
     width: $countrySelector-flag-width;
 
@@ -1004,28 +1029,23 @@ $countrySelector-flag-height : 16px;
     }
 }
 
-.c-countrySelector-title {
+.c-nav-list-icon--flag {
+    height: $countrySelector-flag-height;
+    width: $countrySelector-flag-width;
+    margin-right: spacing();
+}
+
+.c-nav-list-icon--flagCurrent {
+    margin-right: 0;
+}
+
+.c-nav-list-title {
     width: 0;
     overflow: hidden;
     @include font-size(heading-s, true, narrow);
 
     @include media('<mid') {
         width: auto;
-    }
-}
-
-.c-countrySelector-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 0;
-    background: transparent;
-}
-
-.c-nav-popover.c-nav-popover--countrySelector {
-    // tooltip arrow
-    &:before {
-        right: 4%;
     }
 }
 </style>

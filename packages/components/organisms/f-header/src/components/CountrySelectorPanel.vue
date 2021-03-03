@@ -1,20 +1,20 @@
 <template>
     <div :class="['c-nav-container', { 'is-visible': isOpen }]">
-        <div class="c-nav-popoverList c-nav-popoverList--countrySelector">
-            <header class="c-nav-popoverList-header">
+        <div class="c-countrySelector">
+            <header class="c-countrySelector-header">
                 <f-button
                     button-type="ghost"
                     is-icon
-                    class="c-nav-popoverList-header-button"
+                    class="c-countrySelector-header-button"
                     :aria-label="copy.countrySelector.goBackToMainMenu"
                     @click="$emit('goBackButtonClick')">
-                    <arrow-icon class="c-nav-popoverList-go-back-icon" />
+                    <arrow-icon class="c-countrySelector-goBackIcon" />
                 </f-button>
 
                 <h3>{{ copy.countrySelector.selectYourCountryText }}</h3>
             </header>
 
-            <ul class="c-countrySelector-list">
+            <ul class="c-nav-popoverList c-nav-popoverList--twoColumns">
                 <li
                     v-for="(country, i) in countries"
                     :key="i + '_Country'"
@@ -34,7 +34,7 @@
                         @focus="$emit('focusOnLink')">
                         <flag-icon
                             :country-code="country.key"
-                            class="c-countrySelector-flag" />
+                            class="c-nav-list-icon--flag" />
                         <span>
                             {{ country.localisedName }}
                         </span>
@@ -78,15 +78,22 @@ export default {
 
 <style lang="scss">
 
-$countrySelector-text-color  : $grey--darkest;
-$countrySelector-text-hover  : $color-bg--darker;
+$countrySelector-text-color : $grey--darkest;
+$countrySelector-text-hover : $color-bg--darker;
 
-.c-nav-popoverList-header {
+.c-countrySelector {
+    @include media('>=mid') {
+        padding: spacing(x3) 0;
+    }
+}
+
+.c-countrySelector-header {
     display: flex;
     align-items: center;
 
     @include media('>=mid') {
         padding-bottom: spacing(x2);
+        padding-left: spacing(x2);
     }
 
     h3 {
@@ -102,25 +109,15 @@ $countrySelector-text-hover  : $color-bg--darker;
     }
 }
 
-.c-nav-popoverList-header-button {
-    padding: 0;
+.c-countrySelector-header-button {
     margin: spacing(x2);
     @include media('>=mid') {
         display: none;
     }
-    .c-nav-popoverList-go-back-icon {
+    svg.c-countrySelector-goBackIcon {
         transform: rotate(180deg);
-        display: inline-block;
         width: 28px;
         height: 28px;
-    }
-}
-
-.c-countrySelector-list {
-    margin: 0;
-
-    & > li:before {
-        display: none;
     }
 }
 
@@ -141,25 +138,6 @@ $countrySelector-text-hover  : $color-bg--darker;
     @include font-size(body-l);
     padding: spacing(x1.5) spacing(x3);
     width: 100%;
-}
-
-.c-nav-popoverList.c-nav-popoverList--countrySelector {
-    ul {
-        list-style-type: none;
-        padding: 0 spacing(x2);
-    }
-
-    @include media('>=mid') {
-        padding: spacing(x3) 0;
-        min-width: 330px;
-        width: auto;
-
-        ul {
-            list-style-type: none;
-            column-count: 2;
-            padding: 0;
-        }
-    }
 }
 
 </style>

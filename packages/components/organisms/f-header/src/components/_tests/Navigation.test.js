@@ -730,11 +730,11 @@ describe('Navigation', () => {
 
             // Act
             await wrapper.vm.openCountrySelector();
-    
+
             // Assert
             expect(wrapper.find('[data-test-id="country-selector"]').classes()).toContain('is-open');
         });
-    
+
         it('should not be open when `countrySelectorIsOpen: false`', async () => {
             // Arrange
             wrapper = shallowMount(Navigation, {
@@ -746,7 +746,7 @@ describe('Navigation', () => {
 
             // Act
             await wrapper.vm.closeCountrySelector();
-    
+
             // Assert
             expect(wrapper.find('[data-test-id="country-selector"]').classes()).not.toContain('is-open');
         });
