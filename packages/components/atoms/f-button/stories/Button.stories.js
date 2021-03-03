@@ -5,7 +5,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import FButton from '../src/components/Button.vue';
 
 export default {
-    title: 'Components/Atoms',
+    title: 'Components/Atoms/f-button',
     decorators: [withKnobs, withA11y]
 };
 
@@ -26,12 +26,18 @@ export const ButtonComponent = () => ({
         },
         href: {
             default: text('href', '')
-        },
-        isIcon: {
-            default: boolean('isIcon', false)
         }
     },
-    template: '<f-button :buttonType="buttonType" :buttonSize="buttonSize" :isFullWidth="isFullWidth" :actionType="actionType" :href="href" :isIcon="isIcon">Default Button Text</f-button>'
+    template: `
+        <f-button 
+            :buttonType="buttonType"
+            :buttonSize="buttonSize"
+            :isFullWidth="isFullWidth"
+            :actionType="actionType"
+            :href="href"
+            :isIcon="false">
+            Default Button Text
+        </f-button>`
 });
 
 ButtonComponent.storyName = 'f-button';
