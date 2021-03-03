@@ -11,7 +11,7 @@
                 :class="[$style['c-stampCard1-icon']]"
                 :data-test-id="testIdForSection('image')"
                 :src="card.image"
-                alt="">
+                :alt="card.title">
             <h3
                 v-make-text-accessible
                 :class="[$style['c-stampCard1-title']]"

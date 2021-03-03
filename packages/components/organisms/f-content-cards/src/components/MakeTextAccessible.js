@@ -8,6 +8,6 @@ import Vue from 'vue';
  */
 Vue.directive('make-text-accessible', el => {
     const text = el.innerText.trim().replace(/(<(?!(?:b|\/b)\b)[^>]*>)/gi, '');
-    const containsPeriod = text.slice(-1) === '.';
+    const containsPeriod = ['.', '!', '?', ';', ':'].includes(text.slice(-1));
     el.innerHTML = containsPeriod ? text : `${text}<span class="is-visuallyHidden">.</span>`;
 });
