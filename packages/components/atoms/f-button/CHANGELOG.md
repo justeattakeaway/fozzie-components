@@ -9,7 +9,7 @@ Latest (add to next release)
 *March 3, 2021*
 
 ### Added
-- Component tests for link button
+- Component  and accessibility test for link button
 
 *February 25, 2021*
 
