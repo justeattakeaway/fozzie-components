@@ -2,7 +2,7 @@
     <div
         v-if="linkList.links.length"
         :class="[$style['c-footer-panel'], {
-            'is-collapsed': panelMobileCollapsed
+            'is-collapsed': panelCollapsed
         }]"
         data-test-id="linkList-wrapper">
         <h2>
@@ -11,7 +11,7 @@
                 :tabindex="isBelowWide ? 0 : -1"
                 :disabled="!isBelowWide"
                 :aria-disabled="!isBelowWide"
-                :aria-expanded="!panelMobileCollapsed ? 'true' : 'false'"
+                :aria-expanded="!panelCollapsed ? 'true' : 'false'"
                 :aria-controls="listId"
                 :class="[
                     'c-footer-heading',
@@ -22,7 +22,7 @@
                 {{ linkList.title }}
                 <chevron-icon
                     :class="[$style['c-icon--chevron'], {
-                        [$style['c-icon--chevron--up']]: !panelMobileCollapsed
+                        [$style['c-icon--chevron--up']]: !panelCollapsed
                     }]" />
             </button>
         </h2>
@@ -70,7 +70,7 @@ export default {
 
     data () {
         return {
-            panelMobileCollapsed: true,
+            panelCollapsed: true,
             currentScreenWidth: 0
         };
     },
@@ -101,7 +101,7 @@ export default {
     methods: {
         onPanelClick () {
             if (this.isBelowWide) {
-                this.panelMobileCollapsed = !this.panelMobileCollapsed;
+                this.panelCollapsed = !this.panelCollapsed;
             }
         },
 
