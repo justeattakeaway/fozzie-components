@@ -47,7 +47,8 @@ const defaultCheckoutState = {
     messages: [],
     authToken: '',
     isLoggedIn: false,
-    userNote: 'No ketchup, please.'
+    userNote: 'No ketchup, please.',
+    geolocation: null
 };
 
 const defaultAnalyticsState = {
@@ -64,6 +65,7 @@ const defaultCheckoutActions = {
     updateAddressDetails: jest.fn(),
     updateCustomerDetails: jest.fn(),
     updateFulfilmentTime: jest.fn(),
+    getGeoLocation: jest.fn(),
     getBasket: jest.fn(),
     getAddress: jest.fn(),
     placeOrder: jest.fn()

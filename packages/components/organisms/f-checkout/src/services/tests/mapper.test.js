@@ -5,7 +5,8 @@ const defaultParams = {
     customer: {},
     isCheckoutMethodDelivery: true,
     time: {},
-    userNote: ''
+    userNote: '',
+    geolocation: null
 };
 
 describe('checkout mapper', () => {
@@ -120,6 +121,25 @@ describe('checkout mapper', () => {
         // Assert
         expect(notesRequest.length).toBe(1);
         expect(notesRequest[0].note).toBe(userNote);
+    });
+
+    it('should map geo location correctly', () => {
+        // Arrange
+        const geolocation = {
+            latitude: 1.234,
+            longitude: 50.234
+        };
+
+        // Act
+        const requestBody = mapUpdateCheckoutRequest({
+            ...defaultParams,
+            geolocation
+        });
+
+        const geolocationRequest = requestBody[1].value.location.geolocation;
+
+        // Assert
+        expect(geolocationRequest).toBe(geolocation);
     });
 });
 

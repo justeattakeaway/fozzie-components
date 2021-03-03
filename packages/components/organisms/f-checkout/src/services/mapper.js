@@ -3,7 +3,8 @@ const mapUpdateCheckoutRequest = ({
     customer = {},
     isCheckoutMethodDelivery,
     time,
-    userNote
+    userNote,
+    geolocation
 }) => ([
     {
         op: 'add',
@@ -33,7 +34,7 @@ const mapUpdateCheckoutRequest = ({
                         postalCode: address.postcode || null
                     }
                 } : {}),
-                geolocation: null
+                geolocation
             }
         }
     },

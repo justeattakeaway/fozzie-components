@@ -14,6 +14,20 @@ v0.62.0
 ### Removed
 - Redundant timeout props.
 
+
+v0.61.0
+------------------------------
+*March 2, 2021*
+
+### Added
+- `getGeoLocation` to call the location services api [(AddressGeocodingAPI )](https://pages.github.je-labs.com/Architecture/api_specifications/#tag/Location-Services/paths/~1geocode~1{tenant}/post) with graceful failure as tier 3 requirement.
+
+### Changed
+- Called the api during the Submit.
+- Mapped the results into the `PATCH` Checkout request model.
+- Refactored/Added unit tests.
+
+
 v0.60.0
 -------------------------------
 *February 26, 2021*
