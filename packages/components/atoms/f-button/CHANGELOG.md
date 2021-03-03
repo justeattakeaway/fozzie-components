@@ -4,18 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (add to next release)
+v1.1.0
 ------------------------------
 *March 3, 2021*
 
 ### Added
+- Separate story for `f-button--icon`
 - Component  and accessibility test for link button
-
-*February 25, 2021*
 
 ### Changed
 - Restructured component object into page object model
 - Refactored component and accessibility tests
+- `f-button--icon` styles to show different button sizes for `--sizeMedium`, `--sizeLarge`, `--sizeSmall` and `--sizeXSmall`
+- `f-button--icon` styles to show blue background for large f-button--icon
 
 
 v1.0.0

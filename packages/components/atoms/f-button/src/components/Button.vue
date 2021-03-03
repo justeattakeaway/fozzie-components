@@ -192,7 +192,8 @@ $btn-sizeXSmall-lineHeight      : 1;
  * Sets the btn colour to site primary colour
  */
 
-.o-btn--primary {
+.o-btn--primary,
+.o-btn--icon.o-btn--primary.o-btn--sizeLarge {
     background-color: $btn-primary-bgColor;
 
     &,
@@ -328,13 +329,13 @@ $btn-sizeXSmall-lineHeight      : 1;
  */
 
 .o-btn--icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
-    svg {
-        width: 90%;
-        height: 80%;
-    }
 
-    &.o-btn--primary {
+    &.o-btn--primary,
+    &.o-btn--primary.o-btn--sizeLarge {
         path {
             fill: $btn-primary-textColor;
         }
@@ -375,6 +376,47 @@ $btn-sizeXSmall-lineHeight      : 1;
                 fill: $color-link-active;
             }
         }
+    }
+}
+
+.o-btn--icon.o-btn--sizeLarge {
+    width: 56px;
+    height: 56px;
+    padding: 0;
+
+    svg {
+        width: 21px;
+        height: 21px;
+    }
+}
+.o-btn--icon.o-btn--sizeMedium {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+
+    svg {
+        width: 21px;
+        height: 21px;
+    }
+}
+.o-btn--icon.o-btn--sizeSmall {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+
+    svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+.o-btn--icon.o-btn--sizeXSmall {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+
+    svg {
+        width: 18px;
+        height: 18px;
     }
 }
 
