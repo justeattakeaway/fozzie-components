@@ -1,5 +1,5 @@
 import {
-    withKnobs, select, boolean, text
+    withKnobs, select, text
 } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import FButton from '../src/components/Button.vue';
