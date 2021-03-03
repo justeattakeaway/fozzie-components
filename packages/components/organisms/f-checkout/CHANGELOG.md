@@ -4,13 +4,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.63.0
+v0.64.0
 -------------------------------
-*February 26, 2021*
+*March 3, 2021*
 
 ### Changed
 - Prevent error page showing when the address call fails
 - Logging when the address call does fail
+
+
+v0.63.0
+------------------------------
+*March 3, 2021*
+
+### Added
+- `analytics.module` export.
 
 
 v0.62.0
