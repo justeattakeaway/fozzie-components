@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Checkout methods :: submitCheckout :: if \`isLoggedIn\` set to \`false\` should show error message and emit failure event when the email field is invalid 1`] = `
-<p data-test-id="error-email-invalid" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+<p data-test-id="error-email-invalid" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-34.000000, -18.000000)">
         <g transform="translate(32.000000, 16.000000)">
@@ -16,7 +16,7 @@ exports[`Checkout methods :: submitCheckout :: if \`isLoggedIn\` set to \`false\
 `;
 
 exports[`Checkout methods :: submitCheckout :: if \`isLoggedIn\` set to \`false\` should show error message and emit failure event when the email field is not populated 1`] = `
-<p data-test-id="error-email-invalid" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+<p data-test-id="error-email-invalid" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-34.000000, -18.000000)">
         <g transform="translate(32.000000, 16.000000)">
@@ -31,7 +31,7 @@ exports[`Checkout methods :: submitCheckout :: if \`isLoggedIn\` set to \`false\
 `;
 
 exports[`Checkout methods :: submitCheckout :: if \`isLoggedIn\` set to \`false\` should show error message and emit failure event when the first name field is not populated 1`] = `
-<p data-test-id="error-first-name-empty" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+<p data-test-id="error-first-name-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-34.000000, -18.000000)">
         <g transform="translate(32.000000, 16.000000)">
@@ -46,7 +46,7 @@ exports[`Checkout methods :: submitCheckout :: if \`isLoggedIn\` set to \`false\
 `;
 
 exports[`Checkout methods :: submitCheckout :: if \`isLoggedIn\` set to \`false\` should show error message and emit failure event when the last name field is not populated 1`] = `
-<p data-test-id="error-last-name-empty" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+<p data-test-id="error-last-name-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-34.000000, -18.000000)">
         <g transform="translate(32.000000, 16.000000)">
@@ -61,7 +61,7 @@ exports[`Checkout methods :: submitCheckout :: if \`isLoggedIn\` set to \`false\
 `;
 
 exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collection\` should show error message and emit failure event when the mobile number field is not populated 1`] = `
-<p data-test-id="error-mobile-number" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+<p data-test-id="error-mobile-number" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-34.000000, -18.000000)">
         <g transform="translate(32.000000, 16.000000)">
@@ -76,7 +76,7 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collectio
 `;
 
 exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collection\` should show error message and emit failure event when the mobile number field is populated with a < 10 numbers 1`] = `
-<p data-test-id="error-mobile-number" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+<p data-test-id="error-mobile-number" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-34.000000, -18.000000)">
         <g transform="translate(32.000000, 16.000000)">
@@ -91,7 +91,7 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collectio
 `;
 
 exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collection\` should show error message and emit failure event when the mobile number field is populated with non numeric value 1`] = `
-<p data-test-id="error-mobile-number" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+<p data-test-id="error-mobile-number" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-34.000000, -18.000000)">
         <g transform="translate(32.000000, 16.000000)">
@@ -106,7 +106,7 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collectio
 `;
 
 exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\` should emit failure event and display error message when address line1 input field is empty 1`] = `
-<p data-test-id="error-address-line1-empty" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+<p data-test-id="error-address-line1-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-34.000000, -18.000000)">
         <g transform="translate(32.000000, 16.000000)">
@@ -121,7 +121,7 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\
 `;
 
 exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\` should emit failure event and display error message when city input field is empty 1`] = `
-<p data-test-id="error-address-city-empty" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+<p data-test-id="error-address-city-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-34.000000, -18.000000)">
         <g transform="translate(32.000000, 16.000000)">
@@ -136,7 +136,7 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\
 `;
 
 exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\` should emit failure event and display error message when postcode contains incorrect characters 1`] = `
-<p data-test-id="error-address-postcode-type-error" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+<p data-test-id="error-address-postcode-type-error" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-34.000000, -18.000000)">
         <g transform="translate(32.000000, 16.000000)">
@@ -151,7 +151,7 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\
 `;
 
 exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\` should emit failure event and display error message when postcode contains incorrect characters 2`] = `
-<p data-test-id="error-address-postcode-type-error" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+<p data-test-id="error-address-postcode-type-error" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-34.000000, -18.000000)">
         <g transform="translate(32.000000, 16.000000)">
@@ -166,7 +166,7 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\
 `;
 
 exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\` should emit failure event and display error message when postcode input field is empty 1`] = `
-<p data-test-id="error-address-postcode-empty" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+<p data-test-id="error-address-postcode-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-34.000000, -18.000000)">
         <g transform="translate(32.000000, 16.000000)">
