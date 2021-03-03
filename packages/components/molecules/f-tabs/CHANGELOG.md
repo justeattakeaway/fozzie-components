@@ -12,8 +12,8 @@ v0.3.0
 - Added supporting code to component object file
 
 ### Changed
-- `Data-test-id` naming for `tab-` to `tab-button-` in `Tabs.vue`
-- `Data-test-id` naming for `transition-tab-` to `tab-content-` in `Tab.vue`
+- `Data-test-id` naming for `tab-` to `tab-button-` in `Tabs.vue` and `Tabs.test.js`
+- `Data-test-id` naming for `transition-tab-` to `tab-content-` in `Tab.vue` and `Tab.test.js`
 
 *February 24, 2021*
 
