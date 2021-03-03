@@ -32,7 +32,7 @@ export const IconButtonComponent = () => ({
         }
     },
     template: `
-    <div style="display: flex; width: 300px; justify-content: space-between">
+    <div class="wrapper--horisontal">
         <f-button
             :buttonType="buttonType"
             :buttonSize="buttonSize"
