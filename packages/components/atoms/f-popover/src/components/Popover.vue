@@ -2,7 +2,7 @@
     <div
         :class="$style['c-popover']"
         data-test-id="popover">
-        <slot></slot>
+        <slot />
     </div>
 </template>
 
@@ -24,9 +24,9 @@ $tooltip-width                 : 10px;
 .c-popover {
     @include media('>=mid') {
         background-color: $color-bg--component;
-        box-shadow:0px 4px 5px 0px rgba(0, 0, 0, 0.03),
-                    0px 1px 10px 1px rgba(0, 0, 0, 0.07),
-                    0px 2px 4px -1px rgba(0, 0, 0, 0.06);
+        box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.03),
+                    0 1px 10px 1px rgba(0, 0, 0, 0.07),
+                    0 2px 4px -1px rgba(0, 0, 0, 0.06);
         border-radius: $border-radius;
         padding: 0 $popover-padding;
         width: auto;
