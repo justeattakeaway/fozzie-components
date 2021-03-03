@@ -4,9 +4,11 @@
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
-renders recieved content as a popover
+Renders recieved content as a popover.
 
 </div>
+
+Please note that this component is only a wrapper with the base styles for the popover. Styles for hidden and active state, for popover width etc should be defined in a consuming app/component.
 
 ---
 
