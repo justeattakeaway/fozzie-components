@@ -7,8 +7,8 @@ v0.28.0
 ------------------------------
 *March 3, 2021*
 
-### Changed
-- Ordering of sub-pages updated with new documentation added.
+### Added
+- `dataLayer` context.
 
 
 v0.27.0

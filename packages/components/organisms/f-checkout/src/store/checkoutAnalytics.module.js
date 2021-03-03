@@ -1,4 +1,3 @@
-// import Trak from '@justeat/f-trak';
 import { mapAnalyticsName, mapAnalyticsNames } from '../services/mapper';
 import { VUEX_CHECKOUT_MODULE } from '../constants';
 
