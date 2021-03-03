@@ -4808,7 +4808,7 @@
     deepmerge "^4.0.0"
     glob "^7.1.2"
 
-"@wdio/junit-reporter@^7.0.7":
+"@wdio/junit-reporter@7.0.7":
   version "7.0.7"
   resolved "https://registry.yarnpkg.com/@wdio/junit-reporter/-/junit-reporter-7.0.7.tgz#552851641c49a093ebf0b0ac454285d048979e4a"
   integrity sha512-oSgDjfcL6ErNJYMAxbCoNsZag+lDAJJ/48F4HZI4hYaX17nTlM0+MSn0WCR5UIwniCorlgk8lIiJPGMInyQl7w==
