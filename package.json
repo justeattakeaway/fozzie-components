@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "3.18.0",
+  "version": "3.19.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -27,8 +27,8 @@
   },
   "devDependencies": {
     "@babel/cli": "7.10.5",
-    "@babel/plugin-proposal-optional-chaining": "7.10.4",
     "@babel/plugin-proposal-class-properties": "7.12.1",
+    "@babel/plugin-proposal-optional-chaining": "7.10.4",
     "@babel/preset-env": "7.10.4",
     "@justeat/browserslist-config-fozzie": "1.1.1",
     "@justeat/eslint-config-fozzie": "3.4.1",
@@ -45,6 +45,7 @@
     "@vue/test-utils": "1.0.3",
     "@wdio/allure-reporter": "6.7.2",
     "@wdio/cli": "6.4.0",
+    "@wdio/junit-reporter": "7.0.7",
     "@wdio/local-runner": "6.4.0",
     "@wdio/mocha-framework": "6.4.0",
     "@wdio/spec-reporter": "6.4.0",

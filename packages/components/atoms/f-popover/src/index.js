@@ -1,22 +1,19 @@
+
 /**
- * @overview Fozzie Checkout Component JS Wrapper
+ * @overview Fozzie Popover Component JS Wrapper
  *
- * @module f-checkout
+ * @module f-popover
  */
 
 
 // Import vue component
-import VueCheckout from '@/components/Checkout.vue';
-import CheckoutModule from '@/store/checkout.module';
-import AnalyticsModule from '@/store/analytics.module';
-
-export { CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY } from './constants';
+import VPopover from '@/components/Popover.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('VueCheckout', VueCheckout);
+    Vue.component('VPopover', VPopover);
 }
 
 // Create module definition for Vue.use()
@@ -36,8 +33,6 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export {
-    VueCheckout,
-    CheckoutModule,
-    AnalyticsModule
-};
+export default VPopover;
+
+
