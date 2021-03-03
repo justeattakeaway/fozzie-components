@@ -13,18 +13,19 @@
                 :src="card.image"
                 alt="">
             <h3
+                v-make-text-accessible
                 :class="[$style['c-stampCard1-title']]"
                 :data-test-id="testIdForSection('title')">
                 {{ card.title }}
-                <span class="is-visuallyHidden">.</span>
             </h3>
 
             <p
+                v-make-text-accessible
                 :class="[$style['c-stampCard1-statusText']]"
                 :data-test-id="testIdForSection('statusText')"
-                v-html="card.subtitle" />
-
-            <span class="is-visuallyHidden">.</span>
+            >
+                {{ card.subtitle }}
+            </p>
         </div>
         <div
             v-if="isReadyToClaim"
@@ -35,25 +36,26 @@
             <div
                 v-for="(subStatusLine, index) in card.description"
                 :key="index"
+                v-make-text-accessible
                 :class="[$style['c-stampCard1-subStatusText']]"
                 :data-test-id="testIdForSection('subStatusText', index)">
                 {{ subStatusLine }}
-                <span class="is-visuallyHidden">.</span>
             </div>
             <div
+                v-make-text-accessible
                 :class="[$style['c-stampCard1-expiryInfo']]"
                 :data-test-id="testIdForSection('expiryInfo')">
                 {{ card.expiryLine }}
                 <template v-if="hasValidExpiryDate">
                     <span :aria-label="expiryDateAccessible"><span aria-hidden="true">{{ expiryDateVisual }}</span></span>
                 </template>
-                <span class="is-visuallyHidden">.</span>
             </div>
         </div>
         <div
             v-else
             :class="[$style['c-stampCard1-stamps']]"
             :data-test-id="testIdForSection('stamps')"
+            role="img"
             :aria-label="stampCardsStatusCopy()">
             <div
                 v-for="({ stampImage, classSuffix }, index) in stamps"
@@ -81,6 +83,8 @@ import lightFormat from 'date-fns/lightFormat';
 
 import EmptyStamp from './images/stamp-empty-15.svg';
 import FullStamp from './images/stamp-full-15.svg';
+
+import '../MakeTextAccessible';
 
 const getDateFnsLocale = locale => {
     switch (locale) {
