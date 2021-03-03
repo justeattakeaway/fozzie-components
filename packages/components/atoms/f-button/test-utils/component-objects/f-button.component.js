@@ -8,7 +8,7 @@ module.exports = class Buttons extends Page {
     open (buttonType = '') {
         const url = buttonType === 'link' ? '&knob-Button%20Type=link&knob-href=link' : '';
 
-        super.openComponent('atom', `button-component${url}`);
+        browser.url(`/iframe.html?id=components-atoms-f-button--button-component${url}`)
     }
 
     waitForActionComponent () {
