@@ -2,13 +2,22 @@ const Button = require('../../../test-utils/component-objects/f-button.component
 const button = new Button();
 
 describe('f-button component tests', () => {
-    beforeEach(() => {
+
+    it('should display the f-button action component', () => {
+        // Act
         button.open();
-        button.waitForComponent();
+        button.waitForActionComponent();
+
+        // Assert
+        expect(button.isActionComponentDisplayed()).toBe(true);
     });
 
-    it('should display the f-button component', () => {
+    it('should display the f-button link component', () => {
+        // Act
+        button.open('link');
+        button.waitForLinkComponent();
+
         // Assert
-        expect(button.isComponentDisplayed()).toBe(true);
+        expect(button.isLinkComponentDisplayed()).toBe(true);
     });
 });
