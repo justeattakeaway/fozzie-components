@@ -60,21 +60,19 @@ export default {
     components: {
         ChevronIcon
     },
-
     props: {
         linkList: {
             type: Object,
             default: () => ({})
         }
     },
-
     data () {
         return {
-            panelCollapsed: true,
-            currentScreenWidth: 0
+            currentScreenWidth: 0,
+            interactedState: null,
+            panelCollapsed: false
         };
     },
-
     computed: {
         listId () {
             return `footer-${this.linkList.title.toLowerCase().split(' ').join('-')}`;
@@ -88,25 +86,36 @@ export default {
             return this.currentScreenWidth <= 1024;
         }
     },
-
     mounted () {
         this.currentScreenWidth = windowServices.getWindowWidth();
         windowServices.addEvent('resize', this.onResize, 100);
-    },
 
+        this.setPanelCollasped();
+    },
     destroyed () {
         windowServices.removeEvent('resize', this.onResize);
     },
-
     methods: {
+        setPanelCollasped () {
+            const initialOrInteractedState = this.interactedState === null ? true : this.interactedState;
+
+            this.panelCollapsed = this.isBelowWide ? initialOrInteractedState : false;
+        },
         onPanelClick () {
             if (this.isBelowWide) {
-                this.panelCollapsed = !this.panelCollapsed;
+                this.interactedState = !this.panelCollapsed;
+                this.setPanelCollasped();
             }
         },
-
         onResize () {
-            this.currentScreenWidth = windowServices.getWindowWidth();
+            const newScreenWidth = windowServices.getWindowWidth();
+
+            // Mobile trigger `resise` on scroll - address bar collapse
+            if (this.currentScreenWidth !== newScreenWidth) {
+                this.currentScreenWidth = newScreenWidth;
+
+                this.setPanelCollasped();
+            }
         }
     }
 };
