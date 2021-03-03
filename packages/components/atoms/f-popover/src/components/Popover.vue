@@ -9,7 +9,7 @@
 <script>
 
 export default {
-    name: 'Popover',
+    name: 'VPopover',
     components: {},
     props: {
     }
@@ -18,17 +18,16 @@ export default {
 
 <style lang="scss" module>
 
-$popover-radius                : 3px;
 $popover-padding               : spacing(x2);
 $tooltip-width                 : 10px;
 
 .c-popover {
     @include media('>=mid') {
-        background-color: $white;
-        border: 1px solid $color-border;
-        box-shadow: 0 2px 40px rgba(0, 0, 0, 0.2);
-        border-top: 0;
-        border-radius: 0 0 $popover-radius $popover-radius;
+        background-color: $color-bg--component;
+        box-shadow:0px 4px 5px 0px rgba(0, 0, 0, 0.03),
+                    0px 1px 10px 1px rgba(0, 0, 0, 0.07),
+                    0px 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border-radius: $border-radius;
         padding: 0 $popover-padding;
         width: auto;
 
@@ -36,7 +35,7 @@ $tooltip-width                 : 10px;
         &:before {
             bottom: 100%;
             border: $tooltip-width solid transparent;
-            border-bottom: $tooltip-width solid $white;
+            border-bottom: $tooltip-width solid $color-bg--component;
             content: '';
             height: 0;
             width: 0;
