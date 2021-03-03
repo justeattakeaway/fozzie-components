@@ -2,7 +2,7 @@
     <div
         v-if="linkList.links.length"
         :class="[$style['c-footer-panel'], {
-            'is-collapsed': panelCollapsed && isBelowWide
+            'is-collapsed': panelMobileCollapsed
         }]"
         data-test-id="linkList-wrapper">
         <h2>
@@ -11,7 +11,7 @@
                 :tabindex="isBelowWide ? 0 : -1"
                 :disabled="!isBelowWide"
                 :aria-disabled="!isBelowWide"
-                :aria-expanded="!panelCollapsed ? 'true' : 'false'"
+                :aria-expanded="!panelMobileCollapsed ? 'true' : 'false'"
                 :aria-controls="listId"
                 :class="[
                     'c-footer-heading',
@@ -22,7 +22,7 @@
                 {{ linkList.title }}
                 <chevron-icon
                     :class="[$style['c-icon--chevron'], {
-                        [$style['c-icon--chevron--up']]: !panelCollapsed
+                        [$style['c-icon--chevron--up']]: !panelMobileCollapsed
                     }]" />
             </button>
         </h2>
@@ -70,7 +70,7 @@ export default {
 
     data () {
         return {
-            panelCollapsed: false,
+            panelMobileCollapsed: true,
             currentScreenWidth: 0
         };
     },
@@ -92,10 +92,6 @@ export default {
     mounted () {
         this.currentScreenWidth = windowServices.getWindowWidth();
         windowServices.addEvent('resize', this.onResize, 100);
-
-        if (this.isBelowWide) {
-            this.panelCollapsed = true;
-        }
     },
 
     destroyed () {
@@ -105,16 +101,12 @@ export default {
     methods: {
         onPanelClick () {
             if (this.isBelowWide) {
-                this.panelCollapsed = !this.panelCollapsed;
+                this.panelMobileCollapsed = !this.panelMobileCollapsed;
             }
         },
 
         onResize () {
             this.currentScreenWidth = windowServices.getWindowWidth();
-
-            if (this.isBelowWide) {
-                this.panelCollapsed = true;
-            }
         }
     }
 };
