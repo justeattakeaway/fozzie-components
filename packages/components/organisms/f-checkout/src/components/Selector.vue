@@ -69,7 +69,7 @@ export default {
             'updateFulfilmentTime'
         ]),
 
-        ...mapActions('analytics', [
+        ...mapActions('checkoutAnalytics', [
             'updateChangedField'
         ]),
 

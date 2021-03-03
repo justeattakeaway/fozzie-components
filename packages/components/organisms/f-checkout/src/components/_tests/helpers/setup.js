@@ -100,7 +100,7 @@ const createStore = (
             state: checkoutState,
             actions: checkoutActions
         },
-        analytics: {
+        checkoutAnalytics: {
             namespaced: true,
             state: analyticsState,
             actions: analyticsActions

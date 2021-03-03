@@ -286,12 +286,12 @@ describe('CheckoutModule', () => {
                 expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
             });
 
-            it('should call `analytics/updateAutofill` mutation with an array of updated field names.', async () => {
+            it('should call `checkoutAnalytics/updateAutofill` mutation with an array of updated field names.', async () => {
                 // Act
                 await getCheckout({ commit, state, dispatch }, payload);
 
                 // Assert
-                expect(dispatch).toHaveBeenCalledWith('analytics/updateAutofill', state, { root: true });
+                expect(dispatch).toHaveBeenCalledWith('checkoutAnalytics/updateAutofill', state, { root: true });
             });
         });
 
@@ -353,12 +353,12 @@ describe('CheckoutModule', () => {
                 });
             });
 
-            it('should call `analytics/updateAutofill` mutation with an array of updated field names.', async () => {
+            it('should call `checkoutAnalytics/updateAutofill` mutation with an array of updated field names.', async () => {
                 // Act
                 await getAddress({ commit, state, dispatch }, payload);
 
                 // Assert
-                expect(dispatch).toHaveBeenCalledWith('analytics/updateAutofill', state, { root: true });
+                expect(dispatch).toHaveBeenCalledWith('checkoutAnalytics/updateAutofill', state, { root: true });
             });
         });
 
@@ -529,14 +529,14 @@ describe('CheckoutModule', () => {
         it.each([
             [updateAddressDetails, address],
             [updateCustomerDetails, customerDetails]
-        ])('%s should dispatch `analytics/updateChangedFields` action with first key of passed value', (action, value) => {
+        ])('%s should dispatch `checkoutAnalytics/updateChangedFields` action with first key of passed value', (action, value) => {
             // Act
             action({ commit, dispatch }, value);
 
             const [field] = Object.keys(value);
 
             // Assert
-            expect(dispatch).toHaveBeenCalledWith('analytics/updateChangedField', field, { root: true });
+            expect(dispatch).toHaveBeenCalledWith('checkoutAnalytics/updateChangedField', field, { root: true });
         });
     });
 });

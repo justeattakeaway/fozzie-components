@@ -308,7 +308,7 @@ export default {
             'getGeoLocation'
         ]),
 
-        ...mapActions('analytics', [
+        ...mapActions('checkoutAnalytics', [
             'trackInitialLoad',
             'trackFormInteraction'
         ]),

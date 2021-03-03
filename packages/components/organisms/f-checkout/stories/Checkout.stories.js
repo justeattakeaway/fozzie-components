@@ -8,7 +8,7 @@ import {
 
 import VueCheckout from '../src/components/Checkout.vue';
 import CheckoutModule from '../src/store/checkout.module';
-import AnalyticsModule from '../src/store/analytics.module';
+import CheckoutAnalyticsModule from '../src/store/checkoutAnalytics.module';
 import CheckoutMock from '../src/demo/checkoutMock';
 
 export default {
@@ -85,7 +85,7 @@ export const CheckoutComponent = () => ({
     store: new Vuex.Store({
         modules: {
             checkout: CheckoutModule,
-            analytics: AnalyticsModule
+            checkoutAnalytics: CheckoutAnalyticsModule
         }
     }),
     template: '<vue-checkout ' +

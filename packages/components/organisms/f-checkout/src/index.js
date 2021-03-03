@@ -8,7 +8,7 @@
 // Import vue component
 import VueCheckout from '@/components/Checkout.vue';
 import CheckoutModule from '@/store/checkout.module';
-import AnalyticsModule from '@/store/analytics.module';
+import CheckoutAnalyticsModule from '@/store/checkoutAnalytics.module';
 
 export { CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY } from './constants';
 
@@ -39,5 +39,5 @@ if (GlobalVue) {
 export {
     VueCheckout,
     CheckoutModule,
-    AnalyticsModule
+    CheckoutAnalyticsModule
 };
