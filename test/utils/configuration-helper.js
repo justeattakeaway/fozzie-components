@@ -10,10 +10,10 @@ exports.local = () => ({
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases
             videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
-            outputDir: `${global.baseDir}/_results_`
+            outputDir: `${global.baseDir}/test/results/allure/failure-videos`
         }],
         ['allure', {
-            outputDir: `${global.baseDir}/allure-results`,
+            outputDir: `${global.baseDir}/test/results/allure`,
             disableWebdriverStepsReporting: false,
             disableWebdriverScreenshotsReporting: false
         }],
@@ -28,10 +28,10 @@ exports.ci = () => ({
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases
             videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
-            outputDir: `${global.baseDir}/_results_`
+            outputDir: `${global.baseDir}/test/results/allure/failure-videos`
         }],
         ['allure', {
-            outputDir: `${global.baseDir}/allure-results`,
+            outputDir: `${global.baseDir}/test/results/allure`,
             disableWebdriverStepsReporting: false,
             disableWebdriverScreenshotsReporting: false
         }],
