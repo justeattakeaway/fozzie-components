@@ -198,11 +198,6 @@ export default {
         getGeoLocationUrl: {
             type: String,
             required: true
-        },
-
-        getGeoLocationTimeout: {
-            type: Number,
-            default: 1000
         }
     },
 
@@ -569,7 +564,7 @@ export default {
                     await this.getGeoLocation({
                         url: this.getGeoLocationUrl,
                         postData: locationData,
-                        timeout: this.getGeoLocationTimeout
+                        timeout: this.checkoutTimeout
                     });
                 }
             } catch (error) {

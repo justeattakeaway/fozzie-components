@@ -20,7 +20,7 @@ v0.61.0
 *March 2, 2021*
 
 ### Added
-- `getGeoLocation` to call the location services api [(AddressGeocodingAPI )](https://pages.github.je-labs.com/Architecture/api_specifications/#tag/Location-Services/paths/~1geocode~1{tenant}/post) with graceful failure as tier 3 requirement.
+- `getGeoLocation` to call the location services api.
 
 ### Changed
 - Called the api during the Submit.
