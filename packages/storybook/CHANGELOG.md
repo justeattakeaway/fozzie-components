@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.28.0
+------------------------------
+*March 3, 2021*
+
+### Changed
+- Ordering of sub-pages updated with new documentation added.
+
 
 v0.27.0
 ------------------------------

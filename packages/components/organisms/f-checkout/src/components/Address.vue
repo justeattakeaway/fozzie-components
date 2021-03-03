@@ -78,7 +78,7 @@ import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import { mapState, mapActions } from 'vuex';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
-import { VALIDATIONS } from '../constants';
+import { VALIDATIONS, VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
     components: { FormField, ErrorMessage },
@@ -92,7 +92,7 @@ export default {
     inject: ['$v'],
 
     computed: {
-        ...mapState('checkout', [
+        ...mapState(VUEX_CHECKOUT_MODULE, [
             'address'
         ]),
 
@@ -123,7 +123,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('checkout', [
+        ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateAddressDetails'
         ])
     }

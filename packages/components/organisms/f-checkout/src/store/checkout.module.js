@@ -83,7 +83,7 @@ export default {
 
             commit(UPDATE_STATE, data);
 
-            dispatch('checkoutAnalytics/updateAutofill', state, { root: true });
+            dispatch('fCheckoutAnalyticsModule/updateAutofill', state, { root: true });
         },
 
         /**
@@ -193,7 +193,7 @@ export default {
             };
 
             commit(UPDATE_BASKET_DETAILS, basketDetails);
-            dispatch('checkoutAnalytics/updateAutofill', state, { root: true });
+            dispatch('fCheckoutAnalyticsModule/updateAutofill', state, { root: true });
         },
 
         /**
@@ -225,7 +225,7 @@ export default {
             const addressDetails = addressService.getClosestAddress(data.Addresses, tenant);
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
-            dispatch('checkoutAnalytics/updateAutofill', state, { root: true });
+            dispatch('fCheckoutAnalyticsModule/updateAutofill', state, { root: true });
         },
 
         /**
@@ -288,14 +288,14 @@ export default {
         updateAddressDetails ({ commit, dispatch }, payload) {
             const [field] = Object.keys(payload);
 
-            dispatch('checkoutAnalytics/updateChangedField', field, { root: true });
+            dispatch('fCheckoutAnalyticsModule/updateChangedField', field, { root: true });
             commit(UPDATE_FULFILMENT_ADDRESS, payload);
         },
 
         updateCustomerDetails ({ commit, dispatch }, payload) {
             const [field] = Object.keys(payload);
 
-            dispatch('checkoutAnalytics/updateChangedField', field, { root: true });
+            dispatch('fCheckoutAnalyticsModule/updateChangedField', field, { root: true });
             commit(UPDATE_CUSTOMER_DETAILS, payload);
         },
 
@@ -305,7 +305,7 @@ export default {
 
         updateUserNote ({ commit, dispatch }, payload) {
             commit(UPDATE_USER_NOTE, payload);
-            dispatch('checkoutAnalytics/updateChangedField', 'note', { root: true });
+            dispatch('fCheckoutAnalyticsModule/updateChangedField', 'note', { root: true });
         }
     },
 

@@ -7,8 +7,8 @@ import {
 } from '@justeat/storybook/constants/globalisation';
 
 import VueCheckout from '../src/components/Checkout.vue';
-import CheckoutModule from '../src/store/checkout.module';
-import CheckoutAnalyticsModule from '../src/store/checkoutAnalytics.module';
+import fCheckoutModule from '../src/store/checkout.module';
+import fCheckoutAnalyticsModule from '../src/store/checkoutAnalytics.module';
 import CheckoutMock from '../src/demo/checkoutMock';
 
 export default {
@@ -84,8 +84,8 @@ export const CheckoutComponent = () => ({
     },
     store: new Vuex.Store({
         modules: {
-            checkout: CheckoutModule,
-            checkoutAnalytics: CheckoutAnalyticsModule
+            fCheckoutModule,
+            fCheckoutAnalyticsModule
         }
     }),
     template: '<vue-checkout ' +

@@ -1,4 +1,3 @@
-import Trak from '@justeat/f-trak';
 import CheckoutAnalyticsModule from '../checkoutAnalytics.module';
 import * as mapper from '../../services/mapper';
 import { defaultCheckoutState, defaultAnalyticsState } from '../../components/_tests/helpers/setup';
@@ -16,6 +15,12 @@ const {
     trackInitialLoad,
     trackFormInteraction
 } = actions;
+
+Object.defineProperty(global, 'window', {
+    value: {
+        dataLayer: []
+    }
+});
 
 describe('CheckoutAnalyticsModule', () => {
     let state = CheckoutAnalyticsModule.state();
@@ -35,7 +40,7 @@ describe('CheckoutAnalyticsModule', () => {
             commit = jest.fn();
             dispatch = jest.fn();
             state = CheckoutAnalyticsModule.state();
-            trackEventSpy = jest.spyOn(Trak, 'event');
+            window.dataLayer = [];
         });
 
         afterEach(() => {
@@ -189,12 +194,12 @@ describe('CheckoutAnalyticsModule', () => {
                 };
             });
 
-            it('should call `event` method of `f-trak`', () => {
+            it('should `push` expected event to `dataLayer`', () => {
                 // Act
                 trackInitialLoad({ rootState, dispatch });
 
                 // Assert
-                expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
+                expect(window.dataLayer[0]).toEqual(expectedEvent);
             });
 
             describe('when user `isLoggedIn` is true', () => {
@@ -209,7 +214,7 @@ describe('CheckoutAnalyticsModule', () => {
                     trackInitialLoad({ rootState, dispatch });
 
                     // Assert
-                    expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
+                    expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
             });
 
@@ -225,7 +230,7 @@ describe('CheckoutAnalyticsModule', () => {
                     trackInitialLoad({ rootState, dispatch });
 
                     // Assert
-                    expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
+                    expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
             });
 
@@ -260,8 +265,8 @@ describe('CheckoutAnalyticsModule', () => {
                         }
                     }
                 };
-
                 mapAnalyticsNamesSpy = jest.spyOn(mapper, 'mapAnalyticsNames');
+                window.dataLayer = [];
             });
 
             afterEach(() => {
@@ -280,15 +285,15 @@ describe('CheckoutAnalyticsModule', () => {
                     trackFormInteraction({ state, rootState }, payload);
 
                     // Assert
-                    expect(mapAnalyticsNamesSpy).toHaveBeenCalledWith(payload.error);
+                    expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
 
-                it('should call `event` method of `f-trak` with expected event', () => {
+                it('should `push` expected event to `dataLayer`', () => {
                     // Act
                     trackFormInteraction({ state, rootState }, payload);
 
                     // Assert
-                    expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
+                    expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
             });
 
@@ -304,15 +309,15 @@ describe('CheckoutAnalyticsModule', () => {
                     trackFormInteraction({ state, rootState }, payload);
 
                     // Assert
-                    expect(mapAnalyticsNamesSpy).not.toHaveBeenCalled();
+                    expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
 
-                it('should call `event` method of `f-trak` with expected event', () => {
+                it('should `push` expected event to `dataLayer`', () => {
                     // Act
                     trackFormInteraction({ state, rootState }, payload);
 
                     // Assert
-                    expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
+                    expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
             });
 
@@ -328,7 +333,7 @@ describe('CheckoutAnalyticsModule', () => {
                     trackFormInteraction({ state, rootState }, payload);
 
                     // Assert
-                    expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
+                    expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
             });
 
@@ -344,7 +349,7 @@ describe('CheckoutAnalyticsModule', () => {
                     trackFormInteraction({ state, rootState }, payload);
 
                     // Assert
-                    expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
+                    expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
             });
         });

@@ -1,4 +1,4 @@
-import Trak from '@justeat/f-trak';
+// import Trak from '@justeat/f-trak';
 import { mapAnalyticsName, mapAnalyticsNames } from '../services/mapper';
 
 import {
@@ -51,18 +51,20 @@ export default {
          * Pushes initial state of checkout to the dataLayer.
          */
         trackInitialLoad ({ rootState, dispatch }) {
-            window.dataLayer = window.dataLayer || [];
+            if (typeof(window) === 'undefined') {
+                return;
+            }
 
-            const pageName = rootState.checkout.isLoggedIn ? 'Overview' : 'Guest';
+            const pageName = rootState.fCheckoutModule.isLoggedIn ? 'Overview' : 'Guest';
 
-            Trak.event({
+            window.dataLayer.push({
                 custom: {
                     checkout: {
                         step: 1
                     },
-                    basket: rootState.checkout.basket,
+                    basket: rootState.fCheckoutModule.basket,
                     restaurant: {
-                        id: rootState.checkout.restaurantId
+                        id: rootState.fCheckoutModule.restaurantId
                     },
                     pageData: {
                         name: `Checkout 1 ${pageName}`,
@@ -78,11 +80,15 @@ export default {
          * Pushes `form` event to the dataLayer with correct data
          */
         trackFormInteraction ({ state, rootState }, { action, error }) {
-            const formName = rootState.checkout.isLoggedIn ? 'checkout' : 'checkout_guest';
+            if (typeof(window) === 'undefined') {
+                return;
+            }
+
+            const formName = rootState.fCheckoutModule.isLoggedIn ? 'checkout' : 'checkout_guest';
 
             const mappedError = error ? mapAnalyticsNames(error) : null;
 
-            Trak.event({
+            window.dataLayer.push({
                 event: 'Form',
                 custom: {
                     form: {
