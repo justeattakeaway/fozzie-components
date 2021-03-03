@@ -11,6 +11,9 @@ v4.9.1
 ## Fixed
 - Mobile Link lists collapse on scroll
 
+### Added
+- Preserve mobile link list toggle state.
+
 
 v4.9.0
 ------------------------------
