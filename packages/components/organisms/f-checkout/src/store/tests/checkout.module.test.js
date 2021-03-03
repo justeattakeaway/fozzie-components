@@ -4,6 +4,7 @@ import checkoutDelivery from '../../demo/checkout-delivery.json';
 import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
+import geoLocationDetails from '../../demo/get-geo-location.json';
 
 import {
     UPDATE_AUTH,
@@ -15,7 +16,8 @@ import {
     UPDATE_IS_FULFILLABLE,
     UPDATE_ISSUES,
     UPDATE_STATE,
-    UPDATE_USER_NOTE
+    UPDATE_USER_NOTE,
+    UPDATE_GEO_LOCATION
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutModule;
@@ -26,6 +28,7 @@ const {
     getAvailableFulfilment,
     getBasket,
     getCheckout,
+    getGeoLocation,
     updateCheckout,
     setAuthToken,
     updateAddressDetails,
@@ -47,6 +50,14 @@ const address = {
     line2: 'line 2',
     city: 'city',
     postcode: 'postcode'
+};
+
+const locationData = {
+    addressLines: [
+        '1 Jazz Avenue',
+        'Strange Town',
+        'JZ1 1AA'
+    ]
 };
 
 const time = {
@@ -99,7 +110,8 @@ const defaultState = {
     },
     authToken: '',
     isLoggedIn: false,
-    userNote: ''
+    userNote: '',
+    geolocation: null
 };
 
 let state = CheckoutModule.state();
@@ -202,6 +214,22 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe(`${UPDATE_GEO_LOCATION} ::`, () => {
+            it('should update state with received values', () => {
+                // Arrange (Long / Lat)
+                const geometryData = [-0.10358, 51.51469];
+
+                // Act
+                mutations[UPDATE_GEO_LOCATION](state, geometryData);
+
+                // Assert
+                expect(state.geolocation).toEqual({
+                    latitude: geometryData[1],
+                    longitude: geometryData[0]
+                });
+            });
+        });
+
         it.each([
             [UPDATE_FULFILMENT_ADDRESS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
@@ -225,7 +253,8 @@ describe('CheckoutModule', () => {
             url: 'http://localhost/account/checkout',
             tenant: 'uk',
             language: 'en-GB',
-            timeout: '1000'
+            timeout: '1000',
+            postData: null
         };
 
         beforeEach(() => {
@@ -430,6 +459,57 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_TIME, time);
+            });
+        });
+
+        describe('getGeoLocation ::', () => {
+            // Arrange
+            let config;
+            payload.postData = locationData;
+
+            beforeEach(() => {
+                config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${authToken}`
+                    },
+                    timeout: payload.timeout
+                };
+
+                axios.post = jest.fn(() => Promise.resolve({
+                    status: 200,
+                    data: geoLocationDetails
+                }));
+            });
+
+            describe('if the user is logged in', () => {
+                beforeEach(() => {
+                    state.isLoggedIn = true;
+                });
+
+                it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation.`, async () => {
+                    // Act
+                    await getGeoLocation({ commit, state }, payload);
+
+                    // Assert
+                    expect(axios.post).toHaveBeenCalledWith(payload.url, locationData, config);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, geoLocationDetails.geometry.coordinates);
+                });
+            });
+
+            describe('if the user is not logged in', () => {
+                beforeEach(() => {
+                    state.isLoggedIn = false;
+                });
+
+                it('should not make api call and should not call mutation.', async () => {
+                    // Act
+                    await getGeoLocation({ commit, state }, payload);
+
+                    // Assert
+                    expect(axios.post).not.toHaveBeenCalled();
+                    expect(commit).not.toHaveBeenCalled();
+                });
             });
         });
 
