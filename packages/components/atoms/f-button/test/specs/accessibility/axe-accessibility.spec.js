@@ -3,13 +3,17 @@ const Button = require('../../../test-utils/component-objects/f-button.component
 const button = new Button();
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
+    it('a11y - should test f-button action component WCAG compliance', () => {
+        // Act
         button.open();
-        button.waitForComponent();
+        button.waitForActionComponent();
+        const axeResults = getAccessibilityTestResults('f-button - action');
     });
 
-    it('a11y - should test f-button component WCAG compliance', () => {
+    it('a11y - should test f-button link component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-button');
+        button.open('link');
+        button.waitForLinkComponent();
+        const axeResults = getAccessibilityTestResults('f-button - link');
     });
 });
