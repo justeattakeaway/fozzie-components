@@ -1,14 +1,14 @@
-import MediaElementComponent from '../../../test-utils/component-objects/f-mediaElement.component';
+import MediaElement from '../../../test-utils/component-objects/f-mediaElement.component';
+const mediaElement = new MediaElement();
 
 describe('f-mediaElement component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-molecules--media-element-component');
-        browser.switchToFrame(0);
-        MediaElementComponent.waitForMediaElementComponent();
+        mediaElement.open();
+        mediaElement.waitForComponent();
     });
 
     it('should display the f-mediaElement component', () => {
         // Assert
-        expect(MediaElementComponent.isMediaElementComponentDisplayed()).toBe(true);
+        expect(mediaElement.isComponentDisplayed()).toBe(true);
     });
 });

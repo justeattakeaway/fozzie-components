@@ -1,5 +1,29 @@
-const buttonComponent = () => $('[data-test-id="action-button-component"]');
+const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-exports.waitForButtonComponent = () => buttonComponent().waitForExist();
+module.exports = class Buttons extends Page {
+    get actionComponent () { return $('[data-test-id="action-button-component"]'); }
 
-exports.isButtonComponentDisplayed = () => buttonComponent().isDisplayed();
+    get linkComponent () { return $('[data-test-id="link-button-component"]'); }
+
+    open (buttonType = '') {
+        const url = buttonType === 'link' ? '&knob-Button%20Type=link&knob-href=link' : '';
+
+        super.openComponent('atom', `button-component${url}`);
+    }
+
+    waitForActionComponent () {
+        this.actionComponent.waitForExist();
+    }
+
+    waitForLinkComponent () {
+        this.linkComponent.waitForExist();
+    }
+
+    isActionComponentDisplayed () {
+        return this.actionComponent.isDisplayed();
+    }
+
+    isLinkComponentDisplayed () {
+        return this.linkComponent.isDisplayed();
+    }
+};

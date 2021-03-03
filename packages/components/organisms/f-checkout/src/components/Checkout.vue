@@ -83,7 +83,7 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import { required, email } from 'vuelidate/lib/validators';
-import { mapState, mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
@@ -111,7 +111,7 @@ import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants'
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
-import mapUpdateCheckoutRequest from '../services/mapper';
+import { mapUpdateCheckoutRequest } from '../services/mapper';
 
 export default {
     name: 'VueCheckout',
@@ -175,32 +175,6 @@ export default {
             default: 1000
         },
 
-        getCheckoutTimeout: {
-            type: Number,
-            required: false,
-            default: 1000
-        },
-
-        createGuestTimeout: {
-            type: Number,
-            default: 1000
-        },
-
-        getBasketTimeout: {
-            type: Number,
-            default: 1000
-        },
-
-        placeOrderTimeout: {
-            type: Number,
-            default: 1000
-        },
-
-        updateCheckoutTimeout: {
-            type: Number,
-            default: 1000
-        },
-
         authToken: {
             type: String,
             default: ''
@@ -216,12 +190,12 @@ export default {
             required: true
         },
 
-        getAddressTimeout: {
-            type: Number,
-            default: 1000
+        applicationName: {
+            type: String,
+            required: true
         },
 
-        applicationName: {
+        getGeoLocationUrl: {
             type: String,
             required: true
         }
@@ -271,7 +245,8 @@ export default {
             'time',
             'userNote',
             'basket',
-            'orderId'
+            'orderId',
+            'geolocation'
         ]),
 
         isMobileNumberValid () {
@@ -315,6 +290,7 @@ export default {
 
     async mounted () {
         await this.initialise();
+        this.trackInitialLoad();
     },
 
     methods: {
@@ -328,7 +304,13 @@ export default {
             'setAuthToken',
             'updateCustomerDetails',
             'updateUserNote',
-            'placeOrder'
+            'placeOrder',
+            'getGeoLocation'
+        ]),
+
+        ...mapActions('analytics', [
+            'trackInitialLoad',
+            'trackFormInteraction'
         ]),
 
         /**
@@ -368,18 +350,21 @@ export default {
                     await this.setupGuestUser();
                 }
 
+                await this.lookupGeoLocation();
+
                 const data = mapUpdateCheckoutRequest({
                     address: this.address,
                     customer: this.customer,
                     isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
                     time: this.time,
-                    userNote: this.userNote
+                    userNote: this.userNote,
+                    geolocation: this.geolocation
                 });
 
                 await this.updateCheckout({
                     url: this.updateCheckoutUrl,
                     data,
-                    timeout: this.updateCheckoutTimeout
+                    timeout: this.checkoutTimeout
                 });
 
                 await this.submitOrder();
@@ -435,7 +420,7 @@ export default {
             await this.placeOrder({
                 url: this.placeOrderUrl,
                 data,
-                timeout: this.placeOrderTimeout
+                timeout: this.checkoutTimeout
             });
         },
 
@@ -456,7 +441,7 @@ export default {
                     url: this.createGuestUrl,
                     tenant: this.tenant,
                     data: createGuestData,
-                    timeout: this.createGuestTimeout
+                    timeout: this.checkoutTimeout
                 });
 
                 this.$emit(EventNames.CheckoutSetupGuestSuccess);
@@ -479,7 +464,7 @@ export default {
             try {
                 await this.getCheckout({
                     url: this.getCheckoutUrl,
-                    timeout: this.getCheckoutTimeout
+                    timeout: this.checkoutTimeout
                 });
 
                 this.$emit(EventNames.CheckoutGetSuccess);
@@ -505,7 +490,7 @@ export default {
                     url: this.getBasketUrl,
                     tenant: this.tenant,
                     language: this.$i18n.locale,
-                    timeout: this.getBasketTimeout
+                    timeout: this.checkoutTimeout
                 });
 
                 this.$emit(EventNames.CheckoutBasketGetSuccess);
@@ -529,7 +514,7 @@ export default {
             try {
                 await this.getAvailableFulfilment({
                     url: this.checkoutAvailableFulfilmentUrl,
-                    timeout: this.getCheckoutTimeout
+                    timeout: this.checkoutTimeout
                 });
 
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess);
@@ -555,9 +540,8 @@ export default {
                     url: this.getAddressUrl,
                     tenant: this.tenant,
                     language: this.$i18n.locale,
-                    timeout: this.getAddressTimeout
+                    timeout: this.checkoutTimeout
                 });
-
                 this.$emit(EventNames.CheckoutAddressGetSuccess);
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutAddressGetFailure, thrownErrors);
@@ -565,11 +549,38 @@ export default {
             }
         },
 
+        /**
+         * Look up the geo details for the customers address, skip on failure.
+         *
+         */
+        async lookupGeoLocation () {
+            const locationData =
+            {
+                addressLines: Object.values(this.address).filter(addressLine => !!addressLine)
+            };
+
+            try {
+                if (locationData.addressLines.length) {
+                    await this.getGeoLocation({
+                        url: this.getGeoLocationUrl,
+                        postData: locationData,
+                        timeout: this.checkoutTimeout
+                    });
+                }
+            } catch (error) {
+                this.$logger.logWarn(
+                    'Geo location lookup failed',
+                    this.$store,
+                    { error }
+                );
+            }
+        },
+
+        /**
+         * Emit `CheckoutFailure` event with error data
+         * Update `genericErrorMessage` to display correct errorMessage for passed error
+         */
         handleErrorState (error) {
-            /*
-            * Emit `CheckoutFailure` event with error data
-            * Update `genericErrorMessage` to display correct errorMessage for passed error
-            */
             let thrownErrors = error;
 
             // Ideally we would use optional chaining but it doesn't currently work with Storybook
@@ -610,15 +621,19 @@ export default {
             }
         },
 
+        /**
+         * Check form is valid - no inline messages
+         * If form is valid try to call `submitCheckout`
+         * Catch and handle any errors
+         */
         async onFormSubmit () {
-            /*
-            * Check for is valid - no inline messages
-            * If form is valid try to call `submitCheckout`
-            * Catch and handle any errors
-            */
+            this.trackFormInteraction({ action: 'submit' });
+
             if (!this.isFormValid()) {
                 const validationState = validations.getFormValidationState(this.$v);
+
                 this.$emit(EventNames.CheckoutValidationError, validationState);
+                this.trackFormInteraction({ action: 'inline_error', error: validationState.invalidFields });
 
                 this.$logger.logWarn(
                     'Checkout Validation Error',
@@ -632,6 +647,7 @@ export default {
 
             try {
                 await this.submitCheckout();
+                this.trackFormInteraction({ action: 'success' });
             } catch (error) {
                 this.handleErrorState(error);
             } finally {
@@ -639,26 +655,26 @@ export default {
             }
         },
 
+        /**
+         * Check to see if any `Vuelidate` validation errors
+         */
         isFormValid () {
-            /*
-            * Check to see if any `Vuelidate` validation errors
-            */
             this.$v.$touch();
             return !this.$v.$invalid;
         },
 
-        /*
-        * Use phone validation in `f-services` to check if customer number is
-        * valid in current locale
-        */
+        /**
+         * Use phone validation in `f-services` to check if customer number is
+         * valid in current locale
+         */
         isValidPhoneNumber () {
             return validations.isValidPhoneNumber(this.customer.mobileNumber, this.$i18n.locale);
         },
 
-        /*
-        * Use postcode validation in `f-services` to check if customer postcode is
-        * valid in current locale
-        */
+        /**
+         * Use postcode validation in `f-services` to check if customer postcode is
+         * valid in current locale
+         */
         isValidPostcode () {
             return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
         },

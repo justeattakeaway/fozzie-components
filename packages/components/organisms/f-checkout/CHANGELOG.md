@@ -3,6 +3,41 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.62.0
+------------------------------
+*March 3, 2021*
+
+### Changed
+- Storybook knobs to be easier to use.
+- `open` function for component tests to match changes.
+
+### Removed
+- Redundant timeout props.
+
+
+v0.61.0
+------------------------------
+*March 2, 2021*
+
+### Added
+- `getGeoLocation` to call the location services api.
+
+### Changed
+- Called the api during the Submit.
+- Mapped the results into the `PATCH` Checkout request model.
+- Refactored/Added unit tests.
+
+
+v0.60.0
+-------------------------------
+*February 26, 2021*
+
+### Added
+- `analytics.module` to store.
+- `mapAnalyticsName` and `mapAnalyticsNames` to `mapper` service.
+- Analytics tracking to `Checkout` component.
+- Tests to cover changes.
+
 
 v0.59.0
 ------------------------------

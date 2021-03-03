@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { select, text } from '@storybook/addon-knobs';
+import { select, boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import {
     ENGLISH_LOCALE
@@ -8,6 +8,7 @@ import {
 
 import VueCheckout from '../src/components/Checkout.vue';
 import CheckoutModule from '../src/store/checkout.module';
+import AnalyticsModule from '../src/store/analytics.module';
 import CheckoutMock from '../src/demo/checkoutMock';
 
 export default {
@@ -27,6 +28,7 @@ const updateCheckoutUrl = '/update-checkout.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
 const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
+const getGeoLocationUrl = '/get-geo-location.json';
 
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutCollectionUrl);
@@ -37,48 +39,53 @@ CheckoutMock.setupCheckoutMethod(getBasketCollectionUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutUrl);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderUrl);
+CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
 CheckoutMock.passThroughAny();
 
 export const CheckoutComponent = () => ({
     components: { VueCheckout },
+    data () {
+        return {
+            checkoutAvailableFulfilmentUrl,
+            createGuestUrl,
+            getAddressUrl,
+            loginUrl: '/login',
+            paymentPageUrlPrefix,
+            placeOrderUrl,
+            updateCheckoutUrl,
+            getGeoLocationUrl
+        };
+    },
     props: {
+        isLoggedIn: {
+            default: boolean('Is User Logged In', false)
+        },
+
+        serviceType: {
+            default: select('Service Type', ['collection', 'delivery', 'invalid-url'], 'delivery')
+        },
+
         locale: {
             default: select('Locale', [ENGLISH_LOCALE])
+        }
+    },
+    computed: {
+        getCheckoutUrl () {
+            return `/checkout-${this.serviceType}.json`;
         },
-        updateCheckoutUrl: {
-            default: select('Update Checkout Url', [updateCheckoutUrl], updateCheckoutUrl)
+
+        getBasketUrl () {
+            return `/get-basket-${this.serviceType}.json`;
         },
-        getCheckoutUrl: {
-            default: select('Get Checkout Url', [getCheckoutDeliveryUrl, getCheckoutCollectionUrl, 'An invalid URL'], getCheckoutDeliveryUrl)
-        },
-        checkoutAvailableFulfilmentUrl: {
-            default: select('Available Fulfilment Url', [checkoutAvailableFulfilmentUrl], checkoutAvailableFulfilmentUrl)
-        },
-        createGuestUrl: {
-            default: text('Create Guest Url', createGuestUrl)
-        },
-        getBasketUrl: {
-            default: select('Get Basket Url', [getBasketDeliveryUrl, getBasketCollectionUrl], getBasketDeliveryUrl)
-        },
-        authToken: {
-            default: text('Auth token', '')
-        },
-        loginUrl: {
-            default: text('Login Url', '/login')
-        },
-        getAddressUrl: {
-            default: text('Get Address Url', getAddressUrl)
-        },
-        placeOrderUrl: {
-            default: select('Place Order Url', [placeOrderUrl], placeOrderUrl)
-        },
-        paymentPageUrlPrefix: {
-            default: text('Payment Page Url Prefix', paymentPageUrlPrefix)
+
+        authToken () {
+            return this.isLoggedIn ? 'Auth Token' : '';
         }
     },
     store: new Vuex.Store({
         modules: {
-            checkout: CheckoutModule
+            checkout: CheckoutModule,
+            analytics: AnalyticsModule
         }
     }),
     template: '<vue-checkout ' +
@@ -94,8 +101,9 @@ export const CheckoutComponent = () => ({
         ':placeOrderUrl="placeOrderUrl" ' +
         ':paymentPageUrlPrefix="paymentPageUrlPrefix" ' +
         'applicationName="Storybook" ' +
+        ':getGeoLocationUrl="getGeoLocationUrl" ' +
         // eslint-disable-next-line no-template-curly-in-string
-        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix}`" />'
+        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';

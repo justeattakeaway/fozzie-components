@@ -38,6 +38,16 @@ describe('contentCards › PostOrderCard', () => {
         expect(wrapper.find('[data-test-id="contentCard-postOrderCard-title"]').exists()).toBe(false);
     });
 
+    it('should link to a new tab via the `target` attribute', () => {
+        // Arrange & Act
+        const wrapper = shallowMount(PostOrderCard);
+
+        // Assert
+        expect(wrapper.vm.cardContainerCard.target).toStrictEqual({
+            attribute: '_blank',
+            rel: 'noopener'
+        });
+    });
 
     describe('condensed', () => {
         it('should apply the condensed class when no background image is available', () => {

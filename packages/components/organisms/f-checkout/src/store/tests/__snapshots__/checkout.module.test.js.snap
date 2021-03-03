@@ -23,6 +23,7 @@ Object {
     "lastName": "",
     "mobileNumber": "+447111111111",
   },
+  "geolocation": null,
   "id": "12345",
   "isFulfillable": true,
   "isLoggedIn": false,

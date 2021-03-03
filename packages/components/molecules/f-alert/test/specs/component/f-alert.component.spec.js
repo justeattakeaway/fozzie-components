@@ -1,22 +1,22 @@
-import AlertComponent from '../../../test-utils/component-objects/f-alert.component';
+const Alert = require('../../../test-utils/component-objects/f-alert.component');
+const alert = new Alert();
 
 describe('f-alert component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-molecules--alert-component');
-        browser.switchToFrame(0);
-        AlertComponent.waitForAlert();
+        alert.open();
+        alert.waitForComponent();
     });
 
     it('should display Alert', () => {
         // Assert
-        expect(AlertComponent.isAlertDisplayed()).toBe(true);
+        expect(alert.isComponentDisplayed()).toBe(true);
     });
 
     it('should close alert when exit button is clicked', () => {
         // Act
-        AlertComponent.exitAlert();
+        alert.clickExitButton();
 
         // Assert
-        expect(AlertComponent.isAlertDisplayed()).toBe(false);
+        expect(alert.isComponentDisplayed()).toBe(false);
     });
 });

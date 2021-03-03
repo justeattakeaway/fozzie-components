@@ -13,7 +13,7 @@ const fulfilmentTimes = [
     }
 ];
 
-const defaultState = {
+const defaultCheckoutState = {
     id: '',
     serviceType: CHECKOUT_METHOD_DELIVERY,
     restaurantId: '',
@@ -47,10 +47,16 @@ const defaultState = {
     messages: [],
     authToken: '',
     isLoggedIn: false,
-    userNote: 'No ketchup, please.'
+    userNote: 'No ketchup, please.',
+    geolocation: null
 };
 
-const defaultActions = {
+const defaultAnalyticsState = {
+    autofill: [],
+    changedFields: []
+};
+
+const defaultCheckoutActions = {
     getCheckout: jest.fn(),
     updateCheckout: jest.fn(),
     getAvailableFulfilment: jest.fn(),
@@ -59,9 +65,17 @@ const defaultActions = {
     updateAddressDetails: jest.fn(),
     updateCustomerDetails: jest.fn(),
     updateFulfilmentTime: jest.fn(),
+    getGeoLocation: jest.fn(),
     getBasket: jest.fn(),
     getAddress: jest.fn(),
     placeOrder: jest.fn()
+};
+
+const defaultAnalyticsActions = {
+    updateAutofill: jest.fn(),
+    updateChangedField: jest.fn(),
+    trackInitialLoad: jest.fn(),
+    trackFormInteraction: jest.fn()
 };
 
 const i18n = {
@@ -74,12 +88,22 @@ const i18n = {
     }
 };
 
-const createStore = (state = defaultState, actions = defaultActions) => new Vuex.Store({
+const createStore = (
+    checkoutState = defaultCheckoutState,
+    checkoutActions = defaultCheckoutActions,
+    analyticsState = defaultAnalyticsState,
+    analyticsActions = defaultAnalyticsActions
+) => new Vuex.Store({
     modules: {
         checkout: {
             namespaced: true,
-            state,
-            actions
+            state: checkoutState,
+            actions: checkoutActions
+        },
+        analytics: {
+            namespaced: true,
+            state: analyticsState,
+            actions: analyticsActions
         },
         hasModule: jest.fn(() => true)
     }
@@ -93,8 +117,9 @@ const $logger = {
 
 export {
     fulfilmentTimes,
-    defaultState,
-    defaultActions,
+    defaultCheckoutState,
+    defaultCheckoutActions,
+    defaultAnalyticsState,
     i18n,
     createStore,
     $logger
