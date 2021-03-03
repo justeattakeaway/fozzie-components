@@ -231,6 +231,8 @@
 #           command: yarn test-component:chrome
 #       - store_artifacts:
 #           path: _results_/*.mp4
+#       - store_test_results:
+#           path: test/results/ci
 
 #   accessibility_tests:
 #     executor: node
@@ -253,6 +255,8 @@
 #           command: yarn test-a11y:chrome
 #       - store_artifacts:
 #           path: axe-violations/
+#       - store_test_results:
+#           path: test/results/ci
 
 #   bundlewatch:
 #     executor: node
