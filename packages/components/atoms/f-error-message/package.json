@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-error-message",
   "description": "Fozzie Error Message – Generic inline error message",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "main": "dist/f-error-message.umd.min.js",
   "files": [
     "dist"
@@ -31,6 +31,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
+    "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
     "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
   },
   "browserslist": [
