@@ -81,10 +81,6 @@ export default {
          * Pushes `form` event to the dataLayer with correct data
          */
         trackFormInteraction ({ state, rootState }, { action, error }) {
-            if (typeof (window) === 'undefined') {
-                return;
-            }
-
             const formName = rootState[VUEX_CHECKOUT_MODULE].isLoggedIn ? 'checkout' : 'checkout_guest';
 
             const mappedError = error ? mapAnalyticsNames(error) : null;
