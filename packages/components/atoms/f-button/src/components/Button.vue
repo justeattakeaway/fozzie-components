@@ -334,8 +334,7 @@ $btn-sizeXSmall-lineHeight      : 1;
     justify-content: center;
     border-radius: 50%;
 
-    &.o-btn--primary,
-    &.o-btn--primary.o-btn--sizeLarge {
+    &.o-btn--primary {
         path {
             fill: $btn-primary-textColor;
         }

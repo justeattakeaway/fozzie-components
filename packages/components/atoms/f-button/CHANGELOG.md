@@ -16,7 +16,7 @@ v1.1.0
 - Restructured component object into page object model
 - Refactored component and accessibility tests
 - `f-button--icon` styles to show different button sizes for `--sizeMedium`, `--sizeLarge`, `--sizeSmall` and `--sizeXSmall`
-- `f-button--icon` styles to show blue background for large f-button--icon
+- `f-button--icon` styles to show blue background for large primary `f-button--icon` instead of orange
 
 
 v1.0.0
