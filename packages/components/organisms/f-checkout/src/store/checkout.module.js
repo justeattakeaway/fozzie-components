@@ -8,6 +8,7 @@ import {
     UPDATE_CUSTOMER_DETAILS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
+    UPDATE_GEO_LOCATION,
     UPDATE_IS_FULFILLABLE,
     UPDATE_ISSUES,
     UPDATE_ORDER_PLACED,
@@ -53,7 +54,8 @@ export default {
             isAsapAvailable: false
         },
         authToken: '',
-        isLoggedIn: false
+        isLoggedIn: false,
+        geolocation: null
     }),
 
     actions: {
@@ -255,6 +257,30 @@ export default {
             commit(UPDATE_ORDER_PLACED, orderId);
         },
 
+        /**
+         * Get the geo details from the address and update the state (If not logged in then skip).
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getGeoLocation: async ({ commit, state }, { url, postData, timeout }) => {
+            if (state.isLoggedIn) {
+                const authHeader = state.authToken && `Bearer ${state.authToken}`;
+
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: authHeader
+                    },
+                    timeout
+                };
+
+                const { data } = await axios.post(url, postData, config);
+
+                commit(UPDATE_GEO_LOCATION, data.geometry.coordinates);
+            }
+        },
+
         setAuthToken: ({ commit }, authToken) => {
             commit(UPDATE_AUTH, authToken);
         },
@@ -373,6 +399,13 @@ export default {
 
         [UPDATE_ORDER_PLACED]: (state, orderId) => {
             state.orderId = orderId;
+        },
+
+        [UPDATE_GEO_LOCATION]: (state, [lng, lat]) => {
+            state.geolocation = {
+                latitude: lat,
+                longitude: lng
+            };
         }
     }
 };

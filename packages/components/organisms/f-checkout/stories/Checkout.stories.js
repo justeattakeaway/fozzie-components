@@ -28,6 +28,7 @@ const updateCheckoutUrl = '/update-checkout.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
 const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
+const getGeoLocationUrl = '/get-geo-location.json';
 
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutCollectionUrl);
@@ -38,6 +39,7 @@ CheckoutMock.setupCheckoutMethod(getBasketCollectionUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutUrl);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderUrl);
+CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
 CheckoutMock.passThroughAny();
 
 export const CheckoutComponent = () => ({
@@ -50,7 +52,8 @@ export const CheckoutComponent = () => ({
             loginUrl: '/login',
             paymentPageUrlPrefix,
             placeOrderUrl,
-            updateCheckoutUrl
+            updateCheckoutUrl,
+            getGeoLocationUrl
         };
     },
     props: {
@@ -98,8 +101,9 @@ export const CheckoutComponent = () => ({
         ':placeOrderUrl="placeOrderUrl" ' +
         ':paymentPageUrlPrefix="paymentPageUrlPrefix" ' +
         'applicationName="Storybook" ' +
+        ':getGeoLocationUrl="getGeoLocationUrl" ' +
         // eslint-disable-next-line no-template-curly-in-string
-        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix}`" />'
+        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl}`" />'
 });
 
 CheckoutComponent.storyName = 'f-checkout';

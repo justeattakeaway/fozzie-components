@@ -12,13 +12,30 @@ v0.63.0
 - Prevent error page showing when the address call fails
 - Logging when the address call does fail
 
-Latest (add to next release)
+
+v0.62.0
 ------------------------------
-*March 2, 2021*
+*March 3, 2021*
 
 ### Changed
 - Storybook knobs to be easier to use.
 - `open` function for component tests to match changes.
+
+### Removed
+- Redundant timeout props.
+
+
+v0.61.0
+------------------------------
+*March 2, 2021*
+
+### Added
+- `getGeoLocation` to call the location services api.
+
+### Changed
+- Called the api during the Submit.
+- Mapped the results into the `PATCH` Checkout request model.
+- Refactored/Added unit tests.
 
 
 v0.60.0
