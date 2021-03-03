@@ -51,7 +51,7 @@ export const CheckoutComponent = () => ({
             paymentPageUrlPrefix,
             placeOrderUrl,
             updateCheckoutUrl
-        }
+        };
     },
     props: {
         isLoggedIn: {
