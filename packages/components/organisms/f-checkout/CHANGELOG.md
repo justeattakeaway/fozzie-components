@@ -8,8 +8,11 @@ v0.64.0
 *March 3, 2021*
 
 ### Changed
-- `analytics.module` to `checkoutAnalytics.module`.
+- `analytics` to `fCheckout.module`.
+- `analytics.module` to `fCheckoutAnalytics.module`.
 
+### Removed
+- `f-trak` dependency.
 
 v0.63.0
 ------------------------------

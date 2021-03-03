@@ -1,5 +1,6 @@
 // import Trak from '@justeat/f-trak';
 import { mapAnalyticsName, mapAnalyticsNames } from '../services/mapper';
+import { VUEX_CHECKOUT_MODULE } from '../constants';
 
 import {
     UPDATE_CHANGED_FIELD,
@@ -51,20 +52,20 @@ export default {
          * Pushes initial state of checkout to the dataLayer.
          */
         trackInitialLoad ({ rootState, dispatch }) {
-            if (typeof(window) === 'undefined') {
+            if (typeof (window) === 'undefined') {
                 return;
             }
 
-            const pageName = rootState.fCheckoutModule.isLoggedIn ? 'Overview' : 'Guest';
+            const pageName = rootState[VUEX_CHECKOUT_MODULE].isLoggedIn ? 'Overview' : 'Guest';
 
             window.dataLayer.push({
                 custom: {
                     checkout: {
                         step: 1
                     },
-                    basket: rootState.fCheckoutModule.basket,
+                    basket: rootState[VUEX_CHECKOUT_MODULE].basket,
                     restaurant: {
-                        id: rootState.fCheckoutModule.restaurantId
+                        id: rootState[VUEX_CHECKOUT_MODULE].restaurantId
                     },
                     pageData: {
                         name: `Checkout 1 ${pageName}`,
@@ -80,11 +81,11 @@ export default {
          * Pushes `form` event to the dataLayer with correct data
          */
         trackFormInteraction ({ state, rootState }, { action, error }) {
-            if (typeof(window) === 'undefined') {
+            if (typeof (window) === 'undefined') {
                 return;
             }
 
-            const formName = rootState.fCheckoutModule.isLoggedIn ? 'checkout' : 'checkout_guest';
+            const formName = rootState[VUEX_CHECKOUT_MODULE].isLoggedIn ? 'checkout' : 'checkout_guest';
 
             const mappedError = error ? mapAnalyticsNames(error) : null;
 

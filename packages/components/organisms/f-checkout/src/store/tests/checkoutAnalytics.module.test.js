@@ -1,6 +1,7 @@
 import CheckoutAnalyticsModule from '../checkoutAnalytics.module';
 import * as mapper from '../../services/mapper';
 import { defaultCheckoutState, defaultAnalyticsState } from '../../components/_tests/helpers/setup';
+import { VUEX_CHECKOUT_MODULE } from '../../constants';
 
 import {
     UPDATE_CHANGED_FIELD,
@@ -33,8 +34,7 @@ describe('CheckoutAnalyticsModule', () => {
     describe('actions ::', () => {
         let commit;
         let dispatch;
-        let trackEventSpy;
-        const rootState = { checkout: defaultCheckoutState };
+        const rootState = { [VUEX_CHECKOUT_MODULE]: defaultCheckoutState };
 
         beforeEach(() => {
             commit = jest.fn();
@@ -49,6 +49,7 @@ describe('CheckoutAnalyticsModule', () => {
 
         describe('updateAutofill ::', () => {
             let autofillFields = [];
+
             let mapAnalyticsNamesSpy;
             let field;
 
@@ -180,11 +181,11 @@ describe('CheckoutAnalyticsModule', () => {
                             step: 1
                         },
                         basket: {
-                            id: rootState.checkout.basket.id,
-                            total: rootState.checkout.basket.total
+                            id: rootState[VUEX_CHECKOUT_MODULE].basket.id,
+                            total: rootState[VUEX_CHECKOUT_MODULE].basket.total
                         },
                         restaurant: {
-                            id: rootState.checkout.restaurantId
+                            id: rootState[VUEX_CHECKOUT_MODULE].restaurantId
                         },
                         pageData: {
                             name: 'Checkout 1 Guest',
@@ -207,7 +208,7 @@ describe('CheckoutAnalyticsModule', () => {
                     // Arrange
                     const expectedName = 'Checkout 1 Overview';
 
-                    rootState.checkout.isLoggedIn = true;
+                    rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = true;
                     expectedEvent.custom.pageData.name = expectedName;
 
                     // Act
@@ -223,7 +224,7 @@ describe('CheckoutAnalyticsModule', () => {
                     // Arrange
                     const expectedName = 'Checkout 1 Guest';
 
-                    rootState.checkout.isLoggedIn = false;
+                    rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = false;
                     expectedEvent.custom.pageData.name = expectedName;
 
                     // Act
@@ -326,7 +327,7 @@ describe('CheckoutAnalyticsModule', () => {
                     // Arrange
                     const expectedName = 'checkout';
 
-                    rootState.checkout.isLoggedIn = true;
+                    rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = true;
                     expectedEvent.custom.form.name = expectedName;
 
                     // Act
@@ -342,7 +343,7 @@ describe('CheckoutAnalyticsModule', () => {
                     // Arrange
                     const expectedName = 'checkout_guest';
 
-                    rootState.checkout.isLoggedIn = false;
+                    rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = false;
                     expectedEvent.custom.form.name = expectedName;
 
                     // Act
