@@ -252,10 +252,8 @@ $footer-heading-font-size: 'heading-s';
         margin: spacing(x2) 0 0 0;
     }
 
-    @include media('<wide') {
-        .is-collapsed & {
-            display: none;
-        }
+    .is-collapsed & {
+        display: none;
     }
 }
 
