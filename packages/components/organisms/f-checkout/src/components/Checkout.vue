@@ -175,32 +175,6 @@ export default {
             default: 1000
         },
 
-        getCheckoutTimeout: {
-            type: Number,
-            required: false,
-            default: 1000
-        },
-
-        createGuestTimeout: {
-            type: Number,
-            default: 1000
-        },
-
-        getBasketTimeout: {
-            type: Number,
-            default: 1000
-        },
-
-        placeOrderTimeout: {
-            type: Number,
-            default: 1000
-        },
-
-        updateCheckoutTimeout: {
-            type: Number,
-            default: 1000
-        },
-
         authToken: {
             type: String,
             default: ''
@@ -216,11 +190,6 @@ export default {
             required: true
         },
 
-        getAddressTimeout: {
-            type: Number,
-            default: 1000
-        },
-
         applicationName: {
             type: String,
             required: true
@@ -229,11 +198,6 @@ export default {
         getGeoLocationUrl: {
             type: String,
             required: true
-        },
-
-        getGeoLocationTimeout: {
-            type: Number,
-            default: 1000
         }
     },
 
@@ -400,7 +364,7 @@ export default {
                 await this.updateCheckout({
                     url: this.updateCheckoutUrl,
                     data,
-                    timeout: this.updateCheckoutTimeout
+                    timeout: this.checkoutTimeout
                 });
 
                 await this.submitOrder();
@@ -456,7 +420,7 @@ export default {
             await this.placeOrder({
                 url: this.placeOrderUrl,
                 data,
-                timeout: this.placeOrderTimeout
+                timeout: this.checkoutTimeout
             });
         },
 
@@ -477,7 +441,7 @@ export default {
                     url: this.createGuestUrl,
                     tenant: this.tenant,
                     data: createGuestData,
-                    timeout: this.createGuestTimeout
+                    timeout: this.checkoutTimeout
                 });
 
                 this.$emit(EventNames.CheckoutSetupGuestSuccess);
@@ -500,7 +464,7 @@ export default {
             try {
                 await this.getCheckout({
                     url: this.getCheckoutUrl,
-                    timeout: this.getCheckoutTimeout
+                    timeout: this.checkoutTimeout
                 });
 
                 this.$emit(EventNames.CheckoutGetSuccess);
@@ -526,7 +490,7 @@ export default {
                     url: this.getBasketUrl,
                     tenant: this.tenant,
                     language: this.$i18n.locale,
-                    timeout: this.getBasketTimeout
+                    timeout: this.checkoutTimeout
                 });
 
                 this.$emit(EventNames.CheckoutBasketGetSuccess);
@@ -550,7 +514,7 @@ export default {
             try {
                 await this.getAvailableFulfilment({
                     url: this.checkoutAvailableFulfilmentUrl,
-                    timeout: this.getCheckoutTimeout
+                    timeout: this.checkoutTimeout
                 });
 
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess);
@@ -576,7 +540,7 @@ export default {
                     url: this.getAddressUrl,
                     tenant: this.tenant,
                     language: this.$i18n.locale,
-                    timeout: this.getAddressTimeout
+                    timeout: this.checkoutTimeout
                 });
                 this.$emit(EventNames.CheckoutAddressGetSuccess);
             } catch (thrownErrors) {
@@ -600,7 +564,7 @@ export default {
                     await this.getGeoLocation({
                         url: this.getGeoLocationUrl,
                         postData: locationData,
-                        timeout: this.getGeoLocationTimeout
+                        timeout: this.checkoutTimeout
                     });
                 }
             } catch (error) {
