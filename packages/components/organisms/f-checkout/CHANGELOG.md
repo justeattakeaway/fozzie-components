@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.64.0
 ------------------------------
-*March 3, 2021*
+*March 4, 2021*
 
 ### Changed
 - `analytics` to `fCheckout.module`.
