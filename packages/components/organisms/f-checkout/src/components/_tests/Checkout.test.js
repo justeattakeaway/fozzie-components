@@ -9,7 +9,8 @@ import {
     TENANT_MAP,
     BASKET_NOT_ORDERABLE_ERRORS,
     INVALID_MODEL_STATE_ERRORS,
-    SET_ORDER_TIME_ERROR
+    SET_ORDER_TIME_ERROR,
+    UPDATE_CHECKOUT_ERRORS
 } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
@@ -1534,11 +1535,75 @@ describe('Checkout', () => {
                     jest.clearAllMocks();
                 });
 
-                it.each(BASKET_NOT_ORDERABLE_ERRORS)(' %s errorCode should call `trackFormInteraction` with error %s', async issueCode => {
+                it.each(UPDATE_CHECKOUT_ERRORS.basketNotOrderable)(' %s errorCode should call `trackFormInteraction` with error %s', async issueCode => {
                     // Arrange
                     const payload = {
                         action: 'error',
                         error: ['basketNotOrderable']
+                    }
+
+                    const issues =  [
+                        {code: issueCode}
+                    ];
+
+
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            issues
+                        }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
+                    });
+
+                    // Act
+                    await wrapper.vm.handleUpdateCheckout();
+
+                    // Assert
+                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(payload);
+                });
+
+                it.each(UPDATE_CHECKOUT_ERRORS.invalidOrderTime)(' %s errorCode should call `trackFormInteraction` with error %s', async issueCode => {
+                    // Arrange
+                    const payload = {
+                        action: 'error',
+                        error: ['invalidOrderTime']
+                    }
+
+                    const issues =  [
+                        {code: issueCode}
+                    ];
+
+
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            issues
+                        }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
+                    });
+
+                    // Act
+                    await wrapper.vm.handleUpdateCheckout();
+
+                    // Assert
+                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(payload);
+                });
+
+                it.each(UPDATE_CHECKOUT_ERRORS.setdOrderTime)(' %s errorCode should call `trackFormInteraction` with error %s', async issueCode => {
+                    // Arrange
+                    const payload = {
+                        action: 'error',
+                        error: ['setdOrderTime']
                     }
 
                     const issues =  [
@@ -1575,38 +1640,6 @@ describe('Checkout', () => {
 
                     const issues =  [
                         {code: issueCode}
-                    ];
-
-
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            issues
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.handleUpdateCheckout();
-
-                    // Assert
-                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(payload);
-                });
-
-                it(`${SET_ORDER_TIME_ERROR} errorCode should call 'trackFormInteraction' with correct payload`, async () => {
-                    // Arrange
-                    const payload = {
-                        action: 'error',
-                        error: ['setOrderTime']
-                    }
-
-                    const issues =  [
-                        {code: SET_ORDER_TIME_ERROR}
                     ];
 
 

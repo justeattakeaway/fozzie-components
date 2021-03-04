@@ -112,10 +112,11 @@ import {
     TENANT_MAP,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
-    VUEX_CHECKOUT_MODULE
+    VUEX_CHECKOUT_MODULE,
     BASKET_NOT_ORDERABLE_ERRORS,
     INVALID_MODEL_STATE_ERRORS,
-    SET_ORDER_TIME_ERROR
+    SET_ORDER_TIME_ERROR,
+    UPDATE_CHECKOUT_ERRORS
 } from '../constants';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
@@ -431,29 +432,15 @@ export default {
                     timeout: this.updateCheckoutTimeout
                 });
 
-                let errors = [];
+                console.log('asdadsasd'); // eslint-disable-line no-console
+                console.log(this.issues); // eslint-disable-line no-console
+                this.issues && this.trackFormInteraction({action: 'error'})
 
-                if( this.issues ) {
-                    this.issues.forEach(issue => {
-                        if (BASKET_NOT_ORDERABLE_ERRORS.includes(issue.code)) {
-                            !errors.includes('basketNotOrderable') && errors.push('basketNotOrderable');
-                        } else if (issue.code === SET_ORDER_TIME_ERROR) {
-                            !errors.includes('setOrderTime') && errors.push('setOrderTime');
-                        } else if (INVALID_MODEL_STATE_ERRORS.includes(issue.code)) {
-                            !errors.includes('invalidModelState') && errors.push('invalidModelState');
-                        }
-                    })
-
-                    if (errors) {
-                        errors.forEach(error => {
-                            this.trackFormInteraction({action: 'error', error:[error] })
-                        })
-                    }
-                }
             }
 
             catch (errors) {
-                this.trackFormInteraction({ action: 'error', error: ['basketNotOrderable'] });
+                // this.trackFormInteraction({ action: 'error', error: ['basketNotOrderable'] });
+                console.log('catch'); // eslint-disable-line no-console
             }
         },
 

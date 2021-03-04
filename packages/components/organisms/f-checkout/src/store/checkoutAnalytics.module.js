@@ -1,9 +1,10 @@
-import { mapAnalyticsName, mapAnalyticsNames } from '../services/mapper';
+import { mapAnalyticsName, mapAnalyticsNames, mapAnalyticsErrors } from '../services/mapper';
 import { VUEX_CHECKOUT_MODULE } from '../constants';
 
 import {
+    UPDATE_AUTOFILL,
     UPDATE_CHANGED_FIELD,
-    UPDATE_AUTOFILL
+    UPDATE_ERRORS
 } from './mutation-types';
 
 export default {
@@ -11,7 +12,8 @@ export default {
 
     state: () => ({
         changedFields: [],
-        autofill: []
+        autofill: [],
+        errors: []
     }),
 
     actions: {
@@ -79,8 +81,9 @@ export default {
          */
         trackFormInteraction ({ state, rootState }, { action, error }) {
             const formName = rootState[VUEX_CHECKOUT_MODULE].isLoggedIn ? 'checkout' : 'checkout_guest';
+            console.log(`action ${action} error ${error}`); // eslint-disable-line no-console
 
-            const mappedError = error ? mapAnalyticsNames(error).toString() : null;
+            const mappedError = action === 'error' ? state.errors : error ? mapAnalyticsNames(error).toString() : null;
 
             window.dataLayer.push({
                 event: 'Form',
@@ -92,7 +95,19 @@ export default {
                     changes: state.changedFields.sort().toString()
                 }
             });
-        }
+        },
+
+        updateErrors ({ commit }, issues) {
+            if (issues) {
+                const issueArray = []
+                issues.forEach(issue => {
+                    issueArray.push(issue.code)
+                })
+                const errors = mapAnalyticsErrors(issueArray);
+
+                commit(UPDATE_ERRORS, errors);
+            }
+        },
     },
 
     mutations: {
@@ -104,6 +119,18 @@ export default {
 
         [UPDATE_AUTOFILL]: (state, autofill) => {
             state.autofill = autofill;
+        },
+
+        [UPDATE_ERRORS]: (state, errors) => {
+            console.log('error mut'); // eslint-disable-line no-console
+            console.log(errors); // eslint-disable-line no-console
+            errors.forEach(error => {
+                console.log(error); // eslint-disable-line no-console
+                if (!state.errors.includes(error)) {
+                    state.errors.push(error);
+                }
+            })
+            console.log(state.errors); // eslint-disable-line no-console
         }
     }
 };

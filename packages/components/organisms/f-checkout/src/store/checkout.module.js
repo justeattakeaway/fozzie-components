@@ -94,7 +94,7 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         // eslint-disable-next-line no-unused-vars
-        updateCheckout: async ({ commit, state }, {
+        updateCheckout: async ({ commit, state, dispatch }, {
             url, data, timeout
         }) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
@@ -116,6 +116,7 @@ export default {
 
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ISSUES, issues);
+            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateErrors`, issues, { root: true });
         },
 
         /**
