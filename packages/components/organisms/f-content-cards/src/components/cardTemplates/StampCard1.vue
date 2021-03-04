@@ -228,7 +228,15 @@ export default {
         /**
          * Takes the locale and lazyloads the correct date locale for the date-fns library
          * @param locale
-         * @returns {Promise<module:date-fns/locale/da>}
+         * @returns {
+         *  Promise<module:date-fns/locale/da> |
+         *  Promise<module:date-fns/locale/en-AU> |
+         *  Promise<module:date-fns/locale/en-GB> |
+         *  Promise<module:date-fns/locale/en-NZ> |
+         *  Promise<module:date-fns/locale/es> |
+         *  Promise<module:date-fns/locale/it> |
+         *  Promise<module:date-fns/locale/nb>
+         * }
          */
         getDateFnsLocale (locale) {
             switch (locale) {
