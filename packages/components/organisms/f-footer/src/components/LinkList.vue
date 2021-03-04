@@ -96,21 +96,39 @@ export default {
         windowServices.removeEvent('resize', this.onResize);
     },
     methods: {
+        /**
+         * Sets Links List panel collapsed state.
+         * Affects `is-collapsed` panel class.
+         * Value for below `wide` screen width is based on saved `interactedState`, intially defaults to `true` - collapsed.
+         * Value for wider screens resets to `false` e.g. expanded Links List. (see `onResize`)
+         */
         setPanelCollasped () {
-            const initialOrInteractedState = this.interactedState === null ? true : this.interactedState;
+            if (this.isBelowWide) {
+                const initialOrInteractedState = this.interactedState === null ? true : this.interactedState;
 
-            this.panelCollapsed = this.isBelowWide ? initialOrInteractedState : false;
+                this.panelCollapsed = initialOrInteractedState;
+            } else {
+                this.panelCollapsed = false;
+            }
         },
+        /**
+         * Handle click events on Link List visibility toggle.
+         * Only applied to below `wide` screen width (ref. Fozzie UI breakpoints).
+         */
         onPanelClick () {
             if (this.isBelowWide) {
                 this.interactedState = !this.panelCollapsed;
                 this.setPanelCollasped();
             }
         },
+        /**
+         * Hanles `resize` window events.
+         * Screen width is the only factor that affects responsive layout.
+         * Note: Mobile trigger `resize` on scroll, with address bar collapse
+         */
         onResize () {
             const newScreenWidth = windowServices.getWindowWidth();
 
-            // Mobile trigger `resise` on scroll - address bar collapse
             if (this.currentScreenWidth !== newScreenWidth) {
                 this.currentScreenWidth = newScreenWidth;
 
