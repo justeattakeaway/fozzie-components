@@ -1,5 +1,5 @@
 import Vuex from 'vuex';
-import { CHECKOUT_METHOD_DELIVERY } from '../../../constants';
+import { CHECKOUT_METHOD_DELIVERY, VUEX_CHECKOUT_MODULE, VUEX_CHECKOUT_ANALYTICS_MODULE } from '../../../constants';
 import tenantConfigs from '../../../tenants';
 
 const fulfilmentTimes = [
@@ -95,12 +95,12 @@ const createStore = (
     analyticsActions = defaultAnalyticsActions
 ) => new Vuex.Store({
     modules: {
-        checkout: {
+        [VUEX_CHECKOUT_MODULE]: {
             namespaced: true,
             state: checkoutState,
             actions: checkoutActions
         },
-        analytics: {
+        [VUEX_CHECKOUT_ANALYTICS_MODULE]: {
             namespaced: true,
             state: analyticsState,
             actions: analyticsActions

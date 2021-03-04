@@ -7,8 +7,8 @@
 
 // Import vue component
 import VueCheckout from '@/components/Checkout.vue';
-import CheckoutModule from '@/store/checkout.module';
-import AnalyticsModule from '@/store/analytics.module';
+import fCheckoutModule from '@/store/checkout.module';
+import fCheckoutAnalyticsModule from '@/store/checkoutAnalytics.module';
 
 export { CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY } from './constants';
 
@@ -38,6 +38,6 @@ if (GlobalVue) {
 // To allow use as module (npm/webpack/etc.) export component
 export {
     VueCheckout,
-    CheckoutModule,
-    AnalyticsModule
+    fCheckoutModule,
+    fCheckoutAnalyticsModule
 };

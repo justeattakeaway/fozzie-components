@@ -78,11 +78,13 @@ export const MegaModalComponent = () => ({
             :has-close-button="hasCloseButton"
             :close-on-blur="closeOnBlur"
             :close-button-copy="closeButtonCopy">
-            <h3 class="u-noSpacing">
+            <h3 data-test-id="mega-modal-title" class="u-noSpacing">
                 This place isn't taking orders
             </h3>
 
-            <p>Let's find another restaurant to order from.</p>
+            <p data-test-id="mega-modal-content">
+                Let's find another restaurant to order from.
+            </p>
 
         </mega-modal>
     `
