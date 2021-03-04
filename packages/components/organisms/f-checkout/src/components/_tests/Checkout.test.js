@@ -1877,13 +1877,17 @@ describe('Checkout', () => {
             });
 
             describe('when `getAddress` request fails', () => {
-                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
+                it('should emit failure event and log a warning', async () => {
+                    const store = createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAddress: jest.fn(async () => Promise.reject()) })
                     // Arrange
                     const wrapper = mount(VueCheckout, {
-                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAddress: jest.fn(async () => Promise.reject()) }),
+                        store,
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -1892,7 +1896,9 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutAddressGetFailure).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutAddressGetSuccess)).toBeUndefined();
-                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
+                    expect($logger.logWarn).toHaveBeenCalledWith('Get checkout address failure', store, {});
+
+                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(true);
                 });
             });
 
