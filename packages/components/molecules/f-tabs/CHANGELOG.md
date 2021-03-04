@@ -3,9 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
-Latest (add to next release)
+v0.3.0
 ------------------------------
+*March 3, 2021*
+
+### Added
+- Added component tests
+- Added supporting code to component object file
+
+### Changed
+- `Data-test-id` naming for `tab-` to `tab-button-` in `Tabs.vue` and `Tabs.test.js`
+- `Data-test-id` naming for `transition-tab-` to `tab-content-` in `Tab.vue` and `Tab.test.js`
+
 *February 24, 2021*
 
 ### Changed

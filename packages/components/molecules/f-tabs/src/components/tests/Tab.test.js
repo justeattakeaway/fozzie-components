@@ -77,7 +77,7 @@ describe('Tab.vue', () => {
     describe('Animation', () => {
         it('should only create transition element when animateTab is true', () => {
             // Act
-            const tabTransition = wrapper.find(`[data-test-id="transition-tab-${wrapper.vm.name}"]`);
+            const tabTransition = wrapper.find(`[data-test-id="tab-content-${wrapper.vm.name}"]`);
             const tabNormal = wrapper.find(`[data-test-id="no-transition-tab-${wrapper.vm.name}"]`);
 
             // Assert
