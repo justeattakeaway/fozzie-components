@@ -4,8 +4,9 @@ import { defaultCheckoutState, defaultAnalyticsState } from '../../components/_t
 import { VUEX_CHECKOUT_MODULE } from '../../constants';
 
 import {
+    UPDATE_AUTOFILL,
     UPDATE_CHANGED_FIELD,
-    UPDATE_AUTOFILL
+    UPDATE_ERRORS
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutAnalyticsModule;
@@ -13,6 +14,7 @@ const { actions, mutations } = CheckoutAnalyticsModule;
 const {
     updateAutofill,
     updateChangedField,
+    updateErrors,
     trackInitialLoad,
     trackFormInteraction
 } = actions;
@@ -168,6 +170,32 @@ describe('CheckoutAnalyticsModule', () => {
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith(UPDATE_CHANGED_FIELD, field);
+            });
+        });
+
+        describe('updateErrors ::', () => {
+            const issues = [{code: 'issue'}];
+            const issueCodes = ['issue'];
+            let mapAnalyticsErrorsSpy;
+
+            beforeEach(() => {
+                mapAnalyticsErrorsSpy = jest.spyOn(mapper, 'mapAnalyticsErrors').mockImplementation(() => issueCodes);
+            });
+
+            it('should call `mapAnalyticsErrors` with passed issues', () => {
+                // Act
+                updateErrors({ commit }, issues);
+
+                // Assert
+                expect(mapAnalyticsErrorsSpy).toHaveBeenCalledWith(issueCodes);
+            });
+
+            it(`should call ${UPDATE_ERRORS} with passed issues`, () => {
+                // Act
+                updateErrors({ commit }, issues);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, issueCodes);
             });
         });
 
@@ -393,6 +421,29 @@ describe('CheckoutAnalyticsModule', () => {
 
                 // Assert
                 expect(state.autofill).toEqual(payload);
+            });
+        });
+
+        describe(`${UPDATE_ERRORS} ::`, () => {
+            const errors = ['error1', 'error2'];
+
+            it('should update state `errors` with payload', () => {
+                // Act
+                mutations[UPDATE_ERRORS](state, errors);
+
+                // Assert
+                expect(state.errors).toEqual(errors);
+            });
+
+            it('should not update state if `errors` already exist', () => {
+                // Arrange
+                state.errors = errors;
+
+                // Act
+                mutations[UPDATE_ERRORS](state, errors);
+
+                // Assert
+                expect(state.errors).toEqual(errors);
             });
         });
     });

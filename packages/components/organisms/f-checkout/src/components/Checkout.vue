@@ -411,15 +411,10 @@ export default {
                     timeout: this.checkoutTimeout
                 });
 
-                console.log('asdadsasd'); // eslint-disable-line no-console
-                console.log(this.issues); // eslint-disable-line no-console
                 this.issues && this.trackFormInteraction({action: 'error'})
-
             }
-
             catch (errors) {
-                // this.trackFormInteraction({ action: 'error', error: ['basketNotOrderable'] });
-                console.log('catch'); // eslint-disable-line no-console
+                this.trackFormInteraction({ action: 'error', error: ['basketNotOrderable'] });
             }
         },
 

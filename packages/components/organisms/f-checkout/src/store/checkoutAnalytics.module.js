@@ -81,7 +81,6 @@ export default {
          */
         trackFormInteraction ({ state, rootState }, { action, error }) {
             const formName = rootState[VUEX_CHECKOUT_MODULE].isLoggedIn ? 'checkout' : 'checkout_guest';
-            console.log(`action ${action} error ${error}`); // eslint-disable-line no-console
 
             const mappedError = action === 'error' ? state.errors : error ? mapAnalyticsNames(error).toString() : null;
 
@@ -99,10 +98,12 @@ export default {
 
         updateErrors ({ commit }, issues) {
             if (issues) {
-                const issueArray = []
+                const issueArray = [];
+
                 issues.forEach(issue => {
                     issueArray.push(issue.code)
-                })
+                });
+
                 const errors = mapAnalyticsErrors(issueArray);
 
                 commit(UPDATE_ERRORS, errors);
@@ -122,15 +123,11 @@ export default {
         },
 
         [UPDATE_ERRORS]: (state, errors) => {
-            console.log('error mut'); // eslint-disable-line no-console
-            console.log(errors); // eslint-disable-line no-console
             errors.forEach(error => {
-                console.log(error); // eslint-disable-line no-console
                 if (!state.errors.includes(error)) {
                     state.errors.push(error);
                 }
             })
-            console.log(state.errors); // eslint-disable-line no-console
         }
     }
 };

@@ -368,6 +368,8 @@ describe('CheckoutModule', () => {
                 mobileNumber
             };
 
+            const issues =  [{code: 'issue'}]
+
             let config;
 
             beforeEach(() => {
@@ -380,16 +382,26 @@ describe('CheckoutModule', () => {
                 };
                 axios.patch = jest.fn(() => Promise.resolve({
                     status: 200,
-                    data: {}
+                    data: {
+                        issues
+                    }
                 }));
             });
 
             it('should post the checkout details to the backend.', async () => {
                 // Act
-                await updateCheckout({ commit, state }, payload);
+                await updateCheckout({ commit, state, dispatch }, payload);
 
                 // Assert
                 expect(axios.patch).toHaveBeenCalledWith(payload.url, payload.data, config);
+            });
+
+            it(`should dispatch '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateErrors' with issues`, async () => {
+                // Act
+                await updateCheckout({ commit, state, dispatch }, payload);
+
+                // Assert
+                expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateErrors`, issues, { root: true });
             });
         });
 
