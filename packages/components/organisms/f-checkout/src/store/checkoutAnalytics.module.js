@@ -1,4 +1,6 @@
-import { mapAnalyticsName, mapAnalyticsNames, mapAnalyticsErrors } from '../services/mapper';
+import {
+    mapAnalyticsName, mapAnalyticsNames, mapAnalyticsError
+} from '../services/mapper';
 import { VUEX_CHECKOUT_MODULE } from '../constants';
 
 import {
@@ -117,12 +119,10 @@ export default {
                 const issueArray = [];
 
                 issues.forEach(issue => {
-                    issueArray.push(issue.code);
+                    issueArray.push(mapAnalyticsError(issue.code));
                 });
 
-                const errors = mapAnalyticsErrors(issueArray);
-
-                commit(UPDATE_ERRORS, errors);
+                commit(UPDATE_ERRORS, issueArray);
             }
         }
     },

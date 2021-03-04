@@ -83,6 +83,16 @@ const updateCheckoutErrors = {
  * Updates passed field name to match the expected analytics name requirements.
  */
 const mapAnalyticsName = field => (analyticFieldNameMapper[field] || field);
+
+/**
+ * Updates passed field names to match the expected analytics name requirements.
+ * When fields have been mapped, sorts the array alphabetically.
+ */
+const mapAnalyticsNames = fields => fields.map(mapAnalyticsName).sort();
+
+/**
+ * Updates passed issues to match the expected analytics error requirements.
+ */
 const mapAnalyticsError = issue => {
     let errors;
 
@@ -96,14 +106,7 @@ const mapAnalyticsError = issue => {
     return errors;
 };
 
-/**
- * Updates passed field names to match the expected analytics name requirements.
- * When fields have been mapped, sorts the array alphabetically.
- */
-const mapAnalyticsNames = fields => fields.map(mapAnalyticsName).sort();
-
-const mapAnalyticsErrors = issues => issues.map(mapAnalyticsError);
-
 export {
-    mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames, mapAnalyticsErrors
+    mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames, mapAnalyticsError
+
 };

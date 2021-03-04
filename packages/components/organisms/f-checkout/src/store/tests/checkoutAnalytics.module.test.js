@@ -175,12 +175,12 @@ describe('CheckoutAnalyticsModule', () => {
         });
 
         describe('updateErrors ::', () => {
-            const issues = [{ code: 'issue' }];
-            const issueCodes = ['issue'];
-            let mapAnalyticsErrorsSpy;
+            const issue = 'issue';
+            const issues = [{ code: issue }];
+            let mapAnalyticsErrorSpy;
 
             beforeEach(() => {
-                mapAnalyticsErrorsSpy = jest.spyOn(mapper, 'mapAnalyticsErrors').mockImplementation(() => issueCodes);
+                mapAnalyticsErrorSpy = jest.spyOn(mapper, 'mapAnalyticsError').mockImplementation(() => issue);
             });
 
             it('should call `mapAnalyticsErrors` with passed issues', () => {
@@ -188,15 +188,15 @@ describe('CheckoutAnalyticsModule', () => {
                 updateErrors({ commit }, issues);
 
                 // Assert
-                expect(mapAnalyticsErrorsSpy).toHaveBeenCalledWith(issueCodes);
+                expect(mapAnalyticsErrorSpy).toHaveBeenCalledWith(issue);
             });
 
-            it(`should call ${UPDATE_ERRORS} with passed issues`, () => {
+            it(`should call ${UPDATE_ERRORS} with an array of issues`, () => {
                 // Act
                 updateErrors({ commit }, issues);
 
                 // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, issueCodes);
+                expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [issue]);
             });
         });
 

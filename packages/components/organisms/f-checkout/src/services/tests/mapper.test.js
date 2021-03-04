@@ -1,4 +1,4 @@
-import { mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames } from '../mapper';
+import { mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames, mapAnalyticsError } from '../mapper';
 
 const defaultParams = {
     address: {},
@@ -189,5 +189,17 @@ describe('mapAnalyticsNames :: ', () => {
 
         // Act & Assert
         expect(mapAnalyticsNames(provided)).toEqual(expected);
+    });
+});
+
+describe('mapAnalyticsError :: ', () => {
+    it.each([
+        ['ITEMS_UNORDERABLE', 'basketNotOrderable'],
+        ['LAST_NAME_REQUIRED', 'invalidModelState'],
+        ['FULFILMENT_TIME_UNAVAILABLE', 'invalidOrderTime'],
+        ['FULFILMENT_TIME_REQUIRED', 'setOrderTime']
+    ])('should correctly map %s to %s', (provided, expected) => {
+        // Act & Assert
+        expect(mapAnalyticsError(provided)).toEqual(expected);
     });
 });
