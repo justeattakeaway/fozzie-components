@@ -89,7 +89,7 @@ export default {
                     action,
                     error: mappedError,
                     autofill: state.autofill,
-                    changes: state.changedFields.sort()
+                    changes: state.changedFields
                 }
             });
         }
@@ -100,6 +100,8 @@ export default {
             if (!state.changedFields.includes(field)) {
                 state.changedFields.push(field);
             }
+
+            state.changedFields.sort();
         },
 
         [UPDATE_AUTOFILL]: (state, autofill) => {
