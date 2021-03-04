@@ -15,6 +15,8 @@ describe('Accessibility tests', () => {
         checkout.open(checkoutData);
         checkout.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-checkout-delivery');
+
+        // Assert
         expect(axeResults.violations.length).toBe(0);
     });
 
@@ -28,6 +30,8 @@ describe('Accessibility tests', () => {
         checkout.open(checkoutData);
         checkout.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-checkout-collection');
+
+        // Assert
         expect(axeResults.violations.length).toBe(0);
     });
 
@@ -41,6 +45,8 @@ describe('Accessibility tests', () => {
         checkout.open(checkoutData);
         checkout.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-checkout-guest');
+
+        // Assert
         expect(axeResults.violations.length).toBe(0);
     });
 });

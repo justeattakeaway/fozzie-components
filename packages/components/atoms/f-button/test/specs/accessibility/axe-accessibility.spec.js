@@ -18,6 +18,7 @@ describe('Accessibility tests', () => {
         button.waitForLinkComponent();
         const axeResults = getAccessibilityTestResults('f-button - link');
 
+        // Assert
         expect(axeResults.violations.length).toBe(0);
     });
 });

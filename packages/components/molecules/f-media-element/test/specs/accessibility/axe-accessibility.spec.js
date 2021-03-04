@@ -10,6 +10,8 @@ describe('Accessibility tests', () => {
     it('a11y - should test f-mediaElement component WCAG compliance', () => {
         // Act
         const axeResults = getAccessibilityTestResults('f-mediaElement');
+
+        // Assert
         expect(axeResults.violations.length).toBe(0);
     });
 });

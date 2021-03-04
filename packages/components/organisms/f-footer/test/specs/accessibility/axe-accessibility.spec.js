@@ -8,6 +8,8 @@ describe('Accessibility tests', () => {
         // Act
         footer.open('au');
         const axeResults = getAccessibilityTestResults('f-footer');
+
+        // Assert
         expect(axeResults.violations.length).toBe(0);
     });
 
@@ -15,6 +17,8 @@ describe('Accessibility tests', () => {
         // Act
         footer.open();
         const axeResults = getAccessibilityTestResults('f-footer');
+
+        // Assert
         expect(axeResults.violations.length).toBe(0);
     });
 });
