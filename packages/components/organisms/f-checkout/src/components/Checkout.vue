@@ -551,7 +551,7 @@ export default {
                 this.$emit(EventNames.CheckoutAddressGetSuccess);
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutAddressGetFailure, thrownErrors);
-                this.hasCheckoutLoadedSuccessfully = false;
+                this.$logger.logWarn('Get checkout address failure', this.$store, { thrownErrors });
             }
         },
 
