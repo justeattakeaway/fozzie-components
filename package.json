@@ -33,6 +33,7 @@
     "@justeat/browserslist-config-fozzie": "1.1.1",
     "@justeat/eslint-config-fozzie": "3.4.1",
     "@justeat/f-utils": "1.1.0",
+    "@justeat/f-wdio-utils": "0.1.0",
     "@justeat/fozzie": "5.0.0-beta.3",
     "@justeat/fozzie-colour-palette": "3.1.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",
@@ -113,8 +114,5 @@
     "packages/components/organisms/*",
     "packages/services/*",
     "packages/tools/*"
-  ],
-  "dependencies": {
-    "@justeat/f-wdio-utils": "^0.1.0"
-  }
+  ]
 }
