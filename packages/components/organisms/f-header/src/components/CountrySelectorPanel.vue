@@ -14,7 +14,9 @@
                 <h3>{{ copy.countrySelector.selectYourCountryText }}</h3>
             </header>
 
-            <ul class="c-nav-popoverList c-nav-popoverList--twoColumns">
+            <ul
+                class="c-nav-popoverList c-nav-popoverList--twoColumns"
+                data-test-id="c-countrySelector-list">
                 <li
                     v-for="(country, i) in countries"
                     :key="i + '_Country'"
