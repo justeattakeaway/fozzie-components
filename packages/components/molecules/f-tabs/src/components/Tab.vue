@@ -4,7 +4,7 @@
         :name="transitionName">
         <div
             v-show="isActive"
-            :data-test-id="`transition-tab-${name}`"
+            :data-test-id="`tab-content-${name}`"
             :class="$style['c-tab']">
             <slot />
         </div>

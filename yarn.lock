@@ -1950,6 +1950,13 @@
   dependencies:
     qwery "4.0.0"
 
+"@justeat/f-error-message@0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-0.3.1.tgz#07195e2621efbe43f4628d0932c2ecc43b51c71c"
+  integrity sha512-KANckjkK0ay/r9FqK2yEQOCzCASNrnJjHRdLIKvMgl4mVo8WxSSVyjIhfJtnVKQwfWv6bg0kkm1xpxxuQffokg==
+  dependencies:
+    "@justeat/f-vue-icons" "1.10.0"
+
 "@justeat/f-form-field@1.6.1":
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-1.6.1.tgz#47b014847a42467737b65997cfcab212d0385ba7"
