@@ -198,6 +198,7 @@
                         v-on="countrySelectorIsClosedOnMobileView ? { blur: closeNav, focus: openNav } : null">
                         <span class="c-nav-list-iconWrapper">
                             <flag-icon
+                                data-test-id="current-flag-icon"
                                 :country-code="copy.countrySelector.currentCountryKey"
                                 class="c-nav-list-icon--flag c-nav-list-icon--flagCurrent" />
                         </span>

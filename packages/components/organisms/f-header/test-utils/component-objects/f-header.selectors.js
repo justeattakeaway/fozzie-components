@@ -17,7 +17,7 @@ export const NAVIGATION = {
     }, 
     countrySelector: {
         link: '[data-test-id="country-selector"] button', 
-        currentIcon: '[data-test-id="action-button-component"] svg[class*="current"]',
+        currentIcon: '[data-test-id="current-flag-icon"]',
         countryList: '[class="c-countrySelector-list"] li', 
     }
 }

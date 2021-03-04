@@ -1,14 +1,14 @@
 <template>
     <div :class="['c-nav-container', { 'is-visible': isOpen }]">
-        <div class="c-countrySelector">
-            <header class="c-countrySelector-header">
+        <div :class="$style['c-countrySelector']">
+            <header :class="$style['c-countrySelector-header']">
                 <f-button
                     button-type="ghost"
                     is-icon
-                    class="c-countrySelector-header-button"
+                    :class="$style['c-countrySelector-header-button']"
                     :aria-label="copy.countrySelector.goBackToMainMenu"
                     @click="$emit('goBackButtonClick')">
-                    <arrow-icon class="c-countrySelector-goBackIcon" />
+                    <arrow-icon :class="$style['c-countrySelector-goBackIcon']" />
                 </f-button>
 
                 <h3>{{ copy.countrySelector.selectYourCountryText }}</h3>
@@ -18,7 +18,7 @@
                 <li
                     v-for="(country, i) in countries"
                     :key="i + '_Country'"
-                    class="c-countrySelector-country"
+                    :class="$style['c-countrySelector-country']"
                     :data-test-id="['countrySelector-countryList-' + country.dataTestKey]">
                     <a
                         :data-trak='`{
@@ -29,7 +29,7 @@
                         }`'
                         :tabindex="isOpen ? 0 : -1"
                         :href="country.siteUrl"
-                        class="c-countrySelector-link"
+                        :class="$style['c-countrySelector-link']"
                         @blur="$emit('blurOnLink')"
                         @focus="$emit('focusOnLink')">
                         <flag-icon
@@ -76,7 +76,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
 
 $countrySelector-text-color : $grey--darkest;
 $countrySelector-text-hover : $color-bg--darker;
