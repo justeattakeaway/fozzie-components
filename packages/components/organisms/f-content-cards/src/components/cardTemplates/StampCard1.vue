@@ -42,7 +42,6 @@
                 {{ subStatusLine }}
             </div>
             <div
-                v-make-text-accessible
                 :class="[$style['c-stampCard1-expiryInfo']]"
                 :data-test-id="testIdForSection('expiryInfo')">
                 {{ card.expiryLine }}
