@@ -1878,7 +1878,7 @@ describe('Checkout', () => {
 
             describe('when `getAddress` request fails', () => {
                 it('should emit failure event and log a warning', async () => {
-                    const store = createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAddress: jest.fn(async () => Promise.reject()) })
+                    const store = createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAddress: jest.fn(async () => Promise.reject()) });
                     // Arrange
                     const wrapper = mount(VueCheckout, {
                         store,
