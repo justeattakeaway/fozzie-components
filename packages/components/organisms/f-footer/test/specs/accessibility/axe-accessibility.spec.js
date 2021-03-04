@@ -8,11 +8,17 @@ describe('Accessibility tests', () => {
         // Act
         footer.open('au');
         const axeResults = getAccessibilityTestResults('f-footer');
+
+        // Assert
+        expect(axeResults.violations.length).toBe(0);
     });
 
     it('a11y - should test f-footer component WCAG compliance for GB Locale', () => {
         // Act
         footer.open();
         const axeResults = getAccessibilityTestResults('f-footer');
+
+        // Assert
+        expect(axeResults.violations.length).toBe(0);
     });
 });

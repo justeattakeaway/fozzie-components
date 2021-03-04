@@ -1,19 +1,19 @@
 import { withA11y } from '@storybook/addon-a11y';
-import VPopover from '../src/components/Popover.vue';
+import Popover from '../src/components/Popover.vue';
 
 export default {
     title: 'Components/Atoms',
     decorators: [withA11y]
 };
 
-export const VPopoverComponent = () => ({
-    components: { VPopover },
+export const PopoverComponent = () => ({
+    components: { Popover },
     props: {
     },
     template: `
         <div style="position: relative; padding: 16px;">
             Some text
-            <v-popover 
+            <popover 
                 style="position: absolute;
                         top: 100%;
                         width: 300px;
@@ -25,8 +25,8 @@ export const VPopoverComponent = () => ({
                     <li>List item 2</li>
                     <li>List item 3</li>
                 </ul>
-            </v-popover>
+            </popover>
         </div>`
 });
 
-VPopoverComponent.storyName = 'f-popover';
+PopoverComponent.storyName = 'f-popover';

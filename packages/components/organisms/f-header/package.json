@@ -47,7 +47,6 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.12.13",
-    "@justeat/f-wdio-utils": "0.1.0",
     "@justeat/f-button": "1.0.0",
     "@justeat/f-vue-icons": "2.4.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",

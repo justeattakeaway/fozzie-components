@@ -1,14 +1,14 @@
-import CookieBannerComponent from '../../../test-utils/component-objects/f-cookieBanner.component';
+const CookieBanner = require('../../../test-utils/component-objects/f-cookieBanner.component');
+const cookieBanner = new CookieBanner();
 
 describe('f-cookieBanner component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-organisms--cookie-banner-component');
-        browser.switchToFrame(0);
-        CookieBannerComponent .waitForCookieBannerComponent();
+        cookieBanner.open()
+        cookieBanner.waitForComponent();
     });
 
     it('should display the f-cookieBanner component', () => {
         // Assert
-        expect(CookieBannerComponent.isCookieBannerComponentDisplayed()).toBe(true);
+        expect(cookieBanner.isCookieBannerComponentDisplayed()).toBe(true);
     });
 });
