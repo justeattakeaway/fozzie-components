@@ -103,10 +103,7 @@ const mapAnalyticsError = issue => {
 const mapAnalyticsNames = fields => fields.map(mapAnalyticsName).sort();
 
 const mapAnalyticsErrors = issues => {
-    console.log('issues'); // eslint-disable-line no-console
-    const issueList = issues.map(mapAnalyticsError)
-    console.log(issueList); // eslint-disable-line no-console
-    return issueList
+    return issues.map(mapAnalyticsError)
 };
 
 export { mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames, mapAnalyticsErrors };
