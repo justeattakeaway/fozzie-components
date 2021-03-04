@@ -13,7 +13,7 @@ const {
     GUEST_CHECKOUT_LOGIN_BUTTON
 } = require('./f-checkout-selectors');
 
-class Checkout extends Page {
+module.exports = class Checkout extends Page {
     get component () { return $(CHECKOUT_COMPONENT); }
 
     get orderTimeDropdown () { return $(ORDER_TIME_DROPDOWN); }
@@ -281,5 +281,3 @@ class Checkout extends Page {
         return this.fields[inputField].input.isExisting();
     }
 }
-
-module.exports = Checkout;

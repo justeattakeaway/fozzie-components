@@ -10,7 +10,7 @@ const {
     SUBTITLE
 } = require('./f-content-cards-home-promotion.selectors');
 
-class HomePromotionCard1 extends Page {
+module.exports = class HomePromotionCard1 extends Page {
 
     get component () { return $(PROMOTION_CARD_1_COMPONENT) }
     get innerContainer () { return $(INNER_CONTAINER) }
@@ -66,5 +66,3 @@ class HomePromotionCard1 extends Page {
         return card2.isBackgroundImageDisplayed();
     }
 }
-
-module.exports = HomePromotionCard1;

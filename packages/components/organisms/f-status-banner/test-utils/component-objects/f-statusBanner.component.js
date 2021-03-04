@@ -1,6 +1,6 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-class StatusBanner extends Page {
+module.exports = class StatusBanner extends Page {
 
     get component () { return $('[data-test-id="main-banner-container"]') }
 
@@ -17,5 +17,3 @@ class StatusBanner extends Page {
         return this.component.isDisplayed();
     }
 }
-
-module.exports = StatusBanner;
