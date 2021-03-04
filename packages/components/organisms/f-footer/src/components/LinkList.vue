@@ -120,7 +120,7 @@ export default {
             }
         },
         /**
-         * Hanles `resize` window events.
+         * Handles `resize` window events.
          * Screen width is the only factor that affects Links List presentation.
          * Note: Devices trigger `resize` on scroll when address bar collapses
          */
