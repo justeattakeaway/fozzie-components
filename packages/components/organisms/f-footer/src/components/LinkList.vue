@@ -90,7 +90,7 @@ export default {
         this.currentScreenWidth = windowServices.getWindowWidth();
         windowServices.addEvent('resize', this.onResize, 100);
 
-        this.setPanelCollasped();
+        this.setPanelCollapsed();
     },
     destroyed () {
         windowServices.removeEvent('resize', this.onResize);
@@ -102,7 +102,7 @@ export default {
          * Value for below `wide` screen width is based on saved `interactedState`, intially defaults to `true` - collapsed.
          * Value for wider screens resets to `false` e.g. expanded Links List. (see `onResize`)
          */
-        setPanelCollasped () {
+        setPanelCollapsed () {
             if (this.isBelowWide) {
                 const initialOrInteractedState = this.interactedState === null ? true : this.interactedState;
 
@@ -118,7 +118,7 @@ export default {
         onPanelClick () {
             if (this.isBelowWide) {
                 this.interactedState = !this.panelCollapsed;
-                this.setPanelCollasped();
+                this.setPanelCollapsed();
             }
         },
         /**
@@ -132,7 +132,7 @@ export default {
             if (this.currentScreenWidth !== newScreenWidth) {
                 this.currentScreenWidth = newScreenWidth;
 
-                this.setPanelCollasped();
+                this.setPanelCollapsed();
             }
         }
     }
