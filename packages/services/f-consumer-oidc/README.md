@@ -2,7 +2,7 @@ This library allows consumer microsites to obtain tokens for interacting with HT
 
 ## Usage
 
-To install directly in a microsite:
+### Installation and setup
 
 ```
 npm install @justeat/f-consumer-oidc js-cookie
@@ -10,7 +10,7 @@ npm install @justeat/f-consumer-oidc js-cookie
 
 This library has a required `peerDependency` on `js-cookie` (to help reduce the bundle size).
 
-There is also a requirement that an `Oidc` client object is passed into the exported functions below, this can come from the [`oidc-client`](https://github.com/IdentityModel/oidc-client-js/wiki) npm package or another source i.e. a global variable e.g.
+An `Oidc` client object must be passed into the exported functions. This can come from the [`oidc-client`](https://github.com/IdentityModel/oidc-client-js/wiki) npm package or another source e.g. a global variable:
 
 ```javascript
 import OidcClient from 'oidc-client';
@@ -18,7 +18,53 @@ import OidcClient from 'oidc-client';
 const OidcClient = window.Oidc;
 ```
 
-To use within a package, it is recommended to install this as a _peer_ dependency.  This is because the module holds some state to remember the status of logins.  For example if two packages hosted by the same microsite both wanted to get a user token, you wouldn't want them both to go through the whole signin procedure.
+To use within a package, it is recommended to install this package as a _peer_ dependency.  This is because the module holds some state to remember the status of logins.  For example if two packages hosted by the same microsite both wanted to get a user token, you wouldn't want them both to go through the whole signin procedure.
+
+### Recommended code
+
+This library takes care of making the decision of whether and how to fetch an OIDC token.  You should call `silentSignIn()` before every Smart Gateway API call. If a token is available without going to TokenWeb, or if there is reason to believe that no token is available (i.e. the user is not logged in), no HTTP token request will be made and the promise will resolve immediately.
+
+If the token turns out to be expired, Smart Gateway will return a 401. Due to the variety of ways the HTTP request could be sent, this library does not help with the detection of the 401.  If a 401 is received, you should call `silentSignIn()` again, this time passing `true` for `force`.  This will bypass the caching and request a new token. 
+
+An example of how a wrapper function that applies these rules every time might look:
+
+```javascript
+
+import { silentSignIn } from '@justeat/je-consumer-oidc';
+
+async function makeApiCall(url) {
+    function makeApiCallWithToken(token){
+        if (token){ //this assumes we are happy to make the call with no token.
+                    //if the functionality always require a token we should do something else if token is null
+            headers.Authorization = `Bearer ${token}`;
+        }
+
+        return fetch(url, {
+            headers,
+            credentials: 'include'
+        });
+    }
+
+    const token = await silentSignIn();
+
+    try {
+        return makeApiCallWithToken(token)
+    } 
+    catch (error) {
+        if (error.response && error.response.status === 401){
+            var token = await silentSignIn(true);
+
+            return makeApiCallWithToken(token);
+        }
+
+        throw error;
+    }
+    
+}
+
+```
+
+## Exports
 
 The exports are:
 
