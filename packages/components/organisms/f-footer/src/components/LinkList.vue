@@ -104,9 +104,7 @@ export default {
          */
         setPanelCollapsed () {
             if (this.isBelowWide) {
-                const initialOrInteractedState = this.interactedState === null ? true : this.interactedState;
-
-                this.panelCollapsed = initialOrInteractedState;
+                this.panelCollapsed = this.interactedState === null ? true : this.interactedState;
             } else {
                 this.panelCollapsed = false;
             }
