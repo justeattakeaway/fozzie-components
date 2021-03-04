@@ -111,6 +111,8 @@ import {
     CHECKOUT_METHOD_DELIVERY,
     TENANT_MAP,
     VALIDATIONS,
+    VUEX_CHECKOUT_ANALYTICS_MODULE,
+    VUEX_CHECKOUT_MODULE
     BASKET_NOT_ORDERABLE_ERRORS,
     INVALID_MODEL_STATE_ERRORS,
     SET_ORDER_TIME_ERROR
@@ -266,7 +268,7 @@ export default {
     },
 
     computed: {
-        ...mapState('checkout', [
+        ...mapState(VUEX_CHECKOUT_MODULE, [
             'address',
             'customer',
             'id',
@@ -327,7 +329,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('checkout', [
+        ...mapActions(VUEX_CHECKOUT_MODULE, [
             'createGuestUser',
             'getAvailableFulfilment',
             'getAddress',
@@ -340,7 +342,7 @@ export default {
             'placeOrder'
         ]),
 
-        ...mapActions('analytics', [
+        ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
             'trackInitialLoad',
             'trackFormInteraction'
         ]),

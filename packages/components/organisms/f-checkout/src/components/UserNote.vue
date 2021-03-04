@@ -22,10 +22,11 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
     methods: {
-        ...mapActions('checkout', [
+        ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateUserNote'
         ])
     }

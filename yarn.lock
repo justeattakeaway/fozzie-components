@@ -1941,19 +1941,19 @@
   dependencies:
     "@justeat/f-services" "0.13.0"
 
-"@justeat/f-dom@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
-  integrity sha512-NalPlKTMQjAgbRa90gGqNc0Ddgu2nCDWbwj/XnrT6YQOZSAP/TRW+WcgheB9Tmptz5sPg/boZOjSaMR/1ms4dQ==
-  dependencies:
-    qwery "^4.0.0"
-
 "@justeat/f-dom@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-1.1.0.tgz#491ba78240ab73a3c4687d93eb8004415fe8a9c7"
   integrity sha512-1XNBr7loJ6o6TlWZxSx38jSZld4Q9zAlH+waNe0TXCdf3AgsR+pe5IHCQYgkmdHCXhHq9hLZW6NXZnz42UnORg==
   dependencies:
     qwery "4.0.0"
+
+"@justeat/f-error-message@0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-0.3.1.tgz#07195e2621efbe43f4628d0932c2ecc43b51c71c"
+  integrity sha512-KANckjkK0ay/r9FqK2yEQOCzCASNrnJjHRdLIKvMgl4mVo8WxSSVyjIhfJtnVKQwfWv6bg0kkm1xpxxuQffokg==
+  dependencies:
+    "@justeat/f-vue-icons" "1.10.0"
 
 "@justeat/f-form-field@1.6.1":
   version "1.6.1"
@@ -2050,13 +2050,6 @@
   dependencies:
     lodash-es "4.17.15"
     window-or-global "1.0.1"
-
-"@justeat/f-trak@0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-trak/-/f-trak-0.7.1.tgz#0ea1650e3a8749e1f8333b4eb72546339ce980be"
-  integrity sha512-6XpaZPZWNjDkh7EJBFHL43ab5ExjVoQ4kU2bMJWVldUKoo+7DrcEpktkhkQT8D0IYiNfXKn82mGpqB8v2eDvFw==
-  dependencies:
-    "@justeat/f-dom" "0.4.0"
 
 "@justeat/f-utils@1.1.0":
   version "1.1.0"
@@ -19166,7 +19159,7 @@ quick-lru@^5.1.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-5.1.1.tgz#366493e6b3e42a3a6885e2e99d18f80fb7a8c932"
   integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
 
-qwery@4.0.0, qwery@^4.0.0:
+qwery@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/qwery/-/qwery-4.0.0.tgz#7d21e3b4f7e9eed7e68728f4dab4de8b7303febe"
   integrity sha1-fSHjtPfp7tfmhyj02rTei3MD/r4=

@@ -22,3 +22,6 @@ export const VALIDATIONS = {
     address: 'addressValidations',
     guest: 'guestValidations'
 };
+
+export const VUEX_CHECKOUT_MODULE = 'fCheckoutModule';
+export const VUEX_CHECKOUT_ANALYTICS_MODULE = 'fCheckoutAnalyticsModule';
