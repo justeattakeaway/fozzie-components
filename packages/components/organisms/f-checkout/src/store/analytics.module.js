@@ -80,7 +80,7 @@ export default {
         trackFormInteraction ({ state, rootState }, { action, error }) {
             const formName = rootState.checkout.isLoggedIn ? 'checkout' : 'checkout_guest';
 
-            const mappedError = error ? mapAnalyticsNames(error) : null;
+            const mappedError = error ? mapAnalyticsNames(error).toString() : null;
 
             Trak.event({
                 event: 'Form',
@@ -89,8 +89,8 @@ export default {
                         name: formName,
                         action,
                         error: mappedError,
-                        autofill: state.autofill,
-                        changes: state.changedFields.sort()
+                        autofill: state.autofill.toString(),
+                        changes: state.changedFields.sort().toString()
                     }
                 }
             });

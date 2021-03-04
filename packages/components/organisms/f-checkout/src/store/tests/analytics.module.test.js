@@ -255,8 +255,8 @@ describe('AnalyticsModule', () => {
                             name: 'checkout_guest',
                             action: payload.action,
                             error: null,
-                            autofill: state.autofill,
-                            changes: state.changedFields
+                            autofill: state.autofill.toString(),
+                            changes: state.changedFields.toString()
                         }
                     }
                 };
