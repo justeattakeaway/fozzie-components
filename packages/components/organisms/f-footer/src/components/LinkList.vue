@@ -122,7 +122,7 @@ export default {
         /**
          * Hanles `resize` window events.
          * Screen width is the only factor that affects responsive layout.
-         * Note: Mobile trigger `resize` on scroll, with address bar collapse
+         * Note: Devices trigger `resize` on scroll when address bar collapses
          */
         onResize () {
             const newScreenWidth = windowServices.getWindowWidth();
