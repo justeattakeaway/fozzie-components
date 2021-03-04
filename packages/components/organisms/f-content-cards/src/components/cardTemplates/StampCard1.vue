@@ -85,7 +85,7 @@ import lightFormat from 'date-fns/lightFormat';
 import EmptyStamp from './images/stamp-empty-15.svg';
 import FullStamp from './images/stamp-full-15.svg';
 
-import '../MakeTextAccessible';
+import makeTextAccessible from '../MakeTextAccessible';
 
 export default {
     name: 'StampCard1',
@@ -93,6 +93,10 @@ export default {
     components: {
         EmptyStamp,
         FullStamp
+    },
+
+    directives: {
+        makeTextAccessible
     },
 
     props: {
