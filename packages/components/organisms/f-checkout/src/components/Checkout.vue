@@ -660,7 +660,7 @@ export default {
 
                 this.$emit(EventNames.CheckoutValidationError, validationState);
                 this.trackFormInteraction({ action: 'inline_error', error: validationState.invalidFields });
-                this.trackFormInteraction({ action: 'error', error: ['invalidModelState'] });
+                this.trackFormInteraction({ action: 'error', error: 'invalidModelState' });
 
                 this.$logger.logWarn(
                     'Checkout Validation Error',

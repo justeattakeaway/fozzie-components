@@ -68,7 +68,6 @@ describe('Checkout', () => {
     const paymentPageUrlPrefix = 'http://localhost/paymentpage';
     const getGeoLocationUrl = 'http://localhost/geolocation';
 
-
     const applicationName = 'Jest';
 
     const propsData = {
@@ -1119,7 +1118,6 @@ describe('Checkout', () => {
                     expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.postcode');
                 });
 
-
                 it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
@@ -1465,7 +1463,7 @@ describe('Checkout', () => {
                     expect(submitOrderSpy).not.toHaveBeenCalled();
                 });
 
-                it('should call `redirectToPayment`', async () => {
+                it('should call not `redirectToPayment`', async () => {
                     // Act
                     await wrapper.vm.submitCheckout();
 
@@ -2288,6 +2286,20 @@ describe('Checkout', () => {
                     const payload = {
                         action: 'inline_error',
                         error: mockValidationState.invalidFields
+                    };
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(payload);
+                });
+
+                it('should call `trackFormInteraction` with an action `error` and invalidModelState', async () => {
+                    // Arrange
+                    const payload = {
+                        action: 'error',
+                        error: 'invalidModelState'
                     };
 
                     // Act

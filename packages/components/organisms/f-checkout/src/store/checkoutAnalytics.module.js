@@ -108,6 +108,10 @@ export default {
             });
         },
 
+        /**
+         * Maps a passed issues too an analyticsErrors
+         * Calls `UPDATE_Errors` mapped Errors.
+         */
         updateErrors ({ commit }, issues) {
             if (issues) {
                 const issueArray = [];
