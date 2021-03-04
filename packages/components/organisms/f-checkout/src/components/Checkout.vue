@@ -107,7 +107,14 @@ import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
 import ErrorPage from './Error.vue';
 
-import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants';
+import {
+    CHECKOUT_METHOD_DELIVERY,
+    TENANT_MAP,
+    VALIDATIONS,
+    BASKET_NOT_ORDERABLE_ERRORS,
+    INVALID_MODEL_STATE_ERRORS,
+    SET_ORDER_TIME_ERROR
+} from '../constants';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
@@ -175,6 +182,32 @@ export default {
             default: 1000
         },
 
+        getCheckoutTimeout: {
+            type: Number,
+            required: false,
+            default: 1000
+        },
+
+        createGuestTimeout: {
+            type: Number,
+            default: 1000
+        },
+
+        getBasketTimeout: {
+            type: Number,
+            default: 1000
+        },
+
+        placeOrderTimeout: {
+            type: Number,
+            default: 1000
+        },
+
+        updateCheckoutTimeout: {
+            type: Number,
+            default: 1000
+        },
+
         authToken: {
             type: String,
             default: ''
@@ -190,12 +223,12 @@ export default {
             required: true
         },
 
-        applicationName: {
-            type: String,
-            required: true
+        getAddressTimeout: {
+            type: Number,
+            default: 1000
         },
 
-        getGeoLocationUrl: {
+        applicationName: {
             type: String,
             required: true
         }
@@ -246,7 +279,7 @@ export default {
             'userNote',
             'basket',
             'orderId',
-            'geolocation'
+            'issues'
         ]),
 
         isMobileNumberValid () {
@@ -304,8 +337,7 @@ export default {
             'setAuthToken',
             'updateCustomerDetails',
             'updateUserNote',
-            'placeOrder',
-            'getGeoLocation'
+            'placeOrder'
         ]),
 
         ...mapActions('analytics', [
@@ -350,34 +382,32 @@ export default {
                     await this.setupGuestUser();
                 }
 
-                await this.lookupGeoLocation();
-
                 const data = mapUpdateCheckoutRequest({
                     address: this.address,
                     customer: this.customer,
                     isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
                     time: this.time,
-                    userNote: this.userNote,
-                    geolocation: this.geolocation
+                    userNote: this.userNote
                 });
 
-                await this.updateCheckout({
-                    url: this.updateCheckoutUrl,
-                    data,
-                    timeout: this.checkoutTimeout
-                });
+                await this.handleUpdateCheckout(data);
 
-                await this.submitOrder();
+                if (!this.isFulfillable) {
+                    this.trackFormInteraction({ action: 'error', error: ['setOrderTime'] });
+                } else {
+                    await this.submitOrder();
 
-                this.$emit(EventNames.CheckoutSuccess, eventData);
+                    this.$emit(EventNames.CheckoutSuccess, eventData);
 
-                this.$logger.logInfo(
-                    'Consumer Checkout Successful',
-                    this.$store,
-                    eventData
-                );
+                    this.$logger.logInfo(
+                        'Consumer Checkout Successful',
+                        this.$store,
+                        eventData
+                    );
 
-                this.redirectToPayment();
+                    this.redirectToPayment();
+                }
+
             } catch (thrownErrors) {
                 eventData.errors = thrownErrors;
 
@@ -388,6 +418,40 @@ export default {
                     this.$store,
                     eventData
                 );
+            }
+        },
+
+        async handleUpdateCheckout (data) {
+            try {
+                await this.updateCheckout({
+                    url: this.updateCheckoutUrl,
+                    data,
+                    timeout: this.updateCheckoutTimeout
+                });
+
+                let errors = [];
+
+                if( this.issues ) {
+                    this.issues.forEach(issue => {
+                        if (BASKET_NOT_ORDERABLE_ERRORS.includes(issue.code)) {
+                            !errors.includes('basketNotOrderable') && errors.push('basketNotOrderable');
+                        } else if (issue.code === SET_ORDER_TIME_ERROR) {
+                            !errors.includes('setOrderTime') && errors.push('setOrderTime');
+                        } else if (INVALID_MODEL_STATE_ERRORS.includes(issue.code)) {
+                            !errors.includes('invalidModelState') && errors.push('invalidModelState');
+                        }
+                    })
+
+                    if (errors) {
+                        errors.forEach(error => {
+                            this.trackFormInteraction({action: 'error', error:[error] })
+                        })
+                    }
+                }
+            }
+
+            catch (errors) {
+                this.trackFormInteraction({ action: 'error', error: ['basketNotOrderable'] });
             }
         },
 
@@ -420,7 +484,7 @@ export default {
             await this.placeOrder({
                 url: this.placeOrderUrl,
                 data,
-                timeout: this.checkoutTimeout
+                timeout: this.placeOrderTimeout
             });
         },
 
@@ -441,7 +505,7 @@ export default {
                     url: this.createGuestUrl,
                     tenant: this.tenant,
                     data: createGuestData,
-                    timeout: this.checkoutTimeout
+                    timeout: this.createGuestTimeout
                 });
 
                 this.$emit(EventNames.CheckoutSetupGuestSuccess);
@@ -464,7 +528,7 @@ export default {
             try {
                 await this.getCheckout({
                     url: this.getCheckoutUrl,
-                    timeout: this.checkoutTimeout
+                    timeout: this.getCheckoutTimeout
                 });
 
                 this.$emit(EventNames.CheckoutGetSuccess);
@@ -490,7 +554,7 @@ export default {
                     url: this.getBasketUrl,
                     tenant: this.tenant,
                     language: this.$i18n.locale,
-                    timeout: this.checkoutTimeout
+                    timeout: this.getBasketTimeout
                 });
 
                 this.$emit(EventNames.CheckoutBasketGetSuccess);
@@ -514,7 +578,7 @@ export default {
             try {
                 await this.getAvailableFulfilment({
                     url: this.checkoutAvailableFulfilmentUrl,
-                    timeout: this.checkoutTimeout
+                    timeout: this.getCheckoutTimeout
                 });
 
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess);
@@ -540,39 +604,13 @@ export default {
                     url: this.getAddressUrl,
                     tenant: this.tenant,
                     language: this.$i18n.locale,
-                    timeout: this.checkoutTimeout
+                    timeout: this.getAddressTimeout
                 });
+
                 this.$emit(EventNames.CheckoutAddressGetSuccess);
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutAddressGetFailure, thrownErrors);
                 this.hasCheckoutLoadedSuccessfully = false;
-            }
-        },
-
-        /**
-         * Look up the geo details for the customers address, skip on failure.
-         *
-         */
-        async lookupGeoLocation () {
-            const locationData =
-            {
-                addressLines: Object.values(this.address).filter(addressLine => !!addressLine)
-            };
-
-            try {
-                if (locationData.addressLines.length) {
-                    await this.getGeoLocation({
-                        url: this.getGeoLocationUrl,
-                        postData: locationData,
-                        timeout: this.checkoutTimeout
-                    });
-                }
-            } catch (error) {
-                this.$logger.logWarn(
-                    'Geo location lookup failed',
-                    this.$store,
-                    { error }
-                );
             }
         },
 
@@ -634,6 +672,7 @@ export default {
 
                 this.$emit(EventNames.CheckoutValidationError, validationState);
                 this.trackFormInteraction({ action: 'inline_error', error: validationState.invalidFields });
+                this.trackFormInteraction({ action: 'error', error: ['invalidModelState'] });
 
                 this.$logger.logWarn(
                     'Checkout Validation Error',
@@ -750,7 +789,7 @@ export default {
     .c-spinner {
         margin: 0 auto;
     }
-  }
+}
 
 .c-checkout {
     padding-top: spacing(x6);
