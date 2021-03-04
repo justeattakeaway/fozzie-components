@@ -32,7 +32,7 @@ describe('Tabs', () => {
         it('should register a tab when addTab method is called', async () => {
             // Act
             await wrapper.vm.addTab(registeredTabsMock[0]);
-            const tabButton = wrapper.find(`[data-test-id="tab-${registeredTabsMock[0].name}"]`);
+            const tabButton = wrapper.find(`[data-test-id="tab-button-${registeredTabsMock[0].name}"]`);
 
             // Assert
             expect(tabButton.exists()).toBe(true);
@@ -43,7 +43,7 @@ describe('Tabs', () => {
             const tabs = [];
             registeredTabsMock.forEach(tab => {
                 wrapper.vm.addTab(tab);
-                tabs.push(wrapper.find(`[data-test-id="tab-${tab.name}"]`));
+                tabs.push(wrapper.find(`[data-test-id="tab-button-${tab.name}"]`));
             });
             await wrapper.vm.$nextTick();
 
@@ -54,7 +54,7 @@ describe('Tabs', () => {
         it('should display the name of the registered tab inside the button', async () => {
             // Act
             await wrapper.vm.addTab(registeredTabsMock[0]);
-            const tabButton = wrapper.find(`[data-test-id="tab-${registeredTabsMock[0].name}"]`);
+            const tabButton = wrapper.find(`[data-test-id="tab-button-${registeredTabsMock[0].name}"]`);
 
             // Assert
             expect(tabButton.text()).toBe(registeredTabsMock[0].title);
@@ -83,7 +83,7 @@ describe('Tabs', () => {
 
             await wrapper.vm.$nextTick();
 
-            const tabButton = wrapper.find(`[data-test-id="tab-${registeredTabsMock[0].name}"]`);
+            const tabButton = wrapper.find(`[data-test-id="tab-button-${registeredTabsMock[0].name}"]`);
             await tabButton.trigger('click');
 
             // Assert
@@ -98,7 +98,7 @@ describe('Tabs', () => {
 
             await wrapper.vm.$nextTick();
 
-            await wrapper.find(`[data-test-id="tab-${registeredTabsMock[1].name}"]`).trigger('click');
+            await wrapper.find(`[data-test-id="tab-button-${registeredTabsMock[1].name}"]`).trigger('click');
 
             // Assert
             expect(wrapper.vm.direction).toEqual('RIGHT');
@@ -112,8 +112,8 @@ describe('Tabs', () => {
 
             await wrapper.vm.$nextTick();
 
-            await wrapper.find(`[data-test-id="tab-${registeredTabsMock[1].name}"]`).trigger('click');
-            await wrapper.find(`[data-test-id="tab-${registeredTabsMock[0].name}"]`).trigger('click');
+            await wrapper.find(`[data-test-id="tab-button-${registeredTabsMock[1].name}"]`).trigger('click');
+            await wrapper.find(`[data-test-id="tab-button-${registeredTabsMock[0].name}"]`).trigger('click');
 
             // Assert
             expect(wrapper.vm.direction).toEqual('LEFT');

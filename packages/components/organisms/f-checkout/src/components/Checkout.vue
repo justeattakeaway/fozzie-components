@@ -107,7 +107,13 @@ import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
 import ErrorPage from './Error.vue';
 
-import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants';
+import {
+    CHECKOUT_METHOD_DELIVERY,
+    TENANT_MAP,
+    VALIDATIONS,
+    VUEX_CHECKOUT_ANALYTICS_MODULE,
+    VUEX_CHECKOUT_MODULE
+} from '../constants';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
@@ -233,7 +239,7 @@ export default {
     },
 
     computed: {
-        ...mapState('checkout', [
+        ...mapState(VUEX_CHECKOUT_MODULE, [
             'address',
             'customer',
             'id',
@@ -294,7 +300,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('checkout', [
+        ...mapActions(VUEX_CHECKOUT_MODULE, [
             'createGuestUser',
             'getAvailableFulfilment',
             'getAddress',
@@ -308,7 +314,7 @@ export default {
             'getGeoLocation'
         ]),
 
-        ...mapActions('analytics', [
+        ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
             'trackInitialLoad',
             'trackFormInteraction'
         ]),
