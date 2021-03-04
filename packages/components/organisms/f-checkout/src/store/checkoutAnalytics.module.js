@@ -58,18 +58,16 @@ export default {
             const pageName = rootState[VUEX_CHECKOUT_MODULE].isLoggedIn ? 'Overview' : 'Guest';
 
             window.dataLayer.push({
-                custom: {
-                    checkout: {
-                        step: 1
-                    },
-                    basket: rootState[VUEX_CHECKOUT_MODULE].basket,
-                    restaurant: {
-                        id: rootState[VUEX_CHECKOUT_MODULE].restaurantId
-                    },
-                    pageData: {
-                        name: `Checkout 1 ${pageName}`,
-                        group: 'Checkout'
-                    }
+                checkout: {
+                    step: 1
+                },
+                basket: rootState[VUEX_CHECKOUT_MODULE].basket,
+                restaurant: {
+                    id: rootState[VUEX_CHECKOUT_MODULE].restaurantId
+                },
+                pageData: {
+                    name: `Checkout 1 ${pageName}`,
+                    group: 'Checkout'
                 }
             });
 
@@ -86,14 +84,12 @@ export default {
 
             window.dataLayer.push({
                 event: 'Form',
-                custom: {
-                    form: {
-                        name: formName,
-                        action,
-                        error: mappedError,
-                        autofill: state.autofill,
-                        changes: state.changedFields.sort()
-                    }
+                form: {
+                    name: formName,
+                    action,
+                    error: mappedError,
+                    autofill: state.autofill,
+                    changes: state.changedFields.sort()
                 }
             });
         }

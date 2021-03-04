@@ -176,21 +176,19 @@ describe('CheckoutAnalyticsModule', () => {
 
             beforeEach(() => {
                 expectedEvent = {
-                    custom: {
-                        checkout: {
-                            step: 1
-                        },
-                        basket: {
-                            id: rootState[VUEX_CHECKOUT_MODULE].basket.id,
-                            total: rootState[VUEX_CHECKOUT_MODULE].basket.total
-                        },
-                        restaurant: {
-                            id: rootState[VUEX_CHECKOUT_MODULE].restaurantId
-                        },
-                        pageData: {
-                            name: 'Checkout 1 Guest',
-                            group: 'Checkout'
-                        }
+                    checkout: {
+                        step: 1
+                    },
+                    basket: {
+                        id: rootState[VUEX_CHECKOUT_MODULE].basket.id,
+                        total: rootState[VUEX_CHECKOUT_MODULE].basket.total
+                    },
+                    restaurant: {
+                        id: rootState[VUEX_CHECKOUT_MODULE].restaurantId
+                    },
+                    pageData: {
+                        name: 'Checkout 1 Guest',
+                        group: 'Checkout'
                     }
                 };
             });
@@ -209,7 +207,7 @@ describe('CheckoutAnalyticsModule', () => {
                     const expectedName = 'Checkout 1 Overview';
 
                     rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = true;
-                    expectedEvent.custom.pageData.name = expectedName;
+                    expectedEvent.pageData.name = expectedName;
 
                     // Act
                     trackInitialLoad({ rootState, dispatch });
@@ -225,7 +223,7 @@ describe('CheckoutAnalyticsModule', () => {
                     const expectedName = 'Checkout 1 Guest';
 
                     rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = false;
-                    expectedEvent.custom.pageData.name = expectedName;
+                    expectedEvent.pageData.name = expectedName;
 
                     // Act
                     trackInitialLoad({ rootState, dispatch });
@@ -256,14 +254,12 @@ describe('CheckoutAnalyticsModule', () => {
                 };
                 expectedEvent = {
                     event: 'Form',
-                    custom: {
-                        form: {
-                            name: 'checkout_guest',
-                            action: payload.action,
-                            error: null,
-                            autofill: state.autofill,
-                            changes: state.changedFields
-                        }
+                    form: {
+                        name: 'checkout_guest',
+                        action: payload.action,
+                        error: null,
+                        autofill: state.autofill,
+                        changes: state.changedFields
                     }
                 };
                 mapAnalyticsNamesSpy = jest.spyOn(mapper, 'mapAnalyticsNames');
@@ -278,7 +274,7 @@ describe('CheckoutAnalyticsModule', () => {
                 beforeEach(() => {
                     payload.error = 'postcodeNotDefined';
                     mapAnalyticsNamesSpy.mockImplementation(() => payload.error);
-                    expectedEvent.custom.form.error = payload.error;
+                    expectedEvent.form.error = payload.error;
                 });
 
                 it('should call `mapAnalyticsNames` with error', () => {
@@ -302,7 +298,7 @@ describe('CheckoutAnalyticsModule', () => {
                 beforeEach(() => {
                     payload.error = null;
                     mapAnalyticsNamesSpy.mockImplementation(() => payload.error);
-                    expectedEvent.custom.form.error = payload.error;
+                    expectedEvent.form.error = payload.error;
                 });
 
                 it('should not call `mapAnalyticsNames`', () => {
@@ -328,7 +324,7 @@ describe('CheckoutAnalyticsModule', () => {
                     const expectedName = 'checkout';
 
                     rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = true;
-                    expectedEvent.custom.form.name = expectedName;
+                    expectedEvent.form.name = expectedName;
 
                     // Act
                     trackFormInteraction({ state, rootState }, payload);
@@ -344,7 +340,7 @@ describe('CheckoutAnalyticsModule', () => {
                     const expectedName = 'checkout_guest';
 
                     rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = false;
-                    expectedEvent.custom.form.name = expectedName;
+                    expectedEvent.form.name = expectedName;
 
                     // Act
                     trackFormInteraction({ state, rootState }, payload);
