@@ -12,11 +12,12 @@ import {
 const { actions, mutations } = CheckoutAnalyticsModule;
 
 const {
+    trackFormError,
+    trackFormInteraction,
+    trackInitialLoad,
     updateAutofill,
     updateChangedField,
-    updateErrors,
-    trackInitialLoad,
-    trackFormInteraction
+    updateErrors
 } = actions;
 
 Object.defineProperty(global, 'window', {
@@ -174,7 +175,7 @@ describe('CheckoutAnalyticsModule', () => {
         });
 
         describe('updateErrors ::', () => {
-            const issues = [{code: 'issue'}];
+            const issues = [{ code: 'issue' }];
             const issueCodes = ['issue'];
             let mapAnalyticsErrorsSpy;
 
@@ -376,6 +377,20 @@ describe('CheckoutAnalyticsModule', () => {
                     // Assert
                     expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
+            });
+        });
+
+        describe('trackFormError ::', () => {
+            it('should dispatch `trackFormInteraction` with `start` action', () => {
+                // Arrange
+                const errors = ['error 1'];
+                state.errors = errors;
+
+                // Assert
+                trackFormError({ state, dispatch });
+
+                // Assert
+                expect(dispatch).toHaveBeenCalledWith('trackFormInteraction', { action: 'error', error: errors[0] });
             });
         });
     });

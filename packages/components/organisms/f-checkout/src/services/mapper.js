@@ -77,7 +77,7 @@ const updateCheckoutErrors = {
     invalidModelState: ['FIRST_NAME_REQUIRED', 'LAST_NAME_REQUIRED', 'PHONE_NUMBER_REQUIRED', 'DATE_OF_BIRTH_REQUIRED', 'ADDRESS_LINES_REQUIRED', 'POSTAL_CODE_REQUIRED', 'GEO_LOCATION_REQUIRED'],
     invalidOrderTime: ['FULFILMENT_TIME_UNAVAILABLE'],
     setOrderTime: ['FULFILMENT_TIME_REQUIRED']
-}
+};
 
 /**
  * Updates passed field name to match the expected analytics name requirements.
@@ -93,7 +93,7 @@ const mapAnalyticsError = issue => {
         }
     });
 
-    return errors
+    return errors;
 };
 
 /**
@@ -102,8 +102,8 @@ const mapAnalyticsError = issue => {
  */
 const mapAnalyticsNames = fields => fields.map(mapAnalyticsName).sort();
 
-const mapAnalyticsErrors = issues => {
-    return issues.map(mapAnalyticsError)
-};
+const mapAnalyticsErrors = issues => issues.map(mapAnalyticsError);
 
-export { mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames, mapAnalyticsErrors };
+export {
+    mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames, mapAnalyticsErrors
+};

@@ -80,19 +80,31 @@ export default {
          * Pushes `form` event to the dataLayer with correct data
          */
         trackFormInteraction ({ state, rootState }, { action, error }) {
+            let mappedError;
             const formName = rootState[VUEX_CHECKOUT_MODULE].isLoggedIn ? 'checkout' : 'checkout_guest';
 
-            const mappedError = action === 'error' ? state.errors : error ? mapAnalyticsNames(error).toString() : null;
+            if (action !== 'error') {
+                mappedError = error ? mapAnalyticsNames(error).toString() : null;
+            }
 
             window.dataLayer.push({
                 event: 'Form',
                 form: {
                     name: formName,
                     action,
-                    error: mappedError,
+                    error: mappedError || error || null,
                     autofill: state.autofill.toString(),
-                    changes: state.changedFields.sort().toString()
+                    changes: state.changedFields.toString()
                 }
+            });
+        },
+
+        /**
+         * Pushes `form` event to the dataLayer with correct data
+         */
+        trackFormError ({ state, dispatch }) {
+            state.errors.forEach(error => {
+                dispatch('trackFormInteraction', { action: 'error', error });
             });
         },
 
@@ -101,14 +113,14 @@ export default {
                 const issueArray = [];
 
                 issues.forEach(issue => {
-                    issueArray.push(issue.code)
+                    issueArray.push(issue.code);
                 });
 
                 const errors = mapAnalyticsErrors(issueArray);
 
                 commit(UPDATE_ERRORS, errors);
             }
-        },
+        }
     },
 
     mutations: {
@@ -116,6 +128,8 @@ export default {
             if (!state.changedFields.includes(field)) {
                 state.changedFields.push(field);
             }
+
+            state.changedFields.sort();
         },
 
         [UPDATE_AUTOFILL]: (state, autofill) => {
@@ -127,7 +141,7 @@ export default {
                 if (!state.errors.includes(error)) {
                     state.errors.push(error);
                 }
-            })
+            });
         }
     }
 };

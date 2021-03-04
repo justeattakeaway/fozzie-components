@@ -9,11 +9,11 @@ module.exports = class Popover extends Page {
         super.openComponent('atom', 'popover-component');
     }
 
-    waitForTestComponent () 
+    waitForComponent () { 
         super.waitForComponent(this.component);
     }
 
     isComponentDisplayed () {
-        this.component.isDisplayed();
+        return this.component.isDisplayed();
     }
 }

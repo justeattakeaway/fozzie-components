@@ -112,11 +112,7 @@ import {
     TENANT_MAP,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
-    VUEX_CHECKOUT_MODULE,
-    BASKET_NOT_ORDERABLE_ERRORS,
-    INVALID_MODEL_STATE_ERRORS,
-    SET_ORDER_TIME_ERROR,
-    UPDATE_CHECKOUT_ERRORS
+    VUEX_CHECKOUT_MODULE
 } from '../constants';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
@@ -320,6 +316,7 @@ export default {
         ]),
 
         ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
+            'trackFormError',
             'trackInitialLoad',
             'trackFormInteraction'
         ]),
@@ -374,9 +371,7 @@ export default {
 
                 await this.handleUpdateCheckout(data);
 
-                if (!this.isFulfillable) {
-                    this.trackFormInteraction({ action: 'error', error: ['setOrderTime'] });
-                } else {
+                if (this.isFulfillable) {
                     await this.submitOrder();
 
                     this.$emit(EventNames.CheckoutSuccess, eventData);
@@ -389,7 +384,6 @@ export default {
 
                     this.redirectToPayment();
                 }
-
             } catch (thrownErrors) {
                 eventData.errors = thrownErrors;
 
@@ -403,6 +397,10 @@ export default {
             }
         },
 
+        /**
+         * Updates checkout details while emitting events to communicate its success or failure.
+         *
+         */
         async handleUpdateCheckout (data) {
             try {
                 await this.updateCheckout({
@@ -411,9 +409,10 @@ export default {
                     timeout: this.checkoutTimeout
                 });
 
-                this.issues && this.trackFormInteraction({action: 'error'})
-            }
-            catch (errors) {
+                if (this.issues) {
+                    this.trackFormError();
+                }
+            } catch (errors) {
                 this.trackFormInteraction({ action: 'error', error: ['basketNotOrderable'] });
             }
         },
@@ -573,7 +572,7 @@ export default {
                 this.$emit(EventNames.CheckoutAddressGetSuccess);
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutAddressGetFailure, thrownErrors);
-                this.hasCheckoutLoadedSuccessfully = false;
+                this.$logger.logWarn('Get checkout address failure', this.$store, { thrownErrors });
             }
         },
 
@@ -675,7 +674,9 @@ export default {
 
             try {
                 await this.submitCheckout();
-                this.trackFormInteraction({ action: 'success' });
+                if (!this.issues) {
+                    this.trackFormInteraction({ action: 'success' });
+                }
             } catch (error) {
                 this.handleErrorState(error);
             } finally {

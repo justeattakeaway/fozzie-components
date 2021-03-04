@@ -19,7 +19,7 @@ exports.getAccessibilityTestResults = (componentName) => {
             },
             rules: {
 				'duplicate-id': { enabled: false },
-				'bypass': { enabled: false }
+                'bypass': { enabled: false }
 			}
         };
 

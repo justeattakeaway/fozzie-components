@@ -368,7 +368,7 @@ describe('CheckoutModule', () => {
                 mobileNumber
             };
 
-            const issues =  [{code: 'issue'}]
+            const issues = [{ code: 'issue' }];
 
             let config;
 

@@ -73,10 +73,11 @@ const defaultCheckoutActions = {
 };
 
 const defaultAnalyticsActions = {
-    updateAutofill: jest.fn(),
-    updateChangedField: jest.fn(),
+    trackFormError: jest.fn(),
+    trackFormInteraction: jest.fn(),
     trackInitialLoad: jest.fn(),
-    trackFormInteraction: jest.fn()
+    updateAutofill: jest.fn(),
+    updateChangedField: jest.fn()
 };
 
 const i18n = {

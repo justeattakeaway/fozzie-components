@@ -6,11 +6,7 @@ import { validations } from '@justeat/f-services';
 import {
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_COLLECTION,
-    TENANT_MAP,
-    BASKET_NOT_ORDERABLE_ERRORS,
-    INVALID_MODEL_STATE_ERRORS,
-    SET_ORDER_TIME_ERROR,
-    UPDATE_CHECKOUT_ERRORS
+    TENANT_MAP
 } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
@@ -773,6 +769,14 @@ describe('Checkout', () => {
         });
 
         describe('submitCheckout ::', () => {
+            let submitOrderSpy;
+            let redirectToPaymentSpy;
+
+            beforeEach(() => {
+                submitOrderSpy = jest.spyOn(VueCheckout.methods, 'submitOrder');
+                redirectToPaymentSpy = jest.spyOn(VueCheckout.methods, 'redirectToPayment');
+            });
+
             describe('if serviceType set to `collection`', () => {
                 let wrapper;
 
@@ -1400,32 +1404,15 @@ describe('Checkout', () => {
                 });
             });
 
-            it('should call `submitOrder`', async () => {
-                // Arrange
-                const submitOrderSpy = jest.spyOn(VueCheckout.methods, 'submitOrder');
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: {
-                        $logger
-                    }
-                });
-
-                // Act
-                await wrapper.vm.submitCheckout();
-
-                // Assert
-                expect(submitOrderSpy).toHaveBeenCalled();
-            });
-
             describe('when `isFulfillable` is true', () => {
-                it('should call `redirectToPayment`', async () => {
-                    // Arrange
-                    const redirectToPaymentSpy = jest.spyOn(VueCheckout.methods, 'redirectToPayment');
-                    const wrapper = shallowMount(VueCheckout, {
-                        store: createStore(),
+                let wrapper;
+
+                beforeEach(() => {
+                    wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            isFulfillable: true
+                        }),
                         i18n,
                         localVue,
                         propsData,
@@ -1433,29 +1420,30 @@ describe('Checkout', () => {
                             $logger
                         }
                     });
+                });
 
+                it('should call `submitOrder`', async () => {
+                    // Act
+                    await wrapper.vm.submitCheckout();
+
+                    // Assert
+                    expect(submitOrderSpy).toHaveBeenCalled();
+                });
+
+                it('should call `redirectToPayment`', async () => {
                     // Act
                     await wrapper.vm.submitCheckout();
 
                     // Assert
                     expect(redirectToPaymentSpy).toHaveBeenCalled();
                 });
-            })
+            });
 
             describe('when `isFulfillable` is false', () => {
-                let trackFormInteractionSpy;
+                let wrapper;
 
                 beforeEach(() => {
-                    trackFormInteractionSpy = jest.spyOn(VueCheckout.methods, 'trackFormInteraction');
-                });
-
-                afterEach(() => {
-                    jest.clearAllMocks();
-                });
-
-                it('should call `trackFormInteraction`', async () => {
-                    // Arrange
-                    const wrapper = shallowMount(VueCheckout, {
+                    wrapper = shallowMount(VueCheckout, {
                         store: createStore({
                             ...defaultCheckoutState,
                             isFulfillable: false
@@ -1467,30 +1455,32 @@ describe('Checkout', () => {
                             $logger
                         }
                     });
+                });
 
-                    const payload = {
-                        action: 'error',
-                        error: ['setOrderTime']
-                    }
-
+                it('should call not call `submitOrder`', async () => {
                     // Act
                     await wrapper.vm.submitCheckout();
 
                     // Assert
-                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(payload);
+                    expect(submitOrderSpy).not.toHaveBeenCalled();
                 });
-            })
 
+                it('should call `redirectToPayment`', async () => {
+                    // Act
+                    await wrapper.vm.submitCheckout();
+
+                    // Assert
+                    expect(redirectToPaymentSpy).not.toHaveBeenCalled();
+                });
+            });
         });
 
         describe('handleUpdateCheckout ::', () => {
             let wrapper;
-            let updateCheckoutSpy;
             let trackFormInteractionSpy;
 
             describe('when `updateCheckout` request fails', () => {
                 beforeEach(() => {
-                    updateCheckoutSpy = jest.spyOn(VueCheckout.methods, 'updateCheckout');
                     trackFormInteractionSpy = jest.spyOn(VueCheckout.methods, 'trackFormInteraction');
 
                     wrapper = mount(VueCheckout, {
@@ -1499,7 +1489,8 @@ describe('Checkout', () => {
                             {
                                 ...defaultCheckoutActions,
                                 updateCheckout: jest.fn(async () => Promise.reject())
-                            }),
+                            }
+                        ),
                         i18n,
                         localVue,
                         propsData,
@@ -1518,7 +1509,7 @@ describe('Checkout', () => {
                     const payload = {
                         action: 'error',
                         error: ['basketNotOrderable']
-                    }
+                    };
 
                     // Act
                     await wrapper.vm.handleUpdateCheckout();
@@ -1529,16 +1520,37 @@ describe('Checkout', () => {
             });
 
             describe('when `updateCheckout` request succeeds', () => {
+                let trackFormErrorSpy;
+                const issues = [{ code: 'issue' }];
+
                 beforeEach(() => {
-                    updateCheckoutSpy = jest.spyOn(VueCheckout.methods, 'updateCheckout');
-                    trackFormInteractionSpy = jest.spyOn(VueCheckout.methods, 'trackFormInteraction');
+                    trackFormErrorSpy = jest.spyOn(VueCheckout.methods, 'trackFormError');
+
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            issues
+                        }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
+                    });
                 });
 
                 afterEach(() => {
                     jest.clearAllMocks();
                 });
 
+                it('should call `trackFormError` if response contains `issues`', async () => {
+                    // Act
+                    await wrapper.vm.handleUpdateCheckout();
 
+                    // Assert
+                    expect(trackFormErrorSpy).toHaveBeenCalled();
+                });
             });
         });
 
@@ -1988,13 +2000,17 @@ describe('Checkout', () => {
             });
 
             describe('when `getAddress` request fails', () => {
-                it('should emit failure event and set `hasCheckoutLoadedSuccessfully` to `false`', async () => {
+                it('should emit failure event and log a warning', async () => {
+                    const store = createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAddress: jest.fn(async () => Promise.reject()) });
                     // Arrange
                     const wrapper = mount(VueCheckout, {
-                        store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAddress: jest.fn(async () => Promise.reject()) }),
+                        store,
                         i18n,
                         localVue,
-                        propsData
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
                     });
 
                     // Act
@@ -2003,7 +2019,9 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutAddressGetFailure).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutAddressGetSuccess)).toBeUndefined();
-                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(false);
+                    expect($logger.logWarn).toHaveBeenCalledWith('Get checkout address failure', store, {});
+
+                    expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(true);
                 });
             });
 
