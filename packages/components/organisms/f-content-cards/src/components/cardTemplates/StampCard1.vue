@@ -46,7 +46,9 @@
                 :data-test-id="testIdForSection('expiryInfo')">
                 {{ card.expiryLine }}
                 <template v-if="hasValidExpiryDate">
-                    <span :aria-label="expiryDateAccessible"><span aria-hidden="true">{{ expiryDateVisual }}</span></span>
+                    <span :aria-label="expiryDateAccessible">
+                        <span aria-hidden="true">{{ expiryDateVisual }}</span>
+                    </span>
                 </template>
             </div>
         </div>
@@ -55,7 +57,7 @@
             :class="[$style['c-stampCard1-stamps']]"
             :data-test-id="testIdForSection('stamps')"
             role="img"
-            :aria-label="stampCardsStatusCopy()">
+            :aria-label="stampCardsStatusCopy">
             <div
                 v-for="({ stampImage, classSuffix }, index) in stamps"
                 :key="index">
@@ -84,27 +86,6 @@ import EmptyStamp from './images/stamp-empty-15.svg';
 import FullStamp from './images/stamp-full-15.svg';
 
 import '../MakeTextAccessible';
-
-const getDateFnsLocale = locale => {
-    switch (locale) {
-        case 'da-DK':
-            return import(/* webpackChunkName */ 'date-fns/locale/da');
-        case 'en-AU':
-            return import(/* webpackChunkName */ 'date-fns/locale/en-AU');
-        case 'en-GB':
-        case 'en-IE':
-        default:
-            return import(/* webpackChunkName */ 'date-fns/locale/en-GB');
-        case 'en-NZ':
-            return import(/* webpackChunkName */ 'date-fns/locale/en-NZ');
-        case 'es-ES':
-            return import(/* webpackChunkName */ 'date-fns/locale/es');
-        case 'it-IT':
-            return import(/* webpackChunkName */ 'date-fns/locale/it');
-        case 'nb-NO':
-            return import(/* webpackChunkName */ 'date-fns/locale/nb');
-    }
-};
 
 export default {
     name: 'StampCard1',
@@ -198,6 +179,14 @@ export default {
         },
 
         /**
+         * Returns the stamp card status text based on the number of completed steps for accessibility
+         * @return String
+         */
+        stampCardsStatusCopy () {
+            return this.copy.stampCardStatus[this.card.earnedStamps];
+        },
+
+        /**
          * Creates a function that gives portions of the component's markup unique testIds for unit and browser testing
          * @return {function(*, *=): string|boolean}
          */
@@ -206,12 +195,13 @@ export default {
                 ? `${this.testId}--${section}${index === undefined ? '' : `--${index}`}`
                 : false);
         }
+
     },
 
     mounted () {
         this.onViewContentCard();
 
-        getDateFnsLocale(this.copy.locale).then(locale => {
+        this.getDateFnsLocale(this.copy.locale).then(locale => {
             this.dateFnsLocale = locale;
         });
     },
@@ -231,8 +221,30 @@ export default {
             this.emitCardClick(this.card);
         },
 
-        stampCardsStatusCopy () {
-            return this.copy.stampCardStatus[this.card.earnedStamps];
+        /**
+         * Takes the locale and lazyloads the correct date locale for the date-fns library
+         * @param locale
+         * @returns {Promise<module:date-fns/locale/da>}
+         */
+        getDateFnsLocale (locale) {
+            switch (locale) {
+                case 'da-DK':
+                    return import(/* webpackChunkName: "date-fns-locale-da" */ 'date-fns/locale/da');
+                case 'en-AU':
+                    return import(/* webpackChunkName: "date-fns-locale-en-AU" */ 'date-fns/locale/en-AU');
+                case 'en-GB':
+                case 'en-IE':
+                default:
+                    return import(/* webpackChunkName: "date-fns-locale-en-GB" */ 'date-fns/locale/en-GB');
+                case 'en-NZ':
+                    return import(/* webpackChunkName: "date-fns-locale-en-NZ" */ 'date-fns/locale/en-NZ');
+                case 'es-ES':
+                    return import(/* webpackChunkName: "date-fns-locale-es" */ 'date-fns/locale/es');
+                case 'it-IT':
+                    return import(/* webpackChunkName: "date-fns-locale-it" */ 'date-fns/locale/it');
+                case 'nb-NO':
+                    return import(/* webpackChunkName: "date-fns-locale-nb" */ 'date-fns/locale/nb');
+            }
         }
     }
 };
