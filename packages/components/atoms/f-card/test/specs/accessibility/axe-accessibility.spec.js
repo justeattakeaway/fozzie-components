@@ -11,5 +11,6 @@ describe('Accessibility tests', () => {
     it('a11y - should test f-card component WCAG compliance', () => {
         // Act
         const axeResults = getAccessibilityTestResults('f-card');
+        expect(axeResults.violations.length).toBe(0);
     });
 });

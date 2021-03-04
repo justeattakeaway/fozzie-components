@@ -15,6 +15,7 @@ describe('Accessibility tests', () => {
         checkout.open(checkoutData);
         checkout.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-checkout-delivery');
+        expect(axeResults.violations.length).toBe(0);
     });
 
     it('a11y - should test f-checkout component (collection) WCAG compliance', () => {
@@ -27,6 +28,7 @@ describe('Accessibility tests', () => {
         checkout.open(checkoutData);
         checkout.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-checkout-collection');
+        expect(axeResults.violations.length).toBe(0);
     });
 
     it('a11y - should test f-checkout component (guest) WCAG compliance', () => {
@@ -39,5 +41,6 @@ describe('Accessibility tests', () => {
         checkout.open(checkoutData);
         checkout.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-checkout-guest');
+        expect(axeResults.violations.length).toBe(0);
     });
 });

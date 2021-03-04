@@ -5,7 +5,7 @@ const TEST_TYPE = process.env.TEST_TYPE;
 exports.local = () => ({
     bail: 0,
     maxinstances: 1,
-    loglevel: 'info',
+    loglevel: 'error',
     reporters: [
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases

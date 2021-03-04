@@ -14,6 +14,6 @@ module.exports = class <%= name.filename %> extends Page {
     }
 
     isComponentDisplayed () {
-        this.component.isDisplayed();
+        return this.component.isDisplayed();
     }
 }

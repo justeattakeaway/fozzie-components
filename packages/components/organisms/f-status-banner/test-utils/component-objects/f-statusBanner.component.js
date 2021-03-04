@@ -1,5 +1,21 @@
-const statusBannerComponent = () => $('[data-test-id="statusBanner"]');
+const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-exports.waitForStatusBannerComponent = () => statusBannerComponent().waitForExist();
+class StatusBanner extends Page {
 
-exports.isStatusBannerComponentDisplayed = () => statusBannerComponent().isDisplayed();
+    get component () { return $('[data-test-id="main-banner-container"]') }
+
+
+    open() {
+        super.openComponent('organism', 'status-banner-component');
+    };
+
+    waitForComponent() {
+        this.component.waitForExist();
+    }
+
+    isStatusBannerComponentDisplayed() {
+        return this.component.isDisplayed();
+    }
+}
+
+module.exports = StatusBanner;

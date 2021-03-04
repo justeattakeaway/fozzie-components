@@ -1,5 +1,20 @@
-const cookieBannerComponent = () => $('[data-test-id="cookieBanner-component"]');
+const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-exports.waitForCookieBannerComponent = () => cookieBannerComponent().waitForExist();
+class CookieBanner extends Page {
 
-exports.isCookieBannerComponentDisplayed = () => cookieBannerComponent().isDisplayed();
+    get component () { return $('[data-test-id="cookieBanner-component"]')}
+
+    open() {
+        super.openComponent('organism', 'cookie-banner-component');
+    }
+
+    waitForComponent() {
+        this.component.waitForExist();
+    }
+
+    isCookieBannerComponentDisplayed() {
+        return this.component.isDisplayed();
+    }
+}
+
+module.exports = CookieBanner;

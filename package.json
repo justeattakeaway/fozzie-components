@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "3.20.0",
+  "version": "3.21.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -113,5 +113,8 @@
     "packages/components/organisms/*",
     "packages/services/*",
     "packages/tools/*"
-  ]
+  ],
+  "dependencies": {
+    "@justeat/f-wdio-utils": "^0.1.0"
+  }
 }

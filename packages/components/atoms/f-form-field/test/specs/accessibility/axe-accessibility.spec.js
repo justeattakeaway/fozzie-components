@@ -11,5 +11,6 @@ describe('Accessibility tests', () => {
     it('a11y - should test f-formField component WCAG compliance', () => {
         // Act
         const axeResults = getAccessibilityTestResults('f-form-field');
+        expect(axeResults.violations.length).toBe(0);
     });
 });

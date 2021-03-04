@@ -1,8 +1,15 @@
+const Searchbox = require('../../../test-utils/component-objects/f-searchbox.component');
+const searchbox = new Searchbox();
 import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
 
 describe('Accessibility tests', () => {
-    it.skip('a11y - should test f-searchbox component WCAG compliance', () => {
+    beforeEach(() => {
+        searchbox.open();
+        searchbox.waitForComponent();
+    });
+    it('a11y - should test f-searchbox component WCAG compliance', () => {
         // Act
         const axeResults = getAccessibilityTestResults('f-searchbox');
+        expect(axeResults.violations.length).toBe(0);
     });
 });

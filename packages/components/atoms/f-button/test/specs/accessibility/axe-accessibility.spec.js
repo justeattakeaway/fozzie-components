@@ -8,6 +8,8 @@ describe('Accessibility tests', () => {
         button.open();
         button.waitForActionComponent();
         const axeResults = getAccessibilityTestResults('f-button - action');
+
+        expect(axeResults.violations.length).toBe(0);
     });
 
     it('a11y - should test f-button link component WCAG compliance', () => {
@@ -15,5 +17,7 @@ describe('Accessibility tests', () => {
         button.open('link');
         button.waitForLinkComponent();
         const axeResults = getAccessibilityTestResults('f-button - link');
+
+        expect(axeResults.violations.length).toBe(0);
     });
 });
