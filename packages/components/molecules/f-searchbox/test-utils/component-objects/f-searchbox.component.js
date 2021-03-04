@@ -12,6 +12,6 @@ module.exports = class SearchBox extends Page {
     }
 
     isComponentDisplayed () {
-        this.component.isDisplayed();
+        return this.component.isDisplayed();
     }
 };

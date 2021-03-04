@@ -5,7 +5,7 @@ import {
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { withA11y } from '@storybook/addon-a11y';
-import VueSearchbox from '../src/components/Base.vue';
+import Searchbox from '../src/components/Base.vue';
 import SearchboxModule from '../src/store/searchbox.module';
 
 Vue.use(Vuex);
@@ -15,8 +15,8 @@ export default {
     decorators: [withA11y]
 };
 
-export const VueSearchboxComponent = () => ({
-    components: { VueSearchbox },
+export const SearchboxComponent = () => ({
+    components: { Searchbox },
     props: {
         buttonType: {
             default: select('Button Type', ['primary', 'primaryAlt', 'secondary', 'tertiary', 'link'])
@@ -30,7 +30,7 @@ export const VueSearchboxComponent = () => ({
             checkout: SearchboxModule
         }
     }),
-    template: '<vue-searchbox />'
+    template: '<searchbox />'
 });
 
-VueSearchboxComponent.storyName = 'f-searchbox';
+SearchboxComponent.storyName = 'f-searchbox';

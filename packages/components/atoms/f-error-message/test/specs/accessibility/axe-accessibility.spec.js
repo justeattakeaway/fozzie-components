@@ -11,5 +11,8 @@ describe('Accessibility tests', () => {
     it('a11y - should test f-error-message component WCAG compliance', () => {
         // Act
         const axeResults = getAccessibilityTestResults('f-error-message');
+
+        // Assert
+        expect(axeResults.violations.length).toBe(0);
     });
 });
