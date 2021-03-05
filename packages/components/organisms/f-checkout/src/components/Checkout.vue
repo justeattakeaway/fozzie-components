@@ -413,7 +413,19 @@ export default {
                     this.trackFormError();
                 }
             } catch (errors) {
-                this.trackFormInteraction({ action: 'error', error: ['basketNotOrderable'] });
+                let invalidOrderTime = false;
+
+                errors.errors.forEach(error => {
+                    if (error.errorCode === 'FULFILMENT_TIME_INVALID') {
+                        invalidOrderTime = true;
+                    }
+                });
+
+                if (invalidOrderTime) {
+                    this.trackFormInteraction({ action: 'error', error: ['invalidOrderTime'] });
+                } else {
+                    this.trackFormInteraction({ action: 'error', error: ['basketNotOrderable'] });
+                }
             }
         },
 

@@ -1478,42 +1478,100 @@ describe('Checkout', () => {
             let trackFormInteractionSpy;
 
             describe('when `updateCheckout` request fails', () => {
-                beforeEach(() => {
-                    trackFormInteractionSpy = jest.spyOn(VueCheckout.methods, 'trackFormInteraction');
+                describe('when `errors` include `FULFILMENT_TIME_INVALID`', () => {
+                    beforeEach(() => {
+                        const error = {
+                            errors: [
+                                {
+                                    errorCode: 'FULFILMENT_TIME_INVALID'
+                                }
+                            ]
+                        };
 
-                    wrapper = mount(VueCheckout, {
-                        store: createStore(
-                            defaultCheckoutState,
-                            {
-                                ...defaultCheckoutActions,
-                                updateCheckout: jest.fn(async () => Promise.reject())
+                        trackFormInteractionSpy = jest.spyOn(VueCheckout.methods, 'trackFormInteraction');
+
+                        wrapper = mount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    updateCheckout: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger
                             }
-                        ),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
+                        });
+                    });
+
+                    afterEach(() => {
+                        jest.clearAllMocks();
+                    });
+
+                    it('should call `trackFormInteraction` with `invalidOrderTime`', async () => {
+                        // Arrange
+                        const payload = {
+                            action: 'error',
+                            error: ['invalidOrderTime']
+                        };
+
+                        // Act
+                        await wrapper.vm.handleUpdateCheckout();
+
+                        // Assert
+                        expect(trackFormInteractionSpy).toHaveBeenCalledWith(payload);
                     });
                 });
 
-                afterEach(() => {
-                    jest.clearAllMocks();
-                });
+                describe('when `errors` do not include `FULFILMENT_TIME_INVALID`', () => {
+                    beforeEach(() => {
+                        const error = {
+                            errors: [
+                                {
+                                    errorCode: 'TENANT_INVALID'
+                                }
+                            ]
+                        };
 
-                it('should call `trackFormInteraction`', async () => {
-                    // Arrange
-                    const payload = {
-                        action: 'error',
-                        error: ['basketNotOrderable']
-                    };
+                        trackFormInteractionSpy = jest.spyOn(VueCheckout.methods, 'trackFormInteraction');
 
-                    // Act
-                    await wrapper.vm.handleUpdateCheckout();
+                        wrapper = mount(VueCheckout, {
+                            store: createStore(
+                                defaultCheckoutState,
+                                {
+                                    ...defaultCheckoutActions,
+                                    updateCheckout: jest.fn(async () => Promise.reject(error))
+                                }
+                            ),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger
+                            }
+                        });
+                    });
 
-                    // Assert
-                    expect(trackFormInteractionSpy).toHaveBeenCalledWith(payload);
+                    afterEach(() => {
+                        jest.clearAllMocks();
+                    });
+
+                    it('should call `trackFormInteraction` with `invalidOrderTime`', async () => {
+                        // Arrange
+                        const payload = {
+                            action: 'error',
+                            error: ['basketNotOrderable']
+                        };
+
+                        // Act
+                        await wrapper.vm.handleUpdateCheckout();
+
+                        // Assert
+                        expect(trackFormInteractionSpy).toHaveBeenCalledWith(payload);
+                    });
                 });
             });
 

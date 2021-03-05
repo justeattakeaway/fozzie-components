@@ -198,7 +198,6 @@ describe('mapAnalyticsError :: ', () => {
     it.each([
         ['ITEMS_UNORDERABLE', 'basketNotOrderable'],
         ['LAST_NAME_REQUIRED', 'invalidModelState'],
-        ['FULFILMENT_TIME_UNAVAILABLE', 'invalidOrderTime'],
         ['FULFILMENT_TIME_REQUIRED', 'setOrderTime']
     ])('should correctly map %s to %s', (provided, expected) => {
         // Act & Assert
