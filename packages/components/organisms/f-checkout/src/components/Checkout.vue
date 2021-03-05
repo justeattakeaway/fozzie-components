@@ -108,7 +108,10 @@ import UserNote from './UserNote.vue';
 import ErrorPage from './Error.vue';
 
 import {
+    ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE,
+    ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME,
     CHECKOUT_METHOD_DELIVERY,
+    ERROR_CODE_FULFILMENT_TIME_INVALID,
     TENANT_MAP,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
@@ -243,7 +246,7 @@ export default {
             'address',
             'customer',
             'id',
-            'isFulfillable',
+            'isable',
             'isLoggedIn',
             'messages',
             'notices',
@@ -371,7 +374,7 @@ export default {
 
                 await this.handleUpdateCheckout(data);
 
-                if (this.isFulfillable) {
+                if (this.isFulfilable) {
                     await this.submitOrder();
 
                     this.$emit(EventNames.CheckoutSuccess, eventData);
@@ -409,23 +412,15 @@ export default {
                     timeout: this.checkoutTimeout
                 });
 
-                if (this.errors) {
+                if (this.errors) { // If updateCheckout call is successful but returns unfulfilable issues.
                     this.trackFormError();
                 }
-            } catch (errors) {
-                let invalidOrderTime = false;
+            } catch (ex) {
+                const error = ex.errors.find(err => err.errorCode === ERROR_CODE_FULFILMENT_TIME_INVALID)
+                    ? ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME
+                    : ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE;
 
-                errors.errors.forEach(error => {
-                    if (error.errorCode === 'FULFILMENT_TIME_INVALID') {
-                        invalidOrderTime = true;
-                    }
-                });
-
-                if (invalidOrderTime) {
-                    this.trackFormInteraction({ action: 'error', error: ['invalidOrderTime'] });
-                } else {
-                    this.trackFormInteraction({ action: 'error', error: ['basketNotOrderable'] });
-                }
+                this.trackFormInteraction({ action: 'error', error: [error] });
             }
         },
 

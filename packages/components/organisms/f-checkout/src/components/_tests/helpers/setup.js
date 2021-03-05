@@ -42,7 +42,7 @@ const defaultCheckoutState = {
         times: fulfilmentTimes,
         isAsapAvailable: true
     },
-    isFulfillable: true,
+    isFulfilable: true,
     notices: [],
     messages: [],
     authToken: '',
