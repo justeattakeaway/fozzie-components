@@ -319,7 +319,7 @@ export default {
         ]),
 
         ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
-            'trackFormError',
+            'trackFormErrors',
             'trackInitialLoad',
             'trackFormInteraction'
         ]),
@@ -363,16 +363,7 @@ export default {
 
                 await this.lookupGeoLocation();
 
-                const data = mapUpdateCheckoutRequest({
-                    address: this.address,
-                    customer: this.customer,
-                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
-                    time: this.time,
-                    userNote: this.userNote,
-                    geolocation: this.geolocation
-                });
-
-                await this.handleUpdateCheckout(data);
+                await this.handleUpdateCheckout();
 
                 if (this.isFulfilable) {
                     await this.submitOrder();
@@ -386,6 +377,12 @@ export default {
                     );
 
                     this.redirectToPayment();
+                } else {
+                    this.$logger.logWarn(
+                        'Consumer Checkout Not Fulfilable',
+                        this.$store,
+                        eventData
+                    );
                 }
             } catch (thrownErrors) {
                 eventData.errors = thrownErrors;
@@ -404,8 +401,17 @@ export default {
          * Updates checkout details while emitting events to communicate its success or failure.
          *
          */
-        async handleUpdateCheckout (data) {
+        async handleUpdateCheckout () {
             try {
+                const data = mapUpdateCheckoutRequest({
+                    address: this.address,
+                    customer: this.customer,
+                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
+                    time: this.time,
+                    userNote: this.userNote,
+                    geolocation: this.geolocation
+                });
+
                 await this.updateCheckout({
                     url: this.updateCheckoutUrl,
                     data,
@@ -413,7 +419,7 @@ export default {
                 });
 
                 if (this.errors) { // If updateCheckout call is successful but returns unfulfilable issues.
-                    this.trackFormError();
+                    this.trackFormErrors();
                 }
             } catch (ex) {
                 const error = ex.errors.find(err => err.errorCode === ERROR_CODE_FULFILMENT_TIME_INVALID)
@@ -681,6 +687,7 @@ export default {
 
             try {
                 await this.submitCheckout();
+
                 if (!this.errors.length) {
                     this.trackFormInteraction({ action: 'success' });
                 }

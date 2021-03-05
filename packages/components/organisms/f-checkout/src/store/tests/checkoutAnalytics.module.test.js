@@ -5,19 +5,17 @@ import { VUEX_CHECKOUT_MODULE } from '../../constants';
 
 import {
     UPDATE_AUTOFILL,
-    UPDATE_CHANGED_FIELD,
-    UPDATE_ERRORS
+    UPDATE_CHANGED_FIELD
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutAnalyticsModule;
 
 const {
-    trackFormError,
+    trackFormErrors,
     trackFormInteraction,
     trackInitialLoad,
     updateAutofill,
-    updateChangedField,
-    updateErrors
+    updateChangedField
 } = actions;
 
 Object.defineProperty(global, 'window', {
@@ -171,32 +169,6 @@ describe('CheckoutAnalyticsModule', () => {
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith(UPDATE_CHANGED_FIELD, field);
-            });
-        });
-
-        describe('updateErrors ::', () => {
-            const issue = 'issue';
-            const issues = [{ code: issue }];
-            let mapAnalyticsErrorSpy;
-
-            beforeEach(() => {
-                mapAnalyticsErrorSpy = jest.spyOn(mapper, 'mapAnalyticsError').mockImplementation(() => issue);
-            });
-
-            it('should call `mapAnalyticsErrors` with passed issues', () => {
-                // Act
-                updateErrors({ commit }, issues);
-
-                // Assert
-                expect(mapAnalyticsErrorSpy).toHaveBeenCalledWith(issue);
-            });
-
-            it(`should call ${UPDATE_ERRORS} with an array of issues`, () => {
-                // Act
-                updateErrors({ commit }, issues);
-
-                // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [issue]);
             });
         });
 
@@ -380,17 +352,31 @@ describe('CheckoutAnalyticsModule', () => {
             });
         });
 
-        describe('trackFormError ::', () => {
+        describe('trackFormErrors ::', () => {
+            const errors = ['error 1'];
+            let getAnalyticsErrorCodeByApiErrorCodeSpy;
+
+            beforeEach(() => {
+                getAnalyticsErrorCodeByApiErrorCodeSpy = jest.spyOn(mapper, 'getAnalyticsErrorCodeByApiErrorCode')
+                getAnalyticsErrorCodeByApiErrorCodeSpy.mockImplementation(() => errors);
+
+                rootState[VUEX_CHECKOUT_MODULE].errors = errors;
+            });
+
+            it('should call `getAnalyticsErrorCodeByApiErrorCode` with each error', () => {
+                // Assert
+                trackFormErrors({ rootState, dispatch });
+
+                // Assert
+                expect(getAnalyticsErrorCodeByApiErrorCodeSpy).toHaveBeenCalled();
+            });
+
             it('should dispatch `trackFormInteraction` with `start` action', () => {
-                // Arrange
-                const errors = ['error 1'];
-                state.errors = errors;
+                // Assert
+                trackFormErrors({ rootState, dispatch });
 
                 // Assert
-                trackFormError({ state, dispatch });
-
-                // Assert
-                expect(dispatch).toHaveBeenCalledWith('trackFormInteraction', { action: 'error', error: errors[0] });
+                expect(dispatch).toHaveBeenCalledWith('trackFormInteraction', { action: 'error', error: errors });
             });
         });
     });
@@ -436,29 +422,6 @@ describe('CheckoutAnalyticsModule', () => {
 
                 // Assert
                 expect(state.autofill).toEqual(payload);
-            });
-        });
-
-        describe(`${UPDATE_ERRORS} ::`, () => {
-            const errors = ['error1', 'error2'];
-
-            it('should update state `errors` with payload', () => {
-                // Act
-                mutations[UPDATE_ERRORS](state, errors);
-
-                // Assert
-                expect(state.errors).toEqual(errors);
-            });
-
-            it('should not update state if `errors` already exist', () => {
-                // Arrange
-                state.errors = errors;
-
-                // Act
-                mutations[UPDATE_ERRORS](state, errors);
-
-                // Assert
-                expect(state.errors).toEqual(errors);
             });
         });
     });

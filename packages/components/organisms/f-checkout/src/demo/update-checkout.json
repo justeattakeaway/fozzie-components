@@ -9,6 +9,19 @@
           "currency": "GBP",
           "minimumOrderValue": 1000,
           "additionalSpendRequired": 100
+      },
+      {
+        "code": "RESTAURANT_NOT_TAKING_ORDERS"
+      },
+      {
+        "code": "SERVICE_TYPE_UNAVAILABLE"
+      },
+      {
+        "code": "ITEMS_UNORDERABLE"
+      },
+      {
+        "code": "ADDITIONAL_ITEMS_REQUIRED"
       }
+
     ]
 }

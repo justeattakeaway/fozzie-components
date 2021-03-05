@@ -1,5 +1,5 @@
 import {
-    mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames, mapAnalyticsError
+    mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode
 } from '../mapper';
 
 const defaultParams = {
@@ -194,13 +194,18 @@ describe('mapAnalyticsNames :: ', () => {
     });
 });
 
-describe('mapAnalyticsError :: ', () => {
+describe('getAnalyticsErrorCodeByApiErrorCode :: ', () => {
     it.each([
         ['ITEMS_UNORDERABLE', 'basketNotOrderable'],
         ['LAST_NAME_REQUIRED', 'invalidModelState'],
         ['FULFILMENT_TIME_REQUIRED', 'setOrderTime']
-    ])('should correctly map %s to %s', (provided, expected) => {
+    ])('should correctly map %s to %s', (code, expected) => {
+        // Arrange
+        const error = {
+            code: code
+        }
+
         // Act & Assert
-        expect(mapAnalyticsError(provided)).toEqual(expected);
+        expect(getAnalyticsErrorCodeByApiErrorCode(error)).toEqual(expected);
     });
 });

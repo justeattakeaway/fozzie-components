@@ -1,5 +1,5 @@
 import {
-    mapAnalyticsName, mapAnalyticsNames, mapAnalyticsError
+    mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode
 } from '../services/mapper';
 import { VUEX_CHECKOUT_MODULE } from '../constants';
 
@@ -103,11 +103,17 @@ export default {
         /**
          *Dispatches `trackFormInteraction` with each error in `state.errors`.
          */
-        trackFormError ({ rootState, dispatch }) {
-            rootState[VUEX_CHECKOUT_MODULE].errors.forEach(error => {
-                const mappedError = mapAnalyticsError(error);
+        trackFormErrors ({ rootState, dispatch }) {
+            const trackedErrors = [];
 
-                dispatch('trackFormInteraction', { action: 'error', error: mappedError });
+            rootState[VUEX_CHECKOUT_MODULE].errors.forEach(error => {
+                const mappedError = getAnalyticsErrorCodeByApiErrorCode(error);
+
+                if(!trackedErrors.includes(mappedError)) {
+                    trackedErrors.push(mappedError);
+
+                    dispatch('trackFormInteraction', { action: 'error', error: mappedError });
+                }
             });
         }
     },

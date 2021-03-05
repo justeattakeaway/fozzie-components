@@ -764,6 +764,16 @@ describe('Checkout', () => {
         });
 
         describe('submitCheckout ::', () => {
+            let handleUpdateCheckoutSpy;
+            let submitOrderSpy;
+            let redirectToPaymentSpy;
+
+            beforeEach(() => {
+                handleUpdateCheckoutSpy = jest.spyOn(VueCheckout.methods, 'handleUpdateCheckout');
+                submitOrderSpy = jest.spyOn(VueCheckout.methods, 'submitOrder');
+                redirectToPaymentSpy = jest.spyOn(VueCheckout.methods, 'redirectToPayment');
+            });
+
             describe('if serviceType set to `collection`', () => {
                 let wrapper;
 
@@ -1390,44 +1400,74 @@ describe('Checkout', () => {
                 });
             });
 
-            it('should call `submitOrder`', async () => {
-                // Arrange
-                const submitOrderSpy = jest.spyOn(VueCheckout.methods, 'submitOrder');
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: {
-                        $logger
-                    }
+            describe('when `isFulfillable` is true', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            isFulfillable: true
+                        }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
+                    });
                 });
 
-                // Act
-                await wrapper.vm.submitCheckout();
+                it('should call `submitOrder`', async () => {
+                    // Act
+                    await wrapper.vm.submitCheckout();
 
-                // Assert
-                expect(submitOrderSpy).toHaveBeenCalled();
+                    // Assert
+                    expect(submitOrderSpy).toHaveBeenCalled();
+                });
+
+                it('should call `redirectToPayment`', async () => {
+                    // Act
+                    await wrapper.vm.submitCheckout();
+
+                    // Assert
+                    expect(redirectToPaymentSpy).toHaveBeenCalled();
+                });
             });
 
-            it('should call `redirectToPayment`', async () => {
-                // Arrange
-                const redirectToPaymentSpy = jest.spyOn(VueCheckout.methods, 'redirectToPayment');
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: {
-                        $logger
-                    }
+            describe('when `isFulfillable` is false', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            isFulfillable: false
+                        }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
+                    });
                 });
 
-                // Act
-                await wrapper.vm.submitCheckout();
+                it('should not call `submitOrder`', async () => {
+                    // Act
+                    await wrapper.vm.submitCheckout();
 
-                // Assert
-                expect(redirectToPaymentSpy).toHaveBeenCalled();
+                    // Assert
+                    expect(submitOrderSpy).not.toHaveBeenCalled();
+                });
+
+                it('should not call `redirectToPayment`', async () => {
+                    // Act
+                    await wrapper.vm.submitCheckout();
+
+                    // Assert
+                    expect(redirectToPaymentSpy).not.toHaveBeenCalled();
+                });
             });
         });
 

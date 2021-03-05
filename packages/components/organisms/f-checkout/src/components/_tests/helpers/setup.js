@@ -55,7 +55,6 @@ const defaultCheckoutState = {
 const defaultAnalyticsState = {
     autofill: [],
     changedFields: '',
-    // errors: []
 };
 
 const defaultCheckoutActions = {
@@ -74,7 +73,7 @@ const defaultCheckoutActions = {
 };
 
 const defaultAnalyticsActions = {
-    trackFormError: jest.fn(),
+    trackFormErrors: jest.fn(),
     trackFormInteraction: jest.fn(),
     trackInitialLoad: jest.fn(),
     updateAutofill: jest.fn(),

@@ -12,10 +12,10 @@ import {
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
     UPDATE_BASKET_DETAILS,
     UPDATE_CUSTOMER_DETAILS,
+    UPDATE_ERRORS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
-    UPDATE_IS_FULFILLABLE,
-    UPDATE_ISSUES,
+    UPDATE_IS_FULFILABLE,
     UPDATE_STATE,
     UPDATE_USER_NOTE,
     UPDATE_GEO_LOCATION
@@ -66,7 +66,7 @@ const time = {
     to: 'toTime'
 };
 
-const isFulfillable = false;
+const isFulfilable = false;
 
 const issues = [
     {
@@ -101,8 +101,8 @@ const defaultState = {
         city: '',
         postcode: ''
     },
-    isFulfillable: true,
-    issues: [],
+    isFulfilable: true,
+    errors: [],
     notices: [],
     messages: [],
     availableFulfilment: {
@@ -234,8 +234,8 @@ describe('CheckoutModule', () => {
         it.each([
             [UPDATE_FULFILMENT_ADDRESS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
-            [UPDATE_IS_FULFILLABLE, 'isFulfillable', isFulfillable],
-            [UPDATE_ISSUES, 'issues', issues],
+            [UPDATE_IS_FULFILABLE, 'isFulfilable', isFulfilable],
+            [UPDATE_ERRORS, 'errors', issues],
             [UPDATE_USER_NOTE, 'userNote', userNote]
         ])('%s :: should update state with received value', (mutationName, propertyName, propertyValue) => {
             // Arrange & Act
@@ -388,18 +388,10 @@ describe('CheckoutModule', () => {
 
             it('should post the checkout details to the backend.', async () => {
                 // Act
-                await updateCheckout({ commit, state, dispatch }, payload);
+                await updateCheckout({ commit, state }, payload);
 
                 // Assert
                 expect(axios.patch).toHaveBeenCalledWith(payload.url, payload.data, config);
-            });
-
-            it(`should dispatch '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateErrors' with issues`, async () => {
-                // Act
-                await updateCheckout({ commit, state, dispatch }, payload);
-
-                // Assert
-                expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateErrors`, issues, { root: true });
             });
         });
 
