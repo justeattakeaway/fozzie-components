@@ -3,11 +3,7 @@ import Vuex from 'vuex';
 import flushPromises from 'flush-promises';
 import { VueI18n } from '@justeat/f-globalisation';
 import { validations } from '@justeat/f-services';
-import {
-    CHECKOUT_METHOD_DELIVERY,
-    CHECKOUT_METHOD_COLLECTION,
-    TENANT_MAP
-} from '../../constants';
+import { CHECKOUT_METHOD_DELIVERY, CHECKOUT_METHOD_COLLECTION, TENANT_MAP } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
@@ -768,12 +764,34 @@ describe('Checkout', () => {
         });
 
         describe('submitCheckout ::', () => {
+            let handleUpdateCheckoutSpy;
             let submitOrderSpy;
             let redirectToPaymentSpy;
 
             beforeEach(() => {
+                handleUpdateCheckoutSpy = jest.spyOn(VueCheckout.methods, 'handleUpdateCheckout');
                 submitOrderSpy = jest.spyOn(VueCheckout.methods, 'submitOrder');
                 redirectToPaymentSpy = jest.spyOn(VueCheckout.methods, 'redirectToPayment');
+            });
+
+            it('should call `handleUpdateCheckout', async () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
+                });
+
+                // Act
+                await wrapper.vm.submitCheckout();
+
+                // Assert
+                expect(handleUpdateCheckoutSpy).toHaveBeenCalled();
+
             });
 
             describe('if serviceType set to `collection`', () => {
@@ -1476,18 +1494,76 @@ describe('Checkout', () => {
         describe('handleUpdateCheckout ::', () => {
             let wrapper;
             let trackFormInteractionSpy;
+            let updateCheckoutSpy;
+
+            beforeEach(() => {
+                updateCheckoutSpy = jest.spyOn(VueCheckout.methods, 'updateCheckout');
+            });
+
+            it('should try to call `handleUpdateCheckout', async () => {
+                // Arrange
+                wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
+                });
+
+                // Act
+                await wrapper.vm.handleUpdateCheckout();
+
+                // Assert
+                expect(updateCheckoutSpy).toHaveBeenCalled();
+            });
+
+            describe('when `updateCheckout` request succeeds', () => {
+                let trackFormErrorSpy;
+                const issues = [{ code: 'issue' }];
+
+                beforeEach(() => {
+                    trackFormErrorSpy = jest.spyOn(VueCheckout.methods, 'trackFormError');
+
+                    wrapper = mount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            issues
+                        }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
+                    });
+                });
+
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
+                it('should call `trackFormError` if response contains `issues`', async () => {
+                    // Act
+                    await wrapper.vm.handleUpdateCheckout();
+
+                    // Assert
+                    expect(trackFormErrorSpy).toHaveBeenCalled();
+                });
+            });
 
             describe('when `updateCheckout` request fails', () => {
                 describe('when `errors` include `FULFILMENT_TIME_INVALID`', () => {
-                    beforeEach(() => {
-                        const error = {
-                            errors: [
-                                {
-                                    errorCode: 'FULFILMENT_TIME_INVALID'
-                                }
-                            ]
-                        };
+                    const error = {
+                        errors: [
+                            {
+                                errorCode: 'FULFILMENT_TIME_INVALID'
+                            }
+                        ]
+                    };
 
+                    beforeEach(() => {
                         trackFormInteractionSpy = jest.spyOn(VueCheckout.methods, 'trackFormInteraction');
 
                         wrapper = mount(VueCheckout, {
@@ -1527,15 +1603,15 @@ describe('Checkout', () => {
                 });
 
                 describe('when `errors` do not include `FULFILMENT_TIME_INVALID`', () => {
-                    beforeEach(() => {
-                        const error = {
-                            errors: [
-                                {
-                                    errorCode: 'TENANT_INVALID'
-                                }
-                            ]
-                        };
+                    const error = {
+                        errors: [
+                            {
+                                errorCode: 'TENANT_INVALID'
+                            }
+                        ]
+                    };
 
+                    beforeEach(() => {
                         trackFormInteractionSpy = jest.spyOn(VueCheckout.methods, 'trackFormInteraction');
 
                         wrapper = mount(VueCheckout, {
@@ -1572,40 +1648,6 @@ describe('Checkout', () => {
                         // Assert
                         expect(trackFormInteractionSpy).toHaveBeenCalledWith(payload);
                     });
-                });
-            });
-
-            describe('when `updateCheckout` request succeeds', () => {
-                let trackFormErrorSpy;
-                const issues = [{ code: 'issue' }];
-
-                beforeEach(() => {
-                    trackFormErrorSpy = jest.spyOn(VueCheckout.methods, 'trackFormError');
-
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            issues
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-                });
-
-                afterEach(() => {
-                    jest.clearAllMocks();
-                });
-
-                it('should call `trackFormError` if response contains `issues`', async () => {
-                    // Act
-                    await wrapper.vm.handleUpdateCheckout();
-
-                    // Assert
-                    expect(trackFormErrorSpy).toHaveBeenCalled();
                 });
             });
         });
