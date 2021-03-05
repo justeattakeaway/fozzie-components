@@ -47,6 +47,7 @@ const defaultCheckoutState = {
     messages: [],
     authToken: '',
     isLoggedIn: false,
+    issues: [],
     userNote: 'No ketchup, please.',
     geolocation: null
 };
