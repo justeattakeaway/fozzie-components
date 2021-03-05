@@ -2,7 +2,7 @@
     <div
         v-if="linkList.links.length"
         :class="[$style['c-footer-panel'], {
-            'is-collapsed': panelCollapsed && isBelowWide
+            'is-collapsed': panelCollapsed
         }]"
         data-test-id="linkList-wrapper">
         <h2>
@@ -60,21 +60,19 @@ export default {
     components: {
         ChevronIcon
     },
-
     props: {
         linkList: {
             type: Object,
             default: () => ({})
         }
     },
-
     data () {
         return {
-            panelCollapsed: false,
-            currentScreenWidth: 0
+            currentScreenWidth: 0,
+            interactedState: null,
+            panelCollapsed: false
         };
     },
-
     computed: {
         listId () {
             return `footer-${this.linkList.title.toLowerCase().split(' ').join('-')}`;
@@ -88,32 +86,51 @@ export default {
             return this.currentScreenWidth <= 1024;
         }
     },
-
     mounted () {
         this.currentScreenWidth = windowServices.getWindowWidth();
         windowServices.addEvent('resize', this.onResize, 100);
 
-        if (this.isBelowWide) {
-            this.panelCollapsed = true;
-        }
+        this.setPanelCollapsed();
     },
-
     destroyed () {
         windowServices.removeEvent('resize', this.onResize);
     },
-
     methods: {
-        onPanelClick () {
+        /**
+         * Sets Links List panel collapsed state.
+         * Affects `is-collapsed` panel class.
+         * Value for below `wide` screen width is based on saved `interactedState`, intially defaults to `true` - collapsed.
+         * Value for wider screens resets to `false` e.g. expanded Links List. (see `onResize`)
+         */
+        setPanelCollapsed () {
             if (this.isBelowWide) {
-                this.panelCollapsed = !this.panelCollapsed;
+                this.panelCollapsed = this.interactedState === null ? true : this.interactedState;
+            } else {
+                this.panelCollapsed = false;
             }
         },
-
-        onResize () {
-            this.currentScreenWidth = windowServices.getWindowWidth();
-
+        /**
+         * Handle click events on Link List visibility toggle.
+         * Only applied to below `wide` screen width (ref. Fozzie UI breakpoints).
+         */
+        onPanelClick () {
             if (this.isBelowWide) {
-                this.panelCollapsed = true;
+                this.interactedState = !this.panelCollapsed;
+                this.setPanelCollapsed();
+            }
+        },
+        /**
+         * Handles `resize` window events.
+         * Screen width is the only factor that affects Links List presentation.
+         * Note: Devices trigger `resize` on scroll when address bar collapses
+         */
+        onResize () {
+            const newScreenWidth = windowServices.getWindowWidth();
+
+            if (this.currentScreenWidth !== newScreenWidth) {
+                this.currentScreenWidth = newScreenWidth;
+
+                this.setPanelCollapsed();
             }
         }
     }
