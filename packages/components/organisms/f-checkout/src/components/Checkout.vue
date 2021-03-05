@@ -645,7 +645,7 @@ export default {
         },
 
         /**
-         * Fired when `isFormValid` returns truthy via `onFormSubmit()` call.
+         * Fired when `isFormValid` returns falsey via `onFormSubmit()` call.
          * 1. Emit `CheckoutValidationError` for consuming application.
          * 2. Process tracking with action type and error fields
          * 3. Log warn.
