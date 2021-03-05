@@ -11,7 +11,7 @@ import {
     UPDATE_FULFILMENT_TIME,
     UPDATE_GEO_LOCATION,
     UPDATE_IS_FULFILLABLE,
-    UPDATE_ISSUES,
+    UPDATE_ERRORS,
     UPDATE_ORDER_PLACED,
     UPDATE_STATE,
     UPDATE_USER_NOTE
@@ -47,7 +47,7 @@ export default {
         },
         userNote: '',
         isFulfillable: true,
-        issues: [],
+        errors: [],
         notices: [],
         messages: [],
         availableFulfilment: {
@@ -115,8 +115,7 @@ export default {
             const { issues, isFulfillable } = responseData;
 
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
-            commit(UPDATE_ISSUES, issues);
-            dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateErrors`, issues, { root: true });
+            commit(UPDATE_ERRORS, issues);
         },
 
         /**
@@ -391,8 +390,8 @@ export default {
             state.isFulfillable = isFulfillable;
         },
 
-        [UPDATE_ISSUES]: (state, issues) => {
-            state.issues = issues;
+        [UPDATE_ERRORS]: (state, issues) => {
+            state.errors = issues;
         },
 
         [UPDATE_USER_NOTE]: (state, userNote) => {

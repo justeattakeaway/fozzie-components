@@ -5,8 +5,7 @@ import { VUEX_CHECKOUT_MODULE } from '../constants';
 
 import {
     UPDATE_AUTOFILL,
-    UPDATE_CHANGED_FIELD,
-    UPDATE_ERRORS
+    UPDATE_CHANGED_FIELD
 } from './mutation-types';
 
 export default {
@@ -14,8 +13,8 @@ export default {
 
     state: () => ({
         autofill: [],
-        changedFields: '',
-        errors: []
+        changedFields: '', // TODO: come back to this, it should probably be an array that gets "stringified" before doing the dataLayer push.
+        // errors: []
     }),
 
     actions: {
@@ -104,26 +103,12 @@ export default {
         /**
          *Dispatches `trackFormInteraction` with each error in `state.errors`.
          */
-        trackFormError ({ state, dispatch }) {
-            state.errors.forEach(error => {
-                dispatch('trackFormInteraction', { action: 'error', error });
+        trackFormError ({ rootState, dispatch }) {
+            rootState[VUEX_CHECKOUT_MODULE].errors.forEach(error => {
+                const mappedError = mapAnalyticsError(error);
+
+                dispatch('trackFormInteraction', { action: 'error', error: mappedError });
             });
-        },
-
-        /**
-         * Maps a passed issues to analyticsErrors
-         * Calls `UPDATE_ERRORS` with mapped Errors.
-         */
-        updateErrors ({ commit }, issues) {
-            if (issues) {
-                const issueArray = [];
-
-                issues.forEach(issue => {
-                    issueArray.push(mapAnalyticsError(issue.code));
-                });
-
-                commit(UPDATE_ERRORS, issueArray);
-            }
         }
     },
 
@@ -140,14 +125,6 @@ export default {
 
         [UPDATE_AUTOFILL]: (state, autofill) => {
             state.autofill = autofill.toString();
-        },
-
-        [UPDATE_ERRORS]: (state, errors) => {
-            errors.forEach(error => {
-                if (!state.errors.includes(error)) {
-                    state.errors.push(error);
-                }
-            });
         }
     }
 };

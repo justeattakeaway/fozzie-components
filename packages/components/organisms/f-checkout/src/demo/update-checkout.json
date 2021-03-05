@@ -1,4 +1,14 @@
 {
     "isFulfillable": true,
-    "issues": []
+    "issues": [
+      {
+        "code": "FIRST_NAME_REQUIRED"
+      },
+      {
+          "code": "MINIMUM_ORDER_VALUE_NOT_MET",
+          "currency": "GBP",
+          "minimumOrderValue": 1000,
+          "additionalSpendRequired": 100
+      }
+    ]
 }

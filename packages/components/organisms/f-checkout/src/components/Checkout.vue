@@ -253,7 +253,7 @@ export default {
             'basket',
             'orderId',
             'geolocation',
-            'issues'
+            'errors'
         ]),
 
         isMobileNumberValid () {
@@ -409,7 +409,7 @@ export default {
                     timeout: this.checkoutTimeout
                 });
 
-                if (this.issues) {
+                if (this.errors) {
                     this.trackFormError();
                 }
             } catch (errors) {
@@ -686,7 +686,7 @@ export default {
 
             try {
                 await this.submitCheckout();
-                if (!this.issues.length) {
+                if (!this.errors.length) {
                     this.trackFormInteraction({ action: 'success' });
                 }
             } catch (error) {

@@ -92,12 +92,13 @@ const mapAnalyticsNames = fields => fields.map(mapAnalyticsName).sort();
 /**
  * Updates passed issues to match the expected analytics error requirements.
  */
-const mapAnalyticsError = issue => {
+const mapAnalyticsError = error => {
     let errors;
+    console.log(error.code); // eslint-disable-line no-console
 
     Object.entries(updateCheckoutErrors).forEach(entry => {
         const [errorName, errorList] = entry;
-        if (errorList.includes(issue)) {
+        if (errorList.includes(error.code)) {
             errors = errorName;
         }
     });
