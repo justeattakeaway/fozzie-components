@@ -53,7 +53,7 @@ const defaultCheckoutState = {
 
 const defaultAnalyticsState = {
     autofill: [],
-    changedFields: [],
+    changedFields: '',
     errors: []
 };
 

@@ -1,4 +1,6 @@
-import { mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames, mapAnalyticsError } from '../mapper';
+import {
+    mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames, mapAnalyticsError
+} from '../mapper';
 
 const defaultParams = {
     address: {},

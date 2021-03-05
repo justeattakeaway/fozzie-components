@@ -13,8 +13,8 @@ export default {
     namespaced: true,
 
     state: () => ({
-        changedFields: [],
         autofill: [],
+        changedFields: '',
         errors: []
     }),
 
@@ -95,14 +95,14 @@ export default {
                     name: formName,
                     action,
                     error: mappedError || error || null,
-                    autofill: state.autofill.toString(),
-                    changes: state.changedFields.toString()
+                    autofill: state.autofill,
+                    changes: state.changedFields
                 }
             });
         },
 
         /**
-         * Pushes `form` event to the dataLayer with correct data
+         *Dispatches `trackFormInteraction` with each error in `state.errors`.
          */
         trackFormError ({ state, dispatch }) {
             state.errors.forEach(error => {
@@ -111,8 +111,8 @@ export default {
         },
 
         /**
-         * Maps a passed issues too an analyticsErrors
-         * Calls `UPDATE_Errors` mapped Errors.
+         * Maps a passed issues to analyticsErrors
+         * Calls `UPDATE_ERRORS` with mapped Errors.
          */
         updateErrors ({ commit }, issues) {
             if (issues) {
@@ -129,15 +129,17 @@ export default {
 
     mutations: {
         [UPDATE_CHANGED_FIELD]: (state, field) => {
-            if (!state.changedFields.includes(field)) {
-                state.changedFields.push(field);
+            const changed = state.changedFields ? state.changedFields.split(',') : [];
+
+            if (!changed.includes(field)) {
+                changed.push(field);
             }
 
-            state.changedFields.sort();
+            state.changedFields = changed.sort().toString();
         },
 
         [UPDATE_AUTOFILL]: (state, autofill) => {
-            state.autofill = autofill;
+            state.autofill = autofill.toString();
         },
 
         [UPDATE_ERRORS]: (state, errors) => {

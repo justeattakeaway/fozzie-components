@@ -1,32 +1,4 @@
 {
     "isFulfillable": true,
-    "issues": [
-        {
-            "code": "RESTAURANT_NOT_TAKING_ORDERS"
-        },
-        {
-            "code": "SERVICE_TYPE_UNAVAILABLE"
-        },
-        {
-            "code": "ADDITIONAL_ITEMS_REQUIRED"
-        },
-        {
-            "code": "LAST_NAME_REQUIRED"
-        },
-        {
-            "code": "POSTAL_CODE_REQUIRED"
-        },
-        {
-            "code": "FULFILMENT_TIME_UNAVAILABLE"
-        },
-        {
-            "code": "FULFILMENT_TIME_REQUIRED"
-        },
-        {
-            "code": "MINIMUM_ORDER_VALUE_NOT_MET",
-            "currency": "GBP",
-            "minimumOrderValue": 1000,
-            "additionalSpendRequired": 100
-        }
-    ]
+    "issues": []
 }

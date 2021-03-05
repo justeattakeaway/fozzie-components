@@ -1455,7 +1455,7 @@ describe('Checkout', () => {
                     });
                 });
 
-                it('should call not call `submitOrder`', async () => {
+                it('should not call `submitOrder`', async () => {
                     // Act
                     await wrapper.vm.submitCheckout();
 
@@ -1463,7 +1463,7 @@ describe('Checkout', () => {
                     expect(submitOrderSpy).not.toHaveBeenCalled();
                 });
 
-                it('should call not `redirectToPayment`', async () => {
+                it('should not call `redirectToPayment`', async () => {
                     // Act
                     await wrapper.vm.submitCheckout();
 

@@ -674,7 +674,7 @@ export default {
 
             try {
                 await this.submitCheckout();
-                if (!this.issues) {
+                if (!this.issues.length) {
                     this.trackFormInteraction({ action: 'success' });
                 }
             } catch (error) {
