@@ -2303,12 +2303,18 @@ describe('Checkout', () => {
                             $logger
                         }
                     });
+                    
+                    const checkoutValidationErrorSpy = jest.spyOn(wrapper.vm, '$emit');
 
                     // Act
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
+                    expect(checkoutValidationErrorSpy).toHaveBeenCalledWith(
+                        EventNames.CheckoutValidationError,
+                        mockValidationState
+                    );
                 });
 
                 it('should make a call to `trackFormInteraction` with the correct action & error states', async () => {
