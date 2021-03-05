@@ -60,6 +60,7 @@ import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import { mapState } from 'vuex';
 import EventNames from '../event-names';
+import { VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
     components: {
@@ -74,7 +75,7 @@ export default {
     },
 
     computed: {
-        ...mapState('checkout', [
+        ...mapState(VUEX_CHECKOUT_MODULE, [
             'customer',
             'isLoggedIn',
             'serviceType'

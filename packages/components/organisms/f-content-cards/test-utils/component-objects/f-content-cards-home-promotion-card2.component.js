@@ -7,7 +7,7 @@ const {
     BACKGROUND_IMAGE
 } = require('./f-content-cards-home-promotion.selectors');
 
-class HomePromotionCard2 extends Page {
+module.exports = class HomePromotionCard2 extends Page {
 
     get component () { return $(PROMOTION_CARD_2_COMPONENT) }
     get callToAction () { return $(CTA) }
@@ -43,5 +43,3 @@ class HomePromotionCard2 extends Page {
         return this.backgroundImage.isDisplayed();
     }
 }
-
-module.exports = HomePromotionCard2;

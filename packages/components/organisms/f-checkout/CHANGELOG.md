@@ -5,10 +5,47 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.66.0
 ------------------------------
-*March 4, 2021*
+*March 5, 2021*
 
 ### Changed
 - `Checkout.vue` - refactor `onFormSubmit` method and relevant tests.
+
+
+v0.65.1
+------------------------------
+*March 5, 2021*
+
+### Fixed
+- `UPDATE_CHANGED_FIELD` mutation to sort `changedFields` correctly.
+
+
+v0.65.0
+-------------------------------
+*March 4, 2021*
+
+### Changed
+- Prevent error page showing when the address call fails
+- Logging when the address call does fail
+
+
+v0.64.0
+------------------------------
+*March 4, 2021*
+
+### Changed
+- `analytics` to `fCheckout.module`.
+- `analytics.module` to `fCheckoutAnalytics.module`.
+
+### Removed
+- `f-trak` dependency.
+
+
+v0.63.0
+------------------------------
+*March 3, 2021*
+
+### Added
+- `analytics.module` export.
 
 
 v0.62.0

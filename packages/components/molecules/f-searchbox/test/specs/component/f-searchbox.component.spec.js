@@ -7,7 +7,7 @@ describe('f-searchbox component tests', () => {
         searchbox.waitForComponent();
     });
 
-    it.skip('should display the f-searchbox component', () => {
+    it('should display the f-searchbox component', () => {
         // Assert
         expect(searchbox.isComponentDisplayed()).toBe(true);
     });

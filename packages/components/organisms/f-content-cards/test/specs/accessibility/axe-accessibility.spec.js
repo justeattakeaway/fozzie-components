@@ -11,6 +11,9 @@ describe('Accessibility tests', () => {
         card1.open();
         card1.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-contentCard-homePromotion-1');
+
+        // Assert
+        expect(axeResults.violations.length).toBe(0);
     });
 
     it('a11y - should test f-contentCard component WCAG compliance', () => {
@@ -18,5 +21,8 @@ describe('Accessibility tests', () => {
         card2.open();
         card2.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-contentCard-homePromotion-2');
+
+        // Assert
+        expect(axeResults.violations.length).toBe(0);
     });
 });

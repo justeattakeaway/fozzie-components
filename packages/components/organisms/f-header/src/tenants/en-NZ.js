@@ -4,6 +4,7 @@ export default {
     openMenuText: 'Open Menu',
     loginNoScriptLinkText: 'Account',
     skipToMainContentText: 'Skip to main content',
+    navTitle: 'Main menu',
 
     navLinks: {
         accountInfo: {

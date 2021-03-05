@@ -5,6 +5,7 @@ import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
+import { VUEX_CHECKOUT_ANALYTICS_MODULE } from '../../constants';
 
 import {
     UPDATE_AUTH,
@@ -286,12 +287,12 @@ describe('CheckoutModule', () => {
                 expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
             });
 
-            it('should call `analytics/updateAutofill` mutation with an array of updated field names.', async () => {
+            it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
                 // Act
                 await getCheckout({ commit, state, dispatch }, payload);
 
                 // Assert
-                expect(dispatch).toHaveBeenCalledWith('analytics/updateAutofill', state, { root: true });
+                expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
             });
         });
 
@@ -353,12 +354,12 @@ describe('CheckoutModule', () => {
                 });
             });
 
-            it('should call `analytics/updateAutofill` mutation with an array of updated field names.', async () => {
+            it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
                 // Act
                 await getAddress({ commit, state, dispatch }, payload);
 
                 // Assert
-                expect(dispatch).toHaveBeenCalledWith('analytics/updateAutofill', state, { root: true });
+                expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
             });
         });
 
@@ -529,14 +530,14 @@ describe('CheckoutModule', () => {
         it.each([
             [updateAddressDetails, address],
             [updateCustomerDetails, customerDetails]
-        ])('%s should dispatch `analytics/updateChangedFields` action with first key of passed value', (action, value) => {
+        ])(`%s should dispatch '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedFields' action with first key of passed value`, (action, value) => {
             // Act
             action({ commit, dispatch }, value);
 
             const [field] = Object.keys(value);
 
             // Assert
-            expect(dispatch).toHaveBeenCalledWith('analytics/updateChangedField', field, { root: true });
+            expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
         });
     });
 });

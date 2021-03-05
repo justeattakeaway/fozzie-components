@@ -1,14 +1,14 @@
-import Trak from '@justeat/f-trak';
-import AnalyticsModule from '../analytics.module';
+import CheckoutAnalyticsModule from '../checkoutAnalytics.module';
 import * as mapper from '../../services/mapper';
 import { defaultCheckoutState, defaultAnalyticsState } from '../../components/_tests/helpers/setup';
+import { VUEX_CHECKOUT_MODULE } from '../../constants';
 
 import {
     UPDATE_CHANGED_FIELD,
     UPDATE_AUTOFILL
 } from '../mutation-types';
 
-const { actions, mutations } = AnalyticsModule;
+const { actions, mutations } = CheckoutAnalyticsModule;
 
 const {
     updateAutofill,
@@ -17,8 +17,14 @@ const {
     trackFormInteraction
 } = actions;
 
-describe('AnalyticsModule', () => {
-    let state = AnalyticsModule.state();
+Object.defineProperty(global, 'window', {
+    value: {
+        dataLayer: []
+    }
+});
+
+describe('CheckoutAnalyticsModule', () => {
+    let state = CheckoutAnalyticsModule.state();
 
     it('should create default state when initialised.', () => {
         // Assert
@@ -28,14 +34,13 @@ describe('AnalyticsModule', () => {
     describe('actions ::', () => {
         let commit;
         let dispatch;
-        let trackEventSpy;
-        const rootState = { checkout: defaultCheckoutState };
+        const rootState = { [VUEX_CHECKOUT_MODULE]: defaultCheckoutState };
 
         beforeEach(() => {
             commit = jest.fn();
             dispatch = jest.fn();
-            state = AnalyticsModule.state();
-            trackEventSpy = jest.spyOn(Trak, 'event');
+            state = CheckoutAnalyticsModule.state();
+            window.dataLayer = [];
         });
 
         afterEach(() => {
@@ -44,6 +49,7 @@ describe('AnalyticsModule', () => {
 
         describe('updateAutofill ::', () => {
             let autofillFields = [];
+
             let mapAnalyticsNamesSpy;
             let field;
 
@@ -170,31 +176,29 @@ describe('AnalyticsModule', () => {
 
             beforeEach(() => {
                 expectedEvent = {
-                    custom: {
-                        checkout: {
-                            step: 1
-                        },
-                        basket: {
-                            id: rootState.checkout.basket.id,
-                            total: rootState.checkout.basket.total
-                        },
-                        restaurant: {
-                            id: rootState.checkout.restaurantId
-                        },
-                        pageData: {
-                            name: 'Checkout 1 Guest',
-                            group: 'Checkout'
-                        }
+                    checkout: {
+                        step: 1
+                    },
+                    basket: {
+                        id: rootState[VUEX_CHECKOUT_MODULE].basket.id,
+                        total: rootState[VUEX_CHECKOUT_MODULE].basket.total
+                    },
+                    restaurant: {
+                        id: rootState[VUEX_CHECKOUT_MODULE].restaurantId
+                    },
+                    pageData: {
+                        name: 'Checkout 1 Guest',
+                        group: 'Checkout'
                     }
                 };
             });
 
-            it('should call `event` method of `f-trak`', () => {
+            it('should `push` expected event to `dataLayer`', () => {
                 // Act
                 trackInitialLoad({ rootState, dispatch });
 
                 // Assert
-                expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
+                expect(window.dataLayer[0]).toEqual(expectedEvent);
             });
 
             describe('when user `isLoggedIn` is true', () => {
@@ -202,14 +206,14 @@ describe('AnalyticsModule', () => {
                     // Arrange
                     const expectedName = 'Checkout 1 Overview';
 
-                    rootState.checkout.isLoggedIn = true;
-                    expectedEvent.custom.pageData.name = expectedName;
+                    rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = true;
+                    expectedEvent.pageData.name = expectedName;
 
                     // Act
                     trackInitialLoad({ rootState, dispatch });
 
                     // Assert
-                    expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
+                    expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
             });
 
@@ -218,14 +222,14 @@ describe('AnalyticsModule', () => {
                     // Arrange
                     const expectedName = 'Checkout 1 Guest';
 
-                    rootState.checkout.isLoggedIn = false;
-                    expectedEvent.custom.pageData.name = expectedName;
+                    rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = false;
+                    expectedEvent.pageData.name = expectedName;
 
                     // Act
                     trackInitialLoad({ rootState, dispatch });
 
                     // Assert
-                    expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
+                    expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
             });
 
@@ -250,18 +254,16 @@ describe('AnalyticsModule', () => {
                 };
                 expectedEvent = {
                     event: 'Form',
-                    custom: {
-                        form: {
-                            name: 'checkout_guest',
-                            action: payload.action,
-                            error: null,
-                            autofill: state.autofill,
-                            changes: state.changedFields
-                        }
+                    form: {
+                        name: 'checkout_guest',
+                        action: payload.action,
+                        error: null,
+                        autofill: state.autofill,
+                        changes: state.changedFields
                     }
                 };
-
                 mapAnalyticsNamesSpy = jest.spyOn(mapper, 'mapAnalyticsNames');
+                window.dataLayer = [];
             });
 
             afterEach(() => {
@@ -272,7 +274,7 @@ describe('AnalyticsModule', () => {
                 beforeEach(() => {
                     payload.error = 'postcodeNotDefined';
                     mapAnalyticsNamesSpy.mockImplementation(() => payload.error);
-                    expectedEvent.custom.form.error = payload.error;
+                    expectedEvent.form.error = payload.error;
                 });
 
                 it('should call `mapAnalyticsNames` with error', () => {
@@ -280,15 +282,15 @@ describe('AnalyticsModule', () => {
                     trackFormInteraction({ state, rootState }, payload);
 
                     // Assert
-                    expect(mapAnalyticsNamesSpy).toHaveBeenCalledWith(payload.error);
+                    expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
 
-                it('should call `event` method of `f-trak` with expected event', () => {
+                it('should `push` expected event to `dataLayer`', () => {
                     // Act
                     trackFormInteraction({ state, rootState }, payload);
 
                     // Assert
-                    expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
+                    expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
             });
 
@@ -296,7 +298,7 @@ describe('AnalyticsModule', () => {
                 beforeEach(() => {
                     payload.error = null;
                     mapAnalyticsNamesSpy.mockImplementation(() => payload.error);
-                    expectedEvent.custom.form.error = payload.error;
+                    expectedEvent.form.error = payload.error;
                 });
 
                 it('should not call `mapAnalyticsNames`', () => {
@@ -304,15 +306,15 @@ describe('AnalyticsModule', () => {
                     trackFormInteraction({ state, rootState }, payload);
 
                     // Assert
-                    expect(mapAnalyticsNamesSpy).not.toHaveBeenCalled();
+                    expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
 
-                it('should call `event` method of `f-trak` with expected event', () => {
+                it('should `push` expected event to `dataLayer`', () => {
                     // Act
                     trackFormInteraction({ state, rootState }, payload);
 
                     // Assert
-                    expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
+                    expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
             });
 
@@ -321,14 +323,14 @@ describe('AnalyticsModule', () => {
                     // Arrange
                     const expectedName = 'checkout';
 
-                    rootState.checkout.isLoggedIn = true;
-                    expectedEvent.custom.form.name = expectedName;
+                    rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = true;
+                    expectedEvent.form.name = expectedName;
 
                     // Act
                     trackFormInteraction({ state, rootState }, payload);
 
                     // Assert
-                    expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
+                    expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
             });
 
@@ -337,14 +339,14 @@ describe('AnalyticsModule', () => {
                     // Arrange
                     const expectedName = 'checkout_guest';
 
-                    rootState.checkout.isLoggedIn = false;
-                    expectedEvent.custom.form.name = expectedName;
+                    rootState[VUEX_CHECKOUT_MODULE].isLoggedIn = false;
+                    expectedEvent.form.name = expectedName;
 
                     // Act
                     trackFormInteraction({ state, rootState }, payload);
 
                     // Assert
-                    expect(trackEventSpy).toHaveBeenCalledWith(expectedEvent);
+                    expect(window.dataLayer[0]).toEqual(expectedEvent);
                 });
             });
         });
@@ -352,7 +354,7 @@ describe('AnalyticsModule', () => {
 
     describe('mutations ::', () => {
         beforeEach(() => {
-            state = AnalyticsModule.state();
+            state = CheckoutAnalyticsModule.state();
         });
 
         describe(`${UPDATE_CHANGED_FIELD} ::`, () => {

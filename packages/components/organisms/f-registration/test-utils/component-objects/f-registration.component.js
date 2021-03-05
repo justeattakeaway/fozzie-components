@@ -21,7 +21,7 @@ const {
     PASSWORD_EMPTY_ERROR, 
 } = require('./f-registration.selectors');
 
-class Registration extends Page {
+module.exports = class Registration extends Page {
 
     get component () { return $(REGISTRATION_COMPONENT) }
     get createAccountButton () { return $(CREATE_ACCOUNT_BUTTON) }
@@ -115,5 +115,3 @@ class Registration extends Page {
         return this.cookiesPolicyLink.isClickable();
     };
 };
-
-module.exports = Registration;

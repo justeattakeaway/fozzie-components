@@ -1,5 +1,6 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import StampCard from '../StampCard1.vue';
+import tenantConfigs from '../../../tenants';
 
 const localVue = createLocalVue();
 
@@ -20,7 +21,10 @@ const card = {
     totalRequiredStamps: 5
 };
 
+const localeConfig = tenantConfigs['en-GB'];
+
 const provide = {
+    copy: localeConfig,
     emitCardView: jest.fn(),
     emitCardClick: jest.fn()
 };
@@ -34,6 +38,9 @@ function getWrapper (cardDetails = {}, testId = 'stampCard1') {
                 ...cardDetails
             },
             testId
+        },
+        directives: {
+            makeTextAccessible: jest.fn()
         },
         provide
     });
@@ -130,7 +137,7 @@ describe('contentCards › StampCard1', () => {
 
         it('should format the expiry date into the expiry line', () => {
             // Assert
-            expect(wrapper.find('[data-test-id="stampCard1--expiryInfo"]').text()).toBe('Discount expires 28/02');
+            expect(wrapper.find('[data-test-id="stampCard1--expiryInfo"]').text()).toMatch(/(Discount expires\s*28\/02)/gi);
         });
     });
 
