@@ -205,7 +205,6 @@ export default {
         return {
             tenantConfigs,
             genericErrorMessage: null,
-            shouldDisableCheckoutButton: false,
             hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
             isLoading: false
@@ -376,6 +375,8 @@ export default {
                     this.$store,
                     eventData
                 );
+
+                this.trackFormInteraction({ action: 'success' });
 
                 this.redirectToPayment();
             } catch (thrownErrors) {
@@ -623,36 +624,41 @@ export default {
 
         /**
          * Check form is valid - no inline messages
-         * If form is valid try to call `submitCheckout`
-         * Catch and handle any errors
+         * 1. If form is valid try to call `submitCheckout`.
+         * 2. If the form is invalid process error tracking and logging via `onInvalidCheckoutForm()`.
          */
         async onFormSubmit () {
             this.trackFormInteraction({ action: 'submit' });
 
             if (!this.isFormValid()) {
-                const validationState = validations.getFormValidationState(this.$v);
-
-                this.$emit(EventNames.CheckoutValidationError, validationState);
-                this.trackFormInteraction({ action: 'inline_error', error: validationState.invalidFields });
-
-                this.$logger.logWarn(
-                    'Checkout Validation Error',
-                    this.$store,
-                    validationState
-                );
+                this.onInvalidCheckoutForm();
                 return;
             }
 
-            this.shouldDisableCheckoutButton = true;
+            await this.submitCheckout();
+        },
 
-            try {
-                await this.submitCheckout();
-                this.trackFormInteraction({ action: 'success' });
-            } catch (error) {
-                this.handleErrorState(error);
-            } finally {
-                this.shouldDisableCheckoutButton = false;
-            }
+        /**
+         * Fired when `isFormValid` returns truthy via `onFormSubmit()` call.
+         * 1. Emit `CheckoutValidationError` for consuming application.
+         * 2. Process tracking with action type and error fields
+         * 3. Log warn.
+         *
+         * */
+        onInvalidCheckoutForm () {
+            const validationState = validations.getFormValidationState(this.$v);
+
+            this.$emit(EventNames.CheckoutValidationError, validationState);
+            this.trackFormInteraction({
+                action: 'inline_error',
+                error: validationState.invalidFields
+            });
+
+            this.$logger.logWarn(
+                'Checkout Validation Error',
+                this.$store,
+                validationState
+            );
         },
 
         /**
