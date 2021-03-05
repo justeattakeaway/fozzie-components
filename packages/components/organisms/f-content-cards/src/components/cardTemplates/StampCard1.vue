@@ -226,7 +226,7 @@ export default {
         },
 
         /**
-         * Takes the locale and lazyloads the correct date locale for the date-fns library
+         * Takes the locale and lazyloads the correct date locale from the date-fns library
          * @param locale
          * @returns {
          *  Promise<module:date-fns/locale/da> |
