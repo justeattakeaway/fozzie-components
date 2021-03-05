@@ -4,6 +4,7 @@ export default {
     openMenuText: 'Open Menu',
     loginNoScriptLinkText: 'Konto',
     skipToMainContentText: 'Hopp til hovedinnhold',
+    navTitle: 'Hovedmeny',
 
     navLinks: {
         accountInfo: {
