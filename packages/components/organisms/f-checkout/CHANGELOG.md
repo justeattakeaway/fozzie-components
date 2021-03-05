@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.66.0
+------------------------------
+*March 5, 2021*
+
+### Added
+- Analytics error tracking.
+- Tests to cover changes.
+
+### Fixed
+- Guest field inputs Vuex mutation error.
+
+
 v0.65.1
 ------------------------------
 *March 5, 2021*
