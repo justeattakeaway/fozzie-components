@@ -14,6 +14,17 @@ v4.10.0
 - Restructured component tests to support Browserstack
 
 
+v4.10.0
+------------------------------
+*March 5, 2021*
+
+### Changed
+- Media queries to pick up 768px width to render mobile view for tablet devices
+
+### Added
+- Unique keys for each link in `countryList.js`
+
+
 v4.9.0
 ------------------------------
 *March 4, 2021*
