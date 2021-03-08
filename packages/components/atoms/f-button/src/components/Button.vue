@@ -8,9 +8,9 @@
             $style[`o-btn--size${buttonSizeClassname}`],
             (isFullWidth ? $style['o-btn--fullWidth'] : '')
         ]"
-        :attributes="$attrs"
         :action-type="buttonActionType"
         :data-test-id="`${componentType}-component`"
+        v-bind="$attrs"
         v-on="$listeners">
         <slot />
     </component>
