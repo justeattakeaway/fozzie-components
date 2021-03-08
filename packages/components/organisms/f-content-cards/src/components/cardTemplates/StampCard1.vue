@@ -13,15 +13,19 @@
                 :src="card.image"
                 :alt="card.title">
             <h3
+                v-make-text-accessible
                 :class="[$style['c-stampCard1-title']]"
                 :data-test-id="testIdForSection('title')">
                 {{ card.title }}
             </h3>
 
             <p
+                v-make-text-accessible
                 :class="[$style['c-stampCard1-statusText']]"
                 :data-test-id="testIdForSection('statusText')"
-                v-html="card.subtitle" />
+            >
+                {{ card.subtitle }}
+            </p>
         </div>
         <div
             v-if="isReadyToClaim"
@@ -32,6 +36,7 @@
             <div
                 v-for="(subStatusLine, index) in card.description"
                 :key="index"
+                v-make-text-accessible
                 :class="[$style['c-stampCard1-subStatusText']]"
                 :data-test-id="testIdForSection('subStatusText', index)">
                 {{ subStatusLine }}
@@ -39,13 +44,20 @@
             <div
                 :class="[$style['c-stampCard1-expiryInfo']]"
                 :data-test-id="testIdForSection('expiryInfo')">
-                {{ expiryLine }}
+                {{ card.expiryLine }}
+                <template v-if="hasValidExpiryDate">
+                    <span :aria-label="expiryDateAccessible">
+                        <span aria-hidden="true">{{ expiryDateVisual }}</span>
+                    </span>
+                </template>
             </div>
         </div>
         <div
             v-else
             :class="[$style['c-stampCard1-stamps']]"
-            :data-test-id="testIdForSection('stamps')">
+            :data-test-id="testIdForSection('stamps')"
+            role="img"
+            :aria-label="stampCardsStatusCopy">
             <div
                 v-for="({ stampImage, classSuffix }, index) in stamps"
                 :key="index">
@@ -67,10 +79,13 @@
 
 <script>
 import parseISO from 'date-fns/parseISO';
-import lightFormat from 'date-fns/format';
+import format from 'date-fns/format';
+import lightFormat from 'date-fns/lightFormat';
 
 import EmptyStamp from './images/stamp-empty-15.svg';
 import FullStamp from './images/stamp-full-15.svg';
+
+import makeTextAccessible from '../MakeTextAccessible';
 
 export default {
     name: 'StampCard1',
@@ -78,6 +93,10 @@ export default {
     components: {
         EmptyStamp,
         FullStamp
+    },
+
+    directives: {
+        makeTextAccessible
     },
 
     props: {
@@ -96,24 +115,56 @@ export default {
         return {
             // Here for reference, TBC by product - currently this.card.totalRequiredStamps is provided but we have no
             // way of catering for any amount other than 5 when passed as part of the card data
-            totalRequiredStamps: 5
+            totalRequiredStamps: 5,
+            dateFnsLocale: undefined
         };
     },
 
     computed: {
-        expiryLine () {
-            const expiryDate = parseISO(this.card.expiryDate);
-
-            return `${this.card.expiryLine} ${Number.isNaN(expiryDate.valueOf())
-                ? ''
-                : lightFormat(expiryDate, 'dd/MM')
-            }`;
+        /**
+         * Converts the string value from the card data into a `Date`
+         * @return {Date | *}
+         */
+        expiryDate () {
+            return parseISO(this.card.expiryDate);
         },
 
+        /**
+         * Gives the date in two-digit Day/Month format eg "16/12"
+         * @return {string}
+         */
+        expiryDateVisual () {
+            return lightFormat(this.expiryDate, 'dd/MM');
+        },
+
+        /**
+         * Gives the date in localised long-form for screenreaders - e.g. "December 16th"
+         * @return {string}
+         */
+        expiryDateAccessible () {
+            return format(this.expiryDate, 'LLLL do', { locale: this.dateFnsLocale });
+        },
+
+        /**
+         * Truthy when the Date value given by expiryDate has parsed correctly
+         * @return {boolean}
+         */
+        hasValidExpiryDate () {
+            return !Number.isNaN(this.expiryDate.valueOf());
+        },
+
+        /**
+         * Allows the card to interpret both `true` and the string value `"true"` as meaning ready to claim
+         * @return {boolean}
+         */
         isReadyToClaim () {
             return [true, 'true'].includes(this.card.isReadyToClaim);
         },
 
+        /**
+         * Gives an array of stamp objects that the component can scaffold into components for display
+         * @return {Object[]}
+         */
         stamps () {
             const stamps = [];
 
@@ -131,18 +182,36 @@ export default {
             return stamps;
         },
 
+        /**
+         * Returns the stamp card status text based on the number of completed steps for accessibility
+         * @return String
+         */
+        stampCardsStatusCopy () {
+            return this.copy.stampCardStatus[this.card.earnedStamps];
+        },
+
+        /**
+         * Creates a function that gives portions of the component's markup unique testIds for unit and browser testing
+         * @return {function(*, *=): string|boolean}
+         */
         testIdForSection () {
             return (section, index) => (this.testId
                 ? `${this.testId}--${section}${index === undefined ? '' : `--${index}`}`
                 : false);
         }
+
     },
 
     mounted () {
         this.onViewContentCard();
+
+        this.getDateFnsLocale(this.copy.locale).then(locale => {
+            this.dateFnsLocale = locale;
+        });
     },
 
     inject: [
+        'copy',
         'emitCardView',
         'emitCardClick'
     ],
@@ -154,6 +223,40 @@ export default {
 
         onClickContentCard () {
             this.emitCardClick(this.card);
+        },
+
+        /**
+         * Takes the locale and lazyloads the correct date locale from the date-fns library
+         * @param locale
+         * @returns {
+         *  Promise<module:date-fns/locale/da> |
+         *  Promise<module:date-fns/locale/en-AU> |
+         *  Promise<module:date-fns/locale/en-GB> |
+         *  Promise<module:date-fns/locale/en-NZ> |
+         *  Promise<module:date-fns/locale/es> |
+         *  Promise<module:date-fns/locale/it> |
+         *  Promise<module:date-fns/locale/nb>
+         * }
+         */
+        getDateFnsLocale (locale) {
+            switch (locale) {
+                case 'da-DK':
+                    return import(/* webpackChunkName: "date-fns-locale-da" */ 'date-fns/locale/da');
+                case 'en-AU':
+                    return import(/* webpackChunkName: "date-fns-locale-en-AU" */ 'date-fns/locale/en-AU');
+                case 'en-GB':
+                case 'en-IE':
+                default:
+                    return import(/* webpackChunkName: "date-fns-locale-en-GB" */ 'date-fns/locale/en-GB');
+                case 'en-NZ':
+                    return import(/* webpackChunkName: "date-fns-locale-en-NZ" */ 'date-fns/locale/en-NZ');
+                case 'es-ES':
+                    return import(/* webpackChunkName: "date-fns-locale-es" */ 'date-fns/locale/es');
+                case 'it-IT':
+                    return import(/* webpackChunkName: "date-fns-locale-it" */ 'date-fns/locale/it');
+                case 'nb-NO':
+                    return import(/* webpackChunkName: "date-fns-locale-nb" */ 'date-fns/locale/nb');
+            }
         }
     }
 };

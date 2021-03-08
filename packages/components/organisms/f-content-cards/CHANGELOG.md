@@ -3,10 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.1
+------------------------------
+*March 03, 2021*
+
+### Added
+- Adds some accessibility changes to help improve screen reader compatibility for stamp card content card
+
 
 v4.0.0
 ------------------------------
-*February 22, 2020*
+*February 22, 2021*
 
 ### Updated
 - ContentCards component now surfaces card state via several named 'slots' as documented in README.md
@@ -15,7 +22,7 @@ v4.0.0
 
 v3.4.0
 ------------------------------
-*February 24, 2020*
+*February 24, 2021*
 
 ### Updated
 - f-content-cards now uses `vue-svg-loader` to bundle in SVG assets
@@ -27,7 +34,7 @@ v3.4.0
 
 v3.3.0
 ------------------------------
-*February 22, 2020*
+*February 22, 2021*
 
 ### Added
 - Stamp Card component, card Type and story
@@ -39,7 +46,7 @@ v3.3.0
 
 v3.2.0
 ------------------------------
-*February 15, 2020*
+*February 15, 2021*
 
 ### Changed
 - Home Promotion Cards 1 & 2 now use the tracking as supplied to the containing
@@ -50,7 +57,7 @@ v3.2.0
 
 v3.1.1
 ------------------------------
-*February 10, 2020*
+*February 10, 2021*
 
 ### Changed
 - Some style changes for home promotion cards
@@ -58,7 +65,7 @@ v3.1.1
 
 v3.1.0
 ------------------------------
-*February 9, 2020*
+*February 9, 2021*
 
 ### Added
 - `data-test-ids` for home promotion card components

@@ -52,7 +52,7 @@
             <ul class="c-nav-list">
                 <li
                     v-if="showOffersLink"
-                    class="c-nav-list-item">
+                    class="c-nav-list-item--horisontallyAlignedOnWiderView">
                     <a
                         data-test-id="offers-link"
                         data-trak='{
@@ -69,7 +69,7 @@
                 </li>
                 <li
                     v-if="showDeliveryEnquiry && !isBelowMid"
-                    class="c-nav-list-item"
+                    class="c-nav-list-item--horisontallyAlignedOnWiderView"
                     data-test-id="delivery-enquiry">
                     <a
                         data-test-id="delivery-link"
@@ -86,9 +86,8 @@
                         {{ copy.deliveryEnquiry.text }}
                     </a>
                 </li>
-
                 <li
-                    :class="['c-nav-list-item has-sublist', {
+                    :class="['c-nav-list-item--horisontallyAlignedOnWiderView has-sublist', {
                         'is-hidden': !userInfo || !showLoginInfo,
                         'is-open': navIsOpen
                     }]"
@@ -112,55 +111,20 @@
                         </span>
                     </a>
 
-                    <ul
-                        :aria-label="userInfo.friendlyName"
-                        class="c-nav-popoverList">
-                        <li
-                            v-for="(link, index) in copy.navLinks"
-                            :key="index"
-                            data-test-id="nav-links"
-                            class="c-nav-list-item">
-                            <a
-                                :tabindex="navIsOpen ? 0 : -1"
-                                :href="link.url"
-                                :data-trak='`{
-                                    "trakEvent": "click",
-                                    "category": "engagement",
-                                    "action": "header",
-                                    "label": "${link.gtm}"
-                                }`'
-                                class="c-nav-list-link"
-                                @blur="closeNav"
-                                @focus="openNav">
-                                {{ link.text }}
-                            </a>
-                        </li>
-
-                        <li
-                            v-if="!isBelowMid"
-                            class="c-nav-list-item"
-                            data-test-id="logout">
-                            <a
-                                :tabindex="navIsOpen ? 0 : -1"
-                                :href="returnLogoutUrl"
-                                :data-trak='`{
-                                    "trakEvent": "click",
-                                    "category": "engagement",
-                                    "action": "header",
-                                    "label": "${copy.accountLogout.gtm}"
-                                }`'
-                                class="c-nav-list-link"
-                                @blur="closeNav"
-                                @focus="openNav">
-                                {{ copy.accountLogout.text }}
-                            </a>
-                        </li>
-                    </ul>
+                    <v-popover class="c-nav-popover">
+                        <user-navigation-panel
+                            :is-open="navIsOpen"
+                            :is-below-mid="isBelowMid"
+                            :copy="copy"
+                            :return-logout-url="returnLogoutUrl"
+                            @activateNav="openNav"
+                            @deactivateNav="closeNav" />
+                    </v-popover>
                 </li>
 
                 <li
                     v-if="!userInfo && showLoginInfo"
-                    class="c-nav-list-item"
+                    class="c-nav-list-item--horisontallyAlignedOnWiderView"
                     data-test-id="login">
                     <a
                         :href="returnLoginUrl"
@@ -179,7 +143,7 @@
 
                 <li
                     v-if="showHelpLink"
-                    class="c-nav-list-item c-nav-list-item--support">
+                    class="c-nav-list-item--horisontallyAlignedOnWiderView c-nav-list-item--support">
                     <a
                         :href="copy.help.url"
                         :data-trak='`{
@@ -197,7 +161,7 @@
 
                 <li
                     v-if="userInfo && isBelowMid && showLoginInfo"
-                    class="c-nav-list-item"
+                    class="c-nav-list-item--horisontallyAlignedOnWiderView"
                     data-test-id="logout">
                     <a
                         :tabindex="navIsOpen ? 0 : -1"
@@ -214,15 +178,44 @@
                     </a>
                 </li>
 
-                <country-selector
+                <li
                     v-if="showCountrySelector"
-                    ref="countrySelector"
-                    :is-below-mid="isBelowMid"
-                    :copy="copy"
-                    :open-nav="openNav"
-                    :close-nav="closeNav"
                     data-test-id="country-selector"
-                    :nav-is-open="navIsOpen" />
+                    :class="['c-nav-list-item--horisontallyAlignedOnWiderView has-sublist', {
+                        'is-open': countrySelectorIsOpen
+                    }]"
+                    v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: closeCountrySelector }"
+                    @keyup.esc="closeCountrySelector">
+                    <button
+                        type="button"
+                        data-test-id="action-button-component"
+                        :tabindex="isBelowMid && !navIsOpen ? -1 : 0"
+                        class="c-nav-list-text c-nav-list-btn"
+                        :aria-expanded="countrySelectorIsOpenOnDesktopView ? 'true' : 'false'"
+                        :aria-haspopup="!isBelowMid"
+                        :aria-label="copy.countrySelector.changeCurrentCountry"
+                        @click="onCountrySelectorToggle"
+                        v-on="countrySelectorIsClosedOnMobileView ? { blur: closeNav, focus: openNav } : null">
+                        <span class="c-nav-list-iconWrapper">
+                            <flag-icon
+                                data-test-id="current-flag-icon"
+                                :country-code="copy.countrySelector.currentCountryKey"
+                                class="c-nav-list-icon--flag c-nav-list-icon--flagCurrent" />
+                        </span>
+                        <span class='c-nav-list-title'>
+                            {{ copy.countrySelector.selectYourCountryText }}
+                        </span>
+                    </button>
+
+                    <v-popover class="c-nav-popover c-nav-popover--countrySelector">
+                        <country-selector-panel
+                            :copy="copy"
+                            :is-open="countrySelectorIsOpen"
+                            @goBackButtonClick="closeCountrySelector"
+                            @blurOnLink="closeCountrySelector"
+                            @focusOnLink="openCountrySelector" />
+                    </v-popover>
+                </li>
             </ul>
         </div>
     </nav>
@@ -238,15 +231,22 @@ import {
     axiosServices,
     windowServices
 } from '@justeat/f-services';
-import CountrySelector from './CountrySelector.vue';
-
+import VPopover from '@justeat/f-popover';
+import FlagIcon from './FlagIcon.vue';
+import CountrySelectorPanel from './CountrySelectorPanel.vue';
+import UserNavigationPanel from './UserNavigationPanel.vue';
+import '@justeat/f-popover/dist/f-popover.css';
+import { countries } from '../tenants';
 
 export default {
     components: {
-        MopedIcon,
+        CountrySelectorPanel,
+        FlagIcon,
         GiftIcon,
+        MopedIcon,
         ProfileIcon,
-        CountrySelector
+        UserNavigationPanel,
+        VPopover
     },
 
     props: {
@@ -317,7 +317,8 @@ export default {
             currentScreenWidth: null,
             userInfo: this.userInfoProp,
             localOrderCountExpires: false,
-            countrySelectorIsOpen: false
+            countrySelectorIsOpen: false,
+            countries
         };
     },
 
@@ -372,6 +373,13 @@ export default {
                 this.showHelpLink ||
                 this.showDeliveryEnquiry ||
                 this.showLoginInfo;
+        },
+
+        countrySelectorIsClosedOnMobileView () {
+            return this.isBelowMid && !this.countrySelectorIsOpen;
+        },
+        countrySelectorIsOpenOnDesktopView () {
+            return !this.isBelowMid && this.countrySelectorIsOpen;
         }
     },
 
@@ -399,7 +407,7 @@ export default {
         onNavToggle () {
             this.navIsOpen = !this.navIsOpen;
             if (this.showCountrySelector) {
-                this.$refs.countrySelector.closeCountrySelector();
+                this.closeCountrySelector();
             }
             // This is added to remove the ability to scroll the page content when the mobile navigation is open
             this.handleMobileNavState();
@@ -413,6 +421,18 @@ export default {
         openNav () {
             this.navIsOpen = true;
             this.handleMobileNavState();
+        },
+
+        onCountrySelectorToggle () {
+            this.countrySelectorIsOpen = !this.countrySelectorIsOpen;
+        },
+
+        closeCountrySelector () {
+            this.countrySelectorIsOpen = false;
+        },
+
+        openCountrySelector () {
+            this.countrySelectorIsOpen = true;
         },
 
         onResize () {
@@ -569,14 +589,12 @@ $nav-toggleIcon-color--transparent : $white;
 $nav-toggleIcon-bg                 : transparent;
 $nav-toggleIcon-space              : 5px;
 
-$nav-tooltip-width                 : 10px;
-
-$nav-popover-width                 : 300px;
-$nav-popover-radius                : 3px;
-$nav-popover-transition-duration   : 200ms;
 $nav-popover-transition-delay      : 200ms;
-$nav-popover-padding               : spacing(x2);
+$nav-popover-transition-duration   : 200ms;
+$nav-popover-width                 : 300px;
 
+$countrySelector-flag-width  : 16px;
+$countrySelector-flag-height : 16px;
 
 @mixin nav-container-visible () {
     overflow-y: auto;
@@ -619,8 +637,7 @@ $nav-popover-padding               : spacing(x2);
 
     // we have a nav container so that we don’t have to make the inner list 100% height
     // this is so we can position the logout button last on mobile
-    & .c-nav-container,
-    .c-nav-panel {
+    & .c-nav-container {
         @include media('<mid') {
             position: fixed;
             top: $header-height--narrow;
@@ -643,8 +660,6 @@ $nav-popover-padding               : spacing(x2);
     }
 }
 
-
-
 .c-nav-list {
     position: relative;
 }
@@ -652,9 +667,9 @@ $nav-popover-padding               : spacing(x2);
 .c-nav-popoverList {
     margin-top: 0;
     margin-left: 0;
-    padding: 0;
     list-style: none;
     list-style-image: none;
+    padding: 0;
 
     & > li {
         margin-bottom: 0;
@@ -669,15 +684,18 @@ $nav-popover-padding               : spacing(x2);
         flex-direction: column;
     }
 }
-    .c-nav-list-item {
-        margin-bottom: 0;
 
-        // TODO: MAKE THIS NOT USE FLOATS
-        // global modifier for list items horizontally aligned
-        .c-nav--global & {
-            @include media('>=mid') {
-                float: left;
-            }
+    .c-nav-popoverList--twoColumns {
+        @include media('>=mid') {
+            column-count: 2;
+        }
+    }
+
+    // TODO: MAKE THIS NOT USE FLOATS
+    // global modifier for list items horizontally aligned
+    .c-nav-list-item--horisontallyAlignedOnWiderView {
+        @include media('>=mid') {
+            float: left;
         }
     }
 
@@ -757,6 +775,14 @@ $nav-popover-padding               : spacing(x2);
             }
         }
 
+        .c-nav-list-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            background: transparent;
+        }
+
     .has-sublist {
         // ensures the dropdown/popover is relative to the hover element, on wider views
         @include media('>=mid') {
@@ -830,80 +856,6 @@ $nav-popover-padding               : spacing(x2);
         }
     }
 
-// Nav Popover list
-// Used for a list of navigation items that drops down when hovering over a list item in the navigation
-// (only appears on wider views, so all wrapped in media query)
-.c-nav-popoverList {
-    @include media('>=mid') {
-        position: absolute;
-        top: 100%;
-        right: 99999px; // offscreen, so can’t ever be hovered over by default
-        width: $nav-popover-width;
-        background-color: $white;
-        border: 1px solid $color-border;
-        box-shadow: 0 2px 40px rgba(0, 0, 0, 0.2);
-        border-top: 0;
-        border-radius: 0 0 $nav-popover-radius $nav-popover-radius;
-        padding: 0 $nav-popover-padding;
-        opacity: 0;
-        z-index: -1;
-        transition: opacity $nav-popover-transition-duration ease-in-out $nav-popover-transition-delay,
-                    z-index 0s linear ($nav-popover-transition-delay + $nav-popover-transition-duration),
-                    right 0s linear ($nav-popover-transition-delay + $nav-popover-transition-duration);
-
-        // tooltip arrow
-        &:before {
-            bottom: 100%;
-            right: 10%;
-            border: $nav-tooltip-width solid transparent;
-            border-bottom: $nav-tooltip-width solid $white;
-            content: '';
-            height: 0;
-            width: 0;
-            position: absolute;
-            pointer-events: none;
-        }
-
-        & .c-nav-list-item {
-            float: none;
-            border-bottom: 1px solid $grey--light;
-
-            &:last-child {
-                border-bottom: none;
-
-                & .c-nav-list-link,
-                & .c-nav-list-text {
-                    border-radius: 0 0 $nav-popover-radius $nav-popover-radius;
-                }
-            }
-        }
-
-            & .c-nav-list-link,
-            & .c-nav-list-text {
-                font-family: $nav-text-subFont;
-                font-weight: 300;
-                color: $grey--dark;
-                height: auto;
-
-                &:hover,
-                &:focus {
-                    font-weight: 500;
-                    text-decoration: none;
-                }
-            }
-
-        // display the popover when our parent item is hovered(recieved class .open)
-        .has-sublist.is-open & {
-            opacity: 1;
-            z-index: zIndex(high);
-            right: 0;
-
-            transition: opacity $nav-popover-transition-duration ease-in-out,
-                        z-index 0s linear;
-        }
-    }
-}
-
 // Navigation Trigger
 // This is the checkbox that controls the menu active state without JS via :checked
 .c-nav-trigger {
@@ -917,8 +869,7 @@ $nav-popover-padding               : spacing(x2);
         display: none;
     }
 
-    &:checked ~ .c-nav-container,
-    &:checked ~ .c-nav-panel {
+    &:checked ~ .c-nav-container {
         @include media('<mid') {
             @include nav-container-visible();
         }
@@ -1019,4 +970,83 @@ $nav-popover-padding               : spacing(x2);
         }
     }
 
+.c-nav-popover {
+    @include media('>=mid') {
+        min-width: 300px;
+        position: absolute;
+        top: 100%;
+        right: 99999px; // offscreen, so can’t ever be hovered over by default
+        opacity: 0;
+        z-index: -1;
+        transition: opacity $nav-popover-transition-duration ease-in-out $nav-popover-transition-delay,
+                    z-index 0s linear ($nav-popover-transition-delay + $nav-popover-transition-duration),
+                    right 0s linear ($nav-popover-transition-delay + $nav-popover-transition-duration);
+
+        // display the popover when our parent item is hovered(recieved class .open)
+        .has-sublist.is-open & {
+            opacity: 1;
+            z-index: zIndex(high);
+            right: 0;
+
+            transition: opacity $nav-popover-transition-duration ease-in-out,
+                        z-index 0s linear;
+        }
+
+        // tooltip arrow
+        &:before {
+            right: 10%;
+        }
+    }
+}
+
+.c-nav-popover.c-nav-popover--countrySelector {
+    @include media('>=mid') {
+        // tooltip arrow
+        &:before {
+            right: 4%;
+        }
+    }
+}
+
+.c-nav-list-iconWrapper {
+    height: $countrySelector-flag-height;
+    width: $countrySelector-flag-width;
+
+    @include media('<mid') {
+        margin-right: spacing();
+    }
+
+    .c-header--highlightBg &,
+    .c-header--transparent & {
+        @include media('>=mid') {
+            background-color: $white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+.c-nav-list-icon--flag {
+    height: $countrySelector-flag-height;
+    width: $countrySelector-flag-width;
+    margin-right: spacing();
+}
+
+.c-nav-list-icon--flagCurrent {
+    margin-right: 0;
+}
+
+.c-nav-list-title {
+    width: 0;
+    overflow: hidden;
+    @include font-size(heading-s, true, narrow);
+
+    @include media('<mid') {
+        width: auto;
+    }
+}
 </style>

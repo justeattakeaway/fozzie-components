@@ -7,12 +7,8 @@ v0.66.0
 ------------------------------
 *March 5, 2021*
 
-### Added
-- Analytics error tracking.
-- Tests to cover changes.
-
-### Fixed
-- Guest field inputs Vuex mutation error.
+### Changed
+- `Checkout.vue` - refactor `onFormSubmit` method and relevant tests.
 
 
 v0.65.1

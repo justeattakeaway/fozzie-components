@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 
 import asyncUserDetails from './__mocks__/api.account.details.json';
 import {
@@ -72,7 +72,7 @@ describe('Navigation', () => {
 
     it('should show "logout" if the user is logged in and has nav link data', async () => {
         // Arrange
-        wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
+        wrapper = mount(Navigation, { propsData: defaultPropsData });
 
         // Act
         await wrapper.setData({
@@ -88,7 +88,7 @@ describe('Navigation', () => {
 
     it('should show "navLinks" if the user is logged in and has nav link data', async () => {
         // Arrange
-        wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
+        wrapper = mount(Navigation, { propsData: defaultPropsData });
 
         // Act
         await wrapper.setData({
@@ -692,7 +692,7 @@ describe('Navigation', () => {
         });
     });
 
-    describe('country selector', () => {
+    describe('Country selector', () => {
         it('should be shown when "showCountrySelector" is true', () => {
             // Arrange & Act
             wrapper = shallowMount(Navigation, {
@@ -717,6 +717,38 @@ describe('Navigation', () => {
 
             // Assert
             expect(wrapper.find('[data-test-id="country-selector"]').exists()).toBe(false);
+        });
+
+        it('should be open if `countrySelectorIsOpen: true`', async () => {
+            // Arrange
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showCountrySelector: true
+                }
+            });
+
+            // Act
+            await wrapper.vm.openCountrySelector();
+
+            // Assert
+            expect(wrapper.find('[data-test-id="country-selector"]').classes()).toContain('is-open');
+        });
+
+        it('should not be open when `countrySelectorIsOpen: false`', async () => {
+            // Arrange
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showCountrySelector: true
+                }
+            });
+
+            // Act
+            await wrapper.vm.closeCountrySelector();
+
+            // Assert
+            expect(wrapper.find('[data-test-id="country-selector"]').classes()).not.toContain('is-open');
         });
     });
 });
