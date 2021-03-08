@@ -13,6 +13,23 @@ describe('f-registration component tests', () => {
         expect(registration.isComponentDisplayed()).toBe(true);
     });
 
+    it('should display the "Email address is already registered" error', () => {
+
+        // Arrange
+        const userInfo = {
+            firstName: 'Test',
+            lastName: 'User',
+            email: 'test@user.com',
+            password: 'testuser123'
+        };
+
+        // Act
+        registration.submitForm(userInfo);
+
+        // Assert
+        expect(registration.isEmailExistsErrorDisplayed()).toBe(true);
+    });
+
     forEach(['firstName', 'lastName', 'email', 'password'])
     .it('should display input field', field => {
         // Assert
