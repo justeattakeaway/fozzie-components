@@ -2142,8 +2142,7 @@ describe('Checkout', () => {
                             invalidFields: []
                         };
 
-                        const getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
-                        getFormValidationStateSpy.mockReturnValue(mockValidationState);
+                        const getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
 
                         const wrapper = mount(VueCheckout, {
                             store: createStore(),
