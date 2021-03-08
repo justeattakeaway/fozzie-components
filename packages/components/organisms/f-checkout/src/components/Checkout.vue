@@ -689,12 +689,14 @@ export default {
          * */
         onInvalidCheckoutForm () {
             const validationState = validations.getFormValidationState(this.$v);
+            const invalidFields = mapAnalyticsNames(validationState.invalidFields);
 
             this.$emit(EventNames.CheckoutValidationError, validationState);
             this.trackFormInteraction({
                 action: 'inline_error',
-                error: validationState.invalidFields
+                error: invalidFields
             });
+
             this.trackFormInteraction({
                 action: 'error',
                 error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE

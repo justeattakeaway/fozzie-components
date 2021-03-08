@@ -4,6 +4,7 @@ import flushPromises from 'flush-promises';
 import { VueI18n } from '@justeat/f-globalisation';
 import { validations } from '@justeat/f-services';
 import {
+    ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_COLLECTION,
     ERROR_CODE_FULFILMENT_TIME_INVALID,
@@ -11,6 +12,7 @@ import {
 } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
+import * as mapper from '../../services/mapper';
 
 import {
     defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger
@@ -797,7 +799,7 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(handleUpdateCheckoutSpy).toHaveBeenCalled();
-            })
+            });
 
             describe('if serviceType set to `collection`', () => {
                 describe('when all the fields are populated correctly', () => {
@@ -1208,7 +1210,7 @@ describe('Checkout', () => {
                 it('should call `setupGuestUser`', async () => {
                     // Arrange
                     const setupGuestUserSpy = jest.spyOn(VueCheckout.methods, 'setupGuestUser');
-                    const wrapper = shallowMount(VueCheckout, {
+                    wrapper = shallowMount(VueCheckout, {
                         store: createStore({
                             ...defaultCheckoutState,
                             isLoggedIn: false
@@ -1230,7 +1232,7 @@ describe('Checkout', () => {
 
                 it('should emit success event when all the fields are populated correctly', async () => {
                     // Arrange
-                    const wrapper = mount(VueCheckout, {
+                    wrapper = mount(VueCheckout, {
                         store: createStore({
                             ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_COLLECTION,
@@ -1254,7 +1256,7 @@ describe('Checkout', () => {
 
                 it('should show error message and emit failure event when the first name field is not populated', async () => {
                     // Arrange
-                    const wrapper = mount(VueCheckout, {
+                    wrapper = mount(VueCheckout, {
                         store: createStore({
                             ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_COLLECTION,
@@ -1284,7 +1286,7 @@ describe('Checkout', () => {
 
                 it('should show error message and emit failure event when the last name field is not populated', async () => {
                     // Arrange
-                    const wrapper = mount(VueCheckout, {
+                    wrapper = mount(VueCheckout, {
                         store: createStore({
                             ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_COLLECTION,
@@ -1314,7 +1316,7 @@ describe('Checkout', () => {
 
                 it('should show error message and emit failure event when the email field is not populated', async () => {
                     // Arrange
-                    const wrapper = mount(VueCheckout, {
+                    wrapper = mount(VueCheckout, {
                         store: createStore({
                             ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_COLLECTION,
@@ -1344,7 +1346,7 @@ describe('Checkout', () => {
 
                 it('should show error message and emit failure event when the email field is invalid', async () => {
                     // Arrange
-                    const wrapper = mount(VueCheckout, {
+                    wrapper = mount(VueCheckout, {
                         store: createStore({
                             ...defaultCheckoutState,
                             serviceType: CHECKOUT_METHOD_COLLECTION,
@@ -1377,7 +1379,7 @@ describe('Checkout', () => {
                 it('should not call `setupGuestUser`', async () => {
                     // Arrange
                     const setupGuestUserSpy = jest.spyOn(VueCheckout.methods, 'setupGuestUser');
-                    const wrapper = shallowMount(VueCheckout, {
+                    wrapper = shallowMount(VueCheckout, {
                         store: createStore({
                             ...defaultCheckoutState,
                             authToken: 'sampleToken',
@@ -1400,7 +1402,7 @@ describe('Checkout', () => {
 
                 it('should not create validations for guest', () => {
                     // Arrange
-                    const wrapper = shallowMount(VueCheckout, {
+                    wrapper = shallowMount(VueCheckout, {
                         store: createStore({
                             ...defaultCheckoutState,
                             authToken: 'sampleToken',
@@ -1457,7 +1459,7 @@ describe('Checkout', () => {
                     const eventData = {
                         isLoggedIn: false,
                         serviceType: 'delivery'
-                    }
+                    };
 
                     // Act
                     await wrapper.vm.submitCheckout();
@@ -1487,7 +1489,7 @@ describe('Checkout', () => {
                     const eventData = {
                         isLoggedIn: false,
                         serviceType: 'delivery'
-                    }
+                    };
 
                     // Act
                     await wrapper.vm.submitCheckout();
@@ -2482,6 +2484,7 @@ describe('Checkout', () => {
             let isFormValidSpy;
             let mockValidationState;
             let getFormValidationStateSpy;
+            let trackFormInteractionSpy;
 
             beforeEach(() => {
                 mockValidationState = {
@@ -2497,6 +2500,7 @@ describe('Checkout', () => {
                 getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
                 getFormValidationStateSpy.mockReturnValue(mockValidationState);
                 isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
+                trackFormInteractionSpy = jest.spyOn(VueCheckout.methods, 'trackFormInteraction');
             });
 
             it('should exist', () => {
@@ -2544,7 +2548,7 @@ describe('Checkout', () => {
                     );
                 });
 
-                it('should make a call to `trackFormInteraction` with the correct action & error states', async () => {
+                it('should make a call to `trackFormInteraction` with `inline_error` & `invalidFields`', async () => {
                     // Arrange
                     isFormValidSpy.mockReturnValue(false);
 
@@ -2559,15 +2563,38 @@ describe('Checkout', () => {
                         }
                     });
 
-                    const trackFormInteractionSpy = jest.spyOn(wrapper.vm, 'trackFormInteraction');
-
                     // Act
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
                     expect(trackFormInteractionSpy).toHaveBeenCalledWith({
                         action: 'inline_error',
-                        error: mockValidationState.invalidFields
+                        error: mockValidationState.invalidFields.toString()
+                    });
+                });
+
+                it(`should make a call to 'trackFormInteraction' with 'error' & '${ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE}`, async () => {
+                    // Arrange
+                    isFormValidSpy.mockReturnValue(false);
+
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $v,
+                            $logger
+                        }
+                    });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(trackFormInteractionSpy).toHaveBeenCalledWith({
+                        action: 'error',
+                        error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
                     });
                 });
 

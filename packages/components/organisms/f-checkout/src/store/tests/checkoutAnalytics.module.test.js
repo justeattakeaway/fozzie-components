@@ -357,7 +357,7 @@ describe('CheckoutAnalyticsModule', () => {
             let getAnalyticsErrorCodeByApiErrorCodeSpy;
 
             beforeEach(() => {
-                getAnalyticsErrorCodeByApiErrorCodeSpy = jest.spyOn(mapper, 'getAnalyticsErrorCodeByApiErrorCode')
+                getAnalyticsErrorCodeByApiErrorCodeSpy = jest.spyOn(mapper, 'getAnalyticsErrorCodeByApiErrorCode');
                 getAnalyticsErrorCodeByApiErrorCodeSpy.mockImplementation(() => errors);
 
                 rootState[VUEX_CHECKOUT_MODULE].errors = errors;

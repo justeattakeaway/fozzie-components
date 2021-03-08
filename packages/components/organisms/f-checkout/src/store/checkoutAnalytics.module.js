@@ -13,7 +13,7 @@ export default {
 
     state: () => ({
         autofill: [],
-        changedFields: '', // TODO: come back to this, it should probably be an array that gets "stringified" before doing the dataLayer push.
+        changedFields: '' // TODO: come back to this, it should probably be an array that gets "stringified" before doing the dataLayer push.
         // errors: []
     }),
 
@@ -81,7 +81,6 @@ export default {
          * Pushes `form` event to the dataLayer with correct data
          */
         trackFormInteraction ({ state, rootState }, { action, error }) {
-            let mappedError;
             const formName = rootState[VUEX_CHECKOUT_MODULE].isLoggedIn ? 'checkout' : 'checkout_guest';
 
             window.dataLayer.push({
@@ -105,7 +104,7 @@ export default {
             rootState[VUEX_CHECKOUT_MODULE].errors.forEach(error => {
                 const mappedError = getAnalyticsErrorCodeByApiErrorCode(error);
 
-                if(!trackedErrors.includes(mappedError)) {
+                if (!trackedErrors.includes(mappedError)) {
                     trackedErrors.push(mappedError);
 
                     dispatch('trackFormInteraction', { action: 'error', error: mappedError });

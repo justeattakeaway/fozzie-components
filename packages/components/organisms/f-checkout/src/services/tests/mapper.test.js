@@ -180,7 +180,7 @@ describe('mapAnalyticsNames :: ', () => {
             'city'
         ];
 
-        const expected = "addressCity,addressLine1,email,firstName,lastName,mobilePhone";
+        const expected = 'addressCity,addressLine1,email,firstName,lastName,mobilePhone';
 
         // Act & Assert
         expect(mapAnalyticsNames(provided)).toEqual(expected);
@@ -195,8 +195,8 @@ describe('getAnalyticsErrorCodeByApiErrorCode :: ', () => {
     ])('should correctly map %s to %s', (code, expected) => {
         // Arrange
         const error = {
-            code: code
-        }
+            code
+        };
 
         // Act & Assert
         expect(getAnalyticsErrorCodeByApiErrorCode(error)).toEqual(expected);
