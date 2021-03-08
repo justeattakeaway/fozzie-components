@@ -12,7 +12,6 @@ import {
 } from '../../constants';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
-import * as mapper from '../../services/mapper';
 
 import {
     defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger

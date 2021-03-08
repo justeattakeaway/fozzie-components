@@ -251,7 +251,6 @@ export default {
             'id',
             'isFulfilable',
             'isLoggedIn',
-            'isable',
             'messages',
             'notices',
             'orderId',
