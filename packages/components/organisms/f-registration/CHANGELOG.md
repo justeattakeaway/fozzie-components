@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 Latest (add to next release)
 ------------------------------
 
+*March 8, 2021*
+
+### Added
+- Axios mocks for Storybook
+- 'email in use' component test
+
 *February 4, 2021*
 
 ### Added
