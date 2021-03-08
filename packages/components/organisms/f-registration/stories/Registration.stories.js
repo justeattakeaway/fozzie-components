@@ -8,7 +8,8 @@ export default {
     decorators: [withKnobs, withA11y]
 };
 
-RegistrationMock.setupEmailInUse('')
+const createAccountUrl = '/account/register';
+RegistrationMock.setupEmailInUse(createAccountUrl)
 
 
 export const RegistrationComponent = () => ({
@@ -21,7 +22,7 @@ export const RegistrationComponent = () => ({
             default: text('Title', 'Create Account')
         },
         createAccountUrl: {
-            default: text('Create Account URL', '/account/register')
+            default: text('Create Account URL', createAccountUrl)
         },
         buttonText: {
             default: text('Button Text', 'Create Account')
