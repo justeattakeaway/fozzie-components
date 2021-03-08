@@ -13,7 +13,6 @@ v1.1.1
 
 ### Fixed
 - Pass button attributes to component correctly.
-- CSS class name spelling mistake.
 
 
 v1.1.0
