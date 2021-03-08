@@ -260,7 +260,7 @@ describe('CheckoutAnalyticsModule', () => {
                         action: payload.action,
                         error: null,
                         autofill: state.autofill,
-                        changes: state.changedFields
+                        changes: state.changedFields.toString()
                     }
                 };
                 mapAnalyticsNamesSpy = jest.spyOn(mapper, 'mapAnalyticsNames');
@@ -391,24 +391,24 @@ describe('CheckoutAnalyticsModule', () => {
 
             it('should update state if `changedFields` does not include passed fields', () => {
                 // Arrange
-                state.changedFields = '';
+                state.changedFields = [];
 
                 // Act
                 mutations[UPDATE_CHANGED_FIELD](state, field);
 
                 // Assert
-                expect(state.changedFields).toEqual(field);
+                expect(state.changedFields).toEqual([field]);
             });
 
             it('should not update state if `changedFields` include passed fields', () => {
                 // Arrange
-                state.changedFields = field;
+                state.changedFields = [field];
 
                 // Act
                 mutations[UPDATE_CHANGED_FIELD](state, field);
 
                 // Assert
-                expect(state.changedFields).toEqual(field);
+                expect(state.changedFields).toEqual([field]);
             });
         });
 

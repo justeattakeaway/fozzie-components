@@ -46,7 +46,7 @@ export default {
             postcode: ''
         },
         userNote: '',
-        isFulfilable: true,
+        isFulfillable: true,
         errors: [],
         notices: [],
         messages: [],
@@ -317,7 +317,7 @@ export default {
             customer,
             address,
             time,
-            isFulfilable,
+            isFulfillable,
             notices,
             messages
         }) => {
@@ -341,7 +341,7 @@ export default {
                 state.address.postcode = address.postalCode;
             }
 
-            state.isFulfilable = isFulfilable;
+            state.isFulfillable = isFulfillable;
             state.notices = notices;
             state.messages = messages;
         },
@@ -386,8 +386,8 @@ export default {
             };
         },
 
-        [UPDATE_IS_FULFILABLE]: (state, isFulfilable) => {
-            state.isFulfilable = isFulfilable;
+        [UPDATE_IS_FULFILABLE]: (state, isFulfillable) => {
+            state.isFulfillable = isFulfillable;
         },
 
         [UPDATE_ERRORS]: (state, issues) => {

@@ -42,7 +42,7 @@ const defaultCheckoutState = {
         times: fulfilmentTimes,
         isAsapAvailable: true
     },
-    isFulfilable: true,
+    isFulfillable: true,
     notices: [],
     messages: [],
     authToken: '',
@@ -54,7 +54,7 @@ const defaultCheckoutState = {
 
 const defaultAnalyticsState = {
     autofill: [],
-    changedFields: ''
+    changedFields: []
 };
 
 const defaultCheckoutActions = {

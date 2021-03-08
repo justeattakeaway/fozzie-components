@@ -66,7 +66,7 @@ const time = {
     to: 'toTime'
 };
 
-const isFulfilable = false;
+const isFulfillable = false;
 
 const issues = [
     {
@@ -101,7 +101,7 @@ const defaultState = {
         city: '',
         postcode: ''
     },
-    isFulfilable: true,
+    isFulfillable: true,
     errors: [],
     notices: [],
     messages: [],
@@ -234,7 +234,7 @@ describe('CheckoutModule', () => {
         it.each([
             [UPDATE_FULFILMENT_ADDRESS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
-            [UPDATE_IS_FULFILABLE, 'isFulfilable', isFulfilable],
+            [UPDATE_IS_FULFILABLE, 'isFulfillable', isFulfillable],
             [UPDATE_ERRORS, 'errors', issues],
             [UPDATE_USER_NOTE, 'userNote', userNote]
         ])('%s :: should update state with received value', (mutationName, propertyName, propertyValue) => {

@@ -13,8 +13,7 @@ export default {
 
     state: () => ({
         autofill: [],
-        changedFields: '' // TODO: come back to this, it should probably be an array that gets "stringified" before doing the dataLayer push.
-        // errors: []
+        changedFields: []
     }),
 
     actions: {
@@ -90,7 +89,7 @@ export default {
                     action,
                     error: error || null,
                     autofill: state.autofill,
-                    changes: state.changedFields
+                    changes: state.changedFields.toString()
                 }
             });
         },
@@ -115,13 +114,11 @@ export default {
 
     mutations: {
         [UPDATE_CHANGED_FIELD]: (state, field) => {
-            const changed = state.changedFields ? state.changedFields.split(',') : [];
-
-            if (!changed.includes(field)) {
-                changed.push(field);
+            if (!state.changedFields.includes(field)) {
+                state.changedFields.push(field);
             }
 
-            state.changedFields = changed.sort().toString();
+            state.changedFields.sort();
         },
 
         [UPDATE_AUTOFILL]: (state, autofill) => {

@@ -249,7 +249,7 @@ export default {
             'errors',
             'geolocation',
             'id',
-            'isFulfilable',
+            'isFulfillable',
             'isLoggedIn',
             'messages',
             'notices',
@@ -365,7 +365,7 @@ export default {
 
                 await this.handleUpdateCheckout();
 
-                if (this.isFulfilable) {
+                if (this.isFulfillable) {
                     await this.submitOrder();
 
                     this.$emit(EventNames.CheckoutSuccess, eventData);

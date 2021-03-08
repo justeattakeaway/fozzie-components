@@ -1422,8 +1422,8 @@ describe('Checkout', () => {
                 });
             });
 
-            describe('when `isFulfilable` is true', () => {
-                const store = createStore({ ...defaultCheckoutState, isFulfilable: true });
+            describe('when `isFulfillable` is true', () => {
+                const store = createStore({ ...defaultCheckoutState, isFulfillable: true });
 
                 beforeEach(() => {
                     wrapper = shallowMount(VueCheckout, {
@@ -1468,8 +1468,8 @@ describe('Checkout', () => {
                 });
             });
 
-            describe('when `isFulfilable` is false', () => {
-                const store = createStore({ ...defaultCheckoutState, isFulfilable: false });
+            describe('when `isFulfillable` is false', () => {
+                const store = createStore({ ...defaultCheckoutState, isFulfillable: false });
 
                 beforeEach(() => {
                     wrapper = shallowMount(VueCheckout, {
