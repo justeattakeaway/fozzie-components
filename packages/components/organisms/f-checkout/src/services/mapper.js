@@ -96,7 +96,7 @@ const mapAnalyticsName = field => (analyticFieldNameMapper[field] || field);
 const mapAnalyticsNames = fields => fields.map(mapAnalyticsName).sort().toString();
 
 /**
- * Updates passed issues to match the expected analytics error requirements.
+ * Updates passed api error code to match the expected analytics error requirements.
  */
 const getAnalyticsErrorCodeByApiErrorCode = error => {
     let analyticsErrorCode;

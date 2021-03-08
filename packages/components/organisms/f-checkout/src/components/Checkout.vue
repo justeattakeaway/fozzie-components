@@ -399,7 +399,11 @@ export default {
         },
 
         /**
-         * Updates checkout details while emitting events to communicate its success or failure.
+         * Handles call of `updateCheckout` and tracks any returned errors.
+         * 1. Maps checkout data.
+         * 2. If form is valid try to call `updateCheckout`.
+         * 3. If `updateCheckout` call succeeds but errors are returned, `trakFormError` is called.
+         * 4. If `updateCheckout` call fails calls `trakFormError` with error type..
          *
          */
         async handleUpdateCheckout () {
@@ -419,7 +423,7 @@ export default {
                     timeout: this.checkoutTimeout
                 });
 
-                if (this.errors) { // If updateCheckout call is successful but returns unfulfilable issues.
+                if (this.errors) { // If `updateCheckout` call is successful but returns unfulfilable issues.
                     this.trackFormErrors();
                 }
             } catch (ex) {
@@ -582,7 +586,6 @@ export default {
                     language: this.$i18n.locale,
                     timeout: this.checkoutTimeout
                 });
-
                 this.$emit(EventNames.CheckoutAddressGetSuccess);
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutAddressGetFailure, thrownErrors);
@@ -599,6 +602,7 @@ export default {
             {
                 addressLines: Object.values(this.address).filter(addressLine => !!addressLine)
             };
+
             try {
                 if (locationData.addressLines.length) {
                     await this.getGeoLocation({
