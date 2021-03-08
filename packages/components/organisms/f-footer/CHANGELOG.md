@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.9.1
+------------------------------
+*March 3, 2021*
+
+## Fixed
+- Mobile Link lists collapse on scroll
+
+### Added
+- Preserve mobile link list toggle state.
+
+
 v4.9.0
 ------------------------------
 *March 2, 2021*
