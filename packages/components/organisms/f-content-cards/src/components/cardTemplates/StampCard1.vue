@@ -270,7 +270,8 @@ $stampCard-expiryInfo-colour: $grey--dark;
 $stampCard-iconSize-landscape: 56px;
 $stampCard-iconSize-portrait: 48px;
 
-$stampCard-responsive-mobileViewBreakpoint: '<narrowMid';
+$stampCard-responsive-mobileViewBreakpoint: '<=narrowMid';
+$stampCard-responsive-tabletViewBreakpoint: '<=mid';
 
 .c-stampCard1 {
     text-decoration: initial;
@@ -290,6 +291,10 @@ $stampCard-responsive-mobileViewBreakpoint: '<narrowMid';
         color: $color-text;
     }
 
+    @include media($stampCard-responsive-tabletViewBreakpoint) {
+        width: 344px;
+    }
+
     @include media($stampCard-responsive-mobileViewBreakpoint) {
         width: auto;
         box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.12);
@@ -303,6 +308,7 @@ $stampCard-responsive-mobileViewBreakpoint: '<narrowMid';
 .c-stampCard1-icon {
     float: left;
     margin-right: spacing(x2);
+    margin-bottom: spacing();
     width: $stampCard-iconSize-landscape;
     height: $stampCard-iconSize-landscape;
     border-radius: $border-radius;
