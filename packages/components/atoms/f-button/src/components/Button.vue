@@ -10,7 +10,6 @@
         ]"
         :action-type="buttonActionType"
         :data-test-id="`${componentType}-component`"
-        v-bind="$attrs"
         v-on="$listeners">
         <slot />
     </component>
