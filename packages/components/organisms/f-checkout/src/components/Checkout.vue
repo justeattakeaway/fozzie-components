@@ -636,12 +636,11 @@ export default {
         async onFormSubmit () {
             this.trackFormInteraction({ action: 'submit' });
 
-            if (!this.isFormValid()) {
+            if (this.isFormValid()) {
+                await this.submitCheckout();
+            } else {
                 this.onInvalidCheckoutForm();
-                return;
             }
-
-            await this.submitCheckout();
         },
 
         /**
