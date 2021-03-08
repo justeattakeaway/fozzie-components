@@ -3,7 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v4.0.1
+v4.2.0
+------------------------------
+*March 08, 2021*
+
+### Added
+- Mid-size stamp card in an intermediate breakpoint for tablet view
+
+### Fixed
+- Margin on bottom of restaurant icon in stampcard prevents text from butting up
+on the bottom of it when it flows onto the next line
+
+
+v4.1.0
 ------------------------------
 *March 03, 2021*
 
