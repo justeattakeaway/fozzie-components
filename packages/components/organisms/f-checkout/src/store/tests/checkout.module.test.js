@@ -15,7 +15,7 @@ import {
     UPDATE_ERRORS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
-    UPDATE_IS_FULFILABLE,
+    UPDATE_IS_FULFILLABLE,
     UPDATE_STATE,
     UPDATE_USER_NOTE,
     UPDATE_GEO_LOCATION
@@ -234,7 +234,7 @@ describe('CheckoutModule', () => {
         it.each([
             [UPDATE_FULFILMENT_ADDRESS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
-            [UPDATE_IS_FULFILABLE, 'isFulfillable', isFulfillable],
+            [UPDATE_IS_FULFILLABLE, 'isFulfillable', isFulfillable],
             [UPDATE_ERRORS, 'errors', issues],
             [UPDATE_USER_NOTE, 'userNote', userNote]
         ])('%s :: should update state with received value', (mutationName, propertyName, propertyValue) => {

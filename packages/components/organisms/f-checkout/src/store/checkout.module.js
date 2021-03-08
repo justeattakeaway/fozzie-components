@@ -10,7 +10,7 @@ import {
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
     UPDATE_GEO_LOCATION,
-    UPDATE_IS_FULFILABLE,
+    UPDATE_IS_FULFILLABLE,
     UPDATE_ERRORS,
     UPDATE_ORDER_PLACED,
     UPDATE_STATE,
@@ -114,7 +114,7 @@ export default {
             const { data: responseData } = await axios.patch(url, data, config);
             const { issues, isFulfillable } = responseData;
 
-            commit(UPDATE_IS_FULFILABLE, isFulfillable);
+            commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, issues);
         },
 
@@ -386,7 +386,7 @@ export default {
             };
         },
 
-        [UPDATE_IS_FULFILABLE]: (state, isFulfillable) => {
+        [UPDATE_IS_FULFILLABLE]: (state, isFulfillable) => {
             state.isFulfillable = isFulfillable;
         },
 

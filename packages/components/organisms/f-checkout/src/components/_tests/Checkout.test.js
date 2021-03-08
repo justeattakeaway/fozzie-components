@@ -1494,7 +1494,7 @@ describe('Checkout', () => {
                     await wrapper.vm.submitCheckout();
 
                     // Assert
-                    expect($logger.logWarn).toHaveBeenCalledWith('Consumer Checkout Not Fulfilable', store, eventData);
+                    expect($logger.logWarn).toHaveBeenCalledWith('Consumer Checkout Not Fulfillable', store, eventData);
                 });
             });
         });

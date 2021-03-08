@@ -379,7 +379,7 @@ export default {
                     this.redirectToPayment();
                 } else {
                     this.$logger.logWarn(
-                        'Consumer Checkout Not Fulfilable',
+                        'Consumer Checkout Not Fulfillable',
                         this.$store,
                         eventData
                     );
@@ -422,7 +422,7 @@ export default {
                     timeout: this.checkoutTimeout
                 });
 
-                if (this.errors) { // If `updateCheckout` call is successful but returns unfulfilable issues.
+                if (this.errors) { // If `updateCheckout` call is successful but returns unfulfillable issues.
                     this.trackFormErrors();
                 }
             } catch (ex) {
