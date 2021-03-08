@@ -93,7 +93,7 @@ const mapAnalyticsName = field => (analyticFieldNameMapper[field] || field);
  * Updates passed field names to match the expected analytics name requirements.
  * When fields have been mapped, sorts the array alphabetically.
  */
-const mapAnalyticsNames = fields => fields.map(mapAnalyticsName).sort();
+const mapAnalyticsNames = fields => fields.map(mapAnalyticsName).sort().toString();
 
 /**
  * Updates passed issues to match the expected analytics error requirements.
@@ -111,5 +111,8 @@ const getAnalyticsErrorCodeByApiErrorCode = error => {
 };
 
 export {
-    mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode
+    mapUpdateCheckoutRequest,
+    mapAnalyticsName,
+    mapAnalyticsNames,
+    getAnalyticsErrorCodeByApiErrorCode
 };

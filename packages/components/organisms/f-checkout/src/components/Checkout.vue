@@ -109,6 +109,7 @@ import ErrorPage from './Error.vue';
 
 import {
     ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE,
+    ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME,
     CHECKOUT_METHOD_DELIVERY,
     ERROR_CODE_FULFILMENT_TIME_INVALID,
@@ -120,7 +121,7 @@ import {
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
-import { mapUpdateCheckoutRequest } from '../services/mapper';
+import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
 
 export default {
     name: 'VueCheckout',
@@ -670,10 +671,11 @@ export default {
 
             if (!this.isFormValid()) {
                 const validationState = validations.getFormValidationState(this.$v);
+                const invalidFields = mapAnalyticsNames(validationState.invalidFields)
 
                 this.$emit(EventNames.CheckoutValidationError, validationState);
-                this.trackFormInteraction({ action: 'inline_error', error: validationState.invalidFields });
-                this.trackFormInteraction({ action: 'error', error: 'invalidModelState' });
+                this.trackFormInteraction({ action: 'inline_error', error: invalidFields });
+                this.trackFormInteraction({ action: 'error', error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE });
 
                 this.$logger.logWarn(
                     'Checkout Validation Error',

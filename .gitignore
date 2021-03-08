@@ -37,3 +37,4 @@ coverage/
 **/test/results/axe-violations/*
 !**/test/results/axe-violations/README.md
 test/results/ci
+packages/components/allure-results

@@ -180,14 +180,7 @@ describe('mapAnalyticsNames :: ', () => {
             'city'
         ];
 
-        const expected = [
-            'addressCity',
-            'addressLine1',
-            'email',
-            'firstName',
-            'lastName',
-            'mobilePhone'
-        ];
+        const expected = "addressCity,addressLine1,email,firstName,lastName,mobilePhone";
 
         // Act & Assert
         expect(mapAnalyticsNames(provided)).toEqual(expected);

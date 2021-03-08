@@ -84,16 +84,12 @@ export default {
             let mappedError;
             const formName = rootState[VUEX_CHECKOUT_MODULE].isLoggedIn ? 'checkout' : 'checkout_guest';
 
-            if (action !== 'error') {
-                mappedError = error ? mapAnalyticsNames(error).toString() : null;
-            }
-
             window.dataLayer.push({
                 event: 'Form',
                 form: {
                     name: formName,
                     action,
-                    error: mappedError || error || null,
+                    error: error || null,
                     autofill: state.autofill,
                     changes: state.changedFields
                 }
