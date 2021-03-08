@@ -10,6 +10,7 @@ export default {
 
 const createAccountUrl = '/account/register';
 RegistrationMock.setupEmailInUse(createAccountUrl)
+RegistrationMock.passThroughAny();
 
 
 export const RegistrationComponent = () => ({
