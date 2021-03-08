@@ -8,9 +8,8 @@ export default {
     decorators: [withKnobs, withA11y]
 };
 
-const createAccountUrl = '/account/register';
-RegistrationMock.setupEmailInUse(createAccountUrl)
-RegistrationMock.passThroughAny();
+RegistrationMock.setupEmailInUse('')
+
 
 export const RegistrationComponent = () => ({
     components: { Registration },
@@ -22,7 +21,7 @@ export const RegistrationComponent = () => ({
             default: text('Title', 'Create Account')
         },
         createAccountUrl: {
-            default: text('Create Account URL', createAccountUrl)
+            default: text('Create Account URL', '/account/register')
         },
         buttonText: {
             default: text('Button Text', 'Create Account')
@@ -31,7 +30,7 @@ export const RegistrationComponent = () => ({
             default: boolean('Show Login Link', true)
         },
         loginUrl: {
-            default: text('Login URL', createAccountUrl)
+            default: text('Login URL', '/account/login')
         }
     },
     parameters: {
