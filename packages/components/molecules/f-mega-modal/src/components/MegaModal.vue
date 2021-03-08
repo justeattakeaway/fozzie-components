@@ -29,17 +29,17 @@
                     v-if="hasCloseButton"
                     name="close-button">
                     <f-button
-                        type="button"
+                        is-icon
                         :class="[$style['c-megaModal-closeBtn'], {
-                            [$style['c-megaModal-closeBtn--rounded']]: isCloseRounded,
                             [$style['c-megaModal-closeBtn--fixed']]: isCloseFixed || isFullHeight
                         }]"
-                        button-type="icon"
+                        button-type="secondary"
                         button-size="xsmall"
                         data-test-id="close-modal"
                         @click.native="close">
                         <cross-icon
                             :class="[$style['c-megaModal-closeIcon']]" />
+
                         <span class="is-visuallyHidden">
                             {{ closeButtonCopy }}
                         </span>
@@ -350,35 +350,25 @@ export default {
     }
 }
 
-.c-megaModal-closeBtn {
-    position: absolute;
-    right: spacing(x2);
-    top: spacing(x1.5);
-    z-index: zIndex(high);
-
-    @include media('>=mid') {
-        position: fixed;
-    }
-}
-
-    .c-megaModal-closeBtn--rounded {
-        border: solid 1px $white;
-        background-color: $white;
-        border-radius: 50%;
+.c-megaModal {
+    .c-megaModal-closeBtn {
+        display: flex;
         opacity: 0.9;
+        position: absolute;
+        right: spacing(x2);
+        top: spacing(x1.5);
+        z-index: zIndex(high);
+
+        @include media('>=mid') {
+            position: fixed;
+        }
     }
 
     .c-megaModal-closeBtn--fixed {
         position: fixed;
     }
 
-.c-megaModal-closeIcon {
-    display: block;
-    height: 16px;
-    speak: none;
-    width: 16px;
-
-    * {
+    .c-megaModal-closeIcon * {
         fill: $color-link-default;
     }
 }
