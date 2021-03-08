@@ -26,108 +26,108 @@
                 @click="formStart"
                 @focus="formStart"
                 @submit.prevent="onFormSubmit">
-                <error-message
-                    v-if="genericErrorMessage"
-                    :class="$style['c-registration-genericError']">
-                    {{ genericErrorMessage }}
-                </error-message>
+                <section
+                    id="error-summary-container"
+                    :class="$style['is-visuallyHidden']"
+                    role="alert"
+                    data-test-id="error-summary-container">
+                    <p
+                        v-if="genericErrorMessage"
+                        :class="$style['o-form-error']">
+                        <warning-icon :class="$style['o-form-error-icon']" />
+                        {{ genericErrorMessage }}
+                    </p>
+                </section>
+
                 <form-field
+                    ref="firstName"
                     v-model="firstName"
+                    aria-required="true"
+                    aria-describedby="error-message-firstname"
+                    :aria-invalid="!!describeFirstnameErrorMessage"
                     name="firstName"
                     :label-text="copy.labels.firstName"
                     input-type="text"
                     @blur="formFieldBlur('firstName')">
-                    <template #error>
-                        <error-message
-                            v-if="shouldShowFirstNameRequiredError"
-                            data-test-id='error-first-name-empty'>
-                            {{ copy.validationMessages.firstName.requiredError }}
-                        </error-message>
-                        <error-message
-                            v-if="shouldShowFirstNameMaxLengthError"
-                            data-test-id='error-first-name-maxlength'>
-                            {{ copy.validationMessages.firstName.maxLengthError }}
-                        </error-message>
-                        <error-message
-                            v-if="shouldShowFirstNameInvalidCharError"
-                            data-test-id='error-first-name-invalid'>
-                            {{ copy.validationMessages.firstName.invalidCharError }}
-                        </error-message>
+                    <template
+                        v-if="describeFirstnameErrorMessage"
+                        #error>
+                        <p
+                            id="error-message-firstname"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-message-firstname'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            {{ describeFirstnameErrorMessage }}
+                        </p>
                     </template>
                 </form-field>
 
                 <form-field
+                    ref="lastName"
                     v-model="lastName"
                     name="lastName"
+                    data-test-id="input-last-name"
                     :label-text="copy.labels.lastName"
                     input-type="text"
+                    aria-describedby="error-message-lastname"
+                    :aria-invalid="!!describeLastnameErrorMessage"
                     @blur="formFieldBlur('lastName')">
-                    <template #error>
-                        <error-message
-                            v-if="shouldShowLastNameRequiredError"
-                            data-test-id='error-last-name-empty'>
-                            {{ copy.validationMessages.lastName.requiredError }}
-                        </error-message>
-                        <error-message
-                            v-if="shouldShowLastNameMaxLengthError"
-                            data-test-id='error-last-name-maxlength'>
-                            {{ copy.validationMessages.lastName.maxLengthError }}
-                        </error-message>
-                        <error-message
-                            v-if="shouldShowLastNameInvalidCharError"
-                            data-test-id='error-last-name-invalid'>
-                            {{ copy.validationMessages.lastName.invalidCharError }}
-                        </error-message>
+                    <template
+                        v-if="describeLastnameErrorMessage"
+                        #error>
+                        <p
+                            id="error-message-lastname"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-message-lastname'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            {{ describeLastnameErrorMessage }}
+                        </p>
                     </template>
                 </form-field>
 
                 <form-field
+                    ref="email"
                     v-model="email"
+                    aria-required="true"
                     name="email"
+                    aria-describedby="error-message-email"
+                    :aria-invalid="!!describeEmailErrorMessage"
                     :label-text="copy.labels.email"
                     input-type="email"
                     @blur="formFieldBlur('email')">
-                    <template #error>
-                        <error-message
-                            v-if="shouldShowEmailRequiredError"
-                            data-test-id='error-email-empty'>
-                            {{ copy.validationMessages.email.requiredError }}
-                        </error-message>
-                        <error-message
-                            v-else-if="shouldShowEmailInvalidError"
-                            data-test-id='error-email-invalid'>
-                            {{ copy.validationMessages.email.invalidEmailError }}
-                        </error-message>
-                        <error-message
-                            v-if="shouldShowEmailMaxLengthError"
-                            data-test-id='error-email-maxlength'>
-                            {{ copy.validationMessages.email.maxLengthError }}
-                        </error-message>
-                        <error-message
-                            v-else-if="shouldShowEmailAlreadyExistsError"
-                            data-test-id='error-email-exists'>
-                            {{ copy.validationMessages.email.alreadyExistsError }}
-                        </error-message>
+                    <template
+                        v-if="describeEmailErrorMessage"
+                        #error>
+                        <p
+                            id="error-message-email"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-message-email'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            {{ describeEmailErrorMessage }}
+                        </p>
                     </template>
                 </form-field>
 
                 <form-field
+                    ref="password"
                     v-model="password"
+                    aria-required="true"
+                    aria-describedby="error-message-password"
+                    :aria-invalid="!!describePasswordErrorMessage"
                     name="password"
                     :label-text="copy.labels.password"
                     input-type="password"
                     @blur="formFieldBlur('password')">
-                    <template #error>
-                        <error-message
-                            v-if="shouldShowPasswordRequiredError"
-                            data-test-id='error-password-empty'>
-                            {{ copy.validationMessages.password.requiredError }}
-                        </error-message>
-                        <error-message
-                            v-if="shouldShowPasswordMinLengthError"
-                            data-test-id='error-password-minlength'>
-                            {{ copy.validationMessages.password.minLengthError }}
-                        </error-message>
+                    <template
+                        v-if="describePasswordErrorMessage"
+                        #error>
+                        <p
+                            id="error-message-password"
+                            :class="$style['o-form-error']"
+                            data-test-id='error-message-password'>
+                            <warning-icon :class="$style['o-form-error-icon']" />
+                            {{ describePasswordErrorMessage }}
+                        </p>
                     </template>
                 </form-field>
 
@@ -178,7 +178,6 @@ import CardComponent from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import tenantConfigs from '../tenants';
 import RegistrationServiceApi from '../services/RegistrationServiceApi';
@@ -218,8 +217,7 @@ export default {
         FButton,
         CardComponent,
         FormField,
-        BagCelebrateIcon,
-        ErrorMessage
+        BagCelebrateIcon
     },
 
     mixins: [validationMixin],
@@ -274,6 +272,60 @@ export default {
          * The $dirty boolean changes to true when the user has focused/lost
          * focus on the input field.
          */
+
+        describeFirstnameErrorMessage () {
+            if (this.$v.firstName.$dirty) {
+                if (!this.$v.firstName.required) {
+                    return 'Please include your first name';
+                }
+                if (!this.$v.firstName.maxLength) {
+                    return 'First name exceeds 50 characters';
+                }
+                if (!this.$v.firstName.meetsCharacterValidationRules) {
+                    return 'Your name can only contain letters, hyphens or apostrophes';
+                }
+            }
+            return '';
+        },
+        describeLastnameErrorMessage () {
+            if (this.$v.lastName.$dirty) {
+                if (!this.$v.lastName.required) {
+                    return 'Please include your last name';
+                }
+                if (!this.$v.lastName.maxLength) {
+                    return 'Last name exceeds 50 characters';
+                }
+                if (!this.$v.lastName.meetsCharacterValidationRules) {
+                    return 'Your last name can only contain letters, hyphens or apostrophes';
+                }
+            }
+            return '';
+        },
+        describeEmailErrorMessage () {
+            if (this.$v.email.$dirty) {
+                if (!this.$v.email.required) {
+                    return 'Please enter your email address';
+                }
+                if (!this.$v.email.maxLength) {
+                    return 'Email address exceeds 50 characters';
+                }
+                if (!this.$v.email.email) {
+                    return 'Please enter your email address correctly';
+                }
+            }
+            return '';
+        },
+        describePasswordErrorMessage () {
+            if (this.$v.password.$dirty) {
+                if (!this.$v.password.required) {
+                    return 'Please enter a password';
+                }
+                if (!this.$v.password.minLength) {
+                    return 'Password is less than four characters';
+                }
+            }
+            return '';
+        },
 
         shouldShowFirstNameRequiredError () {
             return !this.$v.firstName.required && this.$v.firstName.$dirty;
@@ -421,8 +473,26 @@ export default {
         },
 
         isFormInvalid () {
-            this.$v.$touch();
-            return this.$v.$invalid;
+            const v = this.$v;
+            function countErrors () {
+                return [
+                    v.firstName.$anyError,
+                    v.lastName.$anyError,
+                    v.email.$anyError,
+                    v.password.$anyError
+                ].filter(x => x)
+                    .length;
+            }
+            v.firstName.$touch();
+            v.lastName.$touch();
+            v.email.$touch();
+            v.password.$touch();
+            if (v.$invalid) {
+                this.genericErrorMessage = `There are ${countErrors()} errors in the form.`;
+                return true;
+            }
+            this.genericErrorMessage = '';
+            return false;
         }
     }
 };
