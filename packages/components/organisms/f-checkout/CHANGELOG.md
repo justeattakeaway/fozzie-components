@@ -4,12 +4,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.67.1
+v0.68.1
 ------------------------------
 *March 9, 2021*
 
 ### Changed
-- Updated locale usage for storybook
+- Locale usage in storybook
+
+
+v0.68.0
+------------------------------
+*March 9, 2021*
+
+### Changed
+- Guest checkout header to display correct text.
+
 
 v0.67.0
 ------------------------------
