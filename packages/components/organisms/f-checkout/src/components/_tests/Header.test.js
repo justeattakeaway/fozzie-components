@@ -49,10 +49,10 @@ describe('Header', () => {
 
                 it('should render the authenticated user header', () => {
                     // Arrange
-                    const userHeader = wrapper.find('[data-test-id="user-header"]');
+                    const userHeader = wrapper.find('[data-test-id="user-checkoutHeader"]');
 
                     // Assert
-                    expect(userHeader).toBeDefined();
+                    expect(userHeader).toMatchSnapshot();
                 });
 
                 it('should show the link to switch users', () => {
@@ -79,10 +79,10 @@ describe('Header', () => {
 
                 it('should render the guest header', () => {
                     // Arrange
-                    const guestHeader = wrapper.find('[data-test-id="guest-header"]');
+                    const guestHeader = wrapper.find('[data-test-id="guest-checkoutHeader"]');
 
                     // Assert
-                    expect(guestHeader).toBeDefined();
+                    expect(guestHeader).toMatchSnapshot();
                 });
 
                 it('should show the button to register or login', () => {
