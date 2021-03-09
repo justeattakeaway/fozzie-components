@@ -3,7 +3,8 @@ import Vuex from 'vuex';
 import { select, boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import {
-    ENGLISH_LOCALE
+    ENGLISH_LOCALE,
+    SPANISH_LOCALE
 } from '@justeat/storybook/constants/globalisation';
 
 import VueCheckout from '../src/components/Checkout.vue';
