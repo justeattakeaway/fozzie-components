@@ -2,7 +2,13 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { withA11y } from '@storybook/addon-a11y';
 import {
+    AUSTRALIAN_LOCALE,
+    DANISH_LOCALE,
     ENGLISH_LOCALE,
+    IRISH_LOCALE,
+    ITALIAN_LOCALE,
+    NEW_ZEALAND_LOCALE,
+    NORWEIGAN_LOCALE,
     SPANISH_LOCALE
 } from '@justeat/storybook/constants/globalisation';
 
@@ -24,7 +30,7 @@ export const SearchboxComponent = (args, { argTypes }) => ({
             checkout: SearchboxModule
         }
     }),
-    template: '<searchbox :locale="locale" :key="locale" />'
+    template: '<searchbox v-bind="$props" :key="locale" />'
 });
 
 SearchboxComponent.args = {
@@ -33,7 +39,19 @@ SearchboxComponent.args = {
 
 SearchboxComponent.argTypes = {
     locale: {
-        control: { type: 'select', options: [ENGLISH_LOCALE, SPANISH_LOCALE] }
+        control: {
+            type: 'select',
+            options: [
+                AUSTRALIAN_LOCALE,
+                DANISH_LOCALE,
+                ENGLISH_LOCALE,
+                IRISH_LOCALE,
+                ITALIAN_LOCALE,
+                NEW_ZEALAND_LOCALE,
+                NORWEIGAN_LOCALE,
+                SPANISH_LOCALE
+            ]
+        }
     }
 };
 
