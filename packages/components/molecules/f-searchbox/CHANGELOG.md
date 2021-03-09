@@ -7,8 +7,8 @@ v4.0.0-beta.26
 ------------------------------
 *March 9, 2021*
 
-### Changed
-- `searchbox` Vuex namespace to `fSearchboxModule` to avoid clashes in consuming applications.
+### Added
+- Locale switching to `searchbox` inside Storybook
 
 
 Latest (add to next release)

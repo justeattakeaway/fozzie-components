@@ -28,7 +28,7 @@ export const SearchboxComponent = (args, { argTypes }) => ({
 });
 
 SearchboxComponent.args = {
-    locale: SPANISH_LOCALE
+    locale: ENGLISH_LOCALE
 };
 
 SearchboxComponent.argTypes = {
