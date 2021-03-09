@@ -13,35 +13,22 @@
                         {{ legacyBannerLinkText }}
                     </a>
                 </p>
-                <button-component
-                    type="button"
+                <button
                     :class="[$style['c-cookieWarning-btn']]"
-                    button-type="icon"
-                    button-size="xsmall"
                     data-test-id="cookieBanner-close-button"
                     aria-label="Close"
-                    @click.native="$emit('hide-legacy-banner')">
-                    <cross-icon />
+                    @click="$emit('hide-legacy-banner')">
                     <span class="is-visuallyHidden">
                         {{ legacyBannerCloseBannerText }}
                     </span>
-                </button-component>
+                </button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import ButtonComponent from '@justeat/f-button';
-import '@justeat/f-button/dist/f-button.css';
-
-import { CrossIcon } from '@justeat/f-vue-icons';
-
 export default {
-    components: {
-        ButtonComponent,
-        CrossIcon
-    },
     props: {
         shouldHideLegacyBanner: {
             type: Boolean,
