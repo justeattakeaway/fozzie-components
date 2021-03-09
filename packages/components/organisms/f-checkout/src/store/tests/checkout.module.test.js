@@ -12,10 +12,10 @@ import {
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
     UPDATE_BASKET_DETAILS,
     UPDATE_CUSTOMER_DETAILS,
+    UPDATE_ERRORS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
     UPDATE_IS_FULFILLABLE,
-    UPDATE_ISSUES,
     UPDATE_STATE,
     UPDATE_USER_NOTE,
     UPDATE_GEO_LOCATION
@@ -102,7 +102,7 @@ const defaultState = {
         postcode: ''
     },
     isFulfillable: true,
-    issues: [],
+    errors: [],
     notices: [],
     messages: [],
     availableFulfilment: {
@@ -235,7 +235,7 @@ describe('CheckoutModule', () => {
             [UPDATE_FULFILMENT_ADDRESS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
             [UPDATE_IS_FULFILLABLE, 'isFulfillable', isFulfillable],
-            [UPDATE_ISSUES, 'issues', issues],
+            [UPDATE_ERRORS, 'errors', issues],
             [UPDATE_USER_NOTE, 'userNote', userNote]
         ])('%s :: should update state with received value', (mutationName, propertyName, propertyValue) => {
             // Arrange & Act
@@ -380,7 +380,9 @@ describe('CheckoutModule', () => {
                 };
                 axios.patch = jest.fn(() => Promise.resolve({
                     status: 200,
-                    data: {}
+                    data: {
+                        issues
+                    }
                 }));
             });
 

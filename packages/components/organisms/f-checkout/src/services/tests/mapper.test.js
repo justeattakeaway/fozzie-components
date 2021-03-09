@@ -1,4 +1,6 @@
-import { mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames } from '../mapper';
+import {
+    mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode
+} from '../mapper';
 
 const defaultParams = {
     address: {},
@@ -178,16 +180,25 @@ describe('mapAnalyticsNames :: ', () => {
             'city'
         ];
 
-        const expected = [
-            'addressCity',
-            'addressLine1',
-            'email',
-            'firstName',
-            'lastName',
-            'mobilePhone'
-        ];
+        const expected = 'addressCity,addressLine1,email,firstName,lastName,mobilePhone';
 
         // Act & Assert
         expect(mapAnalyticsNames(provided)).toEqual(expected);
+    });
+});
+
+describe('getAnalyticsErrorCodeByApiErrorCode :: ', () => {
+    it.each([
+        ['ITEMS_UNORDERABLE', 'basketNotOrderable'],
+        ['LAST_NAME_REQUIRED', 'invalidModelState'],
+        ['FULFILMENT_TIME_REQUIRED', 'setOrderTime']
+    ])('should correctly map %s to %s', (code, expected) => {
+        // Arrange
+        const error = {
+            code
+        };
+
+        // Act & Assert
+        expect(getAnalyticsErrorCodeByApiErrorCode(error)).toEqual(expected);
     });
 });
