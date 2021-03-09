@@ -2,10 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { select, boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
-import {
-    ENGLISH_LOCALE,
-    SPANISH_LOCALE
-} from '@justeat/storybook/constants/globalisation';
+import { locales } from '@justeat/storybook/constants/globalisation';
 
 import VueCheckout from '../src/components/Checkout.vue';
 import fCheckoutModule from '../src/store/checkout.module';
@@ -67,7 +64,7 @@ export const CheckoutComponent = () => ({
         },
 
         locale: {
-            default: select('Locale', [ENGLISH_LOCALE])
+            default: select('Locale', [locales.gb])
         }
     },
     computed: {
