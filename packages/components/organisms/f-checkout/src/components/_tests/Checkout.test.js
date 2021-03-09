@@ -1453,7 +1453,7 @@ describe('Checkout', () => {
                     expect(redirectToPaymentSpy).toHaveBeenCalled();
                 });
 
-                it('should not call `logInfo` with correct Warning', async () => {
+                it('should call `logInfo` with correct warning', async () => {
                     // Arrange
                     const eventData = {
                         isLoggedIn: false,
