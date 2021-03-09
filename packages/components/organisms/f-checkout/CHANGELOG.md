@@ -3,6 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.67.0
+------------------------------
+*March 9, 2021*
+
+### Added
+- Analytics error tracking.
+- Tests to cover changes.
+
+# Changed
+- `checkout.module` `issues` to `error`.
+
+### Fixed
+- Guest field inputs Vuex mutation error.
+
+
 v0.66.0
 ------------------------------
 *March 5, 2021*
