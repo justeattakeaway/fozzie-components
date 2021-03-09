@@ -23,7 +23,7 @@
             v-else
             data-test-id="guest-checkoutHeader">
             <h2 :class="$style['c-checkoutHeader-title']">
-                {{ $t('checkoutHeader.guest.guestTitle') }}
+                {{ $t('checkoutHeader.guest.loginTitle') }}
             </h2>
 
             <f-button
