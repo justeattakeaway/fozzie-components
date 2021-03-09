@@ -2371,7 +2371,8 @@ describe('Checkout', () => {
                             invalidFields: []
                         };
 
-                        jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
+                        const getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
+                        getFormValidationStateSpy.mockReturnValue(mockValidationState);
 
                         const wrapper = mount(VueCheckout, {
                             store: createStore(),
@@ -2430,7 +2431,8 @@ describe('Checkout', () => {
                             invalidFields: []
                         };
 
-                        jest.spyOn(validations, 'getFormValidationState').mockReturnValue(mockValidationState);
+                        const getFormValidationStateSpy = jest.spyOn(validations, 'getFormValidationState');
+                        getFormValidationStateSpy.mockReturnValue(mockValidationState);
 
                         const wrapper = mount(VueCheckout, {
                             store: createStore(),
@@ -2532,7 +2534,6 @@ describe('Checkout', () => {
                             $logger
                         }
                     });
-
                     const checkoutValidationErrorSpy = jest.spyOn(wrapper.vm, '$emit');
 
                     // Act
