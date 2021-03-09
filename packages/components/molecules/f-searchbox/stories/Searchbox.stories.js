@@ -24,8 +24,7 @@ export const SearchboxComponent = (args, { argTypes }) => ({
             checkout: SearchboxModule
         }
     }),
-    template: '<searchbox ' +
-        ':locale="locale" />'
+    template: '<searchbox :locale="locale" :key="locale" />'
 });
 
 SearchboxComponent.args = {
@@ -34,7 +33,7 @@ SearchboxComponent.args = {
 
 SearchboxComponent.argTypes = {
     locale: {
-        control: { type: 'select', options: [ENGLISH_LOCALE, SPANISH_LOCALE]}
+        control: { type: 'select', options: [ENGLISH_LOCALE, SPANISH_LOCALE] }
     }
 };
 
