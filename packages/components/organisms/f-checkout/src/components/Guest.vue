@@ -3,7 +3,7 @@
         data-test-id="guest-component"
         :class="$style['c-guest']">
         <form-field
-            v-model="customer.firstName"
+            :value="customer.firstName"
             name="guest-first-name"
             :label-text="$t('guest.firstName')"
             @input="updateCustomerDetails({ 'firstName': $event })">
@@ -17,7 +17,7 @@
         </form-field>
 
         <form-field
-            v-model="customer.lastName"
+            :value="customer.lastName"
             name="guest-last-name"
             :label-text="$t('guest.lastName')"
             @input="updateCustomerDetails({ 'lastName': $event })">
@@ -31,7 +31,7 @@
         </form-field>
 
         <form-field
-            v-model="customer.email"
+            :value="customer.email"
             name="guest-email"
             :label-text="$t('guest.email')"
             @input="updateCustomerDetails({ 'email': $event })">

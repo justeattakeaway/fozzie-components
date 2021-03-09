@@ -4,17 +4,18 @@ import { defaultCheckoutState, defaultAnalyticsState } from '../../components/_t
 import { VUEX_CHECKOUT_MODULE } from '../../constants';
 
 import {
-    UPDATE_CHANGED_FIELD,
-    UPDATE_AUTOFILL
+    UPDATE_AUTOFILL,
+    UPDATE_CHANGED_FIELD
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutAnalyticsModule;
 
 const {
-    updateAutofill,
-    updateChangedField,
+    trackFormErrors,
+    trackFormInteraction,
     trackInitialLoad,
-    trackFormInteraction
+    updateAutofill,
+    updateChangedField
 } = actions;
 
 Object.defineProperty(global, 'window', {
@@ -259,7 +260,7 @@ describe('CheckoutAnalyticsModule', () => {
                         action: payload.action,
                         error: null,
                         autofill: state.autofill,
-                        changes: state.changedFields
+                        changes: state.changedFields.toString()
                     }
                 };
                 mapAnalyticsNamesSpy = jest.spyOn(mapper, 'mapAnalyticsNames');
@@ -350,6 +351,34 @@ describe('CheckoutAnalyticsModule', () => {
                 });
             });
         });
+
+        describe('trackFormErrors ::', () => {
+            const errors = ['error 1'];
+            let getAnalyticsErrorCodeByApiErrorCodeSpy;
+
+            beforeEach(() => {
+                getAnalyticsErrorCodeByApiErrorCodeSpy = jest.spyOn(mapper, 'getAnalyticsErrorCodeByApiErrorCode');
+                getAnalyticsErrorCodeByApiErrorCodeSpy.mockImplementation(() => errors);
+
+                rootState[VUEX_CHECKOUT_MODULE].errors = errors;
+            });
+
+            it('should call `getAnalyticsErrorCodeByApiErrorCode` with each error', () => {
+                // Assert
+                trackFormErrors({ rootState, dispatch });
+
+                // Assert
+                expect(getAnalyticsErrorCodeByApiErrorCodeSpy).toHaveBeenCalled();
+            });
+
+            it('should dispatch `trackFormInteraction` with `start` action', () => {
+                // Assert
+                trackFormErrors({ rootState, dispatch });
+
+                // Assert
+                expect(dispatch).toHaveBeenCalledWith('trackFormInteraction', { action: 'error', error: errors });
+            });
+        });
     });
 
     describe('mutations ::', () => {
@@ -386,7 +415,7 @@ describe('CheckoutAnalyticsModule', () => {
         describe(`${UPDATE_AUTOFILL} ::`, () => {
             it('should update state `autofill` with payload', () => {
                 // Arrange
-                const payload = ['addressLine1'];
+                const payload = 'addressLine1';
 
                 // Act
                 mutations[UPDATE_AUTOFILL](state, payload);
