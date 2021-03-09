@@ -16,8 +16,8 @@ exports.config = {
     // ====================
     // Browserstack Credentials
     // ====================
-    user: process.env.BROWSERSTACK_USERNAME || 'joshuang3',
-    key: process.env.BROWSERSTACK_ACCESS_KEY || 'GyiE38j68kPszoFrkS4k',
+    user: process.env.BROWSERSTACK_USERNAME || '',
+    key: process.env.BROWSERSTACK_ACCESS_KEY || '',
 
     browserstackLocal: true,
 
