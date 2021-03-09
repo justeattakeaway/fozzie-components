@@ -1,12 +1,25 @@
+require('@babel/register');
+const browserstack = require('browserstack-local');
 // Used to set correct directories for WDIO test output
 global.baseDir = __dirname;
 
-const { setTestEnvironment, setTestType } = require('./test/utils/configuration-helper');
+const { setTestEnvironment, setTestType, getBaseUrl } = require('./test/utils/configuration-helper');
+const { browserStackCapabilities } = require('./test/utils/browserstack-helper');
 
 const testEnvironment = setTestEnvironment();
 const testType = setTestType();
+const bsCapabilities = browserStackCapabilities();
 
 exports.config = {
+
+
+    // ====================
+    // Browserstack Credentials
+    // ====================
+    user: process.env.BROWSERSTACK_USERNAME || 'joshuang3',
+    key: process.env.BROWSERSTACK_ACCESS_KEY || 'GyiE38j68kPszoFrkS4k',
+
+    browserstackLocal: true,
 
     //
     // ====================
@@ -35,9 +48,6 @@ exports.config = {
     suites: {
         component: [
             './test/specs/component/*.component.spec.js',
-        ],
-        a11y: [
-            './test/specs/accessibility/axe-accessibility.spec.js',
         ]
     },
     //
@@ -62,16 +72,7 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [{
-
-        //
-        browserName: 'chrome',
-        acceptInsecureCerts: true
-        // If outputDir is provided WebdriverIO can capture driver session logs
-        // it is possible to configure which logTypes to include/exclude.
-        // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
-        // excludeDriverLogs: ['bugreport', 'server'],
-    }],
+    capabilities: [].concat(bsCapabilities),
     //
     // ===================
     // Test Configurations
@@ -103,7 +104,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://localhost:8080',
+    baseUrl: getBaseUrl(8080),
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -119,7 +120,7 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['chromedriver'],
+    services: [],
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -142,10 +143,7 @@ exports.config = {
 
     reporters: testEnvironment.reporters,
 
-    afterTest: () => {
-        browser.takeScreenshot();
-        browser.deleteAllCookies();
-    },
+    afterTest: () => { },
 
     //
     // Options to be passed to Mocha.
@@ -169,8 +167,28 @@ exports.config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    // onPrepare: function (config, capabilities) {
-    // },
+    /**
+     * Start browserstack local before start of test
+     */
+    onPrepare: (/* config, capabilities*/) => {
+        console.log('Connecting local'); // eslint-disable-line
+
+        return new Promise((resolve, reject) => {
+            exports.bs_local = new browserstack.Local();
+            exports.bs_local.start({ key: exports.config.key }, error => {
+                if (error) { return reject(error); }
+                console.log('Connected. Now testing...'); // eslint-disable-line
+
+                return resolve();
+            });
+        });
+    },
+    /**
+     * Stop browserstack local after end of test
+     */
+    onComplete: (/* capabilities, specs*/) => {
+        exports.bs_local.stop(() => { });
+    }
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
      * for that worker as well as modify runtime environments in an async fashion.
@@ -267,16 +285,6 @@ exports.config = {
      * @param {Array.<String>} specs List of spec file paths that ran
      */
     // afterSession: function (config, capabilities, specs) {
-    // },
-    /**
-     * Gets executed after all workers got shut down and the process is about to exit. An error
-     * thrown in the onComplete hook will result in the test run failing.
-     * @param {Object} exitCode 0 - success, 1 - fail
-     * @param {Object} config wdio configuration object
-     * @param {Array.<Object>} capabilities list of capabilities details
-     * @param {<Object>} results object containing test results
-     */
-    // onComplete: function(exitCode, config, capabilities, results) {
     // },
     /**
     * Gets executed when a refresh happens.

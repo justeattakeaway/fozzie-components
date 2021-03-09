@@ -580,7 +580,7 @@ v1.30.0
 - `local:tests` script to easily run all tests locally before submitting a PR
 
 ### Changed
-- `wdio.conf.js` compnent test spec directory
+- `wdio-chrome.conf.js` compnent test spec directory
 
 
 v1.29.0
