@@ -108,7 +108,11 @@ import UserNote from './UserNote.vue';
 import ErrorPage from './Error.vue';
 
 import {
+    ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE,
+    ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
+    ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME,
     CHECKOUT_METHOD_DELIVERY,
+    ERROR_CODE_FULFILMENT_TIME_INVALID,
     TENANT_MAP,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
@@ -117,7 +121,7 @@ import {
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
-import { mapUpdateCheckoutRequest } from '../services/mapper';
+import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
 
 export default {
     name: 'VueCheckout',
@@ -211,7 +215,6 @@ export default {
         return {
             tenantConfigs,
             genericErrorMessage: null,
-            shouldDisableCheckoutButton: false,
             hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
             isLoading: false
@@ -241,18 +244,19 @@ export default {
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
             'address',
+            'basket',
             'customer',
+            'errors',
+            'geolocation',
             'id',
             'isFulfillable',
             'isLoggedIn',
             'messages',
             'notices',
+            'orderId',
             'serviceType',
             'time',
-            'userNote',
-            'basket',
-            'orderId',
-            'geolocation'
+            'userNote'
         ]),
 
         isMobileNumberValid () {
@@ -306,17 +310,18 @@ export default {
             'getAddress',
             'getBasket',
             'getCheckout',
-            'updateCheckout',
-            'setAuthToken',
-            'updateCustomerDetails',
-            'updateUserNote',
+            'getGeoLocation',
             'placeOrder',
-            'getGeoLocation'
+            'setAuthToken',
+            'updateCheckout',
+            'updateCustomerDetails',
+            'updateUserNote'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
-            'trackInitialLoad',
-            'trackFormInteraction'
+            'trackFormErrors',
+            'trackFormInteraction',
+            'trackInitialLoad'
         ]),
 
         /**
@@ -358,6 +363,50 @@ export default {
 
                 await this.lookupGeoLocation();
 
+                await this.handleUpdateCheckout();
+
+                if (this.isFulfillable) {
+                    await this.submitOrder();
+
+                    this.$emit(EventNames.CheckoutSuccess, eventData);
+
+                    this.$logger.logInfo(
+                        'Consumer Checkout Successful',
+                        this.$store,
+                        eventData
+                    );
+
+                    this.redirectToPayment();
+                } else {
+                    this.$logger.logWarn(
+                        'Consumer Checkout Not Fulfillable',
+                        this.$store,
+                        eventData
+                    );
+                }
+            } catch (thrownErrors) {
+                eventData.errors = thrownErrors;
+
+                this.$emit(EventNames.CheckoutFailure, eventData);
+
+                this.$logger.logError(
+                    'Consumer Checkout Failure',
+                    this.$store,
+                    eventData
+                );
+            }
+        },
+
+        /**
+         * Handles call of `updateCheckout` and tracks any returned errors.
+         * 1. Maps checkout data.
+         * 2. If form is valid try to call `updateCheckout`.
+         * 3. If `updateCheckout` call succeeds but errors are returned, `trakFormError` is called.
+         * 4. If `updateCheckout` call fails calls `trakFormError` with error type..
+         *
+         */
+        async handleUpdateCheckout () {
+            try {
                 const data = mapUpdateCheckoutRequest({
                     address: this.address,
                     customer: this.customer,
@@ -373,27 +422,15 @@ export default {
                     timeout: this.checkoutTimeout
                 });
 
-                await this.submitOrder();
+                if (this.errors) { // If `updateCheckout` call is successful but returns unfulfillable issues.
+                    this.trackFormErrors();
+                }
+            } catch (ex) {
+                const error = ex.errors.find(err => err.errorCode === ERROR_CODE_FULFILMENT_TIME_INVALID)
+                    ? ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME
+                    : ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE;
 
-                this.$emit(EventNames.CheckoutSuccess, eventData);
-
-                this.$logger.logInfo(
-                    'Consumer Checkout Successful',
-                    this.$store,
-                    eventData
-                );
-
-                this.redirectToPayment();
-            } catch (thrownErrors) {
-                eventData.errors = thrownErrors;
-
-                this.$emit(EventNames.CheckoutFailure, eventData);
-
-                this.$logger.logError(
-                    'Consumer Checkout Failure',
-                    this.$store,
-                    eventData
-                );
+                this.trackFormInteraction({ action: 'error', error: [error] });
             }
         },
 
@@ -629,36 +666,46 @@ export default {
 
         /**
          * Check form is valid - no inline messages
-         * If form is valid try to call `submitCheckout`
-         * Catch and handle any errors
+         * 1. If form is valid try to call `submitCheckout`.
+         * 2. If the form is invalid process error tracking and logging via `onInvalidCheckoutForm()`.
          */
         async onFormSubmit () {
             this.trackFormInteraction({ action: 'submit' });
 
-            if (!this.isFormValid()) {
-                const validationState = validations.getFormValidationState(this.$v);
-
-                this.$emit(EventNames.CheckoutValidationError, validationState);
-                this.trackFormInteraction({ action: 'inline_error', error: validationState.invalidFields });
-
-                this.$logger.logWarn(
-                    'Checkout Validation Error',
-                    this.$store,
-                    validationState
-                );
-                return;
-            }
-
-            this.shouldDisableCheckoutButton = true;
-
-            try {
+            if (this.isFormValid()) {
                 await this.submitCheckout();
-                this.trackFormInteraction({ action: 'success' });
-            } catch (error) {
-                this.handleErrorState(error);
-            } finally {
-                this.shouldDisableCheckoutButton = false;
+            } else {
+                this.onInvalidCheckoutForm();
             }
+        },
+
+        /**
+         * Fired when `isFormValid` returns falsey via `onFormSubmit()` call.
+         * 1. Emit `CheckoutValidationError` for consuming application.
+         * 2. Process tracking with action type and error fields
+         * 3. Log warn.
+         *
+         * */
+        onInvalidCheckoutForm () {
+            const validationState = validations.getFormValidationState(this.$v);
+            const invalidFields = mapAnalyticsNames(validationState.invalidFields);
+
+            this.$emit(EventNames.CheckoutValidationError, validationState);
+            this.trackFormInteraction({
+                action: 'inline_error',
+                error: invalidFields
+            });
+
+            this.trackFormInteraction({
+                action: 'error',
+                error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
+            });
+
+            this.$logger.logWarn(
+                'Checkout Validation Error',
+                this.$store,
+                validationState
+            );
         },
 
         /**
@@ -756,7 +803,7 @@ export default {
     .c-spinner {
         margin: 0 auto;
     }
-  }
+}
 
 .c-checkout {
     padding-top: spacing(x6);

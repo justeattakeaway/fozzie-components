@@ -1,3 +1,9 @@
+import {
+    ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE,
+    ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
+    ANALYTICS_ERROR_CODE_SET_ORDER_TIME
+} from '../constants';
+
 const mapUpdateCheckoutRequest = ({
     address,
     customer = {},
@@ -72,6 +78,12 @@ const analyticFieldNameMapper = {
     'customer.email': 'email'
 };
 
+const updateCheckoutErrors = {
+    [ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE]: ['RESTAURANT_NOT_TAKING_ORDERS', 'SERVICE_TYPE_UNAVAILABLE', 'ITEMS_UNORDERABLE', 'ADDITIONAL_ITEMS_REQUIRED', 'MINIMUM_ORDER_VALUE_NOT_MET', 'LOCATION_UNDELIVERABLE', 'AGE_VERIFICATION_FAILED'],
+    [ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE]: ['FIRST_NAME_REQUIRED', 'LAST_NAME_REQUIRED', 'PHONE_NUMBER_REQUIRED', 'DATE_OF_BIRTH_REQUIRED', 'ADDRESS_LINES_REQUIRED', 'POSTAL_CODE_REQUIRED', 'GEO_LOCATION_REQUIRED'],
+    [ANALYTICS_ERROR_CODE_SET_ORDER_TIME]: ['FULFILMENT_TIME_REQUIRED', 'FULFILMENT_TIME_UNAVAILABLE']
+};
+
 /**
  * Updates passed field name to match the expected analytics name requirements.
  */
@@ -81,6 +93,26 @@ const mapAnalyticsName = field => (analyticFieldNameMapper[field] || field);
  * Updates passed field names to match the expected analytics name requirements.
  * When fields have been mapped, sorts the array alphabetically.
  */
-const mapAnalyticsNames = fields => fields.map(mapAnalyticsName).sort();
+const mapAnalyticsNames = fields => fields.map(mapAnalyticsName).sort().toString();
 
-export { mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames };
+/**
+ * Updates passed api error code to match the expected analytics error requirements.
+ */
+const getAnalyticsErrorCodeByApiErrorCode = error => {
+    let analyticsErrorCode;
+
+    Object.keys(updateCheckoutErrors).forEach(key => {
+        if (updateCheckoutErrors[key].includes(error.code)) {
+            analyticsErrorCode = key;
+        }
+    });
+
+    return analyticsErrorCode;
+};
+
+export {
+    mapUpdateCheckoutRequest,
+    mapAnalyticsName,
+    mapAnalyticsNames,
+    getAnalyticsErrorCodeByApiErrorCode
+};

@@ -47,6 +47,7 @@ const defaultCheckoutState = {
     messages: [],
     authToken: '',
     isLoggedIn: false,
+    errors: [],
     userNote: 'No ketchup, please.',
     geolocation: null
 };
@@ -72,10 +73,11 @@ const defaultCheckoutActions = {
 };
 
 const defaultAnalyticsActions = {
-    updateAutofill: jest.fn(),
-    updateChangedField: jest.fn(),
+    trackFormErrors: jest.fn(),
+    trackFormInteraction: jest.fn(),
     trackInitialLoad: jest.fn(),
-    trackFormInteraction: jest.fn()
+    updateAutofill: jest.fn(),
+    updateChangedField: jest.fn()
 };
 
 const i18n = {

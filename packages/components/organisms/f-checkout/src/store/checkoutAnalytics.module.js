@@ -1,17 +1,19 @@
-import { mapAnalyticsName, mapAnalyticsNames } from '../services/mapper';
+import {
+    mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode
+} from '../services/mapper';
 import { VUEX_CHECKOUT_MODULE } from '../constants';
 
 import {
-    UPDATE_CHANGED_FIELD,
-    UPDATE_AUTOFILL
+    UPDATE_AUTOFILL,
+    UPDATE_CHANGED_FIELD
 } from './mutation-types';
 
 export default {
     namespaced: true,
 
     state: () => ({
-        changedFields: [],
-        autofill: []
+        autofill: [],
+        changedFields: []
     }),
 
     actions: {
@@ -80,16 +82,31 @@ export default {
         trackFormInteraction ({ state, rootState }, { action, error }) {
             const formName = rootState[VUEX_CHECKOUT_MODULE].isLoggedIn ? 'checkout' : 'checkout_guest';
 
-            const mappedError = error ? mapAnalyticsNames(error) : null;
-
             window.dataLayer.push({
                 event: 'Form',
                 form: {
                     name: formName,
                     action,
-                    error: mappedError,
+                    error: error || null,
                     autofill: state.autofill,
-                    changes: state.changedFields
+                    changes: state.changedFields.toString()
+                }
+            });
+        },
+
+        /**
+         *Dispatches `trackFormInteraction` with each error in `state.errors`.
+         */
+        trackFormErrors ({ rootState, dispatch }) {
+            const trackedErrors = [];
+
+            rootState[VUEX_CHECKOUT_MODULE].errors.forEach(error => {
+                const mappedError = getAnalyticsErrorCodeByApiErrorCode(error);
+
+                if (!trackedErrors.includes(mappedError)) {
+                    trackedErrors.push(mappedError);
+
+                    dispatch('trackFormInteraction', { action: 'error', error: mappedError });
                 }
             });
         }
@@ -105,7 +122,7 @@ export default {
         },
 
         [UPDATE_AUTOFILL]: (state, autofill) => {
-            state.autofill = autofill;
+            state.autofill = autofill.toString();
         }
     }
 };
