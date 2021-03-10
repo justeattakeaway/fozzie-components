@@ -4,11 +4,11 @@ const browserstack = require('browserstack-local');
 global.baseDir = __dirname;
 
 const { setTestEnvironment, setTestType, getBaseUrl } = require('./test/utils/configuration-helper');
-const { browserStackCapabilities } = require('./test/utils/browserstack-helper');
+// const { browserStackCapabilities } = require('./test/utils/browserstack-helper');
 
 const testEnvironment = setTestEnvironment();
 const testType = setTestType();
-const bsCapabilities = browserStackCapabilities();
+// const bsCapabilities = browserStackCapabilities();
 
 exports.config = {
 
@@ -18,8 +18,6 @@ exports.config = {
     // ====================
     user: process.env.BROWSERSTACK_USERNAME || '',
     key: process.env.BROWSERSTACK_ACCESS_KEY || '',
-
-    browserstackLocal: true,
 
     //
     // ====================
@@ -72,7 +70,15 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [].concat(bsCapabilities),
+    capabilities: [{
+        os: 'android',
+        os_version: '11.0',
+        browserName: 'chrome',
+        device: 'Google Pixel 4',
+        project: 'Fozzie-Components',
+        build: 'local-browserstack-ben',
+        'browserstack.networkLogs': true
+    }],
     //
     // ===================
     // Test Configurations
@@ -120,7 +126,9 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: [],
+    services: [['browserstack', {
+        browserstackLocal: true
+    }]],
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -143,8 +151,6 @@ exports.config = {
 
     reporters: testEnvironment.reporters,
 
-    afterTest: () => { },
-
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -152,7 +158,8 @@ exports.config = {
         // Babel setup
         require: ['@babel/register'],
         ui: 'bdd',
-        timeout: 60000
+        timeout: 60000,
+        grep: 'mobile'
     },
     //
     // =====
@@ -188,7 +195,7 @@ exports.config = {
      */
     onComplete: (/* capabilities, specs*/) => {
         exports.bs_local.stop(() => { });
-    }
+    },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
      * for that worker as well as modify runtime environments in an async fashion.
@@ -232,8 +239,8 @@ exports.config = {
     // },
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
-     */
-    // beforeTest: () => {
+    //  */
+    // beforeTest: (test) => {
     // },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
@@ -250,8 +257,14 @@ exports.config = {
     /**
      * Function to be executed after a test (in Mocha/Jasmine).
      */
-    // afterTest: () => {
-    //}
+    afterTest: function (test, context, { error, result, duration, passed, retries }) {
+
+        const hasPassed = passed ? 'passed' : failed;
+
+        
+        driver.executeScript(`browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"${hasPassed}","reason": ""}}`);
+        browser.reloadSession();
+    },
 
 
     /**
