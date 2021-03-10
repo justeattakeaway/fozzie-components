@@ -1,10 +1,8 @@
-// Uncomment the import below to add prop controls to your Story (and add `withKnobs` to the decorators array)
-import {
-    select, boolean
-} from '@storybook/addon-knobs';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { withA11y } from '@storybook/addon-a11y';
+import { locales } from '@justeat/storybook/constants/globalisation';
+
 import Searchbox from '../src/components/Base.vue';
 import SearchboxModule from '../src/store/searchbox.module';
 
@@ -15,22 +13,28 @@ export default {
     decorators: [withA11y]
 };
 
-export const SearchboxComponent = () => ({
+export const SearchboxComponent = (args, { argTypes }) => ({
     components: { Searchbox },
-    props: {
-        buttonType: {
-            default: select('Button Type', ['primary', 'primaryAlt', 'secondary', 'tertiary', 'link'])
-        },
-        fullWidth: {
-            default: boolean('fullWidth', false)
-        }
-    },
+    props: Object.keys(argTypes),
     store: new Vuex.Store({
         modules: {
             checkout: SearchboxModule
         }
     }),
-    template: '<searchbox />'
+    template: '<searchbox v-bind="$props" :key="locale" />'
 });
+
+SearchboxComponent.args = {
+    locale: locales.gb
+};
+
+SearchboxComponent.argTypes = {
+    locale: {
+        control: {
+            type: 'select',
+            options: Object.values(locales)
+        }
+    }
+};
 
 SearchboxComponent.storyName = 'f-searchbox';
