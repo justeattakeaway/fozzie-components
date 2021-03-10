@@ -8,7 +8,7 @@ exports.getBaseUrl = (port = 8080) => {
         case 'local':
             return `http://localhost:${port}/`;
         case 'browserstack':
-            return `http://localhost:${port}/`;
+            return `http://bs-local.com:${port}/`;
         default:
             throw new Error(`Sorry, ${JE_ENV} is not recognised.`);
     }

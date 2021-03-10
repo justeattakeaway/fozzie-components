@@ -1,8 +1,8 @@
-const Footer = require('../../../test-utils/component-objects/f-footer.component');
-const footer = new Footer();
 const forEach = require('mocha-each');
+const Footer = require('../../../../test-utils/component-objects/f-footer.component');
+const footer = new Footer();
 
-describe('f-footer component tests', () => {
+describe('Shared - f-footer component tests', () => {
     beforeEach(() => {
         footer.open('gb');
         footer.waitForComponent();
@@ -14,18 +14,19 @@ describe('f-footer component tests', () => {
     });
 
     forEach([['ios', 'apple'], ['android', 'google'], ['huawei', 'appgallery']])
-    .it('should display download icons and link to correct URL', (icon, expectedUrl) => {
+    .it.only('should display download icons and link to correct URL', (icon, expectedUrl) => {
         // Act
         footer.expectedDownloadIcon = icon;
 
         // Assert
         expect(footer.isDownloadIconDisplayed()).toBe(true);
 
-         // Act
-         footer.clickDownloadIcon();
+        // Act
+        footer.clickDownloadIcon();
+        browser.pause(5000);
 
-         // Assert
-         expect(browser.getUrl()).toContain(expectedUrl);
+        // Assert
+        expect(browser.getUrl()).toContain(expectedUrl);
     });
 
     forEach([['twitter', 'twitter.com'], ['facebook', 'facebook.com'], ['youtube', 'youtube.com']])

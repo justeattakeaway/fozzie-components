@@ -34,7 +34,7 @@ exports.config = {
     // Suites
     suites: {
         component: [
-            './test/specs/component/*.component.spec.js',
+            './test/specs/component/**/*.component.spec.js',
         ],
         a11y: [
             './test/specs/accessibility/axe-accessibility.spec.js',

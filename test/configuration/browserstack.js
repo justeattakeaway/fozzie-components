@@ -10,4 +10,4 @@ const configuration = () => ({
     }
 });
 
-export default configuration;
+exports.default = configuration;

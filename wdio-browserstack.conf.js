@@ -4,11 +4,11 @@ const browserstack = require('browserstack-local');
 global.baseDir = __dirname;
 
 const { setTestEnvironment, setTestType, getBaseUrl } = require('./test/utils/configuration-helper');
-// const { browserStackCapabilities } = require('./test/utils/browserstack-helper');
+const { browserStackCapabilities } = require('./test/utils/browserstack-helper');
 
 const testEnvironment = setTestEnvironment();
 const testType = setTestType();
-// const bsCapabilities = browserStackCapabilities();
+const bsCapabilities = browserStackCapabilities();
 
 exports.config = {
 
@@ -44,8 +44,14 @@ exports.config = {
 
     // Suites
     suites: {
-        component: [
-            './test/specs/component/*.component.spec.js',
+        shared: [
+            './test/specs/component/shared/*.component.spec.js',
+        ],
+        desktop: [
+            './test/specs/component/desktop/*.component.spec.js',
+        ],
+        mobile: [
+            './test/specs/component/mobile/*.component.spec.js',
         ]
     },
     //
@@ -70,15 +76,7 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [{
-        os: 'android',
-        os_version: '11.0',
-        browserName: 'chrome',
-        device: 'Google Pixel 4',
-        project: 'Fozzie-Components',
-        build: 'local-browserstack-ben',
-        'browserstack.networkLogs': true
-    }],
+    capabilities: [].concat(bsCapabilities),
     //
     // ===================
     // Test Configurations
@@ -158,8 +156,7 @@ exports.config = {
         // Babel setup
         require: ['@babel/register'],
         ui: 'bdd',
-        timeout: 60000,
-        grep: 'mobile'
+        timeout: 60000
     },
     //
     // =====
@@ -257,11 +254,10 @@ exports.config = {
     /**
      * Function to be executed after a test (in Mocha/Jasmine).
      */
-    afterTest: function (test, context, { error, result, duration, passed, retries }) {
+    afterTest: (test, context, { error, result, duration, passed, retries }) => {
 
         const hasPassed = passed ? 'passed' : failed;
 
-        
         driver.executeScript(`browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"${hasPassed}","reason": ""}}`);
         browser.reloadSession();
     },

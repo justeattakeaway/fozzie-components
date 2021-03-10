@@ -16342,7 +16342,7 @@ mocha-each@2.0.1:
   dependencies:
     sprintf-js "^1.0.3"
 
-mocha-tags@^1.0.1:
+mocha-tags@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/mocha-tags/-/mocha-tags-1.0.1.tgz#446f9d8d1bc4d39a86f578c6c9a4d86d0cc0fe3f"
   integrity sha1-RG+djRvE05qG9XjGyaTYbQzA/j8=

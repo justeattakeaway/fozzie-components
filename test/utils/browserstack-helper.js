@@ -48,5 +48,6 @@ exports.browserStackCapabilities = () => {
     if (CIRCLE_CI) {
         return exports.circleCICapabilities();
     }
+    console.log(exports.localCapabilities());
     return exports.localCapabilities();
 };
