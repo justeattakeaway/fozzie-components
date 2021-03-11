@@ -3,51 +3,35 @@ export default {
     linkLists: {
         customerService: {
             title: 'Kundeservice',
-            links: [
-                {
-                    url: '/account/login/',
-                    text: 'Log ind',
-                    gtm: 'click_service_login'
-                },
-                {
-                    url: '/account/registe',
-                    text: 'Opret bruger',
-                    gtm: 'click_service_signup'
-                },
-                {
-                    url: '/help',
-                    text: 'Hjælp',
-                    gtm: 'click_service_help'
-                },
-                {
-                    url: '/account/',
-                    text: 'Brugerinformation',
-                    gtm: 'click_service_account'
-                },
-                {
-                    url: '/blog',
-                    text: 'Just Eat Blog',
-                    gtm: 'click_service_blog'
-                }
-            ]
+            links: []
         },
         cuisines: {
             title: 'Hvad har du lyst til?',
             links: [
+                {
+                    url: '/takeaway/premium-gourmet',
+                    text: 'Premium & Gourmet',
+                    gtm: 'click_cuisine_premium' 
+                },
                 {
                     url: '/takeaway/italiensk',
                     text: 'Pizza',
                     gtm: 'click_cuisine_pizza'
                 },
                 {
-                    url: '/takeaway/sushi',
-                    text: 'Sushi',
-                    gtm: 'click_cuisine_sushi'
+                    url: '/takeaway/amerikansk',
+                    text: 'Burger',
+                    gtm: 'click_cuisine_american'
                 },
                 {
-                    url: '/takeaway/indisk',
-                    text: 'Indisk',
-                    gtm: 'click_cuisine_indian'
+                    url: '/takeaway/mexicansk/',
+                    text: 'Mexikansk',
+                    gtm: 'click_cuisine_mexican'
+                },
+                {
+                    url: '/takeaway/sushi/',
+                    text: 'Sushi',
+                    gtm: 'click_cuisine_sushi'
                 },
                 {
                     url: '/takeaway/kinesisk',
@@ -55,17 +39,12 @@ export default {
                     gtm: 'click_cuisine_chinese'
                 },
                 {
-                    url: '/takeaway/amerikansk',
-                    text: 'Amerikansk & burger',
-                    gtm: 'click_cuisine_american'
+                    url: '/takeaway/indisk',
+                    text: 'Indisk',
+                    gtm: 'click_cuisine_indian'
                 },
                 {
-                    url: '/takeaway/premium-gourmet',
-                    text: 'Premium & Gourmet',
-                    gtm: 'click_cuisine_premium_gourmet'
-                },
-                {
-                    url: '/takeaway/typer-foedevarer',
+                    url: '/takeaway',
                     text: 'Alle køkkentyper',
                     gtm: 'click_cuisine_view_all'
                 }
@@ -75,17 +54,12 @@ export default {
             title: 'Find din by',
             links: [
                 {
-                    url: '/takeaway/koebenhavn',
-                    text: 'København',
+                    url: '/takeaway/koebenhavn/',
+                    text: 'København K',
                     gtm: 'click_location_copenhagen'
                 },
                 {
-                    url: '/takeaway/roskilde',
-                    text: 'Roskilde',
-                    gtm: 'click_location_roskilde'
-                },
-                {
-                    url: '/takeaway/aarhus',
+                    url: '/takeaway/aarhus/',
                     text: 'Aarhus',
                     gtm: 'click_location_aarhus'
                 },
@@ -100,8 +74,13 @@ export default {
                     gtm: 'click_location_aalborg'
                 },
                 {
-                    url: '/takeaway/alle-byer',
-                    text: 'Flere byer',
+                    url: '/takeaway/roskilde',
+                    text: 'Roskilde',
+                    gtm: 'click_location_roskilde'
+                },
+                {
+                    url: '/takeaway/alle-byer/',
+                    text: 'Alle byer',
                     gtm: 'click_location_view_all'
                 }
             ]
@@ -114,29 +93,14 @@ export default {
             title: 'Om os',
             links: [
                 {
-                    url: '/about',
+                    url: '/info/coronavirus',
+                    text: 'Coronavirus',
+                    gtm: 'click_about_coronavirus'
+                },
+                {
+                    url: '/info/hvem-er-vi',
                     text: 'Hvem er vi',
                     gtm: 'click_about_about_us'
-                },
-                {
-                    url: '/info/privatlivspolitik',
-                    text: 'Fortrolighedspolitik',
-                    gtm: 'click_about_privacy_policy'
-                },
-                {
-                    url: '/info/vilkar-og-betingelser',
-                    text: 'Vilkår og betingelser',
-                    gtm: 'click_about_tandcs'
-                },
-                {
-                    url: '/info/cookiepolitik',
-                    text: 'Cookiepolitik',
-                    gtm: 'click_about_cookie_policy'
-                },
-                {
-                    url: '/takeaway/firmaaftale',
-                    text: 'Få en firmaaftale',
-                    gtm: 'click_about_work_with_us'
                 },
                 {
                     url: 'https://giftcard-engine.gogift.com/DK/shop/justeatdk#/giftcards',
@@ -144,9 +108,34 @@ export default {
                     gtm: 'click_about_giftcard'
                 },
                 {
-                    url: '/takeaway/prisgaranti/',
+                    url: '/info/prisgaranti',
                     text: 'Prisgaranti',
                     gtm: 'click_about_best_price_guarantee'
+                },
+                {
+                    url: 'https://restaurants.just-eat.dk/',
+                    text: 'Få din restaurant på Just Eat',
+                    gtm: 'click_about_restaurant_signup'
+                },
+                {
+                    url: 'https://connect.just-eat.dk/',
+                    text: 'Partner Center',
+                    gtm: 'click_about_partner_center'
+                },
+                {
+                    url: '/info/cookiepolitik',
+                    text: 'Cookiepolitik',
+                    gtm: 'click_about_cookie_policy'
+                },
+                {
+                    url: '/info/privatlivspolitik',
+                    text: 'Privatlivspolitik',
+                    gtm: 'click_about_privacy_policy'
+                },
+                {
+                    url: '/info/vilkar-og-betingelser',
+                    text: 'Vilkår og betingelser',
+                    gtm: 'click_about_tandcs'
                 }
             ]
         }
@@ -172,6 +161,12 @@ export default {
     sendFeedback: 'Send feedback',
     followUs: 'Følg os',
     socialIcons: [
+        { 
+            url: '/blog',
+            name: 'rss',
+            alt: 'Blog',
+            gtm: 'click_service_blog'
+        },
         {
             url: 'https://www.facebook.com/JustEatDK/',
             name: 'facebook',
@@ -183,12 +178,6 @@ export default {
             name: 'twitter',
             alt: 'Twitter',
             gtm: 'click_follow_twitter'
-        },
-        {
-            url: 'https://www.instagram.com/justeatdk/?hl=dk',
-            name: 'instagram',
-            alt: 'Instagram',
-            gtm: 'click_follow_instagram'
         }
     ],
     currentCountryName: 'Danmark',

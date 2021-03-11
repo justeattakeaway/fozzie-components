@@ -3,57 +3,35 @@ export default {
     linkLists: {
         customerService: {
             title: 'Kundeservice',
-            links: [
-                {
-                    url: '/account/login',
-                    text: 'Logg inn',
-                    rel: 'nofollow',
-                    gtm: 'click_service_login'
-                },
-                {
-                    url: '/account/register',
-                    text: 'Registrer',
-                    gtm: 'click_service_signup'
-                },
-                {
-                    url: '/account',
-                    text: 'Kontoinformasjon',
-                    gtm: 'click_service_account'
-                },
-                {
-                    url: '/help',
-                    text: 'Hjelp',
-                    gtm: 'click_service_help'
-                }
-            ]
+            links: []
         },
         cuisines: {
             title: 'Hva frister?',
             links: [
                 {
-                    url: '/take-away/pizza',
-                    text: 'Pizza',
-                    gtm: 'click_cuisine_pizza'
-                },
-                {
-                    url: '/take-away/sushi',
-                    text: 'Sushi',
-                    gtm: 'click_cuisine_sushi'
-                },
-                {
-                    url: '/take-away/indisk',
+                    url: '/take-away/inaerheten/indisk',
                     text: 'Indisk',
-                    gtm: 'click_cuisine_indian'
+                    gtm: 'click_hva_indisk'
                 },
                 {
-                    url: '/take-away/thaimat',
-                    text: 'Thaimat',
-                    gtm: 'click_cuisine_thai'
-                },
-                {
-                    url: '/take-away/kebab',
+                    url: '/take-away/inaerheten/kebab',
                     text: 'Kebab',
-                    gtm: 'click_cuisine_kebab'
+                    gtm: 'click_hva_kebab'
+                },
+                {
+                    url: '/take-away/inaerheten/pizza',
+                    text: 'Pizza',
+                    gtm: 'click_hva_pizza'
+                },
+                {
+                    url: '/take-away/inaerheten/sushi',
+                    text: 'Sushi',
+                    gtm: 'click_hva_sushi'
+                },
+                {
+                    url: '/take-away/inaerheten/thai',
+                    text: 'Thaimat',
+                    gtm: 'click_hva_thaimat'
                 }
             ]
         },
@@ -61,49 +39,49 @@ export default {
             title: 'Finn din by',
             links: [
                 {
-                    url: '/take-away/Oslo',
-                    text: 'Oslo',
-                    gtm: 'click_location_oslo'
-                },
-                {
-                    url: '/take-away/Bergen',
-                    text: 'Bergen',
-                    gtm: 'click_location_bergen'
-                },
-                {
-                    url: '/take-away/Trondheim',
-                    text: 'Trondheim',
-                    gtm: 'click_location_trondheim'
-                },
-                {
-                    url: '/take-away/Drammen',
-                    text: 'Drammen',
-                    gtm: 'click_location_drammen'
-                },
-                {
-                    url: '/take-away/Fredrikstad',
-                    text: 'Fredrikstad',
-                    gtm: 'click_location_fredrikstad'
-                },
-                {
-                    url: '/take-away/Asker',
+                    url: '/area/1371-asker',
                     text: 'Asker & Bærum',
-                    gtm: 'click_location_asker'
+                    gtm: 'click_finn_asker_baerum'
                 },
                 {
-                    url: '/take-away/Skien/',
-                    text: 'Skien',
-                    gtm: 'click_location_skien'
+                    url: '/take-away/bergen/',
+                    text: 'Bergen',
+                    gtm: 'click_finn_bergen'
                 },
                 {
-                    url: '/take-away/Moss/',
+                    url: '/take-away/drammen/',
+                    text: 'Drammen',
+                    gtm: 'click_finn_drammen'
+                },
+                {
+                    url: '/take-away/fredrikstad/',
+                    text: 'Fredrikstad',
+                    gtm: 'click_finn_fredrikstad'
+                },
+                {
+                    url: '/take-away/moss/',
                     text: 'Moss',
-                    gtm: 'click_location_moss'
+                    gtm: 'click_finn_moss'
                 },
                 {
-                    url: '/take-away/Sarpsborg/',
+                    url: '/take-away/oslo/',
+                    text: 'Oslo',
+                    gtm: 'click_finn_oslo'
+                },
+                {
+                    url: '/take-away/sarpsborg/',
                     text: 'Sarpsborg',
-                    gtm: 'click_location_sarpsborg'
+                    gtm: 'click_finn_sarpsborg'
+                },
+                {
+                    url: '/take-away/skien/',
+                    text: 'Skien',
+                    gtm: 'click_finn_skien'
+                },
+                {
+                    url: '/take-away/trondheim/',
+                    text: 'Trondheim',
+                    gtm: 'click_finn_trondheim'
                 }
             ]
         },
@@ -115,34 +93,44 @@ export default {
             title: 'Om oss',
             links: [
                 {
-                    url: '/take-away/bedrift-overtidsmat',
+                    url: '/info/koronavirus',
+                    text: 'Koronavirus',
+                    gtm: 'click_om_oss_koronavirus'
+                },
+                {
+                    url: '/info/bedrift-overtidsmat',
                     text: 'Bli med på Just Eat!',
-                    gtm: 'click_about_restaurant_signup'
+                    gtm: 'click_om_oss_bli_med'
+                },
+                {
+                    url: '/info/cookie-politikk',
+                    text: 'Cookie politikk',
+                    gtm: 'click_om_oss_cookie_politikk'
+                },
+                {
+                    url: 'https://giftcard-engine.gogift.com/no/shop/justeatno/#/giftcards',
+                    text: 'Gavekort til Just Eat',
+                    gtm: 'click_om_oss_gavekort'
+                },
+                {
+                    url: '/help',
+                    text: 'Om oss',
+                    gtm: 'click_om_oss_om'
                 },
                 {
                     url: 'https://partner.just-eat.no/',
                     text: 'Partner Center',
-                    gtm: 'click_about_partner_centre'
+                    gtm: 'click_om_oss_partner_center'
                 },
                 {
-                    url: '/info/privacy-policy',
+                    url: '/info/personvernerklæring',
                     text: 'Personvernerklæring',
-                    gtm: 'click_about_privacy_policy'
+                    gtm: 'click_om_oss_personvernerklaering'
                 },
                 {
-                    url: '/info/cookies-policy',
-                    text: 'Cookie politikk',
-                    gtm: 'click_about_cookie_policy'
-                },
-                {
-                    url: '/help/',
-                    text: 'Om Just Eat',
-                    gtm: 'click_about_help'
-                },
-                {
-                    url: 'https://giftcard-engine.gogift.com/NO/shop/justeatno/#/giftcards',
-                    text: 'Gavekort til Just Eat',
-                    gtm: 'click_about_giftcards'
+                    url: '/info/vilkar-og-betingelser',
+                    text: 'Vilkår og betingelser',
+                    gtm: 'click_om_oss_vilkar_og_beringelser'
                 }
             ]
         }
@@ -173,6 +161,12 @@ export default {
             name: 'facebook',
             alt: 'Facebook',
             gtm: 'click_follow_facebook'
+        },
+        { 
+            url: '/blog',
+            name: 'rss',
+            alt: 'Blog',
+            gtm: 'click_service_blog'
         }
     ],
     currentCountryName: 'Norge',

@@ -5,29 +5,19 @@ export default {
             title: 'Servizio Clienti',
             links: [
                 {
-                    url: '/account/login/',
-                    text: 'Accedi',
-                    gtm: 'click_service_login'
+                    url: '/apps',
+                    text: 'Apps',
+                    gtm: 'click_service_apps'
                 },
                 {
-                    url: '/account/register/',
-                    text: 'Registrati',
-                    gtm: 'click_service_signup'
-                },
-                {
-                    url: '/blog/',
-                    text: 'Blog',
-                    gtm: 'click_service_blog'
-                },
-                {
-                    url: '/account/info/',
-                    text: 'Il mio account',
-                    gtm: 'click_service_account'
-                },
-                {
-                    url: '/help/',
-                    text: 'Aiuto?',
+                    url: '/help',
+                    text: 'Domande frequenti',
                     gtm: 'click_service_help'
+                },
+                {
+                    url: '/informazioni/miglior-prezzo-garantito',
+                    text: 'Miglior Prezzo Garantito',
+                    gtm: 'click_service_best_price'
                 }
             ]
         },
@@ -35,19 +25,9 @@ export default {
             title: 'Cucine',
             links: [
                 {
-                    url: '/domicilio/vicino-a-me/pizza/',
-                    text: 'Pizza a domicilio',
-                    gtm: 'click_cuisine_pizza'
-                },
-                {
-                    url: '/domicilio/vicino-a-me/cinese',
+                    url: '/domicilio/vicino-a-me/cinese/',
                     text: 'Cinese a domicilio',
                     gtm: 'click_cuisine_chinese'
-                },
-                {
-                    url: '/domicilio/vicino-a-me/sushi-giapponese/',
-                    text: 'Sushi a domicilio',
-                    gtm: 'click_cuisine_sushi'
                 },
                 {
                     url: '/domicilio/vicino-a-me/kebab/',
@@ -55,12 +35,17 @@ export default {
                     gtm: 'click_cuisine_kebab'
                 },
                 {
-                    url: '/domicilio/vicino-a-me/hamburger',
-                    text: 'Hamburger a domicilio',
-                    gtm: 'click_cuisine_hamburger'
+                    url: '/domicilio/vicino-a-me/pizza/',
+                    text: 'Pizza a domicilio',
+                    gtm: 'click_cuisine_pizza'
                 },
                 {
-                    url: '/domicilio/vicino-a-me/',
+                    url: '/domicilio/vicino-a-me/sushi/',
+                    text: 'Sushi a domicilio',
+                    gtm: 'click_cuisine_sushi'
+                },
+                {
+                    url: '/domicilio/vicino-a-me/tipi-cucina/',
                     text: 'Tutti i tipi di cucine',
                     gtm: 'click_cuisine_view_all'
                 }
@@ -70,14 +55,19 @@ export default {
             title: 'Città',
             links: [
                 {
-                    url: '/domicilio/palermo/',
-                    text: 'Palermo',
-                    gtm: 'click_location_palermo'
+                    url: '/domicilio/bologna/',
+                    text: 'Bologna',
+                    gtm: 'click_location_bologna'
                 },
                 {
-                    url: '/domicilio/roma/',
-                    text: 'Roma',
-                    gtm: 'click_location_rome'
+                    url: '/domicilio/ferrara/',
+                    text: 'Ferrara',
+                    gtm: 'click_location_ferrara'
+                },
+                {
+                    url: '/domicilio/genova/',
+                    text: 'Genova',
+                    gtm: 'click_location_genoa'
                 },
                 {
                     url: '/domicilio/milano/',
@@ -90,37 +80,27 @@ export default {
                     gtm: 'click_location_naples'
                 },
                 {
-                    url: '/domicilio/torino/',
-                    text: 'Torino',
-                    gtm: 'click_location_turin'
-                },
-                {
-                    url: '/domicilio/bologna/',
-                    text: 'Bologna',
-                    gtm: 'click_location_bologna'
-                },
-                {
-                    url: '/domicilio/ferrara',
-                    text: 'Ferrara',
-                    gtm: 'click_location_ferrara'
-                },
-                {
-                    url: '/domicilio/genova',
-                    text: 'Genova',
-                    gtm: 'click_location_genoa'
-                },
-                {
-                    url: '/domicilio/padova',
+                    url: '/domicilio/padova/',
                     text: 'Padova',
                     gtm: 'click_location_padua'
                 },
                 {
-                    url: '/domicilio/parma',
+                    url: '/domicilio/palermo/',
+                    text: 'Palermo',
+                    gtm: 'click_location_palermo'
+                },
+                {
+                    url: '/domicilio/parma/',
                     text: 'Parma',
                     gtm: 'click_location_parma'
                 },
                 {
-                    url: '/domicilio/citta/',
+                    url: '/domicilio/roma/',
+                    text: 'Roma',
+                    gtm: 'click_location_rome'
+                },
+                {
+                    url: '/domicilio',
                     text: 'Tutte le città',
                     gtm: 'click_location_view_all'
                 }
@@ -134,59 +114,54 @@ export default {
             title: 'Chi siamo',
             links: [
                 {
-                    url: '/informazioni/privacy-policy/',
-                    text: 'Informativa sulla Privacy',
-                    gtm: 'click_about_privacy_policy'
+                    url: '/informazioni/about-us',
+                    text: 'Informazioni su Just Eat',
+                    gtm: 'click_chi_siamo_informazioni'
                 },
                 {
-                    url: '/informazioni/codice-etico/',
+                    url: '/informazioni/codice-etico',
                     text: 'Codice Etico',
-                    gtm: 'click_about_ethical-code'
+                    gtm: 'click_chi_siamo_codiceetico'
+                },
+                {
+                    url: 'https://ristoranti.justeat.it/',
+                    text: 'Diventa partner di Just Eat',
+                    gtm: 'click_chi_siamo_ristoranti'
+                },
+                {
+                    url: 'https://rider.justeat.it/application',
+                    text: 'Diventa un Rider',
+                    gtm: 'click_chi_siamo_diventa_un_rider'
+                },
+                {
+                    url: '/informazioni/lavora-con-noi',
+                    text: 'Lavora con noi',
+                    gtm: 'click_chi_siamo_lavora_con_noi'
+                },
+                {
+                    url: '/informazioni/media-and-press',
+                    text: 'Media & Press',
+                    gtm: 'click_chi_siamo_media_and_press'
+                },
+                {
+                    url: 'https://partner.justeat.it/',
+                    text: 'Partner Center',
+                    gtm: 'click_chi_siamo_partner_center'
+                },
+                {
+                    url: '/informazioni/privacy-policy',
+                    text: 'Informativa sulla Privacy',
+                    gtm: 'click_chi_siamo_informativa_sulla_privacy'
+                },
+                {
+                    url: '/informazioni/politica-dei-cookie',
+                    text: 'Politica dei cookie',
+                    gtm: 'click_chi_siamo_cookies_policy'
                 },
                 {
                     url: '/informazioni/termini-e-condizioni',
                     text: 'Termini e Condizioni',
-                    gtm: 'click_about_tandcs'
-                },
-                {
-                    url: '/informazioni/politica-dei-cookie/',
-                    text: 'Cookie Policy',
-                    gtm: 'click_about_cookie_policy'
-                },
-                {
-                    url: '/informazioni/about-us/',
-                    text: 'Informazioni su Just Eat',
-                    gtm: 'click_about_about_us'
-                },
-                {
-                    url: '/help/',
-                    text: 'Domande frequenti',
-                    gtm: 'click_about_help'
-                },
-                {
-                    url: '/informazioni/miglior-prezzo-garantito/',
-                    text: 'Miglior Prezzo Garantito',
-                    gtm: 'click_about_best_price_guarantee'
-                },
-                {
-                    url: '/informazioni/suggerisci-un-ristorante',
-                    text: 'Suggerisci un ristorante',
-                    gtm: 'click_about_suggest_a_restaurant'
-                },
-                {
-                    url: '/informazioni/lavora-con-noi/',
-                    text: 'Lavora con noi',
-                    gtm: 'click_about_work_with_us'
-                },
-                {
-                    url: '/informazioni/driver-partner/',
-                    text: 'Diventa un Rider',
-                    gtm: 'click_about_couriers'
-                },
-                {
-                    url: 'https://partner.justeat.it/',
-                    text: 'Partner Centre',
-                    gtm: 'click_about_partner_centre'
+                    gtm: 'click_chi_siamo_termini_e_condizioni'
                 }
             ]
         }
@@ -223,6 +198,12 @@ export default {
             name: 'twitter',
             alt: 'Twitter',
             gtm: 'click_follow_twitter'
+        },
+        { 
+            url: '/blog',
+            name: 'rss',
+            alt: 'Blog',
+            gtm: 'click_service_blog'
         }
     ],
     currentCountryName: 'Italia',

@@ -5,7 +5,7 @@ export default {
             title: 'Customer service',
             links: [
                 {
-                    url: '/contact',
+                    url: '/help',
                     text: 'Contact us',
                     gtm: 'click_service_contact_us'
                 },
@@ -21,19 +21,29 @@ export default {
                     gtm: 'click_service_signup'
                 },
                 {
-                    url: '/blog',
-                    text: 'Blog',
-                    gtm: 'click_service_blog'
-                },
-                {
-                    url: '/apps',
-                    text: 'Mobile apps',
+                    url: '/info/apps',
+                    text: 'Mobile Apps',
                     gtm: 'click_service_apps'
                 },
                 {
                     url: '/member/updateuserinfo',
                     text: 'My account',
                     gtm: 'click_service_account'
+                },
+                {
+                    url: '/giftcards/redeem',
+                    text: 'Redeem a Giftcard',
+                    gtm: 'click_service_redeem_giftcard'
+                },
+                {
+                    url: 'https://giftcards.just-eat.co.uk',
+                    text: 'Buy a Giftcard',
+                    gtm: 'click_service_buy_giftcard'
+                },
+                {
+                    url: '/blog/local/local-legends-the-best-takeaways-in-your-area',
+                    text: 'Local Legends',
+                    gtm: 'click_service_local_legends'
                 }
             ]
         },
@@ -56,14 +66,14 @@ export default {
                     gtm: 'click_cuisine_italian'
                 },
                 {
-                    url: '/takeaway/nearme/sushi',
-                    text: 'Sushi',
-                    gtm: 'click_cuisine_sushi'
-                },
-                {
                     url: '/takeaway/nearme/pizza',
                     text: 'Pizza',
                     gtm: 'click_cuisine_pizza'
+                },
+                {
+                    url: '/takeaway/nearme/sushi',
+                    text: 'Sushi',
+                    gtm: 'click_cuisine_japanese'
                 },
                 {
                     url: '/takeaway/nearme',
@@ -73,7 +83,7 @@ export default {
             ]
         },
         locations: {
-            title: 'Locations',
+            title: 'Popular locations',
             links: [
                 {
                     url: '/takeaway/birmingham',
@@ -108,7 +118,7 @@ export default {
             ]
         },
         brands: {
-            title: 'Brands',
+            title: 'Top brands',
             links: [
                 {
                     url: '/takeaway/brands/kfc',
@@ -118,7 +128,12 @@ export default {
                 {
                     url: '/takeaway/brands/burger-king',
                     text: 'Burger King',
-                    gtm: 'click_brands_burger-king'
+                    gtm: 'click_brands_burger_king'
+                },
+                {
+                    url: '/takeaway/brands/pizza-hut',
+                    text: 'Pizza Hut',
+                    gtm: 'click_brands_pizzahut'
                 },
                 {
                     url: '/takeaway/brands/subway',
@@ -127,8 +142,8 @@ export default {
                 },
                 {
                     url: '/takeaway/brands/yo-sushi',
-                    text: 'Yo! Sushi',
-                    gtm: 'click_brands_yo-sushi'
+                    text: 'YO! Sushi',
+                    gtm: 'click_brands_yo'
                 },
                 {
                     url: '/takeaway/brands',
@@ -138,7 +153,7 @@ export default {
             ]
         },
         aboutUs: {
-            title: 'A bit more about us',
+            title: 'Get to know us',
             links: [
                 {
                     url: 'https://restaurants.just-eat.co.uk/',
@@ -146,13 +161,18 @@ export default {
                     gtm: 'click_about_restaurant_signup'
                 },
                 {
+                    url: 'https://couriers.just-eat.co.uk/application',
+                    text: 'Deliver with Just Eat',
+                    gtm: 'click_about_couriers_signup'
+                },
+                {
                     url: '/pricepromise',
                     text: 'Price promise',
-                    gtm: 'click_about_price_promise'
+                    gtm: 'click_service_price_promise'
                 },
                 {
                     url: '/info/privacy-policy',
-                    text: 'Privacy policy',
+                    text: 'Privacy Policy',
                     gtm: 'click_about_privacy_policy'
                 },
                 {
@@ -166,13 +186,13 @@ export default {
                     gtm: 'click_about_cookie_policy'
                 },
                 {
-                    url: 'https://www.just-eat.com/about-us',
+                    url: 'https://www.justeatplc.com/about-us/our-business',
                     text: 'About Just Eat',
                     gtm: 'click_about_about_us'
                 },
                 {
                     url: 'https://www.just-eat.com/',
-                    text: 'Company website',
+                    text: 'Company Website',
                     gtm: 'click_about_company'
                 },
                 {
@@ -181,7 +201,7 @@ export default {
                     gtm: 'click_about_careers'
                 },
                 {
-                    url: 'https://www.just-eat.co.uk/CmsAssets/media/Files/Common/legal/modern-slavery-statement/JEL-Modern-Slavery-Statement-2019-FINAL.pdf?bid=84c6585fdc794d4fa4b917b8cedb9ff5',
+                    url: '/CmsAssets/media/Files/Common/legal/modern-slavery-statement/JEL-Modern-Slavery-Statement-2019-FINAL.pdf?bid=8ff01332a5ce434da3cb056f0938b617',
                     text: 'Modern Slavery Statement',
                     target: '_blank',
                     rel: 'noopener',
@@ -217,11 +237,23 @@ export default {
     sendFeedback: 'Send feedback',
     followUs: 'Follow us',
     socialIcons: [
+        { 
+            url: '/blog',
+            name: 'rss',
+            alt: 'Just Eat Blog',
+            gtm: 'click_service_blog'
+        },
         {
             url: 'https://www.facebook.com/justeat',
             name: 'facebook',
             alt: 'Just Eat on Facebook (leads to external site)',
             gtm: 'click_follow_facebook'
+        },
+        {
+            url: 'https://www.instagram.com/justeatuk/',
+            name: 'instagram',
+            alt: 'Just Eat on Instagram (leads to external site)',
+            gtm: 'click_follow_instagram'
         },
         {
             url: 'https://twitter.com/JustEatUK',
