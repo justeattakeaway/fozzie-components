@@ -230,7 +230,9 @@
 #           name: Run WebDriverIO Component
 #           command: yarn test-component:chrome
 #       - store_artifacts:
-#           path: _results_/*.mp4
+#           path: test/results/allure/failure-videos
+#       - store_test_results:
+#           path: test/results/ci
 
 #   accessibility_tests:
 #     executor: node
@@ -252,7 +254,9 @@
 #           name: Run WebDriverIO Accessibility Tests
 #           command: yarn test-a11y:chrome
 #       - store_artifacts:
-#           path: axe-violations/
+#           path: tests/results/axe-violations
+#       - store_test_results:
+#           path: test/results/ci
 
 #   bundlewatch:
 #     executor: node

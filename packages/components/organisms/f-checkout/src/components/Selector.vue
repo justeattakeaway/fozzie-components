@@ -13,7 +13,7 @@
 import { mapActions, mapState } from 'vuex';
 import FormDropdown from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import { CHECKOUT_METHOD_DELIVERY } from '../constants';
+import { CHECKOUT_METHOD_DELIVERY, VUEX_CHECKOUT_ANALYTICS_MODULE, VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
     components: { FormDropdown },
@@ -25,7 +25,7 @@ export default {
     },
 
     computed: {
-        ...mapState('checkout', [
+        ...mapState(VUEX_CHECKOUT_MODULE, [
             'availableFulfilment',
             'serviceType'
         ]),
@@ -65,8 +65,12 @@ export default {
     },
 
     methods: {
-        ...mapActions('checkout', [
+        ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateFulfilmentTime'
+        ]),
+
+        ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
+            'updateChangedField'
         ]),
 
         /**
@@ -76,6 +80,7 @@ export default {
         **/
         selectionChanged (selectedFulfilmentTime) {
             this.selectedAvailableFulfilmentTime = selectedFulfilmentTime;
+            this.updateChangedField('orderTime');
 
             // TODO - Update to use different from/to times when the API supports it
             this.updateFulfilmentTime({

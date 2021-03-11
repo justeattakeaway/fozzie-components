@@ -1,6 +1,23 @@
-const alertComponent = () => $('[data-test-id="alert-component"]');
-const exitAlertButton = () => $('[data-test-id="alert-dismiss"]'); 
+const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-exports.isAlertDisplayed = () => alertComponent().isDisplayed();
-exports.waitForAlert = () => alertComponent().waitForExist();
-exports.exitAlert = () => exitAlertButton().click(); 
+module.exports = class Alert extends Page {
+    get component () { return $('[data-test-id="alert-component"]'); }
+
+    get exitButton () { return $('[data-test-id="alert-dismiss"]'); }
+
+    open () {
+        super.openComponent('molecule', 'alert-component');
+    }
+
+    isComponentDisplayed () {
+        return this.component.isDisplayed();
+    }
+
+    waitForComponent () {
+        super.waitForComponent(this.component);
+    }
+
+    clickExitButton () {
+        this.exitButton.click();
+    }
+};

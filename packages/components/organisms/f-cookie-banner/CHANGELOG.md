@@ -3,6 +3,46 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.5.0
+------------------------------
+*March 9, 2021*
+
+### Changed
+- Legacy banner button to use native button.
+- Switch to legacy banner for AU/NZ
+
+
+v0.4.0
+------------------------------
+*March 2, 2021*
+
+### Changed
+- Default locale prop value `en-GB` to be `''`.
+
+
+v0.3.2
+------------------------------
+*March 2, 2021*
+
+### Fixed
+- Protocol missing from image request (Required for Lighthouse checks).
+
+v0.3.1
+------------------------------
+*March 2, 2021*
+
+### Fixed
+- `shouldHideBanner` data property defaults to `true` in order to avoid flash of cookie banner after it has been dismissed.
+
+v0.3.0
+------------------------------
+*February 25, 2021*
+
+### Changed
+- Update tests to use js-cookie.
+- Update legacy cookie value
+- Remove f-globalisation mixin
+
 v0.2.0
 ------------------------------
 *February 17, 2021*

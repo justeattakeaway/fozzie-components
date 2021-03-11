@@ -181,12 +181,14 @@ jobs:
           name: Run WebDriverIO Component Tests
           command: yarn test-component:chrome
       - run: # Run Accessibility UI Tests
-          name: Run WebDriverIO Component Tests
+          name: Run WebDriverIO Accessibility Tests
           command: yarn test-a11y:chrome
       - store_artifacts:
-          path: axe-violations/
+          path: test/results/axe-violations
       - store_artifacts:
-          path: _results_/
+          path: test/results/allure/failure-videos
+      - store_test_results:
+          path: test/results/ci
       - run:
           name: Run Bundlewatch checks
           command: yarn bundlewatch

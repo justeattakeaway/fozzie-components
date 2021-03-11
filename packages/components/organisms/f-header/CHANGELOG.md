@@ -4,6 +4,34 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.9.0
+------------------------------
+*March 4, 2021*
+
+### Added
+- `@justeat/f-popover` component
+- `CountrySelectorPanel` component
+- `UserNavigationPanel` component
+- Main menu title for all the tenants for screen readers
+
+### Updated
+- `@justeat/f-button` updated to v1.1.0
+- tests to cover the changes
+
+### Removed
+- `CountrySelector` component
+
+
+v4.8.0
+------------------------------
+*February 24, 2021*
+
+### Changed
+- f-button and f-vue-icons packages version bump
+- Country selector buttons updated
+- Language specified for french link for Canada in country selector
+
+
 v4.7.0
 ------------------------------
 *February 11, 2021*
@@ -11,14 +39,10 @@ v4.7.0
 ### Added
 - Country selector component tests
 - dataTestKeys into country selector component
+- All tenants to a tenant prop for storybook f-header story
 
 ### Changed
 - component tests to use page object model
-
-*Fabruary 9, 2021*
-
-### Added
-- All tenants to a tenant prop for storybook f-header story
 
 
 v4.6.0

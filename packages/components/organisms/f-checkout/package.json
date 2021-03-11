@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "0.59.0",
+  "version": "0.68.1",
   "main": "dist/f-checkout.umd.min.js",
   "files": [
     "dist",
@@ -32,7 +32,6 @@
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
-    "report": "cd ../.. && yarn report",
     "test": "vue-cli-service test:unit",
     "test:watch": "vue-cli-service test:unit --watch",
     "test:coverage": "yarn test --coverage",

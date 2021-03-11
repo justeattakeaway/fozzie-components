@@ -5,12 +5,16 @@ const messages = {
     acceptButtonText: 'Accept all cookies',
     textLine1: 'We use required cookies (and similar technologies) to make our platform work.',
     textLine2: 'We\'d also like to use optional cookies to help us improve our platform by collecting information on how you use it.',
-    textLine3: 'For details about the cookies and technologies we use, see our {cookiePolicy}.  Using this banner will set a cookie on your device to remember your preferences.',
+    textLine3: 'For details about the cookies and technologies we use, see our ',
+    textLine4: '.  Using this banner will set a cookie on your device to remember your preferences.',
     cookiePolicyLinkText: 'cookies notice',
-    cookiePolicyLinkUrl: 'https://www.menulog.com.au/info/cookies-policy'
+    cookiePolicyLinkUrl: 'https://www.menulog.com.au/info/cookies-policy',
+    legacyBannerText: 'We use cookies to improve your browsing experience. By continuing, you agree to receive cookies on our website.',
+    legacyBannerLinkText: 'Learn more about our cookies policy.',
+    legacyBannerCloseBannerText: 'Close cookie banner'
 };
 
-const displayLegacy = false;
+const displayLegacy = true;
 
 const cookieExclusionList = [
     '_dc_gtm_',

@@ -1,0 +1,8 @@
+{
+    "faultId": "5bdb442d-7e66-4ca0-aaed-41101d8e8b90",
+    "traceId": "80000144-0000-fa00-b63f-84710c7967bb",
+    "errors": [{
+        "description": "The specified email already exists",
+        "errorCode": "409"
+    }]
+}

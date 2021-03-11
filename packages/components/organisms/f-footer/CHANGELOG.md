@@ -4,9 +4,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (add to next release)
+v4.9.1
 ------------------------------
-*February 24, 2021*
+*March 3, 2021*
+
+## Fixed
+- Mobile Link lists collapse on scroll
+
+### Added
+- Preserve mobile link list toggle state.
+
+
+v4.9.0
+------------------------------
+*March 2, 2021*
+
+## Added
+- Codice Etico (Ethical Code) link added for Italy
 
 ### Changed
 - Restructured component object into page object model
@@ -19,7 +33,7 @@ v4.8.3
 
 ### Added
 - All tenants to a tenant prop for storybook f-footer story
-- New modifier css class to fix footer items alignment 
+- New modifier css class to fix footer items alignment
 
 
 v4.8.2

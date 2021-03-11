@@ -3,6 +3,33 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v1.1.1
+------------------------------
+*March 8, 2021*
+
+### Changed
+- Formatting in storybook files.
+
+### Fixed
+- Pass button attributes to component correctly.
+
+
+v1.1.0
+------------------------------
+*March 3, 2021*
+
+### Added
+- Separate story for `f-button--icon`
+- Component  and accessibility test for link button
+
+### Changed
+- Restructured component object into page object model
+- Refactored component and accessibility tests
+- `f-button--icon` styles to show different button sizes for `--sizeMedium`, `--sizeLarge`, `--sizeSmall` and `--sizeXSmall`
+- `f-button--icon` styles to show blue background for large primary `f-button--icon` instead of orange
+
+
 v1.0.0
 ------------------------------
 *February 10, 2021*

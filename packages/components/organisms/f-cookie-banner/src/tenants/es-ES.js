@@ -5,7 +5,8 @@ const messages = {
     acceptButtonText: 'Aceptar todas las cookies',
     textLine1: 'Usamos cookies necesarias y tecnologías similares para facilitar el funcionamiento de nuestra plataforma.',
     textLine2: 'También nos gustaría usar cookies opcionales para ayudarnos a mejorar nuestra plataforma recopilando información sobre cómo la utiliza.',
-    textLine3: 'Para más detalles sobre las cookies y tecnologías que usamos, visite nuestro {cookiePolicy}. El uso de este banner provocará que se instale una cookie en su dispositivo para recordar sus preferencias.',
+    textLine3: 'Para más detalles sobre las cookies y tecnologías que usamos, visite nuestro ',
+    textLine4: '. El uso de este banner provocará que se instale una cookie en su dispositivo para recordar sus preferencias.',
     cookiePolicyLinkText: 'aviso sobre cookies',
     cookiePolicyLinkUrl: 'https://www.just-eat.es/cookies-policy'
 };

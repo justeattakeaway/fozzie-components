@@ -1,10 +1,13 @@
-const video = require('wdio-video-reporter');
+// Used to set correct directories for WDIO test output
+global.baseDir = __dirname;
+
 const { setTestEnvironment, setTestType } = require('./test/utils/configuration-helper');
 
 const testEnvironment = setTestEnvironment();
 const testType = setTestType();
 
 exports.config = {
+
     //
     // ====================
     // Runner Configuration
@@ -137,18 +140,7 @@ exports.config = {
     // see also: https://webdriver.io/docs/dot-reporter.html
     // reporters: ['dot'],
 
-    reporters: [
-        [video, {
-            saveAllVideos: false, // If true, also saves videos for successful test cases
-            videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
-            outputDir: '../../../../_results_'
-        }],
-        ['allure', {
-            outputDir: '../../../../allure-results',
-            disableWebdriverStepsReporting: false,
-            disableWebdriverScreenshotsReporting: false
-        }]
-    ],
+    reporters: testEnvironment.reporters,
 
     afterTest: () => {
         browser.takeScreenshot();

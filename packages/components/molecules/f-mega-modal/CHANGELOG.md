@@ -3,6 +3,28 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.6.0
+------------------------------
+*March 5, 2021*
+
+### Changed
+- Updated npm dependencies.
+
+
+v0.5.0
+------------------------------
+*March 3, 2021*
+
+### Added
+- Added component test file, component object file and tests
+- Added `Data-test-id` to elements within the `MegaModal.stories.js`
+
+### Changed
+- Restructured component object into page object model
+- Refactored component and accessibility tests
+
+
 v0.4.0
 ------------------------------
 *January 28, 2021*

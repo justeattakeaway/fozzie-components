@@ -23,10 +23,11 @@ Object {
     "lastName": "",
     "mobileNumber": "+447111111111",
   },
+  "errors": Array [],
+  "geolocation": null,
   "id": "12345",
   "isFulfillable": true,
   "isLoggedIn": false,
-  "issues": Array [],
   "messages": Array [
     Object {
       "message": Object {

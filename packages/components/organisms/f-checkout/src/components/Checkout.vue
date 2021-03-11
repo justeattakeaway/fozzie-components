@@ -83,7 +83,7 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import { required, email } from 'vuelidate/lib/validators';
-import { mapState, mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
@@ -107,11 +107,21 @@ import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
 import ErrorPage from './Error.vue';
 
-import { CHECKOUT_METHOD_DELIVERY, TENANT_MAP, VALIDATIONS } from '../constants';
+import {
+    ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE,
+    ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
+    ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME,
+    CHECKOUT_METHOD_DELIVERY,
+    ERROR_CODE_FULFILMENT_TIME_INVALID,
+    TENANT_MAP,
+    VALIDATIONS,
+    VUEX_CHECKOUT_ANALYTICS_MODULE,
+    VUEX_CHECKOUT_MODULE
+} from '../constants';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
-import mapUpdateCheckoutRequest from '../services/mapper';
+import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
 
 export default {
     name: 'VueCheckout',
@@ -175,32 +185,6 @@ export default {
             default: 1000
         },
 
-        getCheckoutTimeout: {
-            type: Number,
-            required: false,
-            default: 1000
-        },
-
-        createGuestTimeout: {
-            type: Number,
-            default: 1000
-        },
-
-        getBasketTimeout: {
-            type: Number,
-            default: 1000
-        },
-
-        placeOrderTimeout: {
-            type: Number,
-            default: 1000
-        },
-
-        updateCheckoutTimeout: {
-            type: Number,
-            default: 1000
-        },
-
         authToken: {
             type: String,
             default: ''
@@ -216,12 +200,12 @@ export default {
             required: true
         },
 
-        getAddressTimeout: {
-            type: Number,
-            default: 1000
+        applicationName: {
+            type: String,
+            required: true
         },
 
-        applicationName: {
+        getGeoLocationUrl: {
             type: String,
             required: true
         }
@@ -231,7 +215,6 @@ export default {
         return {
             tenantConfigs,
             genericErrorMessage: null,
-            shouldDisableCheckoutButton: false,
             hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
             isLoading: false
@@ -259,19 +242,21 @@ export default {
     },
 
     computed: {
-        ...mapState('checkout', [
+        ...mapState(VUEX_CHECKOUT_MODULE, [
             'address',
+            'basket',
             'customer',
+            'errors',
+            'geolocation',
             'id',
             'isFulfillable',
             'isLoggedIn',
             'messages',
             'notices',
+            'orderId',
             'serviceType',
             'time',
-            'userNote',
-            'basket',
-            'orderId'
+            'userNote'
         ]),
 
         isMobileNumberValid () {
@@ -315,20 +300,28 @@ export default {
 
     async mounted () {
         await this.initialise();
+        this.trackInitialLoad();
     },
 
     methods: {
-        ...mapActions('checkout', [
+        ...mapActions(VUEX_CHECKOUT_MODULE, [
             'createGuestUser',
             'getAvailableFulfilment',
             'getAddress',
             'getBasket',
             'getCheckout',
-            'updateCheckout',
+            'getGeoLocation',
+            'placeOrder',
             'setAuthToken',
+            'updateCheckout',
             'updateCustomerDetails',
-            'updateUserNote',
-            'placeOrder'
+            'updateUserNote'
+        ]),
+
+        ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
+            'trackFormErrors',
+            'trackFormInteraction',
+            'trackInitialLoad'
         ]),
 
         /**
@@ -368,31 +361,29 @@ export default {
                     await this.setupGuestUser();
                 }
 
-                const data = mapUpdateCheckoutRequest({
-                    address: this.address,
-                    customer: this.customer,
-                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
-                    time: this.time,
-                    userNote: this.userNote
-                });
+                await this.lookupGeoLocation();
 
-                await this.updateCheckout({
-                    url: this.updateCheckoutUrl,
-                    data,
-                    timeout: this.updateCheckoutTimeout
-                });
+                await this.handleUpdateCheckout();
 
-                await this.submitOrder();
+                if (this.isFulfillable) {
+                    await this.submitOrder();
 
-                this.$emit(EventNames.CheckoutSuccess, eventData);
+                    this.$emit(EventNames.CheckoutSuccess, eventData);
 
-                this.$logger.logInfo(
-                    'Consumer Checkout Successful',
-                    this.$store,
-                    eventData
-                );
+                    this.$logger.logInfo(
+                        'Consumer Checkout Successful',
+                        this.$store,
+                        eventData
+                    );
 
-                this.redirectToPayment();
+                    this.redirectToPayment();
+                } else {
+                    this.$logger.logWarn(
+                        'Consumer Checkout Not Fulfillable',
+                        this.$store,
+                        eventData
+                    );
+                }
             } catch (thrownErrors) {
                 eventData.errors = thrownErrors;
 
@@ -403,6 +394,43 @@ export default {
                     this.$store,
                     eventData
                 );
+            }
+        },
+
+        /**
+         * Handles call of `updateCheckout` and tracks any returned errors.
+         * 1. Maps checkout data.
+         * 2. If form is valid try to call `updateCheckout`.
+         * 3. If `updateCheckout` call succeeds but errors are returned, `trakFormError` is called.
+         * 4. If `updateCheckout` call fails calls `trakFormError` with error type..
+         *
+         */
+        async handleUpdateCheckout () {
+            try {
+                const data = mapUpdateCheckoutRequest({
+                    address: this.address,
+                    customer: this.customer,
+                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
+                    time: this.time,
+                    userNote: this.userNote,
+                    geolocation: this.geolocation
+                });
+
+                await this.updateCheckout({
+                    url: this.updateCheckoutUrl,
+                    data,
+                    timeout: this.checkoutTimeout
+                });
+
+                if (this.errors) { // If `updateCheckout` call is successful but returns unfulfillable issues.
+                    this.trackFormErrors();
+                }
+            } catch (ex) {
+                const error = ex.errors.find(err => err.errorCode === ERROR_CODE_FULFILMENT_TIME_INVALID)
+                    ? ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME
+                    : ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE;
+
+                this.trackFormInteraction({ action: 'error', error: [error] });
             }
         },
 
@@ -435,7 +463,7 @@ export default {
             await this.placeOrder({
                 url: this.placeOrderUrl,
                 data,
-                timeout: this.placeOrderTimeout
+                timeout: this.checkoutTimeout
             });
         },
 
@@ -456,7 +484,7 @@ export default {
                     url: this.createGuestUrl,
                     tenant: this.tenant,
                     data: createGuestData,
-                    timeout: this.createGuestTimeout
+                    timeout: this.checkoutTimeout
                 });
 
                 this.$emit(EventNames.CheckoutSetupGuestSuccess);
@@ -479,7 +507,7 @@ export default {
             try {
                 await this.getCheckout({
                     url: this.getCheckoutUrl,
-                    timeout: this.getCheckoutTimeout
+                    timeout: this.checkoutTimeout
                 });
 
                 this.$emit(EventNames.CheckoutGetSuccess);
@@ -505,7 +533,7 @@ export default {
                     url: this.getBasketUrl,
                     tenant: this.tenant,
                     language: this.$i18n.locale,
-                    timeout: this.getBasketTimeout
+                    timeout: this.checkoutTimeout
                 });
 
                 this.$emit(EventNames.CheckoutBasketGetSuccess);
@@ -529,7 +557,7 @@ export default {
             try {
                 await this.getAvailableFulfilment({
                     url: this.checkoutAvailableFulfilmentUrl,
-                    timeout: this.getCheckoutTimeout
+                    timeout: this.checkoutTimeout
                 });
 
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess);
@@ -555,21 +583,47 @@ export default {
                     url: this.getAddressUrl,
                     tenant: this.tenant,
                     language: this.$i18n.locale,
-                    timeout: this.getAddressTimeout
+                    timeout: this.checkoutTimeout
                 });
-
                 this.$emit(EventNames.CheckoutAddressGetSuccess);
             } catch (thrownErrors) {
                 this.$emit(EventNames.CheckoutAddressGetFailure, thrownErrors);
-                this.hasCheckoutLoadedSuccessfully = false;
+                this.$logger.logWarn('Get checkout address failure', this.$store, { thrownErrors });
             }
         },
 
+        /**
+         * Look up the geo details for the customers address, skip on failure.
+         *
+         */
+        async lookupGeoLocation () {
+            const locationData =
+            {
+                addressLines: Object.values(this.address).filter(addressLine => !!addressLine)
+            };
+
+            try {
+                if (locationData.addressLines.length) {
+                    await this.getGeoLocation({
+                        url: this.getGeoLocationUrl,
+                        postData: locationData,
+                        timeout: this.checkoutTimeout
+                    });
+                }
+            } catch (error) {
+                this.$logger.logWarn(
+                    'Geo location lookup failed',
+                    this.$store,
+                    { error }
+                );
+            }
+        },
+
+        /**
+         * Emit `CheckoutFailure` event with error data
+         * Update `genericErrorMessage` to display correct errorMessage for passed error
+         */
         handleErrorState (error) {
-            /*
-            * Emit `CheckoutFailure` event with error data
-            * Update `genericErrorMessage` to display correct errorMessage for passed error
-            */
             let thrownErrors = error;
 
             // Ideally we would use optional chaining but it doesn't currently work with Storybook
@@ -610,55 +664,70 @@ export default {
             }
         },
 
+        /**
+         * Check form is valid - no inline messages
+         * 1. If form is valid try to call `submitCheckout`.
+         * 2. If the form is invalid process error tracking and logging via `onInvalidCheckoutForm()`.
+         */
         async onFormSubmit () {
-            /*
-            * Check for is valid - no inline messages
-            * If form is valid try to call `submitCheckout`
-            * Catch and handle any errors
-            */
-            if (!this.isFormValid()) {
-                const validationState = validations.getFormValidationState(this.$v);
-                this.$emit(EventNames.CheckoutValidationError, validationState);
+            this.trackFormInteraction({ action: 'submit' });
 
-                this.$logger.logWarn(
-                    'Checkout Validation Error',
-                    this.$store,
-                    validationState
-                );
-                return;
-            }
-
-            this.shouldDisableCheckoutButton = true;
-
-            try {
+            if (this.isFormValid()) {
                 await this.submitCheckout();
-            } catch (error) {
-                this.handleErrorState(error);
-            } finally {
-                this.shouldDisableCheckoutButton = false;
+            } else {
+                this.onInvalidCheckoutForm();
             }
         },
 
+        /**
+         * Fired when `isFormValid` returns falsey via `onFormSubmit()` call.
+         * 1. Emit `CheckoutValidationError` for consuming application.
+         * 2. Process tracking with action type and error fields
+         * 3. Log warn.
+         *
+         * */
+        onInvalidCheckoutForm () {
+            const validationState = validations.getFormValidationState(this.$v);
+            const invalidFields = mapAnalyticsNames(validationState.invalidFields);
+
+            this.$emit(EventNames.CheckoutValidationError, validationState);
+            this.trackFormInteraction({
+                action: 'inline_error',
+                error: invalidFields
+            });
+
+            this.trackFormInteraction({
+                action: 'error',
+                error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
+            });
+
+            this.$logger.logWarn(
+                'Checkout Validation Error',
+                this.$store,
+                validationState
+            );
+        },
+
+        /**
+         * Check to see if any `Vuelidate` validation errors
+         */
         isFormValid () {
-            /*
-            * Check to see if any `Vuelidate` validation errors
-            */
             this.$v.$touch();
             return !this.$v.$invalid;
         },
 
-        /*
-        * Use phone validation in `f-services` to check if customer number is
-        * valid in current locale
-        */
+        /**
+         * Use phone validation in `f-services` to check if customer number is
+         * valid in current locale
+         */
         isValidPhoneNumber () {
             return validations.isValidPhoneNumber(this.customer.mobileNumber, this.$i18n.locale);
         },
 
-        /*
-        * Use postcode validation in `f-services` to check if customer postcode is
-        * valid in current locale
-        */
+        /**
+         * Use postcode validation in `f-services` to check if customer postcode is
+         * valid in current locale
+         */
         isValidPostcode () {
             return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
         },
@@ -734,7 +803,7 @@ export default {
     .c-spinner {
         margin: 0 auto;
     }
-  }
+}
 
 .c-checkout {
     padding-top: spacing(x6);

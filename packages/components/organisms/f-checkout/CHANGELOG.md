@@ -4,6 +4,119 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+
+v0.68.1
+------------------------------
+*March 9, 2021*
+
+### Changed
+- Locale usage in storybook
+
+
+v0.68.0
+------------------------------
+*March 9, 2021*
+
+### Changed
+- Guest checkout header to display correct text.
+
+
+v0.67.0
+------------------------------
+*March 9, 2021*
+
+### Added
+- Analytics error tracking.
+- Tests to cover changes.
+
+# Changed
+- `checkout.module` `issues` to `error`.
+
+### Fixed
+- Guest field inputs Vuex mutation error.
+
+
+v0.66.0
+------------------------------
+*March 5, 2021*
+
+### Changed
+- `Checkout.vue` - refactor `onFormSubmit` method and relevant tests.
+
+
+v0.65.1
+------------------------------
+*March 5, 2021*
+
+### Fixed
+- `UPDATE_CHANGED_FIELD` mutation to sort `changedFields` correctly.
+
+
+v0.65.0
+-------------------------------
+*March 4, 2021*
+
+### Changed
+- Prevent error page showing when the address call fails
+- Logging when the address call does fail
+
+
+v0.64.0
+------------------------------
+*March 4, 2021*
+
+### Changed
+- `analytics` to `fCheckout.module`.
+- `analytics.module` to `fCheckoutAnalytics.module`.
+
+### Removed
+- `f-trak` dependency.
+
+
+v0.63.0
+------------------------------
+*March 3, 2021*
+
+### Added
+- `analytics.module` export.
+
+
+v0.62.0
+------------------------------
+*March 3, 2021*
+
+### Changed
+- Storybook knobs to be easier to use.
+- `open` function for component tests to match changes.
+
+### Removed
+- Redundant timeout props.
+
+
+v0.61.0
+------------------------------
+*March 2, 2021*
+
+### Added
+- `getGeoLocation` to call the location services api.
+
+### Changed
+- Called the api during the Submit.
+- Mapped the results into the `PATCH` Checkout request model.
+- Refactored/Added unit tests.
+
+
+v0.60.0
+-------------------------------
+*February 26, 2021*
+
+### Added
+- `analytics.module` to store.
+- `mapAnalyticsName` and `mapAnalyticsNames` to `mapper` service.
+- Analytics tracking to `Checkout` component.
+- Tests to cover changes.
+
+
 v0.59.0
 ------------------------------
 *February 24, 2021*

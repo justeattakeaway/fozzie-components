@@ -6,46 +6,49 @@
             data-test-id="cookieBanner-component">
             <div :class="$style['c-cookieWarning-inner']">
                 <p>
-                    {{ $t('legacyBannerText') }}
+                    {{ legacyBannerText }}
                     <a
                         class="c-cookieWarning-link"
-                        :href="$t('cookiePolicyLinkUrl')">
-                        {{ $t('legacyBannerLinkText') }}
+                        :href="cookiePolicyLinkUrl">
+                        {{ legacyBannerLinkText }}
                     </a>
                 </p>
-                <button-component
-                    type="button"
+                <button
                     :class="[$style['c-cookieWarning-btn']]"
-                    button-type="icon"
-                    button-size="xsmall"
                     data-test-id="cookieBanner-close-button"
                     aria-label="Close"
-                    @click.native="$emit('hide-legacy-banner')">
-                    <cross-icon />
+                    @click="$emit('hide-legacy-banner')">
                     <span class="is-visuallyHidden">
-                        {{ $t('legacyBannerCloseBannerText') }}
+                        {{ legacyBannerCloseBannerText }}
                     </span>
-                </button-component>
+                </button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import ButtonComponent from '@justeat/f-button';
-import '@justeat/f-button/dist/f-button.css';
-
-import { CrossIcon } from '@justeat/f-vue-icons';
-
 export default {
-    components: {
-        ButtonComponent,
-        CrossIcon
-    },
     props: {
         shouldHideLegacyBanner: {
             type: Boolean,
             default: false
+        },
+        legacyBannerText: {
+            type: String,
+            required: true
+        },
+        cookiePolicyLinkUrl: {
+            type: String,
+            required: true
+        },
+        legacyBannerLinkText: {
+            type: String,
+            required: true
+        },
+        legacyBannerCloseBannerText: {
+            type: String,
+            required: true
         }
     }
 };
@@ -90,7 +93,7 @@ export default {
                 right: 8px;
                 width: 10px;
                 height: 10px;
-                background: url('//dy3erx8o0a6nh.cloudfront.net/images/icon-close-banner.png') no-repeat 50%;
+                background: url('https://dy3erx8o0a6nh.cloudfront.net/images/icon-close-banner.png') no-repeat 50%;
                 background-size: 10px 10px;
                 border: none;
                 cursor: pointer;

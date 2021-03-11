@@ -7,7 +7,7 @@ const {
     SOCIAL_ICONS
 } = require('./f-footer.selectors');
 
-class Footer extends Page {
+module.exports = class Footer extends Page {
 
     get component () { return $(FOOTER_COMPONENT) }
     get icons () { return  $$(FOOTER_ICONS) }
@@ -76,5 +76,3 @@ class Footer extends Page {
         return this.courierLinks.isDisplayed();
     }
 }
-
-module.exports = Footer;

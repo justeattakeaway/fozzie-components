@@ -6,7 +6,7 @@ const {
     NAVIGATION
 } = require ('./f-header.selectors');
 
-class Header extends Page {
+module.exports = class Header extends Page {
 
     get component () { return $(HEADER_COMPONENT) }
     get logo () { return  $(HEADER_LOGO) }
@@ -136,5 +136,3 @@ class Header extends Page {
         return this.mobileNavigationBar.click();
     }
 }
-
-module.exports = Header;

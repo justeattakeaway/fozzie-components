@@ -1,14 +1,14 @@
-import CardComponent from '../../../test-utils/component-objects/f-card.component';
+const Card = require('../../../test-utils/component-objects/f-card.component');
+const card = new Card();
 
 describe('f-card component tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-atoms--card-component');
-        browser.switchToFrame(0);
-        CardComponent.waitForCard();
+        card.open();
+        card.waitForComponent();
     });
 
-    it('should display Card', () => {
+    it('should display the f-card component', () => {
         // Assert
-        expect(CardComponent.isCardDisplayed()).toBe(true);
+        expect(card.isComponentDisplayed()).toBe(true);
     });
 });

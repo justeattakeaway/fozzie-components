@@ -4,18 +4,21 @@ import checkoutDelivery from '../../demo/checkout-delivery.json';
 import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
+import geoLocationDetails from '../../demo/get-geo-location.json';
+import { VUEX_CHECKOUT_ANALYTICS_MODULE } from '../../constants';
 
 import {
     UPDATE_AUTH,
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
     UPDATE_BASKET_DETAILS,
     UPDATE_CUSTOMER_DETAILS,
+    UPDATE_ERRORS,
     UPDATE_FULFILMENT_ADDRESS,
     UPDATE_FULFILMENT_TIME,
     UPDATE_IS_FULFILLABLE,
-    UPDATE_ISSUES,
     UPDATE_STATE,
-    UPDATE_USER_NOTE
+    UPDATE_USER_NOTE,
+    UPDATE_GEO_LOCATION
 } from '../mutation-types';
 
 const { actions, mutations } = CheckoutModule;
@@ -26,6 +29,7 @@ const {
     getAvailableFulfilment,
     getBasket,
     getCheckout,
+    getGeoLocation,
     updateCheckout,
     setAuthToken,
     updateAddressDetails,
@@ -47,6 +51,14 @@ const address = {
     line2: 'line 2',
     city: 'city',
     postcode: 'postcode'
+};
+
+const locationData = {
+    addressLines: [
+        '1 Jazz Avenue',
+        'Strange Town',
+        'JZ1 1AA'
+    ]
 };
 
 const time = {
@@ -90,7 +102,7 @@ const defaultState = {
         postcode: ''
     },
     isFulfillable: true,
-    issues: [],
+    errors: [],
     notices: [],
     messages: [],
     availableFulfilment: {
@@ -99,7 +111,8 @@ const defaultState = {
     },
     authToken: '',
     isLoggedIn: false,
-    userNote: ''
+    userNote: '',
+    geolocation: null
 };
 
 let state = CheckoutModule.state();
@@ -191,14 +204,30 @@ describe('CheckoutModule', () => {
                         id: '11111',
                         total: 12.50
                     },
-                    resturantId: '22222'
+                    restaurantId: '22222'
                 };
                 mutations[UPDATE_BASKET_DETAILS](state, eventData);
 
                 // Assert
                 expect(state.serviceType).toEqual(eventData.serviceType);
                 expect(state.basket).toEqual(eventData.basket);
-                expect(state.resturant).toEqual(eventData.resturant);
+                expect(state.restaurant).toEqual(eventData.restaurant);
+            });
+        });
+
+        describe(`${UPDATE_GEO_LOCATION} ::`, () => {
+            it('should update state with received values', () => {
+                // Arrange (Long / Lat)
+                const geometryData = [-0.10358, 51.51469];
+
+                // Act
+                mutations[UPDATE_GEO_LOCATION](state, geometryData);
+
+                // Assert
+                expect(state.geolocation).toEqual({
+                    latitude: geometryData[1],
+                    longitude: geometryData[0]
+                });
             });
         });
 
@@ -206,7 +235,7 @@ describe('CheckoutModule', () => {
             [UPDATE_FULFILMENT_ADDRESS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
             [UPDATE_IS_FULFILLABLE, 'isFulfillable', isFulfillable],
-            [UPDATE_ISSUES, 'issues', issues],
+            [UPDATE_ERRORS, 'errors', issues],
             [UPDATE_USER_NOTE, 'userNote', userNote]
         ])('%s :: should update state with received value', (mutationName, propertyName, propertyValue) => {
             // Arrange & Act
@@ -219,16 +248,19 @@ describe('CheckoutModule', () => {
 
     describe('actions ::', () => {
         let commit;
+        let dispatch;
 
         const payload = {
             url: 'http://localhost/account/checkout',
             tenant: 'uk',
             language: 'en-GB',
-            timeout: '1000'
+            timeout: '1000',
+            postData: null
         };
 
         beforeEach(() => {
             commit = jest.fn();
+            dispatch = jest.fn();
         });
 
         describe('getCheckout ::', () => {
@@ -248,11 +280,19 @@ describe('CheckoutModule', () => {
 
             it(`should get the checkout details from the backend and call ${UPDATE_STATE} mutation.`, async () => {
                 // Act
-                await getCheckout({ commit, state }, payload);
+                await getCheckout({ commit, state, dispatch }, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
                 expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
+            });
+
+            it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
+                // Act
+                await getCheckout({ commit, state, dispatch }, payload);
+
+                // Assert
+                expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
             });
         });
 
@@ -271,7 +311,7 @@ describe('CheckoutModule', () => {
                 axios.get = jest.fn(() => Promise.resolve({ data: basketDelivery }));
 
                 // Act
-                await getBasket({ commit, state }, payload);
+                await getBasket({ commit, state, dispatch }, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
@@ -302,7 +342,7 @@ describe('CheckoutModule', () => {
                 const [expectedAddress] = customerAddresses.Addresses;
 
                 // Act
-                await getAddress({ commit, state }, payload);
+                await getAddress({ commit, state, dispatch }, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
@@ -312,6 +352,14 @@ describe('CheckoutModule', () => {
                     city: expectedAddress.City,
                     postcode: expectedAddress.ZipCode
                 });
+            });
+
+            it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
+                // Act
+                await getAddress({ commit, state, dispatch }, payload);
+
+                // Assert
+                expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
             });
         });
 
@@ -332,7 +380,9 @@ describe('CheckoutModule', () => {
                 };
                 axios.patch = jest.fn(() => Promise.resolve({
                     status: 200,
-                    data: {}
+                    data: {
+                        issues
+                    }
                 }));
             });
 
@@ -405,19 +455,91 @@ describe('CheckoutModule', () => {
             });
         });
 
+        describe('updateFulfilmentTime ::', () => {
+            it(`should call ${UPDATE_FULFILMENT_TIME} mutation.`, () => {
+                // Act
+                updateFulfilmentTime({ commit, state }, time);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_TIME, time);
+            });
+        });
+
+        describe('getGeoLocation ::', () => {
+            // Arrange
+            let config;
+            payload.postData = locationData;
+
+            beforeEach(() => {
+                config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${authToken}`
+                    },
+                    timeout: payload.timeout
+                };
+
+                axios.post = jest.fn(() => Promise.resolve({
+                    status: 200,
+                    data: geoLocationDetails
+                }));
+            });
+
+            describe('if the user is logged in', () => {
+                beforeEach(() => {
+                    state.isLoggedIn = true;
+                });
+
+                it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation.`, async () => {
+                    // Act
+                    await getGeoLocation({ commit, state }, payload);
+
+                    // Assert
+                    expect(axios.post).toHaveBeenCalledWith(payload.url, locationData, config);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, geoLocationDetails.geometry.coordinates);
+                });
+            });
+
+            describe('if the user is not logged in', () => {
+                beforeEach(() => {
+                    state.isLoggedIn = false;
+                });
+
+                it('should not make api call and should not call mutation.', async () => {
+                    // Act
+                    await getGeoLocation({ commit, state }, payload);
+
+                    // Assert
+                    expect(axios.post).not.toHaveBeenCalled();
+                    expect(commit).not.toHaveBeenCalled();
+                });
+            });
+        });
 
         it.each([
             [setAuthToken, UPDATE_AUTH, authToken],
             [updateAddressDetails, UPDATE_FULFILMENT_ADDRESS, address],
             [updateCustomerDetails, UPDATE_CUSTOMER_DETAILS, customerDetails],
-            [updateFulfilmentTime, UPDATE_FULFILMENT_TIME, time],
             [updateUserNote, UPDATE_USER_NOTE, userNote]
         ])('%s should call %s mutation with passed value', (action, mutation, value) => {
             // Act
-            action({ commit }, value);
+            action({ commit, dispatch }, value);
 
             // Assert
             expect(commit).toHaveBeenCalledWith(mutation, value);
+        });
+
+        it.each([
+            [updateAddressDetails, address],
+            [updateCustomerDetails, customerDetails]
+        ])(`%s should dispatch '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedFields' action with first key of passed value`, (action, value) => {
+            // Act
+            action({ commit, dispatch }, value);
+
+            const [field] = Object.keys(value);
+
+            // Assert
+            expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
         });
     });
 });

@@ -1,11 +1,14 @@
-import mapUpdateCheckoutRequest from '../mapper';
+import {
+    mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode
+} from '../mapper';
 
 const defaultParams = {
     address: {},
     customer: {},
     isCheckoutMethodDelivery: true,
     time: {},
-    userNote: ''
+    userNote: '',
+    geolocation: null
 };
 
 describe('checkout mapper', () => {
@@ -120,5 +123,82 @@ describe('checkout mapper', () => {
         // Assert
         expect(notesRequest.length).toBe(1);
         expect(notesRequest[0].note).toBe(userNote);
+    });
+
+    it('should map geo location correctly', () => {
+        // Arrange
+        const geolocation = {
+            latitude: 1.234,
+            longitude: 50.234
+        };
+
+        // Act
+        const requestBody = mapUpdateCheckoutRequest({
+            ...defaultParams,
+            geolocation
+        });
+
+        const geolocationRequest = requestBody[1].value.location.geolocation;
+
+        // Assert
+        expect(geolocationRequest).toBe(geolocation);
+    });
+});
+
+describe('mapAnalyticsName :: ', () => {
+    describe('mapAnalyticsName :: ', () => {
+        it.each([
+            ['address.line1', 'addressLine1'],
+            ['line1', 'addressLine1'],
+            ['address.line2', 'addressLine2'],
+            ['line2', 'addressLine2'],
+            ['address.city', 'addressCity'],
+            ['city', 'addressCity'],
+            ['address.postcode', 'addressPostcode'],
+            ['postcode', 'addressPostcode'],
+            ['customer.firstName', 'firstName'],
+            ['customer.lastName', 'lastName'],
+            ['customer.mobileNumber', 'phone'],
+            ['mobileNumber', 'phone'],
+            ['customer.email', 'email']
+        ])('should map the fieldname %s to the analytics value %s', (provided, expected) => {
+            // Act & Assert
+            expect(mapAnalyticsName(provided)).toEqual(expected);
+        });
+    });
+});
+
+describe('mapAnalyticsNames :: ', () => {
+    it('should correctly map an array of field names and sort alphabetically', () => {
+        // Arrange
+        const provided = [
+            'mobilePhone',
+            'address.line1',
+            'customer.firstName',
+            'lastName',
+            'customer.email',
+            'city'
+        ];
+
+        const expected = 'addressCity,addressLine1,email,firstName,lastName,mobilePhone';
+
+        // Act & Assert
+        expect(mapAnalyticsNames(provided)).toEqual(expected);
+    });
+});
+
+describe('getAnalyticsErrorCodeByApiErrorCode :: ', () => {
+    it.each([
+        ['ITEMS_UNORDERABLE', 'basketNotOrderable'],
+        ['LAST_NAME_REQUIRED', 'invalidModelState'],
+        ['FULFILMENT_TIME_REQUIRED', 'setOrderTime']
+    ])('should correctly map %s to %s', (code, expected) => {
+        // Arrange
+        const error = {
+            code
+        };
+
+        // Act & Assert
+        expect(getAnalyticsErrorCodeByApiErrorCode(error)).toEqual(expected);
     });
 });

@@ -1,14 +1,4 @@
 {
     "isFulfillable": true,
-    "issues": [
-        {
-            "code": "RESTAURANT_UNAVAILABLE"
-        },
-        {
-            "code": "MINIMUM_ORDER_VALUE_NOT_MET",
-            "currency": "GBP",
-            "minimumOrderValue": 1000,
-            "additionalSpendRequired": 100
-        }
-    ]
+    "issues": []
 }

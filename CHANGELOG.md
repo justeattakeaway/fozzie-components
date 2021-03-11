@@ -3,6 +3,30 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.21.0
+------------------------------
+*March 4, 2021*
+
+### Added
+- Assertions to a11y tests
+
+
+v3.20.0
+------------------------------
+*March 3, 2021*
+
+### Changed
+- Accessibility / Alure folder structure
+
+v3.19.0
+------------------------------
+*March 3, 2021*
+
+### Added
+- JUnit reporting to show WebDriverIO test results in CircleCI.
+
+
 v3.18.0
 ------------------------------
 *February 23, 2021*

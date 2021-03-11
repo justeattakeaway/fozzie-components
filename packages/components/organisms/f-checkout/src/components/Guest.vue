@@ -3,7 +3,7 @@
         data-test-id="guest-component"
         :class="$style['c-guest']">
         <form-field
-            v-model="customer.firstName"
+            :value="customer.firstName"
             name="guest-first-name"
             :label-text="$t('guest.firstName')"
             @input="updateCustomerDetails({ 'firstName': $event })">
@@ -17,7 +17,7 @@
         </form-field>
 
         <form-field
-            v-model="customer.lastName"
+            :value="customer.lastName"
             name="guest-last-name"
             :label-text="$t('guest.lastName')"
             @input="updateCustomerDetails({ 'lastName': $event })">
@@ -31,7 +31,7 @@
         </form-field>
 
         <form-field
-            v-model="customer.email"
+            :value="customer.email"
             name="guest-email"
             :label-text="$t('guest.email')"
             @input="updateCustomerDetails({ 'email': $event })">
@@ -53,7 +53,7 @@ import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import { mapState, mapActions } from 'vuex';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
-import { VALIDATIONS } from '../constants';
+import { VALIDATIONS, VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
     components: { FormField, ErrorMessage },
@@ -67,7 +67,7 @@ export default {
     inject: ['$v'],
 
     computed: {
-        ...mapState('checkout', [
+        ...mapState(VUEX_CHECKOUT_MODULE, [
             'customer'
         ]),
 
@@ -94,7 +94,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('checkout', [
+        ...mapActions(VUEX_CHECKOUT_MODULE, [
             'updateCustomerDetails'
         ])
     }

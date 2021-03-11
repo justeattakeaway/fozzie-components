@@ -1,15 +1,24 @@
-import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
-import ButtonComponent from '../../../test-utils/component-objects/f-button.component';
+const { getAccessibilityTestResults } = require('../../../../../../../test/utils/axe-helper');
+const Button = require('../../../test-utils/component-objects/f-button.component');
+const button = new Button();
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        browser.url('?path=/story/components-atoms--button-component');
-        browser.switchToFrame(0);
-        ButtonComponent.waitForButtonComponent();
+    it('a11y - should test f-button action component WCAG compliance', () => {
+        // Act
+        button.open();
+        button.waitForActionComponent();
+        const axeResults = getAccessibilityTestResults('f-button - action');
+
+        expect(axeResults.violations.length).toBe(0);
     });
 
-    it('a11y - should test f-button component WCAG compliance', () => {
+    it('a11y - should test f-button link component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-button');
+        button.open('link');
+        button.waitForLinkComponent();
+        const axeResults = getAccessibilityTestResults('f-button - link');
+
+        // Assert
+        expect(axeResults.violations.length).toBe(0);
     });
 });

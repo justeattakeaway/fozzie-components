@@ -4,7 +4,7 @@ const {
     USER_MESSAGE_CONTENT
 } = require('./f-user-message-selectors');
 
-class UserMessage extends Page {
+module.exports = class UserMessage extends Page {
 
     get component () { return $(USER_MESSAGE_COMPONENT) }
     get content () { return this.component.$(USER_MESSAGE_CONTENT) }
@@ -27,5 +27,3 @@ class UserMessage extends Page {
         return this.content.isDisplayed() && messageContent.length > 0;
     }
 }
-
-module.exports = UserMessage;

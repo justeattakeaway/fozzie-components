@@ -1,20 +1,28 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
-class Tabs extends Page {
+module.exports = class Tabs extends Page {
+    get component () { return $('[data-test-id="tabs-component"]'); }
+    get tabButtons () { return $$('[data-test-id*="tab-button"]'); }
 
-    get component () { return $('[data-test-id="tabs-component"]') }
-
-    open(){
+    open () {
         super.openComponent('molecule', 'vue-tabs-component');
     }
 
-    waitForComponent(){
+    waitForComponent () {
         super.waitForComponent(this.component);
     }
 
-    isComponentDisplayed(){
+    isComponentDisplayed () {
         return this.component.isDisplayed();
     }
-}
 
-module.exports = Tabs;
+    isTabButtonDisplayed () {
+        return this.tabButton.isDisplayed();
+    }
+
+    set expectedTabButton (tabTitle) {
+        this.tabButtonValue = this.tabButtons.filter(element => element.getText().includes(tabTitle))[0];
+    }
+
+    get tabButton () { return this.tabButtonValue != null ? this.tabButtonValue : 'Please set an expected tab button value'; }
+};

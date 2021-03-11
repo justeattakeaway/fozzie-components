@@ -1,15 +1,18 @@
 import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
-import ErrorMessageComponent from '../../../test-utils/component-objects/f-error-message.component';
+const ErrorMessage = require('../../../test-utils/component-objects/f-error-message.component');
+const errorMessage = new ErrorMessage();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        browser.url('?path=/story/components-atoms--error-message-component');
-        browser.switchToFrame(0);
-        ErrorMessageComponent.waitForErrorMessage();
+        errorMessage.open();
+        errorMessage.waitForComponent();
     });
 
     it('a11y - should test f-error-message component WCAG compliance', () => {
         // Act
         const axeResults = getAccessibilityTestResults('f-error-message');
+
+        // Assert
+        expect(axeResults.violations.length).toBe(0);
     });
 });

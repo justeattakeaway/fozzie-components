@@ -30,9 +30,9 @@
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
-    "report": "cd ../.. && yarn report",
     "test": "vue-cli-service test:unit",
-    "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
+    "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y",
+    "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"

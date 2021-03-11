@@ -8,7 +8,6 @@
             $style[`o-btn--size${buttonSizeClassname}`],
             (isFullWidth ? $style['o-btn--fullWidth'] : '')
         ]"
-        :attributes="$attrs"
         :action-type="buttonActionType"
         :data-test-id="`${componentType}-component`"
         v-on="$listeners">
@@ -119,6 +118,15 @@ $btn-sizeSmall-padding          : 7px 1em 9px;
 $btn-sizeXSmall-padding         : 5px 0.5em 7px;
 $btn-sizeXSmall-lineHeight      : 1;
 
+$btn-icon-sizeLarge-buttonSize  : 56px; // button--icon is a sircle so width and height can use one var
+$btn-icon-sizeLarge-iconSize    : 21px;
+$btn-icon-sizeMedium-buttonSize  : 48px;
+$btn-icon-sizeMedium-iconSize    : 21px;
+$btn-icon-sizeSmall-buttonSize  : 40px;
+$btn-icon-sizeSmall-iconSize    : 18px;
+$btn-icon-sizeXSmall-buttonSize  : 32px;
+$btn-icon-sizeXSmall-iconSize    : 18px;
+
 
 .o-btn {
     display: inline-block;
@@ -192,7 +200,8 @@ $btn-sizeXSmall-lineHeight      : 1;
  * Sets the btn colour to site primary colour
  */
 
-.o-btn--primary {
+.o-btn--primary,
+.o-btn--icon.o-btn--primary.o-btn--sizeLarge {
     background-color: $btn-primary-bgColor;
 
     &,
@@ -328,11 +337,10 @@ $btn-sizeXSmall-lineHeight      : 1;
  */
 
 .o-btn--icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
-    svg {
-        width: 90%;
-        height: 80%;
-    }
 
     &.o-btn--primary {
         path {
@@ -375,6 +383,47 @@ $btn-sizeXSmall-lineHeight      : 1;
                 fill: $color-link-active;
             }
         }
+    }
+}
+
+.o-btn--icon.o-btn--sizeLarge {
+    width: $btn-icon-sizeLarge-buttonSize;
+    height: $btn-icon-sizeLarge-buttonSize;
+    padding: 0;
+
+    svg {
+        width: $btn-icon-sizeLarge-iconSize;
+        height: $btn-icon-sizeLarge-iconSize;
+    }
+}
+.o-btn--icon.o-btn--sizeMedium {
+    width: $btn-icon-sizeMedium-buttonSize;
+    height: $btn-icon-sizeMedium-buttonSize;
+    padding: 0;
+
+    svg {
+        width: $btn-icon-sizeMedium-iconSize;
+        height: $btn-icon-sizeMedium-iconSize;
+    }
+}
+.o-btn--icon.o-btn--sizeSmall {
+    width: $btn-icon-sizeSmall-buttonSize;
+    height: $btn-icon-sizeSmall-buttonSize;
+    padding: 0;
+
+    svg {
+        width: $btn-icon-sizeSmall-iconSize;
+        height: $btn-icon-sizeSmall-iconSize;
+    }
+}
+.o-btn--icon.o-btn--sizeXSmall {
+    width: $btn-icon-sizeXSmall-buttonSize;
+    height: $btn-icon-sizeXSmall-buttonSize;
+    padding: 0;
+
+    svg {
+        width: $btn-icon-sizeXSmall-iconSize;
+        height: $btn-icon-sizeXSmall-iconSize;
     }
 }
 
