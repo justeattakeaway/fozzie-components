@@ -365,36 +365,43 @@ export default {
 
                 await this.handleUpdateCheckout();
 
-                if (this.isFulfillable) {
-                    await this.submitOrder();
+                await this.handleFulfillableContext(eventData);
 
-                    this.$emit(EventNames.CheckoutSuccess, eventData);
-
-                    this.$logger.logInfo(
-                        'Consumer Checkout Successful',
-                        this.$store,
-                        eventData
-                    );
-
-                    this.redirectToPayment();
-                } else {
-                    this.$logger.logWarn(
-                        'Consumer Checkout Not Fulfillable',
-                        this.$store,
-                        eventData
-                    );
-                }
             } catch (thrownErrors) {
                 eventData.errors = thrownErrors;
 
                 this.$emit(EventNames.CheckoutFailure, eventData);
 
-                this.$logger.logError(
-                    'Consumer Checkout Failure',
-                    this.$store,
-                    eventData
-                );
+                this.logInfo('Consumer Checkout Failure', eventData);
             }
+        },
+
+        async handleFulfillableContext (eventData) {
+            this.isFulfillable
+                ? await this.processOrderIsFulfillable(eventData)
+                : this.processOrderNotFulfillable(eventData);
+        },
+
+        processOrderNotFulfillable (eventData) {
+            this.logInfo('Consumer Checkout Not Fulfillable', eventData);
+        },
+
+        async processOrderIsFulfillable (eventData) {
+            await this.submitOrder();
+
+            this.$emit(EventNames.CheckoutSuccess, eventData);
+
+            this.logInfo('Consumer Checkout Successful', eventData);
+
+            this.redirectToPayment();
+        },
+
+        logInfo (message, eventData) {
+            this.$logger.logInfo(
+                message,
+                this.$store,
+                eventData
+            );
         },
 
         /**
