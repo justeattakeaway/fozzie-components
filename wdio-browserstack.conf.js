@@ -256,7 +256,7 @@ exports.config = {
      */
     afterTest: (test, context, { error, result, duration, passed, retries }) => {
 
-        const hasPassed = passed ? 'passed' : failed;
+        const hasPassed = passed ? 'passed' : 'failed';
 
         driver.executeScript(`browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"${hasPassed}","reason": ""}}`);
         browser.reloadSession();

@@ -22,8 +22,18 @@ describe('Shared - f-footer component tests', () => {
         expect(footer.isDownloadIconDisplayed()).toBe(true);
 
         // Act
+        footer.expectedDownloadIcon = icon;
         footer.clickDownloadIcon();
-        browser.pause(5000);
+
+        // Assert
+        expect(browser.getUrl()).toContain(expectedUrl);
+    });
+
+    forEach([['ios', 'apple'], ['android', 'google'], ['huawei', 'appgallery']])
+    .it('should link to correct URL', (icon, expectedUrl) => {
+        // Act
+        footer.expectedDownloadIcon = icon;
+        footer.clickDownloadIcon();
 
         // Assert
         expect(browser.getUrl()).toContain(expectedUrl);
