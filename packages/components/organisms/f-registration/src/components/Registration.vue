@@ -34,7 +34,6 @@
                     <p
                         v-if="genericErrorMessage"
                         :class="$style['o-form-error']">
-                        <warning-icon :class="$style['o-form-error-icon']" />
                         {{ genericErrorMessage }}
                     </p>
                 </section>
@@ -56,7 +55,6 @@
                             id="error-message-firstname"
                             :class="$style['o-form-error']"
                             data-test-id='error-message-firstname'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
                             {{ describeFirstnameErrorMessage }}
                         </p>
                     </template>
@@ -79,7 +77,6 @@
                             id="error-message-lastname"
                             :class="$style['o-form-error']"
                             data-test-id='error-message-lastname'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
                             {{ describeLastnameErrorMessage }}
                         </p>
                     </template>
@@ -102,7 +99,6 @@
                             id="error-message-email"
                             :class="$style['o-form-error']"
                             data-test-id='error-message-email'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
                             {{ describeEmailErrorMessage }}
                         </p>
                     </template>
@@ -125,7 +121,6 @@
                             id="error-message-password"
                             :class="$style['o-form-error']"
                             data-test-id='error-message-password'>
-                            <warning-icon :class="$style['o-form-error-icon']" />
                             {{ describePasswordErrorMessage }}
                         </p>
                     </template>
