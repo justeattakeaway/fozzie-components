@@ -2,7 +2,7 @@ const forEach = require('mocha-each');
 const Footer = require('../../../../test-utils/component-objects/f-footer.component');
 const footer = new Footer();
 
-describe('Shared - f-footer component tests', () => {
+describe('Desktop - f-footer component tests', () => {
     beforeEach(() => {
         footer.open('gb');
         footer.waitForComponent();
