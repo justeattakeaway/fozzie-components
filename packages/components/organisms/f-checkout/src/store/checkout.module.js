@@ -1,6 +1,7 @@
 import axios from 'axios';
 import addressService from '../services/addressService';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE } from '../constants';
+import { version as applicationVerion } from '../../package.json';
 
 import {
     UPDATE_AUTH,
@@ -242,11 +243,10 @@ export default {
 
             const config = {
                 headers: {
-                    'Content-Type': 'application/json;v=1',
-                    'x-je-feature': data.applicationName,
-                    ...(state.isLoggedIn && {
-                        Authorization: authHeader
-                    })
+                    'Content-Type': 'application/json;v=2',
+                    'x-je-application-id': 7, // Responsive Web
+                    'x-je-application-version': applicationVerion,
+                    Authorization: authHeader
                 },
                 timeout
             };

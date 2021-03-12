@@ -5,6 +5,7 @@ import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
+import { version as applicationVerion } from '../../../package.json';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE } from '../../constants';
 
 import {
@@ -30,8 +31,9 @@ const {
     getBasket,
     getCheckout,
     getGeoLocation,
-    updateCheckout,
+    placeOrder,
     setAuthToken,
+    updateCheckout,
     updateAddressDetails,
     updateCustomerDetails,
     updateFulfilmentTime,
@@ -60,6 +62,8 @@ const locationData = {
         'JZ1 1AA'
     ]
 };
+
+const basketId = 'newbasketid0001-v1';
 
 const time = {
     from: 'fromTime',
@@ -254,7 +258,7 @@ describe('CheckoutModule', () => {
             url: 'http://localhost/account/checkout',
             tenant: 'uk',
             language: 'en-GB',
-            timeout: '1000',
+            timeout: 1000,
             postData: null
         };
 
@@ -360,6 +364,43 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
+            });
+        });
+
+        describe('placeOrder ::', () => {
+            it('should post the order details to the backend.', async () => {
+                // Arrange
+                payload.url = 'http://localhost/opapi/placeorder';
+                payload.data = {
+                    basketId,
+                    customerNotes: {
+                        noteForRestaurant: userNote
+                    },
+                    referralState: 'ReferredByWeb'
+                };
+
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json;v=2',
+                        'x-je-application-id': 7,
+                        'x-je-application-version': applicationVerion,
+                        Authorization: `Bearer ${authToken}`
+                    },
+                    timeout: payload.timeout
+                };
+
+                axios.post = jest.fn(() => Promise.resolve({
+                    status: 200,
+                    data: {
+                        issues
+                    }
+                }));
+
+                // Act
+                await placeOrder({ commit, state }, payload);
+
+                // Assert
+                expect(axios.post).toHaveBeenCalledWith(payload.url, payload.data, config);
             });
         });
 

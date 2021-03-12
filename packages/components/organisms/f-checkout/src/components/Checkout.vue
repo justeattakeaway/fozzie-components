@@ -10,12 +10,14 @@
         <div
             v-else-if="shouldShowCheckoutForm"
             data-theme="jet"
-            data-test-id="checkout-component">
+            data-test-id="checkout-component"
+        >
             <alert
                 v-if="genericErrorMessage"
                 type="danger"
                 :class="$style['c-checkout-alert']"
-                :heading="$t('errorMessages.errorHeading')">
+                :heading="$t('errorMessages.errorHeading')"
+            >
                 {{ genericErrorMessage }}
             </alert>
 
@@ -25,14 +27,15 @@
                 is-page-content-wrapper
                 card-heading-position="center"
                 data-test-id="checkout-card-component"
-                :class="$style['c-checkout']">
-                <checkout-header
-                    :login-url="loginUrl" />
+                :class="$style['c-checkout']"
+            >
+                <checkout-header :login-url="loginUrl" />
 
                 <form
                     method="post"
                     :class="$style['c-checkout-form']"
-                    @submit.prevent="onFormSubmit">
+                    @submit.prevent="onFormSubmit"
+                >
                     <guest-block v-if="!isLoggedIn" />
 
                     <form-field
@@ -40,11 +43,13 @@
                         name="mobile-number"
                         :label-text="$t('labels.mobileNumber')"
                         :has-error="!isMobileNumberValid"
-                        @input="updateCustomerDetails({ mobileNumber: $event })">
+                        @input="updateCustomerDetails({ mobileNumber: $event })"
+                    >
                         <template #error>
                             <error-message
                                 v-if="!isMobileNumberValid"
-                                data-test-id="error-mobile-number">
+                                data-test-id="error-mobile-number"
+                            >
                                 {{ $t('validationMessages.mobileNumber.requiredError') }}
                             </error-message>
                         </template>
@@ -52,13 +57,15 @@
 
                     <address-block
                         v-if="isCheckoutMethodDelivery"
-                        data-test-id="address-block" />
+                        data-test-id="address-block"
+                    />
 
                     <form-selector />
 
                     <user-note
                         data-test-id="user-note"
-                        @input="updateUserNote($event.target.value)" />
+                        @input="updateUserNote($event.target.value)"
+                    />
 
                     <f-button
                         :class="$style['c-checkout-submitButton']"
@@ -66,13 +73,13 @@
                         button-size="large"
                         is-full-width
                         action-type="submit"
-                        data-test-id="confirm-payment-submit-button">
+                        data-test-id="confirm-payment-submit-button"
+                    >
                         {{ $t('buttonText') }}
                     </f-button>
                 </form>
 
-                <checkout-terms-and-conditions
-                    v-if="!isLoggedIn" />
+                <checkout-terms-and-conditions v-if="!isLoggedIn" />
             </card>
         </div>
 
@@ -279,8 +286,8 @@ export default {
 
         shouldLoadAddress () {
             return this.isLoggedIn &&
-            this.isCheckoutMethodDelivery &&
-            (!this.address || !this.address.line1);
+                this.isCheckoutMethodDelivery &&
+                (!this.address || !this.address.line1);
         },
 
         shouldShowCheckoutForm () {
@@ -449,15 +456,10 @@ export default {
         async submitOrder () {
             const data = {
                 basketId: this.basket.id,
-                applicationId: 7, // Responsive Web
                 customerNotes: {
                     noteForRestaurant: this.userNote
                 },
-                applicationName: this.applicationName,
-                applicationVersion: '1',
-                referralState: 'None',
-                deviceId: '127.0.0.1', // TODO: TBC
-                deviceName: window.navigator.userAgent
+                referralState: 'ReferredByWeb'
             };
 
             await this.placeOrder({
