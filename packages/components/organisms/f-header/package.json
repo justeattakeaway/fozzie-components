@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-header",
   "description": "Fozzie Header – Globalised Header Component",
-  "version": "4.9.0",
+  "version": "4.10.0",
   "main": "dist/f-header.umd.min.js",
   "files": [
     "dist",
