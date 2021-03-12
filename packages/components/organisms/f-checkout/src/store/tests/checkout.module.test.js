@@ -5,6 +5,7 @@ import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
+import customerAuth from '../../demo/customer-auth.json';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE } from '../../constants';
 
 import {
@@ -29,6 +30,7 @@ const {
     getAvailableFulfilment,
     getBasket,
     getCheckout,
+    getCustomerName,
     getGeoLocation,
     updateCheckout,
     setAuthToken,
@@ -44,7 +46,7 @@ const customerDetails = {
     mobileNumber
 };
 
-const authToken = 'sampleToken';
+const authToken = customerAuth.token;
 
 const address = {
     line1: 'line 1',
@@ -261,6 +263,7 @@ describe('CheckoutModule', () => {
         beforeEach(() => {
             commit = jest.fn();
             dispatch = jest.fn();
+            state = defaultState;
         });
 
         describe('getCheckout ::', () => {
@@ -360,6 +363,22 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
+            });
+        });
+
+        describe('getCustomerName ::', () => {
+            it('should get the customer first name and last name from token', async () => {
+                // Arrange
+                const expectedCustomerDetails = {
+                    firstName: 'Joe',
+                    lastName: 'Bloggs'
+                };
+
+                // Act
+                await getCustomerName({ commit, state });
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_CUSTOMER_DETAILS, expectedCustomerDetails);
             });
         });
 
