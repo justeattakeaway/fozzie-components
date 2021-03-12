@@ -7,7 +7,7 @@ describe('Mobile - f-header component tests', () => {
         header.open();
         header.waitForComponent();
 
-        if (browser.capabilities.browserName === 'chrome') {
+        if (process.env.JE_ENV !== 'browserstack') {
             browser.setWindowSize(500, 1000);
         }
     });

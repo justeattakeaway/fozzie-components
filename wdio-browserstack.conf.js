@@ -47,9 +47,6 @@ exports.config = {
         shared: [
             './test/specs/component/shared/*.component.spec.js',
         ],
-        desktop: [
-            './test/specs/component/desktop/*.component.spec.js',
-        ],
         mobile: [
             './test/specs/component/mobile/*.component.spec.js',
         ]

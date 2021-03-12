@@ -57,7 +57,6 @@ module.exports = class Footer extends Page {
     }
 
     isDownloadIconDisplayed () {
-        console.log(this.downloadIconValue.getAttribute('href'));
         return this.downloadIcon.isDisplayed();
     }
 
