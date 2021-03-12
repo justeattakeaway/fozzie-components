@@ -77,7 +77,7 @@ export const CheckoutComponent = () => ({
         },
 
         authToken () {
-            return this.isLoggedIn ? 'Auth Token' : '';
+            return this.isLoggedIn ? CheckoutMock.mockAuthToken : '';
         }
     },
     store: new Vuex.Store({

@@ -458,6 +458,75 @@ describe('Checkout', () => {
                 expect(result).toBe(false);
             });
         });
+
+        describe('shouldLoadCustomerNameFromClaims ::', () => {
+            it('should return `true` for delivery order without customer name when user is logged in', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: true,
+                        serviceType: CHECKOUT_METHOD_DELIVERY,
+                        address: {},
+                        customer: {
+                            firstName: '',
+                            lastName: ''
+                        }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadCustomerNameFromClaims;
+
+                // Assert
+                expect(result).toBe(true);
+            });
+
+            it('should return `false` if `isLoggedIn` is `true` and customer name exists', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: false,
+                        serviceType: CHECKOUT_METHOD_DELIVERY,
+                        address: {}
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadCustomerNameFromClaims;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should return `false` if `isLoggedIn` is `false`', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: false,
+                        serviceType: CHECKOUT_METHOD_DELIVERY,
+                        address: {}
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldLoadCustomerNameFromClaims;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+        });
     });
 
     describe('mounted ::', () => {

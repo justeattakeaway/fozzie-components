@@ -10,6 +10,7 @@ import updateCheckout from './update-checkout.json';
 import getAddress from './get-address.json';
 import placeOrder from './place-order.json';
 import getGeoLocation from './get-geo-location.json';
+import customerAuth from './customer-auth.json';
 
 const mock = new MockAdapter(axios);
 
@@ -53,5 +54,7 @@ export default {
 
     passThroughAny () {
         mock.onAny().passThrough();
-    }
+    },
+
+    mockAuthToken: customerAuth.token
 };
