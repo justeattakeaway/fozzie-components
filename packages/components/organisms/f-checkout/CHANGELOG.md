@@ -3,9 +3,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.68.0
+v0.69.0
 ------------------------------
-*March 11, 2021*
+*March 12, 2021*
 
 ### Changed
 - `Checkout.vue` method clean up. Refactor `submitCheckout`.
@@ -13,6 +13,23 @@ v0.68.0
 ### Added
 - Methods `handleFulfillableContext`, `processOrderNotFulfillable`, 
 `processOrderIsFulfillable` & `logInfo`.
+
+
+v0.68.1
+------------------------------
+*March 9, 2021*
+
+### Changed
+- Locale usage in storybook
+
+
+v0.68.0
+------------------------------
+*March 9, 2021*
+
+### Changed
+- Guest checkout header to display correct text.
+
 
 v0.67.0
 ------------------------------
