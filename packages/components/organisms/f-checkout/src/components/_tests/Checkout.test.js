@@ -466,7 +466,6 @@ describe('Checkout', () => {
                     store: createStore({
                         ...defaultCheckoutState,
                         isLoggedIn: true,
-                        address: {},
                         customer: {
                             firstName: '',
                             lastName: ''
@@ -490,7 +489,6 @@ describe('Checkout', () => {
                     store: createStore({
                         ...defaultCheckoutState,
                         isLoggedIn: false,
-                        address: {}
                     }),
                     i18n,
                     localVue,
@@ -510,7 +508,6 @@ describe('Checkout', () => {
                     store: createStore({
                         ...defaultCheckoutState,
                         isLoggedIn: false,
-                        address: {}
                     }),
                     i18n,
                     localVue,
