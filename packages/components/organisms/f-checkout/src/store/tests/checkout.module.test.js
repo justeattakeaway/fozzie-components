@@ -5,7 +5,7 @@ import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
-import customerAuth from '../../demo/customer-auth.json';
+import { mockAuthToken } from '../../components/_tests/helpers/setup';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE } from '../../constants';
 
 import {
@@ -46,7 +46,7 @@ const customerDetails = {
     mobileNumber
 };
 
-const authToken = customerAuth.token;
+const authToken = mockAuthToken;
 
 const address = {
     line1: 'line 1',

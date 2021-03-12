@@ -54,7 +54,5 @@ export default {
 
     passThroughAny () {
         mock.onAny().passThrough();
-    },
-
-    mockAuthToken: customerAuth.token
+    }
 };
