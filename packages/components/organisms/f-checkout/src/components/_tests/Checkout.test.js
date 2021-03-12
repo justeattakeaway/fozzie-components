@@ -460,7 +460,7 @@ describe('Checkout', () => {
         });
 
         describe('shouldLoadCustomerNameFromClaims ::', () => {
-            it('should return `true` for delivery order without customer name when user is logged in', () => {
+            it('should return `true` if `isLoggedIn` is `true` and the customer name doesn\'t exist', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
