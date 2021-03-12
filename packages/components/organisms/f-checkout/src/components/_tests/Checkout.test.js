@@ -466,7 +466,6 @@ describe('Checkout', () => {
                     store: createStore({
                         ...defaultCheckoutState,
                         isLoggedIn: true,
-                        serviceType: CHECKOUT_METHOD_DELIVERY,
                         address: {},
                         customer: {
                             firstName: '',
@@ -491,7 +490,6 @@ describe('Checkout', () => {
                     store: createStore({
                         ...defaultCheckoutState,
                         isLoggedIn: false,
-                        serviceType: CHECKOUT_METHOD_DELIVERY,
                         address: {}
                     }),
                     i18n,
@@ -512,7 +510,6 @@ describe('Checkout', () => {
                     store: createStore({
                         ...defaultCheckoutState,
                         isLoggedIn: false,
-                        serviceType: CHECKOUT_METHOD_DELIVERY,
                         address: {}
                     }),
                     i18n,
