@@ -15,7 +15,7 @@ exports[`Footer should render default component markup 1`] = `
       <div class="c-footer-row">
         <icon-list-stub icons="[object Object],[object Object],[object Object]" title="Download our apps" isapps="true" locale="en-GB"></icon-list-stub>
         <feedback-block-stub title="Feedback" text="Help us improve our website" buttontext="Send feedback"></feedback-block-stub>
-        <icon-list-stub icons="[object Object],[object Object],[object Object]" title="Follow us" issocial="true" locale="en-GB"></icon-list-stub>
+        <icon-list-stub icons="[object Object],[object Object],[object Object],[object Object],[object Object]" title="Follow us" issocial="true" locale="en-GB"></icon-list-stub>
       </div>
     </div>
   </div>
