@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-footer",
-  "version": "4.9.1",
+  "version": "4.10.0",
   "main": "dist/f-footer.umd.min.js",
   "files": [
     "dist",
@@ -31,8 +31,9 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
-    "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
-    "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
+    "test-component:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite component",
+    "test-component:browserstack": "cross-env-shell NODE_ENV=test JE_ENV=browserstack wdio ../../../../wdio-browserstack.conf.js --suite shared",
+    "test-a11y:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite a11y"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
