@@ -2031,6 +2031,13 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-0.3.0.tgz#58a88476ee204264988640b3cd47ac5d295bde4a"
   integrity sha512-Cr6CDlrZAHoM3ZUJ2sOMLYAVYz+cka5R6THi24va3mhI8kgOSA4ZVzvx607QskTyasIX4xNfrju0HKity1Lq9w==
 
+"@justeat/f-popover@0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-popover/-/f-popover-0.2.1.tgz#0c6780bcf8c452f4b0319c14b86a3cc05904dcb0"
+  integrity sha512-myeYCy8uG5k1isc4D3sPRDFeZJnX54jvFm9zbr7b45gdx/FOVLNAiB3tEQobtakTjmfW8Jl1IxiXtuUiqBD7yg==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
+
 "@justeat/f-searchbox@3.10.0":
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-3.10.0.tgz#1a6b235494f1e22de14bd1d6eea146fd575f419b"
