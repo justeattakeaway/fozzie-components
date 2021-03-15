@@ -1,4 +1,5 @@
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE } from '../constants';
 import { version as applicationVerion } from '../../package.json';
@@ -228,6 +229,23 @@ export default {
 
             commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
+        },
+
+        /**
+         * Get the customer name from JWT claims and update state with the result
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getCustomerName: async ({ commit, state }) => {
+            const tokenData = jwtDecode(state.authToken);
+
+            const customer = {
+                firstName: tokenData.given_name,
+                lastName: tokenData.family_name
+            };
+
+            commit(UPDATE_CUSTOMER_DETAILS, customer);
         },
 
         /**

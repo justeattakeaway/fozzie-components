@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.69.0
+------------------------------
+*March 12, 2021*
+
+### Added
+- Ability to extract customer name from JWT Claims if not retrieved from server
+
 
 v0.68.1
 ------------------------------
