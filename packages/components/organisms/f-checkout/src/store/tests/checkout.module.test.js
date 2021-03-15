@@ -256,18 +256,19 @@ describe('CheckoutModule', () => {
         let commit;
         let dispatch;
 
-        const payload = {
-            url: 'http://localhost/account/checkout',
-            tenant: 'uk',
-            language: 'en-GB',
-            timeout: 1000,
-            postData: null
-        };
+        let payload;
 
         beforeEach(() => {
             commit = jest.fn();
             dispatch = jest.fn();
             state = defaultState;
+            payload = {
+                url: 'http://localhost/account/checkout',
+                tenant: 'uk',
+                language: 'en-GB',
+                timeout: 1000,
+                postData: null
+            };
         });
 
         describe('getCheckout ::', () => {
@@ -424,13 +425,13 @@ describe('CheckoutModule', () => {
         });
 
         describe('updateCheckout ::', () => {
-            payload.data = {
-                mobileNumber
-            };
-
             let config;
 
             beforeEach(() => {
+                payload.data = {
+                    mobileNumber
+                };
+
                 config = {
                     headers: {
                         'Content-Type': 'application/json',
@@ -457,14 +458,15 @@ describe('CheckoutModule', () => {
 
         describe('createGuestUser ::', () => {
             let config;
-            payload.url = 'http://localhost/account/createguest';
-            payload.data = {
-                firstName: 'Joe',
-                lastName: 'Bloggs',
-                email: 'joe@test.com'
-            };
 
             beforeEach(() => {
+                payload.url = 'http://localhost/account/createguest';
+                payload.data = {
+                    firstName: 'Joe',
+                    lastName: 'Bloggs',
+                    email: 'joe@test.com'
+                };
+
                 config = {
                     headers: {
                         'Content-Type': 'application/json',
@@ -528,9 +530,10 @@ describe('CheckoutModule', () => {
         describe('getGeoLocation ::', () => {
             // Arrange
             let config;
-            payload.postData = locationData;
 
             beforeEach(() => {
+                payload.postData = locationData;
+
                 config = {
                     headers: {
                         'Content-Type': 'application/json',
