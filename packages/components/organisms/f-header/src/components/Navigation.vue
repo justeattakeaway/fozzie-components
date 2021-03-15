@@ -51,8 +51,8 @@
             :class="['c-nav-container', { 'is-visible': navIsOpen }]">
             <ul class="c-nav-list">
                 <li
-                    v-if="showOffersLink"
-                    class="c-nav-list-item--horizontallyAlignedAboveMid ">
+                    v-if="showOffersLink  && !isBelowMid"
+                    class="c-nav-list-item--horizontallyAlignedAboveMid">
                     <a
                         data-test-id="offers-link-with-text"
                         data-trak='{
@@ -62,7 +62,7 @@
                             "label": "offers"
                         }'
                         :href="copy.offers.url"
-                        class="c-nav-list-link c-nav-list-link--showAboveMid">
+                        class="c-nav-list-link">
                         <gift-icon class="c-nav-icon c-nav-icon--offers" />
                         {{ copy.offers.text }}
                     </a>
@@ -774,12 +774,6 @@ $countrySelector-flag-height : 16px;
                     }
                 }
             }
-        }
-
-        .c-nav-list-link--showAboveMid {
-                @include media('<=mid') {
-                    display: none;
-                }
         }
 
         .c-nav-list-btn {
