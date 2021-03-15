@@ -3,7 +3,14 @@ const footer = new Footer();
 
 describe('f-footer component tests', () => {
     beforeEach(() => {
-        footer.open('au');
+        const footerData = {
+            locale: 'au',
+            courierLinks: false,
+            countrySelector: true
+        };
+
+
+        footer.open(footerData);
         footer.waitForComponent();
     });
 
@@ -13,8 +20,12 @@ describe('f-footer component tests', () => {
     });
 
     it('Should show courier links on en-AU locale', () => {
-        // Act
-        footer.openAUWithExtraFeatures();
+        // Arrange
+        const footerData = {
+            locale: 'au',
+            courierLinks: false,
+            countrySelector: true
+        };
 
         // Assert
         expect(footer.areCourierLinksDisplayed()).toBe(true);

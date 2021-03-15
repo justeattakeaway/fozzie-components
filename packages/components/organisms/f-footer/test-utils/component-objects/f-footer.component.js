@@ -8,71 +8,104 @@ const {
 } = require('./f-footer.selectors');
 
 module.exports = class Footer extends Page {
+    get component () { return $(FOOTER_COMPONENT); }
 
-    get component () { return $(FOOTER_COMPONENT) }
-    get icons () { return  $$(FOOTER_ICONS) }
-    get downloadIcons () { return $$(DOWNLOAD_ICONS) }
-    get socialIcons () { return $$(SOCIAL_ICONS) }
-    get courierLinks () { return $(COURIER_LINKS) }
-    get downloadIcon ()  { return this.downloadIconValue }
-    get socialIcon () { return this.socialIconValue }
+    get icons () { return $$(FOOTER_ICONS); }
 
-    set expectedDownloadIcon(icon) {
+    get downloadIcons () { return $$(DOWNLOAD_ICONS); }
+
+    get socialIcons () { return $$(SOCIAL_ICONS); }
+
+    get courierLinks () { return $(COURIER_LINKS); }
+
+    get downloadIcon () { return this.downloadIconValue; }
+
+    get socialIcon () { return this.socialIconValue; }
+
+    set expectedDownloadIcon (icon) {
         this.downloadIconValue = this.downloadIcons.filter(element => element.getAttribute('data-test-id').includes(icon))[0];
     }
 
-    set expectedSocialIcon(icon){
+    set expectedSocialIcon (icon) {
         this.socialIconValue = this.socialIcons.filter(element => element.getAttribute('data-test-id').includes(icon))[0];
     }
 
-    open(locale = 'gb'){
-        let countryFormatted = locale.toUpperCase();
+    /**
+     * @description
+     * Sets the data for the checkout component.
+     *
+     * @param {Object} footer
+     * @param {String} footer.locale The checkout type
+     * @param {String} footer.countrySelector The checkout authentication
+     * @param {String} footer.courierLinks The checkout authentication
+     */
+
+    open (footer) {
+        const countryFormatted = footer.locale.toUpperCase();
+        const showCountrySelector = footer.countrySelector ? '&knob-Show%20country%20selector=true' : '';
+        const showCourierLinks = footer.courierLinks ? '&knob-Show%20country%20selector=true' : '';
         let formattedLocale = '';
-        switch ( countryFormatted ){
+        switch (countryFormatted) {
             case 'GB':
             case 'AU':
-                formattedLocale = `en-${countryFormatted}`
-                break
-            default: 
-                throw new Error (`locale ${countryFormatted} is not supported`);
+            case 'NZ':
+            case 'IE':
+                formattedLocale = `en-${countryFormatted}`;
+                break;
+            case 'DK':
+                formattedLocale = `da-${countryFormatted}`;
+                break;
+            case 'ES':
+                formattedLocale = `es-${countryFormatted}`;
+                break;
+            case 'IT':
+                formattedLocale = `it-${countryFormatted}`;
+                break;
+            case 'NO':
+                formattedLocale = `nb-${countryFormatted}`;
+                break;
+            default:
+                throw new Error(`locale ${countryFormatted} is not supported`);
         }
-        super.openComponent('organism', `footer-component&knob-Locale=${formattedLocale}`);
+
+        const url = `footer-component&knob-Locale=${formattedLocale}${showCountrySelector}${showCourierLinks}`
+        super.openComponent('organism', url);
     }
 
 
-    openAUWithExtraFeatures(){
-        super.openComponent('organism', 'footer-component&knob-Show%20courier%20links=true&knob-Locale=en-AU');
-    }
+    // openAUWithExtraFeatures () {
+    //     super.openComponent('organism', 'footer-component&knob-Show%20courier%20links=true&knob-Locale=en-AU');
+    // }
 
-    openGBWithExtraFeatures(){
-        super.openComponent('organism', 'footer-component&knob-Show%20courier%20links=true&knob-Locale=en-GB');
-    }
+    // openGBWithExtraFeatures () {
+    //     super.openComponent('organism', 'footer-component&knob-Show%20courier%20links=true&knob-Locale=en-GB');
+    // }
 
-    waitForComponent(){
+    waitForComponent () {
         super.waitForComponent(this.component);
     }
 
-    isComponentDisplayed(){
+    isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    isDownloadIconDisplayed(){
+    isDownloadIconDisplayed () {
         return this.downloadIcon.isDisplayed();
     }
 
-    clickDownloadIcon(){
+    clickDownloadIcon () {
         return this.downloadIcon.click();
     }
 
-    isSocialIconDisplayed(){
+    isSocialIconDisplayed () {
         return this.socialIcon.isDisplayed();
     }
 
-    clickSocialIcon(){
+    clickSocialIcon () {
         return this.socialIcon.click();
     }
 
-    areCourierLinksDisplayed(){
+    areCourierLinksDisplayed () {
         return this.courierLinks.isDisplayed();
     }
-}
+};
