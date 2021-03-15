@@ -44,6 +44,8 @@ module.exports = class Footer extends Page {
         const countryFormatted = footer.locale.toUpperCase();
         const showCountrySelector = footer.countrySelector ? '&knob-Show%20country%20selector=true' : '';
         const showCourierLinks = footer.courierLinks ? '&knob-Show%20country%20selector=true' : '';
+    open (locale = 'gb') {
+        let countryFormatted = locale.toUpperCase();
         let formattedLocale = '';
         switch (countryFormatted) {
             case 'GB':
@@ -66,6 +68,10 @@ module.exports = class Footer extends Page {
                 break;
             default:
                 throw new Error(`locale ${countryFormatted} is not supported`);
+                formattedLocale = `en-${countryFormatted}`
+                break;
+            default:
+                throw new Error (`locale ${countryFormatted} is not supported`);
         }
 
         const url = `footer-component&knob-Locale=${formattedLocale}${showCountrySelector}${showCourierLinks}`
@@ -73,6 +79,7 @@ module.exports = class Footer extends Page {
     }
 
 
+<<<<<<< HEAD
     // openAUWithExtraFeatures () {
     //     super.openComponent('organism', 'footer-component&knob-Show%20courier%20links=true&knob-Locale=en-AU');
     // }
@@ -80,6 +87,15 @@ module.exports = class Footer extends Page {
     // openGBWithExtraFeatures () {
     //     super.openComponent('organism', 'footer-component&knob-Show%20courier%20links=true&knob-Locale=en-GB');
     // }
+=======
+    openAUWithExtraFeatures () {
+        super.openComponent('organism', 'footer-component&knob-Show%20courier%20links=true&knob-Locale=en-AU');
+    }
+
+    openGBWithExtraFeatures () {
+        super.openComponent('organism', 'footer-component&knob-Show%20courier%20links=true&knob-Locale=en-GB');
+    }
+>>>>>>> master
 
     waitForComponent () {
         super.waitForComponent(this.component);

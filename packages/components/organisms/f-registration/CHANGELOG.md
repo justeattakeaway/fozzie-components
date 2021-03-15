@@ -4,8 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (add to next release)
+v0.47.0
 ------------------------------
+*March 12, 2021*
+
+## Added
+- Browserstack test config in `package.json`
+
+### Changed
+- Restructured component tests to support Browserstack
 
 *March 8, 2021*
 

@@ -1,8 +1,8 @@
-const Registration = require ('../../../test-utils/component-objects/f-registration.component');
-const registration = new Registration();
 const forEach = require('mocha-each');
+const Registration = require ('../../../../test-utils/component-objects/f-registration.component');
+const registration = new Registration();
 
-describe('f-registration component tests', () => {
+describe('Shared - f-registration component tests', () => {
     beforeEach(() => {
         registration.open();
         registration.waitForComponent();
@@ -59,7 +59,7 @@ describe('f-registration component tests', () => {
         const userInfo = {
             firstName: '123*',
             lastName: '456*',
-            email: '***@**', 
+            email: '***@**',
             password: 'llanfairpwllgwyngyllgogerychwyr'
         };
 
