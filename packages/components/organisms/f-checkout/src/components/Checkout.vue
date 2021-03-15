@@ -371,7 +371,7 @@ export default {
 
                 this.$emit(EventNames.CheckoutFailure, eventData);
 
-                this.logInfo('Consumer Checkout Failure', eventData);
+                this.logInvoker('Consumer Checkout Failure', eventData, this.$logger.logError);
             }
         },
 
@@ -384,7 +384,7 @@ export default {
         },
 
         processOrderNotFulfillable (eventData) {
-            this.logInfo('Consumer Checkout Not Fulfillable', eventData);
+            this.logInvoker('Consumer Checkout Not Fulfillable', eventData, this.$logger.logWarn);
         },
 
         async processOrderIsFulfillable (eventData) {
@@ -392,13 +392,13 @@ export default {
 
             this.$emit(EventNames.CheckoutSuccess, eventData);
 
-            this.logInfo('Consumer Checkout Successful', eventData);
+            this.logInvoker('Consumer Checkout Successful', eventData, this.$logger.logInfo);
 
             this.redirectToPayment();
         },
 
-        logInfo (message, eventData) {
-            this.$logger.logInfo(
+        logInvoker (message, eventData, callback) {
+            callback(
                 message,
                 this.$store,
                 eventData

@@ -891,21 +891,21 @@ describe('Checkout', () => {
                         expect($emitSpy).toHaveBeenCalledWith('checkout-payment-failure', eventData);
                     });
 
-                    it('should `logInfo` with a `message` & `eventData`', async () => {
+                    it('should `logInvoker` with a `message` & `eventData`', async () => {
                         // Arrange
-                        const logInfoSpy = jest.spyOn(wrapper.vm, 'logInfo');
+                        const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
 
                         // Act
                         wrapper.vm.submitCheckout();
 
                         // Assert
-                        expect(logInfoSpy).toHaveBeenCalledWith('Consumer Checkout Failure', eventData);
+                        expect(logInvokerSpy).toHaveBeenCalledWith('Consumer Checkout Failure', eventData, $logger.logError);
                     });
                 });
             });
         });
 
-        describe('`logInfo` ::', () => {
+        describe('`logInvoker` ::', () => {
             let wrapper;
             const store = createStore({
                 ...defaultCheckoutState,
@@ -926,18 +926,19 @@ describe('Checkout', () => {
             });
 
             it('should exist', () => {
-                expect(wrapper.vm.logInfo).toBeDefined();
+                expect(wrapper.vm.logInvoker).toBeDefined();
             });
 
             describe('when invoked', () => {
-                it('should call `$logger.logInfo` with the `message`, `$store` & `eventData`', () => {
+                it('should call `$logger` with the correct callback assigned', () => {
                     // Arrange
                     const eventData = {
                         isLoggedIn: true,
                         serviceType: CHECKOUT_METHOD_DELIVERY
                     };
+
                     // Act
-                    wrapper.vm.logInfo('Logger says hi', store, eventData);
+                    wrapper.vm.logInvoker('Logger says hi', eventData, $logger.logInfo);
 
                     // Assert
                     expect($logger.logInfo).toHaveBeenCalled();
@@ -991,9 +992,9 @@ describe('Checkout', () => {
                     expect($emitSpy).toHaveBeenCalledWith('checkout-payment-success', eventData);
                 });
 
-                it('should `logInfo` with a `message` & `eventData` passed', async () => {
+                it('should `logInvoker` with a `message` & `eventData` passed', async () => {
                     // Arrange
-                    const logInfoSpy = jest.spyOn(wrapper.vm, 'logInfo');
+                    const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
                     const eventData = {
                         isLoggedIn: false,
                         serviceType: 'delivery'
@@ -1003,7 +1004,7 @@ describe('Checkout', () => {
                     await wrapper.vm.processOrderIsFulfillable(eventData);
 
                     // Assert
-                    expect(logInfoSpy).toHaveBeenCalledWith('Consumer Checkout Successful', eventData);
+                    expect(logInvokerSpy).toHaveBeenCalledWith('Consumer Checkout Successful', eventData, $logger.logInfo);
                 });
 
                 it('should redirect to payments', async () => {
@@ -1039,9 +1040,9 @@ describe('Checkout', () => {
             });
 
             describe('when invoked', () => {
-                it('should make a call to `logInfo` with a `message` and `eventData`', () => {
+                it('should make a call to `logInvoker` with a `message` and `eventData`', () => {
                     // Arrange
-                    const logInfoSpy = jest.spyOn(wrapper.vm, 'logInfo');
+                    const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
                     const eventData = {
                         isLoggedIn: false,
                         serviceType: 'delivery'
@@ -1051,9 +1052,10 @@ describe('Checkout', () => {
                     wrapper.vm.processOrderNotFulfillable(eventData);
 
                     // Assert
-                    expect(logInfoSpy).toHaveBeenCalledWith(
+                    expect(logInvokerSpy).toHaveBeenCalledWith(
                         'Consumer Checkout Not Fulfillable',
-                        eventData
+                        eventData,
+                        $logger.logWarn
                     );
                 });
             });
