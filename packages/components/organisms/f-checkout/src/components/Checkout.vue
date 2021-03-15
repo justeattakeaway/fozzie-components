@@ -366,7 +366,6 @@ export default {
                 await this.handleUpdateCheckout();
 
                 await this.handleFulfillableContext(eventData);
-
             } catch (thrownErrors) {
                 eventData.errors = thrownErrors;
 
@@ -377,9 +376,11 @@ export default {
         },
 
         async handleFulfillableContext (eventData) {
-            this.isFulfillable
-                ? await this.processOrderIsFulfillable(eventData)
-                : this.processOrderNotFulfillable(eventData);
+            if (this.isFulfillable) {
+                await this.processOrderIsFulfillable(eventData);
+            } else {
+                this.processOrderNotFulfillable(eventData);
+            }
         },
 
         processOrderNotFulfillable (eventData) {
