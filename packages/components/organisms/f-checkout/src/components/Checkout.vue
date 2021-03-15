@@ -283,6 +283,10 @@ export default {
             (!this.address || !this.address.line1);
         },
 
+        shouldLoadCustomerNameFromClaims () {
+            return this.isLoggedIn && (!this.customer.firstName && !this.customer.lastName);
+        },
+
         shouldShowCheckoutForm () {
             return !this.isLoading && this.hasCheckoutLoadedSuccessfully;
         },
@@ -308,6 +312,7 @@ export default {
             'createGuestUser',
             'getAvailableFulfilment',
             'getAddress',
+            'getCustomerName',
             'getBasket',
             'getCheckout',
             'getGeoLocation',
@@ -340,6 +345,10 @@ export default {
 
             await Promise.all(promises);
             this.resetLoadingState();
+
+            if (this.shouldLoadCustomerNameFromClaims) {
+                this.getCustomerName();
+            }
 
             if (this.shouldLoadAddress) {
                 await this.loadAddress();
