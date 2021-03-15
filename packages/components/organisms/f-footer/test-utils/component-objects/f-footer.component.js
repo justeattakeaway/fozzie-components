@@ -4,7 +4,8 @@ const {
     FOOTER_ICONS,
     DOWNLOAD_ICONS,
     COURIER_LINKS,
-    SOCIAL_ICONS
+    SOCIAL_ICONS, 
+    COUNTRY_SELECTOR
 } = require('./f-footer.selectors');
 
 module.exports = class Footer extends Page {
@@ -21,6 +22,8 @@ module.exports = class Footer extends Page {
     get downloadIcon () { return this.downloadIconValue; }
 
     get socialIcon () { return this.socialIconValue; }
+
+    get countrySelector () { return $(COUNTRY_SELECTOR); }
 
     set expectedDownloadIcon (icon) {
         this.downloadIconValue = this.downloadIcons.filter(element => element.getAttribute('data-test-id').includes(icon))[0];
@@ -43,9 +46,7 @@ module.exports = class Footer extends Page {
     open (footer) {
         const countryFormatted = footer.locale.toUpperCase();
         const showCountrySelector = footer.countrySelector ? '&knob-Show%20country%20selector=true' : '';
-        const showCourierLinks = footer.courierLinks ? '&knob-Show%20country%20selector=true' : '';
-    open (locale = 'gb') {
-        let countryFormatted = locale.toUpperCase();
+        const showCourierLinks = footer.courierLinks ? '&knob-Show%20courier%20links=true' : '';
         let formattedLocale = '';
         switch (countryFormatted) {
             case 'GB':
@@ -67,35 +68,12 @@ module.exports = class Footer extends Page {
                 formattedLocale = `nb-${countryFormatted}`;
                 break;
             default:
-                throw new Error(`locale ${countryFormatted} is not supported`);
-                formattedLocale = `en-${countryFormatted}`
-                break;
-            default:
                 throw new Error (`locale ${countryFormatted} is not supported`);
         }
 
-        const url = `footer-component&knob-Locale=${formattedLocale}${showCountrySelector}${showCourierLinks}`
+        const url = `footer-component&knob-Locale=${formattedLocale}${showCountrySelector}${showCourierLinks}`;
         super.openComponent('organism', url);
     }
-
-
-<<<<<<< HEAD
-    // openAUWithExtraFeatures () {
-    //     super.openComponent('organism', 'footer-component&knob-Show%20courier%20links=true&knob-Locale=en-AU');
-    // }
-
-    // openGBWithExtraFeatures () {
-    //     super.openComponent('organism', 'footer-component&knob-Show%20courier%20links=true&knob-Locale=en-GB');
-    // }
-=======
-    openAUWithExtraFeatures () {
-        super.openComponent('organism', 'footer-component&knob-Show%20courier%20links=true&knob-Locale=en-AU');
-    }
-
-    openGBWithExtraFeatures () {
-        super.openComponent('organism', 'footer-component&knob-Show%20courier%20links=true&knob-Locale=en-GB');
-    }
->>>>>>> master
 
     waitForComponent () {
         super.waitForComponent(this.component);
@@ -123,5 +101,9 @@ module.exports = class Footer extends Page {
 
     areCourierLinksDisplayed () {
         return this.courierLinks.isDisplayed();
+    }
+
+    isCountrySelectorDisplayed () {
+        return this.countrySelector.isDisplayed();
     }
 };
