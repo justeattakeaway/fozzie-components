@@ -1,6 +1,18 @@
 const video = require('wdio-video-reporter');
 const CIRCLE_CI = process.env.CIRCLECI;
 const TEST_TYPE = process.env.TEST_TYPE;
+const JE_ENV = process.env.JE_ENV;
+
+exports.getBaseUrl = (port = 8080) => {
+    switch (JE_ENV) {
+        case 'local':
+            return `http://localhost:${port}/`;
+        case 'browserstack':
+            return `http://bs-local.com:${port}/`;
+        default:
+            throw new Error(`Sorry, ${JE_ENV} is not recognised.`);
+    }
+};
 
 exports.local = () => ({
     bail: 0,

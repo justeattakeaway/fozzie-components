@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-registration",
   "description": "Fozzie Registration Form Component",
-  "version": "0.46.0",
+  "version": "0.47.0",
   "main": "dist/f-registration.umd.min.js",
   "files": [
     "dist",
@@ -34,8 +34,9 @@
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
     "test:coverage": "yarn test --coverage",
-    "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
-    "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
+    "test-component:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite component",
+    "test-component:browserstack": "cross-env-shell JE_ENV=browserstack wdio ../../../../wdio-browserstack.conf.js --suite shared",
+    "test-a11y:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite a11y"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
