@@ -274,7 +274,7 @@ describe('Navigation', () => {
             await wrapper.setData(defaultData); // need to await this for the state to fully update the DOM
 
             // Assert
-            expect(wrapper.find('[data-test-id="offers-link-with-text"]').exists()).toBe(true);
+            expect(wrapper.find('[data-test-id="offers-link"].c-nav-list-link').exists()).toBe(true);
         });
 
         it('should not be shown on desktop when "showOffersLink" is false', async () => {
@@ -290,8 +290,7 @@ describe('Navigation', () => {
             await wrapper.setData(defaultData);
 
             // Assert
-            expect(wrapper.find('[data-test-id="offers-link-with-text"]').exists()).toBe(false);
-            expect(wrapper.find('[data-test-id="offers-link-without-text"]').exists()).toBe(false);
+            expect(wrapper.find('[data-test-id="offers-link"].c-nav-list-link').exists()).toBe(false);
         });
 
         describe('on mobile', () => {
@@ -310,7 +309,7 @@ describe('Navigation', () => {
                 await wrapper.setData(defaultData);
 
                 // Assert
-                expect(wrapper.find('[data-test-id="offers-link-without-text"]').exists()).toBe(true);
+                expect(wrapper.find('[data-test-id="offers-link"].c-nav-featureLink').exists()).toBe(true);
             });
 
             it('should not be shown when "showOffersLink" is false', async () => {
@@ -326,8 +325,8 @@ describe('Navigation', () => {
                 await wrapper.setData(defaultData);
 
                 // Assert
-                expect(wrapper.find('[data-test-id="offers-link-without-text"]').exists()).toBe(false);
-                expect(wrapper.find('[data-test-id="offers-link-with-text"]').exists()).toBe(false);
+                expect(wrapper.find('[data-test-id="offers-link"].c-nav-list-link').exists()).toBe(false);
+                expect(wrapper.find('[data-test-id="offers-link"].c-nav-featureLink').exists()).toBe(false);
             });
 
             it('should be shown with open nav when "showOffersLink" is true', async () => {
@@ -346,7 +345,8 @@ describe('Navigation', () => {
                 });
 
                 // Assert
-                expect(wrapper.find('[data-test-id="offers-link-with-text"]').exists()).toBe(true);
+                expect(wrapper.find('[data-test-id="offers-link"].c-nav-list-link').exists()).toBe(true);
+                expect(wrapper.find('[data-test-id="offers-link"].c-nav-featureLink').exists()).toBe(false);
             });
 
             it('should not be shown with open nav when "showOffersLink" is false', async () => {
@@ -365,8 +365,8 @@ describe('Navigation', () => {
                 });
 
                 // Assert
-                expect(wrapper.find('[data-test-id="offers-link-without-text"]').exists()).toBe(false);
-                expect(wrapper.find('[data-test-id="offers-link-with-text"]').exists()).toBe(false);
+                expect(wrapper.find('[data-test-id="offers-link"].c-nav-featureLink').exists()).toBe(false);
+                expect(wrapper.find('[data-test-id="offers-link"].c-nav-list-link').exists()).toBe(false);
             });
         });
     });

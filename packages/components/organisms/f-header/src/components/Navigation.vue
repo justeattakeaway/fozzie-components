@@ -32,7 +32,7 @@
 
         <a
             v-if="showOffersLink && !navIsOpen"
-            data-test-id="offers-link-without-text"
+            data-test-id="offers-link"
             data-trak='{
                 "trakEvent": "click",
                 "category": "header",
@@ -54,7 +54,7 @@
                     v-if="showOffersLink"
                     class="c-nav-list-item--horizontallyAlignedAboveMid">
                     <a
-                        data-test-id="offers-link-with-text"
+                        data-test-id="offers-link"
                         data-trak='{
                             "trakEvent": "click",
                             "category": "header",

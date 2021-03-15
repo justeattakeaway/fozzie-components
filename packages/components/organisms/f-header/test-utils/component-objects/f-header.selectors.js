@@ -4,7 +4,7 @@ export const MOBILE_NAVIGATION_BAR = '[data-test-id="nav-toggle"]';
 
 export const NAVIGATION = {
     offers: {
-        link: '[data-test-id="offers-link-without-text"]', 
+        link: '[data-test-id="offers-link"]', 
     },
     help: {
         link: '[data-test-id="help-link"]', 
