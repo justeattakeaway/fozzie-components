@@ -573,6 +573,7 @@ $nav-icon-color                    : $color-secondary;
 $nav-icon-color--transparent       : $white;
 $nav-icon-color--mobileWhiteBg     : $grey--darkest;
 $nav-transition-duration           : 250ms;
+$nav-icon-size                     : 24px;
 
 $nav-featureLinkIcon-width         : 28px;
 $nav-featureLinkIcon-height        : 28px;
@@ -834,8 +835,8 @@ $countrySelector-flag-height : 16px;
     .c-nav-icon {
         float: left;
         margin-right: spacing();
-        width: 24px;
-        height: 24px;
+        width: $nav-icon-size;
+        height: $nav-icon-size;
 
         @include media('>mid') {
             & path {
