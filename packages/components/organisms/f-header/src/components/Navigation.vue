@@ -32,7 +32,7 @@
 
         <a
             v-if="showOffersLink"
-            data-test-id="offers-link"
+            data-test-id="offers-link-without-text"
             data-trak='{
                 "trakEvent": "click",
                 "category": "header",
@@ -40,7 +40,7 @@
                 "label": "offers_icon"
             }'
             :href="copy.offers.url"
-            class="c-nav-featureLink u-showBelowMid">
+            class="c-nav-featureLink">
             <gift-icon class="c-nav-icon c-nav-icon--offers" />
             <span class="is-visuallyHidden">
                 {{ copy.offers.text }}
@@ -54,7 +54,7 @@
                     v-if="showOffersLink"
                     class="c-nav-list-item--horizontallyAlignedAboveMid ">
                     <a
-                        data-test-id="offers-link"
+                        data-test-id="offers-link-with-text"
                         data-trak='{
                             "trakEvent": "click",
                             "category": "header",
@@ -62,7 +62,7 @@
                             "label": "offers"
                         }'
                         :href="copy.offers.url"
-                        class="c-nav-list-link u-showAboveMid">
+                        class="c-nav-list-link c-nav-list-link--showAboveMid">
                         <gift-icon class="c-nav-icon c-nav-icon--offers" />
                         {{ copy.offers.text }}
                     </a>
@@ -776,6 +776,12 @@ $countrySelector-flag-height : 16px;
             }
         }
 
+        .c-nav-list-link--showAboveMid {
+                @include media('<=mid') {
+                    display: none;
+                }
+        }
+
         .c-nav-list-btn {
             display: flex;
             align-items: center;
@@ -805,7 +811,9 @@ $countrySelector-flag-height : 16px;
             height: spacing(x2) + $nav-featureLinkIcon-height + spacing(x2);
             padding: spacing(x2);
         }
-
+        @include media('>mid') {
+            display: none;
+        }
     }
 
     // Icons, such as the profile icon
