@@ -69,7 +69,8 @@ const defaultCheckoutActions = {
     getGeoLocation: jest.fn(),
     getBasket: jest.fn(),
     getAddress: jest.fn(),
-    placeOrder: jest.fn()
+    placeOrder: jest.fn(),
+    getCustomerName: jest.fn()
 };
 
 const defaultAnalyticsActions = {
@@ -117,6 +118,14 @@ const $logger = {
     logError: jest.fn()
 };
 
+// eslint-disable-next-line
+const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
+    + 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbS'
+    + 'IsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkz'
+    + 'MDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkI'
+    + 'joiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25h'
+    + 'bWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
+
 export {
     fulfilmentTimes,
     defaultCheckoutState,
@@ -124,5 +133,7 @@ export {
     defaultAnalyticsState,
     i18n,
     createStore,
-    $logger
+    $logger,
+    mockAuthToken
 };
+
