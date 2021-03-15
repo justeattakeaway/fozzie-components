@@ -260,7 +260,6 @@ describe('Navigation', () => {
         });
     });
 
-
     describe('offers link', () => {
         it('should be shown on desktop when "showOffersLink" is true', async () => {
             // Arrange
@@ -292,6 +291,7 @@ describe('Navigation', () => {
 
             // Assert
             expect(wrapper.find('[data-test-id="offers-link-with-text"]').exists()).toBe(false);
+            expect(wrapper.find('[data-test-id="offers-link-without-text"]').exists()).toBe(false);
         });
 
         describe('on mobile', () => {
@@ -327,6 +327,7 @@ describe('Navigation', () => {
 
                 // Assert
                 expect(wrapper.find('[data-test-id="offers-link-without-text"]').exists()).toBe(false);
+                expect(wrapper.find('[data-test-id="offers-link-with-text"]').exists()).toBe(false);
             });
 
             it('should be shown with open nav when "showOffersLink" is true', async () => {
@@ -345,7 +346,7 @@ describe('Navigation', () => {
                 });
 
                 // Assert
-                expect(wrapper.find('[data-test-id="offers-link-without-text"]').exists()).toBe(true);
+                expect(wrapper.find('[data-test-id="offers-link-with-text"]').exists()).toBe(true);
             });
 
             it('should not be shown with open nav when "showOffersLink" is false', async () => {
@@ -365,6 +366,7 @@ describe('Navigation', () => {
 
                 // Assert
                 expect(wrapper.find('[data-test-id="offers-link-without-text"]').exists()).toBe(false);
+                expect(wrapper.find('[data-test-id="offers-link-with-text"]').exists()).toBe(false);
             });
         });
     });

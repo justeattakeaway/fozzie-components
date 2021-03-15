@@ -90,5 +90,10 @@ export default {
     @include media('>mid') {
         @include font-size('body-l');
     }
+
+    @include media('<=mid') {
+        padding-left: spacing(x6);
+    }
+
 }
 </style>

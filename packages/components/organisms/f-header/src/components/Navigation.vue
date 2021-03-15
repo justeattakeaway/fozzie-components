@@ -31,7 +31,7 @@
         </label>
 
         <a
-            v-if="showOffersLink"
+            v-if="showOffersLink && !navIsOpen"
             data-test-id="offers-link-without-text"
             data-trak='{
                 "trakEvent": "click",
@@ -40,7 +40,7 @@
                 "label": "offers_icon"
             }'
             :href="copy.offers.url"
-            class="c-nav-featureLink">
+            class="c-nav-featureLink c-nav-featureLink--hideAboveMid">
             <gift-icon class="c-nav-icon c-nav-icon--offers" />
             <span class="is-visuallyHidden">
                 {{ copy.offers.text }}
@@ -51,7 +51,7 @@
             :class="['c-nav-container', { 'is-visible': navIsOpen }]">
             <ul class="c-nav-list">
                 <li
-                    v-if="showOffersLink  && !isBelowMid"
+                    v-if="showOffersLink"
                     class="c-nav-list-item--horizontallyAlignedAboveMid">
                     <a
                         data-test-id="offers-link-with-text"
@@ -68,8 +68,8 @@
                     </a>
                 </li>
                 <li
-                    v-if="showDeliveryEnquiry && !isBelowMid"
-                    class="c-nav-list-item--horizontallyAlignedAboveMid "
+                    v-if="showDeliveryEnquiry"
+                    class="c-nav-list-item--horizontallyAlignedAboveMid"
                     data-test-id="delivery-enquiry">
                     <a
                         data-test-id="delivery-link"
@@ -87,7 +87,7 @@
                     </a>
                 </li>
                 <li
-                    :class="['c-nav-list-item--horizontallyAlignedAboveMid  has-sublist', {
+                    :class="['c-nav-list-item--horizontallyAlignedAboveMid has-sublist', {
                         'is-hidden': !userInfo || !showLoginInfo,
                         'is-open': navIsOpen
                     }]"
@@ -124,7 +124,7 @@
 
                 <li
                     v-if="!userInfo && showLoginInfo"
-                    class="c-nav-list-item--horizontallyAlignedAboveMid "
+                    class="c-nav-list-item--horizontallyAlignedAboveMid"
                     data-test-id="login">
                     <a
                         :href="returnLoginUrl"
@@ -143,7 +143,7 @@
 
                 <li
                     v-if="showHelpLink"
-                    class="c-nav-list-item--horizontallyAlignedAboveMid  c-nav-list-item--support">
+                    class="c-nav-list-item--horizontallyAlignedAboveMid">
                     <a
                         :href="copy.help.url"
                         :data-trak='`{
@@ -152,7 +152,7 @@
                                 "action": "header",
                                 "label": "${copy.help.gtm}"
                             }`'
-                        class="c-nav-list-link"
+                        class="c-nav-list-link c-nav-list-link--leftPaddingBelowMid"
                         data-test-id="help-link"
                         v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
                         {{ copy.help.text }}
@@ -161,7 +161,7 @@
 
                 <li
                     v-if="userInfo && isBelowMid && showLoginInfo"
-                    class="c-nav-list-item--horizontallyAlignedAboveMid "
+                    class="c-nav-list-item--horizontallyAlignedAboveMid"
                     data-test-id="logout">
                     <a
                         :tabindex="navIsOpen ? 0 : -1"
@@ -172,7 +172,7 @@
                                 "action": "header",
                                 "label": "${copy.accountLogout.gtm}"
                             }`'
-                        class="c-nav-list-link"
+                        class="c-nav-list-link c-nav-list-link--leftPaddingBelowMid"
                         v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
                         {{ copy.accountLogout.text }}
                     </a>
@@ -181,7 +181,7 @@
                 <li
                     v-if="showCountrySelector"
                     data-test-id="country-selector"
-                    :class="['c-nav-list-item--horizontallyAlignedAboveMid  has-sublist', {
+                    :class="['c-nav-list-item--horizontallyAlignedAboveMid has-sublist', {
                         'is-open': countrySelectorIsOpen
                     }]"
                     v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: closeCountrySelector }"
@@ -571,7 +571,7 @@ $nav-text-weight                   : $font-weight-bold;
 $nav-text-subFont                  : $font-family-base;
 $nav-icon-color                    : $color-secondary;
 $nav-icon-color--transparent       : $white;
-$nav-icon-color--mobileWhiteBg     : $grey--mid;
+$nav-icon-color--mobileWhiteBg     : $grey--darkest;
 $nav-transition-duration           : 250ms;
 
 $nav-featureLinkIcon-width         : 28px;
@@ -710,9 +710,11 @@ $countrySelector-flag-height : 16px;
             width: 100%;
         }
     }
+
         .c-nav-list-link,
         .c-nav-list-text {
-            display: block;
+            display: flex;
+            align-items: center;
             padding: spacing(x1.5) spacing(x2);
             margin: 0;
             font-family: $nav-text-subFont;
@@ -727,11 +729,6 @@ $countrySelector-flag-height : 16px;
                 font-weight: $nav-text-weight;
                 color: $nav-text-color;
                 border-bottom: none;
-
-                // the following styles align the elements vertically to the height of the header bar
-                // don’t need a fallback, as it degrades gracefully
-                display: flex;
-                align-items: center;
                 height: $header-height;
 
                 .c-header--highlightBg &,
@@ -740,6 +737,13 @@ $countrySelector-flag-height : 16px;
                 }
             }
         }
+
+        .c-nav-list-text {
+            @include media('<=mid') {
+                display: block;
+            }
+        }
+
         .c-nav-list-text-sub {
             display: block;
             overflow: hidden;
@@ -776,6 +780,12 @@ $countrySelector-flag-height : 16px;
             }
         }
 
+        .c-nav-list-link--leftPaddingBelowMid {
+            @include media('<=mid') {
+                padding-left: spacing(x6);
+            }
+        }
+
         .c-nav-list-btn {
             display: flex;
             align-items: center;
@@ -805,6 +815,16 @@ $countrySelector-flag-height : 16px;
             height: spacing(x2) + $nav-featureLinkIcon-height + spacing(x2);
             padding: spacing(x2);
         }
+
+        path {
+            .c-header--highlightBg &,
+            .c-header--transparent & {
+                fill: $nav-icon-color--transparent;
+            }
+        }
+    }
+
+    .c-nav-featureLink--hideAboveMid {
         @include media('>mid') {
             display: none;
         }
@@ -814,6 +834,8 @@ $countrySelector-flag-height : 16px;
     .c-nav-icon {
         float: left;
         margin-right: spacing();
+        width: 24px;
+        height: 24px;
 
         @include media('>mid') {
             & path {
@@ -827,34 +849,12 @@ $countrySelector-flag-height : 16px;
         }
     }
 
+    .c-nav-icon--delivery,
+    .c-nav-icon--offers,
     .c-nav-icon--profile {
-        width: 20px;
-        height: 22px;
-
         @include media('<=mid') {
-            width: 33px;
-            height: 33px;
-            * {
+            & path {
                 fill: $nav-icon-color--mobileWhiteBg;
-            }
-        }
-    }
-
-    .c-nav-icon--delivery {
-        width: 20px;
-        height: 20px;
-    }
-
-    .c-nav-icon--offers {
-        width: $nav-featureLinkIcon-width;
-        height: $nav-featureLinkIcon-height;
-
-        & path {
-            fill: $nav-icon-color;
-
-            .c-header--highlightBg &,
-            .c-header--transparent & {
-                fill: $nav-icon-color--transparent;
             }
         }
     }
