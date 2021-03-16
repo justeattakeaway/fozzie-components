@@ -2,10 +2,10 @@ const forEach = require('mocha-each');
 const Footer = require('../../../../test-utils/component-objects/f-footer.component');
 const footer = new Footer();
 
-describe('Shared - f-footer component tests for tennants: AU, IE, NZ, ES, IT, NO', () => {
+describe('Shared - f-footer component tests for tenants: AU, IE, NZ, ES, IT, NO', () => {
 
     forEach(['au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('Should not show courier links and country selector if knobs are not selected', expectedLocale => {
+    .it('should not show "courier links" and "country selector" when options are unselected', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
@@ -23,12 +23,12 @@ describe('Shared - f-footer component tests for tennants: AU, IE, NZ, ES, IT, NO
     });
 
     forEach(['au', 'ie', 'nz'])
-    .it('Should show courier links and country selector if knobs are selected', expectedLocale => {
+    .it('should show courier links when option is selected', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
             courierLinks: true,
-            countrySelector: true
+            countrySelector: false
         };
 
         // Act
@@ -37,16 +37,15 @@ describe('Shared - f-footer component tests for tennants: AU, IE, NZ, ES, IT, NO
 
         // Assert
         expect(footer.areCourierLinksDisplayed()).toBe(true);
-        expect(footer.isCountrySelectorDisplayed()).toBe(true);
     });
 
     forEach(['es', 'it', 'no'])
-    .it('Should only show country selector, even if courier links and country selector are chosen', expectedLocale => {
+    .it('should never show courier links, even when option is selected', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
             courierLinks: true,
-            countrySelector: true
+            countrySelector: false
         };
 
         // Act
@@ -55,6 +54,39 @@ describe('Shared - f-footer component tests for tennants: AU, IE, NZ, ES, IT, NO
 
         // Assert
         expect(footer.areCourierLinksDisplayed()).toBe(false);
+    });
+
+    forEach(['au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
+    .it('should always show country selector when selected', expectedLocale => {
+        // Arrange
+        const footerData = {
+            locale: expectedLocale,
+            courierLinks: false,
+            countrySelector: true
+        };
+
+        // Act
+        footer.open(footerData);
+        footer.waitForComponent();
+
+        // Assert
         expect(footer.isCountrySelectorDisplayed()).toBe(true);
+    });
+
+    forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
+    .it('should display the corresponding icon for each locale selected', expectedLocale => {
+        // Arrange
+        const footerData = {
+            locale: expectedLocale,
+            courierLinks: false,
+            countrySelector: true
+        };
+
+        // Act
+        footer.open(footerData);
+        footer.waitForComponent();
+
+        // Assert
+        expect(footer.isCurrentCountryIconDisplayed(expectedLocale)).toBe(true);
     });
 });

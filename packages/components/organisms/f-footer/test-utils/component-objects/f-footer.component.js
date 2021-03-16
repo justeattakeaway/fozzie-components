@@ -4,8 +4,11 @@ const {
     FOOTER_ICONS,
     DOWNLOAD_ICONS,
     COURIER_LINKS,
-    SOCIAL_ICONS, 
-    COUNTRY_SELECTOR
+    SOCIAL_ICONS,
+    COUNTRY_SELECTOR_BUTTON,
+    CURRENT_COUNTRY_ICON,
+    CURRENT_COUNTRY_TEXT,
+    COUNTRY_LIST
 } = require('./f-footer.selectors');
 
 module.exports = class Footer extends Page {
@@ -23,7 +26,15 @@ module.exports = class Footer extends Page {
 
     get socialIcon () { return this.socialIconValue; }
 
-    get countrySelector () { return $(COUNTRY_SELECTOR); }
+    get countrySelectorButton () { return $(COUNTRY_SELECTOR_BUTTON); }
+
+    get currentFlagIcon () { return $(CURRENT_COUNTRY_ICON); }
+
+    get currentCountryText () { return $(CURRENT_COUNTRY_TEXT); }
+
+    get countries () { return $$(COUNTRY_LIST); }
+
+    get countryLink () { return this.countryValue != null ? this.countryValue : 'Please set a country value'; }
 
     set expectedDownloadIcon (icon) {
         this.downloadIconValue = this.downloadIcons.filter(element => element.getAttribute('data-test-id').includes(icon))[0];
@@ -31,6 +42,10 @@ module.exports = class Footer extends Page {
 
     set expectedSocialIcon (icon) {
         this.socialIconValue = this.socialIcons.filter(element => element.getAttribute('data-test-id').includes(icon))[0];
+    }
+
+    set expectedCountry (country) {
+        this.countryValue = this.countries.filter(element => element.getAttribute('data-test-id').includes(country))[0];
     }
 
     /**
@@ -104,6 +119,23 @@ module.exports = class Footer extends Page {
     }
 
     isCountrySelectorDisplayed () {
-        return this.countrySelector.isDisplayed();
+        return this.countrySelectorButton.isDisplayed();
+    }
+
+    clickCountrySelectorButton () {
+        return this.countrySelectorButton.click();
+    }
+
+    isCountryLinkItemDisplayed () {
+        return this.countryLink.isDisplayed();
+    }
+
+    clickCountryLinkItem () {
+        return this.countryLink.click();
+    }
+
+    isCurrentCountryIconDisplayed (country) {
+        let expectedIcon = this.currentFlagIcon.getAttribute('class').includes(`c-ficon--flag.${country}.round`);
+        return expectedIcon ? this.currentFlagIcon.isDisplayed() : false;
     }
 };
