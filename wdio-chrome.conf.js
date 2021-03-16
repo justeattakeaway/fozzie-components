@@ -1,5 +1,6 @@
 // Used to set correct directories for WDIO test output
 global.baseDir = __dirname;
+const allure = require('allure-commandline');
 
 const { setTestEnvironment, setTestType, getBaseUrl } = require('./test/utils/configuration-helper');
 
@@ -146,7 +147,6 @@ exports.config = {
         browser.takeScreenshot();
         browser.deleteAllCookies();
     },
-
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -234,8 +234,6 @@ exports.config = {
      */
     // afterTest: () => {
     //}
-
-
     /**
      * Hook that gets executed after the suite has ended
      * @param {Object} suite suite details
@@ -276,8 +274,26 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {<Object>} results object containing test results
      */
-    // onComplete: function(exitCode, config, capabilities, results) {
-    // },
+    onComplete: function() {
+        if (process.env.JE_ENV.toLowerCase() !== 'browserstack') {
+            const reportError = new Error('Could not generate Allure report');
+            const generation = allure(['generate', 'test/results/allure', ' --clean']);
+            return new Promise((resolve, reject) => {
+                const generationTimeout = setTimeout(
+                    () => reject(reportError),
+                    5000
+                );
+
+                generation.on('exit', exitCode => {
+                    clearTimeout(generationTimeout);
+
+                    if (exitCode) {
+                        resolve();
+                    }
+                });
+            });
+        }
+    }
     /**
     * Gets executed when a refresh happens.
     * @param {String} oldSessionId session ID of the old session

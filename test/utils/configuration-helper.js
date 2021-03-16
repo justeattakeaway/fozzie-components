@@ -18,18 +18,17 @@ exports.local = () => ({
     bail: 0,
     maxinstances: 1,
     loglevel: 'silent',
-    reporters: [
+    reporters: JE_ENV !== 'browserstack' ? [
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases
             videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
-            outputDir: `${global.baseDir}/test/results/allure/failure-videos`
+            outputDir: `${global.baseDir}/test/results/allure`
         }],
         ['allure', {
             outputDir: `${global.baseDir}/test/results/allure`,
             disableWebdriverStepsReporting: false,
             disableWebdriverScreenshotsReporting: false
-        }],
-    ]
+        }]] : []
 });
 
 exports.ci = () => ({
