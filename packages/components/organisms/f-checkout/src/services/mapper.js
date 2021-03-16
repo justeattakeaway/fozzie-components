@@ -34,9 +34,9 @@ const mapUpdateCheckoutRequest = ({
                             address.line1 || '',
                             address.line2 || '',
                             '',
-                            address.city || '',
                             ''
                         ],
+                        locality: address.locality || null,
                         postalCode: address.postcode || null
                     }
                 } : {}),

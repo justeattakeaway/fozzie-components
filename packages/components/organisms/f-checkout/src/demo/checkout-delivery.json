@@ -15,11 +15,10 @@
   "address": {
     "lines": [
       "1 Bristol Road",
-      "Flat 1",
-      "",
-      "Bristol",
-      "Somerset"
+      "Flat 1"
     ],
+    "locality": "Bristol",
+    "administrativeArea": "Somerset",
     "postalCode": "BS1 1AA"
   },
   "isFulfillable": true,

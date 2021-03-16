@@ -53,7 +53,7 @@ const authToken = mockAuthToken;
 const address = {
     line1: 'line 1',
     line2: 'line 2',
-    city: 'city',
+    locality: 'locality',
     postcode: 'postcode'
 };
 
@@ -104,7 +104,7 @@ const defaultState = {
     address: {
         line1: '',
         line2: '',
-        city: '',
+        locality: '',
         postcode: ''
     },
     isFulfillable: true,

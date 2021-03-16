@@ -40,7 +40,7 @@ const $v = {
         }
     },
     address: {
-        city: {
+        locality: {
             $dirty: false,
             required: true
         },
@@ -444,7 +444,7 @@ describe('Checkout', () => {
                         ...defaultCheckoutState,
                         isLoggedIn: true,
                         serviceType: CHECKOUT_METHOD_DELIVERY,
-                        address: { line1: 'Fleet Place House', postcode: 'EC4M 7RF', city: 'London' }
+                        address: { line1: 'Fleet Place House', postcode: 'EC4M 7RF', locality: 'London' }
                     }),
                     i18n,
                     localVue,
@@ -488,7 +488,7 @@ describe('Checkout', () => {
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
                         ...defaultCheckoutState,
-                        isLoggedIn: false,
+                        isLoggedIn: false
                     }),
                     i18n,
                     localVue,
@@ -507,7 +507,7 @@ describe('Checkout', () => {
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
                         ...defaultCheckoutState,
-                        isLoggedIn: false,
+                        isLoggedIn: false
                     }),
                     i18n,
                     localVue,
@@ -1114,7 +1114,7 @@ describe('Checkout', () => {
                     expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.line1');
                 });
 
-                it('should emit failure event and display error message when city input field is empty', async () => {
+                it('should emit failure event and display error message when locality input field is empty', async () => {
                     // Arrange
                     wrapper = mount(VueCheckout, {
                         store: createStore({
@@ -1122,7 +1122,7 @@ describe('Checkout', () => {
                             serviceType: CHECKOUT_METHOD_DELIVERY,
                             address: {
                                 ...defaultCheckoutState.address,
-                                city: ''
+                                locality: ''
                             }
                         }),
                         i18n,
@@ -1135,12 +1135,12 @@ describe('Checkout', () => {
 
                     // Act
                     await wrapper.vm.onFormSubmit();
-                    const addressCityEmptyMessage = wrapper.find('[data-test-id="error-address-city-empty"]');
+                    const addressLocalityEmptyMessage = wrapper.find('[data-test-id="error-address-locality-empty"]');
 
                     // Assert
-                    expect(addressCityEmptyMessage).toMatchSnapshot();
+                    expect(addressLocalityEmptyMessage).toMatchSnapshot();
                     expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.city');
+                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.locality');
                 });
 
                 it('should emit failure event and display error message when postcode input field is empty', async () => {
@@ -1233,7 +1233,7 @@ describe('Checkout', () => {
                 it('should create validations for address', () => {
                     // Assert
                     expect(wrapper.vm.$v.address.line1).toBeDefined();
-                    expect(wrapper.vm.$v.address.city).toBeDefined();
+                    expect(wrapper.vm.$v.address.locality).toBeDefined();
                     expect(wrapper.vm.$v.address.postcode).toBeDefined();
                 });
 
@@ -2428,7 +2428,7 @@ describe('Checkout', () => {
                             validFields: [
                                 'customer.mobileNumber',
                                 'address.line1',
-                                'address.city',
+                                'address.locality',
                                 'address.postcode'
                             ],
                             invalidFields: []
@@ -2487,7 +2487,7 @@ describe('Checkout', () => {
                             validFields: [
                                 'customer.mobileNumber',
                                 'address.line1',
-                                'address.city',
+                                'address.locality',
                                 'address.postcode'
                             ],
                             invalidFields: []
@@ -2551,7 +2551,7 @@ describe('Checkout', () => {
                     validFields: [
                         'customer.mobileNumber',
                         'address.line1',
-                        'address.city',
+                        'address.locality',
                         'address.postcode'
                     ],
                     invalidFields: []

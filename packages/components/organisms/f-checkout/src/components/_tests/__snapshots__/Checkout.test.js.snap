@@ -120,8 +120,8 @@ exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\
                 </span></p>
 `;
 
-exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\` should emit failure event and display error message when city input field is empty 1`] = `
-<p data-test-id="error-address-city-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
+exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\` should emit failure event and display error message when locality input field is empty 1`] = `
+<p data-test-id="error-address-locality-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-34.000000, -18.000000)">
         <g transform="translate(32.000000, 16.000000)">

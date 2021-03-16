@@ -40,7 +40,7 @@ describe('checkout mapper', () => {
         const address = {
             line1: '1 Bristol Road',
             line2: 'Flat 1',
-            city: 'Bristol',
+            locality: 'Bristol',
             postcode: 'BS1 1AA'
         };
 
@@ -54,11 +54,11 @@ describe('checkout mapper', () => {
 
         // Assert
         expect(locationRequest.address.postalCode).toBe(address.postcode);
+        expect(locationRequest.address.locality).toBe(address.locality);
         expect(locationRequest.address.lines).toStrictEqual([
             address.line1,
             address.line2,
             '',
-            address.city,
             ''
         ]);
     });
