@@ -381,36 +381,44 @@ export default {
 
                 await this.handleUpdateCheckout();
 
-                if (this.isFulfillable) {
-                    await this.submitOrder();
-
-                    this.$emit(EventNames.CheckoutSuccess, eventData);
-
-                    this.$logger.logInfo(
-                        'Consumer Checkout Successful',
-                        this.$store,
-                        eventData
-                    );
-
-                    this.redirectToPayment();
-                } else {
-                    this.$logger.logWarn(
-                        'Consumer Checkout Not Fulfillable',
-                        this.$store,
-                        eventData
-                    );
-                }
+                await this.handleFulfillableContext(eventData);
             } catch (thrownErrors) {
                 eventData.errors = thrownErrors;
 
                 this.$emit(EventNames.CheckoutFailure, eventData);
 
-                this.$logger.logError(
-                    'Consumer Checkout Failure',
-                    this.$store,
-                    eventData
-                );
+                this.logInvoker('Consumer Checkout Failure', eventData, this.$logger.logError);
             }
+        },
+
+        async handleFulfillableContext (eventData) {
+            if (this.isFulfillable) {
+                await this.processOrderIsFulfillable(eventData);
+            } else {
+                this.processOrderNotFulfillable(eventData);
+            }
+        },
+
+        processOrderNotFulfillable (eventData) {
+            this.logInvoker('Consumer Checkout Not Fulfillable', eventData, this.$logger.logWarn);
+        },
+
+        async processOrderIsFulfillable (eventData) {
+            await this.submitOrder();
+
+            this.$emit(EventNames.CheckoutSuccess, eventData);
+
+            this.logInvoker('Consumer Checkout Successful', eventData, this.$logger.logInfo);
+
+            this.redirectToPayment();
+        },
+
+        logInvoker (message, eventData, callback) {
+            callback(
+                message,
+                this.$store,
+                eventData
+            );
         },
 
         /**
