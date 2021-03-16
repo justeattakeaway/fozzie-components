@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-header",
   "description": "Fozzie Header – Globalised Header Component",
-  "version": "4.10.0",
+  "version": "4.11.0",
   "main": "dist/f-header.umd.min.js",
   "files": [
     "dist",
@@ -49,7 +49,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.12.13",
     "@justeat/f-button": "1.1.0",
-    "@justeat/f-popover": "0.2.0",
+    "@justeat/f-popover": "0.2.1",
     "@justeat/f-vue-icons": "2.4.0",
     "@justeat/f-wdio-utils": "0.1.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",

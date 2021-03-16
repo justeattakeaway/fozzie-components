@@ -13,8 +13,11 @@ module.exports = class Header extends Page {
     get mobileNavigationBar () { return $(MOBILE_NAVIGATION_BAR) }
 
     navigation = {
-        offers: {
-            get link () { return $(NAVIGATION.offers.link) }
+        offersIcon: {
+            get link () { return $(NAVIGATION.offersIcon.link) }
+        },
+        offersLink: {
+            get link () { return $(NAVIGATION.offersLink.link) }
         },
         help: {
             get link () { return $(NAVIGATION.help.link) }
@@ -113,7 +116,7 @@ module.exports = class Header extends Page {
     // }
 
     clickOffersLink () {
-        return this.navigation.offers.link.click();
+        return this.navigation.offersLink.link.click();
     }
 
     clickHelpLink () {

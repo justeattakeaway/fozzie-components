@@ -31,8 +31,8 @@
         </label>
 
         <a
-            v-if="showOffersLink"
-            data-test-id="offers-link"
+            v-if="showOffersLink && !navIsOpen"
+            data-test-id="offers-iconLink"
             data-trak='{
                 "trakEvent": "click",
                 "category": "header",
@@ -40,7 +40,7 @@
                 "label": "offers_icon"
             }'
             :href="copy.offers.url"
-            class="c-nav-featureLink u-showBelowMid">
+            class="c-nav-featureLink c-nav-featureLink--hideAboveMid">
             <gift-icon class="c-nav-icon c-nav-icon--offers" />
             <span class="is-visuallyHidden">
                 {{ copy.offers.text }}
@@ -52,7 +52,7 @@
             <ul class="c-nav-list">
                 <li
                     v-if="showOffersLink"
-                    class="c-nav-list-item--horisontallyAlignedOnWiderView">
+                    class="c-nav-list-item--horizontallyAlignedAboveMid">
                     <a
                         data-test-id="offers-link"
                         data-trak='{
@@ -62,14 +62,14 @@
                             "label": "offers"
                         }'
                         :href="copy.offers.url"
-                        class="c-nav-list-link u-showAboveMid">
+                        class="c-nav-list-link">
                         <gift-icon class="c-nav-icon c-nav-icon--offers" />
                         {{ copy.offers.text }}
                     </a>
                 </li>
                 <li
-                    v-if="showDeliveryEnquiry && !isBelowMid"
-                    class="c-nav-list-item--horisontallyAlignedOnWiderView"
+                    v-if="showDeliveryEnquiry"
+                    class="c-nav-list-item--horizontallyAlignedAboveMid"
                     data-test-id="delivery-enquiry">
                     <a
                         data-test-id="delivery-link"
@@ -87,7 +87,7 @@
                     </a>
                 </li>
                 <li
-                    :class="['c-nav-list-item--horisontallyAlignedOnWiderView has-sublist', {
+                    :class="['c-nav-list-item--horizontallyAlignedAboveMid has-sublist', {
                         'is-hidden': !userInfo || !showLoginInfo,
                         'is-open': navIsOpen
                     }]"
@@ -124,7 +124,7 @@
 
                 <li
                     v-if="!userInfo && showLoginInfo"
-                    class="c-nav-list-item--horisontallyAlignedOnWiderView"
+                    class="c-nav-list-item--horizontallyAlignedAboveMid"
                     data-test-id="login">
                     <a
                         :href="returnLoginUrl"
@@ -143,7 +143,7 @@
 
                 <li
                     v-if="showHelpLink"
-                    class="c-nav-list-item--horisontallyAlignedOnWiderView c-nav-list-item--support">
+                    class="c-nav-list-item--horizontallyAlignedAboveMid">
                     <a
                         :href="copy.help.url"
                         :data-trak='`{
@@ -152,7 +152,7 @@
                                 "action": "header",
                                 "label": "${copy.help.gtm}"
                             }`'
-                        class="c-nav-list-link"
+                        class="c-nav-list-link c-nav-list-link--leftPaddingBelowMid"
                         data-test-id="help-link"
                         v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
                         {{ copy.help.text }}
@@ -161,7 +161,7 @@
 
                 <li
                     v-if="userInfo && isBelowMid && showLoginInfo"
-                    class="c-nav-list-item--horisontallyAlignedOnWiderView"
+                    class="c-nav-list-item--horizontallyAlignedAboveMid"
                     data-test-id="logout">
                     <a
                         :tabindex="navIsOpen ? 0 : -1"
@@ -172,7 +172,7 @@
                                 "action": "header",
                                 "label": "${copy.accountLogout.gtm}"
                             }`'
-                        class="c-nav-list-link"
+                        class="c-nav-list-link c-nav-list-link--leftPaddingBelowMid"
                         v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
                         {{ copy.accountLogout.text }}
                     </a>
@@ -181,7 +181,7 @@
                 <li
                     v-if="showCountrySelector"
                     data-test-id="country-selector"
-                    :class="['c-nav-list-item--horisontallyAlignedOnWiderView has-sublist', {
+                    :class="['c-nav-list-item--horizontallyAlignedAboveMid has-sublist', {
                         'is-open': countrySelectorIsOpen
                     }]"
                     v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: closeCountrySelector }"
@@ -318,13 +318,14 @@ export default {
             userInfo: this.userInfoProp,
             localOrderCountExpires: false,
             countrySelectorIsOpen: false,
-            countries
+            countries,
+            midBreakpoint: 768
         };
     },
 
     computed: {
         isBelowMid () {
-            return this.currentScreenWidth < 768;
+            return this.currentScreenWidth <= this.midBreakpoint;
         },
 
         returnUrl () {
@@ -570,8 +571,9 @@ $nav-text-weight                   : $font-weight-bold;
 $nav-text-subFont                  : $font-family-base;
 $nav-icon-color                    : $color-secondary;
 $nav-icon-color--transparent       : $white;
-$nav-icon-color--mobileWhiteBg     : $grey--mid;
+$nav-icon-color--mobileWhiteBg     : $grey--darkest;
 $nav-transition-duration           : 250ms;
+$nav-icon-size                     : 24px;
 
 $nav-featureLinkIcon-width         : 28px;
 $nav-featureLinkIcon-height        : 28px;
@@ -607,7 +609,7 @@ $countrySelector-flag-height : 16px;
 
 // removes scroll
 .is-navInView {
-    @include media('<mid') {
+    @include media('<=mid') {
         overflow: hidden;
 
         body {
@@ -629,7 +631,7 @@ $countrySelector-flag-height : 16px;
 
 // Global site-wide navigation
 .c-nav--global {
-    @include media('>=mid') {
+    @include media('>mid') {
         display: flex;
         justify-content: flex-end;
         flex-grow: 1;
@@ -638,7 +640,7 @@ $countrySelector-flag-height : 16px;
     // we have a nav container so that we don’t have to make the inner list 100% height
     // this is so we can position the logout button last on mobile
     & .c-nav-container {
-        @include media('<mid') {
+        @include media('<=mid') {
             position: fixed;
             top: $header-height--narrow;
             left: -99999px;
@@ -679,22 +681,22 @@ $countrySelector-flag-height : 16px;
         }
     }
 
-    @include media('<mid') {
+    @include media('<=mid') {
         display: flex;
         flex-direction: column;
     }
 }
 
     .c-nav-popoverList--twoColumns {
-        @include media('>=mid') {
+        @include media('>mid') {
             column-count: 2;
         }
     }
 
     // TODO: MAKE THIS NOT USE FLOATS
     // global modifier for list items horizontally aligned
-    .c-nav-list-item--horisontallyAlignedOnWiderView {
-        @include media('>=mid') {
+    .c-nav-list-item--horizontallyAlignedAboveMid {
+        @include media('>mid') {
             float: left;
         }
     }
@@ -703,15 +705,17 @@ $countrySelector-flag-height : 16px;
     // As an example, this is used on the logout link on the global site
     // Logout is in the popover list, but at the bottom of the
     .c-nav-list-item--forceLast {
-        @include media('<mid') {
+        @include media('<=mid') {
             position: absolute;
             top: 100%;
             width: 100%;
         }
     }
+
         .c-nav-list-link,
         .c-nav-list-text {
-            display: block;
+            display: flex;
+            align-items: center;
             padding: spacing(x1.5) spacing(x2);
             margin: 0;
             font-family: $nav-text-subFont;
@@ -721,16 +725,11 @@ $countrySelector-flag-height : 16px;
             text-decoration: none;
             border-bottom: 1px solid $grey--light;
 
-            @include media('>=mid') {
+            @include media('>mid') {
                 @include font-size($nav-text-size);
                 font-weight: $nav-text-weight;
                 color: $nav-text-color;
                 border-bottom: none;
-
-                // the following styles align the elements vertically to the height of the header bar
-                // don’t need a fallback, as it degrades gracefully
-                display: flex;
-                align-items: center;
                 height: $header-height;
 
                 .c-header--highlightBg &,
@@ -739,6 +738,13 @@ $countrySelector-flag-height : 16px;
                 }
             }
         }
+
+        .c-nav-list-text {
+            @include media('<=mid') {
+                display: block;
+            }
+        }
+
         .c-nav-list-text-sub {
             display: block;
             overflow: hidden;
@@ -747,7 +753,7 @@ $countrySelector-flag-height : 16px;
             max-width: 300px;
 
             &.u-showBelowMid {
-                @include media('>=mid') {
+                @include media('>mid') {
                     display: none !important;
                 }
             }
@@ -759,7 +765,7 @@ $countrySelector-flag-height : 16px;
             &:active {
                 text-decoration: none;
 
-                @include media('>=mid') {
+                @include media('>mid') {
                     color: $nav-text-color--hover;
                     text-decoration: underline;
 
@@ -775,6 +781,12 @@ $countrySelector-flag-height : 16px;
             }
         }
 
+        .c-nav-list-link--leftPaddingBelowMid {
+            @include media('<=mid') {
+                padding-left: spacing(x6);
+            }
+        }
+
         .c-nav-list-btn {
             display: flex;
             align-items: center;
@@ -785,7 +797,7 @@ $countrySelector-flag-height : 16px;
 
     .has-sublist {
         // ensures the dropdown/popover is relative to the hover element, on wider views
-        @include media('>=mid') {
+        @include media('>mid') {
             position: relative;
             cursor: pointer;
         }
@@ -796,7 +808,7 @@ $countrySelector-flag-height : 16px;
         width: $nav-featureLinkIcon-width;
         height: $nav-featureLinkIcon-height;
 
-        @include media('<mid') {
+        @include media('<=mid') {
             position: absolute;
             top: 0;
             right: 0;
@@ -805,14 +817,28 @@ $countrySelector-flag-height : 16px;
             padding: spacing(x2);
         }
 
+        path {
+            .c-header--highlightBg &,
+            .c-header--transparent & {
+                fill: $nav-icon-color--transparent;
+            }
+        }
+    }
+
+    .c-nav-featureLink--hideAboveMid {
+        @include media('>mid') {
+            display: none;
+        }
     }
 
     // Icons, such as the profile icon
     .c-nav-icon {
         float: left;
         margin-right: spacing();
+        width: $nav-icon-size;
+        height: $nav-icon-size;
 
-        @include media('>=mid') {
+        @include media('>mid') {
             & path {
                 fill: $nav-icon-color;
 
@@ -824,34 +850,12 @@ $countrySelector-flag-height : 16px;
         }
     }
 
+    .c-nav-icon--delivery,
+    .c-nav-icon--offers,
     .c-nav-icon--profile {
-        width: 20px;
-        height: 22px;
-
-        @include media('<mid') {
-            width: 33px;
-            height: 33px;
-            * {
+        @include media('<=mid') {
+            & path {
                 fill: $nav-icon-color--mobileWhiteBg;
-            }
-        }
-    }
-
-    .c-nav-icon--delivery {
-        width: 20px;
-        height: 20px;
-    }
-
-    .c-nav-icon--offers {
-        width: $nav-featureLinkIcon-width;
-        height: $nav-featureLinkIcon-height;
-
-        & path {
-            fill: $nav-icon-color;
-
-            .c-header--highlightBg &,
-            .c-header--transparent & {
-                fill: $nav-icon-color--transparent;
             }
         }
     }
@@ -865,12 +869,12 @@ $countrySelector-flag-height : 16px;
     top: -100px;
     left: -100px;
 
-    @include media('>=mid') {
+    @include media('>mid') {
         display: none;
     }
 
     &:checked ~ .c-nav-container {
-        @include media('<mid') {
+        @include media('<=mid') {
             @include nav-container-visible();
         }
     }
@@ -898,7 +902,7 @@ $countrySelector-flag-height : 16px;
     border: none;
 
     // hide on wider views
-    @include media('>=mid') {
+    @include media('>mid') {
         display: none;
 
         &.is-shown--noJS {
@@ -971,7 +975,7 @@ $countrySelector-flag-height : 16px;
     }
 
 .c-nav-popover {
-    @include media('>=mid') {
+    @include media('>mid') {
         min-width: 300px;
         position: absolute;
         top: 100%;
@@ -1000,7 +1004,7 @@ $countrySelector-flag-height : 16px;
 }
 
 .c-nav-popover.c-nav-popover--countrySelector {
-    @include media('>=mid') {
+    @include media('>mid') {
         // tooltip arrow
         &:before {
             right: 4%;
@@ -1012,13 +1016,13 @@ $countrySelector-flag-height : 16px;
     height: $countrySelector-flag-height;
     width: $countrySelector-flag-width;
 
-    @include media('<mid') {
+    @include media('<=mid') {
         margin-right: spacing();
     }
 
     .c-header--highlightBg &,
     .c-header--transparent & {
-        @include media('>=mid') {
+        @include media('>mid') {
             background-color: $white;
             width: 32px;
             height: 32px;
@@ -1045,7 +1049,7 @@ $countrySelector-flag-height : 16px;
     overflow: hidden;
     @include font-size(heading-s, true, narrow);
 
-    @include media('<mid') {
+    @include media('<=mid') {
         width: auto;
     }
 }
