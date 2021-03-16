@@ -1,5 +1,6 @@
 const SkeletonLoader = require('../../../test-utils/component-objects/f-skeletonLoader.component');
-const skeletonLoader = new SkeletonLoader
+
+const skeletonLoader = new SkeletonLoader();
 
 describe('f-skeletonLoader component tests', () => {
     beforeEach(() => {

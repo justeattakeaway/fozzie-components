@@ -32,7 +32,10 @@ export default {
     render (createElement) {
         return createElement(
             'div', {
-                staticClass: this.$style['c-skeleton-loader']
+                staticClass: this.$style['c-skeleton-loader'],
+                attrs: {
+                    'data-test-id': 'skeletonLoader'
+                }
             },
             [this.genBone()]
         );

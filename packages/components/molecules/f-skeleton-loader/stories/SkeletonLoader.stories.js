@@ -9,7 +9,7 @@ export default {
 export const SkeletonLoaderComponent = (args, { argTypes }) => ({
     components: { SkeletonLoader },
     props: Object.keys(argTypes),
-    template: '<skeleton-loader max-width="600" :skeletonType="skeletonType" />'
+    template: '<skeleton-loader :skeletonType="skeletonType" />'
 });
 
 SkeletonLoaderComponent.args = {
