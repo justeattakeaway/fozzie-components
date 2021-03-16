@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.11.1
+------------------------------
+*March 16, 2021*
+
+### Changed
+- Small css amends to the mobile menu and country selector button
+
+
 v4.11.0
 ------------------------------
 *March 15, 2021*
