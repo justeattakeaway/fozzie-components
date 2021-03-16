@@ -3,8 +3,11 @@ export const HEADER_LOGO = '[data-test-id="header-logo"]';
 export const MOBILE_NAVIGATION_BAR = '[data-test-id="nav-toggle"]';
 
 export const NAVIGATION = {
-    offers: {
-        link: '[data-test-id="offers-link"]', 
+    offersIcon: {
+        link: '[data-test-id="offers-iconLink"]',
+    },
+    offersLink: {
+        link: '[data-test-id="offers-link"]',
     },
     help: {
         link: '[data-test-id="help-link"]', 

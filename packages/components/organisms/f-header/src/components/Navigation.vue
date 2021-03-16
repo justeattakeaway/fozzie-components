@@ -32,7 +32,7 @@
 
         <a
             v-if="showOffersLink && !navIsOpen"
-            data-test-id="offers-link"
+            data-test-id="offers-iconLink"
             data-trak='{
                 "trakEvent": "click",
                 "category": "header",
