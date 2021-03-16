@@ -85,7 +85,7 @@ export default {
             padding-top: 8px;
         }
 
-        @include media('>=mid') {
+        @include media('>mid') {
             justify-content: left;
             height: $header-height;
             padding-top: 20px;
@@ -102,7 +102,7 @@ export default {
         height: 24px;
         margin-left: -10.5px; //half of hamburger menu width
 
-        @include media('>=mid') {
+        @include media('>mid') {
             width: 163px;
             height: 40px;
             margin-left: 0;
@@ -113,7 +113,7 @@ export default {
             width: 120px;
             height: 32px;
 
-            @include media('>=mid') {
+            @include media('>mid') {
                 width: 149px;
                 height: 41px;
             }

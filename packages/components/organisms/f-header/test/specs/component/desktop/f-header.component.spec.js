@@ -12,10 +12,10 @@ describe('Desktop - f-header component tests', () => {
     .it('should only display the default navigation fields', field => {
         // Assert
         expect(header.isFieldLinkDisplayed(field)).toBe(true); 
-        expect(header.isFieldLinkDisplayed('offers')).toBe(false);
+        expect(header.isFieldLinkDisplayed('offersLink')).toBe(false);
     });
 
-    forEach(['offers', 'help', 'delivery', 'userAccount', 'countrySelector'])
+    forEach(['offersLink', 'help', 'delivery', 'userAccount', 'countrySelector'])
     .it('should display extra fields as well as default when selected', field => {
         // Act
         header.openWithExtraFeatures();

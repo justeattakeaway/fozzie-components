@@ -13,14 +13,14 @@ describe('Mobile - f-header component tests', () => {
     });
 
     forEach(['help', 'delivery', 'userAccount', 'countrySelector'])
-    .it('should hide all navigation links, except offers link, when in mobile mode', field => {
+    .it.only('should hide all navigation links, except offersIcon link, when in mobile mode', field => {
         // Act
         header.openWithExtraFeatures();
 
         // Assert
         expect(header.isMobileNavigationBarDisplayed()).toBe(true);
         expect(header.isFieldLinkDisplayed(field)).toBe(false);
-        expect(header.isFieldLinkDisplayed('offers')).toBe(true);
+        expect(header.isFieldLinkDisplayed('offersIcon')).toBe(true);
     });
 
     forEach(['help', 'countrySelector', 'userAccount'])
