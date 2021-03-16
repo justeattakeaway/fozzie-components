@@ -5,6 +5,8 @@ import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
+import { mockAuthToken } from '../../components/_tests/helpers/setup';
+import { version as applicationVerion } from '../../../package.json';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE } from '../../constants';
 
 import {
@@ -29,9 +31,11 @@ const {
     getAvailableFulfilment,
     getBasket,
     getCheckout,
+    getCustomerName,
     getGeoLocation,
-    updateCheckout,
+    placeOrder,
     setAuthToken,
+    updateCheckout,
     updateAddressDetails,
     updateCustomerDetails,
     updateFulfilmentTime,
@@ -44,7 +48,7 @@ const customerDetails = {
     mobileNumber
 };
 
-const authToken = 'sampleToken';
+const authToken = mockAuthToken;
 
 const address = {
     line1: 'line 1',
@@ -60,6 +64,8 @@ const locationData = {
         'JZ1 1AA'
     ]
 };
+
+const basketId = 'newbasketid0001-v1';
 
 const time = {
     from: 'fromTime',
@@ -250,17 +256,19 @@ describe('CheckoutModule', () => {
         let commit;
         let dispatch;
 
-        const payload = {
-            url: 'http://localhost/account/checkout',
-            tenant: 'uk',
-            language: 'en-GB',
-            timeout: '1000',
-            postData: null
-        };
+        let payload;
 
         beforeEach(() => {
             commit = jest.fn();
             dispatch = jest.fn();
+            state = defaultState;
+            payload = {
+                url: 'http://localhost/account/checkout',
+                tenant: 'uk',
+                language: 'en-GB',
+                timeout: 1000,
+                postData: null
+            };
         });
 
         describe('getCheckout ::', () => {
@@ -363,14 +371,67 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe('updateCheckout ::', () => {
-            payload.data = {
-                mobileNumber
-            };
+        describe('getCustomerName ::', () => {
+            it('should get the customer first name and last name from token', async () => {
+                // Arrange
+                const expectedCustomerDetails = {
+                    firstName: 'Joe',
+                    lastName: 'Bloggs'
+                };
 
+                // Act
+                await getCustomerName({ commit, state });
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_CUSTOMER_DETAILS, expectedCustomerDetails);
+            });
+        });
+
+        describe('placeOrder ::', () => {
+            it('should post the order details to the backend.', async () => {
+                // Arrange
+                payload.url = 'http://localhost/opapi/placeorder';
+                payload.data = {
+                    basketId,
+                    customerNotes: {
+                        noteForRestaurant: userNote
+                    },
+                    referralState: 'ReferredByWeb'
+                };
+
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json;v=2',
+                        'x-je-application-id': 7,
+                        'x-je-application-version': applicationVerion,
+                        Authorization: `Bearer ${authToken}`
+                    },
+                    timeout: payload.timeout
+                };
+
+                axios.post = jest.fn(() => Promise.resolve({
+                    status: 200,
+                    data: {
+                        issues
+                    }
+                }));
+
+                // Act
+                await placeOrder({ commit, state }, payload);
+
+                // Assert
+                expect(axios.post).toHaveBeenCalledWith(payload.url, payload.data, config);
+            });
+        });
+
+        describe('updateCheckout ::', () => {
             let config;
 
             beforeEach(() => {
+                payload.data = {
+                    mobileNumber
+                };
+
                 config = {
                     headers: {
                         'Content-Type': 'application/json',
@@ -397,14 +458,15 @@ describe('CheckoutModule', () => {
 
         describe('createGuestUser ::', () => {
             let config;
-            payload.url = 'http://localhost/account/createguest';
-            payload.data = {
-                firstName: 'Joe',
-                lastName: 'Bloggs',
-                email: 'joe@test.com'
-            };
 
             beforeEach(() => {
+                payload.url = 'http://localhost/account/createguest';
+                payload.data = {
+                    firstName: 'Joe',
+                    lastName: 'Bloggs',
+                    email: 'joe@test.com'
+                };
+
                 config = {
                     headers: {
                         'Content-Type': 'application/json',
@@ -468,9 +530,10 @@ describe('CheckoutModule', () => {
         describe('getGeoLocation ::', () => {
             // Arrange
             let config;
-            payload.postData = locationData;
 
             beforeEach(() => {
+                payload.postData = locationData;
+
                 config = {
                     headers: {
                         'Content-Type': 'application/json',

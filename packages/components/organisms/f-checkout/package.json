@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "0.69.0",
+  "version": "0.71.0",
   "main": "dist/f-checkout.umd.min.js",
   "files": [
     "dist",
@@ -35,8 +35,8 @@
     "test": "vue-cli-service test:unit",
     "test:watch": "vue-cli-service test:unit --watch",
     "test:coverage": "yarn test --coverage",
-    "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
-    "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
+    "test-component:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite component",
+    "test-a11y:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite a11y"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -45,6 +45,7 @@
     "@justeat/f-globalisation": "1.0.0",
     "@justeat/f-services": "1.7.0",
     "axios": "0.21.1",
+    "jwt-decode": "3.1.2",
     "vuelidate": "0.7.6"
   },
   "peerDependencies": {

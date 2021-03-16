@@ -1,6 +1,8 @@
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE } from '../constants';
+import { version as applicationVerion } from '../../package.json';
 
 import {
     UPDATE_AUTH,
@@ -230,6 +232,23 @@ export default {
         },
 
         /**
+         * Get the customer name from JWT claims and update state with the result
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getCustomerName: async ({ commit, state }) => {
+            const tokenData = jwtDecode(state.authToken);
+
+            const customer = {
+                firstName: tokenData.given_name,
+                lastName: tokenData.family_name
+            };
+
+            commit(UPDATE_CUSTOMER_DETAILS, customer);
+        },
+
+        /**
          * Post the order details to the Order Placement API and get the `orderId` from the response.
          *
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
@@ -242,11 +261,10 @@ export default {
 
             const config = {
                 headers: {
-                    'Content-Type': 'application/json;v=1',
-                    'x-je-feature': data.applicationName,
-                    ...(state.isLoggedIn && {
-                        Authorization: authHeader
-                    })
+                    'Content-Type': 'application/json;v=2',
+                    'x-je-application-id': 7, // Responsive Web
+                    'x-je-application-version': applicationVerion,
+                    Authorization: authHeader
                 },
                 timeout
             };
