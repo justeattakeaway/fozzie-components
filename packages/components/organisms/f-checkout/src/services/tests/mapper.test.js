@@ -90,7 +90,7 @@ describe('checkout mapper', () => {
             const address = {
                 line1: '1 Bristol Road',
                 line2: 'Flat 1',
-                city: 'Bristol',
+                locality: 'Bristol',
                 postcode: 'BS1 1AA'
             };
 
@@ -152,8 +152,8 @@ describe('mapAnalyticsName :: ', () => {
             ['line1', 'addressLine1'],
             ['address.line2', 'addressLine2'],
             ['line2', 'addressLine2'],
-            ['address.city', 'addressCity'],
-            ['city', 'addressCity'],
+            ['address.locality', 'addressLocality'],
+            ['locality', 'addressLocality'],
             ['address.postcode', 'addressPostcode'],
             ['postcode', 'addressPostcode'],
             ['customer.firstName', 'firstName'],
@@ -177,10 +177,10 @@ describe('mapAnalyticsNames :: ', () => {
             'customer.firstName',
             'lastName',
             'customer.email',
-            'city'
+            'locality'
         ];
 
-        const expected = 'addressCity,addressLine1,email,firstName,lastName,mobilePhone';
+        const expected = 'addressLine1,addressLocality,email,firstName,lastName,mobilePhone';
 
         // Act & Assert
         expect(mapAnalyticsNames(provided)).toEqual(expected);
