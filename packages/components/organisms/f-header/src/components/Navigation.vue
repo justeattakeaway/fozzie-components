@@ -135,7 +135,8 @@
                             "label": "${copy.accountLogin.gtm}"
                         }`'
                         rel="nofollow"
-                        class="c-nav-list-link"
+                        :class="['c-nav-list-link',
+                                 { 'c-nav-list-link--leftPaddingBelowMid': userInfo }]"
                         data-test-id="login-link">
                         {{ copy.accountLogin.text }}
                     </a>
@@ -152,7 +153,8 @@
                                 "action": "header",
                                 "label": "${copy.help.gtm}"
                             }`'
-                        class="c-nav-list-link c-nav-list-link--leftPaddingBelowMid"
+                        :class="['c-nav-list-link',
+                                 { 'c-nav-list-link--leftPaddingBelowMid': userInfo }]"
                         data-test-id="help-link"
                         v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
                         {{ copy.help.text }}
@@ -172,7 +174,8 @@
                                 "action": "header",
                                 "label": "${copy.accountLogout.gtm}"
                             }`'
-                        class="c-nav-list-link c-nav-list-link--leftPaddingBelowMid"
+                        :class="['c-nav-list-link',
+                                 { 'c-nav-list-link--leftPaddingBelowMid': userInfo }]"
                         v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
                         {{ copy.accountLogout.text }}
                     </a>

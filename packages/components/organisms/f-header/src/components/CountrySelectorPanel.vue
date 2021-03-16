@@ -109,17 +109,17 @@ $countrySelector-text-hover : $color-bg--darker;
             margin-left: 0;
         }
     }
-}
 
-.c-countrySelector-header-button {
-    margin: spacing(x2);
-    @include media('>mid') {
-        display: none;
-    }
-    svg.c-countrySelector-goBackIcon {
-        transform: rotate(180deg);
-        width: 28px;
-        height: 28px;
+    .c-countrySelector-header-button {
+        margin: spacing(x2);
+        @include media('>mid') {
+            display: none;
+        }
+        svg.c-countrySelector-goBackIcon {
+            transform: rotate(180deg);
+            width: 28px;
+            height: 28px;
+        }
     }
 }
 
