@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.72.0
+------------------------------
+*March 18, 2021*
+
+### Changed
+- `address.city` to `address.locality` in checkout state.
+- `UPDATE_STATE` mutation to use `locality`.
+- `getAddress` to use locality.
+
 v0.71.0
 ------------------------------
 *March 16, 2021*
@@ -11,7 +20,7 @@ v0.71.0
 - `Checkout.vue` method clean up. Refactor `submitCheckout`.
 
 ### Added
-- Methods `handleFulfillableContext`, `processOrderNotFulfillable`, 
+- Methods `handleFulfillableContext`, `processOrderNotFulfillable`,
 `processOrderIsFulfillable` & `logInfo`.
 
 
