@@ -260,10 +260,9 @@ describe('Navigation', () => {
         });
     });
 
-
     describe('offers link', () => {
-        it('should be shown on desktop when "showOffersLink" is true', () => {
-            // Arrange & Act
+        it('should be shown on desktop when "showOffersLink" is true', async () => {
+            // Arrange
             wrapper = shallowMount(Navigation, {
                 propsData: {
                     ...defaultPropsData,
@@ -271,12 +270,15 @@ describe('Navigation', () => {
                 }
             });
 
+            // Act
+            await wrapper.setData(defaultData); // need to await this for the state to fully update the DOM
+
             // Assert
-            expect(wrapper.find('[data-test-id="offers-link"].u-showAboveMid').exists()).toBe(true);
+            expect(wrapper.find('[data-test-id="offers-link"]').exists()).toBe(true);
         });
 
-        it('should not be shown on desktop when "showOffersLink" is false', () => {
-            // Arrange & Act
+        it('should not be shown on desktop when "showOffersLink" is false', async () => {
+            // Arrange
             wrapper = shallowMount(Navigation, {
                 propsData: {
                     ...defaultPropsData,
@@ -284,15 +286,18 @@ describe('Navigation', () => {
                 }
             });
 
+            // Act
+            await wrapper.setData(defaultData);
+
             // Assert
-            expect(wrapper.find('[data-test-id="offers-link"].u-showAboveMid').exists()).toBe(false);
+            expect(wrapper.find('[data-test-id="offers-link"]').exists()).toBe(false);
         });
 
         describe('on mobile', () => {
             beforeEach(setMobileViewport);
 
-            it('should be shown when "showOffersLink" is true', () => {
-                // Arrange & Act
+            it('should be shown when "showOffersLink" is true', async () => {
+                // Arrange
                 wrapper = shallowMount(Navigation, {
                     propsData: {
                         ...defaultPropsData,
@@ -300,12 +305,15 @@ describe('Navigation', () => {
                     }
                 });
 
+                // Act
+                await wrapper.setData(defaultData);
+
                 // Assert
-                expect(wrapper.find('[data-test-id="offers-link"].u-showBelowMid').exists()).toBe(true);
+                expect(wrapper.find('[data-test-id="offers-iconLink"]').exists()).toBe(true);
             });
 
-            it('should not be shown when "showOffersLink" is false', () => {
-                // Arrange & Act
+            it('should not be shown when "showOffersLink" is false', async () => {
+                // Arrange
                 wrapper = shallowMount(Navigation, {
                     propsData: {
                         ...defaultPropsData,
@@ -313,8 +321,12 @@ describe('Navigation', () => {
                     }
                 });
 
+                // Act
+                await wrapper.setData(defaultData);
+
                 // Assert
-                expect(wrapper.find('[data-test-id="offers-link"].u-showBelowMid').exists()).toBe(false);
+                expect(wrapper.find('[data-test-id="offers-link"]').exists()).toBe(false);
+                expect(wrapper.find('[data-test-id="offers-iconLink"]').exists()).toBe(false);
             });
 
             it('should be shown with open nav when "showOffersLink" is true', async () => {
@@ -333,7 +345,8 @@ describe('Navigation', () => {
                 });
 
                 // Assert
-                expect(wrapper.find('[data-test-id="offers-link"].u-showBelowMid').exists()).toBe(true);
+                expect(wrapper.find('[data-test-id="offers-link"]').exists()).toBe(true);
+                expect(wrapper.find('[data-test-id="offers-iconLink"]').exists()).toBe(false);
             });
 
             it('should not be shown with open nav when "showOffersLink" is false', async () => {
@@ -352,7 +365,8 @@ describe('Navigation', () => {
                 });
 
                 // Assert
-                expect(wrapper.find('[data-test-id="offers-link"].u-showBelowMid').exists()).toBe(false);
+                expect(wrapper.find('[data-test-id="offers-link"]').exists()).toBe(false);
+                expect(wrapper.find('[data-test-id="offers-iconLink"]').exists()).toBe(false);
             });
         });
     });

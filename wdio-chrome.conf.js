@@ -1,7 +1,7 @@
 // Used to set correct directories for WDIO test output
 global.baseDir = __dirname;
 
-const { setTestEnvironment, setTestType } = require('./test/utils/configuration-helper');
+const { setTestEnvironment, setTestType, getBaseUrl } = require('./test/utils/configuration-helper');
 
 const testEnvironment = setTestEnvironment();
 const testType = setTestType();
@@ -34,7 +34,7 @@ exports.config = {
     // Suites
     suites: {
         component: [
-            './test/specs/component/*.component.spec.js',
+            './test/specs/component/**/*.component.spec.js',
         ],
         a11y: [
             './test/specs/accessibility/axe-accessibility.spec.js',
@@ -103,7 +103,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://localhost:8080',
+    baseUrl: getBaseUrl(8080),
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,

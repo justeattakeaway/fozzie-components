@@ -1,8 +1,8 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 const {
-    HEADER_COMPONENT, 
-    HEADER_LOGO, 
-    MOBILE_NAVIGATION_BAR, 
+    HEADER_COMPONENT,
+    HEADER_LOGO,
+    MOBILE_NAVIGATION_BAR,
     NAVIGATION
 } = require ('./f-header.selectors');
 
@@ -13,93 +13,96 @@ module.exports = class Header extends Page {
     get mobileNavigationBar () { return $(MOBILE_NAVIGATION_BAR) }
 
     navigation = {
-        offers: {
-            get link () { return $(NAVIGATION.offers.link) }
-        }, 
+        offersIcon: {
+            get link () { return $(NAVIGATION.offersIcon.link) }
+        },
+        offersLink: {
+            get link () { return $(NAVIGATION.offersLink.link) }
+        },
         help: {
             get link () { return $(NAVIGATION.help.link) }
-        }, 
+        },
         delivery: {
-            get link () { return $(NAVIGATION.delivery.link) }, 
-        }, 
+            get link () { return $(NAVIGATION.delivery.link) },
+        },
         userAccount: {
             get link () { return $(NAVIGATION.userAccount.link) }
-        }, 
+        },
         countrySelector: {
-            get link () { return  $(NAVIGATION.countrySelector.link) },
+            get link () { return $(NAVIGATION.countrySelector.link) },
             get currentIcon () { return $(NAVIGATION.countrySelector.currentIcon) },
-            get countries() { return $$(NAVIGATION.countrySelector.countryList) } 
+            get countries () { return $$(NAVIGATION.countrySelector.countryList) }
         }
     }
 
-    get countryLink()  { return this.countryValue != null ?  this.countryValue : 'Please set a country value'; }
+    get countryLink () { return this.countryValue != null ?  this.countryValue : 'Please set a country value'; }
 
-    set expectedCountry(country) {
+    set expectedCountry (country) {
         this.countryValue = this.navigation.countrySelector.countries.filter(element => element.getAttribute('data-test-id').includes(country))[0];
     }
 
-    open(){
+    open () {
         super.openComponent('organism', 'header-component');
     }
 
-    openWithExtraFeatures(){
+    openWithExtraFeatures () {
         super.openComponent('organism', 'header-component&knob-Show%20offers%20link=true&knob-Show%20delivery%20enquiry=true');
     }
 
-    openWithLocale(locale){
+    openWithLocale (locale) {
         let countryFormatted = locale.toUpperCase();
         let formattedLocale = '';
-        switch ( countryFormatted ){
+        switch (countryFormatted) {
             case 'GB':
             case 'AU':
             case 'NZ':
             case 'IE':
-                formattedLocale = `en-${countryFormatted}`
-                break
+                formattedLocale = `en-${countryFormatted}`;
+                break;
             case 'DK':
-                formattedLocale = `da-${countryFormatted}`
-                break
+                formattedLocale = `da-${countryFormatted}`;
+                break;
             case 'ES':
-                formattedLocale = `es-${countryFormatted}`
-                break
+                formattedLocale = `es-${countryFormatted}`;
+                break;
             case 'IT':
-                formattedLocale = `it-${countryFormatted}`
-                break
+                formattedLocale = `it-${countryFormatted}`;
+                break;
             case 'NO':
-                formattedLocale = `nb-${countryFormatted}`
-                break
+                formattedLocale = `nb-${countryFormatted}`;
+                break;
             default:
                 throw new Error (`locale ${countryFormatted} is not supported`)
         }
         super.openComponent('organism', `header-component&knob-Locale=${formattedLocale}`);
     }
 
-    waitForComponent(){
+    waitForComponent () {
         super.waitForComponent(this.component);
     }
 
-    isComponentDisplayed(){
+    isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    isLogoDisplayed(){
+    isLogoDisplayed () {
         return this.logo.isDisplayed();
     }
 
-    isFieldLinkDisplayed(fieldName){
+    isFieldLinkDisplayed (fieldName) {
         return this.navigation[fieldName].link.isDisplayedInViewport();
     }
 
-    isCurrentCountryIconDisplayed(country){
-       let expectedIcon = this.navigation.countrySelector.currentIcon.getAttribute('class').includes(`c-ficon--flag.${country}.round`);
-       return expectedIcon ? this.navigation.countrySelector.currentIcon.isDisplayed() : false
+    isCurrentCountryIconDisplayed (country) {
+        let expectedIcon = this.navigation.countrySelector.currentIcon.getAttribute('class').includes(`c-ficon--flag.${country}.round`);
+        return expectedIcon ? this.navigation.countrySelector.currentIcon.isDisplayed() : false;
     }
 
-    isCountryLinkDisplayed(){
+    isCountryLinkDisplayed () {
         return this.countryLink.isDisplayed();
     }
 
-    isMobileNavigationBarDisplayed(){
+    isMobileNavigationBarDisplayed () {
         return this.mobileNavigationBar.isDisplayed();
     }
 
@@ -112,27 +115,27 @@ module.exports = class Header extends Page {
     //     return this.webOffersIcon.length === 1 && element[0].isDisplayed();
     // }
 
-    clickOffersLink(){
-        return this.navigation.offers.link.click();
+    clickOffersLink () {
+        return this.navigation.offersLink.link.click();
     }
 
-    clickHelpLink(){
+    clickHelpLink () {
         return this.navigation.help.link.click();
     }
 
-    moveToCountrySelector(){
+    moveToCountrySelector () {
         this.navigation.countrySelector.link.moveTo();
     }
 
-    openCountrySelector(){
+    openCountrySelector () {
         return this.navigation.countrySelector.link.click();
     }
 
-    clickCountryListItem(){
+    clickCountryListItem () {
         return this.countryLink.click();
     }
 
-    openMobileNavigation(){
+    openMobileNavigation () {
         return this.mobileNavigationBar.click();
     }
-}
+};
