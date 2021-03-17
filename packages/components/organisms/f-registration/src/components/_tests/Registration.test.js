@@ -15,10 +15,6 @@ describe('Registration', () => {
         loginUrl: '/account/register'
     };
 
-    beforeEach(() => {
-        allure.feature('Registration');
-    });
-
     it('should be defined', () => {
         // Arrange & Act
         wrapper = shallowMount(Registration, { propsData });

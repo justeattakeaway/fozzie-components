@@ -3,7 +3,6 @@ import MockAdapter from 'axios-mock-adapter';
 import RegistrationServiceApi from '../../services/RegistrationServiceApi';
 
 describe('RegistrationServiceApi', () => {
-    allure.feature('Registration Service API');
     const axiosMock = new MockAdapter(axios);
 
     describe('when creating an account', () => {

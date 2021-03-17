@@ -13,7 +13,6 @@ localVue.use(VueI18n);
 localVue.use(Vuex);
 
 describe('Selector', () => {
-    allure.feature('Checkout-Selector');
     const propsData = {};
 
     it('should be defined', () => {

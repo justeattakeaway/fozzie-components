@@ -31,10 +31,7 @@
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
-    "test": "vue-cli-service test:unit && yarn report:unit",
-    "report:unit": "allure generate test/results/allure --clean && yarn allure:open",
-    "allure:open": "yarn allure:clean && allure open",
-    "allure:clean": "rimraf ./test/results",
+    "test": "vue-cli-service test:unit && cd ../../../../ && yarn allure:clean",
     "test-component:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite component",
     "test-a11y:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite a11y"
   },
