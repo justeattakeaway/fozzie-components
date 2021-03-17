@@ -16,7 +16,10 @@ const fulfilmentTimes = [
 const defaultCheckoutState = {
     id: '',
     serviceType: CHECKOUT_METHOD_DELIVERY,
-    restaurantId: '',
+    restaurant: {
+        id: '',
+        seoName: ''
+    },
     basket: {
         id: '',
         total: 0

@@ -25,7 +25,10 @@ export default {
     state: () => ({
         id: '',
         serviceType: '',
-        restaurantId: '',
+        restaurant: {
+            id: '',
+            seoName: ''
+        },
         basket: {
             id: '',
             total: 0
@@ -188,7 +191,10 @@ export default {
             const { data } = await axios.get(url, config);
             const basketDetails = {
                 serviceType: data.ServiceType.toLowerCase(),
-                restaurantId: data.RestaurantId,
+                restaurant: {
+                    id: data.RestaurantId,
+                    seoName: data.RestaurantSeoName
+                },
                 basket: {
                     id: data.BasketId,
                     total: data.BasketSummary.BasketTotals.Total
@@ -377,10 +383,10 @@ export default {
             state.availableFulfilment.isAsapAvailable = asapAvailable;
         },
 
-        [UPDATE_BASKET_DETAILS]: (state, { serviceType, basket, restaurantId }) => {
+        [UPDATE_BASKET_DETAILS]: (state, { serviceType, basket, restaurant }) => {
             state.serviceType = serviceType;
             state.basket = basket;
-            state.restaurantId = restaurantId;
+            state.restaurant = restaurant;
         },
 
         [UPDATE_CUSTOMER_DETAILS]: (state, customer) => {
