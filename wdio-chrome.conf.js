@@ -275,23 +275,30 @@ exports.config = {
      * @param {<Object>} results object containing test results
      */
     onComplete: function() {
-        if (process.env.JE_ENV.toLowerCase() !== 'browserstack') {
+        if (process.env.JE_ENV !== 'browserstack' && process.env.COMPONENT_TYPE !== 'atom') {
             const reportError = new Error('Could not generate Allure report');
             const generation = allure(['generate', 'test/results/allure', ' --clean']);
-            return new Promise((resolve, reject) => {
-                const generationTimeout = setTimeout(
-                    () => reject(reportError),
-                    5000
-                );
 
-                generation.on('exit', exitCode => {
-                    clearTimeout(generationTimeout);
+            for (let i = 0; i < testEnvironment.reporters.length; i++) {
+                for (let j = 0; j < testEnvironment.reporters[i].length; j++) {
+                    if (testEnvironment.reporters[i].includes('allure')) {
+                        return new Promise((resolve, reject) => {
+                            const generationTimeout = setTimeout(
+                                () => reject(reportError),
+                                5000
+                            );
 
-                    if (exitCode) {
-                        resolve();
+                            generation.on('exit', exitCode => {
+                                clearTimeout(generationTimeout);
+
+                                if (exitCode) {
+                                    resolve();
+                                }
+                            });
+                        });
                     }
-                });
-            });
+                }
+            }
         }
     }
     /**

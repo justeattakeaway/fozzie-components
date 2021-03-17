@@ -20,7 +20,6 @@
     "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y lerna run test-a11y:chrome --concurrency 1 --stream",
     "test:consumer": "lerna run test:consumer",
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
-    "report:unit": "allure generate test/results/allure --clean && yarn allure:open",
     "local:tests": "cross-env yarn test && yarn test-component:chrome && yarn test-a11y:chrome", 
     "allure:open": "yarn allure:clean && allure open",
     "allure:clean": "rimraf test/results/allure"

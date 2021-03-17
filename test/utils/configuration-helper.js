@@ -2,6 +2,7 @@ const video = require('wdio-video-reporter');
 const CIRCLE_CI = process.env.CIRCLECI;
 const TEST_TYPE = process.env.TEST_TYPE;
 const JE_ENV = process.env.JE_ENV;
+const COMPONENT_TYPE = process.env.COMPONENT_TYPE;
 
 exports.getBaseUrl = (port = 8080) => {
     switch (JE_ENV) {
@@ -18,7 +19,7 @@ exports.local = () => ({
     bail: 0,
     maxinstances: 1,
     loglevel: 'silent',
-    reporters: JE_ENV !== 'browserstack' ? [
+    reporters: JE_ENV !== 'browserstack' && COMPONENT_TYPE !== 'atom' ? [
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases
             videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
@@ -27,7 +28,8 @@ exports.local = () => ({
         ['allure', {
             outputDir: `${global.baseDir}/test/results/allure`,
             disableWebdriverStepsReporting: false,
-            disableWebdriverScreenshotsReporting: false
+            disableWebdriverScreenshotsReporting: false,
+            disableMochaHooks: true
         }]] : []
 });
 
