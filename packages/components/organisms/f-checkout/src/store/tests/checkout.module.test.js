@@ -357,7 +357,7 @@ describe('CheckoutModule', () => {
                 expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, {
                     line1: expectedAddress.Line1,
                     line2: expectedAddress.Line2,
-                    city: expectedAddress.City,
+                    locality: expectedAddress.City,
                     postcode: expectedAddress.ZipCode
                 });
             });
