@@ -2,15 +2,15 @@ export default {
     locale: 'en-IE',
     linkLists: {
         customerService: {
-            title: 'Customer service',
+            title: 'Customer Service',
             links: [
                 {
-                    url: '/account/login/',
+                    url: '/account/register/?returnurl=%2F',
                     text: 'Log in',
                     gtm: 'click_service_login'
                 },
                 {
-                    url: '/account/register/',
+                    url: '/account/register/?returnurl=%2F',
                     text: 'Sign up',
                     gtm: 'click_service_signup'
                 },
@@ -20,19 +20,19 @@ export default {
                     gtm: 'click_service_blog'
                 },
                 {
-                    url: '/account/',
+                    url: '/account/info/',
                     text: 'My account',
                     gtm: 'click_service_account'
                 },
                 {
-                    url: '/help/',
+                    url: '/help',
                     text: 'Help',
                     gtm: 'click_service_help'
                 }
             ]
         },
         cuisines: {
-            title: 'Popular cuisines',
+            title: 'Cuisines',
             links: [
                 {
                     url: '/takeaway/nearme/pizza',
@@ -60,58 +60,89 @@ export default {
                     gtm: 'click_cuisine_thai'
                 },
                 {
-                    url: '/takeaway/nearme/',
+                    url: '/takeaway/nearme',
                     text: 'View all cuisines',
                     gtm: 'click_cuisine_view_all'
                 }
             ]
         },
         locations: {
-            title: 'Popular locations',
+            title: 'Locations',
             links: [
                 {
-                    url: '/takeaway/dublin-area',
+                    url: '/takeaway/dublin',
                     text: 'Dublin',
-                    gtm: 'click_location_dublin'
+                    gtm: 'click_locations_dublin'
                 },
                 {
-                    url: '/takeaway/limerick-city-centre',
+                    url: '/takeaway/limerick',
                     text: 'Limerick',
-                    gtm: 'click_location_limerick'
+                    gtm: 'click_locations_limerick'
                 },
                 {
-                    url: '/takeaway/cork-city-centre',
+                    url: '/takeaway/cork',
                     text: 'Cork',
-                    gtm: 'click_location_cork'
+                    gtm: 'click_locations_cork'
                 },
                 {
-                    url: '/takeaway/galway-city-centre',
-                    text: 'Galway',
-                    gtm: 'click_location_galway'
+                    url: '/takeaway/ballymun',
+                    text: 'Ballymun',
+                    gtm: 'click_locations_ballymun'
                 },
                 {
                     url: '/takeaway/waterford',
                     text: 'Waterford',
-                    gtm: 'click_location_waterford'
+                    gtm: 'click_locations_waterford'
                 },
                 {
                     url: '/takeaway/',
                     text: 'View all locations',
-                    gtm: 'click_location_view_all'
+                    gtm: 'click_locations_view_all'
                 }
             ]
         },
         brands: {
             title: 'Brands',
-            links: []
+            links: [
+                {
+                    url: '/takeaway/brands/burger-king',
+                    text: 'Burger King',
+                    gtm: 'click_brands_burger_king'
+                },
+                {
+                    url: '/takeaway/brands/apache-pizza',
+                    text: 'Apache Pizza',
+                    gtm: 'click_brands_apache_pizza'
+                },
+                {
+                    url: '/takeaway/brands/kfc',
+                    text: 'KFC',
+                    gtm: 'click_brands_kfc'
+                },
+                {
+                    url: '/takeaway/brands/supermacs',
+                    text: 'Supermacs',
+                    gtm: 'click_brands_supermacs'
+                },
+                {
+                    url: '/takeaway/brands/eddie-rockets',
+                    text: 'Eddie Rockets',
+                    gtm: 'click_brands_eddie_rockets'
+                },
+                {
+                    url: '/takeaway/brands/',
+                    text: 'View all brands',
+                    gtm: 'click_brands_all'
+                }
+            ]
         },
         aboutUs: {
-            title: 'About us',
+            title: 'A bit more about us',
             links: [
                 {
                     url: '/info/about-us',
-                    text: 'About us',
-                    gtm: 'click_about_about_us'
+                    text: 'About Just Eat',
+                    gtm: 'click_about_about_justeat'
                 },
                 {
                     url: '/pricepromise',
@@ -119,12 +150,22 @@ export default {
                     gtm: 'click_about_price_promise'
                 },
                 {
-                    url: '/gift-vouchers/',
+                    url: '/info/gift-cards',
                     text: 'Just Eat Giftcards',
-                    gtm: 'click_about_gift_cards'
+                    gtm: 'click_about_giftcards'
                 },
                 {
-                    url: '/privacy-policy',
+                    url: 'https://restaurants.just-eat.ie/signup',
+                    text: 'Restaurant sign up',
+                    gtm: 'click_about_restaurant_signup'
+                },
+                {
+                    url: 'https://couriers.just-eat.ie/application',
+                    text: 'Deliver with Just Eat',
+                    gtm: 'click_deliverwithjusteatfooter'
+                },
+                {
+                    url: '/info/privacy-policy',
                     text: 'Privacy Policy',
                     gtm: 'click_about_privacy_policy'
                 },
@@ -134,7 +175,7 @@ export default {
                     gtm: 'click_about_tandcs'
                 },
                 {
-                    url: '/info/terms-and-conditions',
+                    url: '/info/cookies-policy',
                     text: 'Cookie Policy',
                     gtm: 'click_about_cookie_policy'
                 }
@@ -200,12 +241,6 @@ export default {
             gtm: 'click_follow_facebook'
         },
         {
-            url: 'https://www.twitter.com/JustEatIE',
-            name: 'twitter',
-            alt: 'Just Eat on Twitter (leads to external site)',
-            gtm: 'click_follow_twitter'
-        },
-        {
             url: 'https://instagram.com/justeatie/',
             name: 'instagram',
             alt: 'Just Eat on Instagram (leads to external site)',
@@ -216,6 +251,12 @@ export default {
             name: 'pinterest',
             alt: 'Just Eat on Pinterest (leads to external site)',
             gtm: 'click_follow_pinterest'
+        },
+        {
+            url: 'https://www.twitter.com/JustEatIE',
+            name: 'twitter',
+            alt: 'Just Eat on Twitter (leads to external site)',
+            gtm: 'click_follow_twitter'
         }
     ],
     currentCountryName: 'Ireland',
