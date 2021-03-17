@@ -12,6 +12,7 @@ v0.72.0
 - `UPDATE_STATE` mutation to use `locality`.
 - `getAddress` to use locality.
 
+
 v0.71.0
 ------------------------------
 *March 16, 2021*

@@ -12,7 +12,16 @@
     "from": "2020-01-01T00:00+00:00",
     "to": "2020-01-01T00:00+00:00"
   },
-
+  "address": {
+    "lines": [
+      "1 Bristol Road",
+      "Flat 1",
+      "",
+      "Bristol",
+      "Somerset"
+    ],
+    "postalCode": "BS1 1AA"
+  },
   "isFulfillable": true,
   "notices": [
     {

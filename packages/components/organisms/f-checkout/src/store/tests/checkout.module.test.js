@@ -346,7 +346,6 @@ describe('CheckoutModule', () => {
                 postcode: 'EC4M 7RF'
             };
 
-
             beforeEach(() => {
                 config = {
                     headers: {
