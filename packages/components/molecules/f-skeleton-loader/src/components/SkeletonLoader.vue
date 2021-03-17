@@ -46,8 +46,8 @@ export default {
 
 <style lang="scss" module>
 
-$skeleton-loader-heading-height: 32px;
-$skeleton-loader-text-height: 16px;
+$skeleton-loader-heading-height: spacing(x4);
+$skeleton-loader-text-height: spacing(x2);
 
 .c-skeleton-loader {
   position: relative;
