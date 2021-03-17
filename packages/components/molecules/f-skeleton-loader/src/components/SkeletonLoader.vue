@@ -23,7 +23,7 @@ export default {
             return this.$createElement(
                 'div',
                 {
-                    staticClass: `${this.$style[`c-skeleton-loader__${text}`]} ${this.$style['c-skeleton-loader__bone']}`
+                    staticClass: `${this.$style[`c-skeleton-loader-${text}`]} ${this.$style['c-skeleton-loader-bone']}`
                 },
                 children
             );
@@ -52,24 +52,24 @@ $skeleton-loader-text-height: 16px;
 .c-skeleton-loader {
   position: relative;
   vertical-align: top;
+}
 
-   &__bone {
-       border-radius: inherit;
-        overflow: hidden;
-        position: relative;
-        background-color: $grey--mid;
-   }
+.c-skeleton-loader-bone {
+    border-radius: inherit;
+    overflow: hidden;
+    position: relative;
+    background-color: $grey--mid;
+}
 
-   &__heading {
+.c-skeleton-loader-heading {
     height: $skeleton-loader-heading-height;
     width: 45%;
-  }
+}
 
-  &__text {
+.c-skeleton-loader-text {
     flex: 1 0 auto;
     height: $skeleton-loader-text-height;
     margin-bottom: spacing();
-  }
 }
 
 </style>
