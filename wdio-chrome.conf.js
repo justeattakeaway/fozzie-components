@@ -35,10 +35,10 @@ exports.config = {
     // Suites
     suites: {
         component: [
-            './test/specs/component/**/*.component.spec.js',
+            './test/specs/component/**/*.component.spec.js'
         ],
         a11y: [
-            './test/specs/accessibility/axe-accessibility.spec.js',
+            './test/specs/accessibility/axe-accessibility.spec.js'
         ]
     },
     //
@@ -277,7 +277,7 @@ exports.config = {
     onComplete: function() {
         if (process.env.JE_ENV !== 'browserstack' && process.env.COMPONENT_TYPE === 'organism') {
             const reportError = new Error('Could not generate Allure report');
-            const generation = allure(['generate', 'test/results/allure', ' --clean']);
+            const generation = allure(['generate', '../../../../test/results/allure', ' --clean']);
 
             for (let i = 0; i < testEnvironment.reporters.length; i++) {
                 for (let j = 0; j < testEnvironment.reporters[i].length; j++) {

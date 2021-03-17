@@ -19,7 +19,7 @@ exports.local = () => ({
     bail: 0,
     maxinstances: 1,
     loglevel: 'silent',
-    reporters: JE_ENV !== 'browserstack' && COMPONENT_TYPE !== 'atom' && COMPONENT_TYPE !== 'molecule' ? [
+    reporters: JE_ENV !== 'browserstack' && COMPONENT_TYPE === 'organism' ? [
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases
             videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
@@ -27,7 +27,7 @@ exports.local = () => ({
         }],
         ['allure', {
             outputDir: `${global.baseDir}/test/results/allure`,
-            disableWebdriverStepsReporting: false,
+            disableWebdriverStepsReporting: true,
             disableWebdriverScreenshotsReporting: false,
             disableMochaHooks: true
         }]] : []

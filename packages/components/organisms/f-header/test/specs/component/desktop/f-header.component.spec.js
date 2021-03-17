@@ -26,7 +26,7 @@ describe('Desktop - f-header component tests', () => {
 
     forEach([['gb', '.co.uk'], ['au', 'au'], ['at', 'at'], ['be', 'be-en'], ['bg', 'bg'], ['ca_en', 'skipthedishes.com'], ['ca_fr', 'skipthedishes.com/fr'], ['dk', '.dk'], ['jet_fr', '.fr'], ['de', '.de'], ['ie', '.ie'], ['il', '.il'], ['it', '.it'], 
     ['lu', 'lu-en'], ['nl', '.nl'], ['nz', '.nz'], ['no', '.no'], ['pl', '.pl'], ['pt', '/pt'], ['ro', '/ro'], ['es', '.es'], ['ch_ch', '.ch'], ['ch_en', '/en'], ['ch_fr', '/fr'] ])
-    .it('should display all countries and redirect to correct URL', (country, expectedUrl) => {
+    .it.skip('should display all countries and redirect to correct URL', (country, expectedUrl) => {
         // Act
         browser.maximizeWindow();
         header.moveToCountrySelector();
