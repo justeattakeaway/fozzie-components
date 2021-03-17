@@ -6,8 +6,10 @@
             (isRounded ? $style['c-card--rounded'] : ''),
             (hasOutline ? $style['c-card--outline'] : ''),
             (isPageContentWrapper ? $style['c-card--pageContentWrapper'] : '')
-        ]">
-        <h1
+        ]"
+    >
+        <component
+            :is="cardHeadingTag"
             v-if="cardHeading"
             :class="[
                 $style['c-card-heading'],
@@ -16,7 +18,7 @@
             data-test-id="card-heading"
         >
             {{ cardHeading }}
-        </h1>
+        </component>
         <slot />
     </div>
 </template>
@@ -34,6 +36,11 @@ export default {
             type: String,
             default: 'left',
             validator: value => ['left', 'right', 'center'].indexOf(value) !== -1
+        },
+        cardHeadingTag: {
+            type: String,
+            default: 'h1',
+            validator: value => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].indexOf(value) !== -1
         },
         hasOutline: {
             type: Boolean,

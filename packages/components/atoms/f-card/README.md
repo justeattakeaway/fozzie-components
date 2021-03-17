@@ -68,6 +68,7 @@ The props that can be defined are as follows:
 | :---                      | :---:      | :---:      | :---:   | :---        |
 | `cardHeadingPosition`     | `String`   |  No        | `left`  | Sets the text alignment of the card component's heading.<br><br>When set to `left` the heading will aligned to the left.<br>When set to `center` the heading will be centrally aligned.<br>When set to `right` the heading will be aligned to the right. |
 | `cardHeading`             | `String`   |  No        | `''`    | When set, will add a heading to the top of the card component. |
+| `cardHeadingTag`          | `String`   |  No        | `'h1'`  | Sets the tag for the card component's heading.<br><br>Allowed values are `h1`, `h2`, `h3`, `h4`, `h5` and `h6` |
 | `hasOutline`              | `Boolean`  |  No        | `false` | When set to `true`, an outline is applied to the card component.  |
 | `isPageContentWrapper`    | `Boolean`  |  No        | `false` | When set to `true`, applies styles to make the card act like a page content wrapper.<br><br>The card will be full width on narrow devices, and then a fixed width above a certain breakpoint width (about 480px), when the card will be centred on the page. |
 | `isRounded`               | `Boolean`  |  No        | `false` | When set to `true`, rounded corners are applied to the card component. |
