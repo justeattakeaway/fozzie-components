@@ -41,9 +41,7 @@ describe('Card', () => {
             expect(cardTitleElement.text()).toBe(propsData.cardHeading);
         });
 
-        it.each(
-            ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
-        )('should set the tag to be %s, as passed in the `cardHeading` prop', (headingTag) => {
+        it.each(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])('should set the tag to be %s, as passed in the `cardHeading` prop', headingTag => {
             // Arrange
             const propsData = {
                 cardHeading: 'Test card title',
