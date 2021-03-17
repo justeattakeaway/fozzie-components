@@ -275,7 +275,7 @@ exports.config = {
      * @param {<Object>} results object containing test results
      */
     onComplete: function() {
-        if (process.env.JE_ENV !== 'browserstack' && process.env.COMPONENT_TYPE !== 'atom') {
+        if (process.env.JE_ENV !== 'browserstack' && process.env.COMPONENT_TYPE === 'organism') {
             const reportError = new Error('Could not generate Allure report');
             const generation = allure(['generate', 'test/results/allure', ' --clean']);
 
