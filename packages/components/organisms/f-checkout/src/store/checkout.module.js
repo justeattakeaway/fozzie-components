@@ -1,6 +1,7 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
+import { mapGetAddressRequest } from '../services/mapper';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE } from '../constants';
 import { version as applicationVerion } from '../../package.json';
 
@@ -227,7 +228,7 @@ export default {
 
             const addressDetails = addressService.getClosestAddress(data.Addresses, tenant);
 
-            commit(UPDATE_FULFILMENT_ADDRESS, addressDetails);
+            commit(UPDATE_FULFILMENT_ADDRESS, mapGetAddressRequest(addressDetails));
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
         },
 

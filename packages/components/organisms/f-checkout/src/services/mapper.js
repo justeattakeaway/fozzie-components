@@ -56,6 +56,12 @@ const mapUpdateCheckoutRequest = ({
     }
 ]);
 
+const mapGetAddressRequest = address => {
+    address.locality = address.city;
+    delete address.city;
+    return address;
+};
+
 /**
  * Maps checkout names to required GA names.
  *
@@ -111,8 +117,9 @@ const getAnalyticsErrorCodeByApiErrorCode = error => {
 };
 
 export {
-    mapUpdateCheckoutRequest,
+    getAnalyticsErrorCodeByApiErrorCode,
     mapAnalyticsName,
     mapAnalyticsNames,
-    getAnalyticsErrorCodeByApiErrorCode
+    mapGetAddressRequest,
+    mapUpdateCheckoutRequest
 };

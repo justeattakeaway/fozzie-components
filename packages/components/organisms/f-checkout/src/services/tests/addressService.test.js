@@ -49,7 +49,7 @@ describe('addressService', () => {
                 expect(actual).toEqual({
                     line1: '',
                     line2: '',
-                    locality: '',
+                    city: '',
                     postcode: ''
                 });
             });
@@ -65,7 +65,7 @@ describe('addressService', () => {
                 expect(actual).toEqual({
                     line1: london3LinesDefault.Line1,
                     line2: `${london3LinesDefault.Line2}, ${london3LinesDefault.Line3}`,
-                    locality: london3LinesDefault.City,
+                    city: london3LinesDefault.City,
                     postcode: london3LinesDefault.ZipCode
                 });
             });
@@ -83,7 +83,7 @@ describe('addressService', () => {
                 expect(actual).toEqual({
                     line1: '',
                     line2: '',
-                    locality: '',
+                    city: '',
                     postcode
                 });
             });
@@ -100,7 +100,7 @@ describe('addressService', () => {
                 expect(actual).toEqual({
                     line1: '',
                     line2: '',
-                    locality: '',
+                    city: '',
                     postcode: 'EN1 1AA'
                 });
             });
@@ -117,7 +117,7 @@ describe('addressService', () => {
                 expect(actual).toEqual({
                     line1: '',
                     line2: '',
-                    locality: '',
+                    city: '',
                     postcode
                 });
             });
@@ -134,7 +134,7 @@ describe('addressService', () => {
                 expect(actual).toEqual({
                     line1: bristol2Lines.Line1,
                     line2: bristol2Lines.Line2,
-                    locality: bristol2Lines.City,
+                    city: bristol2Lines.City,
                     postcode: bristol2Lines.ZipCode
                 });
             });
@@ -151,7 +151,7 @@ describe('addressService', () => {
                 expect(actual).toEqual({
                     line1: london3LinesDefault.Line1,
                     line2: `${london3LinesDefault.Line2}, ${london3LinesDefault.Line3}`,
-                    locality: london3LinesDefault.City,
+                    city: london3LinesDefault.City,
                     postcode: london3LinesDefault.ZipCode
                 });
             });
@@ -168,7 +168,7 @@ describe('addressService', () => {
                 expect(actual).toEqual({
                     line1: area511Line.Line1,
                     line2: '',
-                    locality: area511Line.City,
+                    city: area511Line.City,
                     postcode: area511Line.ZipCode
                 });
             });

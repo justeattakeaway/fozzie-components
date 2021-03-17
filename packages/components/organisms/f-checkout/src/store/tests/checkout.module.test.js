@@ -1,5 +1,6 @@
 import axios from 'axios';
 import CheckoutModule from '../checkout.module';
+import * as mapper from '../../services/mapper';
 import checkoutDelivery from '../../demo/checkout-delivery.json';
 import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
@@ -335,9 +336,19 @@ describe('CheckoutModule', () => {
         });
 
         describe('getAddress ::', () => {
-            it(`should get the address details from the backend and call ${UPDATE_FULFILMENT_ADDRESS} mutation.`, async () => {
-                // Arrange
-                const config = {
+            let config;
+            let mapGetAddressRequestSpy;
+
+            const expectedAddress = {
+                line1: 'Fleet Place House',
+                line2: 'Farringdon',
+                locality: 'London',
+                postcode: 'EC4M 7RF'
+            };
+
+
+            beforeEach(() => {
+                config = {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept-Language': payload.language,
@@ -347,19 +358,33 @@ describe('CheckoutModule', () => {
                 };
 
                 axios.get = jest.fn(() => Promise.resolve({ data: customerAddresses }));
-                const [expectedAddress] = customerAddresses.Addresses;
+
+                mapGetAddressRequestSpy = jest.spyOn(mapper, 'mapGetAddressRequest').mockImplementation(() => expectedAddress);
+            });
+
+            it('should call `mapGetAddressRequest` with address.', async () => {
+                // Arrange
+                const addressDetails = {
+                    line1: 'Fleet Place House',
+                    line2: 'Farringdon',
+                    city: 'London',
+                    postcode: 'EC4M 7RF'
+                };
 
                 // Act
                 await getAddress({ commit, state, dispatch }, payload);
 
                 // Assert
+                expect(mapGetAddressRequestSpy).toHaveBeenCalledWith(addressDetails);
+            });
+
+            it(`should get the address details from the backend and call ${UPDATE_FULFILMENT_ADDRESS} mutation.`, async () => {
+                // Act
+                await getAddress({ commit, state, dispatch }, payload);
+
+                // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, {
-                    line1: expectedAddress.Line1,
-                    line2: expectedAddress.Line2,
-                    locality: expectedAddress.City,
-                    postcode: expectedAddress.ZipCode
-                });
+                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, expectedAddress);
             });
 
             it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {

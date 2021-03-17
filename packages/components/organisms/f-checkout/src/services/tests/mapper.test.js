@@ -1,5 +1,9 @@
 import {
-    mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode
+    getAnalyticsErrorCodeByApiErrorCode,
+    mapAnalyticsName,
+    mapAnalyticsNames,
+    mapGetAddressRequest,
+    mapUpdateCheckoutRequest
 } from '../mapper';
 
 const defaultParams = {
@@ -9,6 +13,13 @@ const defaultParams = {
     time: {},
     userNote: '',
     geolocation: null
+};
+
+const address = {
+    line1: '1 Bristol Road',
+    line2: 'Flat 1',
+    locality: 'Bristol',
+    postcode: 'BS1 1AA'
 };
 
 describe('checkout mapper', () => {
@@ -36,14 +47,6 @@ describe('checkout mapper', () => {
     });
 
     it('should map address correctly', () => {
-        // Arrange
-        const address = {
-            line1: '1 Bristol Road',
-            line2: 'Flat 1',
-            locality: 'Bristol',
-            postcode: 'BS1 1AA'
-        };
-
         // Act
         const requestBody = mapUpdateCheckoutRequest({
             ...defaultParams,
@@ -86,14 +89,6 @@ describe('checkout mapper', () => {
         const isCheckoutMethodDelivery = false;
 
         it('should not map the address', () => {
-            // Arrange
-            const address = {
-                line1: '1 Bristol Road',
-                line2: 'Flat 1',
-                locality: 'Bristol',
-                postcode: 'BS1 1AA'
-            };
-
             // Act
             const requestBody = mapUpdateCheckoutRequest({
                 ...defaultParams,
@@ -165,6 +160,21 @@ describe('mapAnalyticsName :: ', () => {
             // Act & Assert
             expect(mapAnalyticsName(provided)).toEqual(expected);
         });
+    });
+});
+
+describe('mapGetAddressRequest :: ', () => {
+    it('should replace city key with locality', () => {
+        // Arrange
+        const addressWithCity = {
+            line1: '1 Bristol Road',
+            line2: 'Flat 1',
+            city: 'Bristol',
+            postcode: 'BS1 1AA'
+        };
+
+        // Act & Assert
+        expect(mapGetAddressRequest(addressWithCity)).toEqual(address);
     });
 });
 
