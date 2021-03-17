@@ -4,14 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (add to next release)
+v1.1.0
 ------------------------------
-*February 25, 2021*
+*March 17, 2021*
+
+### Added
+- Added a `prop` to allow the customisation of the heading level.
 
 ### Changed
 - Restructured component object into page object model
 - Refactored accessibility tests
-
 
 v1.0.0
 ------------------------------

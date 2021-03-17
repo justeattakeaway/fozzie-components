@@ -87,8 +87,13 @@ export default {
         color: $grey--dark;
     }
 
-    @include media('>=mid') {
+    @include media('>mid') {
         @include font-size('body-l');
     }
+
+    @include media('<=mid') {
+        padding-left: spacing(x6);
+    }
+
 }
 </style>

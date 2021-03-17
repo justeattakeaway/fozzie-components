@@ -832,20 +832,187 @@ describe('Checkout', () => {
             });
         });
 
-        describe('submitCheckout ::', () => {
+        describe('`submitCheckout` ::', () => {
             let wrapper;
-            let handleUpdateCheckoutSpy;
-            let submitOrderSpy;
-            let redirectToPaymentSpy;
 
             beforeEach(() => {
-                handleUpdateCheckoutSpy = jest.spyOn(VueCheckout.methods, 'handleUpdateCheckout');
-                submitOrderSpy = jest.spyOn(VueCheckout.methods, 'submitOrder');
-                redirectToPaymentSpy = jest.spyOn(VueCheckout.methods, 'redirectToPayment');
+                wrapper = mount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        serviceType: CHECKOUT_METHOD_COLLECTION,
+                        isLoggedIn: false
+                    }),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
+                });
             });
 
-            it('should call `handleUpdateCheckout`', async () => {
-                // Arrange
+            it('should exist', () => {
+                expect(wrapper.vm.submitCheckout).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                describe('AND `isLoggedIn` is falsey', () => {
+                    it('should call `setupGuestUser`', () => {
+                        // Arrange
+                        const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
+
+                        // Act
+                        wrapper.vm.submitCheckout();
+
+                        // Assert
+                        expect(setupGuestUserSpy).toHaveBeenCalled();
+                    });
+
+                    it('should not call `lookupGeoLocation`', () => {
+                        // Arrange
+                        const lookupGeoLocationSpy = jest.spyOn(wrapper.vm, 'lookupGeoLocation');
+
+                        // Act
+                        wrapper.vm.submitCheckout();
+
+                        // Assert
+                        expect(lookupGeoLocationSpy).not.toHaveBeenCalled();
+                    });
+
+                    it('should not call `handleUpdateCheckout`', () => {
+                        // Arrange
+                        const handleUpdateCheckoutSpy = jest.spyOn(wrapper.vm, 'handleUpdateCheckout');
+
+                        // Act
+                        wrapper.vm.submitCheckout();
+
+                        // Assert
+                        expect(handleUpdateCheckoutSpy).not.toHaveBeenCalled();
+                    });
+
+                    it('should not call `handleFulfillableContext`', () => {
+                        // Arrange
+                        const handleFulfillableContextSpy = jest.spyOn(wrapper.vm, 'handleFulfillableContext');
+
+                        // Act
+                        wrapper.vm.submitCheckout();
+
+                        // Assert
+                        expect(handleFulfillableContextSpy).not.toHaveBeenCalled();
+                    });
+                });
+
+                describe('AND `isLoggedIn` is truthy', () => {
+                    it('should not call `setupGuestUser`', () => {
+                        // Arrange
+                        wrapper = mount(VueCheckout, {
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                serviceType: CHECKOUT_METHOD_COLLECTION,
+                                isLoggedIn: true
+                            }),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger
+                            }
+                        });
+                        const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
+
+                        // Act
+                        wrapper.vm.submitCheckout();
+
+                        // Assert
+                        expect(setupGuestUserSpy).not.toHaveBeenCalled();
+                    });
+                });
+
+                describe('AND there is an error caught', () => {
+                    let eventData;
+
+                    beforeEach(() => {
+                        jest.spyOn(wrapper.vm, 'setupGuestUser').mockImplementation(() => {
+                            throw new Error('Error');
+                        });
+
+                        eventData = {
+                            isLoggedIn: false,
+                            serviceType: CHECKOUT_METHOD_COLLECTION,
+                            errors: Error('Error')
+                        };
+                    });
+
+                    it('should `$emit` with a `message` & `eventData`', async () => {
+                        // Arrange
+                        const $emitSpy = jest.spyOn(wrapper.vm, '$emit');
+
+                        // Act
+                        wrapper.vm.submitCheckout();
+
+                        // Assert
+                        expect($emitSpy).toHaveBeenCalledWith('checkout-payment-failure', eventData);
+                    });
+
+                    it('should `logInvoker` with a `message` & `eventData`', async () => {
+                        // Arrange
+                        const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
+
+                        // Act
+                        wrapper.vm.submitCheckout();
+
+                        // Assert
+                        expect(logInvokerSpy).toHaveBeenCalledWith('Consumer Checkout Failure', eventData, $logger.logError);
+                    });
+                });
+            });
+        });
+
+        describe('`logInvoker` ::', () => {
+            let wrapper;
+            const store = createStore({
+                ...defaultCheckoutState,
+                isLoggedIn: true,
+                serviceType: CHECKOUT_METHOD_DELIVERY
+            });
+
+            beforeEach(() => {
+                wrapper = mount(VueCheckout, {
+                    store,
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
+                });
+            });
+
+            it('should exist', () => {
+                expect(wrapper.vm.logInvoker).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                it('should call `$logger` with the correct callback assigned', () => {
+                    // Arrange
+                    const eventData = {
+                        isLoggedIn: true,
+                        serviceType: CHECKOUT_METHOD_DELIVERY
+                    };
+
+                    // Act
+                    wrapper.vm.logInvoker('Logger says hi', eventData, $logger.logInfo);
+
+                    // Assert
+                    expect($logger.logInfo).toHaveBeenCalled();
+                });
+            });
+        });
+
+        describe('`processOrderIsFulfillable` ::', () => {
+            let wrapper;
+
+            beforeEach(() => {
                 wrapper = mount(VueCheckout, {
                     store: createStore(),
                     i18n,
@@ -855,709 +1022,193 @@ describe('Checkout', () => {
                         $logger
                     }
                 });
-
-                // Act
-                await wrapper.vm.submitCheckout();
-
-                // Assert
-                expect(handleUpdateCheckoutSpy).toHaveBeenCalled();
             });
 
-            describe('if serviceType set to `collection`', () => {
-                describe('when all the fields are populated correctly', () => {
-                    beforeEach(() => {
-                        wrapper = mount(VueCheckout, {
-                            store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
-                            i18n,
-                            localVue,
-                            propsData,
-                            mocks: {
-                                $logger
-                            }
-                        });
-                    });
-
-                    it('should emit success event', async () => {
-                        // Act
-                        await wrapper.vm.onFormSubmit();
-
-                        // Assert
-                        expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
-                        expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
-                    });
-
-                    it('success event should include `serviceType` and user authentication status', async () => {
-                        const payload = {
-                            isLoggedIn: false,
-                            serviceType: CHECKOUT_METHOD_COLLECTION
-                        };
-
-                        // Act
-                        await wrapper.vm.onFormSubmit();
-
-                        // Assert
-                        expect(wrapper.emitted(EventNames.CheckoutSuccess)[0][0]).toEqual(payload);
-                    });
-
-                    it('should call `logInfo`', async () => {
-                        // Act
-                        await wrapper.vm.onFormSubmit();
-
-                        // Assert
-                        expect($logger.logInfo).toHaveBeenCalled();
-                    });
-                });
-
-                it('should show error message and emit failure event when the mobile number field is not populated', async () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            serviceType: CHECKOUT_METHOD_COLLECTION,
-                            customer: {
-                                ...defaultCheckoutState.customer,
-                                mobileNumber: ''
-                            }
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-                    const mobileNumberEmptyMessage = wrapper.find('[data-test-id="error-mobile-number"]');
-
-                    // Assert
-                    expect(mobileNumberEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.mobileNumber');
-                });
-
-                it('should show error message and emit failure event when the mobile number field is populated with a < 10 numbers', async () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            serviceType: CHECKOUT_METHOD_COLLECTION,
-                            customer: {
-                                ...defaultCheckoutState.customer,
-                                mobileNumber: '077777'
-                            }
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-                    const mobileNumberEmptyMessage = wrapper.find('[data-test-id="error-mobile-number"]');
-
-                    // Assert
-                    expect(wrapper.vm.isMobileNumberValid).toBe(false);
-                    expect(mobileNumberEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.mobileNumber');
-                });
-
-                it('should show error message and emit failure event when the mobile number field is populated with non numeric value', async () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            serviceType: CHECKOUT_METHOD_COLLECTION,
-                            customer: {
-                                ...defaultCheckoutState.customer,
-                                mobileNumber: 'hs;-j`$e&1l'
-                            }
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-                    const mobileNumberEmptyMessage = wrapper.find('[data-test-id="error-mobile-number"]');
-
-                    // Assert
-                    expect(wrapper.vm.isMobileNumberValid).toBe(false);
-                    expect(mobileNumberEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.mobileNumber');
-                });
-
-                it('should not create validations for address', () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_COLLECTION }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.$v.fulfilment).toBeUndefined();
-                });
-
-                it('should call `logWarn` if field is invalid', async () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            serviceType: CHECKOUT_METHOD_DELIVERY,
-                            customer: {
-                                ...defaultCheckoutState.customer,
-                                mobileNumber: ''
-                            }
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-
-                    // Assert
-                    expect($logger.logWarn).toHaveBeenCalled();
-                });
+            it('should exist', () => {
+                expect(wrapper.vm.processOrderIsFulfillable).toBeDefined();
             });
 
-            describe('if serviceType set to `delivery`', () => {
-                describe('when all the fields are populated correctly', () => {
-                    beforeEach(() => {
-                        wrapper = mount(VueCheckout, {
-                            store: createStore({ ...defaultCheckoutState, serviceType: CHECKOUT_METHOD_DELIVERY }),
-                            i18n,
-                            localVue,
-                            propsData,
-                            mocks: {
-                                $logger
-                            }
-                        });
-                    });
-
-                    it('should emit success event', async () => {
-                        // Act
-                        await wrapper.vm.onFormSubmit();
-
-                        // Assert
-                        expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
-                        expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
-                    });
-
-                    it('success event should include `serviceType` and user authentication status', async () => {
-                        const payload = {
-                            isLoggedIn: false,
-                            serviceType: CHECKOUT_METHOD_DELIVERY
-                        };
-
-                        // Act
-                        await wrapper.vm.onFormSubmit();
-
-                        // Assert
-                        expect(wrapper.emitted(EventNames.CheckoutSuccess)[0][0]).toEqual(payload);
-                    });
-
-                    it('should call `logInfo`', async () => {
-                        // Act
-                        await wrapper.vm.onFormSubmit();
-
-                        // Assert
-                        expect($logger.logInfo).toHaveBeenCalled();
-                    });
-                });
-
-                it('should emit failure event and display error message when address line1 input field is empty', async () => {
+            describe('when invoked', () => {
+                it('should submit the order via `submitOrder`', () => {
                     // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            serviceType: CHECKOUT_METHOD_DELIVERY,
-                            address: {
-                                ...defaultCheckoutState.address,
-                                line1: ''
-                            }
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
+                    const submitOrderSpy = jest.spyOn(wrapper.vm, 'submitOrder');
 
                     // Act
-                    await wrapper.vm.onFormSubmit();
-                    const addressLine1EmptyMessage = wrapper.find('[data-test-id="error-address-line1-empty"]');
-
-                    // Assert
-                    expect(addressLine1EmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.line1');
-                });
-
-                it('should emit failure event and display error message when locality input field is empty', async () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            serviceType: CHECKOUT_METHOD_DELIVERY,
-                            address: {
-                                ...defaultCheckoutState.address,
-                                locality: ''
-                            }
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-                    const addressLocalityEmptyMessage = wrapper.find('[data-test-id="error-address-locality-empty"]');
-
-                    // Assert
-                    expect(addressLocalityEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.locality');
-                });
-
-                it('should emit failure event and display error message when postcode input field is empty', async () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            serviceType: CHECKOUT_METHOD_DELIVERY,
-                            address: {
-                                ...defaultCheckoutState.address,
-                                postcode: ''
-                            }
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-                    const addressPostcodeEmptyMessage = wrapper.find('[data-test-id="error-address-postcode-empty"]');
-
-                    // Assert
-                    expect(addressPostcodeEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.postcode');
-                });
-
-                it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            serviceType: CHECKOUT_METHOD_DELIVERY,
-                            address: {
-                                ...defaultCheckoutState.address,
-                                postcode: '?!hdb-se'
-                            }
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-                    const addressPostcodeTypeErrorMessage = wrapper.find('[data-test-id="error-address-postcode-type-error"]');
-
-                    // Assert
-                    expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.postcode');
-                });
-
-                it('should emit failure event and display error message when postcode contains incorrect characters', async () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            serviceType: CHECKOUT_METHOD_DELIVERY,
-                            address: {
-                                ...defaultCheckoutState.address,
-                                postcode: 'EC4M 7R'
-                            }
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-                    const addressPostcodeTypeErrorMessage = wrapper.find('[data-test-id="error-address-postcode-type-error"]');
-
-                    // Assert
-                    expect(addressPostcodeTypeErrorMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('address.postcode');
-                });
-
-                it('should create validations for address', () => {
-                    // Assert
-                    expect(wrapper.vm.$v.address.line1).toBeDefined();
-                    expect(wrapper.vm.$v.address.locality).toBeDefined();
-                    expect(wrapper.vm.$v.address.postcode).toBeDefined();
-                });
-
-                it('should call `logWarn` if field is invalid', async () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            serviceType: CHECKOUT_METHOD_DELIVERY,
-                            address: {
-                                ...defaultCheckoutState.address,
-                                postcode: 'EC4M 7R'
-                            }
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-
-                    // Assert
-                    expect($logger.logWarn).toHaveBeenCalled();
-                });
-            });
-
-            describe('if `isLoggedIn` set to `false`', () => {
-                afterEach(() => {
-                    jest.clearAllMocks();
-                });
-
-                it('should call `setupGuestUser`', async () => {
-                    // Arrange
-                    const setupGuestUserSpy = jest.spyOn(VueCheckout.methods, 'setupGuestUser');
-                    wrapper = shallowMount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            isLoggedIn: false
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-
-                    // Assert
-                    expect(setupGuestUserSpy).toHaveBeenCalled();
-                });
-
-                it('should emit success event when all the fields are populated correctly', async () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            serviceType: CHECKOUT_METHOD_COLLECTION,
-                            isLoggedIn: false
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-
-                    // Assert
-                    expect(wrapper.emitted(EventNames.CheckoutSuccess).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutFailure)).toBeUndefined();
-                });
-
-                it('should show error message and emit failure event when the first name field is not populated', async () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            serviceType: CHECKOUT_METHOD_COLLECTION,
-                            customer: {
-                                ...defaultCheckoutState.customer,
-                                firstName: ''
-                            },
-                            isLoggedIn: false
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-                    const firstNameEmptyMessage = wrapper.find('[data-test-id="error-first-name-empty"]');
-
-                    // Assert
-                    expect(firstNameEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.firstName');
-                });
-
-                it('should show error message and emit failure event when the last name field is not populated', async () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            serviceType: CHECKOUT_METHOD_COLLECTION,
-                            customer: {
-                                ...defaultCheckoutState.customer,
-                                lastName: ''
-                            },
-                            isLoggedIn: false
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-                    const lastNameEmptyMessage = wrapper.find('[data-test-id="error-last-name-empty"]');
-
-                    // Assert
-                    expect(lastNameEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.lastName');
-                });
-
-                it('should show error message and emit failure event when the email field is not populated', async () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            serviceType: CHECKOUT_METHOD_COLLECTION,
-                            customer: {
-                                ...defaultCheckoutState.customer,
-                                email: ''
-                            },
-                            isLoggedIn: false
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-                    const emailEmptyMessage = wrapper.find('[data-test-id="error-email-invalid"]');
-
-                    // Assert
-                    expect(emailEmptyMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.email');
-                });
-
-                it('should show error message and emit failure event when the email field is invalid', async () => {
-                    // Arrange
-                    wrapper = mount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            serviceType: CHECKOUT_METHOD_COLLECTION,
-                            customer: {
-                                ...defaultCheckoutState.customer,
-                                email: '£Gs7asd263('
-                            },
-                            isLoggedIn: false
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-                    const emailInvalidMessage = wrapper.find('[data-test-id="error-email-invalid"]');
-
-                    // Assert
-                    expect(emailInvalidMessage).toMatchSnapshot();
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError).length).toBe(1);
-                    expect(wrapper.emitted(EventNames.CheckoutValidationError)[0][0].invalidFields).toContain('customer.email');
-                });
-            });
-
-            describe('if `isLoggedIn` set to `true`', () => {
-                it('should not call `setupGuestUser`', async () => {
-                    // Arrange
-                    const setupGuestUserSpy = jest.spyOn(VueCheckout.methods, 'setupGuestUser');
-                    wrapper = shallowMount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            authToken: 'sampleToken',
-                            isLoggedIn: true
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-
-                    // Assert
-                    expect(setupGuestUserSpy).not.toHaveBeenCalled();
-                });
-
-                it('should not create validations for guest', () => {
-                    // Arrange
-                    wrapper = shallowMount(VueCheckout, {
-                        store: createStore({
-                            ...defaultCheckoutState,
-                            authToken: 'sampleToken',
-                            isLoggedIn: true
-                        }),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    // Assert
-                    expect(wrapper.vm.$v.customer.firstName).toBeUndefined();
-                    expect(wrapper.vm.$v.customer.lastName).toBeUndefined();
-                    expect(wrapper.vm.$v.customer.email).toBeUndefined();
-                });
-            });
-
-            describe('when `isFulfillable` is true', () => {
-                const store = createStore({ ...defaultCheckoutState, isFulfillable: true });
-
-                beforeEach(() => {
-                    wrapper = shallowMount(VueCheckout, {
-                        store,
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-                });
-
-                it('should call `submitOrder`', async () => {
-                    // Act
-                    await wrapper.vm.submitCheckout();
+                    wrapper.vm.processOrderIsFulfillable();
 
                     // Assert
                     expect(submitOrderSpy).toHaveBeenCalled();
                 });
 
-                it('should call `redirectToPayment`', async () => {
+                it('should `$emit` a checkout success with `eventData` passed', async () => {
+                    // Arrange
+                    const $emitSpy = jest.spyOn(wrapper.vm, '$emit');
+                    const eventData = {
+                        isLoggedIn: false,
+                        serviceType: 'delivery'
+                    };
+
                     // Act
-                    await wrapper.vm.submitCheckout();
+                    await wrapper.vm.processOrderIsFulfillable(eventData);
+
+                    // Assert
+                    expect($emitSpy).toHaveBeenCalledWith('checkout-payment-success', eventData);
+                });
+
+                it('should `logInvoker` with a `message` & `eventData` passed', async () => {
+                    // Arrange
+                    const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
+                    const eventData = {
+                        isLoggedIn: false,
+                        serviceType: 'delivery'
+                    };
+
+                    // Act
+                    await wrapper.vm.processOrderIsFulfillable(eventData);
+
+                    // Assert
+                    expect(logInvokerSpy).toHaveBeenCalledWith('Consumer Checkout Successful', eventData, $logger.logInfo);
+                });
+
+                it('should redirect to payments', async () => {
+                    // Arrange
+                    const redirectToPaymentSpy = jest.spyOn(wrapper.vm, 'redirectToPayment');
+
+                    // Act
+                    await wrapper.vm.processOrderIsFulfillable();
 
                     // Assert
                     expect(redirectToPaymentSpy).toHaveBeenCalled();
                 });
+            });
+        });
 
-                it('should call `logInfo` with correct warning', async () => {
-                    // Arrange
-                    const eventData = {
-                        isLoggedIn: false,
-                        serviceType: 'delivery'
-                    };
+        describe('`processOrderNotFulfillable` ::', () => {
+            let wrapper;
 
-                    // Act
-                    await wrapper.vm.submitCheckout();
-
-                    // Assert
-                    expect($logger.logInfo).toHaveBeenCalledWith('Consumer Checkout Successful', store, eventData);
+            beforeEach(() => {
+                wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
                 });
             });
 
-            describe('when `isFulfillable` is false', () => {
-                const store = createStore({ ...defaultCheckoutState, isFulfillable: false });
+            it('should exist', () => {
+                expect(wrapper.vm.processOrderNotFulfillable).toBeDefined();
+            });
 
-                beforeEach(() => {
-                    wrapper = shallowMount(VueCheckout, {
-                        store,
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-                });
-
-                it('should not call `logWarn` with correct Warning', async () => {
+            describe('when invoked', () => {
+                it('should make a call to `logInvoker` with a `message` and `eventData`', () => {
                     // Arrange
+                    const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
                     const eventData = {
                         isLoggedIn: false,
                         serviceType: 'delivery'
                     };
 
                     // Act
-                    await wrapper.vm.submitCheckout();
+                    wrapper.vm.processOrderNotFulfillable(eventData);
 
                     // Assert
-                    expect($logger.logWarn).toHaveBeenCalledWith('Consumer Checkout Not Fulfillable', store, eventData);
+                    expect(logInvokerSpy).toHaveBeenCalledWith(
+                        'Consumer Checkout Not Fulfillable',
+                        eventData,
+                        $logger.logWarn
+                    );
+                });
+            });
+        });
+
+        describe('`handleFulfillableContext` ::', () => {
+            let wrapper;
+            let eventData = {};
+            const store = createStore({ ...defaultCheckoutState, isFulfillable: true });
+
+            beforeEach(() => {
+                wrapper = mount(VueCheckout, {
+                    store,
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
+                });
+
+                eventData = {
+                    isLoggedIn: false,
+                    serviceType: 'delivery'
+                };
+            });
+
+            it('should exist', () => {
+                expect(wrapper.vm.handleFulfillableContext).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                describe('AND `isFulfillable` is truthy', () => {
+                    it('should process the order is fulfillable call', () => {
+                        // Arrange
+                        const processOrderIsFulfillableSpy = jest.spyOn(wrapper.vm, 'processOrderIsFulfillable');
+
+                        // Act
+                        wrapper.vm.handleFulfillableContext(eventData);
+
+                        // Assert
+                        expect(processOrderIsFulfillableSpy).toHaveBeenCalledWith(eventData);
+                    });
+
+                    it('should not call `processOrderNotFulfillable`', () => {
+                        // Arrange
+                        const processOrderNotFulfillableSpy = jest.spyOn(wrapper.vm, 'processOrderNotFulfillable');
+
+                        // Act
+                        wrapper.vm.handleFulfillableContext();
+
+                        // Assert
+                        expect(processOrderNotFulfillableSpy).not.toHaveBeenCalled();
+                    });
+                });
+
+                describe('AND `isFulfillable` is falsey', () => {
+                    beforeEach(() => {
+                        wrapper = mount(VueCheckout, {
+                            store: createStore({ ...defaultCheckoutState, isFulfillable: false }),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger
+                            }
+                        });
+                    });
+
+                    it('should process the order is not fulfillable call', () => {
+                        // Arrange
+                        const processOrderNotFulfillable = jest.spyOn(wrapper.vm, 'processOrderNotFulfillable');
+
+                        // Act
+                        wrapper.vm.handleFulfillableContext(eventData);
+
+                        // Assert
+                        expect(processOrderNotFulfillable).toHaveBeenCalledWith(eventData);
+                    });
+
+                    it('should not call `processOrderIsFulfillable`', () => {
+                        // Arrange
+                        const processOrderIsFulfillable = jest.spyOn(wrapper.vm, 'processOrderIsFulfillable');
+
+                        // Act
+                        wrapper.vm.handleFulfillableContext();
+
+                        // Assert
+                        expect(processOrderIsFulfillable).not.toHaveBeenCalled();
+                    });
                 });
             });
         });
