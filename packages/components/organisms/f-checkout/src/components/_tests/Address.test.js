@@ -13,7 +13,7 @@ localVue.use(Vuex);
 
 const $v = {
     [VALIDATIONS.address]: {
-        city: {
+        locality: {
             $dirty: false,
             required: true
         },
@@ -72,7 +72,7 @@ describe('Address', () => {
 
         it.each([
             ['isAddressLine1Empty', 'line1'],
-            ['isAddressCityEmpty', 'city'],
+            ['isAddressLocalityEmpty', 'locality'],
             ['isAddressPostcodeEmpty', 'postcode']
         ])('%s :: should call `isFieldEmpty` with argument %s', (property, field) => {
             // Assert
@@ -155,28 +155,28 @@ describe('Address', () => {
                 expect(updateAddressDetailsSpy).toHaveBeenCalledWith({ line2: newLine2Value });
             });
 
-            it('should be called with new input value when called on address city field', async () => {
+            it('should be called with new input value when called on address locality field', async () => {
                 // Arrange
-                const newCityValue = 'New City';
+                const newLocalityValue = 'New Locality';
 
                 // Act
-                await wrapper.find('[data-test-id="formfield-address-city-input"]').setValue(newCityValue);
+                await wrapper.find('[data-test-id="formfield-address-locality-input"]').setValue(newLocalityValue);
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(updateAddressDetailsSpy).toHaveBeenCalledWith({ city: newCityValue });
+                expect(updateAddressDetailsSpy).toHaveBeenCalledWith({ locality: newLocalityValue });
             });
 
             it('should be called with new input value when called on address postcode field', async () => {
                 // Arrange
-                const newPoscodeValue = 'New Postcode';
+                const newPostcodeValue = 'New Postcode';
 
                 // Act
-                await wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue(newPoscodeValue);
+                await wrapper.find('[data-test-id="formfield-address-postcode-input"]').setValue(newPostcodeValue);
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(updateAddressDetailsSpy).toHaveBeenCalledWith({ postcode: newPoscodeValue });
+                expect(updateAddressDetailsSpy).toHaveBeenCalledWith({ postcode: newPostcodeValue });
             });
         });
     });

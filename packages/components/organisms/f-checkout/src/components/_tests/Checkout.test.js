@@ -40,7 +40,7 @@ const $v = {
         }
     },
     address: {
-        city: {
+        locality: {
             $dirty: false,
             required: true
         },
@@ -443,7 +443,7 @@ describe('Checkout', () => {
                         ...defaultCheckoutState,
                         isLoggedIn: true,
                         serviceType: CHECKOUT_METHOD_DELIVERY,
-                        address: { line1: 'Fleet Place House', postcode: 'EC4M 7RF', city: 'London' }
+                        address: { line1: 'Fleet Place House', postcode: 'EC4M 7RF', locality: 'London' }
                     }),
                     i18n,
                     localVue,
@@ -2078,7 +2078,7 @@ describe('Checkout', () => {
                             validFields: [
                                 'customer.mobileNumber',
                                 'address.line1',
-                                'address.city',
+                                'address.locality',
                                 'address.postcode'
                             ],
                             invalidFields: []
@@ -2137,7 +2137,7 @@ describe('Checkout', () => {
                             validFields: [
                                 'customer.mobileNumber',
                                 'address.line1',
-                                'address.city',
+                                'address.locality',
                                 'address.postcode'
                             ],
                             invalidFields: []
@@ -2201,7 +2201,7 @@ describe('Checkout', () => {
                     validFields: [
                         'customer.mobileNumber',
                         'address.line1',
-                        'address.city',
+                        'address.locality',
                         'address.postcode'
                     ],
                     invalidFields: []

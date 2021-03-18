@@ -795,7 +795,7 @@ export default {
                 line1: {
                     required
                 },
-                city: {
+                locality: {
                     required
                 },
                 postcode: {
