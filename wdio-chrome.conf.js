@@ -233,7 +233,7 @@ exports.config = {
      * Function to be executed after a test (in Mocha/Jasmine).
      */
     // afterTest: () => {
-    //}
+    // }
     /**
      * Hook that gets executed after the suite has ended
      * @param {Object} suite suite details
@@ -274,8 +274,8 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {<Object>} results object containing test results
      */
-    onComplete: function() {
-        if (process.env.JE_ENV !== 'browserstack' && process.env.COMPONENT_TYPE === 'organism' && !process.env.TEST_TYPE.includes('ci')) {
+    onComplete: function () {
+        if (process.env.JE_ENV !== 'browserstack' && process.env.COMPONENT_TYPE === 'organism') {
             const reportError = new Error('Could not generate Allure report');
             const generation = allure(['generate', '../../../../test/results/allure', ' --clean']);
 

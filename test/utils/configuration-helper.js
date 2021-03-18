@@ -1,8 +1,9 @@
 const video = require('wdio-video-reporter');
+
 const CIRCLE_CI = process.env.CIRCLECI;
-const TEST_TYPE = process.env.TEST_TYPE;
-const JE_ENV = process.env.JE_ENV;
-const COMPONENT_TYPE = process.env.COMPONENT_TYPE;
+const { TEST_TYPE } = process.env;
+const { JE_ENV } = process.env;
+let { COMPONENT_TYPE } = process.env;
 
 exports.getBaseUrl = (port = 8080) => {
     switch (JE_ENV) {
@@ -10,6 +11,9 @@ exports.getBaseUrl = (port = 8080) => {
             return `http://localhost:${port}/`;
         case 'browserstack':
             return `http://bs-local.com:${port}/`;
+        case 'ci':
+            COMPONENT_TYPE = 'atom';
+            break;
         default:
             throw new Error(`Sorry, ${JE_ENV} is not recognised.`);
     }
@@ -50,8 +54,8 @@ exports.ci = () => ({
         }],
         ['junit', {
             outputDir: `${global.baseDir}/test/results/ci`,
-            outputFileFormat: function(options) { // optional
-                return `${options.cid}-${options.capabilities.browserName}-results.xml`
+            outputFileFormat: function (options) { // optional
+                return `${options.cid}-${options.capabilities.browserName}-results.xml`;
             }
         }]
     ]
