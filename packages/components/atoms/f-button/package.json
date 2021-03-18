@@ -32,8 +32,10 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit && cd ../../../../ && yarn allure:clean",
-    "test-component:chrome": "cross-env-shell JE_ENV=local COMPONENT_TYPE=atom wdio ../../../../wdio-chrome.conf.js --suite component",
-    "test-a11y:chrome": "cross-env-shell JE_ENV=local COMPONENT_TYPE=atom wdio ../../../../wdio-chrome.conf.js --suite a11y"
+    "test-component:chrome": "if-env cross-env-shell JE_ENV=local COMPONENT_TYPE=atom wdio ../../../../wdio-chrome.conf.js --suite component || yarn allure:open",
+    "test-a11y:chrome": "cross-env-shell JE_ENV=local COMPONENT_TYPE=atom wdio ../../../../wdio-chrome.conf.js --suite a11y", 
+    "allure:open": "if-env COMPONENT_TYPE= || yarn allure:clean && allure open", 
+    "allure:clean": "rimraf ../../../../test/results/allure"
   },
   "scriptsInfo": {
     "test-component:chrome": "Runs the functional test suite against Chrome.",
