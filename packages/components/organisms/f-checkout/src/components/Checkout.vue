@@ -3,6 +3,7 @@
         <mega-modal
             v-if="shouldShowErrorDialog"
             :is-open="shouldShowErrorDialog"
+            :has-close-button="false"
             has-overlay
             data-test-id="checkout-issue-modal">
             <h3 data-test-id="checkout-issue-modal-title" class="u-noSpacing">
