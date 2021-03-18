@@ -10,7 +10,6 @@ describe('New - f-cookieBanner component tests', () => {
 
     forEach([['full'], ['necessary']])
     .it('should set "je-cookie_banner" and "je-cookieConsent" to expected cookie values', expectedCookieValue => {
-        
         // Act
         cookieBanner.acceptCookies(expectedCookieValue);
 
@@ -24,7 +23,7 @@ describe('New - f-cookieBanner component tests', () => {
 });
 
 
-describe('Legacy - Multi-tenant - f-cookieBanner component tests', () => {
+describe('New - Multi-tenant - f-cookieBanner component tests', () => {
     forEach([
         ['es', 'es/info/politica-de-cookies'],
         ['dk', 'dk/info/cookiepolitik'],
@@ -35,28 +34,16 @@ describe('Legacy - Multi-tenant - f-cookieBanner component tests', () => {
     .it('should go to the correct cookie policy page', (tenant, expectedCookiePolicyUrl) => {
 
         // Arrange
-        cookieBanner.open(tenant)
+        cookieBanner.open(tenant);
         browser.deleteAllCookies();
         browser.refresh();
         cookieBanner.waitForComponent();
 
         // Act
         cookieBanner.clickCookiePolicyLink();
+        browser.switchWindow(new RegExp(`^.*${expectedCookiePolicyUrl}.*$`));
 
         // Assert
         expect(browser.getUrl()).toContain(expectedCookiePolicyUrl);
     });
-
-    forEach([['dk'], ['es'], ['ie'], ['it'], ['no']])
-    .it('should display the f-cookieBanner component', () => {
-        // Arrange
-        cookieBanner.open(tenant)
-        browser.deleteAllCookies();
-        browser.refresh();
-        cookieBanner.waitForComponent();
-
-        // Assert
-        expect(cookieBanner.isCookieBannerComponentDisplayed()).toBe(true);
-    });
-
 });

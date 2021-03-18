@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.5.1
+------------------------------
+*March 18, 2021*
+
+### Added
+- New tests to test f-cookiebanner in `component`
+- New test supporting files in `test-utils/compoenent-objects`
+- Browserstack support and file structures in tests
+
+### Fixed
+- URL for NZ cookie policy
+
+
 v0.5.0
 ------------------------------
 *March 9, 2021*

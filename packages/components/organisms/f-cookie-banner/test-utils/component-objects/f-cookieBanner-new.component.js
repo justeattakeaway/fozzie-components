@@ -13,19 +13,19 @@ module.exports = class CookieBanner extends Page {
         let formattedLocale = '';
         switch (countryFormatted) {
             case 'IE':
-                formattedLocale = `en-${countryFormatted}`
+                formattedLocale = `en-${countryFormatted}`;
                 break;
             case 'DK':
-                formattedLocale = `da-${countryFormatted}`
+                formattedLocale = `da-${countryFormatted}`;
                 break;
             case 'ES':
-                formattedLocale = `es-${countryFormatted}`
+                formattedLocale = `es-${countryFormatted}`;
                 break;
             case 'IT':
-                formattedLocale = `it-${countryFormatted}`
+                formattedLocale = `it-${countryFormatted}`;
                 break;
             case 'NO':
-                formattedLocale = `nb-${countryFormatted}`
+                formattedLocale = `nb-${countryFormatted}`;
                 break;
             default:
                 throw new Error (`locale ${countryFormatted} is not supported`);
@@ -56,9 +56,12 @@ module.exports = class CookieBanner extends Page {
         return this.cookieAcceptNecessaryButton.isDisplayed();
     }
 
+    clickCookiePolicyLink() {
+        this.cookiePolicyLink.click();
+    }
+
 
     acceptCookies(cookieType) {
-        
         switch(cookieType.toLowerCase()) {
             case 'full':
                 this.cookieAcceptAllButton.click();
@@ -67,7 +70,6 @@ module.exports = class CookieBanner extends Page {
                 this.cookieAcceptNecessaryButton.click();
             break;
         }
-
         return this;
     }
-}
+};

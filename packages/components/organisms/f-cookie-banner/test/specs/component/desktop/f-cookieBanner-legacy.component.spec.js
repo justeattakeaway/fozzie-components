@@ -4,13 +4,8 @@ import forEach from 'mocha-each';
 
 describe('Legacy - f-cookieBanner component tests', () => {
     beforeEach(() => {
-        cookieBanner.open()
+        cookieBanner.open();
         cookieBanner.waitForComponent();
-    });
-
-    it('should display the f-cookieBanner component', () => {
-        // Assert
-        expect(cookieBanner.isCookieBannerComponentDisplayed()).toBe(true);
     });
 
     it('should set "je-cookie_banner" cookie when dismissed', () => {
@@ -24,8 +19,6 @@ describe('Legacy - f-cookieBanner component tests', () => {
     });
 });
 
-
-
 describe('Legacy - Multi-tenant - f-cookieBanner component tests', () => {
     forEach([
         ['gb', 'uk/info/cookies-policy'],
@@ -35,7 +28,7 @@ describe('Legacy - Multi-tenant - f-cookieBanner component tests', () => {
     .it('should go to the correct cookie policy page', (tenant, expectedCookiePolicyUrl) => {
 
         // Arrange
-        cookieBanner.open(tenant)
+        cookieBanner.open(tenant);
         browser.deleteAllCookies();
         browser.refresh();
         cookieBanner.waitForComponent();
