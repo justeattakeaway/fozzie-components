@@ -3,6 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.72.0
+------------------------------
+*March 18, 2021*
+
+### Changed
+- `Checkout.vue` watcher `authToken` to only initialise checkout when the token updates as below:
+  - Truthy > Falsey
+  - Falsey > Truthy
+  - Truthy > Truthy (Checkout will not reload)
+
+### Added
+- Tests to cover authToken watcher changes.
+
+### Removed
+- Some tests that are not required as they're now covered in these new changes.
+
+
 v0.71.0
 ------------------------------
 *March 16, 2021*
