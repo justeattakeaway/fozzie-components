@@ -53,7 +53,7 @@ const authToken = mockAuthToken;
 const address = {
     line1: 'line 1',
     line2: 'line 2',
-    city: 'city',
+    locality: 'locality',
     postcode: 'postcode'
 };
 
@@ -104,7 +104,7 @@ const defaultState = {
     address: {
         line1: '',
         line2: '',
-        city: '',
+        locality: '',
         postcode: ''
     },
     isFulfillable: true,
@@ -357,7 +357,7 @@ describe('CheckoutModule', () => {
                 expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, {
                     line1: expectedAddress.Line1,
                     line2: expectedAddress.Line2,
-                    city: expectedAddress.City,
+                    locality: expectedAddress.City,
                     postcode: expectedAddress.ZipCode
                 });
             });

@@ -3,91 +3,65 @@ export default {
     linkLists: {
         customerService: {
             title: 'Customer service',
-            links: [
-                {
-                    url: '/info/contact-us',
-                    text: 'Contact us',
-                    gtm: 'click_service_contact_us'
-                },
-                {
-                    url: '/account/login/',
-                    text: 'Log in',
-                    gtm: 'click_service_login'
-                },
-                {
-                    url: '/account/register/',
-                    text: 'Sign up',
-                    gtm: 'click_service_signup'
-                },
-                {
-                    url: '/account/info/',
-                    text: 'My account',
-                    gtm: 'click_service_account'
-                },
-                {
-                    url: '/blog/',
-                    text: 'Menulog Blog',
-                    gtm: 'click_service_blog'
-                },
-                {
-                    url: '/help/',
-                    text: 'Help Centre',
-                    gtm: 'click_service_help'
-                }
-            ]
+            links: []
         },
         cuisines: {
-            title: 'Top cuisines',
+            title: 'Cuisines',
             links: [
                 {
                     url: '/browse/cuisines/chinese',
                     text: 'Chinese',
-                    gtm: 'click_cuisine_chinese'
+                    gtm: 'click_cuisines_chinese'
                 },
                 {
                     url: '/browse/cuisines/indian',
                     text: 'Indian',
-                    gtm: 'click_cuisine_indian'
+                    gtm: 'click_cuisines_indian'
                 },
                 {
                     url: '/browse/cuisines/thai',
                     text: 'Thai',
-                    gtm: 'click_cuisine_thai'
+                    gtm: 'click_cuisines_thai'
                 },
                 {
                     url: '/browse/cuisines/pizza',
                     text: 'Pizza',
-                    gtm: 'click_cuisine_pizza'
+                    gtm: 'click_cuisines_pizza'
                 },
                 {
                     url: '/browse',
                     text: 'View all cuisines',
-                    gtm: 'click_cuisine_view_all'
+                    gtm: 'click_cuisines_view_all'
                 }
             ]
         },
         locations: {
-            title: 'Locations',
+            title: 'Cities',
             links: [
                 {
                     url: '/browse/locations/auckland/',
                     text: 'Auckland',
-                    gtm: 'click_location_auckland'
+                    gtm: 'click_cities_auckland'
                 },
                 {
                     url: '/browse/locations/wellington/',
                     text: 'Wellington',
-                    gtm: 'click_location_wellington'
+                    gtm: 'click_cities_wellington'
                 },
                 {
                     url: '/browse/locations/christchurch/',
                     text: 'Christchurch',
-                    gtm: 'click_location_christchurch'
+                    gtm: 'click_cities_christchurch'
                 },
                 {
                     url: '/browse/locations/dunedin/',
                     text: 'Dunedin',
-                    gtm: 'click_location_dunedin'
+                    gtm: 'click_cities_dunedin'
+                },
+                {
+                    url: '/takeaway/',
+                    text: 'View all cities',
+                    gtm: 'click_cities_view_all'
                 }
             ]
         },
@@ -96,27 +70,42 @@ export default {
             links: []
         },
         aboutUs: {
-            title: 'A bit more about us',
+            title: 'About Us',
             links: [
                 {
-                    url: '/about_menulog',
+                    url: '/info/about-us',
                     text: 'Get to know us',
-                    gtm: 'click_about_about_menulog'
+                    gtm: 'click_about_get_to_know_us'
                 },
                 {
-                    url: '/privacy-policy#privacy_policy',
+                    url: '/info/contact-us',
+                    text: 'Contact us',
+                    gtm: 'click_about_contact_us'
+                },
+                {
+                    url: '/help',
+                    text: 'Help Centre',
+                    gtm: 'click_about_help'
+                },
+                {
+                    url: '/blog',
+                    text: 'Menulog Blog',
+                    gtm: 'click_about_blog'
+                },
+                {
+                    url: '/info/privacy-policy',
                     text: 'Privacy Policy / Terms & Conditions',
                     gtm: 'click_about_privacy_policy'
                 },
                 {
-                    url: 'https://connect.menulog.co.nz/',
-                    text: 'Partner Centre',
-                    gtm: 'click_about_partner_centre'
+                    url: 'https://partner.menulog.co.nz/',
+                    text: 'Manage Restaurant',
+                    gtm: 'click_about_manage_restaurant'
                 },
                 {
                     url: '/join_takeaway_section',
-                    text: 'Restaurant sign up',
-                    gtm: 'click_about_restaurant_signup'
+                    text: 'List your Restaurant',
+                    gtm: 'click_about_list_your_restaurant'
                 }
             ]
         }
@@ -173,6 +162,12 @@ export default {
     sendFeedback: 'Send feedback',
     followUs: 'Follow us',
     socialIcons: [
+        {
+            url: '/blog',
+            name: 'rss',
+            alt: 'Blog',
+            gtm: 'click_service_blog'
+        },
         {
             url: 'https://www.facebook.com/Menulog.co.nz',
             name: 'facebook',
