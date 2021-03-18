@@ -32,12 +32,7 @@ coverage/
 /packages/f-content-cards/stories/mocks/
 
 # Test result folders
-<<<<<<< HEAD
-allure-report/
-=======
-/allure-report
-/allure-results
->>>>>>> master
+**/allure-report
 **/test/results/allure/*
 !**/test/results/allure/README.md
 **/test/results/axe-violations/*
