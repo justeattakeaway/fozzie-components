@@ -11,8 +11,9 @@
             <alert
                 v-if="shouldShowPreOrderWarning"
                 type="warning"
-                :heading="$t('warningMessages.preOrder.title')">
-                {{ $t('warningMessages.preOrder.body') }}
+                :heading="$t('warningMessages.preorder.title')"
+                data-test-id="warning-preorder">
+                {{ $t('warningMessages.preorder.body') }}
             </alert>
         </template>
     </form-dropdown>
