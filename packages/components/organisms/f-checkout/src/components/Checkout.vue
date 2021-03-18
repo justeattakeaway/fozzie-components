@@ -332,7 +332,7 @@ export default {
 
         shouldShowErrorDialog () {
             if (this.nonFulfillableError) {
-                return this.nonFulfillableError.showInDialog;
+                return this.nonFulfillableError.shouldShowInDialog;
             }
             return false;
         },
@@ -500,7 +500,7 @@ export default {
 
         handleCheckoutIssues () {
             if (this.errors.length > 0) {
-                const dialogErrors = this.errors.filter(error => error.showInDialog);
+                const dialogErrors = this.errors.filter(error => error.shouldShowInDialog);
                 if (dialogErrors[0]) {
                     const [firstError] = dialogErrors;
                     this.nonFulfillableError = firstError;

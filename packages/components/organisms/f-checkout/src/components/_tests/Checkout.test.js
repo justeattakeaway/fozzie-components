@@ -556,7 +556,7 @@ describe('Checkout', () => {
         });
 
         describe('shouldShowErrorDialog ::', () => {
-            it('should return `true` if `nonFulfillableError.showInDialog` is `true`', () => {
+            it('should return `true` if `nonFulfillableError.shouldShowInDialog` is `true`', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
@@ -570,7 +570,7 @@ describe('Checkout', () => {
                         return {
                             nonFulfillableError: {
                                 code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
-                                showInDialog: true
+                                shouldShowInDialog: true
                             }
                         };
                     }
@@ -597,7 +597,7 @@ describe('Checkout', () => {
                         return {
                             nonFulfillableError: {
                                 code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
-                                showInDialog: false
+                                shouldShowInDialog: false
                             }
                         };
                     }

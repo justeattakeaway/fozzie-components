@@ -1,39 +1,36 @@
-// WIP based on https://docs.google.com/spreadsheets/d/15Ah73FyH3vm-tZIU8OscV-bVj913VSPOMBZZbFG624k/edit#gid=0
-
-// TODO: Account for translations
 const checkoutIssues = {
     MINIMUM_ORDER_VALUE_NOT_MET: {
-        showInDialog: true,
+        shouldShowInDialog: true,
         shouldRedirectToMenu: true
     },
 
     RESTAURANT_NOT_TAKING_ORDERS: {
-        showInDialog: true,
+        shouldShowInDialog: true,
         shouldRedirectToMenu: false
     },
 
     SERVICE_TYPE_UNAVAILABLE: {
-        showInDialog: true,
+        shouldShowInDialog: true,
         shouldRedirectToMenu: false
     },
 
     ADDITIONAL_ITEMS_REQUIRED: {
-        showInDialog: true,
+        shouldShowInDialog: true,
         shouldRedirectToMenu: true
     },
 
     ITEMS_UNORDERABLE: {
-        showInDialog: true,
+        shouldShowInDialog: true,
         shouldRedirectToMenu: true
     },
 
     FULFILMENT_TIME_UNAVAILABLE: {
-        showInDialog: true,
+        shouldShowInDialog: true,
         shouldRedirectToMenu: false
     },
 
     LOCATION_UNDELIVERABLE: {
-        showInDialog: true,
+        shouldShowInDialog: true,
         shouldRedirectToMenu: false
     }
 };
