@@ -335,17 +335,9 @@ describe('CheckoutModule', () => {
         });
 
         describe('getAddress ::', () => {
-            let config;
-
-            const expectedAddress = {
-                line1: 'Fleet Place House',
-                line2: 'Farringdon',
-                locality: 'London',
-                postcode: 'EC4M 7RF'
-            };
-
-            beforeEach(() => {
-                config = {
+            it(`should get the address details from the backend and call ${UPDATE_FULFILMENT_ADDRESS} mutation.`, async () => {
+                // Arrange
+                const config = {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept-Language': payload.language,
@@ -355,15 +347,19 @@ describe('CheckoutModule', () => {
                 };
 
                 axios.get = jest.fn(() => Promise.resolve({ data: customerAddresses }));
-            });
+                const [expectedAddress] = customerAddresses.Addresses;
 
-            it(`should get the address details from the backend and call ${UPDATE_FULFILMENT_ADDRESS} mutation.`, async () => {
                 // Act
                 await getAddress({ commit, state, dispatch }, payload);
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, expectedAddress);
+                expect(commit).toHaveBeenCalledWith(UPDATE_FULFILMENT_ADDRESS, {
+                    line1: expectedAddress.Line1,
+                    line2: expectedAddress.Line2,
+                    locality: expectedAddress.City,
+                    postcode: expectedAddress.ZipCode
+                });
             });
 
             it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
