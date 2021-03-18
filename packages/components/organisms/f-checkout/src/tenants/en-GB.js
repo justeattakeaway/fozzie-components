@@ -49,7 +49,7 @@ const messages = {
     },
 
     warningMessages: {
-        preorder: {
+        preOrder: {
             title: 'Please note, this is a preorder',
             body: 'Please check the day and time above'
         }

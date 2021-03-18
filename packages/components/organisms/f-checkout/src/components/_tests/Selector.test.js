@@ -153,10 +153,10 @@ describe('Selector', () => {
 
                 it('should render warning message', () => {
                     // Arrange
-                    const preorderWarning = wrapper.find('[data-test-id="warning-preorder"]');
+                    const preOrderWarning = wrapper.find('[data-test-id="warning-pre-order"]');
 
                     // Assert
-                    expect(preorderWarning.exists()).toBeTruthy();
+                    expect(preOrderWarning.exists()).toBeTruthy();
                 });
             });
 
@@ -183,10 +183,10 @@ describe('Selector', () => {
 
                 it('should not render warning message', () => {
                     // Arrange
-                    const preorderWarning = wrapper.find('[data-test-id="warning-preorder"]');
+                    const preOrderWarning = wrapper.find('[data-test-id="warning-pre-order"]');
 
                     // Assert
-                    expect(preorderWarning.exists()).toBeFalsy();
+                    expect(preOrderWarning.exists()).toBeFalsy();
                 });
             });
         });
