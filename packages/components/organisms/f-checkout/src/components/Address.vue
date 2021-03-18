@@ -35,16 +35,16 @@
         </fieldset>
 
         <form-field
-            :value="address.city"
-            name="address-city"
-            :label-text="$t('labels.city')"
-            :has-error="isAddressCityEmpty"
-            @input="updateAddressDetails({ ['city']: $event })">
+            :value="address.locality"
+            name="address-locality"
+            :label-text="$t('labels.locality')"
+            :has-error="isAddressLocalityEmpty"
+            @input="updateAddressDetails({ ['locality']: $event })">
             <template #error>
                 <error-message
-                    v-if="isAddressCityEmpty"
-                    data-test-id="error-address-city-empty">
-                    {{ $t('validationMessages.city.requiredError') }}
+                    v-if="isAddressLocalityEmpty"
+                    data-test-id="error-address-locality-empty">
+                    {{ $t('validationMessages.locality.requiredError') }}
                 </error-message>
             </template>
         </form-field>
@@ -106,8 +106,8 @@ export default {
             return this.isFieldEmpty(VALIDATIONS.address, 'line1');
         },
 
-        isAddressCityEmpty () {
-            return this.isFieldEmpty(VALIDATIONS.address, 'city');
+        isAddressLocalityEmpty () {
+            return this.isFieldEmpty(VALIDATIONS.address, 'locality');
         },
 
         isAddressPostcodeEmpty () {

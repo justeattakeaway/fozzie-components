@@ -121,7 +121,7 @@ $alert-borderRadius: $border-radius;
     .c-alert-headingContainer {
         display: flex;
         align-items: center;
-        padding: spacing(x0.5) 0;
+        padding: spacing(x0.5) 0 0;
     }
 
     .c-alert--rounded {
@@ -145,7 +145,7 @@ $alert-borderRadius: $border-radius;
     }
 
     .c-alert-heading {
-        @include font-size(subheading-s, true, narrow);
+        @include font-size(subheading-s);
         margin-top: -1px;
     }
 

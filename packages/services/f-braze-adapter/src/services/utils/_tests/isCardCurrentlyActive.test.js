@@ -6,22 +6,21 @@ const brand = '__BRAND__';
 const brands = [brand];
 
 const card = {
-    brand,
     displayTimes: {}
 };
 
 describe('services › utils › transformCardData', () => {
-    it('should return true if card does not contain brand', () => {
+    it('should return true if card contains neither brand nor display times', () => {
         // Arrange & Act
-        const result = isCardCurrentlyActive({ displayTimes: {} });
+        const result = isCardCurrentlyActive({});
 
         // Assert
         expect(result).toBe(true);
     });
 
-    it('should return true if card does not contain display times', () => {
+    it('should return true if card does not contain brand', () => {
         // Arrange & Act
-        const result = isCardCurrentlyActive({ brand });
+        const result = isCardCurrentlyActive(card);
 
         // Assert
         expect(result).toBe(true);
@@ -29,7 +28,7 @@ describe('services › utils › transformCardData', () => {
 
     it('should return false if card brand is not in users brand list', () => {
         // Arrange & Act
-        const result = isCardCurrentlyActive(card);
+        const result = isCardCurrentlyActive({ ...card, brand }, []);
 
         // Assert
         expect(result).toBe(false);
@@ -37,15 +36,15 @@ describe('services › utils › transformCardData', () => {
 
     it('should return true if card brand is in users brand list', () => {
         // Arrange & Act
-        const result = isCardCurrentlyActive(card, brands);
+        const result = isCardCurrentlyActive({ ...card, brand }, brands);
 
         // Assert
         expect(result).toBe(true);
     });
 
-    it('should return true if no display times are provided', () => {
+    it('should return true if card does not contain display times', () => {
         // Arrange & Act
-        const result = isCardCurrentlyActive(card, brands);
+        const result = isCardCurrentlyActive({ brand }, brands);
 
         // Assert
         expect(result).toBe(true);
@@ -65,7 +64,7 @@ describe('services › utils › transformCardData', () => {
         };
 
         // Act
-        const result = isCardCurrentlyActive({ ...card, displayTimes }, brands);
+        const result = isCardCurrentlyActive({ displayTimes });
 
         // Assert
         expect(result).toBe(true);
@@ -85,7 +84,7 @@ describe('services › utils › transformCardData', () => {
         };
 
         // Act
-        const result = isCardCurrentlyActive({ ...card, displayTimes }, brands);
+        const result = isCardCurrentlyActive({ displayTimes });
 
         // Assert
         expect(result).toBe(true);
@@ -111,7 +110,7 @@ describe('services › utils › transformCardData', () => {
         };
 
         // Act
-        const result = isCardCurrentlyActive({ ...card, displayTimes }, brands);
+        const result = isCardCurrentlyActive({ displayTimes });
 
         // Assert
         expect(result).toBe(false);
