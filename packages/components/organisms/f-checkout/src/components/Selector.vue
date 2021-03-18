@@ -9,9 +9,9 @@
         @input="selectionChanged">
         <template #error>
             <alert
+                v-if="shouldShowPreOrderWarning"
                 type="warning"
-                :heading="$t('warningMessages.preOrder.title')"
-            >
+                :heading="$t('warningMessages.preOrder.title')">
                 {{ $t('warningMessages.preOrder.body') }}
             </alert>
         </template>
@@ -66,6 +66,13 @@ export default {
             }
 
             return times;
+        },
+
+        /*
+         * Returns true if ASAP is not available
+         */
+        shouldShowPreOrderWarning () {
+            return !this.availableFulfilment.isAsapAvailable;
         }
     },
 
