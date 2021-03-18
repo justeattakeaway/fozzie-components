@@ -4,9 +4,7 @@
             v-if="shouldShowErrorDialog"
             :is-open="shouldShowErrorDialog"
             :has-overlay="true"
-            data-test-id="checkout-issue-modal"
-            is-full-height
-            is-scrollable>
+            data-test-id="checkout-issue-modal">
             <h3 data-test-id="checkout-issue-modal-title" class="u-noSpacing">
                 {{ $t(`errorMessages.checkoutIssues.${nonFulfillableError.code}.title`) }}
             </h3>
@@ -333,11 +331,14 @@ export default {
         },
 
         shouldShowErrorDialog () {
-            return this.nonFulfillableError && this.nonFulfillableError.showInDialog;
+            if (this.nonFulfillableError) {
+                return this.nonFulfillableError.showInDialog;
+            }
+            return false;
         },
 
         restaurantMenuPageUrl () {
-            return `${this.restaurant.seoName}/menu`;
+            return `restaurant-${this.restaurant.seoName}/menu`;
         }
     },
 
@@ -499,7 +500,7 @@ export default {
 
         handleCheckoutIssues () {
             if (this.errors.length > 0) {
-                const dialogErrors = this.errors.filter(error => error.openInDialog);
+                const dialogErrors = this.errors.filter(error => error.showInDialog);
                 if (dialogErrors[0]) {
                     const [firstError] = dialogErrors;
                     this.nonFulfillableError = firstError;

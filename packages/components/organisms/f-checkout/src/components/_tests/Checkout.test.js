@@ -263,10 +263,11 @@ describe('Checkout', () => {
         describe('nonFulfillableError', () => {
             describe('when `nonFulfillableError.openInDialog` is `true`', () => {
                 it('should show a mega modal displaying the error title and description', () => {
-                    // Arrange & Act
+                    // Arrange
                     const fulfilmentTimeIssue = CheckoutIssues[ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE];
 
-                    const wrapper = mount(VueCheckout, {
+                    // Act
+                    const wrapper = shallowMount(VueCheckout, {
                         i18n,
                         store: createStore(),
                         localVue,
@@ -582,7 +583,7 @@ describe('Checkout', () => {
                 expect(result).toBe(true);
             });
 
-            it('should return `false` if `nonFulfillableError.showInDialog` is `false`', () => {
+            it('should return `false` if `nonFulfillableError.shouldShowInDialog` is `false`', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
@@ -609,7 +610,7 @@ describe('Checkout', () => {
                 expect(result).toBe(false);
             });
 
-            it('should return `null` if there is no error', () => {
+            it('should return `false` if there is no error', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
@@ -625,14 +626,14 @@ describe('Checkout', () => {
                 const result = wrapper.vm.shouldShowErrorDialog;
 
                 // Assert
-                expect(result).toBe(null);
+                expect(result).toBe(false);
             });
         });
 
         describe('restaurantMenuPageUrl ::', () => {
             it('should return the URL to redirect back to the restaurant menu', () => {
-                const restaurantSeoName = 'masala-zone-camden';
                 // Arrange
+                const restaurantSeoName = 'masala-zone-camden';
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
                         ...defaultCheckoutState,
@@ -650,7 +651,7 @@ describe('Checkout', () => {
                 const result = wrapper.vm.restaurantMenuPageUrl;
 
                 // Assert
-                expect(result).toBe(`${restaurantSeoName}/menu`);
+                expect(result).toBe(`restaurant-${restaurantSeoName}/menu`);
             });
         });
     });
@@ -2617,7 +2618,7 @@ describe('Checkout', () => {
                 wrapper.vm.handleErrorDialogClick();
 
                 // Assert
-                expect(windowLocationSpy).toHaveBeenCalledWith(`${restaurantSeoName}/menu`);
+                expect(windowLocationSpy).toHaveBeenCalledWith(`restaurant-${restaurantSeoName}/menu`);
                 expect(wrapper.vm.nonFulfillableError).toBeNull();
             });
 
