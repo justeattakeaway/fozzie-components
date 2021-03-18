@@ -3,7 +3,7 @@
         <mega-modal
             v-if="shouldShowErrorDialog"
             :is-open="shouldShowErrorDialog"
-            :has-overlay="true"
+            has-overlay
             data-test-id="checkout-issue-modal">
             <h3 data-test-id="checkout-issue-modal-title" class="u-noSpacing">
                 {{ $t(`errorMessages.checkoutIssues.${nonFulfillableError.code}.title`) }}
