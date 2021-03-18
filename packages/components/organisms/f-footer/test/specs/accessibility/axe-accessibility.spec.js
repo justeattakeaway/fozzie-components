@@ -6,12 +6,12 @@ const footer = new Footer();
 describe('Accessibility tests', () => {
 
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('a11y - should test f-footer component WCAG compliance', expectedLocale => {
+    .it('a11y - should test f-footer component WCAG compliance with default options selected', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
             courierLinks: false,
-            countrySelector: true
+            countrySelector: false
         };
 
         // Act
@@ -23,7 +23,7 @@ describe('Accessibility tests', () => {
     });
 
     forEach(['gb', 'au', 'ie', 'nz'])
-    .it('a11y - should test f-footer component WCAG compliance with countries with courier links', expectedLocale => {
+    .it('a11y - should test f-footer component WCAG compliance with extra options selected', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
