@@ -2,7 +2,6 @@ import {
     getAnalyticsErrorCodeByApiErrorCode,
     mapAnalyticsName,
     mapAnalyticsNames,
-    mapCityToLocality,
     mapUpdateCheckoutRequest
 } from '../mapper';
 
@@ -160,21 +159,6 @@ describe('mapAnalyticsName :: ', () => {
             // Act & Assert
             expect(mapAnalyticsName(provided)).toEqual(expected);
         });
-    });
-});
-
-describe('mapCityToLocality :: ', () => {
-    it('should replace city key with locality', () => {
-        // Arrange
-        const addressWithCity = {
-            line1: '1 Bristol Road',
-            line2: 'Flat 1',
-            city: 'Bristol',
-            postcode: 'BS1 1AA'
-        };
-
-        // Act & Assert
-        expect(mapCityToLocality(addressWithCity)).toEqual(address);
     });
 });
 

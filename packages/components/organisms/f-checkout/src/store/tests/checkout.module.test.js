@@ -1,6 +1,5 @@
 import axios from 'axios';
 import CheckoutModule from '../checkout.module';
-import * as mapper from '../../services/mapper';
 import checkoutDelivery from '../../demo/checkout-delivery.json';
 import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
@@ -337,7 +336,6 @@ describe('CheckoutModule', () => {
 
         describe('getAddress ::', () => {
             let config;
-            let mapCityToLocalitySpy;
 
             const expectedAddress = {
                 line1: 'Fleet Place House',
@@ -357,24 +355,6 @@ describe('CheckoutModule', () => {
                 };
 
                 axios.get = jest.fn(() => Promise.resolve({ data: customerAddresses }));
-
-                mapCityToLocalitySpy = jest.spyOn(mapper, 'mapCityToLocality').mockImplementation(() => expectedAddress);
-            });
-
-            it('should call `mapCityToLocality` with address.', async () => {
-                // Arrange
-                const addressDetails = {
-                    line1: 'Fleet Place House',
-                    line2: 'Farringdon',
-                    city: 'London',
-                    postcode: 'EC4M 7RF'
-                };
-
-                // Act
-                await getAddress({ commit, state, dispatch }, payload);
-
-                // Assert
-                expect(mapCityToLocalitySpy).toHaveBeenCalledWith(addressDetails);
             });
 
             it(`should get the address details from the backend and call ${UPDATE_FULFILMENT_ADDRESS} mutation.`, async () => {

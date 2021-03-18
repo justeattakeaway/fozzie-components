@@ -57,15 +57,6 @@ const mapUpdateCheckoutRequest = ({
 ]);
 
 /**
- * Replaces `city` key with `locality` key
- */
-const mapCityToLocality = address => {
-    address.locality = address.city;
-    delete address.city;
-    return address;
-};
-
-/**
  * Maps checkout names to required GA names.
  *
  * Keys -`checkout` names.
@@ -123,6 +114,5 @@ export {
     getAnalyticsErrorCodeByApiErrorCode,
     mapAnalyticsName,
     mapAnalyticsNames,
-    mapCityToLocality,
     mapUpdateCheckoutRequest
 };

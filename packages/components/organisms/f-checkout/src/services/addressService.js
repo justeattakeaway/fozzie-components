@@ -29,7 +29,7 @@ function getAddress (postcode, address) {
         return {
             line1: '',
             line2: '',
-            city: '',
+            locality: '',
             postcode: toFormattedPostcode(postcode)
         };
     }
@@ -39,7 +39,7 @@ function getAddress (postcode, address) {
     return {
         line1: address.Line1,
         line2: lines.filter(l => l).join(', '),
-        city: address.City,
+        locality: address.City,
         postcode: address.ZipCode
     };
 }
