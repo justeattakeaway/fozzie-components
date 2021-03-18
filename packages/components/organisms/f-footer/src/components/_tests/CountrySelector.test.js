@@ -53,7 +53,7 @@ describe('CountrySelector', () => {
     });
 
     it('list should contain country from props', () => {
-        const country = wrapper.find(`[data-test-id="countrySelector-country-${wrapper.key}"]`);
+        const country = wrapper.find('[data-test-id="countrySelector-country"]');
         expect(country.text()).toBe(localisedName);
     });
 

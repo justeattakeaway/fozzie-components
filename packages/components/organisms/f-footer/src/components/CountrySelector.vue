@@ -17,20 +17,17 @@
                 aria-controls="countrySelector-countries"
                 @click="toggleCountryList">
                 <flag-icon
-                    data-test-id="current-flag-icon"
                     :country-code="currentCountryKey"
                     :class="[
                         $style['c-countrySelector-flag'],
                         $style['c-countrySelector-flag--current']
                     ]" />
-                <span
-                    :data-test-id="['countrySelector-current-country-' + currentCountryKey]">
+                <span data-test-id="countrySelector-current-country">
                     {{ currentCountryName }}
                 </span>
 
                 <chevron-icon
-                    v-show="
-                        !showCountryList"
+                    v-show="!showCountryList"
                     :class="[
                         $style['c-icon--chevron--small'],
                         $style['c-countrySelector-chevron']
@@ -53,7 +50,7 @@
                 <li
                     v-for="(country, i) in countries"
                     :key="i + '_Country'"
-                    :data-test-id="['countrySelector-country-' + country.dataTestKey]">
+                    data-test-id="countrySelector-country">
                     <a
                         :data-trak='`{
                             "trakEvent": "click",

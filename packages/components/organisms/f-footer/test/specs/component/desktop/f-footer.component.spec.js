@@ -4,13 +4,7 @@ const footer = new Footer();
 
 describe('Desktop - f-footer component tests', () => {
     beforeEach(() => {
-        const footerData = {
-            locale: 'gb',
-            courierLinks: false,
-            countrySelector: true
-        };
-
-        footer.open(footerData);
+        footer.open('gb');
         footer.waitForComponent();
     });
 
