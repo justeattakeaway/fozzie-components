@@ -2477,24 +2477,6 @@ describe('Checkout', () => {
                         // Assert
                         expect(initialiseSpy).toHaveBeenCalled();
                     });
-
-                    it('should make a call to `setAuthToken` to set the updated authToken', async () => {
-                        // Arrange
-                        const wrapper = shallowMount(VueCheckout, {
-                            store: createStore(),
-                            i18n,
-                            localVue,
-                            propsData
-                        });
-                        const setAuthTokenSpy = jest.spyOn(wrapper.vm, 'setAuthToken');
-                        wrapper.setProps({ authToken: 'NewToken' });
-
-                        // Act
-                        await wrapper.vm.$options.watch.authToken[0].call(wrapper.vm, '', 'NewToken');
-
-                        // Assert
-                        expect(setAuthTokenSpy).toHaveBeenCalledWith('NewToken');
-                    });
                 });
 
                 describe('AND the token changes from truthy > falsey', () => {
@@ -2514,23 +2496,6 @@ describe('Checkout', () => {
 
                         // Assert
                         expect(initialiseSpy).toHaveBeenCalled();
-                    });
-
-                    it('should make a call to `setAuthToken` to set the updated authToken', async () => {
-                        // Arrange
-                        const wrapper = shallowMount(VueCheckout, {
-                            store: createStore(),
-                            i18n,
-                            localVue,
-                            propsData
-                        });
-                        const setAuthTokenSpy = jest.spyOn(wrapper.vm, 'setAuthToken');
-
-                        // Act
-                        await wrapper.vm.$options.watch.authToken[0].call(wrapper.vm, 'NewToken', '');
-
-                        // Assert
-                        expect(setAuthTokenSpy).toHaveBeenCalledWith('');
                     });
                 });
 
@@ -2554,6 +2519,23 @@ describe('Checkout', () => {
                         // Assert
                         expect(initialiseSpy).not.toHaveBeenCalled();
                     });
+                });
+
+                it('should make a call to `setAuthToken` to set the updated authToken', async () => {
+                    // Arrange
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                    const setAuthTokenSpy = jest.spyOn(wrapper.vm, 'setAuthToken');
+
+                    // Act
+                    await wrapper.vm.$options.watch.authToken[0].call(wrapper.vm);
+
+                    // Assert
+                    expect(setAuthTokenSpy).toHaveBeenCalledWith(wrapper.vm.authToken);
                 });
             });
         });
