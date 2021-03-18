@@ -16,7 +16,7 @@ describe('f-checkout "collection" component tests', () => {
         checkout.waitForComponent();
     });
 
-    forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
+    forEach(['addressLine1', 'addressLine2', 'addressLocality', 'addressPostcode'])
     .it.only('should check that address fields should not exist', field => {
         // Assert
         expect(checkout.doesFieldExist(field)).toBe(false);
