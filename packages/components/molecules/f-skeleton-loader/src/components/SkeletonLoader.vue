@@ -1,4 +1,11 @@
 
+<template>
+    <div
+        data-test-id="skeletonLoader"
+        :class="[$style['c-skeleton-loader']]">
+        <div :class="[$style[`c-skeleton-loader-${skeletonType}`], $style['c-skeleton-loader-bone']]" />
+    </div>
+</template>
 
 <script>
 export default {
@@ -7,40 +14,9 @@ export default {
     props: {
         skeletonType: {
             type: String,
-            default: 'heading'
+            default: 'text'
         }
-    },
-    data () {
-        return {
-            rootTypes: {
-                text: 'text',
-                heading: 'heading'
-            }
-        };
-    },
-    methods: {
-        genBone (text = this.skeletonType, children) {
-            return this.$createElement(
-                'div',
-                {
-                    staticClass: `${this.$style[`c-skeleton-loader-${text}`]} ${this.$style['c-skeleton-loader-bone']}`
-                },
-                children
-            );
-        }
-    },
-    render (createElement) {
-        return createElement(
-            'div', {
-                staticClass: this.$style['c-skeleton-loader'],
-                attrs: {
-                    'data-test-id': 'skeletonLoader'
-                }
-            },
-            [this.genBone()]
-        );
     }
-
 };
 </script>
 
