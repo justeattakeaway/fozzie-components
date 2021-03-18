@@ -3,16 +3,21 @@ const Footer = require('../../../../test-utils/component-objects/f-footer.compon
 
 const footer = new Footer();
 
-describe('Shared - f-footer component tests for tenants: AU, IE, NZ, ES, IT, NO', () => {
+describe('Shared - f-footer component tests', () => {
     beforeEach(() => {
         const footerData = {
             locale: 'gb',
             courierLinks: false,
-            countrySelector: true
+            countrySelector: false
         };
 
         footer.open(footerData);
         footer.waitForComponent();
+    });
+
+    it('should display the footer', () => {
+        // Assert
+        expect(footer.isComponentDisplayed()).toBe(true);
     });
 
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
@@ -31,11 +36,6 @@ describe('Shared - f-footer component tests for tenants: AU, IE, NZ, ES, IT, NO'
         // Assert
         expect(footer.areCourierLinksDisplayed()).toBe(false);
         expect(footer.isCountrySelectorDisplayed()).toBe(false);
-    });
-
-    it('should display the footer', () => {
-        // Assert
-        expect(footer.isComponentDisplayed()).toBe(true);
     });
 
     forEach(['au', 'ie', 'nz'])
