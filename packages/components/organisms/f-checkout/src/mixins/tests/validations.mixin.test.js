@@ -4,7 +4,7 @@ import { VALIDATIONS } from '../../constants';
 
 const $v = {
     [VALIDATIONS.address]: {
-        city: {
+        locality: {
             $dirty: false,
             required: true
         },

@@ -48,7 +48,7 @@ export default {
         address: {
             line1: '',
             line2: '',
-            city: '',
+            locality: '',
             postcode: ''
         },
         userNote: '',
@@ -363,9 +363,9 @@ export default {
                 /* eslint-disable prefer-destructuring */
                 state.address.line1 = address.lines[0];
                 state.address.line2 = address.lines[1];
-                state.address.city = address.lines[3];
                 /* eslint-enable prefer-destructuring */
 
+                state.address.locality = address.locality;
                 state.address.postcode = address.postalCode;
             }
 

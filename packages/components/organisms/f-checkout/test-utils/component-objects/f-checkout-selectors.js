@@ -34,9 +34,9 @@ export const FIELDS = {
         input: '[data-test-id="formfield-address-line-2-input"]',
         error: ''
     },
-    addressCity: {
-        input: '[data-test-id="formfield-address-city-input"]',
-        error: '[data-test-id="error-address-city-empty"]'
+    addressLocality: {
+        input: '[data-test-id="formfield-address-locality-input"]',
+        error: '[data-test-id="error-address-locality-empty"]'
     },
     addressPostcode: {
         input: '[data-test-id="formfield-address-postcode-input"]',

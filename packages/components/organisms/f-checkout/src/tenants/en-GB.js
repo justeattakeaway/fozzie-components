@@ -6,7 +6,7 @@ const messages = {
         addressGroup: 'Address',
         line1: 'Address line 1',
         line2: 'Address line 2 (optional)',
-        city: 'City',
+        locality: 'City',
         postcode: 'Postcode',
         deliveryOrderMethod: 'Delivery time',
         collectionOrderMethod: 'Collection time'
@@ -19,7 +19,7 @@ const messages = {
         addressLine1: {
             requiredError: 'Please enter the first line of your address'
         },
-        city: {
+        locality: {
             requiredError: 'Please enter your town or city'
         },
         postcode: {

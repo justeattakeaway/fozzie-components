@@ -38,7 +38,7 @@ const defaultCheckoutState = {
     address: {
         line1: '1 Bristol Road',
         line2: 'Flat 1',
-        city: 'Bristol',
+        locality: 'Bristol',
         postcode: 'BS1 1AA'
     },
     availableFulfilment: {
