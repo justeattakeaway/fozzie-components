@@ -33,6 +33,7 @@ export const FooterComponent = () => ({
     },
     template: `
         <vue-footer
+            style="margin-top: 300px"
             :showCourierLinks="showCourierLinks"
             :locale="locale"
             :showCountrySelector="showCountrySelector" />`
