@@ -3,7 +3,7 @@
         <mega-modal
             v-if="shouldShowErrorDialog"
             :is-open="shouldShowErrorDialog"
-            :has-overlay="true"
+            has-overlay
             data-test-id="checkout-issue-modal"
             is-full-height
             is-scrollable>
