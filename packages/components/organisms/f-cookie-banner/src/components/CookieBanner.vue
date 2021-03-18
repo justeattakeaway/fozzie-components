@@ -8,15 +8,16 @@
             { [$style['c-cookieBanner--is-hidden']]: shouldHideBanner }
         ]"
         data-cookie-consent-overlay
-        data-test-id="cookieBanner-component"
         :aria-hidden="shouldHideBanner">
         <div
             :class="[
                 $style['c-cookieBanner-card'],
                 { [$style['c-cookieBanner-ios']]: isIosBrowser }
-            ]">
+            ]"
+            data-test-id="newCookieBanner-component">
             <div
                 :class="$style['c-cookieBanner-content']"
+                data-test-id="cookieBannerContent"
                 role="dialog"
                 aria-labelledby="cookieConsentLabel"
                 aria-modal="true">
@@ -40,6 +41,7 @@
                 <p :class="$style['c-cookieBanner-text']">
                     {{ copy.textLine3 }}
                     <a
+                        data-test-id="cookie-policy-link"
                         :href="copy.cookiePolicyLinkUrl"
                         :class="$style['c-cookieBanner-link']"
                         target="_blank">
@@ -51,6 +53,7 @@
 
             <div :class="$style['c-cookieBanner-cta']">
                 <button-component
+                    data-test-id="accept-all-cookies-button"
                     is-full-width
                     @click.native="acceptAllCookiesActions">
                     {{ copy.acceptButtonText }}
@@ -58,6 +61,7 @@
 
                 <button-component
                     button-type="ghost"
+                    data-test-id="accept-necessary-cookies-button"
                     is-full-width
                     @click.native="acceptOnlyNecessaryCookiesActions">
                     {{ copy.nonAcceptButtonText }}
