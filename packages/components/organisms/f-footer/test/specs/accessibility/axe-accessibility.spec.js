@@ -1,21 +1,38 @@
 const { getAccessibilityTestResults } = require('../../../../../../../test/utils/axe-helper');
+const forEach = require('mocha-each');
 const Footer = require('../../../test-utils/component-objects/f-footer.component');
 const footer = new Footer();
 
 describe('Accessibility tests', () => {
 
-    it('a11y - should test f-footer component WCAG compliance for AU Locale', () => {
+    forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
+    .it('a11y - should test f-footer component WCAG compliance', expectedLocale => {
+        // Arrange
+        const footerData = {
+            locale: expectedLocale,
+            courierLinks: false,
+            countrySelector: true
+        };
+
         // Act
-        footer.open('au');
+        footer.open(footerData);
         const axeResults = getAccessibilityTestResults('f-footer');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
     });
 
-    it('a11y - should test f-footer component WCAG compliance for GB Locale', () => {
+    forEach(['gb', 'au', 'ie', 'nz'])
+    .it('a11y - should test f-footer component WCAG compliance with countries with courier links', expectedLocale => {
+        // Arrange
+        const footerData = {
+            locale: expectedLocale,
+            courierLinks: false,
+            countrySelector: true
+        };
+
         // Act
-        footer.open();
+        footer.open(footerData);
         const axeResults = getAccessibilityTestResults('f-footer');
 
         // Assert
