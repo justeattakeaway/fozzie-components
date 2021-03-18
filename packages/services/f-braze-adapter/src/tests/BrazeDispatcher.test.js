@@ -127,7 +127,7 @@ describe('instantiation', () => {
                 };
 
                 // Act
-                await brazeDispatcher.configure(options);
+                expect(brazeDispatcher.configure(options)).rejects.toEqual(new Error('Not initialising braze due to config'));
 
                 // Assert
                 expect(appboy.subscribeToInAppMessage).not.toHaveBeenCalled();

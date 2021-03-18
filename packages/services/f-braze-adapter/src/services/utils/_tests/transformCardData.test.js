@@ -75,7 +75,7 @@ const reformattedCard = {
     icon,
     ctaText: button,
     image,
-    isReadyToClaim,
+    isReadyToClaim: false, // because `'__IS_READY_TO_CLAIM__'` is not `true` or `'true'`
     title,
     totalRequiredStamps,
     subtitle: description,
