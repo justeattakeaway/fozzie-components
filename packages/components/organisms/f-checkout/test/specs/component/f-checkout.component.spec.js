@@ -25,7 +25,7 @@ describe('f-checkout component tests', () => {
             mobileNumber: '07777777779',
             line1: 'Test House',
             line2: 'High Street',
-            city: 'Test City',
+            locality: 'Test Locality',
             postcode: 'AR51 1AA',
             note: 'Doorbell is broken'
         };
@@ -103,7 +103,7 @@ describe('f-checkout component tests', () => {
             mobileNumber: '07777777779',
             line1: 'Test House',
             line2: 'High Street',
-            city: 'Test City',
+            locality: 'Test Locality',
             postcode: 'AR51 1AA',
             note: ''
         };
