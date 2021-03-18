@@ -56,7 +56,10 @@ const mapUpdateCheckoutRequest = ({
     }
 ]);
 
-const mapGetAddressRequest = address => {
+/**
+ * Replaces `city` key with `locality` key
+ */
+const mapCityToLocality = address => {
     address.locality = address.city;
     delete address.city;
     return address;
@@ -120,6 +123,6 @@ export {
     getAnalyticsErrorCodeByApiErrorCode,
     mapAnalyticsName,
     mapAnalyticsNames,
-    mapGetAddressRequest,
+    mapCityToLocality,
     mapUpdateCheckoutRequest
 };

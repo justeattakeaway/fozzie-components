@@ -2,7 +2,7 @@ import {
     getAnalyticsErrorCodeByApiErrorCode,
     mapAnalyticsName,
     mapAnalyticsNames,
-    mapGetAddressRequest,
+    mapCityToLocality,
     mapUpdateCheckoutRequest
 } from '../mapper';
 
@@ -163,7 +163,7 @@ describe('mapAnalyticsName :: ', () => {
     });
 });
 
-describe('mapGetAddressRequest :: ', () => {
+describe('mapCityToLocality :: ', () => {
     it('should replace city key with locality', () => {
         // Arrange
         const addressWithCity = {
@@ -174,7 +174,7 @@ describe('mapGetAddressRequest :: ', () => {
         };
 
         // Act & Assert
-        expect(mapGetAddressRequest(addressWithCity)).toEqual(address);
+        expect(mapCityToLocality(addressWithCity)).toEqual(address);
     });
 });
 

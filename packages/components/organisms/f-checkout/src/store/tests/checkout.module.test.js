@@ -337,7 +337,7 @@ describe('CheckoutModule', () => {
 
         describe('getAddress ::', () => {
             let config;
-            let mapGetAddressRequestSpy;
+            let mapCityToLocalitySpy;
 
             const expectedAddress = {
                 line1: 'Fleet Place House',
@@ -358,10 +358,10 @@ describe('CheckoutModule', () => {
 
                 axios.get = jest.fn(() => Promise.resolve({ data: customerAddresses }));
 
-                mapGetAddressRequestSpy = jest.spyOn(mapper, 'mapGetAddressRequest').mockImplementation(() => expectedAddress);
+                mapCityToLocalitySpy = jest.spyOn(mapper, 'mapCityToLocality').mockImplementation(() => expectedAddress);
             });
 
-            it('should call `mapGetAddressRequest` with address.', async () => {
+            it('should call `mapCityToLocality` with address.', async () => {
                 // Arrange
                 const addressDetails = {
                     line1: 'Fleet Place House',
@@ -374,7 +374,7 @@ describe('CheckoutModule', () => {
                 await getAddress({ commit, state, dispatch }, payload);
 
                 // Assert
-                expect(mapGetAddressRequestSpy).toHaveBeenCalledWith(addressDetails);
+                expect(mapCityToLocalitySpy).toHaveBeenCalledWith(addressDetails);
             });
 
             it(`should get the address details from the backend and call ${UPDATE_FULFILMENT_ADDRESS} mutation.`, async () => {
