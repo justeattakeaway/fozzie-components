@@ -18,6 +18,7 @@ import {
     UPDATE_STATE,
     UPDATE_USER_NOTE
 } from './mutation-types';
+import checkoutIssues from '../checkout-issues';
 
 export default {
     namespaced: true,
@@ -119,8 +120,11 @@ export default {
             const { data: responseData } = await axios.patch(url, data, config);
             const { issues, isFulfillable } = responseData;
 
+            // Can now log these errors inside the map if necessary
+            const detailedIssues = issues.map(issue => ({ ...checkoutIssues[issue.code], ...issue }));
+
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
-            commit(UPDATE_ERRORS, issues);
+            commit(UPDATE_ERRORS, detailedIssues);
         },
 
         /**

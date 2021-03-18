@@ -51,7 +51,10 @@ Object {
     },
   ],
   "orderId": "",
-  "restaurantId": "",
+  "restaurant": Object {
+    "id": "",
+    "seoName": "",
+  },
   "serviceType": "delivery",
   "time": Object {
     "from": "2020-01-01T00:00+00:00",

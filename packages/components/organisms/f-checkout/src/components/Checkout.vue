@@ -1,5 +1,30 @@
 <template>
     <div>
+        <mega-modal
+            v-if="shouldShowErrorDialog"
+            :is-open="shouldShowErrorDialog"
+            :has-overlay="true"
+            data-test-id="checkout-issue-modal"
+            is-full-height
+            is-scrollable>
+            <h3 data-test-id="checkout-issue-modal-title" class="u-noSpacing">
+                {{ $t(`errorMessages.checkoutIssues.${errorInfo.code}.title`) }}
+            </h3>
+
+            <p data-test-id="checkout-issue-modal-message">
+                {{ $t(`errorMessages.checkoutIssues.${errorInfo.code}.message`) }}
+            </p>
+
+            <f-button
+                :class="$style['c-checkout-redirectButton']"
+                button-type="primary"
+                button-size="large"
+                action-type="button"
+                data-test-id="redirect-to-menu-button"
+                @click.native="handleErrorDialogClick">
+                {{ $t(`errorMessages.checkoutIssues.${errorInfo.code}.buttonText`) }}
+            </f-button>
+        </mega-modal>
         <div
             v-if="shouldShowSpinner"
             :class="$style['c-spinner-wrapper']"
@@ -102,6 +127,8 @@ import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
+import MegaModal from '@justeat/f-mega-modal';
+import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 
 import { validations } from '@justeat/f-services';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
@@ -145,6 +172,7 @@ export default {
         FormField,
         FormSelector,
         GuestBlock,
+        MegaModal,
         UserNote
     },
 
@@ -221,6 +249,7 @@ export default {
     data () {
         return {
             tenantConfigs,
+            errorInfo: null,
             genericErrorMessage: null,
             hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
@@ -261,6 +290,7 @@ export default {
             'messages',
             'notices',
             'orderId',
+            'restaurant',
             'serviceType',
             'time',
             'userNote'
@@ -300,6 +330,14 @@ export default {
 
         shouldShowErrorPage () {
             return !this.hasCheckoutLoadedSuccessfully;
+        },
+
+        shouldShowErrorDialog () {
+            return this.errorInfo && this.errorInfo.showInDialog;
+        },
+
+        restaurantMenuPageUrl () {
+            return `${this.restaurant.seoName}/menu`;
         }
     },
 
@@ -400,6 +438,7 @@ export default {
         },
 
         processOrderNotFulfillable (eventData) {
+            this.handleCheckoutIssues();
             this.logInvoker('Consumer Checkout Not Fulfillable', eventData, this.$logger.logWarn);
         },
 
@@ -455,6 +494,12 @@ export default {
                     : ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE;
 
                 this.trackFormInteraction({ action: 'error', error: [error] });
+            }
+        },
+
+        handleCheckoutIssues () {
+            if (this.errors.length > 0) {
+                this.errorInfo = this.errors[0];
             }
         },
 
@@ -762,6 +807,14 @@ export default {
                     this.shouldShowSpinner = true;
                 }
             }, 1000);
+        },
+
+        handleErrorDialogClick () {
+            if (this.errorInfo.shouldRedirectToMenu) {
+                window.location.assign(this.restaurantMenuPageUrl);
+            }
+
+            this.errorInfo = null;
         }
     },
 
@@ -843,8 +896,9 @@ export default {
     width: $checkout-width;
     margin: 0 auto;
 }
-
-.c-checkout-submitButton {
+/* If these stay the same then just rename the class to something more generic */
+.c-checkout-submitButton,
+.c-checkout-redirectButton {
     margin: spacing(x4) 0 spacing(x0.5);
 }
 </style>

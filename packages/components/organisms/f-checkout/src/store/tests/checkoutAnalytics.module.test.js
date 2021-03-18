@@ -185,7 +185,8 @@ describe('CheckoutAnalyticsModule', () => {
                         total: rootState[VUEX_CHECKOUT_MODULE].basket.total
                     },
                     restaurant: {
-                        id: rootState[VUEX_CHECKOUT_MODULE].restaurantId
+                        id: rootState[VUEX_CHECKOUT_MODULE].restaurant.id,
+                        seoName: rootState[VUEX_CHECKOUT_MODULE].restaurant.seoName
                     },
                     pageData: {
                         name: 'Checkout 1 Guest',

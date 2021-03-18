@@ -8,8 +8,10 @@ import {
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_COLLECTION,
     ERROR_CODE_FULFILMENT_TIME_INVALID,
+    ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP
 } from '../../constants';
+import CheckoutIssues from '../../checkout-issues';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
@@ -255,6 +257,36 @@ describe('Checkout', () => {
                 // Assert
                 expect(checkoutForm.exists()).toBe(false);
                 expect(spinner.exists()).toBe(true);
+            });
+        });
+
+        describe('errorInfo', () => {
+            describe('when `errorInfo.openInDialog` is `true`', () => {
+                it('should show a mega modal displaying the error title and description', () => {
+                    // Arrange & Act
+                    const fulfilmentTimeIssue = CheckoutIssues[ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE];
+
+                    const wrapper = mount(VueCheckout, {
+                        i18n,
+                        store: createStore(),
+                        localVue,
+                        propsData,
+                        data () {
+                            return {
+                                errorInfo: fulfilmentTimeIssue
+                            };
+                        }
+                    });
+
+                    const errorModal = wrapper.find('[data-test-id="checkout-issue-modal"]');
+                    const errorTitle = wrapper.find('[data-test-id="checkout-issue-modal-title"]');
+                    const errorMessage = wrapper.find('[data-test-id="checkout-issue-modal-message"]');
+
+                    // Assert
+                    expect(errorModal.exists()).toBe(true);
+                    expect(errorTitle.exists()).toBe(true);
+                    expect(errorMessage.exists()).toBe(true);
+                });
             });
         });
     });
@@ -519,6 +551,106 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(result).toBe(false);
+            });
+        });
+
+        describe('shouldShowErrorDialog ::', () => {
+            it('should return `true` if `errorInfo.showInDialog` is `true`', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: true
+                    }),
+                    i18n,
+                    localVue,
+                    propsData,
+                    data () {
+                        return {
+                            errorInfo: {
+                                code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
+                                showInDialog: true
+                            }
+                        };
+                    }
+                });
+
+                // Act
+                const result = wrapper.vm.shouldShowErrorDialog;
+
+                // Assert
+                expect(result).toBe(true);
+            });
+
+            it('should return `false` if `errorInfo.showInDialog` is `false`', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: true
+                    }),
+                    i18n,
+                    localVue,
+                    propsData,
+                    data () {
+                        return {
+                            errorInfo: {
+                                code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
+                                showInDialog: false
+                            }
+                        };
+                    }
+                });
+
+                // Act
+                const result = wrapper.vm.shouldShowErrorDialog;
+
+                // Assert
+                expect(result).toBe(false);
+            });
+
+            it('should return `null` if there is no error', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: true
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.shouldShowErrorDialog;
+
+                // Assert
+                expect(result).toBe(null);
+            });
+        });
+
+        describe('restaurantMenuPageUrl ::', () => {
+            it('should return the URL to redirect back to the restaurant menu', () => {
+                const restaurantSeoName = 'masala-zone-camden';
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        isLoggedIn: true,
+                        restaurant: {
+                            seoName: restaurantSeoName
+                        }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.restaurantMenuPageUrl;
+
+                // Assert
+                expect(result).toBe(`${restaurantSeoName}/menu`);
             });
         });
     });
@@ -2455,6 +2587,62 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(windowLocationSpy).not.toHaveBeenCalled();
+            });
+        });
+
+        describe('handleErrorDialogClick ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            const restaurantSeoName = 'checkout-kofte-farringdon';
+
+            it('should redirect to the restaurant menu if `shouldRedirectToMenu` is true', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, restaurant: { seoName: restaurantSeoName, id: '22222' } }),
+                    i18n,
+                    localVue,
+                    propsData,
+                    data () {
+                        return {
+                            errorInfo: {
+                                shouldRedirectToMenu: true
+                            }
+                        };
+                    }
+                });
+
+                // Act
+                wrapper.vm.handleErrorDialogClick();
+
+                // Assert
+                expect(windowLocationSpy).toHaveBeenCalledWith(`${restaurantSeoName}/menu`);
+                expect(wrapper.vm.errorInfo).toBeNull();
+            });
+
+            it('should not redirect to the restaurant menu if `shouldRedirectToMenu` is false', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, restaurant: { seoName: restaurantSeoName, id: '22222' } }),
+                    i18n,
+                    localVue,
+                    propsData,
+                    data () {
+                        return {
+                            errorInfo: {
+                                shouldRedirectToMenu: false
+                            }
+                        };
+                    }
+                });
+
+                // Act
+                wrapper.vm.handleErrorDialogClick();
+
+                // Assert
+                expect(windowLocationSpy).not.toHaveBeenCalled();
+                expect(wrapper.vm.errorInfo).toBeNull();
             });
         });
 

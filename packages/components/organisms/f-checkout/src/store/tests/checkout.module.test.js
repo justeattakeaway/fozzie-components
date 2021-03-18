@@ -213,7 +213,8 @@ describe('CheckoutModule', () => {
                         id: '11111',
                         total: 12.50
                     },
-                    restaurantId: '22222'
+                    restaurantId: '22222',
+                    restaurantSeoName: 'masala-zone-camden'
                 };
                 mutations[UPDATE_BASKET_DETAILS](state, eventData);
 
