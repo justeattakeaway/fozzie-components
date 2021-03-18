@@ -19,7 +19,7 @@ exports.local = () => ({
     bail: 0,
     maxinstances: 1,
     loglevel: 'silent',
-    reporters: JE_ENV !== 'browserstack' && COMPONENT_TYPE === 'organism' ? [
+    reporters: JE_ENV !== 'browserstack' && COMPONENT_TYPE === 'organism' && !TEST_TYPE.includes('ci') ? [
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases
             videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
@@ -66,4 +66,4 @@ exports.component = () => ({
 });
 
 exports.setTestEnvironment = () => (CIRCLE_CI ? exports.ci() : exports.local());
-exports.setTestType = () => (TEST_TYPE === 'component' ? exports.component() : exports.a11y());
+exports.setTestType = () => (TEST_TYPE.includes('component') ? exports.component() : exports.a11y());
