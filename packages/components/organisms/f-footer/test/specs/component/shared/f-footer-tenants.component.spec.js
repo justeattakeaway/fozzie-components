@@ -5,7 +5,7 @@ const footer = new Footer();
 describe('Shared - f-footer component tests for tenants: AU, IE, NZ, ES, IT, NO', () => {
 
     forEach(['au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should not show "courier links" and "country selector" when options are unselected', expectedLocale => {
+    .it('should not show courier links and country selector when options are unselected', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
