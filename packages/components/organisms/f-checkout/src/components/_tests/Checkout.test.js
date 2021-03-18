@@ -260,8 +260,8 @@ describe('Checkout', () => {
             });
         });
 
-        describe('errorInfo', () => {
-            describe('when `errorInfo.openInDialog` is `true`', () => {
+        describe('nonFulfillableError', () => {
+            describe('when `nonFulfillableError.openInDialog` is `true`', () => {
                 it('should show a mega modal displaying the error title and description', () => {
                     // Arrange & Act
                     const fulfilmentTimeIssue = CheckoutIssues[ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE];
@@ -273,7 +273,7 @@ describe('Checkout', () => {
                         propsData,
                         data () {
                             return {
-                                errorInfo: fulfilmentTimeIssue
+                                nonFulfillableError: fulfilmentTimeIssue
                             };
                         }
                     });
@@ -555,7 +555,7 @@ describe('Checkout', () => {
         });
 
         describe('shouldShowErrorDialog ::', () => {
-            it('should return `true` if `errorInfo.showInDialog` is `true`', () => {
+            it('should return `true` if `nonFulfillableError.showInDialog` is `true`', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
@@ -567,7 +567,7 @@ describe('Checkout', () => {
                     propsData,
                     data () {
                         return {
-                            errorInfo: {
+                            nonFulfillableError: {
                                 code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
                                 showInDialog: true
                             }
@@ -582,7 +582,7 @@ describe('Checkout', () => {
                 expect(result).toBe(true);
             });
 
-            it('should return `false` if `errorInfo.showInDialog` is `false`', () => {
+            it('should return `false` if `nonFulfillableError.showInDialog` is `false`', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore({
@@ -594,7 +594,7 @@ describe('Checkout', () => {
                     propsData,
                     data () {
                         return {
-                            errorInfo: {
+                            nonFulfillableError: {
                                 code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
                                 showInDialog: false
                             }
@@ -2606,7 +2606,7 @@ describe('Checkout', () => {
                     propsData,
                     data () {
                         return {
-                            errorInfo: {
+                            nonFulfillableError: {
                                 shouldRedirectToMenu: true
                             }
                         };
@@ -2618,7 +2618,7 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(windowLocationSpy).toHaveBeenCalledWith(`${restaurantSeoName}/menu`);
-                expect(wrapper.vm.errorInfo).toBeNull();
+                expect(wrapper.vm.nonFulfillableError).toBeNull();
             });
 
             it('should not redirect to the restaurant menu if `shouldRedirectToMenu` is false', () => {
@@ -2630,7 +2630,7 @@ describe('Checkout', () => {
                     propsData,
                     data () {
                         return {
-                            errorInfo: {
+                            nonFulfillableError: {
                                 shouldRedirectToMenu: false
                             }
                         };
@@ -2642,7 +2642,7 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(windowLocationSpy).not.toHaveBeenCalled();
-                expect(wrapper.vm.errorInfo).toBeNull();
+                expect(wrapper.vm.nonFulfillableError).toBeNull();
             });
         });
 

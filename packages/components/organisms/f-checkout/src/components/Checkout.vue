@@ -8,11 +8,11 @@
             is-full-height
             is-scrollable>
             <h3 data-test-id="checkout-issue-modal-title" class="u-noSpacing">
-                {{ $t(`errorMessages.checkoutIssues.${errorInfo.code}.title`) }}
+                {{ $t(`errorMessages.checkoutIssues.${nonFulfillableError.code}.title`) }}
             </h3>
 
             <p data-test-id="checkout-issue-modal-message">
-                {{ $t(`errorMessages.checkoutIssues.${errorInfo.code}.message`) }}
+                {{ $t(`errorMessages.checkoutIssues.${nonFulfillableError.code}.message`) }}
             </p>
 
             <f-button
@@ -22,7 +22,7 @@
                 action-type="button"
                 data-test-id="redirect-to-menu-button"
                 @click.native="handleErrorDialogClick">
-                {{ $t(`errorMessages.checkoutIssues.${errorInfo.code}.buttonText`) }}
+                {{ $t(`errorMessages.checkoutIssues.${nonFulfillableError.code}.buttonText`) }}
             </f-button>
         </mega-modal>
         <div
@@ -249,7 +249,7 @@ export default {
     data () {
         return {
             tenantConfigs,
-            errorInfo: null,
+            nonFulfillableError: null,
             genericErrorMessage: null,
             hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
@@ -333,7 +333,7 @@ export default {
         },
 
         shouldShowErrorDialog () {
-            return this.errorInfo && this.errorInfo.showInDialog;
+            return this.nonFulfillableError && this.nonFulfillableError.showInDialog;
         },
 
         restaurantMenuPageUrl () {
@@ -499,7 +499,11 @@ export default {
 
         handleCheckoutIssues () {
             if (this.errors.length > 0) {
-                this.errorInfo = this.errors[0];
+                const dialogErrors = this.errors.filter(error => error.openInDialog);
+                if (dialogErrors[0]) {
+                    const [firstError] = dialogErrors;
+                    this.nonFulfillableError = firstError;
+                }
             }
         },
 
@@ -810,11 +814,11 @@ export default {
         },
 
         handleErrorDialogClick () {
-            if (this.errorInfo.shouldRedirectToMenu) {
+            if (this.nonFulfillableError.shouldRedirectToMenu) {
                 window.location.assign(this.restaurantMenuPageUrl);
             }
 
-            this.errorInfo = null;
+            this.nonFulfillableError = null;
         }
     },
 
