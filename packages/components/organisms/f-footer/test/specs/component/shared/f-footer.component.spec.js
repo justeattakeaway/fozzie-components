@@ -8,7 +8,7 @@ describe('Shared - f-footer component tests', () => {
         const footerData = {
             locale: 'gb',
             courierLinks: false,
-            countrySelector: false
+            countrySelector: true
         };
 
         footer.open(footerData);
