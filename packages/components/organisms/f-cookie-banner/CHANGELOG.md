@@ -11,6 +11,7 @@ v0.5.1
 - New tests to test f-cookiebanner in `component`
 - New test supporting files in `test-utils/compoenent-objects`
 - Browserstack support and file structures in tests
+- A11y tests
 
 ### Fixed
 - URL for NZ cookie policy
