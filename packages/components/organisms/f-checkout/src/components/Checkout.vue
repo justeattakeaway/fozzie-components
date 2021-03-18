@@ -315,11 +315,11 @@ export default {
          *
          * */
         async authToken (newTokenVal, oldTokenVal) {
+            this.setAuthToken(this.authToken);
+
             if ((!newTokenVal && oldTokenVal) || (!oldTokenVal && newTokenVal)) {
                 await this.initialise();
             }
-
-            this.setAuthToken(this.authToken);
         }
     },
 
