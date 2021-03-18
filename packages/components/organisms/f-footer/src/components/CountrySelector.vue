@@ -111,7 +111,7 @@ export default {
             type: Array,
             required: true
         },
-        
+
         changeCountryText: {
             type: String,
             default: ''
