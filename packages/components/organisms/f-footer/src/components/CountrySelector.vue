@@ -84,42 +84,51 @@ import {
 } from '@justeat/f-vue-icons';
 import vClickOutside from 'v-click-outside';
 import FlagIcon from './FlagIcon.vue';
+
 export default {
     components: {
         ChevronIcon,
         CrossIcon,
         FlagIcon
     },
+
     directives: {
         clickOutside: vClickOutside.directive
     },
+
     props: {
         currentCountryName: {
             type: String,
             required: true
         },
+
         currentCountryKey: {
             type: String,
             required: true
         },
+
         countries: {
             type: Array,
             required: true
         },
+        
         changeCountryText: {
             type: String,
             default: ''
         }
     },
+
     data () {
         return {
             showCountryList: false
         };
     },
+
     methods: {
         toggleCountryList () {
             this.showCountryList = !this.showCountryList;
         },
+
         hideCountryList () {
             this.showCountryList = false;
         }
@@ -129,7 +138,9 @@ export default {
 
 <style lang="scss" module>
 @import '../assets/scss/icons.scss';
+
 $countrySelector-btn-font-size: 'body-s';
+
 .c-countrySelector {
     width: 190px;
     position: relative;
@@ -139,30 +150,37 @@ $countrySelector-btn-font-size: 'body-s';
     padding: spacing() spacing(x2);
     text-decoration: none;
     color: $color-text;
+
     &:hover,
     &:focus {
         color: $blue--dark;
     }
+
     p {
         margin: 0 0 0 spacing();
         display: inline-block;
     }
 }
+
 .c-countrySelector-flag {
     height: 16px;
     width: 24px;
     margin-top: 2px;
 }
+
 .c-countrySelector-flag--current {
     margin-right: spacing();
     margin-top: 0;
 }
+
 .c-countrySelector-chevron {
     margin: 0 0 0 spacing();
 }
+
 .c-countrySelector-cross {
     margin: 0 0 0 11px;
 }
+
 .c-countrySelectorContainer {
     @include media('<wide') {
         width: 100%;
@@ -170,6 +188,7 @@ $countrySelector-btn-font-size: 'body-s';
         order: 3;
     }
 }
+
 .c-countrySelector-button {
     align-items: center;
     background-color: $footer-bgColor;
@@ -180,6 +199,7 @@ $countrySelector-btn-font-size: 'body-s';
     padding: spacing(x2);
     width: 100%;
 }
+
 .c-countrySelector-list {
     position: absolute;
     left: 0;
@@ -192,6 +212,7 @@ $countrySelector-btn-font-size: 'body-s';
     background-color: $footer-bgLight;
     box-shadow: 0 2px 28px rgba($grey--darkest, 0.08);
     list-style: none;
+
     & > li:before {
         content: none;
     }
