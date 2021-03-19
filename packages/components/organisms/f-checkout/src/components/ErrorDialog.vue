@@ -1,5 +1,6 @@
 <template>
     <mega-modal
+        v-if="errorCode"
         :is-open="isOpen"
         :has-close-button="false"
         has-overlay
