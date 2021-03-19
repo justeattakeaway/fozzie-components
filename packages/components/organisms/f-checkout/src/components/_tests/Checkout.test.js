@@ -265,6 +265,8 @@ describe('Checkout', () => {
                 it('should show a mega modal displaying the error title and description', () => {
                     // Arrange
                     const fulfilmentTimeIssue = CheckoutIssues[ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE];
+                    const expectedErrorTitle = 'We do takeaways, not time machines';
+                    const expectedErrorMessage = 'The time you picked for your order isn\'t possible, please choose another.';
 
                     // Act
                     const wrapper = shallowMount(VueCheckout, {
@@ -274,7 +276,10 @@ describe('Checkout', () => {
                         propsData,
                         data () {
                             return {
-                                nonFulfillableError: fulfilmentTimeIssue
+                                nonFulfillableError: {
+                                    ...fulfilmentTimeIssue,
+                                    code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
+                                }
                             };
                         }
                     });
@@ -285,7 +290,11 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(errorModal.exists()).toBe(true);
+
                     expect(errorTitle.exists()).toBe(true);
+                    expect(errorTitle.text()).toBe(expectedErrorTitle);
+
+                    expect(errorMessage.text()).toBe(expectedErrorMessage);
                     expect(errorMessage.exists()).toBe(true);
                 });
             });
