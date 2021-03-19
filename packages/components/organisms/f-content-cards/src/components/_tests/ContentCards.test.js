@@ -70,7 +70,6 @@ beforeEach(() => {
 });
 
 describe('ContentCards', () => {
-
     it('should call intitialiseMetadata when mounted', () => {
         // Arrange & Act
         shallowMount(ContentCards, {
