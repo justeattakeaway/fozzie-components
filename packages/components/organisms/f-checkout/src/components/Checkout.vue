@@ -1,29 +1,10 @@
 <template>
     <div>
-        <mega-modal
+        <error-dialog
             v-if="shouldShowErrorDialog"
             :is-open="shouldShowErrorDialog"
-            :has-close-button="false"
-            has-overlay
-            data-test-id="checkout-issue-modal">
-            <h3 data-test-id="checkout-issue-modal-title" class="u-noSpacing">
-                {{ $t(`errorMessages.checkoutIssues.${nonFulfillableError.code}.title`) }}
-            </h3>
-
-            <p data-test-id="checkout-issue-modal-message">
-                {{ $t(`errorMessages.checkoutIssues.${nonFulfillableError.code}.message`) }}
-            </p>
-
-            <f-button
-                :class="$style['c-checkout-redirectButton']"
-                button-type="primary"
-                button-size="large"
-                action-type="button"
-                data-test-id="redirect-to-menu-button"
-                @click.native="handleErrorDialogClick">
-                {{ $t(`errorMessages.checkoutIssues.${nonFulfillableError.code}.buttonText`) }}
-            </f-button>
-        </mega-modal>
+            :error-code="nonFulfillableError.code"
+            @error-dialog-button-click="handleErrorDialogClick" />
         <div
             v-if="shouldShowSpinner"
             :class="$style['c-spinner-wrapper']"
@@ -126,8 +107,6 @@ import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import MegaModal from '@justeat/f-mega-modal';
-import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 
 import { validations } from '@justeat/f-services';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
@@ -138,6 +117,7 @@ import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import FormSelector from './Selector.vue';
 import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
+import ErrorDialog from './ErrorDialog.vue';
 import ErrorPage from './Error.vue';
 
 import {
@@ -171,8 +151,8 @@ export default {
         FormField,
         FormSelector,
         GuestBlock,
-        MegaModal,
-        UserNote
+        UserNote,
+        ErrorDialog
     },
 
     mixins: [validationMixin, VueGlobalisationMixin, checkoutValidationsMixin],
@@ -903,8 +883,7 @@ export default {
     margin: 0 auto;
 }
 /* If these stay the same then just rename the class to something more generic */
-.c-checkout-submitButton,
-.c-checkout-redirectButton {
+.c-checkout-submitButton {
     margin: spacing(x4) 0 spacing(x0.5);
 }
 </style>

@@ -269,7 +269,7 @@ describe('Checkout', () => {
                     const expectedErrorMessage = 'The time you picked for your order isn\'t possible, please choose another.';
 
                     // Act
-                    const wrapper = shallowMount(VueCheckout, {
+                    const wrapper = mount(VueCheckout, {
                         i18n,
                         store: createStore(),
                         localVue,
