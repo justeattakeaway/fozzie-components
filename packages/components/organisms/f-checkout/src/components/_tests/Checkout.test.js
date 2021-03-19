@@ -507,11 +507,19 @@ describe('Checkout', () => {
         let initialiseSpy;
         let setAuthTokenSpy;
         let trackInitialLoadSpy;
+        let wrapper;
 
         beforeEach(() => {
             initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
             setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
             trackInitialLoadSpy = jest.spyOn(VueCheckout.methods, 'trackInitialLoad');
+
+            wrapper = shallowMount(VueCheckout, {
+                store: createStore(),
+                i18n,
+                localVue,
+                propsData
+            });
         });
 
         afterEach(() => {
@@ -519,40 +527,17 @@ describe('Checkout', () => {
         });
 
         it('should call `setAuthToken`', () => {
-            // Act
-            shallowMount(VueCheckout, {
-                store: createStore(),
-                i18n,
-                localVue,
-                propsData
-            });
-
             // Assert
-            expect(setAuthTokenSpy).toHaveBeenCalled();
+            expect(setAuthTokenSpy).toHaveBeenCalledWith(wrapper.vm.authToken);
         });
 
         it('should call `initialise`', () => {
-            // Act
-            shallowMount(VueCheckout, {
-                store: createStore(),
-                i18n,
-                localVue,
-                propsData
-            });
-
             // Assert
             expect(initialiseSpy).toHaveBeenCalled();
         });
 
         it('should call `trackInitialLoad`', async () => {
             // Act
-            const wrapper = shallowMount(VueCheckout, {
-                store: createStore(),
-                i18n,
-                localVue,
-                propsData
-            });
-
             await wrapper.vm.initialise();
 
             // Assert
