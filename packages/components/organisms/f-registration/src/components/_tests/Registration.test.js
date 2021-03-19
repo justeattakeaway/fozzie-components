@@ -10,6 +10,7 @@ let wrapper;
 
 describe('Registration', () => {
     const propsData = {
+        locale: "en-GB",
         createAccountUrl: 'http://localhost/account/register',
         showLoginLink: true,
         loginUrl: '/account/register'
@@ -112,20 +113,6 @@ describe('Registration', () => {
 
             // Assert
             expect(wrapper.emitted(EventNames.VisitLoginPage).length).toBe(1);
-        });
-
-        it('should fallback to use the en-GB locale if no locale passed', () => {
-            // Arrange & Act
-            wrapper = shallowMount(Registration, {
-                propsData: {
-                    createAccountUrl: 'http://localhost/account/register',
-                    showLoginLink: true,
-                    loginUrl: '/account/register'
-                }
-            });
-
-            // Assert
-            expect(wrapper.vm.tenant).toBe('uk');
         });
     });
 

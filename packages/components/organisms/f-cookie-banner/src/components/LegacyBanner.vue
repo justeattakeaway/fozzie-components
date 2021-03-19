@@ -3,12 +3,13 @@
         <div
             :class="[$style['c-cookieWarning'], { [$style['c-cookieWarning--is-hidden']]: shouldHideLegacyBanner }]"
             :aria-hidden="shouldHideLegacyBanner"
-            data-test-id="cookieBanner-component">
+            data-test-id="legacyCookieBanner-component">
             <div :class="$style['c-cookieWarning-inner']">
                 <p>
                     {{ legacyBannerText }}
                     <a
                         class="c-cookieWarning-link"
+                        data-test-id="cookie-policy-link"
                         :href="cookiePolicyLinkUrl">
                         {{ legacyBannerLinkText }}
                     </a>

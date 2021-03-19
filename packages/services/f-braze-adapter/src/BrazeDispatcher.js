@@ -188,7 +188,7 @@ class BrazeDispatcher {
         }
 
         if (disableComponent || !apiKey || !userId) {
-            this.appboyPromise = Promise.resolve();
+            this.appboyPromise = Promise.reject(new Error('Not initialising braze due to config'));
             return this.appboyPromise;
         }
 

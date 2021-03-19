@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.23.0
+------------------------------
+*March 18, 2021*
+
+## Changed
+- Updated node `config.yml` to support chromedriver 89.0.0
+
+
 v3.22.0
 ------------------------------
 *March 12, 2021*

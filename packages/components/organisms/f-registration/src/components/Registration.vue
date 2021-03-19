@@ -227,7 +227,7 @@ export default {
     props: {
         locale: {
             type: String,
-            default: 'en-GB'
+            default: ''
         },
         createAccountUrl: {
             type: String,
