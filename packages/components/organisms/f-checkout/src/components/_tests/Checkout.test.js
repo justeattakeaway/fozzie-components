@@ -14,7 +14,7 @@ import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
 import {
-    defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger, mockAuthToken
+    defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger
 } from './helpers/setup';
 
 const localVue = createLocalVue();
