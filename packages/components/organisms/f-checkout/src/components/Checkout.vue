@@ -324,6 +324,8 @@ export default {
     },
 
     async mounted () {
+        this.setAuthToken(this.authToken);
+
         await this.initialise();
         this.trackInitialLoad();
     },
