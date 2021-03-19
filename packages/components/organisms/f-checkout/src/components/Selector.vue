@@ -28,7 +28,10 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 import { CHECKOUT_METHOD_DELIVERY, VUEX_CHECKOUT_ANALYTICS_MODULE, VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
-    components: { Alert, FormDropdown },
+    components: {
+        Alert,
+        FormDropdown
+    },
 
     data () {
         return {
