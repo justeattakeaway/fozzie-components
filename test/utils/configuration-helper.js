@@ -3,7 +3,7 @@ const video = require('wdio-video-reporter');
 const CIRCLE_CI = process.env.CIRCLECI;
 const { TEST_TYPE } = process.env;
 const { JE_ENV } = process.env;
-let { COMPONENT_TYPE } = process.env;
+const { COMPONENT_TYPE } = process.env;
 
 exports.getBaseUrl = (port = 8080) => {
     switch (JE_ENV) {
