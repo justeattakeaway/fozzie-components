@@ -14,7 +14,7 @@
                 $style['c-cookieBanner-card'],
                 { [$style['c-cookieBanner-ios']]: isIosBrowser }
             ]"
-            data-test-id="newCookieBanner-component">
+            data-test-id="cookieConsentBanner">
             <div
                 :class="$style['c-cookieBanner-content']"
                 data-test-id="cookieBannerContent"

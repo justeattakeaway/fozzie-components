@@ -1,4 +1,4 @@
-const CookieBanner = require('../../../../test-utils/component-objects/f-cookieBanner-new.component');
+const CookieBanner = require('../../../../test-utils/component-objects/f-cookieConsentBanner.component');
 const cookieBanner = new CookieBanner();
 import forEach from 'mocha-each';
 
@@ -13,9 +13,11 @@ describe('New - f-cookieBanner component tests', () => {
         // Act
         cookieBanner.acceptCookies(expectedCookieValue);
 
+        // Arrange
         const bannerCookie = browser.getCookies().filter(cookie => cookie.name === 'je-banner_cookie')[0];
         const bannerConsent = browser.getCookies().filter(cookie => cookie.name === 'je-cookieConsent')[0];
 
+        // Assert
         expect(bannerCookie.value).toBe('130315');
         expect(bannerConsent.value).toBe(expectedCookieValue);
         expect(cookieBanner.isCookieBannerComponentDisplayed()).toBe(false);

@@ -3,11 +3,11 @@ const cookieBanner = new CookieBanner();
 import forEach from 'mocha-each';
 
 describe('Legacy - Multi-tenant - f-cookieBanner component tests', () => {
-    forEach([['gb'], ['au'], ['nz']])
+    forEach(['gb', 'au', 'nz'])
     .it('should display the f-cookieBanner component', tenant => {
         // Arrange
         cookieBanner.open(tenant);
-        cookieBanner.waitForComponent();
+        cookieBanner.waitForComponent
 
         // Assert
         expect(cookieBanner.isCookieBannerComponentDisplayed()).toBe(true);

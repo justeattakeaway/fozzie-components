@@ -1,4 +1,4 @@
-const CookieBanner = require('../../../../test-utils/component-objects/f-cookieBanner-new.component');
+const CookieBanner = require('../../../../test-utils/component-objects/f-cookieConsentBanner.component');
 const cookieBanner = new CookieBanner();
 import forEach from 'mocha-each';
 
@@ -25,8 +25,8 @@ describe('New - f-cookieBanner component tests', () => {
 });
 
 describe('New - Multi-tenant - f-cookieBanner component tests', () => {
-    forEach([['dk'], ['es'], ['ie'], ['it'], ['no']])
-    .it('should display the f-cookieBanner component', (tenant) => {
+    forEach(['dk', 'es', 'ie', 'it', 'no'])
+    .it.only('should display the f-cookieBanner component', (tenant) => {
         // Arrange
         cookieBanner.open(tenant);
         browser.deleteAllCookies();

@@ -2,7 +2,7 @@ const Page = require('@justeat/f-wdio-utils/src/page.object');
 
 module.exports = class CookieBanner extends Page {
 
-    get component () { return $('[data-test-id="newCookieBanner-component"]')}
+    get component () { return $('[data-test-id="cookieConsentBanner"]')}
     get cookiePolicyLink () { return this.component.$('[data-test-id="cookie-policy-link"]')}
     get cookieAcceptAllButton () { return this.component.$('[data-test-id="accept-all-cookies-button"]')}
     get cookieAcceptNecessaryButton () { return this.component.$('[data-test-id="accept-necessary-cookies-button"]')}

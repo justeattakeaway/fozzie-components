@@ -1,8 +1,8 @@
 import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
 const LegacyCookieBanner = require('../../../test-utils/component-objects/f-cookieBanner-legacy.component');
 const legacyCookieBanner = new LegacyCookieBanner();
-const NewCookieBanner = require('../../../test-utils/component-objects/f-cookieBanner-new.component');
-const newCookieBanner = new NewCookieBanner();
+const CookieConsentBanner = require('../../../test-utils/component-objects/f-cookieConsentBanner.component');
+const cookieConsentBanner = new CookieConsentBanner();
 
 describe('Legacy Accessibility tests', () => {
     it('a11y - should test legacy f-cookie-banner component WCAG compliance', () => {
@@ -19,8 +19,8 @@ describe('Legacy Accessibility tests', () => {
 
     it('a11y - should test new f-cookie-banner component WCAG compliance', () => {
         // Arrange
-        newCookieBanner.open();
-        newCookieBanner.waitForComponent();
+        cookieConsentBanner.open();
+        cookieConsentBanner.waitForComponent();
 
         // Act
         const axeResults = getAccessibilityTestResults('f-cookie-banner');
