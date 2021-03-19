@@ -1946,12 +1946,17 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
-"@justeat/f-alert@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-0.5.0.tgz#a5d53f2b2b0b073d5e0c46c64a67497d4019ff6b"
-  integrity sha512-7aw/1cnfYg9ZGm9j68WIoV7+uOWinrOZ752m8VVdtgECm4NgcXM7gEPEmIQ7rF7HGnvIvOzlL2IVxndaj2gaPQ==
+"@justeat/f-braze-adapter@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-3.0.0.tgz#651852ec8e7a2e4632a8dc3880d67163387180db"
+  integrity sha512-9IaZGfD92VtWkPIYlkwFOQXPfzbYd0Qn0uYRzk4nI02j5csiVRkzbxtmhGQZRPaiY+PiGqH9JaL9weBBvN0M6w==
   dependencies:
-    "@justeat/f-services" "1.0.0"
+    appboy-web-sdk "2.5.2"
+    date-fns "2.16.1"
+    lodash.findindex "4.6.0"
+    lodash.orderby "4.6.0"
+    lodash.startswith "4.2.1"
+    lodash.uniq "4.5.0"
 
 "@justeat/f-button@0.4.1":
   version "0.4.1"

@@ -14,7 +14,7 @@ import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
 import {
-    defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger
+    defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger, mockAuthToken
 } from './helpers/setup';
 
 const localVue = createLocalVue();
@@ -505,15 +505,30 @@ describe('Checkout', () => {
 
     describe('mounted ::', () => {
         let initialiseSpy;
+        let setAuthTokenSpy;
         let trackInitialLoadSpy;
 
         beforeEach(() => {
             initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
+            setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
             trackInitialLoadSpy = jest.spyOn(VueCheckout.methods, 'trackInitialLoad');
         });
 
         afterEach(() => {
             jest.clearAllMocks();
+        });
+
+        it('should call `setAuthToken`', () => {
+            // Act
+            shallowMount(VueCheckout, {
+                store: createStore(),
+                i18n,
+                localVue,
+                propsData
+            });
+
+            // Assert
+            expect(setAuthTokenSpy).toHaveBeenCalled();
         });
 
         it('should call `initialise`', () => {
