@@ -8,7 +8,6 @@ v3.23.0
 *March 19, 2021*
 
 ## Changed
-- Allure reporting to delete files after populating report
 - Refactored `jest-allure2` and `allure-reporter`
 - Added script `report:test-component:chrome` into package.json for automating component test report for organisms
 - Updated generator to reflect changes
