@@ -4,13 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.74.0
+v0.75.0
 ------------------------------
 *March 19, 2021*
 
 ### Added
 - Mega modal dialog for when unfulfillable issues are returned from `updateCheckout`
 - Constants of all the issues we are expected to receive
+
+
+v0.74.0
+------------------------------
+*March 18, 2021*
+
+### Added
+- Preorder warning message for `Selector` component.
+- Tests to cover changes.
 
 
 v0.73.0
