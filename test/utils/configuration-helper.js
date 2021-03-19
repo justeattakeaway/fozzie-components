@@ -11,9 +11,6 @@ exports.getBaseUrl = (port = 8080) => {
             return `http://localhost:${port}/`;
         case 'browserstack':
             return `http://bs-local.com:${port}/`;
-        case 'ci':
-            COMPONENT_TYPE = 'atom';
-            break;
         default:
             throw new Error(`Sorry, ${JE_ENV} is not recognised.`);
     }
@@ -22,7 +19,7 @@ exports.getBaseUrl = (port = 8080) => {
 exports.local = () => ({
     bail: 0,
     maxinstances: 1,
-    loglevel: 'silent',
+    loglevel: 'info',
     reporters: JE_ENV !== 'browserstack' && COMPONENT_TYPE === 'organism' ? [
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases
