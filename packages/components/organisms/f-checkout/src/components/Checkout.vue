@@ -4,7 +4,8 @@
             v-if="shouldShowErrorDialog"
             :is-open="shouldShowErrorDialog"
             :error-code="nonFulfillableError.code"
-            @error-dialog-button-click="handleErrorDialogClick" />
+            @handle-close="handleErrorDialogClose"
+            @error-dialog-button-click="handleErrorDialogButtonClick" />
         <div
             v-if="shouldShowSpinner"
             :class="$style['c-spinner-wrapper']"
@@ -795,12 +796,16 @@ export default {
             }, 1000);
         },
 
-        handleErrorDialogClick () {
+        handleErrorDialogClose () {
+            this.nonFulfillableError = null;
+        },
+
+        handleErrorDialogButtonClick () {
             if (this.nonFulfillableError.shouldRedirectToMenu) {
                 window.location.assign(this.restaurantMenuPageUrl);
             }
 
-            this.nonFulfillableError = null;
+            this.handleErrorDialogClose();
         }
     },
 

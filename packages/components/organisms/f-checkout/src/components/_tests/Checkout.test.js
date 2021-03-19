@@ -2600,7 +2600,7 @@ describe('Checkout', () => {
             });
         });
 
-        describe('handleErrorDialogClick ::', () => {
+        describe('handleErrorDialogButtonClick ::', () => {
             afterEach(() => {
                 jest.clearAllMocks();
             });
@@ -2624,7 +2624,7 @@ describe('Checkout', () => {
                 });
 
                 // Act
-                wrapper.vm.handleErrorDialogClick();
+                wrapper.vm.handleErrorDialogButtonClick();
 
                 // Assert
                 expect(windowLocationSpy).toHaveBeenCalledWith(`restaurant-${restaurantSeoName}/menu`);
@@ -2648,7 +2648,7 @@ describe('Checkout', () => {
                 });
 
                 // Act
-                wrapper.vm.handleErrorDialogClick();
+                wrapper.vm.handleErrorDialogButtonClick();
 
                 // Assert
                 expect(windowLocationSpy).not.toHaveBeenCalled();

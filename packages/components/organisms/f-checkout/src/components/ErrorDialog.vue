@@ -2,9 +2,9 @@
     <mega-modal
         v-if="errorCode"
         :is-open="isOpen"
-        :has-close-button="false"
+        data-test-id="checkout-issue-modal"
         has-overlay
-        data-test-id="checkout-issue-modal">
+        @close="handleClose">
         <h3 data-test-id="checkout-issue-modal-title" class="u-noSpacing">
             {{ $t(`errorMessages.checkoutIssues.${errorCode}.title`) }}
         </h3>
@@ -53,6 +53,10 @@ export default {
     methods: {
         handleButtonClick () {
             this.$emit(EventNames.CheckoutErrorDialogButtonClicked);
+        },
+
+        handleClose () {
+            this.$emit('handle-close');
         }
     }
 };
