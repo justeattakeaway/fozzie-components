@@ -12,6 +12,7 @@ v0.2.0
 - Text, Heading, Sentences child components
 - Prop and CSS to add shine animation to bones
 
+
 v0.1.0
 ------------------------------
 *March 15, 2021*
