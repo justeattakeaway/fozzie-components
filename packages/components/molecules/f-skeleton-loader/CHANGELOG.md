@@ -8,7 +8,7 @@ v0.2.0
 *March 19, 2021*
 
 ### Added
-- Text, Heading and Sentence skeleton components
+- Text, Heading and Sentence skeleton components rendered via prop
 - Animation prop and CSS to animate bones
 
 
