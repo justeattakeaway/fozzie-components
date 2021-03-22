@@ -26,8 +26,6 @@ const setFormFieldValues = wrapper => {
 
 describe('Registration API service', () => {
     let wrapper;
-
-    allure.feature('Registration API');
     beforeEach(() => {
         const div = document.createElement('div');
         document.body.appendChild(div);

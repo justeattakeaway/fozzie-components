@@ -1,4 +1,5 @@
-var { registerAllure } = require('jest-allure2');
-var resultsDir = '../../allure-results';
+const { registerAllure } = require('jest-allure2');
+
+const resultsDir = '../../../../test/results/allure';
 
 registerAllure(resultsDir);

@@ -14,8 +14,6 @@ localVue.use(VueI18n);
 localVue.use(Vuex);
 
 describe('Header', () => {
-    allure.feature('Checkout-Header');
-
     const propsData = {
         loginUrl: 'http://localhost/login'
     };

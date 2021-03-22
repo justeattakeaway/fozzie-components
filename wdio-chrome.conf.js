@@ -1,5 +1,6 @@
 // Used to set correct directories for WDIO test output
 global.baseDir = __dirname;
+const allure = require('allure-commandline');
 
 const { setTestEnvironment, setTestType, getBaseUrl } = require('./test/utils/configuration-helper');
 
@@ -34,10 +35,10 @@ exports.config = {
     // Suites
     suites: {
         component: [
-            './test/specs/component/**/*.component.spec.js',
+            './test/specs/component/**/*.component.spec.js'
         ],
         a11y: [
-            './test/specs/accessibility/axe-accessibility.spec.js',
+            './test/specs/accessibility/axe-accessibility.spec.js'
         ]
     },
     //
@@ -146,7 +147,6 @@ exports.config = {
         browser.takeScreenshot();
         browser.deleteAllCookies();
     },
-
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -233,9 +233,7 @@ exports.config = {
      * Function to be executed after a test (in Mocha/Jasmine).
      */
     // afterTest: () => {
-    //}
-
-
+    // }
     /**
      * Hook that gets executed after the suite has ended
      * @param {Object} suite suite details
@@ -276,8 +274,33 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {<Object>} results object containing test results
      */
-    // onComplete: function(exitCode, config, capabilities, results) {
-    // },
+    onComplete: function () {
+        if (process.env.JE_ENV !== 'browserstack' && process.env.COMPONENT_TYPE === 'organism') {
+            const reportError = new Error('Could not generate Allure report');
+            const generation = allure(['generate', '../../../../test/results/allure', ' --clean']);
+
+            for (let i = 0; i < testEnvironment.reporters.length; i++) {
+                for (let j = 0; j < testEnvironment.reporters[i].length; j++) {
+                    if (testEnvironment.reporters[i].includes('allure')) {
+                        return new Promise((resolve, reject) => {
+                            const generationTimeout = setTimeout(
+                                () => reject(reportError),
+                                5000
+                            );
+
+                            generation.on('exit', exitCode => {
+                                clearTimeout(generationTimeout);
+
+                                if (exitCode) {
+                                    resolve();
+                                }
+                            });
+                        });
+                    }
+                }
+            }
+        }
+    }
     /**
     * Gets executed when a refresh happens.
     * @param {String} oldSessionId session ID of the old session
