@@ -1,5 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import SkeletonLoader from '../SkeletonLoader.vue';
+// import TextBlock from '../skeletons/Text.vue';
+import * as Skeletons from '../skeletons';
 
 const defaultProps = {};
 
@@ -29,6 +31,20 @@ describe('SkeletonLoader', () => {
 
                 // Assert
                 expect(prop.validator(skeletonTypeValue)).toBe(expected);
+            });
+        });
+
+        describe('skeletonType', () => {
+            it.each(Object.keys(Skeletons))('should render the correct skeleton component based on prop: %s', skeletonType => {
+                // Arrange
+                const propsData = {
+                    skeletonType
+                };
+                // Act
+                const wrapper = makeWrapper({ propsData });
+
+                // Assert
+                expect(wrapper.findComponent(Skeletons[skeletonType]).exists()).toBe(true);
             });
         });
 
