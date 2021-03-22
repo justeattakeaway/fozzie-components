@@ -1218,6 +1218,21 @@ describe('Checkout', () => {
                         $logger.logWarn
                     );
                 });
+
+                it('should make a call to `handleCheckoutIssues`', () => {
+                    // Arrange
+                    const checkoutIssuesSpy = jest.spyOn(wrapper.vm, 'handleCheckoutIssues');
+                    const eventData = {
+                        isLoggedIn: false,
+                        serviceType: 'delivery'
+                    };
+
+                    // Act
+                    wrapper.vm.processOrderNotFulfillable(eventData);
+
+                    // Assert
+                    expect(checkoutIssuesSpy).toHaveBeenCalled();
+                });
             });
         });
 
