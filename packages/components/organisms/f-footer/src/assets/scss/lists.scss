@@ -1,0 +1,41 @@
+.c-footer-list {
+    padding: 0;
+    list-style: none;
+    list-style-image: none;
+    margin-top: 0;
+    margin-bottom: spacing(x2);
+    margin-left: spacing(x2);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+
+    & > li {
+        margin-bottom: 0;
+
+        &:before {
+            content: none;
+        }
+    }
+
+    @include media('>=wide') {
+        margin: spacing(x2) 0 0 0;
+    }
+
+    .is-collapsed & {
+        display: none;
+    }
+}
+
+.c-footer-list--inline {
+    margin: 0 0 spacing(x2);
+    align-items: center;
+    flex-flow: row wrap;
+
+    @include media('>=wide') {
+        margin-bottom: 0;
+    }
+}
+
+.c-footer-list--noBottomMargin {
+    margin-bottom: 0;
+}
