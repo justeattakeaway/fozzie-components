@@ -8,6 +8,7 @@ import VueCheckout from '../src/components/Checkout.vue';
 import fCheckoutModule from '../src/store/checkout.module';
 import fCheckoutAnalyticsModule from '../src/store/checkoutAnalytics.module';
 import CheckoutMock from '../src/demo/checkoutMock';
+// import CheckoutIssues from '../src/checkout-issues.json';
 
 export default {
     title: 'Components/Organisms',
@@ -53,6 +54,7 @@ export const CheckoutComponent = () => ({
     data () {
         return {
             checkoutAvailableFulfilmentUrl,
+            checkoutState: this.$store._modules.root.state.fCheckoutModule,
             createGuestUrl,
             getAddressUrl,
             loginUrl: '/login',
@@ -73,8 +75,17 @@ export const CheckoutComponent = () => ({
 
         locale: {
             default: select('Locale', [locales.gb])
+        },
+
+        isAsapAvailable: {
+            default: boolean('Is ASAP available', true)
+            // },
+
+        // hasErrors: {
+        //     default: select('Checkout Errors', Object.keys(CheckoutIssues))
         }
     },
+
     computed: {
         getCheckoutUrl () {
             return `/checkout-${this.serviceType}.json`;
@@ -88,12 +99,20 @@ export const CheckoutComponent = () => ({
             return this.isLoggedIn ? mockAuthToken : '';
         }
     },
+
+    watch: {
+        isAsapAvailable () {
+            this.checkoutState.availableFulfilment.isAsapAvailable = this.isASAPAvailable;
+        }
+    },
+
     store: new Vuex.Store({
         modules: {
             fCheckoutModule,
             fCheckoutAnalyticsModule
         }
     }),
+
     template: '<vue-checkout ' +
         ':getCheckoutUrl="getCheckoutUrl" ' +
         ':updateCheckoutUrl="updateCheckoutUrl" ' +
