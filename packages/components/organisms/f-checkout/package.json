@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "0.74.0",
+  "version": "0.75.0",
   "main": "dist/f-checkout.umd.min.js",
   "files": [
     "dist",
@@ -36,7 +36,10 @@
     "test:watch": "vue-cli-service test:unit --watch",
     "test:coverage": "yarn test --coverage",
     "test-component:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite component",
-    "test-a11y:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite a11y"
+    "report:test-component:chrome": "cross-env-shell JE_ENV=local COMPONENT_TYPE=organism wdio ../../../../wdio-chrome.conf.js --suite component && yarn allure:open",
+    "test-a11y:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite a11y", 
+    "allure:open": "yarn allure:clean && allure open",
+    "allure:clean": "rimraf ../../../../test/results/allure"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -59,6 +62,7 @@
     "@justeat/f-card": "0.8.0",
     "@justeat/f-error-message": "0.3.1",
     "@justeat/f-form-field": "1.8.0",
+    "@justeat/f-mega-modal": "0.6.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",

@@ -2,7 +2,6 @@ import { shallowMount } from '@vue/test-utils';
 import Header from '../Header.vue';
 
 describe('Header', () => {
-    allure.feature('Header');
     it('should be defined', () => {
         const propsData = {
             headerBackgroundTheme: 'transparent'

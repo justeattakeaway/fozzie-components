@@ -1,5 +1,11 @@
 <template>
     <div>
+        <error-dialog
+            v-if="shouldShowErrorDialog"
+            :is-open="shouldShowErrorDialog"
+            :error-code="nonFulfillableError.code"
+            @handle-close="handleErrorDialogClose"
+            @checkout-error-dialog-button-click="handleErrorDialogButtonClick" />
         <div
             v-if="shouldShowSpinner"
             :class="$style['c-spinner-wrapper']"
@@ -112,6 +118,7 @@ import CheckoutTermsAndConditions from './TermsAndConditions.vue';
 import FormSelector from './Selector.vue';
 import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
+import ErrorDialog from './ErrorDialog.vue';
 import ErrorPage from './Error.vue';
 
 import {
@@ -145,7 +152,8 @@ export default {
         FormField,
         FormSelector,
         GuestBlock,
-        UserNote
+        UserNote,
+        ErrorDialog
     },
 
     mixins: [validationMixin, VueGlobalisationMixin, checkoutValidationsMixin],
@@ -221,6 +229,7 @@ export default {
     data () {
         return {
             tenantConfigs,
+            nonFulfillableError: null,
             genericErrorMessage: null,
             hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
@@ -261,6 +270,7 @@ export default {
             'messages',
             'notices',
             'orderId',
+            'restaurant',
             'serviceType',
             'time',
             'userNote'
@@ -300,6 +310,14 @@ export default {
 
         shouldShowErrorPage () {
             return !this.hasCheckoutLoadedSuccessfully;
+        },
+
+        shouldShowErrorDialog () {
+            return this.nonFulfillableError ? this.nonFulfillableError.shouldShowInDialog : false;
+        },
+
+        restaurantMenuPageUrl () {
+            return `restaurant-${this.restaurant.seoName}/menu`;
         }
     },
 
@@ -415,6 +433,7 @@ export default {
         },
 
         processOrderNotFulfillable (eventData) {
+            this.handleCheckoutIssues();
             this.logInvoker('Consumer Checkout Not Fulfillable', eventData, this.$logger.logWarn);
         },
 
@@ -470,6 +489,12 @@ export default {
                     : ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE;
 
                 this.trackFormInteraction({ action: 'error', error: [error] });
+            }
+        },
+
+        handleCheckoutIssues () {
+            if (this.errors.length > 0) {
+                this.nonFulfillableError = this.errors.find(error => error.shouldShowInDialog);
             }
         },
 
@@ -777,6 +802,18 @@ export default {
                     this.shouldShowSpinner = true;
                 }
             }, 1000);
+        },
+
+        handleErrorDialogClose () {
+            this.nonFulfillableError = null;
+        },
+
+        handleErrorDialogButtonClick () {
+            if (this.nonFulfillableError.shouldRedirectToMenu) {
+                window.location.assign(this.restaurantMenuPageUrl);
+            }
+
+            this.handleErrorDialogClose();
         }
     },
 
@@ -858,7 +895,7 @@ export default {
     width: $checkout-width;
     margin: 0 auto;
 }
-
+/* If these stay the same then just rename the class to something more generic */
 .c-checkout-submitButton {
     margin: spacing(x4) 0 spacing(x0.5);
 }

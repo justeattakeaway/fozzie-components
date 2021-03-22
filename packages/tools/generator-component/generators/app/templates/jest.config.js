@@ -37,10 +37,6 @@ module.exports = {
         './test/specs/component/'
     ],
 
-    testURL: 'http://localhost/',
-
-    setupFilesAfterEnv: [
-        '../../../../jest.setup.js'
-    ]
+    testURL: 'http://localhost/'
 
 };
