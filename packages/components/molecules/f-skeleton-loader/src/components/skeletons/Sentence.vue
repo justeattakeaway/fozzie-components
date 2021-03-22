@@ -19,6 +19,6 @@ export default {
     max-width: 70%;
 }
 .c-skeleton-loader-text:not(:last-child) {
-    margin-bottom: 6px;
+    margin-bottom: spacing();
 }
 </style>

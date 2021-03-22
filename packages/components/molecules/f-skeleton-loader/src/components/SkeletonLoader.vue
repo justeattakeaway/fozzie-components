@@ -63,7 +63,8 @@ export default {
   }
 // Use /deep/ to ensure scoped class cascades to children within children
 /deep/ .c-skeleton-loader-heading,
-/deep/ .c-skeleton-loader-text {
+/deep/ .c-skeleton-loader-text,
+/deep/ .c-skeleton-loader-image {
     background-color: $skeleton-loader-bone-background-color;
 }
 </style>
