@@ -8,7 +8,7 @@ import VueCheckout from '../src/components/Checkout.vue';
 import fCheckoutModule from '../src/store/checkout.module';
 import fCheckoutAnalyticsModule from '../src/store/checkoutAnalytics.module';
 import CheckoutMock from '../src/demo/checkoutMock';
-// import CheckoutIssues from '../src/checkout-issues.json';
+import CheckoutIssues from '../src/checkout-issues.js';
 
 export default {
     title: 'Components/Organisms',
@@ -49,6 +49,17 @@ const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
     + 'joiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25h'
     + 'bWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
 
+const checkoutErrors = () => {
+    let errors = [];
+    errors = Object.keys(CheckoutIssues);
+    const test = errors.map(error => {
+        const newError = error.replaceAll('_', ' ').toLowerCase();
+        return newError.charAt(0).toUpperCase() + newError.slice(1);
+    });
+    test.unshift('None');
+    return test;
+};
+
 export const CheckoutComponent = () => ({
     components: { VueCheckout },
     data () {
@@ -79,10 +90,10 @@ export const CheckoutComponent = () => ({
 
         isAsapAvailable: {
             default: boolean('Is ASAP available', true)
-            // },
+        },
 
-        // hasErrors: {
-        //     default: select('Checkout Errors', Object.keys(CheckoutIssues))
+        hasErrors: {
+            default: select('Checkout Errors', checkoutErrors())
         }
     },
 
