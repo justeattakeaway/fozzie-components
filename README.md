@@ -87,6 +87,6 @@ Then run `yarn storybook:serve` to start storybook, which will open on `localhos
 
 ## Publishing Components/
 
-See [Fozzie](/https://fozzie.just-eat.com/documentation/open-source/) docs for further information on publishing and releasing (`Mono-repo Overview` and `Module maintenance`):
+See [Fozzie](https://fozzie.just-eat.com/documentation/open-source/) docs for further information on publishing and releasing (`Mono-repo Overview` and `Module maintenance`):
 
 ### [Just Eat Storybook production](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html)
