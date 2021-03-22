@@ -29,17 +29,13 @@ export default {
         margin-bottom: -(spacing(x8));
     }
     .c-skeleton-loader-carouselCardRestaurantHeader,
-    .c-skeleton-loader-restaurantData  {
+    .c-skeleton-loader-restaurantData {
         border: 1px solid $skeleton-loader-bone-background-color;
+        border-top: 0;
     }
 
     .c-skeleton-loader-carouselCardRestaurantHeader {
-        border-top: 0px;
-        border-bottom: 0px;
-    }
-
-    .c-skeleton-loader-restaurantData {
-        border-top: 0px;
+        border-bottom: 0;
     }
 }
 </style>
