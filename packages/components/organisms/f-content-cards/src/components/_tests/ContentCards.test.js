@@ -70,8 +70,6 @@ beforeEach(() => {
 });
 
 describe('ContentCards', () => {
-    allure.feature('Content Cards');
-
     it('should call intitialiseMetadata when mounted', () => {
         // Arrange & Act
         shallowMount(ContentCards, {
