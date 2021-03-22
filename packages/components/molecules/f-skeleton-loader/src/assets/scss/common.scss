@@ -4,3 +4,7 @@
 $theme: 'jet' !default;
 
 @import  '~@justeat/fozzie/src/scss/fozzie';
+
+$skeleton-loader-heading-height: spacing(x4);
+$skeleton-loader-text-height: spacing(x2);
+$skeleton-loader-bone-background-color: $grey--mid;

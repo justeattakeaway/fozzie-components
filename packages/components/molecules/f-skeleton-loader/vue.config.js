@@ -13,8 +13,26 @@ module.exports = {
             .loader('sass-loader')
             .options({
                 ...sassOptions,
-                // eslint-disable-next-line quotes
-                additionalData: `@import "../assets/scss/common.scss";`
+                /**
+                 * Requires sass-loader 7.3.1 - works out the relative path for the common.scss file for each component
+                 *
+                 * @param resourcePath
+                 * @returns {string}
+                 */
+                additionalData (content, { resourcePath }) {
+                    const levelsUpToSrc = resourcePath.split(path.sep).reverse().indexOf('src');
+
+                    const absPath = path.join(
+                        resourcePath,
+                        ...(new Array(levelsUpToSrc).fill('..')),
+                        'assets/scss/common.scss'
+                    );
+                    const relPath = path.relative(path.dirname(resourcePath), absPath)
+                        .replace(new RegExp(path.sep.replace('\\', '\\\\'), 'g'), '/');
+
+                    return `@import "${relPath}";
+                            ${content}`;
+                }
             });
     },
     pluginOptions: {
