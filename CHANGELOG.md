@@ -9,7 +9,7 @@ v3.24.0
 
 ## Changed
 - Refactored `jest-allure2` and `allure-reporter`
-- Added script `report:test-component:chrome` into package.json for automating component test report for organisms
+- Added script `report:test-component:chrome` into package.json for automating component test report
 - Updated generator to reflect changes
 
 
