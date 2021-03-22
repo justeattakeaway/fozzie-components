@@ -260,7 +260,7 @@ describe('Checkout', () => {
             });
         });
 
-        describe('nonFulfillableError', () => {
+        describe('nonFulfillableError ::', () => {
             describe('when `nonFulfillableError.openInDialog` is `true`', () => {
                 it('should show a mega modal displaying the error title and description', () => {
                     // Arrange

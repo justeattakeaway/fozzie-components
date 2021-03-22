@@ -1,8 +1,4 @@
 {
-    "isFulfillable": false,
-    "issues": [
-        {
-            "code": "RESTAURANT_NOT_TAKING_ORDERS"
-        }
-    ]
+    "isFulfillable": true,
+    "issues": []
 }
