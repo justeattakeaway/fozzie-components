@@ -85,7 +85,10 @@ const userNote = 'Beware of the dachshund';
 const defaultState = {
     id: '',
     serviceType: '',
-    restaurantId: '',
+    restaurant: {
+        id: '',
+        seoName: ''
+    },
     basket: {
         id: '',
         total: 0
@@ -210,7 +213,8 @@ describe('CheckoutModule', () => {
                         id: '11111',
                         total: 12.50
                     },
-                    restaurantId: '22222'
+                    restaurantId: '22222',
+                    restaurantSeoName: 'masala-zone-camden'
                 };
                 mutations[UPDATE_BASKET_DETAILS](state, eventData);
 
@@ -325,7 +329,10 @@ describe('CheckoutModule', () => {
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
                 expect(commit).toHaveBeenCalledWith(UPDATE_BASKET_DETAILS, {
                     serviceType: basketDelivery.ServiceType.toLowerCase(),
-                    restaurantId: basketDelivery.RestaurantId,
+                    restaurant: {
+                        id: basketDelivery.RestaurantId,
+                        seoName: basketDelivery.RestaurantSeoName,
+                    },
                     basket: {
                         id: basketDelivery.BasketId,
                         total: basketDelivery.BasketSummary.BasketTotals.Total

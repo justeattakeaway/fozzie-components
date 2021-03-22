@@ -13,7 +13,7 @@ describe('Mobile - f-header component tests', () => {
     });
 
     forEach(['help', 'delivery', 'userAccount', 'countrySelector'])
-    .it.only('should hide all navigation links, except offersIcon link, when in mobile mode', field => {
+    .it('should hide all navigation links, except offersIcon link, when in mobile mode', field => {
         // Act
         header.openWithExtraFeatures();
 
