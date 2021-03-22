@@ -1,6 +1,5 @@
 <template>
     <mega-modal
-        v-if="errorCode"
         :is-open="isOpen"
         data-test-id="checkout-issue-modal"
         has-overlay
@@ -15,9 +14,7 @@
 
         <f-button
             :class="$style['c-checkout-redirectButton']"
-            button-type="primary"
             button-size="large"
-            action-type="button"
             data-test-id="redirect-to-menu-button"
             @click.native="handleButtonClick">
             {{ $t(`errorMessages.checkoutIssues.${errorCode}.buttonText`) }}
@@ -56,7 +53,7 @@ export default {
         },
 
         handleClose () {
-            this.$emit('handle-close');
+            this.$emit(EventNames.CheckoutDialogCloseButtonClicked);
         }
     }
 };

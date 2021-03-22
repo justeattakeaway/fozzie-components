@@ -265,9 +265,6 @@ describe('Checkout', () => {
                 it('should show a mega modal displaying the error title and description', () => {
                     // Arrange
                     const fulfilmentTimeIssue = CheckoutIssues[ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE];
-                    const expectedErrorTitle = 'We do takeaways, not time machines';
-                    const expectedErrorMessage = 'The time you picked for your order isn\'t possible, please choose another.';
-
                     // Act
                     const wrapper = mount(VueCheckout, {
                         i18n,
@@ -289,13 +286,11 @@ describe('Checkout', () => {
                     const errorMessage = wrapper.find('[data-test-id="checkout-issue-modal-message"]');
 
                     // Assert
-                    expect(errorModal.exists()).toBe(true);
+                    expect(errorModal.html()).toMatchSnapshot();
 
-                    expect(errorTitle.exists()).toBe(true);
-                    expect(errorTitle.text()).toBe(expectedErrorTitle);
+                    expect(errorTitle.text()).toMatchSnapshot();
 
-                    expect(errorMessage.text()).toBe(expectedErrorMessage);
-                    expect(errorMessage.exists()).toBe(true);
+                    expect(errorMessage.text()).toMatchSnapshot();
                 });
             });
         });

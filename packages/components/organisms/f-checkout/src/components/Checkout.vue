@@ -5,7 +5,7 @@
             :is-open="shouldShowErrorDialog"
             :error-code="nonFulfillableError.code"
             @handle-close="handleErrorDialogClose"
-            @error-dialog-button-click="handleErrorDialogButtonClick" />
+            @checkout-error-dialog-button-click="handleErrorDialogButtonClick" />
         <div
             v-if="shouldShowSpinner"
             :class="$style['c-spinner-wrapper']"
@@ -313,10 +313,7 @@ export default {
         },
 
         shouldShowErrorDialog () {
-            if (this.nonFulfillableError) {
-                return this.nonFulfillableError.shouldShowInDialog;
-            }
-            return false;
+            return this.nonFulfillableError ? this.nonFulfillableError.shouldShowInDialog : false;
         },
 
         restaurantMenuPageUrl () {
