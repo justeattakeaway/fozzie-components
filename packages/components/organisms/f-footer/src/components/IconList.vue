@@ -9,14 +9,19 @@
         data-test-id="footerBrands-column">
         <h2
             v-if="title"
-            class="c-footer-heading c-footer-heading--shortBelowWide">
+            :class="[
+                $style['c-footer-heading'],
+                $style['c-footer-heading--shortBelowWide']
+            ]">
             {{ title }}
         </h2>
 
         <ul
-            :class="['c-footer-list c-footer-list--inline', {
-                'c-footer-list--noBottomMargin': isApps
-            }]">
+            :class="[
+                $style['c-footer-list'],
+                $style['c-footer-list--inline'],
+                { [$style['c-footer-list--noBottomMargin']]: isApps }
+            ]">
             <li
                 v-for="(icon, i) in icons"
                 :key="i + '_Icon'"
@@ -100,6 +105,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@import '../assets/scss/headings.scss';
+@import '../assets/scss/lists.scss';
 
 .c-iconList {
     svg {
@@ -138,8 +145,8 @@ export default {
     }
 
     svg {
-       height: 40px;
-       width: 135px;
+        height: 40px;
+        width: 135px;
     }
 }
 

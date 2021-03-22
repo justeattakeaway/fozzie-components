@@ -8,12 +8,12 @@ $theme: 'jet' !default;
 /**
  * Component Variables
  */
- $footer-bgColor         : $grey--light !default;
- $footer-bgLight         : $grey--lighter !default;
- $footer-textColor       : $color-text !default;
- $footer-borderColor     : $color-border !default;
- $footer-chevronColor    : $grey--darkest !default;
- $footer-socialIconColor : $grey--darkest !default;
+$footer-bgColor            : $grey--light !default;
+$footer-bgLight            : $grey--lighter !default;
+$footer-textColor          : $color-text !default;
+$footer-borderColor        : $color-border !default;
+$footer-chevronColor       : $grey--darkest !default;
+$footer-socialIconColor    : $grey--darkest !default;
 
 @mixin theme($type) {
     [data-theme-footer="#{$type}"] & {

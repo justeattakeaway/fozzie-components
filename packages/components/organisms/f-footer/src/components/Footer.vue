@@ -1,29 +1,36 @@
 <template>
     <footer
         :data-theme="theme"
-        class="c-footer"
+        :class="$style['c-footer']"
         data-test-id="footer-component">
         <div
-            class="c-footer-container c-footer-row c-footer-row--noPadBelowWide">
+            :class="[
+                $style['c-footer-container'],
+                $style['c-footer-row'],
+                $style['c-footer-row--noPadBelowWide']
+            ]">
             <link-list
                 v-for="(linkList, i) in copy.linkLists"
                 :key="i + '_ButtonList'"
                 :link-list="linkList" />
         </div>
 
-        <div class="c-footer-light">
-            <div class="c-footer-container">
+        <div :class="$style['c-footer-light']">
+            <div :class="$style['c-footer-container']">
                 <div
                     v-if="copy.linkButtonList.length && showCourierLinks"
                     data-test-id="courierLinks-wrapper"
-                    class="c-footer-row c-footer-row--noBottomPad">
+                    :class="[
+                        $style['c-footer-row'],
+                        $style['c-footer-row--noBottomPad']
+                    ]">
                     <button-list
                         v-for="(buttonList, i) in copy.linkButtonList"
                         :key="i + '_ButtonList'"
                         :button-list="buttonList" />
                 </div>
 
-                <div class="c-footer-row">
+                <div :class="$style['c-footer-row']">
                     <icon-list
                         :title="copy.downloadOurApps"
                         :icons="copy.appStoreIcons"
@@ -44,8 +51,14 @@
         </div>
 
         <div
-            :class="['c-footer-container c-footer-row c-footer-row--combined c-footer-row--notEqualTopAndBottomPad c-footer-row--noPadBelowWide',
-                     { 'c-footer-row--rightAlignedAboveWide': !showCountrySelector }]">
+            :class="[
+                $style['c-footer-container'],
+                $style['c-footer-row'],
+                $style['c-footer-row--combined'],
+                $style['c-footer-row--notEqualTopAndBottomPad'],
+                $style['c-footer-row--noPadBelowWide'],
+                { [$style['c-footer-row--rightAlignedAboveWide']]: !showCountrySelector }
+            ]">
             <country-selector
                 v-if="showCountrySelector"
                 data-test-id="country-selector"
@@ -56,7 +69,7 @@
 
             <legal-field
                 v-if="metaLegalFieldEnabled"
-                :class="[{ 'c-footer-row-item--fullWidthAboveWide': !showCountrySelector }]"
+                :class="{ [$style['c-footer-row-item--fullWidthAboveWide']]: !showCountrySelector }"
                 :info="copy.metaLegalField" />
 
             <icon-list
@@ -121,10 +134,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
-
-$footer-heading-font-size: 'heading-s';
-
+<style lang="scss" module>
 .c-footer {
     background-color: $footer-bgColor;
     color: $footer-textColor;
@@ -138,43 +148,6 @@ $footer-heading-font-size: 'heading-s';
     width: 100%;
     max-width: #{$layout-max-width}px;
     margin: 0 auto;
-}
-
-.c-footer-heading {
-    @include font-size($footer-heading-font-size);
-    font-family: $font-family-base;
-    font-weight: $font-weight-headings;
-    padding: spacing(x2);
-    padding-left: 0;
-}
-
-.c-footer-heading--shortBelowWide {
-    @include media('<wide') {
-        padding: 0 0 spacing();
-    }
-}
-
-.c-footer-heading--button {
-    align-items: center;
-    background: none;
-    border-style: none;
-    color: $color-headings;
-    display: flex;
-    font-weight: $font-weight-headings;
-    justify-content: space-between;
-    margin: 0;
-    padding: spacing(x2);
-    text-align: left;
-    width: 100%;
-    @include font-size($footer-heading-font-size);
-
-    @include media('<wide') {
-        cursor: pointer;
-    }
-
-    @include media('>=wide') {
-        padding: 0;
-    }
 }
 
 .c-footer-row {
@@ -228,47 +201,4 @@ $footer-heading-font-size: 'heading-s';
         flex: 1;
     }
 }
-
-.c-footer-list {
-    padding: 0;
-    list-style: none;
-    list-style-image: none;
-    margin-top: 0;
-    margin-bottom: spacing(x2);
-    margin-left: spacing(x2);
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-
-    & > li {
-        margin-bottom: 0;
-
-        &:before {
-            content: none;
-        }
-    }
-
-    @include media('>=wide') {
-        margin: spacing(x2) 0 0 0;
-    }
-
-    .is-collapsed & {
-        display: none;
-    }
-}
-
-.c-footer-list--inline {
-    margin: 0 0 spacing(x2);
-    align-items: center;
-    flex-flow: row wrap;
-
-    @include media('>=wide') {
-        margin-bottom: 0;
-    }
-}
-
-.c-footer-list--noBottomMargin {
-    margin-bottom: 0;
-}
-
 </style>

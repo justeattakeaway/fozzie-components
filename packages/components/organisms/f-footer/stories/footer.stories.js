@@ -1,6 +1,6 @@
 import { select, boolean } from '@storybook/addon-knobs';
-import VueFooter from '../src/components/Footer.vue';
 import { withA11y } from '@storybook/addon-a11y';
+import VueFooter from '../src/components/Footer.vue';
 
 export default {
     title: 'Components/Organisms',
@@ -25,7 +25,7 @@ export const FooterComponent = () => ({
             default: select('Locale', ['en-GB', 'en-AU', 'da-DK', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO'])
         },
         showCourierLinks: {
-            default: boolean('Show courier links', false)
+            default: boolean('Show courier links', true)
         },
         showCountrySelector: {
             default: boolean('Show country selector', false)
