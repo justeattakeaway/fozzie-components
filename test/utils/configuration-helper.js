@@ -28,7 +28,7 @@ exports.local = () => ({
         }],
         ['allure', {
             outputDir: `${global.baseDir}/test/results/allure`,
-            disableWebdriverStepsReporting: false,
+            disableWebdriverStepsReporting: true,
             disableWebdriverScreenshotsReporting: false,
             disableMochaHooks: true
         }]] : []
