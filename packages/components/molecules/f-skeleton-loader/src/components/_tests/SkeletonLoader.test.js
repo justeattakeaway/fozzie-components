@@ -1,6 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
 import SkeletonLoader from '../SkeletonLoader.vue';
-// import TextBlock from '../skeletons/Text.vue';
 import * as Skeletons from '../skeletons';
 
 const defaultProps = {};
@@ -24,7 +23,9 @@ describe('SkeletonLoader', () => {
 
     describe('props', () => {
         describe('skeletonType validator', () => {
-            it.each([[true, 'Heading'], [true, 'TextBlock'], [true, 'Sentence'], [false, 'NotAValidType']])('should return %p when %s is passed', (expected, skeletonTypeValue) => {
+            it.each([
+                [true, 'Heading'], [true, 'TextBlock'], [true, 'Sentence'], [false, 'NotAValidType']
+            ])('should return %p when %s is passed', (expected, skeletonTypeValue) => {
                 // Arrange & Act
                 const wrapper = makeWrapper();
                 const prop = wrapper.vm.$options.props.skeletonType;
