@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.50.0
+------------------------------
+*March 29, 2021*
+
+### Added
+- A11y markup to support screen-reader
+
 v0.49.1
 ------------------------------
 *March 23, 2021*

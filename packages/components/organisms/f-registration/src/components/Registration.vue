@@ -11,7 +11,7 @@
             :class="$style['c-registration-card']">
             <bag-celebrate-icon :class="$style['c-registration-icon']" />
             <p
-                v-if="showLoginLink"
+                v-show="showLoginLink"
                 :class="[
                     $style['c-registration-link'],
                     $style['c-registration-link--subtitle']
@@ -31,11 +31,10 @@
                     :class="$style['is-visuallyHidden']"
                     role="alert"
                     data-test-id="error-summary-container">
-                    <p
-                        v-if="genericErrorMessage"
-                        :class="$style['o-form-error']">
+                    <error-message v-show="genericErrorMessage"
+                                   :class="$style['c-registration-genericError']">
                         {{ genericErrorMessage }}
-                    </p>
+                    </error-message>
                 </section>
 
                 <form-field
@@ -48,15 +47,12 @@
                     :label-text="copy.labels.firstName"
                     input-type="text"
                     @blur="formFieldBlur('firstName')">
-                    <template
-                        v-if="describeFirstnameErrorMessage"
-                        #error>
-                        <p
-                            id="error-message-firstname"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-message-firstname'>
+                    <template v-show="describeFirstnameErrorMessage"
+                              #error>
+                        <error-message
+                            :class="$style['c-registration-genericError']">
                             {{ describeFirstnameErrorMessage }}
-                        </p>
+                        </error-message>
                     </template>
                 </form-field>
 
@@ -71,14 +67,12 @@
                     :aria-invalid="!!describeLastnameErrorMessage"
                     @blur="formFieldBlur('lastName')">
                     <template
-                        v-if="describeLastnameErrorMessage"
+                        v-show="describeLastnameErrorMessage"
                         #error>
-                        <p
-                            id="error-message-lastname"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-message-lastname'>
+                        <error-message
+                            :class="$style['c-registration-genericError']">
                             {{ describeLastnameErrorMessage }}
-                        </p>
+                        </error-message>
                     </template>
                 </form-field>
 
@@ -93,14 +87,12 @@
                     input-type="email"
                     @blur="formFieldBlur('email')">
                     <template
-                        v-if="describeEmailErrorMessage"
+                        v-show="describeEmailErrorMessage"
                         #error>
-                        <p
-                            id="error-message-email"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-message-email'>
+                        <error-message
+                            :class="$style['c-registration-genericError']">
                             {{ describeEmailErrorMessage }}
-                        </p>
+                        </error-message>
                     </template>
                 </form-field>
 
@@ -115,14 +107,12 @@
                     input-type="password"
                     @blur="formFieldBlur('password')">
                     <template
-                        v-if="describePasswordErrorMessage"
+                        v-show="describePasswordErrorMessage"
                         #error>
-                        <p
-                            id="error-message-password"
-                            :class="$style['o-form-error']"
-                            data-test-id='error-message-password'>
+                        <error-message
+                            :class="$style['c-registration-genericError']">
                             {{ describePasswordErrorMessage }}
-                        </p>
+                        </error-message>
                     </template>
                 </form-field>
 
@@ -173,6 +163,7 @@ import CardComponent from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
+import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import tenantConfigs from '../tenants';
 import RegistrationServiceApi from '../services/RegistrationServiceApi';
@@ -212,7 +203,8 @@ export default {
         FButton,
         CardComponent,
         FormField,
-        BagCelebrateIcon
+        BagCelebrateIcon,
+        ErrorMessage
     },
 
     mixins: [validationMixin],
