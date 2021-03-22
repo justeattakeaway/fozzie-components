@@ -6,7 +6,7 @@ export default {
             prefix: 'By creating an account you agree to our ',
             suffix: '.',
             text: 'Terms and Conditions',
-            url: '/info/terms-and-conditions'
+            url: '/info/privacy-policy'
         },
         privacyPolicy: {
             prefix: 'Please read our ',
@@ -15,9 +15,9 @@ export default {
         },
         cookiesPolicy: {
             prefix: ' and ',
+            suffix: '.',
             text: 'Cookie Policy',
-            url: '/info/cookies-policy',
-            suffix: '.'
+            url: '/info/privacy-policy'
         },
         login: {
             text: 'Already on Menulog?'
