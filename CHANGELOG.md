@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.23.0
 ------------------------------
-*March 19, 2021*
+*March 22, 2021*
 
 ## Changed
 - Refactored `jest-allure2` and `allure-reporter`
