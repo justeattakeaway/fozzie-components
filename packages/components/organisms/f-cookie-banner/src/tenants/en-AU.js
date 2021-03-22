@@ -8,7 +8,7 @@ const messages = {
     textLine3: 'For details about the cookies and technologies we use, see our ',
     textLine4: '.  Using this banner will set a cookie on your device to remember your preferences.',
     cookiePolicyLinkText: 'cookies notice',
-    cookiePolicyLinkUrl: 'https://www.menulog.com.au/info/cookies-policy',
+    cookiePolicyLinkUrl: 'https://www.menulog.com.au/info/privacy-policy#cookies_policy',
     legacyBannerText: 'We use cookies to improve your browsing experience. By continuing, you agree to receive cookies on our website.',
     legacyBannerLinkText: 'Learn more about our cookies policy.',
     legacyBannerCloseBannerText: 'Close cookie banner'

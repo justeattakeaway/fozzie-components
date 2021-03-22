@@ -1,13 +1,13 @@
 {
-  "name": "@justeat/f-cookie-banner",
-  "description": "Fozzie Cookie Banner – Cookie Banner",
-  "version": "0.6.0",
-  "main": "dist/f-cookie-banner.umd.min.js",
+  "name": "@justeat/f-skeleton-loader",
+  "description": "Fozzie Skeleton Loader - Provides a visual indication that another component is loading. ",
+  "version": "0.1.0",
+  "main": "dist/f-skeleton-loader.umd.min.js",
   "files": [
     "dist",
     "test-utils"
   ],
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/organisms/f-cookie-banner",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-skeleton-loader",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -27,22 +27,13 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-cookie-banner ./src/index.js",
-    "demo": "vue serve --port 8080 ./src/demo/Index.vue",
+    "build": "vue-cli-service build --target lib --name f-skeleton-loader ./src/index.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite component",
-<<<<<<< HEAD
-    "report:test-component:chrome": "cross-env-shell JE_ENV=local COMPONENT_TYPE=organism wdio ../../../../wdio-chrome.conf.js --suite component && yarn allure:open",
-    "test-a11y:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite a11y", 
-    "allure:open": "yarn allure:clean && allure open",
-    "allure:clean": "rimraf ../../../../test/results/allure"
-=======
-    "test-component:browserstack": "cross-env-shell JE_ENV=browserstack wdio ../../../../wdio-browserstack.conf.js --suite shared",
     "test-a11y:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite a11y"
->>>>>>> master
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -51,12 +42,9 @@
     "@justeat/f-services": "1.7.0"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.1.1",
-    "js-cookie": "2.2.1"
+    "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-    "@justeat/f-button": "1.0.0",
-    "@justeat/f-vue-icons": "2.3.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",

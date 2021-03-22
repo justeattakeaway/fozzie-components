@@ -125,6 +125,70 @@ describe('Selector', () => {
                 expect(wrapper.vm.fulfilmentTimes).toEqual(expectedTimes);
             });
         });
+
+        describe('shouldShowPreOrderWarning', () => {
+            let wrapper;
+
+            describe('when asap is not available', () => {
+                beforeEach(() => {
+                    wrapper = shallowMount(Selector, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            availableFulfilment: {
+                                times: fulfilmentTimes,
+                                isAsapAvailable: false
+                            }
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should return `true`', () => {
+                    // Assert
+                    expect(wrapper.vm.shouldShowPreOrderWarning).toBeTruthy();
+                });
+
+                it('should render warning message', () => {
+                    // Arrange
+                    const preOrderWarning = wrapper.find('[data-test-id="warning-pre-order"]');
+
+                    // Assert
+                    expect(preOrderWarning.exists()).toBeTruthy();
+                });
+            });
+
+            describe('when asap is available', () => {
+                beforeEach(() => {
+                    wrapper = shallowMount(Selector, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            availableFulfilment: {
+                                times: fulfilmentTimes,
+                                isAsapAvailable: true
+                            }
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                });
+
+                it('should return `false`', () => {
+                    // Assert
+                    expect(wrapper.vm.shouldShowPreOrderWarning).toBeFalsy();
+                });
+
+                it('should not render warning message', () => {
+                    // Arrange
+                    const preOrderWarning = wrapper.find('[data-test-id="warning-pre-order"]');
+
+                    // Assert
+                    expect(preOrderWarning.exists()).toBeFalsy();
+                });
+            });
+        });
     });
 
     describe('methods ::', () => {

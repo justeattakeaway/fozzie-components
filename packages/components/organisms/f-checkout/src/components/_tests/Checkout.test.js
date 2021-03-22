@@ -258,26 +258,6 @@ describe('Checkout', () => {
         });
     });
 
-    describe('props ::', () => {
-        describe('authToken ::', () => {
-            it('should store auth token', async () => {
-                // Arrange
-                const setAuthToken = jest.fn();
-
-                // Act
-                shallowMount(VueCheckout, {
-                    store: createStore(defaultCheckoutState, { ...defaultCheckoutActions, setAuthToken }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Assert
-                expect(setAuthToken).toHaveBeenCalled();
-            });
-        });
-    });
-
     describe('computed ::', () => {
         describe('isMobileNumberValid ::', () => {
             let wrapper;
@@ -524,39 +504,39 @@ describe('Checkout', () => {
 
     describe('mounted ::', () => {
         let initialiseSpy;
+        let setAuthTokenSpy;
         let trackInitialLoadSpy;
+        let wrapper;
 
         beforeEach(() => {
             initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
+            setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
             trackInitialLoadSpy = jest.spyOn(VueCheckout.methods, 'trackInitialLoad');
+
+            wrapper = shallowMount(VueCheckout, {
+                store: createStore(),
+                i18n,
+                localVue,
+                propsData
+            });
         });
 
         afterEach(() => {
             jest.clearAllMocks();
         });
 
-        it('should call `initialise`', () => {
-            // Act
-            shallowMount(VueCheckout, {
-                store: createStore(),
-                i18n,
-                localVue,
-                propsData
-            });
+        it('should call `setAuthToken`', () => {
+            // Assert
+            expect(setAuthTokenSpy).toHaveBeenCalledWith(wrapper.vm.authToken);
+        });
 
+        it('should call `initialise`', () => {
             // Assert
             expect(initialiseSpy).toHaveBeenCalled();
         });
 
         it('should call `trackInitialLoad`', async () => {
             // Act
-            const wrapper = shallowMount(VueCheckout, {
-                store: createStore(),
-                i18n,
-                localVue,
-                propsData
-            });
-
             await wrapper.vm.initialise();
 
             // Assert
@@ -570,26 +550,6 @@ describe('Checkout', () => {
         });
 
         describe('initialise ::', () => {
-            it('should call `setAuthToken`', () => {
-                // Arrange & Act
-                const setAuthTokenSpy = jest.spyOn(VueCheckout.methods, 'setAuthToken');
-
-                const propsDataWithAuthToken = {
-                    ...propsData,
-                    authToken: 'mytoken'
-                };
-
-                shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData: propsDataWithAuthToken
-                });
-
-                // Assert
-                expect(setAuthTokenSpy).toHaveBeenCalledWith(propsDataWithAuthToken.authToken);
-            });
-
             it('should call `loadBasket`', async () => {
                 // Arrange & Act
                 const loadBasketSpy = jest.spyOn(VueCheckout.methods, 'loadBasket');
@@ -2498,28 +2458,84 @@ describe('Checkout', () => {
 
     describe('watch ::', () => {
         describe('authToken ::', () => {
-            afterEach(() => {
-                jest.clearAllMocks();
-            });
+            describe('when invoked', () => {
+                it('should make a call to `setAuthToken` to set the updated authToken', async () => {
+                    // Arrange
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+                    const setAuthTokenSpy = jest.spyOn(wrapper.vm, 'setAuthToken');
 
-            it('should call `initialise`', async () => {
-                // Arrange
-                const initialiseSpy = jest.spyOn(VueCheckout.methods, 'initialise');
+                    // Act
+                    await wrapper.vm.$options.watch.authToken[0].call(wrapper.vm);
 
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
+                    // Assert
+                    expect(setAuthTokenSpy).toHaveBeenCalledWith(wrapper.vm.authToken);
                 });
 
-                jest.clearAllMocks(); // Reset the mock calls given the initialise function gets called upon mount.
+                describe('AND the token changes from falsey > truthy', () => {
+                    it('should make a call to `initialise` so we can reload checkout when the authToken updates', async () => {
+                        // Arrange
+                        const wrapper = shallowMount(VueCheckout, {
+                            store: createStore(),
+                            i18n,
+                            localVue,
+                            propsData
+                        });
+                        const initialiseSpy = jest.spyOn(wrapper.vm, 'initialise');
 
-                // Act
-                await wrapper.vm.$options.watch.authToken[0].call(wrapper.vm);
+                        // Act
+                        await wrapper.vm.$options.watch.authToken[0].call(wrapper.vm, '', 'NewToken');
 
-                // Assert
-                expect(initialiseSpy).toHaveBeenCalled();
+                        // Assert
+                        expect(initialiseSpy).toHaveBeenCalled();
+                    });
+                });
+
+                describe('AND the token changes from truthy > falsey', () => {
+                    it('should make a call to `initialise` so we can reload checkout when the authToken updates', async () => {
+                        // Arrange
+                        const wrapper = shallowMount(VueCheckout, {
+                            store: createStore(),
+                            i18n,
+                            localVue,
+                            propsData
+                        });
+
+                        const initialiseSpy = jest.spyOn(wrapper.vm, 'initialise');
+
+                        // Act
+                        await wrapper.vm.$options.watch.authToken[0].call(wrapper.vm, 'NewToken', '');
+
+                        // Assert
+                        expect(initialiseSpy).toHaveBeenCalled();
+                    });
+                });
+
+                describe('AND the token changes / refreshes from truthy > truthy', () => {
+                    it('should NOT make a call to `initialise` to avoid a checkout refresh', async () => {
+                        // Arrange
+                        const wrapper = shallowMount(VueCheckout, {
+                            store: createStore(),
+                            i18n,
+                            localVue,
+                            propsData: {
+                                ...propsData,
+                                authToken: 'kevin'
+                            }
+                        });
+                        const initialiseSpy = jest.spyOn(wrapper.vm, 'initialise');
+
+                        // Act
+                        await wrapper.vm.$options.watch.authToken[0].call(wrapper.vm, 'NewToken', 'OldToken');
+
+                        // Assert
+                        expect(initialiseSpy).not.toHaveBeenCalled();
+                    });
+                });
             });
         });
     });

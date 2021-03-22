@@ -304,12 +304,28 @@ export default {
     },
 
     watch: {
-        async authToken () {
-            await this.initialise();
+        /**
+         *
+         * Only reload checkout if the token changes as below:
+         * Truthy > Falsey
+         * Falsey > Truthy
+         *
+         * Do not reload checkout if the token changes from one token to another token
+         * as it will always be valid.
+         *
+         * */
+        async authToken (newTokenVal, oldTokenVal) {
+            this.setAuthToken(this.authToken);
+
+            if ((!newTokenVal && oldTokenVal) || (!oldTokenVal && newTokenVal)) {
+                await this.initialise();
+            }
         }
     },
 
     async mounted () {
+        this.setAuthToken(this.authToken);
+
         await this.initialise();
         this.trackInitialLoad();
     },
@@ -342,7 +358,6 @@ export default {
          */
         async initialise () {
             this.isLoading = true;
-            this.setAuthToken(this.authToken);
 
             this.startSpinnerCountdown();
 
