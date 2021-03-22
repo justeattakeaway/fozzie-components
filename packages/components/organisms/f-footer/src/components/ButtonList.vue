@@ -37,7 +37,6 @@ export default {
 
 <style lang="scss" module>
 @import '../assets/scss/headings.scss';
-
 $buttonList-font-size: 'subheading-s';
 
 .c-buttonList {

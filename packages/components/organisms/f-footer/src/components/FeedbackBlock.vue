@@ -50,7 +50,6 @@ export default {
 
 <style lang="scss" module>
 @import '../assets/scss/headings.scss';
-
 $feedback-btn-font-size: 'body-s';
 
 .c-feedback {
