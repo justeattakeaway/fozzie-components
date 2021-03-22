@@ -65,7 +65,8 @@ export default {
                 },
                 basket: rootState[VUEX_CHECKOUT_MODULE].basket,
                 restaurant: {
-                    id: rootState[VUEX_CHECKOUT_MODULE].restaurantId
+                    id: rootState[VUEX_CHECKOUT_MODULE].restaurant.id,
+                    seoName: rootState[VUEX_CHECKOUT_MODULE].restaurant.seoName
                 },
                 pageData: {
                     name: `Checkout 1 ${pageName}`,
