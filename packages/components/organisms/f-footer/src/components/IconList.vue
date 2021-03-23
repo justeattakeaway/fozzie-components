@@ -129,6 +129,7 @@ export default {
         width: 28px;
     }
 }
+
 .c-iconList--apps {
 
     .c-iconList-listItem {
@@ -160,4 +161,5 @@ export default {
         max-width: 67px;
     }
 }
+
 </style>

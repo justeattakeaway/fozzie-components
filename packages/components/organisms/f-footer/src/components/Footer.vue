@@ -255,8 +255,8 @@ $footer-heading-font-size: 'heading-s';
     .is-collapsed & {
         display: none;
     }
-
 }
+
 .c-footer-list--inline {
     margin: 0 0 spacing(x2);
     align-items: center;
