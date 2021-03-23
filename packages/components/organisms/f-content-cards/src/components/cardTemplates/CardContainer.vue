@@ -154,18 +154,15 @@ export default {
 </script>
 
 <style lang="scss" module>
+    @import '../../../src/assets/scss/card-styles';
 
     .c-content-card-body {
         flex-grow: 1;
     }
 
     .c-contentCard {
-        width: 100%;
-        text-decoration: initial;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
+        @include card-container;
+
         margin-right: spacing(x2);
         margin-bottom: spacing(x2);
 
@@ -177,22 +174,8 @@ export default {
             margin-right: 0;
         }
 
-        &,
-        &:hover,
-        &:focus {
-            color: currentColor;
-        }
-
         .c-contentCards--wrap & {
-            display: flex;
-            flex-direction: column;
-            flex: 0 0 40%;
-            margin: 0 spacing() spacing(x3) 0;
-            width: 100%;
-
-            @include media('>=narrowMid') {
-                margin: 0 spacing() spacing(x3);
-            }
+            @include card-container-wrapped;
         }
 
         /**
@@ -225,13 +208,9 @@ export default {
     }
 
     .c-contentCard-bgImg {
-        width: 100%;
+        @include card-bg-image;
+
         min-height: 170px;
-        background-repeat: repeat;
-        background-size: cover;
-        background-color: $grey--lighter;
-        background-position: center;
-        border-radius: $border-radius $border-radius 0 0;
     }
 
     .c-contentCard-title {
@@ -281,10 +260,10 @@ export default {
     }
 
     .c-contentCard-thumbnail {
-        border: 1px solid $grey--lighter;
-        margin-top: - (32px + spacing(x2)); // This offsets the thumbnail above the top of the info card
-        width: 48px;
-        min-height: 48px;
+            border: 1px solid $grey--lighter;
+            margin-top: - (32px + spacing(x2)); // This offsets the thumbnail above the top of the info card
+            width: 48px;
+            min-height: 48px;
     }
 
     .c-postOrderCardContainer {
