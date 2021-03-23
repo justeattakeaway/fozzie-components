@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "main": "dist/f-vue-icons.cjs.js",
   "cdn": "dist/f-vue-icons.min.js",
   "unpkg": "dist/f-vue-icons.min.js",

@@ -1946,24 +1946,6 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
-"@justeat/f-alert@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-0.4.0.tgz#af85055308d8898a6cb63ec153edcbeebbe4b839"
-  integrity sha512-rc8uauczDZABPmwWnMHo+MR+w+Wy0a5OB+GLOBzi9q9QCGyDzs2XSCBwG+X1C8YXYGOolq/U3QViNsQmcgVP/w==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-"@justeat/f-braze-adapter@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-3.0.0.tgz#651852ec8e7a2e4632a8dc3880d67163387180db"
-  integrity sha512-9IaZGfD92VtWkPIYlkwFOQXPfzbYd0Qn0uYRzk4nI02j5csiVRkzbxtmhGQZRPaiY+PiGqH9JaL9weBBvN0M6w==
-  dependencies:
-    appboy-web-sdk "2.5.2"
-    date-fns "2.16.1"
-    lodash.findindex "4.6.0"
-    lodash.orderby "4.6.0"
-    lodash.startswith "4.2.1"
-    lodash.uniq "4.5.0"
-
 "@justeat/f-button@0.4.1":
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.4.1.tgz#6b735093286422f579bd41cee93400a4d32d1b2d"
@@ -2150,6 +2132,13 @@
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-2.3.0.tgz#8fddbd2f48bc63efa3d162c81a4e79e22874b09a"
   integrity sha512-bXcAy5T79LH0rS16v62Lh4VwxG7W7t8C9SlgY0KJIK99IZiV3bJS2MK+sIQvWmLMZIJi4qxNeWhUFVXHqPaTuw==
+  dependencies:
+    babel-helper-vue-jsx-merge-props "2.0.3"
+
+"@justeat/f-vue-icons@2.4.0":
+  version "2.4.0"
+  resolved "http://packages.je-labs.com/npm/private-npm/@justeat/f-vue-icons/-/f-vue-icons-2.4.0.tgz#aad0aa3563ff726043da9d29e8456435176ae913"
+  integrity sha1-qtCqNWP/cmBD2p0p6EVkNRdq6RM=
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
