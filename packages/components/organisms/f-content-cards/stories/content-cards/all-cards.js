@@ -44,7 +44,6 @@ export default function ContentCardsBraze (args, { argTypes }) {
                 :user-id="userId"
                 :api-key="apiKey"
                 :locale="locale"
-                :custom-cards="customCards"
                 :key="locale"
             >
                 <template #${STATE_DEFAULT}="{ cards }">
@@ -56,7 +55,6 @@ export default function ContentCardsBraze (args, { argTypes }) {
                         :is="handleCustomCardType(card.type)"
                         :key="i"
                         :card="card"
-                        :tenant="tenant"
                     />
                 </template>
             </content-cards>`
