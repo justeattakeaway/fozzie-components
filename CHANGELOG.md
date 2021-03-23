@@ -10,6 +10,17 @@ v3.25.0
 ## Added
 - launch.json to provide ability to run / debug individual WDIO test specs against chrome / browserstack
 
+v3.24.1
+------------------------------
+*March 23, 2021*
+
+## Added
+- `f-wdio-utils` package to all component folders 
+- `f-wdio-utils` package to generator
+
+### Removed
+- `f-wdio-utils` from root package.json
+
 
 v3.24.0
 ------------------------------
