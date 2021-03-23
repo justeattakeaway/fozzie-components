@@ -25,7 +25,7 @@ export const FooterComponent = () => ({
             default: select('Locale', ['en-GB', 'en-AU', 'da-DK', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO'])
         },
         showCourierLinks: {
-            default: boolean('Show courier links', true)
+            default: boolean('Show courier links', false)
         },
         showCountrySelector: {
             default: boolean('Show country selector', false)

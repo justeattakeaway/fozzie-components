@@ -9,11 +9,7 @@
             "action": "footer",
             "label": "click_feedback"
         }'>
-        <h2
-            :class="[
-                $style['c-footer-heading'],
-                $style['c-footer-heading--shortBelowWide']
-            ]">
+        <h2 class="c-footer-heading c-footer-heading--shortBelowWide">
             {{ title }}
         </h2>
 
@@ -34,12 +30,10 @@ export default {
             type: String,
             default: ''
         },
-
         text: {
             type: String,
             default: ''
         },
-
         buttonText: {
             type: String,
             default: ''
@@ -49,20 +43,15 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/headings.scss';
-
 $feedback-btn-font-size: 'body-s';
-
 .c-feedback {
     @include media('<wide') {
         order: 1;
     }
 }
-
 .c-feedback-text {
     margin: 0 0 spacing(x0.5) 0;
 }
-
 .c-feedback-button {
     border: 0;
     background-color: transparent;
@@ -72,7 +61,6 @@ $feedback-btn-font-size: 'body-s';
     font-weight: 500;
     @include font-size($feedback-btn-font-size);
     text-decoration: underline;
-
     &:hover {
         cursor: pointer;
         color: $color-link-hover;

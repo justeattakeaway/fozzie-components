@@ -9,19 +9,14 @@
         data-test-id="footerBrands-column">
         <h2
             v-if="title"
-            :class="[
-                $style['c-footer-heading'],
-                $style['c-footer-heading--shortBelowWide']
-            ]">
+            class="c-footer-heading c-footer-heading--shortBelowWide">
             {{ title }}
         </h2>
 
         <ul
-            :class="[
-                $style['c-footer-list'],
-                $style['c-footer-list--inline'],
-                { [$style['c-footer-list--noBottomMargin']]: isApps }
-            ]">
+            :class="['c-footer-list c-footer-list--inline', {
+                'c-footer-list--noBottomMargin': isApps
+            }]">
             <li
                 v-for="(icon, i) in icons"
                 :key="i + '_Icon'"
@@ -63,39 +58,32 @@ export default {
         AppStoreIcon,
         BaseProviderIcon
     },
-
     props: {
         icons: {
             type: Array,
             required: true
         },
-
         title: {
             type: String,
             default: ''
         },
-
         isApps: {
             type: Boolean,
             default: false
         },
-
         isPayments: {
             type: Boolean,
             default: false
         },
-
         isSocial: {
             type: Boolean,
             default: false
         },
-
         locale: {
             type: String,
             default: 'en-GB'
         }
     },
-
     computed: {
         iconChoice () {
             return this.isApps ? 'app-store-icon' : 'base-provider-icon';
@@ -105,68 +93,52 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/headings.scss';
-@import '../assets/scss/lists.scss';
-
 .c-iconList {
     svg {
         height: 25px;
     }
 }
-
 .c-iconList-listItem {
     margin-bottom: spacing();
     margin-right: spacing(x3);
-
     a,
     svg {
         display: block;
     }
-
     &:last-child {
         margin-right: 0;
     }
 }
-
 .c-iconList--social {
     flex-basis: 25%;
-
     svg {
         height: 28px;
         width: 28px;
     }
 }
-
 .c-iconList--apps {
-
     .c-iconList-listItem {
         margin-right: spacing(x2);
         margin-bottom: spacing(x2);
     }
-
     svg {
-        height: 40px;
-        width: 135px;
+       height: 40px;
+       width: 135px;
     }
 }
-
 .c-iconList--payments {
     display: flex;
     align-items: center;
-
     @include media('<wide') {
         padding: spacing(x2) spacing(x2) 0;
     }
-
     .c-iconList-listItem {
         @include media('>=wide') {
             margin-right: spacing(x6);
         }
     }
-
     svg {
         max-width: 67px;
     }
 }
-
 </style>

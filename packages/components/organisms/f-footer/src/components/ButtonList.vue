@@ -36,7 +36,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/headings.scss';
 
 $buttonList-font-size: 'subheading-s';
 

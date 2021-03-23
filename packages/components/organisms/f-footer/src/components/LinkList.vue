@@ -14,8 +14,8 @@
                 :aria-expanded="!panelCollapsed ? 'true' : 'false'"
                 :aria-controls="listId"
                 :class="[
-                    $style['c-footer-heading'],
-                    $style['c-footer-heading--button']
+                    'c-footer-heading',
+                    'c-footer-heading--button'
                 ]"
                 data-test-id="linkList-header"
                 @click="onPanelClick">
@@ -30,7 +30,7 @@
         <ul
             :id="listId"
             :aria-labelledby="listHeadingId"
-            :class="$style['c-footer-list']">
+            class="c-footer-list">
             <li
                 v-for="(link, i) in linkList.links"
                 :key="i + '_Link'">
@@ -77,11 +77,9 @@ export default {
         listId () {
             return `footer-${this.linkList.title.toLowerCase().split(' ').join('-')}`;
         },
-
         listHeadingId () {
             return `${this.listId}-heading`;
         },
-
         isBelowWide () {
             return this.currentScreenWidth <= 1024;
         }
@@ -89,7 +87,6 @@ export default {
     mounted () {
         this.currentScreenWidth = windowServices.getWindowWidth();
         windowServices.addEvent('resize', this.onResize, 100);
-
         this.setPanelCollapsed();
     },
     destroyed () {
@@ -126,10 +123,8 @@ export default {
          */
         onResize () {
             const newScreenWidth = windowServices.getWindowWidth();
-
             if (this.currentScreenWidth !== newScreenWidth) {
                 this.currentScreenWidth = newScreenWidth;
-
                 this.setPanelCollapsed();
             }
         }
@@ -138,34 +133,26 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/headings.scss';
 @import '../assets/scss/icons.scss';
-@import '../assets/scss/lists.scss';
-
 .c-footer-panel {
     flex: 1 0 auto;
-
     @include media('<wide') {
         border-bottom: 1px solid $footer-borderColor;
-
         &:last-of-type {
             border-bottom: none;
         }
     }
 }
-
 .c-footer-list-link {
     color: $footer-textColor;
     display: inline-block;
     padding: spacing() spacing(x2);
     text-decoration: none;
     width: 100%;
-
     @include media('>=wide') {
         padding: 0 0 spacing();
         width: auto;
     }
-
     &:hover {
         text-decoration: underline;
     }
