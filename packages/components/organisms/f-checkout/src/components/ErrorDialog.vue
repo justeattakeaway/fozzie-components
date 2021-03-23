@@ -4,7 +4,9 @@
         data-test-id="checkout-issue-modal"
         has-overlay
         @close="handleClose">
-        <h3 data-test-id="checkout-issue-modal-title" class="u-noSpacing">
+        <h3
+            data-test-id="checkout-issue-modal-title"
+            class="u-noSpacing">
             {{ $t(`errorMessages.checkoutIssues.${errorCode}.title`) }}
         </h3>
 
