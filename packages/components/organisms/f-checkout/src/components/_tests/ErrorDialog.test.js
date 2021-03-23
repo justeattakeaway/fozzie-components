@@ -14,8 +14,6 @@ localVue.use(VueI18n);
 localVue.use(Vuex);
 
 describe('ErrorDialog', () => {
-    allure.feature('Checkout-Header');
-
     const propsData = {
         isOpen: true,
         errorCode: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE

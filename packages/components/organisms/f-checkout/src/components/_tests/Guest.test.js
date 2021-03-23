@@ -27,7 +27,6 @@ const $v = {
 };
 
 describe('Guest', () => {
-
     const propsData = {};
 
     it('should be defined', () => {
