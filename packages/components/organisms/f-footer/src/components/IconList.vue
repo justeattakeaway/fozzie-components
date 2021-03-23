@@ -58,32 +58,39 @@ export default {
         AppStoreIcon,
         BaseProviderIcon
     },
+
     props: {
         icons: {
             type: Array,
             required: true
         },
+
         title: {
             type: String,
             default: ''
         },
+
         isApps: {
             type: Boolean,
             default: false
         },
+
         isPayments: {
             type: Boolean,
             default: false
         },
+
         isSocial: {
             type: Boolean,
             default: false
         },
+
         locale: {
             type: String,
             default: 'en-GB'
         }
     },
+
     computed: {
         iconChoice () {
             return this.isApps ? 'app-store-icon' : 'base-provider-icon';
@@ -93,11 +100,13 @@ export default {
 </script>
 
 <style lang="scss" module>
+
 .c-iconList {
     svg {
         height: 25px;
     }
 }
+
 .c-iconList-listItem {
     margin-bottom: spacing();
     margin-right: spacing(x3);
@@ -109,6 +118,7 @@ export default {
         margin-right: 0;
     }
 }
+
 .c-iconList--social {
     flex-basis: 25%;
     svg {
@@ -126,17 +136,20 @@ export default {
        width: 135px;
     }
 }
+
 .c-iconList--payments {
     display: flex;
     align-items: center;
     @include media('<wide') {
         padding: spacing(x2) spacing(x2) 0;
     }
+
     .c-iconList-listItem {
         @include media('>=wide') {
             margin-right: spacing(x6);
         }
     }
+
     svg {
         max-width: 67px;
     }

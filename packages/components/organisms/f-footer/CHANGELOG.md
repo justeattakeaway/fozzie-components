@@ -8,7 +8,7 @@ v4.12.0
 *March 18, 2021*
 
 ## Added
-- Courier links and country selector component tests for tenants: 'ie', 'nz', 'dk', 'es', 'it', 'no',
+- Courier links and country selector component tests for tenants: 'ie', 'nz', 'dk', 'es', 'it', 'no', 
 - Canada(FR) to dropdown country selector list
 - Accessibility tests for the above tenants
 

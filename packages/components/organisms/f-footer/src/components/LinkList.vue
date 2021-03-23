@@ -77,9 +77,11 @@ export default {
         listId () {
             return `footer-${this.linkList.title.toLowerCase().split(' ').join('-')}`;
         },
+
         listHeadingId () {
             return `${this.listId}-heading`;
         },
+
         isBelowWide () {
             return this.currentScreenWidth <= 1024;
         }
@@ -87,6 +89,7 @@ export default {
     mounted () {
         this.currentScreenWidth = windowServices.getWindowWidth();
         windowServices.addEvent('resize', this.onResize, 100);
+
         this.setPanelCollapsed();
     },
     destroyed () {
@@ -123,8 +126,10 @@ export default {
          */
         onResize () {
             const newScreenWidth = windowServices.getWindowWidth();
+
             if (this.currentScreenWidth !== newScreenWidth) {
                 this.currentScreenWidth = newScreenWidth;
+
                 this.setPanelCollapsed();
             }
         }
@@ -134,25 +139,30 @@ export default {
 
 <style lang="scss" module>
 @import '../assets/scss/icons.scss';
+
 .c-footer-panel {
     flex: 1 0 auto;
     @include media('<wide') {
         border-bottom: 1px solid $footer-borderColor;
+
         &:last-of-type {
             border-bottom: none;
         }
     }
 }
+
 .c-footer-list-link {
     color: $footer-textColor;
     display: inline-block;
     padding: spacing() spacing(x2);
     text-decoration: none;
     width: 100%;
+
     @include media('>=wide') {
         padding: 0 0 spacing();
         width: auto;
     }
+
     &:hover {
         text-decoration: underline;
     }

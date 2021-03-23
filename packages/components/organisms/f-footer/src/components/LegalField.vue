@@ -19,6 +19,7 @@
 import { CertificateConfianzaIcon as ConfianzaIcon } from '@justeat/f-vue-icons';
 
 export default {
+
     components: {
         ConfianzaIcon
     },
@@ -28,6 +29,7 @@ export default {
             required: true
         }
     },
+
     computed: {
         isConfianza () {
             return this.info.icon.name === 'confianza';
@@ -40,20 +42,25 @@ export default {
 </script>
 
 <style lang="scss" module>
+
 .c-footer-certificates {
     display: flex;
     align-items: center;
+
     @include media('<wide') {
         order: 2;
         padding: spacing(x2);
     }
+
     p {
         margin: 0;
     }
 }
+
 .c-footer-certificates-icons {
     display: block;
 }
+
 .c-footer-certificates-icons--confianza {
     width: 50px;
     height: 50px;

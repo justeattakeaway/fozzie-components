@@ -90,6 +90,7 @@ export default {
             type: String,
             default: ''
         },
+
         showCourierLinks: {
             type: Boolean,
             default: true
@@ -121,19 +122,24 @@ export default {
 </script>
 
 <style lang="scss">
+
 $footer-heading-font-size: 'heading-s';
+
 .c-footer {
     background-color: $footer-bgColor;
     color: $footer-textColor;
 }
+
 .c-footer-light {
     background-color: $footer-bgLight;
 }
+
 .c-footer-container {
     width: 100%;
     max-width: #{$layout-max-width}px;
     margin: 0 auto;
 }
+
 .c-footer-heading {
     @include font-size($footer-heading-font-size);
     font-family: $font-family-base;
@@ -146,6 +152,7 @@ $footer-heading-font-size: 'heading-s';
         padding: 0 0 spacing();
     }
 }
+
 .c-footer-heading--button {
     align-items: center;
     background: none;
@@ -159,36 +166,44 @@ $footer-heading-font-size: 'heading-s';
     text-align: left;
     width: 100%;
     @include font-size($footer-heading-font-size);
+
     @include media('<wide') {
         cursor: pointer;
     }
+
     @include media('>=wide') {
         padding: 0;
     }
 }
+
 .c-footer-row {
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
     padding: spacing(x2);
+
     @include media('>=wide') {
         padding: spacing(x4);
         flex-flow: row nowrap;
     }
 }
+
 // this modifier allows children in the row to stay on one line
 // if they fit together for screens smaller than 1025px
 // standard c-footer-row splits children into separate rows for screens smaller than 1025px
 .c-footer-row--combined {
     flex-flow: row wrap;
+
     @include media('>=wide') {
         flex-flow: row nowrap;
     }
 }
+
 .c-footer-row--notEqualTopAndBottomPad {
     padding-top: 20px;
     padding-bottom: 40px;
 }
+
 .c-footer-row--noPadBelowWide {
     @include media('<wide') {
         padding: 0;
@@ -197,17 +212,20 @@ $footer-heading-font-size: 'heading-s';
 .c-footer-row--noBottomPad {
     padding-bottom: 0;
 }
+
 .c-footer-row--rightAlignedAboveWide {
     justify-content: flex-end;
     @include media('<wide') {
         justify-content: flex-start;
     }
 }
+
 .c-footer-row-item--fullWidthAboveWide {
     @include media('>=wide') {
         flex: 1;
     }
 }
+
 .c-footer-list {
     padding: 0;
     list-style: none;
@@ -224,21 +242,25 @@ $footer-heading-font-size: 'heading-s';
             content: none;
         }
     }
+
     @include media('>=wide') {
         margin: spacing(x2) 0 0 0;
     }
     .is-collapsed & {
         display: none;
     }
+
 }
 .c-footer-list--inline {
     margin: 0 0 spacing(x2);
     align-items: center;
     flex-flow: row wrap;
+
     @include media('>=wide') {
         margin-bottom: 0;
     }
 }
+
 .c-footer-list--noBottomMargin {
     margin-bottom: 0;
 }
