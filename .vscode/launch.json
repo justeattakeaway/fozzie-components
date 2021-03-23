@@ -1,0 +1,65 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Single Spec - Component - Chrome",
+            "type": "node",
+            "request": "launch",
+            "args": ["wdio-chrome.conf.js", "--spec", "${file}"],
+            "cwd": "${workspaceFolder}",
+            "autoAttachChildProcesses": true,
+            "program": "${workspaceRoot}/node_modules/@wdio/cli/bin/wdio.js",
+            "console": "integratedTerminal",
+            "skipFiles": [
+                "${workspaceFolder}/node_modules/**/*.js",
+                "${workspaceFolder}/lib/**/*.js",
+                "<node_internals>/**/*.js"
+            ],
+            "env": {
+                "JE_ENV": "local",
+                "TEST_TYPE": "component"
+            }
+        },
+        {
+            "name": "Run Single Spec - Component - Browserstack",
+            "type": "node",
+            "request": "launch",
+            "args": ["wdio-browserstack.conf.js", "--spec", "${file}"],
+            "cwd": "${workspaceFolder}",
+            "autoAttachChildProcesses": true,
+            "program": "${workspaceRoot}/node_modules/@wdio/cli/bin/wdio.js",
+            "console": "integratedTerminal",
+            "skipFiles": [
+                "${workspaceFolder}/node_modules/**/*.js",
+                "${workspaceFolder}/lib/**/*.js",
+                "<node_internals>/**/*.js"
+            ],
+            "env": {
+                "JE_ENV": "browserstack",
+                "TEST_TYPE": "component"
+            }
+        },
+        {
+            "name": "Run Single Spec - Accessibility - Chrome",
+            "type": "node",
+            "request": "launch",
+            "args": ["wdio-chrome.conf.js", "--spec", "${file}"],
+            "cwd": "${workspaceFolder}",
+            "autoAttachChildProcesses": true,
+            "program": "${workspaceRoot}/node_modules/@wdio/cli/bin/wdio.js",
+            "console": "integratedTerminal",
+            "skipFiles": [
+                "${workspaceFolder}/node_modules/**/*.js",
+                "${workspaceFolder}/lib/**/*.js",
+                "<node_internals>/**/*.js"
+            ],
+            "env": {
+                "JE_ENV": "local",
+                "TEST_TYPE": "accessibility"
+            }
+        },
+    ]
+}
