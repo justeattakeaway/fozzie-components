@@ -142,6 +142,7 @@ export default {
 
 .c-footer-panel {
     flex: 1 0 auto;
+
     @include media('<wide') {
         border-bottom: 1px solid $footer-borderColor;
 

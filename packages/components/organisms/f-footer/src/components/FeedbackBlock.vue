@@ -30,10 +30,12 @@ export default {
             type: String,
             default: ''
         },
+
         text: {
             type: String,
             default: ''
         },
+
         buttonText: {
             type: String,
             default: ''
@@ -43,15 +45,19 @@ export default {
 </script>
 
 <style lang="scss" module>
+
 $feedback-btn-font-size: 'body-s';
+
 .c-feedback {
     @include media('<wide') {
         order: 1;
     }
 }
+
 .c-feedback-text {
     margin: 0 0 spacing(x0.5) 0;
 }
+
 .c-feedback-button {
     border: 0;
     background-color: transparent;
@@ -61,6 +67,7 @@ $feedback-btn-font-size: 'body-s';
     font-weight: 500;
     @include font-size($feedback-btn-font-size);
     text-decoration: underline;
+
     &:hover {
         cursor: pointer;
         color: $color-link-hover;

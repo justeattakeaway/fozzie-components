@@ -147,6 +147,7 @@ $footer-heading-font-size: 'heading-s';
     padding: spacing(x2);
     padding-left: 0;
 }
+
 .c-footer-heading--shortBelowWide {
     @include media('<wide') {
         padding: 0 0 spacing();
@@ -209,12 +210,14 @@ $footer-heading-font-size: 'heading-s';
         padding: 0;
     }
 }
+
 .c-footer-row--noBottomPad {
     padding-bottom: 0;
 }
 
 .c-footer-row--rightAlignedAboveWide {
     justify-content: flex-end;
+
     @include media('<wide') {
         justify-content: flex-start;
     }
@@ -236,8 +239,10 @@ $footer-heading-font-size: 'heading-s';
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
+
     & > li {
         margin-bottom: 0;
+
         &:before {
             content: none;
         }
@@ -246,6 +251,7 @@ $footer-heading-font-size: 'heading-s';
     @include media('>=wide') {
         margin: spacing(x2) 0 0 0;
     }
+
     .is-collapsed & {
         display: none;
     }
@@ -264,4 +270,5 @@ $footer-heading-font-size: 'heading-s';
 .c-footer-list--noBottomMargin {
     margin-bottom: 0;
 }
+
 </style>

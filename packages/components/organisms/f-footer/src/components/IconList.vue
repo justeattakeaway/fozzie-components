@@ -110,10 +110,12 @@ export default {
 .c-iconList-listItem {
     margin-bottom: spacing();
     margin-right: spacing(x3);
+
     a,
     svg {
         display: block;
     }
+
     &:last-child {
         margin-right: 0;
     }
@@ -121,16 +123,19 @@ export default {
 
 .c-iconList--social {
     flex-basis: 25%;
+
     svg {
         height: 28px;
         width: 28px;
     }
 }
 .c-iconList--apps {
+
     .c-iconList-listItem {
         margin-right: spacing(x2);
         margin-bottom: spacing(x2);
     }
+
     svg {
        height: 40px;
        width: 135px;
@@ -140,6 +145,7 @@ export default {
 .c-iconList--payments {
     display: flex;
     align-items: center;
+
     @include media('<wide') {
         padding: spacing(x2) spacing(x2) 0;
     }
