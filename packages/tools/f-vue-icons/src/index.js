@@ -120,3 +120,5 @@ export { default as SuccessIcon } from '../icons/SuccessIcon';
 export { default as TickIcon } from '../icons/TickIcon';
 export { default as VegetarianIcon } from '../icons/VegetarianIcon';
 export { default as WarningIcon } from '../icons/WarningIcon';
+export { default as NoteIcon } from '../icons/NoteIcon';
+export { default as CloseCircleIcon } from '../icons/CloseCircleIcon';
