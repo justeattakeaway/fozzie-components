@@ -129,7 +129,6 @@ export default {
 
             if (this.currentScreenWidth !== newScreenWidth) {
                 this.currentScreenWidth = newScreenWidth;
-
                 this.setPanelCollapsed();
             }
         }
