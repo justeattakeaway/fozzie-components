@@ -1,13 +1,8 @@
 <template>
-    <component
-        :is="url && hasCta ? 'a' : 'div'"
-        :href="hasCta && url"
-        :target="target.attribute"
-        :rel="target.rel"
+    <card-case
+        :card="card"
         :class="[$style['c-contentCard'], { [$style['c-contentCard--isolateHeroImage']]: shouldIsolateHeroImage }]"
-        :data-test-id="testId"
-        @click="onClickContentCard"
-    >
+        :data-test-id="testId">
         <div
             :style="{ 'background-image': shouldApplyImageAsBackground ? `url(${image})` : '' }"
             :class="[{ [$style['c-contentCard-bgImg']]: !!image }]">
@@ -50,11 +45,17 @@
                 <slot />
             </div>
         </div>
-    </component>
+    </card-case>
 </template>
 
 <script>
+import CardCase from './CardCase.vue';
+
 export default {
+    components: {
+        CardCase
+    },
+
     props: {
         card: {
             type: Object,
@@ -128,24 +129,7 @@ export default {
         }
     },
 
-    inject: [
-        'emitCardView',
-        'emitCardClick'
-    ],
-
-    mounted () {
-        this.onViewContentCard();
-    },
-
     methods: {
-        onViewContentCard () {
-            this.emitCardView(this.card);
-        },
-
-        onClickContentCard () {
-            this.emitCardClick(this.card);
-        },
-
         testIdForItemWithIndex (index) {
             return this.testId && `ContentCard-TextItem-${index}`;
         }

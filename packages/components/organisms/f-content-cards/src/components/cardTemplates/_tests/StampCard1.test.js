@@ -24,9 +24,7 @@ const card = {
 const localeConfig = tenantConfigs['en-GB'];
 
 const provide = {
-    copy: localeConfig,
-    emitCardView: jest.fn(),
-    emitCardClick: jest.fn()
+    copy: localeConfig
 };
 
 function getWrapper (cardDetails = {}, testId = 'stampCard1') {
