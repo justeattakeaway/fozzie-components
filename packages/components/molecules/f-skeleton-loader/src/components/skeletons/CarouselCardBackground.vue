@@ -8,7 +8,6 @@
 import ImageBlock from './Image.vue';
 
 export default {
-    name: 'CarouselCardBackground',
     components: { ImageBlock }
 };
 </script>

@@ -6,9 +6,7 @@
 </template>
 
 <script>
-export default {
-    name: 'Rating'
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>

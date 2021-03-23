@@ -12,7 +12,6 @@ import CarouselCardRestaurantData from './CarouselCardRestaurantData.vue';
 import CarouselCardRestaurantHeader from './CarouselCardRestaurantHeader.vue';
 
 export default {
-    name: 'RestaurantCarouselCard',
     components: {
         CarouselCardBackground, CarouselCardRestaurantData, CarouselCardRestaurantHeader
     }
@@ -28,6 +27,7 @@ export default {
     .c-skeleton-loader-carouselCardBackground {
         margin-bottom: -(spacing(x8));
     }
+
     .c-skeleton-loader-carouselCardRestaurantHeader,
     .c-skeleton-loader-restaurantData {
         border: 1px solid $skeleton-loader-bone-background-color;

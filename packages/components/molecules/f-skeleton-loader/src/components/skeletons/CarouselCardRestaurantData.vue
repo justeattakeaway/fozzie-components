@@ -10,7 +10,6 @@ import Sentence from './Sentence.vue';
 import Rating from './Rating.vue';
 
 export default {
-    name: 'CarouselCardRestaurantData',
     components: { Sentence, Rating }
 };
 </script>
