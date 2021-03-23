@@ -331,7 +331,7 @@ describe('CheckoutModule', () => {
                     serviceType: basketDelivery.ServiceType.toLowerCase(),
                     restaurant: {
                         id: basketDelivery.RestaurantId,
-                        seoName: basketDelivery.RestaurantSeoName,
+                        seoName: basketDelivery.RestaurantSeoName
                     },
                     basket: {
                         id: basketDelivery.BasketId,
