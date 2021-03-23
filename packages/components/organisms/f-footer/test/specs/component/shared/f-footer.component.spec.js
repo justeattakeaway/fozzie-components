@@ -3,7 +3,7 @@ const Footer = require('../../../../test-utils/component-objects/f-footer.compon
 
 const footer = new Footer();
 
-xdescribe('Shared - f-footer component tests', () => {
+describe('Shared - f-footer component tests', () => {
     beforeEach(() => {
         const footerData = {
             locale: 'gb',

@@ -16,7 +16,7 @@ describe('home promotion card 2 component tests', () => {
     it('should display the elements of the card', () => {
         // Assert
         expect(card.isCallToActionDisplayed()).toBe(true);
-        expect(card.isTextDisplayed()).toBe(true);
+        expect(card.isTextDisplayed()).toBe(true); 
         expect(card.isTitleDisplayed()).toBe(true);
         expect(card.isBackgroundImageDisplayed()).toBe(true);
     });
