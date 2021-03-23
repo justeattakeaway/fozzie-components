@@ -3,20 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (add to next release)
+v1.8.0
 ------------------------------
-*February 1, 2021*
+*March 23, 2021*
 
 ### Changed
 - `package.json` main value to `umd.min`.
-
-
-Latest (add to next release)
-------------------------------
-*January 12, 2021*
-
-### Changed
-- Update axios version for security advisory
+- Update axios version for security advisory.
+- Replaced rollup with vite.
+- Replace vue-cli commands for linting and testing with calls to eslint and jest directly.
+- Update npm dependencies.
 
 
 v1.7.0
