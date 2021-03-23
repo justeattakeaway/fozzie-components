@@ -8,7 +8,7 @@ v0.49.1
 *March 23, 2021*
 
 ### Added
-- `f-wdio-utils` npm package to `f-registration-component`
+- `f-wdio-utils` npm package to package.json
 
 v0.49.0
 ------------------------------
