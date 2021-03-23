@@ -2,23 +2,27 @@ import { shallowMount } from '@vue/test-utils';
 import { windowServices } from '@justeat/f-services';
 import LinkList from '../LinkList.vue';
 
-const wrapper = shallowMount(LinkList, {
-    propsData: {
-        linkList: {
-            title: 'Customer service',
-            links: [
-                {
-                    url: '/contact',
-                    text: 'Contact us'
-                }
-            ]
-        }
+const propsData = {
+    linkList: {
+        title: 'Customer service',
+        links: [
+            {
+                url: '/contact',
+                text: 'Contact us'
+            }
+        ]
     }
-});
+};
 
 describe('LinkList component', () => {
     allure.feature('Link List');
     it('should be defined', () => {
+        // Arrange
+        const wrapper = shallowMount(LinkList, {
+            propsData
+        });
+
+        // Assert
         expect(wrapper.exists()).toBe(true);
     });
 
@@ -30,6 +34,10 @@ describe('LinkList component', () => {
                 [false, 1200]
             ])('Should return %s if `currentScreenWidth` is $s', (expected, width) => {
                 // Arrange
+                const wrapper = shallowMount(LinkList, {
+                    propsData
+                });
+
                 wrapper.vm.currentScreenWidth = width;
 
                 // Assert
@@ -39,14 +47,18 @@ describe('LinkList component', () => {
     });
 
     describe('`methods` ::', () => {
-        xdescribe('`setPanelCollapsed` ::', () => {
+        describe('`setPanelCollapsed` ::', () => {
             it.each([
                 [true, 500, null],
                 [true, 500, true],
                 [false, 500, false],
                 [false, 1200, false]
-            ])('Should set `panelCollapsed` to %s if isBelowWide is %s AND `interactedState` is $s', (expected, width, interactedState) => {
+            ])('Should set `panelCollapsed` to %s if `currentScreenWidth` is %s AND `interactedState` is $s', (expected, width, interactedState) => {
                 // Arrange
+                const wrapper = shallowMount(LinkList, {
+                    propsData
+                });
+
                 wrapper.vm.currentScreenWidth = width;
                 wrapper.vm.interactedState = interactedState;
 
@@ -61,18 +73,30 @@ describe('LinkList component', () => {
         describe('`onPanelClick` ::', () => {
             let setPanelCollapsedSpy;
 
-            beforeEach(() => {
-                setPanelCollapsedSpy = jest.spyOn(LinkList.methods, 'setPanelCollapsed');
-            });
-
-            afterEach(() => {
-                jest.clearAllMocks();
-            });
-
             describe('when `isBelowWide` is `true`', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    wrapper = shallowMount(LinkList, {
+                        propsData,
+                        computed: {
+                            isBelowWide: {
+                                get () {
+                                    return true;
+                                }
+                            }
+                        }
+                    });
+
+                    setPanelCollapsedSpy = jest.spyOn(wrapper.vm, 'setPanelCollapsed');
+                });
+
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
                 it('Should set `interactedState` correctly and call `setPanelCollapsed`', () => {
                     // Arrange
-                    wrapper.vm.currentScreenWidth = 50;
                     wrapper.vm.panelCollapsed = true;
 
                     // Act
@@ -83,17 +107,51 @@ describe('LinkList component', () => {
                     expect(setPanelCollapsedSpy).toHaveBeenCalled();
                 });
             });
+
+            describe('when `isBelowWide` is `false`', () => {
+                let wrapper;
+
+                beforeEach(() => {
+                    wrapper = shallowMount(LinkList, {
+                        propsData,
+                        computed: {
+                            isBelowWide: {
+                                get () {
+                                    return false;
+                                }
+                            }
+                        }
+                    });
+
+                    setPanelCollapsedSpy = jest.spyOn(wrapper.vm, 'setPanelCollapsed');
+                });
+
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
+                it('Should not call `setPanelCollapsed`', () => {
+                    // Act
+                    wrapper.vm.onPanelClick();
+
+                    // Assert
+                    expect(setPanelCollapsedSpy).not.toHaveBeenCalled();
+                });
+            });
         });
 
-        xdescribe('`onResize` ::', () => {
+        describe('`onResize` ::', () => {
             const width = 500;
             let setPanelCollapsedSpy;
-
-            // let getWindowWidthSpy;
+            let wrapper;
 
             beforeEach(() => {
+                wrapper = shallowMount(LinkList, {
+                    propsData
+                });
+
                 jest.spyOn(windowServices, 'getWindowWidth').mockReturnValue(width);
-                setPanelCollapsedSpy = jest.spyOn(LinkList.methods, 'setPanelCollapsed');
+                setPanelCollapsedSpy = jest.spyOn(wrapper.vm, 'setPanelCollapsed');
             });
 
             afterEach(() => {
@@ -112,7 +170,7 @@ describe('LinkList component', () => {
                 expect(setPanelCollapsedSpy).toHaveBeenCalled();
             });
 
-            xit('should not set `currentScreenWidth` if it is the same as the screenWidth', () => {
+            it('should not set `currentScreenWidth` if it is the same as the screenWidth', () => {
                 // Arrange
                 wrapper.vm.currentScreenWidth = width;
 
