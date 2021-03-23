@@ -19,7 +19,7 @@ exports.getBaseUrl = (port = 8080) => {
 exports.local = () => ({
     bail: 0,
     maxinstances: 1,
-    loglevel: 'info',
+    loglevel: 'silent',
     reporters: JE_ENV !== 'browserstack' && COMPONENT_TYPE === 'organism' ? [
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases
@@ -37,7 +37,7 @@ exports.local = () => ({
 exports.ci = () => ({
     bail: 1,
     maxinstances: parseInt(process.env.WDIO_MAX_INSTANCES) || 2,
-    loglevel: process.env.WDIO_LOG_LEVEL || 'info',
+    loglevel: process.env.WDIO_LOG_LEVEL || 'silent',
     reporters: [
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases

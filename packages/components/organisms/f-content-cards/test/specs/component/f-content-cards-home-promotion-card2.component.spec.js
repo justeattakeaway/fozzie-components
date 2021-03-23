@@ -1,4 +1,5 @@
 const HomePromotionCard2 = require('../../../test-utils/component-objects/f-content-cards-home-promotion-card2.component');
+
 const card = new HomePromotionCard2();
 
 describe('home promotion card 2 component tests', () => {
@@ -16,7 +17,7 @@ describe('home promotion card 2 component tests', () => {
         // Assert
         expect(card.isCallToActionDisplayed()).toBe(true);
         expect(card.isTextDisplayed()).toBe(true);
-        expect(card.isTitleDisplayed()).toBe(true); 
+        expect(card.isTitleDisplayed()).toBe(true);
         expect(card.isBackgroundImageDisplayed()).toBe(true);
     });
 });

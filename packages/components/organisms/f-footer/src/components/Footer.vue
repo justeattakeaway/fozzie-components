@@ -35,17 +35,18 @@
                         :title="copy.downloadOurApps"
                         :icons="copy.appStoreIcons"
                         :locale="copy.locale"
-                        is-apps />
+                        list-type="apps" />
 
                     <feedback-block
                         :title="copy.feedback"
                         :text="copy.improveOurWebsite"
-                        :button-text="copy.sendFeedback" />
+                        :button-text="copy.sendFeedback"
+                        data-test-id="feedbackLinks-wrapper" />
 
                     <icon-list
                         :icons="copy.socialIcons"
                         :title="copy.followUs"
-                        is-social />
+                        list-type="social" />
                 </div>
             </div>
         </div>
@@ -74,7 +75,7 @@
 
             <icon-list
                 :icons="copy.paymentIcons"
-                is-payments />
+                list-type="payments" />
         </div>
     </footer>
 </template>

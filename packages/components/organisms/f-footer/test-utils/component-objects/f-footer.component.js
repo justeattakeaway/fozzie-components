@@ -59,9 +59,10 @@ module.exports = class Footer extends Page {
      */
 
     open (footer) {
+        console.log(footer); // eslint-disable-line no-console
         const countryFormatted = footer.locale.toUpperCase();
-        const showCountrySelector = footer.countrySelector ? '&knob-Show%20country%20selector=true' : '';
-        const showCourierLinks = footer.courierLinks ? '&knob-Show%20courier%20links=true' : '';
+        const showCountrySelector = `&knob-Show%20country%20selector=${footer.countrySelector}`;
+        const showCourierLinks = `&knob-Show%20courier%20links=${footer.courierLinks}`;
         let formattedLocale = '';
         switch (countryFormatted) {
             case 'GB':
@@ -83,7 +84,7 @@ module.exports = class Footer extends Page {
                 formattedLocale = `nb-${countryFormatted}`;
                 break;
             default:
-                throw new Error (`locale ${countryFormatted} is not supported`);
+                throw new Error(`locale ${countryFormatted} is not supported`);
         }
 
         const url = `footer-component&knob-Locale=${formattedLocale}${showCountrySelector}${showCourierLinks}`;
@@ -135,7 +136,7 @@ module.exports = class Footer extends Page {
     }
 
     isCurrentCountryIconDisplayed (country) {
-        let expectedIcon = this.currentFlagIcon.getAttribute('class').includes(`c-ficon--flag.${country}.round`);
+        const expectedIcon = this.currentFlagIcon.getAttribute('class').includes(`c-ficon--flag.${country}.round`);
         return expectedIcon ? this.currentFlagIcon.isDisplayed() : false;
     }
 };
