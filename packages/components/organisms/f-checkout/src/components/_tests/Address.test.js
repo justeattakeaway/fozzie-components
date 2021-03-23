@@ -30,7 +30,6 @@ const $v = {
 };
 
 describe('Address', () => {
-
     const propsData = {};
 
     it('should be defined', () => {

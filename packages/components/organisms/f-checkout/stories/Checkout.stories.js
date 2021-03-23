@@ -23,6 +23,7 @@ const createGuestUrl = '/create-guest.json';
 const getBasketDeliveryUrl = '/get-basket-delivery.json';
 const getBasketCollectionUrl = '/get-basket-collection.json';
 const updateCheckoutUrl = '/update-checkout.json';
+const updateCheckoutErrorsUrl = '/update-checkout-errors.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
 const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
@@ -35,6 +36,7 @@ CheckoutMock.setupCheckoutMethod(createGuestUrl);
 CheckoutMock.setupCheckoutMethod(getBasketDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getBasketCollectionUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutUrl);
+CheckoutMock.setupCheckoutMethod(updateCheckoutErrorsUrl);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderUrl);
 CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
@@ -53,12 +55,12 @@ export const CheckoutComponent = () => ({
     data () {
         return {
             checkoutAvailableFulfilmentUrl,
+            checkoutState: this.$store._modules.root.state.fCheckoutModule,
             createGuestUrl,
             getAddressUrl,
             loginUrl: '/login',
             paymentPageUrlPrefix,
             placeOrderUrl,
-            updateCheckoutUrl,
             getGeoLocationUrl
         };
     },
@@ -73,8 +75,17 @@ export const CheckoutComponent = () => ({
 
         locale: {
             default: select('Locale', [locales.gb])
+        },
+
+        isAsapAvailable: {
+            default: boolean('Is ASAP available', true)
+        },
+
+        hasErrors: {
+            default: boolean('Has Checkout Errors', false)
         }
     },
+
     computed: {
         getCheckoutUrl () {
             return `/checkout-${this.serviceType}.json`;
@@ -86,14 +97,26 @@ export const CheckoutComponent = () => ({
 
         authToken () {
             return this.isLoggedIn ? mockAuthToken : '';
+        },
+
+        updateCheckoutUrl () {
+            return this.hasErrors ? updateCheckoutErrorsUrl : updateCheckoutUrl;
         }
     },
+
+    watch: {
+        isAsapAvailable () {
+            this.checkoutState.availableFulfilment.isAsapAvailable = this.isASAPAvailable;
+        }
+    },
+
     store: new Vuex.Store({
         modules: {
             fCheckoutModule,
             fCheckoutAnalyticsModule
         }
     }),
+
     template: '<vue-checkout ' +
         ':getCheckoutUrl="getCheckoutUrl" ' +
         ':updateCheckoutUrl="updateCheckoutUrl" ' +
