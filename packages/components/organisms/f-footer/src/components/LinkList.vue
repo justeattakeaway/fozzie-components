@@ -4,7 +4,7 @@
         :class="[
             $style['c-footer-panel'],
             { [$style['is-collapsed']]: panelCollapsed }]"
-        data-test-id="linkList-wrapper">
+        :data-test-id="testID">
         <h2>
             <button
                 :id="listHeadingId"
@@ -84,6 +84,10 @@ export default {
 
         isBelowWide () {
             return this.currentScreenWidth <= 1024;
+        },
+
+        testID () {
+            return this.panelCollapsed ? 'linkList-wrapper-collapsed' : 'linkList-wrapper';
         }
     },
     mounted () {
