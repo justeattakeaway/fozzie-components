@@ -68,7 +68,6 @@ export default function ContentCardsCustom (args, { argTypes }) {
                         :is="handleCustomCardType(card.type)"
                         :key="i"
                         :card="card"
-                        :tenant="tenant"
                     />
                 </template>
             </content-cards>`

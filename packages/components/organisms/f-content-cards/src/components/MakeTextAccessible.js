@@ -5,6 +5,10 @@
  * remove anything but the <b></b> tags braze may sometimes provide.
  */
 export default el => {
+    if (!el.innerText) {
+        return;
+    }
+
     const text = el.innerText.trim().replace(/(<(?!(?:b|\/b)\b)[^>]*>)/gi, '');
     const containsPeriod = ['.', '!', '?', ';', ':'].includes(text.slice(-1));
     el.innerHTML = containsPeriod ? text : `${text}<span class="is-visuallyHidden">.</span>`;
