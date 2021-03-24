@@ -27,11 +27,11 @@ export default {
     .c-skeleton-loader-sentence {
         width: 25%;
     }
-    /deep/ .c-skeleton-loader-sentence .c-skeleton-loader-text {
+    /deep/ .c-skeleton-loader-text {
         width: 70%;
         height: spacing(x1.8);
     }
-    /deep/ .c-skeleton-loader-sentence .c-skeleton-loader-text:nth-child(2) {
+    /deep/ .c-skeleton-loader-text:nth-child(2) {
         margin-bottom: 0;
     }
 }

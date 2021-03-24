@@ -1,5 +1,5 @@
 <template>
-    <div class="c-skeleton-loader-favouriteCarouselCard c-skeleton-loader-bone">
+    <div class="c-skeleton-loader-restaurantCarouselCard c-skeleton-loader-bone">
         <carousel-card-background />
         <carousel-card-restaurant-header />
         <carousel-card-restaurant-data />
@@ -19,7 +19,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.c-skeleton-loader-favouriteCarouselCard {
+
+.c-skeleton-loader-restaurantCarouselCard {
     max-width: 400px;
     text-align: center;
     margin: auto;
@@ -38,4 +39,5 @@ export default {
         border-bottom: 0;
     }
 }
+
 </style>
