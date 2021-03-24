@@ -12,9 +12,5 @@ module.exports = {
         'node_modules/(?!(lodash-es)/)'
     ],
 
-    testURL: 'http://localhost/',
-
-    setupFilesAfterEnv: [
-        '../../../jest.setup.js'
-    ]
+    testURL: 'http://localhost/'
 };
