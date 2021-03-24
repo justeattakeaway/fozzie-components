@@ -5,10 +5,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.25.0
 ------------------------------
-*March 23, 2021*
+*March 24, 2021*
 
 ## Added
-- launch.json to provide ability to run / debug individual WDIO test specs against chrome / browserstack
+- launch.json to provide ability to run / debug individual WDIO test specs against chrome / browserstack / Jest tests
+
+## Removed
+- jest-allure2 package
 
 v3.24.1
 ------------------------------
