@@ -10,7 +10,11 @@ const {
     KNOB_BUTTON,
     SWITCH_USER_LINK,
     GUEST_CHECKOUT_HEADER,
-    GUEST_CHECKOUT_LOGIN_BUTTON
+    GUEST_CHECKOUT_LOGIN_BUTTON,
+    ERROR_PAGE_COMPONENT,
+    ERROR_PAGE_HEADING,
+    ERROR_PAGE_DESCRIPTION,
+    ERROR_PAGE_IMAGE
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
@@ -33,6 +37,14 @@ module.exports = class Checkout extends Page {
     get guestCheckoutHeader () { return $(GUEST_CHECKOUT_HEADER); }
 
     get guestCheckoutLoginButton () { return $(GUEST_CHECKOUT_LOGIN_BUTTON); }
+
+    get errorPage () { return $(ERROR_PAGE_COMPONENT); }
+
+    get errorPageDescription () { return $(ERROR_PAGE_DESCRIPTION); }
+
+    get errorPageHeading () { return $(ERROR_PAGE_HEADING); }
+
+    get errorPageImage () { return $(ERROR_PAGE_IMAGE); }
 
     fields = {
         firstName: {
@@ -137,6 +149,22 @@ module.exports = class Checkout extends Page {
 
     isGuestCheckoutHeaderDisplayed () {
         return this.guestCheckoutHeader.isDisplayed();
+    }
+
+    isErrorPageComponentDisplayed () {
+        return this.errorPage.isDisplayed();
+    }
+
+    isErrorPageHeadingDisplayed () {
+        return this.errorPageHeading.isDisplayed();
+    }
+
+    isErrorPageDescriptionDisplayed () {
+        return this.errorPageDescription.isDisplayed();
+    }
+
+    isErrorPageImageDisplayed () {
+        return this.errorPageImage.isDisplayed();
     }
 
 
