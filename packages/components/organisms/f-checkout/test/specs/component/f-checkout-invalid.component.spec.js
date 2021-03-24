@@ -6,7 +6,7 @@ describe('f-checkout "invalid" component tests', () => {
     beforeEach(() => {
         const checkoutData = {
             type: 'collection',
-            isAuthenticated: false,
+            isAuthenticated: true,
             isValid: false
         };
 

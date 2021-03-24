@@ -97,7 +97,7 @@ module.exports = class Checkout extends Page {
 
     open (checkout) {
         const serviceType = checkout.isValid ? `&knob-Service%20Type=${checkout.type}` : '&knob-Service%20Type=Invalid%20URL';
-        const isLoggedIn = checkout.isAuthenticated ? `&knob-Is%20User%20Logged%20In=${checkout.isAuthenticated}` : '';
+        const isLoggedIn = `&knob-Is%20User%20Logged%20In=${checkout.isAuthenticated}`;
 
         const url = `checkout-component${serviceType}${isLoggedIn}`;
         super.openComponent('organism', url);
