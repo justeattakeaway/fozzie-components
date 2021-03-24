@@ -198,10 +198,13 @@ describe('Selector', () => {
 
             let wrapper;
             let updateChangedFieldSpy;
+            let updateHasAsapSelectedSpy;
 
             beforeEach(() => {
                 updateChangedFieldSpy = jest.spyOn(Selector.methods, 'updateChangedField');
-
+                updateHasAsapSelectedSpy = jest.spyOn(Selector.methods, 'updateHasAsapSelected');
+    
+    
                 wrapper = shallowMount(Selector, {
                     store: createStore(),
                     i18n,
@@ -216,6 +219,14 @@ describe('Selector', () => {
 
                 // Assert
                 expect(updateChangedFieldSpy).toHaveBeenCalledWith(field);
+            });
+    
+            it('should call `updateHasAsapSelected` with `false`', () => {
+                // Act
+                wrapper.vm.selectionChanged(selectedTime);
+        
+                // Assert
+                expect(updateHasAsapSelectedSpy).toHaveBeenCalledWith(false);
             });
 
             it('should update `selectedAvailableFulfilmentTime` with the value passed', () => {

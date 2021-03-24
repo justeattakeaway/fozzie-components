@@ -5,6 +5,7 @@ import { VUEX_CHECKOUT_ANALYTICS_MODULE } from '../constants';
 import { version as applicationVerion } from '../../package.json';
 
 import {
+    UPDATE_HAS_ASAP_SELECTED,
     UPDATE_AUTH,
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
     UPDATE_BASKET_DETAILS,
@@ -62,7 +63,8 @@ export default {
         },
         authToken: '',
         isLoggedIn: false,
-        geolocation: null
+        geolocation: null,
+        hasAsapSelected: false
     }),
 
     actions: {
@@ -335,6 +337,10 @@ export default {
         updateUserNote ({ commit, dispatch }, payload) {
             commit(UPDATE_USER_NOTE, payload);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, 'note', { root: true });
+        },
+        
+        updateHasAsapSelected ({ commit }, payload) {
+            commit(UPDATE_HAS_ASAP_SELECTED, payload);
         }
     },
 
@@ -385,6 +391,10 @@ export default {
         }) => {
             state.availableFulfilment.times = times;
             state.availableFulfilment.isAsapAvailable = asapAvailable;
+        },
+    
+        [UPDATE_HAS_ASAP_SELECTED]: (state, hasAsapSelected) => {
+            state.hasAsapSelected = hasAsapSelected;
         },
 
         [UPDATE_BASKET_DETAILS]: (state, { serviceType, basket, restaurant }) => {

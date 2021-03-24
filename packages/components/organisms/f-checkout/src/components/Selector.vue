@@ -67,6 +67,7 @@ export default {
 
             if (this.availableFulfilment.isAsapAvailable && times.length) {
                 times[0].text = this.$t('asapFulfilmentOption');
+                this.updateHasAsapSelected(true);
             }
 
             return times;
@@ -88,7 +89,8 @@ export default {
 
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
-            'updateFulfilmentTime'
+            'updateFulfilmentTime',
+            'updateHasAsapSelected'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
@@ -103,6 +105,7 @@ export default {
         selectionChanged (selectedFulfilmentTime) {
             this.selectedAvailableFulfilmentTime = selectedFulfilmentTime;
             this.updateChangedField('orderTime');
+            this.updateHasAsapSelected(false);
 
             // TODO - Update to use different from/to times when the API supports it
             this.updateFulfilmentTime({

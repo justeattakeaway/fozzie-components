@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.76.0
+------------------------------
+*March 24, 2021*
+
+### Added 
+- New time object struture for patch call to checkout. (Includes scheduled & asap values)
+
 
 v0.75.0
 ------------------------------

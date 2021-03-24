@@ -11,7 +11,8 @@ const defaultParams = {
     isCheckoutMethodDelivery: true,
     time: {},
     userNote: '',
-    geolocation: null
+    geolocation: null,
+    asap: false
 };
 
 const address = {
@@ -71,17 +72,25 @@ describe('checkout mapper', () => {
             from: '2021-01-01T01:00:00+0000',
             to: '2021-01-01T01:00:00+0000'
         };
-
+        
+        const expectOutput = {
+            asap: false,
+            scheduled: {
+                ...time
+            }
+        };
+        
         // Act
         const requestBody = mapUpdateCheckoutRequest({
             ...defaultParams,
-            time
+            time,
+            asap: false
         });
 
         const timeRequest = requestBody[1].value.time;
 
         // Assert
-        expect(timeRequest).toBe(time);
+        expect(timeRequest).toStrictEqual(expectOutput);
     });
 
     describe('when checkout method is not delivery', () => {
