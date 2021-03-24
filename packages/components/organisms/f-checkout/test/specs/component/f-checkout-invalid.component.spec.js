@@ -1,6 +1,5 @@
 const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
 const checkout = new Checkout();
-import forEach from 'mocha-each';
 
 describe('f-checkout "invalid" component tests', () => {
     beforeEach(() => {
