@@ -22,9 +22,11 @@ export default function ContentCardsLoading (args, { argTypes }) {
          * Reject the promise set up by the above mock
          */
         beforeDestroy () {
-            this.rejectMockPromise({
-                status: 500
-            });
+            if (this.rejectMockPromise) {
+                this.rejectMockPromise({
+                    status: 500
+                });
+            }
         },
 
         template: `
@@ -36,7 +38,6 @@ export default function ContentCardsLoading (args, { argTypes }) {
                 :user-id="userId"
                 :api-key="apiKey"
                 :locale="locale"
-                :custom-cards="customCards"
                 :key="locale"
             >
                 <template #${STATE_LOADING}="{ status }">

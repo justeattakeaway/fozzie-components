@@ -15,7 +15,8 @@ import {
     HomePromotionCard1,
     HomePromotionCard2,
     GroupHeaderCard,
-    StampCard1
+    StampCard1,
+    StampCardPromotionCard
 } from './components/cardTemplates';
 
 export {
@@ -31,5 +32,6 @@ export {
     HomePromotionCard1,
     HomePromotionCard2,
     GroupHeaderCard,
-    StampCard1
+    StampCard1,
+    StampCardPromotionCard
 };
