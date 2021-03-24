@@ -10,7 +10,10 @@ const {
     KNOB_BUTTON,
     SWITCH_USER_LINK,
     GUEST_CHECKOUT_HEADER,
-    GUEST_CHECKOUT_LOGIN_BUTTON
+    GUEST_CHECKOUT_LOGIN_BUTTON,
+    PRE_ORDER_WARNING,
+    CHECKOUT_ERROR_MESSAGE,
+    RETRY_BUTTON
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
@@ -33,6 +36,12 @@ module.exports = class Checkout extends Page {
     get guestCheckoutHeader () { return $(GUEST_CHECKOUT_HEADER); }
 
     get guestCheckoutLoginButton () { return $(GUEST_CHECKOUT_LOGIN_BUTTON); }
+
+    get preOrderWarning () { return $(PRE_ORDER_WARNING); }
+
+    get checkoutErrorMessage () { return $(CHECKOUT_ERROR_MESSAGE); }
+
+    get errorMessageRetry () { return $(RETRY_BUTTON); }
 
     fields = {
         firstName: {
@@ -86,8 +95,9 @@ module.exports = class Checkout extends Page {
     open (checkout) {
         const serviceType = checkout.isValid ? `&knob-Service%20Type=${checkout.type}` : '&knob-Service%20Type=Invalid%20URL';
         const isLoggedIn = `&knob-Is%20User%20Logged%20In=${checkout.isAuthenticated}`;
+        const hasErrors = `&knob-Has%20Checkout%20Errors=${checkout.checkoutErrors}`;
 
-        const url = `checkout-component${serviceType}${isLoggedIn}`;
+        const url = `checkout-component${serviceType}${isLoggedIn}${hasErrors}`;
         super.openComponent('organism', url);
     }
 
@@ -137,6 +147,18 @@ module.exports = class Checkout extends Page {
 
     isGuestCheckoutHeaderDisplayed () {
         return this.guestCheckoutHeader.isDisplayed();
+    }
+
+    isPreOrderWarningDisplayed () {
+        return this.preOrderWarning.isDisplayed();
+    }
+
+    isCheckoutErrorMessageDisplayed () {
+        return this.checkoutErrorMessage.isDisplayed();
+    }
+
+    clickRetryButton () {
+        return this.errorMessageRetry.click();
     }
 
 
