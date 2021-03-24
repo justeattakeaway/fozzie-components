@@ -7,7 +7,7 @@
             "name": "Run Single Spec - Unit",
             "program": "${workspaceFolder}/node_modules/.bin/jest",
             "args": [
-              "${relativeFile}","--watchAll", "--config", "${fileDirname}/../../../jest.config.js"
+                "--runTestsByPath ${relativeFile}", "--config", "${fileDirname}/../../../jest.config.js"
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
