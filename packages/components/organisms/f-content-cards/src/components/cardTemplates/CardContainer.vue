@@ -1,13 +1,8 @@
 <template>
-    <component
-        :is="url && hasCta ? 'a' : 'div'"
-        :href="hasCta && url"
-        :target="target.attribute"
-        :rel="target.rel"
+    <card-case
+        :card="card"
         :class="[$style['c-contentCard'], { [$style['c-contentCard--isolateHeroImage']]: shouldIsolateHeroImage }]"
-        :data-test-id="testId"
-        @click="onClickContentCard"
-    >
+        :data-test-id="testId">
         <div
             :style="{ 'background-image': shouldApplyImageAsBackground ? `url(${image})` : '' }"
             :class="[{ [$style['c-contentCard-bgImg']]: !!image }]">
@@ -50,11 +45,17 @@
                 <slot />
             </div>
         </div>
-    </component>
+    </card-case>
 </template>
 
 <script>
+import CardCase from './CardCase.vue';
+
 export default {
+    components: {
+        CardCase
+    },
+
     props: {
         card: {
             type: Object,
@@ -128,24 +129,7 @@ export default {
         }
     },
 
-    inject: [
-        'emitCardView',
-        'emitCardClick'
-    ],
-
-    mounted () {
-        this.onViewContentCard();
-    },
-
     methods: {
-        onViewContentCard () {
-            this.emitCardView(this.card);
-        },
-
-        onClickContentCard () {
-            this.emitCardClick(this.card);
-        },
-
         testIdForItemWithIndex (index) {
             return this.testId && `ContentCard-TextItem-${index}`;
         }
@@ -154,18 +138,15 @@ export default {
 </script>
 
 <style lang="scss" module>
+    @import '../../../src/assets/scss/card-styles';
 
     .c-content-card-body {
         flex-grow: 1;
     }
 
     .c-contentCard {
-        width: 100%;
-        text-decoration: initial;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
+        @include card-container;
+
         margin-right: spacing(x2);
         margin-bottom: spacing(x2);
 
@@ -177,22 +158,8 @@ export default {
             margin-right: 0;
         }
 
-        &,
-        &:hover,
-        &:focus {
-            color: currentColor;
-        }
-
         .c-contentCards--wrap & {
-            display: flex;
-            flex-direction: column;
-            flex: 0 0 40%;
-            margin: 0 spacing() spacing(x3) 0;
-            width: 100%;
-
-            @include media('>=narrowMid') {
-                margin: 0 spacing() spacing(x3);
-            }
+            @include card-container-wrapped;
         }
 
         /**
@@ -225,13 +192,9 @@ export default {
     }
 
     .c-contentCard-bgImg {
-        width: 100%;
+        @include card-bg-image;
+
         min-height: 170px;
-        background-repeat: repeat;
-        background-size: cover;
-        background-color: $grey--lighter;
-        background-position: center;
-        border-radius: $border-radius $border-radius 0 0;
     }
 
     .c-contentCard-title {
