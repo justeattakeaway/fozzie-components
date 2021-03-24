@@ -45,6 +45,50 @@ const messages = {
         pageLoad: {
             heading: 'We can\'t show you this page',
             description: 'It\'s a problem at our end, sorry. Your basket is safe and sound, though, so try again soon.'
+        },
+
+        checkoutIssues: {
+            MINIMUM_ORDER_VALUE_NOT_MET: {
+                title: 'Your order does not meet the minimum spend required',
+                message: 'The restaurant might have run out or updated its menu while you were ordering, sorry. You can go back to check your order and choose another item.',
+                buttonText: 'Back to Order'
+            },
+
+            RESTAURANT_NOT_TAKING_ORDERS: {
+                title: 'We couldn\'t send your order',
+                message: 'The restaurant went offline, so we couldn\'t send your order to them, sorry. Hopefully it\'s only temporary, please try again.',
+                buttonText: 'Retry'
+            },
+
+            SERVICE_TYPE_UNAVAILABLE: {
+                title: 'We couldn\'t send your order',
+                message: 'It appears the message for this error is not yet added to the spreadsheet',
+                buttonText: 'Retry'
+            },
+
+            ADDITIONAL_ITEMS_REQUIRED: {
+                title: 'We’ve taken an item off your order',
+                message: 'The restaurant might have run out or updated its menu while you were ordering, sorry. You can go back to check your order and choose another item.',
+                buttonText: 'Back to Order'
+            },
+
+            ITEMS_UNORDERABLE: {
+                title: 'We’ve taken an item off your order',
+                message: 'The restaurant might have run out or updated its menu while you were ordering, sorry. You can go back to check your order and choose another item.',
+                buttonText: 'Back to Order'
+            },
+
+            FULFILMENT_TIME_UNAVAILABLE: {
+                title: 'We do takeaways, not time machines',
+                message: 'The time you picked for your order isn\'t possible, please choose another.',
+                buttonText: 'Retry'
+            },
+
+            LOCATION_UNDELIVERABLE: {
+                title: 'The restaurant doesn\'t deliver to this address',
+                message: 'Search for a different restaurant or change to a collection order.',
+                buttonText: 'OK'
+            }
         }
     },
 

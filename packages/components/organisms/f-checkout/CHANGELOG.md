@@ -12,6 +12,15 @@ Latest (add to next release)
 - Accessibility tests for `Error.vue` component
 
 
+v0.75.0
+------------------------------
+*March 19, 2021*
+
+### Added
+- Mega modal dialog for when unfulfillable issues are returned from `updateCheckout`
+- Constants of all the issues we are expected to receive
+
+
 v0.74.0
 ------------------------------
 *March 18, 2021*

@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.24.1
+------------------------------
+*March 23, 2021*
+
+## Added
+- `f-wdio-utils` package to all component folders 
+- `f-wdio-utils` package to generator
+
+### Removed
+- `f-wdio-utils` from root package.json
+
+
 v3.24.0
 ------------------------------
 *March 22, 2021*

@@ -18,6 +18,7 @@ import {
     UPDATE_STATE,
     UPDATE_USER_NOTE
 } from './mutation-types';
+import checkoutIssues from '../checkout-issues';
 
 export default {
     namespaced: true,
@@ -25,7 +26,10 @@ export default {
     state: () => ({
         id: '',
         serviceType: '',
-        restaurantId: '',
+        restaurant: {
+            id: '',
+            seoName: ''
+        },
         basket: {
             id: '',
             total: 0
@@ -116,8 +120,11 @@ export default {
             const { data: responseData } = await axios.patch(url, data, config);
             const { issues, isFulfillable } = responseData;
 
+            // Can now log these errors inside the map if necessary
+            const detailedIssues = issues.map(issue => ({ ...checkoutIssues[issue.code], ...issue }));
+
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
-            commit(UPDATE_ERRORS, issues);
+            commit(UPDATE_ERRORS, detailedIssues);
         },
 
         /**
@@ -188,7 +195,10 @@ export default {
             const { data } = await axios.get(url, config);
             const basketDetails = {
                 serviceType: data.ServiceType.toLowerCase(),
-                restaurantId: data.RestaurantId,
+                restaurant: {
+                    id: data.RestaurantId,
+                    seoName: data.RestaurantSeoName
+                },
                 basket: {
                     id: data.BasketId,
                     total: data.BasketSummary.BasketTotals.Total
@@ -377,10 +387,10 @@ export default {
             state.availableFulfilment.isAsapAvailable = asapAvailable;
         },
 
-        [UPDATE_BASKET_DETAILS]: (state, { serviceType, basket, restaurantId }) => {
+        [UPDATE_BASKET_DETAILS]: (state, { serviceType, basket, restaurant }) => {
             state.serviceType = serviceType;
             state.basket = basket;
-            state.restaurantId = restaurantId;
+            state.restaurant = restaurant;
         },
 
         [UPDATE_CUSTOMER_DETAILS]: (state, customer) => {
