@@ -2085,6 +2085,18 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
+"@justeat/f-braze-adapter@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-3.1.0.tgz#2c88bf2d450120ded677edf390cdc6a1a54c6895"
+  integrity sha512-yTSEcIfBwlVPw/eHlOEEOxkFv4puM1KCtiz2igvjt3AAV6Ppcr4aRgNpYoGo8/aekVwRbyvN+k5/S3sQr5tJaw==
+  dependencies:
+    appboy-web-sdk "2.5.2"
+    date-fns "2.16.1"
+    lodash.findindex "4.6.0"
+    lodash.orderby "4.6.0"
+    lodash.startswith "4.2.1"
+    lodash.uniq "4.5.0"
+
 "@justeat/f-button@0.4.1":
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.4.1.tgz#6b735093286422f579bd41cee93400a4d32d1b2d"
