@@ -244,10 +244,10 @@ export default {
     }
 
     .c-contentCard-thumbnail {
-            border: 1px solid $grey--lighter;
-            margin-top: - (32px + spacing(x2)); // This offsets the thumbnail above the top of the info card
-            width: 48px;
-            min-height: 48px;
+        border: 1px solid $grey--lighter;
+        margin-top: - (32px + spacing(x2)); // This offsets the thumbnail above the top of the info card
+        width: 48px;
+        min-height: 48px;
     }
 
     .c-postOrderCardContainer {
