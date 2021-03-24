@@ -13,7 +13,7 @@ describe('f-checkout "invalid" component tests', () => {
         checkout.waitForErrorPageComponent();
     });
 
-    it('should not display the checkout component', field => {
+    it('should not display the checkout component', () => {
         // Assert
         expect(checkout.isComponentDisplayed()).toBe(false);
     });
