@@ -4,9 +4,7 @@
 </template>
 
 <script>
-export default {
-    name: 'Heading'
-};
+export default {};
 </script>
 
 
