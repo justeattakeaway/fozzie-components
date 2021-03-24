@@ -14,6 +14,11 @@ describe('f-checkout "invalid" component tests', () => {
         checkout.waitForErrorPageComponent();
     });
 
+    it('should not display the checkout component', field => {
+        // Assert
+        expect(checkout.isComponentDisplayed()).toBe(false);
+    });
+
     it('should display the error page component', () => {
         // Assert
         expect(checkout.isErrorPageComponentDisplayed()).toBe(true);
@@ -24,24 +29,5 @@ describe('f-checkout "invalid" component tests', () => {
         expect(checkout.isErrorPageImageDisplayed()).toBe(true);
         expect(checkout.isErrorPageHeadingDisplayed()).toBe(true);
         expect(checkout.isErrorPageDescriptionDisplayed()).toBe(true);
-    });
-
-    forEach(['addressLine1', 'addressLine2', 'addressLocality', 'addressPostcode'])
-    .it('should not display any user input fields', field => {
-        // Assert
-        expect(checkout.doesFieldExist(field)).toBe(false);
-    });
-
-    it('should not display error component when checkout data is valid', () => {
-        const checkoutData = {
-            type: '',
-            isAuthenticated: false,
-            isValid: true
-        };
-
-        checkout.open(checkoutData);
-        checkout.waitForComponent();
-        // Assert
-        expect(checkout.isErrorPageComponentDisplayed()).toBe(false);
     });
 });
