@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.75.1
+------------------------------
+*March 22, 2021*
+
+### Changed
+- Load `address` into state via new `location` object. 
+
+
 v0.75.0
 ------------------------------
 *March 19, 2021*
