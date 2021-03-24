@@ -38,9 +38,8 @@ $restaurant-logo-width: 48px;
 }
 
 .c-skeleton-loader-heading {
-    margin: auto;
     height: spacing(x3);
-    margin-bottom: spacing();
+    margin: 0 auto spacing();
 }
 
 .c-skeleton-loader-text {
