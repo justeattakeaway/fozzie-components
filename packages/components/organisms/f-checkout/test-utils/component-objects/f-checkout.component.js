@@ -38,7 +38,7 @@ module.exports = class Checkout extends Page {
 
     get guestCheckoutLoginButton () { return $(GUEST_CHECKOUT_LOGIN_BUTTON); }
 
-    get errorPage () { return $(ERROR_PAGE_COMPONENT); }
+    get errorPageComponent () { return $(ERROR_PAGE_COMPONENT); }
 
     get errorPageDescription () { return $(ERROR_PAGE_DESCRIPTION); }
 
@@ -107,6 +107,10 @@ module.exports = class Checkout extends Page {
         super.waitForComponent(this.component);
     }
 
+    waitForErrorPageComponent () {
+        super.waitForComponent(this.errorPageComponent);
+    }
+
     isComponentDisplayed () {
         return this.component.isDisplayed();
     }
@@ -152,7 +156,7 @@ module.exports = class Checkout extends Page {
     }
 
     isErrorPageComponentDisplayed () {
-        return this.errorPage.isDisplayed();
+        return this.errorPageComponent.isDisplayed();
     }
 
     isErrorPageHeadingDisplayed () {

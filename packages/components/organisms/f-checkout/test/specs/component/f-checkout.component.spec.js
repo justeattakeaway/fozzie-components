@@ -3,7 +3,7 @@
 // const checkout = new Checkout();
 
 // describe('f-checkout component tests', () => {
-//     before(() => {
+//     beforeEach(() => {
 //         const checkoutData = {
 //             type: 'delivery',
 //             isAuthenticated: true,

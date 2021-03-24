@@ -11,6 +11,7 @@ describe('f-checkout "invalid" component tests', () => {
         };
 
         checkout.open(checkoutData);
+        checkout.waitForErrorPageComponent();
     });
 
     it('should display the error page component', () => {
