@@ -84,6 +84,10 @@ export default {
 <style lang="scss" module>
 @import '../../../src/assets/scss/card-styles';
 
+$stampCard-promo-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03),
+    0 3px 1px -2px rgba(0, 0, 0, 0.07),
+    0 1px 5px 0 rgba(0, 0, 0, 0.06);
+
 .c-stampCardPromotion1 {
     @include card-container;
 
@@ -93,9 +97,7 @@ export default {
     @include media('>narrowMid') {
         max-width: 344px;
         border-radius: 2px;
-        box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.03),
-            0px 3px 1px -2px rgba(0, 0, 0, 0.07),
-            0px 1px 5px 0px rgba(0, 0, 0, 0.06);
+        box-shadow: $stampCard-promo-shadow;
     }
 
     @include media('>mid') {
@@ -142,12 +144,10 @@ export default {
     margin-left: spacing(x2);
     margin-right: spacing(x2) - 1px;
     border-radius: $border-radius;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.03),
-    0px 3px 1px -2px rgba(0, 0, 0, 0.07),
-    0px 1px 5px 0px rgba(0, 0, 0, 0.06);
+    box-shadow: $stampCard-promo-shadow;
 
     @include media ('>narrowMid') {
-        margin: 0 0 0 0;
+        margin: 0;
         box-shadow: none;
     }
 }
