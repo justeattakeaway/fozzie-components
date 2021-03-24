@@ -13,16 +13,16 @@ exports[`Footer should render default component markup 1`] = `
     <div>
       <!---->
       <div>
-        <icon-list-stub icons="[object Object],[object Object],[object Object]" title="Download our apps" isapps="true" locale="en-GB"></icon-list-stub>
-        <feedback-block-stub title="Feedback" text="Help us improve our website" buttontext="Send feedback"></feedback-block-stub>
-        <icon-list-stub icons="[object Object],[object Object],[object Object],[object Object],[object Object]" title="Follow us" issocial="true" locale="en-GB"></icon-list-stub>
+        <icon-list-stub icons="[object Object],[object Object],[object Object]" title="Download our apps" listtype="apps" locale="en-GB"></icon-list-stub>
+        <feedback-block-stub title="Feedback" text="Help us improve our website" buttontext="Send feedback" data-test-id="feedbackLinks-wrapper"></feedback-block-stub>
+        <icon-list-stub icons="[object Object],[object Object],[object Object],[object Object],[object Object]" title="Follow us" listtype="social" locale="en-GB"></icon-list-stub>
       </div>
     </div>
   </div>
   <div class="">
     <country-selector-stub currentcountryname="United Kingdom" currentcountrykey="gb" countries="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" changecountrytext="You are on the UK website, click here to change." data-test-id="country-selector"></country-selector-stub>
     <!---->
-    <icon-list-stub icons="[object Object],[object Object],[object Object]" title="" ispayments="true" locale="en-GB"></icon-list-stub>
+    <icon-list-stub icons="[object Object],[object Object],[object Object]" title="" listtype="payments" locale="en-GB"></icon-list-stub>
   </div>
 </footer>
 `;
