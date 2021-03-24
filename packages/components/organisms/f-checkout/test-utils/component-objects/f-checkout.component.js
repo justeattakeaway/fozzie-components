@@ -87,6 +87,11 @@ module.exports = class Checkout extends Page {
         super.open(url);
     }
 
+    withQuery (name, value) {
+        super.withQuery(name, value);
+        return this;
+    }
+
     waitForComponent () {
         super.waitForComponent(this.component);
     }

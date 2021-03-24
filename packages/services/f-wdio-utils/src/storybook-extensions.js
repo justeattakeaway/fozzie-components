@@ -5,6 +5,9 @@ const buildUrl = (componentType, componentName, path) => {
         case 'atom':
             url += 'atoms--';
             break;
+        case 'atom-folder':
+            url += 'atoms-';
+            break;
         case 'molecule':
             url += 'molecules--';
             break;
@@ -15,7 +18,7 @@ const buildUrl = (componentType, componentName, path) => {
             url += 'organisms--';
             break;
         default:
-            throw new Error(`${componentType} is not a valid component type. Please use 'atom', 'molecule', 'molecule-folder' or 'organism'`);
+            throw new Error(`${componentType} is not a valid component type. Please use 'atom', 'atom-folder', 'molecule', 'molecule-folder' or 'organism'`);
     }
 
     url += componentName;

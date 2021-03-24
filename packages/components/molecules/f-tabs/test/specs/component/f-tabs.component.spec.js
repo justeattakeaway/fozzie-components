@@ -1,11 +1,14 @@
-import forEach from 'mocha-each';
-const Tabs = require ('../../../test-utils/component-objects/f-tabs.component');
-const tabs = new Tabs();
+const Tabs = require('../../../test-utils/component-objects/f-tabs.component');
+const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
+
+const tabs = new Tabs('molecule', 'vue-tabs-component');
 
 describe('f-tabs component tests', () => {
     beforeEach(() => {
-        tabs.open();
-        tabs.waitForComponent();
+        const pageUrl = buildUrl(tabs.componentType, tabs.componentName, tabs.path);
+
+        tabs.open(pageUrl)
+            .waitForComponent();
     });
 
     it('should display the f-tabs component', () => {

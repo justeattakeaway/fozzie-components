@@ -1,10 +1,14 @@
 const StatusBanner = require('../../../test-utils/component-objects/f-statusBanner.component');
-const statusBanner = new StatusBanner();
+const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
+
+const statusBanner = new StatusBanner('organism', 'status-banner-component');
 
 describe('f-statusBanner component tests', () => {
     beforeEach(() => {
-        statusBanner.open();
-        statusBanner.waitForComponent();
+        const pageUrl = buildUrl(statusBanner.componentType, statusBanner.componentName, statusBanner.path);
+
+        statusBanner.open(pageUrl)
+            .waitForComponent();
     });
 
     it('should display the f-statusBanner component', () => {

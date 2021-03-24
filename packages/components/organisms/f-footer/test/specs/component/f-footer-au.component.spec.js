@@ -1,9 +1,14 @@
 const Footer = require('../../../test-utils/component-objects/f-footer.component');
-const footer = new Footer();
+const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
+
+const footer = new Footer('organism', 'footer-component');
 
 describe('f-footer component tests', () => {
     beforeEach(() => {
-        footer.open('au');
+        footer.withQuery('knob-Locale', 'en-au');
+        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
+
+        footer.open(pageUrl);
         footer.waitForComponent();
     });
 

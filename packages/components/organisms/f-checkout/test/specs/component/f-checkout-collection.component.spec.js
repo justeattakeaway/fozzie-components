@@ -1,12 +1,12 @@
 import forEach from 'mocha-each';
 
 const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
-const buildUrl = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
+const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
 
-const checkout = new Checkout();
+const checkout = new Checkout('organism', 'checkout-component');
 
 describe('f-checkout "collection" component tests', () => {
-    before(() => {
+    beforeEach(() => {
         checkout.withQuery('knob-Service Type', 'collection')
                 .withQuery('knob-Is User Logged In', true);
 
@@ -17,7 +17,7 @@ describe('f-checkout "collection" component tests', () => {
     });
 
     forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
-    .it.only('should check that address fields should not exist', field => {
+    .it('should check that address fields should not exist', field => {
         // Assert
         expect(checkout.doesFieldExist(field)).toBe(false);
     });

@@ -1,10 +1,15 @@
 const Footer = require('../../../test-utils/component-objects/f-footer.component');
-const footer = new Footer();
-const forEach = require('mocha-each');
+const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
+
+const footer = new Footer('organism', 'footer-component');
 
 describe('f-footer component tests', () => {
     beforeEach(() => {
-        footer.open('gb');
+
+        footer.withQuery('knob-Locale', 'en-gb');
+        const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
+
+        footer.open(pageUrl);
         footer.waitForComponent();
     });
 
@@ -21,11 +26,11 @@ describe('f-footer component tests', () => {
         // Assert
         expect(footer.isDownloadIconDisplayed()).toBe(true);
 
-         // Act
-         footer.clickDownloadIcon();
+        // Act
+        footer.clickDownloadIcon();
 
-         // Assert
-         expect(browser.getUrl()).toContain(expectedUrl);
+        // Assert
+        expect(browser.getUrl()).toContain(expectedUrl);
     });
 
     forEach([['twitter', 'twitter.com'], ['facebook', 'facebook.com'], ['youtube', 'youtube.com']])

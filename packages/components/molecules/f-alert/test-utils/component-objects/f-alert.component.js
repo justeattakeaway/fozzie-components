@@ -5,8 +5,8 @@ module.exports = class Alert extends Page {
 
     get exitButton () { return $('[data-test-id="alert-dismiss"]'); }
 
-    open () {
-        super.openComponent('molecule', 'alert-component');
+    open (url) {
+        super.open(url);
     }
 
     isComponentDisplayed () {

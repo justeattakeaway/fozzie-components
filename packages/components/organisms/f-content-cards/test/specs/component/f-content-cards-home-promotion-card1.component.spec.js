@@ -1,10 +1,14 @@
 const HomePromotionCard1 = require('../../../test-utils/component-objects/f-content-cards-home-promotion-card1.component');
-const card = new HomePromotionCard1();
+const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
+
+const card = new HomePromotionCard1('molecule-folder', 'f-content-cards--home-promotion-card-1-component');
 
 describe('home promotion card 1 component tests', () => {
     beforeEach(() => {
-        card.open();
-        card.waitForComponent();
+        const pageUrl = buildUrl(card.componentType, card.componentName, card.path);
+
+        card.open(pageUrl)
+            .waitForComponent();
     });
 
     it('should display the card', () => {
@@ -16,7 +20,7 @@ describe('home promotion card 1 component tests', () => {
         // Assert
         expect(card.isInnerContainerDisplayed()).toBe(true);
         expect(card.isHeaderDisplayed()).toBe(true);
-        expect(card.isImageDisplayed()).toBe(true); 
+        expect(card.isImageDisplayed()).toBe(true);
         expect(card.isSubtitleDisplayed()).toBe(true);
     });
 

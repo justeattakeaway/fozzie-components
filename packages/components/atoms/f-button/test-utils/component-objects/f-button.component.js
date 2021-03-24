@@ -5,18 +5,16 @@ module.exports = class Buttons extends Page {
 
     get linkComponent () { return $('[data-test-id="link-button-component"]'); }
 
-    open (buttonType = '') {
-        const url = buttonType === 'link' ? '&knob-Button%20Type=link&knob-href=link' : '';
-
-        browser.url(`/iframe.html?id=components-atoms-f-button--button-component${url}`)
+    open (url) {
+        super.open(url);
     }
 
     waitForActionComponent () {
-        this.actionComponent.waitForExist();
+        super.waitForComponent();
     }
 
     waitForLinkComponent () {
-        this.linkComponent.waitForExist();
+        this.linkComponent.waitForExist(this.component);
     }
 
     isActionComponentDisplayed () {

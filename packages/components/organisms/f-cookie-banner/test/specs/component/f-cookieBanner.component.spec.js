@@ -1,10 +1,14 @@
 const CookieBanner = require('../../../test-utils/component-objects/f-cookieBanner.component');
-const cookieBanner = new CookieBanner();
+const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
+
+const cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
 
 describe('f-cookieBanner component tests', () => {
     beforeEach(() => {
-        cookieBanner.open()
-        cookieBanner.waitForComponent();
+        const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
+
+        cookieBanner.open(pageUrl)
+            .waitForComponent();
     });
 
     it('should display the f-cookieBanner component', () => {

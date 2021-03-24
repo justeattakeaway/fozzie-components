@@ -1,10 +1,14 @@
 const MegaModal = require('../../../test-utils/component-objects/f-mega-modal.component');
-const megaModal = new MegaModal();
+const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
+
+const megaModal = new MegaModal('molecule', 'mega-modal-component');
 
 describe('f-mega-modal component tests', () => {
     beforeEach(() => {
-        megaModal.open();
-        megaModal.waitForComponent();
+        const pageUrl = buildUrl(megaModal.componentType, megaModal.componentName, megaModal.path);
+
+        megaModal.open(pageUrl)
+            .waitForComponent();
     });
 
     it('should display Alert', () => {

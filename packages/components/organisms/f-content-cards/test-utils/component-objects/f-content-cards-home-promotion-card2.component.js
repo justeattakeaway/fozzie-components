@@ -15,8 +15,8 @@ module.exports = class HomePromotionCard2 extends Page {
     get title () { return $(TITLE) }
     get backgroundImage () { return $(BACKGROUND_IMAGE) }
 
-    open() {
-        super.openComponent('molecule-folder', 'f-content-cards--home-promotion-card-2-component');
+    open (url) {
+        super.open(url);
     }
 
     waitForComponent () {

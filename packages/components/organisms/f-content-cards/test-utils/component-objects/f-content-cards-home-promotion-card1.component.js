@@ -1,6 +1,7 @@
 const Page = require('../../../../../services/f-wdio-utils/src/page.object');
 const HomePromotionCard2 = require('./f-content-cards-home-promotion-card2.component');
-const card2 = new HomePromotionCard2();
+
+const card2 = new HomePromotionCard2('molecule-folder', 'f-content-cards--home-promotion-card-2-component');
 
 const {
     PROMOTION_CARD_1_COMPONENT,
@@ -18,9 +19,9 @@ module.exports = class HomePromotionCard1 extends Page {
     get image () { return $(IMAGE) }
     get subtitle () { return $(SUBTITLE) }
 
-    open() {
-        super.openComponent('molecule-folder', 'f-content-cards--home-promotion-card-1-component');
-    };
+    open (url) {
+        super.open(url);
+    }
 
     waitForComponent () {
         super.waitForComponent(this.component);

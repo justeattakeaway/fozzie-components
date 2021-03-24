@@ -1,10 +1,14 @@
 const Breadcrumbs = require('../../../test-utils/component-objects/f-breadcrumbs.component');
-const breadcrumbs = new Breadcrumbs();
+const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
+
+const breadcrumbs = new Breadcrumbs('molecule', 'breadcrumbs-component');
 
 describe('f-breadcrumbs component tests', () => {
     beforeEach(() => {
-        breadcrumbs.open();
-        breadcrumbs.waitForComponent();
+        const pageUrl = buildUrl(breadcrumbs.componentType, breadcrumbs.componentName, breadcrumbs.path);
+
+        breadcrumbs.open(pageUrl)
+            .waitForComponent();
     });
     it('should display the f-breadcrumbs component', () => {
         // Assert

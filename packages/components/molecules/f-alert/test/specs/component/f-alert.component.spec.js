@@ -1,10 +1,14 @@
 const Alert = require('../../../test-utils/component-objects/f-alert.component');
-const alert = new Alert();
+const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
+
+const alert = new Alert('molecule', 'alert-component');
 
 describe('f-alert component tests', () => {
     beforeEach(() => {
-        alert.open();
-        alert.waitForComponent();
+        const pageUrl = buildUrl(alert.componentType, alert.componentName, alert.path);
+
+        alert.open(pageUrl)
+            .waitForComponent();
     });
 
     it('should display Alert', () => {

@@ -1,11 +1,17 @@
-const Registration = require ('../../../test-utils/component-objects/f-registration.component');
-const registration = new Registration();
 const forEach = require('mocha-each');
+
+const Registration = require('../../../test-utils/component-objects/f-registration.component');
+const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
+
+const registration = new Registration('organism', 'registration-component');
+
 
 describe('f-registration component tests', () => {
     beforeEach(() => {
-        registration.open();
-        registration.waitForComponent();
+        const pageUrl = buildUrl(registration.componentType, registration.componentName, registration.path);
+
+        registration.open(pageUrl)
+            .waitForComponent();
     });
 
     it('should display component', () => {
@@ -14,7 +20,6 @@ describe('f-registration component tests', () => {
     });
 
     it('should display the "Email address is already registered" error', () => {
-
         // Arrange
         const userInfo = {
             firstName: 'Test',
@@ -48,7 +53,7 @@ describe('f-registration component tests', () => {
 
         // Act
         registration.submitForm(userInfo);
-        
+
         // Assert
         expect(registration.isEmptyErrorDisplayed(field)).toBe(true);
     });
@@ -59,13 +64,13 @@ describe('f-registration component tests', () => {
         const userInfo = {
             firstName: '123*',
             lastName: '456*',
-            email: '***@**', 
+            email: '***@**',
             password: 'llanfairpwllgwyngyllgogerychwyr'
         };
 
         // Act
         registration.submitForm(userInfo);
-        
+
         // Assert
         expect(registration.isInvalidErrorDisplayed(field)).toBe(true);
     });
@@ -76,13 +81,13 @@ describe('f-registration component tests', () => {
         const userInfo = {
             firstName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',
             lastName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',
-            email: 'ashton.adamms+jetest@just-eat.com', 
+            email: 'ashton.adamms+jetest@just-eat.com',
             password: 'llanfairpwllgwyngyllgogerychwyr'
         };
 
         // Act
         registration.submitForm(userInfo);
-        
+
         // Assert
         expect(registration.isMaxLengthErrorDisplayed(field)).toBe(true);
     });

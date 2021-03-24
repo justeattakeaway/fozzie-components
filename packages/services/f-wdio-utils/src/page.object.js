@@ -1,11 +1,9 @@
-/* global browser */
-
 class Page {
     constructor (componentType, componentName) {
+        this.title = 'Component URLS';
         this.componenType = componentType;
         this.componentName = componentName;
         this.path = '';
-        this.component = '';
     }
 
     open (url) {
@@ -14,8 +12,7 @@ class Page {
     }
 
     waitForComponent (component) {
-        this.component = component;
-        this.component.waitForExist();
+        component.waitForExist();
     }
 
     withQuery (name, value) {
