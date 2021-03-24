@@ -343,7 +343,7 @@ export default {
             id,
             serviceType,
             customer,
-            address,
+            location,
             time,
             isFulfillable,
             notices,
@@ -359,7 +359,8 @@ export default {
 
             state.time = time;
 
-            if (address) {
+            if (location && location.address) {
+                const { address } = location;
                 /* eslint-disable prefer-destructuring */
                 state.address.line1 = address.lines[0];
                 state.address.line2 = address.lines[1];
