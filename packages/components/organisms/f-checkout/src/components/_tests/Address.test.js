@@ -30,8 +30,6 @@ const $v = {
 };
 
 describe('Address', () => {
-    allure.feature('Checkout-Address');
-
     const propsData = {};
 
     it('should be defined', () => {

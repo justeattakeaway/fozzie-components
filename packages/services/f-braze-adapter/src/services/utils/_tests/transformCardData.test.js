@@ -16,6 +16,7 @@ const pinned = '__PINNED__';
 const button = '__BUTTON__';
 const icon = '__ICON__';
 const image = '__IMAGE__';
+const location = '__LOCATION__';
 const order = '__ORDER__';
 const type = '__TYPE__';
 const voucherCode = '__VOUCHER_CODE__';
@@ -45,6 +46,7 @@ const extras = {
     is_ready_to_claim: isReadyToClaim, // eslint-disable-line camelcase
     line_1: line1, // eslint-disable-line camelcase
     line_2: line2, // eslint-disable-line camelcase
+    location,
     order,
     custom_card_type: type, // eslint-disable-line camelcase
     voucher_code: voucherCode, // eslint-disable-line camelcase
@@ -76,6 +78,7 @@ const reformattedCard = {
     ctaText: button,
     image,
     isReadyToClaim: false, // because `'__IS_READY_TO_CLAIM__'` is not `true` or `'true'`
+    location,
     title,
     totalRequiredStamps,
     subtitle: description,

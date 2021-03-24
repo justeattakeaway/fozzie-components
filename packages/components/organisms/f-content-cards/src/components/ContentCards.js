@@ -225,7 +225,8 @@ export default {
                     'Post_Order_Card_1',
                     'Home_Promotion_Card_1',
                     'Home_Promotion_Card_2',
-                    'Stamp_Card_1'
+                    'Stamp_Card_1',
+                    'StampCard_Promotion_Card_1'
                 ],
                 brands: this.brands,
                 callbacks: {

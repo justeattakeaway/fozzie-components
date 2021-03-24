@@ -1,9 +1,9 @@
 {
   "name": "@justeat/f-services",
   "description": "Fozzie Services - Shared Services for Components and projects",
-  "version": "1.7.1",
-  "main": "dist/f-services.umd.min.js",
-  "module": "dist/f-services.esm.js",
+  "version": "1.9.0",
+  "main": "dist/f-services.umd.js",
+  "module": "dist/f-services.es.js",
   "source": "src/index.js",
   "files": [
     "dist"
@@ -28,29 +28,23 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "rollup --config",
-    "lint": "vue-cli-service lint --no-fix",
+    "build": "vite build",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
-    "test": "vue-cli-service test:unit"
+    "test": "jest"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "lodash-es": "4.17.15",
+    "lodash-es": "4.17.21",
     "window-or-global": "1.0.1"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "7.11.0",
-    "@rollup/plugin-commonjs": "11.0.2",
-    "@rollup/plugin-json": "4.0.2",
-    "@rollup/plugin-node-resolve": "7.1.1",
-    "@vue/cli-plugin-eslint": "3.9.2",
-    "@vue/cli-plugin-unit-jest": "4.4.6",
-    "axios-mock-adapter": "1.18.2",
-    "rollup": "1.26.3",
-    "rollup-plugin-babel": "4.4.0",
-    "rollup-plugin-terser": "5.1.2"
+    "@babel/plugin-transform-runtime": "7.13.10",
+    "axios-mock-adapter": "1.19.0",
+    "jest": "26.6.3",
+    "vite": "2.1.2"
   },
   "peerDependencies": {
     "axios": ">=0.21.1"

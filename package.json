@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "3.23.0",
+  "version": "3.24.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -10,7 +10,6 @@
     "lint:style": "lerna run lint:style --stream",
     "prepublishOnly": "lerna run prepublishOnly --stream",
     "release": "lerna publish",
-    "report": "allure generate test/results/allure -o test/results/allure/report --clean && allure open",
     "storybook:build": "lerna run storybook:build --stream",
     "storybook:serve": "lerna run storybook:serve --stream",
     "storybook:serve-static": "lerna run storybook:serve-static --stream",
@@ -21,7 +20,8 @@
     "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y lerna run test-a11y:chrome --concurrency 1 --stream",
     "test:consumer": "lerna run test:consumer",
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
-    "local:tests": "cross-env yarn test && yarn test-component:chrome && yarn test-a11y:chrome"
+    "local:tests": "cross-env yarn test && yarn test-component:chrome && yarn test-a11y:chrome",
+    "allure:clean": "rimraf test/results/allure"
   },
   "resolutions": {
     "webpack": "4.36.0"
@@ -34,7 +34,6 @@
     "@justeat/browserslist-config-fozzie": "1.1.1",
     "@justeat/eslint-config-fozzie": "3.4.1",
     "@justeat/f-utils": "1.1.0",
-    "@justeat/f-wdio-utils": "0.1.0",
     "@justeat/fozzie": "5.0.0-beta.3",
     "@justeat/fozzie-colour-palette": "3.1.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",

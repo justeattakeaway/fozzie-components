@@ -27,7 +27,6 @@ export default function ContentCardsNoCards (args, { argTypes }) {
                 :user-id="userId"
                 :api-key="apiKey"
                 :locale="locale"
-                :custom-cards="customCards"
                 :key="locale"
             >
                 <template #${STATE_NO_CARDS}="{ status }">

@@ -12,7 +12,6 @@ localVue.use(VueI18n);
 localVue.use(Vuex);
 
 describe('Error', () => {
-    allure.feature('Checkout-Error');
     const propsData = {};
 
     it('should be defined', () => {
