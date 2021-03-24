@@ -13,7 +13,9 @@ import CarouselCardRestaurantHeader from './CarouselCardRestaurantHeader.vue';
 
 export default {
     components: {
-        CarouselCardBackground, CarouselCardRestaurantData, CarouselCardRestaurantHeader
+        CarouselCardBackground,
+        CarouselCardRestaurantData,
+        CarouselCardRestaurantHeader
     }
 };
 </script>
