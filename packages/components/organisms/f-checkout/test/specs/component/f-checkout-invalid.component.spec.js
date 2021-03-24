@@ -3,7 +3,7 @@ const checkout = new Checkout();
 import forEach from 'mocha-each';
 
 describe('f-checkout "invalid" component tests', () => {
-    before(() => {
+    beforeEach(() => {
         const checkoutData = {
             type: '',
             isAuthenticated: false,
