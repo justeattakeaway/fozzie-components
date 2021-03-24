@@ -1,7 +1,7 @@
 <template>
-    <div class="c-skeleton-loader-sentence c-skeleton-loader-bone">
-        <text-block />
-        <text-block />
+    <div>
+        <text-block :class="$style['c-sentence-textBlock']" />
+        <text-block :class="$style['c-sentence-textBlock']" />
     </div>
 </template>
 
@@ -9,16 +9,18 @@
 import TextBlock from './Text.vue';
 
 export default {
-    name: 'Sentence',
     components: { TextBlock }
 };
 </script>
 
-<style lang="scss" scoped>
-.c-skeleton-loader-text:nth-child(2) {
+<style lang="scss" module>
+
+.c-sentence-textBlock:nth-child(2) {
     max-width: 70%;
 }
-.c-skeleton-loader-text:not(:last-child) {
+
+.c-sentence-textBlock:not(:last-child) {
     margin-bottom: spacing();
 }
+
 </style>

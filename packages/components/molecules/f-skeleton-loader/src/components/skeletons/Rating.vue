@@ -1,6 +1,6 @@
 <template>
     <div
-        class="c-skeleton-loader-rating c-skeleton-loader-bone">
+        :class="$style['c-rating']">
         ★★★★★★
     </div>
 </template>
@@ -9,9 +9,9 @@
 export default {};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" module>
 
-.c-skeleton-loader-rating {
+.c-rating {
      color: $skeleton-loader-bone-background-color;
      font-size: spacing(x2);
 }

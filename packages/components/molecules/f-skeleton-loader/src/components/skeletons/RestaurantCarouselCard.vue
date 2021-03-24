@@ -1,8 +1,8 @@
 <template>
-    <div class="c-skeleton-loader-restaurantCarouselCard c-skeleton-loader-bone">
-        <carousel-card-background />
-        <carousel-card-restaurant-header />
-        <carousel-card-restaurant-data />
+    <div :class="$style['c-restaurantCarouselCard']">
+        <carousel-card-background :class="$style['c-restaurantCarouselCard-background']" />
+        <carousel-card-restaurant-header :class="$style['c-restaurantCarouselCard-header']" />
+        <carousel-card-restaurant-data :class="$style['c-restaurantCarouselCard-data']" />
     </div>
 </template>
 
@@ -18,26 +18,27 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" module>
 
-.c-skeleton-loader-restaurantCarouselCard {
+.c-restaurantCarouselCard {
     max-width: 400px;
     text-align: center;
     margin: auto;
-
-    .c-skeleton-loader-carouselCardBackground {
-        margin-bottom: -(spacing(x8));
-    }
-
-    .c-skeleton-loader-carouselCardRestaurantHeader,
-    .c-skeleton-loader-restaurantData {
-        border: 1px solid $skeleton-loader-bone-background-color;
-        border-top: 0;
-    }
-
-    .c-skeleton-loader-carouselCardRestaurantHeader {
-        border-bottom: 0;
-    }
 }
+
+.c-restaurantCarouselCard-background {
+    margin-bottom: -(spacing(x8));
+}
+
+.c-restaurantCarouselCard-header,
+.c-restaurantCarouselCard-data {
+    border: 1px solid $skeleton-loader-bone-background-color;
+    border-top: 0;
+}
+
+.c-restaurantCarouselCard-header {
+    border-bottom: 0;
+}
+
 
 </style>

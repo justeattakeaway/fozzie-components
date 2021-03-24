@@ -1,9 +1,9 @@
 <template>
-    <div class="c-skeleton-loader-carouselCardRestaurantHeader c-skeleton-loader-bone">
-        <image-block />
-        <heading />
-        <text-block />
-        <text-block />
+    <div :class="$style['c-carouselCardRestaurantHeader']">
+        <image-block :class="$style['c-carouselCardRestaurantHeader-logo']" />
+        <heading :class="$style['c-carouselCardRestaurantHeader-heading']" />
+        <text-block :class="[$style['c-text']]" />
+        <text-block :class="[$style['c-text']]" />
     </div>
 </template>
 
@@ -17,19 +17,20 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" module>
 
 $restaurant-logo-width: 48px;
 
-.c-skeleton-loader-carouselCardRestaurantHeader {
+.c-carouselCardRestaurantHeader {
     text-align: center;
     background-color: #fff;
     margin: auto;
     width: 96%;
     padding-bottom: spacing(x2);
+    position: relative;
 }
 
-.c-skeleton-loader-image {
+.c-carouselCardRestaurantHeader-logo {
     margin: auto;
     width: $restaurant-logo-width;
     height: $restaurant-logo-width;
@@ -37,21 +38,21 @@ $restaurant-logo-width: 48px;
     transform: translateY(-50%);
 }
 
-.c-skeleton-loader-heading {
+.c-carouselCardRestaurantHeader-heading {
     height: spacing(x3);
     margin: 0 auto spacing();
 }
 
-.c-skeleton-loader-text {
+.c-text {
     max-width: 40%;
     margin: auto;
 }
 
-.c-skeleton-loader-text:nth-child(3) {
+.c-text:nth-child(3) {
     max-width: 35%;
 }
 
-.c-skeleton-loader-text:not(:last-child) {
+.c-text:not(:last-child) {
     margin-bottom: spacing();
 }
 

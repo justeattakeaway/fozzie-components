@@ -11,6 +11,12 @@ v0.3.0
 ### Added
 - Skeleton components to make restaurant carousel card
 
+### Changed
+- Styles to use modules rather than scoped
+
+### Removed
+- Removed isAnimated prop
+
 
 v0.2.0
 ------------------------------

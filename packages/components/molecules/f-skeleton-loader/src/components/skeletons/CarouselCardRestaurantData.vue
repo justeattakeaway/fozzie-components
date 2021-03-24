@@ -1,21 +1,25 @@
 <template>
-    <div class="c-skeleton-loader-restaurantData c-skeleton-loader-bone">
-        <sentence />
+    <div :class="$style['c-restaurantData']">
+        <div :class="$style['c-restaurantData-textWrapper']">
+            <text-block :class="[$style['c-restaurantData-text']]" />
+            <text-block :class="[$style['c-restaurantData-text']]" />
+        </div>
         <rating />
     </div>
 </template>
 
 <script>
-import Sentence from './Sentence.vue';
+import TextBlock from './Text.vue';
 import Rating from './Rating.vue';
 
 export default {
-    components: { Sentence, Rating }
+    components: { TextBlock, Rating }
 };
 </script>
 
-<style lang="scss" scoped>
-.c-skeleton-loader-restaurantData {
+<style lang="scss" module>
+
+.c-restaurantData {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -23,16 +27,15 @@ export default {
     width: 96%;
     margin: auto;
     padding: spacing();
-
-    .c-skeleton-loader-sentence {
-        width: 25%;
-    }
-    /deep/ .c-skeleton-loader-text {
-        width: 70%;
-        height: spacing(x1.8);
-    }
-    /deep/ .c-skeleton-loader-text:nth-child(2) {
-        margin-bottom: 0;
-    }
 }
+
+.c-restaurantData-textWrapper {
+    flex: 1;
+}
+
+.c-restaurantData-text {
+    width: 25%;
+    height: spacing(x1.5);
+}
+
 </style>

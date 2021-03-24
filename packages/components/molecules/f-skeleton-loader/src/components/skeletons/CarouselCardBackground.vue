@@ -1,6 +1,6 @@
 <template>
-    <div class="c-skeleton-loader-carouselCardBackground c-skeleton-loader-bone">
-        <image-block />
+    <div>
+        <image-block :class="$style['c-carouselCardBackground-image']" />
     </div>
 </template>
 
@@ -12,8 +12,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.c-skeleton-loader-bone {
+<style lang="scss" module>
+
+.c-carouselCardBackground-image {
     height: 200px;
 }
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="c-skeleton-loader-image c-skeleton-loader-bone" />
+    <div :class="$style['c-image']" />
 </template>
 
 <script>
@@ -8,8 +8,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.c-skeleton-loader-image {
+<style lang="scss" module>
+
+.c-image {
     height: $skeleton-loader-image-height;
 }
+
 </style>
