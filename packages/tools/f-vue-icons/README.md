@@ -64,7 +64,7 @@ If you can't use a tree-shaking compatible build tool, then you can use the per-
 The component extends [@justeat/browserslist-config-fozzie](https://github.com/justeat/browserslist-config-fozzie) package for the list of browsers to support.
 
 
-## Contrubuting
+## Contributing
 
 Before staring please read our [contributing guide](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html?path=/story/documentation-getting-started-contributing--page)
 

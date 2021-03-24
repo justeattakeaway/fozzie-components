@@ -9,13 +9,13 @@
 
 If you want to learn more about fozzie-components and how it's structured, these are some good articles...
 
-Description 
-------------- 
-[Guide to mono-repos](https://www.toptal.com/front-end/guide-to-monorepos)
-[Our Development Principles](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html?path=/story/documentation-getting-started-development-principles--page)
-[Fozzie CSS Naming Scheme](https://fozzie.just-eat.com/documentation/css/css-naming)
-[Fozzie Accessibility Guide](https://fozzie.just-eat.com/documentation/general/accessibility/)
-[What not to do guide](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html?path=/story/documentation-standards-accessibility-overview--page)
+Resources |
+------------- |
+[Guide to mono-repos](https://www.toptal.com/front-end/guide-to-monorepos) |
+[Our Development Principles](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html?path=/story/documentation-getting-started-development-principles--page) |
+[Fozzie CSS Naming Scheme](https://fozzie.just-eat.com/documentation/css/css-naming) |
+[Fozzie Accessibility Guide](https://fozzie.just-eat.com/documentation/general/accessibility/) |
+[What not to do guide](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html?path=/story/documentation-standards-accessibility-overview--page) |
 
 ## Pull Requests
 
@@ -75,7 +75,9 @@ If you are making changes that do not need a version bump in any part of the rep
 
 To publish a package to **npm**, please first ensure that you have registered an account on [npmjs.com](https://www.npmjs.com/).
 
-Internal contributors (JET Employees) should request to be added to the Just Eat npm organisation by asking in the #guild-ui Slack channel and providing your npm username. This will then allow you to publish the packages in our mono-repo.
+Internal contributors (JET Employees) should request to be added to the Just Eat npm organisation by asking in the #guild-frontend Slack channel and providing their npm username. This will then allow you to publish the packages from our mono-repo.
+
+To be able to publish you will need to run `npm login` first. You will also need to add your github access token to `.npmrc` file for components to be published to our Storybook. More info about that can be found [here](https://docs.github.com/en/packages/guides/configuring-npm-for-use-with-github-packages).
 
 External contributors should raise a pull request and the release will be handled for you once approved.
 
