@@ -198,13 +198,13 @@ describe('Selector', () => {
 
             let wrapper;
             let updateChangedFieldSpy;
-            let updateHasAsapSelectedSpy;
+            let setAsapFlagSpy;
 
             beforeEach(() => {
                 updateChangedFieldSpy = jest.spyOn(Selector.methods, 'updateChangedField');
-                updateHasAsapSelectedSpy = jest.spyOn(Selector.methods, 'updateHasAsapSelected');
-    
-    
+                setAsapFlagSpy = jest.spyOn(Selector.methods, 'setAsapFlag');
+
+
                 wrapper = shallowMount(Selector, {
                     store: createStore(),
                     i18n,
@@ -220,13 +220,13 @@ describe('Selector', () => {
                 // Assert
                 expect(updateChangedFieldSpy).toHaveBeenCalledWith(field);
             });
-    
-            it('should call `updateHasAsapSelected` with `false`', () => {
+
+            it('should call `setAsapFlag` with the `selectedFulfilmentTime`', () => {
                 // Act
                 wrapper.vm.selectionChanged(selectedTime);
-        
+
                 // Assert
-                expect(updateHasAsapSelectedSpy).toHaveBeenCalledWith(false);
+                expect(setAsapFlagSpy).toHaveBeenCalledWith(selectedTime);
             });
 
             it('should update `selectedAvailableFulfilmentTime` with the value passed', () => {
@@ -235,6 +235,109 @@ describe('Selector', () => {
 
                 // Assert
                 expect(wrapper.vm.selectedAvailableFulfilmentTime).toBe(selectedTime);
+            });
+        });
+
+        describe('`initFulfilmentTime`', () => {
+            let wrapper;
+            let updateFulfilmentTimeSpy;
+
+            beforeEach(() => {
+                wrapper = shallowMount(Selector, {
+                    store: createStore({
+                        availableFulfilment: {
+                            isAsapAvailable: false,
+                            times: []
+                        }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                updateFulfilmentTimeSpy = jest.spyOn(Selector.methods, 'updateFulfilmentTime');
+            });
+
+            it('should exist', () => {
+                expect(wrapper.vm.initFulfilmentTime).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                describe('AND there are no fulfilment `times` available', () => {
+                    it('should NOT make a call to `updateFulfilmentTime`', () => {
+                        // Act
+                        wrapper.vm.initFulfilmentTime([]);
+
+                        // Assert
+                        expect(updateFulfilmentTimeSpy).not.toHaveBeenCalled();
+                    });
+                });
+
+                describe('AND there are fulfilment `times` available', () => {
+                    it('should make a call to `updateFulfilmentTime` with the `from` & `to` values', () => {
+                        // Arrange
+                        const times = [{
+                            text: 'Wednesday 01:00',
+                            value: '2020-01-01T01:00:00.000Z'
+                        }];
+
+                        // Act
+                        wrapper.vm.initFulfilmentTime(times);
+
+                        // Assert
+                        expect(updateFulfilmentTimeSpy).toHaveBeenCalledWith({
+                            from: '2020-01-01T01:00:00.000Z',
+                            to: '2020-01-01T01:00:00.000Z'
+                        });
+                    });
+                });
+            });
+        });
+
+        describe('`setAsapFlag`', () => {
+            let wrapper;
+            let updateHasAsapSelectedSpy;
+
+            beforeEach(() => {
+                wrapper = shallowMount(Selector, {
+                    store: createStore({
+                        availableFulfilment: {
+                            isAsapAvailable: true,
+                            times: fulfilmentTimes
+                        }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                updateHasAsapSelectedSpy = jest.spyOn(Selector.methods, 'updateHasAsapSelected');
+            });
+
+            it('should exist', () => {
+                expect(wrapper.vm.setAsapFlag).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                describe('AND `isAsapAvailable` is available & the `availableFulfilment` from matches the `selected` fulfilment time', () => {
+                    it('should make a call to `updateHasAsapSelected` with the param `true` passed', () => {
+                        // Act
+                        wrapper.vm.setAsapFlag();
+
+                        // Assert
+                        expect(updateHasAsapSelectedSpy).toHaveBeenCalledWith(true);
+                    });
+                });
+
+                describe('AND `isAsapAvailable` is not available', () => {
+                    it('should make a call to `updateHasAsapSelected` with the param `false` passed', () => {
+                        // Act
+                        wrapper.vm.setAsapFlag();
+
+                        // Assert
+                        expect(updateHasAsapSelectedSpy).toHaveBeenCalledWith(false);
+                    });
+                });
             });
         });
     });
@@ -292,6 +395,33 @@ describe('Selector', () => {
                 // Assert
                 expect(selectionChangedSpy).toHaveBeenCalledWith(undefined);
             });
+        });
+    });
+
+    describe('mounted ::', () => {
+        it('should make a call to `initFulfilmentTime` with the available `fulfilmentTimes`', () => {
+            // Arrange
+            const initFulfilmentTimeSpy = jest.spyOn(Selector.methods, 'initFulfilmentTime');
+
+            // Act
+            shallowMount(Selector, {
+                store: createStore(),
+                i18n,
+                localVue,
+                propsData
+            });
+
+            // Assert
+            expect(initFulfilmentTimeSpy).toHaveBeenCalledWith([
+                {
+                    text: 'As soon as possible',
+                    value: '2020-01-01T01:00:00.000Z'
+                },
+                {
+                    text: 'Wednesday 01:15',
+                    value: '2020-01-01T01:15:00.000Z'
+                }
+            ]);
         });
     });
 });

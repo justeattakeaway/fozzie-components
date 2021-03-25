@@ -72,14 +72,14 @@ describe('checkout mapper', () => {
             from: '2021-01-01T01:00:00+0000',
             to: '2021-01-01T01:00:00+0000'
         };
-        
+
         const expectOutput = {
             asap: false,
             scheduled: {
                 ...time
             }
         };
-        
+
         // Act
         const requestBody = mapUpdateCheckoutRequest({
             ...defaultParams,

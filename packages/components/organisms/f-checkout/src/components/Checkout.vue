@@ -471,9 +471,7 @@ export default {
                     address: this.address,
                     customer: this.customer,
                     isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
-                    time: this.hasAsapSelected
-                        ? this.availableFulfilment.times[0]
-                        : this.time,
+                    time: this.time,
                     userNote: this.userNote,
                     geolocation: this.geolocation,
                     asap: this.hasAsapSelected
