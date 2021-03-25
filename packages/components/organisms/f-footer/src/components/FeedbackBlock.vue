@@ -9,7 +9,11 @@
             "action": "footer",
             "label": "click_feedback"
         }'>
-        <h2 class="c-footer-heading c-footer-heading--shortBelowWide">
+        <h2
+            :class="[
+                $style['c-footer-heading'],
+                $style['c-footer-heading--shortBelowWide']
+            ]">
             {{ title }}
         </h2>
 
@@ -45,6 +49,7 @@ export default {
 </script>
 
 <style lang="scss" module>
+@import '../assets/scss/headings.scss';
 
 $feedback-btn-font-size: 'body-s';
 

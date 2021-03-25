@@ -10,7 +10,8 @@ v0.76.0
 
 ### Added 
 - New time object struture for patch call to checkout. (Includes scheduled & asap values)
-
+- Component tests for `Error.vue` component
+- Accessibility tests for `Error.vue` component
 
 v0.75.0
 ------------------------------

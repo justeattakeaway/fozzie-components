@@ -19,7 +19,6 @@ beforeEach(() => {
 });
 
 describe('UserMessage component', () => {
-    allure.feature('User Message');
     it('has a mounted hook', () => {
         expect(typeof UserMessage.mounted).toBe('function');
     });

@@ -30,7 +30,7 @@
     "lint": "vue-cli-service lint",
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
-    "test": "vue-cli-service test:unit && cd ../../../../ && yarn allure:clean",
+    "test": "vue-cli-service test:unit",
     "test-a11y:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite a11y",
     "test-component:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite component"
   },
@@ -50,6 +50,7 @@
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
+    "@justeat/f-wdio-utils": "0.1.0",
     "node-sass-magic-importer": "5.3.2"
   }
 }

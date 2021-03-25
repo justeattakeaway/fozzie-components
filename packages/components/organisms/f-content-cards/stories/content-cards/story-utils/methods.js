@@ -20,6 +20,8 @@ export default {
                 return 'TermsAndConditionsCard';
             case 'Stamp_Card_1':
                 return 'StampCard1';
+            case 'StampCard_Promotion_Card_1':
+                return 'StampCardPromotionCard';
             case 'Post_Order_Card_1':
                 return 'PostOrderCard';
             default:

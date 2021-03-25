@@ -2,7 +2,6 @@ import { shallowMount } from '@vue/test-utils';
 import Card from '../Card.vue';
 
 describe('Card', () => {
-    allure.feature('Card');
     it('should be defined', () => {
         // Arrange
         const propsData = {};

@@ -1,11 +1,8 @@
 <template>
-    <component
-        :is="card.url ? 'a' : 'div'"
-        :href="card.url"
+    <card-case
+        :card="card"
         :data-test-id="testId"
-        :class="[$style['c-stampCard1']]"
-        @click="onClickContentCard"
-    >
+        :class="[$style['c-stampCard1']]">
         <div :class="[$style['c-stampCard1-headerDetails']]">
             <img
                 :class="[$style['c-stampCard1-icon']]"
@@ -74,14 +71,16 @@
                 </div>
             </div>
         </div>
-    </component>
+    </card-case>
 </template>
 
 <script>
+
 import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 import lightFormat from 'date-fns/lightFormat';
 
+import CardCase from './CardCase.vue';
 import EmptyStamp from './images/stamp-empty-15.svg';
 import FullStamp from './images/stamp-full-15.svg';
 
@@ -92,7 +91,8 @@ export default {
 
     components: {
         EmptyStamp,
-        FullStamp
+        FullStamp,
+        CardCase
     },
 
     directives: {
@@ -203,28 +203,16 @@ export default {
     },
 
     mounted () {
-        this.onViewContentCard();
-
         this.getDateFnsLocale(this.copy.locale).then(locale => {
             this.dateFnsLocale = locale;
         });
     },
 
     inject: [
-        'copy',
-        'emitCardView',
-        'emitCardClick'
+        'copy'
     ],
 
     methods: {
-        onViewContentCard () {
-            this.emitCardView(this.card);
-        },
-
-        onClickContentCard () {
-            this.emitCardClick(this.card);
-        },
-
         /**
          * Takes the locale and lazyloads the correct date locale from the date-fns library
          * @param locale

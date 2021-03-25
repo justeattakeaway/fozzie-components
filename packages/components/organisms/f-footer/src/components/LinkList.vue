@@ -2,9 +2,9 @@
     <div
         v-if="linkList.links.length"
         :class="[$style['c-footer-panel'], {
-            'is-collapsed': panelCollapsed
+            [$style['is-collapsed']]: panelCollapsed
         }]"
-        data-test-id="linkList-wrapper">
+        :data-test-id="testId">
         <h2>
             <button
                 :id="listHeadingId"
@@ -14,8 +14,8 @@
                 :aria-expanded="!panelCollapsed ? 'true' : 'false'"
                 :aria-controls="listId"
                 :class="[
-                    'c-footer-heading',
-                    'c-footer-heading--button'
+                    $style['c-footer-heading'],
+                    $style['c-footer-heading--button']
                 ]"
                 data-test-id="linkList-header"
                 @click="onPanelClick">
@@ -30,7 +30,7 @@
         <ul
             :id="listId"
             :aria-labelledby="listHeadingId"
-            class="c-footer-list">
+            :class="$style['c-footer-list']">
             <li
                 v-for="(link, i) in linkList.links"
                 :key="i + '_Link'">
@@ -84,6 +84,10 @@ export default {
 
         isBelowWide () {
             return this.currentScreenWidth <= 1024;
+        },
+
+        testId () {
+            return this.panelCollapsed ? 'linkList-wrapper-collapsed' : 'linkList-wrapper';
         }
     },
     mounted () {
@@ -138,7 +142,9 @@ export default {
 </script>
 
 <style lang="scss" module>
+@import '../assets/scss/headings.scss';
 @import '../assets/scss/icons.scss';
+@import '../assets/scss/lists.scss';
 
 .c-footer-panel {
     flex: 1 0 auto;

@@ -8,6 +8,10 @@ export const KNOB_CHECKOUT_DROPDOWN = '[name="Checkout Url"]';
 export const SWITCH_USER_LINK = '[data-test-id="switch-user-link"]';
 export const GUEST_CHECKOUT_LOGIN_BUTTON = '[data-test-id="guest-login-button"]';
 export const GUEST_CHECKOUT_HEADER = '[data-test-id="guest-checkoutHeader"]';
+export const ERROR_PAGE_COMPONENT = '[data-test-id="checkout-error-page-component"]';
+export const ERROR_PAGE_HEADING = '[data-test-id="checkout-error-page-heading"]';
+export const ERROR_PAGE_DESCRIPTION = '[data-test-id="checkout-error-page-description"]';
+export const ERROR_PAGE_IMAGE = '[data-test-id="checkout-error-page-image"]';
 
 export const FIELDS = {
     firstName: {
@@ -47,14 +51,4 @@ export const FIELDS = {
         input: '[data-test-id="user-note"] textarea',
         error: ''
     }
-};
-
-export default {
-    CHECKOUT_COMPONENT,
-    ORDER_TIME_DROPDOWN,
-    ORDER_TIME_DROPDOWN_OPTIONS,
-    USER_NOTE_INPUT,
-    GO_TO_PAYMENT_BUTTON,
-    SWITCH_USER_LINK,
-    FIELDS
 };

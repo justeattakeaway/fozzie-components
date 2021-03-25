@@ -2,7 +2,9 @@ import {
     ContentCards,
     FirstTimeCustomerCard,
     PostOrderCard,
-    PromotionCard, StampCard1,
+    PromotionCard,
+    StampCard1,
+    StampCardPromotionCard,
     TermsAndConditionsCard,
     VoucherCard
 } from '../../src';
@@ -17,7 +19,8 @@ const components = {
     PromotionCard,
     TermsAndConditionsCard,
     PostOrderCard,
-    StampCard1
+    StampCard1,
+    StampCardPromotionCard
 };
 
 export default function ContentCardsBraze (args, { argTypes }) {
@@ -44,7 +47,6 @@ export default function ContentCardsBraze (args, { argTypes }) {
                 :user-id="userId"
                 :api-key="apiKey"
                 :locale="locale"
-                :custom-cards="customCards"
                 :key="locale"
             >
                 <template #${STATE_DEFAULT}="{ cards }">
@@ -56,7 +58,6 @@ export default function ContentCardsBraze (args, { argTypes }) {
                         :is="handleCustomCardType(card.type)"
                         :key="i"
                         :card="card"
-                        :tenant="tenant"
                     />
                 </template>
             </content-cards>`
