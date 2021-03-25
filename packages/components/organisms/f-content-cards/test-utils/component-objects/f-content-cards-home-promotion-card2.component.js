@@ -8,14 +8,17 @@ const {
 } = require('./f-content-cards-home-promotion.selectors');
 
 module.exports = class HomePromotionCard2 extends Page {
+    get component () { return $(PROMOTION_CARD_2_COMPONENT); }
 
-    get component () { return $(PROMOTION_CARD_2_COMPONENT) }
-    get callToAction () { return $(CTA) }
-    get text () { return $(TEXT) }
-    get title () { return $(TITLE) }
-    get backgroundImage () { return $(BACKGROUND_IMAGE) }
+    get callToAction () { return $(CTA); }
 
-    open() {
+    get text () { return $(TEXT); }
+
+    get cardTitle () { return $(TITLE); }
+
+    get backgroundImage () { return $(BACKGROUND_IMAGE); }
+
+    open () {
         super.openComponent('molecule-folder', 'f-content-cards--home-promotion-card-2-component');
     }
 
@@ -36,10 +39,10 @@ module.exports = class HomePromotionCard2 extends Page {
     }
 
     isTitleDisplayed () {
-        return this.title.isDisplayed();
+        return this.cardTitle.isDisplayed();
     }
 
     isBackgroundImageDisplayed () {
         return this.backgroundImage.isDisplayed();
     }
-}
+};
