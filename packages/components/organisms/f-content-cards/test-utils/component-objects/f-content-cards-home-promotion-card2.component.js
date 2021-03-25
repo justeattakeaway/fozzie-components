@@ -1,4 +1,4 @@
-const Page = require('../../../../../services/f-wdio-utils/src/page.object');
+const Page = require('@justeat/f-wdio-utils/src/page.object');
 const {
     PROMOTION_CARD_2_COMPONENT,
     CTA,
