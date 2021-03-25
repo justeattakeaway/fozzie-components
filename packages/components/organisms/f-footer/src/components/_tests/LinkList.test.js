@@ -29,22 +29,24 @@ describe('LinkList component', () => {
 
         it('should be in a collapsed state', () => {
             // Arrange & Act
-            const linkListWrapper = wrapper.find('[data-test-id="linkList-wrapper"]');
+            const linkListCollapsedWrapper = wrapper.find('[data-test-id="linkList-wrapper-collapsed"]');
 
             // Assert
-            expect(linkListWrapper.classes()).toContain('is-collapsed');
+            expect(linkListCollapsedWrapper.exists()).toBe(true);
         });
 
         it('should be in an open state when linkList title has been clicked', async () => {
             // Arrange
-            const linkListWrapper = wrapper.find('[data-test-id="linkList-wrapper"]');
             const linkListHeader = wrapper.find('[data-test-id="linkList-header"]');
 
             // Act
             await linkListHeader.trigger('click'); // wait for DOM to update as a result of click being triggered
+            const linkListOpenWrapper = wrapper.find('[data-test-id="linkList-wrapper"]');
+            const linkListCollapsedWrapper = wrapper.find('[data-test-id="linkList-wrapper-collapsed"]');
 
             // Assert
-            expect(linkListWrapper.classes()).not.toContain('is-collapsed');
+            expect(linkListOpenWrapper.exists()).toBe(true);
+            expect(linkListCollapsedWrapper.exists()).toBe(false);
         });
     });
 
@@ -56,10 +58,12 @@ describe('LinkList component', () => {
 
         it('should be in an open state', () => {
             // Arrange & Act
-            const linkListWrapper = wrapper.find('[data-test-id="linkList-wrapper"]');
+            const linkListCollapsedWrapper = wrapper.find('[data-test-id="linkList-wrapper-collapsed"]');
+            const linkListOpenWrapper = wrapper.find('[data-test-id="linkList-wrapper"]');
 
             // Assert
-            expect(linkListWrapper.classes()).not.toContain('is-collapsed');
+            expect(linkListOpenWrapper.exists()).toBe(true);
+            expect(linkListCollapsedWrapper.exists()).toBe(false);
         });
     });
 });
