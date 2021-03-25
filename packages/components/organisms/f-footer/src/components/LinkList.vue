@@ -2,7 +2,7 @@
     <div
         v-if="linkList.links.length"
         :class="[$style['c-footer-panel'], {
-            'is-collapsed': panelCollapsed
+            [$style['is-collapsed']]: panelCollapsed
         }]"
         data-test-id="linkList-wrapper">
         <h2>
@@ -14,8 +14,8 @@
                 :aria-expanded="!panelCollapsed ? 'true' : 'false'"
                 :aria-controls="listId"
                 :class="[
-                    $style['o-heading'],
-                    $style['o-heading--button']
+                    $style['c-footer-heading'],
+                    $style['c-footer-heading--button']
                 ]"
                 data-test-id="linkList-header"
                 @click="onPanelClick">
@@ -140,6 +140,7 @@ export default {
 <style lang="scss" module>
 @import '../assets/scss/headings.scss';
 @import '../assets/scss/icons.scss';
+@import '../assets/scss/lists.scss';
 
 .c-footer-panel {
     flex: 1 0 auto;

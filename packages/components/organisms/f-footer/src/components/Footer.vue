@@ -28,7 +28,7 @@
                         :title="copy.downloadOurApps"
                         :icons="copy.appStoreIcons"
                         :locale="copy.locale"
-                        is-apps />
+                        list-type="apps" />
 
                     <feedback-block
                         :title="copy.feedback"
@@ -38,7 +38,7 @@
                     <icon-list
                         :icons="copy.socialIcons"
                         :title="copy.followUs"
-                        is-social />
+                        list-type="social" />
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
 
             <icon-list
                 :icons="copy.paymentIcons"
-                is-payments />
+                list-type="payments" />
         </div>
     </footer>
 </template>

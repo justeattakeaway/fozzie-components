@@ -11,8 +11,8 @@
         }'>
         <h2
             :class="[
-                $style['o-heading'],
-                $style['o-heading--shortBelowWide']
+                $style['c-footer-heading'],
+                $style['c-footer-heading--shortBelowWide']
             ]">
             {{ title }}
         </h2>

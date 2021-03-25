@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 :class="$style['o-heading']">
+        <h2 :class="$style['c-footer-heading']">
             {{ buttonList.title }}
         </h2>
 

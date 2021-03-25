@@ -10,7 +10,7 @@
             v-if="isConfianza"
             :class="[
                 $style['c-footer-certificates-icons'],
-                $style[iconClass]
+                $style['iconClass']
             ]" />
     </div>
 </template>
