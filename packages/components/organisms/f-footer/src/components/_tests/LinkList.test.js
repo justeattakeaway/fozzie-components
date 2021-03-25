@@ -16,7 +16,6 @@ const wrapper = shallowMount(LinkList, {
 });
 
 describe('LinkList component', () => {
-    allure.feature('Link List');
     it('should be defined', () => {
         expect(wrapper.exists()).toBe(true);
     });

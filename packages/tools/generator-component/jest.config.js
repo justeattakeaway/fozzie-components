@@ -23,9 +23,5 @@ module.exports = {
 
     modulePathIgnorePatterns: [
         './test/specs/accessibility/'
-    ],
-
-    setupFilesAfterEnv: [
-        '../../../jest.setup.js'
     ]
 };

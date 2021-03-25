@@ -6,7 +6,6 @@ import {
 } from '../../constants';
 
 describe('FormField', () => {
-    allure.feature('Form Field');
     it('should be defined', () => {
         const propsData = {};
         const wrapper = shallowMount(FormField, { propsData });
