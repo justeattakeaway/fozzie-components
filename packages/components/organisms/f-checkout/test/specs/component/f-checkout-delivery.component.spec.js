@@ -5,7 +5,7 @@ const Checkout = require('../../../test-utils/component-objects/f-checkout.compo
 const checkout = new Checkout();
 
 describe('f-checkout "delivery" component tests', () => {
-    before(() => {
+    beforeEach(() => {
         const checkoutData = {
             type: 'delivery',
             isAuthenticated: true,

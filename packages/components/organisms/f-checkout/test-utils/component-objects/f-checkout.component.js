@@ -14,6 +14,10 @@ const {
     PRE_ORDER_WARNING,
     CHECKOUT_ERROR_MESSAGE,
     RETRY_BUTTON
+    ERROR_PAGE_COMPONENT,
+    ERROR_PAGE_HEADING,
+    ERROR_PAGE_DESCRIPTION,
+    ERROR_PAGE_IMAGE
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
@@ -42,6 +46,14 @@ module.exports = class Checkout extends Page {
     get checkoutErrorMessage () { return $(CHECKOUT_ERROR_MESSAGE); }
 
     get errorMessageRetry () { return $(RETRY_BUTTON); }
+
+    get errorPageComponent () { return $(ERROR_PAGE_COMPONENT); }
+
+    get errorPageDescription () { return $(ERROR_PAGE_DESCRIPTION); }
+
+    get errorPageHeading () { return $(ERROR_PAGE_HEADING); }
+
+    get errorPageImage () { return $(ERROR_PAGE_IMAGE); }
 
     fields = {
         firstName: {
@@ -106,6 +118,10 @@ module.exports = class Checkout extends Page {
         super.waitForComponent(this.component);
     }
 
+    waitForErrorPageComponent () {
+        super.waitForComponent(this.errorPageComponent);
+    }
+
     isComponentDisplayed () {
         return this.component.isDisplayed();
     }
@@ -160,6 +176,22 @@ module.exports = class Checkout extends Page {
 
     clickRetryButton () {
         return this.errorMessageRetry.click();
+    }
+
+    isErrorPageComponentDisplayed () {
+        return this.errorPageComponent.isDisplayed();
+    }
+
+    isErrorPageHeadingDisplayed () {
+        return this.errorPageHeading.isDisplayed();
+    }
+
+    isErrorPageDescriptionDisplayed () {
+        return this.errorPageDescription.isDisplayed();
+    }
+
+    isErrorPageImageDisplayed () {
+        return this.errorPageImage.isDisplayed();
     }
 
 

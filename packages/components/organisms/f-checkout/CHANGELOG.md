@@ -13,6 +13,12 @@ v0.76.0
 - Supporting code in `Checkout.stories.js` and `f-checkout.component.js` to enable testing in storybook.
 - `checkout-available-fulfilment-preorder.json` to support storybook tabs for testing
 
+*March 24, 2021*
+
+### Added
+- Component tests for `Error.vue` component
+- Accessibility tests for `Error.vue` component
+
 
 v0.75.0
 ------------------------------
