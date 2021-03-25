@@ -13,7 +13,7 @@ export default {};
 
 .c-rating {
      color: $skeleton-loader-bone-background-color;
-     font-size: spacing(x2);
+     @include font-size(body-l, false);
 }
 
 </style>

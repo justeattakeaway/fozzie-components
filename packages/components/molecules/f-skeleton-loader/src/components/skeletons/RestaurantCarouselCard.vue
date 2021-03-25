@@ -1,19 +1,19 @@
 <template>
     <div :class="$style['c-restaurantCarouselCard']">
-        <carousel-card-background :class="$style['c-restaurantCarouselCard-background']" />
+        <image-block :class="$style['c-restaurantCarouselCard-background']" />
         <carousel-card-restaurant-header :class="$style['c-restaurantCarouselCard-header']" />
         <carousel-card-restaurant-data :class="$style['c-restaurantCarouselCard-data']" />
     </div>
 </template>
 
 <script>
-import CarouselCardBackground from './CarouselCardBackground.vue';
+import ImageBlock from './Image.vue';
 import CarouselCardRestaurantData from './CarouselCardRestaurantData.vue';
 import CarouselCardRestaurantHeader from './CarouselCardRestaurantHeader.vue';
 
 export default {
     components: {
-        CarouselCardBackground,
+        ImageBlock,
         CarouselCardRestaurantData,
         CarouselCardRestaurantHeader
     }
@@ -30,6 +30,7 @@ export default {
 
 .c-restaurantCarouselCard-background {
     margin-bottom: -(spacing(x8));
+    height: 200px;
 }
 
 .c-restaurantCarouselCard-header,
