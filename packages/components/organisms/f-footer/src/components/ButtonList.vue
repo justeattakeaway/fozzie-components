@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="c-footer-heading">
+        <h2 :class="$style['o-heading']">
             {{ buttonList.title }}
         </h2>
 
@@ -36,6 +36,7 @@ export default {
 </script>
 
 <style lang="scss" module>
+@import '../assets/scss/headings.scss';
 
 $buttonList-font-size: 'subheading-s';
 
