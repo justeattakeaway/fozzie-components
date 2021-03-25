@@ -3,13 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.14.0
+------------------------------
+*March 25, 2021*
+
+## Changed
+- 'Footer' to use CSS modules.
+
 
 v4.13.0
 ------------------------------
 *March 25, 2021*
 
 ## Added
-- 'headings.scss' and 'lists.scss' to assets
+- 'headings.scss' and 'lists.scss' to assets.
+
 ## Changed
 - Components to use shared scss assets.
 - Add test-ids to `IconList`.
