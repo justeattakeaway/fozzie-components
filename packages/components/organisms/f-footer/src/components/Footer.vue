@@ -1,29 +1,36 @@
 <template>
     <footer
         :data-theme="theme"
-        class="c-footer"
+        :class="$style['c-footer']"
         data-test-id="footer-component">
         <div
-            class="c-footer-container c-footer-row c-footer-row--noPadBelowWide">
+            :class="[
+                $style['c-footer-container'],
+                $style['c-footer-row'],
+                $style['c-footer-row--noPadBelowWide']
+            ]">
             <link-list
                 v-for="(linkList, i) in copy.linkLists"
                 :key="i + '_ButtonList'"
                 :link-list="linkList" />
         </div>
 
-        <div class="c-footer-light">
-            <div class="c-footer-container">
+        <div :class="$style['c-footer-light']">
+            <div :class="$style['c-footer-container']">
                 <div
                     v-if="copy.linkButtonList.length && showCourierLinks"
                     data-test-id="courierLinks-wrapper"
-                    class="c-footer-row c-footer-row--noBottomPad">
+                    :class="[
+                        $style['c-footer-row'],
+                        $style['c-footer-row--noBottomPad']
+                    ]">
                     <button-list
                         v-for="(buttonList, i) in copy.linkButtonList"
                         :key="i + '_ButtonList'"
                         :button-list="buttonList" />
                 </div>
 
-                <div class="c-footer-row">
+                <div :class="$style['c-footer-row']">
                     <icon-list
                         :title="copy.downloadOurApps"
                         :icons="copy.appStoreIcons"
@@ -44,8 +51,14 @@
         </div>
 
         <div
-            :class="['c-footer-container c-footer-row c-footer-row--combined c-footer-row--notEqualTopAndBottomPad c-footer-row--noPadBelowWide',
-                     { 'c-footer-row--rightAlignedAboveWide': !showCountrySelector }]">
+            :class="[
+                $style['c-footer-container'],
+                $style['c-footer-row'],
+                $style['c-footer-row--combined'],
+                $style['c-footer-row--notEqualTopAndBottomPad'],
+                $style['c-footer-row--noPadBelowWide'],
+                { [$style['c-footer-row--rightAlignedAboveWide']]: !showCountrySelector }
+            ]">
             <country-selector
                 v-if="showCountrySelector"
                 data-test-id="country-selector"
@@ -56,7 +69,7 @@
 
             <legal-field
                 v-if="metaLegalFieldEnabled"
-                :class="[{ 'c-footer-row-item--fullWidthAboveWide': !showCountrySelector }]"
+                :class="{ [$style['c-footer-row-item--fullWidthAboveWide']]: !showCountrySelector }"
                 :info="copy.metaLegalField" />
 
             <icon-list
@@ -121,7 +134,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
 .c-footer {
     background-color: $footer-bgColor;
     color: $footer-textColor;
