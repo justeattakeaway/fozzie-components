@@ -7,7 +7,8 @@ describe('f-checkout component tests', () => {
         const checkoutData = {
             type: 'delivery',
             isAuthenticated: true,
-            isValid: true
+            isValid: true,
+            isPreOrderWarningDisplayed: true
         };
 
         checkout.open(checkoutData);
@@ -121,13 +122,14 @@ describe('f-checkout component tests', () => {
         expect(checkout.switchUserLinkIsDisplayed()).toBe(true);
     });
 
-    it.skip('should display the preorder warning message when ASAP is not avalible', () => {
+    it('should display the preorder warning message when ASAP is not avalible', () => {
         // Arrange
-        // const checkoutData = {
-        //     type: 'delivery',
-        //     isAuthenticated: true,
-        //     isValid: true
-        // };
+        const checkoutData = {
+            type: 'delivery',
+            isAuthenticated: true,
+            isValid: true,
+            isPreOrderWarningDisplayed: false
+        };
 
         // Act
         checkout.open(checkoutData);

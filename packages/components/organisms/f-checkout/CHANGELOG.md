@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.76.0
+------------------------------
+*March 25, 2021*
+
+### Added
+- Tests to test the preorder warning message
+- Tests to test the checkout error message
+- Supporting code in `Checkout.stories.js` and `f-checkout.component.js` to enable testing in storybook.
+- `checkout-available-fulfilment-preorder.json` to support storybook tabs for testing
+
 
 v0.75.0
 ------------------------------
