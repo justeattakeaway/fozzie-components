@@ -3,12 +3,25 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.13.0
+------------------------------
+*March 25, 2021*
+
+## Added
+- 'headings.scss' and 'lists.scss' to assets
+## Changed
+- Components to use shared scss assets.
+- Add test-ids to `IconList`.
+- Tests to cover changes
+
+
 v4.12.0
 ------------------------------
 *March 18, 2021*
 
 ## Added
-- Courier links and country selector component tests for tenants: 'ie', 'nz', 'dk', 'es', 'it', 'no', 
+- Courier links and country selector component tests for tenants: 'ie', 'nz', 'dk', 'es', 'it', 'no',
 - Canada(FR) to dropdown country selector list
 - Accessibility tests for the above tenants
 
