@@ -260,7 +260,7 @@ describe('Checkout', () => {
         });
 
         describe('nonFulfillableError ::', () => {
-            describe('when `nonFulfillableError.openInDialog` is `true`', () => {
+            describe('when `nonFulfillableError` is an error in checkout issues', () => {
                 it('should show a mega modal displaying the error title and description', () => {
                     // Arrange
                     const fulfilmentTimeIssue = CheckoutIssues[ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE];
@@ -288,6 +288,36 @@ describe('Checkout', () => {
                     expect(errorModal.html()).toMatchSnapshot();
 
                     expect(errorTitle.text()).toMatchSnapshot();
+
+                    expect(errorMessage.text()).toMatchSnapshot();
+                });
+            });
+
+            describe('when `nonFulfillableError` is not an error inside `checkout issues', () => {
+                it('should show a mega modal displaying the default error title and message', () => {
+                    // Arrange
+                    const issueCodeNotInCheckoutIssues = 'DEFAULT_CHECKOUT_ISSUE';
+                    // Act
+                    const wrapper = mount(VueCheckout, {
+                        i18n,
+                        store: createStore(),
+                        localVue,
+                        propsData,
+                        data () {
+                            return {
+                                nonFulfillableError: {
+                                    code: issueCodeNotInCheckoutIssues,
+                                    shouldShowInDialog: true
+                                }
+                            };
+                        }
+                    });
+
+                    const errorTitle = wrapper.find('[data-test-id="checkout-issue-modal-title"]');
+                    const errorMessage = wrapper.find('[data-test-id="checkout-issue-modal-message"]');
+
+                    // Assert
+                    expect(errorTitle.text()).toEqual('Something went wrong');
 
                     expect(errorMessage.text()).toMatchSnapshot();
                 });
