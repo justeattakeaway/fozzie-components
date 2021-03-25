@@ -22,5 +22,3 @@ exports[`Checkout data :: nonFulfillableError :: when \`nonFulfillableError\` is
 exports[`Checkout data :: nonFulfillableError :: when \`nonFulfillableError\` is an error in checkout issues should show a mega modal displaying the error title and description 2`] = `"We do takeaways, not time machines"`;
 
 exports[`Checkout data :: nonFulfillableError :: when \`nonFulfillableError\` is an error in checkout issues should show a mega modal displaying the error title and description 3`] = `"The time you picked for your order isn't possible, please choose another."`;
-
-exports[`Checkout data :: nonFulfillableError :: when \`nonFulfillableError\` is not an error inside \`checkout issues should show a mega modal displaying the default error title and message 1`] = `"Please try again"`;
