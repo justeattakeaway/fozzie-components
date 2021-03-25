@@ -1,5 +1,6 @@
 const forEach = require('mocha-each');
 const Footer = require('../../../../test-utils/component-objects/f-footer.component');
+
 const footer = new Footer();
 
 describe('Desktop - f-footer component tests', () => {

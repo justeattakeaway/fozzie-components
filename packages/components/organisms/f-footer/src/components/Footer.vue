@@ -28,7 +28,7 @@
                         :title="copy.downloadOurApps"
                         :icons="copy.appStoreIcons"
                         :locale="copy.locale"
-                        is-apps />
+                        list-type="apps" />
 
                     <feedback-block
                         :title="copy.feedback"
@@ -38,7 +38,7 @@
                     <icon-list
                         :icons="copy.socialIcons"
                         :title="copy.followUs"
-                        is-social />
+                        list-type="social" />
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
 
             <icon-list
                 :icons="copy.paymentIcons"
-                is-payments />
+                list-type="payments" />
         </div>
     </footer>
 </template>
@@ -122,9 +122,6 @@ export default {
 </script>
 
 <style lang="scss">
-
-$footer-heading-font-size: 'heading-s';
-
 .c-footer {
     background-color: $footer-bgColor;
     color: $footer-textColor;
@@ -138,43 +135,6 @@ $footer-heading-font-size: 'heading-s';
     width: 100%;
     max-width: #{$layout-max-width}px;
     margin: 0 auto;
-}
-
-.c-footer-heading {
-    @include font-size($footer-heading-font-size);
-    font-family: $font-family-base;
-    font-weight: $font-weight-headings;
-    padding: spacing(x2);
-    padding-left: 0;
-}
-
-.c-footer-heading--shortBelowWide {
-    @include media('<wide') {
-        padding: 0 0 spacing();
-    }
-}
-
-.c-footer-heading--button {
-    align-items: center;
-    background: none;
-    border-style: none;
-    color: $color-headings;
-    display: flex;
-    font-weight: $font-weight-headings;
-    justify-content: space-between;
-    margin: 0;
-    padding: spacing(x2);
-    text-align: left;
-    width: 100%;
-    @include font-size($footer-heading-font-size);
-
-    @include media('<wide') {
-        cursor: pointer;
-    }
-
-    @include media('>=wide') {
-        padding: 0;
-    }
 }
 
 .c-footer-row {
@@ -228,47 +188,4 @@ $footer-heading-font-size: 'heading-s';
         flex: 1;
     }
 }
-
-.c-footer-list {
-    padding: 0;
-    list-style: none;
-    list-style-image: none;
-    margin-top: 0;
-    margin-bottom: spacing(x2);
-    margin-left: spacing(x2);
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-
-    & > li {
-        margin-bottom: 0;
-
-        &:before {
-            content: none;
-        }
-    }
-
-    @include media('>=wide') {
-        margin: spacing(x2) 0 0 0;
-    }
-
-    .is-collapsed & {
-        display: none;
-    }
-}
-
-.c-footer-list--inline {
-    margin: 0 0 spacing(x2);
-    align-items: center;
-    flex-flow: row wrap;
-
-    @include media('>=wide') {
-        margin-bottom: 0;
-    }
-}
-
-.c-footer-list--noBottomMargin {
-    margin-bottom: 0;
-}
-
 </style>
