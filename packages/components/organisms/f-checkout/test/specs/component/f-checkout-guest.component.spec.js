@@ -9,7 +9,8 @@ describe('f-checkout component tests', () => {
         const checkoutData = {
             type: 'delivery',
             isAuthenticated: false,
-            isValid: true
+            isValid: true,
+            isPreOrderWarningDisplayed: true
         };
 
         checkout.open(checkoutData);
