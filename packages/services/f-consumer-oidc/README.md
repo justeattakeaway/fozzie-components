@@ -75,13 +75,18 @@ This function attempts to get a valid JWT for the current user.  It works as fol
 * it stores the token in a cookie (`je-oidc`), so if the user has already done this in their session it will retrieve that
 * for the page lifetime (i.e. JS variable) it remembers if the user is not logged in, so that it doesn't attempt to get a token repeatedly
 * by default it will silently refresh the token close to its expiry time, if possible.  This functionality is built in to [`oidc-client`](https://github.com/IdentityModel/oidc-client-js/wiki).
+* you should set the `silentRequestTimeout` setting to a low value, to avoid blocking UI components. By default this is a a very high value - 100 seconds.
 
 Usage:
 
 ```javascript
 import { silentSignIn } from `@justeat/f-consumer-oidc`;
 
-silentSignIn(OidcClient, optionalSettings, force)
+const oidcSettings = {
+    silentRequestTimeout: 2000
+};
+
+silentSignIn(OidcClient, oidcSettings, force)
     .then((token) => /* will be a valid JWT for use in Auth header or null if user not logged in */ )
     .catch((error) => /* ... */);
 ```
