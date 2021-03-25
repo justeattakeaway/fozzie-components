@@ -7,6 +7,7 @@ import {
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_COLLECTION,
+    DEFAULT_CHECKOUT_ISSUE,
     ERROR_CODE_FULFILMENT_TIME_INVALID,
     ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP
@@ -296,7 +297,7 @@ describe('Checkout', () => {
             describe('when `nonFulfillableError` is not an error inside `checkout issues', () => {
                 it('should show a mega modal displaying the default error title and message', () => {
                     // Arrange
-                    const issueCodeNotInCheckoutIssues = 'DEFAULT_CHECKOUT_ISSUE';
+                    const issueCodeNotInCheckoutIssues = DEFAULT_CHECKOUT_ISSUE;
                     // Act
                     const wrapper = mount(VueCheckout, {
                         i18n,
