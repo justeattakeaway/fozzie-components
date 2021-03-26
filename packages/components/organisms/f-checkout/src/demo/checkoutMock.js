@@ -39,7 +39,7 @@ export default {
                 mock.onPatch(path).reply(200, updateCheckout);
                 break;
             case '/update-checkout-errors.json':
-                mock.onPatch(path).reply(200, updateCheckoutErrors);
+                mock.onPatch(path).reply(500, updateCheckoutErrors);
                 break;
             case '/get-address.json':
                 mock.onGet(path).reply(200, getAddress);
