@@ -2085,18 +2085,6 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
-"@justeat/f-braze-adapter@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-3.1.0.tgz#2c88bf2d450120ded677edf390cdc6a1a54c6895"
-  integrity sha512-yTSEcIfBwlVPw/eHlOEEOxkFv4puM1KCtiz2igvjt3AAV6Ppcr4aRgNpYoGo8/aekVwRbyvN+k5/S3sQr5tJaw==
-  dependencies:
-    appboy-web-sdk "2.5.2"
-    date-fns "2.16.1"
-    lodash.findindex "4.6.0"
-    lodash.orderby "4.6.0"
-    lodash.startswith "4.2.1"
-    lodash.uniq "4.5.0"
-
 "@justeat/f-button@0.4.1":
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.4.1.tgz#6b735093286422f579bd41cee93400a4d32d1b2d"
@@ -2165,10 +2153,10 @@
   dependencies:
     vue-i18n "8.0.0"
 
-"@justeat/f-icons@3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.4.0.tgz#dbdeb97c562926dc1c4b98685b25203a97dbd5ff"
-  integrity sha512-Sjd3Bc20M2vwaZvFcyTzjpTG6gv+cbeZmsoNtxwWqN+SF88Uvfyll/+1+e1pI2OV7j6ero3010TQNQzD/6jL7w==
+"@justeat/f-icons@3.5.1":
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.5.1.tgz#a8211d31c3310f5403cee2a72de899a53bcf3d20"
+  integrity sha512-Erb2sYftVUYt+aF1nsFr1ZyKFZiEakTmHk6No3OWxRCWP0rfkT3NYkZ4vn3bIjcVFK0s9igZSZ5ZOeFUIt5xeg==
 
 "@justeat/f-logger@0.8.1":
   version "0.8.1"
