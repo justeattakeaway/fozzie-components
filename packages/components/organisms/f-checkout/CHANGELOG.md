@@ -6,12 +6,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.76.0
 ------------------------------
-*March 24, 2021*
+*March 26, 2021*
 
-### Added 
-- New time object struture for patch call to checkout. (Includes scheduled & asap values)
+### Added
+- New time object structure for patch call to checkout. (Includes scheduled & asap values).
+- Fix up `selector.vue` so times `to/from` are set correctly.
+
+
+v0.76.0
+------------------------------
+*March 25, 2021*
+
+### Added
+- Tests to test the preorder warning message
+- Tests to test the checkout error message
+- Supporting code in `Checkout.stories.js` and `f-checkout.component.js` to enable testing in storybook.
+- `checkout-available-fulfilment-preorder.json` to support storybook tabs for testing
 - Component tests for `Error.vue` component
 - Accessibility tests for `Error.vue` component
+
 
 v0.75.0
 ------------------------------

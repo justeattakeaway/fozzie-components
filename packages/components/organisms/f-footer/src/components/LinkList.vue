@@ -1,9 +1,10 @@
 <template>
     <div
         v-if="linkList.links.length"
-        :class="[$style['c-footer-panel'], {
-            [$style['is-collapsed']]: panelCollapsed
-        }]"
+        :class="[
+            $style['c-footer-panel'],
+            { [$style['is-collapsed']]: panelCollapsed }
+        ]"
         :data-test-id="testId">
         <h2>
             <button
