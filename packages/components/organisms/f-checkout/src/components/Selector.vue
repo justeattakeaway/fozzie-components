@@ -141,12 +141,10 @@ export default {
          * @param selectedFulfilmentTime
          */
         setAsapFlag (selectedFulfilmentTime) {
-            if (this.availableFulfilment.isAsapAvailable
-                && this.availableFulfilment.times[0].from === selectedFulfilmentTime) {
-                this.updateHasAsapSelected(true);
-            } else {
-                this.updateHasAsapSelected(false);
-            }
+            const isAsapSelected = this.availableFulfilment.isAsapAvailable
+                && this.availableFulfilment.times[0].from === selectedFulfilmentTime;
+
+            this.updateHasAsapSelected(isAsapSelected);
         }
     }
 };
