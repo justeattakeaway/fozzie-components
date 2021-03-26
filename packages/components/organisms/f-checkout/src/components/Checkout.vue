@@ -259,11 +259,13 @@ export default {
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
+            'availableFulfilment',
             'address',
             'basket',
             'customer',
             'errors',
             'geolocation',
+            'hasAsapSelected',
             'id',
             'isFulfillable',
             'isLoggedIn',
@@ -471,7 +473,8 @@ export default {
                     isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
                     time: this.time,
                     userNote: this.userNote,
-                    geolocation: this.geolocation
+                    geolocation: this.geolocation,
+                    asap: this.hasAsapSelected
                 });
 
                 await this.updateCheckout({

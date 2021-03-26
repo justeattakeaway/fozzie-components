@@ -25,6 +25,7 @@ Object {
   },
   "errors": Array [],
   "geolocation": null,
+  "hasAsapSelected": false,
   "id": "12345",
   "isFulfillable": true,
   "isLoggedIn": false,

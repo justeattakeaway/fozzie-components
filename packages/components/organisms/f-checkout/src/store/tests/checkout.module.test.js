@@ -121,7 +121,8 @@ const defaultState = {
     authToken: '',
     isLoggedIn: false,
     userNote: '',
-    geolocation: null
+    geolocation: null,
+    hasAsapSelected: false
 };
 
 let state = CheckoutModule.state();

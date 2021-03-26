@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.77.0
+------------------------------
+*March 26, 2021*
+
+### Added
+- New time object structure for patch call to checkout. (Includes scheduled & asap values).
+- Fix up `selector.vue` so times `to/from` are set correctly.
+
+
 v0.76.0
 ------------------------------
 *March 25, 2021*
@@ -12,10 +22,6 @@ v0.76.0
 - Tests to test the checkout error message
 - Supporting code in `Checkout.stories.js` and `f-checkout.component.js` to enable testing in storybook.
 - `checkout-available-fulfilment-preorder.json` to support storybook tabs for testing
-
-*March 24, 2021*
-
-### Added
 - Component tests for `Error.vue` component
 - Accessibility tests for `Error.vue` component
 
@@ -117,7 +123,7 @@ v0.67.0
 - Analytics error tracking.
 - Tests to cover changes.
 
-# Changed
+### Changed
 - `checkout.module` `issues` to `error`.
 
 ### Fixed
