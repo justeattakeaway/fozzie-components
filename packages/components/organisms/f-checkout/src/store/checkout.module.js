@@ -338,7 +338,7 @@ export default {
             commit(UPDATE_USER_NOTE, payload);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, 'note', { root: true });
         },
-        
+
         updateHasAsapSelected ({ commit }, payload) {
             commit(UPDATE_HAS_ASAP_SELECTED, payload);
         }
@@ -392,7 +392,7 @@ export default {
             state.availableFulfilment.times = times;
             state.availableFulfilment.isAsapAvailable = asapAvailable;
         },
-    
+
         [UPDATE_HAS_ASAP_SELECTED]: (state, hasAsapSelected) => {
             state.hasAsapSelected = hasAsapSelected;
         },
