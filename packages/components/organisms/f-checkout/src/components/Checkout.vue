@@ -422,23 +422,30 @@ export default {
                     this.handleNonFulfillableCheckout();
                 }
             } catch (ex) {
-                console.log('exception message', ex.message); // eslint-disable-line
-                console.log('exception response', ex.response); // eslint-disable-line
-                console.log('exception response data', ex.response.data); // eslint-disable-line
+                this.trackException(ex);
 
-                const responseErrors = ex.response.data && ex.response.data.errors
-                    ? ex.response.data.errors
-                    : [];
-
-                const error = responseErrors.find(err => err.errorCode === ERROR_CODE_FULFILMENT_TIME_INVALID)
-                    ? ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME
-                    : ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE;
-
-                console.log(error); // eslint-disable-line
-                // this.trackFormInteraction({ action: 'error', error: [error] });
-
-                // this.handleErrorState(ex);
+                this.handleErrorState({
+                    ex,
+                    eventToEmit: EventNames.CheckoutFailure,
+                    logMessage: 'Consumer Checkout Failure'
+                });
             }
+        },
+
+        // TODO: try creating custom exceptions for each sub-function, and handle these at the top level.
+        // e.g. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw
+        // ZipFormatException or whatever.
+
+        trackException (ex) {
+            const responseErrors = ex.response.data && ex.response.data.errors
+                ? ex.response.data.errors
+                : [];
+
+            const analyticsError = responseErrors.find(err => err.errorCode === ERROR_CODE_FULFILMENT_TIME_INVALID)
+                ? ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME
+                : ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE;
+
+            this.trackFormInteraction({ action: 'error', error: [analyticsError] });
         },
 
         handleNonFulfillableCheckout () {
@@ -545,14 +552,13 @@ export default {
                 });
 
                 this.$emit(EventNames.CheckoutSetupGuestSuccess);
-            } catch (thrownErrors) {
-                this.$emit(EventNames.CheckoutSetupGuestFailure, thrownErrors);
-
-                this.$logger.logError(
-                    'Checkout Setup Guest Failure',
-                    this.$store,
-                    { thrownErrors }
-                );
+            } catch (ex) {
+                this.handleErrorState({
+                    ex,
+                    messageToDisplay: this.$t('errorMessages.guestUserCreationFailure'),
+                    eventToEmit: EventNames.CheckoutSetupGuestFailure,
+                    logMessage: 'Checkout Setup Guest Failure'
+                });
             }
         },
 
@@ -680,19 +686,19 @@ export default {
          * Emit `CheckoutFailure` event with error data
          * Update `genericErrorMessage` to display correct errorMessage for passed error
          */
-        handleErrorState (ex, errorMessage) {
-            debugger; // eslint-disable-line
-
+        handleErrorState ({
+            ex, messageToDisplay, eventToEmit, logMessage
+        }) {
             const eventData = {
                 ...this.eventData,
                 error: ex
             };
 
-            this.$emit(EventNames.CheckoutFailure, eventData);
+            this.$emit(eventToEmit, eventData);
 
-            this.genericErrorMessage = errorMessage || this.$t('errorMessages.genericServerError');
+            this.genericErrorMessage = messageToDisplay || this.$t('errorMessages.genericServerError');
 
-            this.logInvoker('Consumer Checkout Failure', eventData, this.$logger.logError);
+            this.logInvoker(logMessage, eventData, this.$logger.logError);
         },
 
         /**
