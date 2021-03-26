@@ -85,8 +85,8 @@ To run storybook first you must run the following at the the top level
 Then run `yarn storybook:serve` to start storybook, which will open on `localhost:6006`.
 
 
-## Publishing Components/
+## Publishing Components
 
-See [Fozzie](/https://fozzie.just-eat.com/documentation/open-source/) docs for further information on publishing and releasing (`Mono-repo Overview` and `Module maintenance`):
+More information about how to contribute to this repo can be found in our Storybook [Documentation section](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html?path=/story/documentation-getting-started-contributing--page)
 
 ### [Just Eat Storybook production](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html)
