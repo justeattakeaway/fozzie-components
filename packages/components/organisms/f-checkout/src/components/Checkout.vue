@@ -318,6 +318,13 @@ export default {
 
         restaurantMenuPageUrl () {
             return `restaurant-${this.restaurant.seoName}/menu`;
+        },
+
+        eventData () {
+            return {
+                isLoggedIn: this.isLoggedIn,
+                serviceType: this.serviceType
+            };
         }
     },
 
@@ -400,11 +407,6 @@ export default {
          *
          */
         async submitCheckout () {
-            const eventData = {
-                isLoggedIn: this.isLoggedIn,
-                serviceType: this.serviceType
-            };
-
             try {
                 if (!this.isLoggedIn) {
                     await this.setupGuestUser();
@@ -414,35 +416,49 @@ export default {
 
                 await this.handleUpdateCheckout();
 
-                await this.handleFulfillableContext(eventData);
-            } catch (thrownErrors) {
-                eventData.errors = thrownErrors;
+                if (this.isFulfillable) {
+                    await this.processOrder();
+                } else {
+                    this.handleNonFulfillableCheckout();
+                }
+            } catch (ex) {
+                console.log('exception message', ex.message); // eslint-disable-line
+                console.log('exception response', ex.response); // eslint-disable-line
+                console.log('exception response data', ex.response.data); // eslint-disable-line
 
-                this.$emit(EventNames.CheckoutFailure, eventData);
+                const responseErrors = ex.response.data && ex.response.data.errors
+                    ? ex.response.data.errors
+                    : [];
 
-                this.logInvoker('Consumer Checkout Failure', eventData, this.$logger.logError);
+                const error = responseErrors.find(err => err.errorCode === ERROR_CODE_FULFILMENT_TIME_INVALID)
+                    ? ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME
+                    : ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE;
+
+                console.log(error); // eslint-disable-line
+                // this.trackFormInteraction({ action: 'error', error: [error] });
+
+                // this.handleErrorState(ex);
             }
         },
 
-        async handleFulfillableContext (eventData) {
-            if (this.isFulfillable) {
-                await this.processOrderIsFulfillable(eventData);
-            } else {
-                this.processOrderNotFulfillable(eventData);
+        handleNonFulfillableCheckout () {
+            if (this.errors) {
+                this.nonFulfillableError = this.errors.find(error => error.shouldShowInDialog);
+
+                // if (this.errors) { // If `updateCheckout` call is successful but returns unfulfillable issues.
+                this.trackFormErrors();
+                // }
+
+                this.logInvoker('Consumer Checkout Not Fulfillable', this.eventData, this.$logger.logWarn);
             }
         },
 
-        processOrderNotFulfillable (eventData) {
-            this.handleCheckoutIssues();
-            this.logInvoker('Consumer Checkout Not Fulfillable', eventData, this.$logger.logWarn);
-        },
-
-        async processOrderIsFulfillable (eventData) {
+        async processOrder () {
             await this.submitOrder();
 
-            this.$emit(EventNames.CheckoutSuccess, eventData);
+            this.$emit(EventNames.CheckoutSuccess, this.eventData);
 
-            this.logInvoker('Consumer Checkout Successful', eventData, this.$logger.logInfo);
+            this.logInvoker('Consumer Checkout Successful', this.eventData, this.$logger.logInfo);
 
             this.redirectToPayment();
         },
@@ -464,38 +480,20 @@ export default {
          *
          */
         async handleUpdateCheckout () {
-            try {
-                const data = mapUpdateCheckoutRequest({
-                    address: this.address,
-                    customer: this.customer,
-                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
-                    time: this.time,
-                    userNote: this.userNote,
-                    geolocation: this.geolocation
-                });
+            const data = mapUpdateCheckoutRequest({
+                address: this.address,
+                customer: this.customer,
+                isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
+                time: this.time,
+                userNote: this.userNote,
+                geolocation: this.geolocation
+            });
 
-                await this.updateCheckout({
-                    url: this.updateCheckoutUrl,
-                    data,
-                    timeout: this.checkoutTimeout
-                });
-
-                if (this.errors) { // If `updateCheckout` call is successful but returns unfulfillable issues.
-                    this.trackFormErrors();
-                }
-            } catch (ex) {
-                const error = ex.errors.find(err => err.errorCode === ERROR_CODE_FULFILMENT_TIME_INVALID)
-                    ? ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME
-                    : ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE;
-
-                this.trackFormInteraction({ action: 'error', error: [error] });
-            }
-        },
-
-        handleCheckoutIssues () {
-            if (this.errors.length > 0) {
-                this.nonFulfillableError = this.errors.find(error => error.shouldShowInDialog);
-            }
+            await this.updateCheckout({
+                url: this.updateCheckoutUrl,
+                data,
+                timeout: this.checkoutTimeout
+            });
         },
 
         /**
@@ -682,45 +680,19 @@ export default {
          * Emit `CheckoutFailure` event with error data
          * Update `genericErrorMessage` to display correct errorMessage for passed error
          */
-        handleErrorState (error) {
-            let thrownErrors = error;
-
-            // Ideally we would use optional chaining but it doesn't currently work with Storybook
-            if (error && error.response && error.response.data && error.response.data.errors) {
-                thrownErrors = error.response.data.errors;
-            }
+        handleErrorState (ex, errorMessage) {
+            debugger; // eslint-disable-line
 
             const eventData = {
-                isLoggedIn: this.isLoggedIn,
-                serviceType: this.serviceType
+                ...this.eventData,
+                error: ex
             };
 
-            // TODO: Review this later - even though f-registration does something similar
-            if (Array.isArray(thrownErrors)) {
-                this.genericErrorMessage = thrownErrors[0].description || this.$t('errorMessages.genericServerError');
+            this.$emit(EventNames.CheckoutFailure, eventData);
 
-                eventData.error = thrownErrors;
+            this.genericErrorMessage = errorMessage || this.$t('errorMessages.genericServerError');
 
-                this.$emit(EventNames.CheckoutFailure, eventData);
-
-                this.$logger.logError(
-                    'Consumer Checkout Failure',
-                    this.$store,
-                    { eventData }
-                );
-            } else {
-                this.genericErrorMessage = error;
-
-                eventData.error = error;
-
-                this.$emit(EventNames.CheckoutFailure, eventData);
-
-                this.$logger.logError(
-                    'Consumer Checkout Failure',
-                    this.$store,
-                    { eventData }
-                );
-            }
+            this.logInvoker('Consumer Checkout Failure', eventData, this.$logger.logError);
         },
 
         /**
