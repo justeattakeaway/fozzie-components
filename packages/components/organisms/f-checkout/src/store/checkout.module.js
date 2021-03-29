@@ -419,7 +419,6 @@ export default {
         },
 
         [UPDATE_ERRORS]: (state, issues) => {
-            debugger; // eslint-disable-line
             state.errors = issues;
         },
 
