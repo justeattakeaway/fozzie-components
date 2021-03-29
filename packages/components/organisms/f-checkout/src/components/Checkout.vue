@@ -409,7 +409,8 @@ export default {
         },
 
         /**
-         * Submit the checkout details while emitting events to communicate its success or failure.
+         * Process all the information to submit the checkout and place an order
+         * while emitting events to communicate its success or failure.
          *
          */
         async submitCheckout () {
@@ -459,6 +460,10 @@ export default {
             }
         },
 
+        /**
+         * Display and track issues when updating checkout even though the request was successful.
+         * (e.g. request is correct, but the restaurant is now offline).
+         */
         handleNonFulfillableCheckout () {
             if (this.errors) {
                 this.nonFulfillableError = this.errors.find(error => error.shouldShowInDialog);
@@ -466,9 +471,15 @@ export default {
                 this.trackFormErrors();
 
                 this.logInvoker('Consumer Checkout Not Fulfillable', this.eventData, this.$logger.logWarn);
+
+                this.$emit(EventNames.CheckoutUpdateFailure, this.eventData);
             }
         },
 
+        /**
+         * Log a message at the specified level.
+         *
+         */
         logInvoker (message, eventData, callback) {
             callback(
                 message,
@@ -478,11 +489,12 @@ export default {
         },
 
         /**
-         * Handles call of `updateCheckout` and tracks any returned errors.
+         * Handles call of `updateCheckout` and catches and throws any returned errors.
          * 1. Maps checkout data.
-         * 2. If form is valid try to call `updateCheckout`.
-         * 3. If `updateCheckout` call succeeds but errors are returned, `trakFormError` is called.
-         * 4. If `updateCheckout` call fails calls `trakFormError` with error type..
+         * 2. Call `updateCheckout`.
+         * 3. If `updateCheckout` call succeeds but issues are returned, it will be handled by
+         *    its parent method
+         * 4. If `updateCheckout` call fails, throw an UpdateCheckoutError.
          */
         async handleUpdateCheckout () {
             try {
@@ -517,7 +529,7 @@ export default {
         },
 
         /**
-         * Place the order.
+         * Place the order, emit the expected events, and throw a new PlaceOrderError if the process fails.
          */
         async submitOrder () {
             try {
@@ -547,6 +559,7 @@ export default {
         /**
          * Setup a new guest user account. This method will be called when isLoggedIn is false.
          * Events emitted to communicate success or failure.
+         * Throw a CreateGuestUserError if it fails.
          */
         async setupGuestUser () {
             try {
@@ -686,8 +699,8 @@ export default {
         },
 
         /**
-         * Emit `CheckoutFailure` event with error data
-         * Update `genericErrorMessage` to display correct errorMessage for passed error
+         * Emit, log and track the error based on the parameters received.
+         * Set the `genericErrorMessage` for the user to see.
          */
         handleErrorState ({
             error, messageToDisplay, eventToEmit, logMessage
