@@ -11,6 +11,7 @@ v0.77.1
 ### Changed
 - Load `address` into state via new `location` object. 
 
+
 v0.77.0
 ------------------------------
 *March 26, 2021*
