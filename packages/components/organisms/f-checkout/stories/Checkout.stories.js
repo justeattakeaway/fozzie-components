@@ -19,6 +19,7 @@ Vue.use(Vuex);
 const getCheckoutDeliveryUrl = '/checkout-delivery.json';
 const getCheckoutCollectionUrl = '/checkout-collection.json';
 const checkoutAvailableFulfilmentUrl = '/checkout-available-fulfilment.json';
+const checkoutAvailableFulfilmentPreorderUrl = '/checkout-available-fulfilment-preorder.json';
 const createGuestUrl = '/create-guest.json';
 const getBasketDeliveryUrl = '/get-basket-delivery.json';
 const getBasketCollectionUrl = '/get-basket-collection.json';
@@ -32,6 +33,7 @@ const getGeoLocationUrl = '/get-geo-location.json';
 CheckoutMock.setupCheckoutMethod(getCheckoutDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getCheckoutCollectionUrl);
 CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentUrl);
+CheckoutMock.setupCheckoutMethod(checkoutAvailableFulfilmentPreorderUrl);
 CheckoutMock.setupCheckoutMethod(createGuestUrl);
 CheckoutMock.setupCheckoutMethod(getBasketDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getBasketCollectionUrl);
@@ -54,8 +56,6 @@ export const CheckoutComponent = () => ({
     components: { VueCheckout },
     data () {
         return {
-            checkoutAvailableFulfilmentUrl,
-            checkoutState: this.$store._modules.root.state.fCheckoutModule,
             createGuestUrl,
             getAddressUrl,
             loginUrl: '/login',
@@ -101,12 +101,10 @@ export const CheckoutComponent = () => ({
 
         updateCheckoutUrl () {
             return this.hasErrors ? updateCheckoutErrorsUrl : updateCheckoutUrl;
-        }
-    },
+        },
 
-    watch: {
-        isAsapAvailable () {
-            this.checkoutState.availableFulfilment.isAsapAvailable = this.isASAPAvailable;
+        checkoutAvailableFulfilmentUrl () {
+            return this.isAsapAvailable ? checkoutAvailableFulfilmentUrl : checkoutAvailableFulfilmentPreorderUrl;
         }
     },
 

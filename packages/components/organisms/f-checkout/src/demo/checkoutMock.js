@@ -3,6 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import getCheckoutDelivery from './checkout-delivery.json';
 import getCheckoutCollection from './checkout-collection.json';
 import checkoutAvailableFulfilment from './checkout-available-fulfilment.json';
+import checkoutAvailableFulfilmentPreorder from './checkout-available-fulfilment-preorder.json';
 import createGuest from './create-guest.json';
 import getBasketDelivery from './get-basket-delivery.json';
 import getBasketCollection from './get-basket-collection.json';
@@ -25,6 +26,9 @@ export default {
                 break;
             case '/checkout-available-fulfilment.json':
                 mock.onGet(path).reply(200, checkoutAvailableFulfilment);
+                break;
+            case '/checkout-available-fulfilment-preorder.json':
+                mock.onGet(path).reply(200, checkoutAvailableFulfilmentPreorder);
                 break;
             case '/create-guest.json':
                 mock.onPost(path).reply(200, createGuest);

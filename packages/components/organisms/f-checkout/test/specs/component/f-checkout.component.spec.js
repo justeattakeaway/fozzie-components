@@ -3,11 +3,12 @@ const Checkout = require('../../../test-utils/component-objects/f-checkout.compo
 const checkout = new Checkout();
 
 describe('f-checkout component tests', () => {
-    before(() => {
+    beforeEach(() => {
         const checkoutData = {
             type: 'delivery',
             isAuthenticated: true,
-            isValid: true
+            isValid: true,
+            isPreOrderWarningDisplayed: true
         };
 
         checkout.open(checkoutData);
@@ -119,5 +120,59 @@ describe('f-checkout component tests', () => {
 
     it('should display the switch user link', () => {
         expect(checkout.switchUserLinkIsDisplayed()).toBe(true);
+    });
+
+    it('should display the preorder warning message when ASAP is not avalible', () => {
+        // Arrange
+        const checkoutData = {
+            type: 'delivery',
+            isAuthenticated: true,
+            isValid: true,
+            isPreOrderWarningDisplayed: false
+        };
+
+        // Act
+        checkout.open(checkoutData);
+        checkout.waitForComponent();
+
+        // Assert
+        expect(checkout.isPreOrderWarningDisplayed()).toBe(true);
+    });
+
+    it('should display the checkout error component when "Has Checkout Errors" is true', () => {
+        // Arrange
+        const checkoutData = {
+            type: 'delivery',
+            isAuthenticated: true,
+            isValid: true,
+            checkoutErrors: true
+        };
+
+        // Act
+        checkout.open(checkoutData);
+        checkout.waitForComponent();
+        checkout.goToPayment();
+
+        // Assert
+        expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(true);
+    });
+
+    it('should close the checkout error when "Retry" is clicked', () => {
+        // Arrange
+        const checkoutData = {
+            type: 'delivery',
+            isAuthenticated: true,
+            isValid: true,
+            checkoutErrors: true
+        };
+
+        // Act
+        checkout.open(checkoutData);
+        checkout.waitForComponent();
+        checkout.goToPayment();
+        checkout.clickRetryButton();
+
+        // Assert
+        expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
     });
 });

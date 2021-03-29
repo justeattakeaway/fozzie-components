@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.9.0
+------------------------------
+*March 24, 2021*
+
+### Changed
+- `createCamelCaseClient` function passes `transformResponse` directly instead of via a `config` object.
+- `createClient` & `createCamelCaseClient` both scoop up all remaining arguments via a rest parameter allowing us to pass any additional config as you would normally to `axios.create`.
+
+
 v1.8.0
 ------------------------------
 *March 23, 2021*
