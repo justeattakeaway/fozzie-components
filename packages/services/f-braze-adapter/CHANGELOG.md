@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.3.0
+------------------------------
+*March 29, 2021*
+
+### Fixed
+- Handled a condition where, if appboy was not initialised when `BrazeDispatcher.configure()` was called,
+  and an in-app message was received, an error would be thrown.
+
+
 v3.2.0
 ------------------------------
 *March 17, 2021*
