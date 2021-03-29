@@ -4,38 +4,39 @@ const {
     HEADER_LOGO,
     MOBILE_NAVIGATION_BAR,
     NAVIGATION
-} = require ('./f-header.selectors');
+} = require('./f-header.selectors');
 
 module.exports = class Header extends Page {
+    get component () { return $(HEADER_COMPONENT); }
 
-    get component () { return $(HEADER_COMPONENT) }
-    get logo () { return  $(HEADER_LOGO) }
-    get mobileNavigationBar () { return $(MOBILE_NAVIGATION_BAR) }
+    get logo () { return $(HEADER_LOGO); }
+
+    get mobileNavigationBar () { return $(MOBILE_NAVIGATION_BAR); }
 
     navigation = {
         offersIcon: {
-            get link () { return $(NAVIGATION.offersIcon.link) }
+            get link () { return $(NAVIGATION.offersIcon.link); }
         },
         offersLink: {
-            get link () { return $(NAVIGATION.offersLink.link) }
+            get link () { return $(NAVIGATION.offersLink.link); }
         },
         help: {
-            get link () { return $(NAVIGATION.help.link) }
+            get link () { return $(NAVIGATION.help.link); }
         },
         delivery: {
-            get link () { return $(NAVIGATION.delivery.link) },
+            get link () { return $(NAVIGATION.delivery.link); }
         },
         userAccount: {
-            get link () { return $(NAVIGATION.userAccount.link) }
+            get link () { return $(NAVIGATION.userAccount.link); }
         },
         countrySelector: {
-            get link () { return $(NAVIGATION.countrySelector.link) },
-            get currentIcon () { return $(NAVIGATION.countrySelector.currentIcon) },
-            get countries () { return $$(NAVIGATION.countrySelector.countryList) }
+            get link () { return $(NAVIGATION.countrySelector.link); },
+            get currentIcon () { return $(NAVIGATION.countrySelector.currentIcon); },
+            get countries () { return $$(NAVIGATION.countrySelector.countryList); }
         }
     }
 
-    get countryLink () { return this.countryValue != null ?  this.countryValue : 'Please set a country value'; }
+    get countryLink () { return this.countryValue != null ? this.countryValue : 'Please set a country value'; }
 
     set expectedCountry (country) {
         this.countryValue = this.navigation.countrySelector.countries.filter(element => element.getAttribute('data-test-id').includes(country))[0];
@@ -50,7 +51,7 @@ module.exports = class Header extends Page {
     }
 
     openWithLocale (locale) {
-        let countryFormatted = locale.toUpperCase();
+        const countryFormatted = locale.toUpperCase();
         let formattedLocale = '';
         switch (countryFormatted) {
             case 'GB':
@@ -72,7 +73,7 @@ module.exports = class Header extends Page {
                 formattedLocale = `nb-${countryFormatted}`;
                 break;
             default:
-                throw new Error (`locale ${countryFormatted} is not supported`)
+                throw new Error(`locale ${countryFormatted} is not supported`);
         }
         super.openComponent('organism', `header-component&knob-Locale=${formattedLocale}`);
     }
@@ -94,7 +95,7 @@ module.exports = class Header extends Page {
     }
 
     isCurrentCountryIconDisplayed (country) {
-        let expectedIcon = this.navigation.countrySelector.currentIcon.getAttribute('class').includes(`c-ficon--flag.${country}.round`);
+        const expectedIcon = this.navigation.countrySelector.currentIcon.getAttribute('class').includes(`c-ficon--flag.${country}.round`);
         return expectedIcon ? this.navigation.countrySelector.currentIcon.isDisplayed() : false;
     }
 
@@ -106,14 +107,9 @@ module.exports = class Header extends Page {
         return this.mobileNavigationBar.isDisplayed();
     }
 
-    // saving these for another ticket
-    // isMobileOffersIconDisplayed(){
-    //     return this.mobileOffersIcon.length === 1 && element[0].isDisplayed();
-    // }
-
-    // isWebOffersIconDisplayed(){
-    //     return this.webOffersIcon.length === 1 && element[0].isDisplayed();
-    // }
+    isOffersIconLinkDisplayed () {
+        return this.navigation.offersIcon.isDisplayed();
+    }
 
     clickOffersLink () {
         return this.navigation.offersLink.link.click();

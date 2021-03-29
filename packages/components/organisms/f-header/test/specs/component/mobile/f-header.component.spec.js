@@ -12,7 +12,7 @@ describe('Mobile - f-header component tests', () => {
         }
     });
 
-    forEach(['help', 'delivery', 'userAccount', 'countrySelector'])
+    forEach(['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'])
     .it('should hide all navigation links, except offersIcon link, when in mobile mode', field => {
         // Act
         header.openWithExtraFeatures();
@@ -23,10 +23,12 @@ describe('Mobile - f-header component tests', () => {
         expect(header.isFieldLinkDisplayed('offersIcon')).toBe(true);
     });
 
-    forEach(['help', 'countrySelector', 'userAccount'])
+    forEach(['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'])
     .it('should display navigation fields when burger menu has been opened', field => {
         // Act
+        header.openWithExtraFeatures();
         header.openMobileNavigation();
+        console.log(field);
 
         // Assert
         expect(header.isFieldLinkDisplayed(field)).toBe(true);
