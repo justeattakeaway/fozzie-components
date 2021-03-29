@@ -35,14 +35,15 @@ const TEST_PAYLOAD = {
     test: '__TEST_PAYLOAD__'
 };
 
+const LOG_ERROR = 'logError';
+const LOG_INFO = 'logInfo';
+const LOG_WARN = 'logWarn';
+
 const enabledComponentParameters = {
     disableComponent: false,
     apiKey,
     userId
 };
-
-window.dataLayer = dataLayer;
-window.appboy = appboy;
 
 const inAppMessageButtons = [
     {
@@ -61,6 +62,8 @@ beforeEach(() => {
         /* eslint-disable-next-line global-require */
         GetDispatcher = require('../BrazeDispatcher').default;
     });
+    window.dataLayer = dataLayer;
+    window.appboy = appboy;
 });
 
 describe('instantiation', () => {
@@ -256,9 +259,9 @@ describe('BrazeDispatcher operation', () => {
         describe('logger', () => {
             it.each`
                 key          | value
-                ${'info'}    | ${'logInfo'}
-                ${'warn'}    | ${'logWarn'}
-                ${'error'}   | ${'logError'}
+                ${'info'}    | ${LOG_INFO}
+                ${'warn'}    | ${LOG_WARN}
+                ${'error'}   | ${LOG_ERROR}
             `('should for each key call the callback with the relevant log data', ({ key, value }) => {
                 // Act
                 dispatcher.logger(key, TEST_LOG_MESSAGE, TEST_PAYLOAD);
@@ -267,6 +270,7 @@ describe('BrazeDispatcher operation', () => {
                 expect(loggingCallback).toHaveBeenCalledWith(value, TEST_LOG_MESSAGE, TEST_PAYLOAD);
             });
         });
+
         describe('contentCardsHandler', () => {
             const rawCards = [
                 { id: 'card1' },
@@ -288,6 +292,7 @@ describe('BrazeDispatcher operation', () => {
                     ]
                 }
             ];
+
             beforeEach(() => {
                 ContentCards.prototype.orderCardsByOrderValue.mockReturnThis();
                 ContentCards.prototype.orderCardsByUpdateValue.mockReturnThis();
@@ -341,25 +346,45 @@ describe('BrazeDispatcher operation', () => {
                 message.buttons = inAppMessageButtons;
             });
 
-            it('should call registered callback', () => {
+            describe('when braze is initialised', () => {});
+
+            it('should call registered callback', async () => {
                 // Act
-                interceptInAppMessagesHandler(message);
+                await interceptInAppMessagesHandler(message);
 
                 // Assert
                 expect(interceptInAppMessages).toHaveBeenCalledWith(message);
             });
 
-            it('should call braze display function for message', () => {
+            it('should call braze display function for message', async () => {
                 // Act
-                interceptInAppMessagesHandler(message);
+                await interceptInAppMessagesHandler(message);
 
                 // Assert
                 expect(appboy.display.showInAppMessage).toHaveBeenCalledWith(message);
             });
 
-            it('should subscribe internal callback to the CTA button click event', () => {
+            describe('when showInAppMessage throws an error', () => {
+                const error = new Error('We have a problem');
+
+                beforeEach(() => {
+                    interceptInAppMessages.mockImplementation(() => {
+                        throw error;
+                    });
+                });
+
+                it('should log the error to the provided callback', async () => {
+                    // Act
+                    await interceptInAppMessagesHandler(message);
+
+                    // Assert
+                    expect(loggingCallback).toHaveBeenCalledWith(LOG_ERROR, `Error handling message - ${error}`, { message, error });
+                });
+            });
+
+            it('should subscribe internal callback to the CTA button click event', async () => {
                 // Act
-                interceptInAppMessagesHandler(message);
+                await interceptInAppMessagesHandler(message);
 
                 // Assert
                 expect(message.buttons[1].subscribeToClickedEvent).toHaveBeenCalledWith(expect.any(Function));
@@ -378,9 +403,9 @@ describe('BrazeDispatcher operation', () => {
                 });
             });
 
-            it('should subscribe internal callback to the CTA button click event', () => {
+            it('should subscribe internal callback to the CTA button click event', async () => {
                 // Arrange
-                interceptInAppMessagesHandler(message);
+                await interceptInAppMessagesHandler(message);
                 expect(message.buttons[1].subscribeToClickedEvent).toHaveBeenCalledWith(expect.any(Function));
 
                 // Act
