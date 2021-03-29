@@ -122,6 +122,12 @@ import ErrorDialog from './ErrorDialog.vue';
 import ErrorPage from './Error.vue';
 
 import {
+    CreateGuestUserError,
+    UpdateCheckoutError,
+    PlaceOrderError
+} from '../exceptions/exceptions';
+
+import {
     ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE,
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME,
@@ -417,25 +423,45 @@ export default {
                 await this.handleUpdateCheckout();
 
                 if (this.isFulfillable) {
-                    await this.processOrder();
+                    await this.submitOrder();
+
+                    this.redirectToPayment();
                 } else {
                     this.handleNonFulfillableCheckout();
                 }
-            } catch (ex) {
-                this.trackException(ex);
+            } catch (e) {
+                if (e instanceof CreateGuestUserError) {
+                    this.handleErrorState({
+                        error: e,
+                        messageToDisplay: this.$t('errorMessages.guestUserCreationFailure'),
+                        eventToEmit: EventNames.CheckoutSetupGuestFailure,
+                        logMessage: 'Checkout Setup Guest Failure'
+                    });
+                } else if (e instanceof UpdateCheckoutError) {
+                    this.handleErrorState({
+                        error: e,
+                        eventToEmit: EventNames.CheckoutUpdateFailure,
+                        logMessage: 'Checkout Update Failure'
+                    });
+                } else if (e instanceof PlaceOrderError) {
+                    this.handleErrorState({
+                        error: e,
+                        eventToEmit: EventNames.CheckoutProcessOrderFailure,
+                        logMessage: 'Process Order Failure'
+                    });
+                } else {
+                    this.trackException(e);
 
-                this.handleErrorState({
-                    ex,
-                    eventToEmit: EventNames.CheckoutFailure,
-                    logMessage: 'Consumer Checkout Failure'
-                });
+                    this.handleErrorState({
+                        error: e,
+                        eventToEmit: EventNames.CheckoutFailure,
+                        logMessage: 'Consumer Checkout Failure'
+                    });
+                }
             }
         },
 
-        // TODO: try creating custom exceptions for each sub-function, and handle these at the top level.
-        // e.g. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw
-        // ZipFormatException or whatever.
-
+        // TODO: check this
         trackException (ex) {
             const responseErrors = ex.response.data && ex.response.data.errors
                 ? ex.response.data.errors
@@ -452,22 +478,10 @@ export default {
             if (this.errors) {
                 this.nonFulfillableError = this.errors.find(error => error.shouldShowInDialog);
 
-                // if (this.errors) { // If `updateCheckout` call is successful but returns unfulfillable issues.
                 this.trackFormErrors();
-                // }
 
                 this.logInvoker('Consumer Checkout Not Fulfillable', this.eventData, this.$logger.logWarn);
             }
-        },
-
-        async processOrder () {
-            await this.submitOrder();
-
-            this.$emit(EventNames.CheckoutSuccess, this.eventData);
-
-            this.logInvoker('Consumer Checkout Successful', this.eventData, this.$logger.logInfo);
-
-            this.redirectToPayment();
         },
 
         logInvoker (message, eventData, callback) {
@@ -484,23 +498,28 @@ export default {
          * 2. If form is valid try to call `updateCheckout`.
          * 3. If `updateCheckout` call succeeds but errors are returned, `trakFormError` is called.
          * 4. If `updateCheckout` call fails calls `trakFormError` with error type..
-         *
          */
         async handleUpdateCheckout () {
-            const data = mapUpdateCheckoutRequest({
-                address: this.address,
-                customer: this.customer,
-                isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
-                time: this.time,
-                userNote: this.userNote,
-                geolocation: this.geolocation
-            });
+            try {
+                const data = mapUpdateCheckoutRequest({
+                    address: this.address,
+                    customer: this.customer,
+                    isCheckoutMethodDelivery: this.isCheckoutMethodDelivery,
+                    time: this.time,
+                    userNote: this.userNote,
+                    geolocation: this.geolocation
+                });
 
-            await this.updateCheckout({
-                url: this.updateCheckoutUrl,
-                data,
-                timeout: this.checkoutTimeout
-            });
+                await this.updateCheckout({
+                    url: this.updateCheckoutUrl,
+                    data,
+                    timeout: this.checkoutTimeout
+                });
+
+                this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
+            } catch (e) {
+                throw new UpdateCheckoutError(e.message);
+            }
         },
 
         /**
@@ -516,19 +535,28 @@ export default {
          * Place the order.
          */
         async submitOrder () {
-            const data = {
-                basketId: this.basket.id,
-                customerNotes: {
-                    noteForRestaurant: this.userNote
-                },
-                referralState: 'ReferredByWeb'
-            };
+            try {
+                const data = {
+                    basketId: this.basket.id,
+                    customerNotes: {
+                        noteForRestaurant: this.userNote
+                    },
+                    referralState: 'ReferredByWeb'
+                };
 
-            await this.placeOrder({
-                url: this.placeOrderUrl,
-                data,
-                timeout: this.checkoutTimeout
-            });
+                await this.placeOrder({
+                    url: this.placeOrderUrl,
+                    data,
+                    timeout: this.checkoutTimeout
+                });
+
+                this.$emit(EventNames.CheckoutProcessOrderSuccess, this.eventData);
+                this.$emit(EventNames.CheckoutSuccess, this.eventData);
+
+                this.logInvoker('Consumer Checkout Successful', this.eventData, this.$logger.logInfo);
+            } catch (e) {
+                throw new PlaceOrderError(e.message);
+            }
         },
 
         /**
@@ -536,14 +564,14 @@ export default {
          * Events emitted to communicate success or failure.
          */
         async setupGuestUser () {
-            const createGuestData = {
-                emailAddress: this.customer.email,
-                firstName: this.customer.firstName,
-                lastName: this.customer.lastName,
-                registrationSource: 'Guest'
-            };
-
             try {
+                const createGuestData = {
+                    emailAddress: this.customer.email,
+                    firstName: this.customer.firstName,
+                    lastName: this.customer.lastName,
+                    registrationSource: 'Guest'
+                };
+
                 await this.createGuestUser({
                     url: this.createGuestUrl,
                     tenant: this.tenant,
@@ -552,13 +580,8 @@ export default {
                 });
 
                 this.$emit(EventNames.CheckoutSetupGuestSuccess);
-            } catch (ex) {
-                this.handleErrorState({
-                    ex,
-                    messageToDisplay: this.$t('errorMessages.guestUserCreationFailure'),
-                    eventToEmit: EventNames.CheckoutSetupGuestFailure,
-                    logMessage: 'Checkout Setup Guest Failure'
-                });
+            } catch (e) {
+                throw new CreateGuestUserError(e.message);
             }
         },
 
@@ -574,14 +597,14 @@ export default {
                 });
 
                 this.$emit(EventNames.CheckoutGetSuccess);
-            } catch (thrownErrors) {
-                this.$emit(EventNames.CheckoutGetFailure, thrownErrors);
+            } catch (e) {
+                this.$emit(EventNames.CheckoutGetFailure, e);
                 this.hasCheckoutLoadedSuccessfully = false;
 
                 this.$logger.logError(
                     'Get Checkout Failure',
                     this.$store,
-                    { thrownErrors }
+                    { e }
                 );
             }
         },
@@ -600,14 +623,14 @@ export default {
                 });
 
                 this.$emit(EventNames.CheckoutBasketGetSuccess);
-            } catch (thrownErrors) {
-                this.$emit(EventNames.CheckoutBasketGetFailure, thrownErrors);
+            } catch (e) {
+                this.$emit(EventNames.CheckoutBasketGetFailure, e);
                 this.hasCheckoutLoadedSuccessfully = false;
 
                 this.$logger.logError(
                     'Get Checkout Basket Failure',
                     this.$store,
-                    { thrownErrors }
+                    { e }
                 );
             }
         },
@@ -624,14 +647,14 @@ export default {
                 });
 
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess);
-            } catch (thrownErrors) {
-                this.$emit(EventNames.CheckoutAvailableFulfilmentGetFailure, thrownErrors);
+            } catch (e) {
+                this.$emit(EventNames.CheckoutAvailableFulfilmentGetFailure, e);
                 this.hasCheckoutLoadedSuccessfully = false;
 
                 this.$logger.logError(
                     'Get Checkout Available Fulfilment Times Failure',
                     this.$store,
-                    { thrownErrors }
+                    { e }
                 );
             }
         },
@@ -649,9 +672,9 @@ export default {
                     timeout: this.checkoutTimeout
                 });
                 this.$emit(EventNames.CheckoutAddressGetSuccess);
-            } catch (thrownErrors) {
-                this.$emit(EventNames.CheckoutAddressGetFailure, thrownErrors);
-                this.$logger.logWarn('Get checkout address failure', this.$store, { thrownErrors });
+            } catch (e) {
+                this.$emit(EventNames.CheckoutAddressGetFailure, e);
+                this.$logger.logWarn('Get checkout address failure', this.$store, { e });
             }
         },
 
@@ -660,12 +683,11 @@ export default {
          *
          */
         async lookupGeoLocation () {
-            const locationData =
-            {
-                addressLines: Object.values(this.address).filter(addressLine => !!addressLine)
-            };
-
             try {
+                const locationData = {
+                    addressLines: Object.values(this.address).filter(addressLine => !!addressLine)
+                };
+
                 if (locationData.addressLines.length) {
                     await this.getGeoLocation({
                         url: this.getGeoLocationUrl,
@@ -673,12 +695,8 @@ export default {
                         timeout: this.checkoutTimeout
                     });
                 }
-            } catch (error) {
-                this.$logger.logWarn(
-                    'Geo location lookup failed',
-                    this.$store,
-                    { error }
-                );
+            } catch (e) {
+                this.logInvoker('Geo Location Lookup Failed', this.eventData, this.$logger.logWarn);
             }
         },
 
@@ -687,11 +705,11 @@ export default {
          * Update `genericErrorMessage` to display correct errorMessage for passed error
          */
         handleErrorState ({
-            ex, messageToDisplay, eventToEmit, logMessage
+            error, messageToDisplay, eventToEmit, logMessage
         }) {
             const eventData = {
                 ...this.eventData,
-                error: ex
+                error
             };
 
             this.$emit(eventToEmit, eventData);
