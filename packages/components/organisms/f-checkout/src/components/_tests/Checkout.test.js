@@ -638,6 +638,24 @@ describe('Checkout', () => {
                 expect(result).toBe(`restaurant-${restaurantSeoName}/menu`);
             });
         });
+
+        describe('eventData ::', () => {
+            it('should return `isLoggedIn` and `serviceType` in an object`', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                // Act
+                const result = wrapper.vm.eventData;
+
+                // Assert
+                expect(result).toEqual({ isLoggedIn: defaultCheckoutState.isLoggedIn, serviceType: defaultCheckoutState.serviceType });
+            });
+        });
     });
 
     describe('mounted ::', () => {

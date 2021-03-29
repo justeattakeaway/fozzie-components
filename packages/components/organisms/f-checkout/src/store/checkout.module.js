@@ -103,7 +103,6 @@ export default {
         updateCheckout: async ({ commit, state }, {
             url, data, timeout
         }) => {
-            debugger; // eslint-disable-line
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
             const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
@@ -125,8 +124,6 @@ export default {
             const detailedIssues = issues.map(issue => ({ ...checkoutIssues[issue.code], ...issue }));
 
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
-
-            debugger; // eslint-disable-line
             commit(UPDATE_ERRORS, detailedIssues);
         },
 
