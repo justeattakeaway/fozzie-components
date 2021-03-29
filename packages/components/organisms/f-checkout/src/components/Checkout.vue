@@ -446,12 +446,10 @@ export default {
                 } else if (e instanceof PlaceOrderError) {
                     this.handleErrorState({
                         error: e,
-                        eventToEmit: EventNames.CheckoutProcessOrderFailure,
-                        logMessage: 'Process Order Failure'
+                        eventToEmit: EventNames.CheckoutPlaceOrderFailure,
+                        logMessage: 'Place Order Failure'
                     });
                 } else {
-                    this.trackException(e);
-
                     this.handleErrorState({
                         error: e,
                         eventToEmit: EventNames.CheckoutFailure,
@@ -459,19 +457,6 @@ export default {
                     });
                 }
             }
-        },
-
-        // TODO: check this
-        trackException (ex) {
-            const responseErrors = ex.response.data && ex.response.data.errors
-                ? ex.response.data.errors
-                : [];
-
-            const analyticsError = responseErrors.find(err => err.errorCode === ERROR_CODE_FULFILMENT_TIME_INVALID)
-                ? ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME
-                : ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE;
-
-            this.trackFormInteraction({ action: 'error', error: [analyticsError] });
         },
 
         handleNonFulfillableCheckout () {
@@ -550,7 +535,7 @@ export default {
                     timeout: this.checkoutTimeout
                 });
 
-                this.$emit(EventNames.CheckoutProcessOrderSuccess, this.eventData);
+                this.$emit(EventNames.CheckoutPlaceOrderSuccess, this.eventData);
                 this.$emit(EventNames.CheckoutSuccess, this.eventData);
 
                 this.logInvoker('Consumer Checkout Successful', this.eventData, this.$logger.logInfo);
@@ -713,10 +698,10 @@ export default {
             };
 
             this.$emit(eventToEmit, eventData);
+            this.logInvoker(logMessage, eventData, this.$logger.logError);
+            this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
 
             this.genericErrorMessage = messageToDisplay || this.$t('errorMessages.genericServerError');
-
-            this.logInvoker(logMessage, eventData, this.$logger.logError);
         },
 
         /**

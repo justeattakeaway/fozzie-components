@@ -14,8 +14,8 @@ const CheckoutAddressGetSuccess = 'checkout-address-get-success';
 const CheckoutAddressGetFailure = 'checkout-address-get-failure';
 const CheckoutErrorDialogButtonClicked = 'checkout-error-dialog-button-click';
 const CheckoutDialogCloseButtonClicked = 'checkout-dialog-close-button-click';
-const CheckoutProcessOrderSuccess = 'checkout-process-order-success';
-const CheckoutProcessOrderFailure = 'checkout-process-order-failure';
+const CheckoutPlaceOrderSuccess = 'checkout-place-order-success';
+const CheckoutPlaceOrderFailure = 'checkout-place-order-failure';
 const CheckoutUpdateSuccess = 'checkout-update-success';
 const CheckoutUpdateFailure = 'checkout-update-failure';
 
@@ -36,8 +36,8 @@ export default {
     CheckoutAddressGetFailure,
     CheckoutErrorDialogButtonClicked,
     CheckoutDialogCloseButtonClicked,
-    CheckoutProcessOrderSuccess,
-    CheckoutProcessOrderFailure,
+    CheckoutPlaceOrderSuccess,
+    CheckoutPlaceOrderFailure,
     CheckoutUpdateSuccess,
     CheckoutUpdateFailure
 };
