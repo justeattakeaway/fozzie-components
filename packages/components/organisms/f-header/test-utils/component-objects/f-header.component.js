@@ -13,6 +13,8 @@ module.exports = class Header extends Page {
 
     get mobileNavigationBar () { return $(MOBILE_NAVIGATION_BAR); }
 
+    get locales () { return ['au', 'gb', 'ie', 'nz'] }
+
     navigation = {
         offersIcon: {
             get link () { return $(NAVIGATION.offersIcon.link); }
@@ -42,16 +44,27 @@ module.exports = class Header extends Page {
         this.countryValue = this.navigation.countrySelector.countries.filter(element => element.getAttribute('data-test-id').includes(country))[0];
     }
 
-    open () {
-        super.openComponent('organism', 'header-component');
-    }
 
-    openWithExtraFeatures () {
-        super.openComponent('organism', 'header-component&knob-Show%20offers%20link=true&knob-Show%20delivery%20enquiry=true');
-    }
+    // open () {
+    //     super.openComponent('organism', 'header-component');
+    // }
 
-    openWithLocale (locale) {
-        const countryFormatted = locale.toUpperCase();
+    // openWithExtraFeatures () {
+    //     super.openComponent('organism', 'header-component&knob-Show%20offers%20link=true&knob-Show%20delivery%20enquiry=true');
+    // }
+
+    /**
+     * @description
+     * Sets the data for the checkout component.
+     *
+     * @param {Object} header
+     * @param {String} header.locale The checkout type
+     * @param {String} header.offers The checkout authentication
+     * @param {String} header.delivery The checkout authentication
+     */
+
+    open (header) {
+        const countryFormatted = header.locale.toUpperCase();
         let formattedLocale = '';
         switch (countryFormatted) {
             case 'GB':
@@ -75,7 +88,10 @@ module.exports = class Header extends Page {
             default:
                 throw new Error(`locale ${countryFormatted} is not supported`);
         }
-        super.openComponent('organism', `header-component&knob-Locale=${formattedLocale}`);
+
+        const offersUrl = header.offers ? '&knob-Show%20offers%20link=true' : '';
+        const deliveryUrl = header.delivery ? '&knob-Show%20delivery%20enquiry=true' : '';
+        super.openComponent('organism', `header-component&knob-Locale=${formattedLocale}${offersUrl}${deliveryUrl}`);
     }
 
     waitForComponent () {
