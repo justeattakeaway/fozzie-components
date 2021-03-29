@@ -49,30 +49,5 @@ describe('SkeletonLoader', () => {
             });
         });
 
-        describe('isAnimated', () => {
-            it('should add add animation modifier class to component root', () => {
-                // Arrange
-                const propsData = {
-                    isAnimated: true
-                };
-                // Act
-                const wrapper = makeWrapper({ propsData });
-
-                // Assert
-                expect(wrapper.classes()).toContain('c-skeleton-loader--animated');
-            });
-
-            it('should add not add animation modifier class when false', () => {
-                // Arrange
-                const propsData = {
-                    isAnimated: false
-                };
-                // Act
-                const wrapper = makeWrapper({ propsData });
-
-                // Assert
-                expect(wrapper.classes()).not.toContain('c-skeleton-loader--animated');
-            });
-        });
     });
 });
