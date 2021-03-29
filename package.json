@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "3.24.0",
+  "version": "3.25.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -34,7 +34,6 @@
     "@justeat/browserslist-config-fozzie": "1.1.1",
     "@justeat/eslint-config-fozzie": "3.4.1",
     "@justeat/f-utils": "1.1.0",
-    "@justeat/f-wdio-utils": "0.1.0",
     "@justeat/fozzie": "5.0.0-beta.3",
     "@justeat/fozzie-colour-palette": "3.1.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",
@@ -71,7 +70,6 @@
     "eslint-plugin-vuejs-accessibility": "0.6.0",
     "eyeglass": "3.0.2",
     "include-media": "1.4.9",
-    "jest-allure2": "1.2.3",
     "lerna": "3.22.1",
     "mocha-each": "2.0.1",
     "mocha-tags": "1.0.1",

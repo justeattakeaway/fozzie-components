@@ -3,6 +3,25 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.4.1
+------------------------------
+*March 25, 2021*
+
+### Fixed
+- ContentCards Component Page Object model Fixed to use base page package. 
+
+v4.4.0
+------------------------------
+*March 23, 2021*
+
+### Updated
+- Adds `StampCardPromotionCard` component, test, stories and docs
+- Factors out some common card styling into a shared scss file
+- Factors out some common non-visual behaviour into a shared component
+
+### Fixed
+- ContentCards stories when rendered as static site
+
 
 v4.3.0
 ------------------------------

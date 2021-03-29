@@ -3,6 +3,7 @@ import PromotionCard from './PromotionCard.vue';
 import PostOrderCard from './PostOrderCard.vue';
 import SkeletonLoader from './SkeletonLoader.vue';
 import StampCard1 from './StampCard1.vue';
+import StampCardPromotionCard from './StampCardPromotionCard.vue';
 import TermsAndConditionsCard from './TermsAndConditionsCard.vue';
 import VoucherCard from './voucherCard/VoucherCard.vue';
 import GroupHeaderCard from './GroupHeaderCard.vue';
@@ -14,6 +15,7 @@ export {
     PostOrderCard,
     SkeletonLoader,
     StampCard1,
+    StampCardPromotionCard,
     TermsAndConditionsCard,
     VoucherCard,
     HomePromotionCard1,

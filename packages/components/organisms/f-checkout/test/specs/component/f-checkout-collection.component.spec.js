@@ -5,7 +5,7 @@ const Checkout = require('../../../test-utils/component-objects/f-checkout.compo
 const checkout = new Checkout();
 
 describe('f-checkout "collection" component tests', () => {
-    before(() => {
+    beforeEach(() => {
         const checkoutData = {
             type: 'collection',
             isAuthenticated: true,
@@ -17,7 +17,7 @@ describe('f-checkout "collection" component tests', () => {
     });
 
     forEach(['addressLine1', 'addressLine2', 'addressLocality', 'addressPostcode'])
-    .it.only('should check that address fields should not exist', field => {
+    .it('should check that address fields should not exist', field => {
         // Assert
         expect(checkout.doesFieldExist(field)).toBe(false);
     });

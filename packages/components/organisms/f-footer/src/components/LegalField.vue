@@ -1,6 +1,6 @@
 <template>
     <div
-        :class="$style['c-footer-certificates']">
+        :class="$style['c-legalField-certificates']">
         <p
             v-if="info.textField">
             {{ info.textField }}
@@ -9,8 +9,8 @@
         <confianza-icon
             v-if="isConfianza"
             :class="[
-                $style['c-footer-certificates-icons'],
-                $style[iconClass]
+                $style['c-legalField-certificates-icons'],
+                $style['iconClass']
             ]" />
     </div>
 </template>
@@ -35,7 +35,7 @@ export default {
             return this.info.icon.name === 'confianza';
         },
         iconClass () {
-            return `c-footer-certificates-icons--${this.info.icon.name}`;
+            return `c-legalField-certificates-icons--${this.info.icon.name}`;
         }
     }
 };
@@ -43,7 +43,7 @@ export default {
 
 <style lang="scss" module>
 
-.c-footer-certificates {
+.c-legalField-certificates {
     display: flex;
     align-items: center;
 
@@ -57,11 +57,11 @@ export default {
     }
 }
 
-.c-footer-certificates-icons {
+.c-legalField-certificates-icons {
     display: block;
 }
 
-.c-footer-certificates-icons--confianza {
+.c-legalField-certificates-icons--confianza {
     width: 50px;
     height: 50px;
 }

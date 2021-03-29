@@ -67,6 +67,7 @@ export default {
 
             if (this.availableFulfilment.isAsapAvailable && times.length) {
                 times[0].text = this.$t('asapFulfilmentOption');
+                this.updateHasAsapSelected(true);
             }
 
             return times;
@@ -86,9 +87,14 @@ export default {
         }
     },
 
+    mounted () {
+        this.initFulfilmentTime(this.fulfilmentTimes);
+    },
+
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
-            'updateFulfilmentTime'
+            'updateFulfilmentTime',
+            'updateHasAsapSelected'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
@@ -104,11 +110,41 @@ export default {
             this.selectedAvailableFulfilmentTime = selectedFulfilmentTime;
             this.updateChangedField('orderTime');
 
+            this.setAsapFlag(selectedFulfilmentTime);
+
             // TODO - Update to use different from/to times when the API supports it
             this.updateFulfilmentTime({
                 from: selectedFulfilmentTime,
                 to: selectedFulfilmentTime
             });
+        },
+
+        /**
+         * Initialise the first set of times so if the user proceeds with the preset delivery time
+         * we have access to the from/to times up front.
+         *
+         * @param times
+         */
+        initFulfilmentTime (times) {
+            if (times.length && times[0].value) {
+                this.updateFulfilmentTime({
+                    from: times[0].value,
+                    to: times[0].value
+                });
+            }
+        },
+
+        /**
+         * Set asap to `true` if the availableFulfilment time matches the selected fulfilment time,
+         * otherwise set it to false.
+         *
+         * @param selectedFulfilmentTime
+         */
+        setAsapFlag (selectedFulfilmentTime) {
+            const isAsapSelected = this.availableFulfilment.isAsapAvailable
+                && this.availableFulfilment.times[0].from === selectedFulfilmentTime;
+
+            this.updateHasAsapSelected(isAsapSelected);
         }
     }
 };

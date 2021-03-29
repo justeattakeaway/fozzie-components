@@ -19,7 +19,8 @@ pact-logs/
 .tmproj
 *.esproj
 *.sublime-*
-.vscode
+.vscode/*
+!.vscode/launch.json
 nbproject
 Thumbs.db
 logs

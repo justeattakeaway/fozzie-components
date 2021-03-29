@@ -18,6 +18,28 @@ v0.78.0
 - Redundant and unnecessary functions.
 
 
+v0.77.0
+------------------------------
+*March 26, 2021*
+
+### Added
+- New time object structure for patch call to checkout. (Includes scheduled & asap values).
+- Fix up `selector.vue` so times `to/from` are set correctly.
+
+
+v0.76.0
+------------------------------
+*March 25, 2021*
+
+### Added
+- Tests to test the preorder warning message
+- Tests to test the checkout error message
+- Supporting code in `Checkout.stories.js` and `f-checkout.component.js` to enable testing in storybook.
+- `checkout-available-fulfilment-preorder.json` to support storybook tabs for testing
+- Component tests for `Error.vue` component
+- Accessibility tests for `Error.vue` component
+
+
 v0.75.0
 ------------------------------
 *March 19, 2021*
@@ -115,7 +137,7 @@ v0.67.0
 - Analytics error tracking.
 - Tests to cover changes.
 
-# Changed
+### Changed
 - `checkout.module` `issues` to `error`.
 
 ### Fixed
