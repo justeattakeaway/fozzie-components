@@ -10,12 +10,11 @@ export default {
 export const SkeletonLoaderComponent = (args, { argTypes }) => ({
     components: { SkeletonLoader },
     props: Object.keys(argTypes),
-    template: '<skeleton-loader :skeletonType="skeletonType" :isAnimated="isAnimated" />'
+    template: '<skeleton-loader :skeletonType="skeletonType" />'
 });
 
 SkeletonLoaderComponent.args = {
-    skeletonType: 'Sentence',
-    isAnimated: true
+    skeletonType: 'Sentence'
 };
 
 SkeletonLoaderComponent.argTypes = {
