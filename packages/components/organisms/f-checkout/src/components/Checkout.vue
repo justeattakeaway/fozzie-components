@@ -2,7 +2,7 @@
     <div>
         <error-dialog
             :is-open="shouldShowErrorDialog"
-            :error-code="nonFulfillableError && nonFulfillableError.code"
+            :error-code="hasNonFulfillableErrorCode"
             @close="handleErrorDialogClose"
             @checkout-error-dialog-button-click="handleErrorDialogButtonClick" />
         <div
