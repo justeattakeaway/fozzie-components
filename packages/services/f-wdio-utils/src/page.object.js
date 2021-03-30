@@ -1,31 +1,24 @@
 class Page {
-
-  openComponent(componentType, path) {
-    let formattedUrl = ''
-    
-    switch(componentType.toLowerCase()) {
-      case 'atom':
-        formattedUrl = `/iframe.html?id=components-atoms--${path}`
-        break;
-      case 'molecule':
-        formattedUrl = `/iframe.html?id=components-molecules--${path}`
-        break;
-      case 'molecule-folder':
-        formattedUrl = `/iframe.html?id=components-molecules-${path}`
-        break;
-      case 'organism':
-        formattedUrl = `/iframe.html?id=components-organisms--${path}`
-        break;
-      default:
-        throw new Error(`${componentType} is not a valid component type. Please use 'atom', 'molecule', or 'organism'`);
+    constructor (componentType, componentName) {
+        this.title = 'Component URLS';
+        this.componentType = componentType;
+        this.componentName = componentName;
+        this.path = '';
     }
-    
-    browser.url(formattedUrl)
-  }
 
-  waitForComponent (component) {
-    component.waitForExist();
-  }
+    open (url) {
+        browser.url(url);
+        return this;
+    }
+
+    waitForComponent (component) {
+        component.waitForExist();
+    }
+
+    withQuery (name, value) {
+        this.path += `&${name}=${value}`;
+        return this;
+    }
 }
 
 module.exports = Page;

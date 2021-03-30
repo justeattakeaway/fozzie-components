@@ -10,7 +10,7 @@
             v-if="isConfianza"
             :class="[
                 $style['c-legalField-certificates-icons'],
-                $style['iconClass']
+                $style['c-legalField-certificates-icons--confianza']
             ]" />
     </div>
 </template>
@@ -33,9 +33,6 @@ export default {
     computed: {
         isConfianza () {
             return this.info.icon.name === 'confianza';
-        },
-        iconClass () {
-            return `c-legalField-certificates-icons--${this.info.icon.name}`;
         }
     }
 };
