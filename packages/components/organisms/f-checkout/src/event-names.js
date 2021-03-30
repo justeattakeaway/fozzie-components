@@ -14,6 +14,10 @@ const CheckoutAddressGetSuccess = 'checkout-address-get-success';
 const CheckoutAddressGetFailure = 'checkout-address-get-failure';
 const CheckoutErrorDialogButtonClicked = 'checkout-error-dialog-button-click';
 const CheckoutDialogCloseButtonClicked = 'checkout-dialog-close-button-click';
+const CheckoutPlaceOrderSuccess = 'checkout-place-order-success';
+const CheckoutPlaceOrderFailure = 'checkout-place-order-failure';
+const CheckoutUpdateSuccess = 'checkout-update-success';
+const CheckoutUpdateFailure = 'checkout-update-failure';
 
 export default {
     CheckoutSuccess,
@@ -31,5 +35,9 @@ export default {
     CheckoutAddressGetSuccess,
     CheckoutAddressGetFailure,
     CheckoutErrorDialogButtonClicked,
-    CheckoutDialogCloseButtonClicked
+    CheckoutDialogCloseButtonClicked,
+    CheckoutPlaceOrderSuccess,
+    CheckoutPlaceOrderFailure,
+    CheckoutUpdateSuccess,
+    CheckoutUpdateFailure
 };
