@@ -3,7 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
 v0.79.0
+------------------------------
+*March 30, 2021*
+
+### Fixed
+- Retry modal now closes when errors / issues are returned and the user tries to dismiss the modal.
+
+
+v0.78.0
 ------------------------------
 *March 30, 2021*
 
@@ -16,14 +25,6 @@ v0.79.0
 
 ### Removed
 - Redundant and unnecessary functions.
-
-
-v0.78.0
-------------------------------
-*March 30, 2021*
-
-### Fixed
-- Retry modal now closes when errors / issues are returned and the user tries to dismiss the modal.
 
 
 v0.77.0
