@@ -39,6 +39,29 @@ describe('FormDropdown', () => {
                 expect(option.exists()).toBe(false);
             });
         });
+
+        describe('value ::', () => {
+            it('should default to first dropdown option when omitted', () => {
+                // Arrange & Act
+                const propsData = { dropdownOptions };
+                const wrapper = shallowMount(FormDropdown, { propsData });
+
+                // Assert
+                expect(wrapper.find('select').element.value).toBe('value 0');
+            });
+
+            it('should update selected value when changed', async () => {
+                // Arrange
+                const propsData = { dropdownOptions, value: 'value 1' };
+                const wrapper = shallowMount(FormDropdown, { propsData });
+
+                // Act
+                await wrapper.setProps({ value: 'value 3' });
+
+                // Assert
+                expect(wrapper.find('select').element.value).toBe('value 3');
+            });
+        });
     });
 
     describe('methods ::', () => {
