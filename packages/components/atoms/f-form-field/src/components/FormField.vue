@@ -24,6 +24,7 @@
                 :id="`${uniqueId}`"
                 :attributes="$attrs"
                 :type="normalisedInputType"
+                :value="value"
                 :class="[
                     $style['c-formField-input'],
                     $style['c-formField-dropdownContainer'],
