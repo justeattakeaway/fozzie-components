@@ -2300,6 +2300,13 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
+"@justeat/f-wdio-utils@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.1.1.tgz#5cb05f96f718566fdb844ff33c000696a12b2877"
+  integrity sha512-G80OwVKXxpwGS64+TTGIeeB3ctberVoFPotsX2QiFpBsAisR2p2j/uVzPTtyg2peP+5rvTwdTPBy9o9Z7uxyDw==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
+
 "@justeat/fozzie-colour-palette@3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@justeat/fozzie-colour-palette/-/fozzie-colour-palette-3.1.0.tgz#3bbe51404025c5ef8c5e8bf8280a266e51d2a640"

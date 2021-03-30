@@ -48,9 +48,11 @@ describe('Mobile - f-header component tests', () => {
             delivery: true
         };
 
-        ['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'].forEach(link => {
+        // Act
+        ['offersLink', 'userAccount', 'help', 'countrySelector'].forEach(link => {
             header.open(headerData);
             header.openMobileNavigation();
+            browser.pause(500);
 
             // Assert
             expect(header.isFieldLinkDisplayed(link)).toBe(true);
@@ -58,7 +60,7 @@ describe('Mobile - f-header component tests', () => {
     });
 
     forEach(['it', 'es', 'dk', 'no'])
-    .it('should display all navigation links, except for offers and delivery, when burger menu has been opened', expectedLocale => {
+    .it('should display navigation links, except offers and delivery, when menu has been opened', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -70,6 +72,7 @@ describe('Mobile - f-header component tests', () => {
         ['userAccount', 'help', 'countrySelector'].forEach(link => {
             header.open(headerData);
             header.openMobileNavigation();
+            browser.pause(500);
 
             // Assert
             expect(header.isFieldLinkDisplayed(link)).toBe(true);
