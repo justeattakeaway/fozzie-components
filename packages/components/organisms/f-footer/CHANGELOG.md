@@ -9,7 +9,7 @@ v4.15.0
 *March 30, 2021*
 
 ## Fixed
-- Confianza logo styles.
+- Confianza computed styles.
 
 
 v4.14.0
