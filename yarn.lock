@@ -2085,6 +2085,18 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
+"@justeat/f-braze-adapter@3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-3.2.0.tgz#dedb16870c7e314cee49c96816620c1ebe7ed928"
+  integrity sha512-vDmaCCoX4nN8jJovHta7ASrb46OaDakvhJmHfIvp7umnlk74QjGOt68USH/+xu3W6fDh7djU6JVNEnWkKRgZPQ==
+  dependencies:
+    appboy-web-sdk "2.5.2"
+    date-fns "2.16.1"
+    lodash.findindex "4.6.0"
+    lodash.orderby "4.6.0"
+    lodash.startswith "4.2.1"
+    lodash.uniq "4.5.0"
+
 "@justeat/f-button@0.4.1":
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.4.1.tgz#6b735093286422f579bd41cee93400a4d32d1b2d"
@@ -2153,10 +2165,10 @@
   dependencies:
     vue-i18n "8.0.0"
 
-"@justeat/f-icons@3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.4.0.tgz#dbdeb97c562926dc1c4b98685b25203a97dbd5ff"
-  integrity sha512-Sjd3Bc20M2vwaZvFcyTzjpTG6gv+cbeZmsoNtxwWqN+SF88Uvfyll/+1+e1pI2OV7j6ero3010TQNQzD/6jL7w==
+"@justeat/f-icons@3.5.1":
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.5.1.tgz#a8211d31c3310f5403cee2a72de899a53bcf3d20"
+  integrity sha512-Erb2sYftVUYt+aF1nsFr1ZyKFZiEakTmHk6No3OWxRCWP0rfkT3NYkZ4vn3bIjcVFK0s9igZSZ5ZOeFUIt5xeg==
 
 "@justeat/f-logger@0.8.1":
   version "0.8.1"
@@ -2271,6 +2283,13 @@
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-2.3.0.tgz#8fddbd2f48bc63efa3d162c81a4e79e22874b09a"
   integrity sha512-bXcAy5T79LH0rS16v62Lh4VwxG7W7t8C9SlgY0KJIK99IZiV3bJS2MK+sIQvWmLMZIJi4qxNeWhUFVXHqPaTuw==
+  dependencies:
+    babel-helper-vue-jsx-merge-props "2.0.3"
+
+"@justeat/f-vue-icons@2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-2.4.0.tgz#aad0aa3563ff726043da9d29e8456435176ae913"
+  integrity sha512-jeWACUUp0LfQbKO+BS8KiMIQ/RlaLNuinIHwrmDAxHfxCj2RoElS/Z426cVzGWkIuvs20RiaNFMF31pasHq4QQ==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
@@ -5582,15 +5601,6 @@ allure-commandline@2.13.0:
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/allure-commandline/-/allure-commandline-2.13.0.tgz#54d77ab8733ded6a8fe2379b60213cd00f5c6425"
   integrity sha512-KUByc0nT+vVVsnW/p36R92+FS2o3xVX27p+AW/8T4dlXVh7jx6V0v6+rRBCpK7AhBKD9/T3jsSq14hS0sxp64Q==
-
-allure-js-commons@2.0.0-beta.7:
-  version "2.0.0-beta.7"
-  resolved "https://registry.yarnpkg.com/allure-js-commons/-/allure-js-commons-2.0.0-beta.7.tgz#1a81ca53a67df5d0ad5a26b161bfcd8094c03c82"
-  integrity sha512-mTHr1RntyvxXXaqdj94DqtanVUozKXQVNOhuKwqOvbPHKRUd6DIeW0WjPXCTag4NE/jx/FO/MVPErYutbGwOUA==
-  dependencies:
-    mkdirp "^0.5.1"
-    properties "^1.2.1"
-    uuid "^7.0.2"
 
 allure-js-commons@^1.3.2:
   version "1.3.2"
@@ -13923,32 +13933,10 @@ jake@^10.6.1:
     filelist "^1.0.1"
     minimatch "^3.0.4"
 
-jasmine-core@~3.7.0:
-  version "3.7.1"
-  resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-3.7.1.tgz#0401327f6249eac993d47bbfa18d4e8efacfb561"
-  integrity sha512-DH3oYDS/AUvvr22+xUBW62m1Xoy7tUlY1tsxKEJvl5JeJ7q8zd1K5bUwiOxdH+erj6l2vAMM3hV25Xs9/WrmuQ==
-
-jasmine@^3.5.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/jasmine/-/jasmine-3.7.0.tgz#d36638c0c815e6ad5666676e386d79e2ccb70835"
-  integrity sha512-wlzGQ+cIFzMEsI+wDqmOwvnjTvolLFwlcpYLCqSPPH0prOQaW3P+IzMhHYn934l1imNvw07oCyX+vGUv3wmtSQ==
-  dependencies:
-    glob "^7.1.6"
-    jasmine-core "~3.7.0"
-
 javascript-stringify@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/javascript-stringify/-/javascript-stringify-2.0.1.tgz#6ef358035310e35d667c675ed63d3eb7c1aa19e5"
   integrity sha512-yV+gqbd5vaOYjqlbk16EG89xB5udgjqQF3C5FAORDg4f/IS1Yc5ERCv5e/57yBcfJYw05V5JyIXabhwb75Xxow==
-
-jest-allure2@1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/jest-allure2/-/jest-allure2-1.2.3.tgz#ea3115c5de349f5ddc9b2ce4454aae9a3f72b480"
-  integrity sha512-liwzMyzE5F8keT40XXM142Orc0mh23hH+6ZyRkUrEHjOz7tcZM5NvDymtyv6g2zpvWHol9Yf/lG0qQJS2yYWlQ==
-  dependencies:
-    allure-js-commons "2.0.0-beta.7"
-    jasmine "^3.5.0"
-    strip-ansi "^6.0.0"
 
 jest-changed-files@^24.9.0:
   version "24.9.0"
@@ -19583,11 +19571,6 @@ prop-types@^15.0.0, prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0,
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
-properties@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/properties/-/properties-1.2.1.tgz#0ee97a7fc020b1a2a55b8659eda4aa8d869094bd"
-  integrity sha1-Dul6f8AgsaKlW4ZZ7aSqjYaQlL0=
-
 property-information@^5.0.0, property-information@^5.3.0:
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/property-information/-/property-information-5.6.0.tgz#61675545fb23002f245c6540ec46077d4da3ed69"
@@ -23759,11 +23742,6 @@ uuid@^3.0.0, uuid@^3.0.1, uuid@^3.3.2, uuid@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
-
-uuid@^7.0.2:
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.3.tgz#c5c9f2c8cf25dc0a372c4df1441c41f5bd0c680b"
-  integrity sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==
 
 uuid@^8.0.0, uuid@^8.3.0:
   version "8.3.2"

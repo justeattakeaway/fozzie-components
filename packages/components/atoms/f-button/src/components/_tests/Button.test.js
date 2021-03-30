@@ -2,7 +2,6 @@ import { shallowMount, mount } from '@vue/test-utils';
 import FButton from '../Button.vue';
 
 describe('Button', () => {
-    allure.feature('Button');
 
     const actionType = 'button';
     const link = 'http://www.just-eat.co.uk';

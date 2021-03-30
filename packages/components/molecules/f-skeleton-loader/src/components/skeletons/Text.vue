@@ -1,5 +1,5 @@
 <template>
-    <div class="c-skeleton-loader-text c-skeleton-loader-bone" />
+    <div :class="$style['c-text']" />
 </template>
 
 <script>
@@ -8,10 +8,12 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.c-skeleton-loader-text {
+<style lang="scss" module>
+
+.c-text {
     flex: 1 0 auto;
     height: $skeleton-loader-text-height;
     margin-bottom: spacing();
 }
+
 </style>

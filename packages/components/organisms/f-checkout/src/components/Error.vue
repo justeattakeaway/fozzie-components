@@ -8,7 +8,8 @@
         :class="[$style['c-checkout-error'], $style['c-checkout-error--verticalPadding']]"
     >
         <!-- TODO: Load image from CDN in future -->
-        <sad-bag-icon-decorator />
+        <sad-bag-icon-decorator
+            data-test-id="checkout-error-page-image" />
 
         <h1
             :class="$style['c-checkout-error-heading']"

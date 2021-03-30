@@ -1,22 +1,27 @@
 <template>
     <div
-        :class="[$style['c-iconList'], {
-            [$style['c-iconList--apps']]: isApps,
-            [$style['c-iconList--payments']]: isPayments,
-            [$style['c-iconList--rightAligned']]: isPayments,
-            [$style['c-iconList--social']]: isSocial
-        }]"
+        :class="[
+            $style['c-iconList'],
+            $style[`c-iconList--${listType}`],
+            { [$style['c-iconList--rightAligned']]: listType === 'payments' }
+        ]"
         data-test-id="footerBrands-column">
         <h2
             v-if="title"
-            class="c-footer-heading c-footer-heading--shortBelowWide">
+            :class="[
+                $style['c-footer-heading'],
+                $style['c-footer-heading--shortBelowWide']
+            ]">
             {{ title }}
         </h2>
 
         <ul
-            :class="['c-footer-list c-footer-list--inline', {
-                'c-footer-list--noBottomMargin': isApps
-            }]">
+            :class="[
+                $style['c-footer-list'],
+                $style['c-footer-list--inline'],
+                { [$style['c-footer-list--noBottomMargin']]: listType === 'apps' }
+            ]"
+            :data-test-id="`icon-list-${listType}`">
             <li
                 v-for="(icon, i) in icons"
                 :key="i + '_Icon'"
@@ -70,19 +75,9 @@ export default {
             default: ''
         },
 
-        isApps: {
-            type: Boolean,
-            default: false
-        },
-
-        isPayments: {
-            type: Boolean,
-            default: false
-        },
-
-        isSocial: {
-            type: Boolean,
-            default: false
+        listType: {
+            type: String,
+            required: true
         },
 
         locale: {
@@ -93,13 +88,15 @@ export default {
 
     computed: {
         iconChoice () {
-            return this.isApps ? 'app-store-icon' : 'base-provider-icon';
+            return this.listType === 'apps' ? 'app-store-icon' : 'base-provider-icon';
         }
     }
 };
 </script>
 
 <style lang="scss" module>
+@import '../assets/scss/headings.scss';
+@import '../assets/scss/lists.scss';
 
 .c-iconList {
     svg {
@@ -138,8 +135,8 @@ export default {
     }
 
     svg {
-       height: 40px;
-       width: 135px;
+        height: 40px;
+        width: 135px;
     }
 }
 

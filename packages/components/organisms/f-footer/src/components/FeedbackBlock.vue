@@ -1,7 +1,10 @@
 // .is-invisible class on data-gtm-feedback element is dictated by gtm script for Usabilla
 <template>
     <div
-        :class="[$style['c-feedback'], 'is-invisible']"
+        :class="[
+            $style['c-feedback'],
+            $style['is-invisible']
+        ]"
         data-gtm-feedback
         data-trak='{
             "trakEvent": "click",
@@ -9,7 +12,11 @@
             "action": "footer",
             "label": "click_feedback"
         }'>
-        <h2 class="c-footer-heading c-footer-heading--shortBelowWide">
+        <h2
+            :class="[
+                $style['c-footer-heading'],
+                $style['c-footer-heading--shortBelowWide']
+            ]">
             {{ title }}
         </h2>
 
@@ -45,6 +52,7 @@ export default {
 </script>
 
 <style lang="scss" module>
+@import '../assets/scss/headings.scss';
 
 $feedback-btn-font-size: 'body-s';
 

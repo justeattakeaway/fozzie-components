@@ -8,10 +8,10 @@ describe('Accessibility tests', () => {
     it('a11y - should test f-checkout component (delivery) WCAG compliance', () => {
         // Act
         const checkoutData = {
-            type: 'delivery', 
-            isAuthenticated: true, 
+            type: 'delivery',
+            isAuthenticated: true,
             isValid: true
-        }
+        };
         checkout.open(checkoutData);
         checkout.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-checkout-delivery');
@@ -23,10 +23,10 @@ describe('Accessibility tests', () => {
     it('a11y - should test f-checkout component (collection) WCAG compliance', () => {
         // Act
         const checkoutData = {
-            type: 'collection', 
-            isAuthenticated: true, 
+            type: 'collection',
+            isAuthenticated: true,
             isValid: true
-        }
+        };
         checkout.open(checkoutData);
         checkout.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-checkout-collection');
@@ -38,13 +38,28 @@ describe('Accessibility tests', () => {
     it('a11y - should test f-checkout component (guest) WCAG compliance', () => {
         // Act
         const checkoutData = {
-            type: 'delivery', 
-            isAuthenticated: false, 
+            type: 'delivery',
+            isAuthenticated: false,
             isValid: true
-        }
+        };
         checkout.open(checkoutData);
         checkout.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-checkout-guest');
+
+        // Assert
+        expect(axeResults.violations.length).toBe(0);
+    });
+
+    it('a11y - should test f-checkout component (error) WCAG compliance', () => {
+        // Act
+        const checkoutData = {
+            type: 'delivery',
+            isAuthenticated: false,
+            isValid: false
+        };
+        checkout.open(checkoutData);
+        checkout.waitForErrorPageComponent();
+        const axeResults = getAccessibilityTestResults('f-checkout-error-page');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

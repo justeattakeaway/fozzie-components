@@ -1,28 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Footer should render default component markup 1`] = `
-<footer data-theme="je" data-test-id="footer-component" class="c-footer">
-  <div class="c-footer-container c-footer-row c-footer-row--noPadBelowWide">
+<footer data-theme="je" data-test-id="footer-component">
+  <div class="">
     <link-list-stub linklist="[object Object]"></link-list-stub>
     <link-list-stub linklist="[object Object]"></link-list-stub>
     <link-list-stub linklist="[object Object]"></link-list-stub>
     <link-list-stub linklist="[object Object]"></link-list-stub>
     <link-list-stub linklist="[object Object]"></link-list-stub>
   </div>
-  <div class="c-footer-light">
-    <div class="c-footer-container">
+  <div>
+    <div>
       <!---->
-      <div class="c-footer-row">
-        <icon-list-stub icons="[object Object],[object Object],[object Object]" title="Download our apps" isapps="true" locale="en-GB"></icon-list-stub>
+      <div>
+        <icon-list-stub icons="[object Object],[object Object],[object Object]" title="Download our apps" listtype="apps" locale="en-GB"></icon-list-stub>
         <feedback-block-stub title="Feedback" text="Help us improve our website" buttontext="Send feedback"></feedback-block-stub>
-        <icon-list-stub icons="[object Object],[object Object],[object Object],[object Object],[object Object]" title="Follow us" issocial="true" locale="en-GB"></icon-list-stub>
+        <icon-list-stub icons="[object Object],[object Object],[object Object],[object Object],[object Object]" title="Follow us" listtype="social" locale="en-GB"></icon-list-stub>
       </div>
     </div>
   </div>
-  <div class="c-footer-container c-footer-row c-footer-row--combined c-footer-row--notEqualTopAndBottomPad c-footer-row--noPadBelowWide">
+  <div class="">
     <country-selector-stub currentcountryname="United Kingdom" currentcountrykey="gb" countries="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" changecountrytext="You are on the UK website, click here to change." data-test-id="country-selector"></country-selector-stub>
     <!---->
-    <icon-list-stub icons="[object Object],[object Object],[object Object]" title="" ispayments="true" locale="en-GB"></icon-list-stub>
+    <icon-list-stub icons="[object Object],[object Object],[object Object]" title="" listtype="payments" locale="en-GB"></icon-list-stub>
   </div>
 </footer>
 `;
