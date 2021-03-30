@@ -47,6 +47,8 @@ const messages = {
             description: 'It\'s a problem at our end, sorry. Your basket is safe and sound, though, so try again soon.'
         },
 
+        guestUserCreationFailure: 'Guest checkout isn’t available, sorry. Try again soon or sign up',
+
         checkoutIssues: {
             MINIMUM_ORDER_VALUE_NOT_MET: {
                 title: 'Your order does not meet the minimum spend required',
