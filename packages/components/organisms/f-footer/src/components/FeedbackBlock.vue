@@ -1,7 +1,10 @@
 // .is-invisible class on data-gtm-feedback element is dictated by gtm script for Usabilla
 <template>
     <div
-        :class="[$style['c-feedback'], 'is-invisible']"
+        :class="[
+            $style['c-feedback'],
+            $style['is-invisible']
+        ]"
         data-gtm-feedback
         data-trak='{
             "trakEvent": "click",

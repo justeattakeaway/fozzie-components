@@ -1,17 +1,18 @@
 <template>
     <div
-        class="c-skeleton-loader-heading c-skeleton-loader-bone" />
+        :class="$style['c-heading']" />
 </template>
 
 <script>
-export default {
-    name: 'Heading'
-};
+export default {};
 </script>
 
-<style lang="scss" scoped>
-.c-skeleton-loader-heading {
+
+<style lang="scss" module>
+
+.c-heading {
     height: $skeleton-loader-heading-height;
     width: 65%;
 }
+
 </style>
