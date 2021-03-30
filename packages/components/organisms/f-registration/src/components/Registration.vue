@@ -11,7 +11,7 @@
             :class="$style['c-registration-card']">
             <bag-celebrate-icon :class="$style['c-registration-icon']" />
             <p
-                v-show="showLoginLink"
+                v-if="showLoginLink"
                 :class="[
                     $style['c-registration-link'],
                     $style['c-registration-link--subtitle']
