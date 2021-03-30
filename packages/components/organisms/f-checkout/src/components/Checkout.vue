@@ -1,10 +1,9 @@
 <template>
     <div>
         <error-dialog
-            v-if="shouldShowErrorDialog"
             :is-open="shouldShowErrorDialog"
-            :error-code="nonFulfillableError.code"
-            @handle-close="handleErrorDialogClose"
+            :error-code="nonFulfillableError && nonFulfillableError.code"
+            @close="handleErrorDialogClose"
             @checkout-error-dialog-button-click="handleErrorDialogButtonClick" />
         <div
             v-if="shouldShowSpinner"
@@ -320,6 +319,10 @@ export default {
 
         restaurantMenuPageUrl () {
             return `restaurant-${this.restaurant.seoName}/menu`;
+        },
+
+        hasNonFulfillableErrorCode () {
+            return this.nonFulfillableError && this.nonFulfillableError.code;
         }
     },
 
@@ -812,7 +815,7 @@ export default {
         },
 
         handleErrorDialogButtonClick () {
-            if (this.nonFulfillableError.shouldRedirectToMenu) {
+            if (this.nonFulfillableError && this.nonFulfillableError.shouldRedirectToMenu) {
                 window.location.assign(this.restaurantMenuPageUrl);
             }
 
