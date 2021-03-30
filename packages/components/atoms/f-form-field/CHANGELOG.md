@@ -3,9 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (add to next release)
+v1.9.0
 ------------------------------
-*February 25, 2021*
+*March 30, 2021*
+
+### Added
+- New `value` prop to `FormDropdown` component to make the selected value assignable programmatically.
+  - This is done by passing down the existing `value` prop from the parent `FormField` component.
 
 ### Changed
 - Restructured component object into page object model
