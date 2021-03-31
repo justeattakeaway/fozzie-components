@@ -3,9 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.13.0
+------------------------------
+*March 31, 2021*
+
+### Changed
+- Convert `Navigation` component to use css modules.
+- Unit and Component tests to support changes.
+
 v4.12.0
 ------------------------------
-*March 16, 2021*
+*March 31, 2021*
 
 ### Changed
 - Add shared `nav.scss` file.
