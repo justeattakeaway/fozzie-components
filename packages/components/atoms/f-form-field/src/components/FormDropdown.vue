@@ -10,6 +10,7 @@
             :class="$style['c-formDropdown-select']"
             :data-test-id="testId.select"
             v-bind="attributes"
+            :value="value"
             @change="updateOption">
             <option
                 v-for="(option, index) in dropdownOptions"
@@ -36,6 +37,10 @@ export default {
         attributes: {
             type: Object,
             default: () => {}
+        },
+        value: {
+            type: String,
+            default: ''
         },
         dropdownOptions: {
             type: Array,
