@@ -882,7 +882,7 @@ describe('Checkout', () => {
                     expect(wrapper.vm.shouldShowSpinner).toBe(false);
                 });
 
-                it('should set `shouldShowSpinner` to `true` after s`pinnerTimeout`', () => {
+                it('should set `shouldShowSpinner` to `true` after `spinnerTimeout`', () => {
                     // Arrange & Act
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore(),
