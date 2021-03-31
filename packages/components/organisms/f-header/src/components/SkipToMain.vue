@@ -1,7 +1,13 @@
 <template>
-    <div :class="['c-skipTo', { 'c-skipTo--whiteLink': transparentBg }]">
+    <div
+        :class="[
+            $style['c-skipTo'],
+            { [$style['c-skipTo--whiteLink']]: transparentBg }]">
         <a
-            class="is-visuallyHidden is-focusable"
+            :class="[
+                $style['is-visuallyHidden'],
+                $style['is-focusable']
+            ]"
             href="#skipToMain">{{ text }}</a>
     </div>
 </template>
@@ -22,7 +28,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
 
 .c-skipTo {
     position: absolute;
@@ -55,8 +61,6 @@ export default {
         }
     }
 }
-
-
 
 .c-skipTo--whiteLink {
     .is-visuallyHidden {

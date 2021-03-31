@@ -1,0 +1,123 @@
+@import './common.scss';
+
+$nav-transition-duration : 250ms;
+
+$nav-trigger-width : 56px;
+$nav-trigger-height : 48px;
+$nav-trigger-focus-color : $blue;
+$nav-trigger-focus-bg : $blue--offWhite;
+
+$nav-popover-transition-delay : 200ms;
+$nav-popover-transition-duration : 200ms;
+
+$countrySelector-flag-width : 16px;
+$countrySelector-flag-height : 16px;
+
+@mixin nav-container-visible () {
+    overflow-y: auto;
+    left: 0;
+    opacity: 1;
+    z-index: zIndex(high);
+    transition: opacity $nav-transition-duration ease-in-out,
+        z-index 0s linear;
+}
+
+.c-nav-list {
+    position: relative;
+}
+
+.c-nav-list,
+.c-nav-popoverList {
+    margin-top: 0;
+    margin-left: 0;
+    list-style: none;
+    list-style-image: none;
+    padding: 0;
+
+    &>li {
+        margin-bottom: 0;
+
+        &:before {
+            content: none;
+        }
+    }
+
+    @include media('<=mid') {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.c-nav-popoverList--twoColumns {
+    @include media('>mid') {
+        column-count: 2;
+    }
+}
+
+// Navigation Trigger
+// This is the checkbox that controls the menu active state without JS via :checked
+.c-nav-trigger {
+    position: absolute;
+    width: $nav-trigger-width;
+    height: $nav-trigger-height;
+    top: -100px;
+    left: -100px;
+
+    @include media('>mid') {
+        display: none;
+    }
+
+    &:checked~.c-nav-container {
+        @include media('<=mid') {
+            @include nav-container-visible();
+        }
+    }
+
+    &:focus~.c-nav-toggle {
+        background-color: $nav-trigger-focus-bg;
+        box-shadow: 0 0 6px 0 $nav-trigger-focus-color;
+
+        .c-header--transparent & {
+            background-color: transparent;
+        }
+    }
+}
+
+// Global site-wide navigation
+.c-nav--global {
+    @include media('>mid') {
+        display: flex;
+        justify-content: flex-end;
+        flex-grow: 1;
+    }
+
+    // we have a nav container so that we don’t have to make the inner list 100% height
+    // this is so we can position the logout button last on mobile
+    & .c-nav-container {
+        @include media('<=mid') {
+            position: fixed;
+            top: $header-height--narrow;
+            left: -99999px;
+            width: 100%;
+            padding: 0;
+            height: calc(100% - (#{$header-height--narrow}));
+            border-top: $header-separator solid $header-border-color;
+            background: $white;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity $nav-transition-duration ease-in-out,
+                z-index 0s linear $nav-transition-duration,
+                left 0s linear ($nav-popover-transition-delay + $nav-popover-transition-duration);
+
+            &.is-visible {
+                @include nav-container-visible();
+            }
+        }
+    }
+}
+
+.c-nav-list-icon--flag {
+    height: $countrySelector-flag-height;
+    width: $countrySelector-flag-width;
+    margin-right: spacing();
+}

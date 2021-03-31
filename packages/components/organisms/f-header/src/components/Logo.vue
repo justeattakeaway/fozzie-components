@@ -2,7 +2,7 @@
     <a
         :aria-label="linkAltText"
         href="/"
-        class="c-logo"
+        :class="$style['c-logo']"
         :data-trak='`{
             "trakEvent": "click",
             "category": "engagement",
@@ -11,9 +11,10 @@
         }`'>
         <component
             :is="iconComponent"
-            :class="['c-logo-img',
-                     iconClassName,
-                     logoColourModifier]"
+            :class="[
+                $style['c-logo-img'],
+                iconClassName,
+                logoColourModifier]"
             :data-theme-logo="iconClassName"
             data-test-id="header-logo" />
     </a>
@@ -53,7 +54,7 @@ export default {
             return `${this.theme}-logo`;
         },
         iconClassName () {
-            return `c-icon--${this.theme}`;
+            return this.$style[`c-icon--${this.theme}`];
         },
         linkAltText () {
             return `Go to ${this.companyName} homepage`;
@@ -61,9 +62,9 @@ export default {
         logoColourModifier () {
             switch (this.headerBackgroundTheme) {
                 case 'transparent':
-                    return 'c-icon--onTransparentBg';
+                    return this.$style['c-icon--onTransparentBg'];
                 case 'highlight':
-                    return 'c-icon--onHighlightBg';
+                    return this.$style['c-icon--onHighlightBg'];
                 default:
                     return '';
             }
@@ -72,7 +73,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
     // link with the logo
     .c-logo {
         display: block;
