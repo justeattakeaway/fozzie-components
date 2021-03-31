@@ -50,6 +50,7 @@
                     <template v-show="describeFirstnameErrorMessage"
                               #error>
                         <error-message
+                            test-data-id="firstnameErrorMessage"
                             :class="$style['c-registration-genericError']">
                             {{ describeFirstnameErrorMessage }}
                         </error-message>
@@ -70,6 +71,7 @@
                         v-show="describeLastnameErrorMessage"
                         #error>
                         <error-message
+                            test-data-id="lastnameErrorMessage"
                             :class="$style['c-registration-genericError']">
                             {{ describeLastnameErrorMessage }}
                         </error-message>
@@ -90,6 +92,7 @@
                         v-show="describeEmailErrorMessage"
                         #error>
                         <error-message
+                            test-data-id="emailErrorMessage"
                             :class="$style['c-registration-genericError']">
                             {{ describeEmailErrorMessage }}
                         </error-message>
@@ -110,6 +113,7 @@
                         v-show="describePasswordErrorMessage"
                         #error>
                         <error-message
+                            test-data-id="passwordErrorMessage"
                             :class="$style['c-registration-genericError']">
                             {{ describePasswordErrorMessage }}
                         </error-message>
