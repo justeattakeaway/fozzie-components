@@ -157,7 +157,7 @@ describe('f-checkout component tests', () => {
         expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(true);
     });
 
-    it('should close the checkout error when "Retry" is clicked', () => {
+    xit('should close the checkout error when "Retry" is clicked', () => {
         // Arrange
         const checkoutData = {
             type: 'delivery',
