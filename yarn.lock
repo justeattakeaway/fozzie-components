@@ -2158,6 +2158,14 @@
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "1.11.0"
 
+"@justeat/f-form-field@1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-1.8.0.tgz#e8efedb2a72a38975c2c736ea874957aab73b560"
+  integrity sha512-jNc3E3QxqzpleY4qiFfEVZVRHSgTgAemfhyV2elbZ02hWs7drsLUWjXkrOyTXRmlu6UFB13KK/bTc6INR6EKXw==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+    "@justeat/f-vue-icons" "1.11.0"
+
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
@@ -2297,6 +2305,13 @@
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.1.0.tgz#e8a62dd2d03c2cf14ce1fa7d50540c2171b8fc38"
   integrity sha512-m2WfTJWR5Yako3hKEZ7SL3zDvZQA7VQ9hbUBnk02lxMYSKSqeHmLPICaLGtPXCIDBEuESFk2kscHSQc3GBxxmg==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
+
+"@justeat/f-wdio-utils@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.1.1.tgz#5cb05f96f718566fdb844ff33c000696a12b2877"
+  integrity sha512-G80OwVKXxpwGS64+TTGIeeB3ctberVoFPotsX2QiFpBsAisR2p2j/uVzPTtyg2peP+5rvTwdTPBy9o9Z7uxyDw==
   dependencies:
     "@justeat/f-services" "1.7.0"
 
