@@ -1,6 +1,5 @@
 const forEach = require('mocha-each');
 const Header = require('../../../../test-utils/component-objects/f-header.component');
-
 const header = new Header();
 
 describe('Mobile - f-header component tests', () => {
