@@ -3,7 +3,8 @@
         :is-open="isOpen"
         data-test-id="checkout-issue-modal"
         has-overlay
-        @close="handleClose">
+        v-bind="$attrs"
+        v-on="$listeners">
         <h3
             data-test-id="checkout-issue-modal-title"
             class="u-noSpacing">
@@ -41,21 +42,17 @@ export default {
     props: {
         isOpen: {
             type: Boolean,
-            required: true
+            default: false
         },
         errorCode: {
             type: String,
-            required: true
+            default: ''
         }
     },
 
     methods: {
         handleButtonClick () {
             this.$emit(EventNames.CheckoutErrorDialogButtonClicked);
-        },
-
-        handleClose () {
-            this.$emit(EventNames.CheckoutDialogCloseButtonClicked);
         }
     }
 };
