@@ -42,7 +42,7 @@ describe('Desktop - f-header component tests', () => {
     });
 
     forEach(['it', 'es', 'dk', 'no'])
-    .it('should display the below navigation fields', expectedLocale => {
+    .it('should display the below navigation links', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,

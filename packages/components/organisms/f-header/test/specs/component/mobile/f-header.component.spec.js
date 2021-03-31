@@ -19,13 +19,17 @@ describe('Mobile - f-header component tests', () => {
         }
     });
 
-    it('should display delivery link for GB locale', () => {
+    forEach(['offersLink', 'delivery', 'help', 'countrySelector', 'userAccount'])
+    .it('should display all navigation links', link => {
+        // Act
+        header.openMobileNavigation();
+
         // Assert
-        expect(header.isNavigationLinkDisplayed('delivery')).toBe(true);
+        expect(header.isNavigationLinkDisplayed(link)).toBe(true);
     });
 
-    forEach(['gb', 'au', 'ie', 'nz'])
-    .it('should hide all navigation links, except offersIcon link, when in mobile mode', expectedLocale => {
+    forEach(['au', 'ie', 'nz'])
+    .it('should hide all navigation links but display offersIcon link, when in mobile mode', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -45,8 +49,28 @@ describe('Mobile - f-header component tests', () => {
         });
     });
 
-    forEach(['gb', 'au', 'ie', 'nz'])
-    .it.only('should display navigation links when burger menu is opened', expectedLocale => {
+    forEach(['it', 'es', 'dk', 'no'])
+    .it('should hide all navigation links, as well as offersIcon, when in mobile mode', expectedLocale => {
+        // Arrange
+        const headerData = {
+            locale: expectedLocale,
+            offers: true,
+            delivery: true
+        };
+
+        // Act
+        ['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'].forEach(link => {
+            header.open(headerData);
+            header.waitForComponent();
+
+            // Assert
+            expect(header.isMobileNavigationBarDisplayed()).toBe(true);
+            expect(header.isNavigationLinkDisplayed(link)).toBe(false);
+        });
+    });
+
+    forEach(['au', 'ie', 'nz'])
+    .it('should display navigation links when burger menu is opened', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -66,7 +90,7 @@ describe('Mobile - f-header component tests', () => {
     });
 
     forEach(['it', 'es', 'dk', 'no'])
-    .it.only('should display the below navigation links when menu has been opened', expectedLocale => {
+    .it('should display the below navigation links when menu has been opened', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
