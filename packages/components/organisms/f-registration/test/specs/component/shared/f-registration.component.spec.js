@@ -76,7 +76,7 @@ describe('Shared - f-registration component tests', () => {
         const userInfo = {
             firstName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',
             lastName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',
-            email: 'test@user.com',
+            email: 'joe@test.com',
             password: 'abcdefghijabcdefghijabcdefghi'
         };
 

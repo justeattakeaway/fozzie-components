@@ -19,7 +19,7 @@ exports.getBaseUrl = (port = 8080) => {
 exports.local = () => ({
     bail: 0,
     maxinstances: 1,
-    loglevel: 'silent',
+    loglevel: 'local',
     reporters: JE_ENV !== 'browserstack' && COMPONENT_TYPE === 'organism' ? [
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases
