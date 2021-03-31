@@ -30,6 +30,7 @@ v0.79.0
 ### Fixed
 - Retry modal now closes when errors / issues are returned and the user tries to dismiss the modal.
 
+
 v0.78.1
 ------------------------------
 *March 31, 2021*
