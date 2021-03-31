@@ -13,8 +13,6 @@ module.exports = class Header extends Page {
 
     get mobileNavigationBar () { return $(MOBILE_NAVIGATION_BAR); }
 
-    get locales () { return ['au', 'gb', 'ie', 'nz'] }
-
     navigation = {
         offersIcon: {
             get link () { return $(NAVIGATION.offersIcon.link); }
