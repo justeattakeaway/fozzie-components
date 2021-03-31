@@ -3,20 +3,48 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.78.1
+------------------------------
+*March 31, 2021*
+
+### Changed
+- Load `address` into state via new `location` object. 
+
+
+v0.78.0
+------------------------------
+*March 30, 2021*
+
+### Added
+- Custom errors.
+
+### Changed
+- The whole handling of exceptions and errors.
+- Several functions and tests.
+
+### Removed
+- Redundant and unnecessary functions.
+
+
+v0.77.0
+------------------------------
+*March 26, 2021*
+
+### Added
+- New time object structure for patch call to checkout. (Includes scheduled & asap values).
+- Fix up `selector.vue` so times `to/from` are set correctly.
+
+
 v0.76.0
 ------------------------------
 *March 25, 2021*
 
 ### Added
-- Ability to handle issues from API that client has no knowledge of
-- Generic error dialog for these issues
-
-
-Latest (add to next release)
-------------------------------
-*March 24, 2021*
-
-### Added
+- Tests to test the preorder warning message
+- Tests to test the checkout error message
+- Supporting code in `Checkout.stories.js` and `f-checkout.component.js` to enable testing in storybook.
+- `checkout-available-fulfilment-preorder.json` to support storybook tabs for testing
 - Component tests for `Error.vue` component
 - Accessibility tests for `Error.vue` component
 
@@ -118,7 +146,7 @@ v0.67.0
 - Analytics error tracking.
 - Tests to cover changes.
 
-# Changed
+### Changed
 - `checkout.module` `issues` to `error`.
 
 ### Fixed

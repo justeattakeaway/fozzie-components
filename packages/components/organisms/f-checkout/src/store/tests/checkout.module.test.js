@@ -121,7 +121,8 @@ const defaultState = {
     authToken: '',
     isLoggedIn: false,
     userNote: '',
-    geolocation: null
+    geolocation: null,
+    hasAsapSelected: false
 };
 
 let state = CheckoutModule.state();
@@ -157,9 +158,22 @@ describe('CheckoutModule', () => {
                 expect(state.customer).toEqual(defaultState.customer);
             });
 
-            it('should leave address state empty if no address data is returned from the API.', () => {
+            it('should leave address state empty if no location data is returned from the API.', () => {
                 // Arrange
-                checkoutDelivery.address = null;
+                checkoutDelivery.location = null;
+
+                // Act
+                mutations[UPDATE_STATE](state, checkoutDelivery);
+
+                // Assert
+                expect(state.address).toEqual(defaultState.address);
+            });
+
+            it('should leave address state empty if location data is returned with no address from the API.', () => {
+                // Arrange
+                checkoutDelivery.location = {
+                    address: null
+                };
 
                 // Act
                 mutations[UPDATE_STATE](state, checkoutDelivery);

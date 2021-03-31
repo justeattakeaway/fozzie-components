@@ -10,7 +10,8 @@ const mapUpdateCheckoutRequest = ({
     isCheckoutMethodDelivery,
     time,
     userNote,
-    geolocation
+    geolocation,
+    asap
 }) => ([
     {
         op: 'add',
@@ -26,7 +27,12 @@ const mapUpdateCheckoutRequest = ({
         op: 'add',
         path: '/fulfilment',
         value: {
-            time,
+            time: {
+                asap,
+                scheduled: {
+                    ...time
+                }
+            },
             location: {
                 ...(isCheckoutMethodDelivery ? {
                     address: {

@@ -2085,10 +2085,10 @@
     eslint-config-airbnb-base "14.1.0"
     eslint-plugin-vue "6.2.2"
 
-"@justeat/f-braze-adapter@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-3.1.0.tgz#2c88bf2d450120ded677edf390cdc6a1a54c6895"
-  integrity sha512-yTSEcIfBwlVPw/eHlOEEOxkFv4puM1KCtiz2igvjt3AAV6Ppcr4aRgNpYoGo8/aekVwRbyvN+k5/S3sQr5tJaw==
+"@justeat/f-braze-adapter@3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-3.2.0.tgz#dedb16870c7e314cee49c96816620c1ebe7ed928"
+  integrity sha512-vDmaCCoX4nN8jJovHta7ASrb46OaDakvhJmHfIvp7umnlk74QjGOt68USH/+xu3W6fDh7djU6JVNEnWkKRgZPQ==
   dependencies:
     appboy-web-sdk "2.5.2"
     date-fns "2.16.1"
@@ -2165,10 +2165,10 @@
   dependencies:
     vue-i18n "8.0.0"
 
-"@justeat/f-icons@3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.4.0.tgz#dbdeb97c562926dc1c4b98685b25203a97dbd5ff"
-  integrity sha512-Sjd3Bc20M2vwaZvFcyTzjpTG6gv+cbeZmsoNtxwWqN+SF88Uvfyll/+1+e1pI2OV7j6ero3010TQNQzD/6jL7w==
+"@justeat/f-icons@3.5.1":
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-3.5.1.tgz#a8211d31c3310f5403cee2a72de899a53bcf3d20"
+  integrity sha512-Erb2sYftVUYt+aF1nsFr1ZyKFZiEakTmHk6No3OWxRCWP0rfkT3NYkZ4vn3bIjcVFK0s9igZSZ5ZOeFUIt5xeg==
 
 "@justeat/f-logger@0.8.1":
   version "0.8.1"
@@ -2283,6 +2283,13 @@
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-2.3.0.tgz#8fddbd2f48bc63efa3d162c81a4e79e22874b09a"
   integrity sha512-bXcAy5T79LH0rS16v62Lh4VwxG7W7t8C9SlgY0KJIK99IZiV3bJS2MK+sIQvWmLMZIJi4qxNeWhUFVXHqPaTuw==
+  dependencies:
+    babel-helper-vue-jsx-merge-props "2.0.3"
+
+"@justeat/f-vue-icons@2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-2.4.0.tgz#aad0aa3563ff726043da9d29e8456435176ae913"
+  integrity sha512-jeWACUUp0LfQbKO+BS8KiMIQ/RlaLNuinIHwrmDAxHfxCj2RoElS/Z426cVzGWkIuvs20RiaNFMF31pasHq4QQ==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
