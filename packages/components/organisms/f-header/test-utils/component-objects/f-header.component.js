@@ -44,15 +44,6 @@ module.exports = class Header extends Page {
         this.countryValue = this.navigation.countrySelector.countries.filter(element => element.getAttribute('data-test-id').includes(country))[0];
     }
 
-
-    // open () {
-    //     super.openComponent('organism', 'header-component');
-    // }
-
-    // openWithExtraFeatures () {
-    //     super.openComponent('organism', 'header-component&knob-Show%20offers%20link=true&knob-Show%20delivery%20enquiry=true');
-    // }
-
     /**
      * @description
      * Sets the data for the checkout component.
