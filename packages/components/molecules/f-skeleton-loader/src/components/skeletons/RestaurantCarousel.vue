@@ -18,7 +18,7 @@ import RestaurantCarouselCard from './RestaurantCarouselCard.vue';
 export default {
     components: {
         Heading,
-        TextBlock, 
+        TextBlock,
         RestaurantCarouselCard
     }
 };
