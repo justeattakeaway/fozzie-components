@@ -54,13 +54,13 @@ $breakpoints: (medium: 520px, large: 960px);
     &:nth-child(1) {
         display: block;
     }
-    @include media(">medium") {
+    @include media('>medium') {
         margin: 0 spacing(x2) 0 0;
         &:nth-child(2) {
             display: block;
         }
     }
-    @include media(">large") {
+    @include media('>large') {
         &:nth-child(3) {
             display: block;
         }
