@@ -30,20 +30,17 @@ describe('Tabs', () => {
     });
 
     const arrange = ({ mocks } = {}) => {
-        const propsData = {};
         const tabsInstance = shallowMount(Tabs, {
-            ...{
-                propsData,
-                stubs: {
-                    Tab
-                },
-                scopedSlots: {
-                    default: '<tab/>'
-                }
+            // default mounting settings
+            propsData: {},
+            stubs: {
+                Tab
             },
-            ...{
-                mocks
-            }
+            scopedSlots: {
+                default: '<tab/>'
+            },
+            // mounting settings from parameters
+            mocks
         });
 
         const tabStub = tabsInstance.findComponent(Tab);

@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.4.0
 ------------------------------
-*March 29, 2021*
+*April 1, 2021*
 
 ### Fixed
 - When tab selection is updated in `Tab` props, ensures that the focus is reflected back
