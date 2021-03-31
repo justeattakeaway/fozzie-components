@@ -21,6 +21,6 @@ exports[`Checkout data :: nonFulfillableError :: when \`nonFulfillableError\` is
 
 exports[`Checkout data :: nonFulfillableError :: when \`nonFulfillableError\` is an error in checkout issues should show a mega modal displaying the error title and description 2`] = `"We do takeaways, not time machines"`;
 
-exports[`Checkout data :: nonFulfillableError :: when \`nonFulfillableError.openInDialog\` is \`true\` should show a mega modal displaying the error title and description 3`] = `"The time you picked for your order isn't possible, please choose another."`;
+exports[`Checkout data :: nonFulfillableError :: when \`nonFulfillableError\` is an error in checkout issues should show a mega modal displaying the error title and description 3`] = `"The time you picked for your order isn't possible, please choose another."`;
 
 exports[`Checkout methods :: handleErrorState :: should assign the generic server error to \`genericErrorMessage\` where there is no \`messageToDisplay\` 1`] = `"Something went wrong, please try again later"`;
