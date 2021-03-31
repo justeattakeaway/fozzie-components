@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+Latest (add to next release)
+------------------------------
+*March 31, 2021*
+
+### Added
+- Component tests for locales au, dk, ie, es, no, it, nz
+- Component test for offers icon in mobile spec
+
+### Changed
+- Small refactor to url function in component-object
+
 
 v4.11.1
 ------------------------------
