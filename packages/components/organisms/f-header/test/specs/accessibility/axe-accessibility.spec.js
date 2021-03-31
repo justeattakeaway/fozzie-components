@@ -4,20 +4,17 @@ const Header = require('../../../test-utils/component-objects/f-header.component
 const header = new Header();
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
+    forEach(['gb', 'au', 'nz', 'ie', 'it', 'es', 'dk', 'no'])
+    .it('a11y - should test f-header component WCAG compliance', expectedLocale => {
+        // Act
         const headerData = {
-            locale: 'gb',
+            locale: expectedLocale,
             offers: true,
             delivery: true
         };
 
         header.open(headerData);
         header.waitForComponent();
-    });
-
-    forEach(['au', 'nz', 'ie', 'it', 'es', 'dk', 'no'])
-    .it('a11y - should test f-header component WCAG compliance', () => {
-        // Act
         const axeResults = getAccessibilityTestResults('f-header');
 
         // Assert
