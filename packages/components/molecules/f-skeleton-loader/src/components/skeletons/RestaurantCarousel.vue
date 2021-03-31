@@ -16,7 +16,11 @@ import Heading from './Heading.vue';
 import RestaurantCarouselCard from './RestaurantCarouselCard.vue';
 
 export default {
-    components: { Heading, TextBlock, RestaurantCarouselCard }
+    components: {
+        Heading,
+        TextBlock, 
+        RestaurantCarouselCard
+    }
 };
 </script>
 
