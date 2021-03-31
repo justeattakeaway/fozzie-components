@@ -37,8 +37,8 @@ describe('Mobile - f-header component tests', () => {
             delivery: true
         };
 
-        // Act
         ['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'].forEach(link => {
+            // Act
             header.open(headerData);
             header.waitForComponent();
 
@@ -58,8 +58,8 @@ describe('Mobile - f-header component tests', () => {
             delivery: true
         };
 
-        // Act
         ['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'].forEach(link => {
+            // Act
             header.open(headerData);
             header.waitForComponent();
 
@@ -78,8 +78,8 @@ describe('Mobile - f-header component tests', () => {
             delivery: true
         };
 
-        // Act
         ['offersLink', 'userAccount', 'help', 'countrySelector'].forEach(link => {
+            // Act
             header.open(headerData);
             header.openMobileNavigation();
             header.waitForComponent();
@@ -98,8 +98,8 @@ describe('Mobile - f-header component tests', () => {
             delivery: true
         };
 
-        // Act
         ['userAccount', 'help', 'countrySelector'].forEach(link => {
+            // Act
             header.open(headerData);
             header.openMobileNavigation();
             header.waitForComponent();

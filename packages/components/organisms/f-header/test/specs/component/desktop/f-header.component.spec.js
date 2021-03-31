@@ -30,8 +30,8 @@ describe('Desktop - f-header component tests', () => {
             delivery: true
         };
 
-        // Act
         ['offersLink', 'userAccount', 'help', 'countrySelector'].forEach(link => {
+            // Act
             header.open(headerData);
             header.waitForComponent();
 
@@ -50,8 +50,8 @@ describe('Desktop - f-header component tests', () => {
             delivery: true
         };
 
-        // Act
         ['userAccount', 'help', 'countrySelector'].forEach(link => {
+            // Act
             header.open(headerData);
             header.waitForComponent();
 
