@@ -16,9 +16,9 @@ describe('Desktop - f-header component tests', () => {
     });
 
     forEach(['offersLink', 'delivery', 'help', 'countrySelector', 'userAccount'])
-    .it('should display all navigation links', field => {
+    .it('should display all navigation links', link => {
         // Assert
-        expect(header.isFieldLinkDisplayed(field)).toBe(true);
+        expect(header.isNavigationLinkDisplayed(link)).toBe(true);
     });
 
     forEach(['au', 'ie', 'nz'])
@@ -36,13 +36,13 @@ describe('Desktop - f-header component tests', () => {
             header.waitForComponent();
 
             // Assert
-            expect(header.isFieldLinkDisplayed(link)).toBe(true);
-            expect(header.isFieldLinkDisplayed('delivery')).toBe(false);
+            expect(header.isNavigationLinkDisplayed(link)).toBe(true);
+            expect(header.isNavigationLinkDisplayed('delivery')).toBe(false);
         });
     });
 
     forEach(['it', 'es', 'dk', 'no'])
-    .it('should display the below navigation links', expectedLocale => {
+    .it('should display the below navigation fields', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -56,9 +56,9 @@ describe('Desktop - f-header component tests', () => {
             header.waitForComponent();
 
             // Assert
-            expect(header.isFieldLinkDisplayed(link)).toBe(true);
-            expect(header.isFieldLinkDisplayed('offersLink')).toBe(false);
-            expect(header.isFieldLinkDisplayed('delivery')).toBe(false);
+            expect(header.isNavigationLinkDisplayed(link)).toBe(true);
+            expect(header.isNavigationLinkDisplayed('offersLink')).toBe(false);
+            expect(header.isNavigationLinkDisplayed('delivery')).toBe(false);
         });
     });
 
@@ -66,7 +66,6 @@ describe('Desktop - f-header component tests', () => {
     ['lu', 'lu-en'], ['nl', '.nl'], ['nz', '.nz'], ['no', '.no'], ['pl', '.pl'], ['pt', '/pt'], ['ro', '/ro'], ['es', '.es'], ['ch_ch', '.ch'], ['ch_en', '/en'], ['ch_fr', '/fr'] ])
     .it('should display all countries and redirect to correct URL', (expectedLocale, expectedUrl) => {
         // Act
-        // browser.maximizeWindow();
         header.moveToCountrySelector();
         header.expectedCountry = expectedLocale;
 
@@ -90,7 +89,6 @@ describe('Desktop - f-header component tests', () => {
         };
 
         // Act
-        // browser.maximizeWindow();
         header.open(headerData);
         header.waitForComponent();
 

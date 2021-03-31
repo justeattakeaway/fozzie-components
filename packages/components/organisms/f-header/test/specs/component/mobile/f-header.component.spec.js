@@ -21,7 +21,7 @@ describe('Mobile - f-header component tests', () => {
 
     it('should display delivery link for GB locale', () => {
         // Assert
-        expect(header.isFieldLinkDisplayed('delivery')).toBe(true);
+        expect(header.isNavigationLinkDisplayed('delivery')).toBe(true);
     });
 
     forEach(['gb', 'au', 'ie', 'nz'])
@@ -40,8 +40,8 @@ describe('Mobile - f-header component tests', () => {
 
             // Assert
             expect(header.isMobileNavigationBarDisplayed()).toBe(true);
-            expect(header.isFieldLinkDisplayed(link)).toBe(false);
-            expect(header.isFieldLinkDisplayed('offersIcon')).toBe(true);
+            expect(header.isNavigationLinkDisplayed(link)).toBe(false);
+            expect(header.isNavigationLinkDisplayed('offersIcon')).toBe(true);
         });
     });
 
@@ -61,7 +61,7 @@ describe('Mobile - f-header component tests', () => {
             browser.pause(400);
 
             // Assert
-            expect(header.isFieldLinkDisplayed(link)).toBe(true);
+            expect(header.isNavigationLinkDisplayed(link)).toBe(true);
         });
     });
 
@@ -81,9 +81,9 @@ describe('Mobile - f-header component tests', () => {
             browser.pause(400);
 
             // Assert
-            expect(header.isFieldLinkDisplayed(link)).toBe(true);
-            expect(header.isFieldLinkDisplayed('offersLink')).toBe(false);
-            expect(header.isFieldLinkDisplayed('delivery')).toBe(false);
+            expect(header.isNavigationLinkDisplayed(link)).toBe(true);
+            expect(header.isNavigationLinkDisplayed('offersLink')).toBe(false);
+            expect(header.isNavigationLinkDisplayed('delivery')).toBe(false);
         });
     });
 

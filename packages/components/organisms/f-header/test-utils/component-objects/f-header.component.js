@@ -79,7 +79,6 @@ module.exports = class Header extends Page {
             default:
                 throw new Error(`locale ${countryFormatted} is not supported`);
         }
-
         const offersUrl = header.offers ? '&knob-Show%20offers%20link=true' : '';
         const deliveryUrl = header.delivery ? '&knob-Show%20delivery%20enquiry=true' : '';
         super.openComponent('organism', `header-component&knob-Locale=${formattedLocale}${offersUrl}${deliveryUrl}`);
@@ -97,8 +96,8 @@ module.exports = class Header extends Page {
         return this.logo.isDisplayed();
     }
 
-    isFieldLinkDisplayed (fieldName) {
-        return this.navigation[fieldName].link.isDisplayedInViewport();
+    isNavigationLinkDisplayed (linkName) {
+        return this.navigation[linkName].link.isDisplayedInViewport();
     }
 
     isCurrentCountryIconDisplayed (country) {
