@@ -100,6 +100,11 @@ The props that can be defined are as follows:
 | `checkout-setup-guest-success` | Emitted when guest user is created successfully. |
 | `checkout-setup-guest-failure` | Emitted when guest user is not created successfully. |
 | `checkout-validation-error` | Emitted validation error occurs. |
+| `checkout-place-order-success` | Emitted when order is successfully placed. |
+| `checkout-place-order-failure` | Emitted when order is not successfully placed. |
+| `checkout-update-success` | Emitted when checkout is successfully updated. |
+| `checkout-update-failure` | Emitted when checkout is not successfully updated. |
+
 
 You can add event listeners for these like so
 

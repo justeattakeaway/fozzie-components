@@ -3,6 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.78.0
+------------------------------
+*March 30, 2021*
+
+### Added
+- Custom errors.
+
+### Changed
+- The whole handling of exceptions and errors.
+- Several functions and tests.
+
+### Removed
+- Redundant and unnecessary functions.
+
 
 v0.77.1
 ------------------------------

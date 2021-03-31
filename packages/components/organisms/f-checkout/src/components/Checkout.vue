@@ -122,11 +122,14 @@ import ErrorDialog from './ErrorDialog.vue';
 import ErrorPage from './Error.vue';
 
 import {
-    ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE,
+    CreateGuestUserError,
+    UpdateCheckoutError,
+    PlaceOrderError
+} from '../exceptions/exceptions';
+
+import {
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
-    ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME,
     CHECKOUT_METHOD_DELIVERY,
-    ERROR_CODE_FULFILMENT_TIME_INVALID,
     TENANT_MAP,
     VALIDATIONS,
     VUEX_CHECKOUT_ANALYTICS_MODULE,
@@ -320,6 +323,13 @@ export default {
 
         restaurantMenuPageUrl () {
             return `restaurant-${this.restaurant.seoName}/menu`;
+        },
+
+        eventData () {
+            return {
+                isLoggedIn: this.isLoggedIn,
+                serviceType: this.serviceType
+            };
         }
     },
 
@@ -398,15 +408,11 @@ export default {
         },
 
         /**
-         * Submit the checkout details while emitting events to communicate its success or failure.
+         * Process all the information to submit the checkout and place an order
+         * while emitting events to communicate its success or failure.
          *
          */
         async submitCheckout () {
-            const eventData = {
-                isLoggedIn: this.isLoggedIn,
-                serviceType: this.serviceType
-            };
-
             try {
                 if (!this.isLoggedIn) {
                     await this.setupGuestUser();
@@ -416,39 +422,63 @@ export default {
 
                 await this.handleUpdateCheckout();
 
-                await this.handleFulfillableContext(eventData);
-            } catch (thrownErrors) {
-                eventData.errors = thrownErrors;
+                if (this.isFulfillable) {
+                    await this.submitOrder();
 
-                this.$emit(EventNames.CheckoutFailure, eventData);
-
-                this.logInvoker('Consumer Checkout Failure', eventData, this.$logger.logError);
+                    this.redirectToPayment();
+                } else {
+                    this.handleNonFulfillableCheckout();
+                }
+            } catch (e) {
+                if (e instanceof CreateGuestUserError) {
+                    this.handleErrorState({
+                        error: e,
+                        messageToDisplay: this.$t('errorMessages.guestUserCreationFailure'),
+                        eventToEmit: EventNames.CheckoutSetupGuestFailure,
+                        logMessage: 'Checkout Setup Guest Failure'
+                    });
+                } else if (e instanceof UpdateCheckoutError) {
+                    this.handleErrorState({
+                        error: e,
+                        eventToEmit: EventNames.CheckoutUpdateFailure,
+                        logMessage: 'Checkout Update Failure'
+                    });
+                } else if (e instanceof PlaceOrderError) {
+                    this.handleErrorState({
+                        error: e,
+                        eventToEmit: EventNames.CheckoutPlaceOrderFailure,
+                        logMessage: 'Place Order Failure'
+                    });
+                } else {
+                    this.handleErrorState({
+                        error: e,
+                        eventToEmit: EventNames.CheckoutFailure,
+                        logMessage: 'Consumer Checkout Failure'
+                    });
+                }
             }
         },
 
-        async handleFulfillableContext (eventData) {
-            if (this.isFulfillable) {
-                await this.processOrderIsFulfillable(eventData);
-            } else {
-                this.processOrderNotFulfillable(eventData);
+        /**
+         * Display and track issues when updating checkout even though the request was successful.
+         * (e.g. request is correct, but the restaurant is now offline).
+         */
+        handleNonFulfillableCheckout () {
+            if (this.errors) {
+                this.nonFulfillableError = this.errors.find(error => error.shouldShowInDialog);
+
+                this.trackFormErrors();
+
+                this.logInvoker('Consumer Checkout Not Fulfillable', this.eventData, this.$logger.logWarn);
+
+                this.$emit(EventNames.CheckoutUpdateFailure, this.eventData);
             }
         },
 
-        processOrderNotFulfillable (eventData) {
-            this.handleCheckoutIssues();
-            this.logInvoker('Consumer Checkout Not Fulfillable', eventData, this.$logger.logWarn);
-        },
-
-        async processOrderIsFulfillable (eventData) {
-            await this.submitOrder();
-
-            this.$emit(EventNames.CheckoutSuccess, eventData);
-
-            this.logInvoker('Consumer Checkout Successful', eventData, this.$logger.logInfo);
-
-            this.redirectToPayment();
-        },
-
+        /**
+         * Log a message at the specified level.
+         *
+         */
         logInvoker (message, eventData, callback) {
             callback(
                 message,
@@ -458,12 +488,12 @@ export default {
         },
 
         /**
-         * Handles call of `updateCheckout` and tracks any returned errors.
+         * Handles call of `updateCheckout` and catches and throws any returned errors.
          * 1. Maps checkout data.
-         * 2. If form is valid try to call `updateCheckout`.
-         * 3. If `updateCheckout` call succeeds but errors are returned, `trakFormError` is called.
-         * 4. If `updateCheckout` call fails calls `trakFormError` with error type..
-         *
+         * 2. Call `updateCheckout`.
+         * 3. If `updateCheckout` call succeeds but issues are returned, it will be handled by
+         *    its parent method
+         * 4. If `updateCheckout` call fails, throw an UpdateCheckoutError.
          */
         async handleUpdateCheckout () {
             try {
@@ -483,21 +513,9 @@ export default {
                     timeout: this.checkoutTimeout
                 });
 
-                if (this.errors) { // If `updateCheckout` call is successful but returns unfulfillable issues.
-                    this.trackFormErrors();
-                }
-            } catch (ex) {
-                const error = ex.errors.find(err => err.errorCode === ERROR_CODE_FULFILMENT_TIME_INVALID)
-                    ? ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME
-                    : ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE;
-
-                this.trackFormInteraction({ action: 'error', error: [error] });
-            }
-        },
-
-        handleCheckoutIssues () {
-            if (this.errors.length > 0) {
-                this.nonFulfillableError = this.errors.find(error => error.shouldShowInDialog);
+                this.$emit(EventNames.CheckoutUpdateSuccess, this.eventData);
+            } catch (e) {
+                throw new UpdateCheckoutError(e.message);
             }
         },
 
@@ -511,37 +529,47 @@ export default {
         },
 
         /**
-         * Place the order.
+         * Place the order, emit the expected events, and throw a new PlaceOrderError if the process fails.
          */
         async submitOrder () {
-            const data = {
-                basketId: this.basket.id,
-                customerNotes: {
-                    noteForRestaurant: this.userNote
-                },
-                referralState: 'ReferredByWeb'
-            };
+            try {
+                const data = {
+                    basketId: this.basket.id,
+                    customerNotes: {
+                        noteForRestaurant: this.userNote
+                    },
+                    referralState: 'ReferredByWeb'
+                };
 
-            await this.placeOrder({
-                url: this.placeOrderUrl,
-                data,
-                timeout: this.checkoutTimeout
-            });
+                await this.placeOrder({
+                    url: this.placeOrderUrl,
+                    data,
+                    timeout: this.checkoutTimeout
+                });
+
+                this.$emit(EventNames.CheckoutPlaceOrderSuccess, this.eventData);
+                this.$emit(EventNames.CheckoutSuccess, this.eventData);
+
+                this.logInvoker('Consumer Checkout Successful', this.eventData, this.$logger.logInfo);
+            } catch (e) {
+                throw new PlaceOrderError(e.message);
+            }
         },
 
         /**
          * Setup a new guest user account. This method will be called when isLoggedIn is false.
          * Events emitted to communicate success or failure.
+         * Throw a CreateGuestUserError if it fails.
          */
         async setupGuestUser () {
-            const createGuestData = {
-                emailAddress: this.customer.email,
-                firstName: this.customer.firstName,
-                lastName: this.customer.lastName,
-                registrationSource: 'Guest'
-            };
-
             try {
+                const createGuestData = {
+                    emailAddress: this.customer.email,
+                    firstName: this.customer.firstName,
+                    lastName: this.customer.lastName,
+                    registrationSource: 'Guest'
+                };
+
                 await this.createGuestUser({
                     url: this.createGuestUrl,
                     tenant: this.tenant,
@@ -550,14 +578,8 @@ export default {
                 });
 
                 this.$emit(EventNames.CheckoutSetupGuestSuccess);
-            } catch (thrownErrors) {
-                this.$emit(EventNames.CheckoutSetupGuestFailure, thrownErrors);
-
-                this.$logger.logError(
-                    'Checkout Setup Guest Failure',
-                    this.$store,
-                    { thrownErrors }
-                );
+            } catch (e) {
+                throw new CreateGuestUserError(e.message);
             }
         },
 
@@ -573,14 +595,14 @@ export default {
                 });
 
                 this.$emit(EventNames.CheckoutGetSuccess);
-            } catch (thrownErrors) {
-                this.$emit(EventNames.CheckoutGetFailure, thrownErrors);
+            } catch (e) {
+                this.$emit(EventNames.CheckoutGetFailure, e);
                 this.hasCheckoutLoadedSuccessfully = false;
 
                 this.$logger.logError(
                     'Get Checkout Failure',
                     this.$store,
-                    { thrownErrors }
+                    { e }
                 );
             }
         },
@@ -599,14 +621,14 @@ export default {
                 });
 
                 this.$emit(EventNames.CheckoutBasketGetSuccess);
-            } catch (thrownErrors) {
-                this.$emit(EventNames.CheckoutBasketGetFailure, thrownErrors);
+            } catch (e) {
+                this.$emit(EventNames.CheckoutBasketGetFailure, e);
                 this.hasCheckoutLoadedSuccessfully = false;
 
                 this.$logger.logError(
                     'Get Checkout Basket Failure',
                     this.$store,
-                    { thrownErrors }
+                    { e }
                 );
             }
         },
@@ -623,14 +645,14 @@ export default {
                 });
 
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess);
-            } catch (thrownErrors) {
-                this.$emit(EventNames.CheckoutAvailableFulfilmentGetFailure, thrownErrors);
+            } catch (e) {
+                this.$emit(EventNames.CheckoutAvailableFulfilmentGetFailure, e);
                 this.hasCheckoutLoadedSuccessfully = false;
 
                 this.$logger.logError(
                     'Get Checkout Available Fulfilment Times Failure',
                     this.$store,
-                    { thrownErrors }
+                    { e }
                 );
             }
         },
@@ -648,9 +670,9 @@ export default {
                     timeout: this.checkoutTimeout
                 });
                 this.$emit(EventNames.CheckoutAddressGetSuccess);
-            } catch (thrownErrors) {
-                this.$emit(EventNames.CheckoutAddressGetFailure, thrownErrors);
-                this.$logger.logWarn('Get checkout address failure', this.$store, { thrownErrors });
+            } catch (e) {
+                this.$emit(EventNames.CheckoutAddressGetFailure, e);
+                this.$logger.logWarn('Get checkout address failure', this.$store, { e });
             }
         },
 
@@ -659,12 +681,11 @@ export default {
          *
          */
         async lookupGeoLocation () {
-            const locationData =
-            {
-                addressLines: Object.values(this.address).filter(addressLine => !!addressLine)
-            };
-
             try {
+                const locationData = {
+                    addressLines: Object.values(this.address).filter(addressLine => !!addressLine)
+                };
+
                 if (locationData.addressLines.length) {
                     await this.getGeoLocation({
                         url: this.getGeoLocationUrl,
@@ -672,58 +693,28 @@ export default {
                         timeout: this.checkoutTimeout
                     });
                 }
-            } catch (error) {
-                this.$logger.logWarn(
-                    'Geo location lookup failed',
-                    this.$store,
-                    { error }
-                );
+            } catch (e) {
+                this.logInvoker('Geo Location Lookup Failed', this.eventData, this.$logger.logWarn);
             }
         },
 
         /**
-         * Emit `CheckoutFailure` event with error data
-         * Update `genericErrorMessage` to display correct errorMessage for passed error
+         * Emit, log and track the error based on the parameters received.
+         * Set the `genericErrorMessage` for the user to see.
          */
-        handleErrorState (error) {
-            let thrownErrors = error;
-
-            // Ideally we would use optional chaining but it doesn't currently work with Storybook
-            if (error && error.response && error.response.data && error.response.data.errors) {
-                thrownErrors = error.response.data.errors;
-            }
-
+        handleErrorState ({
+            error, messageToDisplay, eventToEmit, logMessage
+        }) {
             const eventData = {
-                isLoggedIn: this.isLoggedIn,
-                serviceType: this.serviceType
+                ...this.eventData,
+                error
             };
 
-            // TODO: Review this later - even though f-registration does something similar
-            if (Array.isArray(thrownErrors)) {
-                this.genericErrorMessage = thrownErrors[0].description || this.$t('errorMessages.genericServerError');
+            this.$emit(eventToEmit, eventData);
+            this.logInvoker(logMessage, eventData, this.$logger.logError);
+            this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
 
-                eventData.error = thrownErrors;
-
-                this.$emit(EventNames.CheckoutFailure, eventData);
-
-                this.$logger.logError(
-                    'Consumer Checkout Failure',
-                    this.$store,
-                    { eventData }
-                );
-            } else {
-                this.genericErrorMessage = error;
-
-                eventData.error = error;
-
-                this.$emit(EventNames.CheckoutFailure, eventData);
-
-                this.$logger.logError(
-                    'Consumer Checkout Failure',
-                    this.$store,
-                    { eventData }
-                );
-            }
+            this.genericErrorMessage = messageToDisplay || this.$t('errorMessages.genericServerError');
         },
 
         /**
