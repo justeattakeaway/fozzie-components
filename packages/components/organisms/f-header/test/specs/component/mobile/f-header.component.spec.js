@@ -82,7 +82,7 @@ describe('Mobile - f-header component tests', () => {
         ['offersLink', 'userAccount', 'help', 'countrySelector'].forEach(link => {
             header.open(headerData);
             header.openMobileNavigation();
-            browser.pause(400);
+            header.waitForComponent();
 
             // Assert
             expect(header.isNavigationLinkDisplayed(link)).toBe(true);
@@ -102,7 +102,7 @@ describe('Mobile - f-header component tests', () => {
         ['userAccount', 'help', 'countrySelector'].forEach(link => {
             header.open(headerData);
             header.openMobileNavigation();
-            browser.pause(400);
+            header.waitForComponent();
 
             // Assert
             expect(header.isNavigationLinkDisplayed(link)).toBe(true);
