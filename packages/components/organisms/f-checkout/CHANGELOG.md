@@ -9,7 +9,7 @@ v0.78.2
 *March 31, 2021*
 
 ### Added
-- spinnerTimeout prop that defaults to 300ms
+- spinnerTimeout prop that defaults to 500ms
 
 ### Changed
 - Spinner shows after spinnerTimeout instead of hardcoded 1s
