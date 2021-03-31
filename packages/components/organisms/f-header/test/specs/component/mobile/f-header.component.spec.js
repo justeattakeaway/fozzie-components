@@ -1,5 +1,6 @@
 const forEach = require('mocha-each');
 const Header = require('../../../../test-utils/component-objects/f-header.component');
+
 const header = new Header();
 
 describe('Mobile - f-header component tests', () => {
@@ -27,6 +28,7 @@ describe('Mobile - f-header component tests', () => {
     .it('should display navigation fields when burger menu has been opened', field => {
         // Act
         header.openMobileNavigation();
+        header.waitForComponent();
 
         // Assert
         expect(header.isFieldLinkDisplayed(field)).toBe(true);
