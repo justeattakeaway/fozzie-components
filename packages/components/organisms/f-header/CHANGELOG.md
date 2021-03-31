@@ -11,6 +11,7 @@ Latest (add to next release)
 ### Added
 - Component tests for locales `au, dk, ie, es, no, it, nz`
 - Component test for offers icon in mobile spec
+- Accessibility tests for the above locales 
 
 ### Changed
 - Small refactor to `open` function in component-object

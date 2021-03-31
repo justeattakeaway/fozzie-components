@@ -1,14 +1,22 @@
+const forEach = require('mocha-each');
 const { getAccessibilityTestResults } = require('../../../../../../../test/utils/axe-helper');
 const Header = require('../../../test-utils/component-objects/f-header.component');
 const header = new Header();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        header.open();
+        const headerData = {
+            locale: 'gb',
+            offers: true,
+            delivery: true
+        };
+
+        header.open(headerData);
         header.waitForComponent();
     });
 
-    it('a11y - should test f-header component WCAG compliance', () => {
+    forEach(['au', 'nz', 'ie', 'it', 'es', 'dk', 'no'])
+    .it('a11y - should test f-header component WCAG compliance', () => {
         // Act
         const axeResults = getAccessibilityTestResults('f-header');
 
