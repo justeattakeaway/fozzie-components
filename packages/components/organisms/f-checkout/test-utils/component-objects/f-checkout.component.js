@@ -237,6 +237,30 @@ module.exports = class Checkout extends Page {
 
     /**
     * @description
+    * Inputs address details into the checkout component.
+    *
+    * @param {Object} addressInfo
+    * @param {String} addressInfo.emailAddress The user's email addess
+    * @param {String} addressInfo.mobileNumber The user's mobile number
+    * @param {String} addressInfo.line1 First line of the user's address
+    * @param {String} addressInfo.line2 Second line of the user's address
+    * @param {String} addressInfo.locality Locality of the user's address
+    * @param {String} addressInfo.postcode Postcode of the user's address
+    * @param {String} addressInfo.note The user's extra note
+    */
+    populateGuestCheckoutForm (addressInfo) {
+        this.waitForComponent();
+        this.fields.emailAddress.input.setValue(addressInfo.emailAddress);
+        this.fields.mobileNumber.input.setValue(addressInfo.mobileNumber);
+        this.fields.addressLine1.input.setValue(addressInfo.line1);
+        this.fields.addressLine2.input.setValue(addressInfo.line2);
+        this.fields.addressLocality.input.setValue(addressInfo.locality);
+        this.fields.addressPostcode.input.setValue(addressInfo.postcode);
+        this.fields.userNote.input.setValue(addressInfo.note);
+    }
+
+    /**
+    * @description
     * Changes checkout page to reflect checkout method to either delivery or collection depending on index given.
     *
     * @param {string} method The collection type: either 'delivery' or 'collection'
