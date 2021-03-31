@@ -74,6 +74,7 @@ describe('Desktop - f-header component tests', () => {
 
         // Act
         header.clickCountryListItem();
+        header.waitForComponent();
 
         // Assert
         expect(browser.getUrl()).toContain(expectedUrl);
