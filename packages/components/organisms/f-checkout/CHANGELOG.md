@@ -14,8 +14,6 @@ v0.78.2
 - Spinner shows after spinnerTimeout instead of hardcoded 1s
 
 
-
-
 v0.78.1
 ------------------------------
 *March 31, 2021*
