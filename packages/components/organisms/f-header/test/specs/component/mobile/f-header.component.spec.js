@@ -19,6 +19,11 @@ describe('Mobile - f-header component tests', () => {
         }
     });
 
+    it('should display delivery link for GB locale', () => {
+        // Assert
+        expect(header.isFieldLinkDisplayed('delivery')).toBe(true);
+    });
+
     forEach(['gb', 'au', 'ie', 'nz'])
     .it('should hide all navigation links, except offersIcon link, when in mobile mode', expectedLocale => {
         // Arrange
@@ -31,6 +36,7 @@ describe('Mobile - f-header component tests', () => {
         // Act
         ['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'].forEach(link => {
             header.open(headerData);
+            header.waitForComponent();
 
             // Assert
             expect(header.isMobileNavigationBarDisplayed()).toBe(true);
@@ -40,7 +46,7 @@ describe('Mobile - f-header component tests', () => {
     });
 
     forEach(['gb', 'au', 'ie', 'nz'])
-    .it('should display navigation links when burger menu is opened', expectedLocale => {
+    .it.only('should display navigation links when burger menu is opened', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -52,7 +58,7 @@ describe('Mobile - f-header component tests', () => {
         ['offersLink', 'userAccount', 'help', 'countrySelector'].forEach(link => {
             header.open(headerData);
             header.openMobileNavigation();
-            browser.pause(500);
+            browser.pause(400);
 
             // Assert
             expect(header.isFieldLinkDisplayed(link)).toBe(true);
@@ -60,7 +66,7 @@ describe('Mobile - f-header component tests', () => {
     });
 
     forEach(['it', 'es', 'dk', 'no'])
-    .it('should display navigation links, except offers and delivery, when menu has been opened', expectedLocale => {
+    .it.only('should display the below navigation links when menu has been opened', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -72,7 +78,7 @@ describe('Mobile - f-header component tests', () => {
         ['userAccount', 'help', 'countrySelector'].forEach(link => {
             header.open(headerData);
             header.openMobileNavigation();
-            browser.pause(500);
+            browser.pause(400);
 
             // Assert
             expect(header.isFieldLinkDisplayed(link)).toBe(true);
