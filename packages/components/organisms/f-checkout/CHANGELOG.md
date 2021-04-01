@@ -17,6 +17,14 @@ v0.81.0
 - Error message component test `isDisplayed` test to search displayed within viewport.
 
 
+v0.80.1
+------------------------------
+*April 1, 2021*
+
+### Added
+o-links fozzie classes for the links
+
+
 v0.80.0
 ------------------------------
 *March 31, 2021*

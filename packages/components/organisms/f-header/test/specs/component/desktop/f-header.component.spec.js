@@ -4,51 +4,96 @@ const header = new Header();
 
 describe('Desktop - f-header component tests', () => {
     beforeEach(() => {
-        header.open();
+        const headerData = {
+            locale: 'gb',
+            offers: true,
+            delivery: true
+        };
+
+        header.open(headerData);
         header.waitForComponent();
+        browser.maximizeWindow();
     });
 
-    forEach(['help', 'countrySelector', 'userAccount'])
-    .it('should only display the default navigation fields', field => {
+    forEach(['offersLink', 'delivery', 'help', 'countrySelector', 'userAccount'])
+    .it('should display all navigation links', link => {
         // Assert
-        expect(header.isFieldLinkDisplayed(field)).toBe(true); 
-        expect(header.isFieldLinkDisplayed('offersLink')).toBe(false);
+        expect(header.isNavigationLinkDisplayed(link)).toBe(true);
     });
 
-    forEach(['offersLink', 'help', 'delivery', 'userAccount', 'countrySelector'])
-    .it('should display extra fields as well as default when selected', field => {
-        // Act
-        header.openWithExtraFeatures();
+    forEach(['au', 'ie', 'nz'])
+    .it('should display the below navigation links', expectedLocale => {
+        // Arrange
+        const headerData = {
+            locale: expectedLocale,
+            offers: true,
+            delivery: true
+        };
 
-        // Assert
-        expect(header.isFieldLinkDisplayed(field)).toBe(true);
+        ['offersLink', 'userAccount', 'help', 'countrySelector'].forEach(link => {
+            // Act
+            header.open(headerData);
+            header.waitForComponent();
+
+            // Assert
+            expect(header.isNavigationLinkDisplayed(link)).toBe(true);
+            expect(header.isNavigationLinkDisplayed('delivery')).toBe(false);
+        });
+    });
+
+    forEach(['it', 'es', 'dk', 'no'])
+    .it('should display the below navigation links', expectedLocale => {
+        // Arrange
+        const headerData = {
+            locale: expectedLocale,
+            offers: true,
+            delivery: true
+        };
+
+        ['userAccount', 'help', 'countrySelector'].forEach(link => {
+            // Act
+            header.open(headerData);
+            header.waitForComponent();
+
+            // Assert
+            expect(header.isNavigationLinkDisplayed(link)).toBe(true);
+            expect(header.isNavigationLinkDisplayed('offersLink')).toBe(false);
+            expect(header.isNavigationLinkDisplayed('delivery')).toBe(false);
+        });
     });
 
     forEach([['gb', '.co.uk'], ['au', 'au'], ['at', 'at'], ['be', 'be-en'], ['bg', 'bg'], ['ca_en', 'skipthedishes.com'], ['ca_fr', 'skipthedishes.com/fr'], ['dk', '.dk'], ['jet_fr', '.fr'], ['de', '.de'], ['ie', '.ie'], ['il', '.il'], ['it', '.it'], 
     ['lu', 'lu-en'], ['nl', '.nl'], ['nz', '.nz'], ['no', '.no'], ['pl', '.pl'], ['pt', '/pt'], ['ro', '/ro'], ['es', '.es'], ['ch_ch', '.ch'], ['ch_en', '/en'], ['ch_fr', '/fr'] ])
-    .it('should display all countries and redirect to correct URL', (country, expectedUrl) => {
+    .it('should display all countries and redirect to correct URL', (expectedLocale, expectedUrl) => {
         // Act
-        browser.maximizeWindow();
         header.moveToCountrySelector();
-        header.expectedCountry = country;
+        header.expectedCountry = expectedLocale;
 
         // Assert
         expect(header.isCountryLinkDisplayed()).toBe(true);
 
         // Act
         header.clickCountryListItem();
+        browser.pause(300);
 
         // Assert
         expect(browser.getUrl()).toContain(expectedUrl);
     });
 
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
-    .it('should display correct country selector icon depending on which locale is chosen', country => {
+    .it('should display correct country selector icon depending on which locale is chosen', expectedLocale => {
+        // Arrange
+        const headerData = {
+            locale: expectedLocale,
+            offers: true,
+            delivery: true
+        };
+
         // Act
-        browser.maximizeWindow();
-        header.openWithLocale(country);
+        header.open(headerData);
+        header.waitForComponent();
 
         // Assert
-        expect(header.isCurrentCountryIconDisplayed(country)).toBe(true);
+        expect(header.isCurrentCountryIconDisplayed(expectedLocale)).toBe(true);
     });
 });

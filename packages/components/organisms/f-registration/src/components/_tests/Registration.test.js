@@ -10,7 +10,7 @@ let wrapper;
 
 describe('Registration', () => {
     const propsData = {
-        locale: "en-GB",
+        locale: 'en-GB',
         createAccountUrl: 'http://localhost/account/register',
         showLoginLink: true,
         loginUrl: '/account/register'
