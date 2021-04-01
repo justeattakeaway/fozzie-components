@@ -136,6 +136,11 @@ export default {
                     url: '/info/vilkar-og-betingelser',
                     text: 'Vilkår og betingelser',
                     gtm: 'click_about_tandcs'
+                },
+                {
+                    url: 'https://secure.ethicspoint.eu/domain/media/da/gui/106834/index.html',
+                    text: 'Etisk hotline',
+                    target: '_blank'
                 }
             ]
         }

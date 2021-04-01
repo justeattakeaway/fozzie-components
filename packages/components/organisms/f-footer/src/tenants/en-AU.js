@@ -217,6 +217,11 @@ export default {
                     url: '/help',
                     text: 'Help Centre',
                     gtm: 'click_about_help_centre'
+                },
+                {
+                    url: 'https://secure.ethicspoint.eu/domain/media/en/gui/106834/index.html',
+                    text: 'Ethics hotline',
+                    target: '_blank'
                 }
             ]
         }

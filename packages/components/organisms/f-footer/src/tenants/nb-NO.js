@@ -131,6 +131,11 @@ export default {
                     url: '/info/vilkar-og-betingelser',
                     text: 'Vilkår og betingelser',
                     gtm: 'click_om_oss_vilkar_og_beringelser'
+                },
+                {
+                    url: 'https://secure.ethicspoint.eu/domain/media/no/gui/106834/index.html',
+                    text: 'Etikkhjelpelinje',
+                    target: '_blank'
                 }
             ]
         }
