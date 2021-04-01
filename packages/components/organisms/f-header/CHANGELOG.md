@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.12.0
 ------------------------------
-*March 31, 2021*
+*April 1, 2021*
 
 ### Changed
 - Add shared `nav.scss` file.
