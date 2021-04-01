@@ -17,7 +17,6 @@ describe('Mobile - f-header component tests', () => {
     .it('should hide all navigation links, except offersIcon link, when in mobile mode', field => {
         // Act
         header.openWithExtraFeatures();
-        header.waitForComponent();
 
         // Assert
         expect(header.isMobileNavigationBarDisplayed()).toBe(true);
@@ -29,7 +28,6 @@ describe('Mobile - f-header component tests', () => {
     .it('should display navigation fields when burger menu has been opened', field => {
         // Act
         header.openMobileNavigation();
-        header.waitForComponent();
 
         // Assert
         expect(header.isFieldLinkDisplayed(field)).toBe(true);
