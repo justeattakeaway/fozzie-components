@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.81.0
+------------------------------
+*April 1, 2021*
+
+### Added
+- Support for running tests on remote `Browserstack`.
+
+### Changed
+- Component test file structure to support `Browserstack`.
+
+### Fixed
+- Error message component test `isDisplayed` test to search displayed within viewport.
+
 
 v0.80.1
 ------------------------------

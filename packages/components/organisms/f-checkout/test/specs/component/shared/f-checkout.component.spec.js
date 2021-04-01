@@ -1,4 +1,4 @@
-const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
+const Checkout = require('../../../../test-utils/component-objects/f-checkout.component');
 
 const checkout = new Checkout();
 
@@ -80,8 +80,8 @@ describe('f-checkout component tests', () => {
         // Assert
         expect(checkout.isOrderTimeDropdownDisplayed()).toBe(true);
         expect(checkout.getOrderTimeOptionText(0)).toBe('As soon as possible');
-        expect(checkout.getOrderTimeOptionText(1)).toBe('Wednesday 00:45');
-        expect(checkout.getOrderTimeOptionText(2)).toBe('Wednesday 01:00');
+        expect(checkout.getOrderTimeOptionText(1)).toBe('Wednesday 01:45');
+        expect(checkout.getOrderTimeOptionText(2)).toBe('Wednesday 02:00');
     });
 
     it('should prevent a user from writing a note of over 200 characters', () => {
@@ -157,7 +157,7 @@ describe('f-checkout component tests', () => {
         expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(true);
     });
 
-    xit('should close the checkout error when "Retry" is clicked', () => {
+    it('should close the checkout error when "Retry" is clicked', () => {
         // Arrange
         const checkoutData = {
             type: 'delivery',
