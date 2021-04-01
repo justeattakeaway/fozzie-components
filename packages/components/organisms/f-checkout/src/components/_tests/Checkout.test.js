@@ -263,7 +263,7 @@ describe('Checkout', () => {
         });
 
         describe('nonFulfillableError ::', () => {
-            describe('when `nonFulfillableError.openInDialog` is `true`', () => {
+            describe('when `nonFulfillableError` is an error in checkout issues', () => {
                 it('should show a mega modal displaying the error title and description', () => {
                     // Arrange
                     const fulfilmentTimeIssue = CheckoutIssues[ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE];
