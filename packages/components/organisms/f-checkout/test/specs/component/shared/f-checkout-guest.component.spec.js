@@ -1,6 +1,6 @@
 import forEach from 'mocha-each';
 
-const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
+const Checkout = require('../../../../test-utils/component-objects/f-checkout.component');
 
 const checkout = new Checkout();
 
@@ -15,6 +15,7 @@ describe('f-checkout component tests', () => {
 
         checkout.open(checkoutData);
         checkout.waitForComponent();
+        browser.pause(2000);
     });
 
     it('should display the guest checkout header component', () => {
@@ -50,7 +51,7 @@ describe('f-checkout component tests', () => {
         };
 
         // Act
-        checkout.populateCheckoutForm(emailAddress);
+        checkout.populateGuestCheckoutForm(emailAddress);
         checkout.goToPayment();
 
         // Assert
@@ -76,8 +77,8 @@ describe('f-checkout component tests', () => {
         // Assert
         expect(checkout.isOrderTimeDropdownDisplayed()).toBe(true);
         expect(checkout.getOrderTimeOptionText(0)).toBe('As soon as possible');
-        expect(checkout.getOrderTimeOptionText(1)).toBe('Wednesday 00:45');
-        expect(checkout.getOrderTimeOptionText(2)).toBe('Wednesday 01:00');
+        expect(checkout.getOrderTimeOptionText(1)).toBe('Wednesday 01:45');
+        expect(checkout.getOrderTimeOptionText(2)).toBe('Wednesday 02:00');
     });
 
     it('should display a "mobileNumber" error message when an unsupported country code is used in the mobile number field', () => {
