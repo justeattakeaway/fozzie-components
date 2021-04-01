@@ -106,6 +106,11 @@ export default {
                     url: '/join_takeaway_section',
                     text: 'List your Restaurant',
                     gtm: 'click_about_list_your_restaurant'
+                },
+                {
+                    url: 'https://secure.ethicspoint.eu/domain/media/en/gui/106834/index.html',
+                    text: 'Ethics hotline',
+                    target: '_blank'
                 }
             ]
         }
