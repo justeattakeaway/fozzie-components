@@ -23,7 +23,7 @@ exports[`Header computed :: isLoggedIn :: when set to true should render the aut
   <h2 data-test-id="user-title">
     John, confirm your details
   </h2>
-  <p><a href="http://localhost/login" data-test-id="switch-user-link">
+  <p><a href="http://localhost/login" data-test-id="switch-user-link" class="o-link--bold o-link--noDecoration">
       Not John? Click here
     </a></p>
 </div>

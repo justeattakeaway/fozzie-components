@@ -76,8 +76,8 @@ describe('Shared - f-registration component tests', () => {
         const userInfo = {
             firstName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',
             lastName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',
-            email: 'ashton.adamms+jetest@just-eat.com', 
-            password: 'llanfairpwllgwyngyllgogerychwyr'
+            email: 'joe@test.com',
+            password: 'abcdefghijabcdefghijabcdefghi'
         };
 
         // Act

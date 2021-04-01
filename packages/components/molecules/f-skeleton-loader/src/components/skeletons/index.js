@@ -6,3 +6,4 @@ export { default as Rating } from './Rating.vue';
 export { default as CarouselCardRestaurantHeader } from './CarouselCardRestaurantHeader.vue';
 export { default as CarouselCardRestaurantData } from './CarouselCardRestaurantData.vue';
 export { default as RestaurantCarouselCard } from './RestaurantCarouselCard.vue';
+export { default as RestaurantCarousel } from './RestaurantCarousel.vue';

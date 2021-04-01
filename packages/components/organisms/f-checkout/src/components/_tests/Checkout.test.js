@@ -71,6 +71,7 @@ describe('Checkout', () => {
     const placeOrderUrl = 'http://localhost/placeorder';
     const paymentPageUrlPrefix = 'http://localhost/paymentpage';
     const getGeoLocationUrl = 'http://localhost/geolocation';
+    const spinnerTimeout = 100;
 
     const applicationName = 'Jest';
 
@@ -85,7 +86,8 @@ describe('Checkout', () => {
         placeOrderUrl,
         paymentPageUrlPrefix,
         getGeoLocationUrl,
-        applicationName
+        applicationName,
+        spinnerTimeout
     };
 
     let windowLocationSpy;
@@ -859,7 +861,7 @@ describe('Checkout', () => {
             });
 
             describe('when `isLoading` is `true`', () => {
-                it('should not set `shouldShowSpinner` to `true` before one second', () => {
+                it('should not set `shouldShowSpinner` to `true` before `spinnerTimeout`', () => {
                     // Arrange & Act
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore(),
@@ -874,13 +876,13 @@ describe('Checkout', () => {
                     });
 
                     wrapper.vm.startSpinnerCountdown();
-                    jest.advanceTimersByTime(999);
+                    jest.advanceTimersByTime(spinnerTimeout - 1);
 
                     // Assert
                     expect(wrapper.vm.shouldShowSpinner).toBe(false);
                 });
 
-                it('should set `shouldShowSpinner` to `true` after one second', () => {
+                it('should set `shouldShowSpinner` to `true` after `spinnerTimeout`', () => {
                     // Arrange & Act
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore(),
@@ -895,7 +897,7 @@ describe('Checkout', () => {
                     });
 
                     wrapper.vm.startSpinnerCountdown();
-                    jest.advanceTimersByTime(1000);
+                    jest.advanceTimersByTime(spinnerTimeout + 1);
 
                     // Assert
                     expect(wrapper.vm.shouldShowSpinner).toBe(true);
