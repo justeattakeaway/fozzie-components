@@ -1,5 +1,12 @@
 import { shallowMount } from '@vue/test-utils';
 import Tab from '../Tab.vue';
+import { INJECTIONS } from '../../constants';
+
+const {
+    REGISTER,
+    SELECT,
+    TABS_COMPONENT
+} = INJECTIONS;
 
 const REGISTER_DATA = {
     name: '__TAB_NAME__',
@@ -8,77 +15,101 @@ const REGISTER_DATA = {
 };
 
 describe('Tab.vue', () => {
-    let wrapper;
+    let activeWrapper;
 
-    beforeEach(() => {
-        // Arrange
-        wrapper = shallowMount(Tab, {
+    function defineActiveCompoment () {
+        activeWrapper = shallowMount(Tab, {
             propsData: {
                 name: REGISTER_DATA.name,
                 title: REGISTER_DATA.title,
-                selected: REGISTER_DATA.selected
+                selected: true
             },
             provide: {
-                register: jest.fn(),
-                tabsComponent: {
+                [REGISTER]: jest.fn(),
+                [SELECT]: jest.fn(),
+                [TABS_COMPONENT]: {
                     activeTab: REGISTER_DATA.name,
                     animationDirection: 'LEFT',
                     animate: true
                 }
             }
         });
-    });
+    }
 
     it('should be defined', () => {
+        // Arrange & Act
+        defineActiveCompoment();
+
         // Assert
-        expect(wrapper.exists()).toBe(true);
+        expect(activeWrapper.exists()).toBe(true);
     });
 
-    it('should call the register callback method when created', () => {
-        // Assert
-        expect(wrapper.vm.register).toHaveBeenCalled();
-    });
-
-    it('should supply the correct object to the callback method', () => {
-        // Assert
-        expect(wrapper.vm.register).toHaveBeenCalledWith(REGISTER_DATA);
-    });
-
-    it('should show only if isActive is true', () => {
-        // Arrange
-        const isActiveWrapper = shallowMount(Tab, {
-            propsData: {
-                name: REGISTER_DATA.name,
-                title: REGISTER_DATA.title,
-                selected: false
-            },
-            provide: {
-                register: jest.fn(),
-                tabsComponent: {
-                    activeTab: '',
-                    animationDirection: 'LEFT',
-                    animate: true
-                }
-            },
-            mocks: {
-                $style: {
-                    'c-tab': 'c-tab'
-                }
-            }
+    describe('when active', () => {
+        beforeEach(() => {
+            // Arrange & Act
+            defineActiveCompoment();
         });
 
-        // Act
-        const tab = isActiveWrapper.find('.c-tab');
+        it('should call the register callback method when created', () => {
+            // Assert
+            expect(activeWrapper.vm[REGISTER]).toHaveBeenCalled();
+        });
 
-        // Assert
-        expect(tab.isVisible()).toBe(false);
+        it('should supply the correct object to the callback method', () => {
+            // Assert
+            expect(activeWrapper.vm[REGISTER]).toHaveBeenCalledWith(REGISTER_DATA);
+        });
+
+        it('should show', () => {
+            // Assert
+            const tab = activeWrapper.find('.c-tab');
+            expect(tab.isVisible()).toBe(true);
+        });
+    });
+
+    describe('when inactive', () => {
+        let inactiveWrapper;
+
+        beforeEach(() => {
+            // Arrange & Act
+            inactiveWrapper = shallowMount(Tab, {
+                propsData: {
+                    name: REGISTER_DATA.name,
+                    title: REGISTER_DATA.title,
+                    selected: false
+                },
+                provide: {
+                    [REGISTER]: jest.fn(),
+                    [SELECT]: jest.fn(),
+                    [TABS_COMPONENT]: {
+                        activeTab: '',
+                        animationDirection: 'LEFT',
+                        animate: true
+                    }
+                }
+            });
+        });
+
+        it('should not show', () => {
+            // Assert
+            const tab = inactiveWrapper.find('.c-tab');
+            expect(tab.isVisible()).toBe(false);
+        });
+
+        it('should call the select callback when becoming active via selected prop', async () => {
+            // Act
+            await inactiveWrapper.setProps({ selected: true });
+
+            // Assert
+            expect(inactiveWrapper.vm[SELECT]).toHaveBeenCalled();
+        });
     });
 
     describe('Animation', () => {
         it('should only create transition element when animateTab is true', () => {
             // Act
-            const tabTransition = wrapper.find(`[data-test-id="tab-content-${wrapper.vm.name}"]`);
-            const tabNormal = wrapper.find(`[data-test-id="no-transition-tab-${wrapper.vm.name}"]`);
+            const tabTransition = activeWrapper.find(`[data-test-id="tab-content-${activeWrapper.vm.name}"]`);
+            const tabNormal = activeWrapper.find(`[data-test-id="no-transition-tab-${activeWrapper.vm.name}"]`);
 
             // Assert
             expect(tabTransition.exists()).toBe(true);
@@ -94,8 +125,9 @@ describe('Tab.vue', () => {
                     selected: REGISTER_DATA.selected
                 },
                 provide: {
-                    register: jest.fn(),
-                    tabsComponent: {
+                    [REGISTER]: jest.fn(),
+                    [SELECT]: jest.fn(),
+                    [TABS_COMPONENT]: {
                         activeTab: '',
                         animationDirection: 'LEFT',
                         animate: true
@@ -116,8 +148,9 @@ describe('Tab.vue', () => {
                     selected: REGISTER_DATA.selected
                 },
                 provide: {
-                    register: jest.fn(),
-                    tabsComponent: {
+                    [REGISTER]: jest.fn(),
+                    [SELECT]: jest.fn(),
+                    [TABS_COMPONENT]: {
                         activeTab: '',
                         animationDirection: 'RIGHT',
                         animate: true
