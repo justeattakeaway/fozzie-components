@@ -4,12 +4,39 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.80.1
+------------------------------
+*April 1, 2021*
+
+### Added
+o-links fozzie classes for the links
+
+
+v0.80.0
+------------------------------
+*March 31, 2021*
+
+### Added
+- spinnerTimeout prop that defaults to 500ms
+
+### Changed
+- Spinner shows after spinnerTimeout instead of hardcoded 1s
+
+
+v0.79.0
+------------------------------
+*March 31, 2021*
+
+### Fixed
+- Retry modal now closes when errors / issues are returned and the user tries to dismiss the modal.
+
+
 v0.78.1
 ------------------------------
 *March 31, 2021*
 
 ### Changed
-- Load `address` into state via new `location` object. 
+- Load `address` into state via new `location` object.
 
 
 v0.78.0

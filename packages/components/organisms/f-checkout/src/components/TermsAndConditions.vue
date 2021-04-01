@@ -6,6 +6,7 @@
             path="checkoutTermsAndConditions">
             <template #termsAndConditions>
                 <a
+                    class="o-link--bold"
                     :href="$t('termsAndConditionsLinkUrl')"
                     target="_blank">
                     <span>{{ $t('termsAndConditionsLinkText') }}</span>
@@ -13,6 +14,7 @@
             </template>
             <template #privacyPolicy>
                 <a
+                    class="o-link--bold"
                     :href="$t('privacyPolicyLinkUrl')"
                     target="_blank">
                     <span>{{ $t('privacyPolicyLinkText') }}</span>
@@ -20,6 +22,7 @@
             </template>
             <template #cookiePolicy>
                 <a
+                    class="o-link--bold"
                     :href="$t('cookiePolicyLinkUrl')"
                     target="_blank">
                     <span>{{ $t('cookiePolicyLinkText') }}</span>
@@ -44,14 +47,7 @@
     font-weight: $font-weight-bold;
 
     a {
-        text-decoration: none;
-        font-weight: $font-weight-bold;
         margin-right: none;
-
-        &:hover,
-        &:focus {
-            text-decoration: underline;
-        }
     }
 }
 </style>

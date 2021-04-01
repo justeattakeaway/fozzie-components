@@ -52,9 +52,6 @@ Within the context of a Vue app, that will look like:
   </script>
   ```
 
-## TODO – setup a page with an example of all the icons somewhere – See all icons and usage here: https://f-vue-icons.netlify.com
-
-
 ### Tree shaking
 
 By using ES imports like `import { AlertIcon } from '@justeat/f-vue-icons'` with Webpack v4 or Rollup, unused exports in this module will be automatically eliminated.
@@ -67,7 +64,15 @@ If you can't use a tree-shaking compatible build tool, then you can use the per-
 The component extends [@justeat/browserslist-config-fozzie](https://github.com/justeat/browserslist-config-fozzie) package for the list of browsers to support.
 
 
-## Development
+## Contributing
+
+Before staring please read our [contributing guide](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html?path=/story/documentation-getting-started-contributing--page)
+
+### Adding new icons
+
+This package uses our [`@justeat/f-icons` svg library](https://github.com/justeat/f-icons) and compiles component files on build.
+
+To build new icon components you need to add new svgs to `@justeat/f-icons`, publish the package, than bump the f-icons version here and build the module.
 
 ### Building the Module
 
@@ -76,6 +81,10 @@ Run `yarn build` to compile the module.
 ### Running the Tests
 
 Run `yarn test` to run the tests.
+
+## Icon list
+
+You can check the list of all the icons in our [Storybook](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html?path=/story/components-atoms--icons).
 
 
 ## Credits
