@@ -576,16 +576,11 @@ $nav-text-subFont                  : $font-family-base;
 $nav-icon-color                    : $color-secondary;
 $nav-icon-color--transparent       : $white;
 $nav-icon-color--mobileWhiteBg     : $grey--darkest;
-// $nav-transition-duration           : 250ms;
 $nav-icon-size                     : 24px;
 
 $nav-featureLinkIcon-width         : 28px;
 $nav-featureLinkIcon-height        : 28px;
 
-// $nav-trigger-width                 : 56px;
-// $nav-trigger-height                : 48px;
-// $nav-trigger-focus-color           : $blue;
-// $nav-trigger-focus-bg              : $blue--offWhite;
 $nav-toggleIcon-left               : spacing(x2);
 $nav-toggleIcon-width              : 21px;
 $nav-toggleIcon-height             : 2px;
@@ -595,12 +590,7 @@ $nav-toggleIcon-color--transparent : $white;
 $nav-toggleIcon-bg                 : transparent;
 $nav-toggleIcon-space              : 5px;
 
-// $nav-popover-transition-delay      : 200ms;
-// $nav-popover-transition-duration   : 200ms;
 $nav-popover-width                 : 300px;
-
-// $countrySelector-flag-width  : 16px;
-// $countrySelector-flag-height : 16px;
 
 @mixin nav-container-visible () {
     overflow-y: auto;
