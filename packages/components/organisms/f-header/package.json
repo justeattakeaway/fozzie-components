@@ -34,7 +34,7 @@
     "test": "vue-cli-service test:unit",
     "test-component:browserstack": "cross-env-shell JE_ENV=browserstack wdio ../../../../wdio-browserstack.conf.js --suite shared mobile",
     "test-component:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite component",
-    "report:test-component:chome": "cross-env-shell JE_ENV=ci COMPONENT_TYPE=organism wdio ../../../../wdio-chrome.conf.js --suite component && yarn:allure:open",
+    "report:test-component:chrome": "cross-env-shell JE_ENV=local COMPONENT_TYPE=organism wdio ../../../../wdio-chrome.conf.js --suite component && yarn allure:open",
     "test-a11y:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite a11y",
     "allure:open": "yarn allure:clean && allure open",
     "allure:clean": "rimraf ../../../../test/results/allure"
