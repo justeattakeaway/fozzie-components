@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.82.0
+------------------------------
+*April 1, 2021*
+
+### Added
+- Ability to handle issues which we do not have stored
+
+
 v0.81.0
 ------------------------------
 *April 1, 2021*
@@ -23,14 +32,6 @@ v0.80.1
 
 ### Added
 o-links fozzie classes for the links
-
-
-v0.81.0
-------------------------------
-*April 1, 2021*
-
-### Added
-- Ability to handle issues which we do not have stored
 
 
 v0.80.0
