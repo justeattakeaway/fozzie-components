@@ -171,7 +171,7 @@ module.exports = class Checkout extends Page {
     }
 
     isCheckoutErrorMessageDisplayed () {
-        return this.checkoutErrorMessage.isDisplayed();
+        return this.checkoutErrorMessage.isDisplayedInViewport();
     }
 
     clickRetryButton () {
