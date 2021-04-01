@@ -3,3 +3,9 @@ export const DIRECTION = {
     LEFT: 'LEFT',
     RIGHT: 'RIGHT'
 };
+
+export const INJECTIONS = {
+    REGISTER: 'fTabs_register',
+    SELECT: 'fTabs_select',
+    TABS_COMPONENT: 'fTabs_tabsComponent'
+};
