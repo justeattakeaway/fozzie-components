@@ -17,6 +17,17 @@ v0.80.0
 - Error message component test `isDisplayed` test to search displayed within viewport.
 
 
+v0.80.0
+------------------------------
+*March 31, 2021*
+
+### Added
+- spinnerTimeout prop that defaults to 500ms
+
+### Changed
+- Spinner shows after spinnerTimeout instead of hardcoded 1s
+
+
 v0.79.0
 ------------------------------
 *March 31, 2021*
@@ -30,7 +41,7 @@ v0.78.1
 *March 31, 2021*
 
 ### Changed
-- Load `address` into state via new `location` object. 
+- Load `address` into state via new `location` object.
 
 
 v0.78.0
