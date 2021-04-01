@@ -1946,6 +1946,14 @@ describe('Checkout', () => {
                 // Assert
                 expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${payload.error.message}` });
             });
+
+            it('should call `scrollToElement` with "errorAlert"', () => {
+                // Act
+                wrapper.vm.handleErrorState(payload);
+
+                // Assert
+                expect(scrollToElementSpy).toHaveBeenCalledWith('errorAlert');
+            });
         });
 
         describe('isFormValid ::', () => {
