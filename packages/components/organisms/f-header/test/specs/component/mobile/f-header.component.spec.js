@@ -17,6 +17,7 @@ describe('Mobile - f-header component tests', () => {
     .it('should hide all navigation links, except offersIcon link, when in mobile mode', field => {
         // Act
         header.openWithExtraFeatures();
+        header.waitForComponent();
 
         // Assert
         expect(header.isMobileNavigationBarDisplayed()).toBe(true);
