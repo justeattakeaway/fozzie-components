@@ -1858,6 +1858,7 @@ describe('Checkout', () => {
             let payload;
             let logInvokerSpy;
             let trackFormInteractionSpy;
+            let scrollToElementSpy;
 
             beforeEach(() => {
                 // Arrange
@@ -1885,6 +1886,7 @@ describe('Checkout', () => {
 
                 logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
                 trackFormInteractionSpy = jest.spyOn(wrapper.vm, 'trackFormInteraction');
+                scrollToElementSpy = jest.spyOn(wrapper.vm, 'scrollToElement');
             });
 
             afterEach(() => {
