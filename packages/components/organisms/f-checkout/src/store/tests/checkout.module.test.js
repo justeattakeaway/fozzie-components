@@ -7,7 +7,7 @@ import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
 import { mockAuthToken } from '../../components/_tests/helpers/setup';
 import { version as applicationVerion } from '../../../package.json';
-import { VUEX_CHECKOUT_ANALYTICS_MODULE } from '../../constants';
+import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../../constants';
 
 import {
     UPDATE_AUTH,
@@ -463,6 +463,7 @@ describe('CheckoutModule', () => {
                 axios.patch = jest.fn(() => Promise.resolve({
                     status: 200,
                     data: {
+                        isFulfillable: false,
                         issues
                     }
                 }));
@@ -474,6 +475,14 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(axios.patch).toHaveBeenCalledWith(payload.url, payload.data, config);
+            });
+
+            it('should convert an unsupported error into a default error.', async () => {
+                // Act
+                await updateCheckout({ commit, state }, payload);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [{ code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true }]);
             });
         });
 
