@@ -3,7 +3,13 @@ const header = new Header();
 
 describe('Shared - f-header component tests', () => {
     beforeEach(() => {
-        header.open();
+        const headerData = {
+            locale: 'gb',
+            offers: true,
+            delivery: true
+        };
+
+        header.open(headerData);
         header.waitForComponent();
     });
 
