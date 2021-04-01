@@ -11,17 +11,20 @@ export default {
     decorators: [withA11y]
 };
 
-export const VueTabsComponent = () => ({
+export const VueTabsComponent = (args, { argTypes }) => ({
     components: { Tabs, Tab },
+
+    props: Object.keys(argTypes),
+
     template: `
         <tabs :animate="true">
-            <tab name="a" title="Your Stampcards" :selected="true">
+            <tab name="a" title="Your Stampcards" :selected="'a' === selected">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
                 temporibus deleniti quas dolor eos et delectus eveniet sequi dolore,
                 minus vel ad nesciunt voluptatibus numquam nulla distinctio modi,
                 voluptas exercitationem?
             </tab>
-            <tab name="b" title="How it works">
+            <tab name="b" title="How it works" :selected="'b' === selected">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi eaque
                 dicta quisquam voluptate inventore repellendus ut itaque, animi, magni
                 consectetur dolore, sapiente error! Eos cupiditate harum quidem sit illo
@@ -32,3 +35,9 @@ export const VueTabsComponent = () => ({
 });
 
 VueTabsComponent.storyName = 'f-tabs';
+VueTabsComponent.args = {
+    selected: 'a'
+};
+VueTabsComponent.argTypes = {
+    selected: { control: { type: 'radio', options: ['a', 'b'] } }
+};

@@ -202,6 +202,12 @@ export default {
             default: 1000
         },
 
+        spinnerTimeout: {
+            type: Number,
+            required: false,
+            default: 500
+        },
+
         authToken: {
             type: String,
             default: ''
@@ -798,7 +804,7 @@ export default {
                 if (this.isLoading) {
                     this.shouldShowSpinner = true;
                 }
-            }, 1000);
+            }, this.spinnerTimeout);
         },
 
         handleErrorDialogClose () {
