@@ -11,6 +11,7 @@
 
             <p :class="$style['c-checkoutHeader-loginLink']">
                 <a
+                    class="o-link--bold o-link--noDecoration"
                     :href="loginUrl"
                     data-test-id="switch-user-link"
                     @click="onVisitLoginPage">
@@ -156,15 +157,5 @@ export default {
 
 .c-checkoutHeader-loginLink {
     text-align: center;
-
-    a {
-        text-decoration: none;
-        font-weight: $font-weight-bold;
-
-        &:hover,
-        &:focus {
-            text-decoration: underline;
-        }
-    }
 }
 </style>
