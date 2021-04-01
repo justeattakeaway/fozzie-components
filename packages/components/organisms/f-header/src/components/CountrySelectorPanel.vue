@@ -1,8 +1,8 @@
 <template>
     <div
         :class="[
-            $style['c-nav-container'],
-            { [$style['is-visible']]: isOpen }
+            'c-nav-container',
+            { 'is-visible': isOpen }
         ]">
         <div :class="$style['c-countrySelector']">
             <header :class="$style['c-countrySelector-header']">
