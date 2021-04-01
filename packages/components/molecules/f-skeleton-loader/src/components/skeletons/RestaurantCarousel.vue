@@ -30,7 +30,6 @@ $breakpoints: (medium: 520px, large: 960px);
 
 .c-restaurantCarouselWrapper {
     margin: auto;
-    max-width: 1208px;
     padding-top: spacing();
     margin-bottom: spacing(x2);
 }
