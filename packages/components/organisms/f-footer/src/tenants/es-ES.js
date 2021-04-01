@@ -202,6 +202,11 @@ export default {
                     url: '/info/terminos-y-condiciones',
                     text: 'Términos y Condiciones',
                     gtm: 'click_sobre_nosotros_terminos_y_condiciones'
+                },
+                {
+                    url: 'https://secure.ethicspoint.eu/domain/media/eseu/gui/106834/index.html',
+                    text: 'Linea directa de ética',
+                    target: '_blank'
                 }
             ]
         }
