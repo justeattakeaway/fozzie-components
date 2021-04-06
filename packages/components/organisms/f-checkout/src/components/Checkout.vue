@@ -896,7 +896,8 @@ export default {
 
 .c-checkout-alert {
     width: $checkout-width;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 /* If these stay the same then just rename the class to something more generic */
 .c-checkout-submitButton {
