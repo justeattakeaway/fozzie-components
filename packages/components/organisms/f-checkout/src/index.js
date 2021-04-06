@@ -9,7 +9,6 @@
 import VueCheckout from '@/components/Checkout.vue';
 import fCheckoutModule from '@/store/checkout.module';
 import fCheckoutAnalyticsModule from '@/store/checkoutAnalytics.module';
-import VueScrollTo from 'vue-scrollto';
 
 export { CHECKOUT_METHOD_COLLECTION, CHECKOUT_METHOD_DELIVERY } from './constants';
 
@@ -18,7 +17,6 @@ export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
     Vue.component('VueCheckout', VueCheckout);
-    Vue.use(VueScrollTo);
 }
 
 // Create module definition for Vue.use()
