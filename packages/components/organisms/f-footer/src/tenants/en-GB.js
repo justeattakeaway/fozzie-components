@@ -210,7 +210,9 @@ export default {
                 {
                     url: 'https://secure.ethicspoint.eu/domain/media/en/gui/106834/index.html',
                     text: 'Ethics hotline',
-                    target: '_blank'
+                    target: '_blank',
+                    rel: 'noopener',
+                    gtm: 'click_ethics_hotline'
                 }
             ]
         }

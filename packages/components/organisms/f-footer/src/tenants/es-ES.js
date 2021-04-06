@@ -206,7 +206,9 @@ export default {
                 {
                     url: 'https://secure.ethicspoint.eu/domain/media/eseu/gui/106834/index.html',
                     text: 'Linea directa de ética',
-                    target: '_blank'
+                    target: '_blank',
+                    rel: 'noopener',
+                    gtm: 'click_ethics_hotline'
                 }
             ]
         }
