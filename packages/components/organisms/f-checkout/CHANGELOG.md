@@ -4,12 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.81.0
+------------------------------
+*April 6, 2021*
+
+### Added
+- Scrolling to the server-side error alert automatically.
+
+
 v0.80.1
 ------------------------------
 *April 1, 2021*
 
 ### Added
-o-links fozzie classes for the links
+- o-links fozzie classes for the links
 
 
 v0.80.0

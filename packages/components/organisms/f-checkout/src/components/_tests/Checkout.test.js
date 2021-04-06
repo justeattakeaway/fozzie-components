@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import flushPromises from 'flush-promises';
 import { VueI18n } from '@justeat/f-globalisation';
 import { validations } from '@justeat/f-services';
+import VueScrollTo from 'vue-scrollto';
 import {
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     CHECKOUT_METHOD_DELIVERY,
@@ -1949,12 +1950,71 @@ describe('Checkout', () => {
                 expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${payload.error.message}` });
             });
 
-            it('should call `scrollToElement` with "errorAlert"', () => {
+            it('should call `scrollToElement` with "errorAlert"', async () => {
                 // Act
                 wrapper.vm.handleErrorState(payload);
 
+                await wrapper.vm.$nextTick();
+
                 // Assert
                 expect(scrollToElementSpy).toHaveBeenCalledWith('errorAlert');
+            });
+        });
+
+        describe('scrollToElement ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should call `scrollTo` with the element when it exists', () => {
+                // Arrange
+                const ref = 'errorAlert';
+                const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    },
+                    data () {
+                        return {
+                            genericErrorMessage: 'Some error'
+                        };
+                    }
+                });
+
+                const alertElement = wrapper.findComponent({ ref }).vm.$el;
+
+                // Act
+                wrapper.vm.scrollToElement(ref);
+
+                // Assert
+                expect(scrollToSpy).toHaveBeenCalledWith(alertElement, 650, { duration: 650, offset: -20 });
+            });
+
+            it('should call `scrollTo` with the element when it does not exists', () => {
+                // Arrange
+                const ref = 'errorAlert';
+                const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
+                });
+
+                // Act
+                wrapper.vm.scrollToElement(ref);
+
+                // Assert
+                expect(scrollToSpy).not.toHaveBeenCalled();
             });
         });
 

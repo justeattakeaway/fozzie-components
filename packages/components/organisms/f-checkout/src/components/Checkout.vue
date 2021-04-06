@@ -727,7 +727,9 @@ export default {
 
             this.genericErrorMessage = messageToDisplay || this.$t('errorMessages.genericServerError');
 
-            this.scrollToElement('errorAlert');
+            this.$nextTick(() => {
+                this.scrollToElement('errorAlert');
+            });
         },
 
         /**
@@ -736,15 +738,13 @@ export default {
         scrollToElement (refElement) {
             const scrollingDurationInMilliseconds = 650;
 
-            this.$nextTick(() => {
-                const element = this.$refs[refElement]
-                    ? this.$refs[refElement].$el
-                    : null;
+            const element = this.$refs[refElement]
+                ? this.$refs[refElement].$el
+                : null;
 
-                if (element) {
-                    VueScrollTo.scrollTo(element, scrollingDurationInMilliseconds, { offset: -20 });
-                }
-            });
+            if (element) {
+                VueScrollTo.scrollTo(element, scrollingDurationInMilliseconds, { offset: -20 });
+            }
         },
 
         /**
