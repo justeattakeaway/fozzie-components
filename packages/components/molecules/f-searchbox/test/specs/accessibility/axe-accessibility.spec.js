@@ -1,6 +1,6 @@
+import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
 const Searchbox = require('../../../test-utils/component-objects/f-searchbox.component');
 const searchbox = new Searchbox();
-import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
 
 describe('Accessibility tests', () => {
     beforeEach(() => {

@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-searchbox",
   "description": "Fozzie Searchbox – Just Eat Takeaway Global Searchbox",
-  "version": "4.0.0-beta.27",
+  "version": "4.0.0-beta.28",
   "main": "dist/f-searchbox.umd.min.js",
   "files": [
     "dist",
@@ -34,6 +34,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
+    "test-component:browserstack": "cross-env-shell JE_ENV=browserstack wdio ../../../../wdio-browserstack.conf.js --suite shared",
     "test-component:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite component", 
     "test-a11y:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite a11y"
   },
