@@ -12,6 +12,13 @@ describe('f-statusBanner component tests', () => {
         expect(statusBanner.isStatusBannerComponentDisplayed()).toBe(true);
     });
 
+    it('should display image and headings of the status-banner', () => {
+        // Assert
+        expect(statusBanner.isImageDisplayed()).toBe(true);
+        expect(statusBanner.isHeadingDisplayed()).toBe(true);
+        expect(statusBanner.isSubheadingDisplayed()).toBe(true);
+    });
+
     it('should display address box and search button', () => {
         // Assert
         expect(statusBanner.isAddressBoxDisplayed()).toBe(true);
@@ -26,10 +33,10 @@ describe('f-statusBanner component tests', () => {
 
         // Act
         statusBanner.addAddress(userInput);
+        statusBanner.clickSearchButton();
 
         // Assert
-        expect(statusBanner.getAddress()).toEqual('');
-    // do I need to add click first before error message appears?
+        expect(statusBanner.getErrorMessage()).toContain('enter a postcode');
     });
 
     it('should display "invalid" error when user does not input address correctly', () => {
@@ -40,21 +47,23 @@ describe('f-statusBanner component tests', () => {
 
         // Act
         statusBanner.addAddress(userInput);
+        statusBanner.clickSearchButton();
 
         // Assert
-        expect(statusBanner.getAddress()).toEqual('');
+        expect(statusBanner.getErrorMessage()).toContain('enter a full, valid postcode');
     });
 
     it('should not display an error when user address is correct', () => {
         // Arrange
         const userInput = {
-            address: '' // valid postcode from unit test
+            address: 'AR511AR'
         };
 
         // Act
         statusBanner.addAddress(userInput);
+        statusBanner.clickSearchButton();
 
         // Assert
-        expect(statusBanner.getAddress()).toEqual('');
+        expect(statusBanner.isErrorMessageDisplayed()).toBe(false);
     });
 });
