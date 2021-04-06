@@ -40,7 +40,6 @@
 
             <form-search-button
                 :copy="copy"
-                data-test-id="text"
                 :is-compressed="isCompressed" />
         </div>
 
