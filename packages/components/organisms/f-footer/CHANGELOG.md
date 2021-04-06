@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.17.0
+------------------------------
+*April 6, 2021*
+
+### Added
+- `rel: 'noopener'` and `gtm` value to Ethics hotline links
+
 
 v4.16.0
 ------------------------------
@@ -10,6 +17,7 @@ v4.16.0
 
 ### Added
 - Ethics hotline link to all the tenants
+
 
 v4.15.0
 ------------------------------
