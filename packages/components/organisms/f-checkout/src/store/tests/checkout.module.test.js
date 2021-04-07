@@ -578,9 +578,9 @@ describe('CheckoutModule', () => {
                 }));
             });
 
-            describe('if the user is logged in', () => {
+            describe('if the auth token is set', () => {
                 beforeEach(() => {
-                    state.isLoggedIn = true;
+                    state.authToken = authToken;
                 });
 
                 it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation.`, async () => {
@@ -593,9 +593,9 @@ describe('CheckoutModule', () => {
                 });
             });
 
-            describe('if the user is not logged in', () => {
+            describe('if the auth token is not set', () => {
                 beforeEach(() => {
-                    state.isLoggedIn = false;
+                    state.authToken = null;
                 });
 
                 it('should not make api call and should not call mutation.', async () => {

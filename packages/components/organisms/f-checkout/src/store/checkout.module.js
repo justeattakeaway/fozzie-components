@@ -81,7 +81,7 @@ export default {
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
-                    ...(state.isLoggedIn && {
+                    ...(state.authToken && {
                         Authorization: authHeader
                     })
                 },
@@ -111,7 +111,7 @@ export default {
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
-                    ...(state.isLoggedIn && {
+                    ...(state.authToken && {
                         Authorization: authHeader
                     })
                 },
@@ -236,7 +236,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept-Language': language,
-                    ...(state.isLoggedIn && {
+                    ...(state.authToken && {
                         Authorization: authHeader
                     })
                 },
@@ -303,7 +303,7 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getGeoLocation: async ({ commit, state }, { url, postData, timeout }) => {
-            if (state.isLoggedIn) {
+            if (state.authToken) {
                 const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
                 const config = {
