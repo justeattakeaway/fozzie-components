@@ -11,6 +11,7 @@ Latest – to be added to the next release
 - Component tests for `MainBannerContainer.vue` and `PageBanner.vue`
 - `f-statusBanner.selector.js` file for storing test elements
 
+
 v1.1.0
 ------------------------------
 *February 23, 2021*
