@@ -7,6 +7,7 @@ import { version as applicationVerion } from '../../package.json';
 import {
     UPDATE_HAS_ASAP_SELECTED,
     UPDATE_AUTH,
+    UPDATE_AUTH_GUEST,
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
     UPDATE_BASKET_DETAILS,
     UPDATE_CUSTOMER_DETAILS,
@@ -143,8 +144,8 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        createGuestUser: async (context, {
-            url, tenant, data, timeout
+        createGuestUser: async ({ commit }, {
+            url, tenant, data, timeout, otacToAuthExchanger
         }) => {
             const config = {
                 headers: {
@@ -157,6 +158,8 @@ export default {
             const response = await axios.post(url, data, config);
             // eslint-disable-next-line no-unused-vars
             const otac = response.data.token;
+            const authToken = otacToAuthExchanger(otac);
+            commit(UPDATE_AUTH_GUEST, authToken);
             // TODO: Use otac to log the user in
         },
 
@@ -392,6 +395,11 @@ export default {
         [UPDATE_AUTH]: (state, authToken) => {
             state.authToken = authToken;
             state.isLoggedIn = !!authToken;
+        },
+
+        [UPDATE_AUTH_GUEST]: (state, authToken) => {
+            state.authToken = authToken;
+            state.isLoggedIn = false;
         },
 
         [UPDATE_AVAILABLE_FULFILMENT_TIMES]: (state, {

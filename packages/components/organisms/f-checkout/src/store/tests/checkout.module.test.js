@@ -497,6 +497,8 @@ describe('CheckoutModule', () => {
                     email: 'joe@test.com'
                 };
 
+                payload.otacToAuthExchanger = () => '';
+
                 config = {
                     headers: {
                         'Content-Type': 'application/json',
