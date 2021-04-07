@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.6.1
+------------------------------
+*April 6, 2021*
+
+### Fixed
+- DataLayer push on showing banner
+- Call resendEvents on "Accept all" button click
+- Update tests
+
+
 v0.6.0
 ------------------------------
 *March 18, 2021*

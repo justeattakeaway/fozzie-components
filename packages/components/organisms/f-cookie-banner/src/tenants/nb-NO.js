@@ -8,7 +8,7 @@ const messages = {
     textLine3: 'For detaljer om hvilke informasjonskapsler og teknologier vi bruker, se vår ',
     textLine4: '. Ved å bruke dette banneret, plasseres en informasjonskapsel på enheten din for å huske dine preferanser.',
     cookiePolicyLinkText: 'melding om informasjonskapsler',
-    cookiePolicyLinkUrl: 'https://www.just-eat.no/info/cookie-politikk'
+    cookiePolicyLinkUrl: 'https://www.just-eat.no/informasjonskapselerklaering'
 };
 
 const displayLegacy = false;

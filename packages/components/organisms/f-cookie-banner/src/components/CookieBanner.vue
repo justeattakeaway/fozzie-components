@@ -170,6 +170,7 @@ export default {
             this.setCookieBannerCookie('full');
             this.setLegacyCookieBannerCookie();
             this.dataLayerPush('full');
+            this.resendEvents();
             this.shouldHideBanner = true;
         },
 
@@ -210,7 +211,13 @@ export default {
                 this.setLegacyCookieBannerCookie();
             } else {
                 const cookieConsent = CookieHelper.get(this.consentCookieName);
-                this.shouldHideBanner = cookieConsent === 'full' || cookieConsent === 'necessary';
+                const isConsentCookiePresent = cookieConsent === 'full' || cookieConsent === 'necessary';
+                if (isConsentCookiePresent) {
+                    this.shouldHideBanner = true;
+                } else {
+                    this.shouldHideBanner = false;
+                    this.dataLayerPush('shown');
+                }
             }
         },
 
