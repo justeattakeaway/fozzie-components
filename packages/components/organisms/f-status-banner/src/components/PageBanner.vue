@@ -3,7 +3,8 @@
         :class="[
             [$style['c-pageBanner']],
             [$style['c-pageBanner--tall']]
-        ]">
+        ]"
+        data-test-id="banner-image">
         <picture>
             <source
                 :srcset="srcSetWide"
