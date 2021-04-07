@@ -25,7 +25,7 @@ describe('New - f-cookieBanner component tests', () => {
 });
 
 describe('New - Multi-tenant - f-cookieBanner component tests', () => {
-    forEach(['dk', 'es', 'ie', 'it', 'no'])
+    forEach(['es', 'ie', 'it'])
     .it.only('should display the f-cookieBanner component', (tenant) => {
         // Arrange
         cookieBanner.open(tenant);
