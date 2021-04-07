@@ -29,3 +29,5 @@ export const ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE = 'basketNotOrderable';
 export const ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE = 'invalidModelState';
 export const ANALYTICS_ERROR_CODE_SET_ORDER_TIME = 'setOrderTime';
 export const ANALYTICS_ERROR_CODE_INVALID_ORDER_TIME = 'invalidOrderTime';
+
+export const DEFAULT_CHECKOUT_ISSUE = 'DEFAULT_CHECKOUT_ISSUE';

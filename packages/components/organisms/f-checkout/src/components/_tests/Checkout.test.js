@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import flushPromises from 'flush-promises';
 import { VueI18n } from '@justeat/f-globalisation';
 import { validations } from '@justeat/f-services';
+import VueScrollTo from 'vue-scrollto';
 import {
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     CHECKOUT_METHOD_DELIVERY,
@@ -71,6 +72,7 @@ describe('Checkout', () => {
     const placeOrderUrl = 'http://localhost/placeorder';
     const paymentPageUrlPrefix = 'http://localhost/paymentpage';
     const getGeoLocationUrl = 'http://localhost/geolocation';
+    const spinnerTimeout = 100;
 
     const applicationName = 'Jest';
 
@@ -85,7 +87,8 @@ describe('Checkout', () => {
         placeOrderUrl,
         paymentPageUrlPrefix,
         getGeoLocationUrl,
-        applicationName
+        applicationName,
+        spinnerTimeout
     };
 
     let windowLocationSpy;
@@ -261,7 +264,7 @@ describe('Checkout', () => {
         });
 
         describe('nonFulfillableError ::', () => {
-            describe('when `nonFulfillableError.openInDialog` is `true`', () => {
+            describe('when `nonFulfillableError` is an error in checkout issues', () => {
                 it('should show a mega modal displaying the error title and description', () => {
                     // Arrange
                     const fulfilmentTimeIssue = CheckoutIssues[ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE];
@@ -859,7 +862,7 @@ describe('Checkout', () => {
             });
 
             describe('when `isLoading` is `true`', () => {
-                it('should not set `shouldShowSpinner` to `true` before one second', () => {
+                it('should not set `shouldShowSpinner` to `true` before `spinnerTimeout`', () => {
                     // Arrange & Act
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore(),
@@ -874,13 +877,13 @@ describe('Checkout', () => {
                     });
 
                     wrapper.vm.startSpinnerCountdown();
-                    jest.advanceTimersByTime(999);
+                    jest.advanceTimersByTime(spinnerTimeout - 1);
 
                     // Assert
                     expect(wrapper.vm.shouldShowSpinner).toBe(false);
                 });
 
-                it('should set `shouldShowSpinner` to `true` after one second', () => {
+                it('should set `shouldShowSpinner` to `true` after `spinnerTimeout`', () => {
                     // Arrange & Act
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore(),
@@ -895,7 +898,7 @@ describe('Checkout', () => {
                     });
 
                     wrapper.vm.startSpinnerCountdown();
-                    jest.advanceTimersByTime(1000);
+                    jest.advanceTimersByTime(spinnerTimeout + 1);
 
                     // Assert
                     expect(wrapper.vm.shouldShowSpinner).toBe(true);
@@ -1858,6 +1861,7 @@ describe('Checkout', () => {
             let payload;
             let logInvokerSpy;
             let trackFormInteractionSpy;
+            let scrollToElementSpy;
 
             beforeEach(() => {
                 // Arrange
@@ -1885,6 +1889,7 @@ describe('Checkout', () => {
 
                 logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
                 trackFormInteractionSpy = jest.spyOn(wrapper.vm, 'trackFormInteraction');
+                scrollToElementSpy = jest.spyOn(wrapper.vm, 'scrollToElement');
             });
 
             afterEach(() => {
@@ -1943,6 +1948,73 @@ describe('Checkout', () => {
 
                 // Assert
                 expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${payload.error.message}` });
+            });
+
+            it('should call `scrollToElement` with "errorAlert"', async () => {
+                // Act
+                wrapper.vm.handleErrorState(payload);
+
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(scrollToElementSpy).toHaveBeenCalledWith('errorAlert');
+            });
+        });
+
+        describe('scrollToElement ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should call `scrollTo` with the element when it exists', () => {
+                // Arrange
+                const ref = 'errorAlert';
+                const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    },
+                    data () {
+                        return {
+                            genericErrorMessage: 'Some error'
+                        };
+                    }
+                });
+
+                const alertElement = wrapper.findComponent({ ref }).vm.$el;
+
+                // Act
+                wrapper.vm.scrollToElement(ref);
+
+                // Assert
+                expect(scrollToSpy).toHaveBeenCalledWith(alertElement, 650, { duration: 650, offset: -20 });
+            });
+
+            it('should call `scrollTo` with the element when it does not exists', () => {
+                // Arrange
+                const ref = 'errorAlert';
+                const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
+                });
+
+                // Act
+                wrapper.vm.scrollToElement(ref);
+
+                // Assert
+                expect(scrollToSpy).not.toHaveBeenCalled();
             });
         });
 

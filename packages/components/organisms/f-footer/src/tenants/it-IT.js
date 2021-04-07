@@ -162,6 +162,13 @@ export default {
                     url: '/informazioni/termini-e-condizioni',
                     text: 'Termini e Condizioni',
                     gtm: 'click_chi_siamo_termini_e_condizioni'
+                },
+                {
+                    url: 'https://secure.ethicspoint.eu/domain/media/it/gui/106834/index.html',
+                    text: 'Linea diretta per l’Etica',
+                    target: '_blank',
+                    rel: 'noopener',
+                    gtm: 'click_ethics_hotline'
                 }
             ]
         }

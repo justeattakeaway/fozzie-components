@@ -23,7 +23,7 @@ export default {
 <style lang="scss" module>
 
 .c-restaurantCarouselCard {
-    max-width: 400px;
+    max-width: 370px;
     text-align: center;
     margin: auto;
 }

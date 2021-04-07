@@ -178,6 +178,13 @@ export default {
                     url: '/info/cookies-policy',
                     text: 'Cookie Policy',
                     gtm: 'click_about_cookie_policy'
+                },
+                {
+                    url: 'https://secure.ethicspoint.eu/domain/media/en/gui/106834/index.html',
+                    text: 'Ethics hotline',
+                    target: '_blank',
+                    rel: 'noopener',
+                    gtm: 'click_ethics_hotline'
                 }
             ]
         }

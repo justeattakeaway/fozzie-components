@@ -4,6 +4,63 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.84.0
+------------------------------
+*April 6, 2021*
+
+### Added
+- Scrolling to the server-side error alert automatically.
+
+
+v0.83.0
+------------------------------
+*April 6, 2021*
+
+### Fixed
+- Error alert top margin.
+
+
+v0.82.0
+------------------------------
+*April 1, 2021*
+
+### Added
+- Ability to handle issues which we do not have stored
+
+
+v0.81.0
+------------------------------
+*April 1, 2021*
+
+### Added
+- Support for running tests on remote `Browserstack`.
+
+### Changed
+- Component test file structure to support `Browserstack`.
+
+### Fixed
+- Error message component test `isDisplayed` test to search displayed within viewport.
+
+
+v0.80.1
+------------------------------
+*April 1, 2021*
+
+### Added
+- o-links fozzie classes for the links
+
+
+v0.80.0
+------------------------------
+*March 31, 2021*
+
+### Added
+- spinnerTimeout prop that defaults to 500ms
+
+### Changed
+- Spinner shows after spinnerTimeout instead of hardcoded 1s
+
+
 v0.79.0
 ------------------------------
 *March 31, 2021*
@@ -17,7 +74,7 @@ v0.78.1
 *March 31, 2021*
 
 ### Changed
-- Load `address` into state via new `location` object. 
+- Load `address` into state via new `location` object.
 
 
 v0.78.0

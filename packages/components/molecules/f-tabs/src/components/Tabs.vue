@@ -26,7 +26,9 @@
 
 <script>
 
-import { DIRECTION } from '../constants';
+import { DIRECTION, INJECTIONS } from '../constants';
+
+const { REGISTER, TABS_COMPONENT, SELECT } = INJECTIONS;
 
 export default {
     name: 'Tabs',
@@ -64,10 +66,13 @@ export default {
         });
 
         return {
-            register (tab) {
+            [REGISTER]: tab => {
                 component.addTab(tab);
             },
-            tabsComponent
+            [SELECT]: name => {
+                component.selectTabIndex(name);
+            },
+            [TABS_COMPONENT]: tabsComponent
         };
     },
     methods: {
