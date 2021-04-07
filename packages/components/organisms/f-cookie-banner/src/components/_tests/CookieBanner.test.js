@@ -6,7 +6,7 @@ import CookieBanner from '../CookieBanner.vue';
 const localVue = createLocalVue();
 localVue.use(VueI18n);
 const i18n = {
-    locale: 'en-GB'
+    locale: 'en-IE'
 };
 
 describe('CookieBanner', () => {
@@ -63,6 +63,7 @@ describe('CookieBanner', () => {
                         dataLayer: []
                     }
                 });
+                window.dataLayer = [];
 
                 // Act
                 const wrapper = shallowMount(CookieBanner, {
@@ -83,7 +84,7 @@ describe('CookieBanner', () => {
                 [false, 'random value'],
                 [true, 'full'],
                 [true, 'necessary']
-            ])('shouldHideBanner should "%s" when `je-cookieConsent` value is "%s"', (
+            ])('shouldHideBanner should be "%s" when `je-cookieConsent` value is "%s"', (
                 expected,
                 cookieValue
             ) => {
@@ -104,6 +105,54 @@ describe('CookieBanner', () => {
 
                 // Assert
                 expect(wrapper.vm.shouldHideBanner).toBe(expected);
+            });
+
+            it('if no consent cookie is present, should push the value `shown` to the dataLayer ', () => {
+                // Arrange
+                const propsData = {};
+                const expected = { event: 'trackConsent', userData: { consent: 'shown' } };
+                Object.defineProperty(global, 'window', {
+                    value: {
+                        dataLayer: []
+                    }
+                });
+                window.dataLayer = [];
+                CookieHelper.remove('je-cookieConsent');
+
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    i18n,
+                    propsData
+                });
+                wrapper.vm.checkCookieBannerCookie();
+
+                // Assert
+                expect(window.dataLayer).toContainEqual(expected);
+            });
+
+            it('if consent cookie is present and set to `full`, should not push the value `shown` to the dataLayer ', () => {
+                // Arrange
+                const propsData = {};
+                const expected = { event: 'trackConsent', userData: { consent: 'shown' } };
+                Object.defineProperty(global, 'window', {
+                    value: {
+                        dataLayer: []
+                    }
+                });
+                window.dataLayer = [];
+                CookieHelper.set('je-cookieConsent', 'full');
+
+                // Act
+                const wrapper = shallowMount(CookieBanner, {
+                    localVue,
+                    i18n,
+                    propsData
+                });
+                wrapper.vm.checkCookieBannerCookie();
+
+                // Assert
+                expect(window.dataLayer).not.toContainEqual(expected);
             });
         });
 
