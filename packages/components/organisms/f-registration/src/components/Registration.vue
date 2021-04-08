@@ -18,7 +18,11 @@
                 ]"
                 data-test-id="create-account-login-link"
                 @click="visitLoginPage">
-                <a :href="loginUrl">{{ copy.navLinks.login.text }}</a>
+                <a
+                    class="o-link--bold o-link--noDecoration"
+                    :href="loginUrl">
+                    {{ copy.navLinks.login.text }}
+                </a>
             </p>
             <form
                 method="post"
@@ -144,16 +148,19 @@
             <p :class="$style['c-registration-link']">
                 {{ copy.navLinks.termsAndConditions.prefix }}
                 <a
+                    class="o-link--bold"
                     data-test-id="ts-and-cs-link"
                     :href="copy.navLinks.termsAndConditions.url"
                     target="_blank">{{ copy.navLinks.termsAndConditions.text }}</a>{{ copy.navLinks.termsAndConditions.suffix }}
                 {{ copy.navLinks.privacyPolicy.prefix }}
                 <a
+                    class="o-link--bold"
                     data-test-id="privacy-policy-link"
                     :href="copy.navLinks.privacyPolicy.url"
                     target="_blank">{{ copy.navLinks.privacyPolicy.text }}</a>
                 {{ copy.navLinks.cookiesPolicy.prefix }}
                 <a
+                    class="o-link--bold"
                     data-test-id="cookies-policy-link"
                     :href="copy.navLinks.cookiesPolicy.url"
                     target="_blank">{{ copy.navLinks.cookiesPolicy.text }}</a>{{ copy.navLinks.cookiesPolicy.suffix }}
@@ -494,21 +501,9 @@ $registration-icon-height--narrow : 74px;
 
     .c-registration-link {
         text-align: center;
-
-        a {
-            // TODO: check default link styles in PIE and update fozzie // (should be able to remove these styles then)
-            text-decoration: none;
-            font-weight: $font-weight-bold;
-
-            &:hover,
-            &:focus {
-                text-decoration: underline;
-            }
-        }
     }
 
         .c-registration-link--subtitle {
             margin-top: - spacing(); // shift the subtitle link closer to the main title
         }
-
 </style>

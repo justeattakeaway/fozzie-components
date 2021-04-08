@@ -15,24 +15,24 @@ module.exports = class Header extends Page {
 
     navigation = {
         offersIcon: {
-            get link () { return $(NAVIGATION.offersIcon.link) }
+            get link () { return $(NAVIGATION.offersIcon.link); }
         },
         offersLink: {
-            get link () { return $(NAVIGATION.offersLink.link) }
+            get link () { return $(NAVIGATION.offersLink.link); }
         },
         help: {
             get link () { return $(NAVIGATION.help.link); }
         },
         delivery: {
-            get link () { return $(NAVIGATION.delivery.link) },
+            get link () { return $(NAVIGATION.delivery.link); }
         },
         userAccount: {
             get link () { return $(NAVIGATION.userAccount.link); }
         },
         countrySelector: {
-            get link () { return $(NAVIGATION.countrySelector.link) },
+            get link () { return $(NAVIGATION.countrySelector.link); },
             get currentIcon () { return $(NAVIGATION.countrySelector.currentIcon); },
-            get countries () { return $$(NAVIGATION.countrySelector.countryList) }
+            get countries () { return $$(NAVIGATION.countrySelector.countryList); }
         }
     }
 
@@ -42,8 +42,21 @@ module.exports = class Header extends Page {
         this.countryValue = this.navigation.countrySelector.countries.filter(element => element.getAttribute('data-test-id').includes(country))[0];
     }
 
-    open (url) {
-        super.open(url);
+    /**
+     * @description
+     * Sets the data for the checkout component.
+     *
+     * @param {Object} header
+     * @param {String} header.locale The checkout type
+     * @param {String} header.offers The checkout authentication
+     * @param {String} header.delivery The checkout authentication
+     */
+    open (header) {
+        const countryFormatted = header.locale.toUpperCase();
+                throw new Error(`locale ${countryFormatted} is not supported`);
+        const offersUrl = header.offers ? '&knob-Show%20offers%20link=true' : '';
+        const deliveryUrl = header.delivery ? '&knob-Show%20delivery%20enquiry=true' : '';
+        super.openComponent('organism', `header-component&knob-Locale=${formattedLocale}${offersUrl}${deliveryUrl}`);
     }
 
     waitForComponent () {
@@ -58,12 +71,12 @@ module.exports = class Header extends Page {
         return this.logo.isDisplayed();
     }
 
-    isFieldLinkDisplayed (fieldName) {
-        return this.navigation[fieldName].link.isDisplayedInViewport();
+    isNavigationLinkDisplayed (linkName) {
+        return this.navigation[linkName].link.isDisplayedInViewport();
     }
 
     isCurrentCountryIconDisplayed (country) {
-        let expectedIcon = this.navigation.countrySelector.currentIcon.getAttribute('class').includes(`c-ficon--flag.${country}.round`);
+        const expectedIcon = this.navigation.countrySelector.currentIcon.getAttribute('class').includes(`c-ficon--flag.${country}.round`);
         return expectedIcon ? this.navigation.countrySelector.currentIcon.isDisplayed() : false;
     }
 
@@ -75,14 +88,9 @@ module.exports = class Header extends Page {
         return this.mobileNavigationBar.isDisplayed();
     }
 
-    // saving these for another ticket
-    // isMobileOffersIconDisplayed(){
-    //     return this.mobileOffersIcon.length === 1 && element[0].isDisplayed();
-    // }
-
-    // isWebOffersIconDisplayed(){
-    //     return this.webOffersIcon.length === 1 && element[0].isDisplayed();
-    // }
+    isOffersIconLinkDisplayed () {
+        return this.navigation.offersIcon.isDisplayed();
+    }
 
     isNavigationLinkDisplayed (linkName) {
         return this.navigation[linkName].link.isDisplayedInViewport();

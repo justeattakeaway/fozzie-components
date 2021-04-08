@@ -1,7 +1,7 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
-import { VUEX_CHECKOUT_ANALYTICS_MODULE } from '../constants';
+import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../constants';
 import { version as applicationVerion } from '../../package.json';
 
 import {
@@ -123,7 +123,15 @@ export default {
             const { issues, isFulfillable } = responseData;
 
             // Can now log these errors inside the map if necessary
-            const detailedIssues = issues.map(issue => ({ ...checkoutIssues[issue.code], ...issue }));
+            const detailedIssues = issues.map(issue => {
+                const checkoutIssue = checkoutIssues[issue.code];
+
+                if (checkoutIssue) {
+                    return { ...checkoutIssue, ...issue };
+                }
+
+                return { code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true };
+            });
 
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
@@ -349,7 +357,7 @@ export default {
             id,
             serviceType,
             customer,
-            address,
+            location,
             time,
             isFulfillable,
             notices,
@@ -365,7 +373,8 @@ export default {
 
             state.time = time;
 
-            if (address) {
+            if (location && location.address) {
+                const { address } = location;
                 /* eslint-disable prefer-destructuring */
                 state.address.line1 = address.lines[0];
                 state.address.line2 = address.lines[1];

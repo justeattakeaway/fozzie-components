@@ -5,8 +5,8 @@ const checkout = new Checkout('organism', 'checkout-component');
 
 describe('f-checkout "invalid" component tests', () => {
     beforeEach(() => {
-        checkout.withQuery('&knob-Service Type', 'delivery')
-        .withQuery('&knob-Is User Logged In', false);
+        checkout.withQuery('&knob-Service Type', 'Invalid URL')
+        .withQuery('&knob-Is User Logged In', true);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 

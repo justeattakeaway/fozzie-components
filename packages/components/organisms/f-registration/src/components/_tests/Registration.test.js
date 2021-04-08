@@ -10,7 +10,7 @@ let wrapper;
 
 describe('Registration', () => {
     const propsData = {
-        locale: "en-GB",
+        locale: 'en-GB',
         createAccountUrl: 'http://localhost/account/register',
         showLoginLink: true,
         loginUrl: '/account/register'
@@ -299,7 +299,7 @@ describe('Registration', () => {
 
             it('should show error message and emit failure event when the last name field is not populated', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="formfield-firstName-input"]').setValue('Adam');
+                wrapper.find('[data-test-id="formfield-firstName-input"]').setValue('Joe');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -358,10 +358,10 @@ describe('Registration', () => {
 
             it('should allow input and emit success event when the password field is populated with a long input', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="formfield-firstName-input"]').setValue('Ashton');
-                wrapper.find('[data-test-id="formfield-lastName-input"]').setValue('Adamms');
-                wrapper.find('[data-test-id="formfield-email-input"]').setValue('ashton.adamms+jetest@just-eat.com');
-                wrapper.find('[data-test-id="formfield-password-input"]').setValue('llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch');
+                wrapper.find('[data-test-id="formfield-firstName-input"]').setValue('Joe');
+                wrapper.find('[data-test-id="formfield-lastName-input"]').setValue('Test');
+                wrapper.find('[data-test-id="formfield-email-input"]').setValue('joe@test.com');
+                wrapper.find('[data-test-id="formfield-password-input"]').setValue('llanfairpwllgwyngyllgogerychwyrndrobwlllgwyngyllgogerychwyrndrobwllllantysiliogogogoch');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -432,10 +432,10 @@ describe('Registration', () => {
 
             it('should emit success event when all fields are populated correctly', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="formfield-firstName-input"]').setValue('James');
-                wrapper.find('[data-test-id="formfield-lastName-input"]').setValue('O\'Neil-Wight');
-                wrapper.find('[data-test-id="formfield-email-input"]').setValue('ashton.adamms+jetest@just-eat.com');
-                wrapper.find('[data-test-id="formfield-password-input"]').setValue('Secure123');
+                wrapper.find('[data-test-id="formfield-firstName-input"]').setValue('Joe');
+                wrapper.find('[data-test-id="formfield-lastName-input"]').setValue('O\'Test');
+                wrapper.find('[data-test-id="formfield-email-input"]').setValue('joe@test.com');
+                wrapper.find('[data-test-id="formfield-password-input"]').setValue('abc123');
 
                 // Act
                 await wrapper.vm.onFormSubmit();

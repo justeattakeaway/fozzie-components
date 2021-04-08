@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-tabs",
   "description": "Fozzie Tabs – Switchable slots for content&#34;",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "dist/f-tabs.umd.min.js",
   "files": [
     "dist",

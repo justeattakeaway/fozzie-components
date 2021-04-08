@@ -20,13 +20,18 @@
 </template>
 
 <script>
-import { DIRECTION } from '../constants';
+import { DIRECTION, INJECTIONS } from '../constants';
+
+const {
+    REGISTER,
+    SELECT,
+    TABS_COMPONENT
+} = INJECTIONS;
 
 export default {
     name: 'Tab',
 
     props: {
-
         title: {
             required: true,
             type: String
@@ -43,25 +48,34 @@ export default {
         }
     },
 
-    inject: ['register', 'tabsComponent'],
+    inject: [REGISTER, SELECT, TABS_COMPONENT],
 
     computed: {
-
         isActive () {
-            return this.tabsComponent.activeTab === this.name;
+            return this[TABS_COMPONENT].activeTab === this.name;
         },
 
         transitionName () {
-            return this.tabsComponent.animationDirection === DIRECTION.LEFT ?
-                this.$style['fade-in-right'] : this.$style['fade-in-left'];
+            return this[TABS_COMPONENT].animationDirection === DIRECTION.LEFT
+                ? this.$style['fade-in-right']
+                : this.$style['fade-in-left'];
         },
 
         animateTab () {
-            return this.tabsComponent.animate;
+            return this[TABS_COMPONENT].animate;
         }
     },
+
+    watch: {
+        selected (current, previous) {
+            if (current && !previous) {
+                this[SELECT](this.name);
+            }
+        }
+    },
+
     created () {
-        this.register({
+        this[REGISTER]({
             name: this.name,
             title: this.title,
             selected: this.selected

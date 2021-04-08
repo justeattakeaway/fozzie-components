@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.4.0
+------------------------------
+*April 1, 2021*
+
+### Fixed
+- When tab selection is updated in `Tab` props, ensures that the focus is reflected back
+  to surrounding `Tabs` component
+
+### Changed
+- Factored out Tabs' `provide` keys to constants
+
+
 v0.3.0
 ------------------------------
 *March 3, 2021*

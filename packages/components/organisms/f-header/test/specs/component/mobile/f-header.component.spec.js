@@ -4,7 +4,13 @@ const header = new Header();
 
 describe('Mobile - f-header component tests', () => {
     beforeEach(() => {
-        header.open();
+        const headerData = {
+            locale: 'gb',
+            offers: true,
+            delivery: true
+        };
+
+        header.open(headerData);
         header.waitForComponent();
 
         if (process.env.JE_ENV !== 'browserstack') {
@@ -12,24 +18,96 @@ describe('Mobile - f-header component tests', () => {
         }
     });
 
-    forEach(['help', 'delivery', 'userAccount', 'countrySelector'])
-    .it('should hide all navigation links, except offersIcon link, when in mobile mode', field => {
-        // Act
-        header.openWithExtraFeatures();
-
-        // Assert
-        expect(header.isMobileNavigationBarDisplayed()).toBe(true);
-        expect(header.isFieldLinkDisplayed(field)).toBe(false);
-        expect(header.isFieldLinkDisplayed('offersIcon')).toBe(true);
-    });
-
-    forEach(['help', 'countrySelector', 'userAccount'])
-    .it('should display navigation fields when burger menu has been opened', field => {
+    forEach(['offersLink', 'delivery', 'help', 'countrySelector', 'userAccount'])
+    .it('should display all navigation links', link => {
         // Act
         header.openMobileNavigation();
 
         // Assert
-        expect(header.isFieldLinkDisplayed(field)).toBe(true);
+        expect(header.isNavigationLinkDisplayed(link)).toBe(true);
+    });
+
+    forEach(['au', 'ie', 'nz'])
+    .it('should hide all navigation links but display offersIcon link, when in mobile mode', expectedLocale => {
+        // Arrange
+        const headerData = {
+            locale: expectedLocale,
+            offers: true,
+            delivery: true
+        };
+
+        ['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'].forEach(link => {
+            // Act
+            header.open(headerData);
+            header.waitForComponent();
+
+            // Assert
+            expect(header.isMobileNavigationBarDisplayed()).toBe(true);
+            expect(header.isNavigationLinkDisplayed(link)).toBe(false);
+            expect(header.isNavigationLinkDisplayed('offersIcon')).toBe(true);
+        });
+    });
+
+    forEach(['it', 'es', 'dk', 'no'])
+    .it('should hide all navigation links, as well as offersIcon, when in mobile mode', expectedLocale => {
+        // Arrange
+        const headerData = {
+            locale: expectedLocale,
+            offers: true,
+            delivery: true
+        };
+
+        ['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'].forEach(link => {
+            // Act
+            header.open(headerData);
+            header.waitForComponent();
+
+            // Assert
+            expect(header.isMobileNavigationBarDisplayed()).toBe(true);
+            expect(header.isNavigationLinkDisplayed(link)).toBe(false);
+        });
+    });
+
+    forEach(['au', 'ie', 'nz'])
+    .it('should display navigation links when burger menu is opened', expectedLocale => {
+        // Arrange
+        const headerData = {
+            locale: expectedLocale,
+            offers: true,
+            delivery: true
+        };
+
+        ['offersLink', 'userAccount', 'help', 'countrySelector'].forEach(link => {
+            // Act
+            header.open(headerData);
+            header.openMobileNavigation();
+            header.waitForComponent();
+
+            // Assert
+            expect(header.isNavigationLinkDisplayed(link)).toBe(true);
+        });
+    });
+
+    forEach(['it', 'es', 'dk', 'no'])
+    .it('should display the below navigation links when menu has been opened', expectedLocale => {
+        // Arrange
+        const headerData = {
+            locale: expectedLocale,
+            offers: true,
+            delivery: true
+        };
+
+        ['userAccount', 'help', 'countrySelector'].forEach(link => {
+            // Act
+            header.open(headerData);
+            header.openMobileNavigation();
+            header.waitForComponent();
+
+            // Assert
+            expect(header.isNavigationLinkDisplayed(link)).toBe(true);
+            expect(header.isNavigationLinkDisplayed('offersLink')).toBe(false);
+            expect(header.isNavigationLinkDisplayed('delivery')).toBe(false);
+        });
     });
 
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])

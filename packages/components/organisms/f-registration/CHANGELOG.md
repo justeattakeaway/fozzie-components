@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.49.2
+------------------------------
+*March 31, 2021*
+
+### Added
+- `o-link` fozzie classes for the links.
+
+### Changed
+- user email and password in unit and component tests
+
+
 v0.49.1
 ------------------------------
 *March 23, 2021*

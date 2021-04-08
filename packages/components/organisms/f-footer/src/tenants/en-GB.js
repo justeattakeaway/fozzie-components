@@ -206,6 +206,13 @@ export default {
                     target: '_blank',
                     rel: 'noopener',
                     gtm: 'click_about_modern_slavery_statement'
+                },
+                {
+                    url: 'https://secure.ethicspoint.eu/domain/media/en/gui/106834/index.html',
+                    text: 'Ethics hotline',
+                    target: '_blank',
+                    rel: 'noopener',
+                    gtm: 'click_ethics_hotline'
                 }
             ]
         }

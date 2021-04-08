@@ -90,6 +90,12 @@ const messages = {
                 title: 'The restaurant doesn\'t deliver to this address',
                 message: 'Search for a different restaurant or change to a collection order.',
                 buttonText: 'OK'
+            },
+
+            DEFAULT_CHECKOUT_ISSUE: {
+                title: 'Something went wrong',
+                message: 'Please try again',
+                buttonText: 'Retry'
             }
         }
     },

@@ -2301,6 +2301,13 @@
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
+"@justeat/f-wdio-utils@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.1.1.tgz#5cb05f96f718566fdb844ff33c000696a12b2877"
+  integrity sha512-G80OwVKXxpwGS64+TTGIeeB3ctberVoFPotsX2QiFpBsAisR2p2j/uVzPTtyg2peP+5rvTwdTPBy9o9Z7uxyDw==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
+
 "@justeat/fozzie-colour-palette@3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@justeat/fozzie-colour-palette/-/fozzie-colour-palette-3.1.0.tgz#3bbe51404025c5ef8c5e8bf8280a266e51d2a640"
@@ -6817,6 +6824,11 @@ better-opn@^2.0.0:
   integrity sha512-kIPXZS5qwyKiX/HcRvDYfmBQUa8XP17I0mYZZ0y4UhpYOSvtsLHDYqmomS+Mj20aDvD3knEiQ0ecQy2nhio3yA==
   dependencies:
     open "^7.0.3"
+
+bezier-easing@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/bezier-easing/-/bezier-easing-2.1.0.tgz#c04dfe8b926d6ecaca1813d69ff179b7c2025d86"
+  integrity sha1-wE3+i5JtbsrKGBPWn/F5t8ICXYY=
 
 bfj@^6.1.1:
   version "6.1.2"
@@ -24003,6 +24015,13 @@ vue-loader@^15.4.2, vue-loader@^15.9.2:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
+
+vue-scrollto@2.20.0:
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/vue-scrollto/-/vue-scrollto-2.20.0.tgz#3ba52239a62710c97003d12d4393f1f3393cd5cc"
+  integrity sha512-7i+AGKJTThZnMEkhIPgrZjyAX+fXV7/rGdg+CV283uZZwCxwiMXaBLTmIc5RTA4uwGnT+E6eJle3mXQfM2OD3A==
+  dependencies:
+    bezier-easing "2.1.0"
 
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
   version "4.1.3"

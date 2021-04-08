@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-footer",
-  "version": "4.15.0",
+  "version": "4.17.0",
   "main": "dist/f-footer.umd.min.js",
   "files": [
     "dist",
