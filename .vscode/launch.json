@@ -39,7 +39,7 @@
             "name": "Run Single Spec - Component - Browserstack",
             "type": "node",
             "request": "launch",
-            "args": ["wdio-browserstack.conf.js", "--spec", "${file}"],
+            "args": ["wdio-browserstack.conf.js", "--spec", "${file}", "--mochaOpts.grep", "@browserstack"],
             "cwd": "${workspaceFolder}",
             "autoAttachChildProcesses": true,
             "program": "${workspaceRoot}/node_modules/@wdio/cli/bin/wdio.js",

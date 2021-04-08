@@ -1,14 +1,14 @@
-const CookieBanner = require('../../../../test-utils/component-objects/f-cookieBanner-legacy.component');
+const CookieBanner = require('../../../test-utils/component-objects/f-cookieBanner-legacy.component');
 const cookieBanner = new CookieBanner();
 import forEach from 'mocha-each';
 
-describe('Legacy - f-cookieBanner component tests', () => {
+describe('Legacy - f-cookieBanner component tests @browserstack', () => {
     beforeEach(() => {
         cookieBanner.open();
         cookieBanner.waitForComponent();
     });
 
-    it('should set "je-cookie_banner" cookie when dismissed', () => {
+    it('should set "je-cookie_banner" cookie when dismissed.', () => {
         // Act
         cookieBanner.close();
 

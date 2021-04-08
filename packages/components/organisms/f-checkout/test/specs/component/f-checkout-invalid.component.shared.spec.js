@@ -1,7 +1,7 @@
-const Checkout = require('../../../../test-utils/component-objects/f-checkout.component');
+const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
 const checkout = new Checkout();
 
-describe('f-checkout "invalid" component tests', () => {
+describe('f-checkout "invalid" component tests - @browserstack', () => {
     beforeEach(() => {
         const checkoutData = {
             type: 'collection',

@@ -1,9 +1,9 @@
 const forEach = require('mocha-each');
-const Footer = require('../../../../test-utils/component-objects/f-footer.component');
+const Footer = require('../../../test-utils/component-objects/f-footer.component');
 
 const footer = new Footer();
 
-describe('Shared - f-footer component tests', () => {
+describe('Desktop - f-footer component tests - @browserstack', () => {
     beforeEach(() => {
         const footerData = {
             locale: 'gb',
@@ -15,16 +15,46 @@ describe('Shared - f-footer component tests', () => {
         footer.waitForComponent();
     });
 
+    forEach([['ios', 'apple'], ['android', 'google'], ['huawei', 'appgallery']])
+    .it('should display download icons and link to correct URL', (icon, expectedUrl) => {
+        // Act
+        footer.expectedDownloadIcon = icon;
+
+        // Assert
+        expect(footer.isDownloadIconDisplayed()).toBe(true);
+
+        // Act
+        footer.clickDownloadIcon();
+
+        // Assert
+        expect(browser.getUrl()).toContain(expectedUrl);
+    });
+
+    forEach([['twitter', 'twitter.com'], ['facebook', 'facebook.com'], ['youtube', 'youtube.com']])
+    .it('should display social media icons', (icon, expectedUrl) => {
+        // Act
+        footer.expectedSocialIcon = icon;
+
+        // Assert
+        expect(footer.isSocialIconDisplayed()).toBe(true);
+
+        // Act
+        footer.clickSocialIcon();
+
+        // Assert
+        expect(browser.getUrl()).toContain(expectedUrl);
+    });
+
     it('should display the footer', () => {
         // Assert
         expect(footer.isComponentDisplayed()).toBe(true);
     });
 
-    forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should not show courier links and country selector when options are unselected', expectedLocale => {
+    forEach(['au', 'nz', 'ie', 'dk', 'es', 'it', 'no'])
+    .it('should not show courier links and country selector when options are unselected', tenant => {
         // Arrange
         const footerData = {
-            locale: expectedLocale,
+            locale: expectedLocale, // fix this
             courierLinks: false,
             countrySelector: false
         };
@@ -38,11 +68,11 @@ describe('Shared - f-footer component tests', () => {
         expect(footer.isCountrySelectorDisplayed()).toBe(false);
     });
 
-    forEach(['au', 'ie', 'nz'])
-    .it('should show courier links when option is selected', expectedLocale => {
+    forEach(['au', 'nz', 'ie'])
+    .it('should show courier links when option is selected', () => {
         // Arrange
         const footerData = {
-            locale: expectedLocale,
+            locale: expectedLocale, // fix this
             courierLinks: true,
             countrySelector: false
         };
@@ -56,10 +86,10 @@ describe('Shared - f-footer component tests', () => {
     });
 
     forEach(['gb', 'es', 'it', 'no'])
-    .it('should never show courier links, even when option is selected', expectedLocale => {
+    .it('should never show courier links, even when option is selected', () => {
         // Arrange
         const footerData = {
-            locale: expectedLocale,
+            locale: expectedLocale, // fix this
             courierLinks: true,
             countrySelector: false
         };
@@ -72,11 +102,11 @@ describe('Shared - f-footer component tests', () => {
         expect(footer.areCourierLinksDisplayed()).toBe(false);
     });
 
-    forEach(['au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should always show country selector when selected', expectedLocale => {
+    forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
+    .it('should always show country selector when selected', () => {
         // Arrange
         const footerData = {
-            locale: expectedLocale,
+            locale: expectedLocale, // fix this
             courierLinks: false,
             countrySelector: true
         };
@@ -89,11 +119,11 @@ describe('Shared - f-footer component tests', () => {
         expect(footer.isCountrySelectorDisplayed()).toBe(true);
     });
 
-    forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
-    .it('should display the corresponding icon for each locale selected', expectedLocale => {
+    forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
+    .it('should display the corresponding icon for each locale selected', () => {
         // Arrange
         const footerData = {
-            locale: expectedLocale,
+            locale: expectedLocale, // fix this
             courierLinks: false,
             countrySelector: true
         };
