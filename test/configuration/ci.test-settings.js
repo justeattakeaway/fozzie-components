@@ -1,3 +1,5 @@
+const video = require('wdio-video-reporter');
+
 const settings = () => ({
     baseUrl: 'http://localhost:8080',
     bail: 1,

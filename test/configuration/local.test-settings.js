@@ -1,5 +1,6 @@
 const { JE_ENV } = process.env;
 const { COMPONENT_TYPE } = process.env;
+const video = require('wdio-video-reporter');
 
 const settings = () => ({
     baseUrl: 'http://localhost:8080',
