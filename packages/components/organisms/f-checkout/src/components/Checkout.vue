@@ -135,6 +135,7 @@ import {
     VUEX_CHECKOUT_MODULE
 } from '../constants';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
+import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
@@ -158,7 +159,7 @@ export default {
         ErrorDialog
     },
 
-    mixins: [validationMixin, VueGlobalisationMixin, checkoutValidationsMixin],
+    mixins: [validationMixin, VueGlobalisationMixin, checkoutValidationsMixin, loggerMixin],
 
     props: {
         getCheckoutUrl: {
@@ -478,22 +479,10 @@ export default {
 
                 this.trackFormErrors();
 
-                this.logInvoker('Consumer Checkout Not Fulfillable', this.eventData, this.$logger.logWarn);
+                this.logInvoker('Consumer Checkout Not Fulfillable', { ...this.eventData }, this.$logger.logWarn);
 
                 this.$emit(EventNames.CheckoutUpdateFailure, this.eventData);
             }
-        },
-
-        /**
-         * Log a message at the specified level.
-         *
-         */
-        logInvoker (message, eventData, callback) {
-            callback(
-                message,
-                this.$store,
-                eventData
-            );
         },
 
         /**
@@ -559,7 +548,7 @@ export default {
                 this.$emit(EventNames.CheckoutPlaceOrderSuccess, this.eventData);
                 this.$emit(EventNames.CheckoutSuccess, this.eventData);
 
-                this.logInvoker('Consumer Checkout Successful', this.eventData, this.$logger.logInfo);
+                this.logInvoker('Consumer Checkout Successful', { ...this.eventData }, this.$logger.logInfo);
             } catch (e) {
                 throw new PlaceOrderError(e.message);
             }
@@ -604,15 +593,11 @@ export default {
                 });
 
                 this.$emit(EventNames.CheckoutGetSuccess);
-            } catch (e) {
-                this.$emit(EventNames.CheckoutGetFailure, e);
+            } catch (error) {
+                this.$emit(EventNames.CheckoutGetFailure, error);
                 this.hasCheckoutLoadedSuccessfully = false;
 
-                this.$logger.logError(
-                    'Get Checkout Failure',
-                    this.$store,
-                    { e }
-                );
+                this.logInvoker('Get Checkout Failure', { ...this.eventData, error }, this.$logger.logError);
             }
         },
 
@@ -630,15 +615,11 @@ export default {
                 });
 
                 this.$emit(EventNames.CheckoutBasketGetSuccess);
-            } catch (e) {
-                this.$emit(EventNames.CheckoutBasketGetFailure, e);
+            } catch (error) {
+                this.$emit(EventNames.CheckoutBasketGetFailure, error);
                 this.hasCheckoutLoadedSuccessfully = false;
 
-                this.$logger.logError(
-                    'Get Checkout Basket Failure',
-                    this.$store,
-                    { e }
-                );
+                this.logInvoker('Get Checkout Basket Failure', { ...this.eventData, error }, this.$logger.logError);
             }
         },
 
@@ -654,15 +635,11 @@ export default {
                 });
 
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetSuccess);
-            } catch (e) {
-                this.$emit(EventNames.CheckoutAvailableFulfilmentGetFailure, e);
+            } catch (error) {
+                this.$emit(EventNames.CheckoutAvailableFulfilmentGetFailure, error);
                 this.hasCheckoutLoadedSuccessfully = false;
 
-                this.$logger.logError(
-                    'Get Checkout Available Fulfilment Times Failure',
-                    this.$store,
-                    { e }
-                );
+                this.logInvoker('Get Checkout Available Fulfilment Times Failure', { ...this.eventData, error }, this.$logger.logError);
             }
         },
 
@@ -679,9 +656,10 @@ export default {
                     timeout: this.checkoutTimeout
                 });
                 this.$emit(EventNames.CheckoutAddressGetSuccess);
-            } catch (e) {
-                this.$emit(EventNames.CheckoutAddressGetFailure, e);
-                this.$logger.logWarn('Get checkout address failure', this.$store, { e });
+            } catch (error) {
+                this.$emit(EventNames.CheckoutAddressGetFailure, error);
+
+                this.logInvoker('Get checkout address failure', this.eventData, this.$logger.logWarn, error);
             }
         },
 
@@ -702,8 +680,9 @@ export default {
                         timeout: this.checkoutTimeout
                     });
                 }
-            } catch (e) {
-                this.logInvoker('Geo Location Lookup Failed', this.eventData, this.$logger.logWarn);
+                this.foo();
+            } catch (error) {
+                this.logInvoker('Geo Location Lookup Failed', this.eventData, this.$logger.logWarn, error);
             }
         },
 
@@ -763,11 +742,7 @@ export default {
                 error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
             });
 
-            this.$logger.logWarn(
-                'Checkout Validation Error',
-                this.$store,
-                validationState
-            );
+            this.logInvoker('Checkout Validation Error', { ...this.eventData, validationState }, this.$logger.logWarn);
         },
 
         /**
