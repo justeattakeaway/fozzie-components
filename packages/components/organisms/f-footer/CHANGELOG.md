@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.18.0
+------------------------------
+*April 8, 2021*
+
+### Added
+- Selectors in `f-footer.selectors.js` for footer blocks
+- Test supporting code in `f-footer.component.js` to test visibility and clickability of certain elements
+- Tests for footer blocks
+- `mobile` folder to run mobile specific tests in Browserstack
+- `data-test-id`s in `FeedbackBlock.vue`, `Footer.vue` and `LinkList.vue` to test specific blocks and buttons.
+
+
 v4.17.0
 ------------------------------
 *April 6, 2021*

@@ -31,7 +31,8 @@
         <ul
             :id="listId"
             :aria-labelledby="listHeadingId"
-            :class="$style['c-footer-list']">
+            :class="$style['c-footer-list']"
+            data-test-id="footer-link-list">
             <li
                 v-for="(link, i) in linkList.links"
                 :key="i + '_Link'">
