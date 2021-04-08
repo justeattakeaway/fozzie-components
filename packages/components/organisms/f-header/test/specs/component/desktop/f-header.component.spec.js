@@ -62,8 +62,8 @@ describe('Desktop - f-header component tests', () => {
         });
     });
 
-    forEach([['gb', '.co.uk'], ['au', 'au'], ['at', 'at'], ['be', 'be-en'], ['bg', 'bg'], ['ca_en', 'skipthedishes.com'], ['jet_fr', '.fr'], ['de', '.de'], ['ie', '.ie'], ['il', '.il'], ['it', '.it']])
-    .it('should display all countries and redirect to correct URL', (expectedLocale, expectedUrl) => {  //dk and no disabled for now
+    forEach([['gb', '.co.uk'], ['dk', '.dk'], ['no', '.no'], ['au', 'au'], ['at', 'at'], ['be', 'be-en'], ['bg', 'bg'], ['ca_en', 'skipthedishes.com'], ['jet_fr', '.fr'], ['de', '.de'], ['ie', '.ie'], ['il', '.il'], ['it', '.it']])
+    .it.only('should display all countries and redirect to correct URL', (expectedLocale, expectedUrl) => {
         // Act
         header.moveToCountrySelector();
         header.expectedCountry = expectedLocale;
