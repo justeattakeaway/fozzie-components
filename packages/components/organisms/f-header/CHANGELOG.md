@@ -10,7 +10,7 @@ Latest (add to next release)
 
 ### Changed
 - Disabled `dk` and `no` from country selector test
-- Refactored large country selector test
+- Refactored large country selector test into two separate tests
 
 *March 31, 2021*
 
