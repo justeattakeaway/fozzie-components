@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (add to next release)
 ------------------------------
+*April 8, 2021*
+
+### Changed
+- Disabled `dk` and `no` from country selector test
+- Refactored large country selector test
+
 *March 31, 2021*
 
 ### Added
