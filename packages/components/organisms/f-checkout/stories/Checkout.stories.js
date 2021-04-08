@@ -46,7 +46,7 @@ CheckoutMock.setupCheckoutMethod(placeOrderUrl);
 CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
 CheckoutMock.passThroughAny();
 
-const checkoutIssues = 'Checkout Issues (response from server but order not fulfilalble)';
+const checkoutIssues = 'Checkout Issues (response from server but order not fulfillable)';
 const serverError = 'Server Error (Response from server is unsuccessful HTTP error code)';
 const ISSUES = 'ISSUES';
 const SERVER = 'SERVER';
