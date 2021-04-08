@@ -160,7 +160,6 @@ export default {
             const otac = response.data.token;
             const authToken = await otacToAuthExchanger(otac);
             commit(UPDATE_AUTH_GUEST, authToken);
-            // TODO: Use otac to log the user in
         },
 
         /**
