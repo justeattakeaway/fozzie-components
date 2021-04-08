@@ -13,7 +13,7 @@ exports.a11y = () => ({
 });
 
 exports.component = () => ({
-    specs: [`${global.baseDir}/test/specs/component/*.component.spec.js`]
+    specs: [`${global.baseDir}/test/specs/component/*.component.*.spec.js`]
 });
 
 exports.setTestType = () => (TEST_TYPE === 'component' ? exports.component() : exports.a11y());

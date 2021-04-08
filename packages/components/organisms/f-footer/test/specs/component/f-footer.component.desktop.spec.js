@@ -50,11 +50,11 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         expect(footer.isComponentDisplayed()).toBe(true);
     });
 
-    forEach(['au', 'nz', 'ie', 'dk', 'es', 'it', 'no'])
-    .it('should not show courier links and country selector when options are unselected', tenant => {
+    forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
+    .it('should not show courier links and country selector when options are unselected', expectedLocale => {
         // Arrange
         const footerData = {
-            locale: expectedLocale, // fix this
+            locale: expectedLocale,
             courierLinks: false,
             countrySelector: false
         };
@@ -68,11 +68,11 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         expect(footer.isCountrySelectorDisplayed()).toBe(false);
     });
 
-    forEach(['au', 'nz', 'ie'])
-    .it('should show courier links when option is selected', () => {
+    forEach(['au', 'ie', 'nz'])
+    .it('should show courier links when option is selected', expectedLocale => {
         // Arrange
         const footerData = {
-            locale: expectedLocale, // fix this
+            locale: expectedLocale,
             courierLinks: true,
             countrySelector: false
         };
@@ -89,7 +89,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     .it('should never show courier links, even when option is selected', () => {
         // Arrange
         const footerData = {
-            locale: expectedLocale, // fix this
+            locale: expectedLocale,
             courierLinks: true,
             countrySelector: false
         };
@@ -102,11 +102,11 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         expect(footer.areCourierLinksDisplayed()).toBe(false);
     });
 
-    forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should always show country selector when selected', () => {
+    forEach(['au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
+    .it('should always show country selector when selected', expectedLocale => {
         // Arrange
         const footerData = {
-            locale: expectedLocale, // fix this
+            locale: expectedLocale,
             courierLinks: false,
             countrySelector: true
         };
@@ -120,10 +120,10 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should display the corresponding icon for each locale selected', () => {
+    .it('should display the corresponding icon for each locale selected', expectedLocale => {
         // Arrange
         const footerData = {
-            locale: expectedLocale, // fix this
+            locale: expectedLocale,
             courierLinks: false,
             countrySelector: true
         };
