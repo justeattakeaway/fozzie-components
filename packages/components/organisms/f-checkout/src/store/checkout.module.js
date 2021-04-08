@@ -158,7 +158,7 @@ export default {
             const response = await axios.post(url, data, config);
             // eslint-disable-next-line no-unused-vars
             const otac = response.data.token;
-            const authToken = otacToAuthExchanger(otac);
+            const authToken = await otacToAuthExchanger(otac);
             commit(UPDATE_AUTH_GUEST, authToken);
             // TODO: Use otac to log the user in
         },
