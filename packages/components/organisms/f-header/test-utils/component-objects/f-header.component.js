@@ -14,22 +14,25 @@ module.exports = class Header extends Page {
     get mobileNavigationBar () { return $(MOBILE_NAVIGATION_BAR); }
 
     navigation = {
-        offers: {
-            get link () { return $(NAVIGATION.offers.link); }
+        offersIcon: {
+            get link () { return $(NAVIGATION.offersIcon.link) }
+        },
+        offersLink: {
+            get link () { return $(NAVIGATION.offersLink.link) }
         },
         help: {
             get link () { return $(NAVIGATION.help.link); }
         },
         delivery: {
-            get link () { return $(NAVIGATION.delivery.link); }
+            get link () { return $(NAVIGATION.delivery.link) },
         },
         userAccount: {
             get link () { return $(NAVIGATION.userAccount.link); }
         },
         countrySelector: {
-            get link () { return $(NAVIGATION.countrySelector.link); },
+            get link () { return $(NAVIGATION.countrySelector.link) },
             get currentIcon () { return $(NAVIGATION.countrySelector.currentIcon); },
-            get countries () { return $$(NAVIGATION.countrySelector.countryList); }
+            get countries () { return $$(NAVIGATION.countrySelector.countryList) }
         }
     }
 
@@ -60,7 +63,7 @@ module.exports = class Header extends Page {
     }
 
     isCurrentCountryIconDisplayed (country) {
-        const expectedIcon = this.navigation.countrySelector.currentIcon.getAttribute('class').includes(`c-ficon--flag.${country}.round`);
+        let expectedIcon = this.navigation.countrySelector.currentIcon.getAttribute('class').includes(`c-ficon--flag.${country}.round`);
         return expectedIcon ? this.navigation.countrySelector.currentIcon.isDisplayed() : false;
     }
 
@@ -81,8 +84,12 @@ module.exports = class Header extends Page {
     //     return this.webOffersIcon.length === 1 && element[0].isDisplayed();
     // }
 
+    isNavigationLinkDisplayed (linkName) {
+        return this.navigation[linkName].link.isDisplayedInViewport();
+    }
+
     clickOffersLink () {
-        return this.navigation.offers.link.click();
+        return this.navigation.offersLink.link.click();
     }
 
     clickHelpLink () {

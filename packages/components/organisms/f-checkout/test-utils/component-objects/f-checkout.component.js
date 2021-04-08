@@ -10,7 +10,14 @@ const {
     KNOB_BUTTON,
     SWITCH_USER_LINK,
     GUEST_CHECKOUT_HEADER,
-    GUEST_CHECKOUT_LOGIN_BUTTON
+    GUEST_CHECKOUT_LOGIN_BUTTON,
+    PRE_ORDER_WARNING,
+    CHECKOUT_ERROR_MESSAGE,
+    RETRY_BUTTON,
+    ERROR_PAGE_COMPONENT,
+    ERROR_PAGE_HEADING,
+    ERROR_PAGE_DESCRIPTION,
+    ERROR_PAGE_IMAGE
 } = require('./f-checkout-selectors');
 
 module.exports = class Checkout extends Page {
@@ -33,6 +40,20 @@ module.exports = class Checkout extends Page {
     get guestCheckoutHeader () { return $(GUEST_CHECKOUT_HEADER); }
 
     get guestCheckoutLoginButton () { return $(GUEST_CHECKOUT_LOGIN_BUTTON); }
+
+    get preOrderWarning () { return $(PRE_ORDER_WARNING); }
+
+    get checkoutErrorMessage () { return $(CHECKOUT_ERROR_MESSAGE); }
+
+    get errorMessageRetry () { return $(RETRY_BUTTON); }
+
+    get errorPageComponent () { return $(ERROR_PAGE_COMPONENT); }
+
+    get errorPageDescription () { return $(ERROR_PAGE_DESCRIPTION); }
+
+    get errorPageHeading () { return $(ERROR_PAGE_HEADING); }
+
+    get errorPageImage () { return $(ERROR_PAGE_IMAGE); }
 
     fields = {
         firstName: {
@@ -59,9 +80,9 @@ module.exports = class Checkout extends Page {
             get input () { return $(FIELDS.addressLine2.input); },
             get error () { return $(FIELDS.addressLine2.error); }
         },
-        addressCity: {
-            get input () { return $(FIELDS.addressCity.input); },
-            get error () { return $(FIELDS.addressCity.error); }
+        addressLocality: {
+            get input () { return $(FIELDS.addressLocality.input); },
+            get error () { return $(FIELDS.addressLocality.error); }
         },
         addressPostcode: {
             get input () { return $(FIELDS.addressPostcode.input); },
@@ -94,6 +115,10 @@ module.exports = class Checkout extends Page {
 
     waitForComponent () {
         super.waitForComponent(this.component);
+    }
+
+    waitForErrorPageComponent () {
+        super.waitForComponent(this.errorPageComponent);
     }
 
     isComponentDisplayed () {
@@ -140,6 +165,34 @@ module.exports = class Checkout extends Page {
         return this.guestCheckoutHeader.isDisplayed();
     }
 
+    isPreOrderWarningDisplayed () {
+        return this.preOrderWarning.isDisplayed();
+    }
+
+    isCheckoutErrorMessageDisplayed () {
+        return this.checkoutErrorMessage.isDisplayed();
+    }
+
+    clickRetryButton () {
+        return this.errorMessageRetry.click();
+    }
+
+    isErrorPageComponentDisplayed () {
+        return this.errorPageComponent.isDisplayed();
+    }
+
+    isErrorPageHeadingDisplayed () {
+        return this.errorPageHeading.isDisplayed();
+    }
+
+    isErrorPageDescriptionDisplayed () {
+        return this.errorPageDescription.isDisplayed();
+    }
+
+    isErrorPageImageDisplayed () {
+        return this.errorPageImage.isDisplayed();
+    }
+
 
     /**
     * @description
@@ -167,7 +220,7 @@ module.exports = class Checkout extends Page {
     * @param {String} addressInfo.mobileNumber The user's mobile number
     * @param {String} addressInfo.line1 First line of the user's address
     * @param {String} addressInfo.line2 Second line of the user's address
-    * @param {String} addressInfo.city City of the user's address
+    * @param {String} addressInfo.locality Locality of the user's address
     * @param {String} addressInfo.postcode Postcode of the user's address
     * @param {String} addressInfo.note The user's extra note
     */
@@ -176,7 +229,7 @@ module.exports = class Checkout extends Page {
         this.fields.mobileNumber.input.setValue(addressInfo.mobileNumber);
         this.fields.addressLine1.input.setValue(addressInfo.line1);
         this.fields.addressLine2.input.setValue(addressInfo.line2);
-        this.fields.addressCity.input.setValue(addressInfo.city);
+        this.fields.addressLocality.input.setValue(addressInfo.locality);
         this.fields.addressPostcode.input.setValue(addressInfo.postcode);
         this.fields.userNote.input.setValue(addressInfo.note);
     }
@@ -281,4 +334,4 @@ module.exports = class Checkout extends Page {
     doesFieldExist (inputField) {
         return this.fields[inputField].input.isExisting();
     }
-}
+};

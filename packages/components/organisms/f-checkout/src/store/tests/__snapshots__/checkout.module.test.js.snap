@@ -3,9 +3,9 @@
 exports[`CheckoutModule mutations :: UPDATE_STATE :: should update state with delivery response. 1`] = `
 Object {
   "address": Object {
-    "city": "Bristol",
     "line1": "1 Bristol Road",
     "line2": "Flat 1",
+    "locality": "Bristol",
     "postcode": "BS1 1AA",
   },
   "authToken": "",
@@ -25,6 +25,7 @@ Object {
   },
   "errors": Array [],
   "geolocation": null,
+  "hasAsapSelected": false,
   "id": "12345",
   "isFulfillable": true,
   "isLoggedIn": false,
@@ -51,7 +52,10 @@ Object {
     },
   ],
   "orderId": "",
-  "restaurantId": "",
+  "restaurant": Object {
+    "id": "",
+    "seoName": "",
+  },
   "serviceType": "delivery",
   "time": Object {
     "from": "2020-01-01T00:00+00:00",

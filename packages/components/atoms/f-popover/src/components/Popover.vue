@@ -22,7 +22,7 @@ $popover-padding               : spacing(x2);
 $tooltip-width                 : 10px;
 
 .c-popover {
-    @include media('>=mid') {
+    @include media('>mid') {
         background-color: $color-bg--component;
         box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.03),
                     0 1px 10px 1px rgba(0, 0, 0, 0.07),

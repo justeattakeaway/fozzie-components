@@ -16,10 +16,10 @@
 
             <ul
                 class="c-nav-popoverList c-nav-popoverList--twoColumns"
-                data-test-id="c-countrySelector-list">
+                data-test-id="countrySelector-list">
                 <li
-                    v-for="(country, i) in countries"
-                    :key="i + '_Country'"
+                    v-for="(country) in countries"
+                    :key="country.key"
                     :class="$style['c-countrySelector-country']"
                     :data-test-id="['countrySelector-countryList-' + country.dataTestKey]">
                     <a
@@ -35,7 +35,7 @@
                         @blur="$emit('blurOnLink')"
                         @focus="$emit('focusOnLink')">
                         <flag-icon
-                            :country-code="country.key"
+                            :country-code="country.flagKey"
                             class="c-nav-list-icon--flag" />
                         <span>
                             {{ country.localisedName }}
@@ -84,7 +84,7 @@ $countrySelector-text-color : $grey--darkest;
 $countrySelector-text-hover : $color-bg--darker;
 
 .c-countrySelector {
-    @include media('>=mid') {
+    @include media('>mid') {
         padding: spacing(x3) 0;
     }
 }
@@ -93,7 +93,7 @@ $countrySelector-text-hover : $color-bg--darker;
     display: flex;
     align-items: center;
 
-    @include media('>=mid') {
+    @include media('>mid') {
         padding-bottom: spacing(x2);
         padding-left: spacing(x2);
     }
@@ -104,22 +104,22 @@ $countrySelector-text-hover : $color-bg--darker;
         margin: 0;
         margin-left: spacing();
 
-        @include media('>=mid') {
+        @include media('>mid') {
             @include font-size(heading-s);
             margin-left: 0;
         }
     }
-}
 
-.c-countrySelector-header-button {
-    margin: spacing(x2);
-    @include media('>=mid') {
-        display: none;
-    }
-    svg.c-countrySelector-goBackIcon {
-        transform: rotate(180deg);
-        width: 28px;
-        height: 28px;
+    .c-countrySelector-header-button {
+        margin: spacing(x2);
+        @include media('>mid') {
+            display: none;
+        }
+        svg.c-countrySelector-goBackIcon {
+            transform: rotate(180deg);
+            width: 28px;
+            height: 28px;
+        }
     }
 }
 

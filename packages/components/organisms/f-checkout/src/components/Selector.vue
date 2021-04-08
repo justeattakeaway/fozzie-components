@@ -6,17 +6,32 @@
         input-type="dropdown"
         :label-text="orderMethod"
         :dropdown-options="fulfilmentTimes"
-        @input="selectionChanged" />
+        @input="selectionChanged">
+        <template #error>
+            <alert
+                v-if="shouldShowPreOrderWarning"
+                type="warning"
+                :heading="$t('warningMessages.preOrder.title')"
+                data-test-id="warning-pre-order">
+                {{ $t('warningMessages.preOrder.body') }}
+            </alert>
+        </template>
+    </form-dropdown>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
+import Alert from '@justeat/f-alert';
+import '@justeat/f-alert/dist/f-alert.css';
 import FormDropdown from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import { CHECKOUT_METHOD_DELIVERY, VUEX_CHECKOUT_ANALYTICS_MODULE, VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
-    components: { FormDropdown },
+    components: {
+        Alert,
+        FormDropdown
+    },
 
     data () {
         return {
@@ -52,9 +67,17 @@ export default {
 
             if (this.availableFulfilment.isAsapAvailable && times.length) {
                 times[0].text = this.$t('asapFulfilmentOption');
+                this.updateHasAsapSelected(true);
             }
 
             return times;
+        },
+
+        /*
+         * Returns true if ASAP is not available
+         */
+        shouldShowPreOrderWarning () {
+            return !this.availableFulfilment.isAsapAvailable;
         }
     },
 
@@ -64,9 +87,14 @@ export default {
         }
     },
 
+    mounted () {
+        this.initFulfilmentTime(this.fulfilmentTimes);
+    },
+
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
-            'updateFulfilmentTime'
+            'updateFulfilmentTime',
+            'updateHasAsapSelected'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
@@ -82,11 +110,41 @@ export default {
             this.selectedAvailableFulfilmentTime = selectedFulfilmentTime;
             this.updateChangedField('orderTime');
 
+            this.setAsapFlag(selectedFulfilmentTime);
+
             // TODO - Update to use different from/to times when the API supports it
             this.updateFulfilmentTime({
                 from: selectedFulfilmentTime,
                 to: selectedFulfilmentTime
             });
+        },
+
+        /**
+         * Initialise the first set of times so if the user proceeds with the preset delivery time
+         * we have access to the from/to times up front.
+         *
+         * @param times
+         */
+        initFulfilmentTime (times) {
+            if (times.length && times[0].value) {
+                this.updateFulfilmentTime({
+                    from: times[0].value,
+                    to: times[0].value
+                });
+            }
+        },
+
+        /**
+         * Set asap to `true` if the availableFulfilment time matches the selected fulfilment time,
+         * otherwise set it to false.
+         *
+         * @param selectedFulfilmentTime
+         */
+        setAsapFlag (selectedFulfilmentTime) {
+            const isAsapSelected = this.availableFulfilment.isAsapAvailable
+                && this.availableFulfilment.times[0].from === selectedFulfilmentTime;
+
+            this.updateHasAsapSelected(isAsapSelected);
         }
     }
 };

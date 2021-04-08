@@ -3,6 +3,53 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.25.0
+------------------------------
+*March 24, 2021*
+
+## Added
+- launch.json to provide ability to run / debug individual WDIO test specs against chrome / browserstack / Jest tests
+
+## Removed
+- jest-allure2 package
+
+v3.24.1
+------------------------------
+*March 23, 2021*
+
+## Added
+- `f-wdio-utils` package to all component folders 
+- `f-wdio-utils` package to generator
+
+### Removed
+- `f-wdio-utils` from root package.json
+
+
+v3.24.0
+------------------------------
+*March 22, 2021*
+
+## Changed
+- Refactored `jest-allure2` and `allure-reporter`
+- Added script `report:test-component:chrome` into package.json for automating component test report
+- Updated generator to reflect changes
+
+
+v3.23.0
+------------------------------
+*March 18, 2021*
+
+## Changed
+- Updated node `config.yml` to support chromedriver 89.0.0
+
+
+v3.22.0
+------------------------------
+*March 12, 2021*
+
+## Changed
+- `wdio-browserstack.conf.js` to support new Browserstack configs.
+
 
 v3.21.0
 ------------------------------
@@ -580,7 +627,7 @@ v1.30.0
 - `local:tests` script to easily run all tests locally before submitting a PR
 
 ### Changed
-- `wdio.conf.js` compnent test spec directory
+- `wdio-chrome.conf.js` compnent test spec directory
 
 
 v1.29.0

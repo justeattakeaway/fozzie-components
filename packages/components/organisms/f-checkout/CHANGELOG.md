@@ -3,6 +3,114 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.78.0
+------------------------------
+*March 30, 2021*
+
+### Added
+- Custom errors.
+
+### Changed
+- The whole handling of exceptions and errors.
+- Several functions and tests.
+
+### Removed
+- Redundant and unnecessary functions.
+
+
+v0.77.0
+------------------------------
+*March 26, 2021*
+
+### Added
+- New time object structure for patch call to checkout. (Includes scheduled & asap values).
+- Fix up `selector.vue` so times `to/from` are set correctly.
+
+
+v0.76.0
+------------------------------
+*March 25, 2021*
+
+### Added
+- Tests to test the preorder warning message
+- Tests to test the checkout error message
+- Supporting code in `Checkout.stories.js` and `f-checkout.component.js` to enable testing in storybook.
+- `checkout-available-fulfilment-preorder.json` to support storybook tabs for testing
+- Component tests for `Error.vue` component
+- Accessibility tests for `Error.vue` component
+
+
+v0.75.0
+------------------------------
+*March 19, 2021*
+
+### Added
+- Mega modal dialog for when unfulfillable issues are returned from `updateCheckout`
+- Constants of all the issues we are expected to receive
+
+
+v0.74.0
+------------------------------
+*March 18, 2021*
+
+### Added
+- Preorder warning message for `Selector` component.
+- Tests to cover changes.
+
+
+v0.73.0
+------------------------------
+*March 18, 2021*
+
+### Changed
+- `Checkout.vue` watcher `authToken` to only initialise checkout when the token updates as below:
+  - Truthy > Falsey
+  - Falsey > Truthy
+  - Truthy > Truthy (Checkout will not reload)
+
+### Added
+- Tests to cover authToken watcher changes.
+
+### Removed
+- Some tests that are not required as they're now covered in these new changes.
+
+
+v0.72.0
+------------------------------
+*March 18, 2021*
+
+### Changed
+- `address.city` to `address.locality` in checkout state.
+- `UPDATE_STATE` mutation to use `locality`.
+- `getAddress` to use locality.
+
+
+v0.71.0
+------------------------------
+*March 16, 2021*
+
+### Changed
+- `Checkout.vue` method clean up. Refactor `submitCheckout`.
+
+### Added
+- Methods `handleFulfillableContext`, `processOrderNotFulfillable`,
+`processOrderIsFulfillable` & `logInfo`.
+
+
+v0.70.0
+------------------------------
+*March 15, 2021*
+
+### Changed
+- Calling OPAPI's v2.
+
+
+v0.69.0
+------------------------------
+*March 12, 2021*
+
+### Added
+- Ability to extract customer name from JWT Claims if not retrieved from server
 
 
 v0.68.1
@@ -29,7 +137,7 @@ v0.67.0
 - Analytics error tracking.
 - Tests to cover changes.
 
-# Changed
+### Changed
 - `checkout.module` `issues` to `error`.
 
 ### Fixed

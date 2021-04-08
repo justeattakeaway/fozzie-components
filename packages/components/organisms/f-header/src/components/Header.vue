@@ -169,7 +169,7 @@ export default {
     // when the off-screen navigation is active (on mobile), it fixes to the top of the screen.
     // this stops the content being forced upwards when this happens (preventing slight visual glitch)
     .is-navInView & {
-        @include media('<mid') {
+        @include media('<=mid') {
             position: fixed;
             top: 0;
             left: 0;
@@ -179,7 +179,7 @@ export default {
     }
 
     // Styles for a sticky header on mobile
-    @include media('<mid') {
+    @include media('<=mid') {
         &.is-sticky {
             left: 0;
             top: -60px;
@@ -191,7 +191,7 @@ export default {
         }
     }
 
-    @include media('>=mid') {
+    @include media('>mid') {
         border-bottom: $header-separator solid $header-border-color;
     }
 }
@@ -242,7 +242,7 @@ export default {
             padding-right: #{$layout-margin--mid}px;
         }
 
-        @include media('>=mid') {
+        @include media('>mid') {
             display: flex;
             min-height: $header-height;
         }

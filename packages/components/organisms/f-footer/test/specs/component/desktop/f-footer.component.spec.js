@@ -1,21 +1,19 @@
-const Footer = require('../../../test-utils/component-objects/f-footer.component');
-const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+
+const Footer = require('../../../../test-utils/component-objects/f-footer.component');
 
 const footer = new Footer('organism', 'footer-component');
 
-describe('f-footer component tests', () => {
+describe('Desktop - f-footer component tests', () => {
     beforeEach(() => {
 
-        footer.withQuery('knob-Locale', 'en-gb');
+        footer.withQuery('&knob-Locale', 'en-gb');
+        footer.withQuery('&knob-Show courier links', 'false');
+        footer.withQuery('&knob-Show country selector', 'true');
         const pageUrl = buildUrl(footer.componentType, footer.componentName, footer.path);
 
         footer.open(pageUrl);
         footer.waitForComponent();
-    });
-
-    it('should display the footer', () => {
-        // Assert
-        expect(footer.isComponentDisplayed()).toBe(true);
     });
 
     forEach([['ios', 'apple'], ['android', 'google'], ['huawei', 'appgallery']])
@@ -46,18 +44,5 @@ describe('f-footer component tests', () => {
 
         // Assert
         expect(browser.getUrl()).toContain(expectedUrl);
-    });
-
-    it('Should not show courier links on en-GB locale if courier links is set to false', () => {
-        // Assert
-        expect(footer.areCourierLinksDisplayed()).toBe(false);
-    });
-
-    it('Should not show courier links on en-GB locale if courier links is set to true', () => {
-        // Act
-        footer.openGBWithExtraFeatures();
-
-        // Assert
-        expect(footer.areCourierLinksDisplayed()).toBe(false);
     });
 });

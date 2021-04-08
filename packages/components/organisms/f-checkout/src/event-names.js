@@ -12,6 +12,12 @@ const CheckoutSetupGuestFailure = 'checkout-setup-guest-failure';
 const CheckoutValidationError = 'checkout-validation-error';
 const CheckoutAddressGetSuccess = 'checkout-address-get-success';
 const CheckoutAddressGetFailure = 'checkout-address-get-failure';
+const CheckoutErrorDialogButtonClicked = 'checkout-error-dialog-button-click';
+const CheckoutDialogCloseButtonClicked = 'checkout-dialog-close-button-click';
+const CheckoutPlaceOrderSuccess = 'checkout-place-order-success';
+const CheckoutPlaceOrderFailure = 'checkout-place-order-failure';
+const CheckoutUpdateSuccess = 'checkout-update-success';
+const CheckoutUpdateFailure = 'checkout-update-failure';
 
 export default {
     CheckoutSuccess,
@@ -27,5 +33,11 @@ export default {
     CheckoutSetupGuestFailure,
     CheckoutValidationError,
     CheckoutAddressGetSuccess,
-    CheckoutAddressGetFailure
+    CheckoutAddressGetFailure,
+    CheckoutErrorDialogButtonClicked,
+    CheckoutDialogCloseButtonClicked,
+    CheckoutPlaceOrderSuccess,
+    CheckoutPlaceOrderFailure,
+    CheckoutUpdateSuccess,
+    CheckoutUpdateFailure
 };

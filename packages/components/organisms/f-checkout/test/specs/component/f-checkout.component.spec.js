@@ -1,12 +1,12 @@
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
-const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
 
-const checkout = new Checkout('molecule-folder', 'f-content-cards--home-promotion-card-1-component');
+const checkout = new Checkout('organism', 'checkout-component');
 
 describe('f-checkout component tests', () => {
     beforeEach(() => {
-        checkout.withQuery('knob-Service Type', 'delivery')
-                .withQuery('knob-Is User Logged In', true);
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
@@ -25,7 +25,7 @@ describe('f-checkout component tests', () => {
             mobileNumber: '07777777779',
             line1: 'Test House',
             line2: 'High Street',
-            city: 'Test City',
+            locality: 'Test Locality',
             postcode: 'AR51 1AA',
             note: 'Doorbell is broken'
         };
@@ -103,7 +103,7 @@ describe('f-checkout component tests', () => {
             mobileNumber: '07777777779',
             line1: 'Test House',
             line2: 'High Street',
-            city: 'Test City',
+            locality: 'Test Locality',
             postcode: 'AR51 1AA',
             note: ''
         };
@@ -119,5 +119,47 @@ describe('f-checkout component tests', () => {
 
     it('should display the switch user link', () => {
         expect(checkout.switchUserLinkIsDisplayed()).toBe(true);
+    });
+
+    it('should display the preorder warning message when ASAP is not avalible', () => {
+        // Arrange
+        checkout.withQuery('&knob-Is ASAP available', false);
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+
+        // Assert
+        expect(checkout.isPreOrderWarningDisplayed()).toBe(true);
+    });
+
+    it('should display the checkout error component when "Has Checkout Errors" is true', () => {
+        // Arrange
+        checkout.withQuery('&knob-Has Checkout Errors', true);
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.goToPayment();
+
+        // Assert
+        expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(true);
+    });
+
+    it('should close the checkout error when "Retry" is clicked', () => {
+        // Arrange
+        checkout.withQuery('&knob-Has Checkout Errors', true);
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.goToPayment();
+        checkout.clickRetryButton();
+
+        // Assert
+        expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
     });
 });

@@ -1,5 +1,5 @@
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Searchbox = require('../../../test-utils/component-objects/f-searchbox.component');
-const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
 
 const searchbox = new Searchbox('molecule', 'searchbox-component');
 

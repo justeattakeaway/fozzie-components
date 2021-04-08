@@ -1,21 +1,21 @@
-const forEach = require('mocha-each');
+import forEach from 'mocha-each';
 
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
-const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
 
 const checkout = new Checkout('organism', 'checkout-component');
 
 describe('f-checkout "delivery" component tests', () => {
     beforeEach(() => {
-        checkout.withQuery('knob-Service Type', 'delivery')
-                .withQuery('knob-Is User Logged In', true);
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
         checkout.open(pageUrl);
         checkout.waitForComponent();
     });
 
-    forEach(['mobileNumber', 'addressLine1', 'addressCity', 'addressPostcode'])
+    forEach(['mobileNumber', 'addressLine1', 'addressLocality', 'addressPostcode'])
     .it('should display each fields error message', field => {
         // Act
         checkout.clearCheckoutForm(field);
@@ -25,7 +25,7 @@ describe('f-checkout "delivery" component tests', () => {
         expect(checkout.isFieldErrorDisplayed(field)).toBe(true);
     });
 
-    forEach(['addressLine1', 'addressLine2', 'addressCity', 'addressPostcode'])
+    forEach(['addressLine1', 'addressLine2', 'addressLocality', 'addressPostcode'])
     .it('should check if address fields exist', field => {
         // Assert
         expect(checkout.doesFieldExist(field)).toBe(true);

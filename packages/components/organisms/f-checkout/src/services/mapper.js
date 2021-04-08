@@ -10,7 +10,8 @@ const mapUpdateCheckoutRequest = ({
     isCheckoutMethodDelivery,
     time,
     userNote,
-    geolocation
+    geolocation,
+    asap
 }) => ([
     {
         op: 'add',
@@ -26,7 +27,12 @@ const mapUpdateCheckoutRequest = ({
         op: 'add',
         path: '/fulfilment',
         value: {
-            time,
+            time: {
+                asap,
+                scheduled: {
+                    ...time
+                }
+            },
             location: {
                 ...(isCheckoutMethodDelivery ? {
                     address: {
@@ -34,9 +40,9 @@ const mapUpdateCheckoutRequest = ({
                             address.line1 || '',
                             address.line2 || '',
                             '',
-                            address.city || '',
                             ''
                         ],
+                        locality: address.locality || null,
                         postalCode: address.postcode || null
                     }
                 } : {}),
@@ -67,8 +73,8 @@ const analyticFieldNameMapper = {
     line1: 'addressLine1',
     'address.line2': 'addressLine2',
     line2: 'addressLine2',
-    'address.city': 'addressCity',
-    city: 'addressCity',
+    'address.locality': 'addressLocality',
+    locality: 'addressLocality',
     'address.postcode': 'addressPostcode',
     postcode: 'addressPostcode',
     'customer.firstName': 'firstName',
@@ -80,7 +86,7 @@ const analyticFieldNameMapper = {
 
 const updateCheckoutErrors = {
     [ANALYTICS_ERROR_CODE_BASKET_NOT_ORDERABLE]: ['RESTAURANT_NOT_TAKING_ORDERS', 'SERVICE_TYPE_UNAVAILABLE', 'ITEMS_UNORDERABLE', 'ADDITIONAL_ITEMS_REQUIRED', 'MINIMUM_ORDER_VALUE_NOT_MET', 'LOCATION_UNDELIVERABLE', 'AGE_VERIFICATION_FAILED'],
-    [ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE]: ['FIRST_NAME_REQUIRED', 'LAST_NAME_REQUIRED', 'PHONE_NUMBER_REQUIRED', 'DATE_OF_BIRTH_REQUIRED', 'ADDRESS_LINES_REQUIRED', 'POSTAL_CODE_REQUIRED', 'GEO_LOCATION_REQUIRED'],
+    [ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE]: ['FIRST_NAME_REQUIRED', 'LAST_NAME_REQUIRED', 'PHONE_NUMBER_REQUIRED', 'DATE_OF_BIRTH_REQUIRED', 'ADDRESS_LINES_REQUIRED', 'LOCALITY_REQUIRED', 'POSTAL_CODE_REQUIRED', 'GEO_LOCATION_REQUIRED'],
     [ANALYTICS_ERROR_CODE_SET_ORDER_TIME]: ['FULFILMENT_TIME_REQUIRED', 'FULFILMENT_TIME_UNAVAILABLE']
 };
 
@@ -111,8 +117,8 @@ const getAnalyticsErrorCodeByApiErrorCode = error => {
 };
 
 export {
-    mapUpdateCheckoutRequest,
+    getAnalyticsErrorCodeByApiErrorCode,
     mapAnalyticsName,
     mapAnalyticsNames,
-    getAnalyticsErrorCodeByApiErrorCode
+    mapUpdateCheckoutRequest
 };

@@ -1,5 +1,8 @@
 import {
-    mapUpdateCheckoutRequest, mapAnalyticsName, mapAnalyticsNames, getAnalyticsErrorCodeByApiErrorCode
+    getAnalyticsErrorCodeByApiErrorCode,
+    mapAnalyticsName,
+    mapAnalyticsNames,
+    mapUpdateCheckoutRequest
 } from '../mapper';
 
 const defaultParams = {
@@ -8,7 +11,15 @@ const defaultParams = {
     isCheckoutMethodDelivery: true,
     time: {},
     userNote: '',
-    geolocation: null
+    geolocation: null,
+    asap: false
+};
+
+const address = {
+    line1: '1 Bristol Road',
+    line2: 'Flat 1',
+    locality: 'Bristol',
+    postcode: 'BS1 1AA'
 };
 
 describe('checkout mapper', () => {
@@ -36,14 +47,6 @@ describe('checkout mapper', () => {
     });
 
     it('should map address correctly', () => {
-        // Arrange
-        const address = {
-            line1: '1 Bristol Road',
-            line2: 'Flat 1',
-            city: 'Bristol',
-            postcode: 'BS1 1AA'
-        };
-
         // Act
         const requestBody = mapUpdateCheckoutRequest({
             ...defaultParams,
@@ -54,11 +57,11 @@ describe('checkout mapper', () => {
 
         // Assert
         expect(locationRequest.address.postalCode).toBe(address.postcode);
+        expect(locationRequest.address.locality).toBe(address.locality);
         expect(locationRequest.address.lines).toStrictEqual([
             address.line1,
             address.line2,
             '',
-            address.city,
             ''
         ]);
     });
@@ -70,30 +73,30 @@ describe('checkout mapper', () => {
             to: '2021-01-01T01:00:00+0000'
         };
 
+        const expectOutput = {
+            asap: false,
+            scheduled: {
+                ...time
+            }
+        };
+
         // Act
         const requestBody = mapUpdateCheckoutRequest({
             ...defaultParams,
-            time
+            time,
+            asap: false
         });
 
         const timeRequest = requestBody[1].value.time;
 
         // Assert
-        expect(timeRequest).toBe(time);
+        expect(timeRequest).toStrictEqual(expectOutput);
     });
 
     describe('when checkout method is not delivery', () => {
         const isCheckoutMethodDelivery = false;
 
         it('should not map the address', () => {
-            // Arrange
-            const address = {
-                line1: '1 Bristol Road',
-                line2: 'Flat 1',
-                city: 'Bristol',
-                postcode: 'BS1 1AA'
-            };
-
             // Act
             const requestBody = mapUpdateCheckoutRequest({
                 ...defaultParams,
@@ -152,8 +155,8 @@ describe('mapAnalyticsName :: ', () => {
             ['line1', 'addressLine1'],
             ['address.line2', 'addressLine2'],
             ['line2', 'addressLine2'],
-            ['address.city', 'addressCity'],
-            ['city', 'addressCity'],
+            ['address.locality', 'addressLocality'],
+            ['locality', 'addressLocality'],
             ['address.postcode', 'addressPostcode'],
             ['postcode', 'addressPostcode'],
             ['customer.firstName', 'firstName'],
@@ -177,10 +180,10 @@ describe('mapAnalyticsNames :: ', () => {
             'customer.firstName',
             'lastName',
             'customer.email',
-            'city'
+            'locality'
         ];
 
-        const expected = 'addressCity,addressLine1,email,firstName,lastName,mobilePhone';
+        const expected = 'addressLine1,addressLocality,email,firstName,lastName,mobilePhone';
 
         // Act & Assert
         expect(mapAnalyticsNames(provided)).toEqual(expected);

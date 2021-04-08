@@ -1,7 +1,7 @@
 class Page {
     constructor (componentType, componentName) {
         this.title = 'Component URLS';
-        this.componenType = componentType;
+        this.componentType = componentType;
         this.componentName = componentName;
         this.path = '';
     }
@@ -16,7 +16,7 @@ class Page {
     }
 
     withQuery (name, value) {
-        this.path += encodeURIComponent(`&${name}=${value}`);
+        this.path += `&${name}=${value}`;
         return this;
     }
 }

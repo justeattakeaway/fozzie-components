@@ -1,0 +1,40 @@
+// Set $theme variable so that fozzie doesn't complain when vars are imported below
+// n.b. This variables isn't actually used (unless there are theme specific vars from fozzie)
+// Instead, the theme is handled via a data-attribute on the component (via the `@mixin theme()` below)
+$theme: 'jet' !default;
+
+@import  '~@justeat/fozzie/src/scss/fozzie';
+
+$skeleton-loader-heading-height: spacing(x4);
+$skeleton-loader-text-height: spacing(x2);
+$skeleton-loader-bone-background-color: $grey--mid;
+$skeleton-loader-image-height: spacing(x8);
+
+@keyframes loading {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.c-text,
+.c-image,
+.c-heading {
+    background-color: $skeleton-loader-bone-background-color;
+    overflow: hidden;
+    position: relative;
+    vertical-align: top;
+
+    &:after {
+        background: linear-gradient(90deg, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, 0.3), hsla(0, 0%, 100%, 0));
+        animation: loading 1.5s infinite;
+        content: '';
+        height: 100%;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: translateX(-100%);
+        z-index: 1;
+    }
+}
+

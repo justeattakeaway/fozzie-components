@@ -2,7 +2,6 @@ import { shallowMount } from '@vue/test-utils';
 import Card from '../Card.vue';
 
 describe('Card', () => {
-    allure.feature('Card');
     it('should be defined', () => {
         // Arrange
         const propsData = {};
@@ -39,6 +38,21 @@ describe('Card', () => {
 
             // Assert
             expect(cardTitleElement.text()).toBe(propsData.cardHeading);
+        });
+
+        it.each(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])('should set the tag to be %s, as passed in the `cardHeading` prop', headingTag => {
+            // Arrange
+            const propsData = {
+                cardHeading: 'Test card title',
+                cardHeadingTag: headingTag
+            };
+
+            // Act
+            const wrapper = shallowMount(Card, { propsData });
+            const cardTitle = wrapper.find('[data-test-id="card-heading"]');
+
+            // Assert
+            expect(cardTitle.element.tagName.toLowerCase()).toBe(headingTag);
         });
     });
 
@@ -160,6 +174,39 @@ describe('Card', () => {
                 expect(position.validator('left')).toBeTruthy();
                 expect(position.validator('right')).toBeTruthy();
                 expect(position.validator('center')).toBeTruthy();
+            });
+        });
+
+
+        describe('cardHeadingTag', () => {
+            it('should default to `h1` if it is not set', () => {
+                // Arrange
+                const propsData = {};
+
+                // Act
+                const wrapper = shallowMount(Card, { propsData });
+
+                // Assert
+                expect(wrapper.vm.cardHeadingTag).toBe('h1');
+            });
+
+            it('should only allow `h1`, `h2`, `h3`, `h4`, `h5` or `h6` to be passed in', () => {
+                // Arrange
+                const propsData = {};
+
+                // Act
+                const wrapper = shallowMount(Card, { propsData });
+
+                const heading = wrapper.vm.$options.props.cardHeadingTag;
+
+                // Assert
+                expect(heading.validator('h100')).toBeFalsy();
+                expect(heading.validator('h1')).toBeTruthy();
+                expect(heading.validator('h2')).toBeTruthy();
+                expect(heading.validator('h3')).toBeTruthy();
+                expect(heading.validator('h4')).toBeTruthy();
+                expect(heading.validator('h5')).toBeTruthy();
+                expect(heading.validator('h6')).toBeTruthy();
             });
         });
     });

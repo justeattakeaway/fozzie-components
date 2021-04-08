@@ -1,181 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Checkout methods :: submitCheckout :: if \`isLoggedIn\` set to \`false\` should show error message and emit failure event when the email field is invalid 1`] = `
-<p data-test-id="error-email-invalid" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g transform="translate(-34.000000, -18.000000)">
-        <g transform="translate(32.000000, 16.000000)">
-          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
-          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
-        </g>
-      </g>
-    </g>
-  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                Please enter a valid email address
-            </span></p>
+exports[`Checkout data :: nonFulfillableError :: when \`nonFulfillableError.openInDialog\` is \`true\` should show a mega modal displaying the error title and description 1`] = `
+<div data-test-id="checkout-issue-modal" class="c-megaModal MegaModal_c-megaModal_3w2Fg MegaModal_u-overlay_2-wsH">
+  <div role="dialog" class="c-megaModal-content MegaModal_c-megaModal-content_28gxc c-megaModal-content--visible MegaModal_c-megaModal-content--visible_4eEpH">
+    <div role="document" class="c-megaModal-document"><button type="button" attributes="[object Object]" data-test-id="close-modal" class="Button_o-btn_1KX8u Button_o-btn--icon_1k-qM Button_o-btn--secondary_1KBR1 Button_o-btn--sizeXSmall_3KRtq MegaModal_c-megaModal-closeBtn_eUziJ"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" class="c-ficon c-ficon--cross MegaModal_c-megaModal-closeIcon_2purM">
+          <path fill-rule="evenodd" d="M13.3.7a1 1 0 00-1.4 0L7 5.6 2.1.7A1 1 0 10.7 2.1L5.6 7 .7 11.9a1 1 0 101.4 1.4L7 8.4l4.9 4.9a1 1 0 101.4-1.4L8.4 7l4.9-4.9c.4-.4.4-1 0-1.4z"></path>
+        </svg><span class="is-visuallyHidden"> Close modal </span></button>
+      <h3 data-test-id="checkout-issue-modal-title" class="u-noSpacing">
+        We do takeaways, not time machines
+      </h3>
+      <p data-test-id="checkout-issue-modal-message">
+        The time you picked for your order isn't possible, please choose another.
+      </p> <button type="button" attributes="[object Object]" data-test-id="redirect-to-menu-button" class="Button_o-btn_1KX8u Button_o-btn--primary_NRuBe Button_o-btn--sizeLarge_3A8Ov c-checkout-redirectButton">
+        Retry
+      </button>
+    </div>
+  </div>
+</div>
 `;
 
-exports[`Checkout methods :: submitCheckout :: if \`isLoggedIn\` set to \`false\` should show error message and emit failure event when the email field is not populated 1`] = `
-<p data-test-id="error-email-invalid" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g transform="translate(-34.000000, -18.000000)">
-        <g transform="translate(32.000000, 16.000000)">
-          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
-          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
-        </g>
-      </g>
-    </g>
-  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                Please enter a valid email address
-            </span></p>
-`;
+exports[`Checkout data :: nonFulfillableError :: when \`nonFulfillableError.openInDialog\` is \`true\` should show a mega modal displaying the error title and description 2`] = `"We do takeaways, not time machines"`;
 
-exports[`Checkout methods :: submitCheckout :: if \`isLoggedIn\` set to \`false\` should show error message and emit failure event when the first name field is not populated 1`] = `
-<p data-test-id="error-first-name-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g transform="translate(-34.000000, -18.000000)">
-        <g transform="translate(32.000000, 16.000000)">
-          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
-          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
-        </g>
-      </g>
-    </g>
-  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                Please enter your first name
-            </span></p>
-`;
+exports[`Checkout data :: nonFulfillableError :: when \`nonFulfillableError.openInDialog\` is \`true\` should show a mega modal displaying the error title and description 3`] = `"The time you picked for your order isn't possible, please choose another."`;
 
-exports[`Checkout methods :: submitCheckout :: if \`isLoggedIn\` set to \`false\` should show error message and emit failure event when the last name field is not populated 1`] = `
-<p data-test-id="error-last-name-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g transform="translate(-34.000000, -18.000000)">
-        <g transform="translate(32.000000, 16.000000)">
-          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
-          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
-        </g>
-      </g>
-    </g>
-  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                Please enter your last name
-            </span></p>
-`;
-
-exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collection\` should show error message and emit failure event when the mobile number field is not populated 1`] = `
-<p data-test-id="error-mobile-number" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g transform="translate(-34.000000, -18.000000)">
-        <g transform="translate(32.000000, 16.000000)">
-          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
-          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
-        </g>
-      </g>
-    </g>
-  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                            Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
-                        </span></p>
-`;
-
-exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collection\` should show error message and emit failure event when the mobile number field is populated with a < 10 numbers 1`] = `
-<p data-test-id="error-mobile-number" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g transform="translate(-34.000000, -18.000000)">
-        <g transform="translate(32.000000, 16.000000)">
-          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
-          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
-        </g>
-      </g>
-    </g>
-  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                            Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
-                        </span></p>
-`;
-
-exports[`Checkout methods :: submitCheckout :: if serviceType set to \`collection\` should show error message and emit failure event when the mobile number field is populated with non numeric value 1`] = `
-<p data-test-id="error-mobile-number" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g transform="translate(-34.000000, -18.000000)">
-        <g transform="translate(32.000000, 16.000000)">
-          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
-          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
-        </g>
-      </g>
-    </g>
-  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                            Your phone number should be at least 10 characters long and shouldn't contain letters or special characters
-                        </span></p>
-`;
-
-exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\` should emit failure event and display error message when address line1 input field is empty 1`] = `
-<p data-test-id="error-address-line1-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g transform="translate(-34.000000, -18.000000)">
-        <g transform="translate(32.000000, 16.000000)">
-          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
-          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
-        </g>
-      </g>
-    </g>
-  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                    Please enter the first line of your address
-                </span></p>
-`;
-
-exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\` should emit failure event and display error message when city input field is empty 1`] = `
-<p data-test-id="error-address-city-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g transform="translate(-34.000000, -18.000000)">
-        <g transform="translate(32.000000, 16.000000)">
-          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
-          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
-        </g>
-      </g>
-    </g>
-  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                Please enter your town or city
-            </span></p>
-`;
-
-exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\` should emit failure event and display error message when postcode contains incorrect characters 1`] = `
-<p data-test-id="error-address-postcode-type-error" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g transform="translate(-34.000000, -18.000000)">
-        <g transform="translate(32.000000, 16.000000)">
-          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
-          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
-        </g>
-      </g>
-    </g>
-  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                This doesn't look like a UK postcode, can you enter it again please?
-            </span></p>
-`;
-
-exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\` should emit failure event and display error message when postcode contains incorrect characters 2`] = `
-<p data-test-id="error-address-postcode-type-error" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g transform="translate(-34.000000, -18.000000)">
-        <g transform="translate(32.000000, 16.000000)">
-          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
-          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
-        </g>
-      </g>
-    </g>
-  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                This doesn't look like a UK postcode, can you enter it again please?
-            </span></p>
-`;
-
-exports[`Checkout methods :: submitCheckout :: if serviceType set to \`delivery\` should emit failure event and display error message when postcode input field is empty 1`] = `
-<p data-test-id="error-address-postcode-empty" data-test-title="" class="ErrorMessage_c-errorMessage__5fre"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="c-ficon c-ficon--danger ErrorMessage_c-errorMessage-icon_3E2NJ">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g transform="translate(-34.000000, -18.000000)">
-        <g transform="translate(32.000000, 16.000000)">
-          <polygon id="bounding-box" opacity="0" points="0 28 28 28 28 0 0 0"></polygon>
-          <path d="M14,2.33333333 C17.0941924,2.33333333 20.0616547,3.56249647 22.2495791,5.75042089 C24.4375035,7.9383453 25.6666667,10.9058076 25.6666667,14 C25.6666667,20.4433221 20.4433221,25.6666667 14,25.6666667 C7.55667792,25.6666667 2.33333333,20.4433221 2.33333333,14 C2.33333333,7.55667792 7.55667792,2.33333333 14,2.33333333 Z M13.9742102,21.4068325 C14.914176,21.4050605 15.6757275,20.643439 15.6774994,19.7033872 C15.6774994,18.7626003 14.9149108,17.9999419 13.9742102,17.9999419 C13.0335096,17.9999419 12.2709211,18.7626003 12.2709211,19.7033872 C12.2709211,20.644174 13.0335096,21.4068325 13.9742102,21.4068325 Z M14.3401974,16.3383582 C15.0957837,12.7801217 16.2817538,11.4652379 16.2817538,9.54497094 C16.2817538,8.23008717 15.423133,7 13.9742102,7 C12.5252875,7 11.6666667,8.23008717 11.6666667,9.54497094 C11.6666667,11.4652379 12.8311713,12.7801217 13.6071499,16.3383582 L14.3401974,16.3383582 Z" id="Color" fill="#D50525"></path>
-        </g>
-      </g>
-    </g>
-  </svg><span data-test-id="content" class="ErrorMessage_c-errorMessage-content_3Tl4Q">
-                Please enter your full UK postcode
-            </span></p>
-`;
+exports[`Checkout methods :: handleErrorState :: should assign the generic server error to \`genericErrorMessage\` where there is no \`messageToDisplay\` 1`] = `"Something went wrong, please try again later"`;

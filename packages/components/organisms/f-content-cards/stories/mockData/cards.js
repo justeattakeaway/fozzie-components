@@ -54,6 +54,10 @@ const cardTypes = {
     Stamp_Card_1: {
         label: 'Stamp Card',
         fields: ['line_3', 'discount_percentage', 'earned_stamps', 'expiry_date', 'expiry_line', 'is_ready_to_claim', 'total_required_stamps']
+    },
+    StampCard_Promotion_Card_1: {
+        label: 'StampCard Promotion Card',
+        fields: ['icon_1', 'button_1']
     }
 };
 /* eslint-enable camelcase */
@@ -62,13 +66,25 @@ const randomSentence = faker.lorem.sentence.bind(faker.lorem, undefined, undefin
 const randomColour = faker.internet.color.bind(faker.internet, undefined, undefined, undefined);
 
 /* eslint-disable camelcase */
+
+const getImageConfigByType = type => {
+    switch (type) {
+        case 'Anniversary_Card_1':
+            return '109/96'; // Custom
+        case 'StampCard_Promotion_Card_1':
+            return '384/165?blur=3'; // 21:9
+        default:
+            return '384/216?blur=3'; // 16:9
+    }
+};
+
 /**
  * A POJO map of fieldname to generator function that will predictably generate the correct type
  * @type {Object}
  */
 const fieldTypeToFaker = {
     background_color: randomColour,
-    background_image_1: type => `https://picsum.photos/seed/${type}_background_image_1/384/216?blur=3`,
+    background_image_1: type => `https://picsum.photos/seed/${type}_background_image_1/${getImageConfigByType(type)}`,
     banner: randomSentence,
     brand_name: faker.commerce.product.bind(faker.commerce),
     button_1: faker.lorem.words.bind(faker.lorem, undefined),
@@ -86,7 +102,7 @@ const fieldTypeToFaker = {
     headline: randomSentence,
     icon_1: type => `https://picsum.photos/seed/${type}_icon_1/48/48`,
     is_ready_to_claim: () => false,
-    image_1: type => `https://picsum.photos/seed/${type}_image_1/384/216?blur=3`,
+    image_1: type => `https://picsum.photos/seed/${type}_image_1/${getImageConfigByType(type)}`,
     line3: randomSentence,
     line4: randomSentence,
     line_3: randomSentence,
@@ -95,7 +111,7 @@ const fieldTypeToFaker = {
     line_6: randomSentence,
     offer_auth_required: faker.random.boolean.bind(faker.random),
     restaurant_id: faker.random.number.bind(faker.random, { min: 100, max: 999999 }),
-    restaurant_image_url: type => `https://picsum.photos/seed/${type}_restaurant_image_url/384/216?blur=3`,
+    restaurant_image_url: type => `https://picsum.photos/seed/${type}_restaurant_image_url/${getImageConfigByType(type)}`,
     restaurant_logo_url: type => `https://picsum.photos/seed/${type}_restaurant_logo_url/48/48`,
     subtitle: randomSentence,
     total_required_stamps: () => 5,
@@ -166,11 +182,9 @@ function seededRandomCardOfType (type) {
         e,
         tp: 'short_news',
         ar: 1,
-        i: (type === 'Anniversary_Card_1'
-            ? `https://picsum.photos/seed/${type}_i/109/96`
-            : `https://picsum.photos/seed/${type}_i/384/216?blur=3`),
-        u: null,
-        uw: null,
+        i: `https://picsum.photos/seed/${type}_i/${getImageConfigByType(type)}`,
+        u: '#',
+        uw: '#',
         tt,
         ds,
         dm
@@ -199,7 +213,8 @@ export default () => {
             seededRandomCardOfType('Post_Order_Card_1'),
             seededRandomCardOfType('Anniversary_Card_1'),
             seededRandomCardOfType('Restaurant_FTC_Offer_Card'),
-            seededRandomCardOfType('Stamp_Card_1')
+            seededRandomCardOfType('Stamp_Card_1'),
+            seededRandomCardOfType('StampCard_Promotion_Card_1')
         ],
         /* eslint-disable camelcase */
         last_full_sync_at: nowMinus5Hours,

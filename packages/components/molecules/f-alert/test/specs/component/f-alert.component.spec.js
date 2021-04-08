@@ -1,5 +1,5 @@
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Alert = require('../../../test-utils/component-objects/f-alert.component');
-const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
 
 const alert = new Alert('molecule', 'alert-component');
 

@@ -17,9 +17,9 @@
       "1 Bristol Road",
       "Flat 1",
       "",
-      "Bristol",
       "Somerset"
     ],
+    "locality": "Bristol",
     "postalCode": "BS1 1AA"
   },
   "isFulfillable": true,

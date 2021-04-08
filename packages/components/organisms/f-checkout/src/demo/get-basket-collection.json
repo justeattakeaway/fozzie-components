@@ -2,6 +2,7 @@
   "BasketId": "11111111",
   "ServiceType": "Collection",
   "RestaurantId": "99999",
+  "RestaurantSeoName": "poppies-fish-and-chips-spitalfields-aldgate",
   "BasketSummary": {
     "BasketTotals": {
       "Total": 23.55

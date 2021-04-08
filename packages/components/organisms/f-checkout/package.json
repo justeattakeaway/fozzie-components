@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "0.68.1",
+  "version": "0.78.0",
   "main": "dist/f-checkout.umd.min.js",
   "files": [
     "dist",
@@ -35,8 +35,11 @@
     "test": "vue-cli-service test:unit",
     "test:watch": "vue-cli-service test:unit --watch",
     "test:coverage": "yarn test --coverage",
-    "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
-    "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
+    "test-component:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite component",
+    "report:test-component:chrome": "cross-env-shell JE_ENV=local COMPONENT_TYPE=organism wdio ../../../../wdio-chrome.conf.js --suite component && yarn allure:open",
+    "test-a11y:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite a11y",
+    "allure:open": "yarn allure:clean && allure open",
+    "allure:clean": "rimraf ../../../../test/results/allure"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -45,6 +48,7 @@
     "@justeat/f-globalisation": "1.0.0",
     "@justeat/f-services": "1.7.0",
     "axios": "0.21.1",
+    "jwt-decode": "3.1.2",
     "vuelidate": "0.7.6"
   },
   "peerDependencies": {
@@ -53,16 +57,18 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.12.13",
-    "@justeat/f-alert": "0.4.0",
+    "@justeat/f-alert": "0.5.0",
     "@justeat/f-button": "0.5.0",
     "@justeat/f-card": "0.8.0",
     "@justeat/f-error-message": "0.3.1",
     "@justeat/f-form-field": "1.8.0",
+    "@justeat/f-mega-modal": "0.6.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
+    "@justeat/f-wdio-utils": "0.2.0",
     "flush-promises": "1.0.2",
     "node-sass-magic-importer": "5.3.2",
     "vuex": "3.5.1"

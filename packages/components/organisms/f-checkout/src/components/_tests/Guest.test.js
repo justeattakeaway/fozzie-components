@@ -27,8 +27,6 @@ const $v = {
 };
 
 describe('Guest', () => {
-    allure.feature('Checkout-Guest');
-
     const propsData = {};
 
     it('should be defined', () => {

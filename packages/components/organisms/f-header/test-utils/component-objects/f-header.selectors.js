@@ -3,8 +3,11 @@ export const HEADER_LOGO = '[data-test-id="header-logo"]';
 export const MOBILE_NAVIGATION_BAR = '[data-test-id="nav-toggle"]';
 
 export const NAVIGATION = {
-    offers: {
-        link: '[data-test-id="offers-link"]', 
+    offersIcon: {
+        link: '[data-test-id="offers-iconLink"]',
+    },
+    offersLink: {
+        link: '[data-test-id="offers-link"]',
     },
     help: {
         link: '[data-test-id="help-link"]', 
@@ -18,6 +21,6 @@ export const NAVIGATION = {
     countrySelector: {
         link: '[data-test-id="country-selector"] button', 
         currentIcon: '[data-test-id="current-flag-icon"]',
-        countryList: '[data-test-id="c-countrySelector-list"] li'
+        countryList: '[data-test-id="countrySelector-list"] li'
     }
 }

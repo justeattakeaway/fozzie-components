@@ -19,7 +19,8 @@ pact-logs/
 .tmproj
 *.esproj
 *.sublime-*
-.vscode
+.vscode/*
+!.vscode/launch.json
 nbproject
 Thumbs.db
 logs
@@ -32,6 +33,7 @@ coverage/
 /packages/f-content-cards/stories/mocks/
 
 # Test result folders
+**/allure-report
 **/test/results/allure/*
 !**/test/results/allure/README.md
 **/test/results/axe-violations/*

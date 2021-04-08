@@ -20,22 +20,29 @@ function interceptInAppMessageClickEventsHandler (message) {
  * click events of the CTA button
  * @param message
  * @this BrazeDispatcher
+ * @return Promise
  */
 function interceptInAppMessagesHandler (message) {
-    if (message instanceof this.appboy.ab.InAppMessage) {
-        /**
-         * Always subscribe click action to second button
-         * as this is always "success" as opposed to "dismiss"
-         * as confirmed with CRM (AS)
-         */
-        this.inAppMessagesCallbacks.forEach(callback => callback(message));
-        if (message.buttons && message.buttons.length >= 2) {
-            const [, button] = message.buttons;
-            // Note that the below subscription returns an ID that could later be used to unsubscribe
-            button.subscribeToClickedEvent(() => interceptInAppMessageClickEventsHandler.bind(this)(message));
-        }
-    }
-    this.appboy.display.showInAppMessage(message);
+    return this.appboyPromise
+        .then(appboy => {
+            if (message instanceof appboy.ab.InAppMessage) {
+                /**
+                 * Always subscribe click action to second button
+                 * as this is always "success" as opposed to "dismiss"
+                 * as confirmed with CRM (AS)
+                 */
+                this.inAppMessagesCallbacks.forEach(callback => callback(message));
+                if (message.buttons && message.buttons.length >= 2) {
+                    const [, button] = message.buttons;
+                    // Note that the below subscription returns an ID that could later be used to unsubscribe
+                    button.subscribeToClickedEvent(() => interceptInAppMessageClickEventsHandler.bind(this)(message));
+                }
+            }
+            appboy.display.showInAppMessage(message);
+        })
+        .catch(error => {
+            this.logger('error', `Error handling message - ${error}`, { message, error });
+        });
 }
 
 /**
@@ -127,7 +134,6 @@ class BrazeDispatcher {
      * @return {Promise<null|*>}
      */
     async configure (options = {}) {
-        this.appboy = window.appboy;
         const {
             apiKey,
             userId,
@@ -188,7 +194,7 @@ class BrazeDispatcher {
         }
 
         if (disableComponent || !apiKey || !userId) {
-            this.appboyPromise = Promise.resolve();
+            this.appboyPromise = Promise.reject(new Error('Not initialising braze due to config'));
             return this.appboyPromise;
         }
 

@@ -4,7 +4,11 @@ const {
     FOOTER_ICONS,
     DOWNLOAD_ICONS,
     COURIER_LINKS,
-    SOCIAL_ICONS
+    SOCIAL_ICONS,
+    COUNTRY_SELECTOR_BUTTON,
+    CURRENT_COUNTRY_ICON,
+    CURRENT_COUNTRY_TEXT,
+    COUNTRY_LIST
 } = require('./f-footer.selectors');
 
 module.exports = class Footer extends Page {
@@ -22,6 +26,16 @@ module.exports = class Footer extends Page {
 
     get socialIcon () { return this.socialIconValue; }
 
+    get countrySelectorButton () { return $(COUNTRY_SELECTOR_BUTTON); }
+
+    get currentFlagIcon () { return $(CURRENT_COUNTRY_ICON); }
+
+    get currentCountryText () { return $(CURRENT_COUNTRY_TEXT); }
+
+    get countries () { return $$(COUNTRY_LIST); }
+
+    get countryLink () { return this.countryValue != null ? this.countryValue : 'Please set a country value'; }
+
     set expectedDownloadIcon (icon) {
         this.downloadIconValue = this.downloadIcons.filter(element => element.getAttribute('data-test-id').includes(icon))[0];
     }
@@ -34,13 +48,38 @@ module.exports = class Footer extends Page {
         super.open(url);
     }
 
+    /**
+     * @description
+     * Sets the data for the checkout component.
+     *
+     * @param {Object} footer
+     * @param {String} footer.locale The checkout type
+     * @param {String} footer.countrySelector The checkout authentication
+     * @param {String} footer.courierLinks The checkout authentication
+     */
 
+    open (footer) {
+        const countryFormatted = footer.locale.toUpperCase();
+        const showCountrySelector = `&knob-Show%20country%20selector=${footer.countrySelector}`;
+        const showCourierLinks = `&knob-Show%20courier%20links=${footer.courierLinks}`;
+                formattedLocale = `en-${countryFormatted}`;
+                break;
+            case 'DK':
+                formattedLocale = `da-${countryFormatted}`;
+                break;
+            case 'ES':
+                formattedLocale = `es-${countryFormatted}`;
+                break;
+            case 'IT':
+                formattedLocale = `it-${countryFormatted}`;
+                break;
+            case 'NO':
+                formattedLocale = `nb-${countryFormatted}`;
+                break;
     openAUWithExtraFeatures () {
-        super.openComponent('organism', 'footer-component&knob-Show%20courier%20links=true&knob-Locale=en-AU');
-    }
 
     openGBWithExtraFeatures () {
-        super.openComponent('organism', 'footer-component&knob-Show%20courier%20links=true&knob-Locale=en-GB');
+        super.openComponent('organism', url);
     }
 
     waitForComponent () {
@@ -69,5 +108,25 @@ module.exports = class Footer extends Page {
 
     areCourierLinksDisplayed () {
         return this.courierLinks.isDisplayed();
+    }
+    isCountrySelectorDisplayed () {
+        return this.countrySelectorButton.isDisplayed();
+    }
+
+    clickCountrySelectorButton () {
+        return this.countrySelectorButton.click();
+    }
+
+    isCountryLinkItemDisplayed () {
+        return this.countryLink.isDisplayed();
+    }
+
+    clickCountryLinkItem () {
+        return this.countryLink.click();
+    }
+
+    isCurrentCountryIconDisplayed (country) {
+        const expectedIcon = this.currentFlagIcon.getAttribute('class').includes(`c-ficon--flag.${country}.round`);
+        return expectedIcon ? this.currentFlagIcon.isDisplayed() : false;
     }
 };

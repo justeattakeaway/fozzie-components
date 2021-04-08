@@ -4,6 +4,39 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.11.1
+------------------------------
+*March 16, 2021*
+
+### Changed
+- Small css amends to the mobile menu and country selector button
+
+
+v4.11.0
+------------------------------
+*March 15, 2021*
+
+### Changed
+- Media queries to pick up 768px width to render mobile view for tablet devices
+- `f-popover` package version bump
+- Fixed the tests for offers link
+- Mobile nav view to show offers and delivery links to have the same experience as on SiteCore header nav
+
+### Added
+- Unique keys for each link in `countryList.js`
+
+
+v4.10.0
+------------------------------
+*March 12, 2021*
+
+## Added
+- Browserstack test config in `package.json`
+
+### Changed
+- Restructured component tests to support Browserstack
+
+
 v4.9.0
 ------------------------------
 *March 4, 2021*

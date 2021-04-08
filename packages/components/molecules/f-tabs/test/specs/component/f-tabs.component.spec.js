@@ -1,5 +1,5 @@
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Tabs = require('../../../test-utils/component-objects/f-tabs.component');
-const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
 
 const tabs = new Tabs('molecule', 'vue-tabs-component');
 

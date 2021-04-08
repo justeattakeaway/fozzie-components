@@ -1,5 +1,5 @@
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const MegaModal = require('../../../test-utils/component-objects/f-mega-modal.component');
-const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
 
 const megaModal = new MegaModal('molecule', 'mega-modal-component');
 

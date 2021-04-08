@@ -1,5 +1,5 @@
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Breadcrumbs = require('../../../test-utils/component-objects/f-breadcrumbs.component');
-const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
 
 const breadcrumbs = new Breadcrumbs('molecule', 'breadcrumbs-component');
 

@@ -1,23 +1,37 @@
 const video = require('wdio-video-reporter');
+
 const CIRCLE_CI = process.env.CIRCLECI;
-const TEST_TYPE = process.env.TEST_TYPE;
+const { TEST_TYPE } = process.env;
+const { JE_ENV } = process.env;
+const { COMPONENT_TYPE } = process.env;
+
+exports.getBaseUrl = (port = 8080) => {
+    switch (JE_ENV) {
+        case 'local':
+            return `http://localhost:${port}/`;
+        case 'browserstack':
+            return `http://bs-local.com:${port}/`;
+        default:
+            throw new Error(`Sorry, ${JE_ENV} is not recognised.`);
+    }
+};
 
 exports.local = () => ({
     bail: 0,
     maxinstances: 1,
-    loglevel: 'silent',
-    reporters: [
+    loglevel: 'info',
+    reporters: JE_ENV !== 'browserstack' && COMPONENT_TYPE === 'organism' ? [
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases
             videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
-            outputDir: `${global.baseDir}/test/results/allure/failure-videos`
+            outputDir: `${global.baseDir}/test/results/allure`
         }],
         ['allure', {
             outputDir: `${global.baseDir}/test/results/allure`,
-            disableWebdriverStepsReporting: false,
-            disableWebdriverScreenshotsReporting: false
-        }],
-    ]
+            disableWebdriverStepsReporting: true,
+            disableWebdriverScreenshotsReporting: false,
+            disableMochaHooks: true
+        }]] : []
 });
 
 exports.ci = () => ({
@@ -37,8 +51,8 @@ exports.ci = () => ({
         }],
         ['junit', {
             outputDir: `${global.baseDir}/test/results/ci`,
-            outputFileFormat: function(options) { // optional
-                return `${options.cid}-${options.capabilities.browserName}-results.xml`
+            outputFileFormat: function (options) { // optional
+                return `${options.cid}-${options.capabilities.browserName}-results.xml`;
             }
         }]
     ]

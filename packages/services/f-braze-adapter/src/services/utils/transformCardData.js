@@ -44,9 +44,9 @@ const transformCardData = card => {
         expiry_date: expiryDate,
         expiry_line: expiryLine,
         footer,
-        is_ready_to_claim: isReadyToClaim,
         restaurant_logo_url: restaurantLogoUrl,
         icon_1: icon = restaurantLogoUrl,
+        location,
         restaurant_image_url: restaurantImageUrl,
         image_1: image = (imageUrl || restaurantImageUrl),
         offer_auth_required: offerAuthRequired,
@@ -61,7 +61,9 @@ const transformCardData = card => {
         display_times_json: displayTimesJson
     } = (extras || {});
 
-    const description = Object.keys(extras)
+    const extrasMembers = Object.keys(extras);
+
+    const description = extrasMembers
         .filter(key => key.indexOf('line_') !== -1)
         .map(key => extras[key]);
 
@@ -75,6 +77,10 @@ const transformCardData = card => {
 
     const extractedCardId = extractCardId(id);
     const target = getCardUrlTarget(url);
+
+    const isReadyToClaim = extrasMembers.includes('is_ready_to_claim')
+        ? ['true', true].includes(extras.is_ready_to_claim)
+        : undefined;
 
     return {
         backgroundColor,
@@ -94,6 +100,7 @@ const transformCardData = card => {
         id,
         image,
         isReadyToClaim,
+        location,
         offerAuthRequired,
         order,
         pinned,

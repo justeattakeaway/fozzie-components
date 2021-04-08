@@ -1,8 +1,11 @@
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import addressService from '../services/addressService';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE } from '../constants';
+import { version as applicationVerion } from '../../package.json';
 
 import {
+    UPDATE_HAS_ASAP_SELECTED,
     UPDATE_AUTH,
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
     UPDATE_BASKET_DETAILS,
@@ -16,6 +19,7 @@ import {
     UPDATE_STATE,
     UPDATE_USER_NOTE
 } from './mutation-types';
+import checkoutIssues from '../checkout-issues';
 
 export default {
     namespaced: true,
@@ -23,7 +27,10 @@ export default {
     state: () => ({
         id: '',
         serviceType: '',
-        restaurantId: '',
+        restaurant: {
+            id: '',
+            seoName: ''
+        },
         basket: {
             id: '',
             total: 0
@@ -42,7 +49,7 @@ export default {
         address: {
             line1: '',
             line2: '',
-            city: '',
+            locality: '',
             postcode: ''
         },
         userNote: '',
@@ -56,7 +63,8 @@ export default {
         },
         authToken: '',
         isLoggedIn: false,
-        geolocation: null
+        geolocation: null,
+        hasAsapSelected: false
     }),
 
     actions: {
@@ -114,8 +122,11 @@ export default {
             const { data: responseData } = await axios.patch(url, data, config);
             const { issues, isFulfillable } = responseData;
 
+            // Can now log these errors inside the map if necessary
+            const detailedIssues = issues.map(issue => ({ ...checkoutIssues[issue.code], ...issue }));
+
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
-            commit(UPDATE_ERRORS, issues);
+            commit(UPDATE_ERRORS, detailedIssues);
         },
 
         /**
@@ -186,7 +197,10 @@ export default {
             const { data } = await axios.get(url, config);
             const basketDetails = {
                 serviceType: data.ServiceType.toLowerCase(),
-                restaurantId: data.RestaurantId,
+                restaurant: {
+                    id: data.RestaurantId,
+                    seoName: data.RestaurantSeoName
+                },
                 basket: {
                     id: data.BasketId,
                     total: data.BasketSummary.BasketTotals.Total
@@ -230,6 +244,23 @@ export default {
         },
 
         /**
+         * Get the customer name from JWT claims and update state with the result
+         *
+         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
+         * @param {Object} payload - Parameter with the different configurations for the request.
+         */
+        getCustomerName: async ({ commit, state }) => {
+            const tokenData = jwtDecode(state.authToken);
+
+            const customer = {
+                firstName: tokenData.given_name,
+                lastName: tokenData.family_name
+            };
+
+            commit(UPDATE_CUSTOMER_DETAILS, customer);
+        },
+
+        /**
          * Post the order details to the Order Placement API and get the `orderId` from the response.
          *
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
@@ -242,11 +273,10 @@ export default {
 
             const config = {
                 headers: {
-                    'Content-Type': 'application/json;v=1',
-                    'x-je-feature': data.applicationName,
-                    ...(state.isLoggedIn && {
-                        Authorization: authHeader
-                    })
+                    'Content-Type': 'application/json;v=2',
+                    'x-je-application-id': 7, // Responsive Web
+                    'x-je-application-version': applicationVerion,
+                    Authorization: authHeader
                 },
                 timeout
             };
@@ -307,6 +337,10 @@ export default {
         updateUserNote ({ commit, dispatch }, payload) {
             commit(UPDATE_USER_NOTE, payload);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, 'note', { root: true });
+        },
+
+        updateHasAsapSelected ({ commit }, payload) {
+            commit(UPDATE_HAS_ASAP_SELECTED, payload);
         }
     },
 
@@ -335,9 +369,9 @@ export default {
                 /* eslint-disable prefer-destructuring */
                 state.address.line1 = address.lines[0];
                 state.address.line2 = address.lines[1];
-                state.address.city = address.lines[3];
                 /* eslint-enable prefer-destructuring */
 
+                state.address.locality = address.locality;
                 state.address.postcode = address.postalCode;
             }
 
@@ -359,10 +393,14 @@ export default {
             state.availableFulfilment.isAsapAvailable = asapAvailable;
         },
 
-        [UPDATE_BASKET_DETAILS]: (state, { serviceType, basket, restaurantId }) => {
+        [UPDATE_HAS_ASAP_SELECTED]: (state, hasAsapSelected) => {
+            state.hasAsapSelected = hasAsapSelected;
+        },
+
+        [UPDATE_BASKET_DETAILS]: (state, { serviceType, basket, restaurant }) => {
             state.serviceType = serviceType;
             state.basket = basket;
-            state.restaurantId = restaurantId;
+            state.restaurant = restaurant;
         },
 
         [UPDATE_CUSTOMER_DETAILS]: (state, customer) => {

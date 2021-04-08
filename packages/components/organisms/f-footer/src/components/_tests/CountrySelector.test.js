@@ -2,7 +2,6 @@ import { shallowMount } from '@vue/test-utils';
 import CountrySelector from '../CountrySelector.vue';
 
 describe('CountrySelector', () => {
-    allure.feature('Country Selector');
     let wrapper,
         button,
         list,
@@ -54,7 +53,7 @@ describe('CountrySelector', () => {
     });
 
     it('list should contain country from props', () => {
-        const country = wrapper.find('[data-test-id="countrySelector-country"]');
+        const country = wrapper.find(`[data-test-id="countrySelector-country-${wrapper.key}"]`);
         expect(country.text()).toBe(localisedName);
     });
 

@@ -1,5 +1,5 @@
-const UserMessage = require ('../../../test-utils/component-objects/f-user-message.component');
-const { buildUrl } = require('../../../../../../services/f-wdio-utils/src/storybook-extensions.js');
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
+const UserMessage = require('../../../test-utils/component-objects/f-user-message.component');
 
 const userMessage = new UserMessage('molecule', 'user-message-component');
 

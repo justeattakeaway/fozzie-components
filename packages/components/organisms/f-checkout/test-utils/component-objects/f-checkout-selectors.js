@@ -8,6 +8,13 @@ export const KNOB_CHECKOUT_DROPDOWN = '[name="Checkout Url"]';
 export const SWITCH_USER_LINK = '[data-test-id="switch-user-link"]';
 export const GUEST_CHECKOUT_LOGIN_BUTTON = '[data-test-id="guest-login-button"]';
 export const GUEST_CHECKOUT_HEADER = '[data-test-id="guest-checkoutHeader"]';
+export const PRE_ORDER_WARNING = '[data-test-id="warning-pre-order"]';
+export const CHECKOUT_ERROR_MESSAGE = '[data-test-id="checkout-issue-modal"]';
+export const RETRY_BUTTON = '[data-test-id="redirect-to-menu-button"]';
+export const ERROR_PAGE_COMPONENT = '[data-test-id="checkout-error-page-component"]';
+export const ERROR_PAGE_HEADING = '[data-test-id="checkout-error-page-heading"]';
+export const ERROR_PAGE_DESCRIPTION = '[data-test-id="checkout-error-page-description"]';
+export const ERROR_PAGE_IMAGE = '[data-test-id="checkout-error-page-image"]';
 
 export const FIELDS = {
     firstName: {
@@ -34,9 +41,9 @@ export const FIELDS = {
         input: '[data-test-id="formfield-address-line-2-input"]',
         error: ''
     },
-    addressCity: {
-        input: '[data-test-id="formfield-address-city-input"]',
-        error: '[data-test-id="error-address-city-empty"]'
+    addressLocality: {
+        input: '[data-test-id="formfield-address-locality-input"]',
+        error: '[data-test-id="error-address-locality-empty"]'
     },
     addressPostcode: {
         input: '[data-test-id="formfield-address-postcode-input"]',
@@ -47,14 +54,4 @@ export const FIELDS = {
         input: '[data-test-id="user-note"] textarea',
         error: ''
     }
-};
-
-export default {
-    CHECKOUT_COMPONENT,
-    ORDER_TIME_DROPDOWN,
-    ORDER_TIME_DROPDOWN_OPTIONS,
-    USER_NOTE_INPUT,
-    GO_TO_PAYMENT_BUTTON,
-    SWITCH_USER_LINK,
-    FIELDS
 };

@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-registration",
   "description": "Fozzie Registration Form Component",
-  "version": "0.46.0",
+  "version": "0.49.1",
   "main": "dist/f-registration.umd.min.js",
   "files": [
     "dist",
@@ -34,8 +34,12 @@
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
     "test:coverage": "yarn test --coverage",
-    "test-component:chrome": "wdio ../../../../wdio.conf.js --suite component",
-    "test-a11y:chrome": "wdio ../../../../wdio.conf.js --suite a11y"
+    "test-component:browserstack": "cross-env-shell JE_ENV=browserstack wdio ../../../../wdio-browserstack.conf.js --suite shared",
+    "test-component:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite component",
+    "report:test-component:chrome": "cross-env-shell JE_ENV=local COMPONENT_TYPE=organism wdio ../../../../wdio-chrome.conf.js --suite component && yarn allure:open",
+    "test-a11y:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite a11y", 
+    "allure:open": "yarn allure:clean && allure open",
+    "allure:clean": "rimraf ../../../../test/results/allure"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -49,6 +53,7 @@
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
+    "@justeat/f-wdio-utils": "0.2.0",
     "@justeat/f-button": "0.4.1",
     "@justeat/f-card": "0.7.0",
     "@justeat/f-error-message": "0.3.1",
