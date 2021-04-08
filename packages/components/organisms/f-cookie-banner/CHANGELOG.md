@@ -9,7 +9,7 @@ v0.7.0
 *April 8, 2021*
 
 ### Changed
-- Wrapped cookie banner content to a div which now is a description for the assistive tech vie `aria-describedby`
+- Wrapped cookie banner content to a div which now is a description for the assistive tech via `aria-describedby`
 - Moved dialog role and aria labels to the higher div to contain both banner context and buttons
 - `f-button` component version bump
 
