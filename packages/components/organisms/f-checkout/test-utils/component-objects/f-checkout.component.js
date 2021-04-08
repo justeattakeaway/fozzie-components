@@ -204,7 +204,7 @@ module.exports = class Checkout extends Page {
     * @param {String} userInfo.email The user's e-mail address
     * @param {String} userInfo.password The user's password
     */
-    submitForm () {
+    submitForm (userInfo) {
         this.fields.firstName.input.setValue(userInfo.firstName);
         this.fields.lastName.input.setValue(userInfo.lastName);
         this.fields.email.input.setValue(userInfo.email);

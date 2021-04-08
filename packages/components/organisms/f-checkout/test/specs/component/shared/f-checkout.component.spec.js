@@ -1,5 +1,5 @@
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
-const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
+const Checkout = require('../../../../test-utils/component-objects/f-checkout.component');
 
 const checkout = new Checkout('organism', 'checkout-component');
 
@@ -7,7 +7,7 @@ describe('f-checkout component tests', () => {
     beforeEach(() => {
         checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
-                .withQuery('&knob-Is Pre Order Warning Displayed', true);
+                .withQuery('&knob-Is ASAP available', true);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 

@@ -59,7 +59,7 @@ describe('Desktop - f-header component tests', () => {
         header.withQuery('&knob-Show delivery enquiry', 'true');
 
         const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
-            // Act
+        // Act
         header.open(pageUrl);
         header.waitForComponent();
         ['offersLink', 'userAccount', 'help', 'countrySelector'].forEach(link => {

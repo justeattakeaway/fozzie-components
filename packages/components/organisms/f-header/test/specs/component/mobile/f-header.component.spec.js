@@ -1,16 +1,46 @@
 const forEach = require('mocha-each');
+
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Header = require('../../../../test-utils/component-objects/f-header.component');
-const header = new Header();
+
+const header = new Header('organism', 'header-component');
+
+function formatLocale (tenant) {
+    const countryFormatted = tenant.toUpperCase();
+    let formattedLocale = '';
+    switch (countryFormatted) {
+        case 'GB':
+        case 'AU':
+        case 'NZ':
+        case 'IE':
+            formattedLocale = `en-${countryFormatted}`;
+            break;
+        case 'DK':
+            formattedLocale = `da-${countryFormatted}`;
+            break;
+        case 'ES':
+            formattedLocale = `es-${countryFormatted}`;
+            break;
+        case 'IT':
+            formattedLocale = `it-${countryFormatted}`;
+            break;
+        case 'NO':
+            formattedLocale = `nb-${countryFormatted}`;
+            break;
+        default:
+            throw new Error(`locale ${countryFormatted} is not supported`);
+    }
+    return formattedLocale;
+}
 
 describe('Mobile - f-header component tests', () => {
     beforeEach(() => {
-        const headerData = {
-            locale: 'gb',
-            offers: true,
-            delivery: true
-        };
+        header.withQuery('&knob-Locale', formatLocale('gb'));
+        header.withQuery('&knob-Show offers link', 'true');
+        header.withQuery('&knob-Show delivery enquiry', 'true');
+        const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
 
-        header.open(headerData);
+        header.open(pageUrl);
         header.waitForComponent();
 
         if (process.env.JE_ENV !== 'browserstack') {
@@ -21,7 +51,7 @@ describe('Mobile - f-header component tests', () => {
     forEach(['offersLink', 'delivery', 'help', 'countrySelector', 'userAccount'])
     .it('should display all navigation links', link => {
         // Act
-        header.openMobileNavigation();
+        header.openMobileNavigationBar();
 
         // Assert
         expect(header.isNavigationLinkDisplayed(link)).toBe(true);
@@ -30,17 +60,16 @@ describe('Mobile - f-header component tests', () => {
     forEach(['au', 'ie', 'nz'])
     .it('should hide all navigation links but display offersIcon link, when in mobile mode', expectedLocale => {
         // Arrange
-        const headerData = {
-            locale: expectedLocale,
-            offers: true,
-            delivery: true
-        };
+        header.withQuery('&knob-Locale', formatLocale(expectedLocale));
+        header.withQuery('&knob-Show offers link', 'true');
+        header.withQuery('&knob-Show delivery enquiry', 'true');
+        const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+
+        // Act
+        header.open(pageUrl);
+        header.waitForComponent();
 
         ['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'].forEach(link => {
-            // Act
-            header.open(headerData);
-            header.waitForComponent();
-
             // Assert
             expect(header.isMobileNavigationBarDisplayed()).toBe(true);
             expect(header.isNavigationLinkDisplayed(link)).toBe(false);
@@ -51,17 +80,16 @@ describe('Mobile - f-header component tests', () => {
     forEach(['it', 'es', 'dk', 'no'])
     .it('should hide all navigation links, as well as offersIcon, when in mobile mode', expectedLocale => {
         // Arrange
-        const headerData = {
-            locale: expectedLocale,
-            offers: true,
-            delivery: true
-        };
+        header.withQuery('&knob-Locale', formatLocale(expectedLocale));
+        header.withQuery('&knob-Show offers link', 'true');
+        header.withQuery('&knob-Show delivery enquiry', 'true');
+        const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+
+        // Act
+        header.open(pageUrl);
+        header.waitForComponent();
 
         ['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'].forEach(link => {
-            // Act
-            header.open(headerData);
-            header.waitForComponent();
-
             // Assert
             expect(header.isMobileNavigationBarDisplayed()).toBe(true);
             expect(header.isNavigationLinkDisplayed(link)).toBe(false);
@@ -71,16 +99,17 @@ describe('Mobile - f-header component tests', () => {
     forEach(['au', 'ie', 'nz'])
     .it('should display navigation links when burger menu is opened', expectedLocale => {
         // Arrange
-        const headerData = {
-            locale: expectedLocale,
-            offers: true,
-            delivery: true
-        };
+        header.withQuery('&knob-Locale', formatLocale(expectedLocale));
+        header.withQuery('&knob-Show offers link', 'true');
+        header.withQuery('&knob-Show delivery enquiry', 'true');
+        const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+
+        // Act
+        header.open(pageUrl);
+        header.waitForComponent();
 
         ['offersLink', 'userAccount', 'help', 'countrySelector'].forEach(link => {
-            // Act
-            header.open(headerData);
-            header.openMobileNavigation();
+            header.openMobileNavigationBar();
             header.waitForComponent();
 
             // Assert
@@ -91,16 +120,17 @@ describe('Mobile - f-header component tests', () => {
     forEach(['it', 'es', 'dk', 'no'])
     .it('should display the below navigation links when menu has been opened', expectedLocale => {
         // Arrange
-        const headerData = {
-            locale: expectedLocale,
-            offers: true,
-            delivery: true
-        };
+        header.withQuery('&knob-Locale', formatLocale(expectedLocale));
+        header.withQuery('&knob-Show offers link', 'true');
+        header.withQuery('&knob-Show delivery enquiry', 'true');
+        const pageUrl = buildUrl(header.componentType, header.componentName, header.path);
+
+        // Act
+        header.open(pageUrl);
+        header.waitForComponent();
 
         ['userAccount', 'help', 'countrySelector'].forEach(link => {
-            // Act
-            header.open(headerData);
-            header.openMobileNavigation();
+            header.openMobileNavigationBar();
             header.waitForComponent();
 
             // Assert
@@ -113,7 +143,7 @@ describe('Mobile - f-header component tests', () => {
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
     .it('should display all countries when in mobile mode', country => {
         // Act
-        header.openMobileNavigation();
+        header.openMobileNavigationBar();
         header.openCountrySelector();
         header.expectedCountry = country;
 

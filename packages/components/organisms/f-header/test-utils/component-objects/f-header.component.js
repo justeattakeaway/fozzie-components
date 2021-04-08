@@ -42,21 +42,8 @@ module.exports = class Header extends Page {
         this.countryValue = this.navigation.countrySelector.countries.filter(element => element.getAttribute('data-test-id').includes(country))[0];
     }
 
-    /**
-     * @description
-     * Sets the data for the checkout component.
-     *
-     * @param {Object} header
-     * @param {String} header.locale The checkout type
-     * @param {String} header.offers The checkout authentication
-     * @param {String} header.delivery The checkout authentication
-     */
-    open (header) {
-        const countryFormatted = header.locale.toUpperCase();
-                throw new Error(`locale ${countryFormatted} is not supported`);
-        const offersUrl = header.offers ? '&knob-Show%20offers%20link=true' : '';
-        const deliveryUrl = header.delivery ? '&knob-Show%20delivery%20enquiry=true' : '';
-        super.openComponent('organism', `header-component&knob-Locale=${formattedLocale}${offersUrl}${deliveryUrl}`);
+    open (url) {
+        super.open(url);
     }
 
     waitForComponent () {
@@ -90,10 +77,6 @@ module.exports = class Header extends Page {
 
     isOffersIconLinkDisplayed () {
         return this.navigation.offersIcon.isDisplayed();
-    }
-
-    isNavigationLinkDisplayed (linkName) {
-        return this.navigation[linkName].link.isDisplayedInViewport();
     }
 
     clickOffersLink () {
