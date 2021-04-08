@@ -479,7 +479,7 @@ export default {
 
                 this.trackFormErrors();
 
-                this.logInvoker('Consumer Checkout Not Fulfillable', { ...this.eventData }, this.$logger.logWarn);
+                this.logInvoker('Consumer Checkout Not Fulfillable', this.eventData, this.$logger.logWarn);
 
                 this.$emit(EventNames.CheckoutUpdateFailure, this.eventData);
             }
@@ -548,7 +548,7 @@ export default {
                 this.$emit(EventNames.CheckoutPlaceOrderSuccess, this.eventData);
                 this.$emit(EventNames.CheckoutSuccess, this.eventData);
 
-                this.logInvoker('Consumer Checkout Successful', { ...this.eventData }, this.$logger.logInfo);
+                this.logInvoker('Consumer Checkout Successful', this.eventData, this.$logger.logInfo);
             } catch (e) {
                 throw new PlaceOrderError(e.message);
             }
@@ -597,7 +597,7 @@ export default {
                 this.$emit(EventNames.CheckoutGetFailure, error);
                 this.hasCheckoutLoadedSuccessfully = false;
 
-                this.logInvoker('Get Checkout Failure', { ...this.eventData, error }, this.$logger.logError);
+                this.logInvoker('Get Checkout Failure', this.eventData, this.$logger.logError, error);
             }
         },
 
@@ -619,7 +619,7 @@ export default {
                 this.$emit(EventNames.CheckoutBasketGetFailure, error);
                 this.hasCheckoutLoadedSuccessfully = false;
 
-                this.logInvoker('Get Checkout Basket Failure', { ...this.eventData, error }, this.$logger.logError);
+                this.logInvoker('Get Checkout Basket Failure', this.eventData, this.$logger.logError, error);
             }
         },
 
@@ -639,7 +639,7 @@ export default {
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetFailure, error);
                 this.hasCheckoutLoadedSuccessfully = false;
 
-                this.logInvoker('Get Checkout Available Fulfilment Times Failure', { ...this.eventData, error }, this.$logger.logError);
+                this.logInvoker('Get Checkout Available Fulfilment Times Failure', this.eventData, this.$logger.logError, error);
             }
         },
 
