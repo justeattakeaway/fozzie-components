@@ -8,7 +8,7 @@ const messages = {
     textLine3: 'For nærmere oplysninger om de anvendte cookies og teknologier henviser vi til vores ',
     textLine4: '. Ved brug af denne banner placeres en cookie på din enhed, som husker dine præferencer.',
     cookiePolicyLinkText: 'cookie-meddelelse',
-    cookiePolicyLinkUrl: 'https://www.just-eat.dk/info/cookiepolitik'
+    cookiePolicyLinkUrl: 'https://www.just-eat.dk/cookie-erklaering'
 };
 
 const displayLegacy = false;

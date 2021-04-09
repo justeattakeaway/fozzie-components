@@ -11,6 +11,7 @@
                 headlineTitle: copy.statusBannerContent.searchboxHeading,
                 headlineSubtitle: copy.statusBannerContent.searchboxSubHeading
             }"
+            data-test-id="banner-search-box"
             :class="$style['c-search-wrapper']" />
     </div>
 </template>

@@ -19,6 +19,7 @@
         >
             <alert
                 v-if="genericErrorMessage"
+                ref="errorAlert"
                 type="danger"
                 :class="$style['c-checkout-alert']"
                 :heading="$t('errorMessages.errorHeading')"
@@ -108,6 +109,8 @@ import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import { validations } from '@justeat/f-services';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
+import VueScrollTo from 'vue-scrollto';
+
 import AddressBlock from './Address.vue';
 import CheckoutHeader from './Header.vue';
 import CheckoutTermsAndConditions from './TermsAndConditions.vue';
@@ -209,6 +212,13 @@ export default {
         authToken: {
             type: String,
             default: ''
+        },
+
+        otacToAuthExchanger: {
+            type: Function,
+            default: () => {
+                throw new Error('otacToAuthExchanger is not implemented');
+            }
         },
 
         loginUrl: {
@@ -544,7 +554,8 @@ export default {
                     url: this.createGuestUrl,
                     tenant: this.tenant,
                     data: createGuestData,
-                    timeout: this.checkoutTimeout
+                    timeout: this.checkoutTimeout,
+                    otacToAuthExchanger: this.otacToAuthExchanger
                 });
 
                 this.$emit(EventNames.CheckoutSetupGuestSuccess);
@@ -672,6 +683,25 @@ export default {
             this.logInvoker(logMessage, this.eventData, this.$logger.logError, error);
             this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
             this.genericErrorMessage = message;
+
+            this.$nextTick(() => {
+                this.scrollToElement('errorAlert');
+            });
+        },
+
+        /**
+         * Scroll to a ref element in the screen.
+        */
+        scrollToElement (refElement) {
+            const scrollingDurationInMilliseconds = 650;
+
+            const element = this.$refs[refElement]
+                ? this.$refs[refElement].$el
+                : null;
+
+            if (element) {
+                VueScrollTo.scrollTo(element, scrollingDurationInMilliseconds, { offset: -20 });
+            }
         },
 
         /**
