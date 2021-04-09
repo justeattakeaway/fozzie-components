@@ -49,7 +49,7 @@ describe('Mobile - f-header component tests', () => {
     });
 
     forEach(['it', 'es', 'dk', 'no'])
-    .it('should hide all navigation links, as well as offersIcon, when in mobile mode', expectedLocale => {
+    .it('should hide all navigation links for country code "%s", as well as offersIcon, when in mobile mode', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -69,7 +69,7 @@ describe('Mobile - f-header component tests', () => {
     });
 
     forEach(['au', 'ie', 'nz'])
-    .it('should display navigation links when burger menu is opened', expectedLocale => {
+    .it('should display navigation links for country code "%s" when burger menu is opened', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -89,7 +89,7 @@ describe('Mobile - f-header component tests', () => {
     });
 
     forEach(['it', 'es', 'dk', 'no'])
-    .it('should display the below navigation links when menu has been opened', expectedLocale => {
+    .it('should display the below navigation links for country code "%s" when menu has been opened', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
