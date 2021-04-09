@@ -217,7 +217,9 @@ export default {
 
         otacToAuthExchanger: {
             type: Function,
-            default: () => ''
+            default: () => {
+                throw new Error('otacToAuthExchanger is not implemented');
+            }
         },
 
         loginUrl: {
