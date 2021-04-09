@@ -530,6 +530,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/scss/navigation.scss';
+
 // TODO - Pull in fozzie utilities css instead
 // https://github.com/justeat/fozzie/blob/f7f0184ba3a244c19d6e83c44c35a31b7c2dd2d9/src/scss/trumps/_utilities.scss
 // Hide from both screenreaders and browsers: h5bp.com/u
@@ -581,10 +583,6 @@ $nav-icon-size                     : 24px;
 $nav-featureLinkIcon-width         : 28px;
 $nav-featureLinkIcon-height        : 28px;
 
-$nav-trigger-width                 : 56px;
-$nav-trigger-height                : 48px;
-$nav-trigger-focus-color           : $blue;
-$nav-trigger-focus-bg              : $blue--offWhite;
 $nav-toggleIcon-left               : spacing(x2);
 $nav-toggleIcon-width              : 21px;
 $nav-toggleIcon-height             : 2px;
@@ -594,21 +592,7 @@ $nav-toggleIcon-color--transparent : $white;
 $nav-toggleIcon-bg                 : transparent;
 $nav-toggleIcon-space              : 5px;
 
-$nav-popover-transition-delay      : 200ms;
-$nav-popover-transition-duration   : 200ms;
 $nav-popover-width                 : 300px;
-
-$countrySelector-flag-width  : 16px;
-$countrySelector-flag-height : 16px;
-
-@mixin nav-container-visible () {
-    overflow-y: auto;
-    left: 0;
-    opacity: 1;
-    z-index: zIndex(high);
-    transition: opacity $nav-transition-duration ease-in-out,
-                z-index 0s linear;
-}
 
 // removes scroll
 .is-navInView {
@@ -631,70 +615,6 @@ $countrySelector-flag-height : 16px;
         padding-top: 0;
     }
 }
-
-// Global site-wide navigation
-.c-nav--global {
-    @include media('>mid') {
-        display: flex;
-        justify-content: flex-end;
-        flex-grow: 1;
-    }
-
-    // we have a nav container so that we don’t have to make the inner list 100% height
-    // this is so we can position the logout button last on mobile
-    & .c-nav-container {
-        @include media('<=mid') {
-            position: fixed;
-            top: $header-height--narrow;
-            left: -99999px;
-            width: 100%;
-            padding: 0;
-            height: calc(100% - (#{$header-height--narrow}));
-            border-top: $header-separator solid $header-border-color;
-            background: $white;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity $nav-transition-duration ease-in-out,
-                        z-index 0s linear $nav-transition-duration,
-                        left 0s linear ($nav-popover-transition-delay + $nav-popover-transition-duration);
-
-            &.is-visible {
-                @include nav-container-visible();
-            }
-        }
-    }
-}
-
-.c-nav-list {
-    position: relative;
-}
-.c-nav-list,
-.c-nav-popoverList {
-    margin-top: 0;
-    margin-left: 0;
-    list-style: none;
-    list-style-image: none;
-    padding: 0;
-
-    & > li {
-        margin-bottom: 0;
-
-        &:before {
-            content: none;
-        }
-    }
-
-    @include media('<=mid') {
-        display: flex;
-        flex-direction: column;
-    }
-}
-
-    .c-nav-popoverList--twoColumns {
-        @include media('>mid') {
-            column-count: 2;
-        }
-    }
 
     // TODO: MAKE THIS NOT USE FLOATS
     // global modifier for list items horizontally aligned
@@ -758,28 +678,6 @@ $countrySelector-flag-height : 16px;
             &.u-showBelowMid {
                 @include media('>mid') {
                     display: none !important;
-                }
-            }
-        }
-
-        .c-nav-list-link {
-            &:hover,
-            &:focus,
-            &:active {
-                text-decoration: none;
-
-                @include media('>mid') {
-                    color: $nav-text-color--hover;
-                    text-decoration: underline;
-
-                    .c-header--highlightBg,
-                    .c-header--transparent & {
-                        color: $nav-text-color--transparent;
-                    }
-
-                    .c-header--transparent .c-nav-popoverList & {
-                        color: inherit;
-                    }
                 }
             }
         }
@@ -862,35 +760,6 @@ $countrySelector-flag-height : 16px;
             }
         }
     }
-
-// Navigation Trigger
-// This is the checkbox that controls the menu active state without JS via :checked
-.c-nav-trigger {
-    position: absolute;
-    width: $nav-trigger-width;
-    height: $nav-trigger-height;
-    top: -100px;
-    left: -100px;
-
-    @include media('>mid') {
-        display: none;
-    }
-
-    &:checked ~ .c-nav-container {
-        @include media('<=mid') {
-            @include nav-container-visible();
-        }
-    }
-
-    &:focus ~ .c-nav-toggle {
-        background-color: $nav-trigger-focus-bg;
-        box-shadow: 0 0 6px 0 $nav-trigger-focus-color;
-
-        .c-header--transparent & {
-            background-color: transparent;
-        }
-    }
-}
 
 // Navigation Toggle
 // Only shown at narrow widths (Hamburger Menu icon)
@@ -1035,12 +904,6 @@ $countrySelector-flag-height : 16px;
             justify-content: center;
         }
     }
-}
-
-.c-nav-list-icon--flag {
-    height: $countrySelector-flag-height;
-    width: $countrySelector-flag-width;
-    margin-right: spacing();
 }
 
 .c-nav-list-icon--flagCurrent {

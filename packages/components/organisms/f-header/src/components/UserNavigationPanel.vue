@@ -67,7 +67,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/nav.scss';
+@import '../assets/scss/navigation.scss';
 
 .list-link {
     display: block;
