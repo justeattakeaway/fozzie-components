@@ -7,8 +7,8 @@ describe('f-user-message component tests', () => {
     beforeEach(() => {
         const pageUrl = buildUrl(userMessage.componentType, userMessage.componentName, userMessage.path);
 
-        userMessage.open(pageUrl)
-            .waitForComponent();
+        userMessage.open(pageUrl);
+        userMessage.waitForComponent();
     });
 
     it('should display the user message component', () => {

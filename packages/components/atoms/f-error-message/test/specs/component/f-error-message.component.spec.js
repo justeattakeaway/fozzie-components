@@ -6,8 +6,8 @@ const errorMessage = new ErrorMessage('atom', 'error-message-component');
 describe('f-error-message component tests', () => {
     beforeEach(() => {
         const pageUrl = buildUrl(errorMessage.componentType, errorMessage.componentName, errorMessage.path);
-        errorMessage.open(pageUrl)
-            .waitForComponent();
+        errorMessage.open(pageUrl);
+        errorMessage.waitForComponent();
     });
 
     it('should display the f-error-message component', () => {

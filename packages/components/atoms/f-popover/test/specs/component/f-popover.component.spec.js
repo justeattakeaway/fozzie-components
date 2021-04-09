@@ -6,8 +6,8 @@ const popover = new Popover('atom', 'popover-component');
 describe('f-popover component tests', () => {
     beforeEach(() => {
         const pageUrl = buildUrl(popover.componentType, popover.componentName, popover.path);
-        popover.open(pageUrl)
-            .waitForComponent();
+        popover.open(pageUrl);
+        popover.waitForComponent();
     });
 
     it('should display the f-popover component', () => {

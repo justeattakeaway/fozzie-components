@@ -6,8 +6,8 @@ const card = new Card('atom', 'card-component');
 describe('f-card component tests', () => {
     beforeEach(() => {
         const pageUrl = buildUrl(card.componentType, card.componentName, card.path);
-        card.open(pageUrl)
-            .waitForComponent();
+        card.open(pageUrl);
+        card.waitForComponent();
     });
 
     it('should display the f-card component', () => {

@@ -7,8 +7,8 @@ describe('f-mega-modal component tests', () => {
     beforeEach(() => {
         const pageUrl = buildUrl(megaModal.componentType, megaModal.componentName, megaModal.path);
 
-        megaModal.open(pageUrl)
-            .waitForComponent();
+        megaModal.open(pageUrl);
+        megaModal.waitForComponent();
     });
 
     it('should display Alert', () => {

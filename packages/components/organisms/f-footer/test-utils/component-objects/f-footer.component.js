@@ -48,40 +48,6 @@ module.exports = class Footer extends Page {
         super.open(url);
     }
 
-    /**
-     * @description
-     * Sets the data for the checkout component.
-     *
-     * @param {Object} footer
-     * @param {String} footer.locale The checkout type
-     * @param {String} footer.countrySelector The checkout authentication
-     * @param {String} footer.courierLinks The checkout authentication
-     */
-
-    open (footer) {
-        const countryFormatted = footer.locale.toUpperCase();
-        const showCountrySelector = `&knob-Show%20country%20selector=${footer.countrySelector}`;
-        const showCourierLinks = `&knob-Show%20courier%20links=${footer.courierLinks}`;
-                formattedLocale = `en-${countryFormatted}`;
-                break;
-            case 'DK':
-                formattedLocale = `da-${countryFormatted}`;
-                break;
-            case 'ES':
-                formattedLocale = `es-${countryFormatted}`;
-                break;
-            case 'IT':
-                formattedLocale = `it-${countryFormatted}`;
-                break;
-            case 'NO':
-                formattedLocale = `nb-${countryFormatted}`;
-                break;
-    openAUWithExtraFeatures () {
-
-    openGBWithExtraFeatures () {
-        super.openComponent('organism', url);
-    }
-
     waitForComponent () {
         super.waitForComponent(this.component);
     }

@@ -7,8 +7,8 @@ describe('f-form-field component tests', () => {
     beforeEach(() => {
         const pageUrl = buildUrl(formfield.componentType, formfield.componentName, formfield.path);
 
-        formfield.open(pageUrl)
-            .waitForComponent();
+        formfield.open(pageUrl);
+        formfield.waitForComponent();
     });
 
     it('should display f-form-field', () => {

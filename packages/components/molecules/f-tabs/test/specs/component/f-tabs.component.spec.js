@@ -7,8 +7,8 @@ describe('f-tabs component tests', () => {
     beforeEach(() => {
         const pageUrl = buildUrl(tabs.componentType, tabs.componentName, tabs.path);
 
-        tabs.open(pageUrl)
-            .waitForComponent();
+        tabs.open(pageUrl);
+        tabs.waitForComponent();
     });
 
     it('should display the f-tabs component', () => {

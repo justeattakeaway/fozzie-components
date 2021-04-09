@@ -7,8 +7,8 @@ describe('f-mediaElement component tests', () => {
     beforeEach(() => {
         const pageUrl = buildUrl(mediaElement.componentType, mediaElement.componentName, mediaElement.path);
 
-        mediaElement.open(pageUrl)
-            .waitForComponent();
+        mediaElement.open(pageUrl);
+        mediaElement.waitForComponent();
     });
 
     it('should display the f-mediaElement component', () => {

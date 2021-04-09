@@ -7,8 +7,8 @@ describe('f-breadcrumbs component tests', () => {
     beforeEach(() => {
         const pageUrl = buildUrl(breadcrumbs.componentType, breadcrumbs.componentName, breadcrumbs.path);
 
-        breadcrumbs.open(pageUrl)
-            .waitForComponent();
+        breadcrumbs.open(pageUrl);
+        breadcrumbs.waitForComponent();
     });
     it('should display the f-breadcrumbs component', () => {
         // Assert

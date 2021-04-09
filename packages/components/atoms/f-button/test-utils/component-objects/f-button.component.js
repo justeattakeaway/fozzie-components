@@ -10,11 +10,11 @@ module.exports = class Buttons extends Page {
     }
 
     waitForActionComponent () {
-        super.waitForComponent();
+        this.actionComponent.waitForComponent();
     }
 
     waitForLinkComponent () {
-        this.linkComponent.waitForExist(this.component);
+        this.linkComponent.waitForExist();
     }
 
     isActionComponentDisplayed () {

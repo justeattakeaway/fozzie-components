@@ -7,8 +7,8 @@ describe('f-alert component tests', () => {
     beforeEach(() => {
         const pageUrl = buildUrl(alert.componentType, alert.componentName, alert.path);
 
-        alert.open(pageUrl)
-            .waitForComponent();
+        alert.open(pageUrl);
+        alert.waitForComponent();
     });
 
     it('should display Alert', () => {
