@@ -125,6 +125,12 @@ export const CheckoutComponent = () => ({
         }
     },
 
+    methods: {
+        otacToAuthExchanger () {
+            return mockAuthToken;
+        }
+    },
+
     store: new Vuex.Store({
         modules: {
             fCheckoutModule,
@@ -139,6 +145,7 @@ export const CheckoutComponent = () => ({
         ':create-guest-url="createGuestUrl" ' +
         ':get-basket-url="getBasketUrl" ' +
         ':authToken="authToken" ' +
+        ':otacToAuthExchanger="otacToAuthExchanger"' +
         ':locale="locale" ' +
         ':loginUrl="loginUrl" ' +
         ':getAddressUrl="getAddressUrl" ' +

@@ -73,7 +73,7 @@ describe('Checkout', () => {
     const paymentPageUrlPrefix = 'http://localhost/paymentpage';
     const getGeoLocationUrl = 'http://localhost/geolocation';
     const spinnerTimeout = 100;
-
+    const otacToAuthExchanger = () => '';
     const applicationName = 'Jest';
 
     const propsData = {
@@ -88,7 +88,8 @@ describe('Checkout', () => {
         paymentPageUrlPrefix,
         getGeoLocationUrl,
         applicationName,
-        spinnerTimeout
+        spinnerTimeout,
+        otacToAuthExchanger
     };
 
     let windowLocationSpy;
@@ -1390,6 +1391,7 @@ describe('Checkout', () => {
                         emailAddress: customer.email,
                         registrationSource: 'Guest'
                     },
+                    otacToAuthExchanger,
                     timeout: 1000
                 };
                 const createGuestUserSpy = jest.spyOn(VueCheckout.methods, 'createGuestUser');
