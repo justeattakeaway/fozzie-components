@@ -22,7 +22,7 @@ describe('Desktop - f-header component tests', () => {
     });
 
     forEach(['au', 'ie', 'nz'])
-    .it('should display the below navigation links', expectedLocale => {
+    .it('should display the below navigation links for country code "%s"', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -42,7 +42,7 @@ describe('Desktop - f-header component tests', () => {
     });
 
     forEach(['it', 'es', 'dk', 'no'])
-    .it('should display the below navigation links', expectedLocale => {
+    .it('should display the below navigation links for country code "%s"', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -62,8 +62,21 @@ describe('Desktop - f-header component tests', () => {
         });
     });
 
-    forEach([['gb', '.co.uk'], ['dk', '.dk'], ['no', '.no'], ['au', 'au'], ['at', 'at'], ['be', 'be-en'], ['bg', 'bg'], ['ca_en', 'skipthedishes.com'], ['jet_fr', '.fr'], ['de', '.de'], ['ie', '.ie'], ['il', '.il'], ['it', '.it']])
-    .it('should display all countries and redirect to correct URL', (expectedLocale, expectedUrl) => {
+    forEach([
+        ['gb', '.co.uk'],
+        ['dk', '.dk'],
+        ['no', '.no'],
+        ['au', 'au'],
+        ['at', 'at'],
+        ['be', 'be-en'],
+        ['bg', 'bg'],
+        ['ca_en', 'skipthedishes.com'],
+        ['jet_fr', '.fr'],
+        ['de', '.de'],
+        ['ie', '.ie'],
+        ['il', '.il'],
+        ['it', '.it']])
+    .it('should display link for country code "%s" and redirect to correct URL', (expectedLocale, expectedUrl) => {
         // Act
         header.moveToCountrySelector();
         header.expectedCountry = expectedLocale;
@@ -78,8 +91,18 @@ describe('Desktop - f-header component tests', () => {
         expect(browser.getUrl()).toContain(expectedUrl);
     });
 
-    forEach([['lu', 'lu-en'], ['nl', '.nl'], ['nz', '.nz'], ['pl', '.pl'], ['pt', '/pt'], ['ro', '/ro'], ['es', '.es'], ['ch_ch', '.ch'], ['ch_en', '/en'], ['ch_fr', '/fr']])
-    .it('should display all countries and redirect to correct URL', (expectedLocale, expectedUrl) => {
+    forEach([
+        ['lu', 'lu-en'],
+        ['nl', '.nl'],
+        ['nz', '.nz'],
+        ['pl', '.pl'],
+        ['pt', '/pt'],
+        ['ro', '/ro'],
+        ['es', '.es'],
+        ['ch_ch', '.ch'],
+        ['ch_en', '/en'],
+        ['ch_fr', '/fr']])
+    .it('should display link for country code "%s" and redirect to correct URL', (expectedLocale, expectedUrl) => {
         // Act
         header.moveToCountrySelector();
         header.expectedCountry = expectedLocale;
@@ -95,7 +118,7 @@ describe('Desktop - f-header component tests', () => {
     });
 
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
-    .it('should display correct country selector icon depending on which locale is chosen', expectedLocale => {
+    .it('should display correct selector icon for country code "%s depending on which locale is chosen', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
