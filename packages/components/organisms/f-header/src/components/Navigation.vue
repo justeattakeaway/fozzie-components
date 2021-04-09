@@ -569,7 +569,6 @@ export default {
 $nav-text-size                     : 'body-l';
 $nav-text-size--narrow             : 'body-s';
 $nav-text-color                    : $color-link-default;
-$nav-text-color--hover             : $color-link-hover;
 $nav-text-color--narrow            : $grey--dark;
 $nav-text-color--transparent       : $white;
 $nav-text-weight                   : $font-weight-bold;

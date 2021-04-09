@@ -1,5 +1,8 @@
 @import './common.scss';
 
+$nav-text-color--hover : $color-link-hover;
+$nav-text-color--transparent : $white;
+
 $nav-transition-duration : 250ms;
 
 $nav-trigger-width : 56px;
