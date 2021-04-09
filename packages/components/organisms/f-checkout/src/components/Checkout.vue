@@ -110,7 +110,6 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 import { validations } from '@justeat/f-services';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import VueScrollTo from 'vue-scrollto';
-
 import AddressBlock from './Address.vue';
 import CheckoutHeader from './Header.vue';
 import CheckoutTermsAndConditions from './TermsAndConditions.vue';

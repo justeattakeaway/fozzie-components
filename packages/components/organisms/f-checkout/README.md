@@ -98,9 +98,14 @@ The props that can be defined are as follows:
 | `checkout-available-fulfilment-get-failure` | Emitted when available fulfilment times fail to load. |
 | `checkout-visit-login-page` | Emitted when user clicks the _Not you?_ link |
 | `checkout-basket-get-success` | Emitted when basket data is successfully loaded. |
+| `checkout-basket-get-failure` | Emitted when basket data is not successfully loaded. |
 | `checkout-setup-guest-success` | Emitted when guest user is created successfully. |
 | `checkout-setup-guest-failure` | Emitted when guest user is not created successfully. |
 | `checkout-validation-error` | Emitted validation error occurs. |
+| `checkout-address-get-success` | Emitted when address is returned successfully. |
+| `checkout-address-get-failure` | Emitted when address is not returned successfully. |
+| `checkout-error-dialog-button-click` | Emitted when the error dialog ok is clicked. |
+| `checkout-dialog-close-button-click` | Emitted when the error dialog close is clicked. |
 | `checkout-place-order-success` | Emitted when order is successfully placed. |
 | `checkout-place-order-failure` | Emitted when order is not successfully placed. |
 | `checkout-update-success` | Emitted when checkout is successfully updated. |
