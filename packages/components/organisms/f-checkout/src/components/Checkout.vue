@@ -19,6 +19,7 @@
         >
             <alert
                 v-if="genericErrorMessage"
+                ref="errorAlert"
                 type="danger"
                 :class="$style['c-checkout-alert']"
                 :heading="$t('errorMessages.errorHeading')"
@@ -110,6 +111,7 @@ import '@justeat/f-form-field/dist/f-form-field.css';
 
 import { validations } from '@justeat/f-services';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
+import VueScrollTo from 'vue-scrollto';
 
 import AddressBlock from './Address.vue';
 import CheckoutHeader from './Header.vue';
@@ -724,6 +726,25 @@ export default {
             this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
 
             this.genericErrorMessage = messageToDisplay || this.$t('errorMessages.genericServerError');
+
+            this.$nextTick(() => {
+                this.scrollToElement('errorAlert');
+            });
+        },
+
+        /**
+         * Scroll to a ref element in the screen.
+        */
+        scrollToElement (refElement) {
+            const scrollingDurationInMilliseconds = 650;
+
+            const element = this.$refs[refElement]
+                ? this.$refs[refElement].$el
+                : null;
+
+            if (element) {
+                VueScrollTo.scrollTo(element, scrollingDurationInMilliseconds, { offset: -20 });
+            }
         },
 
         /**
@@ -896,7 +917,8 @@ export default {
 
 .c-checkout-alert {
     width: $checkout-width;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 /* If these stay the same then just rename the class to something more generic */
 .c-checkout-submitButton {

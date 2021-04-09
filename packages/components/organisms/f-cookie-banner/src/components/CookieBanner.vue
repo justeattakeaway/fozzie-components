@@ -14,48 +14,50 @@
                 $style['c-cookieBanner-card'],
                 { [$style['c-cookieBanner-ios']]: isIosBrowser }
             ]"
-            data-test-id="cookieConsentBanner">
+            data-test-id="cookieConsentBanner"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cookieConsentTitle"
+            aria-describedby="cookieConsentDescription">
             <div
                 :class="$style['c-cookieBanner-content']"
-                data-test-id="cookieBannerContent"
-                role="dialog"
-                aria-labelledby="cookieConsentLabel"
-                aria-modal="true">
+                data-test-id="cookieBannerContent">
                 <h2
-                    id="cookieConsentLabel"
+                    id="cookieConsentTitle"
                     ref="cookieBannerHeading"
-                    :class="$style['c-cookieBanner-title']"
                     tabindex="0"
+                    :class="$style['c-cookieBanner-title']"
                     data-consent-title>
                     {{ copy.mainTitle }}
                 </h2>
+                <div id="cookieConsentDescription">
+                    <p :class="$style['c-cookieBanner-text']">
+                        {{ copy.textLine1 }}
+                    </p>
 
-                <p :class="$style['c-cookieBanner-text']">
-                    {{ copy.textLine1 }}
-                </p>
+                    <p :class="$style['c-cookieBanner-text']">
+                        {{ copy.textLine2 }}
+                    </p>
 
-                <p :class="$style['c-cookieBanner-text']">
-                    {{ copy.textLine2 }}
-                </p>
-
-                <p :class="$style['c-cookieBanner-text']">
-                    {{ copy.textLine3 }}
-                    <a
-                        data-test-id="cookie-policy-link"
-                        :href="copy.cookiePolicyLinkUrl"
-                        :class="$style['c-cookieBanner-link']"
-                        target="_blank">
-                        {{ copy.cookiePolicyLinkText }}
-                    </a>
-                    {{ copy.textLine4 }}
-                </p>
+                    <p :class="$style['c-cookieBanner-text']">
+                        {{ copy.textLine3 }}
+                        <a
+                            data-test-id="cookie-policy-link"
+                            :href="copy.cookiePolicyLinkUrl"
+                            :class="$style['c-cookieBanner-link']"
+                            target="_blank">
+                            {{ copy.cookiePolicyLinkText }}
+                        </a>
+                        {{ copy.textLine4 }}
+                    </p>
+                </div>
             </div>
 
             <div :class="$style['c-cookieBanner-cta']">
                 <button-component
                     data-test-id="accept-all-cookies-button"
                     is-full-width
-                    @click.native="acceptAllCookiesActions">
+                    @click="acceptAllCookiesActions">
                     {{ copy.acceptButtonText }}
                 </button-component>
 
@@ -63,7 +65,7 @@
                     button-type="ghost"
                     data-test-id="accept-necessary-cookies-button"
                     is-full-width
-                    @click.native="acceptOnlyNecessaryCookiesActions">
+                    @click="acceptOnlyNecessaryCookiesActions">
                     {{ copy.nonAcceptButtonText }}
                 </button-component>
             </div>
@@ -170,6 +172,7 @@ export default {
             this.setCookieBannerCookie('full');
             this.setLegacyCookieBannerCookie();
             this.dataLayerPush('full');
+            this.resendEvents();
             this.shouldHideBanner = true;
         },
 
@@ -210,7 +213,13 @@ export default {
                 this.setLegacyCookieBannerCookie();
             } else {
                 const cookieConsent = CookieHelper.get(this.consentCookieName);
-                this.shouldHideBanner = cookieConsent === 'full' || cookieConsent === 'necessary';
+                const isConsentCookiePresent = cookieConsent === 'full' || cookieConsent === 'necessary';
+                if (isConsentCookiePresent) {
+                    this.shouldHideBanner = true;
+                } else {
+                    this.shouldHideBanner = false;
+                    this.dataLayerPush('shown');
+                }
             }
         },
 

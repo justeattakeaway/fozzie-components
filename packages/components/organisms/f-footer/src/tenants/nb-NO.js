@@ -135,7 +135,9 @@ export default {
                 {
                     url: 'https://secure.ethicspoint.eu/domain/media/no/gui/106834/index.html',
                     text: 'Etikkhjelpelinje',
-                    target: '_blank'
+                    target: '_blank',
+                    rel: 'noopener',
+                    gtm: 'click_ethics_hotline'
                 }
             ]
         }

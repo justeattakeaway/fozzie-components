@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-cookie-banner",
   "description": "Fozzie Cookie Banner – Cookie Banner",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "main": "dist/f-cookie-banner.umd.min.js",
   "files": [
     "dist",
@@ -51,7 +51,7 @@
     "js-cookie": "2.2.1"
   },
   "devDependencies": {
-    "@justeat/f-button": "1.0.0",
+    "@justeat/f-button": "1.1.1",
     "@justeat/f-vue-icons": "2.3.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",

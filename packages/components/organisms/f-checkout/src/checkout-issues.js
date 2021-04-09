@@ -32,6 +32,11 @@ const checkoutIssues = {
     LOCATION_UNDELIVERABLE: {
         shouldShowInDialog: true,
         shouldRedirectToMenu: false
+    },
+
+    GENERIC_CHECKOUT_ISSUE: {
+        shouldShowInDialog: true,
+        shouldRedirectToMenu: false
     }
 };
 

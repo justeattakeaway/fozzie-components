@@ -3,6 +3,27 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.7.0
+------------------------------
+*April 8, 2021*
+
+### Changed
+- Wrapped cookie banner content to a div which now is a description for the assistive tech via `aria-describedby`
+- Moved dialog role and aria labels to the higher div to contain both banner context and buttons
+- `f-button` component version bump
+
+
+v0.6.1
+------------------------------
+*April 6, 2021*
+
+### Fixed
+- DataLayer push on showing banner
+- Call resendEvents on "Accept all" button click
+- Update tests
+
+
 v0.6.0
 ------------------------------
 *March 18, 2021*
