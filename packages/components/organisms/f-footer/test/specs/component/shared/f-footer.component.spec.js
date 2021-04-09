@@ -145,7 +145,7 @@ describe('Shared - f-footer component tests', () => {
         ['ch_ch', '.ch'],
         ['ch_en', '/en'],
         ['ch_fr', '/fr']])
-    .it.only('should display link for country code "%s" and redirect to correct URL', (country, expectedUrl) => {
+    .it('should display link for country code "%s" and redirect to correct URL', (country, expectedUrl) => {
         // Act
         footer.clickCountrySelectorButton();
         footer.expectedCountry = country;
