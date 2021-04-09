@@ -4,11 +4,10 @@ const browserstack = require('browserstack-local');
 global.baseDir = __dirname;
 
 
-const { setTestSettings, setTestType } = require('./test/utils/configuration-helper');
+const { setTestSettings } = require('./test/utils/configuration-helper');
 const browserstackSettings = require('./test/configuration/browserstack/browserstack.settings').default();
 
 const testSettings = setTestSettings();
-const testType = setTestType();
 
 exports.config = {
 
@@ -36,11 +35,12 @@ exports.config = {
     // NPM script (see https://docs.npmjs.com/cli/run-script) then the current working
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
-    specs: testType.specs,
+    // Specs are defined in test/configuration/browserstack/browserstack.settings.js
+    // specs: [],
     // Patterns to exclude.
-    exclude: [
-        // 'path/to/excluded/files'
-    ],
+    // exclude: [
+    //     // 'path/to/excluded/files'
+    // ],
 
     // Suites
     suites: {
@@ -108,7 +108,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: testSettings.baseUrl,
+    baseUrl: browserstackSettings.baseUrl,
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,

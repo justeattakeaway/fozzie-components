@@ -1,7 +1,6 @@
 const video = require('wdio-video-reporter');
 
 const settings = () => ({
-    baseUrl: 'http://localhost:8080',
     bail: 1,
     loglevel: process.env.WDIO_LOG_LEVEL || 'info',
     maxinstances: parseInt(process.env.WDIO_MAX_INSTANCES) || 2,

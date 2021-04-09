@@ -2,11 +2,10 @@
 global.baseDir = __dirname;
 const allure = require('allure-commandline');
 
-const { setTestSettings, setTestType } = require('./test/utils/configuration-helper');
+const { setTestSettings } = require('./test/utils/configuration-helper');
 const chromeSettings = require('./test/configuration/chrome/chrome.settings').default();
 
 const testSettings = setTestSettings();
-const testType = setTestType();
 
 exports.config = {
 
@@ -27,19 +26,18 @@ exports.config = {
     // NPM script (see https://docs.npmjs.com/cli/run-script) then the current working
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
-    specs: testType.specs,
+
+    // Specs are defined in test/configuration/chrome/chrome.settings.js
+    // specs: [],
     // Patterns to exclude.
-    exclude: [
-        // 'path/to/excluded/files'
-    ],
+    // exclude: [
+    //     // 'path/to/excluded/files'
+    // ],
 
     // Suites
     suites: {
-        component: [
-            './test/specs/component/**/*.component.*.spec.js'
-        ],
         a11y: [
-            './test/specs/accessibility/axe-accessibility.spec.js'
+            './test/specs/accessibility/*.spec.js'
         ]
     },
     //
@@ -96,7 +94,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: testSettings.baseUrl,
+    baseUrl: chromeSettings.baseUrl,
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -267,7 +265,7 @@ exports.config = {
      * @param {<Object>} results object containing test results
      */
     onComplete: function () {
-        if (process.env.JE_ENV !== 'browserstack' && process.env.COMPONENT_TYPE === 'organism') {
+        if (process.env.COMPONENT_TYPE === 'organism') {
             const reportError = new Error('Could not generate Allure report');
             const generation = allure(['generate', '../../../../test/results/allure', ' --clean']);
 

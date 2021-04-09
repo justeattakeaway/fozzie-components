@@ -7,13 +7,3 @@ exports.setTestSettings = () => {
 
     return testSettings;
 }
-
-exports.a11y = () => ({
-    specs: [`${global.baseDir}/test/specs/accessibility/axe-accessibility.spec.js`]
-});
-
-exports.component = () => ({
-    specs: [`${global.baseDir}/test/specs/component/*.component.*.spec.js`]
-});
-
-exports.setTestType = () => (TEST_TYPE === 'component' ? exports.component() : exports.a11y());

@@ -32,7 +32,9 @@
             ],
             "env": {
                 "JE_ENV": "local",
-                "TEST_TYPE": "component"
+                "TEST_TYPE": "component",
+                "VS_DEBUGGER": "true",
+                "SPEC_FILE": "${file}"
             }
         },
         {
@@ -51,7 +53,9 @@
             ],
             "env": {
                 "JE_ENV": "browserstack",
-                "TEST_TYPE": "component"
+                "TEST_TYPE": "component",
+                "VS_DEBUGGER": "true",
+                "SPEC_FILE": "${file}"
             }
         },
         {
@@ -70,7 +74,9 @@
             ],
             "env": {
                 "JE_ENV": "local",
-                "TEST_TYPE": "accessibility"
+                "TEST_TYPE": "accessibility",
+                "VS_DEBUGGER": "true",
+                "SPEC_FILE": "${file}"
             }
         },
     ]
