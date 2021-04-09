@@ -106,8 +106,8 @@ describe('Shared - f-footer component tests', () => {
         expect(footer.isCurrentCountryIconDisplayed(expectedLocale)).toBe(true);
     });
 
-    forEach([['au', 'au'], ['at', 'at'], ['be', 'be-en'], ['bg', 'bg'], ['ca_en', 'skipthedishes.com'], ['jet_fr', '.fr'], ['de', '.de'], ['ie', '.ie'], ['il', '.il'], ['it', '.it']])
-    .it('should display all countries and redirect to correct URL', (country, expectedUrl) => { //disabled dk and no for now
+    forEach([['au', 'au'], ['at', 'at'], ['no', 'no'], ['dk', 'dk'], ['be', 'be-en'], ['bg', 'bg'], ['ca_en', 'skipthedishes.com'], ['jet_fr', '.fr'], ['de', '.de'], ['ie', '.ie'], ['il', '.il'], ['it', '.it']])
+    .it('should display all countries and redirect to correct URL', (country, expectedUrl) => { 
         // Act
         footer.clickCountrySelectorButton();
         footer.expectedCountry = country;
