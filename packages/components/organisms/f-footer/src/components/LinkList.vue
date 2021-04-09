@@ -8,6 +8,7 @@
         :data-test-id="testId">
         <h2>
             <button
+                v-if="isBelowWide"
                 :id="listHeadingId"
                 :tabindex="isBelowWide ? 0 : -1"
                 :disabled="!isBelowWide"
@@ -26,6 +27,14 @@
                         [$style['c-icon--chevron--up']]: !panelCollapsed
                     }]" />
             </button>
+
+            <span
+                v-else
+                :id="listHeadingId"
+                :class="[
+                    $style['c-footer-heading'],
+                    $style['c-footer-heading--button']
+                ]">{{ linkList.title }}</span>
         </h2>
 
         <ul
