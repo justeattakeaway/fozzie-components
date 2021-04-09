@@ -1,4 +1,4 @@
-function BuildErrorLogFields (error) {
+function buildErrorLogFields (error) {
     return {
         ...(error && error instanceof Error && {
             exception: error.name,
@@ -11,8 +11,8 @@ function BuildErrorLogFields (error) {
 export default {
     methods: {
         logInvoker (message, data, callback, error) {
-            const ex = BuildErrorLogFields(error);
-            callback(message, this.$store, { data, ...ex });
+            const errorFields = buildErrorLogFields(error);
+            callback(message, this.$store, { data, ...errorFields });
         }
     }
 };

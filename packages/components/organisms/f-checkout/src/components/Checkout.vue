@@ -96,7 +96,6 @@
 import { validationMixin } from 'vuelidate';
 import { required, email } from 'vuelidate/lib/validators';
 import { mapActions, mapState } from 'vuex';
-
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
 import FButton from '@justeat/f-button';
@@ -107,10 +106,8 @@ import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-
 import { validations } from '@justeat/f-services';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
-
 import AddressBlock from './Address.vue';
 import CheckoutHeader from './Header.vue';
 import CheckoutTermsAndConditions from './TermsAndConditions.vue';
@@ -119,13 +116,7 @@ import GuestBlock from './Guest.vue';
 import UserNote from './UserNote.vue';
 import ErrorDialog from './ErrorDialog.vue';
 import ErrorPage from './Error.vue';
-
-import {
-    CreateGuestUserError,
-    UpdateCheckoutError,
-    PlaceOrderError
-} from '../exceptions/exceptions';
-
+import exceptions from '../exceptions/exceptions';
 import {
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     CHECKOUT_METHOD_DELIVERY,
@@ -139,6 +130,12 @@ import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
 import { mapUpdateCheckoutRequest, mapAnalyticsNames } from '../services/mapper';
+
+const {
+    CreateGuestUserError,
+    UpdateCheckoutError,
+    PlaceOrderError
+} = exceptions;
 
 export default {
     name: 'VueCheckout',
@@ -439,33 +436,8 @@ export default {
                 } else {
                     this.handleNonFulfillableCheckout();
                 }
-            } catch (e) {
-                if (e instanceof CreateGuestUserError) {
-                    this.handleErrorState({
-                        error: e,
-                        messageToDisplay: this.$t('errorMessages.guestUserCreationFailure'),
-                        eventToEmit: EventNames.CheckoutSetupGuestFailure,
-                        logMessage: 'Checkout Setup Guest Failure'
-                    });
-                } else if (e instanceof UpdateCheckoutError) {
-                    this.handleErrorState({
-                        error: e,
-                        eventToEmit: EventNames.CheckoutUpdateFailure,
-                        logMessage: 'Checkout Update Failure'
-                    });
-                } else if (e instanceof PlaceOrderError) {
-                    this.handleErrorState({
-                        error: e,
-                        eventToEmit: EventNames.CheckoutPlaceOrderFailure,
-                        logMessage: 'Place Order Failure'
-                    });
-                } else {
-                    this.handleErrorState({
-                        error: e,
-                        eventToEmit: EventNames.CheckoutFailure,
-                        logMessage: 'Consumer Checkout Failure'
-                    });
-                }
+            } catch (error) {
+                this.handleErrorState(error);
             }
         },
 
@@ -687,22 +659,19 @@ export default {
         },
 
         /**
-         * Emit, log and track the error based on the parameters received.
+         * Emit, log and track the error based on the parameters
+         * encapsulated within the 'error' class.
          * Set the `genericErrorMessage` for the user to see.
          */
-        handleErrorState ({
-            error, messageToDisplay, eventToEmit, logMessage
-        }) {
-            const eventData = {
-                ...this.eventData,
-                error
-            };
+        handleErrorState (error) {
+            const message = this.$t(error.messageKey || 'errorMessages.genericServerError');
+            const eventToEmit = error.eventToEmit || EventNames.CheckoutFailure;
+            const logMessage = error.logMessage || 'Consumer Checkout Failure';
 
-            this.$emit(eventToEmit, eventData);
-            this.logInvoker(logMessage, eventData, this.$logger.logError);
+            this.$emit(eventToEmit, { ...this.eventData, error });
+            this.logInvoker(logMessage, this.eventData, this.$logger.logError, error);
             this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
-
-            this.genericErrorMessage = messageToDisplay || this.$t('errorMessages.genericServerError');
+            this.genericErrorMessage = message;
         },
 
         /**
