@@ -81,8 +81,7 @@ The props that can be defined are as follows:
 | `getGeoLocationUrl` | `String` | - | URL for the API that can return geo location information (Latitude and Longitude) for a given address.<br>The `tenant` must be provided as the last segment of the URL and all calls must be authenticated. |
 | `checkoutTimeout` | `Number` | 1000 | Timeout for the different API calls in the component. |
 | `authToken` | `String` | `''` | Authorisation token used when submitting the checkout form. |
-| `otacToAuthExchanger` | `Function` | `throw new Error('otacToAuthExchanger is not implemented');
-` | Function to exchange OTAC to JWT auth token |
+| `otacToAuthExchanger` | `Function` | `throw new Error('otacToAuthExchanger is not implemented');` | Function to exchange OTAC to JWT auth token |
 | `loginUrl` | `String` | `-` | URL to navigate to if the user wishes to change account. |
 | `paymentPageUrlPrefix` | `String` | `-` | URL prefix to navigate to after the order has been successfully placed, so the user can pay. The `orderId` will be appended to this URL to form the full URL. |
 | `applicationName` | `String` | `-` | The name of the application using this component. |
