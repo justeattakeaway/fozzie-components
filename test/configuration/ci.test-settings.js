@@ -1,4 +1,4 @@
-const video = require('wdio-video-reporter');
+//const video = require('wdio-video-reporter');
 
 const settings = () => ({
     bail: 1,
@@ -11,11 +11,6 @@ const settings = () => ({
         //     videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
         //     outputDir: `${global.baseDir}/test/results/allure/failure-videos`
         // }],
-        ['allure', {
-            outputDir: `${global.baseDir}/test/results/allure`,
-            disableWebdriverStepsReporting: false,
-            disableWebdriverScreenshotsReporting: false
-        }],
         ['junit', {
             outputDir: `${global.baseDir}/test/results/ci`,
             outputFileFormat: function (options) { // optional
