@@ -541,9 +541,7 @@ export default {
          * Redirect to the payment page.
          */
         redirectToPayment () {
-            setTimeout(() => { // TODO: remove this when the order team handles this automatically.
-                window.location.assign(`${this.paymentPageUrlPrefix}/${this.orderId}`);
-            }, 1000);
+            window.location.assign(`${this.paymentPageUrlPrefix}/${this.orderId}`);
         },
 
         /**
