@@ -121,6 +121,7 @@ const defaultState = {
     },
     authToken: '',
     isLoggedIn: false,
+    isGuestCreated: false,
     userNote: '',
     geolocation: null,
     hasAsapSelected: false
@@ -203,6 +204,14 @@ describe('CheckoutModule', () => {
                 // Assert
                 expect(state.authToken).toEqual(authToken);
                 expect(state.isLoggedIn).toBeFalsy();
+            });
+
+            it('should update state with `isGuestCreated` set to true', () => {
+                // Act
+                mutations[UPDATE_AUTH_GUEST](state, authToken);
+
+                // Assert
+                expect(state.isGuestCreated).toBeTruthy();
             });
         });
 
