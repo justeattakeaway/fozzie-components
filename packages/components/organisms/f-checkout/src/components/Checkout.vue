@@ -201,7 +201,7 @@ export default {
         checkoutTimeout: {
             type: Number,
             required: false,
-            default: 1000
+            default: 10000
         },
 
         spinnerTimeout: {
