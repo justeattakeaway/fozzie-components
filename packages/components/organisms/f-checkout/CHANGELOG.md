@@ -11,6 +11,7 @@ v0.87.1
 ### Changed
 - `checkoutTimeout` prop now defaults to ten seconds
 
+
 v0.87.0
 ------------------------------
 *April 12, 2021*
