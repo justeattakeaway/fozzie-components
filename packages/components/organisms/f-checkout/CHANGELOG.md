@@ -4,12 +4,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.87.0
+v0.88.0
 ------------------------------
 *April 12, 2021*
 
 ### Changed
 - PATCH Checkout now sends null for lines 3 and 4 of address instead of empty string
+
+v0.87.0
+------------------------------
+*April 12, 2021*
+
+### Added
+- `isGuestCreated` store flag that prevents multiple guest accounts from being created when form is resubmitted after failed validation
 
 
 v0.86.0
