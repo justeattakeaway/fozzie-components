@@ -145,7 +145,7 @@ describe('f-checkout component tests - @browserstack', () => {
             type: 'delivery',
             isAuthenticated: true,
             isValid: true,
-            checkoutErrors: true
+            checkoutErrors: 'ISSUES'
         };
 
         // Act
@@ -163,7 +163,7 @@ describe('f-checkout component tests - @browserstack', () => {
             type: 'delivery',
             isAuthenticated: true,
             isValid: true,
-            checkoutErrors: true
+            checkoutErrors: 'ISSUES'
         };
 
         // Act

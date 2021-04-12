@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+Latest (add to next release)
+------------------------------
+*April 9, 2021*
+
+### Changed
+- Refactored large country selector test into two separate tests
+- Added string placeholder to tenant component tests
+
+
 v4.17.0
 ------------------------------
 *April 6, 2021*

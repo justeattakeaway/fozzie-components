@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (add to next release)
 ------------------------------
+*April 9, 2021*
+
+### Changed
+- Refactored large country selector test into two separate tests
+- - Added string placeholder to tenant component tests
+
 *March 31, 2021*
 
 ### Added

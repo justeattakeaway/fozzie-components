@@ -215,6 +215,13 @@ export default {
             default: ''
         },
 
+        otacToAuthExchanger: {
+            type: Function,
+            default: () => {
+                throw new Error('otacToAuthExchanger is not implemented');
+            }
+        },
+
         loginUrl: {
             type: String,
             required: true
@@ -534,9 +541,7 @@ export default {
          * Redirect to the payment page.
          */
         redirectToPayment () {
-            setTimeout(() => { // TODO: remove this when the order team handles this automatically.
-                window.location.assign(`${this.paymentPageUrlPrefix}/${this.orderId}`);
-            }, 1000);
+            window.location.assign(`${this.paymentPageUrlPrefix}/${this.orderId}`);
         },
 
         /**
@@ -585,7 +590,8 @@ export default {
                     url: this.createGuestUrl,
                     tenant: this.tenant,
                     data: createGuestData,
-                    timeout: this.checkoutTimeout
+                    timeout: this.checkoutTimeout,
+                    otacToAuthExchanger: this.otacToAuthExchanger
                 });
 
                 this.$emit(EventNames.CheckoutSetupGuestSuccess);

@@ -11,6 +11,7 @@ import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../../co
 
 import {
     UPDATE_AUTH,
+    UPDATE_AUTH_GUEST,
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
     UPDATE_BASKET_DETAILS,
     UPDATE_CUSTOMER_DETAILS,
@@ -191,6 +192,17 @@ describe('CheckoutModule', () => {
                 // Assert
                 expect(state.authToken).toEqual(authToken);
                 expect(state.isLoggedIn).toBeTruthy();
+            });
+        });
+
+        describe(`${UPDATE_AUTH_GUEST} ::`, () => {
+            it('should update state with authToken and set `isLoggedIn` to false', () => {
+                // Act
+                mutations[UPDATE_AUTH_GUEST](state, authToken);
+
+                // Assert
+                expect(state.authToken).toEqual(authToken);
+                expect(state.isLoggedIn).toBeFalsy();
             });
         });
 
@@ -497,6 +509,8 @@ describe('CheckoutModule', () => {
                     email: 'joe@test.com'
                 };
 
+                payload.otacToAuthExchanger = () => authToken;
+
                 config = {
                     headers: {
                         'Content-Type': 'application/json',
@@ -520,6 +534,14 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(axios.post).toHaveBeenCalledWith(payload.url, payload.data, config);
+            });
+
+            it(`should call ${UPDATE_AUTH_GUEST} mutation.`, async () => {
+                // Act
+                await createGuestUser({ commit, state }, payload);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_AUTH_GUEST, authToken);
             });
         });
 
@@ -578,9 +600,9 @@ describe('CheckoutModule', () => {
                 }));
             });
 
-            describe('if the user is logged in', () => {
+            describe('if the auth token is set', () => {
                 beforeEach(() => {
-                    state.isLoggedIn = true;
+                    state.authToken = authToken;
                 });
 
                 it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation.`, async () => {
@@ -593,9 +615,9 @@ describe('CheckoutModule', () => {
                 });
             });
 
-            describe('if the user is not logged in', () => {
+            describe('if the auth token is not set', () => {
                 beforeEach(() => {
-                    state.isLoggedIn = false;
+                    state.authToken = null;
                 });
 
                 it('should not make api call and should not call mutation.', async () => {
