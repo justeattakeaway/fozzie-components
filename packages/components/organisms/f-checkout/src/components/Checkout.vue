@@ -215,6 +215,13 @@ export default {
             default: ''
         },
 
+        otacToAuthExchanger: {
+            type: Function,
+            default: () => {
+                throw new Error('otacToAuthExchanger is not implemented');
+            }
+        },
+
         loginUrl: {
             type: String,
             required: true
@@ -583,7 +590,8 @@ export default {
                     url: this.createGuestUrl,
                     tenant: this.tenant,
                     data: createGuestData,
-                    timeout: this.checkoutTimeout
+                    timeout: this.checkoutTimeout,
+                    otacToAuthExchanger: this.otacToAuthExchanger
                 });
 
                 this.$emit(EventNames.CheckoutSetupGuestSuccess);

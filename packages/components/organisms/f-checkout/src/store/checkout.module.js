@@ -7,6 +7,7 @@ import { version as applicationVerion } from '../../package.json';
 import {
     UPDATE_HAS_ASAP_SELECTED,
     UPDATE_AUTH,
+    UPDATE_AUTH_GUEST,
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
     UPDATE_BASKET_DETAILS,
     UPDATE_CUSTOMER_DETAILS,
@@ -81,7 +82,7 @@ export default {
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
-                    ...(state.isLoggedIn && {
+                    ...(state.authToken && {
                         Authorization: authHeader
                     })
                 },
@@ -111,7 +112,7 @@ export default {
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
-                    ...(state.isLoggedIn && {
+                    ...(state.authToken && {
                         Authorization: authHeader
                     })
                 },
@@ -143,8 +144,8 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        createGuestUser: async (context, {
-            url, tenant, data, timeout
+        createGuestUser: async ({ commit }, {
+            url, tenant, data, timeout, otacToAuthExchanger
         }) => {
             const config = {
                 headers: {
@@ -157,7 +158,8 @@ export default {
             const response = await axios.post(url, data, config);
             // eslint-disable-next-line no-unused-vars
             const otac = response.data.token;
-            // TODO: Use otac to log the user in
+            const authToken = await otacToAuthExchanger(otac);
+            commit(UPDATE_AUTH_GUEST, authToken);
         },
 
         /**
@@ -236,7 +238,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept-Language': language,
-                    ...(state.isLoggedIn && {
+                    ...(state.authToken && {
                         Authorization: authHeader
                     })
                 },
@@ -303,7 +305,7 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getGeoLocation: async ({ commit, state }, { url, postData, timeout }) => {
-            if (state.isLoggedIn) {
+            if (state.authToken) {
                 const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
                 const config = {
@@ -392,6 +394,11 @@ export default {
         [UPDATE_AUTH]: (state, authToken) => {
             state.authToken = authToken;
             state.isLoggedIn = !!authToken;
+        },
+
+        [UPDATE_AUTH_GUEST]: (state, authToken) => {
+            state.authToken = authToken;
+            state.isLoggedIn = false;
         },
 
         [UPDATE_AVAILABLE_FULFILMENT_TIMES]: (state, {
