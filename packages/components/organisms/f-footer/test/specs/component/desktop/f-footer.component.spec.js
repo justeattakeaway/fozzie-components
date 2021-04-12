@@ -44,4 +44,10 @@ describe('Desktop - f-footer component tests', () => {
         // Assert
         expect(browser.getUrl()).toContain(expectedUrl);
     });
+
+    it('should check to see if the feedback button is clickable', () => {
+
+        // Assert
+        expect(footer.isFeedbackButtonClickable()).toBe(true);
+    });
 });
