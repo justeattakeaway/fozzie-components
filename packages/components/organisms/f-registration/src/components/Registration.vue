@@ -51,7 +51,7 @@
                     :label-text="copy.labels.firstName"
                     input-type="text"
                     @blur="formFieldBlur('firstName')">
-                    <template v-show="describeFirstnameErrorMessage"
+                    <template v-if="describeFirstnameErrorMessage"
                               #error>
                         <error-message
                             test-data-id="firstnameErrorMessage"
@@ -72,7 +72,7 @@
                     :aria-invalid="!!describeLastnameErrorMessage"
                     @blur="formFieldBlur('lastName')">
                     <template
-                        v-show="describeLastnameErrorMessage"
+                        v-if="describeLastnameErrorMessage"
                         #error>
                         <error-message
                             test-data-id="lastnameErrorMessage"
@@ -93,7 +93,7 @@
                     input-type="email"
                     @blur="formFieldBlur('email')">
                     <template
-                        v-show="describeEmailErrorMessage"
+                        v-if="describeEmailErrorMessage"
                         #error>
                         <error-message
                             test-data-id="emailErrorMessage"
@@ -114,7 +114,7 @@
                     input-type="password"
                     @blur="formFieldBlur('password')">
                     <template
-                        v-show="describePasswordErrorMessage"
+                        v-if="describePasswordErrorMessage"
                         #error>
                         <error-message
                             test-data-id="passwordErrorMessage"
