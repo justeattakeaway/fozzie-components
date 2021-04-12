@@ -40,7 +40,8 @@
                     <feedback-block
                         :title="copy.feedback"
                         :text="copy.improveOurWebsite"
-                        :button-text="copy.sendFeedback" />
+                        :button-text="copy.sendFeedback"
+                        data-test-id="feedback-block" />
 
                     <icon-list
                         :icons="copy.socialIcons"
