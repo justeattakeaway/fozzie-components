@@ -19,8 +19,13 @@ import EventNames from '../../event-names';
 import {
     defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger
 } from './helpers/setup';
-import { CreateGuestUserError, UpdateCheckoutError, PlaceOrderError } from '../../exceptions/exceptions';
+import exceptions from '../../exceptions/exceptions';
 
+const {
+    CreateGuestUserError,
+    UpdateCheckoutError,
+    PlaceOrderError
+} = exceptions;
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
