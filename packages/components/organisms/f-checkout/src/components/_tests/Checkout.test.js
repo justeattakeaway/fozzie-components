@@ -73,7 +73,7 @@ describe('Checkout', () => {
     const paymentPageUrlPrefix = 'http://localhost/paymentpage';
     const getGeoLocationUrl = 'http://localhost/geolocation';
     const spinnerTimeout = 100;
-
+    const otacToAuthExchanger = () => '';
     const applicationName = 'Jest';
 
     const propsData = {
@@ -88,7 +88,8 @@ describe('Checkout', () => {
         paymentPageUrlPrefix,
         getGeoLocationUrl,
         applicationName,
-        spinnerTimeout
+        spinnerTimeout,
+        otacToAuthExchanger
     };
 
     let windowLocationSpy;
@@ -1390,6 +1391,7 @@ describe('Checkout', () => {
                         emailAddress: customer.email,
                         registrationSource: 'Guest'
                     },
+                    otacToAuthExchanger,
                     timeout: 1000
                 };
                 const createGuestUserSpy = jest.spyOn(VueCheckout.methods, 'createGuestUser');
@@ -2470,16 +2472,11 @@ describe('Checkout', () => {
         });
 
         describe('redirectToPayment ::', () => {
-            beforeEach(() => {
-                jest.useFakeTimers();
-            });
-
             afterEach(() => {
                 jest.clearAllMocks();
-                jest.clearAllTimers();
             });
 
-            it('should redirect to the payment page after 1 second', () => {
+            it('should redirect to the payment page', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
@@ -2490,29 +2487,9 @@ describe('Checkout', () => {
 
                 // Act
                 wrapper.vm.redirectToPayment();
-
-                jest.advanceTimersByTime(1000);
 
                 // Assert
                 expect(windowLocationSpy).toHaveBeenCalledWith(`${paymentPageUrlPrefix}/${defaultCheckoutState.orderId}`);
-            });
-
-            it('should not redirect to the payment page before 1 second', () => {
-                // Arrange
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Act
-                wrapper.vm.redirectToPayment();
-
-                jest.advanceTimersByTime(999);
-
-                // Assert
-                expect(windowLocationSpy).not.toHaveBeenCalled();
             });
         });
 

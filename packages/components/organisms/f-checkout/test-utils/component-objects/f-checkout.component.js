@@ -107,7 +107,7 @@ module.exports = class Checkout extends Page {
     open (checkout) {
         const serviceType = checkout.isValid ? `&knob-Service%20Type=${checkout.type}` : '&knob-Service%20Type=Invalid%20URL';
         const isLoggedIn = `&knob-Is%20User%20Logged%20In=${checkout.isAuthenticated}`;
-        const hasErrors = `&knob-Has%20Checkout%20Errors=${checkout.checkoutErrors}`;
+        const hasErrors = `&knob-Errors=${checkout.checkoutErrors}`;
         const hasPreorderWarning = `&knob-Is%20ASAP%20available=${checkout.isPreOrderWarningDisplayed}`;
 
         const url = `checkout-component${serviceType}${isLoggedIn}${hasErrors}${hasPreorderWarning}`;

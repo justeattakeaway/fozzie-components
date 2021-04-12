@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.18.0
 ------------------------------
-*April 8, 2021*
+*April 12, 2021*
 
 ### Added
 - Selectors in `f-footer.selectors.js` for footer blocks
@@ -13,6 +13,13 @@ v4.18.0
 - Tests for footer blocks
 - `mobile` folder to run mobile specific tests in Browserstack
 - `data-test-id`s in `FeedbackBlock.vue`, `Footer.vue` and `LinkList.vue` to test specific blocks and buttons.
+
+
+*April 9, 2021*
+
+### Changed
+- Refactored large country selector test into two separate tests
+- Added string placeholder to tenant component tests
 
 
 v4.17.0
