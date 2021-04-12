@@ -977,42 +977,100 @@ describe('Checkout', () => {
 
             describe('when invoked', () => {
                 describe('AND `isLoggedIn` is falsey', () => {
-                    it('should call `setupGuestUser`', async () => {
-                        // Arrange
-                        const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
+                    describe('AND `isGuestCreated` is falsey', () => {
+                        it('should call `setupGuestUser`', async () => {
+                            // Arrange
+                            const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
 
-                        // Act
-                        await wrapper.vm.submitCheckout();
+                            // Act
+                            await wrapper.vm.submitCheckout();
 
-                        // Assert
-                        expect(setupGuestUserSpy).toHaveBeenCalled();
+                            // Assert
+                            expect(setupGuestUserSpy).toHaveBeenCalled();
+                        });
+                    });
+
+                    describe('AND `isGuestCreated` is truthy', () => {
+                        it('should not call `setupGuestUser`', async () => {
+                            // Arrange
+                            wrapper = mount(VueCheckout, {
+                                store: createStore({
+                                    ...defaultCheckoutState,
+                                    isGuestCreated: true
+                                }),
+                                i18n,
+                                localVue,
+                                propsData,
+                                mocks: {
+                                    $logger
+                                }
+                            });
+                            const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
+
+                            // Act
+                            await wrapper.vm.submitCheckout();
+
+                            // Assert
+                            expect(setupGuestUserSpy).not.toHaveBeenCalled();
+                        });
                     });
                 });
 
                 describe('AND `isLoggedIn` is truthy', () => {
-                    it('should not call `setupGuestUser`', async () => {
-                        // Arrange
-                        wrapper = mount(VueCheckout, {
-                            store: createStore({
-                                ...defaultCheckoutState,
-                                serviceType: CHECKOUT_METHOD_COLLECTION,
-                                isLoggedIn: true
-                            }),
-                            i18n,
-                            localVue,
-                            propsData,
-                            mocks: {
-                                $logger
-                            }
+                    describe('AND `isGuestCreated` is falsey', () => {
+                        it('should not call `setupGuestUser`', async () => {
+                            // Arrange
+                            wrapper = mount(VueCheckout, {
+                                store: createStore({
+                                    ...defaultCheckoutState,
+                                    serviceType: CHECKOUT_METHOD_COLLECTION,
+                                    isLoggedIn: true,
+                                    isGuestCreated: false
+                                }),
+                                i18n,
+                                localVue,
+                                propsData,
+                                mocks: {
+                                    $logger
+                                }
+                            });
+
+                            const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
+
+                            // Act
+                            await wrapper.vm.submitCheckout();
+
+                            // Assert
+                            expect(setupGuestUserSpy).not.toHaveBeenCalled();
                         });
+                    });
 
-                        const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
+                    describe('AND `isGuestCreated` is truthy', () => {
+                        it('should not call `setupGuestUser`', async () => {
+                            // Arrange
+                            wrapper = mount(VueCheckout, {
+                                store: createStore({
+                                    ...defaultCheckoutState,
+                                    serviceType: CHECKOUT_METHOD_COLLECTION,
+                                    isLoggedIn: true,
+                                    isGuestCreated: true
+                                }),
+                                i18n,
+                                localVue,
+                                propsData,
+                                mocks: {
+                                    $logger
+                                }
+                            });
 
-                        // Act
-                        await wrapper.vm.submitCheckout();
+                            const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
 
-                        // Assert
-                        expect(setupGuestUserSpy).not.toHaveBeenCalled();
+                            // Act
+                            await wrapper.vm.submitCheckout();
+
+                            // Assert
+                            expect(setupGuestUserSpy).not.toHaveBeenCalled();
+                        });
                     });
                 });
 
