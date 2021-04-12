@@ -661,6 +661,12 @@ $nav-popover-width                 : 300px;
             }
         }
 
+        .c-header--highlightBg {
+            .c-nav-list-link:hover {
+                color: $nav-text-color--hover;
+            }
+        }
+
         .c-nav-list-text {
             @include media('<=mid') {
                 display: block;

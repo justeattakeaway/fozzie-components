@@ -44,35 +44,57 @@ describe('Logo', () => {
         expect(logo).toBeDefined();
     });
 
-    describe('computed :: ', () => {
-        describe('logoColourModifier :: ', () => {
-            it.each([
-                ['', 'white'],
-                ['c-icon--onTransparentBg', 'transparent'],
-                ['c-icon--onHighlightBg', 'highlight'],
-                ['', 'blue']
-            ])('should return correct %s if `headerBackgroundTheme` is %s', (expected, theme) => {
-                // Arrange
-                const propsData = {
-                    theme: 'je',
-                    headerBackgroundTheme: theme,
-                    companyName: 'Just Eat'
-                };
+    describe('header logo :: ', () => {
+        const $style = {
+            'c-logo-img--alt': 'c-logo-img--alt'
+        };
 
-                // Act
-                const wrapper = mount(Logo, {
-                    propsData,
-                    mocks: {
-                        $style: {
-                            'c-icon--onTransparentBg': 'c-icon--onTransparentBg',
-                            'c-icon--onHighlightBg': 'c-icon--onHighlightBg'
-                        }
-                    }
-                });
+        it.each([
+            ['transparent'],
+            ['highlight']
+        ])('should have "c-logo-img--alt" class if "headerBackgroundTheme" property is %s', theme => {
+            // Arrange
+            const propsData = {
+                theme: 'je',
+                headerBackgroundTheme: theme,
+                companyName: 'Just Eat'
+            };
 
-                // Assert
-                expect(wrapper.vm.logoColourModifier).toEqual(expected);
+            // Act
+            const wrapper = mount(Logo, {
+                propsData,
+                mocks: {
+                    $style
+                }
             });
+            const logo = wrapper.find('[data-test-id="header-logo"]');
+
+            // Assert
+            expect(logo.classes()).toContain('c-logo-img--alt');
+        });
+
+        it.each([
+            ['white'],
+            ['blue']
+        ])('should not have "c-logo-img--alt" class if "headerBackgroundTheme" property is %s', theme => {
+            // Arrange
+            const propsData = {
+                theme: 'je',
+                headerBackgroundTheme: theme,
+                companyName: 'Just Eat'
+            };
+
+            // Act
+            const wrapper = mount(Logo, {
+                propsData,
+                mocks: {
+                    $style
+                }
+            });
+            const logo = wrapper.find('[data-test-id="header-logo"]');
+
+            // Assert
+            expect(logo.classes()).not.toContain('c-logo-img--alt');
         });
     });
 });

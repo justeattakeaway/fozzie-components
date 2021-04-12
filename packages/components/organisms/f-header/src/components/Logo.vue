@@ -14,7 +14,8 @@
             :class="[
                 $style['c-logo-img'],
                 iconClassName,
-                logoColourModifier]"
+                { [$style['c-logo-img--alt']]: isAltLogo }
+            ]"
             :data-theme-logo="iconClassName"
             data-test-id="header-logo" />
     </a>
@@ -47,6 +48,10 @@ export default {
         headerBackgroundTheme: {
             type: String,
             default: 'white'
+        },
+        isOpen: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -59,15 +64,11 @@ export default {
         linkAltText () {
             return `Go to ${this.companyName} homepage`;
         },
-        logoColourModifier () {
-            switch (this.headerBackgroundTheme) {
-                case 'transparent':
-                    return this.$style['c-icon--onTransparentBg'];
-                case 'highlight':
-                    return this.$style['c-icon--onHighlightBg'];
-                default:
-                    return '';
-            }
+        isAltLogo () {
+            const isHighlight = this.headerBackgroundTheme === 'highlight';
+            const isTransparent = this.headerBackgroundTheme === 'transparent' && !this.isOpen;
+
+            return isHighlight || isTransparent;
         }
     }
 };
@@ -133,28 +134,12 @@ export default {
             fill: $header-logo-color;
         }
     }
+
     // White logo on highlights background
-    .c-icon--onHighlightBg {
-        &.c-logo-img {
+    .c-logo-img--alt {
             & g,
             & path {
                 fill: $header-logo-color--alt;
             }
-        }
     }
-
-    // Transparent goes from white to red
-    .c-icon--onTransparentBg {
-        &.c-logo-img {
-            & g,
-            & path {
-                fill: $header-logo-color--alt;
-
-                .is-navInView & {
-                    fill: $header-logo-color;
-                }
-            }
-        }
-    }
-
 </style>
