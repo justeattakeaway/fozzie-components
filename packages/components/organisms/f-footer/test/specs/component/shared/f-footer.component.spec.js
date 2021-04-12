@@ -159,4 +159,73 @@ describe('Shared - f-footer component tests', () => {
         // Assert
         expect(browser.getUrl()).toContain(expectedUrl);
     });
+
+
+    forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
+    .it('should display social icons block', expectedLocale => {
+        // Arrange
+        const footerData = {
+            locale: expectedLocale,
+            courierLinks: false,
+            countrySelector: false
+        };
+
+        // Act
+        footer.open(footerData);
+        footer.waitForComponent();
+
+        // Assert
+        expect(footer.isSocialIconBlockDisplayed()).toBe(true);
+    });
+
+    forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
+    .it('should display app downloads block', expectedLocale => {
+        // Arrange
+        const footerData = {
+            locale: expectedLocale,
+            courierLinks: false,
+            countrySelector: false
+        };
+
+        // Act
+        footer.open(footerData);
+        footer.waitForComponent();
+
+        // Assert
+        expect(footer.isDownloadIconBlockDisplayed()).toBe(true);
+    });
+
+    forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
+    .it('should display payment options block', expectedLocale => {
+        // Arrange
+        const footerData = {
+            locale: expectedLocale,
+            courierLinks: false,
+            countrySelector: false
+        };
+
+        // Act
+        footer.open(footerData);
+        footer.waitForComponent();
+
+        // Assert
+        expect(footer.isPaymentIconsBlockDisplayed()).toBe(true);
+    });
+
+    forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
+    .it('should display the feedback block', expectedLocale => {
+        // Arrange
+        const footerData = {
+            locale: expectedLocale,
+            courierLinks: false,
+            countrySelector: false
+        };
+
+        // Act
+        footer.open(footerData);
+        footer.waitForComponent();
+
+        // Assert
+        expect(footer.isFeedbackBlockDisplayed()).toBe(true);
+    });
 });
