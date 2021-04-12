@@ -105,9 +105,10 @@ describe('Mobile - f-header component tests - @browserstack', () => {
 
             // Assert
             expect(header.isNavigationLinkDisplayed(link)).toBe(true);
-            expect(header.isNavigationLinkDisplayed('offersLink')).toBe(false);
-            expect(header.isNavigationLinkDisplayed('delivery')).toBe(false);
         });
+
+        expect(header.isNavigationLinkDisplayed('offersLink')).toBe(false);
+        expect(header.isNavigationLinkDisplayed('delivery')).toBe(false);
     });
 
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
