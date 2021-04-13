@@ -92,7 +92,8 @@
                         :href="copy.offers.url"
                         :class="[
                             $style['c-nav-list-link'],
-                            { [$style['c-nav-list-link--alt']]: isAltColour }
+                            { [$style['c-nav-list-link--alt']]: isAltColour },
+                            { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
                         ]">
                         <gift-icon
                             :class="[
@@ -119,7 +120,8 @@
                         target="_blank"
                         :class="[
                             $style['c-nav-list-link'],
-                            { [$style['c-nav-list-link--alt']]: isAltColour }
+                            { [$style['c-nav-list-link--alt']]: isAltColour },
+                            { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
                         ]">
                         <moped-icon
                             :class="[
@@ -157,7 +159,8 @@
                         <span
                             :class="[
                                 $style['c-nav-list-text-sub'],
-                                { [$style['c-nav-list-link--alt']]: isAltColour }
+                                { [$style['c-nav-list-link--alt']]: isAltColour },
+                                { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
                             ]">
                             {{ userInfo.friendlyName }}
                         </span>
@@ -197,7 +200,8 @@
                         :class="[
                             $style['c-nav-list-link'],
                             { [$style['c-nav-list-link--leftPaddingBelowMid']]: userInfo },
-                            { [$style['c-nav-list-link--alt']]: isAltColour }
+                            { [$style['c-nav-list-link--alt']]: isAltColour },
+                            { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
                         ]"
                         data-test-id="login-link">
                         {{ copy.accountLogin.text }}
@@ -218,7 +222,8 @@
                         :class="[
                             $style['c-nav-list-link'],
                             { [$style['c-nav-list-link--leftPaddingBelowMid']]: userInfo },
-                            { [$style['c-nav-list-link--alt']]: isAltColour }
+                            { [$style['c-nav-list-link--alt']]: isAltColour },
+                            { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
                         ]"
                         data-test-id="help-link"
                         v-on="isBelowMid ? { blur: closeUserMenu, focus: openUserMennu } : null">
@@ -242,7 +247,8 @@
                         :class="[
                             $style['c-nav-list-link'],
                             { [$style['c-nav-list-link--leftPaddingBelowMid']]: userInfo },
-                            { [$style['c-nav-list-link--alt']]: isAltColour }
+                            { [$style['c-nav-list-link--alt']]: isAltColour },
+                            { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
                         ]"
                         v-on="isBelowMid ? { blur: closeUserMenu, focus: openUserMennu } : null">
                         {{ copy.accountLogout.text }}
@@ -747,6 +753,14 @@ $nav-popover-width                 : 300px;
             }
         }
 
+        .c-nav-list-link--transparent {
+            @include media('>mid') {
+                &:hover {
+                    color: $nav-text-color--transparent;
+                }
+            }
+        }
+
         .c-nav-list-text {
             @include media('<=mid') {
                 display: block;
@@ -801,13 +815,6 @@ $nav-popover-width                 : 300px;
             width: spacing(x2) + $nav-featureLinkIcon-width + spacing(x2); // includes padding on both sides
             height: spacing(x2) + $nav-featureLinkIcon-height + spacing(x2);
             padding: spacing(x2);
-        }
-
-        path {
-            .c-header--highlightBg &,
-            .c-header--transparent & {
-                fill: $nav-icon-color--transparent;
-            }
         }
     }
 
