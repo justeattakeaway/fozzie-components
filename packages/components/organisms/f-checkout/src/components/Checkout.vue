@@ -54,7 +54,7 @@
                         <template #error>
                             <error-message
                                 v-if="!isMobileNumberValid"
-                                data-error-message
+                                data-js-error-message
                                 data-test-id="error-mobile-number"
                             >
                                 {{ $t('validationMessages.mobileNumber.requiredError') }}
@@ -802,7 +802,7 @@ export default {
          */
         scrollToFirstInlineError () {
             this.$nextTick(() => {
-                const firstInlineError = document.querySelector('[data-error-message]');
+                const firstInlineError = document.querySelector('[data-js-error-message]');
 
                 this.scrollToElement(firstInlineError, { offset: -100 });
             });

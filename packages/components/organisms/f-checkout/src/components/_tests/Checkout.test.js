@@ -2125,7 +2125,7 @@ describe('Checkout', () => {
 
                 const scrollToElementSpy = jest.spyOn(wrapper.vm, 'scrollToElement');
 
-                const firstErrorElement = document.querySelector('[data-error-message]');
+                const firstErrorElement = document.querySelector('[data-js-error-message]');
 
                 // Act
                 wrapper.vm.scrollToFirstInlineError(firstErrorElement);
