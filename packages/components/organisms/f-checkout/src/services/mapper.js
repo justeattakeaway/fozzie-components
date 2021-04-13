@@ -13,7 +13,7 @@ const mapUpdateCheckoutRequest = ({
     geolocation,
     asap
 }) => {
-    const addressLines = [address.line1 || ''];
+    const addressLines = [address.line1];
 
     if (address.line2) {
         addressLines.push(address.line2);
