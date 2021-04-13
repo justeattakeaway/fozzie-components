@@ -1,7 +1,7 @@
 <template>
     <ul
         :aria-label="copy.navTitle"
-        class="c-nav-popoverList">
+        :class="$style['c-nav-popoverList']">
         <li
             v-for="(link, index) in copy.navLinks"
             :key="index"
@@ -67,6 +67,7 @@ export default {
 </script>
 
 <style lang="scss" module>
+@import '../assets/scss/navigation.scss';
 
 .list-link {
     display: block;

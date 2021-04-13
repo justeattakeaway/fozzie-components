@@ -2,7 +2,7 @@
     <a
         :aria-label="linkAltText"
         href="/"
-        class="c-logo"
+        :class="$style['c-logo']"
         :data-trak='`{
             "trakEvent": "click",
             "category": "engagement",
@@ -11,9 +11,11 @@
         }`'>
         <component
             :is="iconComponent"
-            :class="['c-logo-img',
-                     iconClassName,
-                     logoColourModifier]"
+            :class="[
+                $style['c-logo-img'],
+                iconClassName,
+                { [$style['c-logo-img--alt']]: isAltLogo }
+            ]"
             :data-theme-logo="iconClassName"
             data-test-id="header-logo" />
     </a>
@@ -46,6 +48,10 @@ export default {
         headerBackgroundTheme: {
             type: String,
             default: 'white'
+        },
+        isOpen: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -53,26 +59,22 @@ export default {
             return `${this.theme}-logo`;
         },
         iconClassName () {
-            return `c-icon--${this.theme}`;
+            return this.$style[`c-icon--${this.theme}`];
         },
         linkAltText () {
             return `Go to ${this.companyName} homepage`;
         },
-        logoColourModifier () {
-            switch (this.headerBackgroundTheme) {
-                case 'transparent':
-                    return 'c-icon--onTransparentBg';
-                case 'highlight':
-                    return 'c-icon--onHighlightBg';
-                default:
-                    return '';
-            }
+        isAltLogo () {
+            const isHighlight = this.headerBackgroundTheme === 'highlight';
+            const isTransparent = this.headerBackgroundTheme === 'transparent' && !this.isOpen;
+            return isHighlight || isTransparent;
         }
     }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
+
     // link with the logo
     .c-logo {
         display: block;
@@ -132,28 +134,12 @@ export default {
             fill: $header-logo-color;
         }
     }
+
     // White logo on highlights background
-    .c-icon--onHighlightBg {
-        &.c-logo-img {
+    .c-logo-img--alt {
             & g,
             & path {
                 fill: $header-logo-color--alt;
             }
-        }
     }
-
-    // Transparent goes from white to red
-    .c-icon--onTransparentBg {
-        &.c-logo-img {
-            & g,
-            & path {
-                fill: $header-logo-color--alt;
-
-                .is-navInView & {
-                    fill: $header-logo-color;
-                }
-            }
-        }
-    }
-
 </style>
