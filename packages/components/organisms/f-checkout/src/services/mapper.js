@@ -12,55 +12,58 @@ const mapUpdateCheckoutRequest = ({
     userNote,
     geolocation,
     asap
-}) => ([
-    {
-        op: 'add',
-        path: '/customer',
-        value: {
-            firstName: customer.firstName || null,
-            lastName: customer.lastName || null,
-            phoneNumber: customer.mobileNumber || null,
-            dateOfBirth: null
-        }
-    },
-    {
-        op: 'add',
-        path: '/fulfilment',
-        value: {
-            time: {
-                asap,
-                scheduled: {
-                    ...time
-                }
-            },
-            location: {
-                ...(isCheckoutMethodDelivery ? {
-                    address: {
-                        lines: [
-                            address.line1 || '',
-                            address.line2 || '',
-                            null,
-                            null
-                        ],
-                        locality: address.locality || null,
-                        postalCode: address.postcode || null
-                    }
-                } : {}),
-                geolocation
-            }
-        }
-    },
-    {
-        op: 'add',
-        path: '/notes',
-        value: [
-            {
-                type: 'delivery',
-                note: userNote
-            }
-        ]
+}) => {
+    const addressLines = [address.line1 || ''];
+
+    if (address.line2) {
+        addressLines.push(address.line2);
     }
-]);
+
+    return ([
+        {
+            op: 'add',
+            path: '/customer',
+            value: {
+                firstName: customer.firstName || null,
+                lastName: customer.lastName || null,
+                phoneNumber: customer.mobileNumber || null,
+                dateOfBirth: null
+            }
+        },
+        {
+            op: 'add',
+            path: '/fulfilment',
+            value: {
+                time: {
+                    asap,
+                    scheduled: {
+                        ...time
+                    }
+                },
+                location: {
+                    ...(isCheckoutMethodDelivery ? {
+                        address: {
+                            lines: addressLines,
+                            locality: address.locality || null,
+                            postalCode: address.postcode || null
+                        }
+                    } : {}),
+                    geolocation
+                }
+            }
+        },
+        {
+            op: 'add',
+            path: '/notes',
+            value: [
+                {
+                    type: 'delivery',
+                    note: userNote
+                }
+            ]
+        }
+    ]);
+};
 
 /**
  * Maps checkout names to required GA names.

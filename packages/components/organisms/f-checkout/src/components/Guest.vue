@@ -10,6 +10,7 @@
             <template #error>
                 <error-message
                     v-if="isFirstNameEmpty"
+                    data-js-error-message
                     data-test-id="error-first-name-empty">
                     {{ $t('validationMessages.firstName.requiredError') }}
                 </error-message>
@@ -24,6 +25,7 @@
             <template #error>
                 <error-message
                     v-if="isLastNameEmpty"
+                    data-js-error-message
                     data-test-id="error-last-name-empty">
                     {{ $t('validationMessages.lastName.requiredError') }}
                 </error-message>
@@ -38,6 +40,7 @@
             <template #error>
                 <error-message
                     v-if="!isEmailValid"
+                    data-js-error-message
                     data-test-id="error-email-invalid">
                     {{ $t('validationMessages.email.requiredError') }}
                 </error-message>

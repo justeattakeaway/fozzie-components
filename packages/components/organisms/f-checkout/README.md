@@ -79,7 +79,7 @@ The props that can be defined are as follows:
 | `getBasketUrl` | `String` | - | URL for the API called to get Basket Details.<br><br>The data returned from this API contains the serviceType, which determines if the Checkout component is created for Collection or Delivery when the user is not authenticated. |
 | `placeOrderUrl` | `String` | - | URL for the API called to place the order.<br><br>The data returned from this API contains the orderId, which is needed to redirect the user to the payment page. |
 | `getGeoLocationUrl` | `String` | - | URL for the API that can return geo location information (Latitude and Longitude) for a given address.<br>The `tenant` must be provided as the last segment of the URL and all calls must be authenticated. |
-| `checkoutTimeout` | `Number` | 1000 | Timeout for the different API calls in the component. |
+| `checkoutTimeout` | `Number` | 10000 | Timeout for the different API calls in the component. |
 | `authToken` | `String` | `''` | Authorisation token used when submitting the checkout form. |
 | `otacToAuthExchanger` | `Function` | `throw new Error('otacToAuthExchanger is not implemented');` | Function to exchange OTAC to JWT auth token |
 | `loginUrl` | `String` | `-` | URL to navigate to if the user wishes to change account. |

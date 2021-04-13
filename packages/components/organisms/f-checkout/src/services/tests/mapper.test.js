@@ -60,9 +60,7 @@ describe('checkout mapper', () => {
         expect(locationRequest.address.locality).toBe(address.locality);
         expect(locationRequest.address.lines).toStrictEqual([
             address.line1,
-            address.line2,
-            null,
-            null
+            address.line2
         ]);
     });
 
