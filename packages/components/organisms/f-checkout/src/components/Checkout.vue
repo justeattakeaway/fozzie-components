@@ -662,7 +662,6 @@ export default {
                         timeout: this.checkoutTimeout
                     });
                 }
-                this.foo();
             } catch (error) {
                 this.logInvoker('Geo Location Lookup Failed', this.eventData, this.$logger.logWarn, error);
             }
