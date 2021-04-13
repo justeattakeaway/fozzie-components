@@ -305,7 +305,7 @@ describe('CheckoutModule', () => {
                 url: 'http://localhost/account/checkout',
                 tenant: 'uk',
                 language: 'en-GB',
-                timeout: 1000,
+                timeout: 10000,
                 postData: null
             };
         });
