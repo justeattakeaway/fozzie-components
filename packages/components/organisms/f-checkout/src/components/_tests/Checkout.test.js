@@ -2010,7 +2010,7 @@ describe('Checkout', () => {
                 expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${payload.error.message}` });
             });
 
-            it('should call `scrollToElement` with the "errorAlert" element', async () => {
+            it('should call `scrollToElement` with the `errorAlert` element', async () => {
                 // Act
                 wrapper.vm.handleErrorState(payload);
 
@@ -2076,7 +2076,7 @@ describe('Checkout', () => {
                 expect(scrollToSpy).not.toHaveBeenCalled();
             });
 
-            it('should receive `options` as a parameter', () => {
+            it('should accept `options` as a parameter', () => {
                 // Arrange
                 const ref = 'errorAlert';
                 const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
