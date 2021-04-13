@@ -6,7 +6,8 @@ let browserstackName = `Local - ${process.env.BROWSERSTACK_USERNAME} ${new Date(
 const settings = () => ({
     baseUrl: 'http://bs-local.com:8080',
     capabilities: [
-        {  
+        {
+            deviceType: 'mobile' 
             os: 'android',
             osVersion: '11.0',
             browserName: 'chrome',
@@ -21,6 +22,7 @@ const settings = () => ({
             ] : [SPEC_FILE]
         },
         {
+            deviceType: 'mobile',
             os: 'ios',
             osVersion: '14.0',
             browserName: 'safari',
@@ -35,6 +37,7 @@ const settings = () => ({
             ]
         },
         {
+            deviceType: 'desktop',
             os: 'OS X',
             osVersion: 'Big sur',
             browserName: 'safari',
