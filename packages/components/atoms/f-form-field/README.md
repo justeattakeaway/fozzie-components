@@ -71,12 +71,14 @@ The props that can be defined are as follows (if any):
 | ----- | ----- | ------- | ----------- |
 | `locale` | `String` | `''` | Sets locale for I18n. |
 | `labelText` | `String` | `''` | The text that will be displayed in the form field label. |
-| `inputType` | `String` | `text` | The type of input needed. <br>Options: `text`, `email`, `password`, `radio`, `checkbox`, `dropdown` |
+| `inputType` | `String` | `text` | The type of input needed. <br>Options: `text`, `email`, `password`, `radio`, `checkbox`, `dropdown`, `number` |
 | `labelStyle` | `String` | `'default'` | Defines where the label will be rendered in relation to the form field. <br>Options: <br>`default` - Displays the label above the form field, <br>`inline` Displays the label inside the form field,<br>`inlineNarrow` Displays the label above the form field when in web/tablet. Displays the label inside the form field when in mobile.<br>|
 | `value` | `String` or `Number` | `''` | The value of the form field. |
 | `hasError` | `Boolean` | `false` | When `true` border colour changes to red. |
 | `dropdownOptions` | `Array` | `null` | The options to be displayed in the dropdown. |
 | `isGrouped` | `Boolean` | `false` | When `true` will remove margin between all grouped form fields. |
+| `minNumber` | `Number` | 0 | Sets the value of the `min` property when `inputType` is `number` |
+| `maxNumber` | `Number` | 0 | Sets the value of the `max` property when `inputType` is `number` |
 
 ### Events
 
