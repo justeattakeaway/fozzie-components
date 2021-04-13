@@ -35,8 +35,9 @@
                     :class="$style['is-visuallyHidden']"
                     role="alert"
                     data-test-id="error-summary-container">
-                    <error-message v-show="genericErrorMessage"
-                                   :class="$style['c-registration-genericError']">
+                    <error-message
+                        v-show="genericErrorMessage"
+                        :class="$style['c-registration-genericError']">
                         {{ genericErrorMessage }}
                     </error-message>
                 </section>
@@ -51,8 +52,9 @@
                     :label-text="copy.labels.firstName"
                     input-type="text"
                     @blur="formFieldBlur('firstName')">
-                    <template v-if="describeFirstnameErrorMessage"
-                              #error>
+                    <template
+                        v-if="describeFirstnameErrorMessage"
+                        #error>
                         <error-message
                             test-data-id="firstnameErrorMessage"
                             :class="$style['c-registration-genericError']">
