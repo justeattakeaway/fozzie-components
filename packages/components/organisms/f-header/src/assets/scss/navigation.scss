@@ -70,7 +70,7 @@ $countrySelector-flag-height : 16px;
     list-style-image: none;
     padding: 0;
 
-    &>li {
+    & > li {
         margin-bottom: 0;
 
         &:before {
@@ -85,7 +85,6 @@ $countrySelector-flag-height : 16px;
 }
 
 .c-nav-list-link {
-
     &:hover,
     &:focus,
     &:active {
@@ -127,13 +126,13 @@ $countrySelector-flag-height : 16px;
         display: none;
     }
 
-    &:checked~.c-nav-container {
+    &:checked ~ .c-nav-container {
         @include media('<=mid') {
             @include nav-container-visible();
         }
     }
 
-    &:focus~.c-nav-toggle {
+    &:focus ~ .c-nav-toggle {
         background-color: $nav-trigger-focus-bg;
         box-shadow: 0 0 6px 0 $nav-trigger-focus-color;
 
