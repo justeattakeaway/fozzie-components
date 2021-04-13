@@ -18,7 +18,7 @@ const settings = () => ({
             browserName: 'chrome',
             acceptInsecureCerts: true,
             "goog:chromeOptions": {
-                mobileEmulation: {'deviceName': 'iPhone X'}
+                mobileEmulation: {'deviceName': 'Pixel 2'}
             },
             specs: VS_DEBUGGER ? [SPEC_FILE] : [
                 'test/specs/component/*.component.mobile.spec.js',
