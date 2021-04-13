@@ -12,6 +12,30 @@ v0.90.0
 - Refactored error handling
 
 
+v0.87.1
+------------------------------
+*April 12, 2021*
+
+### Changed
+- `checkoutTimeout` prop now defaults to ten seconds
+
+
+v0.87.0
+------------------------------
+*April 12, 2021*
+
+### Added
+- `isGuestCreated` store flag that prevents multiple guest accounts from being created when form is resubmitted after failed validation
+
+
+v0.86.0
+------------------------------
+*April 12, 2021*
+
+### Removed
+- Hardcoded timeout before redirecting to the payment page.
+
+
 v0.85.0
 ------------------------------
 *April 8, 2021*

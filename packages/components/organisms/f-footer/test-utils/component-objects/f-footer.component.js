@@ -8,7 +8,11 @@ const {
     COUNTRY_SELECTOR_BUTTON,
     CURRENT_COUNTRY_ICON,
     CURRENT_COUNTRY_TEXT,
-    COUNTRY_LIST
+    COUNTRY_LIST,
+    PAYMENT_ICONS,
+    FEEDBACK_BLOCK,
+    FEEDBACK_BUTTON,
+    FOOTER_LINK_LIST
 } = require('./f-footer.selectors');
 
 module.exports = class Footer extends Page {
@@ -18,13 +22,23 @@ module.exports = class Footer extends Page {
 
     get downloadIcons () { return $$(DOWNLOAD_ICONS); }
 
+    get downloadIconsBlock () { return $(DOWNLOAD_ICONS); }
+
     get socialIcons () { return $$(SOCIAL_ICONS); }
+
+    get socialIconsBlock () { return $(SOCIAL_ICONS); }
+
+    get paymentIconsBlock () { return $(PAYMENT_ICONS); }
 
     get courierLinks () { return $(COURIER_LINKS); }
 
     get downloadIcon () { return this.downloadIconValue; }
 
     get socialIcon () { return this.socialIconValue; }
+
+    get feedbackBlock () { return $(FEEDBACK_BLOCK); }
+
+    get feedbackButton () { return $(FEEDBACK_BUTTON); }
 
     get countrySelectorButton () { return $(COUNTRY_SELECTOR_BUTTON); }
 
@@ -33,6 +47,8 @@ module.exports = class Footer extends Page {
     get currentCountryText () { return $(CURRENT_COUNTRY_TEXT); }
 
     get countries () { return $$(COUNTRY_LIST); }
+
+    get footerLinkList () { return $(FOOTER_LINK_LIST); }
 
     get countryLink () { return this.countryValue != null ? this.countryValue : 'Please set a country value'; }
 
@@ -102,6 +118,10 @@ module.exports = class Footer extends Page {
         return this.downloadIcon.isDisplayed();
     }
 
+    isDownloadIconBlockDisplayed () {
+        return this.downloadIconsBlock.isDisplayed();
+    }
+
     clickDownloadIcon () {
         return this.downloadIcon.click();
     }
@@ -110,8 +130,24 @@ module.exports = class Footer extends Page {
         return this.socialIcon.isDisplayed();
     }
 
+    isSocialIconBlockDisplayed () {
+        return this.socialIconsBlock.isDisplayed();
+    }
+
+    isPaymentIconsBlockDisplayed () {
+        return this.paymentIconsBlock.isDisplayed();
+    }
+
     clickSocialIcon () {
         return this.socialIcon.click();
+    }
+
+    isFeedbackBlockDisplayed () {
+        return this.feedbackBlock.isDisplayed();
+    }
+
+    isFeedbackButtonClickable () {
+        return this.feedbackButton.isClickable();
     }
 
     areCourierLinksDisplayed () {
@@ -137,5 +173,9 @@ module.exports = class Footer extends Page {
     isCurrentCountryIconDisplayed (country) {
         const expectedIcon = this.currentFlagIcon.getAttribute('class').includes(`c-ficon--flag.${country}.round`);
         return expectedIcon ? this.currentFlagIcon.isDisplayed() : false;
+    }
+
+    areFooterLinksDisplayed () {
+        return this.footerLinkList.isDisplayedInViewport();
     }
 };
