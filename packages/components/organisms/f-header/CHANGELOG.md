@@ -23,11 +23,20 @@ v4.12.0
 - Convert `CountrySelectorPanel`, `Logo`, `SkipToMain` and `UserNavigationPanel` components to use css modules.
 - Unit and Component tests to support changes.
 
+
+v4.11.2
+------------------------------
+*March 13, 2021*
+
+### Fixed
+- Fixed typo in Italian header
+
+
 *April 9, 2021*
 
 ### Changed
 - Refactored large country selector test into two separate tests
-- - Added string placeholder to tenant component tests
+- Added string placeholder to tenant component tests
 
 *March 31, 2021*
 
