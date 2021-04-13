@@ -1450,7 +1450,7 @@ describe('Checkout', () => {
                         registrationSource: 'Guest'
                     },
                     otacToAuthExchanger,
-                    timeout: 1000
+                    timeout: 10000
                 };
                 const createGuestUserSpy = jest.spyOn(VueCheckout.methods, 'createGuestUser');
                 const wrapper = shallowMount(VueCheckout, {
@@ -1686,7 +1686,7 @@ describe('Checkout', () => {
                             'BS1 1AA'
                         ]
                     },
-                    timeout: 1000
+                    timeout: 10000
                 };
 
                 beforeEach(async () => {
@@ -2648,7 +2648,7 @@ describe('Checkout', () => {
                         },
                         referralState: 'ReferredByWeb'
                     },
-                    timeout: 1000
+                    timeout: 10000
                 };
 
                 // Act
