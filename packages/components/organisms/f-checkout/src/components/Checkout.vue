@@ -461,7 +461,11 @@ export default {
 
                 this.trackFormErrors();
 
-                this.logInvoker('Consumer Checkout Not Fulfillable', this.eventData, this.$logger.logWarn);
+                this.logInvoker({
+                    message: 'Consumer Checkout Not Fulfillable',
+                    data: this.eventData,
+                    logMethod: this.$logger.logWarn
+                });
 
                 this.$emit(EventNames.CheckoutUpdateFailure, this.eventData);
             }
@@ -528,7 +532,11 @@ export default {
                 this.$emit(EventNames.CheckoutPlaceOrderSuccess, this.eventData);
                 this.$emit(EventNames.CheckoutSuccess, this.eventData);
 
-                this.logInvoker('Consumer Checkout Successful', this.eventData, this.$logger.logInfo);
+                this.logInvoker({
+                    message: 'Consumer Checkout Successful',
+                    data: this.eventData,
+                    logMethod: this.$logger.logInfo
+                });
             } catch (e) {
                 throw new PlaceOrderError(e.message);
             }
@@ -578,7 +586,12 @@ export default {
                 this.$emit(EventNames.CheckoutGetFailure, error);
                 this.hasCheckoutLoadedSuccessfully = false;
 
-                this.logInvoker('Get Checkout Failure', this.eventData, this.$logger.logError, error);
+                this.logInvoker({
+                    message: 'Get Checkout Failure',
+                    data: this.eventData,
+                    logMethod: this.$logger.logError,
+                    error
+                });
             }
         },
 
@@ -600,7 +613,12 @@ export default {
                 this.$emit(EventNames.CheckoutBasketGetFailure, error);
                 this.hasCheckoutLoadedSuccessfully = false;
 
-                this.logInvoker('Get Checkout Basket Failure', this.eventData, this.$logger.logError, error);
+                this.logInvoker({
+                    message: 'Get Checkout Basket Failure',
+                    data: this.eventData,
+                    logMethod: this.$logger.logError,
+                    error
+                });
             }
         },
 
@@ -620,7 +638,12 @@ export default {
                 this.$emit(EventNames.CheckoutAvailableFulfilmentGetFailure, error);
                 this.hasCheckoutLoadedSuccessfully = false;
 
-                this.logInvoker('Get Checkout Available Fulfilment Times Failure', this.eventData, this.$logger.logError, error);
+                this.logInvoker({
+                    message: 'Get Checkout Available Fulfilment Times Failure',
+                    data: this.eventData,
+                    logMethod: this.$logger.logError,
+                    error
+                });
             }
         },
 
@@ -640,7 +663,12 @@ export default {
             } catch (error) {
                 this.$emit(EventNames.CheckoutAddressGetFailure, error);
 
-                this.logInvoker('Get checkout address failure', this.eventData, this.$logger.logWarn, error);
+                this.logInvoker({
+                    message: 'Get checkout address failure',
+                    data: this.eventData,
+                    logMethod: this.$logger.logWarn,
+                    error
+                });
             }
         },
 
@@ -662,7 +690,12 @@ export default {
                     });
                 }
             } catch (error) {
-                this.logInvoker('Geo Location Lookup Failed', this.eventData, this.$logger.logWarn, error);
+                this.logInvoker({
+                    message: 'Geo Location Lookup Failed',
+                    data: this.eventData,
+                    logMethod: this.$logger.logWarn,
+                    error
+                });
             }
         },
 
@@ -672,12 +705,17 @@ export default {
          * Set the `genericErrorMessage` for the user to see.
          */
         handleErrorState (error) {
-            const message = this.$t(error.messageKey || 'errorMessages.genericServerError');
+            const message = this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
             const eventToEmit = error.eventToEmit || EventNames.CheckoutFailure;
             const logMessage = error.logMessage || 'Consumer Checkout Failure';
 
             this.$emit(eventToEmit, { ...this.eventData, error });
-            this.logInvoker(logMessage, this.eventData, this.$logger.logError, error);
+            this.logInvoker({
+                message: logMessage,
+                data: this.eventData,
+                logMethod: this.$logger.logError,
+                error
+            });
             this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
             this.genericErrorMessage = message;
 
@@ -738,7 +776,11 @@ export default {
                 error: ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE
             });
 
-            this.logInvoker('Checkout Validation Error', { ...this.eventData, validationState }, this.$logger.logWarn);
+            this.logInvoker({
+                message: 'Checkout Validation Error',
+                data: { ...this.eventData, validationState },
+                logMethod: this.$logger.logWarn
+            });
         },
 
         /**

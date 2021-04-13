@@ -1268,7 +1268,11 @@ describe('Checkout', () => {
                     };
 
                     // Act
-                    wrapper.vm.logInvoker('Logger says hi', eventData, $logger.logInfo);
+                    wrapper.vm.logInvoker({
+                        message: 'Logger says hi',
+                        data: eventData,
+                        logMethod: $logger.logInfo
+                    });
 
                     // Assert
                     expect($logger.logInfo).toHaveBeenCalled();
@@ -1307,11 +1311,11 @@ describe('Checkout', () => {
                     wrapper.vm.handleNonFulfillableCheckout();
 
                     // Assert
-                    expect(logInvokerSpy).toHaveBeenCalledWith(
-                        'Consumer Checkout Not Fulfillable',
-                        wrapper.vm.eventData,
-                        $logger.logWarn
-                    );
+                    expect(logInvokerSpy).toHaveBeenCalledWith({
+                        message: 'Consumer Checkout Not Fulfillable',
+                        data: wrapper.vm.eventData,
+                        logMethod: $logger.logWarn
+                    });
                 });
 
                 it('should make a call to `trackFormErrors`', () => {
@@ -1740,7 +1744,12 @@ describe('Checkout', () => {
                     await wrapper.vm.lookupGeoLocation();
 
                     // Assert
-                    expect(logInvokerSpy).toHaveBeenCalledWith('Geo Location Lookup Failed', wrapper.vm.eventData, $logger.logWarn, error);
+                    expect(logInvokerSpy).toHaveBeenCalledWith({
+                        message: 'Geo Location Lookup Failed',
+                        data: wrapper.vm.eventData,
+                        logMethod: $logger.logWarn,
+                        error
+                    });
                 });
             });
 
@@ -1886,7 +1895,12 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutAddressGetFailure).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutAddressGetSuccess)).toBeUndefined();
-                    expect(logInvokerSpy).toHaveBeenCalledWith('Get checkout address failure', eventData, $logger.logWarn, error);
+                    expect(logInvokerSpy).toHaveBeenCalledWith({
+                        message: 'Get checkout address failure',
+                        data: eventData,
+                        logMethod: $logger.logWarn,
+                        error
+                    });
 
                     expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(true);
                 });
@@ -1987,7 +2001,12 @@ describe('Checkout', () => {
                 wrapper.vm.handleErrorState(error);
 
                 // Assert
-                expect(logInvokerSpy).toHaveBeenCalledWith('Consumer Checkout Failure', eventData, $logger.logError, error);
+                expect(logInvokerSpy).toHaveBeenCalledWith({
+                    message: 'Consumer Checkout Failure',
+                    data: eventData,
+                    logMethod: $logger.logError,
+                    error
+                });
             });
 
             it('should call `trackFormInteraction` with the error information', () => {
@@ -2444,14 +2463,14 @@ describe('Checkout', () => {
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(logInvokerSpy).toHaveBeenCalledWith(
-                        'Checkout Validation Error',
-                        {
+                    expect(logInvokerSpy).toHaveBeenCalledWith({
+                        message: 'Checkout Validation Error',
+                        data: {
                             ...eventData,
                             validationState: mockValidationState
                         },
-                        $logger.logWarn
-                    );
+                        logMethod: $logger.logWarn
+                    });
                 });
             });
         });
@@ -2686,7 +2705,11 @@ describe('Checkout', () => {
                     await wrapper.vm.submitOrder();
 
                     // Assert
-                    expect(logInvokerSpy).toHaveBeenCalledWith('Consumer Checkout Successful', wrapper.vm.eventData, $logger.logInfo);
+                    expect(logInvokerSpy).toHaveBeenCalledWith({
+                        message: 'Consumer Checkout Successful',
+                        data: wrapper.vm.eventData,
+                        logMethod: $logger.logInfo
+                    });
                 });
             });
 

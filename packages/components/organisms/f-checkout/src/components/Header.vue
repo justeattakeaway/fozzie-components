@@ -94,7 +94,10 @@ export default {
         onVisitLoginPage () {
             this.$emit(EventNames.CheckoutVisitLoginPage);
 
-            this.logInvoker('Consumer Visit Login Page', { }, this.$logger.logInfo);
+            this.logInvoker({
+                message: 'Consumer Visit Login Page',
+                logMethod: this.$logger.logInfo
+            });
         }
     }
 };
