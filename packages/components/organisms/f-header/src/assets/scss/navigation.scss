@@ -17,7 +17,6 @@ $countrySelector-flag-width : 16px;
 $countrySelector-flag-height : 16px;
 
 @mixin nav-container-visible () {
-    background: yellow;
     overflow-y: auto;
     left: 0;
     opacity: 1;
@@ -71,7 +70,7 @@ $countrySelector-flag-height : 16px;
     list-style-image: none;
     padding: 0;
 
-    & > li {
+    &>li {
         margin-bottom: 0;
 
         &:before {
@@ -86,6 +85,7 @@ $countrySelector-flag-height : 16px;
 }
 
 .c-nav-list-link {
+
     &:hover,
     &:focus,
     &:active {

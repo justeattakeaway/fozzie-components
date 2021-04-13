@@ -11,10 +11,9 @@
                 $style['c-nav-trigger'],
                 $style['c-nav-toggle'],
                 $style['is-hidden--noJS'],
-                navToggleThemeClass,
-                {
-                    [$style['is-open']]: navIsOpen
-                }]"
+                { [$style['c-nav-toggle--altColour']]: isAltColour },
+                { [$style['is-open']]: navIsOpen }
+            ]"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
             :aria-label="copy.openMenuText"
             data-test-id="nav-toggle"
@@ -64,7 +63,7 @@
                 :class="[
                     $style['c-nav-icon'],
                     $style['c-nav-icon--offers'],
-                    { [$style['c-nav-icon--alt']]: isAltColour && !navIsOpen }
+                    { [$style['c-nav-icon--alt']]: isAltColour }
                 ]" />
             <span :class="$style['is-visuallyHidden']">
                 {{ copy.offers.text }}
@@ -99,7 +98,7 @@
                             :class="[
                                 $style['c-nav-icon'],
                                 $style['c-nav-icon--offers'],
-                                { [$style['c-nav-icon--alt']]: isAltColour && !navIsOpen }
+                                { [$style['c-nav-icon--alt']]: isAltColour }
                             ]" />
                         {{ copy.offers.text }}
                     </a>
@@ -126,7 +125,7 @@
                             :class="[
                                 $style['c-nav-icon'],
                                 $style['c-nav-icon--delivery'],
-                                { [$style['c-nav-icon--alt']]: isAltColour && !navIsOpen }
+                                { [$style['c-nav-icon--alt']]: isAltColour }
                             ]" />
                         {{ copy.deliveryEnquiry.text }}
                     </a>
@@ -153,7 +152,7 @@
                             :class="[
                                 $style['c-nav-icon'],
                                 $style['c-nav-icon--profile'],
-                                { [$style['c-nav-icon--alt']]: isAltColour && !navIsOpen }
+                                { [$style['c-nav-icon--alt']]: isAltColour }
                             ]" />
                         <span
                             :class="[
@@ -442,11 +441,7 @@ export default {
         },
 
         isAltColour () {
-            return this.headerBackgroundTheme === 'highlight' || this.headerBackgroundTheme === 'transparent';
-        },
-
-        navToggleThemeClass () {
-            return this.headerBackgroundTheme === 'highlight' ? this.$style['c-nav-toggle--altColour'] : '';
+            return this.headerBackgroundTheme === 'highlight' || (this.headerBackgroundTheme === 'transparent' && !this.navIsOpen);
         },
 
         /**
@@ -983,17 +978,14 @@ $nav-popover-width                 : 300px;
         margin-right: spacing();
     }
 
-    .c-header--highlightBg &,
-    .c-header--transparent & {
-        @include media('>mid') {
-            background-color: $white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    @include media('>mid') {
+        background-color: $white;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 
