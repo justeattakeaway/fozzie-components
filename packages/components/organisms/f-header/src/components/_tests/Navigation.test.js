@@ -11,6 +11,12 @@ import {
 
 import Navigation from '../Navigation.vue';
 
+const $style = {
+    'is-open': 'is-open',
+    'c-nav-toggle--altColour': 'c-nav-toggle--altColour',
+    'is-hidden': 'is-hidden'
+};
+
 let wrapper;
 
 jest.mock('@justeat/f-services', () => ({
@@ -207,6 +213,9 @@ describe('Navigation', () => {
                             ...defaultPropsData.copy,
                             navLinks: {}
                         }
+                    },
+                    mocks: {
+                        $style
                     }
                 });
 
@@ -218,7 +227,6 @@ describe('Navigation', () => {
                     },
                     navIsOpen: true
                 });
-                wrapper.vm.openNav();
 
                 // Assert
                 expect(wrapper.find('[data-test-id="nav-toggle"]').classes()).toContain('is-open');
@@ -226,24 +234,26 @@ describe('Navigation', () => {
 
             it('should not be shown when "navIsOpen" is false', async () => {
                 // Arrange
-                wrapper = shallowMount(Navigation, { propsData: defaultPropsData });
+                wrapper = shallowMount(Navigation, {
+                    propsData: defaultPropsData,
+                    mocks: {
+                        $style
+                    }
+                });
 
+                // Act
                 await wrapper.setData({
                     ...defaultData,
                     userInfo: {
                         isAuthenticated: true
                     },
-                    navIsOpen: true
+                    navIsOpen: false
                 });
-
-                // Act
-                await wrapper.vm.closeNav();
 
                 // Assert
                 expect(wrapper.find('[data-test-id="nav-toggle"]').classes()).not.toContain('is-open');
             });
         });
-
 
         it('should be white when "headerBackgroundTheme" is set to "highlight"', () => {
             // Arrange & Act
@@ -251,6 +261,9 @@ describe('Navigation', () => {
                 propsData: {
                     ...defaultPropsData,
                     headerBackgroundTheme: 'highlight'
+                },
+                mocks: {
+                    $style
                 }
             });
 
@@ -639,7 +652,7 @@ describe('Navigation', () => {
             expect(wrapper.find('[data-test-id="login"]').exists()).toBe(false);
         });
 
-        it('should NOT show "navLinks" if `showLoginInfo: false` and the user is logged in and has nav link data', async () => {
+        it('should NOT show "navLinks" if `: false` and the user is logged in and has nav link data', async () => {
             // Arrange
             wrapper = shallowMount(Navigation, {
                 propsData: {
@@ -650,6 +663,9 @@ describe('Navigation', () => {
                     hasNavigationLinks () {
                         return true;
                     }
+                },
+                mocks: {
+                    $style
                 }
             });
 
@@ -738,6 +754,9 @@ describe('Navigation', () => {
                 propsData: {
                     ...defaultPropsData,
                     showCountrySelector: true
+                },
+                mocks: {
+                    $style
                 }
             });
 
@@ -754,6 +773,9 @@ describe('Navigation', () => {
                 propsData: {
                     ...defaultPropsData,
                     showCountrySelector: true
+                },
+                mocks: {
+                    $style
                 }
             });
 
