@@ -12,6 +12,15 @@ v0.90.0
 - Refactored error handling
 
 
+v0.88.0
+------------------------------
+*April 12, 2021*
+
+
+### Changed
+- PATCH Checkout now sends null for lines 3 and 4 of address instead of empty string
+
+
 v0.87.1
 ------------------------------
 *April 12, 2021*

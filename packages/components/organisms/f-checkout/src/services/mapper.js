@@ -39,8 +39,8 @@ const mapUpdateCheckoutRequest = ({
                         lines: [
                             address.line1 || '',
                             address.line2 || '',
-                            '',
-                            ''
+                            null,
+                            null
                         ],
                         locality: address.locality || null,
                         postalCode: address.postcode || null

@@ -1154,8 +1154,6 @@ describe('Checkout', () => {
                 });
 
                 describe('AND there is an error caught', () => {
-                    const { errorMessages } = i18n.messages[i18n.locale];
-
                     let handleErrorStateSpy;
 
                     beforeEach(() => {
