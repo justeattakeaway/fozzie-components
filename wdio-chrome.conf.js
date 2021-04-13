@@ -131,7 +131,7 @@ exports.config = {
     // see also: https://webdriver.io/docs/dot-reporter.html
     // reporters: ['dot'],
 
-    reporters: testSettings.reporters,
+    reporters: chromeSettings.reporters,
 
     afterTest: () => {
         browser.takeScreenshot();
@@ -269,9 +269,9 @@ exports.config = {
             const reportError = new Error('Could not generate Allure report');
             const generation = allure(['generate', `${global.baseDir}/test/results/allure`, ' --clean']);
 
-            for (let i = 0; i < testSettings.reporters.length; i++) {
-                for (let j = 0; j < testSettings.reporters[i].length; j++) {
-                    if (testSettings.reporters[i].includes('allure')) {
+            for (let i = 0; i < chromeSettings.reporters.length; i++) {
+                for (let j = 0; j < chromeSettings.reporters[i].length; j++) {
+                    if (chromeSettings.reporters[i].includes('allure')) {
                         return new Promise((resolve, reject) => {
                             const generationTimeout = setTimeout(
                                 () => reject(reportError),

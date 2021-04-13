@@ -48,6 +48,7 @@ const settings = () => ({
             ]
         }] : [])
     ],
+    reporters: [],
     services: [['browserstack', {
         browserstackLocal: true
     }]]

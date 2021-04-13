@@ -145,7 +145,7 @@ exports.config = {
     // see also: https://webdriver.io/docs/dot-reporter.html
     // reporters: ['dot'],
 
-    reporters: testSettings.reporters,
+    reporters: browserstackSettings.reporters,
 
     //
     // Options to be passed to Mocha.

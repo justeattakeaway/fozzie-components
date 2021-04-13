@@ -1,6 +1,7 @@
 // Used to determine if tests are being run through VS Code debugger.
 // If true, only run the file being debugged.
-const { VS_DEBUGGER, SPEC_FILE } = process.env;
+const { ALLURE_REPORTER, SPEC_FILE, VS_DEBUGGER } = process.env;
+const video = require('wdio-video-reporter');
 
 const settings = () => ({
     baseUrl: 'http://localhost:8080',
@@ -25,7 +26,14 @@ const settings = () => ({
             ]
         }] : [])
     ],
-    services: ['chromedriver'],
+    reporters: ALLURE_REPORTER === 'true' ? [
+        [video, {
+            saveAllVideos: false, // If true, also saves videos for successful test cases
+            videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
+            outputDir: `${global.baseDir}/test/results/allure`
+        }]
+    ] : [],
+    services: ['chromedriver']
 });
 
 const isMobile = () => SPEC_FILE.endsWith('mobile.spec.js');
