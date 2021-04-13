@@ -4,7 +4,7 @@
         :class="[
             $style['c-header'],
             headerBackgroundClass,
-            transparentClasses,
+            transparentBackgroundClasses,
             { [$style['c-header--navInView']]: mobileNavIsOpen }
         ]"
         data-test-id='header-component'>
@@ -146,15 +146,15 @@ export default {
             return this.headerBackgroundTheme === 'transparent' && !this.mobileNavIsOpen;
         },
 
-        headerBackgroundClass () {
-            return this.headerBackgroundTheme === 'highlight' ? this.$style['c-header--highlightBg'] : '';
-        },
-
         showOffersLinkWithContent () {
             return this.copy.offers && this.showOffersLink;
         },
 
-        transparentClasses () {
+        headerBackgroundClass () {
+            return this.headerBackgroundTheme === 'highlight' ? this.$style['c-header--highlightBg'] : '';
+        },
+
+        transparentBackgroundClasses () {
             return this.showTransparentHeader ? `${this.$style['c-header--transparent']} ${this.$style['c-header--gradient']}` : '';
         }
     },

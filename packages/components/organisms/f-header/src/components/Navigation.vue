@@ -37,9 +37,8 @@
                 $style['c-nav-toggle'],
                 $style['is-hidden'],
                 $style['is-shown--noJS'],
-                navToggleThemeClass, {
-                    [$style['is-open']]: navIsOpen
-                }]"
+                { [$style['is-open']]: navIsOpen }
+            ]"
             :aria-label="copy.openMenuText"
             for="nav-trigger">
             <span :class="$style['c-nav-toggle-icon']" />
