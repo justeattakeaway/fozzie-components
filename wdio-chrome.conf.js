@@ -267,7 +267,7 @@ exports.config = {
     onComplete: function () {
         if (process.env.ALLURE_REPORTER === 'true') {
             const reportError = new Error('Could not generate Allure report');
-            const generation = allure(['generate', `${global.baseDir}/test/results/allure`, ' --clean']);
+            const generation = allure(['generate', '../../../../test/results/allure', ' --clean']);
 
             for (let i = 0; i < chromeSettings.reporters.length; i++) {
                 for (let j = 0; j < chromeSettings.reporters[i].length; j++) {
