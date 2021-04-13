@@ -283,6 +283,7 @@ export default {
             'customer',
             'errors',
             'geolocation',
+            'isGuestCreated',
             'hasAsapSelected',
             'id',
             'isFulfillable',
@@ -433,7 +434,7 @@ export default {
          */
         async submitCheckout () {
             try {
-                if (!this.isLoggedIn) {
+                if (!this.isLoggedIn && !this.isGuestCreated) {
                     await this.setupGuestUser();
                 }
 
@@ -542,9 +543,7 @@ export default {
          * Redirect to the payment page.
          */
         redirectToPayment () {
-            setTimeout(() => { // TODO: remove this when the order team handles this automatically.
-                window.location.assign(`${this.paymentPageUrlPrefix}/${this.orderId}`);
-            }, 1000);
+            window.location.assign(`${this.paymentPageUrlPrefix}/${this.orderId}`);
         },
 
         /**
