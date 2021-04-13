@@ -1,33 +1,49 @@
 <template>
     <nav
         v-if="hasNavigationLinks"
-        class="c-nav c-nav--global"
+        :class="[
+            $style['c-nav'],
+            $style['c-nav--global']
+        ]"
         data-test-id="nav-container">
         <button
-            :class="['c-nav-trigger c-nav-toggle is-hidden--noJS', navToggleThemeClass, {
-                'is-open': navIsOpen
-            }]"
+            :class="[
+                $style['c-nav-trigger'],
+                $style['c-nav-toggle'],
+                $style['is-hidden--noJS'],
+                navToggleThemeClass,
+                {
+                    [$style['is-open']]: navIsOpen
+                }]"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
             :aria-label="copy.openMenuText"
             data-test-id="nav-toggle"
             type="button"
             @click="onNavToggle">
-            <span class="c-nav-toggle-icon" />
+            <span :class="$style['c-nav-toggle-icon']" />
         </button>
 
         <input
             id="nav-trigger"
             v-model="navIsOpen"
             type="checkbox"
-            class="c-nav-trigger is-hidden is-shown--noJS">
+            :class="[
+                $style['c-nav-trigger'],
+                $style['is-hidden'],
+                $style['is-shown--noJS']
+            ]">
 
         <label
-            :class="['c-nav-toggle is-hidden is-shown--noJS', navToggleThemeClass, {
-                'is-open': navIsOpen
-            }]"
+            :class="[
+                $style['c-nav-toggle'],
+                $style['is-hidden'],
+                $style['is-shown--noJS'],
+                navToggleThemeClass, {
+                    [$style['is-open']]: navIsOpen
+                }]"
             :aria-label="copy.openMenuText"
             for="nav-trigger">
-            <span class="c-nav-toggle-icon" />
+            <span :class="$style['c-nav-toggle-icon']" />
         </label>
 
         <a
@@ -40,19 +56,32 @@
                 "label": "offers_icon"
             }'
             :href="copy.offers.url"
-            class="c-nav-featureLink c-nav-featureLink--hideAboveMid">
-            <gift-icon class="c-nav-icon c-nav-icon--offers" />
-            <span class="is-visuallyHidden">
+            :class="[
+                $style['c-nav-featureLink'],
+                $style['c-nav-featureLink--hideAboveMid']
+            ]">
+            <gift-icon
+                :class="[
+                    $style['c-nav-icon'],
+                    $style['c-nav-icon--offers'],
+                    { [$style['c-nav-icon--alt']]: isAltColour && !navIsOpen }
+                ]" />
+            <span :class="$style['is-visuallyHidden']">
                 {{ copy.offers.text }}
             </span>
         </a>
 
         <div
-            :class="['c-nav-container', { 'is-visible': navIsOpen }]">
-            <ul class="c-nav-list">
+            :class="[
+                $style['c-nav-container'],
+                { [$style['is-visible']]: navIsOpen }
+            ]">
+            <ul
+                :class="$style['c-nav-list']"
+                data-test-id="nav-list">
                 <li
                     v-if="showOffersLink"
-                    class="c-nav-list-item--horizontallyAlignedAboveMid">
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <a
                         data-test-id="offers-link"
                         data-trak='{
@@ -62,14 +91,22 @@
                             "label": "offers"
                         }'
                         :href="copy.offers.url"
-                        class="c-nav-list-link">
-                        <gift-icon class="c-nav-icon c-nav-icon--offers" />
+                        :class="[
+                            $style['c-nav-list-link'],
+                            { [$style['c-nav-list-link--alt']]: isAltColour }
+                        ]">
+                        <gift-icon
+                            :class="[
+                                $style['c-nav-icon'],
+                                $style['c-nav-icon--offers'],
+                                { [$style['c-nav-icon--alt']]: isAltColour && !navIsOpen }
+                            ]" />
                         {{ copy.offers.text }}
                     </a>
                 </li>
                 <li
                     v-if="showDeliveryEnquiry"
-                    class="c-nav-list-item--horizontallyAlignedAboveMid"
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']"
                     data-test-id="delivery-enquiry">
                     <a
                         data-test-id="delivery-link"
@@ -81,50 +118,73 @@
                         }`'
                         :href="copy.deliveryEnquiry.url"
                         target="_blank"
-                        class="c-nav-list-link">
-                        <moped-icon class="c-nav-icon c-nav-icon--delivery" />
+                        :class="[
+                            $style['c-nav-list-link'],
+                            { [$style['c-nav-list-link--alt']]: isAltColour }
+                        ]">
+                        <moped-icon
+                            :class="[
+                                $style['c-nav-icon'],
+                                $style['c-nav-icon--delivery'],
+                                { [$style['c-nav-icon--alt']]: isAltColour && !navIsOpen }
+                            ]" />
                         {{ copy.deliveryEnquiry.text }}
                     </a>
                 </li>
                 <li
-                    :class="['c-nav-list-item--horizontallyAlignedAboveMid has-sublist', {
-                        'is-hidden': !userInfo || !showLoginInfo,
-                        'is-open': navIsOpen
-                    }]"
+                    :class="[
+                        $style['c-nav-list-item--horizontallyAlignedAboveMid'],
+                        $style['has-sublist'], {
+                            [$style['is-hidden']]: !userInfo || !showLoginInfo,
+                            [$style['is-open']]: userMenuIsOpen
+                        }]"
                     data-test-id="user-info-icon"
-                    v-on="isBelowMid ? null : { mouseover: openNav, mouseleave: closeNav }"
-                    @keyup.esc="closeNav">
+                    v-on="isBelowMid ? null : { mouseover: openUserMennu, mouseleave: closeUserMenu }"
+                    @keyup.esc="closeUserMenu">
                     <a
                         data-test-id="user-info-link"
                         :tabindex="isBelowMid ? -1 : 0"
-                        :aria-expanded="!isBelowMid && navIsOpen ? 'true' : 'false'"
+                        :aria-expanded="!isBelowMid && userMenuIsOpen ? 'true' : 'false'"
                         :aria-haspopup="isBelowMid ? false : true"
-                        class="c-nav-list-text"
+                        :class="$style['c-nav-list-text']"
                         href="/"
                         @click.prevent="onNavToggle">
-                        <profile-icon class="c-nav-icon c-nav-icon--profile" />
-                        <span class="c-nav-list-text-sub">
+                        <profile-icon
+                            :class="[
+                                $style['c-nav-icon'],
+                                $style['c-nav-icon--profile'],
+                                { [$style['c-nav-icon--alt']]: isAltColour && !navIsOpen }
+                            ]" />
+                        <span
+                            :class="[
+                                $style['c-nav-list-text-sub'],
+                                { [$style['c-nav-list-link--alt']]: isAltColour }
+                            ]">
                             {{ userInfo.friendlyName }}
                         </span>
-                        <span class="c-nav-list-text-sub u-showBelowMid">
+                        <span
+                            :class="[
+                                $style['c-nav-list-text-sub'],
+                                $style['u-showBelowMid']
+                            ]">
                             {{ userInfo.email }}
                         </span>
                     </a>
 
-                    <v-popover class="c-nav-popover">
+                    <v-popover :class="$style['c-nav-popover']">
                         <user-navigation-panel
                             :is-open="navIsOpen"
                             :is-below-mid="isBelowMid"
                             :copy="copy"
                             :return-logout-url="returnLogoutUrl"
-                            @activateNav="openNav"
-                            @deactivateNav="closeNav" />
+                            @activateNav="openUserMennu"
+                            @deactivateNav="closeUserMenu" />
                     </v-popover>
                 </li>
 
                 <li
                     v-if="!userInfo && showLoginInfo"
-                    class="c-nav-list-item--horizontallyAlignedAboveMid"
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']"
                     data-test-id="login">
                     <a
                         :href="returnLoginUrl"
@@ -135,8 +195,11 @@
                             "label": "${copy.accountLogin.gtm}"
                         }`'
                         rel="nofollow"
-                        :class="['c-nav-list-link',
-                                 { 'c-nav-list-link--leftPaddingBelowMid': userInfo }]"
+                        :class="[
+                            $style['c-nav-list-link'],
+                            { [$style['c-nav-list-link--leftPaddingBelowMid']]: userInfo },
+                            { [$style['c-nav-list-link--alt']]: isAltColour }
+                        ]"
                         data-test-id="login-link">
                         {{ copy.accountLogin.text }}
                     </a>
@@ -144,7 +207,7 @@
 
                 <li
                     v-if="showHelpLink"
-                    class="c-nav-list-item--horizontallyAlignedAboveMid">
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <a
                         :href="copy.help.url"
                         :data-trak='`{
@@ -153,17 +216,20 @@
                                 "action": "header",
                                 "label": "${copy.help.gtm}"
                             }`'
-                        :class="['c-nav-list-link',
-                                 { 'c-nav-list-link--leftPaddingBelowMid': userInfo }]"
+                        :class="[
+                            $style['c-nav-list-link'],
+                            { [$style['c-nav-list-link--leftPaddingBelowMid']]: userInfo },
+                            { [$style['c-nav-list-link--alt']]: isAltColour }
+                        ]"
                         data-test-id="help-link"
-                        v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
+                        v-on="isBelowMid ? { blur: closeUserMenu, focus: openUserMennu } : null">
                         {{ copy.help.text }}
                     </a>
                 </li>
 
                 <li
                     v-if="userInfo && isBelowMid && showLoginInfo"
-                    class="c-nav-list-item--horizontallyAlignedAboveMid"
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']"
                     data-test-id="logout">
                     <a
                         :tabindex="navIsOpen ? 0 : -1"
@@ -174,9 +240,12 @@
                                 "action": "header",
                                 "label": "${copy.accountLogout.gtm}"
                             }`'
-                        :class="['c-nav-list-link',
-                                 { 'c-nav-list-link--leftPaddingBelowMid': userInfo }]"
-                        v-on="isBelowMid ? { blur: closeNav, focus: openNav } : null">
+                        :class="[
+                            $style['c-nav-list-link'],
+                            { [$style['c-nav-list-link--leftPaddingBelowMid']]: userInfo },
+                            { [$style['c-nav-list-link--alt']]: isAltColour }
+                        ]"
+                        v-on="isBelowMid ? { blur: closeUserMenu, focus: openUserMennu } : null">
                         {{ copy.accountLogout.text }}
                     </a>
                 </li>
@@ -184,33 +253,45 @@
                 <li
                     v-if="showCountrySelector"
                     data-test-id="country-selector"
-                    :class="['c-nav-list-item--horizontallyAlignedAboveMid has-sublist', {
-                        'is-open': countrySelectorIsOpen
-                    }]"
+                    :class="[
+                        $style['c-nav-list-item--horizontallyAlignedAboveMid'],
+                        $style['has-sublist'], {
+                            [$style['is-open']]: countrySelectorIsOpen
+                        }]"
                     v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: closeCountrySelector }"
                     @keyup.esc="closeCountrySelector">
                     <button
                         type="button"
                         data-test-id="action-button-component"
                         :tabindex="isBelowMid && !navIsOpen ? -1 : 0"
-                        class="c-nav-list-text c-nav-list-btn"
+                        :class="[
+                            $style['c-nav-list-text'],
+                            $style['c-nav-list-btn']
+                        ]"
                         :aria-expanded="countrySelectorIsOpenOnDesktopView ? 'true' : 'false'"
                         :aria-haspopup="!isBelowMid"
                         :aria-label="copy.countrySelector.changeCurrentCountry"
                         @click="onCountrySelectorToggle"
-                        v-on="countrySelectorIsClosedOnMobileView ? { blur: closeNav, focus: openNav } : null">
-                        <span class="c-nav-list-iconWrapper">
+                        v-on="countrySelectorIsClosedOnMobileView ? { blur: closeUserMenu, focus: openUserMennu } : null">
+                        <span :class="$style['c-nav-list-iconWrapper']">
                             <flag-icon
                                 data-test-id="current-flag-icon"
                                 :country-code="copy.countrySelector.currentCountryKey"
-                                class="c-nav-list-icon--flag c-nav-list-icon--flagCurrent" />
+                                :class="[
+                                    $style['c-nav-list-icon--flag'],
+                                    $style['c-nav-list-icon--flagCurrent']
+                                ]" />
                         </span>
-                        <span class='c-nav-list-title'>
+                        <span :class="$style['c-nav-list-title']">
                             {{ copy.countrySelector.selectYourCountryText }}
                         </span>
                     </button>
 
-                    <v-popover class="c-nav-popover c-nav-popover--countrySelector">
+                    <v-popover
+                        :class="[
+                            $style['c-nav-popover'],
+                            $style['c-nav-popover--countrySelector']
+                        ]">
                         <country-selector-panel
                             :copy="copy"
                             :is-open="countrySelectorIsOpen"
@@ -317,6 +398,7 @@ export default {
     data () {
         return {
             navIsOpen: false,
+            userMenuIsOpen: false,
             currentScreenWidth: null,
             userInfo: this.userInfoProp,
             localOrderCountExpires: false,
@@ -359,8 +441,12 @@ export default {
             return this.localOrderCountExpires < currentTime;
         },
 
+        isAltColour () {
+            return this.headerBackgroundTheme === 'highlight' || this.headerBackgroundTheme === 'transparent';
+        },
+
         navToggleThemeClass () {
-            return this.headerBackgroundTheme === 'highlight' ? 'c-nav-toggle--altColour' : '';
+            return this.headerBackgroundTheme === 'highlight' ? this.$style['c-nav-toggle--altColour'] : '';
         },
 
         /**
@@ -382,6 +468,7 @@ export default {
         countrySelectorIsClosedOnMobileView () {
             return this.isBelowMid && !this.countrySelectorIsOpen;
         },
+
         countrySelectorIsOpenOnDesktopView () {
             return !this.isBelowMid && this.countrySelectorIsOpen;
         }
@@ -417,13 +504,15 @@ export default {
             this.handleMobileNavState();
         },
 
-        closeNav () {
-            this.navIsOpen = false;
+        closeUserMenu () {
+            this.userMenuIsOpen = false;
+
             this.handleMobileNavState();
         },
 
-        openNav () {
-            this.navIsOpen = true;
+        openUserMennu () {
+            this.userMenuIsOpen = true;
+
             this.handleMobileNavState();
         },
 
@@ -448,8 +537,8 @@ export default {
                 this.$emit('onMobileNavToggle', this.navIsOpen);
 
                 if (typeof document !== 'undefined') {
-                    document.documentElement.classList.toggle('is-navInView', this.navIsOpen);
-                    document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.headerBackgroundTheme === 'transparent');
+                    document.documentElement.classList.toggle(this.$style['is-navInView'], this.navIsOpen);
+                    document.documentElement.classList.toggle(this.$style['is-navInView--noPad'], this.navIsOpen && this.headerBackgroundTheme === 'transparent');
                 }
             }
         },
@@ -529,7 +618,9 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
+@import '../assets/scss/navigation.scss';
+
 // TODO - Pull in fozzie utilities css instead
 // https://github.com/justeat/fozzie/blob/f7f0184ba3a244c19d6e83c44c35a31b7c2dd2d9/src/scss/trumps/_utilities.scss
 // Hide from both screenreaders and browsers: h5bp.com/u
@@ -567,7 +658,7 @@ export default {
 $nav-text-size                     : 'body-l';
 $nav-text-size--narrow             : 'body-s';
 $nav-text-color                    : $color-link-default;
-$nav-text-color--hover             : $color-link-hover;
+
 $nav-text-color--narrow            : $grey--dark;
 $nav-text-color--transparent       : $white;
 $nav-text-weight                   : $font-weight-bold;
@@ -581,10 +672,6 @@ $nav-icon-size                     : 24px;
 $nav-featureLinkIcon-width         : 28px;
 $nav-featureLinkIcon-height        : 28px;
 
-$nav-trigger-width                 : 56px;
-$nav-trigger-height                : 48px;
-$nav-trigger-focus-color           : $blue;
-$nav-trigger-focus-bg              : $blue--offWhite;
 $nav-toggleIcon-left               : spacing(x2);
 $nav-toggleIcon-width              : 21px;
 $nav-toggleIcon-height             : 2px;
@@ -594,21 +681,7 @@ $nav-toggleIcon-color--transparent : $white;
 $nav-toggleIcon-bg                 : transparent;
 $nav-toggleIcon-space              : 5px;
 
-$nav-popover-transition-delay      : 200ms;
-$nav-popover-transition-duration   : 200ms;
 $nav-popover-width                 : 300px;
-
-$countrySelector-flag-width  : 16px;
-$countrySelector-flag-height : 16px;
-
-@mixin nav-container-visible () {
-    overflow-y: auto;
-    left: 0;
-    opacity: 1;
-    z-index: zIndex(high);
-    transition: opacity $nav-transition-duration ease-in-out,
-                z-index 0s linear;
-}
 
 // removes scroll
 .is-navInView {
@@ -631,70 +704,6 @@ $countrySelector-flag-height : 16px;
         padding-top: 0;
     }
 }
-
-// Global site-wide navigation
-.c-nav--global {
-    @include media('>mid') {
-        display: flex;
-        justify-content: flex-end;
-        flex-grow: 1;
-    }
-
-    // we have a nav container so that we don’t have to make the inner list 100% height
-    // this is so we can position the logout button last on mobile
-    & .c-nav-container {
-        @include media('<=mid') {
-            position: fixed;
-            top: $header-height--narrow;
-            left: -99999px;
-            width: 100%;
-            padding: 0;
-            height: calc(100% - (#{$header-height--narrow}));
-            border-top: $header-separator solid $header-border-color;
-            background: $white;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity $nav-transition-duration ease-in-out,
-                        z-index 0s linear $nav-transition-duration,
-                        left 0s linear ($nav-popover-transition-delay + $nav-popover-transition-duration);
-
-            &.is-visible {
-                @include nav-container-visible();
-            }
-        }
-    }
-}
-
-.c-nav-list {
-    position: relative;
-}
-.c-nav-list,
-.c-nav-popoverList {
-    margin-top: 0;
-    margin-left: 0;
-    list-style: none;
-    list-style-image: none;
-    padding: 0;
-
-    & > li {
-        margin-bottom: 0;
-
-        &:before {
-            content: none;
-        }
-    }
-
-    @include media('<=mid') {
-        display: flex;
-        flex-direction: column;
-    }
-}
-
-    .c-nav-popoverList--twoColumns {
-        @include media('>mid') {
-            column-count: 2;
-        }
-    }
 
     // TODO: MAKE THIS NOT USE FLOATS
     // global modifier for list items horizontally aligned
@@ -734,11 +743,12 @@ $countrySelector-flag-height : 16px;
                 color: $nav-text-color;
                 border-bottom: none;
                 height: $header-height;
+            }
+        }
 
-                .c-header--highlightBg &,
-                .c-header--transparent & {
-                    color: $nav-text-color--transparent;
-                }
+        .c-nav-list-link--alt {
+            @include media('>mid') {
+                color: $nav-text-color--transparent;
             }
         }
 
@@ -758,28 +768,6 @@ $countrySelector-flag-height : 16px;
             &.u-showBelowMid {
                 @include media('>mid') {
                     display: none !important;
-                }
-            }
-        }
-
-        .c-nav-list-link {
-            &:hover,
-            &:focus,
-            &:active {
-                text-decoration: none;
-
-                @include media('>mid') {
-                    color: $nav-text-color--hover;
-                    text-decoration: underline;
-
-                    .c-header--highlightBg,
-                    .c-header--transparent & {
-                        color: $nav-text-color--transparent;
-                    }
-
-                    .c-header--transparent .c-nav-popoverList & {
-                        color: inherit;
-                    }
                 }
             }
         }
@@ -844,11 +832,6 @@ $countrySelector-flag-height : 16px;
         @include media('>mid') {
             & path {
                 fill: $nav-icon-color;
-
-                .c-header--highlightBg &,
-                .c-header--transparent & {
-                    fill: $nav-icon-color--transparent;
-                }
             }
         }
     }
@@ -863,34 +846,11 @@ $countrySelector-flag-height : 16px;
         }
     }
 
-// Navigation Trigger
-// This is the checkbox that controls the menu active state without JS via :checked
-.c-nav-trigger {
-    position: absolute;
-    width: $nav-trigger-width;
-    height: $nav-trigger-height;
-    top: -100px;
-    left: -100px;
-
-    @include media('>mid') {
-        display: none;
-    }
-
-    &:checked ~ .c-nav-container {
-        @include media('<=mid') {
-            @include nav-container-visible();
+    .c-nav-icon--alt {
+        & path {
+            fill: $nav-icon-color--transparent;
         }
     }
-
-    &:focus ~ .c-nav-toggle {
-        background-color: $nav-trigger-focus-bg;
-        box-shadow: 0 0 6px 0 $nav-trigger-focus-color;
-
-        .c-header--transparent & {
-            background-color: transparent;
-        }
-    }
-}
 
 // Navigation Toggle
 // Only shown at narrow widths (Hamburger Menu icon)
@@ -1035,12 +995,6 @@ $countrySelector-flag-height : 16px;
             justify-content: center;
         }
     }
-}
-
-.c-nav-list-icon--flag {
-    height: $countrySelector-flag-height;
-    width: $countrySelector-flag-width;
-    margin-right: spacing();
 }
 
 .c-nav-list-icon--flagCurrent {

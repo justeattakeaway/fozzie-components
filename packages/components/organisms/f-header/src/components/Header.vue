@@ -1,16 +1,19 @@
 <template>
     <header
         :data-theme="theme"
-        :class="['c-header', headerBackgroundClass, {
-            'c-header--transparent c-header--gradient': showTransparentHeader
-        }]"
+        :class="[
+            $style['c-header'],
+            headerBackgroundClass,
+            transparentClasses,
+            { [$style['c-header--navInView']]: mobileNavIsOpen }
+        ]"
         data-test-id='header-component'>
         <skip-to-main
             v-if="showSkipLink"
             :text="copy.skipToMainContentText"
             :transparent-bg="showTransparentHeader" />
 
-        <div class="c-header-container">
+        <div :class="$style['c-header-container']">
             <logo
                 :theme="theme"
                 :company-name="copy.companyName"
@@ -144,11 +147,15 @@ export default {
         },
 
         headerBackgroundClass () {
-            return this.headerBackgroundTheme === 'highlight' ? 'c-header--highlightBg' : '';
+            return this.headerBackgroundTheme === 'highlight' ? this.$style['c-header--highlightBg'] : '';
         },
 
         showOffersLinkWithContent () {
             return this.copy.offers && this.showOffersLink;
+        },
+
+        transparentClasses () {
+            return this.showTransparentHeader ? `${this.$style['c-header--transparent']} ${this.$style['c-header--gradient']}` : '';
         }
     },
 
@@ -160,24 +167,13 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
+
 .c-header {
     background-color: $header-bg;
     min-width : 300px;
     position: relative;
     z-index: zIndex(mid);
-
-    // when the off-screen navigation is active (on mobile), it fixes to the top of the screen.
-    // this stops the content being forced upwards when this happens (preventing slight visual glitch)
-    .is-navInView & {
-        @include media('<=mid') {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: zIndex(high);
-        }
-    }
 
     // Styles for a sticky header on mobile
     @include media('<=mid') {
@@ -194,6 +190,18 @@ export default {
 
     @include media('>mid') {
         border-bottom: $header-separator solid $header-border-color;
+    }
+}
+
+// when the off-screen navigation is active (on mobile), it fixes to the top of the screen.
+// this stops the content being forced upwards when this happens (preventing slight visual glitch)
+.c-header--navInView {
+    @include media('<=mid') {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: zIndex(high);
     }
 }
 
