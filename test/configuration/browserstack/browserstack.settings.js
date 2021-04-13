@@ -6,8 +6,7 @@ let browserstackName = `Local - ${process.env.BROWSERSTACK_USERNAME} ${new Date(
 const settings = () => ({
     baseUrl: 'http://bs-local.com:8080',
     capabilities: [
-        {
-            deviceType: 'mobile' 
+        ...(isMobile || isShared ? [{
             os: 'android',
             osVersion: '11.0',
             browserName: 'chrome',
@@ -16,13 +15,12 @@ const settings = () => ({
             project: 'Fozzie-Components',
             build: browserstackName,
             'browserstack.networkLogs': true,
-            specs: !VS_DEBUGGER ? [
+            specs: VS_DEBUGGER ? [SPEC_FILE] : [
                 'test/specs/component/*.component.mobile.spec.js',
-                'test/specs/component/*.component.shared.spec.js',
-            ] : [SPEC_FILE]
-        },
-        {
-            deviceType: 'mobile',
+                'test/specs/component/*.component.shared.spec.js'
+            ]
+        }] : []),
+        ...(isMobile || isShared ? [{
             os: 'ios',
             osVersion: '14.0',
             browserName: 'safari',
@@ -31,13 +29,12 @@ const settings = () => ({
             project: 'Fozzie-Components',
             build: browserstackName,
             'browserstack.networkLogs': true,
-            specs: [
+            specs: VS_DEBUGGER ? [SPEC_FILE] : [
                 'test/specs/component/*.component.mobile.spec.js',
-                'test/specs/component/*.component.shared.spec.js',
+                'test/specs/component/*.component.shared.spec.js'
             ]
-        },
-        {
-            deviceType: 'desktop',
+        }] : []),
+        ...(isDesktop || isShared ? [{
             os: 'OS X',
             osVersion: 'Big sur',
             browserName: 'safari',
@@ -45,15 +42,21 @@ const settings = () => ({
             project: 'Fozzie-Components',
             build: browserstackName,
             'browserstack.networkLogs': true,
-            specs: [
+            specs: VS_DEBUGGER ? [SPEC_FILE] : [
                 'test/specs/component/*.component.desktop.spec.js',
-                'test/specs/component/*.component.shared.spec.js',
+                'test/specs/component/*.component.shared.spec.js'
             ]
-        }
+        }] : [])
     ],
     services: [['browserstack', {
         browserstackLocal: true
     }]]
 });
+
+
+const isMobile = () => SPEC_FILE.endsWith('mobile.spec.js');
+const isDesktop = () => SPEC_FILE.endsWith('desktop.spec.js');
+const isShared = () => SPEC_FILE.endsWith('shared.spec.js');
+
 
 exports.default = settings;

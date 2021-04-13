@@ -5,26 +5,31 @@ const { VS_DEBUGGER, SPEC_FILE } = process.env;
 const settings = () => ({
     baseUrl: 'http://localhost:8080',
     capabilities: [
-    {
-        browserName: 'chrome',
-        acceptInsecureCerts: true,
-        specs: !VS_DEBUGGER ? [
-            'test/specs/component/*.component.desktop.spec.js',
-            'test/specs/component/*.component.shared.spec.js'
-        ] : [SPEC_FILE]
-    },
-    {
-        browserName: 'chrome',
-        acceptInsecureCerts: true,
-        "goog:chromeOptions": {
-            mobileEmulation: {'deviceName': 'iPhone X'}
-        },
-        specs: !VS_DEBUGGER ? [
-            'test/specs/component/*.component.mobile.spec.js',
-            'test/specs/cmponent/*.component.shared.spec.js'
-        ] : [SPEC_FILE]
-    }],
+        ...(isDesktop || isShared ? [{
+            browserName: 'chrome',
+            acceptInsecureCerts: true,
+            specs: VS_DEBUGGER ? [SPEC_FILE] : [
+                'test/specs/component/*.component.desktop.spec.js',
+                'test/specs/component/*.component.shared.spec.js'
+            ]
+        }] : []),
+        ...(isMobile || isShared ? [{
+            browserName: 'chrome',
+            acceptInsecureCerts: true,
+            "goog:chromeOptions": {
+                mobileEmulation: {'deviceName': 'iPhone X'}
+            },
+            specs: VS_DEBUGGER ? [SPEC_FILE] : [
+                'test/specs/component/*.component.mobile.spec.js',
+                'test/specs/component/*.component.shared.spec.js'
+            ]
+        }] : [])
+    ],
     services: ['chromedriver'],
 });
+
+const isMobile = () => SPEC_FILE.endsWith('mobile.spec.js');
+const isDesktop = () => SPEC_FILE.endsWith('desktop.spec.js');
+const isShared = () => SPEC_FILE.endsWith('shared.spec.js');
 
 exports.default = settings;

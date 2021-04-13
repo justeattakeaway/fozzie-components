@@ -265,9 +265,9 @@ exports.config = {
      * @param {<Object>} results object containing test results
      */
     onComplete: function () {
-        if (process.env.COMPONENT_TYPE === 'organism') {
+        if (process.env.ALLURE_REPORTER === 'true') {
             const reportError = new Error('Could not generate Allure report');
-            const generation = allure(['generate', '../../../../test/results/allure', ' --clean']);
+            const generation = allure(['generate', `${global.baseDir}/test/results/allure`, ' --clean']);
 
             for (let i = 0; i < testSettings.reporters.length; i++) {
                 for (let j = 0; j < testSettings.reporters[i].length; j++) {

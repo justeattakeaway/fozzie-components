@@ -1,4 +1,4 @@
-const { CIRCLECI, TEST_TYPE } = process.env;
+const { CIRCLECI } = process.env;
 
 exports.setTestSettings = () => {
 
@@ -6,4 +6,4 @@ exports.setTestSettings = () => {
                                     : require('../configuration/local.test-settings').default()
 
     return testSettings;
-}
+};

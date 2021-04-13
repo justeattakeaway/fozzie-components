@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.26.0
+------------------------------
+*April 13, 2021*
+
+## Added
+- Test tagging mechanism for chrome / browserstack
+
+## Removed
+- jest-allure2 package
+
 v3.25.0
 ------------------------------
 *March 24, 2021*

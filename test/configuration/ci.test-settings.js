@@ -5,7 +5,7 @@ const settings = () => ({
     loglevel: process.env.WDIO_LOG_LEVEL || 'info',
     maxinstances: parseInt(process.env.WDIO_MAX_INSTANCES) || 2,
     reporters: [
-        // Ignore for now
+        // Ignore for now. - Not sure why this causes failures
         // [video, {
         //     saveAllVideos: false, // If true, also saves videos for successful test cases
         //     videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
