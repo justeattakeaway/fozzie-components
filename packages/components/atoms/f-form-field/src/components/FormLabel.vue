@@ -1,6 +1,8 @@
 <template>
     <label
         v-if="hasLabelText"
+        :id="`label-${labelFor}`"
+        :for="labelFor"
         :class="[
             $style['o-form-label'],
             $style['c-formField-label'],
@@ -25,6 +27,10 @@ export default {
         isInline: {
             type: Boolean,
             default: false
+        },
+        labelFor: {
+            type: String,
+            required: true
         }
     },
     computed: {

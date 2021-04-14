@@ -28,6 +28,7 @@ Object {
   "hasAsapSelected": false,
   "id": "12345",
   "isFulfillable": true,
+  "isGuestCreated": false,
   "isLoggedIn": false,
   "messages": Array [
     Object {

@@ -64,6 +64,7 @@ export default {
         },
         authToken: '',
         isLoggedIn: false,
+        isGuestCreated: false,
         geolocation: null,
         hasAsapSelected: false
     }),
@@ -399,6 +400,7 @@ export default {
         [UPDATE_AUTH_GUEST]: (state, authToken) => {
             state.authToken = authToken;
             state.isLoggedIn = false;
+            state.isGuestCreated = true;
         },
 
         [UPDATE_AVAILABLE_FULFILMENT_TIMES]: (state, {

@@ -977,42 +977,100 @@ describe('Checkout', () => {
 
             describe('when invoked', () => {
                 describe('AND `isLoggedIn` is falsey', () => {
-                    it('should call `setupGuestUser`', async () => {
-                        // Arrange
-                        const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
+                    describe('AND `isGuestCreated` is falsey', () => {
+                        it('should call `setupGuestUser`', async () => {
+                            // Arrange
+                            const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
 
-                        // Act
-                        await wrapper.vm.submitCheckout();
+                            // Act
+                            await wrapper.vm.submitCheckout();
 
-                        // Assert
-                        expect(setupGuestUserSpy).toHaveBeenCalled();
+                            // Assert
+                            expect(setupGuestUserSpy).toHaveBeenCalled();
+                        });
+                    });
+
+                    describe('AND `isGuestCreated` is truthy', () => {
+                        it('should not call `setupGuestUser`', async () => {
+                            // Arrange
+                            wrapper = mount(VueCheckout, {
+                                store: createStore({
+                                    ...defaultCheckoutState,
+                                    isGuestCreated: true
+                                }),
+                                i18n,
+                                localVue,
+                                propsData,
+                                mocks: {
+                                    $logger
+                                }
+                            });
+                            const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
+
+                            // Act
+                            await wrapper.vm.submitCheckout();
+
+                            // Assert
+                            expect(setupGuestUserSpy).not.toHaveBeenCalled();
+                        });
                     });
                 });
 
                 describe('AND `isLoggedIn` is truthy', () => {
-                    it('should not call `setupGuestUser`', async () => {
-                        // Arrange
-                        wrapper = mount(VueCheckout, {
-                            store: createStore({
-                                ...defaultCheckoutState,
-                                serviceType: CHECKOUT_METHOD_COLLECTION,
-                                isLoggedIn: true
-                            }),
-                            i18n,
-                            localVue,
-                            propsData,
-                            mocks: {
-                                $logger
-                            }
+                    describe('AND `isGuestCreated` is falsey', () => {
+                        it('should not call `setupGuestUser`', async () => {
+                            // Arrange
+                            wrapper = mount(VueCheckout, {
+                                store: createStore({
+                                    ...defaultCheckoutState,
+                                    serviceType: CHECKOUT_METHOD_COLLECTION,
+                                    isLoggedIn: true,
+                                    isGuestCreated: false
+                                }),
+                                i18n,
+                                localVue,
+                                propsData,
+                                mocks: {
+                                    $logger
+                                }
+                            });
+
+                            const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
+
+                            // Act
+                            await wrapper.vm.submitCheckout();
+
+                            // Assert
+                            expect(setupGuestUserSpy).not.toHaveBeenCalled();
                         });
+                    });
 
-                        const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
+                    describe('AND `isGuestCreated` is truthy', () => {
+                        it('should not call `setupGuestUser`', async () => {
+                            // Arrange
+                            wrapper = mount(VueCheckout, {
+                                store: createStore({
+                                    ...defaultCheckoutState,
+                                    serviceType: CHECKOUT_METHOD_COLLECTION,
+                                    isLoggedIn: true,
+                                    isGuestCreated: true
+                                }),
+                                i18n,
+                                localVue,
+                                propsData,
+                                mocks: {
+                                    $logger
+                                }
+                            });
 
-                        // Act
-                        await wrapper.vm.submitCheckout();
+                            const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
 
-                        // Assert
-                        expect(setupGuestUserSpy).not.toHaveBeenCalled();
+                            // Act
+                            await wrapper.vm.submitCheckout();
+
+                            // Assert
+                            expect(setupGuestUserSpy).not.toHaveBeenCalled();
+                        });
                     });
                 });
 
@@ -1392,7 +1450,7 @@ describe('Checkout', () => {
                         registrationSource: 'Guest'
                     },
                     otacToAuthExchanger,
-                    timeout: 1000
+                    timeout: 10000
                 };
                 const createGuestUserSpy = jest.spyOn(VueCheckout.methods, 'createGuestUser');
                 const wrapper = shallowMount(VueCheckout, {
@@ -1628,7 +1686,7 @@ describe('Checkout', () => {
                             'BS1 1AA'
                         ]
                     },
-                    timeout: 1000
+                    timeout: 10000
                 };
 
                 beforeEach(async () => {
@@ -1952,14 +2010,14 @@ describe('Checkout', () => {
                 expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${payload.error.message}` });
             });
 
-            it('should call `scrollToElement` with "errorAlert"', async () => {
+            it('should call `scrollToElement` with the `errorAlert` element', async () => {
                 // Act
                 wrapper.vm.handleErrorState(payload);
 
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(scrollToElementSpy).toHaveBeenCalledWith('errorAlert');
+                expect(scrollToElementSpy).toHaveBeenCalledWith(wrapper.vm.$refs.errorAlert.$el);
             });
         });
 
@@ -1968,7 +2026,7 @@ describe('Checkout', () => {
                 jest.clearAllMocks();
             });
 
-            it('should call `scrollTo` with the element when it exists', () => {
+            it('should call `scrollTo` with the default `options` when the element exists', () => {
                 // Arrange
                 const ref = 'errorAlert';
                 const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
@@ -1991,15 +2049,14 @@ describe('Checkout', () => {
                 const alertElement = wrapper.findComponent({ ref }).vm.$el;
 
                 // Act
-                wrapper.vm.scrollToElement(ref);
+                wrapper.vm.scrollToElement(alertElement);
 
                 // Assert
                 expect(scrollToSpy).toHaveBeenCalledWith(alertElement, 650, { duration: 650, offset: -20 });
             });
 
-            it('should call `scrollTo` with the element when it does not exists', () => {
+            it('should not call `scrollTo` with the element when it does not exists', () => {
                 // Arrange
-                const ref = 'errorAlert';
                 const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
 
                 const wrapper = mount(VueCheckout, {
@@ -2013,10 +2070,70 @@ describe('Checkout', () => {
                 });
 
                 // Act
-                wrapper.vm.scrollToElement(ref);
+                wrapper.vm.scrollToElement(null);
 
                 // Assert
                 expect(scrollToSpy).not.toHaveBeenCalled();
+            });
+
+            it('should accept `options` as a parameter', () => {
+                // Arrange
+                const ref = 'errorAlert';
+                const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    },
+                    data () {
+                        return {
+                            genericErrorMessage: 'Some error'
+                        };
+                    }
+                });
+
+                const alertElement = wrapper.findComponent({ ref }).vm.$el;
+
+                // Act
+                wrapper.vm.scrollToElement(alertElement, { offset: -100 });
+
+                // Assert
+                expect(scrollToSpy).toHaveBeenCalledWith(alertElement, 650, { duration: 650, offset: -100 });
+            });
+        });
+
+        describe('scrollToFirstInlineError ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should call `scrollToElement` with the first inline error and -100 offset', async () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
+                });
+
+                const scrollToElementSpy = jest.spyOn(wrapper.vm, 'scrollToElement');
+
+                const firstErrorElement = document.querySelector('[data-js-error-message]');
+
+                // Act
+                wrapper.vm.scrollToFirstInlineError(firstErrorElement);
+
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(scrollToElementSpy).toHaveBeenCalledWith(firstErrorElement, { offset: -100 });
             });
         });
 
@@ -2590,7 +2707,7 @@ describe('Checkout', () => {
                         },
                         referralState: 'ReferredByWeb'
                     },
-                    timeout: 1000
+                    timeout: 10000
                 };
 
                 // Act
