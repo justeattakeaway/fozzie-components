@@ -54,6 +54,7 @@
                         <template #error>
                             <error-message
                                 v-if="!isMobileNumberValid"
+                                data-js-error-message
                                 data-test-id="error-mobile-number"
                             >
                                 {{ $t('validationMessages.mobileNumber.requiredError') }}
@@ -720,22 +721,18 @@ export default {
             this.genericErrorMessage = message;
 
             this.$nextTick(() => {
-                this.scrollToElement('errorAlert');
+                this.scrollToElement(this.$refs.errorAlert.$el);
             });
         },
 
         /**
          * Scroll to a ref element in the screen.
         */
-        scrollToElement (refElement) {
+        scrollToElement (element, options = { offset: -20 }) {
             const scrollingDurationInMilliseconds = 650;
 
-            const element = this.$refs[refElement]
-                ? this.$refs[refElement].$el
-                : null;
-
             if (element) {
-                VueScrollTo.scrollTo(element, scrollingDurationInMilliseconds, { offset: -20 });
+                VueScrollTo.scrollTo(element, scrollingDurationInMilliseconds, options);
             }
         },
 
@@ -765,6 +762,8 @@ export default {
             const validationState = validations.getFormValidationState(this.$v);
             const invalidFields = mapAnalyticsNames(validationState.invalidFields);
 
+            this.scrollToFirstInlineError();
+
             this.$emit(EventNames.CheckoutValidationError, validationState);
             this.trackFormInteraction({
                 action: 'inline_error',
@@ -780,6 +779,17 @@ export default {
                 message: 'Checkout Validation Error',
                 data: { ...this.eventData, validationState },
                 logMethod: this.$logger.logWarn
+            });
+        },
+
+        /**
+         * Scroll to the first inline error, no matter which one it is.
+         */
+        scrollToFirstInlineError () {
+            this.$nextTick(() => {
+                const firstInlineError = document.querySelector('[data-js-error-message]');
+
+                this.scrollToElement(firstInlineError, { offset: -100 });
             });
         },
 

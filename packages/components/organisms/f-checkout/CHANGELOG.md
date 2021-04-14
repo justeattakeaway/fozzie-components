@@ -12,10 +12,25 @@ v0.90.0
 - Refactored error handling
 
 
+v0.90.0
+------------------------------
+*April 13, 2021*
+
+### Changed
+- Allowed address line 2 to not exist in PATCH request
+
+
+v0.89.0
+------------------------------
+*April 13, 2021*
+
+### Added
+- Automatic scrolling to the first inline error when trying to proceed to the payment page.
+
+
 v0.88.0
 ------------------------------
 *April 12, 2021*
-
 
 ### Changed
 - PATCH Checkout now sends null for lines 3 and 4 of address instead of empty string

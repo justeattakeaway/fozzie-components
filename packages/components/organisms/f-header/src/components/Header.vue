@@ -15,7 +15,8 @@
                 :theme="theme"
                 :company-name="copy.companyName"
                 :logo-gtm-label="copy.logo.gtm"
-                :header-background-theme="headerBackgroundTheme" />
+                :header-background-theme="headerBackgroundTheme"
+                :is-open="mobileNavIsOpen" />
 
             <navigation
                 :copy="copy"

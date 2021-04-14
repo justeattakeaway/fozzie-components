@@ -2017,14 +2017,14 @@ describe('Checkout', () => {
                 expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${error.message}` });
             });
 
-            it('should call `scrollToElement` with "errorAlert"', async () => {
+            it('should call `scrollToElement` with the `errorAlert` element', async () => {
                 // Act
                 wrapper.vm.handleErrorState(error);
 
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(scrollToElementSpy).toHaveBeenCalledWith('errorAlert');
+                expect(scrollToElementSpy).toHaveBeenCalledWith(wrapper.vm.$refs.errorAlert.$el);
             });
         });
 
@@ -2033,7 +2033,7 @@ describe('Checkout', () => {
                 jest.clearAllMocks();
             });
 
-            it('should call `scrollTo` with the element when it exists', () => {
+            it('should call `scrollTo` with the default `options` when the element exists', () => {
                 // Arrange
                 const ref = 'errorAlert';
                 const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
@@ -2056,15 +2056,14 @@ describe('Checkout', () => {
                 const alertElement = wrapper.findComponent({ ref }).vm.$el;
 
                 // Act
-                wrapper.vm.scrollToElement(ref);
+                wrapper.vm.scrollToElement(alertElement);
 
                 // Assert
                 expect(scrollToSpy).toHaveBeenCalledWith(alertElement, 650, { duration: 650, offset: -20 });
             });
 
-            it('should call `scrollTo` with the element when it does not exists', () => {
+            it('should not call `scrollTo` with the element when it does not exists', () => {
                 // Arrange
-                const ref = 'errorAlert';
                 const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
 
                 const wrapper = mount(VueCheckout, {
@@ -2078,10 +2077,70 @@ describe('Checkout', () => {
                 });
 
                 // Act
-                wrapper.vm.scrollToElement(ref);
+                wrapper.vm.scrollToElement(null);
 
                 // Assert
                 expect(scrollToSpy).not.toHaveBeenCalled();
+            });
+
+            it('should accept `options` as a parameter', () => {
+                // Arrange
+                const ref = 'errorAlert';
+                const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    },
+                    data () {
+                        return {
+                            genericErrorMessage: 'Some error'
+                        };
+                    }
+                });
+
+                const alertElement = wrapper.findComponent({ ref }).vm.$el;
+
+                // Act
+                wrapper.vm.scrollToElement(alertElement, { offset: -100 });
+
+                // Assert
+                expect(scrollToSpy).toHaveBeenCalledWith(alertElement, 650, { duration: 650, offset: -100 });
+            });
+        });
+
+        describe('scrollToFirstInlineError ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should call `scrollToElement` with the first inline error and -100 offset', async () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
+                });
+
+                const scrollToElementSpy = jest.spyOn(wrapper.vm, 'scrollToElement');
+
+                const firstErrorElement = document.querySelector('[data-js-error-message]');
+
+                // Act
+                wrapper.vm.scrollToFirstInlineError(firstErrorElement);
+
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(scrollToElementSpy).toHaveBeenCalledWith(firstErrorElement, { offset: -100 });
             });
         });
 
