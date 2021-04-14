@@ -259,7 +259,7 @@ describe('FormField', () => {
             });
         });
 
-        describe('@change', () => {
+        describe('@change ::', () => {
             it('should only trigger one event emission', () => {
                 // Arrange
                 const propsData = {
