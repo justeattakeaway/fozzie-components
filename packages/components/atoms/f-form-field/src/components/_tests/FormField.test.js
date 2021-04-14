@@ -70,6 +70,31 @@ describe('FormField', () => {
                 expect(formInput.attributes('type')).toBe(definedType);
             });
 
+            it('should include the `min` and `max` attributes if inputType=`number`', () => {
+                // Arrange
+                const propsData = {
+                    inputType: 'number'
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+                const formInput = wrapper.find('input');
+
+                // Assert
+                expect(formInput.attributes('min')).toBeDefined();
+                expect(formInput.attributes('max')).toBeDefined();
+            });
+
+            it('should not include the `min` and `max` attributes for default inputType', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(FormField);
+                const formInput = wrapper.find('input');
+
+                // Assert
+                expect(formInput.attributes('min')).toBeUndefined();
+                expect(formInput.attributes('max')).toBeUndefined();
+            });
+
             it('should display the dropdown component if inputType=`dropdown`', () => {
                 // Arrange
                 const propsData = {
