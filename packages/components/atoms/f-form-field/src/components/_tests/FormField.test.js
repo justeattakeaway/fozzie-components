@@ -242,7 +242,7 @@ describe('FormField', () => {
         });
     });
 
-    describe.only('events ::', () => {
+    describe('events ::', () => {
         describe('@input ::', () => {
             it.each(VALID_INPUT_TYPES)('should only trigger one event emission for inputType `%s`', inputType => {
                 // Arrange
