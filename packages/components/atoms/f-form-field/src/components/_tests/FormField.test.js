@@ -241,4 +241,41 @@ describe('FormField', () => {
             });
         });
     });
+
+    describe('events ::', () => {
+        describe('@input ::', () => {
+            it.each(VALID_INPUT_TYPES)('should only trigger one event emission for inputType `%s`', inputType => {
+                // Arrange
+                const propsData = { inputType };
+                const wrapper = shallowMount(FormField, { propsData });
+
+                const formInput = wrapper.find('input');
+
+                // Act
+                formInput.trigger('input');
+
+                // Assert
+                expect(wrapper.emitted().input).toHaveLength(1);
+            });
+        });
+
+        describe('@change ::', () => {
+            it('should only trigger one event emission', () => {
+                // Arrange
+                const propsData = {
+                    inputType: 'dropdown',
+                    dropdownOptions: []
+                };
+                const wrapper = mount(FormField, { propsData });
+
+                const formDropdown = wrapper.find('select');
+
+                // Act
+                formDropdown.trigger('change');
+
+                // Assert
+                expect(wrapper.emitted().input).toHaveLength(1);
+            });
+        });
+    });
 });
