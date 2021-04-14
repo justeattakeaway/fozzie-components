@@ -1,9 +1,9 @@
 const forEach = require('mocha-each');
-const Footer = require('../../../../test-utils/component-objects/f-footer.component');
+const Footer = require('../../../test-utils/component-objects/f-footer.component');
 
 const footer = new Footer();
 
-describe('Shared - f-footer component tests', () => {
+describe('Desktop - f-footer component tests - @browserstack', () => {
     beforeEach(() => {
         const footerData = {
             locale: 'gb',
@@ -13,6 +13,36 @@ describe('Shared - f-footer component tests', () => {
 
         footer.open(footerData);
         footer.waitForComponent();
+    });
+
+    forEach([['ios', 'apple'], ['android', 'google'], ['huawei', 'appgallery']])
+    .it('should display download icons and link to correct URL', (icon, expectedUrl) => {
+        // Act
+        footer.expectedDownloadIcon = icon;
+
+        // Assert
+        expect(footer.isDownloadIconDisplayed()).toBe(true);
+
+        // Act
+        footer.clickDownloadIcon();
+
+        // Assert
+        expect(browser.getUrl()).toContain(expectedUrl);
+    });
+
+    forEach([['twitter', 'twitter.com'], ['facebook', 'facebook.com'], ['youtube', 'youtube.com']])
+    .it('should display social media icons', (icon, expectedUrl) => {
+        // Act
+        footer.expectedSocialIcon = icon;
+
+        // Assert
+        expect(footer.isSocialIconDisplayed()).toBe(true);
+
+        // Act
+        footer.clickSocialIcon();
+
+        // Assert
+        expect(browser.getUrl()).toContain(expectedUrl);
     });
 
     it('should display the footer', () => {
@@ -227,5 +257,11 @@ describe('Shared - f-footer component tests', () => {
 
         // Assert
         expect(footer.isFeedbackBlockDisplayed()).toBe(true);
+    });
+
+    it('should check to see if the feedback button is clickable', () => {
+
+        // Assert
+        expect(footer.isFeedbackButtonClickable()).toBe(true);
     });
 });

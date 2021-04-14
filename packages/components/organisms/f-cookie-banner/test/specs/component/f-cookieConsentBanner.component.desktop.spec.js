@@ -1,8 +1,8 @@
-const CookieBanner = require('../../../../test-utils/component-objects/f-cookieConsentBanner.component');
+const CookieBanner = require('../../../test-utils/component-objects/f-cookieConsentBanner.component');
 const cookieBanner = new CookieBanner();
 import forEach from 'mocha-each';
 
-describe('New - f-cookieBanner component tests', () => {
+describe('New - f-cookieBanner component tests - @browserstack', () => {
     beforeEach(() => {
         cookieBanner.open();
         cookieBanner.waitForComponent();

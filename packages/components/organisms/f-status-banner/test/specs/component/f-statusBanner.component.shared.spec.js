@@ -1,7 +1,7 @@
 const StatusBanner = require('../../../test-utils/component-objects/f-statusBanner.component');
 const statusBanner = new StatusBanner();
 
-describe('f-statusBanner component tests', () => {
+describe('f-statusBanner component tests - @browserstack', () => {
     beforeEach(() => {
         statusBanner.open();
         statusBanner.waitForComponent();
