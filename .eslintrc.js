@@ -85,6 +85,7 @@ module.exports = {
         }
     },
     globals: {
+        browser: 'readonly',
         allure: 'readonly'
     }
 };
