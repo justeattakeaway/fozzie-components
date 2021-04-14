@@ -1,5 +1,6 @@
 const forEach = require('mocha-each');
-const Registration = require ('../../../../test-utils/component-objects/f-registration.component');
+const Registration = require('../../../../test-utils/component-objects/f-registration.component');
+
 const registration = new Registration();
 
 describe('Shared - f-registration component tests', () => {
@@ -14,7 +15,6 @@ describe('Shared - f-registration component tests', () => {
     });
 
     it('should display the "Email address is already registered" error', () => {
-
         // Arrange
         const userInfo = {
             firstName: 'Test',
@@ -48,7 +48,7 @@ describe('Shared - f-registration component tests', () => {
 
         // Act
         registration.submitForm(userInfo);
-        
+
         // Assert
         expect(registration.isEmptyErrorDisplayed(field)).toBe(true);
     });
@@ -65,7 +65,7 @@ describe('Shared - f-registration component tests', () => {
 
         // Act
         registration.submitForm(userInfo);
-        
+
         // Assert
         expect(registration.isInvalidErrorDisplayed(field)).toBe(true);
     });
@@ -82,7 +82,7 @@ describe('Shared - f-registration component tests', () => {
 
         // Act
         registration.submitForm(userInfo);
-        
+
         // Assert
         expect(registration.isMaxLengthErrorDisplayed(field)).toBe(true);
     });
