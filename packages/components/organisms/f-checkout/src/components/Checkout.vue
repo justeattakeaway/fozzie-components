@@ -159,7 +159,12 @@ export default {
         ErrorDialog
     },
 
-    mixins: [validationMixin, VueGlobalisationMixin, checkoutValidationsMixin, loggerMixin],
+    mixins: [
+        validationMixin,
+        VueGlobalisationMixin,
+        checkoutValidationsMixin,
+        loggerMixin
+    ],
 
     props: {
         getCheckoutUrl: {
