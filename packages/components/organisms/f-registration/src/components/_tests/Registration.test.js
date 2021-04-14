@@ -237,7 +237,7 @@ describe('Registration', () => {
 
                 // Assert
                 expect(RegistrationServiceApi.createAccount).toHaveBeenCalledTimes(1);
-                expect(wrapper.vm.genericErrorMessage).toBeNull();
+                expect(wrapper.vm.genericErrorMessage).toBe('');
                 expect(wrapper.emitted(EventNames.CreateAccountSuccess).length).toBe(1);
             });
 

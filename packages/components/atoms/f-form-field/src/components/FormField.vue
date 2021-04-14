@@ -31,7 +31,6 @@
                     $style['c-formField-input--focus']
                 ]"
                 :dropdown-options="dropdownOptions"
-                @update="updateOption"
                 v-on="listeners" />
 
             <input
@@ -49,7 +48,6 @@
                     $style['c-formField-input'],
                     (isSelectionControl ? $style['c-formField-input--focus'] : '')
                 ]"
-                @input="updateValue"
                 v-on="listeners"
             >
             <form-label

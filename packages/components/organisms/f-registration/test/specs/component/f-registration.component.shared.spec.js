@@ -14,7 +14,6 @@ describe('Shared - f-registration component tests - @browserstack', () => {
     });
 
     it('should display the "Email address is already registered" error', () => {
-
         // Arrange
         const userInfo = {
             firstName: 'Test',
@@ -48,7 +47,7 @@ describe('Shared - f-registration component tests - @browserstack', () => {
 
         // Act
         registration.submitForm(userInfo);
-        
+
         // Assert
         expect(registration.isEmptyErrorDisplayed(field)).toBe(true);
     });
@@ -65,7 +64,7 @@ describe('Shared - f-registration component tests - @browserstack', () => {
 
         // Act
         registration.submitForm(userInfo);
-        
+
         // Assert
         expect(registration.isInvalidErrorDisplayed(field)).toBe(true);
     });
@@ -82,7 +81,7 @@ describe('Shared - f-registration component tests - @browserstack', () => {
 
         // Act
         registration.submitForm(userInfo);
-        
+
         // Assert
         expect(registration.isMaxLengthErrorDisplayed(field)).toBe(true);
     });

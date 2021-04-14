@@ -3,15 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v3.26.0
+v3.27.0
 ------------------------------
 *April 13, 2021*
 
 ## Added
 - Test tagging mechanism for chrome / browserstack
 
-## Removed
-- jest-allure2 package
+
+v3.26.0
+------------------------------
+*March 29, 2021*
+
+## Added
+- A11y markup added for screen-reader support to f-registration.
 
 v3.25.0
 ------------------------------
@@ -28,7 +33,7 @@ v3.24.1
 *March 23, 2021*
 
 ## Added
-- `f-wdio-utils` package to all component folders 
+- `f-wdio-utils` package to all component folders
 - `f-wdio-utils` package to generator
 
 ### Removed
