@@ -1,10 +1,10 @@
 import forEach from 'mocha-each';
 
-const Checkout = require('../../../../test-utils/component-objects/f-checkout.component');
+const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
 
 const checkout = new Checkout();
 
-describe('f-checkout component tests', () => {
+describe('f-checkout component tests - @browserstack', () => {
     beforeEach(() => {
         const checkoutData = {
             type: 'delivery',

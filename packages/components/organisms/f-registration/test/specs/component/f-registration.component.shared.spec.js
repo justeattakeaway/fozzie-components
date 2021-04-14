@@ -1,9 +1,8 @@
 const forEach = require('mocha-each');
-const Registration = require('../../../../test-utils/component-objects/f-registration.component');
-
+const Registration = require ('../../../test-utils/component-objects/f-registration.component');
 const registration = new Registration();
 
-describe('Shared - f-registration component tests', () => {
+describe('Shared - f-registration component tests - @browserstack', () => {
     beforeEach(() => {
         registration.open();
         registration.waitForComponent();

@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "3.26.0",
+  "version": "3.27.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -20,7 +20,6 @@
     "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y lerna run test-a11y:chrome --concurrency 1 --stream",
     "test:consumer": "lerna run test:consumer",
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
-    "local:tests": "cross-env yarn test && yarn test-component:chrome && yarn test-a11y:chrome",
     "allure:clean": "rimraf test/results/allure"
   },
   "resolutions": {

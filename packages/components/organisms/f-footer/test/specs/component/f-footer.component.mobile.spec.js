@@ -1,8 +1,8 @@
-const Footer = require('../../../../test-utils/component-objects/f-footer.component');
+const Footer = require('../../../test-utils/component-objects/f-footer.component');
 
 const footer = new Footer();
 
-describe('Mobile - f-footer component tests', () => {
+describe('Mobile - f-footer component tests - @browserstack', () => {
     beforeEach(() => {
         const footerData = {
             locale: 'gb',
@@ -12,10 +12,6 @@ describe('Mobile - f-footer component tests', () => {
 
         footer.open(footerData);
         footer.waitForComponent();
-
-        if (process.env.JE_ENV !== 'browserstack') {
-            browser.setWindowSize(500, 1000);
-        }
     });
 
     it('should not show the items with the drop down boxes when in mobile view', () => {

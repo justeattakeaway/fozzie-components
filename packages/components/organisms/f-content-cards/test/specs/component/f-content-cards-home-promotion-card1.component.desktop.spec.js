@@ -4,7 +4,7 @@ const HomePromotionCard2 = require('../../../test-utils/component-objects/f-cont
 const card = new HomePromotionCard1();
 const card2 = new HomePromotionCard2();
 
-describe('home promotion card 1 component tests', () => {
+describe('home promotion card 1 component tests - @browserstack', () => {
     beforeEach(() => {
         card.open();
         card.waitForComponent();

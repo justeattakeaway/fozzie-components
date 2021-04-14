@@ -136,6 +136,8 @@ module.exports = class Header extends Page {
     }
 
     openMobileNavigation () {
-        return this.mobileNavigationBar.click();
+        this.mobileNavigationBar.click();
+
+        $('.is-navInView').waitForExist();
     }
 };
