@@ -4,6 +4,38 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.90.0
+------------------------------
+*April 13, 2021*
+
+### Changed
+- Allowed address line 2 to not exist in PATCH request
+
+
+v0.89.0
+------------------------------
+*April 13, 2021*
+
+### Added
+- Automatic scrolling to the first inline error when trying to proceed to the payment page.
+
+
+v0.88.0
+------------------------------
+*April 12, 2021*
+
+### Changed
+- PATCH Checkout now sends null for lines 3 and 4 of address instead of empty string
+
+
+v0.87.1
+------------------------------
+*April 12, 2021*
+
+### Changed
+- `checkoutTimeout` prop now defaults to ten seconds
+
+
 v0.87.0
 ------------------------------
 *April 12, 2021*

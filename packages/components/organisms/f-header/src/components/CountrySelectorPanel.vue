@@ -1,5 +1,9 @@
 <template>
-    <div :class="['c-nav-container', { 'is-visible': isOpen }]">
+    <div
+        :class="[
+            $style['c-nav-container'],
+            { [$style['is-visible']]: isOpen }
+        ]">
         <div :class="$style['c-countrySelector']">
             <header :class="$style['c-countrySelector-header']">
                 <f-button
@@ -15,7 +19,10 @@
             </header>
 
             <ul
-                class="c-nav-popoverList c-nav-popoverList--twoColumns"
+                :class="[
+                    $style['c-nav-popoverList'],
+                    $style['c-nav-popoverList--twoColumns']
+                ]"
                 data-test-id="countrySelector-list">
                 <li
                     v-for="(country) in countries"
@@ -36,7 +43,7 @@
                         @focus="$emit('focusOnLink')">
                         <flag-icon
                             :country-code="country.flagKey"
-                            class="c-nav-list-icon--flag" />
+                            :class="$style['c-nav-list-icon--flag']" />
                         <span>
                             {{ country.localisedName }}
                         </span>
@@ -79,6 +86,7 @@ export default {
 </script>
 
 <style lang="scss" module>
+@import '../assets/scss/navigation.scss';
 
 $countrySelector-text-color : $grey--darkest;
 $countrySelector-text-hover : $color-bg--darker;
@@ -115,6 +123,7 @@ $countrySelector-text-hover : $color-bg--darker;
         @include media('>mid') {
             display: none;
         }
+
         svg.c-countrySelector-goBackIcon {
             transform: rotate(180deg);
             width: 28px;

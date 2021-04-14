@@ -44,54 +44,57 @@ describe('Logo', () => {
         expect(logo).toBeDefined();
     });
 
-    it('should have "c-icon--onTransparentBg" class if "headerBackgroundTheme" property is "transparent"', () => {
-        // Arrange
-        const propsData = {
-            theme: 'je',
-            headerBackgroundTheme: 'transparent',
-            companyName: 'Just Eat'
+    describe('header logo :: ', () => {
+        const $style = {
+            'c-logo-img--alt': 'c-logo-img--alt'
         };
 
-        // Act
-        const wrapper = mount(Logo, { propsData });
-        const logo = wrapper.find('[data-theme-logo="c-icon--je"]');
+        it.each([
+            ['transparent'],
+            ['highlight']
+        ])('should have "c-logo-img--alt" class if "headerBackgroundTheme" property is %s', theme => {
+            // Arrange
+            const propsData = {
+                theme: 'je',
+                headerBackgroundTheme: theme,
+                companyName: 'Just Eat'
+            };
 
-        // Assert
-        expect(logo.classes('c-icon--onTransparentBg')).toBe(true);
-    });
+            // Act
+            const wrapper = mount(Logo, {
+                propsData,
+                mocks: {
+                    $style
+                }
+            });
+            const logo = wrapper.find('[data-test-id="header-logo"]');
 
-    it('should have "c-icon--onHighlightBg" class if "headerBackgroundTheme" property is "highlight"', () => {
-        // Arrange
-        const propsData = {
-            theme: 'je',
-            headerBackgroundTheme: 'highlight',
-            companyName: 'Just Eat'
-        };
+            // Assert
+            expect(logo.classes()).toContain('c-logo-img--alt');
+        });
 
-        // Act
-        const wrapper = mount(Logo, { propsData });
-        const logo = wrapper.find('[data-theme-logo="c-icon--je"]');
+        it.each([
+            ['white'],
+            ['blue']
+        ])('should not have "c-logo-img--alt" class if "headerBackgroundTheme" property is %s', theme => {
+            // Arrange
+            const propsData = {
+                theme: 'je',
+                headerBackgroundTheme: theme,
+                companyName: 'Just Eat'
+            };
 
-        // Assert
-        expect(logo.classes('c-icon--onHighlightBg')).toBe(true);
-    });
+            // Act
+            const wrapper = mount(Logo, {
+                propsData,
+                mocks: {
+                    $style
+                }
+            });
+            const logo = wrapper.find('[data-test-id="header-logo"]');
 
-    it('shouldn\'t have "c-icon--onHighlightBg" class if "headerBackgroundTheme" property is not "highlight", "transparent"', () => {
-        // Arrange
-        const propsData = {
-            theme: 'je',
-            headerBackgroundTheme: 'green',
-            companyName: 'Just Eat'
-        };
-
-        // Act
-        const wrapper = shallowMount(Logo, { propsData });
-        const logo = wrapper.find('[data-theme-logo="c-icon--je"]');
-
-        // Assert
-        // with dynamically rendered components
-        // dynamic classes returned as one string in the array
-        // so have to check for 'c-logo-img,c-icon--je,c-icon--onHighlightBg' not just 'c-icon--onHighlightBg'
-        expect(logo.classes()).not.toContain('c-logo-img,c-icon--je,c-icon--onHighlightBg');
+            // Assert
+            expect(logo.classes()).not.toContain('c-logo-img--alt');
+        });
     });
 });
