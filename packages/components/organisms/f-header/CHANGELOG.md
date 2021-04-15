@@ -5,11 +5,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.13.0
 ------------------------------
-*April 15, 2021*
+*April 16, 2021*
 
 ### Changed
 - Convert `Header` component to use css modules.
-- Unit and Component tests to support changes.
 - Convert `Navigation` component to use css modules.
 - Unit and Component tests to support changes.
 
