@@ -5,7 +5,7 @@ import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
-import { mockAuthToken } from '../../components/_tests/helpers/setup';
+import { mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber } from '../../components/_tests/helpers/setup';
 import { version as applicationVerion } from '../../../package.json';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../../constants';
 
@@ -294,7 +294,6 @@ describe('CheckoutModule', () => {
     describe('actions ::', () => {
         let commit;
         let dispatch;
-
         let payload;
 
         beforeEach(() => {
@@ -340,6 +339,80 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
+            });
+
+            describe('when the customers phone number is returned from the api', () => {
+                it('should not use neither of AuthToken phone numbers', async () => {
+                    // Arrange
+                    const expectedPhoneNumber = '5678901234';
+                    checkoutDelivery.customer = {
+                        phoneNumber: expectedPhoneNumber
+                    };
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDelivery.customer.phoneNumber).toBe(expectedPhoneNumber);
+                    expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
+                });
+            });
+
+            describe('when the customers phone number is not returned from the api', () => {
+                beforeEach(() => {
+                    state.authToken = null;
+                    checkoutDelivery.customer = {
+                        phoneNumber: null
+                    };
+                });
+
+                afterEach(() => {
+                    state.authToken = authToken;
+                });
+
+                it('should use the the AuthToken mobile number', async () => {
+                    // Arrange
+                    state.authToken = mockAuthToken;
+                    const expectedPhoneNumber = '9876543210'; // AuthToken Mobile No.
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDelivery.customer.phoneNumber).toBe(expectedPhoneNumber);
+                    expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
+                });
+
+                it('should use the AuthToken phone number if the AuthToken mobile number is missing', async () => {
+                    // Arrange
+                    state.authToken = mockAuthTokenNoMobileNumber;
+                    config.headers.Authorization = `Bearer ${state.authToken}`;
+                    const expectedPhoneNumber = '0123456789'; // AuthToken Phone No.
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDelivery.customer.phoneNumber).toBe(expectedPhoneNumber);
+                    expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
+                });
+
+                it('should be empty if both the AuthToken phone numbers are missing', async () => {
+                    // Arrange
+                    state.authToken = mockAuthTokenNoNumbers;
+                    config.headers.Authorization = `Bearer ${state.authToken}`;
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDelivery.customer.phoneNumber).toBeUndefined();
+                    expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
+                });
             });
         });
 

@@ -92,6 +92,17 @@ export default {
 
             const { data } = await axios.get(url, config);
 
+            /**
+            * If no `customer.phoneNumber` from api then read from decoded
+            * AuthToken and re-assign mobile number or phone number
+            * to `data.customer.phoneNumber`
+            */
+            if (data?.customer && !data.customer.phoneNumber) {
+                const tokenData = jwtDecode(state.authToken);
+
+                data.customer.phoneNumber = tokenData?.mobile_number || tokenData?.phone_number;
+            }
+
             commit(UPDATE_STATE, data);
 
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
