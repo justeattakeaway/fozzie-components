@@ -1,8 +1,8 @@
 const forEach = require('mocha-each');
-const Header = require('../../../../test-utils/component-objects/f-header.component');
+const Header = require('../../../test-utils/component-objects/f-header.component');
 const header = new Header();
 
-describe('Desktop - f-header component tests', () => {
+describe('Desktop - f-header component tests - @browserstack', () => {
     beforeEach(() => {
         const headerData = {
             locale: 'gb',

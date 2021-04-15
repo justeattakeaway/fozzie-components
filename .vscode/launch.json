@@ -32,14 +32,16 @@
             ],
             "env": {
                 "JE_ENV": "local",
-                "TEST_TYPE": "component"
+                "TEST_TYPE": "component",
+                "VS_DEBUGGER": "true",
+                "SPEC_FILE": "${file}"
             }
         },
         {
             "name": "Run Single Spec - Component - Browserstack",
             "type": "node",
             "request": "launch",
-            "args": ["wdio-browserstack.conf.js", "--spec", "${file}"],
+            "args": ["wdio-browserstack.conf.js", "--spec", "${file}", "--mochaOpts.grep", "@browserstack"],
             "cwd": "${workspaceFolder}",
             "autoAttachChildProcesses": true,
             "program": "${workspaceRoot}/node_modules/@wdio/cli/bin/wdio.js",
@@ -51,7 +53,9 @@
             ],
             "env": {
                 "JE_ENV": "browserstack",
-                "TEST_TYPE": "component"
+                "TEST_TYPE": "component",
+                "VS_DEBUGGER": "true",
+                "SPEC_FILE": "${file}"
             }
         },
         {
@@ -70,7 +74,9 @@
             ],
             "env": {
                 "JE_ENV": "local",
-                "TEST_TYPE": "accessibility"
+                "TEST_TYPE": "accessibility",
+                "VS_DEBUGGER": "true",
+                "SPEC_FILE": "${file}"
             }
         },
     ]
