@@ -1,12 +1,24 @@
 // Used to determine if tests are being run through VS Code debugger.
 // If true, only run the file being debugged.
-const { ALLURE_REPORTER, SPEC_FILE, VS_DEBUGGER } = process.env;
+const { ALLURE_REPORTER, SPEC_FILE, TEST_TYPE, VS_DEBUGGER } = process.env;
 const video = require('wdio-video-reporter');
 
 const settings = () => ({
     baseUrl: 'http://localhost:8080',
-    capabilities: [
-        ...(isDesktop || isShared ? [{
+    a11y: {
+        capabilities: [
+            {
+                browserName: 'chrome',
+                acceptInsecureCerts: true,
+                specs: VS_DEBUGGER ? [SPEC_FILE] : [
+                    'test/specs/accessibility/axe-accessibility.spec.js',
+                ]
+            }
+        ],  
+    },
+    component: {
+        capabilities: [
+            ...(isDesktop || isShared ? [{
             browserName: 'chrome',
             acceptInsecureCerts: true,
             specs: VS_DEBUGGER ? [SPEC_FILE] : [
@@ -24,8 +36,9 @@ const settings = () => ({
                 'test/specs/component/*.component.mobile.spec.js',
                 'test/specs/component/*.component.shared.spec.js'
             ]
-        }] : [])
-    ],
+        }] : []),
+        ]  
+    },
     reporters: ALLURE_REPORTER === 'true' ? [
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases

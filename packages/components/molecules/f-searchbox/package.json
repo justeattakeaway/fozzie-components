@@ -34,9 +34,9 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "vue-cli-service lint:style",
     "test": "vue-cli-service test:unit",
-    "test-component:browserstack": "cross-env-shell JE_ENV=browserstack wdio ../../../../wdio-browserstack.conf.js --mochaOpts.grep '@browserstack'",
-    "test-component:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js", 
-    "test-a11y:chrome": "cross-env-shell JE_ENV=local wdio ../../../../wdio-chrome.conf.js --suite a11y"
+    "test-component:browserstack": "cross-env-shell JE_ENV=browserstack TEST_TYPE=component wdio ../../../../wdio-browserstack.conf.js --mochaOpts.grep '@browserstack'",
+    "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js", 
+    "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y"
   },
   "scriptsInfo": {
     "test-component:chrome": "Runs the functional test suite against Chrome.",
