@@ -7,6 +7,13 @@
       "registry": "http://localhost:4873"
     }
   },
+  "ignoreChanges": [
+    "**/CHANGELOG.md",
+    "**/node_modules/**",
+    "**/package.json",
+    "**/*.md",
+    "**/perf/**"
+  ],
   "packages": [
     "packages/*",
     "packages/components/atoms/*",
