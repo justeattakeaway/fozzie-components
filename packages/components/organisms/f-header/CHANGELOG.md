@@ -3,12 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.12.0
+------------------------------
+*April 14, 2021*
+
+### Changed
+- Add shared `nav.scss` file.
+- Convert `CountrySelectorPanel`, `Logo`, `SkipToMain` and `UserNavigationPanel` components to use css modules.
+- Unit and Component tests to support changes.
+
+
 v4.11.2
 ------------------------------
-*March 16, 2021*
+*March 13, 2021*
 
 ### Fixed
 - Fixed typo in Italian header
+
 
 *April 9, 2021*
 
@@ -21,7 +32,7 @@ v4.11.2
 ### Added
 - Component tests for locales `au, dk, ie, es, no, it, nz`
 - Component test for offers icon in mobile spec
-- Accessibility tests for the above locales 
+- Accessibility tests for the above locales
 
 ### Changed
 - Small refactor to `open` function in component-object

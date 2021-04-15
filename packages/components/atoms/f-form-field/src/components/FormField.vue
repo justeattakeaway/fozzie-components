@@ -13,7 +13,7 @@
             <form-label
                 v-if="!isInline"
                 :label-style="normalisedLabelStyle"
-                :for="uniqueId"
+                :label-for="uniqueId"
                 :is-inline="isInline"
                 :data-test-id="testId.label">
                 {{ labelText }}
@@ -21,7 +21,7 @@
 
             <form-dropdown
                 v-if="isDropdown"
-                :id="`${uniqueId}`"
+                :id="uniqueId"
                 :attributes="$attrs"
                 :type="normalisedInputType"
                 :value="value"
@@ -31,28 +31,30 @@
                     $style['c-formField-input--focus']
                 ]"
                 :dropdown-options="dropdownOptions"
-                @update="updateOption"
                 v-on="listeners" />
 
             <input
                 v-else
                 :id="`${uniqueId}`"
+                :aria-labelledby="`label-${uniqueId}`"
                 :value="value"
                 v-bind="$attrs"
                 :type="normalisedInputType"
+                :min="normalisedInputType === 'number' ? minNumber : false"
+                :max="normalisedInputType === 'number' ? maxNumber : false"
                 placeholder=" "
                 :data-test-id="testId.input"
                 :class="[
                     $style['c-formField-input'],
                     (isSelectionControl ? $style['c-formField-input--focus'] : '')
                 ]"
-                @input="updateValue"
                 v-on="listeners"
             >
             <form-label
                 v-if="isInline"
+                :id="`label-${uniqueId}`"
+                :label-for="uniqueId"
                 :label-style="normalisedLabelStyle"
-                :for="uniqueId"
                 :is-inline="isInline"
                 :data-test-id="`${testId.label}--inline`">
                 {{ labelText }}
@@ -127,6 +129,16 @@ export default {
         isGrouped: {
             type: Boolean,
             default: false
+        },
+
+        minNumber: {
+            type: Number,
+            default: 0
+        },
+
+        maxNumber: {
+            type: Number,
+            default: 100
         }
     },
 

@@ -3,6 +3,27 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v1.10.1
+------------------------------
+*April 14, 2021*
+
+### Fixed
+- Duplicate firing of `input` and `update` events.
+
+
+v1.10.0
+------------------------------
+*April 13, 2021*
+
+### Added
+- Support for `number` input type.
+  - Includes two new optional props, `minNumber` and `maxNumber`.
+
+### Fixed
+- vuejs-accessibility violation [`form-control-has-label`](https://github.com/vue-a11y/eslint-plugin-vuejs-accessibility/blob/1cb838c853af763ac4d77467cdcd790f6896a810/docs/form-control-has-label.md)
+
+
 v1.9.0
 ------------------------------
 *March 30, 2021*

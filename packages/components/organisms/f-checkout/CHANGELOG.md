@@ -3,6 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.91.0
+------------------------------
+*April 14, 2021*
+
+### Added
+- Refactored/Aligned logging calls
+- Refactored error handling
+
+
+v0.90.0
+------------------------------
+*April 13, 2021*
+
+### Changed
+- Allowed address line 2 to not exist in PATCH request
+
 
 v0.89.0
 ------------------------------
