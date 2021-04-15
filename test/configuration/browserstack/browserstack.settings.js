@@ -5,49 +5,51 @@ let browserstackName = `Local - ${process.env.BROWSERSTACK_USERNAME} ${new Date(
 
 const settings = () => ({
     baseUrl: 'http://bs-local.com:8080',
-    capabilities: [
-        ...(isMobile || isShared ? [{
-            os: 'android',
-            osVersion: '11.0',
-            browserName: 'chrome',
-            device: 'Google Pixel 4',
-            browserVersion: '',
-            project: 'Fozzie-Components',
-            build: browserstackName,
-            'browserstack.networkLogs': true,
-            specs: VS_DEBUGGER ? [SPEC_FILE] : [
-                'test/specs/component/*.component.mobile.spec.js',
-                'test/specs/component/*.component.shared.spec.js'
-            ]
-        }] : []),
-        ...(isMobile || isShared ? [{
-            os: 'ios',
-            osVersion: '14.0',
-            browserName: 'safari',
-            device: 'iPhone 12',
-            browserVersion: '',
-            project: 'Fozzie-Components',
-            build: browserstackName,
-            'browserstack.networkLogs': true,
-            specs: VS_DEBUGGER ? [SPEC_FILE] : [
-                'test/specs/component/*.component.mobile.spec.js',
-                'test/specs/component/*.component.shared.spec.js'
-            ]
-        }] : []),
-        ...(isDesktop || isShared ? [{
-            os: 'OS X',
-            osVersion: 'Big sur',
-            browserName: 'safari',
-            browserVersion: '14',
-            project: 'Fozzie-Components',
-            build: browserstackName,
-            'browserstack.networkLogs': true,
-            specs: VS_DEBUGGER ? [SPEC_FILE] : [
-                'test/specs/component/*.component.desktop.spec.js',
-                'test/specs/component/*.component.shared.spec.js'
-            ]
-        }] : [])
-    ],
+    component: {
+        capabilities: [
+            ...(isMobile || isShared ? [{
+                os: 'android',
+                osVersion: '11.0',
+                browserName: 'chrome',
+                device: 'Google Pixel 4',
+                browserVersion: '',
+                project: 'Fozzie-Components',
+                build: browserstackName,
+                'browserstack.networkLogs': true,
+                specs: VS_DEBUGGER ? [SPEC_FILE] : [
+                    'test/specs/component/*.component.mobile.spec.js',
+                    'test/specs/component/*.component.shared.spec.js'
+                ]
+            }] : []),
+            ...(isMobile || isShared ? [{
+                os: 'ios',
+                osVersion: '14.0',
+                browserName: 'safari',
+                device: 'iPhone 12',
+                browserVersion: '',
+                project: 'Fozzie-Components',
+                build: browserstackName,
+                'browserstack.networkLogs': true,
+                specs: VS_DEBUGGER ? [SPEC_FILE] : [
+                    'test/specs/component/*.component.mobile.spec.js',
+                    'test/specs/component/*.component.shared.spec.js'
+                ]
+            }] : []),
+            ...(isDesktop || isShared ? [{
+                os: 'OS X',
+                osVersion: 'Big sur',
+                browserName: 'safari',
+                browserVersion: '14',
+                project: 'Fozzie-Components',
+                build: browserstackName,
+                'browserstack.networkLogs': true,
+                specs: VS_DEBUGGER ? [SPEC_FILE] : [
+                    'test/specs/component/*.component.desktop.spec.js',
+                    'test/specs/component/*.component.shared.spec.js'
+                ]
+            }] : [])
+        ]
+    },
     reporters: [],
     services: [['browserstack', {
         browserstackLocal: true
