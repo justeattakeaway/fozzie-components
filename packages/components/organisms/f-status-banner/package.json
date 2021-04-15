@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-status-banner",
   "description": "Fozzie Status Banner - Global status page",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "dist/f-status-banner.umd.min.js",
   "files": [
     "dist",
@@ -36,7 +36,7 @@
     "test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test-component:browserstack": "cross-env-shell JE_ENV=browserstack TEST_TYPE=component wdio ../../../../wdio-browserstack.conf.js --mochaOpts.grep '@browserstack'",
     "report:test-component:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=component ALLURE_REPORTER=true wdio ../../../../wdio-chrome.conf.js && yarn allure:open",
-    "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y", 
+    "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js --suite a11y",
     "allure:open": "yarn allure:clean && allure open",
     "allure:clean": "rimraf ../../../../test/results/allure"
   },
@@ -51,12 +51,12 @@
   },
   "devDependencies": {
     "@justeat/f-searchbox": "3.10.0",
+    "@justeat/f-wdio-utils": "0.1.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3",
-    "@justeat/f-wdio-utils": "0.1.0",
     "node-sass-magic-importer": "5.3.2"
   }
 }
