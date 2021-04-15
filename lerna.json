@@ -1,6 +1,12 @@
 {
   "version": "independent",
   "npmClient": "yarn",
+  "command": {
+    "publish": {
+      "conventionalCommits": true,
+      "message": "chore(release): publish"
+    }
+  },
   "packages": [
     "packages/*",
     "packages/components/atoms/*",
