@@ -1,5 +1,7 @@
-import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
-const Card = require('../../../test-utils/component-objects/f-card.component');
+import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
+
+const Card = require('../../test-utils/component-objects/f-card.component');
+
 const card = new Card();
 
 describe('Accessibility tests', () => {

@@ -10,8 +10,8 @@ const settings = () => ({
             browserName: 'chrome',
             acceptInsecureCerts: true,
             specs: VS_DEBUGGER ? [SPEC_FILE] : [
-                'test/specs/component/*.component.desktop.spec.js',
-                'test/specs/component/*.component.shared.spec.js'
+                'test/component/*.component.desktop.spec.js',
+                'test/component/*.component.shared.spec.js'
             ]
         }] : []),
         ...(isMobile || isShared ? [{
@@ -21,8 +21,8 @@ const settings = () => ({
                 mobileEmulation: {'deviceName': 'Pixel 2'}
             },
             specs: VS_DEBUGGER ? [SPEC_FILE] : [
-                'test/specs/component/*.component.mobile.spec.js',
-                'test/specs/component/*.component.shared.spec.js'
+                'test/component/*.component.mobile.spec.js',
+                'test/component/*.component.shared.spec.js'
             ]
         }] : [])
     ],

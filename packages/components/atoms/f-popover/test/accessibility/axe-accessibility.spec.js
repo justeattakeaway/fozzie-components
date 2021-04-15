@@ -1,6 +1,8 @@
-const Popover = require('../../../test-utils/component-objects/f-popover.component');
+import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
+
+const Popover = require('../../test-utils/component-objects/f-popover.component');
+
 const popover = new Popover();
-import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
