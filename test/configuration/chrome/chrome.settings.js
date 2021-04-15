@@ -1,6 +1,6 @@
 // Used to determine if tests are being run through VS Code debugger.
 // If true, only run the file being debugged.
-const { ALLURE_REPORTER, SPEC_FILE, TEST_TYPE, VS_DEBUGGER } = process.env;
+const { ALLURE_REPORTER, SPEC_FILE, VS_DEBUGGER } = process.env;
 const video = require('wdio-video-reporter');
 
 const settings = () => ({
