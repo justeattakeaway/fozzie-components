@@ -139,7 +139,7 @@
                             [$style['is-open']]: userMenuIsOpen
                         }]"
                     data-test-id="user-info-icon"
-                    v-on="isBelowMid ? null : { mouseover: openUserMennu, mouseleave: closeUserMenu }"
+                    v-on="isBelowMid ? null : { mouseover: openUserMenu, mouseleave: closeUserMenu }"
                     @keyup.esc="closeUserMenu">
                     <a
                         data-test-id="user-info-link"
@@ -178,7 +178,7 @@
                             :is-below-mid="isBelowMid"
                             :copy="copy"
                             :return-logout-url="returnLogoutUrl"
-                            @activateNav="openUserMennu"
+                            @activateNav="openUserMenu"
                             @deactivateNav="closeUserMenu" />
                     </v-popover>
                 </li>
@@ -225,7 +225,7 @@
                             { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
                         ]"
                         data-test-id="help-link"
-                        v-on="isBelowMid ? { blur: closeUserMenu, focus: openUserMennu } : null">
+                        v-on="isBelowMid ? { blur: closeUserMenu, focus: openUserMenu } : null">
                         {{ copy.help.text }}
                     </a>
                 </li>
@@ -249,7 +249,7 @@
                             { [$style['c-nav-list-link--alt']]: isAltColour },
                             { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
                         ]"
-                        v-on="isBelowMid ? { blur: closeUserMenu, focus: openUserMennu } : null">
+                        v-on="isBelowMid ? { blur: closeUserMenu, focus: openUserMenu } : null">
                         {{ copy.accountLogout.text }}
                     </a>
                 </li>
@@ -276,7 +276,7 @@
                         :aria-haspopup="!isBelowMid"
                         :aria-label="copy.countrySelector.changeCurrentCountry"
                         @click="onCountrySelectorToggle"
-                        v-on="countrySelectorIsClosedOnMobileView ? { blur: closeUserMenu, focus: openUserMennu } : null">
+                        v-on="countrySelectorIsClosedOnMobileView ? { blur: closeUserMenu, focus: openUserMenu } : null">
                         <span :class="$style['c-nav-list-iconWrapper']">
                             <flag-icon
                                 data-test-id="current-flag-icon"
@@ -510,7 +510,7 @@ export default {
             this.handleMobileNavState();
         },
 
-        openUserMennu () {
+        openUserMenu () {
             this.userMenuIsOpen = true;
 
             this.handleMobileNavState();
