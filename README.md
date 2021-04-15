@@ -90,3 +90,5 @@ Then run `yarn storybook:serve` to start storybook, which will open on `localhos
 More information about how to contribute to this repo can be found in our Storybook [Documentation section](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html?path=/story/documentation-getting-started-contributing--page)
 
 ### [Just Eat Storybook production](https://justeat.github.io/fozzie-components/@justeat/storybook/index.html)
+
+![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
