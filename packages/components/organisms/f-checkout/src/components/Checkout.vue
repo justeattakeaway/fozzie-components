@@ -97,7 +97,7 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import { required, email } from 'vuelidate/lib/validators';
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
 import FButton from '@justeat/f-button';
@@ -300,6 +300,8 @@ export default {
             'userNote'
         ]),
 
+        ...mapGetters(VUEX_CHECKOUT_MODULE, ['firstShowInDialogError']),
+
         isMobileNumberValid () {
             /*
             * Validation methods return true if the validation conditions
@@ -463,7 +465,7 @@ export default {
          */
         handleNonFulfillableCheckout () {
             if (this.errors) {
-                this.nonFulfillableError = this.errors.find(error => error.shouldShowInDialog);
+                this.toggleDialogError();
 
                 this.trackFormErrors();
 
@@ -475,6 +477,10 @@ export default {
 
                 this.$emit(EventNames.CheckoutUpdateFailure, this.eventData);
             }
+        },
+
+        toggleDialogError () {
+            this.nonFulfillableError = this.firstShowInDialogError;
         },
 
         /**
@@ -544,7 +550,8 @@ export default {
                     logMethod: this.$logger.logInfo
                 });
             } catch (e) {
-                throw new PlaceOrderError(e.message);
+                this.toggleDialogError();
+                throw new PlaceOrderError(e.message, !this.nonFulfillableError);
             }
         },
 
@@ -716,18 +723,23 @@ export default {
             const logMessage = error.logMessage || 'Consumer Checkout Failure';
 
             this.$emit(eventToEmit, { ...this.eventData, error });
+
             this.logInvoker({
                 message: logMessage,
                 data: this.eventData,
                 logMethod: this.$logger.logError,
                 error
             });
-            this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
-            this.genericErrorMessage = message;
 
-            this.$nextTick(() => {
-                this.scrollToElement(this.$refs.errorAlert.$el);
-            });
+            this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
+
+            if (error.shouldShowErrorToUser) {
+                this.genericErrorMessage = message;
+
+                this.$nextTick(() => {
+                    this.scrollToElement(this.$refs.errorAlert.$el);
+                });
+            }
         },
 
         /**

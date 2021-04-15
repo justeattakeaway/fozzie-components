@@ -280,23 +280,36 @@ export default {
         placeOrder: async ({ commit, state }, {
             url, data, timeout
         }) => {
-            const authHeader = state.authToken && `Bearer ${state.authToken}`;
+            try {
+                const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json;v=2',
-                    'x-je-application-id': 7, // Responsive Web
-                    'x-je-application-version': applicationVerion,
-                    Authorization: authHeader
-                },
-                timeout
-            };
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json;v=2',
+                        'x-je-application-id': 7, // Responsive Web
+                        'x-je-application-version': applicationVerion,
+                        Authorization: authHeader
+                    },
+                    timeout
+                };
 
-            const response = await axios.post(url, data, config);
+                const response = await axios.post(url, data, config);
 
-            const { orderId } = response.data;
+                const { orderId } = response.data;
 
-            commit(UPDATE_ORDER_PLACED, orderId);
+                commit(UPDATE_ORDER_PLACED, orderId);
+                commit(UPDATE_ERRORS, []);
+            } catch (error) {
+                const { errorCode } = error.response.data;
+
+                const checkoutIssue = checkoutIssues[errorCode];
+
+                if (checkoutIssue) {
+                    commit(UPDATE_ERRORS, [{ code: errorCode, ...checkoutIssue }]);
+                }
+
+                throw error; // Handled by the calling function.
+            }
         },
 
         /**
@@ -353,6 +366,10 @@ export default {
         updateHasAsapSelected ({ commit }, payload) {
             commit(UPDATE_HAS_ASAP_SELECTED, payload);
         }
+    },
+
+    getters: {
+        firstShowInDialogError: state => state.errors.find(error => error.shouldShowInDialog)
     },
 
     mutations: {

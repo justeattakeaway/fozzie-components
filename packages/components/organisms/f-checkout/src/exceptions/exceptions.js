@@ -7,6 +7,7 @@ class CreateGuestUserError extends Error {
         this.messageKey = 'errorMessages.guestUserCreationFailure';
         this.eventToEmit = EventNames.CheckoutSetupGuestFailure;
         this.logMessage = 'Checkout Setup Guest Failure';
+        this.shouldShowErrorToUser = true;
     }
 }
 
@@ -16,15 +17,17 @@ class UpdateCheckoutError extends Error {
         this.messageKey = 'errorMessages.genericServerError';
         this.eventToEmit = EventNames.CheckoutUpdateFailure;
         this.logMessage = 'Checkout Update Failure';
+        this.shouldShowErrorToUser = true;
     }
 }
 
 class PlaceOrderError extends Error {
-    constructor (message) {
+    constructor (message, shouldShowErrorToUser = false) {
         super(message);
         this.messageKey = 'errorMessages.genericServerError';
         this.eventToEmit = EventNames.CheckoutPlaceOrderFailure;
         this.logMessage = 'Place Order Failure';
+        this.shouldShowErrorToUser = shouldShowErrorToUser;
     }
 }
 
