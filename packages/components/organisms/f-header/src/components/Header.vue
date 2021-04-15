@@ -168,6 +168,19 @@ export default {
 </script>
 
 <style lang="scss" module>
+// when the off-screen navigation is active (on mobile), it fixes to the top of the screen.
+// this stops the content being forced upwards when this happens (preventing slight visual glitch)
+html:global(.is-navInView) {
+    .c-header {
+        @include media('<=mid') {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: zIndex(high);
+        }
+    }
+}
 
 .c-header {
     background-color: $header-bg;
@@ -190,18 +203,6 @@ export default {
 
     @include media('>mid') {
         border-bottom: $header-separator solid $header-border-color;
-    }
-}
-
-// when the off-screen navigation is active (on mobile), it fixes to the top of the screen.
-// this stops the content being forced upwards when this happens (preventing slight visual glitch)
-.c-header--navInView {
-    @include media('<=mid') {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: zIndex(high);
     }
 }
 

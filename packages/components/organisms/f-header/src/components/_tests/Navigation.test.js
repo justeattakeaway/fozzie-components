@@ -107,7 +107,7 @@ describe('Navigation', () => {
         expect(wrapper.find('[data-test-id="nav-links"]').exists()).toBe(true);
     });
 
-    it('should NOT show "navLinks" if the user is logged in but does NOT have nav link data', async () => {
+    it('should NOT show "navLinks" if `showLoginInfo: false` and the user is logged in and has nav link data', async () => {
         // Arrange
         wrapper = shallowMount(Navigation, {
             propsData: {

@@ -537,8 +537,8 @@ export default {
                 this.$emit('onMobileNavToggle', this.navIsOpen);
 
                 if (typeof document !== 'undefined') {
-                    document.documentElement.classList.toggle(this.$style['is-navInView'], this.navIsOpen);
-                    document.documentElement.classList.toggle(this.$style['is-navInView--noPad'], this.navIsOpen && this.headerBackgroundTheme === 'transparent');
+                    document.documentElement.classList.toggle('is-navInView', this.navIsOpen);
+                    document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.headerBackgroundTheme === 'transparent');
                 }
             }
         },
@@ -682,28 +682,6 @@ $nav-toggleIcon-bg                 : transparent;
 $nav-toggleIcon-space              : 5px;
 
 $nav-popover-width                 : 300px;
-
-// removes scroll
-.is-navInView {
-    @include media('<=mid') {
-        overflow: hidden;
-
-        body {
-            position: fixed;
-            width: 100%;
-            padding-top: $header-height--narrow;
-        }
-    }
-}
-
-// If the header is already fixed/absolute (like when the header is transparent)
-// then the content doesn't need to be padded down when the nav comes into view, as it's already flush with the top of the screen
-// This is added in the f-header JS
-.is-navInView--noPad {
-    body {
-        padding-top: 0;
-    }
-}
 
     // TODO: MAKE THIS NOT USE FLOATS
     // global modifier for list items horizontally aligned
