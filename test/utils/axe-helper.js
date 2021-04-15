@@ -15,7 +15,7 @@ exports.getAccessibilityTestResults = (componentName) => {
         const options = {
             runOnly: {
                 type: 'tag',
-                values: ['wcag2a']
+                values: ['wcag21aa']
             },
             rules: {
 				'duplicate-id': { enabled: false },

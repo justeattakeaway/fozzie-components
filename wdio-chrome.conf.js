@@ -1,11 +1,12 @@
 // Used to set correct directories for WDIO test output
 global.baseDir = __dirname;
 const allure = require('allure-commandline');
-
+const { TEST_TYPE } = process.env;
 const { setTestSettings } = require('./test/utils/configuration-helper');
 const chromeSettings = require('./test/configuration/chrome/chrome.settings').default();
 
 const testSettings = setTestSettings();
+const isComponentTest = TEST_TYPE === 'component';
 
 exports.config = {
 
@@ -62,7 +63,8 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [].concat(chromeSettings.capabilities),
+    capabilities: [].concat(isComponentTest ? chromeSettings.component.capabilities
+                            : chromeSettings.a11y.capabilities),
     //
     // ===================
     // Test Configurations
