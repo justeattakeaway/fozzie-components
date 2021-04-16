@@ -31,6 +31,8 @@
     "@babel/plugin-proposal-class-properties": "7.12.1",
     "@babel/plugin-proposal-optional-chaining": "7.10.4",
     "@babel/preset-env": "7.10.4",
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
     "@justeat/browserslist-config-fozzie": "1.1.1",
     "@justeat/eslint-config-fozzie": "3.4.1",
     "@justeat/f-utils": "1.1.0",
@@ -69,6 +71,7 @@
     "eslint-plugin-vue": "6.2.2",
     "eslint-plugin-vuejs-accessibility": "0.6.0",
     "eyeglass": "3.0.2",
+    "husky": "6.0.0",
     "include-media": "1.4.9",
     "lerna": "3.22.1",
     "mocha-each": "2.0.1",
@@ -85,8 +88,7 @@
     "vue-template-compiler": "2.6.10",
     "wdio-chromedriver-service": "6.0.3",
     "wdio-video-reporter": "3.1.1",
-    "webdriverio": "6.3.4",
-    "husky": "6.0.0"
+    "webdriverio": "6.3.4"
   },
   "bugs": {
     "url": "https://github.com/justeat/fozzie-components/issues"
