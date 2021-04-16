@@ -1,52 +1,32 @@
 import { shallowMount } from '@vue/test-utils';
 import { windowServices } from '@justeat/f-services';
-import root from 'window-or-global';
 import LinkList from '../LinkList.vue';
 
-jest.mock('@justeat/f-services', () => ({
-    windowServices: {
-        addEvent: jest.fn(),
-        getWindowWidth: jest.fn()
+const propsData = {
+    linkList: {
+        title: 'Customer service',
+        links: [
+            {
+                url: '/contact',
+                text: 'Contact us'
+            }
+        ]
     }
-}));
-
-const addEvent = (eventName, callbackFunction) => {
-    root.addEventListener(eventName, callbackFunction);
-    return callbackFunction;
 };
 
-windowServices.addEvent.mockImplementation(addEvent);
-windowServices.getWindowWidth.mockImplementation(() => root.innerWidth);
-
-const wrapper = shallowMount(LinkList, {
-    propsData: {
-        linkList: {
-            title: 'Customer service',
-            links: [
-                {
-                    url: '/contact',
-                    text: 'Contact us'
-                }
-            ]
-        }
-    }
-});
-
 describe('LinkList component', () => {
-    it('should be defined', () => {
-        expect(wrapper.exists()).toBe(true);
-    });
-
     describe('for narrow viewport widths', () => {
-        beforeEach(() => {
-            window.innerWidth = 414;
-            window.dispatchEvent(new Event('resize'));
+        jest.spyOn(windowServices, 'getWindowWidth').mockImplementation(() => 414);
+
+        const wrapper = shallowMount(LinkList, {
+            propsData
         });
 
         it('should display the headers as buttons', () => {
             // Arrange
             const linkListHeaderButton = wrapper.find('[data-test-id="linkList-header-button"]');
             const linkListHeaderText = wrapper.find('[data-test-id="linkList-header-text"]');
+
 
             // Assert
             expect(linkListHeaderButton.exists()).toBe(true);
@@ -77,15 +57,18 @@ describe('LinkList component', () => {
     });
 
     describe('for wide viewport widths', () => {
-        beforeEach(() => {
-            window.innerWidth = 1200;
-            window.dispatchEvent(new Event('resize'));
+        jest.spyOn(windowServices, 'getWindowWidth').mockImplementation(() => 1200);
+
+        const wrapper = shallowMount(LinkList, {
+            propsData
         });
 
         it('should display the headers as text', () => {
             // Arrange
             const linkListHeaderButton = wrapper.find('[data-test-id="linkList-header-button"]');
             const linkListHeaderText = wrapper.find('[data-test-id="linkList-header-text"]');
+
+            jest.spyOn(windowServices, 'getWindowWidth').mockImplementation(() => 1200);
 
             // Assert
             expect(linkListHeaderButton.exists()).toBe(false);
