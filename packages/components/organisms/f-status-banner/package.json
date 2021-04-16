@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-status-banner",
   "description": "Fozzie Status Banner - Global status page",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "dist/f-status-banner.umd.min.js",
   "files": [
     "dist",

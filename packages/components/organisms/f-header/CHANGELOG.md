@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.13.2](https://github.com/justeat/fozzie-components/compare/@justeat/f-header@4.13.0...@justeat/f-header@4.13.2) (2021-04-16)
+
+**Note:** Version bump only for package @justeat/f-header
+
+
+
+
+
 ## [4.13.1](https://github.com/justeat/fozzie-components/compare/@justeat/f-header@4.13.0...@justeat/f-header@4.13.1) (2021-04-16)
 
 **Note:** Version bump only for package @justeat/f-header
