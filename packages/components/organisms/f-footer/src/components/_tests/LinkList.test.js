@@ -1,5 +1,22 @@
 import { shallowMount } from '@vue/test-utils';
+import { windowServices } from '@justeat/f-services';
+import root from 'window-or-global';
 import LinkList from '../LinkList.vue';
+
+jest.mock('@justeat/f-services', () => ({
+    windowServices: {
+        addEvent: jest.fn(),
+        getWindowWidth: jest.fn()
+    }
+}));
+
+const addEvent = (eventName, callbackFunction) => {
+    root.addEventListener(eventName, callbackFunction);
+    return callbackFunction;
+};
+
+windowServices.addEvent.mockImplementation(addEvent);
+windowServices.getWindowWidth.mockImplementation(() => root.innerWidth);
 
 const wrapper = shallowMount(LinkList, {
     propsData: {
@@ -26,6 +43,16 @@ describe('LinkList component', () => {
             window.dispatchEvent(new Event('resize'));
         });
 
+        it('should display the headers as buttons', () => {
+            // Arrange
+            const linkListHeaderButton = wrapper.find('[data-test-id="linkList-header-button"]');
+            const linkListHeaderText = wrapper.find('[data-test-id="linkList-header-text"]');
+
+            // Assert
+            expect(linkListHeaderButton.exists()).toBe(true);
+            expect(linkListHeaderText.exists()).toBe(false);
+        });
+
         it('should be in a collapsed state', () => {
             // Arrange & Act
             const linkListCollapsedWrapper = wrapper.find('[data-test-id="linkList-wrapper-collapsed"]');
@@ -36,7 +63,7 @@ describe('LinkList component', () => {
 
         it('should be in an open state when linkList title has been clicked', async () => {
             // Arrange
-            const linkListHeader = wrapper.find('[data-test-id="linkList-header"]');
+            const linkListHeader = wrapper.find('[data-test-id="linkList-header-button"]');
 
             // Act
             await linkListHeader.trigger('click'); // wait for DOM to update as a result of click being triggered
@@ -53,6 +80,16 @@ describe('LinkList component', () => {
         beforeEach(() => {
             window.innerWidth = 1200;
             window.dispatchEvent(new Event('resize'));
+        });
+
+        it('should display the headers as text', () => {
+            // Arrange
+            const linkListHeaderButton = wrapper.find('[data-test-id="linkList-header-button"]');
+            const linkListHeaderText = wrapper.find('[data-test-id="linkList-header-text"]');
+
+            // Assert
+            expect(linkListHeaderButton.exists()).toBe(false);
+            expect(linkListHeaderText.exists()).toBe(true);
         });
 
         it('should be in an open state', () => {
