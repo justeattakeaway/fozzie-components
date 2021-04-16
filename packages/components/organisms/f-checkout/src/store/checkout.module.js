@@ -300,12 +300,14 @@ export default {
                 commit(UPDATE_ORDER_PLACED, orderId);
                 commit(UPDATE_ERRORS, []);
             } catch (error) {
-                const { errorCode } = error.response.data;
+                if (error.response.data) {
+                    const { errorCode } = error.response.data;
 
-                const checkoutIssue = checkoutIssues[errorCode];
+                    const checkoutIssue = checkoutIssues[errorCode];
 
-                if (checkoutIssue) {
-                    commit(UPDATE_ERRORS, [{ code: errorCode, ...checkoutIssue }]);
+                    if (checkoutIssue) {
+                        commit(UPDATE_ERRORS, [{ code: errorCode, ...checkoutIssue }]);
+                    }
                 }
 
                 throw error; // Handled by the calling function.
