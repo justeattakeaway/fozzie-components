@@ -1,6 +1,12 @@
 {
   "version": "independent",
   "npmClient": "yarn",
+  "command": {
+    "publish": {
+      "conventionalCommits": true,
+      "registry": "http://localhost:4873/"
+    }
+  },
   "packages": [
     "packages/*",
     "packages/components/atoms/*",
