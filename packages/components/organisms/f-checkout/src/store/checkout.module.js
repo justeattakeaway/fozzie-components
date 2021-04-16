@@ -97,10 +97,10 @@ export default {
             * AuthToken and re-assign mobile number or phone number
             * to `data.customer.phoneNumber`
             */
-            if (data?.customer && !data.customer.phoneNumber) {
+            if (data && data.customer && !data.customer.phoneNumber) {
                 const tokenData = jwtDecode(state.authToken);
 
-                data.customer.phoneNumber = tokenData?.mobile_number || tokenData?.phone_number;
+                data.customer.phoneNumber = tokenData.mobile_number || tokenData.phone_number;
             }
 
             commit(UPDATE_STATE, data);

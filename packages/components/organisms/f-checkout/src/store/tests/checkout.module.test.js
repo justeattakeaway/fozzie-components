@@ -341,6 +341,21 @@ describe('CheckoutModule', () => {
                 expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
             });
 
+            describe('when the `customer` model is not returned from the api', () => {
+                it('should not error when checking phone number', async () => {
+                    // Arrange
+                    checkoutDelivery.customer = null;
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDelivery.customer).toBe(null);
+                    expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
+                });
+            });
+
             describe('when the customers phone number is returned from the api', () => {
                 it('should not use neither of AuthToken phone numbers', async () => {
                     // Arrange
@@ -371,7 +386,7 @@ describe('CheckoutModule', () => {
                     state.authToken = authToken;
                 });
 
-                it('should use the the AuthToken mobile number', async () => {
+                it('should assign the AuthToken mobile number to the `customer.phoneNumber`', async () => {
                     // Arrange
                     state.authToken = mockAuthToken;
                     const expectedPhoneNumber = '9876543210'; // AuthToken Mobile No.
@@ -385,7 +400,7 @@ describe('CheckoutModule', () => {
                     expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
                 });
 
-                it('should use the AuthToken phone number if the AuthToken mobile number is missing', async () => {
+                it('should assign the AuthToken phone number to the `customer.phoneNumber` if the AuthToken mobile number is missing', async () => {
                     // Arrange
                     state.authToken = mockAuthTokenNoMobileNumber;
                     config.headers.Authorization = `Bearer ${state.authToken}`;
@@ -400,7 +415,7 @@ describe('CheckoutModule', () => {
                     expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
                 });
 
-                it('should be empty if both the AuthToken phone numbers are missing', async () => {
+                it('should assign nothing to the `customer.phoneNumber` if both the AuthToken phone numbers are missing', async () => {
                     // Arrange
                     state.authToken = mockAuthTokenNoNumbers;
                     config.headers.Authorization = `Bearer ${state.authToken}`;
