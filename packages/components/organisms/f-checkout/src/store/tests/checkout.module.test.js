@@ -311,6 +311,7 @@ describe('CheckoutModule', () => {
 
         describe('getCheckout ::', () => {
             let config;
+            let checkoutDeliveryCopy;
 
             beforeEach(() => {
                 config = {
@@ -321,7 +322,10 @@ describe('CheckoutModule', () => {
                     timeout: payload.timeout
                 };
 
-                axios.get = jest.fn(() => Promise.resolve({ data: checkoutDelivery }));
+                // Use a new copy per test so any mutations do not affect subsequent tests
+                checkoutDeliveryCopy = Object.assign(checkoutDelivery);
+
+                axios.get = jest.fn(() => Promise.resolve({ data: checkoutDeliveryCopy }));
             });
 
             it(`should get the checkout details from the backend and call ${UPDATE_STATE} mutation.`, async () => {
@@ -330,7 +334,7 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
+                expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
             });
 
             it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
@@ -344,15 +348,15 @@ describe('CheckoutModule', () => {
             describe('when the `customer` model is not returned from the api', () => {
                 it('should not error when checking phone number', async () => {
                     // Arrange
-                    checkoutDelivery.customer = null;
+                    checkoutDeliveryCopy.customer = null;
 
                     // Act
                     await getCheckout({ commit, state, dispatch }, payload);
 
                     // Assert
-                    expect(checkoutDelivery.customer).toBe(null);
+                    expect(checkoutDeliveryCopy.customer).toBe(null);
                     expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
                 });
             });
 
@@ -360,7 +364,7 @@ describe('CheckoutModule', () => {
                 it('should not use neither of AuthToken phone numbers', async () => {
                     // Arrange
                     const expectedPhoneNumber = '5678901234';
-                    checkoutDelivery.customer = {
+                    checkoutDeliveryCopy.customer = {
                         phoneNumber: expectedPhoneNumber
                     };
 
@@ -368,21 +372,19 @@ describe('CheckoutModule', () => {
                     await getCheckout({ commit, state, dispatch }, payload);
 
                     // Assert
-                    expect(checkoutDelivery.customer.phoneNumber).toBe(expectedPhoneNumber);
-                    expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
+                    expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
                 });
             });
 
             describe('when the customers phone number is not returned from the api', () => {
                 beforeEach(() => {
-                    state.authToken = null;
-                    checkoutDelivery.customer = {
+                    checkoutDeliveryCopy.customer = {
                         phoneNumber: null
                     };
                 });
 
                 afterEach(() => {
+                    // Reset the AuthToken for subsequent tests
                     state.authToken = authToken;
                 });
 
@@ -395,9 +397,7 @@ describe('CheckoutModule', () => {
                     await getCheckout({ commit, state, dispatch }, payload);
 
                     // Assert
-                    expect(checkoutDelivery.customer.phoneNumber).toBe(expectedPhoneNumber);
-                    expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
+                    expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
                 });
 
                 it('should assign the AuthToken phone number to the `customer.phoneNumber` if the AuthToken mobile number is missing', async () => {
@@ -410,9 +410,7 @@ describe('CheckoutModule', () => {
                     await getCheckout({ commit, state, dispatch }, payload);
 
                     // Assert
-                    expect(checkoutDelivery.customer.phoneNumber).toBe(expectedPhoneNumber);
-                    expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
+                    expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
                 });
 
                 it('should assign nothing to the `customer.phoneNumber` if both the AuthToken phone numbers are missing', async () => {
@@ -424,9 +422,7 @@ describe('CheckoutModule', () => {
                     await getCheckout({ commit, state, dispatch }, payload);
 
                     // Assert
-                    expect(checkoutDelivery.customer.phoneNumber).toBeUndefined();
-                    expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
+                    expect(checkoutDeliveryCopy.customer.phoneNumber).toBeUndefined();
                 });
             });
         });
