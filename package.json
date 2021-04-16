@@ -5,6 +5,7 @@
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
     "bundlewatch": "cross-env-shell \"yarn build && bundlewatch --config bundlewatch.config.js\"",
+    "commit": "cz",
     "lint": "cross-env-shell \"lerna run $LERNA_ARGS lint --stream\"",
     "lint:fix": "lerna run lint -- --fix",
     "lint:style": "lerna run lint:style --stream",
@@ -62,6 +63,8 @@
     "chromedriver": "89.0.0",
     "cross-env": "7.0.2",
     "css-loader": "1.0.1",
+    "cz-conventional-changelog": "3.3.0",
+    "commitizen": "4.2.3",
     "danger": "10.2.1",
     "eslint": "6.8.0",
     "eslint-import-resolver-webpack": "0.12.2",
@@ -117,5 +120,10 @@
   ],
   "dependencies": {
     "browserstack-local": "1.4.8"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

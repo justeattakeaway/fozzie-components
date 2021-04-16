@@ -1,6 +1,8 @@
 // Used to set correct directories for WDIO test output
 global.baseDir = __dirname;
+
 const allure = require('allure-commandline');
+
 const { TEST_TYPE } = process.env;
 const { setTestSettings } = require('./test/utils/configuration-helper');
 const chromeSettings = require('./test/configuration/chrome/chrome.settings').default();
