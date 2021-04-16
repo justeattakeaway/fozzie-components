@@ -68,8 +68,6 @@ describe('LinkList component', () => {
             const linkListHeaderButton = wrapper.find('[data-test-id="linkList-header-button"]');
             const linkListHeaderText = wrapper.find('[data-test-id="linkList-header-text"]');
 
-            jest.spyOn(windowServices, 'getWindowWidth').mockImplementation(() => 1200);
-
             // Assert
             expect(linkListHeaderButton.exists()).toBe(false);
             expect(linkListHeaderText.exists()).toBe(true);
