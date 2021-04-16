@@ -22,12 +22,11 @@ class UpdateCheckoutError extends Error {
 }
 
 class PlaceOrderError extends Error {
-    constructor (message, shouldShowErrorToUser = false) {
+    constructor (message) {
         super(message);
         this.messageKey = 'errorMessages.genericServerError';
         this.eventToEmit = EventNames.CheckoutPlaceOrderFailure;
         this.logMessage = 'Place Order Failure';
-        this.shouldShowErrorToUser = shouldShowErrorToUser;
     }
 }
 

@@ -300,7 +300,7 @@ export default {
             'userNote'
         ]),
 
-        ...mapGetters(VUEX_CHECKOUT_MODULE, ['firstShowInDialogError']),
+        ...mapGetters(VUEX_CHECKOUT_MODULE, ['firstDialogError']),
 
         isMobileNumberValid () {
             /*
@@ -480,7 +480,7 @@ export default {
         },
 
         toggleDialogError () {
-            this.nonFulfillableError = this.firstShowInDialogError;
+            this.nonFulfillableError = this.firstDialogError;
         },
 
         /**
@@ -551,7 +551,7 @@ export default {
                 });
             } catch (e) {
                 this.toggleDialogError();
-                throw new PlaceOrderError(e.message, !this.nonFulfillableError);
+                throw new PlaceOrderError(e.message);
             }
         },
 
@@ -733,7 +733,10 @@ export default {
 
             this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
 
-            if (error.shouldShowErrorToUser) {
+            // We don't want to show a dialog and an error message.
+            // TODO: refactor `nonFulfillableError` and `genericErrorMessage` so that we try to use only one, and
+            // we make it more generic and not just for "non fulfillable errors".
+            if (!this.nonFulfillableError) {
                 this.genericErrorMessage = message;
 
                 this.$nextTick(() => {

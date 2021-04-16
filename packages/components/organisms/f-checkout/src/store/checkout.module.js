@@ -22,6 +22,16 @@ import {
 } from './mutation-types';
 import checkoutIssues from '../checkout-issues';
 
+const getIssueByCode = code => {
+    const issue = checkoutIssues[code];
+
+    if (issue) {
+        return { ...issue, code };
+    }
+
+    return null;
+};
+
 export default {
     namespaced: true,
 
@@ -125,15 +135,8 @@ export default {
             const { issues, isFulfillable } = responseData;
 
             // Can now log these errors inside the map if necessary
-            const detailedIssues = issues.map(issue => {
-                const checkoutIssue = checkoutIssues[issue.code];
-
-                if (checkoutIssue) {
-                    return { ...checkoutIssue, ...issue };
-                }
-
-                return { code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true };
-            });
+            const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
+                    || { code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true });
 
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
@@ -303,11 +306,9 @@ export default {
                 if (error.response.data) {
                     const { errorCode } = error.response.data;
 
-                    const checkoutIssue = checkoutIssues[errorCode];
+                    const checkoutIssue = getIssueByCode(errorCode);
 
-                    if (checkoutIssue) {
-                        commit(UPDATE_ERRORS, [{ code: errorCode, ...checkoutIssue }]);
-                    }
+                    commit(UPDATE_ERRORS, (checkoutIssue ? [checkoutIssue] : []));
                 }
 
                 throw error; // Handled by the calling function.
@@ -371,7 +372,7 @@ export default {
     },
 
     getters: {
-        firstShowInDialogError: state => state.errors.find(error => error.shouldShowInDialog)
+        firstDialogError: state => state.errors.find(error => error.shouldShowInDialog)
     },
 
     mutations: {
