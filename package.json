@@ -20,7 +20,8 @@
     "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y lerna run test-a11y:chrome --concurrency 1 --stream",
     "test:consumer": "lerna run test:consumer",
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
-    "allure:clean": "rimraf test/results/allure"
+    "allure:clean": "rimraf test/results/allure",
+    "prepare": "husky install"
   },
   "resolutions": {
     "webpack": "4.36.0"
@@ -84,7 +85,8 @@
     "vue-template-compiler": "2.6.10",
     "wdio-chromedriver-service": "6.0.3",
     "wdio-video-reporter": "3.1.1",
-    "webdriverio": "6.3.4"
+    "webdriverio": "6.3.4",
+    "husky": "6.0.0"
   },
   "bugs": {
     "url": "https://github.com/justeat/fozzie-components/issues"
