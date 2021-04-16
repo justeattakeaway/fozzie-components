@@ -48,6 +48,5 @@ describe('SkeletonLoader', () => {
                 expect(wrapper.findComponent(Skeletons[skeletonType]).exists()).toBe(true);
             });
         });
-
     });
 });
