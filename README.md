@@ -84,6 +84,15 @@ To run storybook first you must run the following at the the top level
 
 Then run `yarn storybook:serve` to start storybook, which will open on `localhost:6006`.
 
+## Committing Code
+
+We use [Husky](https://github.com/typicode/husky) to manage our git hooks.
+
+[When you make a commit, the following scripts will run as part of our pre-commit hook.] (https://github.com/justeat/fozzie-components/blob/master/.husky/pre-commit)
+
+If you wish to skip these pre-commit hooks, simply add the `--no-verify` argument when making your commit.
+
+For example: `git commit -m "Refactor f-button" --no-verify `.
 
 ## Publishing Components
 
