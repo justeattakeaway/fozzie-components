@@ -1,0 +1,8 @@
+{
+    "version": "2.0.0",
+    "tasks": [{
+        "label": "CircleCI CLI",
+        "command": "circleci local execute --config .circleci/local_config.yml --job local", // Could be any other shell command
+        "type": "shell"
+    }]
+}
