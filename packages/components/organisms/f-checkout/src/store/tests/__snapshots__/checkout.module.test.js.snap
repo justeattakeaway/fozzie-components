@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CheckoutModule getters :: firstDialogError :: should return the first error to show in a dialog when there is one 1`] = `
+Object {
+  "code": "CODE2",
+  "shouldShowInDialog": true,
+}
+`;
+
 exports[`CheckoutModule mutations :: UPDATE_STATE :: should update state with delivery response. 1`] = `
 Object {
   "address": Object {

@@ -20,6 +20,7 @@ import {
     UPDATE_STATE,
     UPDATE_USER_NOTE
 } from './mutation-types';
+
 import checkoutIssues from '../checkout-issues';
 
 const getIssueByCode = code => {
@@ -130,11 +131,9 @@ export default {
                 timeout
             };
 
-            // TODO - Handle and log any errors
             const { data: responseData } = await axios.patch(url, data, config);
             const { issues, isFulfillable } = responseData;
 
-            // Can now log these errors inside the map if necessary
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
                     || { code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true });
 
@@ -303,7 +302,7 @@ export default {
                 commit(UPDATE_ORDER_PLACED, orderId);
                 commit(UPDATE_ERRORS, []);
             } catch (error) {
-                if (error.response.data) {
+                if (error.response && error.response.data) {
                     const { errorCode } = error.response.data;
 
                     const checkoutIssue = getIssueByCode(errorCode);

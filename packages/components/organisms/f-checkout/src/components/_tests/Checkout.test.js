@@ -2784,7 +2784,7 @@ describe('Checkout', () => {
             });
 
             describe('when `placeOrder` is unsuccessful', () => {
-                it('should call `toggleDialogError` and throw a `PlaceOrderError` error with the `message` of the error', async () => {
+                it('should throw a `PlaceOrderError` error with the `message` of the error', async () => {
                     // Arrange
                     const errorMessage = 'An error';
 
