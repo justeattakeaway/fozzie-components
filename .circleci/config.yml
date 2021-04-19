@@ -214,6 +214,47 @@ jobs:
       - slack_notify_fail
       - slack_notify_success
 
+  local:
+    executor: node
+    environment:
+      # required to prevent ENOMEM errors
+      LERNA_ARGS: --concurrency 1
+    steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+              - yarn-packages-{{ checksum "yarn.lock" }}
+      - install_node_dependencies
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - build_packages
+      - run: # Lint packages
+          name: Run Lint Tasks on Packages
+          command: yarn lint
+      - run: # Run Tests
+          name: Run Unit / Integration Tests
+          command: yarn test
+      - run: # Install Component Test Dependencies
+          name: Install Component Test Dependencies
+          command: yarn global add @vue/cli @vue/cli-service-global
+      - run: # Build Storybook
+          name: Build Storybook
+          command: yarn storybook:build
+      - run: # Serve Storybook
+          name: Serve Storybook
+          command: yarn storybook:serve-static
+          background: true
+      - run: # Run Component UI Tests
+          name: Run WebDriverIO Component Tests
+          command: yarn test-component:chrome
+      - run: # Run Accessibility UI Tests
+          name: Run WebDriverIO Accessibility Tests
+          command: yarn test-a11y:chrome
+
 workflows:
   version: 2
 
@@ -232,3 +273,11 @@ workflows:
           filters:
             branches:
               only: master
+
+  local:
+    jobs:
+      - local:
+          context: web-core
+          filters:
+            branches:
+              ignore: 'gh-pages'
