@@ -1,6 +1,13 @@
 import { shallowMount } from '@vue/test-utils';
 import Header from '../Header.vue';
 
+const $style = {
+    'c-header': 'c-header',
+    'c-header-container': 'c-header-container',
+    'c-header--transparent': 'c-header--transparent',
+    'c-header--gradient': 'c-header--gradient'
+};
+
 describe('Header', () => {
     it('should be defined', () => {
         const propsData = {
@@ -17,7 +24,12 @@ describe('Header', () => {
         };
 
         // Act
-        const wrapper = shallowMount(Header, { propsData });
+        const wrapper = shallowMount(Header, {
+            propsData,
+            mocks: {
+                $style
+            }
+        });
 
         // Assert
         expect(wrapper).toMatchSnapshot();

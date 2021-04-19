@@ -1,16 +1,19 @@
 <template>
     <header
         :data-theme="theme"
-        :class="['c-header', headerBackgroundClass, {
-            'c-header--transparent c-header--gradient': showTransparentHeader
-        }]"
+        :class="[
+            $style['c-header'],
+            headerBackgroundClass,
+            transparentBackgroundClasses,
+            { [$style['c-header--navInView']]: mobileNavIsOpen }
+        ]"
         data-test-id='header-component'>
         <skip-to-main
             v-if="showSkipLink"
             :text="copy.skipToMainContentText"
             :transparent-bg="showTransparentHeader" />
 
-        <div class="c-header-container">
+        <div :class="$style['c-header-container']">
             <logo
                 :theme="theme"
                 :company-name="copy.companyName"
@@ -143,12 +146,16 @@ export default {
             return this.headerBackgroundTheme === 'transparent' && !this.mobileNavIsOpen;
         },
 
-        headerBackgroundClass () {
-            return this.headerBackgroundTheme === 'highlight' ? 'c-header--highlightBg' : '';
-        },
-
         showOffersLinkWithContent () {
             return this.copy.offers && this.showOffersLink;
+        },
+
+        headerBackgroundClass () {
+            return this.headerBackgroundTheme === 'highlight' ? this.$style['c-header--highlightBg'] : '';
+        },
+
+        transparentBackgroundClasses () {
+            return this.showTransparentHeader ? `${this.$style['c-header--transparent']} ${this.$style['c-header--gradient']}` : '';
         }
     },
 
@@ -160,16 +167,11 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.c-header {
-    background-color: $header-bg;
-    min-width : 300px;
-    position: relative;
-    z-index: zIndex(mid);
-
-    // when the off-screen navigation is active (on mobile), it fixes to the top of the screen.
-    // this stops the content being forced upwards when this happens (preventing slight visual glitch)
-    .is-navInView & {
+<style lang="scss" module>
+// when the off-screen navigation is active (on mobile), it fixes to the top of the screen.
+// this stops the content being forced upwards when this happens (preventing slight visual glitch)
+html:global(.is-navInView) {
+    .c-header {
         @include media('<=mid') {
             position: fixed;
             top: 0;
@@ -178,6 +180,13 @@ export default {
             z-index: zIndex(high);
         }
     }
+}
+
+.c-header {
+    background-color: $header-bg;
+    min-width : 300px;
+    position: relative;
+    z-index: zIndex(mid);
 
     // Styles for a sticky header on mobile
     @include media('<=mid') {

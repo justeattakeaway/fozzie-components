@@ -6,7 +6,7 @@ global.baseDir = __dirname;
 
 const { setTestSettings } = require('./test/utils/configuration-helper');
 const browserstackSettings = require('./test/configuration/browserstack/browserstack.settings').default();
-
+const { TEST_TYPE } = process.env;
 const testSettings = setTestSettings();
 
 exports.config = {
@@ -76,7 +76,7 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [].concat(browserstackSettings.capabilities),  
+    capabilities: [].concat(browserstackSettings.component.capabilities),  
     //
     // ===================
     // Test Configurations
