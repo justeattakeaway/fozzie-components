@@ -66,8 +66,9 @@ export default {
         },
         isAltLogo () {
             const isHighlight = this.headerBackgroundTheme === 'highlight';
-            const isTransparent = this.headerBackgroundTheme === 'transparent' && !this.isOpen;
-            return isHighlight || isTransparent;
+            const isTransparent = this.headerBackgroundTheme === 'transparent';
+
+            return isHighlight || (isTransparent && !this.isOpen);
         }
     }
 };

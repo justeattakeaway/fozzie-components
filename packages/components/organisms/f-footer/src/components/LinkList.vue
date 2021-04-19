@@ -8,17 +8,15 @@
         :data-test-id="testId">
         <h2>
             <button
+                v-if="isBelowWide"
                 :id="listHeadingId"
-                :tabindex="isBelowWide ? 0 : -1"
-                :disabled="!isBelowWide"
-                :aria-disabled="!isBelowWide"
                 :aria-expanded="!panelCollapsed ? 'true' : 'false'"
                 :aria-controls="listId"
                 :class="[
                     $style['c-footer-heading'],
                     $style['c-footer-heading--button']
                 ]"
-                data-test-id="linkList-header"
+                data-test-id="linkList-header-button"
                 @click="onPanelClick">
                 {{ linkList.title }}
                 <chevron-icon
@@ -26,6 +24,15 @@
                         [$style['c-icon--chevron--up']]: !panelCollapsed
                     }]" />
             </button>
+
+            <span
+                v-else
+                :id="listHeadingId"
+                data-test-id="linkList-header-text"
+                :class="[
+                    $style['c-footer-heading'],
+                    $style['c-footer-heading--button']
+                ]">{{ linkList.title }}</span>
         </h2>
 
         <ul
