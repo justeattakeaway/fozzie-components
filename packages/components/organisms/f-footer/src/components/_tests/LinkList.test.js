@@ -1,29 +1,36 @@
 import { shallowMount } from '@vue/test-utils';
+import { windowServices } from '@justeat/f-services';
 import LinkList from '../LinkList.vue';
 
-const wrapper = shallowMount(LinkList, {
-    propsData: {
-        linkList: {
-            title: 'Customer service',
-            links: [
-                {
-                    url: '/contact',
-                    text: 'Contact us'
-                }
-            ]
-        }
+const propsData = {
+    linkList: {
+        title: 'Customer service',
+        links: [
+            {
+                url: '/contact',
+                text: 'Contact us'
+            }
+        ]
     }
-});
+};
 
 describe('LinkList component', () => {
-    it('should be defined', () => {
-        expect(wrapper.exists()).toBe(true);
-    });
-
     describe('for narrow viewport widths', () => {
-        beforeEach(() => {
-            window.innerWidth = 414;
-            window.dispatchEvent(new Event('resize'));
+        jest.spyOn(windowServices, 'getWindowWidth').mockImplementation(() => 414);
+
+        const wrapper = shallowMount(LinkList, {
+            propsData
+        });
+
+        it('should display the headers as buttons', () => {
+            // Arrange
+            const linkListHeaderButton = wrapper.find('[data-test-id="linkList-header-button"]');
+            const linkListHeaderText = wrapper.find('[data-test-id="linkList-header-text"]');
+
+
+            // Assert
+            expect(linkListHeaderButton.exists()).toBe(true);
+            expect(linkListHeaderText.exists()).toBe(false);
         });
 
         it('should be in a collapsed state', () => {
@@ -36,7 +43,7 @@ describe('LinkList component', () => {
 
         it('should be in an open state when linkList title has been clicked', async () => {
             // Arrange
-            const linkListHeader = wrapper.find('[data-test-id="linkList-header"]');
+            const linkListHeader = wrapper.find('[data-test-id="linkList-header-button"]');
 
             // Act
             await linkListHeader.trigger('click'); // wait for DOM to update as a result of click being triggered
@@ -50,9 +57,20 @@ describe('LinkList component', () => {
     });
 
     describe('for wide viewport widths', () => {
-        beforeEach(() => {
-            window.innerWidth = 1200;
-            window.dispatchEvent(new Event('resize'));
+        jest.spyOn(windowServices, 'getWindowWidth').mockImplementation(() => 1200);
+
+        const wrapper = shallowMount(LinkList, {
+            propsData
+        });
+
+        it('should display the headers as text', () => {
+            // Arrange
+            const linkListHeaderButton = wrapper.find('[data-test-id="linkList-header-button"]');
+            const linkListHeaderText = wrapper.find('[data-test-id="linkList-header-text"]');
+
+            // Assert
+            expect(linkListHeaderButton.exists()).toBe(false);
+            expect(linkListHeaderText.exists()).toBe(true);
         });
 
         it('should be in an open state', () => {
