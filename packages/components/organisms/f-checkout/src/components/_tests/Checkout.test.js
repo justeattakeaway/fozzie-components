@@ -1318,6 +1318,17 @@ describe('Checkout', () => {
                     });
                 });
 
+                it('should make a call to `toggleDialogError`', () => {
+                    // Arrange
+                    const toggleDialogErrorSpy = jest.spyOn(wrapper.vm, 'toggleDialogError');
+
+                    // Act
+                    wrapper.vm.handleNonFulfillableCheckout();
+
+                    // Assert
+                    expect(toggleDialogErrorSpy).toHaveBeenCalled();
+                });
+
                 it('should make a call to `trackFormErrors`', () => {
                     // Arrange
                     const trackFormErrorsSpy = jest.spyOn(wrapper.vm, 'trackFormErrors');
@@ -2773,7 +2784,7 @@ describe('Checkout', () => {
             });
 
             describe('when `placeOrder` is unsuccessful', () => {
-                it('should throw a `PlaceOrderError` error with the `message` of the error', async () => {
+                it('should call `toggleDialogError` and throw a `PlaceOrderError` error with the `message` of the error', async () => {
                     // Arrange
                     const errorMessage = 'An error';
 
@@ -2798,6 +2809,38 @@ describe('Checkout', () => {
 
                     result.rejects.toThrow(PlaceOrderError);
                     result.rejects.toThrow(errorMessage);
+                });
+
+                it('should call `toggleDialogError`', async () => {
+                    // Arrange
+                    const errorMessage = 'An error';
+
+                    wrapper = shallowMount(VueCheckout, {
+                        store: createStore(
+                            defaultCheckoutState,
+                            {
+                                ...defaultCheckoutActions,
+                                placeOrder: jest.fn(async () => Promise.reject(new Error(errorMessage)))
+                            }
+                        ),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
+                    });
+
+                    const toggleDialogErrorSpy = jest.spyOn(wrapper.vm, 'toggleDialogError');
+
+                    // A try-catch is needed because the exception otherwise is thrown and the test fails.
+                    try {
+                        // Act
+                        await wrapper.vm.submitOrder();
+                    } catch {
+                        // Assert
+                        expect(toggleDialogErrorSpy).toHaveBeenCalled();
+                    }
                 });
             });
         });
