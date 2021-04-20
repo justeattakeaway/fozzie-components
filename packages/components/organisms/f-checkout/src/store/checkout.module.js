@@ -22,6 +22,26 @@ import {
 } from './mutation-types';
 import checkoutIssues from '../checkout-issues';
 
+/**
+* @function resolveCustomerDetails
+* If certain customer details are missing from api `data.customer` object then fallback
+* to the decoded `state.AuthToken` details and re-assign back to `data.customer`.
+* @param  {object} data  - Api response object.
+* @param  {object} state - The current `checkout` state.
+*/
+function resolveCustomerDetails (data, state) {
+    const tokenData = jwtDecode(state.authToken);
+
+    if (data && data.customer && tokenData) {
+        data.customer.phoneNumber = data.customer.phoneNumber || tokenData.mobile_number || tokenData.phone_number;
+
+        if (!data.customer.firstName || !data.customer.lastName) {
+            data.customer.firstName = tokenData.given_name;
+            data.customer.lastName = tokenData.family_name;
+        }
+    }
+}
+
 export default {
     namespaced: true,
 
@@ -92,16 +112,7 @@ export default {
 
             const { data } = await axios.get(url, config);
 
-            /**
-            * If no `customer.phoneNumber` from api then read from decoded
-            * AuthToken and re-assign mobile number or phone number
-            * to `data.customer.phoneNumber`
-            */
-            if (data && data.customer && !data.customer.phoneNumber) {
-                const tokenData = jwtDecode(state.authToken);
-
-                data.customer.phoneNumber = tokenData.mobile_number || tokenData.phone_number;
-            }
+            resolveCustomerDetails(data, state);
 
             commit(UPDATE_STATE, data);
 
@@ -266,23 +277,6 @@ export default {
         },
 
         /**
-         * Get the customer name from JWT claims and update state with the result
-         *
-         * @param {Object} context - Vuex context object, this is the standard first parameter for actions
-         * @param {Object} payload - Parameter with the different configurations for the request.
-         */
-        getCustomerName: async ({ commit, state }) => {
-            const tokenData = jwtDecode(state.authToken);
-
-            const customer = {
-                firstName: tokenData.given_name,
-                lastName: tokenData.family_name
-            };
-
-            commit(UPDATE_CUSTOMER_DETAILS, customer);
-        },
-
-        /**
          * Post the order details to the Order Placement API and get the `orderId` from the response.
          *
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
@@ -382,6 +376,7 @@ export default {
 
             if (customer) {
                 state.customer.firstName = customer.firstName;
+                state.customer.lastName = customer.lastName;
                 state.customer.mobileNumber = customer.phoneNumber;
             }
 

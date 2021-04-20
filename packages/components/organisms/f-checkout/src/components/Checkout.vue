@@ -421,10 +421,6 @@ export default {
             await Promise.all(promises);
             this.resetLoadingState();
 
-            if (this.shouldLoadCustomerNameFromClaims) {
-                this.getCustomerName();
-            }
-
             if (this.shouldLoadAddress) {
                 await this.loadAddress();
             }
