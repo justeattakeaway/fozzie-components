@@ -32,7 +32,6 @@ const {
     getAvailableFulfilment,
     getBasket,
     getCheckout,
-    getCustomerName,
     getGeoLocation,
     placeOrder,
     setAuthToken,
@@ -360,7 +359,7 @@ describe('CheckoutModule', () => {
                 });
             });
 
-            describe('when the customers phone number is returned from the api', () => {
+            describe('when the customer details are returned from the api', () => {
                 it('should not use neither of AuthToken phone numbers', async () => {
                     // Arrange
                     const expectedPhoneNumber = '5678901234';
@@ -373,6 +372,23 @@ describe('CheckoutModule', () => {
 
                     // Assert
                     expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
+                });
+
+                it('should not use neither of AuthToken customer names', async () => {
+                    // Arrange
+                    const expectedFirstName = 'Jazz';
+                    const expectedLastName = 'Man';
+                    checkoutDeliveryCopy.customer = {
+                        firstName: expectedFirstName,
+                        lastName: expectedLastName
+                    };
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDeliveryCopy.customer.firstName).toBe(expectedFirstName);
+                    expect(checkoutDeliveryCopy.customer.lastName).toBe(expectedLastName);
                 });
             });
 
@@ -423,6 +439,48 @@ describe('CheckoutModule', () => {
 
                     // Assert
                     expect(checkoutDeliveryCopy.customer.phoneNumber).toBeUndefined();
+                });
+            });
+
+            describe('when the customers first name is not returned from the api but the last name is', () => {
+                it('should assign the AuthToken first & last name to the `customer`', async () => {
+                    // Arrange
+                    const expectedCustomerDetails = {
+                        firstName: 'Joe',
+                        lastName: 'Bloggs'
+                    };
+                    checkoutDeliveryCopy.customer = {
+                        firstName: null,
+                        lastName: 'Man'
+                    };
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDeliveryCopy.customer.firstName).toBe(expectedCustomerDetails.firstName);
+                    expect(checkoutDeliveryCopy.customer.lastName).toBe(expectedCustomerDetails.lastName);
+                });
+            });
+
+            describe('when the customers last name is not returned from the api but the first name is', () => {
+                it('should assign the AuthToken first & last name to the `customer`', async () => {
+                    // Arrange
+                    const expectedCustomerDetails = {
+                        firstName: 'Joe',
+                        lastName: 'Bloggs'
+                    };
+                    checkoutDeliveryCopy.customer = {
+                        firstName: 'Jazz',
+                        lastName: null
+                    };
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDeliveryCopy.customer.firstName).toBe(expectedCustomerDetails.firstName);
+                    expect(checkoutDeliveryCopy.customer.lastName).toBe(expectedCustomerDetails.lastName);
                 });
             });
         });
@@ -494,22 +552,6 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
-            });
-        });
-
-        describe('getCustomerName ::', () => {
-            it('should get the customer first name and last name from token', async () => {
-                // Arrange
-                const expectedCustomerDetails = {
-                    firstName: 'Joe',
-                    lastName: 'Bloggs'
-                };
-
-                // Act
-                await getCustomerName({ commit, state });
-
-                // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_CUSTOMER_DETAILS, expectedCustomerDetails);
             });
         });
 
@@ -727,7 +769,6 @@ describe('CheckoutModule', () => {
         it.each([
             [setAuthToken, UPDATE_AUTH, authToken],
             [updateAddressDetails, UPDATE_FULFILMENT_ADDRESS, address],
-            [updateCustomerDetails, UPDATE_CUSTOMER_DETAILS, customerDetails],
             [updateUserNote, UPDATE_USER_NOTE, userNote]
         ])('%s should call %s mutation with passed value', (action, mutation, value) => {
             // Act
