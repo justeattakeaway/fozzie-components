@@ -3,6 +3,39 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.19.0
+------------------------------
+*April 15, 2021*
+
+### Changed
+- Expander buttons are present only for narrow screens 
+
+### Added
+- Tests to cover this change
+
+### Fixed
+- Window resize before each test. Resize events shouldn't be throttled in tests, but they were before the fix.
+
+
+v4.18.0
+------------------------------
+*April 12, 2021*
+
+### Added
+- Selectors in `f-footer.selectors.js` for footer blocks
+- Test supporting code in `f-footer.component.js` to test visibility and clickability of certain elements
+- Tests for footer blocks
+- `mobile` folder to run mobile specific tests in Browserstack
+- `data-test-id`s in `FeedbackBlock.vue`, `Footer.vue` and `LinkList.vue` to test specific blocks and buttons.
+
+
+*April 9, 2021*
+
+### Changed
+- Refactored large country selector test into two separate tests
+- Added string placeholder to tenant component tests
+
+
 v4.17.0
 ------------------------------
 *April 6, 2021*

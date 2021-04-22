@@ -19,8 +19,13 @@ import EventNames from '../../event-names';
 import {
     defaultCheckoutState, defaultCheckoutActions, i18n, createStore, $logger
 } from './helpers/setup';
-import { CreateGuestUserError, UpdateCheckoutError, PlaceOrderError } from '../../exceptions/exceptions';
+import exceptions from '../../exceptions/exceptions';
 
+const {
+    CreateGuestUserError,
+    UpdateCheckoutError,
+    PlaceOrderError
+} = exceptions;
 const localVue = createLocalVue();
 
 localVue.use(VueI18n);
@@ -73,7 +78,7 @@ describe('Checkout', () => {
     const paymentPageUrlPrefix = 'http://localhost/paymentpage';
     const getGeoLocationUrl = 'http://localhost/geolocation';
     const spinnerTimeout = 100;
-
+    const otacToAuthExchanger = () => '';
     const applicationName = 'Jest';
 
     const propsData = {
@@ -88,7 +93,8 @@ describe('Checkout', () => {
         paymentPageUrlPrefix,
         getGeoLocationUrl,
         applicationName,
-        spinnerTimeout
+        spinnerTimeout,
+        otacToAuthExchanger
     };
 
     let windowLocationSpy;
@@ -976,42 +982,100 @@ describe('Checkout', () => {
 
             describe('when invoked', () => {
                 describe('AND `isLoggedIn` is falsey', () => {
-                    it('should call `setupGuestUser`', async () => {
-                        // Arrange
-                        const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
+                    describe('AND `isGuestCreated` is falsey', () => {
+                        it('should call `setupGuestUser`', async () => {
+                            // Arrange
+                            const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
 
-                        // Act
-                        await wrapper.vm.submitCheckout();
+                            // Act
+                            await wrapper.vm.submitCheckout();
 
-                        // Assert
-                        expect(setupGuestUserSpy).toHaveBeenCalled();
+                            // Assert
+                            expect(setupGuestUserSpy).toHaveBeenCalled();
+                        });
+                    });
+
+                    describe('AND `isGuestCreated` is truthy', () => {
+                        it('should not call `setupGuestUser`', async () => {
+                            // Arrange
+                            wrapper = mount(VueCheckout, {
+                                store: createStore({
+                                    ...defaultCheckoutState,
+                                    isGuestCreated: true
+                                }),
+                                i18n,
+                                localVue,
+                                propsData,
+                                mocks: {
+                                    $logger
+                                }
+                            });
+                            const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
+
+                            // Act
+                            await wrapper.vm.submitCheckout();
+
+                            // Assert
+                            expect(setupGuestUserSpy).not.toHaveBeenCalled();
+                        });
                     });
                 });
 
                 describe('AND `isLoggedIn` is truthy', () => {
-                    it('should not call `setupGuestUser`', async () => {
-                        // Arrange
-                        wrapper = mount(VueCheckout, {
-                            store: createStore({
-                                ...defaultCheckoutState,
-                                serviceType: CHECKOUT_METHOD_COLLECTION,
-                                isLoggedIn: true
-                            }),
-                            i18n,
-                            localVue,
-                            propsData,
-                            mocks: {
-                                $logger
-                            }
+                    describe('AND `isGuestCreated` is falsey', () => {
+                        it('should not call `setupGuestUser`', async () => {
+                            // Arrange
+                            wrapper = mount(VueCheckout, {
+                                store: createStore({
+                                    ...defaultCheckoutState,
+                                    serviceType: CHECKOUT_METHOD_COLLECTION,
+                                    isLoggedIn: true,
+                                    isGuestCreated: false
+                                }),
+                                i18n,
+                                localVue,
+                                propsData,
+                                mocks: {
+                                    $logger
+                                }
+                            });
+
+                            const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
+
+                            // Act
+                            await wrapper.vm.submitCheckout();
+
+                            // Assert
+                            expect(setupGuestUserSpy).not.toHaveBeenCalled();
                         });
+                    });
 
-                        const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
+                    describe('AND `isGuestCreated` is truthy', () => {
+                        it('should not call `setupGuestUser`', async () => {
+                            // Arrange
+                            wrapper = mount(VueCheckout, {
+                                store: createStore({
+                                    ...defaultCheckoutState,
+                                    serviceType: CHECKOUT_METHOD_COLLECTION,
+                                    isLoggedIn: true,
+                                    isGuestCreated: true
+                                }),
+                                i18n,
+                                localVue,
+                                propsData,
+                                mocks: {
+                                    $logger
+                                }
+                            });
 
-                        // Act
-                        await wrapper.vm.submitCheckout();
+                            const setupGuestUserSpy = jest.spyOn(wrapper.vm, 'setupGuestUser');
 
-                        // Assert
-                        expect(setupGuestUserSpy).not.toHaveBeenCalled();
+                            // Act
+                            await wrapper.vm.submitCheckout();
+
+                            // Assert
+                            expect(setupGuestUserSpy).not.toHaveBeenCalled();
+                        });
                     });
                 });
 
@@ -1090,8 +1154,6 @@ describe('Checkout', () => {
                 });
 
                 describe('AND there is an error caught', () => {
-                    const { errorMessages } = i18n.messages[i18n.locale];
-
                     let handleErrorStateSpy;
 
                     beforeEach(() => {
@@ -1105,7 +1167,7 @@ describe('Checkout', () => {
                     describe('AND the error is of type `CreateGuestUserError`', () => {
                         it('should call `handleErrorState` with the guest user creation error info', async () => {
                             // Arrange
-                            const error = new CreateGuestUserError('An error');
+                            const error = new CreateGuestUserError('CreateGuestUserError exception!');
 
                             jest.spyOn(wrapper.vm, 'setupGuestUser').mockImplementation(() => {
                                 throw error;
@@ -1115,19 +1177,14 @@ describe('Checkout', () => {
                             await wrapper.vm.submitCheckout();
 
                             // Assert
-                            expect(handleErrorStateSpy).toHaveBeenCalledWith({
-                                error,
-                                messageToDisplay: errorMessages.guestUserCreationFailure,
-                                eventToEmit: EventNames.CheckoutSetupGuestFailure,
-                                logMessage: 'Checkout Setup Guest Failure'
-                            });
+                            expect(handleErrorStateSpy).toHaveBeenCalledWith(error);
                         });
                     });
 
                     describe('AND the error is of type `UpdateCheckoutError`', () => {
                         it('should call `handleErrorState` with the update checkout error info', async () => {
                             // Arrange
-                            const error = new UpdateCheckoutError('An error');
+                            const error = new UpdateCheckoutError('UpdateCheckoutError exception!');
 
                             jest.spyOn(wrapper.vm, 'handleUpdateCheckout').mockImplementation(() => {
                                 throw error;
@@ -1137,18 +1194,14 @@ describe('Checkout', () => {
                             await wrapper.vm.submitCheckout();
 
                             // Assert
-                            expect(handleErrorStateSpy).toHaveBeenCalledWith({
-                                error,
-                                eventToEmit: EventNames.CheckoutUpdateFailure,
-                                logMessage: 'Checkout Update Failure'
-                            });
+                            expect(handleErrorStateSpy).toHaveBeenCalledWith(error);
                         });
                     });
 
                     describe('AND the error is of type `PlaceOrderError`', () => {
                         it('should call `handleErrorState` with the place order error info', async () => {
                             // Arrange
-                            const error = new PlaceOrderError('An error');
+                            const error = new PlaceOrderError('PlaceOrderError exception!');
 
                             jest.spyOn(wrapper.vm, 'submitOrder').mockImplementation(() => {
                                 throw error;
@@ -1158,18 +1211,14 @@ describe('Checkout', () => {
                             await wrapper.vm.submitCheckout();
 
                             // Assert
-                            expect(handleErrorStateSpy).toHaveBeenCalledWith({
-                                error,
-                                eventToEmit: EventNames.CheckoutPlaceOrderFailure,
-                                logMessage: 'Place Order Failure'
-                            });
+                            expect(handleErrorStateSpy).toHaveBeenCalledWith(error);
                         });
                     });
 
                     describe('AND the error is of another type', () => {
                         it('should call `handleErrorState` with the place order error info', async () => {
                             // Arrange
-                            const error = new Error('An error');
+                            const error = new Error('An unknown error!');
 
                             jest.spyOn(wrapper.vm, 'handleUpdateCheckout').mockImplementation(() => {
                                 throw error;
@@ -1179,11 +1228,7 @@ describe('Checkout', () => {
                             await wrapper.vm.submitCheckout();
 
                             // Assert
-                            expect(handleErrorStateSpy).toHaveBeenCalledWith({
-                                error,
-                                eventToEmit: EventNames.CheckoutFailure,
-                                logMessage: 'Consumer Checkout Failure'
-                            });
+                            expect(handleErrorStateSpy).toHaveBeenCalledWith(error);
                         });
                     });
                 });
@@ -1223,7 +1268,11 @@ describe('Checkout', () => {
                     };
 
                     // Act
-                    wrapper.vm.logInvoker('Logger says hi', eventData, $logger.logInfo);
+                    wrapper.vm.logInvoker({
+                        message: 'Logger says hi',
+                        data: eventData,
+                        logMethod: $logger.logInfo
+                    });
 
                     // Assert
                     expect($logger.logInfo).toHaveBeenCalled();
@@ -1262,11 +1311,11 @@ describe('Checkout', () => {
                     wrapper.vm.handleNonFulfillableCheckout();
 
                     // Assert
-                    expect(logInvokerSpy).toHaveBeenCalledWith(
-                        'Consumer Checkout Not Fulfillable',
-                        wrapper.vm.eventData,
-                        $logger.logWarn
-                    );
+                    expect(logInvokerSpy).toHaveBeenCalledWith({
+                        message: 'Consumer Checkout Not Fulfillable',
+                        data: wrapper.vm.eventData,
+                        logMethod: $logger.logWarn
+                    });
                 });
 
                 it('should make a call to `trackFormErrors`', () => {
@@ -1390,7 +1439,8 @@ describe('Checkout', () => {
                         emailAddress: customer.email,
                         registrationSource: 'Guest'
                     },
-                    timeout: 1000
+                    otacToAuthExchanger,
+                    timeout: 10000
                 };
                 const createGuestUserSpy = jest.spyOn(VueCheckout.methods, 'createGuestUser');
                 const wrapper = shallowMount(VueCheckout, {
@@ -1626,7 +1676,7 @@ describe('Checkout', () => {
                             'BS1 1AA'
                         ]
                     },
-                    timeout: 1000
+                    timeout: 10000
                 };
 
                 beforeEach(async () => {
@@ -1673,7 +1723,7 @@ describe('Checkout', () => {
                 beforeEach(() => {
                     jest.spyOn(VueCheckout.methods, 'initialise').mockImplementation();
 
-                    localStore = createStore(defaultCheckoutState, { ...defaultCheckoutActions, getGeoLocation: jest.fn(async () => Promise.reject(errorMsg)) });
+                    localStore = createStore(defaultCheckoutState, { ...defaultCheckoutActions, getGeoLocation: jest.fn(async () => Promise.reject(new Error(errorMsg))) });
                     wrapper = mount(VueCheckout, {
                         store: localStore,
                         i18n,
@@ -1687,13 +1737,19 @@ describe('Checkout', () => {
 
                 it('should call `logInvoker` with a warning', async () => {
                     // Arrange
+                    const error = new Error(errorMsg);
                     const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
 
                     // Act
                     await wrapper.vm.lookupGeoLocation();
 
                     // Assert
-                    expect(logInvokerSpy).toHaveBeenCalledWith('Geo Location Lookup Failed', wrapper.vm.eventData, $logger.logWarn);
+                    expect(logInvokerSpy).toHaveBeenCalledWith({
+                        message: 'Geo Location Lookup Failed',
+                        data: wrapper.vm.eventData,
+                        logMethod: $logger.logWarn,
+                        error
+                    });
                 });
             });
 
@@ -1744,6 +1800,7 @@ describe('Checkout', () => {
             });
 
             describe('when `getBasket` request fails', () => {
+                // Arrange
                 let wrapper;
 
                 beforeEach(() => {
@@ -1771,11 +1828,14 @@ describe('Checkout', () => {
                 });
 
                 it('should call `logError`', async () => {
+                    // Arrange
+                    const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
+
                     // Act
                     await wrapper.vm.loadBasket();
 
                     // Assert
-                    expect($logger.logError).toHaveBeenCalled();
+                    expect(logInvokerSpy).toHaveBeenCalled();
                 });
             });
 
@@ -1811,8 +1871,13 @@ describe('Checkout', () => {
 
             describe('when `getAddress` request fails', () => {
                 it('should emit failure event and log a warning', async () => {
-                    const store = createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAddress: jest.fn(async () => Promise.reject()) });
                     // Arrange
+                    const error = new Error('Doh exception man!');
+                    const eventData = {
+                        isLoggedIn: defaultCheckoutState.isLoggedIn,
+                        serviceType: defaultCheckoutState.serviceType
+                    };
+                    const store = createStore(defaultCheckoutState, { ...defaultCheckoutActions, getAddress: jest.fn(async () => Promise.reject(error)) });
                     const wrapper = mount(VueCheckout, {
                         store,
                         i18n,
@@ -1822,6 +1887,7 @@ describe('Checkout', () => {
                             $logger
                         }
                     });
+                    const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
 
                     // Act
                     await wrapper.vm.loadAddress();
@@ -1829,7 +1895,12 @@ describe('Checkout', () => {
                     // Assert
                     expect(wrapper.emitted(EventNames.CheckoutAddressGetFailure).length).toBe(1);
                     expect(wrapper.emitted(EventNames.CheckoutAddressGetSuccess)).toBeUndefined();
-                    expect($logger.logWarn).toHaveBeenCalledWith('Get checkout address failure', store, {});
+                    expect(logInvokerSpy).toHaveBeenCalledWith({
+                        message: 'Get checkout address failure',
+                        data: eventData,
+                        logMethod: $logger.logWarn,
+                        error
+                    });
 
                     expect(wrapper.vm.hasCheckoutLoadedSuccessfully).toBe(true);
                 });
@@ -1858,19 +1929,20 @@ describe('Checkout', () => {
         describe('handleErrorState ::', () => {
             let wrapper;
             let eventData;
-            let payload;
+            let error;
+            let messageToDisplay;
+            let eventToEmit;
             let logInvokerSpy;
             let trackFormInteractionSpy;
             let scrollToElementSpy;
 
             beforeEach(() => {
                 // Arrange
-                payload = {
-                    error: new Error('An error occurred'),
-                    messageToDisplay: 'Oops, something happened!',
-                    eventToEmit: EventNames.CheckoutFailure,
-                    logMessage: 'Log this error'
-                };
+                error = new Error('An error occurred');
+
+                messageToDisplay = 'Something went wrong, please try again later';
+
+                eventToEmit = EventNames.CheckoutFailure;
 
                 eventData = {
                     isLoggedIn: defaultCheckoutState.isLoggedIn,
@@ -1898,66 +1970,61 @@ describe('Checkout', () => {
 
             it('should emit passed event with the event data and error', () => {
                 // Act
-                wrapper.vm.handleErrorState(payload);
+                wrapper.vm.handleErrorState(error);
 
                 // Assert
-                expect(wrapper.emitted(payload.eventToEmit).length).toBe(1);
-                expect(wrapper.emitted(payload.eventToEmit)[0][0]).toEqual({
-                    ...eventData,
-                    error: payload.error
-                });
+                expect(wrapper.emitted(eventToEmit).length).toBe(1);
+                expect(wrapper.emitted(eventToEmit)[0][0]).toEqual({ ...eventData, error });
             });
 
             it('should assign `messageToDisplay` to `genericErrorMessage` where there is a `messageToDisplay`', () => {
                 // Act
-                wrapper.vm.handleErrorState(payload);
+                wrapper.vm.handleErrorState(error);
 
                 // Assert
-                expect(wrapper.vm.genericErrorMessage).toEqual(payload.messageToDisplay);
+                expect(wrapper.vm.genericErrorMessage).toEqual(messageToDisplay);
             });
 
             it('should assign the generic server error to `genericErrorMessage` where there is no `messageToDisplay`', () => {
                 // Arrange
-                payload.messageToDisplay = null;
+                messageToDisplay = null;
 
                 // Act
-                wrapper.vm.handleErrorState(payload);
+                wrapper.vm.handleErrorState(error);
 
                 // Assert
                 expect(wrapper.vm.genericErrorMessage).toMatchSnapshot();
             });
 
-            it('should call `logInvoker` to log the error, passing the `logMessage` and `eventData`', () => {
+            it('should call `logInvoker` to log the error, passing the `eventData` and `error`', () => {
                 // Act
-                wrapper.vm.handleErrorState(payload);
+                wrapper.vm.handleErrorState(error);
 
                 // Assert
-                expect(logInvokerSpy).toHaveBeenCalledWith(
-                    payload.logMessage,
-                    {
-                        ...eventData,
-                        error: payload.error
-                    },
-                    $logger.logError
-                );
+                expect(logInvokerSpy).toHaveBeenCalledWith({
+                    message: 'Consumer Checkout Failure',
+                    data: eventData,
+                    logMethod: $logger.logError,
+                    error
+                });
             });
 
             it('should call `trackFormInteraction` with the error information', () => {
                 // Act
-                wrapper.vm.handleErrorState(payload);
+                wrapper.vm.handleErrorState(error);
 
                 // Assert
-                expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${payload.error.message}` });
+                expect(trackFormInteractionSpy).toHaveBeenCalledWith({ action: 'error', error: `error_${error.message}` });
             });
 
-            it('should call `scrollToElement` with "errorAlert"', async () => {
+            it('should call `scrollToElement` with the `errorAlert` element', async () => {
                 // Act
-                wrapper.vm.handleErrorState(payload);
+                wrapper.vm.handleErrorState(error);
 
                 await wrapper.vm.$nextTick();
 
                 // Assert
-                expect(scrollToElementSpy).toHaveBeenCalledWith('errorAlert');
+                expect(scrollToElementSpy).toHaveBeenCalledWith(wrapper.vm.$refs.errorAlert.$el);
             });
         });
 
@@ -1966,7 +2033,7 @@ describe('Checkout', () => {
                 jest.clearAllMocks();
             });
 
-            it('should call `scrollTo` with the element when it exists', () => {
+            it('should call `scrollTo` with the default `options` when the element exists', () => {
                 // Arrange
                 const ref = 'errorAlert';
                 const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
@@ -1989,15 +2056,14 @@ describe('Checkout', () => {
                 const alertElement = wrapper.findComponent({ ref }).vm.$el;
 
                 // Act
-                wrapper.vm.scrollToElement(ref);
+                wrapper.vm.scrollToElement(alertElement);
 
                 // Assert
                 expect(scrollToSpy).toHaveBeenCalledWith(alertElement, 650, { duration: 650, offset: -20 });
             });
 
-            it('should call `scrollTo` with the element when it does not exists', () => {
+            it('should not call `scrollTo` with the element when it does not exists', () => {
                 // Arrange
-                const ref = 'errorAlert';
                 const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
 
                 const wrapper = mount(VueCheckout, {
@@ -2011,10 +2077,70 @@ describe('Checkout', () => {
                 });
 
                 // Act
-                wrapper.vm.scrollToElement(ref);
+                wrapper.vm.scrollToElement(null);
 
                 // Assert
                 expect(scrollToSpy).not.toHaveBeenCalled();
+            });
+
+            it('should accept `options` as a parameter', () => {
+                // Arrange
+                const ref = 'errorAlert';
+                const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
+
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    },
+                    data () {
+                        return {
+                            genericErrorMessage: 'Some error'
+                        };
+                    }
+                });
+
+                const alertElement = wrapper.findComponent({ ref }).vm.$el;
+
+                // Act
+                wrapper.vm.scrollToElement(alertElement, { offset: -100 });
+
+                // Assert
+                expect(scrollToSpy).toHaveBeenCalledWith(alertElement, 650, { duration: 650, offset: -100 });
+            });
+        });
+
+        describe('scrollToFirstInlineError ::', () => {
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('should call `scrollToElement` with the first inline error and -100 offset', async () => {
+                // Arrange
+                const wrapper = mount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    }
+                });
+
+                const scrollToElementSpy = jest.spyOn(wrapper.vm, 'scrollToElement');
+
+                const firstErrorElement = document.querySelector('[data-js-error-message]');
+
+                // Act
+                wrapper.vm.scrollToFirstInlineError(firstErrorElement);
+
+                await wrapper.vm.$nextTick();
+
+                // Assert
+                expect(scrollToElementSpy).toHaveBeenCalledWith(firstErrorElement, { offset: -100 });
             });
         });
 
@@ -2371,7 +2497,13 @@ describe('Checkout', () => {
                 it('should make a call to `$logger.logWarn` with the correct payload', async () => {
                     // Arrange
                     isFormValidSpy.mockReturnValue(false);
+
                     const store = createStore();
+
+                    const eventData = {
+                        isLoggedIn: defaultCheckoutState.isLoggedIn,
+                        serviceType: defaultCheckoutState.serviceType
+                    };
 
                     const wrapper = mount(VueCheckout, {
                         store,
@@ -2384,17 +2516,20 @@ describe('Checkout', () => {
                         }
                     });
 
-                    const loggerWarnSpy = jest.spyOn(wrapper.vm.$logger, 'logWarn');
+                    const logInvokerSpy = jest.spyOn(wrapper.vm, 'logInvoker');
 
                     // Act
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(loggerWarnSpy).toHaveBeenCalledWith(
-                        'Checkout Validation Error',
-                        store,
-                        mockValidationState
-                    );
+                    expect(logInvokerSpy).toHaveBeenCalledWith({
+                        message: 'Checkout Validation Error',
+                        data: {
+                            ...eventData,
+                            validationState: mockValidationState
+                        },
+                        logMethod: $logger.logWarn
+                    });
                 });
             });
         });
@@ -2470,16 +2605,11 @@ describe('Checkout', () => {
         });
 
         describe('redirectToPayment ::', () => {
-            beforeEach(() => {
-                jest.useFakeTimers();
-            });
-
             afterEach(() => {
                 jest.clearAllMocks();
-                jest.clearAllTimers();
             });
 
-            it('should redirect to the payment page after 1 second', () => {
+            it('should redirect to the payment page', () => {
                 // Arrange
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
@@ -2490,29 +2620,9 @@ describe('Checkout', () => {
 
                 // Act
                 wrapper.vm.redirectToPayment();
-
-                jest.advanceTimersByTime(1000);
 
                 // Assert
                 expect(windowLocationSpy).toHaveBeenCalledWith(`${paymentPageUrlPrefix}/${defaultCheckoutState.orderId}`);
-            });
-
-            it('should not redirect to the payment page before 1 second', () => {
-                // Arrange
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Act
-                wrapper.vm.redirectToPayment();
-
-                jest.advanceTimersByTime(999);
-
-                // Assert
-                expect(windowLocationSpy).not.toHaveBeenCalled();
             });
         });
 
@@ -2613,7 +2723,7 @@ describe('Checkout', () => {
                         },
                         referralState: 'ReferredByWeb'
                     },
-                    timeout: 1000
+                    timeout: 10000
                 };
 
                 // Act
@@ -2654,7 +2764,11 @@ describe('Checkout', () => {
                     await wrapper.vm.submitOrder();
 
                     // Assert
-                    expect(logInvokerSpy).toHaveBeenCalledWith('Consumer Checkout Successful', wrapper.vm.eventData, $logger.logInfo);
+                    expect(logInvokerSpy).toHaveBeenCalledWith({
+                        message: 'Consumer Checkout Successful',
+                        data: wrapper.vm.eventData,
+                        logMethod: $logger.logInfo
+                    });
                 });
             });
 

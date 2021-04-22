@@ -25,6 +25,7 @@ const getBasketDeliveryUrl = '/get-basket-delivery.json';
 const getBasketCollectionUrl = '/get-basket-collection.json';
 const updateCheckoutUrl = '/update-checkout.json';
 const updateCheckoutErrorsUrl = '/update-checkout-errors.json';
+const updateCheckoutServerErrorUrl = '/update-checkout-server-error.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
 const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
@@ -39,10 +40,22 @@ CheckoutMock.setupCheckoutMethod(getBasketDeliveryUrl);
 CheckoutMock.setupCheckoutMethod(getBasketCollectionUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutErrorsUrl);
+CheckoutMock.setupCheckoutMethod(updateCheckoutServerErrorUrl);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderUrl);
 CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
 CheckoutMock.passThroughAny();
+
+const checkoutIssues = 'Checkout Issues (Response from server but order not fulfillable)';
+const serverError = 'Server Error (Response from server is an error)';
+const ISSUES = 'ISSUES';
+const SERVER = 'SERVER';
+
+const errorOptions = {
+    None: null,
+    [checkoutIssues]: ISSUES,
+    [serverError]: SERVER
+};
 
 // eslint-disable-next-line
 const mockAuthToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
@@ -81,8 +94,8 @@ export const CheckoutComponent = () => ({
             default: boolean('Is ASAP available', true)
         },
 
-        hasErrors: {
-            default: boolean('Has Checkout Errors', false)
+        error: {
+            default: select('Errors', errorOptions)
         }
     },
 
@@ -100,11 +113,21 @@ export const CheckoutComponent = () => ({
         },
 
         updateCheckoutUrl () {
-            return this.hasErrors ? updateCheckoutErrorsUrl : updateCheckoutUrl;
+            if (this.error) {
+                return this.error === SERVER ? updateCheckoutServerErrorUrl : updateCheckoutErrorsUrl;
+            }
+
+            return updateCheckoutUrl;
         },
 
         checkoutAvailableFulfilmentUrl () {
             return this.isAsapAvailable ? checkoutAvailableFulfilmentUrl : checkoutAvailableFulfilmentPreorderUrl;
+        }
+    },
+
+    methods: {
+        otacToAuthExchanger () {
+            return mockAuthToken;
         }
     },
 
@@ -122,6 +145,7 @@ export const CheckoutComponent = () => ({
         ':create-guest-url="createGuestUrl" ' +
         ':get-basket-url="getBasketUrl" ' +
         ':authToken="authToken" ' +
+        ':otacToAuthExchanger="otacToAuthExchanger"' +
         ':locale="locale" ' +
         ':loginUrl="loginUrl" ' +
         ':getAddressUrl="getAddressUrl" ' +

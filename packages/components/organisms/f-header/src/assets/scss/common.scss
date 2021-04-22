@@ -3,7 +3,7 @@
 // The theme is handled via a data-attribute on the component
 $theme: 'jet' !default;
 
-@import  '~@justeat/fozzie/src/scss/fozzie';
+@import '~@justeat/fozzie/src/scss/fozzie';
 
 /**
  * Component Variables
@@ -31,5 +31,27 @@ $header--transparent-opacity        : 0.7;
 @mixin theme($type) {
     [data-theme-header="#{$type}"] & {
         @content;
+    }
+}
+
+// removes scroll
+.is-navInView {
+    @include media('<=mid') {
+        overflow: hidden;
+
+        body {
+            position: fixed;
+            width: 100%;
+            padding-top: $header-height--narrow;
+        }
+    }
+}
+
+// If the header is already fixed/absolute (like when the header is transparent)
+// then the content doesn't need to be padded down when the nav comes into view, as it's already flush with the top of the screen
+// This is added in the f-header JS
+.is-navInView--noPad {
+    body {
+        padding-top: 0;
     }
 }

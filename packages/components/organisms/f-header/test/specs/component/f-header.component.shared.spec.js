@@ -1,9 +1,9 @@
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
-const Header = require('../../../../test-utils/component-objects/f-header.component');
+const Header = require('../../../test-utils/component-objects/f-header.component');
 
 const header = new Header('organism', 'header-component');
 
-describe('Shared - f-header component tests', () => {
+describe('Shared - f-header component tests - @browserstack', () => {
     beforeEach(() => {
         header.withQuery('&knob-Locale', 'en-GB');
         header.withQuery('&knob-Show offers link', 'true');

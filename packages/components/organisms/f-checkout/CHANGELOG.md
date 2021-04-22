@@ -3,6 +3,86 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.92.0
+------------------------------
+*April 16, 2021*
+
+### Added
+- Use AuthToken phone nos. if checkout api fails to return a customer phone no.
+
+
+v0.91.0
+------------------------------
+*April 14, 2021*
+
+### Added
+- Refactored/Aligned logging calls
+- Refactored error handling
+
+
+v0.90.0
+------------------------------
+*April 13, 2021*
+
+### Changed
+- Allowed address line 2 to not exist in PATCH request
+
+
+v0.89.0
+------------------------------
+*April 13, 2021*
+
+### Added
+- Automatic scrolling to the first inline error when trying to proceed to the payment page.
+
+
+v0.88.0
+------------------------------
+*April 12, 2021*
+
+### Changed
+- PATCH Checkout now sends null for lines 3 and 4 of address instead of empty string
+
+
+v0.87.1
+------------------------------
+*April 12, 2021*
+
+### Changed
+- `checkoutTimeout` prop now defaults to ten seconds
+
+
+v0.87.0
+------------------------------
+*April 12, 2021*
+
+### Added
+- `isGuestCreated` store flag that prevents multiple guest accounts from being created when form is resubmitted after failed validation
+
+
+v0.86.0
+------------------------------
+*April 12, 2021*
+
+### Removed
+- Hardcoded timeout before redirecting to the payment page.
+
+
+v0.85.0
+------------------------------
+*April 8, 2021*
+
+### Added
+- `otacToAuthExchanger` prop that provides functionality to exchange OTAC to JWT token for guest checkout.
+
+
+v0.84.1
+------------------------------
+*April 8, 2021*
+
+### Added
+- Ability to display server errors in Storybook
+
 
 v0.84.0
 ------------------------------

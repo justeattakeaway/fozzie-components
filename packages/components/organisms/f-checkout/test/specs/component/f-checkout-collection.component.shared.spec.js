@@ -1,11 +1,11 @@
 import forEach from 'mocha-each';
 
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
-const Checkout = require('../../../../test-utils/component-objects/f-checkout.component');
+const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
 
 const checkout = new Checkout('organism', 'checkout-component');
 
-describe('f-checkout "collection" component tests', () => {
+describe('f-checkout "collection" component tests - @browserstack', () => {
     beforeEach(() => {
         checkout.withQuery('&knob-Service Type', 'collection')
                 .withQuery('&knob-Is User Logged In', true);

@@ -348,6 +348,7 @@ module.exports = class Checkout extends Page {
     *Submit the checkout form.
     */
     goToPayment () {
+        this.goToPaymentButton.scrollIntoView();
         this.goToPaymentButton.click();
     }
 

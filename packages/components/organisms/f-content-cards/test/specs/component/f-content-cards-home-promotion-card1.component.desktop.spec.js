@@ -5,7 +5,7 @@ const HomePromotionCard2 = require('../../../test-utils/component-objects/f-cont
 const card = new HomePromotionCard1('molecule-folder', 'f-content-cards--home-promotion-card-1-component');
 const card2 = new HomePromotionCard2('molecule-folder', 'f-content-cards--home-promotion-card-2-component');
 
-describe('home promotion card 1 component tests', () => {
+describe('home promotion card 1 component tests - @browserstack', () => {
     beforeEach(() => {
         const pageUrl = buildUrl(card.componentType, card.componentName, card.path);
 

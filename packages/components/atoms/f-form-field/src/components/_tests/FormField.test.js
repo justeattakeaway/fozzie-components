@@ -70,6 +70,31 @@ describe('FormField', () => {
                 expect(formInput.attributes('type')).toBe(definedType);
             });
 
+            it('should include the `min` and `max` attributes if inputType=`number`', () => {
+                // Arrange
+                const propsData = {
+                    inputType: 'number'
+                };
+
+                // Act
+                const wrapper = shallowMount(FormField, { propsData });
+                const formInput = wrapper.find('input');
+
+                // Assert
+                expect(formInput.attributes('min')).toBeDefined();
+                expect(formInput.attributes('max')).toBeDefined();
+            });
+
+            it('should not include the `min` and `max` attributes for default inputType', () => {
+                // Arrange & Act
+                const wrapper = shallowMount(FormField);
+                const formInput = wrapper.find('input');
+
+                // Assert
+                expect(formInput.attributes('min')).toBeUndefined();
+                expect(formInput.attributes('max')).toBeUndefined();
+            });
+
             it('should display the dropdown component if inputType=`dropdown`', () => {
                 // Arrange
                 const propsData = {
@@ -213,6 +238,43 @@ describe('FormField', () => {
 
                 // Assert
                 expect(formLabel.attributes('data-test-id')).toBe(`formfield-${attrsData.attrs.name}-label`);
+            });
+        });
+    });
+
+    describe('events ::', () => {
+        describe('@input ::', () => {
+            it.each(VALID_INPUT_TYPES)('should only trigger one event emission for inputType `%s`', inputType => {
+                // Arrange
+                const propsData = { inputType };
+                const wrapper = shallowMount(FormField, { propsData });
+
+                const formInput = wrapper.find('input');
+
+                // Act
+                formInput.trigger('input');
+
+                // Assert
+                expect(wrapper.emitted().input).toHaveLength(1);
+            });
+        });
+
+        describe('@change ::', () => {
+            it('should only trigger one event emission', () => {
+                // Arrange
+                const propsData = {
+                    inputType: 'dropdown',
+                    dropdownOptions: []
+                };
+                const wrapper = mount(FormField, { propsData });
+
+                const formDropdown = wrapper.find('select');
+
+                // Act
+                formDropdown.trigger('change');
+
+                // Assert
+                expect(wrapper.emitted().input).toHaveLength(1);
             });
         });
     });

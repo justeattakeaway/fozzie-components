@@ -5,7 +5,7 @@ const CookieBanner = require('../../../../test-utils/component-objects/f-cookieC
 
 const cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
 
-describe('New - f-cookieBanner component tests', () => {
+describe('New - f-cookieBanner component tests - @browserstack', () => {
     beforeEach(() => {
         const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
 
@@ -13,25 +13,32 @@ describe('New - f-cookieBanner component tests', () => {
         cookieBanner.waitForComponent();
     });
 
-    it('should display the f-cookieBanner content', () => {
-        // Assert
-        expect(cookieBanner.isCookieBannerContentDisplayed()).toBe(true);
-    });
+    forEach([['full'], ['necessary']])
+    .it('should set "je-cookie_banner" and "je-cookieConsent" to expected cookie values', expectedCookieValue => {
+        // Act
+        cookieBanner.acceptCookies(expectedCookieValue);
 
-    it('should display the f-cookieBanner accept all button', () => {
-        // Assert
-        expect(cookieBanner.isCookieBannerAcceptAllButtonDisplayed()).toBe(true);
-    });
+        // Arrange
+        const bannerCookie = browser.getCookies().filter(cookie => cookie.name === 'je-banner_cookie')[0];
+        const bannerConsent = browser.getCookies().filter(cookie => cookie.name === 'je-cookieConsent')[0];
 
-    it('should display the f-cookieBanner accept necessary button', () => {
         // Assert
-        expect(cookieBanner.isCookieBannerAcceptNecessaryButtonDisplayed()).toBe(true);
+        expect(bannerCookie.value).toBe('130315');
+        expect(bannerConsent.value).toBe(expectedCookieValue);
+        expect(cookieBanner.isCookieBannerComponentDisplayed()).toBe(false);
     });
 });
 
+
 describe('New - Multi-tenant - f-cookieBanner component tests', () => {
-    forEach(['es', 'ie', 'it']) // 'dk' and 'no' disabled for now
-    .it.only('should display the f-cookieBanner component', tenant => {
+    forEach([
+        ['es', 'es/info/politica-de-cookies'],
+        // ['dk', 'dk/cookie-erklaering'],
+        ['ie', 'ie/info/cookies-policy'],
+        ['it', 'it/informazioni/politica-dei-cookie']
+        // ['no', 'no/informasjonskapselerklaering']  'dk' and 'no' disabled for now
+    ])
+    .it('should go to the correct cookie policy page', (tenant, expectedCookiePolicyUrl) => {
         // Arrange
         const countryFormatted = tenant.toUpperCase();
         let formattedLocale = '';
@@ -63,7 +70,11 @@ describe('New - Multi-tenant - f-cookieBanner component tests', () => {
         browser.refresh();
         cookieBanner.waitForComponent();
 
+        // Act
+        cookieBanner.clickCookiePolicyLink();
+        browser.switchWindow(new RegExp(`^.*${expectedCookiePolicyUrl}.*$`));
+
         // Assert
-        expect(cookieBanner.isCookieBannerComponentDisplayed()).toBe(true);
+        expect(browser.getUrl()).toContain(expectedCookiePolicyUrl);
     });
 });

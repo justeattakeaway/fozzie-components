@@ -1,11 +1,10 @@
 const forEach = require('mocha-each');
 
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
-const Registration = require('../../../../test-utils/component-objects/f-registration.component');
-
+const Registration = require('../../../test-utils/component-objects/f-registration.component');
 const registration = new Registration('organism', 'registration-component');
 
-describe('f-registration component tests', () => {
+describe('Shared - f-registration component tests - @browserstack', () => {
     beforeEach(() => {
         const pageUrl = buildUrl(registration.componentType, registration.componentName, registration.path);
 

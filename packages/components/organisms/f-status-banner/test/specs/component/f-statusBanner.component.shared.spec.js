@@ -3,7 +3,7 @@ const StatusBanner = require('../../../test-utils/component-objects/f-statusBann
 
 const statusBanner = new StatusBanner('organism', 'status-banner-component');
 
-describe('f-statusBanner component tests', () => {
+describe('f-statusBanner component tests - @browserstack', () => {
     beforeEach(() => {
         const pageUrl = buildUrl(statusBanner.componentType, statusBanner.componentName, statusBanner.path);
 

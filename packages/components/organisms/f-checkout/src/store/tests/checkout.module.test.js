@@ -5,12 +5,13 @@ import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
-import { mockAuthToken } from '../../components/_tests/helpers/setup';
+import { mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber } from '../../components/_tests/helpers/setup';
 import { version as applicationVerion } from '../../../package.json';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../../constants';
 
 import {
     UPDATE_AUTH,
+    UPDATE_AUTH_GUEST,
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
     UPDATE_BASKET_DETAILS,
     UPDATE_CUSTOMER_DETAILS,
@@ -120,6 +121,7 @@ const defaultState = {
     },
     authToken: '',
     isLoggedIn: false,
+    isGuestCreated: false,
     userNote: '',
     geolocation: null,
     hasAsapSelected: false
@@ -191,6 +193,25 @@ describe('CheckoutModule', () => {
                 // Assert
                 expect(state.authToken).toEqual(authToken);
                 expect(state.isLoggedIn).toBeTruthy();
+            });
+        });
+
+        describe(`${UPDATE_AUTH_GUEST} ::`, () => {
+            it('should update state with authToken and set `isLoggedIn` to false', () => {
+                // Act
+                mutations[UPDATE_AUTH_GUEST](state, authToken);
+
+                // Assert
+                expect(state.authToken).toEqual(authToken);
+                expect(state.isLoggedIn).toBeFalsy();
+            });
+
+            it('should update state with `isGuestCreated` set to true', () => {
+                // Act
+                mutations[UPDATE_AUTH_GUEST](state, authToken);
+
+                // Assert
+                expect(state.isGuestCreated).toBeTruthy();
             });
         });
 
@@ -273,7 +294,6 @@ describe('CheckoutModule', () => {
     describe('actions ::', () => {
         let commit;
         let dispatch;
-
         let payload;
 
         beforeEach(() => {
@@ -284,13 +304,14 @@ describe('CheckoutModule', () => {
                 url: 'http://localhost/account/checkout',
                 tenant: 'uk',
                 language: 'en-GB',
-                timeout: 1000,
+                timeout: 10000,
                 postData: null
             };
         });
 
         describe('getCheckout ::', () => {
             let config;
+            let checkoutDeliveryCopy;
 
             beforeEach(() => {
                 config = {
@@ -301,7 +322,10 @@ describe('CheckoutModule', () => {
                     timeout: payload.timeout
                 };
 
-                axios.get = jest.fn(() => Promise.resolve({ data: checkoutDelivery }));
+                // Use a new copy per test so any mutations do not affect subsequent tests
+                checkoutDeliveryCopy = Object.assign(checkoutDelivery);
+
+                axios.get = jest.fn(() => Promise.resolve({ data: checkoutDeliveryCopy }));
             });
 
             it(`should get the checkout details from the backend and call ${UPDATE_STATE} mutation.`, async () => {
@@ -310,7 +334,7 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
+                expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
             });
 
             it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
@@ -319,6 +343,87 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
+            });
+
+            describe('when the `customer` model is not returned from the api', () => {
+                it('should not error when checking phone number', async () => {
+                    // Arrange
+                    checkoutDeliveryCopy.customer = null;
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDeliveryCopy.customer).toBe(null);
+                    expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
+                });
+            });
+
+            describe('when the customers phone number is returned from the api', () => {
+                it('should not use neither of AuthToken phone numbers', async () => {
+                    // Arrange
+                    const expectedPhoneNumber = '5678901234';
+                    checkoutDeliveryCopy.customer = {
+                        phoneNumber: expectedPhoneNumber
+                    };
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
+                });
+            });
+
+            describe('when the customers phone number is not returned from the api', () => {
+                beforeEach(() => {
+                    checkoutDeliveryCopy.customer = {
+                        phoneNumber: null
+                    };
+                });
+
+                afterEach(() => {
+                    // Reset the AuthToken for subsequent tests
+                    state.authToken = authToken;
+                });
+
+                it('should assign the AuthToken mobile number to the `customer.phoneNumber`', async () => {
+                    // Arrange
+                    state.authToken = mockAuthToken;
+                    const expectedPhoneNumber = '9876543210'; // AuthToken Mobile No.
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
+                });
+
+                it('should assign the AuthToken phone number to the `customer.phoneNumber` if the AuthToken mobile number is missing', async () => {
+                    // Arrange
+                    state.authToken = mockAuthTokenNoMobileNumber;
+                    config.headers.Authorization = `Bearer ${state.authToken}`;
+                    const expectedPhoneNumber = '0123456789'; // AuthToken Phone No.
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
+                });
+
+                it('should assign nothing to the `customer.phoneNumber` if both the AuthToken phone numbers are missing', async () => {
+                    // Arrange
+                    state.authToken = mockAuthTokenNoNumbers;
+                    config.headers.Authorization = `Bearer ${state.authToken}`;
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDeliveryCopy.customer.phoneNumber).toBeUndefined();
+                });
             });
         });
 
@@ -497,6 +602,8 @@ describe('CheckoutModule', () => {
                     email: 'joe@test.com'
                 };
 
+                payload.otacToAuthExchanger = () => authToken;
+
                 config = {
                     headers: {
                         'Content-Type': 'application/json',
@@ -520,6 +627,14 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(axios.post).toHaveBeenCalledWith(payload.url, payload.data, config);
+            });
+
+            it(`should call ${UPDATE_AUTH_GUEST} mutation.`, async () => {
+                // Act
+                await createGuestUser({ commit, state }, payload);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_AUTH_GUEST, authToken);
             });
         });
 
@@ -578,9 +693,9 @@ describe('CheckoutModule', () => {
                 }));
             });
 
-            describe('if the user is logged in', () => {
+            describe('if the auth token is set', () => {
                 beforeEach(() => {
-                    state.isLoggedIn = true;
+                    state.authToken = authToken;
                 });
 
                 it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation.`, async () => {
@@ -593,9 +708,9 @@ describe('CheckoutModule', () => {
                 });
             });
 
-            describe('if the user is not logged in', () => {
+            describe('if the auth token is not set', () => {
                 beforeEach(() => {
-                    state.isLoggedIn = false;
+                    state.authToken = null;
                 });
 
                 it('should not make api call and should not call mutation.', async () => {

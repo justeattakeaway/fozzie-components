@@ -3,12 +3,11 @@ const browserstack = require('browserstack-local');
 // Used to set correct directories for WDIO test output
 global.baseDir = __dirname;
 
-const { setTestEnvironment, setTestType, getBaseUrl } = require('./test/utils/configuration-helper');
-const { browserStackCapabilities } = require('./test/utils/browserstack-helper');
 
-const testEnvironment = setTestEnvironment();
-const testType = setTestType();
-const bsCapabilities = browserStackCapabilities();
+const { setTestSettings } = require('./test/utils/configuration-helper');
+const browserstackSettings = require('./test/configuration/browserstack/browserstack.settings').default();
+const { TEST_TYPE } = process.env;
+const testSettings = setTestSettings();
 
 exports.config = {
 
@@ -36,20 +35,24 @@ exports.config = {
     // NPM script (see https://docs.npmjs.com/cli/run-script) then the current working
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
-    specs: testType.specs,
+    // Specs are defined in test/configuration/browserstack/browserstack.settings.js
+    // specs: [],
     // Patterns to exclude.
-    exclude: [
-        // 'path/to/excluded/files'
-    ],
+    // exclude: [
+    //     // 'path/to/excluded/files'
+    // ],
 
     // Suites
     suites: {
         shared: [
-            './test/specs/component/shared/*.component.spec.js',
+            './test/specs/component/*.component.shared.spec.js',
         ],
         mobile: [
-            './test/specs/component/mobile/*.component.spec.js',
-        ]
+            './test/specs/component/*.component.mobile.spec.js',
+        ],
+        desktop: [
+            './test/specs/component/*.component.desktop.spec.js',
+        ],
     },
     //
     // ============
@@ -67,13 +70,13 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: testEnvironment.maxinstances,
+    maxInstances: testSettings.maxinstances,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [].concat(bsCapabilities),
+    capabilities: [].concat(browserstackSettings.component.capabilities),  
     //
     // ===================
     // Test Configurations
@@ -81,7 +84,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: testEnvironment.loglevel,
+    logLevel: testSettings.loglevel,
     //
     // Set specific log levels per logger
     // loggers:
@@ -99,13 +102,13 @@ exports.config = {
     //
     // If you only want to run your tests until a specific amount of tests have failed use
     // bail (default is 0 - don't bail, run all tests).
-    bail: testEnvironment.bail,
+    bail: testSettings.bail,
     //
     // Set a base URL in order to shorten url command calls. If your `url` parameter starts
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: getBaseUrl(8080),
+    baseUrl: browserstackSettings.baseUrl,
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -121,9 +124,7 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: [['browserstack', {
-        browserstackLocal: true
-    }]],
+    services: browserstackSettings.services,
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -144,7 +145,7 @@ exports.config = {
     // see also: https://webdriver.io/docs/dot-reporter.html
     // reporters: ['dot'],
 
-    reporters: testEnvironment.reporters,
+    reporters: browserstackSettings.reporters,
 
     //
     // Options to be passed to Mocha.
@@ -171,7 +172,8 @@ exports.config = {
     /**
      * Start browserstack local before start of test
      */
-    onPrepare: (/* config, capabilities*/) => {
+    onPrepare: (config, capabilities) => {
+        console.log('Setting up capabilities', capabilities)
         console.log('Connecting local'); // eslint-disable-line
 
         return new Promise((resolve, reject) => {
@@ -209,6 +211,7 @@ exports.config = {
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
     // beforeSession: function (config, capabilities, specs) {
+        
     // },
     /**
      * Gets executed before test execution begins. At this point you can access to all global
@@ -235,6 +238,8 @@ exports.config = {
      * Function to be executed before a test (in Mocha/Jasmine) starts.
     //  */
     // beforeTest: (test) => {
+    //     // console.log('test info', test)
+    //     // filterTestCapabilities(test, capabilities);
     // },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling

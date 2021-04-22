@@ -36,5 +36,5 @@ module.exports = {
         './test/specs/accessibility'
     ],
 
-    testURL: 'http://localhost/',
+    testURL: 'http://localhost/'
 };
