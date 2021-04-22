@@ -30,12 +30,18 @@ import checkoutIssues from '../checkout-issues';
 * @param  {object} state - The current `checkout` state.
 */
 function resolveCustomerDetails (data, state) {
-    const tokenData = jwtDecode(state.authToken);
+    if (data && data.customer) {
+        let tokenData;
 
-    if (data && data.customer && tokenData) {
-        data.customer.phoneNumber = data.customer.phoneNumber || tokenData.mobile_number || tokenData.phone_number;
+        if (!data.customer.phoneNumber) {
+            tokenData = jwtDecode(state.authToken);
+
+            data.customer.phoneNumber = tokenData.mobile_number || tokenData.phone_number;
+        }
 
         if (!data.customer.firstName || !data.customer.lastName) {
+            tokenData = tokenData || jwtDecode(state.authToken);
+
             data.customer.firstName = tokenData.given_name;
             data.customer.lastName = tokenData.family_name;
         }

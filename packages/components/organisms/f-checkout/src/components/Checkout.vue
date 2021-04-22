@@ -324,10 +324,6 @@ export default {
                 (!this.address || !this.address.line1);
         },
 
-        shouldLoadCustomerNameFromClaims () {
-            return this.isLoggedIn && (!this.customer.firstName && !this.customer.lastName);
-        },
-
         shouldShowCheckoutForm () {
             return !this.isLoading && this.hasCheckoutLoadedSuccessfully;
         },
