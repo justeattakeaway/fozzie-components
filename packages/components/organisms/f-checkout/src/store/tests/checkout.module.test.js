@@ -196,13 +196,13 @@ describe('CheckoutModule', () => {
         });
 
         describe(`${UPDATE_AUTH_GUEST} ::`, () => {
-            it('should update state with authToken and set `isLoggedIn` to false', () => {
+            it('should update state with authToken and set `isLoggedIn` to true', () => {
                 // Act
                 mutations[UPDATE_AUTH_GUEST](state, authToken);
 
                 // Assert
                 expect(state.authToken).toEqual(authToken);
-                expect(state.isLoggedIn).toBeFalsy();
+                expect(state.isLoggedIn).toBeTruthy();
             });
 
             it('should update state with `isGuestCreated` set to true', () => {
