@@ -411,7 +411,7 @@ export default {
 
         [UPDATE_AUTH_GUEST]: (state, authToken) => {
             state.authToken = authToken;
-            state.isLoggedIn = false;
+            state.isLoggedIn = true;
             state.isGuestCreated = true;
         },
 
