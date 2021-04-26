@@ -157,6 +157,24 @@ describe('f-checkout component tests - @browserstack', () => {
         expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(true);
     });
 
+    it('should display the checkout error component when "Has Place Order Errors" is true', () => {
+        // Arrange
+        const checkoutData = {
+            type: 'delivery',
+            isAuthenticated: true,
+            isValid: true,
+            placeOrderErrors: 'SERVER'
+        };
+
+        // Act
+        checkout.open(checkoutData);
+        checkout.waitForComponent();
+        checkout.goToPayment();
+
+        // Assert
+        expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(true);
+    });
+
     it('should close the checkout error when "Retry" is clicked', () => {
         // Arrange
         const checkoutData = {
