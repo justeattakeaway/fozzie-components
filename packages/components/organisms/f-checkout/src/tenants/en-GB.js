@@ -100,7 +100,7 @@ const messages = {
 
             DuplicateOrder: {
                 title: 'This looks like a duplicate order',
-                message: 'So you\'re not charged twice, your order has not been processed',
+                message: 'So you’re not charged twice, your order has not been processed',
                 buttonText: 'Ok'
             }
         }

@@ -326,10 +326,6 @@ export default {
                 (!this.address || !this.address.line1);
         },
 
-        shouldLoadCustomerNameFromClaims () {
-            return this.isLoggedIn && (!this.customer.firstName && !this.customer.lastName);
-        },
-
         shouldShowCheckoutForm () {
             return !this.isLoading && this.hasCheckoutLoadedSuccessfully;
         },
@@ -423,10 +419,6 @@ export default {
             await Promise.all(promises);
             this.resetLoadingState();
 
-            if (this.shouldLoadCustomerNameFromClaims) {
-                this.getCustomerName();
-            }
-
             if (this.shouldLoadAddress) {
                 await this.loadAddress();
             }
@@ -479,6 +471,10 @@ export default {
             }
         },
 
+        /**
+        * Update `nonFulfillableError`, which at the moment drives whether we should show or hide
+        * a dialog and what to show in it, using the first error to be shown in a dialog, if there's one.
+        */
         toggleDialogError () {
             this.nonFulfillableError = this.firstDialogError;
         },
