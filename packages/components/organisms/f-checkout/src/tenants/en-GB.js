@@ -89,13 +89,19 @@ const messages = {
             LOCATION_UNDELIVERABLE: {
                 title: 'The restaurant doesn\'t deliver to this address',
                 message: 'Search for a different restaurant or change to a collection order.',
-                buttonText: 'OK'
+                buttonText: 'Ok'
             },
 
             DEFAULT_CHECKOUT_ISSUE: {
                 title: 'Something went wrong',
                 message: 'Please try again',
                 buttonText: 'Retry'
+            },
+
+            DuplicateOrder: {
+                title: 'This looks like a duplicate order',
+                message: 'So you’re not charged twice, your order has not been processed',
+                buttonText: 'Ok'
             }
         }
     },
