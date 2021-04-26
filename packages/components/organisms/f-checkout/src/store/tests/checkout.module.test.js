@@ -5,7 +5,9 @@ import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
-import { defaultCheckoutState, mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber } from '../../components/_tests/helpers/setup';
+import {
+    defaultCheckoutState, mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber
+} from '../../components/_tests/helpers/setup';
 import { version as applicationVerion } from '../../../package.json';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../../constants';
 
