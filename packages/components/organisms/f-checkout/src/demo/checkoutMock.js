@@ -11,6 +11,7 @@ import updateCheckout from './update-checkout.json';
 import updateCheckoutErrors from './update-checkout-errors.json';
 import getAddress from './get-address.json';
 import placeOrder from './place-order.json';
+import placeOrderDuplicate from './place-order-duplicate.json';
 import getGeoLocation from './get-geo-location.json';
 
 const mock = new MockAdapter(axios);
@@ -53,6 +54,9 @@ export default {
                 break;
             case '/place-order.json':
                 mock.onPost(path).reply(200, placeOrder);
+                break;
+            case '/place-order-duplicate.json':
+                mock.onPost(path).reply(400, placeOrderDuplicate);
                 break;
             case '/get-geo-location.json':
                 mock.onPost(path).reply(200, getGeoLocation);

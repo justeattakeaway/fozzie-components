@@ -28,6 +28,7 @@ const updateCheckoutErrorsUrl = '/update-checkout-errors.json';
 const updateCheckoutServerErrorUrl = '/update-checkout-server-error.json';
 const getAddressUrl = '/get-address.json';
 const placeOrderUrl = '/place-order.json';
+const placeOrderDuplicateUrl = '/place-order-duplicate.json';
 const paymentPageUrlPrefix = '#/pay'; // Adding the "#" so we don't get redirect out of the component in Storybook
 const getGeoLocationUrl = '/get-geo-location.json';
 
@@ -43,18 +44,25 @@ CheckoutMock.setupCheckoutMethod(updateCheckoutErrorsUrl);
 CheckoutMock.setupCheckoutMethod(updateCheckoutServerErrorUrl);
 CheckoutMock.setupCheckoutMethod(getAddressUrl);
 CheckoutMock.setupCheckoutMethod(placeOrderUrl);
+CheckoutMock.setupCheckoutMethod(placeOrderDuplicateUrl);
 CheckoutMock.setupCheckoutMethod(getGeoLocationUrl);
 CheckoutMock.passThroughAny();
 
 const checkoutIssues = 'Checkout Issues (Response from server but order not fulfillable)';
-const serverError = 'Server Error (Response from server is an error)';
+const checkoutServerError = 'Checkout Error (Response from server is an error)';
+const placeOrderError = 'Place Order Duplicate Error (Response from server is an error)';
 const ISSUES = 'ISSUES';
 const SERVER = 'SERVER';
 
-const errorOptions = {
+const checkoutErrorOptions = {
     None: null,
     [checkoutIssues]: ISSUES,
-    [serverError]: SERVER
+    [checkoutServerError]: SERVER
+};
+
+const placeOrderErrorOptions = {
+    None: null,
+    [placeOrderError]: SERVER
 };
 
 // eslint-disable-next-line
@@ -73,7 +81,6 @@ export const CheckoutComponent = () => ({
             getAddressUrl,
             loginUrl: '/login',
             paymentPageUrlPrefix,
-            placeOrderUrl,
             getGeoLocationUrl
         };
     },
@@ -94,8 +101,12 @@ export const CheckoutComponent = () => ({
             default: boolean('Is ASAP available', true)
         },
 
-        error: {
-            default: select('Errors', errorOptions)
+        checkoutError: {
+            default: select('Checkout Errors', checkoutErrorOptions)
+        },
+
+        placeOrderError: {
+            default: select('Place Order Errors', placeOrderErrorOptions)
         }
     },
 
@@ -113,11 +124,15 @@ export const CheckoutComponent = () => ({
         },
 
         updateCheckoutUrl () {
-            if (this.error) {
-                return this.error === SERVER ? updateCheckoutServerErrorUrl : updateCheckoutErrorsUrl;
+            if (this.checkoutError) {
+                return this.checkoutError === SERVER ? updateCheckoutServerErrorUrl : updateCheckoutErrorsUrl;
             }
 
             return updateCheckoutUrl;
+        },
+
+        placeOrderUrl () {
+            return this.placeOrderError === SERVER ? placeOrderDuplicateUrl : placeOrderUrl;
         },
 
         checkoutAvailableFulfilmentUrl () {
