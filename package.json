@@ -20,7 +20,8 @@
     "test-a11y:chrome": "cross-env-shell JE_ENV=local TEST_TYPE=a11y lerna run test-a11y:chrome --concurrency 1 --stream",
     "test:consumer": "lerna run test:consumer",
     "test:wait-for-server": "node ./test/infrastructure/healthcheck.js",
-    "allure:clean": "rimraf test/results/allure"
+    "allure:clean": "rimraf test/results/allure",
+    "prepare": "husky install"
   },
   "resolutions": {
     "webpack": "4.36.0"
@@ -68,6 +69,7 @@
     "eslint-plugin-vue": "6.2.2",
     "eslint-plugin-vuejs-accessibility": "0.6.0",
     "eyeglass": "3.0.2",
+    "husky": "6.0.0",
     "include-media": "1.4.9",
     "lerna": "3.22.1",
     "mocha-each": "2.0.1",

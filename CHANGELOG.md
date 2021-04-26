@@ -5,10 +5,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.29.0
 ------------------------------
-*April 19, 2021*
+*April 26, 2021*
 
 ## Added
 - CircleCI config for local testing
+
+*April 16, 2021*
+
+## Added
+- `husky` to enable pre-commit lint / test checks 
 
 
 v3.28.0

@@ -36,7 +36,7 @@ describe('SkeletonLoader', () => {
         });
 
         describe('skeletonType', () => {
-            it.each(Object.keys(Skeletons))('should render the correct skeleton component based on prop: %s', skeletonType => {
+            it.each(Object.keys(Skeletons))('should render the correct skeleton component based on the prop: %s', skeletonType => {
                 // Arrange
                 const propsData = {
                     skeletonType
@@ -48,6 +48,5 @@ describe('SkeletonLoader', () => {
                 expect(wrapper.findComponent(Skeletons[skeletonType]).exists()).toBe(true);
             });
         });
-
     });
 });
