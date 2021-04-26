@@ -1,8 +1,8 @@
 <template>
     <div :class="$style['c-restaurantData']">
         <div :class="$style['c-restaurantData-textWrapper']">
-            <text-block :class="[$style['c-restaurantData-text']]" />
-            <text-block :class="[$style['c-restaurantData-text']]" />
+            <text-block :class="[$style['c-skeletonLoader-text']]" />
+            <text-block :class="[$style['c-skeletonLoader-text']]" />
         </div>
         <rating />
     </div>
@@ -33,7 +33,7 @@ export default {
     flex: 1;
 }
 
-.c-restaurantData-text {
+.c-skeletonLoader-text {
     width: 25%;
     height: spacing(x1.5);
 }
