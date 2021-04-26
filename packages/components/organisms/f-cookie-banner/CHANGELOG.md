@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.7.1
+------------------------------
+*April 22, 2021*
+
+### Changed
+- Added is-visuallyHidden CSS to Legacy Banner
+- Add locale prop to usage documentation in README
+
+
 v0.7.0
 ------------------------------
 *April 8, 2021*

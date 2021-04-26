@@ -20,7 +20,7 @@ Object {
   "customer": Object {
     "email": "",
     "firstName": "Joe",
-    "lastName": "",
+    "lastName": "Bloggs",
     "mobileNumber": "+447111111111",
   },
   "errors": Array [],
