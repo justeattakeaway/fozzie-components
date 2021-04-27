@@ -485,69 +485,6 @@ describe('Checkout', () => {
             });
         });
 
-        describe('shouldLoadCustomerNameFromClaims ::', () => {
-            it('should return `true` if `isLoggedIn` is `true` and the customer name doesn\'t exist', () => {
-                // Arrange
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        isLoggedIn: true,
-                        customer: {
-                            firstName: '',
-                            lastName: ''
-                        }
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Act
-                const result = wrapper.vm.shouldLoadCustomerNameFromClaims;
-
-                // Assert
-                expect(result).toBe(true);
-            });
-
-            it('should return `false` if `isLoggedIn` is `true` and customer name exists', () => {
-                // Arrange
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        isLoggedIn: false
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Act
-                const result = wrapper.vm.shouldLoadCustomerNameFromClaims;
-
-                // Assert
-                expect(result).toBe(false);
-            });
-
-            it('should return `false` if `isLoggedIn` is `false`', () => {
-                // Arrange
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        isLoggedIn: false
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Act
-                const result = wrapper.vm.shouldLoadCustomerNameFromClaims;
-
-                // Assert
-                expect(result).toBe(false);
-            });
-        });
-
         describe('shouldShowErrorDialog ::', () => {
             it('should return `true` if `nonFulfillableError.shouldShowInDialog` is `true`', () => {
                 // Arrange
@@ -1316,6 +1253,17 @@ describe('Checkout', () => {
                         data: wrapper.vm.eventData,
                         logMethod: $logger.logWarn
                     });
+                });
+
+                it('should make a call to `toggleDialogError`', () => {
+                    // Arrange
+                    const toggleDialogErrorSpy = jest.spyOn(wrapper.vm, 'toggleDialogError');
+
+                    // Act
+                    wrapper.vm.handleNonFulfillableCheckout();
+
+                    // Assert
+                    expect(toggleDialogErrorSpy).toHaveBeenCalled();
                 });
 
                 it('should make a call to `trackFormErrors`', () => {
@@ -2798,6 +2746,38 @@ describe('Checkout', () => {
 
                     result.rejects.toThrow(PlaceOrderError);
                     result.rejects.toThrow(errorMessage);
+                });
+
+                it('should call `toggleDialogError`', async () => {
+                    // Arrange
+                    const errorMessage = 'An error';
+
+                    wrapper = shallowMount(VueCheckout, {
+                        store: createStore(
+                            defaultCheckoutState,
+                            {
+                                ...defaultCheckoutActions,
+                                placeOrder: jest.fn(async () => Promise.reject(new Error(errorMessage)))
+                            }
+                        ),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $logger
+                        }
+                    });
+
+                    const toggleDialogErrorSpy = jest.spyOn(wrapper.vm, 'toggleDialogError');
+
+                    // A try-catch is needed because the exception otherwise is thrown and the test fails.
+                    try {
+                        // Act
+                        await wrapper.vm.submitOrder();
+                    } catch {
+                        // Assert
+                        expect(toggleDialogErrorSpy).toHaveBeenCalled();
+                    }
                 });
             });
         });

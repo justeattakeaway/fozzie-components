@@ -59,7 +59,8 @@ export default {
 Call the component in your template:
 
 ```js
-<f-cookie-banner />
+<f-cookie-banner
+    :locale="$i18n.locale" />
 ```
 
 ## Configuration
