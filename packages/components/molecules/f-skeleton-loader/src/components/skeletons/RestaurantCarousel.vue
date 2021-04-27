@@ -3,9 +3,9 @@
         <heading :class="$style['c-restaurantCarousel-heading']" />
         <text-block :class="$style['c-restaurantCarousel-desc']" />
         <div :class="$style['c-restaurantCarousel-list']">
-            <restaurant-card :class="$style['c-skeletonLoader-restaurantCard']" />
-            <restaurant-card :class="$style['c-skeletonLoader-restaurantCard']" />
-            <restaurant-card :class="$style['c-skeletonLoader-restaurantCard']" />
+            <restaurant-card :class="$style['c-restaurantCarousel-item']" />
+            <restaurant-card :class="$style['c-restaurantCarousel-item']" />
+            <restaurant-card :class="$style['c-restaurantCarousel-item']" />
         </div>
     </div>
 </template>
@@ -50,7 +50,7 @@ $breakpoints: (medium: 520px, large: 960px);
     justify-content: flex-start;
 }
 
-.c-skeletonLoader-restaurantCard {
+.c-restaurantCarousel-item {
     flex: 1;
     display: none;
 

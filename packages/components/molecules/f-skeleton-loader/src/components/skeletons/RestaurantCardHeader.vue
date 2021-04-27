@@ -1,9 +1,9 @@
 <template>
     <div :class="$style['c-restaurantCardHeader']">
-        <image-block :class="$style['c-skeletonLoader-logo']" />
-        <heading :class="$style['c-skeletonLoader-heading']" />
-        <text-block :class="[$style['c-skeletonLoader-text']]" />
-        <text-block :class="[$style['c-skeletonLoader-text']]" />
+        <image-block :class="$style['c-restaurantCardHeader-logo']" />
+        <heading :class="$style['c-restaurantCardHeader-heading']" />
+        <text-block :class="[$style['c-restaurantCardHeader-text']]" />
+        <text-block :class="[$style['c-restaurantCardHeader-text']]" />
     </div>
 </template>
 
@@ -30,7 +30,7 @@ $restaurant-logo-width: 48px;
     position: relative;
 }
 
-.c-skeletonLoader-logo {
+.c-restaurantCardHeader-logo {
     margin: auto;
     width: $restaurant-logo-width;
     height: $restaurant-logo-width;
@@ -38,21 +38,21 @@ $restaurant-logo-width: 48px;
     transform: translateY(-50%);
 }
 
-.c-skeletonLoader-heading {
+.c-restaurantCardHeader-heading {
     height: spacing(x3);
     margin: 0 auto spacing();
 }
 
-.c-skeletonLoader-text {
+.c-restaurantCardHeader-text {
     max-width: 40%;
     margin: auto;
 }
 
-.c-skeletonLoader-text:nth-child(3) {
+.c-restaurantCardHeader-text:nth-child(3) {
     max-width: 35%;
 }
 
-.c-skeletonLoader-text:not(:last-child) {
+.c-restaurantCardHeader-text:not(:last-child) {
     margin-bottom: spacing();
 }
 
