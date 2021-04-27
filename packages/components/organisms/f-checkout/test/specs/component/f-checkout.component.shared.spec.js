@@ -1,18 +1,19 @@
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
 
-const checkout = new Checkout('organism', 'checkout-component');
+let checkout;
 
 describe('f-checkout component tests - @browserstack', () => {
     beforeEach(() => {
+        checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'delivery')
                 .withQuery('&knob-Is User Logged In', true)
                 .withQuery('&knob-Is ASAP available', true);
 
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
-        checkout.open(pageUrl)
-            .waitForComponent();
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
     });
 
     it('should display the f-checkout component', () => {
@@ -20,7 +21,7 @@ describe('f-checkout component tests - @browserstack', () => {
         expect(checkout.isComponentDisplayed()).toBe(true);
     });
 
-    it('should submit the checkout form', () => {
+    it.skip('should submit the checkout form', () => {
         // Arrange
         const addressInfo = {
             mobileNumber: '07777777779',
@@ -137,7 +138,21 @@ describe('f-checkout component tests - @browserstack', () => {
 
     it('should display the checkout error component when "Has Checkout Errors" is true', () => {
         // Arrange
-        checkout.withQuery('&knob-Has Checkout Errors', true);
+        checkout.withQuery('&knob-Checkout Errors', 'ISSUES');
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+
+        // Act
+        checkout.open(pageUrl);
+        checkout.waitForComponent();
+        checkout.goToPayment();
+
+        // Assert
+        expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(true);
+    });
+
+    it('should display the checkout error component when "Has Place Order Errors" is true', () => {
+        // Arrange
+        checkout.withQuery('knob-Place Order Errors', 'SERVER');
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
         // Act
@@ -151,7 +166,7 @@ describe('f-checkout component tests - @browserstack', () => {
 
     it('should close the checkout error when "Retry" is clicked', () => {
         // Arrange
-        checkout.withQuery('&knob-Has Checkout Errors', true);
+        checkout.withQuery('&knob-Checkout Errors', 'ISSUES');
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
         // Act

@@ -7,6 +7,7 @@ describe('f-button component tests', () => {
 
     it('should display the f-button action component', () => {
         // Arrange
+        button.withQuery('knob-Button Type', 'primary');
         const pageUrl = buildUrl(button.componentType, button.componentName, button.path);
 
         // Act
@@ -26,7 +27,7 @@ describe('f-button component tests', () => {
 
         // Act
         button.open(pageUrl);
-        button.waitForActionComponent();
+        button.waitForLinkComponent();
 
         // Assert
         expect(button.isLinkComponentDisplayed()).toBe(true);

@@ -1,3 +1,5 @@
+import forEach from 'mocha-each';
+
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Tabs = require('../../../test-utils/component-objects/f-tabs.component');
 

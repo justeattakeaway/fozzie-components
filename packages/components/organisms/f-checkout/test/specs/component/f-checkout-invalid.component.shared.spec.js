@@ -1,10 +1,11 @@
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
 
-const checkout = new Checkout('organism', 'checkout-component');
+let checkout;
 
 describe('f-checkout "invalid" component tests - @browserstack', () => {
     beforeEach(() => {
+        checkout = new Checkout('organism', 'checkout-component');
         checkout.withQuery('&knob-Service Type', 'Invalid URL')
         .withQuery('&knob-Is User Logged In', true);
 
