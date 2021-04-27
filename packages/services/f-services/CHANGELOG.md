@@ -6,9 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 v1.10.0
 ------------------------------
 *April 27, 2021*
-
 ### Changed
-- Extended the tel. no. regex for en-GB and added en-AU and en-NZ.
+- Tel. no. regex for en-GB.
+### Added
+- Tel. no. regex for en-AU and en-NZ.
 
 
 v1.9.0
