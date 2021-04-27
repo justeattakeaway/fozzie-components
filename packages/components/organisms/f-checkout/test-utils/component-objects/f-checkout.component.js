@@ -107,6 +107,7 @@ module.exports = class Checkout extends Page {
     open (url) {
         super.open(url);
     }
+        const hasPlaceOrderErrors = `&knob-Place%20Order%20Errors=${checkout.placeOrderErrors}`;
 
     withQuery (name, value) {
         super.withQuery(name, value);

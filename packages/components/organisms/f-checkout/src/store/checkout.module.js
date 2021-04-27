@@ -20,7 +20,22 @@ import {
     UPDATE_STATE,
     UPDATE_USER_NOTE
 } from './mutation-types';
+
 import checkoutIssues from '../checkout-issues';
+
+/**
+ * @param {String} code - The code returned by an API.
+ * @returns {object} - An object with the issue's desired behaviours and the code.
+ */
+const getIssueByCode = code => {
+    const issue = checkoutIssues[code];
+
+    if (issue) {
+        return { ...issue, code };
+    }
+
+    return null;
+};
 
 /**
 * @function resolveCustomerDetails
@@ -29,7 +44,7 @@ import checkoutIssues from '../checkout-issues';
 * @param  {object} data  - Api response object.
 * @param  {object} state - The current `checkout` state.
 */
-function resolveCustomerDetails (data, state) {
+const resolveCustomerDetails = (data, state) => {
     if (data && data.customer) {
         let tokenData;
 
@@ -46,7 +61,7 @@ function resolveCustomerDetails (data, state) {
             data.customer.lastName = tokenData.family_name;
         }
     }
-}
+};
 
 export default {
     namespaced: true,
@@ -148,20 +163,11 @@ export default {
                 timeout
             };
 
-            // TODO - Handle and log any errors
             const { data: responseData } = await axios.patch(url, data, config);
             const { issues, isFulfillable } = responseData;
 
-            // Can now log these errors inside the map if necessary
-            const detailedIssues = issues.map(issue => {
-                const checkoutIssue = checkoutIssues[issue.code];
-
-                if (checkoutIssue) {
-                    return { ...checkoutIssue, ...issue };
-                }
-
-                return { code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true };
-            });
+            const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
+                    || { code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true });
 
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
@@ -291,23 +297,36 @@ export default {
         placeOrder: async ({ commit, state }, {
             url, data, timeout
         }) => {
-            const authHeader = state.authToken && `Bearer ${state.authToken}`;
+            try {
+                const authHeader = state.authToken && `Bearer ${state.authToken}`;
 
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json;v=2',
-                    'x-je-application-id': 7, // Responsive Web
-                    'x-je-application-version': applicationVerion,
-                    Authorization: authHeader
-                },
-                timeout
-            };
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json;v=2',
+                        'x-je-application-id': 7, // Responsive Web
+                        'x-je-application-version': applicationVerion,
+                        Authorization: authHeader
+                    },
+                    timeout
+                };
 
-            const response = await axios.post(url, data, config);
+                const response = await axios.post(url, data, config);
 
-            const { orderId } = response.data;
+                const { orderId } = response.data;
 
-            commit(UPDATE_ORDER_PLACED, orderId);
+                commit(UPDATE_ORDER_PLACED, orderId);
+                commit(UPDATE_ERRORS, []);
+            } catch (error) {
+                if (error.response && error.response.data) {
+                    const { errorCode } = error.response.data;
+
+                    const checkoutIssue = getIssueByCode(errorCode);
+
+                    commit(UPDATE_ERRORS, (checkoutIssue ? [checkoutIssue] : []));
+                }
+
+                throw error; // Handled by the calling function.
+            }
         },
 
         /**
@@ -364,6 +383,10 @@ export default {
         updateHasAsapSelected ({ commit }, payload) {
             commit(UPDATE_HAS_ASAP_SELECTED, payload);
         }
+    },
+
+    getters: {
+        firstDialogError: state => state.errors.find(error => error.shouldShowInDialog)
     },
 
     mutations: {
