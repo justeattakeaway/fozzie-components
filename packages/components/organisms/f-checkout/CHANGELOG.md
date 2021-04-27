@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.96.0
+------------------------------
+*April 27, 2021*
+
+### Fixed
+- Retry `nonFulfillableError` codes attempt to submit order again.
+
+
 v0.91.0
 ------------------------------
 *April 14, 2021*

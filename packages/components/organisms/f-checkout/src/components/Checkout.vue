@@ -844,7 +844,28 @@ export default {
                 window.location.assign(this.restaurantMenuPageUrl);
             }
 
+            this.retrySubmitCheckoutAction();
+
             this.handleErrorDialogClose();
+        },
+
+        /**
+         * Retry submitCheckout form if the retry button is clicked.
+         *
+         */
+        retrySubmitCheckoutAction () {
+            const retryErrorCodes = [
+                'RESTAURANT_NOT_TAKING_ORDERS',
+                'FULFILMENT_TIME_UNAVAILABLE',
+                'DEFAULT_CHECKOUT_ISSUE',
+                'SERVICE_TYPE_UNAVAILABLE'
+            ];
+
+            if (this.nonFulfillableError && this.nonFulfillableError.code) {
+                if (retryErrorCodes.some(code => this.nonFulfillableError.code.includes(code))) {
+                    this.submitOrder();
+                }
+            }
         }
     },
 

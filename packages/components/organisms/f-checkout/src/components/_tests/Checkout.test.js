@@ -2650,6 +2650,8 @@ describe('Checkout', () => {
                     }
                 });
 
+                jest.spyOn(wrapper.vm, 'retrySubmitCheckoutAction').mockImplementation(() => {});
+
                 // Act
                 wrapper.vm.handleErrorDialogButtonClick();
 
@@ -2675,12 +2677,40 @@ describe('Checkout', () => {
                     }
                 });
 
+                jest.spyOn(wrapper.vm, 'retrySubmitCheckoutAction').mockImplementation(() => {});
+
                 // Act
                 wrapper.vm.handleErrorDialogButtonClick();
 
                 // Assert
                 expect(windowLocationSpy).not.toHaveBeenCalled();
                 expect(wrapper.vm.nonFulfillableError).toBeNull();
+            });
+
+            it('should make a call to `retrySubmitCheckoutAction`', () => {
+                // Arrange
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({ ...defaultCheckoutState, restaurant: { seoName: restaurantSeoName, id: '22222' } }),
+                    i18n,
+                    localVue,
+                    propsData,
+                    data () {
+                        return {
+                            nonFulfillableError: {
+                                shouldRedirectToMenu: false,
+                                code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
+                            }
+                        };
+                    }
+                });
+
+                const retrySubmitCheckoutActionSpy = jest.spyOn(wrapper.vm, 'retrySubmitCheckoutAction').mockImplementation(() => {});
+
+                // Act
+                wrapper.vm.handleErrorDialogButtonClick();
+
+                // Assert
+                expect(retrySubmitCheckoutActionSpy).toHaveBeenCalled();
             });
         });
 
@@ -2798,6 +2828,72 @@ describe('Checkout', () => {
 
                     result.rejects.toThrow(PlaceOrderError);
                     result.rejects.toThrow(errorMessage);
+                });
+            });
+        });
+
+        describe('`retrySubmitCheckoutAction`', () => {
+            let wrapper;
+
+            beforeEach(() => {
+                wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        basket: {
+                            id: 'basketId'
+                        }
+                    }),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $logger
+                    },
+                    data () {
+                        return {
+                            nonFulfillableError: {
+                                shouldRedirectToMenu: false,
+                                code: 'RESTAURANT_NOT_TAKING_ORDERS'
+                            }
+                        };
+                    }
+                });
+            });
+
+            it('should exist', () => {
+                expect(wrapper.vm.retrySubmitCheckoutAction).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                describe('AND an error code from the list exists', () => {
+                    it('should make a call to `submitOrder`', () => {
+                        // Arrange
+                        const spy = jest.spyOn(wrapper.vm, 'submitOrder');
+
+                        // Act
+                        wrapper.vm.retrySubmitCheckoutAction();
+
+                        // Assert
+                        expect(spy).toHaveBeenCalled();
+                    });
+                });
+
+                describe('AND an error code from the list does not exist', () => {
+                    it('should not make a call to `submitOrder`', () => {
+                        // Arrange
+                        const spy = jest.spyOn(wrapper.vm, 'submitOrder');
+                        wrapper.setData({
+                            nonFulfillableError: {
+                                code: 'LOCATION_UNDELIVERABLE'
+                            }
+                        });
+
+                        // Act
+                        wrapper.vm.retrySubmitCheckoutAction();
+
+                        // Assert
+                        expect(spy).not.toHaveBeenCalled();
+                    });
                 });
             });
         });
