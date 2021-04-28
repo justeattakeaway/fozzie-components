@@ -3,12 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.96.0
+v0.97.0
 ------------------------------
 *April 28, 2021*
 
 ### Changed
-- Updated to f-services version 1.10.0.
+- Bumped f-services version to 1.10.0.
 
 v0.95.0
 ------------------------------
