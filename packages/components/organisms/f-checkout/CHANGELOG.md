@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.96.0
+------------------------------
+*April 28, 2021*
+
+### Changed
+- Updated notes to reflect PIE design
+
+
 v0.95.0
 ------------------------------
 *April 26, 2021*
