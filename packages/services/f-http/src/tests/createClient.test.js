@@ -2,14 +2,13 @@ import createClient from '../createClient';
 
 describe('createClient', () => {
     describe('initialisation', () => {
-        it('httpClient should be defined', async () => {
-        // Arrange & Act
-        // Assert
+        it('should be defined', async () => {
+            // Arrange, Act & Assert
             expect(createClient).toBeDefined();
         });
 
-        it('httpClient should use default options when not overridden', async () => {
-        // Arrange & Act
+        it('should use default options when not overridden', async () => {
+            // Arrange & Act
             const httpClient = createClient();
             const mergedOptions = httpClient.readConfiguration();
 
@@ -20,8 +19,8 @@ describe('createClient', () => {
             expect(mergedOptions.errorCallback).toBe(null);
         });
 
-        it('httpClient should use overridden options when overridden', async () => {
-        // Arrange & Act
+        it('should use overridden options when overridden', async () => {
+            // Arrange & Act
             const expectedBaseUrl = 'https://www.example.org';
             const expectedTimeout = 2000;
             const expectedErrorCallback = () => {};

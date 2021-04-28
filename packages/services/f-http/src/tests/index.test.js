@@ -3,13 +3,12 @@ import createClient from '../createClient';
 describe('createClient', () => {
     beforeEach(() => {});
 
-    it('httpClient should be defined', async () => {
-        // Arrange & Act
-        // Assert
+    it('should be defined', async () => {
+        // Arrange, Act & Assert
         expect(createClient).toBeDefined();
     });
 
-    it('httpClient should expose expected methods', async () => {
+    it('should expose expected methods', async () => {
         // Arrange & Act
         const httpClient = createClient();
 
