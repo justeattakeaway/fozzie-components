@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-http",
   "description": "Javascript HTTP client for interacting with restful services",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "src/index.js",
   "files": [
     "src"
@@ -35,6 +35,9 @@
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
+  "dependencies": {
+    "axios": "0.21.1"
+  },
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-eslint": "3.9.2",
