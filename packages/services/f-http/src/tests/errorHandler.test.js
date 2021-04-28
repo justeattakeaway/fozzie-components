@@ -18,7 +18,7 @@ describe('errorHandler', () => {
         handleError(error, errorCallbackMock);
 
         // Assert
-        expect(errorCallbackMock.mock.calls.length).toBe(1);
+        expect(errorCallbackMock).toHaveBeenCalledTimes(1);
         expect(errorCallbackMock).toHaveBeenCalledWith(error);
     });
 
