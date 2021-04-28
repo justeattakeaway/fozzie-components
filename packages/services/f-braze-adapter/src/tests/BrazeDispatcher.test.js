@@ -4,10 +4,12 @@ import appboySDK from 'appboy-web-sdk';
 import 'core-js/modules/es.object.from-entries';
 
 import isAppboyInitialised from '../utils/isAppboyInitialised';
+import areCookiesPermitted from '../utils/areCookiesPermitted';
 import ContentCards from '../services/contentCard.service';
 
 jest.mock('appboy-web-sdk');
 jest.mock('../utils/isAppboyInitialised');
+jest.mock('../utils/areCookiesPermitted');
 jest.mock('../services/contentCard.service');
 
 let appboy;
@@ -157,6 +159,74 @@ describe('instantiation', () => {
                 expect(appboyInstance.subscribeToInAppMessage).toHaveBeenCalled();
                 expect(appboyInstance.subscribeToContentCardsUpdates).toHaveBeenCalled();
                 expect(appboyInstance.requestContentCardsRefresh).toHaveBeenCalled();
+            });
+
+            describe('on initialisation of bundled sdk version of braze library', () => {
+                beforeEach(() => {
+                    // Arrange
+                    isAppboyInitialised.mockReturnValue(false);
+                });
+
+                it.each([
+                    [true, true, false, true],
+                    [true, true, true, false],
+                    [false, false, false, true],
+                    [false, false, true, false],
+                    [undefined, undefined, true, false],
+                ])('should initialise appboy with the correct logging (`%p` ➡ `%p`) and cookie (`%p` ➡ `$p`) parameters', async (
+                    enableLoggingConfig,
+                    expectedEnableLoggingParameter,
+                    areCookiesPermittedValue,
+                    expectedNoCookiesParamater
+                ) => {
+                    // Arrange
+                    areCookiesPermitted.mockReturnValue(areCookiesPermittedValue);
+
+                    // Act
+                    await brazeDispatcher.configure({
+                        ...enabledComponentParameters,
+                        enableLogging: enableLoggingConfig
+                    });
+
+                    // Assert
+                    expect(appboySDK.initialize).toHaveBeenCalledWith(apiKey, {
+                        enableLogging: expectedEnableLoggingParameter,
+                        sessionTimeoutInSeconds: 0,
+                        noCookies: expectedNoCookiesParamater
+                    });
+                });
+
+                it('should open a session following initialisation', async () => {
+                    // Act
+                    await brazeDispatcher.configure(enabledComponentParameters);
+
+                    // Assert
+                    expect(appboySDK.openSession).toHaveBeenCalledAfter(appboySDK.initialize);
+                });
+
+                it('should subscribe to callbacks following opening a session', async () => {
+                    // Act
+                    await brazeDispatcher.configure(enabledComponentParameters);
+
+                    // Assert
+                    expect(appboySDK.subscribeToInAppMessage).toHaveBeenCalledAfter(appboySDK.openSession);
+                });
+
+                it('should set the userId following callback subscription', async () => {
+                    // Act
+                    await brazeDispatcher.configure(enabledComponentParameters);
+
+                    // Assert
+                    expect(appboySDK.changeUser).toHaveBeenCalledAfter(appboySDK.requestContentCardsRefresh);
+                });
+
+                it('should pass through the userId along with a callback', async () => {
+                    // Act
+                    await brazeDispatcher.configure(enabledComponentParameters);
+
+                    // Assert
+                    expect(appboySDK.changeUser).toHaveBeenCalledWith(userId, expect.any(Function));
+                });
             });
 
             it.each([
