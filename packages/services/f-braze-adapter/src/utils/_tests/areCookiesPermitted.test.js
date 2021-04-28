@@ -1,6 +1,11 @@
 import CookieHelper from 'js-cookie';
 
-import areCookiesPermitted from '../areCookiesPermitted';
+import areCookiesPermitted, {
+    consentCookieName,
+    consentCookieValue,
+    legacyBannerCookieName,
+    legacyBannerCookieValue
+} from '../areCookiesPermitted';
 
 jest.mock('js-cookie');
 
@@ -11,24 +16,49 @@ describe('f-braze-adapter › areCookiesPermitted', () => {
     });
 
     describe('when called', () => {
-        it('should query the value of `je-cookieConsent` cookie', () => {
+        it(`should query the value of \`${consentCookieName}\` cookie`, () => {
             // Act
             areCookiesPermitted();
 
             // Assert
-            expect(CookieHelper.get).toHaveBeenCalledWith('je-cookieConsent');
+            expect(CookieHelper.get).toHaveBeenCalledWith(consentCookieName);
         });
 
         it.each([
-            [true, 'full'],
+            [true, consentCookieValue],
             [false, 'necessary'],
             [false, null]
-        ])('should return `%p` when `je-cookieConsent` is `%p`', (expected, cookieValue) => {
+        ])(`should return \`%p\` when \`${consentCookieName}\` is \`%p\``, (expected, cookieValue) => {
             // Arrange
             CookieHelper.get.mockReturnValue(cookieValue);
 
             // Act & Assert
             expect(areCookiesPermitted()).toBe(expected);
+        });
+
+        describe(`and when the value of the \`${consentCookieName}\` cookie is not \`${consentCookieValue}\``, () => {
+            beforeEach(() => {
+                CookieHelper.get.mockReturnValueOnce(null);
+            });
+
+            it(`should query the value of \`${legacyBannerCookieName}\` cookie`, () => {
+                // Act
+                areCookiesPermitted();
+
+                // Assert
+                expect(CookieHelper.get).toHaveBeenCalledWith(legacyBannerCookieName);
+            });
+
+            it.each([
+                [true, legacyBannerCookieValue],
+                [false, null]
+            ])(`should return \`%p\` when \`${legacyBannerCookieName}\` is \`%p\``, (expected, cookieValue) => {
+                // Arrange
+                CookieHelper.get.mockReturnValue(cookieValue);
+
+                // Act & Assert
+                expect(areCookiesPermitted()).toBe(expected);
+            });
         });
     });
 });

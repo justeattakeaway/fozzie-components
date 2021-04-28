@@ -172,7 +172,7 @@ describe('instantiation', () => {
                     [true, true, true, false],
                     [false, false, false, true],
                     [false, false, true, false],
-                    [undefined, undefined, true, false],
+                    [undefined, undefined, true, false]
                 ])('should initialise appboy with the correct logging (`%p` ➡ `%p`) and cookie (`%p` ➡ `$p`) parameters', async (
                     enableLoggingConfig,
                     expectedEnableLoggingParameter,
