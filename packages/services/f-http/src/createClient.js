@@ -1,25 +1,27 @@
 import axios from 'axios';
 import defaultOptions from './defaultOptions';
+import handleError from './errorHandler';
 
 let _configuration = null;
 let _axiosInstance = null;
 
 /**
     * Get a resource
-    * @param {string} resource - The resource to post (URL)
+    * @param {string} resource - The resource to get (URL)
+    * @param {object} headers - Any additional request headers you want to provide
     * @return {object} - Returns data from response
 */
-const get = async resource => {
+const get = async (resource, headers = {}) => {
     try {
-        const response = await _axiosInstance.get(resource);
+        const config = {
+            headers
+        };
+
+        const response = await _axiosInstance.get(resource, config);
 
         return response.data;
     } catch (error) {
-        if (_configuration.errorCallback) {
-            _configuration.errorCallback(error, resource);
-        }
-
-        throw error;
+        return handleError(error, _configuration.errorCallback);
     }
 };
 
@@ -27,7 +29,7 @@ const get = async resource => {
     * Post a resource
     * @param {string} resource - The resource to post (URL)
     * @param {object} body - The request body, contents of the resource
-    * @param {object} headers - Any additional request headers you want to post
+    * @param {object} headers - Any additional request headers you want to provide
     * @return {object} - Returns data from response
 */
 const post = async (resource, body, headers = {}) => {
@@ -40,11 +42,7 @@ const post = async (resource, body, headers = {}) => {
 
         return response.data;
     } catch (error) {
-        if (_configuration.errorCallback) {
-            _configuration.errorCallback(error, resource);
-        }
-
-        throw error;
+        return handleError(error, _configuration.errorCallback);
     }
 };
 

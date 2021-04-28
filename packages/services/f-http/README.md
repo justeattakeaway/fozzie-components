@@ -22,9 +22,10 @@ This package exposes methods for interacting with restful services, it may abstr
 - Easy configuration of reusable clients which can be retrieved from context
 - Opt-in automatic logging of errors
 - Opt-in ability to use dynamic timeouts
-- Opt-In automatic providing of diagnostic headers, such as Conversation ID
+- Opt-in automatic providing of diagnostic headers, such as Conversation ID
 - Enables us to switch to alternative HTTP packages when desired
 - Sensible defaults, with the ability to override everything
+- Opt-in Automatic providing of bearer tokens
 
 
 ## Usage
@@ -97,7 +98,7 @@ export default {
       apiResult: null
     }
   },
-  mounted () {
+  async mounted () {
     this.apiResult = await this.$http.get('/todos/1');
   }
 }
@@ -110,4 +111,4 @@ Option | Description | Type | Default
 ------------- | ------------- | ------------- | -------------
 baseUrl | Ensure all requests from this client use a relative url | string | ""
 timeout | How long each request takes to timeout | number | 10000
-errorCallback | A function you can use to globally handle errors | function | null
+errorCallback | A function you can use to globally handle errors (accepts error object) | function | null
