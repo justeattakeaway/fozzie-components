@@ -10,6 +10,14 @@ v0.97.0
 ### Changed
 - Bumped f-services version to 1.10.0.
 
+v0.96.0
+------------------------------
+*April 28, 2021*
+
+### Changed
+- Updated notes to reflect PIE design
+
+
 v0.95.0
 ------------------------------
 *April 26, 2021*

@@ -39,11 +39,11 @@ $userNote-textArea-borderWidth                   : 1px;
 $userNote-textArea-borderColour                  : $grey--light;
 $userNote-textColour                             : $color-text;
 $userNote-textArea-bg                            : $color-bg--component;
-$userNote-textArea-height                        : 144px;
+$userNote-textArea-height                        : 188px;
 
 .c-userNote {
     margin-top: spacing(x3);
-    @include font-size(body-s);
+    @include font-size(body-l);
     color: $userNote-textColour;
 
     .c-userNote-title {
