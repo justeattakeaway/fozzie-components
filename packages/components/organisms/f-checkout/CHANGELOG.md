@@ -9,6 +9,7 @@ v0.97.0
 
 ### Changed
 - Bumped f-services version to 1.10.0.
+- Set tel. no. field type as `Tel`
 
 v0.96.0
 ------------------------------
