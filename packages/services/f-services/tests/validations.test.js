@@ -203,4 +203,56 @@ describe('isValidPhoneNumber', () => {
         // Assert
         expect(actual).toBe(expected);
     });
+
+    it.each([
+        ['+614 12 345 678', true],
+        ['+61412345678', true],
+        ['+614-12-345-678', true],
+        ['04 12 345 678', true],
+        ['0412 345 678', true],
+        ['0412-345-678', true],
+        ['0412345678', true],
+        ['+614 12345  678', false],
+        ['0412  345 678', false],
+        ['0512 345 678', false],
+        ['412 345 678', false],
+        ['0412 345 67', false],
+        ['11111111', false],
+        ['!askfjt%$', false],
+        ['not even trying', false],
+        ['', false],
+        [null, false]
+    ])('should validate %s as %s with `en-AU` locale', (number, expected) => {
+        // Act
+        const actual = isValidPhoneNumber(number, 'en-AU');
+
+        // Assert
+        expect(actual).toBe(expected);
+    });
+
+    it.each([
+        ['+649 70 01234', true],
+        ['+6497001234', true],
+        ['+649-70-01234', true],
+        ['09 70 01234', true],
+        ['09 7001234', true],
+        ['09 70-01234', true],
+        ['097001234', true],
+        ['+649 170 01234', false],
+        ['09  70 01234', false],
+        ['01 70 01234', false],
+        ['9 70 01234', false],
+        ['09 70 012', false],
+        ['11111111', false],
+        ['!askfjt%$', false],
+        ['not even trying', false],
+        ['', false],
+        [null, false]
+    ])('should validate %s as %s with `en-NZ` locale', (number, expected) => {
+        // Act
+        const actual = isValidPhoneNumber(number, 'en-NZ');
+
+        // Assert
+        expect(actual).toBe(expected);
+    });
 });
