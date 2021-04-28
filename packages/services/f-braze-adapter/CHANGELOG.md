@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.4.0
+------------------------------
+*April 28, 2021*
+
+### Changed
+- If the `je-cookieConsent` cookie is unset, or set to something other than `"full"`, the `noCookies`
+  option will be set on initialisation of the braze SDK.
+
+
 v3.3.0
 ------------------------------
 *March 29, 2021*

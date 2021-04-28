@@ -49,6 +49,10 @@ This method returns an instance of the BrazeDispatcher class, which can also be 
 
 All other functionality, such as handling content cards or intercepting in-app messages can be done with callbacks passed through config.
 
+Note that the [`noCookies`](https://js.appboycdn.com/web-sdk/latest/doc/modules/appboy.html#initializationoptions) option is passed to
+braze SDK as `true` if the `je-cookieConsent` cookie (as set by [`@justeat/f-cookie-banner`](https://www.npmjs.com/package/@justeat/f-cookie-banner))
+is not `"full"`.
+
 #### Basic Example
 
 ```js
