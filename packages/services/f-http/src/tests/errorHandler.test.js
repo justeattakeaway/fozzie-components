@@ -19,9 +19,7 @@ describe('errorHandler', () => {
 
         // Assert
         expect(errorCallbackMock.mock.calls.length).toBe(1);
-
-        // Check that the first argument is the error
-        expect(errorCallbackMock.mock.calls[0][0]).toBe(error);
+        expect(errorCallbackMock).toHaveBeenCalledWith(error);
     });
 
     it('errorHandler should re-throw error when callback is not provided', () => {
