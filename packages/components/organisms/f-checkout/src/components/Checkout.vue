@@ -234,8 +234,6 @@ export default {
     data () {
         return {
             tenantConfigs,
-            nonFulfillableError: null,
-            genericErrorMessage: null,
             hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
             isLoading: false
