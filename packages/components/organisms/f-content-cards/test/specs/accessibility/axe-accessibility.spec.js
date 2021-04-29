@@ -1,15 +1,22 @@
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const { getAccessibilityTestResults } = require('../../../../../../../test/utils/axe-helper');
 const HomePromotionCard1 = require('../../../test-utils/component-objects/f-content-cards-home-promotion-card1.component');
 const HomePromotionCard2 = require('../../../test-utils/component-objects/f-content-cards-home-promotion-card2.component');
-const card1 = new HomePromotionCard1();
-const card2 = new HomePromotionCard2();
+
+let card1;
+let card2;
 
 describe('Accessibility tests', () => {
 
+    beforeEach(() => {
+        card1 = new HomePromotionCard1('molecule-folder', 'f-content-cards--home-promotion-card-1-component');
+        card2 = new HomePromotionCard2('molecule-folder', 'f-content-cards--home-promotion-card-2-component');
+    });
+
     it('a11y - should test f-contentCard component WCAG compliance', () => {
         // Act
-        card1.open();
-        card1.waitForComponent();
+        const pageUrl = buildUrl(card1.componentType, card1.componentName, card1.path);
+        card1.open(pageUrl);
         const axeResults = getAccessibilityTestResults('f-contentCard-homePromotion-1');
 
         // Assert
@@ -18,8 +25,8 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-contentCard component WCAG compliance', () => {
         // Act
-        card2.open();
-        card2.waitForComponent();
+        const pageUrl = buildUrl(card2.componentType, card2.componentName, card2.path);
+        card2.open(pageUrl);
         const axeResults = getAccessibilityTestResults('f-contentCard-homePromotion-2');
 
         // Assert

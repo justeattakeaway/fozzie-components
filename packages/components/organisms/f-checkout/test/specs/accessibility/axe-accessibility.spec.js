@@ -1,18 +1,20 @@
 import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
+
+const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
-const checkout = new Checkout();
+
+let checkout;
 
 
 describe('Accessibility tests', () => {
-
     it('a11y - should test f-checkout component (delivery) WCAG compliance', () => {
         // Act
-        const checkoutData = {
-            type: 'delivery',
-            isAuthenticated: true,
-            isValid: true
-        };
-        checkout.open(checkoutData);
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', true);
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout.open(pageUrl);
         checkout.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-checkout-delivery');
 
@@ -22,12 +24,12 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-checkout component (collection) WCAG compliance', () => {
         // Act
-        const checkoutData = {
-            type: 'collection',
-            isAuthenticated: true,
-            isValid: true
-        };
-        checkout.open(checkoutData);
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'collection')
+                .withQuery('&knob-Is User Logged In', true);
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout.open(pageUrl);
         checkout.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-checkout-collection');
 
@@ -37,12 +39,12 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-checkout component (guest) WCAG compliance', () => {
         // Act
-        const checkoutData = {
-            type: 'delivery',
-            isAuthenticated: false,
-            isValid: true
-        };
-        checkout.open(checkoutData);
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'delivery')
+                .withQuery('&knob-Is User Logged In', false);
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout.open(pageUrl);
         checkout.waitForComponent();
         const axeResults = getAccessibilityTestResults('f-checkout-guest');
 
@@ -52,12 +54,12 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-checkout component (error) WCAG compliance', () => {
         // Act
-        const checkoutData = {
-            type: 'delivery',
-            isAuthenticated: false,
-            isValid: false
-        };
-        checkout.open(checkoutData);
+        checkout = new Checkout('organism', 'checkout-component');
+        checkout.withQuery('&knob-Service Type', 'Invalid URL')
+                .withQuery('&knob-Is User Logged In', false);
+
+        const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
+        checkout.open(pageUrl);
         checkout.waitForErrorPageComponent();
         const axeResults = getAccessibilityTestResults('f-checkout-error-page');
 

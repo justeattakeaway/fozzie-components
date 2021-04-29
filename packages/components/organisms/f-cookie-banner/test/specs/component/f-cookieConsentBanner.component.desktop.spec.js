@@ -1,12 +1,15 @@
 import forEach from 'mocha-each';
 
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
-const CookieBanner = require('../../../../test-utils/component-objects/f-cookieConsentBanner.component');
+const CookieBanner = require('../../../test-utils/component-objects/f-cookieConsentBanner.component');
 
-const cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
+let cookieBanner;
+
 
 describe('New - f-cookieBanner component tests - @browserstack', () => {
     beforeEach(() => {
+
+        cookieBanner = new CookieBanner('organism', 'cookie-banner-component');
         const pageUrl = buildUrl(cookieBanner.componentType, cookieBanner.componentName, cookieBanner.path);
 
         cookieBanner.open(pageUrl);

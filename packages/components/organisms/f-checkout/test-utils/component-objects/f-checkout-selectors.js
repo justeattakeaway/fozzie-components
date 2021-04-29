@@ -9,7 +9,7 @@ export const SWITCH_USER_LINK = '[data-test-id="switch-user-link"]';
 export const GUEST_CHECKOUT_LOGIN_BUTTON = '[data-test-id="guest-login-button"]';
 export const GUEST_CHECKOUT_HEADER = '[data-test-id="guest-checkoutHeader"]';
 export const PRE_ORDER_WARNING = '[data-test-id="warning-pre-order"]';
-export const CHECKOUT_ERROR_MESSAGE = '[data-test-id="checkout-issue-modal"]';
+export const CHECKOUT_ERROR_MESSAGE = '[data-test-id="checkout-issue-modal"] div';
 export const RETRY_BUTTON = '[data-test-id="redirect-to-menu-button"]';
 export const ERROR_PAGE_COMPONENT = '[data-test-id="checkout-error-page-component"]';
 export const ERROR_PAGE_HEADING = '[data-test-id="checkout-error-page-heading"]';

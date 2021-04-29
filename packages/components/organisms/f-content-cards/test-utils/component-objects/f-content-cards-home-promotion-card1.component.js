@@ -1,5 +1,4 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
-const card2 = new HomePromotionCard2('molecule-folder', 'f-content-cards--home-promotion-card-2-component');
 
 const {
     PROMOTION_CARD_1_COMPONENT,

@@ -3,7 +3,7 @@ const forEach = require('mocha-each');
 const { buildUrl } = require('@justeat/f-wdio-utils/src/storybook-extensions.js');
 const Header = require('../../../test-utils/component-objects/f-header.component');
 
-const header = new Header('organism', 'header-component');
+let header;
 
 function formatLocale (tenant) {
     const countryFormatted = tenant.toUpperCase();
@@ -35,6 +35,7 @@ function formatLocale (tenant) {
 
 describe('Mobile - f-header component tests - @browserstack', () => {
     beforeEach(() => {
+        header = new Header('organism', 'header-component');
         header.withQuery('&knob-Locale', formatLocale('gb'));
         header.withQuery('&knob-Show offers link', 'true');
         header.withQuery('&knob-Show delivery enquiry', 'true');

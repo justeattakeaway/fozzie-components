@@ -99,7 +99,7 @@ describe('f-checkout component tests - @browserstack', () => {
         expect(checkout.userNoteMaxCharacterCount()).toEqual('200');
     });
 
-    it('should enable a user to submit without adding a note', () => {
+    it.skip('should enable a user to submit without adding a note', () => {
         // Arrange
         const addressInfo = {
             mobileNumber: '07777777779',
@@ -136,6 +136,7 @@ describe('f-checkout component tests - @browserstack', () => {
         expect(checkout.isPreOrderWarningDisplayed()).toBe(true);
     });
 
+
     it('should display the checkout error component when "Has Checkout Errors" is true', () => {
         // Arrange
         checkout.withQuery('&knob-Checkout Errors', 'ISSUES');
@@ -152,29 +153,11 @@ describe('f-checkout component tests - @browserstack', () => {
 
     it('should display the checkout error component when "Has Place Order Errors" is true', () => {
         // Arrange
-        checkout.withQuery('knob-Place Order Errors', 'SERVER');
+        checkout.withQuery('&knob-Place Order Errors', 'SERVER');
         const pageUrl = buildUrl(checkout.componentType, checkout.componentName, checkout.path);
 
         // Act
         checkout.open(pageUrl);
-        checkout.waitForComponent();
-        checkout.goToPayment();
-
-        // Assert
-        expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(true);
-    });
-
-    it('should display the checkout error component when "Has Place Order Errors" is true', () => {
-        // Arrange
-        const checkoutData = {
-            type: 'delivery',
-            isAuthenticated: true,
-            isValid: true,
-            placeOrderErrors: 'SERVER'
-        };
-
-        // Act
-        checkout.open(checkoutData);
         checkout.waitForComponent();
         checkout.goToPayment();
 
@@ -192,6 +175,7 @@ describe('f-checkout component tests - @browserstack', () => {
         checkout.waitForComponent();
         checkout.goToPayment();
         checkout.clickRetryButton();
+        browser.pause(2000);
 
         // Assert
         expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
