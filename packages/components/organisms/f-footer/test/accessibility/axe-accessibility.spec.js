@@ -7,7 +7,7 @@ const footer = new Footer();
 
 describe('Accessibility tests', () => {
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('a11y - should test f-footer component WCAG compliance for country code %s with default options selected', expectedLocale => {
+    .it('a11y - should test f-footer component WCAG compliance for country code "%s" with default options selected', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,

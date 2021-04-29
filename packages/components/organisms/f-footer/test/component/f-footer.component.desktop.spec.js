@@ -17,7 +17,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     forEach([['ios', 'apple'], ['android', 'google'], ['huawei', 'appgallery']])
-    .it('should display download icons ("%s") and redirect to correct URL ("%s")', (icon, expectedUrl) => {
+    .it('should display download icon "%s" and redirect to correct URL ("%s")', (icon, expectedUrl) => {
         // Act
         footer.expectedDownloadIcon = icon;
 
@@ -32,7 +32,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     forEach([['twitter', 'twitter.com'], ['facebook', 'facebook.com'], ['youtube', 'youtube.com']])
-    .it.only('should display social media icons ("%s") and redirect to correct URL ("%s")', (icon, expectedUrl) => {
+    .it('should display social media icon "%s" and redirect to correct URL ("%s")', (icon, expectedUrl) => {
         // Act
         footer.expectedSocialIcon = icon;
 
@@ -121,7 +121,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
-    .it('should display the corresponding country code ("%s") icon for each locale selected', expectedLocale => {
+    .it('should display the corresponding icon for the "%s" country code', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
