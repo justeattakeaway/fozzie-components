@@ -64,7 +64,7 @@ const messages = {
 
             SERVICE_TYPE_UNAVAILABLE: {
                 title: '{serviceType} unavailable',
-                message: 'We\'re sorry, but the restaurant is not currently taking {serviceType} orders.',
+                message: 'We’re sorry, but the restaurant is not currently taking {serviceType} orders.',
                 buttonText: 'Back to order'
             },
 
