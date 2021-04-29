@@ -14,7 +14,7 @@ const messages = {
 
     validationMessages: {
         mobileNumber: {
-            requiredError: 'Your phone number should be at least 10 characters long and shouldn\'t contain letters or special characters'
+            requiredError: 'Your phone number should be at least 10 characters long and shouldn’t contain letters or special characters'
         },
         addressLine1: {
             requiredError: 'Please enter the first line of your address'
@@ -24,7 +24,7 @@ const messages = {
         },
         postcode: {
             requiredError: 'Please enter your full UK postcode',
-            invalidCharError: 'This doesn\'t look like a UK postcode, can you enter it again please?'
+            invalidCharError: 'This doesn’t look like a UK postcode, can you enter it again please?'
         },
         firstName: {
             requiredError: 'Please enter your first name'
@@ -43,8 +43,8 @@ const messages = {
         errorHeading: 'Error',
         genericServerError: 'Something went wrong, please try again later',
         pageLoad: {
-            heading: 'We can\'t show you this page',
-            description: 'It\'s a problem at our end, sorry. Your basket is safe and sound, though, so try again soon.'
+            heading: 'We can’t show you this page',
+            description: 'It’s a problem at our end, sorry. Your basket is safe and sound, though, so try again soon.'
         },
 
         guestUserCreationFailure: 'Guest checkout isn’t available, sorry. Try again soon or sign up',
@@ -52,13 +52,13 @@ const messages = {
         checkoutIssues: {
             MINIMUM_ORDER_VALUE_NOT_MET: {
                 title: 'Minimum spend not reached',
-                message: 'We\'re sorry, but the minimum spend for your order has not been reached. Please amend your order.',
+                message: 'We’re sorry, but the minimum spend for your order has not been reached. Please amend your order.',
                 buttonText: 'Back to order'
             },
 
             RESTAURANT_NOT_TAKING_ORDERS: {
                 title: 'Restaurant not taking orders',
-                message: 'We\'re sorry, but the restaurant is not currently taking orders. Please choose another restaurant to order from.',
+                message: 'We’re sorry, but the restaurant is not currently taking orders. Please choose another restaurant to order from.',
                 buttonText: 'Ok'
             },
 
@@ -70,25 +70,25 @@ const messages = {
 
             ADDITIONAL_ITEMS_REQUIRED: {
                 title: 'Item(s) cannot be ordered',
-                message: 'We\'re sorry, but the item(s) you are trying to order require other items before you can continue. Please amend your order. ',
+                message: 'We’re sorry, but the item(s) you are trying to order require other items before you can continue. Please amend your order. ',
                 buttonText: 'Back to order'
             },
 
             ITEMS_UNORDERABLE: {
                 title: 'Item(s) unavailable',
-                message: 'We\'re sorry, but some item(s) you wanted to order are no longer available. Please check your order before continuing.',
+                message: 'We’re sorry, but some item(s) you wanted to order are no longer available. Please check your order before continuing.',
                 buttonText: 'Back to order'
             },
 
             FULFILMENT_TIME_UNAVAILABLE: {
                 title: 'Time unavailable',
-                message: 'We\'re sorry, but the time you have selected is no longer available. Please select another time.',
+                message: 'We’re sorry, but the time you have selected is no longer available. Please select another time.',
                 buttonText: 'Ok'
             },
 
             LOCATION_UNDELIVERABLE: {
                 title: 'Cannot deliver to address',
-                message: 'We\'re sorry, but the restaurant does not currently deliver to this address. Please choose to order via collection or from another restaurant.',
+                message: 'We’re sorry, but the restaurant does not currently deliver to this address. Please choose to order via collection or from another restaurant.',
                 buttonText: 'Ok'
             },
 
@@ -118,7 +118,7 @@ const messages = {
     userNote: {
         title: 'Leave a note',
         text: 'Leave a note for the resturant with anything they need to know (e.g. the doorbell doesn\'t work). Do not include details about any allergies here.',
-        placeholder: 'e.g. the doorbell doesn\'t work. Do not include details about any allergies here. \n\nWe\'re working with resturants to cut waste. Please don\'t ask for plastic cutlery.'
+        placeholder: 'e.g. the doorbell doesn’t work. Do not include details about any allergies here. \n\nWe\'re working with resturants to cut waste. Please don\'t ask for plastic cutlery.'
     },
 
     guest: {
@@ -139,6 +139,11 @@ const messages = {
             guestTitle: 'Checkout as a guest',
             confirmation: 'Please confirm your {serviceType} details'
         }
+    },
+
+    serviceTypes: {
+        collection: 'Collection',
+        delivery: 'Delivery'
     },
 
     checkoutTermsAndConditions: 'By placing an order you agree to our {termsAndConditions}. Please read our {privacyPolicy} and {cookiePolicy}.',
