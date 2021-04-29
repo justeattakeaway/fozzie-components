@@ -12,7 +12,7 @@
         </h3>
 
         <p data-test-id="checkout-issue-modal-message">
-            {{ $t(`errorMessages.checkoutIssues.${errorCode}.message`) }}
+            {{ $t(`errorMessages.checkoutIssues.${errorCode}.message`, { serviceType }) }}
         </p>
 
         <f-button
