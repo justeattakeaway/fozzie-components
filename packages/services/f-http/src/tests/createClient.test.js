@@ -8,7 +8,7 @@ describe('createClient', () => {
         });
 
         it('should use default options when not overridden', async () => {
-            // Arrange & Act
+            // Arrange
             const expectedResult = {
                 baseUrl: '',
                 timeout: 10000,
@@ -16,6 +16,7 @@ describe('createClient', () => {
                 contentType: 'application/json'
             };
 
+            // Act
             const httpClient = createClient();
             const mergedOptions = httpClient.readConfiguration();
 
@@ -24,7 +25,7 @@ describe('createClient', () => {
         });
 
         it('should use overridden options when overridden', async () => {
-            // Arrange & Act
+            // Arrange
             const expectedBaseUrl = 'https://www.example.org';
             const expectedTimeout = 2000;
             const expectedErrorCallback = () => {};
@@ -37,12 +38,8 @@ describe('createClient', () => {
                 contentType: expectedContentType
             };
 
-            const httpClient = createClient({
-                baseUrl: expectedBaseUrl,
-                timeout: expectedTimeout,
-                errorCallback: expectedErrorCallback,
-                contentType: expectedContentType
-            });
+            // Act
+            const httpClient = createClient(expectedResult);
 
             const mergedOptions = httpClient.readConfiguration();
 
