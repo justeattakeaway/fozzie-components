@@ -9,6 +9,7 @@ v3.29.1
 
 ## Added
 - CircleCI config for local testing
+- Documentation into storybook guides as to how to install CircleCI local with Docker
 
 *April 16, 2021*
 
