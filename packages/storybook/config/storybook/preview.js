@@ -31,6 +31,10 @@ export const parameters = {
                             'Checklist'
                         ]
                     ],
+                    'Capabilities',
+                    [
+                        'Overview'
+                    ],
                     'Guides',
                     [
                         [
