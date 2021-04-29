@@ -10,6 +10,7 @@ v0.98.0
 
 ### Changed
 - Updated Checkout error messages to reflect latest copy
+- Included service type labels to display in error messages
 
 
 v0.97.0
