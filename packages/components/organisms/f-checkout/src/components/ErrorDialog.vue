@@ -8,7 +8,7 @@
         <h3
             data-test-id="checkout-issue-modal-title"
             class="u-noSpacing">
-            {{ $t(`errorMessages.checkoutIssues.${errorCode}.title`) }}
+            {{ $t(`errorMessages.checkoutIssues.${errorCode}.title`, { serviceType }) }}
         </h3>
 
         <p data-test-id="checkout-issue-modal-message">
@@ -45,6 +45,10 @@ export default {
             default: false
         },
         errorCode: {
+            type: String,
+            default: ''
+        },
+        serviceType: {
             type: String,
             default: ''
         }

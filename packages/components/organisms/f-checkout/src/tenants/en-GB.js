@@ -51,51 +51,51 @@ const messages = {
 
         checkoutIssues: {
             MINIMUM_ORDER_VALUE_NOT_MET: {
-                title: 'Your order does not meet the minimum spend required',
-                message: 'The restaurant might have run out or updated its menu while you were ordering, sorry. You can go back to check your order and choose another item.',
-                buttonText: 'Back to Order'
+                title: 'Minimum spend not reached',
+                message: 'We\'re sorry, but the minimum spend for your order has not been reached. Please amend your order.',
+                buttonText: 'Back to order'
             },
 
             RESTAURANT_NOT_TAKING_ORDERS: {
-                title: 'We couldn\'t send your order',
-                message: 'The restaurant went offline, so we couldn\'t send your order to them, sorry. Hopefully it\'s only temporary, please try again.',
-                buttonText: 'Retry'
+                title: 'Restaurant not taking orders',
+                message: 'We\'re sorry, but the restaurant is not currently taking orders. Please choose another restaurant to order from.',
+                buttonText: 'Ok'
             },
 
             SERVICE_TYPE_UNAVAILABLE: {
-                title: 'We couldn\'t send your order',
-                message: 'It appears the message for this error is not yet added to the spreadsheet',
-                buttonText: 'Retry'
+                title: '{serviceType} unavailable',
+                message: 'We\'re sorry, but the restaurant is not currently taking {serviceType} orders.',
+                buttonText: 'Back to order'
             },
 
             ADDITIONAL_ITEMS_REQUIRED: {
-                title: 'We’ve taken an item off your order',
-                message: 'The restaurant might have run out or updated its menu while you were ordering, sorry. You can go back to check your order and choose another item.',
-                buttonText: 'Back to Order'
+                title: 'Item(s) cannot be ordered',
+                message: 'We\'re sorry, but the item(s) you are trying to order require other items before you can continue. Please amend your order. ',
+                buttonText: 'Back to order'
             },
 
             ITEMS_UNORDERABLE: {
-                title: 'We’ve taken an item off your order',
-                message: 'The restaurant might have run out or updated its menu while you were ordering, sorry. You can go back to check your order and choose another item.',
-                buttonText: 'Back to Order'
+                title: 'Item(s) unavailable',
+                message: 'We\'re sorry, but some item(s) you wanted to order are no longer available. Please check your order before continuing.',
+                buttonText: 'Back to order'
             },
 
             FULFILMENT_TIME_UNAVAILABLE: {
-                title: 'We do takeaways, not time machines',
-                message: 'The time you picked for your order isn\'t possible, please choose another.',
-                buttonText: 'Retry'
+                title: 'Time unavailable',
+                message: 'We\'re sorry, but the time you have selected is no longer available. Please select another time.',
+                buttonText: 'Ok'
             },
 
             LOCATION_UNDELIVERABLE: {
-                title: 'The restaurant doesn\'t deliver to this address',
-                message: 'Search for a different restaurant or change to a collection order.',
+                title: 'Cannot deliver to address',
+                message: 'We\'re sorry, but the restaurant does not currently deliver to this address. Please choose to order via collection or from another restaurant.',
                 buttonText: 'Ok'
             },
 
             DEFAULT_CHECKOUT_ISSUE: {
                 title: 'Something went wrong',
                 message: 'Please try again',
-                buttonText: 'Retry'
+                buttonText: 'Ok'
             },
 
             DuplicateOrder: {
