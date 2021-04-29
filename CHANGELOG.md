@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.29.1
 ------------------------------
-*April 26, 2021*
+*April 29, 2021*
 
 ## Added
 - CircleCI config for local testing
