@@ -25,7 +25,9 @@
         <div
             v-else
             data-test-id="guest-checkoutHeader">
-            <h1 :class="$style['c-checkoutHeader-guestTitle']">
+            <h1
+                data-test-id="user-title"
+                :class="$style['c-checkoutHeader-guestTitle']">
                 {{ $t('checkoutHeader.guest.loginTitle') }}
             </h1>
 

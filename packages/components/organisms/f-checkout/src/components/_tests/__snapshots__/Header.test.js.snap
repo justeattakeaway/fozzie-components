@@ -2,7 +2,7 @@
 
 exports[`Header computed :: isLoggedIn :: when set to false should render the guest header 1`] = `
 <div data-test-id="guest-checkoutHeader">
-  <h1>
+  <h1 data-test-id="user-title">
     How do you want to continue?
   </h1>
   <f-button-stub buttontype="primary" buttonsize="large" isfullwidth="true" actiontype="button" data-test-id="guest-login-button" href="http://localhost/login">
