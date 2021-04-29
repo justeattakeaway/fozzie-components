@@ -109,6 +109,7 @@ All options are optional, you don't need to specify any overrides if you are hap
 
 Option | Description | Type | Default
 ------------- | ------------- | ------------- | -------------
-baseUrl | Ensure all requests from this client use a relative url | string | ""
+baseUrl | Ensure all requests from this client use a relative url | string | ''
 timeout | How long each request takes to timeout | number | 10000
 errorCallback | A function you can use to globally handle errors (accepts error object) | function | null
+contentType | Specify a value for the content type header | string | 'application/json'

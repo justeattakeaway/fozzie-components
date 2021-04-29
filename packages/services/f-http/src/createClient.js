@@ -60,7 +60,10 @@ export default options => {
 
     _axiosInstance = axios.create({
         baseURL: _configuration.baseUrl,
-        timeout: _configuration.timeout
+        timeout: _configuration.timeout,
+        headers: {
+            'Content-Type': _configuration.contentType
+        }
     });
 
     return {

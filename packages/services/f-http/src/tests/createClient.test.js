@@ -12,7 +12,8 @@ describe('createClient', () => {
             const expectedResult = {
                 baseUrl: '',
                 timeout: 10000,
-                errorCallback: null
+                errorCallback: null,
+                contentType: 'application/json'
             };
 
             const httpClient = createClient();
@@ -27,17 +28,20 @@ describe('createClient', () => {
             const expectedBaseUrl = 'https://www.example.org';
             const expectedTimeout = 2000;
             const expectedErrorCallback = () => {};
+            const expectedContentType = 'application/mpeg';
 
             const expectedResult = {
                 baseUrl: expectedBaseUrl,
                 timeout: expectedTimeout,
-                errorCallback: expectedErrorCallback
+                errorCallback: expectedErrorCallback,
+                contentType: expectedContentType
             };
 
             const httpClient = createClient({
                 baseUrl: expectedBaseUrl,
                 timeout: expectedTimeout,
-                errorCallback: expectedErrorCallback
+                errorCallback: expectedErrorCallback,
+                contentType: expectedContentType
             });
 
             const mergedOptions = httpClient.readConfiguration();
