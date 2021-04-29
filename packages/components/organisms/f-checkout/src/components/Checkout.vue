@@ -1,10 +1,7 @@
 <template>
     <div>
-        <error-dialog
-            :is-open="shouldShowErrorDialog"
-            :error-code="hasNonFulfillableErrorCode"
-            @close="handleErrorDialogClose"
-            @checkout-error-dialog-button-click="handleErrorDialogButtonClick" />
+        <error-dialog ref="errorAlert" />
+
         <div
             v-if="shouldShowSpinner"
             :class="$style['c-spinner-wrapper']"
@@ -17,16 +14,6 @@
             data-theme="jet"
             data-test-id="checkout-component"
         >
-            <alert
-                v-if="genericErrorMessage"
-                ref="errorAlert"
-                type="danger"
-                :class="$style['c-checkout-alert']"
-                :heading="$t('errorMessages.errorHeading')"
-            >
-                {{ genericErrorMessage }}
-            </alert>
-
             <card
                 is-rounded
                 has-outline
@@ -97,9 +84,7 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import { required, email } from 'vuelidate/lib/validators';
-import { mapActions, mapGetters, mapState } from 'vuex';
-import Alert from '@justeat/f-alert';
-import '@justeat/f-alert/dist/f-alert.css';
+import { mapActions, mapState } from 'vuex';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import Card from '@justeat/f-card';
@@ -145,18 +130,17 @@ export default {
 
     components: {
         AddressBlock,
-        Alert,
         FButton,
         Card,
         CheckoutHeader,
         CheckoutTermsAndConditions,
-        ErrorPage,
+        ErrorDialog,
         ErrorMessage,
+        ErrorPage,
         FormField,
         FormSelector,
         GuestBlock,
-        UserNote,
-        ErrorDialog
+        UserNote
     },
 
     mixins: [
@@ -294,13 +278,10 @@ export default {
             'messages',
             'notices',
             'orderId',
-            'restaurant',
             'serviceType',
             'time',
             'userNote'
         ]),
-
-        ...mapGetters(VUEX_CHECKOUT_MODULE, ['firstDialogError']),
 
         isMobileNumberValid () {
             /*
@@ -332,18 +313,6 @@ export default {
 
         shouldShowErrorPage () {
             return !this.hasCheckoutLoadedSuccessfully;
-        },
-
-        shouldShowErrorDialog () {
-            return this.nonFulfillableError ? this.nonFulfillableError.shouldShowInDialog : false;
-        },
-
-        restaurantMenuPageUrl () {
-            return `restaurant-${this.restaurant.seoName}/menu`;
-        },
-
-        hasNonFulfillableErrorCode () {
-            return this.nonFulfillableError && this.nonFulfillableError.code;
         },
 
         eventData () {
@@ -393,6 +362,7 @@ export default {
             'placeOrder',
             'setAuthToken',
             'updateCheckout',
+            'updateDisplayError',
             'updateCustomerDetails',
             'updateUserNote'
         ]),
@@ -457,8 +427,6 @@ export default {
          */
         handleNonFulfillableCheckout () {
             if (this.errors) {
-                this.toggleDialogError();
-
                 this.trackFormErrors();
 
                 this.logInvoker({
@@ -471,13 +439,6 @@ export default {
             }
         },
 
-        /**
-        * Update `nonFulfillableError`, which at the moment drives whether we should show or hide
-        * a dialog and what to show in it, using the first error to be shown in a dialog, if there's one.
-        */
-        toggleDialogError () {
-            this.nonFulfillableError = this.firstDialogError;
-        },
 
         /**
          * Handles call of `updateCheckout` and catches and throws any returned errors.
@@ -546,7 +507,6 @@ export default {
                     logMethod: this.$logger.logInfo
                 });
             } catch (e) {
-                this.toggleDialogError();
                 throw new PlaceOrderError(e.message);
             }
         },
@@ -711,10 +671,9 @@ export default {
         /**
          * Emit, log and track the error based on the parameters
          * encapsulated within the 'error' class.
-         * Set the `genericErrorMessage` for the user to see.
+         * Set the `displayError` for the user to see.
          */
         handleErrorState (error) {
-            const message = this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
             const eventToEmit = error.eventToEmit || EventNames.CheckoutFailure;
             const logMessage = error.logMessage || 'Consumer Checkout Failure';
 
@@ -728,17 +687,11 @@ export default {
             });
 
             this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
+            this.updateDisplayError(this.$t(error.messageKey) || this.$t('errorMessages.genericServerError'));
 
-            // We don't want to show a dialog and an error message.
-            // TODO: refactor `nonFulfillableError` and `genericErrorMessage` so that we try to use only one, and
-            // we make it more generic and not just for "non fulfillable errors".
-            if (!this.nonFulfillableError) {
-                this.genericErrorMessage = message;
-
-                this.$nextTick(() => {
-                    this.scrollToElement(this.$refs.errorAlert.$el);
-                });
-            }
+            this.$nextTick(() => {
+                this.scrollToElement(this.$refs.errorAlert.$el);
+            });
         },
 
         /**
@@ -844,18 +797,6 @@ export default {
                     this.shouldShowSpinner = true;
                 }
             }, this.spinnerTimeout);
-        },
-
-        handleErrorDialogClose () {
-            this.nonFulfillableError = null;
-        },
-
-        handleErrorDialogButtonClick () {
-            if (this.nonFulfillableError && this.nonFulfillableError.shouldRedirectToMenu) {
-                window.location.assign(this.restaurantMenuPageUrl);
-            }
-
-            this.handleErrorDialogClose();
         }
     },
 
@@ -933,11 +874,6 @@ export default {
     margin-top: spacing(x2);
 }
 
-.c-checkout-alert {
-    width: $checkout-width;
-    margin-left: auto;
-    margin-right: auto;
-}
 /* If these stay the same then just rename the class to something more generic */
 .c-checkout-submitButton {
     margin: spacing(x4) 0 spacing(x0.5);
