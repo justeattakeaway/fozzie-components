@@ -30,8 +30,8 @@ const settings = () => ({
             build: browserstackName,
             'browserstack.networkLogs': true,
             specs: VS_DEBUGGER ? [SPEC_FILE] : [
-                'test/specs/component/*.component.mobile.spec.js',
-                'test/specs/component/*.component.shared.spec.js'
+                'test/component/*.component.mobile.spec.js',
+                'test/component/*.component.shared.spec.js'
             ]
         }] : []),
         ...(isDesktop || isShared ? [{
@@ -43,8 +43,8 @@ const settings = () => ({
             build: browserstackName,
             'browserstack.networkLogs': true,
             specs: VS_DEBUGGER ? [SPEC_FILE] : [
-                'test/specs/component/*.component.desktop.spec.js',
-                'test/specs/component/*.component.shared.spec.js'
+                'test/component/*.component.desktop.spec.js',
+                'test/component/*.component.shared.spec.js'
             ]
         }] : [])
     ],
