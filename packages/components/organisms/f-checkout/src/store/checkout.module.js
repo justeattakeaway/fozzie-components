@@ -16,6 +16,7 @@ import {
     UPDATE_GEO_LOCATION,
     UPDATE_IS_FULFILLABLE,
     UPDATE_ERRORS,
+    UPDATE_ERROR_MESSAGE,
     UPDATE_ORDER_PLACED,
     UPDATE_STATE,
     UPDATE_USER_NOTE
@@ -97,6 +98,7 @@ export default {
         userNote: '',
         isFulfillable: true,
         errors: [],
+        displayError: null,
         notices: [],
         messages: [],
         availableFulfilment: {
@@ -147,7 +149,7 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         // eslint-disable-next-line no-unused-vars
-        updateCheckout: async ({ commit, state }, {
+        updateCheckout: async ({ commit, state, dispatch }, {
             url, data, timeout
         }) => {
             // TODO: deal with exceptions and handle this action properly (when the functionality is ready)
@@ -168,6 +170,8 @@ export default {
 
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
                     || { code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true });
+
+            dispatch('updateDisplayError', detailedIssues);
 
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
@@ -382,6 +386,21 @@ export default {
 
         updateHasAsapSelected ({ commit }, payload) {
             commit(UPDATE_HAS_ASAP_SELECTED, payload);
+        },
+
+        updateDisplayError: ({ commit }, payload) => {
+            const alert = {
+                code: payload,
+                shouldShowInAlert: true
+            };
+
+            let displayError = null;
+
+            if (payload) {
+                displayError = payload[0].code ? payload[0] : alert;
+            }
+
+            commit(UPDATE_ERROR_MESSAGE, displayError);
         }
     },
 
@@ -498,6 +517,10 @@ export default {
                 latitude: lat,
                 longitude: lng
             };
+        },
+
+        [UPDATE_ERROR_MESSAGE]: (state, displayError) => {
+            state.displayError = displayError;
         }
     }
 };

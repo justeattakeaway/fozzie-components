@@ -66,7 +66,7 @@ const $v = {
     $touch: jest.fn()
 };
 
-describe('Checkout', () => {
+xdescribe('Checkout', () => {
     const updateCheckoutUrl = 'http://localhost/updatecheckout';
     const getCheckoutUrl = 'http://localhost/checkout';
     const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
