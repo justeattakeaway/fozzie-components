@@ -9,14 +9,17 @@ describe('createClient', () => {
 
         it('should use default options when not overridden', async () => {
             // Arrange & Act
+            const expectedResult = {
+                baseUrl: '',
+                timeout: 10000,
+                errorCallback: null
+            };
+
             const httpClient = createClient();
             const mergedOptions = httpClient.readConfiguration();
 
             // Assert
-            expect(mergedOptions).toBeDefined();
-            expect(mergedOptions.baseUrl).toBe('');
-            expect(mergedOptions.timeout).toBe(10000);
-            expect(mergedOptions.errorCallback).toBe(null);
+            expect(mergedOptions).toStrictEqual(expectedResult);
         });
 
         it('should use overridden options when overridden', async () => {
@@ -25,18 +28,22 @@ describe('createClient', () => {
             const expectedTimeout = 2000;
             const expectedErrorCallback = () => {};
 
+            const expectedResult = {
+                baseUrl: expectedBaseUrl,
+                timeout: expectedTimeout,
+                errorCallback: expectedErrorCallback
+            };
+
             const httpClient = createClient({
                 baseUrl: expectedBaseUrl,
                 timeout: expectedTimeout,
                 errorCallback: expectedErrorCallback
             });
+
             const mergedOptions = httpClient.readConfiguration();
 
             // Assert
-            expect(mergedOptions).toBeDefined();
-            expect(mergedOptions.baseUrl).toBe(expectedBaseUrl);
-            expect(mergedOptions.timeout).toBe(expectedTimeout);
-            expect(mergedOptions.errorCallback).toBe(expectedErrorCallback);
+            expect(mergedOptions).toStrictEqual(expectedResult);
         });
     });
 });

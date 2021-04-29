@@ -69,7 +69,7 @@ import Vue from 'vue';
 import http from '@justeat/f-http';
 
 const errorCallback = error => { // This is optional
-    console.error(`Handled HTTP Error: ${error.message}`, error)
+    console.error(`Handled HTTP Error: ${error.message}`);
 };
 
 export default () => {
