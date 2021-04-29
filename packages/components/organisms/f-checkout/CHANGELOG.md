@@ -3,6 +3,54 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.96.0
+------------------------------
+*April 28, 2021*
+
+### Changed
+- Updated notes to reflect PIE design
+
+
+v0.95.0
+------------------------------
+*April 26, 2021*
+
+### Added
+- Handling of duplicate orders.
+
+### Changed
+- Refactored handling order issues.
+
+
+v0.94.0
+------------------------------
+*April 23, 2021*
+
+### Changed
+- `UPDATE_AUTH_GUEST` mutation now sets `isLoggedIn` to `true`
+
+
+v0.93.0
+------------------------------
+*April 20, 2021*
+
+### Added
+- Removed alternative method of getting customer details so all access is via the `$State`
+
+
+v0.92.0
+------------------------------
+*April 16, 2021*
+
+### Added
+- Use AuthToken phone nos. if checkout api fails to return a customer phone no.
+
+
+### Changed
+- Refactored handling order issues.
+
+
 v0.91.0
 ------------------------------
 *April 14, 2021*

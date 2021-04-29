@@ -5,7 +5,9 @@ import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
-import { mockAuthToken } from '../../components/_tests/helpers/setup';
+import {
+    defaultCheckoutState, mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber
+} from '../../components/_tests/helpers/setup';
 import { version as applicationVerion } from '../../../package.json';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../../constants';
 
@@ -24,7 +26,7 @@ import {
     UPDATE_GEO_LOCATION
 } from '../mutation-types';
 
-const { actions, mutations } = CheckoutModule;
+const { actions, mutations, getters } = CheckoutModule;
 
 const {
     createGuestUser,
@@ -32,7 +34,6 @@ const {
     getAvailableFulfilment,
     getBasket,
     getCheckout,
-    getCustomerName,
     getGeoLocation,
     placeOrder,
     setAuthToken,
@@ -197,13 +198,13 @@ describe('CheckoutModule', () => {
         });
 
         describe(`${UPDATE_AUTH_GUEST} ::`, () => {
-            it('should update state with authToken and set `isLoggedIn` to false', () => {
+            it('should update state with authToken and set `isLoggedIn` to true', () => {
                 // Act
                 mutations[UPDATE_AUTH_GUEST](state, authToken);
 
                 // Assert
                 expect(state.authToken).toEqual(authToken);
-                expect(state.isLoggedIn).toBeFalsy();
+                expect(state.isLoggedIn).toBeTruthy();
             });
 
             it('should update state with `isGuestCreated` set to true', () => {
@@ -294,7 +295,6 @@ describe('CheckoutModule', () => {
     describe('actions ::', () => {
         let commit;
         let dispatch;
-
         let payload;
 
         beforeEach(() => {
@@ -312,6 +312,7 @@ describe('CheckoutModule', () => {
 
         describe('getCheckout ::', () => {
             let config;
+            let checkoutDeliveryCopy;
 
             beforeEach(() => {
                 config = {
@@ -322,7 +323,10 @@ describe('CheckoutModule', () => {
                     timeout: payload.timeout
                 };
 
-                axios.get = jest.fn(() => Promise.resolve({ data: checkoutDelivery }));
+                // Use a new copy per test so any mutations do not affect subsequent tests
+                checkoutDeliveryCopy = Object.assign(checkoutDelivery);
+
+                axios.get = jest.fn(() => Promise.resolve({ data: checkoutDeliveryCopy }));
             });
 
             it(`should get the checkout details from the backend and call ${UPDATE_STATE} mutation.`, async () => {
@@ -331,7 +335,7 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDelivery);
+                expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
             });
 
             it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
@@ -340,6 +344,146 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
+            });
+
+            describe('when the `customer` model is not returned from the api', () => {
+                it('should not error when checking phone number', async () => {
+                    // Arrange
+                    checkoutDeliveryCopy.customer = null;
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDeliveryCopy.customer).toBe(null);
+                    expect(axios.get).toHaveBeenCalledWith(payload.url, config);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
+                });
+            });
+
+            describe('when the customer details are returned from the api', () => {
+                it('should not use neither of AuthToken phone numbers', async () => {
+                    // Arrange
+                    const expectedPhoneNumber = '5678901234';
+                    checkoutDeliveryCopy.customer = {
+                        phoneNumber: expectedPhoneNumber
+                    };
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
+                });
+
+                it('should not use neither of AuthToken customer names', async () => {
+                    // Arrange
+                    const expectedFirstName = 'Jazz';
+                    const expectedLastName = 'Man';
+                    checkoutDeliveryCopy.customer = {
+                        firstName: expectedFirstName,
+                        lastName: expectedLastName
+                    };
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDeliveryCopy.customer.firstName).toBe(expectedFirstName);
+                    expect(checkoutDeliveryCopy.customer.lastName).toBe(expectedLastName);
+                });
+            });
+
+            describe('when the customers phone number is not returned from the api', () => {
+                beforeEach(() => {
+                    checkoutDeliveryCopy.customer = {
+                        phoneNumber: null
+                    };
+                });
+
+                afterEach(() => {
+                    // Reset the AuthToken for subsequent tests
+                    state.authToken = authToken;
+                });
+
+                it('should assign the AuthToken mobile number to the `customer.phoneNumber`', async () => {
+                    // Arrange
+                    state.authToken = mockAuthToken;
+                    const expectedPhoneNumber = '9876543210'; // AuthToken Mobile No.
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
+                });
+
+                it('should assign the AuthToken phone number to the `customer.phoneNumber` if the AuthToken mobile number is missing', async () => {
+                    // Arrange
+                    state.authToken = mockAuthTokenNoMobileNumber;
+                    config.headers.Authorization = `Bearer ${state.authToken}`;
+                    const expectedPhoneNumber = '0123456789'; // AuthToken Phone No.
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDeliveryCopy.customer.phoneNumber).toBe(expectedPhoneNumber);
+                });
+
+                it('should assign nothing to the `customer.phoneNumber` if both the AuthToken phone numbers are missing', async () => {
+                    // Arrange
+                    state.authToken = mockAuthTokenNoNumbers;
+                    config.headers.Authorization = `Bearer ${state.authToken}`;
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDeliveryCopy.customer.phoneNumber).toBeUndefined();
+                });
+            });
+
+            describe('when the customers first name is not returned from the api but the last name is', () => {
+                it('should assign the AuthToken first & last name to the `customer`', async () => {
+                    // Arrange
+                    const expectedCustomerDetails = {
+                        firstName: 'Joe',
+                        lastName: 'Bloggs'
+                    };
+                    checkoutDeliveryCopy.customer = {
+                        firstName: null,
+                        lastName: 'Man'
+                    };
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDeliveryCopy.customer.firstName).toBe(expectedCustomerDetails.firstName);
+                    expect(checkoutDeliveryCopy.customer.lastName).toBe(expectedCustomerDetails.lastName);
+                });
+            });
+
+            describe('when the customers last name is not returned from the api but the first name is', () => {
+                it('should assign the AuthToken first & last name to the `customer`', async () => {
+                    // Arrange
+                    const expectedCustomerDetails = {
+                        firstName: 'Joe',
+                        lastName: 'Bloggs'
+                    };
+                    checkoutDeliveryCopy.customer = {
+                        firstName: 'Jazz',
+                        lastName: null
+                    };
+
+                    // Act
+                    await getCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(checkoutDeliveryCopy.customer.firstName).toBe(expectedCustomerDetails.firstName);
+                    expect(checkoutDeliveryCopy.customer.lastName).toBe(expectedCustomerDetails.lastName);
+                });
             });
         });
 
@@ -413,22 +557,6 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe('getCustomerName ::', () => {
-            it('should get the customer first name and last name from token', async () => {
-                // Arrange
-                const expectedCustomerDetails = {
-                    firstName: 'Joe',
-                    lastName: 'Bloggs'
-                };
-
-                // Act
-                await getCustomerName({ commit, state });
-
-                // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_CUSTOMER_DETAILS, expectedCustomerDetails);
-            });
-        });
-
         describe('placeOrder ::', () => {
             it('should post the order details to the backend.', async () => {
                 // Arrange
@@ -464,6 +592,65 @@ describe('CheckoutModule', () => {
                 // Assert
                 expect(axios.post).toHaveBeenCalledWith(payload.url, payload.data, config);
             });
+
+            describe('when the api call is unsuccessful', () => {
+                describe('when the there is a response', () => {
+                    it('should commit `UPDATE_ERRORS` with a known error when a place order issue is found', async () => {
+                        // Arrange
+                        // eslint-disable-next-line prefer-promise-reject-errors
+                        axios.post = jest.fn(() => Promise.reject({
+                            status: 400,
+                            response: {
+                                data: {
+                                    errorCode: 'DuplicateOrder'
+                                }
+                            }
+                        }));
+
+                        try {
+                            // Act
+                            await placeOrder({ commit, state }, payload);
+                        } catch {
+                            // Assert
+                            expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [{ code: 'DuplicateOrder', shouldRedirectToMenu: false, shouldShowInDialog: true }]);
+                        }
+                    });
+
+                    it('should commit `UPDATE_ERRORS` with an empty array when a place order issue is not found', async () => {
+                        // Arrange
+                        // eslint-disable-next-line prefer-promise-reject-errors
+                        axios.post = jest.fn(() => Promise.reject({
+                            status: 400,
+                            response: {
+                                data: {
+                                    errorCode: 'UnknownError'
+                                }
+                            }
+                        }));
+
+                        try {
+                            // Act
+                            await placeOrder({ commit, state }, payload);
+                        } catch {
+                            // Assert
+                            expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, []);
+                        }
+                    });
+                });
+
+                it('should throw the error', async () => {
+                    // Arrange
+                    const errorMessage = 'An error';
+
+                    axios.post = jest.fn(() => Promise.reject(new Error(errorMessage)));
+
+                    // Act
+                    const result = await expect(placeOrder({ commit, state }, payload));
+
+                    // Assert
+                    result.rejects.toThrow(errorMessage);
+                });
+            });
         });
 
         describe('updateCheckout ::', () => {
@@ -481,6 +668,7 @@ describe('CheckoutModule', () => {
                     },
                     timeout: payload.timeout
                 };
+
                 axios.patch = jest.fn(() => Promise.resolve({
                     status: 200,
                     data: {
@@ -504,6 +692,25 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [{ code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true }]);
+            });
+
+            it('should convert an unsupported error into a known issue.', async () => {
+                // Arrange
+                const knownIssue = 'RESTAURANT_NOT_TAKING_ORDERS';
+
+                axios.patch = jest.fn(() => Promise.resolve({
+                    status: 200,
+                    data: {
+                        isFulfillable: false,
+                        issues: [{ code: knownIssue }]
+                    }
+                }));
+
+                // Act
+                await updateCheckout({ commit, state }, payload);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [{ code: knownIssue, shouldShowInDialog: true, shouldRedirectToMenu: false }]);
             });
         });
 
@@ -643,7 +850,6 @@ describe('CheckoutModule', () => {
         it.each([
             [setAuthToken, UPDATE_AUTH, authToken],
             [updateAddressDetails, UPDATE_FULFILMENT_ADDRESS, address],
-            [updateCustomerDetails, UPDATE_CUSTOMER_DETAILS, customerDetails],
             [updateUserNote, UPDATE_USER_NOTE, userNote]
         ])('%s should call %s mutation with passed value', (action, mutation, value) => {
             // Act
@@ -664,6 +870,46 @@ describe('CheckoutModule', () => {
 
             // Assert
             expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
+        });
+    });
+
+    describe('getters ::', () => {
+        describe('firstDialogError ::', () => {
+            it('should return the first error to show in a dialog when there is one', () => {
+                // Arrange
+                state = {
+                    ...defaultCheckoutState,
+                    errors: [
+                        { code: 'CODE1', shouldShowInDialog: false },
+                        { code: 'CODE2', shouldShowInDialog: true },
+                        { code: 'CODE3', shouldShowInDialog: false }
+                    ]
+                };
+
+                // Act
+                const result = getters.firstDialogError(state);
+
+                // Assert
+                expect(result).toMatchSnapshot();
+            });
+
+            it('should return `undefined` when there are no errors to show in a dialog', () => {
+                // Arrange
+                state = {
+                    ...defaultCheckoutState,
+                    errors: [
+                        { code: 'CODE1', shouldShowInDialog: false },
+                        { code: 'CODE2', shouldShowInDialog: false },
+                        { code: 'CODE3', shouldShowInDialog: false }
+                    ]
+                };
+
+                // Act
+                const result = getters.firstDialogError(state);
+
+                // Assert
+                expect(result).toBe(undefined);
+            });
         });
     });
 });

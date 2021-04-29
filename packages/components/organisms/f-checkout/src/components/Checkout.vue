@@ -97,7 +97,7 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import { required, email } from 'vuelidate/lib/validators';
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
 import FButton from '@justeat/f-button';
@@ -300,6 +300,8 @@ export default {
             'userNote'
         ]),
 
+        ...mapGetters(VUEX_CHECKOUT_MODULE, ['firstDialogError']),
+
         isMobileNumberValid () {
             /*
             * Validation methods return true if the validation conditions
@@ -322,10 +324,6 @@ export default {
             return this.isLoggedIn &&
                 this.isCheckoutMethodDelivery &&
                 (!this.address || !this.address.line1);
-        },
-
-        shouldLoadCustomerNameFromClaims () {
-            return this.isLoggedIn && (!this.customer.firstName && !this.customer.lastName);
         },
 
         shouldShowCheckoutForm () {
@@ -421,10 +419,6 @@ export default {
             await Promise.all(promises);
             this.resetLoadingState();
 
-            if (this.shouldLoadCustomerNameFromClaims) {
-                this.getCustomerName();
-            }
-
             if (this.shouldLoadAddress) {
                 await this.loadAddress();
             }
@@ -463,7 +457,7 @@ export default {
          */
         handleNonFulfillableCheckout () {
             if (this.errors) {
-                this.nonFulfillableError = this.errors.find(error => error.shouldShowInDialog);
+                this.toggleDialogError();
 
                 this.trackFormErrors();
 
@@ -475,6 +469,14 @@ export default {
 
                 this.$emit(EventNames.CheckoutUpdateFailure, this.eventData);
             }
+        },
+
+        /**
+        * Update `nonFulfillableError`, which at the moment drives whether we should show or hide
+        * a dialog and what to show in it, using the first error to be shown in a dialog, if there's one.
+        */
+        toggleDialogError () {
+            this.nonFulfillableError = this.firstDialogError;
         },
 
         /**
@@ -544,6 +546,7 @@ export default {
                     logMethod: this.$logger.logInfo
                 });
             } catch (e) {
+                this.toggleDialogError();
                 throw new PlaceOrderError(e.message);
             }
         },
@@ -716,18 +719,26 @@ export default {
             const logMessage = error.logMessage || 'Consumer Checkout Failure';
 
             this.$emit(eventToEmit, { ...this.eventData, error });
+
             this.logInvoker({
                 message: logMessage,
                 data: this.eventData,
                 logMethod: this.$logger.logError,
                 error
             });
-            this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
-            this.genericErrorMessage = message;
 
-            this.$nextTick(() => {
-                this.scrollToElement(this.$refs.errorAlert.$el);
-            });
+            this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
+
+            // We don't want to show a dialog and an error message.
+            // TODO: refactor `nonFulfillableError` and `genericErrorMessage` so that we try to use only one, and
+            // we make it more generic and not just for "non fulfillable errors".
+            if (!this.nonFulfillableError) {
+                this.genericErrorMessage = message;
+
+                this.$nextTick(() => {
+                    this.scrollToElement(this.$refs.errorAlert.$el);
+                });
+            }
         },
 
         /**

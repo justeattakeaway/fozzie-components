@@ -5,8 +5,20 @@ const video = require('wdio-video-reporter');
 
 const settings = () => ({
     baseUrl: 'http://localhost:8080',
-    capabilities: [
-        ...(isDesktop || isShared ? [{
+    a11y: {
+        capabilities: [
+            {
+                browserName: 'chrome',
+                acceptInsecureCerts: true,
+                specs: VS_DEBUGGER ? [SPEC_FILE] : [
+                    'test/accessibility/axe-accessibility.spec.js',
+                ]
+            }
+        ]
+    },
+    component: {
+        capabilities: [
+            ...(isDesktop || isShared ? [{
             browserName: 'chrome',
             acceptInsecureCerts: true,
             specs: VS_DEBUGGER ? [SPEC_FILE] : [
@@ -24,8 +36,9 @@ const settings = () => ({
                 'test/component/*.component.mobile.spec.js',
                 'test/component/*.component.shared.spec.js'
             ]
-        }] : [])
-    ],
+        }] : []),
+        ]  
+    },
     reporters: ALLURE_REPORTER === 'true' ? [
         [video, {
             saveAllVideos: false, // If true, also saves videos for successful test cases
