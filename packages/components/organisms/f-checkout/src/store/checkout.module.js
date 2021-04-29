@@ -16,7 +16,7 @@ import {
     UPDATE_GEO_LOCATION,
     UPDATE_IS_FULFILLABLE,
     UPDATE_ERRORS,
-    UPDATE_ERROR_MESSAGE,
+    UPDATE_DISPLAY_ERROR,
     UPDATE_ORDER_PLACED,
     UPDATE_STATE,
     UPDATE_USER_NOTE
@@ -400,7 +400,7 @@ export default {
                 displayError = payload[0].code ? payload[0] : alert;
             }
 
-            commit(UPDATE_ERROR_MESSAGE, displayError);
+            commit(UPDATE_DISPLAY_ERROR, displayError);
         }
     },
 
@@ -519,7 +519,7 @@ export default {
             };
         },
 
-        [UPDATE_ERROR_MESSAGE]: (state, displayError) => {
+        [UPDATE_DISPLAY_ERROR]: (state, displayError) => {
             state.displayError = displayError;
         }
     }
