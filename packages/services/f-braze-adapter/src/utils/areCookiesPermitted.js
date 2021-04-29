@@ -6,7 +6,5 @@ export const consentCookieValue = 'full';
 export const legacyBannerCookieName = 'je-banner_cookie';
 export const legacyBannerCookieValue = '130315';
 
-export default () => {
-    return (CookieHelper.get(consentCookieName) === consentCookieValue)
+export default () => (CookieHelper.get(consentCookieName) === consentCookieValue)
         || (CookieHelper.get(legacyBannerCookieName) === legacyBannerCookieValue);
-};
