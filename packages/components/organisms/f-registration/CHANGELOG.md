@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.51.0
+------------------------------
+*April 15, 2021*
+
+### Changes
+- Error messages retrieved from i18n files.
 
 v0.50.0
 ------------------------------

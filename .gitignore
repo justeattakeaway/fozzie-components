@@ -21,6 +21,7 @@ pact-logs/
 *.sublime-*
 .vscode/*
 !.vscode/launch.json
+!.vscode/tasks.json
 nbproject
 Thumbs.db
 logs
