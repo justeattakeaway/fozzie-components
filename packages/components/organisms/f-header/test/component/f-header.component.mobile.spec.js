@@ -21,7 +21,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     });
 
     forEach(['offersLink', 'delivery', 'help', 'countrySelector', 'userAccount'])
-    .it('should display all navigation links', link => {
+    .it('should display the navigation link: "%s"', link => {
         // Act
         header.openMobileNavigation();
 
@@ -30,7 +30,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     });
 
     forEach(['au', 'ie', 'nz'])
-    .it('should hide all navigation links but display offersIcon link, when in mobile mode', expectedLocale => {
+    .it('should hide all navigation links but display offersIcon link, when in mobile mode for country code "%s"', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -42,6 +42,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
             // Act
             header.open(headerData);
             header.waitForComponent();
+            console.log(link);
 
             // Assert
             expect(header.isMobileNavigationBarDisplayed()).toBe(true);
@@ -84,6 +85,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
             header.open(headerData);
             header.openMobileNavigation();
             header.waitForComponent();
+            console.log(link);
 
             // Assert
             expect(header.isNavigationLinkDisplayed(link)).toBe(true);
@@ -114,7 +116,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     });
 
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
-    .it('should display all countries when in mobile mode', country => {
+    .it('should display all countries when in mobile mode for country code "%s"', country => {
         // Act
         header.openMobileNavigation();
         header.openCountrySelector();

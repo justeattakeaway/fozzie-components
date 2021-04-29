@@ -7,7 +7,7 @@ const header = new Header();
 
 describe('Accessibility tests', () => {
     forEach(['gb', 'au', 'nz', 'ie', 'it', 'es', 'dk', 'no'])
-    .it('a11y - should test f-header component WCAG compliance', expectedLocale => {
+    .it('a11y - should test f-header component WCAG compliance for %s', expectedLocale => {
         // Act
         const headerData = {
             locale: expectedLocale,

@@ -78,7 +78,7 @@ describe('Desktop - f-header component tests - @browserstack', () => {
         ['ie', '.ie'],
         ['il', '.il'],
         ['it', '.it']])
-    .it('should display link for country code "%s" and redirect to correct URL', (expectedLocale, expectedUrl) => {
+    .it('should display link for country code "%s" and redirect to correct URL ("%s")', (expectedLocale, expectedUrl) => {
         // Act
         header.moveToCountrySelector();
         header.expectedCountry = expectedLocale;
@@ -104,7 +104,7 @@ describe('Desktop - f-header component tests - @browserstack', () => {
         ['ch_ch', '.ch'],
         ['ch_en', '/en'],
         ['ch_fr', '/fr']])
-    .it('should display link for country code "%s" and redirect to correct URL', (expectedLocale, expectedUrl) => {
+    .it('should display link for country code "%s" and redirect to correct URL ("%s")', (expectedLocale, expectedUrl) => {
         // Act
         header.moveToCountrySelector();
         header.expectedCountry = expectedLocale;
@@ -120,7 +120,7 @@ describe('Desktop - f-header component tests - @browserstack', () => {
     });
 
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
-    .it('should display correct selector icon for country code "%s depending on which locale is chosen', expectedLocale => {
+    .it('should display correct selector icon for country code "%s" depending on which locale is chosen', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,

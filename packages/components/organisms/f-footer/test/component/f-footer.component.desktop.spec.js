@@ -17,7 +17,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     forEach([['ios', 'apple'], ['android', 'google'], ['huawei', 'appgallery']])
-    .it('should display download icons and link to correct URL', (icon, expectedUrl) => {
+    .it('should display download icons ("%s") and redirect to correct URL ("%s")', (icon, expectedUrl) => {
         // Act
         footer.expectedDownloadIcon = icon;
 
@@ -32,7 +32,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     forEach([['twitter', 'twitter.com'], ['facebook', 'facebook.com'], ['youtube', 'youtube.com']])
-    .it('should display social media icons', (icon, expectedUrl) => {
+    .it.only('should display social media icons ("%s") and redirect to correct URL ("%s")', (icon, expectedUrl) => {
         // Act
         footer.expectedSocialIcon = icon;
 
@@ -150,7 +150,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         ['ie', '.ie'],
         ['il', '.il'],
         ['it', '.it']
-    ]).it('should display link for country code "%s" and redirect to correct URL', (country, expectedUrl) => {
+    ]).it('should display link for country code "%s" and redirect to correct URL ("%s")', (country, expectedUrl) => {
         // Act
         footer.clickCountrySelectorButton();
         footer.expectedCountry = country;
@@ -176,7 +176,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         ['ch_ch', '.ch'],
         ['ch_en', '/en'],
         ['ch_fr', '/fr']])
-    .it('should display link for country code "%s" and redirect to correct URL', (country, expectedUrl) => {
+    .it('should display link for country code "%s" and redirect to correct URL ("%s")', (country, expectedUrl) => {
         // Act
         footer.clickCountrySelectorButton();
         footer.expectedCountry = country;
@@ -193,7 +193,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
 
 
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should display social icons block', expectedLocale => {
+    .it('should display social icons block for country code "%s"', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
@@ -210,7 +210,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should display app downloads block', expectedLocale => {
+    .it('should display app downloads block for country code "%s"', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
@@ -227,7 +227,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should display payment options block', expectedLocale => {
+    .it('should display payment options block for country code "%s"', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
@@ -244,7 +244,7 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
     });
 
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should display the feedback block', expectedLocale => {
+    .it('should display the feedback block for country code "%s"', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,

@@ -17,7 +17,7 @@ describe('f-checkout "collection" component tests - @browserstack', () => {
     });
 
     forEach(['addressLine1', 'addressLine2', 'addressLocality', 'addressPostcode'])
-    .it('%s should not exist', field => {
+    .it('should show that "%s" does not exist', field => {
         // Assert
         expect(checkout.doesFieldExist(field)).toBe(false);
     });

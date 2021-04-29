@@ -4,7 +4,7 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 
 const checkout = new Checkout();
 
-describe('f-checkout component tests - @browserstack', () => {
+describe('f-checkout "guest-delivery" component tests - @browserstack', () => {
     beforeEach(() => {
         const checkoutData = {
             type: 'delivery',
@@ -29,7 +29,7 @@ describe('f-checkout component tests - @browserstack', () => {
     });
 
     forEach(['firstName', 'lastName', 'emailAddress'])
-    .it('should show the guest checkout fields for %s', field => {
+    .it('should show the guest checkout fields for "%s"', field => {
         // Assert
         expect(checkout.doesFieldExist(field)).toBe(true);
     });

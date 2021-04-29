@@ -27,7 +27,7 @@ describe('Legacy - Multi-tenant - f-cookieBanner component tests', () => {
         ['au', 'au/info/privacy-policy#cookies_policy'],
         ['nz', 'nz/info/privacy-policy#cookies_policy']
     ])
-    .it('should go to the correct cookie policy page', (tenant, expectedCookiePolicyUrl) => {
+    .it.only('should go to the correct cookie policy page for "%s" - "%s"', (tenant, expectedCookiePolicyUrl) => {
         // Arrange
         cookieBanner.open(tenant);
         browser.deleteAllCookies();

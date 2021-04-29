@@ -32,13 +32,13 @@ describe('Shared - f-registration component tests - @browserstack', () => {
     });
 
     forEach(['firstName', 'lastName', 'email', 'password'])
-    .it('should display input field', field => {
+    .it('should display input field "%s"', field => {
         // Assert
         expect(registration.isInputFieldDisplayed(field)).toBe(true);
     });
 
     forEach(['firstName', 'lastName', 'email', 'password'])
-    .it('should display error when fields are empty', field => {
+    .it('should display error when "%s" field is empty', field => {
         // Arrange
         const userInfo = {
             firstName: '',
@@ -55,7 +55,7 @@ describe('Shared - f-registration component tests - @browserstack', () => {
     });
 
     forEach(['firstName', 'lastName', 'email'])
-    .it('should display error when input is invalid', field => {
+    .it('should display error when "%s" input is invalid', field => {
         // Arrange
         const userInfo = {
             firstName: '123*',
@@ -72,7 +72,7 @@ describe('Shared - f-registration component tests - @browserstack', () => {
     });
 
     forEach(['firstName', 'lastName'])
-    .it('should display error when input is too long', field => {
+    .it('should display error when "%s" input is too long', field => {
         // Arrange
         const userInfo = {
             firstName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',

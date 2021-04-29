@@ -17,7 +17,7 @@ describe('f-checkout "delivery" component tests - @browserstack', () => {
     });
 
     forEach(['mobileNumber', 'addressLine1', 'addressLocality', 'addressPostcode'])
-    .it('should display the error message for %s', field => {
+    .it('should display the error message for "%s"', field => {
         // Act
         checkout.clearCheckoutForm(field);
         checkout.goToPayment();
@@ -27,14 +27,15 @@ describe('f-checkout "delivery" component tests - @browserstack', () => {
     });
 
     forEach(['addressLine1', 'addressLine2', 'addressLocality', 'addressPostcode'])
-    .it('should check if address fields exist for %s', field => {
+    .it('should show that address fields exist for "%s"', field => {
         // Assert
         expect(checkout.doesFieldExist(field)).toBe(true);
     });
 
-    it('should display the mandatory fields', () => {
+    forEach(['mobileNumber', 'addressLine1', 'addressLocality', 'addressPostcode'])
+    .it('should display the mandatory field, "%s"', field => {
         // Assert
-        expect(checkout.isFieldDisplayed('mobileNumber')).toBe(true);
+        expect(checkout.isFieldDisplayed(field)).toBe(true);
     });
 
     it('should prevent user from submitting a postcode with an illegal postcode', () => {

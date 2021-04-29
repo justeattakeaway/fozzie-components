@@ -10,8 +10,8 @@ describe('New - f-cookieBanner component tests - @browserstack', () => {
         cookieBanner.waitForComponent();
     });
 
-    forEach([['full'], ['necessary']])
-    .it('should set "je-cookie_banner" and "je-cookieConsent" to expected cookie values', expectedCookieValue => {
+    forEach(['full', 'necessary'])
+    .it('should set "je-cookie_banner" and "je-cookieConsent" to expected cookie values for "%s"', expectedCookieValue => {
         // Act
         cookieBanner.acceptCookies(expectedCookieValue);
 

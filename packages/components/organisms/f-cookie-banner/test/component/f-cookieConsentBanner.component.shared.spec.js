@@ -27,7 +27,7 @@ describe('New - f-cookieBanner component tests - @browserstack', () => {
 
     // 'dk' and 'no' disabled for now
     forEach(['es', 'ie', 'it'])
-    .it('should display the f-cookieBanner component', tenant => {
+    .it('should display the f-cookieBanner component for "%s"', tenant => {
         // Arrange
         cookieBanner.open(tenant);
         browser.deleteAllCookies();
