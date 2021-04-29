@@ -3,6 +3,7 @@
         <error-dialog
             :is-open="shouldShowErrorDialog"
             :error-code="hasNonFulfillableErrorCode"
+            :service-type="serviceType"
             @close="handleErrorDialogClose"
             @checkout-error-dialog-button-click="handleErrorDialogButtonClick" />
         <div
