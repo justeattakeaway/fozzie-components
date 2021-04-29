@@ -17,7 +17,7 @@ describe('f-checkout "delivery" component tests - @browserstack', () => {
     });
 
     forEach(['mobileNumber', 'addressLine1', 'addressLocality', 'addressPostcode'])
-    .it('should display each fields error message', field => {
+    .it('should display the error message for %s', field => {
         // Act
         checkout.clearCheckoutForm(field);
         checkout.goToPayment();
@@ -27,7 +27,7 @@ describe('f-checkout "delivery" component tests - @browserstack', () => {
     });
 
     forEach(['addressLine1', 'addressLine2', 'addressLocality', 'addressPostcode'])
-    .it('should check if address fields exist', field => {
+    .it('should check if address fields exist for %s', field => {
         // Assert
         expect(checkout.doesFieldExist(field)).toBe(true);
     });

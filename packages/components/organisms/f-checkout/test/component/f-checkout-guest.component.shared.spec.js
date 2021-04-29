@@ -29,7 +29,7 @@ describe('f-checkout component tests - @browserstack', () => {
     });
 
     forEach(['firstName', 'lastName', 'emailAddress'])
-    .it('should show the guest checkout fields', field => {
+    .it('should show the guest checkout fields for %s', field => {
         // Assert
         expect(checkout.doesFieldExist(field)).toBe(true);
     });
