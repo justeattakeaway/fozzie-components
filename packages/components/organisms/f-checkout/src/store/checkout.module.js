@@ -16,7 +16,7 @@ import {
     UPDATE_GEO_LOCATION,
     UPDATE_IS_FULFILLABLE,
     UPDATE_ERRORS,
-    UPDATE_DISPLAY_ERROR,
+    UPDATE_MESSAGE,
     UPDATE_ORDER_PLACED,
     UPDATE_STATE,
     UPDATE_USER_NOTE
@@ -98,8 +98,8 @@ export default {
         userNote: '',
         isFulfillable: true,
         errors: [],
-        displayError: null,
         notices: [],
+        message: null,
         messages: [],
         availableFulfilment: {
             times: [],
@@ -171,10 +171,14 @@ export default {
             const detailedIssues = issues.map(issue => getIssueByCode(issue.code)
                     || { code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true });
 
-            dispatch('updateDisplayError', detailedIssues);
-
             commit(UPDATE_IS_FULFILLABLE, isFulfillable);
             commit(UPDATE_ERRORS, detailedIssues);
+
+            dispatch('updateMessage', detailedIssues[0]);
+        },
+
+        updateMessage:  ({ commit }, message) => {
+            commit(UPDATE_MESSAGE, message || null);
         },
 
         /**
@@ -298,7 +302,7 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        placeOrder: async ({ commit, state }, {
+        placeOrder: async ({ commit, state, dispatch }, {
             url, data, timeout
         }) => {
             try {
@@ -327,6 +331,7 @@ export default {
                     const checkoutIssue = getIssueByCode(errorCode);
 
                     commit(UPDATE_ERRORS, (checkoutIssue ? [checkoutIssue] : []));
+                    dispatch('updateMessage', checkoutIssue);
                 }
 
                 throw error; // Handled by the calling function.
@@ -386,26 +391,7 @@ export default {
 
         updateHasAsapSelected ({ commit }, payload) {
             commit(UPDATE_HAS_ASAP_SELECTED, payload);
-        },
-
-        updateDisplayError: ({ commit }, payload) => {
-            const alert = {
-                code: payload,
-                shouldShowInAlert: true
-            };
-
-            let displayError = null;
-
-            if (payload) {
-                displayError = payload[0].code ? payload[0] : alert;
-            }
-
-            commit(UPDATE_DISPLAY_ERROR, displayError);
         }
-    },
-
-    getters: {
-        firstDialogError: state => state.errors.find(error => error.shouldShowInDialog)
     },
 
     mutations: {
@@ -519,8 +505,8 @@ export default {
             };
         },
 
-        [UPDATE_DISPLAY_ERROR]: (state, displayError) => {
-            state.displayError = displayError;
+        [UPDATE_MESSAGE]: (state, message) => {
+            state.message = message;
         }
     }
 };

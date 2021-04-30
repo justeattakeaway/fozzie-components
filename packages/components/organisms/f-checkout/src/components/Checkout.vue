@@ -1,6 +1,11 @@
 <template>
     <div>
-        <error-dialog ref="errorAlert" />
+        <component
+            :is="errorType.name"
+            ref="errorAlert"
+            v-bind="errorType.props">
+            <span>{{ errorType.content }}</span>
+        </component>
 
         <div
             v-if="shouldShowSpinner"
@@ -85,6 +90,8 @@
 import { validationMixin } from 'vuelidate';
 import { required, email } from 'vuelidate/lib/validators';
 import { mapActions, mapState } from 'vuex';
+import Alert from '@justeat/f-alert';
+import '@justeat/f-alert/dist/f-alert.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import Card from '@justeat/f-card';
@@ -130,17 +137,18 @@ export default {
 
     components: {
         AddressBlock,
+        Alert,
         FButton,
         Card,
         CheckoutHeader,
         CheckoutTermsAndConditions,
-        ErrorDialog,
-        ErrorMessage,
         ErrorPage,
+        ErrorMessage,
         FormField,
         FormSelector,
         GuestBlock,
-        UserNote
+        UserNote,
+        ErrorDialog
     },
 
     mixins: [
@@ -274,8 +282,10 @@ export default {
             'isFulfillable',
             'isLoggedIn',
             'messages',
+            'message',
             'notices',
             'orderId',
+            'restaurant',
             'serviceType',
             'time',
             'userNote'
@@ -318,6 +328,23 @@ export default {
                 isLoggedIn: this.isLoggedIn,
                 serviceType: this.serviceType
             };
+        },
+
+        errorType () {
+            const dialog = {
+                name: 'error-dialog'
+            };
+            const alert = {
+                name: 'alert',
+                props: {
+                    type: 'danger',
+                    class: this.$style['c-checkout-alert'],
+                    heading: this.$t('errorMessages.errorHeading')
+                },
+                content: this.message
+            };
+
+            return this.message && !this.message.shouldShowInDialog ? alert : dialog;
         }
     },
 
@@ -360,9 +387,9 @@ export default {
             'placeOrder',
             'setAuthToken',
             'updateCheckout',
-            'updateDisplayError',
             'updateCustomerDetails',
-            'updateUserNote'
+            'updateUserNote',
+            'updateMessage'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
@@ -436,7 +463,6 @@ export default {
                 this.$emit(EventNames.CheckoutUpdateFailure, this.eventData);
             }
         },
-
 
         /**
          * Handles call of `updateCheckout` and catches and throws any returned errors.
@@ -669,9 +695,10 @@ export default {
         /**
          * Emit, log and track the error based on the parameters
          * encapsulated within the 'error' class.
-         * Set the `displayError` for the user to see.
+         * Set the `message` for the user to see.
          */
         handleErrorState (error) {
+            const message = this.$t(error.messageKey) || this.$t('errorMessages.genericServerError');
             const eventToEmit = error.eventToEmit || EventNames.CheckoutFailure;
             const logMessage = error.logMessage || 'Consumer Checkout Failure';
 
@@ -685,11 +712,15 @@ export default {
             });
 
             this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
-            this.updateDisplayError(this.$t(error.messageKey) || this.$t('errorMessages.genericServerError'));
 
-            this.$nextTick(() => {
-                this.scrollToElement(this.$refs.errorAlert.$el);
-            });
+
+            if (!error.shouldShowInDialog) {
+                this.updateMessage(message);
+
+                this.$nextTick(() => {
+                    this.scrollToElement(this.$refs.errorAlert.$el);
+                });
+            }
         },
 
         /**
@@ -710,6 +741,7 @@ export default {
          */
         async onFormSubmit () {
             this.trackFormInteraction({ action: 'submit' });
+            this.updateMessage();
 
             if (this.isFormValid()) {
                 await this.submitCheckout();
@@ -872,6 +904,11 @@ export default {
     margin-top: spacing(x2);
 }
 
+.c-checkout-alert {
+    width: $checkout-width;
+    margin-left: auto;
+    margin-right: auto;
+}
 /* If these stay the same then just rename the class to something more generic */
 .c-checkout-submitButton {
     margin: spacing(x4) 0 spacing(x0.5);

@@ -1,11 +1,11 @@
 <template>
-    <div>
-        <mega-modal
-            data-test-id="checkout-issue-modal"
-            has-overlay
-            :is-open="shouldShowModal"
-            @close="handleErrorDialogButtonClick"
-        >
+    <mega-modal
+        data-test-id="checkout-issue-modal"
+        has-overlay
+        :is-open="isOpen"
+        @close="closeErrorDialog"
+    >
+        <span v-if="isOpen">
             <h3
                 data-test-id="checkout-issue-modal-title"
                 class="u-noSpacing"
@@ -21,26 +21,15 @@
                 :class="$style['c-checkout-redirectButton']"
                 button-size="large"
                 data-test-id="redirect-to-menu-button"
-                @click.native="handleErrorDialogButtonClick"
+                @click.native="closeErrorDialog"
             >
                 {{ $t(`errorMessages.checkoutIssues.${errorCode}.buttonText`) }}
             </f-button>
-        </mega-modal>
-
-        <alert
-            v-if="shouldShowAlert"
-            type="danger"
-            :class="$style['c-checkout-alert']"
-            :heading="$t('errorMessages.errorHeading')"
-        >
-            {{ errorCode }}
-        </alert>
-    </div>
+        </span>
+    </mega-modal>
 </template>
 
 <script>
-import Alert from '@justeat/f-alert';
-import '@justeat/f-alert/dist/f-alert.css';
 import MegaModal from '@justeat/f-mega-modal';
 import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 import FButton from '@justeat/f-button';
@@ -50,31 +39,24 @@ import {
     VUEX_CHECKOUT_MODULE
 } from '../constants';
 
-import EventNames from '../event-names';
-
 export default {
     components: {
-        Alert,
-        MegaModal,
-        FButton
+        FButton,
+        MegaModal
     },
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
-            'displayError',
-            'restaurant'
+            'restaurant',
+            'message'
         ]),
 
         errorCode () {
-            return this.displayError && this.displayError.code;
+            return this.message && this.message.code;
         },
 
-        shouldShowModal () {
-            return this.displayError ? this.displayError.shouldShowInDialog : false;
-        },
-
-        shouldShowAlert () {
-            return this.displayError ? this.displayError.shouldShowInAlert : false;
+        isOpen () {
+            return this.message && this.message.shouldShowInDialog;
         },
 
         restaurantMenuPageUrl () {
@@ -84,23 +66,15 @@ export default {
 
     methods: {
         ...mapActions(VUEX_CHECKOUT_MODULE, [
-            'updateDisplayError'
+            'updateMessage'
         ]),
 
-        handleButtonClick () {
-            this.$emit(EventNames.CheckoutErrorDialogButtonClicked);
-        },
-
-        handleErrorDialogClose () {
-            this.updateDisplayError(null);
-        },
-
-        handleErrorDialogButtonClick () {
+        closeErrorDialog () {
             if (this.displayError && this.displayError.shouldRedirectToMenu) {
                 window.location.assign(this.restaurantMenuPageUrl);
             }
 
-            this.handleErrorDialogClose();
+            this.updateMessage();
         }
     }
 };
@@ -109,11 +83,5 @@ export default {
 <style lang="scss" module>
 .c-checkout-redirectButton {
     margin: spacing(x4) 0 spacing(x0.5);
-}
-
-.c-checkout-alert {
-    width: $checkout-width;
-    margin-left: auto;
-    margin-right: auto;
 }
 </style>
