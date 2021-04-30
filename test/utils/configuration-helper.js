@@ -26,10 +26,13 @@ exports.getConfigurationSettings = () => {
         
         case 'a11y':
             testCapabilities = runnerSettings.a11y.capabilities;
+            break;
         case 'component':
             testCapabilities = runnerSettings.component.capabilities;
+            break;
         case 'visual':
             testCapabilities = runnerSettings.visual.capabilities;
+            break;
     }
 
 
@@ -37,7 +40,7 @@ exports.getConfigurationSettings = () => {
         capabilities: testCapabilities,
         bail: environmentSettings.bail,
         logLevel: environmentSettings.logLevel,
-        maxInstances: environmentSettings.maxinstances, 
+        maxInstances: environmentSettings.maxInstances, 
         baseUrl: runnerSettings.baseUrl,
         reporters: runnerSettings.reporters,
         services: runnerSettings.services,
