@@ -1,12 +1,9 @@
 // Used to set correct directories for WDIO test output
 global.baseDir = __dirname;
 const allure = require('allure-commandline');
-const { TEST_TYPE } = process.env;
-const { setTestSettings } = require('./test/utils/configuration-helper');
-const chromeSettings = require('./test/configuration/chrome/chrome.settings').default();
+const { getConfigurationSettings } = require('./test/utils/configuration-helper');
 
-const testSettings = setTestSettings();
-const isComponentTest = TEST_TYPE === 'component';
+const configurationSettings = getConfigurationSettings();
 
 exports.config = {
 
@@ -35,12 +32,6 @@ exports.config = {
     //     // 'path/to/excluded/files'
     // ],
 
-    // Suites
-    suites: {
-        a11y: [
-            './test/specs/accessibility/*.spec.js'
-        ]
-    },
     //
     // ============
     // Capabilities
@@ -57,14 +48,13 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: testSettings.maxinstances,
+    maxInstances: configurationSettings.maxInstances,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [].concat(isComponentTest ? chromeSettings.component.capabilities
-                            : chromeSettings.a11y.capabilities),
+    capabilities: [].concat(configurationSettings.capabilities),
     //
     // ===================
     // Test Configurations
@@ -72,7 +62,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: testSettings.logLevel,
+    logLevel: configurationSettings.logLevel,
     //
     // Set specific log levels per logger
     // loggers:
@@ -90,13 +80,13 @@ exports.config = {
     //
     // If you only want to run your tests until a specific amount of tests have failed use
     // bail (default is 0 - don't bail, run all tests).
-    bail: testSettings.bail,
+    bail: configurationSettings.bail,
     //
     // Set a base URL in order to shorten url command calls. If your `url` parameter starts
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: chromeSettings.baseUrl,
+    baseUrl: configurationSettings.baseUrl,
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -112,7 +102,7 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: chromeSettings.services,
+    services: configurationSettings.services,
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -133,7 +123,7 @@ exports.config = {
     // see also: https://webdriver.io/docs/dot-reporter.html
     // reporters: ['dot'],
 
-    reporters: chromeSettings.reporters,
+    reporters: configurationSettings.reporters,
 
     afterTest: () => {
         browser.takeScreenshot();
@@ -271,9 +261,9 @@ exports.config = {
             const reportError = new Error('Could not generate Allure report');
             const generation = allure(['generate', '../../../../test/results/allure', ' --clean']);
 
-            for (let i = 0; i < chromeSettings.reporters.length; i++) {
-                for (let j = 0; j < chromeSettings.reporters[i].length; j++) {
-                    if (chromeSettings.reporters[i].includes('allure')) {
+            for (let i = 0; i < configurationSettings.reporters.length; i++) {
+                for (let j = 0; j < configurationSettings.reporters[i].length; j++) {
+                    if (configurationSettings.reporters[i].includes('allure')) {
                         return new Promise((resolve, reject) => {
                             const generationTimeout = setTimeout(
                                 () => reject(reportError),
