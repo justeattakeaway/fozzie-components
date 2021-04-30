@@ -104,6 +104,37 @@ export default {
 }
 ```
 
+### Unit Testing Guidance
+Because $http should exist in context, it should be really easy to mock it in any way you want. Check out the example below
+
+```js
+const wrapper = mount(MyComponent, {
+  mocks: {
+    $http: {
+      get: jest.fn()
+    }
+  }
+});
+```
+
+### Integration Testing Guidance
+F-Http exposes a way to create a mockClient, this enables you to mock the underlying HTTPProvider with responses.
+
+**Todo** Support multiple responses from a single test => next update
+
+```js
+import fHttp from '@justeat/f-http';
+
+const $http = fHttp.createMockClient(METHOD_POST, propsData.createAccountUrl, CONSUMERS_REQUEST_DATA, 201);
+
+const wrapper = mount(MyComponent, {
+  mocks: {
+    $http
+  }
+});
+```
+
+
 ## Options
 All options are optional, you don't need to specify any overrides if you are happy with the default values
 
