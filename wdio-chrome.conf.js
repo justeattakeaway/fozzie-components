@@ -31,7 +31,13 @@ exports.config = {
     // exclude: [
     //     // 'path/to/excluded/files'
     // ],
-
+    
+    // Suites
+    suites: {
+        a11y: [
+            './test/specs/accessibility/*.spec.js'
+        ]
+    },
     //
     // ============
     // Capabilities
