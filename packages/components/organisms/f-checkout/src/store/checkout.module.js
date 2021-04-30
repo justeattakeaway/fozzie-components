@@ -177,10 +177,6 @@ export default {
             dispatch('updateMessage', detailedIssues[0]);
         },
 
-        updateMessage:  ({ commit }, message) => {
-            commit(UPDATE_MESSAGE, message || null);
-        },
-
         /**
          * Post the guest user details to the backend.
          *
@@ -391,6 +387,10 @@ export default {
 
         updateHasAsapSelected ({ commit }, payload) {
             commit(UPDATE_HAS_ASAP_SELECTED, payload);
+        },
+
+        updateMessage:  ({ commit }, message) => {
+            commit(UPDATE_MESSAGE, message || null);
         }
     },
 

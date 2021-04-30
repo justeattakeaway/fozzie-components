@@ -6,7 +6,7 @@ import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilmen
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
 import {
-    defaultCheckoutState, mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber
+    mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber
 } from '../../components/_tests/helpers/setup';
 import { version as applicationVerion } from '../../../package.json';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../../constants';
@@ -23,10 +23,11 @@ import {
     UPDATE_IS_FULFILLABLE,
     UPDATE_STATE,
     UPDATE_USER_NOTE,
-    UPDATE_GEO_LOCATION
+    UPDATE_GEO_LOCATION,
+    UPDATE_MESSAGE
 } from '../mutation-types';
 
-const { actions, mutations, getters } = CheckoutModule;
+const { actions, mutations } = CheckoutModule;
 
 const {
     createGuestUser,
@@ -41,7 +42,8 @@ const {
     updateAddressDetails,
     updateCustomerDetails,
     updateFulfilmentTime,
-    updateUserNote
+    updateUserNote,
+    updateMessage
 } = actions;
 
 const mobileNumber = '+447111111111';
@@ -83,6 +85,11 @@ const issues = [
 ];
 
 const userNote = 'Beware of the dachshund';
+const message = {
+    code: 'DuplicateOrder',
+    shouldRedirectToMenu: false,
+    shouldShowInDialog: true
+};
 
 const defaultState = {
     id: '',
@@ -115,6 +122,7 @@ const defaultState = {
     isFulfillable: true,
     errors: [],
     notices: [],
+    message: null,
     messages: [],
     availableFulfilment: {
         times: [],
@@ -130,7 +138,7 @@ const defaultState = {
 
 let state = CheckoutModule.state();
 
-xdescribe('CheckoutModule', () => {
+describe('CheckoutModule', () => {
     it('should create default state when initialised.', () => {
         // Assert
         expect(state).toEqual(defaultState);
@@ -282,7 +290,8 @@ xdescribe('CheckoutModule', () => {
             [UPDATE_FULFILMENT_TIME, 'time', time],
             [UPDATE_IS_FULFILLABLE, 'isFulfillable', isFulfillable],
             [UPDATE_ERRORS, 'errors', issues],
-            [UPDATE_USER_NOTE, 'userNote', userNote]
+            [UPDATE_USER_NOTE, 'userNote', userNote],
+            [UPDATE_MESSAGE, 'message', message]
         ])('%s :: should update state with received value', (mutationName, propertyName, propertyValue) => {
             // Arrange & Act
             mutations[mutationName](state, propertyValue);
@@ -612,7 +621,7 @@ xdescribe('CheckoutModule', () => {
                             await placeOrder({ commit, state }, payload);
                         } catch {
                             // Assert
-                            expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [{ code: 'DuplicateOrder', shouldRedirectToMenu: false, shouldShowInDialog: true }]);
+                            expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [message]);
                         }
                     });
 
@@ -636,6 +645,27 @@ xdescribe('CheckoutModule', () => {
                             expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, []);
                         }
                     });
+
+                    it('should dispatch `updateMessage` with checkoutIssue', async () => {
+                        // Arrange
+                        // eslint-disable-next-line prefer-promise-reject-errors
+                        axios.post = jest.fn(() => Promise.reject({
+                            status: 400,
+                            response: {
+                                data: {
+                                    errorCode: 'DuplicateOrder'
+                                }
+                            }
+                        }));
+
+                        try {
+                            // Act
+                            await placeOrder({ commit, state, dispatch }, payload);
+                        } catch {
+                            // Assert
+                            expect(dispatch).toHaveBeenCalledWith('updateMessage', message);
+                        }
+                    });
                 });
 
                 it('should throw the error', async () => {
@@ -655,6 +685,12 @@ xdescribe('CheckoutModule', () => {
 
         describe('updateCheckout ::', () => {
             let config;
+
+            const issue = {
+                code: 'RESTAURANT_NOT_TAKING_ORDERS',
+                shouldShowInDialog: true,
+                shouldRedirectToMenu: false
+            };
 
             beforeEach(() => {
                 payload.data = {
@@ -680,7 +716,7 @@ xdescribe('CheckoutModule', () => {
 
             it('should post the checkout details to the backend.', async () => {
                 // Act
-                await updateCheckout({ commit, state }, payload);
+                await updateCheckout({ commit, state, dispatch }, payload);
 
                 // Assert
                 expect(axios.patch).toHaveBeenCalledWith(payload.url, payload.data, config);
@@ -688,29 +724,38 @@ xdescribe('CheckoutModule', () => {
 
             it('should convert an unsupported error into a default error.', async () => {
                 // Act
-                await updateCheckout({ commit, state }, payload);
+                await updateCheckout({ commit, state, dispatch }, payload);
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [{ code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true }]);
             });
 
-            it('should convert an unsupported error into a known issue.', async () => {
-                // Arrange
-                const knownIssue = 'RESTAURANT_NOT_TAKING_ORDERS';
+            describe('when a known issue occurs', () => {
+                beforeEach(() => {
+                    axios.patch = jest.fn(() => Promise.resolve({
+                        status: 200,
+                        data: {
+                            isFulfillable: false,
+                            issues: [{ code: issue.code }]
+                        }
+                    }));
+                });
 
-                axios.patch = jest.fn(() => Promise.resolve({
-                    status: 200,
-                    data: {
-                        isFulfillable: false,
-                        issues: [{ code: knownIssue }]
-                    }
-                }));
+                it('should call `updateErrors` with error code.', async () => {
+                    // Act
+                    await updateCheckout({ commit, state, dispatch }, payload);
 
-                // Act
-                await updateCheckout({ commit, state }, payload);
+                    // Assert
+                    expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [issue]);
+                });
 
-                // Assert
-                expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [{ code: knownIssue, shouldShowInDialog: true, shouldRedirectToMenu: false }]);
+                it('should call `updateMessage` with first Issue.', async () => {
+                    // Act
+                    await updateCheckout({ commit, state, dispatch }, payload);
+
+                    // Assert
+                    expect(dispatch).toHaveBeenCalledWith('updateMessage', issue);
+                });
             });
         });
 
@@ -850,7 +895,8 @@ xdescribe('CheckoutModule', () => {
         it.each([
             [setAuthToken, UPDATE_AUTH, authToken],
             [updateAddressDetails, UPDATE_FULFILMENT_ADDRESS, address],
-            [updateUserNote, UPDATE_USER_NOTE, userNote]
+            [updateUserNote, UPDATE_USER_NOTE, userNote],
+            [updateMessage, UPDATE_MESSAGE, message]
         ])('%s should call %s mutation with passed value', (action, mutation, value) => {
             // Act
             action({ commit, dispatch }, value);
@@ -870,46 +916,6 @@ xdescribe('CheckoutModule', () => {
 
             // Assert
             expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
-        });
-    });
-
-    describe('getters ::', () => {
-        describe('firstDialogError ::', () => {
-            it('should return the first error to show in a dialog when there is one', () => {
-                // Arrange
-                state = {
-                    ...defaultCheckoutState,
-                    errors: [
-                        { code: 'CODE1', shouldShowInDialog: false },
-                        { code: 'CODE2', shouldShowInDialog: true },
-                        { code: 'CODE3', shouldShowInDialog: false }
-                    ]
-                };
-
-                // Act
-                const result = getters.firstDialogError(state);
-
-                // Assert
-                expect(result).toMatchSnapshot();
-            });
-
-            it('should return `undefined` when there are no errors to show in a dialog', () => {
-                // Arrange
-                state = {
-                    ...defaultCheckoutState,
-                    errors: [
-                        { code: 'CODE1', shouldShowInDialog: false },
-                        { code: 'CODE2', shouldShowInDialog: false },
-                        { code: 'CODE3', shouldShowInDialog: false }
-                    ]
-                };
-
-                // Act
-                const result = getters.firstDialogError(state);
-
-                // Assert
-                expect(result).toBe(undefined);
-            });
         });
     });
 });

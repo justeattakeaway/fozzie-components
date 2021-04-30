@@ -79,10 +79,6 @@ const defaultCheckoutActions = {
     updateHasAsapSelected: jest.fn()
 };
 
-const defaultCheckoutGetters = {
-    firstDialogError: jest.fn()
-};
-
 const defaultAnalyticsActions = {
     trackFormErrors: jest.fn(),
     trackFormInteraction: jest.fn(),
@@ -104,7 +100,6 @@ const i18n = {
 const createStore = (
     checkoutState = defaultCheckoutState,
     checkoutActions = defaultCheckoutActions,
-    checkoutGetters = defaultCheckoutGetters,
     analyticsState = defaultAnalyticsState,
     analyticsActions = defaultAnalyticsActions
 ) => new Vuex.Store({
@@ -112,8 +107,7 @@ const createStore = (
         [VUEX_CHECKOUT_MODULE]: {
             namespaced: true,
             state: checkoutState,
-            actions: checkoutActions,
-            getters: checkoutGetters
+            actions: checkoutActions
         },
         [VUEX_CHECKOUT_ANALYTICS_MODULE]: {
             namespaced: true,
