@@ -11,6 +11,23 @@ v0.97.0
 - Bumped f-services version to 1.10.0.
 - Set tel. no. field type as `Tel`
 
+v0.98.0
+------------------------------
+*April 29, 2021*
+
+### Changed
+- Updated Checkout error messages to reflect latest copy
+- Included service type labels to display in error messages
+
+
+v0.97.0
+------------------------------
+*April 28, 2021*
+
+### Changed
+- Changed main headers to be h1 elements
+
+
 v0.96.0
 ------------------------------
 *April 28, 2021*

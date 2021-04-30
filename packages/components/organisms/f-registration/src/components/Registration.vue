@@ -275,53 +275,61 @@ export default {
 
         describeFirstnameErrorMessage () {
             if (this.$v.firstName.$dirty) {
+                const messages = this.copy.validationMessages.firstName;
+
                 if (!this.$v.firstName.required) {
-                    return 'Please include your first name';
+                    return messages.requiredError;
                 }
                 if (!this.$v.firstName.maxLength) {
-                    return 'First name exceeds 50 characters';
+                    return messages.maxLengthError;
                 }
                 if (!this.$v.firstName.meetsCharacterValidationRules) {
-                    return 'Your name can only contain letters, hyphens or apostrophes';
+                    return messages.invalidCharError;
                 }
             }
             return '';
         },
         describeLastnameErrorMessage () {
             if (this.$v.lastName.$dirty) {
+                const messages = this.copy.validationMessages.lastName;
+
                 if (!this.$v.lastName.required) {
-                    return 'Please include your last name';
+                    return messages.requiredError;
                 }
                 if (!this.$v.lastName.maxLength) {
-                    return 'Last name exceeds 50 characters';
+                    return messages.maxLengthError;
                 }
                 if (!this.$v.lastName.meetsCharacterValidationRules) {
-                    return 'Your last name can only contain letters, hyphens or apostrophes';
+                    return messages.invalidCharError;
                 }
             }
             return '';
         },
         describeEmailErrorMessage () {
             if (this.$v.email.$dirty) {
+                const messages = this.copy.validationMessages.email;
+
                 if (!this.$v.email.required) {
-                    return 'Please enter your email address';
+                    return messages.requiredError;
                 }
                 if (!this.$v.email.maxLength) {
-                    return 'Email address exceeds 50 characters';
+                    return messages.maxLengthError;
                 }
                 if (!this.$v.email.email) {
-                    return 'Please enter your email address correctly';
+                    return messages.invalidEmailError;
                 }
             }
             return '';
         },
         describePasswordErrorMessage () {
             if (this.$v.password.$dirty) {
+                const messages = this.copy.validationMessages.password;
+
                 if (!this.$v.password.required) {
-                    return 'Please enter a password';
+                    return messages.requiredError;
                 }
                 if (!this.$v.password.minLength) {
-                    return 'Password is less than four characters';
+                    return messages.minLengthError;
                 }
             }
             return '';
