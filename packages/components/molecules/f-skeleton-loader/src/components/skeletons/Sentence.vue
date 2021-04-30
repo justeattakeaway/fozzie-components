@@ -1,7 +1,7 @@
 <template>
     <div>
-        <text-block :class="$style['c-sentence-textBlock']" />
-        <text-block :class="$style['c-sentence-textBlock']" />
+        <text-block :class="$style['c-skeletonLoader-text']" />
+        <text-block :class="$style['c-skeletonLoader-text']" />
     </div>
 </template>
 
@@ -15,11 +15,11 @@ export default {
 
 <style lang="scss" module>
 
-.c-sentence-textBlock:nth-child(2) {
+.c-skeletonLoader-text:nth-child(2) {
     max-width: 70%;
 }
 
-.c-sentence-textBlock:not(:last-child) {
+.c-skeletonLoader-text:not(:last-child) {
     margin-bottom: spacing();
 }
 

@@ -1,9 +1,9 @@
 <template>
-    <div :class="$style['c-carouselCardRestaurantHeader']">
-        <image-block :class="$style['c-carouselCardRestaurantHeader-logo']" />
-        <heading :class="$style['c-carouselCardRestaurantHeader-heading']" />
-        <text-block :class="[$style['c-text']]" />
-        <text-block :class="[$style['c-text']]" />
+    <div :class="$style['c-restaurantCardHeader']">
+        <image-block :class="$style['c-restaurantCardHeader-logo']" />
+        <heading :class="$style['c-restaurantCardHeader-heading']" />
+        <text-block :class="[$style['c-restaurantCardHeader-text']]" />
+        <text-block :class="[$style['c-restaurantCardHeader-text']]" />
     </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
 
 $restaurant-logo-width: 48px;
 
-.c-carouselCardRestaurantHeader {
+.c-restaurantCardHeader {
     text-align: center;
     background-color: $white;
     margin: auto;
@@ -30,7 +30,7 @@ $restaurant-logo-width: 48px;
     position: relative;
 }
 
-.c-carouselCardRestaurantHeader-logo {
+.c-restaurantCardHeader-logo {
     margin: auto;
     width: $restaurant-logo-width;
     height: $restaurant-logo-width;
@@ -38,21 +38,21 @@ $restaurant-logo-width: 48px;
     transform: translateY(-50%);
 }
 
-.c-carouselCardRestaurantHeader-heading {
+.c-restaurantCardHeader-heading {
     height: spacing(x3);
     margin: 0 auto spacing();
 }
 
-.c-text {
+.c-restaurantCardHeader-text {
     max-width: 40%;
     margin: auto;
 }
 
-.c-text:nth-child(3) {
+.c-restaurantCardHeader-text:nth-child(3) {
     max-width: 35%;
 }
 
-.c-text:not(:last-child) {
+.c-restaurantCardHeader-text:not(:last-child) {
     margin-bottom: spacing();
 }
 

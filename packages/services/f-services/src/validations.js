@@ -46,8 +46,10 @@ const isValidPostcode = (postcode, locale) => POSTCODE_REGEX[locale].test(postco
 const meetsCharacterValidationRules = value => /^[\u0060\u00C0-\u00F6\u00F8-\u017Fa-zA-Z-' ]*$/.test(value);
 
 const PHONE_REGEX = {
-    'en-GB': /^(\+(44))?[0-9]{10,11}$/,
-    'es-ES': /^\d{9,}$/
+    'en-GB': /^(\+(44))?[0-9]{10}|(\+(44))?[0-9]{11}$/,
+    'es-ES': /^\d{9,}$/,
+    'en-AU': /^((?!1|13|18))(((0|\+61|61|0061)(2|4|3|7|8))\){0,1}( |-){0,1}[0-9]{2}( |-){0,1}[0-9]{2}( |-){0,1}[0-9]{1}( |-){0,1}[0-9]{3})$/,
+    'en-NZ': /^((?!1|13|18))((0|\+64|64|0064)(2|3|4|6|9)\){0,1}( |-){0,1}[0-9]{2}( |-){0,1}[0-9]{2}( |-){0,1}[0-9]{1}(( |-){0,1}[0-9]{1,3}|( |-){0,1}[0-9]{4}))$/
 };
 
 const isValidPhoneNumber = (number, locale) => PHONE_REGEX[locale].test(number);

@@ -1,3 +1,5 @@
-import HttpClient from './httpClient';
+import createClient from './createClient';
 
-export default HttpClient;
+export default {
+    createClient
+};

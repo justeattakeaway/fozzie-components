@@ -4,6 +4,7 @@
   <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
   <p>Cookie Banner</p>
+  <p>This component will conditionally remove all cookies that are not in the exclusion list for the <a href="src/tenants">appropriate locale</a>.</p>
 </div>
 
 ---
