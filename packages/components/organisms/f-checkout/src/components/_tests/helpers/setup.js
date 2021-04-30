@@ -47,6 +47,7 @@ const defaultCheckoutState = {
     },
     isFulfillable: true,
     notices: [],
+    message: null,
     messages: [],
     authToken: '',
     isLoggedIn: false,
@@ -63,6 +64,7 @@ const defaultAnalyticsState = {
 const defaultCheckoutActions = {
     getCheckout: jest.fn(),
     updateCheckout: jest.fn(),
+    updateMessage: jest.fn(),
     getAvailableFulfilment: jest.fn(),
     setAuthToken: jest.fn(),
     createGuestUser: jest.fn(),

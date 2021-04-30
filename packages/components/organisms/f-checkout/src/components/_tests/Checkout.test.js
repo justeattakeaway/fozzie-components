@@ -560,31 +560,6 @@ xdescribe('Checkout', () => {
             });
         });
 
-        describe('restaurantMenuPageUrl ::', () => {
-            it('should return the URL to redirect back to the restaurant menu', () => {
-                // Arrange
-                const restaurantSeoName = 'masala-zone-camden';
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        isLoggedIn: true,
-                        restaurant: {
-                            seoName: restaurantSeoName
-                        }
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Act
-                const result = wrapper.vm.restaurantMenuPageUrl;
-
-                // Assert
-                expect(result).toBe(`restaurant-${restaurantSeoName}/menu`);
-            });
-        });
-
         describe('eventData ::', () => {
             it('should return `isLoggedIn` and `serviceType` in an object`', () => {
                 // Arrange
@@ -2571,64 +2546,6 @@ xdescribe('Checkout', () => {
 
                 // Assert
                 expect(windowLocationSpy).toHaveBeenCalledWith(`${paymentPageUrlPrefix}/${defaultCheckoutState.orderId}`);
-            });
-        });
-
-        describe('handleErrorDialogButtonClick ::', () => {
-            afterEach(() => {
-                jest.clearAllMocks();
-            });
-
-            const restaurantSeoName = 'checkout-kofte-farringdon';
-
-            it('should redirect to the restaurant menu if `shouldRedirectToMenu` is true', () => {
-                // Arrange
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({ ...defaultCheckoutState, restaurant: { seoName: restaurantSeoName, id: '22222' } }),
-                    i18n,
-                    localVue,
-                    propsData,
-                    data () {
-                        return {
-                            nonFulfillableError: {
-                                shouldRedirectToMenu: true,
-                                code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
-                            }
-                        };
-                    }
-                });
-
-                // Act
-                wrapper.vm.handleErrorDialogButtonClick();
-
-                // Assert
-                expect(windowLocationSpy).toHaveBeenCalledWith(`restaurant-${restaurantSeoName}/menu`);
-                expect(wrapper.vm.nonFulfillableError).toBeNull();
-            });
-
-            it('should not redirect to the restaurant menu if `shouldRedirectToMenu` is false', () => {
-                // Arrange
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({ ...defaultCheckoutState, restaurant: { seoName: restaurantSeoName, id: '22222' } }),
-                    i18n,
-                    localVue,
-                    propsData,
-                    data () {
-                        return {
-                            nonFulfillableError: {
-                                shouldRedirectToMenu: false,
-                                code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
-                            }
-                        };
-                    }
-                });
-
-                // Act
-                wrapper.vm.handleErrorDialogButtonClick();
-
-                // Assert
-                expect(windowLocationSpy).not.toHaveBeenCalled();
-                expect(wrapper.vm.nonFulfillableError).toBeNull();
             });
         });
 

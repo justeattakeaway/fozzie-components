@@ -70,7 +70,7 @@ export default {
         ]),
 
         closeErrorDialog () {
-            if (this.displayError && this.displayError.shouldRedirectToMenu) {
+            if (this.message && this.message.shouldRedirectToMenu) {
                 window.location.assign(this.restaurantMenuPageUrl);
             }
 

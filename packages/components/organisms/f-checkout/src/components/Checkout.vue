@@ -1,10 +1,11 @@
 <template>
     <div>
         <component
-            :is="errorType.name"
+            :is="messageType.name"
             ref="errorAlert"
-            v-bind="errorType.props">
-            <span>{{ errorType.content }}</span>
+            v-bind="messageType.props"
+        >
+            <span>{{ messageType.content }}</span>
         </component>
 
         <div
@@ -330,7 +331,7 @@ export default {
             };
         },
 
-        errorType () {
+        messageType () {
             const dialog = {
                 name: 'error-dialog'
             };
@@ -388,8 +389,8 @@ export default {
             'setAuthToken',
             'updateCheckout',
             'updateCustomerDetails',
-            'updateUserNote',
-            'updateMessage'
+            'updateMessage',
+            'updateUserNote'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
