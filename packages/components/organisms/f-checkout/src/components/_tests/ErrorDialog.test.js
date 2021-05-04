@@ -45,7 +45,7 @@ describe('ErrorDialog', () => {
 
     describe('computed ::', () => {
         describe('errorCode ::', () => {
-            it('should return `code` of `message`', () => {
+            it('should return `code` of `message` when `message` is provided', () => {
                 // Arrange
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore({
@@ -61,7 +61,7 @@ describe('ErrorDialog', () => {
                 expect(wrapper.vm.errorCode).toEqual(message.code);
             });
 
-            it('should return `code` of `message`', () => {
+            it('should return `null` if  no `message` is provided', () => {
                 // Arrange
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore(),
@@ -76,7 +76,7 @@ describe('ErrorDialog', () => {
         });
 
         describe('isOpen ::', () => {
-            it('should return `true`', () => {
+            it('should return `true` when `message` is provided', () => {
                 // Arrange
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore({
@@ -92,7 +92,7 @@ describe('ErrorDialog', () => {
                 expect(wrapper.vm.isOpen).toEqual(true);
             });
 
-            it('should return `null`', () => {
+            it('should return `null` when no `message` is provided', () => {
                 // Arrange
                 const wrapper = shallowMount(ErrorDialog, {
                     store: createStore(),

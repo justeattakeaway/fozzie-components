@@ -13,7 +13,7 @@ v0.99.0
 - One of `ErrorDialog` or `f-alert` to be displayed if an error should be displayed to the user.
 
 ### Added
-- Tests to cover changes in `ErrorDialog`
+- Tests to cover changes in `ErrorDialog`.
 
 
 v0.98.0
