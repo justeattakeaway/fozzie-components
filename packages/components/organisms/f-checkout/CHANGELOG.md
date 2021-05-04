@@ -9,7 +9,7 @@ v0.99.0
 *May 4, 2021*
 
 ### Changed
-- `genericErrorMessage` and `nonFulfillableError` replaced wtih `vuex` `message`.
+- `genericErrorMessage` and `nonFulfillableError` replaced with `vuex` `message`.
 - One of `ErrorDialog` or `f-alert` to be displayed if an error should be displayed to the user.
 
 ### Added
