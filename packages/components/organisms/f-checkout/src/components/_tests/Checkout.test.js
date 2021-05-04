@@ -9,10 +9,8 @@ import {
     CHECKOUT_METHOD_DELIVERY,
     CHECKOUT_METHOD_COLLECTION,
     ERROR_CODE_FULFILMENT_TIME_INVALID,
-    ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
     TENANT_MAP
 } from '../../constants';
-import CheckoutIssues from '../../checkout-issues';
 import VueCheckout from '../Checkout.vue';
 import EventNames from '../../event-names';
 
@@ -66,7 +64,17 @@ const $v = {
     $touch: jest.fn()
 };
 
-xdescribe('Checkout', () => {
+const $style = {
+    'c-checkout-alert': 'c-checkout-alert'
+};
+
+const message = {
+    code: ERROR_CODE_FULFILMENT_TIME_INVALID,
+    shouldRedirectToMenu: true,
+    shouldShowInDialog: true
+};
+
+describe('Checkout', () => {
     const updateCheckoutUrl = 'http://localhost/updatecheckout';
     const getCheckoutUrl = 'http://localhost/checkout';
     const checkoutAvailableFulfilmentUrl = 'http://localhost/checkout/fulfilment';
@@ -268,41 +276,6 @@ xdescribe('Checkout', () => {
                 expect(spinner.exists()).toBe(true);
             });
         });
-
-        describe('nonFulfillableError ::', () => {
-            describe('when `nonFulfillableError` is an error in checkout issues', () => {
-                it('should show a mega modal displaying the error title and description', () => {
-                    // Arrange
-                    const fulfilmentTimeIssue = CheckoutIssues[ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE];
-                    // Act
-                    const wrapper = mount(VueCheckout, {
-                        i18n,
-                        store: createStore(),
-                        localVue,
-                        propsData,
-                        data () {
-                            return {
-                                nonFulfillableError: {
-                                    ...fulfilmentTimeIssue,
-                                    code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE
-                                }
-                            };
-                        }
-                    });
-
-                    const errorModal = wrapper.find('[data-test-id="checkout-issue-modal"]');
-                    const errorTitle = wrapper.find('[data-test-id="checkout-issue-modal-title"]');
-                    const errorMessage = wrapper.find('[data-test-id="checkout-issue-modal-message"]');
-
-                    // Assert
-                    expect(errorModal.html()).toMatchSnapshot();
-
-                    expect(errorTitle.text()).toMatchSnapshot();
-
-                    expect(errorMessage.text()).toMatchSnapshot();
-                });
-            });
-        });
     });
 
     describe('computed ::', () => {
@@ -485,81 +458,6 @@ xdescribe('Checkout', () => {
             });
         });
 
-        describe('shouldShowErrorDialog ::', () => {
-            it('should return `true` if `nonFulfillableError.shouldShowInDialog` is `true`', () => {
-                // Arrange
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        isLoggedIn: true
-                    }),
-                    i18n,
-                    localVue,
-                    propsData,
-                    data () {
-                        return {
-                            nonFulfillableError: {
-                                code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
-                                shouldShowInDialog: true
-                            }
-                        };
-                    }
-                });
-
-                // Act
-                const result = wrapper.vm.shouldShowErrorDialog;
-
-                // Assert
-                expect(result).toBe(true);
-            });
-
-            it('should return `false` if `nonFulfillableError.shouldShowInDialog` is `false`', () => {
-                // Arrange
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        isLoggedIn: true
-                    }),
-                    i18n,
-                    localVue,
-                    propsData,
-                    data () {
-                        return {
-                            nonFulfillableError: {
-                                code: ERROR_CODE_FULFILMENT_TIME_UNAVAILABLE,
-                                shouldShowInDialog: false
-                            }
-                        };
-                    }
-                });
-
-                // Act
-                const result = wrapper.vm.shouldShowErrorDialog;
-
-                // Assert
-                expect(result).toBe(false);
-            });
-
-            it('should return `false` if there is no error', () => {
-                // Arrange
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        isLoggedIn: true
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Act
-                const result = wrapper.vm.shouldShowErrorDialog;
-
-                // Assert
-                expect(result).toBe(false);
-            });
-        });
-
         describe('eventData ::', () => {
             it('should return `isLoggedIn` and `serviceType` in an object`', () => {
                 // Arrange
@@ -575,6 +473,63 @@ xdescribe('Checkout', () => {
 
                 // Assert
                 expect(result).toEqual({ isLoggedIn: defaultCheckoutState.isLoggedIn, serviceType: defaultCheckoutState.serviceType });
+            });
+        });
+
+        describe('messageType ::', () => {
+            describe('when a message exists AND `shouldShowInDialog` is true', () => {
+                // Arrange
+                const dialog = {
+                    name: 'error-dialog'
+                };
+
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
+                it('should return dialog', () => {
+                    // Assert
+                    expect(wrapper.vm.messageType).toEqual(dialog);
+                });
+            });
+
+            describe('when a message exists AND `shouldShowInDialog` is false', () => {
+                // Arrange
+                const alertMessage = 'Something went wrong, please try again later';
+
+                const alert = {
+                    name: 'alert',
+                    props: {
+                        type: 'danger',
+                        class: 'c-checkout-alert',
+                        heading: 'Error'
+                    },
+                    content: alertMessage
+                };
+
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: alertMessage
+                    }),
+                    i18n,
+                    localVue,
+                    propsData,
+                    mocks: {
+                        $style
+                    }
+                });
+
+                it('should return alert', () => {
+                    // Assert
+                    expect(wrapper.vm.messageType).toEqual(alert);
+                });
             });
         });
     });
@@ -1199,7 +1154,7 @@ xdescribe('Checkout', () => {
                 wrapper = mount(VueCheckout, {
                     store: createStore({
                         ...defaultCheckoutState,
-                        errors: [{ code: ERROR_CODE_FULFILMENT_TIME_INVALID, shouldRedirectToMenu: false, shouldShowInDialog: true }]
+                        errors: [message]
                     }),
                     i18n,
                     localVue,
@@ -1228,17 +1183,6 @@ xdescribe('Checkout', () => {
                         data: wrapper.vm.eventData,
                         logMethod: $logger.logWarn
                     });
-                });
-
-                it('should make a call to `toggleDialogError`', () => {
-                    // Arrange
-                    const toggleDialogErrorSpy = jest.spyOn(wrapper.vm, 'toggleDialogError');
-
-                    // Act
-                    wrapper.vm.handleNonFulfillableCheckout();
-
-                    // Assert
-                    expect(toggleDialogErrorSpy).toHaveBeenCalled();
                 });
 
                 it('should make a call to `trackFormErrors`', () => {
@@ -1853,7 +1797,6 @@ xdescribe('Checkout', () => {
             let wrapper;
             let eventData;
             let error;
-            let messageToDisplay;
             let eventToEmit;
             let logInvokerSpy;
             let trackFormInteractionSpy;
@@ -1862,9 +1805,6 @@ xdescribe('Checkout', () => {
             beforeEach(() => {
                 // Arrange
                 error = new Error('An error occurred');
-
-                messageToDisplay = 'Something went wrong, please try again later';
-
                 eventToEmit = EventNames.CheckoutFailure;
 
                 eventData = {
@@ -1898,25 +1838,6 @@ xdescribe('Checkout', () => {
                 // Assert
                 expect(wrapper.emitted(eventToEmit).length).toBe(1);
                 expect(wrapper.emitted(eventToEmit)[0][0]).toEqual({ ...eventData, error });
-            });
-
-            it('should assign `messageToDisplay` to `genericErrorMessage` where there is a `messageToDisplay`', () => {
-                // Act
-                wrapper.vm.handleErrorState(error);
-
-                // Assert
-                expect(wrapper.vm.genericErrorMessage).toEqual(messageToDisplay);
-            });
-
-            it('should assign the generic server error to `genericErrorMessage` where there is no `messageToDisplay`', () => {
-                // Arrange
-                messageToDisplay = null;
-
-                // Act
-                wrapper.vm.handleErrorState(error);
-
-                // Assert
-                expect(wrapper.vm.genericErrorMessage).toMatchSnapshot();
             });
 
             it('should call `logInvoker` to log the error, passing the `eventData` and `error`', () => {
@@ -1968,11 +1889,6 @@ xdescribe('Checkout', () => {
                     propsData,
                     mocks: {
                         $logger
-                    },
-                    data () {
-                        return {
-                            genericErrorMessage: 'Some error'
-                        };
                     }
                 });
 
@@ -2018,11 +1934,6 @@ xdescribe('Checkout', () => {
                     propsData,
                     mocks: {
                         $logger
-                    },
-                    data () {
-                        return {
-                            genericErrorMessage: 'Some error'
-                        };
                     }
                 });
 
@@ -2131,9 +2042,11 @@ xdescribe('Checkout', () => {
 
         describe('`onFormSubmit` ::', () => {
             let isFormValidSpy;
+            let updateMessageSpy;
 
             beforeEach(() => {
                 isFormValidSpy = jest.spyOn(VueCheckout.methods, 'isFormValid');
+                updateMessageSpy = jest.spyOn(VueCheckout.methods, 'updateMessage');
             });
 
             it('should exist', () => {
@@ -2154,6 +2067,27 @@ xdescribe('Checkout', () => {
             });
 
             describe('when invoked', () => {
+                it('should make a call to `updateMessage`', async () => {
+                    // Arrange
+                    isFormValidSpy.mockReturnValue(true);
+                    const wrapper = mount(VueCheckout, {
+                        store: createStore(),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $v,
+                            $logger
+                        }
+                    });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(updateMessageSpy).toHaveBeenCalled();
+                });
+
                 it('should make a call to `trackFormInteraction` so we can track the action type `submit`', async () => {
                     // Arrange
                     isFormValidSpy.mockReturnValue(true);
@@ -2663,38 +2597,6 @@ xdescribe('Checkout', () => {
 
                     result.rejects.toThrow(PlaceOrderError);
                     result.rejects.toThrow(errorMessage);
-                });
-
-                it('should call `toggleDialogError`', async () => {
-                    // Arrange
-                    const errorMessage = 'An error';
-
-                    wrapper = shallowMount(VueCheckout, {
-                        store: createStore(
-                            defaultCheckoutState,
-                            {
-                                ...defaultCheckoutActions,
-                                placeOrder: jest.fn(async () => Promise.reject(new Error(errorMessage)))
-                            }
-                        ),
-                        i18n,
-                        localVue,
-                        propsData,
-                        mocks: {
-                            $logger
-                        }
-                    });
-
-                    const toggleDialogErrorSpy = jest.spyOn(wrapper.vm, 'toggleDialogError');
-
-                    // A try-catch is needed because the exception otherwise is thrown and the test fails.
-                    try {
-                        // Act
-                        await wrapper.vm.submitOrder();
-                    } catch {
-                        // Assert
-                        expect(toggleDialogErrorSpy).toHaveBeenCalled();
-                    }
                 });
             });
         });

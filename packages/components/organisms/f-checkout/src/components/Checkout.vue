@@ -335,6 +335,7 @@ export default {
             const dialog = {
                 name: 'error-dialog'
             };
+
             const alert = {
                 name: 'alert',
                 props: {
