@@ -21,7 +21,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     });
 
     forEach(['offersLink', 'delivery', 'help', 'countrySelector', 'userAccount'])
-    .it.only('should display the navigation link: "%s"', link => {
+    .it('should display the navigation link: "%s"', link => {
         // Act
         header.openMobileNavigation();
 
@@ -61,7 +61,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
         };
 
         forEach(['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'])
-        .it('should hide all navigation links, including the offersIcon,', link => {
+        .it('should hide navigation link "%s", as well as the offersIcon,', link => {
             // Act
             header.open(headerData);
             header.waitForComponent();
@@ -73,7 +73,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     });
 
     forEach(['au', 'ie', 'nz'])
-    .describe('for country code "%s" when in mobile mode', expectedLocale => {
+    .describe('for country code "%s" in mobile mode', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -82,7 +82,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
         };
 
         forEach(['offersLink', 'userAccount', 'help', 'countrySelector'])
-        .it('should display "%s" navigation link when burger menu is opened', link => {
+        .it('should display navigation link "%s" when burger menu is opened', link => {
             // Act
             header.open(headerData);
             header.openMobileNavigation();
@@ -103,7 +103,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
         };
 
         forEach(['userAccount', 'help', 'countrySelector'])
-        .it('should display the "%s" navigation link when burger menu is opened', link => {
+        .it('should display navigation link "%s" but no offers or delivery links', link => {
             // Act
             header.open(headerData);
             header.openMobileNavigation();
@@ -111,10 +111,9 @@ describe('Mobile - f-header component tests - @browserstack', () => {
 
             // Assert
             expect(header.isNavigationLinkDisplayed(link)).toBe(true);
+            expect(header.isNavigationLinkDisplayed('offersLink')).toBe(false);
+            expect(header.isNavigationLinkDisplayed('delivery')).toBe(false);
         });
-
-        expect(header.isNavigationLinkDisplayed('offersLink')).toBe(false);
-        expect(header.isNavigationLinkDisplayed('delivery')).toBe(false);
     });
 
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
