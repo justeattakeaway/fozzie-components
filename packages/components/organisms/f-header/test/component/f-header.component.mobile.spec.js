@@ -21,7 +21,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     });
 
     forEach(['offersLink', 'delivery', 'help', 'countrySelector', 'userAccount'])
-    .it('should display the navigation link: "%s"', link => {
+    .it.only('should display the navigation link: "%s"', link => {
         // Act
         header.openMobileNavigation();
 
@@ -30,7 +30,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     });
 
     forEach(['au', 'ie', 'nz'])
-    .it('should hide all navigation links but display offersIcon link, when in mobile mode for country code "%s"', expectedLocale => {
+    .describe('when in mobile mode for country code "%s"', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -38,11 +38,11 @@ describe('Mobile - f-header component tests - @browserstack', () => {
             delivery: true
         };
 
-        ['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'].forEach(link => {
+        forEach(['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'])
+        .it('should hide "%s" navigation link but display offersIcon link', link => {
             // Act
             header.open(headerData);
             header.waitForComponent();
-            console.log(link);
 
             // Assert
             expect(header.isMobileNavigationBarDisplayed()).toBe(true);
@@ -52,7 +52,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     });
 
     forEach(['it', 'es', 'dk', 'no'])
-    .it('should hide all navigation links for country code "%s", as well as offersIcon, when in mobile mode', expectedLocale => {
+    .describe('country code "%s" when in mobile mode', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -60,7 +60,8 @@ describe('Mobile - f-header component tests - @browserstack', () => {
             delivery: true
         };
 
-        ['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'].forEach(link => {
+        forEach(['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'])
+        .it('should hide all navigation links, including the offersIcon,', link => {
             // Act
             header.open(headerData);
             header.waitForComponent();
@@ -72,7 +73,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     });
 
     forEach(['au', 'ie', 'nz'])
-    .it('should display navigation links for country code "%s" when burger menu is opened', expectedLocale => {
+    .describe('for country code "%s" when in mobile mode', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -80,12 +81,12 @@ describe('Mobile - f-header component tests - @browserstack', () => {
             delivery: true
         };
 
-        ['offersLink', 'userAccount', 'help', 'countrySelector'].forEach(link => {
+        forEach(['offersLink', 'userAccount', 'help', 'countrySelector'])
+        .it('should display "%s" navigation link when burger menu is opened', link => {
             // Act
             header.open(headerData);
             header.openMobileNavigation();
             header.waitForComponent();
-            console.log(link);
 
             // Assert
             expect(header.isNavigationLinkDisplayed(link)).toBe(true);
@@ -93,7 +94,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     });
 
     forEach(['it', 'es', 'dk', 'no'])
-    .it('should display the below navigation links for country code "%s" when menu has been opened', expectedLocale => {
+    .describe('for country code "%s" in mobile mode', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -101,7 +102,8 @@ describe('Mobile - f-header component tests - @browserstack', () => {
             delivery: true
         };
 
-        ['userAccount', 'help', 'countrySelector'].forEach(link => {
+        forEach(['userAccount', 'help', 'countrySelector'])
+        .it('should display the "%s" navigation link when burger menu is opened', link => {
             // Act
             header.open(headerData);
             header.openMobileNavigation();
