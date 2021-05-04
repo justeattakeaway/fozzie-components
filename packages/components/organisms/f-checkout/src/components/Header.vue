@@ -5,9 +5,11 @@
         <div
             v-if="isLoggedIn"
             data-test-id="user-checkoutHeader">
-            <h2 data-test-id="user-title">
+            <h1
+                data-test-id="user-title"
+                :class="$style['c-checkoutHeader-title']">
                 {{ $t('checkoutHeader.user.title', { name }) }}
-            </h2>
+            </h1>
 
             <p :class="$style['c-checkoutHeader-loginLink']">
                 <a
@@ -23,9 +25,11 @@
         <div
             v-else
             data-test-id="guest-checkoutHeader">
-            <h2 :class="$style['c-checkoutHeader-title']">
+            <h1
+                data-test-id="user-title"
+                :class="$style['c-checkoutHeader-guestTitle']">
                 {{ $t('checkoutHeader.guest.loginTitle') }}
-            </h2>
+            </h1>
 
             <f-button
                 button-type="primary"
@@ -43,7 +47,7 @@
                 <span>{{ $t('checkoutHeader.guest.option') }}</span>
             </div>
 
-            <h2 :class="$style['c-checkoutHeader-title']">
+            <h2 :class="$style['c-checkoutHeader-guestTitle']">
                 {{ $t('checkoutHeader.guest.guestTitle') }}
             </h2>
 
@@ -109,6 +113,10 @@ export default {
 }
 
 .c-checkoutHeader-title {
+    @include font-size('heading-m');
+}
+
+.c-checkoutHeader-guestTitle {
     margin-top: 0;
     margin-bottom: spacing(x0.5);
     @include font-size('heading-s');

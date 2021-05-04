@@ -10,11 +10,11 @@
                 data-test-id="checkout-issue-modal-title"
                 class="u-noSpacing"
             >
-                {{ $t(`errorMessages.checkoutIssues.${errorCode}.title`) }}
+                {{ $t(`errorMessages.checkoutIssues.${errorCode}.title`, { serviceType: serviceTypeText }) }}
             </h3>
 
             <p data-test-id="checkout-issue-modal-message">
-                {{ $t(`errorMessages.checkoutIssues.${errorCode}.message`) }}
+                {{ $t(`errorMessages.checkoutIssues.${errorCode}.message`, { serviceType: serviceTypeText }) }}
             </p>
 
             <f-button
@@ -47,8 +47,9 @@ export default {
 
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
+            'message',
             'restaurant',
-            'message'
+            'serviceType'
         ]),
 
         errorCode () {
@@ -61,6 +62,10 @@ export default {
 
         restaurantMenuPageUrl () {
             return `restaurant-${this.restaurant.seoName}/menu`;
+        },
+
+        serviceTypeText () {
+            return this.$t(`serviceTypes.${this.serviceType}`);
         }
     },
 

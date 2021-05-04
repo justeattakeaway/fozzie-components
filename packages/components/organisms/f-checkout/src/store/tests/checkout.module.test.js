@@ -42,8 +42,8 @@ const {
     updateAddressDetails,
     updateCustomerDetails,
     updateFulfilmentTime,
-    updateUserNote,
-    updateMessage
+    updateMessage,
+    updateUserNote
 } = actions;
 
 const mobileNumber = '+447111111111';
@@ -741,7 +741,7 @@ describe('CheckoutModule', () => {
                     }));
                 });
 
-                it('should call `updateErrors` with error code.', async () => {
+                it('should call `updateErrors` with issue.', async () => {
                     // Act
                     await updateCheckout({ commit, state, dispatch }, payload);
 
@@ -749,7 +749,7 @@ describe('CheckoutModule', () => {
                     expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [issue]);
                 });
 
-                it('should call `updateMessage` with first Issue.', async () => {
+                it('should call `updateMessage` with first issue.', async () => {
                     // Act
                     await updateCheckout({ commit, state, dispatch }, payload);
 

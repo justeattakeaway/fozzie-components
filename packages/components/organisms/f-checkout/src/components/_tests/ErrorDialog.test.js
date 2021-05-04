@@ -44,55 +44,81 @@ describe('ErrorDialog', () => {
     });
 
     describe('computed ::', () => {
-        let wrapper;
-        let emptyWrapper;
-
-        beforeEach(() => {
-            wrapper = shallowMount(ErrorDialog, {
-                store: createStore({
-                    ...defaultCheckoutState,
-                    message,
-                    restaurant
-                }),
-                i18n,
-                localVue,
-                propsData
-            });
-
-            emptyWrapper = shallowMount(ErrorDialog, {
-                store: createStore(),
-                i18n,
-                localVue,
-                propsData
-            });
-        });
-
         describe('errorCode ::', () => {
             it('should return `code` of `message`', () => {
+                // Arrange
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
                 // Assert
                 expect(wrapper.vm.errorCode).toEqual(message.code);
             });
 
             it('should return `code` of `message`', () => {
+                // Arrange
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
                 // Assert
-                expect(emptyWrapper.vm.errorCode).toEqual(null);
+                expect(wrapper.vm.errorCode).toEqual(null);
             });
         });
 
         describe('isOpen ::', () => {
             it('should return `true`', () => {
+                // Arrange
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
                 // Assert
                 expect(wrapper.vm.isOpen).toEqual(true);
             });
 
             it('should return `null`', () => {
+                // Arrange
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
                 // Assert
-                expect(emptyWrapper.vm.isOpen).toEqual(null);
+                expect(wrapper.vm.isOpen).toEqual(null);
             });
         });
 
         describe('restaurantMenuPageUrl ::', () => {
             it('should return the URL to redirect back to the restaurant menu', () => {
+                // Arrange
+                const wrapper = shallowMount(ErrorDialog, {
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        restaurant
+                    }),
+                    i18n,
+                    localVue,
+                    propsData
+                });
+
                 // Assert
                 expect(wrapper.vm.restaurantMenuPageUrl).toEqual(`restaurant-${restaurant.seoName}/menu`);
             });
@@ -110,7 +136,6 @@ describe('ErrorDialog', () => {
             afterEach(() => {
                 jest.clearAllMocks();
             });
-
 
             it('should call `updateMessage`', () => {
                 // Arrange
