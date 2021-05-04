@@ -52,7 +52,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     });
 
     forEach(['it', 'es', 'dk', 'no'])
-    .describe('country code "%s" when in mobile mode', expectedLocale => {
+    .describe('when in mobile mode for country code "%s"', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -73,7 +73,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     });
 
     forEach(['au', 'ie', 'nz'])
-    .describe('for country code "%s" in mobile mode', expectedLocale => {
+    .describe('when in mobile mode for country code "%s"', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -94,7 +94,7 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     });
 
     forEach(['it', 'es', 'dk', 'no'])
-    .describe('for country code "%s" in mobile mode', expectedLocale => {
+    .describe('when in mobile mode for country code "%s"', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,

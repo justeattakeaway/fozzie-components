@@ -5,6 +5,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.30.1
 ------------------------------
+*May 4, 2021*
+
+## Changed
+- Replaced `console.logs` in component tests with error handling `%s` string title
+
+## Removed
+- Unused READMEs inside `test/component` and `test-utils/component-object` folders 
+- Extra intermediate `spec` folder in generator for future components (see below entry)
+
+
 *April 30, 2021*
 
 ## Added
