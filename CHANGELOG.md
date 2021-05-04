@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v3.30.1
+v3.31.0
 ------------------------------
 *May 4, 2021*
 
@@ -14,6 +14,9 @@ v3.30.1
 - Unused READMEs inside `test/component` and `test-utils/component-object` folders 
 - Extra intermediate `spec` folder in generator for future components (see below entry)
 
+
+v3.30.0
+------------------------------
 
 *April 30, 2021*
 
