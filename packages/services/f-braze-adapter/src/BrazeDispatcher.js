@@ -3,6 +3,7 @@ import uniq from 'lodash.uniq';
 import ContentCards from './services/contentCard.service';
 import isAppboyInitialised from './utils/isAppboyInitialised';
 import { LogService } from './services/logging/logging.service';
+import areCookiesPermitted from './utils/areCookiesPermitted';
 
 /* braze event handler callbacks */
 
@@ -201,7 +202,11 @@ class BrazeDispatcher {
         try {
             this.appboyPromise = import(/* webpackChunkName: "appboy-web-sdk" */ 'appboy-web-sdk')
                 .then(({ default: appboy }) => {
-                    appboy.initialize(apiKey, { enableLogging, sessionTimeoutInSeconds: this.sessionTimeoutInSeconds });
+                    appboy.initialize(apiKey, {
+                        enableLogging,
+                        sessionTimeoutInSeconds: this.sessionTimeoutInSeconds,
+                        noCookies: !areCookiesPermitted()
+                    });
                     appboy.openSession();
 
                     window.appboy = appboy;
