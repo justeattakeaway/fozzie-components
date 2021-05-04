@@ -22,7 +22,7 @@ module.exports = {
     ],
 
     modulePathIgnorePatterns: [
-        './test/specs/component/',
-        './test/specs/accessibility'
+        './test/component/',
+        './test/accessibility'
     ]
 };

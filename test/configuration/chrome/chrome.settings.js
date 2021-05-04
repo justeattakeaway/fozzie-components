@@ -11,33 +11,33 @@ const settings = () => ({
                 browserName: 'chrome',
                 acceptInsecureCerts: true,
                 specs: VS_DEBUGGER ? [SPEC_FILE] : [
-                    'test/specs/accessibility/axe-accessibility.spec.js',
+                    'test/accessibility/axe-accessibility.spec.js'
                 ]
             }
-        ],  
+        ]
     },
     component: {
         capabilities: [
             ...(isDesktop || isShared ? [{
-            browserName: 'chrome',
-            acceptInsecureCerts: true,
-            specs: VS_DEBUGGER ? [SPEC_FILE] : [
-                'test/specs/component/*.component.desktop.spec.js',
-                'test/specs/component/*.component.shared.spec.js'
-            ]
-        }] : []),
-        ...(isMobile || isShared ? [{
-            browserName: 'chrome',
-            acceptInsecureCerts: true,
-            "goog:chromeOptions": {
-                mobileEmulation: {'deviceName': 'Pixel 2'}
-            },
-            specs: VS_DEBUGGER ? [SPEC_FILE] : [
-                'test/specs/component/*.component.mobile.spec.js',
-                'test/specs/component/*.component.shared.spec.js'
-            ]
-        }] : []),
-        ]  
+                browserName: 'chrome',
+                acceptInsecureCerts: true,
+                specs: VS_DEBUGGER ? [SPEC_FILE] : [
+                    'test/component/*.component.desktop.spec.js',
+                    'test/component/*.component.shared.spec.js'
+                ]
+            }] : []),
+            ...(isMobile || isShared ? [{
+                browserName: 'chrome',
+                acceptInsecureCerts: true,
+                'goog:chromeOptions': {
+                    mobileEmulation: { deviceName: 'Pixel 2' }
+                },
+                specs: VS_DEBUGGER ? [SPEC_FILE] : [
+                    'test/component/*.component.mobile.spec.js',
+                    'test/component/*.component.shared.spec.js'
+                ]
+            }] : [])
+        ]
     },
     reporters: ALLURE_REPORTER === 'true' ? [
         [video, {
