@@ -15,7 +15,6 @@ v3.30.1
 - Extra intermediate `spec` folder in generator for future components (see below entry)
 
 
-
 *April 30, 2021*
 
 ## Added
