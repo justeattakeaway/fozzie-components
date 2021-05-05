@@ -20,7 +20,7 @@ v0.101.0
 ------------------------------
 *May 5, 2021*
 
-### Added
+### Changed
 - Mapping of fulfilment address and time to match the API response.
 
 
