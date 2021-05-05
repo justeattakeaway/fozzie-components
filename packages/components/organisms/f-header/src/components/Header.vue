@@ -187,6 +187,7 @@ html:global(.is-navInView) {
     min-width : 300px;
     position: relative;
     z-index: zIndex(mid);
+    box-shadow: $header-box-shadow;
 
     // Styles for a sticky header on mobile
     @include media('<=mid') {
@@ -200,21 +201,17 @@ html:global(.is-navInView) {
             top: 0;
         }
     }
-
-    @include media('>mid') {
-        border-bottom: $header-separator solid $header-border-color;
-    }
 }
 
     // Adds a border to the header to separate it from the
     // main content at all widths
     .c-header--bordered {
-        border-bottom: $header-separator solid $header-border-color;
+        box-shadow: $header-box-shadow;
     }
 
     .c-header--transparent {
         background-color: transparent;
-        border: none;
+        box-shadow: none;
         position: absolute;
         width: 100%;
     }
