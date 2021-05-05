@@ -68,10 +68,27 @@ const $style = {
     'c-checkout-alert': 'c-checkout-alert'
 };
 
+
 const message = {
     code: ERROR_CODE_FULFILMENT_TIME_INVALID,
     shouldRedirectToMenu: true,
     shouldShowInDialog: true
+};
+
+const dialog = {
+    name: 'error-dialog'
+};
+
+const alertCode = 'Something went wrong, please try again later';
+
+const alert = {
+    name: 'alert',
+    props: {
+        type: 'danger',
+        class: 'c-checkout-alert',
+        heading: 'Error'
+    },
+    content: alertCode
 };
 
 describe('Checkout', () => {
@@ -478,12 +495,76 @@ describe('Checkout', () => {
 
         describe('messageType ::', () => {
             describe('when a message exists AND `shouldShowInDialog` is true', () => {
+                let dialogMessageSpy;
+
+                beforeEach(() => {
+                    dialogMessageSpy = jest.spyOn(VueCheckout.computed, 'dialogMessage');
+                });
+
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
                 it('should return dialog', () => {
                     // Arrange
-                    const dialog = {
-                        name: 'error-dialog'
-                    };
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            message
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
 
+                    // Act
+                    const { messageType } = wrapper.vm;
+
+                    // Assert
+                    expect(dialogMessageSpy).toHaveBeenCalled();
+                    expect(messageType).toEqual(dialog);
+                });
+            });
+
+            describe('when a message exists AND `shouldShowInDialog` is false', () => {
+                let alertMessageSpy;
+
+                beforeEach(() => {
+                    alertMessageSpy = jest.spyOn(VueCheckout.computed, 'alertMessage');
+                });
+
+                afterEach(() => {
+                    jest.clearAllMocks();
+                });
+
+                it('should return alert', () => {
+                    // Arrange
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            message: alertCode
+                        }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $style
+                        }
+                    });
+
+                    // Act
+                    const { messageType } = wrapper.vm;
+
+                    // Assert
+                    expect(alertMessageSpy).toHaveBeenCalled();
+                    expect(messageType).toEqual(alert);
+                });
+            });
+        });
+
+        describe('dialogMessage ::', () => {
+            describe('when a message exists AND `shouldShowInDialog` is true', () => {
+                it('should return dialog', () => {
                     // Act
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore({
@@ -496,30 +577,19 @@ describe('Checkout', () => {
                     });
 
                     // Assert
-                    expect(wrapper.vm.messageType).toEqual(dialog);
+                    expect(wrapper.vm.dialogMessage).toEqual(dialog);
                 });
             });
+        });
 
+        describe('alertMessage ::', () => {
             describe('when a message exists AND `shouldShowInDialog` is false', () => {
                 it('should return alert', () => {
-                    // Arrange
-                    const alertMessage = 'Something went wrong, please try again later';
-
-                    const alert = {
-                        name: 'alert',
-                        props: {
-                            type: 'danger',
-                            class: 'c-checkout-alert',
-                            heading: 'Error'
-                        },
-                        content: alertMessage
-                    };
-
                     // Act
                     const wrapper = shallowMount(VueCheckout, {
                         store: createStore({
                             ...defaultCheckoutState,
-                            message: alertMessage
+                            message: alertCode
                         }),
                         i18n,
                         localVue,
@@ -530,7 +600,7 @@ describe('Checkout', () => {
                     });
 
                     // Assert
-                    expect(wrapper.vm.messageType).toEqual(alert);
+                    expect(wrapper.vm.alertMessage).toEqual(alert);
                 });
             });
         });
