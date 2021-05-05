@@ -41,6 +41,14 @@ describe('f-braze-adapter initialise', () => {
         expect(configure).toHaveBeenCalledWith(settings);
     });
 
+    it('should call configure with a blank object if no settings given', async () => {
+        // Arrange & Act
+        await initialiseBraze();
+
+        // Assert
+        expect(configure).toHaveBeenCalledWith({});
+    });
+
     it('should wrap and rethrow an error if thrown by configure', async () => {
         const message = 'Punkd!';
 

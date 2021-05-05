@@ -49,6 +49,10 @@ This method returns an instance of the BrazeDispatcher class, which can also be 
 
 All other functionality, such as handling content cards or intercepting in-app messages can be done with callbacks passed through config.
 
+Note that the [`noCookies`](https://js.appboycdn.com/web-sdk/latest/doc/modules/appboy.html#initializationoptions) option is passed to
+braze SDK as `true` if the `je-cookieConsent` cookie (as set by [`@justeat/f-cookie-banner`](https://www.npmjs.com/package/@justeat/f-cookie-banner))
+is not `"full"`.
+
 #### Basic Example
 
 ```js
@@ -129,6 +133,17 @@ A callback to be invoked when in-app messages have been retrieved.
 #### `config.callbacks.interceptInAppMessageClickEvents`
 
 The callback to be invoked when in-app messages have been clicked.
+
+#### `config.loggerCallbacks`
+
+A dictionary of functions that should accept the parameters:
+
+* `level` String - one of (`logInfo`|`logWarn`|`logError`)
+* `message` String - A useful log message
+* `payload` Object - Any other relevant info for logging
+
+This will be used to log out any information from the service. In a later version it will also be set up as a log target
+for the braze SDK, based on the `enableLogging` configuration value.
 
 ## Migration to v2
 
