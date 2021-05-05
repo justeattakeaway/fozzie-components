@@ -22,6 +22,6 @@ module.exports = {
     ],
 
     modulePathIgnorePatterns: [
-        './test/specs/accessibility/'
+        './test/accessibility/'
     ]
 };

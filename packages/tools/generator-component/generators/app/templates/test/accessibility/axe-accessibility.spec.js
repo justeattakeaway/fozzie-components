@@ -1,6 +1,7 @@
-const <%= name.filename %> = require('../../../test-utils/component-objects/f-<%= name.class %>.component');
+import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper';
+
+const <%= name.filename %> = require('../../test-utils/component-objects/f-<%= name.class %>.component');
 const <%= name.class %> = new <%= name.filename %>
-import { getAccessibilityTestResults } from '../../../../../../../test/utils/axe-helper';
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
