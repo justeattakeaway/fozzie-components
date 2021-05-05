@@ -49,37 +49,6 @@ describe('Mobile - f-header component tests - @browserstack', () => {
             expect(header.isNavigationLinkDisplayed(link)).toBe(false);
             expect(header.isNavigationLinkDisplayed('offersIcon')).toBe(true);
         });
-    });
-
-    forEach(['it', 'es', 'dk', 'no'])
-    .describe('when in mobile mode for country code "%s"', expectedLocale => {
-        // Arrange
-        const headerData = {
-            locale: expectedLocale,
-            offers: true,
-            delivery: true
-        };
-
-        forEach(['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'])
-        .it('should hide navigation link "%s", as well as the offersIcon,', link => {
-            // Act
-            header.open(headerData);
-            header.waitForComponent();
-
-            // Assert
-            expect(header.isMobileNavigationBarDisplayed()).toBe(true);
-            expect(header.isNavigationLinkDisplayed(link)).toBe(false);
-        });
-    });
-
-    forEach(['au', 'ie', 'nz'])
-    .describe('when in mobile mode for country code "%s"', expectedLocale => {
-        // Arrange
-        const headerData = {
-            locale: expectedLocale,
-            offers: true,
-            delivery: true
-        };
 
         forEach(['offersLink', 'userAccount', 'help', 'countrySelector'])
         .it('should display navigation link "%s" when burger menu is opened', link => {
@@ -101,6 +70,17 @@ describe('Mobile - f-header component tests - @browserstack', () => {
             offers: true,
             delivery: true
         };
+
+        forEach(['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'])
+        .it('should hide navigation link "%s", as well as the offersIcon,', link => {
+            // Act
+            header.open(headerData);
+            header.waitForComponent();
+
+            // Assert
+            expect(header.isMobileNavigationBarDisplayed()).toBe(true);
+            expect(header.isNavigationLinkDisplayed(link)).toBe(false);
+        });
 
         forEach(['userAccount', 'help', 'countrySelector'])
         .it('should display navigation link "%s" but no offers or delivery links', link => {
