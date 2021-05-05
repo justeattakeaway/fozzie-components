@@ -6,6 +6,7 @@
             :value="customer.firstName"
             name="guest-first-name"
             :label-text="$t('guest.firstName')"
+            :has-error="isFirstNameEmpty"
             @input="updateCustomerDetails({ 'firstName': $event })">
             <template #error>
                 <error-message
@@ -21,6 +22,7 @@
             :value="customer.lastName"
             name="guest-last-name"
             :label-text="$t('guest.lastName')"
+            :has-error="isLastNameEmpty"
             @input="updateCustomerDetails({ 'lastName': $event })">
             <template #error>
                 <error-message
@@ -36,6 +38,7 @@
             :value="customer.email"
             name="guest-email"
             :label-text="$t('guest.email')"
+            :has-error="!isEmailValid"
             @input="updateCustomerDetails({ 'email': $event })">
             <template #error>
                 <error-message
