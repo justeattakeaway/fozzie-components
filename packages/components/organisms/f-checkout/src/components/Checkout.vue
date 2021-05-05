@@ -2,6 +2,7 @@
     <div>
         <component
             :is="messageType.name"
+            v-if="message"
             ref="errorAlert"
             v-bind="messageType.props"
         >
@@ -332,11 +333,15 @@ export default {
         },
 
         messageType () {
-            return this.message && !this.message.shouldShowInDialog ? this.alertMessage : this.dialogMessage;
+            return this.message && this.message.shouldShowInDialog
+                ? this.dialogMessage
+                : this.alertMessage;
         },
 
         dialogMessage () {
-            return { name: 'error-dialog' };
+            return {
+                name: 'error-dialog'
+            };
         },
 
         alertMessage () {

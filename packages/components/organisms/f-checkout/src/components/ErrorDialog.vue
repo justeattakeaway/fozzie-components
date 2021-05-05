@@ -5,27 +5,25 @@
         :is-open="isOpen"
         @close="closeErrorDialog"
     >
-        <span v-if="isOpen">
-            <h3
-                data-test-id="checkout-issue-modal-title"
-                class="u-noSpacing"
-            >
-                {{ $t(`errorMessages.checkoutIssues.${errorCode}.title`, { serviceType: serviceTypeText }) }}
-            </h3>
+        <h3
+            data-test-id="checkout-issue-modal-title"
+            class="u-noSpacing"
+        >
+            {{ $t(`errorMessages.checkoutIssues.${errorCode}.title`, { serviceType: serviceTypeText }) }}
+        </h3>
 
-            <p data-test-id="checkout-issue-modal-message">
-                {{ $t(`errorMessages.checkoutIssues.${errorCode}.message`, { serviceType: serviceTypeText }) }}
-            </p>
+        <p data-test-id="checkout-issue-modal-message">
+            {{ $t(`errorMessages.checkoutIssues.${errorCode}.message`, { serviceType: serviceTypeText }) }}
+        </p>
 
-            <f-button
-                :class="$style['c-checkout-redirectButton']"
-                button-size="large"
-                data-test-id="redirect-to-menu-button"
-                @click.native="closeErrorDialog"
-            >
-                {{ $t(`errorMessages.checkoutIssues.${errorCode}.buttonText`) }}
-            </f-button>
-        </span>
+        <f-button
+            :class="$style['c-checkout-redirectButton']"
+            button-size="large"
+            data-test-id="redirect-to-menu-button"
+            @click.native="closeErrorDialog"
+        >
+            {{ $t(`errorMessages.checkoutIssues.${errorCode}.buttonText`) }}
+        </f-button>
     </mega-modal>
 </template>
 
@@ -45,6 +43,12 @@ export default {
         MegaModal
     },
 
+    data () {
+        return {
+            isOpen: false
+        };
+    },
+
     computed: {
         ...mapState(VUEX_CHECKOUT_MODULE, [
             'message',
@@ -56,10 +60,6 @@ export default {
             return this.message && this.message.code;
         },
 
-        isOpen () {
-            return this.message && this.message.shouldShowInDialog;
-        },
-
         restaurantMenuPageUrl () {
             return `restaurant-${this.restaurant.seoName}/menu`;
         },
@@ -67,6 +67,10 @@ export default {
         serviceTypeText () {
             return this.$t(`serviceTypes.${this.serviceType}`);
         }
+    },
+
+    mounted () {
+        this.isOpen = true;
     },
 
     methods: {

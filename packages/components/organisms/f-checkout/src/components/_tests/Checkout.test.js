@@ -1096,6 +1096,22 @@ describe('Checkout', () => {
                     let handleErrorStateSpy;
 
                     beforeEach(() => {
+                        wrapper = mount(VueCheckout, {
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                serviceType: CHECKOUT_METHOD_COLLECTION,
+                                isLoggedIn: false,
+                                isFulfillable: true,
+                                message: alertCode
+                            }),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $logger
+                            }
+                        });
+
                         handleErrorStateSpy = jest.spyOn(wrapper.vm, 'handleErrorState');
                     });
 
@@ -1885,7 +1901,10 @@ describe('Checkout', () => {
                 };
 
                 wrapper = mount(VueCheckout, {
-                    store: createStore(),
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: alertCode
+                    }),
                     i18n,
                     localVue,
                     propsData,
@@ -1955,7 +1974,10 @@ describe('Checkout', () => {
                 const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
 
                 const wrapper = mount(VueCheckout, {
-                    store: createStore(),
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: alertCode
+                    }),
                     i18n,
                     localVue,
                     propsData,
@@ -2000,7 +2022,10 @@ describe('Checkout', () => {
                 const scrollToSpy = jest.spyOn(VueScrollTo, 'scrollTo');
 
                 const wrapper = mount(VueCheckout, {
-                    store: createStore(),
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: alertCode
+                    }),
                     i18n,
                     localVue,
                     propsData,
@@ -2027,7 +2052,10 @@ describe('Checkout', () => {
             it('should call `scrollToElement` with the first inline error and -100 offset', async () => {
                 // Arrange
                 const wrapper = mount(VueCheckout, {
-                    store: createStore(),
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: alertCode
+                    }),
                     i18n,
                     localVue,
                     propsData,
@@ -2517,7 +2545,10 @@ describe('Checkout', () => {
                 const updateCustomerDetailsSpy = jest.spyOn(VueCheckout.methods, 'updateCustomerDetails');
 
                 const wrapper = mount(VueCheckout, {
-                    store: createStore(),
+                    store: createStore({
+                        ...defaultCheckoutState,
+                        message: alertCode
+                    }),
                     i18n,
                     localVue,
                     propsData

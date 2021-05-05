@@ -75,37 +75,6 @@ describe('ErrorDialog', () => {
             });
         });
 
-        describe('isOpen ::', () => {
-            it('should return `true` when `message` is provided', () => {
-                // Arrange
-                const wrapper = shallowMount(ErrorDialog, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        message
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Assert
-                expect(wrapper.vm.isOpen).toEqual(true);
-            });
-
-            it('should return `null` when no `message` is provided', () => {
-                // Arrange
-                const wrapper = shallowMount(ErrorDialog, {
-                    store: createStore(),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
-                // Assert
-                expect(wrapper.vm.isOpen).toEqual(null);
-            });
-        });
-
         describe('restaurantMenuPageUrl ::', () => {
             it('should return the URL to redirect back to the restaurant menu', () => {
                 // Arrange
