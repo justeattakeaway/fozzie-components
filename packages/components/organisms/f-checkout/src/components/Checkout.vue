@@ -926,8 +926,9 @@ export default {
 
     @include media('<=narrow') {
         border: none;
-        padding-top: spacing(x2);
-        padding-bottom: spacing(x2);
+        padding-top: spacing(x3);
+        padding-bottom: spacing(x5);
+        margin-top: 0;
     }
 }
 
