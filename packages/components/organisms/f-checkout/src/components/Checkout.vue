@@ -669,6 +669,7 @@ export default {
                     language: this.$i18n.locale,
                     timeout: this.checkoutTimeout
                 });
+
                 this.$emit(EventNames.CheckoutAddressGetSuccess);
             } catch (error) {
                 this.$emit(EventNames.CheckoutAddressGetFailure, error);
