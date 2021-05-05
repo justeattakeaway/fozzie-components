@@ -10,6 +10,7 @@ v0.3.0
 ### Added
 - Support for content type option
 - Implemented createMockClient to make integration testing easier
+- Ability to setup mock API responses
 - Exposed HTTPVerbs as constants
 
 v0.2.0
