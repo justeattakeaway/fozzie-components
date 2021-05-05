@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.102.0
+------------------------------
+*May 5, 2021*
+
+### Updated
+- Bumped f-button and f-mega-modal versions
+
+
 v0.101.0
 ------------------------------
 *May 5, 2021*
