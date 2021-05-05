@@ -661,6 +661,7 @@ export default {
                     language: this.$i18n.locale,
                     timeout: this.checkoutTimeout
                 });
+
                 this.$emit(EventNames.CheckoutAddressGetSuccess);
             } catch (error) {
                 this.$emit(EventNames.CheckoutAddressGetFailure, error);
@@ -904,8 +905,9 @@ export default {
 
     @include media('<=narrow') {
         border: none;
-        padding-top: spacing(x2);
-        padding-bottom: spacing(x2);
+        padding-top: spacing(x3);
+        padding-bottom: spacing(x5);
+        margin-top: 0;
     }
 }
 

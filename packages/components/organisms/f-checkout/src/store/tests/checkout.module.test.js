@@ -171,7 +171,7 @@ describe('CheckoutModule', () => {
 
             it('should leave address state empty if no location data is returned from the API.', () => {
                 // Arrange
-                checkoutDelivery.location = null;
+                checkoutDelivery.fulfilment.location = null;
 
                 // Act
                 mutations[UPDATE_STATE](state, checkoutDelivery);
@@ -182,7 +182,7 @@ describe('CheckoutModule', () => {
 
             it('should leave address state empty if location data is returned with no address from the API.', () => {
                 // Arrange
-                checkoutDelivery.location = {
+                checkoutDelivery.fulfilment.location = {
                     address: null
                 };
 
