@@ -3,7 +3,7 @@
         <component
             :is="messageType.name"
             v-if="message"
-            ref="errorAlert"
+            ref="errorMessage"
             v-bind="messageType.props"
         >
             <span>{{ messageType.content }}</span>
@@ -540,7 +540,9 @@ export default {
                     logMethod: this.$logger.logInfo
                 });
             } catch (e) {
-                throw new PlaceOrderError(e.message);
+                const { errorCode } = e.response.data;
+
+                throw new PlaceOrderError(e.message, errorCode === 'DuplicateOrder');
             }
         },
 
@@ -723,12 +725,11 @@ export default {
 
             this.trackFormInteraction({ action: 'error', error: `error_${error.message}` });
 
-
             if (!error.shouldShowInDialog) {
                 this.updateMessage(message);
 
                 this.$nextTick(() => {
-                    this.scrollToElement(this.$refs.errorAlert.$el);
+                    this.scrollToElement(this.$refs.errorMessage.$el);
                 });
             }
         },
