@@ -6,13 +6,9 @@ const header = new Header();
 
 describe('Mobile - f-header component tests - @browserstack', () => {
     beforeEach(() => {
-        const headerData = {
-            locale: 'gb',
-            offers: true,
-            delivery: true
-        };
-
-        header.open(headerData);
+        // Act
+        header.open({ locale: 'gb', offers: true, delivery: true });
+        header.openMobileNavigation();
         header.waitForComponent();
 
         if (process.env.JE_ENV !== 'browserstack') {
@@ -21,108 +17,111 @@ describe('Mobile - f-header component tests - @browserstack', () => {
     });
 
     forEach(['offersLink', 'delivery', 'help', 'countrySelector', 'userAccount'])
-    .it('should display the navigation link: "%s"', link => {
-        // Act
-        header.openMobileNavigation();
-
+    .it('should open navigation and display link "%s"', link => {
         // Assert
         expect(header.isNavigationLinkDisplayed(link)).toBe(true);
     });
 
-    forEach(['au', 'ie', 'nz'])
-    .it('should hide all navigation links but display offersIcon link, when in mobile mode for country code "%s"', expectedLocale => {
-        // Arrange
-        const headerData = {
-            locale: expectedLocale,
-            offers: true,
-            delivery: true
-        };
-
-        ['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'].forEach(link => {
-            // Act
-            header.open(headerData);
-            header.waitForComponent();
-            console.log(link);
-
-            // Assert
-            expect(header.isMobileNavigationBarDisplayed()).toBe(true);
-            expect(header.isNavigationLinkDisplayed(link)).toBe(false);
-            expect(header.isNavigationLinkDisplayed('offersIcon')).toBe(true);
-        });
-    });
-
-    forEach(['it', 'es', 'dk', 'no'])
-    .it('should hide all navigation links for country code "%s", as well as offersIcon, when in mobile mode', expectedLocale => {
-        // Arrange
-        const headerData = {
-            locale: expectedLocale,
-            offers: true,
-            delivery: true
-        };
-
-        ['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'].forEach(link => {
-            // Act
-            header.open(headerData);
-            header.waitForComponent();
-
-            // Assert
-            expect(header.isMobileNavigationBarDisplayed()).toBe(true);
-            expect(header.isNavigationLinkDisplayed(link)).toBe(false);
-        });
-    });
-
-    forEach(['au', 'ie', 'nz'])
-    .it('should display navigation links for country code "%s" when burger menu is opened', expectedLocale => {
-        // Arrange
-        const headerData = {
-            locale: expectedLocale,
-            offers: true,
-            delivery: true
-        };
-
-        ['offersLink', 'userAccount', 'help', 'countrySelector'].forEach(link => {
-            // Act
-            header.open(headerData);
-            header.openMobileNavigation();
-            header.waitForComponent();
-            console.log(link);
-
-            // Assert
-            expect(header.isNavigationLinkDisplayed(link)).toBe(true);
-        });
-    });
-
-    forEach(['it', 'es', 'dk', 'no'])
-    .it('should display the below navigation links for country code "%s" when menu has been opened', expectedLocale => {
-        // Arrange
-        const headerData = {
-            locale: expectedLocale,
-            offers: true,
-            delivery: true
-        };
-
-        ['userAccount', 'help', 'countrySelector'].forEach(link => {
-            // Act
-            header.open(headerData);
-            header.openMobileNavigation();
-            header.waitForComponent();
-
-            // Assert
-            expect(header.isNavigationLinkDisplayed(link)).toBe(true);
-        });
-
-        expect(header.isNavigationLinkDisplayed('offersLink')).toBe(false);
-        expect(header.isNavigationLinkDisplayed('delivery')).toBe(false);
-    });
-
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
-    .it('should display all countries when in mobile mode for country code "%s"', country => {
+    .it('should open country selector and display country code "%s"', country => {
         // Act
-        header.openMobileNavigation();
         header.openCountrySelector();
         header.expectedCountry = country;
 
         // Assert
         expect(header.isCountryLinkDisplayed()).toBe(true);
+    });
+
+    forEach(['au', 'ie', 'nz'])
+    .describe('closed navigation for country code "%s"', expectedLocale => {
+
+        beforeEach(() => {
+            // Act
+            header.open({ locale: expectedLocale, offers: true, delivery: true });
+            header.waitForComponent();
+        });
+
+        forEach(['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'])
+        .it('should not display "%s" navigation link', link => {
+            // Assert
+            expect(header.isNavigationLinkDisplayed(link)).toBe(false);
+        });
+
+        it('should display offersIcon link', () => {
+            // Assert
+            expect(header.isNavigationLinkDisplayed('offersIcon')).toBe(true);
+        });
+    });
+
+    forEach(['au', 'ie', 'nz'])
+    .describe('open navigation for country code "%s"', expectedLocale => {
+        beforeEach(() => {
+            // Act
+            header.open({ locale: expectedLocale, offers: true, delivery: true });
+            header.openMobileNavigation();
+            header.waitForComponent();
+        });
+
+        forEach(['offersLink', 'userAccount', 'help', 'countrySelector'])
+        .it('should display navigation link "%s"', link => {
+            // Assert
+            expect(header.isNavigationLinkDisplayed(link)).toBe(true);
+        });
+
+        it('should not display offersIcon link', () => {
+            // Assert
+            expect(header.isNavigationLinkDisplayed('offersIcon')).toBe(false);
+        });
+    });
+
+    forEach(['it', 'es', 'dk', 'no'])
+    .describe('closed navigation for country code "%s"', expectedLocale => {
+        beforeEach(() => {
+            // Act
+            header.open({ locale: expectedLocale, offers: true, delivery: true });
+            header.waitForComponent();
+        });
+
+        forEach(['offersLink', 'delivery', 'userAccount', 'help', 'countrySelector'])
+        .it('should not display navigation link "%s",', link => {
+            // Assert
+            expect(header.isNavigationLinkDisplayed(link)).toBe(false);
+        });
+
+        it('should not display the offersIcon', () => {
+            expect(header.isNavigationLinkDisplayed('offersIcon')).toBe(false);
+        });
+    });
+
+    forEach(['it', 'es', 'dk', 'no'])
+    .describe('open navigation for country code "%s"', expectedLocale => {
+        beforeEach(() => {
+            // Act
+            header.open({ locale: expectedLocale, offers: true, delivery: true });
+            header.openMobileNavigation();
+            header.waitForComponent();
+        });
+
+
+        forEach(['userAccount', 'help', 'countrySelector'])
+        .it('should display navigation link "%s"', link => {
+            // Assert
+            expect(header.isNavigationLinkDisplayed(link)).toBe(true);
+        });
+
+        it('should not display the offers link', () => {
+            // Assert
+            expect(header.isNavigationLinkDisplayed('offersLink')).toBe(false);
+        });
+
+        it('should not display the delivery link', () => {
+            // Assert
+            expect(header.isNavigationLinkDisplayed('delivery')).toBe(false);
+        });
+
+        it('should not display the offersIcon link', () => {
+            // Assert
+            expect(header.isNavigationLinkDisplayed('offersIcon')).toBe(false);
+        });
     });
 });
