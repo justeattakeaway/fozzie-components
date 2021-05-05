@@ -2124,6 +2124,11 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.4.1.tgz#6b735093286422f579bd41cee93400a4d32d1b2d"
   integrity sha512-SL7eTooEY3gZ0DdpPJvsN9W9EZElgxkSEpjYPfiPBHbkGt31Yfnb8OmDmC6MAtlK3Nq5GM5KaZ7bXybljSlPeA==
 
+"@justeat/f-button@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.5.0.tgz#3a2b680b6729c6af8107dbf0a8a35fcf0b51c392"
+  integrity sha512-UTTgcb5IbHIn0k89aO2o4XGu+bFzFKoOAQTTdm63Ew4sgZ0uVQvS+c5A5HsLlmoo5l0iCDyNRCysti1POLUdqg==
+
 "@justeat/f-button@0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-0.7.0.tgz#cb4afe9e8773385e5ad84b50f51de90a8020ce69"
@@ -2201,6 +2206,11 @@
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-0.3.0.tgz#58a88476ee204264988640b3cd47ac5d295bde4a"
   integrity sha512-Cr6CDlrZAHoM3ZUJ2sOMLYAVYz+cka5R6THi24va3mhI8kgOSA4ZVzvx607QskTyasIX4xNfrju0HKity1Lq9w==
+
+"@justeat/f-mega-modal@0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-0.6.0.tgz#2933f1744b1fbde9636a366df73c1626f9cd2a83"
+  integrity sha512-l94zXHEDgXhUq98DJJb6UK7fJfr2xZ7r3CgxcSnFUjBCYPi+tpxQUuO9wcoFPBTVM9HSrVIFJ2dNm/u0A+bOzg==
 
 "@justeat/f-searchbox@3.10.0":
   version "3.10.0"
