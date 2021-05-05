@@ -389,8 +389,8 @@ export default {
             commit(UPDATE_HAS_ASAP_SELECTED, payload);
         },
 
-        updateMessage:  ({ commit }, message) => {
-            commit(UPDATE_MESSAGE, message || null);
+        updateMessage:  ({ commit }, message = null) => {
+            commit(UPDATE_MESSAGE, message);
         }
     },
 

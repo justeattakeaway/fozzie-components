@@ -332,11 +332,15 @@ export default {
         },
 
         messageType () {
-            const dialog = {
-                name: 'error-dialog'
-            };
+            return this.message && !this.message.shouldShowInDialog ? this.alertMessage : this.dialogMessage;
+        },
 
-            const alert = {
+        dialogMessage () {
+            return { name: 'error-dialog' };
+        },
+
+        alertMessage () {
+            return {
                 name: 'alert',
                 props: {
                     type: 'danger',
@@ -345,8 +349,6 @@ export default {
                 },
                 content: this.message
             };
-
-            return this.message && !this.message.shouldShowInDialog ? alert : dialog;
         }
     },
 

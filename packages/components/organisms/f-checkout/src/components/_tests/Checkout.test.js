@@ -478,55 +478,57 @@ describe('Checkout', () => {
 
         describe('messageType ::', () => {
             describe('when a message exists AND `shouldShowInDialog` is true', () => {
-                // Arrange
-                const dialog = {
-                    name: 'error-dialog'
-                };
-
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        message
-                    }),
-                    i18n,
-                    localVue,
-                    propsData
-                });
-
                 it('should return dialog', () => {
+                    // Arrange
+                    const dialog = {
+                        name: 'error-dialog'
+                    };
+
+                    // Act
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            message
+                        }),
+                        i18n,
+                        localVue,
+                        propsData
+                    });
+
                     // Assert
                     expect(wrapper.vm.messageType).toEqual(dialog);
                 });
             });
 
             describe('when a message exists AND `shouldShowInDialog` is false', () => {
-                // Arrange
-                const alertMessage = 'Something went wrong, please try again later';
-
-                const alert = {
-                    name: 'alert',
-                    props: {
-                        type: 'danger',
-                        class: 'c-checkout-alert',
-                        heading: 'Error'
-                    },
-                    content: alertMessage
-                };
-
-                const wrapper = shallowMount(VueCheckout, {
-                    store: createStore({
-                        ...defaultCheckoutState,
-                        message: alertMessage
-                    }),
-                    i18n,
-                    localVue,
-                    propsData,
-                    mocks: {
-                        $style
-                    }
-                });
-
                 it('should return alert', () => {
+                    // Arrange
+                    const alertMessage = 'Something went wrong, please try again later';
+
+                    const alert = {
+                        name: 'alert',
+                        props: {
+                            type: 'danger',
+                            class: 'c-checkout-alert',
+                            heading: 'Error'
+                        },
+                        content: alertMessage
+                    };
+
+                    // Act
+                    const wrapper = shallowMount(VueCheckout, {
+                        store: createStore({
+                            ...defaultCheckoutState,
+                            message: alertMessage
+                        }),
+                        i18n,
+                        localVue,
+                        propsData,
+                        mocks: {
+                            $style
+                        }
+                    });
+
                     // Assert
                     expect(wrapper.vm.messageType).toEqual(alert);
                 });
