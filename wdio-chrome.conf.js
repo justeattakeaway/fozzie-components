@@ -4,6 +4,7 @@ const allure = require('allure-commandline');
 const { getConfigurationSettings } = require('./test/utils/configuration-helper');
 
 const configurationSettings = getConfigurationSettings();
+const percySnapshot = require('@percy/webdriverio');
 
 exports.config = {
 
@@ -185,8 +186,29 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    // before: function (capabilities, specs) {
-    // },
+    before: function (capabilities, specs) {
+        browser.addCommand('percyScreenshot', (screenshotName, featureType) => {
+
+            let viewportWidths = [];
+
+            switch(featureType.toLowerCase())
+            {
+                case 'desktop':
+                    viewportWidths = [1280];
+                    break;
+                case 'mobile':
+                    viewportWidths = [414];
+                    break;
+                case 'shared':
+                    viewportWidths = [414, 1280];
+                    break;
+            }
+
+            browser.call(async () => await percySnapshot(`${screenshotName}`, {
+                widths : viewportWidths
+            }));
+        });
+    },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name

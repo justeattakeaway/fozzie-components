@@ -1,7 +1,5 @@
 const Checkout = require('../../../test-utils/component-objects/f-checkout.component');
-
 const checkout = new Checkout();
-const percySnapshot = require('@percy/webdriverio');
 
 describe('f-checkout component tests - @browserstack', () => {
     beforeEach(() => {
@@ -18,9 +16,8 @@ describe('f-checkout component tests - @browserstack', () => {
 
     it('should display the f-checkout component, @percy', () => {
         // Assert
-        browser.call(async()=>{
-            await percySnapshot('f-checkout is displayed')
-        })
+        browser.percyScreenshot('f-checkout is displayed', 'shared');
+
         expect(checkout.isComponentDisplayed()).toBe(true);
     });
 
