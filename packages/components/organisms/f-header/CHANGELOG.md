@@ -11,6 +11,14 @@ Latest (add to next release)
 - Tagging for future Percy tests
 
 
+v4.14.0
+------------------------------
+*May 4, 2021*
+
+### Changed
+- replace `border-bottom` with `box-shadow` to reflect the design
+
+
 v4.13.0
 ------------------------------
 *April 16, 2021*
