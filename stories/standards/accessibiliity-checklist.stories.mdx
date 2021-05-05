@@ -2,7 +2,7 @@
 
 # Accessibility Checklist
 
-<a name="htmlvalid"></a><h2 class="sg-sectionHeading">HTML is valid</h2>
+## HTML is valid
 
 Paste your markup into a validator a fix any reported issues. As well as reporting markup issues, the W3C Markup Validation Service will also report incorrect use of ARIA attributes.
 
@@ -13,7 +13,7 @@ Paste your markup into a validator a fix any reported issues. As well as reporti
 - [Why Validate?](https://validator.w3.org/docs/why.html#why_pros)
 
 
-<a name="htmlstructure"></a><h2 class="sg-sectionHeading">HTML is well structured</h2>
+## HTML is well structured
 
 Think about the structure of the tags you're using. Are elements like `header` and `section` used appropriately? Are headings structured in a logical order according to level of importance? Have the correct type of lists been used? i.e. ordered / unordered.
 
@@ -29,7 +29,7 @@ Think about the structure of the tags you're using. Are elements like `header` a
 - [HTML element reference](https://developer.mozilla.org/en/docs/Web/HTML/Element)
 
 
-<a name="htmlorder"></a><h2 class="sg-sectionHeading">HTML is well ordered</h2>
+## HTML is well ordered
 
 Turn off CSS and read the page from top to bottom. Is it possible to read the document? Does it make sense?
 
@@ -40,7 +40,7 @@ Use heading order to show importance.
 - Use the [WAVE Evaluation Tool](https://chrome.google.com/webstore/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh) to analyse the document outline.
 
 
-<a name="htmlsemantic"></a><h2 class="sg-sectionHeading">HTML is semantic</h2>
+## HTML is semantic
 
 Ensure semantics are conveyed with tags or roles (if necessary), not with style. E.g. `em` not `class="italic"` and `button` or `role="button"` not `div`.
 
@@ -54,7 +54,7 @@ Ensure semantics are conveyed with tags or roles (if necessary), not with style.
 - [Check the HTML5 accessibility website to see if an element requires additional role attributes](http://www.html5accessibility.com/#support)
 
 
-<a name="htmllabelled"></a><h2 class="sg-sectionHeading">HTML is labelled</h2>
+## HTML is labelled
 
 Controls and images must be labelled.
 
@@ -73,7 +73,7 @@ Images must have an `alt` attribute, even if it's empty. Think about the context
 - WAI-ARIA - [aria-describedby](https://www.w3.org/TR/wai-aria-1.1/#aria-describedby) [aria-labelledby](https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby) [aria-label](https://www.w3.org/TR/wai-aria-1.1/#aria-label)
 
 
-<a name="audit"></a><h2 class="sg-sectionHeading">Passed an accessibility audit</h2>
+## Passed an accessibility audit
 
 Run an in-browser audit and fix any issues.
 
@@ -85,7 +85,7 @@ Paste your markup into a validator such as the [Web Accessibility Checker](http:
 - [Web Accessibility Toolbar](https://www.paciellogroup.com/resources/wat/)
 
 
-<a name="keyboard"></a><h2 class="sg-sectionHeading">Keyboard is supported</h2>
+## Keyboard is supported
 
 Using only the keyboard, check the following.
 
@@ -102,7 +102,7 @@ Follow the conventions in native web components.
 - [ARIA authoring practices document](https://www.w3.org/TR/wai-aria-practices/#intro)
 
 
-<a name="tabstops"></a><h2 class="sg-sectionHeading">Tab stops in place</h2>
+## Tab stops in place
 
 Using only the keyboard, you should be able to navigate to every interactive element (and *only* interactive elements) with the Tab key. Use `tabindex="0"` on interactive elements that aren't natively focusable.
 
@@ -114,7 +114,7 @@ Using only the keyboard, you should be able to navigate to every interactive ele
 - [HTML 5.1 - The tabindex attribute](http://w3c.github.io/html/editing.html#the-tabindex-attribute)
 
 
-<a name="focus"></a><h2 class="sg-sectionHeading">Focus is managed</h2>
+## Focus is managed
 
 Using only the keyboard, interact with any scripted components and ensure focus is never 'dropped'. For example opening a dialogue (Space or Enter) focusses a button within that dialogue, dismissing the dialogue (Escape) hands focus back to the element which opened it.
 
@@ -127,7 +127,7 @@ Using only the keyboard, interact with any scripted components and ensure focus 
 - [WAI-ARIA - Managing Focus](https://www.w3.org/TR/wai-aria-1.1/#managingfocus)
 
 
-<a name="state"></a><h2 class="sg-sectionHeading">States are updated</h2>
+## States are updated
 
 Examine the live DOM (devtools) and manipulate the site (open, close, expand elements). Any states, such as `aria-valuenow` and `aria-expanded`, update accordingly.
 
@@ -136,7 +136,7 @@ Examine the live DOM (devtools) and manipulate the site (open, close, expand ele
 - [Allowed ARIA roles, states and properties](https://www.w3.org/TR/html-aria/#allowed-aria-roles-states-and-properties)
 
 
-<a name="wellspoken"></a><h2 class="sg-sectionHeading">Page is well spoken</h2>
+## Page is well spoken
 
 Use the site with a screen reader (and if you can, switch off your monitor).
 
@@ -154,7 +154,7 @@ Landmarks mean it is easy to navigate the page. Semantic elements and attributes
 - [Live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions)
 
 
-<a name="example"></a><h2 class="sg-sectionHeading">Examples</h2>
+## Examples
 
 ### Adding text for assistive software
 
