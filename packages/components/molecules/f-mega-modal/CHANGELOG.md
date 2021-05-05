@@ -4,20 +4,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.8.0
+v0.7.0
 ------------------------------
 *May 5, 2021*
 
 ### Removed
 - `u-overlay` css style definition as should come from `fozzie`
-
-
-v0.7.0
-------------------------------
-*May 5, 2021*
-
-### Added
-- `isPositionedBottom` prop to allow modal to sit at the bottom of the screen for all screen widths.
 
 
 v0.6.0
