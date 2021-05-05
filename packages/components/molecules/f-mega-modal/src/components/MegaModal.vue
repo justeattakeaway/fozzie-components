@@ -37,7 +37,7 @@
                         button-type="secondary"
                         button-size="xsmall"
                         data-test-id="close-modal"
-                        @click="close">
+                        @click.native="close">
                         <cross-icon
                             :class="[$style['c-megaModal-closeIcon']]" />
 

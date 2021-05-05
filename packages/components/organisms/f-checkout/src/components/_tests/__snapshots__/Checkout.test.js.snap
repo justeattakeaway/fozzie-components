@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Checkout data :: nonFulfillableError :: when \`nonFulfillableError\` is an error in checkout issues should show a mega modal displaying the error title and description 1`] = `
-<div data-test-id="checkout-issue-modal" class="c-megaModal MegaModal_c-megaModal_3w2Fg MegaModal_u-overlay_2-wsH">
+<div data-test-id="checkout-issue-modal" class="c-megaModal MegaModal_c-megaModal_3w2Fg u-overlay">
   <div role="dialog" class="c-megaModal-content MegaModal_c-megaModal-content_28gxc c-megaModal-content--visible MegaModal_c-megaModal-content--visible_4eEpH">
     <div role="document" class="c-megaModal-document"><button type="button" attributes="[object Object]" data-test-id="close-modal" class="Button_o-btn_1KX8u Button_o-btn--icon_1k-qM Button_o-btn--secondary_1KBR1 Button_o-btn--sizeXSmall_3KRtq MegaModal_c-megaModal-closeBtn_eUziJ"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" class="c-ficon c-ficon--cross MegaModal_c-megaModal-closeIcon_2purM">
           <path fill-rule="evenodd" d="M13.3.7a1 1 0 00-1.4 0L7 5.6 2.1.7A1 1 0 10.7 2.1L5.6 7 .7 11.9a1 1 0 101.4 1.4L7 8.4l4.9 4.9a1 1 0 101.4-1.4L8.4 7l4.9-4.9c.4-.4.4-1 0-1.4z"></path>

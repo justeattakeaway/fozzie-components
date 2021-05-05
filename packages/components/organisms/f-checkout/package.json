@@ -60,11 +60,11 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.12.13",
     "@justeat/f-alert": "0.5.0",
-    "@justeat/f-button": "0.5.0",
+    "@justeat/f-button": "1.1.1",
     "@justeat/f-card": "0.8.0",
     "@justeat/f-error-message": "0.3.1",
     "@justeat/f-form-field": "1.8.0",
-    "@justeat/f-mega-modal": "0.6.0",
+    "@justeat/f-mega-modal": "0.8.0",
     "@justeat/f-wdio-utils": "0.1.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
