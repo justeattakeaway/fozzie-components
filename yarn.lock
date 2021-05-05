@@ -2207,6 +2207,11 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-0.3.0.tgz#58a88476ee204264988640b3cd47ac5d295bde4a"
   integrity sha512-Cr6CDlrZAHoM3ZUJ2sOMLYAVYz+cka5R6THi24va3mhI8kgOSA4ZVzvx607QskTyasIX4xNfrju0HKity1Lq9w==
 
+"@justeat/f-mega-modal@0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-0.6.0.tgz#2933f1744b1fbde9636a366df73c1626f9cd2a83"
+  integrity sha512-l94zXHEDgXhUq98DJJb6UK7fJfr2xZ7r3CgxcSnFUjBCYPi+tpxQUuO9wcoFPBTVM9HSrVIFJ2dNm/u0A+bOzg==
+
 "@justeat/f-searchbox@3.10.0":
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-3.10.0.tgz#1a6b235494f1e22de14bd1d6eea146fd575f419b"
