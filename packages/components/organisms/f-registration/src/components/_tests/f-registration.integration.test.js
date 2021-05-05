@@ -5,7 +5,7 @@ import MockAdapter from 'axios-mock-adapter';
 
 import Registration from '../Registration.vue';
 import EventNames from '../../event-names';
-import { CONSUMERS_REQUEST_DATA } from '../../../test/specs/constants/consumer';
+import CONSUMERS_REQUEST_DATA from '../../../test/constants/consumer';
 
 const axiosMock = new MockAdapter(axios);
 

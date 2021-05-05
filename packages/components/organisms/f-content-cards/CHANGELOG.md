@@ -3,12 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.5.0
+------------------------------
+*April 29, 2021*
+
+### Changed
+- Bumped version of f-braze-adapter to respect cookie preferences
+
+
 v4.4.1
 ------------------------------
 *March 25, 2021*
 
 ### Fixed
-- ContentCards Component Page Object model Fixed to use base page package. 
+- ContentCards Component Page Object model Fixed to use base page package.
+
 
 v4.4.0
 ------------------------------

@@ -1,15 +1,18 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 
 module.exports = class CookieBanner extends Page {
+    get component () { return $('[data-test-id="cookieConsentBanner"]'); }
 
-    get component () { return $('[data-test-id="cookieConsentBanner"]')}
-    get cookiePolicyLink () { return this.component.$('[data-test-id="cookie-policy-link"]')}
-    get cookieAcceptAllButton () { return this.component.$('[data-test-id="accept-all-cookies-button"]')}
-    get cookieAcceptNecessaryButton () { return this.component.$('[data-test-id="accept-necessary-cookies-button"]')}
-    get componentContent () { return $('[data-test-id="cookieBannerContent"]')}
+    get cookiePolicyLink () { return this.component.$('[data-test-id="cookie-policy-link"]'); }
+
+    get cookieAcceptAllButton () { return this.component.$('[data-test-id="accept-all-cookies-button"]'); }
+
+    get cookieAcceptNecessaryButton () { return this.component.$('[data-test-id="accept-necessary-cookies-button"]'); }
+
+    get componentContent () { return $('[data-test-id="cookieBannerContent"]'); }
 
     open (locale = 'ie') {
-        let countryFormatted = locale.toUpperCase();
+        const countryFormatted = locale.toUpperCase();
         let formattedLocale = '';
         switch (countryFormatted) {
             case 'IE':
@@ -28,7 +31,7 @@ module.exports = class CookieBanner extends Page {
                 formattedLocale = `nb-${countryFormatted}`;
                 break;
             default:
-                throw new Error (`locale ${countryFormatted} is not supported`);
+                throw new Error(`locale ${countryFormatted} is not supported`);
         }
         super.openComponent('organism', `cookie-banner-component&knob-Locale=${formattedLocale}`);
     }
@@ -36,39 +39,40 @@ module.exports = class CookieBanner extends Page {
 
 
 
-    waitForComponent() {
+    waitForComponent () {
         this.component.waitForExist();
     }
 
-    isCookieBannerComponentDisplayed() {
+    isCookieBannerComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    isCookieBannerContentDisplayed() {
+    isCookieBannerContentDisplayed () {
         return this.componentContent.isDisplayed();
     }
 
-    isCookieBannerAcceptAllButtonDisplayed() {
+    isCookieBannerAcceptAllButtonDisplayed () {
         return this.cookieAcceptAllButton.isDisplayed();
     }
 
-    isCookieBannerAcceptNecessaryButtonDisplayed() {
+    isCookieBannerAcceptNecessaryButtonDisplayed () {
         return this.cookieAcceptNecessaryButton.isDisplayed();
     }
 
-    clickCookiePolicyLink() {
+    clickCookiePolicyLink () {
         this.cookiePolicyLink.click();
     }
 
 
-    acceptCookies(cookieType) {
-        switch(cookieType.toLowerCase()) {
+    acceptCookies (cookieType) {
+        switch (cookieType.toLowerCase()) {
             case 'full':
                 this.cookieAcceptAllButton.click();
-            break;
+                break;
             case 'necessary':
                 this.cookieAcceptNecessaryButton.click();
-            break;
+                break;
+            default:
         }
         return this;
     }

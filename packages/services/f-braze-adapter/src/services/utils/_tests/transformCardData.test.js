@@ -188,4 +188,55 @@ describe('services › utils › transformCardData', () => {
 
         await Promise.all(tests.map(test => expect(transformCardData(test)).toEqual({})));
     });
+
+    describe('when `display_times_json is defined', () => {
+        describe('as a string', () => {
+            it('should attempt to parse `display_times_json` as JSON into `displayTimes`', () => {
+                // Arrange
+                const data = {
+                    extras: { display_times_json: '{"foo":"bar"}' } // eslint-disable-line camelcase
+                };
+
+                // Act
+                const output = transformCardData(data);
+
+                // Assert
+                expect(output.displayTimes).toEqual({ foo: 'bar' });
+            });
+
+            it('should result in `displayTimes` being an empty object if it fails to parse', () => {
+                // Arrange
+                const data = {
+                    extras: { display_times_json: '{invalid}' } // eslint-disable-line camelcase
+                };
+
+                // Act
+                const output = transformCardData(data);
+
+                // Assert
+                expect(output.displayTimes).toEqual({});
+            });
+        });
+
+        describe('as an object', () => {
+            it('should pass `display_times_json` verbatim into `displayTimes', () => {
+                // Arrange
+                const data = {
+                    extras: {
+                        display_times_json: { // eslint-disable-line camelcase
+                            foo: 'bar'
+                        }
+                    }
+                };
+
+                // Act
+                const output = transformCardData(data);
+
+                // Assert
+                expect(output.displayTimes).toEqual({
+                    foo: 'bar'
+                });
+            });
+        });
+    });
 });

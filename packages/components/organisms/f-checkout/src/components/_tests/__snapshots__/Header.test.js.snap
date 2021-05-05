@@ -2,9 +2,9 @@
 
 exports[`Header computed :: isLoggedIn :: when set to false should render the guest header 1`] = `
 <div data-test-id="guest-checkoutHeader">
-  <h2>
+  <h1 data-test-id="user-title">
     How do you want to continue?
-  </h2>
+  </h1>
   <f-button-stub buttontype="primary" buttonsize="large" isfullwidth="true" actiontype="button" data-test-id="guest-login-button" href="http://localhost/login">
     Log in or sign up
   </f-button-stub>
@@ -20,9 +20,9 @@ exports[`Header computed :: isLoggedIn :: when set to false should render the gu
 
 exports[`Header computed :: isLoggedIn :: when set to true should render the authenticated user header 1`] = `
 <div data-test-id="user-checkoutHeader">
-  <h2 data-test-id="user-title">
+  <h1 data-test-id="user-title">
     John, confirm your details
-  </h2>
+  </h1>
   <p><a href="http://localhost/login" data-test-id="switch-user-link" class="o-link--bold o-link--noDecoration">
       Not John? Click here
     </a></p>

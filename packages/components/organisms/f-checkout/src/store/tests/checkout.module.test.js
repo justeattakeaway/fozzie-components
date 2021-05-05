@@ -5,7 +5,9 @@ import basketDelivery from '../../demo/get-basket-delivery.json';
 import checkoutAvailableFulfilment from '../../demo/checkout-available-fulfilment.json';
 import customerAddresses from '../../demo/get-address.json';
 import geoLocationDetails from '../../demo/get-geo-location.json';
-import { mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber } from '../../components/_tests/helpers/setup';
+import {
+    defaultCheckoutState, mockAuthToken, mockAuthTokenNoNumbers, mockAuthTokenNoMobileNumber
+} from '../../components/_tests/helpers/setup';
 import { version as applicationVerion } from '../../../package.json';
 import { VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE } from '../../constants';
 
@@ -24,7 +26,7 @@ import {
     UPDATE_GEO_LOCATION
 } from '../mutation-types';
 
-const { actions, mutations } = CheckoutModule;
+const { actions, mutations, getters } = CheckoutModule;
 
 const {
     createGuestUser,
@@ -161,7 +163,7 @@ describe('CheckoutModule', () => {
 
             it('should leave address state empty if no location data is returned from the API.', () => {
                 // Arrange
-                checkoutDelivery.location = null;
+                checkoutDelivery.fulfilment.location = null;
 
                 // Act
                 mutations[UPDATE_STATE](state, checkoutDelivery);
@@ -172,7 +174,7 @@ describe('CheckoutModule', () => {
 
             it('should leave address state empty if location data is returned with no address from the API.', () => {
                 // Arrange
-                checkoutDelivery.location = {
+                checkoutDelivery.fulfilment.location = {
                     address: null
                 };
 
@@ -590,6 +592,65 @@ describe('CheckoutModule', () => {
                 // Assert
                 expect(axios.post).toHaveBeenCalledWith(payload.url, payload.data, config);
             });
+
+            describe('when the api call is unsuccessful', () => {
+                describe('when the there is a response', () => {
+                    it('should commit `UPDATE_ERRORS` with a known error when a place order issue is found', async () => {
+                        // Arrange
+                        // eslint-disable-next-line prefer-promise-reject-errors
+                        axios.post = jest.fn(() => Promise.reject({
+                            status: 400,
+                            response: {
+                                data: {
+                                    errorCode: 'DuplicateOrder'
+                                }
+                            }
+                        }));
+
+                        try {
+                            // Act
+                            await placeOrder({ commit, state }, payload);
+                        } catch {
+                            // Assert
+                            expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [{ code: 'DuplicateOrder', shouldRedirectToMenu: false, shouldShowInDialog: true }]);
+                        }
+                    });
+
+                    it('should commit `UPDATE_ERRORS` with an empty array when a place order issue is not found', async () => {
+                        // Arrange
+                        // eslint-disable-next-line prefer-promise-reject-errors
+                        axios.post = jest.fn(() => Promise.reject({
+                            status: 400,
+                            response: {
+                                data: {
+                                    errorCode: 'UnknownError'
+                                }
+                            }
+                        }));
+
+                        try {
+                            // Act
+                            await placeOrder({ commit, state }, payload);
+                        } catch {
+                            // Assert
+                            expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, []);
+                        }
+                    });
+                });
+
+                it('should throw the error', async () => {
+                    // Arrange
+                    const errorMessage = 'An error';
+
+                    axios.post = jest.fn(() => Promise.reject(new Error(errorMessage)));
+
+                    // Act
+                    const result = await expect(placeOrder({ commit, state }, payload));
+
+                    // Assert
+                    result.rejects.toThrow(errorMessage);
+                });
+            });
         });
 
         describe('updateCheckout ::', () => {
@@ -607,6 +668,7 @@ describe('CheckoutModule', () => {
                     },
                     timeout: payload.timeout
                 };
+
                 axios.patch = jest.fn(() => Promise.resolve({
                     status: 200,
                     data: {
@@ -630,6 +692,25 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [{ code: DEFAULT_CHECKOUT_ISSUE, shouldShowInDialog: true }]);
+            });
+
+            it('should convert an unsupported error into a known issue.', async () => {
+                // Arrange
+                const knownIssue = 'RESTAURANT_NOT_TAKING_ORDERS';
+
+                axios.patch = jest.fn(() => Promise.resolve({
+                    status: 200,
+                    data: {
+                        isFulfillable: false,
+                        issues: [{ code: knownIssue }]
+                    }
+                }));
+
+                // Act
+                await updateCheckout({ commit, state }, payload);
+
+                // Assert
+                expect(commit).toHaveBeenCalledWith(UPDATE_ERRORS, [{ code: knownIssue, shouldShowInDialog: true, shouldRedirectToMenu: false }]);
             });
         });
 
@@ -789,6 +870,46 @@ describe('CheckoutModule', () => {
 
             // Assert
             expect(dispatch).toHaveBeenCalledWith(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateChangedField`, field, { root: true });
+        });
+    });
+
+    describe('getters ::', () => {
+        describe('firstDialogError ::', () => {
+            it('should return the first error to show in a dialog when there is one', () => {
+                // Arrange
+                state = {
+                    ...defaultCheckoutState,
+                    errors: [
+                        { code: 'CODE1', shouldShowInDialog: false },
+                        { code: 'CODE2', shouldShowInDialog: true },
+                        { code: 'CODE3', shouldShowInDialog: false }
+                    ]
+                };
+
+                // Act
+                const result = getters.firstDialogError(state);
+
+                // Assert
+                expect(result).toMatchSnapshot();
+            });
+
+            it('should return `undefined` when there are no errors to show in a dialog', () => {
+                // Arrange
+                state = {
+                    ...defaultCheckoutState,
+                    errors: [
+                        { code: 'CODE1', shouldShowInDialog: false },
+                        { code: 'CODE2', shouldShowInDialog: false },
+                        { code: 'CODE3', shouldShowInDialog: false }
+                    ]
+                };
+
+                // Act
+                const result = getters.firstDialogError(state);
+
+                // Assert
+                expect(result).toBe(undefined);
+            });
         });
     });
 });
