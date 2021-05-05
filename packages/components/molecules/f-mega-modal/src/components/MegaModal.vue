@@ -1,9 +1,9 @@
 <template>
     <div
         ref="megaModal"
-        :class="['c-megaModal', $style['c-megaModal'], {
-            [$style['u-overlay']]: showOverlay
-        }]"
+        :class="['c-megaModal',
+                 { 'u-overlay': showOverlay },
+                 $style['c-megaModal']]"
         data-test-id='mega-modal-component'
         :aria-hidden="!isOpen"
         @click.self="overlayClose">
@@ -274,14 +274,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-.u-overlay {
-    background-color: rgba(0, 0, 0, 0.5);
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
-}
 
 .c-megaModal {
     z-index: zIndex(high);

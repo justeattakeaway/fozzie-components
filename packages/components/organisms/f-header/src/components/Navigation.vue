@@ -64,7 +64,7 @@
                     $style['c-nav-icon--offers'],
                     { [$style['c-nav-icon--alt']]: isAltColour }
                 ]" />
-            <span :class="$style['is-visuallyHidden']">
+            <span class="is-visuallyHidden">
                 {{ copy.offers.text }}
             </span>
         </a>
@@ -636,18 +636,6 @@ export default {
     visibility: visible !important;
 }
 
-// Hide only visually, but have it available for screenreaders: h5bp.com/v
-.is-visuallyHidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-}
-
 /**
  * Global Page Navigation
  * =================================
@@ -730,9 +718,11 @@ $nav-popover-width                 : 300px;
             }
         }
 
-        .c-nav-list-link--transparent {
+        .c-nav-list-link--transparent,
+        .c-nav-list-link--alt {
             @include media('>mid') {
-                &:hover {
+                &:hover,
+                &:focus {
                     color: $nav-text-color--transparent;
                 }
             }

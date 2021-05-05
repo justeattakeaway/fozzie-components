@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.31.0
+------------------------------
+*May 5, 2021*
+
+## Removed
+- `f-utils` and `fozzie-colour-pallete` packages from dependencies as they are available through `fozzie` package
+
+
 v3.30.1
 ------------------------------
 *April 30, 2021*

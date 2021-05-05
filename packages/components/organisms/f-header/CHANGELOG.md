@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.14.1
+------------------------------
+*May 5, 2021*
+
+### Removed
+- `is-visuallyHidden` css style definition as should come from `fozzie`
+
+### Added
+- Focus styles for navigation links for transparent and orange header versions
+
+
 v4.14.0
 ------------------------------
 *May 4, 2021*

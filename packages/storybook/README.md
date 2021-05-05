@@ -15,8 +15,8 @@ Storybook runs outside of your app. This allows you to develop UI components in 
 ### Using the Vue Dev tools
 To use the Vue Dev tools you need to open the canvas in a new tab (using the link in the top right of Storybook).
 
-
-
+### Global css styles
+If you need to add styles that should be available in every story you can add them to `config/storybook/scss-loader.scss`. For example we import our glodal fozzie styles and some optional mixins which will be added in concuming application, not the components themselves.
 
 ## More Info
 
