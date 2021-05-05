@@ -1,7 +1,7 @@
-const METHOD_GET = 'GET';
-const METHOD_POST = 'POST';
+const GET = 'GET';
+const POST = 'POST';
 
 export default {
-    METHOD_GET,
-    METHOD_POST
+    GET,
+    POST
 };
