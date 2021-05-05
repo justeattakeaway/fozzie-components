@@ -32,7 +32,7 @@ exports.config = {
     // exclude: [
     //     // 'path/to/excluded/files'
     // ],
-    
+
     // Suites
     suites: {
         a11y: [
