@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.14.0
+------------------------------
+*May 4, 2021*
+
+### Changed
+- replace `border-bottom` with `box-shadow` to reflect the design
+
+
 v4.13.0
 ------------------------------
 *April 16, 2021*
