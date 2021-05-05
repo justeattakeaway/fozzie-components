@@ -8,12 +8,13 @@ v1.11.0
 *May 5, 2021*
 
 ### Changed
-- Extended Tel. no. regex for en-GB.
+- Reverted the Tel. no. regex for en-GB back to v1.9.0.
 
 
 v1.10.0
 ------------------------------
 *April 27, 2021*
+
 ### Changed
 - Tel. no. regex for en-GB.
 ### Added
