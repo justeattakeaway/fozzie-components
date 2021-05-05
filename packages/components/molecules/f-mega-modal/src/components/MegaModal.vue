@@ -306,10 +306,6 @@ export default {
     transform: translate(50%, -50%);
     width: 75%;
 
-    &.c-megaModal-content--visible.is-positioned-bottom {
-        bottom: 0;
-    }
-
     &.is-positioned-bottom {
         border-radius: 0;
         bottom: -100vh;
@@ -320,6 +316,10 @@ export default {
         transform: none;
         width: 100%;
         max-width: inherit;
+
+        &.c-megaModal-content--visible {
+            bottom: 0;
+        }
     }
 
     @include media('<mid') {
