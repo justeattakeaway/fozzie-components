@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "0.99.0",
+  "version": "0.102.0",
   "main": "dist/f-checkout.umd.min.js",
   "files": [
     "dist",
@@ -47,7 +47,7 @@
   ],
   "dependencies": {
     "@justeat/f-globalisation": "1.0.0",
-    "@justeat/f-services": "1.10.0",
+    "@justeat/f-services": "1.11.0",
     "axios": "0.21.1",
     "jwt-decode": "3.1.2",
     "vue-scrollto": "2.20.0",
