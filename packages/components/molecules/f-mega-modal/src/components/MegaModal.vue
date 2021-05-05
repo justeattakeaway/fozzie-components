@@ -2,8 +2,8 @@
     <div
         ref="megaModal"
         :class="['c-megaModal',
-                 { 'u-overlay': showOverlay },
-                 $style['c-megaModal']]"
+                 $style['c-megaModal'],
+                 { 'u-overlay': showOverlay }]"
         data-test-id='mega-modal-component'
         :aria-hidden="!isOpen"
         @click.self="overlayClose">
@@ -36,7 +36,7 @@
                         button-type="secondary"
                         button-size="xsmall"
                         data-test-id="close-modal"
-                        @click.native="close">
+                        @click="close">
                         <cross-icon
                             :class="[$style['c-megaModal-closeIcon']]" />
 
