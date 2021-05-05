@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.30.1
+------------------------------
+*April 30, 2021*
+
+## Added
+- Error handling added for `forEach` component tests
+- General linting changes and test-cleanup
+
+## Removed
+- Unneeded extra intermediate `spec` folder in `test/spec/component`
+
+
 v3.29.1
 ------------------------------
 *April 29, 2021*
