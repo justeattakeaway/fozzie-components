@@ -46,13 +46,14 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         expect(browser.getUrl()).toContain(expectedUrl);
     });
 
-    it('should display the footer', () => {
+    it('should display the footer - @percy', () => {
         // Assert
         expect(footer.isComponentDisplayed()).toBe(true);
     });
 
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should not show courier links and country selector for country code "%s" when options are unselected', expectedLocale => {
+    .it('should not show courier links and country selector for country code "%s" when options are unselected - @percy', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
@@ -69,8 +70,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         expect(footer.isCountrySelectorDisplayed()).toBe(false);
     });
 
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['au', 'ie', 'nz'])
-    .it('should show courier links for country code "%s" when option is selected', expectedLocale => {
+    .it('should show courier links for country code "%s" when option is selected - @percy', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
@@ -86,8 +88,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         expect(footer.areCourierLinksDisplayed()).toBe(true);
     });
 
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['gb', 'es', 'it', 'no'])
-    .it('should never show courier links for country code "%s", even when option is selected', expectedLocale => {
+    .it('should never show courier links for country code "%s", even when option is selected - @percy', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
@@ -103,8 +106,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         expect(footer.areCourierLinksDisplayed()).toBe(false);
     });
 
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should always show country selector for country code "%s" when selected', expectedLocale => {
+    .it('should always show country selector for country code "%s" when selected - @percy', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
@@ -120,8 +124,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         expect(footer.isCountrySelectorDisplayed()).toBe(true);
     });
 
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
-    .it('should display the corresponding icon for the "%s" country code', expectedLocale => {
+    .it('should display the corresponding icon for the "%s" country code - @percy', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
@@ -191,9 +196,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         expect(browser.getUrl()).toContain(expectedUrl);
     });
 
-
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should display social icons block for country code "%s"', expectedLocale => {
+    .it('should display social icons block for country code "%s" - @percy', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
@@ -209,8 +214,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         expect(footer.isSocialIconBlockDisplayed()).toBe(true);
     });
 
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should display app downloads block for country code "%s"', expectedLocale => {
+    .it('should display app downloads block for country code "%s" - @percy', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
@@ -226,8 +232,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         expect(footer.isDownloadIconBlockDisplayed()).toBe(true);
     });
 
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should display payment options block for country code "%s"', expectedLocale => {
+    .it('should display payment options block for country code "%s" - @percy', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,
@@ -243,8 +250,9 @@ describe('Desktop - f-footer component tests - @browserstack', () => {
         expect(footer.isPaymentIconsBlockDisplayed()).toBe(true);
     });
 
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['gb', 'au', 'ie', 'nz', 'dk', 'es', 'it', 'no'])
-    .it('should display the feedback block for country code "%s"', expectedLocale => {
+    .it('should display the feedback block for country code "%s" - @percy', expectedLocale => {
         // Arrange
         const footerData = {
             locale: expectedLocale,

@@ -18,13 +18,14 @@ describe('Desktop - f-header component tests - @browserstack', () => {
     });
 
     forEach(['offersLink', 'delivery', 'help', 'countrySelector', 'userAccount'])
-    .it('should display all navigation links', link => {
+    .it('should display all navigation links - @percy', link => {
         // Assert
         expect(header.isNavigationLinkDisplayed(link)).toBe(true);
     });
 
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['au', 'ie', 'nz'])
-    .it('should display the below navigation links for country code "%s"', expectedLocale => {
+    .it('should display the below navigation links for country code "%s" - @percy', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -43,8 +44,9 @@ describe('Desktop - f-header component tests - @browserstack', () => {
         });
     });
 
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['it', 'es', 'dk', 'no'])
-    .it('should display the below navigation links for country code "%s"', expectedLocale => {
+    .it('should display the below navigation links for country code "%s" - @percy', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -119,8 +121,9 @@ describe('Desktop - f-header component tests - @browserstack', () => {
         expect(browser.getUrl()).toContain(expectedUrl);
     });
 
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
-    .it('should display correct selector icon for country code "%s" depending on which locale is chosen', expectedLocale => {
+    .it('should display correct selector icon for country code "%s" depending on which locale is chosen - @percy', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,

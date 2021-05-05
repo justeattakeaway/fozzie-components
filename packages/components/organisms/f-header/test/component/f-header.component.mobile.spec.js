@@ -20,8 +20,9 @@ describe('Mobile - f-header component tests - @browserstack', () => {
         }
     });
 
+    // Refactor for Percy visual regression
     forEach(['offersLink', 'delivery', 'help', 'countrySelector', 'userAccount'])
-    .it('should display the navigation link: "%s"', link => {
+    .it('should display the navigation link: "%s" - @percy', link => {
         // Act
         header.openMobileNavigation();
 
@@ -29,8 +30,9 @@ describe('Mobile - f-header component tests - @browserstack', () => {
         expect(header.isNavigationLinkDisplayed(link)).toBe(true);
     });
 
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['au', 'ie', 'nz'])
-    .it('should hide all navigation links but display offersIcon link, when in mobile mode for country code "%s"', expectedLocale => {
+    .it('should hide all navigation links but display offersIcon link, when in mobile mode for country code "%s" - @percy', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -51,8 +53,9 @@ describe('Mobile - f-header component tests - @browserstack', () => {
         });
     });
 
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['it', 'es', 'dk', 'no'])
-    .it('should hide all navigation links for country code "%s", as well as offersIcon, when in mobile mode', expectedLocale => {
+    .it('should hide all navigation links for country code "%s", as well as offersIcon, when in mobile mode - @percy', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -71,8 +74,9 @@ describe('Mobile - f-header component tests - @browserstack', () => {
         });
     });
 
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['au', 'ie', 'nz'])
-    .it('should display navigation links for country code "%s" when burger menu is opened', expectedLocale => {
+    .it('should display navigation links for country code "%s" when burger menu is opened - @percy', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -92,8 +96,9 @@ describe('Mobile - f-header component tests - @browserstack', () => {
         });
     });
 
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['it', 'es', 'dk', 'no'])
-    .it('should display the below navigation links for country code "%s" when menu has been opened', expectedLocale => {
+    .it('should display the below navigation links for country code "%s" when menu has been opened - @percy', expectedLocale => {
         // Arrange
         const headerData = {
             locale: expectedLocale,
@@ -115,8 +120,9 @@ describe('Mobile - f-header component tests - @browserstack', () => {
         expect(header.isNavigationLinkDisplayed('delivery')).toBe(false);
     });
 
+    // Make sure tenant is appended to screenshot for Percy tests
     forEach(['au', 'gb', 'nz', 'ie', 'dk', 'es', 'it'])
-    .it('should display all countries when in mobile mode for country code "%s"', country => {
+    .it('should display all countries when in mobile mode for country code "%s" - @percy', country => {
         // Act
         header.openMobileNavigation();
         header.openCountrySelector();
