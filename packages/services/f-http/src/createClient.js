@@ -1,6 +1,8 @@
 import axios from 'axios';
 import defaultOptions from './defaultOptions';
 import handleError from './errorHandler';
+import configBuilder from './configBuilder';
+import setAuthorisationToken from './authorisationHandler';
 
 let _configuration = null;
 let _axiosInstance = null;
@@ -11,13 +13,9 @@ let _axiosInstance = null;
  * @param {object} headers - Any additional request headers you want to provide
  * @return {object} - Returns data from response
  */
-const get = async (resource, headers = {}) => {
+const getResource = async (resource, headers = {}) => {
     try {
-        const config = {
-            headers
-        };
-
-        const response = await _axiosInstance.get(resource, config);
+        const response = await _axiosInstance.get(resource, configBuilder(headers));
 
         return response.data;
     } catch (error) {
@@ -32,13 +30,59 @@ const get = async (resource, headers = {}) => {
  * @param {object} headers - Any additional request headers you want to provide
  * @return {object} - Returns data from response
  */
-const post = async (resource, body, headers = {}) => {
+const postResource = async (resource, body, headers = {}) => {
     try {
-        const config = {
-            headers
-        };
+        const response = await _axiosInstance.post(resource, body, configBuilder(headers));
 
-        const response = await _axiosInstance.post(resource, body, config);
+        return response.data;
+    } catch (error) {
+        return handleError(error, _configuration.errorCallback);
+    }
+};
+
+/**
+ * Patch a resource
+ * @param {string} resource - The resource to patch (URL)
+ * @param {object} body - The request body, contents of the resource
+ * @param {object} headers - Any additional request headers you want to provide
+ * @return {object} - Returns data from response
+ */
+const patchResource = async (resource, body, headers = {}) => {
+    try {
+        const response = await _axiosInstance.patch(resource, body, configBuilder(headers));
+
+        return response.data;
+    } catch (error) {
+        return handleError(error, _configuration.errorCallback);
+    }
+};
+
+/**
+ * Put a resource
+ * @param {string} resource - The resource to put (URL)
+ * @param {object} body - The request body, contents of the resource
+ * @param {object} headers - Any additional request headers you want to provide
+ * @return {object} - Returns data from response
+ */
+const putResource = async (resource, body, headers = {}) => {
+    try {
+        const response = await _axiosInstance.put(resource, body, configBuilder(headers));
+
+        return response.data;
+    } catch (error) {
+        return handleError(error, _configuration.errorCallback);
+    }
+};
+
+/**
+ * Delete a resource
+ * @param {string} resource - The resource to delete (URL)
+ * @param {object} headers - Any additional request headers you want to provide
+ * @return {object} - Returns data from response
+ */
+const deleteResource = async (resource, headers = {}) => {
+    try {
+        const response = await _axiosInstance.delete(resource, configBuilder(headers));
 
         return response.data;
     } catch (error) {
@@ -67,8 +111,12 @@ export default (options = {}) => {
     });
 
     return {
-        get,
-        post,
+        get: getResource,
+        post: postResource,
+        patch: patchResource,
+        put: putResource,
+        delete: deleteResource,
+        setAuthorisationToken,
         readConfiguration: () => _configuration
     };
 };

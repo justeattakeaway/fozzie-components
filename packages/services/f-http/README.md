@@ -17,16 +17,18 @@ Javascript HTTP client for interacting with restful services
 
 This package exposes methods for interacting with restful services, it may abstract any number of popular NPM packages which provide the ability to perform GET, PUT, POST, PATH, DELETE requests; while also adding lots of additional benefits.
 
-## Benefits (Now and later)
-- Automatically collect stats showing how long real API calls take
+## Benefits (Now)
 - Easy configuration of reusable clients which can be retrieved from context
-- Opt-in automatic logging of errors
-- Opt-in ability to use dynamic timeouts
-- Opt-in automatic providing of diagnostic headers, such as Conversation ID
 - Enables us to switch to alternative HTTP packages when desired
 - Sensible defaults, with the ability to override everything
-- Opt-in Automatic providing of bearer tokens
+- Ability to set authorisation tokens for all requests for specific clients
+- Ability to name each client, so output from it is grouped and labelled
 
+## Benefits (Soon)
+- _Automatically collect stats showing how long real API calls take_
+- _Opt-in automatic logging of errors_
+- _Opt-in ability to use dynamic timeouts_
+- _Opt-in automatic providing of diagnostic headers, such as Conversation ID_
 
 ## Usage
 
@@ -52,6 +54,7 @@ const errorCallback = error => { // This is optional
 
 export default (context, inject) => {
     const options = { // Options are described later
+        instanceName: 'Example Nuxt client'
         baseUrl: 'https://jsonplaceholder.typicode.com',
         errorCallback
     };
@@ -74,6 +77,7 @@ const errorCallback = error => { // This is optional
 
 export default () => {
     const configuration = { // Options are described later
+        instanceName: 'Example client'
         baseUrl: 'https://jsonplaceholder.typicode.com',
         errorCallback
     };
@@ -102,6 +106,21 @@ export default {
 }
 ```
 
+### Setting Authorisation Token
+If you need to call an authorised endpoint, you could pass the authorisation token through as a header in every request; but if you group clients correctly you may be able to benefit from applying it once for the lifetime of that client.
+
+```js
+// Some event happened that means we now have a token
+export default {
+  async mounted () {
+    this.$http.setAuthorisationToken('my token');
+
+    // This and all future requests will use the provided token
+    const result = await this.$http.get('/todos/1');
+  }
+}
+```
+
 ### Unit Testing Guidance
 Because $http exists in context, it should be really easy to mock it in any way you want. Check out the example below
 
@@ -123,9 +142,10 @@ import httpModule from '@justeat/f-http';
 
 const { mockFactory, httpVerbs } = httpModule;
 
-mockFactory.setupMockResponse(httpVerbs.METHOD_POST, '/URL', REQUEST_DATA, 201);
+mockFactory.setupMockResponse(httpVerbs.POST, '/URL', REQUEST_DATA, 201);
 
-const $http = mockFactory.createMockClient();
+// Accepts options payload
+const $http = mockFactory.createMockClient({ instanceName: 'Integration Test Client'});
 
 const wrapper = mount(MyComponent, {
   mocks: {
@@ -144,3 +164,19 @@ baseUrl | Ensure all requests from this client use a relative url | string | ''
 timeout | How long each request takes to timeout | number | 10000
 errorCallback | A function you can use to globally handle errors (accepts error object) | function | null
 contentType | Specify a value for the content type header | string | 'application/json'
+instanceName | Name the client so that stats and logs can be grouped by a specific API | string | 'Generic Front End'
+
+<hr>
+
+## Client Methods
+These are all of the methods exposed by the httpClient
+
+Method | Description | Parameters
+------------- | ------------- | -------------
+get | Perform a GET request for a resource | resource URL _[string]_, headers _[array]_
+post | POST a resource | resource URL _[string]_, body _[object]_, headers _[array]_
+put | Perform a PUT on a resource | resource URL _[string]_, body _[object]_, headers _[array]_
+patch | Perform a PATCH on a resource | resource URL _[string]_, body _[object]_, headers _[array]_
+get | DELETE a resource | resource URL _[string]_, headers _[array]_
+setAuthorisationToken | Set the authorisation token for all requests | authorisationToken _[string]_
+readConfiguration | Returns the configuration which has been applied | None
