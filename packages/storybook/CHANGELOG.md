@@ -9,7 +9,7 @@ v0.32.0
 *May 5, 2021*
 
 ### Changed
-- Global css styles moved from `vue.config.js` to `scss-loader.scss` and now are imported in `previe.js` to remove style duplication in every component
+- Global css styles moved from `vue.config.js` to `scss-loader.scss` and now are imported in `preview.js` to remove style duplication in every component
 
 
 v0.31.0
