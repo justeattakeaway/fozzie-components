@@ -1,11 +1,15 @@
 import axios from 'axios';
 import defaultOptions from './defaultOptions';
-import handleError from './errorHandler';
-import configBuilder from './configBuilder';
 import setAuthorisationToken from './authorisationHandler';
+import httpVerbs from './httpVerbs';
+
+import requestDispatcher from './requestDispatcher';
 
 let _configuration = null;
 let _axiosInstance = null;
+
+let _sendRequest,
+    _sendRequestWithBody;
 
 /**
  * Get a resource
@@ -13,15 +17,7 @@ let _axiosInstance = null;
  * @param {object} headers - Any additional request headers you want to provide
  * @return {object} - Returns data from response
  */
-const getResource = async (resource, headers = {}) => {
-    try {
-        const response = await _axiosInstance.get(resource, configBuilder(headers));
-
-        return response.data;
-    } catch (error) {
-        return handleError(error, _configuration.errorCallback);
-    }
-};
+const getResource = async (resource, headers = {}) => _sendRequest(httpVerbs.GET, resource, headers);
 
 /**
  * Post a resource
@@ -30,15 +26,7 @@ const getResource = async (resource, headers = {}) => {
  * @param {object} headers - Any additional request headers you want to provide
  * @return {object} - Returns data from response
  */
-const postResource = async (resource, body, headers = {}) => {
-    try {
-        const response = await _axiosInstance.post(resource, body, configBuilder(headers));
-
-        return response.data;
-    } catch (error) {
-        return handleError(error, _configuration.errorCallback);
-    }
-};
+const postResource = async (resource, body, headers = {}) => _sendRequestWithBody(httpVerbs.POST, resource, body, headers);
 
 /**
  * Patch a resource
@@ -47,15 +35,7 @@ const postResource = async (resource, body, headers = {}) => {
  * @param {object} headers - Any additional request headers you want to provide
  * @return {object} - Returns data from response
  */
-const patchResource = async (resource, body, headers = {}) => {
-    try {
-        const response = await _axiosInstance.patch(resource, body, configBuilder(headers));
-
-        return response.data;
-    } catch (error) {
-        return handleError(error, _configuration.errorCallback);
-    }
-};
+const patchResource = async (resource, body, headers = {}) => _sendRequestWithBody(httpVerbs.PATCH, resource, body, headers);
 
 /**
  * Put a resource
@@ -64,15 +44,7 @@ const patchResource = async (resource, body, headers = {}) => {
  * @param {object} headers - Any additional request headers you want to provide
  * @return {object} - Returns data from response
  */
-const putResource = async (resource, body, headers = {}) => {
-    try {
-        const response = await _axiosInstance.put(resource, body, configBuilder(headers));
-
-        return response.data;
-    } catch (error) {
-        return handleError(error, _configuration.errorCallback);
-    }
-};
+const putResource = async (resource, body, headers = {}) => _sendRequestWithBody(httpVerbs.PUT, resource, body, headers);
 
 /**
  * Delete a resource
@@ -80,15 +52,7 @@ const putResource = async (resource, body, headers = {}) => {
  * @param {object} headers - Any additional request headers you want to provide
  * @return {object} - Returns data from response
  */
-const deleteResource = async (resource, headers = {}) => {
-    try {
-        const response = await _axiosInstance.delete(resource, configBuilder(headers));
-
-        return response.data;
-    } catch (error) {
-        return handleError(error, _configuration.errorCallback);
-    }
-};
+const deleteResource = async (resource, headers = {}) => _sendRequest(httpVerbs.DELETE, resource, headers);
 
 /**
  * Create a httpClient
@@ -109,6 +73,10 @@ export default (options = {}) => {
             'Content-Type': _configuration.contentType
         }
     });
+
+    const requestDispatchMethods = requestDispatcher(_axiosInstance, _configuration);
+    _sendRequest = requestDispatchMethods.sendRequest;
+    _sendRequestWithBody = requestDispatchMethods.sendRequestWithBody;
 
     return {
         get: getResource,
