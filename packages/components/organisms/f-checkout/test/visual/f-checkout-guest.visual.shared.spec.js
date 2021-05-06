@@ -33,7 +33,7 @@ describe('f-checkout - Collection - Guest - Visual Tests', () => {
 describe('f-checkout - Collection - Guest - isAsapAvailable: false Visual Tests', () => {
     beforeEach(() => {
         const checkoutData = {
-            type: 'delivery',
+            type: 'collection',
             isAuthenticated: false,
             isValid: true,
             isAsapAvailable: false
