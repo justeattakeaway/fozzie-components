@@ -7,6 +7,11 @@ describe('setAuthorisationToken', () => {
         expect(setAuthorisationToken).toBeDefined();
     });
 
+    it('should not have an authorisation token set by default', async () => {
+        // Arrange, Act & Assert
+        expect(axios.defaults.headers.common.Authorization).not.toBeDefined();
+    });
+
     it('should set the provided authorisation token', async () => {
         // Arrange
         const expectedAuthorisationToken = 'Granola';
