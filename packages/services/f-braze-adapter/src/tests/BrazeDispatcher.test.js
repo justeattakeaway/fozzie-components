@@ -60,7 +60,7 @@ let GetDispatcher;
 
 beforeEach(() => {
     jest.resetAllMocks();
-    jest.isolateModules(async () => {
+    jest.isolateModules(() => {
         /* eslint-disable-next-line global-require */
         GetDispatcher = require('../BrazeDispatcher').default;
     });

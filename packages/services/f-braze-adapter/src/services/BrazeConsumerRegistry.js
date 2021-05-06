@@ -3,7 +3,6 @@ import BrazeConsumer from './BrazeConsumer';
 let consumerRegistryInstance;
 
 class BrazeConsumerRegistry {
-    consumers
 
     static GetConsumerRegistry () {
         if (!consumerRegistryInstance) {
@@ -17,6 +16,7 @@ class BrazeConsumerRegistry {
             throw new Error('do not instantiate more than one instance of BrazeConsumerRegistry');
         }
         consumerRegistryInstance = this;
+        this.consumers = [];
     }
 
     applyContentCardCallbacks (cards) {

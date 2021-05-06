@@ -19,13 +19,21 @@ class BrazeConsumer {
 
     constructor ({
         enabledCardTypes,
-        brands,
-        callbacks,
-        interceptInAppMessages,
-        interceptInAppMessageClickEvents,
+        brands = [],
+        callbacks = {},
+        interceptInAppMessages = {},
+        interceptInAppMessageClickEvents = {},
         customFilters = []
     }) {
-        this.enabledCardTypes = enabledCardTypes;
+        this.defaultEnabledCardTypes = [
+            'Home_Promotion_Card_1',
+            'Home_Promotion_Card_2',
+            'Post_Order_Card_1',
+            'Promotion_Card_1',
+            'Promotion_Card_2'
+        ];
+
+        this.enabledCardTypes = enabledCardTypes || this.defaultEnabledCardTypes;
 
         this.customFilters = customFilters;
 
@@ -64,12 +72,8 @@ class BrazeConsumer {
          * @type {(function(*=): *)|*}
          */
         this.applyFilterMethods = pipe(
-            sortByCardOrder,
-            cards => filterByEnabledCardTypes(cards, this.enabledCardTypes),
-            cards => filterByBrands(cards, this.brands),
-            filterByCurrentlyActive
-            // ...this.defaultFiltersInOrder,
-            // ...this.customFilters
+            ...this.defaultFiltersInOrder,
+            ...this.customFilters
         );
     }
 

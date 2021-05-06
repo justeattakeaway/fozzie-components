@@ -70,8 +70,6 @@ function contentCardsHandler (postCardsAppboy) {
 let dispatcherInstance;
 
 class BrazeDispatcher {
-    consumerRegistry
-
     /**
      * Static constructor to store one instance of BrazeDispatcher per js env
      * @param {Number} sessionTimeoutInSeconds
@@ -133,7 +131,7 @@ class BrazeDispatcher {
             userId,
             disableComponent = false,
             enableLogging,
-            loggerCallbacks
+            loggerCallbacks = {}
         } = options;
 
         if (!this.dispatcherOptions) {
