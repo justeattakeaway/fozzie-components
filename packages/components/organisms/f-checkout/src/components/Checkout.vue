@@ -41,8 +41,19 @@
                 <form
                     method="post"
                     :class="$style['c-checkout-form']"
-                    @submit.prevent="onFormSubmit"
-                >
+                    @submit.prevent="onFormSubmit">
+                    <section
+                        id="error-summary-container"
+                        :class="$style['is-visuallyHidden']"
+                        role="alert"
+                        data-test-id="error-summary-container">
+                        <error-message
+                            v-show="genericFormErrorMessage"
+                            :class="$style['c-checkout-genericError']">
+                            {{ genericFormErrorMessage }}
+                        </error-message>
+                    </section>
+
                     <guest-block v-if="!isLoggedIn" />
 
                     <form-field
@@ -57,7 +68,7 @@
                                 v-if="!isMobileNumberValid"
                                 data-js-error-message
                                 data-test-id="error-mobile-number"
-                            >
+                                :class="$style['c-checkout-genericError']">
                                 {{ $t('validationMessages.mobileNumber.requiredError') }}
                             </error-message>
                         </template>
@@ -65,6 +76,7 @@
 
                     <address-block
                         v-if="isCheckoutMethodDelivery"
+                        :class="$style['c-checkout-genericError']"
                         data-test-id="address-block"
                     />
 
@@ -253,9 +265,11 @@ export default {
             tenantConfigs,
             nonFulfillableError: null,
             genericErrorMessage: null,
+            genericFormErrorMessage: null,
             hasCheckoutLoadedSuccessfully: true,
             shouldShowSpinner: false,
-            isLoading: false
+            isLoading: false,
+            formStarted: false
         };
     },
 
@@ -395,7 +409,8 @@ export default {
             'setAuthToken',
             'updateCheckout',
             'updateCustomerDetails',
-            'updateUserNote'
+            'updateUserNote',
+            'formFieldBlur'
         ]),
 
         ...mapActions(VUEX_CHECKOUT_ANALYTICS_MODULE, [
@@ -403,6 +418,24 @@ export default {
             'trackFormInteraction',
             'trackInitialLoad'
         ]),
+
+        // formStart () {
+        //     if (!this.formStarted) {
+        //         this.$emit(EventNames.CreateAccountStart);
+        //         this.formStarted = true;
+        //     }
+        // },
+
+        // formFieldBlur (field) {
+        //     const fieldValidation = this.$v[field];
+        //     if (fieldValidation) {
+        //         fieldValidation.$touch();
+
+        //         if (fieldValidation.$invalid) {
+        //             this.$emit(EventNames.CreateAccountInlineError, field);
+        //         }
+        //     }
+        // },
 
         /**
          * Loads the necessary data to render a meaningful checkout component.
@@ -778,6 +811,7 @@ export default {
          * */
         onInvalidCheckoutForm () {
             const validationState = validations.getFormValidationState(this.$v);
+            const errorCount = validationState.invalidFields.length;
             const invalidFields = mapAnalyticsNames(validationState.invalidFields);
 
             this.scrollToFirstInlineError();
@@ -798,6 +832,10 @@ export default {
                 data: { ...this.eventData, validationState },
                 logMethod: this.$logger.logWarn
             });
+
+            this.genericFormErrorMessage = errorCount === 1 ?
+                `There is ${errorCount} error in the form.` :
+                `There are ${errorCount} errors in the form.`;
         },
 
         /**
@@ -816,6 +854,7 @@ export default {
          */
         isFormValid () {
             this.$v.$touch();
+            this.genericFormErrorMessage = '';
             return !this.$v.$invalid;
         },
 
@@ -944,5 +983,10 @@ export default {
 /* If these stay the same then just rename the class to something more generic */
 .c-checkout-submitButton {
     margin: spacing(x4) 0 spacing(x0.5);
+}
+
+.c-checkout-genericError {
+        margin-top: 0;
+        margin-bottom: spacing(x2);
 }
 </style>
