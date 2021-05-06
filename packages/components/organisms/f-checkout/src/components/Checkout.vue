@@ -123,6 +123,7 @@ import {
     VUEX_CHECKOUT_MODULE
 } from '../constants';
 import checkoutValidationsMixin from '../mixins/validations.mixin';
+import checkoutIssues from '../checkout-issues';
 import loggerMixin from '../mixins/logger.mixin';
 import EventNames from '../event-names';
 import tenantConfigs from '../tenants';
@@ -541,8 +542,9 @@ export default {
                 });
             } catch (e) {
                 const { errorCode } = e.response.data;
+                const { shouldShowInDialog } = checkoutIssues[errorCode];
 
-                throw new PlaceOrderError(e.message, errorCode === 'DuplicateOrder');
+                throw new PlaceOrderError(e.message, shouldShowInDialog);
             }
         },
 
