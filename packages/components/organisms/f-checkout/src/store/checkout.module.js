@@ -394,8 +394,7 @@ export default {
             id,
             serviceType,
             customer,
-            location,
-            time,
+            fulfilment,
             isFulfillable,
             notices,
             messages
@@ -409,10 +408,10 @@ export default {
                 state.customer.mobileNumber = customer.phoneNumber;
             }
 
-            state.time = time;
+            state.time = fulfilment.time;
 
-            if (location && location.address) {
-                const { address } = location;
+            if (fulfilment.location && fulfilment.location.address) {
+                const { address } = fulfilment.location;
                 /* eslint-disable prefer-destructuring */
                 state.address.line1 = address.lines[0];
                 state.address.line2 = address.lines[1];

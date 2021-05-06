@@ -8,11 +8,11 @@
         <h3
             data-test-id="checkout-issue-modal-title"
             class="u-noSpacing">
-            {{ $t(`errorMessages.checkoutIssues.${errorCode}.title`) }}
+            {{ $t(`errorMessages.checkoutIssues.${errorCode}.title`, { serviceType: serviceTypeText }) }}
         </h3>
 
         <p data-test-id="checkout-issue-modal-message">
-            {{ $t(`errorMessages.checkoutIssues.${errorCode}.message`) }}
+            {{ $t(`errorMessages.checkoutIssues.${errorCode}.message`, { serviceType: serviceTypeText }) }}
         </p>
 
         <f-button
@@ -47,7 +47,17 @@ export default {
         errorCode: {
             type: String,
             default: ''
+        },
+        serviceType: {
+            type: String,
+            default: ''
         }
+    },
+
+    data () {
+        return {
+            serviceTypeText: this.$t(`serviceTypes.${this.serviceType}`)
+        };
     },
 
     methods: {

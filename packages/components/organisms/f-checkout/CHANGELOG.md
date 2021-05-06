@@ -4,6 +4,55 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.101.0
+------------------------------
+*May 5, 2021*
+
+### Changed
+- Mapping of fulfilment address and time to match the API response.
+
+
+v0.100.0
+------------------------------
+*May 5, 2021*
+
+### Added
+- red outline to input fields when an error is displayed
+
+
+v0.99.0
+------------------------------
+*May 4, 2021*
+
+### Changed
+- make header in mobile look as designed
+
+
+v0.98.0
+------------------------------
+*April 29, 2021*
+
+### Changed
+- Updated Checkout error messages to reflect latest copy
+- Included service type labels to display in error messages
+
+
+v0.97.0
+------------------------------
+*April 28, 2021*
+
+### Changed
+- Changed main headers to be h1 elements
+
+
+v0.96.0
+------------------------------
+*April 28, 2021*
+
+### Changed
+- Updated notes to reflect PIE design
+
+
 v0.95.0
 ------------------------------
 *April 26, 2021*

@@ -6,12 +6,12 @@
 
 Okay great, but what does that mean to me as a developer? This page introduces tools and techniques you can use to weave accessibility into your workflow. It covers just a small part of this massive topic, but following the recommendations on this page will make a big difference.
 
-<h2 class="sg-sectionHeading">What is Accessibility?</h2>
+## What is Accessibility?
 
 Accessibility (*AXS* or *a11y*) is an inclusive effort to support as many users as possible, especially those with a disability. These users may use *assitive technology* like a *screen reader* to access the web. We need to code with them in mind.
 
 
-<h2 class="sg-sectionHeading">Before we get started</h2>
+## Before we get started
 
 This page assumes that you have a good understanding of the semantic elements in HTML5. You should also know that ARIA (Accessible Rich Internet Applications) is a set of special attributes that we can add to HTML. There are links to these topics and more in the [resources](#resources) section.
 
@@ -20,7 +20,7 @@ This page assumes that you have a good understanding of the semantic elements in
 There are two really useful free tools that help you develop and test your work. Add [Accessibility developer tools](https://chrome.google.com/webstore/detail/accessibility-developer-t/fpkknkljclfencbdbgkenhalefipecmb?hl=en) to Chrome to to bring accessibility inspection and auditing to DevTools. Install the [Chromevox](https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn?hl=en) screen reader to experience your site as a blind user would. There's a bit of a learning curve with these tools but it's well worth the effort.
 
 
-<h2 class="sg-sectionHeading">Accessible markup</h2>
+## Accessible markup
 
 Unexpected markup confuses assitive tech, make sure that pages are standards compliant HTML5. Regularly check for validity as you go with a tool like the [W3C validator](https://validator.w3.org/).
 
@@ -39,7 +39,7 @@ Similarly, interactive elements need to declare themselves as such semantically.
 Don't forget labelling. Form controls need labels even if they don't visually appear to. All `img` elements need an `alt` attribute. If an image doesn't warrant alternative text, use an empty string as the `alt` tag rather than omit it.
 
 
-<h2 class="sg-sectionHeading">Support the keyboard</h2>
+## Support the keyboard
 
 An accessible site may be navigated and interacted with using just the keyboard. Try it with the pages you're building – you should be able to reach every interactive element (and *only* interactive elements) with the Tab key.
 
@@ -64,7 +64,7 @@ Consider a button that opens a modal window — when the user focusses that butt
 This can sound confusing but it's easy to discover and test if you interact with your page using just the keyboard.
 
 
-<h2 class="sg-sectionHeading">Composite widgets and complex pages</h2>
+## Composite widgets and complex pages
 
 You may be creating a more complex widget for which there isn't a native tag. For example a set of tabs, a carousel, or an expandable tree. Composite widgets need to be constructed carefully so that they work well with assitive tech.
 
@@ -73,7 +73,7 @@ Before you roll your own, consider components in existing JavaScript frameworks 
 If you do build composite widgets from scratch, or your pages involve complex interactivity or asynchronous content, you might need to understand screen reader modes, composite roles, dynamic states and properties, live content and more. Hopefully the [resources](#resources) below will point you in the right direction.
 
 
-<a name="aria-resources"></a><h2 class="sg-sectionHeading">Resources</h2>
+## Resources
 
   - [W3C validator](https://validator.w3.org/)
   - [HTML5 semantic elements](https://www.w3schools.com/html/html5_semantic_elements.asp)
@@ -85,7 +85,7 @@ If you do build composite widgets from scratch, or your pages involve complex in
   - [Using ARIA in HTML](http://html5doctor.com/using-aria-in-html/)
 
 
-<h2 class="sg-sectionHeading">Summary</h2>
+## Summary
 
 By following the steps above you've made a dramatic difference to disabled users. These are real people, using our sites every day.
 

@@ -5,6 +5,8 @@ module.exports = class CookieBanner extends Page {
 
     get cookiePolicyLink () { return this.component.$('[data-test-id="cookie-policy-link"]'); }
 
+    get componentContent () { return $('[data-test-id="cookieBannerContent"]'); }
+
     get cookieAcceptAllButton () { return this.component.$('[data-test-id="accept-all-cookies-button"]'); }
 
     get cookieAcceptNecessaryButton () { return this.component.$('[data-test-id="accept-necessary-cookies-button"]'); }

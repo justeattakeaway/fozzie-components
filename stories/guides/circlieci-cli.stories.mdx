@@ -1,0 +1,50 @@
+<Meta title="Documentation/Guides/CircleCI CLI"/>
+
+# CircleCI CLI
+
+**CircleCI CLI** is here for you to run your CircleCI checks locally.
+
+The reason we’re enabling this is so that people can run checks through CircleCI locally without worrying about different node versions and there can be more consistency between their own local environment and their pipeline build.
+
+
+## What are we trying to achieve and why?
+
+We’re currently trying to minimize the difference between running scripts locally (via Yarn) and the CircleCI pipeline.
+
+By using the CLI, you won’t need to worry about which node version you have installed locally, as the CLI will be configured to run the same node version as what is on the pipeline.
+
+## What are the benefits of doing this?
+
+This increases the consistency between our builds and tests and allows us to have a tighter feedback loop for those times where there is an issue with a commit.
+
+It is also to help people check their work before creating a pull request. The current issue we’re having is people creating PRs, moving their ticket across to the ‘In Review’ column on Jira and then finding out after 30 mins that their PR has failed CI checks.
+
+# How to Install
+
+Before installing the CircleCI CLI, you **must** have Docker installed first as running jobs and workflows on CircleCI CLI will be run in a Docker container.
+
+## Docker for MacOS
+
+For **MacOS** users, you can just download and install [Docker](https://www.docker.com/get-started).
+
+## Docker for Windows
+
+For **Windows** users, you do have a couple more hoops to jump through to get this working where you can follow the documentation [here](https://docs.docker.com/docker-for-windows/install/), before you install Docker for Windows.
+
+## CircleCI CLI
+
+To install **CircleCI CLI**, you can follow the fantastic CircleCI documentation [here](https://circleci.com/docs/2.0/local-cli/).
+If you are a Windows user following the guide above, you can continue following from [here](https://docs.docker.com/docker-for-windows/install/#install-docker-desktop-on-windows).
+
+This can guide you on the installation for CircleCI CLI and give you an overview of how you can use CircleCI CLI to improve your workflow.
+
+# How to Run
+
+Once you have installed the CircleCI CLI, you can simply open your VScode, and press;
+`Ctrl`/`Cmd` +`Shift`+`P`
+and type; `‘Run task’`. 
+
+Hit enter and you will then see the `CircleCI CLI task` pop up. 
+Just hit enter again and then once more on the option, `"Continue without scanning the task output"` to run the CircleCI build. 
+
+This can take around 15-20 mins to complete the run.

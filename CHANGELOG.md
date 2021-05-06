@@ -3,12 +3,52 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v3.29.0
+
+v3.31.1
 ------------------------------
+*May 5, 2021*
+
+### Changed
+- Heading updates to the storybook documentation – ensures storybook automatically generates anchor tags for these headings.
+
+
+v3.31.0
+------------------------------
+*May 4, 2021*
+
+## Changed
+- Replaced `console.logs` in component tests with error handling `%s` string title
+
+## Removed
+- Unused READMEs inside `test/component` and `test-utils/component-object` folders 
+- Extra intermediate `spec` folder in generator for future components (see below entry)
+
+
+v3.30.0
+------------------------------
+
+*April 30, 2021*
+
+## Added
+- Error handling added for `forEach` component tests
+- General linting changes and test-cleanup
+
+## Removed
+- Unneeded extra intermediate `spec` folder in `test/spec/component`
+
+
+v3.29.1
+------------------------------
+*April 29, 2021*
+
+## Added
+- CircleCI config for local testing
+- Documentation into storybook guides as to how to install CircleCI local with Docker
+
 *April 16, 2021*
 
 ## Added
-- `husky` to enable pre-commit lint / test checks 
+- `husky` to enable pre-commit lint / test checks
 
 
 v3.28.0
