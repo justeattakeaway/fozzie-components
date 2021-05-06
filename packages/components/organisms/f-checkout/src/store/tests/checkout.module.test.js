@@ -665,6 +665,7 @@ describe('CheckoutModule', () => {
                             // Assert
                             expect(dispatch).toHaveBeenCalledWith('updateMessage', message);
                         }
+                        expect.hasAssertions();
                     });
                 });
 

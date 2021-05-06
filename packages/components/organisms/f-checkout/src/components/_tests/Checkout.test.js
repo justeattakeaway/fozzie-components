@@ -2678,13 +2678,21 @@ describe('Checkout', () => {
                 it('should throw a `PlaceOrderError` error with the `message` of the error', async () => {
                     // Arrange
                     const errorMessage = 'An error';
+                    const error = {
+                        message: errorMessage,
+                        response: {
+                            data: {
+                                errorCode: errorMessage
+                            }
+                        }
+                    };
 
                     wrapper = shallowMount(VueCheckout, {
                         store: createStore(
                             defaultCheckoutState,
                             {
                                 ...defaultCheckoutActions,
-                                placeOrder: jest.fn(async () => Promise.reject(new Error(errorMessage)))
+                                placeOrder: jest.fn(async () => Promise.reject(error))
                             }
                         ),
                         i18n,
