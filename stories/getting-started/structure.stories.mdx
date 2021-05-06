@@ -10,7 +10,7 @@ The mono-repo structure has been organised to differentiate between several dist
 - Services
 - Tools
 
-### Components
+## Components
 
 UI components written in Vue.js, which can be pulled into a Vue application as a shared library component.
 
@@ -23,7 +23,7 @@ As a rough guide:
 
 As a general rule, if a component depends on another UI component (for example, it contains a `button` component), it will be at the very least a molecule in size. Atoms by their definition are the simplest form of components.
 
-### Services
+## Services
 
 Services are packages that are written solely in JavaScript and provide a distinct piece of client-side or middleware functionality.
 
@@ -31,7 +31,7 @@ For instance, it would make sense to write a specific package to handle how comp
 
 We currently have a shared package called `f-services` which defines a number of client-side utility services that components can make use of.
 
-### Tools
+## Tools
 
 Tools are packages that are used to provide a specific piece of functionality that is used by components or more generally in the mono-repo.
 
