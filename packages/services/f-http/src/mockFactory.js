@@ -2,9 +2,10 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
 import createClient from './createClient';
-import httpVerbs from './httpVerbs';
 
 let _axiosMockAdapter;
+
+const convertToPascalCase = string => string.replace(/\S*/g, word => word.charAt(0) + word.slice(1).toLowerCase());
 
 /**
  * Setup a mock response
@@ -17,15 +18,9 @@ let _axiosMockAdapter;
 const setupMockResponse = async (method, url, requestData, statusCode, data) => {
     if (!_axiosMockAdapter) _axiosMockAdapter = new MockAdapter(axios);
 
-    const mockFunctions = {
-        [httpVerbs.GET]: _axiosMockAdapter.onGet,
-        [httpVerbs.POST]: _axiosMockAdapter.onPost,
-        [httpVerbs.PUT]: _axiosMockAdapter.onPut,
-        [httpVerbs.PATCH]: _axiosMockAdapter.onPatch,
-        [httpVerbs.DELETE]: _axiosMockAdapter.onDelete
-    };
+    const methodName = `on${convertToPascalCase(method)}`;
 
-    mockFunctions[method](url, requestData).reply(statusCode, data);
+    _axiosMockAdapter[methodName](url, requestData).reply(statusCode, data);
 };
 
 /**
