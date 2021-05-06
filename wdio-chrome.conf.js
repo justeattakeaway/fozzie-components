@@ -1,6 +1,6 @@
 // Used to set correct directories for WDIO test output
 global.baseDir = __dirname;
-import { DESKTOP_HUGE_WIDTH, MOBILE_NARROW_WIDTH } from './test/constants/viewport-widths';
+const { DESKTOP_HUGE_WIDTH, MOBILE_NARROW_WIDTH } = require('./test/constants/viewport-widths');
 const allure = require('allure-commandline');
 const { getConfigurationSettings } = require('./test/utils/configuration-helper');
 
