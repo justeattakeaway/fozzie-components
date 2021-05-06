@@ -2,7 +2,6 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
 import createClient from './createClient';
-import httpVerbs from './httpVerbs';
 
 let _axiosMockAdapter;
 
@@ -17,18 +16,15 @@ let _axiosMockAdapter;
 const setupMockResponse = async (method, url, requestData, statusCode, data) => {
     if (!_axiosMockAdapter) _axiosMockAdapter = new MockAdapter(axios);
 
-    switch (method) {
-        case httpVerbs.METHOD_GET:
-            _axiosMockAdapter.onGet(url, requestData).reply(statusCode, data);
-            break;
+    const mockFunctions = {
+        GET: _axiosMockAdapter.onGet,
+        POST: _axiosMockAdapter.onPost,
+        PUT: _axiosMockAdapter.onPut,
+        PATCH: _axiosMockAdapter.onPatch,
+        DELETE: _axiosMockAdapter.onDelete
+    };
 
-        case httpVerbs.METHOD_POST:
-            _axiosMockAdapter.onPost(url, requestData).reply(statusCode, data);
-            break;
-
-        default:
-            throw new Error('Method not provided');
-    }
+    mockFunctions[method](url, requestData).reply(statusCode, data);
 };
 
 /**
